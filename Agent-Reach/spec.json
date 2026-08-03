@@ -1,16 +1,6 @@
 {
   "slug": "Agent-Reach",
-  "name": "AI智能体远程控制",
-  "description": "远程控制AI智能体，批量管理Agent实例，支持启动/停止/状态监控，开发者效率工具",
-  "trigger_words": "",
-  "original_version": "1.0.19",
-  "capability_outline": [
-    "1. **项目自动部署**：自动克隆/更新仓库到 `$HOME/tools/Agent-Reach`，并安装全部依赖",
-    "2. **CLI 命令执行**：通过 `./main` 调用 Agent-Reach 的命令行接口，支持用户传入任意参数",
-    "3. **帮助信息查询**：执行 `./main --help` 展示完整用法，辅助用户确认参数",
-    "4. **失败诊断**：捕获并返回克隆、安装、执行各阶段的错误日志，给出可操作的修复建议",
-    "1. **标准输出**：命令执行的 stdout 完整内容",
-    "2. **错误输出**：命令执行的 stderr 内容（如有）",
-    "3. **退出码**：最终退出状态（0 成功 / 非 0 失败）"
-  ]
+  "mode": "upgrade",
+  "target": 4.8,
+  "overall_before": 3.5
 }
