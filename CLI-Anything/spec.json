@@ -1,0 +1,8 @@
+{
+  "slug": "CLI-Anything",
+  "name": "自然语言转命令工具",
+  "description": "自然语言转命令行操作，自动生成可执行的CLI命令，提升开发效率",
+  "trigger_words": "",
+  "original_version": "1.0.9",
+  "capability_outline": []
+}
