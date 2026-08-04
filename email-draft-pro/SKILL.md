@@ -3,7 +3,7 @@ slug: email-draft-pro
 name: email-draft-pro
 displayName: 商务邮件起草 场景语气匹配
 description: 按场景生成专业商务邮件，匹配语气与格式，支持中英双语与批量处理。
-version: 1.0.11
+version: 1.0.5
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/email-draft-pro
