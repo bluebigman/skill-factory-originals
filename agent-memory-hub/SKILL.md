@@ -3,7 +3,7 @@ slug: agent-memory-hub
 name: agent-memory-hub
 displayName: 团队记忆资产 四类归档 共享索引
 description: 将对话、文档、代码整理为四类记忆资产，生成团队共享索引。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agent-memory-hub
