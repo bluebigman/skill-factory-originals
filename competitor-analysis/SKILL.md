@@ -1,27 +1,26 @@
-# 竞品透镜 · 对标分析引擎
+# SKILL.md
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/competitor-analysis
+```markdown
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
-## 一、能力边界：一页纸速查卡
-
-| 维度 | 能做什么 | 不能做什么 |
-|------|----------|------------|
-| **输入** | 竞品名称（≥1个）、功能列表、定价信息、用户评论文本、CSV/表格数据 | 实时抓取网页数据；访问付费数据库；获取非公开内部资料 |
-| **分析** | 功能对比矩阵、定价模式识别、评价情感分类、SWOT四象限、市场层级判断 | 预测未来市场走势；提供绝对准确的竞品市场份额；替代人工商业判断 |
-| **输出** | 结构化分析报告、Markdown表格、JSON数据、自定义格式 | 生成可直接发布的营销文案；做出最终决策；保证分析结果无偏差 |
-| **处理量** | 单次2-10个竞品；评价文本建议≤5000字/轮 | 超过10个竞品的深度对比；超长文本的逐句情感标注 |
-
-**适用对象**：产品经理、市场分析师、创业者、投资研究助理、独立开发者
-
-**不适用场景**：需要实时数据的竞品监控、需要法律效力的尽职调查、需要财务审计级别的定价拆解
-
+slug: competitor-analysis
+name: competitor-analysis
+displayName: 竞品透视 市场定位 差异对标
+description: 输入竞品信息，输出功能、定价、评价多维对比与差异化建议报告
+version: 19.0.9
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/competitor-analysis
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: SkillForge Lab
+agent_created: true
+trigger_words: ["competitor-analysis", "竞品分析", "竞品对比", "市场对标", "差异化分析"]
 
 ## 许可证（License）
 
