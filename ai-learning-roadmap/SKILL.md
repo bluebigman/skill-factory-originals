@@ -3,7 +3,7 @@ slug: ai-learning-roadmap
 name: ai-learning-roadmap
 displayName: AI自学路径 分周规划 课程推荐
 description: 根据基础与目标，生成含资源与验收的AI分周学习路线。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ai-learning-roadmap
