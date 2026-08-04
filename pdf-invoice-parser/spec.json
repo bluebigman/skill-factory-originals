@@ -1,0 +1,8 @@
+{
+  "slug": "pdf-invoice-parser",
+  "name": "pdf-invoice-parser",
+  "description": "|",
+  "trigger_words": "- \"pdf-invoice-parser",
+  "original_version": "1.0.1",
+  "capability_outline": []
+}
