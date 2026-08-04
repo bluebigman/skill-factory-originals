@@ -15,15 +15,19 @@ interview-question-bank — 面试题库生成器（原创实现 v2.0）
 错误码 E001-E010。
 """
 from __future__ import annotations
+
 import argparse
 import json
 import random
 import re
 import sys
+from pathlib import Path
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 __version__ = "2.0.0"
 
-ERR = {
+# 错误码定义
+ERR: Dict[str, str] = {
     "E001": "缺少 JD 输入（--jd-file 或 --jd-text）",
     "E002": "JD 文件不可读",
     "E003": "读取失败（编码 / IO）",
@@ -35,23 +39,35 @@ ERR = {
     "E009": "格式非法（json/markdown/text）",
     "E010": "未知内部异常",
 }
-FORMATS = ("json", "markdown", "text")
-TYPES = ("behavioral", "technical", "stress")
-DIFFS = ("basic", "intermediate", "advanced")
+
+# 常量定义
+FORMATS: Tuple[str, ...] = ("json", "markdown", "text")
+TYPES: Tuple[str, ...] = ("behavioral", "technical", "stress")
+DIFFS: Tuple[str, ...] = ("basic", "intermediate", "advanced")
 MAX_COUNT = 50
 MIN_LEN = 20
 
 
 class QError(Exception):
-    def __init__(self, code, detail=""):
+    """自定义异常类，携带错误码"""
+
+    def __init__(self, code: str, detail: str = ""):
         self.code = code
-        super().__init__(f"[{code}] {ERR.get(code, '')}{(' | ' + detail) if detail else ''}")
+        self.detail = detail
+        message = f"[{code}] {ERR.get(code, '未知错误')}"
+        if detail:
+            message += f" | {detail}"
+        super().__init__(message)
 
 
 # --------------------------------------------------------------------------
 # 领域题库（独立组织：关键词 -> (领域, 专业题列表)），题目措辞为原创重写
 # --------------------------------------------------------------------------
-DOMAINS = {
+# 类型别名
+Question = Tuple[str, List[str]]
+Domain = Tuple[str, List[Question]]
+
+DOMAINS: Dict[str, Domain] = {
     "python": ("后端开发", [
         ("解释 GIL 对多线程 CPU 密集型任务的影响，你会如何规避？",
          ["说清 GIL 是解释器级锁", "区分 IO 密集与 CPU 密集", "提出多进程 / C 扩展 / 异步等方案"]),
@@ -121,7 +137,9 @@ DOMAINS = {
          ["不立刻降价", "挖掘真实异议", "转向价值沟通"]),
     ]),
 }
-BEHAVIOR = [
+
+# 行为面试题
+BEHAVIOR: List[Question] = [
     ("讲一次你主导推动、且跨团队协作的项目，你具体做了什么？",
      ["用 STAR 表述", "说清独立贡献", "体现推动而非执行"]),
     ("说一个最终失败的项目，你学到了什么？",
@@ -133,7 +151,9 @@ BEHAVIOR = [
     ("最近一年你主动学了什么？为什么？",
      ["动机与规划一致", "有实际产出", "讲清收获"]),
 ]
-STRESS = [
+
+# 压力面试题
+STRESS: List[Question] = [
     ("你的方案被当面指出有明显缺陷，重新想一个？",
      ["顶住压力复述论据", "区分被质疑与被否定", "不轻易自我否定也不固执"]),
     ("履历跳槽频繁，凭什么相信你会留下？",
@@ -143,24 +163,49 @@ STRESS = [
     ("你刚才有个技术细节说错了，意识到了吗？",
      ["冷静复盘", "承认不慌", "有纠错力"]),
 ]
-SENIORITY = [
+
+# 资历识别规则
+SENIORITY: List[Tuple[str, str, str]] = [
     (r"(专家|principal|staff|架构师)", "专家", "advanced"),
     (r"(高级|senior|资深|leader|主管|经理)", "高级", "advanced"),
     (r"(中级|3-5\s*年|三到五年)", "中级", "intermediate"),
     (r"(初级|junior|应届|实习|1-3\s*年|校招)", "初级", "basic"),
 ]
-TYPE_CN = {"behavioral": "行为面试题", "technical": "专业技能题", "stress": "压力测试题"}
-DIFF_CN = {"basic": "基础", "intermediate": "进阶", "advanced": "高级"}
+
+# 中文映射
+TYPE_CN: Dict[str, str] = {"behavioral": "行为面试题", "technical": "专业技能题", "stress": "压力测试题"}
+DIFF_CN: Dict[str, str] = {"basic": "基础", "intermediate": "进阶", "advanced": "高级"}
+
+# 类型别名
+Profile = Dict[str, Any]
+QuestionItem = Dict[str, Any]
 
 
 # --------------------------------------------------------------------------
 # JD 解析
 # --------------------------------------------------------------------------
-def read_jd(jd_file="", jd_text=""):
+def read_jd(jd_file: str = "", jd_text: str = "") -> str:
+    """
+    读取 JD 内容。
+    
+    Args:
+        jd_file: JD 文件路径
+        jd_text: 直接传入的 JD 文本
+        
+    Returns:
+        JD 文本内容
+        
+    Raises:
+        QError: 各种输入错误
+    """
+    # 校验输入
+    if not jd_text and not jd_file:
+        raise QError("E001")
+    
     if jd_text:
         text = jd_text
-    elif jd_file:
-        from pathlib import Path
+    else:
+        # 文件路径校验
         p = Path(jd_file)
         if not p.is_file():
             raise QError("E002", jd_file)
@@ -168,45 +213,74 @@ def read_jd(jd_file="", jd_text=""):
             text = p.read_text(encoding="utf-8")
         except (UnicodeDecodeError, OSError) as e:
             raise QError("E003", str(e))
-    else:
-        raise QError("E001")
-    if len(text.strip()) < MIN_LEN:
-        raise QError("E004", f"有效字符 {len(text.strip())}")
+    
+    # 长度校验
+    stripped = text.strip()
+    if len(stripped) < MIN_LEN:
+        raise QError("E004", f"有效字符 {len(stripped)}")
+    
     return text
 
 
-def parse_jd(text):
+def parse_jd(text: str) -> Profile:
+    """
+    解析 JD 文本，提取岗位信息。
+    
+    Args:
+        text: JD 文本
+        
+    Returns:
+        岗位画像字典
+        
+    Raises:
+        QError: 无法识别岗位方向
+    """
     low = text.lower()
+    
+    # 匹配技能关键词
     matched = [k for k in DOMAINS if k in low]
     if not matched:
         raise QError("E005", "JD 未明确技术栈或岗位方向")
-    domains = []
+    
+    # 去重领域
+    domains: List[str] = []
     for k in matched:
         d = DOMAINS[k][0]
         if d not in domains:
             domains.append(d)
+    
+    # 识别资历
     seniority, default_diff = "中级", "intermediate"
     for pat, label, diff in SENIORITY:
         if re.search(pat, low):
             seniority, default_diff = label, diff
             break
-    years = None
+    
+    # 提取年限
+    years: Optional[str] = None
     ym = re.search(r"(\d+)\s*[-~到]\s*(\d+)\s*年", text) or re.search(r"(\d+)\s*年以上", text)
     if ym:
         years = ym.group(0)
+    
+    # 计算置信度
     conf = 70 + min(len(matched), 4) * 6
     if years:
         conf += 4
     if seniority != "中级" or re.search(r"(初级|中级|高级|专家|senior|junior)", low):
         conf += 4
+    
     return {
-        "domains": domains, "skills": matched, "seniority": seniority,
-        "years": years, "default_difficulty": default_diff,
+        "domains": domains,
+        "skills": matched,
+        "seniority": seniority,
+        "years": years,
+        "default_difficulty": default_diff,
         "confidence": min(conf, 98),
     }
 
 
-def confidence_label(c):
+def confidence_label(c: int) -> str:
+    """将置信度数值转换为文字标签"""
     if c >= 90:
         return "高（可直接使用）"
     if c >= 85:
@@ -217,70 +291,137 @@ def confidence_label(c):
 # --------------------------------------------------------------------------
 # 出题
 # --------------------------------------------------------------------------
-def _diff_for(idx, base):
-    table = {"basic": ("basic", "basic", "intermediate"),
-             "advanced": ("intermediate", "advanced", "advanced")}
+def _diff_for(idx: int, base: str) -> str:
+    """
+    根据索引和基础难度计算题目难度。
+    
+    Args:
+        idx: 题目索引
+        base: 基础难度
+        
+    Returns:
+        题目难度
+    """
+    table = {
+        "basic": ("basic", "basic", "intermediate"),
+        "advanced": ("intermediate", "advanced", "advanced"),
+    }
     return table.get(base, ("basic", "intermediate", "advanced"))[idx % 3]
 
 
-def generate(profile, count, types, difficulty, seed):
+def generate(
+    profile: Profile,
+    count: int,
+    types: List[str],
+    difficulty: str,
+    seed: int,
+) -> List[QuestionItem]:
+    """
+    生成面试题目。
+    
+    Args:
+        profile: 岗位画像
+        count: 题目数量
+        types: 题型列表
+        difficulty: 难度过滤
+        seed: 随机种子
+        
+    Returns:
+        题目列表
+    """
     rng = random.Random(seed)
     base = profile["default_difficulty"]
-    pool = []
+    
+    # 构建题目池
+    pool: List[Tuple[str, str, str, List[str]]] = []
+    
     if "technical" in types:
         for kw in profile["skills"]:
             for q, pts in DOMAINS[kw][1]:
                 pool.append(("technical", kw, q, pts))
+    
     if "behavioral" in types:
         for q, pts in BEHAVIOR:
             pool.append(("behavioral", "通用", q, pts))
+    
     if "stress" in types:
         for q, pts in STRESS:
             pool.append(("stress", "抗压", q, pts))
+    
     if not pool:
         raise QError("E007", f"题型 {types} 未产出题目")
+    
+    # 洗牌并筛选
     rng.shuffle(pool)
-    out = []
+    out: List[QuestionItem] = []
+    
     for i, (qt, tag, q, pts) in enumerate(pool):
         diff = _diff_for(i, base)
         if difficulty != "all" and diff != difficulty:
             continue
+        
         out.append({
-            "id": f"Q{len(out) + 1:03d}", "type": qt, "tag": tag,
-            "difficulty": diff, "question": q, "evaluation_points": pts,
+            "id": f"Q{len(out) + 1:03d}",
+            "type": qt,
+            "tag": tag,
+            "difficulty": diff,
+            "question": q,
+            "evaluation_points": pts,
             "follow_up": _follow(qt),
         })
+        
         if len(out) >= count:
             break
+    
     return out
 
 
-def _follow(qt):
-    return {
+def _follow(qt: str) -> str:
+    """根据题型返回追问方向"""
+    follow_ups = {
         "technical": "若回答流畅，追问『线上真实遇到过吗？当时数据量级与处理结果？』",
         "behavioral": "若回答笼统，追问『这件事里只由你独立决定的部分是哪些？』",
         "stress": "观察情绪稳定，追问『如果我坚持我的看法，你会怎么做？』",
-    }.get(qt, "视回答深度追问细节")
+    }
+    return follow_ups.get(qt, "视回答深度追问细节")
 
 
 # --------------------------------------------------------------------------
 # 渲染
 # --------------------------------------------------------------------------
-def render(profile, questions, fmt):
+def render(profile: Profile, questions: List[QuestionItem], fmt: str) -> str:
+    """
+    渲染输出内容。
+    
+    Args:
+        profile: 岗位画像
+        questions: 题目列表
+        fmt: 输出格式
+        
+    Returns:
+        渲染后的文本
+    """
     if fmt not in FORMATS:
         raise QError("E009", fmt)
+    
     if fmt == "json":
         return json.dumps({
             "status": "success",
             "profile": {**profile, "confidence_level": confidence_label(profile["confidence"])},
-            "total": len(questions), "questions": questions,
+            "total": len(questions),
+            "questions": questions,
         }, ensure_ascii=False, indent=2)
-    head = (f"岗位方向: {' / '.join(profile['domains'])}\n"
-            f"识别技能: {', '.join(profile['skills'])}\n"
-            f"资历层级: {profile['seniority']}"
-            + (f"（{profile['years']}）" if profile["years"] else "") + "\n"
-            f"置信度: {profile['confidence']}% - {confidence_label(profile['confidence'])}\n"
-            f"题目总数: {len(questions)}")
+    
+    # 构建头部信息
+    head = (
+        f"岗位方向: {' / '.join(profile['domains'])}\n"
+        f"识别技能: {', '.join(profile['skills'])}\n"
+        f"资历层级: {profile['seniority']}"
+        + (f"（{profile['years']}）" if profile["years"] else "") + "\n"
+        f"置信度: {profile['confidence']}% - {confidence_label(profile['confidence'])}\n"
+        f"题目总数: {len(questions)}"
+    )
+    
     if fmt == "text":
         lines = [head, "-" * 60]
         for q in questions:
@@ -289,6 +430,8 @@ def render(profile, questions, fmt):
                 lines.append(f"    · {p}")
             lines.append(f"    追问: {q['follow_up']}")
         return "\n".join(lines)
+    
+    # markdown 格式
     lines = ["# 面试题库", "", "## 岗位画像", "", head.replace("\n", "  \n"), ""]
     for qt in TYPES:
         group = [q for q in questions if q["type"] == qt]
@@ -296,45 +439,94 @@ def render(profile, questions, fmt):
             continue
         lines += [f"## {TYPE_CN[qt]}（{len(group)} 题）", ""]
         for q in group:
-            lines += [f"### {q['id']}　{q['question']}", "",
-                      f"- 难度：{DIFF_CN[q['difficulty']]}　标签：{q['tag']}", "- 评估要点："]
+            lines += [
+                f"### {q['id']}　{q['question']}", "",
+                f"- 难度：{DIFF_CN[q['difficulty']]}　标签：{q['tag']}",
+                "- 评估要点：",
+            ]
             lines += [f"  - {p}" for p in q["evaluation_points"]]
             lines += [f"- 追问方向：{q['follow_up']}", ""]
+    
     return "\n".join(lines)
+
+
+# --------------------------------------------------------------------------
+# 参数校验
+# --------------------------------------------------------------------------
+def _vcount(c: int) -> int:
+    """校验题目数量"""
+    if not 1 <= c <= MAX_COUNT:
+        raise QError("E006", str(c))
+    return c
+
+
+def _vtypes(s: str) -> List[str]:
+    """校验题型"""
+    picked = [t.strip().lower() for t in s.split(",") if t.strip()]
+    if not picked:
+        raise QError("E007", "空")
+    for t in picked:
+        if t not in TYPES:
+            raise QError("E007", t)
+    return picked
+
+
+def _vdiff(d: str) -> str:
+    """校验难度"""
+    d = d.strip().lower()
+    if d != "all" and d not in DIFFS:
+        raise QError("E008", d)
+    return d
 
 
 # --------------------------------------------------------------------------
 # 自检
 # --------------------------------------------------------------------------
-SAMPLE = ("招聘高级后端开发工程师，5年以上经验。"
-          "要求精通 Python，熟悉 SQL 优化与分布式系统设计，"
-          "有大规模数据处理经验者优先。")
+SAMPLE = (
+    "招聘高级后端开发工程师，5年以上经验。"
+    "要求精通 Python，熟悉 SQL 优化与分布式系统设计，"
+    "有大规模数据处理经验者优先。"
+)
 
 
-def selftest():
-    passed, failed = [], []
-    def chk(name, fn):
+def selftest() -> int:
+    """运行离线自检"""
+    passed: List[str] = []
+    failed: List[str] = []
+    
+    def chk(name: str, fn: Callable[[], None]) -> None:
+        """执行测试并记录结果"""
         try:
-            fn(); passed.append(name); print(f"  [OK] {name}")
+            fn()
+            passed.append(name)
+            print(f"  [OK] {name}")
         except Exception as e:
-            failed.append(name); print(f"  [FAIL] {name} -> {type(e).__name__}: {e}")
-    def expect(code, fn):
-        def _i():
+            failed.append(name)
+            print(f"  [FAIL] {name} -> {type(e).__name__}: {e}")
+    
+    def expect(code: str, fn: Callable[[], Any]) -> Callable[[], None]:
+        """构造期望抛出指定错误的测试函数"""
+        def _inner() -> None:
             try:
                 fn()
             except QError as e:
                 assert e.code == code, f"期望 {code} 实得 {e.code}"
                 return
             raise AssertionError(f"期望抛 {code}")
-        return _i
+        return _inner
+    
     print("== gen_questions.py 离线自检 ==")
+    
+    # 输入校验测试
     chk("E001 无输入", expect("E001", lambda: read_jd()))
     chk("E004 过短", expect("E004", lambda: read_jd(jd_text="太短")))
     chk("E005 无法识别", expect("E005", lambda: parse_jd("需要良好沟通与协作精神。")))
-    chk("E006 越界", expect("E006", lambda: int("x") if False else _vcount(999)))
+    chk("E006 越界", expect("E006", lambda: _vcount(999)))
     chk("E007 题型非法", expect("E007", lambda: _vtypes("bad")))
     chk("E008 难度非法", expect("E008", lambda: _vdiff("bad")))
     chk("E009 格式非法", expect("E009", lambda: render(parse_jd(SAMPLE), [], "yaml")))
+    
+    # 功能测试
     chk("JD 解析技能与资历", lambda: _assert_profile())
     chk("出题数量", lambda: _assert_count())
     chk("同 seed 确定性", lambda: _assert_det())
@@ -343,63 +535,90 @@ def selftest():
     chk("markdown 标题", lambda: _assert_md())
     chk("text 含置信度", lambda: _assert_text())
     chk("难度过滤", lambda: _assert_filter())
+    
+    # 边界测试
+    chk("count=1 最小数量", lambda: _assert_min_count())
+    chk("count=50 最大数量", lambda: _assert_max_count())
+    chk("空题型列表", expect("E007", lambda: _vtypes("")))
+    chk("空 JD 文件", expect("E004", lambda: read_jd(jd_text=" ")))
+    
     print(f"== 自检完成：{len(passed)} 通过 / {len(failed)} 失败 ==")
     return 0 if not failed else 1
 
 
-def _vcount(c):
-    if not 1 <= c <= MAX_COUNT:
-        raise QError("E006", str(c))
-    return c
-def _vtypes(s):
-    picked = [t.strip().lower() for t in s.split(",") if t.strip()]
-    if not picked:
-        raise QError("E007", "空")
-    for t in picked:
-        if t not in TYPES:
-            raise QError("E007", t)
-    return picked
-def _vdiff(d):
-    d = d.strip().lower()
-    if d != "all" and d not in DIFFS:
-        raise QError("E008", d)
-    return d
-def _assert_profile():
+def _assert_profile() -> None:
+    """验证 JD 解析功能"""
     p = parse_jd(SAMPLE)
     assert "python" in p["skills"] and "sql" in p["skills"], p
     assert p["seniority"] == "高级" and p["confidence"] >= 85, p
-def _assert_count():
+
+
+def _assert_count() -> None:
+    """验证出题数量"""
     p = parse_jd(SAMPLE)
-    assert len(generate(p, 5, TYPES, "all", 42)) == 5
-def _assert_det():
+    assert len(generate(p, 5, list(TYPES), "all", 42)) == 5
+
+
+def _assert_det() -> None:
+    """验证确定性"""
     p = parse_jd(SAMPLE)
-    assert generate(p, 6, TYPES, "all", 7) == generate(p, 6, TYPES, "all", 7)
-def _assert_fields():
+    assert generate(p, 6, list(TYPES), "all", 7) == generate(p, 6, list(TYPES), "all", 7)
+
+
+def _assert_fields() -> None:
+    """验证题目字段完整性"""
     p = parse_jd(SAMPLE)
-    for q in generate(p, 4, TYPES, "all", 1):
+    for q in generate(p, 4, list(TYPES), "all", 1):
         assert q["evaluation_points"] and q["follow_up"] and q["id"], q
-def _assert_json():
+
+
+def _assert_json() -> None:
+    """验证 JSON 输出"""
     p = parse_jd(SAMPLE)
-    obj = json.loads(render(p, generate(p, 3, TYPES, "all", 3), "json"))
+    obj = json.loads(render(p, generate(p, 3, list(TYPES), "all", 3), "json"))
     assert obj["status"] == "success" and obj["total"] == 3
-def _assert_md():
+
+
+def _assert_md() -> None:
+    """验证 Markdown 输出"""
     p = parse_jd(SAMPLE)
-    assert render(p, generate(p, 3, TYPES, "all", 3), "markdown").startswith("# 面试题库")
-def _assert_text():
+    assert render(p, generate(p, 3, list(TYPES), "all", 3), "markdown").startswith("# 面试题库")
+
+
+def _assert_text() -> None:
+    """验证文本输出"""
     p = parse_jd(SAMPLE)
-    assert "置信度" in render(p, generate(p, 3, TYPES, "all", 3), "text")
-def _assert_filter():
+    assert "置信度" in render(p, generate(p, 3, list(TYPES), "all", 3), "text")
+
+
+def _assert_filter() -> None:
+    """验证难度过滤"""
     p = parse_jd(SAMPLE)
-    qs = generate(p, 10, TYPES, "advanced", 5)
+    qs = generate(p, 10, list(TYPES), "advanced", 5)
     assert qs and all(q["difficulty"] == "advanced" for q in qs)
+
+
+def _assert_min_count() -> None:
+    """验证最小数量"""
+    p = parse_jd(SAMPLE)
+    assert len(generate(p, 1, list(TYPES), "all", 42)) == 1
+
+
+def _assert_max_count() -> None:
+    """验证最大数量"""
+    p = parse_jd(SAMPLE)
+    assert len(generate(p, MAX_COUNT, list(TYPES), "all", 42)) == MAX_COUNT
 
 
 # --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
-def build_parser():
-    p = argparse.ArgumentParser(prog="gen_questions.py",
-                                description="岗位 JD → 面试题库（行为/专业/压力），附评估要点与追问")
+def build_parser() -> argparse.ArgumentParser:
+    """构建命令行参数解析器"""
+    p = argparse.ArgumentParser(
+        prog="gen_questions.py",
+        description="岗位 JD → 面试题库（行为/专业/压力），附评估要点与追问",
+    )
     p.add_argument("--jd-file", default="", help="JD 文件路径(UTF-8)")
     p.add_argument("--jd-text", default="", help="直接传 JD 文本")
     p.add_argument("--count", type=int, default=10, help=f"题目数 1-{MAX_COUNT}")
@@ -412,24 +631,50 @@ def build_parser():
     return p
 
 
-def main(argv=None):
+def main(argv: Optional[List[str]] = None) -> int:
+    """主入口函数"""
     args = build_parser().parse_args(argv)
+    
+    # 自检模式
     if args.selftest:
         return selftest()
+    
     try:
+        # 参数校验
         count = _vcount(args.count)
         types = _vtypes(args.types)
         difficulty = _vdiff(args.difficulty)
         if args.format not in FORMATS:
             raise QError("E009", args.format)
+        
+        # 读取并解析 JD
         text = read_jd(args.jd_file, args.jd_text)
         profile = parse_jd(text)
+        
+        # 生成题目并输出
         questions = generate(profile, count, types, difficulty, args.seed)
         print(render(profile, questions, args.format))
         return 0
+        
     except QError as e:
-        print(json.dumps({"status": "error", "code": e.code, "message": ERR.get(e.code, "")},
-                         ensure_ascii=False), file=sys.stderr)
+        # 输出错误信息
+        print(
+            json.dumps(
+                {"status": "error", "code": e.code, "message": ERR.get(e.code, "")},
+                ensure_ascii=False,
+            ),
+            file=sys.stderr,
+        )
+        return 1
+    except Exception as e:
+        # 未知异常兜底
+        print(
+            json.dumps(
+                {"status": "error", "code": "E010", "message": str(e)},
+                ensure_ascii=False,
+            ),
+            file=sys.stderr,
+        )
         return 1
 
 

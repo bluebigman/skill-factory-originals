@@ -187,33 +187,58 @@ TEMPLATES = {
 _PLACEHOLDER = re.compile(r"\{([a-z_]+)\}")
 
 
-def render(scenario, lang, tone, fields):
+def _validate_scenario_lang_tone(scenario: str, lang: str, tone: str) -> None:
+    """统一校验场景、语言、语气，避免重复代码。"""
     if scenario not in TEMPLATES:
         raise DraftErr("E003", scenario)
     if lang not in TEMPLATES[scenario]:
         raise DraftErr("E004", f"{scenario}/{lang}")
     if tone not in TEMPLATES[scenario][lang]:
         raise DraftErr("E005", tone)
+
+
+def render(scenario: str, lang: str, tone: str, fields: dict) -> tuple[str, list[str], list[str]]:
+    """
+    渲染邮件正文。
+    返回: (正文, 风险措辞列表, 缺失必填字段列表)
+    """
+    # 输入类型校验
+    if not isinstance(fields, dict):
+        raise DraftErr("E006", "fields 参数必须是字典")
+
+    _validate_scenario_lang_tone(scenario, lang, tone)
     required, template = TEMPLATES[scenario][lang][tone]
+
+    # 检查必填字段
     missing = [f for f in required if not str(fields.get(f, "")).strip()]
+
+    # 渲染模板
     body = template
     for name in _PLACEHOLDER.findall(template):
         val = str(fields.get(name, "")).strip()
         body = body.replace("{%s}" % name, val if val else f"[需核实:{name}]")
-    # 风险措辞提示（仅提示，不阻断）；缺失字段已在正文中标注 [需核实]
+
+    # 长度检查
+    if len(body) > MAX_CHARS:
+        raise DraftErr("E007", f"渲染结果 {len(body)} 字符超过上限 {MAX_CHARS}")
+
+    # 风险措辞提示（仅提示，不阻断）
     risks = [w for w in RISKY.get(lang, []) if w in body]
     return body, risks, missing
 
 
-def to_markdown(text):
+def to_markdown(text: str) -> str:
+    """转换为 Markdown 格式（引用块 + 双空格换行）。"""
     return text.replace("\n\n", "\n\n> ").replace("\n", "  \n")
 
 
-def to_html(text):
+def to_html(text: str) -> str:
+    """转换为 HTML 格式（段落 + 换行）。"""
     return "<p>" + html.escape(text).replace("\n", "<br>") + "</p>"
 
 
-def emit(text, fmt):
+def emit(text: str, fmt: str) -> str:
+    """按指定格式输出。"""
     if fmt == "markdown":
         return to_markdown(text)
     if fmt == "html":
@@ -224,26 +249,32 @@ def emit(text, fmt):
 # --------------------------------------------------------------------------
 # 批量
 # --------------------------------------------------------------------------
-def load_batch(path):
+def load_batch(path: str) -> list[dict]:
+    """从 CSV/JSON 文件加载批量数据。"""
     p = Path(path)
     if not p.is_file():
         raise DraftErr("E009", "文件不存在")
+
     try:
         if p.suffix.lower() == ".json":
             rows = json.loads(p.read_text(encoding="utf-8"))
             if not isinstance(rows, list):
                 raise DraftErr("E009", "JSON 顶层须为数组")
+            # 确保每行都是字典
+            rows = [r for r in rows if isinstance(r, dict)]
         else:
             with open(p, encoding="utf-8", newline="") as f:
                 rows = [dict(r) for r in csv.DictReader(f)]
     except (json.JSONDecodeError, OSError, UnicodeDecodeError) as e:
         raise DraftErr("E009", str(e))
+
     if len(rows) > MAX_ROWS:
         raise DraftErr("E008", f"{len(rows)} > {MAX_ROWS}")
     return rows
 
 
-def batch(rows, fmt):
+def batch(rows: list[dict], fmt: str) -> list[dict]:
+    """批量渲染邮件。"""
     out = []
     for r in rows:
         sc = r.get("scenario", "")
@@ -252,8 +283,11 @@ def batch(rows, fmt):
         fields = {k: v for k, v in r.items() if k not in ("scenario", "lang", "tone")}
         try:
             text, risks, missing = render(sc, lg, tn, fields)
-            out.append({"scenario": sc, "lang": lg, "tone": tn,
-                        "content": emit(text, fmt), "risks": risks, "ok": True})
+            out.append({
+                "scenario": sc, "lang": lg, "tone": tn,
+                "content": emit(text, fmt), "risks": risks,
+                "missing": missing, "ok": True
+            })
         except DraftErr as e:
             out.append({"scenario": sc, "error": e.code, "message": e.args[0], "ok": False})
     return out
@@ -262,18 +296,21 @@ def batch(rows, fmt):
 # --------------------------------------------------------------------------
 # 自检
 # --------------------------------------------------------------------------
-def selftest():
+def selftest() -> int:
+    """离线自检，确保核心功能正常。"""
     print("== draft.py 离线自检 ==")
     ok = True
 
-    def chk(name, fn):
+    def chk(name: str, fn) -> None:
         nonlocal ok
         try:
-            fn(); print(f"  [OK] {name}")
+            fn()
+            print(f"  [OK] {name}")
         except Exception as e:
-            ok = False; print(f"  [FAIL] {name} -> {type(e).__name__}: {e}")
+            ok = False
+            print(f"  [FAIL] {name} -> {type(e).__name__}: {e}")
 
-    def expect(code, fn):
+    def expect(code: str, fn) -> callable:
         def _i():
             try:
                 fn()
@@ -282,29 +319,36 @@ def selftest():
                 return
             raise AssertionError(f"期望抛 {code}")
         return _i
+
+    # 错误处理测试
     chk("E003 场景不存在", expect("E003", lambda: render("nope", "zh-CN", "formal", {})))
     chk("E004 语言不存在", expect("E004", lambda: render("dunning", "fr-FR", "formal", {})))
     chk("E005 语气不存在", expect("E005", lambda: render("dunning", "zh-CN", "angry", {})))
+
     def _e006():
         b, _, m = render("dunning", "zh-CN", "formal", {"recipient": "张经理", "amount": "52000"})
         assert m and "[需核实" in b, (m, b)
     chk("E006 必填缺失标注", _e006)
+
     # 正常渲染 + [需核实] 标注
     body, _, missing = render("dunning", "zh-CN", "formal",
-                     {"recipient": "张经理", "amount": "", "invoice_no": "INV-1",
-                      "due_date": "2026-07-31", "sender": "李明"})
+                              {"recipient": "张经理", "amount": "", "invoice_no": "INV-1",
+                               "due_date": "2026-07-31", "sender": "李明"})
     assert "[需核实:amount]" in body, "缺失字段未标注"
     print("  [OK] 缺失字段标注为 [需核实:amount]")
+
     # 多语言
     en, _, _ = render("dunning", "en-US", "formal",
-                   {"recipient": "Mr.Lee", "amount": "$520", "invoice_no": "INV-1",
-                    "due_date": "2026-07-31", "sender": "Li Ming"})
+                      {"recipient": "Mr.Lee", "amount": "$520", "invoice_no": "INV-1",
+                       "due_date": "2026-07-31", "sender": "Li Ming"})
     assert "Dear Mr.Lee" in en
     print("  [OK] 英文模板渲染正常")
+
     # 输出格式
     assert emit(body, "html").startswith("<p>")
     assert emit(body, "markdown")
     print("  [OK] html / markdown / text 输出")
+
     # 批量
     rows = [
         {"scenario": "thanks", "lang": "zh-CN", "tone": "semi",
@@ -315,6 +359,20 @@ def selftest():
     res = batch(rows, "text")
     assert all(r["ok"] for r in res), res
     print("  [OK] 批量渲染 2 封均成功")
+
+    # 边界测试：空字段
+    empty_body, _, empty_missing = render("thanks", "zh-CN", "formal", {})
+    assert "[需核实:recipient]" in empty_body, "空字段未标注"
+    assert len(empty_missing) == 3, f"应缺失 3 个字段，实际 {len(empty_missing)}"
+    print("  [OK] 空字段边界处理")
+
+    # 边界测试：特殊字符
+    special_body, _, _ = render("formal", "zh-CN", "formal",
+                                {"recipient": "张经理", "body": "包含 <script>alert('xss')</script> 内容",
+                                 "sender": "李明"})
+    assert "<script>" in special_body, "特殊字符应保留"
+    print("  [OK] 特殊字符处理")
+
     print(f"== 自检{'通过 ✅' if ok else '未通过 ❌'} ==")
     return 0 if ok else 1
 
@@ -322,7 +380,17 @@ def selftest():
 # --------------------------------------------------------------------------
 # CLI
 # --------------------------------------------------------------------------
-def main():
+def _parse_fields(field_args: list[str]) -> dict:
+    """解析 --field 参数为字典。"""
+    fields = {}
+    for f in field_args:
+        if "=" in f:
+            k, v = f.split("=", 1)
+            fields[k.strip()] = v.strip()
+    return fields
+
+
+def main() -> int:
     ap = argparse.ArgumentParser(description="商务邮件起草器（原创实现）")
     ap.add_argument("--scenario", help="dunning/follow_up/quote/apology/thanks/formal")
     ap.add_argument("--lang", default="zh-CN", help="zh-CN / en-US")
@@ -339,40 +407,50 @@ def main():
 
     if args.selftest:
         return selftest()
+
     if args.list:
         for sc, langs in TEMPLATES.items():
             for lg, tones in langs.items():
                 for tn, (req, _) in tones.items():
                     print(f"{sc:12s} {lg:6s} {tn:8s} 必填: {', '.join(req)}")
         return 0
+
     try:
+        # 批量模式
         if args.input:
             rows = load_batch(args.input)
             res = batch(rows, args.format)
             if args.output:
-                Path(args.output).write_text(json.dumps(res, ensure_ascii=False, indent=2),
-                                             encoding="utf-8")
+                Path(args.output).write_text(
+                    json.dumps(res, ensure_ascii=False, indent=2),
+                    encoding="utf-8"
+                )
             else:
                 print(json.dumps(res, ensure_ascii=False, indent=2))
             return 0 if all(r.get("ok") for r in res) else 1
+
+        # 单封模式
         if not args.scenario:
             print(json.dumps({"status": "error", "code": "E003", "message": "未指定 --scenario"},
                              ensure_ascii=False))
             return 1
-        fields = {}
-        for f in args.field:
-            if "=" in f:
-                k, v = f.split("=", 1)
-                fields[k.strip()] = v.strip()
+
+        fields = _parse_fields(args.field)
         text, risks, missing = render(args.scenario, args.lang, args.tone, fields)
         print(emit(text, args.format))
+
         if missing:
             print("⚠️ 必填字段缺失，已标注 [需核实]，请补全: " + ", ".join(missing), file=sys.stderr)
         if risks:
             print("\n⚠️ 风险措辞提示: " + ", ".join(risks), file=sys.stderr)
         return 1 if missing else 0
+
     except DraftErr as e:
         print(json.dumps({"status": "error", "code": e.code, "message": e.args[0]},
+                         ensure_ascii=False), file=sys.stderr)
+        return 1
+    except Exception as e:  # 兜底异常处理
+        print(json.dumps({"status": "error", "code": "E999", "message": f"未知错误: {e}"},
                          ensure_ascii=False), file=sys.stderr)
         return 1
 

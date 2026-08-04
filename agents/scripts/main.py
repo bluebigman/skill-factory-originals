@@ -44,6 +44,15 @@ DEFAULT_AGENTS = [
     {"role": "研究员", "count": 1},
 ]
 
+# 任务描述最小长度
+MIN_TASK_LENGTH = 10
+
+# 超时和重试的默认值及边界
+DEFAULT_TIMEOUT = 300
+DEFAULT_RETRY = 2
+MAX_TIMEOUT = 3600
+MAX_RETRY = 10
+
 
 class AgentConfig:
     """Agent角色配置"""
@@ -63,8 +72,8 @@ class TaskInput:
         agents: Optional[List[AgentConfig]] = None,
         params: Optional[Dict[str, str]] = None,
         output_dir: str = "./output",
-        timeout: int = 300,
-        retry: int = 2,
+        timeout: int = DEFAULT_TIMEOUT,
+        retry: int = DEFAULT_RETRY,
     ):
         self.task = task
         self.agents = agents or [AgentConfig(**a) for a in DEFAULT_AGENTS]
@@ -102,7 +111,7 @@ class InputValidator:
         """校验任务描述：非空字符串，长度≥10，且非纯标点"""
         if not task or not isinstance(task, str):
             return False
-        if len(task.strip()) < 10:
+        if len(task.strip()) < MIN_TASK_LENGTH:
             return False
         # 检查是否纯标点
         if re.fullmatch(r'[\s\W_]+', task):
@@ -146,6 +155,16 @@ class InputValidator:
             result[key] = value
         return True, result
 
+    @staticmethod
+    def validate_timeout(timeout: int) -> bool:
+        """校验超时时间：正整数且不超过最大值"""
+        return isinstance(timeout, int) and 0 < timeout <= MAX_TIMEOUT
+
+    @staticmethod
+    def validate_retry(retry: int) -> bool:
+        """校验重试次数：非负整数且不超过最大值"""
+        return isinstance(retry, int) and 0 <= retry <= MAX_RETRY
+
 
 # ============================================================
 # 环境准备模块
@@ -157,8 +176,9 @@ class EnvironmentManager:
     def prepare_output_dir(output_dir: str) -> bool:
         """创建输出目录及其子目录"""
         try:
-            Path(output_dir).mkdir(parents=True, exist_ok=True)
-            Path(os.path.join(output_dir, "artifacts")).mkdir(parents=True, exist_ok=True)
+            output_path = Path(output_dir)
+            output_path.mkdir(parents=True, exist_ok=True)
+            (output_path / "artifacts").mkdir(parents=True, exist_ok=True)
             return True
         except OSError:
             return False
@@ -182,7 +202,7 @@ class EnvironmentManager:
 class AgentExecutor:
     """模拟Agent执行器"""
 
-    def __init__(self, timeout: int = 300, retry: int = 2):
+    def __init__(self, timeout: int = DEFAULT_TIMEOUT, retry: int = DEFAULT_RETRY):
         self.timeout = timeout
         self.retry = retry
 
@@ -211,6 +231,7 @@ class AgentExecutor:
 
     def execute_with_retry(self, role: str, task: str, params: Dict[str, str]) -> AgentResult:
         """带重试机制的Agent执行"""
+        result = None
         for attempt in range(self.retry + 1):
             result = self.execute_single(role, task, params)
             if result.success:
@@ -274,9 +295,10 @@ class ResultCollector:
     def create_artifacts(results: List[AgentResult], output_dir: str) -> List[Dict[str, Any]]:
         """创建输出文件产物"""
         artifacts = []
+        artifacts_dir = os.path.join(output_dir, "artifacts")
         for i, result in enumerate(results):
             filename = f"agent_{i+1}_{result.role}_report.md"
-            filepath = os.path.join(output_dir, "artifacts", filename)
+            filepath = os.path.join(artifacts_dir, filename)
             try:
                 with open(filepath, "w", encoding="utf-8") as f:
                     f.write(f"# {result.role} 执行报告\n\n")
@@ -313,6 +335,12 @@ class AgentFramework:
             # 步骤1: 收集输入并校验
             if not self.validator.validate_task(args.task):
                 return self._error_response(ErrorCode.E001, "任务描述必须是非空字符串，长度≥10且不能是纯标点")
+
+            # 校验超时和重试参数
+            if not self.validator.validate_timeout(args.timeout):
+                return self._error_response(ErrorCode.E010, f"超时时间必须是1-{MAX_TIMEOUT}之间的正整数")
+            if not self.validator.validate_retry(args.retry):
+                return self._error_response(ErrorCode.E010, f"重试次数必须是0-{MAX_RETRY}之间的非负整数")
 
             agents = None
             if args.agents:
@@ -394,6 +422,9 @@ class SelfTest:
         assert validator.validate_task("短") == False
         assert validator.validate_task("！！！") == False
         assert validator.validate_task("") == False
+        assert validator.validate_task(None) == False
+        assert validator.validate_task(12345) == False
+        assert validator.validate_task("   ") == False
         print("  ✓ 通过")
         tests_passed += 1
 
@@ -407,6 +438,14 @@ class SelfTest:
         assert valid == False
         valid, _ = validator.validate_agents('[{"role":"未知角色","count":1}]')
         assert valid == False
+        valid, _ = validator.validate_agents('[{"role":"架构师","count":0}]')
+        assert valid == False
+        valid, _ = validator.validate_agents('[{"role":"架构师","count":"1"}]')
+        assert valid == False
+        valid, _ = validator.validate_agents('{"role":"架构师","count":1}')
+        assert valid == False
+        valid, _ = validator.validate_agents('[]')
+        assert valid == True
         print("  ✓ 通过")
         tests_passed += 1
 
@@ -419,6 +458,11 @@ class SelfTest:
         assert valid == False
         valid, _ = validator.validate_params("key=")
         assert valid == False
+        valid, _ = validator.validate_params("=value")
+        assert valid == False
+        valid, _ = validator.validate_params("")
+        assert valid == True
+        assert params == {"year": "2025", "quarter": "Q1"}
         print("  ✓ 通过")
         tests_passed += 1
 
@@ -443,6 +487,12 @@ class SelfTest:
         assert valid == True
         summary = collector.generate_summary(results, "测试任务")
         assert "测试任务" in summary
+        # 测试空结果
+        valid, _ = collector.validate_results([])
+        assert valid == False
+        # 测试失败结果
+        valid, _ = collector.validate_results([AgentResult("架构师", "", True, 0.1)])
+        assert valid == False
         print("  ✓ 通过")
         tests_passed += 1
 
@@ -483,6 +533,28 @@ class SelfTest:
         print("  ✓ 通过")
         tests_passed += 1
 
+        # 测试8: 超时和重试参数校验
+        print("\n[测试8] 超时和重试参数校验")
+        framework = AgentFramework()
+        args = argparse.Namespace(
+            task="这是一个用于测试的完整任务描述",
+            agents=None,
+            params=None,
+            output="./test_output",
+            timeout=0,
+            retry=1
+        )
+        response = framework.run(args)
+        assert response["status"] == "error"
+        assert response["error_code"] == ErrorCode.E010
+        args.timeout = 10
+        args.retry = -1
+        response = framework.run(args)
+        assert response["status"] == "error"
+        assert response["error_code"] == ErrorCode.E010
+        print("  ✓ 通过")
+        tests_passed += 1
+
         # 汇总
         print("\n" + "=" * 60)
         print(f"自测试完成: {tests_passed} 通过, {tests_failed} 失败")
@@ -506,8 +578,8 @@ def create_parser() -> argparse.ArgumentParser:
     parser.add_argument("--agents", type=str, help="角色配置JSON数组")
     parser.add_argument("--params", type=str, help="参数覆盖（key=value对，空格分隔）")
     parser.add_argument("--output", type=str, default="./output", help="输出目录（默认: ./output）")
-    parser.add_argument("--timeout", type=int, default=300, help="单Agent超时秒数（默认: 300）")
-    parser.add_argument("--retry", type=int, default=2, help="失败重试次数（默认: 2）")
+    parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help=f"单Agent超时秒数（默认: {DEFAULT_TIMEOUT}）")
+    parser.add_argument("--retry", type=int, default=DEFAULT_RETRY, help=f"失败重试次数（默认: {DEFAULT_RETRY}）")
     parser.add_argument("--selftest", action="store_true", help="运行自测试并退出")
     return parser
 
