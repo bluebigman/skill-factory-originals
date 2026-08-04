@@ -355,11 +355,13 @@ def generate(
     rng.shuffle(pool)
     out: List[QuestionItem] = []
     
+    # 第一轮：按题库顺序出题，命中难度过滤
     for i, (qt, tag, q, pts) in enumerate(pool):
+        if len(out) >= count:
+            break
         diff = _diff_for(i, base)
         if difficulty != "all" and diff != difficulty:
             continue
-        
         out.append({
             "id": f"Q{len(out) + 1:03d}",
             "type": qt,
@@ -369,10 +371,26 @@ def generate(
             "evaluation_points": pts,
             "follow_up": _follow(qt),
         })
-        
-        if len(out) >= count:
-            break
-    
+
+    # 题库不足时循环复用（重新洗牌变换顺序）补满数量，保证大批量请求可控
+    if len(out) < count and difficulty == "all":
+        idx = len(pool)
+        while len(out) < count:
+            if idx > 0 and idx % len(pool) == 0:
+                rng.shuffle(pool)
+            qt, tag, q, pts = pool[idx % len(pool)]
+            diff = _diff_for(idx, base)
+            out.append({
+                "id": f"Q{len(out) + 1:03d}",
+                "type": qt,
+                "tag": tag,
+                "difficulty": diff,
+                "question": q,
+                "evaluation_points": pts,
+                "follow_up": _follow(qt),
+            })
+            idx += 1
+
     return out
 
 
