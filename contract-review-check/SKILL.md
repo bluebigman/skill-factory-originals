@@ -3,7 +3,7 @@ slug: contract-review-check
 name: contract-review-check
 displayName: 合同审查 风险清单 条款核查
 description: 对合同文本进行风险点审查，输出违约、付款、保密、知产归属的核查意见清单。
-version: 2.0.3
+version: 2.0.4
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/contract-review-check

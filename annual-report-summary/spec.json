@@ -1,0 +1,8 @@
+{
+  "slug": "annual-report-summary",
+  "name": "annual-report-summary",
+  "description": "解读上市公司年报，提炼营收利润、现金流、负债、分红等投资要点。",
+  "trigger_words": "- annual-report-summary",
+  "original_version": "1.4.5",
+  "capability_outline": []
+}

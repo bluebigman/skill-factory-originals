@@ -3,7 +3,7 @@ slug: cli-command-tester
 name: HTTP命令行测试工具
 displayName: 接口调试 请求构造 响应校验
 description: 用命令行快速构造HTTP请求、调试REST API并格式化输出响应结果。
-version: 1.0.15
+version: 1.0.16
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/cli-command-tester

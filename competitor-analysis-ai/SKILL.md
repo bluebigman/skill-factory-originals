@@ -3,7 +3,7 @@ slug: competitor-analysis-ai
 name: competitor-analysis
 displayName: 竞品透视 对比拆解 策略建议
 description: 多维度拆解竞品，输出可执行差异化策略与结构化对比报告。
-version: 19.0.10
+version: 19.0.11
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/competitor-analysis-ai

@@ -3,7 +3,7 @@ slug: data-visual-report
 name: data-visual-report
 displayName: 表格数据 可视化报告 图表生成
 description: 将表格数据自动转换为带图表与结论的可视化分析报告
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/data-visual-report

@@ -3,7 +3,7 @@ slug: data-backup-checklist
 name: data-backup-checklist
 displayName: 备份核验 版本比对 恢复演练
 description: 备份完整性检查：清单核对、版本差异、恢复演练、风险分级预警。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/data-backup-checklist

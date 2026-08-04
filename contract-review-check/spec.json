@@ -1,8 +1,11 @@
 {
   "slug": "contract-review-check",
-  "name": "contract-review-check",
-  "description": "对合同文本进行风险点审查：违约责任、付款条款、保密条款、知识产权归属，输出审查意见清单",
-  "trigger_words": "- \"contract-review-check",
-  "original_version": "2.0.2",
-  "capability_outline": []
+  "mode": "upgrade",
+  "target": 4.8,
+  "score_track": [
+    3.5,
+    3.5,
+    3.5
+  ],
+  "final_score": 3.5
 }
