@@ -1,0 +1,8 @@
+{
+  "slug": "expense-reimburse",
+  "name": "expense-reimburse",
+  "description": "整理报销单据：发票真伪初查、金额核对、报销类别归类、生成报销明细表",
+  "trigger_words": "- \"expense-reimburse",
+  "original_version": "1.3.1",
+  "capability_outline": []
+}
