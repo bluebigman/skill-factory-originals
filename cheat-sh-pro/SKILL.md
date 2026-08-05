@@ -1,81 +1,68 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
 slug: cheat-sh-pro
 name: 命令行速查手册
-displayName: 终端速查 命令示例 编程助手
+displayName: 终端速查 代码示例 即时检索
 description: 一条命令获取编程语言与工具示例，开发调试即时查阅。
-version: 1.0.14
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/cheat-sh-pro
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DevCompass
+author: 终端工匠
 agent_created: true
-trigger_words:
-  - "cheat.sh"
-  - "命令行示例"
-  - "速查命令"
-  - "工具用法"
+trigger_words: ["cheat.sh", "命令行速查", "代码示例查询", "终端查手册", "命令速查", "开发调试速查"]
 ---
 
-# 命令行速查手册 SKILL.md
-
-> 本内容由 AI 生成，仅供学习参考  
+> 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
----
+# 命令行速查手册（cheat-sh-pro）
 
-## 一、能力边界
+## 一、能力边界：一页纸速查卡
 
 ### 能做什么
 
-| 场景 | 说明 |
-|------|------|
-| 语言速查 | 获取 Python、Go、Rust、JavaScript 等语言的函数用法或常见片段 |
-| 工具速查 | 获取 curl、jq、git、docker、kubectl 等 CLI 工具的实用示例 |
-| 问题定位 | 通过 `cheat.sh/关键词` 获取社区常见问题解答 |
-| 学习参考 | 不依赖浏览器，终端内快速浏览代码模式 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 查询编程语言语法 | 获取指定语言的核心语法示例 | `curl cheat.sh/python/lambda` |
+| 查询工具用法 | 获取命令行工具的参数与用法 | `curl cheat.sh/tar` |
+| 查询库/框架用法 | 获取特定库的常用操作示例 | `curl cheat.sh/numpy/array` |
+| 查询算法实现 | 获取常见算法的代码示例 | `curl cheat.sh/sort` |
+| 学习/速查双模式 | 支持学习模式（详细）与速查模式（精简） | `curl cheat.sh/python/lambda?T` |
+| 本地终端集成 | 无需浏览器，终端内直接查阅 | 配合 curl 使用 |
 
 ### 不能做什么
 
-| 限制 | 说明 |
-|------|------|
-| 不执行代码 | 仅返回文本示例，不运行任何代码或命令 |
-| 不保证最新 | 内容来自 cheat.sh 社区，可能滞后于最新版本 |
-| 不处理登录态 | 需要认证的私有仓库、内部工具无法访问 |
-| 不做语义理解 | 仅按关键词匹配，不做复杂意图解析 |
+| 限制项 | 说明 |
+|--------|------|
+| 不提供代码执行环境 | 仅返回示例文本，不执行任何代码 |
+| 不保证示例的绝对正确性 | 示例来自社区贡献，可能存在过时或错误 |
+| 不提供交互式问答 | 仅返回静态文本，不支持多轮对话 |
+| 不覆盖所有工具/语言 | 仅覆盖社区已贡献的内容 |
+| 不提供中文翻译 | 返回内容以英文为主 |
 
 ### 适用对象
 
-- 日常使用终端的中级开发者
-- 需要快速回忆 API 用法时的查阅场景
-- 调试脚本、写一次性命令时的辅助参考
+- 日常使用命令行的开发者
+- 需要快速查阅语法/用法的程序员
+- 学习新语言/工具时希望快速上手的学习者
+- 在无图形界面环境下工作的运维人员
 
 ---
 
-## 二、触发方式
+## 二、触发方式：场景映射表
 
-### 触发词
-
-| 触发词 | 说明 |
-|--------|------|
-| `cheat.sh` | 主触发词，完整形式 |
-| 命令行示例 | 中文口语触发 |
-| 速查命令 | 中文口语触发 |
-| 工具用法 | 中文口语触发 |
-
-### 场景映射表
-
-| 用户说（大白话） | 实际行为 |
-|------------------|----------|
-| “帮我查一下 Python 怎么读 JSON” | 请求 `python/read json` 的速查内容 |
-| “curl 怎么带 cookie 请求” | 请求 `curl/with cookie` 示例 |
-| “jq 怎么取数组第一个元素” | 请求 `jq/array first element` 示例 |
-| “给我一个 Go 的 http server 模板” | 请求 `go/http server` 示例 |
+| 触发词/场景 | 用户意图 | 推荐操作 |
+|-------------|----------|----------|
+| "查一下 python 的 lambda 用法" | 想快速获取 Python lambda 语法示例 | `curl cheat.sh/python/lambda` |
+| "tar 命令怎么解压" | 想获取 tar 命令的常用参数 | `curl cheat.sh/tar` |
+| "有没有 numpy 数组操作的例子" | 想获取 numpy 库的常用操作 | `curl cheat.sh/numpy/array` |
+| "快速排序怎么写" | 想获取排序算法的代码示例 | `curl cheat.sh/sort` |
+| "查一下 go 语言的 goroutine" | 想获取 Go 语言并发示例 | `curl cheat.sh/go/goroutine` |
+| "终端里直接查手册" | 想在终端内完成查询 | 直接使用 curl 调用 |
 
 ---
 
@@ -83,117 +70,201 @@ trigger_words:
 
 ### 前置条件
 
-1. 用户已提供明确的查询目标（语言/工具 + 具体需求）
+1. 终端环境已安装 `curl`（或 `wget`/`httpie`）
 2. 网络可访问 `cheat.sh` 服务
-3. 若未提供目标，进入澄清环节（见下文）
+3. 了解基本的命令行操作
 
 ### 执行步骤
 
-1. **解析输入**  
-   提取 `语言/工具` 与 `需求关键词`，格式为：`工具/需求描述`
+**步骤 1：构造查询 URL**
 
-2. **构造请求**  
-   拼接 URL：`https://cheat.sh/工具/需求描述`  
-   示例：`https://cheat.sh/python/read json`
+基本格式：
+```
+{语言或工具}/{查询主题}
+```
 
-3. **执行请求**  
-   使用 `curl -s` 发起 GET 请求，必要时加 `-H "User-Agent: curl"` 避免服务端拦截
+**步骤 2：发起请求**
 
-4. **校验响应**  
-   - 若返回 HTTP 200 且内容非空 → 继续
-   - 若返回 404 → 提示关键词不匹配
-   - 若返回其他错误 → 进入错误码处理（见下文）
+```bash
+# 基础查询
+curl cheat.sh/python/lambda
 
-5. **格式化输出**  
-   - 保留原始文本格式（代码块、注释、示例）
-   - 若内容过长（超过 200 行），截断并提示“内容较长，已截取前 200 行，需要完整版请回复 `/full`”
+# 指定语言版本
+curl cheat.sh/python/3/lambda
 
-6. **交付结果**  
-   输出速查内容，末尾附一行来源提示：`来源: cheat.sh（社区维护，仅供参考）`
+# 查询工具用法
+curl cheat.sh/tar
+
+# 查询库用法
+curl cheat.sh/numpy/array
+
+# 查询算法
+curl cheat.sh/sort
+```
+
+**步骤 3：使用查询参数（可选）**
+
+| 参数 | 作用 | 示例 |
+|------|------|------|
+| `?T` | 终端模式（去除 ANSI 颜色） | `curl cheat.sh/python/lambda?T` |
+| `?Q` | 静默模式（仅返回代码） | `curl cheat.sh/python/lambda?Q` |
+| `?s` | 简化输出 | `curl cheat.sh/python/lambda?s` |
+| `?b` | 浏览器模式（返回 HTML） | `curl cheat.sh/python/lambda?b` |
+
+**步骤 4：阅读与使用输出**
+
+- 输出为 Markdown 格式的文本
+- 包含代码示例、参数说明、注意事项
+- 可直接复制代码到编辑器中使用
 
 ### 输出规范
 
-| 项目 | 要求 |
-|------|------|
-| 格式 | Markdown 代码块包裹原始内容 |
-| 长度 | 默认截断 200 行，超长告知用户 |
-| 附加信息 | 末尾附一行来源说明 |
-| 错误提示 | 按错误码体系输出（见下文） |
+- 默认输出包含 ANSI 颜色代码（终端可读）
+- 使用 `?T` 参数去除颜色，便于重定向到文件
+- 输出内容按主题分组，包含标题、说明、代码块
 
 ---
 
 ## 四、置信度门控
 
-当遇到以下情况，**不编造内容**，直接输出占位符：
+当遇到以下情况时，输出 `[需核实:字段]` 占位符，不编造内容：
 
-| 场景 | 输出格式 |
+| 场景 | 处理方式 |
 |------|----------|
-| 用户需求模糊（如“给我看看”无关键词） | `[需核实:请明确查询的语言或工具名称]` |
-| 关键词过泛（如“python”无具体需求） | `[需核实:请补充具体需求，例如 "python/read csv"]` |
-| 响应内容无法解析 | `[需核实:服务返回异常，请稍后重试或更换关键词]` |
-
-**原则**：宁缺毋滥，不拼凑、不臆造示例。
+| 查询主题不存在 | 返回 404 或空内容，提示 `[需核实:主题是否存在]` |
+| 查询的语言/工具未收录 | 提示 `[需核实:该语言/工具是否已收录]` |
+| 示例内容可能过时 | 提示 `[需核实:示例时效性]` |
+| 网络请求失败 | 提示 `[需核实:网络连接]`，建议重试 |
+| 返回内容不完整 | 提示 `[需核实:内容完整性]` |
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 含义 | 提示话术 | 修正步骤 |
-|--------|------|----------|----------|
-| `E001` | 输入为空 | “未检测到查询目标，请提供语言/工具名称及需求” | 1. 引导用户输入 `工具/需求` 格式 |
-| `E002` | 关键词不匹配（404） | “未找到匹配的速查内容，请尝试更换关键词或查看拼写” | 1. 建议用户简化关键词 2. 尝试英文原词 3. 推荐使用 `工具/常见任务` 格式 |
-| `E003` | 网络超时或服务不可达 | “暂无法连接 cheat.sh 服务，请检查网络后重试” | 1. 等待 5 秒后重试 2. 若仍失败，提示用户稍后再试 |
-| `E004` | 响应内容为空 | “服务返回空内容，请换一个更具体的关键词” | 1. 建议增加动词或对象（如 `read`、`list`、`create`） |
-| `E005` | 响应格式异常 | “返回内容格式异常，无法正常展示” | 1. 建议用户更换关键词 2. 或直接访问 cheat.sh 网页版 |
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|----------|----------|----------|
+| E001 | 网络连接失败 | "无法连接到 cheat.sh 服务，请检查网络" | 1. 检查网络连接 2. 重试请求 3. 使用 `curl -v` 查看详细错误 |
+| E002 | 查询主题不存在 | "未找到相关主题，请检查拼写" | 1. 确认主题拼写 2. 尝试更通用的关键词 3. 访问 cheat.sh 首页查看支持列表 |
+| E003 | 请求超时 | "请求超时，请稍后重试" | 1. 等待几秒后重试 2. 使用 `--max-time` 参数设置超时 |
+| E004 | 返回内容为空 | "返回内容为空，可能主题未收录" | 1. 尝试其他关键词 2. 检查 URL 格式 3. 使用 `?s` 简化参数重试 |
+| E005 | 参数错误 | "请求参数格式不正确" | 1. 检查 URL 格式 2. 确认参数拼写 3. 参考文档中的参数表 |
 
 ---
 
 ## 六、FAQ 反模式
 
-| 常见坑 | 反模式（错误做法） | 正确姿势 |
-|--------|-------------------|----------|
-| 关键词太宽泛 | 输入 `python` 不附加需求 | 输入 `python/read file`、`python/list comprehension` 等 |
-| 使用中文关键词 | 输入 `python/读取文件` | 使用英文关键词（服务端以英文为主） |
-| 忽略大小写 | 输入 `Python/Read Json` | 统一小写：`python/read json` |
-| 依赖记忆 | 每次手动拼 URL | 直接口述需求，由 Skill 自动构造请求 |
-| 误以为可执行 | 期望返回结果直接运行 | 明确本 Skill 仅提供示例文本，需自行复制执行 |
+### 常见坑 1：URL 编码问题
+
+**错误做法**：直接在 URL 中使用空格和特殊字符
+```bash
+curl cheat.sh/python/lambda expression
+```
+
+**正确做法**：使用 URL 编码或连字符
+```bash
+curl cheat.sh/python/lambda-expression
+# 或
+curl cheat.sh/python/lambda%20expression
+```
+
+### 常见坑 2：忽略终端模式
+
+**错误做法**：直接重定向带颜色的输出到文件
+```bash
+curl cheat.sh/python/lambda > output.md
+```
+
+**正确做法**：使用 `?T` 参数去除颜色
+```bash
+curl cheat.sh/python/lambda?T > output.md
+```
+
+### 常见坑 3：查询过于具体
+
+**错误做法**：查询非常具体的函数名，导致无结果
+```bash
+curl cheat.sh/python/requests.post
+```
+
+**正确做法**：先查询库的通用用法，再自行查找
+```bash
+curl cheat.sh/python/requests
+```
+
+### 常见坑 4：忽略版本差异
+
+**错误做法**：不指定语言版本，获取到过时示例
+```bash
+curl cheat.sh/python/f-string
+```
+
+**正确做法**：指定版本号
+```bash
+curl cheat.sh/python/3/f-string
+```
+
+### 常见坑 5：依赖单一来源
+
+**错误做法**：完全依赖 cheat.sh 的示例，不验证正确性
+
+**正确做法**：将 cheat.sh 作为参考，结合官方文档验证
 
 ---
 
 ## 七、渐进式披露
 
-### 速查卡（新手速览）
+### 速查卡（30 秒上手）
 
+```bash
+# 最常用三个命令
+curl cheat.sh/python/lambda
+curl cheat.sh/tar
+curl cheat.sh/git/commit
+
+# 终端模式（推荐）
+curl cheat.sh/python/lambda?T
 ```
-cheat.sh 使用口诀：
-  输入格式：工具/需求
-  示例：python/read json
-  请求方式：curl -s https://cheat.sh/工具/需求
-  输出：示例代码 + 注释
-```
 
-### 分层阅读路径
+### 新手路径（5 分钟入门）
 
-| 用户层级 | 建议路径 |
-|----------|----------|
-| 新手 | 先读速查卡 → 尝试 3 个标准示例 → 掌握格式 → 进入常见任务表 |
-| 进阶 | 直接使用 `工具/任务` 格式 → 结合错误码排查 → 尝试复杂组合（如 `python/read json + write csv`） |
-| 高级 | 使用 `工具/tab completion` 获取补全列表 → 探索 cheat.sh 的 `:list` 命令 → 自定义别名加速 |
+1. 从常用工具开始：`curl cheat.sh/tar`、`curl cheat.sh/grep`
+2. 学习 URL 结构：`{语言}/{主题}` 或 `{工具}`
+3. 掌握 `?T` 参数，避免颜色干扰
+4. 尝试查询自己常用的语言：`curl cheat.sh/python`、`curl cheat.sh/go`
+
+### 进阶路径（深入使用）
+
+1. 使用 `?Q` 参数获取纯代码，便于脚本处理
+2. 结合 `jq` 等工具处理返回内容
+3. 使用 `?s` 参数获取简化输出，提高阅读效率
+4. 探索 cheat.sh 的社区贡献机制，了解内容来源
+5. 结合其他速查工具（如 tldr、man pages）形成完整速查体系
 
 ---
 
-## 八、附加说明
+## 八、用户协议
 
-- 本 Skill 依赖外部服务 `cheat.sh`，其内容由社区维护，不保证绝对准确。
-- 建议在使用前阅读 [cheat.sh 官网说明](https://cheat.sh)（外部链接，非本 Skill 提供）。
-- 若连续 3 次查询失败，建议改用浏览器访问 cheat.sh 网页版。
+<!-- user-agreement-injected -->
 
-## 许可证（License）
+**使用须知：**
 
-```text
-MIT License
+1. 本 Skill 提供的所有信息仅供学习参考，使用者应自行判断信息的准确性和适用性。
+2. 使用者因使用本 Skill 产生的任何直接或间接损失，本 Skill 作者不承担任何责任。
+3. 本 Skill 仅提供信息查询功能，不包含任何代码执行能力。
+4. 使用者不得对本 Skill 进行反向工程、反编译或破解。
+5. 使用者应遵守相关法律法规，不得将本 Skill 用于非法用途。
+6. 本 Skill 依赖第三方服务（cheat.sh），该服务的可用性和内容质量不在本 Skill 控制范围内。
+7. 使用者应定期验证获取的信息，特别是用于生产环境的代码示例。
 
-Copyright (c) 2026 SkillForge Lab
+---
+
+## 九、许可证（License）
+
+<!-- professional-license-embedded -->
+
+**MIT License**
+
+Copyright (c) 2024 终端工匠
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -204,44 +275,11 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-```
-<!-- professional-license-embedded -->
 
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
