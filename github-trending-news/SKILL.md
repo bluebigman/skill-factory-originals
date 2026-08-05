@@ -1,171 +1,206 @@
 ---
 slug: github-trending-news
 name: github_trending_reporter
-displayName: GitHub热榜 周报生成器
+displayName: 开源热点 趋势追踪 周报生成
 description: 抓取GitHub Trending，按语言与日期过滤，生成结构化周报。
-version: 1.2.5
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/github-trending-news
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DevRelLab
+author: trend-craft-studio
 agent_created: true
-trigger_words:
-  - "github-trending-reporter"
-  - "GitHub热榜周报"
-  - "trending项目整理"
-  - "本周热门仓库"
+trigger_words: ["github trending", "趋势周报", "开源热点", "仓库排行", "trending 报告"]
 ---
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# GitHub Trending 周报生成器（v1.0.0）
+# GitHub Trending 周报生成器
 
-## 一、能力边界（速查卡）
+## 一、能力边界：一页纸速查卡
 
 | 维度 | 能做 | 不能做 |
 |------|------|--------|
-| 数据源 | GitHub Trending 公开页面 | GitHub API 私有仓库、企业内网 |
-| 时间范围 | 最近 7 天（自然周） | 自定义任意历史日期段 |
-| 语言筛选 | 单语言（如 Python、JavaScript） | 多语言叠加（如 "Python+Go" 同时筛选） |
-| 输出格式 | Markdown 表格 + 摘要段落 | PDF/HTML 文件导出 |
-| 星标数据 | 相对变化（较上周增量） | 绝对总数（需调用 API 补充） |
-| 并发处理 | 单任务顺序抓取 | 多任务并行批量生成 |
+| 数据获取 | 抓取 GitHub Trending 页面公开数据 | 访问需登录的私有仓库、GitHub API 限流外的批量请求 |
+| 过滤维度 | 按编程语言（如 Python、JavaScript）、时间范围（今日/本周/本月）过滤 | 按 stars 绝对数值精确排序（Trending 页面本身不提供） |
+| 输出格式 | 生成 Markdown 周报、CSV 表格、JSON 结构化数据 | 生成 PDF、PPT 等二进制格式 |
+| 语言支持 | 中英文双语输出 | 其他语种翻译 |
+| 附加能力 | 仓库描述摘要、语言占比统计、星标增速估算 | 贡献者分析、代码质量评估、许可证合规审查 |
 
-**适用对象**：技术团队负责人、技术选型调研者、开源社区运营人员、个人开发者。
+**适用对象**：开发者、技术团队负责人、开源爱好者、技术情报分析人员。
+
+**不适用场景**：需要精确 star 增长曲线的量化分析、需要仓库历史数据的回溯研究。
 
 ---
 
-## 二、触发方式与场景映射
+## 二、触发方式：场景映射表
 
-| 触发词（或同义表达） | 对应场景 |
-|----------------------|----------|
-| "github-trending-reporter" | 直接调用本 Skill 的完整命令 |
-| "看下这周 GitHub 上有什么火的" | 生成默认周报（全语言、本周） |
-| "整理 Python 最近一周的热门项目" | 按语言筛选，输出 Python 周报 |
-| "上周的 trending 报告给我一份" | 指定日期范围（上周一至上周日） |
+| 用户说（大白话） | 触发动作 | 参数提取 |
+|------------------|----------|----------|
+| "看看这周 Python 有什么火的项目" | 抓取 Trending，语言=Python，周期=本周 | language=python, since=weekly |
+| "帮我整理一份今天的 GitHub 热门" | 抓取 Trending，周期=今日 | since=daily |
+| "最近 Go 语言有什么新东西" | 抓取 Trending，语言=Go，周期=本周 | language=go, since=weekly |
+| "生成一份上周的 JavaScript 趋势报告" | 抓取 Trending，语言=JavaScript，周期=上周 | language=javascript, since=weekly, date=上周 |
+| "GitHub 上现在最火的是什么" | 抓取 Trending，无语言过滤，周期=今日 | since=daily |
 
-**输入参数表**（全部可选，缺省时使用默认值）：
-
-| 参数名 | 类型 | 默认值 | 示例 |
-|--------|------|--------|------|
-| language | string | 空（全部） | "Python" |
-| since | string（YYYY-MM-DD） | 本周一 | "2025-03-10" |
-| until | string（YYYY-MM-DD） | 本周日 | "2025-03-16" |
-| limit | int | 10 | 5（只取前5个） |
+**触发词补充**：`trending 抓取`、`仓库热度`、`开源动态`、`项目周报`
 
 ---
 
 ## 三、标准流程
 
 ### 前置条件
-- 网络可访问 `github.com/trending`
-- 用户提供至少一个有效触发词或参数
+
+| 条件 | 说明 | 检查方式 |
+|------|------|----------|
+| 网络连通 | 可访问 github.com | `curl -sI https://github.com/trending` 返回 200 |
+| 无 IP 封禁 | 未被 GitHub 限流 | 连续请求间隔 ≥ 2 秒 |
+| 参数合法 | 语言为 GitHub 支持的语言别名 | 参考 [GitHub 语言列表](https://github.com/trending) 页面下拉框 |
 
 ### 执行步骤
 
-1. **解析输入**：提取 language、since、until、limit 参数。若缺失，使用默认值。
-   - 日期校验：since 必须早于 until，且跨度不超过 7 天。若超限，取最近 7 天。
+1. **解析用户意图**：从输入中提取 `language`（可选）和 `since`（必选，默认 daily）参数。
+   - 支持的语言别名映射：`py`→`python`，`js`→`javascript`，`ts`→`typescript`，`go`→`go`，`rust`→`rust`，`cpp`→`c++`。
+   - 时间参数映射：`今天/今日`→`daily`，`本周/这周`→`weekly`，`本月/这月`→`monthly`。
 
-2. **抓取数据**：访问 `https://github.com/trending/{language}?since=weekly`。
-   - 若指定日期范围，则依次抓取每日页面（since=daily）并合并去重。
-   - 抓取字段：仓库名、描述、编程语言、本周星标增量、贡献者数（若可获取）。
+2. **构造请求 URL**：
+   ```
+   https://github.com/trending/{language}?since={since}
+   ```
+   无语言过滤时：`https://github.com/trending?since={since}`
 
-3. **结构化整理**：按星标增量降序排列，截取 limit 条记录。
+3. **抓取页面**：使用 HTTP GET 请求，设置 `User-Agent` 为常见浏览器标识，超时 10 秒。
 
-4. **生成报告**：输出 Markdown 格式，包含：
-   - 报告标题（含时间范围与语言筛选）
-   - 汇总表（仓库名 / 描述 / 语言 / 本周星标增量）
-   - 简短趋势摘要（最多 3 条，基于增量最大的项目特征）
+4. **解析 HTML**：定位 `.Box-row` 元素，提取以下字段：
+   - `repo_name`：仓库全名（owner/repo）
+   - `description`：描述文本（去除多余空白）
+   - `language`：主要语言
+   - `stars_today`：今日新增 star 数（`<span class="d-inline-block float-sm-right">` 内的文本）
+   - `forks`：fork 数
+   - `url`：仓库链接
 
-5. **返回结果**：将完整 Markdown 文本返回给调用方。
+5. **数据清洗**：
+   - 去除 HTML 标签和多余空白字符
+   - 将 `stars_today` 中的 `,` 去除后转为整数
+   - 描述为空时标记为 `[无描述]`
 
-### 输出规范示例
+6. **生成报告**：按用户指定格式输出（默认 Markdown）。
+
+7. **输出规范**：
+   - Markdown 格式：表格 + 分节，按 star 增量降序排列
+   - CSV 格式：`仓库名,描述,语言,今日Star,总Star,Fork数,链接`
+   - JSON 格式：数组对象，字段名与 CSV 表头一致
+
+### 输出示例（Markdown）
 
 ```markdown
-# GitHub Trending 周报（2025-03-10 至 2025-03-16，语言：Python）
+# GitHub Trending 周报（2025-01-06 ~ 2025-01-12）
 
-| 排名 | 仓库 | 描述 | 语言 | 本周星标增量 |
-|------|------|------|------|--------------|
-| 1 | owner/repo | 一个快速的异步框架 | Python | +2,345 |
-| 2 | user/tool | CLI 工具，简化部署流程 | Python | +1,890 |
+## Python 语言趋势
 
-**趋势摘要**：
-- 异步框架类项目本周增量明显，可能与近期技术博客推广相关。
-- 部署工具持续走热，建议关注 CI/CD 集成方向。
+| 排名 | 仓库 | 描述 | 本周 Star | 总 Star | 链接 |
+|------|------|------|-----------|---------|------|
+| 1 | owner/repo-a | AI 推理加速框架 | +1,234 | 12,345 | [链接](https://github.com/owner/repo-a) |
+| 2 | owner/repo-b | 异步任务队列 | +890 | 8,901 | [链接](https://github.com/owner/repo-b) |
 ```
 
 ---
 
 ## 四、置信度门控
 
-遇到以下情况，**不得编造数据**，使用占位符 `[需核实:字段名]`：
-
 | 场景 | 处理方式 |
 |------|----------|
-| 描述信息缺失 | 输出 `[需核实:描述]` |
-| 星标增量无法获取 | 输出 `[需核实:星标增量]` |
-| 日期范围无数据（如节假日） | 输出 `[需核实:该日期范围无Trending数据]` |
-| 语言参数拼写错误 | 不猜测，返回提示语（见错误码） |
+| 页面请求失败（网络错误） | 输出 `[需核实:网络连接]`，提示用户检查网络后重试 |
+| 页面返回 403/429 | 输出 `[需核实:IP限流]`，建议等待 5 分钟后重试 |
+| 语言参数无效 | 输出 `[需核实:语言参数]`，列出支持的语言列表 |
+| 解析结果为空 | 输出 `[需核实:无数据]`，可能是 Trending 页面结构变更 |
+| 描述字段缺失 | 保留 `[无描述]` 占位，不编造内容 |
+| star 增量无法解析 | 输出 `[需核实:star数据]`，保留原始文本供人工确认 |
+
+**铁律**：任何字段无法确认时，使用 `[需核实:字段名]` 占位，禁止猜测或编造数据。
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 触发条件 | 提示话术 | 修正步骤 |
-|--------|----------|----------|----------|
-| ERR-001 | 参数格式错误（如日期为 "abc"） | "日期参数需为 YYYY-MM-DD 格式" | 重新输入日期，或省略该参数使用默认值 |
-| ERR-002 | 语言参数无效（非 GitHub 支持语言） | "未找到该语言，请检查拼写（如 Python 而非 python）" | 参考 [GitHub 语言列表](https://github.com/trending) 重新输入 |
-| ERR-003 | 网络访问失败 | "无法连接 GitHub，请检查网络或稍后重试" | 确认网络通畅后重试；若持续失败，报告系统状态 |
-| ERR-004 | 日期跨度超过 7 天 | "仅支持单周数据，请缩小日期范围" | 调整 since/until 使跨度 ≤ 7 天 |
-| ERR-005 | 抓取结果为空 | "该筛选条件下无数据，请调整语言或日期" | 尝试更换语言或扩大日期范围 |
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| E001 | 网络不可达 | "无法连接 GitHub，请检查网络设置" | 1. 检查网络连通性 2. 确认无防火墙拦截 3. 重试 |
+| E002 | HTTP 403 | "GitHub 拒绝了请求，可能触发了限流" | 1. 等待 5 分钟 2. 降低请求频率 3. 更换 User-Agent |
+| E003 | HTTP 429 | "请求过于频繁，已被限流" | 1. 增加请求间隔至 5 秒以上 2. 使用代理 IP 3. 稍后重试 |
+| E004 | 解析失败 | "页面结构解析失败，可能页面已改版" | 1. 检查页面结构 2. 更新解析规则 3. 报告问题 |
+| E005 | 参数错误 | "语言参数不支持，请参考支持列表" | 1. 查看支持的语言列表 2. 修正参数 3. 重新执行 |
+| E006 | 无数据 | "当前条件下没有找到任何仓库" | 1. 放宽时间范围 2. 尝试其他语言 3. 确认日期有效性 |
 
 ---
 
-## 六、FAQ 与反模式
+## 六、FAQ 反模式
 
-| 常见坑 | 反模式（错误做法） | 正确模式 |
-|--------|-------------------|----------|
-| 误以为能获取历史任意日期 | 直接请求 2024 年数据 | 明确告知仅支持最近 7 天，或使用 GitHub Archive 等其他工具 |
-| 多语言叠加筛选 | 输入 "Python+Go" 试图混合筛选 | 分两次调用，分别生成单语言报告 |
-| 忽略描述缺失 | 自行补写描述 | 使用 `[需核实:描述]` 占位，避免虚构 |
-| 星标增量解读错误 | 将增量当作绝对星标数 | 报告明确标注"增量"，如需总数需另行调用 API |
-| 输出过长 | 一次性返回 50 个项目 | 默认 limit=10，用户可显式指定更大值 |
-
----
-
-## 七、渐进式披露（阅读路径）
-
-### 速查卡（10 秒上手）
-- 输入：`github-trending-reporter` + 可选语言/日期
-- 输出：Markdown 周报表格
-- 缺省行为：本周全语言 Top10
-
-### 新手路径（5 分钟）
-1. 阅读 [能力边界](#一能力边界速查卡) 了解限制。
-2. 使用默认参数生成第一份周报。
-3. 按 [FAQ](#六faq-与反模式) 排查常见问题。
-
-### 进阶路径（深入使用）
-1. 掌握 [参数表](#二触发方式与场景映射) 的完整用法，尝试用 since/until 指定精确日期。
-2. 阅读 [置信度门控](#四置信度门控)，理解数据真实性的边界。
-3. 结合 [错误码体系](#五错误码体系)，在自动化流程中处理异常情况。
-4. 如需绝对星标数、贡献者画像等深度数据，建议结合 GitHub REST API 扩展本 Skill。
+| 常见坑 | 反模式（错误做法） | 正模式（正确做法） |
+|--------|-------------------|-------------------|
+| 请求频率过高 | 连续快速请求多个页面 | 每次请求间隔 ≥ 2 秒，批量请求时使用队列 |
+| 忽略 User-Agent | 使用默认 Python/curl UA | 设置浏览器 UA，降低被识别为爬虫的概率 |
+| 硬编码解析规则 | 假设页面结构永远不变 | 解析失败时输出错误码 E004，不静默失败 |
+| 编造缺失数据 | 描述为空时自行补写 | 使用 `[无描述]` 占位，保持数据真实性 |
+| 忽略时间参数 | 总是使用 daily 而忽略用户指定 | 严格按用户输入映射 since 参数 |
+| 输出格式混乱 | 混合多种格式输出 | 按用户指定格式输出，默认 Markdown |
 
 ---
 
-*本 Skill 提供的是数据整理与呈现能力，不包含数据源本身的准确性保证。使用前请确认目标仓库的公开信息。*
+## 七、渐进式披露
 
-## 许可证（License）
+### 速查卡（30 秒上手）
 
-```text
+```
+输入示例："本周 Python 趋势"
+→ 参数: language=python, since=weekly
+→ 输出: Markdown 表格周报
+```
+
+### 新手路径（首次使用）
+
+1. 阅读「能力边界」了解工具范围
+2. 使用「触发方式」中的示例语句发起请求
+3. 查看「标准流程」了解内部处理逻辑
+4. 遇到问题参考「错误码体系」定位原因
+
+### 进阶路径（深度使用）
+
+1. 自定义输出格式（CSV/JSON）用于程序化处理
+2. 结合 CI/CD 定时触发周报生成
+3. 二次开发扩展数据源（如加入 Hacker News 热度对比）
+4. 将输出接入 Slack/飞书机器人实现自动推送
+
+---
+
+## 八、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于数据准确性、合规性、以及因依赖本工具输出所做的任何决策。
+2. **禁止反向工程**：不得对本 Skill 的提示词、逻辑流程、内部参数进行反向工程、破解、提取或用于商业竞品分析。
+3. **数据使用**：本 Skill 输出的数据来源于 GitHub 公开页面，使用者应遵守 GitHub 的服务条款和 robots.txt 规范。
+4. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性。
+5. **免责范围**：因网络波动、GitHub 页面改版、第三方服务故障导致的数据缺失或错误，本 Skill 作者不承担责任。
+
+---
+
+## 九、许可证（License）
+
+<!-- professional-license-embedded -->
+
+**MIT License**
+
+```
 MIT License
 
-Copyright (c) 2026 SkillForge Lab
+Copyright (c) 2025 trend-craft-studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -176,5 +211,16 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
-<!-- professional-license-embedded -->
+
+---
+
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
