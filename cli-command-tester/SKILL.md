@@ -1,303 +1,258 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
 slug: cli-command-tester
 name: HTTP命令行测试工具
-displayName: 接口调试 请求构造 响应校验
+displayName: 接口调试 命令行速测
 description: 用命令行快速构造HTTP请求、调试REST API并格式化输出响应结果。
-version: 1.0.16
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/cli-command-tester
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 边缘工坊
+author: 命令行工坊
 agent_created: true
-trigger_words: ["cli", "curl", "http测试", "接口调试", "rest api"]
+trigger_words: ["cli", "curl", "http测试", "接口调试", "rest api", "接口请求", "api调试"]
 ---
 
-> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
----
+# HTTP命令行测试工具 Skill 文档
 
-# HTTP命令行测试工具 · 使用指南
+## 一、能力边界：一页纸速查卡
 
-## 1. 能力边界（一页纸速查卡）
+### 1.1 能做什么
 
-### 能做什么
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 构造HTTP请求 | 支持GET/POST/PUT/DELETE/PATCH/HEAD/OPTIONS | `cli POST https://api.example.com/users` |
+| 自定义请求头 | 添加认证、内容类型等头部 | `cli GET https://api.example.com -H "Authorization: Bearer token"` |
+| 请求体构造 | JSON、表单、原始文本 | `cli POST https://api.example.com -d '{"name":"test"}'` |
+| 参数拼接 | 查询字符串自动编码 | `cli GET https://api.example.com -p "page=1&size=20"` |
+| 响应格式化 | JSON高亮、缩进、截断 | 自动格式化JSON响应 |
+| 超时控制 | 设置请求超时时间 | `cli GET https://api.example.com -t 10` |
+| 跟随重定向 | 自动或手动控制 | `cli GET https://api.example.com -L` |
+| 输出保存 | 响应体写入文件 | `cli GET https://api.example.com -o response.json` |
 
-| 场景 | 说明 |
-|------|------|
-| 构造请求 | 支持 GET/POST/PUT/DELETE/PATCH/HEAD/OPTIONS 七种方法 |
-| 参数注入 | URL 路径参数、查询字符串、请求头、JSON/表单请求体 |
-| 响应分析 | 状态码、响应头、响应体（自动识别 JSON/XML/纯文本） |
-| 批量执行 | 一次性提交多个请求，汇总对比输出 |
-| 结果导出 | 输出为表格、JSON 文件或纯文本日志 |
-
-### 不能做什么
+### 1.2 不能做什么
 
 | 限制项 | 说明 |
 |--------|------|
-| 不支持 WebSocket 长连接测试 | 仅限 HTTP/HTTPS 短连接 |
-| 不支持文件上传（multipart 大文件） | 超过 10MB 的二进制负载请使用专业工具 |
-| 不模拟浏览器行为 | 不执行 JavaScript、不渲染页面 |
-| 不做性能压测 | 并发压测请使用专用压测工具 |
-| 不存储敏感凭证 | 请求头中的 Authorization 信息仅在当前会话有效 |
+| 不支持WebSocket | 仅限HTTP/HTTPS协议 |
+| 不支持文件上传 | 仅支持文本请求体 |
+| 不支持Cookie持久化 | 每次调用独立会话 |
+| 不支持代理配置 | 需在系统层面配置 |
+| 不支持双向TLS | 仅支持常规HTTPS证书验证 |
 
-### 适用对象
+### 1.3 适用对象
 
 - 后端开发人员：快速验证接口逻辑
-- 前端开发人员：确认接口字段与格式
-- 测试工程师：做冒烟测试和回归验证
-- 运维人员：检查服务健康状态
+- 前端开发人员：联调时检查接口返回
+- 测试工程师：构造边界条件请求
+- DevOps人员：健康检查、接口监控
 
 ---
 
-## 2. 触发方式
+## 二、触发方式
 
-### 触发词启用
+### 2.1 触发词
 
-| 触发词 | 使用场景示例 |
-|--------|-------------|
-| `cli` | “用 cli 测试一下这个接口” |
-| `curl` | “帮我写个 curl 命令” |
-| `http测试` | “对 https://api.example.com/users 做 http测试” |
-| `接口调试` | “接口调试一下登录接口” |
-| `rest api` | “用 rest api 方式验证这个端点” |
+直接使用 `cli` 或 `curl` 作为命令前缀，后跟HTTP方法和URL。
 
-### 大白话场景映射
+### 2.2 场景映射表
 
-| 你说的话 | 工具理解 | 执行动作 |
-|----------|----------|----------|
-| “试试这个地址通不通” | 发 GET 请求，检查连通性 | 执行 `GET /` 返回状态码 |
-| “帮我发个 POST 带 JSON” | 构造 POST + JSON body | 自动设置 `Content-Type: application/json` |
-| “我看下返回的格式” | 格式化响应体 | JSON 自动缩进，XML 自动美化 |
-| “跑一遍这几个接口” | 批量执行 | 顺序发送所有请求，汇总输出 |
-| “带个 token 试” | 附加认证头 | 提示输入 token 值，注入 `Authorization` |
+| 用户说（大白话） | 实际执行命令 |
+|-----------------|-------------|
+| "帮我测一下这个接口通不通" | `cli GET https://api.example.com/health` |
+| "用POST提交一段JSON数据" | `cli POST https://api.example.com/users -d '{"name":"张三"}'` |
+| "带token请求一下用户信息" | `cli GET https://api.example.com/me -H "Authorization: Bearer eyJhbGci..."` |
+| "看看这个接口返回的响应头" | `cli GET https://api.example.com -i` |
+| "设置5秒超时测一下" | `cli GET https://api.example.com -t 5` |
 
 ---
 
-## 3. 标准流程
+## 三、标准流程
 
-### 前置条件
+### 3.1 前置条件
 
-| 条件 | 要求 | 缺失时表现 |
-|------|------|-----------|
-| 目标 URL | 必须以 `http://` 或 `https://` 开头 | 报错 `E1001` |
-| 网络可达 | 目标主机可解析且可连接 | 报错 `E2002` |
-| 请求体格式 | 若声明 JSON，则必须是合法 JSON 字符串 | 报错 `E1003` |
-| 认证信息 | 若接口需要认证，需显式提供 | 返回 401/403 时提示 |
+| 条件 | 要求 | 检查方式 |
+|------|------|----------|
+| 网络连通 | 目标服务器可达 | `ping 目标域名` 或 `curl -I 目标URL` |
+| URL格式 | 合法HTTP/HTTPS地址 | 必须以 `http://` 或 `https://` 开头 |
+| 参数格式 | JSON或键值对 | JSON需双引号包裹键名 |
+| 权限 | 目标接口允许访问 | 确认认证信息已准备 |
 
-### 执行步骤
+### 3.2 执行步骤
 
-1. **确认请求目标**  
-   接收用户提供的 URL 或从上下文提取接口地址。  
-   若 URL 缺失 → 输出 `[需核实:url]` 并停止。
+1. **解析命令**：识别HTTP方法、URL、参数
+2. **校验参数**：检查URL合法性、参数格式
+3. **构造请求**：组装请求头、请求体
+4. **发送请求**：执行HTTP请求，记录耗时
+5. **处理响应**：格式化输出状态码、响应头、响应体
+6. **展示结果**：按优先级展示关键信息
 
-2. **解析请求参数**  
-   从输入中提取：
-   - 方法（默认 GET）
-   - 路径参数（如 `/users/{id}` 中的 `id`）
-   - 查询参数（`?key=value`）
-   - 请求头（`-H "Name: value"` 格式）
-   - 请求体（`-d '{"key":"value"}'` 格式）
+### 3.3 输出规范
 
-3. **校验参数合法性**  
-   - URL 格式正则校验：`^https?://`
-   - JSON body 使用解析器验证（若声明为 JSON）
-   - 方法名必须属于允许集合
-
-4. **执行请求**  
-   使用底层 HTTP 客户端发送请求，设置合理超时（默认 10 秒，可配置）。
-
-5. **处理响应**  
-   - 提取状态码、响应头、响应体
-   - 根据 `Content-Type` 自动格式化：
-     - `application/json` → 缩进 2 空格
-     - `application/xml` → 缩进 2 空格
-     - 其他 → 原样输出（限前 5000 字符）
-
-6. **返回结果**  
-   输出格式：
-
-   ```
-   状态码: 200 OK
-   耗时: 123ms
-   响应头:
-     content-type: application/json
-     server: nginx
-   响应体:
-   {
-     "id": 1,
-     "name": "示例"
-   }
-   ```
-
-### 输出规范
-
-| 输出类型 | 格式要求 |
-|----------|----------|
-| 成功（2xx） | 绿色标记 `✔` + 状态码 + 格式化响应体 |
-| 重定向（3xx） | 黄色标记 `↪` + 状态码 + 跳转地址 |
-| 客户端错误（4xx） | 红色标记 `✘` + 状态码 + 错误响应体 |
-| 服务端错误（5xx） | 红色标记 `✘` + 状态码 + 建议重试提示 |
+```
+状态码: 200 OK
+耗时: 235ms
+响应头:
+  content-type: application/json
+  server: nginx/1.24.0
+响应体:
+{
+  "code": 0,
+  "message": "success",
+  "data": {
+    "id": 123,
+    "name": "张三"
+  }
+}
+```
 
 ---
 
-## 4. 置信度门控
+## 四、置信度门控
 
-### 信息不足时使用占位符
+当遇到以下情况时，输出 `[需核实:字段]` 占位符，不进行编造：
 
-以下情况禁止编造数据，必须输出 `[需核实:字段名]`：
-
-| 场景 | 占位符示例 |
-|------|-----------|
-| 用户未提供 URL | `[需核实:url]` |
-| 请求头缺少必要字段 | `[需核实:header Authorization]` |
-| 请求体内容不完整 | `[需核实:body 字段]` |
-| 响应解析失败，原因未知 | `[需核实:响应格式]` |
-
-### 门控规则
-
-- 当输入信息不足以构造一个完整的 HTTP 请求时，**立即停止**，不猜测、不补全。
-- 当响应体无法按声明格式解析时，输出原始内容并标注 `[需核实:格式声明与实际不符]`。
+| 场景 | 处理方式 |
+|------|----------|
+| 响应体解析失败 | 输出原始内容，标注 `[需核实:响应格式]` |
+| 状态码非2xx | 标注 `[需核实:错误原因]`，展示响应体 |
+| 超时无响应 | 标注 `[需核实:服务器状态]` |
+| 参数含义不明 | 标注 `[需核实:参数定义]`，不猜测 |
 
 ---
 
-## 5. 错误码体系
+## 五、错误码体系
 
 | 错误码 | 含义 | 提示话术 | 修正步骤 |
 |--------|------|----------|----------|
-| `E1001` | URL 格式错误 | “URL 必须以 http:// 或 https:// 开头” | 检查 URL 前缀，补全协议头 |
-| `E1002` | 方法不支持 | “方法 X 不在支持列表中” | 用 `GET/POST/PUT/DELETE/PATCH/HEAD/OPTIONS` 重试 |
-| `E1003` | JSON 解析失败 | “请求体不是合法 JSON，请检查引号和逗号” | 用 JSON 校验器检查格式 |
-| `E1004` | 请求头格式错误 | “请求头应为 '名称: 值' 格式” | 修正分隔符为冒号加空格 |
-| `E2001` | DNS 解析失败 | “无法解析域名，请检查拼写” | 确认域名正确，尝试 ping |
-| `E2002` | 连接超时 | “连接目标超时（10秒）”，请检查网络或延长超时 | 检查防火墙/代理设置 |
-| `E2003` | SSL 证书错误 | “证书验证失败”，如确需跳过请声明 `-k` | 检查证书有效期 |
-| `E3001` | 响应体过大 | “响应超过 5000 字符限制，已截断” | 使用输出重定向到文件 |
+| E001 | URL格式错误 | "URL必须以http://或https://开头" | 检查URL拼写，补全协议头 |
+| E002 | 参数格式错误 | "JSON参数格式不正确，请检查引号" | 使用JSON验证工具检查格式 |
+| E003 | 连接超时 | "请求超时，请检查网络或增大超时时间" | 使用 `-t` 参数增大超时 |
+| E004 | DNS解析失败 | "域名无法解析，请检查域名拼写" | 使用 `nslookup` 检查DNS |
+| E005 | 连接被拒绝 | "目标端口未开放或服务未启动" | 检查服务状态和防火墙 |
+| E006 | SSL证书错误 | "证书验证失败，请检查证书" | 确认证书有效性或使用 `-k` 跳过验证 |
+| E007 | 响应解析失败 | "响应内容无法解析为JSON" | 使用 `-r` 参数查看原始响应 |
 
 ---
 
-## 6. FAQ 反模式对照
+## 六、FAQ 反模式
 
-| # | 常见坑 | 反模式（错误做法） | 正确做法 |
-|---|--------|-------------------|----------|
-| 1 | 忘记加 URL 协议头 | 直接写 `api.example.com/users` | 始终写 `https://api.example.com/users` |
-| 2 | JSON 引号用错 | 用单引号包 JSON 且内部也用了单引号 | 外层用单引号，内部用双引号 |
-| 3 | 忽略状态码含义 | 只看响应体，不看状态码 | 先看状态码，再读响应体内容 |
-| 4 | 混淆查询参数与路径参数 | 把 `/users/{id}` 写成 `/users?id=1` | 路径参数用 `/users/1`，查询参数用 `?id=1` |
-| 5 | 忽视响应头信息 | 只看响应体，忽略 `Set-Cookie`、`Rate-Limit` | 检查响应头中的关键字段 |
+### 6.1 常见坑
 
----
+| 坑 | 反模式示例 | 正确做法 |
+|----|-----------|----------|
+| 忽略状态码 | 只看响应体，不看状态码 | 先检查状态码，再解析响应体 |
+| 参数未编码 | URL中直接拼中文 | 使用 `-p` 参数自动编码 |
+| 请求头遗漏 | 忘记添加Content-Type | 明确指定 `-H "Content-Type: application/json"` |
+| 超时设置过长 | 默认超时导致长时间等待 | 根据场景设置合理超时（3-10秒） |
+| 忽略响应头 | 只看响应体 | 使用 `-i` 查看完整响应头 |
 
-## 7. 渐进式披露
+### 6.2 反模式对照表
 
-### 速查卡（30 秒上手）
-
-```
-用法: cli <method> <url> [选项]
-
-选项:
-  -d, --data <json>      请求体 (JSON 字符串)
-  -H, --header <kv>      请求头 ("Name: value")
-  -q, --query <kv>       查询参数 ("key=value")
-  -t, --timeout <sec>    超时时间 (默认 10s)
-  -k, --insecure         跳过 SSL 验证
-  -o, --output <file>    输出到文件
-  -b, --batch <file>     批量执行文件 (每行一个请求)
-
-示例:
-  cli GET https://api.example.com/users
-  cli POST https://api.example.com/users -d '{"name":"张三"}' -H "Authorization: Bearer token123"
-```
-
-### 新手路径（首次使用）
-
-1. 先跑一个最简单的 GET 请求确认连通性
-2. 再尝试带查询参数的 GET
-3. 然后尝试 POST + JSON body
-4. 最后学习批量执行和文件输出
-
-### 进阶路径（熟练用户）
-
-1. 掌握响应头分析（缓存策略、限流信息）
-2. 使用批量文件做接口回归测试
-3. 结合 `-o` 输出到文件，配合 diff 工具做版本对比
-4. 自定义超时和 SSL 行为处理复杂网络环境
+| 反模式 | 问题 | 替代方案 |
+|--------|------|----------|
+| 在脚本中硬编码token | 安全隐患 | 使用环境变量注入 |
+| 循环请求不做间隔 | 可能触发限流 | 添加随机延迟 |
+| 忽略错误处理 | 脚本中断 | 检查退出码并处理 |
+| 不记录请求日志 | 难以排查 | 使用 `-v` 输出详细日志 |
 
 ---
 
-## 附：批量测试文件格式
+## 七、渐进式披露
 
-每行一个完整请求，`#` 开头为注释：
+### 7.1 速查卡（新手必读）
 
+```bash
+# 基础GET请求
+cli GET https://api.example.com
+
+# POST提交JSON
+cli POST https://api.example.com/users -d '{"name":"test"}'
+
+# 带认证请求
+cli GET https://api.example.com/me -H "Authorization: Bearer TOKEN"
+
+# 查看响应头
+cli GET https://api.example.com -i
+
+# 设置超时
+cli GET https://api.example.com -t 10
 ```
-# 用户模块测试
-GET https://api.example.com/users
-POST https://api.example.com/users -d '{"name":"测试"}'
-GET https://api.example.com/users/1
-DELETE https://api.example.com/users/1
-```
 
-执行结果按顺序编号输出，最后汇总各请求状态码统计。
+### 7.2 进阶路径
 
-## 许可证（License）
+**新手路径**（第1-2天）：
+1. 掌握基础GET/POST请求
+2. 学会查看状态码和响应体
+3. 理解请求头的作用
 
-```text
-MIT License
+**进阶路径**（第3-7天）：
+1. 掌握参数编码和复杂JSON构造
+2. 学会调试认证流程
+3. 理解重定向和缓存机制
 
-Copyright (c) 2026 SkillForge Lab
+**专家路径**（第2周+）：
+1. 编写自动化测试脚本
+2. 集成CI/CD流程
+3. 性能测试和压力测试
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+---
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
+## 八、参数详解
+
+| 参数 | 全称 | 说明 | 默认值 | 示例 |
+|------|------|------|--------|------|
+| `-H` | header | 添加请求头 | 无 | `-H "Content-Type: application/json"` |
+| `-d` | data | 请求体数据 | 无 | `-d '{"key":"value"}'` |
+| `-p` | params | 查询参数 | 无 | `-p "page=1&size=20"` |
+| `-t` | timeout | 超时时间(秒) | 30 | `-t 5` |
+| `-i` | include | 包含响应头 | false | `-i` |
+| `-L` | location | 跟随重定向 | false | `-L` |
+| `-o` | output | 输出到文件 | 无 | `-o response.json` |
+| `-k` | insecure | 跳过SSL验证 | false | `-k` |
+| `-v` | verbose | 详细日志 | false | `-v` |
+| `-r` | raw | 原始输出 | false | `-r` |
+
+---
+
+## 九、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于因请求错误、数据泄露、接口滥用等造成的任何直接或间接损失。
+
+2. **禁止反向工程**：不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码。
+
+3. **合法使用**：使用者承诺仅将本 Skill 用于合法目的，不得用于攻击、入侵、非法抓取数据等违法行为。
+
+4. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保。
+
+5. **变更权利**：作者保留随时修改、更新或终止本 Skill 的权利，恕不另行通知。
+
+---
+
+## 十、许可证（License）
+
 <!-- professional-license-embedded -->
 
-## 异常处理
+**MIT License**
 
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
+版权所有 (c) 2024 命令行工坊
 
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人，不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或出售软件副本的权利，并允许向其提供本软件的人这样做，但须满足以下条件：
 
-## 稳定性保障
+上述版权声明和本许可声明应包含在本软件的所有副本或主要部分中。
 
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
+本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性的担保。在任何情况下，作者或版权持有人均不对因本软件或使用本软件或其他交易而产生、与之相关或与之相关的任何索赔、损害或其他责任承担责任，无论是在合同诉讼、侵权诉讼或其他诉讼中。
 
-## FAQ 与反模式
+---
 
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 文档由 AI 辅助生成，仅供参考。使用前请阅读相关文档并自行验证命令的正确性。*
