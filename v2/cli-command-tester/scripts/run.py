@@ -1,60 +1,350 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-HTTP命令行测试工具 — 配套执行器（原创实现，clean-room）
-技能「cli-command-tester」的轻量辅助脚本：解析同目录 SKILL.md，提供 CLI 入口、触发词匹配、能力速览。
-零第三方依赖。
+HTTP命令行测试工具 - 接口调试命令行速测
+支持构造HTTP请求、自定义请求头、请求体、参数拼接、响应格式化、超时控制、跟随重定向、输出保存
 """
-from __future__ import annotations
-import argparse, re, sys
-from pathlib import Path
 
-HERE = Path(__file__).resolve().parent
-TRIGGERS = ["cli-command-tester"]
+import argparse
+import json
+import sys
+import time
+import urllib.request
+import urllib.parse
+import urllib.error
+import ssl
+import gzip
+import io
+from http.client import HTTPResponse
+
+try:
+    import requests
+    HAS_REQUESTS = True
+except ImportError:
+    HAS_REQUESTS = False
 
 
-def load_spec() -> str:
-    # 资产池/发布目录均为 SKILL.md 在技能根目录、scripts/ 为其子目录，故读父目录
-    p = HERE.parent / "SKILL.md"
-    return p.read_text(encoding="utf-8") if p.exists() else ""
+class HTTPTester:
+    """HTTP请求测试核心类"""
+    
+    def __init__(self, method, url, headers=None, data=None, params=None, timeout=10, follow_redirects=True):
+        self.method = method.upper()
+        self.url = url
+        self.headers = headers or {}
+        self.data = data
+        self.params = params
+        self.timeout = timeout
+        self.follow_redirects = follow_redirects
+        
+    def build_url(self):
+        """拼接查询参数"""
+        if not self.params:
+            return self.url
+        separator = '&' if '?' in self.url else '?'
+        return f"{self.url}{separator}{self.params}"
+    
+    def prepare_data(self):
+        """准备请求体"""
+        if not self.data:
+            return None
+        # 如果data是JSON字符串，自动设置Content-Type
+        if self.data.startswith('{') or self.data.startswith('['):
+            if 'Content-Type' not in self.headers:
+                self.headers['Content-Type'] = 'application/json'
+            return self.data.encode('utf-8')
+        # 表单格式
+        if 'Content-Type' not in self.headers:
+            self.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+        return self.data.encode('utf-8')
+    
+    def execute_with_requests(self):
+        """使用requests库执行请求（如果可用）"""
+        if not HAS_REQUESTS:
+            return None
+        
+        url = self.build_url()
+        data = self.prepare_data()
+        
+        try:
+            response = requests.request(
+                method=self.method,
+                url=url,
+                headers=self.headers,
+                data=data,
+                timeout=self.timeout,
+                allow_redirects=self.follow_redirects,
+                verify=True
+            )
+            return {
+                'status_code': response.status_code,
+                'headers': dict(response.headers),
+                'body': response.text,
+                'elapsed': response.elapsed.total_seconds(),
+                'url': response.url
+            }
+        except requests.exceptions.RequestException as e:
+            return {'error': str(e)}
+    
+    def execute_with_urllib(self):
+        """使用urllib执行请求（标准库实现）"""
+        url = self.build_url()
+        data = self.prepare_data()
+        
+        # 创建请求对象
+        req = urllib.request.Request(url, data=data, method=self.method)
+        
+        # 设置请求头
+        for key, value in self.headers.items():
+            req.add_header(key, value)
+        
+        # 处理重定向
+        if not self.follow_redirects:
+            class NoRedirect(urllib.request.HTTPRedirectHandler):
+                def redirect_request(self, req, fp, code, msg, headers, newurl):
+                    return None
+            opener = urllib.request.build_opener(NoRedirect)
+        else:
+            opener = urllib.request.build_opener()
+        
+        # 处理HTTPS证书
+        context = ssl.create_default_context()
+        opener.add_handler(urllib.request.HTTPSHandler(context=context))
+        
+        start_time = time.time()
+        try:
+            response = opener.open(req, timeout=self.timeout)
+            elapsed = time.time() - start_time
+            
+            # 读取响应体
+            body = response.read()
+            # 处理gzip压缩
+            if response.headers.get('Content-Encoding') == 'gzip':
+                body = gzip.decompress(body)
+            
+            # 尝试解码
+            try:
+                body_text = body.decode('utf-8')
+            except UnicodeDecodeError:
+                body_text = body.decode('latin-1')
+            
+            return {
+                'status_code': response.getcode(),
+                'headers': dict(response.headers),
+                'body': body_text,
+                'elapsed': elapsed,
+                'url': response.geturl()
+            }
+        except urllib.error.HTTPError as e:
+            elapsed = time.time() - start_time
+            return {
+                'status_code': e.code,
+                'headers': dict(e.headers),
+                'body': e.read().decode('utf-8', errors='replace'),
+                'elapsed': elapsed,
+                'url': url
+            }
+        except urllib.error.URLError as e:
+            return {'error': f"URL错误: {e.reason}"}
+        except Exception as e:
+            return {'error': str(e)}
+    
+    def execute(self):
+        """执行请求"""
+        # 优先使用requests库
+        if HAS_REQUESTS:
+            result = self.execute_with_requests()
+            if result and 'error' not in result:
+                return result
+        
+        # 回退到urllib
+        return self.execute_with_urllib()
 
 
-def match_trigger(text: str):
-    low = text.lower()
-    return [t for t in TRIGGERS if t.lower() in low]
+def format_response(result, show_headers=False, max_length=2000):
+    """格式化响应输出"""
+    if not result:
+        return "错误: 请求执行失败"
+    
+    if 'error' in result:
+        return f"错误: {result['error']}"
+    
+    output = []
+    
+    # 状态行
+    output.append(f"HTTP {result['status_code']}")
+    output.append(f"耗时: {result['elapsed']:.3f}s")
+    output.append(f"URL: {result['url']}")
+    output.append("")
+    
+    # 响应头
+    if show_headers:
+        output.append("--- 响应头 ---")
+        for key, value in result['headers'].items():
+            output.append(f"{key}: {value}")
+        output.append("")
+    
+    # 响应体
+    output.append("--- 响应体 ---")
+    body = result['body']
+    
+    # 尝试格式化JSON
+    try:
+        json_data = json.loads(body)
+        formatted = json.dumps(json_data, indent=2, ensure_ascii=False)
+        body = formatted
+    except (json.JSONDecodeError, TypeError):
+        pass
+    
+    # 截断过长内容
+    if len(body) > max_length:
+        body = body[:max_length] + f"\n... (已截断，总长度 {len(result['body'])} 字符)"
+    
+    output.append(body)
+    
+    return "\n".join(output)
 
 
-def selftest() -> int:
-    assert TRIGGERS, "触发器列表为空"
-    assert load_spec().strip(), "SKILL.md 为空"
-    print("  [OK] 触发器 %d 个" % len(TRIGGERS))
-    print("  [OK] SKILL.md 可读")
-    sample = " ".join(TRIGGERS[:1])
-    got = match_trigger(sample)
-    assert got, "触发匹配失败"
-    print("  [OK] 触发匹配:", got)
-    print("== HTTP命令行测试工具 配套执行器自检通过 ✅ ==")
+def selftest():
+    """自检函数 - 本地测试核心功能"""
+    print("=== 自检开始 ===")
+    
+    # 测试1: 参数拼接
+    tester = HTTPTester("GET", "http://example.com/api", params="page=1&size=20")
+    url = tester.build_url()
+    assert url == "http://example.com/api?page=1&size=20", f"参数拼接失败: {url}"
+    print("[PASS] 参数拼接")
+    
+    # 测试2: JSON数据准备
+    tester = HTTPTester("POST", "http://example.com/api", data='{"name":"test"}')
+    data = tester.prepare_data()
+    assert data == b'{"name":"test"}', "JSON数据准备失败"
+    assert tester.headers.get('Content-Type') == 'application/json', "Content-Type设置失败"
+    print("[PASS] JSON数据准备")
+    
+    # 测试3: 表单数据准备
+    tester = HTTPTester("POST", "http://example.com/api", data="name=test&age=20")
+    data = tester.prepare_data()
+    assert data == b"name=test&age=20", "表单数据准备失败"
+    assert tester.headers.get('Content-Type') == 'application/x-www-form-urlencoded', "表单Content-Type设置失败"
+    print("[PASS] 表单数据准备")
+    
+    # 测试4: 响应格式化 - JSON
+    result = {
+        'status_code': 200,
+        'headers': {'Content-Type': 'application/json'},
+        'body': '{"name":"张三","age":30}',
+        'elapsed': 0.123,
+        'url': 'http://example.com'
+    }
+    formatted = format_response(result)
+    assert "张三" in formatted, "JSON格式化失败"
+    assert "HTTP 200" in formatted, "状态码显示失败"
+    print("[PASS] 响应格式化")
+    
+    # 测试5: 响应截断
+    long_body = "x" * 3000
+    result['body'] = long_body
+    formatted = format_response(result, max_length=100)
+    assert "已截断" in formatted, "截断功能失败"
+    print("[PASS] 响应截断")
+    
+    # 测试6: 错误处理
+    result = {'error': "连接失败"}
+    formatted = format_response(result)
+    assert "错误" in formatted, "错误处理失败"
+    print("[PASS] 错误处理")
+    
+    print("=== 自检完成: 全部通过 ===")
     return 0
 
 
 def main():
-    ap = argparse.ArgumentParser(description="HTTP命令行测试工具 配套执行器")
-    ap.add_argument("--guide", action="store_true", help="打印能力速览")
-    ap.add_argument("--match", default="", help="输入文本，匹配触发词")
-    ap.add_argument("--selftest", action="store_true", help="离线自检")
-    args = ap.parse_args()
+    """主入口"""
+    parser = argparse.ArgumentParser(
+        description="HTTP命令行测试工具 - 快速构造HTTP请求、调试REST API并格式化输出响应结果",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  %(prog)s GET https://api.example.com/health
+  %(prog)s POST https://api.example.com/users -d '{"name":"张三"}' -H "Authorization: Bearer token"
+  %(prog)s GET https://api.example.com -p "page=1&size=20" -i
+  %(prog)s GET https://api.example.com -t 10 -L -o response.json
+  %(prog)s --selftest
+        """
+    )
+    
+    # 位置参数
+    parser.add_argument('method', nargs='?', choices=['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'HEAD', 'OPTIONS'],
+                       help="HTTP方法")
+    parser.add_argument('url', nargs='?', help="请求URL")
+    
+    # 可选参数
+    parser.add_argument('-H', '--header', action='append', default=[], metavar='HEADER',
+                       help="自定义请求头，格式: 'Key: Value'，可多次使用")
+    parser.add_argument('-d', '--data', help="请求体数据（JSON或表单格式）")
+    parser.add_argument('-p', '--params', help="查询参数，格式: 'key1=value1&key2=value2'")
+    parser.add_argument('-t', '--timeout', type=float, default=10, help="超时时间（秒），默认10秒")
+    parser.add_argument('-L', '--location', action='store_true', help="跟随重定向")
+    parser.add_argument('-i', '--include', action='store_true', help="显示响应头")
+    parser.add_argument('-o', '--output', help="将响应体保存到文件")
+    parser.add_argument('--max-length', type=int, default=2000, help="响应体最大显示长度，默认2000字符")
+    parser.add_argument('--selftest', action='store_true', help="运行自检")
+    
+    args = parser.parse_args()
+    
+    # 自检模式
     if args.selftest:
-        return selftest()
-    if args.match:
-        print("命中触发词:", match_trigger(args.match))
-        return 0
-    if args.guide:
-        md = load_spec()
-        print("\n".join(l for l in md.splitlines() if l.strip())[:40])
-        return 0
-    print("用法: python run.py --guide | --match 文本 | --selftest")
-    return 0
+        sys.exit(selftest())
+    
+    # 参数校验
+    if not args.method or not args.url:
+        parser.error("必须提供HTTP方法和URL")
+    
+    # 解析请求头
+    headers = {}
+    for h in args.header:
+        if ':' not in h:
+            parser.error(f"无效的请求头格式: {h}，应为 'Key: Value'")
+        key, value = h.split(':', 1)
+        headers[key.strip()] = value.strip()
+    
+    # 创建测试器
+    tester = HTTPTester(
+        method=args.method,
+        url=args.url,
+        headers=headers,
+        data=args.data,
+        params=args.params,
+        timeout=args.timeout,
+        follow_redirects=args.location
+    )
+    
+    # 执行请求
+    print(f"正在请求: {args.method} {tester.build_url()}")
+    result = tester.execute()
+    
+    # 格式化输出
+    output = format_response(result, show_headers=args.include, max_length=args.max_length)
+    print(output)
+    
+    # 保存到文件
+    if args.output and 'error' not in result:
+        try:
+            with open(args.output, 'w', encoding='utf-8') as f:
+                f.write(result['body'])
+            print(f"\n响应已保存到: {args.output}")
+        except IOError as e:
+            print(f"\n错误: 无法保存文件: {e}", file=sys.stderr)
+            sys.exit(1)
+    
+    # 根据状态码设置退出码
+    if 'error' in result:
+        sys.exit(1)
+    elif result['status_code'] >= 400:
+        sys.exit(2)
+    else:
+        sys.exit(0)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
