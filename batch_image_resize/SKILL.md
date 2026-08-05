@@ -13,7 +13,7 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: Ling Zhang
+author: 像素工坊
 agent_created: true
 trigger_words: 批量图片缩放, 图片尺寸调整, 图片格式转换, 图片压缩, resize images
 ---
