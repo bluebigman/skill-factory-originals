@@ -11,7 +11,7 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Lab
+author: 邮件智造工坊
 agent_created: true
 trigger_words:
   - "email-draft-pro"
