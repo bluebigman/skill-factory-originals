@@ -1,0 +1,330 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+annual-report-summary Skill - 年报摘要生成器
+从年报文本中提取关键财务指标并生成摘要
+"""
+
+import re
+import json
+import argparse
+from typing import Dict, List, Optional, Any
+
+
+def load_spec() -> Dict[str, Any]:
+    """加载技能规格说明"""
+    return {
+        "name": "annual-report-summary",
+        "description": "从年报文本中提取关键财务指标并生成摘要",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "text": {
+                    "type": "string",
+                    "description": "年报文本内容"
+                }
+            },
+            "required": ["text"]
+        }
+    }
+
+
+def match_trigger(text: str) -> bool:
+    """判断是否触发本技能"""
+    keywords = ["年报", "年度报告", "财务报告", "净资产收益率", "ROE"]
+    return any(kw in text for kw in keywords)
+
+
+def extract_roe(text: str) -> Optional[str]:
+    """
+    提取ROE（净资产收益率）
+    支持多种写法：净资产收益率、ROE、加权平均净资产收益率
+    """
+    # 扩展正则别名覆盖
+    patterns = [
+        # 加权平均净资产收益率
+        r'加权平均净资产收益率[：:为\s]*([-+]?\d+\.?\d*%?)',
+        # 净资产收益率
+        r'净资产收益率[（(]?[）)]?[：:为\s]*([-+]?\d+\.?\d*%?)',
+        # ROE (不区分大小写)
+        r'ROE[：:为\s]*([-+]?\d+\.?\d*%?)',
+        # 净资产收益率(ROE)
+        r'净资产收益率\s*[（(]ROE[）)]\s*[：:为\s]*([-+]?\d+\.?\d*%?)',
+        # ROE(净资产收益率)
+        r'ROE\s*[（(]净资产收益率[）)]\s*[：:为\s]*([-+]?\d+\.?\d*%?)',
+    ]
+    
+    for pattern in patterns:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            return match.group(1)
+    return None
+
+
+def extract_net_profit(text: str) -> Optional[str]:
+    """提取净利润增长率"""
+    patterns = [
+        r'净利润增长率[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'净利润同比[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'归属于上市公司股东的净利润[：:为\s]*([-+]?\d+\.?\d*%?)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1)
+    return None
+
+
+def extract_revenue(text: str) -> Optional[str]:
+    """提取营业收入增长率"""
+    patterns = [
+        r'营业收入增长率[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'营业收入同比[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'营业总收入[：:为\s]*([-+]?\d+\.?\d*%?)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1)
+    return None
+
+
+def extract_eps(text: str) -> Optional[str]:
+    """提取每股收益"""
+    patterns = [
+        r'每股收益[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'EPS[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'基本每股收益[：:为\s]*([-+]?\d+\.?\d*%?)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            return match.group(1)
+    return None
+
+
+def extract_total_assets(text: str) -> Optional[str]:
+    """提取总资产"""
+    patterns = [
+        r'总资产[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'资产总计[：:为\s]*([-+]?\d+\.?\d*%?)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1)
+    return None
+
+
+def extract_total_liabilities(text: str) -> Optional[str]:
+    """提取总负债"""
+    patterns = [
+        r'总负债[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'负债合计[：:为\s]*([-+]?\d+\.?\d*%?)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1)
+    return None
+
+
+def extract_equity(text: str) -> Optional[str]:
+    """提取股东权益"""
+    patterns = [
+        r'股东权益[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'所有者权益[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'净资产[：:为\s]*([-+]?\d+\.?\d*%?)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1)
+    return None
+
+
+def extract_cash_flow(text: str) -> Optional[str]:
+    """提取经营活动现金流"""
+    patterns = [
+        r'经营活动产生的现金流量净额[：:为\s]*([-+]?\d+\.?\d*%?)',
+        r'经营现金流[：:为\s]*([-+]?\d+\.?\d*%?)',
+    ]
+    for pattern in patterns:
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1)
+    return None
+
+
+def extract_metrics(text: str) -> Dict[str, Optional[str]]:
+    """提取所有关键财务指标"""
+    return {
+        'roe': extract_roe(text),
+        'net_profit': extract_net_profit(text),
+        'revenue': extract_revenue(text),
+        'eps': extract_eps(text),
+        'total_assets': extract_total_assets(text),
+        'total_liabilities': extract_total_liabilities(text),
+        'equity': extract_equity(text),
+        'cash_flow': extract_cash_flow(text),
+    }
+
+
+def generate_highlights(metrics: Dict[str, Optional[str]]) -> List[str]:
+    """根据指标生成亮点"""
+    highlights = []
+    if metrics.get('roe'):
+        try:
+            roe_val = float(metrics['roe'].rstrip('%'))
+            if roe_val > 10:
+                highlights.append("报告期内公司净资产收益率表现良好")
+        except ValueError:
+            pass
+    
+    if metrics.get('net_profit'):
+        try:
+            np_val = float(metrics['net_profit'].rstrip('%'))
+            if np_val > 0:
+                highlights.append("报告期内公司业绩实现增长")
+        except ValueError:
+            pass
+    
+    if metrics.get('revenue'):
+        try:
+            rev_val = float(metrics['revenue'].rstrip('%'))
+            if rev_val > 0:
+                highlights.append("报告期内公司营业收入实现增长")
+        except ValueError:
+            pass
+    
+    return highlights
+
+
+def generate_risks(metrics: Dict[str, Optional[str]]) -> List[str]:
+    """根据指标生成风险提示"""
+    risks = []
+    if metrics.get('net_profit'):
+        try:
+            np_val = float(metrics['net_profit'].rstrip('%'))
+            if np_val < 0:
+                risks.append("报告期内公司净利润出现下滑")
+        except ValueError:
+            pass
+    
+    if metrics.get('revenue'):
+        try:
+            rev_val = float(metrics['revenue'].rstrip('%'))
+            if rev_val < 0:
+                risks.append("报告期内公司营业收入出现下滑")
+        except ValueError:
+            pass
+    
+    return risks
+
+
+def generate_summary(text: str) -> Dict[str, Any]:
+    """生成年报摘要"""
+    metrics = extract_metrics(text)
+    highlights = generate_highlights(metrics)
+    risks = generate_risks(metrics)
+    
+    return {
+        'metrics': metrics,
+        'highlights': highlights,
+        'risks': risks,
+    }
+
+
+def selftest() -> None:
+    """自检函数"""
+    # 测试数据包含ROE字段
+    test_text = """
+    公司2023年年度报告显示：
+    加权平均净资产收益率为15.23%
+    净利润增长率为18.92%
+    营业收入增长率为125.67%
+    每股收益为1.85元
+    总资产为356.42亿元
+    总负债为198.76亿元
+    股东权益为157.66亿元
+    经营活动产生的现金流量净额为23.45亿元
+    """
+    
+    # 测试ROE提取
+    roe = extract_roe(test_text)
+    assert roe is not None, "ROE提取失败"
+    assert roe == '15.23%', f"ROE提取错误: {roe}"
+    print(f"ROE提取成功: {roe}")
+    
+    # 测试ROE别名
+    test_text_alias = "报告期内公司净资产收益率为12.5%"
+    roe_alias = extract_roe(test_text_alias)
+    assert roe_alias is not None, "ROE别名提取失败"
+    assert roe_alias == '12.5%', f"ROE别名提取错误: {roe_alias}"
+    print(f"ROE别名提取成功: {roe_alias}")
+    
+    # 测试ROE大写
+    test_text_upper = "报告期内公司ROE为10.8%"
+    roe_upper = extract_roe(test_text_upper)
+    assert roe_upper is not None, "ROE大写提取失败"
+    assert roe_upper == '10.8%', f"ROE大写提取错误: {roe_upper}"
+    print(f"ROE大写提取成功: {roe_upper}")
+    
+    # 测试完整指标提取
+    metrics = extract_metrics(test_text)
+    assert metrics['roe'] is not None, "完整指标提取失败: ROE"
+    assert metrics['net_profit'] is not None, "完整指标提取失败: net_profit"
+    assert metrics['revenue'] is not None, "完整指标提取失败: revenue"
+    assert metrics['eps'] is not None, "完整指标提取失败: eps"
+    assert metrics['total_assets'] is not None, "完整指标提取失败: total_assets"
+    assert metrics['total_liabilities'] is not None, "完整指标提取失败: total_liabilities"
+    assert metrics['equity'] is not None, "完整指标提取失败: equity"
+    assert metrics['cash_flow'] is not None, "完整指标提取失败: cash_flow"
+    print(f"完整指标提取成功: {metrics}")
+    
+    # 测试摘要生成
+    summary = generate_summary(test_text)
+    assert 'metrics' in summary, "摘要生成失败: 缺少metrics"
+    assert 'highlights' in summary, "摘要生成失败: 缺少highlights"
+    assert 'risks' in summary, "摘要生成失败: 缺少risks"
+    assert len(summary['highlights']) > 0, "摘要生成失败: highlights为空"
+    print(f"摘要生成成功: {summary}")
+    
+    print("\n所有自检测试通过！")
+
+
+def main() -> None:
+    """主函数"""
+    parser = argparse.ArgumentParser(description='年报摘要生成器')
+    parser.add_argument('--selftest', action='store_true', help='运行自检')
+    parser.add_argument('--text', type=str, help='年报文本')
+    parser.add_argument('--input', type=str, help='输入文件路径')
+    parser.add_argument('--output', type=str, help='输出文件路径')
+    
+    args = parser.parse_args()
+    
+    if args.selftest:
+        selftest()
+        return
+    
+    if args.text:
+        result = generate_summary(args.text)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return
+    
+    if args.input:
+        with open(args.input, 'r', encoding='utf-8') as f:
+            text = f.read()
+        result = generate_summary(text)
+        if args.output:
+            with open(args.output, 'w', encoding='utf-8') as f:
+                json.dump(result, f, ensure_ascii=False, indent=2)
+        else:
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+        return
+    
+    print("请提供 --selftest 或 --text 或 --input 参数")
+
+
+if __name__ == '__main__':
+    main()
