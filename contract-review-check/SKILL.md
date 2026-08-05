@@ -13,7 +13,7 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Lab
+author: 法盾审阅工坊
 agent_created: true
 trigger_words: ["contract-review-check", "合同审查", "风险清单", "条款核查", "合同体检"]
 ---
