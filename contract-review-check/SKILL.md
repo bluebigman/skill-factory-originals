@@ -1,16 +1,16 @@
 ---
 slug: contract-review-check
 name: contract-review-check
-displayName: 合同审查风险清单核查
-description: 对合同文本进行违约、付款、保密、知识产权归属四类风险点审查，输出带风险等级和条款原文摘录的核查清单。
-version: 2.0.0
+displayName: 合同审查 风险清单 条款核查
+description: 对合同文本进行风险点审查，输出违约、付款、保密、知产归属的核查意见清单。
+version: 1.0.0
 license: MIT
 source_project: original
 source_url: 
-copyright_holder: 法务工坊·条款勘验组
+copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
-disclaimer: 本Skill由AI辅助生成，仅供学习参考，不构成法律意见。使用前请阅读相关文档。
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 法务工坊·条款勘验组
 agent_created: true
 trigger_words: ["contract-review-check", "合同审查", "风险清单", "条款核查", "合同体检", "合同风险扫描", "条款合规检查"]
@@ -27,21 +27,22 @@ trigger_words: ["contract-review-check", "合同审查", "风险清单", "条款
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 合同审查风险清单核查 Skill
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界
+# 合同审查风险清单核查 Skill 使用指南
+
+## 一、能力边界（一页纸速查卡）
 
 ### 1.1 本 Skill 能做什么
 
 | 能力项 | 说明 | 输出形式 |
 |--------|------|----------|
-| 违约条款审查 | 识别违约金比例、赔偿范围、责任承担等高风险表述 | 风险提示 + 条款原文摘录 |
-| 付款条款审查 | 核查付款节点、条件、方式、一次性付款等风险表述 | 风险提示 + 条款原文摘录 |
-| 保密条款审查 | 检查保密期限、范围、永久保密等风险表述 | 风险提示 + 条款原文摘录 |
-| 知识产权归属审查 | 确认成果归属、许可使用、甲方单方归属等风险表述 | 风险提示 + 条款原文摘录 |
+| 违约条款审查 | 识别违约责任约定是否明确、对等、可执行 | 风险提示 + 条款原文摘录 |
+| 付款条款审查 | 核查付款节点、金额、条件、发票、逾期利息等要素 | 风险提示 + 缺失项标注 |
+| 保密条款审查 | 检查保密范围、期限、例外情形、违约责任 | 风险提示 + 合规性判断 |
+| 知识产权归属审查 | 确认成果归属、许可范围、侵权责任承担 | 风险提示 + 归属判定 |
 | 风险等级标注 | 对每项风险给出高/中/低三级标注 | 等级标签 + 简要理由 |
-| 多格式输入 | 支持纯文本（.txt）和 Word（.docx）格式合同 | 统一输出 JSON 或 Markdown |
-| 批量文件审查 | 支持单文件或多文件批量审查 | 每个文件独立输出报告 |
 
 ### 1.2 本 Skill 不能做什么
 
@@ -49,7 +50,7 @@ trigger_words: ["contract-review-check", "合同审查", "风险清单", "条款
 |--------|------|
 | 不提供法律意见 | 输出仅为风险提示清单，不构成正式法律意见书 |
 | 不替代律师审核 | 复杂交易或高标的合同须由执业律师把关 |
-| 不处理扫描件 | 仅支持文本格式和 .docx 格式，不支持 OCR 识别 |
+| 不处理非文本输入 | 仅支持文本格式合同，不支持扫描件 OCR 识别 |
 | 不判断合同效力 | 不评估合同整体法律效力，仅做条款层面核查 |
 | 不保证无遗漏 | 审查基于规则匹配，可能存在未覆盖的风险点 |
 
@@ -60,98 +61,31 @@ trigger_words: ["contract-review-check", "合同审查", "风险清单", "条款
 - 合同模板标准化检查
 - 合同归档前的规范性复核
 
-## 二、触发条件
-
-### 2.1 主动触发
-
-用户输入以下任一关键词即可触发：
-- `contract-review-check`
-- `合同审查`
-- `风险清单`
-- `条款核查`
-- `合同体检`
-- `合同风险扫描`
-- `条款合规检查`
-
-### 2.2 被动触发
-
-当用户提供合同文本（粘贴或文件路径）并表达审查意图时自动触发。
-
-## 三、标准流程
-
-### 3.1 输入处理
-
-1. 接收用户输入的合同文本或文件路径
-2. 支持 `.txt` 和 `.docx` 格式文件
-3. 自动检测输入类型并提取文本内容
-
-### 3.2 风险审查
-
-对提取的文本按以下四类规则进行匹配：
-
-| 类别 | 高风险规则 | 中风险规则 | 低风险规则 |
-|------|-----------|-----------|-----------|
-| 违约 | 违约金比例过高、赔偿全部损失、承担一切责任 | 违约金比例、赔偿损失 | 违约责任 |
-| 付款 | 先付款后交货、先付款后验收、一次性付款 | 付款期限、付款条件 | 付款方式 |
-| 保密 | 无限期保密、永久保密 | 保密期限、保密范围 | 保密协议 |
-| 知识产权 | 知识产权归甲方、成果归甲方 | 知识产权归属、许可使用 | 知识产权 |
-
-### 3.3 输出生成
-
-- 默认输出 JSON 格式（结构化数据）
-- 可选输出 Markdown 格式（人类可读报告）
-- 每个风险点包含：类别、等级、匹配原文、风险描述、修改建议
-
-### 3.4 置信度门控
-
-| 置信度等级 | 条件 | 处理方式 |
-|-----------|------|----------|
-| 高 | 匹配到高风险规则 | 直接输出，标注"高风险" |
-| 中 | 匹配到中风险规则 | 直接输出，标注"中风险" |
-| 低 | 仅匹配到低风险规则 | 直接输出，标注"低风险" |
-| 无 | 未匹配到任何规则 | 输出"未发现明显风险点" |
-
-## 四、错误码
-
-| 错误码 | 含义 | 处理方式 |
-|--------|------|----------|
-| 0 | 成功 | 正常输出结果 |
-| 1 | 输入文件不存在 | 提示用户检查文件路径 |
-| 2 | 文件格式不支持 | 提示用户使用 .txt 或 .docx 格式 |
-| 3 | 文件内容为空 | 提示用户提供有效合同文本 |
-| 4 | 缺少 python-docx 库 | 提示用户安装依赖 |
-| 5 | 参数错误 | 提示用户检查命令行参数 |
-
-## 五、FAQ 与反模式
-
-### 5.1 常见问题
-
-**Q: 审查结果是否具有法律效力？**
-A: 不具有。本 Skill 仅提供风险提示，不构成法律意见。
-
-**Q: 能否处理 PDF 格式合同？**
-A: 不能。请先将 PDF 转换为文本或 Word 格式。
-
-**Q: 审查结果是否完整？**
-A: 不保证完整。规则匹配可能遗漏特殊条款。
-
-### 5.2 反模式
-
-| 反模式 | 说明 | 正确做法 |
-|--------|------|----------|
-| 依赖审查结果签署合同 | 将本工具输出作为签约依据 | 咨询执业律师 |
-| 忽略高风险提示 | 对高风险条款不重视 | 重点协商高风险条款 |
-| 超范围使用 | 用于非合同文本审查 | 仅用于合同文本 |
-| 修改规则文件 | 随意改动内置规则 | 通过参数传递自定义规则 |
 
 ## 许可证（License）
-## 失败处理
 
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
+```text
+MIT License
 
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
+Copyright (c) {year} {holder}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+<!-- professional-license-embedded -->
