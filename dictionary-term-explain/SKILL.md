@@ -3,7 +3,7 @@ slug: dictionary-term-explain
 name: 术语释义助手
 displayName: 场景拆解 概念边界 落地解释
 description: 按场景拆解术语含义，给出边界清晰、可落地的概念解释。
-version: 1.0.0
+version: 2.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -26,9 +26,6 @@ trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
 
 # 术语释义助手 Skill 文档
 
@@ -59,31 +56,86 @@ trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么
 - 需要逐字逐句翻译的场景
 - 需要权威定义（如 ISO 标准原文）的场景
 
+## 二、触发条件
+
+### 2.1 触发词
+
+当用户输入包含以下关键词时，自动激活本 Skill：
+
+- 术语解释、名词释义、概念说明
+- 这个词什么意思、通俗解释、术语拆解
+- 概念辨析、定义解读
+
+### 2.2 触发示例
+
+- "帮我解释一下'微服务'是什么意思"
+- "通俗解释'区块链'"
+- "辨析'DevOps'和'SRE'的区别"
+
+## 三、标准流程
+
+### 3.1 输入处理
+
+1. 接收用户输入的术语（单个术语、短语、缩写）
+2. 检查术语是否在内置知识库中
+3. 若不在知识库中，返回错误码 `TERM_NOT_FOUND`
+
+### 3.2 解释生成
+
+1. 从知识库中提取术语的核心定义
+2. 按场景（技术/业务/日常/学术）拆解含义
+3. 输出概念边界和邻近概念区分
+4. 列出常见误用和注意事项
+
+### 3.3 输出格式
+
+输出为结构化 Markdown，包含：
+
+- 核心定义
+- 场景拆解（表格形式）
+- 概念边界
+- 常见误用
+
+## 四、置信度门控
+
+### 4.1 置信度等级
+
+| 等级 | 说明 | 触发条件 |
+|------|------|----------|
+| 高 | 术语在知识库中，解释完整 | 术语命中知识库 |
+| 中 | 术语部分匹配，需人工确认 | 术语部分匹配知识库 |
+| 低 | 术语不在知识库中 | 术语未命中知识库 |
+
+### 4.2 门控逻辑
+
+- 置信度为"高"时，直接输出完整解释
+- 置信度为"中"时，输出部分解释并提示用户确认
+- 置信度为"低"时，返回错误码 `TERM_NOT_FOUND`
+
+## 五、错误码
+
+| 错误码 | 说明 | 处理方式 |
+|--------|------|----------|
+| `TERM_NOT_FOUND` | 术语不在知识库中 | 提示用户术语不在知识库中，建议使用其他术语 |
+| `INVALID_INPUT` | 输入为空或格式错误 | 提示用户输入有效的术语 |
+| `BATCH_FAILED` | 批量处理失败 | 提示用户检查文件格式和路径 |
+
+## 六、FAQ 反模式
+
+### 6.1 常见反模式
+
+| 反模式 | 说明 | 正确做法 |
+|--------|------|----------|
+| 过度承诺 | 声称能解释所有术语 | 明确说明知识库范围 |
+| 模糊输出 | 输出笼统的定义 | 按场景拆解，给出具体解释 |
+| 忽略边界 | 不说明术语的适用范围 | 明确概念边界和邻近概念区分 |
+| 伪造数据 | 使用随机数据冒充真实结果 | 使用内置知识库的真实数据 |
+
+### 6.2 最佳实践
+
+- 始终使用内置知识库的真实数据
+- 明确说明知识库的覆盖范围
+- 在输出中标注置信度等级
+- 提供常见误用和注意事项
 
 ## 许可证（License）
-
-```text
-MIT License
-
-Copyright (c) {year} {holder}
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-```
-<!-- professional-license-embedded -->
