@@ -5,8 +5,10 @@
 纯标准库，零依赖。
 """
 import argparse
+import difflib
 import os
 import random
+import re
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -67,20 +69,58 @@ def get_domain_cheats(domain):
 
 
 def search_cheats(keyword, domain=None):
-    """按关键词搜索命令，返回 (匹配列表, 匹配数量)"""
+    """按关键词模糊搜索命令，返回 (匹配列表, 匹配数量)
+    使用 difflib.SequenceMatcher 计算相似度，结合子串匹配和正则表达式
+    """
     if domain:
         items = get_domain_cheats(domain)
         if items is None:
             return None, 0
     else:
         items = get_all_cheats()
+
     keyword_lower = keyword.lower()
-    matches = [
-        item for item in items
-        if keyword_lower in item["cmd"].lower()
-        or keyword_lower in item["desc"].lower()
-        or keyword_lower in item["scene"].lower()
-    ]
+    # 构建正则模式（转义特殊字符）
+    try:
+        pattern = re.compile(re.escape(keyword_lower))
+    except re.error:
+        pattern = None
+
+    scored_matches = []
+    for item in items:
+        # 收集所有可搜索字段
+        searchable_text = f"{item['cmd']} {item['desc']} {item['scene']}".lower()
+        
+        # 1. 精确子串匹配（最高优先级）
+        if keyword_lower in searchable_text:
+            score = 1.0
+        else:
+            # 2. 正则匹配
+            regex_score = 0.0
+            if pattern and pattern.search(searchable_text):
+                regex_score = 0.8
+            
+            # 3. difflib 模糊匹配（对每个字段计算相似度）
+            diff_scores = []
+            for field in [item["cmd"], item["desc"], item["scene"]]:
+                field_lower = field.lower()
+                # 使用 SequenceMatcher 计算相似度
+                similarity = difflib.SequenceMatcher(None, keyword_lower, field_lower).ratio()
+                diff_scores.append(similarity)
+            
+            # 取最高相似度
+            max_diff_score = max(diff_scores) if diff_scores else 0.0
+            
+            # 综合评分：正则匹配优先于纯模糊匹配
+            score = max(regex_score, max_diff_score * 0.6)
+        
+        # 只保留相似度超过阈值的匹配
+        if score > 0.3:
+            scored_matches.append((score, item))
+    
+    # 按相似度降序排序
+    scored_matches.sort(key=lambda x: x[0], reverse=True)
+    matches = [item for _, item in scored_matches]
     return matches, len(matches)
 
 
@@ -154,17 +194,26 @@ def run_selftest():
     # 2. 不存在的领域
     assert get_domain_cheats("nonexist") is None, "不存在的领域应返回 None"
 
-    # 3. 搜索
+    # 3. 精确搜索
     matches, count = search_cheats("提交")
     assert count > 0, "搜索'提交'应有结果"
     assert all("提交" in item["desc"] or "提交" in item["scene"] or "提交" in item["cmd"] for item in matches), "搜索结果应包含关键词"
 
-    # 4. 随机
+    # 4. 模糊搜索（测试 difflib 匹配）
+    fuzzy_matches, fuzzy_count = search_cheats("log")
+    assert fuzzy_count > 0, "模糊搜索'log'应有结果"
+    assert any("log" in item["cmd"].lower() for item in fuzzy_matches), "模糊搜索结果应包含 log 相关命令"
+
+    # 5. 模糊搜索（测试拼写变体）
+    fuzzy_matches2, fuzzy_count2 = search_cheats("git log")
+    assert fuzzy_count2 > 0, "模糊搜索'git log'应有结果"
+
+    # 6. 随机
     rand_item = get_random_cheat("docker")
     assert rand_item is not None, "docker 随机应返回一条"
     assert rand_item in CHEATS["docker"], "随机结果应来自 docker 领域"
 
-    # 5. 导出
+    # 7. 导出
     tmp_export = os.path.join(tempfile.gettempdir(), f"cheats_test_{os.getpid()}.md")
     try:
         export_markdown(tmp_export)
@@ -172,22 +221,25 @@ def run_selftest():
             content = f.read()
         assert "命令行速查手册" in content, "导出文件应包含标题"
         assert "git" in content and "docker" in content and "linux" in content, "导出文件应包含所有领域"
+        assert "导出时间" in content, "导出文件应包含时间戳"
     finally:
         if os.path.exists(tmp_export):
             os.unlink(tmp_export)
 
-    # 6. 表格格式
+    # 8. 表格格式
     table = format_table(git_items[:2])
     assert "| 序号 | 命令 | 描述 | 场景 |" in table, "表格应包含表头"
     assert "git log" in table, "表格应包含命令内容"
 
-    # 7. 主流程集成测试（通过 subprocess 调用 main）
+    # 9. 主流程集成测试（通过 subprocess 调用 main）
     import subprocess
     test_cases = [
         (["--domain", "git"], 0),
         (["--search", "提交"], 0),
+        (["--search", "log"], 0),  # 模糊搜索
         (["--random", "--domain", "linux"], 0),
         (["--list-domains"], 0),
+        (["--export", os.path.join(tempfile.gettempdir(), f"cheats_export_{os.getpid()}.md")], 0),
         (["--domain", "nonexist"], 3),
     ]
     for args, expected_code in test_cases:
@@ -198,6 +250,17 @@ def run_selftest():
             timeout=10
         )
         assert result.returncode == expected_code, f"参数 {args} 应退出码 {expected_code}，实际 {result.returncode}"
+        # 验证输出内容
+        if expected_code == 0:
+            assert len(result.stdout.strip()) > 0, f"参数 {args} 应有输出内容"
+
+    # 10. 验证导出文件内容
+    export_path = os.path.join(tempfile.gettempdir(), f"cheats_export_{os.getpid()}.md")
+    if os.path.exists(export_path):
+        with open(export_path, "r", encoding="utf-8") as f:
+            export_content = f.read()
+        assert "命令行速查手册" in export_content, "导出文件应包含标题"
+        os.unlink(export_path)
 
     print("自检通过：所有核心功能验证成功")
     return 0
@@ -209,7 +272,7 @@ def main():
         epilog="示例：python cheat_sheet.py --domain git | --search 提交 | --random | --export cheats.md | --list-domains | --selftest"
     )
     parser.add_argument("--domain", type=str, help="领域名称（git/docker/linux）")
-    parser.add_argument("--search", type=str, help="搜索关键词")
+    parser.add_argument("--search", type=str, help="搜索关键词（支持模糊匹配）")
     parser.add_argument("--random", action="store_true", help="随机返回一条命令")
     parser.add_argument("--export", type=str, metavar="FILE", help="导出全部速查到 Markdown 文件")
     parser.add_argument("--list-domains", action="store_true", help="列出所有可用领域")
