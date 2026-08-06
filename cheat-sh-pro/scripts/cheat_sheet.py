@@ -124,8 +124,12 @@ def search_cheats(keyword, domain=None):
     return matches, len(matches)
 
 
-def get_random_cheat(domain=None):
-    """随机返回一条命令，领域不存在时返回 None"""
+def get_random_cheat(domain=None, seed=None):
+    """随机返回一条命令，领域不存在时返回 None
+    支持 seed 参数用于可复现性
+    """
+    if seed is not None:
+        random.seed(seed)
     if domain:
         items = get_domain_cheats(domain)
         if items is None:
@@ -208,10 +212,12 @@ def run_selftest():
     fuzzy_matches2, fuzzy_count2 = search_cheats("git log")
     assert fuzzy_count2 > 0, "模糊搜索'git log'应有结果"
 
-    # 6. 随机
-    rand_item = get_random_cheat("docker")
-    assert rand_item is not None, "docker 随机应返回一条"
-    assert rand_item in CHEATS["docker"], "随机结果应来自 docker 领域"
+    # 6. 随机（测试 seed 可复现性）
+    rand_item1 = get_random_cheat("docker", seed=42)
+    rand_item2 = get_random_cheat("docker", seed=42)
+    assert rand_item1 is not None, "docker 随机应返回一条"
+    assert rand_item1 in CHEATS["docker"], "随机结果应来自 docker 领域"
+    assert rand_item1 == rand_item2, "相同 seed 应产生相同随机结果"
 
     # 7. 导出
     tmp_export = os.path.join(tempfile.gettempdir(), f"cheats_test_{os.getpid()}.md")
@@ -238,6 +244,7 @@ def run_selftest():
         (["--search", "提交"], 0),
         (["--search", "log"], 0),  # 模糊搜索
         (["--random", "--domain", "linux"], 0),
+        (["--random", "--domain", "linux", "--seed", "42"], 0),  # 带 seed 的随机
         (["--list-domains"], 0),
         (["--export", os.path.join(tempfile.gettempdir(), f"cheats_export_{os.getpid()}.md")], 0),
         (["--domain", "nonexist"], 3),
@@ -262,6 +269,21 @@ def run_selftest():
         assert "命令行速查手册" in export_content, "导出文件应包含标题"
         os.unlink(export_path)
 
+    # 11. 验证 seed 可复现性（通过 subprocess）
+    result1 = subprocess.run(
+        [sys.executable, __file__, "--random", "--domain", "docker", "--seed", "123"],
+        capture_output=True,
+        text=True,
+        timeout=10
+    )
+    result2 = subprocess.run(
+        [sys.executable, __file__, "--random", "--domain", "docker", "--seed", "123"],
+        capture_output=True,
+        text=True,
+        timeout=10
+    )
+    assert result1.stdout == result2.stdout, "相同 seed 的随机输出应一致"
+
     print("自检通过：所有核心功能验证成功")
     return 0
 
@@ -274,6 +296,7 @@ def main():
     parser.add_argument("--domain", type=str, help="领域名称（git/docker/linux）")
     parser.add_argument("--search", type=str, help="搜索关键词（支持模糊匹配）")
     parser.add_argument("--random", action="store_true", help="随机返回一条命令")
+    parser.add_argument("--seed", type=int, help="随机种子（用于可复现性）")
     parser.add_argument("--export", type=str, metavar="FILE", help="导出全部速查到 Markdown 文件")
     parser.add_argument("--list-domains", action="store_true", help="列出所有可用领域")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
@@ -302,7 +325,7 @@ def main():
 
     # 随机
     if args.random:
-        item = get_random_cheat(args.domain)
+        item = get_random_cheat(args.domain, seed=args.seed)
         if item is None:
             print(f"领域不存在：{args.domain}", file=sys.stderr)
             return 3
