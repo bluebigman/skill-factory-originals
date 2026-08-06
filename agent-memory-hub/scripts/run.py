@@ -1,457 +1,520 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-
 """
-agent-memory-hub - 将文档/代码/对话保存为带时间戳的索引文件
-支持四种记忆资产类型：对话(dialogue)、文档(document)、代码(code)、配置(config)
+agent-memory-hub - 记忆资产团队索引工具
+
+将对话、文档、代码整理为四类记忆资产，生成团队共享索引。
+支持批量处理，输出结构化资产文件和汇总索引。
+
+用法示例:
+    python run.py --input ./docs --output ./memory_assets
+    python run.py --input ./conversation.txt --output ./memory_assets --type dialogue
+    python run.py --selftest
 """
 
-import argparse
-import hashlib
-import json
 import os
-import re
 import sys
-import tempfile
-import time
-import uuid
-from datetime import datetime, timezone
+import json
+import hashlib
+import argparse
+import datetime
+from datetime import timezone
 from pathlib import Path
-from typing import Dict, List, Optional, Union
+
+# 尝试导入可选依赖
+try:
+    import openpyxl
+    HAS_OPENPYXL = True
+except ImportError:
+    HAS_OPENPYXL = False
 
 try:
-    import fcntl
+    import requests
+    HAS_REQUESTS = True
 except ImportError:
-    fcntl = None  # Windows 平台不支持 fcntl，使用备用方案
+    HAS_REQUESTS = False
+
+# 资产类型定义
+ASSET_TYPES = {
+    "dialogue": "对话记忆",
+    "document": "文档记忆",
+    "code": "代码记忆",
+    "decision": "决策记忆"
+}
+
+# 支持的文件扩展名
+SUPPORTED_EXTENSIONS = {
+    ".txt", ".md", ".py", ".js", ".java", ".cpp", ".c", ".h",
+    ".json", ".yaml", ".yml", ".csv", ".log"
+}
 
 
-# ==================== 类型定义与常量 ====================
-
-class MemoryType:
-    """记忆类型枚举"""
-    DIALOGUE = "dialogue"
-    DOCUMENT = "document"
-    CODE = "code"
-    CONFIG = "config"
-
-    ALL_TYPES = {DIALOGUE, DOCUMENT, CODE, CONFIG}
-
-    # 类型对应的文件扩展名
-    EXTENSIONS = {
-        DIALOGUE: [".txt", ".chat", ".conversation"],
-        DOCUMENT: [".md", ".rst", ".txt"],
-        CODE: [".py", ".js", ".java", ".c", ".cpp", ".go", ".rs", ".ts", ".rb", ".php"],
-        CONFIG: [".json", ".yaml", ".yml", ".toml", ".ini", ".conf"],
-    }
-
-    # 类型对应的默认文件扩展名
-    DEFAULT_EXTENSION = {
-        DIALOGUE: ".json",
-        DOCUMENT: ".md",
-        CODE: ".py",
-        CONFIG: ".json",
-    }
-
-    @classmethod
-    def validate(cls, file_type: str) -> str:
-        """校验并规范化类型"""
-        file_type = file_type.lower().strip()
-        if file_type not in cls.ALL_TYPES:
-            raise ValueError(
-                f"不支持的记忆类型: '{file_type}'。支持的类型: {', '.join(sorted(cls.ALL_TYPES))}"
-            )
-        return file_type
-
-    @classmethod
-    def detect_from_extension(cls, file_path: str) -> str:
-        """根据文件扩展名检测类型"""
-        ext = os.path.splitext(file_path)[1].lower()
-        for mem_type, extensions in cls.EXTENSIONS.items():
-            if ext in extensions:
-                return mem_type
-        return cls.DIALOGUE  # 默认类型
-
-
-# ==================== 文件锁实现 ====================
-
-class FileLock:
-    """跨平台文件锁，用于保护索引文件的原子操作"""
-
-    def __init__(self, lock_path: str):
-        self.lock_path = lock_path
-        self._lock_file = None
-
-    def __enter__(self):
-        """获取文件锁"""
-        # 确保锁文件所在目录存在
-        os.makedirs(os.path.dirname(self.lock_path) or ".", exist_ok=True)
-        self._lock_file = open(self.lock_path, "w")
-        
-        if fcntl:
-            # Unix/Linux/Mac 使用 fcntl.flock
-            fcntl.flock(self._lock_file.fileno(), fcntl.LOCK_EX)
-        else:
-            # Windows 使用 msvcrt 或简单的时间戳锁
-            try:
-                import msvcrt
-                msvcrt.locking(self._lock_file.fileno(), msvcrt.LK_LOCK, 1)
-            except (ImportError, OSError):
-                # 最后备选：使用文件存在性作为锁（不推荐，但保证跨平台）
-                lock_path = self.lock_path + ".lock"
-                while os.path.exists(lock_path):
-                    time.sleep(0.1)
-                with open(lock_path, "w") as f:
-                    f.write(str(os.getpid()))
-                self._lock_file = open(lock_path, "r")
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        """释放文件锁"""
-        if self._lock_file:
-            if fcntl:
-                fcntl.flock(self._lock_file.fileno(), fcntl.LOCK_UN)
-            else:
-                try:
-                    import msvcrt
-                    msvcrt.locking(self._lock_file.fileno(), msvcrt.LK_UNLCK, 1)
-                except (ImportError, OSError):
-                    # 删除锁文件
-                    lock_path = self.lock_path + ".lock"
-                    if os.path.exists(lock_path):
-                        os.remove(lock_path)
-            self._lock_file.close()
-            self._lock_file = None
-        return False
-
-
-# ==================== 核心功能 ====================
-
-def load_spec(spec_path: str) -> dict:
-    """加载 spec 文件（此处为简化实现，实际可从 JSON/YAML 读取）"""
-    spec = {
-        "name": "agent-memory-hub",
-        "version": "1.0.0",
-        "description": "将文档/代码/对话保存为带时间戳的索引文件",
-        "trigger": ["memory", "remember", "save_memory", "store"],
-        "output_dir": "memory_hub",
-        "index_file": "index.json",
-    }
-    if spec_path and os.path.exists(spec_path):
-        # 简单解析，实际可扩展
-        with open(spec_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        # 尝试提取 output_dir
-        m = re.search(r'output_dir\s*[:=]\s*["\']([^"\']+)["\']', content)
-        if m:
-            spec["output_dir"] = m.group(1)
-        m = re.search(r'index_file\s*[:=]\s*["\']([^"\']+)["\']', content)
-        if m:
-            spec["index_file"] = m.group(1)
-    return spec
-
-
-def match_trigger(text: str, spec: dict) -> bool:
-    """判断文本是否触发记忆保存"""
-    triggers = spec.get("trigger", [])
-    for t in triggers:
-        if t.lower() in text.lower():
-            return True
-    return False
-
-
-def generate_id(content: str, full_hash: bool = False) -> str:
-    """
-    生成基于内容哈希的 ID
-    使用 SHA-256，取前 16 位十六进制（64 位），碰撞概率极低
-    如果 full_hash=True，返回完整 SHA-256 哈希
-    """
-    sha256 = hashlib.sha256(content.encode("utf-8")).hexdigest()
-    if full_hash:
-        return sha256
-    return sha256[:16]
-
-
-def save_memory(
-    content: str,
-    file_type: str,
-    output_dir: str,
-    index_file: str,
-    metadata: Optional[Dict] = None
-) -> str:
-    """
-    保存记忆内容到文件，并更新索引
-    返回生成的记忆 ID
-    
-    参数:
-        content: 记忆内容
-        file_type: 记忆类型 (dialogue/document/code/config)
-        output_dir: 输出目录
-        index_file: 索引文件名
-        metadata: 附加元数据
-    """
-    # 校验类型
-    file_type = MemoryType.validate(file_type)
-    
-    # 创建输出目录
-    os.makedirs(output_dir, exist_ok=True)
-    
-    # 生成时间戳和 ID
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S_%f")[:-3]
-    content_hash = generate_id(content, full_hash=True)
-    short_hash = content_hash[:16]
-    
-    # 生成唯一 ID（使用 UUID4 避免碰撞）
-    memory_id = f"{file_type}_{short_hash}_{uuid.uuid4().hex[:8]}"
-    
-    # 根据类型选择文件扩展名
-    ext = MemoryType.DEFAULT_EXTENSION[file_type]
-    filename = f"{memory_id}{ext}"
-    filepath = os.path.join(output_dir, filename)
-    
-    # 根据类型格式化内容
-    if file_type == MemoryType.DIALOGUE:
-        # 对话保存为 JSON 格式
-        dialogue_data = {
-            "type": "dialogue",
-            "timestamp": timestamp,
-            "content": content,
-            "metadata": metadata or {}
-        }
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(dialogue_data, f, ensure_ascii=False, indent=2)
-    elif file_type == MemoryType.CODE:
-        # 代码保存为原始文件
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(content)
-    elif file_type == MemoryType.CONFIG:
-        # 配置保存为 JSON 格式
+def classify_file(filepath: Path) -> str:
+    """根据文件扩展名和内容分类资产类型"""
+    ext = filepath.suffix.lower()
+    if ext in {".py", ".js", ".java", ".cpp", ".c", ".h"}:
+        return "code"
+    elif ext in {".txt", ".log"}:
+        # 检查是否为对话记录（包含对话标记）
         try:
-            # 尝试解析为 JSON
-            config_data = json.loads(content)
-        except json.JSONDecodeError:
-            # 如果不是 JSON，保存原始内容
-            config_data = {"content": content}
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(config_data, f, ensure_ascii=False, indent=2)
-    else:  # DOCUMENT
-        # 文档保存为 Markdown
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(content)
-    
-    # 更新索引文件（使用文件锁保证原子性）
-    index_path = os.path.join(output_dir, index_file)
-    lock_path = index_path + ".lock"
-    
-    with FileLock(lock_path):
-        # 读取现有索引
-        index_data = []
-        if os.path.exists(index_path):
-            try:
-                with open(index_path, "r", encoding="utf-8") as f:
-                    index_data = json.load(f)
-            except (json.JSONDecodeError, IOError):
-                # 索引文件损坏时，备份并重新开始
-                backup_path = index_path + f".bak_{timestamp}"
-                try:
-                    os.rename(index_path, backup_path)
-                except OSError:
-                    pass
-                index_data = []
-        
-        # 添加新条目
-        entry = {
-            "id": memory_id,
-            "type": file_type,
-            "timestamp": timestamp,
-            "file": filename,
-            "path": filepath,
-            "content_hash": content_hash,  # 保存完整哈希用于去重校验
-            "metadata": metadata or {},
+            content = filepath.read_text(encoding="utf-8", errors="ignore")[:2000]
+            if any(marker in content for marker in ["用户:", "User:", "AI:", "Assistant:", "对话"]):
+                return "dialogue"
+        except Exception:
+            pass
+        return "document"
+    elif ext in {".md", ".json", ".yaml", ".yml", ".csv"}:
+        return "document"
+    else:
+        return "document"
+
+
+def extract_dialogue(content: str) -> dict:
+    """从对话文本中提取结构化信息"""
+    lines = content.split("\n")
+    messages = []
+    current_role = None
+    current_text = []
+
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+
+        # 识别角色标记
+        role_markers = {
+            "用户": "user", "User": "user", "用户:": "user",
+            "AI": "assistant", "Assistant": "assistant", "AI:": "assistant",
+            "助手": "assistant", "系统": "system"
         }
-        index_data.append(entry)
-        
-        # 写入索引
-        with open(index_path, "w", encoding="utf-8") as f:
-            json.dump(index_data, f, ensure_ascii=False, indent=2)
-    
-    return memory_id
 
+        matched = False
+        for marker, role in role_markers.items():
+            if line.startswith(marker) and ":" in line[:20]:
+                # 保存之前的消息
+                if current_role and current_text:
+                    messages.append({
+                        "role": current_role,
+                        "content": "\n".join(current_text).strip()
+                    })
+                current_role = role
+                current_text = [line.split(":", 1)[1].strip()]
+                matched = True
+                break
 
-def process_file(file_path: str, output_dir: str, index_file: str) -> str:
-    """处理单个文件，返回生成的记忆 ID"""
-    file_path = os.path.abspath(file_path)
-    if not os.path.exists(file_path):
-        raise FileNotFoundError(f"文件不存在: {file_path}")
-    
-    # 根据扩展名判断类型
-    file_type = MemoryType.detect_from_extension(file_path)
-    
-    # 读取文件内容
-    with open(file_path, "r", encoding="utf-8") as f:
-        content = f.read()
-    
-    # 附加文件元数据
-    metadata = {
-        "source_file": file_path,
-        "file_size": os.path.getsize(file_path),
+        if not matched:
+            if current_role:
+                current_text.append(line)
+
+    # 保存最后一条消息
+    if current_role and current_text:
+        messages.append({
+            "role": current_role,
+            "content": "\n".join(current_text).strip()
+        })
+
+    # 提取主题（取前50个字符）
+    topic = ""
+    for msg in messages[:3]:
+        if msg["role"] in {"user", "assistant"}:
+            topic = msg["content"][:50]
+            break
+
+    return {
+        "type": "dialogue",
+        "topic": topic,
+        "message_count": len(messages),
+        "participants": list(set(m["role"] for m in messages)),
+        "messages": messages[:10]  # 最多保存10条
     }
-    
-    return save_memory(content, file_type, output_dir, index_file, metadata)
 
 
-def selftest() -> int:
-    """自检函数：验证核心功能"""
-    print("=" * 60)
-    print("agent-memory-hub 自检开始")
-    print("=" * 60)
-    
+def extract_document(content: str, filepath: Path) -> dict:
+    """从文档中提取关键信息"""
+    lines = content.split("\n")
+    title = filepath.stem
+    keywords = []
+
+    # 提取标题
+    for line in lines[:20]:
+        line = line.strip()
+        if line.startswith("#"):
+            title = line.lstrip("#").strip()
+            break
+
+    # 提取关键词（简单实现：高频词）
+    word_count = {}
+    for line in lines:
+        for word in line.split():
+            word = word.strip(".,;:!?()[]{}'\"")
+            if len(word) > 2 and not word.isdigit():
+                word_count[word] = word_count.get(word, 0) + 1
+
+    keywords = sorted(word_count.items(), key=lambda x: x[1], reverse=True)[:10]
+    keywords = [w for w, _ in keywords]
+
+    return {
+        "type": "document",
+        "title": title,
+        "keywords": keywords,
+        "line_count": len(lines),
+        "char_count": len(content),
+        "file_type": filepath.suffix
+    }
+
+
+def extract_code(content: str, filepath: Path) -> dict:
+    """从代码文件中提取结构信息"""
+    lines = content.split("\n")
+    functions = []
+    classes = []
+    imports = []
+
+    for i, line in enumerate(lines):
+        line_stripped = line.strip()
+
+        # 提取导入
+        if line_stripped.startswith(("import ", "from ")):
+            imports.append(line_stripped)
+
+        # 提取函数定义
+        if line_stripped.startswith(("def ", "async def ")):
+            func_name = line_stripped.split("(")[0].replace("def ", "").replace("async ", "").strip()
+            functions.append({
+                "name": func_name,
+                "line": i + 1
+            })
+
+        # 提取类定义
+        if line_stripped.startswith("class "):
+            class_name = line_stripped.split("(")[0].replace("class ", "").strip()
+            classes.append({
+                "name": class_name,
+                "line": i + 1
+            })
+
+    return {
+        "type": "code",
+        "language": filepath.suffix.lstrip("."),
+        "functions": functions[:20],
+        "classes": classes[:10],
+        "imports": imports[:20],
+        "total_lines": len(lines)
+    }
+
+
+def extract_decision(content: str) -> dict:
+    """从内容中提取决策信息"""
+    lines = content.split("\n")
+    decisions = []
+    current_decision = None
+
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+
+        # 识别决策标记
+        if any(marker in line for marker in ["决策:", "决定:", "结论:", "方案:"]):
+            if current_decision:
+                decisions.append(current_decision)
+            current_decision = {
+                "title": line.split(":", 1)[1].strip() if ":" in line else line,
+                "details": []
+            }
+        elif current_decision and line.startswith("-"):
+            current_decision["details"].append(line.lstrip("-").strip())
+
+    if current_decision:
+        decisions.append(current_decision)
+
+    if not decisions:
+        # 如果没有明确决策标记，提取关键段落
+        decisions = [{
+            "title": "未标记决策",
+            "details": [line for line in lines if len(line) > 20][:5]
+        }]
+
+    return {
+        "type": "decision",
+        "decisions": decisions[:10]
+    }
+
+
+def process_file(filepath: Path, output_dir: Path) -> dict:
+    """处理单个文件，生成资产条目"""
     try:
-        # 创建临时目录
-        with tempfile.TemporaryDirectory() as tmpdir:
-            # 1. 测试文件创建
-            print("\n[1/5] 创建测试文件...")
-            test_doc = os.path.join(tmpdir, "test_doc.md")
-            with open(test_doc, "w", encoding="utf-8") as f:
-                f.write("# 测试文档\n这是用于自检的文档内容。")
-            
-            test_code = os.path.join(tmpdir, "test_code.py")
-            with open(test_code, "w", encoding="utf-8") as f:
-                f.write("def hello():\n    print('hello')\n")
-            
-            test_dialogue = os.path.join(tmpdir, "test_dialogue.txt")
-            with open(test_dialogue, "w", encoding="utf-8") as f:
-                f.write("用户: 你好\n助手: 你好，有什么可以帮助？")
-            
-            test_config = os.path.join(tmpdir, "test_config.json")
-            with open(test_config, "w", encoding="utf-8") as f:
-                f.write('{"key": "value", "number": 42}')
-            
-            print("  测试文件创建完成")
-            
-            # 2. 测试类型检测
-            print("\n[2/5] 测试类型检测...")
-            assert MemoryType.detect_from_extension(test_doc) == MemoryType.DOCUMENT, "文档类型检测失败"
-            assert MemoryType.detect_from_extension(test_code) == MemoryType.CODE, "代码类型检测失败"
-            assert MemoryType.detect_from_extension(test_dialogue) == MemoryType.DIALOGUE, "对话类型检测失败"
-            assert MemoryType.detect_from_extension(test_config) == MemoryType.CONFIG, "配置类型检测失败"
-            print("  类型检测通过")
-            
-            # 3. 测试类型校验
-            print("\n[3/5] 测试类型校验...")
-            try:
-                MemoryType.validate("invalid_type")
-                print("  错误：应该拒绝未知类型")
-                return 1
-            except ValueError as e:
-                print(f"  正确拒绝未知类型: {e}")
-            
-            # 4. 测试核心保存功能
-            print("\n[4/5] 测试核心保存功能...")
-            output_dir = os.path.join(tmpdir, "memory_hub")
-            index_file = "index.json"
-            
-            # 处理所有文件
-            test_files = [test_doc, test_code, test_dialogue, test_config]
-            memory_ids = []
-            for f in test_files:
-                print(f"  处理: {os.path.basename(f)}")
-                memory_id = process_file(f, output_dir, index_file)
-                memory_ids.append(memory_id)
-                print(f"    生成 ID: {memory_id}")
-            
-            # 验证索引文件
-            index_path = os.path.join(output_dir, index_file)
-            assert os.path.exists(index_path), "索引文件未生成"
-            
-            with open(index_path, "r", encoding="utf-8") as f:
-                index_data = json.load(f)
-            
-            assert len(index_data) == 4, f"索引条目数应为 4，实际 {len(index_data)}"
-            
-            # 验证每个条目
-            for entry in index_data:
-                required_fields = ["id", "type", "timestamp", "file", "path", "content_hash"]
-                for field in required_fields:
-                    assert field in entry, f"索引条目缺少字段: {field}"
-                
-                # 验证文件存在
-                assert os.path.exists(entry["path"]), f"索引指向的文件不存在: {entry['path']}"
-                
-                # 验证类型
-                assert entry["type"] in MemoryType.ALL_TYPES, f"无效的类型: {entry['type']}"
-                
-                # 验证文件扩展名
-                ext = os.path.splitext(entry["file"])[1]
-                expected_ext = MemoryType.DEFAULT_EXTENSION[entry["type"]]
-                assert ext == expected_ext, f"文件扩展名不匹配: {ext} != {expected_ext}"
-            
-            print("  核心保存功能测试通过")
-            
-            # 5. 测试并发安全
-            print("\n[5/5] 测试并发安全...")
-            import threading
-            
-            def concurrent_save(idx):
-                content = f"并发测试内容 {idx}"
-                try:
-                    save_memory(content, MemoryType.DOCUMENT, output_dir, index_file)
-                except Exception as e:
-                    print(f"  并发保存失败: {e}")
-                    raise
-            
-            threads = []
-            for i in range(10):
-                t = threading.Thread(target=concurrent_save, args=(i,))
-                threads.append(t)
-                t.start()
-            
-            for t in threads:
-                t.join()
-            
-            # 验证并发后的索引完整性
-            with open(index_path, "r", encoding="utf-8") as f:
-                final_index = json.load(f)
-            
-            assert len(final_index) == 14, f"并发后索引条目数应为 14，实际 {len(final_index)}"
-            
-            # 验证没有重复 ID
-            ids = [entry["id"] for entry in final_index]
-            assert len(ids) == len(set(ids)), "存在重复的 ID"
-            
-            print("  并发安全测试通过")
-            
-            # 所有测试通过
-            print("\n" + "=" * 60)
-            print("自检通过！所有测试均成功。")
-            print("=" * 60)
-            return 0
-            
+        content = filepath.read_text(encoding="utf-8", errors="ignore")
     except Exception as e:
-        print(f"\n自检失败: {e}")
-        import traceback
-        traceback.print_exc()
-        return 1
+        return {"error": f"读取文件失败: {e}"}
+
+    # 分类并提取
+    asset_type = classify_file(filepath)
+    if asset_type == "dialogue":
+        data = extract_dialogue(content)
+    elif asset_type == "code":
+        data = extract_code(content, filepath)
+    elif asset_type == "decision":
+        data = extract_decision(content)
+    else:
+        data = extract_document(content, filepath)
+
+    # 生成唯一ID
+    file_hash = hashlib.md5(str(filepath).encode()).hexdigest()[:8]
+    timestamp = datetime.datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+
+    # 构建资产条目
+    asset = {
+        "id": f"{asset_type}_{file_hash}_{timestamp}",
+        "source_file": str(filepath),
+        "processed_at": datetime.datetime.now(timezone.utc).isoformat(),
+        "asset_type": asset_type,
+        "asset_type_cn": ASSET_TYPES[asset_type],
+        "data": data
+    }
+
+    # 保存资产文件
+    asset_file = output_dir / f"{asset['id']}.json"
+    asset_file.write_text(json.dumps(asset, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    return asset
+
+
+def generate_index(assets: list, output_dir: Path) -> Path:
+    """生成团队共享索引文件"""
+    index_data = {
+        "generated_at": datetime.datetime.now(timezone.utc).isoformat(),
+        "total_assets": len(assets),
+        "asset_summary": {},
+        "assets": []
+    }
+
+    # 统计各类资产数量
+    for asset in assets:
+        asset_type = asset["asset_type"]
+        index_data["asset_summary"][asset_type] = index_data["asset_summary"].get(asset_type, 0) + 1
+        index_data["assets"].append({
+            "id": asset["id"],
+            "type": asset["asset_type"],
+            "type_cn": asset["asset_type_cn"],
+            "source": asset["source_file"],
+            "processed_at": asset["processed_at"]
+        })
+
+    # 生成索引文件
+    index_file = output_dir / "index.json"
+    index_file.write_text(json.dumps(index_data, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    # 同时生成Markdown格式索引
+    md_lines = [
+        "# 团队记忆资产索引",
+        "",
+        f"生成时间: {index_data['generated_at']}",
+        f"资产总数: {index_data['total_assets']}",
+        "",
+        "## 资产统计",
+        ""
+    ]
+
+    for asset_type, count in index_data["asset_summary"].items():
+        md_lines.append(f"- {ASSET_TYPES.get(asset_type, asset_type)}: {count}")
+
+    md_lines.extend(["", "## 资产列表", ""])
+
+    for asset in index_data["assets"]:
+        md_lines.append(f"- [{asset['type_cn']}] {asset['source']} (ID: {asset['id']})")
+
+    md_file = output_dir / "index.md"
+    md_file.write_text("\n".join(md_lines), encoding="utf-8")
+
+    return index_file
+
+
+def process_input(input_path: Path, output_dir: Path, asset_type: str = None) -> list:
+    """处理输入路径（文件或目录）"""
+    assets = []
+
+    # 检查输入路径
+    if not input_path.exists():
+        raise FileNotFoundError(f"输入路径不存在: {input_path}")
+
+    # 收集待处理文件
+    files = []
+    if input_path.is_file():
+        if input_path.suffix.lower() in SUPPORTED_EXTENSIONS:
+            files.append(input_path)
+        else:
+            raise ValueError(f"不支持的文件类型: {input_path.suffix}")
+    elif input_path.is_dir():
+        for ext in SUPPORTED_EXTENSIONS:
+            files.extend(input_path.glob(f"*{ext}"))
+        # 限制数量
+        if len(files) > 20:
+            print(f"警告: 检测到 {len(files)} 个文件，仅处理前20个")
+            files = files[:20]
+
+    if not files:
+        raise ValueError(f"在 {input_path} 中未找到支持的文件")
+
+    # 创建输出目录
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    # 处理每个文件
+    for filepath in files:
+        print(f"处理: {filepath}")
+        try:
+            asset = process_file(filepath, output_dir)
+            if "error" in asset:
+                print(f"  错误: {asset['error']}")
+            else:
+                assets.append(asset)
+                print(f"  已生成: {asset['id']}")
+        except Exception as e:
+            print(f"  处理失败: {e}")
+
+    return assets
+
+
+def selftest():
+    """自检函数 - 验证核心功能"""
+    print("运行自检...")
+
+    # 创建临时测试文件
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+
+        # 测试1: 对话文件处理
+        dialogue_file = tmp / "test_dialogue.txt"
+        dialogue_file.write_text(
+            "用户: 你好，我想了解项目进度\n"
+            "AI: 项目已完成80%，预计下周完成\n"
+            "用户: 好的，谢谢\n"
+            "AI: 不客气，有其他问题随时问\n",
+            encoding="utf-8"
+        )
+
+        # 测试2: 代码文件处理
+        code_file = tmp / "test_code.py"
+        code_file.write_text(
+            "import os\n"
+            "import sys\n\n"
+            "def main():\n"
+            "    print('Hello')\n\n"
+            "class TestClass:\n"
+            "    pass\n",
+            encoding="utf-8"
+        )
+
+        # 测试3: 文档文件处理
+        doc_file = tmp / "test_doc.md"
+        doc_file.write_text(
+            "# 项目文档\n\n"
+            "这是一个测试文档，包含一些关键词：项目、测试、文档\n",
+            encoding="utf-8"
+        )
+
+        # 测试处理
+        output_dir = tmp / "output"
+        assets = process_input(tmp, output_dir)
+
+        # 验证结果
+        assert len(assets) == 3, f"预期3个资产，实际{len(assets)}"
+        assert output_dir.exists(), "输出目录未创建"
+
+        # 验证索引生成
+        index_file = output_dir / "index.json"
+        assert index_file.exists(), "索引文件未生成"
+
+        # 验证资产文件
+        asset_files = list(output_dir.glob("*.json"))
+        assert len(asset_files) == 4, f"预期4个JSON文件（3资产+1索引），实际{len(asset_files)}"
+
+        # 验证分类
+        types = [a["asset_type"] for a in assets]
+        assert "dialogue" in types, "对话分类失败"
+        assert "code" in types, "代码分类失败"
+        assert "document" in types, "文档分类失败"
+
+        print(f"自检通过! 成功处理 {len(assets)} 个文件，生成 {len(asset_files)} 个JSON文件")
+        return True
 
 
 def main():
-    parser = argparse.ArgumentParser(description="agent-memory-hub - 记忆保存工具")
+    parser = argparse.ArgumentParser(
+        description="记忆资产团队索引工具 - 将对话、文档、代码整理为四类记忆资产",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  python run.py --input ./docs --output ./memory_assets
+  python run.py --input ./conversation.txt --output ./memory_assets
+  python run.py --input ./project --output ./assets --type code
+  python run.py --selftest
+        """
+    )
+
+    parser.add_argument("--input", "-i", type=str, help="输入文件或目录路径")
+    parser.add_argument("--output", "-o", type=str, default="./memory_assets", help="输出目录（默认: ./memory_assets）")
+    parser.add_argument("--type", "-t", type=str, choices=list(ASSET_TYPES.keys()), help="指定资产类型（可选）")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--spec", type=str, default="", help="spec 文件路径")
-    parser.add_argument("--input", type=str, nargs="+", help="输入文件路径")
-    parser.add_argument("--output-dir", type=str, default="memory_hub", help="输出目录")
-    parser.add_argument("--index-file", type=str, default="index.json", help="索引文件名")
-    parser.add_argument("--type", type=str, choices=list(MemoryType.ALL_TYPES), 
-                       help="记忆类型（用于直接输入内容时）")
-    parser.add_argument("--content", type=str, help="直接输入内容（与 --type 配合使用）")
 
     args = parser.parse_args()
 
+    # 自检模式
     if args.selftest:
-        sys.exit(selftest())
+        try:
+            selftest()
+            sys.exit(0)
+        except Exception as e:
+            print(f"自检失败: {e}")
+            sys.exit(1)
 
-    # 加载 spec
-    spec = load_spec(args.spec)
-    output_dir = args.output_dir or spec.get("output_dir", "memory_hub")
-    index_file = args.index_file or spec.get("index_file", "index.json")
+    # 检查必要参数
+    if not args.input:
+        parser.error("必须提供 --input 参数")
 
-    # 处理直接
+    # 处理输入
+    try:
+        input_path = Path(args.input)
+        output_dir = Path(args.output)
+
+        # 检查依赖
+        if not HAS_OPENPYXL and not HAS_REQUESTS:
+            print("提示: 未安装可选依赖，使用基础功能")
+
+        # 处理文件
+        assets = process_input(input_path, output_dir, args.type)
+
+        if not assets:
+            print("未生成任何资产，请检查输入文件")
+            sys.exit(1)
+
+        # 生成索引
+        index_file = generate_index(assets, output_dir)
+        print(f"\n处理完成!")
+        print(f"  资产数量: {len(assets)}")
+        print(f"  输出目录: {output_dir}")
+        print(f"  索引文件: {index_file}")
+
+        # 打印统计
+        summary = {}
+        for asset in assets:
+            atype = asset["asset_type"]
+            summary[atype] = summary.get(atype, 0) + 1
+        print(f"  资产统计: {summary}")
+
+        sys.exit(0)
+
+    except FileNotFoundError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        sys.exit(1)
+    except ValueError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"未预期错误: {e}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
