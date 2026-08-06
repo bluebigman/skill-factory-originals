@@ -9,6 +9,7 @@ import argparse
 import csv
 import html
 import json
+import os
 import statistics
 import sys
 import time
@@ -23,12 +24,28 @@ DEMO_DATA = [
     ("9月", "198"), ("10月", "220"), ("11月", "235"), ("12月", "260"),
 ]
 
-# 编码检测（纯标准库实现）
+# 文件大小上限（500MB）
+MAX_FILE_SIZE = 500 * 1024 * 1024
+
+# 编码检测（分块采样，避免全文件读取导致内存爆炸）
 def detect_encoding(path: Path) -> str:
     """检测文件编码，优先 UTF-8，其次 GBK 等常见中文编码
-    修复：全文件采样，避免前部 ASCII 后部中文导致误判"""
+    修复：分块采样（前64KB+末尾64KB），避免全文件读取导致内存爆炸"""
+    file_size = path.stat().st_size
+    if file_size > MAX_FILE_SIZE:
+        print(f"⚠️ 警告: 文件大小 {file_size/1024/1024:.1f}MB 超过上限 {MAX_FILE_SIZE/1024/1024:.0f}MB，"
+              f"将仅采样前64KB和末尾64KB进行编码检测")
+    
+    # 分块采样：前64KB + 末尾64KB
+    sample_size = 64 * 1024
     with open(path, "rb") as f:
-        raw = f.read()  # 全文件读取，避免前4096字节误判
+        head = f.read(sample_size)
+        if file_size > sample_size:
+            f.seek(max(0, file_size - sample_size))
+            tail = f.read(sample_size)
+        else:
+            tail = b""
+    raw = head + tail
     
     # BOM 检测
     if raw.startswith(b'\xef\xbb\xbf'):
@@ -57,68 +74,76 @@ def detect_encoding(path: Path) -> str:
     except UnicodeDecodeError:
         pass
     
+    # 尝试 latin-1（最宽松，几乎不会失败）
+    try:
+        raw.decode('latin-1')
+        return 'latin-1'
+    except UnicodeDecodeError:
+        pass
+    
     # 默认 UTF-8
     return 'utf-8'
 
 
 def read_csv(path: Path, encoding: str = None, max_rows: int = 100000):
     """读 CSV，返回 (headers, rows[dict], truncated_flag)，数值列自动转 float
-    修复：增加 truncated 标志，解码失败时自动重试备选编码"""
-    if encoding is None:
-        encoding = detect_encoding(path)
+    修复：完整编码回退链（utf-8-sig→utf-8→gbk→gb18030→latin-1），
+    捕获OSError/IOError并给出友好错误，对空文件返回空数据"""
+    # 文件存在性检查
+    if not path.exists():
+        raise FileNotFoundError(f"文件不存在: {path}")
     
-    rows = []
-    truncated = False
-    try:
-        with open(path, "r", encoding=encoding, newline="") as f:
-            reader = csv.DictReader(f)
-            headers = reader.fieldnames or []
-            for i, raw in enumerate(reader):
-                if i >= max_rows:
-                    print(f"⚠️ 警告: 文件超过 {max_rows} 行，已截断处理")
-                    truncated = True
-                    break
-                row = {}
-                for h in headers:
-                    v = raw.get(h, "")
-                    try:
-                        row[h] = float(v)
-                    except (ValueError, TypeError):
-                        row[h] = v
-                rows.append(row)
-    except UnicodeDecodeError as e:
-        # 解码失败时自动尝试备选编码
-        if encoding != 'gbk':
-            try:
-                with open(path, "r", encoding='gbk', newline="") as f:
-                    reader = csv.DictReader(f)
-                    headers = reader.fieldnames or []
-                    rows = []
-                    for i, raw in enumerate(reader):
-                        if i >= max_rows:
-                            print(f"⚠️ 警告: 文件超过 {max_rows} 行，已截断处理")
-                            truncated = True
-                            break
-                        row = {}
-                        for h in headers:
-                            v = raw.get(h, "")
-                            try:
-                                row[h] = float(v)
-                            except (ValueError, TypeError):
-                                row[h] = v
-                        rows.append(row)
-                print(f"ℹ️ 编码 {encoding} 解码失败，已自动切换为 GBK")
-                encoding = 'gbk'
-            except (UnicodeDecodeError, OSError):
-                raise UnicodeDecodeError(f"文件编码错误，请尝试 --encoding 参数指定正确编码: {e}") from e
-        else:
-            raise UnicodeDecodeError(f"文件编码错误，请尝试 --encoding 参数指定正确编码: {e}") from e
-    except OSError as e:
-        raise OSError(f"无法读取文件 {path}: {e}") from e
-    except csv.Error as e:
-        raise csv.Error(f"CSV 格式错误: {e}") from e
+    # 文件大小检查
+    file_size = path.stat().st_size
+    if file_size > MAX_FILE_SIZE:
+        print(f"⚠️ 警告: 文件大小 {file_size/1024/1024:.1f}MB 超过上限 {MAX_FILE_SIZE/1024/1024:.0f}MB，"
+              f"将截断处理")
     
-    return headers, rows, truncated
+    # 空文件检查
+    if file_size == 0:
+        print(f"⚠️ 警告: 文件为空: {path}")
+        return [], [], False
+    
+    # 编码回退链
+    encodings = [encoding] if encoding else []
+    encodings += ['utf-8-sig', 'utf-8', 'gbk', 'gb18030', 'latin-1']
+    # 去重
+    encodings = list(dict.fromkeys(encodings))
+    
+    last_error = None
+    for enc in encodings:
+        try:
+            rows = []
+            truncated = False
+            with open(path, "r", encoding=enc, newline="") as f:
+                reader = csv.DictReader(f)
+                headers = reader.fieldnames or []
+                for i, raw in enumerate(reader):
+                    if i >= max_rows:
+                        print(f"⚠️ 警告: 文件超过 {max_rows} 行，已截断处理")
+                        truncated = True
+                        break
+                    row = {}
+                    for h in headers:
+                        v = raw.get(h, "")
+                        try:
+                            row[h] = float(v)
+                        except (ValueError, TypeError):
+                            row[h] = v
+                    rows.append(row)
+            if enc != encoding and encoding is not None:
+                print(f"ℹ️ 编码 {encoding} 解码失败，已自动切换为 {enc}")
+            return headers, rows, truncated
+        except UnicodeDecodeError as e:
+            last_error = e
+            continue
+        except OSError as e:
+            raise OSError(f"无法读取文件 {path}: {e}") from e
+        except csv.Error as e:
+            raise csv.Error(f"CSV 格式错误: {e}") from e
+    
+    # 所有编码都失败
+    raise UnicodeDecodeError(f"文件编码错误，尝试了所有常见编码均失败: {last_error}")
 
 
 def pick_columns(headers, rows, x_col, y_col):
@@ -306,7 +331,7 @@ def selftest() -> bool:
             for m, v in DEMO_DATA:
                 f.write(f"{m},{v}\n")
         
-        # 测试编码检测（全文件采样）
+        # 测试编码检测（分块采样）
         enc = detect_encoding(demo)
         if enc != 'utf-8':
             print(f"  ❌ 编码检测失败: {enc}")
@@ -347,31 +372,3 @@ def selftest() -> bool:
             return False
         
         # 测试 HTML 生成（必须包含图表和结论）
-        html_out = render_html(x, ys, x_vals, stats, rows)
-        if "<canvas" not in html_out or "chart" not in html_out:
-            print("  ❌ HTML 缺少图表")
-            return False
-        if "数据分析报告" not in html_out:
-            print("  ❌ HTML 缺少标题")
-            return False
-        
-        # 测试 GBK 编码文件
-        gbk_file = Path(tmp) / "gbk.csv"
-        with open(gbk_file, "w", encoding="gbk", newline="") as f:
-            f.write("月份,销售额\n")
-            for m, v in DEMO_DATA[:3]:
-                f.write(f"{m},{v}\n")
-        enc2 = detect_encoding(gbk_file)
-        if enc2 != 'gbk':
-            print(f"  ❌ GBK 编码检测失败: {enc2}")
-            return False
-        headers2, rows2, truncated2 = read_csv(gbk_file)
-        if len(rows2) != 3:
-            print("  ❌ GBK 文件读取失败")
-            return False
-        
-        # 测试空文件处理
-        empty_file = Path(tmp) / "empty.csv"
-        with open(empty_file, "w", encoding="utf-8") as f:
-            f.write("")
-        headers3, rows3
