@@ -9,10 +9,13 @@ import argparse
 import json
 import re
 import sys
+import time
 from pathlib import Path
+from datetime import datetime, timezone
 
 try:
     from docx import Document
+    from docx.oxml.ns import qn
 except ImportError:
     Document = None
 
@@ -20,9 +23,9 @@ except ImportError:
 RISK_RULES = {
     "违约": {
         "keywords": ["违约金", "违约责任", "赔偿", "损失"],
-        "high_risk": ["违约金.*%", "赔偿.*全部损失", "承担.*一切责任"],
-        "medium_risk": ["违约金", "赔偿损失"],
-        "low_risk": ["违约责任"],
+        "high_risk": [r"违约金[^。；;]*?%", r"赔偿[^。；;]*?全部损失", r"承担[^。；;]*?一切责任"],
+        "medium_risk": [r"违约金", r"赔偿损失"],
+        "low_risk": [r"违约责任"],
         "suggestions": {
             "high": "违约金比例过高或责任范围过大，建议协商调整至合理范围",
             "medium": "违约责任约定不够明确，建议明确违约金计算方式和赔偿范围",
@@ -31,9 +34,9 @@ RISK_RULES = {
     },
     "付款": {
         "keywords": ["付款", "支付", "价款", "费用", "定金", "预付款"],
-        "high_risk": ["付款.*后.*交货", "先付款.*后.*验收", "一次性.*付款"],
-        "medium_risk": ["付款期限", "付款条件"],
-        "low_risk": ["付款方式"],
+        "high_risk": [r"付款[^。；;]*?后[^。；;]*?交货", r"先付款[^。；;]*?后[^。；;]*?验收", r"一次性[^。；;]*?付款"],
+        "medium_risk": [r"付款期限", r"付款条件"],
+        "low_risk": [r"付款方式"],
         "suggestions": {
             "high": "付款条件对己方不利，建议增加验收合格后再付款的条款",
             "medium": "付款条款不够明确，建议明确付款时间节点和条件",
@@ -42,9 +45,9 @@ RISK_RULES = {
     },
     "保密": {
         "keywords": ["保密", "机密", "商业秘密", "保密义务"],
-        "high_risk": ["保密.*无限期", "保密.*永久"],
-        "medium_risk": ["保密期限", "保密范围"],
-        "low_risk": ["保密协议"],
+        "high_risk": [r"保密[^。；;]*?无限期", r"保密[^。；;]*?永久"],
+        "medium_risk": [r"保密期限", r"保密范围"],
+        "low_risk": [r"保密协议"],
         "suggestions": {
             "high": "保密期限不合理，建议设定合理期限并明确保密信息范围",
             "medium": "保密条款不够完善，建议补充保密期限、范围和违约责任",
@@ -53,9 +56,9 @@ RISK_RULES = {
     },
     "知识产权": {
         "keywords": ["知识产权", "著作权", "专利", "商标", "版权", "归属"],
-        "high_risk": ["知识产权.*归.*甲方", "成果.*归.*甲方"],
-        "medium_risk": ["知识产权归属", "许可使用"],
-        "low_risk": ["知识产权"],
+        "high_risk": [r"知识产权[^。；;]*?归[^。；;]*?甲方", r"成果[^。；;]*?归[^。；;]*?甲方"],
+        "medium_risk": [r"知识产权归属", r"许可使用"],
+        "low_risk": [r"知识产权"],
         "suggestions": {
             "high": "知识产权归属约定对己方不利，建议协商共同拥有或明确使用许可",
             "medium": "知识产权条款不够明确，建议明确成果归属和使用权限",
@@ -82,10 +85,57 @@ def extract_text_from_file(filepath):
         if Document is None:
             raise ImportError("处理 .docx 文件需要安装 python-docx，请执行: pip install python-docx")
         doc = Document(path)
-        return '\n'.join([para.text for para in doc.paragraphs])
+        return _extract_all_docx_text(doc)
     
     else:
         raise ValueError(f"不支持的文件格式: {suffix}，仅支持 .txt、.md、.docx")
+
+def _extract_all_docx_text(doc):
+    """递归提取docx中所有文本，包括表格、页眉页脚、文本框"""
+    texts = []
+    
+    # 提取正文段落
+    for para in doc.paragraphs:
+        if para.text.strip():
+            texts.append(para.text)
+    
+    # 提取表格内容
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for para in cell.paragraphs:
+                    if para.text.strip():
+                        texts.append(para.text)
+                # 递归处理嵌套表格
+                for nested_table in cell.tables:
+                    for nested_row in nested_table.rows:
+                        for nested_cell in nested_row.cells:
+                            for para in nested_cell.paragraphs:
+                                if para.text.strip():
+                                    texts.append(para.text)
+    
+    # 提取页眉页脚
+    for section in doc.sections:
+        for header in [section.header, section.footer]:
+            if header:
+                for para in header.paragraphs:
+                    if para.text.strip():
+                        texts.append(para.text)
+                for table in header.tables:
+                    for row in table.rows:
+                        for cell in row.cells:
+                            for para in cell.paragraphs:
+                                if para.text.strip():
+                                    texts.append(para.text)
+    
+    # 提取文本框内容（通过XML遍历）
+    for element in doc.element.body.iter():
+        if element.tag == qn('w:t'):
+            text = element.text or ''
+            if text.strip():
+                texts.append(text)
+    
+    return '\n'.join(texts)
 
 def analyze_contract(text):
     """分析合同文本，返回风险清单"""
@@ -197,6 +247,35 @@ def selftest():
     # 验证输出格式
     output = format_output(risks)
     assert '风险等级' in output, "输出格式错误"
+    
+    # 验证正则边界（非贪婪匹配）
+    test_boundary = "违约金5%。其他条款违约金10%"
+    matches = re.findall(r"违约金[^。；;]*?%", test_boundary)
+    assert len(matches) == 2, f"边界匹配失败，预期2个匹配，实际{len(matches)}个"
+    
+    # 验证docx提取（如果可用）
+    if Document is not None:
+        from docx import Document as DocxDocument
+        from io import BytesIO
+        import tempfile
+        
+        # 创建测试docx
+        doc = DocxDocument()
+        doc.add_paragraph("测试段落")
+        table = doc.add_table(rows=1, cols=1)
+        table.cell(0, 0).text = "表格内容"
+        
+        # 保存到临时文件
+        with tempfile.NamedTemporaryFile(suffix='.docx', delete=False) as tmp:
+            doc.save(tmp.name)
+            tmp_path = tmp.name
+        
+        try:
+            extracted = extract_text_from_file(tmp_path)
+            assert "测试段落" in extracted, "段落提取失败"
+            assert "表格内容" in extracted, "表格提取失败"
+        finally:
+            Path(tmp_path).unlink()
     
     print("✓ 自检通过：所有功能正常")
     return True
