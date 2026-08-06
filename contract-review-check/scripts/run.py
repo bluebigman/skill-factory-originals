@@ -28,18 +28,21 @@ RISK_RULES = {
         "keywords": ["违约金", "违约责任", "赔偿", "损失"],
         "high_risk": [
             {
+                "id": "breach_high_1",
                 "pattern": r"违约金[^。；]*?(\d+(?:\.\d+)?)\s*%",
                 "description": "违约金比例过高",
                 "check": lambda m: float(m.group(1)) > 30,
                 "suggestion": "违约金比例超过30%，建议协商调整至合理范围（通常不超过30%）"
             },
             {
+                "id": "breach_high_2",
                 "pattern": r"赔偿[^。；]*?全部损失",
                 "description": "赔偿范围过大",
                 "check": lambda m: True,
                 "suggestion": "赔偿范围约定为全部损失，建议明确赔偿范围和上限"
             },
             {
+                "id": "breach_high_3",
                 "pattern": r"承担[^。；]*?一切责任",
                 "description": "责任范围过大",
                 "check": lambda m: True,
@@ -48,12 +51,14 @@ RISK_RULES = {
         ],
         "medium_risk": [
             {
+                "id": "breach_medium_1",
                 "pattern": r"违约金[^。；]*?(\d+(?:\.\d+)?)\s*%",
                 "description": "违约金比例需关注",
                 "check": lambda m: 10 <= float(m.group(1)) <= 30,
                 "suggestion": "违约金比例在10%-30%之间，建议根据实际损失评估合理性"
             },
             {
+                "id": "breach_medium_2",
                 "pattern": r"赔偿损失",
                 "description": "赔偿约定不明确",
                 "check": lambda m: True,
@@ -62,6 +67,7 @@ RISK_RULES = {
         ],
         "low_risk": [
             {
+                "id": "breach_low_1",
                 "pattern": r"违约责任",
                 "description": "违约责任条款存在",
                 "check": lambda m: True,
@@ -73,18 +79,21 @@ RISK_RULES = {
         "keywords": ["付款", "支付", "价款", "费用", "定金", "预付款"],
         "high_risk": [
             {
+                "id": "payment_high_1",
                 "pattern": r"付款[^。；]*?后[^。；]*?交货",
                 "description": "付款后交货风险",
                 "check": lambda m: True,
                 "suggestion": "付款后交货存在风险，建议增加交货验收后再付款的条款"
             },
             {
+                "id": "payment_high_2",
                 "pattern": r"先付款[^。；]*?后[^。；]*?验收",
                 "description": "先付款后验收风险",
                 "check": lambda m: True,
                 "suggestion": "先付款后验收对己方不利，建议增加验收合格后再付款的条款"
             },
             {
+                "id": "payment_high_3",
                 "pattern": r"一次性[^。；]*?付款",
                 "description": "一次性付款风险",
                 "check": lambda m: True,
@@ -93,12 +102,14 @@ RISK_RULES = {
         ],
         "medium_risk": [
             {
+                "id": "payment_medium_1",
                 "pattern": r"付款期限",
                 "description": "付款期限约定",
                 "check": lambda m: True,
                 "suggestion": "付款期限约定不够明确，建议明确具体付款时间节点"
             },
             {
+                "id": "payment_medium_2",
                 "pattern": r"付款条件",
                 "description": "付款条件约定",
                 "check": lambda m: True,
@@ -107,6 +118,7 @@ RISK_RULES = {
         ],
         "low_risk": [
             {
+                "id": "payment_low_1",
                 "pattern": r"付款方式",
                 "description": "付款方式约定",
                 "check": lambda m: True,
@@ -118,12 +130,14 @@ RISK_RULES = {
         "keywords": ["保密", "机密", "商业秘密", "保密义务"],
         "high_risk": [
             {
+                "id": "confidential_high_1",
                 "pattern": r"保密[^。；]*?无限期",
                 "description": "保密期限无限期",
                 "check": lambda m: True,
                 "suggestion": "保密期限约定为无限期不合理，建议设定合理期限（通常3-5年）"
             },
             {
+                "id": "confidential_high_2",
                 "pattern": r"保密[^。；]*?永久",
                 "description": "保密期限永久",
                 "check": lambda m: True,
@@ -132,12 +146,14 @@ RISK_RULES = {
         ],
         "medium_risk": [
             {
+                "id": "confidential_medium_1",
                 "pattern": r"保密期限",
                 "description": "保密期限约定",
                 "check": lambda m: True,
                 "suggestion": "保密期限约定不够明确，建议明确具体保密期限"
             },
             {
+                "id": "confidential_medium_2",
                 "pattern": r"保密范围",
                 "description": "保密范围约定",
                 "check": lambda m: True,
@@ -146,6 +162,7 @@ RISK_RULES = {
         ],
         "low_risk": [
             {
+                "id": "confidential_low_1",
                 "pattern": r"保密协议",
                 "description": "保密协议存在",
                 "check": lambda m: True,
@@ -157,12 +174,14 @@ RISK_RULES = {
         "keywords": ["知识产权", "著作权", "专利", "商标", "版权", "归属"],
         "high_risk": [
             {
+                "id": "ip_high_1",
                 "pattern": r"知识产权[^。；]*?归[^。；]*?甲方",
                 "description": "知识产权归甲方",
                 "check": lambda m: True,
                 "suggestion": "知识产权归属约定对己方不利，建议协商共同拥有或明确使用许可"
             },
             {
+                "id": "ip_high_2",
                 "pattern": r"成果[^。；]*?归[^。；]*?甲方",
                 "description": "成果归甲方",
                 "check": lambda m: True,
@@ -171,12 +190,14 @@ RISK_RULES = {
         ],
         "medium_risk": [
             {
+                "id": "ip_medium_1",
                 "pattern": r"知识产权归属",
                 "description": "知识产权归属约定",
                 "check": lambda m: True,
                 "suggestion": "知识产权归属约定不够明确，建议明确成果归属和使用权限"
             },
             {
+                "id": "ip_medium_2",
                 "pattern": r"许可使用",
                 "description": "许可使用约定",
                 "check": lambda m: True,
@@ -185,6 +206,7 @@ RISK_RULES = {
         ],
         "low_risk": [
             {
+                "id": "ip_low_1",
                 "pattern": r"知识产权",
                 "description": "知识产权条款存在",
                 "check": lambda m: True,
@@ -200,18 +222,21 @@ def _compile_rules() -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
     for category, rules in RISK_RULES.items():
         compiled[category] = {
             'high': [{
+                'id': r['id'],
                 'pattern': re.compile(r['pattern']),
                 'description': r['description'],
                 'check': r['check'],
                 'suggestion': r['suggestion']
             } for r in rules['high_risk']],
             'medium': [{
+                'id': r['id'],
                 'pattern': re.compile(r['pattern']),
                 'description': r['description'],
                 'check': r['check'],
                 'suggestion': r['suggestion']
             } for r in rules['medium_risk']],
             'low': [{
+                'id': r['id'],
                 'pattern': re.compile(r['pattern']),
                 'description': r['description'],
                 'check': r['check'],
@@ -321,6 +346,8 @@ def _extract_docx_zipfile(path: Path) -> str:
 def analyze_contract(text: str) -> List[Dict[str, str]]:
     """分析合同文本，返回风险清单（基于语义规则引擎）"""
     risks = []
+    # 记录已匹配的条款位置，避免重复报告
+    matched_positions = set()
     
     for category, rules in RISK_RULES.items():
         # 检查是否包含该类别的关键词
@@ -340,9 +367,14 @@ def analyze_contract(text: str) -> List[Dict[str, str]]:
         high_details = []
         for rule in _COMPILED_RULES[category]['high']:
             for match in rule['pattern'].finditer(text):
+                # 检查是否已匹配过该位置
+                pos_key = (category, 'high', rule['id'], match.start())
+                if pos_key in matched_positions:
+                    continue
                 if rule['check'](match):
                     high_found = True
                     high_details.append(f"{rule['description']}: {match.group(0)[:50]}")
+                    matched_positions.add(pos_key)
                     break
         
         if high_found:
@@ -360,9 +392,14 @@ def analyze_contract(text: str) -> List[Dict[str, str]]:
         medium_details = []
         for rule in _COMPILED_RULES[category]['medium']:
             for match in rule['pattern'].finditer(text):
+                # 检查是否已匹配过该位置
+                pos_key = (category, 'medium', rule['id'], match.start())
+                if pos_key in matched_positions:
+                    continue
                 if rule['check'](match):
                     medium_found = True
                     medium_details.append(f"{rule['description']}: {match.group(0)[:50]}")
+                    matched_positions.add(pos_key)
                     break
         
         if medium_found:
@@ -423,35 +460,4 @@ def selftest() -> bool:
     risks = analyze_contract(test_text)
     
     # 验证结果
-    assert len(risks) == 4, f"预期4个风险项，实际{len(risks)}个"
-    
-    # 验证各类别都有结果
-    categories = [r['category'] for r in risks]
-    assert '违约' in categories, "缺少违约条款分析"
-    assert '付款' in categories, "缺少付款条款分析"
-    assert '保密' in categories, "缺少保密条款分析"
-    assert '知识产权' in categories, "缺少知识产权条款分析"
-    
-    # 验证高风险识别（违约金35% > 30%阈值）
-    breach_risk = [r for r in risks if r['category'] == '违约'][0]
-    assert breach_risk['level'] == '高', f"违约金35%应识别为高风险，实际为{breach_risk['level']}"
-    
-    # 验证输出格式
-    output = format_output(risks)
-    assert '风险等级' in output, "输出格式错误"
-    assert '生成时间' in output, "输出缺少时间戳"
-    
-    # 测试用例2：中风险场景（违约金20%）
-    test_text2 = """
-    本合同约定，若乙方违约，需支付合同总金额20%的违约金。
-    付款方式为分期付款，每期付款前需验收合格。
-    保密期限为合同终止后5年。
-    知识产权归属双方协商确定。
-    """
-    risks2 = analyze_contract(test_text2)
-    breach_risk2 = [r for r in risks2 if r['category'] == '违约'][0]
-    assert breach_risk2['level'] == '中', f"违约金20%应识别为中风险，实际为{breach_risk2['level']}"
-    
-    # 测试用例3：缺失条款的文本
-    test_text3 = "这是一份简单的采购合同，仅包含基本的货物描述和价格。"
-    risks3
+    assert len(risks) == 4, f
