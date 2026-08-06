@@ -11,7 +11,7 @@ import json
 import os
 import sys
 import re
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 
 
@@ -44,7 +44,7 @@ class CompetitorAnalyzer:
     def analyze(self) -> Dict[str, Any]:
         """执行分析，返回结构化结果"""
         analysis = {}
-        analysis["generated_at"] = datetime.now().isoformat()
+        analysis["generated_at"] = datetime.now(timezone.utc).isoformat()
         analysis["total_competitors"] = len(self.competitors)
         analysis["competitor_names"] = [c.get("name", "未知") for c in self.competitors]
 
