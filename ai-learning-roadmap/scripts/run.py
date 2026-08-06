@@ -10,7 +10,7 @@ import argparse
 import json
 import sys
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Dict, List, Optional
 
 # ============ 内置知识库 ============
@@ -68,13 +68,58 @@ PREREQUISITES = {
     "L3": ["深度学习框架", "模型调优", "分布式训练"]
 }
 
-# 每周主题模板
+# 每周主题模板 - 完整数据
 WEEKLY_THEMES = {
-    "通用入门": ["AI概述与Python基础", "数据处理与可视化", "机器学习入门", "监督学习算法", "模型评估与调优", "深度学习基础", "项目实战", "综合复习"],
-    "机器学习专项": ["数学基础复习", "经典ML算法", "特征工程", "模型集成", "实战项目1", "实战项目2", "算法优化", "综合测评"],
-    "深度学习专项": ["神经网络基础", "CNN原理", "RNN与序列模型", "PyTorch实战", "生成模型", "迁移学习", "实战项目", "前沿技术"],
-    "NLP方向": ["文本预处理", "词向量与Embedding", "RNN/LSTM", "Attention机制", "Transformer", "BERT与预训练", "NLP实战", "综合项目"],
-    "计算机视觉方向": ["图像基础", "CNN架构", "目标检测", "图像分割", "生成对抗网络", "模型部署", "视觉实战", "综合项目"]
+    "通用入门": [
+        "AI概述与Python基础",
+        "数据处理与可视化",
+        "机器学习入门",
+        "监督学习算法",
+        "模型评估与调优",
+        "深度学习基础",
+        "项目实战",
+        "综合复习"
+    ],
+    "机器学习专项": [
+        "数学基础复习",
+        "经典ML算法",
+        "特征工程",
+        "模型集成",
+        "实战项目1",
+        "实战项目2",
+        "算法优化",
+        "综合测评"
+    ],
+    "深度学习专项": [
+        "神经网络基础",
+        "CNN原理",
+        "RNN与序列模型",
+        "PyTorch实战",
+        "生成模型",
+        "迁移学习",
+        "实战项目",
+        "前沿技术"
+    ],
+    "NLP方向": [
+        "文本预处理",
+        "词向量与Embedding",
+        "RNN/LSTM",
+        "Attention机制",
+        "Transformer",
+        "BERT与预训练",
+        "NLP实战",
+        "综合项目"
+    ],
+    "计算机视觉方向": [
+        "图像基础",
+        "CNN架构",
+        "目标检测",
+        "图像分割",
+        "生成对抗网络",
+        "模型部署",
+        "视觉实战",
+        "综合项目"
+    ]
 }
 
 
@@ -116,7 +161,7 @@ def generate_roadmap(level: str, goal: str, weeks: int, hours_per_week: int) -> 
 
     roadmap = {
         "meta": {
-            "generated_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
             "level": level,
             "goal": goal,
             "weeks": weeks,
@@ -144,11 +189,12 @@ def generate_roadmap(level: str, goal: str, weeks: int, hours_per_week: int) -> 
                 "estimated_hours": min(res["hours"], hours_per_week)
             })
 
-        # 生成验收标准
+        # 生成可量化的验收标准
         acceptance = [
-            f"能独立完成本周主题相关的代码练习",
-            f"能解释{theme}的核心概念",
-            f"通过本周自测题（正确率≥80%）"
+            f"完成{theme}主题的5道自测题，正确率≥80%",
+            f"独立完成{theme}相关的代码练习，代码通过单元测试",
+            f"能解释{theme}的3个核心概念，并写出示例",
+            f"完成{theme}实战项目，达到项目验收指标"
         ]
 
         # 生成实战练习
@@ -240,14 +286,23 @@ def selftest() -> bool:
     assert detect_goal("我想入门AI") == "通用入门"
     print("✓ 目标识别测试通过")
 
-    # 测试3: 路线生成
+    # 测试3: 无关键词输入场景
+    assert detect_level("这是一个没有关键词的描述") == "L0"
+    assert detect_goal("这是一个没有关键词的描述") == "通用入门"
+    print("✓ 无关键词默认值测试通过")
+
+    # 测试4: 路线生成
     roadmap = generate_roadmap("L1", "机器学习专项", 8, 5)
     assert len(roadmap["weeks"]) == 8
     assert roadmap["meta"]["total_hours"] == 40
     assert all(w["estimated_hours"] > 0 for w in roadmap["weeks"])
+    # 验证验收标准完整性
+    assert all(len(w["practice"]["acceptance"]) >= 4 for w in roadmap["weeks"])
+    # 验证时间戳包含UTC
+    assert "UTC" in roadmap["meta"]["generated_at"]
     print("✓ 路线生成测试通过")
 
-    # 测试4: 参数校验
+    # 测试5: 参数校验
     try:
         generate_roadmap("L1", "机器学习专项", 3, 5)
         assert False, "应该抛出异常"
@@ -255,10 +310,11 @@ def selftest() -> bool:
         pass
     print("✓ 参数校验测试通过")
 
-    # 测试5: 格式输出
+    # 测试6: 格式输出
     content = format_roadmap(roadmap)
     assert "第 1 周" in content
     assert "验收标准" in content
+    assert "正确率≥80%" in content
     print("✓ 格式输出测试通过")
 
     print("所有自检测试通过！")
