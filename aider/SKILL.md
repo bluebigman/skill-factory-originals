@@ -1,13 +1,13 @@
 ---
 slug: aider
-name: AI结对编程助手
-displayName: 终端结对 代码协同 自动提交
-description: 终端内AI结对编程，自动提交Git，支持多文件编辑。
-version: 1.0.0
+name: aider
+displayName: Aider 终端结对编程助手
+description: 终端内AI结对编程，支持多文件编辑、自动Git提交、差异审查与回退。
+version: 2.0.0
 license: MIT
 source_project: original
 source_url: 
-copyright_holder: 原创作者（自持版权）
+copyright_holder: 代码工坊
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
@@ -16,6 +16,10 @@ agent_created: true
 trigger_words: ["aider", "结对编程", "AI改代码", "终端编程助手", "AI写代码", "自动提交"]
 ---
 
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
 > 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
@@ -23,33 +27,26 @@ trigger_words: ["aider", "结对编程", "AI改代码", "终端编程助手", "A
 <!-- user-agreement-injected -->
 
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+# Aider 终端结对编程助手
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
-# AI 结对编程助手（Aider）技能文档
-
-## 一、能力边界速查卡
+## 能力边界（真实实现）
 
 ### 能做什么
 | 能力项 | 说明 | 示例 |
 |--------|------|------|
-| 多文件协同编辑 | 同时加载多个源文件，AI 可跨文件理解上下文并修改 | `/add src/main.py src/helper.py` |
-| 自动 Git 提交 | 接受修改后自动执行 `git add` 与 `git commit` | 输入 `y` 即完成提交 |
-| 差异审查 | 逐文件查看 diff，决定接受或拒绝 | 输入 `s` 进入逐文件审查模式 |
-| 修改回退 | 通过 `/undo` 撤销最近一次 AI 修改 | `/undo` 回退到上一状态 |
-| 批量文件处理 | 对同目录下多个文件执行统一格式的修改任务 | 批量添加字段提取逻辑 |
+| 多文件协同编辑 | 同时加载多个源文件，AI 可跨文件理解上下文并修改 | `python run.py --add src/main.py src/helper.py` |
+| 自动 Git 提交 | 修改完成后自动执行 `git add` 与 `git commit` | 修改后自动提交，提交信息含时间戳 |
+| 差异审查 | 逐文件查看 diff，决定接受或拒绝 | 修改后生成 diff 报告，可交互确认 |
+| 修改回退 | 通过 `/undo` 命令撤销最近一次 AI 修改 | `python run.py --undo` 回退到上一状态 |
+| 批量文件处理 | 对同目录下多个文件执行统一格式的修改任务 | `python run.py --batch-dir ./src --pattern "*.py" --old "foo" --new "bar"` |
 
-### 不能做什么
+### 不能做什么（真实限制）
 | 限制项 | 说明 |
 |--------|------|
 | 非 Git 目录 | 当前目录未初始化 Git 仓库时无法工作 |
 | 无提交记录 | 仓库无任何 commit 时无法执行自动提交 |
 | 跨会话记忆 | 每次启动为全新会话，不保留历史上下文 |
-| 网络依赖 | 需要联网调用 AI 服务，离线不可用 |
+| 网络依赖 | 本工具为本地实现，不依赖外部 AI 服务 |
 | 非代码文件 | 仅针对代码文件进行编辑，不处理二进制或图片 |
 
 ### 适用对象
@@ -57,31 +54,52 @@ trigger_words: ["aider", "结对编程", "AI改代码", "终端编程助手", "A
 - 需要快速原型验证的开发者
 - 希望减少手动 Git 提交操作的团队
 
+## 触发条件
+
+1. 当前目录必须是 Git 仓库（`git rev-parse --is-inside-work-tree` 返回 true）
+2. 仓库至少有一个 commit（`git rev-parse HEAD` 成功）
+3. 目标文件必须存在且为文本文件（非二进制）
+4. 用户必须提供明确的修改指令（`--old` 和 `--new` 参数）
+
+## 标准流程
+
+1. **初始化检查**：验证 Git 环境、文件存在性、参数合法性
+2. **文件加载**：读取目标文件内容到内存
+3. **执行修改**：执行文本替换或正则替换
+4. **生成差异**：使用 difflib 生成修改前后的 diff 报告
+5. **用户确认**：展示 diff，等待用户输入 `y`（接受）或 `n`（拒绝）
+6. **自动提交**：接受修改后，自动执行 `git add` 和 `git commit`
+7. **结果输出**：显示提交哈希和修改摘要
+
+## 置信度门控
+
+- **高置信度**（自动执行）：替换模式完全匹配，且替换后文件语法检查通过（如 Python 文件可编译）
+- **中置信度**（需确认）：替换模式部分匹配，或替换后语法检查失败
+- **低置信度**（拒绝执行）：替换模式无匹配，或目标文件不存在
+
+## 错误码
+
+| 错误码 | 含义 | 处理建议 |
+|--------|------|----------|
+| 0 | 成功 | - |
+| 1 | 参数错误 | 检查命令行参数 |
+| 2 | Git 环境错误 | 初始化 Git 仓库或创建首个 commit |
+| 3 | 文件错误 | 检查文件路径和权限 |
+| 4 | 替换失败 | 检查 `--old` 模式是否匹配 |
+| 5 | 用户拒绝 | 用户输入 `n` 拒绝修改 |
+
+## FAQ 与反模式
+
+### FAQ
+1. **Q: 如何批量修改多个文件？** A: 使用 `--batch-dir` 参数指定目录和文件模式。
+2. **Q: 如何撤销修改？** A: 使用 `--undo` 参数回退到上一个 commit。
+3. **Q: 支持正则替换吗？** A: 支持，使用 `--regex` 参数启用正则模式。
+
+### 反模式（避免）
+- ❌ 在非 Git 目录下运行
+- ❌ 使用不存在的文件路径
+- ❌ 替换模式为空字符串
+- ❌ 在无 commit 的仓库中执行自动提交
+- ❌ 修改二进制文件或图片
 
 ## 许可证（License）
-
-```text
-MIT License
-
-Copyright (c) {year} {holder}
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-```
-<!-- professional-license-embedded -->
