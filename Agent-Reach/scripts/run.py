@@ -31,7 +31,13 @@ from pathlib import Path
 
 CONFIG_DIR = Path.home() / ".agent_reach"
 CONFIG_FILE = CONFIG_DIR / "config.json"
-SSH_OPTS = ["-o", "ConnectTimeout=10", "-o", "StrictHostKeyChecking=no"]
+SSH_OPTS = [
+    "-o", "ConnectTimeout=10",
+    "-o", "StrictHostKeyChecking=no",
+    "-o", "UserKnownHostsFile=/dev/null",
+    "-o", "LogLevel=ERROR",
+    "-o", "HostKeyAlgorithms=+ssh-rsa,ssh-ed25519",
+]
 MAX_RETRIES = 3
 BASE_TIMEOUT = 30
 # 白名单命令集（SKILL.md：仅限白名单命令集，杜绝任意命令）
@@ -50,15 +56,28 @@ def load_config() -> dict:
     if not CONFIG_FILE.exists():
         return {"instances": []}
     try:
-        return json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
-    except Exception:
+        with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+            config = json.load(f)
+        if not isinstance(config, dict) or "instances" not in config:
+            raise ValueError("Config must be a dict with 'instances' key")
+        return config
+    except (json.JSONDecodeError, ValueError, OSError) as e:
+        print(f"ERROR: Failed to load config from {CONFIG_FILE}: {e}", file=sys.stderr)
+        print("Config file is corrupted or invalid. Please fix it or remove it.", file=sys.stderr)
         return {"instances": []}
 
 
 def _ssh_cmd(inst: dict, remote_cmd: str, timeout: int = BASE_TIMEOUT) -> list:
     """构造 ssh 命令（真实调用系统 ssh）"""
     key = inst.get("key_path", "")
-    base = ["ssh"] + (["-i", key] if key else []) + SSH_OPTS + [
+    password = inst.get("password", "")
+    base = ["ssh"]
+    if password:
+        # 使用 sshpass 处理密码认证
+        base = ["sshpass", "-p", password] + base
+    if key:
+        base += ["-i", key]
+    base += SSH_OPTS + [
         "-p", str(inst.get("port", 22)),
         "%s@%s" % (inst.get("user", "root"), inst["host"]),
         remote_cmd,
@@ -77,17 +96,27 @@ def run_ssh(inst: dict, remote_cmd: str, timeout: int = BASE_TIMEOUT) -> dict:
                 text=True,
                 timeout=timeout,
                 check=False,
+                encoding="utf-8",
+                errors="replace",
             )
             if proc.returncode == 0:
                 return {"ok": True, "output": proc.stdout.strip(), "error": ""}
-            # 非零退出码，不重试（命令本身错误）
-            return {"ok": False, "output": proc.stdout.strip(), "error": proc.stderr.strip()}
-        except subprocess.TimeoutExpired:
+            # 非零退出码，收集错误信息
+            error_msg = proc.stderr.strip() if proc.stderr else f"Exit code: {proc.returncode}"
+            if proc.stdout:
+                error_msg = f"{error_msg}\nSTDOUT: {proc.stdout.strip()[:200]}"
+            return {"ok": False, "output": proc.stdout.strip(), "error": error_msg}
+        except subprocess.TimeoutExpired as e:
             if attempt < MAX_RETRIES - 1:
                 sleep_time = 2 ** attempt  # 指数退避: 1, 2, 4
                 time.sleep(sleep_time)
                 continue
-            return {"ok": False, "output": "", "error": f"SSH timeout after {MAX_RETRIES} attempts"}
+            error_msg = f"SSH timeout after {MAX_RETRIES} attempts"
+            if e.stdout:
+                error_msg += f"\nPartial output: {e.stdout.decode('utf-8', errors='replace')[:200]}"
+            return {"ok": False, "output": "", "error": error_msg}
+        except FileNotFoundError:
+            return {"ok": False, "output": "", "error": "ssh or sshpass not found in PATH"}
         except Exception as e:
             if attempt < MAX_RETRIES - 1:
                 sleep_time = 2 ** attempt
@@ -148,7 +177,9 @@ def _build_remote_cmd(action: str, inst: dict, args) -> str:
 def execute_action(action: str, instances: list, args) -> list:
     """并发执行操作，返回结果列表"""
     results = []
-    with ThreadPoolExecutor(max_workers=args.concurrency) as executor:
+    # 限制并发数，防止资源耗尽
+    max_workers = min(args.concurrency, 20)
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
         future_to_inst = {}
         for inst in instances:
             try:
@@ -222,11 +253,25 @@ def selftest() -> int:
     print("=== Agent-Reach Self-Test ===")
     failures = 0
 
-    # 1. 测试 load_config（真实文件）
+    # 1. 测试 load_config（真实文件 + 非法 JSON）
     print("[1] Testing load_config...")
     config = load_config()
     assert isinstance(config, dict), "load_config should return dict"
     assert "instances" in config, "config should have 'instances' key"
+    
+    # 测试非法 JSON
+    test_config_dir = Path(tempfile.mkdtemp())
+    test_config_file = test_config_dir / "config.json"
+    test_config_file.write_text("{invalid json", encoding="utf-8")
+    old_config_file = CONFIG_FILE
+    import runpy
+    # 临时替换 CONFIG_FILE 路径
+    globals()["CONFIG_FILE"] = test_config_file
+    try:
+        bad_config = load_config()
+        assert bad_config == {"instances": []}, "Should return empty config for invalid JSON"
+    finally:
+        globals()["CONFIG_FILE"] = old_config_file
     print("    PASS")
 
     # 2. 测试 filter_instances（真实逻辑）
@@ -242,7 +287,7 @@ def selftest() -> int:
     assert len(filtered) == 1, "Should filter by tag"
     print("    PASS")
 
-    # 3. 测试 _build_remote_cmd（白名单命令构造）
+    # 3. 测试 _build_remote_cmd（白名单命令构造 + 未授权命令拒绝）
     print("[3] Testing _build_remote_cmd...")
     class Args:
         command = "uptime"
@@ -256,6 +301,13 @@ def selftest() -> int:
     args.command = "log_tail"
     cmd = _build_remote_cmd("exec", test_instances[0], args)
     assert cmd == "tail -n 10 /var/log/syslog", f"Unexpected command: {cmd}"
+    
+    # 测试未授权命令
+    try:
+        _build_remote_cmd("exec", test_instances[0], type("A", (), {"command": "rm -rf /"})())
+        assert False, "Should raise ValueError for unauthorized command"
+    except ValueError:
+        pass
     print("    PASS")
 
     # 4. 测试 format_results（真实格式化）
@@ -315,6 +367,12 @@ def selftest() -> int:
         assert False, "Should raise ValueError for invalid command"
     except ValueError:
         pass
+    
+    # 测试 run_ssh 错误处理
+    bad_inst = {"name": "bad", "host": "nonexistent.invalid", "user": "root", "port": 22}
+    result = run_ssh(bad_inst, "echo test", timeout=5)
+    assert not result["ok"], "Should fail for nonexistent host"
+    assert result["error"], "Should have error message"
     print("    PASS")
 
     print(f"\n=== Self-Test {'PASSED' if failures == 0 else f'FAILED ({failures} failures)'} ===")
@@ -326,84 +384,4 @@ def main():
     parser.add_argument("--selftest", action="store_true", help="运行自检")
     parser.add_argument("--format", choices=["json", "markdown"], default="json", help="输出格式")
     parser.add_argument("--concurrency", type=int, default=5, help="并发数 (1-20)")
-    parser.add_argument("--timeout", type=int, default=BASE_TIMEOUT, help="SSH超时秒数")
-
-    subparsers = parser.add_subparsers(dest="action", help="操作类型")
-
-    # start 子命令
-    start_parser = subparsers.add_parser("start", help="启动实例")
-    start_parser.add_argument("--name", help="按名称筛选")
-    start_parser.add_argument("--tag", help="按标签筛选")
-    start_parser.add_argument("--file", help="从文件读取实例名列表")
-
-    # stop 子命令
-    stop_parser = subparsers.add_parser("stop", help="停止实例")
-    stop_parser.add_argument("--name", help="按名称筛选")
-    stop_parser.add_argument("--tag", help="按标签筛选")
-    stop_parser.add_argument("--file", help="从文件读取实例名列表")
-
-    # status 子命令
-    status_parser = subparsers.add_parser("status", help="查看状态")
-    status_parser.add_argument("--name", help="按名称筛选")
-    status_parser.add_argument("--tag", help="按标签筛选")
-    status_parser.add_argument("--file", help="从文件读取实例名列表")
-    status_parser.add_argument("--all", action="store_true", help="查看全部实例")
-
-    # exec 子命令
-    exec_parser = subparsers.add_parser("exec", help="执行白名单命令")
-    exec_parser.add_argument("name", help="实例名称")
-    exec_parser.add_argument("command", choices=WHITELIST.keys(), help="白名单命令")
-    exec_parser.add_argument("--n", type=int, default=10, help="log_tail 行数")
-    exec_parser.add_argument("--path", default="/var/log/syslog", help="log_tail 路径")
-    exec_parser.add_argument("--service", default="agent", help="restart/down 服务名")
-    exec_parser.add_argument("--port", type=int, default=8080, help="health 端口")
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        sys.exit(selftest())
-
-    # 参数校验
-    if not 1 <= args.concurrency <= 20:
-        print("Error: --concurrency must be between 1 and 20", file=sys.stderr)
-        sys.exit(5)
-
-    # 加载配置
-    config = load_config()
-    if not config["instances"]:
-        print(f"Error: No instances found in {CONFIG_FILE}", file=sys.stderr)
-        sys.exit(2)
-
-    # 筛选实例
-    if args.action == "status" and args.all:
-        instances = config["instances"]
-    elif args.action in ("start", "stop", "status"):
-        instances = filter_instances(config["instances"], args.name, args.tag, args.file)
-    elif args.action == "exec":
-        instances = filter_instances(config["instances"], name=args.name)
-    else:
-        print("Error: No action specified", file=sys.stderr)
-        parser.print_help()
-        sys.exit(1)
-
-    if not instances:
-        print("Error: No instances match the filter criteria", file=sys.stderr)
-        sys.exit(3)
-
-    # 执行操作
-    results = execute_action(args.action, instances, args)
-
-    # 输出结果
-    output = format_results(results, args.format)
-    print(output)
-
-    # 检查是否有失败
-    failed = [r for r in results if not r["ok"]]
-    if failed:
-        sys.exit(1)
-    sys.exit(0)
-
-
-if __name__ == "__main__":
-    main()
+    parser.add
