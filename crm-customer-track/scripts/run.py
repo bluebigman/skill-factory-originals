@@ -35,15 +35,6 @@ try:
 except ImportError:
     HAS_OPENPYXL = False
 
-# 尝试导入情感分析模型（可选）
-try:
-    from transformers import pipeline
-    HAS_TRANSFORMERS = True
-    _sentiment_pipeline = None
-except ImportError:
-    HAS_TRANSFORMERS = False
-    _sentiment_pipeline = None
-
 # 情绪关键词词典（用于流失评分，作为情感分析的补充）
 POSITIVE_WORDS = {"满意", "认可", "积极", "推进", "签约", "合作", "愉快", "顺利", "好评", "推荐"}
 NEGATIVE_WORDS = {"不满", "投诉", "推迟", "取消", "犹豫", "拒绝", "失望", "差评", "终止", "搁置"}
@@ -93,27 +84,35 @@ class CustomerTracker:
     def load_xlsx(self, filepath):
         """加载XLSX文件"""
         if not HAS_OPENPYXL:
-            raise ImportError(f"{ERROR_CODES['E005']}: 需要安装openpyxl (pip install openpyxl)")
+            raise ImportError(
+                f"{ERROR_CODES['E005']}: 需要安装openpyxl (pip install openpyxl)。"
+                "或者将xlsx文件转换为CSV格式后使用 --file 参数加载。"
+            )
 
         if not os.path.exists(filepath):
             raise FileNotFoundError(f"{ERROR_CODES['E001']}: {filepath}")
 
-        wb = openpyxl.load_workbook(filepath, read_only=True)
-        ws = wb.active
-        headers = [cell.value for cell in next(ws.iter_rows(min_row=1, max_row=1))]
-        required = {"客户ID", "客户名称", "跟进日期", "跟进方式", "跟进内容摘要"}
-        if not required.issubset(headers):
-            missing = required - set(headers)
-            raise ValueError(f"{ERROR_CODES['E002']}: {missing}")
+        try:
+            wb = openpyxl.load_workbook(filepath, read_only=True)
+            ws = wb.active
+            headers = [cell.value for cell in next(ws.iter_rows(min_row=1, max_row=1))]
+            required = {"客户ID", "客户名称", "跟进日期", "跟进方式", "跟进内容摘要"}
+            if not required.issubset(headers):
+                missing = required - set(headers)
+                raise ValueError(f"{ERROR_CODES['E002']}: {missing}")
 
-        records = []
-        for row in ws.iter_rows(min_row=2, values_only=True):
-            record = dict(zip(headers, row))
-            if all(record.get(k) is not None for k in required):
-                records.append(record)
-        wb.close()
-        self.records = records
-        self._process_records()
+            records = []
+            for row in ws.iter_rows(min_row=2, values_only=True):
+                record = dict(zip(headers, row))
+                if all(record.get(k) is not None for k in required):
+                    records.append(record)
+            wb.close()
+            self.records = records
+            self._process_records()
+        except Exception as e:
+            if isinstance(e, (ImportError, FileNotFoundError, ValueError)):
+                raise
+            raise ValueError(f"读取xlsx文件失败: {str(e)}")
 
     def _process_records(self):
         """处理原始记录，解析日期并按客户归组"""
@@ -188,33 +187,9 @@ class CustomerTracker:
     def _get_sentiment_score(self, text: str) -> Tuple[float, float]:
         """
         获取情绪倾向分数
-        优先使用transformers模型，否则使用关键词词典
+        使用关键词词典方法（移除transformers依赖，避免静默降级问题）
         返回: (正向分数, 负向分数) 范围0-1
         """
-        global _sentiment_pipeline
-
-        # 尝试使用transformers模型
-        if HAS_TRANSFORMERS:
-            try:
-                if _sentiment_pipeline is None:
-                    # 使用轻量级模型，避免下载大模型
-                    _sentiment_pipeline = pipeline(
-                        "sentiment-analysis",
-                        model="distilbert-base-uncased-finetuned-sst-2-english",
-                        device=-1  # CPU
-                    )
-                result = _sentiment_pipeline(text[:512])[0]  # 限制长度
-                label = result['label'].lower()
-                score = result['score']
-                if 'pos' in label:
-                    return (score, 1 - score)
-                else:
-                    return (1 - score, score)
-            except Exception:
-                # 模型加载失败时回退到关键词
-                pass
-
-        # 关键词词典方法
         positive_count = 0
         negative_count = 0
         for word in POSITIVE_WORDS:
@@ -249,7 +224,7 @@ class CustomerTracker:
         days_since_last = (self.now - last_date).days
         is_stalled = days_since_last > self.threshold
 
-        # 情绪分析（使用真实情感分析）
+        # 情绪分析（使用关键词词典）
         positive_count = 0
         negative_count = 0
         competitor_count = 0
@@ -437,3 +412,16 @@ def run_selftest() -> int:
     # 测试2: 分析功能
     results = tracker.analyze()
     assert results["客户总数"] == 2, "客户总数错误"
+    assert results["记录总数"] == 4, "记录总数错误"
+    assert results["无效记录数"] == 0, "无效记录数错误"
+    assert len(results["客户分析"]) == 2, "客户分析数量错误"
+    print("✓ 分析功能测试通过")
+
+    # 测试3: 风险评分计算
+    customer_metrics = {c["客户ID"]: c for c in results["客户分析"]}
+    assert "C001" in customer_metrics, "缺少客户C001"
+    assert "C002" in customer_metrics, "缺少客户C002"
+    
+    # C001应该有较低风险（正面情绪）
+    assert customer_metrics["C001"]["流失风险评分"] < 40, "C001风险评分应较低"
+    # C002应该有较高风险（负面情绪
