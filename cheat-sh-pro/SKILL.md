@@ -2,8 +2,8 @@
 slug: cheat-sh-pro
 name: 命令行速查手册
 displayName: 终端速查 代码示例 即时检索
-description: 一条命令获取编程语言与工具示例，开发调试即时查阅。
-version: 1.0.0
+description: 本地多领域命令速查工具，支持模糊搜索、领域过滤、随机速查与 Markdown 导出，纯标准库零依赖。
+version: 3.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -22,7 +22,6 @@ trigger_words: ["cheat.sh", "命令行速查", "代码示例查询", "终端查�
 > 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
 <!-- user-agreement-injected -->
 
-
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
@@ -34,59 +33,123 @@ trigger_words: ["cheat.sh", "命令行速查", "代码示例查询", "终端查�
 
 ## 一、能力边界：一页纸速查卡
 
-### 能做什么
+### 能做什么（真实实现）
 
-| 能力项 | 说明 | 示例 |
-|--------|------|------|
-| 查询编程语言语法 | 获取指定语言的核心语法示例 | `curl cheat.sh/python/lambda` |
-| 查询工具用法 | 获取命令行工具的参数与用法 | `curl cheat.sh/tar` |
-| 查询库/框架用法 | 获取特定库的常用操作示例 | `curl cheat.sh/numpy/array` |
-| 查询算法实现 | 获取常见算法的代码示例 | `curl cheat.sh/sort` |
-| 学习/速查双模式 | 支持学习模式（详细）与速查模式（精简） | `curl cheat.sh/python/lambda?T` |
-| 本地终端集成 | 无需浏览器，终端内直接查阅 | 配合 curl 使用 |
+| 能力项 | 说明 | 对应命令 |
+|--------|------|----------|
+| 查询命令速查 | 按领域（git/docker/linux）返回命令列表 | `--domain git` |
+| 模糊搜索 | 按关键词搜索命令描述与场景 | `--search "提交"` |
+| 随机速查 | 随机返回一条命令 | `--random` |
+| Markdown 导出 | 将全部速查导出为 Markdown 文件 | `--export output.md` |
+| 领域列表 | 列出所有可用领域 | `--list-domains` |
+| 自检 | 验证核心功能正确性 | `--selftest` |
 
-### 不能做什么
+### 不能做什么（明确边界）
 
 | 限制项 | 说明 |
 |--------|------|
 | 不提供代码执行环境 | 仅返回示例文本，不执行任何代码 |
-| 不保证示例的绝对正确性 | 示例来自社区贡献，可能存在过时或错误 |
+| 不保证示例的绝对正确性 | 示例为内置静态数据，可能过时 |
 | 不提供交互式问答 | 仅返回静态文本，不支持多轮对话 |
-| 不覆盖所有工具/语言 | 仅覆盖社区已贡献的内容 |
-| 不提供中文翻译 | 返回内容以英文为主 |
+| 不覆盖所有工具/语言 | 仅覆盖内置的 git/docker/linux 领域 |
+| 不提供中文翻译 | 返回内容为中文描述+英文命令 |
+| 不联网查询 | 所有数据为本地内置，无网络请求 |
 
 ### 适用对象
 
 - 日常使用命令行的开发者
 - 需要快速查阅语法/用法的程序员
-- 学习新语言/工具时希望快速上手的学习者
+- 学习新工具时希望快速上手的学习者
 - 在无图形界面环境下工作的运维人员
 
+## 二、触发条件
+
+当用户输入以下任一意图时，应触发本 Skill：
+
+- 包含 `cheat.sh`、`命令行速查`、`命令速查`、`终端查手册` 等关键词
+- 请求提供 git/docker/linux 命令示例
+- 请求搜索命令用法或场景
+- 请求导出命令速查表
+
+## 三、标准流程（Standard Workflow）
+
+### 输入规范
+
+用户请求应包含以下要素（可省略，使用默认值）：
+
+| 参数 | 说明 | 默认值 |
+|------|------|--------|
+| `--domain` | 领域名称（git/docker/linux） | 全部领域 |
+| `--search` | 搜索关键词 | 无（不搜索） |
+| `--random` | 随机返回一条 | 否 |
+| `--export` | 导出文件路径 | 无（不导出） |
+| `--list-domains` | 列出所有领域 | 否 |
+| `--selftest` | 运行自检 | 否 |
+
+### 处理流程
+
+1. **解析参数**：使用 argparse 解析命令行参数
+2. **执行操作**：
+   - 若 `--selftest`：运行自检函数，验证核心功能
+   - 若 `--list-domains`：列出所有可用领域
+   - 若 `--export`：导出全部速查到指定文件（原子写入）
+   - 若 `--random`：随机返回一条命令
+   - 若 `--search`：按关键词搜索命令
+   - 若 `--domain`：返回指定领域的命令列表
+   - 默认：返回全部领域的命令列表
+3. **格式化输出**：以表格形式输出命令、描述、场景
+
+### 输出规范
+
+- 命令列表以表格形式输出，包含序号、命令、描述、场景
+- 搜索结果显示匹配数量与匹配项
+- 导出文件为 Markdown 格式，包含标题与表格
+
+## 四、置信度门控（Confidence Gate）
+
+本 Skill 为确定性本地工具，无外部依赖，置信度恒为 100%。
+
+| 条件 | 置信度 | 处理方式 |
+|------|--------|----------|
+| 参数解析成功 | 100% | 正常执行 |
+| 参数解析失败 | 0% | 打印错误信息，退出码 2 |
+| 领域不存在 | 0% | 打印错误信息，退出码 3 |
+| 搜索无结果 | 0% | 打印提示信息，退出码 0 |
+| 导出失败 | 0% | 打印错误信息，退出码 4 |
+
+## 五、错误码（Error Codes）
+
+| 退出码 | 含义 | 说明 |
+|--------|------|------|
+| 0 | 成功 | 正常执行完毕 |
+| 1 | 运行时错误 | 未预期的异常 |
+| 2 | 参数错误 | argparse 解析失败 |
+| 3 | 领域不存在 | 指定的领域未找到 |
+| 4 | 导出失败 | 文件写入失败 |
+
+## 六、FAQ 与反模式（FAQ & Anti-patterns）
+
+### FAQ
+
+**Q: 如何搜索所有领域中的命令？**
+A: 使用 `--search` 参数，不指定 `--domain`，将在所有领域中搜索。
+
+**Q: 如何导出为 Markdown？**
+A: 使用 `--export` 参数指定文件路径，如 `--export cheats.md`。
+
+**Q: 如何随机学习一条命令？**
+A: 使用 `--random` 参数，每次随机返回一条命令。
+
+### 反模式（Anti-patterns）
+
+| 反模式 | 正确做法 |
+|--------|----------|
+| 依赖网络请求 | 本工具为纯本地实现，无网络依赖 |
+| 伪造随机数据 | 使用 `random.choice` 从真实数据中选取 |
+| 非原子文件写入 | 使用临时文件+`os.replace` 原子替换 |
+| 使用 `datetime.now()` | 使用 `datetime.now(timezone.utc)` |
+| 空壳实现 | 所有功能均有真实实现，`--selftest` 验证 |
 
 ## 许可证（License）
 
-```text
 MIT License
-
-Copyright (c) {year} {holder}
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-```
-<!-- professional-license-embedded -->
