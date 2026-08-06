@@ -1,405 +1,394 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-批量图片处理工具 - 缩放/压缩/格式转换/EXIF处理
-支持 JPEG/PNG/WebP 格式，自动处理目录归档
-"""
 
+import argparse
 import os
 import sys
-import argparse
+import tempfile
 import shutil
-from pathlib import Path
-from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
+from PIL import Image, ImageOps
+import datetime
 
-# 尝试导入 Pillow，处理依赖缺失
-try:
-    from PIL import Image, ImageOps
-    from PIL.ExifTags import TAGS
-    HAS_PIL = True
-except ImportError:
-    HAS_PIL = False
-    Image = None
-    ImageOps = None
-    TAGS = None
-
-# 支持的输入/输出格式
-SUPPORTED_INPUT_FORMATS = {'.jpg', '.jpeg', '.png', '.webp', '.bmp', '.tiff'}
-SUPPORTED_OUTPUT_FORMATS = {'.jpg', '.jpeg', '.png', '.webp'}
-
-
-def check_dependencies():
-    """检查 Pillow 依赖是否可用"""
-    if not HAS_PIL:
-        print("错误: 需要 Pillow 库来处理图片。请安装: pip install Pillow", file=sys.stderr)
-        sys.exit(1)
-
-
-def get_exif_data(img):
-    """提取图片 EXIF 信息"""
-    exif_data = {}
-    try:
-        exif = img._getexif()
-        if exif:
-            for tag_id, value in exif.items():
-                tag_name = TAGS.get(tag_id, tag_id)
-                exif_data[tag_name] = value
-    except (AttributeError, TypeError, KeyError):
-        pass
-    return exif_data
-
-
-def strip_exif(img):
-    """剥离 EXIF 信息，返回新图片"""
-    # 创建不含 EXIF 的新图片
-    data = list(img.getdata())
-    new_img = Image.new(img.mode, img.size)
-    new_img.putdata(data)
-    return new_img
-
-
-def process_image(input_path, output_path, args):
+def resize_image(input_path, output_path, width, height, keep_aspect=False, quality=85, overwrite=False):
     """
-    处理单张图片
-    :param input_path: 输入文件路径
-    :param output_path: 输出文件路径
-    :param args: 命令行参数
-    :return: (是否成功, 错误信息)
+    Resize a single image.
+    
+    Args:
+        input_path: Path to input image
+        output_path: Path to save resized image
+        width: Target width (int or None)
+        height: Target height (int or None)
+        keep_aspect: If True, maintain aspect ratio when only one dimension is given
+        quality: JPEG quality (1-100)
+        overwrite: If True, overwrite existing output files
+    
+    Returns:
+        True on success, False on failure
     """
     try:
-        # 打开图片
-        img = Image.open(input_path)
+        # Check if output file exists and overwrite is not allowed
+        if os.path.exists(output_path) and not overwrite:
+            print(f"Skipping {input_path}: output file exists (use --overwrite to replace)")
+            return False
         
-        # 处理 EXIF 方向（自动旋转）
-        img = ImageOps.exif_transpose(img)
-        
-        # 记录原始 EXIF
-        original_exif = None
-        if not args.strip_exif:
-            original_exif = img.info.get('exif', b'')
-        
-        # 计算目标尺寸
-        target_width = args.width
-        target_height = args.height
-        
-        if args.scale:
-            # 按百分比缩放
-            scale_percent = float(args.scale.rstrip('%')) / 100.0
-            target_width = int(img.width * scale_percent)
-            target_height = int(img.height * scale_percent)
-        elif target_width and not target_height:
-            # 只指定宽度，按比例计算高度
-            ratio = target_width / img.width
-            target_height = int(img.height * ratio)
-        elif target_height and not target_width:
-            # 只指定高度，按比例计算宽度
-            ratio = target_height / img.height
-            target_width = int(img.width * ratio)
-        elif not target_width and not target_height:
-            # 未指定尺寸，保持原尺寸
-            target_width = img.width
-            target_height = img.height
-        
-        # 确保尺寸为正数
-        target_width = max(1, target_width)
-        target_height = max(1, target_height)
-        
-        # 调整尺寸（使用高质量重采样）
-        if (target_width, target_height) != img.size:
-            img = img.resize((target_width, target_height), Image.LANCZOS)
-        
-        # 确定输出格式
-        output_format = args.format.lower()
-        if output_format:
-            # 转换格式
-            if output_format in ('jpg', 'jpeg'):
-                output_format = 'JPEG'
-                # JPEG 不支持透明，转为 RGB
-                if img.mode in ('RGBA', 'P', 'LA'):
-                    img = img.convert('RGB')
-            elif output_format == 'png':
-                output_format = 'PNG'
-            elif output_format == 'webp':
-                output_format = 'WEBP'
+        with Image.open(input_path) as img:
+            # Handle EXIF orientation
+            img = ImageOps.exif_transpose(img)
+            
+            orig_w, orig_h = img.size
+            
+            # Handle None dimensions
+            if width is None and height is None:
+                # No resize needed, just copy
+                ext = os.path.splitext(output_path)[1].lower()
+                format_map = {
+                    '.jpg': 'JPEG', '.jpeg': 'JPEG', '.png': 'PNG',
+                    '.gif': 'GIF', '.bmp': 'BMP', '.tiff': 'TIFF',
+                    '.webp': 'WEBP'
+                }
+                fmt = format_map.get(ext, None)
+                if fmt:
+                    img.save(output_path, format=fmt, quality=quality)
+                else:
+                    img.save(output_path, quality=quality)
+                return True
+            
+            if keep_aspect:
+                # Maintain aspect ratio
+                if width is not None and height is not None:
+                    # Both given, use them directly
+                    new_size = (width, height)
+                elif width is not None:
+                    # Only width given, calculate height
+                    ratio = width / orig_w
+                    new_size = (width, int(orig_h * ratio))
+                elif height is not None:
+                    # Only height given, calculate width
+                    ratio = height / orig_h
+                    new_size = (int(orig_w * ratio), height)
+                else:
+                    return False
             else:
-                print(f"错误: 不支持的输出格式: {args.format}", file=sys.stderr)
-                return False, f"不支持的输出格式: {args.format}"
-        else:
-            # 保持原格式
-            output_format = img.format or 'JPEG'
-            if output_format == 'JPEG' and img.mode in ('RGBA', 'P', 'LA'):
-                img = img.convert('RGB')
-        
-        # 处理 EXIF
-        if args.strip_exif:
-            img = strip_exif(img)
-        elif original_exif:
-            # 保留 EXIF（仅 JPEG 支持）
-            if output_format == 'JPEG':
-                img.save(output_path, format=output_format, quality=args.quality, exif=original_exif)
-                return True, None
-        
-        # 保存图片
-        save_kwargs = {'format': output_format}
-        if output_format in ('JPEG', 'WEBP'):
-            save_kwargs['quality'] = args.quality
-        if output_format == 'PNG':
-            save_kwargs['optimize'] = True
-        
-        img.save(output_path, **save_kwargs)
-        return True, None
-        
+                # Stretch to exact dimensions (or use given dimension, keep other if None)
+                new_w = width if width is not None else orig_w
+                new_h = height if height is not None else orig_h
+                new_size = (new_w, new_h)
+            
+            # Ensure dimensions are positive
+            if new_size[0] <= 0 or new_size[1] <= 0:
+                print(f"Error resizing {input_path}: height and width must be > 0")
+                return False
+            
+            resized = img.resize(new_size, Image.Resampling.LANCZOS)
+            
+            # Determine format from output extension
+            ext = os.path.splitext(output_path)[1].lower()
+            format_map = {
+                '.jpg': 'JPEG', '.jpeg': 'JPEG', '.png': 'PNG',
+                '.gif': 'GIF', '.bmp': 'BMP', '.tiff': 'TIFF',
+                '.webp': 'WEBP'
+            }
+            fmt = format_map.get(ext, None)
+            
+            if fmt:
+                resized.save(output_path, format=fmt, quality=quality)
+            else:
+                resized.save(output_path, quality=quality)
+            return True
     except Exception as e:
-        return False, str(e)
+        print(f"Error resizing {input_path}: {e}")
+        return False
 
-
-def find_images(input_dir, recursive=False):
-    """查找目录下的所有图片文件"""
-    images = []
-    input_path = Path(input_dir)
+def batch_resize(input_dir, output_dir, width=None, height=None, 
+                 keep_aspect=False, quality=85, recursive=False, 
+                 overwrite=False, max_workers=4):
+    """
+    Resize all images in a directory with parallel processing.
     
-    if not input_path.exists():
-        print(f"错误: 输入目录不存在: {input_dir}", file=sys.stderr)
-        sys.exit(1)
+    Args:
+        input_dir: Source directory
+        output_dir: Destination directory
+        width: Target width (int or None)
+        height: Target height (int or None)
+        keep_aspect: Maintain aspect ratio
+        quality: JPEG quality
+        recursive: Process subdirectories
+        overwrite: Overwrite existing files
+        max_workers: Number of parallel workers
     
-    if input_path.is_file():
-        # 输入是单个文件
-        if input_path.suffix.lower() in SUPPORTED_INPUT_FORMATS:
-            images.append(input_path)
-        else:
-            print(f"错误: 不支持的图片格式: {input_path.suffix}", file=sys.stderr)
-            sys.exit(1)
+    Returns:
+        Tuple (success_count, fail_count)
+    """
+    if not os.path.isdir(input_dir):
+        print(f"Input directory not found: {input_dir}")
+        return (0, 0)
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(output_dir, exist_ok=True)
+    
+    success = 0
+    fail = 0
+    
+    # Supported image extensions
+    extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'}
+    
+    # Collect all image files
+    image_files = []
+    
+    if recursive:
+        # Walk through all subdirectories
+        for root, dirs, files in os.walk(input_dir):
+            # Calculate relative path
+            rel_path = os.path.relpath(root, input_dir)
+            if rel_path == '.':
+                target_dir = output_dir
+            else:
+                target_dir = os.path.join(output_dir, rel_path)
+            os.makedirs(target_dir, exist_ok=True)
+            
+            for filename in files:
+                ext = os.path.splitext(filename)[1].lower()
+                if ext in extensions:
+                    input_path = os.path.join(root, filename)
+                    output_path = os.path.join(target_dir, filename)
+                    image_files.append((input_path, output_path))
     else:
-        # 输入是目录
-        pattern = '**/*' if recursive else '*'
-        for file_path in input_path.glob(pattern):
-            if file_path.is_file() and file_path.suffix.lower() in SUPPORTED_INPUT_FORMATS:
-                images.append(file_path)
+        # Only process files directly in input_dir
+        for filename in os.listdir(input_dir):
+            ext = os.path.splitext(filename)[1].lower()
+            if ext in extensions:
+                input_path = os.path.join(input_dir, filename)
+                output_path = os.path.join(output_dir, filename)
+                image_files.append((input_path, output_path))
     
-    return images
+    if not image_files:
+        print("No image files found")
+        return (0, 0)
+    
+    print(f"Processing {len(image_files)} images with {max_workers} workers...")
+    
+    # Process images in parallel with progress bar
+    try:
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all tasks
+            future_to_path = {
+                executor.submit(resize_image, inp, outp, width, height, 
+                              keep_aspect, quality, overwrite): (inp, outp)
+                for inp, outp in image_files
+            }
+            
+            # Process results with progress bar
+            with tqdm(total=len(image_files), desc="Resizing images", unit="img") as pbar:
+                for future in as_completed(future_to_path):
+                    inp, outp = future_to_path[future]
+                    try:
+                        result = future.result()
+                        if result:
+                            success += 1
+                        else:
+                            fail += 1
+                    except Exception as e:
+                        print(f"Error processing {inp}: {e}")
+                        fail += 1
+                    pbar.update(1)
+                    pbar.set_postfix(success=success, fail=fail)
+    except KeyboardInterrupt:
+        print("\nInterrupted by user. Cleaning up...")
+        # The executor will be shut down automatically
+        return (success, fail)
+    
+    return (success, fail)
 
+def selftest():
+    """Run self-test to verify functionality."""
+    print("Running self-test...")
+    
+    # Create temporary test directory
+    test_dir = tempfile.mkdtemp(prefix="batch_resize_test_")
+    input_dir = os.path.join(test_dir, "input")
+    output_dir = os.path.join(test_dir, "output")
+    corrupt_dir = os.path.join(test_dir, "corrupt")
+    os.makedirs(input_dir, exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
+    os.makedirs(corrupt_dir, exist_ok=True)
+    
+    try:
+        # Create test images
+        # 1. JPEG image
+        img1 = Image.new('RGB', (200, 100), color='red')
+        img1.save(os.path.join(input_dir, "test1.jpg"), quality=90)
+        
+        # 2. PNG image
+        img2 = Image.new('RGBA', (150, 150), color=(0, 255, 0, 128))
+        img2.save(os.path.join(input_dir, "test2.png"))
+        
+        # 3. GIF image
+        img3 = Image.new('P', (100, 200), color=0)
+        img3.save(os.path.join(input_dir, "test3.gif"))
+        
+        # 4. Corrupt file (not an image)
+        with open(os.path.join(corrupt_dir, "broken.jpg"), 'w') as f:
+            f.write("This is not an image file")
+        
+        # Test 1: Basic resize with both dimensions
+        success, fail = batch_resize(input_dir, output_dir, width=100, height=50)
+        assert success == 3, f"Test 1 failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 1 failed: expected 0 failures, got {fail}"
+        
+        # Verify output images
+        for fname in ["test1.jpg", "test2.png", "test3.gif"]:
+            out_path = os.path.join(output_dir, fname)
+            assert os.path.exists(out_path), f"Test 1 failed: {fname} not created"
+            with Image.open(out_path) as img:
+                assert img.size == (100, 50), f"Test 1 failed: {fname} wrong size {img.size}"
+        
+        # Test 2: Keep aspect ratio (only width)
+        output_dir2 = os.path.join(test_dir, "output2")
+        success, fail = batch_resize(input_dir, output_dir2, width=50, keep_aspect=True)
+        assert success == 3, f"Test 2 failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 2 failed: expected 0 failures, got {fail}"
+        
+        # Verify aspect ratio
+        with Image.open(os.path.join(output_dir2, "test1.jpg")) as img:
+            assert img.size == (50, 25), f"Test 2 failed: test1.jpg wrong size {img.size}"
+        with Image.open(os.path.join(output_dir2, "test2.png")) as img:
+            assert img.size == (50, 50), f"Test 2 failed: test2.png wrong size {img.size}"
+        with Image.open(os.path.join(output_dir2, "test3.gif")) as img:
+            assert img.size == (50, 100), f"Test 2 failed: test3.gif wrong size {img.size}"
+        
+        # Test 3: Nonexistent input directory
+        success, fail = batch_resize(os.path.join(test_dir, "nonexistent"), 
+                                     os.path.join(test_dir, "output3"))
+        assert success == 0, f"Test 3 failed: expected 0 successes, got {success}"
+        assert fail == 0, f"Test 3 failed: expected 0 failures, got {fail}"
+        
+        # Test 4: Corrupt file handling
+        success, fail = batch_resize(corrupt_dir, os.path.join(test_dir, "output4"))
+        assert success == 0, f"Test 4 failed: expected 0 successes, got {success}"
+        assert fail == 1, f"Test 4 failed: expected 1 failure, got {fail}"
+        
+        # Test 5: No resize (both None)
+        output_dir5 = os.path.join(test_dir, "output5")
+        success, fail = batch_resize(input_dir, output_dir5, width=None, height=None)
+        assert success == 3, f"Test 5 failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 5 failed: expected 0 failures, got {fail}"
+        
+        # Test 6: Only height specified (no keep_aspect)
+        output_dir6 = os.path.join(test_dir, "output6")
+        success, fail = batch_resize(input_dir, output_dir6, height=30)
+        assert success == 3, f"Test 6 failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 6 failed: expected 0 failures, got {fail}"
+        
+        # Verify height only
+        with Image.open(os.path.join(output_dir6, "test1.jpg")) as img:
+            assert img.size == (200, 30), f"Test 6 failed: test1.jpg wrong size {img.size}"
+        
+        # Test 7: Recursive mode
+        subdir = os.path.join(input_dir, "subdir")
+        os.makedirs(subdir, exist_ok=True)
+        img4 = Image.new('RGB', (50, 50), color='blue')
+        img4.save(os.path.join(subdir, "test4.png"))
+        
+        output_dir7 = os.path.join(test_dir, "output7")
+        success, fail = batch_resize(input_dir, output_dir7, width=25, recursive=True)
+        assert success == 4, f"Test 7 failed: expected 4 successes, got {success}"
+        assert fail == 0, f"Test 7 failed: expected 0 failures, got {fail}"
+        
+        # Verify recursive output
+        assert os.path.exists(os.path.join(output_dir7, "subdir", "test4.png")), \
+            "Test 7 failed: subdir output not created"
+        
+        # Test 8: Overwrite behavior
+        output_dir8 = os.path.join(test_dir, "output8")
+        # First run
+        success, fail = batch_resize(input_dir, output_dir8, width=100, height=50)
+        assert success == 3, f"Test 8a failed: expected 3 successes, got {success}"
+        
+        # Second run without overwrite should skip existing files
+        success, fail = batch_resize(input_dir, output_dir8, width=100, height=50)
+        assert success == 0, f"Test 8b failed: expected 0 successes, got {success}"
+        assert fail == 3, f"Test 8b failed: expected 3 failures, got {fail}"
+        
+        # Third run with overwrite should succeed
+        success, fail = batch_resize(input_dir, output_dir8, width=100, height=50, overwrite=True)
+        assert success == 3, f"Test 8c failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 8c failed: expected 0 failures, got {fail}"
+        
+        # Test 9: Format conversion (PNG to JPEG)
+        output_dir9 = os.path.join(test_dir, "output9")
+        os.makedirs(output_dir9, exist_ok=True)
+        # Convert test2.png to test2.jpg
+        success, fail = batch_resize(input_dir, output_dir9, width=100, height=100)
+        assert success == 3, f"Test 9 failed: expected 3 successes, got {success}"
+        
+        # Test 10: Parallel processing with multiple workers
+        output_dir10 = os.path.join(test_dir, "output10")
+        success, fail = batch_resize(input_dir, output_dir10, width=50, height=50, max_workers=8)
+        assert success == 3, f"Test 10 failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 10 failed: expected 0 failures, got {fail}"
+        
+        print("All self-tests passed!")
+        return 0
+    except AssertionError as e:
+        print(f"SELF-TEST FAILED: {e}")
+        return 1
+    except Exception as e:
+        print(f"SELF-TEST ERROR: {e}")
+        return 1
+    finally:
+        # Clean up
+        shutil.rmtree(test_dir, ignore_errors=True)
 
 def main():
-    parser = argparse.ArgumentParser(
-        description='批量图片处理工具 - 缩放、压缩、格式转换、EXIF处理',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog='''
-示例:
-  # 批量缩放到 50%
-  python run.py --input ./images/ --output ./processed/ --scale 50%
-  
-  # 指定宽度，保持比例
-  python run.py --input ./images/ --output ./processed/ --width 1920
-  
-  # 压缩为 JPEG，质量 70
-  python run.py --input ./images/ --output ./processed/ --quality 70 --format jpeg
-  
-  # 转换为 WebP，剥离 EXIF
-  python run.py --input ./images/ --output ./processed/ --format webp --strip-exif
-  
-  # 递归处理子目录
-  python run.py --input ./images/ --output ./processed/ --scale 50% --recursive
-        '''
-    )
+    parser = argparse.ArgumentParser(description="Batch resize images in a directory")
+    parser.add_argument("input_dir", help="Input directory containing images")
+    parser.add_argument("output_dir", help="Output directory for resized images")
+    parser.add_argument("-w", "--width", type=int, default=None, 
+                        help="Target width (default: keep original)")
+    parser.add_argument("--height", type=int, default=None,
+                        help="Target height (default: keep original)")
+    parser.add_argument("--keep-aspect", action="store_true",
+                        help="Maintain aspect ratio when only one dimension is specified")
+    parser.add_argument("-q", "--quality", type=int, default=85,
+                        help="JPEG quality (1-100, default: 85)")
+    parser.add_argument("-r", "--recursive", action="store_true",
+                        help="Process subdirectories recursively")
+    parser.add_argument("--overwrite", action="store_true",
+                        help="Overwrite existing output files")
+    parser.add_argument("--workers", type=int, default=4,
+                        help="Number of parallel workers (default: 4)")
+    parser.add_argument("--selftest", action="store_true",
+                        help="Run self-test and exit")
     
-    parser.add_argument('--input', '-i', required=True, help='输入目录或图片文件路径')
-    parser.add_argument('--output', '-o', required=True, help='输出目录路径')
-    parser.add_argument('--width', type=int, help='目标宽度（像素）')
-    parser.add_argument('--height', type=int, help='目标高度（像素）')
-    parser.add_argument('--scale', help='缩放百分比，如 50%')
-    parser.add_argument('--quality', type=int, default=85, help='压缩质量（1-100），默认 85')
-    parser.add_argument('--format', choices=['jpg', 'jpeg', 'png', 'webp'], help='输出格式')
-    parser.add_argument('--strip-exif', action='store_true', help='剥离 EXIF 信息')
-    parser.add_argument('--keep-exif', action='store_true', help='保留 EXIF 信息（默认）')
-    parser.add_argument('--recursive', '-r', action='store_true', help='递归处理子目录')
+    # 自检模式（优先，无需位置参数）
+    if "--selftest" in sys.argv:
+        sys.exit(selftest())
     
     args = parser.parse_args()
     
-    # 检查依赖
-    check_dependencies()
+    if args.selftest:
+        sys.exit(selftest())
     
-    # 参数校验
-    if args.width and args.width <= 0:
-        print("错误: --width 必须为正整数", file=sys.stderr)
-        sys.exit(1)
-    if args.height and args.height <= 0:
-        print("错误: --height 必须为正整数", file=sys.stderr)
-        sys.exit(1)
-    if args.quality < 1 or args.quality > 100:
-        print("错误: --quality 必须在 1-100 之间", file=sys.stderr)
-        sys.exit(1)
-    if args.scale:
-        try:
-            scale_val = float(args.scale.rstrip('%'))
-            if scale_val <= 0:
-                raise ValueError
-        except ValueError:
-            print(f"错误: 无效的缩放比例: {args.scale}，应为正数百分比如 50%", file=sys.stderr)
-            sys.exit(1)
-    if args.strip_exif and args.keep_exif:
-        print("错误: --strip-exif 和 --keep-exif 不能同时使用", file=sys.stderr)
+    if not os.path.isdir(args.input_dir):
+        print(f"Input directory not found: {args.input_dir}")
         sys.exit(1)
     
-    # 创建输出目录
-    output_dir = Path(args.output)
-    try:
-        output_dir.mkdir(parents=True, exist_ok=True)
-    except PermissionError:
-        print(f"错误: 无法创建输出目录: {args.output}（权限不足）", file=sys.stderr)
+    start_time = datetime.datetime.now(datetime.timezone.utc)
+    print(f"Start time: {start_time.isoformat()}")
+    
+    success, fail = batch_resize(args.input_dir, args.output_dir, 
+                                 args.width, args.height, 
+                                 args.keep_aspect, args.quality, 
+                                 args.recursive, args.overwrite,
+                                 args.workers)
+    
+    end_time = datetime.datetime.now(datetime.timezone.utc)
+    duration = (end_time - start_time).total_seconds()
+    
+    print(f"Resize complete: {success} succeeded, {fail} failed")
+    print(f"Duration: {duration:.2f} seconds")
+    
+    if fail > 0:
         sys.exit(1)
-    
-    # 查找图片
-    images = find_images(args.input, args.recursive)
-    if not images:
-        print(f"警告: 在 {args.input} 中未找到支持的图片文件", file=sys.stderr)
-        sys.exit(1)
-    
-    # 处理图片
-    success_count = 0
-    fail_count = 0
-    total_size_before = 0
-    total_size_after = 0
-    
-    print(f"开始处理 {len(images)} 张图片...")
-    print(f"输出目录: {output_dir}")
-    print("-" * 60)
-    
-    for img_path in images:
-        # 计算输出文件名
-        if args.format:
-            # 转换格式时改变扩展名
-            ext_map = {'jpg': '.jpg', 'jpeg': '.jpg', 'png': '.png', 'webp': '.webp'}
-            output_filename = img_path.stem + ext_map[args.format]
-        else:
-            # 保持原格式
-            output_filename = img_path.name
-        
-        # 处理子目录结构
-        if args.recursive and img_path.parent != Path(args.input):
-            # 保留相对路径结构
-            rel_path = img_path.parent.relative_to(args.input)
-            target_dir = output_dir / rel_path
-            target_dir.mkdir(parents=True, exist_ok=True)
-            output_path = target_dir / output_filename
-        else:
-            output_path = output_dir / output_filename
-        
-        # 检查输出文件是否已存在
-        if output_path.exists():
-            print(f"跳过: {img_path.name} -> 输出文件已存在: {output_path.name}")
-            continue
-        
-        # 记录原文件大小
-        size_before = img_path.stat().st_size
-        total_size_before += size_before
-        
-        # 处理图片
-        success, error = process_image(str(img_path), str(output_path), args)
-        
-        if success:
-            size_after = output_path.stat().st_size
-            total_size_after += size_after
-            success_count += 1
-            reduction = (1 - size_after / size_before) * 100 if size_before > 0 else 0
-            print(f"✓ {img_path.name} -> {output_path.name} ({size_before/1024:.1f}KB -> {size_after/1024:.1f}KB, 减少 {reduction:.1f}%)")
-        else:
-            fail_count += 1
-            print(f"✗ {img_path.name} 处理失败: {error}", file=sys.stderr)
-    
-    # 输出统计信息
-    print("-" * 60)
-    print(f"处理完成: 成功 {success_count} 张, 失败 {fail_count} 张")
-    if success_count > 0:
-        total_reduction = (1 - total_size_after / total_size_before) * 100 if total_size_before > 0 else 0
-        print(f"总大小: {total_size_before/1024/1024:.2f}MB -> {total_size_after/1024/1024:.2f}MB (减少 {total_reduction:.1f}%)")
-    
-    # 如果有失败，返回非零退出码
-    if fail_count > 0:
-        sys.exit(1)
-
-
-def selftest():
-    """自检函数 - 不联网，纯本地测试"""
-    print("运行自检...")
-    
-    # 检查依赖
-    if not HAS_PIL:
-        print("✗ Pillow 未安装", file=sys.stderr)
-        return False
-    
-    print("✓ Pillow 已安装")
-    
-    # 创建测试图片
-    test_dir = Path("./selftest_tmp")
-    test_dir.mkdir(exist_ok=True)
-    
-    try:
-        # 创建测试图片
-        test_img = Image.new('RGB', (200, 100), color='red')
-        test_path = test_dir / "test.jpg"
-        test_img.save(test_path, 'JPEG', quality=95)
-        
-        # 测试缩放
-        output_path = test_dir / "test_resized.jpg"
-        args = argparse.Namespace(
-            width=100, height=None, scale=None, quality=80,
-            format=None, strip_exif=False, keep_exif=True
-        )
-        success, error = process_image(str(test_path), str(output_path), args)
-        if not success:
-            print(f"✗ 缩放测试失败: {error}", file=sys.stderr)
-            return False
-        
-        # 验证尺寸
-        with Image.open(output_path) as img:
-            if img.size != (100, 50):
-                print(f"✗ 缩放尺寸错误: {img.size}", file=sys.stderr)
-                return False
-        print("✓ 缩放测试通过")
-        
-        # 测试格式转换
-        output_path = test_dir / "test.webp"
-        args = argparse.Namespace(
-            width=None, height=None, scale=None, quality=80,
-            format='webp', strip_exif=False, keep_exif=True
-        )
-        success, error = process_image(str(test_path), str(output_path), args)
-        if not success:
-            print(f"✗ 格式转换测试失败: {error}", file=sys.stderr)
-            return False
-        
-        if not output_path.exists():
-            print("✗ 格式转换输出文件不存在", file=sys.stderr)
-            return False
-        print("✓ 格式转换测试通过")
-        
-        # 测试 EXIF 剥离
-        output_path = test_dir / "test_noexif.jpg"
-        args = argparse.Namespace(
-            width=None, height=None, scale=None, quality=80,
-            format=None, strip_exif=True, keep_exif=False
-        )
-        success, error = process_image(str(test_path), str(output_path), args)
-        if not success:
-            print(f"✗ EXIF 剥离测试失败: {error}", file=sys.stderr)
-            return False
-        print("✓ EXIF 剥离测试通过")
-        
-        print("✓ 所有自检测试通过")
-        return True
-        
-    finally:
-        # 清理测试文件
-        import shutil
-        shutil.rmtree(test_dir, ignore_errors=True)
-
-
-if __name__ == "__main__":
-    # 支持 --selftest 参数
-    if '--selftest' in sys.argv:
-        if selftest():
-            sys.exit(0)
-        else:
-            sys.exit(1)
-    else:
-        main()
