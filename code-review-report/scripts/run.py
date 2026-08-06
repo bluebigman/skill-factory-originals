@@ -13,7 +13,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 
 # ========== 常量定义 ==========
-VERSION = "2.0.0"
+VERSION = "2.1.0"
 EXIT_SUCCESS = 0
 EXIT_PARAM_ERROR = 1
 EXIT_FILE_NOT_FOUND = 2
@@ -23,7 +23,7 @@ EXIT_INTERNAL_ERROR = 4
 # 严重级别
 SEVERITY_LEVELS = ["P0", "P1", "P2", "P3"]
 
-# 内置规则集（简化示例，实际规则更复杂）
+# 内置规则集（基于正则的代码风格扫描）
 BUILTIN_RULES = [
     {
         "id": "SEC001",
@@ -41,7 +41,7 @@ BUILTIN_RULES = [
     },
     {
         "id": "PERF001",
-        "pattern": r"(?i)(for\s+.*in\s+range\(len\()",
+        "pattern": r"(?i)for\s+\w+\s+in\s+range\(len\(",
         "severity": "P2",
         "message": "建议使用 enumerate 替代 range(len())",
         "confidence": 0.80,
@@ -76,7 +76,10 @@ def atomic_write_text(path: Path, content: str, encoding: str = "utf-8") -> None
 
 
 def parse_diff(diff_text: str) -> List[Dict[str, Any]]:
-    """解析 unified diff 文本，返回变更块列表。"""
+    """解析 unified diff 文本，返回变更块列表。
+
+    支持标准 git diff 格式，对非标准格式进行容错处理。
+    """
     if not diff_text or not diff_text.strip():
         raise ValueError("Diff 内容为空")
 
@@ -87,14 +90,33 @@ def parse_diff(diff_text: str) -> List[Dict[str, Any]]:
     lines = diff_text.splitlines()
     for line in lines:
         if line.startswith("diff --git"):
+            # 保存上一个文件
             if current_file:
+                if current_hunk:
+                    current_file["hunks"].append(current_hunk)
+                    current_hunk = None
                 files.append(current_file)
             current_file = {"path": "", "hunks": []}
             # 提取文件路径
             match = re.search(r"diff --git a/(\S+) b/(\S+)", line)
             if match:
                 current_file["path"] = match.group(2)
+            else:
+                # 尝试其他格式
+                match = re.search(r"diff --git (\S+) (\S+)", line)
+                if match:
+                    current_file["path"] = match.group(2)
+        elif line.startswith("Index:") and current_file is None:
+            # SVN 格式
+            current_file = {"path": "", "hunks": []}
+            match = re.search(r"Index:\s+(.+)", line)
+            if match:
+                current_file["path"] = match.group(1).strip()
+        elif line.startswith("===") and current_file is None:
+            # 其他格式
+            current_file = {"path": "unknown", "hunks": []}
         elif line.startswith("@@") and current_file:
+            # 保存上一个 hunk
             if current_hunk:
                 current_file["hunks"].append(current_hunk)
             # 解析 hunk 头
@@ -108,6 +130,11 @@ def parse_diff(diff_text: str) -> List[Dict[str, Any]]:
             else:
                 current_hunk = {"old_start": 0, "new_start": 0, "lines": []}
         elif current_hunk is not None:
+            current_hunk["lines"].append(line)
+        elif current_file is not None and not line.startswith(("---", "+++")):
+            # 非标准格式，尝试作为普通行处理
+            if current_hunk is None:
+                current_hunk = {"old_start": 0, "new_start": 0, "lines": []}
             current_hunk["lines"].append(line)
 
     # 处理最后一个文件
@@ -235,7 +262,7 @@ def run_selftest() -> int:
     """运行自检，验证核心功能。"""
     print("开始自检...")
 
-    # 测试 1: 解析 diff
+    # 测试 1: 解析标准 git diff
     test_diff = """diff --git a/test.py b/test.py
 index 1234567..abcdefg 100644
 --- a/test.py
@@ -254,35 +281,62 @@ index 1234567..abcdefg 100644
         assert len(files) == 1, "应解析出 1 个文件"
         assert files[0]["path"] == "test.py", "文件路径解析错误"
         assert len(files[0]["hunks"]) == 1, "应解析出 1 个 hunk"
-        print("✓ diff 解析测试通过")
+        print("✓ 标准 diff 解析测试通过")
     except Exception as e:
-        print(f"✗ diff 解析测试失败: {e}")
+        print(f"✗ 标准 diff 解析测试失败: {e}")
         return EXIT_INTERNAL_ERROR
 
-    # 测试 2: 规则匹配
+    # 测试 2: 解析非标准 diff（无 diff --git 前缀）
+    test_diff_svn = """Index: test.py
+===================================================================
+--- test.py (revision 1)
++++ test.py (working copy)
+@@ -1,3 +1,4 @@
+ def main():
+-    print("old")
++    print("new")
+     return 0
+"""
+    try:
+        files_svn = parse_diff(test_diff_svn)
+        assert len(files_svn) == 1, "应解析出 1 个文件"
+        assert files_svn[0]["path"] == "test.py", "SVN 文件路径解析错误"
+        assert len(files_svn[0]["hunks"]) == 1, "应解析出 1 个 hunk"
+        print("✓ 非标准 diff 解析测试通过")
+    except Exception as e:
+        print(f"✗ 非标准 diff 解析测试失败: {e}")
+        return EXIT_INTERNAL_ERROR
+
+    # 测试 3: 规则匹配（含 PERF001 实际匹配）
     try:
         issues = analyze_diff(files)
         assert len(issues) >= 3, f"应至少发现 3 个问题，实际 {len(issues)}"
         severities = [i["severity"] for i in issues]
         assert "P0" in severities, "应包含 P0 级别问题"
         assert "P2" in severities, "应包含 P2 级别问题"
-        print("✓ 规则匹配测试通过")
+        
+        # 验证 PERF001 规则实际触发
+        perf_issues = [i for i in issues if i["rule_id"] == "PERF001"]
+        assert len(perf_issues) == 1, f"PERF001 应触发 1 次，实际 {len(perf_issues)}"
+        assert perf_issues[0]["line"] == 6, f"PERF001 应在第 6 行，实际 {perf_issues[0]['line']}"
+        print("✓ 规则匹配测试通过（含 PERF001 实际匹配）")
     except Exception as e:
         print(f"✗ 规则匹配测试失败: {e}")
         return EXIT_INTERNAL_ERROR
 
-    # 测试 3: 报告生成
+    # 测试 4: 报告生成
     try:
         report = generate_report(files, issues)
         assert "# 代码审查报告" in report, "报告标题缺失"
         assert "变更摘要" in report, "变更摘要缺失"
         assert "问题清单" in report, "问题清单缺失"
+        assert "PERF001" in report, "PERF001 问题应出现在报告中"
         print("✓ 报告生成测试通过")
     except Exception as e:
         print(f"✗ 报告生成测试失败: {e}")
         return EXIT_INTERNAL_ERROR
 
-    # 测试 4: 原子写入
+    # 测试 5: 原子写入
     try:
         with tempfile.TemporaryDirectory() as tmpdir:
             test_file = Path(tmpdir) / "test_report.md"
@@ -295,21 +349,61 @@ index 1234567..abcdefg 100644
         print(f"✗ 原子写入测试失败: {e}")
         return EXIT_INTERNAL_ERROR
 
-    # 测试 5: 过滤功能
+    # 测试 6: 过滤功能
     try:
         filtered_report = generate_report(files, issues, filter_severity="P0")
         assert "P1" not in filtered_report, "P1 问题不应出现在过滤后的报告中"
         assert "P0" in filtered_report, "P0 问题应出现在过滤后的报告中"
+        assert "PERF001" not in filtered_report, "PERF001 不应出现在 P0 过滤报告中"
         print("✓ 过滤功能测试通过")
     except Exception as e:
         print(f"✗ 过滤功能测试失败: {e}")
+        return EXIT_INTERNAL_ERROR
+
+    # 测试 7: 空 diff 处理
+    try:
+        parse_diff("")
+        print("✗ 空 diff 应抛出异常")
+        return EXIT_INTERNAL_ERROR
+    except ValueError:
+        print("✓ 空 diff 处理测试通过")
+    except Exception as e:
+        print(f"✗ 空 diff 处理测试失败: {e}")
+        return EXIT_INTERNAL_ERROR
+
+    # 测试 8: 主流程集成测试（通过 main 函数）
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # 创建测试 diff 文件
+            diff_file = Path(tmpdir) / "test.diff"
+            diff_file.write_text(test_diff, encoding="utf-8")
+            
+            # 创建输出文件路径
+            output_file = Path(tmpdir) / "report.md"
+            
+            # 调用主函数
+            exit_code = main([
+                "--diff", str(diff_file),
+                "--output", str(output_file),
+            ])
+            
+            assert exit_code == EXIT_SUCCESS, f"主函数应返回 0，实际 {exit_code}"
+            assert output_file.exists(), "输出文件应存在"
+            
+            # 验证报告内容
+            report_content = output_file.read_text(encoding="utf-8")
+            assert "# 代码审查报告" in report_content, "报告标题缺失"
+            assert "PERF001" in report_content, "PERF001 问题应出现在报告中"
+            print("✓ 主流程集成测试通过")
+    except Exception as e:
+        print(f"✗ 主流程集成测试失败: {e}")
         return EXIT_INTERNAL_ERROR
 
     print("所有自检通过!")
     return EXIT_SUCCESS
 
 
-def main() -> int:
+def main(argv: Optional[List[str]] = None) -> int:
     """主入口函数。"""
     parser = argparse.ArgumentParser(
         description="代码审查差异分析工具 - 解析 diff 并生成质量报告"
@@ -341,7 +435,7 @@ def main() -> int:
         version=f"code-review-report v{VERSION}",
     )
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
     if args.selftest:
         return run_selftest()
@@ -360,45 +454,4 @@ def main() -> int:
             diff_text = args.diff
     except Exception as e:
         print(f"错误: 无法读取 diff: {e}", file=sys.stderr)
-        return EXIT_FILE_NOT_FOUND
-
-    # 解析 diff
-    try:
-        files = parse_diff(diff_text)
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return EXIT_PARSE_ERROR
-    except Exception as e:
-        print(f"错误: 解析失败: {e}", file=sys.stderr)
-        return EXIT_PARSE_ERROR
-
-    # 分析问题
-    try:
-        issues = analyze_diff(files)
-    except Exception as e:
-        print(f"错误: 分析失败: {e}", file=sys.stderr)
-        return EXIT_INTERNAL_ERROR
-
-    # 生成报告
-    try:
-        report = generate_report(files, issues, args.filter)
-    except Exception as e:
-        print(f"错误: 报告生成失败: {e}", file=sys.stderr)
-        return EXIT_INTERNAL_ERROR
-
-    # 输出报告
-    if args.output:
-        try:
-            atomic_write_text(Path(args.output), report)
-            print(f"报告已保存到: {args.output}")
-        except Exception as e:
-            print(f"错误: 无法保存报告: {e}", file=sys.stderr)
-            return EXIT_INTERNAL_ERROR
-    else:
-        print(report)
-
-    return EXIT_SUCCESS
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        return
