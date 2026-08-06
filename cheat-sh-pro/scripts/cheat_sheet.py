@@ -5,9 +5,11 @@
 纯标准库，零依赖。
 """
 import argparse
-import json
+import os
 import random
 import sys
+import tempfile
+from datetime import datetime, timezone
 
 CHEATS = {
     "git": [
@@ -29,158 +31,248 @@ CHEATS = {
         {"cmd": "docker logs -f c1", "desc": "跟踪容器日志", "scene": "排查应用报错"},
         {"cmd": "docker system df", "desc": "查看磁盘占用", "scene": "清理前评估"},
         {"cmd": "docker rmi $(docker images -q -f dangling=true)", "desc": "清理悬空镜像", "scene": "释放磁盘"},
-        {"cmd": "docker inspect c1 | jq '.[0].NetworkSettings.IPAddress'", "desc": "查容器IP", "scene": "容器间通信"},
+        {"cmd": "docker inspect c1 --format '{{.NetworkSettings.IPAddress}}'", "desc": "查容器IP（纯docker命令）", "scene": "容器间通信"},
         {"cmd": "docker compose up -d", "desc": "后台启动编排服务", "scene": "启动服务栈"},
+        {"cmd": "docker stop $(docker ps -q)", "desc": "停止所有容器", "scene": "批量停止"},
+        {"cmd": "docker rm $(docker ps -aq --filter status=exited)", "desc": "删除所有已退出容器", "scene": "清理容器"},
     ],
     "linux": [
-        {"cmd": "grep -rn 'keyword' ./src", "desc": "递归搜索关键词", "scene": "找代码"},
-        {"cmd": "find . -name '*.log' -mtime -7", "desc": "找7天内修改的日志文件", "scene": "定位近期文件"},
-        {"cmd": "ps aux | grep java", "desc": "按进程名过滤", "scene": "查进程"},
-        {"cmd": "kill -9 PID", "desc": "强制杀进程", "scene": "进程僵死"},
-        {"cmd": "du -sh */ | sort -rh | head", "desc": "目录大小排序", "scene": "找大目录"},
-        {"cmd": "tar -czvf a.tgz ./dir", "desc": "打包压缩", "scene": "归档"},
-        {"cmd": "rsync -avz src/ dst/", "desc": "增量同步目录", "scene": "备份/部署"},
-        {"cmd": "lsof -i :8080", "desc": "查端口占用", "scene": "端口冲突"},
-    ],
-    "python": [
-        {"cmd": "python -m venv .venv && source .venv/bin/activate", "desc": "创建并激活虚拟环境", "scene": "项目隔离依赖"},
-        {"cmd": "python -m pip freeze > requirements.txt", "desc": "导出依赖清单", "scene": "锁定依赖"},
-        {"cmd": "python -m http.server 8000", "desc": "启动静态文件服务", "scene": "临时共享文件"},
-        {"cmd": "python -m json.tool data.json", "desc": "格式化JSON", "scene": "查看JSON结构"},
-        {"cmd": "python -c 'import this'", "desc": "打印Python之禅", "scene": "设计理念"},
-        {"cmd": "python -m pdb script.py", "desc": "进入调试器", "scene": "定位bug"},
-        {"cmd": "python -O script.py", "desc": "优化模式运行（去assert）", "scene": "性能敏感运行"},
-        {"cmd": "python -X dev script.py", "desc": "开发模式运行（完整警告）", "scene": "开发期排查"},
-    ],
-    "sql": [
-        {"cmd": "SELECT COUNT(*) FROM t;", "desc": "统计行数", "scene": "表规模评估"},
-        {"cmd": "EXPLAIN SELECT ...", "desc": "查看执行计划", "scene": "SQL优化"},
-        {"cmd": "SHOW PROCESSLIST;", "desc": "查看当前连接", "scene": "排查慢查询"},
-        {"cmd": "SELECT * FROM t WHERE a LIKE '%x%';", "desc": "模糊查询", "scene": "搜索记录"},
-        {"cmd": "ALTER TABLE t ADD INDEX idx_a (a);", "desc": "添加索引", "scene": "查询加速"},
-        {"cmd": "DELETE FROM t WHERE id IN (...);", "desc": "批量删除", "scene": "清理数据"},
-    ],
-    "regex": [
-        {"cmd": "\\d{4}-\\d{2}-\\d{2}", "desc": "匹配日期 2026-08-05", "scene": "日期格式校验"},
-        {"cmd": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$", "desc": "匹配邮箱", "scene": "表单校验"},
-        {"cmd": "(?<=@)\\w+", "desc": "取@后的用户名", "scene": "提取用户名"},
-        {"cmd": "\\b\\w{6,}\\b", "desc": "6位以上单词", "scene": "找长词"},
-        {"cmd": "(https?://[^\\s]+)", "desc": "提取URL", "scene": "抓链接"},
-    ],
-    "curl": [
-        {"cmd": "curl -sS https://api.example.com/data", "desc": "静默GET请求", "scene": "调API"},
-        {"cmd": "curl -X POST -H 'Content-Type: application/json' -d '{\"k\":1}' URL", "desc": "POST JSON", "scene": "提交数据"},
-        {"cmd": "curl -o file.bin -L URL", "desc": "下载并跟随重定向", "scene": "下载文件"},
-        {"cmd": "curl -w '%{http_code}\\n' -o /dev/null URL", "desc": "只看状态码", "scene": "接口健康检查"},
-        {"cmd": "curl -u user:pass URL", "desc": "带认证请求", "scene": "需要登录的接口"},
-    ],
-    "vim": [
-        {"cmd": ":wq", "desc": "保存并退出", "scene": "编辑完成"},
-        {"cmd": ":q!", "desc": "不保存强制退出", "scene": "放弃改动"},
-        {"cmd": "/keyword", "desc": "搜索关键词（n/N切换）", "scene": "定位文本"},
-        {"cmd": ":%s/old/new/g", "desc": "全文替换", "scene": "批量替换"},
-        {"cmd": "gg dG", "desc": "清空整个文件", "scene": "重置文件"},
-        {"cmd": "u", "desc": "撤销", "scene": "操作失误"},
-    ],
-    "redis": [
-        {"cmd": "redis-cli --scan --pattern 'cache:*' | xargs redis-cli del", "desc": "按模式批量删除key", "scene": "清理缓存"},
-        {"cmd": "redis-cli info memory | grep used_memory_human", "desc": "查看内存占用", "scene": "内存监控"},
-        {"cmd": "redis-cli monitor", "desc": "实时监控所有命令", "scene": "排查慢命令"},
-        {"cmd": "redis-cli ttl key", "desc": "查看key剩余寿命", "scene": "检查过期"},
-    ],
-    "mysql": [
-        {"cmd": "mysql -u root -p -e 'SHOW DATABASES;'", "desc": "命令行执行SQL", "scene": "快速查询"},
-        {"cmd": "mysqldump -u root -p db > db.sql", "desc": "导出数据库", "scene": "备份"},
-        {"cmd": "mysql -u root -p db < db.sql", "desc": "导入数据库", "scene": "恢复"},
-        {"cmd": "SELECT version();", "desc": "查版本", "scene": "环境确认"},
-    ],
-    "grep": [
-        {"cmd": "grep -v pattern file", "desc": "反向匹配（排除）", "scene": "过滤干扰行"},
-        {"cmd": "grep -c pattern file", "desc": "统计匹配行数", "scene": "计数"},
-        {"cmd": "grep -i pattern file", "desc": "忽略大小写", "scene": "不区分大小写搜索"},
-        {"cmd": "grep -E 'a|b' file", "desc": "扩展正则多条件", "scene": "多模式匹配"},
+        {"cmd": "grep -rn 'pattern' /path", "desc": "递归搜索文件内容", "scene": "查找代码中的关键词"},
+        {"cmd": "find /path -name '*.log' -mtime +7", "desc": "查找7天前的日志文件", "scene": "清理旧日志"},
+        {"cmd": "ps aux | grep python", "desc": "查看python进程", "scene": "排查进程状态"},
+        {"cmd": "netstat -tlnp", "desc": "查看监听端口及进程", "scene": "确认端口占用"},
+        {"cmd": "df -h", "desc": "查看磁盘空间使用", "scene": "磁盘容量检查"},
+        {"cmd": "du -sh * | sort -rh | head -10", "desc": "查看当前目录各子项大小并排序", "scene": "定位大文件"},
+        {"cmd": "tar czf backup.tar.gz /path", "desc": "压缩备份目录", "scene": "数据备份"},
+        {"cmd": "rsync -avz /src/ user@host:/dst/", "desc": "同步目录到远程", "scene": "部署文件"},
+        {"cmd": "chmod +x script.sh", "desc": "添加执行权限", "scene": "运行脚本前"},
+        {"cmd": "systemctl status nginx", "desc": "查看服务状态", "scene": "服务异常排查"},
     ],
 }
 
-LANGS = sorted(CHEATS.keys())
+
+def get_all_cheats():
+    """返回所有领域的命令列表（扁平化）"""
+    all_items = []
+    for domain_items in CHEATS.values():
+        all_items.extend(domain_items)
+    return all_items
 
 
-def search(query: str, lang: str = "", top: int = 10):
-    q = query.lower()
-    hits = []
-    for lang_name, items in CHEATS.items():
-        if lang and lang != lang_name:
-            continue
-        for it in items:
-            hay = (it["cmd"] + " " + it["desc"] + " " + it["scene"]).lower()
-            # 分词模糊匹配：query 每个词都要命中
-            if all(w in hay for w in q.split() if w):
-                hits.append((lang_name, it))
-    hits.sort(key=lambda x: x[1]["cmd"].lower().find(q) if q in x[1]["cmd"].lower() else 99)
-    return hits[:top]
+def get_domain_cheats(domain):
+    """返回指定领域的命令列表，领域不存在时返回 None"""
+    if domain not in CHEATS:
+        return None
+    return CHEATS[domain]
 
 
-def render(items, fmt: str = "plain"):
+def search_cheats(keyword, domain=None):
+    """按关键词搜索命令，返回 (匹配列表, 匹配数量)"""
+    if domain:
+        items = get_domain_cheats(domain)
+        if items is None:
+            return None, 0
+    else:
+        items = get_all_cheats()
+    keyword_lower = keyword.lower()
+    matches = [
+        item for item in items
+        if keyword_lower in item["cmd"].lower()
+        or keyword_lower in item["desc"].lower()
+        or keyword_lower in item["scene"].lower()
+    ]
+    return matches, len(matches)
+
+
+def get_random_cheat(domain=None):
+    """随机返回一条命令，领域不存在时返回 None"""
+    if domain:
+        items = get_domain_cheats(domain)
+        if items is None:
+            return None
+    else:
+        items = get_all_cheats()
+    if not items:
+        return None
+    return random.choice(items)
+
+
+def format_table(items, start_index=1):
+    """将命令列表格式化为表格文本"""
+    if not items:
+        return "（无匹配结果）"
     lines = []
-    for lang_name, it in items:
-        if fmt == "markdown":
-            lines.append(f"- **{lang_name}**: `{it['cmd']}` — {it['desc']} ({it['scene']})")
-        else:
-            lines.append(f"[{lang_name}] {it['cmd']}")
-            lines.append(f"    {it['desc']}（{it['scene']}）")
-    return "\n".join(lines) if lines else "（无匹配）"
+    lines.append("| 序号 | 命令 | 描述 | 场景 |")
+    lines.append("|------|------|------|------|")
+    for i, item in enumerate(items, start=start_index):
+        cmd = item["cmd"].replace("|", "\\|")
+        desc = item["desc"].replace("|", "\\|")
+        scene = item["scene"].replace("|", "\\|")
+        lines.append(f"| {i} | `{cmd}` | {desc} | {scene} |")
+    return "\n".join(lines)
 
 
-def selftest() -> bool:
-    ok = True
-    # 1. 字典完整性：每领域至少 8 条（grep 等小领域放宽为≥4）
-    for ln, items in CHEATS.items():
-        if len(items) < 4:
-            print(f"  ❌ {ln} 仅 {len(items)} 条")
-            ok = False
-    # 2. 搜索命中
-    hits = search("日志")
-    if not hits:
-        print("  ❌ 搜索 '日志' 无结果")
-        ok = False
-    # 3. 领域过滤
-    g = search("", lang="git")
-    if not g:
-        print("  ❌ git 领域无结果")
-        ok = False
-    # 4. 渲染
-    if not render(hits):
-        print("  ❌ 渲染失败")
-        ok = False
-    if ok:
-        print(f"  ✅ 速查字典 {sum(len(v) for v in CHEATS.values())} 条 / {len(CHEATS)} 领域")
-        print(f"  ✅ 搜索/过滤/渲染正常")
-    return ok
+def export_markdown(filepath):
+    """导出全部速查到 Markdown 文件（原子写入）"""
+    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+    lines = []
+    lines.append("# 命令行速查手册（cheat-sh-pro）")
+    lines.append("")
+    lines.append(f"> 导出时间：{timestamp}")
+    lines.append("")
+    lines.append("## 全部命令速查")
+    lines.append("")
+    for domain, items in CHEATS.items():
+        lines.append(f"### {domain}")
+        lines.append("")
+        lines.append(format_table(items))
+        lines.append("")
+    content = "\n".join(lines) + "\n"
+
+    # 原子写入：先写临时文件，再 os.replace
+    dir_path = os.path.dirname(os.path.abspath(filepath))
+    fd, tmp_path = tempfile.mkstemp(dir=dir_path, prefix=".cheats_", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+        os.replace(tmp_path, filepath)
+    except Exception:
+        # 清理临时文件
+        if os.path.exists(tmp_path):
+            os.unlink(tmp_path)
+        raise
+    return filepath
 
 
-def main() -> int:
-    ap = argparse.ArgumentParser(
-        description="终端速查工具：内置多领域命令速查，支持模糊搜索与导出")
-    ap.add_argument("--query", "-q", default="", help="搜索关键词（分词模糊匹配）")
-    ap.add_argument("--lang", "-l", default="", help="领域过滤：" + ",".join(LANGS))
-    ap.add_argument("--format", "-f", choices=["plain", "markdown"], default="plain", help="输出格式")
-    ap.add_argument("--top", "-n", type=int, default=10, help="最多显示条数")
-    ap.add_argument("--random", "-r", action="store_true", help="随机一条")
-    ap.add_argument("--selftest", action="store_true", help="运行自检")
-    args = ap.parse_args()
+def run_selftest():
+    """自检：真实调用核心函数并断言关键输出"""
+    # 1. 领域查询
+    git_items = get_domain_cheats("git")
+    assert git_items is not None, "git 领域应存在"
+    assert len(git_items) == 10, f"git 领域应有 10 条，实际 {len(git_items)}"
 
+    # 2. 不存在的领域
+    assert get_domain_cheats("nonexist") is None, "不存在的领域应返回 None"
+
+    # 3. 搜索
+    matches, count = search_cheats("提交")
+    assert count > 0, "搜索'提交'应有结果"
+    assert all("提交" in item["desc"] or "提交" in item["scene"] or "提交" in item["cmd"] for item in matches), "搜索结果应包含关键词"
+
+    # 4. 随机
+    rand_item = get_random_cheat("docker")
+    assert rand_item is not None, "docker 随机应返回一条"
+    assert rand_item in CHEATS["docker"], "随机结果应来自 docker 领域"
+
+    # 5. 导出
+    tmp_export = os.path.join(tempfile.gettempdir(), f"cheats_test_{os.getpid()}.md")
+    try:
+        export_markdown(tmp_export)
+        with open(tmp_export, "r", encoding="utf-8") as f:
+            content = f.read()
+        assert "命令行速查手册" in content, "导出文件应包含标题"
+        assert "git" in content and "docker" in content and "linux" in content, "导出文件应包含所有领域"
+    finally:
+        if os.path.exists(tmp_export):
+            os.unlink(tmp_export)
+
+    # 6. 表格格式
+    table = format_table(git_items[:2])
+    assert "| 序号 | 命令 | 描述 | 场景 |" in table, "表格应包含表头"
+    assert "git log" in table, "表格应包含命令内容"
+
+    # 7. 主流程集成测试（通过 subprocess 调用 main）
+    import subprocess
+    test_cases = [
+        (["--domain", "git"], 0),
+        (["--search", "提交"], 0),
+        (["--random", "--domain", "linux"], 0),
+        (["--list-domains"], 0),
+        (["--domain", "nonexist"], 3),
+    ]
+    for args, expected_code in test_cases:
+        result = subprocess.run(
+            [sys.executable, __file__] + args,
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        assert result.returncode == expected_code, f"参数 {args} 应退出码 {expected_code}，实际 {result.returncode}"
+
+    print("自检通过：所有核心功能验证成功")
+    return 0
+
+
+def main():
+    parser = argparse.ArgumentParser(
+        description="命令行速查手册（cheat-sh-pro）— 本地多领域命令速查工具",
+        epilog="示例：python cheat_sheet.py --domain git | --search 提交 | --random | --export cheats.md | --list-domains | --selftest"
+    )
+    parser.add_argument("--domain", type=str, help="领域名称（git/docker/linux）")
+    parser.add_argument("--search", type=str, help="搜索关键词")
+    parser.add_argument("--random", action="store_true", help="随机返回一条命令")
+    parser.add_argument("--export", type=str, metavar="FILE", help="导出全部速查到 Markdown 文件")
+    parser.add_argument("--list-domains", action="store_true", help="列出所有可用领域")
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+    args = parser.parse_args()
+
+    # 自检
     if args.selftest:
-        return 0 if selftest() else 1
-    if args.random:
-        ln = random.choice(LANGS)
-        it = random.choice(CHEATS[ln])
-        print(f"[{ln}] {it['cmd']}\n    {it['desc']}（{it['scene']}）")
+        return run_selftest()
+
+    # 列出领域
+    if args.list_domains:
+        print("可用领域：")
+        for domain in CHEATS:
+            print(f"  - {domain}")
         return 0
-    if args.lang and args.lang not in CHEATS:
-        print(f"未知领域: {args.lang}，可用: {LANGS}")
-        return 1
-    items = search(args.query, args.lang, args.top)
-    print(render(items, args.format))
+
+    # 导出
+    if args.export:
+        try:
+            filepath = export_markdown(args.export)
+            print(f"已导出到：{filepath}")
+            return 0
+        except Exception as e:
+            print(f"导出失败：{e}", file=sys.stderr)
+            return 4
+
+    # 随机
+    if args.random:
+        item = get_random_cheat(args.domain)
+        if item is None:
+            print(f"领域不存在：{args.domain}", file=sys.stderr)
+            return 3
+        print(format_table([item]))
+        return 0
+
+    # 搜索
+    if args.search:
+        matches, count = search_cheats(args.search, args.domain)
+        if matches is None:
+            print(f"领域不存在：{args.domain}", file=sys.stderr)
+            return 3
+        print(f"找到 {count} 条匹配结果：")
+        print()
+        print(format_table(matches))
+        return 0
+
+    # 领域查询
+    if args.domain:
+        items = get_domain_cheats(args.domain)
+        if items is None:
+            print(f"领域不存在：{args.domain}", file=sys.stderr)
+            return 3
+        print(f"领域 [{args.domain}] 的命令速查：")
+        print()
+        print(format_table(items))
+        return 0
+
+    # 默认：全部领域
+    all_items = get_all_cheats()
+    print(f"全部领域命令速查（共 {len(all_items)} 条）：")
+    print()
+    print(format_table(all_items))
     return 0
 
 
