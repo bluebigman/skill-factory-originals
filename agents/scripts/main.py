@@ -12,7 +12,7 @@ import re
 import sys
 import tempfile
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -284,7 +284,7 @@ class ResultCollector:
         summary = (
             f"任务执行摘要\n"
             f"任务: {task}\n"
-            f"执行时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
+            f"执行时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}\n"
             f"参与Agent: {', '.join(roles)}\n"
             f"成功率: {success_count}/{total_count}\n"
             f"总体状态: {'成功' if success_count == total_count else '部分成功'}"
@@ -302,7 +302,7 @@ class ResultCollector:
             try:
                 with open(filepath, "w", encoding="utf-8") as f:
                     f.write(f"# {result.role} 执行报告\n\n")
-                    f.write(f"## 执行时间\n{datetime.now().isoformat()}\n\n")
+                    f.write(f"## 执行时间\n{datetime.now(timezone.utc).isoformat()}\n\n")
                     f.write(f"## 执行时长\n{result.duration:.2f}秒\n\n")
                     f.write(f"## 输出内容\n{result.output}\n")
                 
