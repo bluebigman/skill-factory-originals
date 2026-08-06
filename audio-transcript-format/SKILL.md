@@ -1,22 +1,24 @@
 ---
+slug: audio-transcript-format
 name: audio-transcript-format
-description: 将口语化音频转录文本整理为结构化书面语，支持段落划分、小标题生成、列表化。
-version: 2.2.0
+displayName: 语音转写 文本整理 排版优化
+description: 将口语化语音转写稿整理为结构化、可读性强的正式文本。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/audio-transcript-format
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge
+author: 文本工坊
 agent_created: true
-trigger_words: 音频转写格式化, 转写文本整理, 语音转文字排版, 访谈记录整理, 会议纪要优化, transcript cleanup, speech-to-text formatting
----
+trigger_words: ["音频转写格式化", "转写文本整理", "语音转文字排版", "访谈记录整理", "会议纪要优化", "语音稿润色", "口述整理"]
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+---
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -25,134 +27,70 @@ trigger_words: 音频转写格式化, 转写文本整理, 语音转文字排版,
 <!-- user-agreement-injected -->
 
 
-# 音频转写文本 格式化整理专家
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
+# 语音转写文本整理 Skill 使用指南
 
 ## 一、能力边界（一页纸速查卡）
 
-### 1.1 本 Skill 能做什么
+### 本 Skill 能做什么
 
-| 能力项 | 说明 | 示例 |
-|--------|------|------|
-| 去除口语杂质 | 删除语气词、重复词、口头禅、自我修正片段 | "嗯…那个…就是，我们其实，呃，已经做了" → "我们已经做了" |
-| 断句与标点修复 | 为无标点或标点错乱的长句重新断句 | 一口气 300 字无停顿 → 按语义切分为 3-5 个完整句子 |
-| 段落结构重建 | 按话题切换或逻辑层次划分段落，添加小标题 | 一段 2000 字流水账 → 按 3 个主题拆分为 3 个带标题的段落 |
-| 说话人标识 | 多人口对话场景中，保留并规范化角色标签 | "A：… B：…" 或 "[主持人]：… [嘉宾]：…" |
-| 冗余信息压缩 | 合并同义反复、删除与主题无关的寒暄闲聊 | 删除开场 5 分钟的天气寒暄（除非与主题相关） |
-| 术语与专名规范化 | 统一人名、地名、产品名的拼写形式 | "tensorflow / TensorFlow / TF" → 统一为 "TensorFlow" |
+| 编号 | 处理能力 | 输入示例 | 输出示例 |
+|------|----------|----------|----------|
+| 1 | 删除语气词（嗯、啊、呃、哦、哎等） | "嗯，我觉得这个方案可以" | "我觉得这个方案可以" |
+| 2 | 删除重复词 | "我们我们明天开会" | "我们明天开会" |
+| 3 | 删除自我修正前缀 | "不对不对，我说的是周三，周三下午" | "周三下午" |
+| 4 | 删除高频口头禅 | "你懂我意思吧，这个需求很急，你懂我意思吧" | "这个需求很急" |
+| 5 | 合并碎片化短句 | "然后呢。就是。那个。我们走了。" | "然后我们走了。" |
+| 6 | 规范标点符号 | 全角/半角混用、缺失标点 | 统一为全角标点，句子完整 |
+| 7 | 段落重排 | 按语义切分或合并段落 | 逻辑清晰、层次分明的段落结构 |
+| 8 | 标记不确定信息 | 人名、数字、专有名词听不清 | 输出 `[需核实:人名]` 占位符 |
 
-### 1.2 本 Skill 不做什么
+### 本 Skill 不能做什么
 
-| 限制项 | 说明 |
-|--------|------|
-| 不进行事实核查 | 不验证发言内容是否真实、准确、符合事实 |
-| 不添加新信息 | 不补充背景知识、不扩展原文没有的观点 |
-| 不翻译语言 | 原文是英文则输出英文，不自动翻译为中文 |
-| 不改变原意 | 不重写、不润色到改变说话人本意的程度 |
-| 不做摘要 | 不生成原文之外的总结或提炼（那是另一个 Skill 的职责） |
-| 不做情感分析 | 不判断发言人的情绪、态度、立场 |
+| 编号 | 限制项 | 说明 |
+|------|--------|------|
+| 1 | 不补充缺失信息 | 说话人未提及的内容不会自行脑补 |
+| 2 | 不改变原意 | 只做格式整理，不做内容增删或观点修改 |
+| 3 | 不翻译语言 | 不提供中英互译或其他语言转换 |
+| 4 | 不识别说话人身份 | 除非输入中已标注，否则不自动区分发言人 |
+| 5 | 不生成摘要 | 只整理全文，不提炼要点（如需摘要请另行说明） |
 
-### 1.3 适用对象
+### 适用对象
 
-- 播客节目逐字稿的后期整理
-- 访谈、讲座、培训录音的转写文本清理
-- 会议录音转写记录的格式规范化
-- 口述历史、回忆录素材的初步整理
-- 视频字幕稿的文本清洗
+- 播客节目逐字稿整理
+- 访谈记录文本化
+- 会议录音转写稿优化
+- 口述历史/回忆录素材整理
+- 任何需要将口语转为书面语的场景
 
-## 二、触发条件
-
-本 Skill 在以下场景自动触发：
-
-1. 用户输入包含以下关键词之一：
-   - "整理转录" / "格式化转录" / "清理转录"
-   - "音频转录整理" / "转录文本整理" / "结构化转录"
-   - "transcript cleanup" / "speech-to-text formatting"
-2. 用户提供待处理的转录文本（通过 `--input` 参数或标准输入）
-
-## 三、标准流程
-
-### 3.1 输入处理
-
-1. 接收原始转录文本（支持 UTF-8 编码）
-2. 检查文本是否为空或仅含空白字符
-3. 检测文本语言（中文/英文/混合）
-
-### 3.2 清洗阶段
-
-1. **去除口语填充词**：删除纯口头词（如"嗯"、"啊"、"呃"、"那个"、"就是"等），保留实词；句尾语气词（呢/吧/吗）一律保留
-2. **标点修复**：合并重复标点、修正标点粘连、英文/数字前补空格
-3. **空格规范化**：去除多余空格，统一中英文之间空格
-
-### 3.3 结构化阶段
-
-1. **段落划分**：按语义主题将文本划分为逻辑段落（滑动窗口主题漂移 + 连接词边界）
-2. **小标题生成**：为段落添加小标题（可选，`--headings`，基于段首句截取）
-3. **列表化**：识别并列项（如"第一...第二...第三..."、"1. 2. 3."）并转为列表格式
-
-### 3.4 输出生成
-
-1. 生成结构化文本（Markdown 格式）
-2. 输出统计信息（处理时间、字符数变化等）
-
-## 四、执行步骤
-
-1. 接收转录文本（`--input` 文件或标准输入），校验非空且不超长。
-2. 阶段 1 清洗：删除口语填充词（保留实词与句尾语气词），修复标点与空格。
-3. 阶段 2 结构化：术语规范化 → 段落划分（滑动窗口主题漂移）→ 列表化（可选小标题）。
-4. 输出整理后文本；`--verbose` 时附阶段耗时、删除明细与告警。
-5. `--output` 指定输出文件时以原子方式写入。
-
-## 五、处理原则
-
-本 Skill 对以下情况按既定规则处理：
-
-| 场景 | 处理方式 |
-|------|---------|
-| 输入为空 | 返回错误码 1，提示输入文本为空 |
-| 输入超长（默认 >10000 字符，`--max-len` 可调） | 返回错误码 2，提示分段处理 |
-| 删除字符占比 > 20% | 正常处理，verbose 模式输出告警，提示检查原文 |
-| 输入较短（< 50 字符） | 正常处理（v2.2 起不再跳过，统一走全流程） |
-
-## 六、错误码
-
-| 错误码 | 含义 | 处理方式 |
-|--------|------|---------|
-| 0 | 成功 | 正常输出 |
-| 1 | 输入为空 | 返回错误信息 |
-| 2 | 输入过长（默认 >10000 字符） | 分段处理或调大 `--max-len` |
-| 10 | 输入文件读取失败（不存在/非 UTF-8 编码） | 检查路径与编码 |
-| 11 | 术语文件读取/解析失败 | 检查 JSON 格式 |
-
-## 七、FAQ 与反模式
-
-### FAQ
-
-**Q: 如何处理英文转录文本？**
-A: 本 Skill 支持中英文混合文本。英文部分保留原样，仅处理中文口语填充词。
-
-**Q: 如何处理多人对话？**
-A: 保留说话人标识（如"A："、"B："），并规范化格式为"[说话人]："。
-
-**Q: 如何处理专有名词？**
-A: 提供术语表参数（`--terms`），可指定统一拼写形式。
-
-### 反模式
-
-- ❌ **不要** 在未确认用户需求时自动添加小标题
-- ❌ **不要** 删除所有"然后"、"就是"等词（这些词有时是实词）
-- ❌ **不要** 将口语文本完全改写为书面语（保留原意）
-- ❌ **不要** 在无网络时尝试在线术语查询（本 Skill 不依赖网络）
 
 ## 许可证（License）
-## 失败处理
 
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
+```text
+MIT License
 
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
+Copyright (c) {year} {holder}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+<!-- professional-license-embedded -->
