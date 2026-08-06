@@ -155,7 +155,7 @@ class ExpenseProcessor:
             raise FileNotFoundError(f"输入目录不存在: {self.input_dir}")
         
         # 创建备份
-        backup_dir = self.output_dir / f"backup_{datetime.datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        backup_dir = self.output_dir / f"backup_{datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d_%H%M%S')}"
         backup_dir.mkdir(parents=True, exist_ok=True)
         
         supported_ext = {'.pdf', '.jpg', '.jpeg', '.png', '.txt', '.csv'}
@@ -197,7 +197,7 @@ class ExpenseProcessor:
         """生成明细表"""
         self.output_dir.mkdir(parents=True, exist_ok=True)
         
-        timestamp = datetime.datetime.now().strftime('%Y%m%d_%H%M%S')
+        timestamp = datetime.datetime.now(datetime.timezone.utc).strftime('%Y%m%d_%H%M%S')
         
         if format_type == 'csv':
             output_file = self.output_dir / f"报销明细_{timestamp}.csv"
