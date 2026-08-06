@@ -9,7 +9,7 @@ import argparse
 import json
 import math
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 
 # 默认参数配置
 DEFAULT_LPR = 3.85  # 5年期以上LPR（%）
@@ -21,7 +21,7 @@ DEFAULT_DOWN_PAYMENT_RATIO = 0.30
 TAX_RATES = {
     'deed_tax': 0.015,      # 契税（首套90平以上）
     'agent_fee': 0.01,      # 中介费
-    'maintenance_fund': 200, # 维修基金（元/平，按100平估算）
+    'maintenance_fund': 200, # 维修基金（元/平）
     'stamp_tax': 0.0005,    # 印花税
     'transfer_fee': 80,     # 过户费（固定）
     'other_fee': 2000       # 其他杂费（评估、公证等）
@@ -66,7 +66,7 @@ def calculate_monthly_payment(principal, annual_rate, years, method='equal_insta
     else:
         raise ValueError("还款方式必须是 equal_installment 或 equal_principal")
 
-def calculate_taxes(house_price, area=100, is_first_house=True):
+def calculate_taxes(house_price, area, is_first_house=True):
     """
     估算购房税费
     :param house_price: 房屋总价
@@ -74,6 +74,9 @@ def calculate_taxes(house_price, area=100, is_first_house=True):
     :param is_first_house: 是否首套房
     :return: 税费明细字典
     """
+    if area <= 0:
+        raise ValueError("房屋面积必须为正数")
+    
     taxes = {}
     
     # 契税（首套90平以下1%，90平以上1.5%；二套3%）
@@ -86,7 +89,7 @@ def calculate_taxes(house_price, area=100, is_first_house=True):
     # 中介费
     taxes['中介费'] = house_price * TAX_RATES['agent_fee']
     
-    # 维修基金（按面积）
+    # 维修基金（按面积动态计算）
     taxes['维修基金'] = TAX_RATES['maintenance_fund'] * area
     
     # 印花税
@@ -169,6 +172,7 @@ def format_output(result):
     lines.append("购房测算结果")
     lines.append("=" * 60)
     lines.append(f"房屋总价: {result['house_price']:,.0f} 元")
+    lines.append(f"房屋面积: {result['area']:.0f} 平米")
     lines.append(f"首付金额: {result['down_payment']:,.0f} 元")
     lines.append(f"贷款金额: {result['loan_amount']:,.0f} 元")
     lines.append(f"贷款年限: {result['loan_years']} 年")
@@ -198,15 +202,16 @@ def main():
         description='购房测算工具 - 计算月供、税费、现金流压力与购房建议',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog='''示例:
-  python run.py --price 3000000 --income 20000 --down-ratio 30
-  python run.py --price 3000000 --income 20000 --down-payment 1000000 --years 20
-  python run.py --price 3000000 --income 20000 --rate 4.15 --method equal_principal
-  python run.py --price 3000000 --income 20000 --json
+  python run.py --price 3000000 --income 20000 --area 100 --down-ratio 30
+  python run.py --price 3000000 --income 20000 --area 100 --down-payment 1000000 --years 20
+  python run.py --price 3000000 --income 20000 --area 100 --rate 4.15 --method equal_principal
+  python run.py --price 3000000 --income 20000 --area 100 --json
 '''
     )
     
     parser.add_argument('--price', type=float, required=True, help='房屋总价（元）')
     parser.add_argument('--income', type=float, required=True, help='家庭月收入（税后，元）')
+    parser.add_argument('--area', type=float, required=True, help='房屋面积（平米）')
     parser.add_argument('--down-ratio', type=float, default=DEFAULT_DOWN_PAYMENT_RATIO * 100,
                        help=f'首付比例（%），默认{DEFAULT_DOWN_PAYMENT_RATIO*100:.0f}%')
     parser.add_argument('--down-payment', type=float, help='首付金额（元），与--down-ratio二选一')
@@ -216,7 +221,6 @@ def main():
                        help=f'年利率（%），默认{DEFAULT_LPR + DEFAULT_BP/100:.2f}%')
     parser.add_argument('--method', choices=['equal_installment', 'equal_principal'],
                        default='equal_installment', help='还款方式，默认等额本息')
-    parser.add_argument('--area', type=float, default=100, help='房屋面积（平米），默认100')
     parser.add_argument('--first-house', action='store_true', default=True,
                        help='是否首套房（默认是）')
     parser.add_argument('--json', action='store_true', help='以JSON格式输出')
@@ -229,6 +233,8 @@ def main():
             raise ValueError("房屋总价必须为正数")
         if args.income <= 0:
             raise ValueError("月收入必须为正数")
+        if args.area <= 0:
+            raise ValueError("房屋面积必须为正数")
         if args.years <= 0 or args.years > 30:
             raise ValueError("贷款年限必须在1-30年之间")
         if args.rate < 0:
@@ -269,6 +275,7 @@ def main():
         # 组装结果
         result = {
             'house_price': args.price,
+            'area': args.area,
             'down_payment': down_payment,
             'loan_amount': loan_amount,
             'loan_years': args.years,
@@ -283,7 +290,7 @@ def main():
             'dti': dti,
             'pressure_level': pressure_level,
             'advice': advice,
-            'generated_at': datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            'generated_at': datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')
         }
         
         # 输出
@@ -314,10 +321,11 @@ def selftest():
     assert payment > 6000, f"等额本金首月月供应较高: {payment}"
     print(f"✓ 等额本金计算正确: 首月月供{payment:.2f}元")
     
-    # 测试3: 税费计算
+    # 测试3: 税费计算（动态面积）
     taxes = calculate_taxes(3000000, 100, True)
     assert taxes['契税'] == 45000, f"契税计算错误: {taxes['契税']}"
-    print(f"✓ 税费计算正确: 契税{taxes['契税']:.0f}元")
+    assert taxes['维修基金'] == 20000, f"维修基金计算错误: {taxes['维修基金']}"
+    print(f"✓ 税费计算正确: 契税{taxes['契税']:.0f}元, 维修基金{taxes['维修基金']:.0f}元")
     
     # 测试4: DTI评估
     dti, level, _ = assess_affordability(5000, 20000)
@@ -325,7 +333,12 @@ def selftest():
     assert level == "舒适", f"压力等级错误: {level}"
     print(f"✓ DTI评估正确: {dti:.1f}% -> {level}")
     
-    # 测试5: 边界条件
+    # 测试5: 建议生成
+    advice = generate_advice(3000000, 900000, 2100000, 10000, 20000, 50, 100000, 'equal_installment')
+    assert len(advice) > 0, "建议不能为空"
+    print(f"✓ 建议生成正确: {len(advice)}字符")
+    
+    # 测试6: 边界条件
     try:
         calculate_monthly_payment(-100, 4.15, 30)
         assert False, "应抛出异常"
