@@ -25,63 +25,134 @@ DEMO_DATA = [
 
 # 编码检测（纯标准库实现）
 def detect_encoding(path: Path) -> str:
-    """检测文件编码，优先 UTF-8，其次 GBK 等常见中文编码"""
+    """检测文件编码，优先 UTF-8，其次 GBK 等常见中文编码
+    修复：全文件采样，避免前部 ASCII 后部中文导致误判"""
     with open(path, "rb") as f:
-        raw = f.read(4096)
+        raw = f.read()  # 全文件读取，避免前4096字节误判
+    
     # BOM 检测
     if raw.startswith(b'\xef\xbb\xbf'):
         return 'utf-8-sig'
     if raw.startswith(b'\xff\xfe') or raw.startswith(b'\xfe\xff'):
         return 'utf-16'
+    
     # 尝试 UTF-8 严格解码
     try:
         raw.decode('utf-8')
         return 'utf-8'
     except UnicodeDecodeError:
         pass
+    
     # 尝试 GBK
     try:
         raw.decode('gbk')
         return 'gbk'
     except UnicodeDecodeError:
         pass
+    
+    # 尝试 GB18030（GBK 超集）
+    try:
+        raw.decode('gb18030')
+        return 'gb18030'
+    except UnicodeDecodeError:
+        pass
+    
     # 默认 UTF-8
     return 'utf-8'
 
 
 def read_csv(path: Path, encoding: str = None, max_rows: int = 100000):
-    """读 CSV，返回 (headers, rows[dict])，数值列自动转 float
-    支持编码自动检测、行数限制防止内存溢出"""
+    """读 CSV，返回 (headers, rows[dict], truncated_flag)，数值列自动转 float
+    修复：增加 truncated 标志，解码失败时自动重试备选编码"""
     if encoding is None:
         encoding = detect_encoding(path)
     
     rows = []
-    with open(path, "r", encoding=encoding, newline="") as f:
-        reader = csv.DictReader(f)
-        headers = reader.fieldnames or []
-        for i, raw in enumerate(reader):
-            if i >= max_rows:
-                print(f"⚠️ 警告: 文件超过 {max_rows} 行，已截断处理")
-                break
-            row = {}
-            for h in headers:
-                v = raw.get(h, "")
-                try:
-                    row[h] = float(v)
-                except (ValueError, TypeError):
-                    row[h] = v
-            rows.append(row)
-    return headers, rows
+    truncated = False
+    try:
+        with open(path, "r", encoding=encoding, newline="") as f:
+            reader = csv.DictReader(f)
+            headers = reader.fieldnames or []
+            for i, raw in enumerate(reader):
+                if i >= max_rows:
+                    print(f"⚠️ 警告: 文件超过 {max_rows} 行，已截断处理")
+                    truncated = True
+                    break
+                row = {}
+                for h in headers:
+                    v = raw.get(h, "")
+                    try:
+                        row[h] = float(v)
+                    except (ValueError, TypeError):
+                        row[h] = v
+                rows.append(row)
+    except UnicodeDecodeError as e:
+        # 解码失败时自动尝试备选编码
+        if encoding != 'gbk':
+            try:
+                with open(path, "r", encoding='gbk', newline="") as f:
+                    reader = csv.DictReader(f)
+                    headers = reader.fieldnames or []
+                    rows = []
+                    for i, raw in enumerate(reader):
+                        if i >= max_rows:
+                            print(f"⚠️ 警告: 文件超过 {max_rows} 行，已截断处理")
+                            truncated = True
+                            break
+                        row = {}
+                        for h in headers:
+                            v = raw.get(h, "")
+                            try:
+                                row[h] = float(v)
+                            except (ValueError, TypeError):
+                                row[h] = v
+                        rows.append(row)
+                print(f"ℹ️ 编码 {encoding} 解码失败，已自动切换为 GBK")
+                encoding = 'gbk'
+            except (UnicodeDecodeError, OSError):
+                raise UnicodeDecodeError(f"文件编码错误，请尝试 --encoding 参数指定正确编码: {e}") from e
+        else:
+            raise UnicodeDecodeError(f"文件编码错误，请尝试 --encoding 参数指定正确编码: {e}") from e
+    except OSError as e:
+        raise OSError(f"无法读取文件 {path}: {e}") from e
+    except csv.Error as e:
+        raise csv.Error(f"CSV 格式错误: {e}") from e
+    
+    return headers, rows, truncated
 
 
 def pick_columns(headers, rows, x_col, y_col):
     """选 x/y 列：默认第一列 x，其余数值列 y"""
+    if not rows:
+        return "index", [], []
+    
     num_cols = []
     for h in headers:
-        if all(isinstance(r.get(h), (int, float)) for r in rows if r.get(h) is not None):
+        # 检查该列是否有至少一个数值
+        has_numeric = any(isinstance(r.get(h), (int, float)) for r in rows)
+        if has_numeric:
             num_cols.append(h)
-    x = x_col or (headers[0] if headers else "index")
-    ys = [y_col] if y_col else [c for c in num_cols if c != x]
+    
+    # 处理 x_col
+    if x_col:
+        if x_col not in headers:
+            print(f"⚠️ 警告: 指定的 X 列 '{x_col}' 不存在，回退到第一列 '{headers[0]}'")
+            x = headers[0]
+        else:
+            x = x_col
+    else:
+        x = headers[0] if headers else "index"
+    
+    # 处理 y_col
+    if y_col:
+        if y_col not in headers:
+            print(f"⚠️ 警告: 指定的 Y 列 '{y_col}' 不存在，使用所有数值列")
+            ys = [c for c in num_cols if c != x]
+        else:
+            ys = [y_col]
+    else:
+        ys = [c for c in num_cols if c != x]
+    
     return x, ys, num_cols
 
 
@@ -116,8 +187,9 @@ def analyze(x_col, y_cols, rows):
     return x_vals, stats
 
 
-def make_conclusions(x_col, stats):
-    """生成有意义的自然语言结论：趋势解读、异常提醒、对比分析"""
+def make_conclusions(x_col, stats, truncated=False):
+    """生成有意义的自然语言结论：趋势解读、异常提醒、对比分析
+    修复：增加 truncated 参数，在结论中明确标注数据不完整"""
     lines = []
     if not stats:
         return "- 数据不足，无法形成结论。"
@@ -125,6 +197,12 @@ def make_conclusions(x_col, stats):
     # 总体概览
     lines.append(f"## 数据洞察报告（{x_col}维度）")
     lines.append("")
+    
+    # 数据完整性警告
+    if truncated:
+        lines.append("> ⚠️ **数据完整性警告**：原始数据超过读取上限，以下分析基于截断后的数据，"
+                     "结论可能不准确。建议使用 --max-rows 参数增加读取行数。")
+        lines.append("")
     
     for y, s in stats.items():
         # 趋势解读
@@ -171,8 +249,9 @@ def make_conclusions(x_col, stats):
     return "\n".join(lines)
 
 
-def render_html(x_col, y_cols, x_vals, stats, rows):
-    """生成 HTML 报告（使用传入的 rows 数据）"""
+def render_html(x_col, y_cols, x_vals, stats, rows, truncated=False):
+    """生成 HTML 报告（使用传入的 rows 数据）
+    修复：增加 truncated 参数，在报告中明确标注数据不完整"""
     labels = json.dumps(x_vals, ensure_ascii=False)
     datasets = []
     for y in y_cols:
@@ -185,10 +264,19 @@ def render_html(x_col, y_cols, x_vals, stats, rows):
     for y, s in stats.items():
         stat_rows += f"<tr><td>{html.escape(y)}</td><td>{s['mean']}</td><td>{s['median']}</td>" \
                      f"<td>{s['min']}~{s['max']}</td><td>{s['stdev']}</td><td>{s['trend']}</td></tr>\n"
+    
+    # 数据完整性警告
+    trunc_warning = ""
+    if truncated:
+        trunc_warning = '<div style="background:#fff3cd;color:#856404;padding:10px;margin:10px 0;border:1px solid #ffeeba;border-radius:4px;">' \
+                        '⚠️ <strong>数据完整性警告</strong>：原始数据超过读取上限，以下分析基于截断后的数据，' \
+                        '结论可能不准确。建议使用 --max-rows 参数增加读取行数。</div>'
+    
     return f"""<!DOCTYPE html>
 <html lang="zh"><head><meta charset="utf-8"><title>数据分析报告</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script></head>
 <body><h2>数据分析报告</h2>
+{trunc_warning}
 <div style="width:90%;max-width:900px;margin:auto;">
 <canvas id="chart"></canvas>
 <table border="1" cellpadding="6" style="border-collapse:collapse;margin-top:20px;">
@@ -206,7 +294,8 @@ new Chart(document.getElementById('chart'), {{
 
 
 def selftest() -> bool:
-    """自检：用临时 CSV 文件验证完整流程"""
+    """自检：用临时 CSV 文件验证完整流程
+    修复：真实调用主流程/核心函数并断言关键输出"""
     print("🔧 运行自检...")
     import tempfile
     with tempfile.TemporaryDirectory() as tmp:
@@ -217,16 +306,19 @@ def selftest() -> bool:
             for m, v in DEMO_DATA:
                 f.write(f"{m},{v}\n")
         
-        # 测试编码检测
+        # 测试编码检测（全文件采样）
         enc = detect_encoding(demo)
         if enc != 'utf-8':
             print(f"  ❌ 编码检测失败: {enc}")
             return False
         
-        # 测试 CSV 读取
-        headers, rows = read_csv(demo)
+        # 测试 CSV 读取（含 truncated 标志）
+        headers, rows, truncated = read_csv(demo)
         if not rows or len(rows) != 12:
             print("  ❌ CSV 读取失败")
+            return False
+        if truncated:
+            print("  ❌ 不应标记为截断")
             return False
         
         # 测试列选择
@@ -273,83 +365,13 @@ def selftest() -> bool:
         if enc2 != 'gbk':
             print(f"  ❌ GBK 编码检测失败: {enc2}")
             return False
-        headers2, rows2 = read_csv(gbk_file)
+        headers2, rows2, truncated2 = read_csv(gbk_file)
         if len(rows2) != 3:
             print("  ❌ GBK 文件读取失败")
             return False
         
-        print(f"  ✅ 12 行示例数据统计正确（均值 {s['mean']}，趋势 {s['trend']}）")
-        print(f"  ✅ 结论生成正常（{len(md)} 字符）")
-        print(f"  ✅ HTML 报告生成正常（{len(html_out)} 字节）")
-        print(f"  ✅ GBK 编码文件读取正常")
-        return True
-
-
-def main() -> int:
-    ap = argparse.ArgumentParser(description="数据洞察：CSV → 统计 + 可视化报告")
-    ap.add_argument("--input", "-i", default="", help="输入 CSV 文件路径")
-    ap.add_argument("--x", default="", help="X 轴列名（默认第一列）")
-    ap.add_argument("--y", default="", help="Y 轴数值列名（默认全部数值列）")
-    ap.add_argument("--output", "-o", default="report.html", help="输出 HTML 报告路径")
-    ap.add_argument("--top", type=int, default=10, help="结论 Top N（保留参数）")
-    ap.add_argument("--encoding", default="", help="指定 CSV 编码（默认自动检测）")
-    ap.add_argument("--max-rows", type=int, default=100000, help="最大读取行数（默认 100000）")
-    ap.add_argument("--demo", action="store_true", help="使用内置示例数据（仅测试用）")
-    ap.add_argument("--selftest", action="store_true", help="运行自检")
-    ap.add_argument("--version", action="version", version="visual_report 1.0.0")
-    args = ap.parse_args()
-
-    if args.selftest:
-        return 0 if selftest() else 1
-
-    # 处理 --demo 模式
-    if args.demo:
-        if args.input:
-            print("⚠️ 警告: --demo 与 --input 同时指定，将使用 --demo 数据")
-        import tempfile
-        tmp = tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8")
-        tmp.write("月份,销售额\n")
-        for m, v in DEMO_DATA:
-            tmp.write(f"{m},{v}\n")
-        tmp.close()
-        args.input = tmp.name
-        print(f"ℹ️ 使用内置示例数据（临时文件: {args.input}）")
-
-    if not args.input:
-        print("❌ 错误: 请用 --input 指定 CSV 文件（--selftest 可离线自检）")
-        return 1
-    src = Path(args.input)
-    if not src.exists():
-        print(f"❌ 错误: 文件不存在 {src}")
-        return 1
-    
-    # 读取 CSV（支持编码检测和行数限制）
-    try:
-        headers, rows = read_csv(src, encoding=args.encoding or None, max_rows=args.max_rows)
-    except Exception as e:
-        print(f"❌ 错误: 读取 CSV 失败 - {e}")
-        return 1
-    
-    if not rows:
-        print("❌ 错误: CSV 无数据行")
-        return 1
-    
-    x, ys, _ = pick_columns(headers, rows, args.x, args.y)
-    if not ys:
-        print("❌ 错误: 未找到数值列（--y 指定）")
-        return 1
-    
-    x_vals, stats = analyze(x, ys, rows)
-    
-    # 输出 Markdown 结论
-    print(make_conclusions(x, stats))
-    
-    # 输出 HTML
-    out = Path(args.output)
-    out.write_text(render_html(x, ys, x_vals, stats, rows), encoding="utf-8")
-    print(f"📄 报告已生成: {out.resolve()}")
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        # 测试空文件处理
+        empty_file = Path(tmp) / "empty.csv"
+        with open(empty_file, "w", encoding="utf-8") as f:
+            f.write("")
+        headers3, rows3
