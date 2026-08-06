@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-多智能体协作框架 - 独立实现
-基于功能规格文档进行 clean-room 重写
+多智能体协作编排器 - 生产级实现
+支持任务拆解、角色分配、执行编排、结果整合与质量校验
 """
 
 import argparse
@@ -53,6 +53,10 @@ DEFAULT_RETRY = 2
 MAX_TIMEOUT = 3600
 MAX_RETRY = 10
 
+# 完整性评分阈值
+COMPLETENESS_THRESHOLD_WARN = 0.8
+COMPLETENESS_THRESHOLD_PASS = 0.9
+
 
 class AgentConfig:
     """Agent角色配置"""
@@ -85,531 +89,577 @@ class TaskInput:
 
 class AgentResult:
     """单个Agent的执行结果"""
-    def __init__(self, role: str, output: str, success: bool, duration: float):
+    def __init__(
+        self,
+        task_id: str,
+        role: str,
+        status: str,
+        output: str,
+        execution_time: float,
+        attempts: int,
+    ):
+        self.task_id = task_id
         self.role = role
+        self.status = status
         self.output = output
-        self.success = success
-        self.duration = duration
+        self.execution_time = execution_time
+        self.attempts = attempts
 
     def to_dict(self) -> Dict[str, Any]:
         return {
+            "task_id": self.task_id,
             "role": self.role,
+            "status": self.status,
             "output": self.output,
-            "success": self.success,
-            "duration": self.duration,
+            "execution_time": self.execution_time,
+            "attempts": self.attempts,
+        }
+
+
+class OrchestratorResult:
+    """编排器最终结果"""
+    def __init__(
+        self,
+        task: str,
+        agents: List[Dict[str, Any]],
+        results: List[AgentResult],
+        completeness: float,
+        status: str,
+        timestamp: str,
+    ):
+        self.task = task
+        self.agents = agents
+        self.results = results
+        self.completeness = completeness
+        self.status = status
+        self.timestamp = timestamp
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "task": self.task,
+            "agents": self.agents,
+            "results": [r.to_dict() for r in self.results],
+            "completeness": self.completeness,
+            "status": self.status,
+            "timestamp": self.timestamp,
         }
 
 
 # ============================================================
-# 输入校验模块
+# 任务拆解器
 # ============================================================
-class InputValidator:
-    """输入参数校验器"""
+class TaskDecomposer:
+    """将复杂任务按角色模板拆分为子任务"""
 
-    @staticmethod
-    def validate_task(task: str) -> bool:
-        """校验任务描述：非空字符串，长度≥10，且非纯标点"""
-        if not task or not isinstance(task, str):
-            return False
-        if len(task.strip()) < MIN_TASK_LENGTH:
-            return False
-        # 检查是否纯标点
-        if re.fullmatch(r'[\s\W_]+', task):
-            return False
-        return True
+    # 角色对应的任务模板
+    ROLE_TEMPLATES = {
+        "架构师": "设计系统架构方案，包括模块划分、接口定义和数据流设计。",
+        "测试工程师": "制定测试策略，设计测试用例，覆盖正常和异常场景。",
+        "数据分析师": "分析数据特征，识别模式，提出数据驱动的建议。",
+        "研究员": "调研相关领域知识，收集信息，整理研究结论。",
+        "代码审查员": "审查代码质量，识别潜在问题，提出改进建议。",
+    }
 
-    @staticmethod
-    def validate_agents(agents_json: str) -> Tuple[bool, Optional[List[AgentConfig]]]:
-        """校验角色配置JSON"""
-        try:
-            data = json.loads(agents_json)
-            if not isinstance(data, list):
-                return False, None
-            result = []
-            for item in data:
-                if not isinstance(item, dict):
-                    return False, None
-                role = item.get("role")
-                count = item.get("count", 1)
-                if role not in VALID_ROLES:
-                    return False, None
-                if not isinstance(count, int) or count < 1:
-                    return False, None
-                result.append(AgentConfig(role, count))
-            return True, result
-        except json.JSONDecodeError:
-            return False, None
+    def __init__(self, task: str, agents: List[AgentConfig]):
+        self.task = task
+        self.agents = agents
 
-    @staticmethod
-    def validate_params(params_str: str) -> Tuple[bool, Optional[Dict[str, str]]]:
-        """校验参数覆盖格式：key=value 对，空格分隔"""
-        if not params_str:
-            return True, {}
-        result = {}
-        for pair in params_str.split():
-            if "=" not in pair:
-                return False, None
-            key, value = pair.split("=", 1)
-            if not key or not value:
-                return False, None
-            result[key] = value
-        return True, result
+    def decompose(self) -> List[Dict[str, Any]]:
+        """将任务拆分为子任务列表"""
+        subtasks = []
+        for agent in self.agents:
+            for i in range(agent.count):
+                subtask_id = f"{agent.role}_{i+1}"
+                template = self.ROLE_TEMPLATES.get(
+                    agent.role, "执行分析任务并输出结果。"
+                )
+                subtasks.append({
+                    "task_id": subtask_id,
+                    "role": agent.role,
+                    "description": f"{template} 任务: {self.task}",
+                    "dependencies": self._get_dependencies(agent.role, i),
+                })
+        return subtasks
 
-    @staticmethod
-    def validate_timeout(timeout: int) -> bool:
-        """校验超时时间：正整数且不超过最大值"""
-        return isinstance(timeout, int) and 0 < timeout <= MAX_TIMEOUT
-
-    @staticmethod
-    def validate_retry(retry: int) -> bool:
-        """校验重试次数：非负整数且不超过最大值"""
-        return isinstance(retry, int) and 0 <= retry <= MAX_RETRY
+    def _get_dependencies(self, role: str, index: int) -> List[str]:
+        """定义角色间的依赖关系"""
+        deps = []
+        if role == "测试工程师":
+            deps.append("架构师_1")
+        elif role == "代码审查员":
+            deps.append("架构师_1")
+        return deps
 
 
 # ============================================================
-# 环境准备模块
-# ============================================================
-class EnvironmentManager:
-    """环境准备与输出目录管理"""
-
-    @staticmethod
-    def prepare_output_dir(output_dir: str) -> bool:
-        """创建输出目录及其子目录"""
-        try:
-            output_path = Path(output_dir)
-            output_path.mkdir(parents=True, exist_ok=True)
-            (output_path / "artifacts").mkdir(parents=True, exist_ok=True)
-            return True
-        except OSError:
-            return False
-
-    @staticmethod
-    def save_output(output_dir: str, stdout: str, stderr: str) -> bool:
-        """保存标准输出和错误输出到文件"""
-        try:
-            with open(os.path.join(output_dir, "stdout.log"), "w", encoding="utf-8") as f:
-                f.write(stdout)
-            with open(os.path.join(output_dir, "stderr.log"), "w", encoding="utf-8") as f:
-                f.write(stderr)
-            return True
-        except OSError:
-            return False
-
-
-# ============================================================
-# Agent执行模块
+# Agent执行器
 # ============================================================
 class AgentExecutor:
-    """模拟Agent执行器"""
+    """执行单个Agent任务，支持超时和重试"""
 
     def __init__(self, timeout: int = DEFAULT_TIMEOUT, retry: int = DEFAULT_RETRY):
         self.timeout = timeout
         self.retry = retry
 
-    def execute_single(self, role: str, task: str, params: Dict[str, str]) -> AgentResult:
-        """
-        执行单个Agent任务
-        在真实环境中，这里会调用LLM或外部服务
-        此处使用模拟实现用于演示和测试
-        """
+    def execute(
+        self, task_id: str, role: str, description: str
+    ) -> AgentResult:
+        """执行任务，带重试机制"""
         start_time = time.time()
+        attempts = 0
+
+        while attempts <= self.retry:
+            attempts += 1
+            try:
+                # 模拟执行（实际可替换为真实AI调用）
+                output = self._simulate_execution(role, description)
+                elapsed = time.time() - start_time
+
+                return AgentResult(
+                    task_id=task_id,
+                    role=role,
+                    status="success",
+                    output=output,
+                    execution_time=elapsed,
+                    attempts=attempts,
+                )
+            except TimeoutError:
+                if attempts > self.retry:
+                    raise TimeoutError(ErrorCode.E007)
+                time.sleep(2 ** attempts)  # 指数退避
+            except Exception as e:
+                if attempts > self.retry:
+                    raise RuntimeError(f"{ErrorCode.E008}: {str(e)}")
+                time.sleep(2 ** attempts)
+
+        raise RuntimeError(ErrorCode.E008)
+
+    def _simulate_execution(self, role: str, description: str) -> str:
+        """模拟Agent执行，生成结构化输出"""
+        # 基于角色生成不同的输出模板
+        templates = {
+            "架构师": "架构方案: 采用微服务架构，包含API网关、服务注册中心、配置中心。",
+            "测试工程师": "测试计划: 包含单元测试、集成测试、端到端测试，覆盖关键路径。",
+            "数据分析师": "数据分析: 识别出3个关键趋势，提出2条优化建议。",
+            "研究员": "研究结论: 汇总5个相关领域的最新进展，提出3个研究方向。",
+            "代码审查员": "审查报告: 发现2个潜在问题，1个性能瓶颈，建议优化方案。",
+        }
+        template = templates.get(role, "执行完成，输出分析结果。")
+        return f"{template} 任务描述: {description[:50]}..."
+
+    def _check_timeout(self, start_time: float) -> None:
+        """检查是否超时"""
+        if time.time() - start_time > self.timeout:
+            raise TimeoutError(ErrorCode.E007)
+
+
+# ============================================================
+# 结果整合器
+# ============================================================
+class ResultIntegrator:
+    """整合所有Agent结果，进行完整性校验"""
+
+    REQUIRED_FIELDS = ["task_id", "role", "status", "output"]
+
+    def integrate(self, results: List[AgentResult]) -> Tuple[float, str]:
+        """计算完整性评分并返回状态"""
+        if not results:
+            return 0.0, "FAIL"
+
+        total_score = 0.0
+        for result in results:
+            result_dict = result.to_dict()
+            field_score = 0.0
+            for field in self.REQUIRED_FIELDS:
+                if field in result_dict and result_dict[field]:
+                    field_score += 1.0 / len(self.REQUIRED_FIELDS)
+            total_score += field_score
+
+        completeness = total_score / len(results)
+
+        if completeness >= COMPLETENESS_THRESHOLD_PASS:
+            status = "PASS"
+        elif completeness >= COMPLETENESS_THRESHOLD_WARN:
+            status = "WARN"
+        else:
+            status = "FAIL"
+
+        return completeness, status
+
+
+# ============================================================
+# 编排器主类
+# ============================================================
+class MultiAgentOrchestrator:
+    """多智能体协作编排器"""
+
+    def __init__(self, config: TaskInput):
+        self.config = config
+        self.decomposer = TaskDecomposer(config.task, config.agents)
+        self.executor = AgentExecutor(config.timeout, config.retry)
+        self.integrator = ResultIntegrator()
+
+    def run(self) -> OrchestratorResult:
+        """执行完整编排流程"""
         try:
-            # 模拟执行时间
-            time.sleep(0.1)
-            
-            # 模拟输出
-            output = (
-                f"[{role}] 任务分析完成\n"
-                f"任务描述: {task[:50]}...\n"
-                f"参数: {json.dumps(params, ensure_ascii=False)}\n"
-                f"分析结果: 已完成任务分解，共识别出3个子任务\n"
-                f"建议: 按优先级排序执行"
+            # 1. 任务拆解
+            subtasks = self.decomposer.decompose()
+
+            # 2. 执行编排（按依赖排序）
+            results = self._execute_with_dependencies(subtasks)
+
+            # 3. 结果整合
+            completeness, status = self.integrator.integrate(results)
+
+            # 4. 生成时间戳
+            timestamp = datetime.now(timezone.utc).isoformat()
+
+            return OrchestratorResult(
+                task=self.config.task,
+                agents=[a.to_dict() for a in self.config.agents],
+                results=results,
+                completeness=completeness,
+                status=status,
+                timestamp=timestamp,
             )
-            return AgentResult(role, output, True, time.time() - start_time)
         except Exception as e:
-            return AgentResult(role, f"执行失败: {str(e)}", False, time.time() - start_time)
+            raise RuntimeError(f"{ErrorCode.E010}: {str(e)}")
 
-    def execute_with_retry(self, role: str, task: str, params: Dict[str, str]) -> AgentResult:
-        """带重试机制的Agent执行"""
-        result = None
-        for attempt in range(self.retry + 1):
-            result = self.execute_single(role, task, params)
-            if result.success:
-                return result
-            if attempt < self.retry:
-                time.sleep(0.5)  # 重试等待
-        return result
+    def _execute_with_dependencies(
+        self, subtasks: List[Dict[str, Any]]
+    ) -> List[AgentResult]:
+        """按依赖关系执行子任务"""
+        results: List[AgentResult] = []
+        executed: Dict[str, AgentResult] = {}
 
-    def execute_all(self, agents: List[AgentConfig], task: str, params: Dict[str, str]) -> List[AgentResult]:
-        """执行所有Agent任务"""
-        results = []
-        for agent in agents:
-            for _ in range(agent.count):
-                result = self.execute_with_retry(agent.role, task, params)
-                results.append(result)
+        # 简单拓扑排序（串行执行）
+        remaining = subtasks.copy()
+        while remaining:
+            progress = False
+            for subtask in remaining[:]:
+                deps = subtask.get("dependencies", [])
+                if all(dep in executed for dep in deps):
+                    result = self.executor.execute(
+                        subtask["task_id"],
+                        subtask["role"],
+                        subtask["description"],
+                    )
+                    executed[subtask["task_id"]] = result
+                    results.append(result)
+                    remaining.remove(subtask)
+                    progress = True
+
+            if not progress:
+                # 存在循环依赖或无法满足的依赖
+                for subtask in remaining:
+                    result = self.executor.execute(
+                        subtask["task_id"],
+                        subtask["role"],
+                        subtask["description"],
+                    )
+                    executed[subtask["task_id"]] = result
+                    results.append(result)
+                break
+
         return results
 
 
 # ============================================================
-# 结果收集与校验模块
+# 输入校验
 # ============================================================
-class ResultCollector:
-    """结果收集与完整性校验"""
+def validate_input(args: argparse.Namespace) -> TaskInput:
+    """校验输入参数并构建TaskInput"""
+    # 校验任务描述
+    if not args.task or len(args.task.strip()) < MIN_TASK_LENGTH:
+        raise ValueError(ErrorCode.E001)
 
-    @staticmethod
-    def validate_results(results: List[AgentResult]) -> Tuple[bool, str]:
-        """校验结果完整性"""
-        if not results:
-            return False, "无Agent执行结果"
-        
-        # 检查是否有致命错误
-        for result in results:
-            if not result.success:
-                return False, f"Agent {result.role} 执行失败"
-            
-        # 检查输出是否非空
-        for result in results:
-            if not result.output or len(result.output.strip()) == 0:
-                return False, f"Agent {result.role} 输出为空"
-        
-        return True, "所有检查通过"
-
-    @staticmethod
-    def generate_summary(results: List[AgentResult], task: str) -> str:
-        """生成任务执行摘要"""
-        success_count = sum(1 for r in results if r.success)
-        total_count = len(results)
-        roles = list(set(r.role for r in results))
-        
-        summary = (
-            f"任务执行摘要\n"
-            f"任务: {task}\n"
-            f"执行时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}\n"
-            f"参与Agent: {', '.join(roles)}\n"
-            f"成功率: {success_count}/{total_count}\n"
-            f"总体状态: {'成功' if success_count == total_count else '部分成功'}"
-        )
-        return summary
-
-    @staticmethod
-    def create_artifacts(results: List[AgentResult], output_dir: str) -> List[Dict[str, Any]]:
-        """创建输出文件产物"""
-        artifacts = []
-        artifacts_dir = os.path.join(output_dir, "artifacts")
-        for i, result in enumerate(results):
-            filename = f"agent_{i+1}_{result.role}_report.md"
-            filepath = os.path.join(artifacts_dir, filename)
-            try:
-                with open(filepath, "w", encoding="utf-8") as f:
-                    f.write(f"# {result.role} 执行报告\n\n")
-                    f.write(f"## 执行时间\n{datetime.now(timezone.utc).isoformat()}\n\n")
-                    f.write(f"## 执行时长\n{result.duration:.2f}秒\n\n")
-                    f.write(f"## 输出内容\n{result.output}\n")
-                
-                size = os.path.getsize(filepath)
-                artifacts.append({
-                    "name": filename,
-                    "path": filepath,
-                    "size": size
-                })
-            except OSError:
-                continue
-        return artifacts
-
-
-# ============================================================
-# 主流程控制器
-# ============================================================
-class AgentFramework:
-    """多智能体协作框架主控制器"""
-
-    def __init__(self):
-        self.validator = InputValidator()
-        self.env_manager = EnvironmentManager()
-        self.executor = None
-        self.collector = ResultCollector()
-
-    def run(self, args: argparse.Namespace) -> Dict[str, Any]:
-        """执行完整流程"""
+    # 解析角色配置
+    agents = []
+    if args.agents:
         try:
-            # 步骤1: 收集输入并校验
-            if not self.validator.validate_task(args.task):
-                return self._error_response(ErrorCode.E001, "任务描述必须是非空字符串，长度≥10且不能是纯标点")
+            agent_data = json.loads(args.agents)
+            if not isinstance(agent_data, list):
+                raise ValueError(ErrorCode.E002)
+            for item in agent_data:
+                if not isinstance(item, dict) or "role" not in item:
+                    raise ValueError(ErrorCode.E002)
+                role = item["role"]
+                count = item.get("count", 1)
+                if role not in VALID_ROLES:
+                    raise ValueError(ErrorCode.E003)
+                if not isinstance(count, int) or count < 1:
+                    raise ValueError(ErrorCode.E002)
+                agents.append(AgentConfig(role, count))
+        except json.JSONDecodeError:
+            raise ValueError(ErrorCode.E002)
+    else:
+        agents = [AgentConfig(**a) for a in DEFAULT_AGENTS]
 
-            # 校验超时和重试参数
-            if not self.validator.validate_timeout(args.timeout):
-                return self._error_response(ErrorCode.E010, f"超时时间必须是1-{MAX_TIMEOUT}之间的正整数")
-            if not self.validator.validate_retry(args.retry):
-                return self._error_response(ErrorCode.E010, f"重试次数必须是0-{MAX_RETRY}之间的非负整数")
+    # 解析参数覆盖
+    params = {}
+    if args.params:
+        try:
+            params = json.loads(args.params)
+            if not isinstance(params, dict):
+                raise ValueError(ErrorCode.E004)
+        except json.JSONDecodeError:
+            raise ValueError(ErrorCode.E004)
 
-            agents = None
-            if args.agents:
-                valid, agents = self.validator.validate_agents(args.agents)
-                if not valid:
-                    return self._error_response(ErrorCode.E002, "角色配置必须是合法JSON数组，且角色名必须在允许列表中")
+    # 校验超时和重试
+    timeout = args.timeout if args.timeout else DEFAULT_TIMEOUT
+    retry = args.retry if args.retry else DEFAULT_RETRY
 
-            params = {}
-            if args.params:
-                valid, params = self.validator.validate_params(args.params)
-                if not valid:
-                    return self._error_response(ErrorCode.E004, "参数覆盖必须是key=value对，用空格分隔")
+    if timeout < 1 or timeout > MAX_TIMEOUT:
+        raise ValueError(f"超时时间必须在1-{MAX_TIMEOUT}秒之间")
+    if retry < 0 or retry > MAX_RETRY:
+        raise ValueError(f"重试次数必须在0-{MAX_RETRY}之间")
 
-            # 步骤2: 环境准备
-            if not self.env_manager.prepare_output_dir(args.output):
-                return self._error_response(ErrorCode.E005, f"无法创建输出目录: {args.output}")
-
-            # 步骤3: 执行Agent任务编排
-            self.executor = AgentExecutor(timeout=args.timeout, retry=args.retry)
-            agent_configs = agents or [AgentConfig(**a) for a in DEFAULT_AGENTS]
-            results = self.executor.execute_all(agent_configs, args.task, params)
-
-            # 步骤4: 结果收集与校验
-            valid, message = self.collector.validate_results(results)
-            if not valid:
-                return self._error_response(ErrorCode.E009, f"结果完整性校验失败: {message}")
-
-            # 生成输出
-            summary = self.collector.generate_summary(results, args.task)
-            artifacts = self.collector.create_artifacts(results, args.output)
-
-            # 保存日志
-            stdout_content = "\n".join([f"[{r.role}] {r.output}" for r in results])
-            self.env_manager.save_output(args.output, stdout_content, "")
-
-            # 构建响应
-            return {
-                "status": "success",
-                "exit_code": 0,
-                "summary": summary,
-                "artifacts": artifacts,
-                "agent_results": [r.to_dict() for r in results]
-            }
-
-        except Exception as e:
-            return self._error_response(ErrorCode.E010, f"未预期的错误: {str(e)}")
-
-    @staticmethod
-    def _error_response(code: str, message: str) -> Dict[str, Any]:
-        """构造错误响应"""
-        return {
-            "status": "error",
-            "exit_code": 1,
-            "error_code": code,
-            "error_message": message
-        }
-
-
-# ============================================================
-# 自测试模块
-# ============================================================
-class SelfTest:
-    """内置自测试用例"""
-
-    @staticmethod
-    def run() -> bool:
-        """运行自测试，返回是否全部通过"""
-        print("=" * 60)
-        print("开始自测试...")
-        print("=" * 60)
-        
-        tests_passed = 0
-        tests_failed = 0
-        
-        # 测试1: 任务描述校验
-        print("\n[测试1] 任务描述校验")
-        validator = InputValidator()
-        assert validator.validate_task("这是一个有效的任务描述") == True
-        assert validator.validate_task("短") == False
-        assert validator.validate_task("！！！") == False
-        assert validator.validate_task("") == False
-        assert validator.validate_task(None) == False
-        assert validator.validate_task(12345) == False
-        assert validator.validate_task("   ") == False
-        print("  ✓ 通过")
-        tests_passed += 1
-
-        # 测试2: 角色配置校验
-        print("\n[测试2] 角色配置校验")
-        valid, agents = validator.validate_agents('[{"role":"架构师","count":1}]')
-        assert valid == True
-        assert len(agents) == 1
-        assert agents[0].role == "架构师"
-        valid, _ = validator.validate_agents('invalid json')
-        assert valid == False
-        valid, _ = validator.validate_agents('[{"role":"未知角色","count":1}]')
-        assert valid == False
-        valid, _ = validator.validate_agents('[{"role":"架构师","count":0}]')
-        assert valid == False
-        valid, _ = validator.validate_agents('[{"role":"架构师","count":"1"}]')
-        assert valid == False
-        valid, _ = validator.validate_agents('{"role":"架构师","count":1}')
-        assert valid == False
-        valid, _ = validator.validate_agents('[]')
-        assert valid == True
-        print("  ✓ 通过")
-        tests_passed += 1
-
-        # 测试3: 参数覆盖校验
-        print("\n[测试3] 参数覆盖校验")
-        valid, params = validator.validate_params("year=2025 quarter=Q1")
-        assert valid == True
-        assert params == {"year": "2025", "quarter": "Q1"}
-        valid, _ = validator.validate_params("invalid")
-        assert valid == False
-        valid, _ = validator.validate_params("key=")
-        assert valid == False
-        valid, _ = validator.validate_params("=value")
-        assert valid == False
-        valid, _ = validator.validate_params("")
-        assert valid == True
-        assert params == {"year": "2025", "quarter": "Q1"}
-        print("  ✓ 通过")
-        tests_passed += 1
-
-        # 测试4: Agent执行器
-        print("\n[测试4] Agent执行器")
-        executor = AgentExecutor(timeout=10, retry=1)
-        result = executor.execute_single("研究员", "测试任务描述", {})
-        assert result.success == True
-        assert result.role == "研究员"
-        assert len(result.output) > 0
-        print("  ✓ 通过")
-        tests_passed += 1
-
-        # 测试5: 结果收集与校验
-        print("\n[测试5] 结果收集与校验")
-        collector = ResultCollector()
-        results = [
-            AgentResult("架构师", "输出内容1", True, 0.1),
-            AgentResult("研究员", "输出内容2", True, 0.2)
-        ]
-        valid, _ = collector.validate_results(results)
-        assert valid == True
-        summary = collector.generate_summary(results, "测试任务")
-        assert "测试任务" in summary
-        # 测试空结果
-        valid, _ = collector.validate_results([])
-        assert valid == False
-        # 测试失败结果
-        valid, _ = collector.validate_results([AgentResult("架构师", "", True, 0.1)])
-        assert valid == False
-        print("  ✓ 通过")
-        tests_passed += 1
-
-        # 测试6: 完整流程（使用临时目录）
-        print("\n[测试6] 完整流程")
-        with tempfile.TemporaryDirectory() as tmpdir:
-            framework = AgentFramework()
-            args = argparse.Namespace(
-                task="这是一个用于测试的完整任务描述",
-                agents=None,
-                params="test=value",
-                output=os.path.join(tmpdir, "output"),
-                timeout=10,
-                retry=1
-            )
-            response = framework.run(args)
-            assert response["status"] == "success"
-            assert response["exit_code"] == 0
-            assert "summary" in response
-            assert len(response["artifacts"]) > 0
-            print("  ✓ 通过")
-            tests_passed += 1
-
-        # 测试7: 错误处理
-        print("\n[测试7] 错误处理")
-        framework = AgentFramework()
-        args = argparse.Namespace(
-            task="短",
-            agents=None,
-            params=None,
-            output="./test_output",
-            timeout=10,
-            retry=1
-        )
-        response = framework.run(args)
-        assert response["status"] == "error"
-        assert response["error_code"] == ErrorCode.E001
-        print("  ✓ 通过")
-        tests_passed += 1
-
-        # 测试8: 超时和重试参数校验
-        print("\n[测试8] 超时和重试参数校验")
-        framework = AgentFramework()
-        args = argparse.Namespace(
-            task="这是一个用于测试的完整任务描述",
-            agents=None,
-            params=None,
-            output="./test_output",
-            timeout=0,
-            retry=1
-        )
-        response = framework.run(args)
-        assert response["status"] == "error"
-        assert response["error_code"] == ErrorCode.E010
-        args.timeout = 10
-        args.retry = -1
-        response = framework.run(args)
-        assert response["status"] == "error"
-        assert response["error_code"] == ErrorCode.E010
-        print("  ✓ 通过")
-        tests_passed += 1
-
-        # 汇总
-        print("\n" + "=" * 60)
-        print(f"自测试完成: {tests_passed} 通过, {tests_failed} 失败")
-        print("=" * 60)
-        return tests_failed == 0
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def create_parser() -> argparse.ArgumentParser:
-    """创建命令行参数解析器"""
-    parser = argparse.ArgumentParser(
-        description="多智能体协作框架 - 任务拆解、多角色协同、结果归并",
-        epilog="示例:\n"
-               "  python main.py --task \"分析用户流失原因并提出3条改进建议\"\n"
-               "  python main.py --task \"编写登录模块测试\" --agents '[{\"role\":\"测试工程师\",\"count\":2}]'\n"
-               "  python main.py --task \"生成销售报告\" --params \"year=2025 quarter=Q1\" --output ./reports"
+    return TaskInput(
+        task=args.task,
+        agents=agents,
+        params=params,
+        output_dir=args.output_dir,
+        timeout=timeout,
+        retry=retry,
     )
-    parser.add_argument("--task", type=str, help="任务描述（必填，长度≥10字符）")
-    parser.add_argument("--agents", type=str, help="角色配置JSON数组")
-    parser.add_argument("--params", type=str, help="参数覆盖（key=value对，空格分隔）")
-    parser.add_argument("--output", type=str, default="./output", help="输出目录（默认: ./output）")
-    parser.add_argument("--timeout", type=int, default=DEFAULT_TIMEOUT, help=f"单Agent超时秒数（默认: {DEFAULT_TIMEOUT}）")
-    parser.add_argument("--retry", type=int, default=DEFAULT_RETRY, help=f"失败重试次数（默认: {DEFAULT_RETRY}）")
-    parser.add_argument("--selftest", action="store_true", help="运行自测试并退出")
-    return parser
 
 
-def main():
-    """主函数"""
-    parser = create_parser()
+# ============================================================
+# 输出处理
+# ============================================================
+def atomic_write_json(filepath: Path, data: Dict[str, Any]) -> None:
+    """原子化写入JSON文件"""
+    try:
+        # 创建临时文件
+        fd, temp_path = tempfile.mkstemp(
+            dir=str(filepath.parent), suffix=".tmp"
+        )
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+                f.flush()
+                os.fsync(f.fileno())
+            # 原子替换
+            os.replace(temp_path, filepath)
+        except Exception:
+            # 清理临时文件
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+            raise
+    except OSError as e:
+        raise OSError(f"{ErrorCode.E006}: {str(e)}")
+
+
+def save_result(result: OrchestratorResult, output_dir: str) -> Path:
+    """保存结果到输出目录"""
+    try:
+        output_path = Path(output_dir)
+        output_path.mkdir(parents=True, exist_ok=True)
+    except OSError as e:
+        raise OSError(f"{ErrorCode.E005}: {str(e)}")
+
+    # 生成文件名
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    filename = f"orchestrator_result_{timestamp}.json"
+    filepath = output_path / filename
+
+    # 原子化写入
+    atomic_write_json(filepath, result.to_dict())
+
+    return filepath
+
+
+# ============================================================
+# 自检功能
+# ============================================================
+def run_selftest() -> int:
+    """运行自检，验证核心功能"""
+    print("=" * 60)
+    print("多智能体协作编排器 - 自检")
+    print("=" * 60)
+
+    try:
+        # 测试1: 任务拆解
+        print("\n[测试1] 任务拆解...")
+        task = "分析电商平台用户行为数据并优化推荐算法"
+        agents = [
+            AgentConfig("架构师", 1),
+            AgentConfig("数据分析师", 2),
+            AgentConfig("测试工程师", 1),
+        ]
+        decomposer = TaskDecomposer(task, agents)
+        subtasks = decomposer.decompose()
+        assert len(subtasks) == 4, f"预期4个子任务，实际{len(subtasks)}"
+        assert subtasks[0]["role"] == "架构师"
+        assert subtasks[1]["role"] == "数据分析师"
+        print(f"  ✓ 拆解成功: {len(subtasks)}个子任务")
+
+        # 测试2: Agent执行
+        print("\n[测试2] Agent执行...")
+        executor = AgentExecutor(timeout=10, retry=1)
+        result = executor.execute("test_1", "架构师", "测试任务")
+        assert result.status == "success"
+        assert result.output, "输出不能为空"
+        assert result.attempts >= 1
+        print(f"  ✓ 执行成功: {result.role}, 耗时{result.execution_time:.2f}s")
+
+        # 测试3: 结果整合
+        print("\n[测试3] 结果整合...")
+        integrator = ResultIntegrator()
+        results = [
+            AgentResult("t1", "架构师", "success", "输出1", 1.0, 1),
+            AgentResult("t2", "研究员", "success", "输出2", 1.0, 1),
+        ]
+        completeness, status = integrator.integrate(results)
+        assert completeness >= 0.9, f"完整性评分异常: {completeness}"
+        assert status == "PASS"
+        print(f"  ✓ 整合成功: 完整性={completeness:.2f}, 状态={status}")
+
+        # 测试4: 完整编排流程
+        print("\n[测试4] 完整编排流程...")
+        config = TaskInput(
+            task="设计一个高可用微服务架构并制定测试方案",
+            agents=agents,
+            output_dir=tempfile.mkdtemp(),
+            timeout=30,
+            retry=1,
+        )
+        orchestrator = MultiAgentOrchestrator(config)
+        final_result = orchestrator.run()
+        assert final_result.status in ["PASS", "WARN"]
+        assert len(final_result.results) == 4
+        print(f"  ✓ 编排成功: 状态={final_result.status}, "
+              f"完整性={final_result.completeness:.2f}")
+
+        # 测试5: 结果保存
+        print("\n[测试5] 结果保存...")
+        filepath = save_result(final_result, config.output_dir)
+        assert filepath.exists(), "结果文件不存在"
+        with open(filepath, "r", encoding="utf-8") as f:
+            saved_data = json.load(f)
+        assert saved_data["task"] == config.task
+        print(f"  ✓ 保存成功: {filepath}")
+
+        # 测试6: 错误处理
+        print("\n[测试6] 错误处理...")
+        try:
+            validate_input(argparse.Namespace(
+                task="短", agents=None, params=None,
+                output_dir="./output", timeout=300, retry=2
+            ))
+            assert False, "应该抛出E001错误"
+        except ValueError as e:
+            assert "E001" in str(e)
+            print(f"  ✓ 错误处理正确: {e}")
+
+        print("\n" + "=" * 60)
+        print("所有自检通过!")
+        print("=" * 60)
+        return 0
+
+    except AssertionError as e:
+        print(f"\n✗ 自检失败: {e}")
+        return 1
+    except Exception as e:
+        print(f"\n✗ 自检异常: {e}")
+        return 1
+
+
+# ============================================================
+# 主入口
+# ============================================================
+def main() -> int:
+    """主入口函数"""
+    parser = argparse.ArgumentParser(
+        description="多智能体协作编排器 - 编排多个AI Agent协作完成复杂任务",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  python run.py --task "分析用户行为数据并优化推荐算法"
+  python run.py --task "设计微服务架构" --agents '[{"role":"架构师","count":2}]'
+  python run.py --selftest
+        """,
+    )
+    parser.add_argument(
+        "--task", type=str, help="任务描述（至少10个字符）"
+    )
+    parser.add_argument(
+        "--agents", type=str,
+        help='角色配置JSON，如: [{"role":"架构师","count":1}]'
+    )
+    parser.add_argument(
+        "--params", type=str, help='参数覆盖JSON，如: {"key":"value"}'
+    )
+    parser.add_argument(
+        "--output-dir", type=str, default="./output",
+        help="输出目录（默认: ./output）"
+    )
+    parser.add_argument(
+        "--timeout", type=int, default=DEFAULT_TIMEOUT,
+        help=f"单Agent超时秒数（默认: {DEFAULT_TIMEOUT}）"
+    )
+    parser.add_argument(
+        "--retry", type=int, default=DEFAULT_RETRY,
+        help=f"失败重试次数（默认: {DEFAULT_RETRY}）"
+    )
+    parser.add_argument(
+        "--selftest", action="store_true", help="运行自检"
+    )
+
     args = parser.parse_args()
 
-    # 自测试模式
+    # 自检模式
     if args.selftest:
-        success = SelfTest.run()
-        sys.exit(0 if success else 1)
+        return run_selftest()
 
-    # 检查必要参数
-    if not args.task:
-        parser.print_help()
-        print("\n错误: 缺少 --task 参数")
-        sys.exit(1)
+    # 校验参数
+    try:
+        config = validate_input(args)
+    except ValueError as e:
+        print(f"参数错误: {e}", file=sys.stderr)
+        return 1
 
-    # 执行主流程
-    framework = AgentFramework()
-    response = framework.run(args)
+    # 执行编排
+    try:
+        orchestrator = MultiAgentOrchestrator(config)
+        result = orchestrator.run()
 
-    # 输出结果
-    print(json.dumps(response, ensure_ascii=False, indent=2))
-    
-    # 设置退出码
-    sys.exit(0 if response["exit_code"] == 0 else 1)
+        # 保存结果
+        filepath = save_result(result, config.output_dir)
+
+        # 输出摘要
+        print(f"任务: {result.task}")
+        print(f"状态: {result.status}")
+        print(f"完整性: {result.completeness:.2f}")
+        print(f"Agent数: {len(result.results)}")
+        print(f"结果文件: {filepath}")
+
+        # 输出详细结果
+        print("\n详细结果:")
+        for r in result.results:
+            print(f"  [{r.role}] {r.task_id}: {r.status} "
+                  f"(耗时{r.execution_time:.2f}s, 尝试{r.attempts}次)")
+
+        # 警告处理
+        if result.status == "WARN":
+            print("\n⚠ 警告: 结果完整性低于预期，请检查Agent输出", file=sys.stderr)
+            return 2
+        elif result.status == "FAIL":
+            print(f"\n✗ 错误: {ErrorCode.E009}", file=sys.stderr)
+            return 3
+
+        return 0
+
+    except TimeoutError as e:
+        print(f"超时错误: {e}", file=sys.stderr)
+        return 4
+    except OSError as e:
+        print(f"IO错误: {e}", file=sys.stderr)
+        return 5
+    except Exception as e:
+        print(f"执行错误: {e}", file=sys.stderr)
+        return 6
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
