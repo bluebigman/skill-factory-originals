@@ -9,9 +9,10 @@ import os
 import sys
 import csv
 import json
+import re
 import argparse
 import hashlib
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 # 尝试导入可选依赖
@@ -96,7 +97,7 @@ class InvoiceExtractor:
         """解析OCR文本，提取发票字段"""
         result = {
             "source_file": os.path.basename(source_file),
-            "processed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "processed_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
             "confidence": "高",  # 默认高置信度
         }
         
@@ -112,14 +113,13 @@ class InvoiceExtractor:
             
             # 发票号码匹配
             if "发票号码" in line or "No." in line:
-                parts = line.split(':') if ':' in line else line.split()
+                parts = re.split(r'[：:]', line) if re.search(r'[：:]', line) else line.split()
                 if len(parts) > 1:
                     result["invoice_no"] = parts[-1].strip()
                     result["invoice_no_conf"] = "高"
             
             # 开票日期匹配
             if "开票日期" in line or "日期" in line:
-                import re
                 date_match = re.search(r'\d{4}年\d{1,2}月\d{1,2}日', line)
                 if date_match:
                     result["invoice_date"] = date_match.group()
@@ -128,19 +128,23 @@ class InvoiceExtractor:
             # 购买方信息
             if "购买方" in line or "购" in line:
                 if "名称" in line:
-                    result["buyer_name"] = line.split(":")[-1].strip() if ":" in line else line
+                    parts = re.split(r'[：:]', line)
+                    result["buyer_name"] = parts[-1].strip() if len(parts) > 1 else line
                     result["buyer_name_conf"] = "中"
                 if "纳税人识别号" in line or "税号" in line:
-                    result["buyer_tax_id"] = line.split(":")[-1].strip() if ":" in line else line
+                    parts = re.split(r'[：:]', line)
+                    result["buyer_tax_id"] = parts[-1].strip() if len(parts) > 1 else line
                     result["buyer_tax_id_conf"] = "中"
             
             # 销售方信息
             if "销售方" in line or "销" in line:
                 if "名称" in line:
-                    result["seller_name"] = line.split(":")[-1].strip() if ":" in line else line
+                    parts = re.split(r'[：:]', line)
+                    result["seller_name"] = parts[-1].strip() if len(parts) > 1 else line
                     result["seller_name_conf"] = "中"
                 if "纳税人识别号" in line or "税号" in line:
-                    result["seller_tax_id"] = line.split(":")[-1].strip() if ":" in line else line
+                    parts = re.split(r'[：:]', line)
+                    result["seller_tax_id"] = parts[-1].strip() if len(parts) > 1 else line
                     result["seller_tax_id_conf"] = "中"
             
             # 金额信息
@@ -165,7 +169,6 @@ class InvoiceExtractor:
     
     def _extract_amount(self, line):
         """从文本行中提取金额数字"""
-        import re
         # 匹配金额格式：数字+小数点+两位小数
         amount_match = re.search(r'[¥￥]?\s*(\d+[,，]?\d*\.?\d{0,2})', line)
         if amount_match:
@@ -174,6 +177,9 @@ class InvoiceExtractor:
     
     def process_file(self, file_path):
         """处理单个文件"""
+        file_path = os.fspath(file_path)
+        if not os.path.exists(file_path):
+            raise FileNotFoundError(f"文件不存在: {file_path}")
         file_ext = Path(file_path).suffix.lower()
         
         try:
@@ -187,11 +193,14 @@ class InvoiceExtractor:
             self.results.append(result)
             return result
             
+        except (ValueError, OSError):
+            # 参数/IO 错误（格式不支持、文件不存在等）上抛给调用方，不吞掉
+            raise
         except Exception as e:
             failure = {
                 "file": file_path,
                 "error": str(e),
-                "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
             }
             self.failures.append(failure)
             print(f"处理失败: {file_path} - {str(e)}", file=sys.stderr)
