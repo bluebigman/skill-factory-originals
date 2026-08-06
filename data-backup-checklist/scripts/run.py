@@ -328,6 +328,19 @@ def selftest():
     """自检函数"""
     print("运行自检...")
     
+    # 测试核心链路：parse_input（临时文件回放）
+    import tempfile as _tf, os as _os
+    with _tf.NamedTemporaryFile("w", suffix=".json", delete=False, encoding="utf-8") as _f:
+        _f.write('[{"name": "backup_20240101.tar.gz", "status": "success"}]')
+        _tmp_path = _f.name
+    try:
+        recs = parse_input(_tmp_path)
+        assert len(recs) >= 1, "应解析出至少1条记录"
+        print("  [OK] parse_input Mock 文件解析通过")
+    finally:
+        _os.unlink(_tmp_path)
+
+    
     # 创建测试数据
     test_records = [
         BackupRecord("backup_20240101.tar.gz", "2024-01-01 00:00:00", 1024, "abc123", "full", "success"),
