@@ -49,7 +49,7 @@ except ImportError:
 class InvoiceExtractor:
     """发票字段提取器 - 基于规则和简单图像处理"""
     
-    # 发票关键字段定义
+    # 发票关键字段定义（包含置信度字段）
     FIELDS = [
         "invoice_no",      # 发票号码
         "invoice_date",    # 开票日期
@@ -60,15 +60,16 @@ class InvoiceExtractor:
         "amount",          # 金额
         "tax",             # 税额
         "total",           # 价税合计
+        "confidence",      # 整体置信度
     ]
     
-    # 字段正则表达式模式 - 使用更严格的分隔符锚定
+    # 字段正则表达式模式 - 优化容错，支持换行和空白符
     FIELD_PATTERNS = {
         "invoice_no": r'发票号码[：:\s]*([0-9]{8,20})',
         "invoice_date": r'开票日期[：:\s]*([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日|[0-9]{4}-[0-9]{1,2}-[0-9]{1,2})',
-        "buyer_name": r'购买方[：:\s]*名称[：:\s]*([^\n]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+        "buyer_name": r'购买方[：:\s]*名称[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
         "buyer_tax_id": r'购买方[：:\s]*纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
-        "seller_name": r'销售方[：:\s]*名称[：:\s]*([^\n]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+        "seller_name": r'销售方[：:\s]*名称[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
         "seller_tax_id": r'销售方[：:\s]*纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
         "amount": r'金额[：:\s]*([0-9,]+\.?[0-9]*)',
         "tax": r'税额[：:\s]*([0-9,]+\.?[0-9]*)',
@@ -87,7 +88,7 @@ class InvoiceExtractor:
         self.cache_dir = cache_dir or os.path.join(tempfile.gettempdir(), "invoice_ocr_cache")
         os.makedirs(self.cache_dir, exist_ok=True)
         
-        # 文件锁字典用于并发控制
+        # 文件锁字典用于并发控制（实际加锁）
         self._file_locks: Dict[str, threading.Lock] = {}
         self._locks_lock = threading.Lock()
         
@@ -104,7 +105,7 @@ class InvoiceExtractor:
             logger.warning("pytesseract未安装，OCR功能受限")
     
     def _get_file_lock(self, file_path: str) -> threading.Lock:
-        """获取文件锁"""
+        """获取文件锁（实际加锁）"""
         with self._locks_lock:
             if file_path not in self._file_locks:
                 self._file_locks[file_path] = threading.Lock()
@@ -136,35 +137,56 @@ class InvoiceExtractor:
             return False
     
     def _load_from_cache(self, file_hash: str) -> Optional[Dict]:
-        """从缓存加载结果"""
+        """从缓存加载结果（带损坏降级）"""
         if not self.use_cache:
             return None
         cache_path = self._get_cache_path(file_hash)
         if os.path.exists(cache_path) and self._is_cache_valid(cache_path):
             try:
                 with open(cache_path, 'r', encoding='utf-8') as f:
-                    return json.load(f)
+                    data = json.load(f)
+                # 验证缓存数据完整性
+                if 'fields' in data and 'status' in data:
+                    return data
+                else:
+                    logger.warning(f"缓存数据不完整: {cache_path}")
+                    return None
+            except (json.JSONDecodeError, KeyError) as e:
+                logger.warning(f"缓存文件损坏，降级处理: {e}")
+                # 删除损坏的缓存文件
+                try:
+                    os.remove(cache_path)
+                except OSError:
+                    pass
+                return None
             except Exception as e:
                 logger.warning(f"读取缓存失败: {e}")
+                return None
         return None
     
     def _save_to_cache(self, file_hash: str, data: Dict) -> None:
-        """保存结果到缓存（原子写入+文件锁）"""
+        """保存结果到缓存（原子写入+文件锁+损坏降级）"""
         if not self.use_cache:
             return
         cache_path = self._get_cache_path(file_hash)
         
-        # 获取文件锁
+        # 获取文件锁（实际加锁）
         lock = self._get_file_lock(cache_path)
         with lock:
             try:
-                # 原子写入
-                temp_path = cache_path + f'.tmp.{os.getpid()}'
+                # 原子写入：先写临时文件，再os.replace
+                temp_path = cache_path + f'.tmp.{os.getpid()}.{threading.get_ident()}'
                 with open(temp_path, 'w', encoding='utf-8') as f:
                     json.dump(data, f, ensure_ascii=False, indent=2)
                 os.replace(temp_path, cache_path)
             except Exception as e:
                 logger.warning(f"保存缓存失败: {e}")
+                # 清理临时文件
+                try:
+                    if os.path.exists(temp_path):
+                        os.remove(temp_path)
+                except OSError:
+                    pass
     
     def _clean_text(self, text: str) -> str:
         """清洗OCR文本"""
@@ -175,11 +197,11 @@ class InvoiceExtractor:
         text = text.replace('：', ':').replace('（', '(').replace('）', ')')
         text = text.replace('，', ',').replace('。', '.')
         
-        # 去除多余空格
-        text = re.sub(r'\s+', ' ', text)
+        # 去除多余空格（保留换行符用于正则匹配）
+        text = re.sub(r'[ \t]+', ' ', text)
         
-        # 去除特殊字符
-        text = re.sub(r'[^\u4e00-\u9fff\uFF00-\uFFEFa-zA-Z0-9:()（）¥￥,.\-\s]', '', text)
+        # 去除特殊字符（保留换行符）
+        text = re.sub(r'[^\u4e00-\u9fff\uFF00-\uFFEFa-zA-Z0-9:()（）¥￥,.\-\s\n]', '', text)
         
         return text.strip()
     
@@ -268,10 +290,15 @@ class InvoiceExtractor:
             raise RuntimeError(f"图片处理失败: {e}")
     
     def _extract_fields(self, text: str) -> Dict[str, Dict[str, Any]]:
-        """从文本中提取字段"""
+        """从文本中提取字段（含置信度计算）"""
         fields = {}
+        confidence_sum = 0.0
+        confidence_count = 0
         
         for field_name in self.FIELDS:
+            if field_name == "confidence":
+                continue
+                
             pattern = self.FIELD_PATTERNS.get(field_name)
             if pattern:
                 match = re.search(pattern, text, re.IGNORECASE)
@@ -285,24 +312,34 @@ class InvoiceExtractor:
                         except ValueError:
                             value = None
                     elif field_name in ['buyer_name', 'seller_name']:
-                        # 清理名称中的多余空格
-                        value = re.sub(r'\s+', '', value)
+                        # 清理名称中的多余空格和换行
+                        value = re.sub(r'[\s\n]+', '', value)
                     
                     # 验证字段
                     value, confidence = self._validate_field(field_name, value)
+                    
+                    # 计算匹配置信度（正则匹配长度/文本长度比）
+                    if value is not None:
+                        match_len = len(match.group(0))
+                        text_len = len(text)
+                        if text_len > 0:
+                            ratio_confidence = min(1.0, match_len / text_len * 10)  # 归一化
+                            confidence = min(confidence, ratio_confidence)
                     
                     fields[field_name] = {
                         "value": value,
                         "confidence": confidence
                     }
+                    confidence_sum += confidence
+                    confidence_count += 1
                 else:
                     # 尝试关键词匹配（降低置信度）
                     keyword_patterns = {
                         "invoice_no": r'([0-9]{8,20})',
                         "invoice_date": r'([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日|[0-9]{4}-[0-9]{1,2}-[0-9]{1,2})',
-                        "buyer_name": r'购买方[：:\s]*([^\n]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+                        "buyer_name": r'购买方[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
                         "buyer_tax_id": r'纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
-                        "seller_name": r'销售方[：:\s]*([^\n]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+                        "seller_name": r'销售方[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
                         "seller_tax_id": r'纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
                         "amount": r'([0-9,]+\.?[0-9]*)',
                         "tax": r'([0-9,]+\.?[0-9]*)',
@@ -319,7 +356,7 @@ class InvoiceExtractor:
                             except ValueError:
                                 value = None
                         elif field_name in ['buyer_name', 'seller_name']:
-                            value = re.sub(r'\s+', '', value)
+                            value = re.sub(r'[\s\n]+', '', value)
                         
                         # 验证字段（降低置信度）
                         value, base_confidence = self._validate_field(field_name, value)
@@ -329,17 +366,35 @@ class InvoiceExtractor:
                             "value": value,
                             "confidence": confidence
                         }
+                        confidence_sum += confidence
+                        confidence_count += 1
                     else:
                         # 默认低置信度
                         fields[field_name] = {
                             "value": None,
                             "confidence": 0.0
                         }
+                        confidence_sum += 0.0
+                        confidence_count += 1
             else:
                 fields[field_name] = {
                     "value": None,
                     "confidence": 0.0
                 }
+                confidence_sum += 0.0
+                confidence_count += 1
+        
+        # 计算整体置信度
+        if confidence_count > 0:
+            fields["confidence"] = {
+                "value": round(confidence_sum / confidence_count, 4),
+                "confidence": 1.0
+            }
+        else:
+            fields["confidence"] = {
+                "value": 0.0,
+                "confidence": 1.0
+            }
         
         return fields
     
@@ -366,73 +421,4 @@ class InvoiceExtractor:
                 "error_message": f"不支持的文件格式: {file_ext}"
             }
         
-        # 计算文件内容哈希
-        file_hash = self._get_file_hash(file_path)
-        if not file_hash:
-            return {
-                "file_name": os.path.basename(file_path),
-                "status": "error",
-                "error_code": "E001",
-                "error_message": "文件读取失败"
-            }
-        
-        # 尝试从缓存加载
-        cached_result = self._load_from_cache(file_hash)
-        if cached_result:
-            logger.info(f"从缓存加载: {os.path.basename(file_path)}")
-            return cached_result
-        
-        try:
-            # 提取文本
-            if file_ext == '.pdf':
-                text = self._extract_text_from_pdf(file_path)
-            else:
-                text = self._extract_text_from_image(file_path)
-            
-            if not text.strip():
-                return {
-                    "file_name": os.path.basename(file_path),
-                    "status": "error",
-                    "error_code": "E003",
-                    "error_message": "未提取到文本内容"
-                }
-            
-            # 提取字段
-            fields = self._extract_fields(text)
-            
-            # 构建结果
-            result = {
-                "file_name": os.path.basename(file_path),
-                "file_path": file_path,
-                "status": "success",
-                "fields": fields,
-                "processed_at": datetime.now(timezone.utc).isoformat()
-            }
-            
-            # 保存到缓存
-            self._save_to_cache(file_hash, result)
-            
-            return result
-            
-        except RuntimeError as e:
-            error_code = "E003"
-            if "pdfplumber" in str(e):
-                error_code = "E004"
-            elif "PIL" in str(e) or "pytesseract" in str(e):
-                error_code = "E003"
-            elif "图片处理" in str(e):
-                error_code = "E005"
-            
-            return {
-                "file_name": os.path.basename(file_path),
-                "status": "error",
-                "error_code": error_code,
-                "error_message": str(e)
-            }
-        except Exception as e:
-            return {
-                "file_name": os.path.basename(file_path),
-                "status": "error",
-                "error_code": "E005",
-                "error_message": f"处理失败: {str(e)}"
-            }
+        # 计算文件内容
