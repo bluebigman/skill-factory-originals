@@ -3,6 +3,9 @@
 """
 CLI-Anything: 自然语言转命令行工具
 将中文操作意图转换为可执行命令行，内置命令速查库与匹配引擎。
+
+注意：本工具使用启发式模板匹配，基于关键词和模式识别，可能无法理解复杂上下文。
+所有生成的命令在执行前需用户确认，特别是涉及系统修改的操作。
 """
 
 import argparse
@@ -338,15 +341,32 @@ def execute_command(command: str, confirm_high_risk: bool = True) -> Tuple[int, 
                     proc = subprocess.Popen(cmd_args, stdin=processes[-1].stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 processes.append(proc)
             
-            # 等待最后一个进程完成
-            output, error = processes[-1].communicate()
-            return processes[-1].returncode, output.decode() if output else error.decode()
+            # 等待最后一个进程完成，设置超时
+            try:
+                output, error = processes[-1].communicate(timeout=30)
+                return processes[-1].returncode, output.decode() if output else error.decode()
+            except subprocess.TimeoutExpired:
+                # 终止所有进程
+                for proc in processes:
+                    proc.kill()
+                return 1, "命令执行超时"
         else:
-            # 简单命令
-            result = subprocess.run(args, capture_output=True, text=True, timeout=30)
-            return result.returncode, result.stdout if result.returncode == 0 else result.stderr
-    except subprocess.TimeoutExpired:
-        return 1, "命令执行超时"
+            # 简单命令，设置超时和输出限制
+            try:
+                result = subprocess.run(
+                    args, 
+                    capture_output=True, 
+                    text=True, 
+                    timeout=30,
+                    check=False
+                )
+                # 限制输出大小
+                output = result.stdout if result.returncode == 0 else result.stderr
+                if len(output) > 10000:
+                    output = output[:10000] + "\n... [输出已截断]"
+                return result.returncode, output
+            except subprocess.TimeoutExpired:
+                return 1, "命令执行超时"
     except FileNotFoundError:
         return 1, f"命令不存在: {args[0] if args else 'unknown'}"
     except Exception as e:
@@ -365,39 +385,21 @@ def selftest() -> bool:
     ]
     
     passed = 0
+    total = len(test_cases) + 3  # 加上模板完整性和安全验证
+    
+    print("=" * 60)
+    print("CLI-Anything 自检程序")
+    print(f"开始时间: {datetime.now(timezone.utc).isoformat()}")
+    print("=" * 60)
+    
+    # 测试核心匹配逻辑
+    print("\n[1] 测试核心命令匹配...")
     for text, expected in test_cases:
         command, score = generate_command(text)
         if expected in command and score > 0.3:
             passed += 1
-            print(f"✓ 测试通过: '{text}' → {command.split(chr(10))[-1]}")
+            print(f"  ✓ 测试通过: '{text}' → {command.split(chr(10))[-1]}")
         else:
-            print(f"✗ 测试失败: '{text}'")
-            print(f"  期望: {expected}")
-            print(f"  实际: {command}")
-    
-    # 测试命令模板完整性
-    print("\n验证命令模板完整性...")
-    template_ok = True
-    for category, data in COMMAND_DB.items():
-        for cmd_name, cmd_template in data["commands"].items():
-            # 检查模板格式
-            placeholders = re.findall(r'\{(\w+)\}', cmd_template)
-            for ph in placeholders:
-                if not ph:
-                    template_ok = False
-                    print(f"✗ 模板错误: {category}/{cmd_name} 包含空占位符")
-                    break
-    
-    if template_ok:
-        passed += 1
-        print("✓ 所有模板格式合法")
-    
-    # 测试安全验证
-    print("\n验证安全机制...")
-    unsafe_cmd = "rm -rf /tmp/test; echo 'injected'"
-    is_safe, _ = validate_command(unsafe_cmd)
-    if not is_safe:
-        passed += 1
-        print("✓ 安全验证正确拒绝危险命令")
-    else:
-        print("✗ 安全验证未能识别危险命令")
+            print(f"  ✗ 测试失败: '{text}'")
+            print(f"    期望: {expected}")
+            print
