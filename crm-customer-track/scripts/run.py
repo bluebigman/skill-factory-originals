@@ -22,7 +22,7 @@ import json
 import os
 import sys
 import tempfile
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
 from collections import defaultdict
 
 # 尝试导入可选依赖
@@ -121,7 +121,7 @@ class CustomerTracker:
     
     def analyze(self):
         """执行完整分析"""
-        today = datetime.now()
+        today = datetime.now(timezone.utc)
         results = []
         
         for cid, records in self.customers.items():
@@ -130,6 +130,8 @@ class CustomerTracker:
             
             name = records[0]["客户名称"]
             last_date = records[-1]["_date"]
+            if last_date.tzinfo is None:
+                last_date = last_date.replace(tzinfo=timezone.utc)
             days_since = (today - last_date).days
             total_count = len(records)
             
@@ -247,7 +249,7 @@ class CustomerTracker:
     def export_json(self, results, output_path):
         """导出JSON报告"""
         report = {
-            "生成时间": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+            "生成时间": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S"),
             "沉默阈值": f"{self.threshold}天",
             "客户总数": len(results),
             "停滞商机数": sum(1 for r in results if r["停滞状态"] == "是"),
