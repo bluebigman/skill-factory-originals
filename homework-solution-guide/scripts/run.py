@@ -1,273 +1,344 @@
 #!/usr/bin/env python3
-"""homework-solution-guide Skill - 作业解题指导"""
+"""
+run.py - 作业引导 Skill 主脚本
+实现 SKILL.md 声明的全部能力，含 argparse/main/selftest。
+"""
+
 import argparse
 import json
 import os
 import re
 import sys
+import tempfile
+import time
+import urllib.error
+import urllib.request
+from datetime import datetime, timezone
 from pathlib import Path
 
-# 题目类型定义
-SUBJECTS = {
-    "math": "数学",
-    "physics": "物理",
-    "chemistry": "化学"
-}
+# ========== 常量 ==========
+SUBJECTS = {"math", "chinese", "english", "physics", "chemistry"}
+GRADE_RANGES = {"小学": (3, 6), "初中": (7, 9), "高中": (10, 12)}
+MAX_ROUNDS = 5
+TIMEOUT_SEC = 5
+MAX_RETRIES = 3
+BASE_DELAY = 1.0  # 指数退避基数
 
-GRADES = {
-    "7年级": "七年级",
-    "8年级": "八年级",
-    "9年级": "九年级",
-    "10": "高一"
-}
+# 外部知识库 API（模拟真实服务，实际部署时可替换为真实端点）
+KNOWLEDGE_API_URL = "https://api.example.com/knowledge"
+MISTAKE_API_URL = "https://api.example.com/mistake"
 
-# 解析模板
-TEMPLATES = {
-    "step": {
-        "description": "分步解题",
-        "output_lines": 8
-    },
-    "hint": {
-        "description": "提示",
-        "output_lines": 10
-    },
-    "review": {
-        "description": "复习",
-        "output_lines": 10
-    },
-    "analyze": {
-        "description": "分析",
-        "output_lines": 12
-    },
-    "next": {
-        "description": "下一步",
-        "output_lines": 11
-    }
-}
+# ========== 工具函数 ==========
 
-def load_spec(subject, grade, topic):
-    """加载题目规格"""
-    # 这里应该是从文件或数据库加载
-    # 为了演示，返回一个模拟的规格
-    return {
-        "subject": subject,
-        "grade": grade,
-        "topic": topic,
-        "type": "homework",
-        "content": f"{SUBJECTS.get(subject, subject)} {GRADES.get(grade, grade)} {topic} 题目",
-        "equation": None
-    }
+def utc_now() -> str:
+    """返回 UTC 时间 ISO 格式"""
+    return datetime.now(timezone.utc).isoformat()
 
-def match_trigger(text):
-    """匹配触发词"""
-    triggers = ["作业", "解题", "指导", "help", "solve"]
-    return any(t in text.lower() for t in triggers)
 
-def extract_equation(content, subject):
-    """从题目内容中提取方程/公式"""
-    if subject == "chemistry":
-        # 化学方程式的常见模式
-        patterns = [
-            r'[A-Z][a-z]?\d*\s*\+\s*[A-Z][a-z]?\d*\s*→\s*[A-Z][a-z]?\d*',  # 简单反应
-            r'[A-Z][a-z]?\d*\s*=\s*[A-Z][a-z]?\d*',  # 等式
-            r'[A-Za-z0-9]+\s*\+\s*[A-Za-z0-9]+\s*→\s*[A-Za-z0-9]+',  # 一般反应
-        ]
-        for pattern in patterns:
-            match = re.search(pattern, content)
-            if match:
-                return match.group(0)
-        # 如果没有匹配到，尝试更宽松的模式
-        match = re.search(r'[A-Za-z0-9]+(?:\s*\+\s*[A-Za-z0-9]+)*\s*[→=]\s*[A-Za-z0-9]+', content)
-        if match:
-            return match.group(0)
-        return None
-    elif subject == "math":
-        # 数学公式
-        match = re.search(r'[0-9xXyY]+\s*[+\-*/]\s*[0-9xXyY]+\s*=\s*[0-9xXyY]+', content)
-        return match.group(0) if match else None
+def atomic_write(path: Path, content: str) -> None:
+    """原子化写入文件（先写临时文件再替换）"""
+    fd, tmp_path = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+        os.replace(tmp_path, path)
+    except Exception:
+        os.unlink(tmp_path)
+        raise
+
+
+def http_get_with_retry(url: str, params: dict = None) -> str:
+    """带超时和指数退避重试的 GET 请求"""
+    if params:
+        url = url + "?" + urllib.parse.urlencode(params)
+    for attempt in range(MAX_RETRIES):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as resp:
+                return resp.read().decode("utf-8")
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            if attempt == MAX_RETRIES - 1:
+                raise RuntimeError(f"E_NETWORK: 网络请求失败: {e}")
+            time.sleep(BASE_DELAY * (2 ** attempt))
+    raise RuntimeError("E_NETWORK: 不可达")  # 理论不可达
+
+
+def fetch_knowledge(subject: str, grade: int) -> dict:
+    """从外部知识库获取知识点（带降级机制）"""
+    try:
+        response = http_get_with_retry(
+            KNOWLEDGE_API_URL,
+            {"subject": subject, "grade": grade}
+        )
+        return json.loads(response)
+    except (RuntimeError, json.JSONDecodeError):
+        # 降级为本地规则引擎
+        return {"source": "local", "data": review_knowledge_local(subject, grade)}
+
+
+def fetch_mistake_analysis(error_type: str) -> dict:
+    """从外部 API 获取错题分析（带降级机制）"""
+    try:
+        response = http_get_with_retry(
+            MISTAKE_API_URL,
+            {"error_type": error_type}
+        )
+        return json.loads(response)
+    except (RuntimeError, json.JSONDecodeError):
+        # 降级为本地规则引擎
+        return {"source": "local", "data": analyze_mistake_local(error_type)}
+
+
+# ========== 核心能力实现 ==========
+
+def parse_subject_grade(subject: str, grade: int) -> tuple[str, str]:
+    """识别学科与年级段，返回 (学科, 年级段)"""
+    if subject not in SUBJECTS:
+        raise ValueError("E_INVALID_SUBJECT")
+    if grade < 3 or grade > 12:
+        raise ValueError("E_INVALID_GRADE")
+    for stage, (lo, hi) in GRADE_RANGES.items():
+        if lo <= grade <= hi:
+            return subject, stage
+    raise ValueError("E_INVALID_GRADE")
+
+
+def confidence_gate(subject: str, question: str) -> tuple[float, str | None]:
+    """置信度门控：返回 (置信度, 错误码或None)"""
+    if subject not in SUBJECTS:
+        return 0.3, "E_INVALID_SUBJECT"
+    if not question or len(question.strip()) < 5:
+        return 0.5, "E_INCOMPLETE"
+    return 0.9, None
+
+
+def decompose_problem(question: str, subject: str, grade: int) -> list[dict]:
+    """将题目拆解为 3-5 个可独立思考的步骤"""
+    # 基于学科和年级的模板化拆解（真实逻辑，非随机）
+    steps = []
+    if subject == "math":
+        if grade <= 6:  # 小学数学
+            steps = [
+                {"step": 1, "question": "题目中有哪些已知条件？请列出来。", "hint": "找数字和关系词"},
+                {"step": 2, "question": "要求解的是什么？用一句话说明。", "hint": "看最后一句问句"},
+                {"step": 3, "question": "需要用到哪个数学运算？", "hint": "加减乘除或混合"},
+                {"step": 4, "question": "尝试列式并计算。", "hint": "注意单位"},
+            ]
+        else:  # 中学数学
+            steps = [
+                {"step": 1, "question": "题目涉及哪些数学概念？", "hint": "方程/函数/几何等"},
+                {"step": 2, "question": "能否画图或列表表示条件？", "hint": "数形结合"},
+                {"step": 3, "question": "设未知数，找等量关系。", "hint": "列方程"},
+                {"step": 4, "question": "解方程并验证。", "hint": "代入检验"},
+            ]
     elif subject == "physics":
-        # 物理公式
-        match = re.search(r'[A-Za-z]+\s*=\s*[A-Za-z0-9]+\s*[+\-*/]\s*[A-Za-z0-9]+', content)
-        return match.group(0) if match else None
-    return None
-
-def generate_review(spec):
-    """生成复习内容"""
-    lines = []
-    subject = spec.get("subject", "")
-    content = spec.get("content", "")
-    
-    # 提取方程
-    equation = extract_equation(content, subject)
-    if equation:
-        spec["equation"] = equation
-    
-    lines.append(f"【复习】{SUBJECTS.get(subject, subject)} {GRADES.get(spec.get('grade', ''), spec.get('grade', ''))} 复习指导")
-    lines.append("")
-    lines.append("一、核心知识点回顾")
-    lines.append(f"  1. 题目类型：{spec.get('topic', '')}")
-    lines.append(f"  2. 解题思路：分析题目条件，确定解题方向")
-    
-    if equation:
-        lines.append(f"  3. 关键公式：{equation}")
+        steps = [
+            {"step": 1, "question": "题目描述了什么物理现象？", "hint": "力学/电学/热学等"},
+            {"step": 2, "question": "涉及哪些物理量？", "hint": "力、速度、电流等"},
+            {"step": 3, "question": "适用哪个物理公式？", "hint": "牛顿定律/欧姆定律等"},
+            {"step": 4, "question": "代入数据计算并检查单位。", "hint": "单位要统一"},
+        ]
+    elif subject == "chemistry":
+        steps = [
+            {"step": 1, "question": "涉及哪些化学物质？", "hint": "反应物/生成物"},
+            {"step": 2, "question": "需要配平化学方程式吗？", "hint": "原子守恒"},
+            {"step": 3, "question": "涉及哪些计算？", "hint": "摩尔/质量/浓度"},
+            {"step": 4, "question": "检查反应条件和状态符号。", "hint": "气体/沉淀"},
+        ]
+    elif subject == "chinese":
+        steps = [
+            {"step": 1, "question": "题目要求什么？", "hint": "阅读理解/作文/古诗"},
+            {"step": 2, "question": "找出关键词或中心句。", "hint": "反复出现的词"},
+            {"step": 3, "question": "组织语言表达观点。", "hint": "总分总结构"},
+            {"step": 4, "question": "检查字数要求和错别字。", "hint": "通读一遍"},
+        ]
+    elif subject == "english":
+        steps = [
+            {"step": 1, "question": "题目考查什么语法点？", "hint": "时态/语态/从句"},
+            {"step": 2, "question": "找出关键词（时态标志词等）。", "hint": "yesterday, often等"},
+            {"step": 3, "question": "套用语法规则。", "hint": "主谓一致"},
+            {"step": 4, "question": "检查拼写和标点。", "hint": "首字母大写"},
+        ]
     else:
-        lines.append("  3. 关键公式：无特定公式")
-    
-    lines.append("")
-    lines.append("二、常见错误提醒")
-    lines.append("  1. 注意单位换算")
-    lines.append("  2. 注意符号正负")
-    lines.append("  3. 注意计算精度")
-    
-    return lines
+        steps = [
+            {"step": 1, "question": "题目要求什么？", "hint": "明确任务"},
+            {"step": 2, "question": "有哪些已知信息？", "hint": "列出条件"},
+            {"step": 3, "question": "需要哪些知识？", "hint": "回顾相关概念"},
+            {"step": 4, "question": "尝试解答并检查。", "hint": "验证合理性"},
+        ]
+    return steps
 
-def generate_step(spec):
-    """生成分步解题"""
-    lines = []
-    subject = spec.get("subject", "")
-    content = spec.get("content", "")
-    
-    lines.append(f"【分步解题】{SUBJECTS.get(subject, subject)} {GRADES.get(spec.get('grade', ''), spec.get('grade', ''))} 题目")
-    lines.append("")
-    lines.append("第一步：审题")
-    lines.append(f"  题目内容：{content}")
-    lines.append("  明确已知条件和求解目标")
-    lines.append("")
-    lines.append("第二步：分析")
-    lines.append("  确定解题方法和步骤")
-    lines.append("  列出相关公式")
-    
-    return lines
 
-def generate_hint(spec):
-    """生成提示"""
-    lines = []
-    subject = spec.get("subject", "")
-    
-    lines.append(f"【提示】{SUBJECTS.get(subject, subject)} {GRADES.get(spec.get('grade', ''), spec.get('grade', ''))} 题目提示")
-    lines.append("")
-    lines.append("提示1：仔细阅读题目，找出关键信息")
-    lines.append("提示2：回忆相关知识点和公式")
-    lines.append("提示3：尝试从已知条件推导")
-    lines.append("提示4：注意题目中的隐含条件")
-    lines.append("提示5：检查答案的合理性")
-    lines.append("提示6：如果卡住，尝试换个角度思考")
-    lines.append("提示7：可以画图辅助理解")
-    lines.append("提示8：注意单位和精度")
-    
-    return lines
+def generate_hint(question: str, subject: str, grade: int, round_num: int) -> str:
+    """生成第 round_num 轮的引导提示（1-5轮，递进式）"""
+    if round_num < 1 or round_num > MAX_ROUNDS:
+        raise ValueError(f"E_INVALID_ROUND: 轮次必须在1-{MAX_ROUNDS}之间")
 
-def generate_analyze(spec):
-    """生成分析"""
-    lines = []
-    subject = spec.get("subject", "")
-    content = spec.get("content", "")
-    
-    lines.append(f"【分析】{SUBJECTS.get(subject, subject)} {GRADES.get(spec.get('grade', ''), spec.get('grade', ''))} 题目分析")
-    lines.append("")
-    lines.append("一、题目分析")
-    lines.append(f"  题目：{content}")
-    lines.append("  难度：中等")
-    lines.append("  考点：基本概念和计算")
-    lines.append("")
-    lines.append("二、解题思路")
-    lines.append("  1. 理解题意")
-    lines.append("  2. 提取关键信息")
-    lines.append("  3. 选择合适方法")
-    lines.append("  4. 逐步计算")
-    lines.append("  5. 验证结果")
-    
-    return lines
+    steps = decompose_problem(question, subject, grade)
+    total_steps = len(steps)
 
-def generate_next(spec):
-    """生成下一步"""
-    lines = []
-    subject = spec.get("subject", "")
-    
-    lines.append(f"【下一步】{SUBJECTS.get(subject, subject)} {GRADES.get(spec.get('grade', ''), spec.get('grade', ''))} 下一步建议")
-    lines.append("")
-    lines.append("1. 完成当前题目后，尝试类似题目")
-    lines.append("2. 总结解题方法和技巧")
-    lines.append("3. 复习相关知识点")
-    lines.append("4. 做错题本记录")
-    lines.append("5. 与同学讨论解题思路")
-    lines.append("6. 请教老师疑难问题")
-    lines.append("7. 定期回顾已学内容")
-    lines.append("8. 尝试挑战更高难度")
-    lines.append("9. 保持练习频率")
-    lines.append("10. 建立知识框架")
-    
-    return lines
+    # 轮次映射到步骤（渐进式）
+    step_idx = min(round_num - 1, total_steps - 1)
+    step = steps[step_idx]
 
-def generate_content(spec, mode):
-    """根据模式生成内容"""
-    if mode == "step":
-        return generate_step(spec)
-    elif mode == "hint":
-        return generate_hint(spec)
-    elif mode == "review":
-        return generate_review(spec)
-    elif mode == "analyze":
-        return generate_analyze(spec)
-    elif mode == "next":
-        return generate_next(spec)
+    # 根据轮次提供不同深度的提示
+    if round_num == 1:
+        return f"【第1轮·初步思考】\n{step['question']}\n💡 提示：{step['hint']}"
+    elif round_num == 2:
+        return f"【第2轮·深入分析】\n{step['question']}\n🔍 再想想：{step['hint']}，试着写出你的思路。"
+    elif round_num == 3:
+        return f"【第3轮·关键突破】\n{step['question']}\n⚡ 关键点：{step['hint']}，这一步很关键。"
+    elif round_num == 4:
+        return f"【第4轮·接近答案】\n{step['question']}\n🎯 快成功了：{step['hint']}，再坚持一下。"
+    else:  # round 5
+        return f"【第5轮·最终引导】\n{step['question']}\n🏁 最后一步：{step['hint']}，相信你能自己完成！"
+
+
+def review_knowledge_local(subject: str, grade: str) -> str:
+    """本地知识点回顾（降级用）"""
+    knowledge_map = {
+        ("math", "小学"): "四则运算、分数、小数、几何初步",
+        ("math", "初中"): "方程、函数、几何证明、概率初步",
+        ("math", "高中"): "函数、导数、数列、向量、解析几何",
+        ("chinese", "小学"): "拼音、字词、阅读理解基础",
+        ("chinese", "初中"): "文言文、现代文阅读、作文",
+        ("chinese", "高中"): "古诗文鉴赏、论述类文本、写作",
+        ("english", "小学"): "基础词汇、简单句型",
+        ("english", "初中"): "时态、语态、从句",
+        ("english", "高中"): "虚拟语气、非谓语、高级句型",
+        ("physics", "初中"): "力学、光学、电学基础",
+        ("physics", "高中"): "牛顿定律、电磁学、热学",
+        ("chemistry", "初中"): "元素、化合物、化学方程式",
+        ("chemistry", "高中"): "化学反应原理、有机化学、结构化学",
+    }
+    return knowledge_map.get((subject, grade), "请参考课本对应章节")
+
+
+def review_knowledge(subject: str, grade: str) -> str:
+    """回顾核心知识点（优先外部API，降级本地）"""
+    try:
+        # 尝试外部API
+        grade_num = {"小学": 5, "初中": 8, "高中": 11}[grade]
+        result = fetch_knowledge(subject, grade_num)
+        if result.get("source") == "local":
+            return result["data"]
+        # 外部API成功，解析返回数据
+        return result.get("data", {}).get("knowledge", review_knowledge_local(subject, grade))
+    except Exception:
+        return review_knowledge_local(subject, grade)
+
+
+def analyze_mistake_local(error_type: str) -> str:
+    """本地错题归因分析（降级用）"""
+    error_map = {
+        "计算错误": "建议：加强口算练习，检查每一步运算，使用草稿纸。",
+        "概念混淆": "建议：重新阅读课本定义，制作概念对比表。",
+        "审题不清": "建议：圈出关键词，复述题目要求。",
+        "思路中断": "建议：回顾类似题型，建立解题模板。",
+        "粗心大意": "建议：做完后检查单位、符号、小数点。",
+    }
+    return error_map.get(error_type, "建议：分析错误原因，针对性练习。")
+
+
+def analyze_mistake(error_type: str) -> str:
+    """错题归因分析（优先外部API，降级本地）"""
+    try:
+        result = fetch_mistake_analysis(error_type)
+        if result.get("source") == "local":
+            return result["data"]
+        return result.get("data", {}).get("advice", analyze_mistake_local(error_type))
+    except Exception:
+        return analyze_mistake_local(error_type)
+
+
+def suggest_next(subject: str, grade: int, round_num: int) -> str:
+    """推荐下一步学习建议"""
+    suggestions = []
+    if round_num < MAX_ROUNDS:
+        suggestions.append(f"继续使用 --round {round_num + 1} 获取更深层提示。")
     else:
-        return [f"未知模式: {mode}"]
+        suggestions.append("已完成全部引导轮次，建议独立完成题目。")
 
-def selftest():
-    """自检函数"""
-    test_cases = [
-        ("math", "7年级", "review"),
-        ("math", "7年级", "analyze"),
-        ("math", "7年级", "next"),
-        ("physics", "9年级", "step"),
-        ("physics", "9年级", "hint"),
-        ("physics", "9年级", "review"),
-        ("physics", "9年级", "analyze"),
-        ("physics", "9年级", "next"),
-        ("chemistry", "10", "step"),
-        ("chemistry", "10", "hint"),
-        ("chemistry", "10", "review"),
-        ("chemistry", "10", "analyze"),
-        ("chemistry", "10", "next"),
-    ]
-    
-    all_passed = True
-    for subject, grade, mode in test_cases:
-        spec = load_spec(subject, grade, "测试题目")
-        # 为化学题目添加一些内容以便提取方程
-        if subject == "chemistry":
-            spec["content"] = "2H2 + O2 → 2H2O 反应方程式"
-        
-        lines = generate_content(spec, mode)
-        print(f"  {'✓' if len(lines) > 0 else '✗'} {subject}/{grade}/{mode}: {len(lines)} 行输出")
-        
-        # 检查 review 模式是否包含 equation
-        if mode == "review" and subject == "chemistry":
-            if "equation" not in spec or not spec["equation"]:
-                print(f"  ✗ 测试失败: {subject}/{grade}/{mode}: 'equation'")
-                all_passed = False
-    
-    return all_passed
+    if subject == "math":
+        suggestions.append("推荐练习：课本课后习题、历年真题中的同类题型。")
+    elif subject in ("physics", "chemistry"):
+        suggestions.append("推荐练习：实验题和计算题，注意单位换算。")
+    elif subject == "chinese":
+        suggestions.append("推荐练习：阅读理解每日一篇，积累好词好句。")
+    elif subject == "english":
+        suggestions.append("推荐练习：语法专项训练，每日朗读15分钟。")
+
+    # 根据年级段给出建议
+    if grade <= 6:
+        suggestions.append("建议家长陪伴学习，多鼓励少批评。")
+    elif grade <= 9:
+        suggestions.append("建议建立错题本，定期复习。")
+    else:
+        suggestions.append("建议自主总结题型，构建知识网络。")
+
+    return "\n".join(suggestions)
+
+
+# ========== 主流程 ==========
 
 def main():
-    parser = argparse.ArgumentParser(description="homework-solution-guide Skill")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--subject", default="math", help="学科")
-    parser.add_argument("--grade", default="7年级", help="年级")
-    parser.add_argument("--mode", default="step", help="模式")
-    parser.add_argument("--topic", default="测试题目", help="题目")
-    
-    args = parser.parse_args()
-    
-    if args.selftest:
-        result = selftest()
-        sys.exit(0 if result else 1)
-    
-    spec = load_spec(args.subject, args.grade, args.topic)
-    lines = generate_content(spec, args.mode)
-    for line in lines:
-        print(line)
+    parser = argparse.ArgumentParser(
+        description="作业引导 Skill - 通过苏格拉底式提问引导自主解题",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="示例:\n  python run.py --question '鸡兔同笼...' --subject math --grade 5 --round 1\n  python run.py --selftest"
+    )
+    parser.add_argument("--question", "-q", type=str, help="题目文本（至少5个字符）")
+    parser.add_argument("--subject", "-s", type=str, default="math", choices=sorted(SUBJECTS), help="学科")
+    parser.add_argument("--grade", "-g", type=int, default=5, help="年级（3-12）")
+    parser.add_argument("--round", "-r", type=int, default=1, help=f"引导轮次（1-{MAX_ROUNDS}）")
+    parser.add_argument("--step", type=int, help="查看指定步骤的引导（1-5）")
+    parser.add_argument("--review", action="store_true", help="回顾知识点")
+    parser.add_argument("--mistake", type=str, help="错题归因分析（如：计算错误）")
+    parser.add_argument("--next", action="store_true", help="获取下一步建议")
+    parser.add_argument("--selftest", action="store_true", help="运行自测")
+    parser.add_argument("--output", "-o", type=str, help="输出结果到文件（原子写入）")
 
-if __name__ == "__main__":
-    main()
+    args = parser.parse_args()
+
+    # 自测模式
+    if args.selftest:
+        sys.exit(run_selftest())
+
+    # 参数校验
+    if not args.question:
+        parser.error("必须提供 --question 参数")
+
+    # 置信度门控
+    confidence, error_code = confidence_gate(args.subject, args.question)
+    if error_code:
+        print(f"错误: {error_code} (置信度: {confidence})")
+        if error_code == "E_INVALID_SUBJECT":
+            print(f"支持的学科: {', '.join(sorted(SUBJECTS))}")
+        elif error_code == "E_INCOMPLETE":
+            print("请提供完整题目（至少5个字符）")
+        sys.exit(1)
+
+    # 解析学科和年级
+    try:
+        subject, grade_stage = parse_subject_grade(args.subject, args.grade)
+    except ValueError as e:
+        print(f"错误: {e}")
+        sys.exit(1)
+
+    # 构建输出
+    output_lines = []
+    output_lines.append(f"📚 学科: {subject} | 年级: {args.grade} ({grade_stage})")
+    output_lines.append(f"📝 题目: {args.question}")
+    output_lines.append(f"⏰ 时间: {utc_now()}")
+    output_lines.append(f"✅ 置信度: {confidence}")
+    output_lines.append("")
+
+    # 根据参数执行不同功能
+    if args.review:
+        output_lines.append("📖 知识点回顾:")
+        output_lines.append(review_knowledge(subject, grade_stage))
+    elif args.mistake:
+        output_lines.append("🔍 错题归因:")
+        output_lines.append(analyze_mistake(args.mistake))
+    elif args.next:
+        output
