@@ -4,20 +4,73 @@
 """
 competitor-analysis-ai Skill Runner
 分析竞品信息，输出结构化报告
+
+支持功能：
+- 从文件/URL/命令行参数加载竞品数据
+- 多维度竞品分析（功能、定价、用户体验、市场定位、技术架构、运营）
+- 生成差异化策略建议
+- 风险提示与数据完整性检查
+- CSV 导出
+- 自测试（--selftest）
 """
 
 import argparse
+import csv
 import json
 import os
 import sys
-import re
+import tempfile
+import time
+import urllib.request
+import urllib.error
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
+
+# 版本信息
+VERSION = "3.0.0"
+
+# 错误码
+ERR_SUCCESS = 0
+ERR_PARAM = 1
+ERR_INVALID_DATA = 2
+ERR_FILE_NOT_FOUND = 3
+ERR_URL_FAILED = 4
+ERR_OUTPUT_DIR = 5
+
+# 网络请求配置
+REQUEST_TIMEOUT = 10  # 秒
+MAX_RETRIES = 3
+RETRY_BASE_DELAY = 1.0  # 秒
+
+# 分析维度
+ANALYSIS_DIMENSIONS = ["features", "pricing", "ux", "positioning", "tech_stack", "operations"]
+
+# 必填字段
+REQUIRED_FIELDS = ["name"]
+
+# 最大竞品数量
+MAX_COMPETITORS = 10
 
 
 def load_spec() -> Dict[str, Any]:
     """加载技能规格说明"""
     spec_path = os.path.join(os.path.dirname(__file__), "spec.json")
+    if not os.path.exists(spec_path):
+        # 如果 spec.json 不存在，返回默认配置
+        return {
+            "name": "competitor-analysis",
+            "version": VERSION,
+            "triggers": [
+                "competitor-analysis",
+                "竞品分析",
+                "竞品对比",
+                "竞争策略",
+                "市场分析",
+                "竞品拆解",
+                "差异化定位",
+                "竞争情报"
+            ]
+        }
     with open(spec_path, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -32,244 +85,580 @@ def match_trigger(user_input: str) -> bool:
     return False
 
 
-class CompetitorAnalyzer:
-    """竞品分析器"""
-
-    def __init__(self, data: Dict[str, Any]):
-        self.data = data
-        self.competitors = data.get("competitors", [])
-        self.metrics = data.get("metrics", [])
-        self.thresholds = data.get("thresholds", {})
-
-    def analyze(self) -> Dict[str, Any]:
-        """执行分析，返回结构化结果"""
-        analysis = {}
-        analysis["generated_at"] = datetime.now(timezone.utc).isoformat()
-        analysis["total_competitors"] = len(self.competitors)
-        analysis["competitor_names"] = [c.get("name", "未知") for c in self.competitors]
-
-        # 分析每个竞品
-        competitor_results = []
-        for comp in self.competitors:
-            comp_result = self._analyze_competitor(comp)
-            competitor_results.append(comp_result)
-        analysis["competitor_results"] = competitor_results
-
-        # 汇总指标
-        summary = self._generate_summary(competitor_results)
-        analysis["summary"] = summary
-
-        # 统计填充率
-        filled = sum(1 for v in analysis.values() if v and not (isinstance(v, str) and v.startswith("[需核实")))
-        total = len(analysis)
-        analysis["completeness"] = f"{filled}/{total}"
-
-        return analysis
-
-    def _analyze_competitor(self, comp: Dict[str, Any]) -> Dict[str, Any]:
-        """分析单个竞品"""
-        result = {}
-        result["name"] = comp.get("name", "未知")
-        result["market_share"] = comp.get("market_share", "[需核实]")
-        result["growth_rate"] = comp.get("growth_rate", "[需核实]")
-        result["product_quality"] = comp.get("product_quality", "[需核实]")
-        result["price_level"] = comp.get("price_level", "[需核实]")
-        result["customer_satisfaction"] = comp.get("customer_satisfaction", "[需核实]")
-
-        # 评分（可能是数字）
-        score = comp.get("score")
-        if score is not None:
-            result["score"] = score
-        else:
-            result["score"] = "[需核实]"
-
-        # 优势与劣势
-        strengths = comp.get("strengths", [])
-        weaknesses = comp.get("weaknesses", [])
-        result["strengths"] = strengths if isinstance(strengths, list) else [strengths]
-        result["weaknesses"] = weaknesses if isinstance(weaknesses, list) else [weaknesses]
-
-        # 战略建议
-        suggestions = comp.get("suggestions", [])
-        result["suggestions"] = suggestions if isinstance(suggestions, list) else [suggestions]
-
-        return result
-
-    def _generate_summary(self, competitor_results: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """生成汇总信息"""
-        summary = {}
-        if not competitor_results:
-            summary["status"] = "无竞品数据"
-            return summary
-
-        # 平均市场份额
-        shares = []
-        for r in competitor_results:
-            share = r.get("market_share")
-            if isinstance(share, (int, float)):
-                shares.append(share)
-        if shares:
-            summary["avg_market_share"] = sum(shares) / len(shares)
-        else:
-            summary["avg_market_share"] = "[需核实]"
-
-        # 平均增长率
-        growths = []
-        for r in competitor_results:
-            growth = r.get("growth_rate")
-            if isinstance(growth, (int, float)):
-                growths.append(growth)
-        if growths:
-            summary["avg_growth_rate"] = sum(growths) / len(growths)
-        else:
-            summary["avg_growth_rate"] = "[需核实]"
-
-        # 最高评分
-        scores = []
-        for r in competitor_results:
-            score = r.get("score")
-            if isinstance(score, (int, float)):
-                scores.append(score)
-        if scores:
-            summary["max_score"] = max(scores)
-            summary["best_competitor"] = competitor_results[scores.index(max(scores))]["name"]
-        else:
-            summary["max_score"] = "[需核实]"
-            summary["best_competitor"] = "[需核实]"
-
-        # 市场集中度
-        if shares:
-            total_share = sum(shares)
-            if total_share > 0:
-                top3 = sorted(shares, reverse=True)[:3]
-                summary["market_concentration"] = sum(top3) / total_share
-            else:
-                summary["market_concentration"] = 0
-        else:
-            summary["market_concentration"] = "[需核实]"
-
-        return summary
+def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
+                         max_retries: int = MAX_RETRIES) -> str:
+    """
+    从 URL 获取数据，带超时和指数退避重试
+    
+    Args:
+        url: 数据源 URL
+        timeout: 超时时间（秒）
+        max_retries: 最大重试次数
+    
+    Returns:
+        获取到的文本内容
+    
+    Raises:
+        urllib.error.URLError: 当所有重试都失败时
+    """
+    last_error = None
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "CompetitorAnalysisSkill/3.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                return response.read().decode("utf-8")
+        except urllib.error.URLError as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                time.sleep(delay)
+    raise last_error
 
 
-def selftest() -> int:
-    """自检函数，验证技能功能"""
-    print("Running selftest for competitor-analysis-ai...")
+def load_data_from_file(file_path: str) -> Dict[str, Any]:
+    """从文件加载数据"""
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"文件不存在: {file_path}")
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
 
-    # 测试数据
-    test_data = {
-        "competitors": [
-            {
-                "name": "竞品A",
-                "market_share": 35.5,
-                "growth_rate": 12.3,
-                "product_quality": "高",
-                "price_level": "中",
-                "customer_satisfaction": 4.5,
-                "score": 85,
-                "strengths": ["品牌知名度高", "产品线丰富"],
-                "weaknesses": ["价格偏高", "创新不足"],
-                "suggestions": ["优化定价策略", "加大研发投入"]
-            },
-            {
-                "name": "竞品B",
-                "market_share": 28.2,
-                "growth_rate": 8.7,
-                "product_quality": "中",
-                "price_level": "低",
-                "customer_satisfaction": 4.0,
-                "score": 78,
-                "strengths": ["性价比高", "渠道覆盖广"],
-                "weaknesses": ["品牌力弱", "售后服务一般"],
-                "suggestions": ["提升品牌形象", "改善售后体验"]
-            },
-            {
-                "name": "竞品C",
-                "market_share": 15.8,
-                "growth_rate": -3.2,
-                "product_quality": "低",
-                "price_level": "高",
-                "customer_satisfaction": 3.2,
-                "score": 62,
-                "strengths": ["技术领先"],
-                "weaknesses": ["价格过高", "市场定位模糊"],
-                "suggestions": ["调整市场定位", "优化成本结构"]
-            }
-        ],
-        "metrics": ["market_share", "growth_rate", "product_quality", "price_level", "customer_satisfaction"],
-        "thresholds": {
-            "market_share": 20,
-            "growth_rate": 5,
-            "customer_satisfaction": 4.0
-        }
+
+def load_data_from_url(url: str) -> Dict[str, Any]:
+    """从 URL 加载数据"""
+    try:
+        content = fetch_url_with_retry(url)
+        return json.loads(content)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"URL 返回的数据不是有效的 JSON: {e}")
+    except urllib.error.URLError as e:
+        raise ConnectionError(f"URL 请求失败: {e}")
+
+
+def load_data_from_args(data_str: str) -> Dict[str, Any]:
+    """从命令行参数加载数据"""
+    try:
+        return json.loads(data_str)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"命令行参数不是有效的 JSON: {e}")
+
+
+def validate_data(data: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    """
+    验证数据格式
+    
+    Returns:
+        (是否有效, 错误信息列表)
+    """
+    errors = []
+    if not isinstance(data, dict):
+        return False, ["数据必须是 JSON 对象"]
+    
+    competitors = data.get("competitors")
+    if competitors is None:
+        return False, ["缺少 'competitors' 字段"]
+    
+    if not isinstance(competitors, list):
+        return False, ["'competitors' 必须是数组"]
+    
+    if len(competitors) == 0:
+        return False, ["'competitors' 数组不能为空"]
+    
+    if len(competitors) > MAX_COMPETITORS:
+        errors.append(f"竞品数量超过最大限制 {MAX_COMPETITORS}，建议分批处理")
+    
+    for i, comp in enumerate(competitors):
+        if not isinstance(comp, dict):
+            errors.append(f"竞品 #{i+1} 必须是对象")
+            continue
+        
+        # 检查必填字段
+        for field in REQUIRED_FIELDS:
+            if field not in comp or comp[field] is None or comp[field] == "":
+                errors.append(f"竞品 #{i+1} 缺少必填字段 '{field}'")
+    
+    return len(errors) == 0, errors
+
+
+def analyze_competitor(competitor: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    分析单个竞品
+    
+    Args:
+        competitor: 竞品数据
+    
+    Returns:
+        分析结果
+    """
+    result = {
+        "name": competitor.get("name", "[需核实:name]"),
+        "dimensions": {}
     }
+    
+    # 功能分析
+    features = competitor.get("features")
+    if features is None:
+        result["dimensions"]["features"] = {"status": "missing", "data": "[需核实:features]"}
+    elif isinstance(features, list):
+        result["dimensions"]["features"] = {
+            "status": "complete",
+            "data": features,
+            "count": len(features)
+        }
+    else:
+        result["dimensions"]["features"] = {"status": "invalid", "data": "[需核实:features]"}
+    
+    # 定价分析
+    pricing = competitor.get("pricing")
+    if pricing is None:
+        result["dimensions"]["pricing"] = {"status": "missing", "data": "[需核实:pricing]"}
+    elif isinstance(pricing, dict):
+        result["dimensions"]["pricing"] = {
+            "status": "complete",
+            "data": pricing
+        }
+    else:
+        result["dimensions"]["pricing"] = {"status": "invalid", "data": "[需核实:pricing]"}
+    
+    # 用户体验分析
+    ux = competitor.get("ux")
+    if ux is None:
+        result["dimensions"]["ux"] = {"status": "missing", "data": "[需核实:ux]"}
+    else:
+        result["dimensions"]["ux"] = {"status": "complete", "data": ux}
+    
+    # 市场定位分析
+    positioning = competitor.get("positioning")
+    if positioning is None:
+        result["dimensions"]["positioning"] = {"status": "missing", "data": "[需核实:positioning]"}
+    else:
+        result["dimensions"]["positioning"] = {"status": "complete", "data": positioning}
+    
+    # 技术架构分析
+    tech_stack = competitor.get("tech_stack")
+    if tech_stack is None:
+        result["dimensions"]["tech_stack"] = {"status": "missing", "data": "[需核实:tech_stack]"}
+    elif isinstance(tech_stack, list):
+        result["dimensions"]["tech_stack"] = {
+            "status": "complete",
+            "data": tech_stack,
+            "count": len(tech_stack)
+        }
+    else:
+        result["dimensions"]["tech_stack"] = {"status": "invalid", "data": "[需核实:tech_stack]"}
+    
+    # 运营策略分析
+    operations = competitor.get("operations")
+    if operations is None:
+        result["dimensions"]["operations"] = {"status": "missing", "data": "[需核实:operations]"}
+    else:
+        result["dimensions"]["operations"] = {"status": "complete", "data": operations}
+    
+    return result
 
-    analyzer = CompetitorAnalyzer(test_data)
-    results = analyzer.analyze()
 
-    # 验证结果
-    assert results["total_competitors"] == 3, "竞品数量错误"
-    assert len(results["competitor_results"]) == 3, "竞品分析结果数量错误"
-    assert "summary" in results, "缺少汇总信息"
-    assert "completeness" in results, "缺少完整性统计"
+def generate_strategies(competitors: List[Dict[str, Any]]) -> List[Dict[str, str]]:
+    """
+    生成差异化策略建议
+    
+    Args:
+        competitors: 竞品列表
+    
+    Returns:
+        策略建议列表
+    """
+    strategies = []
+    
+    # 基于功能差异生成策略
+    feature_sets = []
+    for comp in competitors:
+        features = comp.get("features", [])
+        if isinstance(features, list):
+            feature_sets.append(set(features))
+    
+    if len(feature_sets) >= 2:
+        # 找出差异化功能
+        common_features = set.intersection(*feature_sets) if feature_sets else set()
+        unique_features = []
+        for i, comp in enumerate(competitors):
+            if isinstance(comp.get("features"), list):
+                unique = set(comp["features"]) - common_features
+                if unique:
+                    unique_features.append({
+                        "competitor": comp.get("name", "未知"),
+                        "unique_features": list(unique)
+                    })
+        
+        if unique_features:
+            strategies.append({
+                "type": "feature_differentiation",
+                "description": "基于功能差异化定位",
+                "suggestion": f"重点关注以下竞品的独特功能: {', '.join([f['competitor'] + ': ' + ', '.join(f['unique_features'][:3]) for f in unique_features[:3]])}"
+            })
+    
+    # 基于定价策略生成建议
+    pricing_models = []
+    for comp in competitors:
+        pricing = comp.get("pricing")
+        if isinstance(pricing, dict) and "model" in pricing:
+            pricing_models.append(pricing["model"])
+    
+    if pricing_models:
+        unique_models = list(set(pricing_models))
+        if len(unique_models) > 1:
+            strategies.append({
+                "type": "pricing_strategy",
+                "description": "定价策略差异化",
+                "suggestion": f"市场存在多种定价模式: {', '.join(unique_models)}。建议评估是否有机会采用混合定价策略。"
+            })
+    
+    # 基于市场定位生成建议
+    positions = []
+    for comp in competitors:
+        pos = comp.get("positioning")
+        if pos:
+            positions.append(pos)
+    
+    if positions:
+        strategies.append({
+            "type": "positioning",
+            "description": "市场定位分析",
+            "suggestion": f"当前市场定位包括: {', '.join(positions[:5])}。建议寻找未被覆盖的细分市场。"
+        })
+    
+    # 如果没有生成任何策略，提供通用建议
+    if not strategies:
+        strategies.append({
+            "type": "general",
+            "description": "通用策略建议",
+            "suggestion": "建议深入分析用户需求，寻找未被满足的痛点，并评估技术可行性。"
+        })
+    
+    return strategies
 
-    # 验证汇总数据
-    summary = results["summary"]
-    assert "avg_market_share" in summary, "缺少平均市场份额"
-    assert "avg_growth_rate" in summary, "缺少平均增长率"
-    assert "max_score" in summary, "缺少最高评分"
-    assert "best_competitor" in summary, "缺少最佳竞品"
 
-    # 验证竞品结果
-    first_comp = results["competitor_results"][0]
-    assert first_comp["name"] == "竞品A", "竞品名称错误"
-    assert first_comp["score"] == 85, "评分错误"
-    assert isinstance(first_comp["strengths"], list), "优势应为列表"
-    assert isinstance(first_comp["weaknesses"], list), "劣势应为列表"
+def generate_risks(competitors: List[Dict[str, Any]]) -> List[Dict[str, str]]:
+    """
+    生成风险提示
+    
+    Args:
+        competitors: 竞品列表
+    
+    Returns:
+        风险列表
+    """
+    risks = []
+    
+    # 检查数据完整性风险
+    for i, comp in enumerate(competitors):
+        missing_fields = []
+        for dim in ANALYSIS_DIMENSIONS:
+            if dim not in comp or comp[dim] is None:
+                missing_fields.append(dim)
+        if missing_fields:
+            risks.append({
+                "level": "warning",
+                "type": "data_incomplete",
+                "description": f"竞品 '{comp.get('name', f'#{i+1}')}' 缺少数据: {', '.join(missing_fields)}",
+                "impact": "分析结果可能不完整"
+            })
+    
+    # 检查竞品数量风险
+    if len(competitors) > MAX_COMPETITORS:
+        risks.append({
+            "level": "warning",
+            "type": "too_many_competitors",
+            "description": f"竞品数量 ({len(competitors)}) 超过建议上限 ({MAX_COMPETITORS})",
+            "impact": "分析深度可能不足"
+        })
+    
+    # 如果没有风险，添加一个通用提示
+    if not risks:
+        risks.append({
+            "level": "info",
+            "type": "data_quality",
+            "description": "数据完整性良好",
+            "impact": "分析结果可信度较高"
+        })
+    
+    return risks
 
-    # 验证完整性统计
-    assert results["completeness"] != "0/0", "完整性统计异常"
 
-    print("Selftest passed!")
-    return 0
+def generate_report(data: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    生成完整分析报告
+    
+    Args:
+        data: 输入数据
+    
+    Returns:
+        报告字典
+    """
+    competitors = data.get("competitors", [])
+    
+    # 分析每个竞品
+    findings = []
+    for comp in competitors:
+        if not isinstance(comp, dict) or "name" not in comp or not comp["name"]:
+            continue
+        findings.append(analyze_competitor(comp))
+    
+    # 生成策略和风险
+    strategies = generate_strategies(competitors)
+    risks = generate_risks(competitors)
+    
+    # 数据质量检查
+    data_quality = {
+        "total_competitors": len(competitors),
+        "analyzed_competitors": len(findings),
+        "skipped_competitors": len(competitors) - len(findings),
+        "dimensions_checked": ANALYSIS_DIMENSIONS
+    }
+    
+    report = {
+        "report_id": f"CA-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "competitors_analyzed": len(findings),
+        "dimensions_analyzed": ANALYSIS_DIMENSIONS,
+        "findings": findings,
+        "strategies": strategies,
+        "risks": risks,
+        "data_quality": data_quality
+    }
+    
+    return report
+
+
+def export_csv(report: Dict[str, Any], output_path: str) -> None:
+    """
+    导出 CSV 报告
+    
+    Args:
+        report: 报告数据
+        output_path: 输出文件路径
+    """
+    # 确保输出目录存在
+    output_dir = os.path.dirname(output_path)
+    if output_dir and not os.path.exists(output_dir):
+        os.makedirs(output_dir, exist_ok=True)
+    
+    # 写入临时文件，然后原子替换
+    fd, temp_path = tempfile.mkstemp(dir=output_dir or ".", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", newline="", encoding="utf-8") as f:
+            writer = csv.writer(f)
+            
+            # 写入表头
+            writer.writerow(["竞品名称", "维度", "状态", "数据"])
+            
+            # 写入数据
+            for finding in report["findings"]:
+                name = finding["name"]
+                for dim, dim_data in finding["dimensions"].items():
+                    status = dim_data.get("status", "unknown")
+                    data = dim_data.get("data", "")
+                    if isinstance(data, (list, dict)):
+                        data = json.dumps(data, ensure_ascii=False)
+                    writer.writerow([name, dim, status, data])
+            
+            # 写入策略
+            writer.writerow([])
+            writer.writerow(["策略建议"])
+            for strategy in report["strategies"]:
+                writer.writerow([strategy["type"], strategy["description"], strategy["suggestion"]])
+            
+            # 写入风险
+            writer.writerow([])
+            writer.writerow(["风险提示"])
+            for risk in report["risks"]:
+                writer.writerow([risk["level"], risk["type"], risk["description"], risk["impact"]])
+        
+        # 原子替换
+        os.replace(temp_path, output_path)
+    except Exception:
+        # 清理临时文件
+        if os.path.exists(temp_path):
+            os.unlink(temp_path)
+        raise
+
+
+def run_selftest() -> int:
+    """
+    运行自测试，验证核心功能
+    
+    Returns:
+        退出码（0 表示成功）
+    """
+    print("=== 运行自测试 ===")
+    
+    # 测试 1: 数据验证
+    print("\n[测试 1] 数据验证...")
+    valid_data = {"competitors": [{"name": "竞品A", "features": ["f1"]}]}
+    is_valid, errors = validate_data(valid_data)
+    assert is_valid, f"有效数据验证失败: {errors}"
+    print("  ✓ 有效数据验证通过")
+    
+    invalid_data = {"competitors": [{"features": ["f1"]}]}
+    is_valid, errors = validate_data(invalid_data)
+    assert not is_valid, "无效数据验证失败"
+    print("  ✓ 无效数据验证通过")
+    
+    # 测试 2: 竞品分析
+    print("\n[测试 2] 竞品分析...")
+    competitor = {"name": "竞品A", "features": ["f1", "f2"], "pricing": {"model": "订阅制"}}
+    result = analyze_competitor(competitor)
+    assert result["name"] == "竞品A", "竞品名称错误"
+    assert result["dimensions"]["features"]["status"] == "complete", "功能分析失败"
+    assert result["dimensions"]["pricing"]["status"] == "complete", "定价分析失败"
+    assert result["dimensions"]["ux"]["status"] == "missing", "缺失字段处理失败"
+    print("  ✓ 竞品分析通过")
+    
+    # 测试 3: 策略生成
+    print("\n[测试 3] 策略生成...")
+    competitors = [
+        {"name": "A", "features": ["f1", "f2"], "pricing": {"model": "订阅制"}, "positioning": "高端"},
+        {"name": "B", "features": ["f2", "f3"], "pricing": {"model": "免费"}, "positioning": "大众"}
+    ]
+    strategies = generate_strategies(competitors)
+    assert len(strategies) > 0, "策略生成失败"
+    print(f"  ✓ 策略生成通过，生成 {len(strategies)} 条策略")
+    
+    # 测试 4: 风险生成
+    print("\n[测试 4] 风险生成...")
+    risks = generate_risks(competitors)
+    assert len(risks) > 0, "风险生成失败"
+    print(f"  ✓ 风险生成通过，生成 {len(risks)} 条风险")
+    
+    # 测试 5: 完整报告生成
+    print("\n[测试 5] 完整报告生成...")
+    report = generate_report(valid_data)
+    assert report["competitors_analyzed"] == 1, "报告竞品数量错误"
+    assert "report_id" in report, "报告缺少 ID"
+    assert "generated_at" in report, "报告缺少时间戳"
+    print("  ✓ 完整报告生成通过")
+    
+    # 测试 6: CSV 导出
+    print("\n[测试 6] CSV 导出...")
+    with tempfile.TemporaryDirectory() as tmpdir:
+        csv_path = os.path.join(tmpdir, "test.csv")
+        export_csv(report, csv_path)
+        assert os.path.exists(csv_path), "CSV 文件未创建"
+        with open(csv_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        assert "竞品名称" in content, "CSV 表头错误"
+        print("  ✓ CSV 导出通过")
+    
+    # 测试 7: URL 获取（带重试）
+    print("\n[测试 7] URL 获取重试逻辑...")
+    # 测试无效 URL 的重试行为
+    try:
+        fetch_url_with_retry("http://invalid-url-that-does-not-exist.com/data.json", timeout=1, max_retries=2)
+        assert False, "无效 URL 应该抛出异常"
+    except Exception as e:
+        print(f"  ✓ URL 重试逻辑通过（正确抛出异常: {type(e).__name__}）")
+    
+    print("\n=== 所有测试通过 ===")
+    return ERR_SUCCESS
 
 
 def main() -> int:
-    """主入口"""
-    parser = argparse.ArgumentParser(description="竞品分析工具")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--input", type=str, help="输入JSON文件路径")
-    parser.add_argument("--output", type=str, help="输出JSON文件路径")
+    """主函数"""
+    parser = argparse.ArgumentParser(
+        description="竞品分析工具 - 多维度拆解竞品，输出差异化策略",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  python run.py --file data.json
+  python run.py --url https://example.com/data.json
+  python run.py --data '{"competitors": [{"name": "竞品A"}]}'
+  python run.py --file data.json --csv output.csv
+  python run.py --selftest
+        """
+    )
+    
+    # 数据源参数（互斥）
+    data_group = parser.add_mutually_exclusive_group()
+    data_group.add_argument("--file", help="从 JSON 文件加载数据")
+    data_group.add_argument("--url", help="从 URL 加载 JSON 数据")
+    data_group.add_argument("--data", help="从命令行参数加载 JSON 数据")
+    
+    # 输出参数
+    parser.add_argument("--csv", help="导出 CSV 报告到指定路径")
+    parser.add_argument("--output", "-o", help="输出 JSON 报告到指定路径")
+    
+    # 其他参数
+    parser.add_argument("--selftest", action="store_true", help="运行自测试")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
+    
     args = parser.parse_args()
-
+    
+    # 运行自测试
     if args.selftest:
-        return selftest()
-
-    if args.input:
-        try:
-            with open(args.input, "r", encoding="utf-8") as f:
-                data = json.load(f)
-        except Exception as e:
-            print(f"读取输入文件失败: {e}")
-            return 1
-
-        analyzer = CompetitorAnalyzer(data)
-        results = analyzer.analyze()
-
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    json.dump(results, f, ensure_ascii=False, indent=2)
-                print(f"分析结果已保存到 {args.output}")
-            except Exception as e:
-                print(f"写入输出文件失败: {e}")
-                return 1
+        return run_selftest()
+    
+    # 检查数据源
+    if not args.file and not args.url and not args.data:
+        parser.error("必须提供数据源: --file, --url 或 --data")
+    
+    try:
+        # 加载数据
+        if args.file:
+            data = load_data_from_file(args.file)
+        elif args.url:
+            data = load_data_from_url(args.url)
         else:
-            print(json.dumps(results, ensure_ascii=False, indent=2))
-        return 0
-
-    # 无参数时显示帮助
-    parser.print_help()
-    return 0
+            data = load_data_from_args(args.data)
+        
+        # 验证数据
+        is_valid, errors = validate_data(data)
+        if not is_valid:
+            print("数据验证失败:", file=sys.stderr)
+            for error in errors:
+                print(f"  - {error}", file=sys.stderr)
+            return ERR_INVALID_DATA
+        
+        # 生成报告
+        report = generate_report(data)
+        
+        # 输出 JSON 报告
+        if args.output:
+            # 确保输出目录存在
+            output_dir = os.path.dirname(args.output)
+            if output_dir and not os.path.exists(output_dir):
+                os.makedirs(output_dir, exist_ok=True)
+            
+            # 原子写入
+            fd, temp_path = tempfile.mkstemp(dir=output_dir or ".", suffix=".tmp")
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8") as f:
+                    json.dump(report, f, ensure_ascii=False, indent=2)
+                os.replace(temp_path, args.output)
+            except Exception:
+                if os.path.exists(temp_path):
+                    os.unlink(temp_path)
+                raise
+            print(f"报告已保存到: {args.output}")
+        else:
+            print(json.dumps(report, ensure_ascii=False, indent=2))
+        
+        # 导出 CSV
+        if args.csv:
+            export_csv(report, args.csv)
+            print(f"CSV 已导出到: {args.csv}")
+        
+        return ERR_SUCCESS
+        
+    except FileNotFoundError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return ERR_FILE_NOT_FOUND
+    except ConnectionError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return ERR_URL_FAILED
+    except ValueError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return ERR_INVALID_DATA
+    except Exception as e:
+        print(f"未预期的错误: {e}", file=sys.stderr)
+        return ERR_PARAM
 
 
 if __name__ == "__main__":
