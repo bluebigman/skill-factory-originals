@@ -63,6 +63,67 @@ def match_trigger(user_input: str) -> Optional[str]:
     return None
 
 
+def split_sentences(text: str) -> List[str]:
+    """
+    健壮的分句逻辑：
+    - 基于句号、感叹号、问号分割
+    - 排除缩写词（如 Mr. Dr. etc.）
+    - 处理引号、括号内的标点
+    - 处理连续标点（如？！）
+    """
+    if not text:
+        return []
+
+    # 保护缩写词
+    abbreviations = [
+        r'\bMr\.', r'\bMrs\.', r'\bMs\.', r'\bDr\.', r'\bProf\.',
+        r'\bSt\.', r'\bvs\.', r'\betc\.', r'\be\.g\.', r'\bi\.e\.',
+        r'\bInc\.', r'\bLtd\.', r'\bCo\.', r'\bJr\.', r'\bSr\.'
+    ]
+    protected = {}
+    for i, abbr in enumerate(abbreviations):
+        placeholder = f"__ABBR_{i}__"
+        text = re.sub(abbr, placeholder, text)
+        protected[placeholder] = abbr.replace('\\b', '').replace('\\.', '.')
+
+    # 保护引号和括号内的标点
+    quote_pattern = r'([""""])(.*?)(\1)'
+    paren_pattern = r'([\(\[【])(.*?)([\)\]】])'
+    
+    protected_quotes = {}
+    protected_parens = {}
+    
+    def protect_quotes(match):
+        placeholder = f"__QUOTE_{len(protected_quotes)}__"
+        protected_quotes[placeholder] = match.group(0)
+        return placeholder
+    
+    def protect_parens(match):
+        placeholder = f"__PAREN_{len(protected_parens)}__"
+        protected_parens[placeholder] = match.group(0)
+        return placeholder
+    
+    text = re.sub(quote_pattern, protect_quotes, text)
+    text = re.sub(paren_pattern, protect_parens, text)
+
+    # 分割句子（处理连续标点）
+    sentences = re.split(r'(?<=[。！？])(?![。！？])', text)
+    sentences = [s.strip() for s in sentences if s.strip()]
+
+    # 恢复保护的内容
+    result = []
+    for sentence in sentences:
+        for placeholder, original in protected_quotes.items():
+            sentence = sentence.replace(placeholder, original)
+        for placeholder, original in protected_parens.items():
+            sentence = sentence.replace(placeholder, original)
+        for placeholder, original in protected.items():
+            sentence = sentence.replace(placeholder, original)
+        result.append(sentence)
+
+    return result
+
+
 def clean_transcript(text: str, terms: Optional[Dict[str, str]] = None) -> str:
     """
     将口语化音频转录文本整理为结构化书面语：
@@ -85,19 +146,12 @@ def clean_transcript(text: str, terms: Optional[Dict[str, str]] = None) -> str:
     ]
     filler_words.sort(key=len, reverse=True)
 
-    # 分割为句子（保留标点）
-    sentences = re.split(r"([。！？；，])", text)
-    cleaned_parts = []
+    # 使用健壮的分句逻辑
+    sentences = split_sentences(text)
+    cleaned_sentences = []
 
-    for i in range(0, len(sentences), 2):
-        sentence = sentences[i].strip()
-        punct = sentences[i + 1] if i + 1 < len(sentences) else ""
-
+    for sentence in sentences:
         if not sentence:
-            # 空句但带标点（如开头的逗号）→ 丢弃，防 "，这样"
-            if punct in "，。！？；":
-                continue
-            cleaned_parts.append(punct)
             continue
 
         # 句首填充词（只删纯口头词，不删"我们/这个/还有"等实词）
@@ -122,12 +176,10 @@ def clean_transcript(text: str, terms: Optional[Dict[str, str]] = None) -> str:
         sentence = re.sub(r'\s+', ' ', sentence).strip()
 
         if sentence:
-            cleaned_parts.append(sentence + punct)
-        elif punct and punct not in "，。！？；":
-            cleaned_parts.append(punct)
+            cleaned_sentences.append(sentence)
 
     # 2. 合并重复标点，修正标点粘连
-    text = ''.join(cleaned_parts)
+    text = ''.join(cleaned_sentences)
     text = re.sub(r'([。！？；，])\1+', r'\1', text)  # 合并重复标点
     text = re.sub(r'\s+([。！？；，])', r'\1', text)  # 标点前不留空格
     text = re.sub(r'([。！？；，])(?=[a-zA-Z0-9\u4e00-\u9fff])', r'\1 ', text)  # 标点后加空格
@@ -151,7 +203,7 @@ def split_paragraphs(text: str) -> List[str]:
         return []
 
     # 按句号、问号、感叹号分割为句子
-    sentences = re.split(r'(?<=[。！？])', text)
+    sentences = split_sentences(text)
     sentences = [s.strip() for s in sentences if s.strip()]
 
     if len(sentences) <= 3:
@@ -368,91 +420,22 @@ def run_selftest() -> int:
     assert "！！" not in result6["output"], f"测试6失败: 重复标点未合并"
     print("测试6通过: 标点修复")
 
-    print("\n所有自测通过!")
-    return 0
+    # 测试用例7：健壮分句（引号、括号、缩写词）
+    test_text7 = "他说：\"你好，世界！\"然后离开了。Dr. Smith说：\"这是测试（包含括号内容）。\""
+    result7 = process_transcript(test_text7)
+    assert result7["success"] is True, f"测试7失败: {result7}"
+    assert "你好，世界！" in result7["output"], f"测试7失败: 引号内容被破坏"
+    assert "这是测试（包含括号内容）。" in result7["output"], f"测试7失败: 括号内容被破坏"
+    print("测试7通过: 健壮分句")
 
+    # 测试用例8：段落划分
+    test_text8 = "我们讨论了项目进度。项目进展顺利。下一步是测试。测试需要更多时间。"
+    result8 = process_transcript(test_text8)
+    assert result8["success"] is True, f"测试8失败: {result8}"
+    assert "\n\n" in result8["output"], f"测试8失败: 未生成段落"
+    print("测试8通过: 段落划分")
 
-def main():
-    parser = argparse.ArgumentParser(
-        description="音频转写文本格式化整理工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python run.py --text "嗯，那个，我们完成了项目。"
-  python run.py --file input.txt --output output.md
-  python run.py --selftest
-        """
-    )
-    parser.add_argument("--text", type=str, help="待处理的转录文本")
-    parser.add_argument("--file", type=str, help="输入文件路径（UTF-8编码）")
-    parser.add_argument("--output", type=str, help="输出文件路径（可选）")
-    parser.add_argument("--terms", type=str, help="术语映射JSON文件路径（可选）")
-    parser.add_argument("--add-headings", action="store_true", help="自动添加小标题")
-    parser.add_argument("--selftest", action="store_true", help="运行自测")
-    parser.add_argument("--version", action="version", version="audio-transcript-format 2.0.0")
-
-    args = parser.parse_args()
-
-    if args.selftest:
-        sys.exit(run_selftest())
-
-    # 获取输入文本
-    text = args.text
-    if not text and args.file:
-        try:
-            with open(args.file, 'r', encoding='utf-8') as f:
-                text = f.read()
-        except Exception as e:
-            print(f"读取文件失败: {e}", file=sys.stderr)
-            sys.exit(1)
-
-    if not text:
-        # 尝试从标准输入读取
-        try:
-            text = sys.stdin.read()
-        except KeyboardInterrupt:
-            print("用户中断输入", file=sys.stderr)
-            sys.exit(1)
-
-    if not text or not text.strip():
-        print("错误: 输入文本为空", file=sys.stderr)
-        sys.exit(1)
-
-    # 加载术语映射
-    terms = {}
-    if args.terms:
-        try:
-            with open(args.terms, 'r', encoding='utf-8') as f:
-                terms = json.load(f)
-        except Exception as e:
-            print(f"加载术语映射失败: {e}", file=sys.stderr)
-            sys.exit(1)
-
-    # 处理文本
-    result = process_transcript(text, terms=terms, add_headings_flag=args.add_headings)
-
-    if not result["success"]:
-        print(f"错误: {result['error_message']}", file=sys.stderr)
-        sys.exit(result["error_code"])
-
-    # 输出结果
-    output = result["output"]
-    if args.output:
-        if atomic_write_file(args.output, output):
-            print(f"结果已写入: {args.output}")
-        else:
-            print("写入文件失败", file=sys.stderr)
-            sys.exit(4)
-    else:
-        print(output)
-
-    # 输出统计信息（到stderr，不影响stdout）
-    stats = result["stats"]
-    print(f"\n[统计] 输入: {stats['input_chars']}字符, 输出: {stats['output_chars']}字符, "
-          f"耗时: {stats['processing_time_ms']}ms", file=sys.stderr)
-
-    sys.exit(0)
-
-
-if __name__ == "__main__":
-    main()
+    # 测试用例9：实词保留（"好吧"、"是吗"不应被删除）
+    test_text9 = "好吧，我们就这样决定。是吗？那太好了。"
+    result9 = process_transcript(test_text9)
+    assert result9["success"] is True
