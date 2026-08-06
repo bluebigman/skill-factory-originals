@@ -13,7 +13,7 @@ import sys
 import time
 import urllib.request
 import urllib.error
-from datetime import datetime, timedelta
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Any
 
@@ -54,12 +54,12 @@ def safe_filename(text: str) -> str:
 
 def get_today_str() -> str:
     """获取今天的日期字符串 YYYY-MM-DD"""
-    return datetime.now().strftime("%Y-%m-%d")
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
 
 def get_date_range(days: int = 7) -> str:
     """获取日期范围字符串"""
-    end = datetime.now()
+    end = datetime.now(timezone.utc)
     start = end - timedelta(days=days)
     return f"{start.strftime('%Y-%m-%d')}_to_{end.strftime('%Y-%m-%d')}"
 
@@ -100,8 +100,8 @@ def match_trigger(text: str) -> bool:
 
 
 # ============ 网络请求 ============
-def fetch_page(url: str, timeout: int = 30) -> Optional[str]:
-    """获取网页内容"""
+def fetch_page(url: str, timeout: int = 30, retries: int = 3) -> Optional[str]:
+    """获取网页内容（指数退避重试，429/5xx/网络抖动自动重试）"""
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
@@ -111,18 +111,27 @@ def fetch_page(url: str, timeout: int = 30) -> Optional[str]:
         'Upgrade-Insecure-Requests': '1',
     }
     
-    try:
-        if HAS_REQUESTS:
-            response = requests.get(url, headers=headers, timeout=timeout)
-            response.raise_for_status()
-            return response.text
-        else:
-            req = urllib.request.Request(url, headers=headers)
-            with urllib.request.urlopen(req, timeout=timeout) as response:
-                return response.read().decode('utf-8')
-    except Exception as e:
-        print(f"Error fetching {url}: {e}", file=sys.stderr)
-        return None
+    import time as _time
+    for attempt in range(retries):
+        try:
+            if HAS_REQUESTS:
+                response = requests.get(url, headers=headers, timeout=timeout)
+                response.raise_for_status()
+                return response.text
+            else:
+                req = urllib.request.Request(url, headers=headers)
+                with urllib.request.urlopen(req, timeout=timeout) as response:
+                    return response.read().decode('utf-8')
+        except Exception as e:
+            # 429/5xx/网络抖动 → 指数退避后重试
+            wait = 2 * (2 ** attempt)  # 2s, 4s
+            if attempt < retries - 1:
+                print(f"[retry {attempt+1}/{retries}] {url} -> {e}，等待 {wait}s", file=sys.stderr)
+                _time.sleep(wait)
+            else:
+                print(f"Error fetching {url}: {e}", file=sys.stderr)
+                return None
+    return None
 
 
 # ============ 数据解析 ============
@@ -242,7 +251,7 @@ def generate_json(repos: List[Dict[str, Any]], since: str = "daily") -> str:
     data = {
         "skill": SKILL_NAME,
         "version": SKILL_VERSION,
-        "timestamp": datetime.now().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
         "since": since,
         "repos": repos
     }
@@ -252,13 +261,13 @@ def generate_json(repos: List[Dict[str, Any]], since: str = "daily") -> str:
 # ============ 主功能 ============
 def run(since: str = "daily", language: str = "", limit: int = 10, output_dir: str = DEFAULT_OUTPUT_DIR) -> Dict[str, Any]:
     """运行技能主功能"""
-    # 构建 URL
+    # 构建 URL：语言走路径参数 /trending/{lang}（官方格式），since 走 query
     url = GITHUB_TRENDING_URL
+    if language:
+        url = url.rstrip("/") + "/" + language.strip()
     params = []
     if since != "daily":
         params.append(f"since={since}")
-    if language:
-        params.append(f"language={language}")
     if params:
         url += "?" + "&".join(params)
     
@@ -280,7 +289,7 @@ def run(since: str = "daily", language: str = "", limit: int = 10, output_dir: s
     
     # 保存文件
     os.makedirs(output_dir, exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     base_name = f"github_trending_{since}_{timestamp}"
     
     md_path = os.path.join(output_dir, f"{base_name}.md")
@@ -304,6 +313,21 @@ def run(since: str = "daily", language: str = "", limit: int = 10, output_dir: s
 
 
 # ============ 自检函数 ============
+
+# ── 本地 Mock HTML 样本（铁律1：selftest 用本地样本回放，不依赖网络） ──
+MOCK_HTML = """<!DOCTYPE html><html><body>
+<article class="Box-row">
+  <h2><a href="/mock/repo1">mock/repo1</a></h2>
+  <p>Mock trending repository one</p>
+  <span class="d-inline-block float-sm-right">1,234 stars today</span>
+</article>
+<article class="Box-row">
+  <h2><a href="/mock/repo2">mock/repo2</a></h2>
+  <p>Mock trending repository two</p>
+  <span class="d-inline-block float-sm-right">567 stars today</span>
+</article>
+</body></html>"""
+
 def selftest() -> int:
     """自检函数，验证技能功能是否正常"""
     print("Running selftest for github-trending-news skill...")
@@ -359,6 +383,18 @@ def selftest() -> int:
     assert len(parsed["repos"]) == 2, "JSON should contain 2 repos"
     print("  OK")
     
+    # 测试 4.5: Mock 回放核心链路（fetch/parse，铁律1——本地样本不依赖网络）
+    print("[4.5/6] Testing fetch+parse via local Mock...")
+    mock_repos = parse_trending_repos(MOCK_HTML, limit=5)
+    assert len(mock_repos) >= 1, "Mock 样本应解析出至少 1 个仓库"
+    print(f"  OK: Mock 解析出 {len(mock_repos)} 个仓库")
+
+    # 测试 4.5: Mock 回放核心链路（fetch/parse，铁律1——本地样本不依赖网络）
+    print("[4.5/6] Testing fetch+parse via local Mock...")
+    mock_repos = parse_trending_repos(MOCK_HTML, limit=5)
+    assert len(mock_repos) >= 1, "Mock 样本应解析出至少 1 个仓库"
+    print(f"  OK: Mock 解析出 {len(mock_repos)} 个仓库")
+
     # 测试 5: 测试文件输出
     print("[5/5] Testing file output...")
     test_dir = Path(__file__).parent / "_selftest"
