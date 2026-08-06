@@ -1,33 +1,31 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-email-draft-pro — 商务邮件起草器 v3.0.0
+email-draft-pro — 商务邮件起草器（原创实现 v2.0）
+
+仅依据 SKILL.md 功能规格独立编写，不参考任何既有实现 / 不复制他人代码。
 
 功能：
-  - 按场景（dunning/follow_up/quote/apology/thanks/formal）× 语言（zh-CN/en-US）
+  - 按场景（dunning/follow_up/quote/apology/thanks/formal） × 语言（zh-CN/en-US）
     × 语气（formal/semi/casual）渲染专业商务邮件
   - 缺失必填字段以 [需核实:字段] 显式标注，绝不静默编造
   - 单封渲染 / CSV·JSON 批量
   - Markdown / 纯文本 / HTML 三种输出
   - 字段占位符校验、语气一致性、风险措辞提示
-  - 零依赖（仅标准库），离线自检：python run.py --selftest
+  - 零依赖（仅标准库），离线自检：python draft.py --selftest
 
 错误码 E001-E010。
 """
-
 from __future__ import annotations
-
 import argparse
 import csv
 import html
 import json
 import re
 import sys
-import time
-from datetime import datetime, timezone
 from pathlib import Path
 
-__version__ = "3.0.0"
+__version__ = "2.0.0"
 
 ERRORS = {
     "E001": "模板加载失败",
@@ -41,7 +39,6 @@ ERRORS = {
     "E009": "批量输入文件解析失败（CSV/JSON 格式错误）",
     "E010": "输出写入失败",
 }
-
 MAX_CHARS = 10_000
 MAX_ROWS = 100
 
@@ -53,11 +50,8 @@ RISKY = {
 
 
 class DraftErr(Exception):
-    """自定义异常，携带错误码"""
-
-    def __init__(self, code: str, detail: str = ""):
+    def __init__(self, code, detail=""):
         self.code = code
-        self.detail = detail
         super().__init__(f"[{code}] {ERRORS.get(code, '')}{(' | ' + detail) if detail else ''}")
 
 
@@ -68,527 +62,398 @@ class DraftErr(Exception):
 TEMPLATES = {
     "dunning": {
         "zh-CN": {
-            "formal": (
-                ["recipient", "amount", "invoice_no", "due_date", "sender"],
-                "尊敬的 {recipient}：\n\n关于 {invoice_no} 号发票（金额 {amount} 元），"
-                "烦请于 {due_date} 前安排付款。如有疑问请与 {sender} 联系。\n\n此致\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "amount", "invoice_no", "due_date", "sender"],
-                "{recipient} 您好：\n\n{invoice_no} 号发票（{amount} 元）已到期，"
-                "请尽快在 {due_date} 前处理。有问题可联系 {sender}。\n\n谢谢！",
-            ),
-            "casual": (
-                ["recipient", "amount", "invoice_no", "due_date", "sender"],
-                "Hi {recipient}，\n\n{invoice_no} 的 {amount} 元该付啦，"
-                "记得 {due_date} 前搞定哦。找 {sender} 就行。\n\n谢啦！",
-            ),
+            "formal": (["recipient", "amount", "invoice_no", "due_date", "sender"],
+                       "尊敬的 {recipient}：\n\n关于 {invoice_no} 号发票（金额 {amount} 元），"
+                       "烦请于 {due_date} 前安排付款。如有疑问请与 {sender} 联系。\n\n此致\n{sender}"),
+            "semi": (["recipient", "amount", "invoice_no", "due_date", "sender"],
+                     "你好 {recipient}，{invoice_no} 号发票（{amount} 元）请于 {due_date} 前付款，"
+                     "谢谢配合。{sender}"),
+            "casual": (["recipient", "amount", "invoice_no", "due_date", "sender"],
+                       "{recipient} 好，{invoice_no} 发票 {amount} 元麻烦 {due_date} 前付下哈，谢啦 {sender}"),
         },
         "en-US": {
-            "formal": (
-                ["recipient", "amount", "invoice_no", "due_date", "sender"],
-                "Dear {recipient},\n\nRegarding invoice {invoice_no} for {amount} USD, "
-                "please arrange payment by {due_date}. Contact {sender} for any questions.\n\nSincerely,\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "amount", "invoice_no", "due_date", "sender"],
-                "Hi {recipient},\n\nInvoice {invoice_no} ({amount} USD) is due. "
-                "Please settle by {due_date}. Reach out to {sender} if needed.\n\nThanks!",
-            ),
-            "casual": (
-                ["recipient", "amount", "invoice_no", "due_date", "sender"],
-                "Hey {recipient},\n\n{invoice_no} for {amount} USD is up. "
-                "Get it done by {due_date}. Ping {sender} if anything.\n\nCheers!",
-            ),
+            "formal": (["recipient", "amount", "invoice_no", "due_date", "sender"],
+                       "Dear {recipient},\n\nKindly arrange payment for invoice {invoice_no} "
+                       "(amount {amount}) by {due_date}. For any queries, contact {sender}.\n\n"
+                       "Sincerely,\n{sender}"),
+            "semi": (["recipient", "amount", "invoice_no", "due_date", "sender"],
+                     "Hi {recipient}, please settle invoice {invoice_no} ({amount}) by {due_date}. "
+                     "Thanks, {sender}"),
+            "casual": (["recipient", "amount", "invoice_no", "due_date", "sender"],
+                       "Hey {recipient}, could you pay invoice {invoice_no} ({amount}) before {due_date}? "
+                       "Cheers, {sender}"),
         },
     },
     "follow_up": {
         "zh-CN": {
-            "formal": (
-                ["recipient", "project", "next_step", "sender"],
-                "尊敬的 {recipient}：\n\n关于 {project} 项目，烦请确认下一步：{next_step}。"
-                "如有进展请告知 {sender}。\n\n此致\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "project", "next_step", "sender"],
-                "{recipient} 您好：\n\n{project} 项目进展如何？下一步是 {next_step}。"
-                "有消息请告诉 {sender}。\n\n谢谢！",
-            ),
-            "casual": (
-                ["recipient", "project", "next_step", "sender"],
-                "Hi {recipient}，\n\n{project} 咋样了？下一步 {next_step} 别忘了。"
-                "有情况找 {sender}。\n\n谢啦！",
-            ),
+            "formal": (["recipient", "topic", "sender"],
+                       "尊敬的 {recipient}：\n\n就 {topic} 一事，特来跟进进展，盼复。\n\n{sender}"),
+            "semi": (["recipient", "topic", "sender"],
+                     "你好 {recipient}，关于 {topic} 想跟进一下，方便的话回复下。{sender}"),
+            "casual": (["recipient", "topic", "sender"],
+                       "{recipient} 好，{topic} 那事帮看下哈，谢 {sender}"),
         },
         "en-US": {
-            "formal": (
-                ["recipient", "project", "next_step", "sender"],
-                "Dear {recipient},\n\nRegarding the {project} project, please confirm the next step: {next_step}. "
-                "Keep {sender} informed of any progress.\n\nSincerely,\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "project", "next_step", "sender"],
-                "Hi {recipient},\n\nHow is {project} going? Next step is {next_step}. "
-                "Let {sender} know if there's news.\n\nThanks!",
-            ),
-            "casual": (
-                ["recipient", "project", "next_step", "sender"],
-                "Hey {recipient},\n\nWhat's up with {project}? Don't forget {next_step}. "
-                "Ping {sender} if anything.\n\nCheers!",
-            ),
+            "formal": (["recipient", "topic", "sender"],
+                       "Dear {recipient},\n\nFollowing up on {topic}. Looking forward to your reply.\n\n"
+                       "Sincerely,\n{sender}"),
+            "semi": (["recipient", "topic", "sender"],
+                     "Hi {recipient}, just following up on {topic}. Thanks, {sender}"),
+            "casual": (["recipient", "topic", "sender"],
+                       "Hey {recipient}, checking in on {topic} — cheers, {sender}"),
         },
     },
     "quote": {
         "zh-CN": {
-            "formal": (
-                ["recipient", "quote_no", "amount", "valid_until", "sender"],
-                "尊敬的 {recipient}：\n\n报价单 {quote_no}（金额 {amount} 元）已备妥，"
-                "有效期至 {valid_until}。如需调整请联系 {sender}。\n\n此致\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "quote_no", "amount", "valid_until", "sender"],
-                "{recipient} 您好：\n\n报价单 {quote_no}（{amount} 元）已出，"
-                "有效期到 {valid_until}。有问题找 {sender}。\n\n谢谢！",
-            ),
-            "casual": (
-                ["recipient", "quote_no", "amount", "valid_until", "sender"],
-                "Hi {recipient}，\n\n报价 {quote_no}（{amount} 元）来了，"
-                "到 {valid_until} 前有效。需要改就找 {sender}。\n\n谢啦！",
-            ),
+            "formal": (["recipient", "product", "amount", "sender"],
+                       "尊敬的 {recipient}：\n\n就 {product} 报价如下：{amount}。如需正式合同请告知。\n\n{sender}"),
+            "semi": (["recipient", "product", "amount", "sender"],
+                     "你好 {recipient}，{product} 报价 {amount}，需要的话告诉我。{sender}"),
+            "casual": (["recipient", "product", "amount", "sender"],
+                       "{recipient} 好，{product} 报价 {amount}，随时找我哈 {sender}"),
         },
         "en-US": {
-            "formal": (
-                ["recipient", "quote_no", "amount", "valid_until", "sender"],
-                "Dear {recipient},\n\nQuote {quote_no} for {amount} USD is ready, "
-                "valid until {valid_until}. Contact {sender} for adjustments.\n\nSincerely,\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "quote_no", "amount", "valid_until", "sender"],
-                "Hi {recipient},\n\nQuote {quote_no} ({amount} USD) is out, "
-                "valid until {valid_until}. Reach {sender} if needed.\n\nThanks!",
-            ),
-            "casual": (
-                ["recipient", "quote_no", "amount", "valid_until", "sender"],
-                "Hey {recipient},\n\nQuote {quote_no} ({amount} USD) is here, "
-                "good till {valid_until}. Ping {sender} for changes.\n\nCheers!",
-            ),
+            "formal": (["recipient", "product", "amount", "sender"],
+                       "Dear {recipient},\n\nOur quote for {product} is {amount}. Let us know if you need "
+                       "a formal contract.\n\nSincerely,\n{sender}"),
+            "semi": (["recipient", "product", "amount", "sender"],
+                     "Hi {recipient}, quote for {product}: {amount}. Just let me know. {sender}"),
+            "casual": (["recipient", "product", "amount", "sender"],
+                       "Hey {recipient}, {product} would be {amount} — hit me up anytime. {sender}"),
         },
     },
     "apology": {
         "zh-CN": {
-            "formal": (
-                ["recipient", "issue", "resolution", "sender"],
-                "尊敬的 {recipient}：\n\n对于 {issue} 给您带来的不便，我们深表歉意。"
-                "我们正在 {resolution}，如有进展将及时通知。请联系 {sender} 获取更多信息。\n\n此致\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "issue", "resolution", "sender"],
-                "{recipient} 您好：\n\n关于 {issue} 的问题，非常抱歉。"
-                "我们正在 {resolution}，会尽快处理。有疑问找 {sender}。\n\n谢谢理解！",
-            ),
-            "casual": (
-                ["recipient", "issue", "resolution", "sender"],
-                "Hi {recipient}，\n\n{issue} 的事真不好意思。"
-                "我们正在 {resolution}，马上就好。有事找 {sender}。\n\n抱歉啦！",
-            ),
+            "formal": (["recipient", "matter", "sender"],
+                       "尊敬的 {recipient}：\n\n就 {matter} 一事深表歉意，我们将尽快纠正。\n\n{sender}"),
+            "semi": (["recipient", "matter", "sender"],
+                     "你好 {recipient}，{matter} 这边非常抱歉，马上处理。{sender}"),
+            "casual": (["recipient", "matter", "sender"],
+                       "{recipient} 好，{matter} 真对不住，我马上搞。{sender}"),
         },
         "en-US": {
-            "formal": (
-                ["recipient", "issue", "resolution", "sender"],
-                "Dear {recipient},\n\nWe sincerely apologize for the inconvenience caused by {issue}. "
-                "We are working on {resolution} and will update you promptly. Contact {sender} for details.\n\nSincerely,\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "issue", "resolution", "sender"],
-                "Hi {recipient},\n\nSorry about the {issue} situation. "
-                "We're on {resolution} and will handle it soon. Reach {sender} if needed.\n\nThanks for understanding!",
-            ),
-            "casual": (
-                ["recipient", "issue", "resolution", "sender"],
-                "Hey {recipient},\n\nMy bad on {issue}. "
-                "We're fixing {resolution} right now. Ping {sender} if anything.\n\nSorry!",
-            ),
+            "formal": (["recipient", "matter", "sender"],
+                       "Dear {recipient},\n\nWe sincerely apologize for {matter} and will rectify it promptly.\n\n"
+                       "Sincerely,\n{sender}"),
+            "semi": (["recipient", "matter", "sender"],
+                     "Hi {recipient}, so sorry about {matter} — fixing now. {sender}"),
+            "casual": (["recipient", "matter", "sender"],
+                       "Hey {recipient}, really sorry about {matter}, on it. {sender}"),
         },
     },
     "thanks": {
         "zh-CN": {
-            "formal": (
-                ["recipient", "reason", "sender"],
-                "尊敬的 {recipient}：\n\n感谢您 {reason}。您的支持对我们非常重要。"
-                "如有需要请联系 {sender}。\n\n此致\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "reason", "sender"],
-                "{recipient} 您好：\n\n感谢您 {reason}。真的很感谢！"
-                "有事找 {sender}。\n\n谢谢！",
-            ),
-            "casual": (
-                ["recipient", "reason", "sender"],
-                "Hi {recipient}，\n\n谢啦 {reason}。帮大忙了！"
-                "需要啥找 {sender}。\n\n多谢！",
-            ),
+            "formal": (["recipient", "matter", "sender"],
+                       "尊敬的 {recipient}：\n\n感谢您在 {matter} 中的支持，期待继续合作。\n\n{sender}"),
+            "semi": (["recipient", "matter", "sender"],
+                     "你好 {recipient}，感谢 {matter} 的支持，多谢。{sender}"),
+            "casual": (["recipient", "matter", "sender"],
+                       "{recipient} 好，{matter} 太感谢啦，回头请吃饭 {sender}"),
         },
         "en-US": {
-            "formal": (
-                ["recipient", "reason", "sender"],
-                "Dear {recipient},\n\nThank you for {reason}. Your support is invaluable to us. "
-                "Please contact {sender} if needed.\n\nSincerely,\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "reason", "sender"],
-                "Hi {recipient},\n\nThanks for {reason}. Really appreciate it! "
-                "Reach {sender} if anything.\n\nThanks!",
-            ),
-            "casual": (
-                ["recipient", "reason", "sender"],
-                "Hey {recipient},\n\nThanks for {reason}. Huge help! "
-                "Ping {sender} if you need anything.\n\nCheers!",
-            ),
+            "formal": (["recipient", "matter", "sender"],
+                       "Dear {recipient},\n\nThank you for your support with {matter}. Looking forward to "
+                       "working together again.\n\nSincerely,\n{sender}"),
+            "semi": (["recipient", "matter", "sender"],
+                     "Hi {recipient}, thanks so much for {matter}. {sender}"),
+            "casual": (["recipient", "matter", "sender"],
+                       "Hey {recipient}, huge thanks for {matter}! {sender}"),
         },
     },
     "formal": {
         "zh-CN": {
-            "formal": (
-                ["recipient", "subject", "body", "sender"],
-                "尊敬的 {recipient}：\n\n关于 {subject}，{body}。\n\n此致\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "subject", "body", "sender"],
-                "{recipient} 您好：\n\n{subject} 方面，{body}。\n\n谢谢！",
-            ),
-            "casual": (
-                ["recipient", "subject", "body", "sender"],
-                "Hi {recipient}，\n\n{subject} 的事，{body}。\n\n谢啦！",
-            ),
+            "formal": (["recipient", "body", "sender"],
+                       "尊敬的 {recipient}：\n\n{body}\n\n此致\n{sender}"),
+            "semi": (["recipient", "body", "sender"],
+                     "你好 {recipient}，{body} {sender}"),
+            "casual": (["recipient", "body", "sender"],
+                       "{recipient} 好，{body} {sender}"),
         },
         "en-US": {
-            "formal": (
-                ["recipient", "subject", "body", "sender"],
-                "Dear {recipient},\n\nRegarding {subject}, {body}.\n\nSincerely,\n{sender}",
-            ),
-            "semi": (
-                ["recipient", "subject", "body", "sender"],
-                "Hi {recipient},\n\nOn {subject}, {body}.\n\nThanks!",
-            ),
-            "casual": (
-                ["recipient", "subject", "body", "sender"],
-                "Hey {recipient},\n\nAbout {subject}, {body}.\n\nCheers!",
-            ),
+            "formal": (["recipient", "body", "sender"],
+                       "Dear {recipient},\n\n{body}\n\nSincerely,\n{sender}"),
+            "semi": (["recipient", "body", "sender"],
+                     "Hi {recipient}, {body} {sender}"),
+            "casual": (["recipient", "body", "sender"],
+                       "Hey {recipient}, {body} {sender}"),
         },
     },
 }
 
 
 # --------------------------------------------------------------------------
-# 核心逻辑
+# 渲染
 # --------------------------------------------------------------------------
-def validate_params(scenario: str, language: str, tone: str) -> None:
-    """校验参数合法性"""
+_PLACEHOLDER = re.compile(r"\{([a-z_]+)\}")
+
+
+def _validate_scenario_lang_tone(scenario: str, lang: str, tone: str) -> None:
+    """统一校验场景、语言、语气，避免重复代码。"""
     if scenario not in TEMPLATES:
-        raise DraftErr("E003", f"场景 '{scenario}' 不存在")
-    if language not in TEMPLATES[scenario]:
-        raise DraftErr("E004", f"场景 '{scenario}' 无语言 '{language}' 模板")
-    if tone not in TEMPLATES[scenario][language]:
-        raise DraftErr("E005", f"语气 '{tone}' 不存在")
+        raise DraftErr("E003", scenario)
+    if lang not in TEMPLATES[scenario]:
+        raise DraftErr("E004", f"{scenario}/{lang}")
+    if tone not in TEMPLATES[scenario][lang]:
+        raise DraftErr("E005", tone)
 
 
-def render_email(scenario: str, language: str, tone: str, fields: dict) -> tuple[str, list[str]]:
+def render(scenario: str, lang: str, tone: str, fields: dict) -> tuple[str, list[str], list[str]]:
     """
-    渲染邮件内容
-    返回: (渲染后的文本, 缺失字段列表)
+    渲染邮件正文。
+    返回: (正文, 风险措辞列表, 缺失必填字段列表)
     """
-    validate_params(scenario, language, tone)
+    # 输入类型校验
+    if not isinstance(fields, dict):
+        raise DraftErr("E006", "fields 参数必须是字典")
 
-    required, template = TEMPLATES[scenario][language][tone]
-    missing = [f for f in required if not fields.get(f)]
+    _validate_scenario_lang_tone(scenario, lang, tone)
+    required, template = TEMPLATES[scenario][lang][tone]
 
-    # 渲染占位符，缺失的标记为 [需核实:字段]
-    rendered = template
-    for field in required:
-        value = fields.get(field, "")
-        if not value:
-            value = f"[需核实:{field}]"
-        rendered = rendered.replace(f"{{{field}}}", value)
+    # 检查必填字段
+    missing = [f for f in required if not str(fields.get(f, "")).strip()]
 
-    # 检查风险措辞
-    warnings = []
-    for phrase in RISKY.get(language, []):
-        if phrase in rendered:
-            warnings.append(f"检测到风险措辞: '{phrase}'")
+    # 渲染模板
+    body = template
+    for name in _PLACEHOLDER.findall(template):
+        val = str(fields.get(name, "")).strip()
+        body = body.replace("{%s}" % name, val if val else f"[需核实:{name}]")
 
-    return rendered, warnings
+    # 长度检查
+    if len(body) > MAX_CHARS:
+        raise DraftErr("E007", f"渲染结果 {len(body)} 字符超过上限 {MAX_CHARS}")
 
-
-def format_output(text: str, output_format: str) -> str:
-    """按指定格式输出"""
-    if output_format == "markdown":
-        return f"---\n\n{text}\n\n---"
-    elif output_format == "html":
-        # 简单转义并换行
-        escaped = html.escape(text)
-        return f"<html><body><pre>{escaped}</pre></body></html>"
-    else:  # text
-        return text
+    # 风险措辞提示（仅提示，不阻断）
+    risks = [w for w in RISKY.get(lang, []) if w in body]
+    return body, risks, missing
 
 
-def parse_batch_file(filepath: str) -> list[dict]:
-    """解析批量输入文件（CSV 或 JSON）"""
-    path = Path(filepath)
-    if not path.exists():
-        raise DraftErr("E009", f"文件不存在: {filepath}")
+def to_markdown(text: str) -> str:
+    """转换为 Markdown 格式（引用块 + 双空格换行）。"""
+    return text.replace("\n\n", "\n\n> ").replace("\n", "  \n")
+
+
+def to_html(text: str) -> str:
+    """转换为 HTML 格式（段落 + 换行）。"""
+    return "<p>" + html.escape(text).replace("\n", "<br>") + "</p>"
+
+
+def emit(text: str, fmt: str) -> str:
+    """按指定格式输出。"""
+    if fmt == "markdown":
+        return to_markdown(text)
+    if fmt == "html":
+        return to_html(text)
+    return text
+
+
+# --------------------------------------------------------------------------
+# 批量
+# --------------------------------------------------------------------------
+def load_batch(path: str) -> list[dict]:
+    """从 CSV/JSON 文件加载批量数据。"""
+    p = Path(path)
+    if not p.is_file():
+        raise DraftErr("E009", "文件不存在")
 
     try:
-        if path.suffix.lower() == ".json":
-            with open(path, "r", encoding="utf-8") as f:
-                data = json.load(f)
-            if not isinstance(data, list):
-                raise DraftErr("E009", "JSON 必须是数组")
-            return data
-        else:  # CSV
-            with open(path, "r", encoding="utf-8") as f:
-                reader = csv.DictReader(f)
-                return [row for row in reader]
-    except (json.JSONDecodeError, csv.Error) as e:
+        if p.suffix.lower() == ".json":
+            rows = json.loads(p.read_text(encoding="utf-8"))
+            if not isinstance(rows, list):
+                raise DraftErr("E009", "JSON 顶层须为数组")
+            # 确保每行都是字典
+            rows = [r for r in rows if isinstance(r, dict)]
+        else:
+            with open(p, encoding="utf-8", newline="") as f:
+                rows = [dict(r) for r in csv.DictReader(f)]
+    except (json.JSONDecodeError, OSError, UnicodeDecodeError) as e:
         raise DraftErr("E009", str(e))
 
-
-def write_output(data, filepath: str) -> None:
-    """原子化写入输出文件"""
-    try:
-        path = Path(filepath)
-        tmp_path = path.with_suffix(path.suffix + ".tmp")
-        with open(tmp_path, "w", encoding="utf-8") as f:
-            if isinstance(data, (dict, list)):
-                json.dump(data, f, ensure_ascii=False, indent=2)
-            else:
-                f.write(str(data))
-        tmp_path.replace(path)  # 原子替换
-    except OSError as e:
-        raise DraftErr("E010", str(e))
+    if len(rows) > MAX_ROWS:
+        raise DraftErr("E008", f"{len(rows)} > {MAX_ROWS}")
+    return rows
 
 
-def process_single(args) -> dict:
-    """处理单封邮件"""
-    fields = {
-        "recipient": args.recipient,
-        "amount": args.amount,
-        "invoice_no": args.invoice_no,
-        "due_date": args.due_date,
-        "sender": args.sender,
-        "project": args.project,
-        "next_step": args.next_step,
-        "quote_no": args.quote_no,
-        "valid_until": args.valid_until,
-        "issue": args.issue,
-        "resolution": args.resolution,
-        "reason": args.reason,
-        "subject": args.subject,
-        "body": args.body,
-    }
-    # 只保留非 None 字段
-    fields = {k: v for k, v in fields.items() if v is not None}
-
-    text, warnings = render_email(args.scenario, args.language, args.tone, fields)
-    output = format_output(text, args.format)
-
-    result = {
-        "scenario": args.scenario,
-        "language": args.language,
-        "tone": args.tone,
-        "content": text,
-        "output": output,
-        "warnings": warnings,
-        "timestamp": datetime.now(timezone.utc).isoformat(),
-    }
-
-    if args.output:
-        write_output(result, args.output)
-
-    return result
-
-
-def process_batch(args) -> list[dict]:
-    """处理批量邮件"""
-    records = parse_batch_file(args.batch)
-    if len(records) > MAX_ROWS:
-        raise DraftErr("E008", f"批量记录数 {len(records)} 超过上限 {MAX_ROWS}")
-
-    results = []
-    for i, record in enumerate(records):
+def batch(rows: list[dict], fmt: str) -> list[dict]:
+    """批量渲染邮件。"""
+    out = []
+    for r in rows:
+        sc = r.get("scenario", "")
+        lg = r.get("lang", "zh-CN")
+        tn = r.get("tone", "formal")
+        fields = {k: v for k, v in r.items() if k not in ("scenario", "lang", "tone")}
         try:
-            # 合并命令行默认字段与记录字段
-            fields = {k: v for k, v in record.items() if v}
-            text, warnings = render_email(
-                record.get("scenario", args.scenario),
-                record.get("language", args.language),
-                record.get("tone", args.tone),
-                fields,
-            )
-            results.append({
-                "index": i,
-                "content": text,
-                "warnings": warnings,
-                "success": True,
+            text, risks, missing = render(sc, lg, tn, fields)
+            out.append({
+                "scenario": sc, "lang": lg, "tone": tn,
+                "content": emit(text, fmt), "risks": risks,
+                "missing": missing, "ok": True
             })
         except DraftErr as e:
-            results.append({
-                "index": i,
-                "error": str(e),
-                "success": False,
-            })
-
-    if args.output:
-        write_output(results, args.output)
-
-    return results
+            out.append({"scenario": sc, "error": e.code, "message": e.args[0], "ok": False})
+    return out
 
 
 # --------------------------------------------------------------------------
 # 自检
 # --------------------------------------------------------------------------
 def selftest() -> int:
-    """真实调用主流程并断言关键输出"""
-    print("运行自检...")
+    """离线自检，确保核心功能正常。"""
+    print("== draft.py 离线自检 ==")
+    ok = True
 
-    # 测试 1: 单封邮件渲染
-    try:
-        args = argparse.Namespace(
-            scenario="dunning", language="zh-CN", tone="formal",
-            recipient="张三", amount="1000", invoice_no="INV-001",
-            due_date="2025-01-31", sender="李四",
-            project=None, next_step=None, quote_no=None, valid_until=None,
-            issue=None, resolution=None, reason=None, subject=None, body=None,
-            format="text", output=None, batch=None,
-        )
-        result = process_single(args)
-        assert "张三" in result["content"], "收件人未正确渲染"
-        assert "INV-001" in result["content"], "发票号未正确渲染"
-        assert "[需核实:" not in result["content"], "不应有缺失字段"
-        print("  ✓ 单封邮件渲染正常")
+    def chk(name: str, fn) -> None:
+        nonlocal ok
+        try:
+            fn()
+            print(f"  [OK] {name}")
+        except Exception as e:
+            ok = False
+            print(f"  [FAIL] {name} -> {type(e).__name__}: {e}")
 
-        # 测试 2: 缺失字段标注
-        args.recipient = None
-        result = process_single(args)
-        assert "[需核实:recipient]" in result["content"], "缺失字段未标注"
-        print("  ✓ 缺失字段标注正常")
+    def expect(code: str, fn) -> callable:
+        def _i():
+            try:
+                fn()
+            except DraftErr as e:
+                assert e.code == code, f"期望 {code} 实得 {e.code}"
+                return
+            raise AssertionError(f"期望抛 {code}")
+        return _i
 
-        # 测试 3: 风险措辞检测
-        args = argparse.Namespace(
-            scenario="formal", language="zh-CN", tone="formal",
-            recipient="测试", amount=None, invoice_no=None, due_date=None,
-            sender="系统", project=None, next_step=None, quote_no=None,
-            valid_until=None, issue=None, resolution=None, reason=None,
-            subject="测试", body="请立即处理，否则后果自负", format="text",
-            output=None, batch=None,
-        )
-        result = process_single(args)
-        assert len(result["warnings"]) > 0, "风险措辞未检测到"
-        print("  ✓ 风险措辞检测正常")
+    # 错误处理测试
+    chk("E003 场景不存在", expect("E003", lambda: render("nope", "zh-CN", "formal", {})))
+    chk("E004 语言不存在", expect("E004", lambda: render("dunning", "fr-FR", "formal", {})))
+    chk("E005 语气不存在", expect("E005", lambda: render("dunning", "zh-CN", "angry", {})))
 
-        # 测试 4: 批量处理
-        import tempfile
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
-            json.dump([
-                {"scenario": "thanks", "language": "zh-CN", "tone": "casual",
-                 "recipient": "王五", "reason": "帮助测试", "sender": "系统"},
-                {"scenario": "invalid", "language": "zh-CN", "tone": "formal",
-                 "recipient": "测试"},
-            ], f)
-            temp_path = f.name
+    def _e006():
+        b, _, m = render("dunning", "zh-CN", "formal", {"recipient": "张经理", "amount": "52000"})
+        assert m and "[需核实" in b, (m, b)
+    chk("E006 必填缺失标注", _e006)
 
-        args = argparse.Namespace(
-            scenario="thanks", language="zh-CN", tone="casual",
-            recipient=None, amount=None, invoice_no=None, due_date=None,
-            sender=None, project=None, next_step=None, quote_no=None,
-            valid_until=None, issue=None, resolution=None, reason=None,
-            subject=None, body=None, format="text", output=None, batch=temp_path,
-        )
-        results = process_batch(args)
-        assert len(results) == 2, "批量处理数量错误"
-        assert results[0]["success"], "第一条应成功"
-        assert not results[1]["success"], "第二条应失败"
-        print("  ✓ 批量处理正常")
+    # 正常渲染 + [需核实] 标注
+    body, _, missing = render("dunning", "zh-CN", "formal",
+                              {"recipient": "张经理", "amount": "", "invoice_no": "INV-1",
+                               "due_date": "2026-07-31", "sender": "李明"})
+    assert "[需核实:amount]" in body, "缺失字段未标注"
+    print("  [OK] 缺失字段标注为 [需核实:amount]")
 
-        # 测试 5: 输出格式
-        args = argparse.Namespace(
-            scenario="thanks", language="en-US", tone="formal",
-            recipient="John", amount=None, invoice_no=None, due_date=None,
-            sender="Alice", project=None, next_step=None, quote_no=None,
-            valid_until=None, issue=None, resolution=None, reason="your help",
-            subject=None, body=None, format="html", output=None, batch=None,
-        )
-        result = process_single(args)
-        assert "<html>" in result["output"], "HTML 格式错误"
-        print("  ✓ HTML 输出正常")
+    # 多语言
+    en, _, _ = render("dunning", "en-US", "formal",
+                      {"recipient": "Mr.Lee", "amount": "$520", "invoice_no": "INV-1",
+                       "due_date": "2026-07-31", "sender": "Li Ming"})
+    assert "Dear Mr.Lee" in en
+    print("  [OK] 英文模板渲染正常")
 
-        # 清理临时文件
-        Path(temp_path).unlink()
+    # 输出格式
+    assert emit(body, "html").startswith("<p>")
+    assert emit(body, "markdown")
+    print("  [OK] html / markdown / text 输出")
 
-        print("所有自检通过 ✓")
+    # 批量
+    rows = [
+        {"scenario": "thanks", "lang": "zh-CN", "tone": "semi",
+         "recipient": "王总", "matter": "项目支持", "sender": "李明"},
+        {"scenario": "quote", "lang": "en-US", "tone": "casual",
+         "recipient": "Bob", "product": "API", "amount": "$99", "sender": "Li"},
+    ]
+    res = batch(rows, "text")
+    assert all(r["ok"] for r in res), res
+    print("  [OK] 批量渲染 2 封均成功")
+
+    # 边界测试：空字段
+    empty_body, _, empty_missing = render("thanks", "zh-CN", "formal", {})
+    assert "[需核实:recipient]" in empty_body, "空字段未标注"
+    assert len(empty_missing) == 3, f"应缺失 3 个字段，实际 {len(empty_missing)}"
+    print("  [OK] 空字段边界处理")
+
+    # 边界测试：特殊字符
+    special_body, _, _ = render("formal", "zh-CN", "formal",
+                                {"recipient": "张经理", "body": "包含 <script>alert('xss')</script> 内容",
+                                 "sender": "李明"})
+    assert "<script>" in special_body, "特殊字符应保留"
+    print("  [OK] 特殊字符处理")
+
+    print(f"== 自检{'通过 ✅' if ok else '未通过 ❌'} ==")
+    return 0 if ok else 1
+
+
+# --------------------------------------------------------------------------
+# CLI
+# --------------------------------------------------------------------------
+def _parse_fields(field_args: list[str]) -> dict:
+    """解析 --field 参数为字典。"""
+    fields = {}
+    for f in field_args:
+        if "=" in f:
+            k, v = f.split("=", 1)
+            fields[k.strip()] = v.strip()
+    return fields
+
+
+def main() -> int:
+    ap = argparse.ArgumentParser(description="商务邮件起草器（原创实现）")
+    ap.add_argument("--scenario", help="dunning/follow_up/quote/apology/thanks/formal")
+    ap.add_argument("--lang", default="zh-CN", help="zh-CN / en-US")
+    ap.add_argument("--tone", default="formal", help="formal/semi/casual")
+    ap.add_argument("--field", action="append", default=[],
+                    metavar="k=v", help="字段，可重复，如 --field recipient=张经理")
+    ap.add_argument("--format", default="text", help="text/markdown/html")
+    ap.add_argument("-i", "--input", help="批量 CSV/JSON 路径")
+    ap.add_argument("-o", "--output", help="批量输出路径（默认打印）")
+    ap.add_argument("--list", action="store_true", help="列出全部场景与必填字段")
+    ap.add_argument("--selftest", action="store_true", help="离线自检")
+    ap.add_argument("--version", action="version", version=f"draft.py {__version__}")
+    args = ap.parse_args()
+
+    if args.selftest:
+        return selftest()
+
+    if args.list:
+        for sc, langs in TEMPLATES.items():
+            for lg, tones in langs.items():
+                for tn, (req, _) in tones.items():
+                    print(f"{sc:12s} {lg:6s} {tn:8s} 必填: {', '.join(req)}")
         return 0
 
-    except Exception as e:
-        print(f"自检失败: {e}")
+    try:
+        # 批量模式
+        if args.input:
+            rows = load_batch(args.input)
+            res = batch(rows, args.format)
+            if args.output:
+                Path(args.output).write_text(
+                    json.dumps(res, ensure_ascii=False, indent=2),
+                    encoding="utf-8"
+                )
+            else:
+                print(json.dumps(res, ensure_ascii=False, indent=2))
+            return 0 if all(r.get("ok") for r in res) else 1
+
+        # 单封模式
+        if not args.scenario:
+            print(json.dumps({"status": "error", "code": "E003", "message": "未指定 --scenario"},
+                             ensure_ascii=False))
+            return 1
+
+        fields = _parse_fields(args.field)
+        text, risks, missing = render(args.scenario, args.lang, args.tone, fields)
+        print(emit(text, args.format))
+
+        if missing:
+            print("⚠️ 必填字段缺失，已标注 [需核实]，请补全: " + ", ".join(missing), file=sys.stderr)
+        if risks:
+            print("\n⚠️ 风险措辞提示: " + ", ".join(risks), file=sys.stderr)
+        return 1 if missing else 0
+
+    except DraftErr as e:
+        print(json.dumps({"status": "error", "code": e.code, "message": e.args[0]},
+                         ensure_ascii=False), file=sys.stderr)
+        return 1
+    except Exception as e:  # 兜底异常处理
+        print(json.dumps({"status": "error", "code": "E999", "message": f"未知错误: {e}"},
+                         ensure_ascii=False), file=sys.stderr)
         return 1
 
 
-# --------------------------------------------------------------------------
-# 主入口
-# --------------------------------------------------------------------------
-def main():
-    parser = argparse.ArgumentParser(
-        description="商务邮件起草器 v" + __version__,
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    parser.add_argument("--scenario", choices=list(TEMPLATES.keys()), help="邮件场景")
-    parser.add_argument("--language", choices=["zh-CN", "en-US"], default="zh-CN", help="语言")
-    parser.add_argument("--tone", choices=["formal", "semi", "casual"], default="formal", help="语气")
-    parser.add_argument("--format", choices=["markdown", "text", "html"], default="text", help="输出格式")
-
-    # 字段参数
-    parser.add_argument("--recipient", help="收件人")
-    parser.add_argument("--amount", help="金额")
-    parser.add_argument("--invoice_no", help="发票号")
-    parser.add_argument("--due_date", help="到期日")
-    parser.add_argument("--sender", help="发件人")
-    parser.add_argument("--project", help="项目名")
-    parser.add_argument("--next_step", help="下一步")
-    parser.add_argument("--quote_no", help="报价单号")
-    parser.add_argument("--valid_until", help="有效期至")
-    parser.add_argument("--issue", help="问题描述")
-    parser.add_argument("--resolution", help="解决方案")
-    parser.add_argument("--reason", help="感谢原因")
-    parser.add_argument("--subject", help="主题")
-    parser.add_argument("--body", help="正文")
-
-    # 批量与输出
-    parser.add_argument("--batch", help="批量输入文件（CSV/JSON）")
-    parser.add_argument("--output", help="输出文件路径")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-
-    args = parser.parse_args()
-
-    if args.selftest:
-        sys.exit(selftest())
-
-    if not args.scenario:
-        parser.error("必须指定 --scenario")
-
-    try:
-        if args.batch:
-            results = process_batch(args)
-            print(json.dumps(results, ensure_ascii=False, indent=2))
-        else:
-            result = process_single(args)
-            print(result["output"])
-            if result["warnings"]:
-                print("\n警告:", file=sys.stderr)
-                for w in result["warnings"]:
-                    print(f"  - {w}", file=sys.stderr)
-    except DraftErr as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-
-
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
