@@ -28,10 +28,23 @@ def resize_image(input_path, output_path, width, height, keep_aspect=False, qual
         True on success, False on failure
     """
     try:
+        # Validate dimensions
+        if width is not None and width <= 0:
+            print(f"Error resizing {input_path}: width must be > 0")
+            return False
+        if height is not None and height <= 0:
+            print(f"Error resizing {input_path}: height must be > 0")
+            return False
+        
         # Check if output file exists and overwrite is not allowed
         if os.path.exists(output_path) and not overwrite:
             print(f"Skipping {input_path}: output file exists (use --overwrite to replace)")
             return False
+        
+        # Ensure output directory exists
+        output_dir = os.path.dirname(output_path)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
         
         with Image.open(input_path) as img:
             # Handle EXIF orientation
@@ -329,66 +342,33 @@ def selftest():
         assert success == 3, f"Test 10 failed: expected 3 successes, got {success}"
         assert fail == 0, f"Test 10 failed: expected 0 failures, got {fail}"
         
+        # Test 11: Invalid dimensions (zero and negative)
+        output_dir11 = os.path.join(test_dir, "output11")
+        success, fail = batch_resize(input_dir, output_dir11, width=0, height=50)
+        assert success == 0, f"Test 11a failed: expected 0 successes, got {success}"
+        assert fail == 3, f"Test 11a failed: expected 3 failures, got {fail}"
+        
+        success, fail = batch_resize(input_dir, output_dir11, width=-10, height=50)
+        assert success == 0, f"Test 11b failed: expected 0 successes, got {success}"
+        assert fail == 3, f"Test 11b failed: expected 3 failures, got {fail}"
+        
+        # Test 12: Nonexistent output directory (should be created)
+        output_dir12 = os.path.join(test_dir, "nonexistent", "nested", "dir")
+        success, fail = batch_resize(input_dir, output_dir12, width=100, height=50)
+        assert success == 3, f"Test 12 failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 12 failed: expected 0 failures, got {fail}"
+        assert os.path.exists(output_dir12), "Test 12 failed: output directory not created"
+        
+        # Test 13: Keep aspect with both dimensions (should use exact dimensions)
+        output_dir13 = os.path.join(test_dir, "output13")
+        success, fail = batch_resize(input_dir, output_dir13, width=80, height=60, keep_aspect=True)
+        assert success == 3, f"Test 13 failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 13 failed: expected 0 failures, got {fail}"
+        with Image.open(os.path.join(output_dir13, "test1.jpg")) as img:
+            assert img.size == (80, 60), f"Test 13 failed: test1.jpg wrong size {img.size}"
+        
         print("All self-tests passed!")
         return 0
     except AssertionError as e:
         print(f"SELF-TEST FAILED: {e}")
         return 1
-    except Exception as e:
-        print(f"SELF-TEST ERROR: {e}")
-        return 1
-    finally:
-        # Clean up
-        shutil.rmtree(test_dir, ignore_errors=True)
-
-def main():
-    parser = argparse.ArgumentParser(description="Batch resize images in a directory")
-    parser.add_argument("input_dir", help="Input directory containing images")
-    parser.add_argument("output_dir", help="Output directory for resized images")
-    parser.add_argument("-w", "--width", type=int, default=None, 
-                        help="Target width (default: keep original)")
-    parser.add_argument("--height", type=int, default=None,
-                        help="Target height (default: keep original)")
-    parser.add_argument("--keep-aspect", action="store_true",
-                        help="Maintain aspect ratio when only one dimension is specified")
-    parser.add_argument("-q", "--quality", type=int, default=85,
-                        help="JPEG quality (1-100, default: 85)")
-    parser.add_argument("-r", "--recursive", action="store_true",
-                        help="Process subdirectories recursively")
-    parser.add_argument("--overwrite", action="store_true",
-                        help="Overwrite existing output files")
-    parser.add_argument("--workers", type=int, default=4,
-                        help="Number of parallel workers (default: 4)")
-    parser.add_argument("--selftest", action="store_true",
-                        help="Run self-test and exit")
-    
-    # 自检模式（优先，无需位置参数）
-    if "--selftest" in sys.argv:
-        sys.exit(selftest())
-    
-    args = parser.parse_args()
-    
-    if args.selftest:
-        sys.exit(selftest())
-    
-    if not os.path.isdir(args.input_dir):
-        print(f"Input directory not found: {args.input_dir}")
-        sys.exit(1)
-    
-    start_time = datetime.datetime.now(datetime.timezone.utc)
-    print(f"Start time: {start_time.isoformat()}")
-    
-    success, fail = batch_resize(args.input_dir, args.output_dir, 
-                                 args.width, args.height, 
-                                 args.keep_aspect, args.quality, 
-                                 args.recursive, args.overwrite,
-                                 args.workers)
-    
-    end_time = datetime.datetime.now(datetime.timezone.utc)
-    duration = (end_time - start_time).total_seconds()
-    
-    print(f"Resize complete: {success} succeeded, {fail} failed")
-    print(f"Duration: {duration:.2f} seconds")
-    
-    if fail > 0:
-        sys.exit(1)
