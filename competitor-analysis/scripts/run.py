@@ -12,8 +12,9 @@ import json
 import os
 import re
 import sys
+import time
 from collections import defaultdict
-from datetime import datetime
+from datetime import datetime, timezone
 
 try:
     import openpyxl
@@ -196,7 +197,7 @@ def generate_report(competitors):
     """生成对比报告"""
     lines = []
     lines.append("# 竞品对比分析报告\n")
-    lines.append(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+    lines.append(f"生成时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}\n")
     lines.append(f"分析竞品数: {len(competitors)}\n")
     
     # 功能对比
@@ -279,6 +280,17 @@ def process_directory(input_dir, output_file):
 def selftest():
     """自检函数：验证核心功能"""
     print("运行自检...")
+    
+    # 测试核心链路：parse_markdown_table（Mock 表格回放）
+    mock_table = """| 竞品 | 优势 | 价格 |
+|---|---:|---:|
+| 产品A | 功能全 | 99 |
+| 产品B | 便宜 | 59 |"""
+    parsed = parse_markdown_table(mock_table)
+    assert len(parsed) >= 2, "Mock 表格应解析出至少2个数据行"
+    assert any("产品A" in str(row) for row in parsed), "应包含产品A"
+    print("  [OK] parse_markdown_table Mock 解析通过")
+
     
     # 创建临时测试数据
     import tempfile
