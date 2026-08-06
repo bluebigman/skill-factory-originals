@@ -2,23 +2,19 @@
 slug: code-review-report
 name: code-review-report
 displayName: 代码审查 差异分析 质量报告
-description: 解析统一 diff 文本，定位逻辑、安全、性能与规范问题，输出分级报告。
-version: 2.0.0
+description: 解析代码差异，定位逻辑、安全、性能与规范问题，输出分级报告。
+version: 1.0.0
 license: MIT
 source_project: original
 source_url: 
-copyright_holder: 独立技能工坊
+copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
-disclaimer: 本 Skill 由 AI 辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 独立技能工坊
 agent_created: true
 trigger_words: ["code-review-report","代码审查","代码评审","diff审查","变更检查","代码走查","差异检视","--selftest","--version"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -26,6 +22,13 @@ trigger_words: ["code-review-report","代码审查","代码评审","diff审查",
 > 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
 <!-- user-agreement-injected -->
 
+
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
 # 代码审查 · 差异分析 · 质量报告
 
@@ -39,7 +42,6 @@ trigger_words: ["code-review-report","代码审查","代码评审","diff审查",
 | 问题定位 | 识别逻辑错误、安全漏洞、性能隐患、规范偏离 | 至少包含代码变更上下文（前后各 3-5 行） |
 | 分级报告 | 按严重程度输出 P0/P1/P2/P3 四级问题清单 | 无特殊要求，自动分级 |
 | 变更摘要 | 概括变更涉及的文件、函数、模块范围 | 无特殊要求，自动生成 |
-| 规则过滤 | 按规则 ID 或严重级别过滤报告内容 | 通过 `--filter` 参数指定 |
 
 ### 1.2 不能做什么
 
@@ -49,7 +51,6 @@ trigger_words: ["code-review-report","代码审查","代码评审","diff审查",
 | 不访问仓库 | 无法主动拉取 git 历史、分支信息或远程代码 |
 | 不保证完整覆盖 | 无法发现所有问题，尤其是依赖运行时状态的缺陷 |
 | 不替代人工评审 | 输出为辅助参考，最终判断由开发者负责 |
-| 不处理二进制 diff | 仅支持文本格式的 unified diff |
 
 ### 1.3 适用对象
 
@@ -58,84 +59,31 @@ trigger_words: ["code-review-report","代码审查","代码评审","diff审查",
 - 代码评审会议的前置准备
 - 学习他人代码时的质量观察
 
-## 二、触发条件
-
-### 2.1 显式触发
-
-- 命令行直接调用：`python run.py --diff <diff文本或文件>`
-- 通过 `--selftest` 参数运行自检
-
-### 2.2 隐式触发
-
-- 当用户提供包含 `diff --git` 或 `---`/`+++` 标记的文本时，自动识别为 diff 输入
-
-## 三、标准流程
-
-### 3.1 输入处理
-
-1. 接收 diff 文本（通过 `--diff` 参数或 stdin）
-2. 解析 diff 结构，提取文件路径、变更行号、增删内容
-3. 对每个变更块，提取上下文（前后各 3-5 行）
-
-### 3.2 分析阶段
-
-1. 对每个变更行应用规则集（内置规则 + 可选自定义规则）
-2. 规则覆盖：逻辑错误、安全漏洞、性能隐患、代码规范
-3. 每个问题自动分配严重级别（P0-P3）
-
-### 3.3 报告生成
-
-1. 生成 Markdown 格式报告
-2. 包含：变更摘要、问题清单（按严重级别排序）、统计信息
-3. 支持 `--filter` 参数过滤输出
-
-## 四、置信度门控
-
-| 级别 | 置信度 | 说明 |
-|------|--------|------|
-| HIGH | ≥90% | 规则匹配明确，无歧义 |
-| MEDIUM | 70-89% | 规则匹配但存在上下文依赖 |
-| LOW | <70% | 启发式匹配，需人工确认 |
-
-- 所有问题均标注置信度
-- 置信度低于 70% 的问题在报告中标记为"需人工确认"
-
-## 五、错误码
-
-| 错误码 | 含义 | 处理方式 |
-|--------|------|----------|
-| 0 | 成功 | 正常退出 |
-| 1 | 参数错误 | 检查输入参数 |
-| 2 | 文件不存在 | 检查文件路径 |
-| 3 | 解析失败 | 检查 diff 格式 |
-| 4 | 内部错误 | 查看错误日志 |
-
-## 六、FAQ 与反模式
-
-### FAQ
-
-**Q: 如何处理大文件 diff？**
-A: 支持流式处理，但建议分段输入。
-
-**Q: 支持哪些语言？**
-A: 语言无关，基于文本模式匹配。
-
-### 反模式
-
-| 反模式 | 说明 | 正确做法 |
-|--------|------|----------|
-| 过度依赖 | 完全依赖工具结果 | 结合人工评审 |
-| 忽略上下文 | 只看单行变更 | 查看完整上下文 |
-| 不验证规则 | 盲目信任规则 | 定期更新规则集 |
 
 ## 许可证（License）
-## 失败处理
 
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
+```text
+MIT License
 
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
+Copyright (c) {year} {holder}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+<!-- professional-license-embedded -->
