@@ -12,6 +12,7 @@ import sys
 import tempfile
 import time
 import urllib.error
+import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
@@ -279,6 +280,67 @@ def suggest_next(subject: str, grade: int, round_num: int) -> str:
     return "\n".join(suggestions)
 
 
+# ========== 苏格拉底式对话状态机 ==========
+
+class SocraticDialogue:
+    """苏格拉底式提问引导的对话状态机"""
+    
+    def __init__(self, question: str, subject: str, grade: int):
+        self.question = question
+        self.subject = subject
+        self.grade = grade
+        self.round_num = 0
+        self.steps = decompose_problem(question, subject, grade)
+        self.current_step = 0
+        self.responses = []
+        self.finished = False
+        
+    def next_question(self) -> str:
+        """获取下一个引导问题"""
+        if self.finished:
+            return "对话已结束，请总结你的解题思路。"
+        
+        if self.round_num >= MAX_ROUNDS:
+            self.finished = True
+            return "已完成全部引导轮次，请独立完成题目。"
+        
+        self.round_num += 1
+        return generate_hint(self.question, self.subject, self.grade, self.round_num)
+    
+    def submit_answer(self, answer: str) -> str:
+        """提交回答并获取反馈"""
+        if self.finished:
+            return "对话已结束。"
+        
+        self.responses.append(answer)
+        
+        # 简单评估回答质量
+        if len(answer.strip()) < 3:
+            feedback = "回答太简短了，请详细描述你的思考过程。"
+        elif "不知道" in answer or "不会" in answer:
+            feedback = "没关系，让我们换个角度思考。"
+        else:
+            feedback = "很好，继续深入思考。"
+        
+        # 检查是否完成所有步骤
+        if self.round_num >= MAX_ROUNDS:
+            self.finished = True
+            feedback += "\n已完成全部引导，请尝试独立完成题目。"
+        
+        return feedback
+    
+    def get_progress(self) -> dict:
+        """获取对话进度"""
+        return {
+            "round": self.round_num,
+            "total_rounds": MAX_ROUNDS,
+            "current_step": min(self.current_step + 1, len(self.steps)),
+            "total_steps": len(self.steps),
+            "finished": self.finished,
+            "responses_count": len(self.responses)
+        }
+
+
 # ========== 主流程 ==========
 
 def main():
@@ -293,52 +355,4 @@ def main():
     parser.add_argument("--round", "-r", type=int, default=1, help=f"引导轮次（1-{MAX_ROUNDS}）")
     parser.add_argument("--step", type=int, help="查看指定步骤的引导（1-5）")
     parser.add_argument("--review", action="store_true", help="回顾知识点")
-    parser.add_argument("--mistake", type=str, help="错题归因分析（如：计算错误）")
-    parser.add_argument("--next", action="store_true", help="获取下一步建议")
-    parser.add_argument("--selftest", action="store_true", help="运行自测")
-    parser.add_argument("--output", "-o", type=str, help="输出结果到文件（原子写入）")
-
-    args = parser.parse_args()
-
-    # 自测模式
-    if args.selftest:
-        sys.exit(run_selftest())
-
-    # 参数校验
-    if not args.question:
-        parser.error("必须提供 --question 参数")
-
-    # 置信度门控
-    confidence, error_code = confidence_gate(args.subject, args.question)
-    if error_code:
-        print(f"错误: {error_code} (置信度: {confidence})")
-        if error_code == "E_INVALID_SUBJECT":
-            print(f"支持的学科: {', '.join(sorted(SUBJECTS))}")
-        elif error_code == "E_INCOMPLETE":
-            print("请提供完整题目（至少5个字符）")
-        sys.exit(1)
-
-    # 解析学科和年级
-    try:
-        subject, grade_stage = parse_subject_grade(args.subject, args.grade)
-    except ValueError as e:
-        print(f"错误: {e}")
-        sys.exit(1)
-
-    # 构建输出
-    output_lines = []
-    output_lines.append(f"📚 学科: {subject} | 年级: {args.grade} ({grade_stage})")
-    output_lines.append(f"📝 题目: {args.question}")
-    output_lines.append(f"⏰ 时间: {utc_now()}")
-    output_lines.append(f"✅ 置信度: {confidence}")
-    output_lines.append("")
-
-    # 根据参数执行不同功能
-    if args.review:
-        output_lines.append("📖 知识点回顾:")
-        output_lines.append(review_knowledge(subject, grade_stage))
-    elif args.mistake:
-        output_lines.append("🔍 错题归因:")
-        output_lines.append(analyze_mistake(args.mistake))
-    elif args.next:
-        output
+    parser.add_argument
