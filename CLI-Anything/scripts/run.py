@@ -372,6 +372,19 @@ def execute_command(command: str, confirm_high_risk: bool = True) -> Tuple[int, 
     except Exception as e:
         return 1, f"执行错误: {str(e)}"
 
+def validate_commondb() -> Tuple[bool, str]:
+    """验证COMMAND_DB完整性"""
+    required_keys = ["keywords", "commands"]
+    for category, data in COMMAND_DB.items():
+        for key in required_keys:
+            if key not in data:
+                return False, f"分类 '{category}' 缺少 '{key}' 字段"
+        if not isinstance(data["keywords"], list) or len(data["keywords"]) == 0:
+            return False, f"分类 '{category}' 的 keywords 为空或不是列表"
+        if not isinstance(data["commands"], dict) or len(data["commands"]) == 0:
+            return False, f"分类 '{category}' 的 commands 为空或不是字典"
+    return True, "COMMAND_DB 完整性验证通过"
+
 def selftest() -> bool:
     """自检函数：验证核心功能"""
     test_cases = [
@@ -385,21 +398,4 @@ def selftest() -> bool:
     ]
     
     passed = 0
-    total = len(test_cases) + 3  # 加上模板完整性和安全验证
-    
-    print("=" * 60)
-    print("CLI-Anything 自检程序")
-    print(f"开始时间: {datetime.now(timezone.utc).isoformat()}")
-    print("=" * 60)
-    
-    # 测试核心匹配逻辑
-    print("\n[1] 测试核心命令匹配...")
-    for text, expected in test_cases:
-        command, score = generate_command(text)
-        if expected in command and score > 0.3:
-            passed += 1
-            print(f"  ✓ 测试通过: '{text}' → {command.split(chr(10))[-1]}")
-        else:
-            print(f"  ✗ 测试失败: '{text}'")
-            print(f"    期望: {expected}")
-            print
+    total = len(test_cases) + 3  # 加上模板完整
