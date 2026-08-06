@@ -128,3 +128,9 @@ SOFTWARE.
 
 ```
 <!-- professional-license-embedded -->
+
+## 前置条件
+
+- 本技能开箱即用，无需额外安装依赖。
+- 需要 Python 3.9+ 运行环境。
+- 涉及网络请求时需保持网络连通。
