@@ -10,8 +10,10 @@ import json
 import re
 import sys
 import time
+import hashlib
 from pathlib import Path
 from datetime import datetime, timezone
+from functools import lru_cache
 
 try:
     from docx import Document
@@ -23,8 +25,8 @@ except ImportError:
 RISK_RULES = {
     "违约": {
         "keywords": ["违约金", "违约责任", "赔偿", "损失"],
-        "high_risk": [r"违约金[^。；;]*?%", r"赔偿[^。；;]*?全部损失", r"承担[^。；;]*?一切责任"],
-        "medium_risk": [r"违约金", r"赔偿损失"],
+        "high_risk": [r"违约金[^。；;]*?\d+%", r"赔偿[^。；;]*?全部损失", r"承担[^。；;]*?一切责任"],
+        "medium_risk": [r"违约金[^。；;]*?\d+%", r"赔偿损失"],
         "low_risk": [r"违约责任"],
         "suggestions": {
             "high": "违约金比例过高或责任范围过大，建议协商调整至合理范围",
@@ -67,19 +69,47 @@ RISK_RULES = {
     }
 }
 
+# 文件大小限制（10MB）
+MAX_FILE_SIZE = 10 * 1024 * 1024
+
+def get_utc_timestamp():
+    """获取带时区的UTC时间戳"""
+    return datetime.now(timezone.utc).isoformat()
+
 def extract_text_from_file(filepath):
-    """从文件中提取文本内容"""
+    """从文件中提取文本内容，带文件大小限制和流式读取"""
     path = Path(filepath)
     if not path.exists():
         raise FileNotFoundError(f"文件不存在: {filepath}")
     
+    # 检查文件大小
+    file_size = path.stat().st_size
+    if file_size > MAX_FILE_SIZE:
+        raise ValueError(f"文件大小超过限制（{MAX_FILE_SIZE/1024/1024:.1f}MB），实际大小：{file_size/1024/1024:.1f}MB")
+    
     suffix = path.suffix.lower()
     
     if suffix in ['.txt', '.md']:
-        try:
-            return path.read_text(encoding='utf-8')
-        except UnicodeDecodeError:
-            return path.read_text(encoding='gbk')
+        # 流式读取大文件
+        chunks = []
+        with open(path, 'r', encoding='utf-8', errors='ignore') as f:
+            while True:
+                chunk = f.read(8192)
+                if not chunk:
+                    break
+                chunks.append(chunk)
+        text = ''.join(chunks)
+        if not text.strip():
+            # 尝试GBK编码
+            chunks = []
+            with open(path, 'r', encoding='gbk', errors='ignore') as f:
+                while True:
+                    chunk = f.read(8192)
+                    if not chunk:
+                        break
+                    chunks.append(chunk)
+            text = ''.join(chunks)
+        return text
     
     elif suffix == '.docx':
         if Document is None:
@@ -99,8 +129,8 @@ def _extract_all_docx_text(doc):
         if para.text.strip():
             texts.append(para.text)
     
-    # 提取表格内容
-    for table in doc.tables:
+    # 提取表格内容（包括嵌套表格）
+    def extract_table_content(table):
         for row in table.rows:
             for cell in row.cells:
                 for para in cell.paragraphs:
@@ -108,11 +138,10 @@ def _extract_all_docx_text(doc):
                         texts.append(para.text)
                 # 递归处理嵌套表格
                 for nested_table in cell.tables:
-                    for nested_row in nested_table.rows:
-                        for nested_cell in nested_row.cells:
-                            for para in nested_cell.paragraphs:
-                                if para.text.strip():
-                                    texts.append(para.text)
+                    extract_table_content(nested_table)
+    
+    for table in doc.tables:
+        extract_table_content(table)
     
     # 提取页眉页脚
     for section in doc.sections:
@@ -122,11 +151,7 @@ def _extract_all_docx_text(doc):
                     if para.text.strip():
                         texts.append(para.text)
                 for table in header.tables:
-                    for row in table.rows:
-                        for cell in row.cells:
-                            for para in cell.paragraphs:
-                                if para.text.strip():
-                                    texts.append(para.text)
+                    extract_table_content(table)
     
     # 提取文本框内容（通过XML遍历）
     for element in doc.element.body.iter():
@@ -150,7 +175,8 @@ def analyze_contract(text):
                 "level": "中",
                 "title": f"{category}条款缺失",
                 "detail": f"合同未包含{category}相关条款",
-                "suggestion": f"建议补充{category}条款"
+                "suggestion": f"建议补充{category}条款",
+                "timestamp": get_utc_timestamp()
             })
             continue
         
@@ -167,7 +193,8 @@ def analyze_contract(text):
                 "level": "高",
                 "title": f"{category}条款存在高风险",
                 "detail": f"发现高风险表述: {'; '.join(high_matches[:3])}",
-                "suggestion": rules["suggestions"]["high"]
+                "suggestion": rules["suggestions"]["high"],
+                "timestamp": get_utc_timestamp()
             })
             continue
         
@@ -184,7 +211,8 @@ def analyze_contract(text):
                 "level": "中",
                 "title": f"{category}条款需完善",
                 "detail": f"发现需完善的表述: {'; '.join(medium_matches[:3])}",
-                "suggestion": rules["suggestions"]["medium"]
+                "suggestion": rules["suggestions"]["medium"],
+                "timestamp": get_utc_timestamp()
             })
             continue
         
@@ -194,10 +222,16 @@ def analyze_contract(text):
             "level": "低",
             "title": f"{category}条款基本合规",
             "detail": "条款存在但需人工复核",
-            "suggestion": rules["suggestions"]["low"]
+            "suggestion": rules["suggestions"]["low"],
+            "timestamp": get_utc_timestamp()
         })
     
     return risks
+
+@lru_cache(maxsize=128)
+def analyze_contract_cached(text_hash, text):
+    """带缓存的合同分析函数"""
+    return analyze_contract(text)
 
 def format_output(risks, format_type='text'):
     """格式化输出结果"""
@@ -208,6 +242,7 @@ def format_output(risks, format_type='text'):
     lines = []
     lines.append("=" * 60)
     lines.append("合同审查风险清单")
+    lines.append(f"生成时间: {get_utc_timestamp()}")
     lines.append("=" * 60)
     
     for risk in risks:
@@ -244,19 +279,33 @@ def selftest():
     assert '保密' in categories, "缺少保密条款分析"
     assert '知识产权' in categories, "缺少知识产权条款分析"
     
+    # 验证高风险识别
+    high_risks = [r for r in risks if r['level'] == '高']
+    assert len(high_risks) >= 1, "应至少识别一个高风险项"
+    
     # 验证输出格式
     output = format_output(risks)
     assert '风险等级' in output, "输出格式错误"
+    assert '生成时间' in output, "缺少时间戳"
     
     # 验证正则边界（非贪婪匹配）
     test_boundary = "违约金5%。其他条款违约金10%"
-    matches = re.findall(r"违约金[^。；;]*?%", test_boundary)
+    matches = re.findall(r"违约金[^。；;]*?\d+%", test_boundary)
     assert len(matches) == 2, f"边界匹配失败，预期2个匹配，实际{len(matches)}个"
+    
+    # 验证无%字符时不误报
+    test_no_percent = "违约金条款约定"
+    matches = re.findall(r"违约金[^。；;]*?\d+%", test_no_percent)
+    assert len(matches) == 0, f"无%字符时应无匹配，实际{len(matches)}个"
+    
+    # 验证缓存功能
+    text_hash = hashlib.md5(test_text.encode()).hexdigest()
+    cached_result = analyze_contract_cached(text_hash, test_text)
+    assert len(cached_result) == 4, "缓存结果错误"
     
     # 验证docx提取（如果可用）
     if Document is not None:
         from docx import Document as DocxDocument
-        from io import BytesIO
         import tempfile
         
         # 创建测试docx
@@ -276,6 +325,22 @@ def selftest():
             assert "表格内容" in extracted, "表格提取失败"
         finally:
             Path(tmp_path).unlink()
+    
+    # 验证文件大小限制
+    large_file = Path("test_large.txt")
+    large_file.write_text("x" * (MAX_FILE_SIZE + 1))
+    try:
+        try:
+            extract_text_from_file(str(large_file))
+            assert False, "应抛出文件大小限制异常"
+        except ValueError as e:
+            assert "文件大小超过限制" in str(e), "异常信息错误"
+    finally:
+        large_file.unlink()
+    
+    # 验证时间戳格式
+    ts = get_utc_timestamp()
+    assert ts.endswith('+00:00'), f"时间戳应为UTC格式，实际: {ts}"
     
     print("✓ 自检通过：所有功能正常")
     return True
@@ -318,9 +383,10 @@ def main():
         text = extract_text_from_file(args.input)
         print(f"成功读取 {len(text)} 字符")
         
-        # 分析合同
+        # 分析合同（使用缓存）
+        text_hash = hashlib.md5(text.encode()).hexdigest()
         print("正在分析合同风险...")
-        risks = analyze_contract(text)
+        risks = analyze_contract_cached(text_hash, text)
         
         # 生成输出
         output = format_output(risks, args.format)
