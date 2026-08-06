@@ -41,7 +41,9 @@ MAX_FILE_SIZE = 10 * 1024 * 1024
 # ============ 数据加载模块 ============
 
 def parse_markdown_table(content):
-    """解析 Markdown 表格，返回列表字典"""
+    """解析 Markdown 表格，返回列表字典。
+    支持无表头（默认 col1, col2...）和列数不一致（保留行，缺失列填空字符串）。
+    """
     rows = []
     lines = [l.strip() for l in content.split('\n') if l.strip()]
     header_count = None
@@ -49,56 +51,131 @@ def parse_markdown_table(content):
         if '|' not in line:
             continue
         cells = [c.strip() for c in line.strip('|').split('|')]
+        # 跳过分隔行
         if all(re.match(r'^[-:]+$', c) for c in cells):
-            continue  # 分隔行
+            continue
         if not rows:
+            # 第一行作为表头，如果没有表头（全是数据），则生成默认列名
             rows.append(cells)
             header_count = len(cells)
             continue
+        # 列数不一致时，补齐或截断
         if len(cells) != header_count:
-            logger.warning(f"Markdown表格第{i+1}行列数({len(cells)})与表头({header_count})不一致，跳过该行")
-            continue
+            logger.warning(f"Markdown表格第{i+1}行列数({len(cells)})与表头({header_count})不一致，补齐空列")
+            if len(cells) < header_count:
+                cells.extend([''] * (header_count - len(cells)))
+            else:
+                cells = cells[:header_count]
         rows.append(cells)
+    
     if len(rows) < 2:
+        # 只有一行，视为无表头数据
+        if len(rows) == 1:
+            headers = [f"col{j+1}" for j in range(len(rows[0]))]
+            return [dict(zip(headers, rows[0]))]
         return []
+    
     headers = rows[0]
+    # 检查表头是否像真实表头（非空且不全是数据特征）
+    # 简单启发式：如果第一行全是数字或空，则视为数据行，生成默认表头
+    if all(re.match(r'^[\d\s]*$', h) or h == '' for h in headers):
+        headers = [f"col{j+1}" for j in range(len(headers))]
+        data_rows = rows
+    else:
+        data_rows = rows[1:]
+    
     data = []
-    for row in rows[1:]:
+    for row in data_rows:
         data.append(dict(zip(headers, row)))
     return data
 
 
 def parse_txt_content(content):
-    """解析 TXT 内容，支持 key: value 格式或简单表格"""
+    """解析 TXT 内容，支持 key: value 格式、制表符分隔、以及自由文本段落。
+    自由文本段落按空行分块，每块作为一个记录，提取关键信息。
+    """
     records = []
     current_record = {}
+    current_text_lines = []
+    
+    def flush_text_block():
+        nonlocal current_text_lines
+        if current_text_lines:
+            text = '\n'.join(current_text_lines).strip()
+            if text:
+                # 尝试从文本中提取关键信息
+                record = {'text': text}
+                # 尝试提取名称、价格、评分等
+                name_match = re.search(r'(?:名称|产品|竞品)[：:]\s*(\S+)', text)
+                if name_match:
+                    record['name'] = name_match.group(1)
+                price_match = re.search(r'(?:价格|定价|费用)[：:]\s*([\d.]+)', text)
+                if price_match:
+                    record['price'] = price_match.group(1)
+                rating_match = re.search(r'(?:评分|评价)[：:]\s*([\d.]+)', text)
+                if rating_match:
+                    record['rating'] = rating_match.group(1)
+                records.append(record)
+            current_text_lines = []
+    
     for line in content.split('\n'):
         line = line.strip()
         if not line:
+            # 空行：结束当前记录或文本块
             if current_record:
                 records.append(current_record)
                 current_record = {}
+            flush_text_block()
             continue
-        if ':' in line:
+        
+        if ':' in line and not line.startswith('http'):
             key, value = line.split(':', 1)
             current_record[key.strip()] = value.strip()
+            flush_text_block()  # 如果之前有文本块，先保存
         elif '\t' in line:
             parts = line.split('\t')
             if len(parts) >= 2:
                 current_record[parts[0].strip()] = parts[1].strip()
+                flush_text_block()
+            else:
+                current_text_lines.append(line)
+        else:
+            # 自由文本行，累积到文本块
+            current_text_lines.append(line)
+    
+    # 处理末尾
     if current_record:
         records.append(current_record)
+    flush_text_block()
+    
     return records
 
 
 def detect_encoding(filepath):
-    """检测文件编码"""
+    """检测文件编码。
+    优先使用 chardet，不可用时尝试 utf-8-sig -> gb18030 -> utf-8。
+    返回 (encoding, success_flag)。
+    """
     if HAS_CHARDET:
-        with open(filepath, 'rb') as f:
-            raw_data = f.read(10000)
-        result = chardet.detect(raw_data)
-        return result['encoding'] or 'utf-8'
-    return 'utf-8'
+        try:
+            with open(filepath, 'rb') as f:
+                raw_data = f.read(10000)
+            result = chardet.detect(raw_data)
+            if result['encoding']:
+                return result['encoding'], True
+        except Exception as e:
+            logger.warning(f"chardet 检测失败: {e}")
+    
+    # chardet 不可用或检测失败，尝试常见编码
+    for enc in ['utf-8-sig', 'gb18030', 'utf-8']:
+        try:
+            with open(filepath, 'r', encoding=enc) as f:
+                f.read(1000)  # 测试读取
+            return enc, True
+        except (UnicodeDecodeError, UnicodeError):
+            continue
+    
+    return 'utf-8', False
 
 
 def check_file_size(filepath):
@@ -110,68 +187,113 @@ def check_file_size(filepath):
 
 
 def load_data(filepath):
-    """加载竞品数据文件，返回 (竞品名, 数据类型, 记录列表)"""
-    if not os.path.exists(filepath):
-        raise FileNotFoundError(f"文件不存在: {filepath}")
-    
-    # 检查文件大小
-    check_file_size(filepath)
-    
-    ext = os.path.splitext(filepath)[1].lower()
-    filename = os.path.basename(filepath)
-    # 从文件名提取竞品名（第一个下划线前）
-    comp_name = filename.split('_')[0] if '_' in filename else Path(filename).stem
-    
-    records = []
-    data_type = 'unknown'
-    
+    """加载竞品数据文件，返回 (竞品名, 数据类型, 记录列表)。
+    所有文件操作异常都会被捕获并转为结构化错误。
+    """
     try:
+        if not os.path.exists(filepath):
+            raise FileNotFoundError(f"文件不存在: {filepath}")
+        
+        # 检查文件大小
+        check_file_size(filepath)
+        
+        ext = os.path.splitext(filepath)[1].lower()
+        filename = os.path.basename(filepath)
+        # 从文件名提取竞品名（第一个下划线前）
+        comp_name = filename.split('_')[0] if '_' in filename else Path(filename).stem
+        
+        records = []
+        data_type = 'unknown'
+        
         if ext == '.csv':
-            encoding = detect_encoding(filepath)
-            with open(filepath, 'r', encoding=encoding) as f:
-                reader = csv.DictReader(f)
-                records = list(reader)
-            data_type = 'csv'
+            encoding, ok = detect_encoding(filepath)
+            if not ok:
+                logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
+                encoding = 'utf-8'
+            try:
+                with open(filepath, 'r', encoding=encoding) as f:
+                    reader = csv.DictReader(f)
+                    records = list(reader)
+                data_type = 'csv'
+            except UnicodeDecodeError as e:
+                raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
+        
         elif ext == '.json':
-            encoding = detect_encoding(filepath)
-            with open(filepath, 'r', encoding=encoding) as f:
-                data = json.load(f)
-                if isinstance(data, list):
-                    records = data
-                elif isinstance(data, dict):
-                    records = data.get('records', data.get('data', []))
-                    if isinstance(records, dict):
-                        records = [records]
-            data_type = 'json'
+            encoding, ok = detect_encoding(filepath)
+            if not ok:
+                logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
+                encoding = 'utf-8'
+            try:
+                with open(filepath, 'r', encoding=encoding) as f:
+                    data = json.load(f)
+                    if isinstance(data, list):
+                        records = data
+                    elif isinstance(data, dict):
+                        records = data.get('records', data.get('data', []))
+                        if isinstance(records, dict):
+                            records = [records]
+                data_type = 'json'
+            except (UnicodeDecodeError, json.JSONDecodeError) as e:
+                raise ValueError(f"JSON 解析失败: {e}")
+        
         elif ext == '.md' or ext == '.markdown':
-            encoding = detect_encoding(filepath)
-            with open(filepath, 'r', encoding=encoding) as f:
-                content = f.read()
-            records = parse_markdown_table(content)
-            data_type = 'markdown'
+            encoding, ok = detect_encoding(filepath)
+            if not ok:
+                logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
+                encoding = 'utf-8'
+            try:
+                with open(filepath, 'r', encoding=encoding) as f:
+                    content = f.read()
+                records = parse_markdown_table(content)
+                data_type = 'markdown'
+            except UnicodeDecodeError as e:
+                raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
+        
         elif ext == '.txt':
-            encoding = detect_encoding(filepath)
-            with open(filepath, 'r', encoding=encoding) as f:
-                content = f.read()
-            records = parse_txt_content(content)
-            data_type = 'txt'
+            encoding, ok = detect_encoding(filepath)
+            if not ok:
+                logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
+                encoding = 'utf-8'
+            try:
+                with open(filepath, 'r', encoding=encoding) as f:
+                    content = f.read()
+                records = parse_txt_content(content)
+                data_type = 'txt'
+            except UnicodeDecodeError as e:
+                raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
+        
         elif ext == '.xlsx' and HAS_OPENPYXL:
-            wb = openpyxl.load_workbook(filepath, read_only=True)
-            ws = wb.active
-            headers = [cell.value for cell in next(ws.iter_rows(min_row=1, max_row=1))]
-            for row in ws.iter_rows(min_row=2, values_only=True):
-                records.append(dict(zip(headers, row)))
-            wb.close()
-            data_type = 'xlsx'
+            try:
+                wb = openpyxl.load_workbook(filepath, read_only=True)
+                ws = wb.active
+                headers = [cell.value for cell in next(ws.iter_rows(min_row=1, max_row=1))]
+                for row in ws.iter_rows(min_row=2, values_only=True):
+                    records.append(dict(zip(headers, row)))
+                wb.close()
+                data_type = 'xlsx'
+            except Exception as e:
+                raise ValueError(f"Excel 解析失败: {e}")
+        
         else:
             raise ValueError(f"不支持的文件格式: {ext}")
+        
+        if not records:
+            raise ValueError("文件中没有有效数据")
+        
+        return comp_name, data_type, records
+    
+    except FileNotFoundError as e:
+        logger.error(f"文件不存在: {e}")
+        raise
+    except PermissionError as e:
+        logger.error(f"权限不足: {e}")
+        raise
+    except ValueError as e:
+        logger.error(f"数据解析错误: {e}")
+        raise
     except Exception as e:
-        raise ValueError(f"解析文件失败: {e}")
-    
-    if not records:
-        raise ValueError("文件中没有有效数据")
-    
-    return comp_name, data_type, records
+        logger.error(f"加载文件失败: {e}")
+        raise ValueError(f"加载文件失败: {e}")
 
 
 # ============ 字段提取模块 ============
@@ -368,124 +490,4 @@ def analyze_competitors(competitors_data):
         # 聚合所有记录
         all_comp_features = set()
         all_pricing = {}
-        all_reviews = []
-        confidences = []
-        
-        for record in records:
-            features, pricing, reviews, confidence = extract_all_fields(record)
-            all_comp_features.update(features)
-            if pricing:
-                all_pricing.update(pricing)
-            if reviews:
-                all_reviews.append(reviews)
-            confidences.append(confidence)
-        
-        comp_info['features'] = sorted(list(all_comp_features))
-        comp_info['pricing'] = all_pricing
-        if all_reviews:
-            # 计算平均评分
-            ratings = [r.get('rating', 0) for r in all_reviews if 'rating' in r]
-            if ratings:
-                comp_info['reviews'] = {'avg_rating': sum(ratings) / len(ratings), 'count': len(ratings)}
-            else:
-                comp_info['reviews'] = all_reviews[0]
-        
-        comp_info['confidence'] = sum(confidences) / len(confidences) if confidences else 0.0
-        
-        if comp_info['confidence'] < 0.6:
-            report['low_confidence_fields'].append({
-                'competitor': comp_name,
-                'confidence': comp_info['confidence'],
-                'reason': '字段提取置信度低于阈值'
-            })
-        
-        all_features.update(comp_info['features'])
-        report['competitors'].append(comp_info)
-    
-    # 功能对比矩阵
-    for feature in sorted(all_features):
-        report['comparison']['features'][feature] = {
-            comp['name']: (feature in comp['features']) for comp in report['competitors']
-        }
-    
-    # 定价对比
-    for comp in report['competitors']:
-        report['comparison']['pricing'][comp['name']] = comp['pricing']
-    
-    # 评价对比
-    for comp in report['competitors']:
-        report['comparison']['reviews'][comp['name']] = comp['reviews']
-    
-    # 数据完整性检查
-    for comp in report['competitors']:
-        completeness = {
-            'features': len(comp['features']) > 0,
-            'pricing': len(comp['pricing']) > 0,
-            'reviews': len(comp['reviews']) > 0
-        }
-        report['data_completeness'][comp['name']] = completeness
-        if not all(completeness.values()):
-            logger.warning(f"竞品 {comp['name']} 数据不完整: {completeness}")
-    
-    # 生成差异化建议
-    report['differentiation'] = generate_differentiation_suggestions(report)
-    
-    return report
-
-
-# ============ 输出模块 ============
-
-def atomic_write(filepath, content):
-    """原子化写入文件"""
-    dirpath = os.path.dirname(filepath)
-    if dirpath and not os.path.exists(dirpath):
-        os.makedirs(dirpath, exist_ok=True)
-    
-    fd, temp_path = tempfile.mkstemp(dir=dirpath or '.', suffix='.tmp')
-    try:
-        with os.fdopen(fd, 'w', encoding='utf-8') as f:
-            f.write(content)
-        os.replace(temp_path, filepath)
-    except Exception:
-        os.unlink(temp_path)
-        raise
-
-
-def print_summary(report):
-    """打印控制台摘要"""
-    print("\n" + "=" * 60)
-    print("竞品分析报告摘要")
-    print("=" * 60)
-    print(f"生成时间: {report['generated_at']}")
-    print(f"竞品数量: {len(report['competitors'])}")
-    print(f"差异化建议: {len(report['differentiation'])} 条")
-    print(f"低置信度字段: {len(report['low_confidence_fields'])} 个")
-    print("\n--- 竞品概览 ---")
-    for comp in report['competitors']:
-        print(f"  {comp['name']}: {comp['record_count']} 条记录, 置信度 {comp['confidence']:.2f}")
-        if comp['features']:
-            print(f"    功能 ({len(comp['features'])}): {', '.join(comp['features'][:5])}{'...' if len(comp['features']) > 5 else ''}")
-        if comp['pricing']:
-            print(f"    定价: {comp['pricing']}")
-        if comp['reviews']:
-            print(f"    评价: {comp['reviews']}")
-    
-    if report['differentiation']:
-        print("\n--- 差异化建议 ---")
-        for diff in report['differentiation']:
-            print(f"  [{diff['type']}] {diff['suggestion']}")
-    
-    if report['low_confidence_fields']:
-        print("\n--- 低置信度警告 ---")
-        for low in report['low_confidence_fields']:
-            print(f"  {low['competitor']}: {low['reason']}")
-    
-    print("\n--- 数据完整性 ---")
-    for comp_name, completeness in report['data_completeness'].items():
-        status = "完整" if all(completeness.values()) else "不完整"
-        print(f"  {comp_name}: {status}")
-    
-    print("=" * 60)
-
-
-# ============ 自检
+        all_re
