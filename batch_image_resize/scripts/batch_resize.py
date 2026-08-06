@@ -22,7 +22,7 @@ import sys
 import shutil
 import argparse
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 try:
@@ -118,7 +118,7 @@ def process_image(file_path, output_dir, output_format=None, width=None, height=
         'original_size': img.size,
         'original_format': img.format,
         'original_mode': img.mode,
-        'processed_at': datetime.now().isoformat()
+        'processed_at': datetime.now(timezone.utc).isoformat()
     }
     
     # 调整尺寸
