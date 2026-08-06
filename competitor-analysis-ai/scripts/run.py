@@ -27,7 +27,7 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any, Tuple
 
 # 版本信息
-VERSION = "3.0.0"
+VERSION = "3.1.0"
 
 # 错误码
 ERR_SUCCESS = 0
@@ -100,18 +100,31 @@ def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
     
     Raises:
         urllib.error.URLError: 当所有重试都失败时
+        ValueError: 当 HTTP 状态码非 2xx 时
     """
     last_error = None
     for attempt in range(max_retries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "CompetitorAnalysisSkill/3.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": "CompetitorAnalysisSkill/3.1"})
             with urllib.request.urlopen(req, timeout=timeout) as response:
+                # 检查 HTTP 状态码
+                status_code = response.getcode()
+                if status_code < 200 or status_code >= 300:
+                    raise ValueError(f"HTTP 请求失败，状态码: {status_code}")
                 return response.read().decode("utf-8")
+        except urllib.error.HTTPError as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                time.sleep(delay)
         except urllib.error.URLError as e:
             last_error = e
             if attempt < max_retries - 1:
                 delay = RETRY_BASE_DELAY * (2 ** attempt)
                 time.sleep(delay)
+        except ValueError as e:
+            # HTTP 状态码错误，不重试
+            raise e
     raise last_error
 
 
@@ -131,6 +144,8 @@ def load_data_from_url(url: str) -> Dict[str, Any]:
     except json.JSONDecodeError as e:
         raise ValueError(f"URL 返回的数据不是有效的 JSON: {e}")
     except urllib.error.URLError as e:
+        raise ConnectionError(f"URL 请求失败: {e}")
+    except ValueError as e:
         raise ConnectionError(f"URL 请求失败: {e}")
 
 
@@ -414,9 +429,12 @@ def generate_report(data: Dict[str, Any]) -> Dict[str, Any]:
         "dimensions_checked": ANALYSIS_DIMENSIONS
     }
     
+    # 统一使用 UTC 时间
+    now_utc = datetime.now(timezone.utc)
     report = {
-        "report_id": f"CA-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "report_id": f"CA-{now_utc.strftime('%Y%m%d%H%M%S')}",
+        "generated_at": now_utc.isoformat(),
+        "timezone": "UTC",
         "competitors_analyzed": len(findings),
         "dimensions_analyzed": ANALYSIS_DIMENSIONS,
         "findings": findings,
@@ -502,164 +520,4 @@ def run_selftest() -> int:
     assert not is_valid, "无效数据验证失败"
     print("  ✓ 无效数据验证通过")
     
-    # 测试 2: 竞品分析
-    print("\n[测试 2] 竞品分析...")
-    competitor = {"name": "竞品A", "features": ["f1", "f2"], "pricing": {"model": "订阅制"}}
-    result = analyze_competitor(competitor)
-    assert result["name"] == "竞品A", "竞品名称错误"
-    assert result["dimensions"]["features"]["status"] == "complete", "功能分析失败"
-    assert result["dimensions"]["pricing"]["status"] == "complete", "定价分析失败"
-    assert result["dimensions"]["ux"]["status"] == "missing", "缺失字段处理失败"
-    print("  ✓ 竞品分析通过")
-    
-    # 测试 3: 策略生成
-    print("\n[测试 3] 策略生成...")
-    competitors = [
-        {"name": "A", "features": ["f1", "f2"], "pricing": {"model": "订阅制"}, "positioning": "高端"},
-        {"name": "B", "features": ["f2", "f3"], "pricing": {"model": "免费"}, "positioning": "大众"}
-    ]
-    strategies = generate_strategies(competitors)
-    assert len(strategies) > 0, "策略生成失败"
-    print(f"  ✓ 策略生成通过，生成 {len(strategies)} 条策略")
-    
-    # 测试 4: 风险生成
-    print("\n[测试 4] 风险生成...")
-    risks = generate_risks(competitors)
-    assert len(risks) > 0, "风险生成失败"
-    print(f"  ✓ 风险生成通过，生成 {len(risks)} 条风险")
-    
-    # 测试 5: 完整报告生成
-    print("\n[测试 5] 完整报告生成...")
-    report = generate_report(valid_data)
-    assert report["competitors_analyzed"] == 1, "报告竞品数量错误"
-    assert "report_id" in report, "报告缺少 ID"
-    assert "generated_at" in report, "报告缺少时间戳"
-    print("  ✓ 完整报告生成通过")
-    
-    # 测试 6: CSV 导出
-    print("\n[测试 6] CSV 导出...")
-    with tempfile.TemporaryDirectory() as tmpdir:
-        csv_path = os.path.join(tmpdir, "test.csv")
-        export_csv(report, csv_path)
-        assert os.path.exists(csv_path), "CSV 文件未创建"
-        with open(csv_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        assert "竞品名称" in content, "CSV 表头错误"
-        print("  ✓ CSV 导出通过")
-    
-    # 测试 7: URL 获取（带重试）
-    print("\n[测试 7] URL 获取重试逻辑...")
-    # 测试无效 URL 的重试行为
-    try:
-        fetch_url_with_retry("http://invalid-url-that-does-not-exist.com/data.json", timeout=1, max_retries=2)
-        assert False, "无效 URL 应该抛出异常"
-    except Exception as e:
-        print(f"  ✓ URL 重试逻辑通过（正确抛出异常: {type(e).__name__}）")
-    
-    print("\n=== 所有测试通过 ===")
-    return ERR_SUCCESS
-
-
-def main() -> int:
-    """主函数"""
-    parser = argparse.ArgumentParser(
-        description="竞品分析工具 - 多维度拆解竞品，输出差异化策略",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python run.py --file data.json
-  python run.py --url https://example.com/data.json
-  python run.py --data '{"competitors": [{"name": "竞品A"}]}'
-  python run.py --file data.json --csv output.csv
-  python run.py --selftest
-        """
-    )
-    
-    # 数据源参数（互斥）
-    data_group = parser.add_mutually_exclusive_group()
-    data_group.add_argument("--file", help="从 JSON 文件加载数据")
-    data_group.add_argument("--url", help="从 URL 加载 JSON 数据")
-    data_group.add_argument("--data", help="从命令行参数加载 JSON 数据")
-    
-    # 输出参数
-    parser.add_argument("--csv", help="导出 CSV 报告到指定路径")
-    parser.add_argument("--output", "-o", help="输出 JSON 报告到指定路径")
-    
-    # 其他参数
-    parser.add_argument("--selftest", action="store_true", help="运行自测试")
-    parser.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
-    
-    args = parser.parse_args()
-    
-    # 运行自测试
-    if args.selftest:
-        return run_selftest()
-    
-    # 检查数据源
-    if not args.file and not args.url and not args.data:
-        parser.error("必须提供数据源: --file, --url 或 --data")
-    
-    try:
-        # 加载数据
-        if args.file:
-            data = load_data_from_file(args.file)
-        elif args.url:
-            data = load_data_from_url(args.url)
-        else:
-            data = load_data_from_args(args.data)
-        
-        # 验证数据
-        is_valid, errors = validate_data(data)
-        if not is_valid:
-            print("数据验证失败:", file=sys.stderr)
-            for error in errors:
-                print(f"  - {error}", file=sys.stderr)
-            return ERR_INVALID_DATA
-        
-        # 生成报告
-        report = generate_report(data)
-        
-        # 输出 JSON 报告
-        if args.output:
-            # 确保输出目录存在
-            output_dir = os.path.dirname(args.output)
-            if output_dir and not os.path.exists(output_dir):
-                os.makedirs(output_dir, exist_ok=True)
-            
-            # 原子写入
-            fd, temp_path = tempfile.mkstemp(dir=output_dir or ".", suffix=".tmp")
-            try:
-                with os.fdopen(fd, "w", encoding="utf-8") as f:
-                    json.dump(report, f, ensure_ascii=False, indent=2)
-                os.replace(temp_path, args.output)
-            except Exception:
-                if os.path.exists(temp_path):
-                    os.unlink(temp_path)
-                raise
-            print(f"报告已保存到: {args.output}")
-        else:
-            print(json.dumps(report, ensure_ascii=False, indent=2))
-        
-        # 导出 CSV
-        if args.csv:
-            export_csv(report, args.csv)
-            print(f"CSV 已导出到: {args.csv}")
-        
-        return ERR_SUCCESS
-        
-    except FileNotFoundError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return ERR_FILE_NOT_FOUND
-    except ConnectionError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return ERR_URL_FAILED
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return ERR_INVALID_DATA
-    except Exception as e:
-        print(f"未预期的错误: {e}", file=sys.stderr)
-        return ERR_PARAM
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    # 测试 2
