@@ -18,6 +18,7 @@ import argparse
 import csv
 import json
 import os
+import random
 import sys
 import tempfile
 import time
@@ -88,7 +89,7 @@ def match_trigger(user_input: str) -> bool:
 def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
                          max_retries: int = MAX_RETRIES) -> str:
     """
-    从 URL 获取数据，带超时和指数退避重试
+    从 URL 获取数据，带超时、指数退避重试、随机抖动和 Retry-After 支持
     
     Args:
         url: 数据源 URL
@@ -115,12 +116,23 @@ def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
         except urllib.error.HTTPError as e:
             last_error = e
             if attempt < max_retries - 1:
-                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                # 检查 Retry-After 头
+                retry_after = e.headers.get("Retry-After")
+                if retry_after:
+                    try:
+                        delay = float(retry_after)
+                    except ValueError:
+                        # 可能是 HTTP 日期格式，使用默认退避
+                        delay = RETRY_BASE_DELAY * (2 ** attempt)
+                else:
+                    delay = RETRY_BASE_DELAY * (2 ** attempt)
+                # 添加随机抖动
+                delay += random.uniform(0, delay * 0.5)
                 time.sleep(delay)
         except urllib.error.URLError as e:
             last_error = e
             if attempt < max_retries - 1:
-                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                delay = RETRY_BASE_DELAY * (2 ** attempt) + random.uniform(0, RETRY_BASE_DELAY)
                 time.sleep(delay)
         except ValueError as e:
             # HTTP 状态码错误，不重试
@@ -137,16 +149,113 @@ def load_data_from_file(file_path: str) -> Dict[str, Any]:
 
 
 def load_data_from_url(url: str) -> Dict[str, Any]:
-    """从 URL 加载数据"""
+    """
+    从 URL 加载数据，支持 JSON/CSV/HTML 表格格式
+    
+    Args:
+        url: 数据源 URL
+    
+    Returns:
+        解析后的数据字典
+    """
     try:
         content = fetch_url_with_retry(url)
-        return json.loads(content)
-    except json.JSONDecodeError as e:
-        raise ValueError(f"URL 返回的数据不是有效的 JSON: {e}")
     except urllib.error.URLError as e:
         raise ConnectionError(f"URL 请求失败: {e}")
     except ValueError as e:
         raise ConnectionError(f"URL 请求失败: {e}")
+    
+    # 尝试解析 JSON
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError:
+        pass
+    
+    # 尝试解析 CSV
+    try:
+        import io
+        csv_reader = csv.DictReader(io.StringIO(content))
+        rows = list(csv_reader)
+        if rows:
+            # 将 CSV 行转换为竞品数据
+            competitors = []
+            for row in rows:
+                comp = {}
+                for key, value in row.items():
+                    if key and value:
+                        comp[key.strip()] = value.strip()
+                if "name" in comp:
+                    competitors.append(comp)
+            if competitors:
+                return {"competitors": competitors}
+    except Exception:
+        pass
+    
+    # 尝试解析 HTML 表格
+    try:
+        import html.parser
+        
+        class TableParser(html.parser.HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.in_table = False
+                self.in_row = False
+                self.in_cell = False
+                self.current_row = []
+                self.current_cell = ""
+                self.tables = []
+                self.current_table = []
+            
+            def handle_starttag(self, tag, attrs):
+                if tag == "table":
+                    self.in_table = True
+                    self.current_table = []
+                elif tag == "tr" and self.in_table:
+                    self.in_row = True
+                    self.current_row = []
+                elif tag in ("td", "th") and self.in_row:
+                    self.in_cell = True
+                    self.current_cell = ""
+            
+            def handle_endtag(self, tag):
+                if tag == "table" and self.in_table:
+                    self.in_table = False
+                    if self.current_table:
+                        self.tables.append(self.current_table)
+                elif tag == "tr" and self.in_row:
+                    self.in_row = False
+                    if self.current_row:
+                        self.current_table.append(self.current_row)
+                elif tag in ("td", "th") and self.in_cell:
+                    self.in_cell = False
+                    self.current_row.append(self.current_cell.strip())
+            
+            def handle_data(self, data):
+                if self.in_cell:
+                    self.current_cell += data
+        
+        parser = TableParser()
+        parser.feed(content)
+        
+        if parser.tables:
+            # 使用第一个表格
+            table = parser.tables[0]
+            if len(table) > 1:
+                headers = table[0]
+                competitors = []
+                for row in table[1:]:
+                    comp = {}
+                    for i, header in enumerate(headers):
+                        if i < len(row) and header:
+                            comp[header.strip()] = row[i].strip()
+                    if "name" in comp:
+                        competitors.append(comp)
+                if competitors:
+                    return {"competitors": competitors}
+    except Exception:
+        pass
+    
+    raise ValueError("URL 返回的数据格式不支持，仅支持 JSON、CSV 或 HTML 表格")
 
 
 def load_data_from_args(data_str: str) -> Dict[str, Any]:
@@ -431,93 +540,3 @@ def generate_report(data: Dict[str, Any]) -> Dict[str, Any]:
     
     # 统一使用 UTC 时间
     now_utc = datetime.now(timezone.utc)
-    report = {
-        "report_id": f"CA-{now_utc.strftime('%Y%m%d%H%M%S')}",
-        "generated_at": now_utc.isoformat(),
-        "timezone": "UTC",
-        "competitors_analyzed": len(findings),
-        "dimensions_analyzed": ANALYSIS_DIMENSIONS,
-        "findings": findings,
-        "strategies": strategies,
-        "risks": risks,
-        "data_quality": data_quality
-    }
-    
-    return report
-
-
-def export_csv(report: Dict[str, Any], output_path: str) -> None:
-    """
-    导出 CSV 报告
-    
-    Args:
-        report: 报告数据
-        output_path: 输出文件路径
-    """
-    # 确保输出目录存在
-    output_dir = os.path.dirname(output_path)
-    if output_dir and not os.path.exists(output_dir):
-        os.makedirs(output_dir, exist_ok=True)
-    
-    # 写入临时文件，然后原子替换
-    fd, temp_path = tempfile.mkstemp(dir=output_dir or ".", suffix=".tmp")
-    try:
-        with os.fdopen(fd, "w", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            
-            # 写入表头
-            writer.writerow(["竞品名称", "维度", "状态", "数据"])
-            
-            # 写入数据
-            for finding in report["findings"]:
-                name = finding["name"]
-                for dim, dim_data in finding["dimensions"].items():
-                    status = dim_data.get("status", "unknown")
-                    data = dim_data.get("data", "")
-                    if isinstance(data, (list, dict)):
-                        data = json.dumps(data, ensure_ascii=False)
-                    writer.writerow([name, dim, status, data])
-            
-            # 写入策略
-            writer.writerow([])
-            writer.writerow(["策略建议"])
-            for strategy in report["strategies"]:
-                writer.writerow([strategy["type"], strategy["description"], strategy["suggestion"]])
-            
-            # 写入风险
-            writer.writerow([])
-            writer.writerow(["风险提示"])
-            for risk in report["risks"]:
-                writer.writerow([risk["level"], risk["type"], risk["description"], risk["impact"]])
-        
-        # 原子替换
-        os.replace(temp_path, output_path)
-    except Exception:
-        # 清理临时文件
-        if os.path.exists(temp_path):
-            os.unlink(temp_path)
-        raise
-
-
-def run_selftest() -> int:
-    """
-    运行自测试，验证核心功能
-    
-    Returns:
-        退出码（0 表示成功）
-    """
-    print("=== 运行自测试 ===")
-    
-    # 测试 1: 数据验证
-    print("\n[测试 1] 数据验证...")
-    valid_data = {"competitors": [{"name": "竞品A", "features": ["f1"]}]}
-    is_valid, errors = validate_data(valid_data)
-    assert is_valid, f"有效数据验证失败: {errors}"
-    print("  ✓ 有效数据验证通过")
-    
-    invalid_data = {"competitors": [{"features": ["f1"]}]}
-    is_valid, errors = validate_data(invalid_data)
-    assert not is_valid, "无效数据验证失败"
-    print("  ✓ 无效数据验证通过")
-    
-    # 测试 2
