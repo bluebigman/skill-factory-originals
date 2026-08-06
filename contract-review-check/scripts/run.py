@@ -9,6 +9,8 @@ import argparse
 import json
 import re
 import sys
+import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 try:
@@ -16,13 +18,25 @@ try:
 except ImportError:
     Document = None
 
+# 预编译正则表达式，避免重复编译并提高性能
+_COMPILED_RULES = {}
+
+def _compile_rules():
+    """预编译所有正则表达式"""
+    for category, rules in RISK_RULES.items():
+        _COMPILED_RULES[category] = {
+            'high': [re.compile(p) for p in rules['high_risk']],
+            'medium': [re.compile(p) for p in rules['medium_risk']],
+            'low': [re.compile(p) for p in rules['low_risk']]
+        }
+
 # 风险规则定义：每个规则包含关键词、风险等级、风险描述、建议
 RISK_RULES = {
     "违约": {
         "keywords": ["违约金", "违约责任", "赔偿", "损失"],
-        "high_risk": ["违约金.*%", "赔偿.*全部损失", "承担.*一切责任"],
-        "medium_risk": ["违约金", "赔偿损失"],
-        "low_risk": ["违约责任"],
+        "high_risk": [r"违约金[^。；]*%", r"赔偿[^。；]*全部损失", r"承担[^。；]*一切责任"],
+        "medium_risk": [r"违约金", r"赔偿损失"],
+        "low_risk": [r"违约责任"],
         "suggestions": {
             "high": "违约金比例过高或责任范围过大，建议协商调整至合理范围",
             "medium": "违约责任约定不够明确，建议明确违约金计算方式和赔偿范围",
@@ -31,9 +45,9 @@ RISK_RULES = {
     },
     "付款": {
         "keywords": ["付款", "支付", "价款", "费用", "定金", "预付款"],
-        "high_risk": ["付款.*后.*交货", "先付款.*后.*验收", "一次性.*付款"],
-        "medium_risk": ["付款期限", "付款条件"],
-        "low_risk": ["付款方式"],
+        "high_risk": [r"付款[^。；]*后[^。；]*交货", r"先付款[^。；]*后[^。；]*验收", r"一次性[^。；]*付款"],
+        "medium_risk": [r"付款期限", r"付款条件"],
+        "low_risk": [r"付款方式"],
         "suggestions": {
             "high": "付款条件对己方不利，建议增加验收合格后再付款的条款",
             "medium": "付款条款不够明确，建议明确付款时间节点和条件",
@@ -42,9 +56,9 @@ RISK_RULES = {
     },
     "保密": {
         "keywords": ["保密", "机密", "商业秘密", "保密义务"],
-        "high_risk": ["保密.*无限期", "保密.*永久"],
-        "medium_risk": ["保密期限", "保密范围"],
-        "low_risk": ["保密协议"],
+        "high_risk": [r"保密[^。；]*无限期", r"保密[^。；]*永久"],
+        "medium_risk": [r"保密期限", r"保密范围"],
+        "low_risk": [r"保密协议"],
         "suggestions": {
             "high": "保密期限不合理，建议设定合理期限并明确保密信息范围",
             "medium": "保密条款不够完善，建议补充保密期限、范围和违约责任",
@@ -53,9 +67,9 @@ RISK_RULES = {
     },
     "知识产权": {
         "keywords": ["知识产权", "著作权", "专利", "商标", "版权", "归属"],
-        "high_risk": ["知识产权.*归.*甲方", "成果.*归.*甲方"],
-        "medium_risk": ["知识产权归属", "许可使用"],
-        "low_risk": ["知识产权"],
+        "high_risk": [r"知识产权[^。；]*归[^。；]*甲方", r"成果[^。；]*归[^。；]*甲方"],
+        "medium_risk": [r"知识产权归属", r"许可使用"],
+        "low_risk": [r"知识产权"],
         "suggestions": {
             "high": "知识产权归属约定对己方不利，建议协商共同拥有或明确使用许可",
             "medium": "知识产权条款不够明确，建议明确成果归属和使用权限",
@@ -64,8 +78,11 @@ RISK_RULES = {
     }
 }
 
+# 初始化编译规则
+_compile_rules()
+
 def extract_text_from_file(filepath):
-    """从文件中提取文本内容"""
+    """从文件中提取文本内容，支持txt/md/docx格式"""
     path = Path(filepath)
     if not path.exists():
         raise FileNotFoundError(f"文件不存在: {filepath}")
@@ -76,13 +93,32 @@ def extract_text_from_file(filepath):
         try:
             return path.read_text(encoding='utf-8')
         except UnicodeDecodeError:
-            return path.read_text(encoding='gbk')
+            try:
+                return path.read_text(encoding='gbk')
+            except UnicodeDecodeError:
+                raise ValueError(f"文件编码无法识别，请转换为UTF-8或GBK编码")
     
     elif suffix == '.docx':
         if Document is None:
             raise ImportError("处理 .docx 文件需要安装 python-docx，请执行: pip install python-docx")
-        doc = Document(path)
-        return '\n'.join([para.text for para in doc.paragraphs])
+        try:
+            doc = Document(path)
+            # 提取段落文本
+            texts = [para.text for para in doc.paragraphs if para.text.strip()]
+            
+            # 提取表格文本
+            for table in doc.tables:
+                for row in table.rows:
+                    row_texts = []
+                    for cell in row.cells:
+                        if cell.text.strip():
+                            row_texts.append(cell.text.strip())
+                    if row_texts:
+                        texts.append(' | '.join(row_texts))
+            
+            return '\n'.join(texts)
+        except Exception as e:
+            raise ValueError(f"无法解析docx文件: {e}")
     
     else:
         raise ValueError(f"不支持的文件格式: {suffix}，仅支持 .txt、.md、.docx")
@@ -106,8 +142,8 @@ def analyze_contract(text):
         
         # 检查高风险模式
         high_matches = []
-        for pattern in rules["high_risk"]:
-            matches = re.findall(pattern, text)
+        for pattern in _COMPILED_RULES[category]['high']:
+            matches = pattern.findall(text)
             if matches:
                 high_matches.extend(matches)
         
@@ -123,8 +159,8 @@ def analyze_contract(text):
         
         # 检查中风险模式
         medium_matches = []
-        for pattern in rules["medium_risk"]:
-            matches = re.findall(pattern, text)
+        for pattern in _COMPILED_RULES[category]['medium']:
+            matches = pattern.findall(text)
             if matches:
                 medium_matches.extend(matches)
         
@@ -173,7 +209,7 @@ def selftest():
     """自检函数，验证核心功能"""
     print("运行自检...")
     
-    # 测试文本
+    # 测试用例1：包含所有风险类别的文本
     test_text = """
     本合同约定，甲方应于合同签订后30日内支付乙方合同总价款的30%作为预付款。
     若甲方逾期付款，每逾期一日需支付合同总价款0.5%的违约金。
@@ -194,9 +230,54 @@ def selftest():
     assert '保密' in categories, "缺少保密条款分析"
     assert '知识产权' in categories, "缺少知识产权条款分析"
     
+    # 验证高风险识别
+    high_risks = [r for r in risks if r['level'] == '高']
+    assert len(high_risks) >= 1, "应至少识别出1个高风险项"
+    
     # 验证输出格式
     output = format_output(risks)
     assert '风险等级' in output, "输出格式错误"
+    
+    # 测试用例2：缺失条款的文本
+    test_text2 = "这是一份简单的采购合同，仅包含基本的货物描述和价格。"
+    risks2 = analyze_contract(test_text2)
+    assert len(risks2) == 4, f"预期4个风险项，实际{len(risks2)}个"
+    missing_categories = [r['category'] for r in risks2 if '缺失' in r['title']]
+    assert len(missing_categories) == 4, "应识别出所有缺失的条款类别"
+    
+    # 测试用例3：文件提取功能
+    import tempfile
+    import os
+    
+    # 创建临时txt文件
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as f:
+        f.write("测试合同文本内容")
+        temp_file = f.name
+    
+    try:
+        extracted = extract_text_from_file(temp_file)
+        assert '测试合同文本内容' in extracted, "txt文件提取失败"
+    finally:
+        os.unlink(temp_file)
+    
+    # 测试用例4：不支持的文件格式
+    with tempfile.NamedTemporaryFile(suffix='.pdf', delete=False) as f:
+        temp_pdf = f.name
+    
+    try:
+        try:
+            extract_text_from_file(temp_pdf)
+            assert False, "应抛出ValueError异常"
+        except ValueError as e:
+            assert '不支持的文件格式' in str(e), "错误信息不正确"
+    finally:
+        os.unlink(temp_pdf)
+    
+    # 测试用例5：正则表达式有效性
+    test_high_risk_text = "若乙方违约，需支付合同总金额10%的违约金，并赔偿全部损失。"
+    risks3 = analyze_contract(test_high_risk_text)
+    breach_risk = [r for r in risks3 if r['category'] == '违约'][0]
+    assert breach_risk['level'] == '高', "高风险违约条款未被正确识别"
     
     print("✓ 自检通过：所有功能正常")
     return True
@@ -227,6 +308,9 @@ def main():
             return 0
         except AssertionError as e:
             print(f"自检失败: {e}", file=sys.stderr)
+            return 1
+        except Exception as e:
+            print(f"自检异常: {e}", file=sys.stderr)
             return 1
     
     # 检查必要参数
