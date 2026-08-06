@@ -12,9 +12,11 @@ import json
 import os
 import re
 import sys
+import tempfile
 import time
 from collections import defaultdict
 from datetime import datetime, timezone
+from pathlib import Path
 
 try:
     import openpyxl
@@ -22,6 +24,8 @@ try:
 except ImportError:
     HAS_OPENPYXL = False
 
+
+# ============ 数据加载模块 ============
 
 def parse_markdown_table(content):
     """解析 Markdown 表格，返回列表字典"""
@@ -33,19 +37,41 @@ def parse_markdown_table(content):
         cells = [c.strip() for c in line.strip('|').split('|')]
         if all(re.match(r'^[-:]+$', c) for c in cells):
             continue  # 分隔行
-        if i == 0 or not rows:
-            if not rows:
-                rows.append(cells)
-                continue
+        if not rows:
+            rows.append(cells)
+            continue
         if len(cells) == len(rows[0]):
             rows.append(cells)
-    if not rows:
+    if len(rows) < 2:
         return []
     headers = rows[0]
     data = []
     for row in rows[1:]:
         data.append(dict(zip(headers, row)))
     return data
+
+
+def parse_txt_content(content):
+    """解析 TXT 内容，支持 key: value 格式或简单表格"""
+    records = []
+    current_record = {}
+    for line in content.split('\n'):
+        line = line.strip()
+        if not line:
+            if current_record:
+                records.append(current_record)
+                current_record = {}
+            continue
+        if ':' in line:
+            key, value = line.split(':', 1)
+            current_record[key.strip()] = value.strip()
+        elif '\t' in line:
+            parts = line.split('\t')
+            if len(parts) >= 2:
+                current_record[parts[0].strip()] = parts[1].strip()
+    if current_record:
+        records.append(current_record)
+    return records
 
 
 def load_data(filepath):
@@ -56,7 +82,7 @@ def load_data(filepath):
     ext = os.path.splitext(filepath)[1].lower()
     filename = os.path.basename(filepath)
     # 从文件名提取竞品名（第一个下划线前）
-    comp_name = filename.split('_')[0] if '_' in filename else '未命名竞品'
+    comp_name = filename.split('_')[0] if '_' in filename else Path(filename).stem
     
     records = []
     data_type = 'unknown'
@@ -66,312 +92,442 @@ def load_data(filepath):
             with open(filepath, 'r', encoding='utf-8-sig') as f:
                 reader = csv.DictReader(f)
                 records = list(reader)
+            data_type = 'csv'
         elif ext == '.json':
             with open(filepath, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 if isinstance(data, list):
                     records = data
                 elif isinstance(data, dict):
-                    records = data.get('records', [data])
-        elif ext == '.md':
+                    records = data.get('records', data.get('data', []))
+                    if isinstance(records, dict):
+                        records = [records]
+            data_type = 'json'
+        elif ext == '.md' or ext == '.markdown':
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
-                records = parse_markdown_table(content)
+            records = parse_markdown_table(content)
+            data_type = 'markdown'
         elif ext == '.txt':
             with open(filepath, 'r', encoding='utf-8') as f:
                 content = f.read()
-                # 尝试解析简单格式：每行 "字段: 值"
-                for line in content.split('\n'):
-                    line = line.strip()
-                    if ':' in line:
-                        k, v = line.split(':', 1)
-                        records.append({k.strip(): v.strip()})
+            records = parse_txt_content(content)
+            data_type = 'txt'
         elif ext == '.xlsx' and HAS_OPENPYXL:
             wb = openpyxl.load_workbook(filepath, read_only=True)
             ws = wb.active
-            headers = [c.value for c in next(ws.iter_rows(min_row=1, max_row=1))]
+            headers = [cell.value for cell in next(ws.iter_rows(min_row=1, max_row=1))]
             for row in ws.iter_rows(min_row=2, values_only=True):
                 records.append(dict(zip(headers, row)))
             wb.close()
+            data_type = 'xlsx'
         else:
             raise ValueError(f"不支持的文件格式: {ext}")
     except Exception as e:
-        raise RuntimeError(f"解析文件 {filepath} 失败: {e}")
+        raise ValueError(f"解析文件失败: {e}")
     
-    # 识别数据类型
-    if records:
-        all_keys = set().union(*[set(r.keys()) for r in records])
-        if any(k in ['功能', 'feature', 'features'] for k in all_keys):
-            data_type = 'feature'
-        elif any(k in ['价格', '定价', 'price', 'pricing'] for k in all_keys):
-            data_type = 'pricing'
-        elif any(k in ['评价', '评论', 'review', 'rating'] for k in all_keys):
-            data_type = 'review'
-        else:
-            data_type = 'general'
+    if not records:
+        raise ValueError("文件中没有有效数据")
     
     return comp_name, data_type, records
 
 
-def analyze_features(records):
-    """功能对比分析"""
-    features = defaultdict(list)
-    for rec in records:
-        for k, v in rec.items():
-            if v and str(v).strip() not in ['', '无', 'N/A', 'NA']:
-                features[k].append(str(v).strip())
-    return dict(features)
+# ============ 字段提取模块 ============
+
+def extract_features(record):
+    """从记录中提取功能列表"""
+    features = []
+    for key in ['features', '功能', 'feature', 'capabilities', '能力']:
+        if key in record:
+            value = record[key]
+            if isinstance(value, list):
+                features.extend([str(v).strip() for v in value if str(v).strip()])
+            elif isinstance(value, str):
+                # 支持逗号、分号、换行分隔
+                parts = re.split(r'[,;，；\n]', value)
+                features.extend([p.strip() for p in parts if p.strip()])
+            break
+    return features
 
 
-def analyze_pricing(records):
-    """定价分析"""
-    prices = []
-    for rec in records:
-        for k, v in rec.items():
-            if any(word in k.lower() for word in ['价格', '定价', 'price', 'pricing', '费用', 'cost']):
-                try:
-                    # 提取数字
-                    nums = re.findall(r'[\d.]+', str(v))
-                    if nums:
-                        prices.append(float(nums[0]))
-                except (ValueError, IndexError):
-                    continue
-    if not prices:
-        return {'count': 0, 'min': 0, 'max': 0, 'avg': 0, 'tier': '未知'}
+def extract_pricing(record):
+    """从记录中提取定价信息"""
+    pricing = {}
+    for key in ['price', 'pricing', '价格', '定价', 'cost', '费用']:
+        if key in record:
+            value = record[key]
+            if isinstance(value, dict):
+                pricing = value
+            elif isinstance(value, (int, float)):
+                pricing = {'base': value}
+            elif isinstance(value, str):
+                # 尝试解析价格字符串
+                price_match = re.search(r'[\d.]+', value)
+                if price_match:
+                    pricing = {'base': float(price_match.group())}
+                else:
+                    pricing = {'description': value}
+            break
+    return pricing
+
+
+def extract_reviews(record):
+    """从记录中提取评价信息"""
+    reviews = {}
+    for key in ['reviews', 'rating', '评价', '评分', 'score', 'rating_score']:
+        if key in record:
+            value = record[key]
+            if isinstance(value, (int, float)):
+                reviews = {'rating': float(value)}
+            elif isinstance(value, str):
+                rating_match = re.search(r'(\d+(?:\.\d+)?)\s*[/分]', value)
+                if rating_match:
+                    reviews = {'rating': float(rating_match.group(1))}
+                else:
+                    reviews = {'description': value}
+            elif isinstance(value, dict):
+                reviews = value
+            break
+    return reviews
+
+
+def extract_all_fields(record):
+    """提取所有关键字段，返回 (features, pricing, reviews, confidence)"""
+    features = extract_features(record)
+    pricing = extract_pricing(record)
+    reviews = extract_reviews(record)
     
-    avg = sum(prices) / len(prices)
-    if avg < 50:
-        tier = '低价位'
-    elif avg < 200:
-        tier = '中价位'
-    else:
-        tier = '高价位'
+    # 计算置信度
+    confidence = 0.5
+    if features:
+        confidence += 0.2
+    if pricing:
+        confidence += 0.2
+    if reviews:
+        confidence += 0.1
     
-    return {
-        'count': len(prices),
-        'min': min(prices),
-        'max': max(prices),
-        'avg': round(avg, 2),
-        'tier': tier
+    return features, pricing, reviews, min(confidence, 1.0)
+
+
+# ============ 分析模块 ============
+
+def analyze_competitors(competitors_data):
+    """分析竞品数据，返回对比报告"""
+    report = {
+        'generated_at': datetime.now(timezone.utc).isoformat(),
+        'competitors': [],
+        'comparison': {
+            'features': {},
+            'pricing': {},
+            'reviews': {}
+        },
+        'differentiation': [],
+        'low_confidence_fields': []
     }
-
-
-def analyze_reviews(records):
-    """评价情感分析（简单关键词法）"""
-    positive_words = ['好', '优秀', '赞', '推荐', '满意', '好用', '强大', '稳定', '快', '方便']
-    negative_words = ['差', '慢', '卡', '贵', '难用', '崩溃', 'bug', '问题', '失望', '糟糕']
     
-    pos_count = 0
-    neg_count = 0
-    total = 0
-    keywords = defaultdict(int)
+    all_features = set()
     
-    for rec in records:
-        for k, v in rec.items():
-            if any(word in k.lower() for word in ['评价', '评论', 'review', 'rating', 'feedback']):
-                text = str(v).lower()
-                total += 1
-                for w in positive_words:
-                    if w in text:
-                        pos_count += 1
-                        keywords[w] += 1
-                for w in negative_words:
-                    if w in text:
-                        neg_count += 1
-                        keywords[w] += 1
+    for comp_name, records in competitors_data.items():
+        comp_info = {
+            'name': comp_name,
+            'record_count': len(records),
+            'features': [],
+            'pricing': {},
+            'reviews': {},
+            'confidence': 0.0
+        }
+        
+        # 聚合所有记录
+        all_comp_features = set()
+        all_pricing = {}
+        all_reviews = []
+        confidences = []
+        
+        for record in records:
+            features, pricing, reviews, confidence = extract_all_fields(record)
+            all_comp_features.update(features)
+            if pricing:
+                all_pricing.update(pricing)
+            if reviews:
+                all_reviews.append(reviews)
+            confidences.append(confidence)
+        
+        comp_info['features'] = sorted(list(all_comp_features))
+        comp_info['pricing'] = all_pricing
+        if all_reviews:
+            # 计算平均评分
+            ratings = [r.get('rating', 0) for r in all_reviews if 'rating' in r]
+            if ratings:
+                comp_info['reviews'] = {'avg_rating': sum(ratings) / len(ratings), 'count': len(ratings)}
+            else:
+                comp_info['reviews'] = all_reviews[0]
+        
+        comp_info['confidence'] = sum(confidences) / len(confidences) if confidences else 0.0
+        
+        if comp_info['confidence'] < 0.6:
+            report['low_confidence_fields'].append({
+                'competitor': comp_name,
+                'confidence': comp_info['confidence'],
+                'reason': '字段提取置信度低于阈值'
+            })
+        
+        all_features.update(comp_info['features'])
+        report['competitors'].append(comp_info)
     
-    if total == 0:
-        return {'total': 0, 'positive': 0, 'negative': 0, 'sentiment': '无数据', 'keywords': {}}
-    
-    sentiment = '正面' if pos_count > neg_count else ('负面' if neg_count > pos_count else '中性')
-    return {
-        'total': total,
-        'positive': pos_count,
-        'negative': neg_count,
-        'sentiment': sentiment,
-        'keywords': dict(sorted(keywords.items(), key=lambda x: x[1], reverse=True)[:5])
-    }
-
-
-def generate_report(competitors):
-    """生成对比报告"""
-    lines = []
-    lines.append("# 竞品对比分析报告\n")
-    lines.append(f"生成时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}\n")
-    lines.append(f"分析竞品数: {len(competitors)}\n")
-    
-    # 功能对比
-    lines.append("\n## 功能对比矩阵\n")
-    lines.append("| 竞品 | 功能维度 | 功能项数 |")
-    lines.append("|------|----------|----------|")
-    for comp in competitors:
-        if comp['type'] == 'feature':
-            feat = analyze_features(comp['records'])
-            lines.append(f"| {comp['name']} | {', '.join(list(feat.keys())[:3])} | {sum(len(v) for v in feat.values())} |")
+    # 功能对比矩阵
+    for feature in sorted(all_features):
+        report['comparison']['features'][feature] = {
+            comp['name']: (feature in comp['features']) for comp in report['competitors']
+        }
     
     # 定价对比
-    lines.append("\n## 定价分析\n")
-    lines.append("| 竞品 | 样本数 | 最低价 | 最高价 | 均价 | 档位 |")
-    lines.append("|------|--------|--------|--------|------|------|")
-    for comp in competitors:
-        if comp['type'] == 'pricing':
-            p = analyze_pricing(comp['records'])
-            lines.append(f"| {comp['name']} | {p['count']} | {p['min']} | {p['max']} | {p['avg']} | {p['tier']} |")
+    for comp in report['competitors']:
+        report['comparison']['pricing'][comp['name']] = comp['pricing']
     
     # 评价对比
-    lines.append("\n## 用户评价分析\n")
-    lines.append("| 竞品 | 样本数 | 正面 | 负面 | 情感倾向 | 高频词 |")
-    lines.append("|------|--------|------|------|----------|--------|")
-    for comp in competitors:
-        if comp['type'] == 'review':
-            r = analyze_reviews(comp['records'])
-            kw = ', '.join(r['keywords'].keys()) if r['keywords'] else '无'
-            lines.append(f"| {comp['name']} | {r['total']} | {r['positive']} | {r['negative']} | {r['sentiment']} | {kw} |")
+    for comp in report['competitors']:
+        report['comparison']['reviews'][comp['name']] = comp['reviews']
     
-    # 差异化建议
-    lines.append("\n## 差异化建议\n")
-    types = set(c['type'] for c in competitors)
-    if 'feature' in types:
-        lines.append("- 功能维度：建议对比各竞品功能覆盖度，找出缺失项作为机会点")
-    if 'pricing' in types:
-        lines.append("- 定价维度：分析价格区间分布，评估自身定价的竞争力")
-    if 'review' in types:
-        lines.append("- 评价维度：关注负面评价高频词，针对性改进产品体验")
-    if not types:
-        lines.append("- 数据不足：请提供包含功能、定价或评价字段的竞品数据")
+    # 差异化分析
+    if len(report['competitors']) >= 2:
+        # 找出独特功能
+        for feature in sorted(all_features):
+            has_feature = [comp['name'] for comp in report['competitors'] if feature in comp['features']]
+            if len(has_feature) == 1:
+                report['differentiation'].append({
+                    'type': 'unique_feature',
+                    'feature': feature,
+                    'competitor': has_feature[0],
+                    'suggestion': f"{has_feature[0]} 拥有独特功能 '{feature}'，可作为差异化卖点"
+                })
+        
+        # 定价对比建议
+        prices = {}
+        for comp in report['competitors']:
+            if 'base' in comp['pricing']:
+                prices[comp['name']] = comp['pricing']['base']
+        
+        if len(prices) >= 2:
+            min_price_comp = min(prices, key=prices.get)
+            max_price_comp = max(prices, key=prices.get)
+            if prices[min_price_comp] < prices[max_price_comp]:
+                report['differentiation'].append({
+                    'type': 'pricing',
+                    'competitor': min_price_comp,
+                    'suggestion': f"{min_price_comp} 定价最低 ({prices[min_price_comp]})，可主打性价比"
+                })
+                report['differentiation'].append({
+                    'type': 'pricing',
+                    'competitor': max_price_comp,
+                    'suggestion': f"{max_price_comp} 定价最高 ({prices[max_price_comp]})，需证明高端价值"
+                })
     
-    return '\n'.join(lines)
+    return report
 
 
-def process_directory(input_dir, output_file):
-    """处理目录下所有竞品数据文件"""
-    if not os.path.isdir(input_dir):
-        raise NotADirectoryError(f"目录不存在: {input_dir}")
+# ============ 输出模块 ============
+
+def atomic_write(filepath, content):
+    """原子化写入文件"""
+    dirpath = os.path.dirname(filepath)
+    if dirpath and not os.path.exists(dirpath):
+        os.makedirs(dirpath, exist_ok=True)
     
-    competitors = []
-    for fname in os.listdir(input_dir):
-        if fname.startswith('.'):
-            continue
-        fpath = os.path.join(input_dir, fname)
-        if os.path.isfile(fpath):
-            try:
-                name, dtype, records = load_data(fpath)
-                if records:
-                    competitors.append({'name': name, 'type': dtype, 'records': records})
-                    print(f"已加载: {name} ({dtype}) - {len(records)}条记录")
-            except Exception as e:
-                print(f"跳过 {fname}: {e}", file=sys.stderr)
-    
-    if not competitors:
-        raise ValueError("未找到有效的竞品数据文件")
-    
-    report = generate_report(competitors)
-    
-    if output_file:
-        with open(output_file, 'w', encoding='utf-8') as f:
-            f.write(report)
-        print(f"报告已保存: {output_file}")
-    else:
-        print(report)
-    
-    return len(competitors)
+    fd, temp_path = tempfile.mkstemp(dir=dirpath or '.', suffix='.tmp')
+    try:
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(content)
+        os.replace(temp_path, filepath)
+    except Exception:
+        os.unlink(temp_path)
+        raise
 
 
-def selftest():
-    """自检函数：验证核心功能"""
+def print_summary(report):
+    """打印控制台摘要"""
+    print("\n" + "=" * 60)
+    print("竞品分析报告摘要")
+    print("=" * 60)
+    print(f"生成时间: {report['generated_at']}")
+    print(f"竞品数量: {len(report['competitors'])}")
+    print(f"差异化建议: {len(report['differentiation'])} 条")
+    print(f"低置信度字段: {len(report['low_confidence_fields'])} 个")
+    print("\n--- 竞品概览 ---")
+    for comp in report['competitors']:
+        print(f"  {comp['name']}: {comp['record_count']} 条记录, 置信度 {comp['confidence']:.2f}")
+        if comp['features']:
+            print(f"    功能 ({len(comp['features'])}): {', '.join(comp['features'][:5])}{'...' if len(comp['features']) > 5 else ''}")
+        if comp['pricing']:
+            print(f"    定价: {comp['pricing']}")
+        if comp['reviews']:
+            print(f"    评价: {comp['reviews']}")
+    
+    if report['differentiation']:
+        print("\n--- 差异化建议 ---")
+        for diff in report['differentiation']:
+            print(f"  [{diff['type']}] {diff['suggestion']}")
+    
+    if report['low_confidence_fields']:
+        print("\n--- 低置信度警告 ---")
+        for low in report['low_confidence_fields']:
+            print(f"  {low['competitor']}: {low['reason']}")
+    
+    print("=" * 60)
+
+
+# ============ 自检模块 ============
+
+def run_selftest():
+    """运行自检，验证核心功能"""
     print("运行自检...")
     
-    # 测试核心链路：parse_markdown_table（Mock 表格回放）
-    mock_table = """| 竞品 | 优势 | 价格 |
-|---|---:|---:|
-| 产品A | 功能全 | 99 |
-| 产品B | 便宜 | 59 |"""
-    parsed = parse_markdown_table(mock_table)
-    assert len(parsed) >= 2, "Mock 表格应解析出至少2个数据行"
-    assert any("产品A" in str(row) for row in parsed), "应包含产品A"
-    print("  [OK] parse_markdown_table Mock 解析通过")
-
+    # 创建临时测试文件
+    test_dir = tempfile.mkdtemp(prefix='competitor_selftest_')
     
-    # 创建临时测试数据
-    import tempfile
-    with tempfile.TemporaryDirectory() as tmpdir:
-        # 测试数据1：功能
-        feat_data = [
-            {'功能': '报表', '描述': '支持导出'},
-            {'功能': '图表', '描述': '支持柱状图'},
-            {'功能': '协作', '描述': '实时同步'}
-        ]
-        f1 = os.path.join(tmpdir, '产品A_功能.json')
-        with open(f1, 'w') as f:
-            json.dump(feat_data, f)
-        
-        # 测试数据2：定价
-        price_data = [
-            {'价格': '99元/月'},
-            {'价格': '199元/月'},
-            {'价格': '299元/月'}
-        ]
-        f2 = os.path.join(tmpdir, '产品B_定价.json')
-        with open(f2, 'w') as f:
-            json.dump(price_data, f)
-        
-        # 测试数据3：评价
-        review_data = [
-            {'评价': '很好用，推荐！'},
-            {'评价': '价格有点贵，但功能强大'},
-            {'评价': '界面卡顿，体验一般'}
-        ]
-        f3 = os.path.join(tmpdir, '产品C_评价.json')
-        with open(f3, 'w') as f:
-            json.dump(review_data, f)
-        
-        # 执行分析
-        count = process_directory(tmpdir, os.path.join(tmpdir, 'report.md'))
-        assert count == 3, f"预期3个竞品，实际{count}"
-        
-        # 验证报告内容
-        report_path = os.path.join(tmpdir, 'report.md')
-        with open(report_path, 'r') as f:
-            content = f.read()
-        assert '竞品对比分析报告' in content
-        assert '产品A' in content
-        assert '产品B' in content
-        assert '产品C' in content
-        
-        print("自检通过！")
-        return True
+    # 测试数据
+    test_data = [
+        {
+            'name': 'TestProductA',
+            'features': '搜索,推荐,分析',
+            'price': '99元/月',
+            'rating': '4.5分'
+        },
+        {
+            'name': 'TestProductB',
+            'features': '搜索,推荐,报告',
+            'price': '199元/月',
+            'rating': '4.2分'
+        }
+    ]
+    
+    # 写入测试文件
+    csv_path = os.path.join(test_dir, 'TestProductA_data.csv')
+    with open(csv_path, 'w', encoding='utf-8') as f:
+        writer = csv.DictWriter(f, fieldnames=['name', 'features', 'price', 'rating'])
+        writer.writeheader()
+        writer.writerow(test_data[0])
+    
+    json_path = os.path.join(test_dir, 'TestProductB_data.json')
+    with open(json_path, 'w', encoding='utf-8') as f:
+        json.dump({'records': [test_data[1]]}, f, ensure_ascii=False)
+    
+    # 测试加载
+    comp_name, data_type, records = load_data(csv_path)
+    assert comp_name == 'TestProductA', f"竞品名提取失败: {comp_name}"
+    assert data_type == 'csv', f"数据类型识别失败: {data_type}"
+    assert len(records) == 1, f"记录数错误: {len(records)}"
+    
+    comp_name2, data_type2, records2 = load_data(json_path)
+    assert comp_name2 == 'TestProductB', f"竞品名提取失败: {comp_name2}"
+    assert data_type2 == 'json', f"数据类型识别失败: {data_type2}"
+    assert len(records2) == 1, f"记录数错误: {len(records2)}"
+    
+    # 测试字段提取
+    features, pricing, reviews, confidence = extract_all_fields(test_data[0])
+    assert '搜索' in features, f"功能提取失败: {features}"
+    assert 'base' in pricing, f"定价提取失败: {pricing}"
+    assert 'rating' in reviews, f"评价提取失败: {reviews}"
+    assert confidence > 0.5, f"置信度计算错误: {confidence}"
+    
+    # 测试分析
+    competitors_data = {
+        'TestProductA': records,
+        'TestProductB': records2
+    }
+    report = analyze_competitors(competitors_data)
+    assert len(report['competitors']) == 2, f"竞品数量错误: {len(report['competitors'])}"
+    assert len(report['differentiation']) > 0, "差异化建议为空"
+    
+    # 测试输出
+    output_path = os.path.join(test_dir, 'test_output.json')
+    atomic_write(output_path, json.dumps(report, ensure_ascii=False, indent=2))
+    assert os.path.exists(output_path), "输出文件未创建"
+    
+    # 清理
+    import shutil
+    shutil.rmtree(test_dir)
+    
+    print("自检通过 ✓")
+    return 0
 
+
+# ============ 主函数 ============
 
 def main():
     parser = argparse.ArgumentParser(
-        description='竞品透视：多维对标与差异洞察工具',
-        formatter_class=argparse.RawDescriptionHelpFormatter
+        description='竞品透视 · 多维对标与差异洞察工具',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  python run.py --input compA.csv compB.json
+  python run.py --input compA.csv --output-dir ./results --prefix my_analysis
+  python run.py --selftest
+        """
     )
-    parser.add_argument('--input', '-i', help='输入目录（包含竞品数据文件）')
-    parser.add_argument('--output', '-o', help='输出报告文件路径（Markdown格式）')
-    parser.add_argument('--selftest', action='store_true', help='运行自检')
+    parser.add_argument('--input', '-i', nargs='+', required=False,
+                       help='输入文件路径，可多个，空格分隔')
+    parser.add_argument('--output-dir', '-o', default='./output',
+                       help='输出目录 (默认: ./output)')
+    parser.add_argument('--prefix', '-p', default='competitor_analysis',
+                       help='输出文件名前缀 (默认: competitor_analysis)')
+    parser.add_argument('--selftest', action='store_true',
+                       help='运行自检并退出')
     
     args = parser.parse_args()
     
     if args.selftest:
-        try:
-            selftest()
-            sys.exit(0)
-        except Exception as e:
-            print(f"自检失败: {e}", file=sys.stderr)
-            sys.exit(1)
+        sys.exit(run_selftest())
     
     if not args.input:
-        parser.error("请指定 --input 参数（竞品数据目录）")
+        parser.error("必须提供至少一个输入文件，或使用 --selftest 运行自检")
+    
+    # 加载所有竞品数据
+    competitors_data = {}
+    errors = []
+    
+    for filepath in args.input:
+        try:
+            comp_name, data_type, records = load_data(filepath)
+            competitors_data[comp_name] = records
+            print(f"✓ 加载 {filepath}: {comp_name} ({len(records)} 条记录, {data_type})")
+        except Exception as e:
+            errors.append({'file': filepath, 'error': str(e)})
+            print(f"✗ 加载失败 {filepath}: {e}")
+    
+    if not competitors_data:
+        print("错误: 没有成功加载任何竞品数据")
+        sys.exit(2)
+    
+    # 执行分析
+    try:
+        report = analyze_competitors(competitors_data)
+    except Exception as e:
+        print(f"分析失败: {e}")
+        sys.exit(4)
+    
+    # 输出报告
+    timestamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')
+    output_filename = f"{args.prefix}_{timestamp}.json"
+    output_path = os.path.join(args.output_dir, output_filename)
     
     try:
-        count = process_directory(args.input, args.output)
-        print(f"分析完成，共处理 {count} 个竞品")
-        sys.exit(0)
+        atomic_write(output_path, json.dumps(report, ensure_ascii=False, indent=2))
+        print(f"\n✓ 报告已保存: {output_path}")
     except Exception as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
+        print(f"写入失败: {e}")
+        sys.exit(5)
+    
+    # 打印摘要
+    print_summary(report)
+    
+    # 输出错误明细
+    if errors:
+        print(f"\n警告: {len(errors)} 个文件加载失败")
+        for err in errors:
+            print(f"  {err['file']}: {err['error']}")
+    
+    sys.exit(0)
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     main()
