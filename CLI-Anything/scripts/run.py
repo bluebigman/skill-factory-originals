@@ -64,18 +64,18 @@ def run_selftest(spec_path: str) -> bool:
         # spec 缺失时用内置默认（防外部依赖）
         spec = {
             "triggers": [
-                {"pattern": "容器", "command": "docker ps"},
-                {"pattern": "安装", "command": "sudo apt install {pkg}"},
-                {"pattern": "执行权限", "command": "chmod +x {file}"},
-                {"pattern": "端口", "command": "nc -zv {ip} {port}"},
-                {"pattern": "文件", "command": "ls -la"},
-                {"pattern": "进程", "command": "ps aux"},
+                {"pattern": r"容器", "command": "docker ps"},
+                {"pattern": r"安装", "command": "sudo apt install {pkg}"},
+                {"pattern": r"执行权限", "command": "chmod +x {file}"},
+                {"pattern": r"端口", "command": "nc -zv {ip} {port}"},
+                {"pattern": r"文件", "command": "ls -la"},
+                {"pattern": r"进程", "command": "ps aux"},
             ],
             "params": [
-                {"name": "pkg", "pattern": "(?:安装|install)\s*([a-z0-9.+-]+)"},
-                {"name": "file", "pattern": "([A-Za-z0-9._-]+\.sh)"},
-                {"name": "ip", "pattern": "((?:\d{1,3}\.){3}\d{1,3})"},
-                {"name": "port", "pattern": "(\d{1,5})\s*端口"},
+                {"name": "pkg", "pattern": r"(?:安装|install)\s*([a-z0-9.+-]+)"},
+                {"name": "file", "pattern": r"([A-Za-z0-9._-]+\.sh)"},
+                {"name": "ip", "pattern": r"((?:\d{1,3}\.){3}\d{1,3})"},
+                {"name": "port", "pattern": r"(\d{1,5})\s*端口"},
             ],
         }
     test_cases = [
