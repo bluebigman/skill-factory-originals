@@ -14,6 +14,7 @@ import re
 import sys
 import tempfile
 import time
+import logging
 from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
@@ -24,6 +25,18 @@ try:
 except ImportError:
     HAS_OPENPYXL = False
 
+try:
+    import chardet
+    HAS_CHARDET = True
+except ImportError:
+    HAS_CHARDET = False
+
+# 配置日志
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# 文件大小限制（10MB）
+MAX_FILE_SIZE = 10 * 1024 * 1024
 
 # ============ 数据加载模块 ============
 
@@ -31,6 +44,7 @@ def parse_markdown_table(content):
     """解析 Markdown 表格，返回列表字典"""
     rows = []
     lines = [l.strip() for l in content.split('\n') if l.strip()]
+    header_count = None
     for i, line in enumerate(lines):
         if '|' not in line:
             continue
@@ -39,9 +53,12 @@ def parse_markdown_table(content):
             continue  # 分隔行
         if not rows:
             rows.append(cells)
+            header_count = len(cells)
             continue
-        if len(cells) == len(rows[0]):
-            rows.append(cells)
+        if len(cells) != header_count:
+            logger.warning(f"Markdown表格第{i+1}行列数({len(cells)})与表头({header_count})不一致，跳过该行")
+            continue
+        rows.append(cells)
     if len(rows) < 2:
         return []
     headers = rows[0]
@@ -74,10 +91,31 @@ def parse_txt_content(content):
     return records
 
 
+def detect_encoding(filepath):
+    """检测文件编码"""
+    if HAS_CHARDET:
+        with open(filepath, 'rb') as f:
+            raw_data = f.read(10000)
+        result = chardet.detect(raw_data)
+        return result['encoding'] or 'utf-8'
+    return 'utf-8'
+
+
+def check_file_size(filepath):
+    """检查文件大小"""
+    size = os.path.getsize(filepath)
+    if size > MAX_FILE_SIZE:
+        raise ValueError(f"文件大小({size}字节)超过限制({MAX_FILE_SIZE}字节)，请使用流式处理或分割文件")
+    return size
+
+
 def load_data(filepath):
     """加载竞品数据文件，返回 (竞品名, 数据类型, 记录列表)"""
     if not os.path.exists(filepath):
         raise FileNotFoundError(f"文件不存在: {filepath}")
+    
+    # 检查文件大小
+    check_file_size(filepath)
     
     ext = os.path.splitext(filepath)[1].lower()
     filename = os.path.basename(filepath)
@@ -89,12 +127,14 @@ def load_data(filepath):
     
     try:
         if ext == '.csv':
-            with open(filepath, 'r', encoding='utf-8-sig') as f:
+            encoding = detect_encoding(filepath)
+            with open(filepath, 'r', encoding=encoding) as f:
                 reader = csv.DictReader(f)
                 records = list(reader)
             data_type = 'csv'
         elif ext == '.json':
-            with open(filepath, 'r', encoding='utf-8') as f:
+            encoding = detect_encoding(filepath)
+            with open(filepath, 'r', encoding=encoding) as f:
                 data = json.load(f)
                 if isinstance(data, list):
                     records = data
@@ -104,12 +144,14 @@ def load_data(filepath):
                         records = [records]
             data_type = 'json'
         elif ext == '.md' or ext == '.markdown':
-            with open(filepath, 'r', encoding='utf-8') as f:
+            encoding = detect_encoding(filepath)
+            with open(filepath, 'r', encoding=encoding) as f:
                 content = f.read()
             records = parse_markdown_table(content)
             data_type = 'markdown'
         elif ext == '.txt':
-            with open(filepath, 'r', encoding='utf-8') as f:
+            encoding = detect_encoding(filepath)
+            with open(filepath, 'r', encoding=encoding) as f:
                 content = f.read()
             records = parse_txt_content(content)
             data_type = 'txt'
@@ -211,6 +253,91 @@ def extract_all_fields(record):
 
 # ============ 分析模块 ============
 
+def generate_differentiation_suggestions(report):
+    """生成差异化建议"""
+    suggestions = []
+    competitors = report['competitors']
+    
+    if len(competitors) < 2:
+        return suggestions
+    
+    # 功能差异化建议
+    all_features = set()
+    for comp in competitors:
+        all_features.update(comp['features'])
+    
+    for feature in sorted(all_features):
+        has_feature = [comp['name'] for comp in competitors if feature in comp['features']]
+        if len(has_feature) == 1:
+            suggestions.append({
+                'type': 'unique_feature',
+                'feature': feature,
+                'competitor': has_feature[0],
+                'suggestion': f"{has_feature[0]} 拥有独特功能 '{feature}'，可作为差异化卖点"
+            })
+        elif len(has_feature) == len(competitors):
+            suggestions.append({
+                'type': 'common_feature',
+                'feature': feature,
+                'competitor': None,
+                'suggestion': f"所有竞品都支持 '{feature}'，属于基础功能，需考虑差异化升级"
+            })
+    
+    # 定价差异化建议
+    prices = {}
+    for comp in competitors:
+        if 'base' in comp['pricing']:
+            prices[comp['name']] = comp['pricing']['base']
+    
+    if len(prices) >= 2:
+        min_price_comp = min(prices, key=prices.get)
+        max_price_comp = max(prices, key=prices.get)
+        if prices[min_price_comp] < prices[max_price_comp]:
+            suggestions.append({
+                'type': 'pricing',
+                'competitor': min_price_comp,
+                'suggestion': f"{min_price_comp} 定价最低 ({prices[min_price_comp]})，可主打性价比"
+            })
+            suggestions.append({
+                'type': 'pricing',
+                'competitor': max_price_comp,
+                'suggestion': f"{max_price_comp} 定价最高 ({prices[max_price_comp]})，需证明高端价值"
+            })
+    
+    # 评价差异化建议
+    ratings = {}
+    for comp in competitors:
+        if 'avg_rating' in comp['reviews']:
+            ratings[comp['name']] = comp['reviews']['avg_rating']
+    
+    if len(ratings) >= 2:
+        max_rating_comp = max(ratings, key=ratings.get)
+        min_rating_comp = min(ratings, key=ratings.get)
+        if ratings[max_rating_comp] > ratings[min_rating_comp]:
+            suggestions.append({
+                'type': 'rating',
+                'competitor': max_rating_comp,
+                'suggestion': f"{max_rating_comp} 评分最高 ({ratings[max_rating_comp]})，可强调用户口碑"
+            })
+            suggestions.append({
+                'type': 'rating',
+                'competitor': min_rating_comp,
+                'suggestion': f"{min_rating_comp} 评分较低 ({ratings[min_rating_comp]})，需关注用户体验改进"
+            })
+    
+    # 综合建议
+    if len(competitors) >= 2:
+        # 找出功能最全的竞品
+        max_features_comp = max(competitors, key=lambda c: len(c['features']))
+        suggestions.append({
+            'type': 'comprehensive',
+            'competitor': max_features_comp['name'],
+            'suggestion': f"{max_features_comp['name']} 功能最全面 ({len(max_features_comp['features'])}项)，可作为功能对标基准"
+        })
+    
+    return suggestions
+
+
 def analyze_competitors(competitors_data):
     """分析竞品数据，返回对比报告"""
     report = {
@@ -222,7 +349,8 @@ def analyze_competitors(competitors_data):
             'reviews': {}
         },
         'differentiation': [],
-        'low_confidence_fields': []
+        'low_confidence_fields': [],
+        'data_completeness': {}
     }
     
     all_features = set()
@@ -288,39 +416,19 @@ def analyze_competitors(competitors_data):
     for comp in report['competitors']:
         report['comparison']['reviews'][comp['name']] = comp['reviews']
     
-    # 差异化分析
-    if len(report['competitors']) >= 2:
-        # 找出独特功能
-        for feature in sorted(all_features):
-            has_feature = [comp['name'] for comp in report['competitors'] if feature in comp['features']]
-            if len(has_feature) == 1:
-                report['differentiation'].append({
-                    'type': 'unique_feature',
-                    'feature': feature,
-                    'competitor': has_feature[0],
-                    'suggestion': f"{has_feature[0]} 拥有独特功能 '{feature}'，可作为差异化卖点"
-                })
-        
-        # 定价对比建议
-        prices = {}
-        for comp in report['competitors']:
-            if 'base' in comp['pricing']:
-                prices[comp['name']] = comp['pricing']['base']
-        
-        if len(prices) >= 2:
-            min_price_comp = min(prices, key=prices.get)
-            max_price_comp = max(prices, key=prices.get)
-            if prices[min_price_comp] < prices[max_price_comp]:
-                report['differentiation'].append({
-                    'type': 'pricing',
-                    'competitor': min_price_comp,
-                    'suggestion': f"{min_price_comp} 定价最低 ({prices[min_price_comp]})，可主打性价比"
-                })
-                report['differentiation'].append({
-                    'type': 'pricing',
-                    'competitor': max_price_comp,
-                    'suggestion': f"{max_price_comp} 定价最高 ({prices[max_price_comp]})，需证明高端价值"
-                })
+    # 数据完整性检查
+    for comp in report['competitors']:
+        completeness = {
+            'features': len(comp['features']) > 0,
+            'pricing': len(comp['pricing']) > 0,
+            'reviews': len(comp['reviews']) > 0
+        }
+        report['data_completeness'][comp['name']] = completeness
+        if not all(completeness.values()):
+            logger.warning(f"竞品 {comp['name']} 数据不完整: {completeness}")
+    
+    # 生成差异化建议
+    report['differentiation'] = generate_differentiation_suggestions(report)
     
     return report
 
@@ -372,162 +480,12 @@ def print_summary(report):
         for low in report['low_confidence_fields']:
             print(f"  {low['competitor']}: {low['reason']}")
     
+    print("\n--- 数据完整性 ---")
+    for comp_name, completeness in report['data_completeness'].items():
+        status = "完整" if all(completeness.values()) else "不完整"
+        print(f"  {comp_name}: {status}")
+    
     print("=" * 60)
 
 
-# ============ 自检模块 ============
-
-def run_selftest():
-    """运行自检，验证核心功能"""
-    print("运行自检...")
-    
-    # 创建临时测试文件
-    test_dir = tempfile.mkdtemp(prefix='competitor_selftest_')
-    
-    # 测试数据
-    test_data = [
-        {
-            'name': 'TestProductA',
-            'features': '搜索,推荐,分析',
-            'price': '99元/月',
-            'rating': '4.5分'
-        },
-        {
-            'name': 'TestProductB',
-            'features': '搜索,推荐,报告',
-            'price': '199元/月',
-            'rating': '4.2分'
-        }
-    ]
-    
-    # 写入测试文件
-    csv_path = os.path.join(test_dir, 'TestProductA_data.csv')
-    with open(csv_path, 'w', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=['name', 'features', 'price', 'rating'])
-        writer.writeheader()
-        writer.writerow(test_data[0])
-    
-    json_path = os.path.join(test_dir, 'TestProductB_data.json')
-    with open(json_path, 'w', encoding='utf-8') as f:
-        json.dump({'records': [test_data[1]]}, f, ensure_ascii=False)
-    
-    # 测试加载
-    comp_name, data_type, records = load_data(csv_path)
-    assert comp_name == 'TestProductA', f"竞品名提取失败: {comp_name}"
-    assert data_type == 'csv', f"数据类型识别失败: {data_type}"
-    assert len(records) == 1, f"记录数错误: {len(records)}"
-    
-    comp_name2, data_type2, records2 = load_data(json_path)
-    assert comp_name2 == 'TestProductB', f"竞品名提取失败: {comp_name2}"
-    assert data_type2 == 'json', f"数据类型识别失败: {data_type2}"
-    assert len(records2) == 1, f"记录数错误: {len(records2)}"
-    
-    # 测试字段提取
-    features, pricing, reviews, confidence = extract_all_fields(test_data[0])
-    assert '搜索' in features, f"功能提取失败: {features}"
-    assert 'base' in pricing, f"定价提取失败: {pricing}"
-    assert 'rating' in reviews, f"评价提取失败: {reviews}"
-    assert confidence > 0.5, f"置信度计算错误: {confidence}"
-    
-    # 测试分析
-    competitors_data = {
-        'TestProductA': records,
-        'TestProductB': records2
-    }
-    report = analyze_competitors(competitors_data)
-    assert len(report['competitors']) == 2, f"竞品数量错误: {len(report['competitors'])}"
-    assert len(report['differentiation']) > 0, "差异化建议为空"
-    
-    # 测试输出
-    output_path = os.path.join(test_dir, 'test_output.json')
-    atomic_write(output_path, json.dumps(report, ensure_ascii=False, indent=2))
-    assert os.path.exists(output_path), "输出文件未创建"
-    
-    # 清理
-    import shutil
-    shutil.rmtree(test_dir)
-    
-    print("自检通过 ✓")
-    return 0
-
-
-# ============ 主函数 ============
-
-def main():
-    parser = argparse.ArgumentParser(
-        description='竞品透视 · 多维对标与差异洞察工具',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python run.py --input compA.csv compB.json
-  python run.py --input compA.csv --output-dir ./results --prefix my_analysis
-  python run.py --selftest
-        """
-    )
-    parser.add_argument('--input', '-i', nargs='+', required=False,
-                       help='输入文件路径，可多个，空格分隔')
-    parser.add_argument('--output-dir', '-o', default='./output',
-                       help='输出目录 (默认: ./output)')
-    parser.add_argument('--prefix', '-p', default='competitor_analysis',
-                       help='输出文件名前缀 (默认: competitor_analysis)')
-    parser.add_argument('--selftest', action='store_true',
-                       help='运行自检并退出')
-    
-    args = parser.parse_args()
-    
-    if args.selftest:
-        sys.exit(run_selftest())
-    
-    if not args.input:
-        parser.error("必须提供至少一个输入文件，或使用 --selftest 运行自检")
-    
-    # 加载所有竞品数据
-    competitors_data = {}
-    errors = []
-    
-    for filepath in args.input:
-        try:
-            comp_name, data_type, records = load_data(filepath)
-            competitors_data[comp_name] = records
-            print(f"✓ 加载 {filepath}: {comp_name} ({len(records)} 条记录, {data_type})")
-        except Exception as e:
-            errors.append({'file': filepath, 'error': str(e)})
-            print(f"✗ 加载失败 {filepath}: {e}")
-    
-    if not competitors_data:
-        print("错误: 没有成功加载任何竞品数据")
-        sys.exit(2)
-    
-    # 执行分析
-    try:
-        report = analyze_competitors(competitors_data)
-    except Exception as e:
-        print(f"分析失败: {e}")
-        sys.exit(4)
-    
-    # 输出报告
-    timestamp = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')
-    output_filename = f"{args.prefix}_{timestamp}.json"
-    output_path = os.path.join(args.output_dir, output_filename)
-    
-    try:
-        atomic_write(output_path, json.dumps(report, ensure_ascii=False, indent=2))
-        print(f"\n✓ 报告已保存: {output_path}")
-    except Exception as e:
-        print(f"写入失败: {e}")
-        sys.exit(5)
-    
-    # 打印摘要
-    print_summary(report)
-    
-    # 输出错误明细
-    if errors:
-        print(f"\n警告: {len(errors)} 个文件加载失败")
-        for err in errors:
-            print(f"  {err['file']}: {err['error']}")
-    
-    sys.exit(0)
-
-
-if __name__ == '__main__':
-    main()
+# ============ 自检
