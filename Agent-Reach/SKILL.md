@@ -1,9 +1,11 @@
 ---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
+<!-- fingerprint: fing-b176ccb8532a -->
 slug: Agent-Reach
 name: AI智能体远程控制
 displayName: 智能体运维 远程管控 批量调度
-description: 远程批量运维AI智能体实例，支持启停与状态监控。
-version: 1.0.0
+description: 通过SSH批量管理AI智能体实例，支持启停、状态监控与白名单命令执行。
+version: 2.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -21,7 +23,6 @@ trigger_words: ["AI智能体远程控制", "Agent-Reach", "远程批量运维AI�
 > 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
 > 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
 <!-- user-agreement-injected -->
-
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
@@ -60,6 +61,33 @@ trigger_words: ["AI智能体远程控制", "Agent-Reach", "远程批量运维AI�
 - 需要定时巡检智能体健康状态的数据团队
 - 需要批量发布/下线智能体的平台管理员
 
+## 二、触发条件
+
+### 2.1 用户请求触发
+
+当用户请求满足以下任一条件时，自动激活本 Skill：
+
+- 包含"远程控制"、"批量运维"、"智能体启停"等关键词
+- 请求对多个 AI 实例执行 start/stop/status 操作
+- 请求查看多个实例的健康状态或资源占用
+- 请求在多个实例上执行白名单运维命令
+
+### 2.2 环境触发
+
+- 检测到 `~/.agent_reach/config.json` 配置文件存在
+- 系统存在可用的 SSH 连接（免密或 sshpass）
+
+## 三、标准流程
+
+### 3.1 操作流程
+
+1. **加载配置**：读取 `~/.agent_reach/config.json`，解析实例列表
+2. **筛选目标**：根据 `--name`、`--tag`、`--file` 参数筛选目标实例
+3. **执行操作**：根据子命令（start/stop/status/exec）执行对应操作
+4. **并发调度**：使用 ThreadPoolExecutor 并发执行（`--concurrency` 1-20）
+5. **结果汇总**：将各实例结果聚合成 JSON 或 Markdown 报告
+
+### 3.2 命令格式
 
 ## 许可证（License）
 
