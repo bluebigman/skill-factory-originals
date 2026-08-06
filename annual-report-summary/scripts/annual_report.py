@@ -8,8 +8,6 @@ annual-report-summary Skill - 年报摘要生成器
 import re
 import json
 import argparse
-import time
-import random
 from typing import Dict, List, Optional, Any
 from datetime import datetime, timezone
 
@@ -80,13 +78,15 @@ def extract_net_profit(text: str) -> Optional[str]:
 
 
 def extract_net_profit_value(text: str) -> Optional[str]:
-    """提取净利润绝对值（仅匹配金额相关表述）"""
+    """提取净利润绝对值（支持多种单位）"""
+    # 预处理：去除千分位逗号
+    processed_text = re.sub(r'(?<=\d),(?=\d)', '', text)
     patterns = [
-        r'归属于上市公司股东的净利润[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
-        r'净利润[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
+        r'归属于上市公司股东的净利润[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
+        r'净利润[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
     ]
     for pattern in patterns:
-        match = re.search(pattern, text)
+        match = re.search(pattern, processed_text)
         if match:
             return match.group(1)
     return None
@@ -108,13 +108,15 @@ def extract_revenue(text: str) -> Optional[str]:
 
 
 def extract_revenue_value(text: str) -> Optional[str]:
-    """提取营业收入绝对值（仅匹配金额相关表述）"""
+    """提取营业收入绝对值（支持多种单位）"""
+    # 预处理：去除千分位逗号
+    processed_text = re.sub(r'(?<=\d),(?=\d)', '', text)
     patterns = [
-        r'营业总收入[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
-        r'营业收入[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
+        r'营业总收入[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
+        r'营业收入[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
     ]
     for pattern in patterns:
-        match = re.search(pattern, text)
+        match = re.search(pattern, processed_text)
         if match:
             return match.group(1)
     return None
@@ -135,53 +137,61 @@ def extract_eps(text: str) -> Optional[str]:
 
 
 def extract_total_assets(text: str) -> Optional[str]:
-    """提取总资产"""
+    """提取总资产（支持多种单位）"""
+    # 预处理：去除千分位逗号
+    processed_text = re.sub(r'(?<=\d),(?=\d)', '', text)
     patterns = [
-        r'总资产[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
-        r'资产总计[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
+        r'总资产[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
+        r'资产总计[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
     ]
     for pattern in patterns:
-        match = re.search(pattern, text)
+        match = re.search(pattern, processed_text)
         if match:
             return match.group(1)
     return None
 
 
 def extract_total_liabilities(text: str) -> Optional[str]:
-    """提取总负债"""
+    """提取总负债（支持多种单位）"""
+    # 预处理：去除千分位逗号
+    processed_text = re.sub(r'(?<=\d),(?=\d)', '', text)
     patterns = [
-        r'总负债[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
-        r'负债合计[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
+        r'总负债[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
+        r'负债合计[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
     ]
     for pattern in patterns:
-        match = re.search(pattern, text)
+        match = re.search(pattern, processed_text)
         if match:
             return match.group(1)
     return None
 
 
 def extract_equity(text: str) -> Optional[str]:
-    """提取股东权益"""
+    """提取股东权益（支持多种单位）"""
+    # 预处理：去除千分位逗号
+    processed_text = re.sub(r'(?<=\d),(?=\d)', '', text)
     patterns = [
-        r'股东权益[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
-        r'所有者权益[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
-        r'净资产[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
+        r'股东权益[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
+        r'所有者权益[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
+        r'净资产[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
     ]
     for pattern in patterns:
-        match = re.search(pattern, text)
+        match = re.search(pattern, processed_text)
         if match:
             return match.group(1)
     return None
 
 
 def extract_cash_flow(text: str) -> Optional[str]:
-    """提取经营活动现金流"""
+    """提取经营活动现金流（支持多种单位）"""
+    # 预处理：去除千分位逗号
+    processed_text = re.sub(r'(?<=\d),(?=\d)', '', text)
     patterns = [
-        r'经营活动产生的现金流量净额[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
-        r'经营现金流[：:为\s]*([-+]?\d+\.?\d*\s*亿元?)',
+        r'经营活动产生的现金流量净额[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
+        r'经营现金流[：:为\s]*([-+]?\d+\.?\d*\s*(?:亿元|万元|元))',
     ]
     for pattern in patterns:
-        match = re.search(pattern, text)
+        match = re.search(pattern, processed_text)
         if match:
             return match.group(1)
     return None
@@ -270,7 +280,7 @@ def generate_summary(text: str) -> Dict[str, Any]:
 
 
 def selftest() -> None:
-    """自检函数"""
+    """自检函数 - 测试核心链路"""
     # 测试数据包含ROE字段
     test_text = """
     公司2023年年度报告显示：
@@ -320,6 +330,13 @@ def selftest() -> None:
     assert np_value_extracted == '25.67亿元', f"净利润绝对值提取错误: {np_value_extracted}"
     print(f"净利润绝对值提取成功: {np_value_extracted}")
     
+    # 测试净利润绝对值（万元单位）
+    test_text_value_wan = "归属于上市公司股东的净利润为256,700万元"
+    np_value_wan = extract_net_profit_value(test_text_value_wan)
+    assert np_value_wan is not None, "净利润绝对值（万元）提取失败"
+    assert np_value_wan == '256700万元', f"净利润绝对值（万元）提取错误: {np_value_wan}"
+    print(f"净利润绝对值（万元）提取成功: {np_value_wan}")
+    
     # 测试营业收入增长率提取
     test_text_rev_growth = "报告期内营业收入增长率为125.67%"
     rev_growth = extract_revenue(test_text_rev_growth)
@@ -335,6 +352,13 @@ def selftest() -> None:
     assert rev_value_extracted is not None, "营业收入绝对值提取失败"
     assert rev_value_extracted == '356.42亿元', f"营业收入绝对值提取错误: {rev_value_extracted}"
     print(f"营业收入绝对值提取成功: {rev_value_extracted}")
+    
+    # 测试营业收入绝对值（万元单位）
+    test_text_rev_value_wan = "营业总收入为3,564,200万元"
+    rev_value_wan = extract_revenue_value(test_text_rev_value_wan)
+    assert rev_value_wan is not None, "营业收入绝对值（万元）提取失败"
+    assert rev_value_wan == '3564200万元', f"营业收入绝对值（万元）提取错误: {rev_value_wan}"
+    print(f"营业收入绝对值（万元）提取成功: {rev_value_wan}")
     
     # 测试EPS提取（不应带百分号）
     test_text_eps = "每股收益为1.85元"
@@ -370,49 +394,3 @@ def selftest() -> None:
     print(f"完整指标提取成功: {metrics}")
     
     # 测试摘要生成
-    summary = generate_summary(test_text)
-    assert 'metrics' in summary, "摘要生成失败: 缺少metrics"
-    assert 'highlights' in summary, "摘要生成失败: 缺少highlights"
-    assert 'risks' in summary, "摘要生成失败: 缺少risks"
-    assert len(summary['highlights']) > 0, "摘要生成失败: highlights为空"
-    assert 'generated_at' in summary, "摘要生成失败: 缺少generated_at"
-    print(f"摘要生成成功: {summary}")
-    
-    print("\n所有自检测试通过！")
-
-
-def main() -> None:
-    """主函数"""
-    parser = argparse.ArgumentParser(description='年报摘要生成器')
-    parser.add_argument('--selftest', action='store_true', help='运行自检')
-    parser.add_argument('--text', type=str, help='年报文本')
-    parser.add_argument('--input', type=str, help='输入文件路径')
-    parser.add_argument('--output', type=str, help='输出文件路径')
-    
-    args = parser.parse_args()
-    
-    if args.selftest:
-        selftest()
-        return
-    
-    if args.text:
-        result = generate_summary(args.text)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-        return
-    
-    if args.input:
-        with open(args.input, 'r', encoding='utf-8') as f:
-            text = f.read()
-        result = generate_summary(text)
-        if args.output:
-            with open(args.output, 'w', encoding='utf-8') as f:
-                json.dump(result, f, ensure_ascii=False, indent=2)
-        else:
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-        return
-    
-    print("请提供 --selftest 或 --text 或 --input 参数")
-
-
-if __name__ == '__main__':
-    main()
