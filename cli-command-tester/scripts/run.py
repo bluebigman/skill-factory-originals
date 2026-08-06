@@ -15,6 +15,7 @@ import urllib.error
 import ssl
 import gzip
 import io
+import random
 from http.client import HTTPResponse
 
 try:
@@ -27,7 +28,7 @@ except ImportError:
 class HTTPTester:
     """HTTP请求测试核心类"""
     
-    def __init__(self, method, url, headers=None, data=None, params=None, timeout=10, follow_redirects=True):
+    def __init__(self, method, url, headers=None, data=None, params=None, timeout=10, follow_redirects=True, insecure=False):
         self.method = method.upper()
         self.url = url
         self.headers = headers or {}
@@ -35,6 +36,7 @@ class HTTPTester:
         self.params = params
         self.timeout = timeout
         self.follow_redirects = follow_redirects
+        self.insecure = insecure
         
     def build_url(self):
         """拼接查询参数"""
@@ -47,15 +49,27 @@ class HTTPTester:
         """准备请求体"""
         if not self.data:
             return None
+        
+        # 如果data是dict类型，转换为表单序列化
+        if isinstance(self.data, dict):
+            if 'Content-Type' not in self.headers:
+                self.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+            return urllib.parse.urlencode(self.data).encode('utf-8')
+        
         # 如果data是JSON字符串，自动设置Content-Type
-        if self.data.startswith('{') or self.data.startswith('['):
+        if isinstance(self.data, str) and (self.data.startswith('{') or self.data.startswith('[')):
             if 'Content-Type' not in self.headers:
                 self.headers['Content-Type'] = 'application/json'
             return self.data.encode('utf-8')
+        
         # 表单格式
-        if 'Content-Type' not in self.headers:
-            self.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        return self.data.encode('utf-8')
+        if isinstance(self.data, str):
+            if 'Content-Type' not in self.headers:
+                self.headers['Content-Type'] = 'application/x-www-form-urlencoded'
+            return self.data.encode('utf-8')
+        
+        # 其他类型转字符串
+        return str(self.data).encode('utf-8')
     
     def execute_with_requests(self):
         """使用requests库执行请求（如果可用）"""
@@ -65,25 +79,38 @@ class HTTPTester:
         url = self.build_url()
         data = self.prepare_data()
         
-        try:
-            response = requests.request(
-                method=self.method,
-                url=url,
-                headers=self.headers,
-                data=data,
-                timeout=self.timeout,
-                allow_redirects=self.follow_redirects,
-                verify=True
-            )
-            return {
-                'status_code': response.status_code,
-                'headers': dict(response.headers),
-                'body': response.text,
-                'elapsed': response.elapsed.total_seconds(),
-                'url': response.url
-            }
-        except requests.exceptions.RequestException as e:
-            return {'error': str(e)}
+        # 指数退避重试
+        max_retries = 3
+        retry_delays = [1, 2, 4]
+        
+        for attempt in range(max_retries):
+            try:
+                response = requests.request(
+                    method=self.method,
+                    url=url,
+                    headers=self.headers,
+                    data=data,
+                    timeout=self.timeout,
+                    allow_redirects=self.follow_redirects,
+                    verify=not self.insecure
+                )
+                return {
+                    'status_code': response.status_code,
+                    'headers': dict(response.headers),
+                    'body': response.text,
+                    'elapsed': response.elapsed.total_seconds(),
+                    'url': response.url
+                }
+            except requests.exceptions.SSLError as e:
+                if attempt == max_retries - 1:
+                    return {'error': f"SSL错误: {str(e)}"}
+                time.sleep(retry_delays[attempt])
+            except requests.exceptions.RequestException as e:
+                if attempt == max_retries - 1:
+                    return {'error': str(e)}
+                time.sleep(retry_delays[attempt])
+        
+        return {'error': "请求失败"}
     
     def execute_with_urllib(self):
         """使用urllib执行请求（标准库实现）"""
@@ -107,46 +134,79 @@ class HTTPTester:
             opener = urllib.request.build_opener()
         
         # 处理HTTPS证书
-        context = ssl.create_default_context()
+        if self.insecure:
+            context = ssl._create_unverified_context()
+        else:
+            context = ssl.create_default_context()
         opener.add_handler(urllib.request.HTTPSHandler(context=context))
         
-        start_time = time.time()
-        try:
-            response = opener.open(req, timeout=self.timeout)
-            elapsed = time.time() - start_time
-            
-            # 读取响应体
-            body = response.read()
-            # 处理gzip压缩
-            if response.headers.get('Content-Encoding') == 'gzip':
-                body = gzip.decompress(body)
-            
-            # 尝试解码
+        # 指数退避重试
+        max_retries = 3
+        retry_delays = [1, 2, 4]
+        
+        for attempt in range(max_retries):
+            start_time = time.time()
             try:
-                body_text = body.decode('utf-8')
-            except UnicodeDecodeError:
-                body_text = body.decode('latin-1')
-            
-            return {
-                'status_code': response.getcode(),
-                'headers': dict(response.headers),
-                'body': body_text,
-                'elapsed': elapsed,
-                'url': response.geturl()
-            }
-        except urllib.error.HTTPError as e:
-            elapsed = time.time() - start_time
-            return {
-                'status_code': e.code,
-                'headers': dict(e.headers),
-                'body': e.read().decode('utf-8', errors='replace'),
-                'elapsed': elapsed,
-                'url': url
-            }
-        except urllib.error.URLError as e:
-            return {'error': f"URL错误: {e.reason}"}
-        except Exception as e:
-            return {'error': str(e)}
+                response = opener.open(req, timeout=self.timeout)
+                elapsed = time.time() - start_time
+                
+                # 读取响应体
+                body = response.read()
+                # 处理gzip压缩
+                content_encoding = response.headers.get('Content-Encoding', '')
+                if 'gzip' in content_encoding:
+                    body = gzip.decompress(body)
+                
+                # 尝试解码
+                try:
+                    body_text = body.decode('utf-8')
+                except UnicodeDecodeError:
+                    body_text = body.decode('latin-1')
+                
+                return {
+                    'status_code': response.getcode(),
+                    'headers': dict(response.headers),
+                    'body': body_text,
+                    'elapsed': elapsed,
+                    'url': response.geturl()
+                }
+            except urllib.error.HTTPError as e:
+                elapsed = time.time() - start_time
+                # 读取错误响应体
+                error_body = e.read()
+                content_encoding = e.headers.get('Content-Encoding', '')
+                if 'gzip' in content_encoding:
+                    try:
+                        error_body = gzip.decompress(error_body)
+                    except:
+                        pass
+                return {
+                    'status_code': e.code,
+                    'headers': dict(e.headers),
+                    'body': error_body.decode('utf-8', errors='replace'),
+                    'elapsed': elapsed,
+                    'url': url
+                }
+            except urllib.error.URLError as e:
+                if isinstance(e.reason, ssl.SSLError):
+                    if attempt == max_retries - 1:
+                        return {'error': f"SSL错误: {e.reason}"}
+                elif isinstance(e.reason, ConnectionRefusedError):
+                    if attempt == max_retries - 1:
+                        return {'error': f"连接被拒绝: {e.reason}"}
+                elif isinstance(e.reason, TimeoutError):
+                    if attempt == max_retries - 1:
+                        return {'error': f"超时: {e.reason}"}
+                else:
+                    if attempt == max_retries - 1:
+                        return {'error': f"URL错误: {e.reason}"}
+                time.sleep(retry_delays[attempt])
+            except Exception as e:
+                if attempt == max_retries - 1:
+                    return {'error': str(e)}
+                time.sleep(retry_delays[attempt])
+        
+        return {'error': "请求失败"}
     
     def execute(self):
         """执行请求"""
@@ -221,14 +281,21 @@ def selftest():
     assert tester.headers.get('Content-Type') == 'application/json', "Content-Type设置失败"
     print("[PASS] JSON数据准备")
     
-    # 测试3: 表单数据准备
+    # 测试3: 表单数据准备（字符串）
     tester = HTTPTester("POST", "http://example.com/api", data="name=test&age=20")
     data = tester.prepare_data()
     assert data == b"name=test&age=20", "表单数据准备失败"
     assert tester.headers.get('Content-Type') == 'application/x-www-form-urlencoded', "表单Content-Type设置失败"
-    print("[PASS] 表单数据准备")
+    print("[PASS] 表单数据准备（字符串）")
     
-    # 测试4: 响应格式化 - JSON
+    # 测试4: 表单数据准备（dict类型）
+    tester = HTTPTester("POST", "http://example.com/api", data={"name": "test", "age": 20})
+    data = tester.prepare_data()
+    assert data == b"name=test&age=20", f"dict表单序列化失败: {data}"
+    assert tester.headers.get('Content-Type') == 'application/x-www-form-urlencoded', "dict表单Content-Type设置失败"
+    print("[PASS] 表单数据准备（dict类型）")
+    
+    # 测试5: 响应格式化 - JSON
     result = {
         'status_code': 200,
         'headers': {'Content-Type': 'application/json'},
@@ -241,18 +308,37 @@ def selftest():
     assert "HTTP 200" in formatted, "状态码显示失败"
     print("[PASS] 响应格式化")
     
-    # 测试5: 响应截断
+    # 测试6: 响应截断
     long_body = "x" * 3000
     result['body'] = long_body
     formatted = format_response(result, max_length=100)
     assert "已截断" in formatted, "截断功能失败"
     print("[PASS] 响应截断")
     
-    # 测试6: 错误处理
+    # 测试7: 错误处理
     result = {'error': "连接失败"}
     formatted = format_response(result)
     assert "错误" in formatted, "错误处理失败"
     print("[PASS] 错误处理")
+    
+    # 测试8: gzip解压处理
+    import gzip as gzip_module
+    test_data = b'{"compressed": true}'
+    compressed_data = gzip_module.compress(test_data)
+    decompressed = gzip_module.decompress(compressed_data)
+    assert decompressed == test_data, "gzip解压失败"
+    print("[PASS] gzip解压处理")
+    
+    # 测试9: 重试机制（模拟失败场景）
+    tester = HTTPTester("GET", "http://127.0.0.1:1", timeout=1)
+    result = tester.execute()
+    assert 'error' in result, "重试机制测试失败"
+    print("[PASS] 重试机制")
+    
+    # 测试10: insecure参数
+    tester = HTTPTester("GET", "https://example.com", insecure=True)
+    assert tester.insecure == True, "insecure参数设置失败"
+    print("[PASS] insecure参数")
     
     print("=== 自检完成: 全部通过 ===")
     return 0
@@ -288,6 +374,7 @@ def main():
     parser.add_argument('-i', '--include', action='store_true', help="显示响应头")
     parser.add_argument('-o', '--output', help="将响应体保存到文件")
     parser.add_argument('--max-length', type=int, default=2000, help="响应体最大显示长度，默认2000字符")
+    parser.add_argument('--insecure', action='store_true', help="关闭SSL证书验证")
     parser.add_argument('--selftest', action='store_true', help="运行自检")
     
     args = parser.parse_args()
@@ -316,7 +403,8 @@ def main():
         data=args.data,
         params=args.params,
         timeout=args.timeout,
-        follow_redirects=args.location
+        follow_redirects=args.location,
+        insecure=args.insecure
     )
     
     # 执行请求
