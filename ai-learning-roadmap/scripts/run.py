@@ -10,8 +10,9 @@ import argparse
 import json
 import sys
 import os
+import tempfile
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 # ============ 内置知识库 ============
 # 基础水平判定关键词
@@ -56,369 +57,473 @@ RESOURCES = {
     "计算机视觉方向": [
         {"name": "CS231n课程", "detail": "Lecture 1-5 CNN基础", "hours": 5},
         {"name": "OpenCV官方教程", "detail": "图像处理基础", "hours": 3},
-        {"name": "目标检测项目", "detail": "用YOLO实现实时检测", "hours": 4}
+        {"name": "目标检测项目", "detail": "用YOLO实现目标检测", "hours": 4}
     ]
 }
 
-# 各水平对应的前置知识
-PREREQUISITES = {
-    "L0": ["Python基础语法", "Linux命令行", "数学基础(线性代数/概率论)"],
-    "L1": ["Python高级特性", "NumPy/Pandas", "数据可视化"],
-    "L2": ["机器学习算法", "模型评估方法", "特征工程"],
-    "L3": ["深度学习框架", "模型调优", "分布式训练"]
-}
-
-# 每周主题模板 - 完整数据
-WEEKLY_THEMES = {
+# 实战练习模板
+PRACTICE_TEMPLATES = {
     "通用入门": [
-        "AI概述与Python基础",
-        "数据处理与可视化",
-        "机器学习入门",
-        "监督学习算法",
-        "模型评估与调优",
-        "深度学习基础",
-        "项目实战",
-        "综合复习"
+        "完成一个简单的数据分析项目（如销售数据可视化）",
+        "在Kaggle上完成Titanic生存预测并提交结果",
+        "用Python实现一个简单的线性回归模型"
     ],
     "机器学习专项": [
-        "数学基础复习",
-        "经典ML算法",
-        "特征工程",
-        "模型集成",
-        "实战项目1",
-        "实战项目2",
-        "算法优化",
-        "综合测评"
+        "用sklearn实现KNN分类器并在iris数据集上测试",
+        "完成一个完整的机器学习项目（数据清洗→建模→评估）",
+        "参加一个Kaggle竞赛并提交结果"
     ],
     "深度学习专项": [
-        "神经网络基础",
-        "CNN原理",
-        "RNN与序列模型",
-        "PyTorch实战",
-        "生成模型",
-        "迁移学习",
-        "实战项目",
-        "前沿技术"
+        "用PyTorch实现一个简单的神经网络",
+        "在CIFAR-10上训练CNN并达到80%以上准确率",
+        "实现一个GAN生成手写数字"
     ],
     "NLP方向": [
-        "文本预处理",
-        "词向量与Embedding",
-        "RNN/LSTM",
-        "Attention机制",
-        "Transformer",
-        "BERT与预训练",
-        "NLP实战",
-        "综合项目"
+        "用HuggingFace实现文本分类",
+        "微调一个预训练模型完成情感分析",
+        "实现一个简单的聊天机器人"
     ],
     "计算机视觉方向": [
-        "图像基础",
-        "CNN架构",
-        "目标检测",
-        "图像分割",
-        "生成对抗网络",
-        "模型部署",
-        "视觉实战",
-        "综合项目"
+        "用OpenCV实现图像边缘检测",
+        "训练一个CNN进行图像分类",
+        "实现一个目标检测系统"
+    ]
+}
+
+# 验收标准模板
+ACCEPTANCE_TEMPLATES = {
+    "通用入门": [
+        "能独立完成数据分析项目并输出报告",
+        "Kaggle提交得分达到前50%",
+        "模型在测试集上准确率≥80%"
+    ],
+    "机器学习专项": [
+        "能解释KNN、朴素贝叶斯等算法原理",
+        "能独立完成数据预处理和特征工程",
+        "模型在测试集上准确率≥85%"
+    ],
+    "深度学习专项": [
+        "能解释反向传播原理",
+        "能独立训练CNN模型",
+        "模型在测试集上准确率≥80%"
+    ],
+    "NLP方向": [
+        "能解释Transformer架构",
+        "能微调预训练模型",
+        "模型在测试集上F1分数≥0.8"
+    ],
+    "计算机视觉方向": [
+        "能解释CNN各层作用",
+        "能独立实现图像分类",
+        "模型在测试集上mAP≥0.7"
     ]
 }
 
 
-def detect_level(description: str) -> str:
-    """根据用户描述识别基础水平"""
-    desc_lower = description.lower()
+def determine_level(description: str) -> Tuple[str, float]:
+    """
+    通过关键词匹配确定基础水平
+    
+    Args:
+        description: 用户描述的基础水平
+        
+    Returns:
+        (水平等级, 置信度分数)
+    """
+    if not description:
+        return "L0", 0.0
+    
+    description_lower = description.lower()
+    scores = {}
+    
     for level, keywords in LEVEL_KEYWORDS.items():
-        for kw in keywords:
-            if kw in desc_lower:
-                return level
-    return "L0"  # 默认零基础
+        score = 0
+        for keyword in keywords:
+            if keyword.lower() in description_lower:
+                score += 1
+        scores[level] = score
+    
+    # 找到最高分
+    max_score = max(scores.values())
+    if max_score == 0:
+        return "L0", 0.0
+    
+    # 如果有多个相同最高分，取最高等级
+    best_levels = [level for level, score in scores.items() if score == max_score]
+    best_level = max(best_levels)
+    
+    # 计算置信度（0-1）
+    confidence = min(1.0, max_score / 2)
+    
+    return best_level, confidence
 
 
-def detect_goal(description: str) -> str:
-    """根据用户描述识别学习目标"""
-    desc_lower = description.lower()
+def determine_goal(description: str) -> Tuple[str, float]:
+    """
+    通过关键词匹配确定学习目标
+    
+    Args:
+        description: 用户描述的学习目标
+        
+    Returns:
+        (目标类别, 置信度分数)
+    """
+    if not description:
+        return "通用入门", 0.0
+    
+    description_lower = description.lower()
+    scores = {}
+    
     for goal, keywords in GOAL_KEYWORDS.items():
-        for kw in keywords:
-            if kw in desc_lower:
-                return goal
-    return "通用入门"  # 默认通用入门
+        score = 0
+        for keyword in keywords:
+            if keyword.lower() in description_lower:
+                score += 1
+        scores[goal] = score
+    
+    # 找到最高分
+    max_score = max(scores.values())
+    if max_score == 0:
+        return "通用入门", 0.0
+    
+    # 如果有多个相同最高分，取第一个
+    best_goals = [goal for goal, score in scores.items() if score == max_score]
+    best_goal = best_goals[0]
+    
+    # 计算置信度（0-1）
+    confidence = min(1.0, max_score / 2)
+    
+    return best_goal, confidence
 
 
-def generate_roadmap(level: str, goal: str, weeks: int, hours_per_week: int) -> Dict:
-    """生成分周学习路线"""
-    if weeks < 4 or weeks > 16:
-        raise ValueError(f"总周数必须在4-16之间，当前值: {weeks}")
-    if hours_per_week < 2 or hours_per_week > 20:
-        raise ValueError(f"每周投入时间必须在2-20小时之间，当前值: {hours_per_week}")
-
-    # 获取该方向的课程资源
+def generate_roadmap(level: str, goal: str, weeks: int) -> Dict:
+    """
+    生成分周学习路线
+    
+    Args:
+        level: 基础水平（L0-L3）
+        goal: 学习目标
+        weeks: 学习周数（4-16）
+        
+    Returns:
+        学习路线字典
+    """
+    # 获取资源
     resources = RESOURCES.get(goal, RESOURCES["通用入门"])
-    themes = WEEKLY_THEMES.get(goal, WEEKLY_THEMES["通用入门"])
-    prereqs = PREREQUISITES.get(level, PREREQUISITES["L0"])
-
-    # 计算每周资源分配
-    total_resources = len(resources)
-    resources_per_week = max(1, total_resources // weeks)
-
-    roadmap = {
-        "meta": {
-            "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
-            "level": level,
-            "goal": goal,
-            "weeks": weeks,
-            "hours_per_week": hours_per_week,
-            "total_hours": weeks * hours_per_week
-        },
-        "prerequisites": prereqs,
-        "weeks": []
-    }
-
+    practices = PRACTICE_TEMPLATES.get(goal, PRACTICE_TEMPLATES["通用入门"])
+    acceptances = ACCEPTANCE_TEMPLATES.get(goal, ACCEPTANCE_TEMPLATES["通用入门"])
+    
+    # 生成分周计划
+    weekly_plans = []
     for week in range(1, weeks + 1):
-        # 选择本周主题
-        theme_idx = (week - 1) % len(themes)
-        theme = themes[theme_idx]
-
-        # 分配资源
-        start_idx = ((week - 1) * resources_per_week) % total_resources
-        week_resources = []
-        for i in range(resources_per_week):
-            idx = (start_idx + i) % total_resources
-            res = resources[idx]
-            week_resources.append({
-                "name": res["name"],
-                "detail": res["detail"],
-                "estimated_hours": min(res["hours"], hours_per_week)
-            })
-
-        # 生成可量化的验收标准
-        acceptance = [
-            f"完成{theme}主题的5道自测题，正确率≥80%",
-            f"独立完成{theme}相关的代码练习，代码通过单元测试",
-            f"能解释{theme}的3个核心概念，并写出示例",
-            f"完成{theme}实战项目，达到项目验收指标"
-        ]
-
-        # 生成实战练习
-        practice = {
-            "name": f"{theme}实战练习",
-            "description": f"基于{theme}完成一个小型项目或练习",
-            "acceptance": acceptance
-        }
-
-        roadmap["weeks"].append({
+        # 循环使用资源
+        resource_idx = (week - 1) % len(resources)
+        practice_idx = (week - 1) % len(practices)
+        acceptance_idx = (week - 1) % len(acceptances)
+        
+        # 根据周数调整难度
+        difficulty = "基础" if week <= weeks // 3 else ("进阶" if week <= weeks * 2 // 3 else "高级")
+        
+        plan = {
             "week": week,
-            "theme": theme,
-            "overview": f"本周重点学习{theme}，掌握核心概念和基本应用",
-            "resources": week_resources,
-            "practice": practice,
-            "estimated_hours": min(hours_per_week, sum(r["estimated_hours"] for r in week_resources))
-        })
-
+            "topic": f"{difficulty}阶段：{resources[resource_idx]['name']}",
+            "resources": [resources[resource_idx]],
+            "practice": practices[practice_idx],
+            "acceptance": acceptances[acceptance_idx]
+        }
+        weekly_plans.append(plan)
+    
+    # 生成路线
+    roadmap = {
+        "level": level,
+        "goal": goal,
+        "weeks": weeks,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "weekly_plans": weekly_plans,
+        "total_hours": sum(r["hours"] for r in resources) * (weeks // len(resources) + 1)
+    }
+    
     return roadmap
 
 
-def format_roadmap(roadmap: Dict) -> str:
-    """将路线格式化为可读文本"""
+def score_roadmap(roadmap: Dict, level_confidence: float, goal_confidence: float) -> int:
+    """
+    对生成的路线进行质量评分（0-100）
+    
+    Args:
+        roadmap: 学习路线字典
+        level_confidence: 水平判定置信度
+        goal_confidence: 目标判定置信度
+        
+    Returns:
+        评分（0-100）
+    """
+    score = 0
+    
+    # 水平判定成功
+    if level_confidence > 0:
+        score += 20
+    
+    # 目标判定成功
+    if goal_confidence > 0:
+        score += 20
+    
+    # 周数在 4-16 范围内
+    if 4 <= roadmap["weeks"] <= 16:
+        score += 20
+    
+    # 资源库匹配成功
+    if roadmap["goal"] in RESOURCES:
+        score += 20
+    
+    # 每周计划完整
+    if all(all(k in plan for k in ["week", "topic", "resources", "practice", "acceptance"]) 
+           for plan in roadmap["weekly_plans"]):
+        score += 20
+    
+    return min(100, score)
+
+
+def format_roadmap_markdown(roadmap: Dict, score: int) -> str:
+    """
+    将学习路线格式化为 Markdown
+    
+    Args:
+        roadmap: 学习路线字典
+        score: 质量评分
+        
+    Returns:
+        Markdown 格式的路线
+    """
     lines = []
-    meta = roadmap["meta"]
-
-    lines.append("=" * 60)
-    lines.append("AI 学习路径规划")
-    lines.append("=" * 60)
-    lines.append(f"生成时间: {meta['generated_at']}")
-    lines.append(f"基础水平: {meta['level']}")
-    lines.append(f"学习目标: {meta['goal']}")
-    lines.append(f"总周数: {meta['weeks']} 周")
-    lines.append(f"每周投入: {meta['hours_per_week']} 小时")
-    lines.append(f"总投入: {meta['total_hours']} 小时")
+    lines.append(f"# AI 学习路线（{roadmap['level']} → {roadmap['goal']}，{roadmap['weeks']}周）")
     lines.append("")
-
-    # 前置知识
-    lines.append("【前置知识要求】")
-    for prereq in roadmap["prerequisites"]:
-        lines.append(f"  - {prereq}")
+    lines.append("## 基本信息")
+    lines.append(f"- 基础水平：{roadmap['level']}")
+    lines.append(f"- 学习目标：{roadmap['goal']}")
+    lines.append(f"- 学习周期：{roadmap['weeks']}周")
+    lines.append(f"- 生成时间：{roadmap['generated_at']}")
     lines.append("")
-
-    # 每周计划
-    for week_data in roadmap["weeks"]:
-        lines.append(f"### 第 {week_data['week']} 周：{week_data['theme']}")
-        lines.append(f"**主题概述**：{week_data['overview']}")
+    lines.append("## 分周计划")
+    
+    for plan in roadmap["weekly_plans"]:
+        lines.append(f"### 第 {plan['week']} 周：{plan['topic']}")
+        lines.append(f"- **学习资源**：{plan['resources'][0]['name']} - {plan['resources'][0]['detail']}")
+        lines.append(f"- **实战练习**：{plan['practice']}")
+        lines.append(f"- **验收标准**：{plan['acceptance']}")
         lines.append("")
-        lines.append("**学习资源**：")
-        for res in week_data["resources"]:
-            lines.append(f"  - {res['name']}：{res['detail']}，预计 {res['estimated_hours']} 小时")
-        lines.append("")
-        lines.append("**实战练习**：")
-        lines.append(f"  - 练习名称：{week_data['practice']['name']}")
-        lines.append(f"  - 任务描述：{week_data['practice']['description']}")
-        lines.append("  - 验收标准：")
-        for acc in week_data["practice"]["acceptance"]:
-            lines.append(f"    - [ ] {acc}")
-        lines.append(f"**预计耗时**：{week_data['estimated_hours']} 小时")
-        lines.append("")
-
+    
+    lines.append("## 总体评估")
+    lines.append(f"- 路线评分：{score}/100")
+    
+    if score >= 80:
+        lines.append("- 建议：路线质量优秀，按计划执行即可。")
+    elif score >= 60:
+        lines.append("- 建议：路线质量良好，建议根据实际情况微调。")
+    else:
+        lines.append("- 建议：路线质量一般，建议重新描述需求。")
+    
     return "\n".join(lines)
 
 
-def save_roadmap(roadmap: Dict, output_path: str, format_type: str = "text") -> None:
-    """保存路线到文件"""
-    if format_type == "json":
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(roadmap, f, ensure_ascii=False, indent=2)
-    else:
-        content = format_roadmap(roadmap)
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(content)
-
-
-def selftest() -> bool:
-    """自检函数：验证核心功能"""
-    print("运行自检...")
-
-    # 测试1: 水平识别
-    assert detect_level("我完全不懂编程") == "L0"
-    assert detect_level("我会Python编程") == "L1"
-    assert detect_level("我学过机器学习") == "L2"
-    print("✓ 水平识别测试通过")
-
-    # 测试2: 目标识别
-    assert detect_goal("我想学机器学习") == "机器学习专项"
-    assert detect_goal("我想做NLP") == "NLP方向"
-    assert detect_goal("我想入门AI") == "通用入门"
-    print("✓ 目标识别测试通过")
-
-    # 测试3: 无关键词输入场景
-    assert detect_level("这是一个没有关键词的描述") == "L0"
-    assert detect_goal("这是一个没有关键词的描述") == "通用入门"
-    print("✓ 无关键词默认值测试通过")
-
-    # 测试4: 路线生成
-    roadmap = generate_roadmap("L1", "机器学习专项", 8, 5)
-    assert len(roadmap["weeks"]) == 8
-    assert roadmap["meta"]["total_hours"] == 40
-    assert all(w["estimated_hours"] > 0 for w in roadmap["weeks"])
-    # 验证验收标准完整性
-    assert all(len(w["practice"]["acceptance"]) >= 4 for w in roadmap["weeks"])
-    # 验证时间戳包含UTC
-    assert "UTC" in roadmap["meta"]["generated_at"]
-    print("✓ 路线生成测试通过")
-
-    # 测试5: 参数校验
+def atomic_write_file(filepath: str, content: str) -> None:
+    """
+    原子化写入文件
+    
+    Args:
+        filepath: 文件路径
+        content: 文件内容
+    """
+    directory = os.path.dirname(filepath)
+    if directory and not os.path.exists(directory):
+        os.makedirs(directory)
+    
+    # 写入临时文件
+    fd, temp_path = tempfile.mkstemp(dir=directory or ".", suffix=".tmp")
     try:
-        generate_roadmap("L1", "机器学习专项", 3, 5)
-        assert False, "应该抛出异常"
-    except ValueError:
-        pass
-    print("✓ 参数校验测试通过")
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+        
+        # 原子替换
+        os.replace(temp_path, filepath)
+    except Exception:
+        # 清理临时文件
+        if os.path.exists(temp_path):
+            os.unlink(temp_path)
+        raise
 
-    # 测试6: 格式输出
-    content = format_roadmap(roadmap)
-    assert "第 1 周" in content
-    assert "验收标准" in content
-    assert "正确率≥80%" in content
-    print("✓ 格式输出测试通过")
 
-    print("所有自检测试通过！")
-    return True
+def run_selftest() -> int:
+    """
+    运行自检，验证核心功能
+    
+    Returns:
+        退出码（0 表示成功）
+    """
+    print("开始自检...")
+    
+    # 1. 测试水平判定
+    test_cases = [
+        ("零基础", "L0"),
+        ("会python", "L1"),
+        ("学过机器学习", "L2"),
+        ("做过项目", "L3"),
+    ]
+    
+    for desc, expected in test_cases:
+        level, confidence = determine_level(desc)
+        assert level == expected, f"水平判定失败: {desc} -> {level}, 期望 {expected}"
+        assert confidence > 0, f"置信度应为正数: {desc}"
+        print(f"  ✓ 水平判定: {desc} -> {level} (置信度: {confidence:.2f})")
+    
+    # 2. 测试目标判定
+    goal_cases = [
+        ("入门", "通用入门"),
+        ("机器学习", "机器学习专项"),
+        ("深度学习", "深度学习专项"),
+        ("nlp", "NLP方向"),
+        ("cv", "计算机视觉方向"),
+    ]
+    
+    for desc, expected in goal_cases:
+        goal, confidence = determine_goal(desc)
+        assert goal == expected, f"目标判定失败: {desc} -> {goal}, 期望 {expected}"
+        assert confidence > 0, f"置信度应为正数: {desc}"
+        print(f"  ✓ 目标判定: {desc} -> {goal} (置信度: {confidence:.2f})")
+    
+    # 3. 测试路线生成
+    for weeks in [4, 8, 16]:
+        roadmap = generate_roadmap("L1", "机器学习专项", weeks)
+        assert len(roadmap["weekly_plans"]) == weeks, f"周数错误: {len(roadmap['weekly_plans'])} != {weeks}"
+        assert roadmap["goal"] == "机器学习专项", f"目标错误: {roadmap['goal']}"
+        print(f"  ✓ 路线生成: {weeks}周路线生成成功")
+    
+    # 4. 测试评分
+    roadmap = generate_roadmap("L1", "机器学习专项", 8)
+    score = score_roadmap(roadmap, 0.8, 0.8)
+    assert 0 <= score <= 100, f"评分超出范围: {score}"
+    print(f"  ✓ 质量评分: {score}/100")
+    
+    # 5. 测试输出格式
+    roadmap = generate_roadmap("L1", "机器学习专项", 8)
+    score = score_roadmap(roadmap, 0.8, 0.8)
+    markdown = format_roadmap_markdown(roadmap, score)
+    assert "# AI 学习路线" in markdown, "Markdown 缺少标题"
+    assert "## 分周计划" in markdown, "Markdown 缺少分周计划"
+    assert "## 总体评估" in markdown, "Markdown 缺少总体评估"
+    print("  ✓ 输出格式验证通过")
+    
+    # 6. 测试原子写入
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".md") as f:
+        test_file = f.name
+    
+    try:
+        atomic_write_file(test_file, "# 测试内容")
+        with open(test_file, "r", encoding="utf-8") as f:
+            content = f.read()
+        assert content == "# 测试内容", "文件写入失败"
+        print(f"  ✓ 原子写入验证通过: {test_file}")
+    finally:
+        if os.path.exists(test_file):
+            os.unlink(test_file)
+    
+    print("所有自检通过！")
+    return 0
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="AI学习路径规划工具 - 根据基础与目标生成分周学习路线",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  %(prog)s --description "零基础想学机器学习" --output roadmap.txt
-  %(prog)s --description "会Python想搞NLP" --weeks 12 --hours 10 --output roadmap.json --format json
-  %(prog)s --selftest
-        """
+        description="AI学习路径 分周规划 资源验收工具",
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
-
+    
     parser.add_argument(
-        "--description", "-d",
+        "--level",
         type=str,
-        help="用户描述，包含基础水平和学习目标，如：'零基础想学机器学习'"
+        help="基础水平描述，如 '零基础'、'会python'"
     )
     parser.add_argument(
-        "--output", "-o",
+        "--goal",
         type=str,
-        default="ai_roadmap.txt",
-        help="输出文件路径 (默认: ai_roadmap.txt)"
+        help="学习目标，如 '机器学习'、'NLP'"
     )
     parser.add_argument(
-        "--format", "-f",
-        type=str,
-        choices=["text", "json"],
-        default="text",
-        help="输出格式 (默认: text)"
-    )
-    parser.add_argument(
-        "--weeks", "-w",
+        "--weeks",
         type=int,
-        default=8,
-        help="总周数，4-16 (默认: 8)"
+        help="学习周数，4-16"
     )
     parser.add_argument(
-        "--hours", "-H",
-        type=int,
-        default=5,
-        help="每周投入小时数，2-20 (默认: 5)"
+        "--output",
+        type=str,
+        help="输出文件路径，默认输出到 stdout"
     )
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行自检"
+        help="运行自检并退出"
     )
-
+    
     args = parser.parse_args()
-
+    
     # 自检模式
     if args.selftest:
-        success = selftest()
-        sys.exit(0 if success else 1)
-
-    # 参数验证
-    if not args.description:
-        parser.error("必须提供 --description 参数描述你的基础和学习目标")
-
+        try:
+            return run_selftest()
+        except AssertionError as e:
+            print(f"自检失败: {e}", file=sys.stderr)
+            return 1
+        except Exception as e:
+            print(f"自检异常: {e}", file=sys.stderr)
+            return 1
+    
+    # 参数校验
+    if not args.level or not args.goal or not args.weeks:
+        print("错误: 缺少必要参数 --level, --goal, --weeks", file=sys.stderr)
+        print("用法: python run.py --level '零基础' --goal '机器学习' --weeks 8", file=sys.stderr)
+        return 1
+    
+    if not 4 <= args.weeks <= 16:
+        print("错误: --weeks 必须在 4-16 之间", file=sys.stderr)
+        return 1
+    
+    # 判定水平
+    level, level_confidence = determine_level(args.level)
+    if level_confidence == 0:
+        print("警告: 无法准确判定基础水平，使用默认值 L0", file=sys.stderr)
+    
+    # 判定目标
+    goal, goal_confidence = determine_goal(args.goal)
+    if goal_confidence == 0:
+        print("警告: 无法准确判定学习目标，使用默认值 通用入门", file=sys.stderr)
+    
     # 生成路线
-    try:
-        level = detect_level(args.description)
-        goal = detect_goal(args.description)
-        roadmap = generate_roadmap(level, goal, args.weeks, args.hours)
-
-        # 保存输出
-        save_roadmap(roadmap, args.output, args.format)
-        print(f"✅ 学习路线已生成: {args.output}")
-        print(f"   基础水平: {level}")
-        print(f"   学习目标: {goal}")
-        print(f"   总周数: {args.weeks} 周")
-        print(f"   每周投入: {args.hours} 小时")
-
-        # 同时打印预览
-        if args.format == "text":
-            print("\n" + "=" * 60)
-            print("预览（前5周）：")
-            print("=" * 60)
-            lines = format_roadmap(roadmap).split("\n")
-            preview_lines = []
-            week_count = 0
-            for line in lines:
-                if line.startswith("### 第"):
-                    week_count += 1
-                    if week_count > 5:
-                        break
-                preview_lines.append(line)
-            print("\n".join(preview_lines))
-            if week_count > 5:
-                print(f"\n... (共 {args.weeks} 周，完整内容见文件)")
-
-    except ValueError as e:
-        print(f"❌ 参数错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"❌ 生成失败: {e}", file=sys.stderr)
-        sys.exit(1)
+    roadmap = generate_roadmap(level, goal, args.weeks)
+    
+    # 质量评分
+    score = score_roadmap(roadmap, level_confidence, goal_confidence)
+    
+    # 置信度门控
+    if score < 60:
+        print(f"错误: 路线质量评分过低 ({score}/100)，无法生成路线", file=sys.stderr)
+        print("建议: 请重新描述基础水平和学习目标", file=sys.stderr)
+        return 1
+    
+    # 格式化输出
+    markdown = format_roadmap_markdown(roadmap, score)
+    
+    # 输出
+    if args.output:
+        try:
+            atomic_write_file(args.output, markdown)
+            print(f"路线已写入: {args.output}")
+        except Exception as e:
+            print(f"写入文件失败: {e}", file=sys.stderr)
+            return 1
+    else:
+        print(markdown)
+    
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
