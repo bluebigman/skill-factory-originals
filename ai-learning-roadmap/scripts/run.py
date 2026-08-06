@@ -4,526 +4,285 @@
 AI学习路径 分周规划 资源验收工具
 根据用户基础水平、学习目标和时间预算，生成结构化的分周学习路线，
 包含学习资源、实战练习和可量化的验收标准。
+
+修复说明：
+1. 实现动态规划算法：根据周数动态裁剪/扩展主题，根据水平调整资源深度
+2. 实现时间预算参数：--weeks/--hours 影响每周主题和资源分配
+3. 添加默认降级机制：任何输入都能生成有效路线
+4. 重写selftest：真实调用核心函数并断言关键输出
+5. 使用datetime.now(timezone.utc)生成时间戳
 """
 
 import argparse
 import json
 import sys
 import os
-import tempfile
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 
 # ============ 内置知识库 ============
-# 基础水平判定关键词
+# 基础水平判定关键词（按优先级排序，L3最高）
 LEVEL_KEYWORDS = {
-    "L0": ["零基础", "没学过", "完全不懂", "小白", "新手", "无经验"],
-    "L1": ["会python", "有编程经验", "写过代码", "会编程", "python基础"],
-    "L2": ["学过机器学习", "了解神经网络", "ml基础", "深度学习基础"],
-    "L3": ["做过项目", "熟悉深度学习", "有项目经验", "资深"]
+    "L3": ["做过项目", "熟悉深度学习", "有项目经验", "资深", "专家", "多年经验"],
+    "L2": ["学过机器学习", "了解神经网络", "ml基础", "深度学习基础", "机器学习基础"],
+    "L1": ["会python", "有编程经验", "写过代码", "会编程", "python基础", "编程基础"],
+    "L0": ["零基础", "没学过", "完全不懂", "小白", "新手", "无经验", "从零开始"]
 }
 
-# 学习目标判定关键词
+# 学习目标判定关键词（按优先级排序）
 GOAL_KEYWORDS = {
-    "通用入门": ["入门", "全面", "基础", "通识"],
-    "机器学习专项": ["机器学习", "ml", "machine learning"],
-    "深度学习专项": ["深度学习", "神经网络", "deep learning"],
-    "NLP方向": ["nlp", "自然语言", "文本", "语言模型"],
-    "计算机视觉方向": ["cv", "视觉", "图像", "computer vision"]
+    "计算机视觉方向": ["cv", "视觉", "图像", "computer vision", "目标检测", "图像识别"],
+    "NLP方向": ["nlp", "自然语言", "文本", "语言模型", "transformer", "bert", "gpt"],
+    "深度学习专项": ["深度学习", "神经网络", "deep learning", "pytorch", "tensorflow"],
+    "机器学习专项": ["机器学习", "ml", "machine learning", "sklearn", "scikit-learn"],
+    "通用入门": ["入门", "全面", "基础", "通识", "ai", "人工智能"]
 }
 
-# 各方向课程资源库 (真实可用的公开资源)
+# 各方向课程资源库（按难度分级）
 RESOURCES = {
-    "通用入门": [
-        {"name": "吴恩达《机器学习》", "detail": "Coursera 课程第1-4周", "hours": 4},
-        {"name": "Python数据分析", "detail": "B站黑马程序员视频 P1-P30", "hours": 3},
-        {"name": "Kaggle入门教程", "detail": "Titanic 生存预测实战", "hours": 2}
-    ],
-    "机器学习专项": [
-        {"name": "《统计学习方法》", "detail": "第1-3章 感知机/KNN/朴素贝叶斯", "hours": 5},
-        {"name": "sklearn官方文档", "detail": "分类算法部分", "hours": 3},
-        {"name": "Kaggle竞赛", "detail": "House Prices 回归预测", "hours": 4}
-    ],
-    "深度学习专项": [
-        {"name": "《深度学习》花书", "detail": "第6-8章 深度前馈网络", "hours": 5},
-        {"name": "PyTorch官方教程", "detail": "60分钟入门 + 图像分类", "hours": 3},
-        {"name": "CIFAR-10实战", "detail": "用CNN实现图像分类", "hours": 4}
-    ],
-    "NLP方向": [
-        {"name": "《NLP with Transformers》", "detail": "第1-3章 Transformer原理", "hours": 5},
-        {"name": "HuggingFace教程", "detail": "Pipeline + Fine-tuning", "hours": 3},
-        {"name": "情感分析项目", "detail": "IMDB影评情感分类", "hours": 4}
-    ],
-    "计算机视觉方向": [
-        {"name": "CS231n课程", "detail": "Lecture 1-5 CNN基础", "hours": 5},
-        {"name": "OpenCV官方教程", "detail": "图像处理基础", "hours": 3},
-        {"name": "目标检测项目", "detail": "用YOLO实现目标检测", "hours": 4}
-    ]
+    "通用入门": {
+        "L0": [
+            {"name": "Python基础教程", "detail": "廖雪峰Python教程 第1-10章", "hours": 4, "depth": "入门"},
+            {"name": "AI概念入门", "detail": "吴恩达《AI For Everyone》", "hours": 3, "depth": "入门"},
+            {"name": "数学基础", "detail": "3Blue1Brown线性代数系列", "hours": 2, "depth": "入门"}
+        ],
+        "L1": [
+            {"name": "Python数据分析", "detail": "B站黑马程序员视频 P1-P30", "hours": 3, "depth": "进阶"},
+            {"name": "机器学习入门", "detail": "吴恩达《机器学习》第1-4周", "hours": 4, "depth": "进阶"},
+            {"name": "Kaggle入门", "detail": "Titanic 生存预测实战", "hours": 2, "depth": "进阶"}
+        ],
+        "L2": [
+            {"name": "机器学习进阶", "detail": "《统计学习方法》第1-5章", "hours": 5, "depth": "高级"},
+            {"name": "深度学习基础", "detail": "《深度学习》花书第6-8章", "hours": 4, "depth": "高级"},
+            {"name": "项目实战", "detail": "Kaggle House Prices 竞赛", "hours": 3, "depth": "高级"}
+        ],
+        "L3": [
+            {"name": "前沿AI研究", "detail": "arXiv最新论文精读", "hours": 4, "depth": "专家"},
+            {"name": "系统设计", "detail": "AI系统架构设计实践", "hours": 3, "depth": "专家"},
+            {"name": "创新项目", "detail": "自主选题AI创新项目", "hours": 5, "depth": "专家"}
+        ]
+    },
+    "机器学习专项": {
+        "L0": [
+            {"name": "Python编程基础", "detail": "《Python编程从入门到实践》", "hours": 4, "depth": "入门"},
+            {"name": "数学基础", "detail": "线性代数+概率论基础", "hours": 3, "depth": "入门"},
+            {"name": "ML概念", "detail": "吴恩达《机器学习》第1-2周", "hours": 3, "depth": "入门"}
+        ],
+        "L1": [
+            {"name": "经典ML算法", "detail": "《统计学习方法》第1-4章", "hours": 5, "depth": "进阶"},
+            {"name": "sklearn实战", "detail": "官方文档分类算法部分", "hours": 3, "depth": "进阶"},
+            {"name": "特征工程", "detail": "Kaggle特征工程教程", "hours": 2, "depth": "进阶"}
+        ],
+        "L2": [
+            {"name": "模型优化", "detail": "超参数调优与交叉验证", "hours": 4, "depth": "高级"},
+            {"name": "集成学习", "detail": "XGBoost/LightGBM实战", "hours": 3, "depth": "高级"},
+            {"name": "竞赛实战", "detail": "Kaggle House Prices 完整方案", "hours": 5, "depth": "高级"}
+        ],
+        "L3": [
+            {"name": "AutoML", "detail": "自动化机器学习框架研究", "hours": 4, "depth": "专家"},
+            {"name": "MLOps", "detail": "模型部署与监控", "hours": 3, "depth": "专家"},
+            {"name": "研究前沿", "detail": "最新ML论文复现", "hours": 5, "depth": "专家"}
+        ]
+    },
+    "深度学习专项": {
+        "L0": [
+            {"name": "Python基础", "detail": "Python核心编程 第1-8章", "hours": 4, "depth": "入门"},
+            {"name": "线性代数", "detail": "MIT线性代数公开课", "hours": 3, "depth": "入门"},
+            {"name": "DL概念", "detail": "吴恩达《深度学习》第1-2周", "hours": 3, "depth": "入门"}
+        ],
+        "L1": [
+            {"name": "神经网络基础", "detail": "《深度学习》花书第6章", "hours": 5, "depth": "进阶"},
+            {"name": "PyTorch入门", "detail": "官方60分钟入门教程", "hours": 3, "depth": "进阶"},
+            {"name": "CNN实战", "detail": "CIFAR-10图像分类", "hours": 4, "depth": "进阶"}
+        ],
+        "L2": [
+            {"name": "RNN/LSTM", "detail": "序列模型与注意力机制", "hours": 4, "depth": "高级"},
+            {"name": "生成模型", "detail": "GAN/VAE原理与实现", "hours": 3, "depth": "高级"},
+            {"name": "迁移学习", "detail": "预训练模型微调实战", "hours": 5, "depth": "高级"}
+        ],
+        "L3": [
+            {"name": "Transformer", "detail": "Attention Is All You Need 精读", "hours": 4, "depth": "专家"},
+            {"name": "模型部署", "detail": "ONNX/TensorRT优化", "hours": 3, "depth": "专家"},
+            {"name": "研究项目", "detail": "自主选题深度学习研究", "hours": 5, "depth": "专家"}
+        ]
+    },
+    "NLP方向": {
+        "L0": [
+            {"name": "Python文本处理", "detail": "字符串操作与正则表达式", "hours": 3, "depth": "入门"},
+            {"name": "语言学基础", "detail": "计算语言学导论", "hours": 2, "depth": "入门"},
+            {"name": "NLP概述", "detail": "NLP发展历史与现状", "hours": 2, "depth": "入门"}
+        ],
+        "L1": [
+            {"name": "文本预处理", "detail": "分词/去停用词/词干提取", "hours": 4, "depth": "进阶"},
+            {"name": "词向量", "detail": "Word2Vec/GloVe原理", "hours": 3, "depth": "进阶"},
+            {"name": "传统NLP", "detail": "HMM/CRF序列标注", "hours": 3, "depth": "进阶"}
+        ],
+        "L2": [
+            {"name": "RNN/LSTM", "detail": "序列模型在NLP中的应用", "hours": 4, "depth": "高级"},
+            {"name": "Attention", "detail": "注意力机制详解", "hours": 3, "depth": "高级"},
+            {"name": "Transformer", "detail": "BERT/GPT架构解析", "hours": 5, "depth": "高级"}
+        ],
+        "L3": [
+            {"name": "预训练模型", "detail": "HuggingFace微调实战", "hours": 4, "depth": "专家"},
+            {"name": "NLP前沿", "detail": "大语言模型研究", "hours": 3, "depth": "专家"},
+            {"name": "综合项目", "detail": "智能问答系统开发", "hours": 5, "depth": "专家"}
+        ]
+    },
+    "计算机视觉方向": {
+        "L0": [
+            {"name": "Python图像处理", "detail": "PIL/OpenCV基础", "hours": 3, "depth": "入门"},
+            {"name": "图像基础", "detail": "数字图像处理原理", "hours": 3, "depth": "入门"},
+            {"name": "CV概述", "detail": "计算机视觉发展与应用", "hours": 2, "depth": "入门"}
+        ],
+        "L1": [
+            {"name": "CNN基础", "detail": "CS231n Lecture 1-5", "hours": 5, "depth": "进阶"},
+            {"name": "OpenCV实战", "detail": "图像滤波/边缘检测", "hours": 3, "depth": "进阶"},
+            {"name": "图像分类", "detail": "LeNet/AlexNet实现", "hours": 4, "depth": "进阶"}
+        ],
+        "L2": [
+            {"name": "目标检测", "detail": "YOLO/SSD原理与实现", "hours": 5, "depth": "高级"},
+            {"name": "图像分割", "detail": "FCN/UNet语义分割", "hours": 4, "depth": "高级"},
+            {"name": "GAN应用", "detail": "图像生成与风格迁移", "hours": 3, "depth": "高级"}
+        ],
+        "L3": [
+            {"name": "视频理解", "detail": "动作识别与视频分析", "hours": 4, "depth": "专家"},
+            {"name": "3D视觉", "detail": "点云处理与三维重建", "hours": 3, "depth": "专家"},
+            {"name": "CV前沿", "detail": "最新CV论文与竞赛", "hours": 5, "depth": "专家"}
+        ]
+    }
 }
 
-# 实战练习模板
-PRACTICE_TEMPLATES = {
-    "通用入门": [
-        "完成一个简单的数据分析项目（如销售数据可视化）",
-        "在Kaggle上完成Titanic生存预测并提交结果",
-        "用Python实现一个简单的线性回归模型"
-    ],
-    "机器学习专项": [
-        "用sklearn实现KNN分类器并在iris数据集上测试",
-        "完成一个完整的机器学习项目（数据清洗→建模→评估）",
-        "参加一个Kaggle竞赛并提交结果"
-    ],
-    "深度学习专项": [
-        "用PyTorch实现一个简单的神经网络",
-        "在CIFAR-10上训练CNN并达到80%以上准确率",
-        "实现一个GAN生成手写数字"
-    ],
-    "NLP方向": [
-        "用HuggingFace实现文本分类",
-        "微调一个预训练模型完成情感分析",
-        "实现一个简单的聊天机器人"
-    ],
-    "计算机视觉方向": [
-        "用OpenCV实现图像边缘检测",
-        "训练一个CNN进行图像分类",
-        "实现一个目标检测系统"
-    ]
-}
-
-# 验收标准模板
-ACCEPTANCE_TEMPLATES = {
-    "通用入门": [
-        "能独立完成数据分析项目并输出报告",
-        "Kaggle提交得分达到前50%",
-        "模型在测试集上准确率≥80%"
-    ],
-    "机器学习专项": [
-        "能解释KNN、朴素贝叶斯等算法原理",
-        "能独立完成数据预处理和特征工程",
-        "模型在测试集上准确率≥85%"
-    ],
-    "深度学习专项": [
-        "能解释反向传播原理",
-        "能独立训练CNN模型",
-        "模型在测试集上准确率≥80%"
-    ],
-    "NLP方向": [
-        "能解释Transformer架构",
-        "能微调预训练模型",
-        "模型在测试集上F1分数≥0.8"
-    ],
-    "计算机视觉方向": [
-        "能解释CNN各层作用",
-        "能独立实现图像分类",
-        "模型在测试集上mAP≥0.7"
-    ]
-}
-
-
-def determine_level(description: str) -> Tuple[str, float]:
-    """
-    通过关键词匹配确定基础水平
-    
-    Args:
-        description: 用户描述的基础水平
-        
-    Returns:
-        (水平等级, 置信度分数)
-    """
-    if not description:
-        return "L0", 0.0
-    
-    description_lower = description.lower()
-    scores = {}
-    
-    for level, keywords in LEVEL_KEYWORDS.items():
-        score = 0
-        for keyword in keywords:
-            if keyword.lower() in description_lower:
-                score += 1
-        scores[level] = score
-    
-    # 找到最高分
-    max_score = max(scores.values())
-    if max_score == 0:
-        return "L0", 0.0
-    
-    # 如果有多个相同最高分，取最高等级
-    best_levels = [level for level, score in scores.items() if score == max_score]
-    best_level = max(best_levels)
-    
-    # 计算置信度（0-1）
-    confidence = min(1.0, max_score / 2)
-    
-    return best_level, confidence
-
-
-def determine_goal(description: str) -> Tuple[str, float]:
-    """
-    通过关键词匹配确定学习目标
-    
-    Args:
-        description: 用户描述的学习目标
-        
-    Returns:
-        (目标类别, 置信度分数)
-    """
-    if not description:
-        return "通用入门", 0.0
-    
-    description_lower = description.lower()
-    scores = {}
-    
-    for goal, keywords in GOAL_KEYWORDS.items():
-        score = 0
-        for keyword in keywords:
-            if keyword.lower() in description_lower:
-                score += 1
-        scores[goal] = score
-    
-    # 找到最高分
-    max_score = max(scores.values())
-    if max_score == 0:
-        return "通用入门", 0.0
-    
-    # 如果有多个相同最高分，取第一个
-    best_goals = [goal for goal, score in scores.items() if score == max_score]
-    best_goal = best_goals[0]
-    
-    # 计算置信度（0-1）
-    confidence = min(1.0, max_score / 2)
-    
-    return best_goal, confidence
-
-
-def generate_roadmap(level: str, goal: str, weeks: int) -> Dict:
-    """
-    生成分周学习路线
-    
-    Args:
-        level: 基础水平（L0-L3）
-        goal: 学习目标
-        weeks: 学习周数（4-16）
-        
-    Returns:
-        学习路线字典
-    """
-    # 获取资源
-    resources = RESOURCES.get(goal, RESOURCES["通用入门"])
-    practices = PRACTICE_TEMPLATES.get(goal, PRACTICE_TEMPLATES["通用入门"])
-    acceptances = ACCEPTANCE_TEMPLATES.get(goal, ACCEPTANCE_TEMPLATES["通用入门"])
-    
-    # 生成分周计划
-    weekly_plans = []
-    for week in range(1, weeks + 1):
-        # 循环使用资源
-        resource_idx = (week - 1) % len(resources)
-        practice_idx = (week - 1) % len(practices)
-        acceptance_idx = (week - 1) % len(acceptances)
-        
-        # 根据周数调整难度
-        difficulty = "基础" if week <= weeks // 3 else ("进阶" if week <= weeks * 2 // 3 else "高级")
-        
-        plan = {
-            "week": week,
-            "topic": f"{difficulty}阶段：{resources[resource_idx]['name']}",
-            "resources": [resources[resource_idx]],
-            "practice": practices[practice_idx],
-            "acceptance": acceptances[acceptance_idx]
-        }
-        weekly_plans.append(plan)
-    
-    # 生成路线
-    roadmap = {
-        "level": level,
-        "goal": goal,
-        "weeks": weeks,
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "weekly_plans": weekly_plans,
-        "total_hours": sum(r["hours"] for r in resources) * (weeks // len(resources) + 1)
+# 各水平对应的前置知识（动态生成）
+def get_prerequisites(level: str, goal: str) -> List[str]:
+    """根据水平和目标动态生成前置知识"""
+    base_prereqs = {
+        "L0": ["Python基础语法", "Linux命令行", "数学基础(线性代数/概率论)"],
+        "L1": ["Python高级特性", "NumPy/Pandas", "数据可视化"],
+        "L2": ["机器学习算法", "模型评估方法", "特征工程"],
+        "L3": ["深度学习框架", "模型调优", "分布式训练"]
     }
     
-    return roadmap
+    goal_specific = {
+        "通用入门": ["AI基本概念", "行业应用场景"],
+        "机器学习专项": ["统计学习方法", "sklearn使用"],
+        "深度学习专项": ["神经网络原理", "GPU计算基础"],
+        "NLP方向": ["语言学基础", "文本处理技术"],
+        "计算机视觉方向": ["图像处理基础", "OpenCV使用"]
+    }
+    
+    prereqs = base_prereqs.get(level, base_prereqs["L0"]) + goal_specific.get(goal, goal_specific["通用入门"])
+    return prereqs
 
+# 每周主题模板（按方向，可动态扩展）
+WEEKLY_THEMES = {
+    "通用入门": ["AI概述与Python基础", "数据处理与可视化", "机器学习入门", "监督学习算法", "模型评估与调优", "深度学习基础", "项目实战", "综合复习"],
+    "机器学习专项": ["数学基础复习", "经典ML算法", "特征工程", "模型集成", "实战项目1", "实战项目2", "算法优化", "综合测评"],
+    "深度学习专项": ["神经网络基础", "CNN原理", "RNN与序列模型", "PyTorch实战", "生成模型", "迁移学习", "实战项目", "前沿技术"],
+    "NLP方向": ["文本预处理", "词向量与Embedding", "RNN/LSTM", "Attention机制", "Transformer", "BERT与预训练", "NLP实战", "综合项目"],
+    "计算机视觉方向": ["图像基础", "CNN架构", "目标检测", "图像分割", "生成对抗网络", "模型部署", "视觉实战", "综合项目"]
+}
 
-def score_roadmap(roadmap: Dict, level_confidence: float, goal_confidence: float) -> int:
-    """
-    对生成的路线进行质量评分（0-100）
+def detect_level(description: str) -> str:
+    """根据用户描述识别基础水平（带默认降级）"""
+    if not description:
+        return "L0"
     
-    Args:
-        roadmap: 学习路线字典
-        level_confidence: 水平判定置信度
-        goal_confidence: 目标判定置信度
-        
-    Returns:
-        评分（0-100）
-    """
-    score = 0
-    
-    # 水平判定成功
-    if level_confidence > 0:
-        score += 20
-    
-    # 目标判定成功
-    if goal_confidence > 0:
-        score += 20
-    
-    # 周数在 4-16 范围内
-    if 4 <= roadmap["weeks"] <= 16:
-        score += 20
-    
-    # 资源库匹配成功
-    if roadmap["goal"] in RESOURCES:
-        score += 20
-    
-    # 每周计划完整
-    if all(all(k in plan for k in ["week", "topic", "resources", "practice", "acceptance"]) 
-           for plan in roadmap["weekly_plans"]):
-        score += 20
-    
-    return min(100, score)
+    desc_lower = description.lower()
+    # 按优先级从高到低匹配
+    for level in ["L3", "L2", "L1", "L0"]:
+        for kw in LEVEL_KEYWORDS[level]:
+            if kw in desc_lower:
+                return level
+    return "L0"  # 默认零基础
 
+def detect_goal(description: str) -> str:
+    """根据用户描述识别学习目标（带默认降级）"""
+    if not description:
+        return "通用入门"
+    
+    desc_lower = description.lower()
+    # 按优先级从高到低匹配
+    for goal in ["计算机视觉方向", "NLP方向", "深度学习专项", "机器学习专项", "通用入门"]:
+        for kw in GOAL_KEYWORDS[goal]:
+            if kw in desc_lower:
+                return goal
+    return "通用入门"  # 默认通用入门
 
-def format_roadmap_markdown(roadmap: Dict, score: int) -> str:
-    """
-    将学习路线格式化为 Markdown
+def dynamic_theme_allocation(goal: str, weeks: int) -> List[str]:
+    """动态分配每周主题，根据周数裁剪或扩展"""
+    base_themes = WEEKLY_THEMES.get(goal, WEEKLY_THEMES["通用入门"])
     
-    Args:
-        roadmap: 学习路线字典
-        score: 质量评分
-        
-    Returns:
-        Markdown 格式的路线
-    """
-    lines = []
-    lines.append(f"# AI 学习路线（{roadmap['level']} → {roadmap['goal']}，{roadmap['weeks']}周）")
-    lines.append("")
-    lines.append("## 基本信息")
-    lines.append(f"- 基础水平：{roadmap['level']}")
-    lines.append(f"- 学习目标：{roadmap['goal']}")
-    lines.append(f"- 学习周期：{roadmap['weeks']}周")
-    lines.append(f"- 生成时间：{roadmap['generated_at']}")
-    lines.append("")
-    lines.append("## 分周计划")
-    
-    for plan in roadmap["weekly_plans"]:
-        lines.append(f"### 第 {plan['week']} 周：{plan['topic']}")
-        lines.append(f"- **学习资源**：{plan['resources'][0]['name']} - {plan['resources'][0]['detail']}")
-        lines.append(f"- **实战练习**：{plan['practice']}")
-        lines.append(f"- **验收标准**：{plan['acceptance']}")
-        lines.append("")
-    
-    lines.append("## 总体评估")
-    lines.append(f"- 路线评分：{score}/100")
-    
-    if score >= 80:
-        lines.append("- 建议：路线质量优秀，按计划执行即可。")
-    elif score >= 60:
-        lines.append("- 建议：路线质量良好，建议根据实际情况微调。")
+    if weeks <= len(base_themes):
+        # 裁剪：选择前weeks个主题
+        return base_themes[:weeks]
     else:
-        lines.append("- 建议：路线质量一般，建议重新描述需求。")
-    
-    return "\n".join(lines)
+        # 扩展：循环使用主题并添加"进阶"标记
+        extended = []
+        for i in range(weeks):
+            theme = base_themes[i % len(base_themes)]
+            if i >= len(base_themes):
+                theme = f"{theme}（进阶）"
+            extended.append(theme)
+        return extended
 
+def generate_roadmap(level: str, goal: str, weeks: int, hours_per_week: int) -> Dict:
+    """生成分周学习路线（动态规划算法）"""
+    if weeks < 4 or weeks > 16:
+        raise ValueError(f"总周数必须在4-16之间，当前值: {weeks}")
+    if hours_per_week < 2 or hours_per_week > 20:
+        raise ValueError(f"每周投入时间必须在2-20小时之间，当前值: {hours_per_week}")
 
-def atomic_write_file(filepath: str, content: str) -> None:
-    """
-    原子化写入文件
+    # 获取该方向的课程资源（按水平分级）
+    goal_resources = RESOURCES.get(goal, RESOURCES["通用入门"])
+    resources = goal_resources.get(level, goal_resources["L0"])
     
-    Args:
-        filepath: 文件路径
-        content: 文件内容
-    """
-    directory = os.path.dirname(filepath)
-    if directory and not os.path.exists(directory):
-        os.makedirs(directory)
+    # 动态分配主题
+    themes = dynamic_theme_allocation(goal, weeks)
     
-    # 写入临时文件
-    fd, temp_path = tempfile.mkstemp(dir=directory or ".", suffix=".tmp")
-    try:
-        with os.fdopen(fd, "w", encoding="utf-8") as f:
-            f.write(content)
-        
-        # 原子替换
-        os.replace(temp_path, filepath)
-    except Exception:
-        # 清理临时文件
-        if os.path.exists(temp_path):
-            os.unlink(temp_path)
-        raise
+    # 动态生成前置知识
+    prereqs = get_prerequisites(level, goal)
 
-
-def run_selftest() -> int:
-    """
-    运行自检，验证核心功能
-    
-    Returns:
-        退出码（0 表示成功）
-    """
-    print("开始自检...")
-    
-    # 1. 测试水平判定
-    test_cases = [
-        ("零基础", "L0"),
-        ("会python", "L1"),
-        ("学过机器学习", "L2"),
-        ("做过项目", "L3"),
-    ]
-    
-    for desc, expected in test_cases:
-        level, confidence = determine_level(desc)
-        assert level == expected, f"水平判定失败: {desc} -> {level}, 期望 {expected}"
-        assert confidence > 0, f"置信度应为正数: {desc}"
-        print(f"  ✓ 水平判定: {desc} -> {level} (置信度: {confidence:.2f})")
-    
-    # 2. 测试目标判定
-    goal_cases = [
-        ("入门", "通用入门"),
-        ("机器学习", "机器学习专项"),
-        ("深度学习", "深度学习专项"),
-        ("nlp", "NLP方向"),
-        ("cv", "计算机视觉方向"),
-    ]
-    
-    for desc, expected in goal_cases:
-        goal, confidence = determine_goal(desc)
-        assert goal == expected, f"目标判定失败: {desc} -> {goal}, 期望 {expected}"
-        assert confidence > 0, f"置信度应为正数: {desc}"
-        print(f"  ✓ 目标判定: {desc} -> {goal} (置信度: {confidence:.2f})")
-    
-    # 3. 测试路线生成
-    for weeks in [4, 8, 16]:
-        roadmap = generate_roadmap("L1", "机器学习专项", weeks)
-        assert len(roadmap["weekly_plans"]) == weeks, f"周数错误: {len(roadmap['weekly_plans'])} != {weeks}"
-        assert roadmap["goal"] == "机器学习专项", f"目标错误: {roadmap['goal']}"
-        print(f"  ✓ 路线生成: {weeks}周路线生成成功")
-    
-    # 4. 测试评分
-    roadmap = generate_roadmap("L1", "机器学习专项", 8)
-    score = score_roadmap(roadmap, 0.8, 0.8)
-    assert 0 <= score <= 100, f"评分超出范围: {score}"
-    print(f"  ✓ 质量评分: {score}/100")
-    
-    # 5. 测试输出格式
-    roadmap = generate_roadmap("L1", "机器学习专项", 8)
-    score = score_roadmap(roadmap, 0.8, 0.8)
-    markdown = format_roadmap_markdown(roadmap, score)
-    assert "# AI 学习路线" in markdown, "Markdown 缺少标题"
-    assert "## 分周计划" in markdown, "Markdown 缺少分周计划"
-    assert "## 总体评估" in markdown, "Markdown 缺少总体评估"
-    print("  ✓ 输出格式验证通过")
-    
-    # 6. 测试原子写入
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".md") as f:
-        test_file = f.name
-    
-    try:
-        atomic_write_file(test_file, "# 测试内容")
-        with open(test_file, "r", encoding="utf-8") as f:
-            content = f.read()
-        assert content == "# 测试内容", "文件写入失败"
-        print(f"  ✓ 原子写入验证通过: {test_file}")
-    finally:
-        if os.path.exists(test_file):
-            os.unlink(test_file)
-    
-    print("所有自检通过！")
-    return 0
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="AI学习路径 分周规划 资源验收工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter
-    )
-    
-    parser.add_argument(
-        "--level",
-        type=str,
-        help="基础水平描述，如 '零基础'、'会python'"
-    )
-    parser.add_argument(
-        "--goal",
-        type=str,
-        help="学习目标，如 '机器学习'、'NLP'"
-    )
-    parser.add_argument(
-        "--weeks",
-        type=int,
-        help="学习周数，4-16"
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        help="输出文件路径，默认输出到 stdout"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自检并退出"
-    )
-    
-    args = parser.parse_args()
-    
-    # 自检模式
-    if args.selftest:
-        try:
-            return run_selftest()
-        except AssertionError as e:
-            print(f"自检失败: {e}", file=sys.stderr)
-            return 1
-        except Exception as e:
-            print(f"自检异常: {e}", file=sys.stderr)
-            return 1
-    
-    # 参数校验
-    if not args.level or not args.goal or not args.weeks:
-        print("错误: 缺少必要参数 --level, --goal, --weeks", file=sys.stderr)
-        print("用法: python run.py --level '零基础' --goal '机器学习' --weeks 8", file=sys.stderr)
-        return 1
-    
-    if not 4 <= args.weeks <= 16:
-        print("错误: --weeks 必须在 4-16 之间", file=sys.stderr)
-        return 1
-    
-    # 判定水平
-    level, level_confidence = determine_level(args.level)
-    if level_confidence == 0:
-        print("警告: 无法准确判定基础水平，使用默认值 L0", file=sys.stderr)
-    
-    # 判定目标
-    goal, goal_confidence = determine_goal(args.goal)
-    if goal_confidence == 0:
-        print("警告: 无法准确判定学习目标，使用默认值 通用入门", file=sys.stderr)
-    
-    # 生成路线
-    roadmap = generate_roadmap(level, goal, args.weeks)
-    
-    # 质量评分
-    score = score_roadmap(roadmap, level_confidence, goal_confidence)
-    
-    # 置信度门控
-    if score < 60:
-        print(f"错误: 路线质量评分过低 ({score}/100)，无法生成路线", file=sys.stderr)
-        print("建议: 请重新描述基础水平和学习目标", file=sys.stderr)
-        return 1
-    
-    # 格式化输出
-    markdown = format_roadmap_markdown(roadmap, score)
-    
-    # 输出
-    if args.output:
-        try:
-            atomic_write_file(args.output, markdown)
-            print(f"路线已写入: {args.output}")
-        except Exception as e:
-            print(f"写入文件失败: {e}", file=sys.stderr)
-            return 1
+    # 计算每周资源分配（动态调整）
+    total_resources = len(resources)
+    # 根据周数和水平动态计算每周资源数
+    if weeks <= 4:
+        resources_per_week = min(3, total_resources)
+    elif weeks <= 8:
+        resources_per_week = min(2, total_resources)
     else:
-        print(markdown)
+        resources_per_week = 1
     
-    return 0
+    # 根据水平调整资源深度
+    depth_multiplier = {
+        "L0": 0.8,
+        "L1": 1.0,
+        "L2": 1.2,
+        "L3": 1.5
+    }.get(level, 1.0)
 
+    roadmap = {
+        "meta": {
+            "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
+            "level": level,
+            "goal": goal,
+            "weeks": weeks,
+            "hours_per_week": hours_per_week,
+            "total_hours": weeks * hours_per_week,
+            "algorithm": "dynamic_planning_v2"
+        },
+        "prerequisites": prereqs,
+        "weeks": []
+    }
 
-if __name__ == "__main__":
-    sys.exit(main())
+    for week in range(1, weeks + 1):
+        # 选择本周主题
+        theme = themes[week - 1]
+
+        # 动态分配资源（根据周数和水平）
+        week_resources = []
+        if resources_per_week > 0:
+            start_idx = ((week - 1) * resources_per_week) % total_resources
+            for i in range(resources_per_week):
+                idx = (start_idx + i) % total_resources
+                res = resources[idx]
+                # 根据水平
