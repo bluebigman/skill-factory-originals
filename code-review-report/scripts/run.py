@@ -79,6 +79,7 @@ def parse_diff(diff_text: str) -> List[Dict[str, Any]]:
     """解析 unified diff 文本，返回变更块列表。
 
     支持标准 git diff 格式，对非标准格式进行容错处理。
+    对 hunk 头进行严格解析，格式错误时抛出明确异常。
     """
     if not diff_text or not diff_text.strip():
         raise ValueError("Diff 内容为空")
@@ -119,8 +120,8 @@ def parse_diff(diff_text: str) -> List[Dict[str, Any]]:
             # 保存上一个 hunk
             if current_hunk:
                 current_file["hunks"].append(current_hunk)
-            # 解析 hunk 头
-            match = re.search(r"@@ -(\d+)(?:,\d+)? \+(\d+)(?:,\d+)? @@", line)
+            # 严格解析 hunk 头
+            match = re.match(r"^@@ -(\d+)(?:,\d+)? \+(\d+)(?:,\d+)? @@", line)
             if match:
                 current_hunk = {
                     "old_start": int(match.group(1)),
@@ -128,7 +129,8 @@ def parse_diff(diff_text: str) -> List[Dict[str, Any]]:
                     "lines": [],
                 }
             else:
-                current_hunk = {"old_start": 0, "new_start": 0, "lines": []}
+                # 格式错误，抛出明确异常
+                raise ValueError(f"无法解析 hunk 头: {line}")
         elif current_hunk is not None:
             current_hunk["lines"].append(line)
         elif current_file is not None and not line.startswith(("---", "+++")):
@@ -150,15 +152,35 @@ def parse_diff(diff_text: str) -> List[Dict[str, Any]]:
 
 
 def apply_rules(line: str, context: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """对单行应用规则，返回匹配的问题列表。"""
+    """对单行应用规则，返回匹配的问题列表。
+
+    对 SEC001 规则增加上下文过滤，跳过注释行。
+    """
     issues = []
+    stripped_line = line.strip()
+    
     for rule in BUILTIN_RULES:
+        # SEC001 规则：跳过注释行（# 或 // 开头）
+        if rule["id"] == "SEC001":
+            if stripped_line.startswith("#") or stripped_line.startswith("//"):
+                continue
+        
         if re.search(rule["pattern"], line):
+            # 动态计算 confidence
+            confidence = rule["confidence"]
+            # 根据匹配位置调整 confidence
+            if rule["id"] == "SEC001":
+                # 硬编码密码在赋值语句中，置信度较高
+                if "=" in line and not line.strip().startswith(("#", "//")):
+                    confidence = min(0.99, confidence + 0.04)
+                else:
+                    confidence = max(0.5, confidence - 0.2)
+            
             issue = {
                 "rule_id": rule["id"],
                 "severity": rule["severity"],
                 "message": rule["message"],
-                "confidence": rule["confidence"],
+                "confidence": confidence,
                 "line": context.get("line_number", 0),
                 "file": context.get("file_path", ""),
                 "content": line.strip(),
@@ -399,59 +421,21 @@ index 1234567..abcdefg 100644
         print(f"✗ 主流程集成测试失败: {e}")
         return EXIT_INTERNAL_ERROR
 
-    print("所有自检通过!")
-    return EXIT_SUCCESS
-
-
-def main(argv: Optional[List[str]] = None) -> int:
-    """主入口函数。"""
-    parser = argparse.ArgumentParser(
-        description="代码审查差异分析工具 - 解析 diff 并生成质量报告"
-    )
-    parser.add_argument(
-        "--diff",
-        type=str,
-        help="diff 文本内容或文件路径",
-    )
-    parser.add_argument(
-        "--filter",
-        type=str,
-        choices=SEVERITY_LEVELS,
-        help="按严重级别过滤报告",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        help="输出报告到文件",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自检",
-    )
-    parser.add_argument(
-        "--version",
-        action="version",
-        version=f"code-review-report v{VERSION}",
-    )
-
-    args = parser.parse_args(argv)
-
-    if args.selftest:
-        return run_selftest()
-
-    if not args.diff:
-        print("错误: 必须提供 --diff 参数", file=sys.stderr)
-        parser.print_help()
-        return EXIT_PARAM_ERROR
-
-    # 读取 diff 内容
+    # 测试 9: 无效 hunk 头处理
     try:
-        diff_path = Path(args.diff)
-        if diff_path.exists():
-            diff_text = diff_path.read_text(encoding="utf-8")
-        else:
-            diff_text = args.diff
+        invalid_diff = """diff --git a/test.py b/test.py
+--- a/test.py
++++ b/test.py
+@@ invalid hunk header @@
++print("test")
+"""
+        parse_diff(invalid_diff)
+        print("✗ 无效 hunk 头应抛出异常")
+        return EXIT_INTERNAL_ERROR
+    except ValueError as e:
+        print(f"✓ 无效 hunk 头处理测试通过: {e}")
     except Exception as e:
-        print(f"错误: 无法读取 diff: {e}", file=sys.stderr)
-        return
+        print(f"✗ 无效 hunk 头处理测试失败: {e}")
+        return EXIT_INTERNAL_ERROR
+
+    # 测试
