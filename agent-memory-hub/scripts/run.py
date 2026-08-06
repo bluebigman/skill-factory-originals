@@ -12,7 +12,7 @@ import re
 import sys
 import tempfile
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -60,7 +60,7 @@ def save_memory(content: str, file_type: str, output_dir: str, index_file: str) 
     返回生成的记忆 ID
     """
     os.makedirs(output_dir, exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
     content_id = generate_id(content)
     memory_id = f"{file_type}_{content_id}_{timestamp}"
     filename = f"{memory_id}.md"
