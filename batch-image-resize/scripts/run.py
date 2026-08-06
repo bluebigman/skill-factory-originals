@@ -6,9 +6,12 @@ import os
 import sys
 import tempfile
 import shutil
-from PIL import Image
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from tqdm import tqdm
+from PIL import Image, ImageOps
+import datetime
 
-def resize_image(input_path, output_path, width, height, keep_aspect=False, quality=85):
+def resize_image(input_path, output_path, width, height, keep_aspect=False, quality=85, overwrite=False):
     """
     Resize a single image.
     
@@ -19,18 +22,37 @@ def resize_image(input_path, output_path, width, height, keep_aspect=False, qual
         height: Target height (int or None)
         keep_aspect: If True, maintain aspect ratio when only one dimension is given
         quality: JPEG quality (1-100)
+        overwrite: If True, overwrite existing output files
     
     Returns:
         True on success, False on failure
     """
     try:
+        # Check if output file exists and overwrite is not allowed
+        if os.path.exists(output_path) and not overwrite:
+            print(f"Skipping {input_path}: output file exists (use --overwrite to replace)")
+            return False
+        
         with Image.open(input_path) as img:
+            # Handle EXIF orientation
+            img = ImageOps.exif_transpose(img)
+            
             orig_w, orig_h = img.size
             
             # Handle None dimensions
             if width is None and height is None:
                 # No resize needed, just copy
-                img.save(output_path, quality=quality)
+                ext = os.path.splitext(output_path)[1].lower()
+                format_map = {
+                    '.jpg': 'JPEG', '.jpeg': 'JPEG', '.png': 'PNG',
+                    '.gif': 'GIF', '.bmp': 'BMP', '.tiff': 'TIFF',
+                    '.webp': 'WEBP'
+                }
+                fmt = format_map.get(ext, None)
+                if fmt:
+                    img.save(output_path, format=fmt, quality=quality)
+                else:
+                    img.save(output_path, quality=quality)
                 return True
             
             if keep_aspect:
@@ -60,16 +82,30 @@ def resize_image(input_path, output_path, width, height, keep_aspect=False, qual
                 return False
             
             resized = img.resize(new_size, Image.Resampling.LANCZOS)
-            resized.save(output_path, quality=quality)
+            
+            # Determine format from output extension
+            ext = os.path.splitext(output_path)[1].lower()
+            format_map = {
+                '.jpg': 'JPEG', '.jpeg': 'JPEG', '.png': 'PNG',
+                '.gif': 'GIF', '.bmp': 'BMP', '.tiff': 'TIFF',
+                '.webp': 'WEBP'
+            }
+            fmt = format_map.get(ext, None)
+            
+            if fmt:
+                resized.save(output_path, format=fmt, quality=quality)
+            else:
+                resized.save(output_path, quality=quality)
             return True
     except Exception as e:
         print(f"Error resizing {input_path}: {e}")
         return False
 
 def batch_resize(input_dir, output_dir, width=None, height=None, 
-                 keep_aspect=False, quality=85, recursive=False):
+                 keep_aspect=False, quality=85, recursive=False, 
+                 overwrite=False, max_workers=4):
     """
-    Resize all images in a directory.
+    Resize all images in a directory with parallel processing.
     
     Args:
         input_dir: Source directory
@@ -79,6 +115,8 @@ def batch_resize(input_dir, output_dir, width=None, height=None,
         keep_aspect: Maintain aspect ratio
         quality: JPEG quality
         recursive: Process subdirectories
+        overwrite: Overwrite existing files
+        max_workers: Number of parallel workers
     
     Returns:
         Tuple (success_count, fail_count)
@@ -87,6 +125,7 @@ def batch_resize(input_dir, output_dir, width=None, height=None,
         print(f"Input directory not found: {input_dir}")
         return (0, 0)
     
+    # Create output directory if it doesn't exist
     os.makedirs(output_dir, exist_ok=True)
     
     success = 0
@@ -94,6 +133,9 @@ def batch_resize(input_dir, output_dir, width=None, height=None,
     
     # Supported image extensions
     extensions = {'.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff', '.webp'}
+    
+    # Collect all image files
+    image_files = []
     
     if recursive:
         # Walk through all subdirectories
@@ -111,10 +153,7 @@ def batch_resize(input_dir, output_dir, width=None, height=None,
                 if ext in extensions:
                     input_path = os.path.join(root, filename)
                     output_path = os.path.join(target_dir, filename)
-                    if resize_image(input_path, output_path, width, height, keep_aspect, quality):
-                        success += 1
-                    else:
-                        fail += 1
+                    image_files.append((input_path, output_path))
     else:
         # Only process files directly in input_dir
         for filename in os.listdir(input_dir):
@@ -122,10 +161,43 @@ def batch_resize(input_dir, output_dir, width=None, height=None,
             if ext in extensions:
                 input_path = os.path.join(input_dir, filename)
                 output_path = os.path.join(output_dir, filename)
-                if resize_image(input_path, output_path, width, height, keep_aspect, quality):
-                    success += 1
-                else:
-                    fail += 1
+                image_files.append((input_path, output_path))
+    
+    if not image_files:
+        print("No image files found")
+        return (0, 0)
+    
+    print(f"Processing {len(image_files)} images with {max_workers} workers...")
+    
+    # Process images in parallel with progress bar
+    try:
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
+            # Submit all tasks
+            future_to_path = {
+                executor.submit(resize_image, inp, outp, width, height, 
+                              keep_aspect, quality, overwrite): (inp, outp)
+                for inp, outp in image_files
+            }
+            
+            # Process results with progress bar
+            with tqdm(total=len(image_files), desc="Resizing images", unit="img") as pbar:
+                for future in as_completed(future_to_path):
+                    inp, outp = future_to_path[future]
+                    try:
+                        result = future.result()
+                        if result:
+                            success += 1
+                        else:
+                            fail += 1
+                    except Exception as e:
+                        print(f"Error processing {inp}: {e}")
+                        fail += 1
+                    pbar.update(1)
+                    pbar.set_postfix(success=success, fail=fail)
+    except KeyboardInterrupt:
+        print("\nInterrupted by user. Cleaning up...")
+        # The executor will be shut down automatically
+        return (success, fail)
     
     return (success, fail)
 
@@ -228,6 +300,35 @@ def selftest():
         assert os.path.exists(os.path.join(output_dir7, "subdir", "test4.png")), \
             "Test 7 failed: subdir output not created"
         
+        # Test 8: Overwrite behavior
+        output_dir8 = os.path.join(test_dir, "output8")
+        # First run
+        success, fail = batch_resize(input_dir, output_dir8, width=100, height=50)
+        assert success == 3, f"Test 8a failed: expected 3 successes, got {success}"
+        
+        # Second run without overwrite should skip existing files
+        success, fail = batch_resize(input_dir, output_dir8, width=100, height=50)
+        assert success == 0, f"Test 8b failed: expected 0 successes, got {success}"
+        assert fail == 3, f"Test 8b failed: expected 3 failures, got {fail}"
+        
+        # Third run with overwrite should succeed
+        success, fail = batch_resize(input_dir, output_dir8, width=100, height=50, overwrite=True)
+        assert success == 3, f"Test 8c failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 8c failed: expected 0 failures, got {fail}"
+        
+        # Test 9: Format conversion (PNG to JPEG)
+        output_dir9 = os.path.join(test_dir, "output9")
+        os.makedirs(output_dir9, exist_ok=True)
+        # Convert test2.png to test2.jpg
+        success, fail = batch_resize(input_dir, output_dir9, width=100, height=100)
+        assert success == 3, f"Test 9 failed: expected 3 successes, got {success}"
+        
+        # Test 10: Parallel processing with multiple workers
+        output_dir10 = os.path.join(test_dir, "output10")
+        success, fail = batch_resize(input_dir, output_dir10, width=50, height=50, max_workers=8)
+        assert success == 3, f"Test 10 failed: expected 3 successes, got {success}"
+        assert fail == 0, f"Test 10 failed: expected 0 failures, got {fail}"
+        
         print("All self-tests passed!")
         return 0
     except AssertionError as e:
@@ -254,6 +355,10 @@ def main():
                         help="JPEG quality (1-100, default: 85)")
     parser.add_argument("-r", "--recursive", action="store_true",
                         help="Process subdirectories recursively")
+    parser.add_argument("--overwrite", action="store_true",
+                        help="Overwrite existing output files")
+    parser.add_argument("--workers", type=int, default=4,
+                        help="Number of parallel workers (default: 4)")
     parser.add_argument("--selftest", action="store_true",
                         help="Run self-test and exit")
     
@@ -270,14 +375,20 @@ def main():
         print(f"Input directory not found: {args.input_dir}")
         sys.exit(1)
     
+    start_time = datetime.datetime.now(datetime.timezone.utc)
+    print(f"Start time: {start_time.isoformat()}")
+    
     success, fail = batch_resize(args.input_dir, args.output_dir, 
                                  args.width, args.height, 
                                  args.keep_aspect, args.quality, 
-                                 args.recursive)
+                                 args.recursive, args.overwrite,
+                                 args.workers)
+    
+    end_time = datetime.datetime.now(datetime.timezone.utc)
+    duration = (end_time - start_time).total_seconds()
     
     print(f"Resize complete: {success} succeeded, {fail} failed")
+    print(f"Duration: {duration:.2f} seconds")
+    
     if fail > 0:
         sys.exit(1)
-
-if __name__ == "__main__":
-    main()
