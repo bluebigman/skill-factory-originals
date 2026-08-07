@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: wechat-article-to-markdown-skill
 name: wechat-article-to-markdown-skill
-displayName: 公众号文章 链接转存 Markdown 归档
+displayName: 公众号文章 链接转存 本地归档
 description: 输入公众号文章链接，自动抓取正文并保存为本地 Markdown 文件。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/wechat-article-to-markdown-skill
@@ -12,13 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: 独立技能工坊
 agent_created: true
-trigger_words: ["公众号文章", "微信文章转Markdown", "链接转文档", "文章归档", "抓取公众号"]
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
+trigger_words: ["公众号文章", "微信文章转Markdown", "链接转文档", "文章归档", "抓取公众号", "微信推文保存", "公众号链接下载"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -32,35 +28,39 @@ trigger_words: ["公众号文章", "微信文章转Markdown", "链接转文档",
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 公众号文章转 Markdown 归档 Skill
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界：一页纸速查卡
+# 公众号文章链接转 Markdown 归档 Skill
+
+## 一、能力边界（一页纸速查卡）
 
 ### 1.1 能做什么
 
-| 序号 | 能力项 | 说明 | 输入示例 |
-|------|--------|------|----------|
-| 1 | 链接抓取 | 从公众号文章 URL 提取标题、作者、正文、封面图 | `https://mp.weixin.qq.com/s/xxxx` |
-| 2 | 正文清洗 | 去除页脚广告、推荐阅读、二维码引导等噪声区块 | 自动识别并剥离 |
-| 3 | 图片处理 | 下载正文图片到本地 `assets/` 目录，并在 Markdown 中引用相对路径 | 自动完成 |
-| 4 | 结构化输出 | 生成带 YAML frontmatter 的标准 Markdown 文件 | 见 3.3 输出规范 |
-| 5 | 批量处理 | 支持一次提交多个链接，逐个生成独立文件 | 每行一个 URL |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 正文抓取 | 从公众号文章链接中提取标题、作者、正文内容 | `https://mp.weixin.qq.com/s/xxxx` |
+| 格式转换 | 将抓取的正文转换为标准 Markdown 格式 | 标题、段落、列表、引用、代码块 |
+| 图片处理 | 保留图片链接（原图直链），不下载图片 | `![图片描述](https://mmbiz.qpic.cn/...)` |
+| 本地保存 | 生成带时间戳的 `.md` 文件，保存至指定目录 | `2025-01-15_文章标题.md` |
+| 元数据记录 | 在文件头部写入来源链接、抓取时间、作者等元信息 | YAML frontmatter |
 
 ### 1.2 不能做什么
 
-| 序号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 付费/加密文章 | 无法抓取需要付费、关注或验证码才能查看的内容 |
-| 2 | 已删除文章 | 链接失效或文章被作者删除时，无法恢复 |
-| 3 | 非公众号链接 | 仅支持 `mp.weixin.qq.com` 域名的文章页，不支持朋友圈、视频号等 |
-| 4 | 排版保真 | 不保证复杂排版（表格、特殊字体、SVG 动效）100% 还原 |
-| 5 | 评论与阅读数据 | 不抓取评论区内容、阅读量、点赞数等互动数据 |
+| 限制项 | 说明 |
+|--------|------|
+| 付费/加密文章 | 无法抓取需要付费、关注、验证码才能查看的内容 |
+| 已删除文章 | 链接失效或文章被作者删除时无法获取 |
+| 视频/音频内容 | 仅提取文字和图片，不处理音视频流 |
+| 评论区内容 | 不抓取文章下方的用户评论 |
+| 排版保真 | 不保证与原文视觉排版完全一致（如特殊字体、背景色） |
+| 批量抓取 | 单次仅处理一个链接，不支持批量任务 |
 
 ### 1.3 适用对象
 
-- 内容运营人员：需要将公众号文章归档到内部知识库
-- 研究人员：收集行业文章做文本分析
-- 个人用户：备份自己或他人公众号文章到本地笔记
+- 需要将公众号文章存档到本地笔记库（Obsidian、Notion、Typora 等）的个人用户
+- 需要批量整理微信文章素材的内容运营人员
+- 需要离线阅读或二次编辑文章的研究人员
 
 
 ## 许可证（License）
