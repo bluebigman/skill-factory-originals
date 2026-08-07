@@ -7,7 +7,7 @@ license: MIT
 slug: imagecraft-android
 name: imagecraft-android
 displayName: 图片批量处理
-description: 仅供学习与参考用途。使用本。当用户需要图片处理 压缩转换、进行imagecraft android相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+description: Effortlessly edit images with batch compression, scaling, cropping, rotation, and format conversion. Convert PDFs to ima
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
