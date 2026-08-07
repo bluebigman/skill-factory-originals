@@ -10,7 +10,7 @@ import argparse, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TRIGGERS = ["hyperfine", "基准测试", "性能对比", "测速", "benchmark", "耗时统计", ""]
+TRIGGERS = ["hyperfine"]
 
 
 def load_spec() -> str:
