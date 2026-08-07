@@ -3,7 +3,7 @@ slug: dictionary-term-explain
 name: 术语释义助手
 displayName: 场景拆解 概念边界 落地解释
 description: 按场景拆解术语含义，给出边界清晰、可落地的概念解释。
-version: 1.0.0
+version: 2.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -38,12 +38,14 @@ trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么
 
 | 维度 | 能做 ✅ | 不能做 ❌ |
 |------|---------|-----------|
-| **输入处理** | 接受单个术语、短语、缩写、行业黑话 | 不接受整段文章或长文本的自动摘要 |
+| **输入处理** | 接受单个术语、短语、缩写、行业黑话（长度≤100字符） | 不接受整段文章或长文本的自动摘要 |
 | **解释方式** | 按场景（技术/业务/日常/学术）拆解含义 | 不提供单一笼统的字典式定义 |
 | **边界界定** | 明确术语的适用范围、邻近概念区分 | 不输出模糊的"大概意思" |
 | **落地建议** | 给出使用场景、注意事项、常见误用 | 不提供操作步骤或实施指导 |
-| **批量处理** | 支持同一目录下多个术语文件的批量解释 | 不支持跨领域混合批量（需分领域执行） |
+| **批量处理** | 支持同一目录下多个术语文件的批量解释（JSON/纯文本） | 不支持跨领域混合批量（需分领域执行） |
 | **输出格式** | 结构化 Markdown 表格 + 分层解释 | 不输出无结构的纯文本段落 |
+| **外部查询** | 内置知识库未命中时，尝试外部API（维基百科）兜底 | 不保证外部API可用性，失败时返回明确错误码 |
+| **缓存** | 对查询结果进行内存缓存（LRU） | 不提供持久化缓存 |
 
 ### 1.2 适用对象
 
@@ -59,35 +61,80 @@ trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么
 - 需要逐字逐句翻译的场景
 - 需要权威定义（如 ISO 标准原文）的场景
 
+## 二、触发条件
+
+### 2.1 触发词
+
+- 术语解释、名词释义、概念说明、这个词什么意思、通俗解释、术语拆解、概念辨析、定义解读
+
+### 2.2 输入格式
+
+- 单个术语：`python run.py "微服务"`
+- 批量文件：`python run.py --batch ./terms.json`
+- 指定场景：`python run.py "区块链" --scene 技术`
+
+## 三、标准流程
+
+### 3.1 输入处理
+
+1. 接收术语输入（命令行参数或批量文件）
+2. 校验输入合法性（非空、长度≤100字符）
+3. 规范化输入（去除首尾空白、统一大小写）
+
+### 3.2 知识库查询
+
+1. 在本地知识库中精确匹配术语
+2. 若命中，返回结构化解释（核心定义/场景拆解/边界界定/常见误用）
+3. 若未命中，尝试外部API（维基百科）查询
+4. 外部API失败时，返回错误码 `E1004` 并给出降级输出
+
+### 3.3 输出生成
+
+1. 按用户指定场景（默认全部）生成解释
+2. 输出结构化 Markdown 格式
+3. 包含核心定义、场景拆解、边界界定、常见误用
+
+## 四、置信度门控
+
+| 置信度等级 | 条件 | 输出行为 |
+|-----------|------|---------|
+| **高** | 本地知识库命中 | 直接输出完整解释 |
+| **中** | 外部API查询成功 | 输出解释并标注"外部来源" |
+| **低** | 外部API查询失败 | 输出错误码 `E1004` 和降级提示 |
+
+## 五、错误码
+
+| 错误码 | 含义 | 降级输出 |
+|--------|------|---------|
+| `E1001` | 输入为空 | 提示"请输入要解释的术语" |
+| `E1002` | 输入超长（>100字符） | 截断至100字符并警告 |
+| `E1003` | 批量文件不存在或格式错误 | 提示文件路径错误 |
+| `E1004` | 知识库未命中且外部API失败 | 提示"未找到该术语的解释" |
+| `E1005` | 批量文件编码无法识别 | 提示编码错误 |
+
+## 六、FAQ 反模式
+
+### 6.1 常见问题
+
+**Q: 为什么我的术语没有解释？**
+A: 可能原因：1) 术语不在知识库中；2) 外部API不可用。请检查错误码。
+
+**Q: 如何添加自定义术语？**
+A: 当前版本不支持动态添加，请修改 `TERM_KNOWLEDGE_BASE` 字典。
+
+**Q: 批量处理支持哪些格式？**
+A: 支持 JSON 数组（`["术语1","术语2"]`）和纯文本（每行一个术语）。
+
+### 6.2 反模式
+
+| 反模式 | 说明 | 正确做法 |
+|--------|------|---------|
+| 过度承诺 | 声称支持所有术语 | 明确知识库范围 |
+| 忽略错误 | 静默失败 | 返回错误码和降级输出 |
+| 性能陷阱 | 每次查询都访问外部API | 使用缓存和本地知识库优先 |
+| 编码假设 | 假设所有文件都是UTF-8 | 多编码检测和fallback |
 
 ## 许可证（License）
-
-```text
-MIT License
-
-Copyright (c) {year} {holder}
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-```
-<!-- professional-license-embedded -->
-
 ## 失败处理
 
 - 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
@@ -98,8 +145,18 @@ SOFTWARE.
 - 本技能开箱即用，无需额外安装依赖。
 - 需要 Python 3.9+ 运行环境。
 - 涉及网络请求时需保持网络连通。
-## 执行步骤
 
-1. 读取输入参数或交互输入。
-2. 按技能定义的处理流程执行核心逻辑。
-3. 输出结构化结果，并在完成后给出下一步建议。
+## 许可证（License）
+
+```text
+MIT License
+
+Copyright (c) 2026 原创作者（自持版权）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+```
+<!-- professional-license-embedded -->
