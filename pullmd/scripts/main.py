@@ -101,18 +101,16 @@ class PullMDProcessor:
         
         self.batch_results = []
         for item in items:
-            try:
-                result = self._process_single(item)
-                self.batch_results.append(result)
-            except Exception as e:
-                # 单项目失败不中断整体，记录错误
-                self.batch_results.append(
-                    ProcessedResult(
-                        fields={"error": str(e)},
-                        confidence=0.0,
-                        warnings=[get_error_message("E008")]
-                    )
-                )
+            # 验证每个项目的输入类型
+            if not item or not isinstance(item, InputItem):
+                raise ValueError(get_error_message("E010", "无效的输入项"))
+            
+            if item.source_type not in self.SUPPORTED_TYPES:
+                raise ValueError(get_error_message("E003", f"不支持的输入类型: {item.source_type}"))
+            
+            # 处理单个项目
+            result = self._process_single(item)
+            self.batch_results.append(result)
         
         return self.batch_results
     
@@ -128,9 +126,6 @@ class PullMDProcessor:
         # 输入校验
         if not item.content or not item.content.strip():
             raise ValueError(get_error_message("E001"))
-        
-        if item.source_type not in self.SUPPORTED_TYPES:
-            raise ValueError(get_error_message("E003", f"不支持的输入类型: {item.source_type}"))
         
         # 解析内容
         content = item.content.strip()
@@ -149,7 +144,7 @@ class PullMDProcessor:
         elif item.source_type == "youtube":
             fields, confidence, warnings = self._parse_youtube(content)
         else:
-            raise ValueError(get_error_message("E003"))
+            raise ValueError(get_error_message("E003", f"不支持的输入类型: {item.source_type}"))
         
         # 附加元信息
         fields["_source_type"] = item.source_type
