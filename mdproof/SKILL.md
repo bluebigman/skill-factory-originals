@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: mdproof
 name: mdproof
-displayName: Markdown转PDF 文档转换 格式校验
+displayName: 文档排版 格式校验 PDF输出
 description: 将Markdown内容转换为排版规范的PDF文件，支持批量处理与格式校验。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/mdproof
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 墨规工坊
+author: 墨规工作室
 agent_created: true
-trigger_words: ["PDF转文档", "markdown转pdf", "md转pdf", "文档转换", "格式转换"]
+trigger_words: ["PDF转文档", "markdown转pdf", "md转pdf", "文档转换", "格式转换", "md转文档", "markdown转文档", "排版输出"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,34 +31,36 @@ trigger_words: ["PDF转文档", "markdown转pdf", "md转pdf", "文档转换", "�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# mdproof — Markdown 转 PDF 转换器
+# mdproof — Markdown 转 PDF 排版校验工具
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做与不能做
+### 1.1 能做什么
 
-| 维度 | 能做 | 不能做 |
-|------|------|--------|
-| 输入格式 | 标准 Markdown（.md/.markdown）、含 YAML frontmatter 的 MD 文件、URL 指向的 MD 资源 | 二进制格式（docx/xlsx）、加密文件、需登录鉴权的私有仓库文件 |
-| 转换能力 | 标题层级、段落、列表（有序/无序/任务）、表格、代码块、引用块、粗斜体、行内代码、链接、图片（本地路径或公网 URL） | 复杂 LaTeX 公式渲染、Mermaid 流程图、HTML 内嵌脚本执行 |
-| 输出控制 | 页面尺寸（A4/Letter）、页边距（窄/常规/宽）、字体（系统已装字体）、页眉页脚、封面页 | 自定义字体嵌入（需额外授权）、水印叠加、数字签名 |
-| 批处理 | 支持多文件批量转换，输出到指定目录 | 不支持跨设备分布式转换 |
-| 校验能力 | 识别未闭合代码块、非法表格分隔符、URL 格式异常 | 语义级纠错（如自动修复错别字） |
+| 能力项 | 说明 | 支持程度 |
+|--------|------|----------|
+| 格式转换 | 将 `.md` 文件转换为 `.pdf` 文件 | ✅ 完整支持 |
+| 批量处理 | 一次处理多个 Markdown 文件 | ✅ 支持（最多 50 个文件/批次） |
+| 格式校验 | 检查 Markdown 语法错误、链接失效、图片路径异常 | ✅ 支持（基础级） |
+| 排版规范 | 自动应用标题层级、代码块样式、表格边框、页边距 | ✅ 支持（预设模板） |
+| 自定义样式 | 通过 YAML frontmatter 指定字体、字号、页边距 | ✅ 支持（有限参数） |
+| 目录生成 | 自动提取标题生成 PDF 书签目录 | ✅ 支持（默认开启） |
 
-### 1.2 适用对象
+### 1.2 不能做什么
 
-- **内容创作者**：需要将技术文档、博客草稿导出为 PDF 分享
-- **文档管理员**：批量整理团队知识库为统一格式的 PDF 归档
-- **开发者**：在 CI/CD 流程中将 API 文档、README 自动构建为 PDF 产物
+| 限制项 | 说明 |
+|--------|------|
+| 复杂排版 | 不支持多栏布局、浮动图片、精确像素级控制 |
+| 动态内容 | 不支持 JavaScript 渲染、图表交互、表单填写 |
+| 加密保护 | 不支持 PDF 密码加密、水印添加 |
+| 字体嵌入 | 不支持自定义字体文件嵌入（仅使用系统字体） |
+| 逆向转换 | 不支持 PDF 转回 Markdown |
 
-### 1.3 输入输出规格
+### 1.3 适用对象
 
-| 项目 | 规格 |
-|------|------|
-| 输入来源 | 本地文件路径、标准输入（stdin）、公网 URL |
-| 输出格式 | PDF 1.7+（兼容 PDF/A-1b 子集） |
-| 输出文件命名 | 默认 `原文件名.pdf`，批量时保留目录结构 |
-| 最大输入体积 | 单文件 ≤ 10MB，批处理总数 ≤ 100 个文件 |
+- 需要将技术文档、README、笔记转换为正式 PDF 的开发者
+- 需要批量生成报告、手册的文档维护人员
+- 需要统一排版风格的内容发布者
 
 
 ## 许可证（License）
