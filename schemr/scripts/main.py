@@ -168,17 +168,31 @@ class SchemaParser:
         if not lines:
             raise SchemrError("E001")
 
-        # 第一行可以是标题（可选）
-        doc = SchemaDocument(title=lines[0] if len(lines) > 1 else "")
+        # 创建文档对象
+        doc = SchemaDocument()
+        
+        # 检查第一行是否包含冒号
+        # 如果第一行没有冒号，可能是标题
+        first_line_has_colon = ":" in lines[0]
+        
+        if not first_line_has_colon:
+            # 第一行是标题
+            doc.title = lines[0]
+            # 从第二行开始解析字段
+            field_lines = lines[1:]
+        else:
+            # 所有行都是字段定义
+            field_lines = lines
 
-        for line in lines:
-            # 跳过可能的标题行（如果后续有字段定义）
+        # 解析字段行
+        for line in field_lines:
+            # 跳过空行
+            if not line.strip():
+                continue
+                
+            # 检查是否包含冒号
             if ":" not in line:
-                if not doc.title:
-                    doc.title = line
-                    continue
-                else:
-                    raise SchemrError("E003", f"无法解析行: {line}")
+                raise SchemrError("E003", f"无法解析行: {line}")
 
             parts = line.split(":", maxsplit=3)
             name = parts[0].strip()
