@@ -64,11 +64,19 @@ def parse_input(raw_input: str) -> Dict[str, Any]:
             return data
         elif isinstance(data, list):
             return {"items": data}
+        elif isinstance(data, str):
+            # JSON 字符串但内容不是对象/数组，按文本处理
+            return {"text": data}
         else:
+            # JSON 数字、布尔值等，视为格式错误
             raise PMKitError("E003", "输入应为 JSON 对象或数组")
     except json.JSONDecodeError:
         # 非 JSON 格式，按文本处理
-        return {"text": raw_input.strip()}
+        # 但需要检查是否包含明显的 JSON 特征（如 { 或 [），如果是则报错
+        stripped = raw_input.strip()
+        if stripped.startswith('{') or stripped.startswith('['):
+            raise PMKitError("E007", "JSON 解析失败，请检查输入格式")
+        return {"text": stripped}
 
 
 def extract_key_fields(data: Dict[str, Any]) -> Dict[str, Any]:
@@ -324,7 +332,7 @@ def run_selftest() -> bool:
         assert e.error_code == "E001", f"错误码应为 E001，实际为 {e.error_code}"
     
     try:
-        # 无效 JSON
+        # 无效 JSON（以 { 开头但格式错误）
         process_input("这不是JSON{{{")
         print("测试用例 3 失败: 无效JSON未抛出异常")
         return False

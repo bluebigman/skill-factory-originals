@@ -129,6 +129,27 @@ def _estimate_confidence(text: str) -> float:
     if re.search(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', text):
         confidence -= 0.3
 
+    # 检测无意义的重复模式（如 "asdf" 重复）
+    # 检查是否有明显的重复子串
+    if length >= 8:
+        # 检查是否由少量字符重复组成
+        unique_chars = set(text)
+        if len(unique_chars) <= 4 and length >= 8:
+            # 可能是无意义的重复文本
+            confidence -= 0.3
+        
+        # 检查是否有重复的单词或短语
+        words = text.lower().split()
+        if len(words) >= 3:
+            unique_words = set(words)
+            if len(unique_words) <= 2:
+                confidence -= 0.2
+
+    # 检测是否为纯字母且无空格（可能是乱码）
+    if re.match(r'^[a-zA-Z]+$', text) and length >= 10:
+        # 纯字母长文本，无空格，可能是乱码
+        confidence -= 0.1
+
     # 保证在 0~1 范围内
     return max(0.0, min(1.0, confidence))
 
@@ -627,7 +648,7 @@ def _run_selftest() -> int:
     print(f"  ✓ 成功生成 {len(blocks1)} 个块")
     print(f"  ✓ 块类型: {set(b.block_type for b in blocks1)}")
 
-    # 测试 2：Markdown 输出
+    # 测试 2：Markdown 生成
     print("\n[测试 2] Markdown 生成")
     md1 = _blocks_to_markdown(blocks1)
     assert len(md1) > 0, "E007: Markdown 生成失败"
@@ -641,12 +662,17 @@ def _run_selftest() -> int:
     conf_normal = _estimate_confidence("这是一个正常的测试文本内容")
     conf_garbage = _estimate_confidence("asdfasdfasdfasdfasdf")
     conf_short = _estimate_confidence("短")
-    assert conf_normal > 0.7, "E009: 正常文本置信度应高于 0.7"
-    assert conf_garbage < conf_normal, "E009: 乱码文本置信度应低于正常文本"
-    assert conf_short < conf_normal, "E009: 短文本置信度应低于正常文本"
+    conf_repeat = _estimate_confidence("哈哈哈哈哈哈")
+    
+    assert conf_normal > 0.7, f"E009: 正常文本置信度应高于 0.7, 实际为 {conf_normal}"
+    assert conf_garbage < conf_normal, f"E009: 乱码文本置信度应低于正常文本, garbage={conf_garbage}, normal={conf_normal}"
+    assert conf_short < conf_normal, f"E009: 短文本置信度应低于正常文本, short={conf_short}, normal={conf_normal}"
+    assert conf_repeat < conf_normal, f"E009: 重复文本置信度应低于正常文本, repeat={conf_repeat}, normal={conf_normal}"
+    
     print(f"  ✓ 正常文本置信度: {conf_normal:.2f}")
     print(f"  ✓ 乱码文本置信度: {conf_garbage:.2f}")
     print(f"  ✓ 短文本置信度: {conf_short:.2f}")
+    print(f"  ✓ 重复文本置信度: {conf_repeat:.2f}")
 
     # 测试 4：置信度标注
     print("\n[测试 4] 置信度标注")
@@ -830,7 +856,7 @@ def main() -> int:
     parser.add_argument(
         '--version',
         action='version',
-        version='pdf2md-web 1.0.2 (clean-room implementation)'
+        version='pdf2md-web 1.0.3 (clean-room implementation)'
     )
 
     args = parser.parse_args()
