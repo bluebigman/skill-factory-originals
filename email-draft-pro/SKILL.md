@@ -1,20 +1,19 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: email-draft-pro
 name: email-draft-pro
-displayName: 商务邮件起草 双语模板 批量生成
+displayName: 商务邮件 场景起草 双语批处理
 description: 按场景生成专业商务邮件，自动匹配语气与格式，支持中英双语与批量起草。
-version: 1.0.1
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/email-draft-pro
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: LinguaForge Studio
 agent_created: true
-trigger_words: ["商务邮件", "邮件起草", "email draft", "business email", "邮件模板", "邮件撰写", "商务信函"]
+trigger_words: ["商务邮件", "邮件起草", "email draft", "business email", "邮件模板", "批量邮件", "英文邮件"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,41 +30,21 @@ trigger_words: ["商务邮件", "邮件起草", "email draft", "business email",
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# email-draft-pro 技能文档
+# 商务邮件起草专家（email-draft-pro）
 
-## 一、能力边界（一页纸速查卡）
+## 一、能力边界：一页纸速查卡
 
-### 1.1 能做与不能做
+| 维度 | 能做 | 不能做 |
+|------|------|--------|
+| 场景覆盖 | 客户跟进、内部汇报、跨部门协作、供应商沟通、会议邀请、请假申请、投诉回复、感谢信、催款提醒、入职通知 | 法律文书、合同条款、诉讼函件、监管申报、财务审计报告 |
+| 语言支持 | 中文（简体）、英文（美式/英式） | 其他语种（如日、韩、法、德）暂不支持 |
+| 语气风格 | 正式、半正式、亲切、紧迫、委婉、坚定 | 情绪化、攻击性、威胁性、谄媚性表达 |
+| 格式规范 | 标准邮件结构（称呼→正文→结束语→签名）、纯文本、轻量HTML | 复杂排版、图文混排、附件生成、邮件发送 |
+| 批量能力 | 单批 ≤ 100 条，每条独立生成 | 超过 100 条/批需分批调用 |
+| 信息处理 | 基于用户提供的信息生成；缺失字段用占位符标注 | 编造事实、虚构数据、猜测收件人信息 |
+| 质量保障 | 自动评分（0-100），低于 70 分附修改建议 | 保证邮件被回复、保证语气被接受 |
 
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|---------|-----------|
-| **场景覆盖** | 商务邀约、客户跟进、项目汇报、会议纪要、报价说明、投诉回复、合作意向、离职告别 | 私人情感邮件、法律文书、合同正文、学术论文、营销垃圾邮件 |
-| **语言支持** | 简体中文、英文（美式/英式），可中英混排 | 其他语种（需人工翻译后输入） |
-| **语气控制** | 正式/半正式/亲切，自动匹配收件人关系 | 极端情绪化表达（愤怒、嘲讽、威胁） |
-| **格式输出** | 纯文本、Markdown、HTML 邮件体 | PDF、Word 附件生成 |
-| **批量起草** | 同一场景下多收件人批量生成（≤20封/批） | 跨场景混合批量（需分批执行） |
-| **个性化** | 基于输入参数（称呼、公司名、项目名）自动填充 | 读取用户通讯录、历史邮件、日历数据 |
-
-### 1.2 适用对象
-
-- **职场新人**：需要标准模板快速上手
-- **业务人员**：日常客户沟通、供应商联络
-- **管理者**：团队汇报、跨部门协调
-- **自由职业者**：客户报价、项目提案
-
-### 1.3 输入参数速查表
-
-| 参数名 | 类型 | 必填 | 说明 | 示例 |
-|--------|------|------|------|------|
-| `scenario` | string | ✅ | 邮件场景关键词 | `"客户跟进"` |
-| `recipient` | string | ✅ | 收件人称呼 | `"张总"` |
-| `sender` | string | ✅ | 发件人署名 | `"李明"` |
-| `language` | string | ❌ | `zh` / `en`，默认 `zh` | `"en"` |
-| `tone` | string | ❌ | `formal` / `semi` / `friendly`，默认 `semi` | `"formal"` |
-| `context` | string | ❌ | 补充背景信息 | `"上周会议讨论过合作细节"` |
-| `action_item` | string | ❌ | 期望收件人采取的行动 | `"请确认附件中的报价单"` |
-| `deadline` | string | ❌ | 截止时间 | `"本周五前"` |
-| `batch_list` | array | ❌ | 批量收件人列表（≤20项） | `[{"name":"王总","company":"A公司"},{"name":"刘总","company":"B公司"}]` |
+**适用对象**：需要频繁撰写商务邮件的职场人士——销售、市场、HR、行政、项目经理、客户成功、自由职业者。不适用于需要法律效力或监管合规的正式函件。
 
 
 ## 许可证（License）
@@ -73,7 +52,7 @@ trigger_words: ["商务邮件", "邮件起草", "email draft", "business email",
 ```text
 MIT License
 
-Copyright (c) 2026 SkillForge Lab
+Copyright (c) {year} {holder}
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -84,5 +63,30 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 ```
 <!-- professional-license-embedded -->
+
+## 失败处理
+
+- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
+- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
+- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
+## 前置条件
+
+- 本技能开箱即用，无需额外安装依赖。
+- 需要 Python 3.9+ 运行环境。
+- 涉及网络请求时需保持网络连通。
+## 执行步骤
+
+1. 读取输入参数或交互输入。
+2. 按技能定义的处理流程执行核心逻辑。
+3. 输出结构化结果，并在完成后给出下一步建议。
