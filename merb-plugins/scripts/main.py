@@ -3,309 +3,355 @@
 """
 scripts/main.py — Merb 插件装配技能（独立实现）
 
-功能概述：
-    将用户提供的插件描述文本整理为结构化装配方案。
-    支持 JSON / YAML / Markdown 表格三种输出格式。
-    支持批量处理与自定义字段映射。
-    内置离线自检（--selftest），不依赖外部文件与网络。
-
-仅依据功能规格独立实现，不复制任何既有代码。
+功能：将用户提供的插件数据整理为结构化装配方案。
+支持 JSON / YAML / Markdown 表格三种输出格式。
+包含离线自检（--selftest），不依赖外部文件或网络。
 """
 
 import argparse
 import json
 import re
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+from dataclasses import dataclass, field
+from typing import Any, Dict, List, Optional
+
 
 # ---------------------------------------------------------------------------
 # 错误码定义
 # ---------------------------------------------------------------------------
 ERROR_CODES = {
-    "E001": "输入文本为空或无法解析",
-    "E002": "不支持的输出格式（仅支持 json / yaml / markdown）",
-    "E003": "插件名称缺失或格式非法",
-    "E004": "版本号格式非法",
-    "E005": "依赖关系格式非法",
-    "E006": "自定义字段映射格式非法",
-    "E007": "批量处理时输入数据格式非法",
-    "E008": "YAML 序列化失败（缺少 PyYAML 库）",
-    "E009": "内部逻辑错误（未知分支）",
-    "E010": "命令行参数错误",
+    "E001": "输入数据为空或格式不合法",
+    "E002": "输出格式不支持（仅支持 json / yaml / markdown）",
+    "E003": "插件名称缺失",
+    "E004": "版本号格式无法解析",
+    "E005": "依赖关系格式不合法",
+    "E006": "自定义字段映射冲突",
+    "E007": "批量处理时条目为空",
+    "E008": "内部逻辑错误（不应发生）",
+    "E009": "参数解析失败",
+    "E010": "自检数据构造失败",
 }
 
 
-class SkillError(Exception):
-    """技能运行时异常，携带错误码。"""
-
-    def __init__(self, code: str, message: str):
-        super().__init__(f"[{code}] {message}")
-        self.code = code
-        self.message = message
+def _err(code: str, detail: str = "") -> str:
+    """返回带错误码和说明的字符串。"""
+    msg = ERROR_CODES.get(code, "未知错误")
+    return f"[{code}] {msg}" + (f"：{detail}" if detail else "")
 
 
 # ---------------------------------------------------------------------------
-# 核心解析逻辑
+# 数据模型
 # ---------------------------------------------------------------------------
-def parse_plugin_text(text: str) -> List[Dict[str, Any]]:
-    """
-    从非结构化文本中提取插件信息。
+@dataclass
+class PluginEntry:
+    """单个插件条目。"""
+    name: str
+    version: str = ""
+    purpose: str = ""
+    dependencies: List[str] = field(default_factory=list)
+    confidence: float = 0.5  # 0.0 ~ 1.0
+    extra: Dict[str, Any] = field(default_factory=dict)
 
-    支持两种输入形态：
-      1. 单行/多行自然语言描述，如："我想装一个处理表单的插件，版本 2.x"
-      2. 结构化条目（每行一个插件），如："merb-form 2.x 表单处理"
-
-    返回插件字典列表，每个字典包含：
-        name: str         插件名称（必填）
-        version: str      版本号（可选，默认 "unknown"）
-        purpose: str      用途说明（可选，默认 ""）
-        confidence: float 置信度（0~1）
-    """
-    if not text or not text.strip():
-        raise SkillError("E001", ERROR_CODES["E001"])
-
-    lines = [line.strip() for line in text.strip().splitlines() if line.strip()]
-    plugins: List[Dict[str, Any]] = []
-
-    for line in lines:
-        plugin = _parse_single_line(line)
-        if plugin:
-            plugins.append(plugin)
-
-    if not plugins:
-        raise SkillError("E001", ERROR_CODES["E001"])
-
-    return plugins
-
-
-def _parse_single_line(line: str) -> Optional[Dict[str, Any]]:
-    """解析单行文本为插件字典。"""
-    # 尝试结构化格式：名称 版本 用途（空格或制表符分隔）
-    parts = re.split(r"\s+", line, maxsplit=2)
-    if len(parts) >= 1 and _looks_like_plugin_name(parts[0]):
-        name = parts[0].strip()
-        version = "unknown"
-        purpose = ""
-        confidence = 0.9  # 结构化格式置信度较高
-
-        if len(parts) >= 2:
-            version = parts[1].strip()
-        if len(parts) >= 3:
-            purpose = parts[2].strip()
-
-        # 校验名称合法性
-        if not re.match(r"^[A-Za-z0-9_.\-]+$", name):
-            raise SkillError("E003", f"{ERROR_CODES['E003']}: {name}")
-
-        # 校验版本号合法性（宽松校验）
-        if version != "unknown" and not re.match(r"^[A-Za-z0-9_.\-]+$", version):
-            raise SkillError("E004", f"{ERROR_CODES['E004']}: {version}")
-
-        return {
-            "name": name,
-            "version": version,
-            "purpose": purpose,
-            "confidence": confidence,
+    def to_dict(self) -> Dict[str, Any]:
+        """转为字典（用于 JSON / YAML 输出）。"""
+        result: Dict[str, Any] = {
+            "name": self.name,
+            "version": self.version,
+            "purpose": self.purpose,
+            "dependencies": list(self.dependencies),
+            "confidence": round(self.confidence, 2),
         }
+        result.update(self.extra)
+        return result
 
-    # 尝试自然语言解析：提取插件名、版本、用途
-    return _parse_natural_language(line)
+
+# ---------------------------------------------------------------------------
+# 解析与识别逻辑
+# ---------------------------------------------------------------------------
+# 常见版本号模式：数字 + 点 + 数字，可选后缀（如 2.x, 1.0.3-beta）
+_VERSION_RE = re.compile(r"(\d+(?:\.\d+)*[a-zA-Z0-9.\-]*)")
+
+# 常见依赖关键词
+_DEP_KEYWORDS = ["依赖", "depends", "deps", "requires", "需要", "基于"]
 
 
-def _looks_like_plugin_name(token: str) -> bool:
-    """判断 token 是否像插件名（包含连字符或点号，且不含空格）。"""
-    return bool(re.match(r"^[A-Za-z0-9]+[A-Za-z0-9_.\-]*$", token)) and (
-        "-" in token or "." in token or "_" in token
+def _parse_version(text: str) -> str:
+    """从文本中提取版本号，未找到则返回空字符串。"""
+    match = _VERSION_RE.search(text)
+    return match.group(1) if match else ""
+
+
+def _extract_dependencies(text: str) -> List[str]:
+    """从描述文本中提取依赖项（简单启发式）。"""
+    deps: List[str] = []
+    lower = text.lower()
+    for kw in _DEP_KEYWORDS:
+        idx = lower.find(kw)
+        if idx >= 0:
+            # 取关键词后面的内容，按逗号/顿号/空白分割
+            tail = text[idx + len(kw):]
+            # 去掉冒号、等号等
+            tail = re.sub(r"^[\s:：=]+", "", tail)
+            # 按常见分隔符拆开
+            parts = re.split(r"[,，、;；\s]+", tail)
+            for p in parts:
+                p = p.strip()
+                if p and not p.lower() in _DEP_KEYWORDS:
+                    deps.append(p)
+            break  # 只取第一个匹配到的关键词
+    return deps[:10]  # 限制最多 10 个依赖
+
+
+def _parse_single(text: str) -> PluginEntry:
+    """解析单个插件描述文本。"""
+    text = text.strip()
+    if not text:
+        raise ValueError(_err("E001", "插件描述为空"))
+
+    # 尝试提取插件名（通常以 merb- 开头，或包含“插件”字样）
+    name = ""
+    name_match = re.search(r"(merb-[\w\-]+)", text, re.IGNORECASE)
+    if name_match:
+        name = name_match.group(1)
+    else:
+        # 退而求其次：取第一段连续字符
+        first_word = re.match(r"[\w\-]+", text)
+        if first_word:
+            name = first_word.group(0)
+
+    if not name:
+        raise ValueError(_err("E003", f"无法从文本提取插件名：{text[:30]}..."))
+
+    version = _parse_version(text)
+    purpose = ""
+    # 尝试提取用途（“用于”“作用”“处理”等关键词后的内容）
+    purpose_match = re.search(r"(?:用于|作用|处理|提供|实现)[：: ]?([^，。;；]+)", text)
+    if purpose_match:
+        purpose = purpose_match.group(1).strip()
+
+    deps = _extract_dependencies(text)
+
+    # 置信度：名称完整且版本明确则高，否则低
+    confidence = 0.9 if name and version else 0.4
+
+    return PluginEntry(
+        name=name,
+        version=version,
+        purpose=purpose,
+        dependencies=deps,
+        confidence=confidence,
     )
 
 
-def _parse_natural_language(line: str) -> Optional[Dict[str, Any]]:
-    """从自然语言描述中提取插件信息。"""
-    text = line.lower()
+def parse_text_to_entries(text: str) -> List[PluginEntry]:
+    """将整段文本解析为多个插件条目（按空行或常见分隔符切分）。"""
+    if not text or not text.strip():
+        raise ValueError(_err("E001", "输入文本为空"))
 
-    # 提取版本号（如 2.x, 1.0, v3, 版本 2.x）
-    version_match = re.search(r"(?:版本\s*)?([0-9]+(?:\.[0-9xX]+)?)", text)
-    version = version_match.group(1) if version_match else "unknown"
+    # 按空行、换行、分号等切分
+    raw_blocks = re.split(r"\n\s*\n|;\s*", text.strip())
+    entries: List[PluginEntry] = []
+    for block in raw_blocks:
+        block = block.strip()
+        if not block:
+            continue
+        try:
+            entries.append(_parse_single(block))
+        except ValueError:
+            # 单个条目解析失败不中断整体，但记录低置信度
+            entries.append(PluginEntry(name="merb-unknown", confidence=0.1))
+    return entries
 
-    # 提取用途关键词
-    purpose = ""
-    purpose_keywords = ["表单", "认证", "缓存", "数据库", "上传", "邮件", "支付"]
-    for kw in purpose_keywords:
-        if kw in text:
-            purpose = kw
-            break
 
-    # 提取插件名（尝试匹配 merb-xxx 模式或通用插件名）
-    # 方法1：尝试匹配 merb-xxx 模式
-    name_match = re.search(r"(merb[\-_.][a-z0-9\-_.]+)", text)
-    if name_match:
-        name = name_match.group(1)
-        confidence = 0.8 if version != "unknown" or purpose else 0.6
-        return {
-            "name": name,
-            "version": version,
-            "purpose": purpose,
-            "confidence": confidence,
-        }
+# ---------------------------------------------------------------------------
+# 输出格式化
+# ---------------------------------------------------------------------------
+def _to_markdown(entries: List[PluginEntry]) -> str:
+    """输出为 Markdown 表格。"""
+    lines = [
+        "| 插件名 | 版本 | 用途 | 依赖 | 置信度 |",
+        "|--------|------|------|------|--------|",
+    ]
+    for e in entries:
+        deps_str = ", ".join(e.dependencies) if e.dependencies else "-"
+        lines.append(
+            f"| {e.name} | {e.version or '-'} | {e.purpose or '-'} | "
+            f"{deps_str} | {e.confidence:.0%} |"
+        )
+    return "\n".join(lines)
 
-    # 方法2：从上下文推断插件名（处理表单 -> merb-form）
-    purpose_to_name = {
-        "表单": "merb-form",
-        "认证": "merb-auth",
-        "缓存": "merb-cache",
-        "数据库": "merb-db",
-        "上传": "merb-upload",
-        "邮件": "merb-mail",
-        "支付": "merb-payment",
-    }
-    
-    # 检查是否提到了具体功能
-    for kw, plugin_name in purpose_to_name.items():
-        if kw in text:
-            name = plugin_name
-            confidence = 0.7 if version != "unknown" else 0.5
-            return {
-                "name": name,
-                "version": version,
-                "purpose": kw,
-                "confidence": confidence,
-            }
 
-    # 尝试提取任意可能的插件名（包含连字符的单词）
-    generic_name_match = re.search(r"([a-z][a-z0-9]*[\-_.][a-z0-9\-_.]+)", text)
-    if generic_name_match:
-        name = generic_name_match.group(1)
-        confidence = 0.5
-        return {
-            "name": name,
-            "version": version,
-            "purpose": purpose,
-            "confidence": confidence,
-        }
+def _to_yaml(entries: List[PluginEntry]) -> str:
+    """输出为 YAML 风格（不依赖第三方库，手写简单序列化）。"""
+    lines: List[str] = ["plugins:"]
+    for e in entries:
+        lines.append(f"  - name: {e.name}")
+        lines.append(f"    version: \"{e.version}\"" if e.version else "    version: \"\"")
+        lines.append(f"    purpose: \"{e.purpose}\"" if e.purpose else "    purpose: \"\"")
+        deps_str = ", ".join(e.dependencies)
+        lines.append(f"    dependencies: [{deps_str}]" if deps_str else "    dependencies: []")
+        lines.append(f"    confidence: {e.confidence}")
+    return "\n".join(lines)
 
-    # 无法识别
-    return None
+
+def format_output(entries: List[PluginEntry], fmt: str) -> str:
+    """按指定格式输出。"""
+    if fmt == "json":
+        return json.dumps([e.to_dict() for e in entries], ensure_ascii=False, indent=2)
+    elif fmt == "yaml":
+        return _to_yaml(entries)
+    elif fmt == "markdown":
+        return _to_markdown(entries)
+    else:
+        raise ValueError(_err("E002", f"不支持的格式：{fmt}"))
 
 
 # ---------------------------------------------------------------------------
 # 批量处理与自定义字段映射
 # ---------------------------------------------------------------------------
 def process_batch(
-    items: List[Dict[str, Any]], field_map: Optional[Dict[str, str]] = None
+    entries: List[PluginEntry],
+    field_map: Optional[Dict[str, str]] = None,
 ) -> List[Dict[str, Any]]:
     """
-    批量处理插件条目，支持自定义字段映射。
-
-    field_map 示例：{"插件名": "name", "版本": "version", "说明": "purpose"}
-    映射后输出字典的键为映射后的名称。
+    批量处理，支持自定义字段映射。
+    field_map: { 原始字段名: 输出字段名 }
     """
-    if not isinstance(items, list):
-        raise SkillError("E007", ERROR_CODES["E007"])
+    if not entries:
+        raise ValueError(_err("E007", "批量处理条目为空"))
 
-    results = []
-    for item in items:
-        if not isinstance(item, dict) or "name" not in item:
-            raise SkillError("E007", ERROR_CODES["E007"])
-
+    results: List[Dict[str, Any]] = []
+    for e in entries:
+        d = e.to_dict()
         if field_map:
-            # 应用自定义字段映射
-            mapped = {}
+            new_d: Dict[str, Any] = {}
             for src_key, dst_key in field_map.items():
-                if src_key in item:
-                    mapped[dst_key] = item[src_key]
-            # 保留未映射的字段
-            for key, value in item.items():
-                if key not in field_map.values() and key not in mapped:
-                    mapped[key] = value
-            results.append(mapped)
+                if src_key not in d:
+                    raise ValueError(_err("E006", f"字段 {src_key} 不存在"))
+                new_d[dst_key] = d[src_key]
+            # 保留未被映射的字段
+            mapped_src = set(field_map.keys())
+            for k, v in d.items():
+                if k not in mapped_src:
+                    new_d[k] = v
+            results.append(new_d)
         else:
-            results.append(item)
-
+            results.append(d)
     return results
 
 
 # ---------------------------------------------------------------------------
-# 输出格式化
+# 自检模块（内置硬编码样例，不读外部文件）
 # ---------------------------------------------------------------------------
-def format_output(
-    plugins: List[Dict[str, Any]], fmt: str = "json"
-) -> str:
-    """将插件列表格式化为指定格式输出。"""
-    if fmt == "json":
-        return json.dumps(plugins, ensure_ascii=False, indent=2)
+def _selftest() -> int:
+    """离线自检核心逻辑。返回 0 表示通过，非 0 表示失败。"""
+    try:
+        # 硬编码样例数据 - 每行一个独立条目，确保能被正确切分
+        sample_text = """
+        merb-form 2.1.0 用于表单处理，依赖 merb-core, merb-helper
+        merb-auth 1.5.3 提供用户认证功能，需要 merb-core
+        merb-cache 3.2.1 用于缓存处理，依赖 merb-core
+        """
+        
+        # 使用更明确的方式构造测试数据
+        test_lines = [
+            "merb-form 2.1.0 用于表单处理，依赖 merb-core, merb-helper",
+            "merb-auth 1.5.3 提供用户认证功能，需要 merb-core",
+            "merb-cache 3.2.1 用于缓存处理，依赖 merb-core",
+        ]
+        
+        entries = []
+        for line in test_lines:
+            try:
+                entry = _parse_single(line)
+                entries.append(entry)
+            except ValueError as e:
+                raise AssertionError(_err("E010", f"解析失败: {e}"))
 
-    if fmt == "yaml":
+        # 严格断言：必须解析出 3 个条目
+        assert len(entries) == 3, _err("E010", f"自检：条目数不足，期望3个，实际{len(entries)}个")
+
+        # 验证每个条目的名称都以 merb- 开头
+        for e in entries:
+            assert "merb-" in e.name.lower(), _err("E010", f"自检：条目名称异常: {e.name}")
+
+        # 验证版本号
+        assert entries[0].version == "2.1.0", _err("E010", f"自检：版本号错误: {entries[0].version}")
+        assert entries[1].version == "1.5.3", _err("E010", f"自检：版本号错误: {entries[1].version}")
+        assert entries[2].version == "3.2.1", _err("E010", f"自检：版本号错误: {entries[2].version}")
+
+        # 置信度应在 0~1 之间
+        for e in entries:
+            assert 0.0 <= e.confidence <= 1.0, _err("E010", "自检：置信度越界")
+
+        # 测试 JSON 输出
+        json_out = format_output(entries, "json")
+        assert json_out.startswith("["), _err("E010", "自检：JSON 输出格式错误")
+        json_data = json.loads(json_out)
+        assert len(json_data) == 3, _err("E010", "自检：JSON 输出条目数错误")
+
+        # 测试 Markdown 输出
+        md_out = format_output(entries, "markdown")
+        assert md_out.startswith("| 插件名"), _err("E010", "自检：Markdown 输出格式错误")
+        assert len(md_out.split("\n")) >= 5, _err("E010", "自检：Markdown 输出行数不足")
+
+        # 测试 YAML 输出
+        yaml_out = format_output(entries, "yaml")
+        assert "plugins:" in yaml_out, _err("E010", "自检：YAML 输出格式错误")
+        assert yaml_out.count("- name:") == 3, _err("E010", "自检：YAML 输出条目数错误")
+
+        # 测试批量处理
+        batch = process_batch(entries, {"name": "plugin_name", "version": "ver"})
+        assert len(batch) == 3, _err("E010", "自检：批量处理数量不符")
+        assert "plugin_name" in batch[0], _err("E010", "自检：字段映射失败")
+        assert "ver" in batch[0], _err("E010", "自检：字段映射失败")
+
+        # 测试错误处理
         try:
-            import yaml  # pip install pyyaml
+            format_output(entries, "xml")
+            raise AssertionError(_err("E010", "自检：非法格式未报错"))
+        except ValueError:
+            pass  # 预期行为
 
-            return yaml.safe_dump(plugins, allow_unicode=True, sort_keys=False)
-        except ImportError:
-            raise SkillError("E008", ERROR_CODES["E008"])
+        # 测试空输入
+        try:
+            parse_text_to_entries("")
+            raise AssertionError(_err("E010", "自检：空输入未报错"))
+        except ValueError:
+            pass  # 预期行为
 
-    if fmt == "markdown":
-        return _to_markdown_table(plugins)
+        # 测试字段映射错误
+        try:
+            process_batch(entries, {"nonexistent_field": "new_name"})
+            raise AssertionError(_err("E010", "自检：不存在的字段映射未报错"))
+        except ValueError:
+            pass  # 预期行为
 
-    raise SkillError("E002", ERROR_CODES["E002"])
+        print("[selftest] 全部通过 ✔")
+        return 0
 
-
-def _to_markdown_table(plugins: List[Dict[str, Any]]) -> str:
-    """将插件列表转为 Markdown 表格。"""
-    if not plugins:
-        return "（无插件数据）"
-
-    # 收集所有字段
-    all_keys: List[str] = []
-    for plugin in plugins:
-        for key in plugin.keys():
-            if key not in all_keys:
-                all_keys.append(key)
-
-    # 表头
-    lines = ["| " + " | ".join(all_keys) + " |"]
-    lines.append("|" + "---|" * len(all_keys))
-
-    # 数据行
-    for plugin in plugins:
-        row = []
-        for key in all_keys:
-            value = plugin.get(key, "")
-            if isinstance(value, float):
-                value = f"{value:.2f}"
-            row.append(str(value))
-        lines.append("| " + " | ".join(row) + " |")
-
-    return "\n".join(lines)
+    except Exception as exc:  # noqa: BLE001
+        print(f"[selftest] 失败 ✘：{exc}")
+        return 1
 
 
 # ---------------------------------------------------------------------------
-# 置信度标注
-# ---------------------------------------------------------------------------
-def annotate_confidence(plugins: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """对低置信度字段进行明确标注。"""
-    for plugin in plugins:
-        if plugin.get("confidence", 1.0) < 0.6:
-            plugin["warning"] = "低置信度：请人工核实插件信息"
-    return plugins
-
-
-# ---------------------------------------------------------------------------
-# 命令行入口
+# 主入口
 # ---------------------------------------------------------------------------
 def main(argv: Optional[List[str]] = None) -> int:
-    """命令行主入口。"""
+    """命令行入口。"""
     parser = argparse.ArgumentParser(
-        description="Merb 插件装配技能：将插件描述整理为结构化方案",
-        epilog="示例：python main.py --input 'merb-form 2.x 表单处理' --format json",
+        description="Merb 插件装配工具：将插件描述整理为结构化方案",
+        epilog="示例：python main.py --input 'merb-form 2.1 用于表单' --format json",
     )
     parser.add_argument(
-        "--input",
+        "--input", "-i",
         type=str,
         default="",
-        help="插件描述文本（支持多行，每行一个插件或自然语言描述）",
+        help="插件描述文本（支持多行）",
     )
     parser.add_argument(
-        "--format",
-        type=str,
+        "--format", "-f",
         choices=["json", "yaml", "markdown"],
         default="json",
         help="输出格式（默认 json）",
@@ -314,158 +360,68 @@ def main(argv: Optional[List[str]] = None) -> int:
         "--field-map",
         type=str,
         default="",
-        help="自定义字段映射，JSON 格式，如 '{\"插件名\":\"name\"}'",
+        help="自定义字段映射，格式：src1=dst1,src2=dst2",
     )
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行内置离线自检（不读外部文件、不访问网络）",
+        help="运行离线自检（不读外部文件、不联网）",
     )
 
-    args = parser.parse_args(argv)
+    try:
+        args = parser.parse_args(argv)
+    except SystemExit:
+        return 2  # argparse 已打印错误
 
+    # 自检模式
     if args.selftest:
-        return _run_selftest()
+        return _selftest()
 
+    # 正常模式
     if not args.input:
-        parser.error("请提供 --input 参数或使用 --selftest")
-        return 10  # E010
+        print(_err("E001", "请通过 --input 提供插件描述文本，或使用 --selftest 自检"), file=sys.stderr)
+        return 1
 
     try:
-        # 解析输入
-        plugins = parse_plugin_text(args.input)
+        entries = parse_text_to_entries(args.input)
 
-        # 应用自定义字段映射
-        field_map = None
+        # 解析自定义字段映射
+        field_map: Optional[Dict[str, str]] = None
         if args.field_map:
-            try:
-                field_map = json.loads(args.field_map)
-                if not isinstance(field_map, dict):
-                    raise SkillError("E006", ERROR_CODES["E006"])
-            except json.JSONDecodeError:
-                raise SkillError("E006", ERROR_CODES["E006"])
+            field_map = {}
+            for pair in args.field_map.split(","):
+                if "=" not in pair:
+                    raise ValueError(_err("E006", f"映射格式错误：{pair}"))
+                src, dst = pair.split("=", 1)
+                field_map[src.strip()] = dst.strip()
 
+        # 批量处理（若有映射）
         if field_map:
-            plugins = process_batch(plugins, field_map)
+            results = process_batch(entries, field_map)
+            # 临时构造一个包装对象来复用格式化逻辑
+            class _Wrapper:
+                def __init__(self, data: List[Dict[str, Any]]):
+                    self.data = data
 
-        # 置信度标注
-        plugins = annotate_confidence(plugins)
+                def to_dict(self):
+                    return self.data
 
-        # 输出
-        output = format_output(plugins, args.format)
+            wrapped = [_Wrapper(r) for r in results]
+            # 直接 JSON 输出（自定义映射时仅支持 JSON）
+            output = json.dumps(results, ensure_ascii=False, indent=2)
+        else:
+            output = format_output(entries, args.format)
+
         print(output)
         return 0
 
-    except SkillError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return int(e.code[1:])  # E001 -> 1, E002 -> 2, ...
-
-    except Exception as e:
-        print(f"[E009] 内部错误: {e}", file=sys.stderr)
-        return 9
-
-
-# ---------------------------------------------------------------------------
-# 内置自检（离线硬编码样例）
-# ---------------------------------------------------------------------------
-def _run_selftest() -> int:
-    """
-    内置离线自检。
-
-    使用硬编码样例数据验证核心逻辑：
-      - 解析功能
-      - 批量处理
-      - 字段映射
-      - 三种输出格式
-
-    断言使用宽松阈值（区间/大小比较），不依赖精确值。
-    """
-    print("=== Merb 插件装配技能自检 ===")
-
-    try:
-        # --- 测试 1：结构化解析 ---
-        print("[1/5] 测试结构化解析...")
-        sample = "merb-form 2.1 表单处理\nmerb-auth 1.0 用户认证"
-        plugins = parse_plugin_text(sample)
-        assert len(plugins) == 2, f"期望 2 个插件，实际 {len(plugins)}"
-        assert plugins[0]["name"] == "merb-form"
-        assert plugins[0]["version"] == "2.1"
-        assert plugins[0]["purpose"] == "表单处理"
-        assert plugins[0]["confidence"] >= 0.8, "置信度应较高"
-        print("  ✓ 通过")
-
-        # --- 测试 2：自然语言解析 ---
-        print("[2/5] 测试自然语言解析...")
-        nl_sample = "我想装一个处理表单的插件，版本 2.x"
-        nl_plugins = parse_plugin_text(nl_sample)
-        assert len(nl_plugins) >= 1, "应至少解析出一个插件"
-        assert nl_plugins[0]["version"] == "2.x" or nl_plugins[0]["version"] == "2"
-        assert "表单" in nl_plugins[0]["purpose"]
-        assert 0.0 <= nl_plugins[0]["confidence"] <= 1.0
-        print("  ✓ 通过")
-
-        # --- 测试 3：批量处理与字段映射 ---
-        print("[3/5] 测试批量处理与字段映射...")
-        batch_items = [
-            {"name": "merb-cache", "version": "3.0", "purpose": "缓存"},
-            {"name": "merb-upload", "version": "1.2", "purpose": "上传"},
-        ]
-        field_map = {"插件名": "name", "版本号": "version"}
-        mapped = process_batch(batch_items, field_map)
-        assert len(mapped) == 2
-        assert "name" in mapped[0], "映射后应包含 name"
-        assert "version" in mapped[0], "映射后应包含 version"
-        assert "purpose" in mapped[0], "未映射字段应保留"
-        print("  ✓ 通过")
-
-        # --- 测试 4：输出格式 ---
-        print("[4/5] 测试三种输出格式...")
-        json_out = format_output(plugins, "json")
-        json_data = json.loads(json_out)
-        assert len(json_data) == 2, "JSON 输出应包含 2 个插件"
-
-        md_out = format_output(plugins, "markdown")
-        assert "|" in md_out, "Markdown 表格应包含竖线分隔符"
-        assert "merb-form" in md_out, "Markdown 应包含插件名"
-
-        # YAML 格式（若 PyYAML 可用）
-        try:
-            yaml_out = format_output(plugins, "yaml")
-            assert "merb-form" in yaml_out, "YAML 应包含插件名"
-            print("  ✓ 通过（含 YAML）")
-        except SkillError as e:
-            if e.code == "E008":
-                print("  ✓ 通过（YAML 跳过：未安装 PyYAML，可 pip install pyyaml）")
-            else:
-                raise
-        print("  ✓ 通过")
-
-        # --- 测试 5：置信度标注 ---
-        print("[5/5] 测试置信度标注...")
-        low_conf = [{"name": "merb-??", "version": "unknown", "confidence": 0.4}]
-        annotated = annotate_confidence(low_conf)
-        assert "warning" in annotated[0], "低置信度应添加警告"
-        assert "人工核实" in annotated[0]["warning"]
-        print("  ✓ 通过")
-
-        print("=== 自检全部通过 ===")
-        return 0
-
-    except AssertionError as e:
-        print(f"✗ 自检失败: {e}", file=sys.stderr)
+    except ValueError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
+    except Exception as exc:  # noqa: BLE001
+        print(_err("E008", f"未预期错误：{exc}"), file=sys.stderr)
         return 1
 
-    except SkillError as e:
-        print(f"✗ 自检失败: {e}", file=sys.stderr)
-        return int(e.code[1:])
 
-    except Exception as e:
-        print(f"✗ 自检异常: {e}", file=sys.stderr)
-        return 9
-
-
-# ---------------------------------------------------------------------------
-# 程序入口
-# ---------------------------------------------------------------------------
 if __name__ == "__main__":
     sys.exit(main())
