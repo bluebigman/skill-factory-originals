@@ -28,7 +28,7 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any, Tuple
 
 # 版本信息
-VERSION = "3.1.1"
+VERSION = "3.1.2"
 
 # 错误码
 ERR_SUCCESS = 0

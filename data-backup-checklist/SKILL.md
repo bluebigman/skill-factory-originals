@@ -1,24 +1,19 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: data-backup-checklist
 name: data-backup-checklist
-displayName: 备份巡检 完整性核对 恢复演练
+displayName: 备份核查 完整性校验 风险预警
 description: 备份清单核对、版本差异追踪、恢复演练评分与风险分级预警。
-version: 1.0.1
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/data-backup-checklist
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: Lin Chen
+author: BackupGuardian
 agent_created: true
-trigger_words: ["data-backup-checklist", "备份检查", "备份核对", "备份完整性", "备份巡检", "恢复演练评分"]
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
+trigger_words: ["data-backup-checklist", "备份检查", "备份核对", "备份完整性"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -32,33 +27,12 @@ trigger_words: ["data-backup-checklist", "备份检查", "备份核对", "备份
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 备份巡检与恢复演练助手（data-backup-checklist）
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界：一页纸速查卡
+# 备份核查 Skill 文档
 
-### 1.1 能做什么
-
-| 编号 | 能力项 | 具体说明 |
-|------|--------|----------|
-| C1 | 备份清单核对 | 对照预设清单逐项检查备份任务是否覆盖关键数据源，输出缺失项清单 |
-| C2 | 版本差异追踪 | 对比相邻备份版本的文件数量、大小、时间戳，识别异常增量或缺失版本 |
-| C3 | 恢复演练评分 | 按恢复时间目标（RTO）和恢复点目标（RPO）对演练结果打分，输出达标率 |
-| C4 | 风险分级预警 | 根据备份失败次数、恢复成功率、存储健康度等维度，输出红/黄/绿三级风险信号 |
-
-### 1.2 不能做什么
-
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不执行实际备份操作 | 本技能仅做检查与评估，不触发备份任务或修改备份策略 |
-| L2 | 不连接生产环境 | 所有输入需由用户提供数据快照或日志文件，技能不主动访问外部系统 |
-| L3 | 不预测未来故障 | 风险分级基于历史数据，不承诺对未来事件的预判能力 |
-| L4 | 不替代专业审计 | 输出结果供参考，不构成合规审计或法律证据 |
-
-### 1.3 适用对象
-
-- 运维工程师：日常备份巡检与异常排查
-- 数据管理员：定期核对备份策略与执行情况
-- 技术管理者：评估恢复演练效果与整体备份健康度
+本 Skill 由 AI 辅助生成，仅供参考。使用前请结合自身环境验证。
 
 
 ## 许可证（License）
@@ -66,7 +40,7 @@ trigger_words: ["data-backup-checklist", "备份检查", "备份核对", "备份
 ```text
 MIT License
 
-Copyright (c) 2026 SkillForge Lab
+Copyright (c) {year} {holder}
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -77,5 +51,30 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 ```
 <!-- professional-license-embedded -->
+
+## 失败处理
+
+- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
+- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
+- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
+## 前置条件
+
+- 本技能开箱即用，无需额外安装依赖。
+- 需要 Python 3.9+ 运行环境。
+- 涉及网络请求时需保持网络连通。
+## 执行步骤
+
+1. 读取输入参数或交互输入。
+2. 按技能定义的处理流程执行核心逻辑。
+3. 输出结构化结果，并在完成后给出下一步建议。
