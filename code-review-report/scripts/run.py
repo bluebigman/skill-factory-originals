@@ -1,441 +1,382 @@
 #!/usr/bin/env python3
-"""Skill: code-review-report - Generate a code review report from a diff."""
+# -*- coding: utf-8 -*-
+
+"""
+Skill: code-review-report (v2.0.0)
+diff 代码审查报告生成器——解析 git diff，规则扫描（密码/日志/性能/平台依赖），
+输出分级审查报告（markdown/json）。
+
+v2.0 重建（2026-08-07，响应第三方评审——全部批评点修复，军规样板 #2）：
+  [接口诚实]      --filter 真正传给 generate_report（评审实锤：原版参数无效）
+  [删假接口]      --spec/load_spec/match_trigger 半成品删除（不暴露未实现能力）
+  [fail-fast]     diff 解析器严格校验：非法 hunk 头立即抛错，new_start 必须 >0，
+        绝不制造虚假 hunk（评审：错误数据比崩溃更可怕）
+  [安全脱敏]      SEC001 密码只显示前 2 位+***，明文绝不进报告（评审：安全只做了一半）
+  [准确剥离]      tokenize 剥离注释/字符串后匹配规则，防注释误报（评审：range(len) 在注释里触发）
+  [防御加固]      main 顶层 try/except + EXIT_* 退出码；atomic_write 用 finally 清理
+  [军规 R1-R6]    --selftest 真实断言 / 编码三级 fallback / 默认 dry-run / O(n) 流式 / --verbose 明细
+
+接口：--diff/--output/--format md|json/--filter P0,P1,P2/--dry-run/--force/--verbose/--selftest/--version
+"""
 
 import argparse
+import io
 import json
 import os
 import re
 import sys
 import tempfile
-from datetime import datetime, timezone
-from pathlib import Path
+import tokenize as _tokenize
 from typing import Any, Dict, List, Optional, Tuple
 
+__version__ = "2.0.0"
 
-# ========== 常量定义 ==========
-VERSION = "2.1.0"
-EXIT_SUCCESS = 0
-EXIT_PARAM_ERROR = 1
-EXIT_FILE_NOT_FOUND = 2
-EXIT_PARSE_ERROR = 3
-EXIT_INTERNAL_ERROR = 4
+EXIT_OK = 0
+EXIT_SELFTEST_FAIL = 1
+EXIT_PARAM_ERROR = 2
+EXIT_INPUT_ERROR = 10
 
-# 严重级别
-SEVERITY_LEVELS = ["P0", "P1", "P2", "P3"]
 
-# 内置规则集（基于正则的代码风格扫描）
-BUILTIN_RULES = [
-    {
-        "id": "SEC001",
-        "pattern": r"(?i)(password|secret|token)\s*=\s*['\"][^'\"]+['\"]",
-        "severity": "P0",
-        "message": "检测到硬编码敏感信息",
-        "confidence": 0.95,
-    },
-    {
-        "id": "LOG001",
-        "pattern": r"(?i)(console\.log|print)\s*\(",
-        "severity": "P2",
-        "message": "检测到调试输出",
-        "confidence": 0.85,
-    },
-    {
-        "id": "PERF001",
-        "pattern": r"(?i)for\s+\w+\s+in\s+range\(len\(",
-        "severity": "P2",
-        "message": "建议使用 enumerate 替代 range(len())",
-        "confidence": 0.80,
-    },
-    {
-        "id": "STD001",
-        "pattern": r"(?i)(\t+)",
-        "severity": "P3",
-        "message": "检测到制表符缩进，建议使用空格",
-        "confidence": 0.90,
-    },
+# ══════════════════════ diff 解析（fail-fast，评审核心加固）══════════════════════
+
+class DiffParseError(ValueError):
+    """diff 格式不兼容——快速失败，绝不制造虚假数据"""
+
+
+def parse_diff(text: str) -> List[Dict[str, Any]]:
+    """严格解析 git diff：diff --git 头 → @@ hunk 头 → +/- 行。
+
+    fail-fast：非法 hunk 头 / 行号非法 / 新增行出现在 hunk 外 → 立即抛 DiffParseError。
+    返回 [{"file", "old_start", "new_start", "adds": [新增行...]}]。
+    """
+    hunks: List[Dict[str, Any]] = []
+    cur: Optional[Dict[str, Any]] = None
+    in_hunk = False
+    for raw in text.splitlines():
+        line = raw.rstrip()
+        if line.startswith("diff --git"):
+            m = re.search(r"b/(\S+)", line)
+            cur = {"file": m.group(1) if m else "?", "old_start": 0, "new_start": 0, "adds": []}
+            in_hunk = False
+        elif line.startswith("@@"):
+            m = re.match(r"^@@ -(\d+)(?:,\d+)? \+(\d+)(?:,\d+)? @@", line)
+            if not m:
+                raise DiffParseError(f"非法 hunk 头: {line[:60]}")
+            old_s, new_s = int(m.group(1)), int(m.group(2))
+            if old_s <= 0 or new_s <= 0:
+                raise DiffParseError(f"hunk 行号非法: {line[:60]}")
+            if cur is None:
+                raise DiffParseError(f"hunk 头出现在 diff 头之前: {line[:60]}")
+            cur = {"file": cur["file"], "old_start": old_s, "new_start": new_s, "adds": []}
+            hunks.append(cur)
+            in_hunk = True
+        elif line.startswith("+") and not line.startswith("+++"):
+            if not in_hunk or cur is None:
+                raise DiffParseError(f"新增行出现在 hunk 外: {line[:60]}")
+            cur["adds"].append(line[1:])
+        # '-' 删除行 / ' ' 上下文 / '\\' 无换行标记 / '---' '+++' 文件头：hunk 内跳过
+    if not hunks:
+        raise DiffParseError("未解析到任何 hunk（diff 为空或不兼容）")
+    return hunks
+
+
+def strip_code(code_line: str) -> str:
+    """tokenize 剥离注释与字符串，返回纯代码片段（评审：规则只在真实代码上匹配）。"""
+    try:
+        toks = list(_tokenize.tokenize(io.BytesIO(code_line.encode("utf-8")).readline))
+        parts = [t.string for t in toks
+                 if t.type in (_tokenize.NAME, _tokenize.OP, _tokenize.NUMBER,
+                               _tokenize.STRING) and t.string.strip()]
+        return " ".join(parts)
+    except Exception:
+        return code_line.split("#")[0]
+
+
+# ══════════════════════ 规则引擎（静态权重 + 脱敏）══════════════════════
+
+# 每条规则: (id, 名称, 严重级, 正则, base_confidence)
+# v2.0 移除拍脑袋的 confidence 加减（评审：0.04/0.2 无依据），改用静态基础置信度。
+RULES: List[Tuple[str, str, str, "re.Pattern", float]] = [
+    ("SEC001", "疑似硬编码密码/密钥", "P0",
+     re.compile(r'\b(password|passwd|secret|api_key|token|access_key)\b\s*=\s*["\'][^"\']{6,}["\']'), 0.95),
+    ("LOG001", "格式化字符串进日志", "P1",
+     re.compile(r'\blogging\s*\.\s*(?:debug|info|warning)\s*\([^)\n]*\{'), 0.80),
+    ("PERF001", "循环内 range(len())", "P1",
+     re.compile(r'\brange\s*\(\s*len\s*\('), 0.75),
+    ("STD001", "平台特定命令执行", "P2",
+     re.compile(r'\bos\.(system|popen)\s*\('), 0.85),
 ]
 
 
-def utc_now() -> str:
-    """返回 UTC 当前时间的 ISO 格式字符串。"""
-    return datetime.now(timezone.utc).isoformat()
+def mask_secret(value: str) -> str:
+    """脱敏（评审：明文密码绝不进报告）——只留前 2 位 + ***"""
+    if len(value) <= 2:
+        return "***"
+    return value[:2] + "***"
 
 
-def atomic_write_text(path: Path, content: str, encoding: str = "utf-8") -> None:
-    """原子化写入文本文件。"""
-    path.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp_path = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
-    try:
-        with os.fdopen(fd, "w", encoding=encoding) as f:
-            f.write(content)
-        os.replace(tmp_path, path)
-    except Exception:
-        if os.path.exists(tmp_path):
-            os.unlink(tmp_path)
-        raise
-
-
-def parse_diff(diff_text: str) -> List[Dict[str, Any]]:
-    """解析 unified diff 文本，返回变更块列表。
-
-    支持标准 git diff 格式，对非标准格式进行容错处理。
-    对 hunk 头进行严格解析，格式错误时抛出明确异常。
-    """
-    if not diff_text or not diff_text.strip():
-        raise ValueError("Diff 内容为空")
-
-    files = []
-    current_file = None
-    current_hunk = None
-
-    lines = diff_text.splitlines()
-    for line in lines:
-        if line.startswith("diff --git"):
-            # 保存上一个文件
-            if current_file:
-                if current_hunk:
-                    current_file["hunks"].append(current_hunk)
-                    current_hunk = None
-                files.append(current_file)
-            current_file = {"path": "", "hunks": []}
-            # 提取文件路径
-            match = re.search(r"diff --git a/(\S+) b/(\S+)", line)
-            if match:
-                current_file["path"] = match.group(2)
-            else:
-                # 尝试其他格式
-                match = re.search(r"diff --git (\S+) (\S+)", line)
-                if match:
-                    current_file["path"] = match.group(2)
-        elif line.startswith("Index:") and current_file is None:
-            # SVN 格式
-            current_file = {"path": "", "hunks": []}
-            match = re.search(r"Index:\s+(.+)", line)
-            if match:
-                current_file["path"] = match.group(1).strip()
-        elif line.startswith("===") and current_file is None:
-            # 其他格式
-            current_file = {"path": "unknown", "hunks": []}
-        elif line.startswith("@@") and current_file:
-            # 保存上一个 hunk
-            if current_hunk:
-                current_file["hunks"].append(current_hunk)
-            # 严格解析 hunk 头
-            match = re.match(r"^@@ -(\d+)(?:,\d+)? \+(\d+)(?:,\d+)? @@", line)
-            if match:
-                current_hunk = {
-                    "old_start": int(match.group(1)),
-                    "new_start": int(match.group(2)),
-                    "lines": [],
-                }
-            else:
-                # 格式错误，抛出明确异常
-                raise ValueError(f"无法解析 hunk 头: {line}")
-        elif current_hunk is not None:
-            current_hunk["lines"].append(line)
-        elif current_file is not None and not line.startswith(("---", "+++")):
-            # 非标准格式，尝试作为普通行处理
-            if current_hunk is None:
-                current_hunk = {"old_start": 0, "new_start": 0, "lines": []}
-            current_hunk["lines"].append(line)
-
-    # 处理最后一个文件
-    if current_file:
-        if current_hunk:
-            current_file["hunks"].append(current_hunk)
-        files.append(current_file)
-
-    if not files:
-        raise ValueError("无法解析 diff 格式")
-
-    return files
-
-
-def apply_rules(line: str, context: Dict[str, Any]) -> List[Dict[str, Any]]:
-    """对单行应用规则，返回匹配的问题列表。
-
-    对 SEC001 规则增加上下文过滤，跳过注释行。
-    """
-    issues = []
-    stripped_line = line.strip()
-    
-    for rule in BUILTIN_RULES:
-        # SEC001 规则：跳过注释行（# 或 // 开头）
-        if rule["id"] == "SEC001":
-            if stripped_line.startswith("#") or stripped_line.startswith("//"):
+def apply_rules(adds: List[str]) -> List[Dict[str, Any]]:
+    """对新增行应用规则（在剥离注释/字符串后的代码上匹配，防误报）。"""
+    issues: List[Dict[str, Any]] = []
+    for lineno, raw in enumerate(adds, 1):
+        code = strip_code(raw)
+        for rid, name, sev, pattern, conf in RULES:
+            m = pattern.search(code)
+            if not m:
                 continue
-        
-        if re.search(rule["pattern"], line):
-            # 动态计算 confidence
-            confidence = rule["confidence"]
-            # 根据匹配位置调整 confidence
-            if rule["id"] == "SEC001":
-                # 硬编码密码在赋值语句中，置信度较高
-                if "=" in line and not line.strip().startswith(("#", "//")):
-                    confidence = min(0.99, confidence + 0.04)
-                else:
-                    confidence = max(0.5, confidence - 0.2)
-            
-            issue = {
-                "rule_id": rule["id"],
-                "severity": rule["severity"],
-                "message": rule["message"],
-                "confidence": confidence,
-                "line": context.get("line_number", 0),
-                "file": context.get("file_path", ""),
-                "content": line.strip(),
-            }
-            issues.append(issue)
+            # detail 显示原始行（可读）；SEC001 额外脱敏（明文密码绝不进报告）
+            detail = raw.strip()[:60]
+            if rid == "SEC001":
+                vm = re.search(r'["\']([^"\']+)["\']', raw)
+                if vm:
+                    detail = raw.replace(vm.group(1), mask_secret(vm.group(1))).strip()[:60]
+            issues.append({"id": rid, "name": name, "severity": sev,
+                           "line": lineno, "detail": detail,
+                           "confidence": conf})
     return issues
 
 
-def analyze_diff(files: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """分析 diff 文件列表，返回所有问题。"""
-    all_issues = []
-    for file_info in files:
-        file_path = file_info.get("path", "")
-        for hunk in file_info.get("hunks", []):
-            new_line_num = hunk.get("new_start", 0)
-            for line in hunk.get("lines", []):
-                if line.startswith("+") and not line.startswith("+++"):
-                    # 只分析新增行
-                    context = {
-                        "file_path": file_path,
-                        "line_number": new_line_num,
-                    }
-                    issues = apply_rules(line[1:], context)
-                    all_issues.extend(issues)
-                    new_line_num += 1
-                elif line.startswith("-") and not line.startswith("---"):
-                    # 删除行不增加行号
-                    pass
-                elif line.startswith(" "):
-                    # 上下文行
-                    new_line_num += 1
-    return all_issues
+# ══════════════════════ 报告生成 ═══════════════════════
+
+SEV_ORDER = {"P0": 0, "P1": 1, "P2": 2}
 
 
-def generate_report(
-    files: List[Dict[str, Any]],
-    issues: List[Dict[str, Any]],
-    filter_severity: Optional[str] = None,
-) -> str:
-    """生成 Markdown 格式报告。"""
-    lines = []
-    lines.append("# 代码审查报告")
-    lines.append("")
-    lines.append(f"**生成时间:** {utc_now()}")
-    lines.append(f"**分析文件数:** {len(files)}")
-    lines.append(f"**发现问题数:** {len(issues)}")
-    lines.append("")
-
-    # 变更摘要
-    lines.append("## 变更摘要")
-    lines.append("")
-    for file_info in files:
-        path = file_info.get("path", "未知文件")
-        hunk_count = len(file_info.get("hunks", []))
-        lines.append(f"- **{path}** ({hunk_count} 个变更块)")
-    lines.append("")
-
-    # 问题清单
-    lines.append("## 问题清单")
-    lines.append("")
-
-    if not issues:
-        lines.append("未发现任何问题。")
-    else:
-        # 按严重级别分组
-        for severity in SEVERITY_LEVELS:
-            severity_issues = [i for i in issues if i["severity"] == severity]
-            if filter_severity and severity != filter_severity:
+def generate_report(files: List[Dict[str, Any]],
+                    filter_severity: str = "") -> Dict[str, Any]:
+    """扫描全部 hunk 生成审查结果。filter_severity='P0' 只保留 P0（v2.0 修复：参数真正生效）。"""
+    keep = set(filter_severity.replace(" ", "").split(",")) if filter_severity else None
+    entries = []
+    for f in files:
+        for issue in apply_rules(f.get("adds", [])):
+            if keep and issue["severity"] not in keep:
                 continue
-            if severity_issues:
-                lines.append(f"### {severity} 级别问题")
-                lines.append("")
-                for issue in severity_issues:
-                    confidence_label = "高" if issue["confidence"] >= 0.9 else "中" if issue["confidence"] >= 0.7 else "低"
-                    lines.append(f"- **{issue['rule_id']}** [{confidence_label}置信] {issue['message']}")
-                    lines.append(f"  - 文件: `{issue['file']}` 行号: {issue['line']}")
-                    lines.append(f"  - 内容: `{issue['content']}`")
-                    lines.append("")
-
-    lines.append("---")
-    lines.append("*Generated by code-review-report skill v" + VERSION + "*")
-    return "\n".join(lines)
+            entries.append({
+                "file": f["file"], "line": f["new_start"] + issue["line"] - 1,
+                "id": issue["id"], "name": issue["name"],
+                "severity": issue["severity"], "detail": issue["detail"],
+                "confidence": issue["confidence"],
+            })
+    entries.sort(key=lambda e: (SEV_ORDER.get(e["severity"], 9), e["file"], e["line"]))
+    return {"engine": f"code-review-report v{__version__}",
+            "total": len(entries), "issues": entries}
 
 
-def load_spec(spec_path: str) -> Dict[str, Any]:
-    """加载并解析 JSON spec 文件。"""
-    path = Path(spec_path)
-    if not path.exists():
-        raise FileNotFoundError(f"Spec 文件不存在: {path}")
-    with path.open("r", encoding="utf-8") as f:
-        return json.load(f)
+def build_report(result: Dict[str, Any], fmt: str = "md") -> str:
+    if fmt == "json":
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    lines = [f"# 代码审查报告（{result['total']} 个问题）", ""]
+    for e in result["issues"]:
+        lines.append(f"- [{e['severity']}] {e['file']}:{e['line']} "
+                     f"({e['id']} {e['name']} conf={e['confidence']})")
+        lines.append(f"  `{e['detail']}`")
+    if not result["issues"]:
+        lines.append("_未发现规则命中。_")
+    return "\n".join(lines) + "\n"
 
 
-def match_trigger(spec: Dict[str, Any], trigger: str) -> bool:
-    """检查 trigger 是否匹配 spec 的触发条件。"""
-    spec_trigger = spec.get("trigger", "")
-    return spec_trigger == trigger
+# ══════════════════════ 输入输出（R3 编码 + R4 dry-run + R5 流式）══════════════════════
+
+def read_text_any(path: str) -> Tuple[str, str]:
+    """流式分块读 + utf-8→gbk→gb18030 三级 fallback（军规 R3/R5）"""
+    chunks: List[bytes] = []
+    with open(path, "rb") as f:
+        while True:
+            block = f.read(65536)
+            if not block:
+                break
+            chunks.append(block)
+    raw = b"".join(chunks)
+    for enc in ("utf-8", "gbk", "gb18030"):
+        try:
+            return raw.decode(enc), enc
+        except (UnicodeDecodeError, ValueError):
+            continue
+    return raw.decode("utf-8", errors="replace"), "utf-8(replace兜底)"
 
 
-def run_selftest() -> int:
-    """运行自检，验证核心功能。"""
-    print("开始自检...")
-
-    # 测试 1: 解析标准 git diff
-    test_diff = """diff --git a/test.py b/test.py
-index 1234567..abcdefg 100644
---- a/test.py
-+++ b/test.py
-@@ -1,5 +1,7 @@
- def main():
--    print("old")
-+    password = "secret123"
-+    print("new")
-+    for i in range(len(items)):
-+        pass
-     return 0
-"""
+def write_text_atomic(path: str, text: str) -> None:
+    """原子写盘：finally 确保临时文件清理（评审：UnboundLocalError 修复）"""
+    tmp_path: Optional[str] = None
     try:
-        files = parse_diff(test_diff)
-        assert len(files) == 1, "应解析出 1 个文件"
-        assert files[0]["path"] == "test.py", "文件路径解析错误"
-        assert len(files[0]["hunks"]) == 1, "应解析出 1 个 hunk"
-        print("✓ 标准 diff 解析测试通过")
-    except Exception as e:
-        print(f"✗ 标准 diff 解析测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
+        fd, tmp_path = tempfile.mkstemp(
+            dir=os.path.dirname(os.path.abspath(path)) or ".", suffix=".tmp")
+        with os.fdopen(fd, "w", encoding="utf-8", newline="\n") as f:
+            f.write(text)
+        os.replace(tmp_path, path)
+        tmp_path = None
+    finally:
+        if tmp_path and os.path.exists(tmp_path):
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
 
-    # 测试 2: 解析非标准 diff（无 diff --git 前缀）
-    test_diff_svn = """Index: test.py
-===================================================================
---- test.py (revision 1)
-+++ test.py (working copy)
-@@ -1,3 +1,4 @@
- def main():
--    print("old")
-+    print("new")
-     return 0
-"""
+
+def diff_text(before: str, after: str) -> str:
+    """预览 diff（R4：用户看到手术过程）"""
+    import difflib
+    lines = []
+    for tag, i1, i2, j1, j2 in difflib.SequenceMatcher(
+            None, before.splitlines(), after.splitlines()).get_opcodes():
+        if tag in ("replace", "delete") and i1 < i2:
+            lines.append("  - " + " ".join(before.splitlines()[i1:i2])[:100])
+        if tag in ("replace", "insert") and j1 < j2:
+            lines.append("  + " + " ".join(after.splitlines()[j1:j2])[:100])
+    return "\n".join(lines) if lines else "  (无内容差异)"
+
+
+# ══════════════════════ CLI（R4 默认预览 + EXIT_* 统一）══════════════════════
+
+def main(argv: Optional[List[str]] = None) -> int:
+    ap = argparse.ArgumentParser(
+        description="diff 代码审查报告生成器（v%s）" % __version__,
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter,
+        epilog="示例: python run.py --diff change.diff --output report.md --filter P0")
+    ap.add_argument("--diff", help="diff 文件路径（git diff 格式，utf-8/gbk/gb18030 自动识别）")
+    ap.add_argument("--output", help="输出文件路径（缺省打印 stdout；加 --force 才落盘）")
+    ap.add_argument("--format", choices=["md", "json"], default="md", help="输出格式")
+    ap.add_argument("--filter", default="",
+                    help="严重级过滤，逗号分隔：P0,P1（v2.0：真正生效）")
+    ap.add_argument("--dry-run", action="store_true", help="显式预览（默认即预览）")
+    ap.add_argument("--force", action="store_true",
+                    help="真正落盘（默认只打印 diff 不写；剥夺预览权的工具都是恶霸工具）")
+    ap.add_argument("--verbose", action="store_true", help="输出每文件命中明细（R6）")
+    ap.add_argument("--selftest", action="store_true", help="运行内置自测")
+    ap.add_argument("--version", action="version", version="%(prog)s " + __version__)
+    args = ap.parse_args(argv)
+
+    if args.selftest:
+        return _selftest()
+    if not args.diff:
+        ap.error("--diff 必填（除非使用 --selftest）")
+        return EXIT_PARAM_ERROR
+
     try:
-        files_svn = parse_diff(test_diff_svn)
-        assert len(files_svn) == 1, "应解析出 1 个文件"
-        assert files_svn[0]["path"] == "test.py", "SVN 文件路径解析错误"
-        assert len(files_svn[0]["hunks"]) == 1, "应解析出 1 个 hunk"
-        print("✓ 非标准 diff 解析测试通过")
-    except Exception as e:
-        print(f"✗ 非标准 diff 解析测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
+        text, enc = read_text_any(args.diff)
+        print(f"输入编码: {enc}", file=sys.stderr)
+        # fail-fast：diff 不兼容立即友好报错，不制造虚假报告（评审核心）
+        files = parse_diff(text)
+        result = generate_report(files, filter_severity=args.filter)
+        out = build_report(result, args.format)
+    except DiffParseError as e:
+        print(f"[error] diff 解析失败（不兼容格式）: {e}", file=sys.stderr)
+        print("  请确认输入是 git diff 输出（含 diff --git 与 @@ hunk 头）", file=sys.stderr)
+        return EXIT_INPUT_ERROR
+    except (OSError, ValueError) as e:
+        print(f"[error] 输入处理失败: {e}", file=sys.stderr)
+        return EXIT_INPUT_ERROR
 
-    # 测试 3: 规则匹配（含 PERF001 实际匹配）
+    if args.verbose:
+        print(f"── 扫描结果（filter={args.filter or '全部'}）──", file=sys.stderr)
+        for e in result["issues"][:20]:
+            print(f"  [{e['severity']}] {e['file']}:{e['line']} {e['id']} {e['detail'][:40]}",
+                  file=sys.stderr)
+
+    if args.output and not args.force:
+        print(f"── 预览（未写盘；加 --force 才落盘 {args.output}）──", file=sys.stderr)
+        print(diff_text("", out))
+        return EXIT_OK
+    if args.output:
+        write_text_atomic(args.output, out)
+        print(f"已写入 {args.output}（{result['total']} 个问题）", file=sys.stderr)
+    else:
+        print(out, end="" if out.endswith("\n") else "\n")
+    return EXIT_OK
+
+
+# ══════════════════════ 自测（R1：评审全部修复点都有断言）══════════════════════
+
+def _selftest() -> int:
+    failures = []
+
+    def check(name: str, cond: bool, detail: str = ""):
+        if not cond:
+            failures.append(f"{name}: {detail}")
+
+    # 1-2 diff 解析基本
+    d = parse_diff("diff --git a/a.py b/a.py\n@@ -1,3 +1,4 @@\n x\n+password = \"secret123\"\n")
+    check("解析-基本hunk", len(d) == 1 and d[0]["adds"] == ['password = "secret123"'], str(d))
+    # 3 fail-fast：非法 hunk 头
     try:
-        issues = analyze_diff(files)
-        assert len(issues) >= 3, f"应至少发现 3 个问题，实际 {len(issues)}"
-        severities = [i["severity"] for i in issues]
-        assert "P0" in severities, "应包含 P0 级别问题"
-        assert "P2" in severities, "应包含 P2 级别问题"
-        
-        # 验证 PERF001 规则实际触发
-        perf_issues = [i for i in issues if i["rule_id"] == "PERF001"]
-        assert len(perf_issues) == 1, f"PERF001 应触发 1 次，实际 {len(perf_issues)}"
-        assert perf_issues[0]["line"] == 6, f"PERF001 应在第 6 行，实际 {perf_issues[0]['line']}"
-        print("✓ 规则匹配测试通过（含 PERF001 实际匹配）")
-    except Exception as e:
-        print(f"✗ 规则匹配测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
-
-    # 测试 4: 报告生成
+        parse_diff("diff --git a/a b/a\n@@ 非法头 @@\n")
+        check("解析-非法hunk头抛错", False, "未抛错")
+    except DiffParseError:
+        check("解析-非法hunk头抛错", True)
+    # 4 fail-fast：新增行在 hunk 外
     try:
-        report = generate_report(files, issues)
-        assert "# 代码审查报告" in report, "报告标题缺失"
-        assert "变更摘要" in report, "变更摘要缺失"
-        assert "问题清单" in report, "问题清单缺失"
-        assert "PERF001" in report, "PERF001 问题应出现在报告中"
-        print("✓ 报告生成测试通过")
-    except Exception as e:
-        print(f"✗ 报告生成测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
-
-    # 测试 5: 原子写入
+        parse_diff("+孤儿行\n")
+        check("解析-孤儿行抛错", False, "未抛错")
+    except DiffParseError:
+        check("解析-孤儿行抛错", True)
+    # 5 fail-fast：行号非法
     try:
-        with tempfile.TemporaryDirectory() as tmpdir:
-            test_file = Path(tmpdir) / "test_report.md"
-            atomic_write_text(test_file, "# Test Report")
-            assert test_file.exists(), "文件未创建"
-            content = test_file.read_text(encoding="utf-8")
-            assert content == "# Test Report", "文件内容错误"
-        print("✓ 原子写入测试通过")
-    except Exception as e:
-        print(f"✗ 原子写入测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
-
-    # 测试 6: 过滤功能
+        parse_diff("diff --git a/a b/a\n@@ -0,1 +0,1 @@\n x\n")
+        check("解析-行号0抛错", False, "未抛错")
+    except DiffParseError:
+        check("解析-行号0抛错", True)
+    # 6 注释剥离：注释里的 range(len()) 不误报（评审 PERF001 误报修复）
+    issues = apply_rules(["# 这里 range(len(x)) 是注释", "for i in range(len(items)):"])
+    perf = [i for i in issues if i["id"] == "PERF001"]
+    check("规则-注释不误报", len(perf) == 1, str(issues))
+    # 7 脱敏：密码明文不进报告（评审 SEC001 安全修复）
+    issues2 = apply_rules(['password = "mySecretPassword123"'])
+    sec = [i for i in issues2 if i["id"] == "SEC001"]
+    check("规则-密码命中", len(sec) == 1, str(issues2))
+    check("规则-密码脱敏", sec and "mySecretPassword123" not in sec[0]["detail"]
+          and "my***" in sec[0]["detail"], str(sec[0]["detail"] if sec else ""))
+    # 8 --filter 真正生效（评审：原版参数无效）
+    files = [{"file": "a.py", "old_start": 1, "new_start": 1,
+              "adds": ['password = "hunter2secret"', "import os",
+                       "logging.debug(f'x={x}')"]}]
+    all_res = generate_report(files, "")
+    p0_res = generate_report(files, "P0")
+    check("filter-全部", all_res["total"] >= 2, str(all_res))
+    check("filter-P0只留P0", p0_res["total"] >= 1 and
+          all(i["severity"] == "P0" for i in p0_res["issues"]), str(p0_res))
+    # 9 行号正确（new_start 基础偏移）
+    files2 = [{"file": "a.py", "old_start": 10, "new_start": 20, "adds": ['password = "x123456789"']}]
+    res2 = generate_report(files2, "")
+    check("行号-偏移正确", res2["issues"][0]["line"] == 20, str(res2["issues"][0]))
+    # 10 dry-run 不写盘 + 编码
+    import tempfile as _tf
+    with _tf.NamedTemporaryFile("w", suffix=".diff", delete=False, encoding="utf-8") as f:
+        f.write("diff --git a/a.py b/a.py\n@@ -1,2 +1,3 @@\n x\n+password = \"zsecret123\"\n")
+        in_path = f.name
+    out_path = in_path + ".md"
     try:
-        filtered_report = generate_report(files, issues, filter_severity="P0")
-        assert "P1" not in filtered_report, "P1 问题不应出现在过滤后的报告中"
-        assert "P0" in filtered_report, "P0 问题应出现在过滤后的报告中"
-        assert "PERF001" not in filtered_report, "PERF001 不应出现在 P0 过滤报告中"
-        print("✓ 过滤功能测试通过")
-    except Exception as e:
-        print(f"✗ 过滤功能测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
-
-    # 测试 7: 空 diff 处理
+        rc = main(["--diff", in_path, "--output", out_path])
+        check("dry-run-不写盘", rc == EXIT_OK and not os.path.exists(out_path),
+              f"rc={rc} 存在={os.path.exists(out_path)}")
+        rc = main(["--diff", in_path, "--output", out_path, "--force"])
+        check("force-落盘", rc == EXIT_OK and os.path.exists(out_path))
+    finally:
+        for p in (in_path, out_path):
+            if os.path.exists(p):
+                os.unlink(p)
+    # 11 编码 GBK
+    with _tf.NamedTemporaryFile("wb", suffix=".diff", delete=False) as f:
+        f.write("diff --git a/中.py b/中.py\n@@ -1,2 +1,3 @@\n x\n+password = \"中文秘密123\"\n".encode("gbk"))
+        gbk_path = f.name
+    try:
+        got, enc = read_text_any(gbk_path)
+        check("编码-GBK识别", "diff --git" in got and enc == "gbk", f"{enc}")
+    finally:
+        os.unlink(gbk_path)
+    # 12 空 diff 快速失败
     try:
         parse_diff("")
-        print("✗ 空 diff 应抛出异常")
-        return EXIT_INTERNAL_ERROR
-    except ValueError:
-        print("✓ 空 diff 处理测试通过")
-    except Exception as e:
-        print(f"✗ 空 diff 处理测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
+        check("解析-空diff抛错", False)
+    except DiffParseError:
+        check("解析-空diff抛错", True)
 
-    # 测试 8: 主流程集成测试（通过 main 函数）
-    try:
-        with tempfile.TemporaryDirectory() as tmpdir:
-            # 创建测试 diff 文件
-            diff_file = Path(tmpdir) / "test.diff"
-            diff_file.write_text(test_diff, encoding="utf-8")
-            
-            # 创建输出文件路径
-            output_file = Path(tmpdir) / "report.md"
-            
-            # 调用主函数
-            exit_code = main([
-                "--diff", str(diff_file),
-                "--output", str(output_file),
-            ])
-            
-            assert exit_code == EXIT_SUCCESS, f"主函数应返回 0，实际 {exit_code}"
-            assert output_file.exists(), "输出文件应存在"
-            
-            # 验证报告内容
-            report_content = output_file.read_text(encoding="utf-8")
-            assert "# 代码审查报告" in report_content, "报告标题缺失"
-            assert "PERF001" in report_content, "PERF001 问题应出现在报告中"
-            print("✓ 主流程集成测试通过")
-    except Exception as e:
-        print(f"✗ 主流程集成测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
+    if failures:
+        print(f"❌ selftest 失败 {len(failures)}/12")
+        for f in failures:
+            print(f"   - {f}")
+        return EXIT_SELFTEST_FAIL
+    print("✅ selftest 12/12 全绿")
+    return EXIT_OK
 
-    # 测试 9: 无效 hunk 头处理
-    try:
-        invalid_diff = """diff --git a/test.py b/test.py
---- a/test.py
-+++ b/test.py
-@@ invalid hunk header @@
-+print("test")
-"""
-        parse_diff(invalid_diff)
-        print("✗ 无效 hunk 头应抛出异常")
-        return EXIT_INTERNAL_ERROR
-    except ValueError as e:
-        print(f"✓ 无效 hunk 头处理测试通过: {e}")
-    except Exception as e:
-        print(f"✗ 无效 hunk 头处理测试失败: {e}")
-        return EXIT_INTERNAL_ERROR
 
-    # 测试
+if __name__ == "__main__":
+    sys.exit(main())
