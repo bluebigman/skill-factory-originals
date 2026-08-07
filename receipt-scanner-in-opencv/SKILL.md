@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: receipt-scanner-in-opencv
 name: receipt-scanner-in-opencv
-displayName: 票据识别 OpenCV 文本分割
+displayName: 票据扫描 文本分割 结构化提取
 description: 基于OpenCV的票据图像文本分割与结构化提取工具。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/receipt-scanner-in-opencv
@@ -14,7 +14,8 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: VisionCraft Studio
 agent_created: true
-trigger_words: ["发票识别", "票据扫描", "OCR预处理", "文本分割", "图像处理", "invoice-scanner", "receipt-ocr"]
+trigger_words: ["发票识别", "票据扫描", "OCR预处理", "文本分割", "图像处理", "--selftest", "--version", "小票解析", "单据提取"]
+
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,25 +32,9 @@ trigger_words: ["发票识别", "票据扫描", "OCR预处理", "文本分割", 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# 票据识别 OpenCV 文本分割
+# 票据扫描与文本分割 Skill 使用指南
 
-## 一、能力边界速查卡
-
-### 1.1 能做与不能做
-
-| 维度 | 能做 | 不能做 |
-|------|------|--------|
-| 输入处理 | 接受图片文件（JPG/PNG/BMP/TIFF）、图片URL、Base64编码数据 | 不接受PDF直接输入（需先转图片）、不接受视频流 |
-| 图像预处理 | 灰度化、二值化、降噪、倾斜校正、透视变换 | 不进行深度学习模型训练 |
-| 文本区域定位 | 基于轮廓检测的文本块分割、行分割、词分割 | 不识别手写体（仅印刷体） |
-| 输出格式 | JSON结构化输出、CSV表格输出、带标注的图片输出 | 不生成可编辑的Word/PDF文档 |
-| 批量处理 | 支持多张图片批量处理（单次最多50张） | 不支持分布式并行处理 |
-| 自定义扩展 | 支持自定义ROI区域、自定义分割参数 | 不支持自定义OCR引擎接入 |
-
-### 1.2 适用对象
-
-- **适用**：清晰度尚可的机打发票、电子发票截图、超市小票、银行回单
-- **不适用**：严重模糊/过曝/欠曝的图片、手写票据、复杂背景下的票据照片
+本 Skill 面向需要从票据图像（发票、小票、运单等）中定位文本区域并提取结构化信息的开发者。它基于 OpenCV 实现图像预处理、文本块分割和版面分析，为下游 OCR 引擎提供干净的输入。
 
 
 ## 许可证（License）
