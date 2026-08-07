@@ -239,7 +239,7 @@ class DataProcessor:
             置信度值 (0.0 - 1.0)
         """
         # 基础置信度
-        base = 0.80
+        base = 0.75
 
         # 根据解析质量调整
         if isinstance(parsed_data, dict) and len(parsed_data) > 0:
@@ -256,6 +256,11 @@ class DataProcessor:
             base += 0.05
             if len(key_info) >= 3:
                 base += 0.05
+            if len(key_info) >= 5:
+                base += 0.05
+        else:
+            # 没有关键信息，降低置信度
+            base -= 0.05
 
         # 限制在合理范围
         return min(max(base, 0.0), 1.0)
