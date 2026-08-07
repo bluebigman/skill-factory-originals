@@ -76,13 +76,27 @@ def extract_key_fields(data: Any) -> Tuple[bool, Dict[str, Any], Optional[Dict[s
 
     # 处理字典类型
     if isinstance(data, dict):
-        for key in ["id", "name", "title", "content", "type", "data"]:
-            if key in data and data[key] is not None:
-                result[key] = data[key]
-        # 保留所有其他字段
-        for key, value in data.items():
-            if key not in result:
-                result[key] = value
+        # 处理纯文本包装的情况
+        if "text" in data and isinstance(data["text"], str):
+            text = data["text"]
+            result["text"] = text
+            result["length"] = len(text)
+            # 简单识别关键信息
+            urls = re.findall(r'https?://[^\s]+', text)
+            if urls:
+                result["urls"] = urls
+            emails = re.findall(r'[\w.+-]+@[\w-]+\.[\w.-]+', text)
+            if emails:
+                result["emails"] = emails
+        else:
+            # 处理普通字典
+            for key in ["id", "name", "title", "content", "type", "data"]:
+                if key in data and data[key] is not None:
+                    result[key] = data[key]
+            # 保留所有其他字段
+            for key, value in data.items():
+                if key not in result:
+                    result[key] = value
 
     # 处理列表类型
     elif isinstance(data, list):
@@ -96,19 +110,6 @@ def extract_key_fields(data: Any) -> Tuple[bool, Dict[str, Any], Optional[Dict[s
                     common_keys &= set(item.keys())
             if common_keys:
                 result["common_fields"] = sorted(common_keys)
-
-    # 处理纯文本
-    elif isinstance(data, dict) and "text" in data:
-        text = data["text"]
-        result["text"] = text
-        result["length"] = len(text)
-        # 简单识别关键信息
-        urls = re.findall(r'https?://[^\s]+', text)
-        if urls:
-            result["urls"] = urls
-        emails = re.findall(r'[\w.+-]+@[\w-]+\.[\w.-]+', text)
-        if emails:
-            result["emails"] = emails
 
     # 检查关键信息是否完整
     if not result:
@@ -134,12 +135,12 @@ def calculate_confidence(data: Dict[str, Any]) -> float:
     total_checks += 1
 
     # 检查是否有明确的数据类型
-    if "type" in data or isinstance(data, dict):
+    if "type" in data or "text" in data or "items" in data:
         score += 20
     total_checks += 1
 
     # 检查内容完整性
-    if "content" in data or "items" in data:
+    if "content" in data or "items" in data or "text" in data:
         score += 20
     total_checks += 1
 
