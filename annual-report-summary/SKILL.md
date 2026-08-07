@@ -1,19 +1,20 @@
 ---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: annual-report-summary
 name: annual-report-summary
-displayName: 年报速读 财务透视 决策简报
-description: 从年报文本中提取关键财务指标（ROE/净利润/营收/现金流等）并生成结构化决策简报，支持JSON输出与自检。
-version: 2.0.0
+displayName: 年报速读 财务透视 决策辅助
+description: 快速解析上市公司年报，提炼投资决策关键财务信息。
+version: 1.0.1
 license: MIT
 source_project: original
-source_url: 
-copyright_holder: FinSight Studio
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/annual-report-summary
+copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
-disclaimer: 本Skill由AI辅助生成，仅供学习参考，不构成投资建议。
-author: FinSight Studio
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: FinRead Studio
 agent_created: true
-trigger_words: ["年报解读", "财报分析", "年度报告摘要", "财务数据提炼", "投资决策支持", "年报速读"]
+trigger_words: ["年报解读", "财报分析", "年度报告摘要", "财务数据提炼", "投资决策支持", "年报速览", "财报拆解", "关键指标提取"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -27,55 +28,47 @@ trigger_words: ["年报解读", "财报分析", "年度报告摘要", "财务数
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 年报速读 · 财务透视 · 决策简报
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（真实实现）
+# 年报速读 · 财务透视 · 决策辅助
 
-### 1.1 能做什么（代码已验证）
+## 一、能力边界（一页纸速查卡）
 
-| 编号 | 能力项 | 实现方式 | 输出示例 |
-|------|--------|----------|----------|
-| C01 | 提取ROE（净资产收益率） | 正则匹配6种写法（含加权/扣非/括号标注） | `ROE: 15.2%` |
-| C02 | 提取净利润增长率 | 正则匹配4种表述（增长率/同比/同比增长/同比变化） | `净利润增长率: 23.5%` |
-| C03 | 提取营业收入及增长率 | 正则匹配营收/营业收入+金额/增长率 | `营收: 12.3亿, 增长率: 18.2%` |
-| C04 | 提取毛利率 | 正则匹配毛利率/销售毛利率 | `毛利率: 35.7%` |
-| C05 | 提取净利率 | 正则匹配净利率/销售净利率 | `净利率: 12.1%` |
-| C06 | 提取资产负债率 | 正则匹配资产负债率 | `资产负债率: 58.3%` |
-| C07 | 提取经营现金流净额 | 正则匹配经营/经营性现金流净额 | `经营现金流: 8.5亿` |
-| C08 | 提取每股收益(EPS) | 正则匹配每股收益/基本每股收益 | `EPS: 1.25元` |
-| C09 | 提取研发费用率 | 正则匹配研发费用率/研发投入占比 | `研发费用率: 7.2%` |
-| C10 | 提取商誉金额 | 正则匹配商誉/商誉账面价值 | `商誉: 3.2亿` |
-| C11 | 提取审计意见类型 | 正则匹配审计意见（标准/保留/否定/无法表示） | `审计意见: 标准无保留` |
-| C12 | 生成结构化JSON摘要 | 汇总所有提取结果+时间戳+置信度 | `{"roe": "15.2%", ...}` |
+### 1.1 能做什么
 
-### 1.2 不能做什么（明确边界）
+| 编号 | 能力项 | 说明 | 输出物 |
+|------|--------|------|--------|
+| C1 | 年报结构解析 | 识别年报中的章节结构（经营情况、财务报告、附注等） | 章节索引表 |
+| C2 | 关键财务指标提取 | 从三大报表中提取核心指标（营收、净利润、毛利率、负债率等） | 指标速览表 |
+| C3 | 同比/环比趋势判断 | 对比近2-3年数据，标注变化方向与幅度 | 趋势标注 |
+| C4 | 异常项标记 | 识别非经常性损益、审计意见、关联交易等风险信号 | 风险提示清单 |
+| C5 | 结构化摘要输出 | 按固定模板输出一页纸投资决策摘要 | 决策摘要卡 |
+
+### 1.2 不能做什么
 
 | 编号 | 限制项 | 说明 |
 |------|--------|------|
-| X01 | 不提供投资建议 | 不判断买卖时机，不给出目标价 |
-| X02 | 不预测未来业绩 | 不基于历史数据外推未来盈利 |
-| X03 | 不验证数据真实性 | 仅做文本提取，不核实年报数据 |
-| X04 | 不处理PDF/扫描件 | 仅支持纯文本输入 |
-| X05 | 不比较同行业公司 | 除非用户主动提供可比数据 |
-| X06 | 不计算复合增长率 | 不自动计算CAGR，仅提取文本中已有数值 |
+| L1 | 不提供投资建议 | 不判断"买入/卖出/持有"，只呈现事实与数据 |
+| L2 | 不做估值模型 | 不计算DCF、PE/PB等估值倍数，除非用户明确要求且提供参数 |
+| L3 | 不保证数据完整 | 若年报PDF为扫描件或格式异常，可能无法完整提取 |
+| L4 | 不替代专业审计 | 不验证年报数据的真实性，仅做文本解析与呈现 |
+| L5 | 不处理非年报文件 | 招股书、季报、临时公告等不在处理范围内 |
 
 ### 1.3 适用对象
 
-- 个人投资者：快速了解持仓标的财务健康度
-- 财务分析师：初步筛选工具，定位需深挖科目
-- 财经记者：撰写年报快讯前的数据核对清单
-- 企业战略人员：对标同行年报关键指标
+- 个人投资者：需要快速了解目标公司财务状况
+- 财务分析师：作为初步筛选工具，辅助人工深度分析
+- 学生研究者：学习年报结构与财务指标解读
+- 企业战略人员：对标同行业上市公司财务表现
 
-## 二、触发条件
-
-### 2.1 自动触发关键词
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) {year} {holder}
+Copyright (c) 2026 SkillForge Lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -86,30 +79,5 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 ```
 <!-- professional-license-embedded -->
-
-## 失败处理
-
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
-
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
-## 执行步骤
-
-1. 读取输入参数或交互输入。
-2. 按技能定义的处理流程执行核心逻辑。
-3. 输出结构化结果，并在完成后给出下一步建议。
