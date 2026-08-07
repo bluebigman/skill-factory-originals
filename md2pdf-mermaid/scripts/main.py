@@ -78,5 +78,5 @@ class MarkdownParser:
 
     # 标题正则：支持 1-6 级标题
     HEADING_RE = re.compile(r"^(#{1,6})\s+(.+)$")
-    # 代码块起始
+    # 代码块起始（注意：这里使用三引号字符串来包含反引号）
     CODE_FENCE_RE = re.compile(r"^
