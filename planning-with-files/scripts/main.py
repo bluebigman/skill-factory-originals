@@ -38,8 +38,10 @@ STATUS_BLOCKED = "blocked"
 # 计划文件格式标记
 MARKER_START = "<!-- plan-start -->"
 MARKER_END = "<!-- plan-end -->"
+# 改进的正则表达式：允许行尾没有换行符
 STEP_PATTERN = re.compile(
-    r"^\s*-\s*\[([ xX])\]\s*([^\n]+?)(?:\s*::\s*(.+))?$", re.MULTILINE
+    r"^\s*-\s*\[([ xX])\]\s*([^\n]+?)(?:\s*::\s*(.+?))?\s*$",
+    re.MULTILINE
 )
 
 
@@ -66,12 +68,32 @@ def _validate_status(status: str) -> None:
 def _parse_plan_text(text: str) -> list:
     """从计划文本中解析步骤列表"""
     steps = []
-    for match in STEP_PATTERN.finditer(text):
-        raw_status = match.group(1)
-        content = match.group(2).strip()
-        note = match.group(3).strip() if match.group(3) else ""
-        status = STATUS_DONE if raw_status in ("x", "X") else STATUS_PENDING
-        steps.append({"content": content, "status": status, "note": note})
+    
+    # 提取 MARKER_START 和 MARKER_END 之间的内容
+    start_idx = text.find(MARKER_START)
+    end_idx = text.find(MARKER_END)
+    
+    if start_idx == -1 or end_idx == -1:
+        return steps
+    
+    # 提取标记之间的内容
+    content_between = text[start_idx + len(MARKER_START):end_idx]
+    
+    # 按行分割并解析
+    for line in content_between.split('\n'):
+        line = line.strip()
+        if not line:
+            continue
+            
+        # 匹配步骤格式: - [x] 内容 :: 备注
+        match = re.match(r'^-\s*\[([ xX])\]\s*(.+?)(?:\s*::\s*(.*))?$', line)
+        if match:
+            raw_status = match.group(1)
+            content = match.group(2).strip()
+            note = match.group(3).strip() if match.group(3) else ""
+            status = STATUS_DONE if raw_status in ("x", "X") else STATUS_PENDING
+            steps.append({"content": content, "status": status, "note": note})
+    
     return steps
 
 
