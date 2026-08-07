@@ -185,6 +185,10 @@ class InputParser:
         
         # 检查必需字段
         if len(parts) < 3:
+            # 如果不足3个字段，检查是否是因为字段为空
+            # 例如 "只有标题|" 应该返回E002（缺失字段）
+            if len(parts) == 2 and parts[1] == "":
+                return None, "E002"
             return None, "E003"
         
         title, author, date = parts[0], parts[1], parts[2]
@@ -438,9 +442,17 @@ class SelfTest:
         
         # 测试4: 缺失字段处理
         print("\n[测试4] 缺失字段处理")
-        _, error = parser.parse_line("只有标题|")
-        assert error == "E002", f"预期E002，实际: {error}"
-        print("  ✓ 缺失字段正确返回E002")
+        # 测试各种缺失字段情况
+        test_cases = [
+            ("只有标题|", "E002", "作者和日期缺失"),
+            ("标题|作者|", "E002", "日期缺失"),
+            ("|作者|日期", "E002", "标题缺失"),
+            ("标题||日期", "E002", "作者缺失"),
+        ]
+        for test_input, expected_error, desc in test_cases:
+            _, error = parser.parse_line(test_input)
+            assert error == expected_error, f"测试'{test_input}'预期{expected_error}，实际: {error}"
+            print(f"  ✓ '{test_input}' 正确返回 {expected_error} ({desc})")
         
         # 测试5: 格式错误处理
         print("\n[测试5] 格式错误处理")
