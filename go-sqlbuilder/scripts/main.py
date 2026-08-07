@@ -211,14 +211,83 @@ def parse_input(raw_input: Any) -> QuerySpec:
 # SQL 生成模块
 # --------------------------------------------------------------------------- #
 def _validate_identifier(identifier: str) -> None:
-    """校验 SQL 标识符（表名、列名）的合法性，防止注入。"""
+    """校验 SQL 标识符（表名、列名）的合法性，防止注入。
+    
+    允许以下形式：
+    - 简单标识符: users, id, name
+    - 带表前缀: users.id, o.amount
+    - 带函数调用: SUM(amount), COUNT(*)
+    - 带别名: SUM(amount) as total, u.id AS user_id
+    - 带排序: price DESC, created_at ASC
+    """
     if not identifier or not identifier.strip():
         raise SQLBuilderError("E003", "标识符不能为空")
+    
     import re
+    
+    # 去除可能的排序方向
+    base = identifier.strip()
+    # 检查是否包含排序方向
+    parts = base.split()
+    if len(parts) > 1 and parts[-1].upper() in ("ASC", "DESC"):
+        base = " ".join(parts[:-1])
+    
+    # 允许的模式：
+    # 1. 简单标识符: [a-zA-Z_][a-zA-Z0-9_]*
+    # 2. 带点号: table.column
+    # 3. 函数调用: FUNC(args)
+    # 4. 带别名: expr AS alias 或 expr as alias
+    # 5. 通配符: *
+    
+    # 去除别名部分（AS 或 as）
+    if re.search(r'\s+(AS|as)\s+', base):
+        # 检查别名部分
+        alias_match = re.search(r'\s+(AS|as)\s+([a-zA-Z_][a-zA-Z0-9_]*)', base)
+        if not alias_match:
+            raise SQLBuilderError("E003", f"非法别名: {identifier}")
+        # 检查表达式部分（去掉别名）
+        expr_part = re.split(r'\s+(AS|as)\s+', base)[0].strip()
+        if not _is_valid_expression(expr_part):
+            raise SQLBuilderError("E003", f"非法表达式: {identifier}")
+        return
+    
+    # 检查是否为函数调用
+    if '(' in base and ')' in base:
+        # 提取函数名和参数
+        func_match = re.match(r'^([a-zA-Z_][a-zA-Z0-9_]*)\s*\((.*)\)$', base, re.DOTALL)
+        if func_match:
+            func_name = func_match.group(1)
+            args_str = func_match.group(2).strip()
+            # 函数名必须是合法标识符
+            if not re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*$', func_name):
+                raise SQLBuilderError("E003", f"非法函数名: {func_name}")
+            # 检查参数（允许 *、列名、表达式）
+            if args_str in ('*', ''):
+                return
+            # 参数可以是简单标识符或带表前缀
+            args_list = [a.strip() for a in args_str.split(',')]
+            for arg in args_list:
+                if not _is_valid_expression(arg):
+                    raise SQLBuilderError("E003", f"非法函数参数: {arg}")
+            return
+        else:
+            raise SQLBuilderError("E003", f"非法函数调用: {identifier}")
+    
+    # 简单标识符或带表前缀
+    if _is_valid_expression(base):
+        return
+    
+    raise SQLBuilderError("E003", f"非法标识符: {identifier}")
 
-    # 允许字母、数字、下划线、点（用于 schema.table 或 table.column）
-    if not re.match(r"^[a-zA-Z_][a-zA-Z0-9_]*(\.[a-zA-Z_][a-zA-Z0-9_]*)*$", identifier.strip()):
-        raise SQLBuilderError("E003", f"非法标识符: {identifier}")
+
+def _is_valid_expression(expr: str) -> bool:
+    """检查是否为合法的表达式（标识符、带表前缀的列名等）。"""
+    import re
+    expr = expr.strip()
+    if expr == '*':
+        return True
+    # 支持 table.column 或简单标识符
+    return bool(re.match(r'^[a-zA-Z_][a-zA-Z0-9_]*(\.[a-zA-Z_][a-zA-Z0-9_]*)*$', expr))
 
 
 def _validate_condition(condition: str) -> None:
