@@ -77,7 +77,8 @@ _PATTERNS = {
     "merchant": [
         r"(?:商户|商家|店名|收款方)[:：]\s*([^\n\r]+)",
         r"(?:merchant|store|shop)[:：]\s*([^\n\r]+)",
-        r"^([^\n\r]{2,30})$",  # 兜底：首行非空短文本
+        r"(?:receipt from|from)\s+([^\n\r]+)",  # 新增：处理 "Receipt from XXX" 格式
+        r"^([^\n\r]{2,30})(?:收据|发票|receipt|invoice)?$",  # 修改：允许结尾有"收据"等词
     ],
     "date": [
         r"(?:日期|时间)[:：]\s*(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)",
@@ -132,6 +133,51 @@ def _parse_total(value_str: str) -> Optional[float]:
         return None
 
 
+def _extract_merchant(text: str) -> Optional[str]:
+    """提取商户名称（增强版）"""
+    # 先尝试明确的商户标识
+    for pattern in _PATTERNS["merchant"][:2]:
+        match = re.search(pattern, text, re.IGNORECASE)
+        if match:
+            return match.group(1).strip()
+    
+    # 尝试 "Receipt from XXX" 格式
+    match = re.search(r"(?:receipt from|from)\s+([^\n\r]+)", text, re.IGNORECASE)
+    if match:
+        return match.group(1).strip()
+    
+    # 尝试首行作为商户名称（排除包含关键字的行）
+    lines = text.split('\n')
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        # 排除包含日期、金额等关键信息的行
+        if re.search(r'(日期|时间|date|time|总计|合计|金额|total|amount)', line, re.IGNORECASE):
+            continue
+        # 排除包含商品信息的行
+        if re.search(r'(商品|项目|item|数量|单价|价格|price)', line, re.IGNORECASE):
+            continue
+        # 排除纯数字行
+        if re.match(r'^[\d\s\.,]+$', line):
+            continue
+        # 排除过长的行
+        if len(line) > 30:
+            continue
+        # 排除包含冒号的行（可能是字段定义）
+        if ':' in line or '：' in line:
+            continue
+        # 排除包含"收据"或"发票"字样的行
+        if re.search(r'(收据|发票|receipt|invoice)', line, re.IGNORECASE):
+            continue
+        # 这应该就是商户名称
+        if len(line) >= 2:
+            return line
+        break
+    
+    return None
+
+
 def parse_receipt(raw_text: str) -> ReceiptData:
     """
     解析发票/收据文本
@@ -152,7 +198,7 @@ def parse_receipt(raw_text: str) -> ReceiptData:
     receipt.raw_text = raw_text.strip()
 
     # 提取各字段
-    receipt.merchant = _extract_first(raw_text, _PATTERNS["merchant"])
+    receipt.merchant = _extract_merchant(raw_text)
     receipt.date = _extract_first(raw_text, _PATTERNS["date"])
     total_str = _extract_first(raw_text, _PATTERNS["total"])
     if total_str:

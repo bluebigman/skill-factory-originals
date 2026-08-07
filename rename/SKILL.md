@@ -1,23 +1,21 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: rename
 name: rename
-displayName: 未命名工具
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行rename相关操作时使用本技能，提供规范、可复用的处理流程与输出。
-version: 1.0.0
-author: skill-factory-auto
+displayName: 文件重命名 批量处理 命名规范
+description: 提供文件重命名的规范流程、批量处理策略与命名建议，输出可复用的操作方案。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/rename
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 林墨
 agent_created: true
-trigger_words:
-  - "rename"
+trigger_words: ["rename", "重命名", "批量改名", "文件命名", "命名规范"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -26,95 +24,58 @@ trigger_words:
 <!-- user-agreement-injected -->
 
 
-# 未命名工具
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-> Keep your AI coding sessions named after what they actually became — Claude Code, Codex, Cursor and more. Auto-renames i
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（一页纸速查卡）
+# 文件重命名 批量处理 命名规范
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+## 一、能力边界速查卡
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+### 能做（5项核心能力）
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+| 编号 | 能力项 | 说明 |
+|------|--------|------|
+| 1 | 单文件重命名方案 | 根据用户提供的文件信息，给出规范的新文件名建议 |
+| 2 | 批量重命名策略 | 针对多文件场景，设计统一的命名规则与序号方案 |
+| 3 | 命名规则模板生成 | 输出可复用的命名模板（如 `日期_项目_序号` 格式） |
+| 4 | 冲突检测与规避 | 识别重名风险，提供去重策略与占位方案 |
+| 5 | 操作步骤清单 | 生成分步执行指南，包含备份、预览、执行、验证环节 |
 
-## 二、触发方式（说大白话就能用）
+### 不能做（明确边界）
 
-**触发词表（6类场景）：**
-| rename | 通用场景 |
+| 编号 | 限制项 | 说明 |
+|------|--------|------|
+| 1 | 不直接操作系统文件 | 本技能仅输出方案与步骤，不执行实际文件操作 |
+| 2 | 不处理二进制内容 | 不解析文件内部数据，仅基于文件名与元信息工作 |
+| 3 | 不保证命名唯一性 | 最终唯一性需用户在执行环境中确认 |
+| 4 | 不覆盖特殊权限文件 | 系统保护文件、只读文件需用户自行处理权限 |
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 未命名工具，进入标准流程 |
-| 把这个转成另一种格式 | 启动 未命名工具，进入标准流程 |
-| 批量弄一下这些 | 启动 未命名工具，进入标准流程 |
+### 适用对象
 
-## 三、标准流程（5分钟上手路径）
+- 需要整理本地文件的个人用户
+- 需要批量归档项目文档的团队协作场景
+- 需要规范化命名以适配自动化流程的开发人员
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2026 SkillForge Lab
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
