@@ -2,618 +2,462 @@
 # -*- coding: utf-8 -*-
 """
 合同审查风险清单核查工具
-功能：对合同文本进行违约、付款、保密、知识产权归属四类风险点审查，
-      输出带风险等级和条款原文摘录的核查清单。
-支持：纯文本(.txt)和Word(.docx)格式，单文件或多文件批量审查。
-输出：JSON（默认）或 Markdown 格式。
+功能：对合同文本进行风险点审查，输出违约、付款、保密、知产归属的核查意见清单
 """
 
 import argparse
 import json
 import re
 import sys
-import os
+import time
+import zipfile
 import tempfile
-import hashlib
-from pathlib import Path
+import os
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 
-# 尝试导入 python-docx，失败时给出提示
 try:
     from docx import Document
-    DOCX_AVAILABLE = True
 except ImportError:
-    DOCX_AVAILABLE = False
+    Document = None
 
-# ============================================================
-# 风险规则定义
-# ============================================================
-
-RISK_RULES: Dict[str, Dict[str, Any]] = {
+# 风险规则定义：基于条款语义的规则引擎
+RISK_RULES = {
     "违约": {
+        "keywords": ["违约金", "违约责任", "赔偿", "损失"],
         "high_risk": [
-            (r"违约金[^。；;]*?\d+%", "违约金比例过高，建议协商调整至合理范围（通常不超过30%）"),
-            (r"赔偿[^。；;]*?全部损失", "赔偿范围过大，建议限定为直接损失"),
-            (r"承担[^。；;]*?一切责任", "责任范围过于宽泛，建议明确具体责任类型"),
+            {
+                "id": "breach_high_1",
+                "pattern": r"违约金[^。；]*?(\d+(?:\.\d+)?)\s*%",
+                "description": "违约金比例过高",
+                "check": lambda m: float(m.group(1)) > 30,
+                "suggestion": "违约金比例超过30%，建议协商调整至合理范围（通常不超过30%）"
+            },
+            {
+                "id": "breach_high_2",
+                "pattern": r"赔偿[^。；]*?全部损失",
+                "description": "赔偿范围过大",
+                "check": lambda m: True,
+                "suggestion": "赔偿范围约定为全部损失，建议明确赔偿范围和上限"
+            },
+            {
+                "id": "breach_high_3",
+                "pattern": r"承担[^。；]*?一切责任",
+                "description": "责任范围过大",
+                "check": lambda m: True,
+                "suggestion": "责任范围约定为一切责任，建议明确责任边界和例外情形"
+            }
         ],
         "medium_risk": [
-            (r"违约金[^。；;]*?\d+", "违约金金额需核实是否合理，建议明确计算方式"),
-            (r"赔偿损失", "赔偿范围不够明确，建议明确赔偿范围和计算标准"),
+            {
+                "id": "breach_medium_1",
+                "pattern": r"违约金[^。；]*?(\d+(?:\.\d+)?)\s*%",
+                "description": "违约金比例需关注",
+                "check": lambda m: 10 <= float(m.group(1)) <= 30,
+                "suggestion": "违约金比例在10%-30%之间，建议根据实际损失评估合理性"
+            },
+            {
+                "id": "breach_medium_2",
+                "pattern": r"赔偿损失",
+                "description": "赔偿约定不明确",
+                "check": lambda m: True,
+                "suggestion": "赔偿损失约定不够明确，建议明确赔偿计算方式和范围"
+            }
         ],
         "low_risk": [
-            (r"违约责任", "违约责任条款存在，建议补充具体违约情形和后果"),
-        ],
+            {
+                "id": "breach_low_1",
+                "pattern": r"违约责任",
+                "description": "违约责任条款存在",
+                "check": lambda m: True,
+                "suggestion": "违约责任条款存在，建议补充具体违约情形和后果"
+            }
+        ]
     },
     "付款": {
+        "keywords": ["付款", "支付", "价款", "费用", "定金", "预付款"],
         "high_risk": [
-            (r"付款[^。；;]*?后[^。；;]*?交货", "先付款后交货风险高，建议改为货到验收后付款"),
-            (r"先付款[^。；;]*?后[^。；;]*?验收", "先付款后验收风险高，建议增加验收合格后付款条款"),
-            (r"一次性[^。；;]*?付款", "一次性付款风险高，建议分期付款并绑定履约节点"),
+            {
+                "id": "payment_high_1",
+                "pattern": r"付款[^。；]*?后[^。；]*?交货",
+                "description": "付款后交货风险",
+                "check": lambda m: True,
+                "suggestion": "付款后交货存在风险，建议增加交货验收后再付款的条款"
+            },
+            {
+                "id": "payment_high_2",
+                "pattern": r"先付款[^。；]*?后[^。；]*?验收",
+                "description": "先付款后验收风险",
+                "check": lambda m: True,
+                "suggestion": "先付款后验收对己方不利，建议增加验收合格后再付款的条款"
+            },
+            {
+                "id": "payment_high_3",
+                "pattern": r"一次性[^。；]*?付款",
+                "description": "一次性付款风险",
+                "check": lambda m: True,
+                "suggestion": "一次性付款风险较高，建议分期付款并设置付款条件"
+            }
         ],
         "medium_risk": [
-            (r"付款期限", "付款期限需明确具体日期或条件，避免模糊表述"),
-            (r"付款条件", "付款条件需明确，建议列出所有前置条件"),
+            {
+                "id": "payment_medium_1",
+                "pattern": r"付款期限",
+                "description": "付款期限约定",
+                "check": lambda m: True,
+                "suggestion": "付款期限约定不够明确，建议明确具体付款时间节点"
+            },
+            {
+                "id": "payment_medium_2",
+                "pattern": r"付款条件",
+                "description": "付款条件约定",
+                "check": lambda m: True,
+                "suggestion": "付款条件约定不够明确，建议明确付款条件和验收标准"
+            }
         ],
         "low_risk": [
-            (r"付款方式", "付款方式需明确，建议补充逾期付款违约责任"),
-        ],
+            {
+                "id": "payment_low_1",
+                "pattern": r"付款方式",
+                "description": "付款方式约定",
+                "check": lambda m: True,
+                "suggestion": "付款方式条款存在，建议补充逾期付款的违约责任"
+            }
+        ]
     },
     "保密": {
+        "keywords": ["保密", "机密", "商业秘密", "保密义务"],
         "high_risk": [
-            (r"保密[^。；;]*?无限期", "无限期保密不合理，建议设定合理保密期限"),
-            (r"保密[^。；;]*?永久", "永久保密不合理，建议设定合理保密期限"),
+            {
+                "id": "confidential_high_1",
+                "pattern": r"保密[^。；]*?无限期",
+                "description": "保密期限无限期",
+                "check": lambda m: True,
+                "suggestion": "保密期限约定为无限期不合理，建议设定合理期限（通常3-5年）"
+            },
+            {
+                "id": "confidential_high_2",
+                "pattern": r"保密[^。；]*?永久",
+                "description": "保密期限永久",
+                "check": lambda m: True,
+                "suggestion": "保密期限约定为永久不合理，建议设定合理期限并明确保密信息范围"
+            }
         ],
         "medium_risk": [
-            (r"保密期限", "保密期限需明确，建议设定具体年限"),
-            (r"保密范围", "保密范围需明确，建议列出具体保密信息类型"),
+            {
+                "id": "confidential_medium_1",
+                "pattern": r"保密期限",
+                "description": "保密期限约定",
+                "check": lambda m: True,
+                "suggestion": "保密期限约定不够明确，建议明确具体保密期限"
+            },
+            {
+                "id": "confidential_medium_2",
+                "pattern": r"保密范围",
+                "description": "保密范围约定",
+                "check": lambda m: True,
+                "suggestion": "保密范围约定不够明确，建议明确保密信息的定义和范围"
+            }
         ],
         "low_risk": [
-            (r"保密协议", "保密条款存在，建议明确保密信息定义和例外情形"),
-        ],
+            {
+                "id": "confidential_low_1",
+                "pattern": r"保密协议",
+                "description": "保密协议存在",
+                "check": lambda m: True,
+                "suggestion": "保密条款存在，建议明确保密信息的定义和例外情形"
+            }
+        ]
     },
     "知识产权": {
+        "keywords": ["知识产权", "著作权", "专利", "商标", "版权", "归属"],
         "high_risk": [
-            (r"知识产权[^。；;]*?归[^。；;]*?甲方", "知识产权单方归属甲方，建议协商共同拥有或明确使用许可"),
-            (r"成果[^。；;]*?归[^。；;]*?甲方", "成果单方归属甲方，建议协商共同拥有或明确使用许可"),
+            {
+                "id": "ip_high_1",
+                "pattern": r"知识产权[^。；]*?归[^。；]*?甲方",
+                "description": "知识产权归甲方",
+                "check": lambda m: True,
+                "suggestion": "知识产权归属约定对己方不利，建议协商共同拥有或明确使用许可"
+            },
+            {
+                "id": "ip_high_2",
+                "pattern": r"成果[^。；]*?归[^。；]*?甲方",
+                "description": "成果归甲方",
+                "check": lambda m: True,
+                "suggestion": "成果归属约定对己方不利，建议协商共同拥有或明确使用许可"
+            }
         ],
         "medium_risk": [
-            (r"知识产权归属", "知识产权归属需明确，建议明确所有权和使用权"),
-            (r"许可使用", "许可使用范围需明确，建议明确许可类型和期限"),
+            {
+                "id": "ip_medium_1",
+                "pattern": r"知识产权归属",
+                "description": "知识产权归属约定",
+                "check": lambda m: True,
+                "suggestion": "知识产权归属约定不够明确，建议明确成果归属和使用权限"
+            },
+            {
+                "id": "ip_medium_2",
+                "pattern": r"许可使用",
+                "description": "许可使用约定",
+                "check": lambda m: True,
+                "suggestion": "许可使用条款不够明确，建议明确许可范围、期限和费用"
+            }
         ],
         "low_risk": [
-            (r"知识产权", "知识产权条款存在，建议明确成果归属和侵权责任"),
-        ],
-    },
+            {
+                "id": "ip_low_1",
+                "pattern": r"知识产权",
+                "description": "知识产权条款存在",
+                "check": lambda m: True,
+                "suggestion": "知识产权条款存在，建议补充侵权责任承担和许可范围"
+            }
+        ]
+    }
 }
 
-
-def get_risk_level(category: str, text: str) -> Tuple[Optional[str], Optional[str]]:
-    """
-    根据规则匹配文本，返回风险等级和风险描述。
-    
-    Args:
-        category: 风险类别（违约/付款/保密/知识产权）
-        text: 合同文本
-    
-    Returns:
-        (风险等级, 风险描述) 或 (None, None) 表示未匹配
-    """
-    rules = RISK_RULES.get(category, {})
-    
-    # 先匹配高风险
-    for pattern, desc in rules.get("high_risk", []):
-        if re.search(pattern, text):
-            return "high", desc
-    
-    # 再匹配中风险
-    for pattern, desc in rules.get("medium_risk", []):
-        if re.search(pattern, text):
-            return "medium", desc
-    
-    # 最后匹配低风险
-    for pattern, desc in rules.get("low_risk", []):
-        if re.search(pattern, text):
-            return "low", desc
-    
-    return None, None
-
-
-def extract_matched_sentence(text: str, pattern: str, max_len: int = 100) -> str:
-    """
-    提取匹配到的句子片段。
-    
-    Args:
-        text: 合同文本
-        pattern: 正则表达式
-        max_len: 最大提取长度
-    
-    Returns:
-        匹配的句子片段
-    """
-    match = re.search(pattern, text)
-    if not match:
-        return ""
-    
-    start = max(0, match.start() - 20)
-    end = min(len(text), match.end() + 20)
-    snippet = text[start:end].replace("\n", " ").strip()
-    
-    if len(snippet) > max_len:
-        snippet = snippet[:max_len] + "..."
-    
-    return snippet
-
-
-def review_contract(text: str) -> Dict[str, Any]:
-    """
-    对合同文本进行风险审查。
-    
-    Args:
-        text: 合同文本
-    
-    Returns:
-        审查结果字典
-    """
-    findings = []
-    
-    for category in RISK_RULES:
-        rules = RISK_RULES[category]
-        all_patterns = []
-        for level in ["high_risk", "medium_risk", "low_risk"]:
-            for pattern, desc in rules.get(level, []):
-                all_patterns.append((pattern, desc, level.replace("_risk", "")))
-        
-        for pattern, desc, level in all_patterns:
-            if re.search(pattern, text):
-                snippet = extract_matched_sentence(text, pattern)
-                findings.append({
-                    "category": category,
-                    "level": level,
-                    "description": desc,
-                    "matched_text": snippet,
-                    "pattern": pattern,
-                })
-    
-    # 去重（同一类别同一等级只保留第一个）
-    seen = set()
-    unique_findings = []
-    for finding in findings:
-        key = (finding["category"], finding["level"], finding["pattern"])
-        if key not in seen:
-            seen.add(key)
-            unique_findings.append(finding)
-    
-    # 统计风险等级
-    high_count = sum(1 for f in unique_findings if f["level"] == "high")
-    medium_count = sum(1 for f in unique_findings if f["level"] == "medium")
-    low_count = sum(1 for f in unique_findings if f["level"] == "low")
-    
-    return {
-        "findings": unique_findings,
-        "summary": {
-            "total": len(unique_findings),
-            "high": high_count,
-            "medium": medium_count,
-            "low": low_count,
-        },
-        "reviewed_at": datetime.now(timezone.utc).isoformat(),
-    }
-
-
-def read_text_file(file_path: Path) -> str:
-    """
-    读取文本文件内容。
-    
-    Args:
-        file_path: 文件路径
-    
-    Returns:
-        文件内容
-    
-    Raises:
-        FileNotFoundError: 文件不存在
-        ValueError: 文件为空
-    """
-    if not file_path.exists():
-        raise FileNotFoundError(f"文件不存在: {file_path}")
-    
-    content = file_path.read_text(encoding="utf-8", errors="replace")
-    if not content.strip():
-        raise ValueError(f"文件内容为空: {file_path}")
-    
-    return content
-
-
-def read_docx_file(file_path: Path) -> str:
-    """
-    读取 Word 文档内容。
-    
-    Args:
-        file_path: 文件路径
-    
-    Returns:
-        文档文本内容
-    
-    Raises:
-        ImportError: 缺少 python-docx 库
-        FileNotFoundError: 文件不存在
-        ValueError: 文件为空
-    """
-    if not DOCX_AVAILABLE:
-        raise ImportError("缺少 python-docx 库，请安装: pip install python-docx")
-    
-    if not file_path.exists():
-        raise FileNotFoundError(f"文件不存在: {file_path}")
-    
-    doc = Document(str(file_path))
-    paragraphs = [p.text for p in doc.paragraphs if p.text.strip()]
-    content = "\n".join(paragraphs)
-    
-    if not content.strip():
-        raise ValueError(f"文件内容为空: {file_path}")
-    
-    return content
-
-
-def read_input_file(file_path: Path) -> str:
-    """
-    根据文件扩展名读取内容。
-    
-    Args:
-        file_path: 文件路径
-    
-    Returns:
-        文件文本内容
-    
-    Raises:
-        ValueError: 不支持的文件格式
-    """
-    suffix = file_path.suffix.lower()
-    if suffix == ".txt":
-        return read_text_file(file_path)
-    elif suffix == ".docx":
-        return read_docx_file(file_path)
-    else:
-        raise ValueError(f"不支持的文件格式: {suffix}，仅支持 .txt 和 .docx")
-
-
-def format_markdown(result: Dict[str, Any], source: str = "") -> str:
-    """
-    将审查结果格式化为 Markdown 报告。
-    
-    Args:
-        result: 审查结果字典
-        source: 来源标识（文件名或"用户输入"）
-    
-    Returns:
-        Markdown 格式报告
-    """
-    lines = []
-    lines.append("# 合同审查风险清单报告")
-    lines.append("")
-    
-    if source:
-        lines.append(f"**审查对象**: {source}")
-    lines.append(f"**审查时间**: {result['reviewed_at']}")
-    lines.append("")
-    
-    summary = result["summary"]
-    lines.append("## 风险统计")
-    lines.append("")
-    lines.append(f"- 总风险点: {summary['total']}")
-    lines.append(f"- 高风险: {summary['high']}")
-    lines.append(f"- 中风险: {summary['medium']}")
-    lines.append(f"- 低风险: {summary['low']}")
-    lines.append("")
-    
-    if not result["findings"]:
-        lines.append("## 审查结果")
-        lines.append("")
-        lines.append("未发现明显风险点。")
-        return "\n".join(lines)
-    
-    lines.append("## 风险明细")
-    lines.append("")
-    
-    for i, finding in enumerate(result["findings"], 1):
-        level_icon = {"high": "🔴", "medium": "🟡", "low": "🟢"}.get(finding["level"], "⚪")
-        lines.append(f"### {i}. {level_icon} [{finding['category']}] {finding['level'].upper()}")
-        lines.append("")
-        lines.append(f"**风险描述**: {finding['description']}")
-        lines.append("")
-        lines.append(f"**匹配原文**: {finding['matched_text']}")
-        lines.append("")
-    
-    return "\n".join(lines)
-
-
-def atomic_write_json(file_path: Path, data: Dict[str, Any]) -> None:
-    """
-    原子化写入 JSON 文件。
-    
-    Args:
-        file_path: 输出文件路径
-        data: 要写入的数据
-    """
-    file_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    # 写入临时文件
-    fd, temp_path = tempfile.mkstemp(dir=str(file_path.parent), suffix=".tmp")
-    try:
-        with os.fdopen(fd, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-        # 原子替换
-        os.replace(temp_path, file_path)
-    except Exception:
-        # 清理临时文件
-        if os.path.exists(temp_path):
-            os.unlink(temp_path)
-        raise
-
-
-def atomic_write_markdown(file_path: Path, content: str) -> None:
-    """
-    原子化写入 Markdown 文件。
-    
-    Args:
-        file_path: 输出文件路径
-        content: 要写入的内容
-    """
-    file_path.parent.mkdir(parents=True, exist_ok=True)
-    
-    # 写入临时文件
-    fd, temp_path = tempfile.mkstemp(dir=str(file_path.parent), suffix=".tmp")
-    try:
-        with os.fdopen(fd, "w", encoding="utf-8") as f:
-            f.write(content)
-        # 原子替换
-        os.replace(temp_path, file_path)
-    except Exception:
-        # 清理临时文件
-        if os.path.exists(temp_path):
-            os.unlink(temp_path)
-        raise
-
-
-def process_file(file_path: Path, output_format: str = "json") -> Dict[str, Any]:
-    """
-    处理单个文件。
-    
-    Args:
-        file_path: 文件路径
-        output_format: 输出格式（json/markdown）
-    
-    Returns:
-        处理结果
-    """
-    try:
-        content = read_input_file(file_path)
-    except (FileNotFoundError, ValueError, ImportError) as e:
-        return {
-            "status": "error",
-            "error_code": 1 if isinstance(e, FileNotFoundError) else (3 if isinstance(e, ValueError) else 4),
-            "error_message": str(e),
-            "file": str(file_path),
+def _compile_rules() -> Dict[str, Dict[str, List[Dict[str, Any]]]]:
+    """预编译所有正则表达式"""
+    compiled = {}
+    for category, rules in RISK_RULES.items():
+        compiled[category] = {
+            'high': [{
+                'id': r['id'],
+                'pattern': re.compile(r['pattern']),
+                'description': r['description'],
+                'check': r['check'],
+                'suggestion': r['suggestion']
+            } for r in rules['high_risk']],
+            'medium': [{
+                'id': r['id'],
+                'pattern': re.compile(r['pattern']),
+                'description': r['description'],
+                'check': r['check'],
+                'suggestion': r['suggestion']
+            } for r in rules['medium_risk']],
+            'low': [{
+                'id': r['id'],
+                'pattern': re.compile(r['pattern']),
+                'description': r['description'],
+                'check': r['check'],
+                'suggestion': r['suggestion']
+            } for r in rules['low_risk']]
         }
+    return compiled
+
+_COMPILED_RULES = _compile_rules()
+
+def extract_text_from_file(filepath: str) -> str:
+    """从文件中提取文本内容，支持txt/md/docx格式，含异常处理和降级策略"""
+    path = Path(filepath)
+    if not path.exists():
+        raise FileNotFoundError(f"文件不存在: {filepath}")
     
-    result = review_contract(content)
-    result["source"] = str(file_path)
+    # 检查文件大小（限制为50MB）
+    MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
+    file_size = path.stat().st_size
+    if file_size > MAX_FILE_SIZE:
+        raise ValueError(f"文件过大（{file_size/1024/1024:.1f}MB），超过50MB限制")
     
-    # 生成输出文件
-    output_path = file_path.with_suffix(".review.json" if output_format == "json" else ".review.md")
+    suffix = path.suffix.lower()
     
-    try:
-        if output_format == "json":
-            atomic_write_json(output_path, result)
+    if suffix in ['.txt', '.md']:
+        # 尝试多种编码
+        encodings = ['utf-8', 'gbk', 'gb2312', 'latin-1']
+        for encoding in encodings:
+            try:
+                return path.read_text(encoding=encoding)
+            except (UnicodeDecodeError, UnicodeError):
+                continue
+        raise ValueError(f"文件编码无法识别，请转换为UTF-8或GBK编码")
+    
+    elif suffix == '.docx':
+        # 优先使用python-docx
+        if Document is not None:
+            try:
+                doc = Document(path)
+                texts = [para.text for para in doc.paragraphs if para.text.strip()]
+                
+                # 提取表格文本
+                for table in doc.tables:
+                    for row in table.rows:
+                        row_texts = []
+                        for cell in row.cells:
+                            if cell.text.strip():
+                                row_texts.append(cell.text.strip())
+                        if row_texts:
+                            texts.append(' | '.join(row_texts))
+                
+                return '\n'.join(texts)
+            except Exception as e:
+                # 降级到zipfile提取
+                print(f"python-docx解析失败，尝试降级方案: {e}")
+                try:
+                    return _extract_docx_zipfile(path)
+                except Exception as e2:
+                    raise ValueError(f"docx文件解析失败: {e2}")
         else:
-            markdown_content = format_markdown(result, source=str(file_path))
-            atomic_write_markdown(output_path, markdown_content)
+            # 直接使用zipfile降级方案
+            try:
+                return _extract_docx_zipfile(path)
+            except Exception as e:
+                raise ValueError(f"docx文件解析失败: {e}")
+    
+    else:
+        raise ValueError(f"不支持的文件格式: {suffix}，仅支持 .txt、.md、.docx")
+
+def _extract_docx_zipfile(path: Path) -> str:
+    """使用zipfile提取docx中的document.xml文本"""
+    try:
+        with zipfile.ZipFile(path, 'r') as z:
+            # 检查文件是否损坏
+            if z.testzip() is not None:
+                raise ValueError("docx文件损坏")
+            
+            # 提取document.xml
+            if 'word/document.xml' not in z.namelist():
+                raise ValueError("docx文件缺少document.xml")
+            
+            with z.open('word/document.xml') as f:
+                content = f.read().decode('utf-8')
+            
+            # 提取文本内容
+            # 移除XML标签，保留文本
+            text = re.sub(r'<[^>]+>', ' ', content)
+            # 清理多余空白
+            text = re.sub(r'\s+', ' ', text).strip()
+            
+            # 按段落分割
+            paragraphs = re.findall(r'<w:p[^>]*>(.*?)</w:p>', content, re.DOTALL)
+            texts = []
+            for para in paragraphs:
+                # 提取每个段落中的文本
+                para_text = re.sub(r'<[^>]+>', '', para)
+                para_text = re.sub(r'\s+', ' ', para_text).strip()
+                if para_text:
+                    texts.append(para_text)
+            
+            return '\n'.join(texts) if texts else text
+    except zipfile.BadZipFile:
+        raise ValueError("docx文件格式错误")
     except Exception as e:
-        return {
-            "status": "error",
-            "error_code": 5,
-            "error_message": f"写入输出文件失败: {e}",
-            "file": str(file_path),
-        }
+        raise ValueError(f"docx文件解析失败: {e}")
+
+def analyze_contract(text: str) -> List[Dict[str, str]]:
+    """分析合同文本，返回风险清单（基于语义规则引擎）"""
+    risks = []
+    # 记录已匹配的条款位置，避免重复报告
+    matched_positions = set()
     
-    return {
-        "status": "success",
-        "file": str(file_path),
-        "output": str(output_path),
-        "summary": result["summary"],
-    }
+    for category, rules in RISK_RULES.items():
+        # 检查是否包含该类别的关键词
+        has_keywords = any(kw in text for kw in rules["keywords"])
+        if not has_keywords:
+            risks.append({
+                "category": category,
+                "level": "中",
+                "title": f"{category}条款缺失",
+                "detail": f"合同未包含{category}相关条款",
+                "suggestion": f"建议补充{category}条款"
+            })
+            continue
+        
+        # 检查高风险模式（语义判断）
+        high_found = False
+        high_details = []
+        for rule in _COMPILED_RULES[category]['high']:
+            for match in rule['pattern'].finditer(text):
+                # 检查是否已匹配过该位置
+                pos_key = (category, 'high', rule['id'], match.start())
+                if pos_key in matched_positions:
+                    continue
+                if rule['check'](match):
+                    high_found = True
+                    high_details.append(f"{rule['description']}: {match.group(0)[:50]}")
+                    matched_positions.add(pos_key)
+                    break
+        
+        if high_found:
+            risks.append({
+                "category": category,
+                "level": "高",
+                "title": f"{category}条款存在高风险",
+                "detail": f"发现高风险表述: {'; '.join(high_details[:3])}",
+                "suggestion": rules["high_risk"][0]["suggestion"]
+            })
+            continue
+        
+        # 检查中风险模式（语义判断）
+        medium_found = False
+        medium_details = []
+        for rule in _COMPILED_RULES[category]['medium']:
+            for match in rule['pattern'].finditer(text):
+                # 检查是否已匹配过该位置
+                pos_key = (category, 'medium', rule['id'], match.start())
+                if pos_key in matched_positions:
+                    continue
+                if rule['check'](match):
+                    medium_found = True
+                    medium_details.append(f"{rule['description']}: {match.group(0)[:50]}")
+                    matched_positions.add(pos_key)
+                    break
+        
+        if medium_found:
+            risks.append({
+                "category": category,
+                "level": "中",
+                "title": f"{category}条款需完善",
+                "detail": f"发现需完善的表述: {'; '.join(medium_details[:3])}",
+                "suggestion": rules["medium_risk"][0]["suggestion"]
+            })
+            continue
+        
+        # 低风险
+        risks.append({
+            "category": category,
+            "level": "低",
+            "title": f"{category}条款基本合规",
+            "detail": "条款存在但需人工复核",
+            "suggestion": rules["low_risk"][0]["suggestion"]
+        })
+    
+    return risks
 
+def format_output(risks: List[Dict[str, str]], format_type: str = 'text') -> str:
+    """格式化输出结果"""
+    if format_type == 'json':
+        return json.dumps(risks, ensure_ascii=False, indent=2)
+    
+    # 文本格式输出
+    lines = []
+    lines.append("=" * 60)
+    lines.append("合同审查风险清单")
+    lines.append(f"生成时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}")
+    lines.append("=" * 60)
+    
+    for risk in risks:
+        lines.append(f"\n【{risk['category']}】风险等级: {risk['level']}")
+        lines.append(f"风险点: {risk['title']}")
+        lines.append(f"详情: {risk['detail']}")
+        lines.append(f"建议: {risk['suggestion']}")
+        lines.append("-" * 40)
+    
+    return '\n'.join(lines)
 
-def run_selftest() -> int:
+def selftest() -> bool:
+    """自检函数，真实调用核心功能并验证输出"""
+    print("运行自检...")
+    
+    # 测试用例1：包含所有风险类别的文本（含高风险）
+    test_text = """
+    本合同约定，甲方应于合同签订后30日内支付乙方合同总价款的30%作为预付款。
+    若甲方逾期付款，每逾期一日需支付合同总价款35%的违约金。
+    乙方应保守甲方的商业秘密，保密期限为合同终止后3年。
+    项目开发过程中产生的知识产权归甲方所有。
     """
-    自测函数：验证核心功能是否正常。
     
-    Returns:
-        0 表示成功，非 0 表示失败
-    """
-    print("=" * 60)
-    print("开始自测...")
-    print("=" * 60)
+    # 执行分析
+    risks = analyze_contract(test_text)
     
-    # 测试 1: 高风险违约条款
-    print("\n[测试 1] 高风险违约条款检测")
-    test_text_1 = "若乙方违约，需支付违约金20%，并赔偿全部损失。"
-    result_1 = review_contract(test_text_1)
-    assert result_1["summary"]["high"] >= 1, "应检测到高风险违约条款"
-    assert any(f["category"] == "违约" and f["level"] == "high" for f in result_1["findings"]), "应检测到违约高风险"
-    print(f"  ✓ 通过，检测到 {result_1['summary']['high']} 个高风险点")
-    
-    # 测试 2: 高风险付款条款
-    print("\n[测试 2] 高风险付款条款检测")
-    test_text_2 = "甲方需先付款后交货，且一次性付清全部款项。"
-    result_2 = review_contract(test_text_2)
-    assert result_2["summary"]["high"] >= 1, "应检测到高风险付款条款"
-    assert any(f["category"] == "付款" and f["level"] == "high" for f in result_2["findings"]), "应检测到付款高风险"
-    print(f"  ✓ 通过，检测到 {result_2['summary']['high']} 个高风险点")
-    
-    # 测试 3: 中风险保密条款
-    print("\n[测试 3] 中风险保密条款检测")
-    test_text_3 = "双方应遵守保密期限和保密范围的规定。"
-    result_3 = review_contract(test_text_3)
-    assert result_3["summary"]["medium"] >= 1, "应检测到中风险保密条款"
-    assert any(f["category"] == "保密" and f["level"] == "medium" for f in result_3["findings"]), "应检测到保密中风险"
-    print(f"  ✓ 通过，检测到 {result_3['summary']['medium']} 个中风险点")
-    
-    # 测试 4: 高风险知识产权条款
-    print("\n[测试 4] 高风险知识产权条款检测")
-    test_text_4 = "本项目产生的知识产权归甲方所有。"
-    result_4 = review_contract(test_text_4)
-    assert result_4["summary"]["high"] >= 1, "应检测到高风险知识产权条款"
-    assert any(f["category"] == "知识产权" and f["level"] == "high" for f in result_4["findings"]), "应检测到知识产权高风险"
-    print(f"  ✓ 通过，检测到 {result_4['summary']['high']} 个高风险点")
-    
-    # 测试 5: 无风险文本
-    print("\n[测试 5] 无风险文本检测")
-    test_text_5 = "本合同自双方签字之日起生效。"
-    result_5 = review_contract(test_text_5)
-    assert result_5["summary"]["total"] == 0, "不应检测到风险点"
-    print("  ✓ 通过，未检测到风险点")
-    
-    # 测试 6: 文件读取功能
-    print("\n[测试 6] 文件读取功能")
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as f:
-        f.write("甲方需一次性付款给乙方，违约金为30%。")
-        temp_file = f.name
-    
-    try:
-        content = read_input_file(Path(temp_file))
-        assert "一次性付款" in content, "文件内容读取失败"
-        print("  ✓ 通过，文件读取成功")
-    finally:
-        os.unlink(temp_file)
-    
-    # 测试 7: 输出格式
-    print("\n[测试 7] Markdown 输出格式")
-    test_result = review_contract("违约金为20%，赔偿全部损失。")
-    md_content = format_markdown(test_result, source="测试文件")
-    assert "# 合同审查风险清单报告" in md_content, "Markdown 格式错误"
-    assert "风险统计" in md_content, "Markdown 缺少风险统计"
-    print("  ✓ 通过，Markdown 格式正确")
-    
-    # 测试 8: 时间戳格式
-    print("\n[测试 8] 时间戳格式")
-    test_result = review_contract("测试文本")
-    from datetime import datetime
-    try:
-        datetime.fromisoformat(test_result["reviewed_at"])
-        print("  ✓ 通过，时间戳格式正确")
-    except ValueError:
-        print("  ✗ 失败，时间戳格式错误")
-        return 1
-    
-    print("\n" + "=" * 60)
-    print("所有自测通过！")
-    print("=" * 60)
-    return 0
-
-
-def main() -> int:
-    """
-    主函数。
-    
-    Returns:
-        退出码
-    """
-    parser = argparse.ArgumentParser(
-        description="合同审查风险清单核查工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  %(prog)s -f contract.txt
-  %(prog)s -f contract.docx -o markdown
-  %(prog)s -d ./contracts/
-  %(prog)s --selftest
-        """,
-    )
-    
-    parser.add_argument(
-        "-f", "--file",
-        type=str,
-        help="合同文件路径（.txt 或 .docx）",
-    )
-    parser.add_argument(
-        "-d", "--directory",
-        type=str,
-        help="批量审查目录下的所有合同文件",
-    )
-    parser.add_argument(
-        "-o", "--output",
-        type=str,
-        choices=["json", "markdown"],
-        default="json",
-        help="输出格式（默认: json）",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自测",
-    )
-    
-    args = parser.parse_args()
-    
-    # 自测模式
-    if args.selftest:
-        return run_selftest()
-    
-    # 参数检查
-    if not args.file and not args.directory:
-        parser.print_help()
-        print("\n错误: 必须指定 -f 或 -d 参数", file=sys.stderr)
-        return 5
-    
-    # 单文件模式
-    if args.file:
-        file_path = Path(args.file)
-        if not file_path.exists():
-            print(f"错误: 文件不存在: {file_path}", file=sys.stderr)
-            return 1
-        
-        result = process_file(file_path, args.output)
-        
-        if result["status"] == "error":
-            print(f"错误: {result['error_message']}", file=sys.stderr)
-            return result.get("error_code", 5)
-        
-        print(f"审查完成: {result['file']}")
-        print(f"输出文件: {result['output']}")
-        print(f"风险统计: 总{result['summary']['total']} 高{result['summary']['high']} 中{result['summary']['medium']} 低{result['summary']['low']}")
-        return 0
-    
-    # 目录批量模式
-    if args.directory:
-        dir_path = Path(args.directory)
-        if not dir_path.exists() or not dir_path.is_dir():
-            print(f"错误: 目录不存在: {dir_path}", file=sys.stderr)
-            return 1
-        
-        files = list(dir_path.glob("*.txt")) + list(dir_path.glob("*.docx"))
-        if not files:
-            print(f"错误: 目录中没有找到 .txt 或 .docx 文件: {dir_path}", file=sys.stderr)
-            return 3
-        
-        success_count = 0
-        error_count = 0
-        
-        for file_path in files:
-            result = process_file(file_path, args.output)
-            if result["status"] == "success":
-                success_count += 1
-                print(f"✓ {file_path.name}: 总{result['summary']['total']} 高{result['summary']['high']} 中{result['summary']['medium']} 低{result['summary']['low']}")
-            else:
-                error_count += 1
-                print(f"✗ {file_path.name}: {result['error_message']}", file=sys.stderr)
-        
-        print(f"\n批量处理完成: 成功 {success_count} 个，失败 {error_count} 个")
-        return 0 if error_count == 0 else 5
-    
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    # 验证结果
+    assert len(risks) == 4, f

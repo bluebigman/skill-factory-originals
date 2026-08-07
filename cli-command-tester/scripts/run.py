@@ -17,6 +17,9 @@ import gzip
 import io
 import os
 import tempfile
+import threading
+import http.server
+import socketserver
 from datetime import datetime, timezone
 from http.client import HTTPResponse
 
@@ -256,217 +259,207 @@ def atomic_write_file(filepath, content):
         raise e
 
 
+class LocalTestHandler(http.server.BaseHTTPRequestHandler):
+    """本地测试服务器处理器"""
+    
+    def do_GET(self):
+        """处理GET请求"""
+        if self.path.startswith('/get'):
+            # 返回JSON响应
+            response_data = {
+                'method': 'GET',
+                'path': self.path,
+                'headers': dict(self.headers),
+                'timestamp': datetime.now(timezone.utc).isoformat()
+            }
+            self.send_response(200)
+            self.send_header('Content-Type', 'application/json')
+            self.send_header('X-Test-Header', 'test-value')
+            self.end_headers()
+            self.wfile.write(json.dumps(response_data).encode('utf-8'))
+        elif self.path.startswith('/error'):
+            # 返回错误状态
+            self.send_response(404)
+            self.send_header('Content-Type', 'application/json')
+            self.end_headers()
+            self.wfile.write(json.dumps({'error': 'Not Found'}).encode('utf-8'))
+        else:
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(b'Hello World')
+    
+    def do_POST(self):
+        """处理POST请求"""
+        content_length = int(self.headers.get('Content-Length', 0))
+        body = self.rfile.read(content_length) if content_length > 0 else b''
+        
+        response_data = {
+            'method': 'POST',
+            'path': self.path,
+            'body': body.decode('utf-8', errors='replace'),
+            'headers': dict(self.headers),
+            'timestamp': datetime.now(timezone.utc).isoformat()
+        }
+        self.send_response(200)
+        self.send_header('Content-Type', 'application/json')
+        self.end_headers()
+        self.wfile.write(json.dumps(response_data).encode('utf-8'))
+    
+    def log_message(self, format, *args):
+        """抑制日志输出"""
+        pass
+
+
+def start_local_server():
+    """启动本地测试服务器"""
+    handler = LocalTestHandler
+    httpd = socketserver.TCPServer(('127.0.0.1', 0), handler)
+    port = httpd.server_address[1]
+    thread = threading.Thread(target=httpd.serve_forever, daemon=True)
+    thread.start()
+    return httpd, port
+
+
 def run_selftest():
     """自检测试 - 真实调用核心功能"""
     print("🔍 运行自检测试...")
     tests_passed = 0
     tests_failed = 0
 
-    # 测试1: 构建URL
-    print("\n[测试1] URL参数拼接")
-    tester = HTTPTester('GET', 'https://api.example.com/users', params='page=1&size=20')
-    url = tester.build_url()
-    assert url == 'https://api.example.com/users?page=1&size=20', f"URL拼接错误: {url}"
-    print(f"  ✅ URL拼接正确: {url}")
-    tests_passed += 1
+    # 启动本地测试服务器
+    print("\n[准备] 启动本地测试服务器...")
+    httpd, port = start_local_server()
+    base_url = f"http://127.0.0.1:{port}"
+    print(f"  ✅ 本地服务器已启动: {base_url}")
 
-    # 测试2: JSON请求体准备
-    print("\n[测试2] JSON请求体准备")
-    tester = HTTPTester('POST', 'https://api.example.com/users', data='{"name":"test"}')
-    data = tester.prepare_data()
-    assert data == b'{"name":"test"}', f"JSON请求体错误: {data}"
-    assert tester.headers.get('Content-Type') == 'application/json', f"Content-Type错误: {tester.headers}"
-    print(f"  ✅ JSON请求体正确: {data}")
-    tests_passed += 1
-
-    # 测试3: 表单请求体准备
-    print("\n[测试3] 表单请求体准备")
-    tester = HTTPTester('POST', 'https://api.example.com/users', data={'name': 'test'})
-    data = tester.prepare_data()
-    assert data == b'name=test', f"表单请求体错误: {data}"
-    assert tester.headers.get('Content-Type') == 'application/x-www-form-urlencoded', f"Content-Type错误: {tester.headers}"
-    print(f"  ✅ 表单请求体正确: {data}")
-    tests_passed += 1
-
-    # 测试4: 响应格式化（JSON）
-    print("\n[测试4] JSON响应格式化")
-    result = {
-        'status': 200,
-        'headers': {'Content-Type': 'application/json'},
-        'body': '{"name":"test","age":30}',
-        'elapsed': 0.123,
-        'retries': 0
-    }
-    formatted = format_response(result, verbose=True)
-    assert 'HTTP/1.1 200' in formatted, "状态行缺失"
-    assert '"name": "test"' in formatted, "JSON格式化失败"
-    assert 'Content-Type' in formatted, "响应头缺失"
-    print(f"  ✅ JSON格式化正确")
-    tests_passed += 1
-
-    # 测试5: 响应格式化（非JSON）
-    print("\n[测试5] 非JSON响应格式化")
-    result = {
-        'status': 200,
-        'headers': {},
-        'body': 'Hello World',
-        'elapsed': 0.1,
-        'retries': 0
-    }
-    formatted = format_response(result, verbose=False)
-    assert 'Hello World' in formatted, "非JSON响应错误"
-    print(f"  ✅ 非JSON格式化正确")
-    tests_passed += 1
-
-    # 测试6: 原子写入
-    print("\n[测试6] 原子文件写入")
-    import tempfile as tmp
-    with tmp.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
-        test_file = f.name
     try:
-        success = atomic_write_file(test_file, "测试内容")
-        assert success, "原子写入失败"
-        with open(test_file, 'r', encoding='utf-8') as f:
-            content = f.read()
-        assert content == "测试内容", f"文件内容错误: {content}"
-        print(f"  ✅ 原子写入正确: {test_file}")
+        # 测试1: 构建URL
+        print("\n[测试1] URL参数拼接")
+        tester = HTTPTester('GET', f'{base_url}/get', params='page=1&size=20')
+        url = tester.build_url()
+        assert url == f'{base_url}/get?page=1&size=20', f"URL拼接错误: {url}"
+        print(f"  ✅ URL拼接正确: {url}")
         tests_passed += 1
-    finally:
-        if os.path.exists(test_file):
-            os.unlink(test_file)
 
-    # 测试7: 真实HTTP请求（使用httpbin.org）
-    print("\n[测试7] 真实HTTP请求")
-    try:
-        tester = HTTPTester('GET', 'https://httpbin.org/get', params='test=1', timeout=5)
+        # 测试2: JSON请求体准备
+        print("\n[测试2] JSON请求体准备")
+        tester = HTTPTester('POST', f'{base_url}/post', data='{"name":"test"}')
+        data = tester.prepare_data()
+        assert data == b'{"name":"test"}', f"JSON请求体错误: {data}"
+        assert tester.headers.get('Content-Type') == 'application/json', f"Content-Type错误: {tester.headers}"
+        print(f"  ✅ JSON请求体正确: {data}")
+        tests_passed += 1
+
+        # 测试3: 表单请求体准备
+        print("\n[测试3] 表单请求体准备")
+        tester = HTTPTester('POST', f'{base_url}/post', data={'name': 'test'})
+        data = tester.prepare_data()
+        assert data == b'name=test', f"表单请求体错误: {data}"
+        assert tester.headers.get('Content-Type') == 'application/x-www-form-urlencoded', f"Content-Type错误: {tester.headers}"
+        print(f"  ✅ 表单请求体正确: {data}")
+        tests_passed += 1
+
+        # 测试4: 真实HTTP GET请求
+        print("\n[测试4] 真实HTTP GET请求")
+        tester = HTTPTester('GET', f'{base_url}/get', params='test=1', timeout=5)
         result = tester.execute()
         assert result['status'] == 200, f"HTTP状态码错误: {result['status']}"
         assert 'test' in result['body'], "响应体缺少参数"
-        print(f"  ✅ 真实HTTP请求成功 (状态码: {result['status']})")
+        assert 'timestamp' in result['body'], "响应体缺少时间戳"
+        print(f"  ✅ GET请求成功 (状态码: {result['status']})")
         tests_passed += 1
-    except Exception as e:
-        print(f"  ⚠️ 真实HTTP请求失败（网络可能不可用）: {e}")
-        # 不标记为失败，因为可能是网络环境问题
 
-    # 测试8: 错误处理（无效URL）
-    print("\n[测试8] 无效URL错误处理")
-    tester = HTTPTester('GET', 'https://nonexistent-domain-12345.com/', timeout=3, max_retries=1)
-    result = tester.execute()
-    assert result['status'] == 0, f"应该返回错误状态"
-    assert 'error' in result, "缺少错误信息"
-    print(f"  ✅ 错误处理正确: {result['error'][:50]}...")
-    tests_passed += 1
+        # 测试5: 真实HTTP POST请求
+        print("\n[测试5] 真实HTTP POST请求")
+        tester = HTTPTester('POST', f'{base_url}/post', data='{"name":"test"}', timeout=5)
+        result = tester.execute()
+        assert result['status'] == 200, f"HTTP状态码错误: {result['status']}"
+        assert 'name' in result['body'], "响应体缺少POST数据"
+        print(f"  ✅ POST请求成功 (状态码: {result['status']})")
+        tests_passed += 1
+
+        # 测试6: 响应格式化（JSON）
+        print("\n[测试6] JSON响应格式化")
+        result = {
+            'status': 200,
+            'headers': {'Content-Type': 'application/json'},
+            'body': '{"name":"test","age":30}',
+            'elapsed': 0.123,
+            'retries': 0
+        }
+        formatted = format_response(result, verbose=True)
+        assert 'HTTP/1.1 200' in formatted, "状态行缺失"
+        assert '"name": "test"' in formatted, "JSON格式化失败"
+        assert 'Content-Type' in formatted, "响应头缺失"
+        print(f"  ✅ JSON格式化正确")
+        tests_passed += 1
+
+        # 测试7: 响应格式化（非JSON）
+        print("\n[测试7] 非JSON响应格式化")
+        result = {
+            'status': 200,
+            'headers': {},
+            'body': 'Hello World',
+            'elapsed': 0.1,
+            'retries': 0
+        }
+        formatted = format_response(result, verbose=False)
+        assert 'Hello World' in formatted, "非JSON响应错误"
+        print(f"  ✅ 非JSON格式化正确")
+        tests_passed += 1
+
+        # 测试8: 原子写入
+        print("\n[测试8] 原子文件写入")
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
+            test_file = f.name
+        try:
+            success = atomic_write_file(test_file, "测试内容")
+            assert success, "原子写入失败"
+            with open(test_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+            assert content == "测试内容", f"文件内容错误: {content}"
+            print(f"  ✅ 原子写入正确: {test_file}")
+            tests_passed += 1
+        finally:
+            if os.path.exists(test_file):
+                os.unlink(test_file)
+
+        # 测试9: 错误处理（无效URL）
+        print("\n[测试9] 无效URL错误处理")
+        tester = HTTPTester('GET', 'https://nonexistent-domain-12345.com/', timeout=3, max_retries=1)
+        result = tester.execute()
+        assert result['status'] == 0, f"应该返回错误状态"
+        assert 'error' in result, "缺少错误信息"
+        print(f"  ✅ 错误处理正确: {result['error'][:50]}...")
+        tests_passed += 1
+
+        # 测试10: 重试机制验证
+        print("\n[测试10] 重试机制验证")
+        start_time = time.time()
+        tester = HTTPTester('GET', 'https://nonexistent-domain-12345.com/', timeout=1, max_retries=2)
+        result = tester.execute()
+        elapsed = time.time() - start_time
+        assert result['status'] == 0, "应该返回错误状态"
+        assert result['retries'] == 2, f"重试次数错误: {result['retries']}"
+        assert elapsed >= 3, f"重试等待时间不足: {elapsed:.2f}s"
+        print(f"  ✅ 重试机制正确 (重试次数: {result['retries']}, 耗时: {elapsed:.2f}s)")
+        tests_passed += 1
+
+        # 测试11: HTTP错误处理
+        print("\n[测试11] HTTP错误处理")
+        tester = HTTPTester('GET', f'{base_url}/error', timeout=5)
+        result = tester.execute()
+        assert result['status'] == 404, f"HTTP状态码错误: {result['status']}"
+        assert 'error' in result['body'], "响应体缺少错误信息"
+        print(f"  ✅ HTTP错误处理正确 (状态码: {result['status']})")
+        tests_passed += 1
+
+    finally:
+        # 关闭服务器
+        httpd.shutdown()
+        httpd.server_close()
+        print("\n[清理] 本地测试服务器已关闭")
 
     # 汇总
     print(f"\n{'='*50}")
-    print(f"✅ 通过: {tests_passed} | ❌ 失败: {tests_failed}")
-    if tests_failed > 0:
-        print("❌ 自检测试失败")
-        return 1
-    else:
-        print("✅ 自检测试全部通过")
-        return 0
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description='HTTP命令行测试工具 - 接口调试命令行速测',
-        epilog='示例: cli POST https://api.example.com/users -d \'{"name":"test"}\' -H "Authorization: Bearer token"'
-    )
-
-    # 位置参数
-    parser.add_argument('method', nargs='?', default='GET',
-                        help='HTTP方法 (GET/POST/PUT/DELETE/PATCH/HEAD/OPTIONS)')
-    parser.add_argument('url', nargs='?',
-                        help='目标URL')
-
-    # 可选参数
-    parser.add_argument('-H', '--header', action='append', default=[],
-                        help='自定义请求头，格式: "Header: value" (可多次使用)')
-    parser.add_argument('-d', '--data',
-                        help='请求体 (JSON字符串或表单格式)')
-    parser.add_argument('-p', '--params',
-                        help='查询参数，格式: "key1=value1&key2=value2"')
-    parser.add_argument('-t', '--timeout', type=float, default=10,
-                        help='超时时间（秒），默认10秒')
-    parser.add_argument('-L', '--location', action='store_true',
-                        help='跟随重定向')
-    parser.add_argument('-o', '--output',
-                        help='输出文件路径（原子化写入）')
-    parser.add_argument('-k', '--insecure', action='store_true',
-                        help='跳过TLS证书验证')
-    parser.add_argument('-v', '--verbose', action='store_true',
-                        help='显示详细输出（包含响应头）')
-    parser.add_argument('--no-retry', action='store_true',
-                        help='禁用重试机制')
-    parser.add_argument('--selftest', action='store_true',
-                        help='运行自检测试')
-
-    args = parser.parse_args()
-
-    # 自检测试
-    if args.selftest:
-        return run_selftest()
-
-    # 参数验证
-    if not args.url:
-        parser.error("必须提供URL参数")
-
-    # 解析请求头
-    headers = {}
-    for header in args.header:
-        if ':' not in header:
-            parser.error(f"请求头格式错误: {header} (应为 'Header: value')")
-        key, value = header.split(':', 1)
-        headers[key.strip()] = value.strip()
-
-    # 解析请求体
-    data = None
-    if args.data:
-        # 尝试解析JSON
-        try:
-            data = json.loads(args.data)
-        except json.JSONDecodeError:
-            # 不是JSON，作为原始字符串
-            data = args.data
-
-    # 创建测试器
-    tester = HTTPTester(
-        method=args.method,
-        url=args.url,
-        headers=headers,
-        data=data,
-        params=args.params,
-        timeout=args.timeout,
-        follow_redirects=args.location,
-        insecure=args.insecure,
-        max_retries=0 if args.no_retry else 3
-    )
-
-    # 执行请求
-    result = tester.execute()
-
-    # 格式化输出
-    output = format_response(result, verbose=args.verbose)
-    print(output)
-
-    # 保存到文件
-    if args.output:
-        try:
-            atomic_write_file(args.output, result['body'])
-            print(f"\n📁 响应已保存到: {args.output}")
-        except Exception as e:
-            print(f"\n❌ 文件写入失败: {e}", file=sys.stderr)
-            return 6
-
-    # 返回退出码
-    if result['status'] == 0:
-        return 2  # 网络错误
-    elif result['status'] >= 400:
-        return 4  # HTTP错误
-    else:
-        return 0  # 成功
-
-
-if __name__ == '__main__':
-    sys.exit(main())

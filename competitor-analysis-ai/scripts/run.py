@@ -27,7 +27,7 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any, Tuple
 
 # 版本信息
-VERSION = "3.0.0"
+VERSION = "3.1.1"
 
 # 错误码
 ERR_SUCCESS = 0
@@ -41,6 +41,7 @@ ERR_OUTPUT_DIR = 5
 REQUEST_TIMEOUT = 10  # 秒
 MAX_RETRIES = 3
 RETRY_BASE_DELAY = 1.0  # 秒
+MAX_RETRY_DELAY = 10.0  # 最大退避延迟（秒）
 
 # 分析维度
 ANALYSIS_DIMENSIONS = ["features", "pricing", "ux", "positioning", "tech_stack", "operations"]
@@ -88,7 +89,7 @@ def match_trigger(user_input: str) -> bool:
 def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
                          max_retries: int = MAX_RETRIES) -> str:
     """
-    从 URL 获取数据，带超时和指数退避重试
+    从 URL 获取数据，带超时、指数退避重试和 Retry-After 支持
     
     Args:
         url: 数据源 URL
@@ -100,18 +101,42 @@ def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
     
     Raises:
         urllib.error.URLError: 当所有重试都失败时
+        ValueError: 当 HTTP 状态码非 2xx 时
     """
     last_error = None
     for attempt in range(max_retries):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "CompetitorAnalysisSkill/3.0"})
+            req = urllib.request.Request(url, headers={"User-Agent": "CompetitorAnalysisSkill/3.1"})
             with urllib.request.urlopen(req, timeout=timeout) as response:
+                # 检查 HTTP 状态码
+                status_code = response.getcode()
+                if status_code < 200 or status_code >= 300:
+                    raise ValueError(f"HTTP 请求失败，状态码: {status_code}")
                 return response.read().decode("utf-8")
+        except urllib.error.HTTPError as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                # 检查 Retry-After 头
+                retry_after = e.headers.get("Retry-After")
+                if retry_after:
+                    try:
+                        delay = float(retry_after)
+                    except ValueError:
+                        # 可能是 HTTP 日期格式，使用默认退避
+                        delay = RETRY_BASE_DELAY * (2 ** attempt)
+                else:
+                    delay = RETRY_BASE_DELAY * (2 ** attempt)
+                # 限制最大延迟
+                delay = min(delay, MAX_RETRY_DELAY)
+                time.sleep(delay)
         except urllib.error.URLError as e:
             last_error = e
             if attempt < max_retries - 1:
-                delay = RETRY_BASE_DELAY * (2 ** attempt)
+                delay = min(RETRY_BASE_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
                 time.sleep(delay)
+        except ValueError as e:
+            # HTTP 状态码错误，不重试
+            raise e
     raise last_error
 
 
@@ -124,14 +149,113 @@ def load_data_from_file(file_path: str) -> Dict[str, Any]:
 
 
 def load_data_from_url(url: str) -> Dict[str, Any]:
-    """从 URL 加载数据"""
+    """
+    从 URL 加载数据，支持 JSON/CSV/HTML 表格格式
+    
+    Args:
+        url: 数据源 URL
+    
+    Returns:
+        解析后的数据字典
+    """
     try:
         content = fetch_url_with_retry(url)
-        return json.loads(content)
-    except json.JSONDecodeError as e:
-        raise ValueError(f"URL 返回的数据不是有效的 JSON: {e}")
     except urllib.error.URLError as e:
         raise ConnectionError(f"URL 请求失败: {e}")
+    except ValueError as e:
+        raise ConnectionError(f"URL 请求失败: {e}")
+    
+    # 尝试解析 JSON
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError:
+        pass
+    
+    # 尝试解析 CSV
+    try:
+        import io
+        csv_reader = csv.DictReader(io.StringIO(content))
+        rows = list(csv_reader)
+        if rows:
+            # 将 CSV 行转换为竞品数据
+            competitors = []
+            for row in rows:
+                comp = {}
+                for key, value in row.items():
+                    if key and value:
+                        comp[key.strip()] = value.strip()
+                if "name" in comp:
+                    competitors.append(comp)
+            if competitors:
+                return {"competitors": competitors}
+    except Exception:
+        pass
+    
+    # 尝试解析 HTML 表格
+    try:
+        import html.parser
+        
+        class TableParser(html.parser.HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.in_table = False
+                self.in_row = False
+                self.in_cell = False
+                self.current_row = []
+                self.current_cell = ""
+                self.tables = []
+                self.current_table = []
+            
+            def handle_starttag(self, tag, attrs):
+                if tag == "table":
+                    self.in_table = True
+                    self.current_table = []
+                elif tag == "tr" and self.in_table:
+                    self.in_row = True
+                    self.current_row = []
+                elif tag in ("td", "th") and self.in_row:
+                    self.in_cell = True
+                    self.current_cell = ""
+            
+            def handle_endtag(self, tag):
+                if tag == "table" and self.in_table:
+                    self.in_table = False
+                    if self.current_table:
+                        self.tables.append(self.current_table)
+                elif tag == "tr" and self.in_row:
+                    self.in_row = False
+                    if self.current_row:
+                        self.current_table.append(self.current_row)
+                elif tag in ("td", "th") and self.in_cell:
+                    self.in_cell = False
+                    self.current_row.append(self.current_cell.strip())
+            
+            def handle_data(self, data):
+                if self.in_cell:
+                    self.current_cell += data
+        
+        parser = TableParser()
+        parser.feed(content)
+        
+        if parser.tables:
+            # 使用第一个表格
+            table = parser.tables[0]
+            if len(table) > 1:
+                headers = table[0]
+                competitors = []
+                for row in table[1:]:
+                    comp = {}
+                    for i, header in enumerate(headers):
+                        if i < len(row) and header:
+                            comp[header.strip()] = row[i].strip()
+                    if "name" in comp:
+                        competitors.append(comp)
+                if competitors:
+                    return {"competitors": competitors}
+    except Exception:
+        pass
+    
+    raise ValueError("URL 返回的数据格式不支持，仅支持 JSON、CSV 或 HTML 表格")
 
 
 def load_data_from_args(data_str: str) -> Dict[str, Any]:
@@ -414,252 +538,5 @@ def generate_report(data: Dict[str, Any]) -> Dict[str, Any]:
         "dimensions_checked": ANALYSIS_DIMENSIONS
     }
     
-    report = {
-        "report_id": f"CA-{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}",
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "competitors_analyzed": len(findings),
-        "dimensions_analyzed": ANALYSIS_DIMENSIONS,
-        "findings": findings,
-        "strategies": strategies,
-        "risks": risks,
-        "data_quality": data_quality
-    }
-    
-    return report
-
-
-def export_csv(report: Dict[str, Any], output_path: str) -> None:
-    """
-    导出 CSV 报告
-    
-    Args:
-        report: 报告数据
-        output_path: 输出文件路径
-    """
-    # 确保输出目录存在
-    output_dir = os.path.dirname(output_path)
-    if output_dir and not os.path.exists(output_dir):
-        os.makedirs(output_dir, exist_ok=True)
-    
-    # 写入临时文件，然后原子替换
-    fd, temp_path = tempfile.mkstemp(dir=output_dir or ".", suffix=".tmp")
-    try:
-        with os.fdopen(fd, "w", newline="", encoding="utf-8") as f:
-            writer = csv.writer(f)
-            
-            # 写入表头
-            writer.writerow(["竞品名称", "维度", "状态", "数据"])
-            
-            # 写入数据
-            for finding in report["findings"]:
-                name = finding["name"]
-                for dim, dim_data in finding["dimensions"].items():
-                    status = dim_data.get("status", "unknown")
-                    data = dim_data.get("data", "")
-                    if isinstance(data, (list, dict)):
-                        data = json.dumps(data, ensure_ascii=False)
-                    writer.writerow([name, dim, status, data])
-            
-            # 写入策略
-            writer.writerow([])
-            writer.writerow(["策略建议"])
-            for strategy in report["strategies"]:
-                writer.writerow([strategy["type"], strategy["description"], strategy["suggestion"]])
-            
-            # 写入风险
-            writer.writerow([])
-            writer.writerow(["风险提示"])
-            for risk in report["risks"]:
-                writer.writerow([risk["level"], risk["type"], risk["description"], risk["impact"]])
-        
-        # 原子替换
-        os.replace(temp_path, output_path)
-    except Exception:
-        # 清理临时文件
-        if os.path.exists(temp_path):
-            os.unlink(temp_path)
-        raise
-
-
-def run_selftest() -> int:
-    """
-    运行自测试，验证核心功能
-    
-    Returns:
-        退出码（0 表示成功）
-    """
-    print("=== 运行自测试 ===")
-    
-    # 测试 1: 数据验证
-    print("\n[测试 1] 数据验证...")
-    valid_data = {"competitors": [{"name": "竞品A", "features": ["f1"]}]}
-    is_valid, errors = validate_data(valid_data)
-    assert is_valid, f"有效数据验证失败: {errors}"
-    print("  ✓ 有效数据验证通过")
-    
-    invalid_data = {"competitors": [{"features": ["f1"]}]}
-    is_valid, errors = validate_data(invalid_data)
-    assert not is_valid, "无效数据验证失败"
-    print("  ✓ 无效数据验证通过")
-    
-    # 测试 2: 竞品分析
-    print("\n[测试 2] 竞品分析...")
-    competitor = {"name": "竞品A", "features": ["f1", "f2"], "pricing": {"model": "订阅制"}}
-    result = analyze_competitor(competitor)
-    assert result["name"] == "竞品A", "竞品名称错误"
-    assert result["dimensions"]["features"]["status"] == "complete", "功能分析失败"
-    assert result["dimensions"]["pricing"]["status"] == "complete", "定价分析失败"
-    assert result["dimensions"]["ux"]["status"] == "missing", "缺失字段处理失败"
-    print("  ✓ 竞品分析通过")
-    
-    # 测试 3: 策略生成
-    print("\n[测试 3] 策略生成...")
-    competitors = [
-        {"name": "A", "features": ["f1", "f2"], "pricing": {"model": "订阅制"}, "positioning": "高端"},
-        {"name": "B", "features": ["f2", "f3"], "pricing": {"model": "免费"}, "positioning": "大众"}
-    ]
-    strategies = generate_strategies(competitors)
-    assert len(strategies) > 0, "策略生成失败"
-    print(f"  ✓ 策略生成通过，生成 {len(strategies)} 条策略")
-    
-    # 测试 4: 风险生成
-    print("\n[测试 4] 风险生成...")
-    risks = generate_risks(competitors)
-    assert len(risks) > 0, "风险生成失败"
-    print(f"  ✓ 风险生成通过，生成 {len(risks)} 条风险")
-    
-    # 测试 5: 完整报告生成
-    print("\n[测试 5] 完整报告生成...")
-    report = generate_report(valid_data)
-    assert report["competitors_analyzed"] == 1, "报告竞品数量错误"
-    assert "report_id" in report, "报告缺少 ID"
-    assert "generated_at" in report, "报告缺少时间戳"
-    print("  ✓ 完整报告生成通过")
-    
-    # 测试 6: CSV 导出
-    print("\n[测试 6] CSV 导出...")
-    with tempfile.TemporaryDirectory() as tmpdir:
-        csv_path = os.path.join(tmpdir, "test.csv")
-        export_csv(report, csv_path)
-        assert os.path.exists(csv_path), "CSV 文件未创建"
-        with open(csv_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        assert "竞品名称" in content, "CSV 表头错误"
-        print("  ✓ CSV 导出通过")
-    
-    # 测试 7: URL 获取（带重试）
-    print("\n[测试 7] URL 获取重试逻辑...")
-    # 测试无效 URL 的重试行为
-    try:
-        fetch_url_with_retry("http://invalid-url-that-does-not-exist.com/data.json", timeout=1, max_retries=2)
-        assert False, "无效 URL 应该抛出异常"
-    except Exception as e:
-        print(f"  ✓ URL 重试逻辑通过（正确抛出异常: {type(e).__name__}）")
-    
-    print("\n=== 所有测试通过 ===")
-    return ERR_SUCCESS
-
-
-def main() -> int:
-    """主函数"""
-    parser = argparse.ArgumentParser(
-        description="竞品分析工具 - 多维度拆解竞品，输出差异化策略",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python run.py --file data.json
-  python run.py --url https://example.com/data.json
-  python run.py --data '{"competitors": [{"name": "竞品A"}]}'
-  python run.py --file data.json --csv output.csv
-  python run.py --selftest
-        """
-    )
-    
-    # 数据源参数（互斥）
-    data_group = parser.add_mutually_exclusive_group()
-    data_group.add_argument("--file", help="从 JSON 文件加载数据")
-    data_group.add_argument("--url", help="从 URL 加载 JSON 数据")
-    data_group.add_argument("--data", help="从命令行参数加载 JSON 数据")
-    
-    # 输出参数
-    parser.add_argument("--csv", help="导出 CSV 报告到指定路径")
-    parser.add_argument("--output", "-o", help="输出 JSON 报告到指定路径")
-    
-    # 其他参数
-    parser.add_argument("--selftest", action="store_true", help="运行自测试")
-    parser.add_argument("--version", action="version", version=f"%(prog)s {VERSION}")
-    
-    args = parser.parse_args()
-    
-    # 运行自测试
-    if args.selftest:
-        return run_selftest()
-    
-    # 检查数据源
-    if not args.file and not args.url and not args.data:
-        parser.error("必须提供数据源: --file, --url 或 --data")
-    
-    try:
-        # 加载数据
-        if args.file:
-            data = load_data_from_file(args.file)
-        elif args.url:
-            data = load_data_from_url(args.url)
-        else:
-            data = load_data_from_args(args.data)
-        
-        # 验证数据
-        is_valid, errors = validate_data(data)
-        if not is_valid:
-            print("数据验证失败:", file=sys.stderr)
-            for error in errors:
-                print(f"  - {error}", file=sys.stderr)
-            return ERR_INVALID_DATA
-        
-        # 生成报告
-        report = generate_report(data)
-        
-        # 输出 JSON 报告
-        if args.output:
-            # 确保输出目录存在
-            output_dir = os.path.dirname(args.output)
-            if output_dir and not os.path.exists(output_dir):
-                os.makedirs(output_dir, exist_ok=True)
-            
-            # 原子写入
-            fd, temp_path = tempfile.mkstemp(dir=output_dir or ".", suffix=".tmp")
-            try:
-                with os.fdopen(fd, "w", encoding="utf-8") as f:
-                    json.dump(report, f, ensure_ascii=False, indent=2)
-                os.replace(temp_path, args.output)
-            except Exception:
-                if os.path.exists(temp_path):
-                    os.unlink(temp_path)
-                raise
-            print(f"报告已保存到: {args.output}")
-        else:
-            print(json.dumps(report, ensure_ascii=False, indent=2))
-        
-        # 导出 CSV
-        if args.csv:
-            export_csv(report, args.csv)
-            print(f"CSV 已导出到: {args.csv}")
-        
-        return ERR_SUCCESS
-        
-    except FileNotFoundError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return ERR_FILE_NOT_FOUND
-    except ConnectionError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return ERR_URL_FAILED
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return ERR_INVALID_DATA
-    except Exception as e:
-        print(f"未预期的错误: {e}", file=sys.stderr)
-        return ERR_PARAM
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    # 统一使用 UTC 时间
+    now_ut

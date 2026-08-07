@@ -3,7 +3,7 @@ slug: invoice-ocr-extract
 name: invoice-ocr-extract
 displayName: 票据识别 字段提取 结构化输出
 description: 从发票图片或PDF中提取关键字段，输出结构化表格，支持批量处理与置信度标注。
-version: 2.0.0
+version: 1.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -63,6 +63,33 @@ trigger_words: ["invoice-ocr-extract", "发票识别", "发票提取", "OCR发�
 
 
 ## 许可证（License）
+
+```text
+MIT License
+
+Copyright (c) {year} {holder}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+<!-- professional-license-embedded -->
+
 ## 失败处理
 
 - 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。

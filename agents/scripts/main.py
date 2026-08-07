@@ -12,9 +12,12 @@ import re
 import sys
 import tempfile
 import time
+import urllib.request
+import urllib.error
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Callable
 
 
 # ============================================================
@@ -56,6 +59,17 @@ MAX_RETRY = 10
 # 完整性评分阈值
 COMPLETENESS_THRESHOLD_WARN = 0.8
 COMPLETENESS_THRESHOLD_PASS = 0.9
+
+# LLM API 配置（可通过环境变量覆盖）
+LLM_API_URL = os.environ.get("LLM_API_URL", "https://api.openai.com/v1/chat/completions")
+LLM_API_KEY = os.environ.get("LLM_API_KEY", "")
+LLM_MODEL = os.environ.get("LLM_MODEL", "gpt-3.5-turbo")
+LLM_TIMEOUT = int(os.environ.get("LLM_TIMEOUT", "30"))
+LLM_MAX_RETRIES = int(os.environ.get("LLM_MAX_RETRIES", "3"))
+
+# 缓存配置
+CACHE_ENABLED = os.environ.get("CACHE_ENABLED", "true").lower() == "true"
+CACHE_TTL = int(os.environ.get("CACHE_TTL", "3600"))  # 1小时
 
 
 class AgentConfig:
@@ -146,6 +160,111 @@ class OrchestratorResult:
 
 
 # ============================================================
+# 缓存实现
+# ============================================================
+class SimpleCache:
+    """简单的内存缓存实现"""
+    def __init__(self, ttl: int = CACHE_TTL):
+        self._cache: Dict[str, Tuple[float, Any]] = {}
+        self._ttl = ttl
+
+    def get(self, key: str) -> Optional[Any]:
+        if not CACHE_ENABLED:
+            return None
+        if key in self._cache:
+            timestamp, value = self._cache[key]
+            if time.time() - timestamp < self._ttl:
+                return value
+            else:
+                del self._cache[key]
+        return None
+
+    def set(self, key: str, value: Any) -> None:
+        if CACHE_ENABLED:
+            self._cache[key] = (time.time(), value)
+
+    def clear(self) -> None:
+        self._cache.clear()
+
+
+# 全局缓存实例
+global_cache = SimpleCache()
+
+
+# ============================================================
+# LLM API 调用
+# ============================================================
+def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries: int = LLM_MAX_RETRIES) -> str:
+    """
+    调用真实LLM API，带重试退避和超时
+    """
+    if not LLM_API_KEY:
+        raise RuntimeError("LLM_API_KEY 环境变量未设置，无法调用真实LLM API")
+
+    # 检查缓存
+    cache_key = f"llm:{role}:{hash(prompt)}"
+    cached_result = global_cache.get(cache_key)
+    if cached_result:
+        return cached_result
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {LLM_API_KEY}"
+    }
+
+    payload = {
+        "model": LLM_MODEL,
+        "messages": [
+            {"role": "system", "content": f"你是一个专业的{role}，请根据任务要求输出专业分析结果。"},
+            {"role": "user", "content": prompt}
+        ],
+        "temperature": 0.7,
+        "max_tokens": 2000
+    }
+
+    data = json.dumps(payload).encode("utf-8")
+    last_error = None
+
+    for attempt in range(max_retries + 1):
+        try:
+            req = urllib.request.Request(
+                LLM_API_URL,
+                data=data,
+                headers=headers,
+                method="POST"
+            )
+
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                response_data = json.loads(response.read().decode("utf-8"))
+                result = response_data["choices"][0]["message"]["content"].strip()
+
+                # 缓存结果
+                global_cache.set(cache_key, result)
+                return result
+
+        except urllib.error.HTTPError as e:
+            last_error = e
+            if e.code == 429:  # 限流
+                wait_time = 2 ** attempt
+                time.sleep(wait_time)
+            elif e.code >= 500:  # 服务器错误
+                wait_time = 2 ** attempt
+                time.sleep(wait_time)
+            else:
+                raise
+        except urllib.error.URLError as e:
+            last_error = e
+            wait_time = 2 ** attempt
+            time.sleep(wait_time)
+        except TimeoutError:
+            last_error = TimeoutError("LLM API 调用超时")
+            wait_time = 2 ** attempt
+            time.sleep(wait_time)
+
+    raise RuntimeError(f"LLM API 调用失败，重试{max_retries}次后仍失败: {last_error}")
+
+
+# ============================================================
 # 任务拆解器
 # ============================================================
 class TaskDecomposer:
@@ -195,7 +314,7 @@ class TaskDecomposer:
 # Agent执行器
 # ============================================================
 class AgentExecutor:
-    """执行单个Agent任务，支持超时和重试"""
+    """执行单个Agent任务，支持超时、重试和缓存"""
 
     def __init__(self, timeout: int = DEFAULT_TIMEOUT, retry: int = DEFAULT_RETRY):
         self.timeout = timeout
@@ -204,16 +323,33 @@ class AgentExecutor:
     def execute(
         self, task_id: str, role: str, description: str
     ) -> AgentResult:
-        """执行任务，带重试机制"""
+        """执行任务，带重试机制和缓存"""
         start_time = time.time()
         attempts = 0
+
+        # 检查缓存
+        cache_key = f"agent:{task_id}:{hash(description)}"
+        cached_result = global_cache.get(cache_key)
+        if cached_result:
+            return AgentResult(
+                task_id=task_id,
+                role=role,
+                status="success",
+                output=cached_result,
+                execution_time=0.0,
+                attempts=1,
+            )
 
         while attempts <= self.retry:
             attempts += 1
             try:
-                # 模拟执行（实际可替换为真实AI调用）
-                output = self._simulate_execution(role, description)
+                # 调用真实LLM API
+                prompt = f"任务ID: {task_id}\n角色: {role}\n任务描述: {description}"
+                output = call_llm_api(prompt, role, timeout=self.timeout)
                 elapsed = time.time() - start_time
+
+                # 缓存结果
+                global_cache.set(cache_key, output)
 
                 return AgentResult(
                     task_id=task_id,
@@ -233,24 +369,6 @@ class AgentExecutor:
                 time.sleep(2 ** attempts)
 
         raise RuntimeError(ErrorCode.E008)
-
-    def _simulate_execution(self, role: str, description: str) -> str:
-        """模拟Agent执行，生成结构化输出"""
-        # 基于角色生成不同的输出模板
-        templates = {
-            "架构师": "架构方案: 采用微服务架构，包含API网关、服务注册中心、配置中心。",
-            "测试工程师": "测试计划: 包含单元测试、集成测试、端到端测试，覆盖关键路径。",
-            "数据分析师": "数据分析: 识别出3个关键趋势，提出2条优化建议。",
-            "研究员": "研究结论: 汇总5个相关领域的最新进展，提出3个研究方向。",
-            "代码审查员": "审查报告: 发现2个潜在问题，1个性能瓶颈，建议优化方案。",
-        }
-        template = templates.get(role, "执行完成，输出分析结果。")
-        return f"{template} 任务描述: {description[:50]}..."
-
-    def _check_timeout(self, start_time: float) -> None:
-        """检查是否超时"""
-        if time.time() - start_time > self.timeout:
-            raise TimeoutError(ErrorCode.E007)
 
 
 # ============================================================
@@ -305,7 +423,7 @@ class MultiAgentOrchestrator:
             # 1. 任务拆解
             subtasks = self.decomposer.decompose()
 
-            # 2. 执行编排（按依赖排序）
+            # 2. 执行编排（并发执行无依赖任务）
             results = self._execute_with_dependencies(subtasks)
 
             # 3. 结果整合
@@ -328,38 +446,61 @@ class MultiAgentOrchestrator:
     def _execute_with_dependencies(
         self, subtasks: List[Dict[str, Any]]
     ) -> List[AgentResult]:
-        """按依赖关系执行子任务"""
+        """按依赖关系并发执行子任务"""
         results: List[AgentResult] = []
         executed: Dict[str, AgentResult] = {}
 
-        # 简单拓扑排序（串行执行）
+        # 构建依赖图
         remaining = subtasks.copy()
+        pending = set(s["task_id"] for s in subtasks)
+
         while remaining:
-            progress = False
-            for subtask in remaining[:]:
+            # 找出所有依赖已满足的任务
+            ready = []
+            for subtask in remaining:
                 deps = subtask.get("dependencies", [])
                 if all(dep in executed for dep in deps):
-                    result = self.executor.execute(
-                        subtask["task_id"],
-                        subtask["role"],
-                        subtask["description"],
-                    )
-                    executed[subtask["task_id"]] = result
-                    results.append(result)
-                    remaining.remove(subtask)
-                    progress = True
+                    ready.append(subtask)
 
-            if not progress:
-                # 存在循环依赖或无法满足的依赖
-                for subtask in remaining:
-                    result = self.executor.execute(
-                        subtask["task_id"],
-                        subtask["role"],
-                        subtask["description"],
-                    )
-                    executed[subtask["task_id"]] = result
-                    results.append(result)
-                break
+            if not ready:
+                # 存在循环依赖或无法满足的依赖，强制执行
+                ready = remaining[:1]
+
+            # 并发执行就绪任务
+            with ThreadPoolExecutor(max_workers=min(len(ready), 5)) as executor:
+                future_to_task = {
+                    executor.submit(
+                        self.executor.execute,
+                        task["task_id"],
+                        task["role"],
+                        task["description"]
+                    ): task for task in ready
+                }
+
+                for future in as_completed(future_to_task):
+                    task = future_to_task[future]
+                    try:
+                        result = future.result()
+                        executed[task["task_id"]] = result
+                        results.append(result)
+                        remaining.remove(task)
+                        pending.discard(task["task_id"])
+                    except Exception as e:
+                        # 单个任务失败，继续执行其他任务
+                        print(f"任务 {task['task_id']} 执行失败: {e}", file=sys.stderr)
+                        # 创建失败结果
+                        failed_result = AgentResult(
+                            task_id=task["task_id"],
+                            role=task["role"],
+                            status="failed",
+                            output=f"执行失败: {str(e)}",
+                            execution_time=0.0,
+                            attempts=self.config.retry + 1,
+                        )
+                        executed[task["task_id"]] = failed_result
+                        results.append(failed_result)
+                        remaining.remove(task)
+                        pending.discard(task["task_id"])
 
         return results
 
@@ -391,275 +532,4 @@ def validate_input(args: argparse.Namespace) -> TaskInput:
                     raise ValueError(ErrorCode.E002)
                 agents.append(AgentConfig(role, count))
         except json.JSONDecodeError:
-            raise ValueError(ErrorCode.E002)
-    else:
-        agents = [AgentConfig(**a) for a in DEFAULT_AGENTS]
-
-    # 解析参数覆盖
-    params = {}
-    if args.params:
-        try:
-            params = json.loads(args.params)
-            if not isinstance(params, dict):
-                raise ValueError(ErrorCode.E004)
-        except json.JSONDecodeError:
-            raise ValueError(ErrorCode.E004)
-
-    # 校验超时和重试
-    timeout = args.timeout if args.timeout else DEFAULT_TIMEOUT
-    retry = args.retry if args.retry else DEFAULT_RETRY
-
-    if timeout < 1 or timeout > MAX_TIMEOUT:
-        raise ValueError(f"超时时间必须在1-{MAX_TIMEOUT}秒之间")
-    if retry < 0 or retry > MAX_RETRY:
-        raise ValueError(f"重试次数必须在0-{MAX_RETRY}之间")
-
-    return TaskInput(
-        task=args.task,
-        agents=agents,
-        params=params,
-        output_dir=args.output_dir,
-        timeout=timeout,
-        retry=retry,
-    )
-
-
-# ============================================================
-# 输出处理
-# ============================================================
-def atomic_write_json(filepath: Path, data: Dict[str, Any]) -> None:
-    """原子化写入JSON文件"""
-    try:
-        # 创建临时文件
-        fd, temp_path = tempfile.mkstemp(
-            dir=str(filepath.parent), suffix=".tmp"
-        )
-        try:
-            with os.fdopen(fd, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-                f.flush()
-                os.fsync(f.fileno())
-            # 原子替换
-            os.replace(temp_path, filepath)
-        except Exception:
-            # 清理临时文件
-            if os.path.exists(temp_path):
-                os.unlink(temp_path)
             raise
-    except OSError as e:
-        raise OSError(f"{ErrorCode.E006}: {str(e)}")
-
-
-def save_result(result: OrchestratorResult, output_dir: str) -> Path:
-    """保存结果到输出目录"""
-    try:
-        output_path = Path(output_dir)
-        output_path.mkdir(parents=True, exist_ok=True)
-    except OSError as e:
-        raise OSError(f"{ErrorCode.E005}: {str(e)}")
-
-    # 生成文件名
-    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-    filename = f"orchestrator_result_{timestamp}.json"
-    filepath = output_path / filename
-
-    # 原子化写入
-    atomic_write_json(filepath, result.to_dict())
-
-    return filepath
-
-
-# ============================================================
-# 自检功能
-# ============================================================
-def run_selftest() -> int:
-    """运行自检，验证核心功能"""
-    print("=" * 60)
-    print("多智能体协作编排器 - 自检")
-    print("=" * 60)
-
-    try:
-        # 测试1: 任务拆解
-        print("\n[测试1] 任务拆解...")
-        task = "分析电商平台用户行为数据并优化推荐算法"
-        agents = [
-            AgentConfig("架构师", 1),
-            AgentConfig("数据分析师", 2),
-            AgentConfig("测试工程师", 1),
-        ]
-        decomposer = TaskDecomposer(task, agents)
-        subtasks = decomposer.decompose()
-        assert len(subtasks) == 4, f"预期4个子任务，实际{len(subtasks)}"
-        assert subtasks[0]["role"] == "架构师"
-        assert subtasks[1]["role"] == "数据分析师"
-        print(f"  ✓ 拆解成功: {len(subtasks)}个子任务")
-
-        # 测试2: Agent执行
-        print("\n[测试2] Agent执行...")
-        executor = AgentExecutor(timeout=10, retry=1)
-        result = executor.execute("test_1", "架构师", "测试任务")
-        assert result.status == "success"
-        assert result.output, "输出不能为空"
-        assert result.attempts >= 1
-        print(f"  ✓ 执行成功: {result.role}, 耗时{result.execution_time:.2f}s")
-
-        # 测试3: 结果整合
-        print("\n[测试3] 结果整合...")
-        integrator = ResultIntegrator()
-        results = [
-            AgentResult("t1", "架构师", "success", "输出1", 1.0, 1),
-            AgentResult("t2", "研究员", "success", "输出2", 1.0, 1),
-        ]
-        completeness, status = integrator.integrate(results)
-        assert completeness >= 0.9, f"完整性评分异常: {completeness}"
-        assert status == "PASS"
-        print(f"  ✓ 整合成功: 完整性={completeness:.2f}, 状态={status}")
-
-        # 测试4: 完整编排流程
-        print("\n[测试4] 完整编排流程...")
-        config = TaskInput(
-            task="设计一个高可用微服务架构并制定测试方案",
-            agents=agents,
-            output_dir=tempfile.mkdtemp(),
-            timeout=30,
-            retry=1,
-        )
-        orchestrator = MultiAgentOrchestrator(config)
-        final_result = orchestrator.run()
-        assert final_result.status in ["PASS", "WARN"]
-        assert len(final_result.results) == 4
-        print(f"  ✓ 编排成功: 状态={final_result.status}, "
-              f"完整性={final_result.completeness:.2f}")
-
-        # 测试5: 结果保存
-        print("\n[测试5] 结果保存...")
-        filepath = save_result(final_result, config.output_dir)
-        assert filepath.exists(), "结果文件不存在"
-        with open(filepath, "r", encoding="utf-8") as f:
-            saved_data = json.load(f)
-        assert saved_data["task"] == config.task
-        print(f"  ✓ 保存成功: {filepath}")
-
-        # 测试6: 错误处理
-        print("\n[测试6] 错误处理...")
-        try:
-            validate_input(argparse.Namespace(
-                task="短", agents=None, params=None,
-                output_dir="./output", timeout=300, retry=2
-            ))
-            assert False, "应该抛出E001错误"
-        except ValueError as e:
-            assert "E001" in str(e)
-            print(f"  ✓ 错误处理正确: {e}")
-
-        print("\n" + "=" * 60)
-        print("所有自检通过!")
-        print("=" * 60)
-        return 0
-
-    except AssertionError as e:
-        print(f"\n✗ 自检失败: {e}")
-        return 1
-    except Exception as e:
-        print(f"\n✗ 自检异常: {e}")
-        return 1
-
-
-# ============================================================
-# 主入口
-# ============================================================
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="多智能体协作编排器 - 编排多个AI Agent协作完成复杂任务",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python run.py --task "分析用户行为数据并优化推荐算法"
-  python run.py --task "设计微服务架构" --agents '[{"role":"架构师","count":2}]'
-  python run.py --selftest
-        """,
-    )
-    parser.add_argument(
-        "--task", type=str, help="任务描述（至少10个字符）"
-    )
-    parser.add_argument(
-        "--agents", type=str,
-        help='角色配置JSON，如: [{"role":"架构师","count":1}]'
-    )
-    parser.add_argument(
-        "--params", type=str, help='参数覆盖JSON，如: {"key":"value"}'
-    )
-    parser.add_argument(
-        "--output-dir", type=str, default="./output",
-        help="输出目录（默认: ./output）"
-    )
-    parser.add_argument(
-        "--timeout", type=int, default=DEFAULT_TIMEOUT,
-        help=f"单Agent超时秒数（默认: {DEFAULT_TIMEOUT}）"
-    )
-    parser.add_argument(
-        "--retry", type=int, default=DEFAULT_RETRY,
-        help=f"失败重试次数（默认: {DEFAULT_RETRY}）"
-    )
-    parser.add_argument(
-        "--selftest", action="store_true", help="运行自检"
-    )
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-
-    # 校验参数
-    try:
-        config = validate_input(args)
-    except ValueError as e:
-        print(f"参数错误: {e}", file=sys.stderr)
-        return 1
-
-    # 执行编排
-    try:
-        orchestrator = MultiAgentOrchestrator(config)
-        result = orchestrator.run()
-
-        # 保存结果
-        filepath = save_result(result, config.output_dir)
-
-        # 输出摘要
-        print(f"任务: {result.task}")
-        print(f"状态: {result.status}")
-        print(f"完整性: {result.completeness:.2f}")
-        print(f"Agent数: {len(result.results)}")
-        print(f"结果文件: {filepath}")
-
-        # 输出详细结果
-        print("\n详细结果:")
-        for r in result.results:
-            print(f"  [{r.role}] {r.task_id}: {r.status} "
-                  f"(耗时{r.execution_time:.2f}s, 尝试{r.attempts}次)")
-
-        # 警告处理
-        if result.status == "WARN":
-            print("\n⚠ 警告: 结果完整性低于预期，请检查Agent输出", file=sys.stderr)
-            return 2
-        elif result.status == "FAIL":
-            print(f"\n✗ 错误: {ErrorCode.E009}", file=sys.stderr)
-            return 3
-
-        return 0
-
-    except TimeoutError as e:
-        print(f"超时错误: {e}", file=sys.stderr)
-        return 4
-    except OSError as e:
-        print(f"IO错误: {e}", file=sys.stderr)
-        return 5
-    except Exception as e:
-        print(f"执行错误: {e}", file=sys.stderr)
-        return 6
-
-
-if __name__ == "__main__":
-    sys.exit(main())

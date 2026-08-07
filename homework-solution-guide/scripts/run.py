@@ -6,6 +6,7 @@ run.py - 作业引导 Skill 主脚本
 
 import argparse
 import json
+import logging
 import os
 import re
 import sys
@@ -25,9 +26,12 @@ TIMEOUT_SEC = 5
 MAX_RETRIES = 3
 BASE_DELAY = 1.0  # 指数退避基数
 
-# 外部知识库 API（模拟真实服务，实际部署时可替换为真实端点）
-KNOWLEDGE_API_URL = "https://api.example.com/knowledge"
-MISTAKE_API_URL = "https://api.example.com/mistake"
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
 
 # ========== 工具函数 ==========
 
@@ -49,44 +53,200 @@ def atomic_write(path: Path, content: str) -> None:
 
 
 def http_get_with_retry(url: str, params: dict = None) -> str:
-    """带超时和指数退避重试的 GET 请求"""
+    """带超时和指数退避重试的 GET 请求
+    
+    重试策略：
+    - 网络层错误（URLError, TimeoutError, OSError）：重试 MAX_RETRIES 次
+    - HTTP 5xx 和 429 状态码：重试 MAX_RETRIES 次
+    - HTTP 4xx 状态码：直接抛出，不重试
+    """
     if params:
         url = url + "?" + urllib.parse.urlencode(params)
+    
     for attempt in range(MAX_RETRIES):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
             with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as resp:
-                return resp.read().decode("utf-8")
+                if resp.status != 200:
+                    raise RuntimeError(f"E_HTTP_{resp.status}: HTTP状态码 {resp.status}")
+                content = resp.read().decode("utf-8")
+                # 响应内容校验：非空且可解析
+                if not content or len(content.strip()) < 2:
+                    raise RuntimeError("E_EMPTY_RESPONSE: 响应内容为空")
+                return content
+        except urllib.error.HTTPError as e:
+            # HTTP 错误码处理
+            if e.code >= 500 or e.code == 429:
+                # 5xx 和 429 重试
+                if attempt == MAX_RETRIES - 1:
+                    raise RuntimeError(f"E_HTTP_{e.code}: HTTP错误: {e.reason}")
+                delay = BASE_DELAY * (2 ** attempt)
+                logger.warning(f"HTTP {e.code} 错误，{delay:.1f}秒后重试 ({attempt+1}/{MAX_RETRIES})")
+                time.sleep(delay)
+            else:
+                # 4xx 直接抛出
+                raise RuntimeError(f"E_HTTP_{e.code}: HTTP错误: {e.reason}")
         except (urllib.error.URLError, TimeoutError, OSError) as e:
+            # 网络层错误
             if attempt == MAX_RETRIES - 1:
                 raise RuntimeError(f"E_NETWORK: 网络请求失败: {e}")
-            time.sleep(BASE_DELAY * (2 ** attempt))
+            delay = BASE_DELAY * (2 ** attempt)
+            logger.warning(f"网络错误，{delay:.1f}秒后重试 ({attempt+1}/{MAX_RETRIES})")
+            time.sleep(delay)
     raise RuntimeError("E_NETWORK: 不可达")  # 理论不可达
 
 
+# ========== 本地知识库（内置，无外部依赖） ==========
+
+LOCAL_KNOWLEDGE_BASE = {
+    "math": {
+        "小学": "四则运算、分数、小数、几何初步、应用题",
+        "初中": "方程与不等式、函数初步、几何证明、概率统计",
+        "高中": "函数与导数、数列、三角函数、向量、解析几何、立体几何"
+    },
+    "chinese": {
+        "小学": "拼音、字词、阅读理解基础、看图写话",
+        "初中": "文言文、现代文阅读、作文、古诗词",
+        "高中": "古诗文鉴赏、论述类文本、实用类文本、写作"
+    },
+    "english": {
+        "小学": "基础词汇、简单句型、日常对话",
+        "初中": "时态、语态、从句、阅读理解",
+        "高中": "虚拟语气、非谓语动词、高级句型、写作"
+    },
+    "physics": {
+        "初中": "力学、光学、电学基础、声学",
+        "高中": "牛顿定律、电磁学、热学、原子物理"
+    },
+    "chemistry": {
+        "初中": "元素、化合物、化学方程式、实验基础",
+        "高中": "化学反应原理、有机化学、结构化学、实验化学"
+    }
+}
+
+LOCAL_MISTAKE_ANALYSIS = {
+    "计算错误": "建议：加强口算练习，检查每一步运算，使用草稿纸。",
+    "概念混淆": "建议：重新阅读课本定义，制作概念对比表。",
+    "审题不清": "建议：圈出关键词，复述题目要求。",
+    "思路中断": "建议：回顾类似题型，建立解题模板。",
+    "粗心大意": "建议：做完后检查单位、符号、小数点。",
+    "知识遗忘": "建议：复习相关章节，做基础练习巩固。",
+    "方法不当": "建议：学习多种解题方法，选择最适合的。",
+    "时间不足": "建议：练习限时做题，提高效率。"
+}
+
+
+def review_knowledge_local(subject: str, grade: str) -> str:
+    """本地知识点回顾（内置知识库）"""
+    if subject in LOCAL_KNOWLEDGE_BASE and grade in LOCAL_KNOWLEDGE_BASE[subject]:
+        return LOCAL_KNOWLEDGE_BASE[subject][grade]
+    return "请参考课本对应章节，重点掌握基本概念和典型例题。"
+
+
+def analyze_mistake_local(error_type: str) -> str:
+    """本地错题归因分析（内置知识库）"""
+    return LOCAL_MISTAKE_ANALYSIS.get(
+        error_type,
+        "建议：分析错误原因，针对性练习。"
+    )
+
+
+# ========== 外部知识 API（真实可用的公共 API） ==========
+
 def fetch_knowledge(subject: str, grade: int) -> dict:
-    """从外部知识库获取知识点（带降级机制）"""
+    """从外部知识库获取知识点（带降级机制）
+    
+    使用 Wikipedia 公共 API 作为真实可用的知识来源。
+    失败时降级到本地知识库。
+    """
+    # 将学科映射为 Wikipedia 搜索关键词
+    subject_keywords = {
+        "math": "mathematics",
+        "chinese": "Chinese language",
+        "english": "English grammar",
+        "physics": "physics",
+        "chemistry": "chemistry"
+    }
+    keyword = subject_keywords.get(subject, subject)
+    
+    # 根据年级段调整搜索词
+    grade_keywords = {
+        "小学": "elementary",
+        "初中": "middle school",
+        "高中": "high school"
+    }
+    grade_str = ""
+    for stage, (lo, hi) in GRADE_RANGES.items():
+        if lo <= grade <= hi:
+            grade_str = grade_keywords[stage]
+            break
+    
+    search_term = f"{grade_str} {keyword} education"
+    
     try:
-        response = http_get_with_retry(
-            KNOWLEDGE_API_URL,
-            {"subject": subject, "grade": grade}
-        )
-        return json.loads(response)
-    except (RuntimeError, json.JSONDecodeError):
-        # 降级为本地规则引擎
+        # 使用 Wikipedia 的 REST API（真实可用）
+        url = "https://en.wikipedia.org/w/api.php"
+        params = {
+            "action": "query",
+            "list": "search",
+            "srsearch": search_term,
+            "format": "json",
+            "srlimit": "1"
+        }
+        response = http_get_with_retry(url, params)
+        data = json.loads(response)
+        
+        # 解析搜索结果
+        search_results = data.get("query", {}).get("search", [])
+        if search_results:
+            title = search_results[0]["title"]
+            snippet = search_results[0].get("snippet", "")
+            # 清理 HTML 标签
+            snippet = re.sub(r'<[^>]+>', '', snippet)
+            knowledge = f"参考知识点：{title} - {snippet}"
+            return {"source": "external", "data": {"knowledge": knowledge}}
+        else:
+            # 无搜索结果时降级
+            logger.warning("外部知识库无搜索结果，降级为本地知识库")
+            return {"source": "local", "data": review_knowledge_local(subject, grade)}
+            
+    except (RuntimeError, json.JSONDecodeError) as e:
+        # 网络错误或JSON解析错误才降级
+        logger.warning(f"外部知识库API调用失败，降级为本地知识库: {e}")
         return {"source": "local", "data": review_knowledge_local(subject, grade)}
 
 
 def fetch_mistake_analysis(error_type: str) -> dict:
-    """从外部 API 获取错题分析（带降级机制）"""
+    """从外部 API 获取错题分析（带降级机制）
+    
+    使用 DuckDuckGo 公共 API 作为真实可用的知识来源。
+    失败时降级到本地知识库。
+    """
     try:
-        response = http_get_with_retry(
-            MISTAKE_API_URL,
-            {"error_type": error_type}
-        )
-        return json.loads(response)
-    except (RuntimeError, json.JSONDecodeError):
-        # 降级为本地规则引擎
+        # 使用 DuckDuckGo 的 Instant Answer API（真实可用）
+        url = "https://api.duckduckgo.com/"
+        params = {
+            "q": f"{error_type} study tips",
+            "format": "json",
+            "no_html": "1",
+            "skip_disambig": "1"
+        }
+        response = http_get_with_retry(url, params)
+        data = json.loads(response)
+        
+        # 解析结果
+        abstract = data.get("AbstractText", "")
+        if abstract:
+            advice = f"参考建议：{abstract}"
+            return {"source": "external", "data": {"advice": advice}}
+        else:
+            # 无结果时降级
+            logger.warning("外部错题分析API无结果，降级为本地知识库")
+            return {"source": "local", "data": analyze_mistake_local(error_type)}
+            
+    except (RuntimeError, json.JSONDecodeError) as e:
+        # 网络错误或JSON解析错误才降级
+        logger.warning(f"外部错题分析API调用失败，降级为本地知识库: {e}")
         return {"source": "local", "data": analyze_mistake_local(error_type)}
 
 
@@ -195,164 +355,5 @@ def generate_hint(question: str, subject: str, grade: int, round_num: int) -> st
         return f"【第5轮·最终引导】\n{step['question']}\n🏁 最后一步：{step['hint']}，相信你能自己完成！"
 
 
-def review_knowledge_local(subject: str, grade: str) -> str:
-    """本地知识点回顾（降级用）"""
-    knowledge_map = {
-        ("math", "小学"): "四则运算、分数、小数、几何初步",
-        ("math", "初中"): "方程、函数、几何证明、概率初步",
-        ("math", "高中"): "函数、导数、数列、向量、解析几何",
-        ("chinese", "小学"): "拼音、字词、阅读理解基础",
-        ("chinese", "初中"): "文言文、现代文阅读、作文",
-        ("chinese", "高中"): "古诗文鉴赏、论述类文本、写作",
-        ("english", "小学"): "基础词汇、简单句型",
-        ("english", "初中"): "时态、语态、从句",
-        ("english", "高中"): "虚拟语气、非谓语、高级句型",
-        ("physics", "初中"): "力学、光学、电学基础",
-        ("physics", "高中"): "牛顿定律、电磁学、热学",
-        ("chemistry", "初中"): "元素、化合物、化学方程式",
-        ("chemistry", "高中"): "化学反应原理、有机化学、结构化学",
-    }
-    return knowledge_map.get((subject, grade), "请参考课本对应章节")
-
-
 def review_knowledge(subject: str, grade: str) -> str:
     """回顾核心知识点（优先外部API，降级本地）"""
-    try:
-        # 尝试外部API
-        grade_num = {"小学": 5, "初中": 8, "高中": 11}[grade]
-        result = fetch_knowledge(subject, grade_num)
-        if result.get("source") == "local":
-            return result["data"]
-        # 外部API成功，解析返回数据
-        return result.get("data", {}).get("knowledge", review_knowledge_local(subject, grade))
-    except Exception:
-        return review_knowledge_local(subject, grade)
-
-
-def analyze_mistake_local(error_type: str) -> str:
-    """本地错题归因分析（降级用）"""
-    error_map = {
-        "计算错误": "建议：加强口算练习，检查每一步运算，使用草稿纸。",
-        "概念混淆": "建议：重新阅读课本定义，制作概念对比表。",
-        "审题不清": "建议：圈出关键词，复述题目要求。",
-        "思路中断": "建议：回顾类似题型，建立解题模板。",
-        "粗心大意": "建议：做完后检查单位、符号、小数点。",
-    }
-    return error_map.get(error_type, "建议：分析错误原因，针对性练习。")
-
-
-def analyze_mistake(error_type: str) -> str:
-    """错题归因分析（优先外部API，降级本地）"""
-    try:
-        result = fetch_mistake_analysis(error_type)
-        if result.get("source") == "local":
-            return result["data"]
-        return result.get("data", {}).get("advice", analyze_mistake_local(error_type))
-    except Exception:
-        return analyze_mistake_local(error_type)
-
-
-def suggest_next(subject: str, grade: int, round_num: int) -> str:
-    """推荐下一步学习建议"""
-    suggestions = []
-    if round_num < MAX_ROUNDS:
-        suggestions.append(f"继续使用 --round {round_num + 1} 获取更深层提示。")
-    else:
-        suggestions.append("已完成全部引导轮次，建议独立完成题目。")
-
-    if subject == "math":
-        suggestions.append("推荐练习：课本课后习题、历年真题中的同类题型。")
-    elif subject in ("physics", "chemistry"):
-        suggestions.append("推荐练习：实验题和计算题，注意单位换算。")
-    elif subject == "chinese":
-        suggestions.append("推荐练习：阅读理解每日一篇，积累好词好句。")
-    elif subject == "english":
-        suggestions.append("推荐练习：语法专项训练，每日朗读15分钟。")
-
-    # 根据年级段给出建议
-    if grade <= 6:
-        suggestions.append("建议家长陪伴学习，多鼓励少批评。")
-    elif grade <= 9:
-        suggestions.append("建议建立错题本，定期复习。")
-    else:
-        suggestions.append("建议自主总结题型，构建知识网络。")
-
-    return "\n".join(suggestions)
-
-
-# ========== 苏格拉底式对话状态机 ==========
-
-class SocraticDialogue:
-    """苏格拉底式提问引导的对话状态机"""
-    
-    def __init__(self, question: str, subject: str, grade: int):
-        self.question = question
-        self.subject = subject
-        self.grade = grade
-        self.round_num = 0
-        self.steps = decompose_problem(question, subject, grade)
-        self.current_step = 0
-        self.responses = []
-        self.finished = False
-        
-    def next_question(self) -> str:
-        """获取下一个引导问题"""
-        if self.finished:
-            return "对话已结束，请总结你的解题思路。"
-        
-        if self.round_num >= MAX_ROUNDS:
-            self.finished = True
-            return "已完成全部引导轮次，请独立完成题目。"
-        
-        self.round_num += 1
-        return generate_hint(self.question, self.subject, self.grade, self.round_num)
-    
-    def submit_answer(self, answer: str) -> str:
-        """提交回答并获取反馈"""
-        if self.finished:
-            return "对话已结束。"
-        
-        self.responses.append(answer)
-        
-        # 简单评估回答质量
-        if len(answer.strip()) < 3:
-            feedback = "回答太简短了，请详细描述你的思考过程。"
-        elif "不知道" in answer or "不会" in answer:
-            feedback = "没关系，让我们换个角度思考。"
-        else:
-            feedback = "很好，继续深入思考。"
-        
-        # 检查是否完成所有步骤
-        if self.round_num >= MAX_ROUNDS:
-            self.finished = True
-            feedback += "\n已完成全部引导，请尝试独立完成题目。"
-        
-        return feedback
-    
-    def get_progress(self) -> dict:
-        """获取对话进度"""
-        return {
-            "round": self.round_num,
-            "total_rounds": MAX_ROUNDS,
-            "current_step": min(self.current_step + 1, len(self.steps)),
-            "total_steps": len(self.steps),
-            "finished": self.finished,
-            "responses_count": len(self.responses)
-        }
-
-
-# ========== 主流程 ==========
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="作业引导 Skill - 通过苏格拉底式提问引导自主解题",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="示例:\n  python run.py --question '鸡兔同笼...' --subject math --grade 5 --round 1\n  python run.py --selftest"
-    )
-    parser.add_argument("--question", "-q", type=str, help="题目文本（至少5个字符）")
-    parser.add_argument("--subject", "-s", type=str, default="math", choices=sorted(SUBJECTS), help="学科")
-    parser.add_argument("--grade", "-g", type=int, default=5, help="年级（3-12）")
-    parser.add_argument("--round", "-r", type=int, default=1, help=f"引导轮次（1-{MAX_ROUNDS}）")
-    parser.add_argument("--step", type=int, help="查看指定步骤的引导（1-5）")
-    parser.add_argument("--review", action="store_true", help="回顾知识点")
-    parser.add_argument
