@@ -326,7 +326,7 @@ def parse_invoice(text: str) -> ParseResult:
     if item:
         fields["item"] = item
     
-    # 附加信息: 备注
+    # 附加信息: 备注（可选字段）
     remark_match = re.search(r"(?:备注|remark)[:：\s]*([^\n\r]{1,200})", clean, re.IGNORECASE)
     if remark_match:
         fields["remark"] = remark_match.group(1).strip()
