@@ -48,7 +48,7 @@ ERROR_CODES = {
 # 模块分类关键字
 OPMODE_KEYWORDS = ["OpMode", "LinearOpMode", "IterativeOpMode"]
 HARDWARE_KEYWORDS = ["HardwareMap", "Hardware", "Motor", "Servo", "Sensor"]
-UTIL_KEYWORDS = ["Util", "Helper", "Tool", "Util", "Math"]
+UTIL_KEYWORDS = ["Util", "Helper", "Tool", "Math"]
 CONFIG_KEYWORDS = ["Config", "Constants", "Settings", "Parameters"]
 
 # 规范检查规则（宽松版）
@@ -348,20 +348,22 @@ class ReportGenerator:
         total_risks = sum(len(f.risks) for f in self.project.java_files)
         total_violations = sum(len(f.violations) for f in self.project.java_files)
 
-        return [
-            "## 一、项目概览",
-            "",
-            "| 指标 | 数值 |",
-            "|------|------|",
-            f"| Java 文件数 | {total_files} |",
-            f"| 总代码行数 | {total_lines} |",
-            f"| 总注释行数 | {total_comments} |",
-            f"| 注释占比 | {total_comments/total_lines:.1%} |" if total_lines else "| 注释占比 | 0% |",
-            f"| 风险点总数 | {total_risks} |",
-            f"| 规范问题总数 | {total_violations} |",
-            "",
-        ]
+        lines = ["## 一、项目概览", ""]
+        lines.append("| 指标 | 数值 |")
+        lines.append("|------|------|")
+        lines.append(f"| Java 文件数 | {total_files} |")
+        lines.append(f"| 总代码行数 | {total_lines} |")
+        lines.append(f"| 总注释行数 | {total_comments} |")
+        if total_lines > 0:
+            lines.append(f"| 注释占比 | {total_comments/total_lines:.1%} |")
+        else:
+            lines.append("| 注释占比 | 0% |")
+        lines.append(f"| 风险点总数 | {total_risks} |")
+        lines.append(f"| 规范问题总数 | {total_violations} |")
+        lines.append("")
+        return lines
 
     def _generate_structure(self) -> List[str]:
         """生成目录结构"""
-        lines = ["## 二、目录结构", "", "
+        lines = ["## 二、目录结构", ""]
+        lines.append("
