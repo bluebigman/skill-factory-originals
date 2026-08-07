@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: pbottlerpa
 name: pbottlerpa
-displayName: 网页自动化 数据提取 流程编排
+displayName: 网页流程自动化 数据提取 RPA
 description: 面向专业用户的RPA+AI流程自动化工具，支持网页操作与数据提取。
-version: 1.0.3
+version: 1.0.4
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/pbottlerpa
@@ -14,7 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: FlowForge Studio
 agent_created: true
-trigger_words: ["pbottlerpa", "RPA", "流程自动化", "网页自动化", "数据抓取", "机器人流程", "自动化脚本"]
+trigger_words: ["pbottlerpa", "RPA", "流程自动化", "网页自动化", "数据抓取", "自动化脚本", "网页数据采集"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,9 +31,9 @@ trigger_words: ["pbottlerpa", "RPA", "流程自动化", "网页自动化", "数�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# pbottlerpa — 网页自动化与数据提取技能手册
+# pbottlerpa — 网页流程自动化与数据提取 Skill
 
-本 Skill 由 AI 辅助生成，仅供参考。使用前请结合具体业务场景验证配置与输出。
+本 Skill 由 AI 辅助生成，仅供参考。使用前请结合具体业务场景验证配置与脚本行为。
 
 
 ## 许可证（License）
