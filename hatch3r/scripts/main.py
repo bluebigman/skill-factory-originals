@@ -148,7 +148,7 @@ def calculate_confidence(parsed: Dict[str, Any], raw_input: str) -> Tuple[int, L
         - 成功解析列表项 +10
         - 输入非空 +5
         - 有明确字段名 +5
-        - 有“需核实”标记则 -10
+        - 有“需核实”标记则 -15
 
     参数:
         parsed: 解析后的结构化数据
@@ -182,7 +182,7 @@ def calculate_confidence(parsed: Dict[str, Any], raw_input: str) -> Tuple[int, L
 
     # 有“需核实”标记
     if "_note" in parsed:
-        confidence -= 10
+        confidence -= 15
         warnings.append(parsed["_note"])
 
     # 限制在 0-100 之间
@@ -359,6 +359,12 @@ def run_selftest() -> int:
         failures += 1
     else:
         print("  ✓ 纯文本已处理")
+        # 检查置信度标注
+        if result4.data.get("_confidence_label") != "[需核实]":
+            print(f"  ✗ 纯文本置信度标注错误: {result4.data.get('_confidence_label')}")
+            failures += 1
+        else:
+            print("  ✓ 纯文本置信度标注正确")
 
     # --- 测试用例 5：置信度标注逻辑 ---
     print("\n[测试5] 置信度标注")
