@@ -1,0 +1,34 @@
+{
+  "timestamp": "20260807_160746",
+  "slug": "dictionary-term-explain",
+  "spec": {
+    "slug": "dictionary-term-explain",
+    "name": "术语释义助手",
+    "description": "按场景拆解术语含义，给出边界清晰、可落地的概念解释。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 接收术语输入（命令行参数或批量文件）",
+      "2. 校验输入合法性（非空、长度≤100字符）",
+      "3. 规范化输入（去除首尾空白、统一大小写）",
+      "1. 在本地知识库中精确匹配术语",
+      "2. 若命中，返回结构化解释（核心定义/场景拆解/边界界定/常见误用）",
+      "3. 若未命中，尝试外部API（维基百科）查询",
+      "4. 外部API失败时，返回错误码 `E1004` 并给出降级输出",
+      "1. 按用户指定场景（默认全部）生成解释",
+      "2. 输出结构化 Markdown 格式",
+      "3. 包含核心定义、场景拆解、边界界定、常见误用"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "bfc67d0459f37ace",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
