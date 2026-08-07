@@ -209,7 +209,7 @@ def detect_goal(description: str) -> str:
     return "通用入门"  # 默认通用入门
 
 def dynamic_theme_allocation(goal: str, weeks: int) -> List[str]:
-    """动态分配每周主题，根据周数裁剪或扩展"""
+    """动态分配每周主题，根据周数裁剪或扩展（动态规划核心）"""
     base_themes = WEEKLY_THEMES.get(goal, WEEKLY_THEMES["通用入门"])
     
     if weeks <= len(base_themes):
@@ -285,4 +285,3 @@ def generate_roadmap(level: str, goal: str, weeks: int, hours_per_week: int) -> 
             for i in range(resources_per_week):
                 idx = (start_idx + i) % total_resources
                 res = resources[idx]
-                # 根据水平
