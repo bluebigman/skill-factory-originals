@@ -10,7 +10,7 @@ import argparse, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TRIGGERS = ["gsa feeds", ""]
+TRIGGERS = ["gsa-feeds"]
 
 
 def load_spec() -> str:
