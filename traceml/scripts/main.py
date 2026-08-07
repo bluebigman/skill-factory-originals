@@ -33,6 +33,7 @@ import os
 import sys
 import tempfile
 import urllib.request
+import urllib.parse
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -87,6 +88,8 @@ def _safe_int(value: Any) -> Optional[int]:
 
 def _is_timestamp(value: str) -> bool:
     """判断字符串是否为常见时间戳格式。"""
+    if not isinstance(value, str):
+        return False
     for fmt in ("%Y-%m-%d", "%Y-%m-%d %H:%M:%S", "%Y/%m/%d", "%Y%m%d"):
         try:
             datetime.strptime(value.strip(), fmt)
@@ -159,7 +162,10 @@ def _parse_key_value_pairs(text: str) -> Dict[str, Any]:
 
 
 def _infer_confidence(record: Dict[str, Any]) -> Dict[str, Any]:
-    """根据记录完整性推断置信度，并附加到记录。"""
+    """根据记录完整性推断置信度，返回新字典（不修改原字典）。"""
+    # 创建副本，避免修改原字典
+    result = dict(record)
+    
     required = {"metric", "value"}
     optional = {"timestamp", "label", "group"}
     present = set(record.keys())
@@ -180,11 +186,11 @@ def _infer_confidence(record: Dict[str, Any]) -> Dict[str, Any]:
         level = CONFIDENCE_LOW
         reason = f"缺少必要字段: {', '.join(sorted(missing_required))}"
 
-    record["confidence"] = round(confidence, 2)
-    record["confidence_level"] = level
+    result["confidence"] = round(confidence, 2)
+    result["confidence_level"] = level
     if reason:
-        record["confidence_reason"] = reason
-    return record
+        result["confidence_reason"] = reason
+    return result
 
 
 # ---------------------------------------------------------------------------
@@ -274,7 +280,7 @@ class DataParser:
             # 尝试自动检测
             if content.lstrip().startswith("{"):
                 return DataParser.parse_json(content)
-            elif "," in content.splitlines()[0] if content.splitlines() else False:
+            elif content.splitlines() and "," in content.splitlines()[0]:
                 return DataParser.parse_csv(content)
             else:
                 return DataParser.parse_text(content)
@@ -489,7 +495,7 @@ class BatchProcessor:
                     records = DataParser.parse_text(item)
 
                 std_records = DataTransformer.standardize(records)
-                # 附加置信度
+                # 附加置信度（不修改原记录）
                 std_records = [_infer_confidence(r) for r in std_records]
                 results.extend(std_records)
             except TraceMLError as e:
@@ -567,8 +573,18 @@ class SelfTest:
         print("\n[5/6] 测试置信度标注...")
         complete_rec = {"metric": "loss", "value": 0.3, "timestamp": "2024-01-01", "label": "train"}
         incomplete_rec = {"metric": "loss"}  # 缺少 value
-        c1 = _infer_confidence(complete_rec)
-        c2 = _infer_confidence(incomplete_rec)
+        
+        # 确保原记录不被修改
+        complete_rec_copy = dict(complete_rec)
+        incomplete_rec_copy = dict(incomplete_rec)
+        
+        c1 = _infer_confidence(complete_rec_copy)
+        c2 = _infer_confidence(incomplete_rec_copy)
+        
+        # 验证原记录未被修改
+        assert "confidence" not in complete_rec, "原记录不应被修改"
+        assert "confidence" not in incomplete_rec, "原记录不应被修改"
+        
         assert c1["confidence"] > c2["confidence"], "完整记录置信度应更高"
         assert c1["confidence_level"] == CONFIDENCE_HIGH, "完整记录应为高置信度"
         assert c2["confidence_level"] == CONFIDENCE_LOW, "不完整记录应为低置信度"
