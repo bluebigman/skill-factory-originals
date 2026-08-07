@@ -337,11 +337,9 @@ def run_selftest() -> None:
 
     # 样例 4: 错误输入（缺少必需字段，应返回错误码 E002）
     sample4 = {"source": "无content"}
-    res4 = process_single(sample4)
-    # 注意：process_single 会捕获 SystemExit 吗？不会，因为 error_exit 会 raise SystemExit
-    # 所以这里需要特殊处理
+    # 由于 error_exit 会抛出 SystemExit，这里直接测试 validate_input
     try:
-        process_single(sample4)
+        validate_input(sample4)
         # 如果没退出说明逻辑错误
         raise AssertionError("样例4应触发错误")
     except SystemExit:
