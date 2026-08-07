@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: world-of-m365
 name: world-of-m365
-displayName: M365 运维自动化 脚本工具箱
-description: 面向 M365 管理员的脚本化运维与自动化处理工具集。
-version: 1.0.1
+displayName: M365运维 脚本自动化 批处理
+description: 面向M365管理员的脚本化运维与自动化处理工具集。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/world-of-m365
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: M365OpsForge
 agent_created: true
-trigger_words: ["world-of-m365", "M365 自动化", "Microsoft 365 脚本", "M365 运维", "Office 365 管理", "M365 批处理"]
+trigger_words: ["world-of-m365", "M365 自动化", "Microsoft 365 脚本", "M365 运维", "Office 365 管理", "M365 批处理", "Exchange Online 脚本", "Teams 自动化"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,18 +31,35 @@ trigger_words: ["world-of-m365", "M365 自动化", "Microsoft 365 脚本", "M365
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# world-of-m365 — M365 运维自动化 脚本工具箱
+# world-of-m365 — M365 运维脚本化工具集
 
 ## 一、能力边界（一页纸速查卡）
 
-本 Skill 定位为 **M365 环境下的脚本化运维辅助工具**，帮助管理员将重复性操作转化为可复用脚本，并处理日常数据转换任务。
+### 1.1 能做什么
 
-| 维度 | 说明 |
-|------|------|
-| ✅ 能做 | 将用户提供的 CSV/JSON/URL 数据解析为结构化结果；识别租户、用户、组、许可证等关键字段；生成 PowerShell/CLI 脚本骨架；批量处理同类输入；输出 Markdown/JSON/CSV 格式结果 |
-| ❌ 不能做 | 直接连接 Microsoft Graph API 执行写操作；代替管理员审批流程；自动部署到生产环境；绕过 M365 安全策略；处理非结构化文本（如手写笔记、扫描件） |
-| 🎯 适用对象 | M365 租户管理员、IT 运维工程师、自动化脚本开发者、需要批量处理 M365 配置数据的业务分析师 |
-| ⚠️ 前置依赖 | 用户需提供明确的输入数据（文件路径/URL/粘贴内容）；目标环境需具备 PowerShell 7+ 或 Azure CLI；执行写操作前需人工审核脚本内容 |
+| 能力域 | 具体操作 | 典型场景 |
+|--------|----------|----------|
+| **Exchange Online** | 批量创建/禁用邮箱、配置转发规则、查询邮件追踪 | 新员工入职批量开箱、离职账号回收 |
+| **Teams 管理** | 批量创建团队、添加成员、设置策略、导出成员列表 | 项目组快速搭建协作空间 |
+| **SharePoint Online** | 站点权限批量调整、文档库结构初始化、访问审计 | 部门站点定期权限复核 |
+| **安全与合规** | 批量查询登录日志、检索审计记录、配置保留标签 | 内部合规检查、安全事件追溯 |
+| **用户生命周期** | 批量导入/更新用户属性、同步组归属、清理孤儿账号 | 组织架构调整后的账号治理 |
+
+### 1.2 不能做什么
+
+| 限制项 | 说明 |
+|--------|------|
+| **不处理非 M365 资源** | 不涉及 Azure AD 之外的本地 AD、AWS、GCP 等 |
+| **不绕过权限控制** | 所有操作必须基于当前会话的合法权限，不提供提权功能 |
+| **不执行破坏性操作** | 不包含批量删除、清空回收站、强制覆盖等高风险动作 |
+| **不替代官方管理门户** | 脚本化操作与 UI 操作并行存在，不承诺完全替代 |
+| **不处理 License 分配** | 许可证购买与分配需在管理门户或通过官方 API 单独处理 |
+
+### 1.3 适用对象
+
+- **M365 租户管理员**：日常运维、批量变更、审计追踪
+- **IT 运维工程师**：自动化脚本集成、定时任务调度
+- **安全审计人员**：日志检索、权限复核、合规检查
 
 
 ## 许可证（License）
