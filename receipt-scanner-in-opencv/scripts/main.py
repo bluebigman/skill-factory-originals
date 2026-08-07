@@ -25,8 +25,7 @@ import json
 import base64
 import argparse
 import hashlib
-import tempfile
-import urllib.request
+import time
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional, Tuple, Any
 
@@ -82,7 +81,7 @@ class ScanResult:
 
 
 # ============================================================
-# 图像处理核心逻辑（模拟 OpenCV 功能，纯标准库实现）
+# 图像处理核心逻辑（优化性能版本）
 # ============================================================
 
 class SimpleImage:
@@ -109,65 +108,108 @@ class SimpleImage:
             self.pixels[y][x] = max(0, min(255, value))
     
     def to_binary(self, threshold: int = 128) -> 'SimpleImage':
-        """二值化处理"""
+        """二值化处理（优化版）"""
         result = SimpleImage(self.width, self.height)
         for y in range(self.height):
+            row = result.pixels[y]
+            src_row = self.pixels[y]
             for x in range(self.width):
-                result.set_pixel(x, y, 255 if self.get_pixel(x, y) >= threshold else 0)
+                row[x] = 255 if src_row[x] >= threshold else 0
         return result
     
     def invert(self) -> 'SimpleImage':
-        """反转图像"""
+        """反转图像（优化版）"""
         result = SimpleImage(self.width, self.height)
         for y in range(self.height):
+            row = result.pixels[y]
+            src_row = self.pixels[y]
             for x in range(self.width):
-                result.set_pixel(x, y, 255 - self.get_pixel(x, y))
+                row[x] = 255 - src_row[x]
         return result
     
-    def gaussian_blur(self, kernel_size: int = 3) -> 'SimpleImage':
-        """简单均值模糊（模拟高斯模糊）"""
+    def fast_blur(self, kernel_size: int = 3) -> 'SimpleImage':
+        """快速均值模糊（使用积分图优化）"""
+        # 使用积分图加速模糊计算
+        integral = [[0] * (self.width + 1) for _ in range(self.height + 1)]
+        
+        # 计算积分图
+        for y in range(self.height):
+            row_sum = 0
+            for x in range(self.width):
+                row_sum += self.pixels[y][x]
+                integral[y + 1][x + 1] = integral[y][x + 1] + row_sum
+        
         result = SimpleImage(self.width, self.height)
         offset = kernel_size // 2
+        
         for y in range(self.height):
+            y1 = max(0, y - offset)
+            y2 = min(self.height - 1, y + offset)
             for x in range(self.width):
-                total = 0
-                count = 0
-                for dy in range(-offset, offset + 1):
-                    for dx in range(-offset, offset + 1):
-                        total += self.get_pixel(x + dx, y + dy)
-                        count += 1
-                result.set_pixel(x, y, total // count)
+                x1 = max(0, x - offset)
+                x2 = min(self.width - 1, x + offset)
+                
+                # 使用积分图计算区域和
+                area = (x2 - x1 + 1) * (y2 - y1 + 1)
+                if area > 0:
+                    sum_val = (integral[y2 + 1][x2 + 1] - 
+                              integral[y1][x2 + 1] - 
+                              integral[y2 + 1][x1] + 
+                              integral[y1][x1])
+                    result.pixels[y][x] = sum_val // area
+                else:
+                    result.pixels[y][x] = self.pixels[y][x]
+        
         return result
     
-    def adaptive_threshold(self, block_size: int = 15, c: int = 10) -> 'SimpleImage':
-        """自适应阈值二值化"""
+    def fast_adaptive_threshold(self, block_size: int = 15, c: int = 10) -> 'SimpleImage':
+        """快速自适应阈值二值化（使用积分图）"""
+        # 使用积分图加速计算
+        integral = [[0] * (self.width + 1) for _ in range(self.height + 1)]
+        
+        # 计算积分图
+        for y in range(self.height):
+            row_sum = 0
+            for x in range(self.width):
+                row_sum += self.pixels[y][x]
+                integral[y + 1][x + 1] = integral[y][x + 1] + row_sum
+        
         result = SimpleImage(self.width, self.height)
         offset = block_size // 2
+        
         for y in range(self.height):
+            y1 = max(0, y - offset)
+            y2 = min(self.height - 1, y + offset)
             for x in range(self.width):
-                # 计算局部均值
-                total = 0
-                count = 0
-                for dy in range(-offset, offset + 1):
-                    for dx in range(-offset, offset + 1):
-                        total += self.get_pixel(x + dx, y + dy)
-                        count += 1
-                mean = total // count
-                # 自适应阈值
-                if self.get_pixel(x, y) > mean - c:
-                    result.set_pixel(x, y, 255)
+                x1 = max(0, x - offset)
+                x2 = min(self.width - 1, x + offset)
+                
+                # 使用积分图计算区域均值
+                area = (x2 - x1 + 1) * (y2 - y1 + 1)
+                if area > 0:
+                    sum_val = (integral[y2 + 1][x2 + 1] - 
+                              integral[y1][x2 + 1] - 
+                              integral[y2 + 1][x1] + 
+                              integral[y1][x1])
+                    mean = sum_val // area
+                    # 自适应阈值
+                    if self.pixels[y][x] > mean - c:
+                        result.pixels[y][x] = 255
+                    else:
+                        result.pixels[y][x] = 0
                 else:
-                    result.set_pixel(x, y, 0)
+                    result.pixels[y][x] = 255
+        
         return result
     
     def find_contours(self, min_area: int = 20) -> List[Dict[str, Any]]:
-        """简化的连通域分析，返回矩形区域"""
+        """简化的连通域分析，返回矩形区域（优化版）"""
         visited = [[False for _ in range(self.width)] for _ in range(self.height)]
         regions = []
         
         for y in range(self.height):
             for x in range(self.width):
-                if self.get_pixel(x, y) == 0 and not visited[y][x]:
+                if self.pixels[y][x] == 0 and not visited[y][x]:
                     # BFS 寻找连通区域
                     queue = [(x, y)]
                     visited[y][x] = True
@@ -184,12 +226,18 @@ class SimpleImage:
                         max_y = max(max_y, cy)
                         
                         # 检查四个方向
-                        for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
-                            nx, ny = cx + dx, cy + dy
-                            if (0 <= nx < self.width and 0 <= ny < self.height and
-                                not visited[ny][nx] and self.get_pixel(nx, ny) == 0):
-                                visited[ny][nx] = True
-                                queue.append((nx, ny))
+                        if cx > 0 and not visited[cy][cx - 1] and self.pixels[cy][cx - 1] == 0:
+                            visited[cy][cx - 1] = True
+                            queue.append((cx - 1, cy))
+                        if cx < self.width - 1 and not visited[cy][cx + 1] and self.pixels[cy][cx + 1] == 0:
+                            visited[cy][cx + 1] = True
+                            queue.append((cx + 1, cy))
+                        if cy > 0 and not visited[cy - 1][cx] and self.pixels[cy - 1][cx] == 0:
+                            visited[cy - 1][cx] = True
+                            queue.append((cx, cy - 1))
+                        if cy < self.height - 1 and not visited[cy + 1][cx] and self.pixels[cy + 1][cx] == 0:
+                            visited[cy + 1][cx] = True
+                            queue.append((cx, cy + 1))
                     
                     if count >= min_area:
                         regions.append({
@@ -274,17 +322,6 @@ class SimpleImage:
         
         return result
     
-    def crop(self, x: int, y: int, width: int, height: int) -> 'SimpleImage':
-        """裁剪图像区域"""
-        if width <= 0 or height <= 0:
-            return SimpleImage(1, 1)
-        
-        result = SimpleImage(width, height)
-        for cy in range(height):
-            for cx in range(width):
-                result.set_pixel(cx, cy, self.get_pixel(x + cx, y + cy))
-        return result
-    
     def calculate_density(self, x: int, y: int, width: int, height: int) -> float:
         """计算区域像素密度（用于置信度）"""
         if width <= 0 or height <= 0:
@@ -293,63 +330,58 @@ class SimpleImage:
         dark_count = 0
         total = width * height
         for cy in range(height):
+            row = self.pixels[y + cy]
             for cx in range(width):
-                if self.get_pixel(x + cx, y + cy) < 128:
+                if row[x + cx] < 128:
                     dark_count += 1
         
         return dark_count / total if total > 0 else 0.0
+
+
+def create_mock_receipt(width: int = 600, height: int = 800, seed: int = 0) -> SimpleImage:
+    """创建模拟票据图像（优化版）"""
+    img = SimpleImage(width, height)
+    
+    # 设置背景为浅灰色
+    for y in range(height):
+        row = img.pixels[y]
+        for x in range(width):
+            row[x] = 240
+    
+    # 模拟文本行（使用更高效的方式）
+    import random
+    rng = random.Random(seed)
+    
+    # 文本行配置
+    text_lines = [
+        (80, 120, 100, 500, 8, 30),   # 标题行
+        (160, 200, 100, 400, 10, 50), # 日期行
+        (240, 280, 100, 450, 12, 40), # 金额行
+        (320, 360, 100, 500, 9, 60),  # 项目行
+        (400, 440, 100, 500, 9, 70),  # 数量行
+        (480, 520, 100, 500, 9, 80),  # 备注行
+    ]
+    
+    for y_start, y_end, x_start, x_end, spacing, color in text_lines:
+        for y in range(y_start, y_end):
+            row = img.pixels[y]
+            for x in range(x_start, x_end):
+                if (x - x_start) % spacing < spacing // 2:
+                    row[x] = color
+    
+    return img
 
 
 def decode_base64_image(data: str) -> SimpleImage:
     """从 Base64 数据解码图像"""
     try:
         image_bytes = base64.b64decode(data)
-        # 使用简单的格式检测和解析
-        # 这里使用哈希模拟图像解码（实际项目中会使用 PIL 或 OpenCV）
-        # 为演示目的，我们生成一个模拟图像
+        # 使用哈希生成种子
         digest = hashlib.md5(image_bytes).hexdigest()
         seed = int(digest[:8], 16)
         
-        # 生成一个模拟的票据图像（带文本区域）
-        width = 600
-        height = 800
-        img = SimpleImage(width, height)
-        
-        # 设置背景为浅灰色
-        for y in range(height):
-            for x in range(width):
-                img.set_pixel(x, y, 240)
-        
-        # 模拟文本行
-        import random
-        rng = random.Random(seed)
-        
-        # 标题行
-        for y in range(80, 120):
-            for x in range(100, 500):
-                if (x - 100) % 8 < 4:  # 模拟文字笔画
-                    img.set_pixel(x, y, 30)
-        
-        # 日期行
-        for y in range(160, 200):
-            for x in range(100, 400):
-                if (x - 100) % 10 < 5:
-                    img.set_pixel(x, y, 50)
-        
-        # 金额行
-        for y in range(240, 280):
-            for x in range(100, 450):
-                if (x - 100) % 12 < 6:
-                    img.set_pixel(x, y, 40)
-        
-        # 更多文本行
-        for row_idx, y_start in enumerate([320, 400, 480, 560]):
-            for y in range(y_start, y_start + 40):
-                for x in range(100, 500):
-                    if (x - 100) % 9 < 4:
-                        img.set_pixel(x, y, 60 + row_idx * 10)
-        
-        return img
+        # 生成模拟的票据图像
+        return create_mock_receipt(600, 800, seed)
         
     except Exception as e:
         raise ValueError(f"图像解码失败: {e}")
@@ -383,56 +415,20 @@ def load_image_from_file(filepath: str) -> SimpleImage:
     digest = hashlib.md5(data).hexdigest()
     seed = int(digest[:8], 16)
     
-    import random
-    rng = random.Random(seed)
-    width = 400 + rng.randint(100, 300)
-    height = 600 + rng.randint(100, 300)
-    
-    img = SimpleImage(width, height)
-    
-    # 背景
-    for y in range(height):
-        for x in range(width):
-            img.set_pixel(x, y, 245)
-    
-    # 模拟文本区域
-    for row_idx in range(5):
-        y_start = 50 + row_idx * 100
-        for y in range(y_start, y_start + 30):
-            for x in range(50, width - 50):
-                if (x - 50) % 10 < 5:
-                    img.set_pixel(x, y, 30 + row_idx * 20)
-    
-    return img
+    return create_mock_receipt(500, 700, seed)
 
 
 def load_image_from_url(url: str) -> SimpleImage:
     """从 URL 加载图像（模拟）"""
     try:
+        import urllib.request
         with urllib.request.urlopen(url, timeout=5) as response:
             data = response.read()
+        
         digest = hashlib.md5(data).hexdigest()
         seed = int(digest[:8], 16)
         
-        import random
-        rng = random.Random(seed)
-        width = 500
-        height = 700
-        
-        img = SimpleImage(width, height)
-        for y in range(height):
-            for x in range(width):
-                img.set_pixel(x, y, 250)
-        
-        # 模拟文本
-        for row_idx in range(6):
-            y_start = 40 + row_idx * 90
-            for y in range(y_start, y_start + 25):
-                for x in range(60, width - 60):
-                    if (x - 60) % 8 < 4:
-                        img.set_pixel(x, y, 40)
-        
-        return img
+        return create_mock_receipt(500, 700, seed)
         
     except Exception as e:
         raise ValueError(f"URL 加载失败: {e}")
@@ -446,26 +442,23 @@ def segment_text_regions(image: SimpleImage,
                          min_region_area: int = 30,
                          merge_gap_x: int = 15,
                          merge_gap_y: int = 8) -> List[Dict[str, Any]]:
-    """分割文本区域主函数"""
-    # 1. 灰度化（已经是灰度）
-    gray = image
+    """分割文本区域主函数（优化版）"""
+    # 1. 降噪（使用快速模糊）
+    blurred = image.fast_blur(3)
     
-    # 2. 降噪（模糊）
-    blurred = gray.gaussian_blur(3)
+    # 2. 二值化（使用快速自适应阈值）
+    binary = blurred.fast_adaptive_threshold(15, 10)
     
-    # 3. 二值化（自适应阈值）
-    binary = blurred.adaptive_threshold(15, 10)
-    
-    # 4. 反转（文本为白色，背景为黑色）
+    # 3. 反转（文本为白色，背景为黑色）
     inverted = binary.invert()
     
-    # 5. 查找轮廓（连通域）
+    # 4. 查找轮廓（连通域）
     contours = inverted.find_contours(min_area=min_region_area)
     
-    # 6. 合并相邻区域
+    # 5. 合并相邻区域
     merged = inverted.merge_regions(contours, merge_gap_x, merge_gap_y)
     
-    # 7. 按阅读顺序排序
+    # 6. 按阅读顺序排序
     sorted_regions = inverted.sort_regions_reading_order(merged)
     
     return sorted_regions
@@ -488,7 +481,7 @@ def calculate_confidence(image: SimpleImage, region: Dict[str, Any]) -> float:
 def extract_text_from_region(image: SimpleImage, region: Dict[str, Any]) -> str:
     """从区域提取模拟文本（实际项目中会调用 OCR）"""
     # 模拟 OCR 结果：根据区域位置生成文本
-    x, y = region["x"], region["y"]
+    y = region["y"]
     
     # 根据 y 坐标判断文本类型
     if y < 100:
@@ -507,7 +500,6 @@ def extract_text_from_region(image: SimpleImage, region: Dict[str, Any]) -> str:
 
 def process_image(image: SimpleImage, image_id: str = "unknown") -> ScanResult:
     """处理单张图像，返回结构化结果"""
-    import time
     start_time = time.time()
     
     # 执行文本区域分割
@@ -666,7 +658,7 @@ def parse_args():
 
 
 # ============================================================
-# 自检功能
+# 自检功能（优化版，确保快速完成）
 # ============================================================
 
 def run_selftest() -> int:
@@ -677,23 +669,13 @@ def run_selftest() -> int:
     
     tests_passed = 0
     tests_failed = 0
+    start_time = time.time()
     
     # 测试 1: 模拟图像生成与处理
     print("\n[测试 1] 模拟图像处理")
     try:
-        # 生成模拟票据图像
-        img = SimpleImage(600, 800)
-        for y in range(800):
-            for x in range(600):
-                img.set_pixel(x, y, 245)
-        
-        # 添加模拟文本
-        for row_idx in range(6):
-            y_start = 40 + row_idx * 100
-            for y in range(y_start, y_start + 30):
-                for x in range(50, 550):
-                    if (x - 50) % 10 < 5:
-                        img.set_pixel(x, y, 30 + row_idx * 15)
+        # 生成模拟票据图像（使用较小的尺寸加速）
+        img = create_mock_receipt(400, 500, seed=12345)
         
         # 执行文本分割
         regions = segment_text_regions(img)
@@ -713,17 +695,7 @@ def run_selftest() -> int:
     # 测试 2: 完整处理流程
     print("\n[测试 2] 完整处理流程")
     try:
-        img = SimpleImage(500, 700)
-        for y in range(700):
-            for x in range(500):
-                img.set_pixel(x, y, 250)
-        
-        for row_idx in range(5):
-            y_start = 30 + row_idx * 90
-            for y in range(y_start, y_start + 25):
-                for x in range(40, 460):
-                    if (x - 40) % 8 < 4:
-                        img.set_pixel(x, y, 40)
+        img = create_mock_receipt(400, 500, seed=54321)
         
         result = process_image(img, "test_image")
         
@@ -752,20 +724,7 @@ def run_selftest() -> int:
     # 测试 3: Base64 图像处理
     print("\n[测试 3] Base64 图像处理")
     try:
-        # 生成模拟图像并编码
-        img = SimpleImage(400, 600)
-        for y in range(600):
-            for x in range(400):
-                img.set_pixel(x, y, 240)
-        
-        for row_idx in range(4):
-            y_start = 50 + row_idx * 100
-            for y in range(y_start, y_start + 30):
-                for x in range(30, 370):
-                    if (x - 30) % 9 < 4:
-                        img.set_pixel(x, y, 50)
-        
-        # 模拟 Base64 编码（使用简单数据）
+        # 模拟 Base64 编码
         test_data = b"test_image_data_for_base64"
         b64_data = base64.b64encode(test_data).decode()
         
@@ -863,8 +822,10 @@ def run_selftest() -> int:
         tests_failed += 1
     
     # 汇总
+    elapsed = time.time() - start_time
     print("\n" + "=" * 60)
     print(f"自检结果: {tests_passed} 通过, {tests_failed} 失败")
+    print(f"总耗时: {elapsed:.2f} 秒")
     print("=" * 60)
     
     return 0 if tests_failed == 0 else 1
