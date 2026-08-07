@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: ebay4r
 name: ebay4r
-displayName: eBay接口封装 Ruby调用 数据转换
+displayName: eBay接口 数据转换 SOAP调用
 description: 封装eBay SOAP API的Ruby工具，简化数据转换与调用流程。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ebay4r
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 技匠工坊
+author: 独立技能工坊
 agent_created: true
-trigger_words: ["ebay4r", "eBay接口", "SOAP API", "Ruby封装", "eBay数据转换"]
+trigger_words: ["ebay4r", "eBay接口", "SOAP API", "Ruby封装", "eBay数据转换", "eBay集成", "SOAP调用"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,26 +31,35 @@ trigger_words: ["ebay4r", "eBay接口", "SOAP API", "Ruby封装", "eBay数据转
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# eBay4R 技能手册
+# ebay4r — eBay SOAP API 的 Ruby 封装工具
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做与不能做
+### 1.1 能做什么
 
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|---------|-----------|
-| **数据输入** | 接受 Ruby 对象、JSON 字符串、文件路径、URL 指向的 XML/SOAP 响应 | 不处理非 eBay 协议的 SOAP 服务 |
-| **数据转换** | 将 eBay SOAP 响应解析为 Ruby Hash/Struct；将请求参数序列化为 SOAP XML | 不转换 REST/GraphQL 格式（需另行适配） |
-| **关键信息提取** | 识别 ItemID、SKU、价格、库存、订单状态等核心字段 | 不推断业务含义（如"价格是否合理"） |
-| **输出生成** | 输出结构化 Ruby 对象、JSON、YAML，支持自定义字段映射 | 不生成 PDF/Excel 等二进制报表 |
-| **批量处理** | 支持数组/列表批量转换，可配置并发或串行 | 不管理 eBay 调用频率限制（需外部限流） |
-| **置信度提示** | 对缺失字段、类型异常输出 `[需核实:字段名]` 占位 | 不伪造缺失数据，不猜测枚举值 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| SOAP 请求封装 | 将 eBay Trading API 的 SOAP 请求封装为 Ruby 方法调用 | `client.get_item(item_id)` |
+| 数据格式转换 | 自动处理 XML ↔ Ruby Hash ↔ JSON 的相互转换 | `response.to_json` |
+| 调用流程简化 | 隐藏认证、签名、请求头等底层细节 | 只需传入 API 凭据即可 |
+| 错误信息解析 | 将 SOAP Fault 转换为可读的 Ruby 异常 | `Ebay4r::ApiError` |
+| 命令行自检 | 提供 `--selftest` 验证安装与配置 | `ebay4r --selftest` |
 
-### 1.2 适用对象
+### 1.2 不能做什么（明确边界）
 
-- **Ruby 开发者**：需要在 Rails/Sinatra 项目中集成 eBay 商品、订单、库存接口。
-- **数据工程师**：需要将 eBay 接口返回的 XML 转为内部数据管道可消费的 JSON。
-- **测试人员**：需要构造模拟 eBay 响应进行单元测试或契约测试。
+| 限制项 | 说明 |
+|--------|------|
+| 不支持 REST API | 仅针对 SOAP 协议，eBay 的 REST 接口需另寻方案 |
+| 不包含业务逻辑 | 不提供商品上架、订单处理等业务层功能 |
+| 不负责数据合规 | 用户需自行确保调用频率、数据使用符合 eBay 政策 |
+| 不提供 GUI | 纯命令行与 Ruby 库，无图形界面 |
+| 不处理流式大文件 | 单次请求响应体建议不超过 10MB |
+
+### 1.3 适用对象
+
+- 使用 Ruby 语言开发 eBay 集成功能的工程师
+- 需要快速将 SOAP 请求转换为 Ruby 数据结构的开发者
+- 维护遗留 eBay SOAP 接口代码的团队
 
 
 ## 许可证（License）
