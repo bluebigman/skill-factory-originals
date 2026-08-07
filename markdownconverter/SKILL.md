@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: markdownconverter
 name: markdownconverter
-displayName: Markdown 格式转换 文档导出 批处理
-description: 将 Markdown 文件转换为 HTML、PNG 或 PDF 格式，支持批量处理与自定义样式。
-version: 1.0.1
+displayName: 文档格式转换 批处理 样式定制
+description: 将 Markdown 文件批量转换为 HTML、PNG 或 PDF，支持自定义样式与模板。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/markdownconverter
@@ -14,40 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 格式工坊
 agent_created: true
-trigger_words: ["markdown转换", "md转html", "md转pdf", "md转png", "文档格式转换", "批量转换", "导出文档"]
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
-# Markdown 格式转换 Skill 文档
-
-## 一、能力边界速查卡
-
-### 1.1 能做什么
-
-| 序号 | 能力项 | 说明 | 输入示例 |
-|------|--------|------|----------|
-| 1 | 格式转换 | 将 Markdown 文件转换为 HTML、PNG、PDF | `report.md` → `report.pdf` |
-| 2 | 批量处理 | 一次处理多个文件，支持通配符 | `./docs/*.md` → 批量输出 |
-| 3 | 样式定制 | 通过 CSS 或配置项自定义输出样式 | 自定义页眉、字体、主题色 |
-| 4 | 目录结构保留 | 转换时保留原有目录层级 | `docs/a/b.md` → `output/a/b.html` |
-| 5 | 元数据提取 | 从 Markdown 中提取标题、标签等结构化信息 | 提取 `# 标题` 作为文档名 |
-
-### 1.2 不能做什么
-
-- 不支持 Markdown 以外的输入格式（如 docx、rst 需先自行转换）
-- 不处理加密或受密码保护的 PDF 文件
-- 不执行 Markdown 内嵌的 JavaScript 代码
-- 不保证复杂表格、数学公式在所有输出格式中的完美渲染
-- 不提供云端存储或文件托管服务
-
-### 1.3 适用对象
-
-- 需要将技术文档发布为网页的开发者
-- 需要将笔记导出为图片分享的知识工作者
-- 需要批量生成 PDF 报告的项目管理人员
-- 需要统一文档格式的团队协作场景
-
+trigger_words: ["markdown转换", "md转html", "md转pdf", "md转png", "文档格式转换", "md转图片", "批量转格式"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -61,28 +28,38 @@ trigger_words: ["markdown转换", "md转html", "md转pdf", "md转png", "文档�
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-## 二、触发方式与场景映射
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-### 2.1 触发词表
+# Markdown 格式转换器（markdownconverter）
 
-| 触发词 | 场景描述 |
-|--------|----------|
-| markdown转换 | 用户提到需要转换 Markdown 文件 |
-| md转html | 明确指定目标格式为 HTML |
-| md转pdf | 明确指定目标格式为 PDF |
-| md转png | 明确指定目标格式为 PNG 图片 |
-| 文档格式转换 | 泛指文档格式转换需求 |
-| 批量转换 | 需要一次处理多个文件 |
-| 导出文档 | 将 Markdown 内容导出为其他格式 |
+## 一、能力边界：一页纸速查卡
 
-### 2.2 场景映射示例
+### 1.1 能做什么
 
-| 用户说 | 实际需求 | 推荐操作 |
-|--------|----------|----------|
-| "帮我把这份 README 转成网页" | Markdown → HTML | 执行转换，输出 HTML 文件 |
-| "这些 md 文件都要转成 PDF" | 批量 Markdown → PDF | 批量处理，逐个输出 PDF |
-| "我想把笔记转成图片发朋友圈" | Markdown → PNG | 转换并提示图片尺寸选项 |
-| "转换后能保持原来的目录结构吗" | 目录结构保留 | 确认后按原结构输出 |
+| 功能项 | 说明 | 支持格式 |
+|--------|------|----------|
+| 单文件转换 | 将单个 .md 文件转为目标格式 | HTML / PNG / PDF |
+| 批量转换 | 将指定目录下所有 .md 文件逐一转换 | HTML / PNG / PDF |
+| 自定义样式 | 通过 CSS 或主题模板控制输出外观 | 全部格式 |
+| 目录结构保留 | 转换时保留源文件的目录层级关系 | 全部格式 |
+| 图片资源处理 | 自动识别并处理文档中的本地图片引用 | HTML / PDF |
+| 代码高亮 | 对代码块进行语法高亮渲染 | HTML / PDF |
+
+### 1.2 不能做什么
+
+- 不支持将 HTML / PNG / PDF 反向转回 Markdown
+- 不支持加密 PDF 的生成（无密码保护功能）
+- 不支持对扫描件或图片中的文字进行 OCR 识别
+- 不支持实时预览或交互式编辑
+- 不支持从远程 URL 直接抓取 Markdown 内容进行转换
+
+### 1.3 适用对象
+
+- 需要将技术文档、README、笔记转为可分享格式的内容创作者
+- 需要批量生成项目文档站点的开发人员
+- 需要将 Markdown 讲义转为 PDF 或图片用于分发教育工作者
+- 需要将 Markdown 报告转为正式格式的商务人士
 
 
 ## 许可证（License）
