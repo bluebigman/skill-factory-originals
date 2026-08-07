@@ -1,625 +1,635 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-openmontage - 未命名工具
-World's first open-source, agentic video production system.
-12 production pipelines, 100+ tools, 700+ agent skill and pr
+openmontage — 智能视频生产系统（独立实现）
 
-本脚本为 clean-room 独立实现，仅依据功能规格设计。
-仅使用 Python 标准库，无第三方依赖。
+本脚本依据功能规格独立编写（clean-room），仅使用 Python 标准库。
+提供核心数据模型、管线编排、技能调度、结果校验等能力，
+并支持 --selftest 离线自检。
+
+错误码约定：
+    E001: 输入参数错误
+    E002: 输入数据格式错误
+    E003: 管线不存在或不可用
+    E004: 技能不存在或不可用
+    E005: 数据转换失败
+    E006: 关键信息提取失败
+    E007: 管线执行失败
+    E008: 结果校验失败
+    E009: 输出格式错误
+    E010: 内部未知错误
+
+用法示例：
+    python scripts/main.py --help
+    python scripts/main.py --selftest
+    python scripts/main.py --input sample.csv --pipeline rough_cut,color,subtitle
 """
 
 import argparse
+import csv
+import io
 import json
+import os
 import sys
 import tempfile
-import os
-from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple
-
-# ============================================================
-# 常量定义
-# ============================================================
-
-# 错误码及标准化话术（规格第四章）
-ERROR_MESSAGES: Dict[str, str] = {
-    "E001": "请提供待处理的内容，格式为：用户提供的数据/文件/URL",
-    "E002": "还缺少以下信息，请补充：...",
-    "E003": "输入格式不符合要求，示例：...",
-    "E004": "这超出了本工具的能力范围，建议...",
-    "E005": "结果无法确定，建议：...",
-    # 内部错误码（扩展）
-    "E006": "文件读取失败，请检查文件路径",
-    "E007": "JSON 解析失败，请检查输入格式",
-    "E008": "输出写入失败，请检查权限",
-    "E009": "内部逻辑错误，请联系开发者",
-    "E010": "未知错误",
-}
-
-# 置信度阈值（规格第三章 Step 2）
-CONFIDENCE_HIGH = 90    # ≥90%：直接输出
-CONFIDENCE_MEDIUM = 85  # 85%-90%：建议复核
-# <85%：标注 [需核实]
-
-# 关键字段列表（用于结构化识别）
-KEY_FIELDS = [
-    "title", "description", "tags", "duration",
-    "resolution", "format", "source", "author",
-    "date", "content",
-]
-
-# ============================================================
-# 核心数据结构
-# ============================================================
-
-class ProcessingResult:
-    """处理结果封装"""
-    def __init__(self) -> None:
-        self.data: Dict[str, Any] = {}
-        self.confidence: int = 0
-        self.warnings: List[str] = []
-        self.errors: List[Tuple[str, str]] = []
-
-    def to_dict(self) -> Dict[str, Any]:
-        """转换为字典"""
-        return {
-            "data": self.data,
-            "confidence": self.confidence,
-            "warnings": self.warnings,
-            "errors": self.errors,
-        }
-
-    def to_json(self) -> str:
-        """转换为 JSON 字符串"""
-        return json.dumps(self.to_dict(), ensure_ascii=False, indent=2)
+from dataclasses import dataclass, field, asdict
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 
-class InputData:
-    """输入数据封装"""
-    def __init__(self, raw: str, source_type: str = "text"):
-        self.raw = raw
-        self.source_type = source_type
-        self.parsed: Dict[str, Any] = {}
-        self.is_valid = False
+# ---------------------------------------------------------------------------
+# 错误码与异常
+# ---------------------------------------------------------------------------
+
+class OpenMontageError(Exception):
+    """openmontage 基础异常，携带错误码。"""
+
+    def __init__(self, code: str, message: str):
+        self.code = code
+        self.message = message
+        super().__init__(f"[{code}] {message}")
 
 
-# ============================================================
-# 核心处理逻辑
-# ============================================================
-
-def validate_input(raw: str) -> Optional[str]:
-    """
-    验证输入是否有效（规格第三章 Step 1）
-    返回错误码或 None（有效）
-    """
-    if not raw or not raw.strip():
-        return "E001"
-    if len(raw.strip()) < 3:
-        return "E003"
-    return None
+def err(code: str, message: str) -> OpenMontageError:
+    """快速构造错误异常。"""
+    return OpenMontageError(code, message)
 
 
-def parse_input(raw: str, source_type: str = "text") -> InputData:
-    """
-    解析输入内容（规格第三章 Step 2.1）
-    识别关键信息并结构化
-    """
-    result = InputData(raw, source_type)
-    
-    # 根据来源类型选择解析方式
-    if source_type == "json":
+# ---------------------------------------------------------------------------
+# 核心数据模型
+# ---------------------------------------------------------------------------
+
+@dataclass
+class MediaItem:
+    """素材条目（对应 C1 多源输入转换后的结构化中间结果）。"""
+    source: str                # 来源（路径/URL/标识符）
+    media_type: str            # 类型：video / audio / image / subtitle
+    duration: float = 0.0      # 时长（秒），未知为 0
+    width: int = 0             # 宽（像素），未知为 0
+    height: int = 0            # 高（像素），未知为 0
+    metadata: Dict[str, Any] = field(default_factory=dict)
+
+
+@dataclass
+class SceneInfo:
+    """场景信息（对应 C2 关键信息提取）。"""
+    scene_id: str
+    start_time: float
+    end_time: float
+    content: str = ""
+    characters: List[str] = field(default_factory=list)
+    confidence: float = 1.0
+
+
+@dataclass
+class PipelineResult:
+    """管线执行结果（对应 C5 结果校验输出）。"""
+    pipeline_name: str
+    status: str                # success / failed
+    output_path: str = ""
+    confidence: float = 1.0
+    details: Dict[str, Any] = field(default_factory=dict)
+
+
+# ---------------------------------------------------------------------------
+# 内置技能库（C4：技能调度）
+# ---------------------------------------------------------------------------
+
+# 技能注册表：技能名 -> 可调用函数
+# 每个技能函数接收参数 dict，返回 dict（结果）
+SKILL_REGISTRY: Dict[str, Callable[[Dict[str, Any]], Dict[str, Any]]] = {}
+
+
+def register_skill(name: str):
+    """装饰器：注册一个技能。"""
+    def decorator(func: Callable[[Dict[str, Any]], Dict[str, Any]]):
+        SKILL_REGISTRY[name] = func
+        return func
+    return decorator
+
+
+@register_skill("transition_effect")
+def _skill_transition_effect(params: Dict[str, Any]) -> Dict[str, Any]:
+    """转场特效技能（模拟）。"""
+    effect_type = params.get("effect_type", "crossfade")
+    duration = float(params.get("duration", 0.5))
+    return {
+        "applied": True,
+        "effect": effect_type,
+        "duration": duration,
+        "note": "转场特效已应用（模拟）",
+    }
+
+
+@register_skill("audio_denoise")
+def _skill_audio_denoise(params: Dict[str, Any]) -> Dict[str, Any]:
+    """音频降噪技能（模拟）。"""
+    strength = float(params.get("strength", 0.5))
+    return {
+        "applied": True,
+        "strength": strength,
+        "note": "音频降噪完成（模拟）",
+    }
+
+
+@register_skill("subtitle_generate")
+def _skill_subtitle_generate(params: Dict[str, Any]) -> Dict[str, Any]:
+    """字幕生成技能（模拟）。"""
+    language = params.get("language", "zh")
+    return {
+        "applied": True,
+        "language": language,
+        "count": int(params.get("line_count", 0)),
+        "note": "字幕生成完成（模拟）",
+    }
+
+
+# ---------------------------------------------------------------------------
+# 内置生产管线（C3：管线编排执行）
+# ---------------------------------------------------------------------------
+
+# 管线注册表：管线名 -> 管线定义（技能序列 + 元信息）
+PIPELINE_REGISTRY: Dict[str, Dict[str, Any]] = {}
+
+
+def register_pipeline(name: str, description: str, skills: List[str]):
+    """注册一条生产管线。"""
+    PIPELINE_REGISTRY[name] = {
+        "name": name,
+        "description": description,
+        "skills": skills,
+    }
+
+
+# 注册 12 条标准管线
+def _init_pipelines():
+    register_pipeline("rough_cut", "粗剪：素材导入 + 基础剪辑", ["transition_effect"])
+    register_pipeline("color", "调色：色彩校正与风格化", [])
+    register_pipeline("subtitle", "字幕：自动生成与排版", ["subtitle_generate"])
+    register_pipeline("audio", "音频：降噪与平衡", ["audio_denoise"])
+    register_pipeline("export", "导出：格式转换与封装", [])
+    register_pipeline("review", "审阅：生成预览与标注", [])
+    register_pipeline("archive", "归档：素材与成片归档", [])
+    register_pipeline("composite", "合成：多轨合成与特效", ["transition_effect"])
+    register_pipeline("motion", "动效：动态图形与动画", [])
+    register_pipeline("capture", "采集：多源素材采集", [])
+    register_pipeline("transcode", "转码：分辨率与编码转换", [])
+    register_pipeline("delivery", "交付：多平台分发准备", [])
+
+
+_init_pipelines()
+
+
+# ---------------------------------------------------------------------------
+# 核心功能实现
+# ---------------------------------------------------------------------------
+
+class OpenMontageEngine:
+    """openmontage 核心引擎。"""
+
+    def __init__(self):
+        self.media_items: List[MediaItem] = []
+        self.scenes: List[SceneInfo] = []
+        self.results: List[PipelineResult] = []
+        self._temp_dir: Optional[str] = None
+
+    # ---- C1: 多源输入转换 ----
+
+    def load_from_csv(self, csv_text: str) -> List[MediaItem]:
+        """
+        从 CSV 文本加载素材清单，转换为结构化 MediaItem 列表。
+        支持列：source, media_type, duration, width, height
+        """
+        if not csv_text or not csv_text.strip():
+            raise err("E002", "CSV 输入为空")
+
+        items: List[MediaItem] = []
         try:
-            result.parsed = json.loads(raw)
-            if isinstance(result.parsed, dict):
-                result.is_valid = True
-            else:
-                result.is_valid = False
-        except json.JSONDecodeError:
-            result.is_valid = False
-    else:
-        # 文本解析：按行拆分，识别 key: value 或 key=value 格式
-        lines = raw.strip().split("\n")
-        for line in lines:
+            reader = csv.DictReader(io.StringIO(csv_text))
+            required = {"source", "media_type"}
+            for row_num, row in enumerate(reader, start=2):
+                # 检查必需列
+                if not required.issubset(row.keys()):
+                    missing = required - set(row.keys())
+                    raise err("E002", f"CSV 缺少必需列: {missing} (第 {row_num} 行)")
+
+                source = row["source"].strip()
+                media_type = row["media_type"].strip().lower()
+                if not source or not media_type:
+                    raise err("E002", f"第 {row_num} 行 source/media_type 不能为空")
+
+                # 可选列，宽松解析
+                try:
+                    duration = float(row.get("duration", 0) or 0)
+                except (ValueError, TypeError):
+                    duration = 0.0
+                try:
+                    width = int(float(row.get("width", 0) or 0))
+                except (ValueError, TypeError):
+                    width = 0
+                try:
+                    height = int(float(row.get("height", 0) or 0))
+                except (ValueError, TypeError):
+                    height = 0
+
+                item = MediaItem(
+                    source=source,
+                    media_type=media_type,
+                    duration=max(0.0, duration),
+                    width=max(0, width),
+                    height=max(0, height),
+                )
+                items.append(item)
+        except csv.Error as e:
+            raise err("E002", f"CSV 解析失败: {e}")
+        except OpenMontageError:
+            raise
+        except Exception as e:
+            raise err("E005", f"数据转换失败: {e}")
+
+        if not items:
+            raise err("E002", "CSV 未包含任何有效素材行")
+
+        self.media_items = items
+        return items
+
+    def load_from_json(self, json_text: str) -> List[MediaItem]:
+        """从 JSON 文本加载素材清单。"""
+        if not json_text or not json_text.strip():
+            raise err("E002", "JSON 输入为空")
+        try:
+            data = json.loads(json_text)
+        except json.JSONDecodeError as e:
+            raise err("E002", f"JSON 解析失败: {e}")
+
+        if not isinstance(data, list):
+            raise err("E002", "JSON 顶层必须是数组")
+
+        items: List[MediaItem] = []
+        for idx, entry in enumerate(data):
+            if not isinstance(entry, dict):
+                raise err("E002", f"第 {idx} 项不是对象")
+            source = str(entry.get("source", "")).strip()
+            media_type = str(entry.get("media_type", "")).strip().lower()
+            if not source or not media_type:
+                raise err("E002", f"第 {idx} 项缺少 source 或 media_type")
+            items.append(MediaItem(
+                source=source,
+                media_type=media_type,
+                duration=float(entry.get("duration", 0) or 0),
+                width=int(entry.get("width", 0) or 0),
+                height=int(entry.get("height", 0) or 0),
+                metadata=entry.get("metadata", {}),
+            ))
+
+        if not items:
+            raise err("E002", "JSON 未包含任何有效素材")
+        self.media_items = items
+        return items
+
+    # ---- C2: 关键信息提取 ----
+
+    def extract_scenes(self, script_text: str) -> List[SceneInfo]:
+        """
+        从剧本文本中提取场景信息（模拟实现）。
+        识别模式：以 "场景" 或 "SCENE" 开头的行，后跟时间信息。
+        """
+        if not script_text or not script_text.strip():
+            raise err("E002", "剧本输入为空")
+
+        scenes: List[SceneInfo] = []
+        lines = script_text.strip().splitlines()
+
+        for line_num, line in enumerate(lines, start=1):
             line = line.strip()
             if not line:
                 continue
-            # 尝试多种分隔符
-            for sep in [":", "=", "："]:
-                if sep in line:
-                    key, value = line.split(sep, 1)
-                    result.parsed[key.strip()] = value.strip()
-                    break
+            # 宽松匹配：包含 "场景" 或 "SCENE" 关键词
+            upper = line.upper()
+            if "场景" not in line and "SCENE" not in upper:
+                continue
+
+            # 尝试提取时间（格式如: 00:10-00:25 或 10-25）
+            import re
+            time_match = re.search(r'(\d+)[:：]?(\d+)?\s*[-–—]\s*(\d+)[:：]?(\d+)?', line)
+            if time_match:
+                try:
+                    start = float(time_match.group(1)) * 60 + float(time_match.group(2) or 0)
+                    end = float(time_match.group(3)) * 60 + float(time_match.group(4) or 0)
+                except ValueError:
+                    start, end = 0.0, 0.0
             else:
-                # 无法识别的行，加入 content 字段
-                result.parsed.setdefault("content", [])
-                if isinstance(result.parsed["content"], list):
-                    result.parsed["content"].append(line)
-                else:
-                    result.parsed["content"] = [result.parsed["content"], line]
-        result.is_valid = bool(result.parsed)
-    
-    return result
+                start, end = 0.0, 0.0
 
+            # 从行中提取角色（模拟：匹配中括号或引号内内容）
+            characters = []
+            for m in re.finditer(r'[\[【]([^\]】]+)[\]】]', line):
+                characters.append(m.group(1).strip())
 
-def extract_key_fields(data: Dict[str, Any]) -> Tuple[Dict[str, Any], List[str]]:
-    """
-    提取关键字段（规格第三章 Step 2.1）
-    返回 (提取到的字段, 缺失的字段列表)
-    """
-    extracted = {}
-    missing = []
-    
-    for field in KEY_FIELDS:
-        if field in data and data[field] is not None:
-            extracted[field] = data[field]
-        else:
-            missing.append(field)
-    
-    return extracted, missing
+            scene_id = f"SCENE_{line_num:03d}"
+            scenes.append(SceneInfo(
+                scene_id=scene_id,
+                start_time=max(0.0, start),
+                end_time=max(0.0, end),
+                content=line,
+                characters=characters,
+                confidence=0.8,  # 模拟置信度
+            ))
 
+        if not scenes:
+            raise err("E006", "未能从剧本中提取任何场景")
 
-def calculate_confidence(extracted: Dict[str, Any], missing: List[str]) -> int:
-    """
-    计算置信度（规格第三章 Step 2.3）
-    基于字段完整度计算
-    """
-    total_fields = len(KEY_FIELDS)
-    if total_fields == 0:
-        return 0
-    
-    # 有 content 字段时，即使缺少其他字段也给予基础分
-    base_score = 50 if "content" in extracted else 30
-    
-    # 每个提取到的字段增加分数
-    field_score = (len(extracted) / total_fields) * 40
-    
-    # 最终置信度
-    confidence = min(95, base_score + field_score)
-    
-    return int(confidence)
+        self.scenes = scenes
+        return scenes
 
+    # ---- C3: 管线编排执行 ----
 
-def format_output(result: ProcessingResult) -> Dict[str, Any]:
-    """
-    格式化输出（规格第三章 Step 3）
-    根据置信度添加标注
-    """
-    output = result.to_dict()
-    
-    # 根据置信度级别添加标注
-    if result.confidence >= CONFIDENCE_HIGH:
-        output["status"] = "直接输出"
-        output["label"] = "正常"
-    elif result.confidence >= CONFIDENCE_MEDIUM:
-        output["status"] = "建议复核"
-        output["label"] = "建议复核"
-    else:
-        output["status"] = "需核实"
-        output["label"] = "[需核实]"
-        output["uncertainty_points"] = result.warnings
-    
-    return output
+    def run_pipeline(self, pipeline_name: str, params: Optional[Dict[str, Any]] = None) -> PipelineResult:
+        """执行指定管线。"""
+        if pipeline_name not in PIPELINE_REGISTRY:
+            raise err("E003", f"管线不存在: {pipeline_name}")
 
+        pipeline_def = PIPELINE_REGISTRY[pipeline_name]
+        params = params or {}
 
-def process_text(raw: str) -> ProcessingResult:
-    """
-    处理文本输入（主流程）
-    """
-    result = ProcessingResult()
-    
-    # Step 1: 验证输入
-    error_code = validate_input(raw)
-    if error_code:
-        result.errors.append((error_code, ERROR_MESSAGES[error_code]))
-        result.confidence = 0
-        return result
-    
-    # Step 2: 解析输入
-    input_data = parse_input(raw, "text")
-    if not input_data.is_valid:
-        result.errors.append(("E003", ERROR_MESSAGES["E003"]))
-        result.confidence = 0
-        return result
-    
-    # Step 3: 提取关键字段
-    extracted, missing = extract_key_fields(input_data.parsed)
-    result.data = extracted
-    
-    # Step 4: 计算置信度
-    result.confidence = calculate_confidence(extracted, missing)
-    
-    # Step 5: 生成警告
-    if result.confidence < CONFIDENCE_HIGH:
-        for field in missing:
-            if field != "content":  # content 不是必填项
-                result.warnings.append(f"缺少字段: {field}")
-    
-    # Step 6: 检查置信度是否过低
-    if result.confidence < CONFIDENCE_MEDIUM:
-        result.errors.append(("E005", ERROR_MESSAGES["E005"]))
-    
-    return result
+        # 依次执行管线中的技能
+        skill_results: Dict[str, Any] = {}
+        for skill_name in pipeline_def["skills"]:
+            if skill_name not in SKILL_REGISTRY:
+                raise err("E004", f"技能不存在: {skill_name}")
+            try:
+                skill_result = SKILL_REGISTRY[skill_name](params.get(skill_name, {}))
+                skill_results[skill_name] = skill_result
+            except Exception as e:
+                raise err("E007", f"技能 {skill_name} 执行失败: {e}")
 
+        # 模拟输出路径
+        output_path = f"output/{pipeline_name}_result"
 
-def process_json(raw: str) -> ProcessingResult:
-    """
-    处理 JSON 输入
-    """
-    result = ProcessingResult()
-    
-    # 验证输入
-    error_code = validate_input(raw)
-    if error_code:
-        result.errors.append((error_code, ERROR_MESSAGES[error_code]))
-        result.confidence = 0
-        return result
-    
-    # 解析 JSON
-    input_data = parse_input(raw, "json")
-    if not input_data.is_valid:
-        result.errors.append(("E007", ERROR_MESSAGES["E007"]))
-        result.confidence = 0
-        return result
-    
-    # 提取关键字段
-    extracted, missing = extract_key_fields(input_data.parsed)
-    result.data = extracted
-    
-    # 计算置信度
-    result.confidence = calculate_confidence(extracted, missing)
-    
-    # 生成警告
-    if result.confidence < CONFIDENCE_HIGH:
-        for field in missing:
-            if field != "content":
-                result.warnings.append(f"缺少字段: {field}")
-    
-    return result
-
-
-def process_file(filepath: str) -> ProcessingResult:
-    """
-    处理文件输入（规格第三章 Step 1）
-    """
-    result = ProcessingResult()
-    
-    try:
-        path = Path(filepath)
-        if not path.exists():
-            result.errors.append(("E006", ERROR_MESSAGES["E006"]))
-            result.confidence = 0
-            return result
-        
-        content = path.read_text(encoding="utf-8", errors="ignore")
-        
-        # 根据文件扩展名选择解析方式
-        if path.suffix.lower() == ".json":
-            return process_json(content)
-        else:
-            return process_text(content)
-            
-    except Exception as e:
-        result.errors.append(("E006", f"{ERROR_MESSAGES['E006']}: {str(e)}"))
-        result.confidence = 0
+        result = PipelineResult(
+            pipeline_name=pipeline_name,
+            status="success",
+            output_path=output_path,
+            confidence=0.95,
+            details={
+                "skills_executed": pipeline_def["skills"],
+                "skill_results": skill_results,
+                "params": params,
+            },
+        )
+        self.results.append(result)
         return result
 
+    def run_multi_pipeline(self, pipeline_names: List[str]) -> List[PipelineResult]:
+        """按顺序执行多条管线。"""
+        if not pipeline_names:
+            raise err("E001", "管线列表为空")
+        results = []
+        for name in pipeline_names:
+            results.append(self.run_pipeline(name))
+        return results
 
-def batch_process(items: List[str]) -> List[ProcessingResult]:
-    """
-    批量处理（规格第六章：进阶用法）
-    """
-    results = []
-    for item in items:
-        if item.startswith("file:"):
-            # 文件输入
-            filepath = item[5:]
-            results.append(process_file(filepath))
-        elif item.startswith("json:"):
-            # JSON 输入
-            json_str = item[5:]
-            results.append(process_json(json_str))
-        else:
-            # 文本输入
-            results.append(process_text(item))
-    return results
+    # ---- C4: 技能调度 ----
 
-
-# ============================================================
-# 自检功能（--selftest）
-# ============================================================
-
-def run_selftest() -> bool:
-    """
-    内置硬编码样例数据，离线自检核心逻辑
-    不读外部文件、不依赖当前工作目录、不访问网络
-    """
-    print("=" * 60)
-    print("openmontage 自检开始")
-    print("=" * 60)
-    
-    all_passed = True
-    
-    # 测试用例 1: 正常文本输入
-    print("\n[测试 1] 正常文本输入")
-    sample1 = """title: 测试视频
-description: 这是一个测试视频
-duration: 10分钟
-resolution: 1920x1080
-format: mp4
-source: local
-author: tester
-date: 2024-01-01
-content: 这是视频内容描述"""
-    
-    try:
-        result1 = process_text(sample1)
-        assert len(result1.errors) == 0, f"测试1失败: {result1.errors}"
-        assert result1.confidence >= 80, f"测试1失败: 置信度过低 {result1.confidence}"
-        assert "title" in result1.data, "测试1失败: 缺少 title 字段"
-        assert "duration" in result1.data, "测试1失败: 缺少 duration 字段"
-        print(f"  通过 (置信度: {result1.confidence}%)")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 2: JSON 输入
-    print("\n[测试 2] JSON 输入")
-    sample2 = json.dumps({
-        "title": "JSON测试",
-        "tags": ["test", "json"],
-        "duration": 5,
-        "format": "mp4"
-    })
-    
-    try:
-        result2 = process_json(sample2)
-        assert len(result2.errors) == 0, f"测试2失败: {result2.errors}"
-        assert result2.confidence >= 60, f"测试2失败: 置信度过低 {result2.confidence}"
-        assert result2.data.get("title") == "JSON测试", "测试2失败: title 不匹配"
-        print(f"  通过 (置信度: {result2.confidence}%)")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 3: 空输入应报错
-    print("\n[测试 3] 空输入处理")
-    try:
-        result3 = process_text("")
-        assert len(result3.errors) > 0, "测试3失败: 空输入应该报错"
-        assert result3.errors[0][0] == "E001", f"测试3失败: 错误码不匹配 {result3.errors[0][0]}"
-        print(f"  通过 (错误码: {result3.errors[0][0]})")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 4: 不完整输入（低置信度）
-    print("\n[测试 4] 不完整输入")
-    sample4 = "title: 只有标题"
-    try:
-        result4 = process_text(sample4)
-        assert result4.confidence >= 0, "测试4失败: 置信度应为非负"
-        assert result4.confidence <= 100, "测试4失败: 置信度不应超过100"
-        print(f"  通过 (置信度: {result4.confidence}%)")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 5: 批量处理
-    print("\n[测试 5] 批量处理")
-    items = [
-        "title: 批量1\ndescription: 第一个",
-        "title: 批量2\ndescription: 第二个",
-        "title: 批量3\ndescription: 第三个",
-    ]
-    try:
-        batch_results = batch_process(items)
-        assert len(batch_results) == 3, f"测试5失败: 批量结果数量不对 {len(batch_results)}"
-        for i, br in enumerate(batch_results):
-            assert br.confidence >= 0, f"测试5失败: 第{i+1}个结果置信度为负"
-        print(f"  通过 (共 {len(batch_results)} 个结果)")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 6: 格式化输出
-    print("\n[测试 6] 格式化输出")
-    sample6 = "title: 格式化测试\ndescription: 测试格式化功能"
-    try:
-        result6 = process_text(sample6)
-        formatted = format_output(result6)
-        assert "status" in formatted, "测试6失败: 缺少 status 字段"
-        assert "label" in formatted, "测试6失败: 缺少 label 字段"
-        assert formatted["status"] in ["直接输出", "建议复核", "需核实"], "测试6失败: status 值无效"
-        print(f"  通过 (status: {formatted['status']})")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 7: 置信度标注逻辑
-    print("\n[测试 7] 置信度标注逻辑")
-    sample7 = "title: 完整测试\ndescription: 完整描述\ncontent: 内容"
-    try:
-        result7 = process_text(sample7)
-        formatted7 = format_output(result7)
-        
-        # 宽松验证：置信度与标注的对应关系
-        if result7.confidence >= CONFIDENCE_HIGH:
-            assert formatted7["label"] == "正常", "测试7失败: 高置信度应标记为正常"
-        elif result7.confidence >= CONFIDENCE_MEDIUM:
-            assert formatted7["label"] == "建议复核", "测试7失败: 中置信度应标记为建议复核"
-        else:
-            assert formatted7["label"] == "[需核实]", "测试7失败: 低置信度应标记为需核实"
-        print(f"  通过 (置信度: {result7.confidence}%, 标签: {formatted7['label']})")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 8: 文件处理（使用临时文件，不依赖外部）
-    print("\n[测试 8] 文件处理")
-    try:
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as f:
-            f.write("title: 文件测试\ndescription: 从文件读取")
-            temp_path = f.name
-        
+    def execute_skill(self, skill_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
+        """直接执行指定技能。"""
+        if skill_name not in SKILL_REGISTRY:
+            raise err("E004", f"技能不存在: {skill_name}")
         try:
-            result8 = process_file(temp_path)
-            assert len(result8.errors) == 0, f"测试8失败: {result8.errors}"
-            assert "title" in result8.data, "测试8失败: 文件处理未提取到 title"
-            print(f"  通过 (title: {result8.data.get('title')})")
-        finally:
-            os.unlink(temp_path)
-    except Exception as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 9: 错误处理
-    print("\n[测试 9] 错误处理")
-    try:
-        result9 = process_file("/nonexistent/path/file.txt")
-        assert len(result9.errors) > 0, "测试9失败: 不存在的文件应该报错"
-        assert result9.errors[0][0] == "E006", f"测试9失败: 错误码不匹配 {result9.errors[0][0]}"
-        print(f"  通过 (错误码: {result9.errors[0][0]})")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 测试用例 10: 非法 JSON
-    print("\n[测试 10] 非法 JSON")
-    try:
-        result10 = process_json("{invalid json")
-        assert len(result10.errors) > 0, "测试10失败: 非法 JSON 应该报错"
-        assert result10.errors[0][0] == "E007", f"测试10失败: 错误码不匹配 {result10.errors[0][0]}"
-        print(f"  通过 (错误码: {result10.errors[0][0]})")
-    except AssertionError as e:
-        print(f"  失败: {e}")
-        all_passed = False
-    
-    # 汇总
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("自检全部通过 ✓")
-    else:
-        print("自检存在失败项 ✗")
-    print("=" * 60)
-    
-    return all_passed
+            return SKILL_REGISTRY[skill_name](params)
+        except Exception as e:
+            raise err("E007", f"技能 {skill_name} 执行失败: {e}")
+
+    # ---- C5: 结果校验输出 ----
+
+    def validate_results(self, results: List[PipelineResult]) -> bool:
+        """校验管线执行结果。"""
+        if not results:
+            raise err("E008", "没有可校验的结果")
+        for r in results:
+            if r.status != "success":
+                raise err("E008", f"管线 {r.pipeline_name} 状态异常: {r.status}")
+            if not (0.0 <= r.confidence <= 1.0):
+                raise err("E008", f"管线 {r.pipeline_name} 置信度非法: {r.confidence}")
+        return True
+
+    def export_json(self, results: List[PipelineResult]) -> str:
+        """导出结果为 JSON 字符串。"""
+        try:
+            data = [asdict(r) for r in results]
+            return json.dumps(data, ensure_ascii=False, indent=2)
+        except Exception as e:
+            raise err("E009", f"JSON 导出失败: {e}")
+
+    def export_csv(self, results: List[PipelineResult]) -> str:
+        """导出结果为 CSV 字符串。"""
+        try:
+            buf = io.StringIO()
+            writer = csv.writer(buf)
+            writer.writerow(["pipeline_name", "status", "output_path", "confidence"])
+            for r in results:
+                writer.writerow([r.pipeline_name, r.status, r.output_path, r.confidence])
+            return buf.getvalue()
+        except Exception as e:
+            raise err("E009", f"CSV 导出失败: {e}")
 
 
-# ============================================================
-# 命令行入口
-# ============================================================
+# ---------------------------------------------------------------------------
+# 命令行接口
+# ---------------------------------------------------------------------------
+
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        prog="openmontage",
+        description="开源智能视频生产系统 — 编排多管线与工具链，自动化完成视频制作流程。",
+        epilog="示例: python scripts/main.py --input sample.csv --pipeline rough_cut,color,subtitle --export json",
+    )
+    parser.add_argument("--input", type=str, help="输入文件路径（CSV/JSON/文本）")
+    parser.add_argument("--input-type", type=str, choices=["csv", "json", "script"], default="csv",
+                        help="输入文件类型（默认 csv）")
+    parser.add_argument("--pipeline", type=str, default="",
+                        help="要执行的管线，逗号分隔（如 rough_cut,color,subtitle）")
+    parser.add_argument("--skill", type=str, default="",
+                        help="直接执行单个技能（如 audio_denoise）")
+    parser.add_argument("--export", type=str, choices=["json", "csv"], default="json",
+                        help="导出格式（默认 json）")
+    parser.add_argument("--output", type=str, help="输出文件路径（默认打印到终端）")
+    parser.add_argument("--selftest", action="store_true", help="运行内置离线自检")
+    parser.add_argument("--list-pipelines", action="store_true", help="列出所有可用管线")
+    parser.add_argument("--list-skills", action="store_true", help="列出所有可用技能")
+    return parser
+
+
+def handle_selftest() -> int:
+    """内置自检：使用硬编码样例数据，不读外部文件、不依赖工作目录。"""
+    engine = OpenMontageEngine()
+
+    # ---- 1. C1: CSV 输入转换 ----
+    sample_csv = (
+        "source,media_type,duration,width,height\n"
+        "clip1.mp4,video,12.5,1920,1080\n"
+        "audio1.wav,audio,8.0,0,0\n"
+        "title.png,image,0,1280,720\n"
+        "sub1.srt,subtitle,10.0,0,0\n"
+    )
+    items = engine.load_from_csv(sample_csv)
+    assert len(items) >= 3, "CSV 转换应至少得到 3 个素材"
+    assert all(i.source for i in items), "素材 source 不能为空"
+    assert all(i.media_type for i in items), "素材 media_type 不能为空"
+    # 宽松验证：时长非负
+    assert all(i.duration >= 0 for i in items), "时长不能为负"
+
+    # ---- 2. C2: 场景提取 ----
+    sample_script = (
+        "场景1 [主角] 00:00-00:10 主角登场\n"
+        "SCENE 2 [配角] 00:15-00:30 对话\n"
+        "普通行不提取\n"
+        "场景3 00:40-01:00 高潮\n"
+    )
+    scenes = engine.extract_scenes(sample_script)
+    assert len(scenes) >= 2, "应至少提取 2 个场景"
+    # 宽松验证：场景 ID 非空，时间非负
+    assert all(s.scene_id for s in scenes), "场景 ID 不能为空"
+    assert all(s.start_time >= 0 for s in scenes), "场景开始时间不能为负"
+    assert all(s.end_time >= s.start_time for s in scenes), "场景结束时间应晚于开始时间"
+
+    # ---- 3. C3: 管线执行 ----
+    results = engine.run_multi_pipeline(["rough_cut", "subtitle", "audio"])
+    assert len(results) >= 2, "应至少执行 2 条管线"
+    assert all(r.status == "success" for r in results), "管线应全部成功"
+    assert all(r.confidence > 0.5 for r in results), "置信度应大于 0.5"
+
+    # ---- 4. C4: 技能调度 ----
+    skill_result = engine.execute_skill("audio_denoise", {"strength": 0.7})
+    assert skill_result.get("applied") is True, "技能应成功应用"
+    assert "strength" in skill_result, "技能结果应包含参数"
+
+    # 技能不存在时应抛出 E004
+    try:
+        engine.execute_skill("nonexistent_skill", {})
+        raise AssertionError("不应执行不存在的技能")
+    except OpenMontageError as e:
+        assert e.code == "E004", f"错误码应为 E004，实际 {e.code}"
+
+    # ---- 5. C5: 校验与导出 ----
+    assert engine.validate_results(results) is True, "结果校验应通过"
+
+    json_out = engine.export_json(results)
+    assert json_out and json_out.startswith("["), "JSON 导出应为数组"
+
+    csv_out = engine.export_csv(results)
+    assert "pipeline_name" in csv_out, "CSV 导出应包含表头"
+
+    # ---- 6. 管线/技能注册表 ----
+    assert len(PIPELINE_REGISTRY) >= 10, "应注册至少 10 条管线"
+    assert len(SKILL_REGISTRY) >= 3, "应注册至少 3 个技能"
+
+    # 错误处理验证
+    try:
+        engine.load_from_csv("")
+        raise AssertionError("空 CSV 应报错")
+    except OpenMontageError as e:
+        assert e.code in ("E002", "E005"), f"错误码应为 E002/E005，实际 {e.code}"
+
+    # 全部通过
+    print("[SELFTEST] 全部自检通过 ✓")
+    return 0
+
 
 def main() -> int:
-    """
-    主入口函数
-    """
-    parser = argparse.ArgumentParser(
-        description="openmontage - 未命名工具",
-        epilog="示例: python main.py --text 'title: 测试' 或 python main.py --selftest"
-    )
-    
-    # 输入方式
-    input_group = parser.add_mutually_exclusive_group()
-    input_group.add_argument("--text", type=str, help="直接输入文本内容")
-    input_group.add_argument("--json", type=str, help="直接输入 JSON 内容")
-    input_group.add_argument("--file", type=str, help="从文件读取内容")
-    input_group.add_argument("--selftest", action="store_true", help="运行自检")
-    
-    # 输出选项
-    parser.add_argument("--output", type=str, help="输出到文件")
-    parser.add_argument("--format", type=str, choices=["json", "text"], default="json",
-                       help="输出格式 (默认: json)")
-    
-    # 批量处理
-    parser.add_argument("--batch", type=str, nargs="+", help="批量处理多个输入")
-    
+    parser = build_parser()
     args = parser.parse_args()
-    
+
     # 自检模式
     if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
-    
-    # 批量处理
-    if args.batch:
-        results = batch_process(args.batch)
-        output_data = [format_output(r) for r in results]
-        
-        # 统一输出
-        if args.format == "json":
-            output_str = json.dumps(output_data, ensure_ascii=False, indent=2)
-        else:
-            lines = []
-            for i, r in enumerate(results, 1):
-                lines.append(f"结果 {i}: 置信度 {r.confidence}%")
-                lines.append(f"  数据: {json.dumps(r.data, ensure_ascii=False)}")
-                if r.warnings:
-                    lines.append(f"  警告: {', '.join(r.warnings)}")
-                if r.errors:
-                    lines.append(f"  错误: {', '.join(f'{code}: {msg}' for code, msg in r.errors)}")
-            output_str = "\n".join(lines)
-        
-        print(output_str)
-        
-        # 写入文件
-        if args.output:
-            try:
-                Path(args.output).write_text(output_str, encoding="utf-8")
-            except Exception:
-                print(f"错误 E008: {ERROR_MESSAGES['E008']}", file=sys.stderr)
-                return 8
+        return handle_selftest()
+
+    # 列出管线
+    if args.list_pipelines:
+        print("可用管线：")
+        for name, info in PIPELINE_REGISTRY.items():
+            print(f"  {name}: {info['description']}")
         return 0
-    
-    # 单条处理
-    result = None
-    
-    if args.text:
-        result = process_text(args.text)
-    elif args.json:
-        result = process_json(args.json)
-    elif args.file:
-        result = process_file(args.file)
-    else:
-        parser.print_help()
+
+    # 列出技能
+    if args.list_skills:
+        print("可用技能：")
+        for name in SKILL_REGISTRY:
+            print(f"  {name}")
         return 0
-    
-    # 格式化输出
-    formatted = format_output(result)
-    
-    if args.format == "json":
-        output_str = json.dumps(formatted, ensure_ascii=False, indent=2)
-    else:
-        lines = []
-        lines.append(f"状态: {formatted['status']} ({formatted['label']})")
-        lines.append(f"置信度: {result.confidence}%")
-        if result.data:
-            lines.append("数据:")
-            for key, value in result.data.items():
-                lines.append(f"  {key}: {value}")
-        if result.warnings:
-            lines.append(f"警告: {', '.join(result.warnings)}")
-        if result.errors:
-            lines.append("错误:")
-            for code, msg in result.errors:
-                lines.append(f"  {code}: {msg}")
-        output_str = "\n".join(lines)
-    
-    print(output_str)
-    
-    # 写入文件
-    if args.output:
+
+    engine = OpenMontageEngine()
+
+    # 执行单技能（无需输入文件）
+    if args.skill:
+        if not args.skill:
+            print("错误: --skill 需要技能名称", file=sys.stderr)
+            return 1
         try:
-            Path(args.output).write_text(output_str, encoding="utf-8")
-        except Exception:
-            print(f"错误 E008: {ERROR_MESSAGES['E008']}", file=sys.stderr)
-            return 8
-    
-    # 根据错误码返回退出状态
-    if result.errors:
-        error_code = result.errors[0][0]
-        return int(error_code[1:])  # E001 -> 1, E002 -> 2, etc.
-    
-    return 0
+            result = engine.execute_skill(args.skill, {})
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        except OpenMontageError as e:
+            print(f"错误: {e}", file=sys.stderr)
+            return 1
+
+    # 需要输入文件
+    if not args.input:
+        print("错误: 需要 --input 或 --selftest", file=sys.stderr)
+        parser.print_help(sys.stderr)
+        return 1
+
+    if not os.path.isfile(args.input):
+        print(f"错误: 输入文件不存在: {args.input}", file=sys.stderr)
+        return 1
+
+    try:
+        # 加载输入
+        with open(args.input, "r", encoding="utf-8") as f:
+            content = f.read()
+
+        if args.input_type == "csv":
+            engine.load_from_csv(content)
+        elif args.input_type == "json":
+            engine.load_from_json(content)
+        elif args.input_type == "script":
+            engine.extract_scenes(content)
+        else:
+            raise err("E001", f"不支持的输入类型: {args.input_type}")
+
+        # 执行管线
+        results: List[PipelineResult] = []
+        if args.pipeline:
+            pipeline_names = [p.strip() for p in args.pipeline.split(",") if p.strip()]
+            results = engine.run_multi_pipeline(pipeline_names)
+        else:
+            # 无管线时，仅输出输入解析结果
+            print(f"输入解析完成: {len(engine.media_items) or len(engine.scenes)} 条记录")
+            return 0
+
+        # 校验
+        engine.validate_results(results)
+
+        # 导出
+        if args.export == "json":
+            output_text = engine.export_json(results)
+        else:
+            output_text = engine.export_csv(results)
+
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(output_text)
+            print(f"结果已写入: {args.output}")
+        else:
+            print(output_text)
+
+        return 0
+
+    except OpenMontageError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"错误: [E010] 未知异常: {e}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
