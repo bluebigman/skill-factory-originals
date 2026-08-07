@@ -1,0 +1,81 @@
+---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
+slug: trae-skills
+name: trae-skills
+displayName: 技能导航 场景匹配 任务编排
+description: 面向开发者的技能检索、匹配与执行编排辅助工具。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/trae-skills
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: SkillForge Studio
+agent_created: true
+trigger_words: ["trae skills", "技能列表", "技能选择", "skill 匹配", "技能编排", "技能导航"]
+---
+
+> 📜 **用户协议（User Agreement）**
+> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
+> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
+> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+<!-- user-agreement-injected -->
+
+
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+# trae-skills 技能导航与任务编排助手
+
+## 一、能力边界速查卡
+
+### 1.1 能做什么
+
+| 编号 | 能力项 | 说明 | 典型场景 |
+|------|--------|------|----------|
+| C1 | 技能检索 | 根据关键词、场景、技术栈筛选匹配技能 | 用户说"帮我找个做前端性能优化的技能" |
+| C2 | 任务编排建议 | 将复杂任务拆解为多技能协作流程 | 用户说"我要从零搭建一个带后端的博客" |
+| C3 | 输入结构化 | 将 URL、文件路径、原始数据转换为可处理的结构化描述 | 用户粘贴一段日志或代码片段 |
+| C4 | 置信度标注 | 对匹配结果标注可信程度，区分确定与推测 | 匹配结果可能不唯一时 |
+| C5 | 批量处理 | 一次处理多个技能候选或多项输入 | 用户提交多个需求点 |
+
+### 1.2 不能做什么
+
+| 编号 | 限制项 | 说明 |
+|------|--------|------|
+| L1 | 不执行代码 | 本 Skill 仅提供导航与编排建议，不直接运行技能逻辑 |
+| L2 | 不保证结果 | 匹配结果受输入质量影响，不承诺"最优"或"唯一"解 |
+| L3 | 不替代文档 | 具体技能的使用细节以对应技能文档为准 |
+| L4 | 不处理敏感数据 | 涉及密钥、密码等敏感信息时，仅提示字段位置，不解析内容 |
+
+### 1.3 适用对象
+
+- **新手开发者**：不清楚有哪些技能可用，需要引导式推荐。
+- **进阶开发者**：有明确任务目标，需要多技能组合方案。
+- **技术管理者**：需要评估技能覆盖度，规划自动化流程。
+
+
+## 许可证（License）
+
+```text
+MIT License
+
+Copyright (c) 2026 SkillForge Lab
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+<!-- professional-license-embedded -->
