@@ -150,6 +150,7 @@ class ToolchainAssembler:
         # 构建依赖图
         graph: Dict[str, List[str]] = {}
         all_names: set = set()
+        tool_order: List[str] = []  # 保持原始顺序
 
         for tool in tools:
             name = tool.get("name")
@@ -158,6 +159,7 @@ class ToolchainAssembler:
             deps = tool.get("dependencies", [])
             graph[name] = list(deps)
             all_names.add(name)
+            tool_order.append(name)  # 记录原始顺序
             for dep in deps:
                 all_names.add(dep)
 
@@ -175,7 +177,8 @@ class ToolchainAssembler:
                 if dep in in_degree:
                     in_degree[dep] += 1
 
-        queue = [n for n, deg in in_degree.items() if deg == 0]
+        # 关键修复：按原始顺序选择入度为0的节点
+        queue = [n for n in tool_order if in_degree[n] == 0]
         exec_order: List[str] = []
 
         while queue:
@@ -185,7 +188,15 @@ class ToolchainAssembler:
                 if dep in in_degree:
                     in_degree[dep] -= 1
                     if in_degree[dep] == 0:
-                        queue.append(dep)
+                        # 按原始顺序插入
+                        idx = tool_order.index(dep)
+                        # 找到合适的位置插入
+                        insert_pos = len(queue)
+                        for i, q in enumerate(queue):
+                            if tool_order.index(q) > idx:
+                                insert_pos = i
+                                break
+                        queue.insert(insert_pos, dep)
 
         # 检测环
         if len(exec_order) != len(graph):
