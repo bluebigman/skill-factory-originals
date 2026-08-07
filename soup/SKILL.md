@@ -7,7 +7,7 @@ license: MIT
 slug: soup
 name: soup
 displayName: 未命名工具
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行soup相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+description: I suppose it's a document database. Or a tuple store. But really, it's just data sloshing around, waiting to be used.
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
