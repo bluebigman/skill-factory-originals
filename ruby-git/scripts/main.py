@@ -97,6 +97,12 @@ class GitOps:
         self.runner = GitRunner(repo_path)
         self.repo_path = repo_path
 
+    def _resolve_path(self, path: str) -> str:
+        """解析路径，如果指定了仓库目录则相对于仓库目录"""
+        if self.repo_path:
+            return str(Path(self.repo_path) / path)
+        return path
+
     # ---------- 仓库初始化 ----------
     def init(self, path: str) -> str:
         """初始化新 Git 仓库"""
@@ -118,10 +124,13 @@ class GitOps:
         """将文件加入暂存区"""
         if not files:
             error_exit("E001", "add 命令需要指定文件")
+        resolved_files = []
         for f in files:
-            if not Path(f).exists():
+            resolved = self._resolve_path(f)
+            if not Path(resolved).exists():
                 error_exit("E004", f"文件不存在: {f}")
-        self.runner.run(["add"] + files)
+            resolved_files.append(f)  # 传给 git 命令时使用相对路径
+        self.runner.run(["add"] + resolved_files)
         return f"已暂存: {', '.join(files)}"
 
     def add_all(self) -> str:
@@ -182,26 +191,17 @@ class GitOps:
         """添加远程仓库"""
         if not name or not url:
             error_exit("E001", "remote add 需要名称和 URL")
-        try:
-            self.runner.run(["remote", "add", name, url])
-        except SystemExit:
-            error_exit("E005", f"远程仓库添加失败: {name} -> {url}")
+        self.runner.run(["remote", "add", name, url])
         return f"远程仓库已添加: {name} -> {url}"
 
     def push(self, remote: str = "origin", branch: str = "HEAD") -> str:
         """推送到远程"""
-        try:
-            self.runner.run(["push", remote, branch])
-        except SystemExit:
-            error_exit("E005", f"推送失败: {remote}/{branch}")
+        self.runner.run(["push", remote, branch])
         return f"已推送到 {remote}/{branch}"
 
     def pull(self, remote: str = "origin", branch: str = "HEAD") -> str:
         """从远程拉取"""
-        try:
-            self.runner.run(["pull", remote, branch])
-        except SystemExit:
-            error_exit("E005", f"拉取失败: {remote}/{branch}")
+        self.runner.run(["pull", remote, branch])
         return f"已从 {remote}/{branch} 拉取"
 
     # ---------- 配置读取 ----------
@@ -214,10 +214,7 @@ class GitOps:
             cmd.append("--global")
         cmd.append("--get")
         cmd.append(key)
-        try:
-            return self.runner.run_simple(cmd)
-        except SystemExit:
-            error_exit("E006", f"配置项读取失败: {key}")
+        return self.runner.run_simple(cmd)
 
 
 # ============================================================
@@ -347,7 +344,7 @@ def run_selftest() -> None:
 
         # 3. 暂存文件
         ops = GitOps(temp_dir)
-        result = ops.add([str(test_file)])
+        result = ops.add(["test.txt"])  # 使用相对路径
         assert "已暂存" in result, f"暂存失败: {result}"
         print("[PASS] 文件暂存")
 

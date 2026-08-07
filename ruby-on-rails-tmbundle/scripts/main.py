@@ -327,7 +327,7 @@ def get_snippet(library: Dict[str, Snippet], key: str) -> None:
     print(snippet.code)
 
 
-def search_snippets(library: Dict[str, Snippet], keyword: str) -> None:
+def search_snippets(library: Dict[str, Snippet], keyword: str) -> List[Snippet]:
     """按关键词搜索片段（匹配标题、标签、描述、代码）。"""
     keyword_lower = keyword.lower()
 
@@ -353,6 +353,8 @@ def search_snippets(library: Dict[str, Snippet], keyword: str) -> None:
         print(f"    标签: {', '.join(snippet.tags)}")
         print(f"    描述: {snippet.description}")
         print()
+
+    return results
 
 
 def export_json(library: Dict[str, Snippet], output_path: str) -> None:
@@ -406,7 +408,7 @@ def run_selftest() -> None:
     for key in required_keys:
         if key not in library:
             fail("E007", f"缺少关键片段: {key}")
-    print(f"[通过] 关键片段完整性检查")
+    print("[通过] 关键片段完整性检查")
 
     # 3. 验证片段内容非空
     for key, snippet in library.items():
