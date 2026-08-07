@@ -29,6 +29,7 @@ import json
 import os
 import re
 import sys
+import tempfile
 import urllib.parse
 from datetime import datetime
 from pathlib import Path
@@ -372,13 +373,15 @@ class PDFConverter:
         query_params = urllib.parse.parse_qs(parsed.query)
         param_text = " ".join([f"{k}={v[0]}" for k, v in query_params.items()])
         
+        # 构建一个结构化的文本内容，确保能提取出标题和内容
         info_parts = [
-            f"[URL] {parsed.netloc}",
+            f"标题: {file_name if file_name else parsed.netloc}",
+            f"域名: {parsed.netloc}",
             f"路径: {parsed.path or '/'}",
         ]
         
         if file_name:
-            info_parts.append(f"文件: {file_name}")
+            info_parts.append(f"文件名: {file_name}")
         
         if param_text:
             info_parts.append(f"参数: {param_text}")
@@ -386,7 +389,12 @@ class PDFConverter:
         if parsed.fragment:
             info_parts.append(f"锚点: {parsed.fragment}")
         
-        return " ".join(info_parts)
+        # 添加内容描述，确保有足够的文本内容
+        info_parts.append(f"这是一个来自 {parsed.netloc} 的文档链接")
+        info_parts.append(f"文档路径为 {parsed.path or '/'}")
+        info_parts.append(f"文档相关信息包括文件名、路径和参数等元数据")
+        
+        return "\n".join(info_parts)
     
     def _parse_content(self, content: str) -> Dict[str, Any]:
         """解析内容，提取结构化信息
@@ -519,15 +527,14 @@ class PDFConverter:
         
         # 跳过标题行和元数据行
         content_lines = []
-        start_idx = 0
         
         for i, line in enumerate(lines):
-            # 跳过标题和元数据
+            # 跳过第一行（标题）
             if i == 0:
                 continue
             
             # 跳过明显的元数据行
-            if re.match(r'^(作者|日期|关键词|摘要|reference|author|date|keywords|summary)[：:\s]', line, re.IGNORECASE):
+            if re.match(r'^(作者|日期|关键词|摘要|reference|author|date|keywords|summary|域名|路径|文件名|参数|锚点)[：:\s]', line, re.IGNORECASE):
                 continue
             
             # 跳过分隔线
@@ -541,6 +548,14 @@ class PDFConverter:
                 break
         
         content = "\n".join(content_lines).strip()
+        
+        # 如果内容为空，使用所有非元数据行
+        if not content:
+            content_lines = []
+            for line in lines[1:]:  # 跳过标题
+                if not re.match(r'^(作者|日期|关键词|摘要|reference|author|date|keywords|summary|域名|路径|文件名|参数|锚点)[：:\s]', line, re.IGNORECASE):
+                    content_lines.append(line)
+            content = "\n".join(content_lines).strip()
         
         # 限制内容长度
         if len(content) > 2000:
@@ -744,16 +759,16 @@ def run_selftest() -> bool:
         
         # ========== 测试 2: 文件路径处理 ==========
         print("\n[测试 2] 文件路径处理")
-        sample_file = "sample_document.txt"
-        # 创建临时测试文件（在临时目录中）
-        import tempfile
+        # 创建临时测试文件
         with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as f:
-            f.write("测试文档\n\n这是一段测试内容，用于验证文件处理功能。\n")
+            f.write("测试文档\n\n这是一段测试内容，用于验证文件处理功能。\n作者：测试作者\n")
             temp_file_path = f.name
         
         try:
             file_result = converter.process(temp_file_path, input_type=INPUT_TYPE_FILE)
             assert "data" in file_result, "文件处理结果缺少数据"
+            assert "title" in file_result["data"], "文件处理结果缺少标题"
+            assert "content" in file_result["data"], "文件处理结果缺少内容"
             print(f"  ✓ 文件处理成功, 标题: {file_result['data'].get('title', 'N/A')}")
         finally:
             # 清理临时文件
@@ -764,7 +779,9 @@ def run_selftest() -> bool:
         sample_url = "https://example.com/docs/sample.pdf?version=2&lang=zh"
         url_result = converter.process(sample_url, input_type=INPUT_TYPE_URL)
         assert "data" in url_result, "URL处理结果缺少数据"
-        print(f"  ✓ URL处理成功, 内容: {url_result['data'].get('content', '')[:50]}...")
+        assert "title" in url_result["data"], "URL处理结果缺少标题"
+        assert "content" in url_result["data"], "URL处理结果缺少内容"
+        print(f"  ✓ URL处理成功, 标题: {url_result['data'].get('title', 'N/A')}")
         
         # ========== 测试 4: 批量处理 ==========
         print("\n[测试 4] 批量处理")
