@@ -165,6 +165,7 @@ class MarketingSkillProcessor:
             r"名称[:：]\s*(\S+)",
             r"name[:：]\s*(\S+)",
             r"标题[:：]\s*(\S+)",
+            r"产品名称[:：]\s*(\S+)",
         ]
         for pattern in name_patterns:
             match = re.search(pattern, content, re.IGNORECASE)
@@ -172,17 +173,31 @@ class MarketingSkillProcessor:
                 fields["name"] = match.group(1)
                 break
 
-        # 提取数值（价格、数量等）
-        number_patterns = [
+        # 提取价格（多种格式）
+        price_patterns = [
             r"价格[:：]\s*(\d+\.?\d*)",
-            r"数量[:：]\s*(\d+)",
+            r"售价[:：]\s*(\d+\.?\d*)",
+            r"price[:：]\s*(\d+\.?\d*)",
             r"金额[:：]\s*(\d+\.?\d*)",
+            r"¥\s*(\d+\.?\d*)",
+            r"￥\s*(\d+\.?\d*)",
         ]
-        for pattern in number_patterns:
+        for pattern in price_patterns:
             match = re.search(pattern, content, re.IGNORECASE)
             if match:
-                key = pattern.split("[:：]")[0].lower()
-                fields[key] = float(match.group(1))
+                fields["价格"] = float(match.group(1))
+                break
+
+        # 提取数量
+        quantity_patterns = [
+            r"数量[:：]\s*(\d+)",
+            r"quantity[:：]\s*(\d+)",
+            r"库存[:：]\s*(\d+)",
+        ]
+        for pattern in quantity_patterns:
+            match = re.search(pattern, content, re.IGNORECASE)
+            if match:
+                fields["数量"] = int(match.group(1))
                 break
 
         # 提取 URL
@@ -204,6 +219,11 @@ class MarketingSkillProcessor:
         tags = re.findall(r"@(\w+)", content)
         if tags:
             fields["tags"] = tags
+
+        # 提取日期
+        date_match = re.search(r"(\d{4}[-/]\d{1,2}[-/]\d{1,2})", content)
+        if date_match:
+            fields["date"] = date_match.group(1)
 
         return fields
 
