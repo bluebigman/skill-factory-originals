@@ -212,7 +212,7 @@ class PaperNoteGenerator:
 
         # 1. 概览章节
         overview_conf = 0.95 if paper.title and paper.authors else 0.80
-        overview = self.SECTION_TEMPLATES[0].format(
+        overview = self.SECTION_TEMPLATES[0][1].format(
             title=paper.title or "未命名",
             authors=", ".join(paper.authors) if paper.authors else "未知",
             year=paper.year or "未知",
@@ -224,7 +224,7 @@ class PaperNoteGenerator:
         # 2. 研究背景与动机
         topic = self._extract_topic(paper)
         bg_conf = 0.85 if topic else 0.70
-        background = self.SECTION_TEMPLATES[1].format(
+        background = self.SECTION_TEMPLATES[1][1].format(
             topic=topic or "论文主题",
             confidence=f"{bg_conf:.0%}",
         )
@@ -233,7 +233,7 @@ class PaperNoteGenerator:
         # 3. 方法/核心贡献
         method = self._extract_method(paper, raw_input)
         method_conf = 0.80 if method != "未明确提及" else 0.60
-        method_section = self.SECTION_TEMPLATES[2].format(
+        method_section = self.SECTION_TEMPLATES[2][1].format(
             method_desc=method,
             confidence=f"{method_conf:.0%}",
         )
@@ -242,7 +242,7 @@ class PaperNoteGenerator:
         # 4. 主要结论
         conclusion = self._extract_conclusion(paper, raw_input)
         concl_conf = 0.75 if conclusion != "未明确提及" else 0.55
-        concl_section = self.SECTION_TEMPLATES[3].format(
+        concl_section = self.SECTION_TEMPLATES[3][1].format(
             conclusion=conclusion,
             confidence=f"{concl_conf:.0%}",
         )
@@ -252,7 +252,7 @@ class PaperNoteGenerator:
         think_points = self._extract_think_points(paper)
         reusable = "论文的框架结构、分析方法、实验设计"
         think_conf = 0.70
-        think_section = self.SECTION_TEMPLATES[4].format(
+        think_section = self.SECTION_TEMPLATES[4][1].format(
             think_points=think_points,
             reusable=reusable,
         )
