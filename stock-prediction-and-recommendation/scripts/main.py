@@ -27,7 +27,7 @@ import math
 import os
 import sys
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 # 版本与元数据（对应规格中的元数据）
 SKILL_NAME = "stock-prediction-and-recommendation"
