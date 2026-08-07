@@ -56,6 +56,9 @@ CONFIDENCE_MEDIUM = 0.85    # 建议复核
 # 支持的输出格式
 SUPPORTED_FORMATS = ("json", "text")
 
+# 支持的输入来源
+SUPPORTED_SOURCES = ("text", "file", "url")
+
 # 触发词（依据功能规格第二节）
 TRIGGER_WORDS = ("视频字幕", "auto subtitles")
 
@@ -121,6 +124,20 @@ def validate_input(raw_text: str) -> Optional[str]:
     # 这里简单判定：长度小于 2 视为信息不足
     if len(raw_text.strip()) < 2:
         return "E002"
+    
+    return None
+
+
+def validate_source(source: str) -> Optional[str]:
+    """
+    验证输入来源是否合法
+    
+    返回：
+        None 表示通过
+        错误码字符串表示失败原因
+    """
+    if source not in SUPPORTED_SOURCES:
+        return "E003"
     
     return None
 
@@ -275,6 +292,11 @@ def process_single_input(raw_text: str, source: str = "text") -> OutputResult:
     if error_code:
         raise ValueError(error_code)
     
+    # 来源验证
+    error_code = validate_source(source)
+    if error_code:
+        raise ValueError(error_code)
+    
     # 创建数据结构
     data = InputData(raw_text, source)
     
@@ -396,22 +418,15 @@ def run_selftest() -> bool:
             assert str(e) == "E001", f"预期 E001，实际 {e}"
             print(f"  通过 - 正确触发 E001: {ERROR_MESSAGES['E001']}")
         
-        # 测试用例 3: 输入格式错误（应触发 E003）
+        # 测试用例 3: 格式错误处理（应触发 E003）
         print("\n[测试 3] 格式错误处理（应触发 E003）")
         try:
-            # 无效的输出格式
+            # 无效的输入来源
             process_single_input("测试内容", source="invalid_source")
-            assert False, "无效来源应抛出错误"
-        except ValueError:
-            # 这里实际上不会触发 E003，因为我们不校验 source
-            # 改为测试输出格式
-            result = process_single_input("测试内容")
-            try:
-                format_output(result, "xml")
-                assert False, "不支持的格式应抛出 E006"
-            except ValueError as e:
-                assert str(e) == "E006", f"预期 E006，实际 {e}"
-                print(f"  通过 - 正确触发 E006: {ERROR_MESSAGES['E006'].format(fmt='xml')}")
+            assert False, "无效来源应抛出 E003 错误"
+        except ValueError as e:
+            assert str(e) == "E003", f"预期 E003，实际 {e}"
+            print(f"  通过 - 正确触发 E003: {ERROR_MESSAGES['E003'].format(example='text/file/url')}")
         
         # 测试用例 4: 批量处理
         print("\n[测试 4] 批量处理")
@@ -458,6 +473,24 @@ def run_selftest() -> bool:
         for code in expected_codes:
             assert code in ERROR_MESSAGES, f"缺少错误码 {code}"
         print(f"  通过 - 错误码体系完整（{len(expected_codes)} 个错误码）")
+        
+        # 测试用例 9: 来源验证
+        print("\n[测试 9] 来源验证")
+        # 有效的来源
+        for src in SUPPORTED_SOURCES:
+            result = process_single_input("测试内容", source=src)
+            assert result.data.source == src, f"来源 {src} 应被接受"
+        print(f"  通过 - 支持来源: {', '.join(SUPPORTED_SOURCES)}")
+        
+        # 测试用例 10: 格式错误处理（应触发 E006）
+        print("\n[测试 10] 不支持的输出格式（应触发 E006）")
+        try:
+            result = process_single_input("测试内容")
+            format_output(result, "xml")
+            assert False, "不支持的格式应抛出 E006"
+        except ValueError as e:
+            assert str(e) == "E006", f"预期 E006，实际 {e}"
+            print(f"  通过 - 正确触发 E006: {ERROR_MESSAGES['E006'].format(fmt='xml')}")
         
         print("\n" + "=" * 50)
         print("自检全部通过 ✓")
