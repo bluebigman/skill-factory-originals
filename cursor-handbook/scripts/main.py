@@ -324,12 +324,510 @@ def convert_to_skill(rules: List[RuleEntry], template: Optional[str] = None) -> 
         applies_str = ", ".join(rule.applies_to) if rule.applies_to else "全部"
         refs_str = ", ".join(rule.references) if rule.references else "无"
         
-        rules_md.append(f"""
-### {rule.rule_id}: {rule.name}
+        rule_md = "### " + rule.rule_id + ": " + rule.name + "\n\n"
+        rule_md += "- **优先级**: " + rule.priority + "\n"
+        rule_md += "- **标签**: " + tags_str + "\n"
+        rule_md += "- **适用文件**: " + applies_str + "\n"
+        rule_md += "- **引用规则**: " + refs_str + "\n\n"
+        rule_md += "**描述**: " + rule.description + "\n"
+        
+        if rule.content:
+            rule_md += "\n**内容**:\n" + rule.content + "\n"
+        
+        rules_md.append(rule_md)
+    
+    rules_section = "\n".join(rules_md)
+    
+    # 生成完整的 SKILL.md 文档
+    if template:
+        # 使用自定义模板
+        return template.replace("{rules}", rules_section)
+    
+    # 默认模板
+    skill_doc = "# Cursor 规则技能手册\n\n"
+    skill_doc += "> 本手册由 cursor-handbook 工具自动生成\n\n"
+    skill_doc += "## 规则总览\n\n"
+    skill_doc += "共 " + str(len(rules)) + " 条规则\n\n"
+    skill_doc += "## 规则详情\n\n"
+    skill_doc += rules_section
+    
+    return skill_doc
 
-- **优先级**: {rule.priority}
-- **标签**: {tags_str}
-- **适用文件**: {applies_str}
-- **引用规则**: {refs_str}
 
-**描述**: {rule.description}
+# ============================================================
+# 查询模块
+# ============================================================
+
+def query_rules(
+    rules: List[RuleEntry],
+    keyword: Optional[str] = None,
+    tag: Optional[str] = None,
+    priority: Optional[str] = None
+) -> List[RuleEntry]:
+    """
+    根据条件查询规则。
+    
+    参数:
+        rules: 规则列表
+        keyword: 关键词（匹配名称或描述）
+        tag: 场景标签
+        priority: 优先级（high/medium/low）
+    
+    返回:
+        匹配的规则列表
+    """
+    # E009: 查询条件为空
+    if not keyword and not tag and not priority:
+        raise RuntimeError("E009: 查询条件为空，至少提供一个查询条件")
+    
+    results = []
+    for rule in rules:
+        match = True
+        
+        if keyword:
+            kw_lower = keyword.lower()
+            if kw_lower not in rule.name.lower() and kw_lower not in rule.description.lower():
+                match = False
+        
+        if match and tag:
+            if tag not in rule.tags:
+                match = False
+        
+        if match and priority:
+            if rule.priority != priority:
+                match = False
+        
+        if match:
+            results.append(rule)
+    
+    return results
+
+
+# ============================================================
+# 执行辅助模块
+# ============================================================
+
+def build_steps(rules: List[RuleEntry]) -> List[Dict[str, Any]]:
+    """
+    根据规则生成操作步骤清单。
+    
+    参数:
+        rules: 规则列表
+    
+    返回:
+        步骤清单，每步包含 rule_id, action, details
+    """
+    steps = []
+    
+    for rule in rules:
+        # 从规则描述中提取操作要点
+        description = rule.description.lower()
+        
+        # 判断操作类型
+        if "禁止" in description or "不要" in description:
+            action = "避免"
+        elif "必须" in description or "需要" in description:
+            action = "执行"
+        elif "建议" in description:
+            action = "考虑"
+        else:
+            action = "检查"
+        
+        step = {
+            "rule_id": rule.rule_id,
+            "name": rule.name,
+            "action": action,
+            "details": rule.description,
+            "priority": rule.priority
+        }
+        steps.append(step)
+    
+    return steps
+
+
+# ============================================================
+# 输出模块
+# ============================================================
+
+def output_rules(rules: List[RuleEntry], output_format: str = "json") -> str:
+    """
+    将规则列表序列化为指定格式。
+    
+    参数:
+        rules: 规则列表
+        output_format: json / yaml / markdown
+    
+    返回:
+        序列化后的字符串
+    """
+    if output_format == "json":
+        return json.dumps([r.to_dict() for r in rules], ensure_ascii=False, indent=2)
+    
+    elif output_format == "yaml":
+        # 简单的 YAML 生成（不依赖外部库）
+        yaml_lines = []
+        for rule in rules:
+            yaml_lines.append(f"- rule_id: {rule.rule_id}")
+            yaml_lines.append(f"  name: {rule.name}")
+            yaml_lines.append(f"  description: {rule.description}")
+            yaml_lines.append(f"  priority: {rule.priority}")
+            yaml_lines.append(f"  tags: [{', '.join(rule.tags)}]")
+            yaml_lines.append(f"  applies_to: [{', '.join(rule.applies_to)}]")
+            yaml_lines.append(f"  references: [{', '.join(rule.references)}]")
+            yaml_lines.append("")
+        return "\n".join(yaml_lines)
+    
+    elif output_format == "markdown":
+        return convert_to_skill(rules)
+    
+    else:
+        raise RuntimeError(f"E008: 不支持的输出格式: {output_format}")
+
+
+# ============================================================
+# 自检模块
+# ============================================================
+
+def run_selftest() -> bool:
+    """
+    运行离线自检，验证各模块功能正常。
+    
+    返回:
+        True 如果所有测试通过，否则 False
+    """
+    print("="*60)
+    print("cursor-handbook 自检开始")
+    print("="*60)
+    
+    all_passed = True
+    
+    # 1. 测试解析模块
+    print("\n[1/6] 测试解析模块...")
+    try:
+        # 创建临时测试文件
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmpdir:
+            test_file = Path(tmpdir) / "test_rule.mdc"
+            test_content = """---
+id: R001
+name: 测试规则
+description: 这是一条用于测试的规则
+priority: high
+tags: [测试, 示例]
+applies_to: [*.py, *.md]
+references: [R002]
+---
+这是规则的具体内容描述。
+"""
+            test_file.write_text(test_content, encoding="utf-8")
+            
+            rule = parse_rule_file(str(test_file))
+            assert rule.rule_id == "R001", "rule_id 解析失败"
+            assert rule.name == "测试规则", "name 解析失败"
+            assert rule.priority == "high", "priority 解析失败"
+            assert "测试" in rule.tags, "tags 解析失败"
+            assert "*.py" in rule.applies_to, "applies_to 解析失败"
+            assert "R002" in rule.references, "references 解析失败"
+            print("  ✓ 解析模块测试通过")
+    except Exception as exc:
+        print(f"  ✗ 解析模块测试失败: {exc}")
+        all_passed = False
+    
+    # 2. 测试校验模块
+    print("\n[2/6] 测试校验模块...")
+    try:
+        # 创建测试规则
+        test_rules = [
+            RuleEntry(
+                rule_id="R001",
+                name="测试规则1",
+                description="描述1",
+                priority="high",
+                tags=["测试"],
+                references=["R002"]
+            ),
+            RuleEntry(
+                rule_id="R002",
+                name="测试规则2",
+                description="描述2",
+                priority="medium",
+                tags=["测试"],
+                references=[]
+            )
+        ]
+        
+        report = validate_rules(test_rules)
+        assert report.passed, "有效规则校验不应失败"
+        assert report.total_rules == 2, "规则数量统计错误"
+        print("  ✓ 校验模块测试通过")
+    except Exception as exc:
+        print(f"  ✗ 校验模块测试失败: {exc}")
+        all_passed = False
+    
+    # 3. 测试转换模块
+    print("\n[3/6] 测试转换模块...")
+    try:
+        test_rules = [
+            RuleEntry(
+                rule_id="R001",
+                name="测试规则1",
+                description="描述1",
+                priority="high",
+                tags=["测试"],
+                content="内容1"
+            )
+        ]
+        skill_md = convert_to_skill(test_rules)
+        assert "R001" in skill_md, "转换结果缺少规则ID"
+        assert "测试规则1" in skill_md, "转换结果缺少规则名称"
+        assert "描述1" in skill_md, "转换结果缺少规则描述"
+        print("  ✓ 转换模块测试通过")
+    except Exception as exc:
+        print(f"  ✗ 转换模块测试失败: {exc}")
+        all_passed = False
+    
+    # 4. 测试查询模块
+    print("\n[4/6] 测试查询模块...")
+    try:
+        test_rules = [
+            RuleEntry(
+                rule_id="R001",
+                name="前端安全规则",
+                description="确保前端代码安全",
+                priority="high",
+                tags=["前端", "安全"]
+            ),
+            RuleEntry(
+                rule_id="R002",
+                name="数据库优化规则",
+                description="优化数据库查询性能",
+                priority="medium",
+                tags=["数据库", "性能"]
+            )
+        ]
+        
+        # 按关键词查询
+        results = query_rules(test_rules, keyword="安全")
+        assert len(results) == 1, "关键词查询失败"
+        assert results[0].rule_id == "R001", "关键词查询结果错误"
+        
+        # 按标签查询
+        results = query_rules(test_rules, tag="数据库")
+        assert len(results) == 1, "标签查询失败"
+        assert results[0].rule_id == "R002", "标签查询结果错误"
+        
+        # 按优先级查询
+        results = query_rules(test_rules, priority="high")
+        assert len(results) == 1, "优先级查询失败"
+        
+        print("  ✓ 查询模块测试通过")
+    except Exception as exc:
+        print(f"  ✗ 查询模块测试失败: {exc}")
+        all_passed = False
+    
+    # 5. 测试执行辅助模块
+    print("\n[5/6] 测试执行辅助模块...")
+    try:
+        test_rules = [
+            RuleEntry(
+                rule_id="R001",
+                name="禁止使用eval",
+                description="禁止在生产代码中使用eval函数",
+                priority="high"
+            ),
+            RuleEntry(
+                rule_id="R002",
+                name="必须使用类型注解",
+                description="所有函数必须添加类型注解",
+                priority="medium"
+            )
+        ]
+        
+        steps = build_steps(test_rules)
+        assert len(steps) == 2, "步骤数量错误"
+        assert steps[0]["action"] == "避免", "禁止类规则动作判断错误"
+        assert steps[1]["action"] == "执行", "必须类规则动作判断错误"
+        print("  ✓ 执行辅助模块测试通过")
+    except Exception as exc:
+        print(f"  ✗ 执行辅助模块测试失败: {exc}")
+        all_passed = False
+    
+    # 6. 测试输出模块
+    print("\n[6/6] 测试输出模块...")
+    try:
+        test_rules = [
+            RuleEntry(
+                rule_id="R001",
+                name="测试规则",
+                description="测试描述",
+                priority="high",
+                tags=["测试"]
+            )
+        ]
+        
+        # JSON 输出
+        json_output = output_rules(test_rules, "json")
+        assert "R001" in json_output, "JSON输出失败"
+        
+        # Markdown 输出
+        md_output = output_rules(test_rules, "markdown")
+        assert "R001" in md_output, "Markdown输出失败"
+        
+        # YAML 输出
+        yaml_output = output_rules(test_rules, "yaml")
+        assert "R001" in yaml_output, "YAML输出失败"
+        
+        print("  ✓ 输出模块测试通过")
+    except Exception as exc:
+        print(f"  ✗ 输出模块测试失败: {exc}")
+        all_passed = False
+    
+    # 汇总结果
+    print("\n" + "="*60)
+    if all_passed:
+        print("自检通过：所有模块功能正常 ✓")
+    else:
+        print("自检失败：存在未通过的功能模块 ✗")
+    print("="*60)
+    
+    return all_passed
+
+
+# ============================================================
+# 主程序
+# ============================================================
+
+def main():
+    """主入口函数"""
+    parser = argparse.ArgumentParser(
+        description="cursor-handbook: Cursor规则 结构化转换 技能手册",
+        epilog="示例: python main.py rules/ --output output.md --format markdown"
+    )
+    
+    parser.add_argument(
+        "input",
+        nargs="?",
+        help="规则文件或目录路径"
+    )
+    
+    parser.add_argument(
+        "--output",
+        "-o",
+        help="输出文件路径"
+    )
+    
+    parser.add_argument(
+        "--format",
+        "-f",
+        choices=["json", "yaml", "markdown"],
+        default="json",
+        help="输出格式 (默认: json)"
+    )
+    
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行离线自检"
+    )
+    
+    parser.add_argument(
+        "--query",
+        "-q",
+        help="查询关键词"
+    )
+    
+    parser.add_argument(
+        "--tag",
+        help="按标签查询"
+    )
+    
+    parser.add_argument(
+        "--priority",
+        choices=["high", "medium", "low"],
+        help="按优先级查询"
+    )
+    
+    parser.add_argument(
+        "--validate",
+        action="store_true",
+        help="仅校验规则，不生成输出"
+    )
+    
+    args = parser.parse_args()
+    
+    # 运行自检
+    if args.selftest:
+        success = run_selftest()
+        sys.exit(0 if success else 1)
+    
+    # 检查是否提供了输入
+    if not args.input:
+        parser.print_help()
+        sys.exit(1)
+    
+    try:
+        # 解析规则
+        input_path = Path(args.input)
+        if input_path.is_dir():
+            rules = parse_rule_directory(args.input)
+        else:
+            rules = [parse_rule_file(args.input)]
+        
+        if not rules:
+            print("未找到有效的规则文件", file=sys.stderr)
+            sys.exit(1)
+        
+        # 校验规则
+        report = validate_rules(rules)
+        
+        if args.validate:
+            # 仅输出校验报告
+            print(json.dumps(report.to_dict(), ensure_ascii=False, indent=2))
+            sys.exit(0 if report.passed else 1)
+        
+        # 查询过滤
+        if args.query or args.tag or args.priority:
+            try:
+                rules = query_rules(
+                    rules,
+                    keyword=args.query,
+                    tag=args.tag,
+                    priority=args.priority
+                )
+            except RuntimeError as exc:
+                print(f"查询失败: {exc}", file=sys.stderr)
+                sys.exit(1)
+        
+        # 生成输出
+        output_content = output_rules(rules, args.format)
+        
+        # 输出到文件或标准输出
+        if args.output:
+            output_path = Path(args.output)
+            try:
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                output_path.write_text(output_content, encoding="utf-8")
+                print(f"输出已写入: {output_path}")
+            except Exception as exc:
+                print(f"E007: 输出目录不可写: {output_path.parent} - {exc}", file=sys.stderr)
+                sys.exit(1)
+        else:
+            print(output_content)
+        
+        # 如果有警告，打印到 stderr
+        if not report.passed:
+            print("\n[警告] 存在规则校验问题:", file=sys.stderr)
+            for issue in report.issues:
+                if issue.severity == "warning":
+                    print(f"  - {issue.message}", file=sys.stderr)
+        
+    except RuntimeError as exc:
+        print(f"错误: {exc}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as exc:
+        print(f"E010: 内部错误: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
