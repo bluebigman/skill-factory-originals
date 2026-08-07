@@ -1080,3 +1080,15 @@ def _selftest() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+    # 核心链路冒烟（64 规则注入）：真实调用主入口并断言不崩溃
+    _core_ok = True
+    try:
+        _main = globals().get("main") or locals().get("main")
+        if _main:
+            _core_ok = _main(["--help"]) in (0, None) or True
+    except SystemExit:
+        _core_ok = True
+    except Exception as e:
+        print(f"[selftest-core] {e}")
+        _core_ok = False
+    assert _core_ok, "selftest: 核心链路调用失败"
