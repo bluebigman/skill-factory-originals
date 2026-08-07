@@ -153,8 +153,8 @@ class SkillProcessor:
             try:
                 return json.loads(raw_input)
             except json.JSONDecodeError:
-                # 不是 JSON，按纯文本处理
-                return {"text": raw_input}
+                # 不是 JSON，按纯文本处理，返回特殊标记
+                return {"__text__": raw_input}
 
         # 如果是字典或列表，直接使用
         if isinstance(raw_input, (dict, list)):
@@ -175,6 +175,13 @@ class SkillProcessor:
         """
         extracted = {}
 
+        # 处理纯文本（通过特殊标记识别）
+        if isinstance(parsed_data, dict) and "__text__" in parsed_data:
+            text = parsed_data["__text__"]
+            extracted["content"] = text
+            extracted["length"] = len(text)
+            return extracted
+
         # 处理字典类型
         if isinstance(parsed_data, dict):
             for key, label in self.KEY_FIELDS.items():
@@ -185,7 +192,7 @@ class SkillProcessor:
 
             # 保留其他可能有用的字段
             for key, value in parsed_data.items():
-                if key not in extracted and key not in self.KEY_FIELDS.values():
+                if key not in extracted and key not in self.KEY_FIELDS.values() and key != "__text__":
                     extracted[key] = value
 
         # 处理列表类型
@@ -193,11 +200,10 @@ class SkillProcessor:
             extracted["items"] = parsed_data
             extracted["count"] = len(parsed_data)
 
-        # 处理纯文本
-        elif isinstance(parsed_data, dict) and "text" in parsed_data:
-            text = parsed_data["text"]
-            extracted["content"] = text
-            extracted["length"] = len(text)
+        # 处理其他类型
+        else:
+            extracted["content"] = str(parsed_data)
+            extracted["length"] = len(str(parsed_data))
 
         return extracted
 
@@ -218,7 +224,11 @@ class SkillProcessor:
         base_confidence = 0.75
 
         # 根据提取的信息量调整
-        info_ratio = len(extracted) / max(len(original) if isinstance(original, dict) else 1, 1)
+        if isinstance(original, dict):
+            info_ratio = len(extracted) / max(len(original), 1)
+        else:
+            info_ratio = len(extracted) / max(len(extracted), 1)
+
         confidence = base_confidence + (info_ratio * 0.25)
 
         # 限制在合理范围
@@ -268,110 +278,118 @@ def run_selftest() -> bool:
     processor = SkillProcessor()
     all_passed = True
 
-    # 测试用例1：正常数据处理
-    print("\n[测试 1] 正常数据处理")
-    sample_data = {
-        "name": "测试技能",
-        "version": "1.0.0",
-        "slug": "test-skill",
-        "description": "用于测试的技能",
-        "author": "test-author",
-    }
-    result = processor.process(sample_data, "json")
+    try:
+        # 测试用例1：正常数据处理
+        print("\n[测试 1] 正常数据处理")
+        sample_data = {
+            "name": "测试技能",
+            "version": "1.0.0",
+            "slug": "test-skill",
+            "description": "用于测试的技能",
+            "author": "test-author",
+        }
+        result = processor.process(sample_data, "json")
 
-    # 宽松断言：只要成功且置信度在合理范围即可
-    assert result.success, f"测试 1 失败: 处理未成功"
-    assert result.confidence > 0.5, f"测试 1 失败: 置信度过低"
-    assert result.data is not None, f"测试 1 失败: 输出为空"
-    assert "processed_data" in result.data, f"测试 1 失败: 输出缺少 processed_data"
-    print(f"  ✓ 通过 (置信度: {result.confidence:.2f})")
+        # 宽松断言：只要成功且置信度在合理范围即可
+        assert result.success, f"测试 1 失败: 处理未成功"
+        assert result.confidence > 0.5, f"测试 1 失败: 置信度过低"
+        assert result.data is not None, f"测试 1 失败: 输出为空"
+        assert "processed_data" in result.data, f"测试 1 失败: 输出缺少 processed_data"
+        print(f"  ✓ 通过 (置信度: {result.confidence:.2f})")
 
-    # 测试用例2：空输入处理
-    print("\n[测试 2] 空输入处理")
-    result = processor.process("", "json")
-    assert not result.success, "测试 2 失败: 空输入应该失败"
-    assert result.error_code == "E001", f"测试 2 失败: 错误码不正确 ({result.error_code})"
-    print(f"  ✓ 通过 (错误码: {result.error_code})")
+        # 测试用例2：空输入处理
+        print("\n[测试 2] 空输入处理")
+        result = processor.process("", "json")
+        assert not result.success, "测试 2 失败: 空输入应该失败"
+        assert result.error_code == "E001", f"测试 2 失败: 错误码不正确 ({result.error_code})"
+        print(f"  ✓ 通过 (错误码: {result.error_code})")
 
-    # 测试用例3：列表输入处理
-    print("\n[测试 3] 列表输入处理")
-    sample_list = ["item1", "item2", "item3"]
-    result = processor.process(sample_list, "json")
-    assert result.success, "测试 3 失败: 列表处理未成功"
-    assert result.data is not None, "测试 3 失败: 输出为空"
-    assert "processed_data" in result.data, "测试 3 失败: 输出缺少 processed_data"
-    assert result.data["processed_data"].get("count", 0) >= 3, "测试 3 失败: 列表计数错误"
-    print(f"  ✓ 通过 (项目数: {result.data['processed_data'].get('count', 0)})")
+        # 测试用例3：列表输入处理
+        print("\n[测试 3] 列表输入处理")
+        sample_list = ["item1", "item2", "item3"]
+        result = processor.process(sample_list, "json")
+        assert result.success, "测试 3 失败: 列表处理未成功"
+        assert result.data is not None, "测试 3 失败: 输出为空"
+        assert "processed_data" in result.data, "测试 3 失败: 输出缺少 processed_data"
+        assert result.data["processed_data"].get("count", 0) >= 3, "测试 3 失败: 列表计数错误"
+        print(f"  ✓ 通过 (项目数: {result.data['processed_data'].get('count', 0)})")
 
-    # 测试用例4：JSON字符串输入
-    print("\n[测试 4] JSON 字符串输入")
-    json_string = json.dumps({"name": "JSON测试", "version": "2.0.0"})
-    result = processor.process(json_string, "json")
-    assert result.success, "测试 4 失败: JSON 字符串处理未成功"
-    assert result.data is not None, "测试 4 失败: 输出为空"
-    processed = result.data["processed_data"]
-    assert "name" in processed, "测试 4 失败: 未提取到 name 字段"
-    print(f"  ✓ 通过")
+        # 测试用例4：JSON字符串输入
+        print("\n[测试 4] JSON 字符串输入")
+        json_string = json.dumps({"name": "JSON测试", "version": "2.0.0"})
+        result = processor.process(json_string, "json")
+        assert result.success, "测试 4 失败: JSON 字符串处理未成功"
+        assert result.data is not None, "测试 4 失败: 输出为空"
+        processed = result.data["processed_data"]
+        assert "name" in processed, "测试 4 失败: 未提取到 name 字段"
+        print(f"  ✓ 通过")
 
-    # 测试用例5：纯文本输入
-    print("\n[测试 5] 纯文本输入")
-    text_input = "这是一个测试文本，用于验证处理逻辑"
-    result = processor.process(text_input, "json")
-    assert result.success, "测试 5 失败: 文本处理未成功"
-    assert result.data is not None, "测试 5 失败: 输出为空"
-    processed = result.data["processed_data"]
-    assert "content" in processed, "测试 5 失败: 未提取到 content 字段"
-    assert processed.get("length", 0) > 0, "测试 5 失败: 文本长度异常"
-    print(f"  ✓ 通过 (文本长度: {processed.get('length', 0)})")
+        # 测试用例5：纯文本输入
+        print("\n[测试 5] 纯文本输入")
+        text_input = "这是一个测试文本，用于验证处理逻辑"
+        result = processor.process(text_input, "json")
+        assert result.success, "测试 5 失败: 文本处理未成功"
+        assert result.data is not None, "测试 5 失败: 输出为空"
+        processed = result.data["processed_data"]
+        assert "content" in processed, "测试 5 失败: 未提取到 content 字段"
+        assert processed.get("length", 0) > 0, "测试 5 失败: 文本长度异常"
+        print(f"  ✓ 通过 (文本长度: {processed.get('length', 0)})")
 
-    # 测试用例6：None 输入
-    print("\n[测试 6] None 输入处理")
-    result = processor.process(None, "json")
-    assert not result.success, "测试 6 失败: None 输入应该失败"
-    assert result.error_code == "E001", f"测试 6 失败: 错误码不正确 ({result.error_code})"
-    print(f"  ✓ 通过 (错误码: {result.error_code})")
+        # 测试用例6：None 输入
+        print("\n[测试 6] None 输入处理")
+        result = processor.process(None, "json")
+        assert not result.success, "测试 6 失败: None 输入应该失败"
+        assert result.error_code == "E001", f"测试 6 失败: 错误码不正确 ({result.error_code})"
+        print(f"  ✓ 通过 (错误码: {result.error_code})")
 
-    # 测试用例7：置信度标注
-    print("\n[测试 7] 置信度标注检查")
-    sample_data = {"name": "测试"}
-    result = processor.process(sample_data, "json")
-    assert result.success, "测试 7 失败: 处理未成功"
-    # 置信度应该在 0 到 1 之间
-    assert 0.0 <= result.confidence <= 1.0, "测试 7 失败: 置信度超出范围"
-    # 如果置信度低，应该有警告
-    if result.confidence < processor.min_confidence_direct:
-        assert len(result.warnings) > 0, "测试 7 失败: 低置信度应该有警告"
-    print(f"  ✓ 通过 (置信度: {result.confidence:.2f}, 警告数: {len(result.warnings)})")
+        # 测试用例7：置信度标注
+        print("\n[测试 7] 置信度标注检查")
+        sample_data = {"name": "测试"}
+        result = processor.process(sample_data, "json")
+        assert result.success, "测试 7 失败: 处理未成功"
+        # 置信度应该在 0 到 1 之间
+        assert 0.0 <= result.confidence <= 1.0, "测试 7 失败: 置信度超出范围"
+        # 如果置信度低，应该有警告
+        if result.confidence < processor.min_confidence_direct:
+            assert len(result.warnings) > 0, "测试 7 失败: 低置信度应该有警告"
+        print(f"  ✓ 通过 (置信度: {result.confidence:.2f}, 警告数: {len(result.warnings)})")
 
-    # 测试用例8：错误码体系完整性
-    print("\n[测试 8] 错误码体系检查")
-    expected_codes = ["E001", "E002", "E003", "E004", "E005", "E006", "E007", "E008", "E009", "E010"]
-    for code in expected_codes:
-        assert code in ERROR_CODES, f"测试 8 失败: 缺少错误码 {code}"
-        assert ERROR_CODES[code], f"测试 8 失败: 错误码 {code} 缺少描述"
-    print(f"  ✓ 通过 (错误码数量: {len(ERROR_CODES)})")
+        # 测试用例8：错误码体系完整性
+        print("\n[测试 8] 错误码体系检查")
+        expected_codes = ["E001", "E002", "E003", "E004", "E005", "E006", "E007", "E008", "E009", "E010"]
+        for code in expected_codes:
+            assert code in ERROR_CODES, f"测试 8 失败: 缺少错误码 {code}"
+            assert ERROR_CODES[code], f"测试 8 失败: 错误码 {code} 缺少描述"
+        print(f"  ✓ 通过 (错误码数量: {len(ERROR_CODES)})")
 
-    # 测试用例9：输出格式检查
-    print("\n[测试 9] 输出格式检查")
-    sample_data = {"name": "格式测试", "version": "3.0.0"}
-    result = processor.process(sample_data, "json")
-    assert result.success, "测试 9 失败: 处理未成功"
-    assert result.data is not None, "测试 9 失败: 输出为空"
-    assert "format" in result.data, "测试 9 失败: 输出缺少格式信息"
-    assert result.data["format"] == "json", "测试 9 失败: 格式信息错误"
-    print(f"  ✓ 通过")
+        # 测试用例9：输出格式检查
+        print("\n[测试 9] 输出格式检查")
+        sample_data = {"name": "格式测试", "version": "3.0.0"}
+        result = processor.process(sample_data, "json")
+        assert result.success, "测试 9 失败: 处理未成功"
+        assert result.data is not None, "测试 9 失败: 输出为空"
+        assert "format" in result.data, "测试 9 失败: 输出缺少格式信息"
+        assert result.data["format"] == "json", "测试 9 失败: 格式信息错误"
+        print(f"  ✓ 通过")
 
-    # 测试用例10：批量数据处理
-    print("\n[测试 10] 批量数据处理")
-    batch_data = [
-        {"name": "技能1", "version": "1.0.0"},
-        {"name": "技能2", "version": "2.0.0"},
-        {"name": "技能3", "version": "3.0.0"},
-    ]
-    results = [processor.process(item, "json") for item in batch_data]
-    assert len(results) == 3, "测试 10 失败: 批量处理数量错误"
-    assert all(r.success for r in results), "测试 10 失败: 部分处理失败"
-    print(f"  ✓ 通过 (处理数量: {len(results)})")
+        # 测试用例10：批量数据处理
+        print("\n[测试 10] 批量数据处理")
+        batch_data = [
+            {"name": "技能1", "version": "1.0.0"},
+            {"name": "技能2", "version": "2.0.0"},
+            {"name": "技能3", "version": "3.0.0"},
+        ]
+        results = [processor.process(item, "json") for item in batch_data]
+        assert len(results) == 3, "测试 10 失败: 批量处理数量错误"
+        assert all(r.success for r in results), "测试 10 失败: 部分处理失败"
+        print(f"  ✓ 通过 (处理数量: {len(results)})")
+
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        all_passed = False
+    except Exception as e:
+        print(f"  ✗ 异常: {e}")
+        all_passed = False
 
     # 汇总结果
     print("\n" + "=" * 60)
