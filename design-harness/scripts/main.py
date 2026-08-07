@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 design-harness 技能实现脚本
-版本: 1.0.0
+版本: 1.1.0
 说明: 将用户提供的半成品想法/数据/URL 整理为结构化 Markdown 设计方案。
       标准库实现，无第三方依赖。
 """
@@ -51,6 +51,7 @@ class OutputResult:
     confidence: float = 0.0
     warnings: List[str] = field(default_factory=list)
     markdown: str = ""
+    items: List[InputItem] = field(default_factory=list)  # 保存输入项
 
 
 # ============================================================
@@ -141,6 +142,7 @@ class DesignHarness:
 
             # Step 2: 生成结构化输出
             self.output = OutputResult(title=title or "设计方案")
+            self.output.items = self.items.copy()  # 保存输入项到输出结果
             self._build_sections()
             self._calculate_confidence()
             self._generate_markdown()
@@ -348,6 +350,8 @@ def run_selftest() -> bool:
         result7 = harness.process(sample7, title="电商平台设计")
         assert "电商平台设计" in result7.markdown, "中文标题未正确显示"
         assert len(result7.sections) > 0, "章节为空"
+        assert len(result7.items) > 0, "输入项为空"
+        assert result7.items[0].key_points, "关键词为空"
         print(f"  ✓ 通过 (关键词提取: {result7.items[0].key_points[:3]})")
     except Exception as e:
         print(f"  ✗ 失败: {e}")
