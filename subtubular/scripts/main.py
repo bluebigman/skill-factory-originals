@@ -8,6 +8,7 @@ subtubular — YouTube 字幕与元数据全文检索（clean-room 独立实现�
 
 import argparse
 import csv
+import io
 import json
 import os
 import re
@@ -131,11 +132,18 @@ def extract_video_id(source: str) -> str:
     if re.fullmatch(r"[A-Za-z0-9_-]{11}", source):
         return source
 
-    # URL 形式
+    # URL 形式 - 需要更精确的模式
     patterns = [
-        r"(?:youtube\.com/watch\?v=|youtu\.be/|youtube\.com/embed/)([A-Za-z0-9_-]{11})",
+        # youtube.com/watch?v=ID
+        r"(?:https?://)?(?:www\.)?youtube\.com/watch\?v=([A-Za-z0-9_-]{11})",
+        # youtu.be/ID
+        r"(?:https?://)?(?:www\.)?youtu\.be/([A-Za-z0-9_-]{11})",
+        # youtube.com/embed/ID
+        r"(?:https?://)?(?:www\.)?youtube\.com/embed/([A-Za-z0-9_-]{11})",
+        # 查询参数中的 v=ID
         r"[?&]v=([A-Za-z0-9_-]{11})",
     ]
+    
     for pattern in patterns:
         match = re.search(pattern, source)
         if match:
@@ -394,7 +402,6 @@ def format_output(
         if not data:
             return ""
         fieldnames = list(data[0].keys()) if fields else ["video_id", "title", "channel", "timestamp", "text", "confidence"]
-        import io
         output = io.StringIO()
         writer = csv.DictWriter(output, fieldnames=fieldnames)
         writer.writeheader()

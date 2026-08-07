@@ -7,7 +7,7 @@ license: MIT
 slug: fb2cng
 name: fb2cng
 displayName: PDF转文档
-description: Unified converter of FB2 files to EPUB2/3, KEPUB, AZW8/KFX, PDF, TXT/MD formats. (Next generation of fb2convert, fb2mobi
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行fb2cng相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

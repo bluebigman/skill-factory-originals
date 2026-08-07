@@ -7,7 +7,7 @@ license: MIT
 slug: oxylabs-ai-studio-js
 name: oxylabs-ai-studio-js
 displayName: 爬虫采集
-description: Structured data gathering from any website using AI-powered scraper, crawler, and browser automation. Scraping and crawl
+description: 仅供学习与参考用途。使用本。当用户需要AI大模型 深度学习、进行oxylabs ai studio js相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: pdfmd
 name: pdfmd
 displayName: PDF转文档
-description: Smart PDF to Markdown converter with intelligent heading detection, automatic header/footer removal, orphan fragment mer
+description: 仅供学习与参考用途。使用本。当用户需要PDF识别 文字提取、进行pdfmd相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

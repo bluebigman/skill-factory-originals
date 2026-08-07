@@ -7,7 +7,7 @@ license: MIT
 slug: schemaz
 name: schemaz
 displayName: SQL查询
-description: A purely-functional library for defining type-safe schemas for algebraic data types, providing free generators, SQL quer
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行schemaz相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: markdown-themeable-pdf
 name: markdown-themeable-pdf
 displayName: PDF转文档
-description: ARCHIVED. NOT MAINTAINED. Themeable Markdown Converter (Print to PDF, HTML, JPEG or PNG)
+description: 仅供学习与参考用途。使用本。当用户需要PDF识别 文字提取、进行markdown themeable pdf相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
