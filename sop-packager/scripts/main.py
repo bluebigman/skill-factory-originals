@@ -624,7 +624,6 @@ def main():
         
         # 批量处理模式
         if args.batch:
-            import sys
             try:
                 contents = json.load(sys.stdin)
                 if not isinstance(contents, list):

@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: sql-code-generator
 name: sql-code-generator
-displayName: SQL查询 语句生成 数据库操作
+displayName: 数据库查询 SQL 语句生成
 description: 将自然语言需求转化为规范SQL语句，辅助数据库查询与学习。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/sql-code-generator
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: QueryCraft Studio
+author: DataForge Studio
 agent_created: true
-trigger_words: ["SQL查询", "sql code generator", "数据库查询", "写SQL", "生成查询语句"]
+trigger_words: ["SQL查询", "sql code generator", "数据库查询", "写SQL", "生成查询语句", "查数据", "编写查询"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,36 +31,38 @@ trigger_words: ["SQL查询", "sql code generator", "数据库查询", "写SQL", 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# SQL 查询语句生成助手
+# SQL 代码生成器 Skill 文档
 
-## 一、能力边界速查卡
+## 一、能力边界（速查卡）
 
-### ✅ 能做（核心能力）
+### 1.1 能做什么
 
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 自然语言转SQL | 将中文/英文描述转换为标准SQL语句 |
-| 2 | 表结构解析 | 根据提供的字段定义生成对应查询 |
-| 3 | 多类型SQL支持 | SELECT/INSERT/UPDATE/DELETE/JOIN/子查询等 |
-| 4 | 格式规范输出 | 关键字大写、缩进对齐、注释标注 |
-| 5 | 批量生成 | 一次输入多个查询需求，逐条输出 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 自然语言转 SQL | 将中文描述转换为标准 SQL 语句 | "查所有年龄大于30的用户" → `SELECT * FROM users WHERE age > 30;` |
+| 多表关联查询 | 支持 JOIN 操作生成 | "查每个部门的员工数量" → 生成含 GROUP BY 的 JOIN 语句 |
+| 聚合函数应用 | 支持 COUNT/SUM/AVG/MAX/MIN | "统计订单总金额" → `SELECT SUM(amount) FROM orders;` |
+| 条件过滤优化 | 生成 WHERE 子句及逻辑组合 | "查北京或上海的用户" → `WHERE city IN ('北京','上海')` |
+| 排序与分页 | 生成 ORDER BY 和 LIMIT 子句 | "按时间倒序取前10条" → `ORDER BY created_at DESC LIMIT 10;` |
+| 子查询生成 | 支持嵌套查询场景 | "查工资高于平均工资的员工" → 生成含子查询的语句 |
+| 学习辅助 | 为每条 SQL 附注释说明 | 每条语句附带关键语法点注释 |
 
-### ❌ 不能做（边界声明）
+### 1.2 不能做什么
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不连接真实数据库 | 仅生成语句，不执行、不验证数据 |
-| 2 | 不保证语法绝对正确 | 不同数据库方言（MySQL/PG/Oracle）有差异 |
-| 3 | 不处理敏感数据 | 用户需自行脱敏后再提交 |
-| 4 | 不生成DDL/DML之外的高级功能 | 存储过程、触发器、游标等复杂对象不在范围内 |
-| 5 | 不替代DBA审核 | 生产环境SQL需专业DBA复核 |
+| 限制项 | 说明 |
+|--------|------|
+| 不执行 SQL | 仅生成语句，不连接数据库执行 |
+| 不优化索引 | 不提供物理存储层面的调优建议 |
+| 不处理非关系型数据库 | 仅支持 SQL 标准语法（MySQL/PostgreSQL/SQLite 为主） |
+| 不生成 DDL/DML 之外的语句 | 不生成 GRANT、REVOKE 等权限管理语句 |
+| 不保证语法完全兼容 | 不同数据库方言存在差异，需自行验证 |
 
-### 🎯 适用对象
+### 1.3 适用对象
 
-- 数据分析师：快速获取查询语句模板
-- 后端开发者：联调阶段生成测试查询
-- 数据库学习者：理解SQL写法与逻辑
-- 产品经理：验证数据口径是否可实现
+- 数据分析师：快速获取查询语句原型
+- 后端开发人员：减少编写基础 SQL 的时间
+- 数据库初学者：通过自然语言对照学习 SQL 语法
+- 产品经理：验证数据可行性，与开发沟通更高效
 
 
 ## 许可证（License）
