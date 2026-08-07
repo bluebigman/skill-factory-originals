@@ -1,4 +1,5 @@
 ---
+license: MIT
 slug: self-learning-skills
 name: self-learning-skills
 displayName: 未命名工具
