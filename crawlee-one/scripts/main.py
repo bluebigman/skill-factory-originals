@@ -149,60 +149,74 @@ class ContentProcessor:
         """
         extracted: Dict[str, Any] = {}
         warnings: List[str] = []
-        total_patterns = 0
-        matched_patterns = 0
+        
+        # 计算置信度的权重
+        # 字段类型权重：email/phone/url/id_card/ip = 1, date = 0.5, 自定义字段 = 1
+        total_weight = 0.0
+        matched_weight = 0.0
 
         # 1. 识别内置模式
         for field_name, pattern in self.FIELD_PATTERNS.items():
-            total_patterns += 1
+            # 根据字段类型设置权重
+            weight = 1.0
+            if field_name == "date":
+                weight = 0.5  # 日期格式可能误匹配
+            
+            total_weight += weight
             matches = re.findall(pattern, content)
             if matches:
                 # 去重并保留前5个
                 unique_matches = list(dict.fromkeys(matches))[:5]
                 extracted[field_name] = unique_matches
-                matched_patterns += 1
+                matched_weight += weight
 
         # 2. 识别自定义字段
         if custom_fields:
             for field in custom_fields:
-                total_patterns += 1
+                total_weight += 1.0
                 pattern = rf"{field}[:：]\s*([^\s,，;；]+)"
                 matches = re.findall(pattern, content, re.IGNORECASE)
                 if matches:
                     extracted[field] = matches[0]
-                    matched_patterns += 1
+                    matched_weight += 1.0
                 else:
                     # 尝试更宽松的匹配
                     pattern = rf"{field}\s*[=:：]\s*([^\n]+)"
                     matches = re.findall(pattern, content, re.IGNORECASE)
                     if matches:
                         extracted[field] = matches[0].strip()
-                        matched_patterns += 1
+                        matched_weight += 1.0
                     else:
                         warnings.append(f"[需核实] 未找到字段: {field}")
 
         # 3. 处理 URL 类型输入
         if input_type == "url":
             extracted["url_source"] = content.strip()
+            total_weight += 1.0
+            matched_weight += 1.0
+            
             # 尝试提取域名
             domain_match = re.search(r"https?://([\w\-]+\.)+[\w\-]+", content)
             if domain_match:
                 extracted["domain"] = domain_match.group(0).replace("https://", "").replace("http://", "")
-                matched_patterns += 1
-            total_patterns += 1
+                total_weight += 0.5
+                matched_weight += 0.5
 
         # 4. 处理文件类型输入（提取文件名和扩展名）
         if input_type == "file":
             file_name = content.strip().split("/")[-1].split("\\")[-1]
             extracted["file_name"] = file_name
+            total_weight += 1.0
+            matched_weight += 1.0
+            
             if "." in file_name:
                 extracted["file_extension"] = file_name.split(".")[-1]
-            total_patterns += 2
-            matched_patterns += 2
+                total_weight += 0.5
+                matched_weight += 0.5
 
         # 5. 计算置信度
-        if total_patterns > 0:
-            confidence = (matched_patterns / total_patterns) * 100
+        if total_weight > 0:
+            confidence = (matched_weight / total_weight) * 100
         else:
             confidence = 50.0  # 没有可匹配的模式时给予中等置信度
 
@@ -211,8 +225,16 @@ class ContentProcessor:
 
         # 如果提取结果为空，降低置信度
         if not extracted:
-            confidence = min(confidence, 30.0)
+            confidence = 0.0
             warnings.append("[需核实] 未能从输入中提取到关键信息")
+        else:
+            # 根据提取到的字段数量调整置信度
+            # 如果提取到的字段较少，适当降低置信度
+            extracted_count = len(extracted)
+            if extracted_count == 1:
+                confidence = min(confidence, 60.0)
+            elif extracted_count == 2:
+                confidence = min(confidence, 75.0)
 
         return extracted, confidence, warnings
 
@@ -223,10 +245,12 @@ class ContentProcessor:
             pass
         elif result.confidence >= 85:
             result.warnings.append("建议复核：部分字段置信度在85%-90%之间")
+        elif result.confidence >= 60:
+            result.warnings.append("建议复核：整体置信度在60%-85%之间，请人工确认")
         else:
             # 低置信度，已在 warnings 中标注
             if not result.warnings:
-                result.warnings.append("[需核实] 整体置信度低于85%，请人工确认")
+                result.warnings.append("[需核实] 整体置信度低于60%，请人工确认")
 
     def batch_process(self, contents: List[str], input_type: str = "text",
                       output_format: str = "json",
