@@ -101,7 +101,11 @@ class SoupProcessor:
 
         if src_type == "url":
             # 规格明确：不访问网络。此处仅将 URL 本身作为文本记录。
-            return {"url": self.raw_input, "note": "[需核实] 未访问网络，仅记录 URL 字符串"}
+            return {
+                "url": self.raw_input,
+                "note": "[需核实] 未访问网络，仅记录 URL 字符串",
+                "requires_verification": True
+            }
 
         # 默认按文本处理
         return self._parse_text(self.raw_input)
@@ -137,7 +141,16 @@ class SoupProcessor:
         - 若为其他：记录类型和值。
         """
         if isinstance(data, dict):
-            # 字典：直接结构化，并补充统计信息
+            # 检查是否为 URL 特殊标记
+            if data.get("requires_verification"):
+                return {
+                    "type": "url_reference",
+                    "url": data.get("url", ""),
+                    "note": "[需核实] 未访问网络，仅记录 URL 字符串",
+                    "requires_verification": True
+                }
+            
+            # 普通字典：直接结构化，并补充统计信息
             keys = list(data.keys())
             return {
                 "type": "object",
@@ -186,7 +199,12 @@ class SoupProcessor:
         - 有明确 type 且数据非空：基础 0.9
         - 字段数量/内容越丰富，置信度越高
         - 若存在“需核实”标记，则降低置信度
+        - URL 引用类型：基础置信度较低
         """
+        # URL 引用类型特殊处理
+        if result.get("type") == "url_reference":
+            return 0.7  # 未访问网络的 URL 置信度固定为 0.7
+
         base = 0.9
 
         # 根据类型微调
@@ -270,6 +288,8 @@ def format_output(data: Dict[str, Any], output_format: str = "json") -> str:
             lines.append(f"元素数量: {result['item_count']}")
         if "preview" in result:
             lines.append(f"预览: {result['preview']}")
+        if "url" in result:
+            lines.append(f"URL: {result['url']}")
         return "\n".join(lines)
     raise SoupError("E003", f"不支持的输出格式: {output_format}")
 
@@ -392,7 +412,8 @@ def run_selftest() -> int:
         proc = SoupProcessor("https://example.com/data", source_type="url")
         result6 = proc.process()
         assert result6["input_source"] == "url", "输入来源应为 url"
-        assert "url" in result6["result"]["data"], "结果中应包含 url 字段"
+        assert result6["result"]["type"] == "url_reference", "类型应为 url_reference"
+        assert "url" in result6["result"], "结果中应包含 url 字段"
         assert result6["confidence"] < 0.9, "URL 未访问网络，置信度应低于 0.9"
         print("  通过：URL 离线处理正确，置信度 =", result6["confidence"])
     except AssertionError as exc:
