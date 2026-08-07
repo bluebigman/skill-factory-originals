@@ -7,7 +7,7 @@ license: MIT
 slug: autozest
 name: autozest
 displayName: 未命名工具
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行autozest相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+description: AutoZest is an autotest addon that: * automated growl installation * generation of .autotest with growl & autozest confi
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

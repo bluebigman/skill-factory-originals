@@ -122,7 +122,7 @@ def extract_year(text: str) -> Optional[int]:
 
 def extract_money(text: str) -> Optional[float]:
     """从文本中提取金额（支持 亿/万 单位）"""
-    # 匹配可能的数字+单位
+    # 匹配可能的数字+单位，支持负数和括号表示法
     pattern = r"([-+]?\d+(?:\.\d+)?)\s*(亿元|万元|亿|万|元)?"
     match = re.search(pattern, text)
     if not match:
@@ -151,9 +151,19 @@ class AnnualReportParser:
         """从纯文本中解析财务数据"""
         result: Dict[str, Any] = {}
 
-        # 提取公司名称（简化处理）
-        company_match = re.search(r"(?:公司名称|企业名称)[：:\s]*([\u4e00-\u9fa5A-Za-z0-9]+)", text)
-        result["company_name"] = company_match.group(1) if company_match else "未知公司"
+        # 提取公司名称（支持多种格式）
+        company_patterns = [
+            r"(?:公司名称|企业名称)[：:\s]*([\u4e00-\u9fa5A-Za-z0-9]+)",
+            r"(?:公司|企业)[：:\s]*([\u4e00-\u9fa5A-Za-z0-9]+)",
+            r"^([\u4e00-\u9fa5A-Za-z0-9]+(?:股份|集团|有限|控股))",
+        ]
+        for pattern in company_patterns:
+            match = re.search(pattern, text, re.MULTILINE)
+            if match:
+                result["company_name"] = match.group(1)
+                break
+        else:
+            result["company_name"] = "未知公司"
 
         # 提取年份
         year = extract_year(text)
@@ -161,11 +171,18 @@ class AnnualReportParser:
 
         # 提取主要财务数据
         keywords = {
-            "revenue": ["营业收入", "营业总收入"],
-            "net_profit": ["净利润", "归母净利润"],
-            "total_assets": ["总资产", "资产总计"],
-            "total_liabilities": ["总负债", "负债合计"],
-            "operating_cash_flow": ["经营活动产生的现金流量净额", "经营现金流"],
+            "revenue": ["营业收入", "营业总收入", "主营业务收入"],
+            "net_profit": ["净利润", "归母净利润", "归属于母公司股东的净利润"],
+            "total_assets": ["总资产", "资产总计", "资产总额"],
+            "total_liabilities": ["总负债", "负债合计", "负债总额"],
+            "operating_cash_flow": ["经营活动产生的现金流量净额", "经营现金流", "经营活动现金流量净额"],
+            "operating_cost": ["营业成本", "主营业务成本"],
+            "receivables": ["应收账款"],
+            "inventory": ["存货"],
+            "goodwill": ["商誉"],
+            "current_assets": ["流动资产", "流动资产合计"],
+            "current_liabilities": ["流动负债", "流动负债合计"],
+            "total_shares": ["总股本", "股本", "实收资本"],
         }
 
         for field, aliases in keywords.items():
@@ -173,34 +190,38 @@ class AnnualReportParser:
                 idx = text.find(alias)
                 if idx >= 0:
                     # 获取关键词后的一段文本
-                    segment = text[idx: idx + 100]
-                    value = extract_money(segment)
-                    if value is not None:
-                        result[field] = value
-                        break
-
-        # 提取风险相关数据
-        risk_keywords = {
-            "receivables": ["应收账款"],
-            "inventory": ["存货"],
-            "goodwill": ["商誉"],
-        }
-        for field, aliases in risk_keywords.items():
-            for alias in aliases:
-                idx = text.find(alias)
-                if idx >= 0:
-                    segment = text[idx: idx + 100]
-                    value = extract_money(segment)
+                    segment = text[idx: idx + 200]
+                    # 尝试多种模式
+                    value = None
+                    
+                    # 模式1: 直接数字
+                    num_match = re.search(r"([-+]?\d+(?:\.\d+)?)\s*(亿元|万元|亿|万|元)?", segment)
+                    if num_match:
+                        value = float(num_match.group(1))
+                        unit = num_match.group(2) or ""
+                        if "亿" in unit:
+                            value *= 100000000
+                        elif "万" in unit:
+                            value *= 10000
+                    
                     if value is not None:
                         result[field] = value
                         break
 
         # 提取同比数据（如有）
         for field in ["revenue", "net_profit"]:
-            pattern = rf"{keywords[field][0]}.*?同比[增长下降]*\s*([-+]?\d+(?:\.\d+)?)"
-            match = re.search(pattern, text)
-            if match:
-                result[f"{field}_growth"] = float(match.group(1))
+            if field in keywords:
+                alias = keywords[field][0]
+                # 查找同比数据
+                patterns = [
+                    rf"{alias}.*?同比[增长下降]*\s*([-+]?\d+(?:\.\d+)?)%",
+                    rf"{alias}.*?增减[幅度率]*\s*([-+]?\d+(?:\.\d+)?)%",
+                ]
+                for pattern in patterns:
+                    match = re.search(pattern, text)
+                    if match:
+                        result[f"{field}_growth"] = float(match.group(1)) / 100
+                        break
 
         return result
 
@@ -208,7 +229,7 @@ class AnnualReportParser:
         """解析入口"""
         if self.raw_text:
             parsed = self.parse_text(self.raw_text)
-            # 合并已有结构化数据
+            # 合并已有结构化数据（结构化数据优先）
             for key in REQUIRED_FIELDS:
                 if key in self.data and self.data[key] is not None:
                     parsed[key] = self.data[key]
@@ -590,6 +611,7 @@ def run_selftest() -> None:
         应收账款：20亿元
         存货：15亿元
         商誉：5亿元
+        营业成本：50亿元
         """,
         "company_name": "示例控股有限公司",
         "year": 2025,
@@ -598,6 +620,7 @@ def run_selftest() -> None:
     summary3 = process_data(sample3)
     assert "示例控股" in summary3, "文本解析失败"
     assert "营业收入" in summary3, "文本解析缺少营收"
+    assert "净利润" in summary3, "文本解析缺少净利润"
     print("✓ 样例3（文本解析）通过")
 
     # 测试错误处理
