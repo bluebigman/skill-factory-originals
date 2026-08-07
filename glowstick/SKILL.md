@@ -4,7 +4,7 @@ slug: glowstick
 name: glowstick
 displayName: 实时绘图 数据可视化 OpenGL图表
 description: 将数据快速转为实时OpenGL图表，支持文件与URL输入。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/glowstick
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: Ling Zhang
+author: 数据工坊
 agent_created: true
-trigger_words: ["glowstick", "实时绘图", "OpenGL图表", "数据可视化", "graphing"]
+trigger_words: ["glowstick", "实时绘图", "OpenGL图表", "数据可视化", "graphing", "数据图表", "实时渲染"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,32 +31,38 @@ trigger_words: ["glowstick", "实时绘图", "OpenGL图表", "数据可视化", 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# glowstick — 实时 OpenGL 绘图 Skill 文档
+# glowstick Skill 文档
+
+本 Skill 由 AI 辅助生成，仅供参考。
 
 ## 一、能力边界（一页纸速查卡）
 
-### 能做（核心能力）
+### 能做什么
 
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 数据/文件/URL 输入解析 | 接受用户提供的原始数据、本地文件路径或远程 URL，自动识别内容类型 |
-| 2 | 关键信息提取与保留 | 从输入中提取数值序列、时间戳、标签等绘图必要字段，不丢失原始语义 |
-| 3 | 结构化输出生成 | 按约定格式输出可直接用于 glowstick 渲染的图表描述（JSON/YAML） |
-| 4 | 置信度标注 | 对解析结果中不确定的字段（如缺失表头、类型模糊）显式标注置信度 |
-| 5 | 批量处理与自定义格式 | 支持多组数据一次性转换，允许用户指定输出字段映射规则 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 文件输入绘图 | 读取本地数据文件（CSV、JSON、TXT）并生成 OpenGL 实时图表 | `glowstick data.csv` |
+| URL 输入绘图 | 从远程 URL 拉取数据并渲染为图表 | `glowstick https://example.com/data.json` |
+| 实时交互 | 图表支持缩放、旋转、平移等实时操作 | 鼠标拖拽旋转 3D 散点图 |
+| 多格式支持 | 自动识别常见数据格式并映射到图表类型 | CSV 两列→折线图，三列→3D 散点图 |
+| 自检功能 | 验证安装完整性和依赖可用性 | `glowstick --selftest` |
 
-### 不能做（明确限制）
+### 不能做什么
 
-- 不执行实际的 OpenGL 渲染（需用户自行运行 glowstick 命令）
-- 不处理二进制图像文件（如 PNG/JPG 中的图表）
-- 不推断超出输入范围的数据趋势或预测
-- 不修改用户原始数据文件（只读解析）
+| 限制项 | 说明 |
+|--------|------|
+| 不支持流式数据 | 仅处理静态文件或一次性 URL 拉取，不订阅持续更新的数据源 |
+| 不进行数据清洗 | 输入数据需为结构化格式，缺失值、脏数据需用户自行预处理 |
+| 不生成静态图片 | 输出为实时 OpenGL 窗口，不导出 PNG/JPG 等图片文件 |
+| 不支持自定义着色器 | 图表样式由内置模板决定，不开放底层 GLSL 编程接口 |
+| 不处理超大文件 | 单文件建议不超过 500MB，超过可能导致内存溢出 |
 
 ### 适用对象
 
-- 需要在 Ruby 环境中快速预览数据的开发者
-- 需要将 CSV/JSON/日志文件转为实时图表的运维人员
-- 需要从 URL 拉取数据并可视化的数据分析师
+- 需要快速预览数据分布的数据分析师
+- 需要演示数据关系的科研人员
+- 需要临时可视化日志或指标的后端开发者
+- 对 OpenGL 渲染感兴趣但不想从头编写图形代码的学习者
 
 
 ## 许可证（License）
