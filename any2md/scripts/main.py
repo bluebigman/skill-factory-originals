@@ -34,15 +34,15 @@ ERR_UNKNOWN = "E010"          # 未知错误
 def _detect_heading(line: str) -> Tuple[int, str]:
     """检测是否为Markdown标题，返回(级别, 标题内容)。非标题返回(0, 原行)。"""
     stripped = line.lstrip()
-    if stripped.startswith("#"):
+    if stripped.startswith('#'):
         # 计算 # 数量
         level = 0
         for ch in stripped:
-            if ch == "#":
+            if ch == '#':
                 level += 1
             else:
                 break
-        if 1 <= level <= 6 and (len(stripped) == level or stripped[level] in (" ", "\t")):
+        if 1 <= level <= 6 and (len(stripped) == level or stripped[level] in (' ', '\t')):
             content = stripped[level:].strip()
             return level, content
     return 0, line
@@ -51,4 +51,4 @@ def _detect_heading(line: str) -> Tuple[int, str]:
 def _detect_code_fence(line: str) -> bool:
     """检测是否为代码围栏开始/结束行。"""
     stripped = line.strip()
-    if stripped.startswith("
+    if stripped.startswith('
