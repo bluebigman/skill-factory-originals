@@ -57,7 +57,7 @@ class DataProcessor:
 
     # 可识别的关键字段（销售数据场景）
     KEY_FIELDS = [
-        "日期", "日期", "月份", "季度",
+        "日期", "月份", "季度",
         "产品", "品类", "类别",
         "销售额", "销售金额", "金额",
         "数量", "销量",
@@ -65,22 +65,69 @@ class DataProcessor:
         "客户", "渠道",
     ]
 
-    # 字段别名映射
+    # 字段别名映射（中英文）
     FIELD_ALIASES = {
+        # 日期相关
         "date": "日期",
         "day": "日期",
+        "datetime": "日期",
+        "time": "日期",
         "month": "月份",
         "quarter": "季度",
+        # 产品相关
         "product": "产品",
+        "product_name": "产品",
+        "item": "产品",
+        "goods": "产品",
         "category": "品类",
+        "type": "品类",
+        # 销售额相关
         "sales": "销售额",
-        "amount": "金额",
+        "sales_amount": "销售额",
+        "revenue": "销售额",
+        "amount": "销售额",
+        "total": "销售额",
+        "price": "销售额",
+        "money": "销售额",
+        # 数量相关
         "quantity": "数量",
+        "qty": "数量",
+        "count": "数量",
+        "num": "数量",
+        # 地区相关
         "region": "地区",
         "area": "区域",
         "city": "城市",
+        "location": "地区",
+        "province": "地区",
+        # 客户相关
         "customer": "客户",
+        "client": "客户",
+        "buyer": "客户",
+        # 渠道相关
         "channel": "渠道",
+        "source": "渠道",
+        # 中文别名
+        "日期": "日期",
+        "时间": "日期",
+        "月份": "月份",
+        "季度": "季度",
+        "产品": "产品",
+        "产品名": "产品",
+        "商品": "产品",
+        "品类": "品类",
+        "类别": "品类",
+        "销售额": "销售额",
+        "销售金额": "销售额",
+        "金额": "销售额",
+        "收入": "销售额",
+        "数量": "数量",
+        "销量": "数量",
+        "地区": "地区",
+        "区域": "区域",
+        "城市": "城市",
+        "客户": "客户",
+        "渠道": "渠道",
     }
 
     def __init__(self):
@@ -181,9 +228,9 @@ class DataProcessor:
         rows = []
         if isinstance(data, dict):
             # 单条记录
-            if "数据" in data or "records" in data:
+            if "数据" in data or "records" in data or "data" in data:
                 # 嵌套记录
-                records = data.get("数据") or data.get("records", [])
+                records = data.get("数据") or data.get("records") or data.get("data", [])
                 if isinstance(records, list):
                     rows = records
                 else:
@@ -249,32 +296,49 @@ class DataProcessor:
                 continue
             # 转换字段名
             new_key = self._normalize_field_name(key)
-            normalized[new_key] = value
+            # 如果新key已存在，保留原有值（避免覆盖）
+            if new_key not in normalized:
+                normalized[new_key] = value
+            else:
+                # 如果字段已存在，尝试合并或保留第一个
+                normalized[new_key] = normalized[new_key] if normalized[new_key] else value
         return normalized
 
     def _normalize_field_name(self, field_name: str) -> str:
         """规范化单个字段名"""
-        # 去除空白
+        # 去除空白并转为小写
         name = str(field_name).strip().lower()
-
-        # 检查别名映射
+        
+        # 检查别名映射（优先使用小写匹配）
         if name in self.FIELD_ALIASES:
             return self.FIELD_ALIASES[name]
-
+        
+        # 检查原始格式（保留大小写）
+        original = str(field_name).strip()
+        if original in self.FIELD_ALIASES:
+            return self.FIELD_ALIASES[original]
+        
+        # 尝试部分匹配（如果字段名包含关键信息）
+        for alias, standard in self.FIELD_ALIASES.items():
+            if alias in name:
+                return standard
+        
         # 直接返回原名（保留原始格式）
-        return str(field_name).strip()
+        return original
 
     def _check_required_fields(self, rows: List[Dict[str, Any]]) -> List[str]:
         """检查必需字段是否存在"""
         if not rows:
             return self.required_fields
 
-        first_row = rows[0]
-        missing = []
-        for field in self.required_fields:
-            if field not in first_row:
-                missing.append(field)
-        return missing
+        # 检查所有记录，确保所有必需字段都存在
+        missing = set()
+        for row in rows:
+            for field in self.required_fields:
+                if field not in row:
+                    missing.add(field)
+        
+        return list(missing)
 
     def _evaluate_confidence(self, rows: List[Dict[str, Any]]) -> float:
         """评估数据置信度"""
@@ -460,6 +524,7 @@ def run_selftest() -> bool:
     result = processor.parse_input(test_alias)
     assert result.success, f"别名解析失败: {result.error_message}"
     assert "日期" in result.data["fields"], "日期字段未正确映射"
+    assert "产品" in result.data["fields"], "产品字段未正确映射"
     assert "销售额" in result.data["fields"], "销售额字段未正确映射"
     print(f"  ✓ 通过 (置信度: {result.confidence:.2f})")
 
