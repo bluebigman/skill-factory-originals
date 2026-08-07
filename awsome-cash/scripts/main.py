@@ -270,6 +270,7 @@ def _extract_from_text(text: str, fields: List[str]) -> Dict[str, Any]:
 
     # 金额提取
     if 'amount' in fields:
+        # 首先尝试匹配带货币符号的金额
         match = re.search(r'(?:金额|价格|费用|总计)[：:\s]*([¥￥]?\d+(?:\.\d{1,2})?)', text)
         if match:
             amount_str = match.group(1).replace('¥', '').replace('￥', '')
@@ -278,12 +279,24 @@ def _extract_from_text(text: str, fields: List[str]) -> Dict[str, Any]:
             except ValueError:
                 result['amount'] = '[需核实:amount]'
         else:
-            # 尝试匹配独立数字（可能为金额）
-            match = re.search(r'(?<![¥￥])\b\d+(?:\.\d{1,2})?\b', text)
+            # 尝试匹配带货币符号的金额
+            match = re.search(r'[¥￥]\s*(\d+(?:\.\d{1,2})?)', text)
             if match:
-                result['amount'] = float(match.group(0))
+                try:
+                    result['amount'] = float(match.group(1))
+                except ValueError:
+                    result['amount'] = '[需核实:amount]'
             else:
-                result['amount'] = '[需核实:amount]'
+                # 最后尝试匹配独立的数字（可能为金额）
+                # 但要避免匹配日期中的数字
+                match = re.search(r'(?<![\d-])\d+(?:\.\d{1,2})?(?![\d-])', text)
+                if match:
+                    try:
+                        result['amount'] = float(match.group(0))
+                    except ValueError:
+                        result['amount'] = '[需核实:amount]'
+                else:
+                    result['amount'] = '[需核实:amount]'
 
     # 类别提取
     if 'category' in fields:
@@ -567,139 +580,232 @@ def _run_selftest() -> bool:
     类别：餐饮
     备注：同事聚餐
     """
-    result = _process_text_input(sample_text, DEFAULT_FIELDS)
-    assert result.get('success'), f"文本解析失败: {result.get('error_message')}"
-    records = result.get('data', [])
-    assert len(records) >= 1, "文本解析结果为空"
-    record = records[0]
-    assert record.get('name') == '张三', f"名称提取错误: {record.get('name')}"
-    assert record.get('date') == '2024-03-15', f"日期提取错误: {record.get('date')}"
-    assert isinstance(record.get('amount'), float), "金额应为数值类型"
-    assert record.get('amount') > 100, f"金额值不合理: {record.get('amount')}"
-    print(f"  ✓ 文本解析成功: {record}")
+    try:
+        result = _process_text_input(sample_text, DEFAULT_FIELDS)
+        if not result.get('success'):
+            print(f"  ✗ 文本解析失败: {result.get('error_message')}")
+            all_passed = False
+        else:
+            records = result.get('data', [])
+            if not records:
+                print("  ✗ 文本解析结果为空")
+                all_passed = False
+            else:
+                record = records[0]
+                print(f"  ✓ 文本解析成功: {record}")
+                # 验证关键字段
+                if record.get('name') != '张三':
+                    print(f"  ✗ 名称提取错误: {record.get('name')}")
+                    all_passed = False
+                if record.get('date') != '2024-03-15':
+                    print(f"  ✗ 日期提取错误: {record.get('date')}")
+                    all_passed = False
+                if not isinstance(record.get('amount'), (int, float)):
+                    print(f"  ✗ 金额应为数值类型: {record.get('amount')}")
+                    all_passed = False
+                elif record.get('amount') != 128.50:
+                    print(f"  ✗ 金额值错误: {record.get('amount')}")
+                    all_passed = False
+    except Exception as e:
+        print(f"  ✗ 测试1异常: {str(e)}")
+        all_passed = False
 
     # -------------------------------------------------------------------------
     # 测试 2: JSON 文本解析
     # -------------------------------------------------------------------------
     print("\n[测试 2] JSON 文本解析")
-    sample_json = json.dumps([
-        {"name": "项目A", "date": "2024-01-10", "amount": 999.99, "category": "开发", "note": "第一阶段"},
-        {"name": "项目B", "date": "2024-02-20", "amount": 1500.00, "category": "运维", "note": "服务器"}
-    ], ensure_ascii=False)
-    result = _process_text_input(sample_json, DEFAULT_FIELDS)
-    assert result.get('success'), f"JSON 解析失败: {result.get('error_message')}"
-    records = result.get('data', [])
-    assert len(records) == 2, f"JSON 记录数错误: {len(records)}"
-    assert records[0]['name'] == '项目A', "JSON 第一条记录名称错误"
-    assert records[1]['amount'] == 1500.00, "JSON 第二条记录金额错误"
-    print(f"  ✓ JSON 解析成功: {len(records)} 条记录")
+    try:
+        sample_json = json.dumps([
+            {"name": "项目A", "date": "2024-01-10", "amount": 999.99, "category": "开发", "note": "第一阶段"},
+            {"name": "项目B", "date": "2024-02-20", "amount": 1500.00, "category": "运维", "note": "服务器"}
+        ], ensure_ascii=False)
+        result = _process_text_input(sample_json, DEFAULT_FIELDS)
+        if not result.get('success'):
+            print(f"  ✗ JSON 解析失败: {result.get('error_message')}")
+            all_passed = False
+        else:
+            records = result.get('data', [])
+            if len(records) != 2:
+                print(f"  ✗ JSON 记录数错误: {len(records)}")
+                all_passed = False
+            else:
+                if records[0]['name'] != '项目A':
+                    print(f"  ✗ JSON 第一条记录名称错误: {records[0]['name']}")
+                    all_passed = False
+                if records[1]['amount'] != 1500.00:
+                    print(f"  ✗ JSON 第二条记录金额错误: {records[1]['amount']}")
+                    all_passed = False
+                print(f"  ✓ JSON 解析成功: {len(records)} 条记录")
+    except Exception as e:
+        print(f"  ✗ 测试2异常: {str(e)}")
+        all_passed = False
 
     # -------------------------------------------------------------------------
     # 测试 3: CSV 文本解析
     # -------------------------------------------------------------------------
     print("\n[测试 3] CSV 文本解析")
-    sample_csv = "name,date,amount,category,note\n李四,2024-04-01,88.50,交通,地铁\n王五,2024-04-02,45.00,餐饮,午餐"
-    result = _process_text_input(sample_csv, DEFAULT_FIELDS)
-    assert result.get('success'), f"CSV 解析失败: {result.get('error_message')}"
-    records = result.get('data', [])
-    assert len(records) == 2, f"CSV 记录数错误: {len(records)}"
-    assert records[0]['name'] == '李四', "CSV 第一条记录名称错误"
-    assert records[1]['category'] == '餐饮', "CSV 第二条记录类别错误"
-    print(f"  ✓ CSV 解析成功: {len(records)} 条记录")
+    try:
+        sample_csv = "name,date,amount,category,note\n李四,2024-04-01,88.50,交通,地铁\n王五,2024-04-02,45.00,餐饮,午餐"
+        result = _process_text_input(sample_csv, DEFAULT_FIELDS)
+        if not result.get('success'):
+            print(f"  ✗ CSV 解析失败: {result.get('error_message')}")
+            all_passed = False
+        else:
+            records = result.get('data', [])
+            if len(records) != 2:
+                print(f"  ✗ CSV 记录数错误: {len(records)}")
+                all_passed = False
+            else:
+                if records[0]['name'] != '李四':
+                    print(f"  ✗ CSV 第一条记录名称错误: {records[0]['name']}")
+                    all_passed = False
+                if records[1]['category'] != '餐饮':
+                    print(f"  ✗ CSV 第二条记录类别错误: {records[1]['category']}")
+                    all_passed = False
+                print(f"  ✓ CSV 解析成功: {len(records)} 条记录")
+    except Exception as e:
+        print(f"  ✗ 测试3异常: {str(e)}")
+        all_passed = False
 
     # -------------------------------------------------------------------------
     # 测试 4: 置信度标注
     # -------------------------------------------------------------------------
     print("\n[测试 4] 置信度标注")
-    test_values = [
-        ('张三', 'name', CONFIDENCE_HIGH),
-        ('2024-01-01', 'date', CONFIDENCE_HIGH),
-        (123.45, 'amount', CONFIDENCE_HIGH),
-        ('', 'name', CONFIDENCE_LOW),
-        ('[需核实:name]', 'name', CONFIDENCE_LOW),
-        ('x', 'note', CONFIDENCE_MEDIUM),
-    ]
-    for value, field, expected_min in test_values:
-        conf = _assess_confidence(value, field)
-        # 宽松断言：高置信度值不应被评为低
-        if expected_min == CONFIDENCE_HIGH:
-            assert conf != CONFIDENCE_LOW, f"高置信度值被低估: field={field}, value={value}, conf={conf}"
-        elif expected_min == CONFIDENCE_LOW:
-            assert conf == CONFIDENCE_LOW, f"低置信度值被高估: field={field}, value={value}, conf={conf}"
+    try:
+        test_values = [
+            ('张三', 'name', CONFIDENCE_HIGH),
+            ('2024-01-01', 'date', CONFIDENCE_HIGH),
+            (123.45, 'amount', CONFIDENCE_HIGH),
+            ('', 'name', CONFIDENCE_LOW),
+            ('[需核实:name]', 'name', CONFIDENCE_LOW),
+            ('x', 'note', CONFIDENCE_MEDIUM),
+        ]
+        conf_test_passed = True
+        for value, field, expected_min in test_values:
+            conf = _assess_confidence(value, field)
+            # 宽松断言：高置信度值不应被评为低
+            if expected_min == CONFIDENCE_HIGH:
+                if conf == CONFIDENCE_LOW:
+                    print(f"  ✗ 高置信度值被低估: field={field}, value={value}, conf={conf}")
+                    conf_test_passed = False
+            elif expected_min == CONFIDENCE_LOW:
+                if conf != CONFIDENCE_LOW:
+                    print(f"  ✗ 低置信度值被高估: field={field}, value={value}, conf={conf}")
+                    conf_test_passed = False
+            else:
+                if conf not in (CONFIDENCE_MEDIUM, CONFIDENCE_HIGH):
+                    print(f"  ✗ 置信度评估异常: field={field}, value={value}, conf={conf}")
+                    conf_test_passed = False
+        if conf_test_passed:
+            print(f"  ✓ 置信度标注逻辑正确")
         else:
-            assert conf in (CONFIDENCE_MEDIUM, CONFIDENCE_HIGH), f"置信度评估异常: {conf}"
-    print(f"  ✓ 置信度标注逻辑正确")
+            all_passed = False
+    except Exception as e:
+        print(f"  ✗ 测试4异常: {str(e)}")
+        all_passed = False
 
     # -------------------------------------------------------------------------
     # 测试 5: 错误处理
     # -------------------------------------------------------------------------
     print("\n[测试 5] 错误处理")
-    # 空文本
-    result = _process_text_input("", DEFAULT_FIELDS)
-    assert not result.get('success'), "空文本应返回错误"
-    assert result.get('error_code') == 'E001', f"空文本错误码错误: {result.get('error_code')}"
+    try:
+        # 空文本
+        result = _process_text_input("", DEFAULT_FIELDS)
+        if result.get('success') or result.get('error_code') != 'E001':
+            print(f"  ✗ 空文本错误处理错误")
+            all_passed = False
 
-    # 超长文本
-    long_text = "a" * (MAX_TEXT_LENGTH + 1)
-    result = _process_text_input(long_text, DEFAULT_FIELDS)
-    assert not result.get('success'), "超长文本应返回错误"
-    assert result.get('error_code') == 'E004', f"超长文本错误码错误: {result.get('error_code')}"
+        # 超长文本
+        long_text = "a" * (MAX_TEXT_LENGTH + 1)
+        result = _process_text_input(long_text, DEFAULT_FIELDS)
+        if result.get('success') or result.get('error_code') != 'E004':
+            print(f"  ✗ 超长文本错误处理错误")
+            all_passed = False
 
-    # 不存在的文件
-    result = _process_file_input("/nonexistent/path/file.txt", DEFAULT_FIELDS)
-    assert not result.get('success'), "不存在的文件应返回错误"
-    assert result.get('error_code') == 'E002', f"文件错误码错误: {result.get('error_code')}"
+        # 不存在的文件
+        result = _process_file_input("/nonexistent/path/file.txt", DEFAULT_FIELDS)
+        if result.get('success') or result.get('error_code') != 'E002':
+            print(f"  ✗ 文件错误处理错误")
+            all_passed = False
 
-    # 无效 URL
-    result = _process_url_input("not-a-url", DEFAULT_FIELDS)
-    assert not result.get('success'), "无效 URL 应返回错误"
-    assert result.get('error_code') == 'E003', f"URL 错误码错误: {result.get('error_code')}"
+        # 无效 URL
+        result = _process_url_input("not-a-url", DEFAULT_FIELDS)
+        if result.get('success') or result.get('error_code') != 'E003':
+            print(f"  ✗ URL 错误处理错误")
+            all_passed = False
 
-    # 批量超限
-    many_inputs = ["a"] * (MAX_BATCH_FILES + 1)
-    many_types = ["text"] * (MAX_BATCH_FILES + 1)
-    result = _process_batch_input(many_inputs, DEFAULT_FIELDS, many_types)
-    assert not result.get('success'), "批量超限应返回错误"
-    assert result.get('error_code') == 'E006', f"批量错误码错误: {result.get('error_code')}"
+        # 批量超限
+        many_inputs = ["a"] * (MAX_BATCH_FILES + 1)
+        many_types = ["text"] * (MAX_BATCH_FILES + 1)
+        result = _process_batch_input(many_inputs, DEFAULT_FIELDS, many_types)
+        if result.get('success') or result.get('error_code') != 'E006':
+            print(f"  ✗ 批量错误处理错误")
+            all_passed = False
 
-    print(f"  ✓ 错误处理逻辑正确")
+        print(f"  ✓ 错误处理逻辑正确")
+    except Exception as e:
+        print(f"  ✗ 测试5异常: {str(e)}")
+        all_passed = False
 
     # -------------------------------------------------------------------------
     # 测试 6: 输出模板
     # -------------------------------------------------------------------------
     print("\n[测试 6] 输出模板")
-    sample_result = _process_text_input(sample_text, DEFAULT_FIELDS)
+    try:
+        sample_result = _process_text_input(sample_text, DEFAULT_FIELDS)
 
-    # JSON 模板
-    json_output = _format_output(sample_result, 'json')
-    assert '"success": true' in json_output, "JSON 输出格式错误"
-    parsed = json.loads(json_output)
-    assert parsed['success'] is True, "JSON 输出解析失败"
+        # JSON 模板
+        json_output = _format_output(sample_result, 'json')
+        if '"success": true' not in json_output:
+            print(f"  ✗ JSON 输出格式错误")
+            all_passed = False
+        else:
+            parsed = json.loads(json_output)
+            if not parsed['success']:
+                print(f"  ✗ JSON 输出解析失败")
+                all_passed = False
 
-    # Markdown 模板
-    md_output = _format_output(sample_result, 'markdown')
-    assert '|' in md_output, "Markdown 表格格式错误"
-    assert '记录1' in md_output, "Markdown 表格缺少记录行"
+        # Markdown 模板
+        md_output = _format_output(sample_result, 'markdown')
+        if '|' not in md_output or '记录1' not in md_output:
+            print(f"  ✗ Markdown 表格格式错误")
+            all_passed = False
 
-    # 无效模板
-    err_code = _validate_output_template('xml')
-    assert err_code == 'E008', f"无效模板错误码错误: {err_code}"
+        # 无效模板
+        err_code = _validate_output_template('xml')
+        if err_code != 'E008':
+            print(f"  ✗ 无效模板错误码错误: {err_code}")
+            all_passed = False
 
-    print(f"  ✓ 输出模板功能正常")
+        print(f"  ✓ 输出模板功能正常")
+    except Exception as e:
+        print(f"  ✗ 测试6异常: {str(e)}")
+        all_passed = False
 
     # -------------------------------------------------------------------------
     # 测试 7: 批量处理
     # -------------------------------------------------------------------------
     print("\n[测试 7] 批量处理")
-    batch_inputs = [sample_text, sample_json]
-    batch_types = ["text", "text"]
-    result = _process_batch_input(batch_inputs, DEFAULT_FIELDS, batch_types)
-    assert result.get('success'), f"批量处理失败: {result.get('error_message')}"
-    batch_data = result.get('data', [])
-    assert len(batch_data) == 2, f"批量处理记录数错误: {len(batch_data)}"
-    assert batch_data[0].get('success'), "第一条批量处理失败"
-    assert batch_data[1].get('success'), "第二条批量处理失败"
-    print(f"  ✓ 批量处理成功: {len(batch_data)} 个输入")
+    try:
+        batch_inputs = [sample_text, sample_json]
+        batch_types = ["text", "text"]
+        result = _process_batch_input(batch_inputs, DEFAULT_FIELDS, batch_types)
+        if not result.get('success'):
+            print(f"  ✗ 批量处理失败: {result.get('error_message')}")
+            all_passed = False
+        else:
+            batch_data = result.get('data', [])
+            if len(batch_data) != 2:
+                print(f"  ✗ 批量处理记录数错误: {len(batch_data)}")
+                all_passed = False
+            elif not batch_data[0].get('success') or not batch_data[1].get('success'):
+                print(f"  ✗ 批量处理子项失败")
+                all_passed = False
+            else:
+                print(f"  ✓ 批量处理成功: {len(batch_data)} 个输入")
+    except Exception as e:
+        print(f"  ✗ 测试7异常: {str(e)}")
+        all_passed = False
 
     # -------------------------------------------------------------------------
     # 汇总
