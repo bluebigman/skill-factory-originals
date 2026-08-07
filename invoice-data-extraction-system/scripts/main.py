@@ -142,7 +142,8 @@ def normalize_amount(value) -> str:
     if isinstance(value, (int, float)):
         return f"{float(value):.2f}"
     s = str(value).strip()
-    s = re.sub(r"[^\d.]", "", s)  # 去掉非数字字符（保留小数点）
+    # 保留数字、小数点和负号
+    s = re.sub(r"[^\d.\-]", "", s)
     try:
         return f"{float(s):.2f}"
     except ValueError:
@@ -351,8 +352,8 @@ class InvoiceExtractor:
         }
         for kw in keywords.get(kind, []):
             patterns = [
-                rf"{kw}[（(]?小写[）)]?[：:\s]*([\d,，\.]+)",
-                rf"{kw}[：:\s]*([\d,，\.]+)",
+                rf"{kw}[（(]?小写[）)]?[：:\s]*[¥￥]?\s*([\d,，\.]+)",
+                rf"{kw}[：:\s]*[¥￥]?\s*([\d,，\.]+)",
             ]
             for pat in patterns:
                 m = re.search(pat, text)

@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: laravel-dynamic-report-generator
 name: laravel-dynamic-report-generator
-displayName: 报表生成 数据透视 动态查询
+displayName: 动态报表 数据透视 可视化输出
 description: 将用户数据转化为结构化报表，支持动态查询与可视化输出。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/laravel-dynamic-report-generator
@@ -14,7 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 数据工坊
 agent_created: true
-trigger_words: ["报表", "数据可视化", "laravel dynamic report generator", "动态报表", "数据透视", "SQL查询"]
+trigger_words: ["报表", "数据可视化", "laravel dynamic report generator", "动态报表", "数据透视", "数据洞察", "统计图表", "报告生成"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -28,37 +28,38 @@ trigger_words: ["报表", "数据可视化", "laravel dynamic report generator",
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-# Laravel 动态报表生成器 — 技能文档
+# Laravel 动态报表生成器 Skill 文档
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做（核心能力）
+### 1.1 能做什么
 
-| 编号 | 能力项 | 说明 | 示例 |
-|------|--------|------|------|
-| C1 | 数据源接入 | 接受用户提供的 CSV、JSON、Excel 文件或数据库连接串 | 上传 `sales_2024.csv` |
-| C2 | 动态查询构建 | 根据用户描述生成 SQL 查询语句，支持 WHERE/GROUP BY/ORDER BY | "按月份统计销售额" |
-| C3 | 报表结构设计 | 自动生成报表字段映射、聚合逻辑、分组层级 | 月度销售汇总表 |
-| C4 | 可视化配置 | 输出图表配置（柱状图、折线图、饼图） | 生成 ECharts 配置 JSON |
-| C5 | 批量处理 | 支持多数据源合并、定时刷新配置 | 每日自动汇总多门店数据 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 动态查询 | 根据用户传入的筛选条件，实时构建数据库查询 | 按日期范围、状态、分类筛选订单数据 |
+| 结构化报表 | 将查询结果整理为表格、分组、汇总等结构化格式 | 月度销售汇总表、用户活跃度统计表 |
+| 可视化输出 | 生成图表数据（柱状图、折线图、饼图）所需的 JSON 结构 | 趋势图数据、占比分布数据 |
+| 数据透视 | 支持按维度（时间、分类、地区）进行多角度聚合 | 按月份×产品类别的销售额矩阵 |
+| 导出支持 | 输出可被前端图表库直接消费的数据格式 | ECharts、Chart.js 兼容的数据结构 |
 
-### 1.2 不能做（明确边界）
+### 1.2 不能做什么
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不执行实际部署 | 仅生成代码/配置，不负责服务器部署 |
-| L2 | 不访问私有数据 | 不主动连接未授权的数据库或文件 |
-| L3 | 不保证性能 | 不承诺大数据量下的查询性能 |
-| L4 | 不处理非结构化数据 | 图片、音频、视频等非表格数据不在处理范围 |
-| L5 | 不替代业务决策 | 报表结果仅作参考，不提供商业建议 |
+| 限制项 | 说明 |
+|--------|------|
+| 不执行写操作 | 仅生成报表数据，不执行 INSERT/UPDATE/DELETE |
+| 不处理非结构化数据 | 仅支持关系型数据库中的结构化数据 |
+| 不提供实时推送 | 报表为请求-响应模式，不主动推送更新 |
+| 不包含权限系统 | 数据权限需由调用方自行控制 |
+| 不生成物理文件 | 输出为内存中的数据结构，不直接生成 PDF/Excel 文件 |
 
 ### 1.3 适用对象
 
-- Laravel 开发者：需要快速生成报表模块
-- 数据分析师：需要将原始数据转为可视化报表
-- 项目经理：需要了解数据趋势但不懂复杂 SQL
+- Laravel 开发者：需要快速为业务模块添加报表功能
+- 数据分析人员：需要从业务数据中提取洞察
+- 产品经理：需要验证数据展示方案的可行性
 
 
 ## 许可证（License）
