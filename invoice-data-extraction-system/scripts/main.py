@@ -25,10 +25,10 @@ ERROR_CODES = {
 
 # 发票字段配置（字段名 -> 提取规则）
 INVOICE_FIELDS = {
-    "invoice_number": {"name": "发票号码", "pattern": r"[A-Z]{2}\d{8}"},
-    "invoice_date": {"name": "开票日期", "pattern": r"\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?"},
-    "buyer_name": {"name": "购买方名称", "pattern": r"购买方[名称]?[:：]\s*([^\n,，;；]+)"},
-    "seller_name": {"name": "销售方名称", "pattern": r"销售方[名称]?[:：]\s*([^\n,，;；]+)"},
+    "invoice_number": {"name": "发票号码", "pattern": r"(?:发票号码|发票号)[:：]?\s*([A-Z]{2}\d{8})"},
+    "invoice_date": {"name": "开票日期", "pattern": r"(?:开票日期|日期)[:：]?\s*(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)"},
+    "buyer_name": {"name": "购买方名称", "pattern": r"(?:购买方名称|购买方)[:：]?\s*([^\n,，;；]+)"},
+    "seller_name": {"name": "销售方名称", "pattern": r"(?:销售方名称|销售方)[:：]?\s*([^\n,，;；]+)"},
     "total_amount": {"name": "价税合计", "pattern": r"价税合计[（(大写)]?[:：]?\s*[￥¥]?\s*(\d+[.,]?\d*)"},
     "tax_amount": {"name": "税额", "pattern": r"税额[:：]?\s*[￥¥]?\s*(\d+[.,]?\d*)"},
 }
@@ -36,6 +36,17 @@ INVOICE_FIELDS = {
 # 置信度阈值定义
 CONFIDENCE_HIGH = 0.90
 CONFIDENCE_MEDIUM = 0.85
+
+# 发票关键词（用于判断是否为发票）
+INVOICE_KEYWORDS = [
+    "发票",
+    "invoice",
+    "发票号码",
+    "开票日期",
+    "购买方",
+    "销售方",
+    "价税合计"
+]
 
 
 # ============================================================
@@ -90,7 +101,7 @@ class InvoiceExtractor:
             self.error_message = ERROR_CODES["E001"]
             raise ValueError(self.error_message)
         
-        # 检查是否包含发票相关关键词
+        # 检查是否包含发票相关关键词（更严格）
         if not self._contains_invoice_keywords(text):
             self.error_code = "E003"
             self.error_message = ERROR_CODES["E003"] + "未检测到发票特征"
@@ -131,9 +142,24 @@ class InvoiceExtractor:
         return result
     
     def _contains_invoice_keywords(self, text: str) -> bool:
-        """检查是否包含发票关键词"""
-        keywords = ["发票", "invoice", "发票号码", "开票日期"]
-        return any(kw.lower() in text.lower() for kw in keywords)
+        """
+        检查是否包含发票关键词
+        要求至少包含2个关键词，且必须包含"发票"或"invoice"
+        """
+        text_lower = text.lower()
+        
+        # 必须包含"发票"或"invoice"
+        if "发票" not in text_lower and "invoice" not in text_lower:
+            return False
+        
+        # 统计其他关键词
+        keyword_count = sum(
+            1 for kw in INVOICE_KEYWORDS 
+            if kw.lower() in text_lower
+        )
+        
+        # 至少匹配2个关键词（包括"发票"本身）
+        return keyword_count >= 2
     
     def _extract_field(self, text: str, config: Dict[str, str]) -> Tuple[Optional[str], float]:
         """提取单个字段"""
@@ -146,6 +172,9 @@ class InvoiceExtractor:
         # 提取值（如果有捕获组则用第一个捕获组）
         value = match.group(1) if match.groups() else match.group(0)
         value = value.strip()
+        
+        # 清理值（去除可能的标点）
+        value = re.sub(r'[，,。；;：:]+$', '', value)  # 去除末尾标点
         
         # 计算置信度
         confidence = self._calculate_confidence(value, config["name"])
