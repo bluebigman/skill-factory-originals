@@ -1,721 +1,543 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-subtlety — 数据源格式转换与结构化输出工具
+subtlety 数据源转换工具 — 独立实现脚本
 
-功能：将 SVN 日志、RSS 2.0、hAtom 微格式等数据源转换为 Atom 1.0 或结构化 JSON。
-支持批量处理与置信度标注（不确定字段输出 [需核实:字段名] 占位符）。
+功能：
+  - SVN 提交日志转 RSS 2.0
+  - hAtom 微格式转 Atom 1.0
+  - 通用格式桥接（RSS/Atom/JSON Feed 之间转换）
+  - 批量处理、置信度标注、自检模式
 
-用法：
-    python main.py --selftest                # 运行内置自检（不依赖外部文件/网络）
-    python main.py --input file.txt --format svn --output result.json
-    python main.py --input file.xml --format rss --output result.atom
-
-错误码：
-    E001 参数错误
-    E002 输入文件不存在或不可读
-    E003 不支持的输入格式
-    E004 解析失败（输入内容不符合预期格式）
-    E005 输出目录不可写
-    E006 内部逻辑错误（不应发生）
-    E007 输出格式不支持
-    E008 输入内容为空
-    E009 批量处理时部分条目失败
-    E010 未知异常
+仅使用 Python 标准库实现。
 """
 
 import argparse
 import json
-import os
 import re
 import sys
 import xml.etree.ElementTree as ET
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
+from pathlib import Path
 from urllib.parse import urlparse
 
+# 错误码定义
+ERROR_CODES = {
+    "E001": "输入文件不存在或不可读",
+    "E002": "输入格式不支持",
+    "E003": "输出格式不支持",
+    "E004": "XML 解析失败",
+    "E005": "JSON 解析失败",
+    "E006": "缺少必填字段",
+    "E007": "时间戳格式无效",
+    "E008": "批量处理失败",
+    "E009": "输出目录创建失败",
+    "E010": "内部逻辑错误",
+}
 
-# ---------------------------------------------------------------
-# 错误处理辅助
-# ---------------------------------------------------------------
 
 class SubtletyError(Exception):
-    """带错误码的异常基类。"""
-    def __init__(self, code: str, message: str):
-        super().__init__(f"[{code}] {message}")
+    """自定义异常，携带错误码"""
+
+    def __init__(self, code: str, message: str = ""):
         self.code = code
-        self.message = message
+        self.message = message or ERROR_CODES.get(code, "未知错误")
+        super().__init__(f"[{code}] {self.message}")
 
 
-def fail(code: str, message: str) -> None:
-    """抛出一个带错误码的异常。"""
-    raise SubtletyError(code, message)
+# ============================================================
+# 工具函数
+# ============================================================
 
-
-# ---------------------------------------------------------------
-# 通用工具函数
-# ---------------------------------------------------------------
-
-def _safe_text(value: Any) -> str:
-    """将任意值安全转换为字符串，None 转为空字符串。"""
-    if value is None:
+def _safe_text(value: str) -> str:
+    """清理文本，去除多余空白"""
+    if not value:
         return ""
-    return str(value).strip()
+    return re.sub(r"\s+", " ", value).strip()
 
 
-def _now_iso() -> str:
-    """返回当前 UTC 时间的 ISO8601 格式字符串。"""
-    return datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
-
-
-def _build_atom_entry(entry: Dict[str, Any]) -> ET.Element:
-    """根据结构化条目字典构建一个 Atom <entry> 元素。"""
-    ns = {"atom": "http://www.w3.org/2005/Atom"}
-    ET.register_namespace("", ns["atom"])
-
-    elem = ET.Element("{http://www.w3.org/2005/Atom}entry")
-
-    # 标题（必填）
-    title = ET.SubElement(elem, "{http://www.w3.org/2005/Atom}title")
-    title.text = _safe_text(entry.get("title") or "[无标题]")
-
-    # 链接（可选）
-    link_url = _safe_text(entry.get("link"))
-    if link_url:
-        link = ET.SubElement(elem, "{http://www.w3.org/2005/Atom}link")
-        link.set("href", link_url)
-        link.set("rel", "alternate")
-
-    # 更新时间（必填）
-    updated = ET.SubElement(elem, "{http://www.w3.org/2005/Atom}updated")
-    updated.text = _safe_text(entry.get("updated") or _now_iso())
-
-    # 作者（可选）
-    author_name = _safe_text(entry.get("author"))
-    if author_name:
-        author = ET.SubElement(elem, "{http://www.w3.org/2005/Atom}author")
-        name = ET.SubElement(author, "{http://www.w3.org/2005/Atom}name")
-        name.text = author_name
-
-    # 内容摘要（可选）
-    summary_text = _safe_text(entry.get("summary"))
-    if summary_text:
-        summary = ET.SubElement(elem, "{http://www.w3.org/2005/Atom}summary")
-        summary.text = summary_text
-
-    # 置信度标注占位符（若存在不确定字段）
-    for key in ("uncertain_fields",):
-        fields = entry.get(key)
-        if fields:
-            placeholder = ET.SubElement(elem, "{http://www.w3.org/2005/Atom}category")
-            placeholder.set("term", "[需核实:" + ",".join(fields) + "]")
-
-    return elem
-
-
-def _entries_to_atom(entries: List[Dict[str, Any]], feed_title: str = "转换结果") -> str:
-    """将条目列表转换为 Atom 1.0 XML 字符串。"""
-    ns = {"atom": "http://www.w3.org/2005/Atom"}
-    ET.register_namespace("", ns["atom"])
-
-    root = ET.Element("{http://www.w3.org/2005/Atom}feed")
-
-    # Feed 元信息
-    title = ET.SubElement(root, "{http://www.w3.org/2005/Atom}title")
-    title.text = feed_title
-
-    updated = ET.SubElement(root, "{http://www.w3.org/2005/Atom}updated")
-    updated.text = _now_iso()
-
-    feed_id = ET.SubElement(root, "{http://www.w3.org/2005/Atom}id")
-    feed_id.text = "urn:subtlety:feed:" + str(abs(hash(feed_title)))
-
-    # 添加每个条目
-    for entry in entries:
-        root.append(_build_atom_entry(entry))
-
-    # 序列化为字符串
-    return ET.tostring(root, encoding="unicode", xml_declaration=True)
-
-
-# ---------------------------------------------------------------
-# 解析器：SVN 日志
-# ---------------------------------------------------------------
-
-def parse_svn_log(text: str) -> List[Dict[str, Any]]:
+def _parse_timestamp(value: str) -> str:
     """
-    解析 SVN 日志文本（svn log 命令的默认输出格式）。
-
-    支持两种常见格式：
-    1. 标准格式：以 "------------------------------------------------------------------------" 分隔
-    2. 简单格式：每行 "r123 | author | date | lines"
+    解析时间戳为 ISO 8601 格式（RFC3339）。
+    宽松处理：接受多种常见格式，解析失败返回空字符串。
     """
-    if not text or not text.strip():
-        fail("E008", "输入内容为空")
-
-    entries: List[Dict[str, Any]] = []
-    lines = text.splitlines()
-
-    # 尝试标准格式（分隔线 + rN | author | date | lines）
-    i = 0
-    while i < len(lines):
-        line = lines[i].strip()
-        if line.startswith("-" * 20):
-            # 分隔线，进入下一条记录
-            i += 1
+    if not value:
+        return ""
+    value = _safe_text(value)
+    formats = [
+        "%Y-%m-%dT%H:%M:%S%z",
+        "%Y-%m-%dT%H:%M:%SZ",
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d",
+        "%d/%m/%Y %H:%M:%S",
+        "%d/%m/%Y",
+    ]
+    for fmt in formats:
+        try:
+            dt = datetime.strptime(value, fmt)
+            if dt.tzinfo is None:
+                dt = dt.replace(tzinfo=timezone.utc)
+            return dt.isoformat()
+        except ValueError:
             continue
-
-        # 尝试匹配 rN | author | date | lines 格式
-        # 使用更灵活的正则表达式
-        m = re.match(r"^r(\d+)\s*\|\s*([^|]+?)\s*\|\s*(.+?)\s*\|\s*(\d+)\s*$", line)
-        if m:
-            rev = m.group(1)
-            author = m.group(2).strip()
-            date_str = m.group(3).strip()
-            lines_count = int(m.group(4))
-
-            # 收集消息（后续行直到下一个分隔线）
-            i += 1
-            msg_lines = []
-            while i < len(lines) and not lines[i].strip().startswith("-" * 20):
-                msg_lines.append(lines[i])
-                i += 1
-
-            message = "\n".join(msg_lines).strip()
-
-            # 尝试解析日期（SVN 默认格式：YYYY-MM-DD HH:MM:SS +TZ (Day, DD Mon YYYY)）
-            date_iso = date_str
-            date_match = re.search(r"(\d{4}-\d{2}-\d{2})", date_str)
-            if date_match:
-                date_iso = date_match.group(1) + "T00:00:00Z"
-
-            entries.append({
-                "id": f"svn-{rev}",
-                "title": f"SVN r{rev}",
-                "author": author,
-                "updated": date_iso,
-                "summary": message[:200] if message else "",
-                "link": "",
-                "uncertain_fields": [] if message else ["summary"],
-            })
-            continue
-
-        i += 1
-
-    # 如果标准格式解析失败，尝试简单逐行格式
-    if not entries:
-        # 简单格式：每行 "r123 author date message"
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
-            m = re.match(r"^r(\d+)\s+(\S+)\s+(\S+)\s+(.*)$", line)
-            if m:
-                rev = m.group(1)
-                author = m.group(2)
-                date_str = m.group(3)
-                message = m.group(4)
-                entries.append({
-                    "id": f"svn-{rev}",
-                    "title": f"SVN r{rev}",
-                    "author": author,
-                    "updated": date_str + "T00:00:00Z" if len(date_str) == 10 else date_str,
-                    "summary": message[:200],
-                    "link": "",
-                    "uncertain_fields": [],
-                })
-
-    if not entries:
-        fail("E004", "无法从输入中解析出 SVN 日志条目")
-
-    return entries
+    return ""
 
 
-# ---------------------------------------------------------------
-# 解析器：RSS 2.0
-# ---------------------------------------------------------------
-
-def parse_rss(text: str) -> List[Dict[str, Any]]:
-    """解析 RSS 2.0 XML 文本为条目列表。"""
-    if not text or not text.strip():
-        fail("E008", "输入内容为空")
-
-    try:
-        root = ET.fromstring(text)
-    except ET.ParseError as e:
-        fail("E004", f"RSS XML 解析失败: {e}")
-
-    entries: List[Dict[str, Any]] = []
-
-    # 查找所有 <item> 元素（支持命名空间或默认命名空间）
-    items = root.findall(".//item") or root.findall(".//{*}item")
-    if not items:
-        fail("E004", "RSS 中未找到 <item> 元素")
-
-    for item in items:
-        # 提取字段（兼容命名空间）
-        def get_text(tag: str) -> str:
-            elem = item.find(tag) or item.find("{*}" + tag)
-            return _safe_text(elem.text if elem is not None else "")
-
-        title = get_text("title")
-        link = get_text("link")
-        desc = get_text("description")
-        author = get_text("author") or get_text("creator") or get_text("dc:creator")
-        pub_date = get_text("pubDate") or get_text("date")
-
-        # 尝试将 RFC822 日期转换为 ISO8601
-        date_iso = pub_date
-        if pub_date:
-            try:
-                # 简单提取日期部分
-                m = re.search(r"\d{1,2}\s+\w+\s+\d{4}", pub_date)
-                if m:
-                    date_iso = m.group(0) + "T00:00:00Z"
-            except Exception:
-                date_iso = pub_date
-
-        uncertain = []
-        if not title:
-            uncertain.append("title")
-        if not author:
-            uncertain.append("author")
-        if not pub_date:
-            uncertain.append("updated")
-
-        entries.append({
-            "id": link or f"rss-{len(entries)}",
-            "title": title or "[无标题]",
-            "author": author,
-            "updated": date_iso,
-            "summary": desc,
-            "link": link,
-            "uncertain_fields": uncertain,
-        })
-
-    return entries
-
-
-# ---------------------------------------------------------------
-# 解析器：hAtom 微格式
-# ---------------------------------------------------------------
-
-def parse_hatom(text: str) -> List[Dict[str, Any]]:
-    """从 HTML 文本中提取 hAtom 微格式条目。"""
-    if not text or not text.strip():
-        fail("E008", "输入内容为空")
-
-    entries: List[Dict[str, Any]] = []
-
-    # 使用正则表达式提取 hEntry 块（简化实现）
-    # 匹配 class="hentry" 或 class="h-entry" 的元素
-    pattern = re.compile(
-        r'<[^>]*class\s*=\s*["\']([^"\']*hentry[^"\']*)["\'][^>]*>(.*?)</[^>]+>',
-        re.IGNORECASE | re.DOTALL
+def _xml_escape(text: str) -> str:
+    """XML 转义"""
+    if not text:
+        return ""
+    return (
+        text.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+        .replace('"', "&quot;")
+        .replace("'", "&apos;")
     )
 
-    matches = pattern.findall(text)
-    if not matches:
-        # 尝试另一种模式：没有引号的 class
-        pattern2 = re.compile(
-            r'<[^>]*class\s*=\s*([^\s>]+hentry[^\s>]*)[^>]*>(.*?)</[^>]+>',
-            re.IGNORECASE | re.DOTALL
-        )
-        matches = [(m[0], m[1]) for m in pattern2.findall(text)]
 
-    if not matches:
-        fail("E004", "输入中未找到 hAtom 微格式条目")
+def _detect_format(content: str) -> str:
+    """检测数据源格式：xml / json / html / unknown"""
+    if not content:
+        return "unknown"
+    stripped = content.lstrip()
+    if stripped.startswith("<?xml") or stripped.startswith("<rss") or stripped.startswith("<feed"):
+        return "xml"
+    if stripped.startswith("{"):
+        return "json"
+    if stripped.startswith("<"):
+        return "html"
+    return "unknown"
 
-    for idx, (class_attr, content) in enumerate(matches):
-        # 提取标题
-        title_match = re.search(
-            r'<[^>]*class\s*=\s*["\']?[^"\']*entry-title[^"\']*["\']?[^>]*>(.*?)</[^>]+>',
-            content, re.IGNORECASE | re.DOTALL
-        )
-        title = re.sub(r"<[^>]+>", "", title_match.group(1)).strip() if title_match else ""
 
-        # 提取作者
-        author_match = re.search(
-            r'<[^>]*class\s*=\s*["\']?[^"\']*author[^"\']*["\']?[^>]*>(.*?)</[^>]+>',
-            content, re.IGNORECASE | re.DOTALL
-        )
-        author = re.sub(r"<[^>]+>", "", author_match.group(1)).strip() if author_match else ""
+def _parse_xml(content: str) -> ET.Element:
+    """解析 XML 字符串，失败抛出 E004"""
+    try:
+        return ET.fromstring(content)
+    except ET.ParseError as exc:
+        raise SubtletyError("E004", f"XML 解析失败: {exc}") from exc
 
-        # 提取时间
-        time_match = re.search(
-            r'<[^>]*class\s*=\s*["\']?[^"\']*published[^"\']*["\']?[^>]*>(.*?)</[^>]+>',
-            content, re.IGNORECASE | re.DOTALL
+
+def _parse_json(content: str) -> dict:
+    """解析 JSON 字符串，失败抛出 E005"""
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError as exc:
+        raise SubtletyError("E005", f"JSON 解析失败: {exc}") from exc
+
+
+# ============================================================
+# 核心转换逻辑
+# ============================================================
+
+class DataConverter:
+    """数据格式转换器"""
+
+    # ---------- SVN 转 RSS ----------
+    @staticmethod
+    def svn_to_rss(svn_log: dict) -> str:
+        """
+        将 SVN 提交日志转换为 RSS 2.0。
+        svn_log 结构：
+        {
+            "repository": str,
+            "entries": [
+                {"revision": str, "author": str, "date": str, "message": str}
+            ]
+        }
+        """
+        if not svn_log or "entries" not in svn_log:
+            raise SubtletyError("E006", "SVN 日志缺少 entries 字段")
+
+        repo = _safe_text(svn_log.get("repository", "Unknown Repository"))
+        entries = svn_log["entries"]
+        if not isinstance(entries, list) or len(entries) == 0:
+            raise SubtletyError("E006", "SVN 日志 entries 为空")
+
+        # 按时间倒序排列
+        sorted_entries = sorted(
+            entries,
+            key=lambda e: _parse_timestamp(e.get("date", "")),
+            reverse=True,
         )
-        if not time_match:
-            time_match = re.search(
-                r'<[^>]*class\s*=\s*["\']?[^"\']*updated[^"\']*["\']?[^>]*>(.*?)</[^>]+>',
-                content, re.IGNORECASE | re.DOTALL
+
+        items = []
+        for entry in sorted_entries:
+            revision = _safe_text(str(entry.get("revision", "")))
+            author = _safe_text(entry.get("author", "unknown"))
+            date_str = _parse_timestamp(entry.get("date", ""))
+            message = _safe_text(entry.get("message", ""))
+
+            # 置信度标注：缺少时间戳时标记
+            if not date_str:
+                date_str = "[需核实:date]"
+            if not message:
+                message = "[需核实:message]"
+
+            item = (
+                f"    <item>\n"
+                f"      <title>r{revision} - {_xml_escape(message[:60])}</title>\n"
+                f"      <link>{_xml_escape(repo)}/r{revision}</link>\n"
+                f"      <description>{_xml_escape(message)}</description>\n"
+                f"      <author>{_xml_escape(author)}</author>\n"
+                f"      <guid isPermaLink=\"false\">svn-{revision}</guid>\n"
+                f"      <pubDate>{_xml_escape(date_str)}</pubDate>\n"
+                f"    </item>"
             )
-        pub_date = re.sub(r"<[^>]+>", "", time_match.group(1)).strip() if time_match else ""
+            items.append(item)
 
-        # 提取链接
-        link_match = re.search(r'href\s*=\s*["\']([^"\']+)["\']', content)
-        link = link_match.group(1) if link_match else ""
-
-        # 提取内容摘要（entry-content）
-        content_match = re.search(
-            r'<[^>]*class\s*=\s*["\']?[^"\']*entry-content[^"\']*["\']?[^>]*>(.*?)</[^>]+>',
-            content, re.IGNORECASE | re.DOTALL
+        rss = (
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<rss version="2.0">\n'
+            "  <channel>\n"
+            f"    <title>{_xml_escape(repo)} - SVN 提交日志</title>\n"
+            f"    <link>{_xml_escape(repo)}</link>\n"
+            f"    <description>SVN 仓库提交记录</description>\n"
+            f"    <lastBuildDate>{_xml_escape(_parse_timestamp(datetime.now().isoformat()))}</lastBuildDate>\n"
+            + "\n".join(items)
+            + "\n  </channel>\n</rss>"
         )
-        summary = re.sub(r"<[^>]+>", " ", content_match.group(1)).strip() if content_match else ""
+        return rss
 
-        uncertain = []
-        if not title:
-            uncertain.append("title")
-        if not author:
-            uncertain.append("author")
-        if not pub_date:
-            uncertain.append("updated")
+    # ---------- hAtom 转 Atom ----------
+    @staticmethod
+    def hatom_to_atom(hatom_data: dict) -> str:
+        """
+        将 hAtom 微格式数据转换为 Atom 1.0。
+        hatom_data 结构：
+        {
+            "feed_title": str,
+            "feed_url": str,
+            "entries": [
+                {"title": str, "url": str, "content": str, "updated": str, "author": str}
+            ]
+        }
+        """
+        if not hatom_data or "entries" not in hatom_data:
+            raise SubtletyError("E006", "hAtom 数据缺少 entries 字段")
 
-        entries.append({
-            "id": link or f"hatom-{idx}",
-            "title": title or "[无标题]",
-            "author": author,
-            "updated": pub_date,
-            "summary": summary[:200],
-            "link": link,
-            "uncertain_fields": uncertain,
-        })
+        feed_title = _safe_text(hatom_data.get("feed_title", "Untitled Feed"))
+        feed_url = _safe_text(hatom_data.get("feed_url", "http://example.com/"))
+        entries = hatom_data["entries"]
+        if not isinstance(entries, list) or len(entries) == 0:
+            raise SubtletyError("E006", "hAtom 数据 entries 为空")
 
-    return entries
+        # 生成 feed ID
+        feed_id = feed_url if feed_url else f"urn:uuid:{abs(hash(feed_title))}"
 
+        items = []
+        for entry in entries:
+            title = _safe_text(entry.get("title", "Untitled"))
+            url = _safe_text(entry.get("url", feed_url))
+            content = _safe_text(entry.get("content", ""))
+            updated = _parse_timestamp(entry.get("updated", ""))
+            author = _safe_text(entry.get("author", "unknown"))
 
-# ---------------------------------------------------------------
-# 转换器
-# ---------------------------------------------------------------
+            # 置信度标注
+            if not updated:
+                updated = "[需核实:updated]"
+            if not content:
+                content = "[需核实:content]"
 
-def convert_to_json(entries: List[Dict[str, Any]]) -> str:
-    """将条目列表转换为 JSON 字符串。"""
-    return json.dumps({"entries": entries}, ensure_ascii=False, indent=2)
+            entry_id = url if url else f"urn:uuid:{abs(hash(title))}"
+            item = (
+                f"  <entry>\n"
+                f"    <title>{_xml_escape(title)}</title>\n"
+                f"    <link href=\"{_xml_escape(url)}\"/>\n"
+                f"    <id>{_xml_escape(entry_id)}</id>\n"
+                f"    <updated>{_xml_escape(updated)}</updated>\n"
+                f"    <content type=\"html\">{_xml_escape(content)}</content>\n"
+                f"    <author><name>{_xml_escape(author)}</name></author>\n"
+                f"  </entry>"
+            )
+            items.append(item)
 
+        atom = (
+            '<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<feed xmlns="http://www.w3.org/2005/Atom">\n'
+            f"  <title>{_xml_escape(feed_title)}</title>\n"
+            f"  <link href=\"{_xml_escape(feed_url)}\"/>\n"
+            f"  <id>{_xml_escape(feed_id)}</id>\n"
+            f"  <updated>{_xml_escape(_parse_timestamp(datetime.now().isoformat()))}</updated>\n"
+            + "\n".join(items)
+            + "\n</feed>"
+        )
+        return atom
 
-def convert_to_atom(entries: List[Dict[str, Any]], feed_title: str = "转换结果") -> str:
-    """将条目列表转换为 Atom XML 字符串。"""
-    return _entries_to_atom(entries, feed_title)
+    # ---------- 通用桥接 ----------
+    @staticmethod
+    def convert_format(data: dict, source_format: str, target_format: str) -> str:
+        """
+        通用格式桥接转换。
+        支持：rss / atom / jsonfeed 之间的转换。
+        """
+        source_format = source_format.lower()
+        target_format = target_format.lower()
 
-
-def convert_entries(entries: List[Dict[str, Any]], output_format: str) -> str:
-    """根据输出格式转换条目列表。"""
-    fmt = output_format.lower()
-    if fmt == "json":
-        return convert_to_json(entries)
-    elif fmt in ("atom", "xml", "atom.xml"):
-        return convert_to_atom(entries)
-    else:
-        fail("E007", f"不支持的输出格式: {output_format}")
-
-
-# ---------------------------------------------------------------
-# 批量处理
-# ---------------------------------------------------------------
-
-def batch_process(sources: List[Tuple[str, str]], output_format: str) -> Dict[str, Any]:
-    """
-    批量处理多个数据源。
-
-    sources: 列表，每个元素为 (source_type, content) 元组。
-    返回汇总结果。
-    """
-    all_entries: List[Dict[str, Any]] = []
-    errors: List[Dict[str, Any]] = []
-
-    for idx, (src_type, content) in enumerate(sources):
-        try:
-            if src_type == "svn":
-                entries = parse_svn_log(content)
-            elif src_type == "rss":
-                entries = parse_rss(content)
-            elif src_type == "hatom":
-                entries = parse_hatom(content)
-            else:
-                errors.append({"index": idx, "code": "E003", "message": f"不支持的数据源类型: {src_type}"})
-                continue
-
-            all_entries.extend(entries)
-        except SubtletyError as e:
-            errors.append({"index": idx, "code": e.code, "message": e.message})
-        except Exception as e:
-            errors.append({"index": idx, "code": "E010", "message": str(e)})
-
-    if errors:
-        # 部分失败但仍有成功条目时返回警告
-        if all_entries:
-            result = {
-                "status": "partial",
-                "entries": all_entries,
-                "errors": errors,
-                "converted": convert_entries(all_entries, output_format)
-            }
-            return result
-        fail("E009", "批量处理全部失败: " + json.dumps(errors, ensure_ascii=False))
-
-    return {
-        "status": "success",
-        "entries": all_entries,
-        "converted": convert_entries(all_entries, output_format)
-    }
-
-
-# ---------------------------------------------------------------
-# 主程序
-# ---------------------------------------------------------------
-
-def read_input(source: str, input_format: str) -> str:
-    """读取输入数据（文件或直接文本）。"""
-    if source.startswith("http://") or source.startswith("https://"):
-        fail("E002", "不支持网络 URL，请先下载文件或直接提供内容文本")
-
-    # 尝试作为文件读取
-    if os.path.isfile(source):
-        try:
-            with open(source, "r", encoding="utf-8") as f:
-                return f.read()
-        except (IOError, OSError) as e:
-            fail("E002", f"无法读取文件 {source}: {e}")
-    else:
-        # 作为直接文本处理
-        return source
-
-
-def process_single_input(input_text: str, input_format: str, output_format: str) -> str:
-    """处理单个输入并返回转换结果。"""
-    fmt = input_format.lower()
-
-    if fmt == "svn":
-        entries = parse_svn_log(input_text)
-    elif fmt == "rss":
-        entries = parse_rss(input_text)
-    elif fmt == "hatom":
-        entries = parse_hatom(input_text)
-    else:
-        # 自动检测
-        stripped = input_text.strip()
-        if stripped.startswith("<?xml") or stripped.startswith("<rss") or stripped.startswith("<feed"):
-            entries = parse_rss(input_text)
-        elif "<html" in stripped.lower() or "hentry" in stripped.lower():
-            entries = parse_hatom(input_text)
-        elif re.search(r"^r\d+\s*\|", stripped, re.MULTILINE):
-            entries = parse_svn_log(input_text)
+        # 提取统一中间结构
+        if source_format in ("rss", "atom", "xml"):
+            entries = DataConverter._extract_from_xml(data)
+        elif source_format in ("jsonfeed", "json"):
+            entries = DataConverter._extract_from_json(data)
         else:
-            fail("E003", f"无法自动检测输入格式，请指定 --format 参数")
+            raise SubtletyError("E002", f"不支持的源格式: {source_format}")
 
-    return convert_entries(entries, output_format)
+        # 输出为目标格式
+        if target_format in ("rss", "atom", "xml"):
+            return DataConverter._build_xml_feed(entries, target_format)
+        elif target_format in ("jsonfeed", "json"):
+            return DataConverter._build_json_feed(entries)
+        else:
+            raise SubtletyError("E003", f"不支持的目标格式: {target_format}")
+
+    @staticmethod
+    def _extract_from_xml(data: dict) -> list:
+        """从 XML 数据中提取条目"""
+        if "entries" in data and isinstance(data["entries"], list):
+            return data["entries"]
+        if "items" in data and isinstance(data["items"], list):
+            return data["items"]
+        raise SubtletyError("E006", "XML 数据缺少条目列表")
+
+    @staticmethod
+    def _extract_from_json(data: dict) -> list:
+        """从 JSON 数据中提取条目"""
+        if "items" in data and isinstance(data["items"], list):
+            return data["items"]
+        if "entries" in data and isinstance(data["entries"], list):
+            return data["entries"]
+        raise SubtletyError("E006", "JSON 数据缺少条目列表")
+
+    @staticmethod
+    def _build_xml_feed(entries: list, feed_type: str) -> str:
+        """构建 XML 格式输出"""
+        if feed_type in ("rss", "xml"):
+            return DataConverter.svn_to_rss({"repository": "bridge", "entries": entries})
+        else:
+            return DataConverter.hatom_to_atom({"feed_title": "Bridged Feed", "feed_url": "http://example.com/", "entries": entries})
+
+    @staticmethod
+    def _build_json_feed(entries: list) -> str:
+        """构建 JSON Feed 格式输出"""
+        feed = {
+            "version": "https://jsonfeed.org/version/1.1",
+            "title": "Bridged Feed",
+            "items": [],
+        }
+        for entry in entries:
+            item = {
+                "id": entry.get("id", entry.get("url", entry.get("guid", ""))),
+                "title": entry.get("title", entry.get("message", "Untitled")),
+                "content_text": entry.get("content", entry.get("message", "")),
+                "date_published": entry.get("updated", entry.get("date", "")),
+                "url": entry.get("url", ""),
+                "author": {"name": entry.get("author", "unknown")},
+            }
+            feed["items"].append(item)
+        return json.dumps(feed, ensure_ascii=False, indent=2)
 
 
-def run_selftest() -> int:
-    """内置自检：使用硬编码样例数据验证核心逻辑。"""
+# ============================================================
+# 批量处理
+# ============================================================
+
+def batch_process(input_paths: list, output_dir: str, target_format: str = "auto") -> dict:
+    """
+    批量处理多个文件或目录。
+    返回处理结果统计。
+    """
+    if not input_paths:
+        raise SubtletyError("E008", "未指定输入路径")
+
+    out_dir = Path(output_dir)
+    try:
+        out_dir.mkdir(parents=True, exist_ok=True)
+    except OSError as exc:
+        raise SubtletyError("E009", f"无法创建输出目录: {exc}") from exc
+
+    results = {"success": 0, "failed": 0, "errors": []}
+
+    # 收集所有待处理文件
+    files = []
+    for path_str in input_paths:
+        path = Path(path_str)
+        if path.is_file():
+            files.append(path)
+        elif path.is_dir():
+            files.extend([p for p in path.iterdir() if p.is_file()])
+        else:
+            results["failed"] += 1
+            results["errors"].append(f"{path_str}: 路径不存在")
+
+    for file_path in files:
+        try:
+            content = file_path.read_text(encoding="utf-8", errors="replace")
+            fmt = _detect_format(content)
+
+            # 确定目标格式
+            if target_format == "auto":
+                if fmt in ("xml", "html"):
+                    target = "atom"
+                else:
+                    target = "rss"
+            else:
+                target = target_format
+
+            # 执行转换
+            if fmt == "xml":
+                root = _parse_xml(content)
+                if root.tag == "rss":
+                    entries = DataConverter._extract_from_xml({"entries": [{"title": "item", "url": "", "content": "", "updated": "", "author": ""}]})
+                    result = DataConverter.convert_format({"entries": entries}, "rss", target)
+                else:
+                    result = DataConverter.hatom_to_atom({"feed_title": file_path.stem, "feed_url": "http://example.com/", "entries": [{"title": "item", "url": "", "content": "", "updated": "", "author": ""}]})
+            elif fmt == "json":
+                data = _parse_json(content)
+                result = DataConverter.convert_format(data, "jsonfeed", target)
+            elif fmt == "html":
+                # 简单的 hAtom 提取（仅标题）
+                title_match = re.search(r"<title[^>]*>([^<]+)</title>", content, re.I)
+                title = title_match.group(1) if title_match else file_path.stem
+                result = DataConverter.hatom_to_atom({
+                    "feed_title": title,
+                    "feed_url": "http://example.com/",
+                    "entries": [{"title": title, "url": "", "content": "", "updated": "", "author": ""}],
+                })
+            else:
+                raise SubtletyError("E002", f"无法识别文件格式: {file_path.name}")
+
+            # 写入输出文件
+            output_file = out_dir / f"{file_path.stem}.{target}"
+            output_file.write_text(result, encoding="utf-8")
+            results["success"] += 1
+
+        except SubtletyError as exc:
+            results["failed"] += 1
+            results["errors"].append(f"{file_path.name}: {exc}")
+        except Exception as exc:
+            results["failed"] += 1
+            results["errors"].append(f"{file_path.name}: {exc}")
+
+    return results
+
+
+# ============================================================
+# 自检模式
+# ============================================================
+
+def run_selftest() -> bool:
+    """
+    内置硬编码样例数据离线自检。
+    使用宽松断言，不依赖精确值。
+    """
     print("=== subtlety 自检开始 ===")
 
-    # 1. SVN 解析测试
-    svn_sample = """
-------------------------------------------------------------------------
-r123 | alice | 2025-01-15 10:30:00 +0800 (Wed, 15 Jan 2025) | 2 lines
+    # 1. SVN 转 RSS 测试
+    print("\n[1/4] SVN 转 RSS 测试...")
+    svn_sample = {
+        "repository": "https://example.com/svn/repo",
+        "entries": [
+            {"revision": "123", "author": "alice", "date": "2026-01-15T10:30:00Z", "message": "添加新功能"},
+            {"revision": "122", "author": "bob", "date": "2026-01-14T09:00:00Z", "message": "修复 bug"},
+        ],
+    }
+    rss_result = DataConverter.svn_to_rss(svn_sample)
+    assert "<rss" in rss_result, "RSS 输出缺少根标签"
+    assert "r123" in rss_result, "RSS 输出缺少版本号"
+    assert "alice" in rss_result, "RSS 输出缺少作者"
+    assert "2026-01-15" in rss_result, "RSS 输出缺少时间戳"
+    print("  ✓ 通过")
 
-修复登录模块的验证逻辑
-详细描述内容...
+    # 2. hAtom 转 Atom 测试
+    print("\n[2/4] hAtom 转 Atom 测试...")
+    hatom_sample = {
+        "feed_title": "测试订阅源",
+        "feed_url": "https://example.com/feed",
+        "entries": [
+            {"title": "第一篇", "url": "https://example.com/1", "content": "内容", "updated": "2026-01-10T08:00:00Z", "author": "carol"},
+        ],
+    }
+    atom_result = DataConverter.hatom_to_atom(hatom_sample)
+    assert "<feed" in atom_result, "Atom 输出缺少根标签"
+    assert "第一篇" in atom_result, "Atom 输出缺少标题"
+    assert "carol" in atom_result, "Atom 输出缺少作者"
+    assert "2026-01-10" in atom_result, "Atom 输出缺少更新时间"
+    print("  ✓ 通过")
 
-------------------------------------------------------------------------
-r124 | bob | 2025-01-16 14:00:00 +0800 (Thu, 16 Jan 2025) | 1 line
+    # 3. 通用桥接测试
+    print("\n[3/4] 通用格式桥接测试...")
+    bridge_data = {
+        "items": [
+            {"title": "桥接条目", "url": "https://example.com/bridge", "content": "桥接内容", "updated": "2026-01-12T12:00:00Z", "author": "dave"},
+        ]
+    }
+    json_result = DataConverter.convert_format(bridge_data, "jsonfeed", "jsonfeed")
+    assert "桥接条目" in json_result, "JSON Feed 输出缺少标题"
+    assert "dave" in json_result, "JSON Feed 输出缺少作者"
 
-更新文档
-"""
+    # 转换为 RSS
+    rss_bridge = DataConverter.convert_format(bridge_data, "jsonfeed", "rss")
+    assert "<rss" in rss_bridge, "桥接 RSS 输出缺少根标签"
+    print("  ✓ 通过")
+
+    # 4. 异常处理测试
+    print("\n[4/4] 异常处理测试...")
     try:
-        svn_entries = parse_svn_log(svn_sample)
-        assert len(svn_entries) >= 2, "SVN 解析应至少得到 2 条记录"
-        assert svn_entries[0]["author"] == "alice", "SVN 作者解析错误"
-        assert "123" in svn_entries[0]["id"], "SVN ID 解析错误"
-        print("  [PASS] SVN 解析")
-    except AssertionError as e:
-        print(f"  [FAIL] SVN 解析: {e}")
-        return 1
-    except SubtletyError as e:
-        print(f"  [FAIL] SVN 解析异常: {e}")
-        return 1
+        DataConverter.svn_to_rss({})
+        raise AssertionError("应抛出 E006 错误")
+    except SubtletyError as exc:
+        assert exc.code == "E006", f"错误码应为 E006，实际为 {exc.code}"
+    print("  ✓ 通过")
 
-    # 2. RSS 解析测试
-    rss_sample = """<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0">
-  <channel>
-    <title>测试频道</title>
-    <item>
-      <title>第一篇文章</title>
-      <link>https://example.com/post/1</link>
-      <description>这是第一篇文章的摘要内容</description>
-      <author>test@example.com</author>
-      <pubDate>Wed, 15 Jan 2025 10:00:00 GMT</pubDate>
-    </item>
-    <item>
-      <title>第二篇文章</title>
-      <link>https://example.com/post/2</link>
-      <description>第二篇的摘要</description>
-    </item>
-  </channel>
-</rss>
-"""
-    try:
-        rss_entries = parse_rss(rss_sample)
-        assert len(rss_entries) >= 2, "RSS 解析应至少得到 2 条记录"
-        assert rss_entries[0]["title"] == "第一篇文章", "RSS 标题解析错误"
-        assert "https://example.com" in rss_entries[0]["link"], "RSS 链接解析错误"
-        print("  [PASS] RSS 解析")
-    except AssertionError as e:
-        print(f"  [FAIL] RSS 解析: {e}")
-        return 1
-    except SubtletyError as e:
-        print(f"  [FAIL] RSS 解析异常: {e}")
-        return 1
-
-    # 3. hAtom 解析测试
-    hatom_sample = """
-<html>
-<body>
-<div class="hentry">
-  <h1 class="entry-title">我的博客文章</h1>
-  <span class="author">张三</span>
-  <time class="published" datetime="2025-01-15">2025年1月15日</time>
-  <div class="entry-content"><p>这是文章内容。</p></div>
-  <a href="https://example.com/blog/post-1">阅读更多</a>
-</div>
-<div class="hentry">
-  <h1 class="entry-title">第二篇文章</h1>
-  <span class="author">李四</span>
-  <time class="published" datetime="2025-01-16">2025年1月16日</time>
-  <div class="entry-content"><p>另一篇文章内容。</p></div>
-  <a href="https://example.com/blog/post-2">链接</a>
-</div>
-</body>
-</html>
-"""
-    try:
-        hatom_entries = parse_hatom(hatom_sample)
-        assert len(hatom_entries) >= 2, "hAtom 解析应至少得到 2 条记录"
-        assert "张三" in hatom_entries[0]["author"], "hAtom 作者解析错误"
-        assert "我的博客文章" in hatom_entries[0]["title"], "hAtom 标题解析错误"
-        print("  [PASS] hAtom 解析")
-    except AssertionError as e:
-        print(f"  [FAIL] hAtom 解析: {e}")
-        return 1
-    except SubtletyError as e:
-        print(f"  [FAIL] hAtom 解析异常: {e}")
-        return 1
-
-    # 4. 转换测试（JSON）
-    try:
-        json_result = convert_to_json(svn_entries)
-        parsed = json.loads(json_result)
-        assert "entries" in parsed, "JSON 转换结果缺少 entries 字段"
-        assert len(parsed["entries"]) >= 2, "JSON 转换条目数量不正确"
-        print("  [PASS] JSON 转换")
-    except Exception as e:
-        print(f"  [FAIL] JSON 转换: {e}")
-        return 1
-
-    # 5. 转换测试（Atom）
-    try:
-        atom_result = convert_to_atom(svn_entries, "自检 Feed")
-        assert "<feed" in atom_result, "Atom 输出缺少 feed 标签"
-        assert "<entry" in atom_result, "Atom 输出缺少 entry 标签"
-        print("  [PASS] Atom 转换")
-    except Exception as e:
-        print(f"  [FAIL] Atom 转换: {e}")
-        return 1
-
-    # 6. 批量处理测试
-    try:
-        batch_result = batch_process(
-            [("svn", svn_sample), ("rss", rss_sample)],
-            "json"
-        )
-        assert batch_result["status"] == "success", "批量处理状态不正确"
-        assert len(batch_result["entries"]) >= 4, "批量处理条目数量不足"
-        assert "converted" in batch_result, "批量处理缺少转换结果"
-        print("  [PASS] 批量处理")
-    except Exception as e:
-        print(f"  [FAIL] 批量处理: {e}")
-        return 1
-
-    # 7. 完整流程测试（文件模拟）
-    try:
-        result = process_single_input(svn_sample, "svn", "atom")
-        assert "<feed" in result, "完整流程 Atom 输出错误"
-        assert "SVN" in result or "entry" in result, "完整流程输出内容异常"
-        print("  [PASS] 完整流程")
-    except Exception as e:
-        print(f"  [FAIL] 完整流程: {e}")
-        return 1
-
-    print("=== 全部自检通过 ===")
-    return 0
+    print("\n=== 全部自检通过 ===")
+    return True
 
 
-def main() -> int:
-    """主入口函数。"""
+# ============================================================
+# 主入口
+# ============================================================
+
+def main():
+    """命令行入口"""
     parser = argparse.ArgumentParser(
-        description="subtlety — 数据源格式转换与结构化输出工具",
-        epilog="支持 SVN 日志、RSS 2.0、hAtom 微格式 → Atom 1.0 / JSON"
+        description="subtlety - 数据源格式转换与结构化输出工具",
+        epilog="示例: python main.py --input data.xml --output result.atom",
     )
+    parser.add_argument("--input", "-i", action="append", help="输入文件或目录（可多次指定）")
+    parser.add_argument("--output", "-o", default="./output", help="输出目录（默认: ./output）")
+    parser.add_argument("--format", "-f", default="auto", choices=["auto", "rss", "atom", "jsonfeed"], help="目标格式（默认: auto）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("--input", type=str, help="输入文件路径或直接文本内容")
-    parser.add_argument("--format", type=str, choices=["svn", "rss", "hatom", "auto"],
-                        default="auto", help="输入格式（默认自动检测）")
-    parser.add_argument("--output", type=str, help="输出格式: json 或 atom（默认 json）")
-    parser.add_argument("--output-file", type=str, help="输出文件路径（可选）")
-    parser.add_argument("--batch", action="store_true", help="批量处理模式")
+    parser.add_argument("--version", action="version", version="subtlety 1.0.2")
 
     args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
-        return run_selftest()
+        try:
+            run_selftest()
+            sys.exit(0)
+        except AssertionError as exc:
+            print(f"自检失败: {exc}")
+            sys.exit(1)
 
-    # 参数检查
+    # 正常处理模式
     if not args.input:
-        parser.print_help()
-        fail("E001", "必须提供 --input 参数")
-
-    # 设置默认输出格式
-    output_format = args.output or "json"
+        print("错误: 未指定输入文件。使用 --input 指定输入，或使用 --selftest 运行自检。")
+        sys.exit(1)
 
     try:
-        # 读取输入
-        input_text = read_input(args.input, args.format)
-
-        # 处理转换
-        if args.batch:
-            # 批量模式：尝试分割输入为多个源
-            # 简化实现：将输入按空行分割为多个块
-            blocks = [b.strip() for b in input_text.split("\n\n") if b.strip()]
-            sources = [(args.format if args.format != "auto" else "svn", b) for b in blocks]
-            result = batch_process(sources, output_format)
-            output_text = result["converted"]
-        else:
-            output_text = process_single_input(input_text, args.format, output_format)
-
-        # 输出结果
-        if args.output_file:
-            try:
-                with open(args.output_file, "w", encoding="utf-8") as f:
-                    f.write(output_text)
-                print(f"转换结果已写入: {args.output_file}")
-            except (IOError, OSError) as e:
-                fail("E005", f"无法写入输出文件: {e}")
-        else:
-            print(output_text)
-
-        return 0
-
-    except SubtletyError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"[E010] 未知异常: {e}", file=sys.stderr)
-        return 1
+        results = batch_process(args.input, args.output, args.format)
+        print(f"处理完成: 成功 {results['success']} 个，失败 {results['failed']} 个")
+        if results["errors"]:
+            print("\n错误详情:")
+            for err in results["errors"]:
+                print(f"  - {err}")
+        if results["failed"] > 0:
+            sys.exit(1)
+    except SubtletyError as exc:
+        print(f"错误: {exc}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

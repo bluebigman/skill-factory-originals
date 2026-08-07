@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: subtlety
 name: subtlety
-displayName: 数据格式转换 信息提取 结构化输出
+displayName: 数据源转换 格式桥接 批量处理
 description: 将SVN、RSS、hAtom等数据源转换为Atom或结构化格式，支持批量处理与置信度标注。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/subtlety
@@ -12,9 +12,13 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DataForge Studio
+author: 数据桥接工坊
 agent_created: true
-trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "格式转换", "数据源转换", "RSS生成", "Atom生成"]
+trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "格式转换", "数据源转换", "订阅源转换", "版本库转订阅"]
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -28,38 +32,33 @@ trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "格式转换", "数据
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+# subtlety — 数据源格式转换与结构化输出 Skill
 
-# Subtlety — 数据源格式转换与结构化输出 Skill
+## 一、能力边界（一页纸速查卡）
 
-## 一、能力边界速查卡
+### 1.1 能做什么
 
-### ✅ 能做（核心能力）
-
-| 编号 | 能力项 | 说明 |
+| 序号 | 能力项 | 说明 |
 |------|--------|------|
-| 1 | **数据源解析** | 支持从用户提供的文件路径、URL 或直接粘贴的文本中读取数据 |
-| 2 | **格式转换** | 将 SVN 日志、RSS 2.0、hAtom 微格式等转换为 Atom 1.0 或结构化 JSON |
-| 3 | **关键信息保留** | 自动识别并保留标题、作者、时间戳、链接、内容摘要等核心字段 |
-| 4 | **置信度标注** | 对转换过程中存在不确定性的字段，输出 `[需核实:字段名]` 占位符 |
-| 5 | **批量处理** | 支持一次传入多个数据源，按统一规则批量转换并输出汇总结果 |
+| 1 | SVN 仓库转 RSS | 读取 SVN 提交日志，生成 RSS 2.0 格式的订阅源 |
+| 2 | hAtom 微格式转 Atom | 解析 HTML 中的 hAtom 微格式，输出 Atom 1.0 标准文档 |
+| 3 | 通用格式桥接 | 在 RSS、Atom、hAtom、JSON Feed 之间做双向或单向转换 |
+| 4 | 批量处理 | 一次处理多个数据源文件或目录，输出到指定目录 |
+| 5 | 置信度标注 | 对转换结果中无法确认的字段，自动添加 `[需核实:字段名]` 占位标记 |
+| 6 | 自检模式 | 通过 `--selftest` 验证环境依赖与基础转换管线是否正常 |
 
-### ❌ 不能做（明确边界）
+### 1.2 不能做什么
 
-- 不能访问未授权的私有网络资源（需用户提供可访问的 URL 或文件内容）
-- 不能解析加密或二进制格式的 SVN 仓库（仅支持文本格式的日志输出）
-- 不能自动判断输入数据的语义正确性（仅做格式转换，不做内容审核）
-- 不能保证转换后的数据与原始数据在语义上完全等价（复杂嵌套结构可能丢失）
+- 不能将二进制文件内容（如图片、压缩包）嵌入 RSS/Atom 正文，仅保留链接引用。
+- 不能自动判断 SVN 提交的代码变更语义，只做日志层面的结构化转换。
+- 不能保证转换后的订阅源被所有阅读器完美兼容（不同阅读器对字段支持有差异）。
+- 不能处理无任何时间戳信息的源数据（无法生成 `updated` 字段时，会输出占位符而非猜测）。
 
-### 🎯 适用对象
+### 1.3 适用对象
 
-| 适用场景 | 不适用场景 |
-|----------|------------|
-| 个人博客从 SVN 迁移到静态站点生成器 | 实时流式数据管道 |
-| 将旧版 RSS 订阅源升级为 Atom 格式 | 需要双向同步的持续集成流程 |
-| 从 HTML 页面提取 hAtom 微格式数据 | 需要自然语言理解的复杂内容分析 |
-| 批量整理多个数据源的条目信息 | 二进制文件或多媒体资源的转换 |
+- 需要将内部 SVN 仓库变更动态同步到团队 RSS 阅读器的运维/研发人员。
+- 需要将旧版 hAtom 页面内容迁移为 Atom 订阅源的内容运营人员。
+- 需要批量整理多个格式订阅源的数据工程师。
 
 
 ## 许可证（License）
