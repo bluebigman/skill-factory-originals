@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: chronic
 name: chronic
-displayName: 日期解析 自然语言 时间转换
+displayName: 时间语义解析 日期转换 批量识别
 description: 将自然语言日期描述解析为结构化时间数据，支持多种格式与批量处理。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/chronic
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 时序工坊
+author: LinguaForge Studio
 agent_created: true
-trigger_words: ["chronic", "日期解析", "自然语言日期", "时间转换", "日期识别", "parse date"]
+trigger_words: ["chronic", "日期解析", "自然语言日期", "时间转换", "日期识别", "时间语义", "日期归一化"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -28,28 +28,21 @@ trigger_words: ["chronic", "日期解析", "自然语言日期", "时间转换",
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
 
-# Chronic 自然语言日期解析 Skill 文档
+# chronic — 自然语言日期解析 Skill
 
-## 一、能力边界速查卡
+## 一、能力边界：速查卡
 
-### 1.1 能做与不能做
+| 维度 | 说明 |
+|------|------|
+| **能做** | 解析中文/英文自然语言日期描述；支持相对日期（"三天后"）；支持绝对日期（"2024年3月15日"）；支持模糊日期（"下个月初"）；支持批量输入（数组/换行分隔）；输出 ISO 8601 结构化时间对象 |
+| **不能做** | 不解析时区偏移推算（仅标记时区字段）；不处理农历日期转换；不推断语义模糊的"大约"类描述（如"大概中午"）；不执行日期运算（如"加两周"需先解析再自行计算）；不处理非日期实体（如"第3季度"需先归一化为"Q3"） |
+| **适用对象** | 需要从用户输入中提取时间信息的对话系统、任务调度器、日志分析工具、数据清洗管道 |
 
-| 维度 | 能做 | 不能做 |
-|------|------|--------|
-| 输入类型 | 用户直接提供的文本、文件内容、URL 指向的文本 | 二进制文件、图片中的文字（需先 OCR） |
-| 解析范围 | 英文自然语言日期描述（如 "next tuesday"、"3 days ago"） | 非英文日期表达、时区转换计算 |
-| 输出格式 | 结构化时间对象（年/月/日/时/分/秒）、自定义格式字符串 | 直接生成日历事件、自动设置提醒 |
-| 批量处理 | 支持多条日期描述批量解析 | 流式处理超大数据集（建议分块） |
-| 自定义能力 | 可指定参考时间（now）、时区偏移、输出格式模板 | 修改 Chronic 核心解析逻辑 |
+**输入限制**：单条描述不超过 200 字符；批量输入不超过 100 条/次；超出部分截断并返回截断警告。
 
-### 1.2 适用对象
-
-- 需要从用户输入中提取时间信息的开发者
-- 构建命令行工具、聊天机器人、任务管理应用的技术人员
-- 处理日志文件、文本记录中时间戳的运维工程师
+**输出格式**：`{ "parsed": true/false, "value": "YYYY-MM-DDTHH:mm:ss", "confidence": 0.0-1.0, "original": "用户输入原文", "warnings": [] }`
 
 
 ## 许可证（License）
