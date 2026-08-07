@@ -67,6 +67,13 @@ ERROR_MESSAGES: Dict[str, str] = {
     "E010": "内部逻辑错误，请报告此问题",
 }
 
+# 能力边界说明
+BOUNDARY_NOTES = {
+    "url": "URL 已记录，未访问网络（遵循能力边界）",
+    "file": "文件已读取，仅处理本地内容",
+    "text": "文本已解析，未执行外部操作",
+}
+
 
 # ---------------------------------------------------------------------------
 # 核心数据结构
@@ -79,19 +86,24 @@ class ProcessingResult:
         data: Dict[str, Any],
         confidence: int,
         warnings: Optional[List[str]] = None,
+        boundary_note: Optional[str] = None,
     ) -> None:
         self.data = data
         self.confidence = confidence
         self.warnings = warnings or []
+        self.boundary_note = boundary_note
 
     def to_dict(self) -> Dict[str, Any]:
         """转为字典"""
-        return {
+        result = {
             "data": self.data,
             "confidence": self.confidence,
             "warnings": self.warnings,
             "timestamp": datetime.now().isoformat(),
         }
+        if self.boundary_note:
+            result["boundary_note"] = self.boundary_note
+        return result
 
     def to_json(self) -> str:
         """转为 JSON 字符串"""
@@ -283,6 +295,9 @@ def format_output(result: ProcessingResult, output_format: str = "json") -> str:
         lines.append(f"=== 处理结果（置信度: {result.confidence}%）===")
         lines.append(f"状态: {format_confidence(result.confidence)}")
 
+        if result.boundary_note:
+            lines.append(f"\n边界说明: {result.boundary_note}")
+
         if result.warnings:
             lines.append("\n警告:")
             for w in result.warnings:
@@ -318,17 +333,25 @@ def process_input(
     input_type, parsed_data = parse_input(raw_input)
 
     # Step 2: 根据输入类型处理
+    boundary_note = BOUNDARY_NOTES.get(input_type, "输入已处理")
+
     if input_type == "file":
         # 读取文件内容
         file_path = parsed_data.get("path", "")
         content = read_file_content(file_path)
-        parsed_data = {"content": content, "source": file_path}
+        parsed_data = {
+            "content": content,
+            "source": file_path,
+            "file_path": file_path,
+        }
 
     elif input_type == "url":
-        # 不访问网络，仅记录 URL
+        # 不访问网络，仅记录 URL 和明确的边界说明
+        url = parsed_data.get("url", "")
         parsed_data = {
-            "url": parsed_data.get("url", ""),
-            "note": "URL 已记录，未访问网络（遵循能力边界）",
+            "url": url,
+            "note": "URL 已记录，未访问网络（遵循能力边界：本工具不执行网络请求）",
+            "boundary": "仅记录 URL，不进行网络访问。如需获取内容，请提供文本或文件。",
         }
 
     elif input_type == "text":
@@ -339,9 +362,15 @@ def process_input(
         if lines:
             parsed_data["title"] = lines[0]
         parsed_data["content"] = text
+        parsed_data["boundary"] = "文本已解析，未执行外部操作"
 
     # Step 3: 提取字段
     extracted, missing = extract_fields(parsed_data)
+
+    # 确保 URL 输入时保留 url 字段
+    if input_type == "url":
+        extracted["url"] = parsed_data["url"]
+        extracted["note"] = "URL 已记录，未访问网络（遵循能力边界）"
 
     # Step 4: 计算置信度
     confidence, warnings = calculate_confidence(extracted, missing)
@@ -351,6 +380,7 @@ def process_input(
         data=extracted,
         confidence=confidence,
         warnings=warnings,
+        boundary_note=boundary_note,
     )
 
 
@@ -371,6 +401,7 @@ def process_batch(
                     data={"error": ERROR_MESSAGES.get(error_code, str(exc))},
                     confidence=0,
                     warnings=[f"第 {idx+1} 项处理失败"],
+                    boundary_note=f"第 {idx+1} 项处理失败，未完成处理",
                 )
             )
     return results
@@ -540,6 +571,9 @@ def run_selftest() -> int:
         result = process_input("https://example.com/novel/chapter1")
         assert "url" in result.data, "URL 未被记录"
         assert "note" in result.data, "缺少边界说明"
+        assert "boundary" in result.data, "缺少边界说明字段"
+        assert result.boundary_note is not None, "缺少边界说明"
+        assert "未访问网络" in result.boundary_note, "边界说明不明确"
         print(f"  通过 (记录 URL，未访问网络)")
         passed += 1
     except Exception as exc:
@@ -603,6 +637,10 @@ def main() -> int:
         # 单条处理模式
         result = process_input(args.input, args.format)
         print(format_output(result, args.format))
+
+        # 输出边界说明
+        if result.boundary_note:
+            print(f"\n边界说明: {result.boundary_note}")
 
         # 输出置信度提示
         if result.confidence < CONFIDENCE_HIGH:
