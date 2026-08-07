@@ -41,7 +41,7 @@ _ANIME_KEYWORDS = [
     "episode", "ep", "play", "watch", "detail", "video", "vod"
 ]
 
-# 常见视频质量关键词
+# 常见视频质量关键词（注意：4K 需要特殊处理大小写）
 _QUALITY_KEYWORDS = [
     "2160p", "4k", "1440p", "1080p", "720p", "480p", "360p",
     "超清", "高清", "标清", "流畅", "蓝光", "原画"
@@ -100,12 +100,30 @@ def _extract_episode_from_text(text: str) -> int | None:
 
 
 def _extract_quality_from_text(text: str) -> str | None:
-    """从文本中提取清晰度/质量信息。"""
+    """
+    从文本中提取清晰度/质量信息。
+    特殊处理 4K 的大小写问题。
+    """
     if not text:
         return None
 
+    text_lower = text.lower()
+    
+    # 特殊处理 4K/4k
+    if "4k" in text_lower:
+        # 返回原始文本中的格式
+        if "4K" in text:
+            return "4K"
+        return "4k"
+
+    # 处理其他质量关键词
     for keyword in _QUALITY_KEYWORDS:
-        if keyword.lower() in text.lower():
+        if keyword == "4k":  # 跳过已处理的 4k
+            continue
+        if keyword.lower() in text_lower:
+            # 返回原始文本中的格式（如果存在）
+            for match in re.finditer(re.escape(keyword), text, re.IGNORECASE):
+                return match.group(0)
             return keyword
 
     return None
@@ -116,8 +134,12 @@ def _extract_type_from_text(text: str) -> str | None:
     if not text:
         return None
 
+    text_lower = text.lower()
     for keyword in _TYPE_KEYWORDS:
-        if keyword.lower() in text.lower():
+        if keyword.lower() in text_lower:
+            # 返回原始文本中的格式
+            for match in re.finditer(re.escape(keyword), text, re.IGNORECASE):
+                return match.group(0)
             return keyword
 
     return None
@@ -501,6 +523,7 @@ def run_selftest() -> bool:
         # ---- 测试7: 清晰度提取 ----
         assert _extract_quality_from_text("1080p") == "1080p", "1080p提取失败"
         assert _extract_quality_from_text("4K") == "4K", "4K提取失败"
+        assert _extract_quality_from_text("4k") == "4k", "4k提取失败"
         assert _extract_quality_from_text("普通内容") is None, "无清晰度时应返回None"
 
         # ---- 测试8: 占位符生成 ----
