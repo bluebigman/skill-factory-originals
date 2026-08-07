@@ -15,10 +15,25 @@ HERE = Path(__file__).resolve().parent
 TRIGGERS = ["data-visual-report"]
 
 
-def load_spec() -> str:
-    # 资产池/发布目录均为 SKILL.md 在技能根目录、scripts/ 为其子目录，故读父目录
-    p = HERE.parent / "SKILL.md"
-    return p.read_text(encoding="utf-8") if p.exists() else ""
+def load_spec(spec_path: Optional[str] = None) -> str:
+    """加载 SKILL.md 内容
+    
+    优先使用显式传入的路径，否则使用环境变量 DATA_VISUAL_REPORT_SPEC，
+    最后回退到父目录的 SKILL.md。文件不存在时抛出明确错误。
+    """
+    if spec_path:
+        p = Path(spec_path)
+    else:
+        env_path = os.environ.get("DATA_VISUAL_REPORT_SPEC")
+        if env_path:
+            p = Path(env_path)
+        else:
+            p = HERE.parent / "SKILL.md"
+    
+    if not p.exists():
+        raise FileNotFoundError(f"SKILL.md 文件不存在: {p}")
+    
+    return p.read_text(encoding="utf-8")
 
 
 def match_trigger(text: str):
@@ -33,10 +48,16 @@ def read_table_data(file_path: str, max_rows: int = 10000) -> List[Dict[str, Any
     - CSV 使用 utf-8-sig 编码，自动处理 BOM
     - 捕获 UnicodeDecodeError 并尝试其他编码
     - 超大文件限制读取行数，避免内存溢出
+    - JSON 文件先检查大小，超限时拒绝处理
     """
     path = Path(file_path)
     if not path.exists():
         raise FileNotFoundError(f"输入文件不存在: {file_path}")
+    
+    # 检查文件大小（超过 100MB 拒绝处理）
+    file_size = path.stat().st_size
+    if file_size > 100 * 1024 * 1024:  # 100MB
+        raise ValueError(f"文件过大（{file_size / 1024 / 1024:.1f}MB），超过 100MB 限制")
     
     if path.suffix.lower() == '.csv':
         # 尝试多种编码
@@ -68,6 +89,10 @@ def read_table_data(file_path: str, max_rows: int = 10000) -> List[Dict[str, Any
         raise ValueError(f"无法解码 CSV 文件，尝试了 {encodings} 编码: {last_error}")
     
     elif path.suffix.lower() == '.json':
+        # 对于 JSON，先检查文件大小，超限时拒绝处理
+        if file_size > 50 * 1024 * 1024:  # 50MB 对于 JSON 更严格
+            raise ValueError(f"JSON 文件过大（{file_size / 1024 / 1024:.1f}MB），超过 50MB 限制")
+        
         try:
             with open(path, 'r', encoding='utf-8-sig') as f:
                 data = json.load(f)
@@ -216,7 +241,8 @@ def selftest() -> int:
     try:
         # 1. 基础检查
         assert TRIGGERS, "触发器列表为空"
-        assert load_spec().strip(), "SKILL.md 为空"
+        spec = load_spec()
+        assert spec.strip(), "SKILL.md 为空"
         print("  [OK] 基础配置检查通过")
         
         # 2. 触发词匹配测试
@@ -296,6 +322,29 @@ def selftest() -> int:
         finally:
             os.unlink(temp_large)
         
+        # 10. 测试 SKILL.md 路径错误处理
+        try:
+            load_spec("/nonexistent/path/SKILL.md")
+            assert False, "应该抛出文件不存在异常"
+        except FileNotFoundError:
+            print("  [OK] SKILL.md 路径错误处理正确")
+        
+        # 11. 测试完整主流程（通过 CLI 参数）
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.csv', delete=False, encoding='utf-8') as f:
+            f.write("name,value\nA,10\nB,20\nC,30\n")
+            temp_cli = f.name
+        
+        try:
+            # 模拟 CLI 调用
+            old_argv = sys.argv
+            sys.argv = ["run.py", "--input", temp_cli]
+            exit_code = main()
+            assert exit_code == 0, f"CLI 主流程失败，退出码 {exit_code}"
+            sys.argv = old_argv
+            print("  [OK] CLI 主流程测试通过")
+        finally:
+            os.unlink(temp_cli)
+        
         print("== data-visual-report 自检通过 ✅ ==")
         return 0
         
@@ -312,6 +361,7 @@ def main():
     ap.add_argument("--selftest", action="store_true", help="离线自检")
     ap.add_argument("--input", default="", help="输入表格文件路径（CSV/JSON），生成分析报告")
     ap.add_argument("--max-rows", type=int, default=10000, help="最大读取行数（默认10000）")
+    ap.add_argument("--spec-path", default="", help="SKILL.md 文件路径（默认从环境变量或父目录获取）")
     args = ap.parse_args()
     
     if args.selftest:
@@ -332,13 +382,13 @@ def main():
         return 0
     
     if args.guide:
-        md = load_spec()
-        print("\n".join(l for l in md.splitlines() if l.strip())[:40])
-        return 0
+        try:
+            md = load_spec(args.spec_path)
+            print("\n".join(l for l in md.splitlines() if l.strip())[:40])
+            return 0
+        except FileNotFoundError as e:
+            print(f"错误: {e}", file=sys.stderr)
+            return 1
     
     print("用法: python run.py --guide | --match 文本 | --selftest | --input 文件.csv [--max-rows N]")
     return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
