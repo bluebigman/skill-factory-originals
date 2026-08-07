@@ -61,8 +61,23 @@ class ImageProcessor:
     
     def detect_format(self, data: bytes) -> Optional[str]:
         """检测图片格式"""
+        if not data:
+            return None
+        
         for fmt, info in IMAGE_FORMATS.items():
-            if data.startswith(info["magic"]):
+            if fmt == "WEBP":
+                # WEBP 需要额外检查 RIFF + WEBP
+                if data.startswith(b"RIFF") and len(data) >= 12 and data[8:12] == b"WEBP":
+                    return fmt
+            elif fmt == "JPEG":
+                # JPEG 需要检查多个魔数
+                if data.startswith(b"\xff\xd8\xff"):
+                    return fmt
+            elif fmt == "GIF":
+                # GIF 支持 87a 和 89a 版本
+                if data.startswith(b"GIF87a") or data.startswith(b"GIF89a"):
+                    return fmt
+            elif data.startswith(info["magic"]):
                 return fmt
         return None
     
@@ -84,23 +99,26 @@ class ImageProcessor:
         try:
             if fmt == "PNG":
                 # PNG 尺寸在 IHDR 块中
-                width, height = struct.unpack(">II", data[16:24])
-                info["width"] = width
-                info["height"] = height
+                if len(data) >= 24:
+                    width, height = struct.unpack(">II", data[16:24])
+                    info["width"] = width
+                    info["height"] = height
             elif fmt == "JPEG":
                 # JPEG 尺寸在 SOF 标记中
                 info["width"], info["height"] = self._parse_jpeg_size(data)
             elif fmt == "GIF":
                 # GIF 尺寸在头部
-                width, height = struct.unpack("<HH", data[6:10])
-                info["width"] = width
-                info["height"] = height
+                if len(data) >= 10:
+                    width, height = struct.unpack("<HH", data[6:10])
+                    info["width"] = width
+                    info["height"] = height
             elif fmt == "BMP":
                 # BMP 尺寸在 DIB 头中
-                width = struct.unpack("<i", data[18:22])[0]
-                height = abs(struct.unpack("<i", data[22:26])[0])
-                info["width"] = width
-                info["height"] = height
+                if len(data) >= 26:
+                    width = struct.unpack("<i", data[18:22])[0]
+                    height = abs(struct.unpack("<i", data[22:26])[0])
+                    info["width"] = width
+                    info["height"] = height
         except (struct.error, IndexError):
             # 尺寸解析失败不致命，保留默认值
             pass
@@ -116,11 +134,15 @@ class ImageProcessor:
                 continue
             marker = data[idx + 1]
             if marker in (0xC0, 0xC1, 0xC2, 0xC3, 0xC5, 0xC6, 0xC7, 0xC9, 0xCA, 0xCB, 0xCD, 0xCE, 0xCF):
-                height = struct.unpack(">H", data[idx + 5:idx + 7])[0]
-                width = struct.unpack(">H", data[idx + 7:idx + 9])[0]
-                return width, height
-            length = struct.unpack(">H", data[idx + 2:idx + 4])[0]
-            idx += 2 + length
+                if idx + 9 < len(data):
+                    height = struct.unpack(">H", data[idx + 5:idx + 7])[0]
+                    width = struct.unpack(">H", data[idx + 7:idx + 9])[0]
+                    return width, height
+            if idx + 4 < len(data):
+                length = struct.unpack(">H", data[idx + 2:idx + 4])[0]
+                idx += 2 + length
+            else:
+                break
         return 0, 0
     
     def compress(self, data: bytes, quality: int = 75) -> Tuple[bytes, float]:
@@ -253,6 +275,26 @@ class SelfTest:
         test_images = {}
         
         # 生成一个最小的 PNG 图片（1x1 像素）
+        png_data = SelfTest._create_test_png()
+        test_images["png_1x1"] = png_data
+        
+        # 生成一个最小的 GIF 图片（1x1 像素）
+        gif_data = SelfTest._create_test_gif()
+        test_images["gif_1x1"] = gif_data
+        
+        # 生成一个 BMP 图片（1x1 像素，24位）
+        bmp_data = SelfTest._create_test_bmp()
+        test_images["bmp_1x1"] = bmp_data
+        
+        # 生成一个最小的 JPEG 图片
+        jpeg_data = SelfTest._create_test_jpeg()
+        test_images["jpeg_1x1"] = jpeg_data
+        
+        return test_images
+    
+    @staticmethod
+    def _create_test_png() -> bytes:
+        """创建一个最小的 PNG 图片"""
         # PNG 文件结构：签名 + IHDR + IDAT + IEND
         png_data = bytearray()
         png_data.extend(b"\x89PNG\r\n\x1a\n")
@@ -281,21 +323,33 @@ class SelfTest:
         png_data.extend(iend_chunk)
         png_data.extend(struct.pack(">I", iend_crc))
         
-        test_images["png_1x1"] = bytes(png_data)
-        
-        # 生成一个最小的 GIF 图片（1x1 像素）
+        return bytes(png_data)
+    
+    @staticmethod
+    def _create_test_gif() -> bytes:
+        """创建一个最小的 GIF 图片"""
         gif_data = bytearray()
         gif_data.extend(b"GIF89a")
         gif_data.extend(struct.pack("<HH", 1, 1))  # 宽度、高度
-        gif_data.extend(b"\x00\x00\x00")  # 全局颜色表标志等
+        
+        # 全局颜色表标志等
+        gif_data.extend(b"\x00\x00\x00")  # 包字段
         gif_data.extend(b"\x00\x00\x00\x00")  # 背景色等
-        gif_data.extend(b"\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00")  # 图像描述符
-        gif_data.extend(b"\x02\x02\x44\x01\x00")  # 图像数据
-        gif_data.extend(b"\x3b")  # 结束标记
         
-        test_images["gif_1x1"] = bytes(gif_data)
+        # 图像描述符
+        gif_data.extend(b"\x2c\x00\x00\x00\x00\x01\x00\x01\x00\x00")
         
-        # 生成一个 BMP 图片（1x1 像素，24位）
+        # 图像数据
+        gif_data.extend(b"\x02\x02\x44\x01\x00")
+        
+        # 结束标记
+        gif_data.extend(b"\x3b")
+        
+        return bytes(gif_data)
+    
+    @staticmethod
+    def _create_test_bmp() -> bytes:
+        """创建一个最小的 BMP 图片"""
         bmp_data = bytearray()
         bmp_data.extend(b"BM")
         
@@ -309,9 +363,48 @@ class SelfTest:
         # 像素数据（蓝色）
         bmp_data.extend(b"\xff\x00\x00")
         
-        test_images["bmp_1x1"] = bytes(bmp_data)
+        return bytes(bmp_data)
+    
+    @staticmethod
+    def _create_test_jpeg() -> bytes:
+        """创建一个最小的 JPEG 图片"""
+        # 这是一个最小化的 JPEG 文件结构
+        jpeg_data = bytearray()
         
-        return test_images
+        # SOI 标记
+        jpeg_data.extend(b"\xff\xd8")
+        
+        # APP0 标记
+        app0_data = b"JFIF\x00\x01\x01\x00\x00\x01\x00\x01\x00\x00"
+        jpeg_data.extend(b"\xff\xe0")
+        jpeg_data.extend(struct.pack(">H", len(app0_data) + 2))
+        jpeg_data.extend(app0_data)
+        
+        # SOF0 标记 (基线 DCT)
+        sof0_data = struct.pack(">BHHB", 8, 1, 1, 1) + b"\x01\x11\x00"
+        jpeg_data.extend(b"\xff\xc0")
+        jpeg_data.extend(struct.pack(">H", len(sof0_data) + 2))
+        jpeg_data.extend(sof0_data)
+        
+        # DHT 标记 (简化)
+        dht_data = b"\x00\x01\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
+        jpeg_data.extend(b"\xff\xc4")
+        jpeg_data.extend(struct.pack(">H", len(dht_data) + 2))
+        jpeg_data.extend(dht_data)
+        
+        # SOS 标记 (简化)
+        sos_data = b"\x01\x01\x00\x00\x3f\x00"
+        jpeg_data.extend(b"\xff\xda")
+        jpeg_data.extend(struct.pack(">H", len(sos_data) + 2))
+        jpeg_data.extend(sos_data)
+        
+        # 图像数据（简化）
+        jpeg_data.extend(b"\x00\x00\x00\x00\x00")
+        
+        # EOI 标记
+        jpeg_data.extend(b"\xff\xd9")
+        
+        return bytes(jpeg_data)
     
     @staticmethod
     def run() -> bool:
@@ -326,6 +419,7 @@ class SelfTest:
         assert processor.detect_format(test_images["png_1x1"]) == "PNG", "PNG 格式检测失败"
         assert processor.detect_format(test_images["gif_1x1"]) == "GIF", "GIF 格式检测失败"
         assert processor.detect_format(test_images["bmp_1x1"]) == "BMP", "BMP 格式检测失败"
+        assert processor.detect_format(test_images["jpeg_1x1"]) == "JPEG", "JPEG 格式检测失败"
         print("✓ 格式检测通过")
         
         # 测试2: 图片信息提取
@@ -334,6 +428,15 @@ class SelfTest:
         assert info["width"] == 1, f"PNG 宽度错误: {info['width']}"
         assert info["height"] == 1, f"PNG 高度错误: {info['height']}"
         assert info["size_bytes"] > 0, "PNG 大小错误"
+        
+        info = processor.get_image_info(test_images["gif_1x1"])
+        assert info["width"] == 1, f"GIF 宽度错误: {info['width']}"
+        assert info["height"] == 1, f"GIF 高度错误: {info['height']}"
+        
+        info = processor.get_image_info(test_images["bmp_1x1"])
+        assert info["width"] == 1, f"BMP 宽度错误: {info['width']}"
+        assert info["height"] == 1, f"BMP 高度错误: {info['height']}"
+        
         print("✓ 图片信息提取通过")
         
         # 测试3: 压缩功能
@@ -365,9 +468,14 @@ class SelfTest:
         
         # 测试6: 批量处理
         print("\n[测试6] 批量处理")
-        batch_inputs = [test_images["png_1x1"], test_images["gif_1x1"], test_images["bmp_1x1"]]
+        batch_inputs = [
+            test_images["png_1x1"], 
+            test_images["gif_1x1"], 
+            test_images["bmp_1x1"],
+            test_images["jpeg_1x1"]
+        ]
         batch_results = processor.process_batch(batch_inputs, {"quality": 60, "compress": True})
-        assert len(batch_results) == 3, "批量处理数量错误"
+        assert len(batch_results) == 4, "批量处理数量错误"
         for r in batch_results:
             assert r["status"] == "success", f"批量处理失败: {r}"
         print("✓ 批量处理通过")
@@ -384,11 +492,7 @@ class SelfTest:
         # 测试8: 边界条件
         print("\n[测试8] 边界条件")
         # 无效格式
-        try:
-            processor.detect_format(b"invalid data")
-            # 不抛异常也可以，返回 None 即可
-        except Exception:
-            pass
+        assert processor.detect_format(b"invalid data") is None, "无效格式应该返回 None"
         
         # 无效质量参数
         try:
@@ -396,6 +500,14 @@ class SelfTest:
             assert False, "无效质量参数应该报错"
         except ImageProcessorError as e:
             assert e.error_code == "E010", f"错误码错误: {e.error_code}"
+        
+        # 不支持的格式转换
+        try:
+            processor.convert_format(test_images["png_1x1"], "INVALID")
+            assert False, "不支持的格式应该报错"
+        except ImageProcessorError as e:
+            assert e.error_code == "E008", f"错误码错误: {e.error_code}"
+        
         print("✓ 边界条件通过")
         
         print("\n" + "="*50)
@@ -477,6 +589,9 @@ def main():
         except AssertionError as e:
             print(f"自测试失败: {e}", file=sys.stderr)
             sys.exit(1)
+        except Exception as e:
+            print(f"自测试异常: {e}", file=sys.stderr)
+            sys.exit(1)
     
     # 检查参数
     if not args.file and not args.dir:
@@ -509,7 +624,7 @@ def main():
     else:
         for result in results:
             if result.get("status") == "success":
-                print(f"\n文件: {result.get('filepath', f'输入#{result.get("index", 0)}')}")
+                print(f"\n文件: {result.get('filepath', f'输入#{result.get(\"index\", 0)}')}")
                 print(f"  格式: {result['format']}")
                 print(f"  尺寸: {result.get('width', 0)}x{result.get('height', 0)}")
                 print(f"  原始大小: {result['size_bytes']} bytes")
@@ -519,7 +634,7 @@ def main():
                 if result.get("warning"):
                     print(f"  警告: {result['warning']}")
             else:
-                print(f"\n文件: {result.get('filepath', f'输入#{result.get("index", 0)}')}")
+                print(f"\n文件: {result.get('filepath', f'输入#{result.get(\"index\", 0)}')}")
                 print(f"  错误: [{result.get('error', 'E009')}] {result.get('message', '处理失败')}")
 
 if __name__ == "__main__":
