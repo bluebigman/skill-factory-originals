@@ -1,96 +1,77 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-markdown-pdf: Markdown 转 PDF 转换器（独立实现）
-版本: 1.0.1
-许可: MIT
+markdown-pdf 技能独立实现脚本
 
-本脚本根据功能规格独立实现，仅使用 Python 标准库。
-核心功能：
-  1. 将 Markdown 文本、本地文件或远程 URL 转换为 PDF 文档。
-  2. 支持批量输入、自定义输出命名、合并输出。
-  3. 内置 --selftest 离线自检，不依赖外部文件或网络。
+基于功能规格独立编写（clean-room），不复制任何既有代码。
+提供 Markdown 转 PDF 的核心能力：文件转换、URL 转换、批量处理、样式控制、目录生成。
+
+仅依赖标准库，selftest 使用内置硬编码样例离线自检。
 """
 
 import argparse
+import hashlib
 import html
 import os
 import re
 import sys
+import tempfile
 import urllib.request
 from dataclasses import dataclass, field
-from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Union
+from typing import Dict, List, Optional, Tuple
 
-
-# ---------------------------------------------------------------------------
+# ============================================================
 # 错误码定义
-# ---------------------------------------------------------------------------
-ERROR_CODES = {
-    0: "成功",
-    "E001": "输入参数无效或缺失",
-    "E002": "文件读取失败（不存在或无法访问）",
-    "E003": "URL 访问失败或内容获取失败",
-    "E004": "Markdown 解析失败（语法不支持或内容损坏）",
-    "E005": "PDF 生成失败（渲染错误）",
-    "E006": "输出路径无效或无法写入",
-    "E007": "批量处理时部分输入失败",
-    "E008": "加密或二进制文件不支持",
-    "E009": "字体或资源加载失败",
-    "E010": "未知内部错误",
-}
+# E001: 参数错误
+# E002: 文件不存在
+# E003: 文件读取失败
+# E004: 文件写入失败
+# E005: URL 访问失败
+# E006: Markdown 解析失败
+# E007: PDF 生成失败
+# E008: 批量处理部分失败
+# E009: 目录生成失败
+# E010: 未知错误
+# ============================================================
 
 
-class MarkdownPDFError(Exception):
-    """自定义异常，携带错误码。"""
+# ============================================================
+# 数据模型
+# ============================================================
+@dataclass
+class ConversionOptions:
+    """转换选项配置"""
+    page_size: str = "A4"           # 页面大小
+    font_size: int = 12             # 字体大小（pt）
+    margin_top: int = 25            # 上边距（mm）
+    margin_bottom: int = 25         # 下边距（mm）
+    margin_left: int = 25           # 左边距（mm）
+    margin_right: int = 25          # 右边距（mm）
+    header_text: str = ""           # 页眉文本
+    footer_text: str = ""           # 页脚文本
+    generate_toc: bool = True       # 是否生成目录
+    font_family: str = "sans-serif" # 字体族
 
-    def __init__(self, code: str, message: str):
-        self.code = code
-        self.message = message
-        super().__init__(f"[{code}] {message}")
 
-
-# ---------------------------------------------------------------------------
-# 数据结构
-# ---------------------------------------------------------------------------
 @dataclass
 class ConversionResult:
-    """单次转换结果。"""
-
-    source: str          # 输入来源描述
-    output_path: str     # 输出文件路径
-    success: bool        # 是否成功
-    pages: int = 0       # 生成页数（估算）
-    warnings: List[str] = field(default_factory=list)  # 置信度提示
-
-
-@dataclass
-class PDFConfig:
-    """PDF 生成配置参数。"""
-
-    page_width: float = 595.0      # A4 宽度（点）
-    page_height: float = 842.0     # A4 高度（点）
-    margin_top: float = 72.0       # 上边距（点）
-    margin_bottom: float = 72.0    # 下边距（点）
-    margin_left: float = 72.0      # 左边距（点）
-    margin_right: float = 72.0     # 右边距（点）
-    font_size: float = 12.0        # 正文字号（点）
-    heading_font_size: float = 16.0  # 标题字号（点）
-    line_height: float = 1.5       # 行高倍数
-    output_dir: str = "output"     # 输出目录
+    """转换结果"""
+    source: str                     # 源（文件路径或 URL）
+    output_path: str                # 输出 PDF 路径
+    success: bool                   # 是否成功
+    error_code: Optional[str] = None  # 错误码
+    error_message: Optional[str] = None  # 错误信息
+    page_count: int = 0             # 页数
+    toc_entries: List[Tuple[int, str, int]] = field(default_factory=list)  # 目录条目 (级别, 标题, 页码)
 
 
-# ---------------------------------------------------------------------------
-# Markdown 解析器（轻量级，支持常见语法）
-# ---------------------------------------------------------------------------
+# ============================================================
+# Markdown 解析器（极简实现，仅支持规格所需核心语法）
+# ============================================================
 class MarkdownParser:
-    """
-    将 Markdown 文本解析为中间表示（块列表）。
-    支持：标题、段落、代码块、表格、列表、引用、链接、图片、粗体、斜体、行内代码。
-    不支持的语法会记录警告并尽力保留原文。
-    """
+    """极简 Markdown 解析器：支持标题、段落、列表、代码块、表格、引用、粗体斜体等"""
 
-    # 块级正则
-    _HEADING_RE = re.compile(r'^(#{1,6})\s+(.*)$')
-    _CODE_BLOCK_RE = re.compile(r'^
+    # 块级元素正则
+    _HEADING_RE = re.compile(r'^(#{1,6})\s+(.+)$')
+    _CODE_FENCE_RE = re.compile(r'^

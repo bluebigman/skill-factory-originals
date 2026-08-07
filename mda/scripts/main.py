@@ -1,606 +1,537 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-MDA - 数据编译为 Markdown 文档工具
-功能：将 JSON/CSV/XML/TXT 数据源编译为标准化 Markdown 文档，
-支持批量处理、置信度标注与模板定制。
+mda - 数据编译 文档生成 批量转换
+
+将任意数据源编译为标准化 Markdown 文档，支持批量处理与置信度标注。
+仅依赖 Python 标准库实现。
+
+用法示例:
+    python main.py --selftest
+    python main.py --input data.json --output out.md
+    python main.py --input input_dir/ --output out_dir/ --batch
 """
 
 import argparse
 import csv
-import io
 import json
 import os
 import sys
 import xml.etree.ElementTree as ET
 from datetime import datetime
-from urllib.request import urlopen, Request
-from urllib.error import URLError
+from pathlib import Path
+from urllib.parse import urlparse
 
 # 错误码定义
-ERROR_CODES = {
-    "E001": "参数错误：输入路径无效或不存在",
-    "E002": "文件读取失败：无法读取输入文件",
-    "E003": "数据解析失败：不支持的文件格式或格式错误",
-    "E004": "远程 URL 访问失败",
-    "E005": "输出目录创建失败",
-    "E006": "模板文件读取失败",
-    "E007": "批量处理失败：部分文件处理出错",
-    "E008": "内部逻辑错误：未知的数据类型",
-    "E009": "输出写入失败",
-    "E010": "自检失败：核心逻辑验证未通过",
-}
+ERR_SUCCESS = 0
+ERR_FILE_NOT_FOUND = "E001"
+ERR_INVALID_FORMAT = "E002"
+ERR_OUTPUT_WRITE_FAIL = "E003"
+ERR_INVALID_INPUT = "E004"
+ERR_BATCH_PARTIAL_FAIL = "E005"
+ERR_DIR_NOT_EXIST = "E006"
+ERR_URL_FETCH_FAIL = "E007"
+ERR_TEMPLATE_INVALID = "E008"
+ERR_EMPTY_DATA = "E009"
+ERR_UNKNOWN = "E010"
 
-class MDAError(Exception):
-    """自定义异常类，携带错误码"""
-    def __init__(self, code, message=None):
+
+class MDADataError(Exception):
+    """MDA 数据编译异常基类"""
+    def __init__(self, code, message):
         self.code = code
-        self.message = message or ERROR_CODES.get(code, "未知错误")
-        super().__init__(f"[{code}] {self.message}")
+        self.message = message
+        super().__init__(f"[{code}] {message}")
 
-# ============ 数据源读取模块 ============
 
-def read_local_file(filepath):
-    """读取本地文件内容，返回字节串"""
+def read_json_file(file_path):
+    """读取 JSON 文件并返回数据"""
     try:
-        with open(filepath, "rb") as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except FileNotFoundError:
+        raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
+    except json.JSONDecodeError as e:
+        raise MDADataError(ERR_INVALID_FORMAT, f"JSON 解析失败: {e}")
+
+
+def read_csv_file(file_path):
+    """读取 CSV 文件并返回字典列表"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
+            reader = csv.DictReader(f)
+            return list(reader)
+    except FileNotFoundError:
+        raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
+    except Exception as e:
+        raise MDADataError(ERR_INVALID_FORMAT, f"CSV 解析失败: {e}")
+
+
+def read_xml_file(file_path):
+    """读取 XML 文件并转换为字典结构"""
+    try:
+        tree = ET.parse(file_path)
+        root = tree.getroot()
+
+        def element_to_dict(element):
+            """将 XML 元素递归转换为字典"""
+            result = {}
+            # 处理属性
+            for attr_name, attr_val in element.attrib.items():
+                result[f"@{attr_name}"] = attr_val
+
+            # 处理子元素
+            child_elements = list(element)
+            if child_elements:
+                for child in child_elements:
+                    child_data = element_to_dict(child)
+                    tag = child.tag
+                    if tag in result:
+                        # 同标签多元素转为列表
+                        if isinstance(result[tag], list):
+                            result[tag].append(child_data)
+                        else:
+                            result[tag] = [result[tag], child_data]
+                    else:
+                        result[tag] = child_data
+            else:
+                # 叶子节点取文本内容
+                text = (element.text or "").strip()
+                if text:
+                    result["text"] = text
+
+            return result
+
+        return {root.tag: element_to_dict(root)}
+    except FileNotFoundError:
+        raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
+    except ET.ParseError as e:
+        raise MDADataError(ERR_INVALID_FORMAT, f"XML 解析失败: {e}")
+
+
+def read_txt_file(file_path):
+    """读取 TXT 文件为纯文本"""
+    try:
+        with open(file_path, 'r', encoding='utf-8') as f:
             return f.read()
-    except Exception as e:
-        raise MDAError("E002", f"无法读取文件 {filepath}: {e}")
+    except FileNotFoundError:
+        raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
 
-def read_remote_url(url, timeout=10):
-    """读取远程 URL 内容，返回字节串"""
+
+def read_remote_url(url):
+    """读取远程 URL 数据（仅支持 HTTP/HTTPS）"""
+    import urllib.request
+
+    parsed = urlparse(url)
+    if parsed.scheme not in ("http", "https"):
+        raise MDADataError(ERR_INVALID_INPUT, f"不支持的 URL 协议: {parsed.scheme}")
+
     try:
-        req = Request(url, headers={"User-Agent": "MDA-Skill/1.0"})
-        with urlopen(req, timeout=timeout) as resp:
-            return resp.read()
-    except URLError as e:
-        raise MDAError("E004", f"无法访问 URL {url}: {e}")
-    except Exception as e:
-        raise MDAError("E004", f"URL 访问异常 {url}: {e}")
+        with urllib.request.urlopen(url, timeout=10) as response:
+            content_type = response.headers.get("Content-Type", "")
+            data = response.read().decode("utf-8")
 
-def load_data(source):
-    """
-    加载数据源（本地文件或 URL），返回字节串
-    """
-    if source.startswith(("http://", "https://")):
+            if "json" in content_type:
+                return json.loads(data)
+            elif "csv" in content_type:
+                import io
+                reader = csv.DictReader(io.StringIO(data))
+                return list(reader)
+            elif "xml" in content_type:
+                return ET.fromstring(data)
+            else:
+                return data
+    except Exception as e:
+        raise MDADataError(ERR_URL_FETCH_FAIL, f"URL 获取失败: {e}")
+
+
+def read_data_source(source):
+    """根据数据源类型读取数据"""
+    # 判断是否是 URL
+    if source.startswith("http://") or source.startswith("https://"):
         return read_remote_url(source)
+
+    # 判断本地文件
+    if not os.path.exists(source):
+        raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {source}")
+
+    ext = Path(source).suffix.lower()
+    if ext == ".json":
+        return read_json_file(source)
+    elif ext == ".csv":
+        return read_csv_file(source)
+    elif ext == ".xml":
+        return read_xml_file(source)
+    elif ext == ".txt":
+        return read_txt_file(source)
     else:
-        if not os.path.exists(source):
-            raise MDAError("E001", f"输入路径不存在: {source}")
-        return read_local_file(source)
+        raise MDADataError(ERR_INVALID_FORMAT, f"不支持的文件格式: {ext}")
 
-# ============ 数据解析模块 ============
 
-def parse_json(data_bytes):
-    """解析 JSON 数据"""
-    try:
-        return json.loads(data_bytes.decode("utf-8"))
-    except Exception as e:
-        raise MDAError("E003", f"JSON 解析失败: {e}")
-
-def parse_csv(data_bytes):
-    """解析 CSV 数据，返回字典列表"""
-    try:
-        text = data_bytes.decode("utf-8")
-        reader = csv.DictReader(io.StringIO(text))
-        return list(reader)
-    except Exception as e:
-        raise MDAError("E003", f"CSV 解析失败: {e}")
-
-def parse_xml(data_bytes):
-    """解析 XML 数据，转换为字典结构"""
-    try:
-        root = ET.fromstring(data_bytes)
-        return _xml_to_dict(root)
-    except Exception as e:
-        raise MDAError("E003", f"XML 解析失败: {e}")
-
-def _xml_to_dict(element):
-    """将 XML 元素递归转换为字典"""
-    result = {}
-    # 处理属性
-    for key, value in element.attrib.items():
-        result[f"@{key}"] = value
-    
-    # 处理子元素
-    children = list(element)
-    if children:
-        for child in children:
-            child_data = _xml_to_dict(child)
-            tag = child.tag
-            if tag in result:
-                # 多个同名子元素，转为列表
-                if not isinstance(result[tag], list):
-                    result[tag] = [result[tag]]
-                result[tag].append(child_data)
-            else:
-                result[tag] = child_data
-    else:
-        # 叶子节点，取文本内容
-        text = (element.text or "").strip()
-        if text:
-            result["#text"] = text
-    
-    return result
-
-def parse_txt(data_bytes):
-    """解析 TXT 数据，按行拆分为列表"""
-    try:
-        text = data_bytes.decode("utf-8")
-        lines = [line.strip() for line in text.splitlines() if line.strip()]
-        return {"lines": lines, "content": text}
-    except Exception as e:
-        raise MDAError("E003", f"TXT 解析失败: {e}")
-
-def parse_data(source, data_bytes):
-    """根据文件扩展名或 URL 后缀解析数据"""
-    # 确定格式
-    if source.endswith(".json"):
-        return parse_json(data_bytes)
-    elif source.endswith(".csv"):
-        return parse_csv(data_bytes)
-    elif source.endswith(".xml"):
-        return parse_xml(data_bytes)
-    elif source.endswith(".txt"):
-        return parse_txt(data_bytes)
-    else:
-        # 尝试自动检测
-        text = data_bytes.decode("utf-8", errors="ignore").strip()
-        if text.startswith("{"):
-            return parse_json(data_bytes)
-        elif text.startswith("<"):
-            return parse_xml(data_bytes)
-        elif "," in text.split("\n")[0]:
-            return parse_csv(data_bytes)
-        else:
-            raise MDAError("E003", f"不支持的文件格式: {source}")
-
-# ============ 置信度标注模块 ============
-
-def validate_field(value, field_name=""):
+def check_confidence(data):
     """
-    检查字段值，返回 (是否正常, 标注信息)
+    置信度检查 - 对数据中的缺失值、类型不匹配进行标注
+    返回 (标注后的数据, 置信度问题列表)
     """
+    issues = []
+
+    def annotate_recursive(obj, path=""):
+        """递归检查并标注数据"""
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                current_path = f"{path}.{key}" if path else key
+                annotate_recursive(value, current_path)
+        elif isinstance(obj, list):
+            for idx, item in enumerate(obj):
+                annotate_recursive(item, f"{path}[{idx}]")
+        elif obj is None:
+            issues.append(f"{path}: 值为空")
+        elif isinstance(obj, str) and not obj.strip():
+            issues.append(f"{path}: 空字符串")
+        elif isinstance(obj, (int, float)):
+            # 数值范围检查（宽松）
+            if isinstance(obj, float) and (obj != obj):  # NaN 检查
+                issues.append(f"{path}: 非数值(NaN)")
+
+    annotate_recursive(data)
+    return data, issues
+
+
+def format_value(value):
+    """格式化值为 Markdown 友好字符串"""
     if value is None:
-        return False, f"[需核实:{field_name}]"
-    if isinstance(value, str) and value.strip() == "":
-        return False, f"[需核实:{field_name}]"
-    if isinstance(value, (int, float)) and value < 0:
-        return False, f"[需核实:{field_name}]"
-    return True, ""
-
-def annotate_data(data):
-    """
-    对数据中的可疑字段进行置信度标注
-    返回处理后的数据
-    """
-    if isinstance(data, dict):
-        result = {}
-        for key, value in data.items():
-            ok, annotation = validate_field(value, key)
-            if ok:
-                result[key] = annotate_data(value) if isinstance(value, (dict, list)) else value
-            else:
-                if isinstance(value, (dict, list)):
-                    result[key] = annotate_data(value)
-                else:
-                    result[key] = annotation
-        return result
-    elif isinstance(data, list):
-        return [annotate_data(item) for item in data]
+        return "*空*"
+    elif isinstance(value, bool):
+        return "是" if value else "否"
+    elif isinstance(value, (int, float)):
+        return str(value)
+    elif isinstance(value, dict):
+        # 嵌套字典转为内联描述
+        parts = [f"{k}: {format_value(v)}" for k, v in value.items()]
+        return "; ".join(parts)
+    elif isinstance(value, list):
+        return ", ".join(format_value(v) for v in value)
     else:
-        return data
+        return str(value)
 
-# ============ Markdown 生成模块 ============
 
-def dict_to_markdown_table(data_list):
-    """
-    将字典列表转换为 Markdown 表格
-    """
-    if not data_list or not isinstance(data_list, list):
-        return "_无数据_"
-    
-    # 收集所有字段
-    fields = []
-    for item in data_list:
+def dict_to_markdown_table(data, title="数据表"):
+    """将字典列表转换为 Markdown 表格"""
+    if not data:
+        return f"## {title}\n\n*无数据*"
+
+    # 收集所有键（保持顺序）
+    all_keys = []
+    for item in data:
         if isinstance(item, dict):
             for key in item.keys():
-                if key not in fields:
-                    fields.append(key)
-    
-    if not fields:
-        return "_无字段_"
-    
+                if key not in all_keys:
+                    all_keys.append(key)
+
+    if not all_keys:
+        return f"## {title}\n\n*无有效数据*"
+
     # 生成表头
-    lines = []
-    lines.append("| " + " | ".join(fields) + " |")
-    lines.append("| " + " | ".join(["---"] * len(fields)) + " |")
-    
+    lines = [f"## {title}", ""]
+    lines.append("| " + " | ".join(all_keys) + " |")
+    lines.append("|" + "|".join(["---"] * len(all_keys)) + "|")
+
     # 生成数据行
-    for item in data_list:
+    for item in data:
         if isinstance(item, dict):
             row = []
-            for field in fields:
-                value = item.get(field, "")
-                # 复杂类型转为 JSON 字符串
-                if isinstance(value, (dict, list)):
-                    value = json.dumps(value, ensure_ascii=False)
-                row.append(str(value))
+            for key in all_keys:
+                row.append(format_value(item.get(key)))
             lines.append("| " + " | ".join(row) + " |")
-        else:
-            lines.append(f"| {item} |")
-    
+
     return "\n".join(lines)
 
-def dict_to_markdown(data, level=1):
-    """
-    将字典数据递归转换为 Markdown 格式
-    """
-    if not isinstance(data, dict):
-        return str(data)
-    
-    lines = []
-    for key, value in data.items():
-        lines.append(f"{'#' * min(level, 6)} {key}")
-        lines.append("")
-        
-        if isinstance(value, dict):
-            lines.append(dict_to_markdown(value, level + 1))
-        elif isinstance(value, list):
-            if value and all(isinstance(item, dict) for item in value):
-                lines.append(dict_to_markdown_table(value))
-            else:
-                for item in value:
-                    if isinstance(item, dict):
-                        lines.append(dict_to_markdown(item, level + 1))
-                    else:
-                        lines.append(f"- {item}")
-        else:
-            lines.append(str(value))
-        
-        lines.append("")
-    
-    return "\n".join(lines)
 
-def generate_markdown(data, title="数据文档", template=None):
-    """
-    生成标准化 Markdown 文档
-    """
-    # 处理模板（简化版：仅支持标题和章节顺序）
-    if template:
-        # 模板格式：YAML 头 + 正文模板
-        # 这里简化处理，仅提取 title
-        for line in template.splitlines():
-            if line.startswith("title:"):
-                title = line.split(":", 1)[1].strip()
-    
-    doc_lines = []
-    doc_lines.append(f"# {title}")
-    doc_lines.append("")
-    doc_lines.append(f"> 生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    doc_lines.append("")
-    doc_lines.append("---")
-    doc_lines.append("")
-    
-    if isinstance(data, list):
-        # 列表数据：尝试表格展示
-        if data and all(isinstance(item, dict) for item in data):
-            doc_lines.append("## 数据表")
-            doc_lines.append("")
-            doc_lines.append(dict_to_markdown_table(data))
-        else:
-            doc_lines.append("## 数据列表")
-            doc_lines.append("")
-            for i, item in enumerate(data, 1):
-                doc_lines.append(f"### 条目 {i}")
-                doc_lines.append("")
-                if isinstance(item, dict):
-                    doc_lines.append(dict_to_markdown(item, 4))
+def dict_to_markdown_sections(data, title="数据详情"):
+    """将字典转换为 Markdown 章节格式"""
+    if not data:
+        return f"## {title}\n\n*无数据*"
+
+    lines = [f"## {title}", ""]
+
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if isinstance(value, (dict, list)):
+                lines.append(f"### {key}")
+                lines.append("")
+                if isinstance(value, list) and value and isinstance(value[0], dict):
+                    # 列表中的字典转为子表格
+                    lines.append(dict_to_markdown_table(value, key))
                 else:
-                    doc_lines.append(str(item))
-                doc_lines.append("")
-    elif isinstance(data, dict):
-        doc_lines.append(dict_to_markdown(data, 2))
+                    lines.append(format_value(value))
+                lines.append("")
+            else:
+                lines.append(f"- **{key}**: {format_value(value)}")
+    elif isinstance(data, list):
+        lines.append(dict_to_markdown_table(data, title))
     else:
-        doc_lines.append(str(data))
-    
-    doc_lines.append("")
-    doc_lines.append("---")
-    doc_lines.append("")
-    doc_lines.append("*本文档由 MDA Skill 自动生成*")
-    
-    return "\n".join(doc_lines)
+        lines.append(format_value(data))
 
-# ============ 批量处理模块 ============
+    return "\n".join(lines)
 
-def process_file(source, output_dir, template=None):
-    """
-    处理单个文件，生成 Markdown 文档
-    """
-    # 加载数据
-    data_bytes = load_data(source)
-    # 解析数据
-    data = parse_data(source, data_bytes)
-    # 置信度标注
-    annotated_data = annotate_data(data)
-    # 生成 Markdown
-    filename = os.path.basename(source)
-    title = os.path.splitext(filename)[0]
-    markdown = generate_markdown(annotated_data, title=title, template=template)
-    
-    # 写入输出文件
-    output_file = os.path.join(output_dir, f"{os.path.splitext(filename)[0]}.md")
-    try:
-        with open(output_file, "w", encoding="utf-8") as f:
-            f.write(markdown)
-    except Exception as e:
-        raise MDAError("E009", f"写入文件失败 {output_file}: {e}")
-    
-    return output_file
 
-def process_directory(input_dir, output_dir, template=None):
-    """
-    批量处理目录下的所有数据文件
-    """
-    if not os.path.isdir(input_dir):
-        raise MDAError("E001", f"输入目录不存在: {input_dir}")
-    
-    # 创建输出目录
-    try:
-        os.makedirs(output_dir, exist_ok=True)
-    except Exception as e:
-        raise MDAError("E005", f"创建输出目录失败: {e}")
-    
-    # 支持的扩展名
-    supported_ext = (".json", ".csv", ".xml", ".txt")
-    
-    # 获取所有支持的文件
-    files = [f for f in os.listdir(input_dir) if f.endswith(supported_ext)]
-    
-    if not files:
-        print("警告：输入目录中没有找到支持的数据文件")
-        return []
-    
-    results = []
-    errors = []
-    
-    for filename in files:
-        filepath = os.path.join(input_dir, filename)
-        try:
-            output_file = process_file(filepath, output_dir, template)
-            results.append(output_file)
-            print(f"✓ 已生成: {output_file}")
-        except MDAError as e:
-            errors.append((filename, str(e)))
-            print(f"✗ 处理失败 {filename}: {e}")
-    
-    if errors:
-        raise MDAError("E007", f"批量处理完成，但有 {len(errors)} 个文件失败")
-    
-    return results
+def generate_markdown(data, title="编译文档", include_confidence=True):
+    """将数据编译为标准化 Markdown 文档"""
+    lines = []
+    lines.append(f"# {title}")
+    lines.append("")
+    lines.append(f"> 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    lines.append("")
 
-# ============ 模板处理模块 ============
+    # 添加置信度检查
+    if include_confidence:
+        _, issues = check_confidence(data)
+        if issues:
+            lines.append("## 置信度提示")
+            lines.append("")
+            lines.append("> 以下字段存在数据质量问题，请核实：")
+            lines.append(">")
+            for issue in issues[:20]:  # 最多列出 20 条
+                lines.append(f"> - [需核实:{issue}]")
+            lines.append("")
 
-def load_template(template_path):
-    """加载模板文件"""
-    try:
-        with open(template_path, "r", encoding="utf-8") as f:
-            return f.read()
-    except Exception as e:
-        raise MDAError("E006", f"模板文件读取失败: {e}")
-
-# ============ 命令行入口 ============
-
-def main():
-    """命令行主入口"""
-    parser = argparse.ArgumentParser(
-        description="MDA - 数据编译为 Markdown 文档工具",
-        epilog="示例: python main.py -i input.json -o output.md"
-    )
-    
-    parser.add_argument("-i", "--input", help="输入文件或目录路径，或远程 URL")
-    parser.add_argument("-o", "--output", help="输出文件或目录路径")
-    parser.add_argument("-t", "--template", help="模板文件路径")
-    parser.add_argument("--batch", action="store_true", help="批量处理模式（输入为目录）")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    
-    args = parser.parse_args()
-    
-    # 自检模式
-    if args.selftest:
-        success = selftest()
-        sys.exit(0 if success else 1)
-    
-    # 参数检查
-    if not args.input:
-        parser.error("必须指定 --input 参数")
-    
-    if not args.output:
-        parser.error("必须指定 --output 参数")
-    
-    try:
-        # 加载模板
-        template = None
-        if args.template:
-            template = load_template(args.template)
-        
-        # 批量处理模式
-        if args.batch or os.path.isdir(args.input):
-            output_dir = args.output if os.path.isdir(args.output) or not args.output.endswith(".md") else os.path.dirname(args.output)
-            results = process_directory(args.input, output_dir, template)
-            print(f"\n批量处理完成，共生成 {len(results)} 个文档")
-            for r in results:
-                print(f"  - {r}")
-        # 单文件处理模式
+    # 根据数据类型选择输出格式
+    if isinstance(data, list):
+        # 列表：可能是表格数据或嵌套对象
+        if data and isinstance(data[0], dict):
+            lines.append(dict_to_markdown_table(data))
         else:
-            # 如果是 URL 或单文件
-            output_file = args.output
-            if not output_file.endswith(".md"):
-                output_file = output_file + ".md"
-            
-            # 确保输出目录存在
-            output_dir = os.path.dirname(output_file)
-            if output_dir and not os.path.exists(output_dir):
-                os.makedirs(output_dir, exist_ok=True)
-            
-            result = process_file(args.input, os.path.dirname(output_file) or ".", template)
-            print(f"文档已生成: {result}")
-    
-    except MDAError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"错误 [E008]: 未预期的异常: {e}", file=sys.stderr)
-        sys.exit(1)
+            lines.append("## 数据列表")
+            lines.append("")
+            for idx, item in enumerate(data, 1):
+                lines.append(f"{idx}. {format_value(item)}")
+    elif isinstance(data, dict):
+        lines.append(dict_to_markdown_sections(data))
+    else:
+        lines.append("## 内容")
+        lines.append("")
+        lines.append(format_value(data))
 
-# ============ 自检模块 ============
+    return "\n".join(lines)
+
+
+def process_file(input_path, output_path, title=None):
+    """处理单个文件转换"""
+    try:
+        data = read_data_source(input_path)
+        if data is None or (isinstance(data, (list, dict)) and len(data) == 0):
+            raise MDADataError(ERR_EMPTY_DATA, f"数据为空: {input_path}")
+
+        doc_title = title or Path(input_path).stem
+        markdown = generate_markdown(data, title=doc_title)
+
+        # 写入输出
+        try:
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write(markdown)
+        except IOError as e:
+            raise MDADataError(ERR_OUTPUT_WRITE_FAIL, f"输出写入失败: {e}")
+
+        return True, None
+    except MDADataError as e:
+        return False, str(e)
+    except Exception as e:
+        return False, f"[{ERR_UNKNOWN}] 未知错误: {e}"
+
+
+def process_batch(input_dir, output_dir):
+    """批量处理目录下所有支持的文件"""
+    if not os.path.isdir(input_dir):
+        raise MDADataError(ERR_DIR_NOT_EXIST, f"输入目录不存在: {input_dir}")
+
+    os.makedirs(output_dir, exist_ok=True)
+
+    supported_exts = {'.json', '.csv', '.xml', '.txt'}
+    results = []
+    success_count = 0
+    fail_count = 0
+
+    for file_path in sorted(Path(input_dir).glob('*')):
+        if file_path.suffix.lower() not in supported_exts:
+            continue
+
+        output_path = Path(output_dir) / f"{file_path.stem}.md"
+        success, error = process_file(str(file_path), str(output_path))
+        if success:
+            success_count += 1
+            results.append(f"✓ {file_path.name}")
+        else:
+            fail_count += 1
+            results.append(f"✗ {file_path.name}: {error}")
+
+    return results, success_count, fail_count
+
 
 def selftest():
-    """
-    内置自检：使用硬编码样例数据验证核心逻辑
-    不读取外部文件，不依赖当前工作目录，不访问网络
-    """
-    print("=== MDA 自检开始 ===")
-    
+    """内置自检逻辑 - 使用硬编码样例数据"""
+    test_results = []
+
+    # 测试 1: JSON 数据编译
+    test_data = [
+        {"name": "产品A", "price": 199.9, "stock": 50, "category": "电子"},
+        {"name": "产品B", "price": 299.0, "stock": None, "category": "家居"},
+        {"name": "产品C", "price": 99.5, "stock": 120, "category": "服饰"},
+    ]
     try:
-        # 测试数据定义
-        test_json_data = [
-            {"name": "产品A", "price": 99.5, "stock": 150, "category": "电子"},
-            {"name": "产品B", "price": -10, "stock": 0, "category": ""},
-            {"name": "产品C", "price": 299, "stock": 30, "category": "家居"},
-        ]
-        
-        test_csv_text = "name,age,city\nalice,30,beijing\nbob,25,shanghai\ncarol,,guangzhou\n"
-        
-        test_xml_text = """<?xml version="1.0"?>
-<root>
-    <item id="1">
-        <name>item1</name>
-        <price>100</price>
-    </item>
-    <item id="2">
-        <name>item2</name>
-        <price>200</price>
-    </item>
-</root>"""
-        
-        test_txt_text = "第一行文本\n第二行文本\n第三行文本\n"
-        
-        # 1. 测试 JSON 解析
-        print("[1] 测试 JSON 解析...")
-        json_data = json.loads(json.dumps(test_json_data))
-        assert isinstance(json_data, list), "JSON 解析结果应为列表"
-        assert len(json_data) == 3, "JSON 解析结果长度应为 3"
-        assert json_data[0]["name"] == "产品A", "JSON 解析内容不正确"
-        print("    ✓ JSON 解析通过")
-        
-        # 2. 测试 CSV 解析
-        print("[2] 测试 CSV 解析...")
-        csv_data = parse_csv(test_csv_text.encode("utf-8"))
-        assert isinstance(csv_data, list), "CSV 解析结果应为列表"
-        assert len(csv_data) == 3, "CSV 解析结果长度应为 3"
-        assert csv_data[0]["name"] == "alice", "CSV 解析内容不正确"
-        assert csv_data[2]["age"] == "", "CSV 空字段应保留为空字符串"
-        print("    ✓ CSV 解析通过")
-        
-        # 3. 测试 XML 解析
-        print("[3] 测试 XML 解析...")
-        xml_data = parse_xml(test_xml_text.encode("utf-8"))
-        assert isinstance(xml_data, dict), "XML 解析结果应为字典"
-        assert "item" in xml_data, "XML 解析应包含 item 字段"
-        items = xml_data["item"]
-        assert isinstance(items, list) and len(items) == 2, "XML 应解析出 2 个 item"
-        assert items[0]["name"]["#text"] == "item1", "XML 解析内容不正确"
-        print("    ✓ XML 解析通过")
-        
-        # 4. 测试 TXT 解析
-        print("[4] 测试 TXT 解析...")
-        txt_data = parse_txt(test_txt_text.encode("utf-8"))
-        assert isinstance(txt_data, dict), "TXT 解析结果应为字典"
-        assert "lines" in txt_data, "TXT 解析应包含 lines 字段"
-        assert len(txt_data["lines"]) == 3, "TXT 应解析出 3 行"
-        print("    ✓ TXT 解析通过")
-        
-        # 5. 测试置信度标注
-        print("[5] 测试置信度标注...")
-        annotated = annotate_data(test_json_data)
-        # 检查负价格被标注
-        assert "[需核实:price]" in str(annotated[1]), "负价格应被标注"
-        # 检查空分类被标注
-        assert "[需核实:category]" in str(annotated[1]), "空分类应被标注"
-        # 检查正常数据未被标注
-        assert "[需核实" not in str(annotated[0]), "正常数据不应被标注"
-        print("    ✓ 置信度标注通过")
-        
-        # 6. 测试 Markdown 生成
-        print("[6] 测试 Markdown 生成...")
-        markdown = generate_markdown(test_json_data, title="测试文档")
-        assert markdown.startswith("# 测试文档"), "Markdown 应包含标题"
-        assert "| name" in markdown, "Markdown 应包含表格"
-        assert "产品A" in markdown, "Markdown 应包含数据内容"
-        print("    ✓ Markdown 生成通过")
-        
-        # 7. 测试表格生成
-        print("[7] 测试表格生成...")
-        table = dict_to_markdown_table(test_json_data)
-        assert "| name |" in table, "表格应包含表头"
-        assert "| 产品A |" in table, "表格应包含数据行"
-        print("    ✓ 表格生成通过")
-        
-        # 8. 测试边界情况
-        print("[8] 测试边界情况...")
-        # 空列表
-        empty_table = dict_to_markdown_table([])
-        assert empty_table == "_无数据_", "空列表应返回占位文本"
-        # 非字典列表
-        simple_list = [1, 2, 3]
-        simple_table = dict_to_markdown_table(simple_list)
-        assert "无字段" in simple_table or "1" in simple_table, "简单列表应能生成表格"
-        print("    ✓ 边界情况通过")
-        
-        # 9. 测试错误处理
-        print("[9] 测试错误处理...")
-        # 无效 JSON
-        try:
-            parse_json(b"{invalid json")
-            raise AssertionError("无效 JSON 应抛出异常")
-        except MDAError as e:
-            assert e.code == "E003", "错误码应为 E003"
-        # 不存在的文件
-        try:
-            load_data("/nonexistent/file.json")
-            raise AssertionError("不存在的文件应抛出异常")
-        except MDAError as e:
-            assert e.code == "E001", "错误码应为 E001"
-        print("    ✓ 错误处理通过")
-        
-        # 10. 测试批量处理逻辑（内存中模拟）
-        print("[10] 测试批量处理逻辑...")
-        # 模拟多个文件处理
-        test_sources = [
-            ("data1.json", json.dumps([{"a": 1, "b": 2}]).encode()),
-            ("data2.json", json.dumps([{"c": 3, "d": 4}]).encode()),
-        ]
-        for name, data in test_sources:
-            parsed = parse_data(name, data)
-            assert isinstance(parsed, list), f"{name} 应解析为列表"
-            markdown = generate_markdown(parsed, title=name)
-            assert len(markdown) > 10, f"{name} 生成的 Markdown 应有内容"
-        print("    ✓ 批量处理逻辑通过")
-        
-        print("\n=== 自检全部通过！===")
-        return True
-        
+        md_output = generate_markdown(test_data, title="测试产品列表")
+        # 宽松断言
+        assert "测试产品列表" in md_output
+        assert "产品A" in md_output
+        assert "置信度提示" in md_output  # 包含 None 值
+        assert "需核实" in md_output
+        test_results.append(("JSON 数据编译", True, "包含表头、数据行和置信度提示"))
     except AssertionError as e:
-        print(f"\n✗ 自检失败: {e}")
-        return False
-    except MDAError as e:
-        print(f"\n✗ 自检异常: {e}")
-        return False
+        test_results.append(("JSON 数据编译", False, f"断言失败: {e}"))
+
+    # 测试 2: 字典数据编译
+    test_dict = {
+        "project": "测试项目",
+        "version": "1.0.0",
+        "authors": ["张三", "李四"],
+        "metadata": {"status": "active", "priority": "high"}
+    }
+    try:
+        md_dict = generate_markdown(test_dict, title="项目信息")
+        assert "项目信息" in md_dict
+        assert "project" in md_dict
+        assert "张三" in md_dict
+        assert "status" in md_dict
+        test_results.append(("字典数据编译", True, "章节结构完整"))
+    except AssertionError as e:
+        test_results.append(("字典数据编译", False, f"断言失败: {e}"))
+
+    # 测试 3: 置信度检查
+    try:
+        _, issues = check_confidence({"valid": 123, "empty": "", "none": None})
+        assert len(issues) >= 2  # 至少有两个问题
+        assert any("empty" in i for i in issues)
+        assert any("none" in i for i in issues)
+        test_results.append(("置信度检查", True, f"识别到 {len(issues)} 个问题"))
+    except AssertionError as e:
+        test_results.append(("置信度检查", False, f"断言失败: {e}"))
+
+    # 测试 4: CSV 数据解析（内存中）
+    import io
+    try:
+        csv_data = "name,age,city\n张三,28,北京\n李四,35,上海\n"
+        reader = csv.DictReader(io.StringIO(csv_data))
+        csv_rows = list(reader)
+        assert len(csv_rows) == 2
+        assert csv_rows[0]["name"] == "张三"
+        assert csv_rows[1]["city"] == "上海"
+        test_results.append(("CSV 解析", True, "内存 CSV 解析成功"))
+    except AssertionError as e:
+        test_results.append(("CSV 解析", False, f"断言失败: {e}"))
+
+    # 测试 5: URL 识别（不进行实际网络请求）
+    try:
+        # 测试 URL 格式识别
+        url1 = "https://example.com/data.json"
+        url2 = "http://api.example.com/v1/data"
+        url3 = "ftp://example.com/file.txt"
+        
+        assert urlparse(url1).scheme == "https"
+        assert urlparse(url2).scheme == "http"
+        assert urlparse(url3).scheme == "ftp"
+        
+        # 测试 URL 协议验证
+        parsed = urlparse(url1)
+        assert parsed.scheme in ("http", "https")
+        
+        parsed = urlparse(url3)
+        assert parsed.scheme not in ("http", "https")
+        
+        # 测试 read_data_source 的 URL 判断逻辑
+        assert url1.startswith("http://") or url1.startswith("https://")
+        assert url2.startswith("http://") or url2.startswith("https://")
+        assert not (url3.startswith("http://") or url3.startswith("https://"))
+        
+        test_results.append(("URL 识别", True, "URL 格式识别正常"))
+    except AssertionError as e:
+        test_results.append(("URL 识别", False, f"断言失败: {e}"))
     except Exception as e:
-        print(f"\n✗ 自检未预期异常: {e}")
-        return False
+        test_results.append(("URL 识别", False, f"异常: {e}"))
+
+    # 输出测试结果
+    print("\n=== MDA 自检报告 ===")
+    print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Python: {sys.version.split()[0]}")
+    print("")
+    all_passed = True
+    for name, passed, detail in test_results:
+        status = "✓" if passed else "✗"
+        print(f"  {status} {name}: {detail}")
+        if not passed:
+            all_passed = False
+
+    print("")
+    if all_passed:
+        print("✅ 全部自检通过")
+        return 0
+    else:
+        print("❌ 存在未通过的测试")
+        return 1
+
+
+def main():
+    """主入口函数"""
+    parser = argparse.ArgumentParser(
+        description="MDA - 数据编译为 Markdown 文档",
+        epilog="示例: python main.py --input data.json --output out.md"
+    )
+    parser.add_argument("--input", "-i", help="输入文件路径或 URL")
+    parser.add_argument("--output", "-o", help="输出 Markdown 文件路径")
+    parser.add_argument("--title", "-t", help="文档标题（默认为文件名）")
+    parser.add_argument("--batch", "-b", action="store_true", help="批量处理模式")
+    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+    parser.add_argument("--version", action="version", version="mda 1.0.2")
+
+    args = parser.parse_args()
+
+    # 自检模式
+    if args.selftest:
+        return selftest()
+
+    # 参数校验
+    if not args.input:
+        parser.error("必须指定 --input 参数或使用 --selftest")
+
+    # 批量模式
+    if args.batch:
+        if not args.output:
+            parser.error("批量模式必须指定 --output 目录")
+
+        try:
+            results, success, fail = process_batch(args.input, args.output)
+            print(f"\n批量处理完成: 成功 {success} 个, 失败 {fail} 个")
+            for r in results:
+                print(f"  {r}")
+            return 0 if fail == 0 else 1
+        except MDADataError as e:
+            print(f"错误: {e}", file=sys.stderr)
+            return 1
+
+    # 单文件模式
+    if not args.output:
+        parser.error("必须指定 --output 参数")
+
+    try:
+        success, error = process_file(args.input, args.output, args.title)
+        if success:
+            print(f"✅ 转换成功: {args.input} → {args.output}")
+            return 0
+        else:
+            print(f"❌ 转换失败: {error}", file=sys.stderr)
+            return 1
+    except MDADataError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

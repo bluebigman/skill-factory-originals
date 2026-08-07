@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: mdpdf
 name: mdpdf
-displayName: 文档转换 PDF 样式定制 命令行工具
+displayName: 文档转换 样式定制 格式自检
 description: 将 Markdown 文件转换为 PDF，支持自定义样式表与自检功能。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/mdpdf
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: 独立开发者·林默
 agent_created: true
-trigger_words: ["mdpdf", "markdown转pdf", "md转pdf", "pdf转换", "样式表转换"]
+trigger_words: ["mdpdf", "markdown转pdf", "md转pdf", "pdf转换", "样式表转换", "文档导出", "格式转换"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,26 +31,35 @@ trigger_words: ["mdpdf", "markdown转pdf", "md转pdf", "pdf转换", "样式表�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# mdpdf — Markdown 转 PDF 命令行工具
+# mdpdf — Markdown 转 PDF 技能文档
 
 ## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做与不能做
+### 1.1 能做什么
 
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|---------|-----------|
-| 输入格式 | 本地 `.md` 文件、标准输入（stdin）中的 Markdown 文本、指向 Markdown 文件的 URL | 二进制格式（DOCX、HTML 等）直接输入 |
-| 样式控制 | 通过 CSS 样式表自定义 PDF 外观（字体、间距、页眉页脚、代码块样式） | 不支持 JavaScript 动态渲染、不支持 SVG 矢量图内嵌 |
-| 输出 | 生成 PDF 文件到指定路径 | 不支持输出为 PNG/JPEG 图片格式 |
-| 批量处理 | 单次命令处理单个文件；可通过脚本循环调用实现批量 | 单条命令内不支持通配符多文件输入 |
-| 自检 | `--selftest` 验证环境依赖（如 wkhtmltopdf 或 Chromium）是否就绪 | 不检查 Markdown 语法正确性（语法错误会原样渲染） |
-| 版本信息 | `--version` 输出当前版本号 | 无在线升级功能 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 基础转换 | 将 `.md` 文件转换为 `.pdf` 文件 | `mdpdf input.md` |
+| 样式定制 | 通过 CSS 文件控制 PDF 排版样式 | `mdpdf input.md --style custom.css` |
+| 自检功能 | 检查转换环境与依赖是否就绪 | `mdpdf --selftest` |
+| 版本查询 | 显示当前工具版本号 | `mdpdf --version` |
+| 批量处理 | 支持一次转换多个 Markdown 文件 | `mdpdf a.md b.md c.md` |
 
-### 1.2 适用对象
+### 1.2 不能做什么
 
-- **内容创作者**：需要将技术文档、笔记、报告转为 PDF 分享。
-- **开发者**：希望在 CI/CD 流程中自动生成 PDF 文档。
-- **文档维护者**：需要统一风格的 PDF 输出，通过样式表控制品牌视觉。
+| 限制项 | 说明 |
+|--------|------|
+| 不支持加密 PDF | 无法生成带密码保护的 PDF 文件 |
+| 不支持 PDF 合并/拆分 | 仅做单向转换，不做后处理 |
+| 不支持图片提取 | 转换时图片嵌入 PDF，不单独导出 |
+| 不支持 OCR 识别 | 对扫描版 PDF 无处理能力 |
+| 不支持实时预览 | 转换过程为命令行批处理模式 |
+
+### 1.3 适用对象
+
+- 需要将技术文档、README、笔记转为 PDF 的开发者
+- 需要统一文档排版风格的内容维护者
+- 需要在无图形界面环境下完成文档转换的用户
 
 
 ## 许可证（License）
