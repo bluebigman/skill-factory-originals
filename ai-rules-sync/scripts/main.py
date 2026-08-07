@@ -123,7 +123,8 @@ class SyncEngine:
                 return match.group(1).strip()
 
         # 默认使用第一个词作为名称
-        first_word = re.split(r"[\s,;，。]+", text.strip(), 1)[0]
+        # 修复：使用关键字参数 maxsplit=1 避免 DeprecationWarning
+        first_word = re.split(r"[\s,;，。]+", text.strip(), maxsplit=1)[0]
         return first_word if first_word else "unnamed"
 
     def assess_confidence(self, text: str, category: str) -> float:
