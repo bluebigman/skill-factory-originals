@@ -1,4 +1,5 @@
 ---
+license: MIT
 slug: sinatra
 name: sinatra
 displayName: 未命名工具
