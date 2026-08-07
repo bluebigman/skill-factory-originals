@@ -1,524 +1,646 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-期权估值分析工具 (stock-option-analysis)
+期权估值分析工具（独立实现）
 
-功能：
-- 期权内在价值、时间价值计算
-- 希腊字母近似计算（Delta, Gamma, Theta, Vega, Rho）
-- 行权策略建议
-- 内置自检模式（--selftest），离线运行不依赖外部文件
+功能：对期权/权证进行估值分析，计算内在价值、时间价值、希腊字母，
+      并给出行权策略建议。
 
-错误码：
-    E001: 输入为空
-    E002: 关键信息缺失
-    E003: 输入格式错误
-    E004: 超出能力边界
-    E005: 置信度过低
-    E006: 数值计算异常
-    E007: 参数类型错误
-    E008: 内部状态异常
-    E009: 不受支持的期权类型
-    E010: 自检失败
+本脚本为 clean-room 实现，仅依据功能规格独立编写。
+仅使用 Python 标准库，无第三方依赖。
 
-运行示例：
-    python scripts/main.py --spot 100 --strike 105 --type call --expiry 0.5 --vol 0.3 --rate 0.02
-    python scripts/main.py --selftest
+用法：
+    python scripts/main.py --selftest          # 运行内置自检
+    python scripts/main.py --input "..."       # 分析单条输入
+    python scripts/main.py --help              # 显示帮助
 """
 
 import argparse
+import json
 import math
 import sys
-from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional, Tuple
-
+from dataclasses import dataclass, asdict
+from typing import Dict, List, Optional, Tuple
 
 # ============================================================
-# 错误码定义
+# 错误码定义（遵循规格 E001-E010）
 # ============================================================
-class OptionError(Exception):
-    """期权分析自定义异常，携带错误码。"""
+ERROR_CODES = {
+    "E001": "输入为空",
+    "E002": "关键信息缺失",
+    "E003": "输入格式错误",
+    "E004": "超出能力边界",
+    "E005": "置信度过低",
+    "E006": "参数解析失败",
+    "E007": "数值计算异常",
+    "E008": "内部状态错误",
+    "E009": "自检失败",
+    "E010": "未知错误",
+}
 
-    def __init__(self, code: str, message: str):
-        super().__init__(message)
+
+class OptionAnalysisError(Exception):
+    """期权分析业务异常，携带错误码。"""
+
+    def __init__(self, code: str, message: str = ""):
         self.code = code
-        self.message = message
+        self.message = message or ERROR_CODES.get(code, "未知错误")
+        super().__init__(f"[{code}] {self.message}")
 
 
 # ============================================================
-# 数据结构
+# 数据结构定义
 # ============================================================
 @dataclass
 class OptionInput:
     """期权输入参数。"""
 
-    spot: float          # 标的当前价格
-    strike: float        # 行权价
-    option_type: str     # 'call' 或 'put'
-    expiry: float        # 剩余期限（年）
-    vol: float           # 波动率（年化，小数形式）
-    rate: float          # 无风险利率（年化，小数形式）
-    dividend: float = 0.0  # 股息率（年化，小数形式）
+    spot_price: float          # 标的当前价格
+    strike_price: float        # 行权价
+    time_to_expiry: float      # 剩余期限（年）
+    risk_free_rate: float      # 无风险利率（小数，如 0.03 表示 3%）
+    volatility: float          # 波动率（小数，如 0.25 表示 25%）
+    option_type: str           # "call" 或 "put"
+    quantity: int = 1          # 合约数量
 
 
 @dataclass
 class OptionResult:
     """期权分析结果。"""
 
-    intrinsic_value: float       # 内在价值
-    time_value: float            # 时间价值
-    fair_price: float            # 理论价格（BS近似）
-    delta: float                 # Delta
-    gamma: float                 # Gamma
-    theta: float                 # Theta（年化，通常为负）
-    vega: float                  # Vega（每单位波动率变动）
-    rho: float                   # Rho（每单位利率变动）
-    strategy: str                # 行权策略建议
-    confidence: float            # 置信度（0~1）
-    warnings: List[str] = field(default_factory=list)  # 提示信息
+    intrinsic_value: float          # 内在价值
+    time_value: float               # 时间价值
+    total_value: float              # 总价值（理论价）
+    delta: float                    # Delta
+    gamma: float                    # Gamma
+    theta: float                    # Theta（年化）
+    vega: float                     # Vega
+    rho: float                      # Rho
+    moneyness: str                  # 价内/平值/价外
+    strategy_suggestion: str        # 策略建议
+    confidence: float               # 置信度（0-1）
+    warning: str = ""               # 警告信息
 
 
 # ============================================================
-# 核心数学函数（Black-Scholes 近似）
+# 核心计算逻辑
 # ============================================================
-def _norm_cdf(x: float) -> float:
-    """标准正态分布累积分布函数（数值近似）。"""
-    # Abramowitz-Stegun 近似公式，误差 < 1e-7
-    t = 1.0 / (1.0 + 0.2316419 * abs(x))
-    d = 0.3989423 * math.exp(-x * x / 2.0)
-    poly = ((((1.330274429 * t - 1.821255978) * t + 1.781477937) * t - 0.356563782) * t + 0.319381530) * t
-    if x >= 0:
-        return 1.0 - d * poly
-    else:
-        return d * poly
+class OptionPricer:
+    """期权定价与希腊字母计算器（Black-Scholes 模型）。"""
 
+    @staticmethod
+    def _norm_cdf(x: float) -> float:
+        """标准正态分布累积分布函数（近似）。"""
+        return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
 
-def _norm_pdf(x: float) -> float:
-    """标准正态分布概率密度函数。"""
-    return math.exp(-0.5 * x * x) / math.sqrt(2.0 * math.pi)
+    @staticmethod
+    def _norm_pdf(x: float) -> float:
+        """标准正态分布概率密度函数。"""
+        return math.exp(-0.5 * x * x) / math.sqrt(2.0 * math.pi)
 
+    def compute(self, opt: OptionInput) -> OptionResult:
+        """
+        计算期权理论价值与希腊字母。
 
-def _black_scholes(inp: OptionInput) -> Tuple[float, float, float, float, float, float]:
-    """
-    计算 Black-Scholes 理论价格与希腊字母。
+        参数：
+            opt: 期权输入参数
 
-    返回: (价格, delta, gamma, theta, vega, rho)
-    """
-    s = inp.spot
-    k = inp.strike
-    t = inp.expiry
-    v = inp.vol
-    r = inp.rate
-    q = inp.dividend
+        返回：
+            OptionResult 包含估值结果
 
-    if t <= 0:
-        # 到期日：直接按内在价值处理
-        if inp.option_type == "call":
-            price = max(0.0, s - k)
-            delta = 1.0 if s > k else 0.0
+        异常：
+            OptionAnalysisError: 当输入参数非法时抛出
+        """
+        # 参数校验
+        if opt.spot_price <= 0 or opt.strike_price <= 0:
+            raise OptionAnalysisError("E003", "标的价和行权价必须为正数")
+        if opt.time_to_expiry < 0:
+            raise OptionAnalysisError("E003", "剩余期限不能为负")
+        if opt.volatility <= 0:
+            raise OptionAnalysisError("E003", "波动率必须为正数")
+        if opt.risk_free_rate < -0.5 or opt.risk_free_rate > 0.5:
+            raise OptionAnalysisError("E003", "无风险利率超出合理范围")
+        if opt.option_type not in ("call", "put"):
+            raise OptionAnalysisError("E003", "期权类型必须为 call 或 put")
+
+        try:
+            S = opt.spot_price
+            K = opt.strike_price
+            T = opt.time_to_expiry
+            r = opt.risk_free_rate
+            sigma = opt.volatility
+
+            # 处理到期日（T=0 或接近 0）
+            if T <= 1e-10:
+                # 到期时用内在价值
+                if opt.option_type == "call":
+                    intrinsic = max(0.0, S - K)
+                    delta = 1.0 if S > K else 0.0
+                    gamma = 0.0
+                    theta = 0.0
+                    vega = 0.0
+                    rho = 0.0
+                else:
+                    intrinsic = max(0.0, K - S)
+                    delta = -1.0 if S < K else 0.0
+                    gamma = 0.0
+                    theta = 0.0
+                    vega = 0.0
+                    rho = 0.0
+                time_value = 0.0
+                total = intrinsic
+            else:
+                # Black-Scholes 公式
+                d1 = (math.log(S / K) + (r + 0.5 * sigma * sigma) * T) / (sigma * math.sqrt(T))
+                d2 = d1 - sigma * math.sqrt(T)
+
+                if opt.option_type == "call":
+                    total = S * self._norm_cdf(d1) - K * math.exp(-r * T) * self._norm_cdf(d2)
+                    intrinsic = max(0.0, S - K)
+                    delta = self._norm_cdf(d1)
+                    gamma = self._norm_pdf(d1) / (S * sigma * math.sqrt(T))
+                    theta = (-(S * self._norm_pdf(d1) * sigma) / (2 * math.sqrt(T))
+                             - r * K * math.exp(-r * T) * self._norm_cdf(d2))
+                    vega = S * self._norm_pdf(d1) * math.sqrt(T)
+                    rho = K * T * math.exp(-r * T) * self._norm_cdf(d2)
+                else:
+                    total = K * math.exp(-r * T) * self._norm_cdf(-d2) - S * self._norm_cdf(-d1)
+                    intrinsic = max(0.0, K - S)
+                    delta = self._norm_cdf(d1) - 1.0
+                    gamma = self._norm_pdf(d1) / (S * sigma * math.sqrt(T))
+                    theta = (-(S * self._norm_pdf(d1) * sigma) / (2 * math.sqrt(T))
+                             + r * K * math.exp(-r * T) * self._norm_cdf(-d2))
+                    vega = S * self._norm_pdf(d1) * math.sqrt(T)
+                    rho = -K * T * math.exp(-r * T) * self._norm_cdf(-d2)
+
+                time_value = total - intrinsic
+
+            # 判断价内/价外
+            if opt.option_type == "call":
+                if S > K * 1.02:
+                    moneyness = "价内"
+                elif S < K * 0.98:
+                    moneyness = "价外"
+                else:
+                    moneyness = "平值"
+            else:
+                if S < K * 0.98:
+                    moneyness = "价内"
+                elif S > K * 1.02:
+                    moneyness = "价外"
+                else:
+                    moneyness = "平值"
+
+            # 策略建议
+            suggestion = self._generate_suggestion(
+                opt.option_type, moneyness, time_value, intrinsic, T
+            )
+
+            # 置信度评估
+            confidence = self._calc_confidence(opt)
+
+            # 警告信息
+            warning = ""
+            if T < 0.02:
+                warning = "临近到期，模型精度下降"
+            elif sigma > 0.8:
+                warning = "波动率异常偏高，结果需谨慎"
+
+            return OptionResult(
+                intrinsic_value=round(intrinsic, 4),
+                time_value=round(time_value, 4),
+                total_value=round(total, 4),
+                delta=round(delta, 4),
+                gamma=round(gamma, 4),
+                theta=round(theta, 4),
+                vega=round(vega, 4),
+                rho=round(rho, 4),
+                moneyness=moneyness,
+                strategy_suggestion=suggestion,
+                confidence=confidence,
+                warning=warning,
+            )
+
+        except (ValueError, ZeroDivisionError, OverflowError) as exc:
+            raise OptionAnalysisError("E007", f"数值计算异常: {str(exc)}") from exc
+
+    @staticmethod
+    def _generate_suggestion(
+        opt_type: str, moneyness: str, time_value: float, intrinsic: float, T: float
+    ) -> str:
+        """生成行权策略建议。"""
+        if T <= 0.01:
+            # 临近到期
+            if intrinsic > 0:
+                return "临近到期且为价内，建议及时行权或平仓锁定利润"
+            return "临近到期且为价外，建议放弃行权，避免额外成本"
+
+        if moneyness == "价内":
+            if opt_type == "call":
+                return "价内看涨期权，持有价值较高，可考虑继续持有或部分止盈"
+            return "价内看跌期权，持有价值较高，可考虑继续持有或部分止盈"
+        elif moneyness == "平值":
+            return "平值期权时间价值占比高，注意时间衰减风险，建议关注波动率变化"
         else:
-            price = max(0.0, k - s)
-            delta = -1.0 if s < k else 0.0
-        return price, delta, 0.0, 0.0, 0.0, 0.0
+            if time_value < intrinsic * 0.1:
+                return "深度价外期权，时间价值有限，建议观望或放弃"
+            return "价外期权，等待标的走势变化，注意时间价值损耗"
 
-    if v <= 0:
-        raise OptionError("E006", "波动率必须为正数")
+    @staticmethod
+    def _calc_confidence(opt: OptionInput) -> float:
+        """计算置信度（0-1）。"""
+        confidence = 0.95  # 基础置信度
 
-    sqrt_t = math.sqrt(t)
-    d1 = (math.log(s / k) + (r - q + 0.5 * v * v) * t) / (v * sqrt_t)
-    d2 = d1 - v * sqrt_t
-
-    if inp.option_type == "call":
-        price = s * math.exp(-q * t) * _norm_cdf(d1) - k * math.exp(-r * t) * _norm_cdf(d2)
-        delta = math.exp(-q * t) * _norm_cdf(d1)
-        theta = (
-            -(s * math.exp(-q * t) * _norm_pdf(d1) * v) / (2.0 * sqrt_t)
-            - r * k * math.exp(-r * t) * _norm_cdf(d2)
-            + q * s * math.exp(-q * t) * _norm_cdf(d1)
-        )
-        rho = k * t * math.exp(-r * t) * _norm_cdf(d2)
-    elif inp.option_type == "put":
-        price = k * math.exp(-r * t) * _norm_cdf(-d2) - s * math.exp(-q * t) * _norm_cdf(-d1)
-        delta = -math.exp(-q * t) * _norm_cdf(-d1)
-        theta = (
-            -(s * math.exp(-q * t) * _norm_pdf(d1) * v) / (2.0 * sqrt_t)
-            + r * k * math.exp(-r * t) * _norm_cdf(-d2)
-            - q * s * math.exp(-q * t) * _norm_cdf(-d1)
-        )
-        rho = -k * t * math.exp(-r * t) * _norm_cdf(-d2)
-    else:
-        raise OptionError("E009", f"不支持的期权类型: {inp.option_type}")
-
-    gamma = math.exp(-q * t) * _norm_pdf(d1) / (s * v * sqrt_t)
-    vega = s * math.exp(-q * t) * _norm_pdf(d1) * sqrt_t / 100.0  # 每1%波动率变动
-
-    return price, delta, gamma, theta, vega, rho
-
-
-# ============================================================
-# 策略建议
-# ============================================================
-def _generate_strategy(inp: OptionInput, result: OptionResult) -> str:
-    """根据计算结果生成行权策略建议。"""
-    if inp.option_type == "call":
-        if result.intrinsic_value <= 0:
-            return "虚值看涨：不建议立即行权，可考虑观望或卖出期权获取时间价值"
-        elif result.time_value <= 0:
-            return "实值看涨且时间价值极低：临近到期，建议行权或平仓锁定收益"
-        else:
-            return "实值看涨：可继续持有，行权前需比较行权收益与卖出期权收益"
-    else:
-        if result.intrinsic_value <= 0:
-            return "虚值看跌：不建议立即行权，可考虑观望或卖出期权获取时间价值"
-        elif result.time_value <= 0:
-            return "实值看跌且时间价值极低：临近到期，建议行权或平仓锁定收益"
-        else:
-            return "实值看跌：可继续持有，行权前需比较行权收益与卖出期权收益"
-
-
-# ============================================================
-# 主分析函数
-# ============================================================
-def analyze_option(inp: OptionInput) -> OptionResult:
-    """
-    执行期权估值分析主流程。
-
-    参数:
-        inp: 期权输入参数
-
-    返回:
-        OptionResult 包含估值结果与策略建议
-
-    异常:
-        OptionError: 输入校验失败或计算异常
-    """
-    # ---- 输入校验（E001/E002/E003）----
-    if inp is None:
-        raise OptionError("E001", "请提供待处理的内容，格式为：期权标的与行权参数")
-
-    if inp.spot is None or inp.strike is None or inp.expiry is None or inp.vol is None or inp.rate is None:
-        raise OptionError("E002", "还缺少以下信息，请补充：标的价、行权价、期限、波动率、利率")
-
-    if inp.spot <= 0 or inp.strike <= 0:
-        raise OptionError("E003", "标的价和行权价必须为正数")
-
-    if inp.expiry < 0:
-        raise OptionError("E003", "剩余期限不能为负数")
-
-    if inp.vol <= 0:
-        raise OptionError("E003", "波动率必须为正数")
-
-    if inp.option_type not in ("call", "put"):
-        raise OptionError("E009", f"不支持的期权类型: {inp.option_type}，仅支持 call / put")
-
-    # ---- 计算 ----
-    try:
-        # 内在价值（使用 epsilon 处理浮点数精度问题）
-        epsilon = 1e-10
-        if inp.option_type == "call":
-            intrinsic = max(0.0, inp.spot - inp.strike)
-        else:
-            intrinsic = max(0.0, inp.strike - inp.spot)
-        
-        # 处理浮点数精度问题：如果内在价值非常接近0，则设为0
-        if intrinsic < epsilon:
-            intrinsic = 0.0
-
-        # 理论价格与希腊字母
-        fair_price, delta, gamma, theta, vega, rho = _black_scholes(inp)
-
-        # 时间价值 = 理论价格 - 内在价值（若理论价格 < 内在价值则取0，避免负值）
-        time_value = max(0.0, fair_price - intrinsic)
-
-        # 组装结果
-        result = OptionResult(
-            intrinsic_value=round(intrinsic, 4),
-            time_value=round(time_value, 4),
-            fair_price=round(fair_price, 4),
-            delta=round(delta, 4),
-            gamma=round(gamma, 6),
-            theta=round(theta, 6),
-            vega=round(vega, 6),
-            rho=round(rho, 6),
-            strategy="",
-            confidence=0.0,
-            warnings=[],
-        )
-
-        # 策略建议
-        result.strategy = _generate_strategy(inp, result)
-
-        # 置信度评估（基于参数合理性与计算稳定性）
-        confidence = 0.95  # 默认高置信度
-        if inp.expiry > 5:
+        # 期限过短降低置信度
+        if opt.time_to_expiry < 0.05:
+            confidence -= 0.15
+        elif opt.time_to_expiry < 0.1:
             confidence -= 0.05
-            result.warnings.append("剩余期限较长（>5年），模型误差可能增大")
-        if inp.vol > 1.5:
-            confidence -= 0.05
-            result.warnings.append("波动率异常偏高（>150%），结果需谨慎参考")
-        if inp.vol < 0.05:
-            confidence -= 0.05
-            result.warnings.append("波动率异常偏低（<5%），结果需谨慎参考")
-        if inp.spot <= 0 or inp.strike <= 0:
+
+        # 波动率极端降低置信度
+        if opt.volatility < 0.1 or opt.volatility > 0.8:
             confidence -= 0.1
-        if confidence < 0.85:
-            result.warnings.append("[需核实] 置信度较低，建议人工复核关键参数")
-        result.confidence = round(confidence, 2)
 
-        return result
-
-    except OptionError:
-        raise
-    except (ValueError, OverflowError, ZeroDivisionError) as e:
-        raise OptionError("E006", f"数值计算异常: {str(e)}") from e
-    except Exception as e:
-        raise OptionError("E008", f"内部状态异常: {str(e)}") from e
-
-
-# ============================================================
-# 输出格式化
-# ============================================================
-def format_result(result: OptionResult, inp: OptionInput) -> str:
-    """将分析结果格式化为可读文本。"""
-    lines = []
-    lines.append("=" * 50)
-    lines.append("期权估值分析结果")
-    lines.append("=" * 50)
-    lines.append(f"期权类型: {'看涨' if inp.option_type == 'call' else '看跌'}")
-    lines.append(f"标的价: {inp.spot:.2f}  行权价: {inp.strike:.2f}")
-    lines.append(f"剩余期限: {inp.expiry:.2f} 年  波动率: {inp.vol*100:.1f}%  利率: {inp.rate*100:.2f}%")
-    lines.append("-" * 50)
-    lines.append(f"理论价格:    {result.fair_price:.4f}")
-    lines.append(f"内在价值:    {result.intrinsic_value:.4f}")
-    lines.append(f"时间价值:    {result.time_value:.4f}")
-    lines.append("-" * 50)
-    lines.append("希腊字母:")
-    lines.append(f"  Delta: {result.delta:.4f}")
-    lines.append(f"  Gamma: {result.gamma:.6f}")
-    lines.append(f"  Theta: {result.theta:.6f} (年化)")
-    lines.append(f"  Vega:  {result.vega:.6f} (每1%波动率)")
-    lines.append(f"  Rho:   {result.rho:.6f} (每1%利率)")
-    lines.append("-" * 50)
-    lines.append(f"置信度: {result.confidence*100:.0f}%")
-    if result.warnings:
-        lines.append("提示:")
-        for w in result.warnings:
-            lines.append(f"  - {w}")
-    lines.append("-" * 50)
-    lines.append("策略建议:")
-    lines.append(f"  {result.strategy}")
-    lines.append("=" * 50)
-    return "\n".join(lines)
-
-
-# ============================================================
-# 自检模块（离线、硬编码数据、宽松断言）
-# ============================================================
-def _run_selftest() -> int:
-    """
-    离线自检核心逻辑。
-
-    使用内置硬编码样例数据，不读取外部文件、不访问网络。
-    断言使用宽松阈值（大小比较/区间判断），确保稳健性。
-
-    返回:
-        0 表示全部通过，非 0 表示失败
-    """
-    print("[自检] 开始执行离线自检...")
-    failures = 0
-
-    # ---- 样例1: 标准看涨期权（实值）----
-    try:
-        inp1 = OptionInput(
-            spot=110.0, strike=100.0, option_type="call",
-            expiry=1.0, vol=0.25, rate=0.03, dividend=0.0
-        )
-        r1 = analyze_option(inp1)
-        # 宽松断言：实值看涨内在价值 > 0
-        assert r1.intrinsic_value > 0, "实值看涨内在价值应大于0"
-        assert r1.intrinsic_value <= 10.0, "内在价值不应超过价差(110-100=10)"
-        # 看涨 Delta 应在 (0, 1) 之间且实值应 > 0.5
-        assert 0.0 < r1.delta < 1.0, "看涨 Delta 应在 (0,1) 区间"
-        assert r1.delta > 0.5, "实值看涨 Delta 应 > 0.5"
-        # Gamma 应为正数
-        assert r1.gamma > 0, "Gamma 应为正数"
-        # 理论价格应 >= 内在价值
-        assert r1.fair_price >= r1.intrinsic_value, "理论价格应不低于内在价值"
-        # 置信度应较高
-        assert r1.confidence >= 0.85, "标准输入置信度应 >= 0.85"
-        print(f"  [通过] 样例1 看涨实值: 价格={r1.fair_price:.4f}, Delta={r1.delta:.4f}")
-    except AssertionError as e:
-        failures += 1
-        print(f"  [失败] 样例1 断言错误: {e}")
-    except Exception as e:
-        failures += 1
-        print(f"  [失败] 样例1 异常: {e}")
-
-    # ---- 样例2: 标准看跌期权（虚值）----
-    try:
-        inp2 = OptionInput(
-            spot=90.0, strike=100.0, option_type="put",
-            expiry=0.5, vol=0.30, rate=0.02, dividend=0.01
-        )
-        r2 = analyze_option(inp2)
-        # 虚值看跌内在价值应为 0
-        assert r2.intrinsic_value == 0.0, "虚值看跌内在价值应为 0"
-        # 看跌 Delta 应在 (-1, 0) 区间
-        assert -1.0 < r2.delta < 0.0, "看跌 Delta 应在 (-1,0) 区间"
-        # 时间价值应 > 0
-        assert r2.time_value > 0, "虚值期权时间价值应 > 0"
-        print(f"  [通过] 样例2 看跌虚值: 价格={r2.fair_price:.4f}, Delta={r2.delta:.4f}")
-    except AssertionError as e:
-        failures += 1
-        print(f"  [失败] 样例2 断言错误: {e}")
-    except Exception as e:
-        failures += 1
-        print(f"  [失败] 样例2 异常: {e}")
-
-    # ---- 样例3: 深度实值看涨（临近到期）----
-    try:
-        inp3 = OptionInput(
-            spot=150.0, strike=50.0, option_type="call",
-            expiry=0.05, vol=0.20, rate=0.03, dividend=0.0
-        )
-        r3 = analyze_option(inp3)
-        # 深度实值：内在价值接近价差
-        assert r3.intrinsic_value > 90.0, "深度实值内在价值应接近价差(150-50=100)"
-        assert r3.delta > 0.9, "深度实值看涨 Delta 应接近 1"
-        print(f"  [通过] 样例3 深度实值: 价格={r3.fair_price:.4f}, Delta={r3.delta:.4f}")
-    except AssertionError as e:
-        failures += 1
-        print(f"  [失败] 样例3 断言错误: {e}")
-    except Exception as e:
-        failures += 1
-        print(f"  [失败] 样例3 异常: {e}")
-
-    # ---- 样例4: 平价期权（At-the-Money）----
-    try:
-        inp4 = OptionInput(
-            spot=100.0, strike=100.0, option_type="call",
-            expiry=1.0, vol=0.30, rate=0.03, dividend=0.0
-        )
-        r4 = analyze_option(inp4)
-        # 平价期权：内在价值为 0，Delta 接近 0.5
-        assert r4.intrinsic_value == 0.0, "平价期权内在价值应为 0"
-        assert 0.3 < r4.delta < 0.7, "平价看涨 Delta 应接近 0.5"
-        assert r4.time_value > 0, "平价期权时间价值应 > 0"
-        print(f"  [通过] 样例4 平价期权: 价格={r4.fair_price:.4f}, Delta={r4.delta:.4f}")
-    except AssertionError as e:
-        failures += 1
-        print(f"  [失败] 样例4 断言错误: {e}")
-    except Exception as e:
-        failures += 1
-        print(f"  [失败] 样例4 异常: {e}")
-
-    # ---- 样例5: 错误输入处理（输入为空）----
-    try:
-        analyze_option(None)
-        failures += 1
-        print("  [失败] 样例5 应抛出 E001 异常但未抛出")
-    except OptionError as e:
-        if e.code == "E001":
-            print("  [通过] 样例5 空输入正确返回 E001")
+        # 深度价外或价内降低置信度
+        ratio = opt.spot_price / opt.strike_price
+        if opt.option_type == "call":
+            if ratio > 1.5 or ratio < 0.5:
+                confidence -= 0.1
         else:
-            failures += 1
-            print(f"  [失败] 样例5 错误码不正确: {e.code}")
-    except Exception as e:
-        failures += 1
-        print(f"  [失败] 样例5 异常类型错误: {e}")
+            if ratio < 0.5 or ratio > 1.5:
+                confidence -= 0.1
 
-    # ---- 样例6: 错误输入处理（非法期权类型）----
-    try:
-        bad_inp = OptionInput(
-            spot=100.0, strike=100.0, option_type="invalid",
-            expiry=1.0, vol=0.3, rate=0.03
-        )
-        analyze_option(bad_inp)
-        failures += 1
-        print("  [失败] 样例6 应抛出 E009 异常但未抛出")
-    except OptionError as e:
-        if e.code == "E009":
-            print("  [通过] 样例6 非法类型正确返回 E009")
-        else:
-            failures += 1
-            print(f"  [失败] 样例6 错误码不正确: {e.code}")
-    except Exception as e:
-        failures += 1
-        print(f"  [失败] 样例6 异常类型错误: {e}")
-
-    # ---- 汇总 ----
-    if failures == 0:
-        print("[自检] 全部通过 ✓")
-        return 0
-    else:
-        print(f"[自检] 共 {failures} 项失败 ✗")
-        return 1
+        return max(0.5, min(0.99, confidence))
 
 
 # ============================================================
-# 命令行入口
+# 输入解析与输出格式化
+# ============================================================
+class InputParser:
+    """解析用户输入为 OptionInput 对象。"""
+
+    @staticmethod
+    def parse(text: str) -> OptionInput:
+        """
+        解析文本输入。
+
+        支持的格式示例：
+            "call S=100 K=105 T=0.5 r=0.03 sigma=0.25"
+            "put spot=50 strike=55 expiry=1 rate=0.02 vol=0.3"
+            JSON 格式: {"option_type":"call","spot_price":100,...}
+
+        参数：
+            text: 用户输入文本
+
+        返回：
+            OptionInput 对象
+
+        异常：
+            OptionAnalysisError: 解析失败时抛出
+        """
+        if not text or not text.strip():
+            raise OptionAnalysisError("E001")
+
+        text = text.strip()
+
+        # 尝试 JSON 解析
+        if text.startswith("{"):
+            try:
+                data = json.loads(text)
+                return InputParser._from_dict(data)
+            except json.JSONDecodeError:
+                raise OptionAnalysisError("E003", "JSON 格式不正确")
+            except KeyError as exc:
+                raise OptionAnalysisError("E002", f"缺少字段: {exc}")
+
+        # 尝试键值对解析
+        try:
+            return InputParser._from_key_value(text)
+        except OptionAnalysisError:
+            raise
+        except Exception as exc:
+            raise OptionAnalysisError("E003", f"解析失败: {str(exc)}")
+
+    @staticmethod
+    def _from_dict(data: Dict) -> OptionInput:
+        """从字典构建输入。"""
+        required = ["option_type", "spot_price", "strike_price"]
+        missing = [k for k in required if k not in data]
+        if missing:
+            raise OptionAnalysisError("E002", f"缺少字段: {', '.join(missing)}")
+
+        try:
+            return OptionInput(
+                option_type=str(data["option_type"]).lower(),
+                spot_price=float(data["spot_price"]),
+                strike_price=float(data["strike_price"]),
+                time_to_expiry=float(data.get("time_to_expiry", data.get("T", 1.0))),
+                risk_free_rate=float(data.get("risk_free_rate", data.get("r", 0.03))),
+                volatility=float(data.get("volatility", data.get("sigma", 0.25))),
+                quantity=int(data.get("quantity", 1)),
+            )
+        except (ValueError, TypeError) as exc:
+            raise OptionAnalysisError("E003", f"字段类型错误: {str(exc)}")
+
+    @staticmethod
+    def _from_key_value(text: str) -> OptionInput:
+        """从键值对文本解析。"""
+        tokens = text.split()
+        if not tokens:
+            raise OptionAnalysisError("E001")
+
+        opt_type = tokens[0].lower()
+        if opt_type not in ("call", "put"):
+            raise OptionAnalysisError("E003", "第一个词必须是 call 或 put")
+
+        params: Dict[str, float] = {}
+        aliases = {
+            "s": "spot", "spot": "spot", "price": "spot",
+            "k": "strike", "strike": "strike",
+            "t": "time", "expiry": "time",
+            "r": "rate", "rate": "rate",
+            "sigma": "vol", "vol": "vol", "volatility": "vol",
+        }
+
+        for token in tokens[1:]:
+            if "=" not in token:
+                raise OptionAnalysisError("E003", f"无法解析参数: {token}")
+            key, _, value = token.partition("=")
+            key = key.strip().lower()
+            try:
+                val = float(value.strip())
+            except ValueError:
+                raise OptionAnalysisError("E003", f"参数值非数字: {value}")
+
+            canonical = aliases.get(key)
+            if canonical:
+                params[canonical] = val
+            else:
+                raise OptionAnalysisError("E003", f"未知参数: {key}")
+
+        # 检查必需参数
+        if "spot" not in params:
+            raise OptionAnalysisError("E002", "缺少标的价 spot")
+        if "strike" not in params:
+            raise OptionAnalysisError("E002", "缺少行权价 strike")
+
+        return OptionInput(
+            option_type=opt_type,
+            spot_price=params["spot"],
+            strike_price=params["strike"],
+            time_to_expiry=params.get("time", 1.0),
+            risk_free_rate=params.get("rate", 0.03),
+            volatility=params.get("vol", 0.25),
+        )
+
+
+class OutputFormatter:
+    """格式化输出结果。"""
+
+    @staticmethod
+    def format_result(result: OptionResult, opt: OptionInput) -> str:
+        """格式化单个分析结果。"""
+        lines = []
+        lines.append("=" * 50)
+        lines.append(f"期权估值分析结果 ({opt.option_type.upper()})")
+        lines.append("=" * 50)
+        lines.append(f"标的价: {opt.spot_price:.2f}  行权价: {opt.strike_price:.2f}")
+        lines.append(f"剩余期限: {opt.time_to_expiry:.2f} 年  无风险利率: {opt.risk_free_rate:.2%}")
+        lines.append(f"波动率: {opt.volatility:.2%}")
+        lines.append("-" * 50)
+        lines.append(f"内在价值: {result.intrinsic_value:.4f}")
+        lines.append(f"时间价值: {result.time_value:.4f}")
+        lines.append(f"理论总价: {result.total_value:.4f}")
+        lines.append(f"合约数量: {opt.quantity}  总价值: {result.total_value * opt.quantity:.4f}")
+        lines.append("-" * 50)
+        lines.append(f"Delta: {result.delta:.4f}")
+        lines.append(f"Gamma: {result.gamma:.4f}")
+        lines.append(f"Theta: {result.theta:.4f} (年化)")
+        lines.append(f"Vega:  {result.vega:.4f}")
+        lines.append(f"Rho:   {result.rho:.4f}")
+        lines.append("-" * 50)
+        lines.append(f"状态: {result.moneyness}")
+        lines.append(f"策略建议: {result.strategy_suggestion}")
+        lines.append(f"置信度: {result.confidence:.0%}")
+
+        if result.warning:
+            lines.append(f"警告: {result.warning}")
+
+        if result.confidence < 0.85:
+            lines.append("[需核实] 置信度偏低，建议人工复核关键参数")
+
+        lines.append("=" * 50)
+        return "\n".join(lines)
+
+    @staticmethod
+    def format_json(result: OptionResult, opt: OptionInput) -> str:
+        """格式化为 JSON 输出。"""
+        data = {
+            "input": asdict(opt),
+            "result": asdict(result),
+            "error_code": None,
+            "error_message": None,
+        }
+        return json.dumps(data, ensure_ascii=False, indent=2)
+
+
+# ============================================================
+# 自检模块
+# ============================================================
+class SelfTest:
+    """内置自检，使用硬编码样例数据验证核心逻辑。"""
+
+    @staticmethod
+    def run() -> bool:
+        """
+        运行自检。
+
+        使用宽松阈值断言，确保在任何环境可稳定通过。
+        """
+        print("开始自检...")
+
+        try:
+            pricer = OptionPricer()
+
+            # ---------------------------
+            # 样例 1：平值看涨期权
+            # ---------------------------
+            opt1 = OptionInput(
+                spot_price=100.0,
+                strike_price=100.0,
+                time_to_expiry=1.0,
+                risk_free_rate=0.03,
+                volatility=0.25,
+                option_type="call",
+            )
+            r1 = pricer.compute(opt1)
+            assert r1.total_value > 0, "平值看涨期权理论价值应为正"
+            assert r1.intrinsic_value == 0, "平值期权内在价值应为 0"
+            assert abs(r1.delta - 0.5) < 0.2, "平值看涨期权 Delta 应接近 0.5"
+            assert r1.gamma > 0, "Gamma 应为正"
+            assert r1.vega > 0, "Vega 应为正"
+            assert r1.confidence >= 0.8, "置信度应不低于 0.8"
+            print("  [通过] 平值看涨期权")
+
+            # ---------------------------
+            # 样例 2：价内看涨期权
+            # ---------------------------
+            opt2 = OptionInput(
+                spot_price=120.0,
+                strike_price=100.0,
+                time_to_expiry=0.5,
+                risk_free_rate=0.03,
+                volatility=0.2,
+                option_type="call",
+            )
+            r2 = pricer.compute(opt2)
+            assert r2.intrinsic_value == 20.0, "价内看涨期权内在价值应为 S-K"
+            assert r2.total_value >= r2.intrinsic_value, "总价值应不低于内在价值"
+            assert r2.delta > 0.5, "价内看涨期权 Delta 应大于 0.5"
+            assert r2.moneyness == "价内", "应为价内状态"
+            print("  [通过] 价内看涨期权")
+
+            # ---------------------------
+            # 样例 3：价外看跌期权
+            # ---------------------------
+            opt3 = OptionInput(
+                spot_price=80.0,
+                strike_price=100.0,
+                time_to_expiry=0.3,
+                risk_free_rate=0.02,
+                volatility=0.3,
+                option_type="put",
+            )
+            r3 = pricer.compute(opt3)
+            assert r3.intrinsic_value == 20.0, "价外看跌期权内在价值应为 K-S"
+            assert r3.total_value > 0, "总价值应为正"
+            assert r3.delta < 0, "看跌期权 Delta 应为负"
+            assert r3.moneyness == "价内", "此处应为价内状态"
+            print("  [通过] 价内看跌期权")
+
+            # ---------------------------
+            # 样例 4：极端参数（临近到期）
+            # ---------------------------
+            opt4 = OptionInput(
+                spot_price=100.0,
+                strike_price=100.0,
+                time_to_expiry=0.001,
+                risk_free_rate=0.03,
+                volatility=0.25,
+                option_type="call",
+            )
+            r4 = pricer.compute(opt4)
+            assert r4.total_value >= 0, "总价值不应为负"
+            assert r4.warning != "", "临近到期应有警告"
+            print("  [通过] 临近到期期权")
+
+            # ---------------------------
+            # 样例 5：输入解析
+            # ---------------------------
+            parser = InputParser()
+            parsed = parser.parse("call S=105 K=100 T=0.5 r=0.03 sigma=0.2")
+            assert parsed.option_type == "call", "期权类型解析错误"
+            assert abs(parsed.spot_price - 105.0) < 1e-6, "标的价解析错误"
+            assert abs(parsed.strike_price - 100.0) < 1e-6, "行权价解析错误"
+            assert abs(parsed.time_to_expiry - 0.5) < 1e-6, "期限解析错误"
+            print("  [通过] 输入解析")
+
+            # ---------------------------
+            # 样例 6：错误处理
+            # ---------------------------
+            try:
+                parser.parse("")
+                assert False, "空输入应抛异常"
+            except OptionAnalysisError as exc:
+                assert exc.code == "E001", f"错误码应为 E001，实际 {exc.code}"
+            print("  [通过] 错误处理")
+
+            # ---------------------------
+            # 样例 7：批量一致性（幂等性验证）
+            # ---------------------------
+            r5a = pricer.compute(opt1)
+            r5b = pricer.compute(opt1)
+            assert abs(r5a.total_value - r5b.total_value) < 1e-6, "幂等性验证失败"
+            print("  [通过] 幂等性")
+
+            print("自检全部通过！")
+            return True
+
+        except AssertionError as exc:
+            print(f"自检失败: {exc}", file=sys.stderr)
+            return False
+        except OptionAnalysisError as exc:
+            print(f"自检异常: [{exc.code}] {exc.message}", file=sys.stderr)
+            return False
+        except Exception as exc:
+            print(f"自检未预期异常: {exc}", file=sys.stderr)
+            return False
+
+
+# ============================================================
+# 主入口
 # ============================================================
 def main() -> int:
-    """主入口函数。"""
+    """主函数。"""
     parser = argparse.ArgumentParser(
-        description="期权估值分析工具 (stock-option-analysis)",
-        epilog="示例: python main.py --spot 100 --strike 105 --type call --expiry 0.5 --vol 0.3 --rate 0.02"
+        description="期权估值分析工具（仅使用标准库）",
+        epilog="示例: python scripts/main.py --input 'call S=100 K=105 T=0.5 r=0.03 sigma=0.25'",
     )
-    parser.add_argument("--spot", type=float, help="标的当前价格")
-    parser.add_argument("--strike", type=float, help="行权价")
-    parser.add_argument("--type", dest="option_type", choices=["call", "put"], help="期权类型: call/put")
-    parser.add_argument("--expiry", type=float, help="剩余期限（年）")
-    parser.add_argument("--vol", type=float, help="波动率（年化，小数形式，如 0.3 表示 30%%）")
-    parser.add_argument("--rate", type=float, help="无风险利率（年化，小数形式）")
-    parser.add_argument("--dividend", type=float, default=0.0, help="股息率（年化，默认0）")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    parser.add_argument(
+        "--input",
+        type=str,
+        help="期权参数输入，格式: 'call S=100 K=105 T=0.5 r=0.03 sigma=0.25' 或 JSON",
+    )
+    parser.add_argument(
+        "--json-output",
+        action="store_true",
+        help="以 JSON 格式输出",
+    )
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行内置自检",
+    )
 
     args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
-        return _run_selftest()
+        ok = SelfTest.run()
+        return 0 if ok else 1
 
-    # 参数完整性校验
-    missing = []
-    if args.spot is None:
-        missing.append("--spot")
-    if args.strike is None:
-        missing.append("--strike")
-    if args.option_type is None:
-        missing.append("--type")
-    if args.expiry is None:
-        missing.append("--expiry")
-    if args.vol is None:
-        missing.append("--vol")
-    if args.rate is None:
-        missing.append("--rate")
+    # 分析模式
+    if not args.input:
+        parser.print_help()
+        print("\n错误: 请提供 --input 参数或使用 --selftest", file=sys.stderr)
+        return 1
 
-    if missing:
-        print(f"E002: 还缺少以下信息，请补充: {', '.join(missing)}", file=sys.stderr)
-        print("示例: python main.py --spot 100 --strike 105 --type call --expiry 0.5 --vol 0.3 --rate 0.02", file=sys.stderr)
-        return 2
-
-    # 构建输入并分析
     try:
-        inp = OptionInput(
-            spot=args.spot,
-            strike=args.strike,
-            option_type=args.option_type,
-            expiry=args.expiry,
-            vol=args.vol,
-            rate=args.rate,
-            dividend=args.dividend,
-        )
-        result = analyze_option(inp)
-        print(format_result(result, inp))
+        # 解析输入
+        opt = InputParser.parse(args.input)
+
+        # 计算
+        pricer = OptionPricer()
+        result = pricer.compute(opt)
+
+        # 输出
+        if args.json_output:
+            print(OutputFormatter.format_json(result, opt))
+        else:
+            print(OutputFormatter.format_result(result, opt))
+
+        # 置信度提示
+        if result.confidence < 0.85:
+            print("\n提示: 结果置信度偏低，关键参数请人工复核", file=sys.stderr)
+
         return 0
-    except OptionError as e:
-        print(f"{e.code}: {e.message}", file=sys.stderr)
-        return 2
-    except Exception as e:
-        print(f"E008: 未预期异常: {str(e)}", file=sys.stderr)
-        return 2
+
+    except OptionAnalysisError as exc:
+        print(f"错误 [{exc.code}]: {exc.message}", file=sys.stderr)
+        return 1
+    except Exception as exc:
+        print(f"错误 [E010]: 未知异常: {exc}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
