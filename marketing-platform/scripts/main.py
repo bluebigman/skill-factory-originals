@@ -159,16 +159,34 @@ def _extract_obligations(text: str) -> List[str]:
     obligations = []
     # 常见义务关键词
     keywords = ["应当", "必须", "有义务", "需", "应", "不得", "禁止"]
-    sentences = re.split(r"[。；;]", text)
+    
+    # 先按句号、分号、中文分号分割，再按逗号、中文逗号分割
+    sentences = re.split(r"[。；;\n]", text)
     for sent in sentences:
         sent = sent.strip()
         if not sent:
             continue
-        for kw in keywords:
-            if kw in sent:
-                obligations.append(sent)
-                break
-    return obligations
+        
+        # 按逗号进一步分割
+        sub_sentences = re.split(r"[，,]", sent)
+        for sub in sub_sentences:
+            sub = sub.strip()
+            if not sub:
+                continue
+            for kw in keywords:
+                if kw in sub:
+                    obligations.append(sub)
+                    break
+    
+    # 去重但保持顺序
+    seen = set()
+    unique_obligations = []
+    for ob in obligations:
+        if ob not in seen:
+            seen.add(ob)
+            unique_obligations.append(ob)
+    
+    return unique_obligations
 
 
 def _extract_clause_name(text: str) -> str:
@@ -482,6 +500,8 @@ def run_selftest() -> bool:
     obligations9 = _extract_obligations(sample9)
     assert len(obligations9) >= 3, "应提取到至少3条义务"
     print(f"  提取义务数: {len(obligations9)}")
+    for ob in obligations9:
+        print(f"    - {ob}")
     print("  ✓ 义务提取通过")
 
     # ---------- 测试用例 10: 错误码完整性 ----------
