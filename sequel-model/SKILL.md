@@ -3,8 +3,8 @@
 slug: sequel-model
 name: sequel-model
 displayName: 数据建模 结构转换 字段映射
-description: 将用户提供的任意数据源转换为结构化结果，支持批量处理与置信度标注。
-version: 1.0.1
+description: 将任意数据源转换为结构化结果，支持批量处理与置信度标注。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/sequel-model
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 墨规
+author: 数据工坊
 agent_created: true
-trigger_words: ["sequel model", "数据建模", "结构转换", "字段映射", "结构化输出"]
+trigger_words: ["sequel model", "数据建模", "结构转换", "字段映射", "结构化输出", "数据清洗", "格式统一"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,25 +31,7 @@ trigger_words: ["sequel model", "数据建模", "结构转换", "字段映射", 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# Sequel::Model 数据建模 Skill 文档
-
-## 一、能力边界（一页纸速查卡）
-
-### 1.1 能做与不能做
-
-| 维度 | 能做 | 不能做 |
-|------|------|--------|
-| 输入处理 | 用户提供的数据、文件路径、URL 链接 | 主动抓取未授权的网络资源 |
-| 数据解析 | 识别关键字段、提取结构化信息 | 解析加密或损坏的文件 |
-| 格式转换 | 按约定模板输出 JSON/YAML/CSV | 输出未定义的格式 |
-| 批量操作 | 支持多条记录同时处理 | 超过 1000 条记录的批处理 |
-| 质量反馈 | 标注置信度、提示缺失字段 | 对不确定信息做主观臆断 |
-
-### 1.2 适用对象
-
-- 需要将非结构化数据转为结构化表格的开发者
-- 需要批量清洗和映射字段的数据分析师
-- 需要快速搭建数据管道的后端工程师
+本 Skill 由 AI 辅助生成，仅供参考，不构成任何形式的保证或承诺。
 
 
 ## 许可证（License）
