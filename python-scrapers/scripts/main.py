@@ -53,7 +53,7 @@ def _strip_html_tags(text: str) -> str:
     # 反转义常见实体
     text = html.unescape(text)
     # 压缩空白
-    text = re.sub(r"\\s+", " ", text).strip()
+    text = re.sub(r"\s+", " ", text).strip()
     return text
 
 
@@ -65,7 +65,8 @@ def _normalize_date(text: str) -> str:
     if not text:
         return text
     s = str(text).strip()
-    m = re.search(r"(\\d{4})\\s*[-年/]\\s*(\\d{1,2})\\s*[-月/]\\s*(\\d{1,2})", s)
+    # 匹配 YYYY-MM-DD 或 YYYY/MM/DD 或 YYYY年M月D日
+    m = re.search(r"(\d{4})[-年/](\d{1,2})[-月/](\d{1,2})", s)
     if m:
         y, mo, d = m.group(1), m.group(2).zfill(2), m.group(3).zfill(2)
         return f"{y}-{mo}-{d}"
@@ -90,8 +91,38 @@ def _to_number(value: Any) -> Any:
 # ---------------------------------------------------------------------------
 def parse_csv(text: str) -> List[Dict[str, str]]:
     """解析 CSV 文本为字典列表（首行为表头）。"""
-    reader = csv.DictReader(io.StringIO(text))
-    rows = [dict(row) for row in reader]
+    # 使用 splitlines 处理换行符
+    lines = text.strip().splitlines()
+    if not lines:
+        return []
+    
+    # 解析表头
+    headers = [h.strip() for h in lines[0].split(",")]
+    
+    rows = []
+    for line in lines[1:]:
+        if not line.strip():
+            continue
+        # 处理简单 CSV（支持引号）
+        values = []
+        current = ""
+        in_quotes = False
+        for char in line:
+            if char == '"':
+                in_quotes = not in_quotes
+            elif char == ',' and not in_quotes:
+                values.append(current.strip())
+                current = ""
+            else:
+                current += char
+        values.append(current.strip())
+        
+        # 确保值数量与表头一致
+        row = {}
+        for i, header in enumerate(headers):
+            row[header] = values[i] if i < len(values) else ""
+        rows.append(row)
+    
     return rows
 
 
@@ -145,13 +176,11 @@ def parse_html_tables(text: str) -> List[List[Dict[str, str]]]:
     tables = []
     table_pattern = re.compile(r"<table[^>]*>(.*?)</table>", re.DOTALL | re.IGNORECASE)
     tr_pattern = re.compile(r"<tr[^>]*>(.*?)</tr>", re.DOTALL | re.IGNORECASE)
-    th_pattern = re.compile(r"<t[hd][^>]*>(.*?)</t[hd]>", re.DOTALL | re.IGNORECASE)
 
     for tm in table_pattern.finditer(text):
         headers: List[str] = []
         rows: List[Dict[str, str]] = []
         for rm in tr_pattern.finditer(tm.group(1)):
-            cells = [th_pattern.findall(cm) for cm in [rm.group(1)]]
             # 提取所有 th/td 内容
             all_cells = re.findall(r"<t[hd][^>]*>(.*?)</t[hd]>", rm.group(1), re.DOTALL | re.IGNORECASE)
             cleaned = [_strip_html_tags(c) for c in all_cells]
@@ -300,7 +329,7 @@ def to_markdown(rows: List[Dict[str, Any]]) -> str:
                 v = ", ".join(v)
             cells.append(str(v).replace("|", "\\|"))
         lines.append("| " + " | ".join(cells) + " |")
-    return "\\n".join(lines)
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
@@ -340,7 +369,7 @@ def _selftest() -> int:
     errors = []
 
     # --- 测试 1: CSV 解析 ---
-    csv_data = "name,age,city\\nalice,30,beijing\\nbob,25,shanghai\\n"
+    csv_data = "name,age,city\nalice,30,beijing\nbob,25,shanghai\n"
     try:
         rows = load_source(csv_data, "csv")
         assert len(rows) == 2, f"CSV 行数错误: {len(rows)}"
@@ -396,7 +425,7 @@ def _selftest() -> int:
     try:
         csv_out = to_csv(out_rows)
         assert "a,b" in csv_out, "CSV 表头缺失"
-        assert csv_out.count("\\n") >= 2, "CSV 行数不足"
+        assert csv_out.count("\n") >= 2, "CSV 行数不足"
         md_out = to_markdown(out_rows)
         assert "| a | b |" in md_out, "Markdown 表头缺失"
         assert "---" in md_out, "Markdown 分隔线缺失"
@@ -408,7 +437,7 @@ def _selftest() -> int:
     # --- 测试 6: 完整流程 ---
     try:
         full_result = process_text(
-            "名称,备注\\n苹果,好吃的水果\\n香蕉,热带水果",
+            "名称,备注\n苹果,好吃的水果\n香蕉,热带水果",
             source_type="csv",
             mapping={"产品名": "名称", "描述": "备注"},
             transforms={"描述": ["strip"]},
