@@ -153,7 +153,7 @@ def recommend_chart(data: Dict[str, Any]) -> Dict[str, Any]:
     根据数据特征推荐图表类型及 ECharts 配置。
 
     规则：
-    - 时间序列数据（字段名含 date/time/日期）→ 折线图
+    - 时间序列数据（字段名含 date/time/日期/时间/月/年）→ 折线图
     - 分类数据（字段数 >= 2 且首字段为类别）→ 柱状图
     - 单字段数值分布 → 饼图
 
@@ -172,17 +172,35 @@ def recommend_chart(data: Dict[str, Any]) -> Dict[str, Any]:
     if not fields or not rows:
         raise DashboardError("E004", "数据为空，无法推荐图表")
 
-    # 检测时间序列
-    time_keywords = ["date", "time", "日期", "时间", "year", "month"]
-    has_time = any(any(k in f.lower() for k in time_keywords) for f in fields)
+    # 检测时间序列 - 扩展关键词列表
+    time_keywords = [
+        "date", "time", "datetime", "timestamp",
+        "日期", "时间", "年", "月", "日",
+        "year", "month", "day", "hour", "minute", "second",
+        "week", "quarter", "季度", "周"
+    ]
+    
+    # 检查是否有时间字段
+    has_time = False
+    time_field = None
+    for f in fields:
+        f_lower = f.lower()
+        if any(k in f_lower for k in time_keywords):
+            has_time = True
+            time_field = f
+            break
 
     # 检测数值字段
     numeric_fields = []
     for f in fields:
         try:
             sample = rows[0].get(f, "0")
-            float(sample)
-            numeric_fields.append(f)
+            if isinstance(sample, (int, float)):
+                numeric_fields.append(f)
+            else:
+                # 尝试转换为数值
+                float(sample)
+                numeric_fields.append(f)
         except (ValueError, TypeError):
             continue
 
@@ -190,9 +208,9 @@ def recommend_chart(data: Dict[str, Any]) -> Dict[str, Any]:
         raise DashboardError("E004", "未找到可数值化的字段")
 
     # 推荐图表类型
-    if has_time:
+    if has_time and time_field:
         chart_type = "line"
-        x_field = next(f for f in fields if any(k in f.lower() for k in time_keywords))
+        x_field = time_field
     elif len(fields) >= 2:
         chart_type = "bar"
         x_field = fields[0]
