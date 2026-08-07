@@ -153,6 +153,7 @@ def _detect_status(text: str) -> Optional[str]:
         "处理中": "处理中",
         "待处理": "待处理",
         "已取消": "已取消",
+        "已审核": "已审核",
         "pending": "待处理",
         "completed": "已完成",
         "failed": "失败",
@@ -166,9 +167,17 @@ def _detect_status(text: str) -> Optional[str]:
 
 def _detect_code(text: str) -> Optional[str]:
     """检测编号/订单号（字母数字混合，长度>=4）。"""
-    match = re.search(r"\b[A-Za-z]{2,}\d{2,}\b", text)
-    if match:
-        return match.group(0)
+    # 匹配如 ORD-20260115-001, A1001, EXP-2026-001 等
+    patterns = [
+        r"\b[A-Za-z]{2,}-\d{2,}-\d{2,}\b",  # ORD-20260115-001
+        r"\b[A-Za-z]{2,}-\d{2,}-\d{2,}\b",  # EXP-2026-001
+        r"\b[A-Za-z]{1,}\d{3,}\b",          # A1001
+        r"\b[A-Za-z]{2,}\d{2,}\b",          # AB12
+    ]
+    for pat in patterns:
+        match = re.search(pat, text)
+        if match:
+            return match.group(0)
     return None
 
 
@@ -363,13 +372,15 @@ def load_from_text(text: str) -> List[Tuple[str, str]]:
 
 
 def load_from_csv_content(content: str) -> List[Tuple[str, str]]:
-    """从 CSV 文件内容加载（取每行拼接为文本）。"""
+    """从 CSV 文件内容加载（每行一条记录）。"""
     try:
         reader = csv.reader(io.StringIO(content))
         items = []
         for row in reader:
             if row and any(cell.strip() for cell in row):
-                items.append(("file", " | ".join(cell.strip() for cell in row)))
+                # 将每行数据拼接为一条记录
+                record_text = " | ".join(cell.strip() for cell in row)
+                items.append(("file", record_text))
         if not items:
             raise TaskError("E004", "CSV 内容无有效数据")
         return items
@@ -555,7 +566,7 @@ def main() -> int:
     parser.add_argument("--format", "-f", default="json", choices=["json", "csv", "markdown", "md"],
                         help="输出格式 (默认: json)")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--version", action="version", version="tasks 1.0.1 (clean-room)")
+    parser.add_argument("--version", action="version", version="tasks 1.0.2 (clean-room)")
 
     args = parser.parse_args()
 
