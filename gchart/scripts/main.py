@@ -137,10 +137,18 @@ def compute_confidence(parsed: Dict[str, Any]) -> Tuple[float, str]:
     if 1 <= field_count <= 10:
         score += 5
 
-    # 内容长度合理（10-500字符） +5
+    # 内容长度奖励（修正逻辑）
     content_len = len(parsed.get("content", ""))
-    if 10 <= content_len <= 500:
+    if content_len >= 50:
+        # 长内容（≥50字符）获得额外奖励
+        score += 15
+    elif content_len >= 20:
+        # 中等内容（20-49字符）获得部分奖励
+        score += 10
+    elif content_len >= 10:
+        # 较短内容（10-19字符）获得少量奖励
         score += 5
+    # 内容过短（<10字符）不获得长度奖励
 
     # 限制在 0-100
     score = max(0.0, min(100.0, score))
