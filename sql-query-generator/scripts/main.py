@@ -135,6 +135,35 @@ def infer_field_type(value: Any) -> str:
         return "TIMESTAMP"
     if isinstance(value, (dict, list)):
         return "JSON"
+    
+    # 处理字符串值，尝试识别数字
+    if isinstance(value, str):
+        # 去除可能的空格
+        str_value = value.strip()
+        if str_value:
+            # 尝试解析为整数
+            try:
+                int(str_value)
+                return "INTEGER"
+            except ValueError:
+                pass
+            # 尝试解析为浮点数
+            try:
+                float(str_value)
+                return "FLOAT"
+            except ValueError:
+                pass
+            # 尝试解析为布尔值
+            if str_value.lower() in ("true", "false"):
+                return "BOOLEAN"
+            # 尝试解析为日期时间
+            for fmt in ("%Y-%m-%d", "%Y/%m/%d", "%Y-%m-%d %H:%M:%S", "%Y-%m-%dT%H:%M:%S"):
+                try:
+                    datetime.strptime(str_value, fmt)
+                    return "TIMESTAMP" if " " in str_value or "T" in str_value else "DATE"
+                except ValueError:
+                    continue
+    
     return "VARCHAR(255)"
 
 
@@ -218,6 +247,8 @@ class SchemaInferencer:
                                 type_map[field] = "FLOAT"
                             elif type_map[field] in ("INTEGER", "FLOAT") and inferred == "VARCHAR(255)":
                                 type_map[field] = "VARCHAR(255)"
+                            elif type_map[field] in ("INTEGER", "FLOAT", "VARCHAR(255)") and inferred in ("DATE", "TIMESTAMP"):
+                                type_map[field] = "VARCHAR(255)"
                 return {"table_name": os.path.splitext(os.path.basename(filepath))[0], "fields": type_map}
         except FileNotFoundError:
             raise FileNotFoundError("E002: 文件不存在")
@@ -245,6 +276,8 @@ class SchemaInferencer:
                                 if type_map[key] == "INTEGER" and inferred == "FLOAT":
                                     type_map[key] = "FLOAT"
                                 elif type_map[key] in ("INTEGER", "FLOAT") and inferred == "VARCHAR(255)":
+                                    type_map[key] = "VARCHAR(255)"
+                                elif type_map[key] in ("INTEGER", "FLOAT", "VARCHAR(255)") and inferred in ("DATE", "TIMESTAMP"):
                                     type_map[key] = "VARCHAR(255)"
                 return {"table_name": os.path.splitext(os.path.basename(filepath))[0], "fields": type_map}
             elif isinstance(data, dict):
