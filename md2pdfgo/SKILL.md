@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: md2pdfgo
 name: md2pdfgo
-displayName: Markdown转PDF 文档生成 格式转换
+displayName: 文档转换 Markdown转PDF 批量样式定制
 description: 将Markdown内容转换为PDF文档，支持批量处理与自定义样式。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/md2pdfgo
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: 墨翟工坊
 agent_created: true
-trigger_words: ["md2pdfgo", "markdown转pdf", "md转pdf", "文档转换", "pdf生成"]
+trigger_words: ["md2pdfgo","markdown转pdf","md转pdf","文档转换","pdf生成","markdown导出pdf","md导出pdf"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,36 +31,9 @@ trigger_words: ["md2pdfgo", "markdown转pdf", "md转pdf", "文档转换", "pdf�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# md2pdfgo — Markdown 转 PDF 转换器
+# md2pdfgo — Markdown 转 PDF 技能手册
 
-## 一、能力边界（一页纸速查卡）
-
-### 1.1 能做与不能做
-
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|--------|----------|
-| 输入格式 | Markdown 文本、`.md` 文件、指向 Markdown 的 URL | 二进制格式（DOCX、XLSX 等）直接输入 |
-| 转换能力 | 标准 Markdown 语法 → PDF 渲染 | 复杂 LaTeX 公式、SVG 矢量图渲染 |
-| 样式控制 | 页边距、字体大小、代码块主题 | 逐像素级排版微调 |
-| 批处理 | 多文件批量转换，输出独立 PDF | 合并多个 MD 为单一 PDF（需额外参数） |
-| 输出 | 本地 PDF 文件路径 | 云端存储直传 |
-
-### 1.2 适用对象
-
-- **内容创作者**：将技术文档、博客草稿转为 PDF 分发
-- **开发者**：生成 API 文档、README 的 PDF 版本
-- **办公人员**：将会议纪要、报告草稿转为正式 PDF
-
-### 1.3 输入参数速查
-
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| `input` | string | 是 | — | Markdown 内容、文件路径或 URL |
-| `output` | string | 否 | `output.pdf` | 输出 PDF 文件名 |
-| `style` | string | 否 | `default` | 样式模板：`default` / `compact` / `formal` |
-| `margin` | number | 否 | `20` | 页边距（毫米） |
-| `fontsize` | number | 否 | `11` | 正文字号（pt） |
-| `batch` | boolean | 否 | `false` | 批量模式开关 |
+本 Skill 由 AI 辅助生成，仅供参考。使用前请自行验证输出结果是否符合预期。
 
 
 ## 许可证（License）
