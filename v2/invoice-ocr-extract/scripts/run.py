@@ -143,8 +143,11 @@ class InvoiceExtractor:
         cache_path = self._get_cache_path(file_hash)
         if os.path.exists(cache_path) and self._is_cache_valid(cache_path):
             try:
-                with open(cache_path, 'r', encoding='utf-8') as f:
-                    data = json.load(f)
+                # 使用文件锁保护读取
+                lock = self._get_file_lock(cache_path)
+                with lock:
+                    with open(cache_path, 'r', encoding='utf-8') as f:
+                        data = json.load(f)
                 # 验证缓存数据完整性
                 if 'fields' in data and 'status' in data:
                     return data
@@ -204,6 +207,13 @@ class InvoiceExtractor:
         text = re.sub(r'[^\u4e00-\u9fff\uFF00-\uFFEFa-zA-Z0-9:()（）¥￥,.\-\s\n]', '', text)
         
         return text.strip()
+    
+    def _normalize_text_for_regex(self, text: str) -> str:
+        """将文本中的换行符替换为空格，用于正则匹配"""
+        if not text:
+            return ""
+        # 将换行符替换为空格，同时保留其他空白符
+        return re.sub(r'\n+', ' ', text)
     
     def _validate_field(self, field_name: str, value: Any) -> Tuple[Any, float]:
         """验证字段值并返回置信度"""
@@ -295,13 +305,16 @@ class InvoiceExtractor:
         confidence_sum = 0.0
         confidence_count = 0
         
+        # 将换行符替换为空格，避免正则匹配失败
+        normalized_text = self._normalize_text_for_regex(text)
+        
         for field_name in self.FIELDS:
             if field_name == "confidence":
                 continue
                 
             pattern = self.FIELD_PATTERNS.get(field_name)
             if pattern:
-                match = re.search(pattern, text, re.IGNORECASE)
+                match = re.search(pattern, normalized_text, re.IGNORECASE)
                 if match:
                     value = match.group(1).strip()
                     # 清理值
@@ -321,7 +334,7 @@ class InvoiceExtractor:
                     # 计算匹配置信度（正则匹配长度/文本长度比）
                     if value is not None:
                         match_len = len(match.group(0))
-                        text_len = len(text)
+                        text_len = len(normalized_text)
                         if text_len > 0:
                             ratio_confidence = min(1.0, match_len / text_len * 10)  # 归一化
                             confidence = min(confidence, ratio_confidence)
@@ -346,7 +359,7 @@ class InvoiceExtractor:
                         "total": r'[¥￥]?([0-9,]+\.?[0-9]*)',
                     }
                     
-                    keyword_match = re.search(keyword_patterns.get(field_name, ''), text, re.IGNORECASE)
+                    keyword_match = re.search(keyword_patterns.get(field_name, ''), normalized_text, re.IGNORECASE)
                     if keyword_match:
                         value = keyword_match.group(1).strip()
                         if field_name in ['amount', 'tax', 'total']:
@@ -404,21 +417,3 @@ class InvoiceExtractor:
         file_ext = Path(file_path).suffix.lower()
         
         # 检查文件是否存在
-        if not os.path.exists(file_path):
-            return {
-                "file_name": os.path.basename(file_path),
-                "status": "error",
-                "error_code": "E001",
-                "error_message": "文件不存在"
-            }
-        
-        # 检查文件格式
-        if file_ext not in ['.jpg', '.jpeg', '.png', '.pdf']:
-            return {
-                "file_name": os.path.basename(file_path),
-                "status": "error",
-                "error_code": "E002",
-                "error_message": f"不支持的文件格式: {file_ext}"
-            }
-        
-        #
