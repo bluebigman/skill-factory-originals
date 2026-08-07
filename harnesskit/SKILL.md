@@ -2,7 +2,7 @@
 slug: harnesskit
 name: harnesskit
 displayName: 未命名工具
-description: More than a skill manager — manage skills, MCP servers, plugins, hooks, CLIs, configs, memory & rules across every AI co
+description: 一页纸速查卡。当用户需要一页纸速查卡、进行harnesskit相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

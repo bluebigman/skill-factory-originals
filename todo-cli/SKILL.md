@@ -7,7 +7,7 @@ license: MIT
 slug: todo-cli
 name: todo-cli
 displayName: 未命名工具
-description: ✅ Command-line tool to manage Todo lists
+description: 投资或医疗建议。当用户需要任务管理 自动化、进行todo cli相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

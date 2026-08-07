@@ -7,7 +7,7 @@ license: MIT
 slug: marketingskills
 name: marketingskills
 displayName: 未命名工具
-description: Marketing skills for Claude Code and AI agents. CRO, copywriting, SEO, analytics, and growth engineering.
+description: 投资或医疗建议。当用户需要营销 SEO、进行marketingskills相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

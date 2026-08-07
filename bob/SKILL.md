@@ -7,7 +7,7 @@ license: MIT
 slug: bob
 name: bob
 displayName: SQL查询
-description: SQL query builder and ORM/Factory generator for Go with support for PostgreSQL, MySQL and SQLite
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行bob相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -1,5 +1,6 @@
 ---
 name: audio-transcript-format
+displayName: 翻译 转录 字幕
 description: 将口语化音频转录文本整理为结构化书面语，支持段落划分、小标题生成、列表化。
 version: 2.2.0
 license: MIT

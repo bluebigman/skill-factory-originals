@@ -2,7 +2,7 @@
 slug: html-anything
 name: html-anything
 displayName: 未命名工具
-description: ✨ The agentic HTML editor — your local AI agent writes the HTML, you ship it. 🚀 75 Skills × 9 Surfaces (magazine · deck 
+description: 一页纸速查卡。当用户需要AI大模型 深度学习、进行html anything相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

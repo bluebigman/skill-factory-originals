@@ -7,7 +7,7 @@ license: MIT
 slug: spec-driven-develop
 name: spec-driven-develop
 displayName: 未命名工具
-description: Spec-driven development workflow for AI coding agents: architecture-first planning, task decomposition, GitHub Issue/PR 
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行spec driven develop相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

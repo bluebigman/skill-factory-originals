@@ -7,7 +7,7 @@ license: MIT
 slug: generate-subtitles
 name: generate-subtitles
 displayName: 视频字幕
-description: Generate transcripts for audio and video content with a user friendly UI, powered by Open AI's Whisper with automatic tr
+description: 投资或医疗建议。当用户需要翻译 转录 字幕、进行generate subtitles相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

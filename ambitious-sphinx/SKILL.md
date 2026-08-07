@@ -2,7 +2,7 @@
 slug: ambitious-sphinx
 name: ambitious-sphinx
 displayName: 未命名工具
-description: Ambition adapter for Sphinx
+description: 一页纸速查卡。当用户需要一页纸速查卡、进行ambitious sphinx相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

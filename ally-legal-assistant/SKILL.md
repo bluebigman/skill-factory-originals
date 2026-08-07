@@ -7,7 +7,7 @@ license: MIT
 slug: ally-legal-assistant
 name: ally-legal-assistant
 displayName: 合同审查
-description: Ally – AI Contract Assistant is a Word plugin using Azure OpenAI for contract analysis, real-time Q&A, and auto-markup. 
+description: 仅供学习与参考用途。当用户需要合同审查 法律、进行ally legal assistant相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

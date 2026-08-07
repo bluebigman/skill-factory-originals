@@ -7,7 +7,7 @@ license: MIT
 slug: mlx-auto-subtitled-video-generator
 name: mlx-auto-subtitled-video-generator
 displayName: 视频字幕
-description: Generate accurate transcripts using Apple's MLX framework
+description: 投资或医疗建议。当用户需要翻译 转录 字幕、进行mlx auto subtitled video generator相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

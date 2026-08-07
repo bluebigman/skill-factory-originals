@@ -7,7 +7,7 @@ license: MIT
 slug: obsidian-image-converter
 name: obsidian-image-converter
 displayName: 图片批量处理
-description: ⚡️ Convert, compress, resize, annotate, markup, draw, crop, rotate, flip, align images directly in Obsidian. Drag-resize
+description: 投资或医疗建议。当用户需要图片处理 压缩转换、进行obsidian image converter相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -2,7 +2,7 @@
 slug: javascript-bits
 name: javascript-bits
 displayName: 未命名工具
-description: Useful pieces of JavaScript.  Some old, some new.
+description: 一页纸速查卡。当用户需要一页纸速查卡、进行javascript bits相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: ocr-invoice
 name: ocr-invoice
 displayName: 发票识别
-description: a console application that would run on Windows server to scan user’s Bill and Receipts, which are either captured by ca
+description: 投资或医疗建议。当用户需要PDF识别 文字提取、进行ocr invoice相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

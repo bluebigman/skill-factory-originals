@@ -7,7 +7,7 @@ license: MIT
 slug: ai-content-generator-using-gpt-3-acg
 name: ai-content-generator-using-gpt-3-acg
 displayName: 邮件撰写
-description: The  ACG is a good text generator because it generates the content from scratch , that is based upon the user input ,  p
+description: 投资或医疗建议。当用户需要写作 内容创作、进行ai content generator using gpt 3 acg相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

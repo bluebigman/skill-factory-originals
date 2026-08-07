@@ -7,7 +7,7 @@ license: MIT
 slug: cv-builder
 name: cv-builder
 displayName: 简历优化
-description: Currently a cv generator where you can design only one page
+description: 投资或医疗建议。当用户需要简历制作 求职、进行cv builder相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

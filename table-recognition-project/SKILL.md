@@ -7,7 +7,7 @@ license: MIT
 slug: table-recognition-project
 name: table-recognition-project
 displayName: 发票识别
-description: Extract tables from invoice images, process text using OCR, extract entities and relationships using LLM and traditional
+description: 投资或医疗建议。当用户需要Excel表格 数据处理、进行table recognition project相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

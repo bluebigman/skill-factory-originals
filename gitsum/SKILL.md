@@ -2,7 +2,7 @@
 slug: gitsum
 name: gitsum
 displayName: 未命名工具
-description: basic darcsum feelalike for Git
+description: 一页纸速查卡。当用户需要Git代码管理、进行gitsum相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

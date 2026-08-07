@@ -7,7 +7,7 @@ license: MIT
 slug: self-learning-skills
 name: self-learning-skills
 displayName: 未命名工具
-description: A self-improving skill for AI coding agents (Claude Code, Cursor, AGENTS.md): recognize a hard-won golden path in a sess
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行self learning skills相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

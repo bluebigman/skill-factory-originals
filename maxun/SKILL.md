@@ -7,7 +7,7 @@ license: MIT
 slug: maxun
 name: maxun
 displayName: 爬虫采集
-description: 🔥 The open-source no-code platform for web scraping, crawling, search and AI data extraction • Turn websites into struct
+description: 投资或医疗建议。当用户需要网页抓取 数据采集、进行maxun相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

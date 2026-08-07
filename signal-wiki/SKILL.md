@@ -7,7 +7,7 @@ license: MIT
 slug: signal-wiki
 name: signal-wiki
 displayName: 未命名工具
-description: The easy to use rails wiki
+description: 投资或医疗建议。当用户需要写作 内容创作、进行signal wiki相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -2,7 +2,7 @@
 slug: karpathy-llm-wiki
 name: karpathy-llm-wiki
 displayName: 未命名工具
-description: Agent Skills-compatible LLM wiki for Claude Code, Cursor, and Codex. Build a Karpathy-style knowledge base from raw sour
+description: 一页纸速查卡。当用户需要写作 内容创作、进行karpathy llm wiki相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

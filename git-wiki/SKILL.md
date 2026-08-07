@@ -2,7 +2,7 @@
 slug: git-wiki
 name: git-wiki
 displayName: 未命名工具
-description: A quick & dirty git-powered Sinatra wiki
+description: 一页纸速查卡。当用户需要写作 内容创作、进行git wiki相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

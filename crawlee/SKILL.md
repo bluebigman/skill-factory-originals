@@ -7,7 +7,7 @@ license: MIT
 slug: crawlee
 name: crawlee
 displayName: 爬虫采集
-description: Crawlee—A web scraping and browser automation library for Node.js to build reliable crawlers. In JavaScript and TypeScri
+description: 投资或医疗建议。当用户需要网页抓取 数据采集、进行crawlee相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

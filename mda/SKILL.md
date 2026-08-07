@@ -7,7 +7,7 @@ license: MIT
 slug: mda
 name: mda
 displayName: 未命名工具
-description: MDA Open Spec — a Markdown superset for agent-facing documents. One .mda source compiles to drop-in SKILL.md, AGENTS.md,
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行mda相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

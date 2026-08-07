@@ -7,7 +7,7 @@ license: MIT
 slug: swiftui-design-skill
 name: swiftui-design-skill
 displayName: 未命名工具
-description: SwiftUI Front-End Design Skills — Six Ironclad Rules Against AI Sloppiness, Design Direction Consulting, Brand Asset Gui
+description: 投资或医疗建议。当用户需要UI设计 前端、进行swiftui design skill相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

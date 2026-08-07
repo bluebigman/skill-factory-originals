@@ -7,7 +7,7 @@ license: MIT
 slug: firecrawl
 name: firecrawl
 displayName: 未命名工具
-description: The context API to search, scrape, and interact with the web at scale. 🔥
+description: 投资或医疗建议。当用户需要网页抓取 数据采集、进行firecrawl相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

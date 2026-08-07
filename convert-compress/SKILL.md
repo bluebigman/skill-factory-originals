@@ -7,7 +7,7 @@ license: MIT
 slug: convert-compress
 name: convert-compress
 displayName: 图片批量处理
-description: A clean, native and private image converter for macOS. Convert, compress, and resize across 20+ image formats with batch
+description: 投资或医疗建议。当用户需要图片处理 压缩转换、进行convert compress相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

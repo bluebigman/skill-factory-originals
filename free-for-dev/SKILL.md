@@ -7,7 +7,7 @@ license: MIT
 slug: free-for-dev
 name: free-for-dev
 displayName: 未命名工具
-description: A list of SaaS, PaaS and IaaS offerings that have free tiers of interest to devops and infradev
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行free for dev相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

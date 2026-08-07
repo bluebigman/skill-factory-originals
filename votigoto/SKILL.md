@@ -7,7 +7,7 @@ license: MIT
 slug: votigoto
 name: votigoto
 displayName: 未命名工具
-description: Ruby API wrapper for the TiVoToGo protocol. Use it to access a list of recorded shows and programs on your Tivo.
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行votigoto相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

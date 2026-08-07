@@ -2,7 +2,7 @@
 slug: gchart
 name: gchart
 displayName: 未命名工具
-description: GChart exposes the Google Chart API (http://code.google.com/apis/chart) via a friendly Ruby interface. It can generate t
+description: 一页纸速查卡。当用户需要报表 数据可视化、进行gchart相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

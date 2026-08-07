@@ -7,7 +7,7 @@ license: MIT
 slug: stealthhumanizer
 name: stealthhumanizer
 displayName: 去AI味
-description: 🔓 Free open-source AI text humanizer — bypass GPTZero, Turnitin & AI detectors with 16+ Languages support. 35 providers,
+description: 投资或医疗建议。当用户需要去AI味 润色改写、进行stealthhumanizer相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

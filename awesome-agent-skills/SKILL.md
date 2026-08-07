@@ -7,7 +7,7 @@ license: MIT
 slug: awesome-agent-skills
 name: awesome-agent-skills
 displayName: 未命名工具
-description: A curated collection of 1000+ agent skills from official dev teams and the community, compatible with Claude Code, Codex
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行awesome agent skills相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

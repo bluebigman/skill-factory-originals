@@ -7,7 +7,7 @@ license: MIT
 slug: oad
 name: oad
 displayName: 未命名工具
-description: Collection of tools and scripts useful to automate microscopy workflows in ZEN Blue using Python and Open Application De
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行oad相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: ui-ux-design-pro-skill
 name: ui-ux-design-pro-skill
 displayName: 未命名工具
-description: AI spairings, 150+ reasoning rules, CLI, and 18 platform templates. Works with Claude, Cursor, Windsurf, Copilot, Antigr
+description: 投资或医疗建议。当用户需要UI设计 前端、进行ui ux design pro skill相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

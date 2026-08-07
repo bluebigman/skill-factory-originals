@@ -7,7 +7,7 @@ license: MIT
 slug: tasks
 name: tasks
 displayName: 未命名工具
-description: Some more or less useful rake tasks. Includes tasks to work with git-cvs, convert an Atom collection to a blog, post to 
+description: 投资或医疗建议。当用户需要任务管理 自动化、进行tasks相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

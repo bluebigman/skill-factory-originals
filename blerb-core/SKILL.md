@@ -2,7 +2,7 @@
 slug: blerb-core
 name: blerb-core
 displayName: 未命名工具
-description: blerb running on merb-core
+description: 一页纸速查卡。当用户需要一页纸速查卡、进行blerb core相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

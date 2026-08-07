@@ -7,7 +7,7 @@ license: MIT
 slug: awesome-claude-skills
 name: awesome-claude-skills
 displayName: 未命名工具
-description: A curated list of awesome Claude Skills, resources, and tools for customizing Claude AI workflows — particularly Claude 
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行awesome claude skills相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

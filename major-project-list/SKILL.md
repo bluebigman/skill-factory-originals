@@ -7,7 +7,7 @@ license: MIT
 slug: major-project-list
 name: major-project-list
 displayName: 周报生成
-description: A list of practical projects that anyone can solve in any programming language (See solutions). These projects are divid
+description: 投资或医疗建议。当用户需要投资或医疗建议、进行major project list相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
