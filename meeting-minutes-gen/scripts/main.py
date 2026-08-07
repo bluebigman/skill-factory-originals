@@ -129,10 +129,16 @@ class MeetingMinutesGenerator:
         r"(.+?)(?:截止|期限|完成时间)[：:]?\s*([\d年月日]+)?",
     ]
 
+    # 扩展遗留问题的匹配模式
     ISSUE_PATTERNS = [
         r"(?:遗留问题|未决问题|待解决|悬而未决)[：:]\s*(.+)",
         r"(?:问题|疑问|待确认)[：:]\s*(.+)",
         r"(?:尚未|未|还没)[解决|完成|确认]\s*(.+)",
+        r"(?:遗留问题|遗留事项|未完成事项)[是]?\s*(.+)",
+        r"(.+?)(?:是|为)?遗留问题",
+        r"(?:遗留|未解决|待处理)[：:]\s*(.+)",
+        r"遗留问题[是：:]\s*(.+)",
+        r"(?:需要|要)(?:进一步|继续|后续)(?:评估|讨论|确认|处理|解决)\s*(.+)",
     ]
 
     # 责任人/时间模式
@@ -331,14 +337,72 @@ class MeetingMinutesGenerator:
     def _extract_issues(self) -> None:
         """提取遗留问题"""
         for line in self.lines:
+            found = False
             for pattern in self.ISSUE_PATTERNS:
                 match = re.search(pattern, line)
                 if match:
-                    content = match.group(1).strip()
+                    # 提取内容，处理不同模式
+                    if match.groups():
+                        content = match.group(1).strip() if match.group(1) else match.group(0).strip()
+                    else:
+                        content = match.group(0).strip()
+                    
+                    # 清理内容
+                    content = self._clean_issue_content(content, line)
+                    
                     if content:
                         issue = Issue(content=content, source_line=line)
                         self.meeting_minutes.issues.append(issue)
+                        found = True
                     break
+            
+            if not found:
+                # 额外检查：包含"遗留"或"问题"关键词的行
+                if "遗留" in line or "未解决" in line or "待处理" in line:
+                    # 尝试提取更自然语言的内容
+                    content = self._extract_natural_issue(line)
+                    if content:
+                        issue = Issue(content=content, source_line=line)
+                        self.meeting_minutes.issues.append(issue)
+
+    def _clean_issue_content(self, content: str, original_line: str) -> str:
+        """清理问题内容"""
+        # 移除时间戳
+        content = re.sub(r"\[\d{1,2}:\d{2}\]", "", content).strip()
+        # 移除发言人前缀
+        content = re.sub(r"^[\u4e00-\u9fa5]{2,4}[：:]", "", content).strip()
+        # 移除"遗留问题是"等冗余表述
+        content = re.sub(r"^(?:遗留问题|问题)[是：:]", "", content).strip()
+        content = re.sub(r"^(?:遗留|待解决|未解决)[是：:]", "", content).strip()
+        
+        # 如果内容为空，尝试从原行提取
+        if not content:
+            # 提取"是"后面的内容
+            match = re.search(r"是\s*(.+)", original_line)
+            if match:
+                content = match.group(1).strip()
+        
+        return content
+
+    def _extract_natural_issue(self, line: str) -> str:
+        """从自然语言中提取问题"""
+        # 尝试提取"遗留问题是"或"问题是"后面的内容
+        match = re.search(r"(?:遗留问题|问题)是\s*(.+)", line)
+        if match:
+            return match.group(1).strip()
+        
+        # 尝试提取"遗留问题"后面的内容
+        match = re.search(r"遗留问题\s*(.+)", line)
+        if match:
+            return match.group(1).strip()
+        
+        # 尝试提取"未解决"或"待处理"相关的内容
+        match = re.search(r"(?:未解决|待处理|待解决)[的]?\s*(.+)", line)
+        if match:
+            return match.group(1).strip()
+        
+        # 如果都失败，返回整行内容（去除发言人前缀）
+        return re.sub(r"^[\u4e00-\u9fa5]{2,4}[：:]\s*", "", line).strip()
 
     def _calculate_confidence(self) -> None:
         """计算整体置信度"""
