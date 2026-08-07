@@ -83,8 +83,8 @@ def process_single_image(img_path: Path, output_dir: Path, max_width: int, quali
             # 模拟图片处理（实际项目中这里会调用PIL等库）
             # 这里仅做文件复制作为演示，实际实现需要真实图片处理
             output_path = output_dir / f"resized_{img_path.name}"
-            # 使用临时文件+原子替换确保一致性
-            temp_path = output_dir / f".tmp_{img_path.name}_{os.getpid()}"
+            # 使用唯一临时文件名+原子重命名确保一致性
+            temp_path = output_dir / f".tmp_{img_path.name}_{os.getpid()}_{datetime.now(timezone.utc).timestamp()}"
             shutil.copy2(img_path, temp_path)
             os.replace(temp_path, output_path)
             

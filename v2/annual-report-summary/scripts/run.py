@@ -131,6 +131,27 @@ def extract_from_file(file_path: str) -> dict:
     return extractor.extract(text)
 
 
+def _fetch_with_retry(url: str) -> dict:
+    """
+    带重试退避的HTTP请求函数
+    使用urllib发起请求，按指数退避重试，处理超时和HTTP错误
+    """
+    for attempt in range(MAX_RETRIES):
+        try:
+            req = urllib.request.Request(url, headers={
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+                "Referer": "https://data.eastmoney.com/"
+            })
+            with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as response:
+                return json.loads(response.read().decode('utf-8'))
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+            if attempt == MAX_RETRIES - 1:
+                raise ConnectionError(f"请求失败（已重试{MAX_RETRIES}次）: {e}")
+            # 指数退避
+            time.sleep(RETRY_BACKOFF * (2 ** attempt))
+    raise ConnectionError("请求失败")
+
+
 def fetch_real_data() -> dict:
     """
     从东方财富公开接口获取真实年报数据（贵州茅台示例）
@@ -139,43 +160,33 @@ def fetch_real_data() -> dict:
     params = urllib.parse.urlencode(DATA_SOURCE_PARAMS)
     url = f"{DATA_SOURCE_URL}?{params}"
 
-    for attempt in range(MAX_RETRIES):
-        try:
-            req = urllib.request.Request(url, headers={
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-                "Referer": "https://data.eastmoney.com/"
-            })
-            with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as response:
-                data = json.loads(response.read().decode('utf-8'))
+    try:
+        data = _fetch_with_retry(url)
+        if data.get("result") and data["result"].get("data"):
+            record = data["result"]["data"][0]
+            # 提取关键财务指标
+            indicators = {}
+            # 净资产收益率
+            if record.get("WEIGHTAVG_ROE") is not None:
+                indicators['roe'] = float(record["WEIGHTAVG_ROE"])
+            # 净利润增长率
+            if record.get("PARENT_NETPROFIT_YOY") is not None:
+                indicators['net_profit_growth'] = float(record["PARENT_NETPROFIT_YOY"])
+            # 营收增长率
+            if record.get("TOTAL_OPERATE_INCOME_YOY") is not None:
+                indicators['revenue_growth'] = float(record["TOTAL_OPERATE_INCOME_YOY"])
+            # 资产负债率
+            if record.get("DEBT_ASSET_RATIO") is not None:
+                indicators['debt_ratio'] = float(record["DEBT_ASSET_RATIO"])
 
-            if data.get("result") and data["result"].get("data"):
-                record = data["result"]["data"][0]
-                # 提取关键财务指标
-                indicators = {}
-                # 净资产收益率
-                if record.get("WEIGHTAVG_ROE") is not None:
-                    indicators['roe'] = float(record["WEIGHTAVG_ROE"])
-                # 净利润增长率
-                if record.get("PARENT_NETPROFIT_YOY") is not None:
-                    indicators['net_profit_growth'] = float(record["PARENT_NETPROFIT_YOY"])
-                # 营收增长率
-                if record.get("TOTAL_OPERATE_INCOME_YOY") is not None:
-                    indicators['revenue_growth'] = float(record["TOTAL_OPERATE_INCOME_YOY"])
-                # 资产负债率
-                if record.get("DEBT_ASSET_RATIO") is not None:
-                    indicators['debt_ratio'] = float(record["DEBT_ASSET_RATIO"])
-
-                if indicators:
-                    return indicators
-                else:
-                    raise ValueError("接口返回数据中未找到有效财务指标")
-
-        except (urllib.error.URLError, urllib.error.HTTPError, ValueError, KeyError) as e:
-            if attempt == MAX_RETRIES - 1:
-                raise ConnectionError(f"获取真实数据失败（已重试{MAX_RETRIES}次）: {e}")
-            time.sleep(RETRY_BACKOFF * (attempt + 1))
-
-    raise ConnectionError("获取真实数据失败")
+            if indicators:
+                return indicators
+            else:
+                raise ValueError("接口返回数据中未找到有效财务指标")
+        else:
+            raise ValueError("接口返回数据格式异常")
+    except (ValueError, KeyError) as e:
+        raise ConnectionError(f"数据解析失败: {e}")
 
 
 def selftest() -> int:

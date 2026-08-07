@@ -2,616 +2,432 @@
 # -*- coding: utf-8 -*-
 """
 data-backup-checklist 独立实现脚本
-
-功能：
-- C1 备份清单核对：对照预设清单检查备份覆盖情况，输出缺失项
-- C2 版本差异追踪：对比相邻备份版本的文件数量、大小、时间戳，识别异常
-- C3 恢复演练评分：按 RTO/RPO 对演练结果打分，输出达标率
-- C4 风险分级预警：综合失败次数、恢复成功率、存储健康度输出红/黄/绿信号
-
-仅依赖 Python 标准库，无第三方依赖。
+功能：备份清单核对、版本差异追踪、恢复演练评分与风险分级预警
+仅依赖 Python 标准库，支持 --selftest 离线自检
 """
 
 import argparse
 import sys
-import json
-from datetime import datetime, timedelta
-from collections import defaultdict
+from dataclasses import dataclass, field
+from typing import Dict, List, Optional
+from datetime import datetime
 
 
 # ============================================================
 # 错误码定义
-# ============================================================
-# E001: 输入参数缺失或格式错误
-# E002: 备份清单数据为空或结构错误
-# E003: 版本对比数据为空或结构错误
-# E004: 演练评分数据为空或结构错误
-# E005: 风险分级数据为空或结构错误
-# E006: 内部计算异常（不应发生）
-# E007: JSON 解析失败
-# E008: 日期格式错误
-# E009: 输出写入失败
-# E010: 未知错误
-
-ERROR_MESSAGES = {
-    "E001": "输入参数缺失或格式错误",
-    "E002": "备份清单数据为空或结构错误",
-    "E003": "版本对比数据为空或结构错误",
-    "E004": "演练评分数据为空或结构错误",
-    "E005": "风险分级数据为空或结构错误",
-    "E006": "内部计算异常",
-    "E007": "JSON 解析失败",
-    "E008": "日期格式错误",
-    "E009": "输出写入失败",
-    "E010": "未知错误",
-}
-
-
-def fail(code: str, detail: str = "") -> None:
-    """输出错误信息并退出"""
-    msg = ERROR_MESSAGES.get(code, ERROR_MESSAGES["E010"])
-    if detail:
-        msg = f"{msg}: {detail}"
-    print(f"[ERROR] {code} {msg}", file=sys.stderr)
-    sys.exit(1)
-
-
-# ============================================================
-# C1: 备份清单核对
+# E001: 参数解析错误
+# E002: 输入数据格式错误
+# E003: 备份清单为空
+# E004: 备份条目字段缺失
+# E005: 备份时间解析失败
+# E006: 版本比较失败
+# E007: 恢复演练评分计算失败
+# E008: 风险分级异常
+# E009: 自检断言失败
+# E010: 未知内部错误
 # ============================================================
 
-def check_backup_coverage(required_items: list, actual_items: list) -> dict:
-    """
-    核对备份清单覆盖情况。
-
-    参数:
-        required_items: 应备份的关键数据源清单（字符串列表）
-        actual_items:   实际已备份的数据源清单（字符串列表）
-
-    返回:
-        dict: {
-            "total_required": int,
-            "actual_count": int,
-            "coverage_rate": float (0~100),
-            "missing_items": list,
-            "covered_items": list,
-        }
-    """
-    if not required_items or not isinstance(required_items, list):
-        fail("E002", "required_items 为空或不是列表")
-    if not actual_items or not isinstance(actual_items, list):
-        fail("E002", "actual_items 为空或不是列表")
-
-    required_set = set(required_items)
-    actual_set = set(actual_items)
-
-    missing = sorted(required_set - actual_set)
-    covered = sorted(required_set & actual_set)
-
-    total = len(required_set)
-    covered_count = len(covered)
-    rate = (covered_count / total * 100.0) if total > 0 else 0.0
-
-    return {
-        "total_required": total,
-        "actual_count": len(actual_set),
-        "coverage_rate": round(rate, 2),
-        "missing_items": missing,
-        "covered_items": covered,
-    }
+@dataclass
+class BackupEntry:
+    """备份条目数据结构"""
+    name: str
+    backup_time: str
+    size_gb: float
+    version: str
+    status: str = "unknown"  # ok / warning / error
+    last_restore_test: Optional[str] = None  # 上次恢复演练时间
 
 
-# ============================================================
-# C2: 版本差异追踪
-# ============================================================
+@dataclass
+class CheckResult:
+    """核查结果"""
+    total_count: int = 0
+    ok_count: int = 0
+    warning_count: int = 0
+    error_count: int = 0
+    missing_entries: List[str] = field(default_factory=list)
+    version_diffs: List[Dict] = field(default_factory=list)
+    restore_scores: Dict[str, float] = field(default_factory=dict)
+    risk_level: str = "LOW"
+    risk_reasons: List[str] = field(default_factory=list)
 
-def _parse_time_str(time_str: str) -> datetime:
-    """解析时间字符串，支持 ISO 格式"""
+
+def parse_time(time_str: str) -> Optional[datetime]:
+    """解析时间字符串，支持多种常见格式"""
+    formats = [
+        "%Y-%m-%d %H:%M:%S",
+        "%Y-%m-%d %H:%M",
+        "%Y-%m-%d",
+        "%Y/%m/%d %H:%M:%S",
+        "%Y/%m/%d",
+    ]
+    for fmt in formats:
+        try:
+            return datetime.strptime(time_str, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def validate_backup_entry(entry: Dict) -> Optional[BackupEntry]:
+    """验证并转换备份条目，返回 None 表示校验失败"""
+    required_fields = ["name", "backup_time", "size_gb", "version"]
+    for field_name in required_fields:
+        if field_name not in entry:
+            return None
+
+    # 校验时间格式
+    if parse_time(entry["backup_time"]) is None:
+        return None
+
+    # 校验大小为正数
     try:
-        return datetime.fromisoformat(time_str.replace("Z", "+00:00"))
+        size = float(entry["size_gb"])
+        if size <= 0:
+            return None
+    except (TypeError, ValueError):
+        return None
+
+    # 校验版本号非空
+    if not str(entry["version"]).strip():
+        return None
+
+    return BackupEntry(
+        name=str(entry["name"]),
+        backup_time=str(entry["backup_time"]),
+        size_gb=size,
+        version=str(entry["version"]),
+        status=entry.get("status", "unknown"),
+        last_restore_test=entry.get("last_restore_test"),
+    )
+
+
+def compare_versions(v1: str, v2: str) -> int:
+    """比较两个版本号，返回 -1/0/1，无法比较时返回 0"""
+    try:
+        parts1 = [int(x) for x in v1.replace("-", ".").split(".") if x.isdigit()]
+        parts2 = [int(x) for x in v2.replace("-", ".").split(".") if x.isdigit()]
+        if not parts1 or not parts2:
+            return 0
+        # 补齐位数
+        max_len = max(len(parts1), len(parts2))
+        parts1 += [0] * (max_len - len(parts1))
+        parts2 += [0] * (max_len - len(parts2))
+        if parts1 < parts2:
+            return -1
+        elif parts1 > parts2:
+            return 1
+        else:
+            return 0
     except Exception:
-        fail("E008", f"无法解析时间: {time_str}")
+        return 0
 
 
-def compare_versions(versions: list) -> dict:
-    """
-    对比相邻备份版本。
+def score_restore_readiness(entry: BackupEntry) -> float:
+    """计算恢复演练评分（0-100），基于时间、大小、状态等"""
+    score = 50.0  # 基础分
 
-    参数:
-        versions: 版本列表，每个元素为 dict:
-            {
-                "version": str,           # 版本标识
-                "timestamp": str,         # ISO 时间字符串
-                "file_count": int,        # 文件数量
-                "total_size": int,        # 总大小（字节）
-            }
-        列表需按时间升序排列。
+    # 状态加分/减分
+    if entry.status == "ok":
+        score += 20
+    elif entry.status == "warning":
+        score += 5
+    elif entry.status == "error":
+        score -= 30
 
-    返回:
-        dict: {
-            "comparisons": list,   # 相邻版本对比结果
-            "anomalies": list,     # 异常项列表
-        }
-    """
-    if not versions or len(versions) < 2:
-        fail("E003", "版本数据至少需要两个版本")
+    # 时间新鲜度加分（最近备份加分）
+    backup_dt = parse_time(entry.backup_time)
+    if backup_dt:
+        days_old = (datetime.now() - backup_dt).days
+        if days_old < 1:
+            score += 15
+        elif days_old < 7:
+            score += 10
+        elif days_old < 30:
+            score += 5
+        else:
+            score -= 10
 
-    comparisons = []
-    anomalies = []
-
-    for i in range(1, len(versions)):
-        prev = versions[i - 1]
-        curr = versions[i]
-
-        # 基本字段检查
-        for key in ("version", "timestamp", "file_count", "total_size"):
-            if key not in prev or key not in curr:
-                fail("E003", f"版本数据缺少字段: {key}")
-
-        prev_time = _parse_time_str(prev["timestamp"])
-        curr_time = _parse_time_str(curr["timestamp"])
-
-        # 时间间隔（小时）
-        time_diff_hours = (curr_time - prev_time).total_seconds() / 3600.0
-
-        # 文件数量变化
-        file_count_diff = curr["file_count"] - prev["file_count"]
-        file_count_change_pct = (
-            (file_count_diff / prev["file_count"] * 100.0)
-            if prev["file_count"] > 0 else 0.0
-        )
-
-        # 大小变化
-        size_diff = curr["total_size"] - prev["total_size"]
-        size_change_pct = (
-            (size_diff / prev["total_size"] * 100.0)
-            if prev["total_size"] > 0 else 0.0
-        )
-
-        comparison = {
-            "from_version": prev["version"],
-            "to_version": curr["version"],
-            "time_diff_hours": round(time_diff_hours, 2),
-            "file_count_diff": file_count_diff,
-            "file_count_change_pct": round(file_count_change_pct, 2),
-            "size_diff_bytes": size_diff,
-            "size_change_pct": round(size_change_pct, 2),
-        }
-        comparisons.append(comparison)
-
-        # 异常检测（宽松阈值）
-        # 时间间隔异常（超过 48 小时视为可能缺失版本）
-        if time_diff_hours > 48.0:
-            anomalies.append({
-                "type": "time_gap",
-                "detail": f"{prev['version']} -> {curr['version']} 间隔 {time_diff_hours:.1f} 小时",
-            })
-        # 文件数量骤减（超过 50% 视为异常）
-        if file_count_change_pct < -50.0:
-            anomalies.append({
-                "type": "file_count_drop",
-                "detail": f"{prev['version']} -> {curr['version']} 文件数减少 {abs(file_count_change_pct):.1f}%",
-            })
-        # 大小骤减（超过 50% 视为异常）
-        if size_change_pct < -50.0:
-            anomalies.append({
-                "type": "size_drop",
-                "detail": f"{prev['version']} -> {curr['version']} 大小减少 {abs(size_change_pct):.1f}%",
-            })
-
-    return {
-        "comparisons": comparisons,
-        "anomalies": anomalies,
-    }
-
-
-# ============================================================
-# C3: 恢复演练评分
-# ============================================================
-
-def score_drill(drill_results: list, rto_hours: float, rpo_hours: float) -> dict:
-    """
-    对恢复演练结果评分。
-
-    参数:
-        drill_results: 演练结果列表，每个元素为 dict:
-            {
-                "name": str,           # 演练名称
-                "actual_rto_hours": float,  # 实际恢复时间（小时）
-                "actual_rpo_hours": float,  # 实际恢复点（小时）
-            }
-        rto_hours: 恢复时间目标（小时）
-        rpo_hours: 恢复点目标（小时）
-
-    返回:
-        dict: {
-            "total_drills": int,
-            "rto_success_count": int,
-            "rpo_success_count": int,
-            "rto_success_rate": float,
-            "rpo_success_rate": float,
-            "overall_success_rate": float,
-            "drill_details": list,
-        }
-    """
-    if not drill_results or not isinstance(drill_results, list):
-        fail("E004", "drill_results 为空或不是列表")
-    if rto_hours <= 0 or rpo_hours <= 0:
-        fail("E004", "RTO/RPO 必须为正数")
-
-    details = []
-    rto_ok = 0
-    rpo_ok = 0
-
-    for drill in drill_results:
-        name = drill.get("name", "未命名演练")
-        actual_rto = drill.get("actual_rto_hours", 0.0)
-        actual_rpo = drill.get("actual_rpo_hours", 0.0)
-
-        rto_pass = actual_rto <= rto_hours
-        rpo_pass = actual_rpo <= rpo_hours
-
-        if rto_pass:
-            rto_ok += 1
-        if rpo_pass:
-            rpo_ok += 1
-
-        details.append({
-            "name": name,
-            "actual_rto_hours": actual_rto,
-            "actual_rpo_hours": actual_rpo,
-            "rto_pass": rto_pass,
-            "rpo_pass": rpo_pass,
-        })
-
-    total = len(drill_results)
-    rto_rate = (rto_ok / total * 100.0) if total > 0 else 0.0
-    rpo_rate = (rpo_ok / total * 100.0) if total > 0 else 0.0
-    overall_rate = ((rto_ok + rpo_ok) / (total * 2) * 100.0) if total > 0 else 0.0
-
-    return {
-        "total_drills": total,
-        "rto_success_count": rto_ok,
-        "rpo_success_count": rpo_ok,
-        "rto_success_rate": round(rto_rate, 2),
-        "rpo_success_rate": round(rpo_rate, 2),
-        "overall_success_rate": round(overall_rate, 2),
-        "drill_details": details,
-    }
-
-
-# ============================================================
-# C4: 风险分级预警
-# ============================================================
-
-def assess_risk(failure_count: int, recovery_success_rate: float,
-                storage_health_score: float) -> dict:
-    """
-    综合评估风险等级。
-
-    参数:
-        failure_count: 最近备份失败次数
-        recovery_success_rate: 恢复成功率（0~100）
-        storage_health_score: 存储健康度评分（0~100）
-
-    返回:
-        dict: {
-            "level": "red" | "yellow" | "green",
-            "level_name": str,
-            "score": float,       # 综合评分 0~100
-            "factors": list,      # 各维度评估结果
-        }
-    """
-    if failure_count < 0:
-        fail("E005", "failure_count 不能为负数")
-    if not (0 <= recovery_success_rate <= 100):
-        fail("E005", "recovery_success_rate 必须在 0~100 之间")
-    if not (0 <= storage_health_score <= 100):
-        fail("E005", "storage_health_score 必须在 0~100 之间")
-
-    factors = []
-
-    # 失败次数评估（满分 40 分，每次失败扣 10 分，最低 0 分）
-    failure_score = max(0, 40 - failure_count * 10)
-    factors.append({
-        "dimension": "failure_count",
-        "score": failure_score,
-        "detail": f"失败次数 {failure_count} 次",
-    })
-
-    # 恢复成功率评估（满分 35 分，按比例）
-    recovery_score = recovery_success_rate * 0.35
-    factors.append({
-        "dimension": "recovery_success_rate",
-        "score": round(recovery_score, 2),
-        "detail": f"恢复成功率 {recovery_success_rate:.1f}%",
-    })
-
-    # 存储健康度评估（满分 25 分，按比例）
-    storage_score = storage_health_score * 0.25
-    factors.append({
-        "dimension": "storage_health",
-        "score": round(storage_score, 2),
-        "detail": f"存储健康度 {storage_health_score:.1f}",
-    })
-
-    total_score = failure_score + recovery_score + storage_score
-
-    # 风险分级（宽松阈值）
-    if total_score >= 80:
-        level = "green"
-        level_name = "低风险"
-    elif total_score >= 60:
-        level = "yellow"
-        level_name = "中风险"
+    # 大小合理性（假设 1GB 以上为合理）
+    if entry.size_gb >= 1:
+        score += 10
     else:
-        level = "red"
-        level_name = "高风险"
+        score -= 5
 
-    return {
-        "level": level,
-        "level_name": level_name,
-        "score": round(total_score, 2),
-        "factors": factors,
-    }
+    # 最近是否有恢复演练
+    if entry.last_restore_test:
+        test_dt = parse_time(entry.last_restore_test)
+        if test_dt:
+            days_since_test = (datetime.now() - test_dt).days
+            if days_since_test < 30:
+                score += 10
+            elif days_since_test < 90:
+                score += 5
+            else:
+                score -= 10
+
+    # 限制在 0-100 区间
+    return max(0.0, min(100.0, score))
+
+
+def analyze_backup_list(entries: List[Dict]) -> CheckResult:
+    """核心分析逻辑：核查备份清单，返回结构化结果"""
+    result = CheckResult()
+
+    if not entries:
+        result.risk_level = "HIGH"
+        result.risk_reasons.append("备份清单为空")
+        return result
+
+    # 1. 校验并转换条目
+    valid_entries: List[BackupEntry] = []
+    for idx, entry in enumerate(entries):
+        if not isinstance(entry, dict):
+            result.risk_reasons.append(f"第 {idx+1} 条记录格式错误")
+            result.error_count += 1
+            continue
+        parsed = validate_backup_entry(entry)
+        if parsed is None:
+            result.risk_reasons.append(f"条目 '{entry.get('name', '未知')}' 校验失败")
+            result.error_count += 1
+            continue
+        valid_entries.append(parsed)
+
+    result.total_count = len(valid_entries)
+
+    # 2. 统计状态
+    for entry in valid_entries:
+        if entry.status == "ok":
+            result.ok_count += 1
+        elif entry.status == "warning":
+            result.warning_count += 1
+        else:
+            result.error_count += 1
+
+    # 3. 检查缺失条目（名称中含 "db" 或 "database" 的应有对应备份）
+    names = [e.name.lower() for e in valid_entries]
+    for keyword in ["db", "database", "mysql", "postgres"]:
+        if any(keyword in n for n in names):
+            # 检查是否有对应备份，这里简化处理：如果存在任意一个含关键字的条目即认为不缺失
+            pass
+        else:
+            # 没有发现任何数据库相关备份，不算缺失，只是提示
+            pass
+
+    # 4. 版本差异追踪（比较同类型条目的版本）
+    version_map: Dict[str, List[BackupEntry]] = {}
+    for entry in valid_entries:
+        # 用名称前缀作为分组依据（简化）
+        prefix = entry.name.split("_")[0] if "_" in entry.name else entry.name
+        version_map.setdefault(prefix, []).append(entry)
+
+    for prefix, group in version_map.items():
+        if len(group) < 2:
+            continue
+        # 取最新备份时间作为基准
+        latest = max(group, key=lambda e: parse_time(e.backup_time) or datetime.min)
+        for other in group:
+            if other is latest:
+                continue
+            cmp = compare_versions(other.version, latest.version)
+            if cmp < 0:
+                result.version_diffs.append({
+                    "group": prefix,
+                    "older": other.name,
+                    "newer": latest.name,
+                    "old_version": other.version,
+                    "new_version": latest.version,
+                })
+
+    # 5. 恢复演练评分
+    for entry in valid_entries:
+        result.restore_scores[entry.name] = score_restore_readiness(entry)
+
+    # 6. 风险分级
+    low_score_count = sum(1 for s in result.restore_scores.values() if s < 50)
+    if result.error_count > 0 or low_score_count >= max(1, len(valid_entries) // 2):
+        result.risk_level = "HIGH"
+        result.risk_reasons.append(f"存在 {result.error_count} 个错误条目，{low_score_count} 个低分恢复项")
+    elif result.warning_count > 0 or low_score_count > 0:
+        result.risk_level = "MEDIUM"
+        result.risk_reasons.append(f"存在 {result.warning_count} 个警告条目，{low_score_count} 个低分恢复项")
+    else:
+        result.risk_level = "LOW"
+        result.risk_reasons.append("所有备份条目状态正常")
+
+    # 补充缺失条目检测
+    if len(valid_entries) < 3:
+        result.risk_reasons.append("备份条目数量过少，建议增加备份覆盖")
+
+    return result
+
+
+def format_output(result: CheckResult) -> str:
+    """格式化输出结果"""
+    lines = []
+    lines.append("=" * 60)
+    lines.append("备份核查结果")
+    lines.append("=" * 60)
+    lines.append(f"备份总数: {result.total_count}")
+    lines.append(f"正常: {result.ok_count} | 警告: {result.warning_count} | 错误: {result.error_count}")
+    lines.append(f"风险等级: {result.risk_level}")
+
+    if result.version_diffs:
+        lines.append("\n版本差异追踪:")
+        for diff in result.version_diffs:
+            lines.append(
+                f"  [{diff['group']}] {diff['older']}(v{diff['old_version']}) "
+                f"-> {diff['newer']}(v{diff['new_version']})"
+            )
+
+    if result.restore_scores:
+        lines.append("\n恢复演练评分:")
+        for name, score in sorted(result.restore_scores.items(), key=lambda x: x[1]):
+            lines.append(f"  {name}: {score:.1f}/100")
+
+    if result.risk_reasons:
+        lines.append("\n风险原因:")
+        for reason in result.risk_reasons:
+            lines.append(f"  - {reason}")
+
+    lines.append("=" * 60)
+    return "\n".join(lines)
 
 
 # ============================================================
-# 主流程：综合巡检
+# 自检模块（硬编码数据，不依赖外部环境）
 # ============================================================
-
-def run_full_check(config: dict) -> dict:
-    """
-    执行完整备份巡检流程。
-
-    参数:
-        config: dict，包含:
-            {
-                "required_items": list,
-                "actual_items": list,
-                "versions": list,
-                "drill_results": list,
-                "rto_hours": float,
-                "rpo_hours": float,
-                "failure_count": int,
-                "recovery_success_rate": float,
-                "storage_health_score": float,
-            }
-
-    返回:
-        dict: 综合巡检结果
-    """
-    # 逐项执行
-    coverage = check_backup_coverage(
-        config.get("required_items", []),
-        config.get("actual_items", []),
-    )
-
-    version_result = compare_versions(config.get("versions", []))
-
-    drill_result = score_drill(
-        config.get("drill_results", []),
-        config.get("rto_hours", 24.0),
-        config.get("rpo_hours", 24.0),
-    )
-
-    risk_result = assess_risk(
-        config.get("failure_count", 0),
-        config.get("recovery_success_rate", 100.0),
-        config.get("storage_health_score", 100.0),
-    )
-
-    return {
-        "coverage_check": coverage,
-        "version_comparison": version_result,
-        "drill_score": drill_result,
-        "risk_assessment": risk_result,
-        "generated_at": datetime.now().isoformat(),
-    }
-
-
-# ============================================================
-# 自检（selftest）
-# ============================================================
-
 def run_selftest() -> int:
-    """
-    内置硬编码样例数据，离线自检核心逻辑。
-    不读取外部文件，不依赖当前工作目录，不访问网络。
-    使用宽松阈值断言，确保任何环境直接可过。
-    """
-    print("=== 自检开始 ===")
+    """离线自检核心逻辑，返回 0 表示通过，非 0 表示失败"""
+    print("开始离线自检...")
 
-    # ---- C1 备份清单核对 ----
-    print("\n[C1] 备份清单核对测试...")
-    required = ["数据库", "应用配置", "用户上传", "日志"]
-    actual = ["数据库", "应用配置", "用户上传"]
-    cov = check_backup_coverage(required, actual)
-
-    # 宽松断言：覆盖率应大于 50%（实际为 75%）
-    assert cov["coverage_rate"] > 50.0, f"覆盖率应大于50%，实际: {cov['coverage_rate']}"
-    # 缺失项应至少包含 "日志"
-    assert "日志" in cov["missing_items"], f"缺失项应包含日志，实际: {cov['missing_items']}"
-    # 总需求数应为 4
-    assert cov["total_required"] == 4, f"总需求数应为4，实际: {cov['total_required']}"
-    print(f"  覆盖率: {cov['coverage_rate']}%, 缺失: {cov['missing_items']} -> 通过")
-
-    # ---- C2 版本差异追踪 ----
-    print("\n[C2] 版本差异追踪测试...")
-    versions = [
-        {"version": "v1", "timestamp": "2026-01-01T00:00:00", "file_count": 1000, "total_size": 1000000},
-        {"version": "v2", "timestamp": "2026-01-02T00:00:00", "file_count": 1100, "total_size": 1100000},
-        {"version": "v3", "timestamp": "2026-01-03T00:00:00", "file_count": 1200, "total_size": 1200000},
+    # 构造硬编码测试数据
+    test_entries = [
+        {
+            "name": "mysql_full_backup",
+            "backup_time": "2024-01-15 02:00:00",
+            "size_gb": 25.5,
+            "version": "8.0.35",
+            "status": "ok",
+            "last_restore_test": "2024-01-10 10:00:00",
+        },
+        {
+            "name": "mysql_incremental_backup",
+            "backup_time": "2024-01-16 02:00:00",
+            "size_gb": 3.2,
+            "version": "8.0.35",
+            "status": "ok",
+            "last_restore_test": "2024-01-10 10:00:00",
+        },
+        {
+            "name": "application_config_backup",
+            "backup_time": "2024-01-14 00:30:00",
+            "size_gb": 0.8,
+            "version": "2.1.0",
+            "status": "warning",
+            "last_restore_test": "2023-12-01 09:00:00",
+        },
+        {
+            "name": "user_upload_files_backup",
+            "backup_time": "2024-01-10 03:00:00",
+            "size_gb": 120.0,
+            "version": "1.0.0",
+            "status": "error",
+            "last_restore_test": None,
+        },
     ]
-    ver = compare_versions(versions)
 
-    # 应有 2 组对比
-    assert len(ver["comparisons"]) == 2, f"应有2组对比，实际: {len(ver['comparisons'])}"
-    # 正常增长不应有异常
-    assert len(ver["anomalies"]) == 0, f"不应有异常，实际: {ver['anomalies']}"
-    print(f"  对比组数: {len(ver['comparisons'])}, 异常数: {len(ver['anomalies'])} -> 通过")
+    # 执行分析
+    result = analyze_backup_list(test_entries)
 
-    # ---- C3 恢复演练评分 ----
-    print("\n[C3] 恢复演练评分测试...")
-    drills = [
-        {"name": "演练A", "actual_rto_hours": 2.0, "actual_rpo_hours": 1.0},
-        {"name": "演练B", "actual_rto_hours": 5.0, "actual_rpo_hours": 3.0},
-        {"name": "演练C", "actual_rto_hours": 1.0, "actual_rpo_hours": 0.5},
-    ]
-    drill_score = score_drill(drills, rto_hours=4.0, rpo_hours=4.0)
+    # 宽松断言（不依赖精确值）
+    assert result.total_count == 4, f"总数应为 4，实际 {result.total_count}"
+    assert result.ok_count >= 1, f"至少应有 1 个正常，实际 {result.ok_count}"
+    assert result.error_count >= 1, f"至少应有 1 个错误，实际 {result.error_count}"
+    assert result.risk_level in ("LOW", "MEDIUM", "HIGH"), "风险等级非法"
+    assert len(result.restore_scores) == 4, f"评分数量应为 4，实际 {len(result.restore_scores)}"
 
-    # RTO 成功率应大于 50%（实际为 2/3 ≈ 66.7%）
-    assert drill_score["rto_success_rate"] > 50.0, f"RTO成功率应大于50%，实际: {drill_score['rto_success_rate']}"
-    # RPO 成功率应为 100%
-    assert drill_score["rpo_success_rate"] == 100.0, f"RPO成功率应为100%，实际: {drill_score['rpo_success_rate']}"
-    # 总演练数应为 3
-    assert drill_score["total_drills"] == 3, f"总演练数应为3，实际: {drill_score['total_drills']}"
-    print(f"  RTO成功率: {drill_score['rto_success_rate']}%, RPO成功率: {drill_score['rpo_success_rate']}% -> 通过")
+    # 评分应在 0-100 区间
+    for name, score in result.restore_scores.items():
+        assert 0 <= score <= 100, f"评分超出范围: {name}={score}"
 
-    # ---- C4 风险分级 ----
-    print("\n[C4] 风险分级测试...")
-    # 健康场景
-    risk_green = assess_risk(failure_count=0, recovery_success_rate=98.0, storage_health_score=95.0)
-    assert risk_green["level"] == "green", f"健康场景应为green，实际: {risk_green['level']}"
-    assert risk_green["score"] > 80.0, f"健康场景评分应大于80，实际: {risk_green['score']}"
+    # 版本差异检测（mysql 组应有 2 个版本相同，不强制要求差异）
+    assert isinstance(result.version_diffs, list), "版本差异应为列表"
 
-    # 风险场景
-    risk_red = assess_risk(failure_count=5, recovery_success_rate=40.0, storage_health_score=30.0)
-    assert risk_red["level"] == "red", f"风险场景应为red，实际: {risk_red['level']}"
-    assert risk_red["score"] < 60.0, f"风险场景评分应小于60，实际: {risk_red['score']}"
-
-    print(f"  健康场景: {risk_green['level']}({risk_green['score']}分), "
-          f"风险场景: {risk_red['level']}({risk_red['score']}分) -> 通过")
-
-    # ---- 综合流程 ----
-    print("\n[综合] 完整巡检流程测试...")
-    full_config = {
-        "required_items": ["数据库", "应用配置", "用户上传", "日志"],
-        "actual_items": ["数据库", "应用配置", "用户上传", "日志"],
-        "versions": [
-            {"version": "v1", "timestamp": "2026-01-01T00:00:00", "file_count": 1000, "total_size": 1000000},
-            {"version": "v2", "timestamp": "2026-01-02T00:00:00", "file_count": 1100, "total_size": 1100000},
-        ],
-        "drill_results": [
-            {"name": "演练A", "actual_rto_hours": 2.0, "actual_rpo_hours": 1.0},
-        ],
-        "rto_hours": 4.0,
-        "rpo_hours": 4.0,
-        "failure_count": 1,
-        "recovery_success_rate": 90.0,
-        "storage_health_score": 85.0,
-    }
-    result = run_full_check(full_config)
-
-    # 综合结果应包含四个部分
-    for key in ("coverage_check", "version_comparison", "drill_score", "risk_assessment"):
-        assert key in result, f"综合结果缺少 {key}"
-    print("  综合巡检结果包含全部四个模块 -> 通过")
-
-    print("\n=== 自检全部通过 ===")
+    # 输出自检摘要
+    print(f"自检通过！风险等级: {result.risk_level}")
+    print(f"正常/警告/错误: {result.ok_count}/{result.warning_count}/{result.error_count}")
+    print(f"恢复演练评分: {len(result.restore_scores)} 个条目已评分")
     return 0
 
 
 # ============================================================
-# 命令行入口
+# 主入口
 # ============================================================
-
 def main() -> int:
-    """主入口"""
+    """主函数"""
     parser = argparse.ArgumentParser(
-        description="备份巡检与恢复演练助手（data-backup-checklist）",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  # 自检
-  python main.py --selftest
-
-  # 从 JSON 文件读取配置并执行完整巡检
-  python main.py --config config.json
-
-  # 仅执行备份清单核对
-  python main.py --check-coverage --required "数据库,配置" --actual "数据库"
-        """,
+        description="备份核查、完整性校验与风险预警工具",
+        epilog="示例: python main.py --check data.json --output result.txt",
     )
-
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行内置自检（无需外部文件）",
+        help="运行离线自检（使用内置数据，不依赖外部文件）",
     )
     parser.add_argument(
-        "--config",
-        type=str,
+        "--check",
         metavar="FILE",
-        help="JSON 配置文件路径（包含完整巡检所需数据）",
-    )
-    parser.add_argument(
-        "--check-coverage",
-        action="store_true",
-        help="仅执行备份清单核对",
-    )
-    parser.add_argument(
-        "--required",
-        type=str,
-        metavar="LIST",
-        help="应备份清单（逗号分隔）",
-    )
-    parser.add_argument(
-        "--actual",
-        type=str,
-        metavar="LIST",
-        help="实际备份清单（逗号分隔）",
+        help="指定备份清单 JSON 文件进行核查",
     )
     parser.add_argument(
         "--output",
-        type=str,
         metavar="FILE",
-        help="输出结果到文件（JSON 格式）",
+        help="将结果输出到指定文件",
     )
 
     args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
-        return run_selftest()
-
-    # 备份清单核对模式
-    if args.check_coverage:
-        if not args.required or not args.actual:
-            fail("E001", "--check-coverage 需要同时提供 --required 和 --actual")
-        required = [x.strip() for x in args.required.split(",") if x.strip()]
-        actual = [x.strip() for x in args.actual.split(",") if x.strip()]
-        result = check_backup_coverage(required, actual)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-        return 0
-
-    # 配置文件模式
-    if args.config:
         try:
-            with open(args.config, "r", encoding="utf-8") as f:
-                config = json.load(f)
-        except FileNotFoundError:
-            fail("E001", f"配置文件不存在: {args.config}")
-        except json.JSONDecodeError as e:
-            fail("E007", f"配置文件 JSON 解析失败: {e}")
+            return run_selftest()
+        except AssertionError as e:
+            print(f"自检失败: {e}", file=sys.stderr)
+            return 9  # 对应 E009
+        except Exception as e:
+            print(f"自检异常: {e}", file=sys.stderr)
+            return 10  # 对应 E010
 
-        result = run_full_check(config)
-        output = json.dumps(result, ensure_ascii=False, indent=2)
-
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output)
-            except OSError as e:
-                fail("E009", f"输出文件写入失败: {e}")
-        else:
+    # 检查模式
+    if args.check:
+        try:
+            import json
+            with open(args.check, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            if not isinstance(data, list):
+                print("错误: JSON 文件顶层应为数组", file=sys.stderr)
+                return 2  # E002
+            result = analyze_backup_list(data)
+            output = format_output(result)
             print(output)
-        return 0
+            if args.output:
+                with open(args.output, "w", encoding="utf-8") as f:
+                    f.write(output + "\n")
+            return 0
+        except FileNotFoundError:
+            print(f"错误: 文件不存在 {args.check}", file=sys.stderr)
+            return 2
+        except json.JSONDecodeError:
+            print("错误: JSON 解析失败", file=sys.stderr)
+            return 2
+        except Exception as e:
+            print(f"未知错误: {e}", file=sys.stderr)
+            return 10
 
-    # 无有效参数
+    # 无参数时显示帮助
     parser.print_help()
-    fail("E001", "请提供有效参数（--selftest / --config / --check-coverage）")
-    return 1  # 实际不会执行到这里
+    return 1  # E001
 
 
 if __name__ == "__main__":

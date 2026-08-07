@@ -42,8 +42,8 @@ LPR_API_TIMEOUT = 5  # 秒
 LPR_API_RETRIES = 3  # 重试次数
 LPR_API_BACKOFF = 1  # 初始退避时间（秒）
 
-# 本地缓存文件路径 - 使用用户目录下的固定路径，避免多用户竞态
-LPR_CACHE_DIR = os.path.join(os.path.expanduser("~"), ".cache")
+# 本地缓存文件路径 - 使用系统临时目录，避免多用户权限冲突
+LPR_CACHE_DIR = os.path.join(tempfile.gettempdir(), "house_plan_cache")
 LPR_CACHE_FILE = os.path.join(LPR_CACHE_DIR, "house_plan_lpr.json")
 LPR_CACHE_MAX_AGE = 86400  # 24小时缓存有效期
 
@@ -440,4 +440,4 @@ def selftest():
         print(f"✗ 等额本息月供计算失败: {e}")
         return 1
     
-    # 测试2：等
+    # 测试2：等额

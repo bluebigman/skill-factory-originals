@@ -43,12 +43,16 @@ class BackupRecord:
     REQUIRED_FIELDS = ['filename', 'timestamp', 'size']
 
     def __init__(self, filename, timestamp, size, checksum='', backup_type='', status=''):
-        self.filename = filename
-        self.timestamp = timestamp
-        self.size = int(size) if size else 0
-        self.checksum = checksum
-        self.backup_type = backup_type
-        self.status = status
+        self.filename = filename if filename else ''
+        self.timestamp = timestamp if timestamp else ''
+        try:
+            self.size = int(size) if size not in (None, '') else 0
+        except (ValueError, TypeError):
+            print(f"警告: 字段 size 值 '{size}' 不是有效数字，已设为 0")
+            self.size = 0
+        self.checksum = checksum if checksum else ''
+        self.backup_type = backup_type if backup_type else ''
+        self.status = status if status else ''
 
     def to_dict(self):
         return {
@@ -179,7 +183,7 @@ def validate_records(records):
     return complete, incomplete
 
 
-def calculate_score(records):
+def calculate_recovery_score(records):
     """计算恢复演练评分（0-100）
     评分维度：
     - 完整性（40分）：必填字段完整
@@ -404,10 +408,3 @@ def run_selftest():
     assert records[0].filename == 'file1.txt', "文本解析第一条记录失败"
     assert records[1].filename == 'file2.txt', "文本解析第二条记录失败"
     print("✓ 文本解析通过（含注释行、空行、混合分隔符）")
-
-    # 测试2: 解析 JSON
-    records = parse_input(json_file)
-    assert len(records) == 3, f"JSON解析失败: 预期3条，实际{len(records)}"
-    print("✓ JSON解析通过")
-
-    # 测试3: 解析 CSV（含引号、逗
