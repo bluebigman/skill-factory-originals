@@ -7,7 +7,7 @@ license: MIT
 slug: awesome-claude-code-toolkit
 name: awesome-claude-code-toolkit
 displayName: 未命名工具
-description: The most comprehensive toolkit for Claude Code -- 135 agents, 35 curated skills, 42 commands, 176+ plugins, 20 hooks, 15
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行awesome claude code toolkit相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

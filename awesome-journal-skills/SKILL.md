@@ -6,6 +6,7 @@ ai_generated: true
 license: MIT
 slug: awesome-journal-skills
 name: awesome-journal-skills
+displayName: 仅供学习与参考用途
 displayName: Journal-sp
 description: Journal-specific Claude Code/Codex skill packs covering mainstream journals — AER, QJE, Nature, Cell, 管理世界, 经济研究 & 200+ 
 version: 1.0.0

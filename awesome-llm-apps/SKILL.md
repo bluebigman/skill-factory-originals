@@ -7,7 +7,7 @@ license: MIT
 slug: awesome-llm-apps
 name: awesome-llm-apps
 displayName: 未命名工具
-description: 100+ AI Agents, Agent Skills and RAG Apps - Free and Open Source.
+description: 仅供学习与参考用途。使用本。当用户需要AI大模型 深度学习、进行awesome llm apps相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

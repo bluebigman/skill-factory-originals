@@ -7,7 +7,7 @@ license: MIT
 slug: awesome-python
 name: awesome-python
 displayName: 未命名工具
-description: An opinionated list of Python frameworks, libraries, tools, and resources
+description: 仅供学习与参考用途。使用本。当用户需要Python开发 自动化、进行awesome python相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: awesome-data-analysis
 name: awesome-data-analysis
 displayName: 数据可视化
-description: 🚀 500+ curated resources for Data Analysis & Data Science: Python, SQL, Statistics, ML, AI, Visualization, Cheatsheets, 
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行awesome data analysis相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

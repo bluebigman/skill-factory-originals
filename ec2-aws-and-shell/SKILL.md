@@ -4,16 +4,16 @@ source_project: original
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 ai_generated: true
 license: MIT
-slug: automatic-udemy-course-enroller-get-paid-udemy-courses-for-free
-name: automatic-udemy-course-enroller-get-paid-udemy-courses-for-free
-displayName: 爬虫采集
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行automatic udemy course enroller get paid udemy courses for free相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+slug: ec2-aws-and-shell
+name: ec2-aws-and-shell
+displayName: 代码审查
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行ec2 aws and shell相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
 trigger_words:
-  - "爬虫采集"
-  - "automatic udemy course enroller get paid udemy courses for free"
+  - "代码审查"
+  - "ec2 aws and shell"
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -27,9 +27,9 @@ trigger_words:
 <!-- user-agreement-injected -->
 
 
-# 爬虫采集
+# 代码审查
 
-> Do you want to LEARN NEW STUFF for FREE? Don't worry, with the power of web-scraping and automation, this script will fi
+> SEIS 665 Assignment 2: Linux & Git Overview This week we will focus on becoming familiar with launching a Linux server a
 
 ## 一、能力边界（一页纸速查卡）
 
@@ -50,15 +50,15 @@ trigger_words:
 ## 二、触发方式（说大白话就能用）
 
 **触发词表（6类场景）：**
-| 爬虫采集 | 通用场景 |
-| automatic udemy course enroller get paid udemy courses for free | 通用场景 |
+| 代码审查 | 通用场景 |
+| ec2 aws and shell | 通用场景 |
 
 **大白话触发示例（用户原话 → 触发动作）：**
 | 用户可能会说 | 触发动作 |
 |---|---|
-| 帮我处理一下这个 | 启动 爬虫采集，进入标准流程 |
-| 把这个转成另一种格式 | 启动 爬虫采集，进入标准流程 |
-| 批量弄一下这些 | 启动 爬虫采集，进入标准流程 |
+| 帮我处理一下这个 | 启动 代码审查，进入标准流程 |
+| 把这个转成另一种格式 | 启动 代码审查，进入标准流程 |
+| 批量弄一下这些 | 启动 代码审查，进入标准流程 |
 
 ## 三、标准流程（5分钟上手路径）
 

@@ -7,7 +7,7 @@ license: MIT
 slug: anime-dl
 name: anime-dl
 displayName: 爬虫采集
-description: Anime-dl is a command-line program to download anime from CrunchyRoll and Funimation.
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行anime dl相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

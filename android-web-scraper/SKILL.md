@@ -7,7 +7,7 @@ license: MIT
 slug: android-web-scraper
 name: android-web-scraper
 displayName: 爬虫采集
-description: Android Web Scraper is a simple library for android web automation. Perform web task in background to fetch website data
+description: 仅供学习与参考用途。使用本。当用户需要网页抓取 数据采集、进行android web scraper相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

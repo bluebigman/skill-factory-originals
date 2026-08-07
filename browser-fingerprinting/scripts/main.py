@@ -383,7 +383,8 @@ class CodeFrameworkGenerator:
             f"{s['target']}({s['priority']})" for s in strategies
         )
 
-        code = f'''#!/usr/bin/env python3
+        # 使用字符串拼接而不是 f-string 来避免大括号问题
+        code = '''#!/usr/bin/env python3
 """
 浏览器指纹对抗采集框架（自动生成）
 目标反爬: {strategy_summary}
@@ -397,10 +398,10 @@ import time
 from playwright.sync_api import sync_playwright
 
 # 指纹配置
-FINGERPRINT = {json.dumps(profile_dict, indent=2, ensure_ascii=False)}
+FINGERPRINT = {profile_json}
 
 # 对抗策略摘要
-STRATEGIES = {json.dumps([s["target"] for s in strategies], ensure_ascii=False)}
+STRATEGIES = {strategies_json}
 
 
 def create_browser_context(browser):
@@ -484,7 +485,11 @@ if __name__ == "__main__":
     result = fetch_page(sys.argv[1])
     if result:
         print(json.dumps(result, ensure_ascii=False, indent=2))
-'''
+'''.format(
+            strategy_summary=strategy_summary,
+            profile_json=json.dumps(profile_dict, indent=2, ensure_ascii=False),
+            strategies_json=json.dumps([s["target"] for s in strategies], ensure_ascii=False)
+        )
         return code
 
     @staticmethod
@@ -498,7 +503,8 @@ if __name__ == "__main__":
             f"{s['target']}({s['priority']})" for s in strategies
         )
 
-        code = f'''/**
+        # 使用字符串拼接而不是 f-string 来避免大括号问题
+        code = '''/**
  * 浏览器指纹对抗采集框架（自动生成）
  * 目标反爬: {strategy_summary}
  */
@@ -511,7 +517,7 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 puppeteer.use(StealthPlugin());
 
 // 指纹配置
-const FINGERPRINT = {json.dumps(profile_dict, indent=2, ensure_ascii=False)};
+const FINGERPRINT = {profile_json};
 
 /**
  * 创建带指纹配置的浏览器页面
@@ -602,7 +608,10 @@ if (require.main === module) {{
     }
   }});
 }}
-'''
+'''.format(
+            strategy_summary=strategy_summary,
+            profile_json=json.dumps(profile_dict, indent=2, ensure_ascii=False)
+        )
         return code
 
     @classmethod

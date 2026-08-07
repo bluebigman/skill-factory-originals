@@ -7,7 +7,7 @@ license: MIT
 slug: awesome-copilot-id
 name: awesome-copilot-id
 displayName: 未命名工具
-description: A curated collection of custom agents, skills, rules, and prompts for GitHub Copilot, Google Antigravity, OpenCode, Chat
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行awesome copilot id相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
