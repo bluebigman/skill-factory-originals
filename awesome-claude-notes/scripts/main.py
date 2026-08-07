@@ -45,7 +45,8 @@ SUPPORTED_KEYS = {"text", "url", "data", "file", "note", "content"}
 OUTPUT_KEYS = {"text", "url", "data", "file", "note", "content", "title", "summary"}
 
 # 用于识别 URL 的简单正则（宽松匹配，不依赖网络）
-URL_PATTERN = re.compile(r"^(https?|ftp)://[^\s]+$", re.IGNORECASE)
+# 注意：不使用 ^...$ 锚点，以便从文本中提取 URL
+URL_PATTERN = re.compile(r"(?:https?|ftp)://[^\s]+", re.IGNORECASE)
 
 
 # ----------------------------------------------------------------------
