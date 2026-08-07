@@ -166,12 +166,6 @@ class SqlQuery:
 class SqlParser:
     """SQL 静态解析器（仅支持规格范围内的简单语句）。"""
 
-    # 匹配 SELECT 查询中的列定义
-    _COLUMN_RE = re.compile(
-        r"(?:[\w]+\s*\.\s*)?(\w+)\s+(\w+(?:\s+\w+)?(?:\s*\([^)]*\))?)",
-        re.IGNORECASE
-    )
-
     # 匹配 INSERT 语句
     _INSERT_RE = re.compile(
         r"INSERT\s+INTO\s+([\w_]+)\s*\(([^)]*)\)\s*VALUES\s*\(([^)]*)\)",
@@ -190,9 +184,9 @@ class SqlParser:
         re.IGNORECASE
     )
 
-    # 匹配 SELECT 语句
+    # 匹配 SELECT 语句（支持 JOIN）
     _SELECT_RE = re.compile(
-        r"SELECT\s+(.+?)\s+FROM\s+([\w_]+)(?:\s+(?:AS\s+)?\w+)?(?:\s+WHERE\s+(.+))?$",
+        r"SELECT\s+(.+?)\s+FROM\s+([\w_]+)(?:\s+(?:AS\s+)?\w+)?(?:\s+JOIN\s+.+?)?(?:\s+WHERE\s+(.+))?$",
         re.IGNORECASE
     )
 
@@ -254,8 +248,13 @@ class SqlParser:
                 col_type = self._guess_column_type(col)
                 columns.append((col, col_type))
 
-        # 提取参数
+        # 提取参数（从 WHERE 子句和 JOIN 条件中）
         params = self._extract_params(where_part)
+        # 同时从整个 SQL 中提取参数，确保不遗漏
+        all_params = self._extract_params(sql)
+        for p in all_params:
+            if p not in params:
+                params.append(p)
 
         return SqlQuery(sql=sql, query_type="SELECT", table_name=table_name,
                         columns=columns, params=params)
