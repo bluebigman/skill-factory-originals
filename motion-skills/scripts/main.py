@@ -62,6 +62,16 @@ CORE_FIELDS = [
     "direction",
 ]
 
+# 字段别名映射（用于模糊匹配）
+FIELD_ALIASES = {
+    "animation_name": ["name", "animation", "anim_name", "animationName"],
+    "duration": ["dur", "time", "length", "duration_ms"],
+    "easing": ["ease", "timing_function", "timingFunction"],
+    "keyframes": ["frames", "key_frames", "keyFrames"],
+    "repeat": ["loop", "iterations", "repeat_count"],
+    "direction": ["dir", "animation_direction", "animationDirection"],
+}
+
 
 # ============================================================
 # 工具函数
@@ -176,9 +186,19 @@ def _extract_motion_fields(data: Any) -> Dict[str, Any]:
 
         # 处理嵌套结构
         if "animation" in data and isinstance(data["animation"], dict):
-            for field in CORE_FIELDS:
-                if field not in result and field in data["animation"]:
-                    result[field] = data["animation"][field]
+            nested = data["animation"]
+            # 嵌套结构中的字段映射
+            nested_mappings = {
+                "animation_name": "name",
+                "duration": "duration",
+                "easing": "easing",
+                "keyframes": "keyframes",
+                "repeat": "repeat",
+                "direction": "direction",
+            }
+            for field, nested_key in nested_mappings.items():
+                if field not in result and nested_key in nested:
+                    result[field] = nested[nested_key]
                     confidence_map[field] = CONFIDENCE_HIGH
 
     elif isinstance(data, list):
@@ -193,6 +213,22 @@ def _extract_motion_fields(data: Any) -> Dict[str, Any]:
                     if matched is not None:
                         result[field] = matched
                         confidence_map[field] = CONFIDENCE_MEDIUM
+
+            # 处理嵌套结构
+            if "animation" in data[0] and isinstance(data[0]["animation"], dict):
+                nested = data[0]["animation"]
+                nested_mappings = {
+                    "animation_name": "name",
+                    "duration": "duration",
+                    "easing": "easing",
+                    "keyframes": "keyframes",
+                    "repeat": "repeat",
+                    "direction": "direction",
+                }
+                for field, nested_key in nested_mappings.items():
+                    if field not in result and nested_key in nested:
+                        result[field] = nested[nested_key]
+                        confidence_map[field] = CONFIDENCE_HIGH
 
             for key, value in data[0].items():
                 if key not in result:
@@ -229,6 +265,15 @@ def _fuzzy_find_field(data: Dict[str, Any], target: str) -> Any:
     for key in data:
         if normalize(str(key)) == target_norm:
             return data[key]
+
+    # 检查字段别名
+    if target in FIELD_ALIASES:
+        for alias in FIELD_ALIASES[target]:
+            alias_norm = normalize(alias)
+            for key in data:
+                key_norm = normalize(str(key))
+                if key_norm == alias_norm:
+                    return data[key]
 
     # 包含匹配（目标字段是键的子串或键是目标的子串）
     for key in data:
