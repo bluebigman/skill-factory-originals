@@ -296,6 +296,18 @@ def calculate_confidence(text: str, extracted: Dict[str, Any]) -> str:
         return "低"
 
 
+def has_valid_data(extracted: Dict[str, Any]) -> bool:
+    """检查提取的数据是否包含有效字段。
+
+    Args:
+        extracted: 提取的字段字典。
+
+    Returns:
+        True 表示至少有一个有效字段，False 表示所有字段都为空。
+    """
+    return any(v is not None for v in extracted.values())
+
+
 def transform_to_records(data: str, fields: Optional[List[str]] = None) -> BatchResult:
     """将原始文本转换为结构化记录。
 
@@ -353,10 +365,14 @@ def transform_to_records(data: str, fields: Optional[List[str]] = None) -> Batch
                     match = re.search(pattern, line)
                     extracted[field] = match.group(1) if match else None
 
+            # 检查是否有有效数据
+            if not has_valid_data(extracted):
+                continue  # 跳过无有效数据的行
+
             # 计算置信度
             confidence = calculate_confidence(line, extracted)
 
-            # 创建记录（即使所有字段为 None 也创建，标记低置信度）
+            # 创建记录
             records.append(StructuredRecord(extracted, confidence))
 
         except Exception as e:
