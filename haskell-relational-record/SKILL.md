@@ -7,7 +7,7 @@ license: MIT
 slug: haskell-relational-record
 name: haskell-relational-record
 displayName: SQL查询
-description: This repository includes a joined query generator based on typefull relational algebra, and mapping tools between SQL va
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行haskell relational record相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
