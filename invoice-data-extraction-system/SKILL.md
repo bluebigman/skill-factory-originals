@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: invoice-data-extraction-system
 name: invoice-data-extraction-system
-displayName: 票据解析 字段抽取 结构化输出
+displayName: 票据解析 信息抽取 结构化输出
 description: 将发票PDF或图片转为结构化数据，含置信度标注与批量处理。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/invoice-data-extraction-system
@@ -14,7 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 数据工坊
 agent_created: true
-trigger_words: ["发票识别", "票据解析", "invoice data extraction", "发票信息抽取", "OCR结构化"]
+trigger_words: ["发票识别", "票据解析", "invoice data extraction", "发票信息抽取", "OCR结构化", "票据信息录入", "发票数据化"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,19 +31,34 @@ trigger_words: ["发票识别", "票据解析", "invoice data extraction", "发�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# 票据解析与字段抽取 Skill 文档
+# 票据解析与结构化抽取系统
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-本 Skill 面向需要从发票类文档（PDF、图片、扫描件）中提取结构化字段的用户，适用于财务对账、报销审核、数据归档等场景。
+### 1.1 系统能做什么
 
-| 维度 | 说明 |
-|------|------|
-| ✅ 能做 | 解析 PDF/图片/URL 中的发票文本；抽取关键字段（发票号、日期、金额、税额、购买方/销售方信息）；输出 JSON/CSV 结构化结果；批量处理多文件；对不确定字段标注置信度 |
-| ❌ 不能做 | 无法识别手写体（仅限印刷体）；无法处理加密或损坏的 PDF；不提供法律效力的验真服务；不执行任何支付或财务操作 |
-| ⚠️ 边界条件 | 单文件不超过 20 页；图片分辨率建议 ≥ 300 DPI；支持中英文发票，其他语种识别率可能下降 |
+| 能力项 | 说明 | 输入要求 |
+|--------|------|----------|
+| 单张识别 | 从一张发票图片/PDF中提取关键字段 | 清晰可读的扫描件或电子发票 |
+| 批量处理 | 一次处理多张票据，输出汇总表 | 文件夹路径或文件列表 |
+| 置信度标注 | 每个字段附带可信度评分（0-1） | 自动计算，无需人工干预 |
+| 格式归一 | 日期、金额、税号等字段统一格式 | 自动完成 |
+| 结果导出 | 输出为 JSON / CSV / Excel | 用户指定格式 |
 
-**适用对象**：需要快速从发票中提取关键信息的财务人员、开发人员、数据分析师。
+### 1.2 系统不能做什么
+
+- 不能识别手写模糊、严重倾斜、反光遮挡的票据
+- 不能处理非发票类文档（如合同、收据、订单）
+- 不能验证发票真伪（需对接税务系统）
+- 不能自动修正原始数据错误（仅标注置信度）
+- 不能处理加密或损坏的 PDF 文件
+
+### 1.3 适用对象
+
+- 财务人员：日常报销单录入
+- 审计人员：批量核查票据信息
+- 开发人员：对接业务系统的数据管道
+- 行政人员：差旅票据归档整理
 
 
 ## 许可证（License）

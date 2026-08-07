@@ -161,22 +161,49 @@ def split_records(text: str) -> List[str]:
         block = block.strip()
         if not block:
             continue
+        
         # 如果块内包含多个时间标记，进一步拆分
-        # 简单策略：按行拆分，每行视为一条记录（如果包含时间或任务关键词）
         lines = block.split("\n")
         current = []
+        
         for line in lines:
             line = line.strip()
             if not line:
                 continue
-            # 如果行包含日期或任务关键词，且当前已有内容，则新起一条
-            if current and (extract_date(line) or parse_field_value(line, "task", DEFAULT_ALIASES)):
+            
+            # 判断是否为新记录的开始
+            # 新记录开始的条件：
+            # 1. 行包含日期标记
+            # 2. 行包含任务/工作内容标记（如 "任务:"、"工作内容:" 等）
+            # 3. 行以序号开头（如 "1."、"2、" 等）
+            # 4. 当前已有内容，且新行包含字段标记（如 "负责人:" 等）
+            is_new_record = False
+            
+            if current:  # 当前已有内容
+                if extract_date(line):
+                    is_new_record = True
+                elif re.match(r"^\d+\s*[.、)]", line):  # 序号开头
+                    is_new_record = True
+                elif parse_field_value(line, "task", DEFAULT_ALIASES):
+                    is_new_record = True
+                elif re.match(r"^(任务|工作内容|事项|task|todo|what)\s*[:：]", line, re.IGNORECASE):
+                    is_new_record = True
+            
+            if is_new_record:
                 records.append("\n".join(current))
                 current = [line]
             else:
                 current.append(line)
+        
         if current:
             records.append("\n".join(current))
+    
+    # 如果没有通过上述方式拆分，尝试按行拆分（每行一条记录）
+    if not records:
+        lines = [l.strip() for l in text.strip().split("\n") if l.strip()]
+        if lines:
+            records = lines
+    
     return records
 
 
@@ -206,6 +233,11 @@ def parse_record(text: str, aliases: Dict[str, List[str]]) -> Dict[str, Any]:
         # 去掉日期前缀
         if extract_date(first_line):
             first_line = re.sub(r"^\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?\s*", "", first_line)
+        # 去掉序号前缀
+        first_line = re.sub(r"^\d+\s*[.、)]\s*", "", first_line)
+        # 去掉常见的字段标签
+        for field_name in ["任务", "工作内容", "事项", "task", "todo", "what"]:
+            first_line = re.sub(rf"^{field_name}\s*[:：]\s*", "", first_line, flags=re.IGNORECASE)
         if first_line:
             task = first_line
     if task:
@@ -264,6 +296,13 @@ def process_text(text: str, aliases: Optional[Dict[str, List[str]]] = None) -> L
 
     # 拆分记录
     raw_records = split_records(text)
+    
+    # 如果没有成功拆分，尝试按行拆分
+    if len(raw_records) <= 1:
+        lines = [l.strip() for l in text.strip().split("\n") if l.strip()]
+        if len(lines) > 1:
+            raw_records = lines
+    
     if not raw_records:
         raise DailyLogError("E001")
 
@@ -418,7 +457,7 @@ def run_selftest() -> bool:
         print(f"[PASS] 日期提取: {dates}")
 
         # 5. 批量限制测试
-        too_many = "任务1\n" * 51
+        too_many = "\n".join([f"任务{i}" for i in range(51)])
         try:
             process_text(too_many)
             assert False, "应触发 E004 批量限制错误"
