@@ -37,7 +37,7 @@ logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(message)s", s
 log = logging.getLogger("pdf-invoice-parser")
 
 RETRIES = 3
-TIMEOUT = 30  # 网络请求超时（秒），提升至30秒
+TIMEOUT = 30  # 网络请求超时（秒），可配置
 MAX_WORKERS = 4  # 批量处理最大并发数
 
 
@@ -103,13 +103,13 @@ def _atomic_write(path: Path, content: str) -> None:
         raise BillError("E010", f"写入失败: {e}") from e
 
 
-def _download_with_retry(url: str) -> bytes:
+def _download_with_retry(url: str, timeout: int = TIMEOUT) -> bytes:
     """带指数退避重试的下载。"""
     last_exc = None
     for attempt in range(RETRIES):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=TIMEOUT) as resp:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
                 return resp.read()
         except Exception as e:
             last_exc = e
@@ -430,13 +430,13 @@ def process_pdf(pdf_path: Path) -> Bill:
     return bill
 
 
-def process_input(input_path: str) -> List[Bill]:
+def process_input(input_path: str, timeout: int = TIMEOUT) -> List[Bill]:
     """处理输入（文件/目录/URL）。"""
     results = []
 
     # 检查是否为 URL
     if input_path.startswith(("http://", "https://")):
-        data = _download_with_retry(input_path)
+        data = _download_with_retry(input_path, timeout)
         if not _is_pdf(data):
             raise BillError("E002", f"下载内容不是 PDF: {input_path}")
         with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
@@ -447,7 +447,4 @@ def process_input(input_path: str) -> List[Bill]:
             bill.file = input_path
             results.append(bill)
         finally:
-            tmp_path.unlink(missing_ok=True)
-        return results
-
-    path
+            tmp
