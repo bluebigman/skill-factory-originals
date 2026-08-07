@@ -63,12 +63,16 @@ class ScrapecraftEngine:
 
     # 默认字段映射（支持常见同义词）
     DEFAULT_FIELDS = [
-        FieldSpec("title", ["标题", "名称", "name", "题目"]),
-        FieldSpec("url", ["链接", "网址", "address", "link"]),
-        FieldSpec("author", ["作者", "creator", "writer"]),
-        FieldSpec("date", ["日期", "时间", "date_time", "published"]),
-        FieldSpec("content", ["内容", "正文", "body", "text"]),
-        FieldSpec("category", ["分类", "类别", "type", "tag"]),
+        FieldSpec("title", ["标题", "名称", "name", "题目", "主题"]),
+        FieldSpec("url", ["链接", "网址", "address", "link", "URL", "地址"]),
+        FieldSpec("author", ["作者", "creator", "writer", "创建者", "作者名"]),
+        FieldSpec("date", ["日期", "时间", "date_time", "published", "发布时间", "创建时间"]),
+        FieldSpec("content", ["内容", "正文", "body", "text", "文章内容", "详细信息"]),
+        FieldSpec("category", ["分类", "类别", "type", "tag", "标签", "类目"]),
+        FieldSpec("image", ["图片", "图片链接", "image_url", "封面", "缩略图"]),
+        FieldSpec("views", ["浏览量", "阅读量", "view_count", "点击量"]),
+        FieldSpec("likes", ["点赞数", "喜欢数", "like_count", "赞"]),
+        FieldSpec("status", ["状态", "state", "审核状态"]),
     ]
 
     def __init__(self, max_items: int = 100):
@@ -84,19 +88,27 @@ class ScrapecraftEngine:
         """构建同义词到标准字段名的映射表"""
         mapping = {}
         for field_spec in self.DEFAULT_FIELDS:
+            # 标准字段名
             mapping[field_spec.name.lower()] = field_spec.name
+            # 同义词别名
             for alias in field_spec.aliases:
-                mapping[alias.lower()] = field_spec.name
+                normalized_alias = self._normalize_key_for_map(alias)
+                mapping[normalized_alias] = field_spec.name
         return mapping
+
+    def _normalize_key_for_map(self, key: str) -> str:
+        """标准化键名用于映射查找（去空格、下划线、连字符等）"""
+        normalized = key.strip().lower()
+        # 去掉常见分隔符和特殊字符
+        normalized = re.sub(r"[\s_\-:：/\\.,;；，。]", "", normalized)
+        return normalized
 
     def _normalize_key(self, key: str) -> str:
         """将输入键名标准化为标准字段名
 
         支持中英文同义词匹配，忽略大小写和空白。
         """
-        normalized = key.strip().lower()
-        # 去掉常见分隔符
-        normalized = re.sub(r"[\s_\-:：]", "", normalized)
+        normalized = self._normalize_key_for_map(key)
         return self._field_map.get(normalized, key.strip())
 
     def _infer_value_type(self, value: Any) -> str:
@@ -107,7 +119,8 @@ class ScrapecraftEngine:
             return "number"
         if isinstance(value, str):
             # 尝试识别布尔字符串
-            if value.strip().lower() in ("true", "false", "是", "否"):
+            value_lower = value.strip().lower()
+            if value_lower in ("true", "false", "yes", "no", "是", "否", "真", "假"):
                 return "boolean"
             # 尝试识别数字字符串
             try:
@@ -130,7 +143,7 @@ class ScrapecraftEngine:
         if isinstance(raw_item, dict):
             # 字典输入：直接按键映射
             for key, value in raw_item.items():
-                std_key = self._normalize_key(key)
+                std_key = self._normalize_key(str(key))
                 extracted[std_key] = value
 
         elif isinstance(raw_item, str):
@@ -138,7 +151,7 @@ class ScrapecraftEngine:
             parsed = self._parse_string_input(raw_item)
             if parsed:
                 for key, value in parsed.items():
-                    std_key = self._normalize_key(key)
+                    std_key = self._normalize_key(str(key))
                     extracted[std_key] = value
             else:
                 # 无法解析，整段作为内容
@@ -198,6 +211,7 @@ class ScrapecraftEngine:
         - 基础 90 分
         - 每个警告扣 5 分（最低 60 分）
         - 缺少必填字段扣 10 分
+        - 字段数量影响置信度
         """
         confidence = 90.0
         confidence -= len(warnings) * 5.0
@@ -206,6 +220,15 @@ class ScrapecraftEngine:
         required_fields = [f.name for f in self.DEFAULT_FIELDS if f.required]
         missing = [f for f in required_fields if f not in fields]
         confidence -= len(missing) * 10.0
+
+        # 根据字段数量调整置信度
+        field_count = len(fields)
+        if field_count == 0:
+            confidence -= 30  # 无字段，置信度极低
+        elif field_count == 1:
+            confidence -= 15  # 只有一个字段，置信度较低
+        elif field_count >= 5:
+            confidence += 5  # 字段丰富，置信度提升
 
         return max(60.0, min(99.0, confidence))
 
@@ -463,7 +486,7 @@ def run_selftest() -> int:
     print("  ✓ 通过 (json/text/csv 均正常)")
     passed += 1
 
-    # 测试用例 8: 同义词映射
+    # 测试用例 8: 同义词字段映射
     print("\n[测试 8] 同义词字段映射")
     total += 1
     item = {
@@ -502,6 +525,25 @@ def run_selftest() -> int:
     assert result.success, f"类型推断处理失败: {result.message}"
     # 验证类型推断逻辑（不依赖具体转换，只验证可处理）
     assert result.data.get("title") == "类型测试"
+    print(f"  ✓ 通过 (置信度: {result.confidence:.1f}%)")
+    passed += 1
+
+    # 测试用例 11: 更多同义词测试
+    print("\n[测试 11] 扩展同义词映射")
+    total += 1
+    item = {
+        "标题": "扩展同义词",
+        "发布时间": "2026-04-01",
+        "标签": "测试",
+        "浏览量": 1000,
+        "图片链接": "https://example.com/image.jpg",
+    }
+    result = engine.process_item(item)
+    assert result.success, f"扩展同义词处理失败: {result.message}"
+    assert result.data.get("date") == "2026-04-01", "发布时间→日期映射失败"
+    assert result.data.get("category") == "测试", "标签→分类映射失败"
+    assert result.data.get("views") == 1000, "浏览量映射失败"
+    assert result.data.get("image") == "https://example.com/image.jpg", "图片链接映射失败"
     print(f"  ✓ 通过 (置信度: {result.confidence:.1f}%)")
     passed += 1
 
