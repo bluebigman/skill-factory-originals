@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: ec2-aws-and-shell
 name: ec2-aws-and-shell
-displayName: EC2运维 Shell脚本 云主机管理
+displayName: EC2运维 Shell脚本 云主机操作
 description: 面向AWS EC2与Shell操作的规范化处理流程与输出模板。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ec2-aws-and-shell
@@ -12,9 +12,13 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForgeLab
+author: CloudOps Architect
 agent_created: true
-trigger_words: ["ec2-aws-and-shell", "EC2运维", "AWS云主机", "Shell脚本处理", "云服务器操作"]
+trigger_words: ["ec2-aws-and-shell", "EC2运维", "AWS云主机", "Shell脚本处理", "云服务器操作", "AWS实例管理", "命令行运维"]
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -28,38 +32,24 @@ trigger_words: ["ec2-aws-and-shell", "EC2运维", "AWS云主机", "Shell脚本�
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+# EC2 运维与 Shell 脚本处理 Skill
 
-# EC2 运维与 Shell 操作处理 Skill
+## 一、能力边界（一页纸速查卡）
 
-## 一、能力边界速查卡
+### 1.1 能做与不能做
 
-本 Skill 面向 **AWS EC2 实例管理与 Shell 命令处理** 场景，提供一套可复用的输入解析、命令生成、结果校验流程。
+| 维度 | 能做 ✅ | 不能做 ❌ |
+|------|--------|----------|
+| EC2 实例 | 实例状态查询（运行/停止/终止）、标签信息解析、安全组规则梳理、弹性 IP 关联关系分析 | 直接调用 AWS API 执行变更操作（需用户自行执行命令） |
+| Shell 脚本 | 脚本逻辑审查、参数解析建议、错误处理模式推荐、脚本模板生成 | 在用户机器上实际执行脚本（仅提供文本输出） |
+| 运维流程 | 故障排查步骤梳理、巡检清单生成、操作手册结构化输出 | 代替人工决策（如是否终止实例） |
+| 数据处理 | 将用户提供的命令输出（如 `aws ec2 describe-instances` 的 JSON）解析为易读表格 | 访问用户未提供的任何云资源数据 |
 
-### 能做（核心能力）
+### 1.2 适用对象
 
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 输入结构化 | 将用户提供的 EC2 实例 ID、区域、标签、Shell 脚本片段等原始信息解析为结构化参数表 |
-| 2 | 关键信息识别 | 从描述中提取实例类型、安全组、密钥对、IAM 角色、存储卷等关键配置项 |
-| 3 | 命令模板生成 | 基于参数表生成对应的 AWS CLI 或 Shell 命令序列，附带参数说明 |
-| 4 | 输出规范化 | 按约定格式输出命令、预期结果、风险提示三要素 |
-| 5 | 批量与自定义 | 支持多实例批量处理，允许用户指定输出字段和格式（JSON/表格/纯文本） |
-
-### 不能做（明确边界）
-
-- 不执行任何真实命令——仅生成命令文本与执行建议
-- 不访问 AWS 真实环境——不读取、不修改任何云资源
-- 不处理非 EC2/Shell 主题的请求（如数据库 SQL 优化、前端框架问题）
-- 不保证命令在特定环境下的兼容性——需用户自行验证
-- 不提供安全审计或合规性判定结论
-
-### 适用对象
-
-- 需要快速生成 EC2 操作命令的运维工程师
-- 学习 AWS CLI 与 Shell 交互的初学者
-- 需要规范化命令输出格式的团队协作场景
+- **目标用户**：AWS 云运维工程师、DevOps 人员、系统管理员、SRE 团队成员。
+- **适用场景**：日常 EC2 巡检、Shell 脚本编写与调试、运维操作文档整理、故障排查辅助。
+- **不适用场景**：需要真实云环境交互的自动化操作、涉及生产环境的直接变更执行。
 
 
 ## 许可证（License）
