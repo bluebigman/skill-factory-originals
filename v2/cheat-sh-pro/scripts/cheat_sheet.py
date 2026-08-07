@@ -10,7 +10,6 @@ import os
 import random
 import re
 import shlex
-import subprocess
 import sys
 import tempfile
 from datetime import datetime, timezone
@@ -305,4 +304,4 @@ def run_selftest():
     assert not validate_shell_command("rm -rf /; sudo reboot"), "危险命令应被拒绝"
     assert not validate_shell_command("echo test && rm -rf /"), "危险命令应被拒绝"
 
-    #
+    # 11. 领域
