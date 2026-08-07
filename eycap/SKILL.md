@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: eycap
 name: eycap
-displayName: 部署运维 Capistrano 配方引擎
+displayName: 部署配方 生成校验 配置解释
 description: 为 Engine Yard 平台生成、校验与解释 Capistrano 部署配方。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/eycap
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: 林默
 agent_created: true
-trigger_words: ["eycap", "Engine Yard", "Capistrano 配方", "部署脚本生成", "EY 部署配置"]
+trigger_words: ["eycap", "Engine Yard", "Capistrano 配方", "部署脚本生成", "EY 部署配置", "部署流程编排", "配方校验", "部署脚本解释"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,33 +31,33 @@ trigger_words: ["eycap", "Engine Yard", "Capistrano 配方", "部署脚本生成
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# eycap — Engine Yard 部署配方设计助手
+# eycap — Engine Yard 平台 Capistrano 部署配方工作台
 
 ## 一、能力边界（一页纸速查卡）
 
-### ✅ 能做（核心能力清单）
+### 1.1 能做什么
 
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 配方生成 | 根据用户提供的应用类型、Ruby 版本、数据库配置等参数，生成对应的 Capistrano 部署配方（deploy.rb / deploy/*.rb） |
-| 2 | 配置解析 | 解析用户粘贴的既有 Capistrano 配置文件或 Engine Yard 环境变量，提取关键部署参数（角色、路径、钩子、环境变量） |
-| 3 | 配方校验 | 对用户提供的配方文件进行静态检查，指出语法错误、路径冲突、变量未定义等常见问题 |
-| 4 | 部署流程解释 | 将一段 Capistrano 任务代码翻译为自然语言步骤，帮助用户理解部署过程中发生了什么 |
-| 5 | 故障排查建议 | 根据用户描述的错误日志或现象，给出针对 Engine Yard 环境的排查方向与修复建议 |
+| 能力项 | 说明 | 输出物 |
+|--------|------|--------|
+| 配方生成 | 根据应用类型（Rails/Node.js/静态站点）生成 Capistrano 部署配方骨架 | `deploy.rb` + 分阶段任务文件 |
+| 配方校验 | 检查语法错误、任务依赖缺失、变量引用未定义 | 校验报告（含错误码） |
+| 配方解释 | 将既有配方翻译为自然语言步骤说明 | 部署流程图 + 文字说明 |
+| 环境适配 | 针对 Engine Yard 的 `app`、`util`、`db` 角色生成对应任务 | 角色任务清单 |
+| 变量管理 | 生成环境变量占位与引用规范 | 变量清单表 |
 
-### ❌ 不能做（明确边界）
+### 1.2 不能做什么
 
-- 不能直接连接或操作任何 Engine Yard 账户、服务器或 API
-- 不能替代真实环境中的部署执行——生成结果必须由用户自行审阅后在目标环境验证
-- 不能保证配方在特定版本组合下一定成功（如 Ruby 版本与 gem 依赖的兼容性）
-- 不能识别或处理 Engine Yard 未公开的私有内部配置项
-- 不提供安全审计服务——涉及密钥、凭据的配置需用户自行确认
+- 不执行实际部署操作（不连接服务器）
+- 不生成 Engine Yard 平台之外的部署配置（如 AWS CodeDeploy）
+- 不处理 Capistrano 插件生态的第三方扩展（如 `capistrano-sidekiq` 需自行引入）
+- 不提供可视化界面，仅输出文本/代码
+- 不保证生成的配方在特定版本组合下一定可运行（需用户自测）
 
-### 🎯 适用对象
+### 1.3 适用对象
 
-- 使用 Engine Yard 平台部署 Rails / Sinatra / 自定义 Rack 应用的开发人员
-- 需要将既有部署流程迁移到 Capistrano 的运维工程师
-- 希望理解或维护他人编写的 Capistrano 配方的技术负责人
+- 正在使用或计划迁移到 Engine Yard 的 Ruby/Rails 开发团队
+- 需要将现有部署流程标准化为 Capistrano 配方的运维工程师
+- 学习 Capistrano 与 Engine Yard 集成方式的初学者
 
 
 ## 许可证（License）
