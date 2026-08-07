@@ -562,6 +562,10 @@ def _selftest() -> int:
             repo = Repository(repo_path)
             repo.init()
 
+            # 设置本地 Git 用户配置（避免依赖全局配置）
+            _run_git(repo_path, ["config", "user.email", "selftest@example.com"])
+            _run_git(repo_path, ["config", "user.name", "Self Test"])
+
             # 测试 2: 提交文件
             test_file = repo_path / "hello.txt"
             test_file.write_text("Hello, ruby-git!\n", encoding="utf-8")
