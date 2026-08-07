@@ -617,7 +617,8 @@ def main():
     parser.add_argument("--input", "-i", help="输入图片文件或目录")
     parser.add_argument("--output", "-o", help="输出文件或目录")
     parser.add_argument("--width", "-w", type=int, default=0, help="最大宽度（0表示不限制）")
-    parser.add_argument("--height", "-h", type=int, default=0, help="最大高度（0表示不限制）")
+    # 修复：移除 -h 短选项，避免与 --help 冲突
+    parser.add_argument("--height", type=int, default=0, help="最大高度（0表示不限制）")
     parser.add_argument("--quality", "-q", type=int, default=80, help="压缩质量 0-100（默认80）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--json", action="store_true", help="以JSON格式输出结果")
