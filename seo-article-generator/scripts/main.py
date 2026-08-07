@@ -77,9 +77,10 @@ def parse_keywords(raw_keywords: str) -> List[str]:
     """
     解析关键词字符串为列表。
     支持逗号、分号、换行分隔。
+    空输入或无效输入抛出 ValueError。
     """
     if not raw_keywords or not raw_keywords.strip():
-        return []
+        raise ValueError("E002: 关键词列表为空")
     
     # 按常见分隔符拆分
     parts = re.split(r'[,，;；\n\t]+', raw_keywords)
@@ -136,7 +137,7 @@ def parse_input(args: Dict) -> ArticleInput:
     try:
         article_input = ArticleInput()
         
-        # 关键词
+        # 关键词 - 必须提供
         if 'keywords' in args and args['keywords']:
             article_input.keywords = parse_keywords(args['keywords'])
         else:
@@ -470,10 +471,17 @@ def run_selftest() -> bool:
         
         # 测试6: 边界情况
         print("[自检] 测试边界情况...")
-        # 空关键词
+        # 空关键词应抛出异常
         try:
             parse_keywords("")
             assert False, "空关键词应抛出异常"
+        except ValueError:
+            pass
+        
+        # 只有分隔符的关键词
+        try:
+            parse_keywords(",,,;;;")
+            assert False, "只有分隔符的关键词应抛出异常"
         except ValueError:
             pass
         
