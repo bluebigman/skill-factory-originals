@@ -114,7 +114,7 @@ def parse_text_input(text: str) -> List[KanbanItem]:
         return items
 
     for line in lines:
-        # 跳过注释行
+        # 跳过纯注释行（不以 [ 开头的 # 行）
         if line.startswith("#") and not line.startswith("#["):
             continue
 
@@ -432,7 +432,7 @@ def run_selftest() -> bool:
     [?] 低优先级任务
     """
     items = parse_text_input(sample_text)
-    assert len(items) >= 4, f"应至少解析出 4 个条目，实际: {len(items)}"
+    assert len(items) >= 5, f"应至少解析出 5 个条目，实际: {len(items)}"
     print(f"  ✓ 成功解析 {len(items)} 个条目")
 
     # 验证状态解析
@@ -486,7 +486,7 @@ def run_selftest() -> bool:
 
     try:
         process_input("!!!")
-        assert False, "无效输入应抛出异常或返回空结果"
+        assert False, "无效输入应抛出异常"
     except ValueError as e:
         assert str(e).startswith("E002"), f"错误码应为 E002，实际: {e}"
     print("  ✓ E002 关键信息缺失错误处理正确")
