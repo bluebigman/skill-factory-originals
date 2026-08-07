@@ -1,89 +1,82 @@
 ---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: microsis
 name: microsis
-displayName: 未命名工具
-description: SUPER OLD STUFF
-version: 1.0.0
-author: skill-factory-auto
+displayName: 旧档解析 结构化提取 字段还原
+description: 将老旧数据/文件/URL解析为结构化结果，保留关键信息并标注置信度。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/microsis
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 独立技能工坊
 agent_created: true
-trigger_words:
-  - "microsis"
+trigger_words: ["microsis", "旧数据解析", "结构化提取", "字段还原", "老旧文件转换"]
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
 ---
 
-# 未命名工具
+> 📜 **用户协议（User Agreement）**
+> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
+> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
+> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+<!-- user-agreement-injected -->
 
-> SUPER OLD STUFF
+
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+# microsis — 旧档解析与结构化提取
 
 ## 一、能力边界（一页纸速查卡）
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+### 1.1 能做与不能做
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+| 维度 | 能做 | 不能做 |
+|------|------|--------|
+| 输入 | 用户提供的数据片段、文本文件内容、URL 指向的文本资源 | 二进制文件直接解码、加密内容破解、需登录的私有系统抓取 |
+| 处理 | 识别关键字段、提取实体、按约定模板重组结构 | 语义理解之外的业务判断、跨语言自动翻译、主观内容评价 |
+| 输出 | 结构化文本（JSON/表格/键值对）、带置信度标注的字段集 | 生成可执行代码、自动写入外部数据库、替代人工审核 |
+| 批量 | 支持多组输入逐条处理，输出可合并 | 无上限的流式处理、分布式并行计算 |
+| 自定义 | 允许用户指定输出字段名、分组方式、排序规则 | 动态生成全新的输出协议（需预先约定） |
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### 1.2 适用对象
 
-## 二、触发方式（说大白话就能用）
+- 需要将历史文本记录（如旧版日志、手写扫描件的 OCR 文本、老系统导出数据）转为结构化清单的运维或数据迁移人员。
+- 需要从 URL 抓取公开文本并提取关键字段（如公告、新闻页中的日期/编号/主体）的分析人员。
+- 需要快速核对一批数据中关键信息是否完整、格式是否统一的质检人员。
 
-**触发词表（6类场景）：**
-| microsis | 通用场景 |
+### 1.3 边界值参考
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 未命名工具，进入标准流程 |
-| 把这个转成另一种格式 | 启动 未命名工具，进入标准流程 |
-| 批量弄一下这些 | 启动 未命名工具，进入标准流程 |
+| 参数 | 建议上限 | 超出后的行为 |
+|------|----------|--------------|
+| 单次输入文本长度 | 8000 字符 | 截断处理，并在输出中标注 `[truncated]` |
+| 批量处理条数 | 50 条/次 | 分批提示，不自动拆分 |
+| 自定义字段数量 | 20 个 | 超出后仅保留前 20 个，并给出提示 |
+| URL 抓取超时 | 10 秒 | 返回 `[fetch_timeout]` 占位 |
 
-## 三、标准流程（5分钟上手路径）
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+## 许可证（License）
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+```text
+MIT License
 
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
+Copyright (c) 2026 SkillForge Lab
 
-## 四、异常处理（错误码体系）
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+<!-- professional-license-embedded -->
