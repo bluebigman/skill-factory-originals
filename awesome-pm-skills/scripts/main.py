@@ -31,7 +31,7 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 # 版本信息
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __author__ = "Lin Chen"
 __license__ = "MIT"
 
@@ -57,9 +57,9 @@ DEFAULT_FORMAT = "markdown"
 # 字段提取正则（宽松匹配）
 _FIELD_PATTERNS = {
     "需求描述": r"(?:需求|描述|内容)[：:\s]*([^；;，,\n]+)",
-    "优先级": r"(?:优先级|优先)[：:\s]*(高|中|低|紧急|普通|低)",
+    "优先级": r"(?:优先级|优先)[：:\s]*(高|中|低|紧急|普通)",
     "负责人": r"(?:负责人|责任人|owner)[：:\s]*([\w\u4e00-\u9fa5]+)",
-    "截止日期": r"(?:截止|截止日期|due|deadline)[：:\s]*(\d{4}-\d{2}-\d{2})",
+    "截止日期": r"(?:截止|截止日期|due|deadline)[：:\s]*(\d{4}[-/]\d{1,2}[-/]\d{1,2})",
 }
 
 
@@ -430,6 +430,17 @@ def _run_selftest() -> int:
     date_val = records[0]["字段"]["截止日期"]["值"]
     assert date_val == "2026-12-31", f"日期提取错误: {date_val}"
     print("  ✓ 样例10：日期提取通过")
+
+    # 样例 11：URL 格式校验
+    _, err = _fetch_url("ftp://example.com")
+    assert err == ERR_URL_INVALID, f"样例11应返回E006，实际{err}"
+    print("  ✓ 样例11：URL 格式校验通过")
+
+    # 样例 12：输出格式校验
+    records, _ = _parse_text(sample6)
+    _, err = _format_output(records, "xml")
+    assert err == ERR_OUTPUT_FORMAT, f"样例12应返回E007，实际{err}"
+    print("  ✓ 样例12：输出格式校验通过")
 
     print("全部自检通过！")
     return ERR_OK
