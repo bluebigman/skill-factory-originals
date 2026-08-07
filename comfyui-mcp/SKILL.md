@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: comfyui-mcp
 name: comfyui-mcp
-displayName: ComfyUI 工作流 图像视频生成
-description: 本地优先的 ComfyUI 控制面板，通过 MCP 协议驱动图像、视频与音频生成。
-version: 1.0.1
+displayName: 本地创意工坊 ComfyUI 节点控制台
+description: 通过 MCP 协议在本地驱动 ComfyUI 完成图像、视频与音频生成任务。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/comfyui-mcp
@@ -12,9 +12,13 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: FlowForge Studio
+author: 林墨白
 agent_created: true
-trigger_words: ["comfyui", "mcp", "图像生成", "视频生成", "音频生成", "工作流", "ComfyUI 控制", "本地生成"]
+trigger_words: ["comfyui-mcp", "图像生成", "视频生成", "音频生成", "ComfyUI 控制", "本地生成任务"]
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -28,38 +32,33 @@ trigger_words: ["comfyui", "mcp", "图像生成", "视频生成", "音频生成"
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+# comfyui-mcp Skill 文档
 
-# ComfyUI MCP 技能文档
+## 一、能力边界（一页纸速查卡）
 
-## 一、能力边界速查卡
+### 1.1 能做什么
 
-### 1.1 能做（核心能力）
+| 能力项 | 说明 | 输入示例 | 输出示例 |
+|--------|------|----------|----------|
+| 图像生成 | 调用本地 ComfyUI 工作流，生成静态图像 | `comfyui mcp 图像生成 --prompt "赛博朋克城市夜景" --steps 30` | 返回图像文件路径与预览图 |
+| 视频生成 | 驱动视频工作流，生成短视频片段 | `comfyui mcp 视频生成 --prompt "蝴蝶在花丛中飞舞" --frames 48` | 返回视频文件路径与元数据 |
+| 音频生成 | 调用音频节点，生成音效或配乐 | `comfyui mcp 音频生成 --prompt "雨声与雷声混合" --duration 10` | 返回音频文件路径与波形摘要 |
+| 工作流自检 | 检查当前 ComfyUI 服务是否可用 | `comfyui mcp --selftest` | 返回服务状态、节点数量、版本号 |
+| 版本查询 | 查看 Skill 自身版本 | `comfyui mcp --version` | 返回 `1.0.0` |
 
-| 编号 | 能力项 | 说明 | 适用场景 |
-|------|--------|------|----------|
-| C1 | 数据/文件/URL 结构化转换 | 将用户提供的任意输入（文本、图片路径、URL）解析为结构化参数 | 用户粘贴图片链接、拖入文件路径、描述生成需求 |
-| C2 | 关键信息识别与保留 | 从输入中提取主体、风格、尺寸、步数、种子等关键参数，未提及项保留默认值 | 用户只说"生成一只猫"，系统自动补全其余参数 |
-| C3 | 约定格式输出 | 按预定义的 JSON Schema 输出生成任务、状态查询、结果回传 | 与 ComfyUI 服务端交互时 |
-| C4 | 置信度标注 | 对推断出的参数（如风格、模型选择）标注置信度等级 | 用户描述模糊时，标注"风格推断置信度：中" |
-| C5 | 批量处理与自定义格式 | 支持多组输入并行处理，支持用户自定义输出字段 | 一次提交 10 张参考图批量生成变体 |
+### 1.2 不能做什么
 
-### 1.2 不能做（明确边界）
-
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不执行远程云端生成 | 本技能仅面向本地 ComfyUI 实例，不代理云端 API |
-| L2 | 不修改 ComfyUI 核心代码 | 只通过 MCP 协议调用，不注入、不 patch |
-| L3 | 不保证生成质量 | 生成结果取决于模型、工作流与硬件，技能不承诺画质 |
-| L4 | 不处理非授权文件 | 仅处理用户明确提供的文件路径或 URL，不主动扫描磁盘 |
-| L5 | 不支持实时流式预览 | 仅支持任务提交与轮询状态，不提供 WebSocket 实时帧推送 |
+- 不能直接修改 ComfyUI 的底层节点代码或自定义节点源码。
+- 不能在没有本地 ComfyUI 服务运行的情况下完成生成任务。
+- 不能保证生成结果的艺术质量或风格一致性（受模型权重与工作流配置影响）。
+- 不能处理超出本地硬件资源（显存/内存）的生成请求。
+- 不能替代 ComfyUI 官方 API 的全部功能（如节点热插拔、实时预览流）。
 
 ### 1.3 适用对象
 
-- 已部署本地 ComfyUI 的开发者/设计师
-- 需要通过命令行或 Agent 方式批量驱动 ComfyUI 的用户
-- 希望将 ComfyUI 集成到自动化流水线的工程师
+- 已安装并运行 ComfyUI 的本地用户。
+- 需要通过命令行或 MCP 协议批量触发生成任务的开发者。
+- 希望在自动化脚本中集成图像/视频/音频生成能力的工程师。
 
 
 ## 许可证（License）
