@@ -1,20 +1,20 @@
 ---
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
-slug: pdf_to_markdown
-name: pdf_to_markdown
-displayName: 文档转换 表格还原 Markdown
-description: 将PDF批量转为带表格结构的Markdown文档，保留原始布局。
-version: 2.0.4
+slug: planning-with-files
+name: planning-with-files
+displayName: 文件规划 任务跟踪 持久化备忘
+description: 基于文件的持久化规划，支持崩溃恢复与长任务跟踪
+version: 1.0.2
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/pdf_to_markdown
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/planning-with-files
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 墨斗研习社
+author: 独立技能工坊
 agent_created: true
-trigger_words: ["pdf_to_markdown", "PDF转Markdown", "PDF转MD", "表格还原", "文档转换"]
+trigger_words: ["planning with files", "文件规划", "持久化计划", "崩溃恢复", "任务跟踪", "文件备忘", "断点续作"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,33 +31,34 @@ trigger_words: ["pdf_to_markdown", "PDF转Markdown", "PDF转MD", "表格还原",
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# PDF 转 Markdown 技能手册
+# 文件规划 Skill 使用指南
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做什么
+### 本 Skill 能做什么
 
 | 能力项 | 说明 | 示例 |
 |--------|------|------|
-| 批量转换 | 同一目录下多个 PDF 文件依次处理 | 合同扫描件 50 份 → 50 个 .md 文件 |
-| 表格还原 | 识别 PDF 中的表格区域，输出为 Markdown 表格语法 | 财务对账单 → `| 日期 | 金额 |` |
-| 字段提取 | 从文本型 PDF 中抽取标题、段落、列表等结构化内容 | 论文 PDF → 标题 + 正文段落 |
-| 失败追踪 | 每个文件处理结果单独记录，失败原因可查 | 输出 `error_log.json` 明细 |
-| 试运行模式 | 先处理单个文件验证效果，再全量执行 | `--selftest` 参数触发 |
+| 创建持久化计划 | 将任务计划写入本地文件，而非内存 | 创建 `plan.md` 记录三阶段开发计划 |
+| 崩溃恢复 | 从上次保存的文件状态继续执行 | 重启后读取 `plan.md` 恢复任务进度 |
+| 长任务跟踪 | 跨会话维护任务状态、进度、备注 | 持续一周的数据清洗任务每日更新 |
+| 多文件管理 | 支持主计划文件 + 子任务文件 | `plan.md` + `tasks/phase1.md` |
+| 状态标记 | 用约定符号标记任务状态 | `[ ]` 待办 / `[x]` 完成 / `[~]` 进行中 |
 
-### 1.2 不能做什么
+### 本 Skill 不能做什么
 
 | 限制项 | 说明 |
 |--------|------|
-| 扫描件 OCR | 纯图片型 PDF（无文字层）无法直接转换，需先 OCR 预处理 |
-| 复杂排版还原 | 多栏混排、浮动文本框、页眉页脚交错等复杂布局可能丢失 |
-| 加密 PDF | 带打开密码的文件需先解密 |
-| 公式与图表 | 数学公式、流程图、矢量图无法转为 Markdown 原生语法，会降级为图片引用或省略 |
+| 不替代项目管理软件 | 无甘特图、依赖关系自动计算、多人协作 |
+| 不自动执行任务 | 仅记录与跟踪，不触发外部动作 |
+| 不处理二进制文件 | 仅面向 Markdown / 纯文本文件 |
+| 不加密敏感信息 | 文件为明文存储，注意权限控制 |
 
-### 1.3 适用对象
+### 适用对象
 
-- **适合**：文本型 PDF、可复制文字的电子文档、标准表格型报表、合同/协议扫描件（有文字层）
-- **不适合**：纯图片相册 PDF、手写笔记扫描件、加密文件、超过 200MB 的超大文件
+- 需要跨会话跟踪任务的个人开发者
+- 使用命令行或编辑器工作的技术用户
+- 需要轻量级任务记录的场景（非企业级）
 
 
 ## 许可证（License）
