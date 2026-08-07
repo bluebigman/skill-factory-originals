@@ -10,7 +10,7 @@ import argparse, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TRIGGERS = ["llm-local-deployment", "本地部署大模型", "大模型本地跑", "显卡显存不够", "离线跑模型", "本地推理", ""]
+TRIGGERS = ["llm-local-deployment"]
 
 
 def load_spec() -> str:
