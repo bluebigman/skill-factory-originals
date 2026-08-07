@@ -74,11 +74,11 @@ class HtmlParser:
     """轻量级 HTML 解析器（仅依赖标准库）。"""
 
     # 常见标签及其在文本中的分隔符
-    BLOCK_TAGS = {
+    BLOCK_TAGS = [
         "p", "div", "section", "article", "h1", "h2", "h3",
         "h4", "h5", "h6", "li", "br", "tr", "table", "ul", "ol",
-    }
-    SKIP_TAGS = {"script", "style", "noscript", "template", "svg"}
+    ]
+    SKIP_TAGS = ["script", "style", "noscript", "template", "svg"]
 
     def __init__(self, html_text: str, base_url: str = ""):
         self.raw = html_text
@@ -100,11 +100,15 @@ class HtmlParser:
         """提取页面中的链接。"""
         links: List[str] = []
         try:
-            pattern = re.compile(r'<a\s+[^>]*href=["\']([^"\']+)["\']', re.IGNORECASE)
+            # 更健壮的正则表达式
+            pattern = re.compile(
+                r'<a\s+[^>]*href=["\']([^"\']*?)["\'][^>]*>',
+                re.IGNORECASE | re.DOTALL
+            )
             for match in pattern.finditer(self.raw):
                 href = match.group(1).strip()
                 if href and not href.startswith(("#", "javascript:", "mailto:")):
-                    if self.base_url:
+                    if self.base_url and not href.startswith(("http://", "https://")):
                         href = urljoin(self.base_url, href)
                     links.append(href)
         except Exception:
@@ -115,10 +119,11 @@ class HtmlParser:
         """提取 meta 标签中的信息。"""
         meta_info: Dict[str, str] = {}
         try:
+            # 更灵活的正则表达式
             pattern = re.compile(
-                r'<meta\s+[^>]*(?:name|property)=["\']([^"\']+)["\']\s+'
+                r'<meta\s+[^>]*(?:name|property)=["\']([^"\']+)["\']\s*'
                 r'content=["\']([^"\']*)["\']',
-                re.IGNORECASE,
+                re.IGNORECASE | re.DOTALL,
             )
             for match in pattern.finditer(self.raw):
                 key = match.group(1).lower()
@@ -147,43 +152,33 @@ class HtmlParser:
     def _strip_tags(self, content: str) -> str:
         """去除 HTML 标签，保留文本。"""
         # 移除注释
-        content = re.sub(r"<!--.*?-->", "", content, flags=re.DOTALL)
-        # 跳过不需要的标签内容
+        content = re.sub(r"<!--.*?-->", " ", content, flags=re.DOTALL)
+        
+        # 移除 script、style 等标签及其内容
         for tag in self.SKIP_TAGS:
-            pattern = re.compile(rf"<{tag}[^>]*>.*?</{tag}>", re.DOTALL | re.IGNORECASE)
+            pattern = re.compile(rf'<{tag}[^>]*>.*?</{tag}>', re.DOTALL | re.IGNORECASE)
             content = pattern.sub(" ", content)
+        
         # 块级标签替换为换行
         for tag in self.BLOCK_TAGS:
-            pattern = re.compile(rf"</?{tag}[^>]*>", re.IGNORECASE)
+            # 处理开标签
+            pattern = re.compile(rf'<{tag}[^>]*>', re.IGNORECASE)
             content = pattern.sub("\n", content)
-        # 其余标签去除
-        content = re.sub(r"<[^>]+>", "", content)
+            # 处理闭标签
+            pattern = re.compile(rf'</{tag}>', re.IGNORECASE)
+            content = pattern.sub("\n", content)
+        
+        # 移除剩余标签
+        content = re.sub(r'<[^>]+>', '', content)
+        
         # 解码 HTML 实体
         content = html.unescape(content)
+        
         return content
 
 
 class FieldExtractor:
     """从解析后的页面中抽取结构化字段。"""
-
-    # 通用字段的启发式规则
-    TITLE_PATTERNS = [
-        r"<title[^>]*>([^<]+)</title>",
-        r'<h1[^>]*>([^<]+)</h1>',
-        r'<meta\s+property=["\']og:title["\'][^>]*content=["\']([^"\']+)["\']',
-    ]
-
-    AUTHOR_PATTERNS = [
-        r'<meta\s+name=["\']author["\'][^>]*content=["\']([^"\']+)["\']',
-        r'<a[^>]*rel=["\']author["\'][^>]*>([^<]+)</a>',
-        r'(?:作者|by|author)[：:\s]*([^\n<]{2,30})',
-    ]
-
-    DATE_PATTERNS = [
-        r'<meta\s+(?:name|property)=["\'](?:date|article:published_time)["\'][^>]*content=["\']([^"\']+)["\']',
-        r'(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)',
-        r'(\d{4}-\d{2}-\d{2}[ T]\d{2}:\d{2}(?::\d{2})?)',
-    ]
 
     def __init__(self, html_text: str, base_url: str = ""):
         self.raw = html_text
@@ -242,36 +237,75 @@ class FieldExtractor:
             result.warnings.append(f"抽取异常: {exc}")
         return result
 
-    def _extract_title(self) -> tuple[str, float]:
+    def _extract_title(self) -> tuple:
         """抽取标题。"""
-        for pattern in self.TITLE_PATTERNS:
-            match = re.search(pattern, self.raw, re.IGNORECASE | re.DOTALL)
-            if match:
-                title = html.unescape(match.group(1)).strip()
-                if title:
-                    # 置信度：h1 最高，title 次之，og:title 再次
-                    conf = 0.9 if "h1" in pattern else (0.8 if "title" in pattern else 0.7)
-                    return title, conf
+        # 优先检查 og:title
+        og_title = re.search(
+            r'<meta\s+property=["\']og:title["\'][^>]*content=["\']([^"\']+)["\']',
+            self.raw, re.IGNORECASE
+        )
+        if og_title:
+            title = html.unescape(og_title.group(1)).strip()
+            if title:
+                return title, 0.9
+
+        # 检查 title 标签
+        title_match = re.search(r'<title[^>]*>([^<]+)</title>', self.raw, re.IGNORECASE | re.DOTALL)
+        if title_match:
+            title = html.unescape(title_match.group(1)).strip()
+            if title:
+                return title, 0.8
+
+        # 检查 h1 标签
+        h1_match = re.search(r'<h1[^>]*>([^<]+)</h1>', self.raw, re.IGNORECASE | re.DOTALL)
+        if h1_match:
+            title = html.unescape(h1_match.group(1)).strip()
+            if title:
+                return title, 0.7
+
         return "", 0.0
 
-    def _extract_author(self) -> tuple[str, float]:
+    def _extract_author(self) -> tuple:
         """抽取作者。"""
-        for pattern in self.AUTHOR_PATTERNS:
-            match = re.search(pattern, self.raw, re.IGNORECASE | re.DOTALL)
-            if match:
-                author = html.unescape(match.group(1)).strip()
-                if author:
-                    return author, 0.8
+        # 检查 meta author
+        author_match = re.search(
+            r'<meta\s+name=["\']author["\'][^>]*content=["\']([^"\']+)["\']',
+            self.raw, re.IGNORECASE
+        )
+        if author_match:
+            author = html.unescape(author_match.group(1)).strip()
+            if author:
+                return author, 0.8
+
+        # 检查 rel="author"
+        author_match = re.search(
+            r'<a[^>]*rel=["\']author["\'][^>]*>([^<]+)</a>',
+            self.raw, re.IGNORECASE | re.DOTALL
+        )
+        if author_match:
+            author = html.unescape(author_match.group(1)).strip()
+            if author:
+                return author, 0.7
+
         return "", 0.0
 
-    def _extract_date(self) -> tuple[str, float]:
+    def _extract_date(self) -> tuple:
         """抽取发布时间。"""
-        for pattern in self.DATE_PATTERNS:
-            match = re.search(pattern, self.raw, re.IGNORECASE)
-            if match:
-                date_str = match.group(1).strip()
-                if date_str:
-                    return date_str, 0.8
+        # 检查 meta 标签
+        date_match = re.search(
+            r'<meta\s+(?:name|property)=["\'](?:date|article:published_time)["\'][^>]*content=["\']([^"\']+)["\']',
+            self.raw, re.IGNORECASE
+        )
+        if date_match:
+            date_str = date_match.group(1).strip()
+            if date_str:
+                return date_str, 0.8
+
+        # 检查常见日期格式
+        date_match = re.search(r'(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)', self.raw)
+        if date_match:
+            return date_match.group(1), 0.6
+
         return "", 0.0
 
 
@@ -397,74 +431,81 @@ def run_selftest() -> bool:
     </html>
     """
 
-    # 测试 1: HTML 解析
-    parser = HtmlParser(sample_html, "https://example.com/article")
-    text = parser.extract_text()
-    assert "测试文章标题示例" in text, "标题未出现在文本中"
-    assert "should not appear" not in text, "script 内容不应出现在文本中"
-    assert "color: red" not in text, "style 内容不应出现在文本中"
-    print("  [PASS] HTML 文本抽取")
-
-    # 测试 2: 链接抽取
-    links = parser.extract_links()
-    assert len(links) >= 2, f"应至少抽取 2 个链接，实际 {len(links)}"
-    assert any("page/2" in link for link in links), "未找到分页链接"
-    print("  [PASS] 链接抽取")
-
-    # 测试 3: 图片抽取
-    images = parser.extract_images()
-    assert len(images) >= 2, f"应至少抽取 2 张图片，实际 {len(images)}"
-    assert any("main.jpg" in img for img in images), "未找到主图"
-    print("  [PASS] 图片抽取")
-
-    # 测试 4: 字段抽取
-    result = process_html(sample_html, "https://example.com/article")
-    assert result.fields.get("title") == "测试文章标题示例", "标题抽取错误"
-    assert result.fields.get("author") == "测试作者", "作者抽取错误"
-    assert "2024" in result.fields.get("published_time", ""), "时间抽取错误"
-    assert len(result.fields.get("content", "")) > 50, "正文抽取过短"
-    print("  [PASS] 字段抽取")
-
-    # 测试 5: 置信度
-    assert result.confidences.get("title", 0) > 0.5, "标题置信度应较高"
-    assert result.confidences.get("content", 0) > 0.5, "正文置信度应较高"
-    print("  [PASS] 置信度计算")
-
-    # 测试 6: 批量处理
-    results = process_batch([sample_html, sample_html], ["https://a.com", "https://b.com"])
-    assert len(results) == 2, "批量处理数量错误"
-    assert all(r.fields.get("title") for r in results), "批量处理结果缺失"
-    print("  [PASS] 批量处理")
-
-    # 测试 7: 输出格式
-    json_out = OutputFormatter.to_json(results)
-    assert '"title"' in json_out, "JSON 输出缺少标题字段"
-    csv_out = OutputFormatter.to_csv(results)
-    assert "url" in csv_out, "CSV 输出缺少表头"
-    md_out = OutputFormatter.to_markdown(results)
-    assert "|" in md_out, "Markdown 输出格式错误"
-    print("  [PASS] 输出格式化")
-
-    # 测试 8: 边界情况
-    empty_result = process_html("<html><body><p>简短</p></body></html>")
-    assert empty_result.warnings, "简短内容应有低置信度警告"
-    print("  [PASS] 边界情况处理")
-
-    # 测试 9: URL 校验
-    assert validate_url("https://example.com"), "合法 URL 校验失败"
-    assert not validate_url("not-a-url"), "非法 URL 未被拒绝"
-    print("  [PASS] URL 校验")
-
-    # 测试 10: 错误处理
     try:
-        process_html("")
-        assert False, "空输入应报错"
-    except ValueError as exc:
-        assert "E003" in str(exc), f"错误码错误: {exc}"
-    print("  [PASS] 错误处理")
+        # 测试 1: HTML 解析
+        parser = HtmlParser(sample_html, "https://example.com/article")
+        text = parser.extract_text()
+        assert "测试文章标题示例" in text, "标题未出现在文本中"
+        assert "should not appear" not in text, "script 内容不应出现在文本中"
+        assert "color: red" not in text, "style 内容不应出现在文本中"
+        print("  [PASS] HTML 文本抽取")
 
-    print("自检全部通过！")
-    return True
+        # 测试 2: 链接抽取
+        links = parser.extract_links()
+        assert len(links) >= 2, f"应至少抽取 2 个链接，实际 {len(links)}"
+        assert any("page/2" in link for link in links), "未找到分页链接"
+        print("  [PASS] 链接抽取")
+
+        # 测试 3: 图片抽取
+        images = parser.extract_images()
+        assert len(images) >= 2, f"应至少抽取 2 张图片，实际 {len(images)}"
+        assert any("main.jpg" in img for img in images), "未找到主图"
+        print("  [PASS] 图片抽取")
+
+        # 测试 4: 字段抽取
+        result = process_html(sample_html, "https://example.com/article")
+        assert result.fields.get("title") == "测试文章标题示例", "标题抽取错误"
+        assert result.fields.get("author") == "测试作者", "作者抽取错误"
+        assert "2024" in result.fields.get("published_time", ""), "时间抽取错误"
+        assert len(result.fields.get("content", "")) > 50, "正文抽取过短"
+        print("  [PASS] 字段抽取")
+
+        # 测试 5: 置信度
+        assert result.confidences.get("title", 0) > 0.5, "标题置信度应较高"
+        assert result.confidences.get("content", 0) > 0.5, "正文置信度应较高"
+        print("  [PASS] 置信度计算")
+
+        # 测试 6: 批量处理
+        results = process_batch([sample_html, sample_html], ["https://a.com", "https://b.com"])
+        assert len(results) == 2, "批量处理数量错误"
+        assert all(r.fields.get("title") for r in results), "批量处理结果缺失"
+        print("  [PASS] 批量处理")
+
+        # 测试 7: 输出格式
+        json_out = OutputFormatter.to_json(results)
+        assert '"title"' in json_out, "JSON 输出缺少标题字段"
+        csv_out = OutputFormatter.to_csv(results)
+        assert "url" in csv_out, "CSV 输出缺少表头"
+        md_out = OutputFormatter.to_markdown(results)
+        assert "|" in md_out, "Markdown 输出格式错误"
+        print("  [PASS] 输出格式化")
+
+        # 测试 8: 边界情况
+        empty_result = process_html("<html><body><p>简短</p></body></html>")
+        assert empty_result.warnings, "简短内容应有低置信度警告"
+        print("  [PASS] 边界情况处理")
+
+        # 测试 9: URL 校验
+        assert validate_url("https://example.com"), "合法 URL 校验失败"
+        assert not validate_url("not-a-url"), "非法 URL 未被拒绝"
+        print("  [PASS] URL 校验")
+
+        # 测试 10: 错误处理
+        try:
+            process_html("")
+            assert False, "空输入应报错"
+        except ValueError as exc:
+            assert "E003" in str(exc), f"错误码错误: {exc}"
+        print("  [PASS] 错误处理")
+
+        print("自检全部通过！")
+        return True
+
+    except Exception as exc:
+        print(f"自检失败: {exc}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return False
 
 
 def main():
