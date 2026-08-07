@@ -159,7 +159,9 @@ def detect_entity_type(value: str) -> str:
         return "邮箱"
     if _URL_RE.fullmatch(value.strip()):
         return "URL"
-    if _DATE_RE.fullmatch(value.strip().replace("年", "-").replace("月", "-").replace("日", "")):
+    # 日期检测
+    date_str = value.strip().replace("年", "-").replace("月", "-").replace("日", "")
+    if _DATE_RE.fullmatch(date_str):
         return "日期"
     try:
         float(value.replace(",", ""))
@@ -266,7 +268,7 @@ def parse_json_text(text: str) -> Any:
     try:
         return json.loads(text)
     except json.JSONDecodeError as exc:
-        raise ValueError(f"JSON 解析失败: {exc}") from exc
+        raise ValueError(f"E002: JSON 解析失败: {exc}") from exc
 
 
 def parse_input(data: str, input_type: str = "auto") -> Any:
@@ -311,6 +313,8 @@ def parse_input(data: str, input_type: str = "auto") -> Any:
 def to_json(result: Any) -> str:
     """序列化为 JSON 字符串。"""
     try:
+        if isinstance(result, (ParseResult, BatchResult)):
+            return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
         return json.dumps(result, ensure_ascii=False, indent=2)
     except TypeError as exc:
         raise ValueError(f"E009: JSON 序列化失败: {exc}") from exc
