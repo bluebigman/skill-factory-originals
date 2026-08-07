@@ -85,6 +85,43 @@ def exponential_backoff(attempt: int) -> float:
     return delay
 
 
+def get_cache_path(since: str, language: Optional[str]) -> str:
+    """获取缓存文件路径"""
+    lang_part = f"_{safe_filename(language)}" if language else ""
+    return str(Path(CACHE_DIR) / f"trending_{since}{lang_part}.json")
+
+
+def read_cache(since: str, language: Optional[str]) -> Optional[Dict[str, Any]]:
+    """读取缓存数据"""
+    cache_path = get_cache_path(since, language)
+    try:
+        if os.path.exists(cache_path):
+            with open(cache_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            # 检查缓存是否过期
+            cached_time = datetime.fromisoformat(data.get("cached_at", ""))
+            if datetime.now(timezone.utc) - cached_time < timedelta(seconds=CACHE_TTL):
+                return data
+    except Exception as e:
+        print(f"读取缓存失败: {e}", file=sys.stderr)
+    return None
+
+
+def write_cache(since: str, language: Optional[str], repos: List[Dict[str, Any]]) -> None:
+    """写入缓存数据"""
+    cache_path = get_cache_path(since, language)
+    try:
+        os.makedirs(CACHE_DIR, exist_ok=True)
+        data = {
+            "cached_at": datetime.now(timezone.utc).isoformat(),
+            "repos": repos,
+        }
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        print(f"写入缓存失败: {e}", file=sys.stderr)
+
+
 def fetch_url(url: str, timeout: int = REQUEST_TIMEOUT) -> Optional[str]:
     """
     获取 URL 内容，带重试和指数退避
@@ -96,12 +133,25 @@ def fetch_url(url: str, timeout: int = REQUEST_TIMEOUT) -> Optional[str]:
         try:
             if HAS_REQUESTS:
                 response = requests.get(url, headers=headers, timeout=timeout)
+                # 检查 HTTP 状态码
+                if response.status_code == 403 or response.status_code == 429:
+                    print(f"HTTP {response.status_code} 错误，触发重试", file=sys.stderr)
+                    raise urllib.error.HTTPError(url, response.status_code, "Rate limited", None, None)
                 response.raise_for_status()
                 return response.text
             else:
                 req = urllib.request.Request(url, headers=headers)
                 with urllib.request.urlopen(req, timeout=timeout) as response:
                     return response.read().decode("utf-8")
+        except urllib.error.HTTPError as e:
+            if e.code in (403, 429):
+                print(f"HTTP {e.code} 错误，触发重试", file=sys.stderr)
+            if attempt == MAX_RETRIES - 1:
+                print(f"错误: 获取 {url} 失败: {e}", file=sys.stderr)
+                return None
+            delay = exponential_backoff(attempt)
+            print(f"重试 {attempt + 1}/{MAX_RETRIES}，等待 {delay} 秒...", file=sys.stderr)
+            time.sleep(delay)
         except Exception as e:
             if attempt == MAX_RETRIES - 1:
                 print(f"错误: 获取 {url} 失败: {e}", file=sys.stderr)
@@ -121,74 +171,87 @@ def parse_trending_html(html: str) -> List[Dict[str, Any]]:
     repos = []
 
     if HAS_BS4:
-        soup = BeautifulSoup(html, "html.parser")
-        article_list = soup.select("article.Box-row")
+        try:
+            soup = BeautifulSoup(html, "html.parser")
+            article_list = soup.select("article.Box-row")
 
-        for article in article_list:
-            try:
-                # 仓库名称
-                name_elem = article.select_one("h2 a")
-                if not name_elem:
-                    continue
-                full_name = name_elem.get("href", "").strip("/")
-                if not full_name:
-                    continue
+            for article in article_list:
+                try:
+                    # 仓库名称
+                    name_elem = article.select_one("h2 a")
+                    if not name_elem:
+                        continue
+                    full_name = name_elem.get("href", "").strip("/")
+                    if not full_name:
+                        continue
 
-                # 描述
-                desc_elem = article.select_one("p")
-                description = desc_elem.get_text(strip=True) if desc_elem else ""
+                    # 描述
+                    desc_elem = article.select_one("p")
+                    description = desc_elem.get_text(strip=True) if desc_elem else ""
 
-                # 语言
-                lang_elem = article.select_one("[itemprop='programmingLanguage']")
-                language = lang_elem.get_text(strip=True) if lang_elem else ""
+                    # 语言
+                    lang_elem = article.select_one("[itemprop='programmingLanguage']")
+                    language = lang_elem.get_text(strip=True) if lang_elem else ""
 
-                # Stars（总数）
-                stars_elem = article.select_one("a[href$='/stargazers']")
-                stars_total = 0
-                if stars_elem:
-                    stars_text = stars_elem.get_text(strip=True).replace(",", "")
-                    try:
-                        stars_total = int(stars_text)
-                    except ValueError:
-                        stars_total = 0
-
-                # Forks
-                forks_elem = article.select_one("a[href$='/forks']")
-                forks = 0
-                if forks_elem:
-                    forks_text = forks_elem.get_text(strip=True).replace(",", "")
-                    try:
-                        forks = int(forks_text)
-                    except ValueError:
-                        forks = 0
-
-                # 今日新增 Stars
-                today_stars_elem = article.select_one("span.d-inline-block.float-sm-right")
-                today_stars = 0
-                if today_stars_elem:
-                    today_text = today_stars_elem.get_text(strip=True)
-                    match = re.search(r'([\d,]+)', today_text)
-                    if match:
+                    # Stars（总数）
+                    stars_elem = article.select_one("a[href$='/stargazers']")
+                    stars_total = 0
+                    if stars_elem:
+                        stars_text = stars_elem.get_text(strip=True).replace(",", "")
                         try:
-                            today_stars = int(match.group(1).replace(",", ""))
+                            stars_total = int(stars_text)
                         except ValueError:
-                            today_stars = 0
+                            stars_total = 0
 
-                repos.append({
-                    "name": full_name,
-                    "description": description,
-                    "language": language,
-                    "stars_total": stars_total,
-                    "forks": forks,
-                    "stars_today": today_stars,
-                    "url": f"https://github.com/{full_name}",
-                })
-            except Exception as e:
-                print(f"解析仓库条目失败: {e}", file=sys.stderr)
-                continue
+                    # Forks
+                    forks_elem = article.select_one("a[href$='/forks']")
+                    forks = 0
+                    if forks_elem:
+                        forks_text = forks_elem.get_text(strip=True).replace(",", "")
+                        try:
+                            forks = int(forks_text)
+                        except ValueError:
+                            forks = 0
 
+                    # 今日新增 Stars
+                    today_stars_elem = article.select_one("span.d-inline-block.float-sm-right")
+                    today_stars = 0
+                    if today_stars_elem:
+                        today_text = today_stars_elem.get_text(strip=True)
+                        match = re.search(r'([\d,]+)', today_text)
+                        if match:
+                            try:
+                                today_stars = int(match.group(1).replace(",", ""))
+                            except ValueError:
+                                today_stars = 0
+
+                    repos.append({
+                        "name": full_name,
+                        "description": description,
+                        "language": language,
+                        "stars_total": stars_total,
+                        "forks": forks,
+                        "stars_today": today_stars,
+                        "url": f"https://github.com/{full_name}",
+                    })
+                except Exception as e:
+                    print(f"解析仓库条目失败: {e}", file=sys.stderr)
+                    continue
+        except Exception as e:
+            print(f"HTML 解析失败: {e}", file=sys.stderr)
+            # 降级到正则表达式解析
+            repos = parse_trending_html_regex(html)
     else:
         # 正则表达式回退方案
+        repos = parse_trending_html_regex(html)
+
+    return repos
+
+
+def parse_trending_html_regex(html: str) -> List[Dict[str, Any]]:
+    """使用正则表达式解析 HTML（降级方案）"""
+    repos = []
+    try:
         pattern = re.compile(
             r'<article class="Box-row">.*?'
             r'<h2.*?<a href="/([^"]+)".*?</a>.*?</h2>.*?'
@@ -223,7 +286,9 @@ def parse_trending_html(html: str) -> List[Dict[str, Any]]:
             except Exception as e:
                 print(f"正则解析仓库条目失败: {e}", file=sys.stderr)
                 continue
-
+    except Exception as e:
+        print(f"正则解析失败: {e}", file=sys.stderr)
+    
     return repos
 
 
@@ -362,233 +427,17 @@ def get_output_path(format_type: str, language: Optional[str], since: str) -> st
 
 
 def fetch_trending_data(since: str = "daily", language: Optional[str] = None,
-                        limit: int = 25) -> List[Dict[str, Any]]:
-    """获取并解析 Trending 数据"""
+                        limit: int = 25) -> Tuple[List[Dict[str, Any]], bool]:
+    """
+    获取并解析 Trending 数据
+    返回 (仓库列表, 是否使用缓存)
+    """
+    # 先尝试读取缓存
+    cached_data = read_cache(since, language)
+    if cached_data:
+        print("使用缓存数据", file=sys.stderr)
+        repos = cached_data.get("repos", [])
+        return filter_repos(repos, language, limit), True
+
     # 构建 URL
-    url = GITHUB_TRENDING_URL
-    params = []
-    if since:
-        params.append(f"since={since}")
-    if language:
-        params.append(f"language={language}")
-    if params:
-        url += "?" + "&".join(params)
-
-    # 获取页面
-    html = fetch_url(url)
-    if not html:
-        print("错误: 无法获取 GitHub Trending 页面", file=sys.stderr)
-        return []
-
-    # 解析数据
-    repos = parse_trending_html(html)
-
-    # 过滤和限制
-    repos = filter_repos(repos, language, limit)
-
-    return repos
-
-
-def run_selftest() -> int:
-    """运行自检，验证核心功能"""
-    print("开始自检...")
-    errors = []
-
-    # 测试 1: 工具函数
-    try:
-        assert safe_filename("test/name:with*chars") == "test_name_with_chars"
-        assert get_today_str() == datetime.now(timezone.utc).strftime("%Y-%m-%d")
-        assert get_date_range(7).count("-") == 4
-        print("✓ 工具函数测试通过")
-    except AssertionError as e:
-        errors.append(f"工具函数测试失败: {e}")
-        print("✗ 工具函数测试失败")
-
-    # 测试 2: 指数退避
-    try:
-        assert exponential_backoff(0) == 2
-        assert exponential_backoff(1) == 4
-        assert exponential_backoff(2) == 8
-        assert exponential_backoff(10) == 10  # 达到上限
-        print("✓ 指数退避测试通过")
-    except AssertionError as e:
-        errors.append(f"指数退避测试失败: {e}")
-        print("✗ 指数退避测试失败")
-
-    # 测试 3: HTML 解析（使用模拟数据）
-    try:
-        mock_html = """
-        <article class="Box-row">
-            <h2><a href="/test/repo1">test/repo1</a></h2>
-            <p>Test repository 1</p>
-            <span itemprop="programmingLanguage">Python</span>
-            <a href="/test/repo1/stargazers">1,234</a>
-            <a href="/test/repo1/forks">56</a>
-            <span class="d-inline-block float-sm-right">+89 stars today</span>
-        </article>
-        <article class="Box-row">
-            <h2><a href="/test/repo2">test/repo2</a></h2>
-            <p>Test repository 2</p>
-            <span itemprop="programmingLanguage">JavaScript</span>
-            <a href="/test/repo2/stargazers">567</a>
-            <a href="/test/repo2/forks">23</a>
-            <span class="d-inline-block float-sm-right">+45 stars today</span>
-        </article>
-        """
-        repos = parse_trending_html(mock_html)
-        assert len(repos) == 2
-        assert repos[0]["name"] == "test/repo1"
-        assert repos[0]["stars_total"] == 1234
-        assert repos[0]["stars_today"] == 89
-        assert repos[1]["language"] == "JavaScript"
-        print("✓ HTML 解析测试通过")
-    except AssertionError as e:
-        errors.append(f"HTML 解析测试失败: {e}")
-        print("✗ HTML 解析测试失败")
-
-    # 测试 4: 过滤函数
-    try:
-        test_repos = [
-            {"name": "a", "language": "Python", "stars_today": 10},
-            {"name": "b", "language": "JavaScript", "stars_today": 20},
-            {"name": "c", "language": "Python", "stars_today": 30},
-        ]
-        filtered = filter_repos(test_repos, "python", 2)
-        assert len(filtered) == 2
-        assert filtered[0]["name"] == "c"
-        assert filtered[1]["name"] == "a"
-        print("✓ 过滤函数测试通过")
-    except AssertionError as e:
-        errors.append(f"过滤函数测试失败: {e}")
-        print("✗ 过滤函数测试失败")
-
-    # 测试 5: 格式生成
-    try:
-        test_repos = [
-            {"name": "test/repo", "description": "Test", "language": "Python",
-             "stars_total": 100, "forks": 10, "stars_today": 5,
-             "url": "https://github.com/test/repo"},
-        ]
-        md = generate_markdown(test_repos, "python", "daily", "zh")
-        assert "# GitHub Trending 周报" in md
-        assert "test/repo" in md
-
-        csv_data = generate_csv(test_repos)
-        assert "name,description" in csv_data
-
-        json_data = generate_json(test_repos, "python", "daily")
-        assert "repositories" in json_data
-        print("✓ 格式生成测试通过")
-    except AssertionError as e:
-        errors.append(f"格式生成测试失败: {e}")
-        print("✗ 格式生成测试失败")
-
-    # 测试 6: 原子写入
-    try:
-        import tempfile
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".txt") as f:
-            temp_path = f.name
-        assert atomic_write(temp_path, "test content")
-        with open(temp_path, "r") as f:
-            assert f.read() == "test content"
-        os.unlink(temp_path)
-        print("✓ 原子写入测试通过")
-    except AssertionError as e:
-        errors.append(f"原子写入测试失败: {e}")
-        print("✗ 原子写入测试失败")
-
-    # 测试 7: 真实网络请求（可选，如果网络不可用则跳过）
-    try:
-        repos = fetch_trending_data(since="daily", limit=5)
-        if repos:
-            assert len(repos) > 0
-            assert "name" in repos[0]
-            print(f"✓ 真实网络请求测试通过（获取 {len(repos)} 个仓库）")
-        else:
-            print("⚠ 真实网络请求测试跳过（网络不可用或返回空）")
-    except Exception as e:
-        print(f"⚠ 真实网络请求测试跳过: {e}")
-
-    # 汇总结果
-    if errors:
-        print(f"\n自检失败: {len(errors)} 个错误")
-        for err in errors:
-            print(f"  - {err}")
-        return 1
-    else:
-        print("\n所有自检通过！")
-        return 0
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description=SKILL_DESCRIPTION,
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="示例:\n"
-               "  python run.py --since weekly --language python --format markdown\n"
-               "  python run.py --selftest\n"
-    )
-
-    parser.add_argument("--language", type=str, default=None,
-                        help="编程语言过滤（如 python、javascript）")
-    parser.add_argument("--since", type=str, default="daily",
-                        choices=["daily", "weekly", "monthly"],
-                        help="时间范围: daily/weekly/monthly（默认: daily）")
-    parser.add_argument("--format", type=str, default="markdown",
-                        choices=["markdown", "csv", "json"],
-                        help="输出格式: markdown/csv/json（默认: markdown）")
-    parser.add_argument("--output", type=str, default=None,
-                        help="输出文件路径（默认自动生成）")
-    parser.add_argument("--limit", type=int, default=25,
-                        help="最大仓库数量 1-50（默认: 25）")
-    parser.add_argument("--language-output", type=str, default="zh",
-                        choices=["zh", "en"],
-                        help="输出语言: zh/en（默认: zh）")
-    parser.add_argument("--selftest", action="store_true",
-                        help="运行自检并退出")
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        sys.exit(run_selftest())
-
-    # 参数校验
-    if not 1 <= args.limit <= 50:
-        print("错误: --limit 必须在 1-50 之间", file=sys.stderr)
-        sys.exit(1)
-
-    # 获取数据
-    print(f"正在获取 GitHub Trending 数据（since={args.since}, language={args.language or '全部'}）...")
-    repos = fetch_trending_data(since=args.since, language=args.language, limit=args.limit)
-
-    if not repos:
-        print("错误: 未获取到任何仓库数据", file=sys.stderr)
-        sys.exit(1)
-
-    print(f"成功获取 {len(repos)} 个仓库")
-
-    # 生成输出
-    if args.format == "markdown":
-        content = generate_markdown(repos, args.language, args.since, args.language_output)
-    elif args.format == "csv":
-        content = generate_csv(repos)
-    else:  # json
-        content = generate_json(repos, args.language, args.since)
-
-    # 确定输出路径
-    output_path = args.output or get_output_path(args.format, args.language, args.since)
-
-    # 写入文件
-    if atomic_write(output_path, content):
-        print(f"报告已生成: {output_path}")
-        # 同时输出到 stdout
-        print("\n" + "=" * 60)
-        print(content)
-    else:
-        print("错误: 写入文件失败", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+    url = GITH
