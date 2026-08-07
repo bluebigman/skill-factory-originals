@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260807_120323",
+  "slug": "excel-data-cleaning",
+  "spec": {
+    "slug": "excel-data-cleaning",
+    "name": "表格清洗工坊",
+    "description": "将杂乱表格按规则整理为规范、可分析的结构化数据。",
+    "cli_interface": [],
+    "capability_outline": [
+      "**能做：**",
+      "- 输出清洗报告，记录每行处理结果",
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "06b0ccf5a1a34760",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
