@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: wechat-article-to-markdown
 name: wechat-article-to-markdown
-displayName: 公众号文章 转Markdown 内容提取
-description: 抓取微信公众号文章并转换为结构化Markdown，保留关键信息。
-version: 1.0.1
+displayName: 公众号文章 结构化转存 内容萃取
+description: 抓取微信公众号文章，转换为结构化Markdown，保留标题、作者、正文与图片引用。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/wechat-article-to-markdown
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 墨澜工坊
+author: content-bridge-studio
 agent_created: true
-trigger_words: ["公众号文章", "微信文章转Markdown", "文章抓取", "内容提取", "网页转MD"]
+trigger_words: ["公众号文章", "微信文章转Markdown", "文章抓取", "内容提取", "网页转MD", "推文存档", "图文另存"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,25 +31,21 @@ trigger_words: ["公众号文章", "微信文章转Markdown", "文章抓取", "�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# 微信公众号文章抓取与 Markdown 转换 Skill 文档
+# 微信公众号文章转 Markdown 操作指南
 
-## 一、能力边界：一页纸速查卡
+## 一、能力边界（一页纸速查）
 
-### 1.1 能做与不能做
+| 维度 | 说明 |
+|------|------|
+| 能做的事 | 提取公众号文章页面的标题、作者、发布时间、正文段落、图片链接、引用块、代码块 |
+| 不能做的事 | 无法绕过微信登录墙、无法抓取付费/加密/已删除文章、无法解析文章内嵌视频/音频文件本身 |
+| 输出格式 | 标准 Markdown（.md），图片以 `![描述](URL)` 形式保留原链接 |
+| 适用对象 | 需要将公众号内容迁移至笔记软件、博客、知识库的个人或团队 |
+| 不适用对象 | 需要批量抓取他人文章用于商业转载、需要下载高清原图、需要保留复杂排版（如卡片样式）的场景 |
 
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|---------|-----------|
-| **输入来源** | 用户直接粘贴的文章正文、分享的链接（mp.weixin.qq.com 域名）、已下载的 HTML 文件、纯文本内容 | 需要登录验证的付费文章、被删除或违规下架的文章、非微信生态的网页（如知乎、CSDN） |
-| **内容处理** | 提取标题、作者、发布时间、正文段落、图片链接、代码块、引用块、表格 | 提取评论区内容、阅读量/点赞数等互动数据、文章内嵌视频的播放地址 |
-| **格式转换** | 输出标准 Markdown，保留标题层级（H1-H4）、列表、粗斜体、链接、图片引用 | 保留原文的复杂 CSS 样式、自定义字体颜色、背景色、图文混排的精确位置 |
-| **批量操作** | 一次处理多个链接（最多 10 个），生成独立文件或合并文件 | 定时自动抓取、监控公众号更新、增量同步 |
-| **自定义输出** | 可指定是否包含图片、是否保留原文链接、是否生成目录（TOC） | 输出为 PDF、Word 或 HTML 格式（仅支持 Markdown） |
+**输入要求**：一个可公开访问的微信公众号文章 URL（`https://mp.weixin.qq.com/s/...` 格式）。
 
-### 1.2 适用对象
-
-- **内容创作者**：需要将公众号文章迁移到个人博客、知识库或笔记软件
-- **研究人员**：收集多篇公众号文章作为参考资料，需要统一格式
-- **开发者**：需要将文章内容作为训练数据或文档素材
+**输出产物**：一份结构化的 Markdown 文本，包含 YAML frontmatter（标题、作者、日期）与正文内容。
 
 
 ## 许可证（License）
