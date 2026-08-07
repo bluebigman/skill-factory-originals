@@ -232,10 +232,10 @@ def format_output(result: ProcessResult, detailed: bool = False) -> str:
             lines.append(f"关键字段: {item.key_fields}")
         else:
             keys = list(item.key_fields.keys())
-            lines.append(f"识别字段: {', '.join(keys) if keys else '无'}")
+            lines.append(f"关键字段: {', '.join(keys) if keys else '无'}")
 
-        label = _format_confidence_label(item.confidence)
-        lines.append(f"置信度: {item.confidence:.1%} ({label})")
+        # 置信度格式化为百分比，不带标注
+        lines.append(f"置信度: {item.confidence:.1%}")
 
         if item.warnings:
             lines.append(f"警告: {'; '.join(item.warnings)}")
