@@ -215,10 +215,34 @@ def extract_entities(text: str) -> List[Dict[str, Any]]:
             "confidence": "high" if "@" in email and "." in email.split("@")[-1] else "medium",
         })
 
-    # 电话号码提取（简单模式）
-    phone_pattern = re.compile(r"\b(?:\+?\d{1,3}[-.]?)?\(?\d{3}\)?[-.]?\d{3}[-.]?\d{4}\b")
-    phones = phone_pattern.findall(text)
-    for phone in phones[:5]:
+    # 电话号码提取（更宽松的模式，支持多种格式）
+    # 支持：138-1234-5678, 13812345678, +86 138-1234-5678, (010) 1234-5678 等
+    phone_patterns = [
+        # 带区号的分隔格式：+86 138-1234-5678
+        r"(?:\+?\d{1,3}[\s-]?)?(?:\(\d{2,4}\)[\s-]?)?\d{3,4}[\s-]\d{3,4}[\s-]\d{3,4}",
+        # 连续数字格式：13812345678
+        r"(?:\+?\d{1,3}[\s-]?)?(?:\(\d{2,4}\)[\s-]?)?\d{7,15}",
+        # 带空格格式：138 1234 5678
+        r"(?:\+?\d{1,3}[\s-]?)?(?:\(\d{2,4}\)[\s-]?)?\d{3,4}\s+\d{3,4}\s+\d{3,4}",
+    ]
+    
+    phones = []
+    for pattern in phone_patterns:
+        phone_pattern = re.compile(r"\b" + pattern + r"\b")
+        found = phone_pattern.findall(text)
+        phones.extend(found)
+    
+    # 去除重复并标准化
+    seen_phones = set()
+    unique_phones = []
+    for phone in phones:
+        # 清理可能的多余空格
+        normalized = re.sub(r'\s+', ' ', phone).strip()
+        if normalized not in seen_phones and len(normalized) >= 7:  # 至少7位数字
+            seen_phones.add(normalized)
+            unique_phones.append(normalized)
+    
+    for phone in unique_phones[:5]:
         entities.append({
             "type": "phone",
             "value": phone,
@@ -500,12 +524,13 @@ def run_selftest() -> bool:
         entities = extract_entities(sample_text)
         assert len(entities) > 0, "未提取到任何实体"
         types = {e["type"] for e in entities}
-        assert "email" in types, "未提取到邮箱"
-        assert "phone" in types, "未提取到电话"
-        assert "date" in types, "未提取到日期"
+        assert "email" in types, f"未提取到邮箱，实际类型: {types}"
+        assert "phone" in types, f"未提取到电话，实际类型: {types}"
+        assert "date" in types, f"未提取到日期，实际类型: {types}"
         for entity in entities:
             assert entity["confidence"] in ("high", "medium", "low"), f"置信度取值非法: {entity['confidence']}"
         print(f"  ✓ 实体提取通过，共 {len(entities)} 个实体")
+        print(f"    提取到的电话: {[e['value'] for e in entities if e['type'] == 'phone']}")
 
         # 测试 3: JSON 输入解析
         print("测试 3: JSON 输入解析")
