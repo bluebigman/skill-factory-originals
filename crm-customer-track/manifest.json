@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260807_120025",
+  "slug": "crm-customer-track",
+  "spec": {
+    "slug": "crm-customer-track",
+    "name": "客户跟进轨迹管理",
+    "description": "记录客户互动全轨迹，识别停滞与流失风险，辅助跟进决策。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "db77b48f989b2a76",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
