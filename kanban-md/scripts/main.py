@@ -149,6 +149,9 @@ def parse_task_from_line(line: str) -> Optional[KanbanTask]:
                 title_candidate = line[: first_match.start()].strip("：:，, ")
                 if title_candidate:
                     task.set_field("标题", title_candidate)
+                else:
+                    # 如果没有标题前缀，使用第一个字段的值作为标题
+                    task.set_field("标题", matches[0][1])
         return task
 
     # 尝试解析 "任务：xxx" 或 "待办：xxx" 格式
@@ -305,6 +308,7 @@ def run_selftest() -> bool:
     output, errors = process_input(sample2, columns=["标题", "状态"])
     assert "E003" not in errors, "有效列不应报错"
     assert "标题" in output, "输出应包含标题字段"
+    assert "写测试用例" in output, "输出应包含任务标题"
     print("测试 3（自定义列）通过")
 
     # 测试 4：无效列
