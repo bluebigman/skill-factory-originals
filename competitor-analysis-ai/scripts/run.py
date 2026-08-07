@@ -18,7 +18,6 @@ import argparse
 import csv
 import json
 import os
-import random
 import sys
 import tempfile
 import time
@@ -28,7 +27,7 @@ from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any, Tuple
 
 # 版本信息
-VERSION = "3.1.0"
+VERSION = "3.1.1"
 
 # 错误码
 ERR_SUCCESS = 0
@@ -42,6 +41,7 @@ ERR_OUTPUT_DIR = 5
 REQUEST_TIMEOUT = 10  # 秒
 MAX_RETRIES = 3
 RETRY_BASE_DELAY = 1.0  # 秒
+MAX_RETRY_DELAY = 10.0  # 最大退避延迟（秒）
 
 # 分析维度
 ANALYSIS_DIMENSIONS = ["features", "pricing", "ux", "positioning", "tech_stack", "operations"]
@@ -89,7 +89,7 @@ def match_trigger(user_input: str) -> bool:
 def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
                          max_retries: int = MAX_RETRIES) -> str:
     """
-    从 URL 获取数据，带超时、指数退避重试、随机抖动和 Retry-After 支持
+    从 URL 获取数据，带超时、指数退避重试和 Retry-After 支持
     
     Args:
         url: 数据源 URL
@@ -126,13 +126,13 @@ def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
                         delay = RETRY_BASE_DELAY * (2 ** attempt)
                 else:
                     delay = RETRY_BASE_DELAY * (2 ** attempt)
-                # 添加随机抖动
-                delay += random.uniform(0, delay * 0.5)
+                # 限制最大延迟
+                delay = min(delay, MAX_RETRY_DELAY)
                 time.sleep(delay)
         except urllib.error.URLError as e:
             last_error = e
             if attempt < max_retries - 1:
-                delay = RETRY_BASE_DELAY * (2 ** attempt) + random.uniform(0, RETRY_BASE_DELAY)
+                delay = min(RETRY_BASE_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
                 time.sleep(delay)
         except ValueError as e:
             # HTTP 状态码错误，不重试
@@ -539,4 +539,4 @@ def generate_report(data: Dict[str, Any]) -> Dict[str, Any]:
     }
     
     # 统一使用 UTC 时间
-    now_utc = datetime.now(timezone.utc)
+    now_ut
