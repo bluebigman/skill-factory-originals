@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: shell-gpt
 name: shell-gpt
-displayName: 终端指令 自然语言转命令 智能执行
+displayName: 终端指令 自然语言转命令
 description: 将自然语言指令转化为可执行的命令行操作与结构化输出。
-version: 1.0.2
+version: 1.0.3
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/shell-gpt
@@ -14,7 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 终端工坊
 agent_created: true
-trigger_words: ["shell-gpt", "命令行助手", "终端智能", "CLI自动化", "shell智能", "自然语言转命令", "终端指令解析"]
+trigger_words: ["shell-gpt", "命令行助手", "终端智能", "CLI自动化", "shell智能", "命令转换", "终端指令", "命令行生成"]
 ---
 
 > 📜 **用户协议（User Agreement）**
