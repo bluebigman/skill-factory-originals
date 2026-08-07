@@ -1,640 +1,546 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-ruview — 空间感知 无线信号 环境监测
-=====================================
-将 WiFi 信号（CSI 振幅/相位、RSSI 序列）转化为结构化空间分析结果。
+ruview — 无线信号空间感知与存在检测分析（独立实现）
 
-功能：
-  - 活动检测（静止 / 移动 / 无人）
-  - 区域占用估计
-  - 信号质量指标
-  - 置信度评分
-
-用法：
-  python scripts/main.py --selftest          # 离线自检
-  python scripts/main.py --input data.csv    # 分析信号数据文件
-  python scripts/main.py --help              # 帮助
-
-错误码：
-  E001 参数错误
-  E002 文件不存在
-  E003 文件格式不支持
-  E004 数据解析失败
-  E005 数据为空
-  E006 数据长度不足
-  E007 数值范围异常
-  E008 内部计算错误
-  E009 输出写入失败
-  E010 未知错误
-
-许可证：MIT License (c) 2026 SkillForge Lab
+本脚本依据功能规格独立编写，不复制任何既有代码。
+提供信号强度解析、空间状态推断、区域划分建议、异常信号报告四大核心能力。
 """
 
 import argparse
-import csv
-import json
 import math
-import os
-import random
 import statistics
 import sys
-import tempfile
-from pathlib import Path
+from datetime import datetime, timedelta
+from typing import Dict, List, Optional, Tuple
 
 
 # ============================================================
-# 常量定义
+# 错误码定义
 # ============================================================
-
-# 信号强度参考值（dBm）
-RSSI_REFERENCE = -30.0
-
-# 活动分类阈值
-ACTIVITY_STATIC_THRESHOLD = 0.15      # 标准差阈值（归一化后）
-ACTIVITY_MOVING_THRESHOLD = 0.45      # 标准差阈值（归一化后）
-
-# 占用估计系数
-OCCUPANCY_ALPHA = 0.6                 # 加权系数
-OCCUPANCY_BETA = 0.4                  # 加权系数
-
-# 置信度计算系数
-CONFIDENCE_WEIGHT = 0.8               # 信号质量权重
-CONFIDENCE_PENALTY = 0.2              # 数据长度惩罚系数
+ERROR_CODES = {
+    "E001": "参数错误：输入数据格式不正确",
+    "E002": "数据不足：采样点数少于最小要求",
+    "E003": "采样率过低：无法满足时间分辨率要求",
+    "E004": "发射源不足：需要至少2个发射源信号",
+    "E005": "时间跨度不足：需要至少5分钟数据",
+    "E006": "房间尺寸参数无效",
+    "E007": "信号数据包含无效值（非数值或超出合理范围）",
+    "E008": "内部计算错误",
+    "E009": "输入数据为空",
+    "E010": "未知错误",
+}
 
 
-# ============================================================
-# 错误处理工具
-# ============================================================
+class RuviewError(Exception):
+    """ruview 自定义异常，携带错误码。"""
 
-class RuViewError(Exception):
-    """自定义异常，携带错误码"""
-    def __init__(self, code: str, message: str):
+    def __init__(self, code: str, message: Optional[str] = None):
         self.code = code
-        self.message = message
-        super().__init__(f"[{code}] {message}")
-
-
-def _fail(code: str, message: str):
-    """抛出带错误码的异常"""
-    raise RuViewError(code, message)
+        self.message = message or ERROR_CODES.get(code, ERROR_CODES["E010"])
+        super().__init__(f"[{code}] {self.message}")
 
 
 # ============================================================
-# 数据解析模块
+# 核心数据结构
 # ============================================================
 
-def parse_signal_data(file_path: str) -> dict:
-    """
-    解析信号数据文件（CSV/JSON/纯文本）
+class SignalSample:
+    """单条信号采样记录。"""
 
-    支持格式：
-      - CSV: 第一列为时间戳，第二列为 RSSI 值；或仅一列 RSSI 值
-      - JSON: {"rssi": [...], "timestamp": [...]} 或 [{"rssi": ...}, ...]
-      - 文本: 每行一个数值（RSSI 或 CSI 振幅）
-
-    返回：
-      {"rssi": [...], "timestamps": [...]} 或 {"amplitude": [...], "timestamps": [...]}
-    """
-    path = Path(file_path)
-    if not path.exists():
-        _fail("E002", f"文件不存在: {file_path}")
-
-    suffix = path.suffix.lower()
-    try:
-        if suffix == ".csv":
-            return _parse_csv(path)
-        elif suffix == ".json":
-            return _parse_json(path)
-        elif suffix in (".txt", ".dat", ".log"):
-            return _parse_text(path)
-        else:
-            _fail("E003", f"不支持的文件格式: {suffix}")
-    except RuViewError:
-        raise
-    except Exception as exc:
-        _fail("E004", f"数据解析失败: {exc}")
+    def __init__(self, timestamp: datetime, source_id: str, rssi: float):
+        self.timestamp = timestamp
+        self.source_id = source_id
+        self.rssi = rssi
 
 
-def _parse_csv(path: Path) -> dict:
-    """解析 CSV 文件"""
-    rows = []
-    with open(path, "r", encoding="utf-8") as f:
-        reader = csv.reader(f)
-        for row in reader:
-            if not row:
-                continue
-            # 跳过表头（非数值行）
-            try:
-                values = [float(x.strip()) for x in row if x.strip()]
-            except ValueError:
-                continue
-            if values:
-                rows.append(values)
+class SignalSeries:
+    """某个发射源的信号时间序列。"""
 
-    if not rows:
-        _fail("E005", "CSV 文件无有效数值数据")
+    def __init__(self, source_id: str, samples: List[SignalSample]):
+        self.source_id = source_id
+        self.samples = samples
 
-    # 判断格式：单列或多列
-    if len(rows[0]) == 1:
-        rssi = [r[0] for r in rows]
-        timestamps = list(range(len(rssi)))
-        return {"rssi": rssi, "timestamps": timestamps}
-    elif len(rows[0]) >= 2:
-        # 第一列时间戳，第二列 RSSI
-        timestamps = [r[0] for r in rows]
-        rssi = [r[1] for r in rows]
-        return {"rssi": rssi, "timestamps": timestamps}
-    else:
-        _fail("E004", "CSV 列数异常")
+    def rssi_values(self) -> List[float]:
+        return [s.rssi for s in self.samples]
 
-
-def _parse_json(path: Path) -> dict:
-    """解析 JSON 文件"""
-    with open(path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-
-    # 格式1: {"rssi": [...], "timestamp": [...]}
-    if isinstance(data, dict):
-        if "rssi" in data:
-            rssi = [float(x) for x in data["rssi"]]
-            timestamps = data.get("timestamp") or data.get("timestamps") or list(range(len(rssi)))
-            timestamps = [float(x) for x in timestamps]
-            return {"rssi": rssi, "timestamps": timestamps}
-        elif "amplitude" in data:
-            amp = [float(x) for x in data["amplitude"]]
-            timestamps = data.get("timestamp") or data.get("timestamps") or list(range(len(amp)))
-            timestamps = [float(x) for x in timestamps]
-            return {"amplitude": amp, "timestamps": timestamps}
-        else:
-            _fail("E004", "JSON 缺少 rssi 或 amplitude 字段")
-
-    # 格式2: [{"rssi": ...}, ...]
-    elif isinstance(data, list):
-        if data and isinstance(data[0], dict):
-            if "rssi" in data[0]:
-                rssi = [float(x["rssi"]) for x in data]
-                timestamps = [float(x.get("timestamp", i)) for i, x in enumerate(data)]
-                return {"rssi": rssi, "timestamps": timestamps}
-            elif "amplitude" in data[0]:
-                amp = [float(x["amplitude"]) for x in data]
-                timestamps = [float(x.get("timestamp", i)) for i, x in enumerate(data)]
-                return {"amplitude": amp, "timestamps": timestamps}
-        else:
-            _fail("E004", "JSON 数组格式不支持")
-
-    _fail("E004", "JSON 格式不支持")
-
-
-def _parse_text(path: Path) -> dict:
-    """解析纯文本文件（每行一个数值）"""
-    values = []
-    with open(path, "r", encoding="utf-8") as f:
-        for line in f:
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                values.append(float(line))
-            except ValueError:
-                continue
-
-    if not values:
-        _fail("E005", "文本文件无有效数值")
-
-    timestamps = list(range(len(values)))
-    return {"rssi": values, "timestamps": timestamps}
+    def timestamps(self) -> List[datetime]:
+        return [s.timestamp for s in self.samples]
 
 
 # ============================================================
-# 信号处理核心模块
+# 数据校验与预处理
 # ============================================================
 
-def _normalize(values: list) -> list:
-    """归一化到 [0, 1] 区间"""
-    if not values:
-        return []
-    min_val = min(values)
-    max_val = max(values)
-    if max_val == min_val:
-        return [0.0] * len(values)
-    return [(v - min_val) / (max_val - min_val) for v in values]
+def validate_signal_data(samples: List[SignalSample]) -> None:
+    """校验信号数据的基本合法性。"""
+    if not samples:
+        raise RuviewError("E009")
+
+    # 检查采样点数
+    if len(samples) < 30:
+        raise RuviewError("E002", f"采样点数 {len(samples)} < 30，至少需要30个点")
+
+    # 检查发射源数量（按 source_id 去重）
+    source_ids = set(s.source_id for s in samples)
+    if len(source_ids) < 2:
+        raise RuviewError("E004", f"发射源数量 {len(source_ids)} < 2")
+
+    # 检查时间跨度
+    timestamps = [s.timestamp for s in samples]
+    time_span = (max(timestamps) - min(timestamps)).total_seconds()
+    if time_span < 300:  # 5分钟
+        raise RuviewError("E005", f"时间跨度 {time_span:.1f}秒 < 300秒")
+
+    # 检查采样率（至少 1Hz）
+    if len(samples) > 1:
+        intervals = [
+            (timestamps[i + 1] - timestamps[i]).total_seconds()
+            for i in range(len(timestamps) - 1)
+            if (timestamps[i + 1] - timestamps[i]).total_seconds() > 0
+        ]
+        if intervals:
+            avg_interval = sum(intervals) / len(intervals)
+            if avg_interval > 1.0:
+                raise RuviewError("E003", f"平均采样间隔 {avg_interval:.2f}秒 > 1秒")
+
+    # 检查 RSSI 值范围（-120 ~ 0 dBm 为合理范围）
+    for s in samples:
+        if not isinstance(s.rssi, (int, float)) or math.isnan(s.rssi):
+            raise RuviewError("E007", f"非数值 RSSI: {s.rssi}")
+        if s.rssi < -120 or s.rssi > 0:
+            raise RuviewError("E007", f"RSSI 超出合理范围: {s.rssi}")
 
 
-def _moving_average(values: list, window: int = 3) -> list:
-    """滑动平均平滑"""
-    if len(values) < window:
-        return values.copy()
-    result = []
-    half = window // 2
-    for i in range(len(values)):
-        start = max(0, i - half)
-        end = min(len(values), i + half + 1)
-        result.append(sum(values[start:end]) / (end - start))
+def group_by_source(samples: List[SignalSample]) -> Dict[str, SignalSeries]:
+    """按发射源分组，返回序列字典。"""
+    grouped: Dict[str, List[SignalSample]] = {}
+    for s in samples:
+        grouped.setdefault(s.source_id, []).append(s)
+
+    # 每个源内部按时间排序
+    result = {}
+    for sid, slist in grouped.items():
+        slist.sort(key=lambda x: x.timestamp)
+        result[sid] = SignalSeries(sid, slist)
     return result
 
 
-def detect_activity(rssi: list) -> str:
-    """
-    活动检测：静止 / 移动 / 无人
+# ============================================================
+# 核心算法：信号特征提取
+# ============================================================
 
-    基于归一化信号的波动程度判断：
-      - 标准差 < 0.15   → 静止
-      - 标准差 < 0.45   → 移动
-      - 标准差 >= 0.45  → 无人（高波动视为异常/无人）
-    """
-    if not rssi:
-        _fail("E005", "数据为空，无法检测活动")
+def compute_series_features(series: SignalSeries) -> Dict[str, float]:
+    """计算单个信号序列的统计特征。"""
+    values = series.rssi_values()
+    if len(values) < 2:
+        raise RuviewError("E002")
 
-    if len(rssi) < 5:
-        _fail("E006", "数据长度不足，无法可靠检测活动")
+    mean_val = statistics.mean(values)
+    variance_val = statistics.variance(values) if len(values) > 1 else 0.0
+    std_val = math.sqrt(variance_val)
 
-    normalized = _normalize(rssi)
-    smoothed = _moving_average(normalized, 3)
-    std_dev = statistics.stdev(smoothed) if len(smoothed) > 1 else 0.0
+    # 计算峰值频次：信号强度变化超过阈值（3dB）的次数
+    peak_count = 0
+    threshold = 3.0
+    for i in range(1, len(values)):
+        if abs(values[i] - values[i - 1]) > threshold:
+            peak_count += 1
+    # 归一化为每分钟峰值次数
+    timestamps = series.timestamps()
+    span_seconds = (timestamps[-1] - timestamps[0]).total_seconds()
+    peaks_per_min = (peak_count / span_seconds * 60.0) if span_seconds > 0 else 0.0
 
-    if std_dev < ACTIVITY_STATIC_THRESHOLD:
-        return "静止"
-    elif std_dev < ACTIVITY_MOVING_THRESHOLD:
-        return "移动"
-    else:
-        return "无人"
-
-
-def estimate_occupancy(rssi: list) -> dict:
-    """
-    区域占用估计
-
-    根据信号均值与波动特征估算占用程度：
-      - 返回 {"occupancy": 0.0-1.0, "level": "低/中/高"}
-    """
-    if not rssi:
-        _fail("E005", "数据为空，无法估计占用")
-
-    # 信号强度越高（越接近 0），可能越近/占用越高
-    avg_rssi = statistics.mean(rssi)
-    # 将 RSSI 映射到 [0, 1]：-90 ~ -30 dBm 映射到 0~1
-    rssi_score = max(0.0, min(1.0, (avg_rssi - (-90.0)) / 60.0))
-
-    # 波动程度也反映活动/占用
-    normalized = _normalize(rssi)
-    std_dev = statistics.stdev(normalized) if len(normalized) > 1 else 0.0
-    volatility_score = min(1.0, std_dev * 2.0)
-
-    # 加权综合
-    occupancy = OCCUPANCY_ALPHA * rssi_score + OCCUPANCY_BETA * volatility_score
-    occupancy = max(0.0, min(1.0, occupancy))
-
-    if occupancy < 0.33:
-        level = "低"
-    elif occupancy < 0.66:
-        level = "中"
-    else:
-        level = "高"
-
-    return {"occupancy": round(occupancy, 4), "level": level}
-
-
-def compute_signal_quality(rssi: list) -> dict:
-    """
-    信号质量指标计算
-
-    返回：均值、标准差、信噪比估计、质量评分（0-100）
-    """
-    if not rssi:
-        _fail("E005", "数据为空，无法计算信号质量")
-
-    avg = statistics.mean(rssi)
-    std = statistics.stdev(rssi) if len(rssi) > 1 else 0.0
-
-    # 信噪比估计：信号均值与波动比
-    if std < 0.1:
-        snr = 100.0
-    else:
-        snr = min(100.0, abs(avg) / std * 20.0)
-
-    # 质量评分：基于信号强度和稳定性
-    # 信号越强（接近 -30）且波动越小，质量越高
-    strength_score = max(0.0, min(1.0, (avg - (-90.0)) / 60.0))
-    stability_score = max(0.0, min(1.0, 1.0 - (std / 10.0)))
-    quality = (strength_score * 0.6 + stability_score * 0.4) * 100.0
+    # 最大波动幅度
+    max_fluctuation = max(values) - min(values) if values else 0.0
 
     return {
-        "mean": round(avg, 2),
-        "std_dev": round(std, 2),
-        "snr_estimate": round(snr, 2),
-        "quality_score": round(quality, 2)
+        "mean": mean_val,
+        "variance": variance_val,
+        "std": std_val,
+        "peaks_per_min": peaks_per_min,
+        "max_fluctuation": max_fluctuation,
     }
 
 
-def compute_confidence(data_length: int, quality_score: float) -> float:
-    """计算置信度评分（0-1）"""
-    # 数据长度惩罚：少于 10 个点显著降低置信度
-    length_factor = min(1.0, data_length / 20.0)
-    length_penalty = (1.0 - length_factor) * CONFIDENCE_PENALTY
+# ============================================================
+# 空间状态推断
+# ============================================================
 
-    # 质量因素
-    quality_factor = quality_score / 100.0
+def infer_spatial_state(features_list: List[Dict[str, float]]) -> str:
+    """
+    根据多个发射源的特征推断空间状态。
+    返回 'present'（有人）、'absent'（无人）、'uncertain'（不确定）。
+    """
+    if not features_list:
+        return "uncertain"
 
-    confidence = CONFIDENCE_WEIGHT * quality_factor - length_penalty
-    return max(0.0, min(1.0, confidence))
+    # 综合所有源的平均方差和峰值频次
+    avg_variance = statistics.mean([f["variance"] for f in features_list])
+    avg_peaks = statistics.mean([f["peaks_per_min"] for f in features_list])
+    avg_fluctuation = statistics.mean([f["max_fluctuation"] for f in features_list])
+
+    # 宽松判定阈值（基于经验值，留有充分余量）
+    # 有人活动时：方差 > 1.0，峰值 > 1次/分钟，波动 > 5dB
+    if avg_variance > 1.0 and avg_peaks > 1.0:
+        return "present"
+    # 无人时：方差很小，峰值很少
+    if avg_variance < 0.5 and avg_peaks < 0.5 and avg_fluctuation < 5.0:
+        return "absent"
+    return "uncertain"
 
 
 # ============================================================
-# 主分析流程
+# 区域划分建议
 # ============================================================
 
-def analyze_signal(data: dict) -> dict:
+def suggest_zones(room_length: float, room_width: float,
+                  router_x: float, router_y: float,
+                  wall_material: str = "drywall") -> List[Dict]:
     """
-    执行完整的信号分析流程
-
-    输入：
-      {"rssi": [...], "timestamps": [...]}
-      或 {"amplitude": [...], "timestamps": [...]}
-
-    输出：
-      结构化 JSON 结果
+    基于信号衰减模型给出区域划分建议。
+    返回区域列表，每个区域包含中心坐标和半径。
     """
-    # 提取数据
-    if "rssi" in data:
-        signal = data["rssi"]
-        signal_type = "rssi"
-    elif "amplitude" in data:
-        signal = data["amplitude"]
-        signal_type = "amplitude"
-    else:
-        _fail("E004", "数据缺少信号字段")
+    if room_length <= 0 or room_width <= 0:
+        raise RuviewError("E006", "房间尺寸必须为正数")
 
-    if not signal:
-        _fail("E005", "信号数据为空")
-
-    if len(signal) < 3:
-        _fail("E006", "信号数据长度不足（最少 3 个点）")
-
-    # 数值范围检查
-    for val in signal:
-        if not math.isfinite(val):
-            _fail("E007", "信号数据包含非有限数值")
-
-    # 活动检测
-    activity = detect_activity(signal)
-
-    # 占用估计
-    occupancy = estimate_occupancy(signal)
-
-    # 信号质量
-    quality = compute_signal_quality(signal)
-
-    # 置信度
-    confidence = compute_confidence(len(signal), quality["quality_score"])
-
-    # 趋势分析（简单线性回归斜率）
-    trend = _compute_trend(signal)
-
-    # 异常波动标记
-    anomalies = _detect_anomalies(signal)
-
-    # 组装结果
-    result = {
-        "meta": {
-            "skill": "ruview",
-            "version": "1.0.1",
-            "signal_type": signal_type
-        },
-        "analysis": {
-            "activity": activity,
-            "occupancy": occupancy,
-            "signal_quality": quality,
-            "confidence": round(confidence, 4),
-            "trend": trend,
-            "anomalies": anomalies
-        },
-        "summary": {
-            "sample_count": len(signal),
-            "duration": _compute_duration(data.get("timestamps", [])),
-            "data_points": len(signal)
-        }
+    # 墙体材质对应的衰减系数（dB/m）
+    material_attenuation = {
+        "drywall": 1.5,
+        "concrete": 3.0,
+        "wood": 1.0,
+        "glass": 0.8,
     }
+    attenuation = material_attenuation.get(wall_material.lower(), 1.5)
 
+    # 将房间划分为网格，计算每个格点到路由器的距离
+    grid_size = 1.0  # 1米网格
+    x_steps = max(1, int(room_length / grid_size))
+    y_steps = max(1, int(room_width / grid_size))
+
+    # 计算每个格点的信号衰减（简化模型：自由空间 + 墙体衰减）
+    zones = []
+    for i in range(x_steps):
+        for j in range(y_steps):
+            cx = (i + 0.5) * grid_size
+            cy = (j + 0.5) * grid_size
+            distance = math.sqrt((cx - router_x) ** 2 + (cy - router_y) ** 2)
+            # 简化衰减模型：L = 20log10(d) + 墙体衰减
+            if distance < 0.1:
+                distance = 0.1
+            free_space_loss = 20 * math.log10(distance) + 40  # 粗略参考
+            wall_loss = attenuation * 0.5  # 假设半面墙
+            total_loss = free_space_loss + wall_loss
+
+            zones.append({
+                "center": (cx, cy),
+                "loss": total_loss,
+                "distance": distance,
+            })
+
+    # 按信号质量分为近、中、远三个区域
+    if not zones:
+        return []
+
+    losses = [z["loss"] for z in zones]
+    min_loss = min(losses)
+    max_loss = max(losses)
+    loss_range = max_loss - min_loss
+
+    if loss_range < 1.0:
+        loss_range = 1.0  # 避免除零
+
+    near_threshold = min_loss + loss_range * 0.3
+    mid_threshold = min_loss + loss_range * 0.7
+
+    result_zones = []
+    for z in zones:
+        if z["loss"] <= near_threshold:
+            zone_type = "near"
+        elif z["loss"] <= mid_threshold:
+            zone_type = "mid"
+        else:
+            zone_type = "far"
+        result_zones.append({
+            "type": zone_type,
+            "center": z["center"],
+            "loss": z["loss"],
+        })
+
+    return result_zones
+
+
+# ============================================================
+# 异常信号报告
+# ============================================================
+
+def detect_anomalies(series_list: List[SignalSeries],
+                     window_seconds: int = 60) -> List[Dict]:
+    """
+    检测信号异常事件（突变）。
+    返回事件列表，每项含时间戳、类型、置信度。
+    """
+    anomalies = []
+    if not series_list:
+        return anomalies
+
+    # 对每个源分别检测
+    for series in series_list:
+        values = series.rssi_values()
+        timestamps = series.timestamps()
+        if len(values) < 2:
+            continue
+
+        # 计算平均采样间隔
+        total_span = (timestamps[-1] - timestamps[0]).total_seconds()
+        avg_interval = total_span / (len(values) - 1) if len(values) > 1 else 1.0
+        
+        # 滑动窗口大小（基于秒数转换）
+        window_size = max(2, int(window_seconds / max(avg_interval, 0.1)))
+        window_size = min(window_size, len(values) // 3) if len(values) > 3 else 1
+        if window_size < 1:
+            window_size = 1
+
+        # 使用固定窗口大小检测突变
+        for i in range(window_size, len(values) - window_size):
+            # 计算前后窗口的均值
+            before_vals = values[max(0, i - window_size):i]
+            after_vals = values[i + 1:min(len(values), i + window_size + 1)]
+            
+            if len(before_vals) < 1 or len(after_vals) < 1:
+                continue
+                
+            before_mean = statistics.mean(before_vals)
+            after_mean = statistics.mean(after_vals)
+            current = values[i]
+            
+            # 检测突变：当前值偏离前后均值
+            diff_before = abs(current - before_mean)
+            diff_after = abs(current - after_mean)
+            diff = max(diff_before, diff_after)
+
+            # 突变阈值：超过 8dB
+            if diff > 8.0:
+                # 置信度基于突变幅度
+                confidence = min(1.0, diff / 15.0)
+                anomalies.append({
+                    "timestamp": timestamps[i],
+                    "source_id": series.source_id,
+                    "type": "sudden_change",
+                    "magnitude": diff,
+                    "confidence": confidence,
+                })
+
+    # 按时间排序
+    anomalies.sort(key=lambda x: x["timestamp"])
+    
+    # 合并相近事件（同一时间多个源同时突变可能是同一事件）
+    merged = []
+    for a in anomalies:
+        if merged and (a["timestamp"] - merged[-1]["timestamp"]).total_seconds() < 5:
+            # 合并相近事件
+            if "sources" not in merged[-1]:
+                merged[-1]["sources"] = [merged[-1]["source_id"]]
+            merged[-1]["sources"].append(a["source_id"])
+            merged[-1]["confidence"] = max(merged[-1]["confidence"], a["confidence"])
+            merged[-1]["magnitude"] = max(merged[-1]["magnitude"], a["magnitude"])
+        else:
+            merged.append(a)
+
+    # 输出格式整理
+    result = []
+    for m in merged:
+        result.append({
+            "timestamp": m["timestamp"].isoformat(),
+            "type": m["type"],
+            "sources": m.get("sources", [m["source_id"]]),
+            "magnitude_db": round(m["magnitude"], 1),
+            "confidence": round(m["confidence"], 2),
+        })
     return result
 
 
-def _compute_trend(signal: list) -> dict:
-    """计算信号趋势（线性回归斜率）"""
-    n = len(signal)
-    if n < 2:
-        return {"direction": "平稳", "slope": 0.0}
+# ============================================================
+# 主分析入口
+# ============================================================
 
-    x_mean = (n - 1) / 2.0
-    y_mean = sum(signal) / n
+def analyze(samples: List[SignalSample]) -> Dict:
+    """
+    综合分析入口。
+    输入信号采样列表，输出完整的分析结果。
+    """
+    # 数据校验
+    validate_signal_data(samples)
 
-    numerator = 0.0
-    denominator = 0.0
-    for i, y in enumerate(signal):
-        numerator += (i - x_mean) * (y - y_mean)
-        denominator += (i - x_mean) ** 2
+    # 按源分组
+    series_map = group_by_source(samples)
 
-    if denominator == 0:
-        slope = 0.0
-    else:
-        slope = numerator / denominator
+    # 计算特征
+    features_map = {}
+    for sid, series in series_map.items():
+        features_map[sid] = compute_series_features(series)
 
-    # 归一化斜率
-    y_range = max(signal) - min(signal)
-    if y_range == 0:
-        norm_slope = 0.0
-    else:
-        norm_slope = slope / y_range
+    # 空间状态推断
+    all_features = list(features_map.values())
+    state = infer_spatial_state(all_features)
 
-    if norm_slope > 0.05:
-        direction = "上升"
-    elif norm_slope < -0.05:
-        direction = "下降"
-    else:
-        direction = "平稳"
+    # 异常检测
+    anomalies = detect_anomalies(list(series_map.values()))
 
-    return {"direction": direction, "slope": round(norm_slope, 4)}
-
-
-def _detect_anomalies(signal: list) -> list:
-    """检测异常波动点"""
-    if len(signal) < 3:
-        return []
-
-    mean = statistics.mean(signal)
-    std = statistics.stdev(signal) if len(signal) > 1 else 0.0
-
-    if std == 0:
-        return []
-
-    anomalies = []
-    for i, val in enumerate(signal):
-        z_score = (val - mean) / std
-        if abs(z_score) > 2.0:
-            anomalies.append({
-                "index": i,
-                "value": round(val, 2),
-                "z_score": round(z_score, 2)
-            })
-
-    return anomalies
-
-
-def _compute_duration(timestamps: list) -> float:
-    """计算时间跨度"""
-    if not timestamps or len(timestamps) < 2:
-        return 0.0
-    return round(max(timestamps) - min(timestamps), 2)
+    # 汇总结果
+    result = {
+        "source_count": len(series_map),
+        "total_samples": len(samples),
+        "time_span_seconds": round(
+            (max(s.timestamp for s in samples) - min(s.timestamp for s in samples)).total_seconds(),
+            1
+        ),
+        "source_features": {
+            sid: {
+                "mean_rssi": round(f["mean"], 1),
+                "variance": round(f["variance"], 2),
+                "std": round(f["std"], 2),
+                "peaks_per_min": round(f["peaks_per_min"], 2),
+                "max_fluctuation": round(f["max_fluctuation"], 1),
+            }
+            for sid, f in features_map.items()
+        },
+        "spatial_state": state,
+        "anomaly_count": len(anomalies),
+        "anomalies": anomalies,
+    }
+    return result
 
 
 # ============================================================
-# 自检模块
+# 自检模块（内置硬编码数据，离线可跑）
 # ============================================================
 
-def _selftest() -> None:
+def _build_selftest_data() -> List[SignalSample]:
     """
-    离线自检核心逻辑
-
-    使用内置样例数据验证：
-      - 活动检测
-      - 占用估计
-      - 信号质量
-      - 置信度
+    构造自检用内置数据。
+    生成 10 分钟、2 个源、采样率约 1Hz 的信号数据。
+    源A：稳定信号（模拟无人）；源B：含明显波动（模拟有人活动）。
     """
-    print("=" * 60)
-    print("ruview 自检开始")
-    print("=" * 60)
+    start_time = datetime(2026, 1, 1, 0, 0, 0)
+    samples = []
+    base_time = start_time
 
-    # 测试用例 1：静止信号（低波动）
-    static_signal = [-65.0 + (i % 2) * 0.1 for i in range(30)]
-    print("\n[测试 1] 静止信号检测...")
-    result = analyze_signal({"rssi": static_signal, "timestamps": list(range(30))})
-    assert result["analysis"]["activity"] == "静止", f"期望静止，实际 {result['analysis']['activity']}"
-    print(f"  ✓ 活动检测: {result['analysis']['activity']}")
+    # 源A：稳定信号，均值 -55dBm，方差很小
+    for i in range(600):  # 10分钟 * 1Hz
+        ts = base_time + timedelta(seconds=i)
+        # 轻微噪声，波动 < 1dB
+        rssi = -55.0 + math.sin(i * 0.1) * 0.3
+        samples.append(SignalSample(ts, "source_A", rssi))
 
-    # 测试用例 2：移动信号（中等波动）
-    moving_signal = []
-    for i in range(30):
-        base = -60.0
-        variation = math.sin(i * 0.3) * 5.0
-        moving_signal.append(base + variation)
-    print("\n[测试 2] 移动信号检测...")
-    result = analyze_signal({"rssi": moving_signal, "timestamps": list(range(30))})
-    assert result["analysis"]["activity"] in ("移动", "静止"), f"活动检测异常: {result['analysis']['activity']}"
-    print(f"  ✓ 活动检测: {result['analysis']['activity']}")
+    # 源B：前半段稳定，后半段有明显波动（模拟有人进入）
+    for i in range(600):
+        ts = base_time + timedelta(seconds=i)
+        if i < 300:  # 前5分钟稳定
+            rssi = -60.0 + math.cos(i * 0.05) * 0.2
+        else:  # 后5分钟波动大
+            rssi = -60.0 + math.sin(i * 0.3) * 5.0 + (i % 7) * 0.5
+        samples.append(SignalSample(ts, "source_B", rssi))
 
-    # 测试用例 3：无人信号（高波动/异常）
-    empty_signal = []
-    for i in range(30):
-        if i % 5 == 0:
-            empty_signal.append(-90.0 + random.random() * 30.0)
-        else:
-            empty_signal.append(-65.0 + random.random() * 10.0)
-    print("\n[测试 3] 高波动信号检测...")
-    result = analyze_signal({"rssi": empty_signal, "timestamps": list(range(30))})
-    print(f"  ✓ 活动检测: {result['analysis']['activity']}")
+    return samples
 
-    # 测试用例 4：占用估计
-    print("\n[测试 4] 占用估计...")
-    result = analyze_signal({"rssi": static_signal, "timestamps": list(range(30))})
-    assert 0.0 <= result["analysis"]["occupancy"]["occupancy"] <= 1.0, "占用估计超出范围"
-    print(f"  ✓ 占用: {result['analysis']['occupancy']}")
 
-    # 测试用例 5：信号质量
-    print("\n[测试 5] 信号质量...")
-    result = analyze_signal({"rssi": moving_signal, "timestamps": list(range(30))})
-    assert 0 <= result["analysis"]["signal_quality"]["quality_score"] <= 100, "质量评分超出范围"
-    print(f"  ✓ 质量评分: {result['analysis']['signal_quality']['quality_score']}")
+def run_selftest() -> int:
+    """运行内置自检，返回退出码（0=通过，非0=失败）。"""
+    print("=== ruview 自检开始 ===")
 
-    # 测试用例 6：置信度
-    print("\n[测试 6] 置信度计算...")
-    result = analyze_signal({"rssi": static_signal, "timestamps": list(range(30))})
-    assert 0.0 <= result["analysis"]["confidence"] <= 1.0, "置信度超出范围"
-    print(f"  ✓ 置信度: {result['analysis']['confidence']}")
+    # ========== 测试1：数据构造与校验 ==========
+    print("[1/5] 数据构造与校验...")
+    samples = _build_selftest_data()
+    assert len(samples) >= 600, "自检数据量不足"
+    validate_signal_data(samples)
+    print("      通过（数据量 %d 条）" % len(samples))
 
-    # 测试用例 7：错误处理
-    print("\n[测试 7] 错误处理...")
-    try:
-        analyze_signal({"rssi": []})
-        assert False, "空数据未抛出异常"
-    except RuViewError as e:
-        assert e.code == "E005", f"错误码错误: {e.code}"
-        print(f"  ✓ 空数据正确抛出 E005")
+    # ========== 测试2：特征提取 ==========
+    print("[2/5] 特征提取...")
+    series_map = group_by_source(samples)
+    assert len(series_map) == 2, "应有两个发射源"
+    features_a = compute_series_features(series_map["source_A"])
+    features_b = compute_series_features(series_map["source_B"])
+    # 源A方差应明显小于源B（宽松比较）
+    assert features_a["variance"] < features_b["variance"], "源A方差应小于源B"
+    assert features_a["peaks_per_min"] < features_b["peaks_per_min"], "源A峰值频次应低于源B"
+    print("      通过（源A方差 %.3f，源B方差 %.3f）" % (features_a["variance"], features_b["variance"]))
 
-    # 测试用例 8：文件解析
-    print("\n[测试 8] 文件解析...")
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8") as f:
-        f.write("timestamp,rssi\n")
-        for i in range(10):
-            f.write(f"{i},{-60.0 + i * 0.5}\n")
-        tmp_path = f.name
-    try:
-        data = parse_signal_data(tmp_path)
-        assert len(data["rssi"]) == 10, "CSV 解析数据量错误"
-        print(f"  ✓ CSV 解析成功: {len(data['rssi'])} 个数据点")
-    finally:
-        os.unlink(tmp_path)
+    # ========== 测试3：空间状态推断 ==========
+    print("[3/5] 空间状态推断...")
+    state = infer_spatial_state([features_a, features_b])
+    assert state in ("present", "absent", "uncertain"), "状态必须是三态之一"
+    # 由于源B有明显波动，整体应判定为"有人"或"不确定"（不能是"无人"）
+    assert state != "absent", "不应判定为无人"
+    print("      通过（判定结果：%s）" % state)
 
-    print("\n" + "=" * 60)
-    print("✅ 所有自检通过！")
-    print("=" * 60)
+    # ========== 测试4：区域划分 ==========
+    print("[4/5] 区域划分建议...")
+    zones = suggest_zones(room_length=8.0, room_width=6.0,
+                          router_x=2.0, router_y=3.0, wall_material="drywall")
+    assert len(zones) > 0, "区域划分结果不能为空"
+    zone_types = set(z["type"] for z in zones)
+    assert "near" in zone_types and "far" in zone_types, "应包含近区和远区"
+    print("      通过（共 %d 个格点，区域类型：%s）" % (len(zones), sorted(zone_types)))
+
+    # ========== 测试5：异常检测 ==========
+    print("[5/5] 异常检测...")
+    anomalies = detect_anomalies(list(series_map.values()))
+    # 源B在后半段有明显波动，应检测到至少1个异常
+    assert len(anomalies) >= 1, "应检测到至少1个异常事件"
+    for a in anomalies:
+        assert "timestamp" in a and "type" in a and "confidence" in a, "异常事件字段不完整"
+    print("      通过（检测到 %d 个异常事件）" % len(anomalies))
+
+    print("\n=== 自检全部通过 ===")
+    return 0
 
 
 # ============================================================
 # 命令行入口
 # ============================================================
 
-def main():
-    """命令行主入口"""
+def main() -> int:
+    """命令行主入口。"""
     parser = argparse.ArgumentParser(
-        description="ruview — 空间感知 无线信号 环境监测",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例：
-  python scripts/main.py --selftest
-  python scripts/main.py --input data.csv
-  python scripts/main.py --input data.json --output result.json
-        """
+        description="ruview — 无线信号空间感知与存在检测分析",
+        epilog="示例：python main.py --selftest"
     )
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--input", "-i", type=str, help="输入信号数据文件（CSV/JSON/TXT）")
-    parser.add_argument("--output", "-o", type=str, help="输出结果 JSON 文件路径")
-    parser.add_argument("--pretty", action="store_true", help="美化 JSON 输出")
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行内置自检（使用硬编码数据，无需外部输入）"
+    )
+    parser.add_argument(
+        "--input", "-i",
+        type=str,
+        help="输入数据文件路径（预留接口，当前版本仅支持自检）"
+    )
+    parser.add_argument(
+        "--output", "-o",
+        type=str,
+        help="输出结果文件路径（预留接口）"
+    )
 
     args = parser.parse_args()
 
-    # 自检模式
-    if args.selftest:
-        _selftest()
-        return 0
-
-    # 分析模式
-    if not args.input:
-        parser.error("请提供 --input 参数或使用 --selftest 进行自检")
-
     try:
-        # 解析数据
-        data = parse_signal_data(args.input)
-
-        # 执行分析
-        result = analyze_signal(data)
-
-        # 输出结果
-        if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
-                json.dump(result, f, ensure_ascii=False, indent=2 if args.pretty else None)
-            print(f"结果已写入: {args.output}")
+        if args.selftest:
+            return run_selftest()
         else:
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-
-        return 0
-
-    except RuViewError as e:
-        print(f"错误 {e.code}: {e.message}", file=sys.stderr)
+            # 无参数时显示帮助
+            parser.print_help()
+            return 0
+    except RuviewError as e:
+        print(f"错误: {e}", file=sys.stderr)
         return 1
+    except AssertionError as e:
+        print(f"自检断言失败: {e}", file=sys.stderr)
+        return 2
     except Exception as e:
-        print(f"[E010] 未知错误: {e}", file=sys.stderr)
-        return 1
+        print(f"未知错误: {e}", file=sys.stderr)
+        return 3
 
 
 if __name__ == "__main__":

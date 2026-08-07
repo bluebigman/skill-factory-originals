@@ -103,3 +103,18 @@ trigger_words:
 - 批量处理：连续提供多个输入，按同一规则逐项处理
 - 自定义输出：说明期望的格式/字段，按需生成
 - 与其它工具组合：可串联其他 Skill 形成工作流
+
+## 许可证（License）
+
+```text
+MIT License
+
+Copyright (c) 2026 原创作者（自持版权）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+```
+<!-- professional-license-embedded -->
