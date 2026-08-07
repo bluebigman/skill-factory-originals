@@ -164,7 +164,7 @@ class InvoiceExtractor:
                 parsed_data = self._parse_json_input(raw_input)
             elif input_type == INPUT_TYPE_FILE:
                 parsed_data = self._parse_file_input(raw_input)
-            elif input_TYPE_URL == INPUT_TYPE_URL:
+            elif input_type == INPUT_TYPE_URL:
                 # URL模式：仅提取URL并标记为需外部处理
                 raise make_error("E004")
             else:
@@ -227,10 +227,16 @@ class InvoiceExtractor:
         for field in self.fields:
             patterns = self._field_patterns.get(field, [])
             for pattern in patterns:
-                match = re.search(pattern, text, re.IGNORECASE)
-                if match:
-                    extracted[field] = match.group(1).strip()
-                    break
+                try:
+                    match = re.search(pattern, text, re.IGNORECASE)
+                    if match:
+                        value = match.group(1).strip()
+                        if value:  # 确保值不为空
+                            extracted[field] = value
+                            break
+                except (re.error, IndexError):
+                    # 跳过无效的正则表达式或匹配错误
+                    continue
         
         return extracted
     
@@ -260,12 +266,23 @@ class InvoiceExtractor:
                 # 简单校验数值字段
                 if field in ("amount", "tax_amount", "total_amount"):
                     try:
-                        value = float(str(value).replace("￥", "").replace("¥", ""))
-                        confidence = 0.95 if isinstance(extracted[field], (int, float)) else 0.85
+                        # 清理数值字符串
+                        value_str = str(value).replace("￥", "").replace("¥", "").strip()
+                        value = float(value_str)
+                        # 判断来源类型（JSON或文本）
+                        if isinstance(extracted[field], (int, float)):
+                            confidence = 0.95
+                        else:
+                            confidence = 0.85
                     except (ValueError, TypeError):
+                        # 数值解析失败，保留原值但降低置信度
                         confidence = 0.70
                 else:
-                    confidence = 0.95 if isinstance(extracted[field], str) and len(extracted[field]) > 0 else 0.85
+                    # 字符串字段
+                    if isinstance(extracted[field], str) and len(extracted[field].strip()) > 0:
+                        confidence = 0.95
+                    else:
+                        confidence = 0.85
                 
                 result["fields"][field] = value
                 result["confidence"][field] = confidence
