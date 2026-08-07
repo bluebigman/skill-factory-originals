@@ -209,6 +209,32 @@ def _extract_assertion_method(expr: str) -> Tuple[str, List[str]]:
     return method, args
 
 
+def _extract_expect_actual(expr: str) -> str:
+    """从 expect(...) 表达式中提取实际值表达式。
+    
+    使用括号配对算法，正确处理嵌套括号。
+    """
+    match = re.search(r'\bexpect\s*\(', expr)
+    if not match:
+        return ""
+    
+    # 从 '(' 开始找到匹配的 ')'
+    start = match.end() - 1  # 指向 '('
+    depth = 0
+    pos = start
+    while pos < len(expr):
+        ch = expr[pos]
+        if ch == '(':
+            depth += 1
+        elif ch == ')':
+            depth -= 1
+            if depth == 0:
+                # 提取括号内的内容
+                return expr[start + 1:pos].strip()
+        pos += 1
+    return ""
+
+
 def _extract_function_signature(text: str) -> Optional[Dict[str, Any]]:
     """从函数代码中提取签名信息。
 
@@ -276,9 +302,8 @@ def parse_structure(code: str) -> TestCaseNode:
             # 提取该 it 内的 expect 表达式
             expect_exprs = _extract_expect_expressions(it_block)
             for expr in expect_exprs:
-                # 提取 expect 参数
-                expect_match = re.search(r'\bexpect\s*\(\s*([^)]+)\)', expr)
-                actual = expect_match.group(1).strip() if expect_match else ""
+                # 提取 expect 参数（使用括号配对算法）
+                actual = _extract_expect_actual(expr)
                 method, args = _extract_assertion_method(expr)
                 assertion = AssertionInfo(
                     method=method,
@@ -307,8 +332,7 @@ def parse_structure(code: str) -> TestCaseNode:
             it_node = TestCaseNode(type="it", name=it_name, content=it_block)
             expect_exprs = _extract_expect_expressions(it_block)
             for expr in expect_exprs:
-                expect_match = re.search(r'\bexpect\s*\(\s*([^)]+)\)', expr)
-                actual = expect_match.group(1).strip() if expect_match else ""
+                actual = _extract_expect_actual(expr)
                 method, args = _extract_assertion_method(expr)
                 assertion = AssertionInfo(
                     method=method,
@@ -329,8 +353,7 @@ def parse_structure(code: str) -> TestCaseNode:
     if not root.children:
         expect_exprs = _extract_expect_expressions(code)
         for expr in expect_exprs:
-            expect_match = re.search(r'\bexpect\s*\(\s*([^)]+)\)', expr)
-            actual = expect_match.group(1).strip() if expect_match else ""
+            actual = _extract_expect_actual(expr)
             method, args = _extract_assertion_method(expr)
             assertion = AssertionInfo(
                 method=method,
@@ -361,9 +384,8 @@ def parse_assertion(expr: str) -> AssertionInfo:
     if 'expect' not in expr:
         raise error_code("E003", f"非 expect 断言表达式: {expr}")
 
-    # 提取 expect 参数
-    expect_match = re.search(r'\bexpect\s*\(\s*([^)]+)\)', expr)
-    actual = expect_match.group(1).strip() if expect_match else ""
+    # 提取 expect 参数（使用括号配对算法，正确处理嵌套）
+    actual = _extract_expect_actual(expr)
 
     # 提取断言方法
     method, args = _extract_assertion_method(expr)
@@ -659,11 +681,12 @@ def run_selftest() -> bool:
         assert assertion.method == "toBe", f"应识别 toBe，实际 {assertion.method}"
         assert assertion.actual == "add(1,2)", f"实际值应为 add(1,2)，实际 {assertion.actual}"
         assert len(assertion.arguments) >= 1, "应至少有一个参数"
-        print(f"  ✓ 识别断言: {assertion.method}({assertion.arguments})")
+        print(f"  ✓ 识别断言: {assertion.method}({assertion.arguments}), 实际值: {assertion.actual}")
 
         assertion2 = parse_assertion("expect(x).toBeGreaterThan(5)")
         assert assertion2.method == "toBeGreaterThan", f"应识别 toBeGreaterThan，实际 {assertion2.method}"
-        print(f"  ✓ 识别断言: {assertion2.method}({assertion2.arguments})")
+        assert assertion2.actual == "x", f"实际值应为 x，实际 {assertion2.actual}"
+        print(f"  ✓ 识别断言: {assertion2.method}({assertion2.arguments}), 实际值: {assertion2.actual}")
     except AssertionError as e:
         print(f"  ✗ C2 断言失败: {e}")
         all_passed = False
