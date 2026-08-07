@@ -111,6 +111,17 @@ class AwesomeLlmAppProcessor:
         从解析后的输入中提取关键信息。
         依据规格：识别关键字段并结构化。
         """
+        # 首先检查是否为纯文本包装（来自 _parse_input 的文本处理分支）
+        if isinstance(parsed, dict) and "text" in parsed and "length" in parsed:
+            text = parsed["text"]
+            if not text:
+                return {"error": "E002"}
+            return {
+                "type": "text",
+                "length": parsed["length"],
+                "preview": text[:200],
+            }
+        
         if isinstance(parsed, dict):
             # 已结构化数据，直接提取
             result = {
@@ -132,16 +143,6 @@ class AwesomeLlmAppProcessor:
             if not parsed:
                 return {"error": "E002"}
             return result
-        elif isinstance(parsed, dict) and "text" in parsed:
-            # 纯文本
-            text = parsed["text"]
-            if not text:
-                return {"error": "E002"}
-            return {
-                "type": "text",
-                "length": parsed["length"],
-                "preview": text[:200],
-            }
         else:
             return {"error": "E003"}
 
