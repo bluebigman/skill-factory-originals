@@ -12,7 +12,7 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 林墨
+author: 林墨研
 agent_created: true
 trigger_words: ["数据可视化", "图表报告", "趋势分析", "占比统计", "TopN排行", "数据洞察", "报表生成"]
 ---
@@ -33,7 +33,7 @@ trigger_words: ["数据可视化", "图表报告", "趋势分析", "占比统计
 
 # 数据洞察 · 图表报告自动生成 Skill
 
-本 Skill 由 AI 辅助生成，仅供参考。它接收一份结构化的表格数据（如 CSV、JSON 数组、Markdown 表格），自动完成数据清洗、指标计算、图表类型推荐与生成、结论提炼，最终输出一份包含可视化图表与文字结论的分析报告。
+本 Skill 由 AI 辅助生成，仅供参考。使用前请确认输入数据来源合法且已获授权处理。
 
 
 ## 许可证（License）

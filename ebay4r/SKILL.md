@@ -4,7 +4,7 @@ slug: ebay4r
 name: ebay4r
 displayName: eBay接口 数据转换 SOAP调用
 description: 封装eBay SOAP API的Ruby工具，简化数据转换与调用流程。
-version: 1.0.2
+version: 1.0.3
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ebay4r
@@ -14,7 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 独立技能工坊
 agent_created: true
-trigger_words: ["ebay4r", "eBay接口", "SOAP API", "Ruby封装", "eBay数据转换", "eBay集成", "SOAP调用"]
+trigger_words: ["ebay4r", "eBay接口", "SOAP API", "Ruby封装", "eBay数据转换", "eBay调用", "SOAP请求"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,35 +31,9 @@ trigger_words: ["ebay4r", "eBay接口", "SOAP API", "Ruby封装", "eBay数据转
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# ebay4r — eBay SOAP API 的 Ruby 封装工具
+# eBay4R 技能文档
 
-## 一、能力边界（一页纸速查卡）
-
-### 1.1 能做什么
-
-| 能力项 | 说明 | 示例 |
-|--------|------|------|
-| SOAP 请求封装 | 将 eBay Trading API 的 SOAP 请求封装为 Ruby 方法调用 | `client.get_item(item_id)` |
-| 数据格式转换 | 自动处理 XML ↔ Ruby Hash ↔ JSON 的相互转换 | `response.to_json` |
-| 调用流程简化 | 隐藏认证、签名、请求头等底层细节 | 只需传入 API 凭据即可 |
-| 错误信息解析 | 将 SOAP Fault 转换为可读的 Ruby 异常 | `Ebay4r::ApiError` |
-| 命令行自检 | 提供 `--selftest` 验证安装与配置 | `ebay4r --selftest` |
-
-### 1.2 不能做什么（明确边界）
-
-| 限制项 | 说明 |
-|--------|------|
-| 不支持 REST API | 仅针对 SOAP 协议，eBay 的 REST 接口需另寻方案 |
-| 不包含业务逻辑 | 不提供商品上架、订单处理等业务层功能 |
-| 不负责数据合规 | 用户需自行确保调用频率、数据使用符合 eBay 政策 |
-| 不提供 GUI | 纯命令行与 Ruby 库，无图形界面 |
-| 不处理流式大文件 | 单次请求响应体建议不超过 10MB |
-
-### 1.3 适用对象
-
-- 使用 Ruby 语言开发 eBay 集成功能的工程师
-- 需要快速将 SOAP 请求转换为 Ruby 数据结构的开发者
-- 维护遗留 eBay SOAP 接口代码的团队
+本 Skill 由 AI 辅助生成，仅供参考。使用前请结合官方文档与自身场景进行验证。
 
 
 ## 许可证（License）
