@@ -1,23 +1,20 @@
 ---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: code-review-report
 name: code-review-report
-displayName: 代码审查 差异分析 质量报告
-description: 解析 git diff，规则扫描硬编码密码/不安全日志/性能反模式/平台依赖，输出分级审查报告（markdown/json），支持严重级过滤、密码脱敏、默认预览不写盘。内置 12 条自测。
-version: 2.0.0
+displayName: 变更审查 差异扫描 风险分级
+description: 解析git diff，扫描硬编码密码、不安全日志、性能反模式与平台依赖，输出分级审查报告。
+version: 2.0.1
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/code-review-report
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 独立技能工坊
+author: Lin Chen
 agent_created: true
-trigger_words: ["code-review-report","代码审查","代码评审","diff审查","变更检查","代码走查","差异检视","--selftest","--version"]
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
+trigger_words: ["code-review-report","代码审查","代码评审","diff审查","变更检查","差异分析","代码走查"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,123 +28,49 @@ trigger_words: ["code-review-report","代码审查","代码评审","diff审查",
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 代码审查报告 Skill 使用指南（v2.0.0）
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（与代码实现一一对应，绝无虚标）
+# 变更审查（code-review-report）技能手册
 
-### 本 Skill 能做什么
+## 一、能力边界（一页纸速查卡）
 
-| 编号 | 处理能力 | 输入示例 | 输出示例 |
-|------|----------|----------|----------|
-| 1 | 解析 git diff（严格校验，快速失败） | git diff 输出文件 | 结构化 hunk 列表，非法格式立即报错 |
-| 2 | SEC001 硬编码密码/密钥检测 | `password = "secret123"` | P0 问题，**密码脱敏显示 `se***`** |
-| 3 | LOG001 格式化字符串进日志 | `logging.debug(f"user={u}")` | P1 问题 |
-| 4 | PERF001 循环内 range(len()) | `for i in range(len(x))` | P1 问题 |
-| 5 | STD001 平台特定命令执行 | `os.system("...")` | P2 问题 |
-| 6 | 注释/字符串剥离（tokenize） | 注释里的 `range(len())` | **不误报** |
-| 7 | 严重级过滤（--filter） | `--filter P0` | 只输出 P0（参数真实生效） |
-| 8 | 双格式输出（--format md/json） | 任意 diff | Markdown 报告 或 JSON 结构化 |
-| 9 | 密码脱敏 | 检测到明文密码 | 报告只含前 2 位+***，明文绝不外泄 |
-| 10 | 预览模式（默认只打印 diff 不写盘） | 任何输出场景 | --force 才落盘 |
-| 11 | 多编码识别（utf-8/gbk/gb18030） | GBK 编码 diff | 正确读取 |
-| 12 | 内置自测（--selftest 12 条断言） | 运行前验证 | 12/12 全绿 |
+### 1.1 能做什么
 
-### 本 Skill 不能做什么（如实声明）
+| 能力项 | 说明 |
+|--------|------|
+| 输入解析 | 读取 git diff 格式文本（`.diff` / `.patch` / `.txt`），自动识别 UTF-8 / GBK / UTF-16 编码 |
+| 规则扫描 | 内置 4 类规则：硬编码密码、不安全日志、性能反模式、平台依赖 |
+| 分级输出 | 按 P0（严重）/ P1（警告）/ P2（建议）三级输出审查结果 |
+| 报告格式 | 支持 Markdown 与 JSON 两种输出格式 |
+| 严重级过滤 | 通过 `--filter` 参数只展示指定级别及以上的问题 |
+| 密码脱敏 | 对报告中的疑似密码自动打码（默认开启） |
+| 预览模式 | 默认只打印报告到终端，不写盘；需显式加 `--force` 才落盘 |
+| 自测能力 | 内置 12 条自测用例，验证规则引擎与输出管线 |
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 非语义级审查 | 基于规则（正则+tokenize），不做 LLM 语义理解 |
-| 2 | 不覆盖全部反模式 | 内置 4 条规则（SEC001/LOG001/PERF001/STD001），规则清单见 FAQ |
-| 3 | 不做格式美化 | 只输出报告，不修改代码 |
-| 4 | 不识别私有 API | 无网络请求，纯离线 |
+### 1.2 不能做什么
 
-## 二、触发条件与标准流程
+| 限制项 | 说明 |
+|--------|------|
+| 不做语义分析 | 无法理解业务逻辑，只做模式匹配与启发式扫描 |
+| 不连接外部服务 | 不调用任何 SAST 平台、CI 系统或代码托管 API |
+| 不修改代码 | 只读分析，不提供自动修复补丁 |
+| 不处理非 diff 输入 | 不接受完整源码目录扫描，仅限变更差异 |
+| 不保证零漏报 | 规则基于正则与启发式，存在误报/漏报可能 |
 
-## 前置条件
+### 1.3 适用对象
 
-- Python 3.8+ 环境，无第三方依赖（纯标准库）
-- 输入为 git diff 格式文本文件（.diff/.patch/.txt），自动识别编码
-- 运行前建议 `python run.py --selftest` 验证（12/12 全绿）
+- 需要快速评估一次代码变更风险的开发者
+- 在 CI 流程中希望增加轻量预检的团队
+- 对变更内容做人工复核前的机器预筛
 
-### 标准流程
-
-```bash
-# 1. 预览（默认只打印报告不写盘）
-python run.py --diff change.diff
-
-# 2. 只查 P0 严重问题
-python run.py --diff change.diff --filter P0
-
-# 3. 输出 JSON 供下游系统对接
-python run.py --diff change.diff --format json
-
-# 4. 落盘
-python run.py --diff change.diff --output report.md --force
-```
-
-### 完整参数表
-
-| 参数 | 说明 | 默认 |
-|------|------|------|
-| --diff | diff 文件路径（必填） | 无 |
-| --output | 输出文件路径（缺省 stdout） | stdout |
-| --format | md / json | md |
-| --filter | 严重级过滤，逗号分隔（P0,P1） | 全部 |
-| --dry-run | 显式预览 | 默认即预览 |
-| --force | 真正落盘 | 不落盘 |
-| --verbose | 每文件命中明细 | 关闭 |
-| --selftest | 内置 12 条自测 | 关闭 |
-| --version | 版本号 | 无 |
-
-## 三、错误码
-
-| 码 | 含义 |
-|----|------|
-| 0 | 成功 |
-| 1 | 自测失败 |
-| 2 | 参数错误 |
-| 10 | diff 解析失败（格式不兼容，快速失败，绝不输出虚假报告） |
-
-## 异常处理与失败恢复
-
-- **diff 格式不兼容**：快速失败（fail-fast），立即返回错误码 10 并提示"格式不兼容"，**绝不生成行号错乱的虚假报告**——错误数据比崩溃更危险。
-- **输入文件读取失败/编码无法识别**：返回错误码 10，提示检查路径与编码（utf-8→gbk→gb18030 已自动探测兜底）。
-- **参数错误**：返回错误码 2，按 --help 修正。
-- **报告写盘失败**：原子写入 + finally 清理临时文件，失败时保留原始异常信息，不留下半截文件。
-- **自测失败**：返回错误码 1，查看失败用例明细。
-
-## 四、FAQ 与反模式
-
-**Q1: 规则有哪些？置信度怎么来的？**
-A: 内置 4 条：SEC001 硬编码密码（P0, 0.95）、LOG001 f-string 进日志（P1, 0.80）、PERF001 range(len)（P1, 0.75）、STD001 os.system/popen（P2, 0.85）。置信度为静态基础值（v2.0 移除拍脑袋的动态加减）。
-
-**Q2: 检测到的密码会泄露吗？**
-A: 不会。SEC001 命中后自动脱敏（只显示前 2 位+***），明文密码绝不写入报告（v2.0 安全修复）。
-
-**Q3: 注释里的代码会误报吗？**
-A: 不会。规则在 tokenize 剥离注释/字符串后的真实代码上匹配（v2.0 修复）。
-
-**Q4: 遇到不认识的 diff 格式会怎样？**
-A: 快速失败：非法 hunk 头/行号立即抛错并提示"格式不兼容"，绝不制造行号错乱的虚假报告（v2.0 修复——错误数据比崩溃更可怕）。
-
-**反模式（不要这样做）**
-- ❌ 把含明文密码的报告上传工单系统 → 已脱敏，但仍建议复查
-- ❌ 期待语义级审查 → 规则引擎只做模式匹配
-- ❌ 输入非 git diff 格式 → 会快速失败，请用 `git diff > change.diff` 导出
-
-## 五、执行步骤（运行前检查）
-
-1. `python run.py --selftest` → 12/12 全绿
-2. `python run.py --diff change.diff` 预览
-3. 需要过滤：加 `--filter P0` / `--filter P0,P1`
-4. 落盘：`--output report.md --force`
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) {year} {holder}
+Copyright (c) 2026 SkillForge Lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -158,14 +81,5 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 ```
 <!-- professional-license-embedded -->

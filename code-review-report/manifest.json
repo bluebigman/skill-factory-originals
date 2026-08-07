@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260807_120022",
+  "slug": "code-review-report",
+  "spec": {
+    "slug": "code-review-report",
+    "name": "code-review-report",
+    "description": "解析 git diff，规则扫描硬编码密码/不安全日志/性能反模式/平台依赖，输出分级审查报告（markdown/json），支持严重级过滤、密码脱敏、默认预览不写盘。内置 12 条自测。",
+    "cli_interface": [],
+    "capability_outline": [
+      "- 输入为 git diff 格式文本文件（.diff/.patch/.txt），自动识别编码",
+      "1. `python run.py --selftest` → 12/12 全绿",
+      "2. `python run.py --diff change.diff` 预览",
+      "3. 需要过滤：加 `--filter P0` / `--filter P0,P1`",
+      "4. 落盘：`--output report.md --force`"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "d2fa181c7a73176b",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
