@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: ruby-git
 name: ruby-git
-displayName: Git仓库操作 Ruby 封装工具
-description: 基于 Ruby 的 Git 仓库创建、读取与操作封装库，提供命令行接口。
-version: 1.0.1
+displayName: Git仓库 命令行 版本控制
+description: 基于Ruby的Git仓库操作封装，提供命令行接口，简化日常版本控制任务。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ruby-git
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: 独立技能工坊
 agent_created: true
-trigger_words: ["ruby-git", "Ruby Git 操作", "Git 仓库管理", "Git 封装库", "Ruby 版本控制"]
+trigger_words: ["ruby-git", "Ruby Git 操作", "Git 仓库管理", "Git 封装库", "Ruby 版本控制", "Git 命令行工具", "仓库操作脚本"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,46 +31,39 @@ trigger_words: ["ruby-git", "Ruby Git 操作", "Git 仓库管理", "Git 封装�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# ruby-git 技能文档
+# ruby-git — 基于 Ruby 的 Git 仓库操作封装
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-### 1.1 核心能力清单
+### 1.1 能做
 
-| 能力编号 | 能力描述 | 适用场景 |
-|---------|---------|---------|
-| C1 | 创建 Git 仓库（本地初始化、克隆远程仓库） | 新项目初始化、从远程拉取代码 |
-| C2 | 读取仓库状态（日志、分支、文件变更） | 代码审查、状态监控 |
-| C3 | 操作仓库内容（提交、分支切换、合并） | 日常开发流程 |
-| C4 | 管理远程仓库（添加、移除、推送、拉取） | 团队协作、代码同步 |
-| C5 | 高级操作（标签管理、子模块、钩子脚本） | 发布管理、自动化流程 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 仓库初始化 | 在当前目录或指定路径创建新的 Git 仓库 | `ruby-git init ./myrepo` |
+| 状态查询 | 查看工作区、暂存区、HEAD 的当前状态 | `ruby-git status` |
+| 文件暂存 | 将指定文件或全部变更加入暂存区 | `ruby-git add app/models/user.rb` |
+| 提交创建 | 以指定消息创建新提交 | `ruby-git commit -m "修复登录逻辑"` |
+| 分支管理 | 列出、创建、切换、删除分支 | `ruby-git branch -c feature/login` |
+| 日志查看 | 展示提交历史，支持数量限制 | `ruby-git log --limit 10` |
+| 差异对比 | 比较工作区与暂存区、暂存区与 HEAD 的差异 | `ruby-git diff --staged` |
+| 远程操作 | 添加远程仓库、推送、拉取 | `ruby-git remote add origin https://...` |
+| 配置读取 | 读取仓库级或全局级配置项 | `ruby-git config user.name` |
 
-### 1.2 能力边界声明
+### 1.2 不能做
 
-**能做：**
-
-- 通过系统调用封装 Git 命令，提供 Ruby 风格的 API
-- 支持标准 Git 工作流（clone、add、commit、push、pull、branch、merge）
-- 提供仓库对象模型（Repository、Branch、Commit、Tag 等）
-- 支持批量操作和链式调用
-- 提供错误捕获和状态查询机制
-
-**不能做：**
-
-- 不替代 Git 本身的底层实现（仍是调用系统 Git 命令）
-- 不支持 Git 协议的自定义扩展
-- 不提供图形化界面
-- 不处理 Git LFS 等第三方扩展（需额外配置）
-- 不保证跨平台命令兼容性（依赖系统 Git 安装）
+| 限制项 | 说明 |
+|--------|------|
+| 不支持合并冲突的自动解决 | 冲突需要人工介入，工具仅标记冲突文件 |
+| 不支持子模块操作 | 当前版本不处理 `git submodule` 相关指令 |
+| 不支持 LFS 大文件存储 | 大文件需使用 Git LFS 原生命令 |
+| 不支持交互式 rebase | 仅支持非交互式的 `rebase` 调用 |
+| 不提供图形化界面 | 纯命令行工具，无 GUI 组件 |
 
 ### 1.3 适用对象
 
-| 用户类型 | 适用程度 | 说明 |
-|---------|---------|------|
-| Ruby 开发者 | ✅ 高度适用 | 需要 Ruby 环境（≥ 2.5） |
-| 运维工程师 | ✅ 适用 | 需要自动化 Git 操作 |
-| 非技术用户 | ⚠️ 部分适用 | 需了解基础 Git 概念 |
-| 移动端开发者 | ❌ 不适用 | 需要桌面/服务器环境 |
+- 需要在 Ruby 脚本中嵌入 Git 操作的开发者
+- 希望用统一命令行接口管理多个仓库的运维人员
+- 对 Git 命令不熟悉、需要简化操作的新手用户
 
 
 ## 许可证（License）
