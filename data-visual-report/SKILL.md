@@ -1,19 +1,20 @@
 ---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: data-visual-report
 name: data-visual-report
 displayName: 数据洞察 图表报告 自动生成
-description: 将表格数据自动转换为带图表与结论的可视化分析报告
-version: 1.0.0
+description: 将表格数据自动转为带图表与结论的可视化分析报告
+version: 1.0.1
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/data-visual-report
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DataCraft Studio
+author: 林墨研
 agent_created: true
-trigger_words: ["数据可视化", "图表报告", "趋势分析", "占比统计", "TopN排行", "可视化分析", "数据报告", "图表生成"]
+trigger_words: ["数据可视化", "图表报告", "趋势分析", "占比统计", "TopN排行", "数据洞察", "报表生成"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -38,30 +39,28 @@ trigger_words: ["数据可视化", "图表报告", "趋势分析", "占比统计
 
 | 能力项 | 说明 | 输入要求 |
 |--------|------|----------|
-| 表格数据读取 | 解析 CSV / Excel / JSON 格式的结构化数据 | 文件 ≤ 5MB，行数 ≤ 10,000 行 |
-| 图表自动生成 | 根据字段类型自动匹配折线图、柱状图、饼图 | 至少 1 列分类/时间字段 + 1 列数值字段 |
-| 趋势分析 | 识别时间序列的上升/下降/波动模式 | 时间字段格式需为日期或连续序号 |
-| 占比统计 | 计算分类字段的数值占比并生成饼图 | 分类字段去重后 ≤ 20 个类别 |
-| TopN 排行 | 提取数值字段的前 N 名（默认 Top 10） | 数值字段为可排序的数值类型 |
-| 结论生成 | 基于统计结果自动撰写分析结论 | 数据量 ≥ 3 行，否则仅做描述性说明 |
+| 趋势分析 | 识别时间序列数据的上升/下降/波动规律 | 至少 3 个时间点，数值型字段 |
+| 占比统计 | 计算各分类在总体中的份额 | 分类字段 + 数值字段 |
+| TopN 排行 | 按指定指标取前 N 名 | 任意维度字段 + 排序字段 |
+| 图表生成 | 自动匹配折线图/柱状图/饼图 | 结构化表格数据（CSV/JSON/Excel 粘贴） |
+| 结论提炼 | 基于数据特征输出自然语言洞察 | 数据量 ≥ 5 行，字段 ≥ 2 列 |
 
 ### 1.2 不能做什么
 
 | 限制项 | 说明 |
 |--------|------|
-| 非结构化数据 | 无法处理纯文本、图片、PDF 中的表格 |
-| 缺失值处理 | 不做插补，仅标注 [需核实:字段名] 并跳过该行 |
-| 因果推断 | 只做相关性描述，不推断因果关系 |
-| 实时数据 | 仅处理用户提供的静态文件，不连接数据库或 API |
-| 多表关联 | 仅支持单文件单表，不支持跨表 JOIN |
-| 自定义图表样式 | 输出固定模板样式，不提供个性化配色/布局定制 |
+| 非表格数据 | 不接受纯文本、图片、音频输入 |
+| 因果推断 | 只描述相关性，不推断业务因果 |
+| 预测未来 | 不输出超出数据范围的预测值 |
+| 数据清洗 | 不自动修正缺失值/异常值，仅标记 |
+| 多表关联 | 仅处理单张二维表，不做跨表 JOIN |
 
 ### 1.3 适用对象
 
-- 需要快速生成数据看板的业务分析师
-- 需要将数据结果汇报给非技术团队的项目经理
-- 需要为论文/报告补充图表的学术研究者
-- 需要验证数据分布规律的数据科学初学者
+- 需要快速产出周报/月报的运营人员
+- 需要数据佐证结论的产品经理
+- 需要将实验数据可视化的研究人员
+- 任何持有结构化表格但缺乏可视化技能的用户
 
 
 ## 许可证（License）
@@ -69,7 +68,7 @@ trigger_words: ["数据可视化", "图表报告", "趋势分析", "占比统计
 ```text
 MIT License
 
-Copyright (c) {year} {holder}
+Copyright (c) 2026 SkillForge Lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -80,30 +79,5 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 ```
 <!-- professional-license-embedded -->
-
-## 失败处理
-
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
-
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
-## 执行步骤
-
-1. 读取输入参数或交互输入。
-2. 按技能定义的处理流程执行核心逻辑。
-3. 输出结构化结果，并在完成后给出下一步建议。
