@@ -10,7 +10,7 @@ import argparse, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TRIGGERS = ["markaby", ""]
+TRIGGERS = ["markaby"]
 
 
 def load_spec() -> str:
