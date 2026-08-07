@@ -28,17 +28,17 @@ ERROR_CODES = {
     "E010": "未知错误",
 }
 
-# 内置 LaTeX 模板（不开放修改）
-LATEX_TEMPLATE = r"""\documentclass[11pt]{{article}}
-\usepackage[utf8]{{inputenc}}
-\usepackage[T1]{{fontenc}}
-\usepackage{{geometry}}
-\geometry{{a4paper, margin=2.5cm}}
-\usepackage{{listings}}
-\usepackage{{xcolor}}
-\usepackage{{booktabs}}
-\usepackage{{longtable}}
-\usepackage{{hyperref}}
+# 内置 LaTeX 模板
+LATEX_TEMPLATE = r"""\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\geometry{a4paper, margin=2.5cm}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{hyperref}
 \hypersetup{{
     colorlinks=true,
     linkcolor=blue,
