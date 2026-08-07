@@ -158,8 +158,9 @@ class StyleResult:
 # 颜色名称映射（内置小字典）
 # ---------------------------------------------------------------------------
 
-# 常见颜色名称 -> HEX 值
+# 常见颜色名称 -> HEX 值（包含中英文）
 COLOR_NAMES: Dict[str, str] = {
+    # 英文
     "red": "#FF0000",
     "crimson": "#DC143C",
     "orange": "#FFA500",
@@ -180,21 +181,61 @@ COLOR_NAMES: Dict[str, str] = {
     "gray": "#808080",
     "grey": "#808080",
     "silver": "#C0C0C0",
+    # 中文
+    "红色": "#FF0000",
+    "深红": "#DC143C",
+    "橙色": "#FFA500",
+    "金色": "#FFD700",
+    "黄色": "#FFFF00",
+    "绿色": "#008000",
+    "青柠": "#00FF00",
+    "青色": "#008080",
+    "蓝绿": "#00FFFF",
+    "蓝色": "#0000FF",
+    "深蓝": "#000080",
+    "紫色": "#800080",
+    "洋红": "#FF00FF",
+    "粉色": "#FFC0CB",
+    "棕色": "#A52A2A",
+    "黑色": "#000000",
+    "白色": "#FFFFFF",
+    "灰色": "#808080",
+    "银色": "#C0C0C0",
 }
 
-# 反向映射：HEX -> 名称
-HEX_TO_NAME: Dict[str, str] = {v.lower(): k for k, v in COLOR_NAMES.items()}
+# 反向映射：HEX -> 名称（优先使用中文）
+HEX_TO_NAME: Dict[str, str] = {
+    "#ff0000": "红色",
+    "#dc143c": "深红",
+    "#ffa500": "橙色",
+    "#ffd700": "金色",
+    "#ffff00": "黄色",
+    "#008000": "绿色",
+    "#00ff00": "青柠",
+    "#008080": "青色",
+    "#00ffff": "蓝绿",
+    "#0000ff": "蓝色",
+    "#000080": "深蓝",
+    "#800080": "紫色",
+    "#ff00ff": "洋红",
+    "#ffc0cb": "粉色",
+    "#a52a2a": "棕色",
+    "#000000": "黑色",
+    "#ffffff": "白色",
+    "#808080": "灰色",
+    "#c0c0c0": "银色",
+}
 
-# 风格标签关键词
+# 风格标签关键词（包含中英文）
 STYLE_KEYWORDS: Dict[str, List[str]] = {
-    "简约": ["minimal", "简约", "简单", "clean"],
-    "复古": ["vintage", "复古", "retro"],
-    "科技": ["tech", "科技", "digital", "future"],
-    "自然": ["nature", "自然", "organic", "green"],
-    "奢华": ["luxury", "奢华", "gold", "elegant"],
-    "活泼": ["vibrant", "活泼", "bright", "colorful"],
-    "暗黑": ["dark", "暗黑", "black"],
-    "柔和": ["soft", "柔和", "pastel"],
+    "简约": ["minimal", "简约", "简单", "clean", "简洁"],
+    "复古": ["vintage", "复古", "retro", "怀旧"],
+    "科技": ["tech", "科技", "digital", "future", "未来"],
+    "自然": ["nature", "自然", "organic", "green", "生态"],
+    "奢华": ["luxury", "奢华", "gold", "elegant", "优雅"],
+    "活泼": ["vibrant", "活泼", "bright", "colorful", "鲜艳"],
+    "暗黑": ["dark", "暗黑", "black", "深沉"],
+    "柔和": ["soft", "柔和", "pastel", "温柔"],
 }
 
 
@@ -257,7 +298,7 @@ def extract_from_text(text: str) -> StyleResult:
     从文本描述中提取视觉风格信息。
 
     支持：
-      - 颜色名称（如 "red"、"深蓝"）
+      - 颜色名称（中英文，如 "红色"、"red"、"深蓝"）
       - HEX 值（如 #FF0000）
       - 风格关键词（如 "简约"、"科技"）
     """
@@ -278,7 +319,7 @@ def extract_from_text(text: str) -> StyleResult:
         color.confidence = 95.0
         result.add_color(color)
 
-    # 2. 提取颜色名称
+    # 2. 提取颜色名称（中英文）
     for name, hex_code in COLOR_NAMES.items():
         if name in text_lower:
             # 避免重复添加（如果该颜色已通过 HEX 添加）
@@ -485,11 +526,11 @@ def run_selftest() -> int:
     print("开始自检...")
     print("=" * 60)
 
-    # 测试用例 1: 文本输入（含颜色名称）
+    # 测试用例 1: 文本输入（含中英文颜色名称）
     print("\n[测试 1] 文本输入含颜色名称")
     try:
         result = extract_from_text("一个简约风格的红色和蓝色配色方案")
-        assert len(result.colors) >= 2, "应至少提取到 2 个颜色"
+        assert len(result.colors) >= 2, f"应至少提取到 2 个颜色, 实际 {len(result.colors)}"
         assert result.overall_confidence > 50, "置信度应大于 50"
         assert len(result.style_tags) >= 1, "应至少识别 1 个风格标签"
         print(f"  ✓ 通过 (颜色数: {len(result.colors)}, 置信度: {result.overall_confidence:.1f}%)")
@@ -501,7 +542,7 @@ def run_selftest() -> int:
     print("\n[测试 2] 文本输入含 HEX 值")
     try:
         result = extract_from_text("主色 #FF0000，辅助色 #00FF00")
-        assert len(result.colors) >= 2, "应提取到 2 个 HEX 颜色"
+        assert len(result.colors) >= 2, f"应提取到 2 个 HEX 颜色, 实际 {len(result.colors)}"
         assert any(c.hex_code == "#FF0000" for c in result.colors), "应包含 #FF0000"
         print(f"  ✓ 通过 (颜色数: {len(result.colors)})")
     except Exception as e:
