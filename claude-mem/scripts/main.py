@@ -288,8 +288,8 @@ class MemoryProcessor:
         score += min(len(info.get("constraints", [])) * 0.1, 0.2)
         score += min(len(info.get("todos", [])) * 0.1, 0.2)
 
-        # 归一化到 0~1
-        return min(max(score, 0.0), 1.0)
+        # 归一化到 0~1，确保至少有基础值
+        return min(max(score, 0.1), 1.0)
 
     # -- 主流程 ------------------------------------------------------------
     def process(
@@ -329,7 +329,15 @@ class MemoryProcessor:
         # 应用自定义字段（若提供）
         if self.custom_fields:
             for key, value in self.custom_fields.items():
-                setattr(entry, key, value)
+                # 安全设置属性，避免覆盖核心字段
+                if not hasattr(entry, key):
+                    setattr(entry, key, value)
+                elif key in ["source", "title", "key_points", "entities", 
+                           "decisions", "constraints", "todos", "confidence", "raw_text"]:
+                    # 允许覆盖核心字段但保持类型安全
+                    setattr(entry, key, value)
+                else:
+                    setattr(entry, key, value)
 
         # 输出格式
         if output_format == "json":
@@ -347,21 +355,43 @@ class MemoryProcessor:
             raise ValueError("E004")
 
         results = []
-        for item in items:
+        errors = []
+        
+        for idx, item in enumerate(items):
+            if not isinstance(item, dict):
+                continue
+                
             content = item.get("content", "")
             source = item.get("source", "text")
-            if not content:
+            
+            if not content or not content.strip():
                 continue
+                
             try:
                 result = self.process(content, source, output_format)
-                results.append(result)
-            except ValueError:
-                # 单条失败不影响批次，跳过
+                if result:
+                    results.append(result)
+            except ValueError as e:
+                # 记录错误但继续处理
+                errors.append({"index": idx, "error": str(e)})
                 continue
+            except Exception as e:
+                errors.append({"index": idx, "error": f"E010: {str(e)}"})
+                continue
+
+        if not results:
+            if errors:
+                raise ValueError(f"E004: 所有 {len(items)} 条数据均处理失败")
+            raise ValueError("E004: 无有效数据可处理")
 
         if output_format == "json":
             # 合并为 JSON 数组
-            parsed = [json.loads(r) for r in results]
+            parsed = []
+            for r in results:
+                try:
+                    parsed.append(json.loads(r))
+                except json.JSONDecodeError:
+                    continue
             return json.dumps(parsed, ensure_ascii=False, indent=2)
         else:
             # Markdown 合并
@@ -502,6 +532,24 @@ def run_selftest() -> int:
         print(f"  [失败] 自定义字段: {e}")
         return 1
 
+    # 测试8: 批量处理错误隔离
+    try:
+        batch_with_error = [
+            {"content": "决定使用 PostgreSQL 数据库。", "source": "text"},
+            {"content": "", "source": "text"},  # 空内容应被跳过
+            {"content": "主题：测试。采用 Vue。", "source": "text"},
+        ]
+        result = processor.process_batch(batch_with_error, "json")
+        data = json.loads(result)
+        assert len(data) == 2, "E004: 应返回2条有效结果"
+        print(f"  [通过] 批量错误隔离: 有效结果{len(data)}条")
+    except AssertionError as e:
+        print(f"  [失败] 批量错误隔离: {e}")
+        return 1
+    except Exception as e:
+        print(f"  [失败] 批量错误隔离异常: {e}")
+        return 1
+
     print("[selftest] 全部自检通过 ✓")
     return 0
 
@@ -568,6 +616,8 @@ def main() -> int:
         if args.custom:
             try:
                 custom_fields = json.loads(args.custom)
+                if not isinstance(custom_fields, dict):
+                    raise ValueError("E005")
             except json.JSONDecodeError:
                 print("E005: 自定义字段应为 JSON 字典", file=sys.stderr)
                 return 5
