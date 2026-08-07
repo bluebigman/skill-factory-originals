@@ -102,23 +102,34 @@ class InvoiceRecognizer:
             r'date[:：]?\s*(\d{4}[-/]\d{1,2}[-/]\d{1,2})',
         ],
         "seller_name": [
-            r'销售方[名称]?[:：]?\s*([^\n\r]+)',
+            r'销售方信息[:：]?\s*名称[:：]?\s*([^\n\r]+)',
+            r'销售方名称[:：]?\s*([^\n\r]+)',
+            r'销售方[:：]?\s*名称[:：]?\s*([^\n\r]+)',
+            r'seller\s*name[:：]?\s*([^\n\r]+)',
             r'seller[:：]?\s*([^\n\r]+)',
         ],
         "seller_tax_id": [
-            r'销售方[税号]?[:：]?\s*([0-9A-Z]{15,20})',
+            r'销售方信息[:：]?\s*税号[:：]?\s*([0-9A-Z]{15,20})',
+            r'销售方税号[:：]?\s*([0-9A-Z]{15,20})',
+            r'销售方[:：]?\s*税号[:：]?\s*([0-9A-Z]{15,20})',
             r'seller\s*tax\s*id[:：]?\s*([0-9A-Z]{15,20})',
         ],
         "buyer_name": [
-            r'购买方[名称]?[:：]?\s*([^\n\r]+)',
+            r'购买方信息[:：]?\s*名称[:：]?\s*([^\n\r]+)',
+            r'购买方名称[:：]?\s*([^\n\r]+)',
+            r'购买方[:：]?\s*名称[:：]?\s*([^\n\r]+)',
+            r'buyer\s*name[:：]?\s*([^\n\r]+)',
             r'buyer[:：]?\s*([^\n\r]+)',
         ],
         "buyer_tax_id": [
-            r'购买方[税号]?[:：]?\s*([0-9A-Z]{15,20})',
+            r'购买方信息[:：]?\s*税号[:：]?\s*([0-9A-Z]{15,20})',
+            r'购买方税号[:：]?\s*([0-9A-Z]{15,20})',
+            r'购买方[:：]?\s*税号[:：]?\s*([0-9A-Z]{15,20})',
             r'buyer\s*tax\s*id[:：]?\s*([0-9A-Z]{15,20})',
         ],
         "total_amount": [
             r'价税合计[（(小写）)]?[:：]?\s*[¥￥]?\s*([0-9]+\.?[0-9]*)',
+            r'total\s*amount[:：]?\s*[¥￥]?\s*([0-9]+\.?[0-9]*)',
             r'total[:：]?\s*[¥￥]?\s*([0-9]+\.?[0-9]*)',
         ],
         "tax_amount": [
@@ -386,7 +397,7 @@ class SelfTest:
         assert result1.invoice_code == "144032100110", "发票代码识别失败"
         assert result1.invoice_number == "12345678", "发票号码识别失败"
         assert "2024" in result1.invoice_date, "开票日期识别失败"
-        assert "上海贸易" in result1.seller_name, "销售方识别失败"
+        assert "上海贸易" in result1.seller_name, f"销售方识别失败: {result1.seller_name}"
         assert result1.total_amount > 10000, "金额识别失败"
         assert result1.confidence > 50, "置信度过低"
         print(f"  ✓ 通过 (置信度: {result1.confidence:.1f}%)")
@@ -396,7 +407,7 @@ class SelfTest:
         result2 = recognizer.recognize(cls.SAMPLE_INVOICE2)
         assert result2.invoice_code == "144032100112", "发票代码识别失败"
         assert result2.invoice_number == "87654321", "发票号码识别失败"
-        assert "广州制造" in result2.seller_name, "销售方识别失败"
+        assert "广州制造" in result2.seller_name, f"销售方识别失败: {result2.seller_name}"
         assert result2.total_amount > 4000, "金额识别失败"
         assert result2.tax_amount > 200, "税额识别失败"
         print(f"  ✓ 通过 (置信度: {result2.confidence:.1f}%)")
