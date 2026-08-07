@@ -73,5 +73,5 @@ class MarkdownParser:
     """轻量级 Markdown 解析器（仅支持核心语法）"""
 
     # 块级元素正则
-    _HEADING_RE = re.compile(r"^(#{1,6})\s+(.+)$")
-    _CODE_BLOCK_RE = re.compile(r"^
+    _HEADING_RE = re.compile(r'^(#{1,6})\s+(.+)$')
+    _CODE_BLOCK_RE = re.compile(r'^
