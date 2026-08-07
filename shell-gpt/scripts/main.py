@@ -53,7 +53,7 @@ class CommandParser:
                 "template": "ls {flags} {path}",
                 "default": {"flags": "-la", "path": "."},
                 "params": {
-                    "path": r"(?:目录|路径)?\s*([^\s]+)",
+                    "path": r"(?:目录|路径)?\s*([\/\.\w\-]+)",
                     "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
                 }
             },
@@ -68,7 +68,7 @@ class CommandParser:
                 "template": "mkdir {flags} {path}",
                 "default": {"flags": "-p", "path": "new_dir"},
                 "params": {
-                    "path": r"(?:目录|路径)?\s*([^\s]+)",
+                    "path": r"(?:目录|路径)?\s*([\/\.\w\-]+)",
                     "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
                 }
             },
@@ -77,7 +77,7 @@ class CommandParser:
                 "template": "rm {flags} {path}",
                 "default": {"flags": "-f", "path": "file"},
                 "params": {
-                    "path": r"(?:文件|路径)?\s*([^\s]+)",
+                    "path": r"(?:文件|路径)?\s*([\/\.\w\-]+)",
                     "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
                 }
             },
@@ -86,8 +86,8 @@ class CommandParser:
                 "template": "cp {flags} {source} {dest}",
                 "default": {"flags": "-r", "source": "source", "dest": "dest"},
                 "params": {
-                    "source": r"(?:源|来源)?\s*([^\s]+)",
-                    "dest": r"(?:目标|目的)?\s*([^\s]+)",
+                    "source": r"(?:源|来源)?\s*([\/\.\w\-]+)",
+                    "dest": r"(?:目标|目的)?\s*([\/\.\w\-]+)",
                     "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
                 }
             },
@@ -96,8 +96,8 @@ class CommandParser:
                 "template": "mv {flags} {source} {dest}",
                 "default": {"flags": "", "source": "source", "dest": "dest"},
                 "params": {
-                    "source": r"(?:源|来源)?\s*([^\s]+)",
-                    "dest": r"(?:目标|目的)?\s*([^\s]+)",
+                    "source": r"(?:源|来源)?\s*([\/\.\w\-]+)",
+                    "dest": r"(?:目标|目的)?\s*([\/\.\w\-]+)",
                     "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
                 }
             },
@@ -106,8 +106,8 @@ class CommandParser:
                 "template": "grep {flags} {pattern} {path}",
                 "default": {"flags": "-rn", "pattern": "pattern", "path": "."},
                 "params": {
-                    "pattern": r"(?:模式|关键词)?\s*([^\s]+)",
-                    "path": r"(?:目录|路径)?\s*([^\s]+)",
+                    "pattern": r"(?:模式|关键词)?\s*([\/\.\w\-]+)",
+                    "path": r"(?:目录|路径)?\s*([\/\.\w\-]+)",
                     "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
                 }
             },
@@ -116,7 +116,7 @@ class CommandParser:
                 "template": "cat {path}",
                 "default": {"path": "file"},
                 "params": {
-                    "path": r"(?:文件|路径)?\s*([^\s]+)"
+                    "path": r"(?:文件|路径)?\s*([\/\.\w\-]+)"
                 }
             },
             {
@@ -132,7 +132,7 @@ class CommandParser:
                 "template": "df {flags} {path}",
                 "default": {"flags": "-h", "path": "."},
                 "params": {
-                    "path": r"(?:目录|路径)?\s*([^\s]+)",
+                    "path": r"(?:目录|路径)?\s*([\/\.\w\-]+)",
                     "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
                 }
             },
@@ -191,6 +191,9 @@ class CommandParser:
                 # 模板中缺少参数，使用默认值补全
                 for key, value in pattern["default"].items():
                     command = command.replace("{" + key + "}", str(value))
+
+            # 清理多余的空格
+            command = re.sub(r'\s+', ' ', command).strip()
 
             return {
                 "action": pattern["keywords"][0],
@@ -336,7 +339,7 @@ def run_selftest():
 
     # --- 测试1：解析基础指令 ---
     test_cases = [
-        ("列出当前目录文件", "ls"),
+        ("列出当前目录文件", "ls -la ."),
         ("查看当前路径", "pwd"),
         ("创建目录 test_dir", "mkdir"),
         ("删除文件 temp.txt", "rm"),
@@ -349,10 +352,10 @@ def run_selftest():
         ("帮助", "help"),
     ]
 
-    for text, expected_prefix in test_cases:
+    for text, expected_cmd in test_cases:
         result = parser.parse(text)
         assert "error" not in result, f"解析失败: {text} -> {result}"
-        assert result["command"].startswith(expected_prefix), \
+        assert result["command"].startswith(expected_cmd.split()[0]), \
             f"命令前缀不匹配: {text} -> {result['command']}"
         print(f"  ✓ 解析测试通过: {text} -> {result['command']}")
 
@@ -396,6 +399,12 @@ def run_selftest():
     assert "error" not in param_result, "带参数解析失败"
     assert "/tmp/mydir" in param_result["command"], "路径参数提取失败"
     print(f"  ✓ 参数提取测试通过: {param_result['command']}")
+
+    # --- 测试6：ls 命令实际执行 ---
+    ls_result = executor.execute("ls -la .")
+    assert "error" not in ls_result, f"ls 执行失败: {ls_result}"
+    assert ls_result["success"] is True, "ls 应成功执行"
+    print("  ✓ ls 命令执行测试通过")
 
     print("\n全部自检通过！")
     return ERR_SUCCESS

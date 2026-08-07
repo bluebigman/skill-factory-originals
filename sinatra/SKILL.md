@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: sinatra
 name: sinatra
-displayName: Web开发 DSL 路由构建器
+displayName: Web路由设计 Sinatra调试助手
 description: 基于Sinatra DSL的轻量Web应用路由设计与调试辅助工具。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/sinatra
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge
+author: RouteCraft Studio
 agent_created: true
-trigger_words: ["sinatra", "ruby web", "dsl", "路由设计", "轻量web框架", "rack应用"]
+trigger_words: ["sinatra", "ruby web", "dsl", "路由设计", "轻量web框架", "ruby路由", "web应用调试"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,29 +31,9 @@ trigger_words: ["sinatra", "ruby web", "dsl", "路由设计", "轻量web框架",
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# Sinatra DSL 路由设计助手
+# Sinatra 路由设计调试 Skill
 
-## 一、能力边界速查卡
-
-### 能做什么
-| 编号 | 能力项 | 说明 | 适用场景 |
-|------|--------|------|----------|
-| 1 | 路由结构解析 | 从用户提供的代码片段/描述中提取路由定义 | 审查现有路由、梳理接口清单 |
-| 2 | 路由冲突检测 | 识别相同HTTP方法与路径的重复定义 | 排查路由覆盖导致的bug |
-| 3 | 参数占位符提取 | 识别 `:param` 与 `*glob` 模式 | 设计RESTful接口时确认参数命名 |
-| 4 | 过滤器与辅助方法梳理 | 提取 `before`/`after` 过滤器及 `helpers` 块 | 理解请求生命周期中的横切逻辑 |
-| 5 | 配置项核对 | 检查 `set` 指令与环境变量使用 | 部署前确认运行环境配置 |
-
-### 不能做什么
-- 不能执行或运行 Ruby/Sinatra 代码
-- 不能替代测试框架进行行为验证
-- 不能自动修复路由冲突，仅提供修改建议
-- 不处理非 Sinatra 框架（如 Rails、Roda）的路由语法
-
-### 适用对象
-- 正在阅读或维护 Sinatra 项目的开发者
-- 需要快速梳理既有路由结构的代码审查者
-- 学习 Sinatra DSL 语法的新手
+本 Skill 由 AI 辅助生成，仅供参考。使用前请结合官方文档与项目实际场景进行验证。
 
 
 ## 许可证（License）
