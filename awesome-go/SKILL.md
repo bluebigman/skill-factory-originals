@@ -1,23 +1,21 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: awesome-go
 name: awesome-go
-displayName: 未命名工具
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行awesome go相关操作时使用本技能，提供规范、可复用的处理流程与输出。
-version: 1.0.0
-author: skill-factory-auto
+displayName: Go资源导航 学习参考 项目速查
+description: 面向Go开发者的学习资源导航与项目速查工具，提供结构化信息整理与输出。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/awesome-go
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: skillcraft-studio
 agent_created: true
-trigger_words:
-  - "awesome go"
+trigger_words: ["awesome go", "go资源", "go项目列表", "go学习资料", "go awesome"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -26,95 +24,59 @@ trigger_words:
 <!-- user-agreement-injected -->
 
 
-# 未命名工具
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-> A curated list of awesome Go frameworks, libraries and software
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（一页纸速查卡）
+# awesome-go 技能文档
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+## 一、能力边界速查卡
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+### 1.1 能做（核心能力清单）
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+| 编号 | 能力项 | 说明 | 适用场景示例 |
+|------|--------|------|--------------|
+| C1 | 数据/文件/URL 结构化转换 | 将用户提供的任意格式输入（文本、文件路径、网页链接）解析为统一的结构化数据 | 用户粘贴一段 Go 项目描述，要求整理成条目 |
+| C2 | 关键信息识别与保留 | 从输入中提取项目名称、分类、描述、星标数、维护状态等核心字段 | 用户给出一堆 GitHub 链接，需要提取项目名和简介 |
+| C3 | 约定格式输出 | 按 Markdown 表格、JSON、或纯文本列表等指定格式生成结果 | 用户要求"输出成表格"或"输出成 JSON" |
+| C4 | 置信度标注 | 对无法完全确定的信息标注置信度等级，不隐瞒不确定性 | 项目维护状态无法确认时标注"待核实" |
+| C5 | 批量处理与自定义格式 | 支持一次处理多条记录，并允许用户自定义输出字段和排序规则 | 用户要求"按星标数降序，只要前 20 条" |
 
-## 二、触发方式（说大白话就能用）
+### 1.2 不能做（明确边界）
 
-**触发词表（6类场景）：**
-| awesome go | 通用场景 |
+| 编号 | 限制项 | 说明 |
+|------|--------|------|
+| L1 | 不实时抓取网络数据 | 本技能不主动访问互联网获取最新数据，仅处理用户提供的内容 |
+| L2 | 不评估代码质量 | 不判断某个 Go 库的代码好坏、性能优劣，仅做信息整理 |
+| L3 | 不推荐具体选型 | 不给出"你应该用 X 库"的结论性建议，只呈现事实信息 |
+| L4 | 不生成代码 | 不编写 Go 代码、不提供代码示例 |
+| L5 | 不保证信息时效性 | 输入数据可能过时，输出结果仅反映输入内容本身 |
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 未命名工具，进入标准流程 |
-| 把这个转成另一种格式 | 启动 未命名工具，进入标准流程 |
-| 批量弄一下这些 | 启动 未命名工具，进入标准流程 |
+### 1.3 适用对象
 
-## 三、标准流程（5分钟上手路径）
+- **Go 初学者**：需要一份结构化的学习资源清单
+- **Go 进阶开发者**：需要按类别检索特定领域的开源项目
+- **技术调研人员**：需要快速整理 Go 生态中的项目信息
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2026 SkillForge Lab
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
