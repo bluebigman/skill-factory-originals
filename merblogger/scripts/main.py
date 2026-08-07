@@ -122,15 +122,22 @@ def extract_title(content: str) -> str:
 
 def extract_author(content: str) -> str:
     """尝试从内容中提取作者信息。"""
-    # 匹配 "作者: xxx" 或 "author: xxx" 模式
+    # 匹配 "作者：xxx" 或 "作者: xxx" 或 "author: xxx" 模式
     patterns = [
-        r"(?:作者|作者：|author[：:])\s*([^\n]+)",
-        r"(?:by|By|BY)[：:]\s*([^\n]+)",
+        r"作者[：:]\s*([^\n]+)",  # 中文冒号或英文冒号
+        r"author[：:]\s*([^\n]+)",  # 英文
+        r"^作者\s+([^\n]+)",  # 作者 张三（空格分隔）
+        r"^author\s+([^\n]+)",  # author John Doe
+        r"(?:by|By|BY)[：:]\s*([^\n]+)",  # by: xxx
     ]
     for pattern in patterns:
-        match = re.search(pattern, content, re.IGNORECASE)
+        match = re.search(pattern, content, re.IGNORECASE | re.MULTILINE)
         if match:
-            return match.group(1).strip()
+            author = match.group(1).strip()
+            # 清理可能的标点符号
+            author = author.strip('，。；、,.;:')
+            if author:
+                return author
     return ""
 
 
@@ -161,29 +168,40 @@ def extract_date(content: str) -> str:
 def extract_category(content: str) -> str:
     """尝试提取分类信息。"""
     patterns = [
-        r"(?:分类|分类：|category[：:])\s*([^\n]+)",
+        r"分类[：:]\s*([^\n]+)",
+        r"category[：:]\s*([^\n]+)",
+        r"^分类\s+([^\n]+)",
+        r"^category\s+([^\n]+)",
         r"(?:标签组|专栏)[：:]\s*([^\n]+)",
     ]
     for pattern in patterns:
-        match = re.search(pattern, content, re.IGNORECASE)
+        match = re.search(pattern, content, re.IGNORECASE | re.MULTILINE)
         if match:
-            return match.group(1).strip()
+            category = match.group(1).strip()
+            category = category.strip('，。；、,.;:')
+            if category:
+                return category
     return ""
 
 
 def extract_tags(content: str) -> List[str]:
     """尝试提取标签列表。"""
     patterns = [
-        r"(?:标签|标签：|tags?[：:])\s*([^\n]+)",
+        r"标签[：:]\s*([^\n]+)",
+        r"tags?[：:]\s*([^\n]+)",
+        r"^标签\s+([^\n]+)",
+        r"^tags?\s+([^\n]+)",
         r"(?:关键词|关键字)[：:]\s*([^\n]+)",
     ]
     for pattern in patterns:
-        match = re.search(pattern, content, re.IGNORECASE)
+        match = re.search(pattern, content, re.IGNORECASE | re.MULTILINE)
         if match:
             raw = match.group(1)
             # 支持逗号、顿号、空格分隔
             tags = re.split(r"[,，、\s]+", raw)
-            return [t.strip() for t in tags if t.strip()]
+            result = [t.strip() for t in tags if t.strip()]
+            if result:
+                return result
     return []
 
 
@@ -318,11 +336,20 @@ def format_json(article: BlogArticle) -> str:
 
 def format_html(article: BlogArticle) -> str:
     """输出为 HTML 片段。"""
+    # HTML 转义
+    def escape_html(text: str) -> str:
+        return (
+            text.replace("&", "&amp;")
+            .replace("<", "&lt;")
+            .replace(">", "&gt;")
+            .replace('"', "&quot;")
+        )
+
     tags_html = ""
     if article.tags:
         tags_html = (
             '<div class="tags">'
-            + " ".join(f'<span class="tag">{t}</span>' for t in article.tags)
+            + " ".join(f'<span class="tag">{escape_html(t)}</span>' for t in article.tags)
             + "</div>"
         )
 
@@ -330,19 +357,19 @@ def format_html(article: BlogArticle) -> str:
     if article.author or article.date or article.category:
         parts = []
         if article.author:
-            parts.append(f'<span class="author">{article.author}</span>')
+            parts.append(f'<span class="author">{escape_html(article.author)}</span>')
         if article.date:
-            parts.append(f'<span class="date">{article.date}</span>')
+            parts.append(f'<span class="date">{escape_html(article.date)}</span>')
         if article.category:
-            parts.append(f'<span class="category">{article.category}</span>')
+            parts.append(f'<span class="category">{escape_html(article.category)}</span>')
         meta_html = f'<div class="meta">{" | ".join(parts)}</div>'
 
     content_html = "\n".join(
-        f"<p>{line}</p>" for line in article.content.splitlines() if line.strip()
+        f"<p>{escape_html(line)}</p>" for line in article.content.splitlines() if line.strip()
     )
 
     return f"""<article>
-  <h1>{article.title}</h1>
+  <h1>{escape_html(article.title)}</h1>
   {meta_html}
   {tags_html}
   <div class="content">
@@ -410,28 +437,28 @@ def run_selftest() -> int:
 
         # 测试 1: 基本解析
         article = parse_article(data["sample_article"])
-        assert article.title == "我的第一篇博客", "标题提取失败"
-        assert article.author == "张三", "作者提取失败"
-        assert article.date == "2026-01-15", "日期提取失败"
-        assert article.category == "技术", "分类提取失败"
-        assert len(article.tags) >= 3, "标签提取失败"
-        assert article.confidence == "high", "置信度应为 high"
+        assert article.title == "我的第一篇博客", f"标题提取失败: '{article.title}'"
+        assert article.author == "张三", f"作者提取失败: '{article.author}'"
+        assert article.date == "2026-01-15", f"日期提取失败: '{article.date}'"
+        assert article.category == "技术", f"分类提取失败: '{article.category}'"
+        assert len(article.tags) >= 3, f"标签提取失败: {article.tags}"
+        assert article.confidence == "high", f"置信度应为 high，实际为 {article.confidence}"
         print("[PASS] 基本解析测试")
 
         # 测试 2: 无元信息文章
         article2 = parse_article(data["sample_article_no_meta"])
-        assert article2.title == "无元信息文章", "标题提取失败"
-        assert article2.confidence == "low", "置信度应为 low"
-        assert article2.author == "", "作者应为空"
-        assert article2.date == "", "日期应为空"
+        assert article2.title == "无元信息文章", f"标题提取失败: '{article2.title}'"
+        assert article2.confidence == "low", f"置信度应为 low，实际为 {article2.confidence}"
+        assert article2.author == "", f"作者应为空，实际为 '{article2.author}'"
+        assert article2.date == "", f"日期应为空，实际为 '{article2.date}'"
         print("[PASS] 无元信息解析测试")
 
         # 测试 3: 英文文章
         article3 = parse_article(data["sample_article_english"])
-        assert article3.title == "My First Post", "英文标题提取失败"
-        assert article3.author == "John Doe", "英文作者提取失败"
-        assert article3.date == "2026-02-20", "英文日期提取失败"
-        assert len(article3.tags) >= 2, "英文标签提取失败"
+        assert article3.title == "My First Post", f"英文标题提取失败: '{article3.title}'"
+        assert article3.author == "John Doe", f"英文作者提取失败: '{article3.author}'"
+        assert article3.date == "2026-02-20", f"英文日期提取失败: '{article3.date}'"
+        assert len(article3.tags) >= 2, f"英文标签提取失败: {article3.tags}"
         print("[PASS] 英文解析测试")
 
         # 测试 4: 格式输出
@@ -478,10 +505,10 @@ def run_selftest() -> int:
 
         # 测试 7: 日期验证（宽松阈值）
         date = extract_date("发布于 2026-03-15 的内容")
-        assert date == "2026-03-15", "日期提取失败"
+        assert date == "2026-03-15", f"日期提取失败: '{date}'"
 
         date2 = extract_date("日期：2026年12月31日")
-        assert date2 == "2026-12-31", "中文日期提取失败"
+        assert date2 == "2026-12-31", f"中文日期提取失败: '{date2}'"
 
         date3 = extract_date("没有日期的内容")
         assert date3 == "", "无日期时应返回空字符串"
