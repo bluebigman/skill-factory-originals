@@ -1,396 +1,501 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-scripts/main.py — planning-with-files 技能的全新独立实现（clean-room）
-
-本脚本依据功能规格独立编写，不包含任何既有代码。
-提供基于文件的持久化规划、崩溃恢复与长任务跟踪能力。
-
-用法示例:
-    python scripts/main.py --new plan.md "三阶段开发计划"
-    python scripts/main.py --add plan.md "[ ] 完成需求分析"
-    python scripts/main.py --status plan.md
-    python scripts/main.py --selftest
+planning-with-files 技能核心逻辑实现
+基于文件的持久化规划，支持崩溃恢复与长任务跟踪
 """
 
-import argparse
 import os
-import re
 import sys
+import json
+import time
+import argparse
 import tempfile
-from datetime import datetime
 from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Optional, Any
+
 
 # 错误码定义
 ERROR_CODES = {
-    "E001": "参数错误：缺少必要参数或参数格式不正确",
-    "E002": "文件错误：目标文件不存在或无法访问",
-    "E003": "格式错误：文件内容不符合规划文件格式",
-    "E004": "写入错误：无法写入目标文件",
-    "E005": "读取错误：无法读取目标文件",
-    "E006": "操作错误：不支持的操作类型",
-    "E007": "状态错误：任务状态标记不合法",
-    "E008": "路径错误：路径不合法或不在允许范围内",
-    "E009": "自检错误：自检过程中发现逻辑错误",
-    "E010": "未知错误：未预期的异常",
+    "E001": "参数错误",
+    "E002": "文件不存在",
+    "E003": "文件读取失败",
+    "E004": "文件写入失败",
+    "E005": "JSON解析失败",
+    "E006": "任务状态无效",
+    "E007": "任务不存在",
+    "E008": "目录创建失败",
+    "E009": "计划数据校验失败",
+    "E010": "内部逻辑错误",
 }
 
-# 状态标记正则
-STATUS_PATTERN = re.compile(r"^\[([ x~])\]\s*(.*)$")
+
+class PlanningError(Exception):
+    """规划功能自定义异常"""
+    def __init__(self, code: str, message: str = ""):
+        self.code = code
+        self.message = message or ERROR_CODES.get(code, "未知错误")
+        super().__init__(f"[{code}] {self.message}")
 
 
-def error_exit(code: str, message: str = None) -> None:
-    """输出错误信息并以错误码退出"""
-    msg = message or ERROR_CODES.get(code, "未知错误")
-    print(f"错误 [{code}]: {msg}", file=sys.stderr)
-    sys.exit(1)
+class PlanManager:
+    """
+    计划管理器
+    负责计划的创建、加载、保存、任务状态管理和变更日志
+    """
+
+    # 合法的任务状态集合
+    VALID_STATUSES = {"待办", "进行中", "已完成", "阻塞"}
+
+    def __init__(self, plan_dir: Optional[str] = None):
+        """
+        初始化计划管理器
+        :param plan_dir: 计划文件存储目录，默认为当前目录下的 plans 文件夹
+        """
+        self.plan_dir = Path(plan_dir) if plan_dir else Path.cwd() / "plans"
+        self.current_plan = None
+        self.current_plan_path = None
+        self._ensure_dir()
+
+    def _ensure_dir(self) -> None:
+        """确保计划目录存在"""
+        try:
+            self.plan_dir.mkdir(parents=True, exist_ok=True)
+        except OSError as exc:
+            raise PlanningError("E008", f"无法创建计划目录: {exc}")
+
+    def create_plan(self, name: str, description: str = "") -> Dict[str, Any]:
+        """
+        创建新计划
+        :param name: 计划名称
+        :param description: 计划描述
+        :return: 创建的计划数据
+        """
+        if not name or not name.strip():
+            raise PlanningError("E001", "计划名称不能为空")
+
+        plan_data = {
+            "name": name.strip(),
+            "description": description.strip(),
+            "created_at": datetime.now().isoformat(),
+            "updated_at": datetime.now().isoformat(),
+            "status": "进行中",
+            "tasks": [],
+            "change_log": [
+                {
+                    "timestamp": datetime.now().isoformat(),
+                    "action": "创建计划",
+                    "detail": f"计划 '{name}' 已创建",
+                }
+            ],
+        }
+
+        # 生成文件名：时间戳_计划名.json
+        timestamp = time.strftime("%Y%m%d_%H%M%S")
+        safe_name = "".join(c for c in name if c.isalnum() or c in "-_").strip() or "plan"
+        filename = f"{timestamp}_{safe_name}.json"
+        filepath = self.plan_dir / filename
+
+        self._save_plan(filepath, plan_data)
+        self.current_plan = plan_data
+        self.current_plan_path = filepath
+        return plan_data
+
+    def load_plan(self, filepath: str) -> Dict[str, Any]:
+        """
+        加载已有计划
+        :param filepath: 计划文件路径
+        :return: 计划数据
+        """
+        path = Path(filepath)
+        if not path.exists():
+            raise PlanningError("E002", f"计划文件不存在: {filepath}")
+
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                plan_data = json.load(f)
+        except json.JSONDecodeError as exc:
+            raise PlanningError("E005", f"JSON解析失败: {exc}")
+        except OSError as exc:
+            raise PlanningError("E003", f"文件读取失败: {exc}")
+
+        # 校验计划数据基本结构
+        self._validate_plan_data(plan_data)
+
+        self.current_plan = plan_data
+        self.current_plan_path = path
+        return plan_data
+
+    def _validate_plan_data(self, plan_data: Dict[str, Any]) -> None:
+        """校验计划数据的合法性"""
+        if not isinstance(plan_data, dict):
+            raise PlanningError("E009", "计划数据格式错误")
+        if "name" not in plan_data or "tasks" not in plan_data:
+            raise PlanningError("E009", "计划数据缺少必要字段")
+        if not isinstance(plan_data["tasks"], list):
+            raise PlanningError("E009", "任务列表格式错误")
+
+    def _save_plan(self, filepath: Path, plan_data: Dict[str, Any]) -> None:
+        """
+        保存计划到文件
+        :param filepath: 文件路径
+        :param plan_data: 计划数据
+        """
+        try:
+            with open(filepath, "w", encoding="utf-8") as f:
+                json.dump(plan_data, f, ensure_ascii=False, indent=2)
+        except OSError as exc:
+            raise PlanningError("E004", f"文件写入失败: {exc}")
+
+    def save_current(self) -> None:
+        """保存当前计划到文件"""
+        if self.current_plan is None or self.current_plan_path is None:
+            raise PlanningError("E010", "当前没有加载计划")
+        self._save_plan(self.current_plan_path, self.current_plan)
+
+    def add_task(self, title: str, description: str = "") -> Dict[str, Any]:
+        """
+        添加任务到当前计划
+        :param title: 任务标题
+        :param description: 任务描述
+        :return: 添加的任务
+        """
+        if self.current_plan is None:
+            raise PlanningError("E010", "当前没有加载计划")
+        if not title or not title.strip():
+            raise PlanningError("E001", "任务标题不能为空")
+
+        task = {
+            "id": len(self.current_plan["tasks"]) + 1,
+            "title": title.strip(),
+            "description": description.strip(),
+            "status": "待办",
+            "created_at": datetime.now().isoformat(),
+            "updated_at": datetime.now().isoformat(),
+        }
+
+        self.current_plan["tasks"].append(task)
+        self._record_change("添加任务", f"添加任务: {title}")
+        self._update_plan_timestamp()
+        self.save_current()
+        return task
+
+    def update_task_status(self, task_id: int, new_status: str) -> Dict[str, Any]:
+        """
+        更新任务状态
+        :param task_id: 任务ID
+        :param new_status: 新状态（待办/进行中/已完成/阻塞）
+        :return: 更新后的任务
+        """
+        if self.current_plan is None:
+            raise PlanningError("E010", "当前没有加载计划")
+
+        if new_status not in self.VALID_STATUSES:
+            raise PlanningError("E006", f"无效的任务状态: {new_status}")
+
+        task = self._find_task(task_id)
+        if task is None:
+            raise PlanningError("E007", f"任务不存在: {task_id}")
+
+        old_status = task["status"]
+        task["status"] = new_status
+        task["updated_at"] = datetime.now().isoformat()
+        self._record_change("更新任务状态", f"任务 '{task['title']}' 状态: {old_status} -> {new_status}")
+        self._update_plan_timestamp()
+        self.save_current()
+        return task
+
+    def _find_task(self, task_id: int) -> Optional[Dict[str, Any]]:
+        """根据ID查找任务"""
+        for task in self.current_plan["tasks"]:
+            if task["id"] == task_id:
+                return task
+        return None
+
+    def remove_task(self, task_id: int) -> None:
+        """
+        删除任务
+        :param task_id: 任务ID
+        """
+        if self.current_plan is None:
+            raise PlanningError("E010", "当前没有加载计划")
+
+        task = self._find_task(task_id)
+        if task is None:
+            raise PlanningError("E007", f"任务不存在: {task_id}")
+
+        self.current_plan["tasks"] = [t for t in self.current_plan["tasks"] if t["id"] != task_id]
+        self._record_change("删除任务", f"删除任务: {task['title']}")
+        self._update_plan_timestamp()
+        self.save_current()
+
+    def get_progress(self) -> Dict[str, Any]:
+        """
+        获取计划进度统计
+        :return: 进度统计数据
+        """
+        if self.current_plan is None:
+            raise PlanningError("E010", "当前没有加载计划")
+
+        tasks = self.current_plan["tasks"]
+        total = len(tasks)
+        completed = sum(1 for t in tasks if t["status"] == "已完成")
+        in_progress = sum(1 for t in tasks if t["status"] == "进行中")
+        blocked = sum(1 for t in tasks if t["status"] == "阻塞")
+        pending = sum(1 for t in tasks if t["status"] == "待办")
+
+        progress_percent = (completed / total * 100) if total > 0 else 0
+
+        return {
+            "total": total,
+            "completed": completed,
+            "in_progress": in_progress,
+            "blocked": blocked,
+            "pending": pending,
+            "progress_percent": round(progress_percent, 1),
+            "plan_name": self.current_plan["name"],
+            "plan_status": self.current_plan["status"],
+        }
+
+    def get_next_action(self) -> Optional[str]:
+        """
+        获取下一步建议
+        :return: 下一步建议文本
+        """
+        if self.current_plan is None:
+            raise PlanningError("E010", "当前没有加载计划")
+
+        # 查找第一个待办或进行中的任务
+        for task in self.current_plan["tasks"]:
+            if task["status"] in ("待办", "进行中"):
+                return f"下一步: {task['title']} (状态: {task['status']})"
+
+        if self.current_plan["status"] == "已完成":
+            return "计划已完成，无需继续"
+        return "所有任务已完成，可以结束计划"
+
+    def _record_change(self, action: str, detail: str) -> None:
+        """记录变更日志"""
+        self.current_plan["change_log"].append({
+            "timestamp": datetime.now().isoformat(),
+            "action": action,
+            "detail": detail,
+        })
+
+    def _update_plan_timestamp(self) -> None:
+        """更新计划时间戳"""
+        self.current_plan["updated_at"] = datetime.now().isoformat()
 
 
-def validate_path(path_str: str) -> Path:
-    """校验并规范化路径，防止路径穿越"""
-    if not path_str or not path_str.strip():
-        error_exit("E001", "路径不能为空")
-    p = Path(path_str).expanduser()
-    # 防止路径穿越到非预期目录
-    if ".." in p.parts:
-        error_exit("E008", f"路径包含非法部分: {path_str}")
-    return p
-
-
-def read_plan_file(path: Path) -> str:
-    """读取规划文件内容，文件不存在时返回空字符串"""
-    if not path.exists():
-        return ""
-    try:
-        return path.read_text(encoding="utf-8")
-    except Exception as e:
-        error_exit("E005", f"读取文件失败: {e}")
-
-
-def write_plan_file(path: Path, content: str) -> None:
-    """写入规划文件内容"""
-    try:
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
-    except Exception as e:
-        error_exit("E004", f"写入文件失败: {e}")
-
-
-def parse_tasks(content: str) -> list:
-    """解析文件内容中的任务行，返回任务列表"""
-    tasks = []
-    for line in content.splitlines():
-        line = line.rstrip("\n")
-        m = STATUS_PATTERN.match(line)
-        if m:
-            status = m.group(1)
-            desc = m.group(2)
-            tasks.append({"status": status, "desc": desc, "line": line})
-    return tasks
-
-
-def count_status(tasks: list) -> dict:
-    """统计各类状态的任务数量"""
-    counts = {" ": 0, "x": 0, "~": 0}
-    for t in tasks:
-        if t["status"] in counts:
-            counts[t["status"]] += 1
-    return counts
-
-
-def generate_summary(content: str) -> str:
-    """生成规划文件的摘要信息"""
-    tasks = parse_tasks(content)
-    counts = count_status(tasks)
-    total = len(tasks)
-    completed = counts["x"]
-    in_progress = counts["~"]
-    pending = counts[" "]
-
-    # 计算完成率（避免除零）
-    if total > 0:
-        ratio = (completed / total) * 100
-    else:
-        ratio = 0.0
-
-    lines = [
-        f"任务总数: {total}",
-        f"已完成: {completed}",
-        f"进行中: {in_progress}",
-        f"待办: {pending}",
-        f"完成率: {ratio:.1f}%",
-    ]
-    return "\n".join(lines)
-
-
-def create_plan(path: Path, title: str) -> None:
-    """创建新的规划文件"""
-    if path.exists():
-        error_exit("E002", f"文件已存在: {path}")
-    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    content = f"# {title}\n\n> 创建时间: {now}\n\n## 任务列表\n\n"
-    write_plan_file(path, content)
-    print(f"已创建规划文件: {path}")
-
-
-def add_task(path: Path, task_line: str) -> None:
-    """向规划文件添加任务"""
-    if not path.exists():
-        error_exit("E002", f"文件不存在: {path}")
-    content = read_plan_file(path)
-    if not task_line.strip():
-        error_exit("E001", "任务内容不能为空")
-
-    # 规范化任务行，确保有状态标记
-    if STATUS_PATTERN.match(task_line):
-        line = task_line
-    else:
-        line = f"[ ] {task_line}"
-
-    # 检查重复任务
-    tasks = parse_tasks(content)
-    for t in tasks:
-        if t["desc"] == line[4:].strip():
-            error_exit("E003", f"任务已存在: {line[4:].strip()}")
-
-    new_content = content.rstrip() + "\n" + line + "\n"
-    write_plan_file(path, new_content)
-    print(f"已添加任务: {line}")
-
-
-def update_task(path: Path, task_desc: str, new_status: str) -> None:
-    """更新任务状态"""
-    if not path.exists():
-        error_exit("E002", f"文件不存在: {path}")
-    if new_status not in (" ", "x", "~"):
-        error_exit("E007", f"非法状态标记: {new_status}")
-
-    content = read_plan_file(path)
-    tasks = parse_tasks(content)
-    found = False
-
-    new_lines = []
-    for line in content.splitlines():
-        m = STATUS_PATTERN.match(line)
-        if m and m.group(2).strip() == task_desc.strip():
-            new_line = f"[{new_status}] {m.group(2)}"
-            new_lines.append(new_line)
-            found = True
-        else:
-            new_lines.append(line)
-
-    if not found:
-        error_exit("E003", f"未找到任务: {task_desc}")
-
-    write_plan_file(path, "\n".join(new_lines) + "\n")
-    print(f"任务已更新: [{new_status}] {task_desc}")
-
-
-def list_tasks(path: Path) -> None:
-    """列出所有任务"""
-    if not path.exists():
-        error_exit("E002", f"文件不存在: {path}")
-    content = read_plan_file(path)
-    tasks = parse_tasks(content)
-    if not tasks:
-        print("（无任务）")
-        return
-    for i, t in enumerate(tasks, 1):
-        status_desc = {" ": "待办", "x": "完成", "~": "进行中"}.get(t["status"], "未知")
-        print(f"{i:3d}. [{t['status']}] {t['desc']}  ({status_desc})")
-
-
-def show_status(path: Path) -> None:
-    """显示规划文件状态摘要"""
-    if not path.exists():
-        error_exit("E002", f"文件不存在: {path}")
-    content = read_plan_file(path)
-    print(generate_summary(content))
-
-
-def selftest() -> None:
-    """内置自检函数，使用硬编码样例数据离线验证核心逻辑"""
+def run_selftest() -> int:
+    """
+    运行自检
+    使用内置硬编码样例数据，不依赖外部文件
+    :return: 0表示成功，非0表示失败
+    """
     print("开始自检...")
 
-    # 使用临时目录，避免污染当前工作目录
-    with tempfile.TemporaryDirectory() as tmpdir:
-        tmp_path = Path(tmpdir)
-        plan_file = tmp_path / "test_plan.md"
+    try:
+        # 使用临时目录作为计划目录
+        with tempfile.TemporaryDirectory() as tmpdir:
+            manager = PlanManager(tmpdir)
 
-        # 测试1: 创建规划文件
-        try:
-            create_plan(plan_file, "自检测试计划")
-            if not plan_file.exists():
-                error_exit("E009", "创建文件失败")
-            print("[通过] 创建规划文件")
-        except SystemExit:
-            error_exit("E009", "创建规划文件异常")
+            # 测试1: 创建计划
+            plan = manager.create_plan("测试计划", "自检用测试计划")
+            assert plan["name"] == "测试计划", "计划名称错误"
+            assert plan["status"] == "进行中", "计划初始状态错误"
+            assert len(plan["tasks"]) == 0, "初始任务列表应为空"
+            print("  [通过] 创建计划")
 
-        # 测试2: 添加任务
-        try:
-            add_task(plan_file, "[ ] 任务A")
-            add_task(plan_file, "[ ] 任务B")
-            add_task(plan_file, "[~] 任务C")
-            content = read_plan_file(plan_file)
-            tasks = parse_tasks(content)
-            if len(tasks) != 3:
-                error_exit("E009", f"添加任务数量错误: {len(tasks)}")
-            print("[通过] 添加任务")
-        except SystemExit:
-            error_exit("E009", "添加任务异常")
+            # 测试2: 添加任务
+            task1 = manager.add_task("任务一", "第一个测试任务")
+            task2 = manager.add_task("任务二", "第二个测试任务")
+            assert task1["id"] == 1, "第一个任务ID应为1"
+            assert task2["id"] == 2, "第二个任务ID应为2"
+            assert len(manager.current_plan["tasks"]) == 2, "任务数量应为2"
+            print("  [通过] 添加任务")
 
-        # 测试3: 更新任务状态
-        try:
-            update_task(plan_file, "任务A", "x")
-            content = read_plan_file(plan_file)
-            tasks = parse_tasks(content)
-            task_a = [t for t in tasks if t["desc"] == "任务A"]
-            if not task_a or task_a[0]["status"] != "x":
-                error_exit("E009", "更新任务状态失败")
-            print("[通过] 更新任务状态")
-        except SystemExit:
-            error_exit("E009", "更新任务状态异常")
+            # 测试3: 更新任务状态
+            manager.update_task_status(1, "进行中")
+            manager.update_task_status(2, "已完成")
+            task1_updated = manager._find_task(1)
+            task2_updated = manager._find_task(2)
+            assert task1_updated["status"] == "进行中", "任务1状态应为进行中"
+            assert task2_updated["status"] == "已完成", "任务2状态应为已完成"
+            print("  [通过] 更新任务状态")
 
-        # 测试4: 状态统计
-        try:
-            content = read_plan_file(plan_file)
-            tasks = parse_tasks(content)
-            counts = count_status(tasks)
-            if counts["x"] != 1 or counts["~"] != 1 or counts[" "] != 1:
-                error_exit("E009", f"状态统计错误: {counts}")
-            print("[通过] 状态统计")
-        except SystemExit:
-            error_exit("E009", "状态统计异常")
+            # 测试4: 进度统计
+            progress = manager.get_progress()
+            assert progress["total"] == 2, "总任务数应为2"
+            assert progress["completed"] == 1, "已完成数应为1"
+            assert progress["in_progress"] == 1, "进行中数应为1"
+            assert progress["progress_percent"] > 0, "进度百分比应大于0"
+            assert progress["progress_percent"] < 100, "进度百分比应小于100"
+            print("  [通过] 进度统计")
 
-        # 测试5: 摘要生成
-        try:
-            content = read_plan_file(plan_file)
-            summary = generate_summary(content)
-            if "任务总数" not in summary or "完成率" not in summary:
-                error_exit("E009", "摘要生成错误")
-            # 宽松验证完成率在合理范围
-            ratio_match = re.search(r"完成率: (\d+\.?\d*)%", summary)
-            if ratio_match:
-                ratio = float(ratio_match.group(1))
-                if ratio < 0 or ratio > 100:
-                    error_exit("E009", f"完成率超出范围: {ratio}")
-            print("[通过] 摘要生成")
-        except SystemExit:
-            error_exit("E009", "摘要生成异常")
+            # 测试5: 下一步建议
+            next_action = manager.get_next_action()
+            assert next_action is not None, "应返回下一步建议"
+            assert "任务一" in next_action, "下一步建议应指向任务一"
+            print("  [通过] 下一步建议")
 
-        # 测试6: 重复任务检测
-        try:
-            add_task(plan_file, "[ ] 任务A")
-            error_exit("E009", "未检测到重复任务")
-        except SystemExit:
-            # 预期应失败，说明检测有效
-            print("[通过] 重复任务检测")
+            # 测试6: 保存和重新加载
+            manager.save_current()
+            saved_path = manager.current_plan_path
+            reloaded = manager.load_plan(str(saved_path))
+            assert reloaded["name"] == "测试计划", "重新加载后计划名称应一致"
+            assert len(reloaded["tasks"]) == 2, "重新加载后任务数应一致"
+            assert reloaded["tasks"][0]["status"] == "进行中", "重新加载后任务状态应保留"
+            print("  [通过] 保存与加载")
 
-        # 测试7: 解析空内容
-        try:
-            empty_tasks = parse_tasks("")
-            if empty_tasks:
-                error_exit("E009", "空内容解析错误")
-            print("[通过] 空内容解析")
-        except SystemExit:
-            error_exit("E009", "空内容解析异常")
+            # 测试7: 删除任务
+            manager.remove_task(1)
+            assert len(manager.current_plan["tasks"]) == 1, "删除后任务数应为1"
+            assert manager.current_plan["tasks"][0]["id"] == 2, "剩余任务ID应为2"
+            print("  [通过] 删除任务")
 
-        # 测试8: 路径校验
-        try:
-            validate_path("normal/path/file.md")
+            # 测试8: 错误处理
             try:
-                validate_path("../evil/path")
-                error_exit("E009", "路径穿越未拦截")
-            except SystemExit:
-                print("[通过] 路径校验")
-        except SystemExit:
-            error_exit("E009", "路径校验异常")
+                manager.update_task_status(999, "已完成")
+                assert False, "应抛出任务不存在的错误"
+            except PlanningError as exc:
+                assert exc.code == "E007", f"错误码应为E007，实际为{exc.code}"
 
-        # 测试9: 状态标记解析
-        try:
-            m = STATUS_PATTERN.match("[x] 完成的任务")
-            if not m or m.group(1) != "x":
-                error_exit("E009", "状态标记解析失败")
-            m2 = STATUS_PATTERN.match("[~] 进行中")
-            if not m2 or m2.group(1) != "~":
-                error_exit("E009", "进行中状态解析失败")
-            m3 = STATUS_PATTERN.match("[ ] 待办")
-            if not m3 or m3.group(1) != " ":
-                error_exit("E009", "待办状态解析失败")
-            print("[通过] 状态标记解析")
-        except SystemExit:
-            error_exit("E009", "状态标记解析异常")
+            try:
+                manager.update_task_status(2, "无效状态")
+                assert False, "应抛出无效状态的错误"
+            except PlanningError as exc:
+                assert exc.code == "E006", f"错误码应为E006，实际为{exc.code}"
+            print("  [通过] 错误处理")
 
-        # 测试10: 文件写入读取
-        try:
-            test_content = "# 测试\n\n[ ] 任务1\n[x] 任务2\n"
-            write_plan_file(plan_file, test_content)
-            read_back = read_plan_file(plan_file)
-            if read_back != test_content:
-                error_exit("E009", "文件读写不一致")
-            print("[通过] 文件读写")
-        except SystemExit:
-            error_exit("E009", "文件读写异常")
+            # 测试9: 变更日志
+            log_count = len(manager.current_plan["change_log"])
+            assert log_count > 0, "变更日志不应为空"
+            assert log_count >= 4, f"变更日志数量应至少为4，实际为{log_count}"
+            print("  [通过] 变更日志")
 
-    print("\n全部自检通过！")
-    sys.exit(0)
+        print("所有自检通过！")
+        return 0
+
+    except AssertionError as exc:
+        print(f"自检失败: {exc}")
+        return 1
+    except PlanningError as exc:
+        print(f"自检失败: [{exc.code}] {exc.message}")
+        return 1
+    except Exception as exc:
+        print(f"自检异常: {exc}")
+        return 1
 
 
-def main() -> None:
+def main() -> int:
     """主入口函数"""
     parser = argparse.ArgumentParser(
-        description="文件规划工具 - 基于文件的持久化任务跟踪",
-        epilog="示例: %(prog)s --new plan.md '项目计划'",
+        description="planning-with-files - 基于文件的持久化规划工具",
+        epilog="示例: python main.py --create \"我的计划\" --description \"计划描述\""
     )
-    parser.add_argument("--new", nargs=2, metavar=("FILE", "TITLE"),
-                        help="创建新的规划文件")
-    parser.add_argument("--add", nargs=2, metavar=("FILE", "TASK"),
-                        help="添加任务到规划文件")
-    parser.add_argument("--update", nargs=3, metavar=("FILE", "TASK", "STATUS"),
-                        help="更新任务状态 (状态: ' '=待办, x=完成, ~=进行中)")
-    parser.add_argument("--list", metavar="FILE", help="列出所有任务")
-    parser.add_argument("--status", metavar="FILE", help="显示任务状态统计")
-    parser.add_argument("--selftest", action="store_true",
-                        help="运行离线自检")
+
+    # 全局参数
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+    parser.add_argument("--dir", type=str, default=None, help="计划文件存储目录")
+
+    # 操作参数
+    parser.add_argument("--create", type=str, metavar="NAME", help="创建新计划")
+    parser.add_argument("--description", type=str, default="", help="计划描述")
+    parser.add_argument("--load", type=str, metavar="FILE", help="加载已有计划")
+    parser.add_argument("--add-task", type=str, metavar="TITLE", help="添加任务")
+    parser.add_argument("--task-desc", type=str, default="", help="任务描述")
+    parser.add_argument("--update-status", type=str, nargs=2, metavar=("TASK_ID", "STATUS"), help="更新任务状态")
+    parser.add_argument("--remove-task", type=int, metavar="TASK_ID", help="删除任务")
+    parser.add_argument("--progress", action="store_true", help="显示进度")
+    parser.add_argument("--next-action", action="store_true", help="显示下一步建议")
 
     args = parser.parse_args()
 
-    # 自检模式优先
+    # 运行自检
     if args.selftest:
-        selftest()
-        return
+        return run_selftest()
 
-    # 解析操作
     try:
-        if args.new:
-            path = validate_path(args.new[0])
-            create_plan(path, args.new[1])
-        elif args.add:
-            path = validate_path(args.add[0])
-            add_task(path, args.add[1])
-        elif args.update:
-            path = validate_path(args.update[0])
-            task_desc = args.update[1]
-            status = args.update[2]
-            # 将用户输入的 "todo"/"done"/"doing" 转换为标记
-            status_map = {"todo": " ", "done": "x", "doing": "~", " ": " ", "x": "x", "~": "~"}
-            if status not in status_map:
-                error_exit("E007", f"非法状态: {status} (可用: todo/done/doing)")
-            update_task(path, task_desc, status_map[status])
-        elif args.list:
-            path = validate_path(args.list)
-            list_tasks(path)
-        elif args.status:
-            path = validate_path(args.status)
-            show_status(path)
-        else:
+        manager = PlanManager(args.dir)
+
+        # 创建新计划
+        if args.create:
+            plan = manager.create_plan(args.create, args.description)
+            print(f"计划已创建: {plan['name']}")
+            print(f"文件位置: {manager.current_plan_path}")
+            return 0
+
+        # 加载已有计划
+        if args.load:
+            plan = manager.load_plan(args.load)
+            print(f"计划已加载: {plan['name']}")
+            print(f"任务数量: {len(plan['tasks'])}")
+
+        # 添加任务
+        if args.add_task:
+            if manager.current_plan is None:
+                print("错误: 请先创建或加载计划", file=sys.stderr)
+                return 1
+            task = manager.add_task(args.add_task, args.task_desc)
+            print(f"任务已添加: ID={task['id']}, 标题={task['title']}")
+
+        # 更新任务状态
+        if args.update_status:
+            if manager.current_plan is None:
+                print("错误: 请先创建或加载计划", file=sys.stderr)
+                return 1
+            task_id = int(args.update_status[0])
+            status = args.update_status[1]
+            task = manager.update_task_status(task_id, status)
+            print(f"任务状态已更新: ID={task['id']}, 状态={task['status']}")
+
+        # 删除任务
+        if args.remove_task is not None:
+            if manager.current_plan is None:
+                print("错误: 请先创建或加载计划", file=sys.stderr)
+                return 1
+            manager.remove_task(args.remove_task)
+            print(f"任务已删除: ID={args.remove_task}")
+
+        # 显示进度
+        if args.progress:
+            if manager.current_plan is None:
+                print("错误: 请先创建或加载计划", file=sys.stderr)
+                return 1
+            progress = manager.get_progress()
+            print(f"计划: {progress['plan_name']} (状态: {progress['plan_status']})")
+            print(f"总任务: {progress['total']}")
+            print(f"已完成: {progress['completed']}")
+            print(f"进行中: {progress['in_progress']}")
+            print(f"阻塞: {progress['blocked']}")
+            print(f"待办: {progress['pending']}")
+            print(f"完成度: {progress['progress_percent']}%")
+
+        # 显示下一步建议
+        if args.next_action:
+            if manager.current_plan is None:
+                print("错误: 请先创建或加载计划", file=sys.stderr)
+                return 1
+            action = manager.get_next_action()
+            print(action)
+
+        # 如果没有执行任何操作
+        if not any([args.create, args.load, args.add_task, args.update_status,
+                    args.remove_task is not None, args.progress, args.next_action]):
             parser.print_help()
-            error_exit("E001", "请指定操作参数")
-    except SystemExit:
-        raise
-    except Exception as e:
-        error_exit("E010", f"未预期错误: {e}")
+            return 0
+
+        return 0
+
+    except PlanningError as exc:
+        print(f"错误: [{exc.code}] {exc.message}", file=sys.stderr)
+        return 1
+    except Exception as exc:
+        print(f"错误: [E010] 未预期异常: {exc}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
