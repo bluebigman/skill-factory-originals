@@ -274,7 +274,24 @@ def selftest() -> int:
     assert abs(output['indicators']['roe'] - 15.23) < 0.01, f"主流程ROE值错误: {output['indicators']['roe']}"
     print("  [OK] 主流程CLI调用:", output['indicators'])
 
-    # 测试7: 真实数据源调用（如果可用）
+    # 测试7: 文件参数主流程调用
+    test_file = HERE / "test_annual_report_cli.txt"
+    test_file.write_text(test_text, encoding='utf-8')
+    try:
+        result = subprocess.run(
+            [sys.executable, str(__file__), "--file", str(test_file), "--json"],
+            capture_output=True, text=True, timeout=10
+        )
+        assert result.returncode == 0, f"文件参数主流程退出码非0: {result.returncode}"
+        output = json.loads(result.stdout)
+        assert 'indicators' in output, "文件参数主流程输出缺少indicators"
+        assert 'roe' in output['indicators'], "文件参数主流程输出缺少ROE"
+        assert abs(output['indicators']['roe'] - 15.23) < 0.01, f"文件参数主流程ROE值错误: {output['indicators']['roe']}"
+        print("  [OK] 文件参数主流程CLI调用:", output['indicators'])
+    finally:
+        test_file.unlink(missing_ok=True)
+
+    # 测试8: 真实数据源调用（如果可用）
     try:
         real_data = fetch_real_data()
         assert 'roe' in real_data, "真实数据源ROE缺失"

@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: e2m
 name: e2m
-displayName: 文档转Markdown 格式转换 内容提取
-description: 将多种格式文件或链接转换为结构化Markdown，保留关键信息。
-version: 1.0.1
+displayName: 文档转写 多格式转换 结构化整理
+description: 将各类文件或链接转为结构化Markdown，保留关键信息。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/e2m
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 墨规
+author: 林墨工坊
 agent_created: true
-trigger_words: ["e2m", "转markdown", "转md", "文件转换", "格式转换", "提取内容"]
+trigger_words: ["e2m", "转markdown", "转md", "文件转换", "格式转换", "转文档", "链接转md"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,22 +31,18 @@ trigger_words: ["e2m", "转markdown", "转md", "文件转换", "格式转换", "
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# E2M 技能文档（SKILL.md）
+# e2m — 多格式转 Markdown 技能手册
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-本技能用于将常见办公与网页文件转换为 Markdown 格式，并提取结构化信息。以下表格明确列出支持与不支持的范围，请在使用前对照确认。
+| 维度 | 说明 |
+|------|------|
+| **能做的事** | 将文本文件（.txt/.md/.csv）、富文本（.docx/.rtf）、网页链接（http/https）、剪贴板内容、PDF 文本层内容转换为结构化 Markdown |
+| **不能做的事** | 无法解析扫描版 PDF（无文本层）、无法处理加密/损坏文件、无法执行 OCR 识别、无法转换音频视频、无法保留原文件中的复杂排版（如文本框坐标、艺术字效果） |
+| **适用对象** | 需要快速整理资料的研究人员、需要归档网页内容的编辑、需要统一笔记格式的知识管理爱好者、需要批量转换文档的办公人员 |
+| **不适用对象** | 需要像素级还原原版式的出版行业、需要处理手写笔记的用户、需要转换超过 50MB 超大文件的场景 |
 
-| 能力维度 | 支持（能做） | 不支持（不能做） |
-| :--- | :--- | :--- |
-| **输入格式** | `.doc`, `.docx`, `.epub`, `.html`, `.htm`, `.url`, `.pdf`, `.ppt`, `.pptx`, `.mp3`, `.m4a` | 加密文件、损坏文件、扫描版图片型 PDF（无 OCR 能力） |
-| **输入来源** | 本地文件路径、标准 HTTP/HTTPS 链接 | 需要登录鉴权的私有链接、非标准协议链接 |
-| **核心处理** | 提取正文文本、识别标题层级、保留表格结构、提取链接与图片引用 | 复杂排版还原（如文本框坐标、艺术字效果）、动态网页脚本执行 |
-| **输出格式** | 标准 Markdown（`.md`），含标题、列表、表格、代码块、引用块 | 自定义模板渲染（如特定 CMS 格式）、PDF 直接输出 |
-| **附加能力** | 批量处理（多文件依次转换）、音频文件基础转写（需网络服务） | 实时流式转写、说话人分离、情感分析 |
-| **信息标注** | 对不确定的字段输出 `[需核实:字段名]` 占位符 | 自动填充缺失信息或编造内容 |
-
-**适用对象**：需要将文档归档为纯文本格式的写作者、需要从网页或文档中提取关键信息的研究人员、需要批量整理资料库的内容运营人员。
+**输入限制**：单次处理文件大小 ≤ 20MB；链接长度 ≤ 2048 字符；支持的文件编码为 UTF-8/GBK/GB2312。
 
 
 ## 许可证（License）

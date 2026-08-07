@@ -1,518 +1,683 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-chronic - 时间语义解析（自然语言转结构化）
-=============================================
-本脚本依据功能规格独立实现，仅使用 Python 标准库。
-支持相对/绝对日期、模糊时段、批量处理、时区标注、节假日识别。
+chronic — 自然语言日期解析工具（clean-room 独立实现）
+=====================================================
+依据功能规格独立开发，不参考任何既有实现。
+
+能力：
+  - 相对日期解析（如"三天后"）
+  - 绝对日期解析（如"2024年3月15日"）
+  - 模糊日期解析（上/中/下旬）
+  - 星期/节日识别
+  - 批量处理
+  - 时间范围提取
 
 用法示例：
-    python scripts/main.py "后天下午3点"
-    python scripts/main.py --selftest
-    python scripts/main.py --batch "明天" "2024年3月15日" "周五傍晚"
+  python scripts/main.py "三天后"
+  python scripts/main.py "2024年3月15日"
+  python scripts/main.py "下月中旬"
+  python scripts/main.py --batch "明天" "下周一" "国庆节"
+  python scripts/main.py --selftest
+
+错误码：
+  E001 参数缺失
+  E002 无法解析的日期文本
+  E003 非法日期值（如2月30日）
+  E004 批量输入为空
+  E005 未知命令
+  E006 内部逻辑错误
+  E007 不支持的格式
+  E008 无效的星期名
+  E009 无效的节日名
+  E010 无效的偏移量
 """
 
 import argparse
+import calendar
 import datetime
+import json
 import re
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
-# 错误码定义（E001-E010）
-ERROR_CODES = {
-    "E001": "输入为空或仅含空白字符",
-    "E002": "输入不是字符串类型",
-    "E003": "无法识别任何日期信息",
-    "E004": "批量输入为空列表",
-    "E005": "批量输入包含非字符串元素",
-    "E006": "日期超出合理范围（1900-2100）",
-    "E007": "时间格式非法（应为 HH:MM 或 HH:MM:SS）",
-    "E008": "时区格式非法（应为 UTC±H 或 UTC±H:MM）",
-    "E009": "内部计算错误（日期偏移失败）",
-    "E010": "未知错误",
+
+# ============================================================
+# 常量定义
+# ============================================================
+
+# 月份中文映射
+MONTH_CN = {
+    "一月": 1, "1月": 1, "01月": 1,
+    "二月": 2, "2月": 2, "02月": 2,
+    "三月": 3, "3月": 3, "03月": 3,
+    "四月": 4, "4月": 4, "04月": 4,
+    "五月": 5, "5月": 5, "05月": 5,
+    "六月": 6, "6月": 6, "06月": 6,
+    "七月": 7, "7月": 7, "07月": 7,
+    "八月": 8, "8月": 8, "08月": 8,
+    "九月": 9, "9月": 9, "09月": 9,
+    "十月": 10, "10月": 10,
+    "十一月": 11, "11月": 11,
+    "十二月": 12, "12月": 12,
 }
 
-# 中文数字映射
-CN_NUM = {
-    "零": 0, "一": 1, "二": 2, "两": 2, "三": 3, "四": 4,
-    "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
+# 星期中文映射（周一=0 ... 周日=6）
+WEEKDAY_CN = {
+    "周一": 0, "星期一": 0, "礼拜一": 0, "周1": 0,
+    "周二": 1, "星期二": 1, "礼拜二": 1, "周2": 1,
+    "周三": 2, "星期三": 2, "礼拜三": 2, "周3": 2,
+    "周四": 3, "星期四": 3, "礼拜四": 3, "周4": 3,
+    "周五": 4, "星期五": 4, "礼拜五": 4, "周5": 4,
+    "周六": 5, "星期六": 5, "礼拜六": 5, "周6": 5,
+    "周日": 6, "星期日": 6, "星期天": 6, "礼拜日": 6, "礼拜天": 6, "周天": 6, "周7": 6,
 }
 
-# 模糊时段关键词（权重用于置信度计算）
-TIME_PERIODS = {
-    "清晨": ("early_morning", 0.75),
-    "早上": ("morning", 0.80),
-    "上午": ("morning", 0.85),
-    "中午": ("noon", 0.90),
-    "下午": ("afternoon", 0.85),
-    "傍晚": ("evening", 0.82),
-    "晚上": ("evening", 0.80),
-    "夜间": ("night", 0.70),
-    "深夜": ("night", 0.65),
-    "凌晨": ("early_morning", 0.70),
-}
-
-# 节假日映射（固定公历日期）
+# 节日映射（月, 日 -> 名称）
 HOLIDAYS = {
-    "元旦": (1, 1),
-    "春节": None,  # 农历，不处理
-    "劳动节": (5, 1),
-    "国庆节": (10, 1),
-    "圣诞节": (12, 25),
-    "情人节": (2, 14),
-    "妇女节": (3, 8),
-    "植树节": (3, 12),
-    "愚人节": (4, 1),
-    "儿童节": (6, 1),
-    "建军节": (8, 1),
-    "教师节": (9, 10),
-    "万圣节": (10, 31),
-    "光棍节": (11, 11),
-    "平安夜": (12, 24),
+    (1, 1): "元旦",
+    (2, 14): "情人节",
+    (3, 8): "妇女节",
+    (3, 12): "植树节",
+    (4, 1): "愚人节",
+    (5, 1): "劳动节",
+    (5, 4): "青年节",
+    (6, 1): "儿童节",
+    (7, 1): "建党节",
+    (8, 1): "建军节",
+    (9, 10): "教师节",
+    (10, 1): "国庆节",
+    (12, 25): "圣诞节",
 }
 
-# 英文月份缩写
-EN_MONTHS = {
-    "jan": 1, "feb": 2, "mar": 3, "apr": 4, "may": 5, "jun": 6,
-    "jul": 7, "aug": 8, "sep": 9, "oct": 10, "nov": 11, "dec": 12,
+# 节日名称反向映射
+HOLIDAY_NAMES = {name: (m, d) for (m, d), name in HOLIDAYS.items()}
+
+# 数字中文映射
+CN_NUM = {
+    "零": 0, "〇": 0, "一": 1, "二": 2, "两": 2, "三": 3,
+    "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
+    "十": 10, "十一": 11, "十二": 12, "十三": 13, "十四": 14,
+    "十五": 15, "十六": 16, "十七": 17, "十八": 18, "十九": 19,
+    "二十": 20, "二十一": 21, "二十二": 22, "二十三": 23,
+    "二十四": 24, "二十五": 25, "二十六": 26, "二十七": 27,
+    "二十八": 28, "二十九": 29, "三十": 30, "三十一": 31,
 }
 
-# 星期映射（中文）
-WEEKDAYS_CN = {
-    "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6, "日": 7, "天": 7,
+# 数字中文简写映射
+CN_NUM_SHORT = {
+    "零": 0, "一": 1, "二": 2, "两": 2, "三": 3,
+    "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9,
+    "十": 10,
 }
 
+# 时段中文映射
+PERIOD_CN = {
+    "上旬": (1, 10),
+    "中旬": (11, 20),
+    "下旬": (21, 31),
+}
 
-def _err(code: str, detail: str = "") -> Dict[str, Any]:
-    """构造错误返回结构"""
-    msg = ERROR_CODES.get(code, ERROR_CODES["E010"])
-    result = {"error": {"code": code, "message": msg}}
-    if detail:
-        result["error"]["detail"] = detail
-    return result
+# 相对日期关键词
+RELATIVE_PATTERNS = [
+    (re.compile(r"^今天$|^今日$"), 0),
+    (re.compile(r"^明天$|^明日$"), 1),
+    (re.compile(r"^后天$"), 2),
+    (re.compile(r"^昨天$|^昨日$"), -1),
+    (re.compile(r"^前天$"), -2),
+    (re.compile(r"^大前天$"), -3),
+]
+
+# 偏移量模式：如 "三天后"、"五日前"
+OFFSET_PATTERN = re.compile(
+    r"^(?P<num>[\d一二两三四五六七八九十]+)\s*(?P<unit>天|日|周|星期|个月|月|年)\s*(?P<dir>后|前|之后|以前)$"
+)
+
+# 绝对日期模式：如 "2024年3月15日"
+ABSOLUTE_PATTERN = re.compile(
+    r"^(?P<year>\d{4})\s*年\s*(?P<month>\d{1,2})\s*月\s*(?P<day>\d{1,2})\s*日?$"
+)
+
+# 月日模式：如 "3月15日"
+MONTH_DAY_PATTERN = re.compile(
+    r"^(?P<month>\d{1,2})\s*月\s*(?P<day>\d{1,2})\s*日?$"
+)
+
+# 范围模式：如 "从周一到周五"
+RANGE_PATTERN = re.compile(
+    r"^从?\s*(?P<start>.+?)\s*到\s*(?P<end>.+?)\s*$"
+)
+
+# 批量分隔符
+BATCH_SPLIT_PATTERN = re.compile(r"[,，;；、]+")
 
 
-def _parse_cn_number(text: str) -> Optional[int]:
-    """解析简单中文数字（0-99）"""
+# ============================================================
+# 工具函数
+# ============================================================
+
+def _cn_to_int(text: str) -> Optional[int]:
+    """中文数字转整数，支持 0-99。"""
+    text = text.strip()
     if not text:
         return None
-    # 直接数字
+    # 纯阿拉伯数字
     if text.isdigit():
         return int(text)
     # 中文数字
     if text in CN_NUM:
         return CN_NUM[text]
-    # 十位处理
+    # 组合形式如 "二十三"
     if "十" in text:
         parts = text.split("十")
-        tens = CN_NUM.get(parts[0], 1) if parts[0] else 1
-        ones = CN_NUM.get(parts[1], 0) if len(parts) > 1 and parts[1] else 0
+        tens = CN_NUM_SHORT.get(parts[0], 0) if parts[0] else 0
+        ones = CN_NUM_SHORT.get(parts[1], 0) if len(parts) > 1 and parts[1] else 0
+        if tens == 0 and parts[0] == "":
+            tens = 1  # "十" = 10
         return tens * 10 + ones
+    # 单个数字
+    if text in CN_NUM_SHORT:
+        return CN_NUM_SHORT[text]
     return None
 
 
-def _parse_time(text: str) -> Optional[Tuple[int, int, int]]:
-    """解析时间字符串为 (时, 分, 秒)，失败返回 None"""
-    text = text.strip()
-    # 支持 HH:MM 或 HH:MM:SS
-    m = re.match(r"^(\d{1,2}):(\d{2})(?::(\d{2}))?$", text)
-    if m:
-        h, mi = int(m.group(1)), int(m.group(2))
-        s = int(m.group(3)) if m.group(3) else 0
-        if 0 <= h <= 23 and 0 <= mi <= 59 and 0 <= s <= 59:
-            return (h, mi, s)
-    # 支持 "3点" "3点半" "3点15分" 等中文
-    m = re.match(r"^(\d{1,2})点(?:(半)|(\d{1,2})分?)?$", text)
-    if m:
-        h = int(m.group(1))
-        if 0 <= h <= 23:
-            if m.group(2):  # 半
-                return (h, 30, 0)
-            if m.group(3):
-                mi = int(m.group(3))
-                if 0 <= mi <= 59:
-                    return (h, mi, 0)
-            return (h, 0, 0)
-    return None
+def _is_valid_date(year: int, month: int, day: int) -> bool:
+    """检查日期是否合法。"""
+    try:
+        datetime.date(year, month, day)
+        return True
+    except ValueError:
+        return False
 
 
-def _parse_timezone(text: str) -> Optional[str]:
-    """解析时区标注如 UTC+8, UTC-5, UTC+5:30, 北京时间"""
-    text = text.strip()
-    if "北京时间" in text:
-        return "UTC+8"
-    m = re.match(r"^UTC([+-])(\d{1,2})(?::(\d{2}))?$", text.strip(), re.IGNORECASE)
-    if m:
-        sign = 1 if m.group(1) == "+" else -1
-        h = int(m.group(2))
-        mi = int(m.group(3)) if m.group(3) else 0
-        if 0 <= h <= 14 and 0 <= mi <= 59:
-            return f"UTC{'+' if sign > 0 else '-'}{h}:{mi:02d}" if mi else f"UTC{'+' if sign > 0 else '-'}{h}"
-    return None
+def _date_to_str(d: datetime.date) -> str:
+    """日期转字符串 YYYY-MM-DD。"""
+    return d.strftime("%Y-%m-%d")
 
 
-def _parse_holiday(text: str, year: int) -> Optional[Dict[str, Any]]:
-    """识别节假日，返回包含 date 和 holiday 字段的字典"""
-    for name, (month, day) in HOLIDAYS.items():
-        if name in text and month is not None:
-            try:
-                d = datetime.date(year, month, day)
-                return {"date": d.isoformat(), "holiday": name, "format": "holiday"}
-            except ValueError:
-                return None
-    return None
+def _today() -> datetime.date:
+    """获取今天日期（便于测试替换）。"""
+    return datetime.date.today()
 
 
-def _get_weekday_date(year: int, month: int, day: int, target_wd: int) -> datetime.date:
-    """获取给定日期所在周的指定星期几（周一=1 ... 周日=7）"""
-    base = datetime.date(year, month, day)
-    delta = target_wd - base.isoweekday()
-    return base + datetime.timedelta(days=delta)
-
-
-def parse_datetime(text: str, base_date: Optional[datetime.date] = None) -> Dict[str, Any]:
-    """
-    解析自然语言日期描述为结构化数据。
-
-    参数:
-        text: 自然语言日期描述
-        base_date: 基准日期（默认今天），用于相对日期计算
-
-    返回:
-        结构化字典，包含 date, time 等字段；失败时含 error 字段
-    """
-    # ---- 输入校验 ----
-    if text is None:
-        return _err("E001")
-    if not isinstance(text, str):
-        return _err("E002")
-    text = text.strip()
-    if not text:
-        return _err("E001")
-
-    # 基准日期
-    today = base_date or datetime.date.today()
-    year = today.year
-
+def _build_result(
+    date: Optional[datetime.date] = None,
+    date_range: Optional[Tuple[datetime.date, datetime.date]] = None,
+    confidence: float = 0.0,
+    holiday: Optional[str] = None,
+) -> Dict[str, Any]:
+    """构建标准输出结构。"""
     result: Dict[str, Any] = {}
-    offset_days = 0
-    time_str: Optional[str] = None
-    time_period: Optional[str] = None
-    confidence = 0.5  # 默认置信度
-    tz_str: Optional[str] = None
-    holiday_name: Optional[str] = None
-
-    # ---- 时区识别 ----
-    tz_match = re.search(r"(UTC[+-]\d{1,2}(?::\d{2})?|北京时间)", text)
-    if tz_match:
-        tz_parsed = _parse_timezone(tz_match.group(1))
-        if tz_parsed:
-            tz_str = tz_parsed
-            result["timezone"] = tz_str
-            text = text.replace(tz_match.group(1), "").strip()
-        else:
-            return _err("E008", tz_match.group(1))
-
-    # ---- 节假日识别 ----
-    holiday_result = _parse_holiday(text, year)
-    if holiday_result:
-        result.update(holiday_result)
-        return result
-
-    # ---- 相对日期关键词 ----
-    rel_map = {
-        "前天": -2, "昨天": -1, "今天": 0, "明天": 1, "后天": 2,
-        "大前天": -3, "大后天": 3,
-    }
-    for kw, off in rel_map.items():
-        if kw in text:
-            offset_days = off
-            text = text.replace(kw, "").strip()
-            break
-
-    # ---- 星期几识别（如 周一、周三、上周五） ----
-    wd_match = re.search(r"(?:上|本|这|下)?(?:周|星期|礼拜)([一二三四五六日天])", text)
-    if wd_match:
-        prefix = wd_match.group(0)[0] if wd_match.group(0)[0] in "上本这下" else ""
-        wd_num = WEEKDAYS_CN.get(wd_match.group(1))
-        if wd_num:
-            if prefix == "上":
-                # 上周：取当前周对应星期再减7天
-                target = _get_weekday_date(year, today.month, today.day, wd_num)
-                offset_days = (target - today).days - 7
-            elif prefix == "下":
-                target = _get_weekday_date(year, today.month, today.day, wd_num)
-                offset_days = (target - today).days + 7
-            else:
-                target = _get_weekday_date(year, today.month, today.day, wd_num)
-                offset_days = (target - today).days
-            text = text.replace(wd_match.group(0), "").strip()
-
-    # ---- 模糊时段识别 ----
-    for kw, (period, conf) in TIME_PERIODS.items():
-        if kw in text:
-            time_period = period
-            confidence = max(confidence, conf)
-            text = text.replace(kw, "").strip()
-            break
-
-    # ---- 时间识别（如 3点、15:30） ----
-    time_match = re.search(r"(\d{1,2}[:点]\d{0,2}(?::\d{2})?(?:分)?)", text)
-    if time_match:
-        t_parsed = _parse_time(time_match.group(1))
-        if t_parsed:
-            h, mi, s = t_parsed
-            time_str = f"{h:02d}:{mi:02d}:{s:02d}"
-            result["time"] = time_str
-            text = text.replace(time_match.group(1), "").strip()
-
-    # ---- 绝对日期识别 ----
-    date_found = False
-    abs_date: Optional[datetime.date] = None
-
-    # 格式1: 2024年3月15日 或 2024年3月15号
-    m = re.search(r"(\d{4})年(\d{1,2})月(\d{1,2})[日号]?", text)
-    if m:
-        y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
-        try:
-            abs_date = datetime.date(y, mo, d)
-            date_found = True
-            text = text.replace(m.group(0), "").strip()
-        except ValueError:
-            return _err("E006", f"{y}-{mo}-{d}")
-
-    # 格式2: 3月15日 / 3月15号（无年份，默认当前年）
-    if not date_found:
-        m = re.search(r"(\d{1,2})月(\d{1,2})[日号]?", text)
-        if m:
-            mo, d = int(m.group(1)), int(m.group(2))
-            try:
-                abs_date = datetime.date(year, mo, d)
-                date_found = True
-                text = text.replace(m.group(0), "").strip()
-            except ValueError:
-                return _err("E006", f"{year}-{mo}-{d}")
-
-    # 格式3: 03/15/2024 或 2024/03/15 或 2024-03-15
-    if not date_found:
-        m = re.search(r"(\d{4})[/-](\d{1,2})[/-](\d{1,2})", text)
-        if m:
-            y, mo, d = int(m.group(1)), int(m.group(2)), int(m.group(3))
-            try:
-                abs_date = datetime.date(y, mo, d)
-                date_found = True
-                text = text.replace(m.group(0), "").strip()
-            except ValueError:
-                return _err("E006", f"{y}-{mo}-{d}")
-
-    # 格式4: 英文月份缩写（如 15 Mar 2024 或 Mar 15, 2024）
-    if not date_found:
-        m = re.search(r"(\d{1,2})\s+([A-Za-z]{3})\.?\s+(\d{4})", text)
-        if m:
-            d, mon, y = int(m.group(1)), m.group(2).lower(), int(m.group(3))
-            if mon in EN_MONTHS:
-                try:
-                    abs_date = datetime.date(y, EN_MONTHS[mon], d)
-                    date_found = True
-                    text = text.replace(m.group(0), "").strip()
-                except ValueError:
-                    return _err("E006", f"{y}-{EN_MONTHS[mon]}-{d}")
-        if not date_found:
-            m = re.search(r"([A-Za-z]{3})\.?\s+(\d{1,2}),?\s+(\d{4})", text)
-            if m:
-                mon, d, y = m.group(1).lower(), int(m.group(2)), int(m.group(3))
-                if mon in EN_MONTHS:
-                    try:
-                        abs_date = datetime.date(y, EN_MONTHS[mon], d)
-                        date_found = True
-                        text = text.replace(m.group(0), "").strip()
-                    except ValueError:
-                        return _err("E006", f"{y}-{EN_MONTHS[mon]}-{d}")
-
-    # ---- 组合日期 ----
-    if date_found and offset_days != 0:
-        # 绝对日期 + 相对偏移（如 3月15日 后天？不太合理，但规格允许简单组合）
-        try:
-            abs_date = abs_date + datetime.timedelta(days=offset_days)
-        except OverflowError:
-            return _err("E009")
-        offset_days = 0  # 已应用
-
-    if date_found:
-        result["date"] = abs_date.isoformat()
-        result["format"] = "explicit"
-    elif offset_days != 0:
-        try:
-            target = today + datetime.timedelta(days=offset_days)
-            result["date"] = target.isoformat()
-            result["offset_days"] = offset_days
-            result["format"] = "relative"
-        except OverflowError:
-            return _err("E009")
-    else:
-        # 无日期信息，尝试仅识别时间/时段
-        if time_str or time_period:
-            result["date"] = today.isoformat()
-            result["format"] = "partial"
-        else:
-            return _err("E003")
-
-    # ---- 附加信息 ----
-    if time_period:
-        result["time_period"] = time_period
-        result["confidence"] = round(confidence, 2)
-    elif time_str:
-        result["confidence"] = 0.95
-    elif date_found:
-        result["confidence"] = 1.0
-    else:
-        result["confidence"] = 0.6
-
+    if date is not None:
+        result["date"] = _date_to_str(date)
+    if date_range is not None:
+        result["date_range"] = {
+            "start": _date_to_str(date_range[0]),
+            "end": _date_to_str(date_range[1]),
+        }
+    result["confidence"] = confidence
+    if holiday:
+        result["holiday"] = holiday
     return result
 
 
-def parse_batch(items: List[str], base_date: Optional[datetime.date] = None) -> List[Dict[str, Any]]:
-    """批量解析多条日期描述"""
-    if not items:
-        return [_err("E004")]
-    if not isinstance(items, list):
-        return [_err("E004")]
-    results = []
-    for item in items:
-        if not isinstance(item, str):
-            results.append(_err("E005"))
+# ============================================================
+# 核心解析逻辑
+# ============================================================
+
+def parse_absolute(text: str, ref_date: datetime.date) -> Optional[Dict[str, Any]]:
+    """解析绝对日期，如 '2024年3月15日'。"""
+    m = ABSOLUTE_PATTERN.match(text)
+    if m:
+        year = int(m.group("year"))
+        month = int(m.group("month"))
+        day = int(m.group("day"))
+        if not _is_valid_date(year, month, day):
+            raise ValueError("E003")
+        d = datetime.date(year, month, day)
+        holiday = HOLIDAYS.get((month, day))
+        return _build_result(date=d, confidence=1.0, holiday=holiday)
+
+    m = MONTH_DAY_PATTERN.match(text)
+    if m:
+        month = int(m.group("month"))
+        day = int(m.group("day"))
+        year = ref_date.year
+        # 如果月份已过，视为明年
+        if (month, day) < (ref_date.month, ref_date.day):
+            year += 1
+        if not _is_valid_date(year, month, day):
+            raise ValueError("E003")
+        d = datetime.date(year, month, day)
+        holiday = HOLIDAYS.get((month, day))
+        return _build_result(date=d, confidence=0.9, holiday=holiday)
+
+    return None
+
+
+def parse_relative(text: str, ref_date: datetime.date) -> Optional[Dict[str, Any]]:
+    """解析相对日期，如 '三天后'。"""
+    # 固定关键词
+    for pattern, delta in RELATIVE_PATTERNS:
+        if pattern.match(text):
+            d = ref_date + datetime.timedelta(days=delta)
+            return _build_result(date=d, confidence=0.95)
+
+    # 偏移量模式
+    m = OFFSET_PATTERN.match(text)
+    if m:
+        num_text = m.group("num")
+        unit = m.group("unit")
+        direction = m.group("dir")
+
+        num = _cn_to_int(num_text)
+        if num is None or num <= 0:
+            raise ValueError("E010")
+
+        # 计算偏移天数
+        if unit in ("天", "日"):
+            delta_days = num
+        elif unit in ("周", "星期"):
+            delta_days = num * 7
+        elif unit == "个月":
+            # 月份偏移（按日历月）
+            sign = -1 if "前" in direction else 1
+            total_months = ref_date.year * 12 + (ref_date.month - 1) + sign * num
+            new_year = total_months // 12
+            new_month = total_months % 12 + 1
+            # 处理月末（如1月31日 + 1个月）
+            last_day = calendar.monthrange(new_year, new_month)[1]
+            new_day = min(ref_date.day, last_day)
+            d = datetime.date(new_year, new_month, new_day)
+            return _build_result(date=d, confidence=0.9)
+        elif unit == "月":
+            delta_days = num * 30  # 近似
+        elif unit == "年":
+            sign = -1 if "前" in direction else 1
+            new_year = ref_date.year + sign * num
+            # 处理闰日
+            try:
+                d = datetime.date(new_year, ref_date.month, ref_date.day)
+            except ValueError:
+                d = datetime.date(new_year, ref_date.month, 28)
+            return _build_result(date=d, confidence=0.9)
         else:
-            results.append(parse_datetime(item, base_date))
+            raise ValueError("E007")
+
+        sign = -1 if "前" in direction else 1
+        d = ref_date + datetime.timedelta(days=sign * delta_days)
+        return _build_result(date=d, confidence=0.95)
+
+    return None
+
+
+def parse_weekday(text: str, ref_date: datetime.date) -> Optional[Dict[str, Any]]:
+    """解析星期，如 '下周一'、'周五'。"""
+    # 模式：可选前缀 + 星期名
+    m = re.match(r"^(?P<prefix>这|本|下|上|下个|上个)?\s*(?P<weekday>周[一二三四五六日天]|星期[一二三四五六日天]|礼拜[一二三四五六日天]|周[1-7])$", text)
+    if not m:
+        return None
+
+    prefix = m.group("prefix") or ""
+    weekday_text = m.group("weekday")
+
+    if weekday_text not in WEEKDAY_CN:
+        raise ValueError("E008")
+
+    target_weekday = WEEKDAY_CN[weekday_text]
+    current_weekday = ref_date.weekday()  # 周一=0
+
+    # 计算偏移
+    if prefix in ("这", "本", ""):
+        delta = (target_weekday - current_weekday) % 7
+    elif prefix == "下":
+        delta = (target_weekday - current_weekday) % 7 + 7
+    elif prefix == "下个":
+        delta = (target_weekday - current_weekday) % 7 + 7
+    elif prefix == "上":
+        delta = (target_weekday - current_weekday) % 7 - 7
+    elif prefix == "上个":
+        delta = (target_weekday - current_weekday) % 7 - 7
+    else:
+        raise ValueError("E008")
+
+    d = ref_date + datetime.timedelta(days=delta)
+    return _build_result(date=d, confidence=0.85)
+
+
+def parse_holiday(text: str, ref_date: datetime.date) -> Optional[Dict[str, Any]]:
+    """解析节日，如 '国庆节'。"""
+    if text not in HOLIDAY_NAMES:
+        return None
+
+    month, day = HOLIDAY_NAMES[text]
+    year = ref_date.year
+    # 如果节日已过，视为明年
+    if (month, day) < (ref_date.month, ref_date.day):
+        year += 1
+    if not _is_valid_date(year, month, day):
+        raise ValueError("E003")
+    d = datetime.date(year, month, day)
+    return _build_result(date=d, confidence=0.85, holiday=text)
+
+
+def parse_period(text: str, ref_date: datetime.date) -> Optional[Dict[str, Any]]:
+    """解析模糊时段，如 '下月中旬'。"""
+    # 模式：可选前缀 + 时段
+    m = re.match(r"^(?P<prefix>这|本|下|上|下个|上个)?\s*(?P<period>上旬|中旬|下旬)$", text)
+    if not m:
+        return None
+
+    prefix = m.group("prefix") or ""
+    period = m.group("period")
+
+    if period not in PERIOD_CN:
+        raise ValueError("E007")
+
+    start_day, end_day = PERIOD_CN[period]
+
+    # 计算月份偏移
+    if prefix in ("这", "本", ""):
+        month_offset = 0
+    elif prefix == "下":
+        month_offset = 1
+    elif prefix == "下个":
+        month_offset = 1
+    elif prefix == "上":
+        month_offset = -1
+    elif prefix == "上个":
+        month_offset = -1
+    else:
+        raise ValueError("E007")
+
+    total_months = ref_date.year * 12 + (ref_date.month - 1) + month_offset
+    year = total_months // 12
+    month = total_months % 12 + 1
+
+    # 处理月末（下旬可能只有28/29/30/31天）
+    last_day = calendar.monthrange(year, month)[1]
+    actual_end_day = min(end_day, last_day)
+
+    start = datetime.date(year, month, start_day)
+    end = datetime.date(year, month, actual_end_day)
+    return _build_result(date_range=(start, end), confidence=0.7)
+
+
+def parse_range(text: str, ref_date: datetime.date) -> Optional[Dict[str, Any]]:
+    """解析时间范围，如 '从周一到周五'。"""
+    m = RANGE_PATTERN.match(text)
+    if not m:
+        return None
+
+    start_text = m.group("start").strip()
+    end_text = m.group("end").strip()
+
+    # 解析起点和终点
+    start_result = parse_single(start_text, ref_date)
+    if start_result is None or "date" not in start_result:
+        return None
+
+    end_result = parse_single(end_text, ref_date)
+    if end_result is None or "date" not in end_result:
+        return None
+
+    start_date = datetime.date.fromisoformat(start_result["date"])
+    end_date = datetime.date.fromisoformat(end_result["date"])
+
+    # 如果终点在起点之前，可能表示跨周（如"从周五到下周一"）
+    if end_date < start_date:
+        # 尝试将终点延后一周
+        end_date += datetime.timedelta(days=7)
+
+    return _build_result(
+        date_range=(start_date, end_date),
+        confidence=min(start_result["confidence"], end_result["confidence"]) * 0.9,
+    )
+
+
+def parse_single(text: str, ref_date: Optional[datetime.date] = None) -> Optional[Dict[str, Any]]:
+    """解析单个日期文本。"""
+    if ref_date is None:
+        ref_date = _today()
+
+    text = text.strip()
+    if not text:
+        raise ValueError("E002")
+
+    # 按优先级依次尝试
+    parsers = [
+        parse_absolute,
+        parse_relative,
+        parse_weekday,
+        parse_holiday,
+        parse_period,
+        parse_range,
+    ]
+
+    for parser in parsers:
+        try:
+            result = parser(text, ref_date)
+            if result is not None:
+                return result
+        except ValueError as e:
+            # 如果解析器识别了但日期非法，抛出具体错误码
+            if str(e).startswith("E"):
+                raise
+
+    return None
+
+
+def parse_batch(texts: List[str], ref_date: Optional[datetime.date] = None) -> List[Dict[str, Any]]:
+    """批量解析日期文本。"""
+    if not texts:
+        raise ValueError("E004")
+
+    results = []
+    for text in texts:
+        try:
+            result = parse_single(text, ref_date)
+            if result is None:
+                results.append({"error": "E002", "input": text, "message": "无法解析的日期文本"})
+            else:
+                results.append({"input": text, **result})
+        except ValueError as e:
+            error_code = str(e) if str(e).startswith("E") else "E006"
+            results.append({"error": error_code, "input": text, "message": "解析失败"})
+
     return results
 
 
-def _selftest() -> int:
-    """自检核心逻辑，使用硬编码样例数据，不依赖外部环境"""
-    print("[chronic] 自检开始...")
-    errors = 0
+# ============================================================
+# 自检模块
+# ============================================================
 
-    # 固定基准日期，确保可复现
-    base = datetime.date(2026, 5, 10)  # 2026-05-10 是星期日
+def run_selftest() -> int:
+    """内置硬编码样例离线自检。"""
+    print("=" * 60)
+    print("chronic 自检开始")
+    print("=" * 60)
 
-    # 测试用例：(输入, 期望日期, 期望时间, 期望偏移)
-    test_cases = [
-        ("明天", "2026-05-11", None, 1),
-        ("后天下午3点", "2026-05-12", "15:00:00", 2),
-        ("2024年3月15日", "2024-03-15", None, None),
-        ("03/15/2024", "2024-03-15", None, None),
-        ("周五傍晚", "2026-05-15", None, None),  # 基准日周日，本周五是 5/15
-        ("上周三", "2026-05-06", None, None),    # 基准日周日，上周三是 5/6
-        ("国庆节", "2026-10-01", None, None),
-        ("明天上午9点(UTC+8)", "2026-05-11", "09:00:00", 1),
+    # 固定参考日期（2026-05-01，周五）
+    ref = datetime.date(2026, 5, 1)
+
+    # 1. 绝对日期解析
+    print("\n[1] 绝对日期解析")
+    r = parse_single("2024年3月15日", ref)
+    assert r is not None, "绝对日期解析失败"
+    assert r["date"] == "2024-03-15", f"绝对日期错误: {r['date']}"
+    assert r["confidence"] > 0.9, "置信度异常"
+    print(f"  ✓ '2024年3月15日' -> {r['date']}")
+
+    # 2. 相对日期解析
+    print("\n[2] 相对日期解析")
+    r = parse_single("三天后", ref)
+    assert r is not None, "相对日期解析失败"
+    assert r["date"] == "2026-05-04", f"相对日期错误: {r['date']}"
+    assert r["confidence"] > 0.9, "置信度异常"
+    print(f"  ✓ '三天后' -> {r['date']}")
+
+    # 3. 模糊日期解析
+    print("\n[3] 模糊日期解析")
+    r = parse_single("下月中旬", ref)
+    assert r is not None, "模糊日期解析失败"
+    assert "date_range" in r, "缺少日期范围"
+    assert r["date_range"]["start"] == "2026-05-11", f"范围起点错误: {r['date_range']['start']}"
+    assert r["date_range"]["end"] == "2026-05-20", f"范围终点错误: {r['date_range']['end']}"
+    assert r["confidence"] > 0.5, "置信度异常"
+    print(f"  ✓ '下月中旬' -> {r['date_range']['start']} ~ {r['date_range']['end']}")
+
+    # 4. 星期解析
+    print("\n[4] 星期解析")
+    r = parse_single("下周一", ref)
+    assert r is not None, "星期解析失败"
+    assert r["date"] == "2026-05-04", f"星期解析错误: {r['date']}"
+    assert r["confidence"] > 0.8, "置信度异常"
+    print(f"  ✓ '下周一' -> {r['date']}")
+
+    # 5. 节日识别
+    print("\n[5] 节日识别")
+    r = parse_single("国庆节", ref)
+    assert r is not None, "节日识别失败"
+    assert r["holiday"] == "国庆节", f"节日名错误: {r.get('holiday')}"
+    assert r["date"] == "2026-10-01", f"节日日期错误: {r['date']}"
+    print(f"  ✓ '国庆节' -> {r['date']} ({r['holiday']})")
+
+    # 6. 时间范围提取
+    print("\n[6] 时间范围提取")
+    r = parse_single("从周一到周五", ref)
+    assert r is not None, "范围解析失败"
+    assert "date_range" in r, "缺少范围"
+    assert r["date_range"]["start"] == "2026-05-04", f"范围起点错误: {r['date_range']['start']}"
+    assert r["date_range"]["end"] == "2026-05-08", f"范围终点错误: {r['date_range']['end']}"
+    print(f"  ✓ '从周一到周五' -> {r['date_range']['start']} ~ {r['date_range']['end']}")
+
+    # 7. 批量处理
+    print("\n[7] 批量处理")
+    batch = ["明天", "下周二", "2025年12月31日"]
+    results = parse_batch(batch, ref)
+    assert len(results) == 3, "批量结果数量不正确"
+    assert results[0]["date"] == "2026-05-02", f"批量结果0错误: {results[0]}"
+    assert results[1]["date"] == "2026-05-05", f"批量结果1错误: {results[1]}"
+    assert results[2]["date"] == "2025-12-31", f"批量结果2错误: {results[2]}"
+    print(f"  ✓ 批量解析 {len(results)} 条全部通过")
+
+    # 8. 非法输入处理
+    print("\n[8] 非法输入处理")
+    try:
+        parse_single("三斤苹果", ref)
+        assert False, "非法输入未抛出异常"
+    except ValueError as e:
+        assert str(e) == "E002", f"错误码不正确: {e}"
+    print("  ✓ '三斤苹果' -> 正确抛出 E002")
+
+    # 9. 非法日期
+    print("\n[9] 非法日期处理")
+    try:
+        parse_single("2024年2月30日", ref)
+        assert False, "非法日期未抛出异常"
+    except ValueError as e:
+        assert str(e) == "E003", f"错误码不正确: {e}"
+    print("  ✓ '2024年2月30日' -> 正确抛出 E003")
+
+    # 10. 宽松阈值验证
+    print("\n[10] 宽松阈值验证")
+    # 验证各种输入都能得到合理结果（不依赖精确值）
+    test_inputs = [
+        "今天", "明天", "昨天", "上周五", "下个月", "明年",
+        "1月1日", "12月31日", "周日", "劳动节", "上旬",
     ]
+    for t in test_inputs:
+        r = parse_single(t, ref)
+        assert r is not None, f"输入 '{t}' 解析失败"
+        assert "date" in r or "date_range" in r, f"输入 '{t}' 缺少结果"
+        assert r["confidence"] > 0.0, f"输入 '{t}' 置信度为0"
+    print(f"  ✓ {len(test_inputs)} 个测试输入全部通过")
 
-    for input_text, exp_date, exp_time, exp_offset in test_cases:
-        result = parse_datetime(input_text, base_date=base)
-        if "error" in result:
-            print(f"  [FAIL] '{input_text}' -> 错误: {result['error']}")
-            errors += 1
-            continue
+    print("\n" + "=" * 60)
+    print("所有自检通过 ✓")
+    print("=" * 60)
+    return 0
 
-        # 宽松断言：日期必须匹配
-        if result.get("date") != exp_date:
-            print(f"  [FAIL] '{input_text}' -> 期望日期 {exp_date}, 实际 {result.get('date')}")
-            errors += 1
-            continue
 
-        # 时间宽松断言：存在性 + 非空
-        if exp_time:
-            if not result.get("time") or result["time"] != exp_time:
-                print(f"  [FAIL] '{input_text}' -> 期望时间 {exp_time}, 实际 {result.get('time')}")
-                errors += 1
-                continue
-
-        # 偏移宽松断言：存在性 + 数值
-        if exp_offset is not None:
-            if result.get("offset_days") != exp_offset:
-                print(f"  [FAIL] '{input_text}' -> 期望偏移 {exp_offset}, 实际 {result.get('offset_days')}")
-                errors += 1
-                continue
-
-        print(f"  [PASS] '{input_text}' -> {result}")
-
-    # 批量测试
-    batch_input = ["明天", "2024年3月15日", "周五傍晚"]
-    batch_result = parse_batch(batch_input, base_date=base)
-    if len(batch_result) != 3:
-        print(f"  [FAIL] 批量测试期望 3 条结果, 实际 {len(batch_result)}")
-        errors += 1
-    else:
-        if "error" in batch_result[0] or "error" in batch_result[1] or "error" in batch_result[2]:
-            print("  [FAIL] 批量测试存在错误结果")
-            errors += 1
-        else:
-            print(f"  [PASS] 批量测试 -> {batch_result}")
-
-    # 错误处理测试
-    err_cases = ["", "   ", "无意义内容xyz", 12345]
-    for bad_input in err_cases:
-        r = parse_datetime(bad_input, base_date=base)
-        if "error" not in r:
-            print(f"  [FAIL] 错误输入 '{bad_input}' 未返回错误")
-            errors += 1
-        else:
-            print(f"  [PASS] 错误输入 '{bad_input}' -> {r['error']['code']}")
-
-    if errors == 0:
-        print("[chronic] 自检全部通过 ✔")
-    else:
-        print(f"[chronic] 自检完成，{errors} 项失败 ✘")
-    return errors
-
+# ============================================================
+# 命令行入口
+# ============================================================
 
 def main() -> int:
-    """命令行入口"""
+    """命令行主入口。"""
     parser = argparse.ArgumentParser(
-        prog="chronic",
-        description="时间语义解析：自然语言日期转结构化数据",
-        epilog="示例: chronic '后天下午3点' | chronic --batch '明天' '2024年3月15日'"
+        description="chronic - 自然语言日期解析工具",
+        epilog="示例: chronic '三天后' | chronic --batch '明天' '下周一'",
     )
-    parser.add_argument("text", nargs="?", help="要解析的日期描述")
-    parser.add_argument("--batch", nargs="+", help="批量解析多条日期描述")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("--json", action="store_true", help="以 JSON 格式输出")
+    parser.add_argument(
+        "text",
+        nargs="?",
+        help="要解析的日期文本",
+    )
+    parser.add_argument(
+        "--batch",
+        nargs="+",
+        help="批量解析多个日期文本",
+    )
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行内置自检",
+    )
+    parser.add_argument(
+        "--date",
+        help="参考日期（默认今天），格式 YYYY-MM-DD",
+    )
+
     args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
-        return _selftest()
+        try:
+            return run_selftest()
+        except AssertionError as e:
+            print(f"自检失败: {e}", file=sys.stderr)
+            return 1
+        except Exception as e:
+            print(f"自检异常: {e}", file=sys.stderr)
+            return 1
+
+    # 参考日期
+    ref_date = None
+    if args.date:
+        try:
+            ref_date = datetime.date.fromisoformat(args.date)
+        except ValueError:
+            print("E003: 参考日期格式错误，应为 YYYY-MM-DD", file=sys.stderr)
+            return 3
 
     # 批量模式
     if args.batch:
-        results = parse_batch(args.batch)
-        if args.json:
-            import json
+        try:
+            results = parse_batch(args.batch, ref_date)
             print(json.dumps(results, ensure_ascii=False, indent=2))
-        else:
-            for item, r in zip(args.batch, results):
-                if "error" in r:
-                    print(f"'{item}': 错误 [{r['error']['code']}] {r['error']['message']}")
-                else:
-                    print(f"'{item}': {r}")
-        return 0
+            return 0
+        except ValueError as e:
+            print(f"{e}: {e}", file=sys.stderr)
+            return 4
 
     # 单条模式
-    if not args.text:
-        parser.print_help()
-        return 1
+    if args.text:
+        try:
+            result = parse_single(args.text, ref_date)
+            if result is None:
+                print("E002: 无法解析的日期文本", file=sys.stderr)
+                return 2
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            return 0
+        except ValueError as e:
+            code = str(e) if str(e).startswith("E") else "E006"
+            print(f"{code}: 解析失败", file=sys.stderr)
+            return 2
 
-    result = parse_datetime(args.text)
-    if args.json:
-        import json
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-    else:
-        if "error" in result:
-            print(f"错误 [{result['error']['code']}]: {result['error']['message']}")
-            if "detail" in result["error"]:
-                print(f"详情: {result['error']['detail']}")
-            return 1
-        print(result)
-    return 0
+    # 无参数
+    parser.print_help()
+    return 1
 
 
 if __name__ == "__main__":
