@@ -82,7 +82,7 @@ class ParseResult:
 # 字段名称 -> 正则表达式模式
 FIELD_PATTERNS: Dict[str, str] = {
     "姓名": r"(?:姓名|名字|称呼)[:：\s]*([\u4e00-\u9fa5]{2,4})",
-    "电话": r"(?:电话|手机|联系方式)[:：\s]*(1[3-9]\d{9})",
+    "电话": r"(?:电话|手机|联系方式)[:：\s]*((?:1[3-9]\d{9})|(?:\d{3,4}[-]?\d{7,8}))",
     "邮箱": r"(?:邮箱|电子邮件|Email|E-mail)[:：\s]*([\w.\-]+@[\w\-]+\.[\w.\-]+)",
     "日期": r"(?:日期|时间|日期时间)[:：\s]*(\d{4}[-/]\d{1,2}[-/]\d{1,2})",
     "金额": r"(?:金额|价格|费用)[:：\s]*([0-9]+(?:\.[0-9]{1,2})?)\s*(元|人民币|CNY|￥)?",
@@ -179,8 +179,11 @@ def _calc_confidence(field_name: str, value: str, full_text: str) -> str:
         # 值包含特定格式特征增加置信度
         if field_name == "邮箱" and "@" in value:
             score += 0.2
-        if field_name == "电话" and re.fullmatch(r"1[3-9]\d{9}", value):
-            score += 0.1
+        if field_name == "电话":
+            if re.fullmatch(r"1[3-9]\d{9}", value):
+                score += 0.1  # 完整手机号
+            elif len(value) >= 7:
+                score += 0.05  # 较长的电话号码
         if field_name == "日期" and re.fullmatch(r"\d{4}[-/]\d{1,2}[-/]\d{1,2}", value):
             score += 0.1
 
