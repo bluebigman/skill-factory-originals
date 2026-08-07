@@ -167,7 +167,14 @@ def format_output(
 
     返回:
         格式化后的字符串
+
+    异常:
+        ValueError: 如果输出格式无效
     """
+    # 验证输出格式
+    if output_format not in ["json", "text"]:
+        raise ValueError(f"E007: {ERROR_MESSAGES['E007']}")
+
     # 确定置信度标注
     if confidence >= CONFIDENCE_HIGH:
         flag = "直接输出"
@@ -203,11 +210,18 @@ def process_single(input_text: str, output_format: str = "json") -> str:
 
     返回:
         处理结果字符串
+
+    异常:
+        ValueError: 如果输入或输出格式无效
     """
     # 校验输入
     error_code = validate_input(input_text)
     if error_code:
         raise ValueError(f"{error_code}: {ERROR_MESSAGES[error_code]}")
+
+    # 校验输出格式
+    if output_format not in ["json", "text"]:
+        raise ValueError(f"E007: {ERROR_MESSAGES['E007']}")
 
     # URL 校验（不访问网络）
     if is_url(input_text):
@@ -235,6 +249,9 @@ def process_batch(input_text: str, output_format: str = "json") -> str:
 
     返回:
         处理结果字符串
+
+    异常:
+        ValueError: 如果输入不是有效的 JSON 数组
     """
     try:
         items = json.loads(input_text)
@@ -369,8 +386,12 @@ def run_selftest() -> bool:
         process_single(sample, "invalid_format")
         all_passed = False
         print("  ✗ 非法格式参数测试未触发错误")
-    except ValueError:
-        print("  ✓ 非法格式参数测试通过")
+    except ValueError as e:
+        if "E007" in str(e):
+            print("  ✓ 非法格式参数测试通过")
+        else:
+            all_passed = False
+            print(f"  ✗ 非法格式参数测试错误码不符: {e}")
 
     # 汇总结果
     print("\n" + "=" * 60)
@@ -401,9 +422,8 @@ def main() -> int:
     )
     parser.add_argument(
         "--format",
-        choices=["json", "text"],
         default="json",
-        help="输出格式（默认: json）",
+        help="输出格式（默认: json，可选: json/text）",
     )
     parser.add_argument(
         "--batch",
