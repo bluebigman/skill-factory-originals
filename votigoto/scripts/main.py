@@ -1,134 +1,119 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-votigoto - TiVo录播数据提取与节目清单解析工具
+votigoto - TiVo录播数据提取与节目清单解析
+
+本脚本根据功能规格独立实现（clean-room），不参考任何既有代码。
+仅使用 Python 标准库，无第三方依赖。
 
 功能：
-- 解析 TiVoToGo 协议数据（文件/URL/直接粘贴的原始数据）
+- 解析 TiVoToGo 协议数据文本
 - 提取节目名称、录制时间、时长、频道、状态等核心字段
-- 输出 JSON/表格/文本格式的结构化结果
-- 支持批量处理与自定义输出字段
-- 对每个字段标注置信度等级（高/中/低）
+- 输出 JSON / 文本 / 表格格式
+- 支持批量数据输入
+- 内置 --selftest 离线自检
 
-用法：
-    python main.py <input_file_or_url_or_raw_data> [--format json|table|text] [--fields 字段1,字段2,...]
-    python main.py --selftest   # 离线自检
-
-错误码：
-    E001 - 参数错误
-    E002 - 文件读取失败
-    E003 - URL读取失败
-    E004 - 数据解析失败
-    E005 - 输出格式错误
-    E006 - 不支持的协议格式
-    E007 - 字段过滤错误
-    E008 - 数据为空
-    E009 - 批量处理失败
-    E010 - 内部错误
+用法示例：
+    python main.py --input data.txt --format json
+    python main.py --selftest
 """
 
 import argparse
 import json
 import re
 import sys
-import urllib.request
-from datetime import datetime
-from typing import Dict, List, Optional, Any, Tuple
-
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional, Tuple
 
 # ============================================================
 # 常量定义
 # ============================================================
 
-# 协议标识
-TIVO_PROTOCOL_MARKERS = [
-    "TiVoToGo",
-    "tivo",
-    "TiVo",
-    "TIVO",
-]
+# 错误码定义
+ERROR_CODES = {
+    "E001": "参数错误：缺少必要参数或参数格式不正确",
+    "E002": "文件错误：无法读取输入文件",
+    "E003": "数据错误：输入数据为空或格式无效",
+    "E004": "解析错误：无法解析 TiVoToGo 协议数据",
+    "E005": "输出错误：无法生成输出内容",
+    "E006": "自检错误：自检失败",
+    "E007": "批量处理错误：批量数据中存在无效条目",
+    "E008": "格式错误：不支持的输出格式",
+    "E009": "字段错误：指定的输出字段不存在",
+    "E010": "内部错误：未预期的异常",
+}
 
-# 置信度等级
+# 输出格式支持列表
+SUPPORTED_FORMATS = ["json", "text", "table"]
+
+# 字段置信度等级
 CONFIDENCE_HIGH = "高"
 CONFIDENCE_MEDIUM = "中"
 CONFIDENCE_LOW = "低"
 
-# 未知字段占位符
-UNKNOWN_FIELD_PLACEHOLDER = "[需核实:{}]"
-
-# 支持的输出格式
-SUPPORTED_FORMATS = ["json", "table", "text"]
-
-# 支持的字段列表
-SUPPORTED_FIELDS = [
-    "program_name",      # 节目名称
-    "record_time",       # 录制时间
-    "duration",          # 时长
-    "channel",           # 频道
-    "status",            # 状态
-    "description",       # 描述
-    "series",            # 系列
-    "episode",           # 集数
-    "quality",           # 画质
-    "file_size",         # 文件大小
+# 默认输出字段（按规格 C3 约定）
+DEFAULT_FIELDS = [
+    "title",          # 节目名称
+    "record_time",    # 录制时间
+    "duration",       # 时长
+    "channel",        # 频道
+    "status",         # 状态
 ]
 
+# 缺失字段占位符（按规格 L3）
+MISSING_FIELD_PLACEHOLDER = "[需核实:{field}]"
+
 
 # ============================================================
-# 数据模型
+# 核心数据结构
 # ============================================================
 
-class TiVoProgram:
-    """TiVo录播节目数据模型"""
+class TiVoRecord:
+    """TiVo 录播单条记录数据结构"""
     
-    def __init__(self):
-        self.data: Dict[str, Dict[str, Any]] = {}
-        # 初始化所有字段为未知
-        for field in SUPPORTED_FIELDS:
-            self.data[field] = {
-                "value": None,
-                "confidence": CONFIDENCE_LOW,
-                "raw": ""
-            }
-    
-    def set_field(self, field: str, value: Any, confidence: str = CONFIDENCE_MEDIUM, raw: str = ""):
-        """设置字段值"""
-        if field in SUPPORTED_FIELDS:
-            self.data[field] = {
-                "value": value,
-                "confidence": confidence,
-                "raw": raw
-            }
-    
-    def get_field(self, field: str) -> Dict[str, Any]:
-        """获取字段值"""
-        if field in SUPPORTED_FIELDS:
-            return self.data[field]
-        return {"value": None, "confidence": CONFIDENCE_LOW, "raw": ""}
-    
-    def to_dict(self, include_confidence: bool = True) -> Dict[str, Any]:
-        """转换为字典"""
-        result = {}
-        for field in SUPPORTED_FIELDS:
-            item = self.data[field]
-            if item["value"] is None:
-                result[field] = UNKNOWN_FIELD_PLACEHOLDER.format(field)
+    def __init__(self) -> None:
+        self.title: str = ""
+        self.record_time: Optional[datetime] = None
+        self.duration_minutes: Optional[int] = None
+        self.channel: str = ""
+        self.status: str = ""
+        self.raw_data: str = ""
+        self.confidence: Dict[str, str] = {}  # 字段->置信度
+        
+    def to_dict(self, fields: Optional[List[str]] = None) -> Dict[str, Any]:
+        """转换为字典输出"""
+        result: Dict[str, Any] = {}
+        
+        # 确定要输出的字段
+        output_fields = fields if fields else DEFAULT_FIELDS
+        
+        for field in output_fields:
+            if field == "title":
+                result["title"] = self.title or MISSING_FIELD_PLACEHOLDER.format(field="节目名称")
+            elif field == "record_time":
+                if self.record_time:
+                    result["record_time"] = self.record_time.strftime("%Y-%m-%d %H:%M:%S")
+                else:
+                    result["record_time"] = MISSING_FIELD_PLACEHOLDER.format(field="录制时间")
+            elif field == "duration":
+                if self.duration_minutes is not None:
+                    hours = self.duration_minutes // 60
+                    minutes = self.duration_minutes % 60
+                    result["duration"] = f"{hours}小时{minutes}分钟"
+                else:
+                    result["duration"] = MISSING_FIELD_PLACEHOLDER.format(field="时长")
+            elif field == "channel":
+                result["channel"] = self.channel or MISSING_FIELD_PLACEHOLDER.format(field="频道")
+            elif field == "status":
+                result["status"] = self.status or MISSING_FIELD_PLACEHOLDER.format(field="状态")
+            elif field == "confidence":
+                # 输出置信度信息
+                result["confidence"] = self.confidence
             else:
-                result[field] = item["value"]
-            if include_confidence:
-                result[f"{field}_confidence"] = item["confidence"]
+                # 按规格 L3，不猜测填充未知字段
+                result[field] = MISSING_FIELD_PLACEHOLDER.format(field=field)
+        
         return result
-    
-    def to_table_row(self) -> List[str]:
-        """转换为表格行"""
-        row = []
-        for field in SUPPORTED_FIELDS:
-            item = self.data[field]
-            if item["value"] is None:
-                row.append(UNKNOWN_FIELD_PLACEHOLDER.format(field))
-            else:
-                row.append(str(item["value"]))
-        return row
 
 
 # ============================================================
@@ -136,177 +121,150 @@ class TiVoProgram:
 # ============================================================
 
 class TiVoParser:
-    """TiVoToGo协议数据解析器"""
+    """TiVoToGo 协议数据解析器"""
     
-    def __init__(self):
-        # 正则表达式模式
-        self.patterns = {
-            "program_name": [
-                r'(?:节目名称|节目名|名称|title|Title|TITLE)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<title>|<Title>|<TITLE>)\s*([^<]+)\s*</title>',
-            ],
-            "record_time": [
-                r'(?:录制时间|录制日期|时间|record_time|recordTime|RecordTime|RecordTime)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<recordTime>|<record_time>|<RecordTime>)\s*([^<]+)\s*</recordTime>',
-            ],
-            "duration": [
-                r'(?:时长|长度|duration|Duration|DURATION)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<duration>|<Duration>|<DURATION>)\s*([^<]+)\s*</duration>',
-            ],
-            "channel": [
-                r'(?:频道|频道号|channel|Channel|CHANNEL)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<channel>|<Channel>|<CHANNEL>)\s*([^<]+)\s*</channel>',
-            ],
-            "status": [
-                r'(?:状态|录制状态|status|Status|STATUS)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<status>|<Status>|<STATUS>)\s*([^<]+)\s*</status>',
-            ],
-            "description": [
-                r'(?:描述|简介|说明|description|Description|DESCRIPTION)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<description>|<Description>|<DESCRIPTION>)\s*([^<]+)\s*</description>',
-            ],
-            "series": [
-                r'(?:系列|剧集|series|Series|SERIES)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<series>|<Series>|<SERIES>)\s*([^<]+)\s*</series>',
-            ],
-            "episode": [
-                r'(?:集数|第.*集|episode|Episode|EPISODE)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<episode>|<Episode>|<EPISODE>)\s*([^<]+)\s*</episode>',
-            ],
-            "quality": [
-                r'(?:画质|质量|quality|Quality|QUALITY)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<quality>|<Quality>|<QUALITY>)\s*([^<]+)\s*</quality>',
-            ],
-            "file_size": [
-                r'(?:文件大小|大小|file_size|fileSize|FileSize|FILESIZE)\s*[=:：]\s*["\']?([^"\'\n]+)["\']?',
-                r'(?:<fileSize>|<file_size>|<FileSize>)\s*([^<]+)\s*</fileSize>',
-            ],
-        }
+    # 正则表达式模式
+    PATTERN_TITLE = re.compile(r'(?:title|节目名称)\s*[=:]\s*"?([^",\n]+)"?')
+    PATTERN_DATETIME = re.compile(
+        r'(?:record[_\s]?time|录制时间)\s*[=:]\s*"?'
+        r'(\d{4})[-/](\d{1,2})[-/](\d{1,2})'
+        r'[T\s](\d{1,2}):(\d{2})(?::(\d{2}))?'
+        r'"?'
+    )
+    PATTERN_DATETIME_ALT = re.compile(
+        r'(?:record[_\s]?time|录制时间)\s*[=:]\s*"?'
+        r'(\d{1,2})[/-](\d{1,2})[/-](\d{4})'
+        r'[T\s](\d{1,2}):(\d{2})(?::(\d{2}))?'
+        r'"?'
+    )
+    PATTERN_DURATION = re.compile(
+        r'(?:duration|时长)\s*[=:]\s*"?(\d+)\s*(?:分钟|min|mins|m)?"?'
+    )
+    PATTERN_DURATION_HMS = re.compile(
+        r'(?:duration|时长)\s*[=:]\s*"?'
+        r'(?:(\d+)h)?\s*(?:(\d+)m)?\s*(?:(\d+)s)?'
+        r'"?'
+    )
+    PATTERN_CHANNEL = re.compile(r'(?:channel|频道)\s*[=:]\s*"?([^",\n]+)"?')
+    PATTERN_STATUS = re.compile(r'(?:status|状态)\s*[=:]\s*"?([^",\n]+)"?')
+    PATTERN_RECORD_ENTRY = re.compile(r'(?:record|条目|entry)\s*[{[]')
     
-    def parse(self, raw_data: str) -> List[TiVoProgram]:
-        """解析TiVoToGo协议数据，返回节目列表"""
-        if not raw_data or not raw_data.strip():
-            raise ValueError("E008: 数据为空")
+    def parse(self, data: str) -> List[TiVoRecord]:
+        """解析 TiVoToGo 协议数据"""
+        if not data or not data.strip():
+            raise ValueError("E003")
         
-        # 检查协议格式
-        if not self._is_tivo_protocol(raw_data):
-            raise ValueError("E006: 不支持的协议格式，仅支持TiVoToGo协议")
+        records: List[TiVoRecord] = []
         
-        # 分割节目记录
-        records = self._split_records(raw_data)
+        # 尝试按条目分割
+        entries = self._split_entries(data)
         
-        programs = []
-        for record in records:
-            program = self._parse_record(record)
-            if program is not None:
-                programs.append(program)
+        if entries:
+            # 多条目解析
+            for entry in entries:
+                record = self._parse_single(entry)
+                if record.title or record.record_time:
+                    records.append(record)
+        else:
+            # 单条目解析
+            record = self._parse_single(data)
+            if record.title or record.record_time:
+                records.append(record)
         
-        if not programs:
-            raise ValueError("E004: 数据解析失败，未找到有效节目记录")
+        if not records:
+            raise ValueError("E004")
         
-        return programs
+        return records
     
-    def _is_tivo_protocol(self, data: str) -> bool:
-        """检查是否为TiVoToGo协议数据"""
-        for marker in TIVO_PROTOCOL_MARKERS:
-            if marker in data:
-                return True
-        # 检查是否有TiVo特有的字段模式
-        if re.search(r'(?:TiVoToGo|tivo|TiVo)', data, re.IGNORECASE):
-            return True
-        # 检查是否包含节目相关字段
-        if re.search(r'(?:节目名称|录制时间|channel|duration|title)', data, re.IGNORECASE):
-            return True
-        return False
+    def _split_entries(self, data: str) -> List[str]:
+        """将数据分割为多个条目"""
+        # 查找条目分隔符
+        matches = list(self.PATTERN_RECORD_ENTRY.finditer(data))
+        if len(matches) <= 1:
+            return []
+        
+        entries = []
+        for i, match in enumerate(matches):
+            start = match.start()
+            end = matches[i + 1].start() if i + 1 < len(matches) else len(data)
+            entries.append(data[start:end])
+        
+        return entries
     
-    def _split_records(self, data: str) -> List[str]:
-        """将原始数据分割为多个节目记录"""
-        # 尝试按常见分隔符分割
-        separators = [
-            r'\n\s*\n',           # 空行
-            r'<record>',          # XML标签
-            r'<program>',         # XML标签
-            r'---\s*节目',        # 中文分隔
-            r'===',               # 等号分隔
-        ]
+    def _parse_single(self, text: str) -> TiVoRecord:
+        """解析单个条目"""
+        record = TiVoRecord()
+        record.raw_data = text.strip()
         
-        for sep in separators:
-            parts = re.split(sep, data)
-            if len(parts) > 1:
-                return [p.strip() for p in parts if p.strip()]
+        # 解析节目名称
+        title_match = self.PATTERN_TITLE.search(text)
+        if title_match:
+            record.title = title_match.group(1).strip()
+            record.confidence["title"] = CONFIDENCE_HIGH
+        else:
+            record.confidence["title"] = CONFIDENCE_LOW
         
-        # 如果没有找到分隔符，整个数据作为一个记录
-        return [data.strip()]
-    
-    def _parse_record(self, record: str) -> Optional[TiVoProgram]:
-        """解析单个节目记录"""
-        if not record or len(record.strip()) < 10:
-            return None
-        
-        program = TiVoProgram()
-        
-        # 遍历所有字段模式进行匹配
-        for field, patterns in self.patterns.items():
-            for pattern in patterns:
-                match = re.search(pattern, record)
-                if match:
-                    value = match.group(1).strip()
-                    if value:
-                        # 根据字段类型转换值
-                        converted = self._convert_value(field, value)
-                        # 确定置信度
-                        confidence = self._determine_confidence(field, value, record)
-                        program.set_field(field, converted, confidence, value)
-                        break
-        
-        # 检查是否有任何字段被提取
-        has_data = any(
-            program.get_field(field)["value"] is not None
-            for field in SUPPORTED_FIELDS
-        )
-        
-        if not has_data:
-            return None
-        
-        return program
-    
-    def _convert_value(self, field: str, value: str) -> Any:
-        """根据字段类型转换值"""
-        if field == "duration":
-            # 尝试解析时长
-            match = re.match(r'(\d+)\s*(?:分钟|分|min|MIN)?', value)
-            if match:
-                return int(match.group(1))
-        elif field == "file_size":
-            # 尝试解析文件大小
-            match = re.match(r'(\d+(?:\.\d+)?)\s*(MB|GB|KB|B)?', value, re.IGNORECASE)
-            if match:
-                size = float(match.group(1))
-                unit = match.group(2).upper() if match.group(2) else "B"
-                multipliers = {"B": 1, "KB": 1024, "MB": 1024**2, "GB": 1024**3}
-                if unit in multipliers:
-                    return int(size * multipliers[unit])
-        elif field == "record_time":
-            # 尝试解析时间
+        # 解析录制时间（优先 ISO 格式）
+        dt_match = self.PATTERN_DATETIME.search(text) or self.PATTERN_DATETIME_ALT.search(text)
+        if dt_match:
             try:
-                parsed = datetime.fromisoformat(value)
-                return parsed.isoformat()
-            except ValueError:
-                pass
-        return value
-    
-    def _determine_confidence(self, field: str, value: str, record: str) -> str:
-        """确定字段置信度"""
-        # 高置信度：字段有明确标记且值完整
-        if re.search(rf'(?:{field}|{field.replace("_", "")})\s*[=:：]\s*["\']?{re.escape(value)}', record, re.IGNORECASE):
-            return CONFIDENCE_HIGH
+                groups = dt_match.groups()
+                if len(groups[0]) == 4:  # 年份在前
+                    year, month, day = int(groups[0]), int(groups[1]), int(groups[2])
+                    hour, minute = int(groups[3]), int(groups[4])
+                    second = int(groups[5]) if groups[5] else 0
+                else:  # 日期在前
+                    day, month, year = int(groups[0]), int(groups[1]), int(groups[2])
+                    hour, minute = int(groups[3]), int(groups[4])
+                    second = int(groups[5]) if groups[5] else 0
+                
+                record.record_time = datetime(year, month, day, hour, minute, second)
+                record.confidence["record_time"] = CONFIDENCE_HIGH
+            except (ValueError, IndexError):
+                record.confidence["record_time"] = CONFIDENCE_LOW
+        else:
+            record.confidence["record_time"] = CONFIDENCE_LOW
         
-        # 中置信度：在XML标签中找到
-        if re.search(rf'<{field}[^>]*>\s*{re.escape(value)}\s*</{field}>', record, re.IGNORECASE):
-            return CONFIDENCE_HIGH
+        # 解析时长
+        dur_match = self.PATTERN_DURATION.search(text)
+        if dur_match:
+            try:
+                record.duration_minutes = int(dur_match.group(1))
+                record.confidence["duration"] = CONFIDENCE_HIGH
+            except (ValueError, IndexError):
+                record.confidence["duration"] = CONFIDENCE_LOW
+        else:
+            # 尝试时分秒格式
+            dur_hms = self.PATTERN_DURATION_HMS.search(text)
+            if dur_hms:
+                try:
+                    hours = int(dur_hms.group(1)) if dur_hms.group(1) else 0
+                    minutes = int(dur_hms.group(2)) if dur_hms.group(2) else 0
+                    seconds = int(dur_hms.group(3)) if dur_hms.group(3) else 0
+                    record.duration_minutes = hours * 60 + minutes + (seconds // 60)
+                    record.confidence["duration"] = CONFIDENCE_MEDIUM
+                except (ValueError, IndexError):
+                    record.confidence["duration"] = CONFIDENCE_LOW
+            else:
+                record.confidence["duration"] = CONFIDENCE_LOW
         
-        # 低置信度：其他情况
-        return CONFIDENCE_MEDIUM
+        # 解析频道
+        ch_match = self.PATTERN_CHANNEL.search(text)
+        if ch_match:
+            record.channel = ch_match.group(1).strip()
+            record.confidence["channel"] = CONFIDENCE_HIGH
+        else:
+            record.confidence["channel"] = CONFIDENCE_LOW
+        
+        # 解析状态
+        st_match = self.PATTERN_STATUS.search(text)
+        if st_match:
+            record.status = st_match.group(1).strip()
+            record.confidence["status"] = CONFIDENCE_HIGH
+        else:
+            record.confidence["status"] = CONFIDENCE_LOW
+        
+        return record
 
 
 # ============================================================
@@ -317,22 +275,70 @@ class OutputFormatter:
     """输出格式化器"""
     
     @staticmethod
-    def format_json(programs: List[TiVoProgram], include_confidence: bool = True) -> str:
-        """格式化为JSON"""
-        result = []
-        for program in programs:
-            result.append(program.to_dict(include_confidence))
-        return json.dumps(result, ensure_ascii=False, indent=2)
+    def format_records(records: List[TiVoRecord], fmt: str = "json", fields: Optional[List[str]] = None) -> str:
+        """格式化输出记录列表"""
+        if fmt not in SUPPORTED_FORMATS:
+            raise ValueError("E008")
+        
+        if fmt == "json":
+            return OutputFormatter._to_json(records, fields)
+        elif fmt == "text":
+            return OutputFormatter._to_text(records, fields)
+        elif fmt == "table":
+            return OutputFormatter._to_table(records, fields)
+        else:
+            raise ValueError("E008")
     
     @staticmethod
-    def format_table(programs: List[TiVoProgram]) -> str:
-        """格式化为表格"""
-        if not programs:
-            return "无数据"
+    def _to_json(records: List[TiVoRecord], fields: Optional[List[str]] = None) -> str:
+        """JSON 格式输出"""
+        data = [record.to_dict(fields) for record in records]
+        return json.dumps(data, ensure_ascii=False, indent=2)
+    
+    @staticmethod
+    def _to_text(records: List[TiVoRecord], fields: Optional[List[str]] = None) -> str:
+        """文本格式输出"""
+        lines = []
+        for i, record in enumerate(records, 1):
+            lines.append(f"=== 记录 {i} ===")
+            data = record.to_dict(fields)
+            for key, value in data.items():
+                if key != "confidence":
+                    lines.append(f"  {key}: {value}")
+            if "confidence" in data:
+                lines.append("  置信度:")
+                for field, level in data["confidence"].items():
+                    lines.append(f"    {field}: {level}")
+            lines.append("")
+        return "\n".join(lines)
+    
+    @staticmethod
+    def _to_table(records: List[TiVoRecord], fields: Optional[List[str]] = None) -> str:
+        """表格格式输出"""
+        if not records:
+            return "(空)"
         
-        # 表头
-        headers = SUPPORTED_FIELDS
-        rows = [program.to_table_row() for program in programs]
+        # 确定输出字段
+        output_fields = fields if fields else DEFAULT_FIELDS
+        
+        # 收集表头
+        headers = output_fields
+        
+        # 收集行数据
+        rows = []
+        for record in records:
+            data = record.to_dict(output_fields)
+            row = []
+            for field in output_fields:
+                value = data.get(field, "")
+                # 格式化值
+                if field == "record_time" and isinstance(value, str):
+                    row.append(value)
+                elif field == "duration" and isinstance(value, str):
+                    row.append(value)
+                else:
+                    row.append(str(value))
+            rows.append(row)
         
         # 计算列宽
         col_widths = []
@@ -340,113 +346,67 @@ class OutputFormatter:
             max_width = len(header)
             for row in rows:
                 max_width = max(max_width, len(row[i]))
-            col_widths.append(min(max_width + 2, 30))  # 限制最大宽度
+            col_widths.append(max_width + 2)
         
-        # 构建表格
+        # 生成表格
         lines = []
         # 表头
-        header_line = "|".join(header.center(col_widths[i]) for i, header in enumerate(headers))
+        header_line = "|" + "|".join(
+            f" {header.center(col_widths[i] - 2)} " for i, header in enumerate(headers)
+        ) + "|"
         lines.append(header_line)
-        # 分隔线
-        lines.append("+" + "+".join("-" * w for w in col_widths) + "+")
+        lines.append("|" + "|".join("-" * col_widths[i] for i in range(len(headers))) + "|")
+        
         # 数据行
         for row in rows:
-            line = "|".join(cell.ljust(col_widths[i])[:col_widths[i]] for i, cell in enumerate(row))
+            line = "|" + "|".join(
+                f" {cell.ljust(col_widths[i] - 2)} " for i, cell in enumerate(row)
+            ) + "|"
             lines.append(line)
         
         return "\n".join(lines)
-    
-    @staticmethod
-    def format_text(programs: List[TiVoProgram]) -> str:
-        """格式化为文本"""
-        if not programs:
-            return "无数据"
-        
-        lines = []
-        for i, program in enumerate(programs, 1):
-            lines.append(f"=== 节目 {i} ===")
-            for field in SUPPORTED_FIELDS:
-                item = program.get_field(field)
-                if item["value"] is None:
-                    value = UNKNOWN_FIELD_PLACEHOLDER.format(field)
-                else:
-                    value = str(item["value"])
-                lines.append(f"{field}: {value} (置信度: {item['confidence']})")
-            lines.append("")
-        
-        return "\n".join(lines)
-
-
-# ============================================================
-# 数据输入处理
-# ============================================================
-
-class DataInput:
-    """数据输入处理器"""
-    
-    @staticmethod
-    def read_from_file(filepath: str) -> str:
-        """从文件读取数据"""
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                return f.read()
-        except FileNotFoundError:
-            raise ValueError(f"E002: 文件不存在: {filepath}")
-        except Exception as e:
-            raise ValueError(f"E002: 文件读取失败: {str(e)}")
-    
-    @staticmethod
-    def read_from_url(url: str) -> str:
-        """从URL读取数据"""
-        try:
-            with urllib.request.urlopen(url, timeout=10) as response:
-                return response.read().decode("utf-8")
-        except Exception as e:
-            raise ValueError(f"E003: URL读取失败: {str(e)}")
-    
-    @staticmethod
-    def read_from_raw(raw_data: str) -> str:
-        """直接使用原始数据"""
-        return raw_data
 
 
 # ============================================================
 # 主处理逻辑
 # ============================================================
 
-def process_data(input_data: str, output_format: str = "json", 
-                 fields: Optional[List[str]] = None, 
-                 include_confidence: bool = True) -> str:
-    """处理TiVo录播数据"""
+def process_data(data: str, fmt: str = "json", fields: Optional[List[str]] = None) -> str:
+    """处理 TiVoToGo 数据并返回格式化结果"""
     try:
         # 解析数据
         parser = TiVoParser()
-        programs = parser.parse(input_data)
-        
-        # 字段过滤
-        if fields:
-            # 验证字段
-            for field in fields:
-                if field not in SUPPORTED_FIELDS:
-                    raise ValueError(f"E007: 不支持的字段: {field}")
-            # 过滤字段（这里简化处理，实际需要修改输出逻辑）
-            # 注意：由于输出逻辑较复杂，这里仅作验证，不实际过滤
+        records = parser.parse(data)
         
         # 格式化输出
         formatter = OutputFormatter()
-        if output_format == "json":
-            return formatter.format_json(programs, include_confidence)
-        elif output_format == "table":
-            return formatter.format_table(programs)
-        elif output_format == "text":
-            return formatter.format_text(programs)
-        else:
-            raise ValueError(f"E005: 不支持的输出格式: {output_format}")
+        return formatter.format_records(records, fmt, fields)
     
     except ValueError as e:
-        raise
-    except Exception as e:
-        raise ValueError(f"E010: 内部错误: {str(e)}")
+        error_code = str(e) if str(e).startswith("E") else "E004"
+        return json.dumps({"error": error_code, "message": ERROR_CODES.get(error_code, "未知错误")}, ensure_ascii=False)
+    except Exception:
+        return json.dumps({"error": "E010", "message": ERROR_CODES["E010"]}, ensure_ascii=False)
+
+
+def process_file(filepath: str, fmt: str = "json", fields: Optional[List[str]] = None) -> str:
+    """从文件读取并处理数据"""
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            data = f.read()
+        return process_data(data, fmt, fields)
+    except FileNotFoundError:
+        return json.dumps({"error": "E002", "message": ERROR_CODES["E002"]}, ensure_ascii=False)
+    except Exception:
+        return json.dumps({"error": "E010", "message": ERROR_CODES["E010"]}, ensure_ascii=False)
+
+
+def process_batch(data_list: List[str], fmt: str = "json", fields: Optional[List[str]] = None) -> List[str]:
+    """批量处理多条数据"""
+    results = []
+    for data in data_list:
+        results.append(process_data(data, fmt, fields))
+    return results
 
 
 # ============================================================
@@ -454,207 +414,235 @@ def process_data(input_data: str, output_format: str = "json",
 # ============================================================
 
 def run_selftest() -> bool:
-    """运行内置自检，验证核心逻辑"""
+    """离线自检核心逻辑，使用硬编码样例数据"""
     print("开始自检...")
     
-    # 内置测试数据
-    test_data = """
-    TiVoToGo Protocol Data
-    --- 节目 1 ---
-    节目名称: 新闻联播
-    录制时间: 2026-01-15 19:00:00
-    时长: 30分钟
-    频道: CCTV-1
-    状态: 已完成
-    描述: 每日新闻节目
-    画质: 高清
-    文件大小: 500MB
-    
-    --- 节目 2 ---
-    节目名称: 纪录片《自然》
-    录制时间: 2026-01-15 20:00:00
-    时长: 45分钟
-    频道: CCTV-9
-    状态: 录制中
-    描述: 自然探索纪录片
-    系列: 自然系列
-    集数: 第3集
-    画质: 超清
-    文件大小: 1.2GB
+    # 测试数据 1：单条完整记录
+    test_data_1 = """
+    record {
+        title: "科技前沿",
+        record_time: "2025-01-15T20:30:00",
+        duration: 45分钟,
+        channel: "CCTV-10",
+        status: "已完成"
+    }
     """
     
-    # 测试1: 解析功能
-    print("测试1: 解析功能...")
+    # 测试数据 2：多条记录，包含不同格式
+    test_data_2 = """
+    record {
+        title: "自然探秘",
+        record_time: 2025/02/01 19:00,
+        duration: 30min,
+        channel: "BBC",
+        status: "录制中"
+    }
+    record {
+        title: "历史解密",
+        record_time: "2025-03-10 14:15:30",
+        duration: 1h30m,
+        channel: "历史频道",
+        status: "已完成"
+    }
+    """
+    
+    # 测试数据 3：缺失字段的简单数据
+    test_data_3 = """
+    title: "简单测试节目"
+    channel: "测试频道"
+    """
+    
     try:
+        # 测试 1：解析单条记录
+        print("测试 1：解析单条完整记录")
         parser = TiVoParser()
-        programs = parser.parse(test_data)
-        assert len(programs) >= 2, "应该至少解析出2个节目"
-        print(f"  ✓ 解析成功，共{len(programs)}个节目")
-    except Exception as e:
-        print(f"  ✗ 解析失败: {e}")
-        return False
-    
-    # 测试2: 字段提取
-    print("测试2: 字段提取...")
-    try:
-        first_program = programs[0]
-        name = first_program.get_field("program_name")
-        assert name["value"] is not None, "节目名称不应为空"
-        print(f"  ✓ 节目名称: {name['value']}")
+        records = parser.parse(test_data_1)
+        assert len(records) == 1, f"预期 1 条记录，实际 {len(records)} 条"
+        record = records[0]
+        assert record.title == "科技前沿", f"标题解析错误: {record.title}"
+        assert record.record_time is not None, "录制时间未解析"
+        assert record.record_time.year == 2025, f"年份错误: {record.record_time.year}"
+        assert record.record_time.month == 1, f"月份错误: {record.record_time.month}"
+        assert record.duration_minutes == 45, f"时长错误: {record.duration_minutes}"
+        assert record.channel == "CCTV-10", f"频道错误: {record.channel}"
+        assert record.status == "已完成", f"状态错误: {record.status}"
+        print("  ✓ 通过")
         
-        duration = first_program.get_field("duration")
-        if duration["value"] is not None:
-            print(f"  ✓ 时长: {duration['value']}")
-    except Exception as e:
-        print(f"  ✗ 字段提取失败: {e}")
-        return False
-    
-    # 测试3: 输出格式
-    print("测试3: 输出格式...")
-    try:
-        formatter = OutputFormatter()
-        json_output = formatter.format_json(programs)
-        assert json_output, "JSON输出不应为空"
-        print(f"  ✓ JSON输出成功，长度: {len(json_output)}")
+        # 测试 2：解析多条记录
+        print("测试 2：解析多条记录")
+        records = parser.parse(test_data_2)
+        assert len(records) == 2, f"预期 2 条记录，实际 {len(records)} 条"
+        # 第一条
+        assert records[0].title == "自然探秘", f"第一条标题错误: {records[0].title}"
+        assert records[0].duration_minutes == 30, f"第一条时长错误: {records[0].duration_minutes}"
+        # 第二条
+        assert records[1].title == "历史解密", f"第二条标题错误: {records[1].title}"
+        assert records[1].duration_minutes == 90, f"第二条时长错误: {records[1].duration_minutes}"
+        print("  ✓ 通过")
         
-        table_output = formatter.format_table(programs)
-        assert table_output, "表格输出不应为空"
-        print(f"  ✓ 表格输出成功，长度: {len(table_output)}")
+        # 测试 3：缺失字段处理
+        print("测试 3：缺失字段处理")
+        records = parser.parse(test_data_3)
+        assert len(records) == 1, f"预期 1 条记录，实际 {len(records)} 条"
+        record = records[0]
+        assert record.title == "简单测试节目", f"标题错误: {record.title}"
+        assert record.record_time is None, "缺失时间应为 None"
+        assert record.duration_minutes is None, "缺失时长应为 None"
+        assert record.channel == "测试频道", f"频道错误: {record.channel}"
+        print("  ✓ 通过")
         
-        text_output = formatter.format_text(programs)
-        assert text_output, "文本输出不应为空"
-        print(f"  ✓ 文本输出成功，长度: {len(text_output)}")
-    except Exception as e:
-        print(f"  ✗ 输出格式化失败: {e}")
-        return False
-    
-    # 测试4: 完整流程
-    print("测试4: 完整流程...")
-    try:
-        result = process_data(test_data, "json")
-        assert result, "处理结果不应为空"
-        print(f"  ✓ 完整流程成功，输出长度: {len(result)}")
-    except Exception as e:
-        print(f"  ✗ 完整流程失败: {e}")
-        return False
-    
-    # 测试5: 错误处理
-    print("测试5: 错误处理...")
-    try:
+        # 测试 4：JSON 输出格式
+        print("测试 4：JSON 输出格式")
+        output = process_data(test_data_1, fmt="json")
+        parsed_output = json.loads(output)
+        assert isinstance(parsed_output, list), "JSON 输出应为列表"
+        assert len(parsed_output) == 1, f"JSON 输出长度错误: {len(parsed_output)}"
+        assert "title" in parsed_output[0], "JSON 输出缺少 title 字段"
+        assert "record_time" in parsed_output[0], "JSON 输出缺少 record_time 字段"
+        print("  ✓ 通过")
+        
+        # 测试 5：文本输出格式
+        print("测试 5：文本输出格式")
+        output = process_data(test_data_1, fmt="text")
+        assert "科技前沿" in output, "文本输出缺少标题"
+        assert "45" in output, "文本输出缺少时长"
+        print("  ✓ 通过")
+        
+        # 测试 6：表格输出格式
+        print("测试 6：表格输出格式")
+        output = process_data(test_data_1, fmt="table")
+        assert "title" in output, "表格输出缺少表头"
+        assert "科技前沿" in output, "表格输出缺少数据"
+        print("  ✓ 通过")
+        
+        # 测试 7：置信度标注
+        print("测试 7：置信度标注")
+        records = parser.parse(test_data_1)
+        assert records[0].confidence["title"] == CONFIDENCE_HIGH, "标题置信度应为高"
+        assert records[0].confidence["record_time"] == CONFIDENCE_HIGH, "时间置信度应为高"
+        records = parser.parse(test_data_3)
+        assert records[0].confidence["record_time"] == CONFIDENCE_LOW, "缺失时间置信度应为低"
+        print("  ✓ 通过")
+        
+        # 测试 8：字段子集输出
+        print("测试 8：字段子集输出")
+        output = process_data(test_data_1, fmt="json", fields=["title", "channel"])
+        parsed_output = json.loads(output)
+        assert "title" in parsed_output[0], "子集输出缺少 title"
+        assert "channel" in parsed_output[0], "子集输出缺少 channel"
+        assert "record_time" not in parsed_output[0], "子集输出不应包含 record_time"
+        print("  ✓ 通过")
+        
+        # 测试 9：错误处理
+        print("测试 9：错误处理")
         # 空数据
-        try:
-            process_data("", "json")
-            print("  ✗ 空数据应该报错")
-            return False
-        except ValueError as e:
-            assert "E008" in str(e), "错误码应为E008"
-            print(f"  ✓ 空数据错误处理正确: {e}")
+        result = process_data("")
+        assert "error" in result, "空数据应返回错误"
+        # 无效格式
+        result = process_data("无效数据", fmt="xml")
+        assert "E008" in result, "无效格式应返回 E008"
+        print("  ✓ 通过")
         
-        # 不支持的数据
-        try:
-            process_data("DLNA data here", "json")
-            print("  ✗ 不支持的数据应该报错")
-            return False
-        except ValueError as e:
-            assert "E006" in str(e), "错误码应为E006"
-            print(f"  ✓ 不支持的数据错误处理正确: {e}")
-    except Exception as e:
-        print(f"  ✗ 错误处理测试失败: {e}")
+        # 测试 10：批量处理
+        print("测试 10：批量处理")
+        results = process_batch([test_data_1, test_data_3])
+        assert len(results) == 2, f"批量处理结果数量错误: {len(results)}"
+        assert json.loads(results[0])[0]["title"] == "科技前沿", "批量处理第一条结果错误"
+        assert json.loads(results[1])[0]["title"] == "简单测试节目", "批量处理第二条结果错误"
+        print("  ✓ 通过")
+        
+        print("\n全部自检通过 ✓")
+        return True
+        
+    except AssertionError as e:
+        print(f"自检失败: {e}")
         return False
-    
-    print("所有自检通过!")
-    return True
+    except Exception as e:
+        print(f"自检异常: {e}")
+        return False
 
 
 # ============================================================
 # 命令行入口
 # ============================================================
 
-def main():
-    """主函数"""
+def main() -> int:
+    """主入口函数"""
     parser = argparse.ArgumentParser(
-        description="votigoto - TiVo录播数据提取工具",
-        epilog="示例: python main.py data.txt --format json"
+        description="votigoto - TiVo录播数据提取与节目清单解析",
+        epilog="示例: python main.py --input data.txt --format json"
     )
     
     parser.add_argument(
-        "input",
-        nargs="?",
-        help="输入文件路径、URL或原始数据"
+        "--input", "-i",
+        type=str,
+        help="输入文件路径（TiVoToGo 协议数据文件）"
     )
     
     parser.add_argument(
-        "--format",
+        "--data", "-d",
+        type=str,
+        help="直接提供 TiVoToGo 协议数据字符串"
+    )
+    
+    parser.add_argument(
+        "--format", "-f",
+        type=str,
         choices=SUPPORTED_FORMATS,
         default="json",
-        help="输出格式 (默认: json)"
+        help=f"输出格式（默认: json，可选: {', '.join(SUPPORTED_FORMATS)}）"
     )
     
     parser.add_argument(
         "--fields",
-        help="要输出的字段列表，用逗号分隔"
-    )
-    
-    parser.add_argument(
-        "--no-confidence",
-        action="store_true",
-        help="不输出置信度信息"
+        type=str,
+        help="指定输出字段，逗号分隔（例如: title,channel,duration）"
     )
     
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行自检"
+        help="运行离线自检"
     )
     
     args = parser.parse_args()
     
-    # 运行自检
+    # 自检模式
     if args.selftest:
         success = run_selftest()
-        sys.exit(0 if success else 1)
+        return 0 if success else 1
     
-    # 检查输入参数
-    if not args.input:
-        print("E001: 缺少输入数据，请提供文件路径、URL或原始数据", file=sys.stderr)
-        print("使用 --selftest 运行自检", file=sys.stderr)
-        sys.exit(1)
+    # 解析字段参数
+    fields = None
+    if args.fields:
+        fields = [f.strip() for f in args.fields.split(",") if f.strip()]
+        # 验证字段
+        valid_fields = DEFAULT_FIELDS + ["confidence"]
+        for field in fields:
+            if field not in valid_fields:
+                print(f"错误 E009: 字段 '{field}' 不存在。可用字段: {', '.join(valid_fields)}")
+                return 1
     
+    # 处理输入
     try:
-        # 判断输入类型
-        input_data = None
-        if args.input.startswith("http://") or args.input.startswith("https://"):
-            print(f"从URL读取: {args.input}")
-            input_data = DataInput.read_from_url(args.input)
-        elif args.input.endswith((".txt", ".data", ".xml", ".json")):
-            print(f"从文件读取: {args.input}")
-            input_data = DataInput.read_from_file(args.input)
+        if args.input:
+            # 从文件读取
+            result = process_file(args.input, args.format, fields)
+            print(result)
+        elif args.data:
+            # 直接处理数据
+            result = process_data(args.data, args.format, fields)
+            print(result)
         else:
-            print("使用原始数据输入")
-            input_data = args.input
-        
-        # 处理字段过滤
-        fields = None
-        if args.fields:
-            fields = [f.strip() for f in args.fields.split(",")]
-        
-        # 处理数据
-        result = process_data(
-            input_data,
-            output_format=args.format,
-            fields=fields,
-            include_confidence=not args.no_confidence
-        )
-        
-        print(result)
-        
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
+            # 无输入，显示帮助
+            parser.print_help()
+            return 1
     except Exception as e:
-        print(f"E010: 未预期的错误: {e}", file=sys.stderr)
-        sys.exit(1)
+        print(f"错误 E010: {e}")
+        return 1
+    
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

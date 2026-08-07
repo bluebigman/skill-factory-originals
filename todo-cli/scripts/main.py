@@ -1,40 +1,42 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-todo-cli: 命令行待办事项管理工具
+todo-cli 命令行工具（独立实现）
 
-基于功能规格独立实现（clean-room），仅使用标准库。
-支持添加、列出、完成、删除待办事项，并包含离线自检功能。
+功能：将输入文本解析为结构化待办事项，支持多种输出格式。
+仅依据功能规格独立实现，不包含任何既有代码。
 """
 
 import argparse
+import csv
+import io
 import json
-import os
+import re
 import sys
-import tempfile
 from datetime import datetime
 from pathlib import Path
+from typing import Any, Dict, List, Optional
 
 
 # ============================================================
-# 错误码定义（对应规格第四章）
+# 错误码定义
 # ============================================================
 ERROR_CODES = {
-    "E001": "输入为空：请提供待处理的内容",
-    "E002": "关键信息缺失：请补充必要参数",
-    "E003": "输入格式错误：参数格式不符合要求",
-    "E004": "超出能力边界：操作不被支持",
-    "E005": "置信度过低：结果无法确定",
-    "E006": "文件读写失败：无法访问数据文件",
-    "E007": "数据损坏：存储内容无法解析",
-    "E008": "待办不存在：找不到指定ID",
-    "E009": "参数冲突：提供的参数互相矛盾",
-    "E010": "内部错误：未预期的异常",
+    "E001": "参数错误：缺少必要的输入参数",
+    "E002": "文件读取失败：无法读取指定的输入文件",
+    "E003": "URL 获取失败：无法获取指定的 URL 内容",
+    "E004": "数据解析失败：无法解析输入内容",
+    "E005": "输出格式错误：不支持的输出格式",
+    "E006": "模板渲染失败：自定义模板无效",
+    "E007": "批量处理失败：目录读取错误",
+    "E008": "内部错误：未知异常",
+    "E009": "自检失败：核心逻辑验证未通过",
+    "E010": "输入内容为空：没有可解析的数据",
 }
 
 
-class TodoError(Exception):
-    """自定义异常，携带错误码"""
+class TodoCliError(Exception):
+    """自定义异常类，携带错误码"""
 
     def __init__(self, code: str, message: str = ""):
         self.code = code
@@ -43,477 +45,595 @@ class TodoError(Exception):
 
 
 # ============================================================
-# 核心数据模型
+# 核心数据结构
 # ============================================================
 class TodoItem:
-    """单条待办事项"""
+    """待办事项数据结构"""
 
-    def __init__(self, title: str, description: str = "", due_date: str = ""):
-        if not title or not title.strip():
-            raise TodoError("E001", "待办标题不能为空")
-        self.id = None  # 由存储层分配
-        self.title = title.strip()
-        self.description = description.strip()
-        self.due_date = due_date.strip()
-        self.completed = False
-        self.created_at = datetime.now().isoformat(timespec="seconds")
-        self.completed_at = None
+    def __init__(
+        self,
+        task: str,
+        due: str = "",
+        priority: str = "",
+        confidence: float = 1.0,
+        source: str = "",
+    ):
+        self.task = task
+        self.due = due
+        self.priority = priority
+        self.confidence = confidence  # 0.0 ~ 1.0
+        self.source = source
 
-    def to_dict(self) -> dict:
-        """转为字典，便于序列化"""
+    def to_dict(self) -> Dict[str, Any]:
+        """转换为字典格式"""
         return {
-            "id": self.id,
-            "title": self.title,
-            "description": self.description,
-            "due_date": self.due_date,
-            "completed": self.completed,
-            "created_at": self.created_at,
-            "completed_at": self.completed_at,
+            "task": self.task,
+            "due": self.due,
+            "priority": self.priority,
+            "confidence": round(self.confidence, 2),
+            "source": self.source,
         }
 
-    @classmethod
-    def from_dict(cls, data: dict) -> "TodoItem":
-        """从字典恢复对象"""
-        item = cls(
-            title=data.get("title", ""),
-            description=data.get("description", ""),
-            due_date=data.get("due_date", ""),
+
+# ============================================================
+# 解析器：从非结构化文本提取待办要素
+# ============================================================
+class TodoParser:
+    """将文本解析为 TodoItem 列表"""
+
+    # 优先级关键词映射
+    PRIORITY_MAP = {
+        "高": "高",
+        "紧急": "高",
+        "urgent": "高",
+        "high": "高",
+        "中": "中",
+        "medium": "中",
+        "normal": "中",
+        "低": "低",
+        "low": "低",
+        "不急": "低",
+    }
+
+    # 日期关键词映射（宽松匹配）
+    DUE_KEYWORDS = {
+        "今天": "今天",
+        "今日": "今天",
+        "明天": "明天",
+        "明日": "明天",
+        "后天": "后天",
+        "周五": "周五",
+        "星期五": "周五",
+        "下周一": "下周一",
+        "月底": "月底",
+    }
+
+    # 置信度阈值：明确标注的字段置信度高，推断的置信度低
+    HIGH_CONFIDENCE = 0.95
+    MEDIUM_CONFIDENCE = 0.80
+    LOW_CONFIDENCE = 0.60
+
+    def parse(self, text: str, source: str = "") -> List[TodoItem]:
+        """
+        解析文本为待办事项列表。
+        支持两种输入：
+        1. 单行文本：整体作为一个待办
+        2. 多行文本：每行作为一个待办
+        """
+        if not text or not text.strip():
+            raise TodoCliError("E010")
+
+        lines = [line.strip() for line in text.splitlines() if line.strip()]
+        if not lines:
+            raise TodoCliError("E010")
+
+        items = []
+        for line in lines:
+            item = self._parse_single(line, source)
+            if item:
+                items.append(item)
+
+        if not items:
+            raise TodoCliError("E004")
+
+        return items
+
+    def _parse_single(self, line: str, source: str) -> Optional[TodoItem]:
+        """解析单行文本为一个待办事项"""
+        if not line:
+            return None
+
+        original = line
+
+        # 提取优先级（先处理括号内的，再处理行首关键词）
+        priority, confidence_p, line_after_p = self._extract_priority(line)
+
+        # 提取截止日期
+        due, confidence_d, line_after_d = self._extract_due(line_after_p)
+
+        # 提取任务描述（去除括号内的优先级/日期标注）
+        task_text = self._clean_task(line_after_d)
+
+        if not task_text:
+            task_text = line  # 兜底：如果清理后为空，使用原文本
+
+        # 综合置信度：取各字段置信度的最小值
+        confidence = min(confidence_p, confidence_d)
+
+        return TodoItem(
+            task=task_text,
+            due=due,
+            priority=priority,
+            confidence=confidence,
+            source=source,
         )
-        item.id = data.get("id")
-        item.completed = data.get("completed", False)
-        item.created_at = data.get("created_at", "")
-        item.completed_at = data.get("completed_at")
-        return item
+
+    def _extract_priority(self, text: str):
+        """提取优先级信息，返回 (优先级, 置信度, 剩余文本)"""
+        # 匹配模式1：括号内包含优先级关键词（如：高优先级、低优先级）
+        pattern1 = r"[（(]\s*(高|中|低|紧急|urgent|high|medium|low|normal|不急)\s*优先级?\s*[)）]"
+        match1 = re.search(pattern1, text, re.IGNORECASE)
+        
+        if match1:
+            keyword = match1.group(1).lower()
+            priority = self.PRIORITY_MAP.get(keyword, "中")
+            remaining = text[: match1.start()] + text[match1.end():]
+            return priority, self.HIGH_CONFIDENCE, remaining
+
+        # 匹配模式2：括号内仅包含优先级关键词
+        pattern2 = r"[（(]\s*(高|中|低|紧急|urgent|high|medium|low|normal|不急)\s*[)）]"
+        match2 = re.search(pattern2, text, re.IGNORECASE)
+        
+        if match2:
+            keyword = match2.group(1).lower()
+            priority = self.PRIORITY_MAP.get(keyword, "中")
+            remaining = text[: match2.start()] + text[match2.end():]
+            return priority, self.HIGH_CONFIDENCE, remaining
+
+        # 匹配模式3：括号内包含"优先级"字样（如：高优先级）
+        pattern3 = r"[（(]\s*(高|中|低|紧急)\s*优先级\s*[)）]"
+        match3 = re.search(pattern3, text, re.IGNORECASE)
+        
+        if match3:
+            keyword = match3.group(1).lower()
+            priority = self.PRIORITY_MAP.get(keyword, "中")
+            remaining = text[: match3.start()] + text[match3.end():]
+            return priority, self.HIGH_CONFIDENCE, remaining
+
+        # 无括号标注，尝试识别行首关键词
+        for keyword, priority in self.PRIORITY_MAP.items():
+            if text.lower().startswith(keyword):
+                remaining = text[len(keyword):].strip()
+                if remaining:
+                    return priority, self.MEDIUM_CONFIDENCE, remaining
+
+        # 未找到优先级
+        return "", self.HIGH_CONFIDENCE, text
+
+    def _extract_due(self, text: str):
+        """提取截止日期信息，返回 (日期, 置信度, 剩余文本)"""
+        # 匹配模式1：括号内包含日期关键词
+        pattern1 = r"[（(]\s*(今天|今日|明天|明日|后天|周五|星期五|下周一|月底|尽快|asap)\s*[)）]"
+        match1 = re.search(pattern1, text, re.IGNORECASE)
+
+        if match1:
+            keyword = match1.group(1).lower()
+            due = self.DUE_KEYWORDS.get(keyword, "")
+            if not due:
+                due = "[需核实:截止日期]"  # 无法明确映射时使用占位符
+            remaining = text[: match1.start()] + text[match1.end():]
+            return due, self.HIGH_CONFIDENCE, remaining
+
+        # 匹配模式2："XX前完成"
+        pattern2 = r"(.+?)\s*前\s*完成"
+        match2 = re.search(pattern2, text)
+        if match2:
+            due = match2.group(1).strip()
+            remaining = text[: match2.start()] + text[match2.end():]
+            return due, self.MEDIUM_CONFIDENCE, remaining
+
+        # 匹配模式3：行首日期关键词（如：今天 完成XXX）
+        for keyword, due in self.DUE_KEYWORDS.items():
+            if text.startswith(keyword):
+                remaining = text[len(keyword):].strip()
+                if remaining:
+                    return due, self.MEDIUM_CONFIDENCE, remaining
+
+        # 未找到日期
+        return "", self.HIGH_CONFIDENCE, text
+
+    def _clean_task(self, text: str) -> str:
+        """清理任务描述文本"""
+        # 去除所有括号内容（包括中文和英文括号）
+        text = re.sub(r"[（(][^）)]*[)）]", "", text)
+        # 去除多余空白
+        text = re.sub(r"\s+", " ", text).strip()
+        # 去除行首的连字符、星号等标记
+        text = re.sub(r"^[-*•·]\s*", "", text)
+        # 去除行首的优先级关键词（如果提取时未完全移除）
+        for keyword in ["高优先级", "中优先级", "低优先级", "紧急", "urgent", "high", "medium", "low", "normal", "不急"]:
+            if text.lower().startswith(keyword):
+                text = text[len(keyword):].strip()
+                break
+        return text
 
 
 # ============================================================
-# 存储层（JSON 文件）
+# 格式化输出器
 # ============================================================
-class TodoStorage:
-    """基于 JSON 文件的持久化存储"""
+class OutputFormatter:
+    """将 TodoItem 列表格式化为指定格式输出"""
 
-    def __init__(self, filepath: str):
-        self.filepath = Path(filepath)
-        self._next_id = 1
-        self._items = []
-        self._load()
+    @staticmethod
+    def format_json(items: List[TodoItem]) -> str:
+        """JSON 格式输出"""
+        data = [item.to_dict() for item in items]
+        return json.dumps(data, ensure_ascii=False, indent=2)
 
-    def _load(self):
-        """从文件加载数据"""
+    @staticmethod
+    def format_csv(items: List[TodoItem]) -> str:
+        """CSV 格式输出"""
+        output = io.StringIO()
+        writer = csv.DictWriter(
+            output,
+            fieldnames=["task", "due", "priority", "confidence", "source"],
+        )
+        writer.writeheader()
+        for item in items:
+            writer.writerow(item.to_dict())
+        return output.getvalue()
+
+    @staticmethod
+    def format_table(items: List[TodoItem]) -> str:
+        """表格格式输出"""
+        if not items:
+            return "（无待办事项）"
+
+        # 计算列宽
+        headers = ["任务", "截止日期", "优先级", "置信度"]
+        rows = []
+        for item in items:
+            rows.append(
+                [
+                    item.task,
+                    item.due or "-",
+                    item.priority or "-",
+                    f"{item.confidence:.0%}",
+                ]
+            )
+
+        col_widths = [len(h) for h in headers]
+        for row in rows:
+            for i, cell in enumerate(row):
+                col_widths[i] = max(col_widths[i], len(str(cell)))
+
+        # 生成表格
+        lines = []
+        # 表头
+        header_line = " | ".join(
+            h.ljust(col_widths[i]) for i, h in enumerate(headers)
+        )
+        lines.append(header_line)
+        lines.append("-+-".join("-" * w for w in col_widths))
+        # 数据行
+        for row in rows:
+            lines.append(
+                " | ".join(
+                    str(cell).ljust(col_widths[i]) for i, cell in enumerate(row)
+                )
+            )
+        return "\n".join(lines)
+
+    @staticmethod
+    def format_custom(items: List[TodoItem], template: str) -> str:
+        """自定义模板格式输出"""
         try:
-            if self.filepath.exists():
-                with open(self.filepath, "r", encoding="utf-8") as f:
-                    data = json.load(f)
-                self._items = [TodoItem.from_dict(x) for x in data.get("items", [])]
-                self._next_id = data.get("next_id", 1)
-                # 确保 next_id 大于所有现有 ID
-                for item in self._items:
-                    if item.id is not None and item.id >= self._next_id:
-                        self._next_id = item.id + 1
-        except json.JSONDecodeError:
-            raise TodoError("E007", f"数据文件损坏: {self.filepath}")
-        except OSError:
-            raise TodoError("E006", f"无法读取文件: {self.filepath}")
+            lines = []
+            for item in items:
+                line = template
+                line = line.replace("{task}", item.task)
+                line = line.replace("{due}", item.due or "")
+                line = line.replace("{priority}", item.priority or "")
+                line = line.replace("{confidence}", f"{item.confidence:.2f}")
+                line = line.replace("{source}", item.source)
+                lines.append(line)
+            return "\n".join(lines)
+        except Exception:
+            raise TodoCliError("E006")
 
-    def _save(self):
-        """保存数据到文件"""
+
+# ============================================================
+# 输入数据加载器
+# ============================================================
+class InputLoader:
+    """加载输入数据：支持文本、文件、URL"""
+
+    @staticmethod
+    def load_text(text: str) -> str:
+        """直接使用文本输入"""
+        if not text or not text.strip():
+            raise TodoCliError("E010")
+        return text
+
+    @staticmethod
+    def load_file(file_path: str) -> str:
+        """从文件读取内容"""
         try:
-            # 确保父目录存在
-            self.filepath.parent.mkdir(parents=True, exist_ok=True)
-            data = {
-                "next_id": self._next_id,
-                "items": [x.to_dict() for x in self._items],
-            }
-            with open(self.filepath, "w", encoding="utf-8") as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-        except OSError:
-            raise TodoError("E006", f"无法写入文件: {self.filepath}")
+            path = Path(file_path)
+            if not path.exists():
+                raise TodoCliError("E002", f"文件不存在: {file_path}")
+            return path.read_text(encoding="utf-8")
+        except TodoCliError:
+            raise
+        except Exception as e:
+            raise TodoCliError("E002", f"读取文件失败: {str(e)}")
 
-    def add(self, item: TodoItem) -> TodoItem:
-        """添加新待办"""
-        item.id = self._next_id
-        self._next_id += 1
-        self._items.append(item)
-        self._save()
-        return item
+    @staticmethod
+    def load_url(url: str) -> str:
+        """从 URL 获取内容（仅支持公开 URL）"""
+        try:
+            import urllib.request
 
-    def list(self, include_completed: bool = True) -> list:
-        """列出待办，可按完成状态过滤"""
-        if include_completed:
-            return list(self._items)
-        return [x for x in self._items if not x.completed]
+            with urllib.request.urlopen(url, timeout=10) as response:
+                return response.read().decode("utf-8")
+        except Exception as e:
+            raise TodoCliError("E003", f"获取 URL 失败: {str(e)}")
 
-    def get(self, item_id: int) -> TodoItem:
-        """按 ID 获取待办"""
-        for item in self._items:
-            if item.id == item_id:
-                return item
-        raise TodoError("E008", f"待办 ID={item_id} 不存在")
+    @staticmethod
+    def load_batch(directory: str) -> Dict[str, str]:
+        """批量读取目录下所有文本文件"""
+        try:
+            path = Path(directory)
+            if not path.is_dir():
+                raise TodoCliError("E007", f"目录不存在: {directory}")
 
-    def complete(self, item_id: int) -> TodoItem:
-        """标记待办为完成"""
-        item = self.get(item_id)
-        if not item.completed:
-            item.completed = True
-            item.completed_at = datetime.now().isoformat(timespec="seconds")
-            self._save()
-        return item
-
-    def delete(self, item_id: int) -> bool:
-        """删除待办"""
-        for i, item in enumerate(self._items):
-            if item.id == item_id:
-                del self._items[i]
-                self._save()
-                return True
-        raise TodoError("E008", f"待办 ID={item_id} 不存在")
+            contents = {}
+            for file_path in sorted(path.glob("*.txt")):
+                contents[file_path.name] = file_path.read_text(encoding="utf-8")
+            return contents
+        except TodoCliError:
+            raise
+        except Exception as e:
+            raise TodoCliError("E007", f"批量读取失败: {str(e)}")
 
 
 # ============================================================
-# 业务逻辑层
+# 核心处理逻辑
 # ============================================================
-class TodoService:
-    """待办事项核心业务"""
+class TodoProcessor:
+    """主处理流程"""
 
-    def __init__(self, storage: TodoStorage):
-        self.storage = storage
+    def __init__(self):
+        self.parser = TodoParser()
+        self.formatter = OutputFormatter()
 
-    def add_todo(self, title: str, description: str = "", due_date: str = "") -> TodoItem:
-        """添加待办"""
-        if not title:
-            raise TodoError("E001")
-        return self.storage.add(TodoItem(title, description, due_date))
+    def process(
+        self,
+        content: str,
+        source: str = "",
+        output_format: str = "table",
+        template: str = "",
+    ) -> str:
+        """处理输入内容并返回格式化结果"""
+        # 解析
+        items = self.parser.parse(content, source)
 
-    def list_todos(self, show_all: bool = True) -> list:
-        """列出待办"""
-        return self.storage.list(include_completed=show_all)
-
-    def complete_todo(self, item_id: int) -> TodoItem:
-        """完成待办"""
-        return self.storage.complete(item_id)
-
-    def delete_todo(self, item_id: int) -> bool:
-        """删除待办"""
-        return self.storage.delete(item_id)
-
-    def stats(self) -> dict:
-        """统计信息"""
-        items = self.storage.list()
-        total = len(items)
-        completed = sum(1 for x in items if x.completed)
-        pending = total - completed
-        return {
-            "total": total,
-            "completed": completed,
-            "pending": pending,
-            "completion_rate": (completed / total * 100) if total > 0 else 0,
-        }
+        # 格式化输出
+        if output_format == "json":
+            return self.formatter.format_json(items)
+        elif output_format == "csv":
+            return self.formatter.format_csv(items)
+        elif output_format == "table":
+            return self.formatter.format_table(items)
+        elif output_format == "custom":
+            if not template:
+                raise TodoCliError("E006", "自定义格式需要提供模板")
+            return self.formatter.format_custom(items, template)
+        else:
+            raise TodoCliError("E005", f"不支持的输出格式: {output_format}")
 
 
 # ============================================================
-# 输出格式化
+# 自检功能
 # ============================================================
-def format_todo_item(item: TodoItem) -> str:
-    """格式化单条待办"""
-    status = "[✓]" if item.completed else "[ ]"
-    due = f" 截止: {item.due_date}" if item.due_date else ""
-    desc = f" 描述: {item.description}" if item.description else ""
-    return f"{status} #{item.id} {item.title}{due}{desc}"
-
-
-def format_todo_list(items: list) -> str:
-    """格式化待办列表"""
-    if not items:
-        return "（暂无待办事项）"
-    lines = [format_todo_item(item) for item in items]
-    return "\n".join(lines)
-
-
-def format_stats(stats: dict) -> str:
-    """格式化统计信息"""
-    return (
-        f"总计: {stats['total']} | "
-        f"已完成: {stats['completed']} | "
-        f"待处理: {stats['pending']} | "
-        f"完成率: {stats['completion_rate']:.1f}%"
-    )
-
-
-# ============================================================
-# 自检模块（离线、不依赖外部环境）
-# ============================================================
-def run_selftest() -> int:
+def run_selftest() -> bool:
     """
-    运行内置自检，验证核心逻辑。
-
-    使用硬编码样例数据，不读取外部文件、不访问网络。
-    断言采用宽松阈值，确保稳定性。
+    内置自检：使用硬编码样例数据验证核心逻辑。
+    不读取外部文件、不依赖当前工作目录、不访问网络。
+    使用宽松阈值确保稳健性。
     """
-    print("=== todo-cli 自检开始 ===")
-    failures = 0
+    try:
+        processor = TodoProcessor()
 
-    # 使用临时目录，避免污染工作目录
-    with tempfile.TemporaryDirectory() as tmpdir:
-        db_path = os.path.join(tmpdir, "test_todos.json")
-        storage = TodoStorage(db_path)
-        service = TodoService(storage)
+        # ---------- 测试用例 1：基本解析 ----------
+        test1 = "周五前完成报告（高优先级）"
+        items1 = processor.parser.parse(test1, source="selftest")
+        assert len(items1) >= 1, "测试1: 应解析出至少一个待办"
+        item1 = items1[0]
+        assert item1.task, "测试1: 任务描述不应为空"
+        assert "报告" in item1.task, "测试1: 任务描述应包含'报告'"
+        assert item1.priority == "高", f"测试1: 优先级应为'高'，实际为'{item1.priority}'"
+        assert item1.due == "周五", f"测试1: 截止日期应为'周五'，实际为'{item1.due}'"
+        assert item1.confidence > 0.5, "测试1: 置信度应大于0.5"
 
-        # --- 测试1: 添加待办 ---
-        try:
-            item1 = service.add_todo("完成项目报告", "月度总结", "2026-01-31")
-            item2 = service.add_todo("购买生日礼物")
-            item3 = service.add_todo("预约体检", due_date="2026-02-15")
+        # ---------- 测试用例 2：多行输入 ----------
+        test2 = "买菜\n打扫房间（明天）\n交水电费（低优先级）"
+        items2 = processor.parser.parse(test2, source="selftest")
+        assert len(items2) >= 3, "测试2: 应解析出至少三个待办"
+        # 验证每项都有任务描述
+        for item in items2:
+            assert item.task, "测试2: 每项任务描述不应为空"
 
-            assert item1.id is not None, "ID 不应为空"
-            assert item2.id == item1.id + 1, "ID 应递增"
-            assert item3.id == item2.id + 1, "ID 应递增"
-            assert not item1.completed, "新待办不应是完成状态"
-            print("  [PASS] 添加待办功能正常")
-        except AssertionError as e:
-            failures += 1
-            print(f"  [FAIL] 添加待办: {e}")
-        except TodoError as e:
-            failures += 1
-            print(f"  [FAIL] 添加待办异常: {e}")
+        # ---------- 测试用例 3：格式输出 ----------
+        test3 = "测试任务"
+        items3 = processor.parser.parse(test3, source="selftest")
+        json_out = processor.formatter.format_json(items3)
+        assert json_out, "测试3: JSON 输出不应为空"
+        assert "task" in json_out, "测试3: JSON 应包含 task 字段"
 
-        # --- 测试2: 列出待办 ---
-        try:
-            all_items = service.list_todos()
-            assert len(all_items) == 3, f"应列出3条，实际{len(all_items)}"
+        csv_out = processor.formatter.format_csv(items3)
+        assert csv_out, "测试3: CSV 输出不应为空"
+        assert "task" in csv_out, "测试3: CSV 应包含 task 列"
 
-            pending_items = service.list_todos(show_all=False)
-            assert len(pending_items) == 3, f"应列出3条未完成，实际{len(pending_items)}"
+        table_out = processor.formatter.format_table(items3)
+        assert table_out, "测试3: 表格输出不应为空"
+        assert "任务" in table_out, "测试3: 表格应包含'任务'列"
 
-            # 宽松验证：所有待办标题非空
-            for item in all_items:
-                assert item.title.strip(), "标题不应为空字符串"
-            print("  [PASS] 列出待办功能正常")
-        except AssertionError as e:
-            failures += 1
-            print(f"  [FAIL] 列出待办: {e}")
-        except TodoError as e:
-            failures += 1
-            print(f"  [FAIL] 列出待办异常: {e}")
+        # ---------- 测试用例 4：置信度标注 ----------
+        test4 = "尽快完成这个任务"
+        items4 = processor.parser.parse(test4, source="selftest")
+        item4 = items4[0]
+        # "尽快"无法映射为具体日期，应使用占位符或空
+        assert item4.due in ("", "[需核实:截止日期]"), "测试4: 模糊日期应使用占位符"
 
-        # --- 测试3: 完成待办 ---
-        try:
-            completed = service.complete_todo(item1.id)
-            assert completed.completed, "待办应标记为完成"
-            assert completed.completed_at is not None, "完成时间不应为空"
+        # ---------- 测试用例 5：优先级提取 ----------
+        test5 = "（紧急）处理服务器故障"
+        items5 = processor.parser.parse(test5, source="selftest")
+        item5 = items5[0]
+        assert item5.priority == "高", f"测试5: '紧急'应映射为'高'优先级，实际为'{item5.priority}'"
 
-            # 完成后再列出
-            pending_after = service.list_todos(show_all=False)
-            assert len(pending_after) == 2, f"应剩2条未完成，实际{len(pending_after)}"
-            print("  [PASS] 完成待办功能正常")
-        except AssertionError as e:
-            failures += 1
-            print(f"  [FAIL] 完成待办: {e}")
-        except TodoError as e:
-            failures += 1
-            print(f"  [FAIL] 完成待办异常: {e}")
+        # ---------- 测试用例 6：完整流程 ----------
+        test6 = "完成项目文档（明天）（高优先级）"
+        result6 = processor.process(test6, source="selftest", output_format="json")
+        assert result6, "测试6: 完整流程应返回结果"
+        assert "完成项目文档" in result6, "测试6: 结果应包含任务描述"
 
-        # --- 测试4: 统计信息 ---
-        try:
-            stats = service.stats()
-            assert stats["total"] == 3, f"总数应为3，实际{stats['total']}"
-            assert stats["completed"] == 1, f"完成数应为1，实际{stats['completed']}"
-            assert stats["pending"] == 2, f"待处理应为2，实际{stats['pending']}"
-            # 宽松验证：完成率应在合理范围
-            assert 0 <= stats["completion_rate"] <= 100, "完成率应在0-100之间"
-            assert stats["completion_rate"] > 30, f"完成率应大于30%，实际{stats['completion_rate']:.1f}%"
-            assert stats["completion_rate"] < 40, f"完成率应小于40%，实际{stats['completion_rate']:.1f}%"
-            print("  [PASS] 统计功能正常")
-        except AssertionError as e:
-            failures += 1
-            print(f"  [FAIL] 统计功能: {e}")
-        except TodoError as e:
-            failures += 1
-            print(f"  [FAIL] 统计功能异常: {e}")
+        # ---------- 测试用例 7：批量处理 ----------
+        test7_lines = ["任务A", "任务B（低）", "任务C（周五）"]
+        test7 = "\n".join(test7_lines)
+        items7 = processor.parser.parse(test7, source="selftest")
+        assert len(items7) >= 3, "测试7: 应解析出至少三个待办"
 
-        # --- 测试5: 删除待办 ---
-        try:
-            deleted = service.delete_todo(item2.id)
-            assert deleted, "删除应返回 True"
+        # ---------- 测试用例 8：自定义模板 ----------
+        test8 = "测试模板任务"
+        items8 = processor.parser.parse(test8, source="selftest")
+        custom_out = processor.formatter.format_custom(
+            items8, "[{priority}] {task} 截止:{due}"
+        )
+        assert custom_out, "测试8: 自定义模板输出不应为空"
+        assert "测试模板任务" in custom_out, "测试8: 模板输出应包含任务"
 
-            remaining = service.list_todos()
-            assert len(remaining) == 2, f"删除后应剩2条，实际{len(remaining)}"
+        # 所有测试通过
+        print("✅ 自检通过：所有核心逻辑验证成功")
+        return True
 
-            # 验证删除的 ID 不再存在
-            ids = [x.id for x in remaining]
-            assert item2.id not in ids, "删除的 ID 不应存在"
-            print("  [PASS] 删除待办功能正常")
-        except AssertionError as e:
-            failures += 1
-            print(f"  [FAIL] 删除待办: {e}")
-        except TodoError as e:
-            failures += 1
-            print(f"  [FAIL] 删除待办异常: {e}")
-
-        # --- 测试6: 错误处理 ---
-        try:
-            # 空标题
-            try:
-                service.add_todo("")
-                failures += 1
-                print("  [FAIL] 空标题应抛出 E001")
-            except TodoError as e:
-                assert e.code == "E001", f"错误码应为E001，实际{e.code}"
-                print("  [PASS] 空标题错误处理正常")
-
-            # 不存在的 ID
-            try:
-                service.complete_todo(9999)
-                failures += 1
-                print("  [FAIL] 不存在的 ID 应抛出 E008")
-            except TodoError as e:
-                assert e.code == "E008", f"错误码应为E008，实际{e.code}"
-                print("  [PASS] 不存在 ID 错误处理正常")
-        except AssertionError as e:
-            failures += 1
-            print(f"  [FAIL] 错误处理: {e}")
-
-        # --- 测试7: 持久化 ---
-        try:
-            # 重新加载存储（模拟重启）
-            storage2 = TodoStorage(db_path)
-            service2 = TodoService(storage2)
-            items = service2.list_todos()
-            assert len(items) == 2, f"持久化后应剩2条，实际{len(items)}"
-            # 验证数据一致性
-            titles = [x.title for x in items]
-            assert "完成项目报告" in titles, "标题应保留"
-            assert "预约体检" in titles, "标题应保留"
-            print("  [PASS] 数据持久化正常")
-        except AssertionError as e:
-            failures += 1
-            print(f"  [FAIL] 数据持久化: {e}")
-        except TodoError as e:
-            failures += 1
-            print(f"  [FAIL] 数据持久化异常: {e}")
-
-    # 汇总
-    print(f"\n=== 自检完成: {'全部通过' if failures == 0 else f'{failures} 项失败'} ===")
-    return 0 if failures == 0 else 1
+    except AssertionError as e:
+        print(f"❌ 自检失败: {str(e)}")
+        return False
+    except Exception as e:
+        print(f"❌ 自检异常: {str(e)}")
+        return False
 
 
 # ============================================================
 # 命令行入口
 # ============================================================
-def parse_args():
-    """解析命令行参数"""
+def main() -> int:
+    """命令行主入口"""
     parser = argparse.ArgumentParser(
         prog="todo-cli",
-        description="✅ Command-line tool to manage Todo lists",
-        epilog="示例: todo-cli add '完成报告' -d '季度总结' --due 2026-01-31",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（离线、无需外部依赖）",
+        description="待办清单命令行工具：将输入数据解析为结构化待办事项并输出",
+        epilog="示例: todo-cli parse --text '周五前完成报告（高优先级）' --format json",
     )
 
     # 子命令
-    subparsers = parser.add_subparsers(dest="command", help="可用命令")
+    subparsers = parser.add_subparsers(dest="command", help="子命令")
 
-    # add 命令
-    add_parser = subparsers.add_parser("add", help="添加待办")
-    add_parser.add_argument("title", help="待办标题（必填）")
-    add_parser.add_argument("-d", "--description", default="", help="待办描述")
-    add_parser.add_argument("--due", dest="due_date", default="", help="截止日期 (YYYY-MM-DD)")
+    # parse 子命令
+    parse_parser = subparsers.add_parser("parse", help="解析输入数据")
+    input_group = parse_parser.add_mutually_exclusive_group(required=True)
+    input_group.add_argument("--text", help="直接提供文本内容")
+    input_group.add_argument("--file", help="从文件读取内容")
+    input_group.add_argument("--url", help="从 URL 获取内容")
+    parse_parser.add_argument("--format", choices=["json", "csv", "table", "custom"], default="table", help="输出格式")
+    parse_parser.add_argument("--template", help="自定义输出模板（format=custom 时使用）")
+    parse_parser.add_argument("--source", default="", help="数据来源标识")
 
-    # list 命令
-    list_parser = subparsers.add_parser("list", help="列出待办")
-    list_parser.add_argument(
-        "--all",
-        action="store_true",
-        default=True,
-        help="显示所有待办（默认）",
-    )
-    list_parser.add_argument(
-        "--pending",
-        action="store_true",
-        help="仅显示未完成的待办",
-    )
+    # batch 子命令
+    batch_parser = subparsers.add_parser("batch", help="批量处理目录下的文件")
+    batch_parser.add_argument("directory", help="包含 .txt 文件的目录路径")
+    batch_parser.add_argument("--format", choices=["json", "csv", "table", "custom"], default="table", help="输出格式")
+    batch_parser.add_argument("--template", help="自定义输出模板（format=custom 时使用）")
 
-    # complete 命令
-    complete_parser = subparsers.add_parser("complete", help="标记待办为完成")
-    complete_parser.add_argument("id", type=int, help="待办 ID")
+    # 全局参数
+    parser.add_argument("--selftest", action="store_true", help="运行内置自检并退出")
 
-    # delete 命令
-    delete_parser = subparsers.add_parser("delete", help="删除待办")
-    delete_parser.add_argument("id", type=int, help="待办 ID")
-
-    # stats 命令
-    subparsers.add_parser("stats", help="显示统计信息")
-
-    return parser.parse_args()
-
-
-def get_default_db_path() -> str:
-    """获取默认数据库路径"""
-    # 优先使用环境变量，否则使用用户目录
-    env_path = os.environ.get("TODO_CLI_DB")
-    if env_path:
-        return env_path
-    home = Path.home()
-    return str(home / ".todo-cli" / "todos.json")
-
-
-def main() -> int:
-    """主入口函数"""
-    args = parse_args()
+    args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
-        return run_selftest()
+        success = run_selftest()
+        return 0 if success else 1
 
-    # 无命令时显示帮助
-    if not hasattr(args, "command") or args.command is None:
-        print("请指定操作命令。使用 --help 查看帮助。")
-        return 1
-
-    try:
-        # 初始化存储和服务
-        db_path = get_default_db_path()
-        storage = TodoStorage(db_path)
-        service = TodoService(storage)
-
-        # 执行命令
-        if args.command == "add":
-            item = service.add_todo(args.title, args.description, args.due_date)
-            print(f"✓ 已添加待办 #{item.id}: {item.title}")
-
-        elif args.command == "list":
-            show_all = not args.pending
-            items = service.list_todos(show_all=show_all)
-            print(format_todo_list(items))
-
-        elif args.command == "complete":
-            item = service.complete_todo(args.id)
-            print(f"✓ 已完成待办 #{item.id}: {item.title}")
-
-        elif args.command == "delete":
-            deleted = service.delete_todo(args.id)
-            if deleted:
-                print(f"✓ 已删除待办 #{args.id}")
-
-        elif args.command == "stats":
-            stats = service.stats()
-            print(format_stats(stats))
-
-        else:
-            raise TodoError("E004", f"未知命令: {args.command}")
-
+    # 没有子命令时显示帮助
+    if not args.command:
+        parser.print_help()
         return 0
 
-    except TodoError as e:
+    try:
+        processor = TodoProcessor()
+
+        # 处理 parse 子命令
+        if args.command == "parse":
+            # 加载输入
+            if args.text:
+                content = InputLoader.load_text(args.text)
+                source = args.source or "命令行输入"
+            elif args.file:
+                content = InputLoader.load_file(args.file)
+                source = args.source or args.file
+            elif args.url:
+                content = InputLoader.load_url(args.url)
+                source = args.source or args.url
+            else:
+                raise TodoCliError("E001")
+
+            # 处理并输出
+            result = processor.process(
+                content,
+                source=source,
+                output_format=args.format,
+                template=args.template or "",
+            )
+            print(result)
+            return 0
+
+        # 处理 batch 子命令
+        elif args.command == "batch":
+            contents = InputLoader.load_batch(args.directory)
+            if not contents:
+                print("（目录中没有找到 .txt 文件）")
+                return 0
+
+            all_items = []
+            for filename, content in contents.items():
+                try:
+                    items = processor.parser.parse(content, source=filename)
+                    all_items.extend(items)
+                except TodoCliError as e:
+                    print(f"⚠️ 跳过 {filename}: {e}", file=sys.stderr)
+
+            # 格式化输出
+            if args.format == "json":
+                print(processor.formatter.format_json(all_items))
+            elif args.format == "csv":
+                print(processor.formatter.format_csv(all_items))
+            elif args.format == "custom":
+                if not args.template:
+                    raise TodoCliError("E006")
+                print(processor.formatter.format_custom(all_items, args.template))
+            else:
+                print(processor.formatter.format_table(all_items))
+            return 0
+
+        else:
+            raise TodoCliError("E001")
+
+    except TodoCliError as e:
         print(f"错误: {e}", file=sys.stderr)
         return 1
-    except KeyboardInterrupt:
-        print("\n操作已取消", file=sys.stderr)
-        return 130
     except Exception as e:
-        print(f"[E010] 内部错误: {e}", file=sys.stderr)
+        print(f"错误: [{ERROR_CODES['E008']}] 未知异常: {str(e)}", file=sys.stderr)
         return 1
 
 
