@@ -342,7 +342,7 @@ def main() -> int:
     parser.add_argument("--title", "-t", type=str, default="转换结果",
                         help="生成的 Markdown 标题")
     parser.add_argument("--batch", "-b", type=str,
-                        help="批量处理，JSON 数组格式，如 '[\\"a\\", \\"b\\"]'")
+                        help='批量处理，JSON 数组格式，如 \'["a", "b"]\'')
     parser.add_argument("--selftest", action="store_true",
                         help="运行内置自检（离线，无需任何依赖）")
     parser.add_argument("--json-output", action="store_true",
