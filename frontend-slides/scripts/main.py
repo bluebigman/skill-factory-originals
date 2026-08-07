@@ -502,11 +502,12 @@ def parse_markdown(md_text: str) -> Dict[str, Any]:
     current_page: Optional[Dict[str, Any]] = None
     current_content: List[str] = []
     in_frontmatter = False
+    found_content = False  # 标记是否找到了实际内容
 
     for line in lines:
         # 处理 YAML frontmatter
         if line.strip() == "---":
-            if not in_frontmatter and not deck_data["title"]:
+            if not in_frontmatter and not deck_data["title"] and not found_content:
                 in_frontmatter = True
                 continue
             else:
@@ -526,44 +527,60 @@ def parse_markdown(md_text: str) -> Dict[str, Any]:
         if line.strip() in ("---", "***", "___"):
             if current_page:
                 current_page["content"] = "\n".join(current_content).strip()
-                deck_data["pages"].append(current_page)
+                if current_page["content"]:  # 只有有内容才添加
+                    deck_data["pages"].append(current_page)
             current_page = {"title": f"页面 {len(deck_data['pages']) + 1}"}
             current_content = []
+            found_content = True
             continue
 
-        # 标题
+        # 一级标题 - 作为文档标题（只在开头）
         if line.startswith("# "):
-            if not deck_data["title"]:
+            if not deck_data["title"] and not found_content:
                 deck_data["title"] = line[2:].strip()
                 continue
             else:
+                # 后续的一级标题作为新页面
                 if current_page:
                     current_page["content"] = "\n".join(current_content).strip()
-                    deck_data["pages"].append(current_page)
+                    if current_page["content"]:
+                        deck_data["pages"].append(current_page)
                 current_page = {"title": line[2:].strip()}
                 current_content = []
+                found_content = True
                 continue
 
         # 二级标题作为页面标题
         if line.startswith("## "):
             if current_page:
                 current_page["content"] = "\n".join(current_content).strip()
-                deck_data["pages"].append(current_page)
+                if current_page["content"]:
+                    deck_data["pages"].append(current_page)
             current_page = {"title": line[3:].strip()}
             current_content = []
+            found_content = True
             continue
 
         # 内容行
         if current_page is not None:
             current_content.append(line)
+        elif line.strip() and not deck_data["title"]:
+            # 如果没有标题，第一行非空内容作为标题
+            deck_data["title"] = line.strip()
+            found_content = True
 
     # 处理最后一项
     if current_page:
         current_page["content"] = "\n".join(current_content).strip()
-        deck_data["pages"].append(current_page)
+        if current_page["content"]:
+            deck_data["pages"].append(current_page)
 
     if not deck_data["title"]:
         deck_data["title"] = "未命名幻灯片"
+
+    # 如果没有页面但有内容，创建一个默认页面
+    if not deck_data["pages"] and found_content:
+        deck_data["pages"] = [{"title": "内容", "content": "\n".join(current_content).strip()}]
 
     if not deck_data["pages"]:
         raise ValueError("E003")
@@ -679,8 +696,9 @@ author: 自检
 """
         parsed = parse_markdown(md_sample)
         assert parsed["title"] == "Markdown 测试", "Markdown 标题解析失败"
-        assert len(parsed["pages"]) == 2, "Markdown 页面数量错误"
+        assert len(parsed["pages"]) == 2, f"Markdown 页面数量错误: {len(parsed['pages'])}"
         assert "第一页的内容" in parsed["pages"][0]["content"], "Markdown 内容解析失败"
+        assert "第二页的内容" in parsed["pages"][1]["content"], "Markdown 内容解析失败"
         print("  ✓ Markdown 解析测试通过")
     except Exception as e:
         print(f"  ✗ Markdown 解析失败: {e}")
