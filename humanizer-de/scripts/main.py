@@ -222,27 +222,30 @@ class HumanizerDE:
         if not text or len(text.strip()) == 0:
             return False
 
-        # 移除标点和空白
-        cleaned = re.sub(r'[\s\W_]', '', text)
-        if len(cleaned) == 0:
+        # 移除标点和空白，但保留德文字符
+        cleaned_text = re.sub(r'[^\w\säöüßÄÖÜ]', '', text)
+        if len(cleaned_text.strip()) == 0:
             return False
 
         # 德文字符占比
-        german_char_count = sum(1 for c in cleaned if c in GERMAN_CHARS)
-        char_ratio = german_char_count / len(cleaned)
+        german_char_count = sum(1 for c in cleaned_text if c in GERMAN_CHARS)
+        char_ratio = german_char_count / max(1, len(cleaned_text))
 
         # 常见德文单词检测
         common_words = ["der", "die", "das", "und", "ist", "nicht", "ein", "eine",
                         "mit", "auf", "für", "von", "den", "dem", "des", "sich",
                         "auch", "noch", "nach", "aus", "bei", "oder", "wenn"]
-        word_count = 0
-        for word in cleaned.lower().split():
-            if word in common_words:
-                word_count += 1
-        word_ratio = word_count / max(1, len(cleaned.split()))
+        
+        # 分割单词（保留德文特殊字符）
+        words = re.findall(r'\b[\wäöüßÄÖÜ]+\b', text.lower())
+        if len(words) == 0:
+            return False
+            
+        word_count = sum(1 for word in words if word in common_words)
+        word_ratio = word_count / len(words)
 
-        # 综合判断：德文字符占比 > 1% 或 常见词占比 > 20%
-        return char_ratio > 0.01 or word_ratio > 0.2
+        # 综合判断：德文字符占比 > 0.5% 或 常见词占比 > 15%
+        return char_ratio > 0.005 or word_ratio > 0.15
 
     def detect_ai_patterns(self, text: str) -> List[Dict]:
         """
