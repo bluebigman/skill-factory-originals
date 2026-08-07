@@ -3,7 +3,7 @@
 """
 solvecaptcha-java 技能实现脚本
 功能：验证码识别 Java 自动化接入的辅助工具（含离线自检）
-版本：1.0.1
+版本：1.0.2
 """
 
 import argparse
@@ -289,8 +289,9 @@ class CaptchaSolver:
         Raises:
             CaptchaError: 当识别失败时
         """
-        if not image_data or len(image_data) < 10:
-            raise CaptchaError("E007", "图片数据无效或过小")
+        # 只对完全为空的数据报错
+        if not image_data:
+            raise CaptchaError("E007", "图片数据无效或为空")
 
         # 模拟识别：从图片字节中提取可打印字符
         # 实际项目中此处应替换为真正的 OCR 识别逻辑
@@ -306,17 +307,17 @@ class CaptchaSolver:
             elif byte in (32, 45, 95):  # 空格、连字符、下划线
                 result_chars.append(chr(byte))
 
-        # 如果没有找到任何可识别字符，返回一个默认值
+        # 如果没有找到任何可识别字符，返回一个基于数据的确定性结果
         if not result_chars:
-            # 使用图片大小作为种子生成确定性结果
-            seed = len(image_data) % 10000
+            # 使用图片数据生成确定性结果
+            seed = sum(image_data) % 10000
             result = f"CAP{seed:04d}"
         else:
             # 取前 8 个字符作为验证码
             result = "".join(result_chars[:8])
             if len(result) < 4:
-                # 结果太短时补充随机字符
-                seed = len(image_data) % 1000
+                # 结果太短时补充基于数据的字符
+                seed = sum(image_data) % 1000
                 result = f"{result}{seed:03d}"
 
         # 清理非法字符
@@ -476,9 +477,10 @@ def run_selftest() -> bool:
         except CaptchaError as exc:
             assert exc.code == "E007", f"错误码应为 E007，实际为 {exc.code}"
 
-        # 极小数据
+        # 极小数据（不再要求抛出异常，应能成功识别）
         result = solver._recognize_image(b"12345")
         assert result is not None, "极小数据识别结果为空"
+        assert len(result) > 0, "极小数据识别结果长度为零"
 
         # data URI 格式
         data_uri = "data:image/png;base64," + test_b64
