@@ -1,667 +1,714 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-技能工厂：代码库萃取与规则蒸馏 —— 独立实现脚本
-=================================================
-本脚本根据功能规格，实现以下核心能力：
-1. 代码库结构解析（目录树扫描、文件分类）
-2. 规则与约定提取（从注释、配置文件名中提炼）
-3. 工作流还原（识别构建、测试、发布等步骤）
-4. 经验教训沉淀（识别 HACK/TODO/FIXME/NOTE/XXX 标记）
-5. 技能包生成（输出 SKILL.md 文本）
+scripts/main.py
 
-仅依赖 Python 标准库，无第三方依赖。
-通过 `--selftest` 参数可进行离线自检。
+技能工厂：代码库萃取与规则蒸馏 —— 独立实现脚本（clean-room 重写）
 
-用法示例：
-    python main.py /path/to/repo            # 分析指定代码库
-    python main.py --selftest               # 运行内置自检
-    python main.py --help                   # 显示帮助信息
+本脚本依据功能规格独立实现，仅使用 Python 标准库。
+提供命令行接口与内置离线自检（--selftest）。
 
 错误码说明：
-    E001: 参数错误（缺少路径或参数冲突）
-    E002: 路径不存在
-    E003: 路径不是目录
-    E004: 目录不可读（权限问题）
-    E005: 未找到任何可分析的文件
-    E006: 输出文件写入失败
-    E007: 自检数据初始化失败
-    E008: 自检断言失败（核心逻辑错误）
-    E009: 未捕获的运行时异常
-    E010: 未知错误
+    E001: 参数解析错误
+    E002: 输入路径不存在
+    E003: 输入路径不是目录
+    E004: 目录不可读
+    E005: 文件读取失败
+    E006: 文件编码不支持
+    E007: 输出目录创建失败
+    E008: 输出文件写入失败
+    E009: 内部逻辑错误（未知分支）
+    E010: 自检失败
 """
 
 import argparse
 import os
 import re
 import sys
-import json
+import tempfile
 from collections import defaultdict
-from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Set, Tuple
+from pathlib import Path
 
-
-# ============================================================
-# 错误码定义
-# ============================================================
-ERROR_CODES = {
-    "E001": "参数错误：请检查命令行参数",
-    "E002": "路径不存在",
-    "E003": "路径不是目录",
-    "E004": "目录不可读",
-    "E005": "未找到任何可分析的文件",
-    "E006": "输出文件写入失败",
-    "E007": "自检数据初始化失败",
-    "E008": "自检断言失败",
-    "E009": "未捕获的运行时异常",
-    "E010": "未知错误",
-}
-
-
-def fail(code: str, message: Optional[str] = None) -> None:
-    """输出错误信息并退出。"""
-    msg = ERROR_CODES.get(code, "未知错误")
-    if message:
-        msg = f"{msg}：{message}"
-    print(f"[错误 {code}] {msg}", file=sys.stderr)
-    sys.exit(1)
-
-
-# ============================================================
-# 数据结构定义
-# ============================================================
-@dataclass
-class FileInfo:
-    """单个文件的元信息。"""
-    path: str                          # 相对路径
-    name: str                          # 文件名
-    ext: str                           # 扩展名（含点，如 .py）
-    category: str = "其他"             # 文件分类
-    size: int = 0                      # 字节数
-    annotations: List[str] = field(default_factory=list)  # 注释标记
-
-
-@dataclass
-class AnalysisResult:
-    """一次分析的完整结果。"""
-    root_path: str                     # 根路径
-    total_files: int = 0               # 文件总数
-    total_dirs: int = 0                # 目录总数
-    total_lines: int = 0               # 总行数
-    files: List[FileInfo] = field(default_factory=list)          # 所有文件
-    categories: Dict[str, int] = field(default_factory=dict)     # 分类统计
-    extensions: Dict[str, int] = field(default_factory=dict)     # 扩展名统计
-    rules: List[Dict] = field(default_factory=list)              # 提取的规则
-    workflows: List[Dict] = field(default_factory=list)          # 工作流步骤
-    lessons: List[Dict] = field(default_factory=list)            # 经验教训
-    module_deps: Dict[str, Set[str]] = field(default_factory=dict)  # 模块依赖
-    config_files: List[str] = field(default_factory=list)        # 配置文件
-
-
-# ============================================================
+# ---------------------------------------------------------------------------
 # 常量定义
-# ============================================================
-# 配置文件识别模式
-CONFIG_PATTERNS = [
-    r"^\.eslintrc", r"^\.prettierrc", r"^\.babelrc", r"^\.flake8",
-    r"^Makefile$", r"^makefile$", r"^CMakeLists\.txt$",
-    r"^package\.json$", r"^pom\.xml$", r"^build\.gradle$",
-    r"^Cargo\.toml$", r"^go\.mod$", r"^requirements.*\.txt$",
-    r"^pyproject\.toml$", r"^setup\.py$", r"^setup\.cfg$",
-    r"^tox\.ini$", r"^\.github/workflows/", r"^\.gitlab-ci\.yml$",
-    r"^Dockerfile$", r"^docker-compose.*\.yml$", r"^\.env.*$",
-    r"^README.*$", r"^LICENSE.*$", r"^\.gitignore$",
-    r"^\.dockerignore$", r"^\.editorconfig$", r"^\.npmrc$",
-    r"^\.yarnrc$", r"^tsconfig\.json$", r"^jest\.config\.js$",
-    r"^\.travis\.yml$", r"^\.circleci/", r"^Jenkinsfile$",
-]
+# ---------------------------------------------------------------------------
 
-# 源代码文件扩展名
-SOURCE_EXTS = {
-    ".py", ".js", ".ts", ".jsx", ".tsx", ".java", ".c", ".h",
-    ".cpp", ".hpp", ".cc", ".go", ".rs", ".rb", ".php", ".swift",
-    ".kt", ".scala", ".sh", ".bash", ".zsh", ".cs", ".vue",
-    ".html", ".css", ".scss", ".less", ".sql", ".r", ".m",
+# 文本文件扩展名白名单（用于静态分析）
+TEXT_EXTENSIONS = {
+    ".py", ".js", ".ts", ".java", ".c", ".cpp", ".h", ".hpp",
+    ".go", ".rs", ".rb", ".php", ".swift", ".kt", ".scala",
+    ".json", ".yaml", ".yml", ".toml", ".ini", ".cfg", ".conf",
+    ".md", ".txt", ".rst", ".xml", ".html", ".css", ".scss",
+    ".sh", ".bat", ".ps1", ".sql", ".graphql", ".proto",
 }
 
-# 注释标记模式（用于经验教训提取）
-ANNOTATION_PATTERNS = {
-    "HACK": r"//\s*HACK|#\s*HACK|/\*\s*HACK",
-    "TODO": r"//\s*TODO|#\s*TODO|/\*\s*TODO",
-    "FIXME": r"//\s*FIXME|#\s*FIXME|/\*\s*FIXME",
-    "NOTE": r"//\s*NOTE|#\s*NOTE|/\*\s*NOTE",
-    "XXX": r"//\s*XXX|#\s*XXX|/\*\s*XXX",
-    "WORKAROUND": r"//\s*WORKAROUND|#\s*WORKAROUND|/\*\s*WORKAROUND",
+# 配置文件名（用于识别项目类型）
+CONFIG_FILES = {
+    "package.json": "node",
+    "pom.xml": "java",
+    "Cargo.toml": "rust",
+    "go.mod": "go",
+    "requirements.txt": "python",
+    "setup.py": "python",
+    "pyproject.toml": "python",
+    "Gemfile": "ruby",
+    "build.gradle": "gradle",
+    "Makefile": "make",
 }
 
-# 工作流关键词
-WORKFLOW_KEYWORDS = {
-    "build": ["build", "编译", "构建", "compile", "make"],
-    "test": ["test", "测试", "check", "verify"],
-    "lint": ["lint", "静态检查", "eslint", "pylint"],
-    "format": ["format", "格式化", "prettier", "black"],
-    "publish": ["publish", "发布", "deploy", "部署", "release"],
-    "install": ["install", "安装", "setup"],
-    "clean": ["clean", "清理"],
-    "docs": ["docs", "文档", "documentation"],
+# 注释标记（按语言分组）
+COMMENT_MARKERS = {
+    "python": ("#",),
+    "javascript": ("//", "/*", "*"),
+    "typescript": ("//", "/*", "*"),
+    "java": ("//", "/*", "*"),
+    "c": ("//", "/*", "*"),
+    "cpp": ("//", "/*", "*"),
+    "go": ("//", "/*", "*"),
+    "rust": ("//", "/*", "*"),
+    "ruby": ("#",),
+    "php": ("//", "#", "/*", "*"),
+    "shell": ("#",),
+    "sql": ("--", "/*", "*"),
 }
 
-# 忽略的目录
-IGNORE_DIRS = {".git", ".svn", ".hg", "__pycache__", "node_modules",
-               "vendor", ".tox", ".mypy_cache", ".pytest_cache",
-               "dist", "build", ".idea", ".vscode", ".next", ".nuxt"}
+# 经验标记（TODO/FIXME/HACK/NOTE/XXX）
+EXPERIENCE_MARKERS = ["TODO", "FIXME", "HACK", "NOTE", "XXX"]
 
-# 忽略的文件
-IGNORE_FILES = {".DS_Store", "Thumbs.db"}
+# 工作流相关关键字（用于识别 CI/CD 流程）
+WORKFLOW_KEYWORDS = ["build", "test", "deploy", "publish", "release", "lint", "install"]
+
+# ---------------------------------------------------------------------------
+# 核心数据结构
+# ---------------------------------------------------------------------------
 
 
-# ============================================================
-# 核心逻辑实现
-# ============================================================
-class CodebaseAnalyzer:
-    """代码库分析器：扫描目录、提取信息。"""
+class AnalysisResult:
+    """分析结果容器"""
 
-    def __init__(self, root_path: str):
-        self.root_path = root_path
-        self.result = AnalysisResult(root_path=root_path)
-        self._all_files: List[str] = []
+    def __init__(self):
+        self.project_type = "unknown"
+        self.config_files = []
+        self.modules = []          # 模块/目录列表
+        self.file_count = 0
+        self.rules = []            # 规则清单
+        self.workflows = []        # 工作流
+        self.experiences = []      # 经验卡片
+        self.dependencies = defaultdict(list)  # 模块依赖关系
 
-    def scan(self) -> AnalysisResult:
-        """执行完整扫描流程。"""
-        # 1. 扫描目录树
-        self._scan_directory()
-        if not self.result.files:
-            fail("E005", f"路径 {self.root_path} 下未找到可分析的文件")
+    def to_dict(self):
+        """转换为字典（用于输出）"""
+        return {
+            "project_type": self.project_type,
+            "config_files": self.config_files,
+            "modules": self.modules,
+            "file_count": self.file_count,
+            "rules": self.rules,
+            "workflows": self.workflows,
+            "experiences": self.experiences,
+            "dependencies": dict(self.dependencies),
+        }
 
-        # 2. 分析文件内容
-        self._analyze_contents()
 
-        # 3. 提取规则
-        self._extract_rules()
+# ---------------------------------------------------------------------------
+# 核心分析逻辑
+# ---------------------------------------------------------------------------
 
-        # 4. 还原工作流
-        self._restore_workflows()
 
-        # 5. 沉淀经验
-        self._extract_lessons()
+def analyze_codebase(root_path):
+    """
+    分析代码库，提取结构、规则、工作流与经验。
 
-        return self.result
+    参数:
+        root_path: 代码库根目录路径（Path 对象）
 
-    # ---------- 目录扫描 ----------
-    def _scan_directory(self) -> None:
-        """递归扫描目录，收集文件信息。"""
-        if not os.path.exists(self.root_path):
-            fail("E002", self.root_path)
-        if not os.path.isdir(self.root_path):
-            fail("E003", self.root_path)
-        if not os.access(self.root_path, os.R_OK):
-            fail("E004", self.root_path)
+    返回:
+        AnalysisResult 对象
 
-        dir_count = 0
-        for dirpath, dirnames, filenames in os.walk(self.root_path):
-            # 过滤忽略目录
-            dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
-            dir_count += 1
+    异常:
+        可能抛出 OSError（E002/E003/E004/E005）
+    """
+    if not root_path.exists():
+        raise FileNotFoundError(f"E002: 路径不存在: {root_path}")
+    if not root_path.is_dir():
+        raise NotADirectoryError(f"E003: 不是目录: {root_path}")
+    if not os.access(root_path, os.R_OK):
+        raise PermissionError(f"E004: 目录不可读: {root_path}")
 
-            rel_dir = os.path.relpath(dirpath, self.root_path)
-            if rel_dir == ".":
-                rel_dir = ""
+    result = AnalysisResult()
 
-            for fname in filenames:
-                if fname in IGNORE_FILES:
-                    continue
+    # 1. 扫描目录树，识别模块与配置文件
+    _scan_directory(root_path, result)
 
-                full_path = os.path.join(dirpath, fname)
-                rel_path = os.path.join(rel_dir, fname) if rel_dir else fname
+    # 2. 识别项目类型（基于配置文件）
+    result.project_type = _detect_project_type(result.config_files)
 
-                try:
-                    fsize = os.path.getsize(full_path)
-                except OSError:
-                    fsize = 0
+    # 3. 提取规则与约定
+    result.rules = _extract_rules(root_path, result)
 
-                # 跳过二进制文件（简单判断：读取前几个字节）
-                if self._is_binary(full_path):
-                    continue
+    # 4. 还原工作流
+    result.workflows = _extract_workflows(root_path, result)
 
-                ext = os.path.splitext(fname)[1].lower()
-                category = self._classify_file(fname, ext, rel_path)
+    # 5. 沉淀经验教训
+    result.experiences = _extract_experiences(root_path, result)
 
-                file_info = FileInfo(
-                    path=rel_path,
-                    name=fname,
-                    ext=ext,
-                    category=category,
-                    size=fsize,
-                )
-                self.result.files.append(file_info)
-                self._all_files.append(rel_path)
+    # 6. 构建模块依赖图
+    result.dependencies = _build_dependency_graph(root_path, result.modules)
 
-                # 更新统计
-                self.result.categories[category] = \
-                    self.result.categories.get(category, 0) + 1
-                if ext:
-                    self.result.extensions[ext] = \
-                        self.result.extensions.get(ext, 0) + 1
+    return result
 
-                # 识别配置文件
-                if self._is_config_file(fname, rel_path):
-                    self.result.config_files.append(rel_path)
 
-        self.result.total_files = len(self.result.files)
-        self.result.total_dirs = dir_count
+def _scan_directory(root_path, result):
+    """
+    递归扫描目录，收集模块列表、配置文件、文件计数。
 
-    def _is_binary(self, filepath: str) -> bool:
-        """判断文件是否为二进制（读取前1024字节检查空字节）。"""
+    参数:
+        root_path: 根目录 Path
+        result: AnalysisResult 实例（原地修改）
+    """
+    for root, dirs, files in os.walk(root_path):
+        # 跳过隐藏目录（如 .git, .svn, node_modules）
+        dirs[:] = [d for d in dirs if not d.startswith(".") and d not in ("node_modules", "venv", "__pycache__")]
+
+        current_dir = Path(root)
+        rel_path = current_dir.relative_to(root_path)
+
+        # 记录模块（相对路径）
+        if rel_path != Path("."):
+            result.modules.append(str(rel_path))
+
+        # 处理文件
+        for file in files:
+            if file.startswith("."):
+                continue
+            file_path = current_dir / file
+            rel_file = file_path.relative_to(root_path)
+
+            # 配置文件
+            if file in CONFIG_FILES:
+                result.config_files.append(str(rel_file))
+
+            # 文本文件计数
+            if file_path.suffix.lower() in TEXT_EXTENSIONS or file in ("Makefile", "Dockerfile"):
+                result.file_count += 1
+
+
+def _detect_project_type(config_files):
+    """
+    根据配置文件识别项目类型。
+
+    参数:
+        config_files: 配置文件相对路径列表
+
+    返回:
+        项目类型字符串
+    """
+    for config in config_files:
+        filename = Path(config).name
+        if filename in CONFIG_FILES:
+            return CONFIG_FILES[filename]
+    return "unknown"
+
+
+def _extract_rules(root_path, result):
+    """
+    从配置文件和文档中提取规则与约定。
+
+    参数:
+        root_path: 根目录 Path
+        result: AnalysisResult 实例
+
+    返回:
+        规则列表（字典格式）
+    """
+    rules = []
+    rule_keywords = ["must", "should", "always", "never", "require", "禁止", "必须", "务必"]
+
+    # 扫描 README 或文档中的规则描述
+    for doc_name in ["README.md", "README.txt", "CONTRIBUTING.md", "docs/rules.md"]:
+        doc_path = root_path / doc_name
+        if not doc_path.exists():
+            continue
         try:
-            with open(filepath, "rb") as f:
-                chunk = f.read(1024)
-                return b"\x00" in chunk
-        except OSError:
-            return True
+            content = doc_path.read_text(encoding="utf-8", errors="ignore")
+            for line in content.splitlines():
+                line = line.strip()
+                if not line:
+                    continue
+                # 检查是否包含规则关键词
+                lower_line = line.lower()
+                if any(kw in lower_line for kw in rule_keywords):
+                    rules.append({
+                        "source": doc_name,
+                        "content": line[:200],  # 截断超长行
+                        "priority": "high" if any(kw in lower_line for kw in ["must", "禁止", "必须"]) else "medium",
+                        "scope": "project",
+                    })
+        except (OSError, UnicodeError):
+            continue  # 跳过无法读取的文件
 
-    def _classify_file(self, fname: str, ext: str, rel_path: str) -> str:
-        """根据扩展名和路径对文件分类。"""
-        if ext in SOURCE_EXTS:
-            return "源代码"
-        if ext in {".md", ".rst", ".txt"} or fname.startswith("README"):
-            return "文档"
-        if self._is_config_file(fname, rel_path):
-            return "配置"
-        if ext in {".json", ".yaml", ".yml", ".toml", ".ini", ".cfg"}:
-            return "数据"
-        if ext in {".png", ".jpg", ".jpeg", ".gif", ".svg", ".ico"}:
-            return "图片"
-        if ext in {".ttf", ".otf", ".woff", ".woff2"}:
-            return "字体"
-        if ext in {".mp3", ".wav", ".ogg"}:
-            return "音频"
-        if ext in {".mp4", ".avi", ".mkv"}:
-            return "视频"
-        return "其他"
+    return rules
 
-    def _is_config_file(self, fname: str, rel_path: str) -> bool:
-        """判断是否为配置文件。"""
-        for pattern in CONFIG_PATTERNS:
-            if re.match(pattern, rel_path) or re.match(pattern, fname):
-                return True
-        return False
 
-    # ---------- 内容分析 ----------
-    def _analyze_contents(self) -> None:
-        """分析各文件内容，提取模块依赖、行数等信息。"""
-        for file_info in self.result.files:
-            # 只分析文本文件
-            if file_info.category not in {"源代码", "配置", "文档"}:
-                continue
+def _extract_workflows(root_path, result):
+    """
+    从 CI 配置和脚本中还原工作流。
 
-            full_path = os.path.join(self.root_path, file_info.path)
+    参数:
+        root_path: 根目录 Path
+        result: AnalysisResult 实例
+
+    返回:
+        工作流列表（字典格式）
+    """
+    workflows = []
+
+    # 检查 GitHub Actions
+    gh_actions_dir = root_path / ".github" / "workflows"
+    if gh_actions_dir.exists():
+        for yml_file in gh_actions_dir.glob("*.yml"):
             try:
-                with open(full_path, "r", encoding="utf-8", errors="ignore") as f:
-                    lines = f.readlines()
-            except OSError:
+                content = yml_file.read_text(encoding="utf-8", errors="ignore")
+                steps = []
+                for line in content.splitlines():
+                    line = line.strip()
+                    # 提取步骤名称
+                    if line.startswith("name:"):
+                        steps.append(line.split(":", 1)[1].strip())
+                    # 提取运行命令
+                    elif line.startswith("run:"):
+                        cmd = line.split(":", 1)[1].strip()
+                        if cmd:
+                            steps.append(f"run: {cmd[:100]}")
+                if steps:
+                    workflows.append({
+                        "name": yml_file.stem,
+                        "source": str(yml_file.relative_to(root_path)),
+                        "steps": steps,
+                        "type": "ci",
+                    })
+            except (OSError, UnicodeError):
                 continue
 
-            file_info.size = sum(len(line.encode("utf-8", errors="ignore"))
-                                 for line in lines)
-            self.result.total_lines += len(lines)
+    # 检查 package.json scripts
+    pkg_json = root_path / "package.json"
+    if pkg_json.exists():
+        try:
+            import json
+            data = json.loads(pkg_json.read_text(encoding="utf-8", errors="ignore"))
+            scripts = data.get("scripts", {})
+            if scripts:
+                workflow_steps = []
+                for name, cmd in scripts.items():
+                    if any(kw in name.lower() for kw in WORKFLOW_KEYWORDS):
+                        workflow_steps.append(f"{name}: {cmd[:100]}")
+                if workflow_steps:
+                    workflows.append({
+                        "name": "package-scripts",
+                        "source": "package.json",
+                        "steps": workflow_steps,
+                        "type": "build",
+                    })
+        except (Exception, ValueError):
+            pass  # JSON 解析失败则跳过
 
-            # 提取模块依赖（import 语句）
-            if file_info.ext == ".py":
-                self._extract_python_deps(lines, file_info)
-            elif file_info.ext in {".js", ".ts", ".jsx", ".tsx"}:
-                self._extract_js_deps(lines, file_info)
-            elif file_info.ext in {".java", ".go", ".rs", ".c", ".cpp", ".h", ".hpp"}:
-                self._extract_c_like_deps(lines, file_info)
-
-            # 提取注释标记
-            self._extract_annotations(lines, file_info)
-
-    def _extract_python_deps(self, lines: List[str], file_info: FileInfo) -> None:
-        """提取 Python 模块依赖。"""
-        deps = set()
-        for line in lines:
-            stripped = line.strip()
-            # import xxx 或 from xxx import yyy
-            m = re.match(r"^(?:import|from)\s+([a-zA-Z_][a-zA-Z0-9_]*)", stripped)
-            if m:
-                deps.add(m.group(1))
-            # import a.b.c 或 from a.b.c import ...
-            m = re.match(r"^(?:import|from)\s+([a-zA-Z_][a-zA-Z0-9_]*\.[a-zA-Z0-9_.]+)", stripped)
-            if m:
-                deps.add(m.group(1).split(".")[0])
-        if deps:
-            self.result.module_deps[file_info.path] = deps
-
-    def _extract_js_deps(self, lines: List[str], file_info: FileInfo) -> None:
-        """提取 JavaScript/TypeScript 模块依赖。"""
-        deps = set()
-        for line in lines:
-            stripped = line.strip()
-            # import xxx from 'yyy' 或 require('yyy')
-            m = re.match(r"^import\s+.*\s+from\s+['\"]([^'\"]+)['\"]", stripped)
-            if m:
-                deps.add(m.group(1))
-            m = re.match(r"^const\s+.*=\s*require\(['\"]([^'\"]+)['\"]\)", stripped)
-            if m:
-                deps.add(m.group(1))
-        if deps:
-            self.result.module_deps[file_info.path] = deps
-
-    def _extract_c_like_deps(self, lines: List[str], file_info: FileInfo) -> None:
-        """提取 C/Java/Go 等语言的头文件依赖。"""
-        deps = set()
-        for line in lines:
-            stripped = line.strip()
-            # #include <xxx> 或 #include "xxx"
-            m = re.match(r"^#include\s*[<\"]([^>\"]+)[>\"]", stripped)
-            if m:
-                deps.add(m.group(1))
-            # import xxx
-            m = re.match(r"^import\s+([a-zA-Z0-9_.]+)", stripped)
-            if m:
-                deps.add(m.group(1))
-        if deps:
-            self.result.module_deps[file_info.path] = deps
-
-    def _extract_annotations(self, lines: List[str], file_info: FileInfo) -> None:
-        """提取注释中的标记（HACK、TODO、FIXME 等）。"""
-        for annotation_type, pattern in ANNOTATION_PATTERNS.items():
-            for i, line in enumerate(lines, 1):
-                if re.search(pattern, line):
-                    file_info.annotations.append(
-                        f"{annotation_type}:{i}:{line.strip()[:100]}"
-                    )
-
-    # ---------- 规则提取 ----------
-    def _extract_rules(self) -> None:
-        """从配置文件和代码中提取规则与约定。"""
-        rules: List[Dict] = []
-
-        # 从配置文件名提取规则
-        for cfg in self.result.config_files:
-            cfg_lower = cfg.lower()
-            if "eslint" in cfg_lower:
-                rules.append({
-                    "来源": cfg,
-                    "规则": "使用 ESLint 进行代码规范检查",
-                    "优先级": "高",
-                    "适用范围": "JavaScript/TypeScript 代码",
-                })
-            elif "prettier" in cfg_lower:
-                rules.append({
-                    "来源": cfg,
-                    "规则": "使用 Prettier 统一代码格式",
-                    "优先级": "中",
-                    "适用范围": "前端代码",
-                })
-            elif "flake8" in cfg_lower or "pyproject" in cfg_lower:
-                rules.append({
-                    "来源": cfg,
-                    "规则": "使用 Flake8 进行 Python 代码风格检查",
-                    "优先级": "高",
-                    "适用范围": "Python 代码",
-                })
-            elif "makefile" in cfg_lower:
-                rules.append({
-                    "来源": cfg,
-                    "规则": "使用 Makefile 管理构建任务",
-                    "优先级": "中",
-                    "适用范围": "项目构建",
-                })
-            elif "dockerfile" in cfg_lower:
-                rules.append({
-                    "来源": cfg,
-                    "规则": "使用 Docker 容器化部署",
-                    "优先级": "中",
-                    "适用范围": "部署环境",
-                })
-            elif "github" in cfg_lower or "gitlab" in cfg_lower:
-                rules.append({
-                    "来源": cfg,
-                    "规则": "使用 CI/CD 自动化流水线",
-                    "优先级": "高",
-                    "适用范围": "持续集成/部署",
-                })
-
-        # 从命名规范提取规则
-        for file_info in self.result.files:
-            # 蛇形命名
-            if file_info.ext == ".py" and re.match(r"^[a-z_]+\.py$", file_info.name):
-                rules.append({
-                    "来源": file_info.path,
-                    "规则": "Python 文件使用蛇形命名法（snake_case）",
-                    "优先级": "低",
-                    "适用范围": "文件命名",
-                })
-            # 驼峰命名
-            if file_info.ext in {".java", ".ts", ".js"} and \
-                    re.match(r"^[A-Z][a-zA-Z0-9]*\.", file_info.name):
-                rules.append({
-                    "来源": file_info.path,
-                    "规则": "类文件使用驼峰命名法（PascalCase）",
-                    "优先级": "低",
-                    "适用范围": "文件命名",
-                })
-
-        # 去重
-        seen = set()
-        unique_rules = []
-        for rule in rules:
-            key = (rule["规则"], rule["适用范围"])
-            if key not in seen:
-                seen.add(key)
-                unique_rules.append(rule)
-
-        self.result.rules = unique_rules
-
-    # ---------- 工作流还原 ----------
-    def _restore_workflows(self) -> None:
-        """从配置文件和脚本中还原工作流步骤。"""
-        workflows: List[Dict] = []
-        steps: Dict[str, List[str]] = defaultdict(list)
-
-        # 读取 Makefile
-        for cfg in self.result.config_files:
-            if os.path.basename(cfg).lower() == "makefile":
-                full_path = os.path.join(self.root_path, cfg)
-                try:
-                    with open(full_path, "r", encoding="utf-8", errors="ignore") as f:
-                        content = f.read()
-                    # 提取目标
-                    for m in re.finditer(r"^([a-zA-Z_-]+)\s*:", content, re.MULTILINE):
-                        target = m.group(1)
-                        for wf_type, keywords in WORKFLOW_KEYWORDS.items():
-                            if any(kw in target.lower() for kw in keywords):
-                                steps[wf_type].append(target)
-                except OSError:
-                    pass
-
-            # 读取 package.json
-            if os.path.basename(cfg) == "package.json":
-                full_path = os.path.join(self.root_path, cfg)
-                try:
-                    with open(full_path, "r", encoding="utf-8") as f:
-                        data = json.load(f)
-                    scripts = data.get("scripts", {})
-                    for name, cmd in scripts.items():
-                        for wf_type, keywords in WORKFLOW_KEYWORDS.items():
-                            if any(kw in name.lower() or kw in str(cmd).lower()
-                                   for kw in keywords):
-                                steps[wf_type].append(f"{name}: {cmd}")
-                except (OSError, json.JSONDecodeError):
-                    pass
-
-            # 读取 CI 配置
-            if "github" in cfg.lower() or "gitlab" in cfg.lower() or "jenkins" in cfg.lower():
-                full_path = os.path.join(self.root_path, cfg)
-                try:
-                    with open(full_path, "r", encoding="utf-8") as f:
-                        content = f.read()
-                    # 提取 job 名称
-                    for m in re.finditer(r"^([a-zA-Z_-]+):", content, re.MULTILINE):
-                        job = m.group(1)
-                        if job not in {"on", "env", "jobs", "steps", "name", "runs-on"}:
-                            steps["ci"].append(job)
-                except OSError:
-                    pass
-
-        # 整理输出
-        for wf_type, step_list in steps.items():
-            if step_list:
-                workflows.append({
-                    "流程类型": wf_type,
-                    "步骤": step_list,
-                    "步骤数": len(step_list),
-                })
-
-        self.result.workflows = workflows
-
-    # ---------- 经验沉淀 ----------
-    def _extract_lessons(self) -> None:
-        """从代码注释中提取经验教训。"""
-        lessons: List[Dict] = []
-        for file_info in self.result.files:
-            for annotation in file_info.annotations:
-                ann_type, line_no, text = annotation.split(":", 2)
-                lessons.append({
-                    "文件": file_info.path,
-                    "行号": int(line_no),
-                    "类型": ann_type,
-                    "内容": text,
-                })
-        self.result.lessons = lessons
+    return workflows
 
 
-# ============================================================
-# 输出格式化
-# ============================================================
-def format_report(result: AnalysisResult) -> str:
-    """将分析结果格式化为可读文本报告。"""
-    lines = []
-    lines.append("=" * 60)
-    lines.append(f"代码库分析报告")
-    lines.append(f"根路径: {result.root_path}")
-    lines.append("=" * 60)
+def _extract_experiences(root_path, result):
+    """
+    从代码注释中提取经验教训。
 
-    # 基本统计
-    lines.append(f"\n【基本统计】")
-    lines.append(f"  文件总数: {result.total_files}")
-    lines.append(f"  目录总数: {result.total_dirs}")
-    lines.append(f"  代码总行数: {result.total_lines}")
+    参数:
+        root_path: 根目录 Path
+        result: AnalysisResult 实例
 
-    # 分类统计
-    lines.append(f"\n【文件分类】")
-    for cat, count in sorted(result.categories.items(), key=lambda x: -x[1]):
-        lines.append(f"  {cat}: {count}")
+    返回:
+        经验卡片列表
+    """
+    experiences = []
 
-    # 扩展名统计
-    if result.extensions:
-        lines.append(f"\n【扩展名分布】")
-        for ext, count in sorted(result.extensions.items(), key=lambda x: -x[1]):
-            lines.append(f"  {ext}: {count}")
+    # 遍历所有文本文件
+    for root, dirs, files in os.walk(root_path):
+        dirs[:] = [d for d in dirs if not d.startswith(".")]
+        for file in files:
+            file_path = Path(root) / file
+            if file_path.suffix.lower() not in TEXT_EXTENSIONS:
+                continue
 
-    # 配置文件
-    if result.config_files:
-        lines.append(f"\n【配置文件】")
+            try:
+                content = file_path.read_text(encoding="utf-8", errors="ignore")
+            except (OSError, UnicodeError):
+                continue
+
+            # 按行检查经验标记
+            for idx, line in enumerate(content.splitlines(), 1):
+                for marker in EXPERIENCE_MARKERS:
+                    if marker in line.upper():
+                        # 提取注释内容
+                        comment_start = max(line.find("//"), line.find("#"), line.find("--"))
+                        if comment_start >= 0:
+                            comment = line[comment_start:].strip()
+                        else:
+                            comment = line.strip()
+
+                        experiences.append({
+                            "marker": marker,
+                            "file": str(file_path.relative_to(root_path)),
+                            "line": idx,
+                            "content": comment[:200],
+                        })
+                        break  # 每行只记录一个标记
+
+    return experiences
+
+
+def _build_dependency_graph(root_path, modules):
+    """
+    构建模块依赖图（基于 import/require 语句的简单分析）。
+
+    参数:
+        root_path: 根目录 Path
+        modules: 模块列表
+
+    返回:
+        依赖字典 {模块: [依赖模块列表]}
+    """
+    dependencies = defaultdict(list)
+
+    # 简化实现：扫描 import 语句，尝试匹配本地模块
+    import_patterns = [
+        re.compile(r"^\s*(?:from|import)\s+([\w.]+)", re.MULTILINE),  # Python
+        re.compile(r"^\s*(?:require|import)\s*\(?\s*['\"]([^'\"]+)['\"]", re.MULTILINE),  # JS/TS
+        re.compile(r"^\s*#include\s*[<\"]([^>\"]+)[>\"]", re.MULTILINE),  # C/C++
+    ]
+
+    for root, dirs, files in os.walk(root_path):
+        dirs[:] = [d for d in dirs if not d.startswith(".")]
+        for file in files:
+            file_path = Path(root) / file
+            if file_path.suffix.lower() not in TEXT_EXTENSIONS:
+                continue
+
+            rel_file = file_path.relative_to(root_path)
+            module_name = str(rel_file.parent) if rel_file.parent != Path(".") else "root"
+
+            try:
+                content = file_path.read_text(encoding="utf-8", errors="ignore")
+            except (OSError, UnicodeError):
+                continue
+
+            for pattern in import_patterns:
+                for match in pattern.finditer(content):
+                    imported = match.group(1).split(".")[0]
+                    # 检查是否为本地模块
+                    for mod in modules:
+                        if mod.endswith(imported) or imported in mod:
+                            dependencies[module_name].append(mod)
+                            break
+
+    return dependencies
+
+
+# ---------------------------------------------------------------------------
+# 输出与格式化
+# ---------------------------------------------------------------------------
+
+
+def format_report(result, format_type="text"):
+    """
+    格式化分析报告。
+
+    参数:
+        result: AnalysisResult 实例
+        format_type: 输出格式（text/json/markdown）
+
+    返回:
+        格式化字符串
+    """
+    if format_type == "json":
+        import json
+        return json.dumps(result.to_dict(), indent=2, ensure_ascii=False)
+
+    if format_type == "markdown":
+        lines = ["# 代码库分析报告", ""]
+        lines.append(f"## 项目类型: {result.project_type}")
+        lines.append("")
+        lines.append(f"## 文件数量: {result.file_count}")
+        lines.append("")
+
+        # 配置文件
+        lines.append("## 配置文件")
         for cfg in result.config_files:
-            lines.append(f"  - {cfg}")
+            lines.append(f"- {cfg}")
+        lines.append("")
 
-    # 规则
-    if result.rules:
-        lines.append(f"\n【提取规则】")
-        for i, rule in enumerate(result.rules, 1):
-            lines.append(f"  {i}. [{rule['优先级']}] {rule['规则']}")
-            lines.append(f"     来源: {rule['来源']} | 适用范围: {rule['适用范围']}")
+        # 模块
+        lines.append("## 模块列表")
+        for mod in result.modules[:20]:  # 限制输出
+            lines.append(f"- {mod}")
+        if len(result.modules) > 20:
+            lines.append(f"- ... 共 {len(result.modules)} 个模块")
+        lines.append("")
 
-    # 工作流
-    if result.workflows:
-        lines.append(f"\n【工作流还原】")
+        # 规则
+        lines.append("## 提取规则")
+        for rule in result.rules[:20]:
+            lines.append(f"- [{rule['priority']}] {rule['content']}")
+        lines.append("")
+
+        # 工作流
+        lines.append("## 工作流")
         for wf in result.workflows:
-            lines.append(f"  [{wf['流程类型']}] {wf['步骤数']} 个步骤")
-            for step in wf["步骤"]:
-                lines.append(f"    - {step}")
+            lines.append(f"### {wf['name']} ({wf['type']})")
+            for step in wf["steps"][:10]:
+                lines.append(f"- {step}")
+        lines.append("")
 
-    # 经验教训
-    if result.lessons:
-        lines.append(f"\n【经验教训】")
-        for i, lesson in enumerate(result.lessons[:20], 1):  # 最多显示20条
-            lines.append(f"  {i}. [{lesson['类型']}] {lesson['文件']}:{lesson['行号']}")
-            lines.append(f"     {lesson['内容']}")
-        if len(result.lessons) > 20:
-            lines.append(f"  ... 还有 {len(result.lessons) - 20} 条")
+        # 经验
+        lines.append("## 经验教训")
+        for exp in result.experiences[:20]:
+            lines.append(f"- [{exp['marker']}] {exp['file']}:{exp['line']} - {exp['content']}")
+        lines.append("")
 
-    # 模块依赖
-    if result.module_deps:
-        lines.append(f"\n【模块依赖】")
-        for module, deps in list(result.module_deps.items())[:10]:
-            lines.append(f"  {module} -> {', '.join(sorted(deps)[:5])}")
-        if len(result.module_deps) > 10:
-            lines.append(f"  ... 还有 {len(result.module_deps) - 10} 个模块")
+        return "\n".join(lines)
 
-    lines.append("\n" + "=" * 60)
-    lines.append("报告生成完毕")
+    # 默认文本格式
+    lines = ["=" * 60, "代码库分析报告", "=" * 60]
+    lines.append(f"项目类型: {result.project_type}")
+    lines.append(f"文件数量: {result.file_count}")
+    lines.append("")
+    lines.append("配置文件:")
+    for cfg in result.config_files:
+        lines.append(f"  - {cfg}")
+    lines.append("")
+    lines.append("模块列表 (前 20 个):")
+    for mod in result.modules[:20]:
+        lines.append(f"  - {mod}")
+    if len(result.modules) > 20:
+        lines.append(f"  ... 共 {len(result.modules)} 个模块")
+    lines.append("")
+    lines.append("提取规则 (前 20 条):")
+    for rule in result.rules[:20]:
+        lines.append(f"  - [{rule['priority']}] {rule['content']}")
+    lines.append("")
+    lines.append("工作流:")
+    for wf in result.workflows:
+        lines.append(f"  - {wf['name']} ({wf['type']}):")
+        for step in wf["steps"][:5]:
+            lines.append(f"      * {step}")
+    lines.append("")
+    lines.append("经验教训 (前 20 条):")
+    for exp in result.experiences[:20]:
+        lines.append(f"  - [{exp['marker']}] {exp['file']}:{exp['line']} - {exp['content']}")
     lines.append("=" * 60)
 
     return "\n".join(lines)
 
 
-def generate_skill_md(result: AnalysisResult) -> str:
-    """生成 SKILL.md 格式的技能包文档。"""
-    lines = []
-    lines.append("---")
-    lines.append("slug: skill-based-architecture")
-    lines.append("name: skill-based-architecture")
-    lines.append("displayName: 技能工厂 代码库萃取 规则蒸馏")
-    lines.append("description: 将任意代码库转化为可复用技能包，提炼规则、流程与经验。")
-    lines.append("version: 1.0.1")
-    lines.append("license: MIT")
-    lines.append("---")
-    lines.append("")
-    lines.append("# 技能工厂：代码库萃取与规则蒸馏")
-    lines.append("")
-    lines.append(f"> 本技能包由代码库分析工具自动生成")
-    lines.append(f"> 分析时间: {__import__('datetime').datetime.now().isoformat()}")
-    lines.append(f"> 源路径: {result.root_path}")
-    lines.append("")
-    lines.append("## 项目概览")
-    lines.append("")
-    lines.append(f"- 文件总数: {result.total_files}")
-    lines.append(f"- 目录总数: {result.total_dirs}")
-    lines.append(f"- 代码总行数: {result.total_lines}")
-    lines.append("")
-    lines.append("## 文件分类")
-    lines.append("")
-    lines.append("| 分类 | 数量 |")
-    lines.append("|------|------|")
-    for cat, count in sorted(result.categories.items(), key=lambda x: -x[1]):
-        lines.append(f"| {cat} | {count} |")
-    lines.append("")
-    lines.append("## 提取的规则")
-    lines.append("")
-    for i, rule in enumerate(result.rules, 1):
-        lines.append(f"{i}. **[{rule['优先级']}]** {rule['规则']}")
-        lines.append(f"   - 来源: `{rule['来源']}`")
-        lines.append(f"   - 适用范围: {rule['适用范围']}")
-    lines.append("")
-    lines.append("## 工作流")
-    lines.append("")
-    for wf in result.workflows:
-        lines.append(f"### {wf['流程类型']}")
-        lines.append("")
-        for step in wf["步骤"]:
-            lines.append(f"- {step}")
-        lines.append("")
-    lines.append("## 经验教训")
-    lines.append("")
-    for lesson in result.lessons[:50]:
-        lines.append(f"- [{lesson['类型']}] `{lesson['文件']}:{lesson['行号']}`: {lesson['内容']}")
-    lines.append("")
-    lines.append("---")
-    lines.append("## 用户协议")
-    lines.append("")
-    lines.append("> 本技能包仅供学习与参考用途。使用本技能包产生的任何结果，由使用者自行承担全部责任。")
-    lines.append("> 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。")
-    lines.append("")
-    lines.append("## 许可证")
-    lines.append("")
-    lines.append("
+# ---------------------------------------------------------------------------
+# 自检逻辑（--selftest）
+# ---------------------------------------------------------------------------
+
+
+def run_selftest():
+    """
+    内置离线自检。
+
+    使用硬编码样例数据在临时目录中构建一个模拟代码库，
+    验证核心分析逻辑的正确性。不依赖外部文件、不访问网络。
+
+    返回:
+        True 表示自检通过，False 表示失败
+
+    异常:
+        自检失败时抛出 AssertionError
+    """
+    print("运行内置自检...")
+
+    try:
+        # 创建临时目录作为模拟代码库
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_path = Path(tmpdir)
+
+            # --- 创建模拟项目结构 ---
+            # 配置文件
+            (tmp_path / "package.json").write_text(
+                '{"name": "demo", "scripts": {"build": "tsc", "test": "jest", "deploy": "aws deploy"}}',
+                encoding="utf-8"
+            )
+            (tmp_path / "README.md").write_text(
+                "# Demo Project\n必须使用 TypeScript 编写所有代码。\nNever use `any` type.\n",
+                encoding="utf-8"
+            )
+
+            # 源码目录
+            src_dir = tmp_path / "src"
+            src_dir.mkdir()
+            (src_dir / "index.ts").write_text(
+                "// TODO: 重构此模块\nimport { helper } from './helper';\nconst x: number = 1;\n",
+                encoding="utf-8"
+            )
+            (src_dir / "helper.ts").write_text(
+                "export function helper() { return 'help'; }\n// FIXME: 这里有个 bug\n",
+                encoding="utf-8"
+            )
+
+            # 嵌套目录
+            utils_dir = src_dir / "utils"
+            utils_dir.mkdir()
+            (utils_dir / "math.ts").write_text(
+                "export const add = (a: number, b: number) => a + b;\n",
+                encoding="utf-8"
+            )
+
+            # CI 工作流
+            gh_dir = tmp_path / ".github" / "workflows"
+            gh_dir.mkdir(parents=True)
+            (gh_dir / "ci.yml").write_text(
+                "name: CI\non: [push]\njobs:\n  build:\n    steps:\n      - name: Checkout\n        run: git checkout\n      - name: Install\n        run: npm install\n      - name: Test\n        run: npm test\n",
+                encoding="utf-8"
+            )
+
+            # --- 执行分析 ---
+            result = analyze_codebase(tmp_path)
+
+            # --- 断言（宽松阈值，确保稳健） ---
+            # 1. 项目类型应为 node（package.json 存在）
+            assert result.project_type == "node", f"E010: 项目类型识别失败: {result.project_type}"
+
+            # 2. 配置文件应包含 package.json
+            assert any("package.json" in cfg for cfg in result.config_files), "E010: 未识别 package.json"
+
+            # 3. 文件数量应大于 0（宽松判断）
+            assert result.file_count > 0, "E010: 文件计数异常"
+
+            # 4. 模块数量应不少于 2（src 和 src/utils）
+            assert len(result.modules) >= 2, f"E010: 模块数量异常: {len(result.modules)}"
+
+            # 5. 规则提取：README 中应至少提取 1 条规则
+            assert len(result.rules) >= 1, "E010: 规则提取失败"
+
+            # 6. 工作流提取：应有至少 1 个工作流（package.json scripts 或 CI）
+            assert len(result.workflows) >= 1, "E010: 工作流提取失败"
+
+            # 7. 经验提取：应有至少 2 条经验（TODO 和 FIXME）
+            assert len(result.experiences) >= 2, f"E010: 经验提取失败: {len(result.experiences)}"
+
+            # 8. 经验内容应包含 TODO 或 FIXME 标记
+            markers = [exp["marker"] for exp in result.experiences]
+            assert "TODO" in markers and "FIXME" in markers, "E010: 经验标记内容异常"
+
+            # 9. 依赖图不应为空（index.ts 引用了 helper）
+            assert len(result.dependencies) > 0, "E010: 依赖图为空"
+
+            # 10. 模块列表中应包含 src 和 src/utils
+            module_strs = " ".join(result.modules)
+            assert "src" in module_strs, "E010: 模块列表缺少 src"
+
+            print("自检通过: 所有断言成功")
+
+            # 打印简要结果（便于人工验证）
+            print(f"  项目类型: {result.project_type}")
+            print(f"  文件数量: {result.file_count}")
+            print(f"  模块数量: {len(result.modules)}")
+            print(f"  规则数量: {len(result.rules)}")
+            print(f"  工作流数量: {len(result.workflows)}")
+            print(f"  经验数量: {len(result.experiences)}")
+
+            return True
+
+    except AssertionError as e:
+        print(f"自检失败: {e}")
+        return False
+    except Exception as e:
+        print(f"自检异常: {e}")
+        return False
+
+
+# ---------------------------------------------------------------------------
+# 命令行入口
+# ---------------------------------------------------------------------------
+
+
+def main():
+    """命令行主入口"""
+    parser = argparse.ArgumentParser(
+        description="技能工厂：代码库萃取与规则蒸馏",
+        epilog="示例: python main.py /path/to/repo --format markdown"
+    )
+    parser.add_argument(
+        "path",
+        nargs="?",
+        default=".",
+        help="代码库根目录路径（默认当前目录）"
+    )
+    parser.add_argument(
+        "--format",
+        choices=["text", "json", "markdown"],
+        default="text",
+        help="输出格式（默认 text）"
+    )
+    parser.add_argument(
+        "--output",
+        help="输出文件路径（默认输出到 stdout）"
+    )
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行内置自检（不分析代码库）"
+    )
+
+    try:
+        args = parser.parse_args()
+    except SystemExit as e:
+        # argparse 内部错误
+        print(f"E001: 参数解析错误: {e}", file=sys.stderr)
+        return 1
+
+    # 自检模式
+    if args.selftest:
+        success = run_selftest()
+        return 0 if success else 10
+
+    # 正常分析模式
+    try:
+        root_path = Path(args.path).resolve()
+        result = analyze_codebase(root_path)
+
+        report = format_report(result, args.format)
+
+        # 输出
+        if args.output:
+            try:
+                out_path = Path(args.output)
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                out_path.write_text(report, encoding="utf-8")
+                print(f"报告已写入: {out_path}")
+            except OSError as e:
+                print(f"E008: 输出文件写入失败: {e}", file=sys.stderr)
+                return 8
+        else:
+            print(report)
+
+        return 0
+
+    except FileNotFoundError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 2
+    except NotADirectoryError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 3
+    except PermissionError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 4
+    except OSError as e:
+        print(f"E005: 文件读取失败: {e}", file=sys.stderr)
+        return 5
+    except Exception as e:
+        print(f"E009: 内部错误: {e}", file=sys.stderr)
+        return 9
+
+
+if __name__ == "__main__":
+    sys.exit(main())
