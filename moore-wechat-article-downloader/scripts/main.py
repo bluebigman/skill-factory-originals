@@ -1,64 +1,315 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-公众号文章 - 本地优先的内容情报处理工具
+公众号文章下载器 - 本地优先的微信内容情报库同步工具
 
-本模块根据功能规格独立实现，提供：
-- 输入内容的结构化解析
-- 关键信息识别与置信度评估
-- 批量处理与自定义输出格式
-- 内置自检功能（--selftest）
+本脚本是一个独立、干净的实现，仅依据功能规格编写。
+核心能力：
+  1. 将用户提供的数据/文件/URL 转换为结构化结果
+  2. 识别并保留输入中的关键信息
+  3. 按约定格式生成输出
+  4. 对不确定项给出置信度提示
+  5. 支持批量处理和自定义格式
 
 错误码体系：
-    E001 - 输入为空
-    E002 - 关键信息缺失
-    E003 - 输入格式错误
-    E004 - 超出能力边界
-    E005 - 置信度过低
-    E006 - 输出格式不支持
-    E007 - 批量处理中断
-    E008 - 内部状态异常
-    E009 - 参数解析错误
-    E010 - 未知错误
+  E001 - 输入为空
+  E002 - 关键信息缺失
+  E003 - 输入格式错误
+  E004 - 超出能力边界
+  E005 - 置信度过低
+  E006 - 输出格式不支持
+  E007 - 数据解析失败
+  E008 - 文件读取失败
+  E009 - 参数错误
+  E010 - 内部逻辑错误
+
+用法示例：
+  python main.py --selftest                       # 运行离线自检
+  python main.py --input "文章标题|作者|2026-01-01"  # 处理一条输入
+  python main.py --input "标题1|作者1|日期1" --input "标题2|作者2|日期2"  # 批量处理
 """
 
 import argparse
 import json
 import os
-import re
 import sys
-from dataclasses import dataclass, field, asdict
-from typing import Any, Dict, List, Optional, Tuple
+import tempfile
 from datetime import datetime
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple
 
 
 # ============================================================
-# 数据模型
+# 常量定义
 # ============================================================
 
-@dataclass
+# 错误码与标准化话术映射
+ERROR_MESSAGES: Dict[str, str] = {
+    "E001": "请提供待处理的内容，格式为：用户提供的数据/文件/URL",
+    "E002": "还缺少以下信息，请补充：",
+    "E003": "输入格式不符合要求，示例：标题|作者|日期",
+    "E004": "这超出了本工具的能力范围，建议使用专门工具处理",
+    "E005": "结果无法确定，建议人工复核关键信息",
+    "E006": "不支持的输出格式，可选：json、text、csv",
+    "E007": "数据解析失败，请检查输入内容",
+    "E008": "文件读取失败，请检查文件路径和权限",
+    "E009": "参数错误，请检查命令行参数",
+    "E010": "内部逻辑错误，请报告此问题",
+}
+
+# 置信度阈值
+HIGH_CONFIDENCE = 90   # ≥90% 直接输出
+MEDIUM_CONFIDENCE = 85 # 85%-90% 标注"建议复核"
+LOW_CONFIDENCE = 85    # <85% 标注"[需核实]"
+
+# 输出格式支持列表
+SUPPORTED_FORMATS = ["json", "text", "csv"]
+
+# 必需字段列表
+REQUIRED_FIELDS = ["title", "author", "date"]
+
+
+# ============================================================
+# 数据模型与解析
+# ============================================================
+
 class Article:
     """文章数据模型"""
-    title: str = ""
-    author: str = ""
-    content: str = ""
-    url: str = ""
-    publish_date: str = ""
-    source: str = ""
-    comments: List[Dict[str, Any]] = field(default_factory=list)
-    stats: Dict[str, int] = field(default_factory=dict)
-    raw_input: str = ""
+    
+    def __init__(self, title: str, author: str, date: str, 
+                 content: str = "", url: str = "", 
+                 comments: Optional[List[Dict[str, Any]]] = None,
+                 extra: Optional[Dict[str, Any]] = None):
+        self.title = title
+        self.author = author
+        self.date = date
+        self.content = content
+        self.url = url
+        self.comments = comments or []
+        self.extra = extra or {}
+    
+    def to_dict(self) -> Dict[str, Any]:
+        """转换为字典"""
+        return {
+            "title": self.title,
+            "author": self.author,
+            "date": self.date,
+            "content": self.content,
+            "url": self.url,
+            "comments": self.comments,
+            "extra": self.extra,
+            "confidence": self._calculate_confidence(),
+            "needs_review": self._needs_review(),
+        }
+    
+    def _calculate_confidence(self) -> int:
+        """
+        计算置信度（0-100）
+        
+        基于字段完整性和数据合理性：
+        - 基础分 70
+        - 每个必需字段存在 +5
+        - 日期格式正确 +5
+        - 有内容 +5
+        - 有URL +5
+        - 有评论 +5
+        """
+        score = 70
+        
+        # 必需字段检查
+        for field in REQUIRED_FIELDS:
+            if getattr(self, field, ""):
+                score += 5
+        
+        # 日期格式检查
+        if self._is_valid_date(self.date):
+            score += 5
+        
+        # 可选字段加分
+        if self.content:
+            score += 5
+        if self.url:
+            score += 5
+        if self.comments:
+            score += 5
+        
+        return min(score, 100)
+    
+    def _needs_review(self) -> bool:
+        """判断是否需要复核"""
+        confidence = self._calculate_confidence()
+        if confidence >= HIGH_CONFIDENCE:
+            return False
+        if confidence >= MEDIUM_CONFIDENCE:
+            return True  # 建议复核
+        return True  # 需要核实
+    
+    @staticmethod
+    def _is_valid_date(date_str: str) -> bool:
+        """检查日期格式是否合理"""
+        if not date_str:
+            return False
+        # 尝试多种常见日期格式
+        formats = [
+            "%Y-%m-%d", "%Y/%m/%d", "%Y.%m.%d",
+            "%Y年%m月%d日", "%m-%d", "%m/%d",
+        ]
+        for fmt in formats:
+            try:
+                datetime.strptime(date_str, fmt)
+                return True
+            except ValueError:
+                continue
+        return False
 
 
-@dataclass
-class ProcessResult:
-    """处理结果数据模型"""
-    success: bool = False
-    error_code: str = ""
-    message: str = ""
-    confidence: float = 0.0
-    data: Optional[Article] = None
-    warnings: List[str] = field(default_factory=list)
+class InputParser:
+    """输入解析器"""
+    
+    @staticmethod
+    def parse_line(line: str) -> Tuple[Optional[Article], Optional[str]]:
+        """
+        解析单条输入
+        
+        支持格式：
+        - "标题|作者|日期"
+        - "标题|作者|日期|内容"
+        - "标题|作者|日期|内容|URL"
+        
+        返回：(文章对象, 错误码或None)
+        """
+        if not line or not line.strip():
+            return None, "E001"
+        
+        parts = [p.strip() for p in line.split("|")]
+        
+        # 检查必需字段
+        if len(parts) < 3:
+            return None, "E003"
+        
+        title, author, date = parts[0], parts[1], parts[2]
+        
+        # 检查字段是否为空
+        missing = []
+        if not title:
+            missing.append("标题")
+        if not author:
+            missing.append("作者")
+        if not date:
+            missing.append("日期")
+        
+        if missing:
+            return None, "E002"
+        
+        # 可选字段
+        content = parts[3] if len(parts) > 3 else ""
+        url = parts[4] if len(parts) > 4 else ""
+        
+        return Article(title=title, author=author, date=date,
+                      content=content, url=url), None
+    
+    @staticmethod
+    def parse_file(file_path: str) -> Tuple[List[Article], List[str]]:
+        """
+        解析文件输入
+        
+        支持格式：每行一条记录，用|分隔字段
+        
+        返回：(文章列表, 错误列表)
+        """
+        articles = []
+        errors = []
+        
+        try:
+            path = Path(file_path)
+            if not path.exists():
+                return [], ["E008"]
+            
+            with open(path, "r", encoding="utf-8") as f:
+                for line_num, line in enumerate(f, 1):
+                    line = line.strip()
+                    if not line or line.startswith("#"):  # 跳过空行和注释
+                        continue
+                    
+                    article, error = InputParser.parse_line(line)
+                    if error:
+                        errors.append(f"第{line_num}行: {ERROR_MESSAGES.get(error, '未知错误')}")
+                    else:
+                        articles.append(article)
+            
+            return articles, errors
+            
+        except Exception as e:
+            return [], [f"E008: {str(e)}"]
+
+
+# ============================================================
+# 输出格式化
+# ============================================================
+
+class OutputFormatter:
+    """输出格式化器"""
+    
+    @staticmethod
+    def format_json(articles: List[Article]) -> str:
+        """JSON格式输出"""
+        return json.dumps(
+            [a.to_dict() for a in articles],
+            ensure_ascii=False,
+            indent=2
+        )
+    
+    @staticmethod
+    def format_text(articles: List[Article]) -> str:
+        """纯文本格式输出"""
+        lines = []
+        for i, article in enumerate(articles, 1):
+            data = article.to_dict()
+            lines.append(f"=== 文章 {i} ===")
+            lines.append(f"标题: {data['title']}")
+            lines.append(f"作者: {data['author']}")
+            lines.append(f"日期: {data['date']}")
+            if data.get('content'):
+                lines.append(f"内容: {data['content'][:100]}...")
+            if data.get('url'):
+                lines.append(f"URL: {data['url']}")
+            lines.append(f"置信度: {data['confidence']}%")
+            if data['needs_review']:
+                if data['confidence'] >= MEDIUM_CONFIDENCE:
+                    lines.append("状态: 建议复核")
+                else:
+                    lines.append("状态: [需核实]")
+            lines.append("")
+        return "\n".join(lines)
+    
+    @staticmethod
+    def format_csv(articles: List[Article]) -> str:
+        """CSV格式输出"""
+        import csv
+        import io
+        
+        output = io.StringIO()
+        writer = csv.writer(output)
+        
+        # 表头
+        writer.writerow(["标题", "作者", "日期", "内容", "URL", "置信度", "状态"])
+        
+        for article in articles:
+            data = article.to_dict()
+            status = ""
+            if data['needs_review']:
+                status = "需核实" if data['confidence'] < MEDIUM_CONFIDENCE else "建议复核"
+            writer.writerow([
+                data['title'],
+                data['author'],
+                data['date'],
+                data.get('content', ''),
+                data.get('url', ''),
+                f"{data['confidence']}%",
+                status,
+            ])
+        
+        return output.getvalue()
 
 
 # ============================================================
@@ -66,627 +317,369 @@ class ProcessResult:
 # ============================================================
 
 class ArticleProcessor:
-    """文章处理器 - 负责输入解析、结构化、置信度评估"""
+    """文章处理器"""
     
     def __init__(self):
-        self.supported_formats = ["json", "text", "markdown", "html"]
-        self.required_fields = ["title", "content"]
-        self.confidence_thresholds = {
-            "high": 0.90,
-            "medium": 0.70  # 降低中等置信度阈值
-        }
+        self.parser = InputParser()
+        self.formatter = OutputFormatter()
     
-    def process(self, input_data: str, output_format: str = "json") -> ProcessResult:
-        """主处理入口"""
-        try:
-            # 检查输入
-            if not input_data or not input_data.strip():
-                return ProcessResult(
-                    success=False,
-                    error_code="E001",
-                    message="请提供待处理的内容，格式为：用户提供的数据/文件/URL"
-                )
-            
-            # 检查输出格式
-            if output_format not in self.supported_formats:
-                return ProcessResult(
-                    success=False,
-                    error_code="E006",
-                    message=f"输出格式 '{output_format}' 不支持，支持：{', '.join(self.supported_formats)}"
-                )
-            
-            # 解析输入
-            article, parse_warnings = self._parse_input(input_data)
-            
-            # 检查关键字段
-            missing_fields = self._check_required_fields(article)
-            if missing_fields:
-                return ProcessResult(
-                    success=False,
-                    error_code="E002",
-                    message=f"还缺少以下信息，请补充：{', '.join(missing_fields)}"
-                )
-            
-            # 评估置信度
-            confidence, confidence_warnings = self._evaluate_confidence(article)
-            warnings = parse_warnings + confidence_warnings
-            
-            # 置信度检查
-            if confidence < self.confidence_thresholds["medium"]:
-                return ProcessResult(
-                    success=False,
-                    error_code="E005",
-                    message=f"结果无法确定（置信度 {confidence:.0%}），建议：补充更多信息或人工核实",
-                    confidence=confidence,
-                    data=article,
-                    warnings=warnings
-                )
-            
-            # 格式化输出
-            formatted_output = self._format_output(article, output_format)
-            
-            return ProcessResult(
-                success=True,
-                message="处理成功",
-                confidence=confidence,
-                data=article,
-                warnings=warnings
-            )
-            
-        except Exception as e:
-            return ProcessResult(
-                success=False,
-                error_code="E010",
-                message=f"处理过程中发生错误：{str(e)}"
-            )
+    def process_input(self, input_str: str) -> Tuple[Optional[Article], Optional[str]]:
+        """
+        处理单条输入
+        
+        返回：(结果字典, 错误码)
+        """
+        if not input_str or not input_str.strip():
+            return None, "E001"
+        
+        # 检查是否是文件路径
+        if input_str.startswith("file:"):
+            file_path = input_str[5:]
+            articles, errors = self.parser.parse_file(file_path)
+            if errors:
+                return None, errors[0].split(":")[0] if ":" in errors[0] else "E008"
+            if not articles:
+                return None, "E001"
+            return articles[0], None
+        
+        # 解析单条输入
+        article, error = self.parser.parse_line(input_str)
+        if error:
+            return None, error
+        
+        return article, None
     
-    def process_batch(self, inputs: List[str], output_format: str = "json") -> List[ProcessResult]:
-        """批量处理多个输入"""
-        results = []
-        for idx, input_data in enumerate(inputs):
-            try:
-                result = self.process(input_data, output_format)
-                results.append(result)
-            except Exception as e:
-                results.append(ProcessResult(
-                    success=False,
-                    error_code="E007",
-                    message=f"批量处理第 {idx+1} 项失败：{str(e)}"
-                ))
-        return results
-    
-    def _parse_input(self, input_data: str) -> Tuple[Article, List[str]]:
-        """解析输入数据为结构化文章对象"""
-        warnings = []
-        article = Article(raw_input=input_data[:500])  # 截断原始输入
+    def process_batch(self, inputs: List[str]) -> Tuple[List[Article], List[str]]:
+        """
+        批量处理输入
         
-        # 尝试多种解析方式
-        input_data = input_data.strip()
+        返回：(文章列表, 错误列表)
+        """
+        articles = []
+        errors = []
         
-        # 尝试 JSON 解析
-        try:
-            parsed = json.loads(input_data)
-            if isinstance(parsed, dict):
-                article.title = str(parsed.get("title", ""))
-                article.author = str(parsed.get("author", ""))
-                article.content = str(parsed.get("content", ""))
-                article.url = str(parsed.get("url", ""))
-                article.publish_date = str(parsed.get("publish_date", ""))
-                article.source = str(parsed.get("source", ""))
-                article.comments = parsed.get("comments", [])
-                article.stats = parsed.get("stats", {})
-                return article, warnings
-        except json.JSONDecodeError:
-            pass
-        
-        # 尝试 URL 格式
-        if input_data.startswith(("http://", "https://")):
-            article.url = input_data
-            article.title = self._extract_url_title(input_data)
-            warnings.append("URL 输入，仅提取基本信息，建议提供完整内容")
-            return article, warnings
-        
-        # 尝试 Markdown 格式
-        if input_data.startswith("#") or "##" in input_data:
-            article = self._parse_markdown(input_data)
-            return article, warnings
-        
-        # 尝试 HTML 格式
-        if "<html" in input_data.lower() or "<article" in input_data.lower():
-            article = self._parse_html(input_data)
-            return article, warnings
-        
-        # 尝试纯文本格式
-        article = self._parse_text(input_data)
-        warnings.append("使用纯文本解析，可能遗漏部分结构化信息")
-        return article, warnings
-    
-    def _parse_markdown(self, text: str) -> Article:
-        """解析 Markdown 格式"""
-        article = Article()
-        lines = text.split("\n")
-        
-        # 提取标题（第一个 # 开头行）
-        for line in lines:
-            if line.startswith("#"):
-                article.title = line.lstrip("#").strip()
-                break
-        
-        # 提取作者（常见标记）
-        for line in lines:
-            if re.match(r"^\s*(作者|author)\s*[:：]", line, re.IGNORECASE):
-                article.author = re.sub(r"^\s*(作者|author)\s*[:：]\s*", "", line, flags=re.IGNORECASE)
-                break
-        
-        # 提取日期
-        for line in lines:
-            date_match = re.search(r"(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)", line)
-            if date_match:
-                article.publish_date = date_match.group(1)
-                break
-        
-        # 提取引用块内容（> 开头）
-        quote_lines = []
-        for line in lines:
-            if line.startswith(">"):
-                quote_lines.append(line.lstrip(">").strip())
-        
-        # 提取正文内容（非标题、非引用、非空行）
-        content_lines = []
-        for line in lines:
-            stripped = line.strip()
-            if stripped and not stripped.startswith("#") and not stripped.startswith(">"):
-                content_lines.append(stripped)
-        
-        # 如果有引用块，合并到内容中
-        if quote_lines:
-            content_lines.extend(quote_lines)
-        
-        article.content = "\n".join(content_lines)
-        
-        return article
-    
-    def _parse_html(self, html: str) -> Article:
-        """解析 HTML 格式（简化版）"""
-        article = Article()
-        
-        # 提取标题
-        title_match = re.search(r"<title[^>]*>([^<]+)</title>", html, re.IGNORECASE)
-        if title_match:
-            article.title = title_match.group(1).strip()
-        
-        # 提取 meta 作者
-        author_match = re.search(r'<meta[^>]*name=["\']author["\'][^>]*content=["\']([^"\']+)["\']', html, re.IGNORECASE)
-        if author_match:
-            article.author = author_match.group(1)
-        
-        # 提取正文（简化处理，去除标签）
-        body_match = re.search(r"<body[^>]*>(.*?)</body>", html, re.IGNORECASE | re.DOTALL)
-        if body_match:
-            content = body_match.group(1)
-            content = re.sub(r"<script[^>]*>.*?</script>", "", content, flags=re.DOTALL | re.IGNORECASE)
-            content = re.sub(r"<style[^>]*>.*?</style>", "", content, flags=re.DOTALL | re.IGNORECASE)
-            content = re.sub(r"<[^>]+>", " ", content)
-            content = re.sub(r"\s+", " ", content).strip()
-            article.content = content
-        
-        # 如果没有 body，尝试提取 article 标签
-        if not article.content:
-            article_match = re.search(r"<article[^>]*>(.*?)</article>", html, re.IGNORECASE | re.DOTALL)
-            if article_match:
-                content = article_match.group(1)
-                content = re.sub(r"<[^>]+>", " ", content)
-                content = re.sub(r"\s+", " ", content).strip()
-                article.content = content
-        
-        return article
-    
-    def _parse_text(self, text: str) -> Article:
-        """解析纯文本格式"""
-        article = Article()
-        lines = [l.strip() for l in text.split("\n") if l.strip()]
-        
-        if not lines:
-            return article
-        
-        # 第一行作为标题（如果合理长度）
-        if len(lines[0]) <= 100:
-            article.title = lines[0]
-            content_start = 1
-        else:
-            article.title = lines[0][:50] + "..." if len(lines[0]) > 50 else lines[0]
-            content_start = 0
-        
-        # 查找作者行
-        for i, line in enumerate(lines[:5]):
-            if re.match(r"^(作者|author|by)\s*[:：]", line, re.IGNORECASE):
-                article.author = re.sub(r"^(作者|author|by)\s*[:：]\s*", "", line, flags=re.IGNORECASE)
-                break
-        
-        # 内容为剩余行
-        article.content = "\n".join(lines[content_start:])
-        
-        return article
-    
-    def _extract_url_title(self, url: str) -> str:
-        """从 URL 提取简单标题"""
-        # 从 URL 路径提取文件名
-        path = url.rstrip("/").split("/")[-1]
-        if path and not path.startswith("?"):
-            return path.replace("-", " ").replace("_", " ").title()
-        return "未命名文章"
-    
-    def _check_required_fields(self, article: Article) -> List[str]:
-        """检查必填字段"""
-        missing = []
-        for field_name in self.required_fields:
-            value = getattr(article, field_name, "")
-            if not value or not value.strip():
-                missing.append(field_name)
-        return missing
-    
-    def _evaluate_confidence(self, article: Article) -> Tuple[float, List[str]]:
-        """评估数据置信度"""
-        warnings = []
-        score = 0.0
-        checks = 0
-        
-        # 标题检查（权重较高）
-        if article.title:
-            score += 1.0
-            if len(article.title) < 5:
-                warnings.append("标题过短，可能不完整")
-                score += 0.3
-            elif len(article.title) >= 10:
-                score += 0.2  # 标题较完整额外加分
-        else:
-            warnings.append("缺少标题")
-        checks += 1
-        
-        # 内容检查（权重最高）
-        if article.content:
-            score += 1.0
-            content_len = len(article.content)
-            if content_len < 50:
-                warnings.append("内容过短，可能信息不完整")
-                score += 0.2
-            elif content_len < 200:
-                score += 0.5
+        for i, input_str in enumerate(inputs, 1):
+            article, error = self.process_input(input_str)
+            if error:
+                errors.append(f"第{i}条: {ERROR_MESSAGES.get(error, '未知错误')}")
             else:
-                score += 0.8  # 内容充分额外加分
-        else:
-            warnings.append("缺少正文内容")
-        checks += 1
+                articles.append(article)
         
-        # 作者检查（非必填）
-        if article.author:
-            score += 0.8
-        else:
-            warnings.append("缺少作者信息")
-        checks += 1
-        
-        # URL 检查（非必填）
-        if article.url and article.url.startswith("http"):
-            score += 0.8
-        else:
-            warnings.append("缺少来源 URL")
-        checks += 1
-        
-        # 日期检查（非必填）
-        if article.publish_date:
-            score += 0.8
-        else:
-            warnings.append("缺少发布日期")
-        checks += 1
-        
-        # 计算最终置信度
-        confidence = score / checks if checks > 0 else 0.0
-        
-        # 附加警告
-        if confidence < 0.70:
-            warnings.append("整体置信度偏低，建议人工复核关键信息")
-        elif confidence >= 0.90:
-            pass  # 高质量数据
-        
-        return min(confidence, 1.0), warnings
+        return articles, errors
     
-    def _format_output(self, article: Article, output_format: str) -> str:
-        """格式化输出"""
-        if output_format == "json":
-            return json.dumps(asdict(article), ensure_ascii=False, indent=2)
-        elif output_format == "markdown":
-            return self._to_markdown(article)
-        elif output_format == "html":
-            return self._to_html(article)
+    def format_output(self, articles: List[Article], fmt: str = "json") -> Tuple[Optional[str], Optional[str]]:
+        """
+        格式化输出
+        
+        返回：(输出字符串, 错误码)
+        """
+        if fmt not in SUPPORTED_FORMATS:
+            return None, "E006"
+        
+        if fmt == "json":
+            return self.formatter.format_json(articles), None
+        elif fmt == "text":
+            return self.formatter.format_text(articles), None
+        elif fmt == "csv":
+            return self.formatter.format_csv(articles), None
         else:
-            return self._to_text(article)
-    
-    def _to_markdown(self, article: Article) -> str:
-        """转换为 Markdown 格式"""
-        md = []
-        if article.title:
-            md.append(f"# {article.title}")
-        if article.author:
-            md.append(f"\n> 作者：{article.author}")
-        if article.publish_date:
-            md.append(f"> 日期：{article.publish_date}")
-        if article.url:
-            md.append(f"> 来源：{article.url}")
-        if article.content:
-            md.append(f"\n{article.content}")
-        return "\n".join(md)
-    
-    def _to_html(self, article: Article) -> str:
-        """转换为 HTML 格式"""
-        html = ["<!DOCTYPE html>", "<html>", "<head>"]
-        if article.title:
-            html.append(f"<title>{article.title}</title>")
-        html.append("</head><body>")
-        if article.title:
-            html.append(f"<h1>{article.title}</h1>")
-        if article.author:
-            html.append(f"<p>作者：{article.author}</p>")
-        if article.publish_date:
-            html.append(f"<p>日期：{article.publish_date}</p>")
-        if article.url:
-            html.append(f"<p>来源：<a href='{article.url}'>{article.url}</a></p>")
-        if article.content:
-            html.append(f"<div>{article.content}</div>")
-        html.append("</body></html>")
-        return "\n".join(html)
-    
-    def _to_text(self, article: Article) -> str:
-        """转换为纯文本格式"""
-        text = []
-        if article.title:
-            text.append(f"标题：{article.title}")
-        if article.author:
-            text.append(f"作者：{article.author}")
-        if article.publish_date:
-            text.append(f"日期：{article.publish_date}")
-        if article.url:
-            text.append(f"来源：{article.url}")
-        if article.content:
-            text.append(f"\n{article.content}")
-        return "\n".join(text)
+            return None, "E006"
 
 
 # ============================================================
 # 自检功能
 # ============================================================
 
-def run_selftest() -> bool:
-    """内置自检逻辑，使用硬编码样例数据验证核心功能"""
-    print("开始自检...")
-    processor = ArticleProcessor()
-    all_passed = True
+class SelfTest:
+    """自检模块 - 使用硬编码样例数据离线验证核心逻辑"""
     
-    # 测试用例 1：JSON 格式输入
-    print("\n测试 1: JSON 格式输入")
-    json_input = json.dumps({
-        "title": "测试文章标题",
-        "author": "测试作者",
-        "content": "这是一篇用于测试的文章内容。" * 10,
-        "url": "https://example.com/article/1",
-        "publish_date": "2026-01-01",
-        "source": "测试来源"
-    })
-    result = processor.process(json_input, "json")
-    assert result.success, f"JSON 处理失败: {result.message}"
-    assert result.confidence >= 0.70, f"置信度过低: {result.confidence}"
-    assert result.data is not None and result.data.title == "测试文章标题"
-    print(f"  通过 (置信度: {result.confidence:.2%})")
-    
-    # 测试用例 2：Markdown 格式输入
-    print("\n测试 2: Markdown 格式输入")
-    md_input = """# Markdown测试文章
-
-> 作者：张三
-> 日期：2026-02-15
-
-这是第一段内容，用于测试Markdown解析功能。
-这是第二段内容，继续补充文字以确保内容长度足够。
-这是第三段内容，进一步增加内容长度。
-"""
-    result = processor.process(md_input, "markdown")
-    assert result.success, f"Markdown 处理失败: {result.message}"
-    assert result.data is not None and result.data.title == "Markdown测试文章"
-    assert result.data.author == "张三"
-    print(f"  通过 (置信度: {result.confidence:.2%})")
-    
-    # 测试用例 3：纯文本格式输入
-    print("\n测试 3: 纯文本格式输入")
-    text_input = """这是一篇纯文本测试文章
-
-作者：李四
-
-正文内容开始，包含足够长度的文字来满足置信度评估要求。
-这里继续补充更多内容，确保整体长度超过阈值。
-这是第三行内容，进一步增加内容的丰富程度。
-"""
-    result = processor.process(text_input, "text")
-    assert result.success, f"文本处理失败: {result.message}"
-    assert result.data is not None and len(result.data.content) > 50
-    print(f"  通过 (置信度: {result.confidence:.2%})")
-    
-    # 测试用例 4：错误处理 - 空输入
-    print("\n测试 4: 空输入错误处理")
-    result = processor.process("", "json")
-    assert not result.success, "空输入应该失败"
-    assert result.error_code == "E001", f"错误码错误: {result.error_code}"
-    print(f"  通过 (错误码: {result.error_code})")
-    
-    # 测试用例 5：错误处理 - 缺少关键字段
-    print("\n测试 5: 缺少关键字段")
-    incomplete_input = json.dumps({"author": "某人"})
-    result = processor.process(incomplete_input, "json")
-    assert not result.success, "缺少关键字段应该失败"
-    assert result.error_code == "E002", f"错误码错误: {result.error_code}"
-    print(f"  通过 (错误码: {result.error_code})")
-    
-    # 测试用例 6：批量处理
-    print("\n测试 6: 批量处理")
-    batch_inputs = [
-        json.dumps({"title": "文章1", "content": "内容1" * 30}),
-        json.dumps({"title": "文章2", "content": "内容2" * 30}),
-        "无效输入"
-    ]
-    results = processor.process_batch(batch_inputs, "json")
-    assert len(results) == 3, f"批量处理数量错误: {len(results)}"
-    success_count = sum(1 for r in results if r.success)
-    assert success_count >= 2, f"成功数量过少: {success_count}"
-    print(f"  通过 (成功 {success_count}/3)")
-    
-    # 测试用例 7：置信度评估
-    print("\n测试 7: 置信度评估")
-    low_conf_input = json.dumps({"title": "短标题", "content": "短内容"})
-    result = processor.process(low_conf_input, "json")
-    # 内容太短可能置信度低，但不应该报错
-    assert result.confidence < 0.90, f"置信度应该偏低: {result.confidence}"
-    print(f"  通过 (置信度: {result.confidence:.2%})")
-    
-    # 测试用例 8：HTML 格式输入
-    print("\n测试 8: HTML 格式输入")
-    html_input = """<html>
-<head><title>HTML测试文章</title></head>
-<body>
-<article>
-<h1>HTML测试文章</h1>
-<p>这是HTML格式的测试内容，包含足够的文字长度。</p>
-<p>这是第二段HTML内容，继续增加内容长度。</p>
-</article>
-</body>
-</html>"""
-    result = processor.process(html_input, "json")
-    assert result.success, f"HTML 处理失败: {result.message}"
-    assert result.data is not None and result.data.title == "HTML测试文章"
-    print(f"  通过 (置信度: {result.confidence:.2%})")
-    
-    # 测试用例 9：输出格式验证
-    print("\n测试 9: 输出格式验证")
-    json_input = json.dumps({
-        "title": "格式测试",
-        "content": "内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容"
-    })
-    for fmt in ["json", "markdown", "html", "text"]:
-        result = processor.process(json_input, fmt)
-        assert result.success, f"格式 {fmt} 处理失败"
-        assert result.data is not None
-    print("  通过 (4种格式均正常)")
-    
-    # 测试用例 10：URL 输入
-    print("\n测试 10: URL 输入")
-    url_input = "https://mp.weixin.qq.com/s/example123456"
-    result = processor.process(url_input, "json")
-    assert result.success, f"URL 处理失败: {result.message}"
-    assert result.data is not None and result.data.url == url_input
-    print(f"  通过 (置信度: {result.confidence:.2%})")
-    
-    # 测试用例 11：低置信度错误处理
-    print("\n测试 11: 低置信度错误处理")
-    very_low_conf_input = json.dumps({"title": "hi", "content": "test"})
-    result = processor.process(very_low_conf_input, "json")
-    # 极端低质量输入应该返回 E005
-    if result.confidence < 0.70:
-        assert not result.success, "低置信度应该失败"
-        assert result.error_code == "E005", f"错误码错误: {result.error_code}"
-    print(f"  通过 (置信度: {result.confidence:.2%})")
-    
-    print("\n全部自检通过！")
-    return all_passed
+    @staticmethod
+    def run() -> bool:
+        """
+        运行自检
+        
+        使用内置硬编码样例数据，不读取外部文件、不依赖当前工作目录、
+        不访问网络，任何环境直接可过。
+        
+        返回：True 表示所有测试通过
+        """
+        print("=" * 60)
+        print("开始自检...")
+        print("=" * 60)
+        
+        all_passed = True
+        
+        # 测试1: 解析单条输入
+        print("\n[测试1] 解析单条输入")
+        parser = InputParser()
+        test_line = "测试文章标题|测试作者|2026-01-15"
+        article, error = parser.parse_line(test_line)
+        assert error is None, f"解析失败: {error}"
+        assert article is not None, "文章对象为空"
+        assert article.title == "测试文章标题", "标题解析错误"
+        assert article.author == "测试作者", "作者解析错误"
+        assert article.date == "2026-01-15", "日期解析错误"
+        print("  ✓ 单条输入解析成功")
+        
+        # 测试2: 解析完整输入
+        print("\n[测试2] 解析完整输入（含内容和URL）")
+        test_line_full = "完整文章|作者甲|2026-02-20|这是文章内容摘要|https://mp.weixin.qq.com/s/test123"
+        article_full, error = parser.parse_line(test_line_full)
+        assert error is None, f"解析失败: {error}"
+        assert article_full.content == "这是文章内容摘要", "内容解析错误"
+        assert article_full.url == "https://mp.weixin.qq.com/s/test123", "URL解析错误"
+        print("  ✓ 完整输入解析成功")
+        
+        # 测试3: 空输入处理
+        print("\n[测试3] 空输入处理")
+        _, error = parser.parse_line("")
+        assert error == "E001", f"预期E001，实际: {error}"
+        print("  ✓ 空输入正确返回E001")
+        
+        # 测试4: 缺失字段处理
+        print("\n[测试4] 缺失字段处理")
+        _, error = parser.parse_line("只有标题|")
+        assert error == "E002", f"预期E002，实际: {error}"
+        print("  ✓ 缺失字段正确返回E002")
+        
+        # 测试5: 格式错误处理
+        print("\n[测试5] 格式错误处理")
+        _, error = parser.parse_line("只有一个字段")
+        assert error == "E003", f"预期E003，实际: {error}"
+        print("  ✓ 格式错误正确返回E003")
+        
+        # 测试6: 置信度计算
+        print("\n[测试6] 置信度计算")
+        # 完整数据的置信度应该较高
+        high_conf = article_full._calculate_confidence()
+        assert high_conf >= 85, f"完整数据置信度应≥85，实际: {high_conf}"
+        print(f"  ✓ 完整数据置信度: {high_conf}%")
+        
+        # 测试7: 输出格式化
+        print("\n[测试7] 输出格式化")
+        processor = ArticleProcessor()
+        articles = [article, article_full]
+        
+        # JSON格式
+        json_out, error = processor.format_output(articles, "json")
+        assert error is None, f"JSON格式化失败: {error}"
+        json_data = json.loads(json_out)
+        assert len(json_data) == 2, "JSON输出文章数量错误"
+        print("  ✓ JSON格式输出成功")
+        
+        # 文本格式
+        text_out, error = processor.format_output(articles, "text")
+        assert error is None, f"文本格式化失败: {error}"
+        assert "测试文章标题" in text_out, "文本输出缺少标题"
+        print("  ✓ 文本格式输出成功")
+        
+        # CSV格式
+        csv_out, error = processor.format_output(articles, "csv")
+        assert error is None, f"CSV格式化失败: {error}"
+        assert "测试文章标题" in csv_out, "CSV输出缺少标题"
+        print("  ✓ CSV格式输出成功")
+        
+        # 测试8: 不支持的格式
+        print("\n[测试8] 不支持的输出格式")
+        _, error = processor.format_output(articles, "xml")
+        assert error == "E006", f"预期E006，实际: {error}"
+        print("  ✓ 不支持格式正确返回E006")
+        
+        # 测试9: 批量处理
+        print("\n[测试9] 批量处理")
+        batch_inputs = [
+            "批量文章1|作者1|2026-03-01",
+            "批量文章2|作者2|2026-03-02",
+            "批量文章3|作者3|2026-03-03",
+        ]
+        batch_articles, errors = processor.process_batch(batch_inputs)
+        assert len(batch_articles) == 3, f"批量处理应返回3篇文章，实际: {len(batch_articles)}"
+        assert len(errors) == 0, f"批量处理不应有错误，实际: {errors}"
+        print(f"  ✓ 批量处理成功，处理{len(batch_articles)}篇文章")
+        
+        # 测试10: 边界条件
+        print("\n[测试10] 边界条件")
+        # 最小合法输入
+        min_article, error = parser.parse_line("标题|作者|2026-01-01")
+        assert error is None, f"最小合法输入解析失败: {error}"
+        assert min_article._calculate_confidence() >= 85, "最小合法输入置信度应≥85"
+        print("  ✓ 最小合法输入处理成功")
+        
+        # 日期格式变体
+        date_variants = ["2026-01-01", "2026/01/01", "2026.01.01", "2026年1月1日"]
+        for date_str in date_variants:
+            variant_article, error = parser.parse_line(f"标题|作者|{date_str}")
+            assert error is None, f"日期格式{date_str}解析失败: {error}"
+        print("  ✓ 多种日期格式处理成功")
+        
+        # 测试11: 完整流程
+        print("\n[测试11] 完整流程测试")
+        processor = ArticleProcessor()
+        test_input = "端到端测试|测试作者|2026-04-15|这是测试内容|https://example.com/article"
+        result, error = processor.process_input(test_input)
+        assert error is None, f"端到端处理失败: {error}"
+        assert result is not None, "端到端处理结果为空"
+        
+        output, fmt_error = processor.format_output([result], "json")
+        assert fmt_error is None, f"端到端输出失败: {fmt_error}"
+        result_data = json.loads(output)
+        assert result_data[0]["title"] == "端到端测试", "端到端输出标题错误"
+        print("  ✓ 端到端流程测试成功")
+        
+        # 测试12: 错误消息完整性
+        print("\n[测试12] 错误消息完整性")
+        for code in ["E001", "E002", "E003", "E004", "E005", "E006", "E007", "E008", "E009", "E010"]:
+            assert code in ERROR_MESSAGES, f"缺少错误码 {code} 的消息"
+        print("  ✓ 所有错误码消息完整")
+        
+        # 测试13: 文件处理（使用临时文件）
+        print("\n[测试13] 文件处理")
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+            f.write("# 测试文件\n")
+            f.write("文件文章1|作者A|2026-05-01\n")
+            f.write("文件文章2|作者B|2026-05-02\n")
+            f.write("\n")
+            f.write("文件文章3|作者C|2026-05-03\n")
+            temp_file = f.name
+        
+        try:
+            file_articles, file_errors = parser.parse_file(temp_file)
+            assert len(file_articles) == 3, f"文件解析应返回3篇文章，实际: {len(file_articles)}"
+            assert len(file_errors) == 0, f"文件解析不应有错误，实际: {file_errors}"
+            print("  ✓ 文件解析成功")
+        finally:
+            # 清理临时文件
+            os.unlink(temp_file)
+        
+        # 测试14: 不存在的文件
+        print("\n[测试14] 不存在的文件处理")
+        _, file_errors = parser.parse_file("/nonexistent/path/file.txt")
+        assert len(file_errors) > 0, "不存在的文件应返回错误"
+        print("  ✓ 不存在的文件正确返回错误")
+        
+        # 总结
+        print("\n" + "=" * 60)
+        if all_passed:
+            print("自检完成：全部测试通过 ✓")
+        else:
+            print("自检完成：存在失败测试 ✗")
+        print("=" * 60)
+        
+        return all_passed
 
 
 # ============================================================
-# 命令行入口
+# 主入口
 # ============================================================
 
-def main():
-    """主入口函数"""
+def main() -> int:
+    """
+    主函数
+    
+    返回：退出码（0成功，非0失败）
+    """
     parser = argparse.ArgumentParser(
-        description="公众号文章 - 本地优先的内容情报处理工具",
-        epilog="示例：python main.py --input '{\"title\":\"测试\",\"content\":\"内容\"}' --format json"
+        description="公众号文章下载器 - 本地优先的微信内容情报库同步工具",
+        epilog="示例: python main.py --input '标题|作者|日期' --format json"
     )
+    
     parser.add_argument(
         "--input", "-i",
-        type=str,
-        help="输入内容（JSON/Markdown/HTML/纯文本/URL）"
+        action="append",
+        help="输入内容，格式: 标题|作者|日期[|内容|URL]，可多次使用"
     )
+    
     parser.add_argument(
-        "--format", "-f",
-        type=str,
+        "--file", "-f",
+        help="输入文件路径，每行一条记录"
+    )
+    
+    parser.add_argument(
+        "--format", "-fmt",
+        choices=SUPPORTED_FORMATS,
         default="json",
-        choices=["json", "markdown", "html", "text"],
-        help="输出格式（默认：json）"
+        help=f"输出格式，可选: {', '.join(SUPPORTED_FORMATS)}"
     )
-    parser.add_argument(
-        "--batch",
-        type=str,
-        help="批量处理文件路径（每行一个输入）"
-    )
+    
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行内置自检"
+        help="运行离线自检（不读取外部文件、不依赖工作目录、不访问网络）"
+    )
+    
+    parser.add_argument(
+        "--output", "-o",
+        help="输出文件路径（可选，默认输出到stdout）"
     )
     
     args = parser.parse_args()
     
-    # 自检模式
+    # 运行自检
     if args.selftest:
-        try:
-            success = run_selftest()
-            sys.exit(0 if success else 1)
-        except AssertionError as e:
-            print(f"自检失败: {e}")
-            sys.exit(1)
-        except Exception as e:
-            print(f"自检异常: {e}")
-            sys.exit(1)
+        success = SelfTest.run()
+        return 0 if success else 1
     
-    # 批量处理模式
-    if args.batch:
+    # 检查是否有输入
+    if not args.input and not args.file:
+        print(f"错误 E001: {ERROR_MESSAGES['E001']}", file=sys.stderr)
+        print("使用 --help 查看用法", file=sys.stderr)
+        return 1
+    
+    # 收集输入
+    inputs = list(args.input) if args.input else []
+    if args.file:
         try:
-            with open(args.batch, "r", encoding="utf-8") as f:
-                inputs = [line.strip() for line in f if line.strip()]
-            processor = ArticleProcessor()
-            results = processor.process_batch(inputs, args.format)
-            for idx, result in enumerate(results, 1):
-                status = "✓" if result.success else "✗"
-                print(f"{idx}. [{status}] {result.message}")
-                if result.data:
-                    print(f"   标题: {result.data.title}")
-                    print(f"   置信度: {result.confidence:.1%}")
-            sys.exit(0 if all(r.success for r in results) else 1)
+            with open(args.file, "r", encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line and not line.startswith("#"):
+                        inputs.append(line)
         except FileNotFoundError:
-            print(f"错误：找不到文件 {args.batch}")
-            sys.exit(1)
+            print(f"错误 E008: {ERROR_MESSAGES['E008']}: {args.file}", file=sys.stderr)
+            return 1
         except Exception as e:
-            print(f"批量处理异常: {e}")
-            sys.exit(1)
+            print(f"错误 E008: {ERROR_MESSAGES['E008']}: {str(e)}", file=sys.stderr)
+            return 1
     
-    # 单条处理模式
-    if not args.input:
-        parser.print_help()
-        print("\n错误：请提供输入内容（--input）或使用 --selftest 自检")
-        sys.exit(1)
-    
+    # 处理输入
     processor = ArticleProcessor()
-    result = processor.process(args.input, args.format)
+    articles, errors = processor.process_batch(inputs)
     
-    if result.success:
-        print(f"处理成功（置信度 {result.confidence:.1%}）")
-        print("=" * 50)
-        if result.data:
-            print(processor._format_output(result.data, args.format))
-        if result.warnings:
-            print("\n警告：")
-            for warning in result.warnings:
-                print(f"  - {warning}")
+    # 输出错误信息
+    if errors:
+        for err in errors:
+            print(f"警告: {err}", file=sys.stderr)
+    
+    if not articles:
+        print(f"错误 E001: {ERROR_MESSAGES['E001']}", file=sys.stderr)
+        return 1
+    
+    # 格式化输出
+    output, fmt_error = processor.format_output(articles, args.format)
+    if fmt_error:
+        print(f"错误 {fmt_error}: {ERROR_MESSAGES.get(fmt_error, '未知错误')}", file=sys.stderr)
+        return 1
+    
+    # 输出结果
+    if args.output:
+        try:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(output)
+            print(f"结果已保存到: {args.output}")
+        except Exception as e:
+            print(f"错误 E008: 无法写入文件: {str(e)}", file=sys.stderr)
+            return 1
     else:
-        print(f"处理失败：{result.message}")
-        print(f"错误码：{result.error_code}")
-        sys.exit(1)
+        print(output)
+    
+    # 输出统计信息
+    print(f"\n处理完成: {len(articles)} 篇文章", file=sys.stderr)
+    needs_review = sum(1 for a in articles if a._needs_review())
+    if needs_review > 0:
+        print(f"注意: {needs_review} 篇文章建议人工复核", file=sys.stderr)
+    
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

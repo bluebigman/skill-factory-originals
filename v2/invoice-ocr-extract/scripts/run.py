@@ -270,7 +270,7 @@ class InvoiceExtractor:
         return self._clean_text(text)
     
     def _extract_text_from_image(self, image_path: str) -> str:
-        """从图片提取文本"""
+        """从图片提取文本（OCR）"""
         if not HAS_PIL:
             raise RuntimeError("PIL未安装，无法处理图片")
         if not HAS_TESSERACT:
@@ -421,4 +421,4 @@ class InvoiceExtractor:
                 "error_message": f"不支持的文件格式: {file_ext}"
             }
         
-        # 计算文件内容
+        #
