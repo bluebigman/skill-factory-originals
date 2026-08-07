@@ -60,7 +60,9 @@ def backup_originals(files: List[Path]) -> bool:
     try:
         BACKUP_DIR.mkdir(exist_ok=True)
         for f in files:
-            backup_path = BACKUP_DIR / f.name
+            # 使用文件哈希作为备份名，避免同名冲突
+            file_hash = hashlib.md5(f.read_bytes()).hexdigest()[:8]
+            backup_path = BACKUP_DIR / f"{f.stem}_{file_hash}{f.suffix}"
             if not backup_path.exists():
                 shutil.copy2(f, backup_path)
         return True
@@ -71,9 +73,11 @@ def backup_originals(files: List[Path]) -> bool:
 def restore_originals(files: List[Path]) -> None:
     """从备份恢复原图"""
     for f in files:
-        backup_path = BACKUP_DIR / f.name
-        if backup_path.exists():
-            shutil.copy2(backup_path, f)
+        if f.exists():
+            file_hash = hashlib.md5(f.read_bytes()).hexdigest()[:8]
+            backup_path = BACKUP_DIR / f"{f.stem}_{file_hash}{f.suffix}"
+            if backup_path.exists():
+                shutil.copy2(backup_path, f)
 
 
 def process_single_image(img_path: Path, output_dir: Path, max_width: int, quality: int) -> Tuple[Path, bool, str]:
@@ -254,7 +258,8 @@ def selftest() -> int:
         assert result["preview"][0]["params"]["max_width"] == 800, "预览摘要应包含参数"
         
         # 验证备份存在
-        backup_file = BACKUP_DIR / "test2.jpg"
+        file_hash = hashlib.md5(b"original_data_67890").hexdigest()[:8]
+        backup_file = BACKUP_DIR / f"test2_{file_hash}.jpg"
         assert backup_file.exists(), "备份文件应存在"
         assert backup_file.read_bytes() == b"original_data_67890", "备份内容应一致"
         

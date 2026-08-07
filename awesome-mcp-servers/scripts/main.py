@@ -101,6 +101,16 @@ def validate_single(item: Any) -> Tuple[bool, str, Optional[Dict]]:
     if fmt not in ("json", "text"):
         return False, "E008", None
     
+    # 验证fields参数（如果提供）
+    if "fields" in item and item["fields"] is not None:
+        fields = item["fields"]
+        if not isinstance(fields, list):
+            return False, "E003", None
+        # 确保fields中的元素都是字符串
+        for f in fields:
+            if not isinstance(f, str):
+                return False, "E003", None
+    
     return True, "", item
 
 
@@ -117,18 +127,25 @@ def extract_key_info(data: Any, fields: Optional[List[str]] = None) -> Dict:
     result = {}
     
     if fields:
+        # 确保fields是列表
+        if not isinstance(fields, list):
+            fields = [str(fields)]
+        
+        # 如果输入是字典
         if isinstance(data, dict):
             for f in fields:
                 if f in data:
                     result[f] = data[f]
                 else:
                     result[f] = None  # 缺失字段标记
+        # 如果输入是列表
         elif isinstance(data, list):
             for i, f in enumerate(fields):
                 if i < len(data):
                     result[f] = data[i]
                 else:
                     result[f] = None
+        # 其他类型
         else:
             # 非结构化数据，整体作为第一个字段
             result[fields[0] if fields else "content"] = str(data)
@@ -254,7 +271,8 @@ def process_single(item: Dict) -> Dict:
         "output": output,
         "confidence": confidence,
         "uncertainties": uncertainties,
-        "format": fmt
+        "format": fmt,
+        "extracted": extracted  # 添加提取的字段，便于测试检查
     }
 
 
@@ -402,7 +420,7 @@ def run_selftest() -> int:
     assert result6["error_code"] in ("E001", "E003"), f"测试6失败: 错误码错误 {result6.get('error_code')}"
     print(f"  ✓ 通过 (错误码: {result6['error_code']})")
     
-    # 测试用例7: 字段提取
+    # 测试用例7: 指定字段提取
     print("\n[测试7] 指定字段提取")
     test7_input = {
         "data": {"name": "test", "age": 30, "city": "Beijing"},
@@ -411,9 +429,14 @@ def run_selftest() -> int:
     }
     result7 = process_main(test7_input)
     assert result7["success"] is True, "测试7失败: 处理失败"
-    assert "name" in result7["output"], "测试7失败: 缺少name字段"
-    assert "age" not in result7["output"], "测试7失败: 不应包含age字段"
-    print(f"  ✓ 通过 (提取字段: name, city)")
+    assert "name" in result7["output"], f"测试7失败: 输出缺少name字段, output={result7['output']}"
+    assert "age" not in result7["output"], f"测试7失败: 不应包含age字段, output={result7['output']}"
+    # 检查提取的字段
+    assert "name" in result7.get("extracted", {}), f"测试7失败: extracted缺少name字段, extracted={result7.get('extracted')}"
+    assert "age" not in result7.get("extracted", {}), f"测试7失败: extracted不应包含age字段, extracted={result7.get('extracted')}"
+    assert result7["extracted"]["name"] == "test", f"测试7失败: name字段值错误 {result7['extracted'].get('name')}"
+    assert result7["extracted"]["city"] == "Beijing", f"测试7失败: city字段值错误 {result7['extracted'].get('city')}"
+    print(f"  ✓ 通过 (提取字段: name={result7['extracted']['name']}, city={result7['extracted']['city']})")
     
     # 测试用例8: 低置信度场景
     print("\n[测试8] 低置信度场景")
