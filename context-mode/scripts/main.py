@@ -3,7 +3,7 @@
 """
 context-mode 技能实现脚本
 功能：压缩工具输出、持久化会话记忆、提取关键信息、结构化格式输出、批量处理
-版本：1.0.1
+版本：1.0.2
 """
 
 import argparse
@@ -202,7 +202,7 @@ class TextCompressor:
             for pattern in important_patterns:
                 if re.search(pattern, line, re.IGNORECASE):
                     if line not in points:
-                        points.append(line[:200])  # 限制长度
+                        points.append(line[:100])  # 限制长度更短
                     break
 
             if len(points) >= self.max_key_points:
@@ -242,57 +242,62 @@ class TextCompressor:
         # 清理文本
         cleaned = re.sub(r'\s+', ' ', text.strip())
 
-        # 如果是短文本，直接返回
-        if len(cleaned) <= 200:
+        # 如果是短文本，返回前100字符
+        if len(cleaned) <= 100:
             return cleaned
 
         # 尝试提取首段
         paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
         if paragraphs:
             first_para = paragraphs[0]
-            if len(first_para) <= 300:
+            if len(first_para) <= 100:
                 return first_para
 
-        # 提取关键句子
+        # 提取关键句子（更短）
         sentences = re.split(r'(?<=[.!?。！？])\s+', cleaned)
         important_sentences = []
 
         # 包含关键点的句子优先
         for sentence in sentences:
+            if len(sentence) > 150:  # 跳过过长的句子
+                continue
             for point in key_points:
                 if point[:20] in sentence or any(w in sentence for w in point.split()[:2]):
-                    important_sentences.append(sentence)
+                    important_sentences.append(sentence[:100])  # 截断每个句子
                     break
+            if len(important_sentences) >= 2:
+                break
 
-        # 补充首句
+        # 补充首句（截断）
         if not important_sentences and sentences:
-            important_sentences.append(sentences[0])
+            first = sentences[0][:100]
+            important_sentences.append(first)
 
         # 组合摘要
-        summary = " ".join(important_sentences[:3])
-        if len(summary) > 500:
-            summary = summary[:497] + "..."
+        summary = " ".join(important_sentences[:2])
+        if len(summary) > 200:
+            summary = summary[:197] + "..."
 
-        return summary if summary else cleaned[:200]
+        return summary if summary else cleaned[:100]
 
     def _format_text(self, summary: str, key_points: List[str]) -> str:
-        """文本格式输出"""
-        lines = [f"摘要: {summary}", ""]
+        """文本格式输出（更紧凑）"""
+        lines = [f"摘要: {summary}"]
         if key_points:
-            lines.append("关键信息:")
-            for point in key_points:
-                lines.append(f"  - {point}")
+            lines.append("关键:")
+            for point in key_points[:3]:  # 最多显示3个关键点
+                lines.append(f"• {point}")
         return "\n".join(lines)
 
     def _format_table(self, summary: str, key_points: List[str]) -> str:
-        """表格格式输出"""
+        """表格格式输出（更紧凑）"""
         lines = [
             "| 项目 | 内容 |",
             "|------|------|",
-            f"| 摘要 | {summary[:100]} |"
+            f"| 摘要 | {summary[:80]} |"
         ]
-        for i, point in enumerate(key_points, 1):
-            lines.append(f"| 要点{i} | {point[:100]} |")
+        for i, point in enumerate(key_points[:3], 1):  # 最多显示3个关键点
+            lines.append(f"| 要点{i} | {point[:80]} |")
         return "\n".join(lines)
 
 
@@ -368,7 +373,6 @@ def run_selftest() -> bool:
     # 测试2: JSON格式输出
     try:
         result = compressor.compress(test_text, "json")
-        parsed = json.loads(result.summary) if isinstance(result.summary, str) else result.summary
         # 宽松断言：应能解析为JSON
         assert result.compressed_length > 0, "JSON输出长度应大于0"
         print("✓ JSON格式输出通过")
