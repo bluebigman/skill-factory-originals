@@ -7,7 +7,7 @@
 供 AI 编码代理直接消费。
 
 作者: 林墨
-版本: 1.0.2
+版本: 1.0.3
 许可证: MIT
 """
 
@@ -104,6 +104,8 @@ class StructureExtractor(HTMLParser):
         self.text_content: List[str] = []         # 页面文本内容（非空）
         self.dom_tree: List[Dict[str, Any]] = []  # DOM 树（简化）
         self._stack: List[Dict[str, Any]] = []    # 解析栈
+        self.has_viewport: bool = False           # 是否有 viewport meta 标签
+        self.has_media_queries: bool = False      # 是否有媒体查询
 
     def handle_starttag(
         self, tag: str, attrs: List[Tuple[str, Optional[str]]]
@@ -122,6 +124,16 @@ class StructureExtractor(HTMLParser):
                 self.links.append(value)
             elif key == "src" and value:
                 self.links.append(value)
+
+        # 检测 viewport meta 标签
+        if tag == "meta":
+            meta_attrs = {k: v for k, v in attrs}
+            if meta_attrs.get("name") == "viewport":
+                self.has_viewport = True
+
+        # 检测媒体查询属性（响应式设计的常见标志）
+        if "media" in attr_dict or "sizes" in attr_dict:
+            self.has_media_queries = True
 
         node: Dict[str, Any] = {
             "tag": tag,
@@ -164,6 +176,8 @@ def extract_structure(html_content: str) -> Dict[str, Any]:
         "text_snippets": parser.text_content[:50],  # 最多保存 50 条文本片段
         "dom_tree": parser.dom_tree,
         "node_count": _count_nodes(parser.dom_tree),
+        "has_viewport": parser.has_viewport,
+        "has_media_queries": parser.has_media_queries,
     }
 
 
@@ -208,12 +222,17 @@ def build_template(
     layout_framework = _detect_framework(structure["tags"], structure["classes"])
 
     # 推断响应式布局
-    responsive = _detect_responsive(structure["tags"], structure["attributes"])
+    responsive = _detect_responsive(
+        structure["tags"], 
+        structure["attributes"],
+        structure["has_viewport"],
+        structure["has_media_queries"]
+    )
 
     # 构建模板
     template: Dict[str, Any] = {
         "template_meta": {
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": source,
             "source_type": source_type,
             "content_hash": content_hash,
@@ -278,10 +297,32 @@ def _detect_framework(tags: List[str], classes: List[str]) -> str:
     return "unknown"
 
 
-def _detect_responsive(tags: List[str], attributes: List[str]) -> bool:
+def _detect_responsive(
+    tags: List[str], 
+    attributes: List[str], 
+    has_viewport: bool, 
+    has_media_queries: bool
+) -> bool:
     """检测是否为响应式布局。"""
-    # 检查是否有 viewport meta 或响应式相关属性
-    return "viewport" in attributes or "media" in attributes
+    # 检查是否有 viewport meta 标签（最重要的标志）
+    if has_viewport:
+        return True
+    
+    # 检查是否有媒体查询相关属性
+    if has_media_queries:
+        return True
+    
+    # 检查是否有响应式相关的标准属性
+    responsive_attrs = {"media", "sizes", "srcset", "picture"}
+    if any(attr in responsive_attrs for attr in attributes):
+        return True
+    
+    # 检查是否有响应式相关的标准标签
+    responsive_tags = {"picture", "source"}
+    if any(tag in responsive_tags for tag in tags):
+        return True
+    
+    return False
 
 
 def _extract_style_variables(html_content: str) -> Dict[str, str]:
@@ -423,7 +464,7 @@ def main() -> int:
     parser.add_argument("--file", type=str, help="本地 HTML 文件路径")
     parser.add_argument("-o", "--output", type=str, default="template.json", help="输出 JSON 文件路径")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--version", action="version", version="%(prog)s 1.0.2")
+    parser.add_argument("--version", action="version", version="%(prog)s 1.0.3")
 
     args = parser.parse_args()
 
