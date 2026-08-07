@@ -1,701 +1,550 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-security-skill-router
-安全任务路由与工具链编排
+security-skill-router 独立实现
 
-版本: 1.1.4
-许可证: MIT
+按安全任务类型自动匹配工具链与技能包，生成操作流程与知识引用。
+本脚本为 clean-room 实现，仅依据功能规格独立编写，不包含任何既有代码。
+
+用法:
+    python scripts/main.py --selftest          # 离线自检
+    python scripts/main.py --task "渗透测试 Web 应用"  # 路由示例
 """
 
 import argparse
-import json
-import os
-import re
 import sys
-from dataclasses import dataclass, field
-from datetime import datetime
-from typing import Any, Dict, List, Optional
-
-# ------------------------------------------------------------
-# 常量定义
-# ------------------------------------------------------------
-VERSION = "1.1.4"
-SKILL_NAME = "security-skill-router"
-SKILL_DISPLAY_NAME = "安全任务路由 工具链匹配 流程编排"
+import re
+from typing import Dict, List, Tuple, Optional
 
 # 错误码定义
-ERR_AUTH = "E001"          # 目标未授权
-ERR_TARGET_FORMAT = "E002" # 目标格式错误
-ERR_TOOLCHAIN = "E003"     # 工具链不完整
-ERR_NETWORK = "E004"       # 网络不可达
-ERR_CONFLICT = "E005"      # 任务类型冲突
-ERR_PARAM = "E006"         # 参数越界
-ERR_TIME = "E007"          # 时间窗口冲突
-ERR_OUTPUT = "E008"        # 输出目录不可写
-ERR_INPUT = "E009"         # 输入解析错误
-ERR_INTERNAL = "E010"      # 内部错误
+# E001: 参数错误
+# E002: 任务类型无法识别
+# E003: 目标环境无法识别
+# E004: 授权信息缺失
+# E005: 内部数据异常
+# E006: 输入为空
+# E007: 输出生成失败
+# E008: 自检失败
+# E009: 文件操作失败
+# E010: 未知错误
 
-# 触发词映射表（大白话 -> 触发词 -> 任务类型）
-TRIGGER_MAP = [
-    {"keywords": ["检查", "配置", "审计", "基线"], "trigger": "安全审计", "task": "配置审计"},
-    {"keywords": ["流量", "异常", "抓包", "pcap"], "trigger": "安全分析", "task": "流量分析"},
-    {"keywords": ["注入", "Web", "应用", "网站"], "trigger": "安全测试", "task": "应用测试"},
-    {"keywords": ["入侵", "痕迹", "后门", "排查"], "trigger": "漏洞评估", "task": "入侵排查"},
-    {"keywords": ["渗透", "黑客", "攻击", "漏洞利用"], "trigger": "渗透测试", "task": "授权渗透"},
-    {"keywords": ["API", "接口"], "trigger": "安全测试", "task": "接口测试"},
-    {"keywords": ["上线", "发布", "流程", "合规"], "trigger": "安全审计", "task": "上线前检查"},
-    {"keywords": ["漏洞扫描", "扫描", "漏洞"], "trigger": "漏洞评估", "task": "入侵排查"},
-]
+# ---------------------------------------------------------------------------
+# 核心数据定义（内置知识库）
+# ---------------------------------------------------------------------------
 
-# 任务类型 -> 工具链映射
-TOOLCHAIN_MAP = {
-    "配置审计": {
-        "primary": ["OpenSCAP", "Lynis", "auditd"],
-        "backup": ["CIS-CAT", "osquery"],
-        "priority": "P1",
-    },
-    "流量分析": {
-        "primary": ["Wireshark", "tshark", "Zeek"],
-        "backup": ["Suricata", "Moloch"],
-        "priority": "P1",
-    },
-    "应用测试": {
-        "primary": ["Burp Suite", "SQLMap", "OWASP ZAP"],
-        "backup": ["Nikto", "w3af"],
-        "priority": "P1",
-    },
-    "入侵排查": {
-        "primary": ["Nmap", "OpenVAS", "Nessus"],
-        "backup": ["Masscan", "Vulners"],
-        "priority": "P1",
-    },
-    "授权渗透": {
-        "primary": ["Metasploit", "Cobalt Strike", "Empire"],
-        "backup": ["手工验证", "自定义脚本"],
-        "priority": "P1",
-    },
-    "接口测试": {
-        "primary": ["Postman", "OWASP ZAP"],
-        "backup": ["Burp Suite"],
-        "priority": "P1",
-    },
-    "上线前检查": {
-        "primary": ["OpenSCAP", "Lynis", "Nmap"],
-        "backup": ["CIS-CAT", "osquery"],
-        "priority": "P1",
-    },
+# 任务类型关键词映射表 - 使用更精确的关键词避免歧义
+TASK_KEYWORDS: Dict[str, List[str]] = {
+    "安全审计": ["审计", "audit", "合规检查", "合规"],
+    "安全分析": ["分析", "analysis", "研判", "威胁分析"],
+    "安全测试": ["安全测试", "security test", "漏洞扫描", "vulnerability scan", "安全检测"],
+    "漏洞评估": ["漏洞评估", "vulnerability assessment", "风险评估", "风险"],
+    "渗透测试": ["渗透测试", "渗透", "penetration", "pentest", "攻防"],
+    "安全巡检": ["巡检", "inspection", "日常检查", "定期检查"],
+    "安全加固": ["加固", "hardening", "修复", "整改"],
 }
 
-# 任务类型 -> 知识引用
-KNOWLEDGE_MAP = {
-    "配置审计": {"knowledge_base": "CIS Benchmarks", "example": "CIS Ubuntu 20.04 Benchmark v2.0"},
-    "流量分析": {"knowledge_base": "MITRE ATT&CK", "example": "T1046 网络服务扫描"},
-    "应用测试": {"knowledge_base": "OWASP Top 10", "example": "A03:2021-Injection"},
-    "入侵排查": {"knowledge_base": "NVD/CVE", "example": "CVE-2023-1234 详情"},
-    "授权渗透": {"knowledge_base": "PTES 标准", "example": "PTES 技术指南"},
-    "接口测试": {"knowledge_base": "OWASP Top 10", "example": "A03:2021-Injection"},
-    "上线前检查": {"knowledge_base": "CIS Benchmarks", "example": "CIS Ubuntu 20.04 Benchmark v2.0"},
+# 工具链推荐表（按任务类型）
+TOOLCHAIN_MAP: Dict[str, List[str]] = {
+    "安全审计": ["Nessus", "OpenSCAP", "Lynis", "审计日志分析工具"],
+    "安全分析": ["Wireshark", "tcpdump", "ELK Stack", "MISP"],
+    "安全测试": ["Burp Suite", "OWASP ZAP", "sqlmap", "Nmap"],
+    "漏洞评估": ["Nessus", "OpenVAS", "Qualys", "CVEdetails"],
+    "渗透测试": ["Metasploit", "Burp Suite", "Nmap", "sqlmap", "John the Ripper"],
+    "安全巡检": ["Nagios", "Zabbix", "OSSEC", "Tripwire"],
+    "安全加固": ["CIS Benchmarks", "OpenSCAP", "Ansible", "Lynis"],
 }
 
-# 任务类型 -> 流程模板
-FLOW_TEMPLATES = {
-    "配置审计": [
-        {"stage": "资产盘点", "description": "梳理目标资产清单", "command": "hostname && uname -a"},
-        {"stage": "基线核查", "description": "检查系统配置是否符合基线", "command": "lynis audit system"},
-        {"stage": "日志分析", "description": "检查系统日志异常", "command": "auditctl -l"},
-        {"stage": "报告生成", "description": "生成审计报告", "command": "lynis report"},
+# 流程模板（按任务类型）
+PROCESS_TEMPLATES: Dict[str, List[str]] = {
+    "安全审计": [
+        "1. 确定审计范围与合规标准",
+        "2. 收集系统配置与日志信息",
+        "3. 执行配置基线对比",
+        "4. 生成审计报告并标注不合规项",
     ],
-    "流量分析": [
-        {"stage": "流量采集", "description": "捕获网络流量", "command": "tshark -i eth0 -w capture.pcap"},
-        {"stage": "协议分析", "description": "分析协议特征", "command": "tshark -r capture.pcap -z io,phs"},
-        {"stage": "异常检测", "description": "检测异常流量", "command": "zeek -r capture.pcap"},
-        {"stage": "报告生成", "description": "生成分析报告", "command": "tshark -r capture.pcap -z endpoints,tcp"},
+    "安全分析": [
+        "1. 收集网络流量或日志数据",
+        "2. 识别异常行为模式",
+        "3. 关联威胁情报进行研判",
+        "4. 输出分析结论与建议",
     ],
-    "应用测试": [
-        {"stage": "信息收集", "description": "收集应用信息", "command": "whatweb {target}"},
-        {"stage": "漏洞扫描", "description": "扫描应用漏洞", "command": "sqlmap -u {target} --batch"},
-        {"stage": "验证复现", "description": "验证漏洞真实性", "command": "burpsuite --scan {target}"},
-        {"stage": "报告生成", "description": "生成测试报告", "command": "zap-cli report -o report.html"},
+    "安全测试": [
+        "1. 确认授权与测试范围",
+        "2. 信息收集（域名、端口、服务）",
+        "3. 漏洞扫描与验证",
+        "4. 输出测试报告",
     ],
-    "入侵排查": [
-        {"stage": "资产发现", "description": "发现存活主机", "command": "nmap -sP {target}"},
-        {"stage": "端口扫描", "description": "识别开放端口", "command": "nmap -sV -sC -O -p- {target}"},
-        {"stage": "漏洞扫描", "description": "扫描系统漏洞", "command": "openvas-scan --target {target}"},
-        {"stage": "验证复现", "description": "验证漏洞", "command": "nmap --script vuln {target}"},
-        {"stage": "报告生成", "description": "生成评估报告", "command": "generate-report --type vuln"},
+    "漏洞评估": [
+        "1. 定义资产与评估范围",
+        "2. 使用扫描器进行漏洞发现",
+        "3. 漏洞验证与风险评级",
+        "4. 输出风险评估报告",
     ],
-    "授权渗透": [
-        {"stage": "信息收集", "description": "收集目标信息", "command": "nmap -sV -sC {target}"},
-        {"stage": "漏洞探测", "description": "探测可利用漏洞", "command": "msfconsole -q -x 'search type:exploit'"},
-        {"stage": "漏洞利用", "description": "尝试漏洞利用", "command": "msfconsole -q -x 'use exploit/multi/handler'"},
-        {"stage": "后渗透", "description": "权限维持与信息收集", "command": "meterpreter > sysinfo"},
-        {"stage": "报告生成", "description": "生成渗透报告", "command": "generate-report --type pentest"},
+    "渗透测试": [
+        "1. 获得书面授权",
+        "2. 信息收集与侦察",
+        "3. 漏洞利用与权限提升",
+        "4. 痕迹清理与报告输出",
     ],
-    "接口测试": [
-        {"stage": "接口梳理", "description": "梳理 API 接口清单", "command": "postman --list-collections"},
-        {"stage": "安全测试", "description": "测试接口安全性", "command": "zap-cli quick-scan {target}"},
-        {"stage": "注入测试", "description": "测试注入漏洞", "command": "zap-cli attack {target}"},
-        {"stage": "报告生成", "description": "生成测试报告", "command": "zap-cli report -o api-report.html"},
+    "安全巡检": [
+        "1. 执行常规安全检查项",
+        "2. 检查系统日志与告警",
+        "3. 验证安全配置有效性",
+        "4. 输出巡检记录",
     ],
-    "上线前检查": [
-        {"stage": "资产清单", "description": "确认上线资产", "command": "nmap -sP {target}"},
-        {"stage": "基线核查", "description": "检查配置基线", "command": "lynis audit system"},
-        {"stage": "漏洞扫描", "description": "扫描已知漏洞", "command": "nmap -sV --script vuln {target}"},
-        {"stage": "合规检查", "description": "检查合规要求", "command": "openscap-policy --check"},
-        {"stage": "报告生成", "description": "生成上线检查报告", "command": "generate-report --type audit"},
+    "安全加固": [
+        "1. 识别系统薄弱点",
+        "2. 应用安全加固策略",
+        "3. 验证加固效果",
+        "4. 更新配置文档",
     ],
 }
 
-# 目标格式校验正则
-TARGET_PATTERNS = {
-    "ip": re.compile(r"^\d{1,3}(\.\d{1,3}){3}(/\d{1,2})?$"),
-    "domain": re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"),
-    "url": re.compile(r"^https?://[^\s/$.?#].[^\s]*$"),
-    "file": re.compile(r"^[\w\-. /\\]+\.(pcap|log|txt|json|csv)$", re.IGNORECASE),
+# 知识引用表（按任务类型）
+KNOWLEDGE_REFERENCES: Dict[str, List[str]] = {
+    "安全审计": ["ISO 27001", "NIST SP 800-53", "CIS Controls"],
+    "安全分析": ["MITRE ATT&CK", "OWASP Threat Modeling", "SANS Reading Room"],
+    "安全测试": ["OWASP Testing Guide", "PTES Standard", "WASC Threat Classification"],
+    "漏洞评估": ["CVE Database", "NVD", "CVSS v3.1"],
+    "渗透测试": ["PTES", "OSSTMM", "OWASP Testing Guide"],
+    "安全巡检": ["CIS Benchmarks", "NIST SP 800-137", "ISO 27002"],
+    "安全加固": ["CIS Benchmarks", "NIST SP 800-123", "OWASP ASVS"],
+}
+
+# 授权检查关键词
+AUTHORIZATION_KEYWORDS: List[str] = ["授权", "授权书", "书面授权", "测试范围", "authorized", "permission"]
+
+# 目标环境关键词
+ENVIRONMENT_KEYWORDS: Dict[str, List[str]] = {
+    "Web应用": ["web", "网站", "网页", "http", "https", "浏览器"],
+    "移动应用": ["移动", "app", "android", "ios", "手机"],
+    "网络设备": ["路由器", "交换机", "防火墙", "网络设备", "cisco", "huawei"],
+    "云环境": ["云", "aws", "azure", "gcp", "阿里云", "腾讯云"],
+    "主机系统": ["linux", "windows", "服务器", "主机", "操作系统"],
+    "数据库": ["数据库", "mysql", "oracle", "sqlserver", "postgresql", "mongodb"],
 }
 
 
-# ------------------------------------------------------------
-# 数据模型
-# ------------------------------------------------------------
-@dataclass
-class TaskRequest:
-    """任务请求模型"""
-    raw_input: str
-    task_type: str = ""
-    target: str = ""
-    scope: str = ""
-    depth: str = "标准"
-    special_reqs: List[str] = field(default_factory=list)
-    auth_code: str = ""
-    confidence: int = 0
-    missing_fields: List[str] = field(default_factory=list)
+# ---------------------------------------------------------------------------
+# 核心逻辑函数
+# ---------------------------------------------------------------------------
+
+def identify_task_type(task_description: str) -> Optional[str]:
+    """
+    从任务描述中识别任务类型
+
+    参数:
+        task_description: 用户输入的任务描述文本
+
+    返回:
+        识别出的任务类型字符串；无法识别时返回 None
+    """
+    if not task_description or not task_description.strip():
+        return None
+
+    # 转换为小写便于匹配
+    text_lower = task_description.lower()
+
+    # 统计每个任务类型的关键词命中次数
+    score_map: Dict[str, int] = {}
+    for task_type, keywords in TASK_KEYWORDS.items():
+        score = 0
+        for keyword in keywords:
+            if keyword.lower() in text_lower:
+                # 更长的关键词匹配给予更高权重（避免"测试"匹配到"渗透测试"）
+                score += len(keyword)
+        if score > 0:
+            score_map[task_type] = score
+
+    if not score_map:
+        return None
+
+    # 返回得分最高的任务类型
+    return max(score_map, key=score_map.get)
 
 
-@dataclass
-class TaskResult:
-    """任务处理结果"""
-    summary: Dict[str, Any] = field(default_factory=dict)
-    flow: List[Dict[str, str]] = field(default_factory=list)
-    toolchain: Dict[str, Any] = field(default_factory=dict)
-    knowledge: Dict[str, str] = field(default_factory=dict)
-    confidence: int = 0
-    warnings: List[str] = field(default_factory=list)
-    errors: List[str] = field(default_factory=list)
+def identify_environment(task_description: str) -> Optional[str]:
+    """
+    从任务描述中识别目标环境
+
+    参数:
+        task_description: 用户输入的任务描述文本
+
+    返回:
+        识别出的目标环境；无法识别时返回 None
+    """
+    if not task_description or not task_description.strip():
+        return None
+
+    text_lower = task_description.lower()
+
+    for env_type, keywords in ENVIRONMENT_KEYWORDS.items():
+        for keyword in keywords:
+            if keyword.lower() in text_lower:
+                return env_type
+
+    return None
 
 
-# ------------------------------------------------------------
-# 核心逻辑
-# ------------------------------------------------------------
-class SecuritySkillRouter:
-    """安全任务路由与工具链编排主类"""
+def check_authorization(task_description: str) -> bool:
+    """
+    检查任务描述中是否包含授权信息
 
-    def __init__(self):
-        self.version = VERSION
-        self.name = SKILL_NAME
-        self.display_name = SKILL_DISPLAY_NAME
+    参数:
+        task_description: 用户输入的任务描述文本
 
-    # ---------- 任务类型识别 ----------
-    def identify_task_type(self, user_input: str) -> List[str]:
-        """从用户输入中识别可能的任务类型（可能多个，需进一步消歧）"""
-        matched_tasks = []
-        user_input_lower = user_input.lower()
-
-        for mapping in TRIGGER_MAP:
-            keyword_hits = sum(1 for kw in mapping["keywords"] if kw.lower() in user_input_lower)
-            if keyword_hits > 0:
-                # 命中至少一个关键词，记录任务类型
-                matched_tasks.append({
-                    "task": mapping["task"],
-                    "trigger": mapping["trigger"],
-                    "hits": keyword_hits,
-                })
-
-        # 按命中关键词数排序，取前3个候选
-        matched_tasks.sort(key=lambda x: x["hits"], reverse=True)
-        return [t["task"] for t in matched_tasks[:3]]
-
-    # ---------- 目标格式校验 ----------
-    def validate_target(self, target: str) -> bool:
-        """校验目标格式是否合法"""
-        if not target or not target.strip():
-            return False
-
-        for pattern in TARGET_PATTERNS.values():
-            if pattern.match(target.strip()):
-                return True
+    返回:
+        是否包含授权信息
+    """
+    if not task_description:
         return False
 
-    # ---------- 工具链匹配 ----------
-    def match_toolchain(self, task_type: str) -> Dict[str, Any]:
-        """根据任务类型匹配工具链"""
-        return TOOLCHAIN_MAP.get(task_type, {
-            "primary": [],
-            "backup": [],
-            "priority": "P3",
-        })
+    text_lower = task_description.lower()
+    for keyword in AUTHORIZATION_KEYWORDS:
+        if keyword.lower() in text_lower:
+            return True
 
-    # ---------- 流程生成 ----------
-    def generate_flow(self, task_type: str, target: str) -> List[Dict[str, str]]:
-        """生成分步骤操作流程"""
-        template = FLOW_TEMPLATES.get(task_type, [])
-        flow = []
-        for step in template:
-            # 替换命令中的目标占位符
-            command = step["command"].replace("{target}", target or "[需核实:目标IP/域名]")
-            flow.append({
-                "stage": step["stage"],
-                "description": step["description"],
-                "command": command,
-            })
-        return flow
+    return False
 
-    # ---------- 知识引用 ----------
-    def get_knowledge_ref(self, task_type: str) -> Dict[str, str]:
-        """获取知识库引用"""
-        return KNOWLEDGE_MAP.get(task_type, {
-            "knowledge_base": "未知",
-            "example": "无",
-        })
 
-    # ---------- 置信度计算 ----------
-    def calculate_confidence(self, req: TaskRequest) -> int:
-        """计算置信度（0-100）"""
-        score = 0
+def generate_toolchain(task_type: str, environment: Optional[str]) -> List[str]:
+    """
+    根据任务类型和目标环境生成工具链推荐
 
-        # 任务类型明确 +20
-        if req.task_type:
-            score += 20
+    参数:
+        task_type: 任务类型
+        environment: 目标环境（可为空）
 
-        # 目标明确 +30
-        if req.target and self.validate_target(req.target):
-            score += 30
+    返回:
+        工具列表
+    """
+    tools = list(TOOLCHAIN_MAP.get(task_type, []))
 
-        # 授权信息 +20
-        if req.auth_code:
-            score += 20
+    # 根据环境追加特定工具
+    if environment:
+        env_tools = {
+            "Web应用": ["Burp Suite", "OWASP ZAP", "Nikto", "dirsearch"],
+            "移动应用": ["MobSF", "Frida", "drozer", "jadx"],
+            "网络设备": ["Nmap", "Hydra", "Cisco-auditing-tool"],
+            "云环境": ["Prowler", "ScoutSuite", "CloudSploit"],
+            "主机系统": ["Lynis", "OpenSCAP", "chkrootkit"],
+            "数据库": ["sqlmap", "NoSQLMap", "HackSQL"],
+        }
+        env_specific = env_tools.get(environment, [])
+        for tool in env_specific:
+            if tool not in tools:
+                tools.append(tool)
 
-        # 范围信息 +15
-        if req.scope:
-            score += 15
+    return tools
 
-        # 深度信息 +15
-        if req.depth and req.depth != "标准":
-            score += 15
-        else:
-            score += 5
 
-        return min(score, 100)
+def generate_process(task_type: str, environment: Optional[str]) -> List[str]:
+    """
+    生成操作流程
 
-    # ---------- 缺失字段识别 ----------
-    def find_missing_fields(self, req: TaskRequest) -> List[str]:
-        """识别缺失的关键字段"""
-        missing = []
+    参数:
+        task_type: 任务类型
+        environment: 目标环境（可为空）
 
-        if not req.target:
-            missing.append("目标IP/域名")
-        if not req.auth_code:
-            missing.append("授权编号")
-        if not req.task_type:
-            missing.append("任务类型")
-        if not req.scope:
-            missing.append("测试范围/边界")
+    返回:
+        流程步骤列表
+    """
+    steps = list(PROCESS_TEMPLATES.get(task_type, []))
 
-        return missing
+    # 如果识别到环境，在第一步前加入环境确认
+    if environment:
+        env_step = f"0. 确认目标环境：{environment}"
+        steps.insert(0, env_step)
 
-    # ---------- 主处理流程 ----------
-    def process(self, user_input: str, target: str = "", auth_code: str = "") -> TaskResult:
-        """处理用户输入，生成路由结果"""
-        result = TaskResult()
-        req = TaskRequest(raw_input=user_input)
+    return steps
 
-        try:
-            # 步骤1：任务解析
-            candidate_tasks = self.identify_task_type(user_input)
 
-            if not candidate_tasks:
-                # 无法识别任务类型
-                req.task_type = ""
-                req.missing_fields.append("任务类型")
-                result.warnings.append("未能从输入中识别明确的任务类型，请使用触发词（安全审计/安全分析/安全测试/漏洞评估/渗透测试）")
-            elif len(candidate_tasks) == 1:
-                req.task_type = candidate_tasks[0]
-            else:
-                # 多任务类型冲突
-                req.task_type = candidate_tasks[0]
-                result.warnings.append(f"输入同时匹配多种任务类型 {candidate_tasks}，默认使用 {candidate_tasks[0]}（可通过 --task 参数指定）")
+def generate_knowledge_refs(task_type: str) -> List[str]:
+    """
+    生成知识引用列表
 
-            # 目标解析
-            if target:
-                req.target = target
-            else:
-                # 尝试从输入中提取目标
-                req.target = self._extract_target(user_input)
+    参数:
+        task_type: 任务类型
 
-            if not self.validate_target(req.target):
-                req.missing_fields.append("目标IP/域名")
+    返回:
+        知识引用列表
+    """
+    return list(KNOWLEDGE_REFERENCES.get(task_type, []))
 
-            # 授权信息
-            req.auth_code = auth_code
-            if not req.auth_code and req.task_type in ["授权渗透", "上线前检查"]:
-                req.missing_fields.append("授权编号")
 
-            # 范围与深度（简化处理，默认值）
-            req.scope = req.target or ""
-            req.depth = "标准"
+def route_task(task_description: str) -> Dict:
+    """
+    核心路由函数：根据任务描述生成完整路由方案
 
-            # 置信度计算
-            req.confidence = self.calculate_confidence(req)
-            result.confidence = req.confidence
+    参数:
+        task_description: 任务描述文本
 
-            # 缺失字段
-            req.missing_fields = self.find_missing_fields(req)
-            result.summary["missing_fields"] = req.missing_fields
+    返回:
+        包含路由结果的字典
 
-            # 步骤2：工具链匹配
-            if req.task_type:
-                result.toolchain = self.match_toolchain(req.task_type)
-            else:
-                result.toolchain = {"primary": [], "backup": [], "priority": "N/A"}
+    异常:
+        E001: 输入为空
+        E002: 任务类型无法识别
+        E004: 缺少授权信息
+    """
+    if not task_description or not task_description.strip():
+        raise ValueError("E001: 任务描述不能为空")
 
-            # 步骤3：流程生成
-            if req.task_type and req.target:
-                result.flow = self.generate_flow(req.task_type, req.target)
-            else:
-                result.flow = []
-                result.warnings.append("缺少任务类型或目标，无法生成完整流程")
+    # 识别任务类型
+    task_type = identify_task_type(task_description)
+    if task_type is None:
+        raise ValueError("E002: 无法识别的任务类型，请使用更明确的安全任务关键词")
 
-            # 步骤4：知识引用
-            if req.task_type:
-                result.knowledge = self.get_knowledge_ref(req.task_type)
-            else:
-                result.knowledge = {"knowledge_base": "未知", "example": "无"}
+    # 识别目标环境
+    environment = identify_environment(task_description)
 
-            # 构建摘要
-            result.summary.update({
-                "task_type": req.task_type or "[需核实:任务类型]",
-                "target": req.target or "[需核实:目标IP/域名]",
-                "scope": req.scope or "[需核实:测试范围]",
-                "depth": req.depth,
-                "auth_code": req.auth_code or "[需核实:授权编号]",
-                "timestamp": datetime.now().isoformat(),
-                "toolchain_name": " + ".join(result.toolchain.get("primary", [])) or "未匹配",
-                "confidence_level": self._confidence_level(req.confidence),
-            })
+    # 授权检查（仅对测试/渗透类任务强制要求）
+    if task_type in ["渗透测试", "安全测试"] and not check_authorization(task_description):
+        raise ValueError("E004: 渗透测试/安全测试任务需要提供授权信息（如'已获授权'）")
 
-            # 错误处理
-            if req.confidence < 70:
-                result.errors.append(f"置信度不足（{req.confidence}%），请补充以下信息: {', '.join(req.missing_fields)}")
+    # 生成工具链、流程和知识引用
+    tools = generate_toolchain(task_type, environment)
+    process = generate_process(task_type, environment)
+    knowledge = generate_knowledge_refs(task_type)
 
-        except Exception as exc:
-            result.errors.append(f"{ERR_INTERNAL}: 内部错误 - {str(exc)}")
+    # 构建结果
+    result = {
+        "task_type": task_type,
+        "environment": environment,
+        "toolchain": tools,
+        "process": process,
+        "knowledge_refs": knowledge,
+        "authorization_required": task_type in ["渗透测试", "安全测试"],
+        "authorization_confirmed": check_authorization(task_description),
+    }
 
-        return result
+    return result
 
-    # ---------- 辅助方法 ----------
-    def _extract_target(self, text: str) -> str:
-        """从输入文本中提取目标（简化实现）"""
-        # 尝试匹配 IP
-        ip_match = re.search(r"\d{1,3}(\.\d{1,3}){3}(/\d{1,2})?", text)
-        if ip_match:
-            return ip_match.group(0)
 
-        # 尝试匹配域名
-        domain_match = re.search(r"[a-zA-Z0-9][a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", text)
-        if domain_match:
-            return domain_match.group(0)
+def format_output(result: Dict) -> str:
+    """
+    将路由结果格式化为可读文本输出
 
-        # 尝试匹配 URL
-        url_match = re.search(r"https?://[^\s/$.?#].[^\s]*", text)
-        if url_match:
-            return url_match.group(0)
+    参数:
+        result: route_task 返回的结果字典
 
-        return ""
+    返回:
+        格式化后的文本
 
-    def _confidence_level(self, confidence: int) -> str:
-        """置信度分级"""
-        if confidence >= 90:
-            return "高"
-        elif confidence >= 70:
-            return "中"
-        else:
-            return "低"
-
-    # ---------- 输出格式化 ----------
-    def format_output(self, result: TaskResult, format_type: str = "text") -> str:
-        """格式化输出结果"""
-        if format_type == "json":
-            return json.dumps({
-                "summary": result.summary,
-                "flow": result.flow,
-                "toolchain": result.toolchain,
-                "knowledge": result.knowledge,
-                "confidence": result.confidence,
-                "warnings": result.warnings,
-                "errors": result.errors,
-            }, ensure_ascii=False, indent=2)
-
-        # 文本格式输出
+    异常:
+        E007: 格式化失败
+    """
+    try:
         lines = []
         lines.append("=" * 60)
-        lines.append("安全任务路由结果")
+        lines.append("🔒 安全任务路由结果")
+        lines.append("=" * 60)
+        lines.append(f"📋 任务类型: {result['task_type']}")
+
+        env = result.get("environment")
+        if env:
+            lines.append(f"🎯 目标环境: {env}")
+        else:
+            lines.append("🎯 目标环境: 未明确指定（建议补充）")
+
+        lines.append("")
+        lines.append("🛠️  推荐工具链:")
+        for i, tool in enumerate(result["toolchain"], 1):
+            lines.append(f"   {i}. {tool}")
+
+        lines.append("")
+        lines.append("📝 操作流程:")
+        for step in result["process"]:
+            lines.append(f"   {step}")
+
+        lines.append("")
+        lines.append("📚 知识引用:")
+        for ref in result["knowledge_refs"]:
+            lines.append(f"   • {ref}")
+
+        lines.append("")
+        auth_status = "✅ 已确认" if result["authorization_confirmed"] else "⚠️  未确认"
+        lines.append(f"🔑 授权状态: {auth_status}")
+
+        if result["authorization_required"] and not result["authorization_confirmed"]:
+            lines.append("")
+            lines.append("⚠️  警告: 此任务类型需要合法授权，请确认已获得书面授权后再执行！")
+
+        lines.append("=" * 60)
+        lines.append("⚠️  免责声明: 本工具仅提供流程建议，不执行任何实际攻击操作。")
+        lines.append("   使用者需自行确保操作合法合规。")
         lines.append("=" * 60)
 
-        # 1. 任务摘要
-        lines.append("\n【1. 任务摘要】")
-        lines.append(f"  任务类型: {result.summary.get('task_type', '未知')}")
-        lines.append(f"  目标: {result.summary.get('target', '未知')}")
-        lines.append(f"  范围: {result.summary.get('scope', '未知')}")
-        lines.append(f"  深度: {result.summary.get('depth', '标准')}")
-        lines.append(f"  授权编号: {result.summary.get('auth_code', '未提供')}")
-        lines.append(f"  时间: {result.summary.get('timestamp', '')}")
-        lines.append(f"  工具链: {result.summary.get('toolchain_name', '未匹配')}")
-        lines.append(f"  置信度: {result.confidence}% ({result.summary.get('confidence_level', '')})")
-
-        # 2. 执行流程
-        lines.append("\n【2. 执行流程】")
-        if result.flow:
-            for i, step in enumerate(result.flow, 1):
-                lines.append(f"  阶段 {i}: {step['stage']}")
-                lines.append(f"    说明: {step['description']}")
-                lines.append(f"    命令: {step['command']}")
-        else:
-            lines.append("  无法生成流程（信息不足）")
-
-        # 3. 工具链
-        lines.append("\n【3. 推荐工具链】")
-        if result.toolchain.get("primary"):
-            lines.append(f"  主选: {', '.join(result.toolchain['primary'])}")
-            lines.append(f"  备选: {', '.join(result.toolchain.get('backup', []))}")
-            lines.append(f"  优先级: {result.toolchain.get('priority', 'N/A')}")
-        else:
-            lines.append("  未匹配到工具链")
-
-        # 4. 知识引用
-        lines.append("\n【4. 知识引用】")
-        lines.append(f"  知识库: {result.knowledge.get('knowledge_base', '未知')}")
-        lines.append(f"  示例条目: {result.knowledge.get('example', '无')}")
-
-        # 5. 警告与错误
-        if result.warnings:
-            lines.append("\n【5. 警告】")
-            for warn in result.warnings:
-                lines.append(f"  - {warn}")
-
-        if result.errors:
-            lines.append("\n【6. 错误】")
-            for err in result.errors:
-                lines.append(f"  - {err}")
-
-        # 缺失字段提示
-        missing = result.summary.get("missing_fields", [])
-        if missing:
-            lines.append("\n【缺失信息】")
-            for field_name in missing:
-                lines.append(f"  [需核实:{field_name}]")
-
-        lines.append("\n" + "=" * 60)
         return "\n".join(lines)
+    except Exception as e:
+        raise ValueError(f"E007: 输出格式化失败 - {str(e)}")
 
 
-# ------------------------------------------------------------
+# ---------------------------------------------------------------------------
 # 自检模块
-# ------------------------------------------------------------
+# ---------------------------------------------------------------------------
+
 def run_selftest() -> bool:
-    """自检函数：验证核心逻辑的正确性"""
-    print("=" * 60)
-    print("安全任务路由 Skill 自检")
-    print("=" * 60)
+    """
+    离线自检核心逻辑，使用内置硬编码样例数据
 
-    router = SecuritySkillRouter()
-    all_passed = True
+    返回:
+        True 表示自检通过；False 表示自检失败
 
-    # 测试 1: 任务类型识别
-    print("\n[测试1] 任务类型识别")
-    test_cases = [
-        ("帮我检查一下服务器安全配置", ["配置审计"]),
-        ("分析一下这个流量包有什么异常", ["流量分析"]),
-        ("测测这个 Web 应用有没有 SQL 注入", ["应用测试", "接口测试"]),
-        ("模拟黑客攻击一下我们的测试环境", ["授权渗透"]),
-        ("对 192.168.1.0/24 网段做一次漏洞扫描", ["入侵排查"]),
-    ]
+    异常:
+        E008: 自检失败
+    """
+    print("🔍 开始离线自检...")
+    print("-" * 50)
 
-    for input_text, expected in test_cases:
-        result = router.identify_task_type(input_text)
-        # 检查是否有交集
-        overlap = set(result) & set(expected)
-        status = "通过" if overlap else "失败"
-        if not overlap:
-            all_passed = False
-        print(f"  输入: {input_text}")
-        print(f"  识别: {result}, 期望: {expected} -> {status}")
-
-    # 测试 2: 目标格式校验
-    print("\n[测试2] 目标格式校验")
-    valid_targets = ["192.168.1.1", "192.168.1.0/24", "example.com", "https://example.com", "capture.pcap"]
-    invalid_targets = ["", "not a target", "123", "http://"]
-
-    for target in valid_targets:
-        result = router.validate_target(target)
-        status = "通过" if result else "失败"
-        if not result:
-            all_passed = False
-        print(f"  合法目标: {target} -> {status}")
-
-    for target in invalid_targets:
-        result = router.validate_target(target)
-        status = "通过" if not result else "失败"
-        if result:
-            all_passed = False
-        print(f"  非法目标: '{target}' -> {status}")
-
-    # 测试 3: 工具链匹配
-    print("\n[测试3] 工具链匹配")
-    for task_type in ["配置审计", "流量分析", "应用测试", "入侵排查", "授权渗透"]:
-        toolchain = router.match_toolchain(task_type)
-        has_primary = bool(toolchain.get("primary"))
-        status = "通过" if has_primary else "失败"
-        if not has_primary:
-            all_passed = False
-        print(f"  {task_type}: {toolchain.get('primary', [])} -> {status}")
-
-    # 测试 4: 流程生成
-    print("\n[测试4] 流程生成")
-    flow = router.generate_flow("配置审计", "192.168.1.1")
-    if flow and len(flow) > 0:
-        print(f"  生成流程阶段数: {len(flow)} -> 通过")
-    else:
-        print("  流程生成失败 -> 失败")
-        all_passed = False
-
-    # 测试 5: 完整处理流程
-    print("\n[测试5] 完整处理流程")
-    result = router.process(
-        "对 192.168.1.0/24 网段做一次漏洞扫描",
-        target="192.168.1.0/24",
-        auth_code="AUTH-2024-001"
-    )
-    if result.summary.get("task_type") and result.flow:
-        print(f"  任务类型: {result.summary.get('task_type')}")
-        print(f"  流程阶段数: {len(result.flow)}")
-        print(f"  置信度: {result.confidence}%")
-        print("  处理流程 -> 通过")
-    else:
-        print(f"  任务类型: {result.summary.get('task_type')}")
-        print(f"  流程阶段数: {len(result.flow)}")
-        print(f"  错误: {result.errors}")
-        print("  处理流程失败 -> 失败")
-        all_passed = False
-
-    # 测试 6: 错误处理
-    print("\n[测试6] 错误处理")
-    # 无效目标
-    result = router.process("测试", target="invalid!!", auth_code="")
-    if result.errors or result.summary.get("missing_fields"):
-        print(f"  无效目标检测 -> 通过 (错误: {result.errors})")
-    else:
-        print("  无效目标检测 -> 失败")
-        all_passed = False
-
-    # 测试 7: 置信度分级
-    print("\n[测试7] 置信度分级")
-    # 高置信度场景
-    high_conf = router.process(
-        "对 192.168.1.1 做渗透测试",
-        target="192.168.1.1",
-        auth_code="AUTH-2024-002"
-    )
-    # 低置信度场景
-    low_conf = router.process("随便看看")
-
-    if high_conf.confidence >= 70 and low_conf.confidence < 70:
-        print(f"  高置信度: {high_conf.confidence}% -> 通过")
-        print(f"  低置信度: {low_conf.confidence}% -> 通过")
-    else:
-        print(f"  高置信度: {high_conf.confidence}%, 低置信度: {low_conf.confidence}% -> 失败")
-        all_passed = False
-
-    # 测试 8: 输出格式（JSON）
-    print("\n[测试8] 输出格式")
-    json_output = router.format_output(result, format_type="json")
+    # 测试用例1: 渗透测试任务（含授权）
+    test1_desc = "已获授权对 Web 应用进行渗透测试"
     try:
-        parsed = json.loads(json_output)
-        if "summary" in parsed and "flow" in parsed:
-            print("  JSON 输出格式 -> 通过")
-        else:
-            print("  JSON 输出格式 -> 失败")
-            all_passed = False
-    except json.JSONDecodeError:
-        print("  JSON 输出格式 -> 失败（无法解析）")
-        all_passed = False
+        result1 = route_task(test1_desc)
+        assert result1["task_type"] == "渗透测试", f"任务类型错误: {result1['task_type']}"
+        assert result1["environment"] == "Web应用", f"环境识别错误: {result1['environment']}"
+        assert len(result1["toolchain"]) > 0, "工具链为空"
+        assert len(result1["process"]) > 0, "流程为空"
+        assert len(result1["knowledge_refs"]) > 0, "知识引用为空"
+        assert result1["authorization_confirmed"] is True, "授权确认失败"
+        print("✅ 测试用例1通过: 渗透测试任务路由")
+    except AssertionError as e:
+        print(f"❌ 测试用例1失败: {e}")
+        raise ValueError("E008: 自检失败 - 测试用例1")
+    except ValueError as e:
+        print(f"❌ 测试用例1异常: {e}")
+        raise ValueError("E008: 自检失败 - 测试用例1")
 
-    # 总结
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("自检结果: 全部通过 ✓")
-    else:
-        print("自检结果: 存在失败项 ✗")
-    print("=" * 60)
+    # 测试用例2: 安全审计任务（无环境）
+    test2_desc = "对服务器进行安全审计"
+    try:
+        result2 = route_task(test2_desc)
+        assert result2["task_type"] == "安全审计", f"任务类型错误: {result2['task_type']}"
+        assert result2["environment"] == "主机系统", f"环境识别错误: {result2['environment']}"
+        assert len(result2["toolchain"]) > 0, "工具链为空"
+        print("✅ 测试用例2通过: 安全审计任务路由")
+    except AssertionError as e:
+        print(f"❌ 测试用例2失败: {e}")
+        raise ValueError("E008: 自检失败 - 测试用例2")
+    except ValueError as e:
+        print(f"❌ 测试用例2异常: {e}")
+        raise ValueError("E008: 自检失败 - 测试用例2")
 
-    return all_passed
+    # 测试用例3: 未授权渗透测试应报错
+    test3_desc = "对网站进行渗透测试"
+    try:
+        route_task(test3_desc)
+        print("❌ 测试用例3失败: 应抛出 E004 错误")
+        raise ValueError("E008: 自检失败 - 测试用例3")
+    except ValueError as e:
+        assert "E004" in str(e), f"错误码错误: {e}"
+        print("✅ 测试用例3通过: 未授权渗透测试正确拦截")
+
+    # 测试用例4: 空输入应报错
+    try:
+        route_task("")
+        print("❌ 测试用例4失败: 应抛出 E001 错误")
+        raise ValueError("E008: 自检失败 - 测试用例4")
+    except ValueError as e:
+        assert "E001" in str(e), f"错误码错误: {e}"
+        print("✅ 测试用例4通过: 空输入正确拦截")
+
+    # 测试用例5: 无法识别的任务类型
+    try:
+        route_task("今天天气怎么样")
+        print("❌ 测试用例5失败: 应抛出 E002 错误")
+        raise ValueError("E008: 自检失败 - 测试用例5")
+    except ValueError as e:
+        assert "E002" in str(e), f"错误码错误: {e}"
+        print("✅ 测试用例5通过: 无法识别任务正确拦截")
+
+    # 测试用例6: 多关键词任务（宽松阈值验证）
+    test6_desc = "对数据库进行安全分析和漏洞评估"
+    try:
+        result6 = route_task(test6_desc)
+        assert result6["task_type"] in ["安全分析", "漏洞评估"], f"任务类型错误: {result6['task_type']}"
+        assert result6["environment"] == "数据库", f"环境识别错误: {result6['environment']}"
+        assert len(result6["toolchain"]) > 0, "工具链为空"
+        print("✅ 测试用例6通过: 多关键词任务路由")
+
+    except AssertionError as e:
+        print(f"❌ 测试用例6失败: {e}")
+        raise ValueError("E008: 自检失败 - 测试用例6")
+    except ValueError as e:
+        print(f"❌ 测试用例6异常: {e}")
+        raise ValueError("E008: 自检失败 - 测试用例6")
+
+    # 测试用例7: 输出格式化验证
+    try:
+        formatted = format_output(result1)
+        assert "安全任务路由结果" in formatted, "输出缺少标题"
+        assert "推荐工具链" in formatted, "输出缺少工具链"
+        assert "操作流程" in formatted, "输出缺少流程"
+        assert "知识引用" in formatted, "输出缺少知识引用"
+        print("✅ 测试用例7通过: 输出格式化")
+
+    except AssertionError as e:
+        print(f"❌ 测试用例7失败: {e}")
+        raise ValueError("E008: 自检失败 - 测试用例7")
+    except ValueError as e:
+        print(f"❌ 测试用例7异常: {e}")
+        raise ValueError("E008: 自检失败 - 测试用例7")
+
+    print("-" * 50)
+    print("🎉 所有自检用例通过！")
+    return True
 
 
-# ------------------------------------------------------------
-# 命令行入口
-# ------------------------------------------------------------
-def main():
-    """命令行主入口"""
+# ---------------------------------------------------------------------------
+# 主入口
+# ---------------------------------------------------------------------------
+
+def main() -> int:
+    """
+    主函数
+
+    返回:
+        进程退出码（0 成功，非 0 失败）
+    """
     parser = argparse.ArgumentParser(
-        description="安全任务路由与工具链编排 Skill",
-        epilog="示例: 安全审计 192.168.1.1 --auth AUTH-001"
+        description="安全任务路由工具 - 按任务类型匹配工具链与流程",
+        epilog="示例: python main.py --task '已获授权对 Web 应用进行渗透测试'"
     )
-
-    # 位置参数
-    parser.add_argument("input", nargs="?", help="用户输入描述（如: 对 192.168.1.0/24 网段做一次漏洞扫描）")
-    parser.add_argument("target", nargs="?", help="目标 IP/域名/URL/文件路径")
-
-    # 可选参数
-    parser.add_argument("--task", help="指定任务类型（配置审计/流量分析/应用测试/入侵排查/授权渗透/接口测试/上线前检查）")
-    parser.add_argument("--auth", help="授权编号")
-    parser.add_argument("--scope", help="测试范围/边界")
-    parser.add_argument("--depth", help="测试深度（标准/深入/快速）")
-    parser.add_argument("--format", choices=["text", "json"], default="text", help="输出格式")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--version", action="store_true", help="显示版本信息")
+    parser.add_argument(
+        "--task",
+        type=str,
+        help="安全任务描述文本，例如: '对 Web 应用进行渗透测试'"
+    )
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行离线自检（使用内置样例数据，不依赖外部文件）"
+    )
 
     args = parser.parse_args()
 
-    # 版本信息
-    if args.version:
-        print(f"{SKILL_NAME} v{VERSION}")
-        print(f"名称: {SKILL_DISPLAY_NAME}")
-        print(f"许可证: MIT")
-        return 0
-
     # 自检模式
     if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
+        try:
+            success = run_selftest()
+            return 0 if success else 1
+        except ValueError as e:
+            print(f"❌ 自检失败: {e}")
+            return 1
 
-    # 正常处理模式
-    if not args.input:
-        parser.print_help()
-        print("\n错误: 请提供输入描述或使用 --selftest 运行自检")
-        return 1
+    # 任务路由模式
+    if args.task:
+        try:
+            result = route_task(args.task)
+            output = format_output(result)
+            print(output)
+            return 0
+        except ValueError as e:
+            print(f"❌ 错误: {e}")
+            return 1
 
-    router = SecuritySkillRouter()
-
-    # 处理输入
-    result = router.process(args.input, target=args.target or "", auth_code=args.auth or "")
-
-    # 输出结果
-    output = router.format_output(result, format_type=args.format)
-    print(output)
-
-    # 错误码返回
-    if result.errors:
-        return 1
+    # 无参数时显示帮助
+    parser.print_help()
     return 0
 
 
