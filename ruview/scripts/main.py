@@ -295,7 +295,7 @@ class AnomalyDetector:
                 last_dt = datetime.fromisoformat(str(last_ts))
                 duration = (last_dt - first_dt).total_seconds()
 
-            if duration < cls.MIN_DURATION_SECONDS:
+            if duration < AnomalyDetector.MIN_DURATION_SECONDS:
                 raise RUViewError("E008")
         except (ValueError, TypeError) as exc:
             raise RUViewError("E007", str(exc)) from exc
