@@ -191,31 +191,49 @@ def organize_query(sql_text: str) -> dict:
     if not sql_text or not sql_text.strip():
         fail("E004", "查询语句为空")
 
-    # 提取 SELECT 字段（简单解析）
-    lines = [line.strip() for line in sql_text.strip().splitlines() if line.strip()]
-    select_fields = []
-    for line in lines:
-        if line.upper().startswith("SELECT"):
-            # 去掉 SELECT 关键字，取逗号分隔的字段
-            fields_part = line[6:].strip()
-            select_fields = [f.strip() for f in fields_part.split(",") if f.strip()]
-            break
+    # 移除注释
+    sql_clean = sql_text.strip()
+    # 合并多行为单行，便于解析
+    sql_single_line = ' '.join(sql_clean.split())
 
-    # 提取 FROM 表名
+    # 提取 SELECT 字段
+    select_fields = []
     from_table = None
-    for i, line in enumerate(lines):
-        if line.upper().startswith("FROM"):
-            from_table = line[4:].strip().split()[0] if line[4:].strip() else None
-            break
+    
+    # 查找 SELECT 部分
+    select_start = sql_single_line.upper().find("SELECT")
+    if select_start != -1:
+        # 找到 FROM 的位置
+        from_pos = sql_single_line.upper().find(" FROM ")
+        if from_pos != -1:
+            # SELECT 和 FROM 之间的部分就是字段列表
+            fields_part = sql_single_line[select_start + 6:from_pos].strip()
+            select_fields = [f.strip() for f in fields_part.split(",") if f.strip()]
+            
+            # 提取 FROM 后面的表名（跳过可能的 JOIN、WHERE 等关键字）
+            from_part = sql_single_line[from_pos + 5:].strip()
+            # 分割出第一个词作为表名（表名可能包含 schema 前缀）
+            from_parts = from_part.split()
+            if from_parts:
+                from_table = from_parts[0].strip('"`[]')
+                # 如果表名后面跟着别名，保留表名
+                if '.' in from_table:
+                    # 处理 schema.table 格式
+                    from_table = from_table.split('.')[-1]
+    
+    # 检查是否有 WHERE、GROUP BY、ORDER BY
+    has_where = " where " in f" {sql_single_line.lower()} "
+    has_group_by = " group by " in f" {sql_single_line.lower()} "
+    has_order_by = " order by " in f" {sql_single_line.lower()} "
 
     return {
         "original_sql": sql_text,
         "select_fields": select_fields,
         "from_table": from_table,
         "query_type": "SELECT" if "select" in sql_text.lower() else "OTHER",
-        "has_where": "where" in sql_text.lower(),
-        "has_group_by": "group by" in sql_text.lower(),
-        "has_order_by": "order by" in sql_text.lower(),
+        "has_where": has_where,
+        "has_group_by": has_group_by,
+        "has_order_by": has_order_by,
     }
 
 
