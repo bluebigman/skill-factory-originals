@@ -78,32 +78,41 @@ def parse_text_content(raw_text: str) -> Dict[str, Any]:
     for line in lines:
         stripped = line.strip()
 
-        # 识别标题
+        # 跳过空行
+        if not stripped:
+            if current_para:
+                paragraphs.append(" ".join(current_para))
+                current_para = []
+            continue
+
+        # 识别标题（以 # 开头）
         if stripped.startswith("#"):
-            headings.append(stripped.lstrip("#").strip())
+            # 确保是标题格式（# 后跟空格或直接是内容）
+            heading_text = stripped.lstrip("#").strip()
+            if heading_text:
+                headings.append(heading_text)
             continue
 
-        # 识别列表项
-        if stripped.startswith(("-", "*", "+")) and len(stripped) > 1:
-            list_items.append(stripped[1:].strip())
+        # 识别列表项（以 -、*、+ 开头，后跟空格）
+        if (stripped.startswith(("- ", "* ", "+ "))):
+            list_items.append(stripped[2:].strip())
             continue
 
-        # 识别键值对
-        if ":" in stripped and len(stripped.split(":", 1)[0]) < 30:
+        # 识别键值对（key: value 格式）
+        if ":" in stripped:
             key, _, value = stripped.partition(":")
             key = key.strip()
             value = value.strip()
-            if key and not key.startswith(("#", "-", "*")):
+            # 键名应该是合理的（不包含特殊字符，不以数字开头等）
+            if (key and value and 
+                not key.startswith(("#", "-", "*", "+")) and
+                len(key) < 50 and
+                not any(c in key for c in [' ', '\t', '\n'])):
                 key_value_pairs[key] = value
                 continue
 
         # 收集段落
-        if stripped:
-            current_para.append(stripped)
-        else:
-            if current_para:
-                paragraphs.append(" ".join(current_para))
-                current_para = []
+        current_para.append(stripped)
 
     # 处理最后的段落
     if current_para:
@@ -470,11 +479,24 @@ def run_selftest() -> bool:
     assert single_line["line_count"] == 1, "单行文本行数应为 1"
     assert single_line["word_count"] == 2, "单词数应为 2"
 
-    # 特殊字符
+    # 特殊字符和格式测试
     special = parse_text_content("# 标题\n\n- 项目\n\nkey: value")
     assert len(special["headings"]) == 1, "应识别一个标题"
     assert len(special["list_items"]) == 1, "应识别一个列表项"
     assert "key" in special["key_value_pairs"], "应识别键值对"
+    assert special["key_value_pairs"]["key"] == "value", "键值对值应正确"
+
+    # 测试空行和空白字符
+    whitespace_text = "  \n  \n  内容  \n  \n"
+    ws_parsed = parse_text_content(whitespace_text)
+    assert ws_parsed["line_count"] > 0, "空白文本行数应大于0"
+    assert len(ws_parsed["paragraphs"]) >= 1, "应识别至少一个段落"
+
+    # 测试特殊字符
+    special_chars = "特殊字符：@#$%^&*()\n第二行：测试"
+    sc_parsed = parse_text_content(special_chars)
+    assert sc_parsed["char_count"] > 0, "特殊字符文本字符数应大于0"
+    assert len(sc_parsed["paragraphs"]) >= 1, "应识别至少一个段落"
 
     print("  ✓ 边界测试通过")
 
