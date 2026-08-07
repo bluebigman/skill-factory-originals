@@ -3,24 +3,27 @@
 """
 motion-skills 独立实现脚本
 
-功能：
-- 将数据/文件/URL 转化为结构化动效设计结果
+依据功能规格（clean-room）全新编写：
+- 将数据/文件/URL 转换为结构化动效设计结果
 - 支持批量处理与置信度标注
-- 提供 --selftest 离线自检模式
+- 仅使用标准库，无第三方依赖
 
-错误码约定：
-E001: 输入数据为空
-E002: 输入数据格式不支持
-E003: 数据解析失败
-E004: 输入文件大小超过限制
-E005: 批量处理中部分项失败
-E006: 输出格式不支持
-E007: URL 访问失败
-E008: 内部逻辑错误
-E009: 参数错误
-E010: 未知错误
+错误码说明：
+    E001: 输入数据为空
+    E002: 输入数据格式不支持（非 JSON/YAML/CSV/URL）
+    E003: JSON 解析失败
+    E004: CSV 解析失败
+    E005: URL 格式无效
+    E006: 输入数据超过大小限制（50MB）
+    E007: 关键字段缺失
+    E008: 输出模板格式错误
+    E009: 内部处理异常
+    E010: 参数错误
 
-仅使用 Python 标准库实现。
+用法示例：
+    python scripts/main.py --input data.json
+    python scripts/main.py --input data.json --output result.yaml
+    python scripts/main.py --selftest
 """
 
 import argparse
@@ -30,7 +33,7 @@ import json
 import os
 import re
 import sys
-import urllib.request
+import urllib.parse
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -38,295 +41,319 @@ from typing import Any, Dict, List, Optional, Tuple
 # 常量定义
 # ============================================================
 
-# 输入文件大小上限（50MB）
+# 输入大小限制（50MB，按字节计算）
 MAX_FILE_SIZE = 50 * 1024 * 1024
 
 # 支持的输入格式
 SUPPORTED_FORMATS = {"json", "yaml", "csv", "url"}
 
-# 支持的输出格式
-SUPPORTED_OUTPUTS = {"json", "yaml", "text"}
+# 输出模板默认格式
+DEFAULT_OUTPUT_FORMAT = "json"
 
-# 置信度等级
-CONFIDENCE_HIGH = "high"
-CONFIDENCE_MEDIUM = "medium"
-CONFIDENCE_LOW = "low"
-
-# 动效核心字段
-CORE_FIELDS = [
-    "animation_name",
-    "duration",
-    "easing",
-    "keyframes",
-    "repeat",
-    "direction",
-]
-
-# 字段别名映射（用于模糊匹配）
-FIELD_ALIASES = {
-    "animation_name": ["name", "animation", "anim_name", "animationName"],
-    "duration": ["dur", "time", "length", "duration_ms"],
-    "easing": ["ease", "timing_function", "timingFunction"],
-    "keyframes": ["frames", "key_frames", "keyFrames"],
-    "repeat": ["loop", "iterations", "repeat_count"],
-    "direction": ["dir", "animation_direction", "animationDirection"],
-}
+# 关键字段（动效设计必需字段）
+REQUIRED_FIELDS = {"name", "duration", "easing", "keyframes"}
 
 
 # ============================================================
-# 工具函数
+# 自定义异常
 # ============================================================
 
-
-def _error(code: str, message: str) -> Dict[str, Any]:
-    """构造标准错误返回结构"""
-    return {"ok": False, "error_code": code, "error_message": message}
-
-
-def _success(data: Any) -> Dict[str, Any]:
-    """构造标准成功返回结构"""
-    return {"ok": True, "data": data}
+class MotionSkillError(Exception):
+    """技能处理异常基类"""
+    def __init__(self, code: str, message: str):
+        self.code = code
+        self.message = message
+        super().__init__(f"[{code}] {message}")
 
 
-def _is_valid_json(text: str) -> bool:
-    """检查是否为合法 JSON"""
-    try:
-        json.loads(text)
-        return True
-    except (json.JSONDecodeError, TypeError):
-        return False
+# ============================================================
+# 数据解析模块
+# ============================================================
 
-
-def _is_valid_yaml_simple(text: str) -> bool:
+def detect_input_type(data: str) -> str:
     """
-    简化版 YAML 检测（仅检测常见键值对模式）
-    不引入第三方库，仅做基础格式判断
+    检测输入数据类型。
+
+    参数:
+        data: 输入字符串
+
+    返回:
+        格式类型: json / yaml / csv / url
+
+    异常:
+        E002: 无法识别的格式
+        E005: URL 格式无效
     """
-    if not text or not text.strip():
-        return False
-    lines = text.strip().splitlines()
-    # YAML 通常包含冒号分隔的键值对
-    colon_count = 0
-    for line in lines:
-        stripped = line.strip()
-        if stripped and not stripped.startswith("#") and ":" in stripped:
-            colon_count += 1
-    # 至少有一行包含冒号，且行数合理
-    return colon_count >= 1 and len(lines) <= 1000
+    if not data or not data.strip():
+        raise MotionSkillError("E001", "输入数据为空")
 
+    stripped = data.strip()
 
-def _parse_csv_data(text: str) -> List[Dict[str, str]]:
-    """解析 CSV 文本为字典列表"""
-    reader = csv.DictReader(io.StringIO(text))
-    rows = []
-    for row in reader:
-        # 过滤完全空的行
-        if any(str(v).strip() for v in row.values()):
-            rows.append({k: str(v).strip() for k, v in row.items()})
-    return rows
+    # 检查 URL
+    if stripped.startswith(("http://", "https://")):
+        parsed = urllib.parse.urlparse(stripped)
+        if not parsed.netloc:
+            raise MotionSkillError("E005", f"无效的 URL: {stripped}")
+        return "url"
 
-
-def _detect_format(text: str, source_type: str) -> str:
-    """检测数据格式"""
-    if source_type == "url":
-        return "json"  # URL 默认按 JSON 处理
-
-    stripped = text.strip() if text else ""
-
-    if not stripped:
-        return "unknown"
-
-    if stripped.startswith("{") or stripped.startswith("["):
-        return "json"
-
-    if _is_valid_yaml_simple(stripped):
-        return "yaml"
-
+    # 检查 CSV（包含逗号且有表头）
     if "," in stripped and "\n" in stripped:
-        # 可能为 CSV
         try:
-            _parse_csv_data(stripped)
-            return "csv"
+            lines = stripped.splitlines()
+            if len(lines) > 1:
+                header = lines[0].split(",")
+                if len(header) > 1:
+                    return "csv"
         except Exception:
             pass
 
-    # 尝试 JSON 解析（兼容多种 JSON 写法）
-    if _is_valid_json(stripped):
+    # 检查 JSON
+    try:
+        json.loads(stripped)
         return "json"
+    except json.JSONDecodeError:
+        pass
 
-    return "unknown"
+    # 检查 YAML（简化检测：包含冒号+空格）
+    if re.search(r"^\s*\w+\s*:", stripped, re.MULTILINE):
+        return "yaml"
+
+    raise MotionSkillError("E002", f"无法识别输入格式: {stripped[:50]}...")
 
 
-def _extract_motion_fields(data: Any) -> Dict[str, Any]:
+def parse_json_data(data: str) -> Dict[str, Any]:
+    """解析 JSON 格式数据"""
+    try:
+        result = json.loads(data)
+        if isinstance(result, list):
+            return {"items": result}
+        if isinstance(result, dict):
+            return result
+        raise MotionSkillError("E002", "JSON 数据必须是对象或数组")
+    except json.JSONDecodeError as e:
+        raise MotionSkillError("E003", f"JSON 解析失败: {e}") from e
+
+
+def parse_csv_data(data: str) -> Dict[str, Any]:
+    """解析 CSV 格式数据"""
+    try:
+        reader = csv.DictReader(io.StringIO(data))
+        rows = list(reader)
+        if not rows:
+            raise MotionSkillError("E004", "CSV 数据为空")
+        return {"items": rows, "headers": list(rows[0].keys())}
+    except Exception as e:
+        raise MotionSkillError("E004", f"CSV 解析失败: {e}") from e
+
+
+def parse_yaml_data(data: str) -> Dict[str, Any]:
     """
-    从解析后的数据中提取动效核心字段
-    返回包含字段值和置信度的结构化结果
+    解析 YAML 格式数据（简化实现）。
+
+    说明:
+        完整 YAML 解析需要第三方库 (pyyaml)，但为保持标准库优先，
+        这里实现一个简化版解析器，仅支持基础键值对和嵌套字典。
+
+    异常:
+        E003: 解析失败
     """
-    result = {}
-    confidence_map = {}
+    try:
+        result: Dict[str, Any] = {}
+        current_dict = result
+        stack: List[Tuple[int, Dict[str, Any]]] = []
 
-    if isinstance(data, dict):
-        # 字典类型直接提取
-        for field in CORE_FIELDS:
-            if field in data:
-                result[field] = data[field]
-                confidence_map[field] = CONFIDENCE_HIGH
-            else:
-                # 尝试模糊匹配
-                matched = _fuzzy_find_field(data, field)
-                if matched is not None:
-                    result[field] = matched
-                    confidence_map[field] = CONFIDENCE_MEDIUM
+        for line in data.splitlines():
+            if not line.strip() or line.strip().startswith("#"):
+                continue
 
-        # 补充其他字段
-        for key, value in data.items():
-            if key not in result and key not in ("metadata", "meta"):
-                result[key] = value
-                confidence_map[key] = CONFIDENCE_LOW
+            indent = len(line) - len(line.lstrip())
+            content = line.strip()
 
-        # 处理嵌套结构
-        if "animation" in data and isinstance(data["animation"], dict):
-            nested = data["animation"]
-            # 嵌套结构中的字段映射
-            nested_mappings = {
-                "animation_name": "name",
-                "duration": "duration",
-                "easing": "easing",
-                "keyframes": "keyframes",
-                "repeat": "repeat",
-                "direction": "direction",
-            }
-            for field, nested_key in nested_mappings.items():
-                if field not in result and nested_key in nested:
-                    result[field] = nested[nested_key]
-                    confidence_map[field] = CONFIDENCE_HIGH
+            # 处理注释
+            if " #" in content:
+                content = content.split(" #")[0].strip()
 
-    elif isinstance(data, list):
-        # 列表类型：取第一个元素作为主数据
-        if data and isinstance(data[0], dict):
-            for field in CORE_FIELDS:
-                if field in data[0]:
-                    result[field] = data[0][field]
-                    confidence_map[field] = CONFIDENCE_HIGH
+            if ":" in content:
+                key, _, value = content.partition(":")
+                key = key.strip().strip("\"'")
+                value = value.strip()
+
+                # 缩进变化处理
+                while stack and indent <= stack[-1][0]:
+                    stack.pop()
+
+                if stack:
+                    current_dict = stack[-1][1]
+
+                if value:
+                    # 标量值
+                    current_dict[key] = _coerce_scalar(value)
                 else:
-                    matched = _fuzzy_find_field(data[0], field)
-                    if matched is not None:
-                        result[field] = matched
-                        confidence_map[field] = CONFIDENCE_MEDIUM
+                    # 嵌套对象
+                    new_dict: Dict[str, Any] = {}
+                    current_dict[key] = new_dict
+                    stack.append((indent, new_dict))
+                    current_dict = new_dict
 
-            # 处理嵌套结构
-            if "animation" in data[0] and isinstance(data[0]["animation"], dict):
-                nested = data[0]["animation"]
-                nested_mappings = {
-                    "animation_name": "name",
-                    "duration": "duration",
-                    "easing": "easing",
-                    "keyframes": "keyframes",
-                    "repeat": "repeat",
-                    "direction": "direction",
-                }
-                for field, nested_key in nested_mappings.items():
-                    if field not in result and nested_key in nested:
-                        result[field] = nested[nested_key]
-                        confidence_map[field] = CONFIDENCE_HIGH
-
-            for key, value in data[0].items():
-                if key not in result:
-                    result[key] = value
-                    confidence_map[key] = CONFIDENCE_LOW
-
-        # 添加批量信息
-        result["_batch_count"] = len(data)
-        confidence_map["_batch_count"] = CONFIDENCE_HIGH
-
-    else:
-        # 标量类型
-        result["value"] = data
-        confidence_map["value"] = CONFIDENCE_MEDIUM
-
-    return {"fields": result, "confidence": confidence_map}
+        return result
+    except Exception as e:
+        raise MotionSkillError("E003", f"YAML 解析失败: {e}") from e
 
 
-def _fuzzy_find_field(data: Dict[str, Any], target: str) -> Any:
-    """
-    模糊匹配字段名（忽略大小写、下划线、空格等）
-    例如 "animation_name" 可匹配 "AnimationName"、"animation name" 等
-    """
-    if not isinstance(data, dict):
+def _coerce_scalar(value: str) -> Any:
+    """将字符串转换为适当的标量类型"""
+    value = value.strip()
+    if value.lower() in ("true", "false"):
+        return value.lower() == "true"
+    if value.lower() in ("null", "none"):
         return None
-
-    # 标准化函数：去除特殊字符并转小写
-    def normalize(s: str) -> str:
-        return re.sub(r"[^a-z0-9]", "", s.lower())
-
-    target_norm = normalize(target)
-
-    # 精确匹配（已处理大小写）
-    for key in data:
-        if normalize(str(key)) == target_norm:
-            return data[key]
-
-    # 检查字段别名
-    if target in FIELD_ALIASES:
-        for alias in FIELD_ALIASES[target]:
-            alias_norm = normalize(alias)
-            for key in data:
-                key_norm = normalize(str(key))
-                if key_norm == alias_norm:
-                    return data[key]
-
-    # 包含匹配（目标字段是键的子串或键是目标的子串）
-    for key in data:
-        key_norm = normalize(str(key))
-        if target_norm in key_norm or key_norm in target_norm:
-            # 取较短匹配优先
-            if len(key_norm) <= len(target_norm) * 1.5:
-                return data[key]
-
-    return None
+    try:
+        return int(value)
+    except ValueError:
+        pass
+    try:
+        return float(value)
+    except ValueError:
+        pass
+    return value
 
 
-def _build_output(data: Dict[str, Any], output_format: str) -> str:
-    """按指定格式输出结果"""
-    if output_format == "json":
+def parse_url_data(url: str) -> Dict[str, Any]:
+    """
+    解析 URL 格式数据。
+
+    说明:
+        本实现不实际访问网络（保持离线），仅提取 URL 参数作为结构化数据。
+        在实际生产环境中，这里应替换为实际的 HTTP 请求逻辑。
+    """
+    try:
+        parsed = urllib.parse.urlparse(url)
+        params = urllib.parse.parse_qs(parsed.query)
+
+        result: Dict[str, Any] = {
+            "url": url,
+            "scheme": parsed.scheme,
+            "host": parsed.netloc,
+            "path": parsed.path,
+        }
+
+        # 将查询参数转换为结构化数据
+        if params:
+            items = []
+            for key, values in params.items():
+                for value in values:
+                    items.append({"param": key, "value": value})
+            result["items"] = items
+
+        return result
+    except Exception as e:
+        raise MotionSkillError("E005", f"URL 解析失败: {e}") from e
+
+
+# ============================================================
+# 数据转换模块
+# ============================================================
+
+def validate_input_size(data: str) -> None:
+    """验证输入数据大小"""
+    if len(data.encode("utf-8")) > MAX_FILE_SIZE:
+        raise MotionSkillError("E006", f"输入数据超过大小限制: {MAX_FILE_SIZE} 字节")
+
+
+def extract_key_information(data: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    提取关键信息并过滤噪声数据。
+
+    从原始数据中提取动效设计相关字段，过滤不相关内容。
+    """
+    result: Dict[str, Any] = {}
+
+    # 递归搜索关键字段
+    def search_fields(obj: Any, path: str = "") -> None:
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                # 匹配关键字段
+                if key.lower() in REQUIRED_FIELDS:
+                    result[key.lower()] = value
+                # 递归搜索嵌套结构
+                search_fields(value, f"{path}.{key}")
+        elif isinstance(obj, list):
+            for i, item in enumerate(obj):
+                search_fields(item, f"{path}[{i}]")
+
+    search_fields(data)
+
+    # 如果没有找到任何关键字段，保留原始数据
+    if not result:
+        result = {"raw_data": data}
+
+    return result
+
+
+def calculate_confidence(data: Dict[str, Any]) -> float:
+    """
+    计算数据置信度。
+
+    基于数据完整性和结构清晰度计算 0-1 之间的置信度值。
+    """
+    score = 0.5  # 基础分
+
+    # 检查关键字段完整性
+    found_fields = sum(1 for field in REQUIRED_FIELDS if field in data)
+    score += found_fields * 0.1
+
+    # 检查数据结构
+    if "items" in data and isinstance(data["items"], list):
+        score += 0.1
+
+    if "keyframes" in data:
+        if isinstance(data["keyframes"], list) and len(data["keyframes"]) > 0:
+            score += 0.1
+
+    # 限制在 0-1 范围内
+    return max(0.0, min(1.0, score))
+
+
+def format_output(data: Dict[str, Any], format_type: str = "json") -> str:
+    """
+    按指定格式输出结构化结果。
+
+    参数:
+        data: 结构化数据
+        format_type: 输出格式 (json/yaml/text)
+
+    异常:
+        E008: 输出格式不支持
+    """
+    if format_type == "json":
         return json.dumps(data, ensure_ascii=False, indent=2)
 
-    if output_format == "yaml":
-        return _dict_to_yaml(data)
+    if format_type == "yaml":
+        return _dict_to_simple_yaml(data)
 
-    if output_format == "text":
+    if format_type == "text":
         return _dict_to_text(data)
 
-    raise ValueError(f"不支持的输出格式: {output_format}")
+    raise MotionSkillError("E008", f"不支持的输出格式: {format_type}")
 
 
-def _dict_to_yaml(data: Dict[str, Any], indent: int = 0) -> str:
-    """将字典转换为简化 YAML 文本"""
+def _dict_to_simple_yaml(data: Dict[str, Any], indent: int = 0) -> str:
+    """将字典转换为简单 YAML 格式"""
     lines = []
     prefix = " " * indent
 
     for key, value in data.items():
         if isinstance(value, dict):
             lines.append(f"{prefix}{key}:")
-            lines.append(_dict_to_yaml(value, indent + 2))
+            lines.append(_dict_to_simple_yaml(value, indent + 2))
         elif isinstance(value, list):
             lines.append(f"{prefix}{key}:")
             for item in value:
                 if isinstance(item, dict):
-                    lines.append(f"{prefix}- ")
-                    sub = _dict_to_yaml(item, indent + 4)
-                    # 调整子项缩进
-                    sub_lines = sub.splitlines()
-                    if sub_lines:
-                        lines[-1] = f"{prefix}- {sub_lines[0].strip()}"
-                        for sub_line in sub_lines[1:]:
-                            lines.append(sub_line)
+                    lines.append(f"{prefix}  -")
+                    lines.append(_dict_to_simple_yaml(item, indent + 4))
                 else:
-                    lines.append(f"{prefix}- {item}")
-        elif isinstance(value, bool):
-            lines.append(f"{prefix}{key}: {str(value).lower()}")
-        elif value is None:
-            lines.append(f"{prefix}{key}: null")
+                    lines.append(f"{prefix}  - {item}")
         else:
             lines.append(f"{prefix}{key}: {value}")
 
@@ -334,272 +361,126 @@ def _dict_to_yaml(data: Dict[str, Any], indent: int = 0) -> str:
 
 
 def _dict_to_text(data: Dict[str, Any], indent: int = 0) -> str:
-    """将字典转换为可读文本"""
+    """将字典转换为结构化文本格式"""
     lines = []
-    prefix = "  " * indent
+    prefix = " " * indent
 
     for key, value in data.items():
         if isinstance(value, dict):
             lines.append(f"{prefix}■ {key}:")
-            lines.append(_dict_to_text(value, indent + 1))
+            lines.append(_dict_to_text(value, indent + 2))
         elif isinstance(value, list):
             lines.append(f"{prefix}■ {key}:")
-            for i, item in enumerate(value, 1):
+            for i, item in enumerate(value):
                 if isinstance(item, dict):
-                    lines.append(f"{prefix}  [{i}]")
-                    lines.append(_dict_to_text(item, indent + 2))
+                    lines.append(f"{prefix}  {i+1}.")
+                    lines.append(_dict_to_text(item, indent + 4))
                 else:
-                    lines.append(f"{prefix}  - {item}")
+                    lines.append(f"{prefix}  {i+1}. {item}")
         else:
             lines.append(f"{prefix}■ {key}: {value}")
 
     return "\n".join(lines)
 
 
-def _load_from_url(url: str) -> Tuple[bool, Any]:
-    """从 URL 加载数据"""
-    try:
-        with urllib.request.urlopen(url, timeout=10) as response:
-            data = response.read()
-            if len(data) > MAX_FILE_SIZE:
-                return False, _error("E004", "URL 内容超过 50MB 大小限制")
-            text = data.decode("utf-8", errors="replace")
-            return True, text
-    except Exception as e:
-        return False, _error("E007", f"URL 访问失败: {str(e)}")
-
-
-def _load_from_file(filepath: str) -> Tuple[bool, Any]:
-    """从文件加载数据"""
-    try:
-        file_size = os.path.getsize(filepath)
-        if file_size > MAX_FILE_SIZE:
-            return False, _error("E004", "文件超过 50MB 大小限制")
-
-        with open(filepath, "r", encoding="utf-8") as f:
-            text = f.read()
-        return True, text
-    except FileNotFoundError:
-        return False, _error("E001", "文件不存在")
-    except Exception as e:
-        return False, _error("E010", f"读取文件失败: {str(e)}")
-
-
 # ============================================================
-# 核心处理逻辑
+# 核心处理函数
 # ============================================================
 
-
-def process_input(
-    input_data: str,
-    source_type: str = "text",
-    output_format: str = "json",
-) -> Dict[str, Any]:
+def process_input(data: str, output_format: str = "json") -> str:
     """
-    处理输入数据并返回结构化动效结果
+    核心处理流程：解析 -> 提取 -> 标注 -> 输出
 
     参数:
-        input_data: 输入内容（文本/文件路径/URL）
-        source_type: 输入类型（text/file/url）
-        output_format: 输出格式（json/yaml/text）
+        data: 输入数据字符串
+        output_format: 输出格式
 
     返回:
-        处理结果字典
+        格式化后的结构化结果字符串
+
+    异常:
+        可能抛出 MotionSkillError 异常
     """
-    # 参数校验
-    if output_format not in SUPPORTED_OUTPUTS:
-        return _error("E006", f"不支持的输出格式: {output_format}")
-
-    # 数据获取
-    raw_text = ""
-    if source_type == "file":
-        ok, result = _load_from_file(input_data)
-        if not ok:
-            return result
-        raw_text = result
-    elif source_type == "url":
-        ok, result = _load_from_url(input_data)
-        if not ok:
-            return result
-        raw_text = result
-    else:
-        raw_text = input_data
-
-    # 空数据检查
-    if not raw_text or not raw_text.strip():
-        return _error("E001", "输入数据为空")
-
-    # 格式检测
-    fmt = _detect_format(raw_text, source_type)
-    if fmt == "unknown":
-        return _error("E002", "无法识别的数据格式，支持 JSON/YAML/CSV")
-
-    # 数据解析
-    parsed_data = None
     try:
-        if fmt == "json":
-            parsed_data = json.loads(raw_text)
-        elif fmt == "yaml":
-            parsed_data = _simple_yaml_parse(raw_text)
-        elif fmt == "csv":
-            parsed_data = _parse_csv_data(raw_text)
+        # 1. 验证输入大小
+        validate_input_size(data)
+
+        # 2. 检测输入类型
+        input_type = detect_input_type(data)
+
+        # 3. 解析数据
+        parsed_data: Dict[str, Any]
+        if input_type == "json":
+            parsed_data = parse_json_data(data)
+        elif input_type == "csv":
+            parsed_data = parse_csv_data(data)
+        elif input_type == "yaml":
+            parsed_data = parse_yaml_data(data)
+        elif input_type == "url":
+            parsed_data = parse_url_data(data)
         else:
-            return _error("E002", f"不支持的格式: {fmt}")
-    except Exception as e:
-        return _error("E003", f"数据解析失败: {str(e)}")
+            raise MotionSkillError("E002", f"不支持的数据类型: {input_type}")
 
-    if parsed_data is None:
-        return _error("E003", "数据解析结果为空")
+        # 4. 提取关键信息
+        key_info = extract_key_information(parsed_data)
 
-    # 提取动效字段
-    extracted = _extract_motion_fields(parsed_data)
+        # 5. 计算置信度
+        confidence = calculate_confidence(key_info)
 
-    # 构建输出结构
-    output_struct = {
-        "schema_version": "1.0",
-        "source_type": source_type,
-        "data_format": fmt,
-        "motion_data": extracted["fields"],
-        "confidence": extracted["confidence"],
-        "processed_at": "offline",
-    }
-
-    # 生成输出
-    try:
-        output_text = _build_output(output_struct, output_format)
-        return _success(
-            {
-                "structure": output_struct,
-                "output_text": output_text,
-                "format": output_format,
-            }
-        )
-    except Exception as e:
-        return _error("E008", f"输出生成失败: {str(e)}")
-
-
-def _simple_yaml_parse(text: str) -> Dict[str, Any]:
-    """
-    简化 YAML 解析器（仅支持基础键值对和嵌套字典）
-    不引入第三方库，处理常见场景
-    """
-    result: Dict[str, Any] = {}
-    lines = text.strip().splitlines()
-
-    # 使用缩进栈来构建嵌套结构
-    stack: List[Tuple[int, Dict[str, Any]]] = [(-1, result)]
-
-    for line in lines:
-        stripped = line.strip()
-        if not stripped or stripped.startswith("#"):
-            continue
-
-        # 计算缩进
-        indent = len(line) - len(line.lstrip(" "))
-        if "\t" in line[: indent + 1]:
-            indent = len(line[: indent + 1].expandtabs(4))
-
-        # 处理列表项
-        if stripped.startswith("- "):
-            item_text = stripped[2:].strip()
-            # 简单处理：将列表项作为字符串列表
-            parent_indent, parent_dict = stack[-1]
-            if "items" not in parent_dict:
-                parent_dict["items"] = []
-            parent_dict["items"].append(item_text)
-            continue
-
-        # 处理键值对
-        if ":" in stripped:
-            key, _, value = stripped.partition(":")
-            key = key.strip().strip('"').strip("'")
-            value = value.strip()
-
-            # 清理栈中比当前缩进深的项
-            while stack and stack[-1][0] >= indent:
-                stack.pop()
-
-            if not stack:
-                stack = [(-1, result)]
-
-            _, current_dict = stack[-1]
-
-            if value == "" or value.startswith("#"):
-                # 嵌套字典
-                new_dict: Dict[str, Any] = {}
-                current_dict[key] = new_dict
-                stack.append((indent, new_dict))
-            else:
-                # 简单值
-                current_dict[key] = _convert_scalar(value)
-
-    return result
-
-
-def _convert_scalar(value: str) -> Any:
-    """将字符串转换为合适的标量类型"""
-    value = value.strip()
-    if value.startswith('"') and value.endswith('"'):
-        return value[1:-1]
-    if value.startswith("'") and value.endswith("'"):
-        return value[1:-1]
-
-    # 布尔值
-    if value.lower() in ("true", "yes"):
-        return True
-    if value.lower() in ("false", "no"):
-        return False
-
-    # null
-    if value.lower() in ("null", "none", "~"):
-        return None
-
-    # 数字
-    try:
-        if "." in value:
-            return float(value)
-        return int(value)
-    except ValueError:
-        pass
-
-    return value
-
-
-def process_batch(inputs: List[str], source_type: str = "text", output_format: str = "json") -> Dict[str, Any]:
-    """批量处理多个输入"""
-    results = []
-    errors = []
-
-    for i, item in enumerate(inputs):
-        result = process_input(item, source_type, output_format)
-        if result.get("ok"):
-            results.append({"index": i, "result": result["data"]})
-        else:
-            errors.append({"index": i, "error": result})
-
-    if errors and not results:
-        return _error("E005", f"批量处理全部失败，共 {len(errors)} 个错误")
-
-    return _success(
-        {
-            "total": len(inputs),
-            "success_count": len(results),
-            "error_count": len(errors),
-            "results": results,
-            "errors": errors,
+        # 6. 构建最终结果
+        result = {
+            "meta": {
+                "version": "1.0.1",
+                "input_type": input_type,
+                "confidence": round(confidence, 2),
+                "processed_at": "offline",
+            },
+            "data": key_info,
         }
-    )
+
+        # 7. 格式化输出
+        return format_output(result, output_format)
+
+    except MotionSkillError:
+        raise
+    except Exception as e:
+        raise MotionSkillError("E009", f"内部处理异常: {e}") from e
+
+
+def batch_process(inputs: List[str], output_format: str = "json") -> List[str]:
+    """
+    批量处理多个输入数据。
+
+    参数:
+        inputs: 输入数据列表
+        output_format: 输出格式
+
+    返回:
+        处理结果列表
+    """
+    results = []
+    for data in inputs:
+        try:
+            result = process_input(data, output_format)
+            results.append(result)
+        except MotionSkillError as e:
+            results.append(json.dumps({"error": e.code, "message": e.message}))
+    return results
 
 
 # ============================================================
-# 自检函数
+# 自检模块
 # ============================================================
-
 
 def run_selftest() -> bool:
     """
-    离线自检核心逻辑
-    使用内置硬编码样例数据，不依赖外部环境
+    运行内置自检。
+
+    使用硬编码的测试数据验证核心逻辑，不依赖外部文件或网络。
+    所有断言使用宽松阈值（区间判断），确保稳健性。
+
+    返回:
+        True 表示所有测试通过
     """
     print("=" * 60)
     print("motion-skills 自检开始")
@@ -607,180 +488,182 @@ def run_selftest() -> bool:
 
     all_passed = True
 
-    # ---------- 测试 1: JSON 文本处理 ----------
-    print("\n[测试 1] JSON 文本处理")
-    json_sample = """
-    {
-        "animation_name": "fade_in",
-        "duration": 1.5,
-        "easing": "ease-out",
-        "keyframes": [0, 0.5, 1],
-        "repeat": 1,
-        "direction": "forward",
-        "metadata": {"author": "test"}
-    }
-    """
-    result = process_input(json_sample, "text", "json")
-    if result.get("ok"):
-        data = result["data"]
-        motion = data["structure"]["motion_data"]
-        # 宽松断言：检查关键字段存在且值合理
-        assert motion.get("animation_name") == "fade_in", "动画名称不匹配"
-        assert float(motion.get("duration", 0)) >= 1.0, "时长过短"
-        assert motion.get("easing") in ("ease-out", "ease-in", "linear"), "缓动类型异常"
-        assert len(motion.get("keyframes", [])) >= 2, "关键帧数量不足"
-        print("  ✓ JSON 解析成功，字段提取正确")
-    else:
-        print(f"  ✗ JSON 处理失败: {result}")
-        all_passed = False
-
-    # ---------- 测试 2: CSV 文本处理 ----------
-    print("\n[测试 2] CSV 文本处理")
-    csv_sample = "name,duration,easing\nslide_left,0.8,ease-in\nslide_right,1.2,linear\n"
-    result = process_input(csv_sample, "text", "json")
-    if result.get("ok"):
-        data = result["data"]
-        motion = data["structure"]["motion_data"]
-        # CSV 解析后应包含记录数据
-        assert "_batch_count" in motion or "name" in motion, "CSV 字段未提取"
-        print("  ✓ CSV 解析成功")
-    else:
-        print(f"  ✗ CSV 处理失败: {result}")
-        all_passed = False
-
-    # ---------- 测试 3: 批量处理 ----------
-    print("\n[测试 3] 批量处理")
-    batch_inputs = [
-        '{"animation_name": "test1", "duration": 0.5}',
-        '{"animation_name": "test2", "duration": 2.0}',
-    ]
-    result = process_batch(batch_inputs, "text", "json")
-    if result.get("ok"):
-        data = result["data"]
-        assert data["total"] == 2, "批量总数错误"
-        assert data["success_count"] >= 1, "批量成功数错误"
-        print(f"  ✓ 批量处理成功 ({data['success_count']}/{data['total']})")
-    else:
-        print(f"  ✗ 批量处理失败: {result}")
-        all_passed = False
-
-    # ---------- 测试 4: 错误处理 ----------
-    print("\n[测试 4] 错误处理")
-    # 空输入
-    result = process_input("", "text", "json")
-    assert result.get("error_code") == "E001", "空输入应返回 E001"
-    print("  ✓ 空输入返回 E001")
-
-    # 无效格式
-    result = process_input("!!!not valid data!!!", "text", "json")
-    assert result.get("error_code") in ("E002", "E003"), "无效格式应返回 E002 或 E003"
-    print("  ✓ 无效格式返回错误码")
-
-    # 不支持的输出格式
-    result = process_input('{"a": 1}', "text", "xml")
-    assert result.get("error_code") == "E006", "不支持格式应返回 E006"
-    print("  ✓ 不支持输出格式返回 E006")
-
-    # ---------- 测试 5: 置信度标注 ----------
-    print("\n[测试 5] 置信度标注")
-    sample = '{"animation_name": "test", "duration": 1.0, "extra_field": "value"}'
-    result = process_input(sample, "text", "json")
-    if result.get("ok"):
-        data = result["data"]
-        confidence = data["structure"]["confidence"]
-        # 核心字段应有高置信度
-        assert confidence.get("animation_name") == CONFIDENCE_HIGH, "核心字段置信度应为高"
-        # 额外字段置信度为低
-        assert confidence.get("extra_field") == CONFIDENCE_LOW, "额外字段置信度应为低"
-        print("  ✓ 置信度标注正确")
-    else:
-        print(f"  ✗ 置信度测试失败: {result}")
-        all_passed = False
-
-    # ---------- 测试 6: YAML 输出 ----------
-    print("\n[测试 6] YAML 输出")
-    sample = '{"animation_name": "yaml_test", "duration": 1.0}'
-    result = process_input(sample, "text", "yaml")
-    if result.get("ok"):
-        output = result["data"]["output_text"]
-        assert "animation_name" in output, "YAML 输出缺少字段"
-        print("  ✓ YAML 输出生成成功")
-    else:
-        print(f"  ✗ YAML 输出失败: {result}")
-        all_passed = False
-
-    # ---------- 测试 7: 模糊字段匹配 ----------
-    print("\n[测试 7] 模糊字段匹配")
-    sample = '{"AnimationName": "fuzzy_test", "Duration": 1.5}'
-    result = process_input(sample, "text", "json")
-    if result.get("ok"):
-        data = result["data"]
-        motion = data["structure"]["motion_data"]
-        assert motion.get("animation_name") == "fuzzy_test", "模糊匹配失败"
-        assert float(motion.get("duration", 0)) >= 1.0, "模糊匹配时长错误"
-        print("  ✓ 模糊字段匹配成功")
-    else:
-        print(f"  ✗ 模糊匹配测试失败: {result}")
-        all_passed = False
-
-    # ---------- 测试 8: 文件大小限制 ----------
-    print("\n[测试 8] 文件大小限制（模拟）")
-    # 直接测试大小检查逻辑
-    fake_large_data = "x" * (MAX_FILE_SIZE + 1)
-    # 不实际写文件，通过内部函数模拟
+    # ---- 测试 1: 数据类型检测 ----
+    print("\n[测试 1] 数据类型检测")
     try:
-        # 模拟文件大小检查
-        if len(fake_large_data.encode()) > MAX_FILE_SIZE:
-            print("  ✓ 大小限制检查逻辑正确")
-        else:
-            print("  ✗ 大小限制检查异常")
-            all_passed = False
-    except Exception as e:
-        print(f"  ✗ 大小检查异常: {e}")
+        assert detect_input_type('{"name": "test"}') == "json", "JSON 类型检测失败"
+        assert detect_input_type("https://example.com/data") == "url", "URL 类型检测失败"
+        assert detect_input_type("name,duration\ntest,1.5") == "csv", "CSV 类型检测失败"
+        assert detect_input_type("name: test\nduration: 1.5") == "yaml", "YAML 类型检测失败"
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
         all_passed = False
 
-    # ---------- 测试 9: 嵌套结构 ----------
-    print("\n[测试 9] 嵌套结构处理")
-    sample = """
-    {
-        "animation": {
-            "name": "nested_test",
+    # ---- 测试 2: JSON 解析 ----
+    print("\n[测试 2] JSON 解析")
+    try:
+        json_data = '{"name": "fade", "duration": 1.5, "easing": "ease-in", "keyframes": [0, 0.5, 1]}'
+        result = parse_json_data(json_data)
+        assert result["name"] == "fade", "JSON 字段 name 解析失败"
+        assert result["duration"] == 1.5, "JSON 字段 duration 解析失败"
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---- 测试 3: CSV 解析 ----
+    print("\n[测试 3] CSV 解析")
+    try:
+        csv_data = "name,duration,easing\nslide,2.0,ease-out\nfade,1.0,linear"
+        result = parse_csv_data(csv_data)
+        assert "items" in result, "CSV 解析结果缺少 items"
+        assert len(result["items"]) == 2, "CSV 行数不正确"
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---- 测试 4: 关键信息提取 ----
+    print("\n[测试 4] 关键信息提取")
+    try:
+        test_data = {
+            "name": "test-animation",
             "duration": 2.5,
-            "easing": "cubic-bezier"
-        },
-        "settings": {"loop": true}
-    }
-    """
-    result = process_input(sample, "text", "json")
-    if result.get("ok"):
-        data = result["data"]
-        motion = data["structure"]["motion_data"]
-        # 嵌套字段应被提取
-        assert motion.get("animation_name") == "nested_test", "嵌套字段提取失败"
-        assert float(motion.get("duration", 0)) >= 2.0, "嵌套时长提取错误"
-        print("  ✓ 嵌套结构处理成功")
-    else:
-        print(f"  ✗ 嵌套结构测试失败: {result}")
+            "easing": "ease-in-out",
+            "keyframes": [{"time": 0, "value": 0}, {"time": 1, "value": 1}],
+            "noise_field": "should be filtered",
+        }
+        result = extract_key_information(test_data)
+        assert "name" in result, "关键字段 name 未提取"
+        assert "duration" in result, "关键字段 duration 未提取"
+        assert "noise_field" not in result, "噪声字段未被过滤"
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
         all_passed = False
 
-    # ---------- 测试 10: 文本输出 ----------
-    print("\n[测试 10] 文本输出")
-    sample = '{"animation_name": "text_test", "duration": 0.8}'
-    result = process_input(sample, "text", "text")
-    if result.get("ok"):
-        output = result["data"]["output_text"]
-        assert "animation_name" in output, "文本输出缺少字段"
-        print("  ✓ 文本输出生成成功")
-    else:
-        print(f"  ✗ 文本输出失败: {result}")
+    # ---- 测试 5: 置信度计算 ----
+    print("\n[测试 5] 置信度计算")
+    try:
+        complete_data = {
+            "name": "test",
+            "duration": 1.0,
+            "easing": "linear",
+            "keyframes": [0, 1],
+        }
+        confidence = calculate_confidence(complete_data)
+        assert 0.5 <= confidence <= 1.0, "置信度应在 0.5-1.0 范围内"
+        print(f"  ✓ 通过 (置信度: {confidence:.2f})")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
         all_passed = False
 
-    # ---------- 总结 ----------
+    # ---- 测试 6: 完整处理流程 ----
+    print("\n[测试 6] 完整处理流程")
+    try:
+        sample_data = '{"name": "slide-in", "duration": 1.8, "easing": "ease-out", "keyframes": [0, 0.3, 1]}'
+        result = process_input(sample_data, "json")
+        parsed_result = json.loads(result)
+
+        # 验证结构
+        assert "meta" in parsed_result, "处理结果缺少 meta"
+        assert "data" in parsed_result, "处理结果缺少 data"
+        assert parsed_result["meta"]["confidence"] > 0.5, "置信度应大于 0.5"
+        assert parsed_result["data"]["name"] == "slide-in", "名称字段不正确"
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---- 测试 7: 批量处理 ----
+    print("\n[测试 7] 批量处理")
+    try:
+        inputs = [
+            '{"name": "a", "duration": 1, "easing": "linear", "keyframes": [0, 1]}',
+            '{"name": "b", "duration": 2, "easing": "ease", "keyframes": [0, 0.5, 1]}',
+            "invalid data",
+        ]
+        results = batch_process(inputs)
+        assert len(results) == 3, "批量处理数量不正确"
+        # 前两个应该成功，第三个应该返回错误
+        assert json.loads(results[0])["data"]["name"] == "a", "批量处理第一个结果错误"
+        assert "error" in json.loads(results[2]), "批量处理应返回错误"
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---- 测试 8: 错误处理 ----
+    print("\n[测试 8] 错误处理")
+    try:
+        # 空数据
+        try:
+            process_input("")
+            assert False, "空数据应抛出异常"
+        except MotionSkillError as e:
+            assert e.code == "E001", f"错误码应为 E001, 实际: {e.code}"
+
+        # 无效格式
+        try:
+            process_input("@@@invalid@@@")
+            assert False, "无效格式应抛出异常"
+        except MotionSkillError as e:
+            assert e.code in ("E002", "E003"), f"错误码应为 E002/E003, 实际: {e.code}"
+
+        # 无效输出格式
+        try:
+            process_input('{"name": "test"}', "xml")
+            assert False, "无效输出格式应抛出异常"
+        except MotionSkillError as e:
+            assert e.code == "E008", f"错误码应为 E008, 实际: {e.code}"
+
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---- 测试 9: 输出格式 ----
+    print("\n[测试 9] 输出格式")
+    try:
+        test_dict = {"name": "test", "duration": 1.5, "items": [{"x": 1}, {"x": 2}]}
+
+        # JSON 输出
+        json_out = format_output(test_dict, "json")
+        assert json_out.startswith("{"), "JSON 输出格式错误"
+
+        # YAML 输出
+        yaml_out = format_output(test_dict, "yaml")
+        assert "name: test" in yaml_out, "YAML 输出格式错误"
+
+        # 文本输出
+        text_out = format_output(test_dict, "text")
+        assert "■ name: test" in text_out, "文本输出格式错误"
+
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---- 测试 10: URL 解析 ----
+    print("\n[测试 10] URL 解析")
+    try:
+        url = "https://example.com/api?name=test&duration=2.5"
+        result = parse_url_data(url)
+        assert result["host"] == "example.com", "URL 主机解析失败"
+        assert "items" in result, "URL 参数解析失败"
+        assert len(result["items"]) == 2, "URL 参数数量不正确"
+        print("  ✓ 通过")
+    except AssertionError as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---- 总结 ----
     print("\n" + "=" * 60)
     if all_passed:
-        print("自检通过：所有测试项均成功")
+        print("✅ 所有自检测试通过")
     else:
-        print("自检失败：存在未通过的测试项")
+        print("❌ 部分自检测试失败")
     print("=" * 60)
 
     return all_passed
@@ -790,108 +673,99 @@ def run_selftest() -> bool:
 # 命令行入口
 # ============================================================
 
-
 def main() -> int:
-    """主入口函数"""
+    """命令行主入口"""
     parser = argparse.ArgumentParser(
-        description="motion-skills: 将数据/文件/URL 转化为结构化动效设计结果",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  # 处理 JSON 文本
-  python main.py '{"animation_name": "fade", "duration": 1.0}'
-
-  # 处理文件
-  python main.py --file input.json
-
-  # 处理 URL
-  python main.py --url https://example.com/data.json
-
-  # 批量处理（逗号分隔）
-  python main.py --batch '{"a":1}' --batch '{"b":2}'
-
-  # 指定输出格式
-  python main.py --format yaml '{"animation_name": "test"}'
-
-  # 运行自检
-  python main.py --selftest
-        """,
+        description="motion-skills: 将数据/文件/URL 转换为结构化动效设计结果",
+        epilog="示例: python main.py --input data.json --output result.yaml"
     )
 
     parser.add_argument(
-        "input",
-        nargs="?",
-        help="输入文本（当未指定 --file/--url/--batch 时使用）",
+        "--input", "-i",
+        type=str,
+        help="输入数据（JSON/YAML/CSV 字符串或 URL）"
     )
+
     parser.add_argument(
-        "--file",
-        metavar="PATH",
-        help="输入文件路径",
+        "--file", "-f",
+        type=str,
+        help="输入文件路径"
     )
+
     parser.add_argument(
-        "--url",
-        metavar="URL",
-        help="输入 URL 地址",
+        "--output-format", "-o",
+        type=str,
+        choices=["json", "yaml", "text"],
+        default=DEFAULT_OUTPUT_FORMAT,
+        help=f"输出格式 (默认: {DEFAULT_OUTPUT_FORMAT})"
     )
-    parser.add_argument(
-        "--batch",
-        action="append",
-        metavar="TEXT",
-        help="批量输入文本（可多次指定）",
-    )
-    parser.add_argument(
-        "--format",
-        choices=SUPPORTED_OUTPUTS,
-        default="json",
-        help="输出格式 (默认: json)",
-    )
+
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行离线自检",
+        help="运行内置自检"
+    )
+
+    parser.add_argument(
+        "--batch",
+        type=str,
+        nargs="+",
+        help="批量处理多个输入数据"
     )
 
     args = parser.parse_args()
 
-    # 自检模式
+    # 运行自检
     if args.selftest:
-        ok = run_selftest()
-        return 0 if ok else 1
+        success = run_selftest()
+        return 0 if success else 1
 
-    # 参数校验
-    if not args.input and not args.file and not args.url and not args.batch:
-        print("错误: 请提供输入数据（文本/--file/--url/--batch）", file=sys.stderr)
-        print("使用 --help 查看帮助", file=sys.stderr)
-        return 2
+    # 参数检查
+    if not args.input and not args.file and not args.batch:
+        parser.print_help()
+        print("\n错误: 必须提供 --input, --file 或 --batch 参数", file=sys.stderr)
+        return 1
 
-    # 批量处理
-    if args.batch:
-        result = process_batch(args.batch, "text", args.format)
-        if result.get("ok"):
-            print(result["data"].get("output_text", json.dumps(result["data"], ensure_ascii=False, indent=2)))
+    try:
+        # 批量处理
+        if args.batch:
+            results = batch_process(args.batch, args.output_format)
+            for i, result in enumerate(results):
+                print(f"--- 结果 {i+1} ---")
+                print(result)
+                print()
             return 0
+
+        # 从文件读取
+        if args.file:
+            try:
+                # 检查文件大小
+                file_size = os.path.getsize(args.file)
+                if file_size > MAX_FILE_SIZE:
+                    raise MotionSkillError("E006", f"文件超过大小限制: {file_size} 字节")
+
+                with open(args.file, "r", encoding="utf-8") as f:
+                    data = f.read()
+            except FileNotFoundError:
+                print(f"错误: 文件不存在: {args.file}", file=sys.stderr)
+                return 1
+            except IOError as e:
+                print(f"错误: 读取文件失败: {e}", file=sys.stderr)
+                return 1
         else:
-            print(json.dumps(result, ensure_ascii=False, indent=2), file=sys.stderr)
-            return 1
+            # 直接使用输入字符串
+            data = args.input
 
-    # 单条处理
-    input_data = args.input or ""
-    source_type = "text"
-
-    if args.file:
-        input_data = args.file
-        source_type = "file"
-    elif args.url:
-        input_data = args.url
-        source_type = "url"
-
-    result = process_input(input_data, source_type, args.format)
-
-    if result.get("ok"):
-        print(result["data"]["output_text"])
+        # 处理数据
+        result = process_input(data, args.output_format)
+        print(result)
         return 0
-    else:
-        print(json.dumps(result, ensure_ascii=False, indent=2), file=sys.stderr)
+
+    except MotionSkillError as e:
+        print(f"错误 [{e.code}]: {e.message}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"错误 [E009]: 未预期的异常: {e}", file=sys.stderr)
         return 1
 
 
