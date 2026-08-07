@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 toggl-tally 工时数据整理技能 - 独立实现脚本
-版本: 1.0.1 (clean-room 实现)
+版本: 1.0.2 (clean-room 实现)
 """
 
 import json
@@ -266,10 +266,6 @@ def _parse_text_data(text: str) -> List[Dict[str, Any]]:
     lines = [line.strip() for line in text.split("\n") if line.strip()]
 
     for i, line in enumerate(lines):
-        # 跳过可能的表头
-        if i == 0 and any(kw in line.lower() for kw in ["project", "description", "duration", "项目", "描述", "时长"]):
-            continue
-
         # 尝试逗号/制表符分隔
         parts = re.split(r"[,;\t|]", line)
         parts = [p.strip() for p in parts if p.strip()]
@@ -372,7 +368,14 @@ def process_data(input_data: Any) -> Dict[str, Any]:
                     else:
                         raw_records = _parse_text_data(text)
             elif "," in text or "\t" in text:
-                raw_records = _parse_csv_data(text)
+                # 检查是否有表头
+                first_line = text.split("\n")[0].strip().lower()
+                if any(kw in first_line for kw in ["project", "description", "duration", "项目", "描述", "时长"]):
+                    # 有表头，按 CSV 处理
+                    raw_records = _parse_csv_data(text)
+                else:
+                    # 无表头，尝试按文本处理
+                    raw_records = _parse_text_data(text)
             else:
                 raw_records = _parse_text_data(text)
         elif isinstance(input_data, list):
