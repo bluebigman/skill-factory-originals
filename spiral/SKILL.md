@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: spiral
 name: spiral
-displayName: 数据库客户端 跨平台管理 ERD可视化
+displayName: 数据库管理 ERD可视化 跨库客户端
 description: 跨平台数据库客户端，支持SQL与NoSQL管理及ERD可视化操作。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/spiral
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DataFlow Studio
+author: LingDataWorks
 agent_created: true
-trigger_words: ["spiral", "数据库客户端", "ERD可视化", "SQL管理", "NoSQL管理"]
+trigger_words: ["spiral", "数据库客户端", "ERD可视化", "SQL管理", "NoSQL管理", "数据建模", "表结构设计"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -33,37 +33,33 @@ trigger_words: ["spiral", "数据库客户端", "ERD可视化", "SQL管理", "No
 
 # spiral — 跨平台数据库客户端与 ERD 可视化操作指南
 
-## 一、能力边界（一页纸速查卡）
+## 1. 能力边界（一页纸速查卡）
 
-### 1.1 核心能力清单
+### 1.1 能做
 
-| 序号 | 能力项 | 说明 | 适用场景 |
-|------|--------|------|----------|
-| 1 | 多类型数据库连接 | 支持 SQL（MySQL/PostgreSQL/SQLite 等）与 NoSQL（MongoDB/Redis 等） | 日常开发、测试环境管理 |
-| 2 | 交互式 ERD 可视化 | 将表结构、字段关系以实体-关系图呈现 | 数据库设计评审、文档输出 |
-| 3 | 查询执行与结果导出 | 执行 SQL 查询，结果可导出为 CSV/JSON | 数据分析、报表生成 |
-| 4 | 批量操作支持 | 多表批量更新、删除、结构同步 | 版本升级、数据清洗 |
-| 5 | 自定义格式输出 | 按用户指定字段结构生成结果 | 接口对接、数据迁移 |
+| 能力项 | 说明 | 典型场景 |
+|--------|------|----------|
+| 多数据库连接 | 支持主流 SQL（MySQL、PostgreSQL、SQLite、SQL Server）与 NoSQL（MongoDB、Redis） | 同时管理开发库与生产库 |
+| SQL 编辑与执行 | 语法高亮、多语句执行、执行计划查看 | 编写复杂联表查询 |
+| NoSQL 数据操作 | 文档增删改查、集合/索引管理 | 调整 MongoDB 文档结构 |
+| ERD 可视化 | 自动生成实体关系图，支持拖拽布局与导出 | 向团队展示表间外键关系 |
+| 数据导出导入 | CSV、JSON、SQL 脚本格式 | 迁移测试数据到新环境 |
+| 连接配置管理 | 加密保存连接串，支持环境分组 | 区分 dev/staging/prod 配置 |
 
-### 1.2 能力边界声明
+### 1.2 不能做
 
-**能做：**
-- 解析用户提供的数据库连接串、SQL 文件、ERD 描述文本
-- 识别表名、字段名、数据类型、主外键关系
-- 按约定格式输出结构化结果（JSON/CSV/Markdown 表格）
-- 对不确定项标注置信度提示
+- 不提供数据库性能调优建议（如索引优化策略）
+- 不替代数据库备份工具（仅提供导出功能）
+- 不支持分布式事务协调
+- 不包含数据脱敏或合规审计功能
+- 不提供跨数据库的实时数据同步
 
-**不能做：**
-- 无法直接连接真实数据库执行操作（需用户提供连接信息）
-- 无法自动推断缺失的表结构或字段类型
-- 无法处理加密数据库文件或私有协议
-- 不提供数据备份或恢复功能
+### 1.3 适用对象
 
-**适用对象：**
-- 数据库管理员（DBA）
-- 后端开发工程师
-- 数据分析师
-- 系统架构师
+- 后端开发人员：日常 SQL 调试与表结构设计
+- 数据工程师：快速查看数据血缘与表关联
+- 技术负责人：通过 ERD 评审数据库设计
+- 运维人员：多环境连接配置管理
 
 
 ## 许可证（License）

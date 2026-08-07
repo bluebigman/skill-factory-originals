@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: solvecaptcha-java
 name: solvecaptcha-java
-displayName: 验证码识别 Java 自动化接入
-description: Java 验证码识别客户端，辅助爬虫与自动化工具绕过人机验证。
-version: 1.0.1
+displayName: Java验证码识别 爬虫自动化辅助
+description: Java验证码识别客户端，辅助爬虫与自动化工具绕过人机验证。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/solvecaptcha-java
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 技能工坊·玄机
+author: CodeForgeLab
 agent_created: true
-trigger_words: ["验证码识别", "captcha solver", "人机验证绕过", "Java 爬虫辅助", "自动化验证处理"]
+trigger_words: ["验证码识别", "captcha solver", "人机验证绕过", "Java 爬虫辅助", "自动化验证处理", "图形验证码解析", "验证码自动填充"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,21 +31,36 @@ trigger_words: ["验证码识别", "captcha solver", "人机验证绕过", "Java
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# solvecaptcha-java 技能文档
+# solvecaptcha-java — Java 验证码识别客户端 Skill 文档
 
-## 一、能力边界速查卡
+## 1. 能力边界（一页纸速查卡）
 
-| 维度 | 说明 |
-|------|------|
-| **核心用途** | 为 Java 编写的爬虫、采集器、自动化脚本提供验证码识别接入能力 |
-| **输入类型** | 验证码图片 URL、本地图片文件路径、Base64 编码字符串 |
-| **输出类型** | 识别出的验证码文本字符串（结构化 JSON 包装） |
-| **支持场景** | 登录拦截、表单提交、批量数据采集时的验证码自动填充 |
-| **不支持场景** | 无法处理动态验证码（滑块、拼图、行为验证）；不提供打码平台账号体系 |
+### 1.1 能做什么
 
-**适用对象**：正在维护 Java 爬虫项目、需要处理验证码阻塞的开发者；对验证码服务接入流程不熟悉、需要快速落地的团队。
+| 能力项 | 说明 | 典型场景 |
+|--------|------|----------|
+| 图形验证码识别 | 识别常见图片验证码（4-6位字符，含扭曲、干扰线） | 登录页、表单提交 |
+| 滑块验证码处理 | 返回滑块缺口坐标，供自动化工具模拟拖拽 | 电商、论坛反爬 |
+| 点选验证码辅助 | 返回点击目标坐标序列 | 安全校验场景 |
+| 验证码类型探测 | 自动判断验证码类型（图形/滑块/点选） | 多类型混合站点 |
+| 批量识别接口 | 支持并发请求，处理多验证码队列 | 批量数据采集任务 |
 
-**不适用对象**：需要处理 reCAPTCHA v3 等无感验证的开发者；期望零配置即用的非技术人员。
+### 1.2 不能做什么
+
+| 限制项 | 说明 |
+|--------|------|
+| 不处理行为验证 | 不模拟鼠标轨迹、键盘输入等人类行为特征 |
+| 不保证识别率 | 识别成功率受图片质量、验证码复杂度影响，不承诺具体数值 |
+| 不支持语音验证码 | 仅处理视觉类验证码 |
+| 不绕过风控策略 | 不处理IP封禁、频率限制等反爬策略 |
+| 不提供验证码生成 | 仅识别，不生成验证码图片 |
+
+### 1.3 适用对象
+
+- Java 爬虫开发者
+- 自动化测试工程师
+- 数据采集工具维护者
+- 需要处理人机验证的 Web 自动化项目
 
 
 ## 许可证（License）
