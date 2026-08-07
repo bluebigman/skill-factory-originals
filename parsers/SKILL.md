@@ -7,7 +7,7 @@ license: MIT
 slug: parsers
 name: parsers
 displayName: PDF转文档
-description: Monorepo for a suite of `unified`-compatible converters for converting between, from, and to .docx, JATS XML, LaTeX, and
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行parsers相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

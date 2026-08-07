@@ -7,7 +7,7 @@ license: MIT
 slug: streamlit-sales-dashboard
 name: streamlit-sales-dashboard
 displayName: 数据可视化
-description: Interactive Streamlit dashboard visualizing sales data from Excel with dynamic filters and key KPIs.
+description: 仅供学习与参考用途。使用本。当用户需要报表 数据可视化、进行streamlit sales dashboard相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

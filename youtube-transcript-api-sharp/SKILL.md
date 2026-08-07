@@ -7,7 +7,7 @@ license: MIT
 slug: youtube-transcript-api-sharp
 name: youtube-transcript-api-sharp
 displayName: 视频字幕
-description: This is a C# API which allows you to get the transcript/subtitles for a given YouTube video. It also works for automatic
+description: 仅供学习与参考用途。使用本。当用户需要翻译 转录 字幕、进行youtube transcript api sharp相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

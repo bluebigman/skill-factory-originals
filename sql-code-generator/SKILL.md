@@ -7,7 +7,7 @@ license: MIT
 slug: sql-code-generator
 name: sql-code-generator
 displayName: SQL查询
-description: Generate code from your SQL schema and queries for type safety and development speed.
+description: 仅供学习与参考用途。使用本。当用户需要SQL查询 数据库、进行sql code generator相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

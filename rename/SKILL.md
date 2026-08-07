@@ -7,7 +7,7 @@ license: MIT
 slug: rename
 name: rename
 displayName: 未命名工具
-description: Keep your AI coding sessions named after what they actually became — Claude Code, Codex, Cursor and more. Auto-renames i
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行rename相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

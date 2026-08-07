@@ -7,7 +7,7 @@ license: MIT
 slug: scripd
 name: scripd
 displayName: SQL查询
-description: A robust SQL Generator. Parses database structures defined in json based on the jsyn file format and generates correspon
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行scripd相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

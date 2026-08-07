@@ -7,7 +7,7 @@ license: MIT
 slug: paper-fetch-skill
 name: paper-fetch-skill
 displayName: 未命名工具
-description: Fetch papers as agent-ready markdown — DOI/URL/title in, structured full text out. CLI · MCP · Skill.
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行paper fetch skill相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

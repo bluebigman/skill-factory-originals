@@ -7,7 +7,7 @@ license: MIT
 slug: workflow
 name: workflow
 displayName: 未命名工具
-description: An easy-to-use workflow automation library for Go. Supports conditional branching, parallel execution, embedded scriptin
+description: 仅供学习与参考用途。使用本。当用户需要任务管理 自动化、进行workflow相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: uber-go-guide-pl
 name: uber-go-guide-pl
 displayName: 翻译润色
-description: 🇵🇱 Uber's Go Style Guide Translation in Polish 🇵🇱
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行uber go guide pl相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

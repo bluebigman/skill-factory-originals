@@ -7,7 +7,7 @@ license: MIT
 slug: pscale-workflow-helper-scripts
 name: pscale-workflow-helper-scripts
 displayName: 未命名工具
-description: Workflows and helper scripts around the PlanetScale DB workflow to automate database branch creation, association, updat
+description: 仅供学习与参考用途。使用本。当用户需要任务管理 自动化、进行pscale workflow helper scripts相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

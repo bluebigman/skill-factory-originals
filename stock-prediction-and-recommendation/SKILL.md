@@ -7,7 +7,7 @@ license: MIT
 slug: stock-prediction-and-recommendation
 name: stock-prediction-and-recommendation
 displayName: 数据可视化
-description: A comprehensive React-based stock market analysis dashboard that enables users to visualize and compare historical marke
+description: 仅供学习与参考用途。使用本。当用户需要金融 股票、进行stock prediction and recommendation相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

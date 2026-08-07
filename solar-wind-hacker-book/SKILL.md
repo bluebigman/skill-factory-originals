@@ -7,7 +7,7 @@ license: MIT
 slug: solar-wind-hacker-book
 name: solar-wind-hacker-book
 displayName: 代码审查
-description: 2020 was a roller coaster of major, world-shaking events. We all couldn't wait for the year to end. But just as 2020 was
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行solar wind hacker book相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

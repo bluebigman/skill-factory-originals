@@ -7,7 +7,7 @@ license: MIT
 slug: text-rewriter
 name: text-rewriter
 displayName: 去AI味
-description: this is the text-rewriter-python repository, an open-source project that provides a python script to "humanize" ai-gener
+description: 仅供学习与参考用途。使用本。当用户需要去AI味 润色改写、进行text rewriter相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

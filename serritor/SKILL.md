@@ -7,7 +7,7 @@ license: MIT
 slug: serritor
 name: serritor
 displayName: 爬虫采集
-description: Serritor is an open source web crawler framework built upon Selenium and written in Java. It can be used to crawl dynami
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行serritor相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

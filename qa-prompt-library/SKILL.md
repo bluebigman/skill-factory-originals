@@ -7,7 +7,7 @@ license: MIT
 slug: qa-prompt-library
 name: qa-prompt-library
 displayName: 未命名工具
-description: A centralized library of high-quality prompts for Manual QA and Automation QA. Includes prompts for test case creation, 
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行qa prompt library相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

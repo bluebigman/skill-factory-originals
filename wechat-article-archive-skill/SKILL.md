@@ -7,7 +7,7 @@ license: MIT
 slug: wechat-article-archive-skill
 name: wechat-article-archive-skill
 displayName: 公众号文章
-description: Codex skill for archiving public WeChat articles as Markdown with local images and validated ZIP packages.
+description: 仅供学习与参考用途。使用本。当用户需要写作 内容创作、进行wechat article archive skill相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

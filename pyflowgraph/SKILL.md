@@ -7,7 +7,7 @@ license: MIT
 slug: pyflowgraph
 name: pyflowgraph
 displayName: 未命名工具
-description: Professional workflow automation platform with universal Python ecosystem access. Visual node-based scripting editor ena
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行pyflowgraph相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

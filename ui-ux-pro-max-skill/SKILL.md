@@ -7,7 +7,7 @@ license: MIT
 slug: ui-ux-pro-max-skill
 name: ui-ux-pro-max-skill
 displayName: 未命名工具
-description: An AI SKILL that provide design intelligence for building professional UI/UX multiple platforms
+description: 仅供学习与参考用途。使用本。当用户需要UI设计 前端、进行ui ux pro max skill相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
