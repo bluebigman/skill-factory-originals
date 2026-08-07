@@ -311,14 +311,29 @@ def validate_config(config: Dict[str, Any]) -> None:
     """
     required_keys = ("auth_token", "site_id")
     for key in required_keys:
-        if key not in config or not config[key]:
+        if key not in config or config[key] is None:
             raise Ebay4RError("E008", f"缺少必要配置项: {key}")
 
-    if not isinstance(config["site_id"], (int, str)):
-        raise Ebay4RError("E008", "site_id 必须为整数或数字字符串")
+    # 验证 auth_token
+    auth_token = config["auth_token"]
+    if not isinstance(auth_token, str) or len(auth_token) < 10:
+        raise Ebay4RError("E008", "auth_token 必须为长度至少 10 的字符串")
 
-    if len(str(config["auth_token"])) < 10:
-        raise Ebay4RError("E008", "auth_token 长度不足，疑似无效")
+    # 验证 site_id
+    site_id = config["site_id"]
+    if isinstance(site_id, bool):
+        raise Ebay4RError("E008", "site_id 不能为布尔值")
+    if isinstance(site_id, int):
+        if site_id < 0 or site_id > 999:
+            raise Ebay4RError("E008", f"site_id 超出有效范围: {site_id}")
+    elif isinstance(site_id, str):
+        if not site_id.isdigit():
+            raise Ebay4RError("E008", "site_id 字符串必须为纯数字")
+        site_id_val = int(site_id)
+        if site_id_val < 0 or site_id_val > 999:
+            raise Ebay4RError("E008", f"site_id 超出有效范围: {site_id}")
+    else:
+        raise Ebay4RError("E008", "site_id 必须为整数或数字字符串")
 
 
 # ---------------------------------------------------------------------------
