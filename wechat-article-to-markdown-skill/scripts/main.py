@@ -53,11 +53,11 @@ class ArticleData:
         """将文章数据转换为 Markdown 格式"""
         # 构造 frontmatter
         lines = ["---"]
-        lines.append(f"title: \"{self.title}\"")
-        lines.append(f"author: \"{self.author}\"")
-        lines.append(f"source: \"{self.url}\"")
-        lines.append(f"fetch_time: \"{self.fetch_time}\"")
-        lines.append(f"publish_date: \"{self.publish_date}\"")
+        lines.append(f'title: "{self.title}"')
+        lines.append(f'author: "{self.author}"')
+        lines.append(f'source: "{self.url}"')
+        lines.append(f'fetch_time: "{self.fetch_time}"')
+        lines.append(f'publish_date: "{self.publish_date}"')
         lines.append("---")
         lines.append("")
         lines.append(f"# {self.title}")
