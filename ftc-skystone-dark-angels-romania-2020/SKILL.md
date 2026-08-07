@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: ftc-skystone-dark-angels-romania-2020
 name: ftc-skystone-dark-angels-romania-2020
-displayName: FTC机器人 代码审查 结构解析
+displayName: FTC机器人 代码结构审查
 description: 解析FTC机器人项目代码，提取结构信息并生成审查报告。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ftc-skystone-dark-angels-romania-2020
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 星尘工坊
+author: CodeForge Studio
 agent_created: true
-trigger_words: ["代码审查", "FTC", "SKYSTONE", "机器人代码", "结构解析", "代码分析", "审查报告"]
+trigger_words: ["代码审查", "FTC", "SKYSTONE", "机器人代码", "结构解析", "程序分析", "工程检查"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,35 +31,35 @@ trigger_words: ["代码审查", "FTC", "SKYSTONE", "机器人代码", "结构解
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# FTC SKYSTONE 代码审查与结构解析 Skill
+# FTC SKYSTONE 机器人项目代码结构审查 Skill
 
 ## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做（核心能力）
+### 1.1 能做什么
 
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| C1 | 代码结构解析 | 解析 FTC SKYSTONE 赛季项目中的 Java/Kotlin 文件，提取类、方法、注解、OpMode 注册信息 |
-| C2 | 关键信息识别 | 识别 `@TeleOp`、`@Autonomous` 注解、`LinearOpMode`/`OpMode` 继承关系、硬件映射调用 |
-| C3 | 审查报告生成 | 按约定模板输出 Markdown 格式审查报告，包含结构概览、风险点、改进建议 |
-| C4 | 置信度标注 | 对无法确认的信息（如外部库依赖、硬件配置）标注 `[需核实:字段]` 占位符 |
-| C5 | 批量处理 | 支持多文件/目录输入，批量生成审查结果并汇总 |
+| 能力项 | 说明 | 输出物 |
+|--------|------|--------|
+| 项目结构解析 | 识别 FTC 机器人项目的目录层级、包结构、类文件分布 | 目录树 + 包结构图 |
+| 代码模块识别 | 区分 OpMode、硬件映射、工具类、配置类等模块 | 模块清单表 |
+| 依赖关系梳理 | 分析类之间的引用、继承、接口实现关系 | 依赖关系图 |
+| 代码规范检查 | 检查命名、注释、代码风格是否符合 FTC 官方规范 | 规范问题清单 |
+| 风险点标注 | 识别潜在的空指针、资源泄漏、并发问题 | 风险标注列表 |
+| 审查报告生成 | 汇总以上信息，输出结构化 Markdown 审查报告 | 审查报告.md |
 
-### 1.2 不能做（明确边界）
+### 1.2 不能做什么
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不执行代码 | 不编译、不运行、不调试任何代码，仅做静态文本分析 |
-| L2 | 不判断硬件兼容性 | 不验证代码与真实机器人硬件的匹配程度 |
-| L3 | 不提供性能优化建议 | 不分析算法复杂度或执行效率 |
-| L4 | 不处理非文本文件 | 不支持图片、视频、二进制文件输入 |
-| L5 | 不保证审查完整性 | 审查结果基于输入内容，不覆盖未提供的文件或依赖 |
+- 不执行代码，不进行运行时行为分析
+- 不修改源代码，只做静态审查
+- 不保证发现所有潜在缺陷（静态分析的固有限制）
+- 不评估机器人实际比赛表现
+- 不提供硬件配置建议
 
 ### 1.3 适用对象
 
-- FTC 参赛队伍（尤其是 SKYSTONE 赛季）的代码维护者
-- 需要快速了解陌生 FTC 项目结构的开发者
-- 准备代码评审会议的团队负责人
+- FTC SKYSTONE（2019-2020）赛季的机器人项目
+- 使用 Java 语言编写的 FTC OpMode 代码
+- 项目规模在 10~200 个 Java 文件之间
+- 需要代码交接、质量评估、赛前检查的团队
 
 
 ## 许可证（License）

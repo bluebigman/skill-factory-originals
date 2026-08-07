@@ -56,19 +56,19 @@ AMOUNT_PATTERNS = [
 INVOICE_KEYWORDS = [
     "rechnungsnummer", "rechnung nr", "rechnungsnr",
     "invoice number", "invoice no", "invoice#",
-    "rgnr", "rnr",
+    "rgnr", "rnr", "rechnung nr:",
 ]
 
 # 常见税号关键词（德文）
 TAX_KEYWORDS = [
     "ust-idnr", "ust idnr", "umsatzsteuer-id",
     "steuernummer", "steuer-nr", "tax number",
-    "vat id", "vat number",
+    "vat id", "vat number", "ust-idnr:",
 ]
 
 # 常见收/付款方关键词
 VENDOR_KEYWORDS = ["rechnungssteller", "absender", "lieferant", "verkäufer", "vendor", "seller"]
-CUSTOMER_KEYWORDS = ["rechnungempfänger", "empfänger", "kunde", "customer", "buyer"]
+CUSTOMER_KEYWORDS = ["rechnungempfänger", "empfänger", "kunde", "customer", "buyer", "an:"]
 
 # ---------------------------------------------------------------------------
 # 核心数据结构
@@ -197,6 +197,7 @@ def extract_amount(text):
 
 def extract_invoice_number(text):
     """提取发票号。返回 (发票号, 置信度)。"""
+    # 先尝试从关键词行提取
     lines = text.split("\n")
     for i, line in enumerate(lines):
         lower = line.lower()
@@ -206,10 +207,22 @@ def extract_invoice_number(text):
                 for candidate_line in [line, lines[i + 1] if i + 1 < len(lines) else ""]:
                     # 去除关键词部分
                     after_kw = re.sub(keyword, "", candidate_line, flags=re.IGNORECASE)
-                    # 查找数字序列（可能包含连字符）
-                    match = re.search(r"[A-Za-z0-9][A-Za-z0-9\-/]{3,}", after_kw)
+                    after_kw = after_kw.lstrip(":： \t")
+                    # 查找发票号模式（字母+数字组合，可能包含-或/）
+                    match = re.search(r"[A-Za-z]{0,5}[-/]?\d{3,}", after_kw)
                     if match:
                         return match.group(0).strip(), 0.8
+    
+    # 如果没找到，尝试从文本中直接搜索发票号模式
+    # 例如 "RE-2024-00123" 或 "INV-001"
+    invoice_patterns = [
+        r"(?:RE|INV|Rg|RG)[-/\s]\d{2,4}[-/\s]\d{3,}",  # RE-2024-00123
+        r"(?:INV|Rg|RG)[-/\s]\d{3,}",                    # INV-001
+    ]
+    match, _ = search_pattern(text, invoice_patterns)
+    if match:
+        return match, 0.7
+    
     return None, 0.0
 
 
@@ -222,8 +235,9 @@ def extract_tax_number(text):
             if keyword in lower:
                 for candidate_line in [line, lines[i + 1] if i + 1 < len(lines) else ""]:
                     after_kw = re.sub(keyword, "", candidate_line, flags=re.IGNORECASE)
-                    # 税号通常是字母+数字组合
-                    match = re.search(r"[A-Za-z]{0,3}\s?\d{2,15}", after_kw)
+                    after_kw = after_kw.lstrip(":： \t")
+                    # 税号通常是 DE+数字 或 数字组合
+                    match = re.search(r"(?:DE)?\d{8,15}", after_kw)
                     if match:
                         return match.group(0).strip(), 0.75
     return None, 0.0
@@ -241,8 +255,12 @@ def extract_party(text, keywords):
                 after_kw = after_kw.lstrip(":： \t")
                 if after_kw and len(after_kw) > 1:
                     return after_kw.strip(), 0.7
+                # 检查下一行
                 if i + 1 < len(lines) and lines[i + 1].strip():
-                    return lines[i + 1].strip(), 0.6
+                    next_line = lines[i + 1].strip()
+                    # 跳过地址行，只取姓名行
+                    if not re.match(r"^[\d\s]+$", next_line) and not re.match(r"^\d{5}", next_line):
+                        return next_line, 0.6
     return None, 0.0
 
 
@@ -302,14 +320,14 @@ def extract_fields(text):
     else:
         result.add_warning("E006: 未找到税号")
 
-    # 收款方
+    # 收款方（供应商）
     vendor_val, vendor_conf = extract_vendor(normalized)
     if vendor_val:
         result.add_field("vendor", vendor_val, vendor_conf)
     else:
         result.add_warning("E007: 未找到收款方")
 
-    # 付款方
+    # 付款方（客户）
     customer_val, customer_conf = extract_customer(normalized)
     if customer_val:
         result.add_field("customer", customer_val, customer_conf)
@@ -383,6 +401,12 @@ def run_selftest():
 
     # 宽松断言：检查关键字段是否存在
     field_names = [f["name"] for f in result_dict["fields"]]
+    
+    # 打印提取到的字段以便调试
+    print("  提取到的字段:")
+    for field in result_dict["fields"]:
+        print(f"    - {field['name']}: {field['value']} (置信度: {field['confidence']})")
+    
     assert "date" in field_names, "E010: 应提取到日期字段"
     assert "amount" in field_names, "E010: 应提取到金额字段"
     assert "invoice_number" in field_names, "E010: 应提取到发票号字段"
