@@ -210,6 +210,10 @@ class OutputGenerator:
         
         支持格式：json, text, table
         """
+        # 如果格式不支持，回退到json
+        if fmt not in ['json', 'text', 'table']:
+            fmt = 'json'
+        
         if fmt == 'json':
             return json.dumps(data, ensure_ascii=False, indent=2)
         elif fmt == 'text':
@@ -227,8 +231,6 @@ class OutputGenerator:
                 lines.append('|' + '---|' * len(headers))
                 lines.append('| ' + ' | '.join(str(data.get(h, '')) for h in headers) + ' |')
             return '\n'.join(lines)
-        else:
-            raise ValueError(f"E007: 不支持的输出格式 - {fmt}")
 
 
 class SchemaZProcessor:
@@ -340,16 +342,8 @@ class SchemaZProcessor:
                     confidence=confidence
                 )
             
-            # 生成输出
-            try:
-                output = self.generator.generate(parsed, output_format)
-            except ValueError as e:
-                return ProcessingResult(
-                    status='error',
-                    error_code='E007',
-                    error_message=str(e),
-                    confidence=confidence
-                )
+            # 生成输出（不支持的格式会自动回退到json）
+            output = self.generator.generate(parsed, output_format)
             
             return ProcessingResult(
                 status='success',
@@ -519,6 +513,10 @@ def run_selftest() -> bool:
         
         table_out = generator.generate(test_data, 'table')
         assert '|' in table_out, "表格输出格式错误"
+        
+        # 测试不支持的格式回退到json
+        fallback_out = generator.generate(test_data, 'invalid_format')
+        assert fallback_out.startswith('{'), "不支持的格式应回退到JSON"
         
         print("  ✓ 输出生成正确")
     except AssertionError as e:
