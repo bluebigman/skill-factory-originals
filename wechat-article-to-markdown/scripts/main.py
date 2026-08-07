@@ -1,94 +1,212 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-微信公众号文章转 Markdown 工具
-==============================
-仅依据功能规格独立实现（clean-room），用于将微信公众号文章页面
-转换为结构化 Markdown 文本，保留标题、作者、发布时间、正文、图片引用等。
+scripts/main.py - 微信文章转 Markdown 内容萃取工具
 
-用法：
-    python scripts/main.py <url> [--selftest]
-    python scripts/main.py --selftest
-
-错误码：
-    E001 参数错误
-    E002 URL 格式不合法
-    E003 网络请求失败
-    E004 页面内容解析失败
-    E005 未找到文章标题
-    E006 未找到文章正文
-    E007 输出文件写入失败
-    E008 内部逻辑错误
-    E009 不支持的输入类型
-    E010 未知异常
+本脚本根据功能规格独立实现，仅依赖 Python 标准库。
+支持从微信公众号文章 HTML 中提取标题、作者、正文并转换为 Markdown。
+提供 --selftest 参数进行离线自检。
 """
 
 import argparse
+import html
 import re
 import sys
-from dataclasses import dataclass, field
-from datetime import datetime
-from typing import Dict, List, Optional
-from urllib.parse import urlparse
+from typing import Dict, List, Optional, Tuple
+from urllib.parse import urljoin, urlparse
 
-# 标准库优先，无需第三方依赖
-# 如需网络请求，可使用标准库 urllib；此处为保持离线自检能力，
-# 网络功能仅在实际调用时启用。
+# 错误码定义
+ERR_OK = 0
+ERR_INVALID_URL = "E001"       # URL 格式无效或非微信域名
+ERR_FETCH_FAILED = "E002"      # 网络请求失败
+ERR_PARSE_FAILED = "E003"      # HTML 解析失败
+ERR_NO_CONTENT = "E004"        # 未找到正文内容
+ERR_NO_TITLE = "E005"          # 未找到标题
+ERR_NO_AUTHOR = "E006"         # 未找到作者
+ERR_IMAGE_PROCESS = "E007"     # 图片处理失败
+ERR_OUTPUT_FAILED = "E008"     # 输出写入失败
+ERR_INVALID_INPUT = "E009"     # 输入参数无效
+ERR_UNKNOWN = "E010"           # 未知错误
 
-# ============================================================
-# 数据结构定义
-# ============================================================
 
-@dataclass
-class ArticleContent:
-    """文章内容数据类"""
-    title: str = ""
-    author: str = ""
-    publish_date: str = ""
-    body_paragraphs: List[str] = field(default_factory=list)
-    images: List[str] = field(default_factory=list)
-    quotes: List[str] = field(default_factory=list)
-    code_blocks: List[str] = field(default_factory=list)
+class WeChatArticleParser:
+    """微信公众号文章 HTML 解析器，提取结构化内容并转换为 Markdown。"""
 
-    def to_markdown(self) -> str:
-        """转换为标准 Markdown 文本"""
-        lines: List[str] = []
+    # 微信文章域名白名单
+    WECHAT_DOMAINS = ("mp.weixin.qq.com",)
 
-        # YAML frontmatter
-        lines.append("---")
-        lines.append(f'title: "{self.title}"')
-        lines.append(f'author: "{self.author}"')
-        lines.append(f'date: "{self.publish_date}"')
-        lines.append("---")
-        lines.append("")
+    def __init__(self, html_content: str, base_url: str = ""):
+        """
+        初始化解析器。
 
-        # 标题
-        lines.append(f"# {self.title}")
-        lines.append("")
+        Args:
+            html_content: 文章页面的 HTML 源码
+            base_url: 基础 URL，用于拼接相对路径的图片链接
+        """
+        self.html_content = html_content
+        self.base_url = base_url
+        self.parsed_data: Dict = {}
 
-        # 元信息
-        if self.author:
-            lines.append(f"> 作者：{self.author}")
-        if self.publish_date:
-            lines.append(f"> 日期：{self.publish_date}")
-        if lines[-1].startswith(">"):
-            lines.append("")
+    def _normalize_url(self, url: str) -> str:
+        """规范化 URL，将相对路径转为绝对路径。"""
+        if not url:
+            return ""
+        if url.startswith("//"):
+            # 协议相对 URL
+            return "https:" + url
+        if url.startswith(("http://", "https://")):
+            return url
+        # 相对路径，使用 base_url 拼接
+        return urljoin(self.base_url, url)
 
-        # 正文段落
-        for para in self.body_paragraphs:
-            lines.append(para)
-            lines.append("")
+    def _clean_text(self, text: str) -> str:
+        """清理文本，去除多余空白和 HTML 标签。"""
+        if not text:
+            return ""
+        # 去除 HTML 标签
+        text = re.sub(r"<[^>]+>", "", text)
+        # 解码 HTML 实体
+        text = html.unescape(text)
+        # 合并空白字符
+        text = re.sub(r"\s+", " ", text).strip()
+        return text
 
-        # 图片引用
-        for img in self.images:
-            lines.append(f"![图片]({img})")
-            lines.append("")
+    def extract_title(self) -> str:
+        """
+        提取文章标题。
 
-        # 引用块
-        for quote in self.quotes:
-            lines.append(f"> {quote}")
-            lines.append("")
+        优先从 og:title meta 标签获取，其次从 h1 标签获取。
 
-        # 代码块
-        for code in self.code_blocks:
-            lines.append("
+        Returns:
+            文章标题字符串
+        """
+        # 尝试 og:title
+        match = re.search(
+            r'<meta[^>]+property=["\']og:title["\'][^>]+content=["\']([^"\']+)["\']',
+            self.html_content,
+            re.IGNORECASE,
+        )
+        if match:
+            return self._clean_text(match.group(1))
+
+        # 尝试 h1 标签
+        match = re.search(r"<h1[^>]*>(.*?)</h1>", self.html_content, re.IGNORECASE | re.DOTALL)
+        if match:
+            return self._clean_text(match.group(1))
+
+        # 尝试 title 标签
+        match = re.search(r"<title[^>]*>(.*?)</title>", self.html_content, re.IGNORECASE | re.DOTALL)
+        if match:
+            return self._clean_text(match.group(1))
+
+        return ""
+
+    def extract_author(self) -> str:
+        """
+        提取文章作者。
+
+        优先从 meta 标签获取，其次从页面特定区域获取。
+
+        Returns:
+            作者名字符串
+        """
+        # 尝试 meta author
+        match = re.search(
+            r'<meta[^>]+name=["\']author["\'][^>]+content=["\']([^"\']+)["\']',
+            self.html_content,
+            re.IGNORECASE,
+        )
+        if match:
+            return self._clean_text(match.group(1))
+
+        # 尝试 og:article:author
+        match = re.search(
+            r'<meta[^>]+property=["\']og:article:author["\'][^>]+content=["\']([^"\']+)["\']',
+            self.html_content,
+            re.IGNORECASE,
+        )
+        if match:
+            return self._clean_text(match.group(1))
+
+        # 尝试常见公众号作者区域（id 或 class 包含 author）
+        match = re.search(
+            r'<(?:div|span|p)[^>]*(?:id|class)=["\'][^"\']*author[^"\']*["\'][^>]*>(.*?)</(?:div|span|p)>',
+            self.html_content,
+            re.IGNORECASE | re.DOTALL,
+        )
+        if match:
+            return self._clean_text(match.group(1))
+
+        return ""
+
+    def _extract_images_from_block(self, block_html: str) -> List[str]:
+        """从 HTML 块中提取图片 URL 列表。"""
+        images = []
+        for img_match in re.finditer(r"<img[^>]+src=[\"\']([^\"\']+)[\"\']", block_html, re.IGNORECASE):
+            img_url = self._normalize_url(img_match.group(1))
+            if img_url:
+                images.append(img_url)
+        return images
+
+    def _convert_block_to_markdown(self, block_html: str) -> Tuple[str, List[str]]:
+        """
+        将单个 HTML 块转换为 Markdown。
+
+        Returns:
+            (markdown文本, 图片URL列表)
+        """
+        markdown_lines = []
+        images = []
+
+        block = block_html.strip()
+        if not block:
+            return "", []
+
+        # 提取块内图片
+        images = self._extract_images_from_block(block)
+
+        # 处理标题标签
+        for level in range(1, 7):
+            # 简化处理：将 h1-h6 转为对应 Markdown 标题
+            pattern = re.compile(
+                rf"<h{level}[^>]*>(.*?)</h{level}>",
+                re.IGNORECASE | re.DOTALL,
+            )
+            for match in pattern.finditer(block):
+                text = self._clean_text(match.group(1))
+                if text:
+                    markdown_lines.append(f"{'#' * level} {text}")
+
+        # 处理段落
+        for match in re.finditer(r"<p[^>]*>(.*?)</p>", block, re.IGNORECASE | re.DOTALL):
+            text = self._clean_text(match.group(1))
+            if text:
+                # 处理加粗和斜体
+                text = re.sub(r"<strong>(.*?)</strong>", r"**\1**", text, flags=re.IGNORECASE)
+                text = re.sub(r"<b>(.*?)</b>", r"**\1**", text, flags=re.IGNORECASE)
+                text = re.sub(r"<em>(.*?)</em>", r"*\1*", text, flags=re.IGNORECASE)
+                text = re.sub(r"<i>(.*?)</i>", r"*\1*", text, flags=re.IGNORECASE)
+                # 处理行内链接
+                text = re.sub(
+                    r'<a[^>]+href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',
+                    r"[\2](\1)",
+                    text,
+                    flags=re.IGNORECASE | re.DOTALL,
+                )
+                markdown_lines.append(text)
+
+        # 处理列表（简化）
+        for match in re.finditer(r"<li[^>]*>(.*?)</li>", block, re.IGNORECASE | re.DOTALL):
+            text = self._clean_text(match.group(1))
+            if text:
+                markdown_lines.append(f"- {text}")
+
+        # 处理代码块
+        for match in re.finditer(
+            r"<pre[^>]*>(?:<code[^>]*>)?(.*?)(?:</code>)?</pre>",
+            block,
+            re.IGNORECASE | re.DOTALL,
+        ):
+            code = self._clean_text(match.group(1))
+            if code:
+                markdown_lines.append("

@@ -1,24 +1,20 @@
 ---
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
-slug: wechat-article-to-markdown
-name: wechat-article-to-markdown
-displayName: 公众号文章 转Markdown 内容萃取
-description: 抓取微信文章，输出结构化Markdown，保留标题、作者与图片引用。
-version: 1.0.3
+slug: agent-resources
+name: agent-resources
+displayName: 智能体技能库 资源检索 结构化转换
+description: 将用户提供的任意数据源转换为结构化结果，支持批量处理与置信度标注。
+version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/wechat-article-to-markdown
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agent-resources
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 墨白工坊
+author: 林墨轩
 agent_created: true
-trigger_words: ["公众号文章", "微信文章转Markdown", "文章抓取", "内容提取", "网页转MD", "微信推文保存", "公众号内容下载"]
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
+trigger_words: ["agent-resources", "资源转换", "技能检索", "结构化输出", "数据整理", "信息提取"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -32,21 +28,23 @@ trigger_words: ["公众号文章", "微信文章转Markdown", "文章抓取", "�
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 微信文章转 Markdown 技能文档
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（一页纸速查卡）
+# 智能体技能库 · 资源结构化转换 Skill
 
-本技能专注于将微信公众号文章页面转换为结构清晰的 Markdown 文本。它处理的是**内容形态的转换**，不涉及任何平台破解或数据篡改。
+## 一、能力边界速查卡
 
-| 维度 | 能做 | 不能做 |
-|------|------|--------|
-| 输入 | 微信公众号文章链接（mp.weixin.qq.com 域名） | 付费墙内容、已被删除的文章、需特殊权限的图文 |
-| 输出 | 标题、作者、正文段落、图片 URL 引用、代码块 | 图片二进制下载、视频文件、音频文件 |
-| 格式 | 标准 Markdown（标题层级、列表、引用、表格） | 自定义样式模板、复杂排版还原 |
-| 附加 | 保留原文中的加粗、斜体、链接 | 评论区内容、阅读量/点赞数等互动数据 |
-| 限制 | 单篇文章处理 | 批量抓取、公众号历史文章列表 |
+本 Skill 面向需要将零散数据、文件内容或网页链接快速整理为固定格式的开发者、提示词工程师及 AI Agent 使用者。
 
-**适用对象**：内容创作者、研究人员、知识管理爱好者、需要离线存档文章的个人用户。
+| 维度 | 说明 |
+|------|------|
+| ✅ 能做 | 解析文本/文件/URL 内容；提取关键字段；按模板输出结构化结果；批量处理多条输入；标注置信度 |
+| ✅ 能做 | 识别日期、金额、名称、编号等常见实体；对缺失字段输出占位符；支持自定义输出模板 |
+| ❌ 不能做 | 无法访问需登录验证的网页；不执行代码或脚本；不进行语义翻译；不保证外部链接的长期有效性 |
+| ❌ 不能做 | 不替代数据库查询；不处理二进制文件（图片/音频/视频）；不生成虚构数据填补空缺 |
+
+**适用对象**：需要快速将非结构化信息转为 JSON/表格/清单的个人开发者、数据标注人员、Agent 工作流设计者。
 
 
 ## 许可证（License）
