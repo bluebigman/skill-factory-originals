@@ -1,22 +1,18 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-tach — 依赖可视化与架构边界守护（独立实现）
+tach — 依赖透视与架构边界守护（clean-room 独立实现）
 
-本脚本依据功能规格独立编写，不复制任何既有实现。
-支持：
-  - 解析 Python 文件中的 import 语句，构建模块依赖图
-  - 依据模块归属规则与允许方向，检查架构边界违规
-  - 输出文本树、表格、DOT 格式
-  - 定向增量检查
-  - 内置离线自检（--selftest）
+功能：
+  1. 静态解析 Python 源码中的模块导入关系
+  2. 按包/模块粒度聚合依赖图谱
+  3. 依据架构规则（允许/禁止的依赖方向）执行一致性校验
+  4. 输出结构化依赖清单与违规报告
 
-用法示例：
-  python main.py --root ./src --config tach.toml
-  python main.py --root ./src --config tach.toml --target ./src/app
-  python main.py --root ./src --config tach.toml --format dot
-  python main.py --selftest
+仅使用 Python 标准库实现，无第三方依赖。
 """
+
+from __future__ import annotations
 
 import argparse
 import ast
@@ -27,481 +23,484 @@ import sys
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Dict, List, Optional, Set, Tuple
+from typing import Dict, List, Optional, Set, Tuple, Callable
 
 # ---------------------------------------------------------------------------
 # 错误码定义
 # ---------------------------------------------------------------------------
 ERR_OK = 0
-ERR_CONFIG_NOT_FOUND = "E001"      # 配置文件不存在
-ERR_CONFIG_INVALID = "E002"        # 配置文件格式错误
-ERR_ROOT_NOT_FOUND = "E003"        # 根目录不存在
-ERR_TARGET_NOT_FOUND = "E004"      # 目标文件/目录不存在
-ERR_PARSE_FAILED = "E005"          # Python 文件解析失败
-ERR_NO_RULES = "E006"              # 未定义任何架构规则
-ERR_INTERNAL = "E007"              # 内部逻辑错误
-ERR_ARG_INVALID = "E008"           # 命令行参数无效
-ERR_OUTPUT_FAILED = "E009"         # 输出写入失败
-ERR_SELFTEST_FAILED = "E010"       # 自检失败
+ERR_USAGE = "E001"       # 命令行参数错误
+ERR_PATH = "E002"        # 路径不存在或不可读
+ERR_PARSE = "E003"       # 源码解析失败
+ERR_RULE = "E004"        # 架构规则格式错误
+ERR_INTERNAL = "E005"    # 内部逻辑错误
+ERR_OUTPUT = "E006"      # 输出写入失败
+ERR_SELFTEST = "E007"    # 自检失败
+ERR_EMPTY = "E008"       # 无有效源码文件
+ERR_MODULE = "E009"      # 模块名解析失败
+ERR_UNKNOWN = "E010"     # 未知错误
 
 
 # ---------------------------------------------------------------------------
 # 数据结构
 # ---------------------------------------------------------------------------
 @dataclass
-class ImportRecord:
-    """一条导入记录"""
-    module: str          # 模块名（相对或绝对）
-    lineno: int          # 行号
-    alias: Optional[str] = None  # 别名
+class Dependency:
+    """一条依赖关系：source -> target"""
+    source: str
+    target: str
+    line: int = 0
+    column: int = 0
 
 
 @dataclass
-class ModuleNode:
-    """模块节点"""
-    name: str            # 模块名（相对根目录的点路径）
-    path: Path           # 文件路径
-    imports: List[ImportRecord] = field(default_factory=list)
-
-
-@dataclass
-class BoundaryRule:
-    """架构边界规则"""
-    source: str          # 源模块（支持前缀匹配）
-    allowed: List[str]   # 允许依赖的目标模块（支持前缀匹配）
+class ArchRule:
+    """架构规则：允许或禁止 source 依赖 target"""
+    kind: str            # "allow" 或 "forbid"
+    source_pattern: str  # 支持简单通配符 * 和 **（** 表示任意层级）
+    target_pattern: str
 
 
 @dataclass
 class Violation:
     """违规记录"""
+    rule: ArchRule
     source: str
     target: str
-    lineno: int
-    reason: str
+    line: int = 0
 
 
 @dataclass
-class CheckResult:
-    """检查结果"""
+class AnalysisResult:
+    """分析结果汇总"""
+    dependencies: List[Dependency] = field(default_factory=list)
+    modules: Set[str] = field(default_factory=set)
     violations: List[Violation] = field(default_factory=list)
-    module_count: int = 0
-    import_count: int = 0
+    files_scanned: int = 0
+    errors: List[str] = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
-# 配置解析
+# 依赖解析器：基于 AST 静态扫描
 # ---------------------------------------------------------------------------
-def load_config(config_path: Path) -> Dict:
-    """
-    加载配置文件（支持 JSON 或 TOML 简化格式）。
-    返回结构：
-    {
-      "modules": {"app": ["app*"], "core": ["core*"]},
-      "rules": [
-        {"source": "app", "allowed": ["core"]},
-        {"source": "core", "allowed": []}
-      ]
-    }
-    """
-    if not config_path.exists():
-        raise FileNotFoundError(f"{ERR_CONFIG_NOT_FOUND}: 配置文件不存在: {config_path}")
+class DependencyParser:
+    """使用 Python 标准库 ast 模块解析源码中的导入语句"""
 
-    try:
-        text = config_path.read_text(encoding="utf-8")
-        if config_path.suffix == ".json":
-            return json.loads(text)
-        # 简化 TOML 解析（仅支持小节与 key = value）
-        return _parse_simple_toml(text)
-    except Exception as exc:
-        raise ValueError(f"{ERR_CONFIG_INVALID}: 配置文件格式错误: {exc}") from exc
+    # 常见第三方库前缀，用于过滤标准库/第三方依赖
+    STDLIB_MODULES: Set[str] = set(sys.stdlib_module_names) if hasattr(sys, "stdlib_module_names") else set()
 
+    def __init__(self, root: Path):
+        self.root = root
+        self.result = AnalysisResult()
+        self._imports_cache: Dict[Path, List[Tuple[str, int]]] = {}
 
-def _parse_simple_toml(text: str) -> Dict:
-    """极简 TOML 解析器（仅用于本工具配置）"""
-    result: Dict = {}
-    current_section = None
+    def parse_project(self) -> AnalysisResult:
+        """扫描项目根目录下所有 .py 文件"""
+        if not self.root.exists() or not self.root.is_dir():
+            self.result.errors.append(f"{ERR_PATH}: 路径不存在或不是目录: {self.root}")
+            return self.result
 
-    for line in text.splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if line.startswith("[") and line.endswith("]"):
-            current_section = line[1:-1].strip()
-            if current_section not in result:
-                result[current_section] = []
-            continue
-        if "=" in line:
-            key, _, value = line.partition("=")
-            key = key.strip()
-            value = value.strip().strip('"').strip("'")
-            if current_section is None:
-                result[key] = value
-            else:
-                result[current_section].append((key, value))
+        py_files = sorted(self.root.rglob("*.py"))
+        # 跳过常见生成目录
+        py_files = [f for f in py_files if not any(
+            part in {".git", "__pycache__", ".venv", "venv", "node_modules", ".tox", ".eggs"}
+            for part in f.parts
+        )]
 
-    # 转换为期望结构
-    modules: Dict[str, List[str]] = {}
-    rules: List[Dict] = []
+        if not py_files:
+            self.result.errors.append(f"{ERR_EMPTY}: 未找到任何 .py 文件")
+            return self.result
 
-    if "modules" in result:
-        for item in result["modules"]:
-            if isinstance(item, tuple):
-                modules[item[0]] = [item[1]]
-            else:
-                modules[item] = []
-
-    if "rules" in result:
-        for item in result["rules"]:
-            if isinstance(item, tuple):
-                rules.append({"source": item[0], "allowed": [item[1]]})
-
-    return {"modules": modules, "rules": rules}
-
-
-# ---------------------------------------------------------------------------
-# 依赖解析
-# ---------------------------------------------------------------------------
-def parse_python_file(file_path: Path, root: Path) -> Optional[ModuleNode]:
-    """
-    解析单个 Python 文件，提取导入关系。
-    返回 ModuleNode，解析失败返回 None。
-    """
-    try:
-        tree = ast.parse(file_path.read_text(encoding="utf-8"), filename=str(file_path))
-    except (SyntaxError, UnicodeDecodeError):
-        return None
-
-    # 计算模块名（相对根目录的点路径）
-    try:
-        rel_path = file_path.resolve().relative_to(root.resolve())
-    except ValueError:
-        rel_path = Path(file_path.name)
-
-    parts = list(rel_path.parts)
-    if parts[-1] == "__init__.py":
-        parts = parts[:-1]
-    elif parts[-1].endswith(".py"):
-        parts[-1] = parts[-1][:-3]
-    else:
-        return None
-
-    module_name = ".".join(parts) if parts else "__root__"
-
-    node = ModuleNode(name=module_name, path=file_path)
-
-    for item in ast.walk(tree):
-        if isinstance(item, ast.Import):
-            for alias in item.names:
-                node.imports.append(
-                    ImportRecord(module=alias.name, lineno=item.lineno, alias=alias.asname)
-                )
-        elif isinstance(item, ast.ImportFrom):
-            module = item.module or ""
-            if item.level > 0:
-                # 相对导入：转换为绝对（这里简化处理）
-                module = "." * item.level + module
-            for alias in item.names:
-                target = f"{module}.{alias.name}" if module else alias.name
-                node.imports.append(
-                    ImportRecord(module=target, lineno=item.lineno, alias=alias.asname)
-                )
-
-    return node
-
-
-def scan_directory(root: Path) -> List[ModuleNode]:
-    """递归扫描目录下所有 .py 文件"""
-    nodes: List[ModuleNode] = []
-    if not root.exists():
-        raise FileNotFoundError(f"{ERR_ROOT_NOT_FOUND}: 根目录不存在: {root}")
-
-    for py_file in sorted(root.rglob("*.py")):
-        # 跳过常见虚拟环境目录
-        if any(part in {"venv", ".venv", "__pycache__", ".git"} for part in py_file.parts):
-            continue
-        node = parse_python_file(py_file, root)
-        if node:
-            nodes.append(node)
-    return nodes
-
-
-# ---------------------------------------------------------------------------
-# 架构规则匹配
-# ---------------------------------------------------------------------------
-def match_prefix(module: str, pattern: str) -> bool:
-    """前缀匹配（支持 * 通配符）"""
-    if pattern.endswith("*"):
-        return module.startswith(pattern[:-1])
-    return module == pattern or module.startswith(pattern + ".")
-
-
-def find_rule_for_module(module: str, rules: List[BoundaryRule]) -> Optional[BoundaryRule]:
-    """找到模块所属的规则（取最长匹配）"""
-    best: Optional[BoundaryRule] = None
-    best_len = -1
-    for rule in rules:
-        if match_prefix(module, rule.source):
-            # 计算匹配长度（用于最长匹配）
-            pattern = rule.source[:-1] if rule.source.endswith("*") else rule.source
-            if len(pattern) > best_len:
-                best = rule
-                best_len = len(pattern)
-    return best
-
-
-def check_architecture(nodes: List[ModuleNode], rules: List[BoundaryRule]) -> CheckResult:
-    """执行架构边界校验"""
-    result = CheckResult()
-    result.module_count = len(nodes)
-
-    # 构建模块名 -> 节点映射
-    module_map = {node.name: node for node in nodes}
-
-    # 收集所有规则中提到的模块前缀，用于判断目标模块是否属于项目
-    project_modules = set()
-    for rule in rules:
-        source_pattern = rule.source[:-1] if rule.source.endswith("*") else rule.source
-        project_modules.add(source_pattern)
-        for allowed_pattern in rule.allowed:
-            pattern = allowed_pattern[:-1] if allowed_pattern.endswith("*") else allowed_pattern
-            project_modules.add(pattern)
-
-    for node in nodes:
-        rule = find_rule_for_module(node.name, rules)
-        if rule is None:
-            continue  # 未定义规则的模块不检查
-
-        for imp in node.imports:
-            result.import_count += 1
-            target = imp.module.lstrip(".")
-
-            # 判断目标模块是否属于项目内模块
-            is_project_module = False
-            # 检查目标模块是否在已知模块映射中
-            if target in module_map or any(name.startswith(target + ".") for name in module_map):
-                is_project_module = True
-            # 检查目标模块是否匹配项目模块前缀
-            else:
-                for proj_prefix in project_modules:
-                    if match_prefix(target, proj_prefix):
-                        is_project_module = True
-                        break
-            
-            # 如果不是项目内模块（标准库、第三方库等），跳过
-            if not is_project_module:
+        for py_file in py_files:
+            self.result.files_scanned += 1
+            rel_path = py_file.relative_to(self.root)
+            module_name = self._path_to_module(rel_path)
+            if not module_name:
                 continue
+            self.result.modules.add(module_name)
+            imports = self._parse_file_imports(py_file)
+            for imported, line in imports:
+                target = self._resolve_import_target(imported, module_name)
+                if target:
+                    dep = Dependency(source=module_name, target=target, line=line)
+                    self.result.dependencies.append(dep)
 
-            # 检查是否允许
-            allowed = False
-            for pattern in rule.allowed:
-                if match_prefix(target, pattern):
-                    allowed = True
-                    break
+        return self.result
 
-            if not allowed:
-                result.violations.append(
-                    Violation(
-                        source=node.name,
-                        target=target,
-                        lineno=imp.lineno,
-                        reason=f"模块 '{node.name}' 不允许依赖 '{target}'（规则: {rule.source}）",
-                    )
-                )
+    def _path_to_module(self, rel_path: Path) -> Optional[str]:
+        """将相对路径转换为模块名，如 src/pkg/mod.py -> src.pkg.mod"""
+        try:
+            parts = list(rel_path.parts)
+            if parts[-1] == "__init__.py":
+                parts = parts[:-1]  # 包目录
+            elif parts[-1].endswith(".py"):
+                parts[-1] = parts[-1][:-3]
+            else:
+                return None
+            # 过滤非法标识符
+            valid_parts = []
+            for p in parts:
+                if p.isidentifier():
+                    valid_parts.append(p)
+                else:
+                    valid_parts.append("_")
+            return ".".join(valid_parts) if valid_parts else None
+        except Exception:
+            return None
 
-    return result
+    def _parse_file_imports(self, file_path: Path) -> List[Tuple[str, int]]:
+        """解析单个文件中的导入语句，返回 (模块名, 行号) 列表"""
+        try:
+            source = file_path.read_text(encoding="utf-8", errors="replace")
+            tree = ast.parse(source, filename=str(file_path))
+        except (SyntaxError, UnicodeDecodeError) as e:
+            self.result.errors.append(f"{ERR_PARSE}: 解析失败 {file_path}: {e}")
+            return []
+
+        imports: List[Tuple[str, int]] = []
+
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                for alias in node.names:
+                    imports.append((alias.name, node.lineno))
+            elif isinstance(node, ast.ImportFrom):
+                if node.module:  # 相对导入 module 为 None
+                    imports.append((node.module, node.lineno))
+                elif node.level > 0:
+                    # 相对导入，转换为绝对模块名在 resolve 阶段处理
+                    imports.append((f".{'.' * (node.level - 1)}{node.module or ''}", node.lineno))
+
+        return imports
+
+    def _resolve_import_target(self, imported: str, current_module: str) -> Optional[str]:
+        """将导入名解析为绝对模块名"""
+        if not imported:
+            return None
+
+        # 处理相对导入
+        if imported.startswith("."):
+            level = 0
+            while imported.startswith("."):
+                level += 1
+                imported = imported[1:]
+            base_parts = current_module.split(".")
+            if level > len(base_parts):
+                return None
+            base = base_parts[:len(base_parts) - level + 1]
+            if imported:
+                base.append(imported)
+            return ".".join(base) if base else None
+
+        # 绝对导入
+        return imported
+
+
+# ---------------------------------------------------------------------------
+# 架构规则引擎
+# ---------------------------------------------------------------------------
+class RuleEngine:
+    """架构规则匹配与校验"""
+
+    def __init__(self, rules: List[ArchRule]):
+        self.rules = rules
+        self._compiled: List[Tuple[ArchRule, Callable, Callable]] = []
+        for rule in rules:
+            src_pattern = self._compile_pattern(rule.source_pattern)
+            tgt_pattern = self._compile_pattern(rule.target_pattern)
+            self._compiled.append((rule, src_pattern, tgt_pattern))
+
+    @staticmethod
+    def _compile_pattern(pattern: str) -> Callable[[str], bool]:
+        """将通配符模式编译为匹配函数"""
+        if pattern == "**":
+            return lambda s: True
+        
+        # 将 ** 转换为匹配任意层级，* 转换为匹配单层
+        # 先将 ** 替换为特殊标记，避免与 * 冲突
+        parts = pattern.split("**")
+        regex_parts = []
+        
+        for i, part in enumerate(parts):
+            if i > 0:
+                # 两个部分之间的 ** 匹配任意层级（包括零个）
+                regex_parts.append(".*")
+            
+            if part:
+                # 处理单个 * 通配符
+                part_escaped = re.escape(part)
+                # 将 \* 转换回 * 作为通配符
+                part_escaped = part_escaped.replace(r"\*", "[^.]*")
+                regex_parts.append(part_escaped)
+        
+        regex_str = "".join(regex_parts)
+        
+        # 特殊处理：如果模式以 ** 结尾，需要匹配剩余所有内容
+        if pattern.endswith("**"):
+            regex_str += ".*"
+        
+        # 确保完整匹配
+        regex_str = f"^{regex_str}$"
+        
+        try:
+            regex = re.compile(regex_str)
+            return lambda s: bool(regex.match(s))
+        except re.error:
+            # 如果编译失败，退化为精确匹配
+            return lambda s: s == pattern
+
+    def check_dependency(self, dep: Dependency) -> Optional[Violation]:
+        """检查单条依赖是否违规。返回违规记录或 None"""
+        # 先检查 forbid 规则
+        for rule, src_match, tgt_match in self._compiled:
+            if rule.kind == "forbid" and src_match(dep.source) and tgt_match(dep.target):
+                return Violation(rule=rule, source=dep.source, target=dep.target, line=dep.line)
+
+        # 如果有匹配的 allow 规则，则允许
+        for rule, src_match, tgt_match in self._compiled:
+            if rule.kind == "allow" and src_match(dep.source) and tgt_match(dep.target):
+                return None
+
+        # 无匹配规则时默认允许
+        return None
+
+    def validate(self, deps: List[Dependency]) -> List[Violation]:
+        """批量校验依赖"""
+        violations = []
+        for dep in deps:
+            v = self.check_dependency(dep)
+            if v:
+                violations.append(v)
+        return violations
+
+
+# ---------------------------------------------------------------------------
+# 架构规则解析器
+# ---------------------------------------------------------------------------
+def parse_rules(rules_data: List[Dict]) -> List[ArchRule]:
+    """从字典列表解析架构规则"""
+    rules = []
+    for item in rules_data:
+        kind = item.get("kind", "").lower()
+        if kind not in {"allow", "forbid"}:
+            raise ValueError(f"{ERR_RULE}: 无效规则类型: {kind}")
+        source = item.get("source", "")
+        target = item.get("target", "")
+        if not source or not target:
+            raise ValueError(f"{ERR_RULE}: source 和 target 不能为空")
+        rules.append(ArchRule(kind=kind, source_pattern=source, target_pattern=target))
+    return rules
 
 
 # ---------------------------------------------------------------------------
 # 输出格式化
 # ---------------------------------------------------------------------------
-def format_text_tree(nodes: List[ModuleNode], max_depth: int = 3) -> str:
-    """输出文本树"""
-    lines = ["依赖树:"]
-    # 构建层级结构
-    tree: Dict[str, Set[str]] = defaultdict(set)
-    for node in nodes:
-        parts = node.name.split(".")
-        for i in range(len(parts) - 1):
-            parent = ".".join(parts[: i + 1])
-            child = ".".join(parts[: i + 2])
-            tree[parent].add(child)
-
-    def render(prefix: str, name: str, depth: int):
-        if depth > max_depth:
-            return
-        lines.append(f"{prefix}{name}")
-        children = sorted(tree.get(name, set()))
-        for i, child in enumerate(children):
-            is_last = i == len(children) - 1
-            child_prefix = prefix + ("    " if is_last else "│   ")
-            lines.append(f"{child_prefix}├── {child}")
-
-    # 根节点
-    roots = sorted({node.name.split(".")[0] for node in nodes})
-    for root in roots:
-        render("", root, 0)
-
+def format_dependency_list(deps: List[Dependency]) -> str:
+    """格式化依赖清单为文本"""
+    lines = ["依赖清单:", "=" * 60]
+    for dep in sorted(deps, key=lambda d: (d.source, d.target)):
+        lines.append(f"  {dep.source} -> {dep.target}  [行 {dep.line}]")
     return "\n".join(lines)
 
 
-def format_table(nodes: List[ModuleNode]) -> str:
-    """输出表格"""
-    lines = ["| 模块 | 依赖数 |"]
-    lines.append("|------|--------|")
-    for node in sorted(nodes, key=lambda n: n.name):
-        lines.append(f"| {node.name} | {len(node.imports)} |")
-    return "\n".join(lines)
-
-
-def format_dot(nodes: List[ModuleNode]) -> str:
-    """输出 DOT 格式"""
-    lines = ["digraph dependencies {"]
-    for node in nodes:
-        lines.append(f'  "{node.name}";')
-        for imp in node.imports:
-            target = imp.module.lstrip(".")
-            if target:
-                lines.append(f'  "{node.name}" -> "{target}";')
-    lines.append("}")
-    return "\n".join(lines)
-
-
-def format_violations(result: CheckResult) -> str:
+def format_violations(violations: List[Violation]) -> str:
     """格式化违规报告"""
-    if not result.violations:
-        return "✅ 未发现架构边界违规。"
-
-    lines = [f"❌ 发现 {len(result.violations)} 处架构边界违规:"]
-    lines.append("")
-    lines.append("| 源模块 | 目标模块 | 行号 | 原因 |")
-    lines.append("|--------|----------|------|------|")
-    for v in result.violations:
-        lines.append(f"| {v.source} | {v.target} | {v.lineno} | {v.reason} |")
+    if not violations:
+        return "✅ 未发现架构违规"
+    lines = ["❌ 架构违规报告:", "=" * 60]
+    for v in violations:
+        action = "禁止" if v.rule.kind == "forbid" else "允许"
+        lines.append(
+            f"  [{action}] {v.source} -> {v.target} (行 {v.line}) "
+            f"[规则: {v.rule.source_pattern} -> {v.rule.target_pattern}]"
+        )
     return "\n".join(lines)
 
 
-# ---------------------------------------------------------------------------
-# 增量检查
-# ---------------------------------------------------------------------------
-def check_target(target: Path, root: Path, rules: List[BoundaryRule]) -> CheckResult:
-    """对指定文件/目录定向检查"""
-    if not target.exists():
-        raise FileNotFoundError(f"{ERR_TARGET_NOT_FOUND}: 目标不存在: {target}")
+def format_json(result: AnalysisResult) -> str:
+    """输出 JSON 格式结果"""
+    data = {
+        "modules": sorted(result.modules),
+        "dependencies": [
+            {"source": d.source, "target": d.target, "line": d.line}
+            for d in result.dependencies
+        ],
+        "violations": [
+            {
+                "source": v.source,
+                "target": v.target,
+                "line": v.line,
+                "rule": {"kind": v.rule.kind, "source": v.rule.source_pattern, "target": v.rule.target_pattern}
+            }
+            for v in result.violations
+        ],
+        "files_scanned": result.files_scanned,
+        "errors": result.errors,
+    }
+    return json.dumps(data, ensure_ascii=False, indent=2)
 
-    if target.is_file():
-        nodes = [node for node in [parse_python_file(target, root)] if node]
+
+# ---------------------------------------------------------------------------
+# 主分析流程
+# ---------------------------------------------------------------------------
+def run_analysis(
+    project_path: str,
+    rules: Optional[List[ArchRule]] = None,
+    json_output: bool = False,
+) -> Tuple[int, str]:
+    """执行完整分析流程，返回 (退出码, 输出文本)"""
+    root = Path(project_path)
+    if not root.exists():
+        return 1, f"{ERR_PATH}: 路径不存在: {project_path}"
+    if not root.is_dir():
+        return 1, f"{ERR_PATH}: 不是目录: {project_path}"
+
+    # 解析依赖
+    parser = DependencyParser(root)
+    result = parser.parse_project()
+
+    # 执行规则校验
+    if rules:
+        engine = RuleEngine(rules)
+        result.violations = engine.validate(result.dependencies)
+
+    # 生成输出
+    if json_output:
+        output = format_json(result)
     else:
-        # 目录：仅扫描该目录（不含子目录？这里递归）
-        nodes = []
-        for py_file in target.rglob("*.py"):
-            node = parse_python_file(py_file, root)
-            if node:
-                nodes.append(node)
+        parts = []
+        parts.append(f"扫描文件数: {result.files_scanned}")
+        parts.append(f"发现模块数: {len(result.modules)}")
+        parts.append(f"发现依赖数: {len(result.dependencies)}")
+        parts.append("")
+        parts.append(format_dependency_list(result.dependencies))
+        parts.append("")
+        parts.append(format_violations(result.violations))
+        if result.errors:
+            parts.append("")
+            parts.append("错误信息:")
+            for err in result.errors:
+                parts.append(f"  {err}")
+        output = "\n".join(parts)
 
-    return check_architecture(nodes, rules)
+    # 如果有错误，返回非零退出码
+    if result.errors:
+        return 2, output
+    if result.violations:
+        return 3, output
+    return 0, output
 
 
 # ---------------------------------------------------------------------------
-# 自检（离线硬编码样例）
+# 内置自检（不依赖外部文件，纯内存数据）
 # ---------------------------------------------------------------------------
 def run_selftest() -> int:
-    """
-    内置离线自检：使用硬编码样例数据验证核心逻辑。
-    不读外部文件、不依赖当前目录、不访问网络。
-    """
-    print("=== tach 自检开始 ===")
+    """内置硬编码样例数据的离线自检"""
+    print("开始自检...")
 
-    # ---- 样例模块 ----
-    sample_nodes = [
-        ModuleNode(name="app.main", path=Path("app/main.py"),
-                   imports=[ImportRecord(module="app.service", lineno=1),
-                            ImportRecord(module="core.utils", lineno=2)]),
-        ModuleNode(name="app.service", path=Path("app/service.py"),
-                   imports=[ImportRecord(module="core.base", lineno=1)]),
-        ModuleNode(name="core.base", path=Path("core/base.py"),
-                   imports=[ImportRecord(module="core.utils", lineno=1)]),
-        ModuleNode(name="core.utils", path=Path("core/utils.py"),
-                   imports=[ImportRecord(module="os", lineno=1)]),
+    # --- 测试 1: 依赖解析器（使用临时内存 AST 模拟）---
+    # 由于解析器基于文件系统，这里直接测试模块名转换和规则引擎
+    print("[1/4] 测试模块名转换...")
+    parser = DependencyParser(Path("."))
+    test_cases = [
+        (Path("src/main.py"), "src.main"),
+        (Path("pkg/__init__.py"), "pkg"),
+        (Path("app/utils/helper.py"), "app.utils.helper"),
     ]
+    for path, expected in test_cases:
+        result = parser._path_to_module(path)
+        assert result == expected, f"模块名转换失败: {path} -> {result} (期望 {expected})"
+    print("  ✅ 模块名转换测试通过")
 
-    # ---- 样例规则 ----
-    sample_rules = [
-        BoundaryRule(source="app", allowed=["app", "core"]),
-        BoundaryRule(source="core", allowed=["core"]),
+    # --- 测试 2: 规则匹配 ---
+    print("[2/4] 测试规则引擎...")
+    rules = [
+        ArchRule(kind="forbid", source_pattern="controller.**", target_pattern="dao.**"),
+        ArchRule(kind="allow", source_pattern="service.**", target_pattern="dao.**"),
+        ArchRule(kind="forbid", source_pattern="**", target_pattern="**"),
     ]
+    engine = RuleEngine(rules)
 
-    # ---- 测试1: 架构检查（应无违规） ----
-    result = check_architecture(sample_nodes, sample_rules)
-    assert result.violations == [], f"测试1失败: 应无违规，实际 {len(result.violations)}"
-    assert result.module_count == 4, f"测试1失败: 模块数应为4，实际 {result.module_count}"
-    print("✅ 测试1（正常架构检查）通过")
+    # 测试 forbid 规则
+    dep1 = Dependency(source="controller.user", target="dao.user", line=10)
+    v = engine.check_dependency(dep1)
+    assert v is not None, "应检测到 controller -> dao 违规"
+    assert v.rule.kind == "forbid"
 
-    # ---- 测试2: 违规检测 ----
-    bad_nodes = [
-        ModuleNode(name="core.base", path=Path("core/base.py"),
-                   imports=[ImportRecord(module="app.service", lineno=5)]),
+    # 测试 allow 规则覆盖
+    dep2 = Dependency(source="service.user", target="dao.user", line=20)
+    v = engine.check_dependency(dep2)
+    assert v is None, "service -> dao 应被 allow 规则允许"
+
+    # 测试通配符
+    dep3 = Dependency(source="any.module", target="any.other", line=30)
+    v = engine.check_dependency(dep3)
+    assert v is not None, "** -> ** forbid 应匹配所有"
+
+    print("  ✅ 规则引擎测试通过")
+
+    # --- 测试 3: 规则解析 ---
+    print("[3/4] 测试规则解析...")
+    rules_data = [
+        {"kind": "forbid", "source": "a.*", "target": "b.*"},
+        {"kind": "allow", "source": "x.**", "target": "y.**"},
     ]
-    result2 = check_architecture(bad_nodes, sample_rules)
-    assert len(result2.violations) == 1, f"测试2失败: 应1个违规，实际 {len(result2.violations)}"
-    v = result2.violations[0]
-    assert v.source == "core.base", f"测试2失败: 源模块错误 {v.source}"
-    assert v.target == "app.service", f"测试2失败: 目标模块错误 {v.target}"
-    assert v.lineno == 5, f"测试2失败: 行号错误 {v.lineno}"
-    print("✅ 测试2（违规检测）通过")
+    parsed_rules = parse_rules(rules_data)
+    assert len(parsed_rules) == 2
+    assert parsed_rules[0].kind == "forbid"
+    assert parsed_rules[1].kind == "allow"
+    print("  ✅ 规则解析测试通过")
 
-    # ---- 测试3: 规则匹配 ----
-    assert match_prefix("app.main", "app") is True, "测试3失败: app.main 应匹配 app"
-    assert match_prefix("app.main", "app.*") is True, "测试3失败: app.main 应匹配 app.*"
-    assert match_prefix("core.utils", "app") is False, "测试3失败: core.utils 不应匹配 app"
-    assert match_prefix("appx", "app") is True, "测试3失败: appx 应匹配 app（前缀）"
-    print("✅ 测试3（规则匹配）通过")
+    # --- 测试 4: 集成测试（模拟依赖图）---
+    print("[4/4] 测试完整流程...")
+    # 构造模拟依赖和规则
+    mock_deps = [
+        Dependency(source="app.controller.user", target="app.dao.user", line=1),
+        Dependency(source="app.service.user", target="app.dao.user", line=2),
+        Dependency(source="app.util.helper", target="app.middleware.auth", line=3),
+    ]
+    mock_rules = [
+        ArchRule(kind="forbid", source_pattern="app.controller.**", target_pattern="app.dao.**"),
+        ArchRule(kind="allow", source_pattern="app.service.**", target_pattern="app.dao.**"),
+        ArchRule(kind="forbid", source_pattern="app.util.**", target_pattern="app.middleware.**"),
+    ]
+    engine = RuleEngine(mock_rules)
+    violations = engine.validate(mock_deps)
+    assert len(violations) == 2, f"期望 2 个违规，实际 {len(violations)}"
 
-    # ---- 测试4: 输出格式 ----
-    text_tree = format_text_tree(sample_nodes, max_depth=2)
-    assert "app" in text_tree and "core" in text_tree, "测试4失败: 文本树缺少根节点"
-    table = format_table(sample_nodes)
-    assert "| 模块 |" in table, "测试4失败: 表格缺少表头"
-    dot = format_dot(sample_nodes)
-    assert "digraph" in dot, "测试4失败: DOT 缺少 digraph"
-    print("✅ 测试4（输出格式）通过")
+    # 验证违规内容
+    viol_sources = {v.source for v in violations}
+    assert "app.controller.user" in viol_sources
+    assert "app.util.helper" in viol_sources
 
-    # ---- 测试5: 违规报告 ----
-    report = format_violations(result)
-    assert "未发现" in report, "测试5失败: 无违规报告错误"
-    report2 = format_violations(result2)
-    assert "违规" in report2 and "core.base" in report2, "测试5失败: 违规报告错误"
-    print("✅ 测试5（违规报告）通过")
+    # 验证 JSON 输出
+    result = AnalysisResult()
+    result.dependencies = mock_deps
+    result.violations = violations
+    result.modules = {"app.controller.user", "app.dao.user", "app.service.user", "app.util.helper", "app.middleware.auth"}
+    result.files_scanned = 5
+    json_out = format_json(result)
+    assert "app.controller.user" in json_out
+    assert "violations" in json_out
 
-    # ---- 测试6: 边界情况 ----
-    # 空规则
-    empty_result = check_architecture(sample_nodes, [])
-    assert empty_result.violations == [], "测试6失败: 空规则不应有违规"
-    # 空模块
-    empty_nodes_result = check_architecture([], sample_rules)
-    assert empty_nodes_result.module_count == 0, "测试6失败: 空模块计数应为0"
-    print("✅ 测试6（边界情况）通过")
+    print("  ✅ 集成测试通过")
 
-    print("\n=== 全部自检通过 ===")
-    return ERR_OK
+    print("\n✅ 全部自检通过")
+    return 0
 
 
 # ---------------------------------------------------------------------------
-# 主入口
+# 命令行入口
 # ---------------------------------------------------------------------------
 def main() -> int:
+    """主入口函数"""
     parser = argparse.ArgumentParser(
-        description="tach — 依赖可视化与架构边界守护",
-        epilog="示例: python main.py --root ./src --config tach.json"
+        description="tach — 依赖透视与架构边界守护",
+        epilog="示例: python main.py --path ./src --rules rules.json",
     )
-    parser.add_argument("--root", type=str, help="项目根目录")
-    parser.add_argument("--config", type=str, help="配置文件路径（JSON 或 TOML）")
-    parser.add_argument("--target", type=str, help="定向检查的文件或目录")
-    parser.add_argument("--format", choices=["tree", "table", "dot"], default="tree",
-                        help="输出格式（默认: tree）")
-    parser.add_argument("--max-depth", type=int, default=3,
-                        help="文本树最大深度（默认: 3）")
-    parser.add_argument("--selftest", action="store_true",
-                        help="运行内置离线自检")
+    parser.add_argument("--path", type=str, help="项目根目录路径")
+    parser.add_argument("--rules", type=str, help="架构规则 JSON 文件路径")
+    parser.add_argument("--json", action="store_true", help="输出 JSON 格式")
+    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
 
     args = parser.parse_args()
 
@@ -509,98 +508,45 @@ def main() -> int:
     if args.selftest:
         try:
             return run_selftest()
-        except AssertionError as exc:
-            print(f"❌ 自检失败: {exc}")
+        except AssertionError as e:
+            print(f"{ERR_SELFTEST}: 自检失败: {e}")
             return 1
-        except Exception as exc:
-            print(f"❌ 自检异常: {exc}")
+        except Exception as e:
+            print(f"{ERR_UNKNOWN}: 自检异常: {e}")
             return 1
 
-    # 校验参数
-    if not args.root or not args.config:
-        parser.error(f"{ERR_ARG_INVALID}: 必须指定 --root 和 --config")
+    # 常规模式
+    if not args.path:
+        print(f"{ERR_USAGE}: 必须提供 --path 参数", file=sys.stderr)
+        parser.print_help(sys.stderr)
         return 1
 
+    # 加载规则
+    rules: List[ArchRule] = []
+    if args.rules:
+        try:
+            rules_path = Path(args.rules)
+            if not rules_path.exists():
+                print(f"{ERR_PATH}: 规则文件不存在: {args.rules}", file=sys.stderr)
+                return 1
+            with open(rules_path, "r", encoding="utf-8") as f:
+                rules_data = json.load(f)
+            rules = parse_rules(rules_data)
+        except (json.JSONDecodeError, ValueError) as e:
+            print(f"{ERR_RULE}: 规则文件解析失败: {e}", file=sys.stderr)
+            return 1
+        except Exception as e:
+            print(f"{ERR_UNKNOWN}: 加载规则失败: {e}", file=sys.stderr)
+            return 1
+
+    # 执行分析
     try:
-        root = Path(args.root)
-        config_path = Path(args.config)
-
-        # 加载配置
-        config = load_config(config_path)
-
-        # 提取规则
-        modules_config = config.get("modules", {})
-        rules_config = config.get("rules", [])
-
-        if not rules_config:
-            print(f"⚠️ {ERR_NO_RULES}: 未定义任何架构规则", file=sys.stderr)
-            return 1
-
-        # 构建规则对象
-        rules: List[BoundaryRule] = []
-        for rule_item in rules_config:
-            if isinstance(rule_item, dict):
-                source = rule_item.get("source", "")
-                allowed = rule_item.get("allowed", [])
-                # 支持字符串形式的 allowed
-                if isinstance(allowed, str):
-                    allowed = [allowed]
-                rules.append(BoundaryRule(source=source, allowed=list(allowed)))
-
-        # 扫描或定向检查
-        if args.target:
-            target = Path(args.target)
-            result = check_target(target, root, rules)
-        else:
-            nodes = scan_directory(root)
-            result = check_architecture(nodes, rules)
-
-        # 输出结果
-        print(f"\n扫描模块数: {result.module_count}")
-        print(f"依赖关系数: {result.import_count}")
-
-        # 输出依赖图
-        if args.format == "tree":
-            nodes = scan_directory(root) if not args.target else _scan_target_nodes(Path(args.target), root)
-            print("\n" + format_text_tree(nodes, args.max_depth))
-        elif args.format == "table":
-            nodes = scan_directory(root) if not args.target else _scan_target_nodes(Path(args.target), root)
-            print("\n" + format_table(nodes))
-        elif args.format == "dot":
-            nodes = scan_directory(root) if not args.target else _scan_target_nodes(Path(args.target), root)
-            print("\n" + format_dot(nodes))
-
-        # 输出违规报告
-        print("\n" + "=" * 60)
-        print(format_violations(result))
-
-        # 返回状态
-        return 0 if not result.violations else 2
-
-    except FileNotFoundError as exc:
-        print(f"❌ {exc}", file=sys.stderr)
+        exit_code, output = run_analysis(args.path, rules, args.json)
+        print(output)
+        return exit_code
+    except Exception as e:
+        print(f"{ERR_INTERNAL}: 分析过程异常: {e}", file=sys.stderr)
         return 1
-    except ValueError as exc:
-        print(f"❌ {exc}", file=sys.stderr)
-        return 1
-    except Exception as exc:
-        print(f"❌ {ERR_INTERNAL}: 内部错误: {exc}", file=sys.stderr)
-        return 1
-
-
-def _scan_target_nodes(target: Path, root: Path) -> List[ModuleNode]:
-    """辅助函数：扫描目标（文件或目录）的模块节点"""
-    nodes: List[ModuleNode] = []
-    if target.is_file():
-        node = parse_python_file(target, root)
-        if node:
-            nodes.append(node)
-    else:
-        for py_file in target.rglob("*.py"):
-            node = parse_python_file(py_file, root)
-            if node:
-                nodes.append(node)
-    return nodes
 
 
 if __name__ == "__main__":
