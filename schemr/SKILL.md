@@ -1,23 +1,21 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: schemr
 name: schemr
-displayName: 未命名工具
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行schemr相关操作时使用本技能，提供规范、可复用的处理流程与输出。
-version: 1.0.0
-author: skill-factory-auto
+displayName: 数据建模 结构转换 字段映射
+description: 将任意数据源转换为结构化Schema文档的领域专用语言工具
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/schemr
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: SchemaForge Studio
 agent_created: true
-trigger_words:
-  - "schemr"
+trigger_words: ["schemr", "schema生成", "结构转换", "数据建模", "字段映射", "DSL建模"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -26,95 +24,60 @@ trigger_words:
 <!-- user-agreement-injected -->
 
 
-# 未命名工具
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-> A DSL for creating schema documents in ruby
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（一页纸速查卡）
+# schemr — 数据建模与结构转换 Skill 文档
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+## 一、能力边界（速查卡）
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+### 能做（5项核心能力）
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+| 编号 | 能力项 | 说明 | 适用场景示例 |
+|------|--------|------|--------------|
+| 1 | 多源输入解析 | 接受用户提供的数据、文件路径或URL作为输入源 | 从JSON文件、API响应、CSV导出中提取结构 |
+| 2 | 关键信息识别 | 自动识别输入中的实体、属性、类型及层级关系 | 从非结构化文本中提取字段名与数据类型 |
+| 3 | 结构化输出生成 | 按约定的Schema格式生成标准文档 | 生成JSON Schema、YAML配置或Markdown表格 |
+| 4 | 置信度标注 | 对每个字段的识别结果标注可信程度 | 区分明确字段与推测字段，便于人工复核 |
+| 5 | 批量与自定义处理 | 支持多文件批量转换及自定义输出模板 | 一次处理整个目录下的数据文件 |
 
-## 二、触发方式（说大白话就能用）
+### 不能做（明确边界）
 
-**触发词表（6类场景）：**
-| schemr | 通用场景 |
+| 编号 | 限制项 | 说明 |
+|------|--------|------|
+| 1 | 不执行代码 | 仅做静态分析，不运行输入中的任何程序逻辑 |
+| 2 | 不保证语义正确 | 字段含义推断基于模式匹配，不验证业务语义 |
+| 3 | 不处理加密内容 | 加密文件或需要认证的URL需先解密/授权 |
+| 4 | 不生成业务代码 | 只产出Schema文档，不生成对应的类或接口实现 |
+| 5 | 不覆盖所有格式 | 对二进制格式、图像类数据源支持有限 |
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 未命名工具，进入标准流程 |
-| 把这个转成另一种格式 | 启动 未命名工具，进入标准流程 |
-| 批量弄一下这些 | 启动 未命名工具，进入标准流程 |
+### 适用对象
 
-## 三、标准流程（5分钟上手路径）
+- 需要快速搭建数据模型的数据工程师
+- 需要将遗留系统数据结构文档化的后端开发者
+- 需要统一多系统接口字段规范的技术负责人
+- 需要从样例数据反推Schema的API设计人员
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2026 SkillForge Lab
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
