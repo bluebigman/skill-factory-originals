@@ -1,24 +1,21 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: code-review-single-skill
 name: code-review-single-skill
-displayName: 代码审查
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行code review single skill相关操作时使用本技能，提供规范、可复用的处理流程与输出。
-version: 1.0.0
-author: skill-factory-auto
+displayName: 代码审查 单文件检视 质量门禁
+description: 对单份代码文件执行结构化审查，输出问题清单与改进建议。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/code-review-single-skill
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: Lin Chen
 agent_created: true
-trigger_words:
-  - "代码审查"
-  - "code review single skill"
+trigger_words: ["代码审查", "code review", "单文件审查", "代码检视", "review code"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -27,96 +24,146 @@ trigger_words:
 <!-- user-agreement-injected -->
 
 
-# 代码审查
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-> Single-repo Code Review Expert. Extracts the current branch diff via Git, performs deep review of logic bugs, boundary g
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（一页纸速查卡）
+# 单文件代码审查 Skill 文档
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+## 一、能力边界速查卡
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+本 Skill 面向**单份代码文件**的结构化审查场景，帮助开发者快速定位潜在问题。
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+| 维度 | 能做 | 不能做 |
+|------|------|--------|
+| 输入 | 单份代码文件内容（粘贴文本或提供文件路径） | 多文件跨模块依赖分析、完整项目架构评审 |
+| 分析 | 语法风格、命名规范、基础逻辑缺陷、常见反模式 | 运行时性能基准测试、安全漏洞渗透验证 |
+| 输出 | 问题分级清单（阻断/建议/可选）、修改建议 | 自动修复代码、生成补丁文件 |
+| 适用对象 | 个人开发者、小型团队日常自检 | 大型组织合规审计、CI/CD 流水线强制门禁 |
 
-## 二、触发方式（说大白话就能用）
+**适用对象**：需要快速自查代码质量的开发者；在提交 PR 前希望获得第二双眼睛的团队个人成员。
 
-**触发词表（6类场景）：**
-| 代码审查 | 通用场景 |
-| code review single skill | 通用场景 |
+## 二、触发方式与场景映射
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 代码审查，进入标准流程 |
-| 把这个转成另一种格式 | 启动 代码审查，进入标准流程 |
-| 批量弄一下这些 | 启动 代码审查，进入标准流程 |
+当你的需求匹配以下任一场景时，可使用本 Skill：
 
-## 三、标准流程（5分钟上手路径）
+| 大白话场景 | 触发词示例 | 说明 |
+|-----------|-----------|------|
+| "帮我看看这段代码有啥问题" | 代码审查 / code review | 最常用入口 |
+| "这个函数写得对不对" | 单文件审查 / 代码检视 | 聚焦单文件 |
+| "提交前帮我检查一下" | review code / 代码检查 | 提交前自检 |
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+**注意**：若需求涉及多个文件间的调用关系、数据库 schema 变更、或需要与历史提交对比，请改用其他专用工具。
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+## 三、标准执行流程
 
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
+### 前置条件
 
-## 四、异常处理（错误码体系）
+- 用户提供**完整**的代码文件内容（文本粘贴或文件路径）
+- 明确告知编程语言（若无法从扩展名/语法判断）
+- 如有特殊审查重点（如安全性、可读性），请提前说明
 
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
+### 执行步骤
 
-## 五、常见问题（FAQ 速查）
+1. **解析输入**：识别语言类型、代码规模（行数）、主要结构（函数/类/模块）。
+2. **静态扫描**：按以下维度逐项检查：
+   - 命名规范（变量/函数/类命名是否清晰一致）
+   - 代码风格（缩进、空格、注释完整性）
+   - 逻辑正确性（边界条件、空值处理、循环终止条件）
+   - 常见反模式（重复代码、过深嵌套、魔法数字）
+3. **问题分级**：
+   - **[阻断]**：可能导致运行时错误或明显逻辑错误
+   - **[建议]**：可读性/可维护性改进点
+   - **[可选]**：风格偏好或微优化
+4. **生成报告**：按输出规范整理结果。
 
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
+### 输出规范
 
-## 六、进阶用法（深度按需）
+```markdown
+## 审查报告
 
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+**文件**：<文件名或标识>
+**语言**：<语言类型>
+**代码规模**：<行数>
+
+### 问题清单
+
+| 级别 | 行号 | 问题描述 | 修改建议 |
+|------|------|----------|----------|
+| 阻断 | 12 | 未处理空指针 | 增加 null 判断 |
+| 建议 | 45 | 魔法数字 86400 | 提取为常量 |
+
+### 总体评价
+<2-3 句总结性评价>
+```
+
+## 四、置信度门控
+
+当出现以下情况时，本 Skill **不会**编造结论，而是输出占位符：
+
+- 代码片段不完整（缺少函数头/尾）→ 输出 `[需核实:完整代码]`
+- 语言识别不确定 → 输出 `[需核实:编程语言]`
+- 依赖外部库/API 但未提供上下文 → 输出 `[需核实:依赖定义]`
+
+**原则**：宁缺毋滥。无法确认的问题不强行列出，避免误导。
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| E001 | 输入为空 | "未检测到代码内容，请提供待审查的代码文本或文件路径。" | 重新输入代码 |
+| E002 | 语言无法识别 | "无法确定代码语言，请明确指定（如 Python/Java/Go）。" | 补充语言信息 |
+| E003 | 代码片段不完整 | "代码疑似被截断，请提供完整文件内容。" | 检查粘贴内容完整性 |
+| E004 | 超出单文件范围 | "检测到多文件引用，本 Skill 仅支持单文件审查。" | 拆分文件逐一审查 |
+
+## 六、FAQ 反模式对照
+
+| 常见坑 | 反模式示例 | 正确做法 |
+|--------|-----------|----------|
+| 过度承诺 | "我能保证找出所有 bug" | 明确说明仅做静态结构审查，不覆盖运行时行为 |
+| 忽略上下文 | 不询问语言直接分析 | 先确认语言和审查重点 |
+| 编造行号 | 代码未分行号时随意标注 | 先标注行号或使用代码块定位描述 |
+| 一刀切建议 | 所有问题都标"必须修改" | 按阻断/建议/可选分级 |
+| 忽略用户重点 | 用户强调安全性却只查风格 | 优先响应用户指定的审查维度 |
+
+## 七、渐进式阅读路径
+
+### 新手快速上手（30 秒）
+
+1. 直接粘贴代码 → 2. 说明语言 → 3. 获取分级问题清单 → 4. 按"阻断"级别优先修改。
+
+### 进阶使用（3 分钟）
+
+1. 阅读"能力边界速查卡"明确预期。
+2. 在输入时指定审查重点（如"重点看并发安全"）。
+3. 结合"错误码体系"排查输入问题。
+4. 对输出中的 `[需核实]` 项补充信息后重新审查。
+
+### 深度应用（10 分钟）
+
+1. 将本 Skill 输出作为自检清单，配合实际运行测试。
+2. 对"建议"级别问题建立个人代码规范清单。
+3. 定期用同一文件多次审查，验证改进效果。
+
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2026 SkillForge Lab
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
