@@ -363,7 +363,7 @@ class MemSearch:
             # 类型判断与内容提取
             content = ""
             if isinstance(data, str):
-                # 判断是否为文件路径或 URL
+                # 判断是否为 URL
                 if data.startswith("http://") or data.startswith("https://"):
                     # URL 抓取（简化处理）
                     try:
@@ -374,8 +374,8 @@ class MemSearch:
                         source = f"url:{data}"
                     except Exception as e:
                         return make_error("E004", str(e))
-                elif len(data) < 500 and "\n" not in data and any(c in data for c in "./\\"):
-                    # 可能是文件路径
+                # 判断是否为文件路径（更严格的条件）
+                elif self._is_file_path(data):
                     try:
                         with open(data, "r", encoding="utf-8") as f:
                             content = f.read()
@@ -433,6 +433,31 @@ class MemSearch:
             })
         except Exception as e:
             return make_error("E010", str(e))
+
+    def _is_file_path(self, text: str) -> bool:
+        """更严格地判断是否为文件路径"""
+        # 文本长度限制（文件路径通常不会太长）
+        if len(text) > 200:
+            return False
+        
+        # 文件路径通常包含特定模式
+        # 检查是否包含换行符（多行文本不是文件路径）
+        if '\n' in text:
+            return False
+            
+        # 检查是否包含空格（文件路径通常无空格，除非是带空格的路径）
+        # 但这里我们保守处理，如果包含空格且不是以 / 或 \ 开头，可能是普通文本
+        if ' ' in text and not text.startswith(('C:\\', 'D:\\', '/', '~/')):
+            return False
+            
+        # 包含文件扩展名或路径分隔符
+        has_path_sep = '/' in text or '\\' in text
+        has_extension = bool(re.search(r'\.[a-zA-Z]{1,5}$', text))
+        
+        # 纯文件名模式（如 data.txt）
+        is_simple_file = bool(re.match(r'^[\w\-\.]+\.(txt|md|json|csv|log|dat)$', text))
+        
+        return has_path_sep or has_extension or is_simple_file
 
     def search(self, query: str, top_k: int = 5, mode: str = "semantic") -> Dict[str, Any]:
         """
