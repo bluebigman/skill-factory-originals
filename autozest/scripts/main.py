@@ -226,16 +226,21 @@ def extract_key_fields(data: Any) -> Tuple[Dict[str, Any], float]:
         return extracted, confidence
 
 
-def check_key_info_completeness(fields: Dict[str, Any]) -> Tuple[bool, List[str]]:
+def check_key_info_completeness(fields: Dict[str, Any], is_batch_item: bool = False) -> Tuple[bool, List[str]]:
     """
     检查关键信息是否完整。
     
     Args:
         fields: 已提取的字段字典
+        is_batch_item: 是否为批量处理中的单个项目
         
     Returns:
         Tuple[bool, List[str]]: (是否完整, 缺失字段列表)
     """
+    # 批量处理中的简单项目不需要强制包含 name 和 type
+    if is_batch_item:
+        return True, []
+    
     # 核心必需字段（按需调整）
     required_fields = ["name", "type"]
     
@@ -313,7 +318,8 @@ def generate_output(
 
 def process_single_item(
     raw_input: Any,
-    custom_format: Optional[Dict[str, Any]] = None
+    custom_format: Optional[Dict[str, Any]] = None,
+    is_batch_item: bool = False
 ) -> Dict[str, Any]:
     """
     处理单个输入项。
@@ -321,6 +327,7 @@ def process_single_item(
     Args:
         raw_input: 原始输入
         custom_format: 自定义格式
+        is_batch_item: 是否为批量处理中的单个项目
         
     Returns:
         Dict[str, Any]: 处理结果
@@ -335,7 +342,7 @@ def process_single_item(
     extracted, confidence = extract_key_fields(raw_input)
     
     # 4. 检查关键信息
-    complete, missing = check_key_info_completeness(extracted)
+    complete, missing = check_key_info_completeness(extracted, is_batch_item)
     if not complete and confidence < MEDIUM_CONFIDENCE_THRESHOLD:
         raise_error("E002", f"还缺少以下信息，请补充：{', '.join(missing)}")
     
@@ -371,7 +378,7 @@ def process_batch(
     
     for i, item in enumerate(items):
         try:
-            result = process_single_item(item, custom_format)
+            result = process_single_item(item, custom_format, is_batch_item=True)
             result["index"] = i
             results.append(result)
         except AutoZestError as e:
