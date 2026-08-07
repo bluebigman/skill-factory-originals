@@ -112,6 +112,11 @@ class ConfigParser:
     BRANCH_PATTERN = re.compile(r"(?:branch|分支)[:：]\s*([\w.\-\/]+)")
     REPO_PATTERN = re.compile(r"(?:repo|repository|仓库)[:：]\s*([\w:\/\.@\-]+\.git|[\w:\/\.@\-]+)")
 
+    # 链接文件和目录的正则模式
+    LINKED_FILES_PATTERN = re.compile(r'linked_files\s*[:=]\s*\[([^\]]*)\]', re.IGNORECASE)
+    LINKED_DIRS_PATTERN = re.compile(r'linked_dirs\s*[:=]\s*\[([^\]]*)\]', re.IGNORECASE)
+    PATH_IN_LIST_PATTERN = re.compile(r'["\']([\/\w.\-]+)["\']')
+
     def parse(self, raw_config: str, app_name: str, environment: str = "production") -> DeployConfig:
         """
         解析部署配置文本，返回结构化配置对象
@@ -290,36 +295,73 @@ class ConfigParser:
         linked_dirs = []
         in_files_section = False
         in_dirs_section = False
+        current_file_line = ""
+        current_dir_line = ""
 
         for line in lines:
             line = line.strip()
             if not line:
                 continue
 
-            if "linked_files" in line.lower() or "link_files" in line.lower():
-                in_files_section = True
-                in_dirs_section = False
+            # 检测 linked_files 声明
+            if "linked_files" in line.lower():
+                # 如果同一行包含列表，直接解析
+                match = self.LINKED_FILES_PATTERN.search(line)
+                if match:
+                    paths = self.PATH_IN_LIST_PATTERN.findall(match.group(1))
+                    linked_files.extend(paths)
+                else:
+                    # 检查是否有内联的数组
+                    if "[" in line:
+                        in_files_section = True
+                        current_file_line = line[line.index("["):]
+                        continue
+                    else:
+                        in_files_section = True
+                        current_file_line = ""
                 continue
 
-            if "linked_dirs" in line.lower() or "link_dirs" in line.lower():
-                in_dirs_section = True
-                in_files_section = False
+            # 检测 linked_dirs 声明
+            if "linked_dirs" in line.lower():
+                # 如果同一行包含列表，直接解析
+                match = self.LINKED_DIRS_PATTERN.search(line)
+                if match:
+                    paths = self.PATH_IN_LIST_PATTERN.findall(match.group(1))
+                    linked_dirs.extend(paths)
+                else:
+                    # 检查是否有内联的数组
+                    if "[" in line:
+                        in_dirs_section = True
+                        current_dir_line = line[line.index("["):]
+                        continue
+                    else:
+                        in_dirs_section = True
+                        current_dir_line = ""
                 continue
 
+            # 处理文件列表内容
             if in_files_section:
-                if "]" in line or "}" in line:
+                current_file_line += line
+                # 检查是否包含完整的列表
+                if "]" in current_file_line:
+                    # 提取所有路径
+                    paths = self.PATH_IN_LIST_PATTERN.findall(current_file_line)
+                    linked_files.extend(paths)
                     in_files_section = False
-                    continue
-                # 提取路径
-                paths = re.findall(r'["\']([\/\w.\-]+)["\']', line)
-                linked_files.extend(paths)
+                    current_file_line = ""
+                continue
 
+            # 处理目录列表内容
             if in_dirs_section:
-                if "]" in line or "}" in line:
+                current_dir_line += line
+                # 检查是否包含完整的列表
+                if "]" in current_dir_line:
+                    # 提取所有路径
+                    paths = self.PATH_IN_LIST_PATTERN.findall(current_dir_line)
+                    linked_dirs.extend(paths)
                     in_dirs_section = False
-                    continue
-                paths = re.findall(r'["\']([\/\w.\-]+)["\']', line)
-                linked_dirs.extend(paths)
+                    current_dir_line = ""
+                continue
 
         return linked_files, linked_dirs
 
