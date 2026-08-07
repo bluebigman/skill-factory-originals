@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: awesome-claude-code-toolkit
 name: awesome-claude-code-toolkit
-displayName: 技能工具箱 数据转换 结构化输出
-description: 将用户输入数据转换为结构化结果，支持批量处理与自定义格式。
-version: 1.0.1
+displayName: 数据整理 结构化转换 批量处理
+description: 将零散输入数据转换为规范结构化结果，支持批量与自定义格式。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/awesome-claude-code-toolkit
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge Studio
+author: 独立技能工坊
 agent_created: true
-trigger_words: ["awesome claude code toolkit", "数据转换", "结构化输出", "批量处理", "格式整理"]
+trigger_words: ["awesome claude code toolkit", "数据转换", "结构化输出", "批量处理", "格式整理", "数据清洗", "字段映射"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -33,19 +33,33 @@ trigger_words: ["awesome claude code toolkit", "数据转换", "结构化输出"
 
 # awesome-claude-code-toolkit 技能文档
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-本技能定位为**通用数据处理与格式化输出工具**，面向需要将零散信息整理为规范结构的场景。
+### 1.1 能做什么
 
-| 维度 | 说明 |
-|------|------|
-| ✅ 能做 | 解析文本/文件/URL 中的关键字段；按指定模板重组数据；批量处理多条记录；输出 JSON/CSV/Markdown 表格；标注置信度 |
-| ❌ 不能做 | 不执行外部 API 调用；不进行语义推理或情感分析；不修改原始文件；不保证数据准确性（仅做格式转换） |
-| 🎯 适用对象 | 需要快速整理笔记、清洗数据、生成报表草稿的日常办公用户；需要批量格式化日志或清单的开发者 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 数据标准化 | 将非结构化文本/列表转为键值对或表格 | "张三，28岁，北京" → `{"name":"张三","age":28,"city":"北京"}` |
+| 批量处理 | 一次处理多条记录，保持结构一致 | 10条日志 → 10个JSON对象数组 |
+| 格式转换 | 支持JSON、CSV、Markdown表格、纯文本四种输出 | 输入任意，输出指定格式 |
+| 字段映射 | 按用户指定字段名重命名或提取子集 | 只保留 `id` 和 `status` 字段 |
+| 类型推断 | 自动识别数字、布尔、日期等基础类型 | `"true"` → `true`，`"2024-01-01"` → 日期字符串 |
 
-**输入要求**：文本段落、CSV/JSON 文件路径、可访问的 URL 地址。单次处理建议不超过 200 条记录，超出时自动分批。
+### 1.2 不能做什么
 
-**输出约定**：默认输出 Markdown 表格；可通过参数切换为 JSON 或 CSV。每条结果附带 `confidence` 字段（0-1 区间）。
+| 限制项 | 说明 |
+|--------|------|
+| 不做语义理解 | 无法判断"高兴"是正面还是负面情绪，仅做结构整理 |
+| 不做数据清洗决策 | 不会自动删除"看起来错误"的数据，需用户明确指令 |
+| 不做跨语言翻译 | 保留原文内容，仅调整结构 |
+| 不处理二进制 | 仅支持文本类输入（JSON、CSV、日志、普通文本） |
+| 不保证唯一性 | 重复数据会原样保留，去重需用户指定规则 |
+
+### 1.3 适用对象
+
+- 需要快速整理日志、报表、问卷结果的开发者
+- 需要将散落数据汇总为统一格式的运营人员
+- 需要批量转换数据结构的自动化脚本调用方
 
 
 ## 许可证（License）
