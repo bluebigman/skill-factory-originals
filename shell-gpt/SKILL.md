@@ -1,4 +1,5 @@
 ---
+license: MIT
 slug: shell-gpt
 name: shell-gpt
 displayName: 未命名工具
