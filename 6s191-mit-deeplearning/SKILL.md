@@ -7,7 +7,7 @@ license: MIT
 slug: 6s191-mit-deeplearning
 name: 6s191-mit-deeplearning
 displayName: 代码审查
-description: 投资或医疗建议。当用户需要AI大模型 深度学习、进行6s191 mit deeplearning相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+description: 仅供学习与参考用途。使用本。当用户需要AI大模型 深度学习、进行6s191 mit deeplearning相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

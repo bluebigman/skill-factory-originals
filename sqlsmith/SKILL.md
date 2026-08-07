@@ -7,7 +7,7 @@ license: MIT
 slug: sqlsmith
 name: sqlsmith
 displayName: SQL查询
-description: 投资或医疗建议。当用户需要SQL查询 数据库、进行sqlsmith相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+description: 仅供学习与参考用途。使用本。当用户需要SQL查询 数据库、进行sqlsmith相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

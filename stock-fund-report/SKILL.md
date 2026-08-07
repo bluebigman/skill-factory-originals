@@ -4,7 +4,7 @@
 slug: stock-fund-report
 name: stock-fund-report
 displayName: 持仓分析报告
-description: 根据持仓与行情数据生成投资分析周报：收益统计、持仓集中度、风险提示、调仓建议
+description: 仅供学习与参考用途。使用本。当用户需要报表 数据可视化、进行stock fund report相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT

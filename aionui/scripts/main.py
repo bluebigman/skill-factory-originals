@@ -1,411 +1,458 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-aionui - 未命名工具
-Open-source 24/7 Cowork app for OpenClaw, Hermes, Claude Code, Codex, OpenCode and 20+ more CLI Agent
-
-基于功能规格的 clean-room 独立实现。
-仅使用 Python 标准库，无第三方依赖。
-
-用法:
-    python main.py --selftest    # 离线自检
-    python main.py --input "文本" --format json   # 处理输入
-    python main.py --help        # 帮助信息
+aionui 未命名工具 - 独立实现脚本
+=================================
+基于功能规格的 clean-room 实现，仅使用 Python 标准库。
+支持命令行调用和 --selftest 离线自检。
 """
 
 import argparse
-import json
-import re
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+import re
+from typing import Dict, List, Any, Optional, Tuple
 
-# ──────────────────────────── 常量定义 ────────────────────────────
 
-# 错误码与标准化话术（规格第四节）
-ERROR_MESSAGES: Dict[str, str] = {
-    "E001": "请提供待处理的内容，格式为：用户提供的数据/文件/URL",
-    "E002": "还缺少以下信息，请补充：...",
-    "E003": "输入格式不符合要求，示例：...",
-    "E004": "这超出了本工具的能力范围，建议...",
-    "E005": "结果无法确定，建议：...",
+# ---------------------------------------------------------------------------
+# 错误码定义
+# ---------------------------------------------------------------------------
+class ErrorCode:
+    """错误码常量定义"""
+    E001_EMPTY_INPUT = "E001"
+    E002_MISSING_INFO = "E002"
+    E003_BAD_FORMAT = "E003"
+    E004_OUT_OF_SCOPE = "E004"
+    E005_LOW_CONFIDENCE = "E005"
+    E006_INTERNAL = "E006"
+    E007_OUTPUT_FAIL = "E007"
+    E008_UNSUPPORTED = "E008"
+    E009_EXTERNAL = "E009"
+    E010_UNKNOWN = "E010"
+
+
+ERROR_MESSAGES = {
+    ErrorCode.E001_EMPTY_INPUT: "请提供待处理的内容，格式为：用户提供的数据/文件/URL",
+    ErrorCode.E002_MISSING_INFO: "还缺少以下信息，请补充：",
+    ErrorCode.E003_BAD_FORMAT: "输入格式不符合要求，示例：",
+    ErrorCode.E004_OUT_OF_SCOPE: "这超出了本工具的能力范围，建议：",
+    ErrorCode.E005_LOW_CONFIDENCE: "结果无法确定，建议：",
+    ErrorCode.E006_INTERNAL: "内部处理错误，请重试",
+    ErrorCode.E007_OUTPUT_FAIL: "输出生成失败，请检查参数",
+    ErrorCode.E008_UNSUPPORTED: "不支持的输入类型或格式",
+    ErrorCode.E009_EXTERNAL: "需要外部服务但未启用网络访问",
+    ErrorCode.E010_UNKNOWN: "未知错误，请参考文档",
 }
 
-# 置信度阈值（规格第三节 Step 2）
-CONFIDENCE_HIGH = 90      # ≥90% 直接输出
-CONFIDENCE_MEDIUM = 85    # 85%-90% 建议复核
 
-# 输出格式支持列表
-SUPPORTED_FORMATS = ["json", "text", "csv"]
+# ---------------------------------------------------------------------------
+# 核心数据结构
+# ---------------------------------------------------------------------------
+class ProcessedItem:
+    """单条处理结果"""
+    def __init__(self, source: str, key_fields: Dict[str, Any], confidence: float, warnings: List[str] = None):
+        self.source = source
+        self.key_fields = key_fields
+        self.confidence = confidence
+        self.warnings = warnings or []
 
-# 内置硬编码自检样例（不依赖外部文件）
-SELF_TEST_SAMPLES = [
-    {
-        "input": "张三，电话13800138000，邮箱zhangsan@example.com，地址北京市朝阳区",
-        "expect_keys": ["name", "phone", "email", "address", "confidence", "flags"],
-        "expect_name": "张三",
-        "expect_phone_len": 11,
-    },
-    {
-        "input": "项目Alpha，预算50000元，截止2026-12-31，负责人李四",
-        "expect_keys": ["name", "budget", "deadline", "owner", "confidence", "flags"],
-        "expect_budget_min": 10000,
-        "expect_budget_max": 100000,
-    },
-    {
-        "input": "这个内容很短",
-        "expect_keys": ["raw", "length", "confidence", "flags"],
-        "expect_len_min": 1,
-    },
-]
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "source": self.source,
+            "key_fields": self.key_fields,
+            "confidence": self.confidence,
+            "warnings": self.warnings,
+        }
 
 
-# ──────────────────────────── 核心功能函数 ────────────────────────────
+class ProcessResult:
+    """批量处理结果"""
+    def __init__(self):
+        self.items: List[ProcessedItem] = []
+        self.errors: List[Tuple[str, str]] = []  # (错误码, 描述)
 
-def validate_input(raw_input: str) -> Tuple[bool, str, Optional[Dict[str, Any]]]:
+    def add_item(self, item: ProcessedItem) -> None:
+        self.items.append(item)
+
+    def add_error(self, code: str, message: str) -> None:
+        self.errors.append((code, message))
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "items": [item.to_dict() for item in self.items],
+            "errors": self.errors,
+        }
+
+
+# ---------------------------------------------------------------------------
+# 核心处理逻辑
+# ---------------------------------------------------------------------------
+def _validate_input(raw_input: Any) -> Optional[str]:
+    """校验输入，返回错误码或 None（通过）"""
+    if raw_input is None:
+        return ErrorCode.E001_EMPTY_INPUT
+    if isinstance(raw_input, str) and not raw_input.strip():
+        return ErrorCode.E001_EMPTY_INPUT
+    if isinstance(raw_input, (list, tuple, dict)) and len(raw_input) == 0:
+        return ErrorCode.E001_EMPTY_INPUT
+    return None
+
+
+def _extract_key_fields(text: str) -> Dict[str, Any]:
     """
-    校验输入合法性（规格第三节 Step 1）。
-    返回: (是否合法, 错误码或空串, 结构化的最小信息集)
+    从文本中提取关键信息。
+    规则：
+    - 识别形如 key: value 或 key=value 的字段
+    - 识别常见命名实体（日期、数字、邮箱等）
+    - 返回结构化字典
     """
-    # E001: 输入为空
-    if raw_input is None or not raw_input.strip():
-        return False, "E001", None
+    fields: Dict[str, Any] = {}
 
-    text = raw_input.strip()
+    # 1. 提取 key: value 或 key=value
+    pattern = r'(?:^|\s)([A-Za-z_][A-Za-z0-9_]*)\s*[:=]\s*([^\s,;]+)'
+    for match in re.finditer(pattern, text):
+        key, value = match.group(1), match.group(2)
+        fields[key] = value
 
-    # E003: 输入格式错误（简单长度校验，过于短的内容视为无有效信息）
-    if len(text) < 2:
-        return False, "E003", None
-
-    # 收集最小信息集（Step 1 要求）
-    info_set = {
-        "input_source": "user_provided_text",  # 本实现仅支持文本直接输入
-        "output_format": None,                  # 由参数决定
-        "completeness": "standard",             # 标准完整度
-        "raw_text": text,
-        "length": len(text),
-    }
-    return True, "", info_set
-
-
-def extract_key_info(text: str) -> Dict[str, Any]:
-    """
-    从文本中提取关键信息（规格第三节 Step 2.1）。
-    使用正则表达式识别常见模式。
-    """
-    info: Dict[str, Any] = {}
-
-    # 姓名：常见中文姓名（2-4个汉字）
-    name_match = re.search(r"([\u4e00-\u9fa5]{2,4})(?=，|,|电话|邮箱|地址|$)", text)
-    if name_match:
-        info["name"] = name_match.group(1)
-
-    # 电话：11位手机号
-    phone_match = re.search(r"1[3-9]\d{9}", text)
-    if phone_match:
-        info["phone"] = phone_match.group(0)
-
-    # 邮箱：标准邮箱格式
-    email_match = re.search(r"[\w.+-]+@[\w-]+\.[\w.]+", text)
-    if email_match:
-        info["email"] = email_match.group(0)
-
-    # 地址：地址关键词
-    addr_match = re.search(r"([\u4e00-\u9fa5]+(?:省|市|区|县|镇|街道)[\u4e00-\u9fa5]*)", text)
-    if addr_match:
-        info["address"] = addr_match.group(1)
-
-    # 预算：数字+元
-    budget_match = re.search(r"(\d+)\s*元", text)
-    if budget_match:
-        info["budget"] = int(budget_match.group(1))
-
-    # 日期：YYYY-MM-DD
-    date_match = re.search(r"(\d{4}-\d{2}-\d{2})", text)
+    # 2. 提取日期（YYYY-MM-DD 或 YYYY/MM/DD）
+    date_match = re.search(r'\d{4}[-/]\d{1,2}[-/]\d{1,2}', text)
     if date_match:
-        info["deadline"] = date_match.group(1)
+        fields["date"] = date_match.group(0)
 
-    # 负责人：负责人后跟姓名
-    owner_match = re.search(r"负责人[:：]?\s*([\u4e00-\u9fa5]{2,4})", text)
-    if owner_match:
-        info["owner"] = owner_match.group(1)
+    # 3. 提取邮箱
+    email_match = re.search(r'[\w.+-]+@[\w-]+\.[\w.]+', text)
+    if email_match:
+        fields["email"] = email_match.group(0)
 
-    # 项目名：项目后跟名称
-    project_match = re.search(r"项目[:：]?\s*([\u4e00-\u9fa5A-Za-z0-9]+)", text)
-    if project_match:
-        info["project"] = project_match.group(1)
+    # 4. 提取 URL
+    url_match = re.search(r'https?://[^\s]+', text)
+    if url_match:
+        fields["url"] = url_match.group(0)
 
-    return info
+    # 5. 提取数字（第一个出现的数字）
+    num_match = re.search(r'\d+', text)
+    if num_match:
+        fields["number"] = num_match.group(0)
+
+    return fields
 
 
-def compute_confidence(text: str, extracted: Dict[str, Any]) -> Tuple[int, List[str]]:
-    """
-    计算置信度并生成标注（规格第三节 Step 2.3）。
-    返回: (置信度百分比, 标注列表)
-    """
-    flags: List[str] = []
-    confidence = 50  # 基础分
+def _calculate_confidence(fields: Dict[str, Any], raw_text_len: int) -> float:
+    """计算置信度（0-1）"""
+    if not fields:
+        return 0.0
 
-    # 文本长度贡献（越长信息越丰富）
-    text_len = len(text)
-    if text_len >= 50:
-        confidence += 20
-    elif text_len >= 20:
-        confidence += 15
-    elif text_len >= 10:
-        confidence += 10
+    # 基础置信度
+    base = min(0.6 + 0.1 * len(fields), 0.95)
+
+    # 文本长度修正
+    if raw_text_len < 10:
+        base -= 0.2
+    elif raw_text_len > 500:
+        base += 0.02
+
+    # 关键字段完整性
+    if "date" in fields and "email" in fields:
+        base += 0.03
+
+    return max(0.0, min(1.0, base))
+
+
+def _format_confidence_label(confidence: float) -> str:
+    """根据置信度生成标注"""
+    if confidence >= 0.90:
+        return "直接输出"
+    elif confidence >= 0.85:
+        return "建议复核"
     else:
-        confidence += 5
+        return "[需核实]"
 
-    # 提取到关键字段加分
-    extract_count = len(extracted)
-    confidence += min(extract_count * 5, 25)  # 最多加25分
 
-    # 检查是否包含结构化分隔符
-    if any(sep in text for sep in ["，", ",", "；", ";", "|"]):
-        confidence += 5
+def process_single(raw_input: Any) -> ProcessedItem:
+    """处理单条输入"""
+    # 输入校验
+    error_code = _validate_input(raw_input)
+    if error_code:
+        raise ValueError(f"{error_code}: {ERROR_MESSAGES[error_code]}")
 
-    # 有明确格式的数据（电话、邮箱、日期）加分
-    if "phone" in extracted:
-        confidence += 5
-    if "email" in extracted:
-        confidence += 5
-    if "deadline" in extracted:
-        confidence += 5
-
-    # 置信度上限95，下限5
-    confidence = max(5, min(confidence, 95))
-
-    # 根据置信度生成标注
-    if confidence >= CONFIDENCE_HIGH:
-        pass  # 直接输出，无标注
-    elif confidence >= CONFIDENCE_MEDIUM:
-        flags.append("建议复核")
+    # 转文本
+    if isinstance(raw_input, str):
+        text = raw_input
+    elif isinstance(raw_input, (dict, list)):
+        text = str(raw_input)
     else:
-        flags.append("[需核实]")
+        text = str(raw_input)
 
-    return confidence, flags
-
-
-def process_text(raw_input: str, output_format: str = "json") -> Tuple[bool, str, Optional[Dict[str, Any]]]:
-    """
-    核心处理流程（规格第三节 Step 2 完整实现）。
-    返回: (是否成功, 错误码或空串, 处理结果)
-    """
-    # Step 1: 校验输入
-    valid, err_code, info_set = validate_input(raw_input)
-    if not valid:
-        return False, err_code, None
-
-    # Step 2: 执行核心流程
-    text = info_set["raw_text"]
-    extracted = extract_key_info(text)
-
-    # 检查关键信息是否完整（E002）
-    if len(extracted) == 0:
-        return False, "E002", None
+    # 提取关键字段
+    fields = _extract_key_fields(text)
 
     # 计算置信度
-    confidence, flags = compute_confidence(text, extracted)
+    confidence = _calculate_confidence(fields, len(text))
 
-    # 构建结果
-    result = {
-        "raw": text,
-        "length": len(text),
-        **extracted,  # 展开提取的字段
-        "confidence": confidence,
-        "flags": flags,
-    }
+    # 生成警告
+    warnings = []
+    if confidence < 0.85:
+        warnings.append("关键信息提取不完整，请人工复核")
+    if not fields:
+        warnings.append("未能识别结构化字段")
 
-    # 检查置信度过低（E005）
-    if confidence < CONFIDENCE_MEDIUM:
-        result["error_code"] = "E005"
-
-    # Step 3: 输出格式化
-    if output_format == "json":
-        pass  # 已经是字典，调用方负责序列化
-    elif output_format == "text":
-        # 文本格式：每行一个字段
-        lines = [f"{k}: {v}" for k, v in result.items() if k != "raw"]
-        result["text_output"] = "\n".join(lines)
-    elif output_format == "csv":
-        # CSV格式：简单实现，仅输出键值对
-        result["csv_output"] = ",".join([f"{k}={v}" for k, v in result.items() if k != "raw"])
-
-    return True, "", result
-
-
-def format_output(result: Dict[str, Any], output_format: str) -> str:
-    """将结果序列化为指定格式的字符串。"""
-    if output_format == "json":
-        return json.dumps(result, ensure_ascii=False, indent=2)
-    elif output_format == "text":
-        return result.get("text_output", str(result))
-    elif output_format == "csv":
-        return result.get("csv_output", str(result))
-    else:
-        return str(result)
-
-
-# ──────────────────────────── 自检模块 ────────────────────────────
-
-def run_selftest() -> bool:
-    """
-    内置自检（--selftest 参数）。
-    使用硬编码样例数据，不依赖外部文件、网络或当前工作目录。
-    使用宽松阈值断言，确保必然匹配。
-    """
-    print("开始自检...")
-    all_passed = True
-
-    # 测试1: 空输入应返回 E001
-    ok, err, _ = process_text("")
-    if not ok and err == "E001":
-        print("  [PASS] 空输入处理正确 (E001)")
-    else:
-        print(f"  [FAIL] 空输入处理错误: {err}")
-        all_passed = False
-
-    # 测试2: 处理内置样例
-    for i, sample in enumerate(SELF_TEST_SAMPLES, 1):
-        try:
-            ok, err, result = process_text(sample["input"])
-            if not ok:
-                print(f"  [FAIL] 样例{i}处理失败: {err}")
-                all_passed = False
-                continue
-
-            # 检查必需键存在
-            for key in sample["expect_keys"]:
-                if key not in result:
-                    print(f"  [FAIL] 样例{i}缺少键: {key}")
-                    all_passed = False
-                    break
-            else:
-                # 宽松阈值断言
-                if "expect_name" in sample and result.get("name") != sample["expect_name"]:
-                    print(f"  [FAIL] 样例{i}姓名不匹配")
-                    all_passed = False
-
-                if "expect_phone_len" in sample:
-                    phone = result.get("phone", "")
-                    if not (len(phone) >= 10 and len(phone) <= 12):  # 宽松区间
-                        print(f"  [FAIL] 样例{i}电话号码长度异常")
-                        all_passed = False
-
-                if "expect_budget_min" in sample and "expect_budget_max" in sample:
-                    budget = result.get("budget", 0)
-                    if not (sample["expect_budget_min"] <= budget <= sample["expect_budget_max"]):
-                        print(f"  [FAIL] 样例{i}预算不在合理区间")
-                        all_passed = False
-
-                if "expect_len_min" in sample:
-                    if result.get("length", 0) < sample["expect_len_min"]:
-                        print(f"  [FAIL] 样例{i}长度异常")
-                        all_passed = False
-
-                # 置信度必须是0-100之间的整数
-                conf = result.get("confidence", -1)
-                if not (0 <= conf <= 100):
-                    print(f"  [FAIL] 样例{i}置信度越界")
-                    all_passed = False
-
-                print(f"  [PASS] 样例{i}处理成功")
-
-        except Exception as e:
-            print(f"  [FAIL] 样例{i}异常: {e}")
-            all_passed = False
-
-    # 测试3: 格式输出
-    for fmt in SUPPORTED_FORMATS:
-        try:
-            ok, _, result = process_text("测试数据，电话13800138000", fmt)
-            if ok:
-                output = format_output(result, fmt)
-                if len(output) > 0:
-                    print(f"  [PASS] 格式输出 {fmt} 正常")
-                else:
-                    print(f"  [FAIL] 格式输出 {fmt} 为空")
-                    all_passed = False
-            else:
-                print(f"  [FAIL] 格式输出 {fmt} 处理失败")
-                all_passed = False
-        except Exception as e:
-            print(f"  [FAIL] 格式输出 {fmt} 异常: {e}")
-            all_passed = False
-
-    # 测试4: 错误码覆盖
-    error_codes = ["E001", "E002", "E003", "E004", "E005"]
-    for code in error_codes:
-        if code not in ERROR_MESSAGES:
-            print(f"  [FAIL] 缺少错误码 {code}")
-            all_passed = False
-        else:
-            msg = ERROR_MESSAGES[code]
-            if not msg or len(msg) < 5:
-                print(f"  [FAIL] 错误码 {code} 消息过短")
-                all_passed = False
-
-    print(f"  [PASS] 错误码体系完整 ({len(error_codes)}个)")
-
-    # 最终结果
-    if all_passed:
-        print("自检全部通过 ✓")
-    else:
-        print("自检存在失败项 ✗")
-    return all_passed
-
-
-# ──────────────────────────── 主入口 ────────────────────────────
-
-def main() -> int:
-    """命令行主入口。"""
-    parser = argparse.ArgumentParser(
-        description="aionui - 未命名工具：将文本信息结构化处理",
-        epilog="示例: python main.py --input '张三，电话13800138000' --format json"
+    return ProcessedItem(
+        source=raw_input if isinstance(raw_input, str) else str(raw_input),
+        key_fields=fields,
+        confidence=confidence,
+        warnings=warnings,
     )
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--input", "-i", type=str, help="待处理的文本内容")
-    parser.add_argument("--format", "-f", type=str, choices=SUPPORTED_FORMATS,
-                        default="json", help="输出格式 (默认: json)")
-    parser.add_argument("--list-formats", action="store_true", help="列出支持的输出格式")
 
-    args = parser.parse_args()
 
+def process_batch(inputs: List[Any]) -> ProcessResult:
+    """批量处理"""
+    result = ProcessResult()
+
+    for item in inputs:
+        try:
+            processed = process_single(item)
+            result.add_item(processed)
+        except ValueError as e:
+            code = str(e).split(":")[0] if ":" in str(e) else ErrorCode.E010_UNKNOWN
+            result.add_error(code, str(e))
+
+    return result
+
+
+def format_output(result: ProcessResult, detailed: bool = False) -> str:
+    """格式化输出结果"""
+    if not result.items:
+        return "没有可输出的结果"
+
+    lines = []
+    for i, item in enumerate(result.items, 1):
+        lines.append(f"--- 条目 {i} ---")
+        lines.append(f"来源: {item.source[:100]}{'...' if len(item.source) > 100 else ''}")
+
+        if detailed:
+            lines.append(f"关键字段: {item.key_fields}")
+        else:
+            keys = list(item.key_fields.keys())
+            lines.append(f"识别字段: {', '.join(keys) if keys else '无'}")
+
+        label = _format_confidence_label(item.confidence)
+        lines.append(f"置信度: {item.confidence:.1%} ({label})")
+
+        if item.warnings:
+            lines.append(f"警告: {'; '.join(item.warnings)}")
+
+        lines.append("")
+
+    if result.errors:
+        lines.append("=== 错误汇总 ===")
+        for code, msg in result.errors:
+            lines.append(f"[{code}] {msg}")
+
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
+# CLI 入口
+# ---------------------------------------------------------------------------
+def run_cli(args: argparse.Namespace) -> int:
+    """CLI 主入口"""
     # 自检模式
     if args.selftest:
-        return 0 if run_selftest() else 1
+        return run_selftest()
 
-    # 列出格式
-    if args.list_formats:
-        print("支持的输出格式:")
-        for fmt in SUPPORTED_FORMATS:
-            print(f"  - {fmt}")
+    # 处理模式
+    if args.input:
+        # 支持多输入
+        inputs = args.input
+        result = process_batch(inputs)
+        output = format_output(result, detailed=args.detailed)
+
+        # 输出
+        if args.output:
+            try:
+                with open(args.output, "w", encoding="utf-8") as f:
+                    f.write(output)
+            except OSError as e:
+                print(f"[{ErrorCode.E007_OUTPUT_FAIL}] 写入文件失败: {e}", file=sys.stderr)
+                return 1
+        else:
+            print(output)
+
+        # 错误处理
+        if result.errors:
+            return 1
+        return 0
+    else:
+        # 无输入，显示帮助
+        parser.print_help()
         return 0
 
-    # 处理输入
-    if not args.input:
-        print(f"错误 E001: {ERROR_MESSAGES['E001']}", file=sys.stderr)
-        print("使用 --help 查看帮助，或 --selftest 运行自检", file=sys.stderr)
+
+# ---------------------------------------------------------------------------
+# 自检逻辑（硬编码样例，不依赖外部文件）
+# ---------------------------------------------------------------------------
+def run_selftest() -> int:
+    """
+    离线自检核心逻辑。
+    使用硬编码样例，不读取外部文件，不访问网络。
+    """
+    test_cases = [
+        # (输入, 期望至少识别字段数, 期望置信度下限)
+        ("姓名: 张三, email: test@example.com, 日期: 2025-01-15", 3, 0.6),
+        ("user=alice, score=85, url=https://example.com", 3, 0.6),
+        ("简单文本没有结构化内容", 0, 0.0),
+        ("联系 admin@test.org 或拨打 12345", 1, 0.4),
+        ({"name": "test", "value": 42}, 0, 0.4),  # dict 输入
+        ("", 0, 0.0),  # 空输入
+    ]
+
+    print("=== aionui 自检开始 ===")
+    passed = True
+
+    # 测试 1: 单条处理
+    print("\n[测试1] 单条处理")
+    for i, (input_data, min_fields, min_conf) in enumerate(test_cases[:4], 1):
+        try:
+            result = process_single(input_data)
+            field_count = len(result.key_fields)
+            conf_ok = result.confidence >= min_conf
+            fields_ok = field_count >= min_fields
+
+            status = "PASS" if (conf_ok and fields_ok) else "FAIL"
+            if status == "FAIL":
+                passed = False
+
+            print(f"  用例{i}: {status} - 字段数={field_count}(需≥{min_fields}), "
+                  f"置信度={result.confidence:.2f}(需≥{min_conf})")
+        except ValueError as e:
+            if i == len(test_cases) - 1:  # 空输入应该报错
+                print(f"  用例{i}: PASS - 正确拒绝空输入")
+            else:
+                print(f"  用例{i}: FAIL - 意外错误: {e}")
+                passed = False
+
+    # 测试 2: 空输入处理
+    print("\n[测试2] 空输入")
+    try:
+        process_single("")
+        print("  FAIL - 空输入应抛出错误")
+        passed = False
+    except ValueError as e:
+        code = str(e).split(":")[0]
+        if code == ErrorCode.E001_EMPTY_INPUT:
+            print(f"  PASS - 正确返回 {code}")
+        else:
+            print(f"  FAIL - 错误码不正确: {code}")
+            passed = False
+
+    # 测试 3: 批量处理
+    print("\n[测试3] 批量处理")
+    batch = ["name: Alice, email: a@b.com", "简单文本", "key=value"]
+    result = process_batch(batch)
+    if len(result.items) == 3:
+        print(f"  PASS - 批量处理 {len(result.items)} 条")
+    else:
+        print(f"  FAIL - 期望3条，实际 {len(result.items)}")
+        passed = False
+
+    # 测试 4: 置信度计算
+    print("\n[测试4] 置信度计算")
+    high_conf = _calculate_confidence({"a": "1", "b": "2", "c": "3"}, 100)
+    low_conf = _calculate_confidence({}, 5)
+    if high_conf > 0.7 and low_conf < 0.3:
+        print(f"  PASS - 高置信度={high_conf:.2f}, 低置信度={low_conf:.2f}")
+    else:
+        print(f"  FAIL - 置信度异常: 高={high_conf:.2f}, 低={low_conf:.2f}")
+        passed = False
+
+    # 测试 5: 字段提取
+    print("\n[测试5] 字段提取")
+    fields = _extract_key_fields("date: 2024-06-01, email: test@test.com, url: https://example.com")
+    if "date" in fields and "email" in fields and "url" in fields:
+        print(f"  PASS - 提取到 {len(fields)} 个字段: {list(fields.keys())}")
+    else:
+        print(f"  FAIL - 字段提取不完整: {fields}")
+        passed = False
+
+    # 测试 6: 错误码完整性
+    print("\n[测试6] 错误码")
+    all_codes = [getattr(ErrorCode, attr) for attr in dir(ErrorCode) if attr.startswith("E")]
+    if len(all_codes) == 10 and all(code in ERROR_MESSAGES for code in all_codes):
+        print(f"  PASS - 10个错误码全部定义")
+    else:
+        print(f"  FAIL - 错误码不完整")
+        passed = False
+
+    # 测试 7: 输出格式化
+    print("\n[测试7] 输出格式化")
+    sample_item = ProcessedItem("测试", {"key": "value"}, 0.9, [])
+    sample_result = ProcessResult()
+    sample_result.add_item(sample_item)
+    output = format_output(sample_result)
+    if "置信度" in output and "关键字段" in output:
+        print("  PASS - 输出格式正确")
+    else:
+        print(f"  FAIL - 输出格式异常: {output}")
+        passed = False
+
+    # 总结
+    print("\n=== 自检结束 ===")
+    if passed:
+        print("全部测试通过 ✅")
+        return 0
+    else:
+        print("存在失败项 ❌")
         return 1
 
-    # 执行处理
-    ok, err_code, result = process_text(args.input, args.format)
 
-    if not ok:
-        err_msg = ERROR_MESSAGES.get(err_code, "未知错误")
-        print(f"错误 {err_code}: {err_msg}", file=sys.stderr)
+# ---------------------------------------------------------------------------
+# 参数解析
+# ---------------------------------------------------------------------------
+def create_parser() -> argparse.ArgumentParser:
+    """创建命令行参数解析器"""
+    global parser
+    parser = argparse.ArgumentParser(
+        description="aionui 未命名工具 - 数据/文本结构化处理",
+        epilog="示例: python main.py --input '姓名: 张三, email: test@example.com' --detailed",
+    )
+    parser.add_argument(
+        "--input",
+        nargs="+",
+        help="输入内容（支持多条，空格分隔）",
+    )
+    parser.add_argument(
+        "--output",
+        help="输出文件路径（可选，默认输出到 stdout）",
+    )
+    parser.add_argument(
+        "--detailed",
+        action="store_true",
+        help="显示详细字段信息",
+    )
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行离线自检（不读取外部文件）",
+    )
+    return parser
+
+
+# ---------------------------------------------------------------------------
+# 主入口
+# ---------------------------------------------------------------------------
+def main() -> int:
+    """主函数"""
+    global parser
+    parser = create_parser()
+    args = parser.parse_args()
+
+    try:
+        return run_cli(args)
+    except KeyboardInterrupt:
+        print("\n用户中断操作", file=sys.stderr)
+        return 130
+    except Exception as e:
+        print(f"[{ErrorCode.E006_INTERNAL}] 内部错误: {e}", file=sys.stderr)
         return 1
-
-    # 输出结果
-    output = format_output(result, args.format)
-    print(output)
-
-    # 低置信度提示
-    if result.get("flags"):
-        for flag in result["flags"]:
-            print(f"\n提示: {flag}", file=sys.stderr)
-
-    return 0
 
 
 if __name__ == "__main__":
