@@ -91,8 +91,14 @@ def validate_input(data: Any) -> None:
     if isinstance(data, str):
         return
     if isinstance(data, dict):
-        if "content" not in data or not isinstance(data["content"], str):
+        # 检查 content 字段是否存在且为字符串
+        if "content" not in data:
             raise ProcessingError("E003")
+        if not isinstance(data["content"], str):
+            raise ProcessingError("E003")
+        # 检查 content 是否为空字符串（修正点）
+        if not data["content"].strip():
+            raise ProcessingError("E001")
         return
     # 其他类型（数字、布尔等）视为格式错误
     raise ProcessingError("E003")
