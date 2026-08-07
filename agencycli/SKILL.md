@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: agencycli
 name: agencycli
-displayName: 智能体编排 团队协作 自动化调度
-description: 轻量级CLI工具，通过Markdown+YAML定义角色、技能与项目，驱动AI智能体团队自主协作。
-version: 1.0.1
+displayName: 多智能体协作 任务编排 命令行调度
+description: 用Markdown+YAML定义角色与任务，命令行驱动AI智能体团队自主协作。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agencycli
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: Ling Xiao
 agent_created: true
-trigger_words: ["agencycli", "智能体团队", "AI代理编排", "自主协作", "多智能体调度"]
+trigger_words: ["agencycli", "智能体团队", "AI代理编排", "自主协作", "多智能体调度", "角色编排", "任务分派", "协作流程"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,36 +31,35 @@ trigger_words: ["agencycli", "智能体团队", "AI代理编排", "自主协作"
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# agencycli — 智能体团队编排命令行工具
+# agencycli — 多智能体协作与任务编排命令行工具
 
 ## 一、能力边界（一页纸速查卡）
 
-### ✅ 能做（5项核心能力）
+### 1.1 能做什么
 
-| 编号 | 能力项 | 说明 | 示例 |
-|------|--------|------|------|
-| 1 | 角色定义解析 | 从YAML配置中读取智能体角色、职责与权限范围 | `roles/analyst.yaml` 定义数据分析师角色 |
-| 2 | 技能注册与调用 | 将Markdown格式的技能文档注册为可执行技能，供智能体调用 | `skills/web-search.md` 注册网络搜索技能 |
-| 3 | 项目任务编排 | 根据项目描述自动拆解任务，分配给合适的智能体角色 | 输入项目目标，自动生成任务清单与分配方案 |
-| 4 | 执行状态追踪 | 实时监控各智能体执行进度，输出结构化状态报告 | `agencycli status` 查看当前任务执行情况 |
-| 5 | 结果汇总输出 | 收集各智能体产出，按约定格式生成最终交付物 | 输出为 `output/` 目录下的结构化文件 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 角色定义 | 通过 YAML 文件定义 AI 角色的身份、职责、行为准则 | `roles/analyst.yaml` |
+| 技能挂载 | 为角色绑定特定技能（Skill），限定其能力范围 | `skills: [data_analysis, report_writing]` |
+| 任务编排 | 用 Markdown 编写任务描述，指定由哪个角色执行 | `tasks/task-001.md` |
+| 团队协作 | 多个角色按顺序或并行执行任务，自动传递上下文 | 分析师产出数据 → 文案撰写报告 |
+| 流程驱动 | 通过配置文件定义协作流程（顺序、分支、合并） | `pipeline.yaml` |
+| 自检与版本 | 内置自检命令和版本查询 | `agencycli --selftest` |
 
-### ❌ 不能做（明确边界）
+### 1.2 不能做什么
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不执行外部API调用 | 工具本身不直接调用第三方API，需通过技能定义接入 |
-| 2 | 不处理非结构化输入 | 输入必须为Markdown或YAML格式，其他格式需先转换 |
-| 3 | 不提供图形界面 | 纯命令行交互，无GUI或Web界面 |
-| 4 | 不保证任务成功率 | 任务执行结果取决于智能体能力与输入质量，工具仅提供编排框架 |
-| 5 | 不支持实时人机对话 | 非交互式执行，任务提交后按预设流程运行 |
+| 限制项 | 说明 |
+|--------|------|
+| 不执行外部 API 调用 | 工具本身不直接调用第三方服务（如 OpenAI API），需由宿主环境提供 |
+| 不替代人工决策 | 角色输出结果需人工审核，工具不提供自动批准机制 |
+| 不支持实时交互 | 所有任务通过文件定义，不支持命令行交互式对话 |
+| 不处理非结构化输入 | 任务描述必须遵循 Markdown 规范，角色定义必须遵循 YAML 规范 |
 
-### 🎯 适用对象
+### 1.3 适用对象
 
-- **开发者**：需要快速搭建多智能体协作流程的工程团队
-- **运维人员**：需要自动化处理重复性任务编排的运维团队
-- **项目经理**：需要将项目拆解为可并行执行任务的协调者
-- **AI研究者**：需要实验多智能体协作模式的研究人员
+- **AI 应用开发者**：需要快速搭建多智能体协作原型的团队
+- **自动化流程设计者**：需要将复杂任务拆解为多个 AI 角色协作的工程师
+- **技术评估人员**：评估多智能体编排方案可行性的架构师
 
 
 ## 许可证（License）
