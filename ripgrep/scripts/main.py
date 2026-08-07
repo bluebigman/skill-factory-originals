@@ -140,23 +140,30 @@ class IgnoreRules:
         dir_only = pattern.endswith("/")
         if dir_only:
             pattern = pattern.rstrip("/")
-            if not is_dir:
-                return False
+            # 目录模式匹配路径前缀
+            if rel_path == pattern or rel_path.startswith(pattern + "/"):
+                return True
+            return False
 
         # 处理锚定模式（开头带 /）
         anchored = pattern.startswith("/")
         if anchored:
             pattern = pattern.lstrip("/")
-            if not rel_path.startswith(pattern) and rel_path != pattern:
-                return False
-            return fnmatch.fnmatch(rel_path, pattern) or rel_path == pattern
+            # 锚定模式匹配根目录下的路径
+            return rel_path == pattern or rel_path.startswith(pattern + "/")
 
         # 处理包含 / 的模式（相对路径）
         if "/" in pattern:
-            return fnmatch.fnmatch(rel_path, pattern) or fnmatch.fnmatch(rel_path, f"*/{pattern}")
+            # 匹配完整路径或任意父目录下的路径
+            return fnmatch.fnmatch(rel_path, pattern) or fnmatch.fnmatch(rel_path, f"**/{pattern}")
 
         # 简单文件名模式（匹配任意层级）
-        return fnmatch.fnmatch(rel_path, f"**/{pattern}") or fnmatch.fnmatch(rel_path, pattern)
+        # 检查路径的每一部分
+        for part in rel_path.split("/"):
+            if fnmatch.fnmatch(part, pattern):
+                return True
+        # 也检查整个路径
+        return fnmatch.fnmatch(rel_path, pattern) or fnmatch.fnmatch(rel_path, f"**/{pattern}")
 
 
 # ============================================================

@@ -1,0 +1,83 @@
+---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
+slug: rorem
+name: rorem
+displayName: 随机数据生成 测试填充 批量造数
+description: 按需生成随机测试数据，支持结构化输出与批量定制，辅助开发调试。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/rorem
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: DataForge Studio
+agent_created: true
+trigger_words: ["rorem", "随机数据", "测试数据生成", "造数", "mock数据", "假数据填充"]
+---
+
+> 📜 **用户协议（User Agreement）**
+> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
+> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
+> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+<!-- user-agreement-injected -->
+
+
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+# rorem — 随机数据生成与测试填充 Skill 文档
+
+## 一、能力边界：一页纸速查卡
+
+本 Skill 面向**开发人员、测试工程师、数据运维人员**，用于在本地或 CI 环境中快速生成结构化的随机测试数据。
+
+### 1.1 能做（核心能力清单）
+
+| 序号 | 能力项 | 说明 | 典型场景 |
+|------|--------|------|----------|
+| 1 | 结构化数据生成 | 根据字段类型（字符串、数字、日期、布尔、枚举）生成随机值 | 构造 API 请求体、数据库种子数据 |
+| 2 | 批量生成 | 支持一次生成 N 条记录，N 可配置（1~10000） | 压测数据准备、分页调试 |
+| 3 | 格式自定义 | 支持 JSON、CSV、SQL INSERT 语句、纯文本表格四种输出格式 | 不同下游工具的数据导入 |
+| 4 | 关键信息保留 | 用户指定的固定值（如外键 ID、状态码）在生成结果中原样保留 | 保持业务关联完整性 |
+| 5 | 自检与版本查询 | 提供 `--selftest` 自检命令和 `--version` 版本查询 | 环境验证、排障 |
+
+### 1.2 不能做（明确边界）
+
+| 序号 | 限制项 | 说明 |
+|------|--------|------|
+| 1 | 不生成真实个人信息 | 不产出真实姓名、身份证号、手机号等可识别个人身份的数据 |
+| 2 | 不保证数据唯一性 | 随机生成可能产生重复值，如需唯一性需在输出后自行去重 |
+| 3 | 不执行网络请求 | 不主动访问外部 URL 拉取数据，仅处理本地输入 |
+| 4 | 不进行数据校验 | 生成的数据不验证是否符合业务规则（如金额范围、日期先后） |
+| 5 | 不支持复杂嵌套 | 仅支持单层扁平结构，嵌套对象需用户自行拼接 |
+
+### 1.3 适用对象与前置条件
+
+- **适用对象**：本地开发环境、测试环境、CI 流水线
+- **前置条件**：已安装 rorem 可执行文件，可通过命令行调用；输入数据为 UTF-8 编码的文本文件或直接粘贴的字符串
+
+
+## 许可证（License）
+
+```text
+MIT License
+
+Copyright (c) 2026 SkillForge Lab
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+<!-- professional-license-embedded -->
