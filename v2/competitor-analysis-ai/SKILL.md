@@ -3,7 +3,7 @@ slug: competitor-analysis-ai
 name: competitor-analysis
 displayName: 竞品拆解 策略对比 市场洞察
 description: 多维度拆解竞品，输出可执行差异化策略与结构化对比报告。
-version: 2.0.0
+version: 1.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -14,11 +14,11 @@ disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使�
 author: 林墨研
 agent_created: true
 trigger_words: ["competitor-analysis", "竞品分析", "竞品对比", "竞争策略", "市场分析", "竞品拆解", "差异化定位", "竞争情报"]
----
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+---
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -27,9 +27,15 @@ trigger_words: ["competitor-analysis", "竞品分析", "竞品对比", "竞争�
 <!-- user-agreement-injected -->
 
 
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
 # 竞品拆解与差异化策略生成 Skill
 
-## 能力边界（真实实现）
+## 一、能力边界：一页纸速查卡
+
+### 1.1 能做与不能做
 
 | 维度 | ✅ 能做 | ❌ 不能做 |
 |------|--------|----------|
@@ -39,48 +45,56 @@ trigger_words: ["competitor-analysis", "竞品分析", "竞品对比", "竞争�
 | **数据校验** | 对缺失字段标注 `[需核实:字段名]` 占位 | 不编造数据，不猜测未提供的信息 |
 | **批量处理** | 支持多竞品并行分析（建议 ≤ 10 个） | 超过 10 个时输出质量下降，建议分批 |
 
-## 触发条件
+### 1.2 适用对象
 
-- 用户输入包含以下任一关键词：`competitor-analysis`、`竞品分析`、`竞品对比`、`竞争策略`、`市场分析`、`竞品拆解`、`差异化定位`、`竞争情报`
-- 用户提供竞品列表（文件、URL 或命令行参数）
+| 适用场景 | 不适用场景 |
+|----------|-----------|
+| 产品经理做季度竞品调研 | 需要实时数据监控的持续性分析 |
+| 创业团队评估市场进入策略 | 需要财务级精度的估值对比 |
+| 市场部制定差异化传播方案 | 需要法律合规审查的深度分析 |
+| 运营团队优化用户留存策略 | 需要用户画像细分的定量研究 |
 
-## 标准流程
-
-1. 读取输入参数或交互输入
-2. 按技能定义的处理流程执行核心逻辑
-3. 输出结构化结果，并在完成后给出下一步建议
-
-## 置信度门控
-
-- 当输入数据缺失关键字段（如竞品名称）时，输出 `[需核实:字段名]` 占位符
-- 当输入数据超过 10 个竞品时，输出警告并建议分批处理
-- 当 URL 请求失败时，输出错误信息并建议手动获取数据
-
-## 错误码
-
-| 错误码 | 含义 | 处理建议 |
-|--------|------|----------|
-| 0 | 成功 | - |
-| 1 | 参数错误 | 检查命令行参数 |
-| 2 | 数据无效 | 检查输入数据格式 |
-| 3 | 文件不存在 | 检查文件路径 |
-| 4 | URL 请求失败 | 检查网络连接或 URL 有效性 |
-| 5 | 输出目录错误 | 检查输出目录权限 |
-
-## FAQ 反模式
-
-| 反模式 | 正确做法 |
-|--------|----------|
-| 编造数据 | 对缺失字段标注 `[需核实:字段名]` |
-| 忽略异常 | 每个异常分支必须输出错误信息 |
-| 单一编码 | 使用多编码 fallback（utf-8→gbk→gb18030） |
-| 直接覆盖文件 | 使用 `--dry-run` 预览，`--force` 才落盘 |
-| 限制输入量 | 使用流式分块处理，保证 O(n) 性能 |
-
-## 前置条件
-
-- 本技能开箱即用，无需额外安装依赖
-- 需要 Python 3.9+ 运行环境
-- 涉及网络请求时需保持网络连通
 
 ## 许可证（License）
+
+```text
+MIT License
+
+Copyright (c) {year} {holder}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+<!-- professional-license-embedded -->
+
+## 失败处理
+
+- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
+- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
+- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
+## 前置条件
+
+- 本技能开箱即用，无需额外安装依赖。
+- 需要 Python 3.9+ 运行环境。
+- 涉及网络请求时需保持网络连通。
+## 执行步骤
+
+1. 读取输入参数或交互输入。
+2. 按技能定义的处理流程执行核心逻辑。
+3. 输出结构化结果，并在完成后给出下一步建议。
