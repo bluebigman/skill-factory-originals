@@ -30,7 +30,8 @@ scripts/main.py — 独立实现脚本
 import argparse
 import sys
 import re
-from typing import Any, Dict, List, Optional, Tuple
+import json
+from typing import Any, Dict, List, Optional, Union
 
 
 # ---------------------------------------------------------------------------
@@ -114,7 +115,7 @@ def extract_key_fields(data: Any) -> Dict[str, Any]:
         if date_match:
             fields["date"] = date_match.group(0)
 
-        # 提取可能的 ID（连续数字）
+        # 提取可能的 ID（连续数字，至少3位）
         id_match = re.search(r'\b\d{3,}\b', text)
         if id_match:
             fields["id"] = id_match.group(0)
@@ -232,9 +233,12 @@ def format_output(
                 # 默认就是 JSON 兼容结构，无需额外处理
                 pass
             elif custom_format == "compact":
-                # 精简格式
-                compact = {k: v for k, v in fields.items()}
-                result["data"] = compact
+                # 精简格式，只保留核心数据
+                compact = {
+                    "data": fields,
+                    "confidence": confidence
+                }
+                result = compact
             else:
                 raise ValueError(f"E003: 不支持的输出格式: {custom_format}")
 
@@ -424,8 +428,14 @@ def run_selftest() -> None:
         # ---- 测试用例 6: 置信度分级 ----
         print("\n[测试 6] 置信度分级")
         try:
-            # 高置信度（结构化输入）
-            high_input = {"name": "Test", "id": "123", "url": "https://example.com", "email": "a@b.com", "date": "2026-01-01"}
+            # 高置信度（结构化完整输入）
+            high_input = {
+                "name": "Test Project",
+                "id": "123456",
+                "url": "https://example.com",
+                "email": "a@b.com",
+                "date": "2026-01-01"
+            }
             high_result = process_single(high_input)
             assert high_result["confidence"] >= HIGH_CONFIDENCE, "结构化完整输入置信度应高"
             assert high_result["confidence_level"] == "high", "应为 high 级别"
@@ -436,6 +446,28 @@ def run_selftest() -> None:
             low_result = process_single(low_input)
             assert low_result["confidence"] < HIGH_CONFIDENCE, "简单输入置信度不应过高"
             print(f"  ✓ 通过: 低置信度分级正确 ({low_result['confidence']:.1f}%)")
+        except AssertionError as e:
+            raise ValueError(f"E010: 断言失败 - {str(e)}")
+        except ValueError as e:
+            print(f"  ✗ 失败: {str(e)}")
+            raise
+
+        # ---- 测试用例 7: 自定义格式 ----
+        print("\n[测试 7] 自定义格式")
+        try:
+            # 测试 compact 格式
+            compact_result = process_single(test_input_1, custom_format="compact")
+            assert "data" in compact_result, "compact 格式应包含 data 字段"
+            assert "confidence" in compact_result, "compact 格式应包含 confidence 字段"
+            print(f"  ✓ 通过: compact 格式输出正确")
+            
+            # 测试不支持的格式
+            try:
+                process_single(test_input_1, custom_format="xml")
+                raise ValueError("E010: 不支持的格式应抛出异常")
+            except ValueError as e:
+                assert str(e).startswith("E003"), f"应抛出 E003, 实际: {str(e)}"
+                print(f"  ✓ 通过: 不支持的格式错误处理正确 ({str(e)})")
         except AssertionError as e:
             raise ValueError(f"E010: 断言失败 - {str(e)}")
         except ValueError as e:
@@ -511,7 +543,6 @@ def main() -> None:
         # 处理输入
         try:
             result = process_single(input_data, args.format)
-            import json
             print(json.dumps(result, ensure_ascii=False, indent=2))
         except ValueError as e:
             print(str(e), file=sys.stderr)
