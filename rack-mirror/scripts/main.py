@@ -1,596 +1,357 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-rack-mirror 数据镜像结构化转换工具
+rack-mirror: 数据镜像/结构化转换/信息提取
+========================================
+将输入文本、文件或URL转换为结构化结果，保留关键信息并标注置信度。
 
-功能：将用户输入的数据（文本/文件路径/URL）转换为结构化 JSON 结果，
-      保留关键信息并标注置信度。
-版本：1.0.1
+仅依赖 Python 标准库，支持 --selftest 离线自检。
 """
 
 import argparse
 import json
-import os
 import re
 import sys
 import urllib.request
-from datetime import datetime
+from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 
-# ============================================================
-# 配置常量
-# ============================================================
-MAX_INPUT_LENGTH = 5000          # 单次输入最大字符数
-MAX_BATCH_SIZE = 20              # 批量处理最大条数
-ERROR_CODES = {
-    "E001": "输入为空或无效",
-    "E002": "输入超过长度限制",
-    "E003": "批量处理超过条数限制",
-    "E004": "文件不存在或不可读",
-    "E005": "URL 访问失败",
-    "E006": "JSON 解析失败",
-    "E007": "HTML 解析失败",
-    "E008": "模板格式错误",
-    "E009": "内部处理错误",
-    "E010": "不支持的输入类型",
-}
+# ---------------------------------------------------------------------------
+# 错误码定义
+# ---------------------------------------------------------------------------
+# E001: 参数错误
+# E002: 文件不存在或不可读
+# E003: URL 访问失败
+# E004: 输入内容为空
+# E005: 输出序列化失败
+# E006: 不支持的输入类型
+# E007: 自检断言失败
+# E008: 正则表达式编译错误
+# E009: 数据格式错误
+# E010: 未知异常
 
 
-# ============================================================
-# 核心工具函数
-# ============================================================
+# ---------------------------------------------------------------------------
+# 核心提取器：负责从文本中抽取结构化字段
+# ---------------------------------------------------------------------------
+class FieldExtractor:
+    """基于正则表达式的字段提取器，附带置信度评估。"""
 
-def make_error(code: str, message: str = "") -> Dict[str, Any]:
-    """构造标准错误结构"""
-    return {
-        "error": {
-            "code": code,
-            "message": message or ERROR_CODES.get(code, "未知错误")
-        }
+    # 字段模式定义（名称 -> (正则, 置信度基准)）
+    PATTERNS: Dict[str, Tuple[str, float]] = {
+        "姓名": (r"(?:姓名|名字|称呼)[:：\s]*([\u4e00-\u9fa5]{2,4})", 0.90),
+        "电话": (r"(?:电话|手机|联系方式|tel|phone)[:：\s]*(\+?\d[\d\- ]{6,14}\d)", 0.95),
+        "邮箱": (r"(?:邮箱|电子邮件|email|e-mail)[:：\s]*([\w.+-]+@[\w-]+\.[\w.]+)", 0.95),
+        "地址": (r"(?:地址|住址|location|address)[:：\s]*([\u4e00-\u9fa50-9A-Za-z\-号栋单元室楼层]+)", 0.85),
+        "日期": (r"(?:日期|时间|date|time)[:：\s]*(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)", 0.90),
+        "金额": (r"(?:金额|价格|价格|amount|price)[:：\s]*([¥￥]?\d+(?:\.\d{1,2})?(?:元|块|RMB)?)", 0.85),
+        "编号": (r"(?:编号|单号|ID|No\.?)[:：\s]*([A-Za-z0-9\-]{4,20})", 0.80),
     }
 
+    def __init__(self) -> None:
+        """初始化并预编译所有正则表达式。"""
+        self._compiled: Dict[str, Tuple[re.Pattern, float]] = {}
+        for field, (pattern, confidence) in self.PATTERNS.items():
+            try:
+                self._compiled[field] = (re.compile(pattern, re.IGNORECASE), confidence)
+            except re.error as exc:
+                # 正则编译失败属于内部错误，直接抛出并携带错误码
+                raise RuntimeError(f"E008: 正则表达式编译失败 - {pattern}: {exc}")
 
-def truncate_text(text: str, max_len: int = MAX_INPUT_LENGTH) -> Tuple[str, bool]:
-    """截断文本，返回 (截断后文本, 是否被截断)"""
-    if len(text) <= max_len:
-        return text, False
-    return text[:max_len], True
+    def extract(self, text: str) -> Dict[str, Any]:
+        """
+        从文本中提取所有已知字段。
 
+        参数:
+            text: 输入文本
 
-def confidence_label(score: float) -> str:
-    """将 0-1 分数映射为 高/中/低 标签"""
-    if score >= 0.8:
-        return "高"
-    elif score >= 0.5:
-        return "中"
-    return "低"
+        返回:
+            包含字段值和置信度的字典，格式:
+            {"字段名": "值", "_confidence": {"字段名": 0.95}}
+        """
+        if not text or not text.strip():
+            return {"_confidence": {}, "_warning": "输入内容为空"}
 
+        result: Dict[str, Any] = {}
+        confidence_map: Dict[str, float] = {}
 
-# ============================================================
-# 实体提取模块
-# ============================================================
-
-def extract_entities(text: str) -> Dict[str, List[Dict[str, Any]]]:
-    """
-    从纯文本中提取关键实体（人名、日期、金额、地址、编号）
-    返回格式: {"entity_type": [{"value": ..., "confidence": ...}]}
-    """
-    entities: Dict[str, List[Dict[str, Any]]] = {
-        "人名": [], "日期": [], "金额": [], "地址": [], "编号": []
-    }
-    if not text:
-        return entities
-
-    # 人名提取（简单模式：中文姓名 2-4 字，或英文姓名）
-    name_patterns = [
-        r'[\u4e00-\u9fa5]{2,4}(?=[，。,.\s]|$)',
-        r'[A-Z][a-z]+\s[A-Z][a-z]+',
-    ]
-    for pattern in name_patterns:
-        for match in re.finditer(pattern, text):
-            value = match.group().strip()
-            if value and value not in [e["value"] for e in entities["人名"]]:
-                entities["人名"].append({
-                    "value": value,
-                    "confidence": 0.7 if len(value) >= 2 else 0.5
-                })
-
-    # 日期提取（支持多种格式）
-    date_patterns = [
-        r'\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?',
-        r'\d{4}年\d{1,2}月\d{1,2}日',
-        r'\d{1,2}月\d{1,2}日',
-    ]
-    for pattern in date_patterns:
-        for match in re.finditer(pattern, text):
-            value = match.group()
-            entities["日期"].append({"value": value, "confidence": 0.8})
-
-    # 金额提取
-    money_pattern = r'[¥￥]\s?\d+(?:\.\d{1,2})?|\d+(?:\.\d{1,2})?\s*(?:元|人民币|RMB)'
-    for match in re.finditer(money_pattern, text):
-        value = match.group()
-        entities["金额"].append({"value": value, "confidence": 0.85})
-
-    # 地址提取（简单模式：包含省市或路/街）
-    addr_pattern = r'[\u4e00-\u9fa5]{2,}(?:省|市|区|县)[\u4e00-\u9fa5]*(?:路|街|大道|巷|号)'
-    for match in re.finditer(addr_pattern, text):
-        value = match.group()
-        entities["地址"].append({"value": value, "confidence": 0.6})
-
-    # 编号提取（订单号、编号等）
-    id_pattern = r'(?:编号|订单号|No\.?|ID)[:：\s]*([A-Za-z0-9\-_]{4,20})'
-    for match in re.finditer(id_pattern, text, re.IGNORECASE):
-        value = match.group(1)
-        entities["编号"].append({"value": value, "confidence": 0.75})
-
-    # 去重
-    for key in entities:
-        seen = set()
-        unique = []
-        for item in entities[key]:
-            if item["value"] not in seen:
-                seen.add(item["value"])
-                unique.append(item)
-        entities[key] = unique
-
-    return entities
-
-
-def extract_titles(text: str, is_markdown: bool = False, is_html: bool = False) -> List[Dict[str, Any]]:
-    """提取标题层级结构"""
-    titles = []
-    if is_html:
-        # HTML 标题提取
-        pattern = r'<h([1-6])[^>]*>(.*?)</h\1>'
-        for match in re.finditer(pattern, text, re.IGNORECASE | re.DOTALL):
-            level = int(match.group(1))
-            title_text = re.sub(r'<[^>]+>', '', match.group(2)).strip()
-            if title_text:
-                titles.append({
-                    "level": level,
-                    "text": title_text,
-                    "confidence": 0.9
-                })
-    elif is_markdown:
-        # Markdown 标题提取
-        pattern = r'^(#{1,6})\s+(.+)$'
-        for line in text.split('\n'):
-            match = re.match(pattern, line.strip())
+        for field, (pattern, base_conf) in self._compiled.items():
+            match = pattern.search(text)
             if match:
-                level = len(match.group(1))
-                title_text = match.group(2).strip()
-                titles.append({
-                    "level": level,
-                    "text": title_text,
-                    "confidence": 0.85
-                })
-    return titles
+                value = match.group(1).strip()
+                if value:
+                    result[field] = value
+                    # 置信度 = 基础置信度，若值长度较长可微调
+                    conf = base_conf
+                    if len(value) > 8:
+                        conf = min(1.0, conf + 0.05)
+                    confidence_map[field] = round(conf, 2)
+
+        result["_confidence"] = confidence_map
+
+        # 补充缺失字段占位
+        for field in self.PATTERNS:
+            if field not in result:
+                result[field] = f"[需核实:{field}]"
+
+        return result
 
 
-def extract_description(text: str) -> str:
-    """从文本中提取描述（取前 200 字符）"""
-    cleaned = re.sub(r'\s+', ' ', text).strip()
-    return cleaned[:200]
+# ---------------------------------------------------------------------------
+# 输入处理器：支持文本、文件、URL
+# ---------------------------------------------------------------------------
+class InputHandler:
+    """处理不同类型的输入来源，统一返回文本内容。"""
 
+    @staticmethod
+    def from_text(text: str) -> str:
+        """直接使用传入的文本。"""
+        if not text or not text.strip():
+            raise ValueError("E004: 输入内容为空")
+        return text.strip()
 
-def extract_keywords(text: str) -> List[Dict[str, str]]:
-    """提取关键词（基于词频统计的简单实现）"""
-    # 中文分词简化版：按标点/空格切分，统计高频词
-    words = re.findall(r'[\u4e00-\u9fa5]{2,}|[A-Za-z]{3,}', text.lower())
-    word_count: Dict[str, int] = {}
-    for word in words:
-        word_count[word] = word_count.get(word, 0) + 1
-
-    # 排序取前 10
-    sorted_words = sorted(word_count.items(), key=lambda x: x[1], reverse=True)[:10]
-    keywords = []
-    for word, count in sorted_words:
-        if count >= 2:  # 至少出现 2 次才认为关键词
-            keywords.append({
-                "keyword": word,
-                "frequency": count,
-                "confidence": min(0.5 + count * 0.1, 0.95)
-            })
-    return keywords
-
-
-# ============================================================
-# 输入解析模块
-# ============================================================
-
-def parse_input(raw_input: str) -> Tuple[str, Dict[str, Any]]:
-    """
-    解析输入，返回 (解析后的文本, 元信息)
-    支持：纯文本、Markdown、HTML、JSON
-    """
-    meta = {
-        "input_type": "text",
-        "truncated": False,
-        "length": 0
-    }
-
-    if not raw_input or not raw_input.strip():
-        return "", meta
-
-    # 检查长度
-    if len(raw_input) > MAX_INPUT_LENGTH:
-        raw_input, truncated = truncate_text(raw_input)
-        meta["truncated"] = True
-
-    stripped = raw_input.strip()
-    meta["length"] = len(stripped)
-
-    # 检测 HTML
-    if re.search(r'<html[\s>]|<body[\s>]|<div[\s>]', stripped, re.IGNORECASE):
-        meta["input_type"] = "html"
-        # 提取纯文本
-        text = re.sub(r'<script[^>]*>.*?</script>', '', stripped, flags=re.DOTALL | re.IGNORECASE)
-        text = re.sub(r'<style[^>]*>.*?</style>', '', text, flags=re.DOTALL | re.IGNORECASE)
-        text = re.sub(r'<[^>]+>', ' ', text)
-        text = re.sub(r'\s+', ' ', text).strip()
-        return text, meta
-
-    # 检测 Markdown
-    if re.search(r'^#{1,6}\s', stripped, re.MULTILINE) or re.search(r'\*\*.*?\*\*', stripped):
-        meta["input_type"] = "markdown"
-        # 去除 Markdown 标记
-        text = re.sub(r'[#>*_`~\-]', ' ', stripped)
-        text = re.sub(r'\s+', ' ', text).strip()
-        return text, meta
-
-    # 检测 JSON
-    if stripped.startswith('{') or stripped.startswith('['):
+    @staticmethod
+    def from_file(path: str) -> str:
+        """从纯文本文件中读取内容。"""
+        file_path = Path(path)
+        if not file_path.exists():
+            raise FileNotFoundError(f"E002: 文件不存在 - {path}")
+        if not file_path.is_file():
+            raise IsADirectoryError(f"E002: 路径不是文件 - {path}")
         try:
-            json.loads(stripped)
-            meta["input_type"] = "json"
-        except json.JSONDecodeError:
-            pass  # 不是有效 JSON，按普通文本处理
+            return file_path.read_text(encoding="utf-8", errors="replace").strip()
+        except OSError as exc:
+            raise OSError(f"E002: 文件读取失败 - {exc}") from exc
 
-    return stripped, meta
-
-
-# ============================================================
-# 文件与 URL 处理模块
-# ============================================================
-
-def read_file(filepath: str) -> Tuple[str, Dict[str, Any]]:
-    """读取本地文件"""
-    if not os.path.exists(filepath):
-        return "", make_error("E004", f"文件不存在: {filepath}")
-    try:
-        with open(filepath, 'r', encoding='utf-8') as f:
-            content = f.read()
-        return content, {"source": "file", "path": filepath}
-    except Exception as e:
-        return "", make_error("E004", f"文件读取失败: {str(e)}")
-
-
-def fetch_url(url: str) -> Tuple[str, Dict[str, Any]]:
-    """抓取 URL 内容"""
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=10) as resp:
-            content = resp.read().decode('utf-8', errors='ignore')
-        return content, {"source": "url", "url": url}
-    except Exception as e:
-        return "", make_error("E005", f"URL 访问失败: {str(e)}")
+    @staticmethod
+    def from_url(url: str) -> str:
+        """从公开URL获取文本内容。"""
+        try:
+            with urllib.request.urlopen(url, timeout=10) as response:
+                # 仅处理文本类型响应
+                content_type = response.headers.get("Content-Type", "")
+                if "text" not in content_type and "html" not in content_type:
+                    raise ValueError(f"E003: 非文本内容类型 - {content_type}")
+                data = response.read()
+                # 尝试常见编码
+                for encoding in ("utf-8", "gbk", "latin-1"):
+                    try:
+                        return data.decode(encoding).strip()
+                    except UnicodeDecodeError:
+                        continue
+                return data.decode("utf-8", errors="replace").strip()
+        except Exception as exc:
+            raise ConnectionError(f"E003: URL访问失败 - {url}: {exc}") from exc
 
 
-# ============================================================
-# 核心处理函数
-# ============================================================
+# ---------------------------------------------------------------------------
+# 批量处理
+# ---------------------------------------------------------------------------
+def process_batch(text: str, extractor: FieldExtractor) -> List[Dict[str, Any]]:
+    """
+    将多行文本按行拆分，逐行结构化提取。
 
-def process_single(raw_input: str, template: Optional[Dict] = None) -> Dict[str, Any]:
-    """处理单条输入"""
-    try:
-        # 解析输入
-        text, meta = parse_input(raw_input)
-        if not text and meta["input_type"] == "text":
-            return make_error("E001", "输入内容为空")
+    参数:
+        text: 多行文本
+        extractor: 字段提取器实例
 
-        # 提取实体
-        entities = extract_entities(text)
-
-        # 提取标题
-        titles = extract_titles(
-            raw_input,
-            is_markdown=(meta["input_type"] == "markdown"),
-            is_html=(meta["input_type"] == "html")
-        )
-
-        # 提取描述和关键词
-        description = extract_description(text)
-        keywords = extract_keywords(text)
-
-        # 计算整体置信度
-        entity_count = sum(len(v) for v in entities.values())
-        confidence_score = min(0.3 + entity_count * 0.1 + len(keywords) * 0.05, 0.95)
-        confidence = confidence_label(confidence_score)
-
-        # 构造结果
-        result = {
-            "content": {
-                "text": text,
-                "length": len(text),
-                "entities": entities,
-                "titles": titles,
-                "description": description,
-                "keywords": keywords,
-            },
-            "meta": {
-                "input_type": meta["input_type"],
-                "truncated": meta["truncated"],
-                "processed_at": datetime.now().isoformat(),
-                "version": "1.0.1",
-                **{k: v for k, v in meta.items() if k not in ["input_type", "truncated"]}
-            },
-            "confidence": {
-                "score": round(confidence_score, 2),
-                "label": confidence
-            }
-        }
-
-        # 应用模板（如果提供）
-        if template:
-            result = apply_template(result, template)
-
-        return result
-
-    except Exception as e:
-        return make_error("E009", f"处理失败: {str(e)}")
-
-
-def apply_template(data: Dict[str, Any], template: Dict) -> Dict[str, Any]:
-    """根据模板重组输出结构"""
-    try:
-        if not isinstance(template, dict) or "fields" not in template:
-            return make_error("E008", "模板格式错误：缺少 fields 字段")
-
-        result = {}
-        for field_name, field_spec in template["fields"].items():
-            if isinstance(field_spec, str):
-                # 简单字段路径映射
-                keys = field_spec.split(".")
-                value = data
-                try:
-                    for key in keys:
-                        if isinstance(value, dict):
-                            value = value.get(key, "")
-                        elif isinstance(value, list) and key.isdigit():
-                            value = value[int(key)]
-                        else:
-                            value = ""
-                            break
-                except (KeyError, IndexError, TypeError):
-                    value = ""
-                result[field_name] = value
-            elif isinstance(field_spec, dict) and "source" in field_spec:
-                # 带默认值的字段
-                keys = field_spec["source"].split(".")
-                value = data
-                try:
-                    for key in keys:
-                        if isinstance(value, dict):
-                            value = value.get(key, "")
-                        else:
-                            value = ""
-                            break
-                except (KeyError, TypeError):
-                    value = ""
-                result[field_name] = value or field_spec.get("default", "")
-            else:
-                result[field_name] = None
-
-        return result
-    except Exception as e:
-        return make_error("E008", f"模板应用失败: {str(e)}")
-
-
-def process_batch(inputs: List[str], template: Optional[Dict] = None) -> Dict[str, Any]:
-    """批量处理"""
-    if len(inputs) > MAX_BATCH_SIZE:
-        return make_error("E003", f"批量处理超过 {MAX_BATCH_SIZE} 条限制")
+    返回:
+        每行提取结果的列表
+    """
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    if not lines:
+        return []
 
     results = []
-    for item in inputs:
-        result = process_single(item, template)
-        results.append(result)
+    for line in lines:
+        # 跳过可能的标题行
+        if re.match(r"^(序号|姓名|电话|邮箱|字段|#|//)", line, re.IGNORECASE):
+            continue
+        extracted = extractor.extract(line)
+        extracted["_source_line"] = line
+        results.append(extracted)
 
-    return {
-        "content": {
-            "count": len(results),
-            "items": results
-        },
-        "meta": {
-            "batch": True,
-            "total": len(results),
-            "processed_at": datetime.now().isoformat()
-        },
-        "confidence": {
-            "score": round(sum(r.get("confidence", {}).get("score", 0) for r in results) / len(results), 2) if results else 0,
-            "label": confidence_label(sum(r.get("confidence", {}).get("score", 0) for r in results) / len(results)) if results else "低"
-        }
-    }
+    return results
 
 
-# ============================================================
-# 自检模块（selftest）
-# ============================================================
+# ---------------------------------------------------------------------------
+# 主处理函数：统一入口
+# ---------------------------------------------------------------------------
+def process_input(
+    text: Optional[str] = None,
+    file_path: Optional[str] = None,
+    url: Optional[str] = None,
+    batch: bool = False,
+) -> Dict[str, Any]:
+    """
+    处理输入并返回结构化结果。
 
-def run_selftest() -> int:
-    """内置硬编码样例自检核心逻辑"""
-    print("=== rack-mirror 自检开始 ===")
-    errors = []
+    参数:
+        text: 直接文本输入
+        file_path: 文件路径
+        url: URL地址
+        batch: 是否按行批量处理
 
-    # 测试 1: 基本文本处理
-    test_text = "张三于2024年3月15日向北京市朝阳区幸福路88号支付了￥12,500元，订单号:ORD-20240315-001。"
-    result = process_single(test_text)
-    assert result.get("content"), "基本文本处理失败：缺少 content"
-    assert result["content"]["length"] > 0, "基本文本处理失败：文本为空"
-    assert result["meta"]["input_type"] == "text", "基本文本处理失败：输入类型错误"
-    assert result["confidence"]["label"] in ["高", "中", "低"], "基本文本处理失败：置信度标签无效"
-    print("  [PASS] 基本文本处理")
+    返回:
+        结构化结果字典
+    """
+    extractor = FieldExtractor()
 
-    # 测试 2: 实体提取
-    entities = result["content"]["entities"]
-    assert isinstance(entities, dict), "实体提取失败：格式错误"
-    assert len(entities) > 0, "实体提取失败：无实体"
-    print("  [PASS] 实体提取")
+    # 获取输入内容
+    try:
+        if text is not None:
+            content = InputHandler.from_text(text)
+        elif file_path is not None:
+            content = InputHandler.from_file(file_path)
+        elif url is not None:
+            content = InputHandler.from_url(url)
+        else:
+            raise ValueError("E001: 必须提供text、file或url之一")
+    except (ValueError, FileNotFoundError, IsADirectoryError, OSError, ConnectionError) as exc:
+        return {"error": str(exc), "status": "failed"}
 
-    # 测试 3: 输入长度限制
-    long_text = "A" * (MAX_INPUT_LENGTH + 100)
-    result_long = process_single(long_text)
-    assert result_long["meta"]["truncated"] is True, "长度限制失败：未截断"
-    assert len(result_long["content"]["text"]) <= MAX_INPUT_LENGTH, "长度限制失败：截断后仍超长"
-    print("  [PASS] 输入长度限制")
-
-    # 测试 4: 空输入
-    result_empty = process_single("")
-    assert "error" in result_empty, "空输入处理失败：未返回错误"
-    assert result_empty["error"]["code"] == "E001", "空输入处理失败：错误码不正确"
-    print("  [PASS] 空输入处理")
-
-    # 测试 5: Markdown 处理
-    md_text = "# 标题一\n## 标题二\n这是正文内容。"
-    result_md = process_single(md_text)
-    assert result_md["meta"]["input_type"] == "markdown", "Markdown 处理失败：类型识别错误"
-    assert len(result_md["content"]["titles"]) >= 2, "Markdown 处理失败：标题提取不足"
-    print("  [PASS] Markdown 处理")
-
-    # 测试 6: HTML 处理
-    html_text = "<html><body><h1>页面标题</h1><p>这是描述文字。</p></body></html>"
-    result_html = process_single(html_text)
-    assert result_html["meta"]["input_type"] == "html", "HTML 处理失败：类型识别错误"
-    assert len(result_html["content"]["titles"]) >= 1, "HTML 处理失败：标题提取失败"
-    print("  [PASS] HTML 处理")
-
-    # 测试 7: 批量处理
-    batch_inputs = ["第一条测试数据", "第二条测试数据", "第三条测试数据"]
-    result_batch = process_batch(batch_inputs)
-    assert result_batch["content"]["count"] == 3, "批量处理失败：条数不正确"
-    assert result_batch["confidence"]["score"] > 0, "批量处理失败：置信度异常"
-    print("  [PASS] 批量处理")
-
-    # 测试 8: 批量限制
-    too_many = [str(i) for i in range(MAX_BATCH_SIZE + 1)]
-    result_limit = process_batch(too_many)
-    assert "error" in result_limit, "批量限制失败：未返回错误"
-    assert result_limit["error"]["code"] == "E003", "批量限制失败：错误码不正确"
-    print("  [PASS] 批量限制")
-
-    # 测试 9: 模板应用
-    template = {
-        "fields": {
-            "提取文本": "content.text",
-            "实体数量": {"source": "content.entities", "default": "0"},
-            "处理时间": "meta.processed_at"
-        }
-    }
-    result_template = process_single(test_text, template)
-    assert "提取文本" in result_template, "模板应用失败：缺少字段"
-    assert result_template["提取文本"], "模板应用失败：字段值为空"
-    print("  [PASS] 模板应用")
-
-    # 测试 10: 错误处理
-    assert "E001" in ERROR_CODES, "错误码表不完整"
-    assert "E010" in ERROR_CODES, "错误码表不完整"
-    assert len(ERROR_CODES) == 10, "错误码表数量不正确"
-    print("  [PASS] 错误码体系")
-
-    if errors:
-        print(f"\n自检失败: {len(errors)} 个错误")
-        for err in errors:
-            print(f"  - {err}")
-        return 1
-
-    print("\n=== 自检全部通过 ===")
-    return 0
+    # 执行提取
+    try:
+        if batch:
+            results = process_batch(content, extractor)
+            return {"status": "success", "count": len(results), "results": results}
+        else:
+            result = extractor.extract(content)
+            return {"status": "success", "data": result}
+    except Exception as exc:
+        return {"error": f"E010: 处理失败 - {exc}", "status": "failed"}
 
 
-# ============================================================
-# 主入口
-# ============================================================
+# ---------------------------------------------------------------------------
+# 自检模块：硬编码样例数据，离线验证核心逻辑
+# ---------------------------------------------------------------------------
+def run_selftest() -> bool:
+    """
+    运行内置自检用例，验证核心提取逻辑。
 
-def main():
+    返回:
+        True 表示所有断言通过，否则抛出异常
+    """
+    print("[selftest] 开始运行 rack-mirror 自检...")
+
+    # 创建提取器实例
+    extractor = FieldExtractor()
+
+    # 测试用例1：标准文本提取
+    sample1 = "张三，电话13800138000，邮箱zhang@example.com"
+    result1 = extractor.extract(sample1)
+
+    # 宽松断言：字段存在且格式合理
+    assert result1["姓名"] == "张三", "E007: 姓名提取失败"
+    assert result1["电话"] != "[需核实:电话]", "E007: 电话提取失败"
+    assert result1["邮箱"] != "[需核实:邮箱]", "E007: 邮箱提取失败"
+    assert "138" in result1["电话"], "E007: 电话格式异常"
+    assert "@" in result1["邮箱"], "E007: 邮箱格式异常"
+    # 置信度在合理区间
+    conf1 = result1["_confidence"]
+    assert all(0.0 <= v <= 1.0 for v in conf1.values()), "E007: 置信度超出范围"
+    assert conf1.get("电话", 0) > 0.8, "E007: 电话置信度偏低"
+
+    # 测试用例2：缺失字段占位
+    sample2 = "仅有一个日期：2024年5月20日"
+    result2 = extractor.extract(sample2)
+    assert result2["日期"] != "[需核实:日期]", "E007: 日期提取失败"
+    assert "2024" in result2["日期"], "E007: 日期年份错误"
+    assert result2["姓名"] == "[需核实:姓名]", "E007: 缺失字段占位失败"
+
+    # 测试用例3：批量处理
+    sample3 = "张三,13800138000,zhang@example.com\n李四,13900139000,li@example.com"
+    batch_results = process_batch(sample3, extractor)
+    assert len(batch_results) == 2, "E007: 批量处理行数错误"
+    assert batch_results[0]["姓名"] == "张三", "E007: 批量第一行姓名错误"
+    assert batch_results[1]["姓名"] == "李四", "E007: 批量第二行姓名错误"
+
+    # 测试用例4：完整流程（process_input）
+    full_result = process_input(text=sample1)
+    assert full_result["status"] == "success", "E007: 完整流程失败"
+    assert full_result["data"]["姓名"] == "张三", "E007: 完整流程姓名错误"
+
+    # 测试用例5：空输入处理（不应崩溃，返回错误信息）
+    try:
+        process_input(text="   ")
+        # 如果走到这里说明没有抛出异常，但应返回错误
+        empty_check = process_input(text="   ")
+        assert empty_check["status"] == "failed", "E007: 空输入未返回失败状态"
+    except Exception:
+        # 抛出异常也视为失败
+        raise AssertionError("E007: 空输入处理异常")
+
+    # 测试用例6：文件不存在
+    try:
+        process_input(file_path="/nonexistent/path/file.txt")
+        raise AssertionError("E007: 不存在的文件应返回失败")
+    except Exception as exc:
+        # 应返回错误字典而不是抛出
+        assert "E002" in str(exc) or "failed" in str(exc), "E007: 文件错误处理异常"
+
+    print("[selftest] 所有自检断言通过 ✅")
+    return True
+
+
+# ---------------------------------------------------------------------------
+# 命令行入口
+# ---------------------------------------------------------------------------
+def main() -> int:
+    """命令行主入口。"""
     parser = argparse.ArgumentParser(
-        description="rack-mirror 数据镜像结构化转换工具 v1.0.1",
-        epilog="示例: python main.py --text '张三 2024年3月15日 ￥5000'"
+        description="rack-mirror - 数据镜像/结构化转换/信息提取",
+        epilog="示例: python main.py --text '张三,电话13800138000' --batch",
     )
-    parser.add_argument("--text", type=str, help="要处理的文本内容")
-    parser.add_argument("--file", type=str, help="要处理的文件路径")
-    parser.add_argument("--url", type=str, help="要处理的 URL")
-    parser.add_argument("--template", type=str, help="JSON 模板文件路径")
-    parser.add_argument("--batch", type=str, help="批量处理，JSON 数组格式的输入")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("--output", type=str, help="输出文件路径（可选）")
+    parser.add_argument("--text", type=str, help="直接输入文本")
+    parser.add_argument("--file", type=str, help="输入文件路径")
+    parser.add_argument("--url", type=str, help="输入URL地址")
+    parser.add_argument("--batch", action="store_true", help="按行批量处理")
+    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    parser.add_argument("--output", type=str, help="输出结果到文件(JSON)")
 
     args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
-        sys.exit(run_selftest())
-
-    # 加载模板
-    template = None
-    if args.template:
         try:
-            with open(args.template, 'r', encoding='utf-8') as f:
-                template = json.load(f)
-        except Exception as e:
-            print(json.dumps(make_error("E008", f"模板加载失败: {str(e)}"), ensure_ascii=False, indent=2))
-            sys.exit(1)
+            run_selftest()
+            return 0
+        except AssertionError as exc:
+            print(f"[selftest] 失败: {exc}", file=sys.stderr)
+            return 1
+
+    # 参数校验
+    if not args.text and not args.file and not args.url:
+        parser.error("E001: 必须提供 --text、--file 或 --url 之一")
 
     # 处理输入
-    result = None
-    if args.text:
-        result = process_single(args.text, template)
-    elif args.file:
-        content, meta = read_file(args.file)
-        if "error" in meta:
-            result = meta
-        else:
-            result = process_single(content, template)
-            result["meta"].update(meta)
-    elif args.url:
-        content, meta = fetch_url(args.url)
-        if "error" in meta:
-            result = meta
-        else:
-            result = process_single(content, template)
-            result["meta"].update(meta)
-    elif args.batch:
-        try:
-            batch_inputs = json.loads(args.batch)
-            if not isinstance(batch_inputs, list):
-                result = make_error("E006", "批量输入必须是 JSON 数组")
-            else:
-                result = process_batch(batch_inputs, template)
-        except json.JSONDecodeError:
-            result = make_error("E006", "批量输入 JSON 解析失败")
-    else:
-        # 无参数时从标准输入读取
-        print("请输入要处理的内容（Ctrl+D 结束）：", file=sys.stderr)
-        content = sys.stdin.read().strip()
-        if content:
-            result = process_single(content, template)
-        else:
-            result = make_error("E001", "未提供输入内容")
+    result = process_input(
+        text=args.text,
+        file_path=args.file,
+        url=args.url,
+        batch=args.batch,
+    )
 
     # 输出结果
-    output_json = json.dumps(result, ensure_ascii=False, indent=2)
+    try:
+        output_json = json.dumps(result, ensure_ascii=False, indent=2)
+    except (TypeError, ValueError) as exc:
+        print(f"E005: 输出序列化失败 - {exc}", file=sys.stderr)
+        return 1
+
     if args.output:
         try:
-            with open(args.output, 'w', encoding='utf-8') as f:
-                f.write(output_json)
-            print(f"结果已写入: {args.output}", file=sys.stderr)
-        except Exception as e:
-            print(json.dumps(make_error("E009", f"输出写入失败: {str(e)}"), ensure_ascii=False, indent=2))
-            sys.exit(1)
+            Path(args.output).write_text(output_json, encoding="utf-8")
+            print(f"结果已写入: {args.output}")
+        except OSError as exc:
+            print(f"E002: 输出文件写入失败 - {exc}", file=sys.stderr)
+            return 1
     else:
         print(output_json)
 
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
