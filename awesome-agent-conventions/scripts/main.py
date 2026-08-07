@@ -44,10 +44,10 @@ SKILL_DESCRIPTION = "仅供学习与参考用途。提供规范、可复用的�
 # 错误码及对应话术 (来自规格书第四节)
 ERROR_MESSAGES: Dict[str, str] = {
     "E001": "请提供待处理的内容，格式为：用户提供的数据/文件/URL",
-    "E002": "还缺少以下信息，请补充：...",
-    "E003": "输入格式不符合要求，示例：...",
-    "E004": "这超出了本工具的能力范围，建议...",
-    "E005": "结果无法确定，建议：...",
+    "E002": "还缺少以下信息，请补充：{}",
+    "E003": "输入格式不符合要求，示例：{}",
+    "E004": "这超出了本工具的能力范围，建议：{}",
+    "E005": "结果无法确定，建议：{}",
     # 预留一些内部错误码
     "E006": "内部错误: 未知的处理异常",
     "E007": "内部错误: 参数解析失败",
@@ -321,10 +321,20 @@ def format_error(error_code: str, **kwargs: Any) -> Dict[str, Any]:
         错误信息字典。
     """
     message = ERROR_MESSAGES.get(error_code, "未知错误")
-    # 简单替换占位符
-    for key, value in kwargs.items():
-        message = message.replace(f"...", str(value), 1)
-
+    
+    # 如果消息中包含 {} 占位符, 则进行格式化
+    if "{}" in message:
+        # 如果没有提供参数, 则移除占位符
+        if not kwargs:
+            message = message.replace("{}", "")
+        else:
+            # 使用提供的参数进行格式化
+            try:
+                message = message.format(*kwargs.values())
+            except (KeyError, IndexError):
+                # 如果参数不匹配, 则移除占位符
+                message = message.replace("{}", "")
+    
     return {
         "error_code": error_code,
         "error_message": message,
