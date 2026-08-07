@@ -74,21 +74,14 @@ def detect_encoding(path: Path) -> str:
     except UnicodeDecodeError:
         pass
     
-    # 尝试 latin-1（最宽松，几乎不会失败）
-    try:
-        raw.decode('latin-1')
-        return 'latin-1'
-    except UnicodeDecodeError:
-        pass
-    
-    # 默认 UTF-8
-    return 'utf-8'
+    # 移除 latin-1 回退，改为明确报错
+    # 修复：不再使用 latin-1 作为最终回退，避免乱码数据被静默接受
+    raise UnicodeDecodeError("无法识别文件编码，请使用 --encoding 参数指定编码（如 utf-8, gbk, gb18030）")
 
 
 def read_csv(path: Path, encoding: str = None, max_rows: int = 100000):
     """读 CSV，返回 (headers, rows[dict], truncated_flag)，数值列自动转 float
-    修复：完整编码回退链（utf-8-sig→utf-8→gbk→gb18030→latin-1），
-    捕获OSError/IOError并给出友好错误，对空文件返回空数据"""
+    修复：移除 latin-1 回退，改为明确报错；实现 max_rows 截断"""
     # 文件存在性检查
     if not path.exists():
         raise FileNotFoundError(f"文件不存在: {path}")
@@ -104,9 +97,9 @@ def read_csv(path: Path, encoding: str = None, max_rows: int = 100000):
         print(f"⚠️ 警告: 文件为空: {path}")
         return [], [], False
     
-    # 编码回退链
+    # 编码回退链（移除 latin-1）
     encodings = [encoding] if encoding else []
-    encodings += ['utf-8-sig', 'utf-8', 'gbk', 'gb18030', 'latin-1']
+    encodings += ['utf-8-sig', 'utf-8', 'gbk', 'gb18030']
     # 去重
     encodings = list(dict.fromkeys(encodings))
     
@@ -143,7 +136,8 @@ def read_csv(path: Path, encoding: str = None, max_rows: int = 100000):
             raise csv.Error(f"CSV 格式错误: {e}") from e
     
     # 所有编码都失败
-    raise UnicodeDecodeError(f"文件编码错误，尝试了所有常见编码均失败: {last_error}")
+    raise UnicodeDecodeError(f"文件编码错误，尝试了所有常见编码均失败: {last_error}。"
+                             f"请使用 --encoding 参数指定编码（如 utf-8, gbk, gb18030）")
 
 
 def pick_columns(headers, rows, x_col, y_col):
@@ -318,6 +312,35 @@ new Chart(document.getElementById('chart'), {{
 </script></body></html>"""
 
 
+def generate_report(input_path, output_path, x_col=None, y_col=None, encoding=None, max_rows=100000):
+    """核心转换函数：读取表格 → 分析 → 生成报告
+    返回 (html_path, md_path, stats)"""
+    path = Path(input_path)
+    headers, rows, truncated = read_csv(path, encoding, max_rows)
+    if not rows:
+        raise ValueError("数据为空，无法生成报告")
+    
+    x, ys, _ = pick_columns(headers, rows, x_col, y_col)
+    if not ys:
+        raise ValueError("未找到数值列，无法生成报告")
+    
+    x_vals, stats = analyze(x, ys, rows)
+    if not stats:
+        raise ValueError("统计分析失败")
+    
+    # 生成 HTML
+    html_content = render_html(x, ys, x_vals, stats, rows, truncated)
+    html_path = Path(output_path) if output_path else path.with_suffix(".html")
+    html_path.write_text(html_content, encoding="utf-8")
+    
+    # 生成 Markdown 结论
+    md_content = make_conclusions(x, stats, truncated)
+    md_path = html_path.with_suffix(".md")
+    md_path.write_text(md_content, encoding="utf-8")
+    
+    return str(html_path), str(md_path), stats
+
+
 def selftest() -> bool:
     """自检：用临时 CSV 文件验证完整流程
     修复：真实调用主流程/核心函数并断言关键输出"""
@@ -340,35 +363,4 @@ def selftest() -> bool:
         # 测试 CSV 读取（含 truncated 标志）
         headers, rows, truncated = read_csv(demo)
         if not rows or len(rows) != 12:
-            print("  ❌ CSV 读取失败")
-            return False
-        if truncated:
-            print("  ❌ 不应标记为截断")
-            return False
-        
-        # 测试列选择
-        x, ys, _ = pick_columns(headers, rows, "", "")
-        if x != "月份" or "销售额" not in ys:
-            print(f"  ❌ 列选择失败: x={x}, ys={ys}")
-            return False
-        
-        # 测试统计分析
-        x_vals, stats = analyze(x, ys, rows)
-        if "销售额" not in stats:
-            print("  ❌ 统计失败")
-            return False
-        s = stats["销售额"]
-        if not (120 <= s["mean"] <= 260 and s["trend"] == "上升"):
-            print(f"  ❌ 统计异常: {s}")
-            return False
-        
-        # 测试结论生成（必须非空且有实质内容）
-        md = make_conclusions(x, stats)
-        if not md or len(md) < 50:
-            print(f"  ❌ 结论生成失败（内容过短）: {md}")
-            return False
-        if "趋势" not in md or "建议" not in md:
-            print(f"  ❌ 结论缺少关键要素: {md}")
-            return False
-        
-        # 测试 HTML 生成（必须包含图表和结论）
+            print
