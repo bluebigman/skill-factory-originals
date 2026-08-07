@@ -16,6 +16,7 @@ import csv
 import json
 import os
 import re
+import shutil
 import sys
 import tempfile
 from pathlib import Path
@@ -116,14 +117,9 @@ def check_deploy_prerequisites(required_tools: list, required_dirs: list) -> dic
         "all_passed": True,
     }
 
-    # 检查工具
+    # 检查工具 - 使用 shutil.which 进行检测
     for tool in required_tools:
-        found = False
-        for path_dir in os.environ.get("PATH", "").split(os.pathsep):
-            candidate = os.path.join(path_dir, tool)
-            if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
-                found = True
-                break
+        found = shutil.which(tool) is not None
         results["tools"][tool] = found
         if not found:
             results["all_passed"] = False
@@ -440,7 +436,6 @@ def selftest() -> bool:
     print("\n[测试 2] 部署前置条件检查")
     try:
         # 使用当前环境中的工具
-        import shutil
         available_tools = [t for t in ["python3", "sh", "ls"] if shutil.which(t)]
         unavailable_tools = ["definitely-not-exist-tool-xyz"]
         result = check_deploy_prerequisites(available_tools + unavailable_tools, [])
