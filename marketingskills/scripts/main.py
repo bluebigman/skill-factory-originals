@@ -272,7 +272,7 @@ class MarketingSkillsProcessor:
                 confidence = 0.95 if fields["domain"] else 0.7
             else:
                 # 普通字典
-                fields = parsed_data
+                fields = parsed_data.copy()
                 # 计算置信度：根据字段完整性
                 required_fields = ["content", "title", "description"]
                 present_fields = sum(1 for f in required_fields if f in parsed_data)
@@ -290,12 +290,20 @@ class MarketingSkillsProcessor:
         elif isinstance(parsed_data, str):
             # 纯文本输入
             lines = parsed_data.split("\n")
+            # 确保 char_count 一定存在
             fields = {
                 "content": parsed_data,
                 "line_count": len(lines),
                 "char_count": len(parsed_data),
+                "word_count": len(parsed_data.split()),
             }
-            confidence = 0.8 if len(parsed_data) > 10 else 0.6
+            # 根据文本长度和内容丰富度计算置信度
+            if len(parsed_data) > 100:
+                confidence = 0.85
+            elif len(parsed_data) > 10:
+                confidence = 0.75
+            else:
+                confidence = 0.6
 
         # 确保置信度在 0-1 之间
         confidence = max(0.0, min(1.0, confidence))
@@ -405,6 +413,7 @@ def run_selftest() -> bool:
     try:
         test_text = "这是一段测试文本，用于验证文本处理功能是否正常工作。"
         result = processor.process(test_text, "text")
+        assert "char_count" in result.fields, f"缺少 char_count 字段，实际字段: {list(result.fields.keys())}"
         assert result.fields["char_count"] > 0
         assert result.fields["line_count"] >= 1
         assert result.confidence > 0  # 置信度应大于0
@@ -485,8 +494,14 @@ def run_selftest() -> bool:
     print("\n[测试 7] 置信度标注")
     try:
         # 测试高置信度
-        high_conf_result = processor.process({"title": "测试"}, "text")
-        assert high_conf_result.confidence >= 0.5
+        high_conf_result = processor.process({"title": "测试", "description": "完整描述"}, "text")
+        assert high_conf_result.confidence >= 0.8
+        assert len(high_conf_result.warnings) == 0  # 高置信度不应有警告
+
+        # 测试中等置信度
+        medium_conf_result = processor.process("短文本", "text")
+        assert medium_conf_result.confidence >= 0.5
+        assert len(medium_conf_result.warnings) > 0  # 中等置信度应有警告
 
         # 测试警告生成
         low_conf_result = StructuredResult(
@@ -497,7 +512,11 @@ def run_selftest() -> bool:
         warnings = low_conf_result.warnings
         assert len(warnings) > 0  # 低置信度应该有警告
 
-        print(f"  ✓ 通过 (高置信度: {high_conf_result.confidence:.2%})")
+        # 验证置信度标注在文本输出中
+        text_output = processor.process("这是一段测试文本", "text")
+        assert "置信度" in text_output.content  # 文本输出应包含置信度标注
+
+        print(f"  ✓ 通过 (高置信度: {high_conf_result.confidence:.2%}, 有警告: {len(medium_conf_result.warnings)} 条)")
     except Exception as e:
         print(f"  ✗ 失败: {e}")
         all_passed = False
