@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 cold-email-generator 技能实现脚本
-版本: 1.0.1
+版本: 1.0.2
 功能: 将零散资料转化为专业冷邮件草稿，支持批量处理与置信度标注。
 """
 
@@ -66,7 +66,8 @@ class InputParser:
         info = ContactInfo(source_text=text.strip())
         
         # 提取姓名（常见模式：姓名：XXX 或 Name: XXX）
-        name_match = re.search(r'(?:姓名|名字|Name)[：:\s]+([\u4e00-\u9fa5A-Za-z\s]{2,20})', text)
+        # 修正：使用更精确的正则，避免捕获多余空格
+        name_match = re.search(r'(?:姓名|名字|Name)[：:\s]+([\u4e00-\u9fa5A-Za-z]{2,20})', text)
         if name_match:
             info.name = name_match.group(1).strip()
         
@@ -378,9 +379,9 @@ def run_selftest() -> bool:
         result = process_input(test_text, "text")
         assert len(result["contacts"]) == 1, "文本解析应返回1个联系人"
         contact = result["contacts"][0]
-        assert contact.name == "张三", "姓名提取失败"
-        assert contact.company == "ABC科技有限公司", "公司提取失败"
-        assert contact.industry == "企业服务", "行业提取失败"
+        assert contact.name == "张三", f"姓名提取失败，实际获取: {contact.name}"
+        assert contact.company == "ABC科技有限公司", f"公司提取失败，实际获取: {contact.company}"
+        assert contact.industry == "企业服务", f"行业提取失败，实际获取: {contact.industry}"
         assert len(contact.intent_keywords) > 0, "关键词提取失败"
         print("  ✓ 文本解析通过")
         
