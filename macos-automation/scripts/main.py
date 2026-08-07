@@ -90,14 +90,17 @@ class AutomationProcessor:
         self._calculate_confidence(parsed_data, missing_fields)
 
         # Step 5: 生成结构化结果
-        result = self._build_result(parsed_data)
+        result_data = self._build_result(parsed_data)
 
-        # Step 6: 附加元信息
-        result["_meta"] = {
-            "confidence": self.confidence,
-            "confidence_label": self._get_confidence_label(),
-            "warnings": self.warnings,
-            "error_code": self.error_code,
+        # Step 6: 构建最终响应
+        result = {
+            "data": result_data,
+            "_meta": {
+                "confidence": self.confidence,
+                "confidence_label": self._get_confidence_label(),
+                "warnings": self.warnings,
+                "error_code": self.error_code,
+            }
         }
 
         return result
