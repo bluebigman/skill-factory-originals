@@ -10,7 +10,7 @@ workflow 技能实现脚本（clean-room 重写）
 import argparse
 import json
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Tuple
 
 
 # ---------------------------------------------------------------------------
@@ -66,7 +66,11 @@ class WorkflowProcessor:
         支持 JSON 格式和纯文本格式。
         返回 (是否成功, 解析结果, 错误码)
         """
-        if not raw_input or not raw_input.strip():
+        if raw_input is None:
+            return False, None, "E001"
+        
+        # 处理空字符串和纯空白字符串
+        if not isinstance(raw_input, str) or not raw_input.strip():
             return False, None, "E001"
 
         text = raw_input.strip()
@@ -117,7 +121,10 @@ class WorkflowProcessor:
                         if normalized_key not in extracted:
                             extracted[normalized_key] = value
         elif isinstance(data, str):
-            extracted["content"] = data
+            if data.strip():  # 非空字符串
+                extracted["content"] = data
+            else:
+                extracted["content"] = data
 
         return extracted
 
@@ -227,12 +234,23 @@ class WorkflowProcessor:
         results = []
         failures = 0
         for i, item in enumerate(items):
-            success, result, err = self.generate_result(item, output_format)
-            if success:
-                results.append({"index": i, "success": True, "result": result})
-            else:
+            # 检查单个项目是否有效
+            if item is None or (isinstance(item, str) and not item.strip()):
                 failures += 1
-                results.append({"index": i, "success": False, "error": err})
+                results.append({"index": i, "success": False, "error": "E001"})
+                continue
+            
+            # 尝试解析和处理
+            try:
+                success, result, err = self.generate_result(item, output_format)
+                if success:
+                    results.append({"index": i, "success": True, "result": result})
+                else:
+                    failures += 1
+                    results.append({"index": i, "success": False, "error": err})
+            except Exception as e:
+                failures += 1
+                results.append({"index": i, "success": False, "error": f"E010: {str(e)}"})
 
         if failures > 0:
             return False, {"partial": True, "results": results, "failures": failures}, "E007"
@@ -324,6 +342,11 @@ def run_selftest() -> bool:
     assert not ok, "测试9失败: 部分失败时应返回失败"
     assert err == "E007", f"测试9失败: 错误码应为 E007, 实际 {err}"
     assert result.get("failures", 0) >= 1, "测试9失败: 应有至少1个失败项"
+    # 验证失败项的索引和错误码
+    failed_item = [r for r in result["results"] if not r["success"]]
+    assert len(failed_item) == 1, "测试9失败: 应该只有1个失败项"
+    assert failed_item[0]["index"] == 0, "测试9失败: 失败项索引应为0"
+    assert failed_item[0]["error"] == "E001", f"测试9失败: 失败项错误码应为E001, 实际 {failed_item[0]['error']}"
     print("测试9通过: 批量部分失败处理")
 
     # 测试用例 10: 错误码完整性
@@ -404,7 +427,9 @@ def main() -> int:
 
             ok, result, err = processor.batch_process(items, args.format)
             if not ok:
-                error = make_error(err)
+                # 对于部分失败，返回详细错误信息
+                error = make_error(err, f"失败 {result.get('failures', 0)} 项")
+                error["partial_results"] = result
                 print(json.dumps(error, ensure_ascii=False, indent=2))
                 return 1
         else:
