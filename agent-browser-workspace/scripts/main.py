@@ -93,6 +93,9 @@ class BrowserWorkspace:
             self.session.connected = True
             return True
             
+        except ValueError as e:
+            self.session.connected = False
+            raise ValueError(f"E003: CDP 连接失败: {e}") from e
         except Exception as e:
             self.session.connected = False
             raise ConnectionError(f"E003: CDP 连接失败: {e}") from e
@@ -383,11 +386,18 @@ class SelfTest:
         assert result is True, "CDP 连接应返回 True"
         assert ws.session.connected is True, "连接状态应为 True"
         
-        # 测试错误地址
+        # 测试空地址
         try:
             ws.connect_cdp("")
             assert False, "空地址应该抛出异常"
-        except ConnectionError:
+        except (ValueError, ConnectionError):
+            pass  # 预期行为
+        
+        # 测试错误格式
+        try:
+            ws.connect_cdp("invalid-endpoint")
+            assert False, "错误格式应该抛出异常"
+        except (ValueError, ConnectionError):
             pass  # 预期行为
         
         # 测试断开
@@ -624,7 +634,7 @@ def main() -> int:
         try:
             ws.connect_cdp(args.connect)
             print(f"✅ 已连接到 {args.connect}")
-        except Exception as e:
+        except (ValueError, ConnectionError) as e:
             print(f"❌ 连接失败: {e}", file=sys.stderr)
             return 1
     
