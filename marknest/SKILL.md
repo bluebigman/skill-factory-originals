@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: marknest
 name: marknest
-displayName: 文档巢穴 格式转换 信息提取
-description: 将用户提供的文件或链接，转换为规范、可复用的结构化输出。
-version: 1.0.1
+displayName: 文档转换 结构化整理 信息提取
+description: 将文件或链接转为规范、可复用的结构化输出。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/marknest
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LingForge
+author: LinStruct
 agent_created: true
-trigger_words: ["PDF转文档", "marknest", "格式转换", "文档处理", "信息提取"]
+trigger_words: ["PDF转文档", "marknest", "格式转换", "文档处理", "信息提取", "结构化输出", "链接转文档"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,25 +31,9 @@ trigger_words: ["PDF转文档", "marknest", "格式转换", "文档处理", "信
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# MarkNest 技能手册
+# marknest — 文档结构化转换 Skill
 
-## 一、能力边界速查卡
-
-本技能用于处理用户提交的数据、文件或 URL，将其转化为结构化的、可复用的输出结果。以下表格明确了本技能的适用范围与限制。
-
-| 维度 | 说明 |
-| :--- | :--- |
-| **核心任务** | 解析输入内容，识别关键信息，按约定格式输出结构化结果。 |
-| **输入来源** | 用户直接粘贴的文本数据、上传的本地文件（如 PDF、TXT、MD）、可访问的 URL 链接。 |
-| **输出形式** | 标准 Markdown 文档、JSON 数据格式、或用户指定的自定义模板。 |
-| **批量处理** | 支持一次提交多个文件或 URL，按顺序逐一处理并汇总输出。 |
-| **能力边界** | 不执行代码、不访问需登录授权的私有系统、不进行事实性核查（如验证新闻真伪）。 |
-| **适用对象** | 需要快速整理文档要点、提取关键字段、或转换文档格式的个人开发者、研究人员及办公人员。 |
-
-**不能做的事项：**
-- 不处理图像中的文字（OCR 功能需外部配合）。
-- 不修改原始文件，仅生成新的输出内容。
-- 不提供法律、医疗或金融等专业领域的权威建议。
+本 Skill 由 AI 辅助生成，仅供参考。使用前请确认输入内容符合你的实际需求与合规要求。
 
 
 ## 许可证（License）
