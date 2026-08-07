@@ -257,6 +257,15 @@ def check_architecture(nodes: List[ModuleNode], rules: List[BoundaryRule]) -> Ch
     # 构建模块名 -> 节点映射
     module_map = {node.name: node for node in nodes}
 
+    # 收集所有规则中提到的模块前缀，用于判断目标模块是否属于项目
+    project_modules = set()
+    for rule in rules:
+        source_pattern = rule.source[:-1] if rule.source.endswith("*") else rule.source
+        project_modules.add(source_pattern)
+        for allowed_pattern in rule.allowed:
+            pattern = allowed_pattern[:-1] if allowed_pattern.endswith("*") else allowed_pattern
+            project_modules.add(pattern)
+
     for node in nodes:
         rule = find_rule_for_module(node.name, rules)
         if rule is None:
@@ -266,16 +275,21 @@ def check_architecture(nodes: List[ModuleNode], rules: List[BoundaryRule]) -> Ch
             result.import_count += 1
             target = imp.module.lstrip(".")
 
-            # 跳过标准库和第三方库（仅检查项目内部依赖）
-            if target.split(".")[0] not in module_map:
-                # 尝试匹配项目内模块
-                matched = False
-                for name in module_map:
-                    if name == target or name.startswith(target + "."):
-                        matched = True
+            # 判断目标模块是否属于项目内模块
+            is_project_module = False
+            # 检查目标模块是否在已知模块映射中
+            if target in module_map or any(name.startswith(target + ".") for name in module_map):
+                is_project_module = True
+            # 检查目标模块是否匹配项目模块前缀
+            else:
+                for proj_prefix in project_modules:
+                    if match_prefix(target, proj_prefix):
+                        is_project_module = True
                         break
-                if not matched:
-                    continue
+            
+            # 如果不是项目内模块（标准库、第三方库等），跳过
+            if not is_project_module:
+                continue
 
             # 检查是否允许
             allowed = False
