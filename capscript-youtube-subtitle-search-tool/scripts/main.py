@@ -3,7 +3,7 @@
 """
 capscript-youtube-subtitle-search-tool
 字幕检索 / 时间轴定位 / 关键词过滤
-版本: 1.0.2 (clean-room 独立实现)
+版本: 1.0.3 (clean-room 独立实现)
 """
 
 import re
@@ -142,8 +142,34 @@ def parse_subtitles(raw_text: str) -> Dict:
         return {"entries": [], "error": ERR_INVALID_INPUT}
 
     entries = []
+    
+    # 移除 VTT 文件头（WEBVTT 及其可能的元数据）
+    lines = raw_text.splitlines()
+    cleaned_lines = []
+    in_header = False
+    for line in lines:
+        stripped = line.strip()
+        if stripped == "WEBVTT":
+            in_header = True
+            continue
+        if in_header:
+            # 跳过头部空行和元数据（如 NOTE、Kind 等）
+            if stripped == "":
+                continue
+            if stripped.startswith("NOTE") or ":" in stripped and "-->" not in stripped:
+                continue
+            # 遇到第一条时间戳行，结束头部处理
+            if "-->" in stripped or re.search(r"\d{1,2}:\d{2}:\d{2}[,.]\d{1,3}", stripped):
+                in_header = False
+                cleaned_lines.append(line)
+            continue
+        cleaned_lines.append(line)
+    
+    # 重新组合文本
+    cleaned_text = "\n".join(cleaned_lines)
+    
     # 按空行分割字幕块
-    blocks = re.split(r"\n\s*\n", raw_text.strip())
+    blocks = re.split(r"\n\s*\n", cleaned_text.strip())
     if not blocks or (len(blocks) == 1 and not blocks[0].strip()):
         return {"entries": [], "error": ERR_PARSE_FAILED}
 
