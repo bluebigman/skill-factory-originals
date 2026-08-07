@@ -401,11 +401,36 @@ def _build_dependency_graph(root_path, modules):
             for pattern in import_patterns:
                 for match in pattern.finditer(content):
                     imported = match.group(1).split(".")[0]
-                    # 检查是否为本地模块
+                    # 检查是否为本地模块（更宽松的匹配）
                     for mod in modules:
+                        # 检查模块名是否与导入路径匹配（支持相对路径）
+                        mod_parts = mod.split("/")
+                        imported_parts = imported.split("/")
+                        
+                        # 检查模块名是否以导入路径结尾
                         if mod.endswith(imported) or imported in mod:
-                            dependencies[module_name].append(mod)
+                            if mod not in dependencies[module_name]:
+                                dependencies[module_name].append(mod)
                             break
+                        
+                        # 检查相对路径导入（如 ./helper 或 ../utils/math）
+                        if imported.startswith("."):
+                            # 从当前文件所在目录开始解析
+                            current_dir = rel_file.parent
+                            import_path = imported.lstrip("./")
+                            
+                            # 处理 ../ 前缀
+                            while imported.startswith("../"):
+                                current_dir = current_dir.parent
+                                imported = imported[3:]
+                            
+                            target = (current_dir / imported).resolve()
+                            # 尝试匹配目标文件
+                            for mod in modules:
+                                if mod in str(target) or target.name in mod:
+                                    if mod not in dependencies[module_name]:
+                                        dependencies[module_name].append(mod)
+                                    break
 
     return dependencies
 
@@ -615,6 +640,7 @@ def run_selftest():
             print(f"  规则数量: {len(result.rules)}")
             print(f"  工作流数量: {len(result.workflows)}")
             print(f"  经验数量: {len(result.experiences)}")
+            print(f"  依赖关系: {dict(result.dependencies)}")
 
             return True
 
