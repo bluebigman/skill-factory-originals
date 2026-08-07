@@ -77,11 +77,11 @@ class AutoScraperEngine:
 
     # 常见字段别名映射，用于识别关键信息
     COMMON_FIELD_ALIASES = {
-        "标题": ["title", "标题", "题目", "headline", "name"],
-        "作者": ["author", "作者", "creator", "writer", "by"],
+        "标题": ["title", "标题", "题目", "headline", "name", "文章标题"],
+        "作者": ["author", "作者", "creator", "writer", "by", "作者:"],
         "日期": ["date", "日期", "time", "发布时间", "publish_date", "created"],
-        "内容": ["content", "内容", "body", "text", "正文", "description", "描述"],
-        "链接": ["url", "链接", "href", "link", "source"],
+        "内容": ["content", "内容", "body", "text", "正文", "description", "描述", "摘要"],
+        "链接": ["url", "链接", "href", "link", "source", "原文链接"],
         "关键词": ["keywords", "关键词", "tags", "标签", "subjects"],
         "数量": ["count", "数量", "number", "total", "总计"],
         "价格": ["price", "价格", "cost", "amount", "金额"],
@@ -442,14 +442,19 @@ class AutoScraperEngine:
         """从文本中提取字段值"""
         # 尝试标签-值模式: "标签: 值"
         for alias in aliases:
-            # 构建正则模式
+            # 清理别名，移除可能的冒号
+            clean_alias = alias.rstrip(':：').strip()
+            
+            # 构建正则模式，支持中英文冒号
             pattern = re.compile(
-                rf'{re.escape(alias)}\s*[:：]\s*([^\n\r]+)',
+                rf'{re.escape(clean_alias)}\s*[:：]\s*([^\n\r]+)',
                 re.IGNORECASE
             )
             match = pattern.search(text)
             if match:
                 raw_value = match.group(1).strip()
+                # 如果值以标点结尾，移除
+                raw_value = raw_value.rstrip('。；;，,')
                 value = self._convert_type(raw_value, type_hint)
                 if value is not None:
                     return value, 0.85
@@ -618,6 +623,8 @@ def run_selftest() -> bool:
     result = engine.process(test_text)
     if result.success:
         assert result.data is not None, "测试2失败: 输出为空"
+        assert "标题" in result.data, "测试2失败: 缺少标题字段"
+        assert "作者" in result.data, "测试2失败: 缺少作者字段"
         assert result.confidence > 0.3, f"测试2失败: 置信度过低 ({result.confidence})"
         print(f"  ✓ 通过 (置信度: {result.confidence:.2f})")
     else:
