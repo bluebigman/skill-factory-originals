@@ -118,8 +118,13 @@ def extract_key_info(raw_input: Any) -> Tuple[Dict[str, Any], float]:
         # 字典输入：直接保留键值
         return raw_input, 0.95
     elif isinstance(raw_input, list):
-        # 列表输入：尝试识别常见结构
-        return {"items": raw_input, "count": len(raw_input)}, 0.90
+        # 列表输入：为每个元素创建字段
+        extracted = {}
+        for i, item in enumerate(raw_input):
+            field_name = f"item_{i+1}"
+            extracted[field_name] = item
+        extracted["total_count"] = len(raw_input)
+        return extracted, 0.90
     else:
         # 字符串输入：简单识别
         text = raw_input.strip()
@@ -149,12 +154,21 @@ def analyze_input(extracted: Dict[str, Any]) -> List[ReviewItem]:
             )
         else:
             # 非空字段，标记为正常
+            status = "ok"
+            note = "字段已正常识别"
+            confidence = 0.95
+            
+            # 特殊处理 total_count 字段
+            if key == "total_count":
+                note = f"共识别 {value} 个列表元素"
+                confidence = 0.92
+            
             items.append(
                 ReviewItem(
                     field=str(key),
-                    status="ok",
-                    note="字段已正常识别",
-                    confidence=0.95,
+                    status=status,
+                    note=note,
+                    confidence=confidence,
                 )
             )
     return items
@@ -260,6 +274,8 @@ def run_selftest() -> int:
     ok, output, err_code = process_input(sample_list)
     assert ok, f"测试用例3失败: {err_code}"
     assert "item1" in output, "测试用例3输出缺少列表内容"
+    assert "item2" in output, "测试用例3输出缺少列表内容"
+    assert "item3" in output, "测试用例3输出缺少列表内容"
     print("测试用例 3 (列表输入) 通过")
 
     # 测试用例 4: 字符串输入
