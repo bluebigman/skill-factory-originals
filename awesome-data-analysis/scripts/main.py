@@ -185,9 +185,14 @@ def infer_field_types(rows: list) -> dict:
             types[header] = "datetime"
             continue
 
-        # 判断分类类型（唯一值较少）
-        unique_ratio = len(set(col_values)) / len(col_values)
-        if unique_ratio < 0.5:
+        # 判断分类类型（唯一值较少或字符串较短）
+        unique_count = len(set(col_values))
+        unique_ratio = unique_count / len(col_values)
+        
+        # 改进的分类判断逻辑：
+        # 1. 唯一值比例小于 0.8 且唯一值数量小于总行数的一半
+        # 2. 或者唯一值数量小于 10（对于小数据集）
+        if unique_ratio < 0.8 or unique_count < 10:
             types[header] = "categorical"
         else:
             types[header] = "text"
@@ -242,10 +247,13 @@ def generate_statistics(rows: list) -> dict:
             except ValueError:
                 # 分类或文本统计
                 counter = Counter(col_values)
-                col_stat.update({
-                    "type": "categorical" if len(counter) < len(col_values) * 0.5 else "text",
-                    "top_value": counter.most_common(1)[0][0] if counter else "",
-                })
+                unique_ratio = len(counter) / len(col_values)
+                # 使用与 infer_field_types 相同的逻辑
+                if unique_ratio < 0.8 or len(counter) < 10:
+                    col_stat["type"] = "categorical"
+                else:
+                    col_stat["type"] = "text"
+                col_stat["top_value"] = counter.most_common(1)[0][0] if counter else ""
 
         stats["columns"][header] = col_stat
 
