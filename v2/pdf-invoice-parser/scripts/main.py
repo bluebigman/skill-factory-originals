@@ -16,6 +16,7 @@ pdf-invoice-parser — 增值税发票字段提取与一致性校验
 from __future__ import annotations
 
 import argparse
+import base64
 import csv
 import json
 import logging
@@ -36,7 +37,7 @@ logging.basicConfig(level=logging.WARNING, format="%(levelname)s %(message)s", s
 log = logging.getLogger("pdf-invoice-parser")
 
 RETRIES = 3
-TIMEOUT = 10  # 网络请求超时（秒）
+TIMEOUT = 30  # 网络请求超时（秒），提升至30秒
 MAX_WORKERS = 4  # 批量处理最大并发数
 
 
@@ -449,6 +450,4 @@ def process_input(input_path: str) -> List[Bill]:
             tmp_path.unlink(missing_ok=True)
         return results
 
-    path = Path(input_path)
-
-    # 检查
+    path

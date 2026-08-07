@@ -1,489 +1,335 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-obsidian-skills — Obsidian 笔记自动化与知识库构建工具
-版本: 1.0.1
-许可: MIT
+obsidian-skills — 笔记自动化与知识库构建工具
+
+功能概述：
+    将任意数据、文件或URL转换为结构化Obsidian笔记，
+    支持YAML frontmatter生成、元数据提取、置信度标注与批量处理。
+
+用法示例：
+    python main.py --input sample.txt --output notes/
+    python main.py --selftest
 """
 
 import argparse
+import csv
+import datetime
+import hashlib
 import json
 import os
 import re
 import sys
 import tempfile
 import urllib.parse
-from datetime import datetime
+import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 
-# ============================================================
+# ---------------------------------------------------------------------------
 # 错误码定义
-# ============================================================
-class AppError(Exception):
-    """应用异常基类，携带错误码"""
-
-    def __init__(self, code: str, message: str):
-        self.code = code
-        self.message = message
-        super().__init__(f"[{code}] {message}")
-
-
-def err(code: str, message: str) -> AppError:
-    """便捷构造错误"""
-    return AppError(code, message)
-
-
-# ============================================================
-# 数据模型与常量
-# ============================================================
-DEFAULT_TEMPLATE = """---
-title: "{title}"
-author: "{author}"
-date: "{date}"
-tags: [{tags}]
-source: "{source}"
-confidence: {confidence}
----
-
-# {title}
-
-{content}
-"""
-
-# 需要核实字段的前缀标记
-UNCERTAIN_PREFIX = "[需核实:"
-
-# 支持解析的文本扩展名（用于文件转笔记）
-TEXT_EXTENSIONS = {".txt", ".md", ".markdown", ".csv", ".json", ".html", ".htm", ".xml", ".yaml", ".yml", ".log"}
-
-# 单文件大小限制（10MB）
-MAX_FILE_SIZE = 10 * 1024 * 1024
+# ---------------------------------------------------------------------------
+ERROR_CODES = {
+    "E001": "参数错误：缺少必要参数或参数值无效",
+    "E002": "文件读取失败：文件不存在、无权限或无法解码",
+    "E003": "文件写入失败：目标目录不可写或磁盘空间不足",
+    "E004": "URL访问失败：网络不可达、超时或返回非200状态",
+    "E005": "数据解析失败：无法从输入中提取有效内容",
+    "E006": "模板渲染失败：模板语法错误或变量缺失",
+    "E007": "批量处理中断：某个文件处理失败导致整体中止",
+    "E008": "自检失败：核心逻辑验证未通过",
+    "E009": "不支持的输入类型：无法识别的文件格式或URL协议",
+    "E010": "内部错误：未预期的异常发生",
+}
 
 
-# ============================================================
-# 核心功能：数据/文件/URL → 结构化笔记
-# ============================================================
-class NoteBuilder:
-    """将原始数据转换为结构化 Obsidian 笔记"""
-
-    def __init__(self, template: Optional[str] = None):
-        self.template = template or DEFAULT_TEMPLATE
-
-    def build(self, data: Dict[str, Any]) -> str:
-        """
-        根据数据字典生成 Markdown 笔记。
-        数据字典字段: title, author, date, tags, source, content, confidence
-        """
-        # 字段缺失时标注需核实
-        title = data.get("title") or self._uncertain("title")
-        author = data.get("author") or self._uncertain("author")
-        date = data.get("date") or datetime.now().strftime("%Y-%m-%d")
-        tags = data.get("tags") or []
-        source = data.get("source") or self._uncertain("source")
-        content = data.get("content") or self._uncertain("content")
-        confidence = data.get("confidence", "low")
-
-        # 标签格式化为逗号分隔
-        tag_str = ", ".join(f'"{t}"' for t in tags)
-
-        # 渲染模板
-        try:
-            return self.template.format(
-                title=title,
-                author=author,
-                date=date,
-                tags=tag_str,
-                source=source,
-                confidence=confidence,
-                content=content,
-            )
-        except KeyError as e:
-            raise err("E001", f"模板字段缺失: {e}")
-
-    @staticmethod
-    def _uncertain(field: str) -> str:
-        """生成需核实标记"""
-        return f"{UNCERTAIN_PREFIX}{field}]"
+def fail(code: str, message: str = "") -> None:
+    """抛出带错误码的异常。"""
+    detail = ERROR_CODES.get(code, "未知错误")
+    if message:
+        raise RuntimeError(f"[{code}] {detail}: {message}")
+    raise RuntimeError(f"[{code}] {detail}")
 
 
-def parse_text_to_note(text: str, source: str = "", tags: Optional[List[str]] = None) -> Dict[str, Any]:
-    """从纯文本提取结构化笔记数据"""
-    if not text or not text.strip():
-        raise err("E002", "输入文本为空")
+# ---------------------------------------------------------------------------
+# 核心数据结构
+# ---------------------------------------------------------------------------
+class Note:
+    """表示一篇Obsidian笔记。"""
 
-    lines = [l.strip() for l in text.splitlines() if l.strip()]
-    if not lines:
-        raise err("E002", "输入文本无有效内容")
+    def __init__(
+        self,
+        title: str = "",
+        content: str = "",
+        frontmatter: Optional[Dict[str, Any]] = None,
+        source: str = "",
+    ):
+        self.title = title.strip() or "未命名笔记"
+        self.content = content.strip()
+        self.frontmatter = frontmatter or {}
+        self.source = source
 
-    # 第一行作为标题
-    title = lines[0][:80]  # 限制长度
-    # 其余作为正文
-    content = "\n".join(lines[1:]) if len(lines) > 1 else ""
+    def to_markdown(self) -> str:
+        """将笔记渲染为带YAML frontmatter的Markdown字符串。"""
+        lines = ["---"]
+        # 确保标题始终存在
+        fm = dict(self.frontmatter)
+        fm.setdefault("title", self.title)
+        fm.setdefault("created", datetime.date.today().isoformat())
+        fm.setdefault("source", self.source)
 
-    # 简单启发式提取作者（含"作者"或"by"的行）
-    author = ""
-    for line in lines[1:5]:
-        if re.match(r"^(作者|by|author)\s*[:：]", line, re.IGNORECASE):
-            author = re.sub(r"^(作者|by|author)\s*[:：]\s*", "", line, flags=re.IGNORECASE)
-            break
-
-    # 简单日期提取
-    date_match = re.search(r"(20\d{2}[-/年]\d{1,2}[-/月]\d{1,2}日?)", text)
-    date = date_match.group(1) if date_match else ""
-
-    # 简单标签提取（#开头的词）
-    found_tags = re.findall(r"#([\w\u4e00-\u9fa5-]+)", text)
-    all_tags = list(dict.fromkeys(found_tags + (tags or [])))[:10]
-
-    return {
-        "title": title,
-        "author": author,
-        "date": date,
-        "tags": all_tags,
-        "source": source,
-        "content": content,
-        "confidence": "medium" if author and date else "low",
-    }
-
-
-def parse_json_to_note(json_data: Dict[str, Any], source: str = "") -> Dict[str, Any]:
-    """从 JSON 数据提取结构化笔记"""
-    if not isinstance(json_data, dict):
-        raise err("E003", "JSON 数据必须是对象")
-
-    # 常见字段映射
-    title = json_data.get("title") or json_data.get("name") or json_data.get("标题") or ""
-    author = json_data.get("author") or json_data.get("creator") or json_data.get("作者") or ""
-    date = json_data.get("date") or json_data.get("created") or json_data.get("日期") or ""
-    tags = json_data.get("tags") or json_data.get("labels") or []
-    content = json_data.get("content") or json_data.get("body") or json_data.get("text") or ""
-    source_url = json_data.get("source") or json_data.get("url") or source
-
-    # 如果 content 是字典或列表，转为 JSON 字符串
-    if not isinstance(content, str):
-        content = json.dumps(content, ensure_ascii=False, indent=2)
-
-    return {
-        "title": title,
-        "author": author,
-        "date": date,
-        "tags": tags if isinstance(tags, list) else [tags] if tags else [],
-        "source": source_url,
-        "content": content,
-        "confidence": "high" if title and content else "medium",
-    }
-
-
-def extract_meta_from_url(url: str) -> Dict[str, str]:
-    """从 URL 提取元数据（无需网络访问）"""
-    parsed = urllib.parse.urlparse(url)
-    path = Path(parsed.path)
-    title = path.stem.replace("-", " ").replace("_", " ").title() if path.stem else parsed.netloc
-    return {
-        "title": title,
-        "source": url,
-        "domain": parsed.netloc,
-    }
-
-
-# ============================================================
-# 批量处理与文件操作
-# ============================================================
-def read_file_safe(filepath: Path) -> str:
-    """安全读取文件，带大小和编码检查"""
-    if not filepath.exists():
-        raise err("E004", f"文件不存在: {filepath}")
-
-    if not filepath.is_file():
-        raise err("E005", f"不是文件: {filepath}")
-
-    size = filepath.stat().st_size
-    if size > MAX_FILE_SIZE:
-        raise err("E006", f"文件超过 10MB 限制: {filepath} ({size} bytes)")
-
-    # 尝试多种编码
-    for encoding in ["utf-8", "gbk", "latin-1"]:
-        try:
-            return filepath.read_text(encoding=encoding)
-        except (UnicodeDecodeError, PermissionError):
-            continue
-
-    raise err("E007", f"无法读取文件（编码不支持）: {filepath}")
-
-
-def process_file(filepath: Path, output_dir: Path, template: Optional[str] = None) -> Path:
-    """处理单个文件，生成笔记"""
-    if filepath.suffix.lower() not in TEXT_EXTENSIONS:
-        raise err("E008", f"不支持的文件类型: {filepath.suffix}")
-
-    text = read_file_safe(filepath)
-    note_data = parse_text_to_note(text, source=str(filepath))
-
-    # 根据文件扩展名选择解析方式
-    if filepath.suffix.lower() == ".json":
-        try:
-            json_data = json.loads(text)
-            note_data = parse_json_to_note(json_data, source=str(filepath))
-        except json.JSONDecodeError:
-            # JSON 解析失败则退回文本解析
-            pass
-
-    builder = NoteBuilder(template)
-    note = builder.build(note_data)
-
-    # 生成输出文件名（时间戳避免冲突）
-    safe_title = re.sub(r'[\\/:*?"<>|]', "_", note_data["title"])[:50]
-    output_path = output_dir / f"{safe_title}_{datetime.now().strftime('%Y%m%d%H%M%S')}.md"
-    output_path.write_text(note, encoding="utf-8")
-
-    return output_path
-
-
-def process_url(url: str, output_dir: Path, template: Optional[str] = None) -> Path:
-    """处理 URL（不访问网络，仅提取 URL 元数据）"""
-    meta = extract_meta_from_url(url)
-    note_data = {
-        "title": meta["title"],
-        "author": "",
-        "date": "",
-        "tags": ["未分类"],
-        "source": url,
-        "content": f"来源: {url}\n\n请手动补充内容。",
-        "confidence": "low",
-    }
-
-    builder = NoteBuilder(template)
-    note = builder.build(note_data)
-
-    safe_title = re.sub(r'[\\/:*?"<>|]', "_", note_data["title"])[:50]
-    output_path = output_dir / f"{safe_title}_{datetime.now().strftime('%Y%m%d%H%M%S')}.md"
-    output_path.write_text(note, encoding="utf-8")
-
-    return output_path
-
-
-def process_batch(inputs: List[str], output_dir: Path, template: Optional[str] = None) -> Dict[str, Any]:
-    """批量处理多个输入（文件或 URL）"""
-    results = {"success": [], "failed": []}
-
-    for item in inputs:
-        try:
-            if item.startswith(("http://", "https://")):
-                output = process_url(item, output_dir, template)
+        for key, value in fm.items():
+            if isinstance(value, (list, tuple)):
+                # 列表渲染为YAML数组
+                items = "[" + ", ".join(f'"{str(v)}"' for v in value) + "]"
+                lines.append(f"{key}: {items}")
+            elif isinstance(value, bool):
+                lines.append(f"{key}: {'true' if value else 'false'}")
+            elif isinstance(value, (int, float)):
+                lines.append(f"{key}: {value}")
             else:
-                filepath = Path(item)
-                output = process_file(filepath, output_dir, template)
-            results["success"].append({"input": item, "output": str(output)})
-        except AppError as e:
-            results["failed"].append({"input": item, "error": e.code, "message": e.message})
-        except Exception as e:
-            results["failed"].append({"input": item, "error": "E009", "message": str(e)})
+                # 字符串，进行必要的转义
+                safe_value = str(value).replace('"', '\\"')
+                lines.append(f'{key}: "{safe_value}"')
 
-    return results
+        lines.append("---")
+        lines.append("")
+        lines.append(self.content)
+        return "\n".join(lines)
+
+    def __repr__(self) -> str:
+        return f"Note(title={self.title!r}, content_len={len(self.content)})"
 
 
-# ============================================================
-# 自检功能（--selftest）
-# ============================================================
-def run_selftest() -> int:
-    """离线自检核心逻辑，使用硬编码样例数据"""
-    print("=== obsidian-skills 自检开始 ===")
-    failures = 0
-
-    # 测试 1: 文本解析
-    print("\n[1/5] 测试文本解析...")
-    sample_text = """Obsidian 使用指南
-作者: 张三
-日期: 2026-03-15
-
-这是一段测试内容，用于验证解析功能。
-#obsidian #笔记
-"""
+# ---------------------------------------------------------------------------
+# 输入处理模块
+# ---------------------------------------------------------------------------
+def read_text_file(path: str) -> str:
+    """读取文本文件内容。"""
     try:
-        note_data = parse_text_to_note(sample_text, source="test://sample")
-        assert note_data["title"] == "Obsidian 使用指南", f"标题解析错误: {note_data['title']}"
-        assert note_data["author"] == "张三", f"作者解析错误: {note_data['author']}"
-        assert len(note_data["tags"]) >= 1, "标签解析错误"
-        assert note_data["content"], "内容解析错误"
-        print("  ✓ 文本解析通过")
-    except AssertionError as e:
-        print(f"  ✗ 文本解析失败: {e}")
-        failures += 1
-    except AppError as e:
-        print(f"  ✗ 文本解析异常: {e.code} {e.message}")
-        failures += 1
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
+            return f.read()
+    except FileNotFoundError:
+        fail("E002", f"文件不存在: {path}")
+    except PermissionError:
+        fail("E002", f"无读取权限: {path}")
+    except UnicodeDecodeError:
+        fail("E002", f"文件不是有效的UTF-8文本: {path}")
+    except Exception as e:
+        fail("E010", f"读取文件异常: {e}")
 
-    # 测试 2: JSON 解析
-    print("\n[2/5] 测试 JSON 解析...")
-    sample_json = {
-        "title": "项目报告",
-        "author": "李四",
-        "date": "2026-01-01",
-        "tags": ["报告", "项目"],
-        "content": "这是项目报告的正文内容。",
-        "source": "test://json",
+
+def fetch_url(url: str, timeout: int = 10) -> str:
+    """从URL获取文本内容。"""
+    try:
+        req = urllib.request.Request(url, headers={"User-Agent": "obsidian-skills/1.0"})
+        with urllib.request.urlopen(req, timeout=timeout) as resp:
+            if resp.status != 200:
+                fail("E004", f"HTTP状态码 {resp.status}")
+            # 尝试按UTF-8解码，失败则用replace
+            raw = resp.read()
+            try:
+                return raw.decode("utf-8")
+            except UnicodeDecodeError:
+                return raw.decode("utf-8", errors="replace")
+    except urllib.error.URLError as e:
+        fail("E004", f"URL请求失败: {e.reason}")
+    except TimeoutError:
+        fail("E004", "请求超时")
+    except Exception as e:
+        fail("E010", f"URL处理异常: {e}")
+
+
+def parse_csv_data(text: str) -> List[Dict[str, str]]:
+    """解析CSV文本为字典列表。"""
+    try:
+        reader = csv.DictReader(text.splitlines())
+        rows = [dict(row) for row in reader]
+        if not rows:
+            fail("E005", "CSV内容为空")
+        return rows
+    except Exception as e:
+        fail("E005", f"CSV解析失败: {e}")
+
+
+def parse_json_data(text: str) -> Any:
+    """解析JSON文本。"""
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as e:
+        fail("E005", f"JSON解析失败: {e}")
+
+
+def extract_metadata_from_text(text: str, source: str = "") -> Dict[str, Any]:
+    """从原始文本中提取基础元数据。"""
+    meta: Dict[str, Any] = {}
+
+    # 提取标题（首个# 标题或第一行）
+    title_match = re.search(r"^#\s+(.+)$", text, re.MULTILINE)
+    if title_match:
+        meta["title"] = title_match.group(1).strip()
+    else:
+        first_line = text.strip().split("\n")[0][:80] if text.strip() else "未命名"
+        meta["title"] = first_line
+
+    # 提取日期（YYYY-MM-DD格式）
+    date_match = re.search(r"\d{4}-\d{2}-\d{2}", text)
+    if date_match:
+        meta["date"] = date_match.group(0)
+
+    # 提取标签（#tag形式）
+    tags = re.findall(r"#([a-zA-Z0-9_\-\u4e00-\u9fff]+)", text)
+    if tags:
+        # 去重并限制数量
+        unique_tags = list(dict.fromkeys(tags))[:10]
+        meta["tags"] = unique_tags
+
+    # 提取邮箱
+    emails = re.findall(r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", text)
+    if emails:
+        meta["emails"] = list(dict.fromkeys(emails))[:5]
+
+    # 提取URL
+    urls = re.findall(r"https?://[^\s<>\"']+", text)
+    if urls:
+        meta["urls"] = list(dict.fromkeys(urls))[:5]
+
+    meta["source"] = source or "unknown"
+    meta["char_count"] = len(text)
+
+    return meta
+
+
+def sanitize_filename(name: str) -> str:
+    """将字符串转为安全的文件名。"""
+    # 移除非法字符
+    name = re.sub(r'[\\/:*?"<>|]', "_", name)
+    # 移除控制字符
+    name = re.sub(r"[\x00-\x1f\x7f]", "", name)
+    # 去除首尾空白和点
+    name = name.strip().strip(".")
+    # 限制长度
+    if len(name) > 80:
+        name = name[:80]
+    return name or "未命名笔记"
+
+
+# ---------------------------------------------------------------------------
+# 笔记构建模块
+# ---------------------------------------------------------------------------
+def build_note_from_text(
+    text: str,
+    source: str = "",
+    template: Optional[Dict[str, str]] = None,
+) -> Note:
+    """从纯文本构建笔记。"""
+    meta = extract_metadata_from_text(text, source)
+    title = meta.pop("title", "未命名笔记")
+
+    # 构建正文
+    content_parts = []
+
+    # 核心内容（去除已有标题行以避免重复）
+    body = re.sub(r"^#\s+.+\n?", "", text, count=1, flags=re.MULTILINE).strip()
+    if body:
+        content_parts.append(body)
+
+    # 附加元数据区块
+    if meta:
+        content_parts.append("")
+        content_parts.append("## 元数据")
+        for key, value in meta.items():
+            if isinstance(value, list):
+                content_parts.append(f"- {key}: {', '.join(str(v) for v in value)}")
+            else:
+                content_parts.append(f"- {key}: {value}")
+
+    content = "\n".join(content_parts).strip()
+
+    # 构建frontmatter
+    frontmatter = {
+        "title": title,
+        "source": source or "unknown",
+        "created": datetime.date.today().isoformat(),
     }
-    try:
-        json_note = parse_json_to_note(sample_json)
-        assert json_note["title"] == "项目报告", f"JSON 标题解析错误: {json_note['title']}"
-        assert json_note["author"] == "李四", f"JSON 作者解析错误: {json_note['author']}"
-        assert len(json_note["tags"]) == 2, "JSON 标签解析错误"
-        print("  ✓ JSON 解析通过")
-    except AssertionError as e:
-        print(f"  ✗ JSON 解析失败: {e}")
-        failures += 1
+    if "tags" in meta:
+        frontmatter["tags"] = meta["tags"]
+    if "date" in meta:
+        frontmatter["date"] = meta["date"]
 
-    # 测试 3: 笔记生成
-    print("\n[3/5] 测试笔记生成...")
-    try:
-        builder = NoteBuilder()
-        note = builder.build(note_data)
-        assert "---" in note, "缺少 YAML frontmatter"
-        assert "# Obsidian 使用指南" in note, "缺少标题"
-        assert "[需核实:" not in note, "不应有需核实标记"
-        print("  ✓ 笔记生成通过")
-    except AssertionError as e:
-        print(f"  ✗ 笔记生成失败: {e}")
-        failures += 1
-    except AppError as e:
-        print(f"  ✗ 笔记生成异常: {e.code} {e.message}")
-        failures += 1
-
-    # 测试 4: URL 元数据提取
-    print("\n[4/5] 测试 URL 元数据提取...")
-    try:
-        meta = extract_meta_from_url("https://example.com/blog/my-article")
-        assert meta["title"], "URL 标题为空"
-        assert meta["source"] == "https://example.com/blog/my-article", "URL 来源错误"
-        assert meta["domain"] == "example.com", f"域名错误: {meta['domain']}"
-        print("  ✓ URL 元数据提取通过")
-    except AssertionError as e:
-        print(f"  ✗ URL 元数据提取失败: {e}")
-        failures += 1
-
-    # 测试 5: 文件处理（使用临时文件）
-    print("\n[5/5] 测试文件处理...")
-    try:
-        with tempfile.TemporaryDirectory() as tmpdir:
-            tmp_path = Path(tmpdir)
-            input_file = tmp_path / "test_input.txt"
-            input_file.write_text("测试文件标题\n\n这是文件内容。\n#测试标签", encoding="utf-8")
-
-            output_dir = tmp_path / "output"
-            output_dir.mkdir()
-
-            result = process_file(input_file, output_dir)
-            assert result.exists(), "输出文件不存在"
-            content = result.read_text(encoding="utf-8")
-            assert "测试文件标题" in content, "输出内容缺少标题"
-            assert "这是文件内容" in content, "输出内容缺少正文"
-            print("  ✓ 文件处理通过")
-    except AssertionError as e:
-        print(f"  ✗ 文件处理失败: {e}")
-        failures += 1
-    except AppError as e:
-        print(f"  ✗ 文件处理异常: {e.code} {e.message}")
-        failures += 1
-    except Exception as e:
-        print(f"  ✗ 文件处理未知错误: {e}")
-        failures += 1
-
-    # 汇总
-    print(f"\n=== 自检完成: {5 - failures}/5 通过 ===")
-    if failures > 0:
-        print(f"存在 {failures} 项失败")
-        return 1
-    return 0
+    return Note(title=title, content=content, frontmatter=frontmatter, source=source)
 
 
-# ============================================================
-# 命令行入口
-# ============================================================
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="Obsidian 笔记自动化工具 — 将数据/文件/URL 转换为结构化笔记",
-        epilog="示例: python main.py --input note.txt --output vault/",
-    )
+def build_note_from_csv(
+    csv_text: str,
+    source: str = "",
+) -> List[Note]:
+    """从CSV数据构建多条笔记（每行一条）。"""
+    rows = parse_csv_data(csv_text)
+    notes = []
 
-    parser.add_argument(
-        "--input", "-i",
-        nargs="+",
-        help="输入文件路径或 URL（支持多个）",
-    )
-    parser.add_argument(
-        "--output", "-o",
-        default="./notes_output",
-        help="输出目录（默认: ./notes_output）",
-    )
-    parser.add_argument(
-        "--template", "-t",
-        help="自定义笔记模板文件路径",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检（不依赖外部环境）",
-    )
-    parser.add_argument(
-        "--version",
-        action="version",
-        version="obsidian-skills 1.0.1",
-    )
+    for idx, row in enumerate(rows):
+        # 尝试找到标题列
+        title_col = None
+        for col in row.keys():
+            if col and ("标题" in col or "title" in col.lower()):
+                title_col = col
+                break
+        if title_col is None and row:
+            title_col = list(row.keys())[0]
 
-    args = parser.parse_args()
+        # 提取标签列
+        tags = []
+        for col, val in row.items():
+            if col and ("标签" in col or "tag" in col.lower()):
+                tags = [t.strip() for t in val.split(",") if t.strip()]
+                break
 
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
+        # 构建内容
+        content_lines = []
+        for col, val in row.items():
+            if val and col != title_col:
+                content_lines.append(f"**{col}**: {val}")
+        content = "\n".join(content_lines)
 
-    # 正常运行模式
-    if not args.input:
-        parser.error("必须提供 --input 或使用 --selftest")
+        title = row.get(title_col, f"记录{idx+1}") if title_col else f"记录{idx+1}"
 
-    # 读取模板
-    template = None
-    if args.template:
-        try:
-            template_path = Path(args.template)
-            template = read_file_safe(template_path)
-        except AppError as e:
-            print(f"错误: {e.code} {e.message}", file=sys.stderr)
-            return 2
+        frontmatter = {
+            "title": title,
+            "source": source,
+            "created": datetime.date.today().isoformat(),
+        }
+        if tags:
+            frontmatter["tags"] = tags
 
-    # 创建输出目录
-    try:
-        output_dir = Path(args.output)
-        output_dir.mkdir(parents=True, exist_ok=True)
-    except OSError as e:
-        print(f"[E010] 无法创建输出目录: {e}", file=sys.stderr)
-        return 2
+        notes.append(
+            Note(
+                title=title,
+                content=content,
+                frontmatter=frontmatter,
+                source=source,
+            )
+        )
 
-    # 批量处理
-    try:
-        results = process_batch(args.input, output_dir, template)
-
-        # 输出结果
-        print(f"处理完成: {len(results['success'])} 成功, {len(results['failed'])} 失败")
-
-        for item in results["success"]:
-            print(f"  ✓ {item['input']} → {item['output']}")
-
-        for item in results["failed"]:
-            print(f"  ✗ {item['input']}: [{item['error']}] {item['message']}")
-
-        # 有失败时返回非零
-        return 1 if results["failed"] else 0
-
-    except AppError as e:
-        print(f"错误: {e.code} {e.message}", file=sys.stderr)
-        return 2
-    except Exception as e:
-        print(f"[E009] 未预期错误: {e}", file=sys.stderr)
-        return 2
+    return notes
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+def build_note_from_json(
+    json_text: str,
+    source: str = "",
+) -> Note:
+    """从JSON数据构建笔记。"""
+    data = parse_json_data(json_text)
+
+    if isinstance(data, dict):
+        title = str(data.get("title", data.get("name", "JSON数据")))
+        # 移除已用于标题的字段
+        content_data = {k: v for k, v in data.items() if k not in ("title", "name")}
+
+        # 格式化内容
+        content_lines = []
+        for key, value in content_data.items():
+            if isinstance(value, (dict, list)):
+                content_lines.append(f"### {key}")
+                content_lines.append(f"
