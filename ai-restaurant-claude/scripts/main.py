@@ -10,6 +10,7 @@ scripts/main.py — AI 餐厅营销与运营引擎（代码审查技能）独立
 
 import argparse
 import json
+import re
 import sys
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -62,6 +63,7 @@ def extract_key_fields(text: str) -> Dict[str, str]:
     fields: Dict[str, str] = {}
     lines = [line.strip() for line in text.splitlines() if line.strip()]
 
+    # 第一遍：尝试键值对解析
     for line in lines:
         lower = line.lower()
         # 简单键值对解析：key: value 或 key：value
@@ -93,6 +95,42 @@ def extract_key_fields(text: str) -> Dict[str, str]:
         else:
             # 未识别字段保留原名
             fields.setdefault("extra_" + key, value)
+
+    # 第二遍：如果第一遍没有找到任何字段，尝试从自然语言中提取
+    if not fields:
+        # 尝试提取价格
+        price_match = re.search(r'(\d+(?:\.\d+)?)\s*(?:元|块钱|块)', text)
+        if price_match:
+            fields["price"] = price_match.group(0)
+
+        # 尝试提取评分
+        rating_match = re.search(r'(\d+(?:\.\d+)?)\s*(?:星|分)', text)
+        if rating_match:
+            fields["rating"] = rating_match.group(0)
+
+        # 尝试提取平台
+        platform_keywords = ["大众点评", "美团", "饿了么", "抖音", "小红书", "微博"]
+        for p in platform_keywords:
+            if p in text:
+                fields["platform"] = p
+                break
+
+        # 尝试提取菜品（简单的关键词匹配）
+        dish_patterns = [
+            r'吃了\s*([^\s，。]+)',
+            r'点了\s*([^\s，。]+)',
+            r'尝了\s*([^\s，。]+)',
+            r'([\u4e00-\u9fff]{2,8}(?:面|饭|菜|汤|鸡|鸭|鱼|肉|虾|蟹|锅|饼|包|饺|粉|粥|茶|酒|奶|汁))',
+        ]
+        for pattern in dish_patterns:
+            dish_match = re.search(pattern, text)
+            if dish_match:
+                fields["dish_name"] = dish_match.group(1)
+                break
+
+        # 如果找到了任何字段，把整段文本作为评论内容
+        if fields:
+            fields["review"] = text.strip()
 
     return fields
 
@@ -146,9 +184,10 @@ def process_input(raw_input: Any) -> Dict[str, Any]:
                 pass
         # 普通文本
         fields = extract_key_fields(text_content)
-        if not fields:
-            raise ValueError("E003")
+        # 修改：即使没有提取到字段，也返回低置信度结果而不是报错
         confidence, warnings = compute_confidence(fields)
+        if not fields:
+            warnings.append("未能识别出任何结构化字段，请补充更多信息")
         return {"fields": fields, "confidence": confidence, "warnings": warnings}
 
     # 字典输入
@@ -233,9 +272,12 @@ def run_selftest() -> int:
     try:
         result2 = process_input(sample2)
         conf2 = result2["confidence"]
+        fields2 = result2["fields"]
         # 宽松断言：置信度不应过高（因为关键字段缺失）
         assert conf2 < 90.0, f"不完整输入置信度应较低，实际 {conf2}"
         assert conf2 >= 0.0, "置信度不能为负"
+        # 应该能识别出菜品名称"面"
+        assert "dish_name" in fields2, "应该尝试识别出菜品名称"
         print("  [通过] 样例2: 部分输入低置信度")
     except AssertionError as e:
         print(f"  [失败] 样例2: {e}")
@@ -291,6 +333,21 @@ def run_selftest() -> int:
         print("  [通过] 样例6: 输出格式化")
     except Exception:
         print("  [失败] 样例6: 输出格式化异常")
+        return 1
+
+    # ---- 样例 7: 自然语言输入 ----
+    sample7 = "在美团点了份宫保鸡丁，38块钱，味道很棒，给4.5星"
+    try:
+        result7 = process_input(sample7)
+        fields7 = result7["fields"]
+        assert "dish_name" in fields7, "应识别出菜品名称"
+        assert "platform" in fields7, "应识别出平台"
+        print("  [通过] 样例7: 自然语言输入")
+    except AssertionError as e:
+        print(f"  [失败] 样例7: {e}")
+        return 1
+    except Exception:
+        print("  [失败] 样例7: 发生异常")
         return 1
 
     print("全部自检通过 ✅")
