@@ -114,13 +114,41 @@ def format_output(data: Any, fmt: str = "json") -> str:
     elif fmt == "compact":
         return json.dumps(data, ensure_ascii=False, separators=(",", ":"), default=str)
     elif fmt == "text":
-        # 纯文本格式：仅输出结构化数据的核心内容
-        if isinstance(data, dict):
-            lines = [f"{k}: {v}" for k, v in data.items() if not k.startswith("_")]
-            return "\n".join(lines) if lines else str(data)
-        return str(data)
+        # 纯文本格式：递归处理嵌套结构，输出关键字段内容
+        return _format_text(data)
     else:
         raise ValueError(f"不支持的输出格式: {fmt}")
+
+
+def _format_text(data: Any, indent: int = 0) -> str:
+    """
+    递归格式化数据为纯文本格式。
+    对于字典，输出 "key: value" 格式；
+    对于列表，输出 "- value" 格式；
+    对于标量，直接输出值。
+    """
+    lines = []
+    prefix = " " * indent
+    
+    if isinstance(data, dict):
+        for key, value in data.items():
+            if key.startswith("_"):  # 跳过内部字段
+                continue
+            if isinstance(value, (dict, list)):
+                lines.append(f"{prefix}{key}:")
+                lines.append(_format_text(value, indent + 2))
+            else:
+                lines.append(f"{prefix}{key}: {value}")
+    elif isinstance(data, list):
+        for item in data:
+            if isinstance(item, (dict, list)):
+                lines.append(_format_text(item, indent + 2))
+            else:
+                lines.append(f"{prefix}- {item}")
+    else:
+        lines.append(f"{prefix}{data}")
+    
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
@@ -286,6 +314,7 @@ def run_selftest() -> bool:
     result_7 = process_input('{"x": 1, "y": 2}', "text")
     assert result_7["status"] == "success", "用例7：状态应为 success"
     assert "x: 1" in result_7["output"], "用例7：文本输出应包含字段内容"
+    assert "y: 2" in result_7["output"], "用例7：文本输出应包含所有字段内容"
     print("用例7（文本输出格式）通过 ✓")
 
     # --- 测试用例 8：置信度标注 ---
