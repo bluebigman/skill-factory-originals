@@ -50,6 +50,8 @@ def parse_input(raw_text: str) -> dict:
         - keywords: 提取的关键词列表
         - has_url: 是否包含 URL
         - has_file: 是否包含文件路径
+        - urls: 提取到的 URL 列表
+        - files: 提取到的文件路径列表
         - confidence: 置信度 (0-100)
 
     异常:
@@ -221,58 +223,66 @@ def run_selftest() -> bool:
     """
     print("开始自检...")
 
-    # 测试用例 1: 正常输入
-    test1 = "帮我处理一下这个 https://example.com/video 人工智能 短视频"
-    result1 = process_input(test1)
-    assert result1["status"] == "success", "测试1: 状态应为 success"
-    assert result1["has_url"] is True, "测试1: 应检测到 URL"
-    assert len(result1["extracted_keywords"]) > 0, "测试1: 应提取到关键词"
-    assert result1["confidence"] >= 85, "测试1: 置信度应不低于85"
-    print("  测试1 (正常输入) 通过")
-
-    # 测试用例 2: 空输入
     try:
-        process_input("")
-        assert False, "测试2: 空输入应抛出异常"
-    except InputError as e:
-        assert e.code == "E001", "测试2: 错误码应为 E001"
-    print("  测试2 (空输入) 通过")
+        # 测试用例 1: 正常输入
+        test1 = "帮我处理一下这个 https://example.com/video 人工智能 短视频"
+        result1 = process_input(test1)
+        assert result1["status"] == "success", "测试1: 状态应为 success"
+        assert result1["input_summary"]["has_url"] is True, "测试1: 应检测到 URL"
+        assert len(result1["extracted_keywords"]) > 0, "测试1: 应提取到关键词"
+        assert result1["confidence"] >= 85, "测试1: 置信度应不低于85"
+        print("  测试1 (正常输入) 通过")
 
-    # 测试用例 3: 批量处理
-    test3_inputs = ["第一个主题 关键词", "", "第二个主题 https://example.com"]
-    results3 = batch_process(test3_inputs)
-    assert len(results3) == 3, "测试3: 应有3个结果"
-    assert results3[0]["status"] == "success", "测试3: 第一条应成功"
-    assert results3[1]["status"] == "error", "测试3: 第二条应失败"
-    assert results3[1]["error_code"] == "E001", "测试3: 第二条错误码应为E001"
-    assert results3[2]["status"] == "success", "测试3: 第三条应成功"
-    print("  测试3 (批量处理) 通过")
+        # 测试用例 2: 空输入
+        try:
+            process_input("")
+            assert False, "测试2: 空输入应抛出异常"
+        except InputError as e:
+            assert e.code == "E001", "测试2: 错误码应为 E001"
+        print("  测试2 (空输入) 通过")
 
-    # 测试用例 4: 低置信度场景
-    test4 = "abc"
-    result4 = process_input(test4)
-    assert result4["status"] == "success", "测试4: 状态应为 success"
-    # 宽松断言：置信度在合理范围内
-    assert 0 <= result4["confidence"] <= 100, "测试4: 置信度应在0-100之间"
-    print("  测试4 (低置信度) 通过")
+        # 测试用例 3: 批量处理
+        test3_inputs = ["第一个主题 关键词", "", "第二个主题 https://example.com"]
+        results3 = batch_process(test3_inputs)
+        assert len(results3) == 3, "测试3: 应有3个结果"
+        assert results3[0]["status"] == "success", "测试3: 第一条应成功"
+        assert results3[1]["status"] == "error", "测试3: 第二条应失败"
+        assert results3[1]["error_code"] == "E001", "测试3: 第二条错误码应为E001"
+        assert results3[2]["status"] == "success", "测试3: 第三条应成功"
+        print("  测试3 (批量处理) 通过")
 
-    # 测试用例 5: 文件路径检测
-    test5 = "处理 data/report.pdf 这个文件"
-    result5 = process_input(test5)
-    assert result5["status"] == "success", "测试5: 状态应为 success"
-    assert result5["has_file"] is True, "测试5: 应检测到文件"
-    print("  测试5 (文件路径检测) 通过")
+        # 测试用例 4: 低置信度场景
+        test4 = "abc"
+        result4 = process_input(test4)
+        assert result4["status"] == "success", "测试4: 状态应为 success"
+        # 宽松断言：置信度在合理范围内
+        assert 0 <= result4["confidence"] <= 100, "测试4: 置信度应在0-100之间"
+        print("  测试4 (低置信度) 通过")
 
-    # 测试用例 6: 错误码映射
-    assert "E001" in ERROR_CODES, "测试6: E001 应存在"
-    assert "E002" in ERROR_CODES, "测试6: E002 应存在"
-    assert "E003" in ERROR_CODES, "测试6: E003 应存在"
-    assert "E004" in ERROR_CODES, "测试6: E004 应存在"
-    assert "E005" in ERROR_CODES, "测试6: E005 应存在"
-    print("  测试6 (错误码映射) 通过")
+        # 测试用例 5: 文件路径检测
+        test5 = "处理 data/report.pdf 这个文件"
+        result5 = process_input(test5)
+        assert result5["status"] == "success", "测试5: 状态应为 success"
+        assert result5["input_summary"]["has_file"] is True, "测试5: 应检测到文件"
+        print("  测试5 (文件路径检测) 通过")
 
-    print("所有自检测试通过！")
-    return True
+        # 测试用例 6: 错误码映射
+        assert "E001" in ERROR_CODES, "测试6: E001 应存在"
+        assert "E002" in ERROR_CODES, "测试6: E002 应存在"
+        assert "E003" in ERROR_CODES, "测试6: E003 应存在"
+        assert "E004" in ERROR_CODES, "测试6: E004 应存在"
+        assert "E005" in ERROR_CODES, "测试6: E005 应存在"
+        print("  测试6 (错误码映射) 通过")
+
+        print("所有自检测试通过！")
+        return True
+
+    except AssertionError as e:
+        print(f"自检失败: {e}")
+        return False
+    except Exception as e:
+        print(f"自检异常: {e}")
+        return False
 
 
 # ---------------------------------------------------------------------------
@@ -310,14 +320,9 @@ def main():
 
     # 自检模式
     if args.selftest:
-        try:
-            run_selftest()
+        if run_selftest():
             return 0
-        except AssertionError as e:
-            print(f"自检失败: {e}")
-            return 1
-        except Exception as e:
-            print(f"自检异常: {e}")
+        else:
             return 1
 
     # 批量模式
