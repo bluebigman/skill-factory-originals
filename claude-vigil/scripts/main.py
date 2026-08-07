@@ -84,10 +84,10 @@ def parse_json_input(raw_input: str) -> Dict[str, Any]:
     try:
         data = json.loads(raw_input.strip())
         if not isinstance(data, dict):
-            raise VigorError("E008", "JSON 顶层必须是对象")
+            raise VigilError("E008", "JSON 顶层必须是对象")
         return data
     except json.JSONDecodeError as e:
-        raise VigorError("E008", f"JSON 解析失败: {e}")
+        raise VigilError("E008", f"JSON 解析失败: {e}")
 
 
 def read_file_input(file_path: str) -> str:
@@ -96,11 +96,11 @@ def read_file_input(file_path: str) -> str:
         with open(file_path, "r", encoding="utf-8") as f:
             return f.read()
     except FileNotFoundError:
-        raise VigorError("E006", f"文件不存在: {file_path}")
+        raise VigilError("E006", f"文件不存在: {file_path}")
     except PermissionError:
-        raise VigorError("E006", f"没有读取权限: {file_path}")
+        raise VigilError("E006", f"没有读取权限: {file_path}")
     except Exception as e:
-        raise VigorError("E006", f"读取失败: {e}")
+        raise VigilError("E006", f"读取失败: {e}")
 
 
 def process_url_input(url: str) -> Dict[str, Any]:
@@ -108,15 +108,18 @@ def process_url_input(url: str) -> Dict[str, Any]:
     处理 URL 输入。
     注意：本工具不访问网络，仅做格式校验和结构化。
     """
-    if not re.match(r'^https?://', url, re.IGNORECASE):
-        raise VigorError("E007", f"不支持的 URL 协议: {url}")
+    stripped_url = url.strip()
+    
+    if not re.match(r'^https?://', stripped_url, re.IGNORECASE):
+        raise VigilError("E007", f"不支持的 URL 协议: {stripped_url}")
 
     # 仅返回结构化元信息，不实际访问
     return {
         "type": "url",
-        "url": url.strip(),
+        "url": stripped_url,
         "status": "not_accessed",  # 工具不访问网络
         "confidence": 0.9,
+        "confidence_note": "直接输出",
         "note": "URL 已记录，但本工具不执行网络访问",
     }
 
@@ -202,7 +205,7 @@ def process_text_input(text: str) -> Dict[str, Any]:
     """处理纯文本输入"""
     valid, err_code = validate_input(text)
     if not valid:
-        raise VigorError(err_code)
+        raise VigilError(err_code)
 
     fields = extract_key_fields(text)
     fields["type"] = "text"
@@ -219,7 +222,7 @@ def process_json_input(raw_input: str) -> Dict[str, Any]:
     """处理 JSON 输入"""
     valid, err_code = validate_input(raw_input)
     if not valid:
-        raise VigorError(err_code)
+        raise VigilError(err_code)
 
     data = parse_json_input(raw_input)
 
@@ -245,7 +248,7 @@ def process_json_input(raw_input: str) -> Dict[str, Any]:
 def process_file_input(file_path: str) -> Dict[str, Any]:
     """处理文件输入"""
     if not os.path.isfile(file_path):
-        raise VigorError("E006", f"文件不存在: {file_path}")
+        raise VigilError("E006", f"文件不存在: {file_path}")
 
     content = read_file_input(file_path)
     file_ext = os.path.splitext(file_path)[1].lower()
@@ -263,22 +266,13 @@ def process_file_input(file_path: str) -> Dict[str, Any]:
     return result
 
 
-def process_url_input(url: str) -> Dict[str, Any]:
-    """处理 URL 输入"""
-    valid, err_code = validate_input(url)
-    if not valid:
-        raise VigorError(err_code)
-
-    return process_url_input(url)
-
-
 def process_input(raw_input: str) -> Dict[str, Any]:
     """
     统一入口：根据输入类型分发处理
     """
     valid, err_code = validate_input(raw_input)
     if not valid:
-        raise VigorError(err_code)
+        raise VigilError(err_code)
 
     input_type = detect_input_type(raw_input)
 
@@ -307,7 +301,7 @@ def process_batch(inputs: List[str]) -> List[Dict[str, Any]]:
             result = process_input(item)
             result["_input"] = item[:50]  # 截断显示
             results.append(result)
-        except VigorError as e:
+        except VigilError as e:
             results.append({
                 "error": e.code,
                 "message": e.message,
@@ -399,7 +393,7 @@ def run_selftest() -> int:
         try:
             process_input("")
             assert False, "空输入应抛出异常"
-        except VigorError as e:
+        except VigilError as e:
             assert e.code == "E001", f"错误码应为 E001, 实际: {e.code}"
         print("  ✓ 通过 (正确返回 E001)")
         tests_passed += 1
@@ -497,7 +491,7 @@ def run_selftest() -> int:
         sample_result = {"type": "text", "confidence": 0.9}
         pretty_output = format_output(sample_result, pretty=True)
         assert "\n" in pretty_output, "美化输出应包含换行"
-        assert '"type" in pretty_output', "输出应包含字段"
+        assert '"type"' in pretty_output, "输出应包含字段"
 
         compact_output = format_output(sample_result, pretty=False)
         assert "\n" not in compact_output.replace(" ", ""), "紧凑输出不应包含换行"
@@ -591,7 +585,7 @@ def main() -> int:
         result = process_input(args.input)
         print(format_output(result, pretty=(args.output == "pretty")))
         return 0
-    except VigorError as e:
+    except VigilError as e:
         print(f"[{e.code}] {e.message}", file=sys.stderr)
         return 1
     except Exception as e:

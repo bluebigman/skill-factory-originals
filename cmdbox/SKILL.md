@@ -1,0 +1,81 @@
+---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
+slug: cmdbox
+name: cmdbox
+displayName: 命令收纳箱 别名管理 快捷执行
+description: 存储、标记并快速运行带变量替换和组合能力的别名命令工具。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/cmdbox
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: LinguaForge
+agent_created: true
+trigger_words: ["cmdbox", "cb", "命令别名", "命令收纳", "快捷命令", "命令组合", "变量替换"]
+---
+
+> 📜 **用户协议（User Agreement）**
+> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
+> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
+> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+<!-- user-agreement-injected -->
+
+
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+# cmdbox 技能手册
+
+## 一、能力边界速查卡
+
+### 1.1 能做什么
+
+| 编号 | 能力项 | 说明 | 示例 |
+|------|--------|------|------|
+| C1 | 别名命令存储 | 将长命令存为短别名，支持标签分类 | `cb add deploy --cmd "npm run build && scp dist/* server:/var/www" --tag prod` |
+| C2 | 变量替换 | 命令中嵌入 `{{var}}` 占位符，执行时动态填充 | `cb run deploy --env staging` |
+| C3 | 命令组合 | 将多个已存命令串联或并联执行 | `cb chain build test deploy` |
+| C4 | 快速检索 | 按标签、名称、描述模糊搜索已存命令 | `cb find deploy --tag prod` |
+| C5 | 批量操作 | 支持导入/导出命令集，便于迁移和分享 | `cb export --file backup.json` |
+
+### 1.2 不能做什么
+
+| 编号 | 限制项 | 说明 |
+|------|--------|------|
+| L1 | 不执行任意系统命令 | 仅执行用户明确存入的别名命令，不提供通用 shell 入口 |
+| L2 | 不解析自然语言 | 不支持"帮我部署一下"这类模糊指令，需明确指定别名 |
+| L3 | 不存储敏感信息 | 密码、密钥等明文不建议存入，工具不提供加密存储 |
+| L4 | 不保证跨平台兼容 | 命令本身依赖用户运行环境，工具仅负责调度 |
+
+### 1.3 适用对象
+
+- 日常使用大量重复命令的开发者/运维人员
+- 需要统一管理多项目部署、构建、测试命令的团队
+- 希望减少记忆负担、提升终端操作效率的个人用户
+
+
+## 许可证（License）
+
+```text
+MIT License
+
+Copyright (c) 2026 SkillForge Lab
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+<!-- professional-license-embedded -->
