@@ -312,4 +312,288 @@ class OutputFormatter:
             "",
             "## 压缩摘要",
             "",
-            "
+        ]
+        # 添加摘要内容（每行前加缩进）
+        for line in result.summary.split("\n"):
+            lines.append(f"  {line}")
+        return "\n".join(lines)
+
+    @staticmethod
+    def _to_json(result: CompressionResult) -> str:
+        """JSON 格式输出。"""
+        return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
+
+    @staticmethod
+    def _to_kv(result: CompressionResult) -> str:
+        """键值对格式输出。"""
+        kv_lines = [
+            f"original_size={result.original_size}",
+            f"compressed_size={result.compressed_size}",
+            f"ratio={OutputFormatter._ratio(result.original_size, result.compressed_size)}%",
+            f"lines={result.lines}",
+            f"created_at={result.created_at}",
+            "summary=",
+        ]
+        # 摘要内容缩进
+        for line in result.summary.split("\n"):
+            kv_lines.append(f"  {line}")
+        return "\n".join(kv_lines)
+
+    @staticmethod
+    def _ratio(original: int, compressed: int) -> float:
+        """计算压缩率。"""
+        if original == 0:
+            return 0.0
+        return round((1 - compressed / original) * 100, 1)
+
+
+# ============================================================
+# 批量处理
+# ============================================================
+class BatchProcessor:
+    """批量处理多个输入源。"""
+
+    @staticmethod
+    def process(inputs: List[str], fmt: str = "markdown", max_lines: int = 30) -> List[Dict[str, Any]]:
+        """处理多个输入，返回结果列表。"""
+        results = []
+        compressor = TextCompressor(max_lines=max_lines)
+
+        for i, input_text in enumerate(inputs):
+            try:
+                result = compressor.compress(input_text)
+                formatted = OutputFormatter.format(result, fmt)
+                results.append({
+                    "index": i,
+                    "success": True,
+                    "output": formatted,
+                    "meta": result.to_dict(),
+                })
+            except AppError as e:
+                results.append({
+                    "index": i,
+                    "success": False,
+                    "error": e.message,
+                    "output": None,
+                    "meta": None,
+                })
+            except Exception as e:
+                results.append({
+                    "index": i,
+                    "success": False,
+                    "error": f"未知错误: {str(e)}",
+                    "output": None,
+                    "meta": None,
+                })
+
+        return results
+
+
+# ============================================================
+# 自测函数
+# ============================================================
+def run_selftest() -> bool:
+    """运行自测，验证核心功能。"""
+    print("=" * 50)
+    print("开始自测...")
+    print("=" * 50)
+
+    try:
+        # 测试 1：文本压缩
+        print("\n[测试 1] 文本压缩")
+        compressor = TextCompressor(max_lines=5)
+        sample_text = """INFO: Starting application
+        =====================
+        Server started successfully on port 8080
+        Connected to database: mysql://localhost:3306/app
+        Processed 1234 requests in 5.6 seconds
+        Warning: high memory usage detected
+        Error: connection timeout to external API
+        All systems operational
+        =====================
+        Shutdown complete"""
+        result = compressor.compress(sample_text)
+        assert result.original_size > 0, "原始大小应为正数"
+        assert result.lines == 10, f"行数应为 10，实际为 {result.lines}"
+        assert "关键信息" in result.summary, "摘要应包含关键信息"
+        print(f"  ✓ 压缩成功：{result.original_size} -> {result.compressed_size} 字节")
+        print(f"  ✓ 压缩率：{OutputFormatter._ratio(result.original_size, result.compressed_size)}%")
+
+        # 测试 2：格式输出
+        print("\n[测试 2] 格式输出")
+        md_output = OutputFormatter.format(result, "markdown")
+        assert "| 项目 | 值 |" in md_output, "Markdown 应包含表格头"
+        print(f"  ✓ Markdown 输出成功，长度 {len(md_output)} 字符")
+
+        json_output = OutputFormatter.format(result, "json")
+        json_data = json.loads(json_output)
+        assert json_data["original_size"] == result.original_size, "JSON 原始大小不匹配"
+        print(f"  ✓ JSON 输出成功，长度 {len(json_output)} 字符")
+
+        kv_output = OutputFormatter.format(result, "kv")
+        assert "original_size=" in kv_output, "KV 应包含原始大小"
+        print(f"  ✓ KV 输出成功，长度 {len(kv_output)} 字符")
+
+        # 测试 3：会话记忆
+        print("\n[测试 3] 会话记忆")
+        memory = SessionMemory()
+        memory.add_entry("test_key", "测试内容")
+        entry = memory.get_entry("test_key")
+        assert entry is not None, "应能获取记忆条目"
+        assert entry["content"] == "测试内容", "记忆内容不匹配"
+        keys = memory.list_keys()
+        assert "test_key" in keys, "应包含测试键"
+        print(f"  ✓ 记忆写入/读取成功，当前键数：{len(keys)}")
+
+        # 测试 4：批量处理
+        print("\n[测试 4] 批量处理")
+        batch_inputs = ["第一段文本内容", "第二段包含错误信息的文本"]
+        results = BatchProcessor.process(batch_inputs, fmt="json")
+        assert len(results) == 2, f"应处理 2 个输入，实际 {len(results)}"
+        assert all(r["success"] for r in results), "所有处理应成功"
+        print(f"  ✓ 批量处理成功，处理 {len(results)} 个输入")
+
+        # 测试 5：错误处理
+        print("\n[测试 5] 错误处理")
+        try:
+            compressor.compress("")
+            assert False, "空输入应抛出异常"
+        except AppError as e:
+            assert e.code == "E007", f"错误码应为 E007，实际为 {e.code}"
+            print(f"  ✓ 空输入错误处理正确：{e.code}")
+
+        try:
+            OutputFormatter.format(result, "xml")
+            assert False, "不支持的格式应抛出异常"
+        except AppError as e:
+            assert e.code == "E004", f"错误码应为 E004，实际为 {e.code}"
+            print(f"  ✓ 不支持的格式错误处理正确：{e.code}")
+
+        # 测试 6：关键信息提取
+        print("\n[测试 6] 关键信息提取")
+        info_text = "系统运行正常，处理了 1234 个请求，发现 2 个错误：连接超时和资源不足"
+        info_result = compressor._extract_key_info(info_text)
+        assert "数字" in info_result, "应提取到数字"
+        assert "错误信息" in info_result, "应提取到错误信息"
+        print(f"  ✓ 关键信息提取成功：{list(info_result.keys())}")
+
+        print("\n" + "=" * 50)
+        print("所有自测通过！")
+        print("=" * 50)
+        return True
+
+    except AssertionError as e:
+        print(f"\n✗ 自测失败：{str(e)}")
+        return False
+    except Exception as e:
+        print(f"\n✗ 自测异常：{str(e)}")
+        return False
+
+
+# ============================================================
+# 主入口
+# ============================================================
+def main():
+    """主函数，处理命令行参数。"""
+    parser = argparse.ArgumentParser(
+        description="context-mode 技能：文本压缩、记忆持久化、信息提取",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+    )
+    parser.add_argument("--input", "-i", type=str, help="输入文本或文件路径")
+    parser.add_argument("--file", "-f", type=str, help="输入文件路径（与 --input 二选一）")
+    parser.add_argument("--format", "-fmt", type=str, default="markdown",
+                        choices=["markdown", "json", "kv"],
+                        help="输出格式（默认：markdown）")
+    parser.add_argument("--max-lines", type=int, default=30,
+                        help="摘要最大行数（默认：30）")
+    parser.add_argument("--memory-file", type=str,
+                        help="会话记忆文件路径（默认：系统临时目录）")
+    parser.add_argument("--memory-add", nargs=2, metavar=("KEY", "CONTENT"),
+                        help="添加记忆条目：--memory-add 键 内容")
+    parser.add_argument("--memory-get", type=str, metavar="KEY",
+                        help="获取记忆条目：--memory-get 键")
+    parser.add_argument("--memory-list", action="store_true",
+                        help="列出所有记忆键")
+    parser.add_argument("--batch", type=str, nargs="+",
+                        help="批量处理多个输入（空格分隔）")
+    parser.add_argument("--selftest", action="store_true",
+                        help="运行自测")
+
+    args = parser.parse_args()
+
+    # 运行自测
+    if args.selftest:
+        success = run_selftest()
+        sys.exit(0 if success else 1)
+
+    try:
+        # 记忆操作
+        if args.memory_add:
+            memory = SessionMemory(args.memory_file)
+            memory.add_entry(args.memory_add[0], args.memory_add[1])
+            print(json.dumps({"success": True, "message": "记忆已添加"}, ensure_ascii=False))
+            return
+
+        if args.memory_get:
+            memory = SessionMemory(args.memory_file)
+            entry = memory.get_entry(args.memory_get)
+            if entry:
+                print(json.dumps(entry, ensure_ascii=False, indent=2))
+            else:
+                print(json.dumps({"success": False, "message": f"未找到键 '{args.memory_get}'"}, ensure_ascii=False))
+            return
+
+        if args.memory_list:
+            memory = SessionMemory(args.memory_file)
+            keys = memory.list_keys()
+            print(json.dumps({"keys": keys}, ensure_ascii=False, indent=2))
+            return
+
+        # 批量处理
+        if args.batch:
+            results = BatchProcessor.process(args.batch, fmt=args.format, max_lines=args.max_lines)
+            print(json.dumps(results, ensure_ascii=False, indent=2))
+            return
+
+        # 获取输入内容
+        input_text = ""
+        if args.file:
+            try:
+                with open(args.file, "r", encoding="utf-8") as f:
+                    input_text = f.read()
+            except OSError as e:
+                raise err_file_read(f"无法读取文件 {args.file}: {e}")
+        elif args.input:
+            # 如果是文件路径则读取，否则作为文本
+            if os.path.isfile(args.input):
+                try:
+                    with open(args.input, "r", encoding="utf-8") as f:
+                        input_text = f.read()
+                except OSError as e:
+                    raise err_file_read(f"无法读取文件 {args.input}: {e}")
+            else:
+                input_text = args.input
+        else:
+            # 从标准输入读取
+            if not sys.stdin.isatty():
+                input_text = sys.stdin.read()
+
+        if not input_text:
+            raise err_invalid_input("请通过 --input、--file 或标准输入提供内容")
+
+        # 执行压缩
+        compressor = TextCompressor(max_lines=args.max_lines)
+        result = compressor.compress(input_text)
+        output = OutputFormatter.format(result, args.format)
+        print(output)
+
+    except AppError as e:
+        print(f"错误 [{e.code}]: {e.message}", file=sys.stderr)
+        sys.exit(1)
+    except Exception as e:
+        print(f"错误 [E010]: {str(e)}", file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
