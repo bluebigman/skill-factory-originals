@@ -395,6 +395,9 @@ def _run_selftest() -> None:
     断言使用宽松阈值（大小比较/区间判断），确保与实现必然匹配。
     """
     print("开始自检...")
+    print("运行环境: Python", sys.version.split()[0])
+    print("当前时间:", datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+    print("-" * 50)
 
     # 样例数据（硬编码）
     sample_text = "2026年3月15日 订单 #A123 金额 ¥1,234.56 联系邮箱 test@example.com 状态：已发货"
@@ -405,6 +408,7 @@ def _run_selftest() -> None:
     ]
 
     # --- 测试 1: 单条处理 ---
+    print("[测试1] 单条文本处理...")
     try:
         result = process_single(sample_text)
         assert result is not None, "单条处理返回空"
@@ -419,11 +423,17 @@ def _run_selftest() -> None:
         assert result["邮箱"] == "test@example.com", "邮箱抽取错误"
         # 置信度至少为中
         assert result["置信度"] in (CONFIDENCE_HIGH, CONFIDENCE_MEDIUM), "置信度等级异常"
-        print("  [OK] 单条处理测试通过")
+        print("  ✓ 单条处理测试通过")
+        print(f"    抽取结果: 日期={result['日期']}, 金额={result['金额']}, 邮箱={result['邮箱']}, 置信度={result['置信度']}")
     except AssertionError as exc:
+        print(f"  ✗ 单条处理测试失败: {exc}")
         raise TaskError("E006", f"自检失败（单条处理）: {exc}")
+    except Exception as exc:
+        print(f"  ✗ 单条处理测试异常: {exc}")
+        raise TaskError("E006", f"自检失败（单条处理异常）: {exc}")
 
     # --- 测试 2: 批量处理 ---
+    print("[测试2] 批量文本处理...")
     try:
         batch_result = process_batch(sample_batch)
         assert batch_result is not None, "批量处理返回空"
@@ -433,62 +443,112 @@ def _run_selftest() -> None:
         assert summary["总条数"] == 3, "批量总条数错误"
         assert summary["成功条数"] >= 2, "成功条数应至少为 2"
         assert len(batch_result["结果列表"]) >= 2, "结果列表长度应至少为 2"
-        print("  [OK] 批量处理测试通过")
+        print("  ✓ 批量处理测试通过")
+        print(f"    汇总: 总条数={summary['总条数']}, 成功={summary['成功条数']}, 失败={summary['失败条数']}")
     except AssertionError as exc:
+        print(f"  ✗ 批量处理测试失败: {exc}")
         raise TaskError("E006", f"自检失败（批量处理）: {exc}")
+    except Exception as exc:
+        print(f"  ✗ 批量处理测试异常: {exc}")
+        raise TaskError("E006", f"自检失败（批量处理异常）: {exc}")
 
     # --- 测试 3: 格式转换 ---
+    print("[测试3] 格式转换...")
     try:
         json_out = convert_output(result, "json")
         assert json_out.startswith("{"), "JSON 输出格式错误"
+        print("  ✓ JSON 格式转换通过")
+        
         csv_out = convert_output(batch_result, "csv")
         assert "原文" in csv_out, "CSV 输出缺少表头"
+        print("  ✓ CSV 格式转换通过")
+        
         md_out = convert_output(batch_result, "markdown")
         assert md_out.startswith("|"), "Markdown 输出格式错误"
-        print("  [OK] 格式转换测试通过")
+        print("  ✓ Markdown 格式转换通过")
     except AssertionError as exc:
+        print(f"  ✗ 格式转换测试失败: {exc}")
         raise TaskError("E006", f"自检失败（格式转换）: {exc}")
+    except Exception as exc:
+        print(f"  ✗ 格式转换测试异常: {exc}")
+        raise TaskError("E006", f"自检失败（格式转换异常）: {exc}")
 
     # --- 测试 4: 错误处理 ---
+    print("[测试4] 错误处理...")
     try:
         # 空输入
         try:
             process_single("")
+            print("  ✗ 空输入未报错")
             raise AssertionError("空输入未报错")
         except TaskError as exc:
             assert exc.code == "E002", f"空输入错误码应为 E002，实际 {exc.code}"
+            print("  ✓ 空输入错误处理通过 (E002)")
 
         # 不支持的格式
         try:
             convert_output(result, "xml")
+            print("  ✗ 不支持的格式未报错")
             raise AssertionError("不支持的格式未报错")
         except TaskError as exc:
             assert exc.code == "E003", f"格式错误码应为 E003，实际 {exc.code}"
+            print("  ✓ 不支持的格式错误处理通过 (E003)")
 
-        print("  [OK] 错误处理测试通过")
+        # 非字符串输入
+        try:
+            process_single(123)
+            print("  ✗ 非字符串输入未报错")
+            raise AssertionError("非字符串输入未报错")
+        except TaskError as exc:
+            assert exc.code == "E010", f"非字符串输入错误码应为 E010，实际 {exc.code}"
+            print("  ✓ 非字符串输入错误处理通过 (E010)")
+
     except AssertionError as exc:
+        print(f"  ✗ 错误处理测试失败: {exc}")
         raise TaskError("E006", f"自检失败（错误处理）: {exc}")
+    except Exception as exc:
+        print(f"  ✗ 错误处理测试异常: {exc}")
+        raise TaskError("E006", f"自检失败（错误处理异常）: {exc}")
 
     # --- 测试 5: 边界情况 ---
+    print("[测试5] 边界情况...")
     try:
         # 超长输入（构造一个超过限制的字符串）
         long_text = "a" * (MAX_INPUT_CHARS + 1)
         try:
             process_single(long_text)
+            print("  ✗ 超长输入未报错")
             raise AssertionError("超长输入未报错")
         except TaskError as exc:
             assert exc.code == "E009", f"超长输入错误码应为 E009，实际 {exc.code}"
+            print("  ✓ 超长输入错误处理通过 (E009)")
 
         # 无关键信息的文本
         no_info = process_single("纯粹的无意义文本")
         assert no_info["置信度"] == CONFIDENCE_LOW, "无信息文本置信度应为低"
         assert no_info["日期"] is None or no_info["日期"] == PLACEHOLDER, "日期处理异常"
+        print("  ✓ 无关键信息文本处理通过")
+        print(f"    结果: 置信度={no_info['置信度']}, 日期={no_info['日期']}, 金额={no_info['金额']}")
 
-        print("  [OK] 边界情况测试通过")
+        # 空列表批量处理
+        try:
+            process_batch([])
+            print("  ✗ 空列表批量处理未报错")
+            raise AssertionError("空列表批量处理未报错")
+        except TaskError as exc:
+            assert exc.code == "E002", f"空列表批量处理错误码应为 E002，实际 {exc.code}"
+            print("  ✓ 空列表批量处理错误处理通过 (E002)")
+
     except AssertionError as exc:
+        print(f"  ✗ 边界情况测试失败: {exc}")
         raise TaskError("E006", f"自检失败（边界情况）: {exc}")
+    except Exception as exc:
+        print(f"  ✗ 边界情况测试异常: {exc}")
+        raise TaskError("E006", f"自检失败（边界情况异常）: {exc}")
 
+    print("-" * 50)
     print("自检全部通过 ✓")
+    print("所有测试用例均成功执行，无错误。")
 
 
 # ---------------------------------------------------------------------------
