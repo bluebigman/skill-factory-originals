@@ -11,7 +11,7 @@ import argparse
 import json
 import re
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional, Tuple, Union
 
 
 # ---------------------------------------------------------------------------
