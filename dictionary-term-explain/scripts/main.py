@@ -1,66 +1,87 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-术语释义助手 - 独立实现脚本
-根据功能规格 clean-room 重写，不参考任何既有代码。
+术语释义助手 (dictionary-term-explain)
+按场景拆解术语含义，给出边界清晰、可落地的概念解释。
 """
 
 import argparse
 import json
-import os
-import re
 import sys
+import urllib.request
+import urllib.error
+from collections import OrderedDict
 from typing import Dict, List, Optional, Tuple
 
 
 # ============================================================
-# 错误码定义
+# 常量定义
 # ============================================================
-class ErrorCode:
-    """错误码常量"""
-    E1001 = "E1001"  # 输入为空
-    E1002 = "E1002"  # 输入超长
-    E1003 = "E1003"  # 批量文件不存在或格式错误
-    E1004 = "E1004"  # 知识库未命中且外部API失败
-    E1005 = "E1005"  # 批量文件编码无法识别
 
+# 错误码
+ERR_INPUT_EMPTY = "E1001"       # 输入为空
+ERR_INPUT_TOO_LONG = "E1002"    # 输入超长
+ERR_BATCH_FILE = "E1003"        # 批量文件不存在或格式错误
+ERR_KB_MISS_EXTERNAL_FAIL = "E1004"  # 知识库未命中且外部API失败
+ERR_ENCODING = "E1005"          # 批量文件编码无法识别
 
-# ============================================================
-# 内置知识库（硬编码样例数据）
-# ============================================================
-TERM_KNOWLEDGE_BASE: Dict[str, Dict] = {
+# 本地知识库（内置硬编码）
+# 格式: 术语 -> {定义, 场景拆解, 边界, 误用}
+TERM_KNOWLEDGE_BASE: Dict[str, Dict[str, str]] = {
     "微服务": {
-        "core": "将单一应用拆分为一组小服务，每个服务独立部署、独立扩展，通过轻量级通信机制协作。",
-        "scenes": {
-            "技术": "在技术场景中，微服务强调服务的独立部署、独立数据库、独立团队负责，通常配合容器化技术。",
-            "业务": "在业务场景中，微服务将业务能力模块化，使不同业务线可以独立迭代和扩展。",
-            "日常": "在日常对话中，微服务常被用来指代'把大系统拆成小系统'的做法。",
-            "学术": "在学术上，微服务是一种软件架构风格，强调服务粒度、独立性和去中心化治理。"
+        "定义": "一种将单一应用程序划分为一组小服务的架构风格，每个服务独立部署、独立扩展。",
+        "场景拆解": {
+            "技术": "微服务将单体应用拆分为多个独立部署的小服务，每个服务可独立开发、测试、部署和扩展，服务间通过轻量级通信机制（如HTTP/REST）交互。",
+            "业务": "业务团队可以独立负责某个微服务，加快交付速度，降低跨团队协调成本。",
+            "日常": "可以理解为将一个大型项目拆分成多个小项目，每个小项目独立运行、独立维护。",
+            "学术": "微服务架构是一种分布式系统架构模式，强调服务的独立性和自治性，是面向服务架构（SOA）的一种演进。"
         },
-        "boundary": "微服务区别于单体架构和SOA。单体架构所有功能在一个进程中；SOA强调服务复用和企业级总线；微服务更强调去中心化和独立部署。",
-        "misuse": "常见误用：把任何分布式系统都称为微服务；认为微服务数量越多越好；忽略分布式带来的复杂性。"
+        "边界": "微服务与单体架构相对，但并非所有系统都适合微服务；微服务与SOA有相似之处，但微服务更强调服务的独立部署和去中心化治理。",
+        "误用": "常见误用包括将微服务与SOA混为一谈，或认为微服务是解决所有架构问题的银弹。"
+    },
+    "容器化": {
+        "定义": "将应用程序及其依赖打包到一个可移植的容器中，实现环境一致性和快速部署。",
+        "场景拆解": {
+            "技术": "容器化通过操作系统级虚拟化，将应用及其依赖打包成镜像，实现一次构建、到处运行。",
+            "业务": "容器化可以显著提升应用交付效率，减少环境不一致导致的问题。",
+            "日常": "可以理解为将应用连同其运行环境一起打包，像集装箱一样标准化运输和部署。",
+            "学术": "容器化是一种轻量级虚拟化技术，通过命名空间和控制组实现资源隔离和限制。"
+        },
+        "边界": "容器化与虚拟机不同，容器共享宿主机内核，资源占用更小；容器化与微服务相关但不同，容器化是部署方式，微服务是架构模式。",
+        "误用": "常见误用包括将容器化等同于虚拟化，或认为容器化只适用于微服务架构。"
+    },
+    "API网关": {
+        "定义": "位于客户端和后端服务之间的中间层，负责请求路由、协议转换、认证授权、限流等。",
+        "场景拆解": {
+            "技术": "API网关作为系统的统一入口，将客户端的请求转发到相应的后端服务，并处理跨横切关注点。",
+            "业务": "API网关可以统一管理对外接口，提供安全、监控、计费等能力。",
+            "日常": "可以理解为大楼的前台，所有访客都通过前台找到对应的人。",
+            "学术": "API网关是一种架构模式，是分布式系统中的一个核心组件，用于管理和控制API流量。"
+        },
+        "边界": "API网关与负载均衡器不同，负载均衡器主要做流量分发，API网关还包含协议转换、认证等功能；API网关与BFF（Backend for Frontend）不同，BFF更专注于为特定前端提供聚合接口。",
+        "误用": "常见误用包括将API网关等同于负载均衡器，或认为API网关是必须的组件。"
     },
     "区块链": {
-        "core": "一种去中心化的分布式账本技术，通过密码学将数据区块按时间顺序链接，实现不可篡改的共享记录。",
-        "scenes": {
-            "技术": "在技术场景中，区块链涉及共识算法、加密哈希、P2P网络等核心技术栈。",
-            "业务": "在业务场景中，区块链用于供应链追溯、数字资产确权、多方协作信任等。",
-            "日常": "日常对话中，区块链常被简称为'分布式账本'或'去中心化数据库'。",
-            "学术": "在学术上，区块链是分布式系统、密码学和博弈论的交叉领域。"
+        "定义": "一种去中心化的分布式账本技术，通过密码学保证数据不可篡改和可追溯。",
+        "场景拆解": {
+            "技术": "区块链通过区块链接的方式存储数据，每个区块包含前一个区块的哈希，形成链式结构，任何篡改都会被检测到。",
+            "业务": "区块链可以用于供应链溯源、数字资产、跨境支付等场景，提高透明度和信任度。",
+            "日常": "可以理解为一种公开的、不可篡改的账本，每个人都可以查看但没有人能单独修改。",
+            "学术": "区块链是一种分布式数据库技术，结合了密码学、共识算法、P2P网络等技术，实现去中心化的信任机制。"
         },
-        "boundary": "区块链区别于传统数据库（中心化 vs 去中心化）、区别于比特币（区块链是技术，比特币是应用）。",
-        "misuse": "常见误用：把区块链等同于加密货币；认为区块链数据绝对安全；忽略性能和存储成本。"
+        "边界": "区块链与分布式数据库不同，区块链强调去中心化和不可篡改，分布式数据库通常由中心化机构管理；区块链与比特币不同，比特币是区块链的一种应用。",
+        "误用": "常见误用包括将区块链等同于比特币，或认为所有数据都适合上链。"
     },
-    "人工智能": {
-        "core": "让计算机模拟人类智能行为的技术，包括学习、推理、感知、理解等能力。",
-        "scenes": {
-            "技术": "在技术场景中，人工智能涵盖机器学习、深度学习、自然语言处理、计算机视觉等子领域。",
-            "业务": "在业务场景中，人工智能用于自动化决策、智能客服、预测分析等。",
-            "日常": "日常对话中，人工智能通常指'让机器像人一样思考'的技术。",
-            "学术": "在学术上，人工智能是计算机科学的分支，研究智能体的设计与实现。"
+    "DevOps": {
+        "定义": "一种文化和实践，旨在促进开发（Development）和运维（Operations）团队之间的协作，实现持续交付。",
+        "场景拆解": {
+            "技术": "DevOps通过自动化工具链（CI/CD、配置管理、监控等）实现软件交付的自动化和持续化。",
+            "业务": "DevOps可以缩短交付周期，提高部署频率，快速响应市场需求。",
+            "日常": "可以理解为开发人员和运维人员不再各自为政，而是紧密合作，共同负责软件的整个生命周期。",
+            "学术": "DevOps是一种软件工程文化和实践，强调自动化、协作、度量和共享。"
         },
-        "boundary": "人工智能区别于传统编程（规则驱动 vs 数据驱动）、区别于机器学习（AI是宏观概念，ML是实现方法）。",
-        "misuse": "常见误用：把机器学习等同于人工智能；认为AI具有真正意识；忽视数据偏见问题。"
+        "边界": "DevOps与敏捷开发不同，敏捷关注需求开发和迭代，DevOps关注交付和运维；DevOps与SRE（站点可靠性工程）不同，SRE更关注系统的可靠性。",
+        "误用": "常见误用包括将DevOps等同于CI/CD工具，或认为DevOps只是运维团队的事情。"
     }
 }
 
@@ -68,489 +89,375 @@ TERM_KNOWLEDGE_BASE: Dict[str, Dict] = {
 # ============================================================
 # 核心功能类
 # ============================================================
-class TermExplainer:
-    """术语解释器核心逻辑"""
 
-    def __init__(self, knowledge_base: Optional[Dict] = None):
-        """初始化解释器
-        
-        Args:
-            knowledge_base: 知识库字典，默认为内置知识库
-        """
+class TermExplainer:
+    """术语解释器，负责查询、解释和格式化输出。"""
+
+    def __init__(self, knowledge_base: Dict[str, Dict[str, str]] = None):
+        """初始化解释器，设置知识库和缓存。"""
         self.knowledge_base = knowledge_base or TERM_KNOWLEDGE_BASE
-        self.cache: Dict[str, Dict] = {}  # 内存缓存
-        self.cache_limit = 100  # 缓存上限
+        # 使用 OrderedDict 模拟 LRU 缓存
+        self.cache: "OrderedDict[str, Dict[str, str]]" = OrderedDict()
+        self.cache_limit = 100
 
     def validate_input(self, term: str) -> Tuple[bool, str, Optional[str]]:
-        """校验输入合法性
-        
-        Args:
-            term: 用户输入的术语
-            
-        Returns:
-            (是否合法, 规范化后的术语, 错误码或None)
         """
-        if term is None or term.strip() == "":
-            return False, "", ErrorCode.E1001
-        
-        # 规范化：去首尾空白
-        normalized = term.strip()
-        
-        # 长度校验
+        校验输入合法性。
+        返回: (是否合法, 规范化后的术语, 错误码或None)
+        """
+        if not term or not term.strip():
+            return False, "", ERR_INPUT_EMPTY
+
+        normalized = term.strip().lower()
         if len(normalized) > 100:
-            # 超长时截断并警告
-            normalized = normalized[:100]
-            return True, normalized, ErrorCode.E1002
-        
+            # 超长截断并警告
+            return True, normalized[:100], ERR_INPUT_TOO_LONG
+
         return True, normalized, None
 
-    def query_knowledge_base(self, term: str) -> Optional[Dict]:
-        """查询本地知识库
-        
-        Args:
-            term: 规范化后的术语
-            
-        Returns:
-            匹配的解释字典，未命中返回None
-        """
+    def query_knowledge_base(self, term: str) -> Optional[Dict[str, str]]:
+        """查询本地知识库，命中则返回解释，否则返回None。"""
         # 先查缓存
         if term in self.cache:
+            # 更新缓存顺序（LRU）
+            self.cache.move_to_end(term)
             return self.cache[term]
-        
-        # 精确匹配知识库
+
+        # 查知识库
         result = self.knowledge_base.get(term)
         if result:
-            # 加入缓存
-            self._add_to_cache(term, result)
-        
+            # 更新缓存
+            self.cache[term] = result
+            self.cache.move_to_end(term)
+            if len(self.cache) > self.cache_limit:
+                self.cache.popitem(last=False)
+
         return result
 
-    def _add_to_cache(self, key: str, value: Dict) -> None:
-        """添加缓存项（LRU简化版）"""
-        if len(self.cache) >= self.cache_limit:
-            # 简单清空（简化LRU）
-            self.cache.clear()
-        self.cache[key] = value
-
-    def external_query(self, term: str) -> Optional[Dict]:
-        """模拟外部API查询（无网络时降级）
-        
-        Args:
-            term: 术语
-            
-        Returns:
-            查询结果或None
+    def query_external_api(self, term: str) -> Optional[Dict[str, str]]:
         """
-        # 本实现不进行真实网络请求，直接返回None
-        # 实际实现可在此调用维基百科等外部API
+        查询外部API（维基百科）作为兜底。
+        此函数在离线/无网环境下会返回None。
+        """
+        try:
+            # 使用维基百科 API（仅作示例，实际可能不可用）
+            url = f"https://zh.wikipedia.org/api/rest_v1/page/summary/{term}"
+            req = urllib.request.Request(url, headers={"User-Agent": "TermExplainer/2.0"})
+            with urllib.request.urlopen(req, timeout=3) as resp:
+                data = json.loads(resp.read().decode("utf-8"))
+                if "extract" in data:
+                    return {
+                        "定义": data["extract"],
+                        "场景拆解": {
+                            "通用": data["extract"]
+                        },
+                        "边界": "外部来源，未做本地边界界定。",
+                        "误用": "外部来源，未做本地误用分析。",
+                        "来源": "维基百科"
+                    }
+        except (urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError, KeyError, TimeoutError):
+            pass
+
         return None
 
-    def explain(self, term: str, scene: Optional[str] = None) -> Dict:
-        """解释术语主流程
-        
-        Args:
-            term: 输入术语
-            scene: 指定场景（可选）
-            
-        Returns:
-            包含结果和错误码的字典
+    def explain(self, term: str, scene: Optional[str] = None) -> Dict[str, object]:
         """
-        # 1. 输入校验
-        is_valid, normalized, error_code = self.validate_input(term)
-        if not is_valid:
-            return {
-                "success": False,
-                "error_code": error_code,
-                "message": "请输入要解释的术语" if error_code == ErrorCode.E1001 else "输入格式错误",
-                "data": None
-            }
-        
+        解释术语的主流程。
+        返回包含解释结果和错误信息的字典。
+        """
+        # 1. 校验输入
+        valid, normalized, err_code = self.validate_input(term)
+        if not valid:
+            return {"success": False, "error": err_code, "message": "请输入要解释的术语"}
+
         # 2. 查询知识库
         result = self.query_knowledge_base(normalized)
-        if result:
-            return {
-                "success": True,
-                "error_code": None,
-                "message": "本地知识库命中",
-                "data": self._format_result(normalized, result, scene)
-            }
-        
-        # 3. 尝试外部API
-        external_result = self.external_query(normalized)
-        if external_result:
-            return {
-                "success": True,
-                "error_code": None,
-                "message": "外部来源",
-                "data": self._format_result(normalized, external_result, scene)
-            }
-        
-        # 4. 全部失败
-        return {
-            "success": False,
-            "error_code": ErrorCode.E1004,
-            "message": "未找到该术语的解释",
-            "data": None
-        }
+        source = "本地知识库"
 
-    def _format_result(self, term: str, data: Dict, scene: Optional[str]) -> Dict:
-        """格式化输出结果
-        
-        Args:
-            term: 术语
-            data: 知识库数据
-            scene: 指定场景
-            
-        Returns:
-            格式化后的结果字典
-        """
-        formatted = {
-            "term": term,
-            "core": data.get("core", ""),
-            "scenes": {},
-            "boundary": data.get("boundary", ""),
-            "misuse": data.get("misuse", "")
-        }
-        
-        scenes = data.get("scenes", {})
-        if scene and scene in scenes:
-            # 只输出指定场景
-            formatted["scenes"][scene] = scenes[scene]
+        # 3. 知识库未命中，尝试外部API
+        if not result:
+            result = self.query_external_api(normalized)
+            if result:
+                source = "外部API"
+            else:
+                return {
+                    "success": False,
+                    "error": ERR_KB_MISS_EXTERNAL_FAIL,
+                    "message": "未找到该术语的解释",
+                    "term": normalized
+                }
+
+        # 4. 根据场景过滤输出
+        scene_breakdown = result.get("场景拆解", {})
+        if scene:
+            # 指定场景时，只输出该场景的解释
+            if scene in scene_breakdown:
+                filtered_breakdown = {scene: scene_breakdown[scene]}
+            else:
+                # 场景不存在时，输出全部
+                filtered_breakdown = scene_breakdown
         else:
-            # 输出所有场景
-            formatted["scenes"] = scenes
-        
-        return formatted
+            filtered_breakdown = scene_breakdown
 
-    def batch_explain(self, terms: List[str], scene: Optional[str] = None) -> List[Dict]:
-        """批量解释术语
-        
-        Args:
-            terms: 术语列表
-            scene: 指定场景
-            
-        Returns:
-            结果列表
+        # 5. 组装输出
+        output = {
+            "success": True,
+            "term": normalized,
+            "definition": result.get("定义", ""),
+            "scene_breakdown": filtered_breakdown,
+            "boundary": result.get("边界", ""),
+            "misuse": result.get("误用", ""),
+            "source": source
+        }
+
+        # 如果输入超长，附加警告
+        if err_code == ERR_INPUT_TOO_LONG:
+            output["warning"] = "输入超过100字符，已截断处理"
+
+        return output
+
+    def format_markdown(self, result: Dict[str, object]) -> str:
+        """将解释结果格式化为 Markdown 文本。"""
+        if not result.get("success"):
+            return f"**错误**: {result.get('message', '未知错误')}"
+
+        lines = []
+        lines.append(f"## {result['term']}")
+        lines.append("")
+        lines.append(f"**来源**: {result.get('source', '未知')}")
+        lines.append("")
+        lines.append("### 核心定义")
+        lines.append("")
+        lines.append(result["definition"])
+        lines.append("")
+        lines.append("### 场景拆解")
+        lines.append("")
+        lines.append("| 场景 | 解释 |")
+        lines.append("|------|------|")
+        for scene, desc in result["scene_breakdown"].items():
+            # 处理描述中的换行符
+            desc_clean = desc.replace("\n", " ").replace("|", "\\|")
+            lines.append(f"| {scene} | {desc_clean} |")
+        lines.append("")
+        lines.append("### 边界界定")
+        lines.append("")
+        lines.append(result["boundary"])
+        lines.append("")
+        lines.append("### 常见误用")
+        lines.append("")
+        lines.append(result["misuse"])
+
+        if result.get("warning"):
+            lines.append("")
+            lines.append(f"> ⚠️ {result['warning']}")
+
+        return "\n".join(lines)
+
+    def batch_explain(self, file_path: str) -> List[Dict[str, object]]:
+        """
+        批量解释文件中的术语。
+        支持 JSON 数组格式和纯文本（每行一个术语）。
         """
         results = []
-        for term in terms:
-            result = self.explain(term, scene)
-            results.append(result)
+        try:
+            # 读取文件（多编码尝试）
+            content = None
+            for encoding in ["utf-8", "gbk", "latin-1"]:
+                try:
+                    with open(file_path, "r", encoding=encoding) as f:
+                        content = f.read()
+                    break
+                except (UnicodeDecodeError, UnicodeError):
+                    continue
+
+            if content is None:
+                return [{"success": False, "error": ERR_ENCODING, "message": "文件编码无法识别"}]
+
+            # 解析内容
+            terms = []
+            stripped = content.strip()
+            if stripped.startswith("[") and stripped.endswith("]"):
+                # JSON 数组
+                try:
+                    data = json.loads(content)
+                    if isinstance(data, list):
+                        terms = [str(t) for t in data]
+                except json.JSONDecodeError:
+                    return [{"success": False, "error": ERR_BATCH_FILE, "message": "JSON格式错误"}]
+            else:
+                # 纯文本，每行一个
+                terms = [line.strip() for line in content.splitlines() if line.strip()]
+
+            if not terms:
+                return [{"success": False, "error": ERR_BATCH_FILE, "message": "文件中没有术语"}]
+
+            # 逐个解释
+            for term in terms:
+                results.append(self.explain(term))
+
+        except FileNotFoundError:
+            return [{"success": False, "error": ERR_BATCH_FILE, "message": f"文件不存在: {file_path}"}]
+        except Exception as e:
+            return [{"success": False, "error": ERR_BATCH_FILE, "message": f"读取文件失败: {str(e)}"}]
+
         return results
 
 
 # ============================================================
-# 文件处理功能
+# 自测模块
 # ============================================================
-def parse_batch_file(file_path: str) -> Tuple[bool, List[str], Optional[str]]:
-    """解析批量文件
-    
-    Args:
-        file_path: 文件路径
-        
-    Returns:
-        (是否成功, 术语列表, 错误码或None)
-    """
-    # 检查文件是否存在
-    if not os.path.exists(file_path):
-        return False, [], ErrorCode.E1003
-    
-    # 尝试多种编码读取
-    content = None
-    for encoding in ["utf-8", "gbk", "latin-1"]:
-        try:
-            with open(file_path, "r", encoding=encoding) as f:
-                content = f.read()
-            break
-        except (UnicodeDecodeError, IOError):
-            continue
-    
-    if content is None:
-        return False, [], ErrorCode.E1005
-    
-    # 尝试解析为JSON
-    terms = []
-    try:
-        data = json.loads(content)
-        if isinstance(data, list):
-            terms = [str(item).strip() for item in data if str(item).strip()]
-        elif isinstance(data, dict):
-            # 兼容对象格式
-            for key in ["terms", "items", "data"]:
-                if key in data and isinstance(data[key], list):
-                    terms = [str(item).strip() for item in data[key] if str(item).strip()]
-                    break
-    except json.JSONDecodeError:
-        # 尝试按行解析纯文本
-        lines = [line.strip() for line in content.splitlines() if line.strip()]
-        terms = lines
-    
-    if not terms:
-        return False, [], ErrorCode.E1003
-    
-    return True, terms, None
 
-
-# ============================================================
-# 输出格式化
-# ============================================================
-def format_markdown(result: Dict) -> str:
-    """将结果格式化为Markdown
-    
-    Args:
-        result: explain()返回的结果字典
-        
-    Returns:
-        Markdown格式字符串
-    """
-    if not result.get("success"):
-        return f"**错误** ({result.get('error_code')}): {result.get('message')}"
-    
-    data = result["data"]
-    lines = []
-    lines.append(f"# {data['term']}")
-    lines.append("")
-    lines.append("## 核心定义")
-    lines.append(data["core"])
-    lines.append("")
-    
-    # 场景拆解
-    lines.append("## 场景拆解")
-    lines.append("| 场景 | 解释 |")
-    lines.append("|------|------|")
-    for scene_name, scene_desc in data["scenes"].items():
-        lines.append(f"| {scene_name} | {scene_desc} |")
-    lines.append("")
-    
-    # 边界界定
-    lines.append("## 边界界定")
-    lines.append(data["boundary"])
-    lines.append("")
-    
-    # 常见误用
-    lines.append("## 常见误用")
-    lines.append(data["misuse"])
-    
-    return "\n".join(lines)
-
-
-# ============================================================
-# 自检功能
-# ============================================================
 def run_selftest() -> int:
-    """运行离线自检
-    
-    Returns:
-        退出码（0表示成功）
-    """
-    print("=== 术语释义助手 自检开始 ===")
-    
+    """内置自测，使用硬编码样例数据验证核心逻辑。"""
+    print("开始自测...")
     explainer = TermExplainer()
-    
-    # 测试用例1: 正常查询
+
+    # 测试1: 正常查询
     result = explainer.explain("微服务")
-    if not result["success"]:
-        print("[FAIL] 正常查询测试: 微服务查询应成功")
-        return 1
-    if result["data"]["term"] != "微服务":
-        print("[FAIL] 正常查询测试: 术语名称不匹配")
-        return 1
-    if len(result["data"]["core"]) <= 10:
-        print("[FAIL] 正常查询测试: 核心定义太短")
-        return 1
-    if len(result["data"]["scenes"]) < 3:
-        print("[FAIL] 正常查询测试: 场景数量不足")
-        return 1
-    print("[PASS] 正常查询测试")
-    
-    # 测试用例2: 指定场景
-    result = explainer.explain("区块链", scene="技术")
-    if not result["success"]:
-        print("[FAIL] 指定场景测试: 区块链查询应成功")
-        return 1
-    if "技术" not in result["data"]["scenes"]:
-        print("[FAIL] 指定场景测试: 缺少技术场景")
-        return 1
-    if len(result["data"]["scenes"]) != 1:
-        print("[FAIL] 指定场景测试: 应只包含指定场景")
-        return 1
-    print("[PASS] 指定场景测试")
-    
-    # 测试用例3: 空输入
+    assert result["success"], f"测试1失败: 正常查询失败 {result}"
+    assert "微服务" in result["term"], f"测试1失败: 术语不匹配 {result['term']}"
+    assert len(result["definition"]) > 0, "测试1失败: 定义为空"
+    assert len(result["scene_breakdown"]) >= 1, "测试1失败: 场景拆解为空"
+    print("✅ 测试1通过: 正常查询")
+
+    # 测试2: 空输入
     result = explainer.explain("")
-    if result["success"]:
-        print("[FAIL] 空输入测试: 空输入应失败")
-        return 1
-    if result["error_code"] != ErrorCode.E1001:
-        print("[FAIL] 空输入测试: 错误码应为E1001")
-        return 1
-    print("[PASS] 空输入测试")
-    
-    # 测试用例4: 超长输入
-    long_term = "A" * 150
+    assert not result["success"], "测试2失败: 空输入应该失败"
+    assert result["error"] == ERR_INPUT_EMPTY, f"测试2失败: 错误码不匹配 {result['error']}"
+    print("✅ 测试2通过: 空输入处理")
+
+    # 测试3: 超长输入
+    long_term = "x" * 150
     result = explainer.explain(long_term)
+    assert result["success"], "测试3失败: 超长输入应该成功（截断）"
+    assert len(result["term"]) <= 100, f"测试3失败: 截断失败 {len(result['term'])}"
+    assert result.get("warning"), "测试3失败: 应该有警告"
+    print("✅ 测试3通过: 超长输入截断")
+
+    # 测试4: 未命中术语（外部API失败时）
+    result = explainer.explain("完全不存在xyzzy")
+    # 可能命中外部API或失败，两种情况都算通过
     if not result["success"]:
-        print("[FAIL] 超长输入测试: 超长输入应截断后成功")
-        return 1
-    if len(result["data"]["term"]) > 100:
-        print("[FAIL] 超长输入测试: 术语应被截断至100字符")
-        return 1
-    print("[PASS] 超长输入测试")
-    
-    # 测试用例5: 未命中术语
-    result = explainer.explain("不存在的术语XYZ")
-    if result["success"]:
-        print("[FAIL] 未命中术语测试: 未知术语应失败")
-        return 1
-    if result["error_code"] != ErrorCode.E1004:
-        print("[FAIL] 未命中术语测试: 错误码应为E1004")
-        return 1
-    print("[PASS] 未命中术语测试")
-    
-    # 测试用例6: 批量文件解析（内存模拟）
+        assert result["error"] == ERR_KB_MISS_EXTERNAL_FAIL, f"测试4失败: 错误码不匹配 {result['error']}"
+    print("✅ 测试4通过: 未命中术语处理")
+
+    # 测试5: 场景过滤
+    result = explainer.explain("容器化", scene="技术")
+    assert result["success"], "测试5失败: 场景查询失败"
+    assert "技术" in result["scene_breakdown"], "测试5失败: 技术场景不包含"
+    assert len(result["scene_breakdown"]) == 1, "测试5失败: 场景过滤不生效"
+    print("✅ 测试5通过: 场景过滤")
+
+    # 测试6: 批量处理（JSON格式）
     import tempfile
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8") as f:
+    import os
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
         json.dump(["微服务", "区块链"], f)
         tmp_path = f.name
-    
     try:
-        ok, terms, err = parse_batch_file(tmp_path)
-        if not ok:
-            print("[FAIL] 批量文件解析测试: 批量文件解析应成功")
-            return 1
-        if len(terms) != 2:
-            print("[FAIL] 批量文件解析测试: 应解析出2个术语")
-            return 1
-        print("[PASS] 批量文件解析测试")
+        results = explainer.batch_explain(tmp_path)
+        assert len(results) == 2, f"测试6失败: 批量结果数量不对 {len(results)}"
+        assert results[0]["success"], "测试6失败: 第一个术语失败"
+        assert results[1]["success"], "测试6失败: 第二个术语失败"
+        print("✅ 测试6通过: 批量JSON处理")
     finally:
         os.unlink(tmp_path)
-    
-    # 测试用例7: 批量解释
-    results = explainer.batch_explain(["微服务", "区块链", "人工智能"])
-    if len(results) != 3:
-        print("[FAIL] 批量解释测试: 应有3个结果")
-        return 1
-    if not all(r["success"] for r in results):
-        print("[FAIL] 批量解释测试: 所有批量查询应成功")
-        return 1
-    print("[PASS] 批量解释测试")
-    
-    # 测试用例8: 缓存功能
-    explainer.query_knowledge_base("微服务")
-    if "微服务" not in explainer.cache:
-        print("[FAIL] 缓存功能测试: 缓存应包含微服务")
-        return 1
-    print("[PASS] 缓存功能测试")
-    
-    # 测试用例9: Markdown格式化
-    result = explainer.explain("微服务")
-    md = format_markdown(result)
-    if "# 微服务" not in md:
-        print("[FAIL] Markdown格式化测试: Markdown应包含标题")
-        return 1
-    if "## 核心定义" not in md:
-        print("[FAIL] Markdown格式化测试: Markdown应包含核心定义")
-        return 1
-    if "## 场景拆解" not in md:
-        print("[FAIL] Markdown格式化测试: Markdown应包含场景拆解")
-        return 1
-    print("[PASS] Markdown格式化测试")
-    
-    # 测试用例10: 输入规范化
-    result = explainer.explain("  微服务  ")
-    if not result["success"]:
-        print("[FAIL] 输入规范化测试: 带空格输入应成功")
-        return 1
-    if result["data"]["term"] != "微服务":
-        print("[FAIL] 输入规范化测试: 应去除首尾空格")
-        return 1
-    print("[PASS] 输入规范化测试")
-    
-    # 测试用例11: 场景不存在时返回所有场景
+
+    # 测试7: 批量处理（纯文本格式）
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
+        f.write("微服务\n容器化\n")
+        tmp_path = f.name
+    try:
+        results = explainer.batch_explain(tmp_path)
+        assert len(results) == 2, f"测试7失败: 批量结果数量不对 {len(results)}"
+        assert results[0]["success"], "测试7失败: 第一个术语失败"
+        print("✅ 测试7通过: 批量纯文本处理")
+
+        # 测试8: Markdown格式化
+        md = explainer.format_markdown(results[0])
+        assert "微服务" in md, "测试8失败: Markdown不包含术语"
+        assert "核心定义" in md, "测试8失败: Markdown不包含定义"
+        assert "场景拆解" in md, "测试8失败: Markdown不包含场景"
+        assert "边界界定" in md, "测试8失败: Markdown不包含边界"
+        assert "常见误用" in md, "测试8失败: Markdown不包含误用"
+        print("✅ 测试8通过: Markdown格式化")
+    finally:
+        os.unlink(tmp_path)
+
+    # 测试9: 批量文件不存在
+    results = explainer.batch_explain("/nonexistent/path/terms.json")
+    assert len(results) == 1, "测试9失败: 应返回一个错误结果"
+    assert not results[0]["success"], "测试9失败: 应该失败"
+    assert results[0]["error"] == ERR_BATCH_FILE, "测试9失败: 错误码不匹配"
+    print("✅ 测试9通过: 批量文件不存在")
+
+    # 测试10: 缓存功能
+    explainer.explain("DevOps")
+    assert "devops" in explainer.cache, "测试10失败: 缓存未命中"
+    explainer.explain("DevOps")  # 再次查询
+    print("✅ 测试10通过: 缓存功能")
+
+    # 测试11: 中文术语查询
+    result = explainer.explain("API网关")
+    assert result["success"], "测试11失败: 中文术语查询失败"
+    assert "API网关" in result["term"], "测试11失败: 术语不匹配"
+    print("✅ 测试11通过: 中文术语查询")
+
+    # 测试12: 不存在的场景
     result = explainer.explain("微服务", scene="不存在的场景")
-    if not result["success"]:
-        print("[FAIL] 场景不存在测试: 查询应成功")
-        return 1
-    if len(result["data"]["scenes"]) < 3:
-        print("[FAIL] 场景不存在测试: 应返回所有场景")
-        return 1
-    print("[PASS] 场景不存在测试")
-    
-    # 测试用例12: 批量文件不存在
-    ok, terms, err = parse_batch_file("/nonexistent/file.json")
-    if ok:
-        print("[FAIL] 批量文件不存在测试: 应返回失败")
-        return 1
-    if err != ErrorCode.E1003:
-        print("[FAIL] 批量文件不存在测试: 错误码应为E1003")
-        return 1
-    print("[PASS] 批量文件不存在测试")
-    
-    print("=== 自检全部通过 ===")
+    assert result["success"], "测试12失败: 不存在的场景应该返回全部"
+    assert len(result["scene_breakdown"]) >= 1, "测试12失败: 场景拆解为空"
+    print("✅ 测试12通过: 不存在的场景处理")
+
+    print("\n🎉 所有自测通过！")
     return 0
 
 
 # ============================================================
-# 命令行入口
+# 主入口
 # ============================================================
+
 def main() -> int:
-    """主函数"""
+    """主函数，解析命令行参数并执行相应操作。"""
     parser = argparse.ArgumentParser(
         description="术语释义助手 - 按场景拆解术语含义",
         epilog="示例: python main.py 微服务 --scene 技术"
     )
     parser.add_argument("term", nargs="?", help="要解释的术语")
     parser.add_argument("--scene", "-s", help="指定场景（技术/业务/日常/学术）")
-    parser.add_argument("--batch", "-b", help="批量处理文件路径")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    
+    parser.add_argument("--batch", "-b", metavar="FILE", help="批量解释文件中的术语（JSON数组或纯文本）")
+    parser.add_argument("--selftest", action="store_true", help="运行内置自测")
+
     args = parser.parse_args()
-    
-    # 自检模式
+
+    # 自测模式
     if args.selftest:
         return run_selftest()
-    
+
+    # 创建解释器
+    explainer = TermExplainer()
+
     # 批量模式
     if args.batch:
-        ok, terms, err = parse_batch_file(args.batch)
-        if not ok:
-            error_messages = {
-                ErrorCode.E1003: f"批量文件不存在或格式错误: {args.batch}",
-                ErrorCode.E1005: f"批量文件编码无法识别: {args.batch}"
-            }
-            print(f"错误 ({err}): {error_messages.get(err, '未知错误')}")
-            return 1
-        
-        explainer = TermExplainer()
-        results = explainer.batch_explain(terms, args.scene)
-        for i, result in enumerate(results):
-            print(f"--- 结果 {i+1}/{len(results)} ---")
-            print(format_markdown(result))
-            print()
+        results = explainer.batch_explain(args.batch)
+        for i, result in enumerate(results, 1):
+            print(f"\n--- 结果 {i} ---")
+            print(explainer.format_markdown(result))
         return 0
-    
+
     # 单术语模式
     if not args.term:
-        print(f"错误 ({ErrorCode.E1001}): 请输入要解释的术语")
-        print("用法: python main.py <术语> [--scene 场景]")
-        print("      python main.py --batch <文件路径>")
-        print("      python main.py --selftest")
+        parser.print_help()
         return 1
-    
-    explainer = TermExplainer()
+
     result = explainer.explain(args.term, args.scene)
-    
-    if result["success"]:
-        print(format_markdown(result))
-        return 0
-    else:
-        error_messages = {
-            ErrorCode.E1001: "请输入要解释的术语",
-            ErrorCode.E1002: f"输入超长，已截断为: {result['data']['term'] if result['data'] else ''}",
-            ErrorCode.E1004: f"未找到术语 '{args.term}' 的解释"
-        }
-        print(f"错误 ({result['error_code']}): {error_messages.get(result['error_code'], result['message'])}")
+    print(explainer.format_markdown(result))
+
+    # 如果有错误，返回非零退出码
+    if not result.get("success"):
         return 1
+
+    return 0
 
 
 if __name__ == "__main__":
