@@ -319,8 +319,8 @@ def handle_request(
     else:
         result = process_single(input_data, output_format)
 
-    # 格式化输出
-    if result.status == "ok":
+    # 格式化输出 - 修正：对 partial 状态也要保留 data
+    if result.status in ("ok", "partial"):
         return format_output(result)
     else:
         return {
