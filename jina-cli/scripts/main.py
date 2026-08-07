@@ -172,7 +172,7 @@ def extract_text_from_markdown(md: str) -> str:
         return ""
     try:
         text = md
-        # 移除标题标记
+        # 移除标题标记（包括行首的 # 和空格）
         text = re.sub(r"^#{1,6}\s*", "", text, flags=re.MULTILINE)
         # 移除粗体/斜体标记
         text = re.sub(r"\*\*|__|\*|_", "", text)
@@ -189,6 +189,8 @@ def extract_text_from_markdown(md: str) -> str:
         text = re.sub(r"^\s*\d+\.\s+", "", text, flags=re.MULTILINE)
         # 移除分隔线
         text = re.sub(r"^---+\s*$", "", text, flags=re.MULTILINE)
+        # 清理多余空行
+        text = re.sub(r"\n\s*\n+", "\n\n", text)
         return text.strip()
     except Exception as e:
         raise JinaCliError("E005", f"Markdown 解析失败: {str(e)}")
@@ -398,7 +400,7 @@ def run_selftest() -> bool:
         assert "引用内容" in extracted, "Markdown 提取应包含引用"
         # 不应包含 Markdown 标记
         assert "**" not in extracted, "Markdown 提取不应包含粗体标记"
-        assert "#" not in extracted.split("\n")[0], "Markdown 提取不应包含标题标记"
+        assert "#" not in extracted, "Markdown 提取不应包含标题标记"
         print("  ✓ 通过")
     except AssertionError as e:
         print(f"  ✗ 失败: {e}")
