@@ -1,486 +1,549 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-shell-gpt 独立实现脚本
-
-功能：
-    将自然语言指令转化为可执行的命令行操作与结构化输出。
-
-仅依据功能规格进行 clean-room 独立实现。
+shell-gpt 技能实现脚本
+功能：将自然语言指令转化为可执行的命令行操作与结构化输出。
 """
 
 import argparse
-import os
+import json
 import re
 import shlex
-import subprocess
 import sys
-import tempfile
+from typing import Dict, List, Optional, Tuple
 
-
-# ---------------------------------------------------------------------------
 # 错误码定义
-# ---------------------------------------------------------------------------
-ERR_SUCCESS = 0
-ERR_INVALID_INPUT = "E001"       # 输入为空或格式错误
-ERR_UNSUPPORTED_ACTION = "E002"  # 无法识别的自然语言指令
-ERR_COMMAND_EXEC_FAIL = "E003"   # 命令执行失败
-ERR_NO_SHELL = "E004"            # 无法获取系统 shell
-ERR_PERMISSION_DENIED = "E005"   # 权限不足
-ERR_TIMEOUT = "E006"             # 命令执行超时
-ERR_INTERNAL = "E007"            # 内部逻辑错误
-ERR_PARAMETER = "E008"           # 参数错误
-ERR_ENV = "E009"                 # 环境变量错误
-ERR_FILE = "E010"                # 文件操作错误
+ERROR_CODES = {
+    "E001": "参数错误",
+    "E002": "输入为空",
+    "E003": "无法识别的指令",
+    "E004": "命令生成失败",
+    "E005": "JSON序列化失败",
+    "E006": "无效的平台类型",
+    "E007": "命令执行失败",
+    "E008": "权限不足",
+    "E009": "资源不存在",
+    "E010": "内部错误",
+}
 
 
-# ---------------------------------------------------------------------------
-# 核心解析逻辑：将自然语言指令映射为命令模板
-# ---------------------------------------------------------------------------
+class CommandGenerator:
+    """命令生成器：将自然语言转换为命令行"""
 
-class CommandParser:
-    """
-    将自然语言指令转化为结构化命令对象。
+    # 常见命令模板库
+    COMMAND_PATTERNS = {
+        "file": {
+            "list": ["ls", "dir"],
+            "create": ["touch", "mkdir"],
+            "delete": ["rm"],
+            "copy": ["cp"],
+            "move": ["mv"],
+            "search": ["find", "grep"],
+        },
+        "system": {
+            "info": ["uname", "df", "free"],
+            "process": ["ps", "top"],
+            "network": ["ping", "netstat", "curl"],
+            "package": ["apt", "pip", "npm"],
+        },
+        "git": {
+            "status": ["git status"],
+            "commit": ["git commit"],
+            "push": ["git push"],
+            "pull": ["git pull"],
+            "clone": ["git clone"],
+        },
+    }
 
-    采用基于关键词规则的模式匹配，不涉及任何外部服务或网络调用。
-    """
+    def __init__(self, platform: str = "auto"):
+        """初始化生成器
 
-    def __init__(self):
-        # 定义动作模式：关键词 -> (命令模板, 参数说明)
-        self._patterns = [
-            {
-                "keywords": ["列出", "查看", "显示", "ls", "list"],
-                "template": "ls {flags} {path}",
-                "default": {"flags": "-la", "path": "."},
-                "params": {
-                    "path": r"(?:目录|路径)?\s*([\/\.\w\-]+)",
-                    "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
-                }
-            },
-            {
-                "keywords": ["当前目录", "当前路径", "pwd"],
-                "template": "pwd",
-                "default": {},
-                "params": {}
-            },
-            {
-                "keywords": ["创建目录", "新建目录", "mkdir"],
-                "template": "mkdir {flags} {path}",
-                "default": {"flags": "-p", "path": "new_dir"},
-                "params": {
-                    "path": r"(?:目录|路径)?\s*([\/\.\w\-]+)",
-                    "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
-                }
-            },
-            {
-                "keywords": ["删除文件", "移除文件", "rm"],
-                "template": "rm {flags} {path}",
-                "default": {"flags": "-f", "path": "file"},
-                "params": {
-                    "path": r"(?:文件|路径)?\s*([\/\.\w\-]+)",
-                    "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
-                }
-            },
-            {
-                "keywords": ["复制", "拷贝", "cp"],
-                "template": "cp {flags} {source} {dest}",
-                "default": {"flags": "-r", "source": "source", "dest": "dest"},
-                "params": {
-                    "source": r"(?:源|来源)?\s*([\/\.\w\-]+)",
-                    "dest": r"(?:目标|目的)?\s*([\/\.\w\-]+)",
-                    "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
-                }
-            },
-            {
-                "keywords": ["移动", "重命名", "mv"],
-                "template": "mv {flags} {source} {dest}",
-                "default": {"flags": "", "source": "source", "dest": "dest"},
-                "params": {
-                    "source": r"(?:源|来源)?\s*([\/\.\w\-]+)",
-                    "dest": r"(?:目标|目的)?\s*([\/\.\w\-]+)",
-                    "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
-                }
-            },
-            {
-                "keywords": ["查找", "搜索", "find", "grep"],
-                "template": "grep {flags} {pattern} {path}",
-                "default": {"flags": "-rn", "pattern": "pattern", "path": "."},
-                "params": {
-                    "pattern": r"(?:模式|关键词)?\s*([\/\.\w\-]+)",
-                    "path": r"(?:目录|路径)?\s*([\/\.\w\-]+)",
-                    "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
-                }
-            },
-            {
-                "keywords": ["显示文件", "查看文件", "cat"],
-                "template": "cat {path}",
-                "default": {"path": "file"},
-                "params": {
-                    "path": r"(?:文件|路径)?\s*([\/\.\w\-]+)"
-                }
-            },
-            {
-                "keywords": ["进程", "ps"],
-                "template": "ps {flags}",
-                "default": {"flags": "-ef"},
-                "params": {
-                    "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
-                }
-            },
-            {
-                "keywords": ["磁盘", "df"],
-                "template": "df {flags} {path}",
-                "default": {"flags": "-h", "path": "."},
-                "params": {
-                    "path": r"(?:目录|路径)?\s*([\/\.\w\-]+)",
-                    "flags": r"(?:选项|参数)?\s*(-[a-zA-Z]+)"
-                }
-            },
-            {
-                "keywords": ["帮助", "help", "?"],
-                "template": "help",
-                "default": {},
-                "params": {}
-            }
-        ]
-
-    def parse(self, text):
+        Args:
+            platform: 目标平台 (auto/linux/mac/windows)
         """
-        解析自然语言指令。
+        self.platform = platform
+        self._detect_platform()
 
-        参数：
-            text: 用户输入的自然语言字符串
+    def _detect_platform(self) -> None:
+        """自动检测当前平台"""
+        if self.platform == "auto":
+            import platform as pf
 
-        返回：
-            dict: 包含命令模板与参数的结构化对象
+            system = pf.system().lower()
+            if "windows" in system:
+                self.platform = "windows"
+            elif "darwin" in system:
+                self.platform = "mac"
+            else:
+                self.platform = "linux"
 
-        错误：
-            返回错误码字典
+    def parse_intent(self, text: str) -> Tuple[str, str, Dict]:
+        """解析自然语言意图
+
+        Args:
+            text: 自然语言指令
+
+        Returns:
+            (类别, 动作, 参数) 元组
+
+        Raises:
+            ValueError: 当无法识别意图时
         """
         if not text or not text.strip():
-            return {"error": ERR_INVALID_INPUT, "message": "输入不能为空"}
+            raise ValueError("E002")
 
-        normalized = text.strip().lower()
+        text_lower = text.lower().strip()
 
-        for pattern in self._patterns:
-            # 检查是否包含关键词
-            matched = False
-            for kw in pattern["keywords"]:
-                if kw in normalized:
-                    matched = True
-                    break
+        # 简单关键词匹配（实际项目可替换为更智能的解析）
+        intent_map = [
+            # (类别, 动作, 关键词列表)
+            ("file", "list", ["列出", "查看文件", "list", "ls"]),
+            ("file", "create", ["创建", "新建", "touch", "mkdir"]),
+            ("file", "delete", ["删除", "移除", "rm"]),
+            ("file", "copy", ["复制", "拷贝", "cp"]),
+            ("file", "move", ["移动", "mv"]),
+            ("file", "search", ["搜索", "查找", "find", "grep"]),
+            ("system", "info", ["系统信息", "查看系统", "uname", "df"]),
+            ("system", "process", ["进程", "process", "ps"]),
+            ("system", "network", ["网络", "ping", "netstat"]),
+            ("system", "package", ["安装", "包管理", "pip", "apt"]),
+            ("git", "status", ["git status", "仓库状态"]),
+            ("git", "commit", ["提交", "commit"]),
+            ("git", "push", ["推送", "push"]),
+            ("git", "pull", ["拉取", "pull"]),
+            ("git", "clone", ["克隆", "clone"]),
+        ]
 
-            if not matched:
-                continue
+        for category, action, keywords in intent_map:
+            if any(kw in text_lower for kw in keywords):
+                # 提取参数（简单示例：提取引号或括号中的内容）
+                params = self._extract_params(text)
+                return category, action, params
 
-            # 提取参数
-            params = {}
-            for param_name, regex in pattern["params"].items():
-                match = re.search(regex, normalized)
-                if match:
-                    params[param_name] = match.group(1)
-                else:
-                    # 使用默认值
-                    params[param_name] = pattern["default"].get(param_name, "")
+        raise ValueError("E003")
 
-            # 填充模板
-            command = pattern["template"]
-            try:
-                command = command.format(**params)
-            except KeyError:
-                # 模板中缺少参数，使用默认值补全
-                for key, value in pattern["default"].items():
-                    command = command.replace("{" + key + "}", str(value))
+    def _extract_params(self, text: str) -> Dict:
+        """提取命令参数
 
-            # 清理多余的空格
-            command = re.sub(r'\s+', ' ', command).strip()
+        Args:
+            text: 自然语言文本
 
-            return {
-                "action": pattern["keywords"][0],
-                "command": command,
-                "params": params,
-                "template": pattern["template"]
-            }
-
-        return {"error": ERR_UNSUPPORTED_ACTION, "message": f"无法识别的指令: {text}"}
-
-
-# ---------------------------------------------------------------------------
-# 命令执行器
-# ---------------------------------------------------------------------------
-
-class CommandExecutor:
-    """
-    负责执行解析后的命令，并返回结构化输出。
-    """
-
-    def __init__(self, timeout=10, shell=None):
-        self.timeout = timeout
-        self.shell = shell or self._detect_shell()
-
-    def _detect_shell(self):
-        """检测系统默认 shell"""
-        for candidate in ["/bin/bash", "/bin/sh", "/bin/zsh", "cmd.exe", "powershell.exe"]:
-            if os.path.exists(candidate):
-                return candidate
-        # 尝试从环境变量获取
-        shell_env = os.environ.get("SHELL", "")
-        if shell_env and os.path.exists(shell_env):
-            return shell_env
-        return None
-
-    def execute(self, command):
+        Returns:
+            参数字典
         """
-        执行命令并返回结构化结果。
+        params = {}
 
-        参数：
-            command: 字符串形式的命令
+        # 提取路径参数
+        path_match = re.findall(r'["\']([^"\']+)["\']', text)
+        if path_match:
+            params["paths"] = path_match
 
-        返回：
-            dict: 包含退出码、标准输出、标准错误的结构化对象
-        """
-        if not command or not command.strip():
-            return {"error": ERR_INVALID_INPUT, "message": "命令为空"}
+        # 提取选项参数（-x 或 --xxx 格式）
+        option_match = re.findall(r'(?:^|\s)(--?[a-zA-Z][\w-]*)', text)
+        if option_match:
+            params["options"] = option_match
 
-        if not self.shell:
-            return {"error": ERR_NO_SHELL, "message": "无法检测到系统 shell"}
+        return params
 
-        # 权限检查（简单模拟）
-        if command.startswith("sudo") and os.geteuid() != 0:
-            return {"error": ERR_PERMISSION_DENIED, "message": "需要 root 权限执行 sudo 命令"}
+    def generate(self, text: str) -> Dict:
+        """生成命令行结果
 
-        try:
-            # 使用 shell 执行命令
-            result = subprocess.run(
-                command,
-                shell=True,
-                executable=self.shell,
-                capture_output=True,
-                text=True,
-                timeout=self.timeout,
-                check=False
-            )
-
-            return {
-                "command": command,
-                "exit_code": result.returncode,
-                "stdout": result.stdout,
-                "stderr": result.stderr,
-                "success": result.returncode == 0
-            }
-
-        except subprocess.TimeoutExpired:
-            return {"error": ERR_TIMEOUT, "message": f"命令执行超时（{self.timeout}秒）"}
-        except PermissionError:
-            return {"error": ERR_PERMISSION_DENIED, "message": "权限不足"}
-        except OSError as exc:
-            return {"error": ERR_COMMAND_EXEC_FAIL, "message": f"命令执行失败: {exc}"}
-        except Exception as exc:
-            return {"error": ERR_INTERNAL, "message": f"内部错误: {exc}"}
-
-
-# ---------------------------------------------------------------------------
-# 主处理流程
-# ---------------------------------------------------------------------------
-
-class ShellGPT:
-    """
-    技能主类：整合解析与执行流程。
-    """
-
-    def __init__(self, timeout=10):
-        self.parser = CommandParser()
-        self.executor = CommandExecutor(timeout=timeout)
-
-    def process(self, text, execute=True):
-        """
-        处理自然语言指令。
-
-        参数：
+        Args:
             text: 自然语言指令
-            execute: 是否实际执行命令（False 时仅返回解析结果）
 
-        返回：
-            dict: 结构化输出
+        Returns:
+            结构化结果字典
+
+        Raises:
+            ValueError: 处理失败时抛出带错误码的异常
         """
-        # 第一步：解析
-        parsed = self.parser.parse(text)
+        try:
+            # 解析意图
+            category, action, params = self.parse_intent(text)
 
-        # 解析失败
-        if "error" in parsed:
-            return parsed
+            # 生成命令
+            commands = self._build_command(category, action, params)
 
-        # 第二步：执行（如果需要）
-        if execute:
-            result = self.executor.execute(parsed["command"])
-            result["parsed"] = parsed
+            # 构建结果
+            result = {
+                "success": True,
+                "intent": {
+                    "category": category,
+                    "action": action,
+                    "params": params,
+                },
+                "commands": commands,
+                "platform": self.platform,
+                "message": f"已生成{len(commands)}条命令",
+            }
+
             return result
 
-        # 仅返回解析结果
-        parsed["executed"] = False
-        return parsed
+        except ValueError as e:
+            error_code = str(e) if str(e) in ERROR_CODES else "E010"
+            raise ValueError(error_code) from e
+
+    def _build_command(self, category: str, action: str, params: Dict) -> List[str]:
+        """构建具体命令
+
+        Args:
+            category: 指令类别
+            action: 动作类型
+            params: 参数
+
+        Returns:
+            命令列表
+
+        Raises:
+            ValueError: 生成失败时
+        """
+        commands = []
+
+        try:
+            # 获取基础命令
+            base_commands = self.COMMAND_PATTERNS.get(category, {}).get(action, [])
+
+            if not base_commands:
+                raise ValueError("E004")
+
+            # 选择命令（按平台适配）
+            cmd = self._select_platform_command(base_commands)
+
+            # 附加参数
+            if params.get("paths"):
+                cmd += " " + " ".join(params["paths"])
+
+            if params.get("options"):
+                cmd += " " + " ".join(params["options"])
+
+            commands.append(cmd)
+
+            # 添加辅助命令（如需要）
+            if category == "git" and action == "commit":
+                commands.append("git log --oneline -5")
+
+            return commands
+
+        except Exception as e:
+            if str(e) == "E004":
+                raise
+            raise ValueError("E004") from e
+
+    def _select_platform_command(self, commands: List[str]) -> str:
+        """根据平台选择命令
+
+        Args:
+            commands: 候选命令列表
+
+        Returns:
+            选中的命令
+        """
+        if not commands:
+            raise ValueError("E004")
+
+        # Windows 平台优先使用 Windows 命令
+        if self.platform == "windows":
+            for cmd in commands:
+                if cmd in ["dir", "type"]:
+                    return cmd
+
+        # 默认返回第一个
+        return commands[0]
 
 
-# ---------------------------------------------------------------------------
-# 自检模块
-# ---------------------------------------------------------------------------
+class ShellGPT:
+    """主处理类"""
 
-def run_selftest():
+    def __init__(self):
+        """初始化"""
+        self.generator = CommandGenerator()
+
+    def process(self, text: str) -> Dict:
+        """处理自然语言指令
+
+        Args:
+            text: 自然语言指令
+
+        Returns:
+            处理结果
+        """
+        try:
+            result = self.generator.generate(text)
+            return result
+
+        except ValueError as e:
+            error_code = str(e)
+            return {
+                "success": False,
+                "error_code": error_code,
+                "error_message": ERROR_CODES.get(error_code, "未知错误"),
+                "message": ERROR_CODES.get(error_code, "未知错误"),
+            }
+
+    def execute(self, text: str, dry_run: bool = True) -> Dict:
+        """执行命令
+
+        Args:
+            text: 自然语言指令
+            dry_run: 是否只生成不执行
+
+        Returns:
+            执行结果
+        """
+        result = self.process(text)
+
+        if not result.get("success"):
+            return result
+
+        if dry_run:
+            result["dry_run"] = True
+            result["message"] = "预览模式：命令未实际执行"
+            return result
+
+        # 实际执行模式
+        try:
+            import subprocess
+
+            outputs = []
+            for cmd in result.get("commands", []):
+                proc = subprocess.run(
+                    shlex.split(cmd),
+                    capture_output=True,
+                    text=True,
+                    timeout=30,
+                )
+                outputs.append({
+                    "command": cmd,
+                    "returncode": proc.returncode,
+                    "stdout": proc.stdout[:500],  # 限制输出长度
+                    "stderr": proc.stderr[:500],
+                })
+
+            result["outputs"] = outputs
+            result["success"] = all(o["returncode"] == 0 for o in outputs)
+            result["message"] = "命令执行完成" if result["success"] else "部分命令执行失败"
+
+        except Exception as e:
+            result["success"] = False
+            result["error_code"] = "E007"
+            result["error_message"] = f"命令执行失败: {str(e)}"
+            result["message"] = result["error_message"]
+
+        return result
+
+
+def run_selftest() -> int:
+    """自检函数：使用内置样例验证核心逻辑
+
+    Returns:
+        0 表示成功，非 0 表示失败
     """
-    离线自检核心逻辑。
+    print("=" * 60)
+    print("开始自检 (Self-Test)")
+    print("=" * 60)
 
-    使用内置硬编码样例数据，不依赖外部文件、网络或当前工作目录。
-    使用宽松阈值断言，确保任何环境可过。
-    """
-    print("开始自检...")
-
-    # 创建核心组件
-    parser = CommandParser()
-
-    # --- 测试1：解析基础指令 ---
+    # 内置测试样例
     test_cases = [
-        ("列出当前目录文件", "ls -la ."),
-        ("查看当前路径", "pwd"),
-        ("创建目录 test_dir", "mkdir"),
-        ("删除文件 temp.txt", "rm"),
-        ("复制文件 a.txt 到 b.txt", "cp"),
-        ("移动文件 x.txt 到 y.txt", "mv"),
-        ("查找关键词 error", "grep"),
-        ("显示文件 config.py", "cat"),
-        ("查看进程列表", "ps"),
-        ("查看磁盘使用情况", "df"),
-        ("帮助", "help"),
+        {
+            "input": "列出当前目录的文件",
+            "expected_category": "file",
+            "expected_action": "list",
+            "expected_has_command": True,
+        },
+        {
+            "input": "查看系统信息",
+            "expected_category": "system",
+            "expected_action": "info",
+            "expected_has_command": True,
+        },
+        {
+            "input": "git status 查看仓库状态",
+            "expected_category": "git",
+            "expected_action": "status",
+            "expected_has_command": True,
+        },
+        {
+            "input": "创建一个新文件 test.txt",
+            "expected_category": "file",
+            "expected_action": "create",
+            "expected_has_command": True,
+        },
+        {
+            "input": "搜索包含 error 的文件",
+            "expected_category": "file",
+            "expected_action": "search",
+            "expected_has_command": True,
+        },
     ]
 
-    for text, expected_cmd in test_cases:
-        result = parser.parse(text)
-        assert "error" not in result, f"解析失败: {text} -> {result}"
-        assert result["command"].startswith(expected_cmd.split()[0]), \
-            f"命令前缀不匹配: {text} -> {result['command']}"
-        print(f"  ✓ 解析测试通过: {text} -> {result['command']}")
+    # 无效输入测试
+    invalid_cases = [
+        "",
+        "   ",
+        "完全无法识别的随机文本xyz",
+    ]
 
-    # --- 测试2：错误处理 ---
-    empty_result = parser.parse("")
-    assert "error" in empty_result, "空输入应返回错误"
-    assert empty_result["error"] == ERR_INVALID_INPUT, "空输入错误码应为 E001"
+    passed = 0
+    failed = 0
 
-    garbage_result = parser.parse("xyzzy 完全无法识别的指令")
-    assert "error" in garbage_result, "无法识别的指令应返回错误"
-    assert garbage_result["error"] == ERR_UNSUPPORTED_ACTION, "无法识别错误码应为 E002"
-    print("  ✓ 错误处理测试通过")
+    # 初始化处理器
+    processor = ShellGPT()
 
-    # --- 测试3：执行器（使用无害命令） ---
-    executor = CommandExecutor(timeout=5)
+    # 测试有效输入
+    print("\n--- 测试有效输入 ---")
+    for i, case in enumerate(test_cases, 1):
+        try:
+            result = processor.process(case["input"])
 
-    # 执行 pwd（在任何系统都安全）
-    pwd_result = executor.execute("pwd")
-    assert "error" not in pwd_result, f"pwd 执行失败: {pwd_result}"
-    assert pwd_result["success"] is True, "pwd 应成功执行"
-    assert pwd_result["stdout"].strip(), "pwd 应有输出"
-    print(f"  ✓ 执行器测试通过: pwd -> {pwd_result['stdout'].strip()}")
+            # 宽松断言
+            assert result.get("success") is True, "应该成功处理"
+            intent = result.get("intent", {})
+            assert intent.get("category") == case["expected_category"], \
+                f"类别不匹配: {intent.get('category')} != {case['expected_category']}"
+            assert intent.get("action") == case["expected_action"], \
+                f"动作不匹配: {intent.get('action')} != {case['expected_action']}"
 
-    # 执行 echo（无害）
-    echo_result = executor.execute("echo selftest")
-    assert "error" not in echo_result, f"echo 执行失败: {echo_result}"
-    assert echo_result["success"] is True, "echo 应成功执行"
-    assert "selftest" in echo_result["stdout"], "echo 输出应包含测试字符串"
-    print("  ✓ echo 执行测试通过")
+            commands = result.get("commands", [])
+            assert len(commands) > 0, "应该生成至少一条命令"
+            assert any(cmd.strip() for cmd in commands), "命令不应为空"
 
-    # --- 测试4：完整流程 ---
-    gpt = ShellGPT(timeout=5)
-    full_result = gpt.process("查看当前路径")
-    assert "error" not in full_result, f"完整流程失败: {full_result}"
-    assert full_result["success"] is True, "完整流程应成功"
-    assert full_result["stdout"].strip(), "完整流程应有输出"
-    print(f"  ✓ 完整流程测试通过: {full_result['stdout'].strip()}")
+            # 宽松验证命令长度
+            assert len(commands[0]) > 2, "命令长度应大于2"
 
-    # --- 测试5：参数提取 ---
-    param_result = parser.parse("创建目录 /tmp/mydir")
-    assert "error" not in param_result, "带参数解析失败"
-    assert "/tmp/mydir" in param_result["command"], "路径参数提取失败"
-    print(f"  ✓ 参数提取测试通过: {param_result['command']}")
+            print(f"  ✓ 用例{i}: {case['input']}")
+            print(f"    分类: {intent.get('category')}/{intent.get('action')}")
+            print(f"    命令: {commands[0]}")
+            passed += 1
 
-    # --- 测试6：ls 命令实际执行 ---
-    ls_result = executor.execute("ls -la .")
-    assert "error" not in ls_result, f"ls 执行失败: {ls_result}"
-    assert ls_result["success"] is True, "ls 应成功执行"
-    print("  ✓ ls 命令执行测试通过")
+        except Exception as e:
+            print(f"  ✗ 用例{i} 失败: {str(e)}")
+            failed += 1
 
-    print("\n全部自检通过！")
-    return ERR_SUCCESS
+    # 测试无效输入
+    print("\n--- 测试无效输入 ---")
+    for i, invalid in enumerate(invalid_cases, 1):
+        try:
+            result = processor.process(invalid)
+
+            # 无效输入应该返回失败
+            assert result.get("success") is False, "无效输入应该失败"
+            assert "error_code" in result, "应该包含错误码"
+
+            print(f"  ✓ 无效输入{i} 正确拒绝: '{invalid[:20]}...'")
+            print(f"    错误码: {result.get('error_code')}")
+            passed += 1
+
+        except Exception as e:
+            print(f"  ✗ 无效输入{i} 测试异常: {str(e)}")
+            failed += 1
+
+    # 测试 JSON 序列化
+    print("\n--- 测试结构化输出 ---")
+    try:
+        result = processor.process("查看系统信息")
+        json_str = json.dumps(result, ensure_ascii=False, indent=2)
+        assert len(json_str) > 10, "JSON 输出应有内容"
+        print("  ✓ JSON 序列化成功")
+        passed += 1
+    except Exception as e:
+        print(f"  ✗ JSON 序列化失败: {str(e)}")
+        failed += 1
+
+    # 测试 execute 模式
+    print("\n--- 测试执行模式 ---")
+    try:
+        result = processor.execute("列出当前目录的文件", dry_run=True)
+        assert result.get("dry_run") is True, "应该是预览模式"
+        assert result.get("success") is True, "预览模式应该成功"
+        print("  ✓ 预览模式正常")
+        passed += 1
+    except Exception as e:
+        print(f"  ✗ 预览模式测试失败: {str(e)}")
+        failed += 1
+
+    # 汇总
+    print("\n" + "=" * 60)
+    print(f"自检完成: 通过 {passed} 项, 失败 {failed} 项")
+    print("=" * 60)
+
+    return 0 if failed == 0 else 1
 
 
-# ---------------------------------------------------------------------------
-# 命令行入口
-# ---------------------------------------------------------------------------
+def main() -> int:
+    """主入口函数
 
-def main():
-    """主入口函数"""
+    Returns:
+        退出码
+    """
     parser = argparse.ArgumentParser(
-        description="shell-gpt: 将自然语言指令转化为可执行的命令行操作",
-        epilog="示例: python main.py '列出当前目录文件'"
+        description="shell-gpt: 将自然语言指令转化为命令行操作",
+        epilog="示例: python main.py '列出当前目录文件'",
     )
-
     parser.add_argument(
-        "instruction",
+        "input",
         nargs="?",
-        help="自然语言指令"
+        help="自然语言指令",
     )
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行离线自检"
+        help="运行自检",
     )
     parser.add_argument(
-        "--no-execute",
+        "--execute",
         action="store_true",
-        help="仅解析不执行命令"
+        help="实际执行命令（默认仅预览）",
     )
     parser.add_argument(
-        "--timeout",
-        type=int,
-        default=10,
-        help="命令执行超时时间（秒）"
+        "--platform",
+        choices=["auto", "linux", "mac", "windows"],
+        default="auto",
+        help="目标平台",
+    )
+    parser.add_argument(
+        "--json",
+        action="store_true",
+        help="以 JSON 格式输出",
     )
 
     args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
-        sys.exit(run_selftest())
+        return run_selftest()
 
-    # 无指令时显示帮助
-    if not args.instruction:
+    # 检查输入
+    if not args.input:
         parser.print_help()
-        return ERR_INVALID_INPUT
-
-    # 处理指令
-    gpt = ShellGPT(timeout=args.timeout)
-    result = gpt.process(args.instruction, execute=not args.no_execute)
-
-    # 输出结果
-    if "error" in result:
-        print(f"错误 [{result['error']}]: {result['message']}", file=sys.stderr)
         return 1
 
-    if args.no_execute:
-        # 仅显示解析结果
-        print(f"解析结果: {result['command']}")
-        return ERR_SUCCESS
+    # 初始化处理器
+    processor = ShellGPT()
+    processor.generator.platform = args.platform
 
-    # 显示执行结果
-    print(f"命令: {result['command']}")
-    print(f"退出码: {result['exit_code']}")
+    # 处理输入
+    result = processor.execute(args.input, dry_run=not args.execute)
 
-    if result["stdout"]:
-        print("标准输出:")
-        print(result["stdout"])
+    # 输出结果
+    if args.json:
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    else:
+        if result.get("success"):
+            print(f"✓ {result.get('message', '处理成功')}")
+            for cmd in result.get("commands", []):
+                print(f"  $ {cmd}")
 
-    if result["stderr"]:
-        print("标准错误:")
-        print(result["stderr"], file=sys.stderr)
+            if "outputs" in result:
+                for out in result["outputs"]:
+                    if out.get("stdout"):
+                        print(f"  输出: {out['stdout']}")
+                    if out.get("stderr"):
+                        print(f"  错误: {out['stderr']}")
+        else:
+            print(f"✗ {result.get('error_message', result.get('message', '处理失败'))}")
+            return 1
 
-    return ERR_SUCCESS if result["success"] else 1
+    return 0
 
 
 if __name__ == "__main__":
