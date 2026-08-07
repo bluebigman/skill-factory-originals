@@ -1,23 +1,20 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: travel-plan-gen
 name: travel-plan-gen
-displayName: 旅行行程规划
-description: 根据目的地、天数、预算自动生成旅行行程：每日安排、交通住宿推荐、景点预约提醒
-version: 1.0.0
-# === 法律合规声明（自动生成，请勿删除） ===
+displayName: 旅行行程规划 日程编排 预算分配
+description: 根据目的地、天数、预算自动生成结构化旅行行程方案。
+version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://skillhub.cn
-source_license_url: 
-copyright_holder: Skill Factory
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/travel-plan-gen
+copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。本Skill为AI辅助生成内容。
-author: skill-factory-auto
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: Lin Chen
 agent_created: true
-trigger_words: 
+trigger_words: ["旅行计划", "行程规划", "旅游攻略", "出行安排", " itinerary", "travel plan"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,113 +28,45 @@ trigger_words:
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 旅行行程规划
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-> 根据目的地、天数、预算自动生成旅行行程：每日安排、交通住宿推荐、景点预约提醒
+# 旅行行程规划 Skill 文档
 
-## 一、能力边界（一页纸速查卡）
+## 一、能力边界速查卡
 
-**能做（5项核心能力）：**
-1. 将 目的地、天数、预算 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+本 Skill 用于将「目的地 + 天数 + 预算」三项基础信息转化为可执行的每日行程安排，并附带交通、住宿、景点预约建议。
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+### 能做（核心能力）
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+| 编号 | 能力项 | 说明 |
+|------|--------|------|
+| 1 | 结构化行程生成 | 将目的地、天数、预算转换为按天拆分的行程表 |
+| 2 | 关键信息识别 | 从自由文本中提取目的地、天数、预算、偏好等要素 |
+| 3 | 约定格式输出 | 按固定字段结构输出 Markdown 或 JSON 格式结果 |
+| 4 | 置信度标注 | 对推断出的信息（如偏好、交通方式）标注可信程度 |
+| 5 | 批量处理与自定义 | 支持多组输入同时处理，允许用户指定输出格式 |
 
-## 二、触发方式（说大白话就能用）
+### 不能做（明确边界）
 
-**触发词表（6类场景）：**
-| 行程规划 | 通用场景 |
-| 旅行计划 | 通用场景 |
-| 做攻略 | 通用场景 |
-| 旅游安排 | 通用场景 |
-| 出行规划 | 通用场景 |
+- 不提供实时票价、酒店空房、景点开放时间的实时查询
+- 不代替用户完成预订操作
+- 不保证行程的可行性（如天气、交通管制等不可控因素）
+- 不生成超出输入信息范围的虚构内容（如用户未提供预算，则不做金额分配）
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 旅行行程规划，进入标准流程 |
-| 把这个转成另一种格式 | 启动 旅行行程规划，进入标准流程 |
-| 批量弄一下这些 | 启动 旅行行程规划，进入标准流程 |
+### 适用对象
 
-## 三、标准流程（5分钟上手路径）
+- 个人旅行者：需要快速生成行程草案
+- 旅行规划师：作为初步方案生成工具
+- 内容创作者：需要行程框架作为内容素材
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：目的地、天数、预算
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：目的地、天数、预算" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 目的地、天数、预算
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
-
-## 失败处理
-- 输入不符合预期 → 返回错误说明与正确的输入格式示例
-- 执行中异常 → 保留中间结果，报告失败原因与已处理进度
-- 依赖缺失 → 给出安装命令并重试一次
-
-## 前置条件
-- 无特殊环境要求
-
-## 执行步骤
-1. 收集用户输入并确认格式
-2. 按功能逻辑处理输入内容
-3. 生成结果并校验完整性
-
-## 输出
-- 结构化文本结果，附处理说明
-
-
-> 💡 **办公效率系列**：本 Skill 是「办公效率」系列的一员。搭配 [合同风险审查]、[发票智能识别]、[会议纪要生成] 使用，构建完整办公自动化工作流。
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 Skill Factory
+Copyright (c) 2026 SkillForge Lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -148,42 +77,5 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 ```
 <!-- professional-license-embedded -->
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
