@@ -25,6 +25,7 @@ import argparse
 import csv
 import json
 import sys
+import tempfile
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 from pathlib import Path
@@ -391,29 +392,37 @@ def run_selftest() -> bool:
         assert bad_format.error_code == ErrorCode.E003_UNSUPPORTED_FORMAT
         print("[OK] 不支持格式处理")
 
-        # 5. 测试批量处理（使用模拟路径，不实际读取文件）
-        fake_files = [
-            Path("invoice_001.pdf"),
-            Path("invoice_002.png"),
-            Path("invoice_003.jpg"),
-        ]
-        batch = processor.process_batch(fake_files)
-        assert batch.total == 3, "批量总数应为3"
-        assert batch.succeeded == 3, "模拟文件应全部成功"
-        assert batch.failed == 0, "模拟文件不应失败"
-        print("[OK] 批量处理")
+        # 5. 测试批量处理（使用临时文件）
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # 创建临时文件
+            tmp_path = Path(tmpdir)
+            fake_files = [
+                tmp_path / "invoice_001.pdf",
+                tmp_path / "invoice_002.png",
+                tmp_path / "invoice_003.jpg",
+            ]
+            
+            # 创建实际文件（空文件即可，MockExtractor不读取内容）
+            for f in fake_files:
+                f.touch()
+            
+            batch = processor.process_batch(fake_files)
+            assert batch.total == 3, "批量总数应为3"
+            assert batch.succeeded == 3, "模拟文件应全部成功"
+            assert batch.failed == 0, "模拟文件不应失败"
+            print("[OK] 批量处理")
 
-        # 6. 测试输出格式化（宽松断言：仅检查关键内容存在）
-        csv_output = OutputFormatter.to_csv(batch)
-        assert "文件名" in csv_output, "CSV应包含表头"
-        assert "invoice_001.pdf" in csv_output, "CSV应包含文件名"
-        print("[OK] CSV输出")
+            # 6. 测试输出格式化（宽松断言：仅检查关键内容存在）
+            csv_output = OutputFormatter.to_csv(batch)
+            assert "文件名" in csv_output, "CSV应包含表头"
+            assert "invoice_001.pdf" in csv_output, "CSV应包含文件名"
+            print("[OK] CSV输出")
 
-        json_output = OutputFormatter.to_json(batch)
-        json_data = json.loads(json_output)
-        assert json_data["total"] == 3, "JSON总数应为3"
-        assert len(json_data["items"]) == 3, "JSON应有3条记录"
-        print("[OK] JSON输出")
+            json_output = OutputFormatter.to_json(batch)
+            json_data = json.loads(json_output)
+            assert json_data["total"] == 3, "JSON总数应为3"
+            assert len(json_data["items"]) == 3, "JSON应有3条记录"
+            print("[OK] JSON输出")
 
         # 7. 测试错误码完整性
         assert ErrorCode.E001_INVALID_ARGS != ErrorCode.SUCCESS
