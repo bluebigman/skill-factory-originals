@@ -78,6 +78,7 @@ def extract_key_fields(raw_input: Any) -> Dict[str, Any]:
     - 字符串：尝试解析为 JSON，若失败则按文本处理
     - 字典：直接使用
     - 列表：逐项处理
+    - 数字：转为标量处理
     - 其他：转为字符串处理
     
     返回结构化字典，包含提取的字段和元信息。
@@ -94,6 +95,15 @@ def extract_key_fields(raw_input: Any) -> Dict[str, Any]:
         except json.JSONDecodeError:
             # 非 JSON 文本，提取关键信息
             return _structure_from_text(text)
+
+    # 数字输入（int, float, bool 等）
+    if isinstance(raw_input, (int, float, bool)):
+        return {
+            "type": "scalar",
+            "value": raw_input,
+            "value_type": type(raw_input).__name__,
+            "source": "scalar",
+        }
 
     # 字典输入
     if isinstance(raw_input, dict):
@@ -135,6 +145,13 @@ def _structure_from_parsed(parsed: Any, source_type: str) -> Dict[str, Any]:
             "type": "array",
             "items": parsed,
             "item_count": len(parsed),
+            "source": source_type,
+        }
+    elif isinstance(parsed, (int, float, bool)):
+        return {
+            "type": "scalar",
+            "value": parsed,
+            "value_type": type(parsed).__name__,
             "source": source_type,
         }
     else:
@@ -189,7 +206,9 @@ def calculate_confidence(structured: Dict[str, Any]) -> float:
     - 信息模糊或缺失：低置信度
     """
     try:
-        if structured.get("type") in ("object", "array"):
+        data_type = structured.get("type", "unknown")
+        
+        if data_type in ("object", "array"):
             # 结构化数据，根据字段数量和信息完整度评估
             field_count = structured.get("field_count", structured.get("item_count", 0))
             if field_count >= 5:
@@ -201,7 +220,19 @@ def calculate_confidence(structured: Dict[str, Any]) -> float:
             else:
                 return 0.80
         
-        elif structured.get("type") == "text":
+        elif data_type == "list":
+            # 列表数据，根据项数评估
+            count = structured.get("count", 0)
+            if count >= 5:
+                return 0.92
+            elif count >= 3:
+                return 0.88
+            elif count >= 1:
+                return 0.85
+            else:
+                return 0.75
+        
+        elif data_type == "text":
             # 文本数据，根据内容特征评估
             content = structured.get("content", "")
             if len(content) < 10:
@@ -213,7 +244,7 @@ def calculate_confidence(structured: Dict[str, Any]) -> float:
             else:
                 return 0.80
         
-        elif structured.get("type") == "scalar":
+        elif data_type == "scalar":
             # 标量数据
             return 0.92
         
@@ -307,16 +338,20 @@ def format_output(result: ProcessingResult, output_format: str = "text") -> str:
             else:
                 data = result.data
                 if data:
-                    if data.get("type") == "object":
+                    data_type = data.get("type", "unknown")
+                    if data_type == "object":
                         lines.append(f"字段数: {data.get('field_count', 0)}")
                         lines.append(f"字段: {', '.join(data.get('field_names', [])[:5])}")
-                    elif data.get("type") == "text":
+                    elif data_type == "text":
                         lines.append(f"长度: {data.get('length', 0)}")
                         lines.append(f"词数: {data.get('word_count', 0)}")
                         if data.get("emails"):
                             lines.append(f"邮箱: {', '.join(data['emails'])}")
-                    elif data.get("type") == "array":
-                        lines.append(f"项数: {data.get('item_count', 0)}")
+                    elif data_type in ("array", "list"):
+                        count = data.get("item_count", data.get("count", 0))
+                        lines.append(f"项数: {count}")
+                    elif data_type == "scalar":
+                        lines.append(f"值: {data.get('value', '')}")
                 lines.append(f"置信度: {result.confidence:.1%}")
             return "\n".join(lines)
         
@@ -330,11 +365,12 @@ def format_output(result: ProcessingResult, output_format: str = "text") -> str:
             else:
                 lines.append(f"✅ 处理成功")
                 if result.data:
-                    lines.append(f"数据类型: {result.data.get('type', 'unknown')}")
-                    if result.data.get("type") == "object":
+                    data_type = result.data.get("type", "unknown")
+                    lines.append(f"数据类型: {data_type}")
+                    if data_type == "object":
                         lines.append(f"字段数: {result.data.get('field_count', 0)}")
                         lines.append(f"字段列表: {', '.join(result.data.get('field_names', []))}")
-                    elif result.data.get("type") == "text":
+                    elif data_type == "text":
                         lines.append(f"内容长度: {result.data.get('length', 0)}")
                         lines.append(f"词数: {result.data.get('word_count', 0)}")
                         if result.data.get("emails"):
@@ -344,10 +380,12 @@ def format_output(result: ProcessingResult, output_format: str = "text") -> str:
                         if result.data.get("top_keywords"):
                             kws = [f"{k}({v})" for k, v in result.data["top_keywords"]]
                             lines.append(f"关键词: {', '.join(kws)}")
-                    elif result.data.get("type") == "array":
-                        lines.append(f"项数: {result.data.get('item_count', 0)}")
-                    elif result.data.get("type") == "scalar":
+                    elif data_type in ("array", "list"):
+                        count = result.data.get("item_count", result.data.get("count", 0))
+                        lines.append(f"项数: {count}")
+                    elif data_type == "scalar":
                         lines.append(f"值: {result.data.get('value', '')}")
+                        lines.append(f"值类型: {result.data.get('value_type', 'unknown')}")
                 
                 # 置信度标注
                 conf = result.confidence
@@ -477,6 +515,8 @@ def run_selftest() -> int:
         assert result.status == "success", f"期望success，实际{result.status}"
         assert result.data.get("type") == "list", f"期望list，实际{result.data.get('type')}"
         assert result.data.get("count", 0) >= 3, f"项数应>=3，实际{result.data.get('count')}"
+        # 列表置信度应较高
+        assert result.confidence >= 0.85, f"列表置信度应>=0.85，实际{result.confidence}"
         tests_passed += 1
         print("  ✅ 通过")
     except AssertionError as e:
@@ -490,7 +530,9 @@ def run_selftest() -> int:
     try:
         result = process_input(12345)
         assert result.status == "success", f"期望success，实际{result.status}"
-        assert result.data.get("type") in ("scalar", "text"), f"期望scalar/text，实际{result.data.get('type')}"
+        assert result.data.get("type") == "scalar", f"期望scalar，实际{result.data.get('type')}"
+        assert result.data.get("value") == 12345, f"期望值12345，实际{result.data.get('value')}"
+        assert result.confidence >= 0.85, f"数字置信度应>=0.85，实际{result.confidence}"
         tests_passed += 1
         print("  ✅ 通过")
     except AssertionError as e:
@@ -511,6 +553,11 @@ def run_selftest() -> int:
         short_text = _structure_from_text("短")
         conf2 = calculate_confidence(short_text)
         assert conf2 < 0.85, f"短文本置信度应<0.85，实际{conf2}"
+        
+        # 列表
+        list_data = extract_key_fields(["a", "b", "c", "d", "e"])
+        conf3 = calculate_confidence(list_data)
+        assert conf3 >= 0.85, f"列表置信度应>=0.85，实际{conf3}"
         
         tests_passed += 1
         print("  ✅ 通过")
