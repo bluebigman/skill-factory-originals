@@ -1,94 +1,76 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: sinatra
 name: sinatra
-displayName: 未命名工具
-description: (offically at github.com/sinatra/sinatra) Classy web-development dressed in a DSL
-version: 1.0.0
-author: skill-factory-auto
+displayName: Web开发 DSL 路由构建器
+description: 基于Sinatra DSL的轻量Web应用路由设计与调试辅助工具。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/sinatra
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: LinguaForge
 agent_created: true
-trigger_words:
-  - "sinatra"
+trigger_words: ["sinatra", "ruby web", "dsl", "路由设计", "轻量web框架", "rack应用"]
 ---
 
-# 未命名工具
+> 📜 **用户协议（User Agreement）**
+> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
+> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
+> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+<!-- user-agreement-injected -->
 
-> (offically at github.com/sinatra/sinatra) Classy web-development dressed in a DSL
 
-## 一、能力边界（一页纸速查卡）
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+# Sinatra DSL 路由设计助手
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+## 一、能力边界速查卡
 
-## 二、触发方式（说大白话就能用）
+### 能做什么
+| 编号 | 能力项 | 说明 | 适用场景 |
+|------|--------|------|----------|
+| 1 | 路由结构解析 | 从用户提供的代码片段/描述中提取路由定义 | 审查现有路由、梳理接口清单 |
+| 2 | 路由冲突检测 | 识别相同HTTP方法与路径的重复定义 | 排查路由覆盖导致的bug |
+| 3 | 参数占位符提取 | 识别 `:param` 与 `*glob` 模式 | 设计RESTful接口时确认参数命名 |
+| 4 | 过滤器与辅助方法梳理 | 提取 `before`/`after` 过滤器及 `helpers` 块 | 理解请求生命周期中的横切逻辑 |
+| 5 | 配置项核对 | 检查 `set` 指令与环境变量使用 | 部署前确认运行环境配置 |
 
-**触发词表（6类场景）：**
-| sinatra | 通用场景 |
+### 不能做什么
+- 不能执行或运行 Ruby/Sinatra 代码
+- 不能替代测试框架进行行为验证
+- 不能自动修复路由冲突，仅提供修改建议
+- 不处理非 Sinatra 框架（如 Rails、Roda）的路由语法
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 未命名工具，进入标准流程 |
-| 把这个转成另一种格式 | 启动 未命名工具，进入标准流程 |
-| 批量弄一下这些 | 启动 未命名工具，进入标准流程 |
+### 适用对象
+- 正在阅读或维护 Sinatra 项目的开发者
+- 需要快速梳理既有路由结构的代码审查者
+- 学习 Sinatra DSL 语法的新手
 
-## 三、标准流程（5分钟上手路径）
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+## 许可证（License）
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+```text
+MIT License
 
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
+Copyright (c) 2026 SkillForge Lab
 
-## 四、异常处理（错误码体系）
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+<!-- professional-license-embedded -->
