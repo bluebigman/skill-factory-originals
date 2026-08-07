@@ -246,12 +246,33 @@ def batch_transform(
         all_records: List[StructuredRecord] = []
         for idx, item in enumerate(items):
             try:
-                records = transform_to_records(
-                    item, source=f"{source}#{idx}", auto_confidence=auto_confidence
-                )
+                # 对于字符串输入，先检查是否为有效的JSON
+                if isinstance(item, str):
+                    stripped = item.strip()
+                    # 尝试JSON解析
+                    try:
+                        parsed = json.loads(stripped)
+                        # 如果解析成功，使用解析后的数据
+                        records = transform_to_records(
+                            parsed, source=f"{source}#{idx}", auto_confidence=auto_confidence
+                        )
+                    except json.JSONDecodeError:
+                        # JSON解析失败，尝试作为CSV或纯文本
+                        if "," in stripped or "\n" in stripped:
+                            records = transform_to_records(
+                                item, source=f"{source}#{idx}", auto_confidence=auto_confidence
+                            )
+                        else:
+                            # 纯文本且不是有效JSON，作为错误处理
+                            raise ResourceTransformError("E002", f"无效的JSON字符串: {stripped}")
+                else:
+                    # 非字符串类型直接处理
+                    records = transform_to_records(
+                        item, source=f"{source}#{idx}", auto_confidence=auto_confidence
+                    )
                 all_records.extend(records)
             except ResourceTransformError as exc:
-                # 单条失败不中断整个批次
+                # 单条失败不中断整个批次，创建错误记录
                 all_records.append(
                     StructuredRecord(
                         data={"error": exc.code, "message": exc.message},
