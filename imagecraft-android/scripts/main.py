@@ -110,11 +110,14 @@ class ImageProcessor:
 
     def convert_pdf_to_images(self, pdf_path):
         """PDF转图片（模拟实现）"""
-        if not pdf_path or not os.path.exists(pdf_path):
-            return ProcessResult(False, "PDF文件不存在", 0, ErrorCode.E006, None)
+        if not pdf_path or not pdf_path.strip():
+            return ProcessResult(False, "PDF路径为空", 0, ErrorCode.E001, None)
 
         if not pdf_path.lower().endswith(".pdf"):
             return ProcessResult(False, "文件不是PDF格式", 0, ErrorCode.E003, None)
+
+        if not os.path.exists(pdf_path):
+            return ProcessResult(False, "PDF文件不存在", 0, ErrorCode.E006, None)
 
         # 模拟转换过程
         return ProcessResult(True, "PDF转换成功（模拟）", 95, None, {"pages": 5})
@@ -405,14 +408,25 @@ class CLI:
         # ---------- 测试4: PDF转换 ----------
         print("\n[测试4] PDF转换")
         total += 1
-        result = self.processor.convert_pdf_to_images("test.pdf")
-        print(f"  模拟PDF: {result.message}")
-
-        if result.success and result.confidence > 90:
-            passed += 1
-            print("  ✓ 通过")
-        else:
-            print("  ✗ 失败")
+        
+        # 创建临时PDF文件用于测试
+        temp_pdf = "test_temp.pdf"
+        try:
+            with open(temp_pdf, "w") as f:
+                f.write("%PDF-1.4\n% 模拟PDF文件\n")
+            
+            result = self.processor.convert_pdf_to_images(temp_pdf)
+            print(f"  模拟PDF: {result.message}")
+            
+            if result.success and result.confidence > 90:
+                passed += 1
+                print("  ✓ 通过")
+            else:
+                print("  ✗ 失败")
+        finally:
+            # 清理临时文件
+            if os.path.exists(temp_pdf):
+                os.remove(temp_pdf)
 
         # ---------- 测试5: 错误处理 ----------
         print("\n[测试5] 错误处理")
