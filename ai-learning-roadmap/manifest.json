@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260807_115020",
+  "slug": "ai-learning-roadmap",
+  "spec": {
+    "slug": "ai-learning-roadmap",
+    "name": "ai-learning-roadmap",
+    "description": "根据基础与目标，生成含资源与验收的AI分周学习路线。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "5cb55b1b0d198820",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
