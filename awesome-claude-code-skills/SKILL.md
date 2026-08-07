@@ -9,6 +9,8 @@ name: awesome-claude-code-skills
 displayName: 仅供学习与参考用途
 displayName: 仅供学习与参考用途
 displayName: 仅供学习与参考用途
+displayName: 仅供学习与参考用途
+displayName: 仅供学习与参考用途
 displayName: Claude Cod
 description: Claude Code 最实用的 Skills / Agents / Plugins 精选合集 | 50+ 精选 | 按场景分类 | 带推荐等级 | 复制即装
 version: 1.0.0
