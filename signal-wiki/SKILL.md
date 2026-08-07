@@ -1,4 +1,5 @@
 ---
+license: MIT
 slug: signal-wiki
 name: signal-wiki
 displayName: 未命名工具
