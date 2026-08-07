@@ -455,59 +455,95 @@ def run_selftest() -> bool:
     print("开始自检...")
     processor = S3Processor()
 
-    # 测试 1: 正常文本输入
-    print("测试 1: 文本输入")
-    processor.set_input("示例文本，包含 123 个数字和 test@example.com 邮箱", "text")
-    result = processor.process()
-    assert result.status == "ok" or result.status == "review", "文本输入处理失败"
-    assert result.confidence > 0, "置信度不应为 0"
-    print(f"  ✓ 通过 (置信度: {result.confidence:.0%})")
-
-    # 测试 2: JSON 输入
-    print("测试 2: JSON 输入")
-    json_data = json.dumps({"name": "测试", "value": 42, "type": "sample"})
-    processor.set_input(json_data, "json")
-    result = processor.process()
-    assert result.content.get("name") == "测试", "JSON 解析失败"
-    print(f"  ✓ 通过 (置信度: {result.confidence:.0%})")
-
-    # 测试 3: 空输入
-    print("测试 3: 空输入")
     try:
-        processor.set_input("", "text")
-        processor.process()
-        assert False, "空输入应抛出 E001"
-    except RuntimeError as e:
-        assert str(e) == "E001", f"错误码不正确: {e}"
-        print("  ✓ 通过 (正确抛出 E001)")
+        # 测试 1: 正常文本输入
+        print("测试 1: 文本输入")
+        processor.set_input("示例文本，包含 123 个数字和 test@example.com 邮箱", "text")
+        result = processor.process()
+        assert result.status in ["ok", "review"], f"文本输入处理失败，状态: {result.status}"
+        assert result.confidence > 0, "置信度不应为 0"
+        print(f"  ✓ 通过 (置信度: {result.confidence:.0%}, 状态: {result.status})")
 
-    # 测试 4: 低置信度输入
-    print("测试 4: 低置信度输入")
-    processor.set_input("x", "text")
-    result = processor.process()
-    assert result.confidence < CONFIDENCE_MEDIUM, "简单输入置信度应较低"
-    print(f"  ✓ 通过 (置信度: {result.confidence:.0%})")
+        # 测试 2: JSON 输入
+        print("测试 2: JSON 输入")
+        json_data = json.dumps({"name": "测试", "value": 42, "type": "sample"})
+        processor.set_input(json_data, "json")
+        result = processor.process()
+        assert result.content.get("name") == "测试", "JSON 解析失败"
+        print(f"  ✓ 通过 (置信度: {result.confidence:.0%})")
 
-    # 测试 5: 错误输入类型
-    print("测试 5: 错误输入类型")
-    try:
-        processor.set_input("test", "unknown_type")
-        processor.process()
-        assert False, "未知类型应抛出 E003"
-    except RuntimeError as e:
-        assert str(e) == "E003", f"错误码不正确: {e}"
-        print("  ✓ 通过 (正确抛出 E003)")
+        # 测试 3: 空输入
+        print("测试 3: 空输入")
+        try:
+            processor.set_input("", "text")
+            processor.process()
+            assert False, "空输入应抛出 E001"
+        except RuntimeError as e:
+            assert str(e) == "E001", f"错误码不正确: {e}"
+            print("  ✓ 通过 (正确抛出 E001)")
 
-    # 测试 6: 批量处理
-    print("测试 6: 批量处理")
-    items = [{"id": i, "value": f"item_{i}"} for i in range(3)]
-    processor.set_input(json.dumps(items), "json")
-    result = processor.process()
-    assert result.content.get("count") == 3, "批量处理失败"
-    print(f"  ✓ 通过 (处理 {result.content['count']} 条)")
+        # 测试 4: 低置信度输入
+        print("测试 4: 低置信度输入")
+        processor.set_input("x", "text")
+        result = processor.process()
+        assert result.confidence < CONFIDENCE_MEDIUM, "简单输入置信度应较低"
+        print(f"  ✓ 通过 (置信度: {result.confidence:.0%})")
 
-    print("\n所有自检通过!")
-    return True
+        # 测试 5: 错误输入类型
+        print("测试 5: 错误输入类型")
+        try:
+            processor.set_input("test", "unknown_type")
+            processor.process()
+            assert False, "未知类型应抛出 E003"
+        except RuntimeError as e:
+            assert str(e) == "E003", f"错误码不正确: {e}"
+            print("  ✓ 通过 (正确抛出 E003)")
+
+        # 测试 6: 批量处理
+        print("测试 6: 批量处理")
+        items = [{"id": i, "value": f"item_{i}"} for i in range(3)]
+        processor.set_input(json.dumps(items), "json")
+        result = processor.process()
+        assert result.content.get("count") == 3, "批量处理失败"
+        print(f"  ✓ 通过 (处理 {result.content['count']} 条)")
+
+        # 测试 7: URL 输入
+        print("测试 7: URL 输入")
+        processor.set_input("https://example.com/path", "url")
+        result = processor.process()
+        assert result.content.get("type") == "url", "URL 解析失败"
+        print(f"  ✓ 通过 (URL: {result.content.get('url')})")
+
+        # 测试 8: 输出格式测试
+        print("测试 8: 输出格式测试")
+        processor.set_input("测试输出格式", "text")
+        result = processor.process()
+        
+        # JSON 格式
+        processor.set_options(output_format="json")
+        json_output = processor.format_output(result)
+        assert json.loads(json_output), "JSON 格式输出无效"
+        
+        # 文本格式
+        processor.set_options(output_format="text")
+        text_output = processor.format_output(result)
+        assert "ID:" in text_output, "文本格式输出缺少 ID"
+        
+        # 紧凑格式
+        processor.set_options(output_format="compact")
+        compact_output = processor.format_output(result)
+        assert json.loads(compact_output), "紧凑格式输出无效"
+        print("  ✓ 通过 (所有格式输出正常)")
+
+        print("\n所有自检通过!")
+        return True
+
+    except AssertionError as e:
+        print(f"\n✗ 自检失败: {e}")
+        return False
+    except Exception as e:
+        print(f"\n✗ 自检异常: {e}")
+        return False
 
 
 # ---------------------------------------------------------------------------
@@ -556,19 +592,17 @@ def main() -> int:
         version="s3 1.0.0",
     )
 
-    args = parser.parse_args()
+    try:
+        args = parser.parse_args()
+    except SystemExit:
+        return 1
 
     # 自检模式
     if args.selftest:
-        try:
-            run_selftest()
+        if run_selftest():
             return 0
-        except AssertionError as e:
-            print(f"自检失败: {e}", file=sys.stderr)
+        else:
             return 1
-        except Exception as e:
-            print(f"自检异常: {e}", file=sys.stderr)
-            return 2
 
     # 正常处理模式
     if not args.input:
