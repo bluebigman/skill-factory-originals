@@ -240,13 +240,14 @@ class DataProcessor:
     def _build_error_result(self, error_code: str, raw_input: str, source_type: str) -> Dict[str, Any]:
         """构建错误结果。"""
         result = self.OUTPUT_TEMPLATE.copy()
+        error_message = ERROR_CODES.get(error_code, "未知错误")
         result.update({
             "id": self._generate_id(),
             "timestamp": datetime.now().isoformat(),
             "source_type": source_type,
             "raw_input": raw_input[:200],
             "error_code": error_code,
-            "error_message": ERROR_CODES.get(error_code, "未知错误"),
+            "error_message": f"[{error_code}] {error_message}",
             "confidence": 0.0,
             "confidence_label": "[需核实]",
         })
