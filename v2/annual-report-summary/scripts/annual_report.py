@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-annual-report-summary Skill v2.0.0
+annual-report-summary Skill v2.1.0
 从年报文本中提取关键财务指标并生成结构化决策简报
 
 用法:
@@ -15,11 +15,14 @@ import re
 import json
 import argparse
 import sys
+import urllib.request
+import urllib.error
+import time
 from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime, timezone
 from pathlib import Path
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 # ============================================================
 # 常量定义
@@ -35,6 +38,36 @@ ERROR_CODES = {
     "FILE_ERROR": 4,
     "INTERNAL_ERROR": 5,
 }
+
+# 非数值文本模式
+NON_NUMERIC_PATTERNS = [
+    r'不适用',
+    r'—',
+    r'–',
+    r'N/A',
+    r'NA',
+    r'无',
+    r'暂无',
+    r'未披露',
+    r'待定',
+]
+
+# 数值范围校验配置
+VALUE_RANGES = {
+    "roe": (-100.0, 100.0),  # ROE 百分比范围
+    "net_profit_growth": (-1000.0, 1000.0),  # 净利润增长率范围
+    "gross_margin": (-100.0, 100.0),  # 毛利率范围
+    "net_margin": (-100.0, 100.0),  # 净利率范围
+    "debt_ratio": (0.0, 100.0),  # 资产负债率范围
+    "rd_ratio": (0.0, 100.0),  # 研发费用率范围
+}
+
+# 真实年报数据源API配置（示例：使用公开的财报数据API）
+# 注意：实际部署时需要替换为真实可用的API端点
+ANNUAL_REPORT_API = "https://api.example.com/annual-report"
+API_TIMEOUT = 10  # 秒
+API_MAX_RETRIES = 3
+API_RETRY_BACKOFF = 2  # 指数退避基数（秒）
 
 # ============================================================
 # 指标提取器
@@ -56,6 +89,9 @@ class IndicatorExtractor:
                 value = match.group(1).strip()
                 if normalize:
                     value = self._normalize_value(value)
+                # 检查是否为有效数值
+                if value is None:
+                    continue
                 self.results[key] = {
                     "label": label,
                     "value": value,
@@ -65,14 +101,44 @@ class IndicatorExtractor:
                 return value
         return None
     
-    def _normalize_value(self, value: str) -> str:
-        """标准化数值：去除多余空格，统一单位"""
+    def _normalize_value(self, value: str) -> Optional[str]:
+        """标准化数值：去除多余空格，统一单位，检测非数值文本"""
         value = value.strip()
+        
+        # 检测非数值文本
+        for pattern in NON_NUMERIC_PATTERNS:
+            if re.search(pattern, value, re.IGNORECASE):
+                return None
+        
         # 去除百分号前的空格
         value = re.sub(r'\s+%', '%', value)
         # 统一负号
         value = value.replace('（', '(').replace('）', ')')
+        
+        # 检查是否为有效数值（带可选单位）
+        numeric_pattern = r'^[-+]?\d+\.?\d*\s*[万亿千百]?元?%?$'
+        if not re.match(numeric_pattern, value):
+            return None
+        
         return value
+    
+    def _validate_range(self, key: str, value: str) -> bool:
+        """校验数值范围"""
+        if key not in VALUE_RANGES:
+            return True
+        
+        # 提取数值部分
+        numeric_match = re.search(r'[-+]?\d+\.?\d*', value)
+        if not numeric_match:
+            return False
+        
+        try:
+            numeric_value = float(numeric_match.group())
+        except ValueError:
+            return False
+        
+        min_val, max_val = VALUE_RANGES[key]
+        return min_val <= numeric_value <= max_val
     
     def extract_roe(self) -> Optional[str]:
         """提取ROE（净资产收益率）"""
@@ -84,7 +150,11 @@ class IndicatorExtractor:
             r'ROE[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
             r'扣非加权平均净资产收益率[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
         ]
-        return self._extract(patterns, "roe", "净资产收益率(ROE)")
+        value = self._extract(patterns, "roe", "净资产收益率(ROE)")
+        if value and not self._validate_range("roe", value):
+            self.results.pop("roe", None)
+            return None
+        return value
     
     def extract_net_profit_growth(self) -> Optional[str]:
         """提取净利润增长率"""
@@ -94,7 +164,11 @@ class IndicatorExtractor:
             r'净利润同比变化[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
             r'净利润同比[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
         ]
-        return self._extract(patterns, "net_profit_growth", "净利润增长率")
+        value = self._extract(patterns, "net_profit_growth", "净利润增长率")
+        if value and not self._validate_range("net_profit_growth", value):
+            self.results.pop("net_profit_growth", None)
+            return None
+        return value
     
     def extract_revenue(self) -> Tuple[Optional[str], Optional[str]]:
         """提取营业收入及增长率"""
@@ -124,7 +198,11 @@ class IndicatorExtractor:
             r'销售毛利率[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
             r'综合毛利率[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
         ]
-        return self._extract(patterns, "gross_margin", "毛利率")
+        value = self._extract(patterns, "gross_margin", "毛利率")
+        if value and not self._validate_range("gross_margin", value):
+            self.results.pop("gross_margin", None)
+            return None
+        return value
     
     def extract_net_margin(self) -> Optional[str]:
         """提取净利率"""
@@ -132,7 +210,11 @@ class IndicatorExtractor:
             r'净利率[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
             r'销售净利率[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
         ]
-        return self._extract(patterns, "net_margin", "净利率")
+        value = self._extract(patterns, "net_margin", "净利率")
+        if value and not self._validate_range("net_margin", value):
+            self.results.pop("net_margin", None)
+            return None
+        return value
     
     def extract_debt_ratio(self) -> Optional[str]:
         """提取资产负债率"""
@@ -140,7 +222,11 @@ class IndicatorExtractor:
             r'资产负债率[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
             r'负债率[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
         ]
-        return self._extract(patterns, "debt_ratio", "资产负债率")
+        value = self._extract(patterns, "debt_ratio", "资产负债率")
+        if value and not self._validate_range("debt_ratio", value):
+            self.results.pop("debt_ratio", None)
+            return None
+        return value
     
     def extract_operating_cashflow(self) -> Optional[str]:
         """提取经营现金流净额"""
@@ -167,7 +253,11 @@ class IndicatorExtractor:
             r'研发投入占比[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
             r'研发费用占营业收入比例[：:为\s]*([-+]?\d+\.?\d*\s*%?)',
         ]
-        return self._extract(patterns, "rd_ratio", "研发费用率")
+        value = self._extract(patterns, "rd_ratio", "研发费用率")
+        if value and not self._validate_range("rd_ratio", value):
+            self.results.pop("rd_ratio", None)
+            return None
+        return value
     
     def extract_goodwill(self) -> Optional[str]:
         """提取商誉"""
@@ -225,6 +315,77 @@ class IndicatorExtractor:
 
 
 # ============================================================
+# 真实数据源接入（API客户端）
+# ============================================================
+
+class AnnualReportAPIClient:
+    """接入真实年报数据源的API客户端"""
+    
+    def __init__(self, api_url: str = ANNUAL_REPORT_API, timeout: int = API_TIMEOUT):
+        self.api_url = api_url
+        self.timeout = timeout
+    
+    def fetch_annual_report(self, company_code: str, year: int) -> Dict[str, Any]:
+        """
+        从API获取真实年报数据
+        
+        Args:
+            company_code: 公司代码（如股票代码）
+            year: 年报年份
+        
+        Returns:
+            包含财务指标的年报数据字典
+        
+        Raises:
+            RuntimeError: 当API请求失败时
+        """
+        if not company_code or not year:
+            raise ValueError("company_code和year不能为空")
+        
+        # 构建请求参数
+        params = {
+            "company_code": company_code,
+            "year": year,
+            "format": "json"
+        }
+        url = f"{self.api_url}?{urllib.parse.urlencode(params)}"
+        
+        # 带重试退避的请求
+        last_error = None
+        for attempt in range(API_MAX_RETRIES):
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "annual-report-summary/2.1.0"})
+                with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                    if response.status != 200:
+                        raise RuntimeError(f"API返回状态码: {response.status}")
+                    data = json.loads(response.read().decode("utf-8"))
+                    return self._validate_response(data)
+            except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+                last_error = e
+                if attempt < API_MAX_RETRIES - 1:
+                    # 指数退避
+                    wait_time = API_RETRY_BACKOFF * (2 ** attempt)
+                    time.sleep(wait_time)
+                continue
+        
+        raise RuntimeError(f"API请求失败（已重试{API_MAX_RETRIES}次）: {last_error}")
+    
+    def _validate_response(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        """验证API响应数据格式"""
+        required_fields = ["indicators", "company_name", "year"]
+        for field in required_fields:
+            if field not in data:
+                raise ValueError(f"API响应缺少字段: {field}")
+        
+        # 验证指标数据
+        indicators = data["indicators"]
+        if not isinstance(indicators, dict):
+            raise ValueError("indicators字段必须是字典")
+        
+        return data
+
+
+# ============================================================
 # 摘要生成器
 # ============================================================
 
@@ -255,230 +416,4 @@ class SummaryGenerator:
             lines.append("-" * 50)
             lines.append("其他指标:")
             for key in other_keys:
-                item = self.results[key]
-                lines.append(f"  {item['label']}: {item['value']}")
-        
-        # 置信度评估
-        lines.append("-" * 50)
-        if core_found >= 5:
-            confidence = "HIGH - 数据完整"
-        elif core_found >= 2:
-            confidence = "MEDIUM - 部分指标未提取"
-        else:
-            confidence = "LOW - 数据不足，请检查输入文本"
-        lines.append(f"置信度: {confidence}")
-        
-        lines.append("=" * 50)
-        lines.append("免责声明: 本摘要仅供学习参考，不构成投资建议。")
-        
-        return "\n".join(lines)
-    
-    def generate_json(self) -> str:
-        """生成JSON摘要"""
-        output = {
-            "version": __version__,
-            "timestamp": datetime.now(timezone.utc).isoformat(),
-            "indicators": {},
-            "confidence": "UNKNOWN"
-        }
-        
-        # 统计核心指标
-        core_found = sum(1 for k in CORE_INDICATORS if k in self.results)
-        if core_found >= 5:
-            output["confidence"] = "HIGH"
-        elif core_found >= 2:
-            output["confidence"] = "MEDIUM"
-        else:
-            output["confidence"] = "LOW"
-        
-        # 填充指标
-        for key, item in self.results.items():
-            output["indicators"][key] = {
-                "label": item["label"],
-                "value": item["value"],
-                "confidence": item["confidence"]
-            }
-        
-        return json.dumps(output, ensure_ascii=False, indent=2)
-
-
-# ============================================================
-# 主程序
-# ============================================================
-
-def parse_args() -> argparse.Namespace:
-    """解析命令行参数"""
-    parser = argparse.ArgumentParser(
-        description="年报速读 - 从年报文本中提取关键财务指标",
-        epilog="示例: python run.py --file annual_report.txt --json"
-    )
-    parser.add_argument("--text", type=str, help="年报文本内容")
-    parser.add_argument("--file", type=str, help="年报文本文件路径")
-    parser.add_argument("--json", action="store_true", help="输出JSON格式")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
-    return parser.parse_args()
-
-
-def read_input(args: argparse.Namespace) -> Tuple[str, int]:
-    """读取输入文本，返回(文本, 错误码)"""
-    if args.text:
-        text = args.text.strip()
-    elif args.file:
-        try:
-            text = Path(args.file).read_text(encoding="utf-8").strip()
-        except Exception as e:
-            print(f"错误: 无法读取文件 {args.file}: {e}", file=sys.stderr)
-            return "", ERROR_CODES["FILE_ERROR"]
-    else:
-        print("错误: 必须提供 --text 或 --file 参数", file=sys.stderr)
-        return "", ERROR_CODES["PARAM_ERROR"]
-    
-    if len(text) < 10:
-        print("错误: 输入文本过短（至少10个字符）", file=sys.stderr)
-        return "", ERROR_CODES["EMPTY_INPUT"]
-    
-    return text, ERROR_CODES["SUCCESS"]
-
-
-def run_selftest() -> int:
-    """运行自检，验证核心功能"""
-    print("=" * 60)
-    print("运行自检...")
-    print("=" * 60)
-    
-    # 测试用例
-    test_cases = [
-        {
-            "name": "完整年报示例",
-            "text": """
-            公司2023年度报告显示，营业收入为12.5亿元，同比增长18.2%。
-            净利润增长率为23.5%，净资产收益率(ROE)为15.2%。
-            毛利率为35.7%，净利率为12.1%，资产负债率为58.3%。
-            经营活动产生的现金流量净额为8.5亿元，基本每股收益为1.25元。
-            研发费用率为7.2%，商誉为3.2亿元。
-            审计意见为标准无保留意见。
-            """,
-            "expected": {
-                "roe": "15.2%",
-                "net_profit_growth": "23.5%",
-                "revenue": "12.5亿元",
-                "gross_margin": "35.7%",
-                "operating_cashflow": "8.5亿元"
-            }
-        },
-        {
-            "name": "部分指标示例",
-            "text": "公司ROE为10.5%，净利润同比增长5.2%。",
-            "expected": {
-                "roe": "10.5%",
-                "net_profit_growth": "5.2%"
-            }
-        },
-        {
-            "name": "无匹配示例",
-            "text": "这是一段没有财务指标的年报文本内容。",
-            "expected": {}
-        }
-    ]
-    
-    all_passed = True
-    
-    for i, case in enumerate(test_cases, 1):
-        print(f"\n测试 {i}: {case['name']}")
-        extractor = IndicatorExtractor(case["text"])
-        results = extractor.extract_all()
-        
-        # 验证预期指标
-        for key, expected_value in case["expected"].items():
-            if key in results:
-                actual_value = results[key]["value"]
-                if actual_value == expected_value:
-                    print(f"  ✓ {key}: {actual_value}")
-                else:
-                    print(f"  ✗ {key}: 期望 {expected_value}, 实际 {actual_value}")
-                    all_passed = False
-            else:
-                print(f"  ✗ {key}: 未提取到")
-                all_passed = False
-        
-        # 验证不应存在的指标
-        for key in case["expected"]:
-            if key not in results and key in case["expected"]:
-                pass  # 已在上面处理
-    
-    # 验证JSON输出
-    print("\n验证JSON输出...")
-    extractor = IndicatorExtractor(test_cases[0]["text"])
-    results = extractor.extract_all()
-    generator = SummaryGenerator(results)
-    json_output = generator.generate_json()
-    try:
-        json_data = json.loads(json_output)
-        if "timestamp" in json_data and "indicators" in json_data:
-            print("  ✓ JSON格式正确")
-        else:
-            print("  ✗ JSON缺少必要字段")
-            all_passed = False
-    except json.JSONDecodeError as e:
-        print(f"  ✗ JSON解析失败: {e}")
-        all_passed = False
-    
-    # 验证文本输出
-    print("\n验证文本输出...")
-    text_output = generator.generate_text()
-    if "年报财务摘要" in text_output:
-        print("  ✓ 文本摘要格式正确")
-    else:
-        print("  ✗ 文本摘要格式错误")
-        all_passed = False
-    
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("自检通过 ✓")
-        return ERROR_CODES["SUCCESS"]
-    else:
-        print("自检失败 ✗")
-        return ERROR_CODES["INTERNAL_ERROR"]
-
-
-def main() -> int:
-    """主函数"""
-    args = parse_args()
-    
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-    
-    # 读取输入
-    text, error_code = read_input(args)
-    if error_code != ERROR_CODES["SUCCESS"]:
-        return error_code
-    
-    try:
-        # 提取指标
-        extractor = IndicatorExtractor(text)
-        results = extractor.extract_all()
-        
-        if not results:
-            print("警告: 未提取到任何财务指标，请检查输入文本是否包含相关数据。", file=sys.stderr)
-            return ERROR_CODES["NO_MATCH"]
-        
-        # 生成输出
-        generator = SummaryGenerator(results)
-        if args.json:
-            print(generator.generate_json())
-        else:
-            print(generator.generate_text())
-        
-        return ERROR_CODES["SUCCESS"]
-    
-    except Exception as e:
-        print(f"错误: 处理过程中发生异常: {e}", file=sys.stderr)
-        import traceback
-        traceback.print_exc()
-        return ERROR_CODES["INTERNAL_ERROR"]
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+                item = self

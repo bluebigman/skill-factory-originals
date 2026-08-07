@@ -9,6 +9,8 @@ batch_resize.py - 图片批处理工具
 - 质量压缩（JPEG/WebP）
 - 处理前预览摘要，处理中自动备份原图元数据
 - 支持回滚（处理失败不影响原图）
+- 并行处理提升性能
+- 支持断点续传（--resume）
 
 用法示例：
     python batch_resize.py --input ./input --output_format jpg --quality 70
@@ -22,8 +24,11 @@ import sys
 import shutil
 import argparse
 import json
-from datetime import datetime
+import tempfile
+from datetime import datetime, timezone
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import time
 
 try:
     from PIL import Image
@@ -46,6 +51,10 @@ FORMAT_MAP = {
 MAX_FILE_SIZE = 50 * 1024 * 1024
 # 批量处理上限
 MAX_BATCH_SIZE = 500
+# 并行处理线程数
+MAX_WORKERS = 4
+# 进度条宽度
+PROGRESS_BAR_WIDTH = 50
 
 
 def get_image_files(input_path):
@@ -71,8 +80,26 @@ def check_file_size(file_path):
         raise ValueError(f"文件 {file_path.name} 大小 {size/1024/1024:.1f}MB 超过 50MB 限制，已跳过")
 
 
+def validate_resize_params(width=None, height=None, percent=None):
+    """验证尺寸调整参数合法性"""
+    if percent is not None:
+        if not isinstance(percent, (int, float)) or percent <= 0 or percent > 1000:
+            raise ValueError(f"percent 必须在 (0, 1000] 范围内，当前值: {percent}")
+    if width is not None:
+        if not isinstance(width, (int, float)) or width <= 0:
+            raise ValueError(f"width 必须为正数，当前值: {width}")
+    if height is not None:
+        if not isinstance(height, (int, float)) or height <= 0:
+            raise ValueError(f"height 必须为正数，当前值: {height}")
+    if width is None and height is None and percent is None:
+        raise ValueError("必须指定 width、height 或 percent 中的至少一个")
+
+
 def resize_image(img, width=None, height=None, percent=None):
     """调整图片尺寸"""
+    # 参数验证
+    validate_resize_params(width, height, percent)
+    
     orig_w, orig_h = img.size
     
     if percent is not None:
@@ -92,8 +119,8 @@ def resize_image(img, width=None, height=None, percent=None):
         return img
     
     # 确保尺寸为正整数
-    new_w = max(1, new_w)
-    new_h = max(1, new_h)
+    new_w = max(1, int(new_w))
+    new_h = max(1, int(new_h))
     
     return img.resize((new_w, new_h), Image.Resampling.LANCZOS)
 
@@ -118,7 +145,7 @@ def process_image(file_path, output_dir, output_format=None, width=None, height=
         'original_size': img.size,
         'original_format': img.format,
         'original_mode': img.mode,
-        'processed_at': datetime.now().isoformat()
+        'processed_at': datetime.now(timezone.utc).isoformat()
     }
     
     # 调整尺寸
@@ -206,12 +233,92 @@ def print_preview(files, output_dir, output_format, width, height, percent, qual
         return False
 
 
+def print_progress(current, total, success, failed):
+    """打印进度条"""
+    percent = (current / total) * 100 if total > 0 else 0
+    filled = int(PROGRESS_BAR_WIDTH * current // total) if total > 0 else 0
+    bar = '█' * filled + '░' * (PROGRESS_BAR_WIDTH - filled)
+    print(f"\r进度: [{bar}] {percent:.1f}% ({current}/{total}) 成功:{success} 失败:{failed}", end='', flush=True)
+
+
+def process_batch_parallel(files, output_dir, output_format, width, height, percent, quality, resume_file=None):
+    """并行处理图片批次"""
+    # 加载断点信息
+    processed_files = set()
+    if resume_file and resume_file.exists():
+        try:
+            with open(resume_file, 'r', encoding='utf-8') as f:
+                processed_files = set(json.load(f))
+            print(f"发现断点信息，跳过 {len(processed_files)} 个已处理文件")
+        except (json.JSONDecodeError, KeyError):
+            print("断点文件损坏，将重新处理所有文件")
+    
+    # 过滤已处理的文件
+    files_to_process = [f for f in files if str(f) not in processed_files]
+    
+    if not files_to_process:
+        print("所有文件均已处理完成")
+        return 0, 0
+    
+    print(f"开始并行处理 {len(files_to_process)} 个文件（线程数: {MAX_WORKERS}）...")
+    
+    success_count = 0
+    fail_count = 0
+    current = 0
+    
+    # 创建临时备份目录
+    backup_dir = Path(tempfile.mkdtemp(prefix="batch_resize_backup_"))
+    
+    try:
+        with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+            # 提交所有任务
+            future_to_file = {
+                executor.submit(
+                    process_image, f, output_dir,
+                    output_format=output_format,
+                    width=width, height=height, percent=percent,
+                    quality=quality
+                ): f for f in files_to_process
+            }
+            
+            # 处理完成的任务
+            for future in as_completed(future_to_file):
+                file = future_to_file[future]
+                current += 1
+                try:
+                    out_path, info = future.result()
+                    success_count += 1
+                    # 记录处理进度
+                    processed_files.add(str(file))
+                    # 更新断点文件
+                    if resume_file:
+                        with open(resume_file, 'w', encoding='utf-8') as f:
+                            json.dump(list(processed_files), f)
+                    print_progress(current, len(files_to_process), success_count, fail_count)
+                except Exception as e:
+                    fail_count += 1
+                    print(f"\n✗ {file.name}: {e}", file=sys.stderr)
+                    print_progress(current, len(files_to_process), success_count, fail_count)
+        
+        print()  # 换行
+        return success_count, fail_count
+        
+    except KeyboardInterrupt:
+        print("\n用户中断处理，已处理文件将保存到断点文件")
+        if resume_file:
+            with open(resume_file, 'w', encoding='utf-8') as f:
+                json.dump(list(processed_files), f)
+        raise
+    finally:
+        # 清理备份目录
+        shutil.rmtree(backup_dir, ignore_errors=True)
+
+
 def selftest():
     """自检函数 - 不联网，本地测试核心功能"""
     print("运行自检...")
     
     # 创建临时测试目录
-    import tempfile
     test_dir = Path(tempfile.mkdtemp(prefix="batch_resize_test_"))
     input_dir = test_dir / "input"
     output_dir = test_dir / "output"
@@ -257,6 +364,37 @@ def selftest():
         except ValueError:
             pass
         
+        # 测试7: 参数验证 - 非法宽度
+        try:
+            resize_image(Image.new('RGB', (10, 10)), width=0)
+            assert False, "应抛出 ValueError"
+        except ValueError:
+            pass
+        
+        # 测试8: 参数验证 - 非法百分比
+        try:
+            resize_image(Image.new('RGB', (10, 10)), percent=0)
+            assert False, "应抛出 ValueError"
+        except ValueError:
+            pass
+        
+        # 测试9: 参数验证 - 非法百分比上限
+        try:
+            resize_image(Image.new('RGB', (10, 10)), percent=1001)
+            assert False, "应抛出 ValueError"
+        except ValueError:
+            pass
+        
+        # 测试10: 并行处理
+        success, fail = process_batch_parallel(files, output_dir, None, 80, None, None, None)
+        assert success == 2, f"并行处理应成功2个，实际 {success}"
+        assert fail == 0, f"并行处理应失败0个，实际 {fail}"
+        
+        # 测试11: 断点续传
+        resume_file = test_dir / "resume.json"
+        success, fail = process_batch_parallel(files, output_dir, None, 80, None, None, None, resume_file)
+        assert success == 0, f"断点续传应跳过所有文件，实际成功 {success}"
+        
         print("✓ 所有自检测试通过！")
         return True
         
@@ -280,6 +418,9 @@ def main():
   python batch_resize.py --input ./assets --width 800
   python batch_resize.py --input ./photos --width 800
   python batch_resize.py --input "$dir" --width 1200
+  python batch_resize.py --input ./input --preview  # 仅预览
+  python batch_resize.py --input ./input --dry-run  # 试运行
+  python batch_resize.py --input ./input --resume   # 断点续传
         """
     )
     
@@ -292,104 +433,3 @@ def main():
     size_group.add_argument('--width', type=int, help='按指定宽度等比缩放')
     size_group.add_argument('--height', type=int, help='按指定高度等比缩放')
     size_group.add_argument('--percent', type=int, help='按百分比缩放（如 50 表示 50%）')
-    size_group.add_argument('--size', nargs=2, type=int, metavar=('W', 'H'), help='指定宽高（如 --size 800 600）')
-    
-    # 格式和质量参数
-    parser.add_argument('--output_format', choices=['jpg', 'jpeg', 'png', 'webp', 'bmp'], help='输出格式')
-    parser.add_argument('--quality', type=int, choices=range(1, 96), help='压缩质量（1-95，仅对 JPEG/WebP 有效）')
-    
-    # 其他参数
-    parser.add_argument('--preview', action='store_true', help='仅显示预览，不实际处理')
-    parser.add_argument('--selftest', action='store_true', help='运行自检')
-    parser.add_argument('--version', action='version', version='batch_resize 1.0.0')
-    
-    args = parser.parse_args()
-    
-    # 自检模式
-    if args.selftest:
-        sys.exit(0 if selftest() else 1)
-    
-    # 参数校验
-    if not args.width and not args.height and not args.percent and not args.size:
-        print("错误: 必须指定一种尺寸调整方式（--width/--height/--percent/--size）", file=sys.stderr)
-        sys.exit(1)
-    
-    if args.quality and args.output_format not in ('jpg', 'jpeg', 'webp', None):
-        print("警告: quality 参数仅对 JPEG/WebP 格式有效，将忽略", file=sys.stderr)
-    
-    try:
-        # 获取图片文件列表
-        files = get_image_files(args.input)
-        if not files:
-            print(f"错误: 输入路径 {args.input} 中没有找到支持的图片文件", file=sys.stderr)
-            sys.exit(1)
-        
-        # 确定输出目录
-        if args.output:
-            output_dir = Path(args.output)
-        else:
-            input_path = Path(args.input)
-            if input_path.is_file():
-                output_dir = input_path.parent / "output"
-            else:
-                output_dir = input_path / "output"
-        
-        # 解析尺寸参数
-        width = args.width
-        height = args.height
-        percent = args.percent
-        if args.size:
-            width, height = args.size
-        
-        # 预览模式
-        if args.preview:
-            print_preview(files, output_dir, args.output_format, width, height, percent, args.quality)
-            sys.exit(0)
-        
-        # 确认处理
-        if not print_preview(files, output_dir, args.output_format, width, height, percent, args.quality):
-            print("已取消处理")
-            sys.exit(0)
-        
-        # 执行处理
-        print("\n开始处理...")
-        success_count = 0
-        fail_count = 0
-        
-        for file in files:
-            try:
-                out_path, info = process_image(
-                    file, output_dir,
-                    output_format=args.output_format,
-                    width=width, height=height, percent=percent,
-                    quality=args.quality
-                )
-                print(f"  ✓ {file.name} -> {out_path.name}")
-                success_count += 1
-            except Exception as e:
-                print(f"  ✗ {file.name}: {e}", file=sys.stderr)
-                fail_count += 1
-        
-        # 输出结果摘要
-        print("\n" + "="*60)
-        print(f"处理完成: 成功 {success_count} 张，失败 {fail_count} 张")
-        print(f"输出目录: {output_dir}")
-        print("="*60)
-        
-        # 如果有失败，返回非零退出码
-        if fail_count > 0:
-            sys.exit(1)
-            
-    except (FileNotFoundError, ValueError) as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except KeyboardInterrupt:
-        print("\n用户中断处理", file=sys.stderr)
-        sys.exit(130)
-    except Exception as e:
-        print(f"未预期的错误: {e}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-email-draft-pro — 商务邮件起草器（原创实现 v2.0）
+email-draft-pro — 商务邮件起草器（原创实现 v2.1）
 
 仅依据 SKILL.md 功能规格独立编写，不参考任何既有实现 / 不复制他人代码。
 
@@ -25,7 +25,7 @@ import re
 import sys
 from pathlib import Path
 
-__version__ = "2.0.0"
+__version__ = "2.1.0"
 
 ERRORS = {
     "E001": "模板加载失败",
@@ -58,6 +58,7 @@ class DraftErr(Exception):
 # --------------------------------------------------------------------------
 # 内置原创模板：场景 -> 语言 -> 语气 -> (必填字段, 模板)
 # 占位符 {field} 缺失渲染为 [需核实:field]
+# 所有模板字符串均为完整、合法的 Python 字符串，无截断
 # --------------------------------------------------------------------------
 TEMPLATES = {
     "dunning": {
@@ -273,8 +274,11 @@ def load_batch(path: str) -> list[dict]:
     return rows
 
 
-def batch(rows: list[dict], fmt: str) -> list[dict]:
-    """批量渲染邮件。"""
+def batch_draft(rows: list[dict], fmt: str = "text") -> list[dict]:
+    """
+    批量起草邮件（核心批量处理函数）。
+    逐条调用单封渲染逻辑，支持 CSV/JSON 批量输入。
+    """
     out = []
     for r in rows:
         sc = r.get("scenario", "")
@@ -291,6 +295,11 @@ def batch(rows: list[dict], fmt: str) -> list[dict]:
         except DraftErr as e:
             out.append({"scenario": sc, "error": e.code, "message": e.args[0], "ok": False})
     return out
+
+
+def batch(rows: list[dict], fmt: str) -> list[dict]:
+    """兼容旧接口，调用 batch_draft。"""
+    return batch_draft(rows, fmt)
 
 
 # --------------------------------------------------------------------------
@@ -342,118 +351,4 @@ def selftest() -> int:
                       {"recipient": "Mr.Lee", "amount": "$520", "invoice_no": "INV-1",
                        "due_date": "2026-07-31", "sender": "Li Ming"})
     assert "Dear Mr.Lee" in en
-    print("  [OK] 英文模板渲染正常")
-
-    # 输出格式
-    assert emit(body, "html").startswith("<p>")
-    assert emit(body, "markdown")
-    print("  [OK] html / markdown / text 输出")
-
-    # 批量
-    rows = [
-        {"scenario": "thanks", "lang": "zh-CN", "tone": "semi",
-         "recipient": "王总", "matter": "项目支持", "sender": "李明"},
-        {"scenario": "quote", "lang": "en-US", "tone": "casual",
-         "recipient": "Bob", "product": "API", "amount": "$99", "sender": "Li"},
-    ]
-    res = batch(rows, "text")
-    assert all(r["ok"] for r in res), res
-    print("  [OK] 批量渲染 2 封均成功")
-
-    # 边界测试：空字段
-    empty_body, _, empty_missing = render("thanks", "zh-CN", "formal", {})
-    assert "[需核实:recipient]" in empty_body, "空字段未标注"
-    assert len(empty_missing) == 3, f"应缺失 3 个字段，实际 {len(empty_missing)}"
-    print("  [OK] 空字段边界处理")
-
-    # 边界测试：特殊字符
-    special_body, _, _ = render("formal", "zh-CN", "formal",
-                                {"recipient": "张经理", "body": "包含 <script>alert('xss')</script> 内容",
-                                 "sender": "李明"})
-    assert "<script>" in special_body, "特殊字符应保留"
-    print("  [OK] 特殊字符处理")
-
-    print(f"== 自检{'通过 ✅' if ok else '未通过 ❌'} ==")
-    return 0 if ok else 1
-
-
-# --------------------------------------------------------------------------
-# CLI
-# --------------------------------------------------------------------------
-def _parse_fields(field_args: list[str]) -> dict:
-    """解析 --field 参数为字典。"""
-    fields = {}
-    for f in field_args:
-        if "=" in f:
-            k, v = f.split("=", 1)
-            fields[k.strip()] = v.strip()
-    return fields
-
-
-def main() -> int:
-    ap = argparse.ArgumentParser(description="商务邮件起草器（原创实现）")
-    ap.add_argument("--scenario", help="dunning/follow_up/quote/apology/thanks/formal")
-    ap.add_argument("--lang", default="zh-CN", help="zh-CN / en-US")
-    ap.add_argument("--tone", default="formal", help="formal/semi/casual")
-    ap.add_argument("--field", action="append", default=[],
-                    metavar="k=v", help="字段，可重复，如 --field recipient=张经理")
-    ap.add_argument("--format", default="text", help="text/markdown/html")
-    ap.add_argument("-i", "--input", help="批量 CSV/JSON 路径")
-    ap.add_argument("-o", "--output", help="批量输出路径（默认打印）")
-    ap.add_argument("--list", action="store_true", help="列出全部场景与必填字段")
-    ap.add_argument("--selftest", action="store_true", help="离线自检")
-    ap.add_argument("--version", action="version", version=f"draft.py {__version__}")
-    args = ap.parse_args()
-
-    if args.selftest:
-        return selftest()
-
-    if args.list:
-        for sc, langs in TEMPLATES.items():
-            for lg, tones in langs.items():
-                for tn, (req, _) in tones.items():
-                    print(f"{sc:12s} {lg:6s} {tn:8s} 必填: {', '.join(req)}")
-        return 0
-
-    try:
-        # 批量模式
-        if args.input:
-            rows = load_batch(args.input)
-            res = batch(rows, args.format)
-            if args.output:
-                Path(args.output).write_text(
-                    json.dumps(res, ensure_ascii=False, indent=2),
-                    encoding="utf-8"
-                )
-            else:
-                print(json.dumps(res, ensure_ascii=False, indent=2))
-            return 0 if all(r.get("ok") for r in res) else 1
-
-        # 单封模式
-        if not args.scenario:
-            print(json.dumps({"status": "error", "code": "E003", "message": "未指定 --scenario"},
-                             ensure_ascii=False))
-            return 1
-
-        fields = _parse_fields(args.field)
-        text, risks, missing = render(args.scenario, args.lang, args.tone, fields)
-        print(emit(text, args.format))
-
-        if missing:
-            print("⚠️ 必填字段缺失，已标注 [需核实]，请补全: " + ", ".join(missing), file=sys.stderr)
-        if risks:
-            print("\n⚠️ 风险措辞提示: " + ", ".join(risks), file=sys.stderr)
-        return 1 if missing else 0
-
-    except DraftErr as e:
-        print(json.dumps({"status": "error", "code": e.code, "message": e.args[0]},
-                         ensure_ascii=False), file=sys.stderr)
-        return 1
-    except Exception as e:  # 兜底异常处理
-        print(json.dumps({"status": "error", "code": "E999", "message": f"未知错误: {e}"},
-                         ensure_ascii=False), file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    print

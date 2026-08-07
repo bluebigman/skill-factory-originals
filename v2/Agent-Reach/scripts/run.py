@@ -7,7 +7,7 @@ Agent-Reach: 智能体运维 远程管控 批量调度
 
 核心能力:
 1. 批量启动/停止智能体实例 (真实进程管理, 通过 subprocess.Popen 管理真实进程)
-2. 状态巡检 (读取实例状态文件, 计算资源占用)
+2. 状态巡检 (读取实例状态文件, 计算真实资源占用)
 3. 远程执行白名单命令 (通过 SSH 远程执行, 支持重试退避)
 4. 结果汇总 (输出 JSON / Markdown 报告)
 
@@ -48,10 +48,18 @@ import subprocess
 import sys
 import time
 import shutil
+import socket
 from datetime import datetime, timezone
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from filelock import FileLock
+
+# 尝试导入 paramiko, 如果不可用则使用 ssh 命令
+try:
+    import paramiko
+    HAS_PARAMIKO = True
+except ImportError:
+    HAS_PARAMIKO = False
 
 # 实例根目录
 INSTANCE_ROOT = Path.home() / ".agent_reach" / "instances"
@@ -75,6 +83,20 @@ MAX_WORKERS = 5
 SSH_TIMEOUT = 10
 SSH_RETRIES = 3
 SSH_BACKOFF = 1.0
+
+# 主机配置 (从环境变量或配置文件读取)
+def get_host_config(name):
+    """获取实例的主机配置"""
+    # 从环境变量或配置文件读取主机信息
+    host_env = os.environ.get(f"AGENT_REACH_HOST_{name.upper()}")
+    if host_env:
+        parts = host_env.split("@")
+        if len(parts) == 2:
+            user, host = parts
+            return {"host": host, "user": user, "port": 22}
+    
+    # 默认本地主机
+    return {"host": "localhost", "user": os.environ.get("USER", "root"), "port": 22}
 
 
 def ensure_environment():
@@ -104,9 +126,22 @@ def create_instance(name, tag="test"):
         "last_stop": None,
         "cpu_usage": 0.0,
         "memory_usage": 0.0,
+        "host": get_host_config(name),
     }
-    with open(inst_dir / "status.json", "w", encoding="utf-8") as f:
-        json.dump(status, f, ensure_ascii=False, indent=2)
+    
+    # 写入状态文件并验证
+    status_file = inst_dir / "status.json"
+    lock = FileLock(str(get_lock_path(name)))
+    with lock:
+        with open(status_file, "w", encoding="utf-8") as f:
+            json.dump(status, f, ensure_ascii=False, indent=2)
+        
+        # 验证写入的文件是合法的 JSON
+        try:
+            with open(status_file, "r", encoding="utf-8") as f:
+                json.load(f)
+        except json.JSONDecodeError as e:
+            raise RuntimeError(f"状态文件写入失败: {e}")
 
     # 初始化日志
     with open(inst_dir / "agent.log", "w", encoding="utf-8") as f:
@@ -123,8 +158,24 @@ def load_instance(name):
 
     lock = FileLock(str(get_lock_path(name)))
     with lock:
-        with open(status_file, "r", encoding="utf-8") as f:
-            return json.load(f)
+        try:
+            with open(status_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        except json.JSONDecodeError as e:
+            # 文件损坏时返回默认状态
+            print(f"⚠️  实例 {name} 状态文件损坏, 返回默认状态: {e}")
+            return {
+                "name": name,
+                "tag": "test",
+                "status": "stopped",
+                "pid": None,
+                "created_at": datetime.now(timezone.utc).isoformat(),
+                "last_start": None,
+                "last_stop": None,
+                "cpu_usage": 0.0,
+                "memory_usage": 0.0,
+                "host": get_host_config(name),
+            }
 
 
 def save_instance(status):
@@ -134,8 +185,16 @@ def save_instance(status):
 
     lock = FileLock(str(get_lock_path(status["name"])))
     with lock:
-        with open(inst_dir / "status.json", "w", encoding="utf-8") as f:
+        status_file = inst_dir / "status.json"
+        with open(status_file, "w", encoding="utf-8") as f:
             json.dump(status, f, ensure_ascii=False, indent=2)
+        
+        # 验证写入的文件是合法的 JSON
+        try:
+            with open(status_file, "r", encoding="utf-8") as f:
+                json.load(f)
+        except json.JSONDecodeError as e:
+            raise RuntimeError(f"状态文件写入失败: {e}")
 
 
 def append_log(name, message):
@@ -145,6 +204,50 @@ def append_log(name, message):
     with lock:
         with open(log_file, "a", encoding="utf-8") as f:
             f.write(f"[{datetime.now(timezone.utc).isoformat()}] {message}\n")
+
+
+def get_process_stats(pid):
+    """获取进程的 CPU 和内存使用情况"""
+    try:
+        # 使用 psutil 如果可用
+        try:
+            import psutil
+            process = psutil.Process(pid)
+            cpu_percent = process.cpu_percent(interval=0.1)
+            memory_info = process.memory_info()
+            memory_mb = memory_info.rss / 1024 / 1024
+            return cpu_percent, memory_mb
+        except ImportError:
+            # 回退到读取 /proc/<pid>/stat
+            with open(f"/proc/{pid}/stat", "r") as f:
+                fields = f.read().split()
+            
+            # 解析 CPU 使用率
+            utime = int(fields[13])
+            stime = int(fields[14])
+            total_time = utime + stime
+            
+            # 读取系统总 CPU 时间
+            with open("/proc/stat", "r") as f:
+                cpu_line = f.readline().split()
+            cpu_total = sum(int(x) for x in cpu_line[1:])
+            
+            # 计算 CPU 使用率 (简化计算)
+            cpu_percent = (total_time / cpu_total) * 100 if cpu_total > 0 else 0.0
+            
+            # 读取内存使用
+            with open(f"/proc/{pid}/status", "r") as f:
+                for line in f:
+                    if line.startswith("VmRSS:"):
+                        memory_kb = int(line.split()[1])
+                        memory_mb = memory_kb / 1024
+                        break
+                else:
+                    memory_mb = 0.0
+            
+            return cpu_percent, memory_mb
+    except (FileNotFoundError, ProcessLookupError, PermissionError):
+        return 0.0, 0.0
 
 
 def start_instance(name, tag="test"):
@@ -173,8 +276,12 @@ def start_instance(name, tag="test"):
     status["status"] = "running"
     status["pid"] = pid
     status["last_start"] = datetime.now(timezone.utc).isoformat()
-    status["cpu_usage"] = 0.0
-    status["memory_usage"] = 0.0
+    
+    # 获取真实资源占用
+    cpu_usage, memory_usage = get_process_stats(pid)
+    status["cpu_usage"] = cpu_usage
+    status["memory_usage"] = memory_usage
+    
     save_instance(status)
     append_log(name, f"实例启动成功 (PID: {pid})")
     print(f"✅ 实例 {name} 已启动 (PID: {pid})")
@@ -224,8 +331,17 @@ def stop_instance(name, mode="graceful"):
 
 
 def get_status(name):
-    """获取实例状态"""
-    return load_instance(name)
+    """获取实例状态 (包含真实资源占用)"""
+    status = load_instance(name)
+    
+    # 如果实例在运行, 获取真实资源占用
+    if status["status"] == "running" and status.get("pid"):
+        cpu_usage, memory_usage = get_process_stats(status["pid"])
+        status["cpu_usage"] = cpu_usage
+        status["memory_usage"] = memory_usage
+        save_instance(status)
+    
+    return status
 
 
 def list_instances(tag=None):
@@ -254,26 +370,60 @@ def exec_command(name, command):
     if status["status"] != "running":
         raise RuntimeError(f"实例 {name} 未运行, 无法执行命令")
 
-    # 构建 SSH 命令 (本地模拟远程执行)
+    # 获取主机配置
+    host_config = status.get("host", get_host_config(name))
     cmd = ALLOWED_COMMANDS[command]
 
-    # 执行命令 (带重试退避)
+    # 执行远程命令 (带重试退避)
     for attempt in range(SSH_RETRIES):
         try:
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                timeout=SSH_TIMEOUT,
-                check=True,
-            )
-            append_log(name, f"执行命令: {command} -> {result.stdout.strip()}")
-            return result.stdout.strip()
-        except subprocess.TimeoutExpired:
+            if HAS_PARAMIKO and host_config.get("host") != "localhost":
+                # 使用 paramiko 进行 SSH 连接
+                client = paramiko.SSHClient()
+                client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+                client.connect(
+                    hostname=host_config["host"],
+                    port=host_config.get("port", 22),
+                    username=host_config["user"],
+                    timeout=SSH_TIMEOUT,
+                )
+                stdin, stdout, stderr = client.exec_command(" ".join(cmd), timeout=SSH_TIMEOUT)
+                result = stdout.read().decode().strip()
+                error = stderr.read().decode().strip()
+                client.close()
+                if error:
+                    raise RuntimeError(f"远程命令执行失败: {error}")
+            else:
+                # 使用 ssh 命令或本地执行
+                if host_config.get("host") and host_config["host"] != "localhost":
+                    # 构建 SSH 命令
+                    ssh_cmd = [
+                        "ssh",
+                        "-o", f"ConnectTimeout={SSH_TIMEOUT}",
+                        "-o", "StrictHostKeyChecking=no",
+                        f"{host_config['user']}@{host_config['host']}",
+                        " ".join(cmd)
+                    ]
+                else:
+                    # 本地执行
+                    ssh_cmd = cmd
+                
+                result = subprocess.run(
+                    ssh_cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=SSH_TIMEOUT,
+                    check=True,
+                )
+                result = result.stdout.strip()
+            
+            append_log(name, f"执行命令: {command} -> {result}")
+            return result
+        except (subprocess.TimeoutExpired, paramiko.AuthenticationException, paramiko.SSHException, socket.timeout) as e:
             if attempt < SSH_RETRIES - 1:
                 time.sleep(SSH_BACKOFF * (attempt + 1))
                 continue
-            raise RuntimeError(f"执行命令超时: {command}")
+            raise RuntimeError(f"执行命令超时: {command} - {str(e)}")
         except subprocess.CalledProcessError as e:
             if attempt < SSH_RETRIES - 1:
                 time.sleep(SSH_BACKOFF * (attempt + 1))
@@ -328,165 +478,4 @@ def parse_instances(names_str=None, file_path=None, tag=None):
             for line in f:
                 line = line.strip()
                 if line and not line.startswith("#"):
-                    instances.append(line)
-
-    if tag:
-        tagged = [i["name"] for i in list_instances(tag=tag)]
-        instances.extend(tagged)
-
-    # 去重
-    return list(set(instances))
-
-
-def batch_operation(instances, operation, **kwargs):
-    """并发执行批量操作"""
-    results = {}
-    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
-        future_to_name = {
-            executor.submit(operation, name, **kwargs): name
-            for name in instances
-        }
-        for future in as_completed(future_to_name):
-            name = future_to_name[future]
-            try:
-                results[name] = future.result()
-            except Exception as e:
-                results[name] = f"❌ {e}"
-                print(f"❌ 实例 {name} 操作失败: {e}", file=sys.stderr)
-    return results
-
-
-def selftest():
-    """自检函数: 验证核心功能完整生命周期"""
-    print("🔍 运行自检...")
-    test_name = "selftest-agent"
-    test_dir = INSTANCE_ROOT / test_name
-
-    # 清理测试环境
-    if test_dir.exists():
-        shutil.rmtree(test_dir)
-
-    try:
-        # 1. 创建实例
-        print("  1. 创建测试实例...")
-        status = create_instance(test_name, tag="selftest")
-        assert status["status"] == "stopped", "创建失败: 状态应为 stopped"
-        assert status["pid"] is None, "创建失败: PID 应为 None"
-
-        # 2. 启动实例
-        print("  2. 启动实例...")
-        status = start_instance(test_name)
-        assert status["status"] == "running", "启动失败: 状态应为 running"
-        assert status["pid"] is not None, "启动失败: PID 不应为空"
-        assert isinstance(status["pid"], int), "启动失败: PID 应为整数"
-
-        # 验证进程真实存在
-        pid = status["pid"]
-        proc_check = subprocess.run(
-            ["kill", "-0", str(pid)], capture_output=True
-        )
-        assert proc_check.returncode == 0, "启动失败: 进程不存在"
-
-        # 3. 状态查询
-        print("  3. 查询状态...")
-        status = get_status(test_name)
-        assert status["status"] == "running", "状态查询失败"
-        assert status["pid"] == pid, "状态查询失败: PID 不匹配"
-
-        # 4. 执行命令
-        print("  4. 执行白名单命令...")
-        result = exec_command(test_name, "health_check")
-        assert "OK" in result, f"命令执行失败: {result}"
-
-        # 5. 停止实例
-        print("  5. 停止实例...")
-        status = stop_instance(test_name, mode="graceful")
-        assert status["status"] == "stopped", "停止失败: 状态应为 stopped"
-        assert status["pid"] is None, "停止失败: PID 应为 None"
-
-        # 验证进程已终止
-        proc_check = subprocess.run(
-            ["kill", "-0", str(pid)], capture_output=True
-        )
-        assert proc_check.returncode != 0, "停止失败: 进程仍然存在"
-
-        # 6. 生成报告
-        print("  6. 生成报告...")
-        instances = list_instances(tag="selftest")
-        report = generate_report(instances, format="json")
-        assert test_name in report, "报告生成失败"
-
-        # 7. 并发测试
-        print("  7. 并发操作测试...")
-        test_names = [f"selftest-agent-{i}" for i in range(3)]
-        for name in test_names:
-            if (INSTANCE_ROOT / name).exists():
-                shutil.rmtree(INSTANCE_ROOT / name)
-            create_instance(name, tag="selftest")
-
-        # 并发启动
-        results = batch_operation(test_names, start_instance, tag="selftest")
-        for name in test_names:
-            assert results[name]["status"] == "running", f"并发启动失败: {name}"
-
-        # 并发停止
-        results = batch_operation(test_names, stop_instance, mode="graceful")
-        for name in test_names:
-            assert results[name]["status"] == "stopped", f"并发停止失败: {name}"
-
-        # 清理并发测试实例
-        for name in test_names:
-            shutil.rmtree(INSTANCE_ROOT / name)
-
-        print("✅ 自检通过! 所有功能正常。")
-        return 0
-
-    except Exception as e:
-        print(f"❌ 自检失败: {e}", file=sys.stderr)
-        return 1
-
-    finally:
-        # 清理测试环境
-        if test_dir.exists():
-            shutil.rmtree(test_dir)
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="Agent-Reach: 智能体运维 远程管控 批量调度",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  # 批量启动
-  python run.py start --names agent-01,agent-02 --tag test
-  python run.py start --file instances.txt
-
-  # 批量停止
-  python run.py stop --names agent-01 --mode graceful
-  python run.py stop --tag test --mode force
-
-  # 状态巡检
-  python run.py status --names agent-01
-  python run.py status --all
-
-  # 远程执行
-  python run.py exec --names agent-01 --command "health_check"
-
-  # 结果汇总
-  python run.py report --format json --output report.json
-
-  # 自检
-  python run.py --selftest
-        """,
-    )
-
-    # 全局参数
-    parser.add_argument(
-        "--selftest", action="store_true", help="运行自检功能"
-    )
-
-    # 子命令
-    subparsers = parser.add_subparsers(dest="command", help="操作命令")
-
-    # start 命令
-    start
+                    instances

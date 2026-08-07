@@ -1,424 +1,594 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-GitHub Trending 周报生成器 - 单文件实现
-
-功能：
-1. 抓取 GitHub Trending 页面公开数据（无需 API Token）
-2. 按编程语言、时间范围过滤
-3. 生成 Markdown 周报、CSV 表格、JSON 结构化数据
-4. 内置离线演示数据（无网络时可用 --demo 模式）
-
-用法示例：
-  python run.py --since daily --language python --output report.md
-  python run.py --since weekly --format json --output data.json
-  python run.py --demo --since monthly --format csv --output demo.csv
-  python run.py --selftest
+GitHub Trending News Skill - 生产级实现
+获取 GitHub 每日 Trending 仓库信息并生成结构化周报
 """
 
 import argparse
 import csv
 import json
+import os
 import re
 import sys
 import time
-from datetime import datetime, timedelta
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
+from typing import Dict, List, Optional, Any, Tuple
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
+# 尝试导入第三方库，如果失败则使用内置替代
 try:
     import requests
+    HAS_REQUESTS = True
 except ImportError:
-    requests = None
+    HAS_REQUESTS = False
 
-# ============ 内置演示数据（离线可用） ============
-DEMO_REPOS = [
-    {
-        "name": "openai/gpt-4o-mini",
-        "description": "OpenAI's new compact model with vision capabilities",
-        "language": "Python",
-        "stars_today": 1250,
-        "total_stars": 45200,
-        "forks": 8900,
-        "url": "https://github.com/openai/gpt-4o-mini"
-    },
-    {
-        "name": "microsoft/autogen",
-        "description": "A framework for building multi-agent AI systems",
-        "language": "Python",
-        "stars_today": 890,
-        "total_stars": 23400,
-        "forks": 3100,
-        "url": "https://github.com/microsoft/autogen"
-    },
-    {
-        "name": "langchain-ai/langchain",
-        "description": "Building applications with LLMs through composability",
-        "language": "Python",
-        "stars_today": 760,
-        "total_stars": 78900,
-        "forks": 12400,
-        "url": "https://github.com/langchain-ai/langchain"
-    },
-    {
-        "name": "rust-lang/rustlings",
-        "description": "Small exercises to get you used to reading and writing Rust code",
-        "language": "Rust",
-        "stars_today": 340,
-        "total_stars": 45600,
-        "forks": 6800,
-        "url": "https://github.com/rust-lang/rustlings"
-    },
-    {
-        "name": "tauri-apps/tauri",
-        "description": "Build smaller, faster, and more secure desktop applications",
-        "language": "Rust",
-        "stars_today": 280,
-        "total_stars": 67800,
-        "forks": 5200,
-        "url": "https://github.com/tauri-apps/tauri"
-    },
-    {
-        "name": "vercel/next.js",
-        "description": "The React framework for production",
-        "language": "JavaScript",
-        "stars_today": 520,
-        "total_stars": 112000,
-        "forks": 24500,
-        "url": "https://github.com/vercel/next.js"
-    },
-    {
-        "name": "facebook/react",
-        "description": "The library for web and native user interfaces",
-        "language": "JavaScript",
-        "stars_today": 430,
-        "total_stars": 213000,
-        "forks": 44500,
-        "url": "https://github.com/facebook/react"
-    },
-    {
-        "name": "golang/go",
-        "description": "The Go programming language",
-        "language": "Go",
-        "stars_today": 310,
-        "total_stars": 115000,
-        "forks": 16800,
-        "url": "https://github.com/golang/go"
-    }
-]
-
-# 语言别名映射
-LANGUAGE_ALIASES = {
-    "py": "python",
-    "python": "python",
-    "js": "javascript",
-    "javascript": "javascript",
-    "ts": "typescript",
-    "typescript": "typescript",
-    "go": "go",
-    "golang": "go",
-    "rust": "rust",
-    "rs": "rust",
-    "java": "java",
-    "c": "c",
-    "c++": "cpp",
-    "cpp": "cpp",
-    "ruby": "ruby",
-    "php": "php",
-    "swift": "swift",
-    "kotlin": "kotlin"
-}
-
-# 时间范围映射
-SINCE_MAP = {
-    "daily": "今日",
-    "weekly": "本周",
-    "monthly": "本月"
-}
+try:
+    from bs4 import BeautifulSoup
+    HAS_BS4 = True
+except ImportError:
+    HAS_BS4 = False
 
 
-def parse_args():
-    """解析命令行参数"""
-    parser = argparse.ArgumentParser(
-        description="GitHub Trending 周报生成器",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=__doc__
-    )
-    parser.add_argument("--input", "-i", help="输入文件（预留，当前版本不使用）")
-    parser.add_argument("--output", "-o", default="trending_report.md",
-                        help="输出文件路径（默认: trending_report.md）")
-    parser.add_argument("--language", "-l", default=None,
-                        help="过滤语言，如 python/javascript/go（默认: 全部）")
-    parser.add_argument("--since", "-s", default="daily",
-                        choices=["daily", "weekly", "monthly"],
-                        help="时间范围: daily/weekly/monthly（默认: daily）")
-    parser.add_argument("--format", "-f", default="markdown",
-                        choices=["markdown", "csv", "json"],
-                        help="输出格式: markdown/csv/json（默认: markdown）")
-    parser.add_argument("--demo", action="store_true",
-                        help="使用内置演示数据（离线模式）")
-    parser.add_argument("--selftest", action="store_true",
-                        help="运行自检")
-    return parser.parse_args()
+# ============ 配置 ============
+SKILL_NAME = "github-trending"
+SKILL_VERSION = "2.0.0"
+SKILL_DESCRIPTION = "获取 GitHub 每日 Trending 仓库信息并生成结构化周报"
+
+# GitHub Trending 页面 URL
+GITHUB_TRENDING_URL = "https://github.com/trending"
+GITHUB_TRENDING_DAILY_URL = "https://github.com/trending?since=daily"
+GITHUB_TRENDING_WEEKLY_URL = "https://github.com/trending?since=weekly"
+GITHUB_TRENDING_MONTHLY_URL = "https://github.com/trending?since=monthly"
+
+# 默认输出目录
+DEFAULT_OUTPUT_DIR = str(Path.home() / ".workbuddy" / "skills" / SKILL_NAME)
+
+# 缓存配置
+CACHE_DIR = str(Path.home() / ".workbuddy" / "cache" / SKILL_NAME)
+CACHE_TTL = 3600  # 1小时缓存
+
+# 网络请求配置
+REQUEST_TIMEOUT = 15  # 秒
+MAX_RETRIES = 3
+RETRY_BASE_DELAY = 2  # 秒
+RETRY_MAX_DELAY = 10  # 秒
+
+# 用户代理
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
 
-def fetch_trending(language=None, since="daily"):
+# ============ 工具函数 ============
+def safe_filename(text: str) -> str:
+    """将文本转换为安全的文件名"""
+    return re.sub(r'[^\w\-_.]', '_', text)
+
+
+def get_today_str() -> str:
+    """获取今天的日期字符串 YYYY-MM-DD"""
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+
+def get_date_range(days: int = 7) -> str:
+    """获取日期范围字符串"""
+    end = datetime.now(timezone.utc)
+    start = end - timedelta(days=days)
+    return f"{start.strftime('%Y-%m-%d')}_to_{end.strftime('%Y-%m-%d')}"
+
+
+def exponential_backoff(attempt: int) -> float:
+    """计算指数退避延迟时间"""
+    delay = min(RETRY_BASE_DELAY * (2 ** attempt), RETRY_MAX_DELAY)
+    return delay
+
+
+def fetch_url(url: str, timeout: int = REQUEST_TIMEOUT) -> Optional[str]:
     """
-    从 GitHub Trending 页面抓取数据
-    返回: list[dict] 仓库列表
+    获取 URL 内容，带重试和指数退避
+    优先使用 requests，如果不可用则使用 urllib
     """
-    if requests is None:
-        raise RuntimeError("需要 requests 库。请运行: pip install requests")
+    headers = {"User-Agent": USER_AGENT, "Accept": "text/html,application/xhtml+xml"}
 
-    url = "https://github.com/trending"
-    if language:
-        url += f"/{language}"
-    url += f"?since={since}"
+    for attempt in range(MAX_RETRIES):
+        try:
+            if HAS_REQUESTS:
+                response = requests.get(url, headers=headers, timeout=timeout)
+                response.raise_for_status()
+                return response.text
+            else:
+                req = urllib.request.Request(url, headers=headers)
+                with urllib.request.urlopen(req, timeout=timeout) as response:
+                    return response.read().decode("utf-8")
+        except Exception as e:
+            if attempt == MAX_RETRIES - 1:
+                print(f"错误: 获取 {url} 失败: {e}", file=sys.stderr)
+                return None
+            delay = exponential_backoff(attempt)
+            print(f"重试 {attempt + 1}/{MAX_RETRIES}，等待 {delay} 秒...", file=sys.stderr)
+            time.sleep(delay)
 
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        "Accept": "text/html,application/xhtml+xml"
-    }
+    return None
 
-    print(f"正在抓取: {url}")
-    try:
-        resp = requests.get(url, headers=headers, timeout=15)
-        resp.raise_for_status()
-    except requests.RequestException as e:
-        raise RuntimeError(f"网络请求失败: {e}")
 
-    # 解析 HTML（简化版，使用正则提取关键信息）
-    html = resp.text
+def parse_trending_html(html: str) -> List[Dict[str, Any]]:
+    """
+    解析 GitHub Trending 页面 HTML，提取仓库信息
+    支持 BeautifulSoup 和正则表达式两种方式
+    """
     repos = []
 
-    # 匹配仓库条目
-    pattern = re.compile(
-        r'<h2[^>]*>\s*<a[^>]*href="/([^"]+)"[^>]*>([^<]+)</a>',
-        re.IGNORECASE
-    )
-    matches = pattern.findall(html)
+    if HAS_BS4:
+        soup = BeautifulSoup(html, "html.parser")
+        article_list = soup.select("article.Box-row")
 
-    for path, name in matches[:20]:  # 最多取 20 个
-        repo = {
-            "name": path.strip(),
-            "description": "",
-            "language": language or "Unknown",
-            "stars_today": 0,
-            "total_stars": 0,
-            "forks": 0,
-            "url": f"https://github.com/{path.strip()}"
-        }
-        repos.append(repo)
+        for article in article_list:
+            try:
+                # 仓库名称
+                name_elem = article.select_one("h2 a")
+                if not name_elem:
+                    continue
+                full_name = name_elem.get("href", "").strip("/")
+                if not full_name:
+                    continue
 
-    if not repos:
-        raise RuntimeError("未能从页面解析到仓库数据，请检查网络或稍后重试")
+                # 描述
+                desc_elem = article.select_one("p")
+                description = desc_elem.get_text(strip=True) if desc_elem else ""
 
-    # 提取描述和星标数（简化处理）
-    desc_pattern = re.compile(r'<p[^>]*class="col-9[^"]*"[^>]*>([^<]+)</p>')
-    descs = desc_pattern.findall(html)
-    for i, repo in enumerate(repos):
-        if i < len(descs):
-            repo["description"] = descs[i].strip()
+                # 语言
+                lang_elem = article.select_one("[itemprop='programmingLanguage']")
+                language = lang_elem.get_text(strip=True) if lang_elem else ""
 
-    # 提取星标数
-    star_pattern = re.compile(r'<span[^>]*class="d-inline-block float-sm-right">\s*([\d,]+)\s*</span>')
-    stars = star_pattern.findall(html)
-    for i, repo in enumerate(repos):
-        if i < len(stars):
-            repo["stars_today"] = int(stars[i].replace(",", ""))
+                # Stars（总数）
+                stars_elem = article.select_one("a[href$='/stargazers']")
+                stars_total = 0
+                if stars_elem:
+                    stars_text = stars_elem.get_text(strip=True).replace(",", "")
+                    try:
+                        stars_total = int(stars_text)
+                    except ValueError:
+                        stars_total = 0
+
+                # Forks
+                forks_elem = article.select_one("a[href$='/forks']")
+                forks = 0
+                if forks_elem:
+                    forks_text = forks_elem.get_text(strip=True).replace(",", "")
+                    try:
+                        forks = int(forks_text)
+                    except ValueError:
+                        forks = 0
+
+                # 今日新增 Stars
+                today_stars_elem = article.select_one("span.d-inline-block.float-sm-right")
+                today_stars = 0
+                if today_stars_elem:
+                    today_text = today_stars_elem.get_text(strip=True)
+                    match = re.search(r'([\d,]+)', today_text)
+                    if match:
+                        try:
+                            today_stars = int(match.group(1).replace(",", ""))
+                        except ValueError:
+                            today_stars = 0
+
+                repos.append({
+                    "name": full_name,
+                    "description": description,
+                    "language": language,
+                    "stars_total": stars_total,
+                    "forks": forks,
+                    "stars_today": today_stars,
+                    "url": f"https://github.com/{full_name}",
+                })
+            except Exception as e:
+                print(f"解析仓库条目失败: {e}", file=sys.stderr)
+                continue
+
+    else:
+        # 正则表达式回退方案
+        pattern = re.compile(
+            r'<article class="Box-row">.*?'
+            r'<h2.*?<a href="/([^"]+)".*?</a>.*?</h2>.*?'
+            r'<p[^>]*>(.*?)</p>.*?'
+            r'<span[^>]*itemprop="programmingLanguage"[^>]*>(.*?)</span>.*?'
+            r'<a[^>]*href="[^"]*stargazers"[^>]*>([\d,]+)</a>.*?'
+            r'<a[^>]*href="[^"]*forks"[^>]*>([\d,]+)</a>.*?'
+            r'<span[^>]*class="d-inline-block float-sm-right"[^>]*>([^<]*)</span>',
+            re.DOTALL
+        )
+
+        for match in pattern.finditer(html):
+            try:
+                full_name = match.group(1).strip()
+                description = re.sub(r'<[^>]+>', '', match.group(2)).strip()
+                language = match.group(3).strip()
+                stars_total = int(match.group(4).replace(",", ""))
+                forks = int(match.group(5).replace(",", ""))
+                today_text = match.group(6)
+                today_match = re.search(r'([\d,]+)', today_text)
+                today_stars = int(today_match.group(1).replace(",", "")) if today_match else 0
+
+                repos.append({
+                    "name": full_name,
+                    "description": description,
+                    "language": language,
+                    "stars_total": stars_total,
+                    "forks": forks,
+                    "stars_today": today_stars,
+                    "url": f"https://github.com/{full_name}",
+                })
+            except Exception as e:
+                print(f"正则解析仓库条目失败: {e}", file=sys.stderr)
+                continue
 
     return repos
 
 
-def filter_by_language(repos, language):
-    """按语言过滤仓库列表"""
-    if not language:
-        return repos
-    lang = LANGUAGE_ALIASES.get(language.lower(), language.lower())
-    return [r for r in repos if r.get("language", "").lower() == lang]
+def filter_repos(repos: List[Dict[str, Any]], language: Optional[str] = None,
+                 limit: int = 25) -> List[Dict[str, Any]]:
+    """按语言过滤并限制数量"""
+    if language:
+        language_lower = language.lower()
+        repos = [r for r in repos if r.get("language", "").lower() == language_lower]
+
+    # 按今日 stars 排序（降序）
+    repos.sort(key=lambda x: x.get("stars_today", 0), reverse=True)
+
+    return repos[:limit]
 
 
-def generate_markdown(repos, since, language):
+def generate_markdown(repos: List[Dict[str, Any]], language: Optional[str],
+                      since: str, lang_output: str = "zh") -> str:
     """生成 Markdown 格式周报"""
     lines = []
-    lines.append("# GitHub Trending 周报\n")
-    lines.append(f"**生成时间**: {datetime.now().strftime('%Y-%m-%d %H:%M')}\n")
-    lines.append(f"**时间范围**: {SINCE_MAP.get(since, since)}")
-    lines.append(f"**语言过滤**: {language or '全部'}\n")
-    lines.append("---\n")
-    lines.append("## 热门仓库排行\n")
+    lines.append("# GitHub Trending 周报")
+    lines.append("")
+    lines.append(f"- **生成时间**: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S UTC')}")
+    lines.append(f"- **时间范围**: {since}")
+    if language:
+        lines.append(f"- **语言过滤**: {language}")
+    lines.append(f"- **仓库数量**: {len(repos)}")
+    lines.append("")
 
-    for i, repo in enumerate(repos, 1):
-        lines.append(f"### {i}. [{repo['name']}]({repo['url']})")
-        lines.append(f"- **描述**: {repo.get('description', '暂无描述')}")
-        lines.append(f"- **语言**: {repo.get('language', 'Unknown')}")
-        lines.append(f"- **今日星标**: ⭐ {repo.get('stars_today', 0):,}")
-        lines.append(f"- **总星标**: ⭐ {repo.get('total_stars', 0):,}")
-        lines.append(f"- **Fork 数**: {repo.get('forks', 0):,}")
-        lines.append("")
+    if not repos:
+        lines.append("> 未找到符合条件的仓库。")
+        return "\n".join(lines)
 
-    lines.append("---\n")
-    lines.append("*本报告由 GitHub Trending 周报生成器自动生成*\n")
+    lines.append("## 仓库列表")
+    lines.append("")
+    lines.append("| # | 仓库 | 描述 | 语言 | Stars | Forks | 今日Stars |")
+    lines.append("|---|------|------|------|-------|-------|-----------|")
+
+    for idx, repo in enumerate(repos, 1):
+        name = repo.get("name", "")
+        desc = repo.get("description", "")
+        if len(desc) > 80:
+            desc = desc[:77] + "..."
+        lang = repo.get("language", "")
+        stars = repo.get("stars_total", 0)
+        forks = repo.get("forks", 0)
+        today = repo.get("stars_today", 0)
+
+        lines.append(f"| {idx} | [{name}]({repo.get('url', '#')}) | {desc} | {lang} | {stars:,} | {forks:,} | +{today:,} |")
+
+    lines.append("")
+    lines.append("## 语言统计")
+    lines.append("")
+
+    lang_stats = {}
+    for repo in repos:
+        lang = repo.get("language", "Unknown")
+        lang_stats[lang] = lang_stats.get(lang, 0) + 1
+
+    for lang, count in sorted(lang_stats.items(), key=lambda x: x[1], reverse=True):
+        percentage = (count / len(repos)) * 100
+        lines.append(f"- {lang}: {count} ({percentage:.1f}%)")
+
+    lines.append("")
+    lines.append("---")
+    lines.append("")
+    lines.append("*本报告由 GitHub Trending Skill 自动生成*")
+
     return "\n".join(lines)
 
 
-def generate_csv(repos, output_path):
+def generate_csv(repos: List[Dict[str, Any]]) -> str:
     """生成 CSV 格式数据"""
     if not repos:
-        raise ValueError("没有可导出的数据")
+        return "name,description,language,stars_total,forks,stars_today,url\n"
 
-    fieldnames = ["name", "description", "language", "stars_today",
-                  "total_stars", "forks", "url"]
-    with open(output_path, "w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(repos)
-    return f"CSV 已保存到 {output_path}"
+    output = []
+    fieldnames = ["name", "description", "language", "stars_total", "forks", "stars_today", "url"]
+    output.append(",".join(fieldnames))
+
+    for repo in repos:
+        row = [
+            repo.get("name", ""),
+            repo.get("description", "").replace(",", " ").replace("\n", " "),
+            repo.get("language", ""),
+            str(repo.get("stars_total", 0)),
+            str(repo.get("forks", 0)),
+            str(repo.get("stars_today", 0)),
+            repo.get("url", ""),
+        ]
+        output.append(",".join(row))
+
+    return "\n".join(output)
 
 
-def generate_json(repos, output_path, since, language):
+def generate_json(repos: List[Dict[str, Any]], language: Optional[str],
+                  since: str) -> str:
     """生成 JSON 格式数据"""
     data = {
-        "generated_at": datetime.now().isoformat(),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "since": since,
         "language": language,
         "total_count": len(repos),
-        "repositories": repos
+        "repositories": repos,
     }
-    with open(output_path, "w", encoding="utf-8") as f:
-        json.dump(data, f, ensure_ascii=False, indent=2)
-    return f"JSON 已保存到 {output_path}"
+    return json.dumps(data, ensure_ascii=False, indent=2)
 
 
-def selftest():
-    """自检函数：验证核心功能"""
-    print("=" * 50)
-    print("运行自检...")
-    print("=" * 50)
-
-    # 测试语言别名映射
-    assert LANGUAGE_ALIASES["py"] == "python", "语言别名映射失败"
-    assert LANGUAGE_ALIASES["js"] == "javascript", "语言别名映射失败"
-    print("[PASS] 语言别名映射")
-
-    # 测试时间范围映射
-    assert SINCE_MAP["daily"] == "今日", "时间范围映射失败"
-    assert SINCE_MAP["weekly"] == "本周", "时间范围映射失败"
-    print("[PASS] 时间范围映射")
-
-    # 测试数据过滤
-    filtered = filter_by_language(DEMO_REPOS, "python")
-    assert len(filtered) == 3, f"Python 过滤失败，期望 3 个，实际 {len(filtered)}"
-    assert all(r["language"] == "Python" for r in filtered), "过滤结果语言不匹配"
-    print("[PASS] 语言过滤功能")
-
-    # 测试 Markdown 生成
-    md = generate_markdown(DEMO_REPOS[:3], "daily", "python")
-    assert "# GitHub Trending" in md, "Markdown 标题缺失"
-    assert "热门仓库排行" in md, "Markdown 章节缺失"
-    print("[PASS] Markdown 生成")
-
-    # 测试 CSV 生成
-    csv_path = Path("_selftest.csv")
+def atomic_write(filepath: str, content: str) -> bool:
+    """原子化写入文件"""
     try:
-        generate_csv(DEMO_REPOS[:2], csv_path)
-        assert csv_path.exists(), "CSV 文件未创建"
-        with open(csv_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        assert "name" in content, "CSV 缺少表头"
-        print("[PASS] CSV 生成")
-    finally:
-        if csv_path.exists():
-            csv_path.unlink()
+        filepath = Path(filepath)
+        filepath.parent.mkdir(parents=True, exist_ok=True)
 
-    # 测试 JSON 生成
-    json_path = Path("_selftest.json")
+        # 写入临时文件
+        temp_path = filepath.with_suffix(filepath.suffix + ".tmp")
+        with open(temp_path, "w", encoding="utf-8") as f:
+            f.write(content)
+            f.flush()
+            os.fsync(f.fileno())
+
+        # 原子替换
+        os.replace(temp_path, filepath)
+        return True
+    except Exception as e:
+        print(f"写入文件失败: {e}", file=sys.stderr)
+        return False
+
+
+def get_output_path(format_type: str, language: Optional[str], since: str) -> str:
+    """生成默认输出文件路径"""
+    today = get_today_str()
+    lang_part = f"_{safe_filename(language)}" if language else ""
+    filename = f"github_trending_{since}{lang_part}_{today}.{format_type}"
+    return str(Path(DEFAULT_OUTPUT_DIR) / filename)
+
+
+def fetch_trending_data(since: str = "daily", language: Optional[str] = None,
+                        limit: int = 25) -> List[Dict[str, Any]]:
+    """获取并解析 Trending 数据"""
+    # 构建 URL
+    url = GITHUB_TRENDING_URL
+    params = []
+    if since:
+        params.append(f"since={since}")
+    if language:
+        params.append(f"language={language}")
+    if params:
+        url += "?" + "&".join(params)
+
+    # 获取页面
+    html = fetch_url(url)
+    if not html:
+        print("错误: 无法获取 GitHub Trending 页面", file=sys.stderr)
+        return []
+
+    # 解析数据
+    repos = parse_trending_html(html)
+
+    # 过滤和限制
+    repos = filter_repos(repos, language, limit)
+
+    return repos
+
+
+def run_selftest() -> int:
+    """运行自检，验证核心功能"""
+    print("开始自检...")
+    errors = []
+
+    # 测试 1: 工具函数
     try:
-        generate_json(DEMO_REPOS[:2], json_path, "daily", "python")
-        assert json_path.exists(), "JSON 文件未创建"
-        with open(json_path, "r", encoding="utf-8") as f:
-            data = json.load(f)
-        assert data["total_count"] == 2, "JSON 数据数量错误"
-        print("[PASS] JSON 生成")
-    finally:
-        if json_path.exists():
-            json_path.unlink()
+        assert safe_filename("test/name:with*chars") == "test_name_with_chars"
+        assert get_today_str() == datetime.now(timezone.utc).strftime("%Y-%m-%d")
+        assert get_date_range(7).count("-") == 4
+        print("✓ 工具函数测试通过")
+    except AssertionError as e:
+        errors.append(f"工具函数测试失败: {e}")
+        print("✗ 工具函数测试失败")
 
-    # 测试异常处理
+    # 测试 2: 指数退避
     try:
-        generate_csv([], "test.csv")
-        assert False, "空数据应抛出异常"
-    except ValueError:
-        print("[PASS] 空数据异常处理")
+        assert exponential_backoff(0) == 2
+        assert exponential_backoff(1) == 4
+        assert exponential_backoff(2) == 8
+        assert exponential_backoff(10) == 10  # 达到上限
+        print("✓ 指数退避测试通过")
+    except AssertionError as e:
+        errors.append(f"指数退避测试失败: {e}")
+        print("✗ 指数退避测试失败")
 
-    print("=" * 50)
-    print("所有自检通过！")
-    print("=" * 50)
-    return 0
+    # 测试 3: HTML 解析（使用模拟数据）
+    try:
+        mock_html = """
+        <article class="Box-row">
+            <h2><a href="/test/repo1">test/repo1</a></h2>
+            <p>Test repository 1</p>
+            <span itemprop="programmingLanguage">Python</span>
+            <a href="/test/repo1/stargazers">1,234</a>
+            <a href="/test/repo1/forks">56</a>
+            <span class="d-inline-block float-sm-right">+89 stars today</span>
+        </article>
+        <article class="Box-row">
+            <h2><a href="/test/repo2">test/repo2</a></h2>
+            <p>Test repository 2</p>
+            <span itemprop="programmingLanguage">JavaScript</span>
+            <a href="/test/repo2/stargazers">567</a>
+            <a href="/test/repo2/forks">23</a>
+            <span class="d-inline-block float-sm-right">+45 stars today</span>
+        </article>
+        """
+        repos = parse_trending_html(mock_html)
+        assert len(repos) == 2
+        assert repos[0]["name"] == "test/repo1"
+        assert repos[0]["stars_total"] == 1234
+        assert repos[0]["stars_today"] == 89
+        assert repos[1]["language"] == "JavaScript"
+        print("✓ HTML 解析测试通过")
+    except AssertionError as e:
+        errors.append(f"HTML 解析测试失败: {e}")
+        print("✗ HTML 解析测试失败")
+
+    # 测试 4: 过滤函数
+    try:
+        test_repos = [
+            {"name": "a", "language": "Python", "stars_today": 10},
+            {"name": "b", "language": "JavaScript", "stars_today": 20},
+            {"name": "c", "language": "Python", "stars_today": 30},
+        ]
+        filtered = filter_repos(test_repos, "python", 2)
+        assert len(filtered) == 2
+        assert filtered[0]["name"] == "c"
+        assert filtered[1]["name"] == "a"
+        print("✓ 过滤函数测试通过")
+    except AssertionError as e:
+        errors.append(f"过滤函数测试失败: {e}")
+        print("✗ 过滤函数测试失败")
+
+    # 测试 5: 格式生成
+    try:
+        test_repos = [
+            {"name": "test/repo", "description": "Test", "language": "Python",
+             "stars_total": 100, "forks": 10, "stars_today": 5,
+             "url": "https://github.com/test/repo"},
+        ]
+        md = generate_markdown(test_repos, "python", "daily", "zh")
+        assert "# GitHub Trending 周报" in md
+        assert "test/repo" in md
+
+        csv_data = generate_csv(test_repos)
+        assert "name,description" in csv_data
+
+        json_data = generate_json(test_repos, "python", "daily")
+        assert "repositories" in json_data
+        print("✓ 格式生成测试通过")
+    except AssertionError as e:
+        errors.append(f"格式生成测试失败: {e}")
+        print("✗ 格式生成测试失败")
+
+    # 测试 6: 原子写入
+    try:
+        import tempfile
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".txt") as f:
+            temp_path = f.name
+        assert atomic_write(temp_path, "test content")
+        with open(temp_path, "r") as f:
+            assert f.read() == "test content"
+        os.unlink(temp_path)
+        print("✓ 原子写入测试通过")
+    except AssertionError as e:
+        errors.append(f"原子写入测试失败: {e}")
+        print("✗ 原子写入测试失败")
+
+    # 测试 7: 真实网络请求（可选，如果网络不可用则跳过）
+    try:
+        repos = fetch_trending_data(since="daily", limit=5)
+        if repos:
+            assert len(repos) > 0
+            assert "name" in repos[0]
+            print(f"✓ 真实网络请求测试通过（获取 {len(repos)} 个仓库）")
+        else:
+            print("⚠ 真实网络请求测试跳过（网络不可用或返回空）")
+    except Exception as e:
+        print(f"⚠ 真实网络请求测试跳过: {e}")
+
+    # 汇总结果
+    if errors:
+        print(f"\n自检失败: {len(errors)} 个错误")
+        for err in errors:
+            print(f"  - {err}")
+        return 1
+    else:
+        print("\n所有自检通过！")
+        return 0
 
 
 def main():
-    """主入口函数"""
-    args = parse_args()
+    parser = argparse.ArgumentParser(
+        description=SKILL_DESCRIPTION,
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="示例:\n"
+               "  python run.py --since weekly --language python --format markdown\n"
+               "  python run.py --selftest\n"
+    )
+
+    parser.add_argument("--language", type=str, default=None,
+                        help="编程语言过滤（如 python、javascript）")
+    parser.add_argument("--since", type=str, default="daily",
+                        choices=["daily", "weekly", "monthly"],
+                        help="时间范围: daily/weekly/monthly（默认: daily）")
+    parser.add_argument("--format", type=str, default="markdown",
+                        choices=["markdown", "csv", "json"],
+                        help="输出格式: markdown/csv/json（默认: markdown）")
+    parser.add_argument("--output", type=str, default=None,
+                        help="输出文件路径（默认自动生成）")
+    parser.add_argument("--limit", type=int, default=25,
+                        help="最大仓库数量 1-50（默认: 25）")
+    parser.add_argument("--language-output", type=str, default="zh",
+                        choices=["zh", "en"],
+                        help="输出语言: zh/en（默认: zh）")
+    parser.add_argument("--selftest", action="store_true",
+                        help="运行自检并退出")
+
+    args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
-        return selftest()
+        sys.exit(run_selftest())
+
+    # 参数校验
+    if not 1 <= args.limit <= 50:
+        print("错误: --limit 必须在 1-50 之间", file=sys.stderr)
+        sys.exit(1)
 
     # 获取数据
-    try:
-        if args.demo:
-            print("使用内置演示数据（离线模式）")
-            repos = DEMO_REPOS.copy()
-            # 模拟时间过滤
-            if args.since == "daily":
-                repos = [r for r in repos if r["stars_today"] > 300]
-            elif args.since == "weekly":
-                repos = [r for r in repos if r["stars_today"] > 200]
-            elif args.since == "monthly":
-                repos = [r for r in repos if r["stars_today"] > 100]
-        else:
-            repos = fetch_trending(args.language, args.since)
-            # 等待避免限流
-            time.sleep(1)
+    print(f"正在获取 GitHub Trending 数据（since={args.since}, language={args.language or '全部'}）...")
+    repos = fetch_trending_data(since=args.since, language=args.language, limit=args.limit)
 
-        # 语言过滤
-        repos = filter_by_language(repos, args.language)
+    if not repos:
+        print("错误: 未获取到任何仓库数据", file=sys.stderr)
+        sys.exit(1)
 
-        if not repos:
-            print(f"警告: 没有找到符合条件的仓库（语言={args.language or '全部'}）")
-            return 1
+    print(f"成功获取 {len(repos)} 个仓库")
 
-        # 按今日星标排序
-        repos.sort(key=lambda x: x.get("stars_today", 0), reverse=True)
+    # 生成输出
+    if args.format == "markdown":
+        content = generate_markdown(repos, args.language, args.since, args.language_output)
+    elif args.format == "csv":
+        content = generate_csv(repos)
+    else:  # json
+        content = generate_json(repos, args.language, args.since)
 
-        # 生成输出
-        if args.format == "markdown":
-            content = generate_markdown(repos, args.since, args.language)
-            with open(args.output, "w", encoding="utf-8") as f:
-                f.write(content)
-            print(f"Markdown 周报已保存到: {args.output}")
-            print(f"共 {len(repos)} 个仓库")
+    # 确定输出路径
+    output_path = args.output or get_output_path(args.format, args.language, args.since)
 
-        elif args.format == "csv":
-            msg = generate_csv(repos, args.output)
-            print(msg)
-
-        elif args.format == "json":
-            msg = generate_json(repos, args.output, args.since, args.language)
-            print(msg)
-
-        return 0
-
-    except RuntimeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except ValueError as e:
-        print(f"参数错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"未预期错误: {e}", file=sys.stderr)
-        return 1
+    # 写入文件
+    if atomic_write(output_path, content):
+        print(f"报告已生成: {output_path}")
+        # 同时输出到 stdout
+        print("\n" + "=" * 60)
+        print(content)
+    else:
+        print("错误: 写入文件失败", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

@@ -1,19 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
+
 """
-竞品拆解与差异化策略生成工具 (competitor-analysis-ai)
+competitor-analysis-ai Skill Runner
+分析竞品信息，输出结构化报告
 
-功能：
-1. 读取竞品数据（CSV/Excel/纯文本）
-2. 多维度拆解：功能、定价、用户体验、市场定位、技术架构、运营策略
-3. 生成结构化对比报告（Markdown格式）
-4. 输出差异化策略建议与风险提示
-
-用法示例：
-    python run.py --input competitors.csv --output report.md
-    python run.py --input competitors.xlsx --output report.md --mode detailed
-    python run.py --input data.txt --output report.md --top 5
-    python run.py --selftest
+支持功能：
+- 从文件/URL/命令行参数加载竞品数据
+- 多维度竞品分析（功能、定价、用户体验、市场定位、技术架构、运营）
+- 生成差异化策略建议
+- 风险提示与数据完整性检查
+- CSV 导出
+- 自测试（--selftest）
 """
 
 import argparse
@@ -21,417 +19,524 @@ import csv
 import json
 import os
 import sys
-import re
-from datetime import datetime
-from collections import OrderedDict
+import tempfile
+import time
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
+from typing import Dict, List, Optional, Any, Tuple
 
-# 尝试导入可选依赖
-try:
-    import openpyxl
-    HAS_OPENPYXL = True
-except ImportError:
-    HAS_OPENPYXL = False
+# 版本信息
+VERSION = "3.1.1"
 
-try:
-    import requests
-    HAS_REQUESTS = True
-except ImportError:
-    HAS_REQUESTS = False
+# 错误码
+ERR_SUCCESS = 0
+ERR_PARAM = 1
+ERR_INVALID_DATA = 2
+ERR_FILE_NOT_FOUND = 3
+ERR_URL_FAILED = 4
+ERR_OUTPUT_DIR = 5
 
-# ========== 核心业务逻辑 ==========
+# 网络请求配置
+REQUEST_TIMEOUT = 10  # 秒
+MAX_RETRIES = 3
+RETRY_BASE_DELAY = 1.0  # 秒
+MAX_RETRY_DELAY = 10.0  # 最大退避延迟（秒）
 
-# 分析维度定义
-ANALYSIS_DIMENSIONS = [
-    "功能特性",
-    "定价策略",
-    "用户体验",
-    "市场定位",
-    "技术架构",
-    "运营策略"
-]
+# 分析维度
+ANALYSIS_DIMENSIONS = ["features", "pricing", "ux", "positioning", "tech_stack", "operations"]
 
-# 内置行业知识库（用于策略建议）
-INDUSTRY_INSIGHTS = {
-    "SaaS": {
-        "趋势": "订阅制向按量付费演进，AI功能成为差异化关键",
-        "风险": "客户获取成本持续上升，需关注留存率",
-        "建议": "聚焦垂直场景，提供可量化的ROI证明"
-    },
-    "电商": {
-        "趋势": "社交电商与直播带货融合，供应链效率决定利润",
-        "风险": "价格战激烈，平台规则变化频繁",
-        "建议": "强化私域运营，建立品牌护城河"
-    },
-    "金融科技": {
-        "趋势": "合规成本上升，开放银行成为主流",
-        "风险": "监管政策不确定性，数据安全要求提高",
-        "建议": "与持牌机构合作，注重风控能力建设"
-    },
-    "教育": {
-        "趋势": "AI个性化学习，线上线下融合OMO模式",
-        "风险": "获客成本高，政策监管趋严",
-        "建议": "深耕内容质量，打造口碑传播"
-    },
-    "医疗健康": {
-        "趋势": "远程医疗普及，AI辅助诊断加速",
-        "风险": "数据隐私敏感，审批流程漫长",
-        "建议": "与医疗机构深度绑定，积累临床数据"
-    },
-    "默认": {
-        "趋势": "数字化转型加速，用户体验成为核心竞争点",
-        "风险": "同质化竞争严重，需持续创新",
-        "建议": "聚焦细分市场，快速迭代验证"
-    }
-}
+# 必填字段
+REQUIRED_FIELDS = ["name"]
+
+# 最大竞品数量
+MAX_COMPETITORS = 10
 
 
-class CompetitorAnalyzer:
-    """竞品分析核心引擎"""
+def load_spec() -> Dict[str, Any]:
+    """加载技能规格说明"""
+    spec_path = os.path.join(os.path.dirname(__file__), "spec.json")
+    if not os.path.exists(spec_path):
+        # 如果 spec.json 不存在，返回默认配置
+        return {
+            "name": "competitor-analysis",
+            "version": VERSION,
+            "triggers": [
+                "competitor-analysis",
+                "竞品分析",
+                "竞品对比",
+                "竞争策略",
+                "市场分析",
+                "竞品拆解",
+                "差异化定位",
+                "竞争情报"
+            ]
+        }
+    with open(spec_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def match_trigger(user_input: str) -> bool:
+    """判断输入是否匹配技能触发条件"""
+    spec = load_spec()
+    triggers = spec.get("triggers", [])
+    for trigger in triggers:
+        if trigger.lower() in user_input.lower():
+            return True
+    return False
+
+
+def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
+                         max_retries: int = MAX_RETRIES) -> str:
+    """
+    从 URL 获取数据，带超时、指数退避重试和 Retry-After 支持
     
-    def __init__(self, input_file, output_file, mode="standard", top=10):
-        self.input_file = input_file
-        self.output_file = output_file
-        self.mode = mode
-        self.top = min(top, 10)  # 最多分析10个
-        self.data = []
-        self.errors = []
-        
-    def load_data(self):
-        """加载竞品数据（支持CSV/Excel/纯文本）"""
-        if not os.path.exists(self.input_file):
-            raise FileNotFoundError(f"输入文件不存在: {self.input_file}")
-        
-        ext = os.path.splitext(self.input_file)[1].lower()
-        
-        if ext == ".csv":
-            self._load_csv()
-        elif ext in (".xlsx", ".xls"):
-            if not HAS_OPENPYXL:
-                raise ImportError("处理Excel文件需要安装openpyxl库: pip install openpyxl")
-            self._load_excel()
-        elif ext in (".txt", ".md"):
-            self._load_text()
-        else:
-            raise ValueError(f"不支持的文件格式: {ext}（支持CSV/Excel/纯文本）")
-        
-        if not self.data:
-            raise ValueError("未解析到任何竞品数据，请检查文件内容格式")
-        
-        # 限制数量
-        self.data = self.data[:self.top]
-        
-    def _load_csv(self):
-        """解析CSV文件"""
+    Args:
+        url: 数据源 URL
+        timeout: 超时时间（秒）
+        max_retries: 最大重试次数
+    
+    Returns:
+        获取到的文本内容
+    
+    Raises:
+        urllib.error.URLError: 当所有重试都失败时
+        ValueError: 当 HTTP 状态码非 2xx 时
+    """
+    last_error = None
+    for attempt in range(max_retries):
         try:
-            with open(self.input_file, "r", encoding="utf-8-sig") as f:
-                reader = csv.DictReader(f)
-                for row in reader:
-                    # 清理空字段
-                    clean_row = {k: (v.strip() if v else "") for k, v in row.items()}
-                    if clean_row.get("产品名称") or clean_row.get("name"):
-                        self.data.append(clean_row)
-        except Exception as e:
-            raise ValueError(f"CSV解析失败: {e}")
-    
-    def _load_excel(self):
-        """解析Excel文件"""
-        try:
-            wb = openpyxl.load_workbook(self.input_file, data_only=True)
-            ws = wb.active
-            headers = [cell.value for cell in ws[1]]
-            for row in ws.iter_rows(min_row=2, values_only=True):
-                if not any(row):
-                    continue
-                item = {headers[i]: (str(row[i]).strip() if row[i] else "") for i in range(len(headers))}
-                if item.get("产品名称") or item.get("name"):
-                    self.data.append(item)
-        except Exception as e:
-            raise ValueError(f"Excel解析失败: {e}")
-    
-    def _load_text(self):
-        """解析纯文本文件（按段落分割）"""
-        try:
-            with open(self.input_file, "r", encoding="utf-8") as f:
-                content = f.read()
-            
-            # 按空行分割段落
-            paragraphs = [p.strip() for p in re.split(r'\n\s*\n', content) if p.strip()]
-            
-            for para in paragraphs:
-                item = {"产品名称": para.split("\n")[0][:50]}
-                # 尝试提取关键信息
-                for line in para.split("\n"):
-                    if ":" in line:
-                        key, value = line.split(":", 1)
-                        item[key.strip()] = value.strip()
-                self.data.append(item)
-        except Exception as e:
-            raise ValueError(f"文本解析失败: {e}")
-    
-    def analyze(self):
-        """执行多维度分析"""
-        results = []
-        
-        for idx, competitor in enumerate(self.data, 1):
-            name = competitor.get("产品名称") or competitor.get("name") or f"竞品{idx}"
-            
-            # 提取各维度信息（缺失字段标注占位符）
-            analysis = {
-                "序号": idx,
-                "产品名称": name,
-                "功能特性": self._extract_field(competitor, ["功能", "features", "核心功能"]),
-                "定价策略": self._extract_field(competitor, ["定价", "价格", "price"]),
-                "用户体验": self._extract_field(competitor, ["体验", "UX", "用户评价"]),
-                "市场定位": self._extract_field(competitor, ["定位", "市场", "target"]),
-                "技术架构": self._extract_field(competitor, ["技术", "架构", "tech"]),
-                "运营策略": self._extract_field(competitor, ["运营", "策略", "operation"]),
-            }
-            
-            # 计算综合评分（基于字段完整度）
-            filled = sum(1 for v in analysis.values() if v and not v.startswith("[需核实"))
-            analysis["数据完整度"] = f"{filled}/{len(ANALYSIS_DIMENSIONS)}"
-            
-            results.append(analysis)
-        
-        return results
-    
-    def _extract_field(self, data, keys):
-        """从数据中提取字段值"""
-        for key in keys:
-            if key in data and data[key]:
-                return data[key]
-        # 尝试模糊匹配
-        for k, v in data.items():
-            if any(word in k for word in keys):
-                return v
-        return f"[需核实:{keys[0]}]"
-    
-    def generate_strategy(self, results):
-        """生成差异化策略建议"""
-        strategies = []
-        
-        # 识别行业（通过关键词匹配）
-        industry = "默认"
-        all_text = json.dumps(results, ensure_ascii=False)
-        for key in INDUSTRY_INSIGHTS:
-            if key != "默认" and key.lower() in all_text.lower():
-                industry = key
-                break
-        
-        insights = INDUSTRY_INSIGHTS[industry]
-        
-        # 分析竞品数量
-        count = len(results)
-        if count == 0:
-            return []
-        
-        # 生成基础策略
-        strategies.append({
-            "行业洞察": insights["趋势"],
-            "风险提示": insights["风险"],
-            "核心建议": insights["建议"]
-        })
-        
-        # 基于数据完整度生成建议
-        complete_count = sum(1 for r in results if r["数据完整度"].startswith("6/6"))
-        if complete_count < count * 0.5:
-            strategies.append({
-                "数据建议": "竞品数据完整度不足50%，建议补充功能、定价等关键字段后再做深度分析"
-            })
-        
-        # 定价策略分析
-        prices = []
-        for r in results:
-            price_str = r["定价策略"]
-            if price_str and not price_str.startswith("[需核实"):
-                numbers = re.findall(r'\d+', price_str)
-                if numbers:
-                    prices.append(int(numbers[0]))
-        
-        if len(prices) >= 2:
-            avg_price = sum(prices) / len(prices)
-            strategies.append({
-                "定价洞察": f"竞品平均定价约{avg_price:.0f}元，若你的产品定价在此区间，建议突出差异化价值"
-            })
-        
-        return strategies
-    
-    def generate_report(self, results, strategies):
-        """生成Markdown格式报告"""
-        now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        
-        lines = [
-            "# 竞品分析报告",
-            "",
-            f"**生成时间**: {now}",
-            f"**分析竞品数**: {len(results)}",
-            f"**分析模式**: {self.mode}",
-            "",
-            "---",
-            "",
-            "## 一、竞品概览",
-            "",
-            "| 序号 | 产品名称 | 数据完整度 | 功能特性 | 定价策略 |",
-            "|------|----------|------------|----------|----------|",
-        ]
-        
-        for r in results:
-            lines.append(
-                f"| {r['序号']} | {r['产品名称']} | {r['数据完整度']} | "
-                f"{r['功能特性'][:30] if r['功能特性'] else 'N/A'} | "
-                f"{r['定价策略'][:20] if r['定价策略'] else 'N/A'} |"
-            )
-        
-        lines.extend(["", "## 二、详细对比", ""])
-        
-        for dim in ANALYSIS_DIMENSIONS:
-            lines.append(f"### {dim}")
-            lines.append("")
-            lines.append("| 产品 | 详情 |")
-            lines.append("|------|------|")
-            for r in results:
-                value = r.get(dim, "N/A")
-                lines.append(f"| {r['产品名称']} | {value} |")
-            lines.append("")
-        
-        lines.extend(["## 三、差异化策略建议", ""])
-        
-        for i, strategy in enumerate(strategies, 1):
-            for key, value in strategy.items():
-                lines.append(f"### 建议{i}.{key}")
-                lines.append("")
-                lines.append(f"> {value}")
-                lines.append("")
-        
-        lines.extend(["---", "", "*本报告由AI自动生成，数据来源于用户提供的素材，仅供参考。*"])
-        
-        return "\n".join(lines)
-    
-    def run(self):
-        """执行完整分析流程"""
-        # 1. 加载数据
-        self.load_data()
-        
-        # 2. 执行分析
-        results = self.analyze()
-        
-        # 3. 生成策略
-        strategies = self.generate_strategy(results)
-        
-        # 4. 生成报告
-        report = self.generate_report(results, strategies)
-        
-        # 5. 输出报告
-        with open(self.output_file, "w", encoding="utf-8") as f:
-            f.write(report)
-        
-        return len(results)
+            req = urllib.request.Request(url, headers={"User-Agent": "CompetitorAnalysisSkill/3.1"})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                # 检查 HTTP 状态码
+                status_code = response.getcode()
+                if status_code < 200 or status_code >= 300:
+                    raise ValueError(f"HTTP 请求失败，状态码: {status_code}")
+                return response.read().decode("utf-8")
+        except urllib.error.HTTPError as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                # 检查 Retry-After 头
+                retry_after = e.headers.get("Retry-After")
+                if retry_after:
+                    try:
+                        delay = float(retry_after)
+                    except ValueError:
+                        # 可能是 HTTP 日期格式，使用默认退避
+                        delay = RETRY_BASE_DELAY * (2 ** attempt)
+                else:
+                    delay = RETRY_BASE_DELAY * (2 ** attempt)
+                # 限制最大延迟
+                delay = min(delay, MAX_RETRY_DELAY)
+                time.sleep(delay)
+        except urllib.error.URLError as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                delay = min(RETRY_BASE_DELAY * (2 ** attempt), MAX_RETRY_DELAY)
+                time.sleep(delay)
+        except ValueError as e:
+            # HTTP 状态码错误，不重试
+            raise e
+    raise last_error
 
 
-def selftest():
-    """自检函数：验证核心功能正常"""
-    print("=== 竞品分析工具自检 ===")
+def load_data_from_file(file_path: str) -> Dict[str, Any]:
+    """从文件加载数据"""
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"文件不存在: {file_path}")
+    with open(file_path, "r", encoding="utf-8") as f:
+        return json.load(f)
+
+
+def load_data_from_url(url: str) -> Dict[str, Any]:
+    """
+    从 URL 加载数据，支持 JSON/CSV/HTML 表格格式
     
-    # 创建测试数据
-    test_data = [
-        {"产品名称": "竞品A", "功能特性": "AI客服、数据分析", "定价策略": "99元/月", "用户体验": "界面简洁", "市场定位": "中小企业", "技术架构": "SaaS", "运营策略": "内容营销"},
-        {"产品名称": "竞品B", "功能特性": "CRM、自动化", "定价策略": "199元/月", "用户体验": "功能强大", "市场定位": "大型企业", "技术架构": "私有化部署", "运营策略": "渠道合作"},
-    ]
+    Args:
+        url: 数据源 URL
     
-    # 测试分析功能
-    analyzer = CompetitorAnalyzer.__new__(CompetitorAnalyzer)
-    analyzer.data = test_data
-    analyzer.mode = "standard"
-    
-    results = analyzer.analyze()
-    assert len(results) == 2, "分析结果数量错误"
-    assert results[0]["产品名称"] == "竞品A", "产品名称解析错误"
-    assert results[0]["功能特性"] == "AI客服、数据分析", "功能特性解析错误"
-    
-    # 测试策略生成
-    strategies = analyzer.generate_strategy(results)
-    assert len(strategies) > 0, "策略生成失败"
-    
-    # 测试报告生成
-    report = analyzer.generate_report(results, strategies)
-    assert "竞品分析报告" in report, "报告生成失败"
-    assert "差异化策略建议" in report, "策略建议缺失"
-    
-    # 测试文件IO
-    test_input = "selftest_competitors.csv"
-    test_output = "selftest_report.md"
-    
+    Returns:
+        解析后的数据字典
+    """
     try:
-        with open(test_input, "w", encoding="utf-8") as f:
-            f.write("产品名称,功能特性,定价策略,用户体验,市场定位,技术架构,运营策略\n")
-            f.write("测试产品1,AI功能,50元,良好,初创,云原生,社交媒体\n")
-            f.write("测试产品2,数据分析,80元,优秀,中型,混合架构,线下活动\n")
-        
-        analyzer2 = CompetitorAnalyzer(test_input, test_output)
-        count = analyzer2.run()
-        assert count == 2, "文件分析数量错误"
-        assert os.path.exists(test_output), "输出文件未生成"
-        
-        print("✅ 所有自检测试通过！")
-        return 0
-    finally:
-        # 清理测试文件
-        for f in [test_input, test_output]:
-            if os.path.exists(f):
-                os.remove(f)
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="竞品拆解与差异化策略生成工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""示例:
-  python run.py --input competitors.csv --output report.md
-  python run.py --input data.xlsx --output report.md --mode detailed
-  python run.py --input data.txt --output report.md --top 5
-  python run.py --selftest
-        """
-    )
-    
-    parser.add_argument("--input", "-i", help="输入文件路径（CSV/Excel/纯文本）")
-    parser.add_argument("--output", "-o", default="competitor_report.md", help="输出报告路径（默认: competitor_report.md）")
-    parser.add_argument("--mode", "-m", choices=["standard", "detailed"], default="standard", help="分析模式（默认: standard）")
-    parser.add_argument("--top", "-t", type=int, default=10, help="最多分析竞品数量，1-10（默认: 10）")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    
-    args = parser.parse_args()
-    
-    # 自检模式
-    if args.selftest:
-        sys.exit(selftest())
-    
-    # 参数校验
-    if not args.input:
-        parser.error("必须指定 --input 参数")
-    
-    if not 1 <= args.top <= 10:
-        parser.error("--top 参数必须在1-10之间")
-    
-    # 执行分析
-    try:
-        analyzer = CompetitorAnalyzer(args.input, args.output, args.mode, args.top)
-        count = analyzer.run()
-        print(f"✅ 分析完成！共分析 {count} 个竞品")
-        print(f"📄 报告已生成: {args.output}")
-        return 0
-    except FileNotFoundError as e:
-        print(f"❌ 错误: {e}", file=sys.stderr)
-        return 1
-    except ImportError as e:
-        print(f"❌ 依赖缺失: {e}", file=sys.stderr)
-        return 1
+        content = fetch_url_with_retry(url)
+    except urllib.error.URLError as e:
+        raise ConnectionError(f"URL 请求失败: {e}")
     except ValueError as e:
-        print(f"❌ 数据错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"❌ 未知错误: {e}", file=sys.stderr)
-        return 1
+        raise ConnectionError(f"URL 请求失败: {e}")
+    
+    # 尝试解析 JSON
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError:
+        pass
+    
+    # 尝试解析 CSV
+    try:
+        import io
+        csv_reader = csv.DictReader(io.StringIO(content))
+        rows = list(csv_reader)
+        if rows:
+            # 将 CSV 行转换为竞品数据
+            competitors = []
+            for row in rows:
+                comp = {}
+                for key, value in row.items():
+                    if key and value:
+                        comp[key.strip()] = value.strip()
+                if "name" in comp:
+                    competitors.append(comp)
+            if competitors:
+                return {"competitors": competitors}
+    except Exception:
+        pass
+    
+    # 尝试解析 HTML 表格
+    try:
+        import html.parser
+        
+        class TableParser(html.parser.HTMLParser):
+            def __init__(self):
+                super().__init__()
+                self.in_table = False
+                self.in_row = False
+                self.in_cell = False
+                self.current_row = []
+                self.current_cell = ""
+                self.tables = []
+                self.current_table = []
+            
+            def handle_starttag(self, tag, attrs):
+                if tag == "table":
+                    self.in_table = True
+                    self.current_table = []
+                elif tag == "tr" and self.in_table:
+                    self.in_row = True
+                    self.current_row = []
+                elif tag in ("td", "th") and self.in_row:
+                    self.in_cell = True
+                    self.current_cell = ""
+            
+            def handle_endtag(self, tag):
+                if tag == "table" and self.in_table:
+                    self.in_table = False
+                    if self.current_table:
+                        self.tables.append(self.current_table)
+                elif tag == "tr" and self.in_row:
+                    self.in_row = False
+                    if self.current_row:
+                        self.current_table.append(self.current_row)
+                elif tag in ("td", "th") and self.in_cell:
+                    self.in_cell = False
+                    self.current_row.append(self.current_cell.strip())
+            
+            def handle_data(self, data):
+                if self.in_cell:
+                    self.current_cell += data
+        
+        parser = TableParser()
+        parser.feed(content)
+        
+        if parser.tables:
+            # 使用第一个表格
+            table = parser.tables[0]
+            if len(table) > 1:
+                headers = table[0]
+                competitors = []
+                for row in table[1:]:
+                    comp = {}
+                    for i, header in enumerate(headers):
+                        if i < len(row) and header:
+                            comp[header.strip()] = row[i].strip()
+                    if "name" in comp:
+                        competitors.append(comp)
+                if competitors:
+                    return {"competitors": competitors}
+    except Exception:
+        pass
+    
+    raise ValueError("URL 返回的数据格式不支持，仅支持 JSON、CSV 或 HTML 表格")
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+def load_data_from_args(data_str: str) -> Dict[str, Any]:
+    """从命令行参数加载数据"""
+    try:
+        return json.loads(data_str)
+    except json.JSONDecodeError as e:
+        raise ValueError(f"命令行参数不是有效的 JSON: {e}")
+
+
+def validate_data(data: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    """
+    验证数据格式
+    
+    Returns:
+        (是否有效, 错误信息列表)
+    """
+    errors = []
+    if not isinstance(data, dict):
+        return False, ["数据必须是 JSON 对象"]
+    
+    competitors = data.get("competitors")
+    if competitors is None:
+        return False, ["缺少 'competitors' 字段"]
+    
+    if not isinstance(competitors, list):
+        return False, ["'competitors' 必须是数组"]
+    
+    if len(competitors) == 0:
+        return False, ["'competitors' 数组不能为空"]
+    
+    if len(competitors) > MAX_COMPETITORS:
+        errors.append(f"竞品数量超过最大限制 {MAX_COMPETITORS}，建议分批处理")
+    
+    for i, comp in enumerate(competitors):
+        if not isinstance(comp, dict):
+            errors.append(f"竞品 #{i+1} 必须是对象")
+            continue
+        
+        # 检查必填字段
+        for field in REQUIRED_FIELDS:
+            if field not in comp or comp[field] is None or comp[field] == "":
+                errors.append(f"竞品 #{i+1} 缺少必填字段 '{field}'")
+    
+    return len(errors) == 0, errors
+
+
+def analyze_competitor(competitor: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    分析单个竞品
+    
+    Args:
+        competitor: 竞品数据
+    
+    Returns:
+        分析结果
+    """
+    result = {
+        "name": competitor.get("name", "[需核实:name]"),
+        "dimensions": {}
+    }
+    
+    # 功能分析
+    features = competitor.get("features")
+    if features is None:
+        result["dimensions"]["features"] = {"status": "missing", "data": "[需核实:features]"}
+    elif isinstance(features, list):
+        result["dimensions"]["features"] = {
+            "status": "complete",
+            "data": features,
+            "count": len(features)
+        }
+    else:
+        result["dimensions"]["features"] = {"status": "invalid", "data": "[需核实:features]"}
+    
+    # 定价分析
+    pricing = competitor.get("pricing")
+    if pricing is None:
+        result["dimensions"]["pricing"] = {"status": "missing", "data": "[需核实:pricing]"}
+    elif isinstance(pricing, dict):
+        result["dimensions"]["pricing"] = {
+            "status": "complete",
+            "data": pricing
+        }
+    else:
+        result["dimensions"]["pricing"] = {"status": "invalid", "data": "[需核实:pricing]"}
+    
+    # 用户体验分析
+    ux = competitor.get("ux")
+    if ux is None:
+        result["dimensions"]["ux"] = {"status": "missing", "data": "[需核实:ux]"}
+    else:
+        result["dimensions"]["ux"] = {"status": "complete", "data": ux}
+    
+    # 市场定位分析
+    positioning = competitor.get("positioning")
+    if positioning is None:
+        result["dimensions"]["positioning"] = {"status": "missing", "data": "[需核实:positioning]"}
+    else:
+        result["dimensions"]["positioning"] = {"status": "complete", "data": positioning}
+    
+    # 技术架构分析
+    tech_stack = competitor.get("tech_stack")
+    if tech_stack is None:
+        result["dimensions"]["tech_stack"] = {"status": "missing", "data": "[需核实:tech_stack]"}
+    elif isinstance(tech_stack, list):
+        result["dimensions"]["tech_stack"] = {
+            "status": "complete",
+            "data": tech_stack,
+            "count": len(tech_stack)
+        }
+    else:
+        result["dimensions"]["tech_stack"] = {"status": "invalid", "data": "[需核实:tech_stack]"}
+    
+    # 运营策略分析
+    operations = competitor.get("operations")
+    if operations is None:
+        result["dimensions"]["operations"] = {"status": "missing", "data": "[需核实:operations]"}
+    else:
+        result["dimensions"]["operations"] = {"status": "complete", "data": operations}
+    
+    return result
+
+
+def generate_strategies(competitors: List[Dict[str, Any]]) -> List[Dict[str, str]]:
+    """
+    生成差异化策略建议
+    
+    Args:
+        competitors: 竞品列表
+    
+    Returns:
+        策略建议列表
+    """
+    strategies = []
+    
+    # 基于功能差异生成策略
+    feature_sets = []
+    for comp in competitors:
+        features = comp.get("features", [])
+        if isinstance(features, list):
+            feature_sets.append(set(features))
+    
+    if len(feature_sets) >= 2:
+        # 找出差异化功能
+        common_features = set.intersection(*feature_sets) if feature_sets else set()
+        unique_features = []
+        for i, comp in enumerate(competitors):
+            if isinstance(comp.get("features"), list):
+                unique = set(comp["features"]) - common_features
+                if unique:
+                    unique_features.append({
+                        "competitor": comp.get("name", "未知"),
+                        "unique_features": list(unique)
+                    })
+        
+        if unique_features:
+            strategies.append({
+                "type": "feature_differentiation",
+                "description": "基于功能差异化定位",
+                "suggestion": f"重点关注以下竞品的独特功能: {', '.join([f['competitor'] + ': ' + ', '.join(f['unique_features'][:3]) for f in unique_features[:3]])}"
+            })
+    
+    # 基于定价策略生成建议
+    pricing_models = []
+    for comp in competitors:
+        pricing = comp.get("pricing")
+        if isinstance(pricing, dict) and "model" in pricing:
+            pricing_models.append(pricing["model"])
+    
+    if pricing_models:
+        unique_models = list(set(pricing_models))
+        if len(unique_models) > 1:
+            strategies.append({
+                "type": "pricing_strategy",
+                "description": "定价策略差异化",
+                "suggestion": f"市场存在多种定价模式: {', '.join(unique_models)}。建议评估是否有机会采用混合定价策略。"
+            })
+    
+    # 基于市场定位生成建议
+    positions = []
+    for comp in competitors:
+        pos = comp.get("positioning")
+        if pos:
+            positions.append(pos)
+    
+    if positions:
+        strategies.append({
+            "type": "positioning",
+            "description": "市场定位分析",
+            "suggestion": f"当前市场定位包括: {', '.join(positions[:5])}。建议寻找未被覆盖的细分市场。"
+        })
+    
+    # 如果没有生成任何策略，提供通用建议
+    if not strategies:
+        strategies.append({
+            "type": "general",
+            "description": "通用策略建议",
+            "suggestion": "建议深入分析用户需求，寻找未被满足的痛点，并评估技术可行性。"
+        })
+    
+    return strategies
+
+
+def generate_risks(competitors: List[Dict[str, Any]]) -> List[Dict[str, str]]:
+    """
+    生成风险提示
+    
+    Args:
+        competitors: 竞品列表
+    
+    Returns:
+        风险列表
+    """
+    risks = []
+    
+    # 检查数据完整性风险
+    for i, comp in enumerate(competitors):
+        missing_fields = []
+        for dim in ANALYSIS_DIMENSIONS:
+            if dim not in comp or comp[dim] is None:
+                missing_fields.append(dim)
+        if missing_fields:
+            risks.append({
+                "level": "warning",
+                "type": "data_incomplete",
+                "description": f"竞品 '{comp.get('name', f'#{i+1}')}' 缺少数据: {', '.join(missing_fields)}",
+                "impact": "分析结果可能不完整"
+            })
+    
+    # 检查竞品数量风险
+    if len(competitors) > MAX_COMPETITORS:
+        risks.append({
+            "level": "warning",
+            "type": "too_many_competitors",
+            "description": f"竞品数量 ({len(competitors)}) 超过建议上限 ({MAX_COMPETITORS})",
+            "impact": "分析深度可能不足"
+        })
+    
+    # 如果没有风险，添加一个通用提示
+    if not risks:
+        risks.append({
+            "level": "info",
+            "type": "data_quality",
+            "description": "数据完整性良好",
+            "impact": "分析结果可信度较高"
+        })
+    
+    return risks
+
+
+def generate_report(data: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    生成完整分析报告
+    
+    Args:
+        data: 输入数据
+    
+    Returns:
+        报告字典
+    """
+    competitors = data.get("competitors", [])
+    
+    # 分析每个竞品
+    findings = []
+    for comp in competitors:
+        if not isinstance(comp, dict) or "name" not in comp or not comp["name"]:
+            continue
+        findings.append(analyze_competitor(comp))
+    
+    # 生成策略和风险
+    strategies = generate_strategies(competitors)
+    risks = generate_risks(competitors)
+    
+    # 数据质量检查
+    data_quality = {
+        "total_competitors": len(competitors),
+        "analyzed_competitors": len(findings),
+        "skipped_competitors": len(competitors) - len(findings),
+        "dimensions_checked": ANALYSIS_DIMENSIONS
+    }
+    
+    # 统一使用 UTC 时间
+    now_ut

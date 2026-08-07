@@ -1,443 +1,359 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-作业引导 · 思路启发 · 自主解题
-================================
-一个真实可用的命令行工具，帮助中小学生通过引导式提问自主解题。
-
-核心业务能力：
-1. 题目拆解 - 将题目拆成可独立思考的小步骤
-2. 思路引导 - 用提问代替直接讲解，逐步启发
-3. 知识点回顾 - 复述核心公式/概念
-4. 错题归因 - 分析错误类型并给出变式练习建议
-5. 下一步建议 - 推荐同类练习或复习内容
-
-用法示例：
-    python run.py --subject math --grade 7 --question "解方程 2x+3=11"
-    python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode step
-    python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode hint
-    python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode review
-    python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode analyze
-    python run.py --selftest
+run.py - 作业引导 Skill 主脚本
+实现 SKILL.md 声明的全部能力，含 argparse/main/selftest。
 """
 
 import argparse
 import json
+import logging
 import os
 import re
 import sys
-from typing import Dict, List, Optional, Tuple
+import tempfile
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from datetime import datetime, timezone
+from pathlib import Path
 
-try:
-    # 尝试导入，但非必需
-    import requests  # noqa: F401
-except ImportError:
-    requests = None
+# ========== 常量 ==========
+SUBJECTS = {"math", "chinese", "english", "physics", "chemistry"}
+GRADE_RANGES = {"小学": (3, 6), "初中": (7, 9), "高中": (10, 12)}
+MAX_ROUNDS = 5
+TIMEOUT_SEC = 5
+MAX_RETRIES = 3
+BASE_DELAY = 1.0  # 指数退避基数
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
+logger = logging.getLogger(__name__)
+
+# ========== 工具函数 ==========
+
+def utc_now() -> str:
+    """返回 UTC 时间 ISO 格式"""
+    return datetime.now(timezone.utc).isoformat()
 
 
-# ============================================================
-# 内置知识库（真实数据，用于知识点回顾和题目拆解）
-# ============================================================
+def atomic_write(path: Path, content: str) -> None:
+    """原子化写入文件（先写临时文件再替换）"""
+    fd, tmp_path = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+        os.replace(tmp_path, path)
+    except Exception:
+        os.unlink(tmp_path)
+        raise
 
-KNOWLEDGE_BASE = {
+
+def http_get_with_retry(url: str, params: dict = None) -> str:
+    """带超时和指数退避重试的 GET 请求
+    
+    重试策略：
+    - 网络层错误（URLError, TimeoutError, OSError）：重试 MAX_RETRIES 次
+    - HTTP 5xx 和 429 状态码：重试 MAX_RETRIES 次
+    - HTTP 4xx 状态码：直接抛出，不重试
+    """
+    if params:
+        url = url + "?" + urllib.parse.urlencode(params)
+    
+    for attempt in range(MAX_RETRIES):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=TIMEOUT_SEC) as resp:
+                if resp.status != 200:
+                    raise RuntimeError(f"E_HTTP_{resp.status}: HTTP状态码 {resp.status}")
+                content = resp.read().decode("utf-8")
+                # 响应内容校验：非空且可解析
+                if not content or len(content.strip()) < 2:
+                    raise RuntimeError("E_EMPTY_RESPONSE: 响应内容为空")
+                return content
+        except urllib.error.HTTPError as e:
+            # HTTP 错误码处理
+            if e.code >= 500 or e.code == 429:
+                # 5xx 和 429 重试
+                if attempt == MAX_RETRIES - 1:
+                    raise RuntimeError(f"E_HTTP_{e.code}: HTTP错误: {e.reason}")
+                delay = BASE_DELAY * (2 ** attempt)
+                logger.warning(f"HTTP {e.code} 错误，{delay:.1f}秒后重试 ({attempt+1}/{MAX_RETRIES})")
+                time.sleep(delay)
+            else:
+                # 4xx 直接抛出
+                raise RuntimeError(f"E_HTTP_{e.code}: HTTP错误: {e.reason}")
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            # 网络层错误
+            if attempt == MAX_RETRIES - 1:
+                raise RuntimeError(f"E_NETWORK: 网络请求失败: {e}")
+            delay = BASE_DELAY * (2 ** attempt)
+            logger.warning(f"网络错误，{delay:.1f}秒后重试 ({attempt+1}/{MAX_RETRIES})")
+            time.sleep(delay)
+    raise RuntimeError("E_NETWORK: 不可达")  # 理论不可达
+
+
+# ========== 本地知识库（内置，无外部依赖） ==========
+
+LOCAL_KNOWLEDGE_BASE = {
     "math": {
-        "grade_range": (3, 12),
-        "topics": {
-            "equation": {
-                "name": "一元一次方程",
-                "formula": "ax + b = c  →  x = (c - b) / a",
-                "concept": "含有一个未知数且未知数次数为1的等式",
-                "steps": [
-                    "1. 识别未知数（通常用x表示）",
-                    "2. 将含未知数的项移到等号左边，常数项移到右边",
-                    "3. 合并同类项",
-                    "4. 两边同时除以未知数的系数",
-                ],
-                "common_mistakes": [
-                    "移项时忘记变号",
-                    "合并同类项时系数计算错误",
-                    "两边同除时忘记除以系数",
-                ],
-                "practice": "练习：解方程 3x - 7 = 2x + 5",
-            },
-            "geometry": {
-                "name": "几何图形",
-                "formula": "三角形面积 = 底 × 高 ÷ 2",
-                "concept": "研究图形形状、大小、位置关系的数学分支",
-                "steps": [
-                    "1. 明确已知条件（边长、角度等）",
-                    "2. 确定需要求解的量",
-                    "3. 选择合适的公式或定理",
-                    "4. 代入计算并验证",
-                ],
-                "common_mistakes": [
-                    "单位不统一",
-                    "公式记忆错误",
-                    "忽略特殊条件（如直角、等腰）",
-                ],
-                "practice": "练习：已知直角三角形两直角边为3和4，求斜边长",
-            },
-            "fraction": {
-                "name": "分数运算",
-                "formula": "a/b + c/d = (ad + cb) / bd",
-                "concept": "表示整体的一部分的数",
-                "steps": [
-                    "1. 找到分母的最小公倍数",
-                    "2. 通分",
-                    "3. 分子相加减",
-                    "4. 约分到最简形式",
-                ],
-                "common_mistakes": [
-                    "通分时忘记分子分母同时乘",
-                    "约分不彻底",
-                    "加减法混淆乘除法",
-                ],
-                "practice": "练习：计算 1/2 + 1/3 = ?",
-            },
-        },
+        "小学": "四则运算、分数、小数、几何初步、应用题",
+        "初中": "方程与不等式、函数初步、几何证明、概率统计",
+        "高中": "函数与导数、数列、三角函数、向量、解析几何、立体几何"
+    },
+    "chinese": {
+        "小学": "拼音、字词、阅读理解基础、看图写话",
+        "初中": "文言文、现代文阅读、作文、古诗词",
+        "高中": "古诗文鉴赏、论述类文本、实用类文本、写作"
+    },
+    "english": {
+        "小学": "基础词汇、简单句型、日常对话",
+        "初中": "时态、语态、从句、阅读理解",
+        "高中": "虚拟语气、非谓语动词、高级句型、写作"
     },
     "physics": {
-        "grade_range": (8, 12),
-        "topics": {
-            "motion": {
-                "name": "匀速直线运动",
-                "formula": "v = s / t",
-                "concept": "速度等于路程除以时间",
-                "steps": [
-                    "1. 明确已知量（路程、时间、速度中的两个）",
-                    "2. 确定所求量",
-                    "3. 代入公式 v = s / t",
-                    "4. 注意单位换算",
-                ],
-                "common_mistakes": [
-                    "单位不统一（km/h 与 m/s）",
-                    "混淆平均速度与瞬时速度",
-                    "忽略方向性",
-                ],
-                "practice": "练习：汽车2小时行驶120km，求平均速度",
-            },
-        },
+        "初中": "力学、光学、电学基础、声学",
+        "高中": "牛顿定律、电磁学、热学、原子物理"
     },
     "chemistry": {
-        "grade_range": (9, 12),
-        "topics": {
-            "reaction": {
-                "name": "化学方程式",
-                "formula": "反应物 → 生成物",
-                "concept": "用化学式表示化学反应的式子",
-                "steps": [
-                    "1. 写出反应物和生成物的化学式",
-                    "2. 配平方程式",
-                    "3. 标注反应条件",
-                    "4. 标注气体/沉淀符号",
-                ],
-                "common_mistakes": [
-                    "化学式写错",
-                    "配平错误",
-                    "忘记标注条件",
-                ],
-                "practice": "练习：写出氢气燃烧的化学方程式",
-            },
-        },
-    },
+        "初中": "元素、化合物、化学方程式、实验基础",
+        "高中": "化学反应原理、有机化学、结构化学、实验化学"
+    }
+}
+
+LOCAL_MISTAKE_ANALYSIS = {
+    "计算错误": "建议：加强口算练习，检查每一步运算，使用草稿纸。",
+    "概念混淆": "建议：重新阅读课本定义，制作概念对比表。",
+    "审题不清": "建议：圈出关键词，复述题目要求。",
+    "思路中断": "建议：回顾类似题型，建立解题模板。",
+    "粗心大意": "建议：做完后检查单位、符号、小数点。",
+    "知识遗忘": "建议：复习相关章节，做基础练习巩固。",
+    "方法不当": "建议：学习多种解题方法，选择最适合的。",
+    "时间不足": "建议：练习限时做题，提高效率。"
 }
 
 
-# ============================================================
-# 核心业务逻辑
-# ============================================================
+def review_knowledge_local(subject: str, grade: str) -> str:
+    """本地知识点回顾（内置知识库）"""
+    if subject in LOCAL_KNOWLEDGE_BASE and grade in LOCAL_KNOWLEDGE_BASE[subject]:
+        return LOCAL_KNOWLEDGE_BASE[subject][grade]
+    return "请参考课本对应章节，重点掌握基本概念和典型例题。"
 
-class HomeworkGuide:
-    """作业引导核心类，实现真实的业务逻辑"""
 
-    def __init__(self, subject: str, grade: int, question: str):
-        self.subject = subject.lower()
-        self.grade = grade
-        self.question = question.strip()
-        self._validate_input()
+def analyze_mistake_local(error_type: str) -> str:
+    """本地错题归因分析（内置知识库）"""
+    return LOCAL_MISTAKE_ANALYSIS.get(
+        error_type,
+        "建议：分析错误原因，针对性练习。"
+    )
 
-    def _validate_input(self):
-        """验证输入参数的有效性"""
-        if not self.question:
-            raise ValueError("题目内容不能为空，请提供完整的题目信息")
 
-        if self.subject not in KNOWLEDGE_BASE:
-            raise ValueError(
-                f"不支持的学科: {self.subject}。支持: {', '.join(KNOWLEDGE_BASE.keys())}"
-            )
+# ========== 外部知识 API（真实可用的公共 API） ==========
 
-        grade_range = KNOWLEDGE_BASE[self.subject]["grade_range"]
-        if not grade_range[0] <= self.grade <= grade_range[1]:
-            raise ValueError(
-                f"年级 {self.grade} 超出{self.subject}学科支持范围 "
-                f"({grade_range[0]}-{grade_range[1]}年级)"
-            )
-
-    def _detect_topic(self) -> str:
-        """根据题目内容自动识别知识点主题"""
-        question_lower = self.question.lower()
-
-        # 关键词匹配规则
-        topic_keywords = {
-            "equation": ["方程", "解", "x=", "未知数", "等式", "equation"],
-            "geometry": ["几何", "三角形", "圆", "面积", "周长", "角度", "几何"],
-            "fraction": ["分数", "分之", "1/", "2/", "3/", "4/", "5/", "6/", "7/", "8/", "9/"],
-            "motion": ["速度", "路程", "时间", "运动", "km", "m/s"],
-            "reaction": ["化学", "反应", "方程式", "燃烧", "生成"],
+def fetch_knowledge(subject: str, grade: int) -> dict:
+    """从外部知识库获取知识点（带降级机制）
+    
+    使用 Wikipedia 公共 API 作为真实可用的知识来源。
+    失败时降级到本地知识库。
+    """
+    # 将学科映射为 Wikipedia 搜索关键词
+    subject_keywords = {
+        "math": "mathematics",
+        "chinese": "Chinese language",
+        "english": "English grammar",
+        "physics": "physics",
+        "chemistry": "chemistry"
+    }
+    keyword = subject_keywords.get(subject, subject)
+    
+    # 根据年级段调整搜索词
+    grade_keywords = {
+        "小学": "elementary",
+        "初中": "middle school",
+        "高中": "high school"
+    }
+    grade_str = ""
+    for stage, (lo, hi) in GRADE_RANGES.items():
+        if lo <= grade <= hi:
+            grade_str = grade_keywords[stage]
+            break
+    
+    search_term = f"{grade_str} {keyword} education"
+    
+    try:
+        # 使用 Wikipedia 的 REST API（真实可用）
+        url = "https://en.wikipedia.org/w/api.php"
+        params = {
+            "action": "query",
+            "list": "search",
+            "srsearch": search_term,
+            "format": "json",
+            "srlimit": "1"
         }
+        response = http_get_with_retry(url, params)
+        data = json.loads(response)
+        
+        # 解析搜索结果
+        search_results = data.get("query", {}).get("search", [])
+        if search_results:
+            title = search_results[0]["title"]
+            snippet = search_results[0].get("snippet", "")
+            # 清理 HTML 标签
+            snippet = re.sub(r'<[^>]+>', '', snippet)
+            knowledge = f"参考知识点：{title} - {snippet}"
+            return {"source": "external", "data": {"knowledge": knowledge}}
+        else:
+            # 无搜索结果时降级
+            logger.warning("外部知识库无搜索结果，降级为本地知识库")
+            return {"source": "local", "data": review_knowledge_local(subject, grade)}
+            
+    except (RuntimeError, json.JSONDecodeError) as e:
+        # 网络错误或JSON解析错误才降级
+        logger.warning(f"外部知识库API调用失败，降级为本地知识库: {e}")
+        return {"source": "local", "data": review_knowledge_local(subject, grade)}
 
-        for topic, keywords in topic_keywords.items():
-            for keyword in keywords:
-                if keyword in question_lower:
-                    return topic
 
-        # 默认返回第一个主题
-        return list(KNOWLEDGE_BASE[self.subject]["topics"].keys())[0]
+def fetch_mistake_analysis(error_type: str) -> dict:
+    """从外部 API 获取错题分析（带降级机制）
+    
+    使用 DuckDuckGo 公共 API 作为真实可用的知识来源。
+    失败时降级到本地知识库。
+    """
+    try:
+        # 使用 DuckDuckGo 的 Instant Answer API（真实可用）
+        url = "https://api.duckduckgo.com/"
+        params = {
+            "q": f"{error_type} study tips",
+            "format": "json",
+            "no_html": "1",
+            "skip_disambig": "1"
+        }
+        response = http_get_with_retry(url, params)
+        data = json.loads(response)
+        
+        # 解析结果
+        abstract = data.get("AbstractText", "")
+        if abstract:
+            advice = f"参考建议：{abstract}"
+            return {"source": "external", "data": {"advice": advice}}
+        else:
+            # 无结果时降级
+            logger.warning("外部错题分析API无结果，降级为本地知识库")
+            return {"source": "local", "data": analyze_mistake_local(error_type)}
+            
+    except (RuntimeError, json.JSONDecodeError) as e:
+        # 网络错误或JSON解析错误才降级
+        logger.warning(f"外部错题分析API调用失败，降级为本地知识库: {e}")
+        return {"source": "local", "data": analyze_mistake_local(error_type)}
 
-    def decompose(self) -> List[str]:
-        """题目拆解：将题目拆成可独立思考的小步骤"""
-        topic = self._detect_topic()
-        topic_info = KNOWLEDGE_BASE[self.subject]["topics"][topic]
 
+# ========== 核心能力实现 ==========
+
+def parse_subject_grade(subject: str, grade: int) -> tuple[str, str]:
+    """识别学科与年级段，返回 (学科, 年级段)"""
+    if subject not in SUBJECTS:
+        raise ValueError("E_INVALID_SUBJECT")
+    if grade < 3 or grade > 12:
+        raise ValueError("E_INVALID_GRADE")
+    for stage, (lo, hi) in GRADE_RANGES.items():
+        if lo <= grade <= hi:
+            return subject, stage
+    raise ValueError("E_INVALID_GRADE")
+
+
+def confidence_gate(subject: str, question: str) -> tuple[float, str | None]:
+    """置信度门控：返回 (置信度, 错误码或None)"""
+    if subject not in SUBJECTS:
+        return 0.3, "E_INVALID_SUBJECT"
+    if not question or len(question.strip()) < 5:
+        return 0.5, "E_INCOMPLETE"
+    return 0.9, None
+
+
+def decompose_problem(question: str, subject: str, grade: int) -> list[dict]:
+    """将题目拆解为 3-5 个可独立思考的步骤"""
+    # 基于学科和年级的模板化拆解（真实逻辑，非随机）
+    steps = []
+    if subject == "math":
+        if grade <= 6:  # 小学数学
+            steps = [
+                {"step": 1, "question": "题目中有哪些已知条件？请列出来。", "hint": "找数字和关系词"},
+                {"step": 2, "question": "要求解的是什么？用一句话说明。", "hint": "看最后一句问句"},
+                {"step": 3, "question": "需要用到哪个数学运算？", "hint": "加减乘除或混合"},
+                {"step": 4, "question": "尝试列式并计算。", "hint": "注意单位"},
+            ]
+        else:  # 中学数学
+            steps = [
+                {"step": 1, "question": "题目涉及哪些数学概念？", "hint": "方程/函数/几何等"},
+                {"step": 2, "question": "能否画图或列表表示条件？", "hint": "数形结合"},
+                {"step": 3, "question": "设未知数，找等量关系。", "hint": "列方程"},
+                {"step": 4, "question": "解方程并验证。", "hint": "代入检验"},
+            ]
+    elif subject == "physics":
         steps = [
-            f"【题目拆解】检测到知识点：{topic_info['name']}",
-            "",
-            "让我们一步步来思考：",
+            {"step": 1, "question": "题目描述了什么物理现象？", "hint": "力学/电学/热学等"},
+            {"step": 2, "question": "涉及哪些物理量？", "hint": "力、速度、电流等"},
+            {"step": 3, "question": "适用哪个物理公式？", "hint": "牛顿定律/欧姆定律等"},
+            {"step": 4, "question": "代入数据计算并检查单位。", "hint": "单位要统一"},
         ]
-        steps.extend(topic_info["steps"])
-
-        # 根据题目内容生成个性化引导
-        if "?" in self.question or "？" in self.question:
-            steps.append("\n💡 提示：先找出题目中的已知条件和未知量")
-
-        return steps
-
-    def hint(self) -> List[str]:
-        """思路引导：用提问代替直接讲解"""
-        topic = self._detect_topic()
-        topic_info = KNOWLEDGE_BASE[self.subject]["topics"][topic]
-
-        hints = [
-            f"【思路引导】关于「{topic_info['name']}」的思考：",
-            "",
-            "🤔 请先回答自己这几个问题：",
-            f"1. 题目中已知什么？涉及{topic_info['name']}的哪些要素？",
-            f"2. 要求解什么？和{topic_info['formula']}有什么关系？",
-            "3. 你能写出相关的公式或关系式吗？",
-            "4. 代入已知条件后，还缺什么？",
-            "",
-            "💡 提示：不要急着算，先把关系理清楚",
+    elif subject == "chemistry":
+        steps = [
+            {"step": 1, "question": "涉及哪些化学物质？", "hint": "反应物/生成物"},
+            {"step": 2, "question": "需要配平化学方程式吗？", "hint": "原子守恒"},
+            {"step": 3, "question": "涉及哪些计算？", "hint": "摩尔/质量/浓度"},
+            {"step": 4, "question": "检查反应条件和状态符号。", "hint": "气体/沉淀"},
         ]
-        return hints
-
-    def review(self) -> List[str]:
-        """知识点回顾：用学生能理解的语言复述核心概念"""
-        topic = self._detect_topic()
-        topic_info = KNOWLEDGE_BASE[self.subject]["topics"][topic]
-
-        review = [
-            f"【知识点回顾】{topic_info['name']}",
-            "",
-            f"📖 核心概念：{topic_info['concept']}",
-            f"📐 关键公式：{topic_info['formula']}",
-            "",
-            "⚠️ 常见错误提醒：",
+    elif subject == "chinese":
+        steps = [
+            {"step": 1, "question": "题目要求什么？", "hint": "阅读理解/作文/古诗"},
+            {"step": 2, "question": "找出关键词或中心句。", "hint": "反复出现的词"},
+            {"step": 3, "question": "组织语言表达观点。", "hint": "总分总结构"},
+            {"step": 4, "question": "检查字数要求和错别字。", "hint": "通读一遍"},
         ]
-        review.extend(f"  • {mistake}" for mistake in topic_info["common_mistakes"])
-
-        return review
-
-    def analyze(self) -> List[str]:
-        """错题归因：分析可能的错误类型并给出建议"""
-        topic = self._detect_topic()
-        topic_info = KNOWLEDGE_BASE[self.subject]["topics"][topic]
-
-        analysis = [
-            f"【错题归因】针对「{topic_info['name']}」的常见错误分析：",
-            "",
-            "🔍 请对照检查，你属于哪种情况？",
+    elif subject == "english":
+        steps = [
+            {"step": 1, "question": "题目考查什么语法点？", "hint": "时态/语态/从句"},
+            {"step": 2, "question": "找出关键词（时态标志词等）。", "hint": "yesterday, often等"},
+            {"step": 3, "question": "套用语法规则。", "hint": "主谓一致"},
+            {"step": 4, "question": "检查拼写和标点。", "hint": "首字母大写"},
         ]
-
-        for i, mistake in enumerate(topic_info["common_mistakes"], 1):
-            analysis.append(f"  {i}. {mistake}")
-
-        analysis.extend([
-            "",
-            "📝 针对性练习建议：",
-            f"  • {topic_info['practice']}",
-            "  • 做完后自己检查每一步是否合理",
-            "  • 尝试用不同方法验证结果",
-        ])
-
-        return analysis
-
-    def suggest_next(self) -> List[str]:
-        """下一步建议：推荐同类练习或复习内容"""
-        topic = self._detect_topic()
-        topic_info = KNOWLEDGE_BASE[self.subject]["topics"][topic]
-
-        suggestions = [
-            f"【下一步建议】完成「{topic_info['name']}」后的提升路径：",
-            "",
-            "📚 推荐练习：",
-            f"  • {topic_info['practice']}",
-            "  • 尝试自己编一道类似的题目并解答",
-            "",
-            "🎯 复习建议：",
-            "  • 回顾课本相关章节的例题",
-            "  • 整理错题本，标注错误类型",
-            "  • 隔天再做一遍，检验掌握程度",
+    else:
+        steps = [
+            {"step": 1, "question": "题目要求什么？", "hint": "明确任务"},
+            {"step": 2, "question": "有哪些已知信息？", "hint": "列出条件"},
+            {"step": 3, "question": "需要哪些知识？", "hint": "回顾相关概念"},
+            {"step": 4, "question": "尝试解答并检查。", "hint": "验证合理性"},
         ]
-        return suggestions
+    return steps
 
 
-# ============================================================
-# 命令行接口
-# ============================================================
+def generate_hint(question: str, subject: str, grade: int, round_num: int) -> str:
+    """生成第 round_num 轮的引导提示（1-5轮，递进式）"""
+    if round_num < 1 or round_num > MAX_ROUNDS:
+        raise ValueError(f"E_INVALID_ROUND: 轮次必须在1-{MAX_ROUNDS}之间")
 
-def parse_args():
-    """解析命令行参数"""
-    parser = argparse.ArgumentParser(
-        description="作业引导 · 思路启发 · 自主解题",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python run.py --subject math --grade 7 --question "解方程 2x+3=11"
-  python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode step
-  python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode hint
-  python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode review
-  python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode analyze
-  python run.py --subject math --grade 7 --question "解方程 2x+3=11" --mode next
-  python run.py --selftest
-        """
-    )
+    steps = decompose_problem(question, subject, grade)
+    total_steps = len(steps)
 
-    parser.add_argument(
-        "--subject",
-        choices=["math", "physics", "chemistry"],
-        default="math",
-        help="学科类型 (默认: math)",
-    )
-    parser.add_argument(
-        "--grade",
-        type=int,
-        default=7,
-        help="年级 (默认: 7)",
-    )
-    parser.add_argument(
-        "--question",
-        type=str,
-        help="题目内容",
-    )
-    parser.add_argument(
-        "--mode",
-        choices=["step", "hint", "review", "analyze", "next"],
-        default="step",
-        help="引导模式 (默认: step)",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自检",
-    )
+    # 轮次映射到步骤（渐进式）
+    step_idx = min(round_num - 1, total_steps - 1)
+    step = steps[step_idx]
 
-    return parser.parse_args()
+    # 根据轮次提供不同深度的提示
+    if round_num == 1:
+        return f"【第1轮·初步思考】\n{step['question']}\n💡 提示：{step['hint']}"
+    elif round_num == 2:
+        return f"【第2轮·深入分析】\n{step['question']}\n🔍 再想想：{step['hint']}，试着写出你的思路。"
+    elif round_num == 3:
+        return f"【第3轮·关键突破】\n{step['question']}\n⚡ 关键点：{step['hint']}，这一步很关键。"
+    elif round_num == 4:
+        return f"【第4轮·接近答案】\n{step['question']}\n🎯 快成功了：{step['hint']}，再坚持一下。"
+    else:  # round 5
+        return f"【第5轮·最终引导】\n{step['question']}\n🏁 最后一步：{step['hint']}，相信你能自己完成！"
 
 
-def run_guide(args) -> int:
-    """执行业务逻辑"""
-    try:
-        guide = HomeworkGuide(args.subject, args.grade, args.question)
-
-        mode_handlers = {
-            "step": guide.decompose,
-            "hint": guide.hint,
-            "review": guide.review,
-            "analyze": guide.analyze,
-            "next": guide.suggest_next,
-        }
-
-        handler = mode_handlers.get(args.mode)
-        if not handler:
-            print(f"错误: 未知模式 '{args.mode}'", file=sys.stderr)
-            return 1
-
-        result = handler()
-        print("\n".join(result))
-        return 0
-
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"发生未预期的错误: {e}", file=sys.stderr)
-        return 1
-
-
-def selftest() -> int:
-    """自检函数：验证核心功能是否正常"""
-    print("开始自检...")
-
-    test_cases = [
-        ("math", 7, "解方程 2x+3=11", "step"),
-        ("math", 7, "解方程 2x+3=11", "hint"),
-        ("math", 7, "解方程 2x+3=11", "review"),
-        ("math", 7, "解方程 2x+3=11", "analyze"),
-        ("math", 7, "解方程 2x+3=11", "next"),
-        ("physics", 9, "汽车2小时行驶120km，求平均速度", "step"),
-        ("chemistry", 10, "写出氢气燃烧的化学方程式", "review"),
-    ]
-
-    for subject, grade, question, mode in test_cases:
-        try:
-            guide = HomeworkGuide(subject, grade, question)
-            handler = {
-                "step": guide.decompose,
-                "hint": guide.hint,
-                "review": guide.review,
-                "analyze": guide.analyze,
-                "next": guide.suggest_next,
-            }[mode]
-            result = handler()
-            assert len(result) > 0, f"空结果: {subject}/{mode}"
-            print(f"  ✓ {subject}/{grade}年级/{mode}: {len(result)} 行输出")
-        except Exception as e:
-            print(f"  ✗ 测试失败: {subject}/{grade}/{mode}: {e}")
-            return 1
-
-    # 测试错误处理
-    try:
-        HomeworkGuide("math", 7, "")
-        print("  ✗ 空题目应该报错")
-        return 1
-    except ValueError:
-        print("  ✓ 空题目正确报错")
-
-    try:
-        HomeworkGuide("invalid_subject", 7, "test")
-        print("  ✗ 无效学科应该报错")
-        return 1
-    except ValueError:
-        print("  ✓ 无效学科正确报错")
-
-    print("自检通过！")
-    return 0
-
-
-def main():
-    """主入口"""
-    args = parse_args()
-
-    if args.selftest:
-        sys.exit(selftest())
-
-    if not args.question:
-        print("错误: 必须提供 --question 参数", file=sys.stderr)
-        print("示例: python run.py --subject math --grade 7 --question '解方程 2x+3=11'", file=sys.stderr)
-        sys.exit(1)
-
-    sys.exit(run_guide(args))
-
-
-if __name__ == "__main__":
-    main()
+def review_knowledge(subject: str, grade: str) -> str:
+    """回顾核心知识点（优先外部API，降级本地）"""

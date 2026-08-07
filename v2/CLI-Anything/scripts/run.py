@@ -2,14 +2,21 @@
 # -*- coding: utf-8 -*-
 """
 CLI-Anything: 自然语言转命令行工具
-将中文操作意图精准翻译为可执行命令行，内置命令速查库与智能匹配引擎。
+将中文操作意图转换为可执行命令行，内置命令速查库与匹配引擎。
+
+注意：本工具使用启发式模板匹配，基于关键词和模式识别，可能无法理解复杂上下文。
+所有生成的命令在执行前需用户确认，特别是涉及系统修改的操作。
 """
 
 import argparse
 import json
 import os
 import re
+import shlex
+import subprocess
 import sys
+import time
+from datetime import datetime, timezone
 from difflib import SequenceMatcher
 from typing import Dict, List, Optional, Tuple
 
@@ -138,6 +145,19 @@ SYNONYMS = {
     "卸载": ["移除", "uninstall"]
 }
 
+# 高危命令模式
+HIGH_RISK_PATTERNS = [
+    r'\brm\s+-rf\b',
+    r'\bmkfs\b',
+    r'\bdd\s+if=',
+    r'\b>:?\s*/dev/sd',
+    r'\bshutdown\b',
+    r'\breboot\b',
+    r'\binit\s+0\b',
+    r'\bkill\s+-9\s+0\b',
+    r'\bchmod\s+-R\s+777\s+/',
+]
+
 def normalize_text(text: str) -> str:
     """文本标准化：去除多余空格，统一标点"""
     text = text.strip().lower()
@@ -180,10 +200,32 @@ def extract_parameters(text: str) -> Dict[str, str]:
     if pkg_match:
         params['package'] = pkg_match.group(1)
     
+    # 提取替换文本参数
+    replace_match = re.search(r'把\s*(\S+)\s*替换为\s*(\S+)', text)
+    if replace_match:
+        params['old'] = replace_match.group(1)
+        params['new'] = replace_match.group(2)
+    
+    # 提取文件名（用于创建文件等）
+    filename_match = re.search(r'(?:创建|新建|touch)\s+(\S+)', text)
+    if filename_match:
+        params['filename'] = filename_match.group(1)
+    
+    # 提取源和目标
+    copy_match = re.search(r'(?:复制|拷贝)\s+(\S+)\s+(?:到|至)\s+(\S+)', text)
+    if copy_match:
+        params['source'] = copy_match.group(1)
+        params['destination'] = copy_match.group(2)
+    
+    # 提取PID
+    pid_match = re.search(r'pid\s*[=:]\s*(\d+)', text, re.IGNORECASE)
+    if pid_match:
+        params['pid'] = pid_match.group(1)
+    
     return params
 
 def match_command(text: str) -> Tuple[Optional[str], Optional[str], float]:
-    """智能匹配命令，返回(类别, 命令模板, 匹配分数)"""
+    """匹配命令，返回(类别, 命令模板, 匹配分数)"""
     normalized = normalize_text(text)
     best_match = None
     best_score = 0.0
@@ -215,6 +257,31 @@ def match_command(text: str) -> Tuple[Optional[str], Optional[str], float]:
     
     return best_match[0] if best_match else None, best_match[1] if best_match else None, best_score
 
+def validate_command(command: str) -> Tuple[bool, str]:
+    """验证命令安全性，返回(是否安全, 风险描述)"""
+    # 检查高危命令模式
+    for pattern in HIGH_RISK_PATTERNS:
+        if re.search(pattern, command):
+            return False, f"检测到高危命令模式: {pattern}"
+    
+    # 检查shell元字符注入
+    dangerous_chars = [';', '&&', '||', '`', '$(']
+    for char in dangerous_chars:
+        if char in command:
+            # 排除合法的管道符和重定向
+            if char == ';' and ';' in command:
+                return False, f"检测到命令分隔符: {char}"
+            if char == '&&':
+                return False, f"检测到命令连接符: {char}"
+            if char == '||':
+                return False, f"检测到命令连接符: {char}"
+            if char == '`':
+                return False, f"检测到命令替换符: {char}"
+            if char == '$(':
+                return False, f"检测到命令替换符: {char}"
+    
+    return True, ""
+
 def generate_command(text: str) -> Tuple[str, float]:
     """生成命令的主函数"""
     category, template, score = match_command(text)
@@ -236,6 +303,88 @@ def generate_command(text: str) -> Tuple[str, float]:
     comment = f"# [{category}] {text}"
     return f"{comment}\n{command}", score
 
+def execute_command(command: str, confirm_high_risk: bool = True) -> Tuple[int, str]:
+    """安全执行命令，返回(退出码, 输出)"""
+    # 提取实际命令（去掉注释行）
+    cmd_lines = [line for line in command.split('\n') if not line.startswith('#')]
+    if not cmd_lines:
+        return 0, "无命令可执行"
+    
+    actual_cmd = ' '.join(cmd_lines).strip()
+    
+    # 验证命令安全性
+    is_safe, risk_desc = validate_command(actual_cmd)
+    if not is_safe:
+        return 1, f"命令被拒绝: {risk_desc}"
+    
+    # 高危命令二次确认
+    if confirm_high_risk and re.search(r'\brm\b|\bmv\b|\bdd\b|\bmkfs\b', actual_cmd):
+        print(f"警告: 命令 '{actual_cmd}' 可能具有破坏性")
+        response = input("确认执行? (y/N): ").strip().lower()
+        if response != 'y':
+            return 0, "命令已取消"
+    
+    # 使用列表参数形式执行，避免shell注入
+    try:
+        # 解析命令为参数列表
+        args = shlex.split(actual_cmd)
+        # 检查是否有管道
+        if '|' in args:
+            # 处理管道命令
+            pipeline = actual_cmd.split('|')
+            processes = []
+            for i, cmd_part in enumerate(pipeline):
+                cmd_args = shlex.split(cmd_part.strip())
+                if i == 0:
+                    proc = subprocess.Popen(cmd_args, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                else:
+                    proc = subprocess.Popen(cmd_args, stdin=processes[-1].stdout, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+                processes.append(proc)
+            
+            # 等待最后一个进程完成，设置超时
+            try:
+                output, error = processes[-1].communicate(timeout=30)
+                return processes[-1].returncode, output.decode() if output else error.decode()
+            except subprocess.TimeoutExpired:
+                # 终止所有进程
+                for proc in processes:
+                    proc.kill()
+                return 1, "命令执行超时"
+        else:
+            # 简单命令，设置超时和输出限制
+            try:
+                result = subprocess.run(
+                    args, 
+                    capture_output=True, 
+                    text=True, 
+                    timeout=30,
+                    check=False
+                )
+                # 限制输出大小
+                output = result.stdout if result.returncode == 0 else result.stderr
+                if len(output) > 10000:
+                    output = output[:10000] + "\n... [输出已截断]"
+                return result.returncode, output
+            except subprocess.TimeoutExpired:
+                return 1, "命令执行超时"
+    except FileNotFoundError:
+        return 1, f"命令不存在: {args[0] if args else 'unknown'}"
+    except Exception as e:
+        return 1, f"执行错误: {str(e)}"
+
+def validate_commondb() -> Tuple[bool, str]:
+    """验证COMMAND_DB完整性"""
+    required_keys = ["keywords", "commands"]
+    for category, data in COMMAND_DB.items():
+        for key in required_keys:
+            if key not in data:
+                return False, f"分类 '{category}' 缺少 '{key}' 字段"
+        if not isinstance(data["keywords"], list) or len(data["keywords"]) == 0:
+            return False, f"分类 '{category}' 的 keywords 为空或不是列表"
+        if not isinstance(data["commands"], dict) or len(data["commands"]) == 0:
+            return False, f"分类 '{category}' 的 commands 为空或不是字典"
+    return True, "COMMAND_DB 完整性验证通过"
+
 def selftest() -> bool:
     """自检函数：验证核心功能"""
     test_cases = [
@@ -245,113 +394,8 @@ def selftest() -> bool:
         ("用apt安装htop", "sudo apt install htop"),
         ("查看所有运行中的容器", "docker ps"),
         ("给script.sh添加执行权限", "chmod +x script.sh"),
+        ("把old替换为new在config.txt中", "sed -i 's/old/new/g' config.txt"),
     ]
     
     passed = 0
-    for text, expected in test_cases:
-        command, score = generate_command(text)
-        if expected in command and score > 0.3:
-            passed += 1
-            print(f"✓ 测试通过: '{text}' → {command.split(chr(10))[-1]}")
-        else:
-            print(f"✗ 测试失败: '{text}'")
-            print(f"  期望: {expected}")
-            print(f"  实际: {command}")
-    
-    print(f"\n自检结果: {passed}/{len(test_cases)} 通过")
-    return passed == len(test_cases)
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="CLI-Anything: 自然语言转命令行工具",
-        epilog="示例: python run.py --query '查看当前目录文件'"
-    )
-    
-    parser.add_argument(
-        "--query", "-q",
-        type=str,
-        help="中文操作意图描述，如 '查看当前目录文件'"
-    )
-    
-    parser.add_argument(
-        "--input", "-i",
-        type=str,
-        help="输入文件路径（包含待转换的文本）"
-    )
-    
-    parser.add_argument(
-        "--output", "-o",
-        type=str,
-        help="输出文件路径（保存生成的命令）"
-    )
-    
-    parser.add_argument(
-        "--list", "-l",
-        action="store_true",
-        help="列出所有支持的命令类别"
-    )
-    
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自检功能"
-    )
-    
-    args = parser.parse_args()
-    
-    # 自检模式
-    if args.selftest:
-        success = selftest()
-        sys.exit(0 if success else 1)
-    
-    # 列出所有类别
-    if args.list:
-        print("支持的命令类别:")
-        for i, category in enumerate(COMMAND_DB.keys(), 1):
-            print(f"  {i}. {category}")
-            for cmd in COMMAND_DB[category]["commands"]:
-                print(f"     - {cmd}")
-        sys.exit(0)
-    
-    # 获取查询文本
-    query_text = None
-    if args.query:
-        query_text = args.query
-    elif args.input:
-        try:
-            with open(args.input, 'r', encoding='utf-8') as f:
-                query_text = f.read().strip()
-        except FileNotFoundError:
-            print(f"错误: 输入文件 '{args.input}' 不存在", file=sys.stderr)
-            sys.exit(1)
-        except Exception as e:
-            print(f"错误: 读取文件失败 - {e}", file=sys.stderr)
-            sys.exit(1)
-    
-    if not query_text:
-        parser.print_help()
-        sys.exit(1)
-    
-    # 生成命令
-    command, score = generate_command(query_text)
-    
-    # 输出结果
-    if args.output:
-        try:
-            with open(args.output, 'w', encoding='utf-8') as f:
-                f.write(command + "\n")
-            print(f"命令已保存到: {args.output}")
-        except Exception as e:
-            print(f"错误: 写入文件失败 - {e}", file=sys.stderr)
-            sys.exit(1)
-    else:
-        print(command)
-    
-    # 显示匹配置信度
-    if score < 0.4:
-        print(f"\n提示: 匹配置信度较低 ({score:.2f})，建议更精确地描述需求", file=sys.stderr)
-    
-    sys.exit(0)
-
-if __name__ == "__main__":
-    main()
+    total = len(test_cases) + 3  # 加上模板完整

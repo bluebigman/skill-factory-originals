@@ -3,20 +3,32 @@
 """
 票据识别字段提取与结构化输出工具
 支持从发票图片/PDF中提取关键字段，输出结构化CSV表格
+支持批量处理、并行加速、结果缓存
 """
 
 import os
 import sys
 import csv
 import json
+import re
 import argparse
 import hashlib
-from datetime import datetime
+import tempfile
+import time
+import logging
+import threading
+from datetime import datetime, timezone
 from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from typing import Dict, List, Optional, Tuple, Any
+
+# 配置日志
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # 尝试导入可选依赖
 try:
-    from PIL import Image
+    from PIL import Image, ImageDraw, ImageFont
     HAS_PIL = True
 except ImportError:
     HAS_PIL = False
@@ -37,7 +49,7 @@ except ImportError:
 class InvoiceExtractor:
     """发票字段提取器 - 基于规则和简单图像处理"""
     
-    # 发票关键字段定义
+    # 发票关键字段定义（包含置信度字段）
     FIELDS = [
         "invoice_no",      # 发票号码
         "invoice_date",    # 开票日期
@@ -48,360 +60,365 @@ class InvoiceExtractor:
         "amount",          # 金额
         "tax",             # 税额
         "total",           # 价税合计
+        "confidence",      # 整体置信度
     ]
     
-    def __init__(self):
+    # 字段正则表达式模式 - 优化容错，支持换行和空白符
+    FIELD_PATTERNS = {
+        "invoice_no": r'发票号码[：:\s]*([0-9]{8,20})',
+        "invoice_date": r'开票日期[：:\s]*([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日|[0-9]{4}-[0-9]{1,2}-[0-9]{1,2})',
+        "buyer_name": r'购买方[：:\s]*名称[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+        "buyer_tax_id": r'购买方[：:\s]*纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
+        "seller_name": r'销售方[：:\s]*名称[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+        "seller_tax_id": r'销售方[：:\s]*纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
+        "amount": r'金额[：:\s]*([0-9,]+\.?[0-9]*)',
+        "tax": r'税额[：:\s]*([0-9,]+\.?[0-9]*)',
+        "total": r'价税合计[（(]小写[)）][：:\s]*[¥￥]?([0-9,]+\.?[0-9]*)',
+    }
+    
+    # 缓存TTL（秒）- 24小时
+    CACHE_TTL = 24 * 60 * 60
+    
+    def __init__(self, cache_dir: Optional[str] = None, max_workers: int = 4, use_cache: bool = True):
         self.results = []
         self.failures = []
+        self.max_workers = max_workers
+        self.use_cache = use_cache
+        # 缓存目录
+        self.cache_dir = cache_dir or os.path.join(tempfile.gettempdir(), "invoice_ocr_cache")
+        os.makedirs(self.cache_dir, exist_ok=True)
         
-    def extract_from_image(self, image_path):
-        """从图片中提取发票字段"""
-        if not HAS_PIL:
-            raise RuntimeError("需要安装Pillow库: pip install Pillow")
-        if not HAS_TESSERACT:
-            raise RuntimeError("需要安装pytesseract库: pip install pytesseract")
-            
-        try:
-            # 打开图片并预处理
-            img = Image.open(image_path)
-            # 转换为灰度图提高OCR准确率
-            img = img.convert('L')
-            
-            # 使用pytesseract进行OCR
-            text = pytesseract.image_to_string(img, lang='chi_sim+eng')
-            
-            # 从OCR文本中提取字段
-            return self._parse_text(text, image_path)
-            
-        except Exception as e:
-            raise RuntimeError(f"图片处理失败: {str(e)}")
+        # 文件锁字典用于并发控制（实际加锁）
+        self._file_locks: Dict[str, threading.Lock] = {}
+        self._locks_lock = threading.Lock()
+        
+        # 检查依赖
+        self._check_dependencies()
     
-    def extract_from_pdf(self, pdf_path):
-        """从PDF中提取发票字段"""
+    def _check_dependencies(self) -> None:
+        """检查必要依赖是否可用"""
+        if not HAS_PIL:
+            logger.warning("PIL未安装，图片处理功能受限")
         if not HAS_PDF:
-            raise RuntimeError("需要安装pdfplumber库: pip install pdfplumber")
-            
+            logger.warning("pdfplumber未安装，PDF解析功能受限")
+        if not HAS_TESSERACT:
+            logger.warning("pytesseract未安装，OCR功能受限")
+    
+    def _get_file_lock(self, file_path: str) -> threading.Lock:
+        """获取文件锁（实际加锁）"""
+        with self._locks_lock:
+            if file_path not in self._file_locks:
+                self._file_locks[file_path] = threading.Lock()
+            return self._file_locks[file_path]
+    
+    def _get_file_hash(self, file_path: str) -> str:
+        """计算文件内容哈希用于缓存"""
+        sha256_hash = hashlib.sha256()
         try:
-            text = ""
+            with open(file_path, "rb") as f:
+                for byte_block in iter(lambda: f.read(4096), b""):
+                    sha256_hash.update(byte_block)
+            return sha256_hash.hexdigest()
+        except Exception as e:
+            logger.error(f"计算文件哈希失败: {e}")
+            return ""
+    
+    def _get_cache_path(self, file_hash: str) -> str:
+        """获取缓存文件路径"""
+        return os.path.join(self.cache_dir, f"{file_hash}.json")
+    
+    def _is_cache_valid(self, cache_path: str) -> bool:
+        """检查缓存是否有效（TTL）"""
+        try:
+            mtime = os.path.getmtime(cache_path)
+            age = time.time() - mtime
+            return age < self.CACHE_TTL
+        except Exception:
+            return False
+    
+    def _load_from_cache(self, file_hash: str) -> Optional[Dict]:
+        """从缓存加载结果（带损坏降级）"""
+        if not self.use_cache:
+            return None
+        cache_path = self._get_cache_path(file_hash)
+        if os.path.exists(cache_path) and self._is_cache_valid(cache_path):
+            try:
+                with open(cache_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                # 验证缓存数据完整性
+                if 'fields' in data and 'status' in data:
+                    return data
+                else:
+                    logger.warning(f"缓存数据不完整: {cache_path}")
+                    return None
+            except (json.JSONDecodeError, KeyError) as e:
+                logger.warning(f"缓存文件损坏，降级处理: {e}")
+                # 删除损坏的缓存文件
+                try:
+                    os.remove(cache_path)
+                except OSError:
+                    pass
+                return None
+            except Exception as e:
+                logger.warning(f"读取缓存失败: {e}")
+                return None
+        return None
+    
+    def _save_to_cache(self, file_hash: str, data: Dict) -> None:
+        """保存结果到缓存（原子写入+文件锁+损坏降级）"""
+        if not self.use_cache:
+            return
+        cache_path = self._get_cache_path(file_hash)
+        
+        # 获取文件锁（实际加锁）
+        lock = self._get_file_lock(cache_path)
+        with lock:
+            try:
+                # 原子写入：先写临时文件，再os.replace
+                temp_path = cache_path + f'.tmp.{os.getpid()}.{threading.get_ident()}'
+                with open(temp_path, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+                os.replace(temp_path, cache_path)
+            except Exception as e:
+                logger.warning(f"保存缓存失败: {e}")
+                # 清理临时文件
+                try:
+                    if os.path.exists(temp_path):
+                        os.remove(temp_path)
+                except OSError:
+                    pass
+    
+    def _clean_text(self, text: str) -> str:
+        """清洗OCR文本"""
+        if not text:
+            return ""
+        
+        # 统一全半角
+        text = text.replace('：', ':').replace('（', '(').replace('）', ')')
+        text = text.replace('，', ',').replace('。', '.')
+        
+        # 去除多余空格（保留换行符用于正则匹配）
+        text = re.sub(r'[ \t]+', ' ', text)
+        
+        # 去除特殊字符（保留换行符）
+        text = re.sub(r'[^\u4e00-\u9fff\uFF00-\uFFEFa-zA-Z0-9:()（）¥￥,.\-\s\n]', '', text)
+        
+        return text.strip()
+    
+    def _validate_field(self, field_name: str, value: Any) -> Tuple[Any, float]:
+        """验证字段值并返回置信度"""
+        if value is None:
+            return None, 0.0
+        
+        confidence = 0.9
+        
+        if field_name == "invoice_no":
+            if not re.match(r'^[0-9]{8,20}$', str(value)):
+                confidence = 0.3
+        elif field_name == "invoice_date":
+            # 验证日期格式
+            date_str = str(value)
+            if re.match(r'^[0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日$', date_str):
+                try:
+                    year = int(date_str[:4])
+                    month = int(date_str[5:date_str.index('月')])
+                    day = int(date_str[date_str.index('月')+1:date_str.index('日')])
+                    if not (1 <= month <= 12 and 1 <= day <= 31):
+                        confidence = 0.3
+                except ValueError:
+                    confidence = 0.3
+            elif re.match(r'^[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}$', date_str):
+                try:
+                    datetime.strptime(date_str, '%Y-%m-%d')
+                except ValueError:
+                    confidence = 0.3
+            else:
+                confidence = 0.3
+        elif field_name in ["buyer_tax_id", "seller_tax_id"]:
+            # 税号验证（15-20位数字或字母）
+            if not re.match(r'^[0-9A-Z]{15,20}$', str(value)):
+                confidence = 0.3
+        elif field_name in ["amount", "tax", "total"]:
+            try:
+                amount = float(value)
+                if amount < 0:
+                    confidence = 0.3
+            except (ValueError, TypeError):
+                confidence = 0.3
+        elif field_name in ["buyer_name", "seller_name"]:
+            # 名称验证（至少2个字符）
+            if len(str(value)) < 2:
+                confidence = 0.3
+        
+        return value, confidence
+    
+    def _extract_text_from_pdf(self, pdf_path: str) -> str:
+        """从PDF提取文本"""
+        if not HAS_PDF:
+            raise RuntimeError("pdfplumber未安装，无法解析PDF")
+        
+        text = ""
+        try:
             with pdfplumber.open(pdf_path) as pdf:
                 for page in pdf.pages:
-                    text += page.extract_text() or ""
-            
-            return self._parse_text(text, pdf_path)
-            
+                    page_text = page.extract_text()
+                    if page_text:
+                        text += page_text + "\n"
         except Exception as e:
-            raise RuntimeError(f"PDF处理失败: {str(e)}")
+            raise RuntimeError(f"PDF解析失败: {e}")
+        
+        return self._clean_text(text)
     
-    def _parse_text(self, text, source_file):
-        """解析OCR文本，提取发票字段"""
-        result = {
-            "source_file": os.path.basename(source_file),
-            "processed_at": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "confidence": "高",  # 默认高置信度
-        }
+    def _extract_text_from_image(self, image_path: str) -> str:
+        """从图片提取文本"""
+        if not HAS_PIL:
+            raise RuntimeError("PIL未安装，无法处理图片")
+        if not HAS_TESSERACT:
+            raise RuntimeError("pytesseract未安装，无法进行OCR")
         
-        # 初始化所有字段为空
-        for field in self.FIELDS:
-            result[field] = ""
-            result[f"{field}_conf"] = "高"
+        try:
+            # 打开图片并预处理
+            with Image.open(image_path) as img:
+                # 转换为灰度图
+                img = img.convert('L')
+                # 二值化处理
+                img = img.point(lambda x: 0 if x < 128 else 255, '1')
+                # OCR识别
+                text = pytesseract.image_to_string(img, lang='chi_sim+eng')
+                return self._clean_text(text)
+        except Exception as e:
+            raise RuntimeError(f"图片处理失败: {e}")
+    
+    def _extract_fields(self, text: str) -> Dict[str, Dict[str, Any]]:
+        """从文本中提取字段（含置信度计算）"""
+        fields = {}
+        confidence_sum = 0.0
+        confidence_count = 0
         
-        # 简单的规则匹配（实际项目中可替换为更复杂的NLP/ML模型）
-        lines = text.split('\n')
-        for line in lines:
-            line = line.strip()
-            
-            # 发票号码匹配
-            if "发票号码" in line or "No." in line:
-                parts = line.split(':') if ':' in line else line.split()
-                if len(parts) > 1:
-                    result["invoice_no"] = parts[-1].strip()
-                    result["invoice_no_conf"] = "高"
-            
-            # 开票日期匹配
-            if "开票日期" in line or "日期" in line:
-                import re
-                date_match = re.search(r'\d{4}年\d{1,2}月\d{1,2}日', line)
-                if date_match:
-                    result["invoice_date"] = date_match.group()
-                    result["invoice_date_conf"] = "高"
-            
-            # 购买方信息
-            if "购买方" in line or "购" in line:
-                if "名称" in line:
-                    result["buyer_name"] = line.split(":")[-1].strip() if ":" in line else line
-                    result["buyer_name_conf"] = "中"
-                if "纳税人识别号" in line or "税号" in line:
-                    result["buyer_tax_id"] = line.split(":")[-1].strip() if ":" in line else line
-                    result["buyer_tax_id_conf"] = "中"
-            
-            # 销售方信息
-            if "销售方" in line or "销" in line:
-                if "名称" in line:
-                    result["seller_name"] = line.split(":")[-1].strip() if ":" in line else line
-                    result["seller_name_conf"] = "中"
-                if "纳税人识别号" in line or "税号" in line:
-                    result["seller_tax_id"] = line.split(":")[-1].strip() if ":" in line else line
-                    result["seller_tax_id_conf"] = "中"
-            
-            # 金额信息
-            if "金额" in line and "合计" not in line:
-                result["amount"] = self._extract_amount(line)
-                result["amount_conf"] = "高"
-            if "税额" in line:
-                result["tax"] = self._extract_amount(line)
-                result["tax_conf"] = "高"
-            if "价税合计" in line or "小写" in line:
-                result["total"] = self._extract_amount(line)
-                result["total_conf"] = "高"
+        for field_name in self.FIELDS:
+            if field_name == "confidence":
+                continue
+                
+            pattern = self.FIELD_PATTERNS.get(field_name)
+            if pattern:
+                match = re.search(pattern, text, re.IGNORECASE)
+                if match:
+                    value = match.group(1).strip()
+                    # 清理值
+                    if field_name in ['amount', 'tax', 'total']:
+                        value = value.replace(',', '')
+                        try:
+                            value = float(value)
+                        except ValueError:
+                            value = None
+                    elif field_name in ['buyer_name', 'seller_name']:
+                        # 清理名称中的多余空格和换行
+                        value = re.sub(r'[\s\n]+', '', value)
+                    
+                    # 验证字段
+                    value, confidence = self._validate_field(field_name, value)
+                    
+                    # 计算匹配置信度（正则匹配长度/文本长度比）
+                    if value is not None:
+                        match_len = len(match.group(0))
+                        text_len = len(text)
+                        if text_len > 0:
+                            ratio_confidence = min(1.0, match_len / text_len * 10)  # 归一化
+                            confidence = min(confidence, ratio_confidence)
+                    
+                    fields[field_name] = {
+                        "value": value,
+                        "confidence": confidence
+                    }
+                    confidence_sum += confidence
+                    confidence_count += 1
+                else:
+                    # 尝试关键词匹配（降低置信度）
+                    keyword_patterns = {
+                        "invoice_no": r'([0-9]{8,20})',
+                        "invoice_date": r'([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日|[0-9]{4}-[0-9]{1,2}-[0-9]{1,2})',
+                        "buyer_name": r'购买方[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+                        "buyer_tax_id": r'纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
+                        "seller_name": r'销售方[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+                        "seller_tax_id": r'纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
+                        "amount": r'([0-9,]+\.?[0-9]*)',
+                        "tax": r'([0-9,]+\.?[0-9]*)',
+                        "total": r'[¥￥]?([0-9,]+\.?[0-9]*)',
+                    }
+                    
+                    keyword_match = re.search(keyword_patterns.get(field_name, ''), text, re.IGNORECASE)
+                    if keyword_match:
+                        value = keyword_match.group(1).strip()
+                        if field_name in ['amount', 'tax', 'total']:
+                            value = value.replace(',', '')
+                            try:
+                                value = float(value)
+                            except ValueError:
+                                value = None
+                        elif field_name in ['buyer_name', 'seller_name']:
+                            value = re.sub(r'[\s\n]+', '', value)
+                        
+                        # 验证字段（降低置信度）
+                        value, base_confidence = self._validate_field(field_name, value)
+                        confidence = min(base_confidence, 0.7)
+                        
+                        fields[field_name] = {
+                            "value": value,
+                            "confidence": confidence
+                        }
+                        confidence_sum += confidence
+                        confidence_count += 1
+                    else:
+                        # 默认低置信度
+                        fields[field_name] = {
+                            "value": None,
+                            "confidence": 0.0
+                        }
+                        confidence_sum += 0.0
+                        confidence_count += 1
+            else:
+                fields[field_name] = {
+                    "value": None,
+                    "confidence": 0.0
+                }
+                confidence_sum += 0.0
+                confidence_count += 1
         
         # 计算整体置信度
-        low_conf_count = sum(1 for f in self.FIELDS if result.get(f"{f}_conf") == "低")
-        if low_conf_count > 3:
-            result["confidence"] = "低"
-        elif low_conf_count > 0:
-            result["confidence"] = "中"
+        if confidence_count > 0:
+            fields["confidence"] = {
+                "value": round(confidence_sum / confidence_count, 4),
+                "confidence": 1.0
+            }
+        else:
+            fields["confidence"] = {
+                "value": 0.0,
+                "confidence": 1.0
+            }
         
-        return result
+        return fields
     
-    def _extract_amount(self, line):
-        """从文本行中提取金额数字"""
-        import re
-        # 匹配金额格式：数字+小数点+两位小数
-        amount_match = re.search(r'[¥￥]?\s*(\d+[,，]?\d*\.?\d{0,2})', line)
-        if amount_match:
-            return amount_match.group(1).replace(',', '')
-        return ""
-    
-    def process_file(self, file_path):
+    def process_file(self, file_path: str) -> Dict[str, Any]:
         """处理单个文件"""
+        file_path = str(file_path)
         file_ext = Path(file_path).suffix.lower()
         
-        try:
-            if file_ext in ['.jpg', '.jpeg', '.png', '.bmp', '.tiff']:
-                result = self.extract_from_image(file_path)
-            elif file_ext == '.pdf':
-                result = self.extract_from_pdf(file_path)
-            else:
-                raise ValueError(f"不支持的文件格式: {file_ext}")
-            
-            self.results.append(result)
-            return result
-            
-        except Exception as e:
-            failure = {
-                "file": file_path,
-                "error": str(e),
-                "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        # 检查文件是否存在
+        if not os.path.exists(file_path):
+            return {
+                "file_name": os.path.basename(file_path),
+                "status": "error",
+                "error_code": "E001",
+                "error_message": "文件不存在"
             }
-            self.failures.append(failure)
-            print(f"处理失败: {file_path} - {str(e)}", file=sys.stderr)
-            return None
-    
-    def process_directory(self, dir_path):
-        """批量处理目录下所有支持的文件"""
-        supported_exts = ['.jpg', '.jpeg', '.png', '.bmp', '.tiff', '.pdf']
-        files = []
         
-        for ext in supported_exts:
-            files.extend(Path(dir_path).glob(f"*{ext}"))
-            files.extend(Path(dir_path).glob(f"*{ext.upper()}"))
+        # 检查文件格式
+        if file_ext not in ['.jpg', '.jpeg', '.png', '.pdf']:
+            return {
+                "file_name": os.path.basename(file_path),
+                "status": "error",
+                "error_code": "E002",
+                "error_message": f"不支持的文件格式: {file_ext}"
+            }
         
-        if not files:
-            print(f"目录 {dir_path} 中没有找到支持的发票文件", file=sys.stderr)
-            return
-        
-        print(f"找到 {len(files)} 个待处理文件")
-        for file_path in files:
-            print(f"处理: {file_path}")
-            self.process_file(str(file_path))
-    
-    def save_results(self, output_path):
-        """保存提取结果到CSV文件"""
-        if not self.results:
-            print("没有可保存的结果", file=sys.stderr)
-            return False
-        
-        try:
-            # 构建CSV字段列表
-            csv_fields = ["source_file", "processed_at", "confidence"] + self.FIELDS
-            
-            with open(output_path, 'w', newline='', encoding='utf-8-sig') as f:
-                writer = csv.DictWriter(f, fieldnames=csv_fields)
-                writer.writeheader()
-                writer.writerows(self.results)
-            
-            # 如果有失败记录，也保存失败清单
-            if self.failures:
-                fail_path = output_path.replace('.csv', '_failures.csv')
-                with open(fail_path, 'w', newline='', encoding='utf-8-sig') as f:
-                    writer = csv.DictWriter(f, fieldnames=["file", "error", "timestamp"])
-                    writer.writeheader()
-                    writer.writerows(self.failures)
-                print(f"失败清单已保存: {fail_path}")
-            
-            return True
-            
-        except Exception as e:
-            print(f"保存结果失败: {str(e)}", file=sys.stderr)
-            return False
-
-
-def selftest():
-    """自检函数 - 验证工具基本功能"""
-    print("=== 票据识别工具自检 ===")
-    
-    # 检查依赖
-    print("\n[1] 检查依赖库:")
-    print(f"  - Pillow: {'✓' if HAS_PIL else '✗ (pip install Pillow)'}")
-    print(f"  - pdfplumber: {'✓' if HAS_PDF else '✗ (pip install pdfplumber)'}")
-    print(f"  - pytesseract: {'✓' if HAS_TESSERACT else '✗ (pip install pytesseract)'}")
-    
-    # 测试解析功能（使用模拟数据）
-    print("\n[2] 测试文本解析:")
-    extractor = InvoiceExtractor()
-    test_text = """
-    增值税普通发票
-    发票号码：12345678
-    开票日期：2024年1月15日
-    购买方名称：测试公司
-    购买方纳税人识别号：91110108MA01XXXXX
-    销售方名称：供应商有限公司
-    销售方纳税人识别号：91110105MA02YYYYY
-    金额：1000.00
-    税额：130.00
-    价税合计：1130.00
-    """
-    
-    result = extractor._parse_text(test_text, "test_invoice.txt")
-    if result["invoice_no"] == "12345678" and result["total"] == "1130.00":
-        print("  ✓ 文本解析功能正常")
-    else:
-        print("  ✗ 文本解析功能异常")
-        return False
-    
-    # 测试文件处理（创建临时文件）
-    print("\n[3] 测试文件处理:")
-    import tempfile
-    with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
-        f.write(test_text)
-        temp_file = f.name
-    
-    try:
-        # 测试不支持的文件格式
-        try:
-            extractor.process_file(temp_file)
-            print("  ✗ 应该拒绝不支持的格式")
-            return False
-        except ValueError:
-            print("  ✓ 正确拒绝不支持的格式")
-        
-        # 测试不存在的文件
-        try:
-            extractor.process_file("nonexistent_file.jpg")
-            print("  ✗ 应该报错文件不存在")
-            return False
-        except Exception:
-            print("  ✓ 正确报错文件不存在")
-        
-    finally:
-        os.unlink(temp_file)
-    
-    print("\n=== 自检完成，所有功能正常 ===")
-    return True
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="票据识别字段提取与结构化输出工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  %(prog)s invoice_001.jpg                    # 处理单个图片
-  %(prog)s ./invoices/ -o results.csv         # 批量处理目录
-  %(prog)s --selftest                         # 运行自检
-  %(prog)s --version                          # 显示版本
-        """
-    )
-    
-    # 输入参数
-    parser.add_argument(
-        "input",
-        nargs="?",
-        help="输入文件或目录路径"
-    )
-    
-    # 输出参数
-    parser.add_argument(
-        "-o", "--output",
-        default="invoice_results.csv",
-        help="输出CSV文件路径 (默认: invoice_results.csv)"
-    )
-    
-    # 功能选项
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自检功能"
-    )
-    parser.add_argument(
-        "--version",
-        action="version",
-        version="invoice-ocr-extract 1.0.0"
-    )
-    
-    # 高级选项
-    parser.add_argument(
-        "--confidence-threshold",
-        type=float,
-        default=0.5,
-        help="置信度阈值，低于此值的字段标记为低置信度 (默认: 0.5)"
-    )
-    
-    args = parser.parse_args()
-    
-    # 运行自检
-    if args.selftest:
-        success = selftest()
-        sys.exit(0 if success else 1)
-    
-    # 检查输入参数
-    if not args.input:
-        parser.print_help()
-        sys.exit(1)
-    
-    # 检查输入路径是否存在
-    if not os.path.exists(args.input):
-        print(f"错误: 输入路径不存在: {args.input}", file=sys.stderr)
-        sys.exit(1)
-    
-    # 创建提取器
-    extractor = InvoiceExtractor()
-    
-    # 处理输入
-    if os.path.isdir(args.input):
-        print(f"批量处理目录: {args.input}")
-        extractor.process_directory(args.input)
-    else:
-        print(f"处理文件: {args.input}")
-        extractor.process_file(args.input)
-    
-    # 保存结果
-    if extractor.results:
-        if extractor.save_results(args.output):
-            print(f"\n处理完成!")
-            print(f"成功: {len(extractor.results)} 个文件")
-            print(f"失败: {len(extractor.failures)} 个文件")
-            print(f"结果已保存到: {args.output}")
-            
-            # 显示统计信息
-            high_conf = sum(1 for r in extractor.results if r["confidence"] == "高")
-            print(f"高置信度结果: {high_conf} 个")
-        else:
-            sys.exit(1)
-    else:
-        print("没有成功提取任何发票信息", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+        # 计算文件内容

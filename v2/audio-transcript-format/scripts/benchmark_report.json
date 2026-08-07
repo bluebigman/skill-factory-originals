@@ -1,0 +1,33 @@
+{
+  "engine": "audio-transcript-format v4.0",
+  "cases": 149,
+  "macro_f1": 0.8359,
+  "precision": 0.8629,
+  "recall": 0.8106,
+  "per_class": {
+    "actions": {
+      "precision": 0.878,
+      "recall": 0.8182,
+      "f1": 0.8471
+    },
+    "deadlines": {
+      "precision": 1.0,
+      "recall": 0.7941,
+      "f1": 0.8852
+    },
+    "disagreements": {
+      "precision": 0.8421,
+      "recall": 0.7273,
+      "f1": 0.7805
+    },
+    "decisions": {
+      "precision": 0.7568,
+      "recall": 0.875,
+      "f1": 0.8116
+    }
+  },
+  "tp": 107,
+  "fp": 17,
+  "fn": 25,
+  "misclassified": []
+}

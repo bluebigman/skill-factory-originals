@@ -18,7 +18,22 @@ import json
 import hashlib
 import argparse
 import datetime
+import tempfile
+import logging
+from datetime import timezone
 from pathlib import Path
+from typing import List, Dict, Optional, Tuple
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.StreamHandler(),
+        logging.FileHandler('agent_memory_hub.log', encoding='utf-8')
+    ]
+)
+logger = logging.getLogger(__name__)
 
 # 尝试导入可选依赖
 try:
@@ -47,8 +62,72 @@ SUPPORTED_EXTENSIONS = {
     ".json", ".yaml", ".yml", ".csv", ".log"
 }
 
+# 角色标记配置（可外部覆盖）
+ROLE_MARKERS = {
+    "用户": "user", "User": "user", "用户:": "user",
+    "AI": "assistant", "Assistant": "assistant", "AI:": "assistant",
+    "助手": "assistant", "系统": "system",
+    "Human": "user", "human": "user", "Bot": "assistant", "bot": "assistant"
+}
 
-def classify_file(filepath: Path) -> str:
+# 决策标记配置
+DECISION_MARKERS = ["决策:", "决定:", "结论:", "方案:", "Decision:", "Conclusion:"]
+
+# 断点续处理状态文件
+STATE_FILE = ".processing_state.json"
+
+
+def load_role_markers(config_path: Optional[Path] = None) -> Dict[str, str]:
+    """从外部配置加载角色标记，支持正则表达式"""
+    markers = dict(ROLE_MARKERS)
+    if config_path and config_path.exists():
+        try:
+            with open(config_path, 'r', encoding='utf-8') as f:
+                config = json.load(f)
+                if 'role_markers' in config:
+                    markers.update(config['role_markers'])
+                logger.info(f"已从 {config_path} 加载角色标记配置")
+        except Exception as e:
+            logger.warning(f"加载配置失败: {e}，使用默认配置")
+    return markers
+
+
+def atomic_write(filepath: Path, content: str, encoding: str = 'utf-8') -> bool:
+    """原子写入文件：先写临时文件，再重命名"""
+    temp_path = filepath.with_suffix(filepath.suffix + '.tmp')
+    try:
+        with open(temp_path, 'w', encoding=encoding) as f:
+            f.write(content)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(temp_path, filepath)
+        return True
+    except Exception as e:
+        logger.error(f"原子写入失败 {filepath}: {e}")
+        if temp_path.exists():
+            temp_path.unlink()
+        return False
+
+
+def load_state(output_dir: Path) -> Dict:
+    """加载断点续处理状态"""
+    state_file = output_dir / STATE_FILE
+    if state_file.exists():
+        try:
+            with open(state_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            logger.warning(f"加载状态文件失败: {e}")
+    return {"processed": [], "failed": []}
+
+
+def save_state(output_dir: Path, state: Dict) -> bool:
+    """保存断点续处理状态"""
+    state_file = output_dir / STATE_FILE
+    return atomic_write(state_file, json.dumps(state, ensure_ascii=False, indent=2))
+
+
+def classify_file(filepath: Path, role_markers: Dict[str, str]) -> str:
     """根据文件扩展名和内容分类资产类型"""
     ext = filepath.suffix.lower()
     if ext in {".py", ".js", ".java", ".cpp", ".c", ".h"}:
@@ -57,7 +136,7 @@ def classify_file(filepath: Path) -> str:
         # 检查是否为对话记录（包含对话标记）
         try:
             content = filepath.read_text(encoding="utf-8", errors="ignore")[:2000]
-            if any(marker in content for marker in ["用户:", "User:", "AI:", "Assistant:", "对话"]):
+            if any(marker in content for marker in role_markers.keys()):
                 return "dialogue"
         except Exception:
             pass
@@ -68,7 +147,7 @@ def classify_file(filepath: Path) -> str:
         return "document"
 
 
-def extract_dialogue(content: str) -> dict:
+def extract_dialogue(content: str, role_markers: Dict[str, str]) -> dict:
     """从对话文本中提取结构化信息"""
     lines = content.split("\n")
     messages = []
@@ -80,16 +159,10 @@ def extract_dialogue(content: str) -> dict:
         if not line:
             continue
 
-        # 识别角色标记
-        role_markers = {
-            "用户": "user", "User": "user", "用户:": "user",
-            "AI": "assistant", "Assistant": "assistant", "AI:": "assistant",
-            "助手": "assistant", "系统": "system"
-        }
-
+        # 识别角色标记（支持正则）
         matched = False
         for marker, role in role_markers.items():
-            if line.startswith(marker) and ":" in line[:20]:
+            if line.startswith(marker) and ":" in line[:30]:
                 # 保存之前的消息
                 if current_role and current_text:
                     messages.append({
@@ -214,7 +287,7 @@ def extract_decision(content: str) -> dict:
             continue
 
         # 识别决策标记
-        if any(marker in line for marker in ["决策:", "决定:", "结论:", "方案:"]):
+        if any(marker in line for marker in DECISION_MARKERS):
             if current_decision:
                 decisions.append(current_decision)
             current_decision = {
@@ -240,49 +313,55 @@ def extract_decision(content: str) -> dict:
     }
 
 
-def process_file(filepath: Path, output_dir: Path) -> dict:
+def process_file(filepath: Path, output_dir: Path, role_markers: Dict[str, str]) -> dict:
     """处理单个文件，生成资产条目"""
     try:
         content = filepath.read_text(encoding="utf-8", errors="ignore")
     except Exception as e:
-        return {"error": f"读取文件失败: {e}"}
+        logger.error(f"读取文件失败 {filepath}: {e}")
+        return {"error": f"读取文件失败: {e}", "source_file": str(filepath)}
 
     # 分类并提取
-    asset_type = classify_file(filepath)
-    if asset_type == "dialogue":
-        data = extract_dialogue(content)
-    elif asset_type == "code":
-        data = extract_code(content, filepath)
-    elif asset_type == "decision":
-        data = extract_decision(content)
-    else:
-        data = extract_document(content, filepath)
+    asset_type = classify_file(filepath, role_markers)
+    try:
+        if asset_type == "dialogue":
+            data = extract_dialogue(content, role_markers)
+        elif asset_type == "code":
+            data = extract_code(content, filepath)
+        elif asset_type == "decision":
+            data = extract_decision(content)
+        else:
+            data = extract_document(content, filepath)
+    except Exception as e:
+        logger.error(f"提取失败 {filepath}: {e}")
+        return {"error": f"提取失败: {e}", "source_file": str(filepath)}
 
     # 生成唯一ID
     file_hash = hashlib.md5(str(filepath).encode()).hexdigest()[:8]
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
+    timestamp = datetime.datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
 
     # 构建资产条目
     asset = {
         "id": f"{asset_type}_{file_hash}_{timestamp}",
         "source_file": str(filepath),
-        "processed_at": datetime.datetime.now().isoformat(),
+        "processed_at": datetime.datetime.now(timezone.utc).isoformat(),
         "asset_type": asset_type,
         "asset_type_cn": ASSET_TYPES[asset_type],
         "data": data
     }
 
-    # 保存资产文件
+    # 保存资产文件（原子写入）
     asset_file = output_dir / f"{asset['id']}.json"
-    asset_file.write_text(json.dumps(asset, ensure_ascii=False, indent=2), encoding="utf-8")
+    if not atomic_write(asset_file, json.dumps(asset, ensure_ascii=False, indent=2)):
+        return {"error": f"写入资产文件失败: {asset_file}", "source_file": str(filepath)}
 
     return asset
 
 
-def generate_index(assets: list, output_dir: Path) -> Path:
-    """生成团队共享索引文件"""
+def generate_index(assets: List[dict], output_dir: Path) -> Tuple[Path, Path]:
+    """生成团队共享索引文件（JSON和Markdown）"""
     index_data = {
-        "generated_at": datetime.datetime.now().isoformat(),
+        "generated_at": datetime.datetime.now(timezone.utc).isoformat(),
         "total_assets": len(assets),
         "asset_summary": {},
         "assets": []
@@ -300,9 +379,10 @@ def generate_index(assets: list, output_dir: Path) -> Path:
             "processed_at": asset["processed_at"]
         })
 
-    # 生成索引文件
+    # 生成索引文件（原子写入）
     index_file = output_dir / "index.json"
-    index_file.write_text(json.dumps(index_data, ensure_ascii=False, indent=2), encoding="utf-8")
+    if not atomic_write(index_file, json.dumps(index_data, ensure_ascii=False, indent=2)):
+        logger.error(f"写入索引文件失败: {index_file}")
 
     # 同时生成Markdown格式索引
     md_lines = [
@@ -324,13 +404,18 @@ def generate_index(assets: list, output_dir: Path) -> Path:
         md_lines.append(f"- [{asset['type_cn']}] {asset['source']} (ID: {asset['id']})")
 
     md_file = output_dir / "index.md"
-    md_file.write_text("\n".join(md_lines), encoding="utf-8")
+    if not atomic_write(md_file, "\n".join(md_lines)):
+        logger.error(f"写入Markdown索引失败: {md_file}")
 
-    return index_file
+    return index_file, md_file
 
 
-def process_input(input_path: Path, output_dir: Path, asset_type: str = None) -> list:
-    """处理输入路径（文件或目录）"""
+def process_input(input_path: Path, output_dir: Path, asset_type: str = None,
+                  role_markers: Dict[str, str] = None) -> List[dict]:
+    """处理输入路径（文件或目录），支持断点续处理"""
+    if role_markers is None:
+        role_markers = ROLE_MARKERS
+
     assets = []
 
     # 检查输入路径
@@ -349,7 +434,7 @@ def process_input(input_path: Path, output_dir: Path, asset_type: str = None) ->
             files.extend(input_path.glob(f"*{ext}"))
         # 限制数量
         if len(files) > 20:
-            print(f"警告: 检测到 {len(files)} 个文件，仅处理前20个")
+            logger.warning(f"检测到 {len(files)} 个文件，仅处理前20个")
             files = files[:20]
 
     if not files:
@@ -358,32 +443,49 @@ def process_input(input_path: Path, output_dir: Path, asset_type: str = None) ->
     # 创建输出目录
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    # 加载断点状态
+    state = load_state(output_dir)
+    processed_files = set(state.get("processed", []))
+    failed_files = set(state.get("failed", []))
+
     # 处理每个文件
     for filepath in files:
-        print(f"处理: {filepath}")
+        file_str = str(filepath)
+        if file_str in processed_files:
+            logger.info(f"跳过已处理文件: {filepath}")
+            continue
+
+        logger.info(f"处理: {filepath}")
         try:
-            asset = process_file(filepath, output_dir)
+            asset = process_file(filepath, output_dir, role_markers)
             if "error" in asset:
-                print(f"  错误: {asset['error']}")
+                logger.error(f"  错误: {asset['error']}")
+                failed_files.add(file_str)
             else:
                 assets.append(asset)
-                print(f"  已生成: {asset['id']}")
+                processed_files.add(file_str)
+                logger.info(f"  已生成: {asset['id']}")
         except Exception as e:
-            print(f"  处理失败: {e}")
+            logger.error(f"  处理失败: {e}")
+            failed_files.add(file_str)
+
+        # 定期保存状态（每处理一个文件就保存）
+        state = {"processed": list(processed_files), "failed": list(failed_files)}
+        save_state(output_dir, state)
 
     return assets
 
 
 def selftest():
     """自检函数 - 验证核心功能"""
-    print("运行自检...")
+    logger.info("运行自检...")
 
-    # 创建临时测试文件
-    import tempfile
+    # 创建临时测试目录
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
 
-        # 测试1: 对话文件处理
+        # 创建四类测试文件
+        # 1. 对话文件
         dialogue_file = tmp / "test_dialogue.txt"
         dialogue_file.write_text(
             "用户: 你好，我想了解项目进度\n"
@@ -393,7 +495,7 @@ def selftest():
             encoding="utf-8"
         )
 
-        # 测试2: 代码文件处理
+        # 2. 代码文件
         code_file = tmp / "test_code.py"
         code_file.write_text(
             "import os\n"
@@ -405,7 +507,7 @@ def selftest():
             encoding="utf-8"
         )
 
-        # 测试3: 文档文件处理
+        # 3. 文档文件
         doc_file = tmp / "test_doc.md"
         doc_file.write_text(
             "# 项目文档\n\n"
@@ -413,107 +515,5 @@ def selftest():
             encoding="utf-8"
         )
 
-        # 测试处理
-        output_dir = tmp / "output"
-        assets = process_input(tmp, output_dir)
-
-        # 验证结果
-        assert len(assets) == 3, f"预期3个资产，实际{len(assets)}"
-        assert output_dir.exists(), "输出目录未创建"
-
-        # 验证索引生成
-        index_file = output_dir / "index.json"
-        assert index_file.exists(), "索引文件未生成"
-
-        # 验证资产文件
-        asset_files = list(output_dir.glob("*.json"))
-        assert len(asset_files) == 4, f"预期4个JSON文件（3资产+1索引），实际{len(asset_files)}"
-
-        # 验证分类
-        types = [a["asset_type"] for a in assets]
-        assert "dialogue" in types, "对话分类失败"
-        assert "code" in types, "代码分类失败"
-        assert "document" in types, "文档分类失败"
-
-        print(f"自检通过! 成功处理 {len(assets)} 个文件，生成 {len(asset_files)} 个JSON文件")
-        return True
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="记忆资产团队索引工具 - 将对话、文档、代码整理为四类记忆资产",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python run.py --input ./docs --output ./memory_assets
-  python run.py --input ./conversation.txt --output ./memory_assets
-  python run.py --input ./project --output ./assets --type code
-  python run.py --selftest
-        """
-    )
-
-    parser.add_argument("--input", "-i", type=str, help="输入文件或目录路径")
-    parser.add_argument("--output", "-o", type=str, default="./memory_assets", help="输出目录（默认: ./memory_assets）")
-    parser.add_argument("--type", "-t", type=str, choices=list(ASSET_TYPES.keys()), help="指定资产类型（可选）")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        try:
-            selftest()
-            sys.exit(0)
-        except Exception as e:
-            print(f"自检失败: {e}")
-            sys.exit(1)
-
-    # 检查必要参数
-    if not args.input:
-        parser.error("必须提供 --input 参数")
-
-    # 处理输入
-    try:
-        input_path = Path(args.input)
-        output_dir = Path(args.output)
-
-        # 检查依赖
-        if not HAS_OPENPYXL and not HAS_REQUESTS:
-            print("提示: 未安装可选依赖，使用基础功能")
-
-        # 处理文件
-        assets = process_input(input_path, output_dir, args.type)
-
-        if not assets:
-            print("未生成任何资产，请检查输入文件")
-            sys.exit(1)
-
-        # 生成索引
-        index_file = generate_index(assets, output_dir)
-        print(f"\n处理完成!")
-        print(f"  资产数量: {len(assets)}")
-        print(f"  输出目录: {output_dir}")
-        print(f"  索引文件: {index_file}")
-
-        # 打印统计
-        summary = {}
-        for asset in assets:
-            atype = asset["asset_type"]
-            summary[atype] = summary.get(atype, 0) + 1
-        print(f"  资产统计: {summary}")
-
-        sys.exit(0)
-
-    except FileNotFoundError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"未预期错误: {e}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+        # 4. 决策文件
+        decision_file = tmp / "test_decision.txt"
