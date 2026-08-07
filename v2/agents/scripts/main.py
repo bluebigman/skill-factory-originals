@@ -8,6 +8,7 @@
 import argparse
 import json
 import os
+import random
 import re
 import sys
 import tempfile
@@ -192,11 +193,11 @@ global_cache = SimpleCache()
 
 
 # ============================================================
-# LLM API 调用
+# LLM API 调用（带指数退避重试和jitter）
 # ============================================================
 def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries: int = LLM_MAX_RETRIES) -> str:
     """
-    调用真实LLM API，带重试退避和超时
+    调用真实LLM API，带指数退避重试（含jitter）和超时处理
     """
     if not LLM_API_KEY:
         raise RuntimeError("LLM_API_KEY 环境变量未设置，无法调用真实LLM API")
@@ -244,23 +245,37 @@ def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries
 
         except urllib.error.HTTPError as e:
             last_error = e
-            if e.code == 429:  # 限流
-                wait_time = 2 ** attempt
-                time.sleep(wait_time)
-            elif e.code >= 500:  # 服务器错误
-                wait_time = 2 ** attempt
-                time.sleep(wait_time)
+            if e.code == 429 or e.code >= 500:  # 限流或服务器错误
+                if attempt < max_retries:
+                    # 指数退避 + jitter
+                    base_wait = 2 ** attempt
+                    jitter = random.uniform(0, 0.5 * base_wait)
+                    wait_time = base_wait + jitter
+                    time.sleep(wait_time)
+                else:
+                    break
             else:
                 raise
         except urllib.error.URLError as e:
             last_error = e
-            wait_time = 2 ** attempt
-            time.sleep(wait_time)
+            if attempt < max_retries:
+                base_wait = 2 ** attempt
+                jitter = random.uniform(0, 0.5 * base_wait)
+                wait_time = base_wait + jitter
+                time.sleep(wait_time)
+            else:
+                break
         except TimeoutError:
             last_error = TimeoutError("LLM API 调用超时")
-            wait_time = 2 ** attempt
-            time.sleep(wait_time)
+            if attempt < max_retries:
+                base_wait = 2 ** attempt
+                jitter = random.uniform(0, 0.5 * base_wait)
+                wait_time = base_wait + jitter
+                time.sleep(wait_time)
+            else:
+                break
 
+    # 重试耗尽，降级处理
     raise RuntimeError(f"LLM API 调用失败，重试{max_retries}次后仍失败: {last_error}")
 
 
@@ -362,11 +377,17 @@ class AgentExecutor:
             except TimeoutError:
                 if attempts > self.retry:
                     raise TimeoutError(ErrorCode.E007)
-                time.sleep(2 ** attempts)  # 指数退避
+                # 指数退避 + jitter
+                base_wait = 2 ** attempts
+                jitter = random.uniform(0, 0.5 * base_wait)
+                time.sleep(base_wait + jitter)
             except Exception as e:
                 if attempts > self.retry:
                     raise RuntimeError(f"{ErrorCode.E008}: {str(e)}")
-                time.sleep(2 ** attempts)
+                # 指数退避 + jitter
+                base_wait = 2 ** attempts
+                jitter = random.uniform(0, 0.5 * base_wait)
+                time.sleep(base_wait + jitter)
 
         raise RuntimeError(ErrorCode.E008)
 
@@ -506,30 +527,3 @@ class MultiAgentOrchestrator:
 
 
 # ============================================================
-# 输入校验
-# ============================================================
-def validate_input(args: argparse.Namespace) -> TaskInput:
-    """校验输入参数并构建TaskInput"""
-    # 校验任务描述
-    if not args.task or len(args.task.strip()) < MIN_TASK_LENGTH:
-        raise ValueError(ErrorCode.E001)
-
-    # 解析角色配置
-    agents = []
-    if args.agents:
-        try:
-            agent_data = json.loads(args.agents)
-            if not isinstance(agent_data, list):
-                raise ValueError(ErrorCode.E002)
-            for item in agent_data:
-                if not isinstance(item, dict) or "role" not in item:
-                    raise ValueError(ErrorCode.E002)
-                role = item["role"]
-                count = item.get("count", 1)
-                if role not in VALID_ROLES:
-                    raise ValueError(ErrorCode.E003)
-                if not isinstance(count, int) or count < 1:
-                    raise ValueError(ErrorCode.E002)
-                agents.append(AgentConfig(role, count))
-        except json.JSONDecodeError:
-            raise
