@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: pbottlerpa
 name: pbottlerpa
-displayName: RPA流程自动化 网页操作 数据提取
+displayName: 网页流程自动化 数据抓取 效率提升
 description: 面向专业用户的RPA+AI流程自动化工具，支持网页操作与数据提取。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/pbottlerpa
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: FlowCraft Studio
+author: FlowForge Studio
 agent_created: true
-trigger_words: ["pbottlerpa", "RPA", "流程自动化", "网页自动化", "数据抓取"]
+trigger_words: ["pbottlerpa", "RPA", "流程自动化", "网页自动化", "数据抓取", "自动化脚本", "网页数据采集"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,19 +31,33 @@ trigger_words: ["pbottlerpa", "RPA", "流程自动化", "网页自动化", "数�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# pbottlerpa 技能文档
+# pbottlerpa — 网页流程自动化与数据抓取 Skill 文档
 
-## 一、能力边界速查卡
+## 一、能力边界：一页纸速查卡
 
-本技能面向需要将重复性网页操作与数据提取流程自动化的专业用户（如运营人员、测试工程师、数据分析师）。以下是能力边界的一页纸速览：
+### 1.1 能做什么
 
-| 维度 | 说明 |
-|------|------|
-| ✅ 能做 | 将用户提供的 URL、文件或原始数据转换为结构化结果；识别并保留输入中的关键字段；按约定格式输出；对不确定项给出置信度提示；支持批量处理与自定义输出格式 |
-| ❌ 不能做 | 无法处理未提供输入来源的任务；不能绕过网站登录验证或反爬机制；不执行任何形式的代码注入或系统级操作；不保证提取结果的绝对完整性 |
-| 适用对象 | 需要自动化处理网页数据提取、表单填写、批量信息采集的专业用户 |
-| 输入要求 | 必须提供明确的数据来源（URL/文件路径/粘贴的文本数据）及期望的输出格式 |
-| 输出规范 | 结构化文本（JSON/CSV/Markdown 表格），包含字段完整性自查与置信度标注 |
+| 能力类别 | 具体功能 | 典型场景 |
+|---------|---------|---------|
+| 网页操作 | 自动点击、填表、翻页、滚动、悬停 | 表单批量提交、分页遍历 |
+| 数据提取 | 结构化字段抓取、表格导出、文本抽取 | 商品价格监控、新闻标题汇总 |
+| 流程编排 | 多步骤串联、条件分支、循环执行 | 每日定时巡检、批量数据同步 |
+| 结果输出 | JSON/CSV 导出、日志记录、截图留档 | 数据交接、审计追溯 |
+
+### 1.2 不能做什么
+
+| 限制项 | 说明 |
+|-------|------|
+| 不处理验证码 | 若页面出现验证码，流程将暂停并提示人工介入 |
+| 不绕过登录/权限 | 仅操作已授权访问的页面，不做凭证绕过 |
+| 不执行 JS 逆向 | 对动态渲染内容仅支持标准 DOM 操作 |
+| 不保证页面兼容 | 对非标准 HTML 或极端反爬策略的站点，可能失败 |
+
+### 1.3 适用对象
+
+- 需要重复性网页操作的运营人员
+- 需要定期采集公开数据的分析师
+- 需要将网页流程嵌入自动化管线的开发者
 
 
 ## 许可证（License）
