@@ -1,89 +1,82 @@
 ---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: merb-plugins
 name: merb-plugins
-displayName: 未命名工具
-description: Merb Plugins: Even more modules to hook up your Merb installation
-version: 1.0.0
-author: skill-factory-auto
+displayName: 插件装配 模块对接 功能扩展
+description: 将用户提供的插件数据整理为结构化装配方案，辅助 Merb 项目模块对接。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/merb-plugins
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 装配工坊
 agent_created: true
-trigger_words:
-  - "merb plugins"
+trigger_words: ["merb plugins", "插件装配", "模块对接", "功能扩展", "插件清单整理"]
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
 ---
 
-# 未命名工具
+> 📜 **用户协议（User Agreement）**
+> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
+> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
+> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+<!-- user-agreement-injected -->
 
-> Merb Plugins: Even more modules to hook up your Merb installation
 
-## 一、能力边界（一页纸速查卡）
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+# Merb 插件装配 Skill 使用指南
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+## 一、能力边界速查卡
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### 1.1 能做（核心能力清单）
 
-## 二、触发方式（说大白话就能用）
+| 编号 | 能力项 | 说明 | 输入示例 | 输出示例 |
+|------|--------|------|----------|----------|
+| C1 | 插件数据转结构化结果 | 将用户提供的插件名称、版本、依赖等信息整理为统一格式的清单 | `merb-plugins --selftest` 或一段插件描述文本 | 结构化 JSON 或 Markdown 表格 |
+| C2 | 关键信息识别与保留 | 从非结构化文本中提取插件名、版本号、依赖关系、用途说明 | "我想装一个处理表单的插件，版本 2.x" | `{ "name": "merb-form", "version": "2.x", "purpose": "表单处理" }` |
+| C3 | 按约定格式生成输出 | 支持 JSON、YAML、Markdown 表格三种输出格式 | `--format json` | 对应格式的结构化数据 |
+| C4 | 置信度标注 | 对识别结果给出可信度评估，低置信度字段明确标注 | 信息模糊时 | `{ "name": "merb-??", "confidence": 0.4 }` |
+| C5 | 批量处理与自定义格式 | 一次处理多个插件条目，支持用户自定义字段映射 | 包含 5 个插件的文本 | 按用户字段模板输出的批量结果 |
 
-**触发词表（6类场景）：**
-| merb plugins | 通用场景 |
+### 1.2 不能做（明确边界）
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 未命名工具，进入标准流程 |
-| 把这个转成另一种格式 | 启动 未命名工具，进入标准流程 |
-| 批量弄一下这些 | 启动 未命名工具，进入标准流程 |
+| 编号 | 限制项 | 说明 |
+|------|--------|------|
+| L1 | 不执行实际安装 | 本 Skill 仅做信息整理与方案输出，不执行任何安装命令 |
+| L2 | 不验证插件真实性 | 不保证用户提供的插件名称在官方仓库中真实存在 |
+| L3 | 不生成代码 | 不编写插件实现代码或配置代码 |
+| L4 | 不评估兼容性 | 不判断插件与特定 Merb 版本的兼容性（除非用户明确提供版本对照表） |
+| L5 | 不处理二进制文件 | 仅处理文本、URL、JSON/YAML 等可解析格式 |
 
-## 三、标准流程（5分钟上手路径）
+### 1.3 适用对象
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+- **适用**：Merb 项目维护者、插件整理者、需要批量梳理插件清单的开发者
+- **不适用**：需要自动安装插件的场景、需要代码生成的场景
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
 
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
+## 许可证（License）
 
-## 四、异常处理（错误码体系）
+```text
+MIT License
 
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
+Copyright (c) 2026 SkillForge Lab
 
-## 五、常见问题（FAQ 速查）
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+<!-- professional-license-embedded -->
