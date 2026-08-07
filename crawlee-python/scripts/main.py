@@ -349,6 +349,18 @@ class CrawleeSkill:
         self.input_handler = InputHandler()
         self.formatter = OutputFormatter()
 
+    @staticmethod
+    def is_html_content(content: str) -> bool:
+        """检测内容是否为 HTML。"""
+        # 检查是否有 HTML 标签
+        content_lower = content.lower()
+        html_markers = [
+            "<html", "<head", "<body", "<div", "<p", "<span", 
+            "<table", "<a ", "<title", "<h1", "<h2", "<h3",
+            "<!doctype html", "<br", "<img", "<ul", "<ol", "<li"
+        ]
+        return any(marker in content_lower for marker in html_markers)
+
     def process_input(
         self,
         source_type: str,
@@ -378,15 +390,18 @@ class CrawleeSkill:
             elif source_type == "file":
                 # 本地文件
                 content = self.input_handler.read_local_file(source_value)
-                if source_value.lower().endswith((".html", ".htm")):
+                if source_value.lower().endswith((".html", ".htm")) or self.is_html_content(content):
                     data = self.extractor.extract_from_html(content, source_value)
                 else:
                     data = self.extractor.extract_from_text(content, source_value)
                 results.append(ExtractionResult(source=source_value, data=data))
 
             elif source_type == "text":
-                # 直接文本
-                data = self.extractor.extract_from_text(source_value, "inline-text")
+                # 直接文本，检测是否为 HTML
+                if self.is_html_content(source_value):
+                    data = self.extractor.extract_from_html(source_value, "inline-text")
+                else:
+                    data = self.extractor.extract_from_text(source_value, "inline-text")
                 results.append(ExtractionResult(source="inline-text", data=data))
 
             elif source_type == "url_list":
