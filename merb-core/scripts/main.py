@@ -261,7 +261,7 @@ def run_selftest() -> bool:
     print("\n[1] 测试空输入...")
     result = processor.process("")
     assert result.confidence == 0.0, "空输入置信度应为0"
-    assert any("E001" in w for w in result.warnings), "应包含E001错误"
+    assert any(ERROR_MESSAGES["E001"] in w for w in result.warnings), "应包含E001错误"
     print("  ✓ 通过")
     
     # 测试用例 2: 基本键值对输入
@@ -326,7 +326,7 @@ def run_selftest() -> bool:
     # 超长输入
     long_input = "x" * 20000
     result = processor.process(long_input)
-    assert any("E009" in w for w in result.warnings), "超长输入应返回E009"
+    assert any(ERROR_MESSAGES["E009"] in w for w in result.warnings), "超长输入应返回E009"
     print("  ✓ 通过")
     
     # 测试用例 9: 批量处理概念验证
