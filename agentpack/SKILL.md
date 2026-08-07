@@ -1,0 +1,82 @@
+---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
+slug: agentpack
+name: agentpack
+displayName: 本地上下文路由引擎
+description: 为AI编码代理路由任务至相关文件、测试、规则与技能，支持提示词缓存。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agentpack
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 流云架构师
+agent_created: true
+trigger_words: ["agentpack", "上下文路由", "本地引擎", "任务分发", "代码代理"]
+---
+
+> 📜 **用户协议（User Agreement）**
+> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
+> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
+> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+<!-- user-agreement-injected -->
+
+
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+# agentpack — 本地上下文路由引擎
+
+## 一、能力边界速查卡
+
+### 1.1 能做什么（核心能力）
+
+| 编号 | 能力项 | 说明 | 典型场景 |
+|------|--------|------|----------|
+| C1 | 任务路由 | 将用户请求映射到项目内相关文件、测试用例、规则文档或技能包 | 开发者在 IDE 中提问"这个报错涉及哪个模块" |
+| C2 | 上下文聚合 | 从多个来源（代码、测试、文档）提取与当前任务相关的片段 | 调试时快速定位相关代码与测试 |
+| C3 | 提示词缓存 | 对重复使用的上下文片段做缓存，减少重复计算 | 同一仓库多次执行相似任务 |
+| C4 | 结构化输出 | 将路由结果整理为统一的 JSON 或 Markdown 结构 | 供其他工具或脚本消费 |
+| C5 | 自检与版本查询 | 通过 `--selftest` 验证安装完整性，通过 `--version` 查看版本 | 环境部署后的快速验证 |
+
+### 1.2 不能做什么（边界声明）
+
+| 编号 | 限制项 | 说明 |
+|------|--------|------|
+| L1 | 不执行代码 | agentpack 只做路由与上下文组织，不直接运行测试或编译 |
+| L2 | 不修改文件 | 不自动改动项目内的任何源文件、配置或测试 |
+| L3 | 不联网获取信息 | 仅基于本地仓库内容工作，不拉取远程数据 |
+| L4 | 不保证路由绝对准确 | 路由结果依赖项目结构清晰度与元数据质量，存在不确定性 |
+| L5 | 不支持跨项目全局索引 | 每次运行针对当前工作目录的项目上下文 |
+
+### 1.3 适用对象
+
+- 使用 AI 编码代理（如 Copilot、Codex、Cline 等）的开发者
+- 维护多模块、多语言仓库的技术负责人
+- 需要将项目知识结构化的平台工程师
+
+
+## 许可证（License）
+
+```text
+MIT License
+
+Copyright (c) 2026 SkillForge Lab
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+```
+<!-- professional-license-embedded -->
