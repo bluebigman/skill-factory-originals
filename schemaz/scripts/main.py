@@ -14,6 +14,9 @@ schemaz - SQL查询 技能实现脚本
 """
 
 import argparse
+import csv
+import hashlib
+import io
 import json
 import os
 import sys
@@ -239,7 +242,6 @@ def generate_item_id(source: str, index: int) -> str:
         base = Path(source).stem.replace(" ", "_")
     else:
         # 使用内容哈希的一部分作为 ID
-        import hashlib
         base = hashlib.md5(source.encode()).hexdigest()[:8]
     return f"{source_type}_{base}_{index}"
 
@@ -368,9 +370,6 @@ def format_output(result: Union[ProcessedItem, ProcessingResult], fmt: str = "js
         return "\n".join(lines)
 
     # CSV 格式
-    import csv
-    import io
-
     items = data["items"] if "items" in data else [data]
     output = io.StringIO()
     writer = csv.writer(output)
@@ -512,6 +511,10 @@ def run_selftest() -> int:
     result = process_batch(batch_inputs)
     assert len(result.items) == 3, "批量处理数量不符"
     assert result.total == 3, "总数统计错误"
+    # 验证批量处理中的每个项
+    assert result.items[0].source_type == "json", "第一个项应为 JSON"
+    assert result.items[1].source_type == "text", "第二个项应为文本"
+    assert result.items[2].source_type == "url", "第三个项应为 URL"
     print(f"  ✓ 通过 (处理 {result.total} 项)")
 
     # 样例 5: 输出格式化
