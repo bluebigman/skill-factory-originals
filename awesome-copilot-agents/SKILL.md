@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: awesome-copilot-agents
 name: awesome-copilot-agents
-displayName: 智能体资源导航 清单整理与检索
-description: 将 GitHub 智能体资源链接整理为结构化清单，支持检索与导出。
-version: 1.0.1
+displayName: 智能体资源导航 清单整理 链接归档
+description: 将GitHub智能体资源链接整理为结构化清单，支持检索与导出。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/awesome-copilot-agents
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: ResourceArchitect
 agent_created: true
-trigger_words: ["awesome-copilot-agents", "copilot agents 清单", "智能体资源导航", "GitHub 指令整理", "agent 列表汇总"]
+trigger_words: ["awesome-copilot-agents", "copilot agents 清单", "智能体资源导航", "GitHub 指令整理", "agent 列表汇总", "智能体链接归档", "资源清单生成"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,33 +31,18 @@ trigger_words: ["awesome-copilot-agents", "copilot agents 清单", "智能体资
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# awesome-copilot-agents 技能手册
+# 智能体资源导航 · 清单整理与归档 Skill
 
-## 一、能力边界速查卡
-
-本技能用于将散落的 GitHub 智能体资源（指令、提示词、技能包、MCP 服务等）整理为结构化清单，并提供检索与导出能力。
+## 一、能力边界（一页纸速查卡）
 
 | 维度 | 说明 |
 |------|------|
-| **输入** | 用户提供的 URL、文件路径、粘贴的文本内容 |
-| **输出** | 结构化 Markdown 清单，含分类、描述、来源链接 |
-| **处理方式** | 解析 → 分类 → 去重 → 标注置信度 → 输出 |
-| **适用对象** | 开发者、技术调研者、AI 工具爱好者 |
-
-### 能做（5 项核心能力）
-
-1. **资源解析**：从用户提供的 URL 或文本中提取资源名称、链接、简介。
-2. **自动分类**：按资源类型（指令/提示词/技能/MCP/其他）进行归类。
-3. **信息去重**：识别重复条目，合并相同资源并保留最早来源。
-4. **置信度标注**：对无法确认的信息标注 `[需核实:字段]`，不编造内容。
-5. **批量导出**：支持将整理结果输出为 Markdown 表格或 JSON 格式。
-
-### 不能做（明确边界）
-
-- 不主动抓取互联网内容，仅处理用户明确提供的数据。
-- 不判断资源质量优劣，仅做客观整理。
-- 不修改原始资源内容，仅做结构化呈现。
-- 不保证资源链接长期有效，链接有效性需用户自行验证。
+| **核心能力** | 从用户提供的 URL 或文本中提取资源名称、链接、简介；按资源类型自动归类；识别并合并重复条目；对不确定信息标注占位符；输出 Markdown 表格或 JSON 格式 |
+| **输入要求** | 至少包含一个有效 URL 或一段包含 GitHub 链接的文本；建议同时提供资源名称或简介，否则将标注 `[需核实:名称]` |
+| **输出格式** | Markdown 表格（默认）或 JSON（通过 `--format json` 指定） |
+| **适用对象** | 维护个人收藏夹的开发者、整理团队知识库的技术负责人、需要快速归档大量链接的研究人员 |
+| **不处理** | 不访问网络抓取页面内容；不自动生成资源简介；不判断资源质量优劣；不处理非 GitHub 链接（如 GitLab、Bitbucket 等，将标注 `[需核实:平台]` 并跳过归类） |
+| **边界值** | 单次处理上限 200 条资源；单条简介长度上限 200 字符（超出截断并标注 `[已截断]`）；重复判定基于 URL 完全匹配（忽略末尾斜杠） |
 
 
 ## 许可证（License）
