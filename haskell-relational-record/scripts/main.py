@@ -299,12 +299,11 @@ def run_selftest() -> bool:
 
     # --- 测试2: 空输入处理（E001） ---
     print("\n[测试2] 空输入处理")
-    try:
-        process_data("")
-        assert False, "空输入应触发E001错误"
-    except ProcessError as e:
-        assert e.code == "E001", f"错误码应为E001, 实际: {e.code}"
-        print(f"  通过 - 错误码: {e.code}, 消息: {e.message}")
+    result = process_data("")
+    assert result["status"] == "error", "状态应为error"
+    assert len(result["errors"]) > 0, "应包含错误信息"
+    assert result["errors"][0]["code"] == "E001", f"错误码应为E001, 实际: {result['errors'][0]['code']}"
+    print(f"  通过 - 错误码: {result['errors'][0]['code']}, 消息: {result['errors'][0]['message']}")
 
     # --- 测试3: 文本行输入处理 ---
     print("\n[测试3] 文本行输入处理")
