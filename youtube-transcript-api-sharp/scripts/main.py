@@ -32,6 +32,7 @@ import json
 import re
 import sys
 from typing import Any, Dict, List, Optional, Tuple
+from urllib.parse import urlparse, parse_qs
 
 # 版本信息
 __version__ = "1.0.0"
@@ -194,9 +195,31 @@ class TranscriptProcessor:
             # 解析 YouTube URL
             video_id = self._extract_youtube_id(input_str)
             if video_id:
+                # 解析URL参数
+                parsed_url = urlparse(input_str)
+                query_params = parse_qs(parsed_url.query)
+                
+                # 构建包含URL参数的content字典
+                content = {
+                    "video_id": video_id,
+                    "url": input_str,
+                }
+                
+                # 从URL参数中提取其他字段
+                if "language" in query_params or "lang" in query_params:
+                    lang_key = "language" if "language" in query_params else "lang"
+                    content["language"] = query_params[lang_key][0]
+                
+                if "text" in query_params:
+                    content["text"] = query_params["text"][0]
+                
+                if "timestamp" in query_params or "time" in query_params:
+                    ts_key = "timestamp" if "timestamp" in query_params else "time"
+                    content["timestamp"] = query_params[ts_key][0]
+                
                 return {
                     "type": "url",
-                    "content": {"video_id": video_id, "url": input_str},
+                    "content": content,
                     "error": None,
                     "message": ""
                 }
@@ -273,10 +296,22 @@ class TranscriptProcessor:
             if lang_match:
                 fields["language"] = lang_match.group(1).lower()
 
-            # 提取 text 内容
-            text_match = re.search(r"(?:text|content|transcript)[=:\s]+(.+)", content, re.IGNORECASE)
+            # 提取 text 内容 - 改进的正则表达式
+            # 匹配 text= 后跟非空格字符（URL编码）或引号内的文本
+            text_match = re.search(r'text=([^&\s]+)', content)
             if text_match:
-                fields["text"] = text_match.group(1).strip()
+                # URL解码
+                from urllib.parse import unquote
+                fields["text"] = unquote(text_match.group(1))
+            else:
+                # 尝试其他格式
+                text_match = re.search(r'(?:text|content|transcript)[=:\s]+"([^"]+)"', content)
+                if text_match:
+                    fields["text"] = text_match.group(1)
+                else:
+                    text_match = re.search(r'(?:text|content|transcript)[=:\s]+([^\s]+)', content)
+                    if text_match:
+                        fields["text"] = text_match.group(1)
 
             # 提取 timestamp
             ts_match = re.search(r"(?:timestamp|time)[=:\s]+([\d:\.]+)", content, re.IGNORECASE)
@@ -407,11 +442,12 @@ def selftest() -> bool:
 
     # 测试用例 2: 有效URL输入
     print("测试2: URL输入")
-    test_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&language=en&text=Hello world this is a test transcript content for validation purposes"
+    test_url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ&language=en&text=Hello%20world%20this%20is%20a%20test%20transcript%20content%20for%20validation%20purposes"
     result = processor.process(test_url)
     assert result["status"] == "success", "有效输入应成功"
     assert result["data"] is not None, "应有数据输出"
     assert result["confidence"] > 0, "置信度应大于0"
+    assert result["data"]["text"] == "Hello world this is a test transcript content for validation purposes", "文本应正确提取"
     print(f"  ✓ 通过 (置信度: {result['confidence']}%)")
 
     # 测试用例 3: 结构化输入
