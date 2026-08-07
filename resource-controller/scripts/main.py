@@ -157,6 +157,8 @@ class DataParser:
         if isinstance(data, dict):
             return [data]
         if isinstance(data, list):
+            if not data:
+                raise ResourceControllerError("E001")
             return data
 
         # 如果是字节，尝试解码
@@ -180,6 +182,8 @@ class DataParser:
             if isinstance(parsed, dict):
                 return [parsed]
             if isinstance(parsed, list):
+                if not parsed:
+                    raise ResourceControllerError("E001")
                 return parsed
         except json.JSONDecodeError:
             pass
@@ -691,6 +695,14 @@ class SelfTest:
             except ResourceControllerError as e:
                 assert e.error_code == "E003", f"错误码应为 E003，实际 {e.error_code}"
 
+            # 空列表
+            try:
+                controller.process([], batch=True)
+                print("  ✗ 空列表应抛出错误")
+                return False
+            except ResourceControllerError as e:
+                assert e.error_code == "E004", f"错误码应为 E004，实际 {e.error_code}"
+
             print("  ✓ 错误处理通过")
         except Exception as e:
             print(f"  ✗ 测试 7 失败: {e}")
@@ -773,7 +785,7 @@ def main():
     parser.add_argument(
         "--version",
         action="version",
-        version="resource-controller 1.0.1",
+        version="resource-controller 1.0.2",
     )
 
     args = parser.parse_args()
