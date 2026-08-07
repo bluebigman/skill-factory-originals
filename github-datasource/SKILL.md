@@ -7,7 +7,7 @@ license: MIT
 slug: github-datasource
 name: github-datasource
 displayName: 数据可视化
-description: The GitHub data source lets you visualize GitHub data in Grafana dashboards
+description: 仅供学习与参考用途。使用本。当用户需要Git代码管理、进行github datasource相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

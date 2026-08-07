@@ -7,7 +7,7 @@ license: MIT
 slug: n8n-azure-vm-starter
 name: n8n-azure-vm-starter
 displayName: 未命名工具
-description: 🚀 Deploy n8n on Azure VM with Docker, auto-HTTPS, and PostgreSQL. Simple scripts for easy setup and maintenance. ~$15/mo
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行n8n azure vm starter相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

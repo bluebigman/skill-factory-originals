@@ -7,7 +7,7 @@ license: MIT
 slug: magento-2-affiliate-pro
 name: magento-2-affiliate-pro
 displayName: 代码审查
-description: # MAGENTO 2 AFFILIATE PRO  This is a perfect extension for you to create your affiliate program. As you may know, affili
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行magento 2 affiliate pro相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

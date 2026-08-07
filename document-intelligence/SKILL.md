@@ -7,7 +7,7 @@ license: MIT
 slug: document-intelligence
 name: document-intelligence
 displayName: 发票识别
-description: Developed a Document Intelligence platform that automates document processing using OCR, NLP, and AI to extract, classif
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行document intelligence相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

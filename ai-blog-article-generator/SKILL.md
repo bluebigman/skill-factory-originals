@@ -7,7 +7,7 @@ license: MIT
 slug: ai-blog-article-generator
 name: ai-blog-article-generator
 displayName: SEO文案
-description: The AI Blog Article Generator is a Python-based tool that utilizes the Cohere API to generate high-quality, SEO-optimize
+description: 仅供学习与参考用途。使用本。当用户需要写作 内容创作、进行ai blog article generator相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

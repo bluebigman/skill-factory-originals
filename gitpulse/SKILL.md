@@ -7,7 +7,7 @@ license: MIT
 slug: gitpulse
 name: gitpulse
 displayName: 周报生成
-description: Local-first Git work report generator for daily, weekly and monthly reports.
+description: 仅供学习与参考用途。使用本。当用户需要Git代码管理、进行gitpulse相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: any2md
 name: any2md
 displayName: PDF转文档
-description: Convert PDF, DOCX, HTML, and TXT files — or web pages by URL — to clean, LLM-optimized Markdown with YAML frontmatter.
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行any2md相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

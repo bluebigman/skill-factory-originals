@@ -7,7 +7,7 @@ license: MIT
 slug: okf-skills
 name: okf-skills
 displayName: 未命名工具
-description: The OKF toolkit for Claude Code — author, maintain, validate & visualize Open Knowledge Format bundles. Plugin, agent sk
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行okf skills相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

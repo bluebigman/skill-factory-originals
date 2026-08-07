@@ -7,7 +7,7 @@ license: MIT
 slug: auto-subtitles
 name: auto-subtitles
 displayName: 视频字幕
-description: Generate subtitle/transcript files from video or audio files using local AI speech  recognition with faster-whisper and 
+description: 仅供学习与参考用途。使用本。当用户需要翻译 转录 字幕、进行auto subtitles相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: codexia
 name: codexia
 displayName: 未命名工具
-description: Lightweight Agent Workstation for Codex CLI + Claude Code — with task scheduler, git worktree & remote control, skills m
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行codexia相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -6,6 +6,7 @@ ai_generated: true
 license: MIT
 slug: awesome-nuwa
 name: awesome-nuwa
+displayName: 仅供学习与参考用途
 displayName: Awesome li
 description: Awesome list of 女娲.skill — 用女娲蒸馏的人物思维框架合集 | Distilled human thinking frameworks for Claude Code
 version: 1.0.0

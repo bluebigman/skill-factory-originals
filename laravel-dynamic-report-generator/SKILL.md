@@ -7,7 +7,7 @@ license: MIT
 slug: laravel-dynamic-report-generator
 name: laravel-dynamic-report-generator
 displayName: SQL查询
-description: A dynamic report generator package for Laravel with a drag-and-drop interface. This package allows users to generate SQL
+description: 仅供学习与参考用途。使用本。当用户需要报表 数据可视化、进行laravel dynamic report generator相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

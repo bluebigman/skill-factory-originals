@@ -7,7 +7,7 @@ license: MIT
 slug: ipython-dashboard
 name: ipython-dashboard
 displayName: 数据可视化
-description: A stand alone, light-weight web server for building, sharing graphs created in ipython. Build for data science, data ana
+description: 仅供学习与参考用途。使用本。当用户需要报表 数据可视化、进行ipython dashboard相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

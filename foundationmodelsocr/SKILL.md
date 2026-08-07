@@ -7,7 +7,7 @@ license: MIT
 slug: foundationmodelsocr
 name: foundationmodelsocr
 displayName: 发票识别
-description: iOS demo app using Apple’s FoundationModels to extract data from scanned invoices. Combines Vision for image processing 
+description: 仅供学习与参考用途。使用本。当用户需要PDF识别 文字提取、进行foundationmodelsocr相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: filetomarkdown
 name: filetomarkdown
 displayName: PDF转文档
-description: Convert 60+ file types to Markdown - Office docs, PDFs, code files, archives. CLI + API + Browser support.
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行filetomarkdown相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

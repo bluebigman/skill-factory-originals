@@ -7,7 +7,7 @@ license: MIT
 slug: ai-rules-sync
 name: ai-rules-sync
 displayName: 未命名工具
-description: Synchronize, manage, and share your ai rules, skills, commands, subagents (Cursor, Claude Code, Copilot, OpenCode, Trae 
+description: 仅供学习与参考用途。使用本。当用户需要AI大模型 深度学习、进行ai rules sync相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

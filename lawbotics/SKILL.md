@@ -7,7 +7,7 @@ license: MIT
 slug: lawbotics
 name: lawbotics
 displayName: 合同审查
-description: LawBotics v2 is an AI-powered legal contract analysis platform that combines machine learning with modern web technologi
+description: 仅供学习与参考用途。使用本。当用户需要合同审查 法律、进行lawbotics相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

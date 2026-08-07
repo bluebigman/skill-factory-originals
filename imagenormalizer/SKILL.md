@@ -7,7 +7,7 @@ license: MIT
 slug: imagenormalizer
 name: imagenormalizer
 displayName: 图片批量处理
-description: Image Normalizer is a cross-platform command-line batch-processing tool that resizes and compresses images.
+description: 仅供学习与参考用途。使用本。当用户需要图片处理 压缩转换、进行imagenormalizer相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: excel-image-extractor
 name: excel-image-extractor
 displayName: Excel表格处理
-description: 💡 You can easily extract photos 📸 from an Excel 📊 cell using this Python script. But wait, there's more! These photos ca
+description: 仅供学习与参考用途。使用本。当用户需要Excel表格 数据处理、进行excel image extractor相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: claude-code-reviewer
 name: claude-code-reviewer
 displayName: 代码审查
-description: This project analyzes code and generates report using AI. It takes a folder of code, sends it to Claude API, and outputs
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行claude code reviewer相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

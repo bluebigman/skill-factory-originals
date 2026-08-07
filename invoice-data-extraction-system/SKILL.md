@@ -7,7 +7,7 @@ license: MIT
 slug: invoice-data-extraction-system
 name: invoice-data-extraction-system
 displayName: 发票识别
-description: Automate the extraction of key data fields from invoice images using YOLOv8 and OCR. Train custom models to detect field
+description: 仅供学习与参考用途。使用本。当用户需要PDF识别 文字提取、进行invoice data extraction system相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

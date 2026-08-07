@@ -7,7 +7,7 @@ license: MIT
 slug: mcafee-com-activate
 name: mcafee-com-activate
 displayName: 代码审查
-description: The Best Antivirus and Total Protection for Mac! What's the Best Malware Protection?   Malware, Spyware, and Adware Prot
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行mcafee com activate相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

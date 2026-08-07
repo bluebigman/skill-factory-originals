@@ -7,7 +7,7 @@ license: MIT
 slug: openseo-studio
 name: openseo-studio
 displayName: SEO文案
-description: Fully client-side SEO article generator – BYOK, static, MIT.
+description: 仅供学习与参考用途。使用本。当用户需要营销 SEO、进行openseo studio相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

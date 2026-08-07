@@ -3,7 +3,7 @@
 slug: docspect
 name: docspect
 displayName: 合同审查 风险条款 智能摘要
-description: 解析合同文档，输出结构化摘要与风险提示，辅助条款审阅。
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行docspect相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.1
 license: MIT
 source_project: original

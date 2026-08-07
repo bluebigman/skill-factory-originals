@@ -7,7 +7,7 @@ license: MIT
 slug: gmail-ai-unsub
 name: gmail-ai-unsub
 displayName: 未命名工具
-description: AI-powered CLI tool to identify and automatically unsubscribe from marketing emails in Gmail using LLMs (Gemini, Claude,
+description: 仅供学习与参考用途。使用本。当用户需要邮件撰写 办公、进行gmail ai unsub相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

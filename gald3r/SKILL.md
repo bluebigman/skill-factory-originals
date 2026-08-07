@@ -7,7 +7,7 @@ license: MIT
 slug: gald3r
 name: gald3r
 displayName: 未命名工具
-description: AI dev framework: 22 agents, 100 core skills + 142 addon skill packs, 149 commands. Runs on 21 AI tools: Cursor, Claude 
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行gald3r相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

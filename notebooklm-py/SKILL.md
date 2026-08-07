@@ -7,7 +7,7 @@ license: MIT
 slug: notebooklm-py
 name: notebooklm-py
 displayName: 未命名工具
-description: Unofficial Python API and agentic skill for Google Gemini Notebook. Full programmatic access to NotebookLM's features—in
+description: 仅供学习与参考用途。使用本。当用户需要知识库 笔记、进行notebooklm py相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

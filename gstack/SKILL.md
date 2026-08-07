@@ -7,7 +7,7 @@ license: MIT
 slug: gstack
 name: gstack
 displayName: 未命名工具
-description: Use Garry Tan's exact Claude Code setup: 23 opinionated tools that serve as CEO, Designer, Eng Manager, Release Manager,
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行gstack相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

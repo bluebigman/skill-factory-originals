@@ -7,7 +7,7 @@ license: MIT
 slug: ai-workspace-archive
 name: ai-workspace-archive
 displayName: 未命名工具
-description: A massive, self-updating local archive of AI tools — 11,000+ agent skills, 240+ MCP servers, 2,200+ IDE rules (Cursor/Cl
+description: 仅供学习与参考用途。使用本。当用户需要AI大模型 深度学习、进行ai workspace archive相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

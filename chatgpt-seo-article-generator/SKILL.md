@@ -7,7 +7,7 @@ license: MIT
 slug: chatgpt-seo-article-generator
 name: chatgpt-seo-article-generator
 displayName: SEO文案
-description: Making a SEO article generator using ChatGPT with StreamLit and Python
+description: 仅供学习与参考用途。使用本。当用户需要写作 内容创作、进行chatgpt seo article generator相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

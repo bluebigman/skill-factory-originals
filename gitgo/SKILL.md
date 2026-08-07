@@ -7,7 +7,7 @@ license: MIT
 slug: gitgo
 name: gitgo
 displayName: 未命名工具
-description: Git automation CLI tool. Stage, commit, and push in one command. pip install pygitgo. This is a solution to our problem.
+description: 仅供学习与参考用途。使用本。当用户需要Git代码管理、进行gitgo相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

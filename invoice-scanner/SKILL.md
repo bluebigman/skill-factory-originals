@@ -7,7 +7,7 @@ license: MIT
 slug: invoice-scanner
 name: invoice-scanner
 displayName: 发票识别
-description: System that uses OCR (Optical Character Recognition) to extract data from invoice photos (e.g. products, supermarket, pr
+description: 仅供学习与参考用途。使用本。当用户需要PDF识别 文字提取、进行invoice scanner相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

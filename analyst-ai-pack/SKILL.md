@@ -7,7 +7,7 @@ license: MIT
 slug: analyst-ai-pack
 name: analyst-ai-pack
 displayName: 未命名工具
-description: An open agent-skills library for malware analysis, reverse engineering, and threat hunting - 118 curated, runnable skill
+description: 仅供学习与参考用途。使用本。当用户需要AI大模型 深度学习、进行analyst ai pack相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

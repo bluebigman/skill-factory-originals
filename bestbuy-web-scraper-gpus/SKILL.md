@@ -7,7 +7,7 @@ license: MIT
 slug: bestbuy-web-scraper-gpus
 name: bestbuy-web-scraper-gpus
 displayName: 爬虫采集
-description: A personal tool using Python's Scrapy framework to scrape Best Buy's product pages for RTX 3080 TIs and notify if availa
+description: 仅供学习与参考用途。使用本。当用户需要网页抓取 数据采集、进行bestbuy web scraper gpus相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

@@ -7,7 +7,7 @@ license: MIT
 slug: nima0011
 name: nima0011
 displayName: 代码审查
-description: # Contributing to this repository <!-- omit in toc -->  ## Getting started <!-- omit in toc -->  Before you begin: - Thi
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行nima0011相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

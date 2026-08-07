@@ -7,7 +7,7 @@ license: MIT
 slug: automate-download-freesound
 name: automate-download-freesound
 displayName: 爬虫采集
-description: [Web Scraper] A cool Python automation project that automates the menial task of downloading hundreds of audio files.
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行automate download freesound相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true

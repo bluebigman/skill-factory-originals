@@ -6,6 +6,7 @@ ai_generated: true
 license: MIT
 slug: huashu-design
 name: huashu-design
+displayName: UI设计 前端
 displayName: Huashu Des
 description: Huashu Design · HTML-native design skill for Claude Code · Claude Code 里 HTML 原生的设计 skill · 高保真原型 / 幻灯片 / 动画 + 20 设计哲学 +
 version: 1.0.0

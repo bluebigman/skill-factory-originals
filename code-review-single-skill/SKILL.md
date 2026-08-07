@@ -7,7 +7,7 @@ license: MIT
 slug: code-review-single-skill
 name: code-review-single-skill
 displayName: 代码审查
-description: Single-repo Code Review Expert. Extracts the current branch diff via Git, performs deep review of logic bugs, boundary g
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行code review single skill相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
