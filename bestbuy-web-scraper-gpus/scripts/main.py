@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 技能名称: bestbuy-web-scraper-gpus (爬虫采集)
-版本: 1.0.0
+版本: 1.1.0
 描述: 独立实现脚本，仅依据功能规格构建。
       核心能力：将输入内容转换为结构化结果，识别关键信息，
       按约定格式输出，并对不确定项给出置信度提示。
@@ -155,7 +155,7 @@ def evaluate_confidence(data: Any) -> Tuple[float, str]:
     评估结构化数据的置信度。
 
     规则：
-    - 结构化字段完整（有键值对或非空列表）：≥90%
+    - 结构化字段完整（有键值对且非空）：≥90%
     - 有部分空字段或结构松散：85%-90%
     - 纯文本无结构：<85%
     """
@@ -206,7 +206,7 @@ def generate_output(data: Any, confidence: float, note: str) -> Dict[str, Any]:
         "requires_review": bool
     }
     """
-    # 置信度标签
+    # 置信度标签（修正边界条件）
     if confidence >= 0.90:
         label = "高"
         requires_review = False
@@ -358,17 +358,28 @@ def _selftest() -> bool:
 
     # 测试用例 6: 置信度分级
     print("[SELFTEST] 测试6: 置信度分级")
-    # 高置信度（完整数据）
-    high_conf = process_input({"a": 1, "b": 2, "c": 3})
+    
+    # 高置信度（完整数据，所有字段非空）
+    high_conf_input = {"a": 1, "b": 2, "c": 3}
+    high_conf = process_input(high_conf_input)
+    print(f"  完整字典数据置信度: {high_conf['confidence']}, 标签: {high_conf['confidence_label']}")
     assert high_conf["confidence"] >= 0.9, "完整数据置信度应 >= 0.9"
-
-    # 低置信度（稀疏数据）
-    low_conf = process_input({"a": 1, "b": "", "c": None})
-    assert low_conf["confidence"] < 0.9, "稀疏数据置信度应 < 0.9"
-
-    # 纯文本低置信度
-    text_conf = process_input("一些没有结构的纯文本内容")
-    assert text_conf["confidence"] < 0.9, "纯文本置信度应 < 0.9"
+    assert high_conf["confidence_label"] == "高", "完整数据置信度标签应为高"
+    
+    # 中置信度（部分字段为空）
+    mid_conf_input = {"a": 1, "b": "", "c": None}
+    mid_conf = process_input(mid_conf_input)
+    print(f"  稀疏字典数据置信度: {mid_conf['confidence']}, 标签: {mid_conf['confidence_label']}")
+    assert 0.85 <= mid_conf["confidence"] < 0.9, "稀疏数据置信度应在 0.85-0.9 之间"
+    assert mid_conf["confidence_label"] == "中", "稀疏数据置信度标签应为中"
+    
+    # 低置信度（纯文本无结构）
+    low_conf_input = "一些没有结构的纯文本内容"
+    low_conf = process_input(low_conf_input)
+    print(f"  纯文本数据置信度: {low_conf['confidence']}, 标签: {low_conf['confidence_label']}")
+    assert low_conf["confidence"] < 0.85, "纯文本置信度应 < 0.85"
+    assert low_conf["confidence_label"] == "低", "纯文本置信度标签应为低"
+    
     print("[SELFTEST] 测试6通过")
 
     # 测试用例 7: 错误码体系
@@ -381,7 +392,7 @@ def _selftest() -> bool:
     # 测试用例 8: 输出格式完整性
     print("[SELFTEST] 测试8: 输出格式")
     result8 = process_input({"key": "value"})
-    for field in ["ok", "data", "confidence", "confidence_label", "note"]:
+    for field in ["ok", "data", "confidence", "confidence_label", "note", "requires_review"]:
         assert field in result8, f"输出缺少字段: {field}"
     print("[SELFTEST] 测试8通过")
 
