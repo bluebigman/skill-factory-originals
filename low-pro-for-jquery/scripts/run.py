@@ -10,7 +10,7 @@ import argparse, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TRIGGERS = ["low pro for jquery", ""]
+TRIGGERS = ["low-pro-for-jquery"]
 
 
 def load_spec() -> str:
