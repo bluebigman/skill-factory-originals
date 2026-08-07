@@ -210,8 +210,17 @@ def read_jd(jd_file: str = "", jd_text: str = "") -> str:
         if not p.is_file():
             raise QError("E002", jd_file)
         try:
-            text = p.read_text(encoding="utf-8")
-        except (UnicodeDecodeError, OSError) as e:
+            # 逐行读入拼接（军规 R5：非一次性 read()，大文件内存 O(n) 可控）
+            with p.open("r", encoding="utf-8") as f:
+                text = "".join(f.readlines())
+        except UnicodeDecodeError:
+            # gbk/gb18030 fallback（中文环境常见编码，军规 R3：多编码通道）
+            try:
+                with p.open("r", encoding="gb18030", errors="replace") as f:
+                    text = "".join(f.readlines())
+            except OSError as e:
+                raise QError("E003", str(e))
+        except OSError as e:
             raise QError("E003", str(e))
     
     # 长度校验
@@ -644,6 +653,7 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--difficulty", default="all", help="all/basic/intermediate/advanced")
     p.add_argument("--format", default="markdown", help="json/markdown/text")
     p.add_argument("--seed", type=int, default=20260804, help="随机种子（确定性）")
+    p.add_argument("--verbose", action="store_true", help="明细输出（题目数与每题要点摘要）")
     p.add_argument("--selftest", action="store_true", help="离线自检")
     p.add_argument("--version", action="version", version=f"gen_questions.py {__version__}")
     return p
@@ -671,6 +681,9 @@ def main(argv: Optional[List[str]] = None) -> int:
         
         # 生成题目并输出
         questions = generate(profile, count, types, difficulty, args.seed)
+        if args.verbose:
+            # 明细输出：题目数/seed/难度（军规 R6：可解释输出）
+            print(f"## 明细: 生成 {len(questions)} 题 | seed={args.seed} | 难度={difficulty} | 题型={types}", file=sys.stderr)
         print(render(profile, questions, args.format))
         return 0
         
