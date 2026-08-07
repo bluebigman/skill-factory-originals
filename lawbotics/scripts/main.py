@@ -90,8 +90,8 @@ class ContractParser:
         "甲方": r"(?:甲方|Party\s*A)\s*[:：]?\s*([^\s,，;；]+)",
         "乙方": r"(?:乙方|Party\s*B)\s*[:：]?\s*([^\s,，;；]+)",
         "签订日期": r"(?:签订日期|签署日期|日期)\s*[:：]?\s*(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)",
-        "金额": r"(?:金额|价款|费用|价格)\s*[:：]?\s*([¥￥]?\s*\d+(?:\.\d+)?\s*(?:元|万|万元)?)",
-        "有效期": r"(?:有效期|期限|合同期)\s*[:：]?\s*(\d+\s*(?:年|个月|天|日))",
+        "金额": r"(?:金额|价款|费用|价格|总价)\s*[:：]?\s*([¥￥]?\s*\d+(?:\.\d+)?\s*(?:元|万|万元)?)",
+        "有效期": r"(?:有效期|期限|合同期|合同期限)\s*[:：]?\s*(\d+\s*(?:年|个月|天|日))",
     }
 
     # 置信度权重：字段数量越多，整体置信度越高
@@ -258,22 +258,26 @@ def run_selftest() -> bool:
 
     # 样例1：完整字段，应高置信度
     r1 = parser.parse(SELFTEST_SAMPLES[0])
+    print(f"样例1提取到 {len(r1.fields)} 个字段，置信度: {r1.overall_confidence}")
     assert len(r1.fields) >= 4, f"样例1应至少提取4个字段，实际 {len(r1.fields)}"
     assert r1.overall_confidence > 0.80, f"样例1置信度应>0.80，实际 {r1.overall_confidence}"
 
     # 样例2：部分字段
     r2 = parser.parse(SELFTEST_SAMPLES[1])
+    print(f"样例2提取到 {len(r2.fields)} 个字段，置信度: {r2.overall_confidence}")
     assert len(r2.fields) >= 3, f"样例2应至少提取3个字段，实际 {len(r2.fields)}"
     assert r2.overall_confidence > 0.70, f"样例2置信度应>0.70，实际 {r2.overall_confidence}"
 
     # 样例3：无字段，低置信度
     r3 = parser.parse(SELFTEST_SAMPLES[2])
+    print(f"样例3提取到 {len(r3.fields)} 个字段，置信度: {r3.overall_confidence}")
     assert len(r3.fields) == 0, f"样例3应提取0个字段，实际 {len(r3.fields)}"
     assert r3.overall_confidence < 0.60, f"样例3置信度应<0.60，实际 {r3.overall_confidence}"
     assert r3.needs_review is True, "样例3应标记为需复核"
 
     # 样例4：英文输入
     r4 = parser.parse(SELFTEST_SAMPLES[3])
+    print(f"样例4提取到 {len(r4.fields)} 个字段，置信度: {r4.overall_confidence}")
     assert len(r4.fields) >= 2, f"样例4应至少提取2个字段，实际 {len(r4.fields)}"
 
     # 测试空输入错误
