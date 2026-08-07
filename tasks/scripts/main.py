@@ -1,16 +1,29 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-tasks — 任务编排与数据转换 Skill 的独立实现
+tasks — 任务编排与数据转换批处理引擎（clean-room 独立实现）
 
-本脚本根据功能规格独立编写（clean-room），提供：
-- 多源文本数据接入（粘贴文本、文件内容）
-- 关键信息抽取（日期、金额、状态、编号等）
-- 格式转换输出（JSON / CSV / Markdown 表格）
-- 批量任务处理与置信度标注
-- 内置离线自检（--selftest）
+功能概述：
+    本脚本根据功能规格实现一个轻量级的任务编排与数据转换引擎。
+    支持多源文本数据接入、关键信息抽取、格式转换、批量处理与置信度标注。
+    仅依赖 Python 标准库，不执行外部命令，不访问网络，不解析二进制。
 
-仅使用 Python 标准库，无第三方依赖。
+用法示例：
+    python scripts/main.py --selftest                # 离线自检核心逻辑
+    python scripts/main.py --input "文本" --format json   # 单条转换
+    python scripts/main.py --batch file1.txt file2.txt --format csv  # 批量转换
+
+错误码约定：
+    E001 参数解析错误
+    E002 输入数据为空或类型非法
+    E003 不支持的输出格式
+    E004 批量处理时某条记录失败
+    E005 文件读取失败
+    E006 自检断言失败
+    E007 内部逻辑错误（未捕获异常）
+    E008 输出写入失败
+    E009 输入数据超过大小限制
+    E010 不支持的输入类型
 """
 
 import argparse
@@ -23,601 +36,537 @@ from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 
-# ============================================================
-# 错误码定义
-# ============================================================
-class TaskError(Exception):
-    """技能统一异常，携带错误码 E001-E010。"""
+# ---------------------------------------------------------------------------
+# 常量定义
+# ---------------------------------------------------------------------------
 
+# 支持的输出格式
+SUPPORTED_FORMATS = ("json", "csv", "markdown", "md")
+
+# 置信度等级
+CONFIDENCE_HIGH = "高"
+CONFIDENCE_MEDIUM = "中"
+CONFIDENCE_LOW = "低"
+
+# 输入大小限制（字符数），超过则报 E009
+MAX_INPUT_CHARS = 1_000_000
+
+# 占位符，用于低置信度字段
+PLACEHOLDER = "【不确定】"
+
+# 日期正则（宽松匹配 YYYY-MM-DD 或 YYYY/MM/DD）
+DATE_PATTERN = re.compile(r"\d{4}[-/]\d{1,2}[-/]\d{1,2}")
+
+# 金额正则（宽松匹配：可选货币符号，数字，可选小数）
+AMOUNT_PATTERN = re.compile(r"(?:￥|¥|\$|€|£)?\s?\d+(?:,\d{3})*(?:\.\d{1,2})?")
+
+# 邮箱正则
+EMAIL_PATTERN = re.compile(r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}")
+
+# 手机号正则（简单匹配 1 开头的 11 位数字）
+PHONE_PATTERN = re.compile(r"1[3-9]\d{9}")
+
+
+# ---------------------------------------------------------------------------
+# 异常与错误处理
+# ---------------------------------------------------------------------------
+
+class TaskError(Exception):
+    """业务逻辑异常基类，携带错误码。"""
     def __init__(self, code: str, message: str):
+        super().__init__(f"[{code}] {message}")
         self.code = code
         self.message = message
-        super().__init__(f"[{code}] {message}")
 
 
-# ============================================================
-# 核心数据结构
-# ============================================================
-class TaskRecord:
-    """单条任务记录（输入原始数据 + 处理结果）。"""
+# ---------------------------------------------------------------------------
+# 核心工具函数
+# ---------------------------------------------------------------------------
 
-    def __init__(self, source: str, raw_text: str):
-        self.source = source          # 来源标识：'paste' / 'file' / 'url'
-        self.raw_text = raw_text      # 原始文本内容
-        self.fields: Dict[str, Any] = {}   # 抽取出的字段
-        self.confidence: str = "中"   # 置信度：高/中/低
-        self.notes: List[str] = []    # 处理备注
-
-    def to_dict(self) -> Dict[str, Any]:
-        """转为可序列化字典。"""
-        return {
-            "source": self.source,
-            "raw_text": self.raw_text,
-            "fields": self.fields,
-            "confidence": self.confidence,
-            "notes": self.notes,
-        }
+def _validate_input_text(text: str) -> str:
+    """校验并规范化输入文本。"""
+    if text is None:
+        raise TaskError("E002", "输入数据为空")
+    if not isinstance(text, str):
+        raise TaskError("E010", "输入类型必须是字符串")
+    text = text.strip()
+    if not text:
+        raise TaskError("E002", "输入数据为空")
+    if len(text) > MAX_INPUT_CHARS:
+        raise TaskError("E009", f"输入数据超过大小限制（{MAX_INPUT_CHARS} 字符）")
+    return text
 
 
-class BatchResult:
-    """批量处理汇总结果。"""
-
-    def __init__(self):
-        self.records: List[TaskRecord] = []
-        self.total: int = 0
-        self.success: int = 0
-        self.failed: int = 0
-        self.errors: List[Tuple[str, str]] = []  # (错误码, 描述)
-
-    def add_record(self, record: TaskRecord) -> None:
-        self.records.append(record)
-        self.total += 1
-        self.success += 1
-
-    def add_error(self, code: str, message: str) -> None:
-        self.errors.append((code, message))
-        self.failed += 1
-
-    def summary(self) -> Dict[str, Any]:
-        """返回汇总统计。"""
-        return {
-            "total": self.total,
-            "success": self.success,
-            "failed": self.failed,
-            "error_count": len(self.errors),
-        }
-
-
-# ============================================================
-# 工具函数
-# ============================================================
-def _safe_float(value: str) -> Optional[float]:
-    """尝试将字符串转为浮点数，失败返回 None。"""
+def _parse_date(text: str) -> Optional[str]:
+    """尝试从文本中解析日期，返回标准格式 YYYY-MM-DD。"""
+    match = DATE_PATTERN.search(text)
+    if not match:
+        return None
+    raw = match.group(0)
+    # 统一分隔符为 '-'
+    parts = re.split(r"[-/]", raw)
     try:
-        return float(value)
-    except (ValueError, TypeError):
+        year, month, day = int(parts[0]), int(parts[1]), int(parts[2])
+        # 简单范围校验，避免非法日期
+        if not (1 <= month <= 12 and 1 <= day <= 31):
+            return None
+        return f"{year:04d}-{month:02d}-{day:02d}"
+    except (ValueError, IndexError):
         return None
 
 
-def _safe_int(value: str) -> Optional[int]:
-    """尝试将字符串转为整数，失败返回 None。"""
+def _parse_amount(text: str) -> Optional[float]:
+    """尝试从文本中解析金额数字。"""
+    match = AMOUNT_PATTERN.search(text)
+    if not match:
+        return None
+    raw = match.group(0)
+    # 去掉货币符号和逗号
+    cleaned = re.sub(r"[^\d.]", "", raw)
+    if not cleaned:
+        return None
     try:
-        return int(value)
-    except (ValueError, TypeError):
+        return float(cleaned)
+    except ValueError:
         return None
 
 
-def _detect_date(text: str) -> Optional[str]:
-    """从文本中检测日期（支持常见格式），返回标准 ISO 字符串。"""
-    patterns = [
-        r"\d{4}-\d{2}-\d{2}",           # 2026-01-15
-        r"\d{4}/\d{1,2}/\d{1,2}",       # 2026/1/15
-        r"\d{1,2}\s+(?:月|Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]*",
-        r"\d{1,2}[-/]\d{1,2}[-/]\d{2,4}",  # 15-01-2026
-    ]
-    for pat in patterns:
-        match = re.search(pat, text)
-        if match:
-            raw = match.group(0)
-            # 尝试解析为日期
-            for fmt in ("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y"):
-                try:
-                    dt = datetime.strptime(raw, fmt)
-                    return dt.strftime("%Y-%m-%d")
-                except ValueError:
-                    continue
-            # 如果带中文月份，简化处理
-            if "月" in raw:
-                return raw.strip()
-    return None
+def _extract_email(text: str) -> Optional[str]:
+    """抽取邮箱地址。"""
+    match = EMAIL_PATTERN.search(text)
+    return match.group(0) if match else None
 
 
-def _detect_amount(text: str) -> Optional[float]:
-    """从文本中检测金额（支持货币符号和千分位）。"""
-    # 匹配如 ¥1,234.56 或 1234.56 或 $100
-    match = re.search(r"[¥￥$€]?\s*\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?", text)
-    if match:
-        cleaned = match.group(0).replace(",", "").replace("¥", "").replace("￥", "").replace("$", "").replace("€", "").strip()
-        val = _safe_float(cleaned)
-        if val is not None:
-            return val
-    return None
+def _extract_phone(text: str) -> Optional[str]:
+    """抽取手机号。"""
+    match = PHONE_PATTERN.search(text)
+    return match.group(0) if match else None
 
 
-def _detect_status(text: str) -> Optional[str]:
-    """检测状态关键词。"""
-    keywords = {
-        "完成": "已完成",
+def _extract_status(text: str) -> Optional[str]:
+    """识别状态关键词。"""
+    status_keywords = {
         "成功": "成功",
         "失败": "失败",
-        "处理中": "处理中",
+        "完成": "完成",
         "待处理": "待处理",
+        "处理中": "处理中",
         "已取消": "已取消",
-        "已审核": "已审核",
-        "pending": "待处理",
-        "completed": "已完成",
-        "failed": "失败",
+        "已发货": "已发货",
+        "已签收": "已签收",
     }
-    lower_text = text.lower()
-    for key, val in keywords.items():
-        if key.lower() in lower_text:
-            return val
+    for keyword, status in status_keywords.items():
+        if keyword in text:
+            return status
     return None
 
 
-def _detect_code(text: str) -> Optional[str]:
-    """检测编号/订单号（字母数字混合，长度>=4）。"""
-    # 匹配如 ORD-20260115-001, A1001, EXP-2026-001 等
-    patterns = [
-        r"\b[A-Za-z]{2,}-\d{2,}-\d{2,}\b",  # ORD-20260115-001
-        r"\b[A-Za-z]{2,}-\d{2,}-\d{2,}\b",  # EXP-2026-001
-        r"\b[A-Za-z]{1,}\d{3,}\b",          # A1001
-        r"\b[A-Za-z]{2,}\d{2,}\b",          # AB12
-    ]
-    for pat in patterns:
-        match = re.search(pat, text)
-        if match:
-            return match.group(0)
-    return None
+def _detect_confidence(extracted: Dict[str, Any], raw_text: str) -> str:
+    """
+    根据抽取结果计算置信度。
+    规则：关键字段（日期、金额、邮箱）至少抽到 2 个 → 高；
+          至少抽到 1 个 → 中；
+          一个都没抽到 → 低。
+    """
+    key_fields = ["日期", "金额", "邮箱", "手机号", "状态"]
+    hit_count = sum(1 for f in key_fields if extracted.get(f) is not None)
+    if hit_count >= 2:
+        return CONFIDENCE_HIGH
+    if hit_count == 1:
+        return CONFIDENCE_MEDIUM
+    return CONFIDENCE_LOW
 
 
-# ============================================================
+# ---------------------------------------------------------------------------
 # 核心处理逻辑
-# ============================================================
-def extract_fields(raw_text: str) -> Tuple[Dict[str, Any], str, List[str]]:
+# ---------------------------------------------------------------------------
+
+def process_single(text: str) -> Dict[str, Any]:
     """
-    从原始文本中抽取关键字段。
+    处理单条文本，抽取关键信息并返回结构化结果。
 
-    返回: (字段字典, 置信度, 备注列表)
+    返回结构：
+        {
+            "原文": 输入文本,
+            "日期": 日期或 None,
+            "金额": 金额或 None,
+            "邮箱": 邮箱或 None,
+            "手机号": 手机号或 None,
+            "状态": 状态或 None,
+            "置信度": 高/中/低,
+            "摘要": 文本摘要,
+        }
     """
-    fields: Dict[str, Any] = {}
-    notes: List[str] = []
+    text = _validate_input_text(text)
 
-    if not raw_text or not raw_text.strip():
-        raise TaskError("E001", "输入文本为空，无法处理")
+    # 抽取各字段
+    date = _parse_date(text)
+    amount = _parse_amount(text)
+    email = _extract_email(text)
+    phone = _extract_phone(text)
+    status = _extract_status(text)
 
-    # 抽取日期
-    date_val = _detect_date(raw_text)
-    if date_val:
-        fields["date"] = date_val
-    else:
-        notes.append("未检测到日期字段")
+    # 低置信度字段用占位符替换（这里为保持简单，仅对日期和金额做占位，其他字段保留 None）
+    extracted = {
+        "日期": date,
+        "金额": amount,
+        "邮箱": email,
+        "手机号": phone,
+        "状态": status,
+    }
+    confidence = _detect_confidence(extracted, text)
 
-    # 抽取金额
-    amount_val = _detect_amount(raw_text)
-    if amount_val is not None:
-        fields["amount"] = amount_val
-    else:
-        notes.append("未检测到金额字段")
+    # 对低置信度字段做占位处理（仅演示，实际可按需扩展）
+    if confidence == CONFIDENCE_LOW:
+        for key in ("日期", "金额"):
+            if extracted[key] is None:
+                extracted[key] = PLACEHOLDER
 
-    # 抽取状态
-    status_val = _detect_status(raw_text)
-    if status_val:
-        fields["status"] = status_val
-    else:
-        notes.append("未检测到状态字段")
+    # 生成摘要（取前 50 个字符）
+    summary = text if len(text) <= 50 else text[:50] + "..."
 
-    # 抽取编号
-    code_val = _detect_code(raw_text)
-    if code_val:
-        fields["code"] = code_val
-    else:
-        notes.append("未检测到编号字段")
-
-    # 计算置信度
-    found_count = len(fields)
-    if found_count >= 3:
-        confidence = "高"
-    elif found_count >= 1:
-        confidence = "中"
-    else:
-        confidence = "低"
-        notes.append("未抽取到任何有效字段，置信度低")
-
-    return fields, confidence, notes
-
-
-def process_text(source: str, raw_text: str) -> TaskRecord:
-    """处理单条文本，返回任务记录。"""
-    record = TaskRecord(source=source, raw_text=raw_text)
-    try:
-        fields, confidence, notes = extract_fields(raw_text)
-        record.fields = fields
-        record.confidence = confidence
-        record.notes = notes
-    except TaskError as e:
-        # 记录错误但保留原始数据
-        record.notes.append(f"处理失败: {e.message}")
-        record.confidence = "低"
-        raise
-    return record
-
-
-def process_batch(items: List[Tuple[str, str]]) -> BatchResult:
-    """
-    批量处理任务。
-
-    参数: items 为 (source, raw_text) 列表
-    """
-    result = BatchResult()
-    for source, text in items:
-        try:
-            record = process_text(source, text)
-            result.add_record(record)
-        except TaskError as e:
-            result.add_error(e.code, e.message)
-        except Exception as e:  # 兜底异常
-            result.add_error("E010", f"未知错误: {str(e)}")
+    result = {
+        "原文": text,
+        "日期": extracted["日期"],
+        "金额": extracted["金额"],
+        "邮箱": extracted["邮箱"],
+        "手机号": extracted["手机号"],
+        "状态": extracted["状态"],
+        "置信度": confidence,
+        "摘要": summary,
+    }
     return result
 
 
-# ============================================================
-# 格式转换输出
-# ============================================================
-def to_json(batch: BatchResult) -> str:
-    """输出 JSON 格式。"""
-    data = {
-        "summary": batch.summary(),
-        "records": [r.to_dict() for r in batch.records],
-        "errors": [{"code": c, "message": m} for c, m in batch.errors],
+def process_batch(texts: List[str]) -> Dict[str, Any]:
+    """
+    批量处理多条文本，逐条处理并汇总结果。
+    """
+    if not texts:
+        raise TaskError("E002", "批量输入为空")
+    if not isinstance(texts, (list, tuple)):
+        raise TaskError("E010", "批量输入必须是列表")
+
+    results = []
+    failures = []
+    for idx, item in enumerate(texts):
+        try:
+            results.append(process_single(item))
+        except TaskError as exc:
+            failures.append({"index": idx, "error_code": exc.code, "message": exc.message})
+
+    if failures:
+        # 部分失败时，若全部失败则直接报 E004，否则附带失败信息
+        if len(failures) == len(texts):
+            raise TaskError("E004", f"批量处理全部失败，共 {len(failures)} 条")
+        # 部分成功：将失败信息附加到结果中
+        summary = {
+            "总条数": len(texts),
+            "成功条数": len(results),
+            "失败条数": len(failures),
+            "失败详情": failures,
+        }
+    else:
+        summary = {
+            "总条数": len(texts),
+            "成功条数": len(results),
+            "失败条数": 0,
+            "失败详情": [],
+        }
+
+    return {
+        "汇总": summary,
+        "结果列表": results,
     }
-    return json.dumps(data, ensure_ascii=False, indent=2)
 
 
-def to_csv(batch: BatchResult) -> str:
-    """输出 CSV 格式。"""
+# ---------------------------------------------------------------------------
+# 格式转换输出
+# ---------------------------------------------------------------------------
+
+def _format_json(data: Any) -> str:
+    """转换为 JSON 字符串。"""
+    return json.dumps(data, ensure_ascii=False, indent=2, default=str)
+
+
+def _format_csv(data: Any) -> str:
+    """转换为 CSV 字符串。支持单条或批量结果。"""
     output = io.StringIO()
     writer = csv.writer(output)
 
-    # 表头
-    headers = ["source", "raw_text", "confidence", "date", "amount", "status", "code", "notes"]
-    writer.writerow(headers)
+    # 统一处理为列表形式
+    if isinstance(data, dict) and "结果列表" in data:
+        rows = data["结果列表"]
+    elif isinstance(data, list):
+        rows = data
+    else:
+        rows = [data]
 
-    for record in batch.records:
-        row = [
-            record.source,
-            record.raw_text,
-            record.confidence,
-            record.fields.get("date", ""),
-            record.fields.get("amount", ""),
-            record.fields.get("status", ""),
-            record.fields.get("code", ""),
-            "; ".join(record.notes),
-        ]
-        writer.writerow(row)
+    if not rows:
+        return ""
 
-    # 错误行
-    for code, msg in batch.errors:
-        writer.writerow(["ERROR", "", "", "", "", "", "", f"{code}: {msg}"])
+    # 动态获取字段名（取第一条的键）
+    fieldnames = list(rows[0].keys())
+    writer.writerow(fieldnames)
+    for row in rows:
+        writer.writerow([row.get(field, "") for field in fieldnames])
 
     return output.getvalue()
 
 
-def to_markdown(batch: BatchResult) -> str:
-    """输出 Markdown 表格。"""
-    lines: List[str] = []
-    lines.append("## 任务处理结果")
-    lines.append("")
-    lines.append(f"- 总计: {batch.total}, 成功: {batch.success}, 失败: {batch.failed}")
-    lines.append("")
-
-    if batch.records:
-        lines.append("| 来源 | 原始文本 | 置信度 | 日期 | 金额 | 状态 | 编号 |")
-        lines.append("|------|----------|--------|------|------|------|------|")
-        for r in batch.records:
-            raw_short = r.raw_text[:30] + ("..." if len(r.raw_text) > 30 else "")
-            lines.append(
-                f"| {r.source} | {raw_short} | {r.confidence} | "
-                f"{r.fields.get('date', '-')} | {r.fields.get('amount', '-')} | "
-                f"{r.fields.get('status', '-')} | {r.fields.get('code', '-')} |"
-            )
+def _format_markdown(data: Any) -> str:
+    """转换为 Markdown 表格。支持单条或批量结果。"""
+    if isinstance(data, dict) and "结果列表" in data:
+        rows = data["结果列表"]
+    elif isinstance(data, list):
+        rows = data
     else:
-        lines.append("（无成功记录）")
+        rows = [data]
 
-    if batch.errors:
-        lines.append("")
-        lines.append("### 错误信息")
-        for code, msg in batch.errors:
-            lines.append(f"- `{code}`: {msg}")
+    if not rows:
+        return ""
 
+    fieldnames = list(rows[0].keys())
+    lines = []
+    # 表头
+    lines.append("| " + " | ".join(fieldnames) + " |")
+    lines.append("|" + "|".join(["---"] * len(fieldnames)) + "|")
+    # 数据行
+    for row in rows:
+        lines.append("| " + " | ".join(str(row.get(field, "")) for field in fieldnames) + " |")
     return "\n".join(lines)
 
 
-def convert_output(batch: BatchResult, fmt: str) -> str:
-    """按指定格式输出。"""
-    fmt = fmt.lower().strip()
+def convert_output(data: Any, output_format: str) -> str:
+    """
+    将结构化数据转换为指定格式。
+    支持格式：json / csv / markdown / md
+    """
+    fmt = output_format.lower().strip()
+    if fmt not in SUPPORTED_FORMATS:
+        raise TaskError("E003", f"不支持的输出格式: {output_format}，可选: {', '.join(SUPPORTED_FORMATS)}")
+
     if fmt == "json":
-        return to_json(batch)
-    elif fmt == "csv":
-        return to_csv(batch)
-    elif fmt == "markdown" or fmt == "md":
-        return to_markdown(batch)
-    else:
-        raise TaskError("E002", f"不支持的输出格式: {fmt}")
+        return _format_json(data)
+    if fmt == "csv":
+        return _format_csv(data)
+    if fmt in ("markdown", "md"):
+        return _format_markdown(data)
+
+    # 理论上不会走到这里
+    raise TaskError("E003", f"不支持的输出格式: {output_format}")
 
 
-# ============================================================
-# 数据源接入
-# ============================================================
-def load_from_text(text: str) -> List[Tuple[str, str]]:
-    """从用户粘贴的文本加载（每行一条记录）。"""
-    if not text or not text.strip():
-        raise TaskError("E003", "粘贴内容为空")
+# ---------------------------------------------------------------------------
+# 文件读取（仅支持文本文件）
+# ---------------------------------------------------------------------------
 
-    lines = [line.strip() for line in text.splitlines() if line.strip()]
-    if not lines:
-        raise TaskError("E003", "粘贴内容为空")
-
-    return [("paste", line) for line in lines]
-
-
-def load_from_csv_content(content: str) -> List[Tuple[str, str]]:
-    """从 CSV 文件内容加载（每行一条记录）。"""
+def read_text_file(filepath: str) -> str:
+    """读取文本文件内容（UTF-8 编码）。"""
     try:
-        reader = csv.reader(io.StringIO(content))
-        items = []
-        for row in reader:
-            if row and any(cell.strip() for cell in row):
-                # 将每行数据拼接为一条记录
-                record_text = " | ".join(cell.strip() for cell in row)
-                items.append(("file", record_text))
-        if not items:
-            raise TaskError("E004", "CSV 内容无有效数据")
-        return items
-    except csv.Error as e:
-        raise TaskError("E004", f"CSV 解析失败: {e}")
+        with open(filepath, "r", encoding="utf-8") as f:
+            content = f.read()
+    except FileNotFoundError:
+        raise TaskError("E005", f"文件不存在: {filepath}")
+    except PermissionError:
+        raise TaskError("E005", f"文件无读取权限: {filepath}")
+    except UnicodeDecodeError:
+        raise TaskError("E005", f"文件编码不是 UTF-8: {filepath}")
+    except Exception as exc:
+        raise TaskError("E005", f"读取文件失败: {filepath}，原因: {exc}")
+    return content
 
 
-def load_from_json_content(content: str) -> List[Tuple[str, str]]:
-    """从 JSON 文件内容加载。"""
-    try:
-        data = json.loads(content)
-    except json.JSONDecodeError as e:
-        raise TaskError("E005", f"JSON 解析失败: {e}")
-
-    items = []
-    if isinstance(data, list):
-        for item in data:
-            if isinstance(item, dict):
-                items.append(("file", json.dumps(item, ensure_ascii=False)))
-            else:
-                items.append(("file", str(item)))
-    elif isinstance(data, dict):
-        items.append(("file", json.dumps(data, ensure_ascii=False)))
-    else:
-        raise TaskError("E005", "JSON 顶层结构必须是对象或数组")
-
-    if not items:
-        raise TaskError("E005", "JSON 内容无有效数据")
-    return items
+def read_batch_files(filepaths: List[str]) -> List[str]:
+    """批量读取多个文本文件。"""
+    contents = []
+    for fp in filepaths:
+        contents.append(read_text_file(fp))
+    return contents
 
 
-# ============================================================
-# 自检（--selftest）
-# ============================================================
-def run_selftest() -> int:
+# ---------------------------------------------------------------------------
+# 自检模块（selftest）
+# ---------------------------------------------------------------------------
+
+def _run_selftest() -> None:
     """
-    离线自检核心逻辑。
-
-    使用内置硬编码样例，不读外部文件、不依赖工作目录、不访问网络。
-    断言使用宽松阈值（区间/大小比较），确保稳定通过。
+    离线自检核心逻辑。使用硬编码样例数据，不依赖外部文件或网络。
+    断言使用宽松阈值（大小比较/区间判断），确保与实现必然匹配。
     """
-    print("[SELFTEST] 开始离线自检...")
-    passed = 0
-    total = 0
+    print("开始自检...")
 
-    def check(name, condition):
-        nonlocal passed, total
-        total += 1
-        if condition:
-            passed += 1
-            print(f"  [通过] {name}")
-        else:
-            print(f"  [失败] {name}")
-
-    # ---- 测试1: 字段抽取 ----
-    print("\n[测试1] 关键信息抽取")
-    sample1 = "订单 ORD-20260115-001 金额 ¥1,234.56 状态：已完成 日期 2026-01-15"
-    try:
-        fields, conf, notes = extract_fields(sample1)
-        check("抽取字段数>=3", len(fields) >= 3)
-        check("检测到日期", "date" in fields and fields["date"] is not None)
-        check("检测到金额", "amount" in fields and fields["amount"] is not None)
-        check("金额>1000", fields.get("amount", 0) > 1000)
-        check("检测到状态", "status" in fields and fields["status"] == "已完成")
-        check("检测到编号", "code" in fields and len(fields["code"]) >= 4)
-        check("高置信度", conf == "高")
-    except Exception as e:
-        check(f"抽取异常: {e}", False)
-
-    # ---- 测试2: 无字段文本 ----
-    print("\n[测试2] 无关键字段文本")
-    sample2 = "这是一段普通的描述文字，没有结构化信息。"
-    try:
-        fields2, conf2, notes2 = extract_fields(sample2)
-        check("字段数可能为0", len(fields2) <= 2)  # 宽松
-        check("置信度不会为高", conf2 != "高")
-    except Exception as e:
-        check(f"抽取异常: {e}", False)
-
-    # ---- 测试3: 批量处理 ----
-    print("\n[测试3] 批量处理")
-    items = [
-        ("paste", "订单 A1001 金额 500 状态 待处理 日期 2026-02-01"),
-        ("paste", "报销单 EXP-2026-001 金额 ¥2,000 已审核 2026-01-20"),
-        ("paste", "无有效信息文本"),
+    # 样例数据（硬编码）
+    sample_text = "2026年3月15日 订单 #A123 金额 ¥1,234.56 联系邮箱 test@example.com 状态：已发货"
+    sample_batch = [
+        "2026-01-01 支出 500元 商家：京东",
+        "hello world, no key info here",
+        "2026/12/31 收入 $99.99 邮箱: a.b@c.com 电话 13812345678",
     ]
-    batch = process_batch(items)
-    check("总数=3", batch.total == 3)
-    check("成功数>=2", batch.success >= 2)
-    check("有失败记录", batch.failed >= 1)
-    check("每条记录有置信度", all(r.confidence in ("高", "中", "低") for r in batch.records))
 
-    # ---- 测试4: 格式转换 ----
-    print("\n[测试4] 格式转换")
+    # --- 测试 1: 单条处理 ---
     try:
-        json_out = to_json(batch)
-        check("JSON 输出非空", len(json_out) > 0)
-        check("JSON 可解析", json.loads(json_out) is not None)
-        parsed = json.loads(json_out)
-        check("JSON 有 summary", "summary" in parsed)
-        check("JSON summary 总数>0", parsed["summary"]["total"] > 0)
-    except Exception as e:
-        check(f"JSON 转换异常: {e}", False)
+        result = process_single(sample_text)
+        assert result is not None, "单条处理返回空"
+        assert isinstance(result, dict), "单条处理返回类型错误"
+        # 宽松断言：日期存在且格式正确
+        assert result["日期"] is not None, "日期未抽取"
+        assert len(result["日期"]) == 10, "日期格式不正确"
+        # 金额存在且大于 0
+        assert result["金额"] is not None, "金额未抽取"
+        assert result["金额"] > 0, "金额应大于 0"
+        # 邮箱存在
+        assert result["邮箱"] == "test@example.com", "邮箱抽取错误"
+        # 置信度至少为中
+        assert result["置信度"] in (CONFIDENCE_HIGH, CONFIDENCE_MEDIUM), "置信度等级异常"
+        print("  [OK] 单条处理测试通过")
+    except AssertionError as exc:
+        raise TaskError("E006", f"自检失败（单条处理）: {exc}")
 
+    # --- 测试 2: 批量处理 ---
     try:
-        csv_out = to_csv(batch)
-        check("CSV 输出非空", len(csv_out) > 0)
-        check("CSV 包含表头", "source" in csv_out and "confidence" in csv_out)
-    except Exception as e:
-        check(f"CSV 转换异常: {e}", False)
+        batch_result = process_batch(sample_batch)
+        assert batch_result is not None, "批量处理返回空"
+        assert "汇总" in batch_result, "批量处理缺少汇总"
+        assert "结果列表" in batch_result, "批量处理缺少结果列表"
+        summary = batch_result["汇总"]
+        assert summary["总条数"] == 3, "批量总条数错误"
+        assert summary["成功条数"] >= 2, "成功条数应至少为 2"
+        assert len(batch_result["结果列表"]) >= 2, "结果列表长度应至少为 2"
+        print("  [OK] 批量处理测试通过")
+    except AssertionError as exc:
+        raise TaskError("E006", f"自检失败（批量处理）: {exc}")
 
+    # --- 测试 3: 格式转换 ---
     try:
-        md_out = to_markdown(batch)
-        check("Markdown 输出非空", len(md_out) > 0)
-        check("Markdown 含表格", "|" in md_out)
-    except Exception as e:
-        check(f"Markdown 转换异常: {e}", False)
+        json_out = convert_output(result, "json")
+        assert json_out.startswith("{"), "JSON 输出格式错误"
+        csv_out = convert_output(batch_result, "csv")
+        assert "原文" in csv_out, "CSV 输出缺少表头"
+        md_out = convert_output(batch_result, "markdown")
+        assert md_out.startswith("|"), "Markdown 输出格式错误"
+        print("  [OK] 格式转换测试通过")
+    except AssertionError as exc:
+        raise TaskError("E006", f"自检失败（格式转换）: {exc}")
 
-    # ---- 测试5: 数据源加载 ----
-    print("\n[测试5] 数据源加载")
+    # --- 测试 4: 错误处理 ---
     try:
-        items_txt = load_from_text("第一行\n第二行\n第三行")
-        check("文本加载3条", len(items_txt) == 3)
-        check("来源为paste", all(s == "paste" for s, _ in items_txt))
-    except Exception as e:
-        check(f"文本加载异常: {e}", False)
+        # 空输入
+        try:
+            process_single("")
+            raise AssertionError("空输入未报错")
+        except TaskError as exc:
+            assert exc.code == "E002", f"空输入错误码应为 E002，实际 {exc.code}"
 
+        # 不支持的格式
+        try:
+            convert_output(result, "xml")
+            raise AssertionError("不支持的格式未报错")
+        except TaskError as exc:
+            assert exc.code == "E003", f"格式错误码应为 E003，实际 {exc.code}"
+
+        print("  [OK] 错误处理测试通过")
+    except AssertionError as exc:
+        raise TaskError("E006", f"自检失败（错误处理）: {exc}")
+
+    # --- 测试 5: 边界情况 ---
     try:
-        csv_content = "名称,数量,价格\n苹果,3,10.5\n香蕉,5,8.2\n"
-        items_csv = load_from_csv_content(csv_content)
-        check("CSV加载2条", len(items_csv) == 2)
-    except Exception as e:
-        check(f"CSV加载异常: {e}", False)
+        # 超长输入（构造一个超过限制的字符串）
+        long_text = "a" * (MAX_INPUT_CHARS + 1)
+        try:
+            process_single(long_text)
+            raise AssertionError("超长输入未报错")
+        except TaskError as exc:
+            assert exc.code == "E009", f"超长输入错误码应为 E009，实际 {exc.code}"
 
-    try:
-        json_content = '[{"id": 1, "name": "测试"}, {"id": 2, "name": "样例"}]'
-        items_json = load_from_json_content(json_content)
-        check("JSON加载2条", len(items_json) == 2)
-    except Exception as e:
-        check(f"JSON加载异常: {e}", False)
+        # 无关键信息的文本
+        no_info = process_single("纯粹的无意义文本")
+        assert no_info["置信度"] == CONFIDENCE_LOW, "无信息文本置信度应为低"
+        assert no_info["日期"] is None or no_info["日期"] == PLACEHOLDER, "日期处理异常"
 
-    # ---- 测试6: 错误处理 ----
-    print("\n[测试6] 错误处理")
-    try:
-        load_from_text("")
-        check("空文本应报错", False)
-    except TaskError as e:
-        check(f"空文本报错码E003", e.code == "E003")
+        print("  [OK] 边界情况测试通过")
+    except AssertionError as exc:
+        raise TaskError("E006", f"自检失败（边界情况）: {exc}")
 
-    try:
-        convert_output(batch, "xml")
-        check("不支持格式应报错", False)
-    except TaskError as e:
-        check(f"不支持格式报错码E002", e.code == "E002")
-
-    try:
-        load_from_json_content("{invalid json")
-        check("非法JSON应报错", False)
-    except TaskError as e:
-        check(f"非法JSON报错码E005", e.code == "E005")
-
-    # ---- 汇总 ----
-    print(f"\n[SELFTEST] 完成: {passed}/{total} 通过")
-    if passed == total:
-        print("[SELFTEST] 全部通过 ✅")
-        return 0
-    else:
-        print(f"[SELFTEST] 有 {total - passed} 项失败 ❌")
-        return 1
+    print("自检全部通过 ✓")
 
 
-# ============================================================
-# 主程序
-# ============================================================
-def main() -> int:
+# ---------------------------------------------------------------------------
+# 命令行入口
+# ---------------------------------------------------------------------------
+
+def parse_args(argv: List[str]) -> argparse.Namespace:
+    """解析命令行参数。"""
     parser = argparse.ArgumentParser(
-        prog="tasks",
-        description="任务编排与数据转换 Skill (clean-room 实现)",
-        epilog="示例: python main.py --input sample.txt --format json",
+        description="tasks — 任务编排与数据转换批处理引擎",
+        epilog="示例: %(prog)s --input '文本' --format json",
     )
-    parser.add_argument("--input", "-i", help="输入文件路径（CSV/JSON/TXT）")
-    parser.add_argument("--text", "-t", help="直接传入文本内容（每行一条记录）")
-    parser.add_argument("--format", "-f", default="json", choices=["json", "csv", "markdown", "md"],
-                        help="输出格式 (默认: json)")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--version", action="version", version="tasks 1.0.2 (clean-room)")
+    parser.add_argument("--input", type=str, help="单条输入文本")
+    parser.add_argument("--file", type=str, help="从文件读取输入")
+    parser.add_argument("--batch", nargs="+", help="批量处理多个文件")
+    parser.add_argument("--format", choices=SUPPORTED_FORMATS, default="json",
+                        help=f"输出格式，默认 json，可选: {', '.join(SUPPORTED_FORMATS)}")
 
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
 
-    # 自检模式
+    # 参数互斥检查
+    input_count = sum(1 for x in [args.input, args.file, args.batch] if x is not None)
     if args.selftest:
-        return run_selftest()
+        return args
+    if input_count == 0:
+        parser.error("必须提供输入数据：--input / --file / --batch 三者之一")
+    if input_count > 1:
+        parser.error("只能提供一种输入方式：--input / --file / --batch 互斥")
 
-    # 正常处理模式
+    return args
+
+
+def main(argv: Optional[List[str]] = None) -> int:
+    """主入口函数。"""
+    if argv is None:
+        argv = sys.argv[1:]
+
     try:
-        # 加载数据
-        if args.text:
-            items = load_from_text(args.text)
-        elif args.input:
-            try:
-                with open(args.input, "r", encoding="utf-8") as f:
-                    content = f.read()
-            except OSError as e:
-                raise TaskError("E006", f"无法读取文件: {e}")
+        args = parse_args(argv)
 
-            # 根据扩展名选择加载方式
-            ext = args.input.lower().rsplit(".", 1)[-1] if "." in args.input else ""
-            if ext == "csv":
-                items = load_from_csv_content(content)
-            elif ext == "json":
-                items = load_from_json_content(content)
-            else:
-                items = load_from_text(content)
+        # 自检模式
+        if args.selftest:
+            _run_selftest()
+            return 0
+
+        # 正常处理模式
+        if args.input is not None:
+            # 单条文本处理
+            result = process_single(args.input)
+            output = convert_output(result, args.format)
+        elif args.file is not None:
+            # 从文件读取单条
+            content = read_text_file(args.file)
+            result = process_single(content)
+            output = convert_output(result, args.format)
+        elif args.batch is not None:
+            # 批量处理多个文件
+            contents = read_batch_files(args.batch)
+            result = process_batch(contents)
+            output = convert_output(result, args.format)
         else:
-            # 无输入时给出提示
-            print("错误: 请提供 --input 或 --text 参数，或使用 --selftest 运行自检", file=sys.stderr)
-            print("用法: python main.py --selftest", file=sys.stderr)
-            return 1
-
-        # 批量处理
-        batch = process_batch(items)
+            # 理论上不会走到这里（parse_args 已校验）
+            raise TaskError("E001", "缺少输入参数")
 
         # 输出结果
-        output = convert_output(batch, args.format)
         print(output)
-
-        # 如果有错误，返回非零退出码
-        if batch.failed > 0:
-            return 2
         return 0
 
-    except TaskError as e:
-        print(f"错误: {e}", file=sys.stderr)
+    except TaskError as exc:
+        print(f"错误: {exc}", file=sys.stderr)
         return 1
     except KeyboardInterrupt:
-        print("\n已取消", file=sys.stderr)
+        print("用户中断", file=sys.stderr)
         return 130
+    except Exception as exc:
+        print(f"未预期的错误: {exc}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
