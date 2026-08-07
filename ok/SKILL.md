@@ -3,8 +3,8 @@
 slug: ok
 name: ok
 displayName: 数据整理 结构化输出 信息提取
-description: 将用户提供的任意数据、文件或URL转换为结构化结果，并标注置信度。
-version: 1.0.1
+description: 将任意数据、文件或URL转为结构化结果，并标注置信度。
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ok
@@ -12,9 +12,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 林默
+author: LinguaForge
 agent_created: true
-trigger_words: ["代码审查", "数据整理", "结构化输出", "信息提取", "格式转换"]
+trigger_words: ["代码审查", "数据整理", "结构化输出", "信息提取", "格式转换", "数据清洗", "内容解析"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,25 +31,7 @@ trigger_words: ["代码审查", "数据整理", "结构化输出", "信息提取
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# 数据整理与结构化输出 Skill 文档
-
-## 一、能力边界（一页纸速查卡）
-
-### 1.1 能做与不能做
-
-| 维度 | 能做 | 不能做 |
-|------|------|--------|
-| 输入类型 | 用户直接粘贴的文本、上传的文件（txt/csv/json/md）、可公开访问的 URL | 需要登录鉴权的私有系统、二进制可执行文件、加密数据 |
-| 处理动作 | 提取关键字段、识别实体、按模板重组、批量转换格式 | 修改原始数据源、执行代码、访问内网资源 |
-| 输出形式 | Markdown 表格、JSON 对象、CSV 行、键值对列表 | 生成图片、音频、视频等非文本内容 |
-| 质量保障 | 对每个输出字段标注置信度（高/中/低） | 对缺失信息进行猜测或编造 |
-| 交互方式 | 单次处理、批量处理（需用户明确指定） | 后台自动运行、定时任务、主动推送 |
-
-### 1.2 适用对象
-
-- **目标用户**：需要快速将零散数据整理为规范格式的运营人员、数据分析师、开发者。
-- **典型场景**：从网页抓取信息、整理会议记录、清洗 CSV 数据、提取合同关键条款。
-- **不适用场景**：需要深度行业知识判断的决策建议、涉及法律效力的正式文件生成。
+本 Skill 由 AI 辅助生成，仅供参考，不构成任何形式的保证或承诺。
 
 
 ## 许可证（License）
