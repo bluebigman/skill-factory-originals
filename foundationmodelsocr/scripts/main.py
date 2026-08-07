@@ -10,6 +10,7 @@ scripts/main.py — 票据识别与结构化解析（独立实现）
 import argparse
 import json
 import os
+import re
 import sys
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional, Tuple
@@ -83,8 +84,14 @@ class ReceiptParser:
     FIELD_PATTERNS: Dict[str, Tuple[str, str]] = {
         "invoice_number": (r"(发票号码|发票号|NO\.?|No\.?)\s*[:：]?\s*([A-Za-z0-9\-]{4,20})", "str"),
         "invoice_date": (r"(开票日期|日期|date)\s*[:：]?\s*(\d{4}[-/年.]\d{1,2}[-/月.]\d{1,2}日?)", "str"),
-        "total_amount": (r"(价税合计|合计金额|金额|总计|total)\s*[:：]?\s*[¥￥]?\s*(\d{1,10}(?:[.,]\d{1,2})?)", "float"),
-        "tax_amount": (r"(税额|税金|tax)\s*[:：]?\s*[¥￥]?\s*(\d{1,10}(?:[.,]\d{1,2})?)", "float"),
+        "total_amount": (
+            r"(价税合计|合计金额|金额|总计|total)\s*[:：]?\s*[¥￥]?\s*(\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?|\d+(?:\.\d{1,2})?)",
+            "float"
+        ),
+        "tax_amount": (
+            r"(税额|税金|tax)\s*[:：]?\s*[¥￥]?\s*(\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?|\d+(?:\.\d{1,2})?)",
+            "float"
+        ),
         "seller_name": (r"(销售方|卖方|收款方|seller|收款人)\s*[:：]?\s*([^\n]{2,50})", "str"),
         "buyer_name": (r"(购买方|买方|付款方|buyer|付款人)\s*[:：]?\s*([^\n]{2,50})", "str"),
     }
@@ -100,7 +107,6 @@ class ReceiptParser:
             raise SkillError("E004")
 
         doc = DocumentResult(source=source, raw_text=text.strip())
-        import re
 
         for key, (pattern, type_hint) in self.FIELD_PATTERNS.items():
             match = re.search(pattern, text, re.IGNORECASE | re.MULTILINE)
