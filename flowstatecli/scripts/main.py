@@ -133,7 +133,7 @@ def extract_key_info(text: str) -> Dict[str, Any]:
     if task_id_match:
         result["task_id"] = f"#{task_id_match.group(1)}"
 
-    # 提取类型关键词
+    # 提取类型关键词（使用原文，保持大小写不敏感匹配）
     type_keywords = {
         "bugfix": ["bug", "修复", "fix", "defect"],
         "feature": ["功能", "新特性", "feature", "开发"],
@@ -161,9 +161,9 @@ def extract_key_info(text: str) -> Dict[str, Any]:
             if hours > 0 or minutes > 0:
                 result["duration_h"] = hours + minutes / 60.0
 
-    # 提取关联文件（.py, .js, .ts, .css, .html, .md, .json 等）
-    file_pattern = re.compile(r"[\w\-]+\.(?:py|js|ts|css|html|md|json|txt|yml|yaml|toml|ini|cfg|sh|bat)")
-    files_found = file_pattern.findall(lower_text)
+    # 提取关联文件（使用原文保持大小写，.py, .js, .ts, .css, .html, .md, .json 等）
+    file_pattern = re.compile(r'[\w\-]+\.(?:py|js|ts|css|html|md|json|txt|yml|yaml|toml|ini|cfg|sh|bat)')
+    files_found = file_pattern.findall(text)
     result["files"] = list(set(files_found))  # 去重
 
     # 置信度标注：根据提取到的信息量计算
