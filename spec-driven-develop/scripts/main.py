@@ -343,18 +343,18 @@ class TaskDecomposer:
             content: 任务内容
 
         Returns:
-            耗时范围字符串，如 "2-4"
+            耗时范围字符串，如 "1-2小时"
         """
         # 简单启发式：内容越长越复杂
         length = len(content)
         if length < 20:
-            return "1-2"
+            return "1-2小时"
         elif length < 50:
-            return "2-4"
+            return "2-4小时"
         elif length < 100:
-            return "4-8"
+            return "4-8小时"
         else:
-            return "8-16"
+            return "8-16小时"
 
     def _generate_acceptance_criteria(self, content: str) -> str:
         """生成验收标准。"""
@@ -389,7 +389,7 @@ class GitHubTemplateGenerator:
 - 模块: {task['所属模块']}
 
 ### 预估耗时
-{task['预估耗时(小时)']} 小时
+{task['预估耗时(小时)']}
 
 ### 依赖任务
 {', '.join(task['依赖']) if task['依赖'] else '无'}
