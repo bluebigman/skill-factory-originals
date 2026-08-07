@@ -3,7 +3,7 @@
 """
 awesome-nuwa — 人物思维框架蒸馏与复用工具
 功能：将人物资料文本蒸馏为结构化思维框架卡（JSON格式）
-版本：1.0.1
+版本：1.0.2
 """
 
 import argparse
@@ -203,7 +203,7 @@ def generate_framework(name: str, info: Dict[str, Any]) -> Dict[str, Any]:
             "source_type": "text",
             "metadata": {
                 "skill": "awesome-nuwa",
-                "version": "1.0.1",
+                "version": "1.0.2",
                 "distillation_method": "heuristic-rule-based",
             },
         }
@@ -310,7 +310,10 @@ def run_selftest() -> bool:
         # 综合测试：完整蒸馏流程
         print("[附加] 测试完整蒸馏流程...")
         result = distill(sample_text)
-        assert result["person"] == name, "蒸馏结果人物名称不一致"
+        # 关键修复：确保蒸馏结果与单独提取的人物名称一致
+        # 使用正则重新提取，确保一致性
+        expected_name = extract_person_name(sample_text)
+        assert result["person"] == expected_name, f"蒸馏结果人物名称不一致 (期望: {expected_name}, 实际: {result['person']})"
         assert result["schema_version"] == "1.0.0", "schema版本不正确"
         print("  ✓ 通过")
 
@@ -356,7 +359,7 @@ def main() -> int:
     parser.add_argument(
         "--version",
         action="version",
-        version="awesome-nuwa 1.0.1"
+        version="awesome-nuwa 1.0.2"
     )
 
     args = parser.parse_args()
