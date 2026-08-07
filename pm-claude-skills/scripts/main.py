@@ -155,12 +155,23 @@ class TextParser:
 
     def detect_language(self) -> str:
         """检测文本语言"""
+        # 计算中文字符和英文字符的数量
         chinese_chars = len(re.findall(r'[\u4e00-\u9fff]', self.text))
         english_chars = len(re.findall(r'[a-zA-Z]', self.text))
+        
+        # 如果中文字符多于英文字符，判断为中文
         if chinese_chars > english_chars:
             return "zh-CN"
+        # 如果英文字符多于中文字符，判断为英文
+        elif english_chars > chinese_chars:
+            return "en-US"
+        # 如果中英文字符数量相同且都大于0，优先判断为中文（因为中文文本通常包含英文词汇）
+        elif chinese_chars > 0:
+            return "zh-CN"
+        # 如果只有英文字符，判断为英文
         elif english_chars > 0:
             return "en-US"
+        # 如果没有检测到中英文字符，返回未知
         return "unknown"
 
     def summarize(self, max_length: int = 200) -> str:
