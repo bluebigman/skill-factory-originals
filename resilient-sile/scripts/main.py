@@ -264,12 +264,28 @@ def batch_process(inputs: List[Any], required_fields: List[str] = None,
     results = []
     for idx, item in enumerate(inputs):
         try:
-            result = process_input(item, required_fields, "dict")
-            results.append({"index": idx, "status": "success", "result": json.loads(result)})
+            # 处理每个项目，使用 dict 格式获取中间结果
+            result_str = process_input(item, required_fields, "dict")
+            result = json.loads(result_str)
+            results.append({"index": idx, "status": "success", "result": result})
         except SkillError as e:
             results.append({"index": idx, "status": "error", "code": e.code, "message": e.message})
+        except Exception as e:
+            results.append({"index": idx, "status": "error", "code": "E006", "message": str(e)})
 
-    return json.dumps({"batch_results": results}, ensure_ascii=False, indent=2)
+    # 根据输出格式返回结果
+    if output_format == "json":
+        return json.dumps({"batch_results": results}, ensure_ascii=False, indent=2)
+    elif output_format == "text":
+        lines = []
+        for r in results:
+            if r["status"] == "success":
+                lines.append(f"[{r['index']}] 成功: 置信度 {r['result']['confidence']}%")
+            else:
+                lines.append(f"[{r['index']}] 失败: {r['code']} - {r['message']}")
+        return "\n".join(lines)
+    else:
+        return str({"batch_results": results})
 
 
 # ============================================================
@@ -283,7 +299,7 @@ def run_selftest() -> bool:
     使用宽松阈值断言，确保任何环境可过。
     """
     print("开始自检...")
-
+    
     # 测试用例 1: 结构化输入处理
     print("测试1: 结构化输入")
     test_data = {"title": "测试文档", "author": "测试作者", "content": "测试内容"}
@@ -329,6 +345,9 @@ def run_selftest() -> bool:
     except SkillError as e:
         assert e.code == "E001", f"错误码应为E001，实际: {e.code}"
         print("  ✓ 空输入错误处理通过")
+    except Exception as e:
+        print(f"  ✗ 未预期的异常: {e}")
+        return False
 
     # 测试用例 4: 错误处理 - 缺失关键字段
     print("测试4: 缺失关键字段")
@@ -339,6 +358,9 @@ def run_selftest() -> bool:
     except SkillError as e:
         assert e.code == "E002", f"错误码应为E002，实际: {e.code}"
         print("  ✓ 缺失关键字段错误处理通过")
+    except Exception as e:
+        print(f"  ✗ 未预期的异常: {e}")
+        return False
 
     # 测试用例 5: 批量处理
     print("测试5: 批量处理")
@@ -351,17 +373,20 @@ def run_selftest() -> bool:
         result_str = batch_process(batch_items)
         result = json.loads(result_str)
         # 宽松断言: 应有两个成功一个失败
-        assert len(result["batch_results"]) == 3, "应有3个处理结果"
+        assert len(result["batch_results"]) == 3, f"应有3个处理结果，实际: {len(result['batch_results'])}"
         success_count = sum(1 for r in result["batch_results"] if r["status"] == "success")
         error_count = sum(1 for r in result["batch_results"] if r["status"] == "error")
         assert success_count >= 1, f"至少应有1个成功，实际: {success_count}"
         assert error_count >= 1, f"至少应有1个失败，实际: {error_count}"
-        print("  ✓ 批量处理通过")
+        print(f"  ✓ 批量处理通过 (成功: {success_count}, 失败: {error_count})")
     except AssertionError as e:
         print(f"  ✗ 断言失败: {e}")
         return False
     except SkillError as e:
         print(f"  ✗ 处理失败: {e.code} {e.message}")
+        return False
+    except Exception as e:
+        print(f"  ✗ 未预期的异常: {e}")
         return False
 
     # 测试用例 6: 输出格式
@@ -372,12 +397,53 @@ def run_selftest() -> bool:
         assert json_out.startswith("{"), "JSON输出应以{开头"
         text_out = process_input(test_input, output_format="text")
         assert "置信度" in text_out, "文本输出应包含置信度"
+        dict_out = process_input(test_input, output_format="dict")
+        assert "data" in dict_out, "dict输出应包含data字段"
         print("  ✓ 输出格式处理通过")
     except AssertionError as e:
         print(f"  ✗ 断言失败: {e}")
         return False
     except SkillError as e:
         print(f"  ✗ 处理失败: {e.code} {e.message}")
+        return False
+    except Exception as e:
+        print(f"  ✗ 未预期的异常: {e}")
+        return False
+
+    # 测试用例 7: JSON字符串输入
+    print("测试7: JSON字符串输入")
+    try:
+        json_str = '{"title": "测试", "content": "内容"}'
+        result_str = process_input(json_str, required_fields=["title"], output_format="json")
+        result = json.loads(result_str)
+        assert result["data"]["title"] == "测试", "应正确解析JSON字符串"
+        print("  ✓ JSON字符串输入处理通过")
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
+        return False
+    except SkillError as e:
+        print(f"  ✗ 处理失败: {e.code} {e.message}")
+        return False
+    except Exception as e:
+        print(f"  ✗ 未预期的异常: {e}")
+        return False
+
+    # 测试用例 8: 列表输入
+    print("测试8: 列表输入")
+    try:
+        list_input = [1, 2, 3, 4, 5]
+        result_str = process_input(list_input, output_format="json")
+        result = json.loads(result_str)
+        assert result["data"]["count"] == 5, "应正确统计列表长度"
+        print("  ✓ 列表输入处理通过")
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
+        return False
+    except SkillError as e:
+        print(f"  ✗ 处理失败: {e.code} {e.message}")
+        return False
+    except Exception as e:
+        print(f"  ✗ 未预期的异常: {e}")
         return False
 
     print("\n全部自检通过 ✓")
