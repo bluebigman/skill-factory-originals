@@ -1,24 +1,25 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: huashu-design
 name: huashu-design
-displayName: UI设计 前端
-displayName: Huashu Des
-description: Huashu Design · HTML-native design skill for Claude Code · Claude Code 里 HTML 原生的设计 skill · 高保真原型 / 幻灯片 / 动画 + 20 设计哲学 +
-version: 1.0.0
-author: skill-factory-auto
+displayName: 画术设计 高保真原型 幻灯片动画
+description: 在 Claude Code 中直接生成 HTML 原生高保真原型、幻灯片与交互动画。
+version: 1.0.1
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/huashu-design
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 画术工坊
 agent_created: true
-trigger_words:
-  - "huashu design"
----
+trigger_words: ["huashu-design", "画术设计", "HTML 原型", "高保真原型", "幻灯片", "交互动画", "设计稿生成"]
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+---
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -27,95 +28,62 @@ trigger_words:
 <!-- user-agreement-injected -->
 
 
-# Huashu Des
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-> Huashu Design · HTML-native design skill for Claude Code · Claude Code 里 HTML 原生的设计 skill · 高保真原型 / 幻灯片 / 动画 + 20 设计哲学 +
+# 画术设计（huashu-design）Skill 文档
 
-## 一、能力边界（一页纸速查卡）
+## 一、能力边界：一页纸速查卡
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+### 1.1 能做与不能做
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+| 维度 | 能做 ✅ | 不能做 ❌ |
+|------|--------|----------|
+| 输入处理 | 用户粘贴的文本数据、上传的 CSV/JSON 文件、公开 URL 指向的网页内容 | 私域/需登录认证的 URL、二进制大文件（>5MB）、实时流数据 |
+| 输出形式 | 单个 HTML 文件（内嵌 CSS/JS）、多页幻灯片（单 HTML 内分节）、SVG 图形 | 直接部署到服务器、生成后端代码、输出 PDF（需用户自行打印） |
+| 设计能力 | 响应式布局、CSS 动画、渐变/阴影/圆角等现代视觉风格、20 条设计哲学自动应用 | 位图图像处理（如抠图、滤镜）、字体文件嵌入、3D 渲染 |
+| 交互能力 | 悬停反馈、点击切换、滚动渐入、轮播图、选项卡切换 | 复杂状态管理（如多步骤表单校验）、实时数据绑定、WebSocket 通信 |
+| 数据保真 | 保留输入中的关键字段、数值精度、层级结构 | 自动推断缺失数据、跨表关联、语义纠错 |
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### 1.2 适用对象
 
-## 二、触发方式（说大白话就能用）
+- **产品经理**：快速将需求文档转化为可点击的高保真原型，用于评审或用户测试。
+- **前端开发者**：获取设计风格参考或初始 HTML/CSS 骨架，减少从零搭建的时间。
+- **教育工作者**：制作课堂演示幻灯片，嵌入可交互的示例代码块或图表。
+- **数据分析师**：将统计结果转化为可视化图表页面，便于汇报展示。
 
-**触发词表（6类场景）：**
-| huashu design | 通用场景 |
+### 1.3 输入规格
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 Huashu Des，进入标准流程 |
-| 把这个转成另一种格式 | 启动 Huashu Des，进入标准流程 |
-| 批量弄一下这些 | 启动 Huashu Des，进入标准流程 |
+| 输入类型 | 格式要求 | 示例 |
+|---------|---------|------|
+| 文本数据 | 纯文本或 Markdown，建议附带结构说明（如"这是用户调研摘要"） | "用户反馈：加载慢（12 条）、界面复杂（8 条）……" |
+| 表格数据 | CSV 或 JSON，需包含表头或键名 | `[{"月份":"1月","销量":120}, ...]` |
+| URL | 公开可访问的 HTTP/HTTPS 链接 | `https://example.com/report` |
 
-## 三、标准流程（5分钟上手路径）
+### 1.4 输出规格
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+- **文件类型**：单个 `.html` 文件，自包含（无外部依赖）。
+- **结构要求**：`<head>` 内嵌 `<style>`，`<body>` 末尾内嵌 `<script>`。
+- **尺寸基准**：默认视口 1440×900，响应式断点 768px / 480px。
+- **编码**：UTF-8，中文内容无需转义。
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2026 SkillForge Lab
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
