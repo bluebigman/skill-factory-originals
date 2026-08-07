@@ -495,7 +495,8 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         epilog="示例: python main.py input.csv -v 销售额 -c 地区 -o report.md -f markdown",
     )
     parser.add_argument("input", nargs="?", help="输入数据文件（CSV/JSON）")
-    parser.add_argument("-v", "--value-col", required=True, help="数值列名")
+    # -v 不再设为必选，因为 --selftest 模式不需要
+    parser.add_argument("-v", "--value-col", help="数值列名")
     parser.add_argument("-c", "--category-col", help="分类列名（可选，用于占比统计）")
     parser.add_argument("-t", "--title", default="数据洞察报告", help="报告标题")
     parser.add_argument("-o", "--output", help="输出文件路径（默认输出到 stdout）")
@@ -632,13 +633,18 @@ def main(argv: Optional[List[str]] = None) -> int:
     try:
         args = parse_args(argv)
 
-        # 自检模式
+        # 自检模式 - 优先处理，不需要其他参数
         if args.selftest:
             return run_selftest()
 
-        # 正常模式
+        # 正常模式 - 此时需要验证必选参数
         if not args.input:
             print("错误: 缺少输入文件参数", file=sys.stderr)
+            print("用法: python main.py <input> -v <value_col> [options]", file=sys.stderr)
+            return 1  # E001
+
+        if not args.value_col:
+            print("错误: 缺少数值列参数 (-v/--value-col)", file=sys.stderr)
             print("用法: python main.py <input> -v <value_col> [options]", file=sys.stderr)
             return 1  # E001
 
