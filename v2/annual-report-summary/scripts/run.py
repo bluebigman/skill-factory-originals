@@ -6,7 +6,7 @@ annual-report-summary — 配套执行器（原创实现，clean-room）
 零第三方依赖。
 """
 from __future__ import annotations
-import argparse, re, sys, json, time, urllib.request, urllib.error
+import argparse, re, sys, json, time, urllib.request, urllib.error, urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
 
@@ -136,8 +136,6 @@ def fetch_real_data() -> dict:
     从东方财富公开接口获取真实年报数据（贵州茅台示例）
     带重试退避和超时控制
     """
-    import urllib.parse
-
     params = urllib.parse.urlencode(DATA_SOURCE_PARAMS)
     url = f"{DATA_SOURCE_URL}?{params}"
 
@@ -264,6 +262,15 @@ def selftest() -> int:
     assert 'roe' in output['indicators'], "主流程输出缺少ROE"
     assert abs(output['indicators']['roe'] - 15.23) < 0.01, f"主流程ROE值错误: {output['indicators']['roe']}"
     print("  [OK] 主流程CLI调用:", output['indicators'])
+
+    # 测试7: 真实数据源调用（如果可用）
+    try:
+        real_data = fetch_real_data()
+        assert 'roe' in real_data, "真实数据源ROE缺失"
+        assert 'net_profit_growth' in real_data, "真实数据源净利润增长率缺失"
+        print("  [OK] 真实数据源调用:", real_data)
+    except ConnectionError as e:
+        print(f"  [WARN] 真实数据源不可用（不影响自检通过）: {e}")
 
     print("== annual-report-summary 配套执行器自检通过 ✅ ==")
     return 0

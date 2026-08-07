@@ -76,7 +76,8 @@ def extract_key_fields(text: str) -> Dict[str, Any]:
         result["confidence"] += 0.2
 
     # 3. 提取键值对（支持 name=value 或 name: value）
-    kv_pattern = r"(\w+)\s*[=:]\s*([^\s,;]+)"
+    # 使用更宽松的正则，支持中文和特殊字符
+    kv_pattern = r'([\w\u4e00-\u9fff]+)\s*[=:]\s*([^\s,;]+)'
     kv_matches = re.findall(kv_pattern, text)
     for key, value in kv_matches:
         result["fields"][key] = value
@@ -235,7 +236,7 @@ def run_selftest() -> bool:
     assert result["status"] == "success", "测试 1 失败：状态错误"
     assert result["parsed"]["fields"]["name"] == "测试文件", "测试 1 失败：字段提取错误"
     assert result["confidence"] >= 0.85, f"测试 1 失败：置信度异常 {result['confidence']}"
-    print("  ✓ 通过")
+    print(f"  ✓ 通过 (confidence={result['confidence']:.2f})")
 
     # 测试用例 2: URL 输入
     print("\n[测试 2] URL 输入")
@@ -271,7 +272,7 @@ def run_selftest() -> bool:
     assert result["status"] == "success", "测试 5 失败：状态错误"
     assert result["confidence"] < 0.85, "测试 5 失败：应低置信度"
     assert any("需核实" in w for w in result["warnings"]), "测试 5 失败：应包含需核实警告"
-    print("  ✓ 通过")
+    print(f"  ✓ 通过 (confidence={result['confidence']:.2f})")
 
     # 测试用例 6: 批量处理
     print("\n[测试 6] 批量处理")

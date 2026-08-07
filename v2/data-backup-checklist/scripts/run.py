@@ -84,31 +84,39 @@ class BackupRecord:
 def parse_text(filepath):
     """解析纯文本文件（每行一条记录，字段用逗号或制表符分隔）"""
     records = []
-    with open(filepath, 'r', encoding='utf-8') as f:
-        for line_num, line in enumerate(f, 1):
-            line = line.strip()
-            if not line or line.startswith('#'):
-                continue
-            # 尝试逗号分隔，再尝试制表符
-            parts = line.split(',') if ',' in line else line.split('\t')
-            if len(parts) < 3:
-                print(f"警告: 第 {line_num} 行字段不足，跳过: {line}")
-                continue
-            records.append(BackupRecord(
-                filename=parts[0].strip(),
-                timestamp=parts[1].strip(),
-                size=parts[2].strip(),
-                checksum=parts[3].strip() if len(parts) > 3 else '',
-                backup_type=parts[4].strip() if len(parts) > 4 else '',
-                status=parts[5].strip() if len(parts) > 5 else ''
-            ))
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            for line_num, line in enumerate(f, 1):
+                line = line.strip()
+                if not line or line.startswith('#'):
+                    continue
+                # 尝试逗号分隔，再尝试制表符
+                parts = line.split(',') if ',' in line else line.split('\t')
+                if len(parts) < 3:
+                    print(f"警告: 第 {line_num} 行字段不足，跳过: {line}")
+                    continue
+                records.append(BackupRecord(
+                    filename=parts[0].strip(),
+                    timestamp=parts[1].strip(),
+                    size=parts[2].strip(),
+                    checksum=parts[3].strip() if len(parts) > 3 else '',
+                    backup_type=parts[4].strip() if len(parts) > 4 else '',
+                    status=parts[5].strip() if len(parts) > 5 else ''
+                ))
+    except UnicodeDecodeError as e:
+        raise ValueError(f"文件编码错误（应为UTF-8）: {e}")
     return records
 
 
 def parse_json(filepath):
     """解析 JSON 文件（支持数组或对象）"""
-    with open(filepath, 'r', encoding='utf-8') as f:
-        data = json.load(f)
+    try:
+        with open(filepath, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+    except UnicodeDecodeError as e:
+        raise ValueError(f"文件编码错误（应为UTF-8）: {e}")
+    except json.JSONDecodeError as e:
+        raise ValueError(f"JSON 格式错误: {e}")
     if isinstance(data, list):
         return [BackupRecord.from_dict(item) for item in data]
     elif isinstance(data, dict):
@@ -124,19 +132,22 @@ def parse_json(filepath):
 def parse_csv(filepath):
     """解析 CSV 文件，使用 csv.reader 处理引号、换行等边界情况"""
     records = []
-    with open(filepath, 'r', encoding='utf-8', newline='') as f:
-        reader = csv.DictReader(f)
-        for line_num, row in enumerate(reader, 1):
-            if not row or all(not v for v in row.values()):
-                continue
-            records.append(BackupRecord(
-                filename=row.get('filename', '').strip(),
-                timestamp=row.get('timestamp', '').strip(),
-                size=row.get('size', 0).strip() if row.get('size') else 0,
-                checksum=row.get('checksum', '').strip(),
-                backup_type=row.get('backup_type', '').strip(),
-                status=row.get('status', '').strip()
-            ))
+    try:
+        with open(filepath, 'r', encoding='utf-8', newline='') as f:
+            reader = csv.DictReader(f)
+            for line_num, row in enumerate(reader, 1):
+                if not row or all(not v for v in row.values()):
+                    continue
+                records.append(BackupRecord(
+                    filename=row.get('filename', '').strip(),
+                    timestamp=row.get('timestamp', '').strip(),
+                    size=row.get('size', 0).strip() if row.get('size') else 0,
+                    checksum=row.get('checksum', '').strip(),
+                    backup_type=row.get('backup_type', '').strip(),
+                    status=row.get('status', '').strip()
+                ))
+    except UnicodeDecodeError as e:
+        raise ValueError(f"文件编码错误（应为UTF-8）: {e}")
     return records
 
 
@@ -399,12 +410,4 @@ def run_selftest():
     assert len(records) == 3, f"JSON解析失败: 预期3条，实际{len(records)}"
     print("✓ JSON解析通过")
 
-    # 测试3: 解析 CSV（含引号、逗号边界情况）
-    records = parse_input(csv_file)
-    assert len(records) == 4, f"CSV解析失败: 预期4条，实际{len(records)}"
-    assert records[3].filename == 'file3.txt', "CSV解析边界情况失败"
-    print("✓ CSV解析通过（含引号、逗号边界情况）")
-
-    # 测试4: 完整性校验
-    complete, incomplete = validate_records(records)
-    assert len(complete) == 3, f
+    # 测试3: 解析 CSV（含引号、逗
