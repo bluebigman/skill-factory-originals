@@ -45,7 +45,7 @@ class FieldExtractor:
         "邮箱": (r"(?:邮箱|电子邮件|email|e-mail)[:：\s]*([\w.+-]+@[\w-]+\.[\w.]+)", 0.95),
         "地址": (r"(?:地址|住址|location|address)[:：\s]*([\u4e00-\u9fa50-9A-Za-z\-号栋单元室楼层]+)", 0.85),
         "日期": (r"(?:日期|时间|date|time)[:：\s]*(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)", 0.90),
-        "金额": (r"(?:金额|价格|价格|amount|price)[:：\s]*([¥￥]?\d+(?:\.\d{1,2})?(?:元|块|RMB)?)", 0.85),
+        "金额": (r"(?:金额|价格|amount|price)[:：\s]*([¥￥]?\d+(?:\.\d{1,2})?(?:元|块|RMB)?)", 0.85),
         "编号": (r"(?:编号|单号|ID|No\.?)[:：\s]*([A-Za-z0-9\-]{4,20})", 0.80),
     }
 
@@ -272,23 +272,38 @@ def run_selftest() -> bool:
     assert full_result["status"] == "success", "E007: 完整流程失败"
     assert full_result["data"]["姓名"] == "张三", "E007: 完整流程姓名错误"
 
-    # 测试用例5：空输入处理（不应崩溃，返回错误信息）
-    try:
-        process_input(text="   ")
-        # 如果走到这里说明没有抛出异常，但应返回错误
-        empty_check = process_input(text="   ")
-        assert empty_check["status"] == "failed", "E007: 空输入未返回失败状态"
-    except Exception:
-        # 抛出异常也视为失败
-        raise AssertionError("E007: 空输入处理异常")
+    # 测试用例5：空输入处理（返回失败状态）
+    empty_result = process_input(text="   ")
+    assert empty_result["status"] == "failed", "E007: 空输入未返回失败状态"
+    assert "E004" in empty_result.get("error", ""), "E007: 空输入错误码错误"
 
-    # 测试用例6：文件不存在
+    # 测试用例6：文件不存在（返回失败状态）
+    file_result = process_input(file_path="/nonexistent/path/file.txt")
+    assert file_result["status"] == "failed", "E007: 不存在的文件应返回失败状态"
+    assert "E002" in file_result.get("error", ""), "E007: 文件错误码错误"
+
+    # 测试用例7：无参数输入（返回失败状态）
+    no_input_result = process_input()
+    assert no_input_result["status"] == "failed", "E007: 无输入未返回失败状态"
+    assert "E001" in no_input_result.get("error", ""), "E007: 无输入错误码错误"
+
+    # 测试用例8：URL输入（应返回失败，因为离线环境）
+    url_result = process_input(url="http://example.com")
+    assert url_result["status"] == "failed", "E007: URL输入应返回失败状态（离线环境）"
+    assert "E003" in url_result.get("error", ""), "E007: URL错误码错误"
+
+    # 测试用例9：JSON序列化验证
     try:
-        process_input(file_path="/nonexistent/path/file.txt")
-        raise AssertionError("E007: 不存在的文件应返回失败")
-    except Exception as exc:
-        # 应返回错误字典而不是抛出
-        assert "E002" in str(exc) or "failed" in str(exc), "E007: 文件错误处理异常"
+        json_str = json.dumps(full_result, ensure_ascii=False)
+        assert json_str, "E007: JSON序列化结果为空"
+    except (TypeError, ValueError) as exc:
+        raise AssertionError(f"E007: JSON序列化失败 - {exc}")
+
+    # 测试用例10：正则编译验证
+    try:
+        FieldExtractor()
+    except RuntimeError as exc:
+        raise AssertionError(f"E007: 正则编译失败 - {exc}")
 
     print("[selftest] 所有自检断言通过 ✅")
     return True

@@ -2,575 +2,408 @@
 # -*- coding: utf-8 -*-
 """
 scripts/main.py
-========================================
-未命名工具 (s3) — 伪 s3 协议处理器（Mozilla 浏览器场景）
 
-本脚本根据功能规格独立实现（clean-room），不参考任何既有代码。
+基于功能规格独立实现的 S3 技能工具（clean-room 重写）。
 仅使用 Python 标准库，无第三方依赖。
-
-核心能力：
-    1. 将用户提供的数据/文件/URL 转换为结构化结果
-    2. 识别并保留输入中的关键信息
-    3. 按约定格式生成输出
-    4. 对不确定项给出置信度提示
-    5. 支持批量处理和自定义格式
-
-错误码体系：
-    E001 输入为空
-    E002 关键信息缺失
-    E003 输入格式错误
-    E004 超出能力边界
-    E005 置信度过低
-    E006 输出格式不支持
-    E007 批量处理失败
-    E008 参数解析错误
-    E009 内部逻辑错误
-    E010 未知错误
-
-用法示例：
-    python scripts/main.py --input "示例文本内容"
-    python scripts/main.py --input "示例内容" --format json
-    python scripts/main.py --selftest
 """
 
 import argparse
 import json
+import re
 import sys
-import os
-from typing import Any, Dict, List, Optional, Tuple, Union
+from typing import Any, Dict, List, Optional, Tuple
 
 
-# ============================================================
-# 常量定义
-# ============================================================
-
-# 版本信息
-VERSION = "1.0.0"
-SKILL_NAME = "未命名工具"
-SKILL_SLUG = "s3"
-
-# 置信度阈值（宽松区间，避免边界值断言）
-HIGH_CONFIDENCE_THRESHOLD = 0.90      # ≥90% 直接输出
-MEDIUM_CONFIDENCE_THRESHOLD = 0.85    # 85%-90% 建议复核
-LOW_CONFIDENCE_THRESHOLD = 0.85       # <85% 标注 [需核实]
-
-# 默认输出格式
-DEFAULT_OUTPUT_FORMAT = "text"
-
-# 支持的输出格式
-SUPPORTED_FORMATS = {"text", "json"}
-
-# 关键信息字段（用于结构化输出）
-KEY_FIELDS = ["content", "length", "word_count", "has_url", "confidence"]
+# ---------------------------------------------------------------------------
+# 错误码定义（对应规格第四章）
+# ---------------------------------------------------------------------------
+ERROR_CODES = {
+    "E001": "请提供待处理的内容，格式为：用户提供的数据/文件/URL",
+    "E002": "还缺少以下信息，请补充：...",
+    "E003": "输入格式不符合要求，示例：...",
+    "E004": "这超出了本工具的能力范围，建议...",
+    "E005": "结果无法确定，建议：...",
+    "E006": "内部处理异常，请稍后重试",
+    "E007": "参数解析失败，请检查命令行参数",
+    "E008": "输出序列化失败",
+    "E009": "自检断言未通过",
+    "E010": "未知错误",
+}
 
 
-# ============================================================
-# 工具函数
-# ============================================================
+class S3Error(Exception):
+    """带错误码的业务异常"""
 
-def _now() -> str:
-    """返回当前时间字符串（用于输出元信息）。"""
-    from datetime import datetime
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
-
-def _generate_id(prefix: str = "s3") -> str:
-    """生成简单唯一 ID（基于时间戳与随机数）。"""
-    import time
-    import random
-    return f"{prefix}-{int(time.time() * 1000)}-{random.randint(1000, 9999)}"
+    def __init__(self, code: str, message: Optional[str] = None):
+        self.code = code
+        self.message = message or ERROR_CODES.get(code, ERROR_CODES["E010"])
+        super().__init__(f"[{self.code}] {self.message}")
 
 
-# ============================================================
-# 核心逻辑：输入解析
-# ============================================================
+# ---------------------------------------------------------------------------
+# 核心数据结构
+# ---------------------------------------------------------------------------
+class ProcessedItem:
+    """单个输入项的处理结果"""
 
-def parse_input(raw_input: str) -> Dict[str, Any]:
+    def __init__(
+        self,
+        original: str,
+        key_fields: Dict[str, Any],
+        confidence: float,
+        warnings: Optional[List[str]] = None,
+    ):
+        self.original = original
+        self.key_fields = key_fields
+        self.confidence = confidence
+        self.warnings = warnings or []
+
+    def to_dict(self) -> Dict[str, Any]:
+        """转为字典结构"""
+        return {
+            "original": self.original,
+            "key_fields": self.key_fields,
+            "confidence": self.confidence,
+            "warnings": self.warnings,
+        }
+
+
+class ProcessResult:
+    """批量处理的整体结果"""
+
+    def __init__(self, items: List[ProcessedItem]):
+        self.items = items
+
+    def to_dict(self) -> Dict[str, Any]:
+        return {
+            "total": len(self.items),
+            "items": [item.to_dict() for item in self.items],
+        }
+
+
+# ---------------------------------------------------------------------------
+# 核心处理逻辑
+# ---------------------------------------------------------------------------
+def _validate_input(raw_input: str) -> None:
+    """校验输入是否合法（E001/E003）"""
+    if raw_input is None or raw_input.strip() == "":
+        raise S3Error("E001")
+    if len(raw_input) > 10000:  # 防止超长输入
+        raise S3Error("E003")
+
+
+def _extract_key_fields(text: str) -> Tuple[Dict[str, Any], float]:
     """
-    解析用户输入，提取关键信息。
-
-    参数:
-        raw_input: 用户提供的原始输入字符串
-
-    返回:
-        结构化字典，包含:
-            - content: 原始内容
-            - length: 字符长度
-            - word_count: 单词数量（按空白分割）
-            - has_url: 是否包含 URL
-            - has_file_path: 是否包含文件路径
-
-    错误码:
-        E001: 输入为空
-        E003: 输入格式错误（非字符串）
+    从文本中提取关键信息并计算置信度。
+    识别规则：
+      - 形如 "key: value" 或 "key=value" 的字段
+      - URL 链接
+      - 数字编号
+    置信度基于识别到的字段数量与文本长度综合判断。
     """
-    # 输入为空检查 (E001)
-    if raw_input is None or (isinstance(raw_input, str) and raw_input.strip() == ""):
-        raise ValueError("E001: 请提供待处理的内容，格式为：用户提供的数据/文件/URL")
+    fields: Dict[str, Any] = {}
+    total_chars = len(text.strip())
+    if total_chars == 0:
+        return fields, 0.0
 
-    # 类型检查 (E003)
-    if not isinstance(raw_input, str):
-        raise TypeError("E003: 输入格式不符合要求，示例：'这是一个示例文本'")
-
-    # 基础统计
-    content = raw_input.strip()
-    length = len(content)
-    word_count = len(content.split())
-
-    # URL 检测（宽松判断，仅检查常见协议前缀）
-    has_url = content.lower().startswith(("http://", "https://", "ftp://", "s3://"))
-
-    # 文件路径检测（宽松判断：包含路径分隔符或常见扩展名）
-    has_file_path = (
-        "/" in content
-        or "\\" in content
-        or content.lower().endswith((".txt", ".csv", ".json", ".xml", ".md", ".pdf"))
+    # 1. 识别 key: value 或 key=value 模式
+    pair_pattern = re.compile(
+        r"(?P<key>[A-Za-z_][A-Za-z0-9_]*)\s*[:=]\s*(?P<value>[^,\n;]+)"
     )
+    pair_matches = pair_pattern.findall(text)
+    for key, value in pair_matches:
+        cleaned_value = value.strip()
+        if cleaned_value:
+            fields[key] = cleaned_value
 
-    return {
-        "content": content,
-        "length": length,
-        "word_count": word_count,
-        "has_url": has_url,
-        "has_file_path": has_file_path,
-    }
+    # 2. 识别 URL
+    url_pattern = re.compile(r"https?://[^\s,;]+")
+    urls = url_pattern.findall(text)
+    if urls:
+        fields["url"] = urls[0]
+        if len(urls) > 1:
+            fields["additional_urls"] = urls[1:]
 
-
-# ============================================================
-# 核心逻辑：置信度计算
-# ============================================================
-
-def calculate_confidence(parsed: Dict[str, Any]) -> float:
-    """
-    根据输入特征计算置信度（0.0 ~ 1.0）。
-
-    规则（宽松启发式，不依赖精确值）：
-        - 基础置信度 0.90
-        - 内容过短（<5字符）: -0.10
-        - 内容为空: -0.30
-        - 包含 URL: +0.05
-        - 包含文件路径: +0.05
-        - 内容较长（>100字符）: +0.05
-        - 置信度限制在 [0.0, 1.0] 区间
-
-    参数:
-        parsed: 解析结果字典
-
-    返回:
-        置信度浮点数（0.0 ~ 1.0）
-    """
-    confidence = 0.90
-
-    # 内容长度影响
-    length = parsed.get("length", 0)
-    if length < 5:
-        confidence -= 0.10
-    elif length > 100:
-        confidence += 0.05
-
-    # URL 与文件路径加分
-    if parsed.get("has_url"):
-        confidence += 0.05
-    if parsed.get("has_file_path"):
-        confidence += 0.05
-
-    # 边界限制
-    confidence = max(0.0, min(1.0, confidence))
-    return round(confidence, 2)
-
-
-# ============================================================
-# 核心逻辑：结果生成
-# ============================================================
-
-def generate_result(parsed: Dict[str, Any], output_format: str = DEFAULT_OUTPUT_FORMAT) -> Dict[str, Any]:
-    """
-    生成结构化结果。
-
-    参数:
-        parsed: 解析结果字典
-        output_format: 输出格式（text/json）
-
-    返回:
-        结构化结果字典
-
-    错误码:
-        E006: 输出格式不支持
-    """
-    # 格式检查 (E006)
-    if output_format not in SUPPORTED_FORMATS:
-        raise ValueError(f"E006: 不支持的输出格式 '{output_format}'，支持: {', '.join(sorted(SUPPORTED_FORMATS))}")
+    # 3. 识别数字编号（如 ID、编号等）
+    id_pattern = re.compile(r"(?:ID|id|编号|No\.?)\s*[:=]?\s*(\d+)")
+    id_matches = id_pattern.findall(text)
+    if id_matches:
+        fields["id"] = id_matches[0]
 
     # 计算置信度
-    confidence = calculate_confidence(parsed)
-
-    # 置信度标注
-    if confidence >= HIGH_CONFIDENCE_THRESHOLD:
-        confidence_label = "高置信度"
-        advice = "直接使用"
-    elif confidence >= MEDIUM_CONFIDENCE_THRESHOLD:
-        confidence_label = "中置信度"
-        advice = "建议复核"
+    # 规则：识别到的字段越多、文本越短，置信度越高
+    field_count = len(fields)
+    if field_count == 0:
+        confidence = 0.3  # 未识别到任何字段，置信度低
     else:
-        confidence_label = "低置信度"
-        advice = "[需核实] 请确认输入内容"
+        # 基础置信度 0.6，每个字段增加 0.1，最多到 0.95
+        confidence = min(0.6 + 0.1 * field_count, 0.95)
+        # 文本过长或过短都会降低置信度
+        if total_chars < 5:
+            confidence -= 0.1
+        elif total_chars > 500:
+            confidence -= 0.05
+        # 确保置信度在 0~1 之间
+        confidence = max(0.0, min(1.0, confidence))
 
-    # 构建结果
-    result = {
-        "skill": SKILL_SLUG,
-        "skill_name": SKILL_NAME,
-        "version": VERSION,
-        "timestamp": _now(),
-        "result_id": _generate_id(),
-        "input_summary": {
-            "content_preview": parsed["content"][:50] + ("..." if parsed["length"] > 50 else ""),
-            "length": parsed["length"],
-            "word_count": parsed["word_count"],
-            "has_url": parsed["has_url"],
-            "has_file_path": parsed["has_file_path"],
-        },
-        "processing": {
-            "status": "success",
-            "method": "rule-based",
-            "fields_extracted": KEY_FIELDS,
-        },
-        "output": {
-            "content": parsed["content"],
-            "structured": {
-                "length": parsed["length"],
-                "word_count": parsed["word_count"],
-                "contains_url": parsed["has_url"],
-                "contains_file_path": parsed["has_file_path"],
-            },
-        },
-        "confidence": {
-            "score": confidence,
-            "label": confidence_label,
-            "advice": advice,
-        },
-        "meta": {
-            "disclaimer": "本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。",
-            "license": "MIT",
-            "copyright": "原创作者（自持版权）",
-        },
-    }
-
-    return result
+    return fields, confidence
 
 
-# ============================================================
-# 核心逻辑：输出格式化
-# ============================================================
-
-def format_output(result: Dict[str, Any], output_format: str = DEFAULT_OUTPUT_FORMAT) -> str:
+def _check_critical_fields(fields: Dict[str, Any]) -> Optional[str]:
     """
-    将结果字典格式化为指定格式的字符串。
-
-    参数:
-        result: 结果字典
-        output_format: 输出格式（text/json）
-
-    返回:
-        格式化后的字符串
-
-    错误码:
-        E006: 输出格式不支持
+    检查关键字段是否完整（E002）。
+    如果缺少必要字段，返回提示信息；否则返回 None。
     """
+    # 至少需要识别出 1 个有效字段
+    if not fields:
+        return "未识别到任何关键字段，请提供包含 key: value 或 URL 格式的内容"
+    return None
+
+
+def process_single(text: str) -> ProcessedItem:
+    """处理单个输入项"""
+    _validate_input(text)
+
+    fields, confidence = _extract_key_fields(text)
+
+    # 关键信息缺失检查
+    missing_hint = _check_critical_fields(fields)
+    warnings = []
+    if missing_hint:
+        warnings.append(missing_hint)
+        # 置信度过低时标注需核实
+        if confidence < 0.85:
+            warnings.append("[需核实] 识别出的关键字段较少，请人工确认结果")
+
+    return ProcessedItem(
+        original=text,
+        key_fields=fields,
+        confidence=confidence,
+        warnings=warnings,
+    )
+
+
+def process_batch(inputs: List[str]) -> ProcessResult:
+    """批量处理多个输入项"""
+    if not inputs:
+        raise S3Error("E001")
+
+    items = []
+    for raw in inputs:
+        # 单条输入异常不中断整体流程，记录为低置信度结果
+        try:
+            item = process_single(raw)
+        except S3Error as exc:
+            item = ProcessedItem(
+                original=raw,
+                key_fields={},
+                confidence=0.0,
+                warnings=[f"处理失败: {exc.message}"],
+            )
+        items.append(item)
+
+    return ProcessResult(items)
+
+
+def format_output(result: ProcessResult, output_format: str = "json") -> str:
+    """按指定格式输出结果"""
     if output_format == "json":
-        return json.dumps(result, ensure_ascii=False, indent=2)
-
+        try:
+            return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
+        except (TypeError, ValueError) as exc:
+            raise S3Error("E008", f"JSON 序列化失败: {exc}") from exc
     elif output_format == "text":
         lines = []
-        lines.append(f"=== {SKILL_NAME} (s3) 处理结果 ===")
-        lines.append(f"时间: {result['timestamp']}")
-        lines.append(f"结果ID: {result['result_id']}")
-        lines.append("")
-        lines.append("--- 输入摘要 ---")
-        lines.append(f"内容预览: {result['input_summary']['content_preview']}")
-        lines.append(f"字符数: {result['input_summary']['length']}")
-        lines.append(f"单词数: {result['input_summary']['word_count']}")
-        lines.append(f"包含URL: {'是' if result['input_summary']['has_url'] else '否'}")
-        lines.append(f"包含文件路径: {'是' if result['input_summary']['has_file_path'] else '否'}")
-        lines.append("")
-        lines.append("--- 处理结果 ---")
-        lines.append(f"状态: {result['processing']['status']}")
-        lines.append(f"提取字段: {', '.join(result['processing']['fields_extracted'])}")
-        lines.append("")
-        lines.append("--- 结构化输出 ---")
-        lines.append(f"长度: {result['output']['structured']['length']}")
-        lines.append(f"单词数: {result['output']['structured']['word_count']}")
-        lines.append(f"包含URL: {'是' if result['output']['structured']['contains_url'] else '否'}")
-        lines.append(f"包含文件路径: {'是' if result['output']['structured']['contains_file_path'] else '否'}")
-        lines.append("")
-        lines.append("--- 置信度 ---")
-        lines.append(f"得分: {result['confidence']['score']:.2f}")
-        lines.append(f"等级: {result['confidence']['label']}")
-        lines.append(f"建议: {result['confidence']['advice']}")
-        lines.append("")
-        lines.append(f"--- 元信息 ---")
-        lines.append(f"许可证: {result['meta']['license']}")
+        for idx, item in enumerate(result.items, 1):
+            lines.append(f"--- 项目 {idx} ---")
+            lines.append(f"原始输入: {item.original}")
+            lines.append(f"关键字段: {json.dumps(item.key_fields, ensure_ascii=False)}")
+            lines.append(f"置信度: {item.confidence * 100:.1f}%")
+            if item.warnings:
+                lines.append(f"提示: {'; '.join(item.warnings)}")
+            lines.append("")
         return "\n".join(lines)
-
     else:
-        raise ValueError(f"E006: 不支持的输出格式 '{output_format}'")
+        raise S3Error("E003", f"不支持的输出格式: {output_format}")
 
 
-# ============================================================
-# 核心逻辑：批量处理
-# ============================================================
-
-def batch_process(inputs: List[str], output_format: str = DEFAULT_OUTPUT_FORMAT) -> List[Dict[str, Any]]:
+# ---------------------------------------------------------------------------
+# 自检模块（--selftest）
+# ---------------------------------------------------------------------------
+def run_selftest() -> int:
     """
-    批量处理多个输入。
-
-    参数:
-        inputs: 输入字符串列表
-        output_format: 输出格式
-
-    返回:
-        结果字典列表
-
-    错误码:
-        E007: 批量处理失败（某个输入处理出错）
+    离线自检核心逻辑。
+    使用硬编码样例数据，不读外部文件、不访问网络。
+    断言使用宽松阈值，确保在任何环境可过。
     """
-    results = []
-    errors = []
+    print("开始自检...")
 
-    for idx, raw_input in enumerate(inputs):
-        try:
-            parsed = parse_input(raw_input)
-            result = generate_result(parsed, output_format)
-            results.append(result)
-        except (ValueError, TypeError) as e:
-            errors.append({"index": idx, "error": str(e)})
+    # 样例 1: 正常输入，包含 key: value 和 URL
+    sample1 = "name: test_item, url: https://example.com/data, id: 12345"
+    try:
+        item1 = process_single(sample1)
+        assert item1.key_fields.get("name") == "test_item", "name 字段提取失败"
+        assert "url" in item1.key_fields, "url 字段提取失败"
+        assert item1.confidence > 0.5, "置信度应大于 50%"
+        assert item1.confidence <= 1.0, "置信度不应超过 100%"
+        print("  样例1（正常输入）: 通过")
+    except AssertionError as exc:
+        print(f"  样例1 失败: {exc}")
+        return 1
+    except S3Error as exc:
+        print(f"  样例1 异常: {exc.message}")
+        return 1
 
-    # 如果有错误，抛出批量处理异常 (E007)
-    if errors:
-        error_summary = "; ".join([f"[{e['index']}] {e['error']}" for e in errors])
-        raise RuntimeError(f"E007: 批量处理失败，{len(errors)} 个输入出错: {error_summary}")
+    # 样例 2: 空输入，应触发 E001
+    try:
+        process_single("   ")
+        print("  样例2（空输入）: 失败（未触发错误）")
+        return 1
+    except S3Error as exc:
+        assert exc.code == "E001", f"错误码应为 E001，实际为 {exc.code}"
+        print("  样例2（空输入）: 通过")
 
-    return results
+    # 样例 3: 批量处理，包含一个合法输入和一个非法输入
+    batch_input = [
+        "key1: value1, key2: value2",
+        "   ",  # 非法输入
+        "url: https://test.org/page, note: hello world",
+    ]
+    try:
+        batch_result = process_batch(batch_input)
+        assert len(batch_result.items) == 3, "批量处理应返回 3 个结果"
+        # 合法输入应有字段提取
+        assert len(batch_result.items[0].key_fields) >= 2, "第一个输入应提取到至少 2 个字段"
+        # 非法输入应置信度为 0 且包含警告
+        assert batch_result.items[1].confidence == 0.0, "非法输入置信度应为 0"
+        assert len(batch_result.items[1].warnings) > 0, "非法输入应有警告信息"
+        # 第三个输入应提取到 url
+        assert "url" in batch_result.items[2].key_fields, "第三个输入应提取到 url"
+        print("  样例3（批量处理）: 通过")
+    except AssertionError as exc:
+        print(f"  样例3 失败: {exc}")
+        return 1
+    except S3Error as exc:
+        print(f"  样例3 异常: {exc.message}")
+        return 1
+
+    # 样例 4: 输出格式化（JSON 和文本）
+    try:
+        sample_item = ProcessedItem(
+            original="test data",
+            key_fields={"name": "test"},
+            confidence=0.9,
+            warnings=[],
+        )
+        sample_result = ProcessResult([sample_item])
+
+        json_out = format_output(sample_result, "json")
+        parsed = json.loads(json_out)
+        assert parsed["total"] == 1, "JSON 输出 total 应为 1"
+        assert parsed["items"][0]["confidence"] == 0.9, "JSON 输出 confidence 不正确"
+
+        text_out = format_output(sample_result, "text")
+        assert "测试" in text_out or "项目" in text_out or "---" in text_out, "文本输出格式异常"
+        print("  样例4（输出格式化）: 通过")
+    except AssertionError as exc:
+        print(f"  样例4 失败: {exc}")
+        return 1
+    except S3Error as exc:
+        print(f"  样例4 异常: {exc.message}")
+        return 1
+
+    # 样例 5: 边界情况 - 只包含 URL 的输入
+    try:
+        url_only = process_single("https://example.com/single")
+        assert "url" in url_only.key_fields, "应识别出 URL"
+        assert url_only.confidence > 0.3, "URL 识别的置信度应大于 30%"
+        print("  样例5（URL 边界）: 通过")
+    except AssertionError as exc:
+        print(f"  样例5 失败: {exc}")
+        return 1
+    except S3Error as exc:
+        print(f"  样例5 异常: {exc.message}")
+        return 1
+
+    # 样例 6: 错误码体系完整性
+    try:
+        for code in ["E001", "E002", "E003", "E004", "E005"]:
+            assert code in ERROR_CODES, f"错误码 {code} 未定义"
+        print("  样例6（错误码体系）: 通过")
+    except AssertionError as exc:
+        print(f"  样例6 失败: {exc}")
+        return 1
+
+    print("所有自检样例通过！")
+    return 0
 
 
-# ============================================================
-# 命令行接口
-# ============================================================
-
-def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
-    """
-    解析命令行参数。
-
-    参数:
-        argv: 命令行参数列表（默认为 sys.argv[1:]）
-
-    返回:
-        解析后的参数命名空间
-    """
+# ---------------------------------------------------------------------------
+# 命令行入口
+# ---------------------------------------------------------------------------
+def main() -> int:
+    """主入口函数"""
     parser = argparse.ArgumentParser(
-        description=f"{SKILL_NAME} (s3) — 伪 s3 协议处理器",
-        epilog="示例: python scripts/main.py --input '示例内容' --format json",
-    )
-
-    parser.add_argument(
-        "--input",
-        type=str,
-        help="待处理的输入内容（字符串）",
+        description="S3 技能工具 - 伪 S3 协议处理",
+        epilog="示例: python main.py 'name: test, url: https://example.com'",
     )
     parser.add_argument(
-        "--format",
-        type=str,
-        choices=sorted(SUPPORTED_FORMATS),
-        default=DEFAULT_OUTPUT_FORMAT,
-        help=f"输出格式（默认: {DEFAULT_OUTPUT_FORMAT}）",
-    )
-    parser.add_argument(
-        "--batch",
-        type=str,
-        nargs="+",
-        help="批量处理多个输入（空格分隔）",
+        "inputs",
+        nargs="*",
+        help="待处理的输入内容（可多个，空格分隔）",
     )
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行内置自检（离线，无需外部文件或网络）",
+        help="运行离线自检",
     )
     parser.add_argument(
-        "--version",
+        "--format",
+        choices=["json", "text"],
+        default="json",
+        help="输出格式（默认: json）",
+    )
+    parser.add_argument(
+        "--batch",
         action="store_true",
-        help="显示版本信息",
+        help="批量模式：每行输入作为独立条目处理",
     )
 
-    return parser.parse_args(argv)
-
-
-# ============================================================
-# 自检逻辑（内置硬编码样例，离线可运行）
-# ============================================================
-
-def run_selftest() -> int:
-    """
-    运行内置自检。
-
-    使用硬编码样例数据，不读取外部文件、不依赖当前工作目录、不访问网络。
-    断言使用宽松阈值（大小比较/区间判断），确保任何环境直接可过。
-
-    返回:
-        0 表示全部通过，非 0 表示失败
-    """
-    print("=" * 60)
-    print("开始自检 (selftest)")
-    print("=" * 60)
-
-    # --------------------------------------------------------
-    # 测试用例 1: 基本解析
-    # --------------------------------------------------------
-    print("\n[1/6] 测试基本解析...")
-    sample_input = "这是一个示例文本，用于测试基本解析功能。"
-    parsed = parse_input(sample_input)
-
-    # 宽松断言
-    assert parsed["length"] > 0, "E009: 长度应为正数"
-    assert parsed["word_count"] >= 1, "E009: 单词数应至少为 1"
-    assert parsed["has_url"] is False, "E009: 不应包含 URL"
-    assert parsed["has_file_path"] is False, "E009: 不应包含文件路径"
-    print("  ✓ 基本解析通过")
-
-    # --------------------------------------------------------
-    # 测试用例 2: 置信度计算
-    # --------------------------------------------------------
-    print("\n[2/6] 测试置信度计算...")
-    confidence = calculate_confidence(parsed)
-
-    # 宽松断言：置信度应在合理区间
-    assert 0.0 <= confidence <= 1.0, "E009: 置信度应在 [0,1] 区间"
-    assert confidence > 0.5, "E009: 正常输入的置信度应大于 0.5"
-    print(f"  ✓ 置信度计算通过 (score={confidence:.2f})")
-
-    # --------------------------------------------------------
-    # 测试用例 3: 结果生成
-    # --------------------------------------------------------
-    print("\n[3/6] 测试结果生成...")
-    result = generate_result(parsed, "json")
-
-    # 宽松断言：检查关键字段存在
-    assert "skill" in result, "E009: 结果缺少 skill 字段"
-    assert "output" in result, "E009: 结果缺少 output 字段"
-    assert "confidence" in result, "E009: 结果缺少 confidence 字段"
-    assert result["skill"] == SKILL_SLUG, "E009: skill 字段值不正确"
-    print("  ✓ 结果生成通过")
-
-    # --------------------------------------------------------
-    # 测试用例 4: 输出格式化
-    # --------------------------------------------------------
-    print("\n[4/6] 测试输出格式化...")
-    text_output = format_output(result, "text")
-    json_output = format_output(result, "json")
-
-    # 宽松断言：输出非空且包含关键内容
-    assert len(text_output) > 50, "E009: 文本输出过短"
-    assert len(json_output) > 50, "E009: JSON 输出过短"
-    assert SKILL_NAME in text_output, "E009: 文本输出缺少技能名称"
-    assert '"skill"' in json_output, "E009: JSON 输出缺少 skill 字段"
-    print("  ✓ 输出格式化通过")
-
-    # --------------------------------------------------------
-    # 测试用例 5: URL 与文件路径识别
-    # --------------------------------------------------------
-    print("\n[5/6] 测试 URL 与文件路径识别...")
-    url_input = "https://example.com/data/file.txt"
-    parsed_url = parse_input(url_input)
-
-    assert parsed_url["has_url"] is True, "E009: 应识别 URL"
-    assert parsed_url["has_file_path"] is True, "E009: 应识别文件路径"
-    print("  ✓ URL 与文件路径识别通过")
-
-    # --------------------------------------------------------
-    # 测试用例 6: 批量处理
-    # --------------------------------------------------------
-    print("\n[6/6] 测试批量处理...")
-    batch_inputs = ["第一条输入", "第二条输入 https://example.com", "第三条输入"]
-    batch_results = batch_process(batch_inputs, "json")
-
-    assert len(batch_results) == 3, "E009: 批量处理应返回 3 个结果"
-    for br in batch_results:
-        assert "result_id" in br, "E009: 批量结果缺少 result_id"
-        assert br["processing"]["status"] == "success", "E009: 处理状态应为 success"
-    print("  ✓ 批量处理通过")
-
-    # --------------------------------------------------------
-    # 自检完成
-    # --------------------------------------------------------
-    print("\n" + "=" * 60)
-    print("自检全部通过 ✓")
-    print("=" * 60)
-    return 0
-
-
-# ============================================================
-# 主入口
-# ============================================================
-
-def main(argv: Optional[List[str]] = None) -> int:
-    """
-    主入口函数。
-
-    参数:
-        argv: 命令行参数列表（默认为 sys.argv[1:]）
-
-    返回:
-        退出码（0 成功，非 0 失败）
-    """
     try:
-        args = parse_args(argv)
+        args = parser.parse_args()
+    except SystemExit as exc:
+        # argparse 出错时返回非零退出码
+        return exc.code if isinstance(exc.code, int) else 1
 
-        # 自检模式
-        if args.selftest:
-            return run_selftest()
+    # 自检模式
+    if args.selftest:
+        return run_selftest()
 
-        # 版本模式
-        if args.version:
-            print(f"{SKILL_NAME} (s3) 版本 {VERSION}")
-            return 0
+    # 处理输入
+    if not args.inputs:
+        print(f"错误: {ERROR_CODES['E001']}", file=sys.stderr)
+        return 1
 
-        # 批量模式
+    try:
         if args.batch:
-            try:
-                results = batch_process(args.batch, args.format)
-                print(f"批量处理完成，共 {len(results)} 个结果：")
-                for idx, res in enumerate(results):
-                    print(f"\n--- 结果 {idx + 1} ---")
-                    print(format_output(res, args.format))
-                return 0
-            except RuntimeError as e:
-                print(f"错误: {e}", file=sys.stderr)
-                return 1
+            # 批量模式：每个参数作为独立输入
+            result = process_batch(args.inputs)
+        else:
+            # 单条模式：将所有参数合并为一条输入
+            combined = " ".join(args.inputs)
+            result = process_batch([combined])
 
-        # 单条处理模式
-        if args.input:
-            try:
-                parsed = parse_input(args.input)
-                result = generate_result(parsed, args.format)
-                print(format_output(result, args.format))
-                return 0
-            except (ValueError, TypeError) as e:
-                print(f"错误: {e}", file=sys.stderr)
-                return 1
+        output = format_output(result, args.format)
+        print(output)
+        return 0
 
-        # 无有效参数，显示帮助
-        print("未提供有效参数。使用 --help 查看用法，或 --selftest 运行自检。")
+    except S3Error as exc:
+        print(f"错误: {exc.message}", file=sys.stderr)
+        return 1
+    except Exception as exc:  # 兜底异常处理
+        print(f"错误: [{ERROR_CODES['E010']}] {exc}", file=sys.stderr)
         return 1
 
-    except KeyboardInterrupt:
-        print("\n用户中断操作", file=sys.stderr)
-        return 130
-    except Exception as e:
-        print(f"E010: 未知错误: {e}", file=sys.stderr)
-        return 1
-
-
-# ============================================================
-# 脚本入口
-# ============================================================
 
 if __name__ == "__main__":
     sys.exit(main())

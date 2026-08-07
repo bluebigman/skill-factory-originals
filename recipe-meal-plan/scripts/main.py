@@ -7,6 +7,7 @@
 
 import argparse
 import json
+import re
 import sys
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -76,6 +77,29 @@ TASTE_PROFILES: Dict[str, Dict[str, float]] = {
     "素食": {"油": 0.8, "辣": 0.2, "重口": 0.3, "甜": 0.2},
 }
 
+# 口味名称映射（包含常见变体）
+TASTE_ALIASES: Dict[str, str] = {
+    "清淡": "清淡",
+    "清谈": "清淡",
+    "家常": "家常",
+    "家常菜": "家常",
+    "川菜": "川湘",
+    "川湘": "川湘",
+    "湘菜": "川湘",
+    "辣": "川湘",
+    "麻辣": "川湘",
+    "粤菜": "粤式",
+    "粤式": "粤式",
+    "广东菜": "粤式",
+    "西餐": "西式",
+    "西式": "西式",
+    "日料": "日式",
+    "日式": "日式",
+    "日本菜": "日式",
+    "素菜": "素食",
+    "素食": "素食",
+}
+
 # 默认口味
 DEFAULT_TASTE = "家常"
 
@@ -118,7 +142,6 @@ def parse_user_input(text: str) -> Dict[str, Any]:
         return result
 
     # 提取人数（如：3人、4个人）
-    import re
     people_match = re.search(r"(\d+)\s*(人|个人|口)", text)
     if people_match:
         result["people"] = int(people_match.group(1))
@@ -128,11 +151,18 @@ def parse_user_input(text: str) -> Dict[str, Any]:
     if budget_match:
         result["budget"] = float(budget_match.group(1))
 
-    # 提取口味（从TASTE_PROFILES中匹配）
-    for taste in TASTE_PROFILES:
-        if taste in text:
+    # 提取口味（使用别名映射，支持更多表达方式）
+    for alias, taste in TASTE_ALIASES.items():
+        if alias in text:
             result["taste"] = taste
             break
+    
+    # 如果未找到，尝试直接匹配口味名称
+    if result["taste"] is None:
+        for taste in TASTE_PROFILES:
+            if taste in text:
+                result["taste"] = taste
+                break
 
     # 提取忌口（简单关键词）
     avoid_keywords = ["不吃", "忌口", "过敏"]
@@ -408,9 +438,9 @@ def run_selftest() -> bool:
     # 测试1：参数解析
     try:
         parsed = parse_user_input("我想吃川菜，3个人，预算500元")
-        assert parsed["taste"] == "川湘", "口味解析失败"
-        assert parsed["people"] == 3, "人数解析失败"
-        assert parsed["budget"] == 500, "预算解析失败"
+        assert parsed["taste"] == "川湘", f"口味解析失败: {parsed['taste']}"
+        assert parsed["people"] == 3, f"人数解析失败: {parsed['people']}"
+        assert parsed["budget"] == 500, f"预算解析失败: {parsed['budget']}"
         print("  [PASS] 参数解析")
     except AssertionError as e:
         print(f"  [FAIL] 参数解析: {e}")

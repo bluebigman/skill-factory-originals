@@ -1,547 +1,555 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-ruview — 无线信号空间感知与存在检测分析（独立实现）
+ruview — 无线信号空间感知与存在检测分析（Clean-room 实现）
 
-本脚本依据功能规格独立编写，不复制任何既有代码。
-提供信号强度解析、空间状态推断、区域划分建议、异常信号报告四大核心能力。
+本脚本完全依据功能规格独立实现，不参考任何既有代码。
+仅使用 Python 标准库，无第三方依赖。
+
+核心能力：
+    1. 信号强度解析：解析 RSSI 序列，输出均值、方差、峰值频次
+    2. 空间状态推断：基于多源信号波动，判定存在/不存在/不确定
+    3. 区域划分建议：基于衰减模型，给出监测区域划分建议
+    4. 异常信号报告：识别信号突变事件（时间戳+类型+置信度）
+
+命令行用法：
+    python main.py [--selftest]
 """
 
 import argparse
 import math
 import statistics
 import sys
+from collections import deque
 from datetime import datetime, timedelta
-from typing import Dict, List, Optional, Tuple
 
 
 # ============================================================
-# 错误码定义
+# 错误码定义 (E001-E010)
 # ============================================================
 ERROR_CODES = {
-    "E001": "参数错误：输入数据格式不正确",
-    "E002": "数据不足：采样点数少于最小要求",
-    "E003": "采样率过低：无法满足时间分辨率要求",
-    "E004": "发射源不足：需要至少2个发射源信号",
-    "E005": "时间跨度不足：需要至少5分钟数据",
-    "E006": "房间尺寸参数无效",
-    "E007": "信号数据包含无效值（非数值或超出合理范围）",
-    "E008": "内部计算错误",
-    "E009": "输入数据为空",
-    "E010": "未知错误",
+    "E001": "输入数据为空或格式错误",
+    "E002": "采样数据不足（至少需要 30 个数据点）",
+    "E003": "采样率过低（至少需要 1Hz）",
+    "E004": "发射源数量不足（至少需要 2 个）",
+    "E005": "房间尺寸参数无效",
+    "E006": "数据中包含非数值类型",
+    "E007": "时间戳格式错误",
+    "E008": "时间跨度不足（至少需要 5 分钟）",
+    "E009": "参数类型错误",
+    "E010": "内部计算异常",
 }
 
 
-class RuviewError(Exception):
-    """ruview 自定义异常，携带错误码。"""
-
-    def __init__(self, code: str, message: Optional[str] = None):
+class RUViewError(Exception):
+    """自定义异常类，携带错误码"""
+    def __init__(self, code: str, message: str = ""):
         self.code = code
-        self.message = message or ERROR_CODES.get(code, ERROR_CODES["E010"])
+        self.message = message or ERROR_CODES.get(code, "未知错误")
         super().__init__(f"[{code}] {self.message}")
 
 
 # ============================================================
-# 核心数据结构
+# 信号强度解析模块
 # ============================================================
+class SignalAnalyzer:
+    """信号强度解析器：处理 RSSI 数值序列，输出波动特征"""
 
-class SignalSample:
-    """单条信号采样记录。"""
+    @staticmethod
+    def validate_rssi_sequence(rssi_values: list) -> None:
+        """校验 RSSI 序列有效性"""
+        if not rssi_values:
+            raise RUViewError("E001")
+        if len(rssi_values) < 30:
+            raise RUViewError("E002")
+        for val in rssi_values:
+            if not isinstance(val, (int, float)):
+                raise RUViewError("E006")
+            if math.isnan(val) or math.isinf(val):
+                raise RUViewError("E006")
 
-    def __init__(self, timestamp: datetime, source_id: str, rssi: float):
-        self.timestamp = timestamp
-        self.source_id = source_id
-        self.rssi = rssi
+    @staticmethod
+    def calculate_features(rssi_values: list) -> dict:
+        """计算波动特征：均值、方差、峰值频次"""
+        SignalAnalyzer.validate_rssi_sequence(rssi_values)
 
+        try:
+            mean_val = statistics.mean(rssi_values)
+            var_val = statistics.variance(rssi_values) if len(rssi_values) > 1 else 0.0
 
-class SignalSeries:
-    """某个发射源的信号时间序列。"""
+            # 峰值检测：局部极大值（比前后邻居都大）
+            peak_count = 0
+            for i in range(1, len(rssi_values) - 1):
+                if rssi_values[i] > rssi_values[i-1] and rssi_values[i] > rssi_values[i+1]:
+                    peak_count += 1
 
-    def __init__(self, source_id: str, samples: List[SignalSample]):
-        self.source_id = source_id
-        self.samples = samples
+            # 峰值频次 = 峰值数 / 总时长（假设 1Hz 采样率，点数即秒数）
+            duration_seconds = len(rssi_values)
+            peak_freq = peak_count / duration_seconds if duration_seconds > 0 else 0.0
 
-    def rssi_values(self) -> List[float]:
-        return [s.rssi for s in self.samples]
-
-    def timestamps(self) -> List[datetime]:
-        return [s.timestamp for s in self.samples]
-
-
-# ============================================================
-# 数据校验与预处理
-# ============================================================
-
-def validate_signal_data(samples: List[SignalSample]) -> None:
-    """校验信号数据的基本合法性。"""
-    if not samples:
-        raise RuviewError("E009")
-
-    # 检查采样点数
-    if len(samples) < 30:
-        raise RuviewError("E002", f"采样点数 {len(samples)} < 30，至少需要30个点")
-
-    # 检查发射源数量（按 source_id 去重）
-    source_ids = set(s.source_id for s in samples)
-    if len(source_ids) < 2:
-        raise RuviewError("E004", f"发射源数量 {len(source_ids)} < 2")
-
-    # 检查时间跨度
-    timestamps = [s.timestamp for s in samples]
-    time_span = (max(timestamps) - min(timestamps)).total_seconds()
-    if time_span < 300:  # 5分钟
-        raise RuviewError("E005", f"时间跨度 {time_span:.1f}秒 < 300秒")
-
-    # 检查采样率（至少 1Hz）
-    if len(samples) > 1:
-        intervals = [
-            (timestamps[i + 1] - timestamps[i]).total_seconds()
-            for i in range(len(timestamps) - 1)
-            if (timestamps[i + 1] - timestamps[i]).total_seconds() > 0
-        ]
-        if intervals:
-            avg_interval = sum(intervals) / len(intervals)
-            if avg_interval > 1.0:
-                raise RuviewError("E003", f"平均采样间隔 {avg_interval:.2f}秒 > 1秒")
-
-    # 检查 RSSI 值范围（-120 ~ 0 dBm 为合理范围）
-    for s in samples:
-        if not isinstance(s.rssi, (int, float)) or math.isnan(s.rssi):
-            raise RuviewError("E007", f"非数值 RSSI: {s.rssi}")
-        if s.rssi < -120 or s.rssi > 0:
-            raise RuviewError("E007", f"RSSI 超出合理范围: {s.rssi}")
-
-
-def group_by_source(samples: List[SignalSample]) -> Dict[str, SignalSeries]:
-    """按发射源分组，返回序列字典。"""
-    grouped: Dict[str, List[SignalSample]] = {}
-    for s in samples:
-        grouped.setdefault(s.source_id, []).append(s)
-
-    # 每个源内部按时间排序
-    result = {}
-    for sid, slist in grouped.items():
-        slist.sort(key=lambda x: x.timestamp)
-        result[sid] = SignalSeries(sid, slist)
-    return result
+            return {
+                "mean": mean_val,                # 均值
+                "variance": var_val,             # 方差
+                "peak_count": peak_count,        # 峰值次数
+                "peak_frequency": peak_freq,     # 峰值频次（次/秒）
+                "sample_count": len(rssi_values), # 样本数
+            }
+        except Exception as exc:
+            raise RUViewError("E010", str(exc)) from exc
 
 
 # ============================================================
-# 核心算法：信号特征提取
+# 空间状态推断模块
 # ============================================================
+class SpaceStateDetector:
+    """空间状态推断器：根据多源信号波动判定存在状态"""
 
-def compute_series_features(series: SignalSeries) -> Dict[str, float]:
-    """计算单个信号序列的统计特征。"""
-    values = series.rssi_values()
-    if len(values) < 2:
-        raise RuviewError("E002")
+    # 判定阈值（宽松设计，避免边界依赖）
+    VARIANCE_THRESHOLD = 0.5      # 方差低于此值视为"无明显波动"
+    PEAK_FREQ_THRESHOLD = 0.01    # 峰值频次低于此值视为"不活跃"
 
-    mean_val = statistics.mean(values)
-    variance_val = statistics.variance(values) if len(values) > 1 else 0.0
-    std_val = math.sqrt(variance_val)
+    @staticmethod
+    def validate_sources(sources: dict) -> None:
+        """校验发射源数据：至少 2 个有效信号源"""
+        if not isinstance(sources, dict):
+            raise RUViewError("E009")
+        if len(sources) < 2:
+            raise RUViewError("E004")
+        for src_name, rssi_list in sources.items():
+            if not isinstance(rssi_list, list) or not rssi_list:
+                raise RUViewError("E001")
+            SignalAnalyzer.validate_rssi_sequence(rssi_list)
 
-    # 计算峰值频次：信号强度变化超过阈值（3dB）的次数
-    peak_count = 0
-    threshold = 3.0
-    for i in range(1, len(values)):
-        if abs(values[i] - values[i - 1]) > threshold:
-            peak_count += 1
-    # 归一化为每分钟峰值次数
-    timestamps = series.timestamps()
-    span_seconds = (timestamps[-1] - timestamps[0]).total_seconds()
-    peaks_per_min = (peak_count / span_seconds * 60.0) if span_seconds > 0 else 0.0
+    @classmethod
+    def infer_state(cls, sources: dict) -> dict:
+        """
+        推断空间存在状态：
+        - "present"：存在移动物体（多个源波动明显）
+        - "absent"：不存在移动物体（所有源波动微弱）
+        - "uncertain"：不确定（部分源波动，部分不波动）
+        """
+        cls.validate_sources(sources)
 
-    # 最大波动幅度
-    max_fluctuation = max(values) - min(values) if values else 0.0
+        try:
+            per_source_features = {}
+            for src_name, rssi_list in sources.items():
+                features = SignalAnalyzer.calculate_features(rssi_list)
+                per_source_features[src_name] = features
 
-    return {
-        "mean": mean_val,
-        "variance": variance_val,
-        "std": std_val,
-        "peaks_per_min": peaks_per_min,
-        "max_fluctuation": max_fluctuation,
-    }
+            # 统计活跃源数量（方差或峰值频次超过阈值）
+            active_sources = 0
+            for features in per_source_features.values():
+                if (features["variance"] > cls.VARIANCE_THRESHOLD or
+                        features["peak_frequency"] > cls.PEAK_FREQ_THRESHOLD):
+                    active_sources += 1
 
+            total_sources = len(sources)
 
-# ============================================================
-# 空间状态推断
-# ============================================================
+            # 判定逻辑（宽松比例判断）
+            if active_sources == 0:
+                state = "absent"
+                confidence = 0.8  # 高置信度：完全安静
+            elif active_sources >= total_sources * 0.6:
+                state = "present"
+                confidence = 0.7 + 0.2 * (active_sources / total_sources)
+            else:
+                state = "uncertain"
+                confidence = 0.5
 
-def infer_spatial_state(features_list: List[Dict[str, float]]) -> str:
-    """
-    根据多个发射源的特征推断空间状态。
-    返回 'present'（有人）、'absent'（无人）、'uncertain'（不确定）。
-    """
-    if not features_list:
-        return "uncertain"
-
-    # 综合所有源的平均方差和峰值频次
-    avg_variance = statistics.mean([f["variance"] for f in features_list])
-    avg_peaks = statistics.mean([f["peaks_per_min"] for f in features_list])
-    avg_fluctuation = statistics.mean([f["max_fluctuation"] for f in features_list])
-
-    # 宽松判定阈值（基于经验值，留有充分余量）
-    # 有人活动时：方差 > 1.0，峰值 > 1次/分钟，波动 > 5dB
-    if avg_variance > 1.0 and avg_peaks > 1.0:
-        return "present"
-    # 无人时：方差很小，峰值很少
-    if avg_variance < 0.5 and avg_peaks < 0.5 and avg_fluctuation < 5.0:
-        return "absent"
-    return "uncertain"
-
-
-# ============================================================
-# 区域划分建议
-# ============================================================
-
-def suggest_zones(room_length: float, room_width: float,
-                  router_x: float, router_y: float,
-                  wall_material: str = "drywall") -> List[Dict]:
-    """
-    基于信号衰减模型给出区域划分建议。
-    返回区域列表，每个区域包含中心坐标和半径。
-    """
-    if room_length <= 0 or room_width <= 0:
-        raise RuviewError("E006", "房间尺寸必须为正数")
-
-    # 墙体材质对应的衰减系数（dB/m）
-    material_attenuation = {
-        "drywall": 1.5,
-        "concrete": 3.0,
-        "wood": 1.0,
-        "glass": 0.8,
-    }
-    attenuation = material_attenuation.get(wall_material.lower(), 1.5)
-
-    # 将房间划分为网格，计算每个格点到路由器的距离
-    grid_size = 1.0  # 1米网格
-    x_steps = max(1, int(room_length / grid_size))
-    y_steps = max(1, int(room_width / grid_size))
-
-    # 计算每个格点的信号衰减（简化模型：自由空间 + 墙体衰减）
-    zones = []
-    for i in range(x_steps):
-        for j in range(y_steps):
-            cx = (i + 0.5) * grid_size
-            cy = (j + 0.5) * grid_size
-            distance = math.sqrt((cx - router_x) ** 2 + (cy - router_y) ** 2)
-            # 简化衰减模型：L = 20log10(d) + 墙体衰减
-            if distance < 0.1:
-                distance = 0.1
-            free_space_loss = 20 * math.log10(distance) + 40  # 粗略参考
-            wall_loss = attenuation * 0.5  # 假设半面墙
-            total_loss = free_space_loss + wall_loss
-
-            zones.append({
-                "center": (cx, cy),
-                "loss": total_loss,
-                "distance": distance,
-            })
-
-    # 按信号质量分为近、中、远三个区域
-    if not zones:
-        return []
-
-    losses = [z["loss"] for z in zones]
-    min_loss = min(losses)
-    max_loss = max(losses)
-    loss_range = max_loss - min_loss
-
-    if loss_range < 1.0:
-        loss_range = 1.0  # 避免除零
-
-    near_threshold = min_loss + loss_range * 0.3
-    mid_threshold = min_loss + loss_range * 0.7
-
-    result_zones = []
-    for z in zones:
-        if z["loss"] <= near_threshold:
-            zone_type = "near"
-        elif z["loss"] <= mid_threshold:
-            zone_type = "mid"
-        else:
-            zone_type = "far"
-        result_zones.append({
-            "type": zone_type,
-            "center": z["center"],
-            "loss": z["loss"],
-        })
-
-    return result_zones
+            return {
+                "state": state,                      # present / absent / uncertain
+                "confidence": min(confidence, 0.95), # 置信度 0~1
+                "active_source_count": active_sources,
+                "total_source_count": total_sources,
+                "per_source_features": per_source_features,
+            }
+        except RUViewError:
+            raise
+        except Exception as exc:
+            raise RUViewError("E010", str(exc)) from exc
 
 
 # ============================================================
-# 异常信号报告
+# 区域划分建议模块
 # ============================================================
+class ZonePlanner:
+    """区域划分建议器：基于信号衰减模型给出监测区域建议"""
 
-def detect_anomalies(series_list: List[SignalSeries],
-                     window_seconds: int = 60) -> List[Dict]:
-    """
-    检测信号异常事件（突变）。
-    返回事件列表，每项含时间戳、类型、置信度。
-    """
-    anomalies = []
-    if not series_list:
-        return anomalies
+    # 2.4GHz 信号自由空间衰减模型（简化版）
+    # 路径损耗 = 20*log10(d) + 20*log10(f) - 147.55，f 单位 MHz
+    FREQ_MHZ = 2400.0
 
-    # 对每个源分别检测
-    for series in series_list:
-        values = series.rssi_values()
-        timestamps = series.timestamps()
-        if len(values) < 2:
-            continue
+    @staticmethod
+    def validate_room_params(room_width: float, room_height: float,
+                             router_pos: tuple, wall_material: str) -> None:
+        """校验房间参数"""
+        if not isinstance(room_width, (int, float)) or room_width <= 0:
+            raise RUViewError("E005")
+        if not isinstance(room_height, (int, float)) or room_height <= 0:
+            raise RUViewError("E005")
+        if not isinstance(router_pos, (tuple, list)) or len(router_pos) != 2:
+            raise RUViewError("E009")
+        if not all(isinstance(v, (int, float)) for v in router_pos):
+            raise RUViewError("E009")
+        if not isinstance(wall_material, str) or not wall_material:
+            raise RUViewError("E009")
 
-        # 计算平均采样间隔
-        total_span = (timestamps[-1] - timestamps[0]).total_seconds()
-        avg_interval = total_span / (len(values) - 1) if len(values) > 1 else 1.0
-        
-        # 滑动窗口大小（基于秒数转换）
-        window_size = max(2, int(window_seconds / max(avg_interval, 0.1)))
-        window_size = min(window_size, len(values) // 3) if len(values) > 3 else 1
-        if window_size < 1:
-            window_size = 1
+    @staticmethod
+    def _wall_attenuation(material: str) -> float:
+        """墙体材质衰减系数（dB）"""
+        material_map = {
+            "木质": 3.0,
+            "石膏板": 2.5,
+            "砖墙": 8.0,
+            "混凝土": 15.0,
+            "玻璃": 2.0,
+        }
+        return material_map.get(material, 5.0)  # 默认中等衰减
 
-        # 使用固定窗口大小检测突变
-        for i in range(window_size, len(values) - window_size):
-            # 计算前后窗口的均值
-            before_vals = values[max(0, i - window_size):i]
-            after_vals = values[i + 1:min(len(values), i + window_size + 1)]
-            
-            if len(before_vals) < 1 or len(after_vals) < 1:
-                continue
-                
-            before_mean = statistics.mean(before_vals)
-            after_mean = statistics.mean(after_vals)
-            current = values[i]
-            
-            # 检测突变：当前值偏离前后均值
-            diff_before = abs(current - before_mean)
-            diff_after = abs(current - after_mean)
-            diff = max(diff_before, diff_after)
+    @classmethod
+    def suggest_zones(cls, room_width: float, room_height: float,
+                      router_pos: tuple, wall_material: str) -> dict:
+        """生成区域划分建议"""
+        cls.validate_room_params(room_width, room_height, router_pos, wall_material)
 
-            # 突变阈值：超过 8dB
-            if diff > 8.0:
-                # 置信度基于突变幅度
-                confidence = min(1.0, diff / 15.0)
-                anomalies.append({
-                    "timestamp": timestamps[i],
-                    "source_id": series.source_id,
-                    "type": "sudden_change",
-                    "magnitude": diff,
-                    "confidence": confidence,
+        try:
+            rx, ry = router_pos
+            attenuation = cls._wall_attenuation(wall_material)
+
+            # 计算各区域信号强度参考值
+            # 将房间划分为 3 个区域：近场、中场、远场（基于距离）
+            max_dist = math.sqrt(room_width**2 + room_height**2)
+            rx_dist = math.sqrt((room_width - rx)**2 + (room_height - ry)**2)
+
+            def path_loss(distance_m):
+                """简化路径损耗计算"""
+                if distance_m <= 0:
+                    distance_m = 0.1
+                return 20 * math.log10(distance_m) + 20 * math.log10(cls.FREQ_MHZ) - 147.55
+
+            # 参考信号强度（假设发射功率 20dBm）
+            tx_power = 20.0
+            ref_rssi = tx_power - path_loss(rx_dist / 3)
+
+            zones = []
+            for i, (dist_ratio, name) in enumerate([
+                (0.3, "近场区"),
+                (0.6, "中场区"),
+                (1.0, "远场区"),
+            ]):
+                dist = dist_ratio * rx_dist
+                rssi_est = tx_power - path_loss(dist) - attenuation
+                zones.append({
+                    "zone_name": name,
+                    "distance_ratio": dist_ratio,
+                    "estimated_rssi": rssi_est,
+                    "recommendation": (
+                        f"{name}：建议部署监测点，预计信号强度约 {rssi_est:.1f} dBm"
+                    ),
                 })
 
-    # 按时间排序
-    anomalies.sort(key=lambda x: x["timestamp"])
-    
-    # 合并相近事件（同一时间多个源同时突变可能是同一事件）
-    merged = []
-    for a in anomalies:
-        if merged and (a["timestamp"] - merged[-1]["timestamp"]).total_seconds() < 5:
-            # 合并相近事件
-            if "sources" not in merged[-1]:
-                merged[-1]["sources"] = [merged[-1]["source_id"]]
-            merged[-1]["sources"].append(a["source_id"])
-            merged[-1]["confidence"] = max(merged[-1]["confidence"], a["confidence"])
-            merged[-1]["magnitude"] = max(merged[-1]["magnitude"], a["magnitude"])
-        else:
-            merged.append(a)
-
-    # 输出格式整理
-    result = []
-    for m in merged:
-        result.append({
-            "timestamp": m["timestamp"].isoformat(),
-            "type": m["type"],
-            "sources": m.get("sources", [m["source_id"]]),
-            "magnitude_db": round(m["magnitude"], 1),
-            "confidence": round(m["confidence"], 2),
-        })
-    return result
-
-
-# ============================================================
-# 主分析入口
-# ============================================================
-
-def analyze(samples: List[SignalSample]) -> Dict:
-    """
-    综合分析入口。
-    输入信号采样列表，输出完整的分析结果。
-    """
-    # 数据校验
-    validate_signal_data(samples)
-
-    # 按源分组
-    series_map = group_by_source(samples)
-
-    # 计算特征
-    features_map = {}
-    for sid, series in series_map.items():
-        features_map[sid] = compute_series_features(series)
-
-    # 空间状态推断
-    all_features = list(features_map.values())
-    state = infer_spatial_state(all_features)
-
-    # 异常检测
-    anomalies = detect_anomalies(list(series_map.values()))
-
-    # 汇总结果
-    result = {
-        "source_count": len(series_map),
-        "total_samples": len(samples),
-        "time_span_seconds": round(
-            (max(s.timestamp for s in samples) - min(s.timestamp for s in samples)).total_seconds(),
-            1
-        ),
-        "source_features": {
-            sid: {
-                "mean_rssi": round(f["mean"], 1),
-                "variance": round(f["variance"], 2),
-                "std": round(f["std"], 2),
-                "peaks_per_min": round(f["peaks_per_min"], 2),
-                "max_fluctuation": round(f["max_fluctuation"], 1),
+            return {
+                "room_size": (room_width, room_height),
+                "router_position": router_pos,
+                "wall_material": wall_material,
+                "wall_attenuation_db": attenuation,
+                "zones": zones,
+                "summary": (
+                    f"房间 {room_width}x{room_height}m，路由器在 ({rx},{ry})，"
+                    f"墙体衰减 {attenuation}dB。建议分为 {len(zones)} 个监测区域。"
+                ),
             }
-            for sid, f in features_map.items()
-        },
-        "spatial_state": state,
-        "anomaly_count": len(anomalies),
-        "anomalies": anomalies,
-    }
-    return result
+        except RUViewError:
+            raise
+        except Exception as exc:
+            raise RUViewError("E010", str(exc)) from exc
 
 
 # ============================================================
-# 自检模块（内置硬编码数据，离线可跑）
+# 异常信号报告模块
 # ============================================================
+class AnomalyDetector:
+    """异常信号检测器：识别信号突变事件"""
 
-def _build_selftest_data() -> List[SignalSample]:
-    """
-    构造自检用内置数据。
-    生成 10 分钟、2 个源、采样率约 1Hz 的信号数据。
-    源A：稳定信号（模拟无人）；源B：含明显波动（模拟有人活动）。
-    """
-    start_time = datetime(2026, 1, 1, 0, 0, 0)
-    samples = []
-    base_time = start_time
+    # 突变判定阈值（宽松）
+    JUMP_THRESHOLD_DB = 8.0      # 相邻采样变化超过此值视为突变
+    MIN_DURATION_SECONDS = 300   # 至少 5 分钟数据
 
-    # 源A：稳定信号，均值 -55dBm，方差很小
-    for i in range(600):  # 10分钟 * 1Hz
-        ts = base_time + timedelta(seconds=i)
-        # 轻微噪声，波动 < 1dB
-        rssi = -55.0 + math.sin(i * 0.1) * 0.3
-        samples.append(SignalSample(ts, "source_A", rssi))
+    @staticmethod
+    def validate_timeseries(timestamps: list, rssi_values: list) -> None:
+        """校验时间序列数据"""
+        if not timestamps or not rssi_values:
+            raise RUViewError("E001")
+        if len(timestamps) != len(rssi_values):
+            raise RUViewError("E001")
 
-    # 源B：前半段稳定，后半段有明显波动（模拟有人进入）
-    for i in range(600):
-        ts = base_time + timedelta(seconds=i)
-        if i < 300:  # 前5分钟稳定
-            rssi = -60.0 + math.cos(i * 0.05) * 0.2
-        else:  # 后5分钟波动大
-            rssi = -60.0 + math.sin(i * 0.3) * 5.0 + (i % 7) * 0.5
-        samples.append(SignalSample(ts, "source_B", rssi))
+        # 时间跨度检查
+        try:
+            first_ts = timestamps[0]
+            last_ts = timestamps[-1]
+            if isinstance(first_ts, (int, float)) and isinstance(last_ts, (int, float)):
+                duration = last_ts - first_ts
+            else:
+                # 尝试解析为 datetime
+                first_dt = datetime.fromisoformat(str(first_ts))
+                last_dt = datetime.fromisoformat(str(last_ts))
+                duration = (last_dt - first_dt).total_seconds()
 
-    return samples
+            if duration < cls.MIN_DURATION_SECONDS:
+                raise RUViewError("E008")
+        except (ValueError, TypeError) as exc:
+            raise RUViewError("E007", str(exc)) from exc
+
+        # RSSI 校验
+        SignalAnalyzer.validate_rssi_sequence(rssi_values)
+
+    @classmethod
+    def detect_anomalies(cls, timestamps: list, rssi_values: list) -> dict:
+        """检测异常事件列表"""
+        cls.validate_timeseries(timestamps, rssi_values)
+
+        try:
+            anomalies = []
+            for i in range(1, len(rssi_values)):
+                diff = abs(rssi_values[i] - rssi_values[i-1])
+                if diff > cls.JUMP_THRESHOLD_DB:
+                    # 判断突变类型
+                    if rssi_values[i] > rssi_values[i-1]:
+                        anomaly_type = "signal_increase"
+                        desc = "信号强度突增"
+                    else:
+                        anomaly_type = "signal_decrease"
+                        desc = "信号强度突降"
+
+                    # 置信度计算（基于突变幅度）
+                    confidence = min(0.9, 0.5 + diff / 30.0)
+
+                    anomalies.append({
+                        "timestamp": timestamps[i],
+                        "type": anomaly_type,
+                        "description": desc,
+                        "delta_db": diff,
+                        "confidence": confidence,
+                    })
+
+            return {
+                "total_events": len(anomalies),
+                "events": anomalies,
+                "summary": f"检测到 {len(anomalies)} 个异常事件",
+            }
+        except RUViewError:
+            raise
+        except Exception as exc:
+            raise RUViewError("E010", str(exc)) from exc
 
 
-def run_selftest() -> int:
-    """运行内置自检，返回退出码（0=通过，非0=失败）。"""
-    print("=== ruview 自检开始 ===")
+# ============================================================
+# 综合分析入口
+# ============================================================
+class RUViewAnalyzer:
+    """ruview 综合分析器：整合所有能力"""
 
-    # ========== 测试1：数据构造与校验 ==========
-    print("[1/5] 数据构造与校验...")
-    samples = _build_selftest_data()
-    assert len(samples) >= 600, "自检数据量不足"
-    validate_signal_data(samples)
-    print("      通过（数据量 %d 条）" % len(samples))
+    def __init__(self):
+        self.signal_analyzer = SignalAnalyzer()
+        self.state_detector = SpaceStateDetector()
+        self.zone_planner = ZonePlanner()
+        self.anomaly_detector = AnomalyDetector()
 
-    # ========== 测试2：特征提取 ==========
-    print("[2/5] 特征提取...")
-    series_map = group_by_source(samples)
-    assert len(series_map) == 2, "应有两个发射源"
-    features_a = compute_series_features(series_map["source_A"])
-    features_b = compute_series_features(series_map["source_B"])
-    # 源A方差应明显小于源B（宽松比较）
-    assert features_a["variance"] < features_b["variance"], "源A方差应小于源B"
-    assert features_a["peaks_per_min"] < features_b["peaks_per_min"], "源A峰值频次应低于源B"
-    print("      通过（源A方差 %.3f，源B方差 %.3f）" % (features_a["variance"], features_b["variance"]))
+    def full_analysis(self, rssi_sequences: dict, room_params: dict) -> dict:
+        """
+        执行完整分析流程
+        rssi_sequences: {"source1": [rssi...], "source2": [rssi...]}
+        room_params: {"width": float, "height": float, "router_pos": (x,y), "wall_material": str}
+        """
+        # 1. 空间状态推断
+        state_result = self.state_detector.infer_state(rssi_sequences)
 
-    # ========== 测试3：空间状态推断 ==========
-    print("[3/5] 空间状态推断...")
-    state = infer_spatial_state([features_a, features_b])
-    assert state in ("present", "absent", "uncertain"), "状态必须是三态之一"
-    # 由于源B有明显波动，整体应判定为"有人"或"不确定"（不能是"无人"）
-    assert state != "absent", "不应判定为无人"
-    print("      通过（判定结果：%s）" % state)
+        # 2. 区域划分建议
+        zone_result = self.zone_planner.suggest_zones(
+            room_params["width"],
+            room_params["height"],
+            room_params["router_pos"],
+            room_params["wall_material"],
+        )
 
-    # ========== 测试4：区域划分 ==========
-    print("[4/5] 区域划分建议...")
-    zones = suggest_zones(room_length=8.0, room_width=6.0,
-                          router_x=2.0, router_y=3.0, wall_material="drywall")
-    assert len(zones) > 0, "区域划分结果不能为空"
-    zone_types = set(z["type"] for z in zones)
-    assert "near" in zone_types and "far" in zone_types, "应包含近区和远区"
-    print("      通过（共 %d 个格点，区域类型：%s）" % (len(zones), sorted(zone_types)))
+        # 3. 信号特征分析（取第一个源作为代表）
+        first_source = list(rssi_sequences.keys())[0]
+        signal_features = self.signal_analyzer.calculate_features(rssi_sequences[first_source])
 
-    # ========== 测试5：异常检测 ==========
-    print("[5/5] 异常检测...")
-    anomalies = detect_anomalies(list(series_map.values()))
-    # 源B在后半段有明显波动，应检测到至少1个异常
-    assert len(anomalies) >= 1, "应检测到至少1个异常事件"
-    for a in anomalies:
-        assert "timestamp" in a and "type" in a and "confidence" in a, "异常事件字段不完整"
-    print("      通过（检测到 %d 个异常事件）" % len(anomalies))
+        return {
+            "space_state": state_result,
+            "zones": zone_result,
+            "signal_features": signal_features,
+            "analysis_time": datetime.now().isoformat(),
+        }
 
-    print("\n=== 自检全部通过 ===")
-    return 0
+
+# ============================================================
+# 自检模块（--selftest）
+# ============================================================
+class SelfTest:
+    """内置自检：使用硬编码样例数据验证核心逻辑"""
+
+    @staticmethod
+    def _generate_test_data():
+        """生成测试数据（确定性数据，非随机）"""
+        # 模拟 60 秒采样，1Hz
+        # 源1：有明显波动（模拟有人移动）
+        source1 = []
+        base = -45.0
+        for i in range(60):
+            # 使用确定性正弦波 + 固定偏移，产生波动
+            val = base + 5 * math.sin(i / 5.0) + (3 if i % 7 == 0 else 0)
+            source1.append(round(val, 2))
+
+        # 源2：波动较小（模拟较远或遮挡）
+        source2 = []
+        base2 = -60.0
+        for i in range(60):
+            val = base2 + 2 * math.sin(i / 8.0)
+            source2.append(round(val, 2))
+
+        # 源3：几乎无波动（模拟静止环境）
+        source3 = [-70.0 + (0.1 if i % 10 == 0 else 0) for i in range(60)]
+
+        return {
+            "sources": {
+                "source_1": source1,
+                "source_2": source2,
+                "source_3": source3,
+            },
+            "room": {
+                "width": 6.0,
+                "height": 4.0,
+                "router_pos": (1.0, 2.0),
+                "wall_material": "砖墙",
+            },
+        }
+
+    @classmethod
+    def run(cls) -> bool:
+        """执行自检，返回是否通过"""
+        print("=" * 60)
+        print("ruview 自检开始（离线模式，无外部依赖）")
+        print("=" * 60)
+
+        try:
+            test_data = cls._generate_test_data()
+
+            # ---- 测试1：信号特征分析 ----
+            print("\n[测试1] 信号特征分析")
+            analyzer = SignalAnalyzer()
+            features = analyzer.calculate_features(test_data["sources"]["source_1"])
+            assert features["sample_count"] >= 30, "样本数应 >= 30"
+            assert features["variance"] > 0, "波动数据方差应 > 0"
+            assert features["peak_count"] > 0, "波动数据应有峰值"
+            assert 0 <= features["peak_frequency"] <= 1, "峰值频次应在合理范围"
+            print(f"  ✓ 通过: 均值={features['mean']:.2f}, 方差={features['variance']:.2f}, "
+                  f"峰值次数={features['peak_count']}")
+
+            # ---- 测试2：空间状态推断 ----
+            print("\n[测试2] 空间状态推断")
+            detector = SpaceStateDetector()
+            state_result = detector.infer_state(test_data["sources"])
+            assert state_result["state"] in ("present", "absent", "uncertain"), \
+                "状态必须是三态之一"
+            assert 0 <= state_result["confidence"] <= 1, "置信度应在 0~1 之间"
+            assert state_result["active_source_count"] >= 1, "应有至少一个活跃源"
+            print(f"  ✓ 通过: 状态={state_result['state']}, 置信度={state_result['confidence']:.2f}, "
+                  f"活跃源={state_result['active_source_count']}/{state_result['total_source_count']}")
+
+            # ---- 测试3：区域划分建议 ----
+            print("\n[测试3] 区域划分建议")
+            planner = ZonePlanner()
+            zone_result = planner.suggest_zones(
+                test_data["room"]["width"],
+                test_data["room"]["height"],
+                test_data["room"]["router_pos"],
+                test_data["room"]["wall_material"],
+            )
+            assert len(zone_result["zones"]) == 3, "应输出 3 个区域"
+            assert zone_result["wall_attenuation_db"] > 0, "墙体衰减应为正数"
+            print(f"  ✓ 通过: 区域数={len(zone_result['zones'])}, "
+                  f"墙体衰减={zone_result['wall_attenuation_db']}dB")
+
+            # ---- 测试4：异常检测 ----
+            print("\n[测试4] 异常信号检测")
+            # 构造 6 分钟数据（360 点），包含突变
+            timestamps = list(range(360))  # 0~359 秒
+            rssi = [-50.0] * 180 + [-65.0] * 180  # 中间有 15dB 突变
+            anomaly_detector = AnomalyDetector()
+            anomaly_result = anomaly_detector.detect_anomalies(timestamps, rssi)
+            assert anomaly_result["total_events"] >= 1, "应检测到至少 1 个异常"
+            first_event = anomaly_result["events"][0]
+            assert first_event["type"] in ("signal_increase", "signal_decrease"), \
+                "异常类型必须正确"
+            print(f"  ✓ 通过: 检测到 {anomaly_result['total_events']} 个异常事件")
+
+            # ---- 测试5：综合流程 ----
+            print("\n[测试5] 综合分析流程")
+            full_analyzer = RUViewAnalyzer()
+            full_result = full_analyzer.full_analysis(test_data["sources"], test_data["room"])
+            assert "space_state" in full_result, "应包含空间状态"
+            assert "zones" in full_result, "应包含区域建议"
+            assert "signal_features" in full_result, "应包含信号特征"
+            print(f"  ✓ 通过: 综合状态={full_result['space_state']['state']}")
+
+            # ---- 测试6：错误处理 ----
+            print("\n[测试6] 错误处理")
+            try:
+                SignalAnalyzer.calculate_features([])
+                assert False, "空数据应抛出 E001"
+            except RUViewError as e:
+                assert e.code == "E001", f"错误码应为 E001，实际 {e.code}"
+            print("  ✓ 通过: 空数据正确抛出 E001")
+
+            try:
+                SignalAnalyzer.calculate_features([-50] * 10)  # 不足 30 个
+                assert False, "数据不足应抛出 E002"
+            except RUViewError as e:
+                assert e.code == "E002", f"错误码应为 E002，实际 {e.code}"
+            print("  ✓ 通过: 数据不足正确抛出 E002")
+
+            print("\n" + "=" * 60)
+            print("✅ 全部自检通过！")
+            print("=" * 60)
+            return True
+
+        except AssertionError as exc:
+            print(f"\n❌ 自检失败: {exc}")
+            return False
+        except RUViewError as exc:
+            print(f"\n❌ 自检异常: [{exc.code}] {exc.message}")
+            return False
+        except Exception as exc:
+            print(f"\n❌ 自检未预期异常: {exc}")
+            return False
 
 
 # ============================================================
 # 命令行入口
 # ============================================================
-
-def main() -> int:
-    """命令行主入口。"""
+def main():
+    """主入口函数"""
     parser = argparse.ArgumentParser(
         description="ruview — 无线信号空间感知与存在检测分析",
-        epilog="示例：python main.py --selftest"
+        epilog="示例: python main.py --selftest",
     )
     parser.add_argument(
         "--selftest",
         action="store_true",
-        help="运行内置自检（使用硬编码数据，无需外部输入）"
+        help="运行内置自检（离线，无需外部数据）",
     )
-    parser.add_argument(
-        "--input", "-i",
-        type=str,
-        help="输入数据文件路径（预留接口，当前版本仅支持自检）"
-    )
-    parser.add_argument(
-        "--output", "-o",
-        type=str,
-        help="输出结果文件路径（预留接口）"
-    )
-
     args = parser.parse_args()
 
-    try:
-        if args.selftest:
-            return run_selftest()
-        else:
-            # 无参数时显示帮助
-            parser.print_help()
-            return 0
-    except RuviewError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except AssertionError as e:
-        print(f"自检断言失败: {e}", file=sys.stderr)
-        return 2
-    except Exception as e:
-        print(f"未知错误: {e}", file=sys.stderr)
-        return 3
+    if args.selftest:
+        success = SelfTest.run()
+        sys.exit(0 if success else 1)
+
+    # 未指定参数时，显示帮助信息
+    parser.print_help()
+    print("\n提示: 使用 --selftest 运行内置自检")
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()

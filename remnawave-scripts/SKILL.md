@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: remnawave-scripts
 name: remnawave-scripts
-displayName: 脚本工具集 配置部署 数据转换
+displayName: RemnaWave 部署配置与数据转换工具集
 description: 面向RemnaWave项目的脚本工具集，提供部署、配置管理与数据转换能力。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/remnawave-scripts
@@ -14,7 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: ScriptForge Studio
 agent_created: true
-trigger_words: ["remnawave-scripts", "remnawave 脚本", "脚本工具集", "部署脚本", "配置管理", "数据转换"]
+trigger_words: ["remnawave-scripts", "remnawave 脚本", "脚本工具集", "部署脚本", "配置管理", "数据转换", "RemnaWave 运维"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,9 +31,30 @@ trigger_words: ["remnawave-scripts", "remnawave 脚本", "脚本工具集", "部
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# RemnaWave 脚本工具集（remnawave-scripts）
+# RemnaWave 脚本工具集 Skill 文档
 
-本 Skill 由 AI 辅助生成，仅供参考。它描述了一个名为 `remnawave-scripts` 的脚本集合，用于处理 RemnaWave 项目中的常见自动化任务。
+## 1. 能力边界（一页纸速查卡）
+
+### 1.1 能做什么
+
+| 能力域 | 具体操作 | 适用场景 |
+|--------|----------|----------|
+| 部署辅助 | 生成部署脚本骨架、校验部署前置条件 | 新环境初始化、CI/CD 流水线对接 |
+| 配置管理 | 读取/修改 RemnaWave 配置文件、参数校验 | 调整服务端口、日志级别、存储路径 |
+| 数据转换 | 将外部数据格式（JSON/CSV/YAML）转换为 RemnaWave 所需结构 | 导入用户数据、迁移旧系统配置 |
+
+### 1.2 不能做什么（明确限制）
+
+- 不执行实际部署操作（不调用 Docker/K8s API）
+- 不修改 RemnaWave 核心二进制文件
+- 不处理加密数据的解密（仅支持明文配置）
+- 不提供 GUI 界面，仅命令行交互
+
+### 1.3 适用对象
+
+- RemnaWave 项目的运维人员
+- 需要批量配置管理的开发工程师
+- 进行数据迁移的项目实施人员
 
 
 ## 许可证（License）
