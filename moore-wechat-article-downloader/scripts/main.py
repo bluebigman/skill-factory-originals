@@ -104,7 +104,7 @@ class ProcessResult:
         """根据置信度返回标注等级"""
         if self.confidence >= 90:
             return "直接输出"
-        elif self.confidence >= 85:
+        elif self.confidence >= 80:
             return "建议复核"
         else:
             return "[需核实]"
@@ -147,7 +147,10 @@ class ArticleProcessor:
         article = self._extract_article_info(parsed_data)
 
         # 检查关键信息完整性
-        self._check_required_fields(article)
+        missing_fields = self._get_missing_fields(article)
+        if missing_fields:
+            missing_str = ", ".join(missing_fields)
+            raise AppError("E002", f"还缺少以下信息，请补充：{missing_str}")
 
         # 计算置信度
         confidence = self._calculate_confidence(article)
@@ -167,7 +170,7 @@ class ArticleProcessor:
 
         # 构建结果
         warnings = []
-        if confidence < 85:
+        if confidence < 80:
             warnings.append("置信度过低，部分字段可能不准确")
         elif confidence < 90:
             warnings.append("部分字段置信度一般，建议复核")
@@ -238,14 +241,18 @@ class ArticleProcessor:
 
         return article
 
-    def _check_required_fields(self, article: ArticleInfo) -> None:
-        """检查关键字段完整性"""
+    def _get_missing_fields(self, article: ArticleInfo) -> List[str]:
+        """获取缺失的关键字段列表"""
         missing_fields = []
         if not article.title:
             missing_fields.append("标题(title)")
         if not article.content:
             missing_fields.append("内容(content)")
+        return missing_fields
 
+    def _check_required_fields(self, article: ArticleInfo) -> None:
+        """检查关键字段完整性（向后兼容）"""
+        missing_fields = self._get_missing_fields(article)
         if missing_fields:
             raise AppError("E002", "还缺少以下信息，请补充：" + ", ".join(missing_fields))
 
@@ -255,8 +262,8 @@ class ArticleProcessor:
 
         规则：
         - 基础分 60
-        - 有标题 +10
-        - 有内容 +10
+        - 有标题 +15
+        - 有内容 +15
         - 有作者 +5
         - 有来源 +5
         - 有 URL +5
@@ -265,9 +272,9 @@ class ArticleProcessor:
         confidence = 60
 
         if article.title:
-            confidence += 10
+            confidence += 15
         if article.content:
-            confidence += 10
+            confidence += 15
         if article.author:
             confidence += 5
         if article.source:
@@ -320,12 +327,12 @@ def run_selftest() -> bool:
     print("开始自检 (selftest)")
     print("=" * 60)
 
-    processor = ArticleProcessor()
     all_passed = True
 
     # 测试用例 1: 完整 JSON 输入
     print("\n[测试 1] 完整 JSON 输入")
     try:
+        processor = ArticleProcessor()
         json_input = json.dumps({
             "title": "测试文章标题",
             "author": "测试作者",
@@ -337,7 +344,7 @@ def run_selftest() -> bool:
         result = processor.process_input(json_input, "dict")
         assert result is not None, "结果不应为空"
         assert result.confidence > 0, "置信度应大于0"
-        assert result.confidence >= 85, f"完整输入置信度应较高，实际: {result.confidence}"
+        assert result.confidence >= 90, f"完整输入置信度应≥90，实际: {result.confidence}"
         assert result.data is not None, "数据不应为空"
         assert isinstance(result.data, dict), "数据应为字典类型"
         assert result.data.get("title") == "测试文章标题", "标题提取错误"
@@ -354,6 +361,7 @@ def run_selftest() -> bool:
     # 测试用例 2: 纯文本输入
     print("\n[测试 2] 纯文本输入")
     try:
+        processor = ArticleProcessor()
         text_input = """title: 文本标题
 author: 文本作者
 content: 这是从纯文本中提取的内容，包含足够的信息用于测试。
@@ -361,7 +369,7 @@ content: 这是从纯文本中提取的内容，包含足够的信息用于测�
         result = processor.process_input(text_input, "dict")
         assert result is not None, "结果不应为空"
         assert result.confidence > 0, "置信度应大于0"
-        assert result.confidence >= 80, f"文本输入置信度应较高，实际: {result.confidence}"
+        assert result.confidence >= 80, f"文本输入置信度应≥80，实际: {result.confidence}"
         assert result.data.get("title") == "文本标题", "标题提取错误"
         assert result.data.get("author") == "文本作者", "作者提取错误"
         print(f"  ✓ 通过 (置信度: {result.confidence})")
@@ -375,24 +383,25 @@ content: 这是从纯文本中提取的内容，包含足够的信息用于测�
     # 测试用例 3: URL 输入
     print("\n[测试 3] URL 输入")
     try:
+        processor = ArticleProcessor()
         url_input = "https://mp.weixin.qq.com/s/test_article_123"
-        result = processor.process_input(url_input, "dict")
-        assert result is not None, "结果不应为空"
-        assert result.confidence > 0, "置信度应大于0"
-        assert result.data.get("url") == url_input, "URL提取错误"
-        # URL输入缺少内容和标题，置信度应较低
-        assert result.confidence < 85, f"URL输入置信度应较低，实际: {result.confidence}"
-        print(f"  ✓ 通过 (置信度: {result.confidence})")
+        try:
+            processor.process_input(url_input, "dict")
+            all_passed = False
+            print("  ✗ 失败: URL输入应抛出 E002 错误（缺少标题和内容）")
+        except AppError as e:
+            assert e.code == "E002", f"错误码应为E002，实际: {e.code}"
+            assert "标题(title)" in e.message, "错误信息应包含标题"
+            assert "内容(content)" in e.message, "错误信息应包含内容"
+            print(f"  ✓ 通过 (错误码: {e.code}, 提示: {e.message})")
     except AssertionError as e:
         all_passed = False
         print(f"  ✗ 失败: {e}")
-    except AppError as e:
-        all_passed = False
-        print(f"  ✗ 失败: {e.code} {e.message}")
 
     # 测试用例 4: 空输入错误处理
     print("\n[测试 4] 空输入错误处理")
     try:
+        processor = ArticleProcessor()
         processor.process_input("", "dict")
         all_passed = False
         print("  ✗ 失败: 应抛出 E001 错误")
@@ -403,6 +412,7 @@ content: 这是从纯文本中提取的内容，包含足够的信息用于测�
     # 测试用例 5: 缺失关键字段错误处理
     print("\n[测试 5] 缺失关键字段错误处理")
     try:
+        processor = ArticleProcessor()
         processor.process_input('{"author": "无标题作者"}', "dict")
         all_passed = False
         print("  ✗ 失败: 应抛出 E002 错误")
@@ -413,6 +423,7 @@ content: 这是从纯文本中提取的内容，包含足够的信息用于测�
     # 测试用例 6: 批量处理
     print("\n[测试 6] 批量处理")
     try:
+        processor = ArticleProcessor()
         batch_inputs = [
             '{"title": "批量1", "content": "内容1的内容部分"}',
             '{"title": "批量2", "content": "内容2的内容部分"}',
@@ -435,6 +446,7 @@ content: 这是从纯文本中提取的内容，包含足够的信息用于测�
     # 测试用例 7: 置信度阈值逻辑
     print("\n[测试 7] 置信度阈值逻辑")
     try:
+        processor = ArticleProcessor()
         # 完整信息 - 高置信度
         full_result = processor.process_input(
             json.dumps({
@@ -448,17 +460,25 @@ content: 这是从纯文本中提取的内容，包含足够的信息用于测�
             "dict"
         )
         assert full_result.confidence >= 90, f"完整信息置信度应≥90，实际: {full_result.confidence}"
-        assert full_result.data.get("confidence_level") == "直接输出", "置信度等级应为直接输出"
+        assert full_result._get_confidence_level() == "直接输出", "置信度等级应为直接输出"
 
         # 部分信息 - 中等置信度
         partial_result = processor.process_input(
             json.dumps({"title": "只有标题", "content": "只有内容"}),
             "dict"
         )
-        assert 60 <= partial_result.confidence < 90, f"部分信息置信度应在60-90之间，实际: {partial_result.confidence}"
-        assert partial_result.data.get("confidence_level") in ["建议复核", "[需核实]"], "置信度等级应标注"
+        assert 80 <= partial_result.confidence < 90, f"部分信息置信度应在80-90之间，实际: {partial_result.confidence}"
+        assert partial_result._get_confidence_level() == "建议复核", "置信度等级应标注为建议复核"
 
-        print(f"  ✓ 通过 (完整: {full_result.confidence}, 部分: {partial_result.confidence})")
+        # 低置信度 - 只有标题
+        low_result = processor.process_input(
+            json.dumps({"title": "只有标题", "content": "短"}),
+            "dict"
+        )
+        assert low_result.confidence < 80, f"低置信度应<80，实际: {low_result.confidence}"
+        assert low_result._get_confidence_level() == "[需核实]", "置信度等级应为需核实"
+
+        print(f"  ✓ 通过 (完整: {full_result.confidence}, 部分: {partial_result.confidence}, 低: {low_result.confidence})")
     except AssertionError as e:
         all_passed = False
         print(f"  ✗ 失败: {e}")
@@ -469,6 +489,7 @@ content: 这是从纯文本中提取的内容，包含足够的信息用于测�
     # 测试用例 8: 输出格式
     print("\n[测试 8] 输出格式")
     try:
+        processor = ArticleProcessor()
         json_output = processor.process_input(
             '{"title": "格式测试", "content": "内容"}',
             "json"
