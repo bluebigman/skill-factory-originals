@@ -247,6 +247,24 @@ def selftest() -> int:
     finally:
         test_file.unlink(missing_ok=True)
 
+    # 测试6: 主流程调用（通过CLI入口）
+    import subprocess
+    test_text = """
+    公司年报显示，2023年度加权平均净资产收益率为15.23%，
+    归属于上市公司股东的净利润增长率为25.67%，
+    营业收入增长率为18.45%，资产负债率为45.67%。
+    """
+    result = subprocess.run(
+        [sys.executable, str(__file__), "--text", test_text, "--json"],
+        capture_output=True, text=True, timeout=10
+    )
+    assert result.returncode == 0, f"主流程退出码非0: {result.returncode}"
+    output = json.loads(result.stdout)
+    assert 'indicators' in output, "主流程输出缺少indicators"
+    assert 'roe' in output['indicators'], "主流程输出缺少ROE"
+    assert abs(output['indicators']['roe'] - 15.23) < 0.01, f"主流程ROE值错误: {output['indicators']['roe']}"
+    print("  [OK] 主流程CLI调用:", output['indicators'])
+
     print("== annual-report-summary 配套执行器自检通过 ✅ ==")
     return 0
 

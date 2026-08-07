@@ -50,13 +50,13 @@ def load_progress() -> Dict[str, List[str]]:
 def save_progress(completed: List[str]) -> None:
     """保存处理进度"""
     PROGRESS_FILE.write_text(
-        json.dumps({"completed": completed}, indent=2),
+        json.dumps({"completed": completed, "timestamp": datetime.now(timezone.utc).isoformat()}, indent=2),
         encoding='utf-8'
     )
 
 
 def backup_originals(files: List[Path]) -> bool:
-    """备份原图到临时目录"""
+    """备份原图到备份目录"""
     try:
         BACKUP_DIR.mkdir(exist_ok=True)
         for f in files:
@@ -263,6 +263,24 @@ def selftest() -> int:
         assert test_img.read_bytes() == b"original_data_67890", "回滚后原图应恢复"
         
         print("  [OK] 预览摘要和回滚功能验证通过")
+    
+    # 测试6: 时间戳使用UTC
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        input_dir = tmp / "input"
+        output_dir = tmp / "output"
+        input_dir.mkdir()
+        
+        test_img = input_dir / "test3.jpg"
+        test_img.write_bytes(b"test_data")
+        
+        result = process_images(input_dir, output_dir, max_width=800, quality=85)
+        timestamp = result["preview"][0]["timestamp"]
+        # 验证时间戳格式和UTC
+        dt = datetime.fromisoformat(timestamp)
+        assert dt.tzinfo is not None, "时间戳应包含时区信息"
+        assert dt.utcoffset().total_seconds() == 0, "时间戳应为UTC"
+        print("  [OK] UTC时间戳验证通过")
     
     print("== 自检全部通过 ✅ ==")
     return 0

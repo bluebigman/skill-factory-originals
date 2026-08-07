@@ -16,6 +16,7 @@ competitor-analysis-ai Skill Runner
 
 import argparse
 import csv
+import io
 import json
 import os
 import sys
@@ -173,7 +174,6 @@ def load_data_from_url(url: str) -> Dict[str, Any]:
     
     # 尝试解析 CSV
     try:
-        import io
         csv_reader = csv.DictReader(io.StringIO(content))
         rows = list(csv_reader)
         if rows:
@@ -539,4 +539,4 @@ def generate_report(data: Dict[str, Any]) -> Dict[str, Any]:
     }
     
     # 统一使用 UTC 时间
-    now_ut
+    now_utc
