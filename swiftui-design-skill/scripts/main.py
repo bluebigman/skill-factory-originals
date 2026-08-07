@@ -375,16 +375,19 @@ def format_review_output(results: List[ReviewResult], format_type: str = "text")
             )
         except Exception as exc:
             raise ValueError(f"E006: {ERROR_CODES['E006']}: {str(exc)}")
-
-    # 文本输出
-    lines = ["审查结果:", "=" * 60]
-    for r in results:
-        status = "✅" if r.passed else "❌"
-        lines.append(f"[{status}] {r.rule_id} ({r.category})")
-        lines.append(f"    描述: {r.description}")
-        lines.append(f"    结果: {r.message}")
-        lines.append("-" * 40)
-    return "\n".join(lines)
+    elif format_type == "text":
+        # 文本输出
+        lines = ["审查结果:", "=" * 60]
+        for r in results:
+            status = "✅" if r.passed else "❌"
+            lines.append(f"[{status}] {r.rule_id} ({r.category})")
+            lines.append(f"    描述: {r.description}")
+            lines.append(f"    结果: {r.message}")
+            lines.append("-" * 40)
+        return "\n".join(lines)
+    else:
+        # 无效的格式类型，抛出异常
+        raise ValueError(f"E006: {ERROR_CODES['E006']}: 不支持的输出格式: {format_type}")
 
 
 # ============================================================
@@ -490,7 +493,9 @@ def run_selftest() -> bool:
         format_review_output(results, "invalid_format")
         print("  测试 5 (错误处理): 失败 - 应抛出异常但未抛出")
         return False
-    except ValueError:
+    except ValueError as exc:
+        # 确认抛出的是 ValueError 类型
+        assert "E006" in str(exc), f"E009: 错误消息应包含错误码 E006，实际为: {str(exc)}"
         print("  测试 5 (错误处理): 通过")
     except Exception as exc:
         print(f"  测试 5 (错误处理): 失败 - 未预期的异常类型: {type(exc).__name__}")
