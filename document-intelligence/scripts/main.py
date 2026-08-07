@@ -171,7 +171,7 @@ class DocumentIntelligence:
         
         # 逐行解析
         for line in lines:
-            # 匹配 "字段名: 值" 或 "字段名：值"
+            # 匹配 "字段名: 值" 或 "字段名：值" (支持中文和英文冒号)
             match = re.match(r'^([^:：]{1,20})[:：]\s*(.+)$', line)
             if match:
                 field_label = match.group(1).strip()
@@ -185,11 +185,30 @@ class DocumentIntelligence:
                     # 未识别字段，保留原始标签
                     parsed[f"raw_{field_label}"] = field_value
         
-        # 尝试从自由文本中提取金额（如果未匹配到）
+        # 如果关键字段缺失，尝试从自由文本中提取
         if "total" not in parsed:
+            # 尝试匹配 "价税合计" 后的金额
             total_match = re.search(r'价税合计[:：]?\s*[¥￥]?\s*([\d,.]+)', text)
             if total_match:
                 parsed["total"] = total_match.group(1)
+        
+        if "invoice_no" not in parsed:
+            # 尝试匹配 "发票号码" 后的数字
+            invoice_match = re.search(r'发票号码[:：]?\s*([\d]+)', text)
+            if invoice_match:
+                parsed["invoice_no"] = invoice_match.group(1)
+        
+        if "date" not in parsed:
+            # 尝试匹配 "开票日期" 后的日期
+            date_match = re.search(r'开票日期[:：]?\s*(\d{4}[-/]\d{1,2}[-/]\d{1,2})', text)
+            if date_match:
+                parsed["date"] = date_match.group(1)
+        
+        if "seller_name" not in parsed:
+            # 尝试匹配 "销售方名称" 后的内容
+            seller_match = re.search(r'销售方名称[:：]?\s*(.+)', text)
+            if seller_match:
+                parsed["seller_name"] = seller_match.group(1).strip()
         
         return parsed
 
