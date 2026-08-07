@@ -175,6 +175,21 @@ class InvoiceExtractor:
             if marker in line:
                 value = self._extract_value(line, marker)
                 if value:
+                    # 根据字段类型转换值
+                    if field_name == "amount":
+                        try:
+                            # 尝试转换为数字
+                            cleaned_value = value.replace("¥", "").replace("￥", "").strip()
+                            value = float(cleaned_value)
+                        except ValueError:
+                            pass  # 如果转换失败，保持字符串
+                    elif field_name == "date":
+                        # 标准化日期格式
+                        date_match = re.search(PATTERNS["date"], value)
+                        if date_match:
+                            year, month, day = date_match.groups()
+                            value = f"{year}-{int(month):02d}-{int(day):02d}"
+                    
                     confidence = self._estimate_confidence(line, marker)
                     field = ExtractedField(
                         name=field_name,
@@ -234,9 +249,13 @@ class InvoiceExtractor:
         # 匹配金额
         amount_match = re.search(PATTERNS["amount"], line)
         if amount_match and ("金额" in line or "合计" in line):
+            try:
+                amount_value = float(amount_match.group(1))
+            except ValueError:
+                amount_value = amount_match.group(1)
             result.add_field(ExtractedField(
                 name="amount",
-                value=float(amount_match.group(1)),
+                value=amount_value,
                 confidence=0.88,
                 source=line,
                 note="通过金额格式识别",
@@ -424,7 +443,7 @@ def run_selftest() -> bool:
         assert "date" in fields1, "日期未识别"
 
         # 宽松断言：值类型正确
-        assert isinstance(fields1["amount"], (int, float)), "金额类型错误"
+        assert isinstance(fields1["amount"], (int, float)), f"金额类型错误，实际类型: {type(fields1['amount'])}"
         assert fields1["amount"] > 0, "金额应为正数"
 
         # 宽松断言：置信度合理
