@@ -11,6 +11,7 @@ scripts/main.py
 import argparse
 import sys
 import re
+import json
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -94,7 +95,9 @@ def extract_key_fields(text: str) -> List[Dict[str, Any]]:
                     entry[key] = value
             else:
                 # 非键值对行，作为内容行
-                entry.setdefault("content", []).append(line)
+                if "content" not in entry:
+                    entry["content"] = []
+                entry["content"].append(line)
 
         if entry:
             entries.append(entry)
@@ -197,7 +200,6 @@ def format_output(result: ProcessingResult, output_format: str = "text") -> str:
     支持格式：text, json
     """
     if output_format == "json":
-        import json
         return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
     else:
         # 文本格式
@@ -289,8 +291,13 @@ def selftest() -> bool:
         print("  样例2 失败: 空输入应抛出异常")
         return False
     except ValueError as e:
-        assert "E001" in str(e), "样例2: 错误码应为E001"
+        if "E001" not in str(e):
+            print(f"  样例2 失败: 错误码不是E001，实际为: {e}")
+            return False
         print("  样例2 通过 (空输入正确报错)")
+    except Exception as e:
+        print(f"  样例2 失败: 抛出异常类型不正确: {type(e).__name__}: {e}")
+        return False
 
     # 测试样例 3: 无键值对输入
     sample3 = "这是一段没有键值对的纯文本内容，用于测试低置信度场景。"
@@ -319,6 +326,9 @@ def selftest() -> bool:
         assert batch_result["errors"] > 0, "样例4: 至少1个错误（空输入）"
         print(f"  样例4 通过 (成功: {batch_result['processed']}, 失败: {batch_result['errors']})")
     except AssertionError as e:
+        print(f"  样例4 失败: {e}")
+        return False
+    except Exception as e:
         print(f"  样例4 失败: {e}")
         return False
 
@@ -404,7 +414,6 @@ def main() -> int:
         # 批量处理
         batch_result = batch_process(args.batch, args.format)
         if args.format == "json":
-            import json
             print(json.dumps(batch_result, ensure_ascii=False, indent=2))
         else:
             for i, item in enumerate(batch_result["results"], 1):
