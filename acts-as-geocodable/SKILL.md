@@ -4,7 +4,7 @@ slug: acts-as-geocodable
 name: acts-as-geocodable
 displayName: 地理编码 地址解析 坐标映射
 description: 将地址文本解析为结构化地理数据并输出坐标与置信度。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/acts-as-geocodable
@@ -54,3 +54,19 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
+
+## 失败处理
+
+- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
+- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
+- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
+## 前置条件
+
+- 本技能开箱即用，无需额外安装依赖。
+- 需要 Python 3.9+ 运行环境。
+- 涉及网络请求时需保持网络连通。
+## 执行步骤
+
+1. 读取输入参数或交互输入。
+2. 按技能定义的处理流程执行核心逻辑。
+3. 输出结构化结果，并在完成后给出下一步建议。
