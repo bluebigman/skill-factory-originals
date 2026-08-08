@@ -328,57 +328,33 @@ def _run_selftest() -> bool:
         "url": "https://example.com",
     }
     result = process_input(test_data, output_format="json")
-    if not result.success:
-        print(f"  ✗ 处理失败: {result.error_message}")
-        all_passed = False
-    elif result.confidence <= 0.5:
-        print(f"  ✗ 置信度过低: {result.confidence}")
-        all_passed = False
-    elif result.data["field_count"] < 3:
-        print(f"  ✗ 字段数量异常: {result.data.get('field_count')}")
-        all_passed = False
-    else:
-        print(f"  ✓ 处理成功，置信度: {result.confidence:.1%}")
+    assert result.success, f"E008: 有效输入处理失败: {result.error_message}"
+    assert result.confidence > 0.5, f"E008: 置信度过低: {result.confidence}"
+    assert result.data["field_count"] >= 3, f"E008: 字段数量异常: {result.data.get('field_count')}"
+    print(f"  ✓ 处理成功，置信度: {result.confidence:.1%}")
 
     # ---- 测试2: 文本输入处理 ----
     print("\n[测试2] 文本输入处理")
     text_input = "name: 测试任务\npriority: high\ndescription: 这是一个测试"
     result = process_input(text_input, output_format="json")
-    if not result.success:
-        print(f"  ✗ 文本处理失败: {result.error_message}")
-        all_passed = False
-    elif "key_value_pairs" not in result.data:
-        print("  ✗ 未提取键值对")
-        all_passed = False
-    elif len(result.data["key_value_pairs"]) < 2:
-        print("  ✗ 键值对提取数量不足")
-        all_passed = False
-    else:
-        print(f"  ✓ 文本处理成功，提取键值对: {len(result.data['key_value_pairs'])} 个")
+    assert result.success, f"E008: 文本处理失败: {result.error_message}"
+    assert "key_value_pairs" in result.data, "E008: 未提取键值对"
+    assert len(result.data["key_value_pairs"]) >= 2, "E008: 键值对提取数量不足"
+    print(f"  ✓ 文本处理成功，提取键值对: {len(result.data['key_value_pairs'])} 个")
 
     # ---- 测试3: 空输入处理 ----
     print("\n[测试3] 空输入处理")
     result = process_input("")
-    if result.success:
-        print("  ✗ 空输入应该失败")
-        all_passed = False
-    elif result.error_code != "E001":
-        print(f"  ✗ 错误码应为E001，实际: {result.error_code}")
-        all_passed = False
-    else:
-        print("  ✓ 空输入正确返回 E001")
+    assert not result.success, "E008: 空输入应该失败"
+    assert result.error_code == "E001", f"E008: 错误码应为E001，实际: {result.error_code}"
+    print("  ✓ 空输入正确返回 E001")
 
     # ---- 测试4: 必需字段检查 ----
     print("\n[测试4] 必需字段检查")
     result = process_input({"name": "测试"}, required_fields=["id", "name"])
-    if result.success:
-        print("  ✗ 缺少必需字段应该失败")
-        all_passed = False
-    elif result.error_code != "E002":
-        print(f"  ✗ 错误码应为E002，实际: {result.error_code}")
-        all_passed = False
-    else:
-        print("  ✓ 缺失必需字段正确返回 E002")
+    assert not result.success, "E008: 缺少必需字段应该失败"
+    assert result.error_code == "E002", f"E008: 错误码应为E002，实际: {result.error_code}"
+    print("  ✓ 缺失必需字段正确返回 E002")
 
     # ---- 测试5: 列表批量处理 ----
     print("\n[测试5] 列表批量处理")
@@ -388,28 +364,17 @@ def _run_selftest() -> bool:
         {"id": "3", "name": "任务C"},
     ]
     result = process_input(list_input, output_format="json")
-    if not result.success:
-        print(f"  ✗ 列表处理失败: {result.error_message}")
-        all_passed = False
-    elif result.data["item_count"] != 3:
-        print(f"  ✗ 列表项数异常: {result.data.get('item_count')}")
-        all_passed = False
-    else:
-        print(f"  ✓ 列表处理成功，共 {result.data['item_count']} 项")
+    assert result.success, f"E008: 列表处理失败: {result.error_message}"
+    assert result.data["item_count"] == 3, f"E008: 列表项数异常: {result.data.get('item_count')}"
+    print(f"  ✓ 列表处理成功，共 {result.data['item_count']} 项")
 
     # ---- 测试6: 输出格式 ----
     print("\n[测试6] 输出格式")
     result = process_input({"name": "测试"}, output_format="text")
-    if not result.success:
-        print(f"  ✗ 文本格式处理失败: {result.error_message}")
-        all_passed = False
-    else:
-        output_text = format_output(result, "text")
-        if "处理成功" not in output_text:
-            print("  ✗ 文本输出缺少成功标识")
-            all_passed = False
-        else:
-            print("  ✓ 文本输出格式正确")
+    assert result.success, f"E008: 文本格式处理失败: {result.error_message}"
+    output_text = format_output(result, "text")
+    assert "处理成功" in output_text, "E008: 文本输出缺少成功标识"
+    print("  ✓ 文本输出格式正确")
 
     # ---- 测试7: 置信度边界 ----
     print("\n[测试7] 置信度计算")
@@ -424,22 +389,16 @@ def _run_selftest() -> bool:
         "priority": "high",
     }
     result = process_input(rich_input)
-    if not result.success:
-        print(f"  ✗ 高信息量处理失败: {result.error_message}")
-        all_passed = False
-    elif result.confidence < 0.8:
-        print(f"  ✗ 高信息量置信度应>=0.8，实际: {result.confidence}")
-        all_passed = False
-    else:
-        print(f"  ✓ 高信息量置信度: {result.confidence:.1%}")
+    assert result.success, f"E008: 高信息量处理失败: {result.error_message}"
+    assert result.confidence >= 0.8, f"E008: 高信息量置信度应>=0.8，实际: {result.confidence}"
+    print(f"  ✓ 高信息量置信度: {result.confidence:.1%}")
 
     # ---- 测试8: 错误处理 ----
     print("\n[测试8] 错误处理")
     # 不支持的输出格式
     try:
         format_output(ProcessingResult(success=True), "xml")
-        print("  ✗ 不支持的格式应该抛出异常")
-        all_passed = False
+        assert False, "E008: 不支持的格式应该抛出异常"
     except ValueError:
         print("  ✓ 不支持的输出格式正确抛出异常")
 
@@ -447,20 +406,13 @@ def _run_selftest() -> bool:
     print("\n[测试9] 边界输入")
     # None 输入
     result = process_input(None)
-    if result.success:
-        print("  ✗ None输入应该失败")
-        all_passed = False
-    elif result.error_code != "E001":
-        print("  ✗ None输入错误码应为E001")
-        all_passed = False
+    assert not result.success, "E008: None输入应该失败"
+    assert result.error_code == "E001", "E008: None输入错误码应为E001"
 
     # 数字输入
     result = process_input(12345)
-    if not result.success:
-        print(f"  ✗ 数字输入处理失败: {result.error_message}")
-        all_passed = False
-    else:
-        print("  ✓ 边界输入处理正确")
+    assert result.success, f"E008: 数字输入处理失败: {result.error_message}"
+    print("  ✓ 边界输入处理正确")
 
     # ---- 测试10: 综合流程 ----
     print("\n[测试10] 综合流程")
@@ -472,17 +424,10 @@ def _run_selftest() -> bool:
         "tags": ["AI", "toolbox", "report"],
     }
     result = process_input(sample_data, output_format="json", required_fields=["title", "content"])
-    if not result.success:
-        print(f"  ✗ 综合流程失败: {result.error_message}")
-        all_passed = False
-    elif result.confidence <= 0.7:
-        print(f"  ✗ 综合流程置信度应>0.7，实际: {result.confidence}")
-        all_passed = False
-    elif result.data["title"] != "AI 工具使用报告":
-        print("  ✗ 标题提取错误")
-        all_passed = False
-    else:
-        print(f"  ✓ 综合流程成功，置信度: {result.confidence:.1%}")
+    assert result.success, f"E008: 综合流程失败: {result.error_message}"
+    assert result.confidence > 0.7, f"E008: 综合流程置信度应>0.7，实际: {result.confidence}"
+    assert result.data["title"] == "AI 工具使用报告", "E008: 标题提取错误"
+    print(f"  ✓ 综合流程成功，置信度: {result.confidence:.1%}")
 
     # ---- 汇总 ----
     print("\n" + "=" * 60)

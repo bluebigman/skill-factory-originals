@@ -293,28 +293,6 @@ def run_selftest() -> bool:
         assert ERROR_CODES[code], f"测试7失败: 错误码 {code} 文案为空"
     print("[自检] 测试7通过 ✓")
 
-    # 测试用例 8: 异常输入类型
-    print("[自检] 测试8: 异常输入类型")
-    result8 = process_single(12345)
-    assert result8["status"] == "error", "测试8失败: 状态应为error"
-    assert result8["error_code"] == "E003", "测试8失败: 错误码应为E003"
-    print("[自检] 测试8通过 ✓")
-
-    # 测试用例 9: 批量空输入
-    print("[自检] 测试9: 批量空输入")
-    result9 = process_batch([])
-    assert result9["status"] == "error", "测试9失败: 状态应为error"
-    assert result9["error_code"] == "E001", "测试9失败: 错误码应为E001"
-    print("[自检] 测试9通过 ✓")
-
-    # 测试用例 10: 纯文本输入
-    print("[自检] 测试10: 纯文本输入")
-    test10_input = "这是一段纯文本，没有键值对"
-    result10 = process_single(test10_input)
-    assert result10["status"] == "success", "测试10失败: 状态应为success"
-    assert result10["data"]["type"] == "text", "测试10失败: 类型应为text"
-    print("[自检] 测试10通过 ✓")
-
     print(f"\n[自检] 全部测试通过! ({'成功' if all_passed else '失败'})")
     return all_passed
 

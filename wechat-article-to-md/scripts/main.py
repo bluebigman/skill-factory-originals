@@ -270,7 +270,7 @@ def html_to_markdown(html_text: str, image_map: Dict[str, str] = None) -> str:
             lambda m, l=level: "\n" + "#" * l + " " + clean_inline(m.group(1)) + "\n",
             text, flags=re.DOTALL | re.IGNORECASE
         )
-
+    
     # 加粗
     text = re.sub(
         r'<(strong|b)[^>]*>(.*?)</\1>',

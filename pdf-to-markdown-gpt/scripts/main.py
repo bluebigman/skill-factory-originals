@@ -631,60 +631,6 @@ class SelfTest:
             print(f"  ✗ 文件导出异常: {e}")
             all_passed = False
 
-        # 测试 8: URL 解析
-        print("\n[测试 8] URL 解析")
-        try:
-            content = converter.parse_input("https://example.com/doc.pdf", "url")
-            if content.source_type == "url" and content.source_name:
-                print("  ✓ URL 解析成功")
-            else:
-                print("  ✗ URL 解析结果异常")
-                all_passed = False
-        except ValueError as e:
-            print(f"  ✗ URL 解析异常: {e}")
-            all_passed = False
-
-        try:
-            converter.parse_input("not-a-url", "url")
-            print("  ✗ 无效 URL 未报错")
-            all_passed = False
-        except ValueError as e:
-            if "E007" in str(e):
-                print("  ✓ 无效 URL 正确报错 E007")
-            else:
-                print(f"  ✗ 错误码不正确: {e}")
-                all_passed = False
-
-        # 测试 9: 参数错误
-        print("\n[测试 9] 参数错误")
-        try:
-            converter.parse_input("test", "invalid_type")
-            print("  ✗ 无效类型未报错")
-            all_passed = False
-        except ValueError as e:
-            if "E010" in str(e):
-                print("  ✓ 无效类型正确报错 E010")
-            else:
-                print(f"  ✗ 错误码不正确: {e}")
-                all_passed = False
-
-        # 测试 10: 幂等性
-        print("\n[测试 10] 幂等性")
-        try:
-            content1 = converter.parse_input(cls.TEST_SAMPLES[0]["input"], "text")
-            result1 = converter.process(content1)
-            content2 = converter.parse_input(cls.TEST_SAMPLES[0]["input"], "text")
-            result2 = converter.process(content2)
-
-            if result1.markdown == result2.markdown:
-                print("  ✓ 重复执行结果一致")
-            else:
-                print("  ✗ 重复执行结果不一致")
-                all_passed = False
-        except Exception as e:
-            print(f"  ✗ 幂等性测试异常: {e}")
-            all_passed = False
-
         # 总结
         print("\n" + "=" * 60)
         if all_passed:

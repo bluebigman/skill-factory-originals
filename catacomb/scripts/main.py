@@ -264,7 +264,7 @@ def process_batch(input_text: str, output_format: str = "json") -> str:
     for item in items:
         try:
             result = process_single(str(item), output_format)
-            results.append({"输入": str(item), "结果": json.loads(result) if output_format == "json" else result})
+            results.append({"输入": str(item), "结果": result})
         except ValueError as e:
             results.append({"输入": str(item), "错误": str(e)})
 

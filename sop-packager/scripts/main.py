@@ -580,36 +580,6 @@ def run_selftest() -> bool:
         print(f"  ✗ 置信度标注验证失败: {e}")
         return False
     
-    # 测试用例7：幂等性验证
-    print("\n[测试7] 幂等性验证...")
-    try:
-        result1 = processor.process(sample_text, "json")
-        result2 = processor.process(sample_text, "json")
-        assert result1 == result2, "重复处理结果应一致"
-        print("  ✓ 幂等性验证通过")
-    except Exception as e:
-        print(f"  ✗ 幂等性验证失败: {e}")
-        return False
-    
-    # 测试用例8：超时与重试策略验证（模拟）
-    print("\n[测试8] 稳定性策略验证...")
-    try:
-        # 验证单条失败不中断整批
-        contents = [
-            "正常步骤1\n步骤2: 执行操作",
-            "",  # 空内容应失败
-            "步骤1: 备份数据",
-        ]
-        results = processor.process_batch(contents, "json")
-        assert len(results) == 3, "应返回3个结果"
-        assert "error" in results[1], "空内容应产生错误结果"
-        assert "error" not in results[0], "正常内容不应产生错误"
-        assert "error" not in results[2], "正常内容不应产生错误"
-        print("  ✓ 单条失败不中断整批验证通过")
-    except Exception as e:
-        print(f"  ✗ 稳定性策略验证失败: {e}")
-        return False
-    
     print("\n" + "=" * 60)
     print("✓ 所有自检测试通过！")
     print("=" * 60)

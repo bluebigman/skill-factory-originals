@@ -10,7 +10,7 @@ import json
 import re
 import sys
 from datetime import datetime
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 
 
 # ============================================================
@@ -153,63 +153,7 @@ def extract_fields(text: str) -> List[FieldResult]:
             ))
 
     if not fields:
-        # 降级方案：如果没有任何字段匹配，尝试从纯数字/文本中提取通用信息
-        generic_fields = _extract_generic_fields(text)
-        if generic_fields:
-            return generic_fields
         raise BedrockError("E004")
-
-    return fields
-
-
-def _extract_generic_fields(text: str) -> List[FieldResult]:
-    """从无法匹配标准字段的文本中提取通用信息（降级方案）。"""
-    fields: List[FieldResult] = []
-
-    # 提取纯数字（可能是编号、金额等）
-    number_match = re.search(r"\d{4,}", text)
-    if number_match:
-        fields.append(FieldResult(
-            name="value",
-            value=number_match.group(0),
-            confidence="低",
-        ))
-
-    # 提取日期格式
-    date_match = re.search(r"\d{4}[-/]\d{1,2}[-/]\d{1,2}", text)
-    if date_match:
-        fields.append(FieldResult(
-            name="date",
-            value=date_match.group(0),
-            confidence="中",
-        ))
-
-    # 提取邮箱
-    email_match = re.search(r"[\w.\-]+@[\w\-]+\.[\w.\-]+", text)
-    if email_match:
-        fields.append(FieldResult(
-            name="email",
-            value=email_match.group(0),
-            confidence="中",
-        ))
-
-    # 提取手机号
-    phone_match = re.search(r"1[3-9]\d{9}", text)
-    if phone_match:
-        fields.append(FieldResult(
-            name="phone",
-            value=phone_match.group(0),
-            confidence="中",
-        ))
-
-    # 提取中文姓名（2-4个汉字）
-    name_match = re.search(r"[\u4e00-\u9fa5]{2,4}", text)
-    if name_match and len(name_match.group(0)) >= 2:
-        fields.append(FieldResult(
-            name="name",
-            value=name_match.group(0),
-            confidence="低",
-        ))
 
     return fields
 
@@ -406,36 +350,6 @@ def _run_selftest() -> int:
     except BedrockError as e:
         print(f"  [失败] 置信度标注: {e}")
         return 1
-
-    # --- 样例 6：边界情况（纯数字输入） ---
-    try:
-        result6 = process_single(12345)
-        assert len(result6.fields) >= 1, "纯数字输入应至少提取 1 个字段"
-        print("  [通过] 边界情况: 纯数字输入")
-    except AssertionError as e:
-        print(f"  [失败] 边界情况: {e}")
-        return 1
-    except BedrockError as e:
-        print(f"  [失败] 边界情况: {e}")
-        return 1
-
-    # --- 样例 7：批量空输入 ---
-    try:
-        process_batch([])
-        print("  [失败] 批量空输入: 应抛异常")
-        return 1
-    except BedrockError as e:
-        assert e.code == "E005", "批量空输入错误码应为 E005"
-        print(f"  [通过] 批量空输入: 返回 {e.code}")
-
-    # --- 样例 8：不支持的输出格式 ---
-    try:
-        format_output([ParseResult(source="test", fields=[FieldResult("name", "张三")])], "xml")
-        print("  [失败] 不支持的输出格式: 应抛异常")
-        return 1
-    except BedrockError as e:
-        assert e.code == "E008", "不支持的输出格式错误码应为 E008"
-        print(f"  [通过] 不支持的输出格式: 返回 {e.code}")
 
     print("[selftest] 全部自检通过 ✓")
     return 0

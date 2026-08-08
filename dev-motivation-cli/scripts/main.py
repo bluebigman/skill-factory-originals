@@ -16,7 +16,7 @@ import argparse
 import json
 import sys
 import datetime
-from typing import Dict, Any
+from typing import Dict, Any, List
 
 # 错误码定义
 ERROR_CODES = {

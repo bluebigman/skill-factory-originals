@@ -141,16 +141,15 @@ class DataProcessor:
                 })
 
         avg_confidence = total_confidence / len(input_list) if input_list else 0.0
-        success_count = sum(1 for r in results if "error" not in r)
 
         return ProcessResult(
             data={
                 "results": results,
                 "total_count": len(input_list),
-                "success_count": success_count,
+                "success_count": sum(1 for r in results if "error" not in r),
             },
             confidence=avg_confidence,
-            warnings=["批量处理完成，部分条目可能失败"] if success_count < len(input_list) else []
+            warnings=["批量处理完成，部分条目可能失败"] if len(results) > sum(1 for r in results if "error" not in r) else []
         )
 
     def _process_single(self, input_data: Any, output_format: str) -> ProcessResult:

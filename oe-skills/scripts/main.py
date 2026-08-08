@@ -6,7 +6,6 @@ import json
 import os
 import sys
 import tempfile
-import shutil
 from pathlib import Path
 
 
@@ -16,14 +15,13 @@ def analyze_text_file(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
     except UnicodeDecodeError:
+        # 尝试其他编码
         try:
             with open(file_path, 'r', encoding='gbk') as f:
                 content = f.read()
         except UnicodeDecodeError:
             with open(file_path, 'r', encoding='latin-1') as f:
                 content = f.read()
-    except Exception as e:
-        return {"type": "error", "message": str(e)}
 
     lines = content.splitlines()
     line_count = len(lines)
@@ -43,34 +41,25 @@ def analyze_text_file(file_path):
 
 def analyze_binary_file(file_path):
     """分析二进制文件，返回基本信息"""
-    try:
-        file_size = os.path.getsize(file_path)
-        with open(file_path, 'rb') as f:
-            header = f.read(16)
-        return {
-            "type": "binary",
-            "size": file_size,
-            "header_hex": header.hex()
-        }
-    except Exception as e:
-        return {"type": "error", "message": str(e)}
+    file_size = os.path.getsize(file_path)
+    with open(file_path, 'rb') as f:
+        header = f.read(16)
+    return {
+        "type": "binary",
+        "size": file_size,
+        "header_hex": header.hex()
+    }
 
 
 def analyze_file(file_path):
     """分析文件，自动判断文本或二进制"""
-    if not os.path.exists(file_path):
-        return {"type": "error", "message": f"文件不存在: {file_path}"}
-
     try:
         with open(file_path, 'rb') as f:
             sample = f.read(1024)
     except Exception as e:
         return {"type": "error", "message": str(e)}
 
-    if not sample:
-        # 空文件按文本处理
-        return analyze_text_file(file_path)
-
+    # 检查是否为文本文件
     try:
         sample.decode('utf-8')
         return analyze_text_file(file_path)
@@ -109,68 +98,46 @@ def format_output(result):
 def run_selftest():
     """运行自测试"""
     test_dir = tempfile.mkdtemp(prefix="oe_skills_test_")
-    try:
-        test_file = os.path.join(test_dir, "test.txt")
+    test_file = os.path.join(test_dir, "test.txt")
 
-        # 创建测试文本文件
-        test_content = "第一行\n第二行\n第三行\n"
-        with open(test_file, 'w', encoding='utf-8') as f:
-            f.write(test_content)
+    # 创建测试文本文件
+    test_content = "第一行\n第二行\n第三行\n"
+    with open(test_file, 'w', encoding='utf-8') as f:
+        f.write(test_content)
 
-        # 测试文本分析
-        result = analyze_file(test_file)
-        assert result["type"] == "text", "文本类型判断失败"
-        assert result["lines"] == 3, f"行数错误: {result['lines']}"
-        assert result["characters"] == len(test_content), f"字符数错误: {result['characters']}"
-        assert result["structured"]["first_line"] == "第一行", "首行错误"
-        assert result["structured"]["last_line"] == "第三行", "末行错误"
+    # 测试文本分析
+    result = analyze_file(test_file)
+    assert result["type"] == "text", "文本类型判断失败"
+    assert result["lines"] == 3, f"行数错误: {result['lines']}"
+    assert result["characters"] == len(test_content), f"字符数错误: {result['characters']}"
+    assert result["structured"]["first_line"] == "第一行", "首行错误"
+    assert result["structured"]["last_line"] == "第三行", "末行错误"
 
-        # 测试二进制分析
-        bin_file = os.path.join(test_dir, "test.bin")
-        with open(bin_file, 'wb') as f:
-            f.write(b'\x00\x01\x02\x03\xff')
+    # 测试二进制分析
+    bin_file = os.path.join(test_dir, "test.bin")
+    with open(bin_file, 'wb') as f:
+        f.write(b'\x00\x01\x02\x03\xff')
 
-        result = analyze_file(bin_file)
-        assert result["type"] == "binary", "二进制类型判断失败"
-        assert result["size"] == 5, f"二进制大小错误: {result['size']}"
+    result = analyze_file(bin_file)
+    assert result["type"] == "binary", "二进制类型判断失败"
+    assert result["size"] == 5, f"二进制大小错误: {result['size']}"
 
-        # 测试格式化输出
-        output = format_output(result)
-        assert "二进制" in output, "格式化输出错误"
+    # 测试格式化输出
+    output = format_output(result)
+    assert "二进制" in output, "格式化输出错误"
 
-        # 测试空文件
-        empty_file = os.path.join(test_dir, "empty.txt")
-        with open(empty_file, 'w', encoding='utf-8') as f:
-            pass
-        result = analyze_file(empty_file)
-        assert result["type"] == "text", "空文件类型判断失败"
-        assert result["lines"] == 0, f"空文件行数错误: {result['lines']}"
-        assert result["characters"] == 0, f"空文件字符数错误: {result['characters']}"
+    # 清理
+    import shutil
+    shutil.rmtree(test_dir)
 
-        # 测试不存在的文件
-        result = analyze_file(os.path.join(test_dir, "nonexistent.txt"))
-        assert result["type"] == "error", "不存在文件应返回错误"
-
-        # 测试错误处理
-        output = format_output({"type": "error", "message": "测试错误"})
-        assert "错误" in output, "错误格式化输出错误"
-
-        # 测试JSON输出
-        result = analyze_file(test_file)
-        json_str = json.dumps(result, ensure_ascii=False)
-        assert json_str, "JSON序列化失败"
-
-        print("自测试通过")
-        return 0
-    finally:
-        shutil.rmtree(test_dir, ignore_errors=True)
+    print("自测试通过")
+    return 0
 
 
 def main():
     parser = argparse.ArgumentParser(description="文件分析工具")
     parser.add_argument("file", nargs="?", help="要分析的文件路径")
     parser.add_argument("--selftest", action="store_true", help="运行自测试")
-    parser.add_argument("--json", action="store_true", help="以JSON格式输出")
     args = parser.parse_args()
 
     if args.selftest:
@@ -185,11 +152,8 @@ def main():
         return 1
 
     result = analyze_file(args.file)
-    if args.json:
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-    else:
-        output = format_output(result)
-        print(output)
+    output = format_output(result)
+    print(output)
     return 0
 
 

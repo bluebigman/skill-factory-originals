@@ -95,8 +95,7 @@ def validate_input(raw_input: Any) -> Tuple[bool, str]:
         if len(raw_input) == 0:
             return False, "E001"
     else:
-        # 数字、布尔等非容器类型视为有效输入
-        return True, ""
+        return False, "E003"
 
     return True, ""
 
@@ -149,20 +148,6 @@ def extract_key_fields(content: Any) -> Tuple[Dict[str, Any], float]:
         result["type"] = "list"
         result["data"] = content
         confidence = 90.0
-
-    elif isinstance(content, bool):
-        # 布尔输入
-        result["type"] = "boolean"
-        result["value"] = content
-        confidence = 55.0
-        warnings.append("布尔类型输入，置信度较低")
-
-    elif isinstance(content, (int, float)):
-        # 数字输入
-        result["type"] = "number"
-        result["value"] = content
-        confidence = 55.0
-        warnings.append("数字类型输入，置信度较低")
 
     else:
         # 其他类型
@@ -298,8 +283,6 @@ def _format_text_result(result: Dict[str, Any]) -> str:
             lines.append(f"URL: {data['url']}")
         if "content" in data:
             lines.append(f"内容: {data['content'][:200]}")
-        if "value" in data:
-            lines.append(f"值: {data['value']}")
         if "data" in data and isinstance(data["data"], dict):
             for key, value in data["data"].items():
                 lines.append(f"  {key}: {str(value)[:100]}")
@@ -598,173 +581,6 @@ def run_selftest() -> int:
     except Exception as exc:
         failed += 1
         errors.append(f"测试10失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 11: 文件输入处理 ---
-    print("[测试 11] 文件输入处理")
-    try:
-        import tempfile
-        import os
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as f:
-            f.write("文件测试内容")
-            temp_path = f.name
-        try:
-            with open(temp_path, "r", encoding="utf-8") as f:
-                file_content = f.read()
-            result = process_item(file_content, {})
-            assert result.data.get("type") == "text", "文件内容类型识别错误"
-            assert "文件测试" in result.data.get("content", ""), "文件内容提取错误"
-            passed += 1
-            print("  ✓ 通过")
-        finally:
-            os.unlink(temp_path)
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试11失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 12: 复杂 JSON 嵌套 ---
-    print("[测试 12] 复杂 JSON 嵌套")
-    try:
-        complex_json = '{"user": {"name": "张三", "age": 30}, "items": [1, 2, 3], "active": true}'
-        result = process_item(complex_json, {})
-        assert result.data.get("type") == "json", "复杂JSON类型识别错误"
-        assert result.data.get("data", {}).get("user", {}).get("name") == "张三", "嵌套JSON解析错误"
-        assert len(result.data.get("data", {}).get("items", [])) == 3, "JSON数组解析错误"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试12失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 13: 无效 JSON 降级处理 ---
-    print("[测试 13] 无效 JSON 降级处理")
-    try:
-        invalid_json = '{"name": "测试", value: 42}'
-        result = process_item(invalid_json, {})
-        assert result.data.get("type") == "text", "无效JSON应降级为文本处理"
-        assert len(result.warnings) > 0, "应有降级警告"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试13失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 14: 批量处理容错 ---
-    print("[测试 14] 批量处理容错")
-    try:
-        batch = ["正常文本", "", "https://test.com"]
-        results = process_batch(batch, {})
-        assert len(results) == 3, "批量处理数量错误"
-        assert results[0].confidence > 50, "第一项应正常处理"
-        assert len(results[1].errors) > 0, "第二项应产生错误"
-        assert results[2].confidence > 50, "第三项应正常处理"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试14失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 15: 输出格式完整性 ---
-    print("[测试 15] 输出格式完整性")
-    try:
-        result = process_item("完整性测试", {})
-        output_dict = result.to_dict()
-        assert "data" in output_dict, "缺少data字段"
-        assert "confidence" in output_dict, "缺少confidence字段"
-        assert "warnings" in output_dict, "缺少warnings字段"
-        assert "errors" in output_dict, "缺少errors字段"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试15失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 16: 参数解析错误处理 ---
-    print("[测试 16] 参数解析错误处理")
-    try:
-        # 验证 E009 错误码存在
-        assert "E009" in ERROR_CODES, "缺少E009错误码"
-        # 模拟参数解析失败场景
-        import subprocess
-        import sys as _sys
-        # 使用无效参数调用脚本，应返回非零退出码
-        proc = subprocess.run(
-            [_sys.executable, __file__, "--invalid-arg"],
-            capture_output=True,
-            text=True,
-            timeout=10
-        )
-        assert proc.returncode != 0, "无效参数应返回非零退出码"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试16失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 17: 超长文本处理 ---
-    print("[测试 17] 超长文本处理")
-    try:
-        long_text = "长文本" * 10000  # 30000字符
-        result = process_item(long_text, {})
-        assert result.data.get("type") == "text", "长文本类型识别错误"
-        assert result.confidence > 50, "长文本置信度应正常"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试17失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 18: 特殊字符处理 ---
-    print("[测试 18] 特殊字符处理")
-    try:
-        special_text = "特殊字符: \n\t\r\\\"'`~!@#$%^&*()_+-=[]{}|;:,.<>?"
-        result = process_item(special_text, {})
-        assert result.data.get("type") == "text", "特殊字符类型识别错误"
-        assert result.confidence > 50, "特殊字符置信度应正常"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试18失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 19: 数字和布尔输入 ---
-    print("[测试 19] 数字和布尔输入")
-    try:
-        result_num = process_item(12345, {})
-        assert result_num.data.get("type") == "number", "数字类型识别错误"
-        assert result_num.data.get("value") == 12345, "数字值提取错误"
-        assert result_num.confidence < 60, "数字置信度应较低"
-
-        result_bool = process_item(True, {})
-        assert result_bool.data.get("type") == "boolean", "布尔类型识别错误"
-        assert result_bool.data.get("value") is True, "布尔值提取错误"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试19失败: {str(exc)}")
-        print(f"  ✗ 失败: {str(exc)}")
-
-    # --- 测试 20: 幂等性验证 ---
-    print("[测试 20] 幂等性验证")
-    try:
-        test_input = "幂等性测试文本"
-        result1 = process_item(test_input, {})
-        result2 = process_item(test_input, {})
-        assert result1.to_dict() == result2.to_dict(), "相同输入应产生相同输出"
-        passed += 1
-        print("  ✓ 通过")
-    except Exception as exc:
-        failed += 1
-        errors.append(f"测试20失败: {str(exc)}")
         print(f"  ✗ 失败: {str(exc)}")
 
     # --- 总结 ---

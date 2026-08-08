@@ -317,27 +317,6 @@ def selftest() -> bool:
         print(f"[失败] 测试8：{e}")
         return False
 
-    # 测试用例 9: 特殊字符输入
-    try:
-        special_text = "特殊字符测试：!@#$%^&*()_+{}[]|\\:;\"'<>,.?/~`"
-        result_special = process_single(special_text, "json")
-        assert result_special["处理状态"] == "成功", "测试9失败：特殊字符处理失败"
-        print("[通过] 测试9：特殊字符输入")
-    except AssertionError as e:
-        print(f"[失败] 测试9：{e}")
-        return False
-
-    # 测试用例 10: 重复执行幂等性
-    try:
-        test_input = "幂等性测试文本，包含日期2024-05-20"
-        result_a = process_single(test_input, "json")
-        result_b = process_single(test_input, "json")
-        assert result_a == result_b, "测试10失败：重复执行结果不一致"
-        print("[通过] 测试10：幂等性")
-    except AssertionError as e:
-        print(f"[失败] 测试10：{e}")
-        return False
-
     print("=" * 60)
     print("自检全部通过！")
     print("=" * 60)

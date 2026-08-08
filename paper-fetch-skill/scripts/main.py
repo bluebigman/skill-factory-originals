@@ -131,7 +131,9 @@ def _parse_pdf_metadata(file_path: str) -> Dict[str, Any]:
             "abstract": "[需核实:摘要]",
             "keywords": "[需核实:关键词]",
             "url": f"file://{os.path.abspath(file_path)}",
-            "source": "pdf_file"
+            "source": "pdf_file",
+            "file_size": file_size,
+            "modified_time": modified_time.isoformat()
         }
         
         # 检查字段数量

@@ -163,14 +163,7 @@ class SQLGenerator:
             remaining = text.replace(match.group(0), " ", 1)
             return table, remaining
 
-        # 模式3: 聚合词后跟表名，如 "统计订单表总金额"
-        match = re.search(r"(?:统计|计数|求和|总和|平均|平均值|最大|最大值|最小|最小值)\s*([\u4e00-\u9fa5_a-zA-Z][\u4e00-\u9fa5_a-zA-Z0-9_]*)\s*表", text)
-        if match:
-            table = match.group(1)
-            remaining = text.replace(match.group(0), " ", 1)
-            return table, remaining
-
-        # 模式4: "查询xxx" 或 "统计xxx" 等，xxx可能是表名
+        # 模式3: "查询xxx" 或 "统计xxx" 等，xxx可能是表名
         match = re.search(r"(?:查询|统计|计数|求和|平均|最大|最小|获取|列出|显示)\s*([\u4e00-\u9fa5_a-zA-Z][\u4e00-\u9fa5_a-zA-Z0-9_]*)", text)
         if match and "表" not in match.group(1):
             # 检查是否可能是表名（后面没有其他明显字段）

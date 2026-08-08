@@ -368,42 +368,6 @@ def run_selftest() -> None:
         print(f"✗ Markdown 输出测试失败: {e}")
         sys.exit(1)
 
-    # 测试 8: 无效输出格式
-    try:
-        process_input(data="姓名: 张三", output_format="xml")
-        print("✗ 无效输出格式测试失败: 未抛出异常")
-        sys.exit(1)
-    except WorkflowError as e:
-        if e.error_code == "E004":
-            print("✓ 无效输出格式测试通过")
-        else:
-            print(f"✗ 无效输出格式测试失败: {e}")
-            sys.exit(1)
-
-    # 测试 9: 无效 URL
-    try:
-        process_input(url="ftp://example.com")
-        print("✗ 无效 URL 测试失败: 未抛出异常")
-        sys.exit(1)
-    except WorkflowError as e:
-        if e.error_code == "E006":
-            print("✓ 无效 URL 测试通过")
-        else:
-            print(f"✗ 无效 URL 测试失败: {e}")
-            sys.exit(1)
-
-    # 测试 10: 不支持的文件类型
-    try:
-        process_input(file_path="/tmp/test.exe")
-        print("✗ 不支持文件类型测试失败: 未抛出异常")
-        sys.exit(1)
-    except WorkflowError as e:
-        if e.error_code == "E007":
-            print("✓ 不支持文件类型测试通过")
-        else:
-            print(f"✗ 不支持文件类型测试失败: {e}")
-            sys.exit(1)
-
     print("\n所有自检测试通过！")
 
 

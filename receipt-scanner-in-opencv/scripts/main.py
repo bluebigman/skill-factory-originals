@@ -8,7 +8,6 @@ receipt-scanner-in-opencv 独立实现脚本
 import sys
 import argparse
 import math
-import re
 from dataclasses import dataclass, field
 from typing import List, Tuple, Optional
 
@@ -344,6 +343,7 @@ class ReceiptExtractor:
 
     def _extract_amount(self, text: str) -> Optional[float]:
         """从文本中提取金额"""
+        import re
         # 匹配数字模式
         match = re.search(r'(\d+\.?\d*)', text)
         if match:
@@ -355,6 +355,7 @@ class ReceiptExtractor:
 
     def _extract_date(self, text: str) -> Optional[str]:
         """从文本中提取日期"""
+        import re
         # 匹配日期格式：YYYY-MM-DD 或 YYYY年MM月DD日
         patterns = [
             r'(\d{4}[-/]\d{1,2}[-/]\d{1,2})',
@@ -380,6 +381,7 @@ class ReceiptExtractor:
 
     def _extract_item(self, text: str) -> Optional[dict]:
         """提取商品项"""
+        import re
         # 尝试提取名称和价格
         # 简单规则：假设格式为 "名称 数量 价格元"
         parts = text.split()
@@ -668,7 +670,7 @@ def run_selftest() -> bool:
 def get_version() -> str:
     """获取版本信息"""
     try:
-        return "1.0.7"
+        return "1.0.6"
     except Exception:
         raise_error("E010", "版本信息不可用")
 

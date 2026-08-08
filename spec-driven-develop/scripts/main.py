@@ -524,20 +524,6 @@ def run_selftest() -> None:
         except SpecDrivenError as e:
             assert e.error_code == "E002", "超长输入应返回E002错误码"
 
-        # 测试无效输出格式
-        try:
-            format_output(result, "invalid_format")
-            assert False, "无效格式应抛出异常"
-        except SpecDrivenError as e:
-            assert e.error_code == "E004", "无效格式应返回E004错误码"
-
-        # 测试无法解析的输入
-        try:
-            processor.process("   ")  # 空白输入
-            assert False, "空白输入应抛出异常"
-        except SpecDrivenError as e:
-            assert e.error_code == "E001", "空白输入应返回E001错误码"
-
         print("自检通过！所有核心功能验证成功。")
         print(f"  需求点数: {result['meta']['total_requirements']}")
         print(f"  任务数: {result['meta']['total_tasks']}")

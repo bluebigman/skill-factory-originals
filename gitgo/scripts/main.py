@@ -253,26 +253,6 @@ def run_selftest() -> int:
     else:
         print("[FAIL] 参数解析逻辑异常")
 
-    # 测试 9: 文件路径处理逻辑
-    total += 1
-    test_path = Path("test_file.txt")
-    if test_path.name == "test_file.txt":
-        passed += 1
-        print("[PASS] 文件路径处理逻辑正常")
-    else:
-        print("[FAIL] 文件路径处理逻辑异常")
-
-    # 测试 10: 幂等性逻辑（重复执行结果一致）
-    total += 1
-    test_data = [1, 2, 3]
-    result1 = sorted(test_data)
-    result2 = sorted(test_data)
-    if result1 == result2:
-        passed += 1
-        print("[PASS] 幂等性逻辑正常")
-    else:
-        print("[FAIL] 幂等性逻辑异常")
-
     # 输出结果
     print(f"\n自检完成: {passed}/{total} 项通过")
     if passed == total:

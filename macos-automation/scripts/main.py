@@ -345,21 +345,7 @@ def run_selftest() -> bool:
     ]
     result_7 = processor.process(test_input_7)
     assert result_7.get("data") is not None, "测试7失败: 数据为空"
-    # 修复：batch_count 在 _build_result 中未包含，需从 data 中获取
-    # 实际 batch_count 存储在 data 中，但 _build_result 只输出 OUTPUT_TEMPLATE 字段
-    # 因此需要检查 data 中的 batch_count 或从 description 解析
-    data_7 = result_7["data"]
-    # 检查 batch_count 是否在 data 中（通过 description 解析或直接检查）
-    batch_count = data_7.get("batch_count")
-    if batch_count is None:
-        # 尝试从 description 中解析
-        desc = data_7.get("description", "")
-        try:
-            parsed_desc = json.loads(desc)
-            batch_count = len(parsed_desc) if isinstance(parsed_desc, list) else None
-        except (json.JSONDecodeError, TypeError):
-            batch_count = None
-    assert batch_count == 2, f"测试7失败: 批量数量错误，期望2，实际{batch_count}"
+    assert result_7["data"].get("batch_count") == 2, f"测试7失败: 批量数量错误，期望2，实际{result_7['data'].get('batch_count')}"
     print("[PASS] 测试7: 批量结果完整性")
 
     # 测试用例 8: URL 识别
