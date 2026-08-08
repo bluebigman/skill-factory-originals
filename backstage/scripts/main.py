@@ -372,6 +372,34 @@ def run_selftest() -> bool:
     assert not high_conf.needs_review, "测试8失败: 高置信度不应标记复核"
     print("✓ 测试8通过: 置信度边界")
 
+    # 测试用例 9: 标量输入处理
+    test9_input = "42"
+    result9 = process_input(test9_input)
+    assert result9.data is not None, "测试9失败: 标量输入结果为空"
+    assert "value" in result9.data, "测试9失败: 标量输入缺少value字段"
+    print("✓ 测试9通过: 标量输入处理")
+
+    # 测试用例 10: 纯文本输入处理
+    test10_input = "这是一个纯文本内容"
+    result10 = process_input(test10_input)
+    assert result10.data is not None, "测试10失败: 文本输入结果为空"
+    assert "content" in result10.data, "测试10失败: 文本输入缺少content字段"
+    print("✓ 测试10通过: 纯文本输入处理")
+
+    # 测试用例 11: 批量模式错误输入
+    batch_inputs2 = ['{"name": "A"}', '{"name": "B", "id": 1}']
+    batch_results2 = process_batch(batch_inputs2, expected_fields=["name", "id"])
+    assert len(batch_results2) == 2, "测试11失败: 批量数量错误"
+    assert batch_results2[0].data is None, "测试11失败: 第一项应失败"
+    assert batch_results2[1].data is not None, "测试11失败: 第二项应成功"
+    print("✓ 测试11通过: 批量模式错误输入")
+
+    # 测试用例 12: 未知字段警告
+    test12_input = '{"name": "A", "unknown_field": "x"}'
+    result12 = process_input(test12_input)
+    assert len(result12.warnings) > 0, "测试12失败: 应有未知字段警告"
+    print("✓ 测试12通过: 未知字段警告")
+
     print("\n所有自检通过！")
     return True
 
