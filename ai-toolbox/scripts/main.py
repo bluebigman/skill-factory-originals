@@ -162,7 +162,7 @@ def calculate_confidence(data: Dict[str, Any]) -> Tuple[float, List[str]]:
     confidence = 0.5
 
     # 有结构化字段
-    if "fields" in data and data["field_count"] > 0:
+    if "fields" in data and data.get("field_count", 0) > 0:
         confidence += 0.3
         if data["field_count"] >= 3:
             confidence += 0.1

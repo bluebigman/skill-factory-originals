@@ -343,6 +343,33 @@ def run_selftest() -> bool:
     assert result["status"] in ("success", "error"), "测试 7 失败: 状态异常"
     print("  通过 (no crash)")
 
+    # --- 测试用例 8：JSON 数组批量处理 ---
+    print("[测试 8] JSON 数组批量处理")
+    json_array = json.dumps([{"id": "J1", "content": "JSON 批量一"}, {"id": "J2", "content": "JSON 批量二"}])
+    result = process_input(json_array, "json")
+    assert result["status"] == "success", f"测试 8 失败: {result}"
+    assert result["summary"]["total"] == 2, "测试 8 失败: 总数不正确"
+    assert result["summary"]["success_count"] == 2, "测试 8 失败: 成功数应为 2"
+    print(f"  通过 (total={result['summary']['total']}, success={result['summary']['success_count']})")
+
+    # --- 测试用例 9：输入格式校验 ---
+    print("[测试 9] 输入格式校验")
+    valid, _ = validate_input_format("ID: X, 内容: 测试")
+    assert valid, "测试 9 失败: 有效输入应通过校验"
+    invalid, _ = validate_input_format("")
+    assert not invalid, "测试 9 失败: 空输入应校验失败"
+    print("  通过 (format validation)")
+
+    # --- 测试用例 10：置信度标注 ---
+    print("[测试 10] 置信度标注")
+    note_high = _format_confidence_note(95.0)
+    note_medium = _format_confidence_note(87.0)
+    note_low = _format_confidence_note(80.0)
+    assert note_high == "", "测试 10 失败: 高置信度不应有标注"
+    assert note_medium == "【建议复核】", "测试 10 失败: 中置信度应标注建议复核"
+    assert note_low == "【需核实】", "测试 10 失败: 低置信度应标注需核实"
+    print("  通过 (confidence notes)")
+
     print("\n所有自检通过！")
     return all_passed
 

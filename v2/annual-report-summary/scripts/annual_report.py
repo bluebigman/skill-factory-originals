@@ -17,12 +17,18 @@ import argparse
 import sys
 import urllib.request
 import urllib.error
+import urllib.parse
 import time
+import logging
 from typing import Dict, List, Optional, Any, Tuple
 from datetime import datetime, timezone
 from pathlib import Path
 
 __version__ = "2.1.0"
+
+# 配置日志
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 # ============================================================
 # 常量定义
@@ -79,6 +85,7 @@ class IndicatorExtractor:
     def __init__(self, text: str):
         self.text = text
         self.results: Dict[str, Dict[str, Any]] = {}
+        self.skipped_values: List[str] = []  # 记录被跳过的非数值文本
     
     def _extract(self, patterns: List[str], key: str, label: str, 
                  normalize: bool = True) -> Optional[str]:
@@ -91,6 +98,9 @@ class IndicatorExtractor:
                     value = self._normalize_value(value)
                 # 检查是否为有效数值
                 if value is None:
+                    # 记录被跳过的非数值文本
+                    self.skipped_values.append(f"{label}: {match.group(1).strip()}")
+                    logger.warning(f"跳过非数值文本: {label} = {match.group(1).strip()}")
                     continue
                 self.results[key] = {
                     "label": label,
@@ -153,6 +163,7 @@ class IndicatorExtractor:
         value = self._extract(patterns, "roe", "净资产收益率(ROE)")
         if value and not self._validate_range("roe", value):
             self.results.pop("roe", None)
+            logger.warning(f"ROE值超出合理范围: {value}")
             return None
         return value
     
@@ -167,6 +178,7 @@ class IndicatorExtractor:
         value = self._extract(patterns, "net_profit_growth", "净利润增长率")
         if value and not self._validate_range("net_profit_growth", value):
             self.results.pop("net_profit_growth", None)
+            logger.warning(f"净利润增长率超出合理范围: {value}")
             return None
         return value
     
@@ -201,6 +213,7 @@ class IndicatorExtractor:
         value = self._extract(patterns, "gross_margin", "毛利率")
         if value and not self._validate_range("gross_margin", value):
             self.results.pop("gross_margin", None)
+            logger.warning(f"毛利率超出合理范围: {value}")
             return None
         return value
     
@@ -213,6 +226,7 @@ class IndicatorExtractor:
         value = self._extract(patterns, "net_margin", "净利率")
         if value and not self._validate_range("net_margin", value):
             self.results.pop("net_margin", None)
+            logger.warning(f"净利率超出合理范围: {value}")
             return None
         return value
     
@@ -225,6 +239,7 @@ class IndicatorExtractor:
         value = self._extract(patterns, "debt_ratio", "资产负债率")
         if value and not self._validate_range("debt_ratio", value):
             self.results.pop("debt_ratio", None)
+            logger.warning(f"资产负债率超出合理范围: {value}")
             return None
         return value
     
@@ -256,6 +271,7 @@ class IndicatorExtractor:
         value = self._extract(patterns, "rd_ratio", "研发费用率")
         if value and not self._validate_range("rd_ratio", value):
             self.results.pop("rd_ratio", None)
+            logger.warning(f"研发费用率超出合理范围: {value}")
             return None
         return value
     
@@ -365,6 +381,7 @@ class AnnualReportAPIClient:
                 if attempt < API_MAX_RETRIES - 1:
                     # 指数退避
                     wait_time = API_RETRY_BACKOFF * (2 ** attempt)
+                    logger.warning(f"API请求失败（第{attempt+1}次），{wait_time}秒后重试: {e}")
                     time.sleep(wait_time)
                 continue
         
@@ -385,35 +402,4 @@ class AnnualReportAPIClient:
         return data
 
 
-# ============================================================
-# 摘要生成器
-# ============================================================
-
-class SummaryGenerator:
-    """生成人类可读的摘要"""
-    
-    def __init__(self, results: Dict[str, Dict[str, Any]]):
-        self.results = results
-    
-    def generate_text(self) -> str:
-        """生成文本摘要"""
-        if not self.results:
-            return "未提取到任何财务指标，请检查输入文本。"
-        
-        lines = ["=" * 50, "年报财务摘要", "=" * 50]
-        
-        # 核心指标
-        core_found = 0
-        for key in CORE_INDICATORS:
-            if key in self.results:
-                core_found += 1
-                item = self.results[key]
-                lines.append(f"  {item['label']}: {item['value']}")
-        
-        # 其他指标
-        other_keys = [k for k in self.results.keys() if k not in CORE_INDICATORS]
-        if other_keys:
-            lines.append("-" * 50)
-            lines.append("其他指标:")
-            for key in other_keys:
-                item = self
+#

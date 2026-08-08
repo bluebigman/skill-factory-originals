@@ -107,6 +107,9 @@ class IndicatorExtractor:
                     if value is not None and self._is_valid_number(value, indicator):
                         results[indicator] = value
                         break
+                    else:
+                        # 显式处理无效数据：记录日志并标记为 None
+                        print(f"  [WARN] 指标 {indicator} 匹配到无效值: '{match.group(1)}'，已跳过", file=sys.stderr)
         return results
 
 

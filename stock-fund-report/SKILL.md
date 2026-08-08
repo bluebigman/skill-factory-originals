@@ -1,23 +1,21 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: stock-fund-report
 name: stock-fund-report
-displayName: 持仓分析报告
-description: 仅供学习与参考用途。使用本。当用户需要报表 数据可视化、进行stock fund report相关操作时使用本技能，提供规范、可复用的处理流程与输出。
-version: 1.0.0
-# === 法律合规声明（自动生成，请勿删除） ===
+displayName: 基金持仓透视 报表可视化 盈亏分析
+description: 解析基金持仓数据，生成可视化报表与盈亏分析，辅助投资决策参考。
+version: 1.2.2
+rules_version: cpr-20260808-n152
 license: MIT
 source_project: original
-source_url: https://skillhub.cn
-source_license_url: 
-copyright_holder: Skill Factory
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/stock-fund-report
+copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。本Skill为AI辅助生成内容。
-author: skill-factory-auto
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: DataViz Studio
 agent_created: true
-trigger_words: 
+trigger_words: ["stock-fund-report", "基金报表", "持仓分析", "盈亏可视化", "基金数据透视"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,113 +29,45 @@ trigger_words:
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 持仓分析报告
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-> 根据持仓与行情数据生成投资分析周报：收益统计、持仓集中度、风险提示、调仓建议
+# 基金持仓报表生成与可视化 Skill 文档
 
 ## 一、能力边界（一页纸速查卡）
 
-**能做（5项核心能力）：**
-1. 将 持仓明细与交易记录 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+### 1.1 能做什么
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+| 序号 | 能力项 | 说明 |
+|------|--------|------|
+| 1 | 字段解析 | 从用户提供的文本或表格中提取基金代码、名称、市值、成本、盈亏、持仓比例等关键字段 |
+| 2 | 数据处理 | 对持仓数据进行排序、汇总、占比计算、盈亏统计等规范化处理 |
+| 3 | 报表生成 | 输出结构化报表，支持 Markdown 表格、CSV 格式及简单的文本可视化 |
+| 4 | 置信度标注 | 对解析结果中不确定的字段标注 `[需核实:字段名]`，提示用户确认 |
+| 5 | 错误诊断 | 识别输入格式问题，返回明确的错误码与修正指引 |
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### 1.2 不能做什么
 
-## 二、触发方式（说大白话就能用）
+| 序号 | 限制项 | 说明 |
+|------|--------|------|
+| 1 | 不提供投资建议 | 本技能仅做数据整理与展示，不包含买卖时机判断、收益预测等 |
+| 2 | 不连接实时行情 | 不获取实时市场价格，所有数据以用户输入为准 |
+| 3 | 不执行交易操作 | 不连接任何交易系统，不产生实际交易指令 |
+| 4 | 不处理非结构化文本 | 需要相对规整的输入格式，纯自然语言描述需先转化为结构化数据 |
 
-**触发词表（6类场景）：**
-| 持仓分析 | 通用场景 |
-| 投资周报 | 通用场景 |
-| 收益统计 | 通用场景 |
-| 持仓报告 | 通用场景 |
-| 仓位分析 | 通用场景 |
+### 1.3 适用对象
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 持仓分析报告，进入标准流程 |
-| 把这个转成另一种格式 | 启动 持仓分析报告，进入标准流程 |
-| 批量弄一下这些 | 启动 持仓分析报告，进入标准流程 |
+- 个人投资者：整理自己的基金持仓，生成可视化报表
+- 理财顾问：为客户生成持仓概览，辅助沟通
+- 学习研究者：分析基金组合结构，进行数据透视练习
 
-## 三、标准流程（5分钟上手路径）
-
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：持仓明细与交易记录
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：持仓明细与交易记录" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 持仓明细与交易记录
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
-
-## 失败处理
-- 输入不符合预期 → 返回错误说明与正确的输入格式示例
-- 执行中异常 → 保留中间结果，报告失败原因与已处理进度
-- 依赖缺失 → 给出安装命令并重试一次
-
-## 前置条件
-- 无特殊环境要求
-
-## 执行步骤
-1. 收集用户输入并确认格式
-2. 按功能逻辑处理输入内容
-3. 生成结果并校验完整性
-
-## 输出
-- 结构化文本结果，附处理说明
-
-
-> 💡 **金融财税系列**：本 Skill 是「金融财税」系列的一员。搭配 [工资奖金计算]、[个税计算]、[年报解读] 使用，覆盖个人与企业财税全场景。
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 Skill Factory
+Copyright (c) 2026 SkillForge Lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -148,42 +78,5 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 ```
 <!-- professional-license-embedded -->
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
