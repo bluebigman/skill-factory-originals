@@ -6,7 +6,8 @@ slug: academic-research-skills
 name: academic-research-skills
 displayName: 学术研究 文献处理 论文写作
 description: 将研究资料转化为结构化成果，支持检索、写作、审校与修订全流程。
-version: 1.0.2
+version: 1.0.3
+rules_version: cpr-20260808-n152
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/academic-research-skills
