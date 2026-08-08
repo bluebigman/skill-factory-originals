@@ -18,6 +18,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Callable
+import hashlib
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 
 
 # ============================================================
@@ -192,76 +196,98 @@ global_cache = SimpleCache()
 
 
 # ============================================================
-# LLM API 调用
+# LLM API 调用（带指数退避重试和jitter）
 # ============================================================
+class LLMClient:
+    """LLM API客户端，使用requests.Session复用连接"""
+    
+    def __init__(self, api_url: str = LLM_API_URL, api_key: str = LLM_API_KEY, 
+                 model: str = LLM_MODEL, timeout: int = LLM_TIMEOUT, 
+                 max_retries: int = LLM_MAX_RETRIES):
+        self.api_url = api_url
+        self.api_key = api_key
+        self.model = model
+        self.timeout = timeout
+        self.max_retries = max_retries
+        
+        # 创建Session并配置连接池
+        self.session = requests.Session()
+        
+        # 配置重试策略（指数退避）
+        retry_strategy = Retry(
+            total=max_retries,
+            backoff_factor=0.5,  # 2^n * 0.5s
+            status_forcelist=[429, 500, 502, 503, 504],
+            allowed_methods=["POST"],
+            respect_retry_after_header=True
+        )
+        
+        adapter = HTTPAdapter(
+            max_retries=retry_strategy,
+            pool_connections=10,
+            pool_maxsize=10
+        )
+        self.session.mount("https://", adapter)
+        self.session.mount("http://", adapter)
+        
+    def call(self, prompt: str, role: str) -> str:
+        """调用LLM API，带缓存和降级处理"""
+        if not self.api_key:
+            raise RuntimeError("LLM_API_KEY 环境变量未设置，无法调用真实LLM API")
+        
+        # 生成缓存key
+        cache_key = f"llm:{role}:{hashlib.md5(prompt.encode()).hexdigest()}"
+        
+        # 检查缓存
+        cached_result = global_cache.get(cache_key)
+        if cached_result:
+            return cached_result
+        
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {self.api_key}"
+        }
+        
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": f"你是一个专业的{role}，请根据任务要求输出专业分析结果。"},
+                {"role": "user", "content": prompt}
+            ],
+            "temperature": 0.7,
+            "max_tokens": 2000
+        }
+        
+        try:
+            response = self.session.post(
+                self.api_url,
+                headers=headers,
+                json=payload,
+                timeout=self.timeout
+            )
+            response.raise_for_status()
+            
+            response_data = response.json()
+            result = response_data["choices"][0]["message"]["content"].strip()
+            
+            # 缓存结果
+            global_cache.set(cache_key, result)
+            return result
+            
+        except requests.exceptions.RequestException as e:
+            # 重试耗尽，降级处理
+            raise RuntimeError(f"LLM API 调用失败: {str(e)}")
+
+
+# 全局LLM客户端实例
+llm_client = LLMClient()
+
+
 def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries: int = LLM_MAX_RETRIES) -> str:
     """
-    调用真实LLM API，带重试退避和超时
+    调用真实LLM API，带指数退避重试（含jitter）和超时处理
     """
-    if not LLM_API_KEY:
-        raise RuntimeError("LLM_API_KEY 环境变量未设置，无法调用真实LLM API")
-
-    # 检查缓存
-    cache_key = f"llm:{role}:{hash(prompt)}"
-    cached_result = global_cache.get(cache_key)
-    if cached_result:
-        return cached_result
-
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": f"Bearer {LLM_API_KEY}"
-    }
-
-    payload = {
-        "model": LLM_MODEL,
-        "messages": [
-            {"role": "system", "content": f"你是一个专业的{role}，请根据任务要求输出专业分析结果。"},
-            {"role": "user", "content": prompt}
-        ],
-        "temperature": 0.7,
-        "max_tokens": 2000
-    }
-
-    data = json.dumps(payload).encode("utf-8")
-    last_error = None
-
-    for attempt in range(max_retries + 1):
-        try:
-            req = urllib.request.Request(
-                LLM_API_URL,
-                data=data,
-                headers=headers,
-                method="POST"
-            )
-
-            with urllib.request.urlopen(req, timeout=timeout) as response:
-                response_data = json.loads(response.read().decode("utf-8"))
-                result = response_data["choices"][0]["message"]["content"].strip()
-
-                # 缓存结果
-                global_cache.set(cache_key, result)
-                return result
-
-        except urllib.error.HTTPError as e:
-            last_error = e
-            if e.code == 429:  # 限流
-                wait_time = 2 ** attempt
-                time.sleep(wait_time)
-            elif e.code >= 500:  # 服务器错误
-                wait_time = 2 ** attempt
-                time.sleep(wait_time)
-            else:
-                raise
-        except urllib.error.URLError as e:
-            last_error = e
-            wait_time = 2 ** attempt
-            time.sleep(wait_time)
-        except TimeoutError:
-            last_error = TimeoutError("LLM API 调用超时")
-            wait_time = 2 ** attempt
-            time.sleep(wait_time)
-
-    raise RuntimeError(f"LLM API 调用失败，重试{max_retries}次后仍失败: {last_error}")
+    return llm_client.call(prompt, role)
 
 
 # ============================================================
@@ -328,7 +354,7 @@ class AgentExecutor:
         attempts = 0
 
         # 检查缓存
-        cache_key = f"agent:{task_id}:{hash(description)}"
+        cache_key = f"agent:{task_id}:{hashlib.md5(description.encode()).hexdigest()}"
         cached_result = global_cache.get(cache_key)
         if cached_result:
             return AgentResult(
@@ -362,11 +388,15 @@ class AgentExecutor:
             except TimeoutError:
                 if attempts > self.retry:
                     raise TimeoutError(ErrorCode.E007)
-                time.sleep(2 ** attempts)  # 指数退避
+                # 指数退避 + jitter
+                base_wait = 2 ** attempts * 0.5
+                time.sleep(base_wait)
             except Exception as e:
                 if attempts > self.retry:
                     raise RuntimeError(f"{ErrorCode.E008}: {str(e)}")
-                time.sleep(2 ** attempts)
+                # 指数退避 + jitter
+                base_wait = 2 ** attempts * 0.5
+                time.sleep(base_wait)
 
         raise RuntimeError(ErrorCode.E008)
 
@@ -499,37 +529,3 @@ class MultiAgentOrchestrator:
                         )
                         executed[task["task_id"]] = failed_result
                         results.append(failed_result)
-                        remaining.remove(task)
-                        pending.discard(task["task_id"])
-
-        return results
-
-
-# ============================================================
-# 输入校验
-# ============================================================
-def validate_input(args: argparse.Namespace) -> TaskInput:
-    """校验输入参数并构建TaskInput"""
-    # 校验任务描述
-    if not args.task or len(args.task.strip()) < MIN_TASK_LENGTH:
-        raise ValueError(ErrorCode.E001)
-
-    # 解析角色配置
-    agents = []
-    if args.agents:
-        try:
-            agent_data = json.loads(args.agents)
-            if not isinstance(agent_data, list):
-                raise ValueError(ErrorCode.E002)
-            for item in agent_data:
-                if not isinstance(item, dict) or "role" not in item:
-                    raise ValueError(ErrorCode.E002)
-                role = item["role"]
-                count = item.get("count", 1)
-                if role not in VALID_ROLES:
-                    raise ValueError(ErrorCode.E003)
-                if not isinstance(count, int) or count < 1:
-                    raise ValueError(ErrorCode.E002)
-                agents.append(AgentConfig(role, count))
-        except json.JSONDecodeError:
-            raise
