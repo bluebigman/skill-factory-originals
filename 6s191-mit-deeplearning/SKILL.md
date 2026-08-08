@@ -1,4 +1,5 @@
 ---
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 > 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
 <!-- ai-generated-notice -->
 copyright_holder: 原创作者（自持版权）
@@ -10,7 +11,8 @@ slug: 6s191-mit-deeplearning
 name: 6s191-mit-deeplearning
 displayName: 代码审查
 description: 仅供学习与参考用途。使用本。当用户需要AI大模型 深度学习、进行6s191 mit deeplearning相关操作时使用本技能，提供规范、可复用的处理流程与输出。
-version: 1.0.0
+version: 1.0.1
+rules_version: cpr-20260808-n152
 author: skill-factory-auto
 agent_created: true
 trigger_words:
