@@ -69,6 +69,39 @@ LATEX_TEMPLATE = r"""\documentclass[11pt]{article}
 """
 
 
+def escape_latex(text: str) -> str:
+    """转义 LaTeX 特殊字符"""
+    replacements = {
+        '\\': r'\textbackslash{}',
+        '&': r'\&',
+        '%': r'\%',
+        '$': r'\$',
+        '#': r'\#',
+        '_': r'\_',
+        '{': r'\{',
+        '}': r'\}',
+        '~': r'\textasciitilde{}',
+        '^': r'\textasciicircum{}',
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    return text
+
+
+def inline_md_to_latex(text: str) -> str:
+    """转换行内 Markdown 样式为 LaTeX"""
+    # 转义特殊字符（先处理代码，避免转义代码内容）
+    # 行内代码
+    text = re.sub(r'`([^`]+)`', r'\\texttt{\1}', text)
+    # 粗体
+    text = re.sub(r'\*\*([^*]+)\*\*', r'\\textbf{\1}', text)
+    # 斜体
+    text = re.sub(r'(?<!\*)\*([^*]+)\*(?!\*)', r'\\textit{\1}', text)
+    # 转义剩余特殊字符
+    text = escape_latex(text)
+    return text
+
+
 def md_to_latex(markdown_text: str) -> str:
     """
     将 Markdown 文本转换为 LaTeX 源码。
@@ -100,5 +133,5 @@ def md_to_latex(markdown_text: str) -> str:
         line = lines[i]
         stripped = line.strip()
         
-        # 处理代码块
+        # 处理代码块开始/结束
         if stripped.startswith('

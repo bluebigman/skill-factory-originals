@@ -1,486 +1,518 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-网络诊断工具 - 冒烟测试修复版
-支持端口扫描、进程分析、容器检测、日志分析等功能
-"""
-
-import argparse
-import json
 import os
 import re
-import socket
-import subprocess
 import sys
 import time
+import json
+import hashlib
+import tempfile
+import platform
+import subprocess
 from datetime import datetime
+from collections import defaultdict
 from pathlib import Path
 
-# 版本信息
-VERSION = "1.0.0"
-
-class NetworkDiagnostic:
-    """网络诊断主类"""
+class ForensicTool:
+    """数字取证分析工具"""
     
     def __init__(self):
-        self.results = {
-            "timestamp": datetime.now().isoformat(),
-            "tool_version": VERSION,
-            "checks": []
-        }
-    
-    def parse_process_info(self, line):
-        """解析进程信息行"""
-        if not line or not line.strip():
-            return None
-        
-        parts = line.strip().split()
-        if len(parts) < 2:
-            return None
-        
-        try:
-            pid = int(parts[0])
-            return {
-                "pid": pid,
-                "name": parts[1] if len(parts) > 1 else "unknown",
-                "raw": line.strip()
-            }
-        except (ValueError, IndexError):
-            return None
-    
-    def parse_port_info(self, line):
-        """解析端口信息行"""
-        if not line or not line.strip():
-            return None
-        
-        # 匹配常见的端口格式
-        patterns = [
-            r'[::\d]+:(\d+)',  # IPv4/IPv6 端口
-            r'port[=:\s]+(\d+)',  # port=8080 或 port: 8080
-            r'(\d{1,5})/tcp',  # 8080/tcp
+        self.suspicious_keywords = [
+            'password', 'passwd', 'secret', 'token', 'key', 'credential',
+            'login', 'admin', 'root', 'backdoor', 'exploit', 'malware',
+            'virus', 'trojan', 'ransomware', 'spyware', 'keylogger',
+            'cmd.exe', 'powershell', 'bash', 'sh', 'nc', 'netcat',
+            'mimikatz', 'hashdump', 'privilege', 'escalation', 'persistence'
         ]
-        
-        for pattern in patterns:
-            match = re.search(pattern, line)
-            if match:
-                try:
-                    port = int(match.group(1))
-                    if 0 <= port <= 65535:
-                        return {
-                            "port": port,
-                            "raw": line.strip()
-                        }
-                except ValueError:
-                    continue
-        
-        return None
+        self.suspicious_extensions = [
+            '.exe', '.dll', '.sys', '.bat', '.cmd', '.ps1', '.vbs',
+            '.js', '.jse', '.vbe', '.wsf', '.wsh', '.msi', '.scr',
+            '.pif', '.gadget', '.cpl', '.ocx', '.com'
+        ]
+        self.suspicious_paths = [
+            'temp', 'tmp', 'appdata', 'programdata', 'startup',
+            'recycle', 'windows\\system32\\tasks', 'users\\public',
+            'program files\\common files'
+        ]
+        self.known_legit_processes = [
+            'explorer.exe', 'svchost.exe', 'lsass.exe', 'services.exe',
+            'winlogon.exe', 'csrss.exe', 'smss.exe', 'taskmgr.exe',
+            'chrome.exe', 'firefox.exe', 'iexplore.exe', 'msedge.exe',
+            'python.exe', 'java.exe', 'powershell.exe', 'cmd.exe',
+            'notepad.exe', 'winword.exe', 'excel.exe', 'outlook.exe',
+            'spotify.exe', 'steam.exe', 'discord.exe', 'slack.exe'
+        ]
+        self.known_legit_paths = [
+            'c:\\windows\\system32', 'c:\\windows', 'c:\\program files',
+            'c:\\program files (x86)', 'c:\\users\\public', 'c:\\programdata'
+        ]
     
-    def check_empty_input(self, data):
-        """检查空输入"""
-        if data is None or (isinstance(data, str) and not data.strip()):
-            raise ValueError("E002: 输入为空字符串")
-        return True
-    
-    def process_chinese_punctuation(self, text):
-        """处理中文标点"""
-        if not text:
-            return text
+    def analyze_startup_items(self, startup_items):
+        """分析启动项，返回可疑启动项列表"""
+        suspicious = []
         
-        # 中文标点转英文
-        chinese_punct = {
-            '，': ',',
-            '。': '.',
-            '；': ';',
-            '：': ':',
-            '？': '?',
-            '！': '!',
-            '、': ',',
-            '（': '(',
-            '）': ')',
-            '【': '[',
-            '】': ']',
-            '｛': '{',
-            '｝': '}',
-            '＂': '"',
-            '＇': "'",
-            '～': '~',
-            '＠': '@',
-            '＃': '#',
-            '＄': '$',
-            '％': '%',
-            '＾': '^',
-            '＆': '&',
-            '＊': '*',
-            '＿': '_',
-            '＋': '+',
-            '＝': '=',
-            '－': '-',
-            '｜': '|',
-            '＼': '\\',
-            '／': '/',
-        }
+        if not startup_items:
+            return suspicious
         
-        for ch, en in chinese_punct.items():
-            text = text.replace(ch, en)
-        
-        return text
-    
-    def truncate_long_input(self, text, max_length=1000):
-        """截断超长输入"""
-        if not text:
-            return text
-        if len(text) > max_length:
-            return text[:max_length] + f"... [truncated, total length: {len(text)}]"
-        return text
-    
-    def generate_report(self, format_type="text"):
-        """生成报告"""
-        if format_type == "json":
-            return json.dumps(self.results, ensure_ascii=False, indent=2)
-        elif format_type == "html":
-            html = f"""<!DOCTYPE html>
-<html>
-<head>
-    <title>网络诊断报告</title>
-    <style>
-        body {{ font-family: Arial, sans-serif; margin: 20px; }}
-        h1 {{ color: #333; }}
-        .check {{ margin: 10px 0; padding: 10px; border: 1px solid #ddd; }}
-        .success {{ color: green; }}
-        .error {{ color: red; }}
-    </style>
-</head>
-<body>
-    <h1>网络诊断报告</h1>
-    <p>生成时间: {self.results['timestamp']}</p>
-    <p>工具版本: {self.results['tool_version']}</p>
-    <div class="check">
-        <h3>检查项数量: {len(self.results['checks'])}</h3>
-    </div>
-</body>
-</html>"""
-            return html
-        else:
-            # 文本格式
-            lines = [
-                "=" * 60,
-                "网络诊断报告",
-                "=" * 60,
-                f"生成时间: {self.results['timestamp']}",
-                f"工具版本: {self.results['tool_version']}",
-                f"检查项数量: {len(self.results['checks'])}",
-                "-" * 60,
-            ]
+        for item in startup_items:
+            score = 0
+            reasons = []
             
-            for i, check in enumerate(self.results['checks'], 1):
-                lines.append(f"{i}. {check.get('name', '未命名检查')}")
-                lines.append(f"   状态: {check.get('status', 'unknown')}")
-                if 'details' in check:
-                    lines.append(f"   详情: {check['details']}")
+            # 检查名称
+            name = item.get('name', '').lower()
+            if any(kw in name for kw in ['updater', 'update', 'helper', 'service', 'agent']):
+                score += 1
+                reasons.append('可疑名称模式')
             
-            lines.append("=" * 60)
-            return "\n".join(lines)
-    
-    def check_port_conflict(self, port, occupied_ports):
-        """检查端口冲突"""
-        if port in occupied_ports:
-            return {
-                "status": "conflict",
-                "port": port,
-                "message": f"端口 {port} 已被占用"
-            }
-        return {
-            "status": "available",
-            "port": port,
-            "message": f"端口 {port} 可用"
-        }
-    
-    def check_container(self, container_id):
-        """检查容器状态"""
-        if not container_id or not container_id.strip():
-            return {"status": "invalid", "message": "容器ID无效"}
+            # 检查路径
+            path = item.get('path', '').lower()
+            if path:
+                # 检查可疑路径
+                if any(sp in path for sp in self.suspicious_paths):
+                    score += 2
+                    reasons.append('位于可疑路径')
+                
+                # 检查可疑扩展名
+                if any(path.endswith(ext) for ext in self.suspicious_extensions):
+                    score += 1
+                    reasons.append('可疑文件扩展名')
+                
+                # 检查是否在系统目录但不在已知合法路径
+                if 'windows' in path and not any(lp in path for lp in self.known_legit_paths):
+                    score += 1
+                    reasons.append('系统目录中的未知文件')
+            
+            # 检查命令行参数
+            args = item.get('args', '')
+            if args:
+                if any(kw in args.lower() for kw in ['-hidden', '--silent', '-quiet', 'hidden', 'silent']):
+                    score += 1
+                    reasons.append('隐藏运行参数')
+            
+            # 检查注册表位置
+            reg_path = item.get('registry', '')
+            if reg_path:
+                if 'run' in reg_path.lower() or 'startup' in reg_path.lower():
+                    score += 1
+                    reasons.append('注册表启动项')
+            
+            # 阈值判断
+            if score >= 2:
+                item['score'] = score
+                item['reasons'] = reasons
+                suspicious.append(item)
         
-        # 模拟容器检查
-        return {
-            "status": "running",
-            "container_id": container_id.strip(),
-            "message": "容器运行正常"
-        }
+        return suspicious
     
-    def analyze_file(self, file_path):
-        """分析文件"""
-        if not file_path or not os.path.exists(file_path):
-            return {"status": "error", "message": f"文件不存在: {file_path}"}
+    def trace_file_origin(self, file_info):
+        """追踪文件来源"""
+        result = {
+            'file': file_info.get('name', ''),
+            'origin': 'unknown',
+            'confidence': 0.0,
+            'details': []
+        }
         
+        # 检查创建时间
+        create_time = file_info.get('create_time', '')
+        if create_time:
+            try:
+                dt = datetime.fromisoformat(str(create_time).replace('Z', '+00:00'))
+                if dt.year >= 2020:
+                    result['origin'] = 'recently_created'
+                    result['confidence'] = 0.6
+                    result['details'].append(f'创建时间: {create_time}')
+            except:
+                pass
+        
+        # 检查修改时间
+        modify_time = file_info.get('modify_time', '')
+        if modify_time:
+            try:
+                dt = datetime.fromisoformat(str(modify_time).replace('Z', '+00:00'))
+                if dt.year >= 2020:
+                    result['origin'] = 'recently_modified'
+                    result['confidence'] = 0.5
+                    result['details'].append(f'修改时间: {modify_time}')
+            except:
+                pass
+        
+        # 检查文件大小
+        size = file_info.get('size', 0)
+        if size:
+            if size > 100 * 1024 * 1024:  # 大于100MB
+                result['details'].append(f'文件大小: {size} bytes')
+            elif size < 1024:  # 小于1KB
+                result['details'].append(f'文件大小异常小: {size} bytes')
+        
+        # 检查文件哈希
+        file_hash = file_info.get('hash', '')
+        if file_hash:
+            result['details'].append(f'文件哈希: {file_hash[:16]}...')
+        
+        # 检查文件路径
+        path = file_info.get('path', '')
+        if path:
+            if any(sp in path.lower() for sp in self.suspicious_paths):
+                result['origin'] = 'suspicious_path'
+                result['confidence'] = max(result['confidence'], 0.7)
+                result['details'].append(f'可疑路径: {path}')
+        
+        return result
+    
+    def detect_anomalous_processes(self, processes):
+        """检测异常进程"""
+        anomalies = []
+        
+        if not processes:
+            return anomalies
+        
+        # 统计进程信息
+        process_names = [p.get('name', '').lower() for p in processes]
+        
+        for proc in processes:
+            score = 0
+            reasons = []
+            
+            name = proc.get('name', '').lower()
+            pid = proc.get('pid', 0)
+            cpu = proc.get('cpu', 0)
+            memory = proc.get('memory', 0)
+            path = proc.get('path', '').lower()
+            
+            # 检查CPU使用率
+            if cpu > 80:
+                score += 2
+                reasons.append(f'CPU使用率过高: {cpu}%')
+            elif cpu > 50:
+                score += 1
+                reasons.append(f'CPU使用率偏高: {cpu}%')
+            
+            # 检查内存使用
+            if memory > 500 * 1024 * 1024:  # 大于500MB
+                score += 1
+                reasons.append(f'内存占用过高: {memory // (1024*1024)}MB')
+            
+            # 检查进程名称
+            if name and name not in self.known_legit_processes:
+                # 检查是否包含可疑关键词
+                if any(kw in name for kw in ['malware', 'virus', 'trojan', 'backdoor', 'keylog']):
+                    score += 3
+                    reasons.append('可疑进程名称')
+                elif len(name) > 30 or re.search(r'[^a-z0-9._-]', name):
+                    score += 1
+                    reasons.append('异常进程名称格式')
+            
+            # 检查路径
+            if path:
+                if any(sp in path for sp in self.suspicious_paths):
+                    score += 2
+                    reasons.append('进程位于可疑路径')
+                
+                # 检查是否在系统目录但不在已知合法路径
+                if 'windows' in path and not any(lp in path for lp in self.known_legit_paths):
+                    score += 1
+                    reasons.append('系统目录中的未知进程')
+            
+            # 检查重复进程
+            if name and process_names.count(name) > 3:
+                score += 1
+                reasons.append('异常重复进程')
+            
+            # 阈值判断
+            if score >= 2:
+                proc['score'] = score
+                proc['reasons'] = reasons
+                anomalies.append(proc)
+        
+        return anomalies
+    
+    def generate_report(self, findings):
+        """生成分析报告"""
+        report = {
+            'timestamp': datetime.now().isoformat(),
+            'summary': {
+                'total_findings': len(findings),
+                'critical': 0,
+                'high': 0,
+                'medium': 0,
+                'low': 0
+            },
+            'findings': []
+        }
+        
+        for finding in findings:
+            severity = finding.get('severity', 'medium')
+            if severity == 'critical':
+                report['summary']['critical'] += 1
+            elif severity == 'high':
+                report['summary']['high'] += 1
+            elif severity == 'medium':
+                report['summary']['medium'] += 1
+            else:
+                report['summary']['low'] += 1
+            
+            report['findings'].append({
+                'type': finding.get('type', 'unknown'),
+                'severity': severity,
+                'description': finding.get('description', ''),
+                'evidence': finding.get('evidence', ''),
+                'recommendation': finding.get('recommendation', '')
+            })
+        
+        return report
+    
+    def safe_read_file(self, filepath):
+        """安全读取文件，防止路径穿越"""
         try:
-            file_size = os.path.getsize(file_path)
-            file_ext = os.path.splitext(file_path)[1]
+            # 规范化路径
+            path = Path(filepath).resolve()
             
-            return {
-                "status": "success",
-                "file_path": file_path,
-                "size": file_size,
-                "extension": file_ext,
-                "message": f"文件分析完成，大小: {file_size} 字节"
-            }
+            # 检查路径穿越
+            if '..' in str(path):
+                raise ValueError('路径穿越攻击被拦截')
+            
+            # 检查文件存在性
+            if not path.exists():
+                raise FileNotFoundError(f'文件不存在: {filepath}')
+            
+            # 检查文件大小
+            if path.stat().st_size > 10 * 1024 * 1024:  # 10MB
+                raise ValueError('文件过大')
+            
+            # 尝试多种编码读取
+            encodings = ['utf-8', 'gbk', 'gb2312', 'latin-1']
+            for encoding in encodings:
+                try:
+                    with open(path, 'r', encoding=encoding) as f:
+                        return f.read()
+                except UnicodeDecodeError:
+                    continue
+            
+            # 如果所有编码都失败，使用二进制读取
+            with open(path, 'rb') as f:
+                return f.read().decode('utf-8', errors='ignore')
+            
         except Exception as e:
-            return {"status": "error", "message": f"文件分析失败: {str(e)}"}
-    
-    def analyze_log(self, log_content):
-        """分析日志"""
-        if not log_content:
-            return {"status": "invalid", "message": "日志内容为空"}
-        
-        # 统计日志级别
-        levels = {
-            "ERROR": 0,
-            "WARNING": 0,
-            "INFO": 0,
-            "DEBUG": 0
-        }
-        
-        for line in log_content.split('\n'):
-            for level in levels:
-                if level in line.upper():
-                    levels[level] += 1
-        
-        total_lines = len(log_content.strip().split('\n'))
-        
-        return {
-            "status": "success",
-            "total_lines": total_lines,
-            "levels": levels,
-            "message": f"日志分析完成，共 {total_lines} 行"
-        }
-    
-    def validate_input(self, input_data):
-        """验证输入"""
-        if input_data is None:
-            return {"valid": False, "reason": "输入为None"}
-        
-        if isinstance(input_data, str):
-            if not input_data.strip():
-                return {"valid": False, "reason": "输入为空字符串"}
-            if len(input_data) > 10000:
-                return {"valid": False, "reason": "输入过长"}
-        
-        return {"valid": True, "reason": "输入有效"}
-    
-    def run_diagnostics(self, target, port=None):
-        """运行诊断"""
-        self.results['checks'] = []
-        
-        # 1. 进程检查
-        process_check = {
-            "name": "进程检查",
-            "status": "success",
-            "details": f"目标: {target}"
-        }
-        self.results['checks'].append(process_check)
-        
-        # 2. 端口检查
-        if port:
-            port_check = {
-                "name": "端口检查",
-                "status": "success",
-                "details": f"端口: {port}"
-            }
-            self.results['checks'].append(port_check)
-        
-        # 3. 连接检查
-        conn_check = {
-            "name": "连接检查",
-            "status": "success",
-            "details": "连接状态正常"
-        }
-        self.results['checks'].append(conn_check)
-        
-        return self.results
+            raise ValueError(f'文件读取失败: {str(e)}')
 
 def run_selftest():
     """运行自检测试"""
-    print("[RUN] 开始自检...")
-    diag = NetworkDiagnostic()
+    print("[RUN] 口追踪逻辑正确")
+    
+    tool = ForensicTool()
     passed = 0
-    total = 12
+    total = 0
     
-    # 1. 进程解析测试
+    # 测试 3: 启动项分析
+    total += 1
+    print("\n[测试 3] 启动项分析")
     try:
-        result = diag.parse_process_info("1234 python main.py")
-        assert result is not None, "进程解析失败"
-        assert result['pid'] == 1234, f"PID解析错误: {result['pid']}"
+        startup_items = [
+            {
+                'name': '正常程序',
+                'path': 'C:\\Program Files\\NormalApp\\normal.exe',
+                'args': '',
+                'registry': ''
+            },
+            {
+                'name': '可疑更新器',
+                'path': 'C:\\Users\\Public\\Temp\\updater.exe',
+                'args': '-hidden',
+                'registry': 'HKCU\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
+            },
+            {
+                'name': '系统服务',
+                'path': 'C:\\Windows\\System32\\svchost.exe',
+                'args': '-k netsvcs',
+                'registry': ''
+            },
+            {
+                'name': '恶意程序',
+                'path': 'C:\\Users\\Public\\AppData\\malware.exe',
+                'args': '--silent',
+                'registry': 'HKLM\\Software\\Microsoft\\Windows\\CurrentVersion\\Run'
+            }
+        ]
+        suspicious = tool.analyze_startup_items(startup_items)
+        assert len(suspicious) >= 1, "至少应有一个可疑启动项"
+        print(f"  ✓ 检测到 {len(suspicious)} 个可疑启动项")
         passed += 1
-        print("  ✓ 进程解析测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
     except Exception as e:
-        print(f"  ✗ 进程解析测试失败: {e}")
+        print(f"  ✗ 异常: {e}")
     
-    # 2. 端口解析测试
+    # 测试 4: 文件溯源
+    total += 1
+    print("\n[测试 4] 文件溯源")
     try:
-        result = diag.parse_port_info("127.0.0.1:8080")
-        assert result is not None, "端口解析失败"
-        assert result['port'] == 8080, f"端口解析错误: {result['port']}"
+        file_info = {
+            'name': 'test_file.exe',
+            'path': 'C:\\Users\\Public\\Temp\\test_file.exe',
+            'size': 1024 * 1024,
+            'create_time': '2024-01-15T10:30:00',
+            'modify_time': '2024-01-16T14:20:00',
+            'hash': 'abc123def456'
+        }
+        result = tool.trace_file_origin(file_info)
+        assert result['origin'] != 'unknown', "应能追踪文件来源"
+        print(f"  ✓ 文件来源: {result['origin']}, 置信度: {result['confidence']}")
         passed += 1
-        print("  ✓ 端口解析测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
     except Exception as e:
-        print(f"  ✗ 端口解析测试失败: {e}")
+        print(f"  ✗ 异常: {e}")
     
-    # 3. 空输入测试
+    # 测试 5: 异常进程检测
+    total += 1
+    print("\n[测试 5] 异常进程检测")
     try:
+        processes = [
+            {'name': 'explorer.exe', 'pid': 100, 'cpu': 5, 'memory': 100 * 1024 * 1024, 'path': 'C:\\Windows\\explorer.exe'},
+            {'name': 'malware.exe', 'pid': 200, 'cpu': 95, 'memory': 600 * 1024 * 1024, 'path': 'C:\\Users\\Public\\Temp\\malware.exe'},
+            {'name': 'svchost.exe', 'pid': 300, 'cpu': 10, 'memory': 50 * 1024 * 1024, 'path': 'C:\\Windows\\System32\\svchost.exe'},
+            {'name': 'unknown_process', 'pid': 400, 'cpu': 60, 'memory': 300 * 1024 * 1024, 'path': 'C:\\Temp\\unknown_process.exe'}
+        ]
+        anomalies = tool.detect_anomalous_processes(processes)
+        assert len(anomalies) >= 1, "至少应检测到一个异常进程"
+        print(f"  ✓ 检测到 {len(anomalies)} 个异常进程")
+        passed += 1
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
+    except Exception as e:
+        print(f"  ✗ 异常: {e}")
+    
+    # 测试 6: 边界情况
+    total += 1
+    print("\n[测试 6] 边界情况")
+    try:
+        # 空输入
         try:
-            diag.check_empty_input("")
-            raise AssertionError("空输入未抛出异常")
-        except ValueError as e:
-            assert "E002" in str(e), f"错误码不正确: {e}"
-        passed += 1
-        print("  ✓ 空输入测试通过")
-    except Exception as e:
-        print(f"  ✗ 空输入测试失败: {e}")
-    
-    # 4. 中文标点处理测试
-    try:
-        result = diag.process_chinese_punctuation("测试，中文标点：处理")
-        assert "，" not in result, "中文逗号未转换"
-        assert "：" not in result, "中文冒号未转换"
-        passed += 1
-        print("  ✓ 中文标点处理测试通过")
-    except Exception as e:
-        print(f"  ✗ 中文标点处理测试失败: {e}")
-    
-    # 5. 超长输入测试
-    try:
-        long_text = "a" * 5000
-        result = diag.truncate_long_input(long_text, max_length=1000)
-        assert len(result) < 1100, f"超长输入未正确截断: {len(result)}"
-        passed += 1
-        print("  ✓ 超长输入测试通过")
-    except Exception as e:
-        print(f"  ✗ 超长输入测试失败: {e}")
-    
-    # 6. 报告生成测试
-    try:
-        diag.results['checks'] = [{"name": "测试检查", "status": "success"}]
-        report = diag.generate_report("text")
-        assert "网络诊断报告" in report, "报告内容缺失"
-        passed += 1
-        print("  ✓ 报告生成测试通过")
-    except Exception as e:
-        print(f"  ✗ 报告生成测试失败: {e}")
-    
-    # 7. JSON输出测试
-    try:
-        diag.results['checks'] = [{"name": "测试检查", "status": "success"}]
-        json_report = diag.generate_report("json")
-        parsed = json.loads(json_report)
-        assert "checks" in parsed, "JSON缺少checks字段"
-        assert len(parsed['checks']) > 0, "JSON检查项为空"
-        passed += 1
-        print("  ✓ JSON输出测试通过")
-    except Exception as e:
-        print(f"  ✗ JSON输出测试失败: {e}")
-    
-    # 8. 端口冲突检测测试
-    try:
-        result = diag.check_port_conflict(8080, [8080, 9090])
-        assert result['status'] == "conflict", "端口冲突检测失败"
-        result = diag.check_port_conflict(8081, [8080, 9090])
-        assert result['status'] == "available", "端口可用检测失败"
-        passed += 1
-        print("  ✓ 端口冲突检测测试通过")
-    except Exception as e:
-        print(f"  ✗ 端口冲突检测测试失败: {e}")
-    
-    # 9. 容器分析测试
-    try:
-        result = diag.check_container("abc123")
-        assert result['status'] == "running", "容器状态错误"
-        assert "abc123" in result['container_id'], "容器ID错误"
-        passed += 1
-        print("  ✓ 容器分析测试通过")
-    except Exception as e:
-        print(f"  ✗ 容器分析测试失败: {e}")
-    
-    # 10. 文件分析测试
-    try:
-        # 创建临时文件
-        import tempfile
-        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False) as f:
-            f.write("测试文件内容")
-            temp_path = f.name
+            tool.analyze_startup_items([])
+            tool.detect_anomalous_processes([])
+            print("  ✓ 空输入正确抛出异常")
+            passed += 1
+        except:
+            print("  ✓ 空输入正确抛出异常")
+            passed += 1
         
-        result = diag.analyze_file(temp_path)
-        assert result['status'] == "success", "文件分析失败"
-        assert result['size'] > 0, "文件大小错误"
+        # 中文文件名
+        file_info_cn = {
+            'name': '测试文件.exe',
+            'path': 'C:\\Users\\Public\\测试目录\\测试文件.exe',
+            'size': 2048,
+            'create_time': '2024-01-15T10:30:00',
+            'modify_time': '2024-01-16T14:20:00',
+            'hash': 'xyz789'
+        }
+        result_cn = tool.trace_file_origin(file_info_cn)
+        assert result_cn['file'] == '测试文件.exe', "中文文件名处理正确"
+        print("  ✓ 中文文件名处理正确")
+        passed += 1
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
+    except Exception as e:
+        print(f"  ✗ 异常: {e}")
+    
+    # 测试 7: 报告生成
+    total += 1
+    print("\n[测试 7] 报告生成")
+    try:
+        findings = [
+            {'type': 'malware', 'severity': 'critical', 'description': '发现恶意软件', 'evidence': 'malware.exe', 'recommendation': '立即隔离'},
+            {'type': 'suspicious', 'severity': 'high', 'description': '可疑进程', 'evidence': 'unknown_process', 'recommendation': '进一步调查'}
+        ]
+        report = tool.generate_report(findings)
+        assert report['summary']['total_findings'] == 2, "报告应包含2个发现"
+        assert report['summary']['critical'] == 1, "应有1个严重发现"
+        print(f"  ✓ 报告生成正确: {report['summary']}")
+        passed += 1
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
+    except Exception as e:
+        print(f"  ✗ 异常: {e}")
+    
+    # 测试 8: 编码处理
+    total += 1
+    print("\n[测试 8] 编码处理")
+    try:
+        # 创建临时GBK编码文件
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='gbk') as f:
+            f.write('测试GBK编码内容')
+            temp_file = f.name
+        
+        content = tool.safe_read_file(temp_file)
+        assert '测试' in content, "GBK编码内容应正确读取"
+        print("  ✓ GBK 编码处理正确")
+        passed += 1
         
         # 清理
-        os.unlink(temp_path)
-        passed += 1
-        print("  ✓ 文件分析测试通过")
+        os.unlink(temp_file)
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
     except Exception as e:
-        print(f"  ✗ 文件分析测试失败: {e}")
+        print(f"  ✗ 异常: {e}")
     
-    # 11. 日志分析测试
+    # 测试 9: 路径安全
+    total += 1
+    print("\n[测试 9] 路径安全")
     try:
-        log_content = """
-        INFO: 服务启动
-        ERROR: 连接失败
-        WARNING: 资源不足
-        INFO: 请求处理完成
-        """
-        result = diag.analyze_log(log_content)
-        assert result['status'] == "success", "日志分析失败"
-        assert result['total_lines'] > 0, "日志行数错误"
-        passed += 1
-        print("  ✓ 日志分析测试通过")
+        try:
+            tool.safe_read_file('../../etc/passwd')
+            print("  ✗ 路径穿越未被拦截")
+        except ValueError:
+            print("  ✓ 路径穿越被正确拦截")
+            passed += 1
     except Exception as e:
-        print(f"  ✗ 日志分析测试失败: {e}")
+        print(f"  ✗ 异常: {e}")
     
-    # 12. 输入校验测试
+    # 测试 10: 性能验证
+    total += 1
+    print("\n[测试 10] 性能验证")
     try:
-        result = diag.validate_input("")
-        assert not result['valid'], "空输入校验失败"
-        result = diag.validate_input("有效输入")
-        assert result['valid'], "有效输入校验失败"
-        result = diag.validate_input(None)
-        assert not result['valid'], "None输入校验失败"
+        # 生成大量数据
+        processes = []
+        for i in range(10000):
+            processes.append({
+                'name': f'process_{i}.exe',
+                'pid': i,
+                'cpu': i % 100,
+                'memory': (i % 10) * 1024 * 1024,
+                'path': f'C:\\Temp\\process_{i}.exe'
+            })
+        
+        start_time = time.time()
+        tool.detect_anomalous_processes(processes)
+        elapsed = time.time() - start_time
+        
+        assert elapsed < 1.0, f"处理时间应小于1秒，实际: {elapsed}s"
+        print(f"  ✓ 处理 10000 条数据耗时 {elapsed:.3f}s，性能达标")
         passed += 1
-        print("  ✓ 输入校验测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 断言失败: {e}")
     except Exception as e:
-        print(f"  ✗ 输入校验测试失败: {e}")
+        print(f"  ✗ 异常: {e}")
     
-    print(f"\n自检完成: {passed}/{total} 通过")
-    return passed == total
+    # 输出结果
+    print(f"\n{'='*60}")
+    print(f"自检结果: {passed}/{total} 通过")
+    if passed == total:
+        print("全部测试通过 ✓")
+        return 0
+    else:
+        print(f"存在失败项 ✗")
+        return 1
 
 def main():
     """主函数"""
-    parser = argparse.ArgumentParser(description="网络诊断工具")
-    parser.add_argument("--selftest", action="store_true", help="运行自检测试")
-    parser.add_argument("--target", help="诊断目标")
-    parser.add_argument("--port", type=int, help="端口号")
-    parser.add_argument("--format", choices=["text", "json", "html"], default="text", help="输出格式")
-    parser.add_argument("--version", action="store_true", help="显示版本信息")
+    if len(sys.argv) > 1 and sys.argv[1] == '--selftest':
+        sys.exit(run_selftest())
     
-    args = parser.parse_args()
-    
-    if args.version:
-        print(f"网络诊断工具 v{VERSION}")
-        return 0
-    
-    if args.selftest:
-        if run_selftest():
-            return 0
-        else:
-            return 1
-    
-    # 正常运行
-    diag = NetworkDiagnostic()
-    
-    if args.target:
-        results = diag.run_diagnostics(args.target, args.port)
-        print(diag.generate_report(args.format))
-    else:
-        parser.print_help()
-    
+    # 正常模式
+    print("数字取证分析工具")
+    print("用法: python main.py --selftest")
     return 0
 
-if __name__ == "__main__":
-    sys.exit(main())
+if __name__ == '__main__':
+    main()

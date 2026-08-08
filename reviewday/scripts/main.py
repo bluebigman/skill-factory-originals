@@ -94,6 +94,8 @@ def parse_review_text(text: str) -> list:
     支持格式:
     - "文件路径:行号 描述"
     - "文件路径 行号: 描述"
+    - "文件路径: 描述"（无行号）
+    - "文件路径 描述"（无行号）
     - 结构化 JSON 数组
     """
     text = text.strip()
@@ -134,6 +136,11 @@ def parse_text_line(line: str) -> ReviewItem:
 
     # 模式3: 仅 "路径: 描述"（无行号）
     match = re.match(r'^(.+?):\s+(.+)$', line)
+    if match:
+        return ReviewItem(match.group(1), 0, match.group(2))
+
+    # 模式4: 仅 "路径 描述"（无行号，路径不含空格）
+    match = re.match(r'^(\S+)\s+(.+)$', line)
     if match:
         return ReviewItem(match.group(1), 0, match.group(2))
 

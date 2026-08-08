@@ -303,8 +303,11 @@ def generate_markdown(data, title="编译文档", include_confidence=True):
         else:
             lines.append("## 数据列表")
             lines.append("")
-            for idx, item in enumerate(data, 1):
-                lines.append(f"{idx}. {format_value(item)}")
+            if data:
+                for idx, item in enumerate(data, 1):
+                    lines.append(f"{idx}. {format_value(item)}")
+            else:
+                lines.append("*无数据*")
     elif isinstance(data, dict):
         lines.append(dict_to_markdown_sections(data))
     else:

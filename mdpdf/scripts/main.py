@@ -72,6 +72,7 @@ def markdown_to_html(md_content: str) -> str:
     lines = md_content.split("\n")
     in_code_block = False
     in_list = False
+    code_block_lang = ""
 
     for line in lines:
         # 代码块处理
