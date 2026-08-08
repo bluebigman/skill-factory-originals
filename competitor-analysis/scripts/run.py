@@ -43,6 +43,7 @@ MAX_FILE_SIZE = 10 * 1024 * 1024
 def parse_markdown_table(content):
     """解析 Markdown 表格，返回列表字典。
     支持无表头（默认 col1, col2...）和列数不一致（保留行，缺失列填空字符串）。
+    增强表头检测：检查是否包含常见列名关键词，避免数字/空行误判。
     """
     rows = []
     lines = [l.strip() for l in content.split('\n') if l.strip()]
@@ -76,9 +77,12 @@ def parse_markdown_table(content):
         return []
     
     headers = rows[0]
-    # 检查表头是否像真实表头（非空且不全是数据特征）
-    # 简单启发式：如果第一行全是数字或空，则视为数据行，生成默认表头
-    if all(re.match(r'^[\d\s]*$', h) or h == '' for h in headers):
+    # 增强表头检测：检查是否包含常见列名关键词
+    common_headers = ['name', '名称', 'feature', '功能', 'price', '价格', 'rating', '评分', 'description', '描述']
+    header_keywords_found = any(any(kw in h.lower() for kw in common_headers) for h in headers if h)
+    
+    # 如果第一行全是数字或空，且不包含关键词，则视为数据行
+    if not header_keywords_found and all(re.match(r'^[\d\s]*$', h) or h == '' for h in headers):
         headers = [f"col{j+1}" for j in range(len(headers))]
         data_rows = rows
     else:
@@ -189,6 +193,7 @@ def check_file_size(filepath):
 def load_data(filepath):
     """加载竞品数据文件，返回 (竞品名, 数据类型, 记录列表)。
     所有文件操作异常都会被捕获并转为结构化错误。
+    使用文件锁防止并发读取竞态。
     """
     try:
         if not os.path.exists(filepath):
@@ -197,90 +202,137 @@ def load_data(filepath):
         # 检查文件大小
         check_file_size(filepath)
         
-        ext = os.path.splitext(filepath)[1].lower()
-        filename = os.path.basename(filepath)
-        # 从文件名提取竞品名（第一个下划线前）
-        comp_name = filename.split('_')[0] if '_' in filename else Path(filename).stem
-        
-        records = []
-        data_type = 'unknown'
-        
-        if ext == '.csv':
-            encoding, ok = detect_encoding(filepath)
-            if not ok:
-                logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
-                encoding = 'utf-8'
+        # 文件锁防止并发读取竞态
+        lock_path = filepath + '.lock'
+        lock_fd = None
+        try:
+            lock_fd = os.open(lock_path, os.O_CREAT | os.O_RDWR, 0o644)
+            # 尝试获取锁（非阻塞，避免死锁）
             try:
-                with open(filepath, 'r', encoding=encoding) as f:
-                    reader = csv.DictReader(f)
-                    records = list(reader)
-                data_type = 'csv'
-            except UnicodeDecodeError as e:
-                raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
+                import fcntl
+                fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except ImportError:
+                # Windows 或非 POSIX 系统，使用 msvcrt
+                try:
+                    import msvcrt
+                    msvcrt.locking(lock_fd, msvcrt.LK_NBLCK, 1)
+                except ImportError:
+                    pass  # 无锁支持，跳过
+                except OSError:
+                    pass  # 锁被占用，继续（不阻塞）
+            except OSError:
+                # 锁被占用，等待重试（最多3次）
+                for _ in range(3):
+                    time.sleep(0.1)
+                    try:
+                        fcntl.flock(lock_fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                        break
+                    except OSError:
+                        continue
+                else:
+                    logger.warning(f"文件 {filepath} 被其他进程锁定，继续读取（可能产生竞态）")
+        except Exception as e:
+            logger.warning(f"文件锁创建失败: {e}")
         
-        elif ext == '.json':
-            encoding, ok = detect_encoding(filepath)
-            if not ok:
-                logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
-                encoding = 'utf-8'
-            try:
-                with open(filepath, 'r', encoding=encoding) as f:
-                    data = json.load(f)
-                    if isinstance(data, list):
-                        records = data
-                    elif isinstance(data, dict):
-                        records = data.get('records', data.get('data', []))
-                        if isinstance(records, dict):
-                            records = [records]
-                data_type = 'json'
-            except (UnicodeDecodeError, json.JSONDecodeError) as e:
-                raise ValueError(f"JSON 解析失败: {e}")
+        try:
+            ext = os.path.splitext(filepath)[1].lower()
+            filename = os.path.basename(filepath)
+            # 从文件名提取竞品名（第一个下划线前）
+            comp_name = filename.split('_')[0] if '_' in filename else Path(filename).stem
+            
+            records = []
+            data_type = 'unknown'
+            
+            if ext == '.csv':
+                encoding, ok = detect_encoding(filepath)
+                if not ok:
+                    logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
+                    encoding = 'utf-8'
+                try:
+                    with open(filepath, 'r', encoding=encoding) as f:
+                        reader = csv.DictReader(f)
+                        records = list(reader)
+                    data_type = 'csv'
+                except UnicodeDecodeError as e:
+                    raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
+            
+            elif ext == '.json':
+                encoding, ok = detect_encoding(filepath)
+                if not ok:
+                    logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
+                    encoding = 'utf-8'
+                try:
+                    with open(filepath, 'r', encoding=encoding) as f:
+                        data = json.load(f)
+                        if isinstance(data, list):
+                            records = data
+                        elif isinstance(data, dict):
+                            records = data.get('records', data.get('data', []))
+                            if isinstance(records, dict):
+                                records = [records]
+                    data_type = 'json'
+                except (UnicodeDecodeError, json.JSONDecodeError) as e:
+                    raise ValueError(f"JSON 解析失败: {e}")
+            
+            elif ext == '.md' or ext == '.markdown':
+                encoding, ok = detect_encoding(filepath)
+                if not ok:
+                    logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
+                    encoding = 'utf-8'
+                try:
+                    with open(filepath, 'r', encoding=encoding) as f:
+                        content = f.read()
+                    records = parse_markdown_table(content)
+                    data_type = 'markdown'
+                except UnicodeDecodeError as e:
+                    raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
+            
+            elif ext == '.txt':
+                encoding, ok = detect_encoding(filepath)
+                if not ok:
+                    logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
+                    encoding = 'utf-8'
+                try:
+                    with open(filepath, 'r', encoding=encoding) as f:
+                        content = f.read()
+                    records = parse_txt_content(content)
+                    data_type = 'txt'
+                except UnicodeDecodeError as e:
+                    raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
+            
+            elif ext == '.xlsx' and HAS_OPENPYXL:
+                try:
+                    wb = openpyxl.load_workbook(filepath, read_only=True)
+                    ws = wb.active
+                    headers = [cell.value for cell in next(ws.iter_rows(min_row=1, max_row=1))]
+                    for row in ws.iter_rows(min_row=2, values_only=True):
+                        records.append(dict(zip(headers, row)))
+                    wb.close()
+                    data_type = 'xlsx'
+                except Exception as e:
+                    raise ValueError(f"Excel 解析失败: {e}")
+            
+            else:
+                raise ValueError(f"不支持的文件格式: {ext}")
+            
+            if not records:
+                raise ValueError("文件中没有有效数据")
+            
+            return comp_name, data_type, records
         
-        elif ext == '.md' or ext == '.markdown':
-            encoding, ok = detect_encoding(filepath)
-            if not ok:
-                logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
-                encoding = 'utf-8'
-            try:
-                with open(filepath, 'r', encoding=encoding) as f:
-                    content = f.read()
-                records = parse_markdown_table(content)
-                data_type = 'markdown'
-            except UnicodeDecodeError as e:
-                raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
-        
-        elif ext == '.txt':
-            encoding, ok = detect_encoding(filepath)
-            if not ok:
-                logger.warning(f"文件 {filepath} 编码检测失败，尝试 utf-8")
-                encoding = 'utf-8'
-            try:
-                with open(filepath, 'r', encoding=encoding) as f:
-                    content = f.read()
-                records = parse_txt_content(content)
-                data_type = 'txt'
-            except UnicodeDecodeError as e:
-                raise ValueError(f"文件编码错误，无法用 {encoding} 解码: {e}")
-        
-        elif ext == '.xlsx' and HAS_OPENPYXL:
-            try:
-                wb = openpyxl.load_workbook(filepath, read_only=True)
-                ws = wb.active
-                headers = [cell.value for cell in next(ws.iter_rows(min_row=1, max_row=1))]
-                for row in ws.iter_rows(min_row=2, values_only=True):
-                    records.append(dict(zip(headers, row)))
-                wb.close()
-                data_type = 'xlsx'
-            except Exception as e:
-                raise ValueError(f"Excel 解析失败: {e}")
-        
-        else:
-            raise ValueError(f"不支持的文件格式: {ext}")
-        
-        if not records:
-            raise ValueError("文件中没有有效数据")
-        
-        return comp_name, data_type, records
+        finally:
+            # 释放文件锁
+            if lock_fd is not None:
+                try:
+                    import fcntl
+                    fcntl.flock(lock_fd, fcntl.LOCK_UN)
+                except ImportError:
+                    try:
+                        import msvcrt
+                        msvcrt.locking(lock_fd, msvcrt.LK_UNLCK, 1)
+                    except ImportError:
+                        pass
+                os.close(lock_fd)
     
     except FileNotFoundError as e:
         logger.error(f"文件不存在: {e}")
@@ -323,7 +375,7 @@ def extract_pricing(record):
             if isinstance(value, dict):
                 pricing = value
             elif isinstance(value, (int, float)):
-                pricing = {'base': value}
+                pricing = {'base': float(value)}
             elif isinstance(value, str):
                 # 尝试解析价格字符串
                 price_match = re.search(r'[\d.]+', value)
@@ -425,69 +477,3 @@ def generate_differentiation_suggestions(report):
                 'competitor': max_price_comp,
                 'suggestion': f"{max_price_comp} 定价最高 ({prices[max_price_comp]})，需证明高端价值"
             })
-    
-    # 评价差异化建议
-    ratings = {}
-    for comp in competitors:
-        if 'avg_rating' in comp['reviews']:
-            ratings[comp['name']] = comp['reviews']['avg_rating']
-    
-    if len(ratings) >= 2:
-        max_rating_comp = max(ratings, key=ratings.get)
-        min_rating_comp = min(ratings, key=ratings.get)
-        if ratings[max_rating_comp] > ratings[min_rating_comp]:
-            suggestions.append({
-                'type': 'rating',
-                'competitor': max_rating_comp,
-                'suggestion': f"{max_rating_comp} 评分最高 ({ratings[max_rating_comp]})，可强调用户口碑"
-            })
-            suggestions.append({
-                'type': 'rating',
-                'competitor': min_rating_comp,
-                'suggestion': f"{min_rating_comp} 评分较低 ({ratings[min_rating_comp]})，需关注用户体验改进"
-            })
-    
-    # 综合建议
-    if len(competitors) >= 2:
-        # 找出功能最全的竞品
-        max_features_comp = max(competitors, key=lambda c: len(c['features']))
-        suggestions.append({
-            'type': 'comprehensive',
-            'competitor': max_features_comp['name'],
-            'suggestion': f"{max_features_comp['name']} 功能最全面 ({len(max_features_comp['features'])}项)，可作为功能对标基准"
-        })
-    
-    return suggestions
-
-
-def analyze_competitors(competitors_data):
-    """分析竞品数据，返回对比报告"""
-    report = {
-        'generated_at': datetime.now(timezone.utc).isoformat(),
-        'competitors': [],
-        'comparison': {
-            'features': {},
-            'pricing': {},
-            'reviews': {}
-        },
-        'differentiation': [],
-        'low_confidence_fields': [],
-        'data_completeness': {}
-    }
-    
-    all_features = set()
-    
-    for comp_name, records in competitors_data.items():
-        comp_info = {
-            'name': comp_name,
-            'record_count': len(records),
-            'features': [],
-            'pricing': {},
-            'reviews': {},
-            'confidence': 0.0
-        }
-        
-        # 聚合所有记录
-        all_comp_features = set()
-        all_pricing = {}
-        all_re
