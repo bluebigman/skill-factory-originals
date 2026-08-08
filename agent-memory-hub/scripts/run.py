@@ -20,6 +20,7 @@ import argparse
 import datetime
 import tempfile
 import logging
+import concurrent.futures
 from datetime import timezone
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
@@ -104,6 +105,12 @@ DECISION_MARKERS = ["决策:", "决定:", "结论:", "方案:", "Decision:", "Co
 # 断点续处理状态文件
 STATE_FILE = ".processing_state.json"
 
+# 最大处理文件数
+MAX_FILES = 20
+
+# 错误码定义
+class ErrorCode:
+    E009 = "E009: 文件数量超过上限"
 
 def load_role_markers(config_path: Optional[Path] = None) -> Dict[str, str]:
     """从外部配置加载角色标记，支持正则表达式"""
@@ -347,6 +354,16 @@ def extract_decision(content: str) -> dict:
     }
 
 
+def _generate_asset_id(asset_type: str, source: str) -> str:
+    """生成资产唯一ID"""
+    if not isinstance(source, str) or not source.strip():
+        raise ValueError("source 参数必须是非空字符串")
+    
+    file_hash = hashlib.md5(source.encode()).hexdigest()[:8]
+    timestamp = datetime.datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    return f"{asset_type}_{file_hash}_{timestamp}"
+
+
 def process_file(filepath: Path, output_dir: Path, role_markers: Dict[str, str]) -> dict:
     """处理单个文件，生成资产条目"""
     try:
@@ -371,12 +388,15 @@ def process_file(filepath: Path, output_dir: Path, role_markers: Dict[str, str])
         return {"error": f"提取失败: {e}", "source_file": str(filepath)}
 
     # 生成唯一ID
-    file_hash = hashlib.md5(str(filepath).encode()).hexdigest()[:8]
-    timestamp = datetime.datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    try:
+        asset_id = _generate_asset_id(asset_type, str(filepath))
+    except ValueError as e:
+        logger.error(f"生成资产ID失败 {filepath}: {e}")
+        return {"error": f"生成资产ID失败: {e}", "source_file": str(filepath)}
 
     # 构建资产条目
     asset = {
-        "id": f"{asset_type}_{file_hash}_{timestamp}",
+        "id": asset_id,
         "source_file": str(filepath),
         "processed_at": datetime.datetime.now(timezone.utc).isoformat(),
         "asset_type": asset_type,
@@ -467,9 +487,9 @@ def process_input(input_path: Path, output_dir: Path, asset_type: str = None,
         for ext in SUPPORTED_EXTENSIONS:
             files.extend(input_path.glob(f"*{ext}"))
         # 限制数量
-        if len(files) > 20:
-            logger.warning(f"检测到 {len(files)} 个文件，仅处理前20个")
-            files = files[:20]
+        if len(files) > MAX_FILES:
+            logger.error(ErrorCode.E009)
+            raise ValueError(ErrorCode.E009)
 
     if not files:
         raise ValueError(f"在 {input_path} 中未找到支持的文件")
@@ -482,29 +502,9 @@ def process_input(input_path: Path, output_dir: Path, asset_type: str = None,
     processed_files = set(state.get("processed", []))
     failed_files = set(state.get("failed", []))
 
-    # 处理每个文件
-    for filepath in files:
-        file_str = str(filepath)
-        if file_str in processed_files:
-            logger.info(f"跳过已处理文件: {filepath}")
-            continue
+    # 过滤已处理的文件
+    pending_files = [f for f in files if str(f) not in processed_files]
 
-        logger.info(f"处理: {filepath}")
-        try:
-            asset = process_file(filepath, output_dir, role_markers)
-            if "error" in asset:
-                logger.error(f"  错误: {asset['error']}")
-                failed_files.add(file_str)
-            else:
-                assets.append(asset)
-                processed_files.add(file_str)
-                logger.info(f"  已生成: {asset['id']}")
-        except Exception as e:
-            logger.error(f"  处理失败: {e}")
-            failed_files.add(file_str)
-
-        # 定期保存状态（每处理一个文件就保存）
-        state = {"processed": list(processed_files), "failed": list(failed_files)}
-        save_state(output_dir, state)
-
-    return assets
+    # 并发处理文件
+    def _process_single(filepath: Path) -> Tuple[Path, dict]:
+        logger
