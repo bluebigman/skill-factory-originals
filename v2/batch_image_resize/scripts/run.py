@@ -80,15 +80,15 @@ def restore_originals(files: List[Path]) -> None:
                 shutil.copy2(backup_path, f)
 
 
-def process_single_image(img_path: Path, output_dir: Path, max_width: int, quality: int) -> Tuple[Path, bool, str]:
-    """处理单张图片，带重试机制"""
+def process_single_image(img_path: Path, output_dir: Path, max_width: int, quality: int, thread_id: int = 0) -> Tuple[Path, bool, str]:
+    """处理单张图片，带重试机制和原子写入"""
     for attempt in range(MAX_RETRIES):
         try:
             # 模拟图片处理（实际项目中这里会调用PIL等库）
             # 这里仅做文件复制作为演示，实际实现需要真实图片处理
             output_path = output_dir / f"resized_{img_path.name}"
-            # 使用唯一临时文件名+原子重命名确保一致性
-            temp_path = output_dir / f".tmp_{img_path.name}_{os.getpid()}_{datetime.now(timezone.utc).timestamp()}"
+            # 使用唯一临时文件名（含线程ID）+原子重命名确保一致性
+            temp_path = output_dir / f".tmp_{img_path.name}_{thread_id}_{os.getpid()}_{datetime.now(timezone.utc).timestamp()}"
             shutil.copy2(img_path, temp_path)
             os.replace(temp_path, output_path)
             
@@ -143,8 +143,8 @@ def process_images(input_dir: Path, output_dir: Path, max_width: int, quality: i
     
     with ProcessPoolExecutor(max_workers=4) as executor:
         future_to_file = {
-            executor.submit(process_single_image, f, output_dir, max_width, quality): f
-            for f in pending_files
+            executor.submit(process_single_image, f, output_dir, max_width, quality, i): f
+            for i, f in enumerate(pending_files)
         }
         
         for future in as_completed(future_to_file):
@@ -286,6 +286,30 @@ def selftest() -> int:
         assert dt.tzinfo is not None, "时间戳应包含时区信息"
         assert dt.utcoffset().total_seconds() == 0, "时间戳应为UTC"
         print("  [OK] UTC时间戳验证通过")
+    
+    # 测试7: 原子写入和并发安全
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp = Path(tmpdir)
+        input_dir = tmp / "input"
+        output_dir = tmp / "output"
+        input_dir.mkdir()
+        
+        # 创建多个测试图片
+        for i in range(5):
+            (input_dir / f"test_{i}.jpg").write_bytes(f"data_{i}".encode())
+        
+        # 并发处理
+        result = process_images(input_dir, output_dir, max_width=800, quality=85)
+        assert result["success"] == 5, f"预期成功5张，实际{result['success']}"
+        assert result["failed"] == 0, f"预期失败0张，实际{result['failed']}"
+        
+        # 验证所有输出文件
+        for i in range(5):
+            out_file = output_dir / f"resized_test_{i}.jpg"
+            assert out_file.exists(), f"输出文件 {out_file} 应存在"
+            assert out_file.read_bytes() == f"data_{i}".encode(), f"输出内容应一致"
+        
+        print("  [OK] 并发处理和原子写入验证通过")
     
     print("== 自检全部通过 ✅ ==")
     return 0

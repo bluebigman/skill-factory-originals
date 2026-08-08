@@ -263,7 +263,7 @@ class InvoiceExtractor:
         return value, confidence
     
     def _extract_text_from_pdf(self, pdf_path: str) -> str:
-        """从PDF提取文本"""
+        """从PDF提取文本（实际使用pdfplumber）"""
         if not HAS_PDF:
             raise RuntimeError("pdfplumber未安装，无法解析PDF")
         
@@ -308,18 +308,67 @@ class InvoiceExtractor:
         # 将换行符替换为空格，避免正则匹配失败
         normalized_text = self._normalize_text_for_regex(text)
         
+        # 多模式正则备选（增加容错）
+        multi_patterns = {
+            "invoice_no": [
+                r'发票号码[：:\s]*([0-9]{8,20})',
+                r'发票号[：:\s]*([0-9]{8,20})',
+                r'NO[.:\s]*([0-9]{8,20})',
+            ],
+            "invoice_date": [
+                r'开票日期[：:\s]*([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日|[0-9]{4}-[0-9]{1,2}-[0-9]{1,2})',
+                r'日期[：:\s]*([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日|[0-9]{4}-[0-9]{1,2}-[0-9]{1,2})',
+            ],
+            "buyer_name": [
+                r'购买方[：:\s]*名称[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+                r'购买方[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+            ],
+            "buyer_tax_id": [
+                r'购买方[：:\s]*纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
+                r'纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
+            ],
+            "seller_name": [
+                r'销售方[：:\s]*名称[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+                r'销售方[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
+            ],
+            "seller_tax_id": [
+                r'销售方[：:\s]*纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
+                r'纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
+            ],
+            "amount": [
+                r'金额[：:\s]*([¥￥]?\s*[0-9,]+\.?[0-9]*)',
+                r'金额[：:\s]*([0-9,]+\.?[0-9]*)',
+                r'([¥￥]\s*[0-9,]+\.?[0-9]*)',
+            ],
+            "tax": [
+                r'税额[：:\s]*([¥￥]?\s*[0-9,]+\.?[0-9]*)',
+                r'税额[：:\s]*([0-9,]+\.?[0-9]*)',
+                r'([¥￥]\s*[0-9,]+\.?[0-9]*)',
+            ],
+            "total": [
+                r'价税合计[（(]小写[)）][：:\s]*[¥￥]?\s*([0-9,]+\.?[0-9]*)',
+                r'价税合计[（(]小写[)）][：:\s]*([0-9,]+\.?[0-9]*)',
+                r'价税合计[：:\s]*[¥￥]?\s*([0-9,]+\.?[0-9]*)',
+            ],
+        }
+        
         for field_name in self.FIELDS:
             if field_name == "confidence":
                 continue
                 
-            pattern = self.FIELD_PATTERNS.get(field_name)
-            if pattern:
+            patterns = multi_patterns.get(field_name, [self.FIELD_PATTERNS.get(field_name, '')])
+            matched = False
+            
+            for pattern in patterns:
+                if not pattern:
+                    continue
                 match = re.search(pattern, normalized_text, re.IGNORECASE)
                 if match:
                     value = match.group(1).strip()
                     # 清理值
                     if field_name in ['amount', 'tax', 'total']:
-                        value = value.replace(',', '')
+                        # 去除货币符号和千分位逗号
+                        value = value.replace('¥', '').replace('￥', '').replace(',', '')
                         try:
                             value = float(value)
                         except ValueError:
@@ -328,92 +377,4 @@ class InvoiceExtractor:
                         # 清理名称中的多余空格和换行
                         value = re.sub(r'[\s\n]+', '', value)
                     
-                    # 验证字段
-                    value, confidence = self._validate_field(field_name, value)
-                    
-                    # 计算匹配置信度（正则匹配长度/文本长度比）
-                    if value is not None:
-                        match_len = len(match.group(0))
-                        text_len = len(normalized_text)
-                        if text_len > 0:
-                            ratio_confidence = min(1.0, match_len / text_len * 10)  # 归一化
-                            confidence = min(confidence, ratio_confidence)
-                    
-                    fields[field_name] = {
-                        "value": value,
-                        "confidence": confidence
-                    }
-                    confidence_sum += confidence
-                    confidence_count += 1
-                else:
-                    # 尝试关键词匹配（降低置信度）
-                    keyword_patterns = {
-                        "invoice_no": r'([0-9]{8,20})',
-                        "invoice_date": r'([0-9]{4}年[0-9]{1,2}月[0-9]{1,2}日|[0-9]{4}-[0-9]{1,2}-[0-9]{1,2})',
-                        "buyer_name": r'购买方[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
-                        "buyer_tax_id": r'纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
-                        "seller_name": r'销售方[：:\s]*([\s\S]{2,50}?)(?=\s*(?:纳税人识别号|地址|电话|$))',
-                        "seller_tax_id": r'纳税人识别号[：:\s]*([0-9A-Z]{15,20})',
-                        "amount": r'([0-9,]+\.?[0-9]*)',
-                        "tax": r'([0-9,]+\.?[0-9]*)',
-                        "total": r'[¥￥]?([0-9,]+\.?[0-9]*)',
-                    }
-                    
-                    keyword_match = re.search(keyword_patterns.get(field_name, ''), normalized_text, re.IGNORECASE)
-                    if keyword_match:
-                        value = keyword_match.group(1).strip()
-                        if field_name in ['amount', 'tax', 'total']:
-                            value = value.replace(',', '')
-                            try:
-                                value = float(value)
-                            except ValueError:
-                                value = None
-                        elif field_name in ['buyer_name', 'seller_name']:
-                            value = re.sub(r'[\s\n]+', '', value)
-                        
-                        # 验证字段（降低置信度）
-                        value, base_confidence = self._validate_field(field_name, value)
-                        confidence = min(base_confidence, 0.7)
-                        
-                        fields[field_name] = {
-                            "value": value,
-                            "confidence": confidence
-                        }
-                        confidence_sum += confidence
-                        confidence_count += 1
-                    else:
-                        # 默认低置信度
-                        fields[field_name] = {
-                            "value": None,
-                            "confidence": 0.0
-                        }
-                        confidence_sum += 0.0
-                        confidence_count += 1
-            else:
-                fields[field_name] = {
-                    "value": None,
-                    "confidence": 0.0
-                }
-                confidence_sum += 0.0
-                confidence_count += 1
-        
-        # 计算整体置信度
-        if confidence_count > 0:
-            fields["confidence"] = {
-                "value": round(confidence_sum / confidence_count, 4),
-                "confidence": 1.0
-            }
-        else:
-            fields["confidence"] = {
-                "value": 0.0,
-                "confidence": 1.0
-            }
-        
-        return fields
-    
-    def process_file(self, file_path: str) -> Dict[str, Any]:
-        """处理单个文件"""
-        file_path = str(file_path)
-        file_ext = Path(file_path).suffix.lower()
-        
-        # 检查文件是否存在
+                    #

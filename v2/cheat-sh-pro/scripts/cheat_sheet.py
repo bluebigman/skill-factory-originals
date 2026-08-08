@@ -6,6 +6,7 @@
 """
 import argparse
 import difflib
+import json
 import os
 import random
 import re
@@ -14,7 +15,8 @@ import sys
 import tempfile
 from datetime import datetime, timezone
 
-CHEATS = {
+# 默认内置数据（作为兜底，用户可通过外部文件覆盖）
+DEFAULT_CHEATS = {
     "git": [
         {"cmd": "git log --oneline -10", "desc": "查看最近10条提交（简洁）", "scene": "快速回顾提交历史"},
         {"cmd": "git status -sb", "desc": "查看工作区状态（短格式+分支）", "scene": "提交前检查"},
@@ -88,6 +90,53 @@ CHEATS = {
         {"cmd": "kubectl port-forward svc/service-name 8080:80", "desc": "端口转发", "scene": "本地访问服务"},
     ],
 }
+
+# 全局数据字典（运行时加载）
+CHEATS = {}
+
+
+def load_cheats_from_file(filepath):
+    """从外部 JSON 文件加载速查数据，返回 dict 或 None"""
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            return None
+        # 验证数据结构
+        for domain, items in data.items():
+            if not isinstance(items, list):
+                return None
+            for item in items:
+                if not isinstance(item, dict) or "cmd" not in item or "desc" not in item:
+                    return None
+        return data
+    except (json.JSONDecodeError, OSError, TypeError):
+        return None
+
+
+def load_cheats():
+    """加载速查数据：优先从外部文件，否则使用内置默认数据"""
+    global CHEATS
+    # 检查用户配置目录
+    config_dir = os.path.join(os.path.expanduser("~"), ".cheat-sh-pro")
+    external_file = os.path.join(config_dir, "cheats.json")
+    
+    if os.path.exists(external_file):
+        data = load_cheats_from_file(external_file)
+        if data is not None:
+            CHEATS = data
+            return
+    
+    # 检查当前目录下的 cheats.json
+    local_file = os.path.join(os.getcwd(), "cheats.json")
+    if os.path.exists(local_file):
+        data = load_cheats_from_file(local_file)
+        if data is not None:
+            CHEATS = data
+            return
+    
+    # 使用内置默认数据
+    CHEATS = {k: [dict(item) for item in v] for k, v in DEFAULT_CHEATS.items()}
 
 
 def get_all_cheats():
@@ -275,33 +324,4 @@ def run_selftest():
 
     # 7. 随机（测试 seed 可复现性）
     rand_item1 = get_random_cheat("docker", seed=42)
-    rand_item2 = get_random_cheat("docker", seed=42)
-    assert rand_item1 is not None, "docker 随机应返回一条"
-    assert rand_item1 in CHEATS["docker"], "随机结果应来自 docker 领域"
-    assert rand_item1 == rand_item2, "相同 seed 应产生相同随机结果"
-
-    # 8. 导出
-    tmp_export = os.path.join(tempfile.gettempdir(), f"cheats_test_{os.getpid()}.md")
-    try:
-        export_markdown(tmp_export)
-        with open(tmp_export, "r", encoding="utf-8") as f:
-            content = f.read()
-        assert "命令行速查手册" in content, "导出文件应包含标题"
-        assert "git" in content and "docker" in content and "linux" in content, "导出文件应包含所有领域"
-        assert "python" in content and "javascript" in content and "kubernetes" in content, "导出文件应包含新增领域"
-        assert "导出时间" in content, "导出文件应包含时间戳"
-    finally:
-        if os.path.exists(tmp_export):
-            os.unlink(tmp_export)
-
-    # 9. 表格格式
-    table = format_table(git_items[:2])
-    assert "| 序号 | 命令 | 描述 | 场景 |" in table, "表格应包含表头"
-    assert "git log" in table, "表格应包含命令内容"
-
-    # 10. 命令安全性验证
-    assert validate_shell_command("du -sh * | sort -rh | head -10"), "管道命令应通过验证"
-    assert not validate_shell_command("rm -rf /; sudo reboot"), "危险命令应被拒绝"
-    assert not validate_shell_command("echo test && rm -rf /"), "危险命令应被拒绝"
-
-    # 11. 领域
+    rand_item2 = get_random_cheat

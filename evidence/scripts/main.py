@@ -654,7 +654,38 @@ def _run_selftest() -> int:
         except ValueError:
             pass
 
-        print("[SELFTEST] 全部 15 项核心逻辑检查通过")
+        # 测试16: 桑基图支持
+        sankey_data = generate_chart_data(ds, "桑基图")
+        assert sankey_data["图表类型"] == "桑基图", "桑基图类型错误"
+        assert sankey_data["数据点数量"] > 0, "桑基图数据点为空"
+
+        # 测试17: 折线图排序
+        line_data = generate_chart_data(ds, "折线图")
+        assert line_data["图表类型"] == "折线图", "折线图类型错误"
+        assert len(line_data["标签"]) == len(line_data["数值"]), "折线图标签与数值数量不匹配"
+
+        # 测试18: 异常提示生成
+        anomaly_notes = _generate_anomaly_notes(ds)
+        assert isinstance(anomaly_notes, list), "异常提示应为列表"
+
+        # 测试19: 空数据集异常
+        empty_ds = DataSet([], [])
+        try:
+            generate_chart_data(empty_ds, "柱状图")
+            assert False, "空数据集应抛出异常"
+        except ValueError:
+            pass
+
+        # 测试20: 模板字段校验
+        bad_template = dict(sample_template)
+        bad_template["字段顺序"] = ["不存在的字段"]
+        try:
+            apply_template(ds, bad_template)
+            assert False, "模板字段不存在应抛出异常"
+        except ValueError:
+            pass
+
+        print("[SELFTEST] 全部 20 项核心逻辑检查通过")
         return 0
 
     except AssertionError as exc:
