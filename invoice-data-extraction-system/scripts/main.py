@@ -320,27 +320,50 @@ class InvoiceExtractor:
         return ""
 
     def _extract_buyer(self, text: str) -> str:
+        # 匹配 "购买方:" 后直到换行或 "名称:" 后的内容
         patterns = [
             r"购买方[（(]?名称[）)]?[：:\s]*([^\n\r]*)",
+            r"购买方[：:\s]*\s*名称[：:\s]*([^\n\r]*)",
+            r"购买方[：:\s]*([^\n\r]*)",
             r"购方[：:\s]*([^\n\r]*)",
             r"Buyer[：:\s]*([^\n\r]*)",
         ]
         for pat in patterns:
             m = re.search(pat, text, re.IGNORECASE)
             if m:
-                return m.group(1).strip()
+                value = m.group(1).strip()
+                # 如果捕获的内容包含 "名称:"，则提取其后的内容
+                if "名称" in value:
+                    sub = re.search(r"名称[：:\s]*([^\n\r]*)", value)
+                    if sub:
+                        value = sub.group(1).strip()
+                # 如果捕获的内容包含 "纳税人识别号"，则截断
+                if "纳税人识别号" in value:
+                    value = value.split("纳税人识别号")[0].strip()
+                if value:
+                    return value
         return ""
 
     def _extract_seller(self, text: str) -> str:
         patterns = [
             r"销售方[（(]?名称[）)]?[：:\s]*([^\n\r]*)",
+            r"销售方[：:\s]*\s*名称[：:\s]*([^\n\r]*)",
+            r"销售方[：:\s]*([^\n\r]*)",
             r"销方[：:\s]*([^\n\r]*)",
             r"Seller[：:\s]*([^\n\r]*)",
         ]
         for pat in patterns:
             m = re.search(pat, text, re.IGNORECASE)
             if m:
-                return m.group(1).strip()
+                value = m.group(1).strip()
+                if "名称" in value:
+                    sub = re.search(r"名称[：:\s]*([^\n\r]*)", value)
+                    if sub:
+                        value = sub.group(1).strip()
+                if "纳税人识别号" in value:
+                    value = value.split("纳税人识别号")[0].strip()
+                if value:
+                    return value
         return ""
 
     def _extract_amount(self, text: str, kind: str) -> str:
