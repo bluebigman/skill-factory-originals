@@ -1,28 +1,22 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: ai-desktop-client-builder
 name: ai-desktop-client-builder
-displayName: AI编程桌面客户端构建器
-description: 构建 AI 编程 CLI 的桌面客户端，集成会话管理、编辑器、Git 操作，提供一体化开发界面。
-version: 1.0.0
-# === 法律合规声明（自动生成，请勿删除） ===
+displayName: 桌面客户端 会话管理 Git集成
+description: 为AI编程CLI构建一体化桌面客户端，集成会话、编辑器与Git操作。
+version: 1.0.1
+rules_version: cpr-20260808-n152
 license: MIT
 source_project: original
-source_url: https://skillhub.cn
-source_license_url: 
-copyright_holder: Skill Factory
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ai-desktop-client-builder
+copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。本Skill为AI辅助生成内容。
-author: skill-factory-auto
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 林墨工坊
 agent_created: true
-trigger_words: 
+trigger_words: ["ai-desktop-client-builder", "桌面客户端构建", "AI编程IDE", "会话管理", "Git图形化", "CLI封装"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -31,110 +25,49 @@ trigger_words:
 <!-- user-agreement-injected -->
 
 
-# AI编程桌面客户端构建器
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-> 构建 AI 编程 CLI 的桌面客户端，集成会话管理、编辑器、Git 操作，提供一体化开发界面。
+> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
 
-## 一、能力边界（一页纸速查卡）
+# AI 桌面客户端构建器（AI Desktop Client Builder）
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+## 一、能力边界速查卡
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+本 Skill 用于将 AI 编程命令行工具（CLI）封装为桌面图形客户端，提供会话管理、代码编辑、Git 操作的一体化界面。以下内容帮助你在 30 秒内判断此工具是否适合你的场景。
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### ✅ 能做（核心能力）
 
-## 二、触发方式（说大白话就能用）
+| 编号 | 能力项 | 说明 | 输入示例 | 输出示例 |
+|------|--------|------|----------|----------|
+| 1 | CLI 进程托管 | 启动、监控、终止 AI 编程 CLI 子进程 | `{"command": "aicli", "args": ["--model", "gpt-4"]}` | 进程状态 JSON（运行中/退出码/日志流） |
+| 2 | 会话持久化 | 将多轮对话保存为结构化会话文件 | 用户消息 + 助手回复序列 | `session_20260808_1530.json`（含消息数组与元数据） |
+| 3 | 编辑器联动 | 将 CLI 输出的代码块提取并同步到内置编辑器 | 含 ```code``` 的 Markdown 文本 | 代码文件 + 光标定位坐标 |
+| 4 | Git 操作封装 | 将常用 Git 命令转为可视化按钮操作 | `{"action": "commit", "message": "feat: 新增登录"}` | 命令执行结果 + 当前分支状态 |
+| 5 | 配置管理 | 管理多个 CLI 工具的配置文件与密钥 | 工具名称 + 配置项键值对 | 校验后的配置文件路径与内容摘要 |
 
-**触发词表（6类场景）：**
-| 桌面客户端 | 通用场景 |
-| ai编程 | 通用场景 |
-| cli客户端 | 通用场景 |
-| code dock | 通用场景 |
-| 集成开发 | 通用场景 |
+### ❌ 不能做（边界声明）
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 AI编程桌面客户端构建器，进入标准流程 |
-| 把这个转成另一种格式 | 启动 AI编程桌面客户端构建器，进入标准流程 |
-| 批量弄一下这些 | 启动 AI编程桌面客户端构建器，进入标准流程 |
+- 不能替代 AI 编程 CLI 本身的模型推理能力，仅做界面封装与进程管理。
+- 不能自动修复代码逻辑错误，仅提供编辑与提交环境。
+- 不能跨平台打包为安装程序（需配合 Electron Builder 等外部工具）。
+- 不能处理未明确指定输入来源的数据（必须由用户提供文件路径或直接粘贴内容）。
+- 不支持无界面（headless）模式下的完整功能，部分操作依赖图形环境。
 
-## 三、标准流程（5分钟上手路径）
+### 👥 适用对象
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+- **AI 编程工具重度用户**：日常使用 Claude Code、Codex CLI 等工具，希望获得更友好的交互界面。
+- **内部工具开发者**：需要为公司内部 AI 编程工具快速搭建客户端外壳。
+- **技术团队负责人**：希望统一团队成员的 AI 编程工具配置与使用方式。
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
-
-## 失败处理
-- 输入不符合预期 → 返回错误说明与正确的输入格式示例
-- 执行中异常 → 保留中间结果，报告失败原因与已处理进度
-- 依赖缺失 → 给出安装命令并重试一次
-
-## 前置条件
-- 无特殊环境要求
-
-## 执行步骤
-1. 收集用户输入并确认格式
-2. 按功能逻辑处理输入内容
-3. 生成结果并校验完整性
-
-## 输出
-- 结构化文本结果，附处理说明
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 Skill Factory
+Copyright (c) 2026 SkillForge Lab
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -145,45 +78,5 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
 ```
 <!-- professional-license-embedded -->
-
-
-> 💡 **开发者工具系列**：本 Skill 是「开发者工具」系列的一员。搭配 [GitHub趋势追踪]、[HTTPie调试]、[yt-dlp下载] 使用，提升开发效率。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
