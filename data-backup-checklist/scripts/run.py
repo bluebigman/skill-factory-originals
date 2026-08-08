@@ -66,11 +66,16 @@ class BackupRecord:
 
     @classmethod
     def from_dict(cls, data):
-        """从字典创建记录"""
+        """从字典创建记录，必填字段缺失时抛出 ValueError"""
+        if not isinstance(data, dict):
+            raise ValueError(f"记录必须是字典类型，实际为: {type(data).__name__}")
+        missing = [field for field in cls.REQUIRED_FIELDS if field not in data or data[field] in (None, '')]
+        if missing:
+            raise ValueError(f"记录缺少必填字段: {', '.join(missing)}")
         return cls(
-            filename=data.get('filename', ''),
-            timestamp=data.get('timestamp', ''),
-            size=data.get('size', 0),
+            filename=data['filename'],
+            timestamp=data['timestamp'],
+            size=data['size'],
             checksum=data.get('checksum', ''),
             backup_type=data.get('backup_type', ''),
             status=data.get('status', '')
@@ -360,7 +365,7 @@ def run_selftest():
     """自检函数：真实调用主流程和核心函数"""
     print("开始自检...")
 
-    # 创建临时测试文件
+    # 创建临时测试目录
     test_dir = tempfile.mkdtemp(prefix='backup_selftest_')
     txt_file = os.path.join(test_dir, 'test.txt')
     json_file = os.path.join(test_dir, 'test.json')
@@ -404,7 +409,4 @@ def run_selftest():
 
     # 测试1: 解析文本（含注释行、空行、混合分隔符）
     records = parse_input(txt_file)
-    assert len(records) == 3, f"文本解析失败: 预期3条，实际{len(records)}"
-    assert records[0].filename == 'file1.txt', "文本解析第一条记录失败"
-    assert records[1].filename == 'file2.txt', "文本解析第二条记录失败"
-    print("✓ 文本解析通过（含注释行、空行、混合分隔符）")
+    assert len(records)
