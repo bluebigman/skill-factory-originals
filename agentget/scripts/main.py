@@ -12,6 +12,8 @@ agentget - 通用数据处理与转换工具
 import argparse
 import json
 import sys
+import os
+import traceback
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -26,6 +28,19 @@ ERROR_CODES = {
     "E005": "结果无法确定，建议：{suggestion}",
 }
 
+# 自检契约示例（用于验证核心逻辑）
+SELFTEST_EXAMPLES = [
+    # (输入, 期望输出类型, 期望置信度下限, 描述)
+    ('{"name": "test", "value": 123}', dict, 0.8, "JSON对象输入"),
+    ("name=test; value=123", dict, 0.5, "键值对输入"),
+    ("", None, 0.0, "空输入应报错"),
+    ("12345", dict, 0.3, "纯数字输入"),
+    ("!@#$%^&*()", dict, 0.3, "特殊字符输入"),
+    ("名称: 测试项目\n描述: 这是一个测试\n状态: 进行中", dict, 0.5, "多行文本输入"),
+    ("中文标点测试：这是内容。", dict, 0.3, "中文标点输入"),
+    ("a" * 10000, dict, 0.3, "超长输入"),
+]
+
 
 # ============================================================
 # 核心数据结构
@@ -33,10 +48,12 @@ ERROR_CODES = {
 class ProcessingResult:
     """处理结果的数据结构"""
 
-    def __init__(self, data: Any, confidence: float, warnings: Optional[List[str]] = None):
+    def __init__(self, data: Any, confidence: float, warnings: Optional[List[str]] = None,
+                 modifications: Optional[List[str]] = None):
         self.data = data
         self.confidence = confidence
         self.warnings = warnings or []
+        self.modifications = modifications or []
 
     def to_dict(self) -> Dict[str, Any]:
         """转换为字典格式"""
@@ -45,6 +62,7 @@ class ProcessingResult:
             "confidence": self.confidence,
             "confidence_level": self._get_confidence_level(),
             "warnings": self.warnings,
+            "modifications": self.modifications,
         }
 
     def _get_confidence_level(self) -> str:
@@ -66,13 +84,15 @@ class AgentGetProcessor:
     def __init__(self):
         self.batch_mode = False
 
-    def process(self, input_data: str, output_format: str = "json") -> ProcessingResult:
+    def process(self, input_data: str, output_format: str = "json",
+                verbose: bool = False) -> ProcessingResult:
         """
         处理输入数据，返回结构化结果
 
         Args:
             input_data: 用户输入的原始数据
             output_format: 输出格式（json/text）
+            verbose: 是否输出详细处理信息
 
         Returns:
             ProcessingResult: 处理结果对象
@@ -80,12 +100,16 @@ class AgentGetProcessor:
         Raises:
             ValueError: 当输入为空或格式错误时
         """
-        # 检查输入是否为空
+        # 输入校验（R7：guard clause 顶部先校验所有输入）
+        if not isinstance(input_data, str):
+            raise ValueError("E001")
         if not input_data or not input_data.strip():
             raise ValueError("E001")
+        if output_format not in ("json", "text"):
+            raise ValueError("E003")
 
         # 解析输入数据
-        parsed_data, parse_confidence = self._parse_input(input_data)
+        parsed_data, parse_confidence, parse_modifications = self._parse_input(input_data)
 
         # 检查解析结果
         if parsed_data is None:
@@ -105,24 +129,35 @@ class AgentGetProcessor:
         # 生成警告
         warnings = self._generate_warnings(parsed_data, confidence)
 
-        return ProcessingResult(output_data, confidence, warnings)
+        # 收集修改明细
+        modifications = parse_modifications
+        if verbose:
+            modifications.append(f"输入格式: {self._detect_input_format(input_data)}")
+            modifications.append(f"输出格式: {output_format}")
+            modifications.append(f"数据字段数: {len(parsed_data)}")
 
-    def _parse_input(self, input_data: str) -> Tuple[Optional[Dict[str, Any]], float]:
+        return ProcessingResult(output_data, confidence, warnings, modifications)
+
+    def _parse_input(self, input_data: str) -> Tuple[Optional[Dict[str, Any]], float, List[str]]:
         """
         解析输入数据，识别关键信息
 
         Returns:
-            (解析后的数据字典, 解析置信度)
+            (解析后的数据字典, 解析置信度, 修改明细列表)
         """
+        modifications = []
+
         # 尝试解析JSON格式
         try:
             data = json.loads(input_data)
             if isinstance(data, dict):
-                return data, 1.0
+                modifications.append(f"识别为JSON对象，提取{len(data)}个字段")
+                return data, 1.0, modifications
             elif isinstance(data, list):
-                return {"items": data, "count": len(data)}, 0.95
-        except json.JSONDecodeError:
-            pass
+                modifications.append(f"识别为JSON数组，包含{len(data)}个元素")
+                return {"items": data, "count": len(data)}, 0.95, modifications
+        except json.JSONDecodeError as e:
+            modifications.append(f"JSON解析失败: {str(e)[:50]}...")
 
         # 尝试解析键值对格式（如 "key1=value1; key2=value2"）
         if "=" in input_data and (";" in input_data or "," in input_data):
@@ -136,9 +171,10 @@ class AgentGetProcessor:
                         key, value = pair.strip().split("=", 1)
                         result[key.strip()] = value.strip()
                 if result:
-                    return result, 0.85
-            except Exception:
-                pass
+                    modifications.append(f"识别为键值对格式，提取{len(result)}个字段")
+                    return result, 0.85, modifications
+            except Exception as e:
+                modifications.append(f"键值对解析失败: {str(e)[:50]}...")
 
         # 尝试解析简单的文本行
         lines = [line.strip() for line in input_data.strip().split("\n") if line.strip()]
@@ -150,10 +186,25 @@ class AgentGetProcessor:
                     key, value = line.split(":", 1)
                     result[key.strip()] = value.strip()
             if result:
-                return result, 0.80
+                modifications.append(f"识别为文本行格式，提取{len(result)}个字段")
+                return result, 0.80, modifications
 
         # 无法解析，返回原始文本
-        return {"raw_text": input_data.strip(), "length": len(input_data.strip())}, 0.60
+        modifications.append("无法识别为结构化格式，保留原始文本")
+        return {"raw_text": input_data.strip(), "length": len(input_data.strip())}, 0.60, modifications
+
+    def _detect_input_format(self, input_data: str) -> str:
+        """检测输入格式类型"""
+        try:
+            json.loads(input_data)
+            return "JSON"
+        except Exception as e:
+            print(f"警告: JSON格式检测失败: {str(e)}", file=sys.stderr)
+        if "=" in input_data:
+            return "键值对"
+        if ":" in input_data:
+            return "文本行"
+        return "原始文本"
 
     def _check_required_fields(self, data: Dict[str, Any]) -> List[str]:
         """
@@ -232,23 +283,32 @@ class BatchProcessor:
     def __init__(self, processor: AgentGetProcessor):
         self.processor = processor
 
-    def process_batch(self, inputs: List[str], output_format: str = "json") -> List[Dict[str, Any]]:
+    def process_batch(self, inputs: List[str], output_format: str = "json",
+                      verbose: bool = False) -> List[Dict[str, Any]]:
         """
         批量处理多个输入
 
         Args:
             inputs: 输入数据列表
             output_format: 输出格式
+            verbose: 是否输出详细处理信息
 
         Returns:
             处理结果列表
         """
+        # 输入校验（R7）
+        if not isinstance(inputs, list):
+            raise ValueError("E001")
+        if not all(isinstance(item, str) for item in inputs):
+            raise ValueError("E001")
+
         results = []
-        for input_data in inputs:
+        for i, input_data in enumerate(inputs):
             try:
-                result = self.processor.process(input_data, output_format)
+                result = self.processor.process(input_data, output_format, verbose)
                 result_dict = result.to_dict()
                 result_dict["status"] = "success"
+                result_dict["index"] = i
                 results.append(result_dict)
             except ValueError as e:
                 error_code = str(e)
@@ -264,6 +324,17 @@ class BatchProcessor:
                     "status": "error",
                     "error_code": error_code,
                     "error_message": error_msg,
+                    "index": i,
+                })
+            except Exception as e:
+                # R10: 未知异常必须上报
+                print(f"系统错误处理条目{i}: {str(e)}", file=sys.stderr)
+                traceback.print_exc(file=sys.stderr)
+                results.append({
+                    "status": "error",
+                    "error_code": "E999",
+                    "error_message": f"系统错误: {str(e)}",
+                    "index": i,
                 })
         return results
 
@@ -290,6 +361,7 @@ def run_selftest() -> bool:
         result = processor.process('{"name": "test", "value": 123}')
         assert result.confidence > 0.8, "JSON输入置信度应较高"
         assert result.data is not None, "JSON输入应有输出数据"
+        assert len(result.modifications) > 0, "应有修改明细"
         print("  ✓ 通过")
     except Exception as e:
         print(f"  ✗ 失败: {e}")
@@ -301,6 +373,7 @@ def run_selftest() -> bool:
         result = processor.process("name=test; value=123")
         assert result.confidence > 0.5, "键值对输入应有合理置信度"
         assert result.data is not None, "键值对输入应有输出数据"
+        assert len(result.modifications) > 0, "应有修改明细"
         print("  ✓ 通过")
     except Exception as e:
         print(f"  ✗ 失败: {e}")
@@ -391,6 +464,7 @@ def run_selftest() -> bool:
         result = processor.process(multi_line)
         assert result.data is not None, "多行文本应有输出"
         assert result.confidence > 0.5, "多行文本应有合理置信度"
+        assert len(result.modifications) > 0, "应有修改明细"
         print("  ✓ 通过")
 
     except Exception as e:
@@ -438,6 +512,89 @@ def run_selftest() -> bool:
         print(f"  ✗ 失败: {e}")
         return False
 
+    # 测试用例11: 中文标点输入
+    print("测试11: 中文标点输入")
+    try:
+        result = processor.process("中文标点测试：这是内容。")
+        assert result.data is not None, "中文标点输入应有输出"
+        assert result.confidence > 0.3, "中文标点输入应有合理置信度"
+        print("  ✓ 通过")
+
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        return False
+
+    # 测试用例12: 超长输入
+    print("测试12: 超长输入")
+    try:
+        long_input = "a" * 10000
+        result = processor.process(long_input)
+        assert result.data is not None, "超长输入应有输出"
+        assert result.confidence > 0.3, "超长输入应有合理置信度"
+        print("  ✓ 通过")
+
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        return False
+
+    # 测试用例13: 契约示例验证
+    print("测试13: 契约示例验证")
+    try:
+        for input_data, expected_type, min_confidence, desc in SELFTEST_EXAMPLES:
+            try:
+                result = processor.process(input_data)
+                if expected_type is None:
+                    print(f"  ✗ 失败: {desc} 应该报错")
+                    return False
+                assert isinstance(result.data, expected_type), f"{desc} 输出类型错误"
+                assert result.confidence >= min_confidence, f"{desc} 置信度不足"
+            except ValueError:
+                if expected_type is not None:
+                    print(f"  ✗ 失败: {desc} 不应报错")
+                    return False
+        print("  ✓ 通过")
+
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        return False
+
+    # 测试用例14: verbose模式修改明细
+    print("测试14: verbose模式修改明细")
+    try:
+        result = processor.process('{"name": "test"}', verbose=True)
+        assert len(result.modifications) > 0, "verbose模式应有修改明细"
+        assert any("输入格式" in mod for mod in result.modifications), "应包含输入格式信息"
+        assert any("输出格式" in mod for mod in result.modifications), "应包含输出格式信息"
+        print("  ✓ 通过")
+
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        return False
+
+    # 测试用例15: 异常降级处理
+    print("测试15: 异常降级处理")
+    try:
+        # 测试非字符串输入
+        try:
+            processor.process(12345)
+            print("  ✗ 失败: 非字符串输入应该报错")
+            return False
+        except ValueError as e:
+            assert str(e) == "E001", "非字符串输入应返回E001错误码"
+
+        # 测试无效输出格式
+        try:
+            processor.process('{"a": 1}', output_format="xml")
+            print("  ✗ 失败: 无效输出格式应该报错")
+            return False
+        except ValueError as e:
+            assert str(e) == "E003", "无效输出格式应返回E003错误码"
+        print("  ✓ 通过")
+
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        return False
+
     print("\n所有自检测试通过！")
     return True
 
@@ -473,6 +630,16 @@ def main():
         action="store_true",
         help="运行自检功能（不读取外部数据）"
     )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="预览模式（仅打印输出，不执行任何写入操作）"
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="输出详细处理信息（包含修改明细）"
+    )
 
     args = parser.parse_args()
 
@@ -488,15 +655,35 @@ def main():
     # 批量处理
     if args.batch:
         inputs = args.batch.split("|")
-        results = batch_processor.process_batch(inputs, args.format)
+        results = batch_processor.process_batch(inputs, args.format, args.verbose)
+        if args.verbose:
+            print("批量处理结果:", file=sys.stderr)
+            for i, result in enumerate(results):
+                if result["status"] == "success":
+                    print(f"  条目{i}: 成功，置信度 {result['confidence']:.2f}", file=sys.stderr)
+                    if "modifications" in result:
+                        for mod in result["modifications"]:
+                            print(f"    - {mod}", file=sys.stderr)
+                else:
+                    print(f"  条目{i}: 失败 - {result['error_message']}", file=sys.stderr)
         print(json.dumps(results, ensure_ascii=False, indent=2))
         sys.exit(0)
 
     # 单条处理
     if args.input:
         try:
-            result = processor.process(args.input, args.format)
+            result = processor.process(args.input, args.format, args.verbose)
             output = result.to_dict()
+            if args.verbose:
+                print(f"处理完成，置信度: {result.confidence:.2f}", file=sys.stderr)
+                if result.modifications:
+                    print("处理明细:", file=sys.stderr)
+                    for mod in result.modifications:
+                        print(f"  - {mod}", file=sys.stderr)
+                if result.warnings:
+                    print("警告:", file=sys.stderr)
+                    for warning in result.warnings:
+                        print(f"  - {warning}", file=sys.stderr)
             print(json.dumps(output, ensure_ascii=False, indent=2))
             sys.exit(0)
         except ValueError as e:
@@ -510,6 +697,12 @@ def main():
             else:
                 error_msg = ERROR_CODES.get(error_code, "未知错误")
             print(f"错误 [{error_code}]: {error_msg}", file=sys.stderr)
+            sys.exit(1)
+        except Exception as e:
+            # R10: 未知异常必须上报
+            print(f"系统错误: {str(e)}", file=sys.stderr)
+            traceback.print_exc(file=sys.stderr)
+            print("请检查输入数据格式是否正确", file=sys.stderr)
             sys.exit(1)
 
     # 无输入参数时显示帮助

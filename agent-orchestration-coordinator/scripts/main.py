@@ -130,13 +130,14 @@ def split_task_into_subtasks(task_text: str, max_subtasks: int) -> List[str]:
         current.append(ch)
         if ch in _CHINESE_PUNCTUATION:
             sentence = "".join(current).strip()
-            if sentence:
+            # 过滤掉纯标点的句子（如 "。。。"）
+            if sentence and not all(c in _CHINESE_PUNCTUATION for c in sentence):
                 sentences.append(sentence)
             current = []
     # 处理末尾无标点的剩余部分
     if current:
         tail = "".join(current).strip()
-        if tail:
+        if tail and not all(c in _CHINESE_PUNCTUATION for c in tail):
             sentences.append(tail)
 
     # 如果句子数量超过限制，则按长度均匀合并（保持 O(n)）
@@ -546,6 +547,129 @@ def run_selftest() -> int:
         print("[PASS] GBK 编码兼容")
     except Exception as e:
         print(f"[FAIL] GBK 编码: {e}")
+        failures += 1
+
+    # 测试用例 10: 边界情况 - 只有标点符号
+    try:
+        task10 = "。。。"
+        subtasks10 = split_task_into_subtasks(task10, 3)
+        assert len(subtasks10) == 0, "纯标点输入应返回空列表"
+        print("[PASS] 纯标点输入处理")
+    except AssertionError as e:
+        print(f"[FAIL] 纯标点输入: {e}")
+        failures += 1
+
+    # 测试用例 11: 边界情况 - 单个字符
+    try:
+        task11 = "测"
+        subtasks11 = split_task_into_subtasks(task11, 3)
+        assert len(subtasks11) == 1, "单个字符应拆出 1 个子任务"
+        print("[PASS] 单字符输入处理")
+    except AssertionError as e:
+        print(f"[FAIL] 单字符输入: {e}")
+        failures += 1
+
+    # 测试用例 12: 边界情况 - 超长单句（无标点）
+    try:
+        task12 = "这是一个没有标点的超长句子" * 1000
+        subtasks12 = split_task_into_subtasks(task12, 3)
+        assert len(subtasks12) == 1, "无标点长文本应作为单个子任务"
+        print("[PASS] 无标点长文本处理")
+    except AssertionError as e:
+        print(f"[FAIL] 无标点长文本: {e}")
+        failures += 1
+
+    # 测试用例 13: 边界情况 - 混合中英文标点
+    try:
+        task13 = "Task one. Task two! Task three？"
+        subtasks13 = split_task_into_subtasks(task13, 5)
+        assert len(subtasks13) >= 3, "混合标点应正确切分"
+        print("[PASS] 混合中英文标点处理")
+    except AssertionError as e:
+        print(f"[FAIL] 混合标点: {e}")
+        failures += 1
+
+    # 测试用例 14: 边界情况 - 非法 Agent 数量
+    try:
+        try:
+            validate_agent_count(0)
+            print("[FAIL] Agent 数量为 0 应抛出 E003")
+            failures += 1
+        except OrchestrationError as e:
+            assert e.code == "E003", f"错误码应为 E003，实际 {e.code}"
+            print("[PASS] Agent 数量边界校验")
+    except Exception as e:
+        print(f"[FAIL] Agent 数量边界: {e}")
+        failures += 1
+
+    # 测试用例 15: 边界情况 - 布尔类型 Agent 数量
+    try:
+        try:
+            validate_agent_count(True)
+            print("[FAIL] 布尔类型 Agent 数量应抛出 E002")
+            failures += 1
+        except OrchestrationError as e:
+            assert e.code == "E002", f"错误码应为 E002，实际 {e.code}"
+            print("[PASS] 布尔类型 Agent 数量校验")
+    except Exception as e:
+        print(f"[FAIL] 布尔类型 Agent 数量: {e}")
+        failures += 1
+
+    # 测试用例 16: 边界情况 - 空任务列表汇总
+    try:
+        summary16 = summarize_results([])
+        assert summary16["total"] == 0, "空任务列表 total 应为 0"
+        assert summary16["status"] == "空任务列表", "空任务列表状态应正确"
+        print("[PASS] 空任务列表汇总")
+    except AssertionError as e:
+        print(f"[FAIL] 空任务列表汇总: {e}")
+        failures += 1
+
+    # 测试用例 17: 边界情况 - 任务描述为 None
+    try:
+        try:
+            validate_task_description(None)
+            print("[FAIL] None 输入应抛出 E001")
+            failures += 1
+        except OrchestrationError as e:
+            assert e.code == "E001", f"错误码应为 E001，实际 {e.code}"
+            print("[PASS] None 输入校验")
+    except Exception as e:
+        print(f"[FAIL] None 输入: {e}")
+        failures += 1
+
+    # 测试用例 18: 边界情况 - 二进制输入
+    try:
+        try:
+            validate_task_description(b"binary data")
+            print("[FAIL] 二进制输入应抛出 E002")
+            failures += 1
+        except OrchestrationError as e:
+            assert e.code == "E002", f"错误码应为 E002，实际 {e.code}"
+            print("[PASS] 二进制输入校验")
+    except Exception as e:
+        print(f"[FAIL] 二进制输入: {e}")
+        failures += 1
+
+    # 测试用例 19: 边界情况 - 超长任务描述截断
+    try:
+        long_task19 = "长" * 6000
+        clean_task19 = validate_task_description(long_task19)
+        assert len(clean_task19) == 5000, "超长任务应截断至 5000 字符"
+        print("[PASS] 超长任务描述截断")
+    except AssertionError as e:
+        print(f"[FAIL] 超长任务描述截断: {e}")
+        failures += 1
+
+    # 测试用例 20: 边界情况 - 角色分配负载均衡
+    try:
+        assignments20 = assign_agent_roles(["任务1", "任务2", "任务3", "任务4", "任务5"], 3)
+        roles20 = [t["agent_role"] for t in assignments20]
+        assert len(set(roles20)) == 3, "应使用 3 种不同角色"
+        assert roles20[0] == roles20[3], "轮询分配应循环使用角色"
+        print("[PASS] 角色分配负载均衡")
+    except AssertionError as e:
+        print(f"[FAIL] 角色分配负载均衡: {e}")
         failures += 1
 
     print(f"\n=== 自检结束: {'全部通过' if failures == 0 else f'{failures} 项失败'} ===")
