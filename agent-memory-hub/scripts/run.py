@@ -23,17 +23,45 @@ import logging
 from datetime import timezone
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
+from logging.handlers import RotatingFileHandler
 
-# 配置日志
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.StreamHandler(),
-        logging.FileHandler('agent_memory_hub.log', encoding='utf-8')
-    ]
-)
-logger = logging.getLogger(__name__)
+# 配置日志 - 默认使用临时目录，可通过 --log-file 覆盖
+DEFAULT_LOG_DIR = tempfile.gettempdir()
+DEFAULT_LOG_FILE = os.path.join(DEFAULT_LOG_DIR, 'agent_memory_hub.log')
+
+def setup_logging(log_file: str = DEFAULT_LOG_FILE) -> logging.Logger:
+    """配置日志系统，支持文件轮转"""
+    logger = logging.getLogger('agent_memory_hub')
+    logger.setLevel(logging.INFO)
+    
+    # 清除已有handlers
+    logger.handlers.clear()
+    
+    # 控制台handler
+    console_handler = logging.StreamHandler()
+    console_handler.setLevel(logging.INFO)
+    console_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+    console_handler.setFormatter(console_format)
+    logger.addHandler(console_handler)
+    
+    # 文件handler（带轮转）
+    try:
+        file_handler = RotatingFileHandler(
+            log_file, 
+            maxBytes=5*1024*1024,  # 5MB
+            backupCount=3,
+            encoding='utf-8'
+        )
+        file_handler.setLevel(logging.INFO)
+        file_format = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+        file_handler.setFormatter(file_format)
+        logger.addHandler(file_handler)
+    except Exception as e:
+        logger.warning(f"无法创建日志文件 {log_file}: {e}")
+    
+    return logger
+
+logger = setup_logging()
 
 # 尝试导入可选依赖
 try:
@@ -93,19 +121,25 @@ def load_role_markers(config_path: Optional[Path] = None) -> Dict[str, str]:
 
 
 def atomic_write(filepath: Path, content: str, encoding: str = 'utf-8') -> bool:
-    """原子写入文件：先写临时文件，再重命名"""
-    temp_path = filepath.with_suffix(filepath.suffix + '.tmp')
+    """原子写入文件：使用唯一临时文件，确保并发安全"""
+    # 创建临时文件（带随机后缀）
+    temp_fd, temp_path = tempfile.mkstemp(
+        dir=filepath.parent,
+        prefix=f'.{filepath.stem}_',
+        suffix='.tmp'
+    )
     try:
-        with open(temp_path, 'w', encoding=encoding) as f:
+        with os.fdopen(temp_fd, 'w', encoding=encoding) as f:
             f.write(content)
             f.flush()
             os.fsync(f.fileno())
+        # 原子替换
         os.replace(temp_path, filepath)
         return True
     except Exception as e:
         logger.error(f"原子写入失败 {filepath}: {e}")
-        if temp_path.exists():
-            temp_path.unlink()
+        if os.path.exists(temp_path):
+            os.unlink(temp_path)
         return False
 
 
@@ -474,46 +508,3 @@ def process_input(input_path: Path, output_dir: Path, asset_type: str = None,
         save_state(output_dir, state)
 
     return assets
-
-
-def selftest():
-    """自检函数 - 验证核心功能"""
-    logger.info("运行自检...")
-
-    # 创建临时测试目录
-    with tempfile.TemporaryDirectory() as tmpdir:
-        tmp = Path(tmpdir)
-
-        # 创建四类测试文件
-        # 1. 对话文件
-        dialogue_file = tmp / "test_dialogue.txt"
-        dialogue_file.write_text(
-            "用户: 你好，我想了解项目进度\n"
-            "AI: 项目已完成80%，预计下周完成\n"
-            "用户: 好的，谢谢\n"
-            "AI: 不客气，有其他问题随时问\n",
-            encoding="utf-8"
-        )
-
-        # 2. 代码文件
-        code_file = tmp / "test_code.py"
-        code_file.write_text(
-            "import os\n"
-            "import sys\n\n"
-            "def main():\n"
-            "    print('Hello')\n\n"
-            "class TestClass:\n"
-            "    pass\n",
-            encoding="utf-8"
-        )
-
-        # 3. 文档文件
-        doc_file = tmp / "test_doc.md"
-        doc_file.write_text(
-            "# 项目文档\n\n"
-            "这是一个测试文档，包含一些关键词：项目、测试、文档\n",
-            encoding="utf-8"
-        )
-
-        # 4. 决策文件
-        decision_file = tmp / "test_decision.txt"
