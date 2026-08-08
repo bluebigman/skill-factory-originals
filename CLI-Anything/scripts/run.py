@@ -398,4 +398,4 @@ def selftest() -> bool:
     ]
     
     passed = 0
-    total = len(test_cases) + 3  # 加上模板完整
+    total = len(test_cases) + 3  # 加上模板完整性
