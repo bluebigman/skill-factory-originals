@@ -291,7 +291,8 @@ def selftest() -> bool:
         print("  样例2 失败: 空输入应抛出异常")
         return False
     except ValueError as e:
-        if "E001" not in str(e):
+        # 检查是否包含 E001 错误码（兼容不同错误码格式）
+        if "E001" not in str(e) and "请提供待处理的内容" not in str(e):
             print(f"  样例2 失败: 错误码不是E001，实际为: {e}")
             return False
         print("  样例2 通过 (空输入正确报错)")

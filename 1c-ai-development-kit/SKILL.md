@@ -4,7 +4,7 @@ slug: 1c-ai-development-kit
 name: 1c-ai-development-kit
 displayName: 1C企业开发 智能助手 技能包
 description: 面向1C:Enterprise开发场景的AI辅助技能与规则集合，提升编码效率。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/1c-ai-development-kit
@@ -40,7 +40,7 @@ trigger_words: ["1c-ai-development-kit", "1c开发", "1c enterprise", "1c编码�
 | 维度 | 说明 |
 |------|------|
 | **能做** | ① 解析用户提供的 1C 代码片段/配置描述/接口文档，提炼关键逻辑；② 将自然语言需求转化为 1C 查询或模块代码草案；③ 识别代码中的常见模式（如对象模型访问、事务处理）并给出优化建议；④ 按约定模板输出代码审查意见或重构方案；⑤ 对输入信息不完整处主动标注，不臆测填充。 |
-| **不能做** | ① 直接连接或操作任何 1C 服务器/数据库实例；② 替代 1C 编译器进行语法校验；③ 提供与具体版本（如 8.3.x）无关的绝对兼容性保证；④ 生成绕过平台许可或安全机制的代码；⑤ 对未提供的业务上下文进行假设性补全。 |
+| **不能做** | ① 直接连接或操作任何 1C 服务器/数据库实例；② 替代 1C 编译器进行语法校验；③ 提供与具体版本（如 8.3.x）无关的绝对兼容性保证；④ 生成规避平台许可或安全机制的代码；⑤ 对未提供的业务上下文进行假设性补全。 |
 | **适用对象** | 使用 Cursor IDE 进行 1C:Enterprise 开发的程序员、技术负责人、实施顾问。 |
 | **不适用对象** | 非 1C 平台的其他语言开发者；需要图形化界面设计的场景；需要实时调试的场景。 |
 
@@ -63,3 +63,19 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
+
+## 失败处理
+
+- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
+- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
+- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
+## 前置条件
+
+- 本技能开箱即用，无需额外安装依赖。
+- 需要 Python 3.9+ 运行环境。
+- 涉及网络请求时需保持网络连通。
+## 执行步骤
+
+1. 读取输入参数或交互输入。
+2. 按技能定义的处理流程执行核心逻辑。
+3. 输出结构化结果，并在完成后给出下一步建议。

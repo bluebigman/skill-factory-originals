@@ -9,7 +9,7 @@ from __future__ import annotations
 import argparse, re, sys, json, time, shutil, hashlib, os, tempfile
 from pathlib import Path
 from datetime import datetime, timezone
-from concurrent.futures import ProcessPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Optional, Tuple
 
 HERE = Path(__file__).resolve().parent
@@ -133,15 +133,20 @@ def process_images(input_dir: Path, output_dir: Path, max_width: int, quality: i
         for f in pending_files
     ]
     
+    # 打印预览摘要（处理前）
+    print(f"准备处理 {len(pending_files)} 个文件:")
+    for item in preview:
+        print(f"  - {item['input']} → {item['output']} (max_width={item['params']['max_width']}, quality={item['params']['quality']})")
+    
     # 备份原图
     if not backup_originals(pending_files):
         return {"success": 0, "failed": len(pending_files), "errors": ["备份失败"], "preview": preview}
     
-    # 并行处理（使用进程池避免线程安全问题）
+    # 并行处理（使用线程池，每个线程有唯一ID）
     results = {"success": 0, "failed": 0, "errors": []}
     completed = list(completed_files)
     
-    with ProcessPoolExecutor(max_workers=4) as executor:
+    with ThreadPoolExecutor(max_workers=4) as executor:
         future_to_file = {
             executor.submit(process_single_image, f, output_dir, max_width, quality, i): f
             for i, f in enumerate(pending_files)
@@ -192,7 +197,6 @@ def selftest() -> int:
     print("  [OK] SKILL.md 可读")
     
     # 测试3: 真实调用主流程
-    import tempfile
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
         input_dir = tmp / "input"

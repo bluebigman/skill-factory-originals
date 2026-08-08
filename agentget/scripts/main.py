@@ -252,7 +252,14 @@ class BatchProcessor:
                 results.append(result_dict)
             except ValueError as e:
                 error_code = str(e)
-                error_msg = ERROR_CODES.get(error_code, "未知错误")
+                # 处理可能包含缺失字段的错误码
+                if ":" in error_code:
+                    error_code, missing = error_code.split(":", 1)
+                    error_msg = ERROR_CODES.get(error_code, "未知错误")
+                    if "{missing}" in error_msg:
+                        error_msg = error_msg.format(missing=missing)
+                else:
+                    error_msg = ERROR_CODES.get(error_code, "未知错误")
                 results.append({
                     "status": "error",
                     "error_code": error_code,
@@ -494,7 +501,14 @@ def main():
             sys.exit(0)
         except ValueError as e:
             error_code = str(e)
-            error_msg = ERROR_CODES.get(error_code, "未知错误")
+            # 处理可能包含缺失字段的错误码
+            if ":" in error_code:
+                error_code, missing = error_code.split(":", 1)
+                error_msg = ERROR_CODES.get(error_code, "未知错误")
+                if "{missing}" in error_msg:
+                    error_msg = error_msg.format(missing=missing)
+            else:
+                error_msg = ERROR_CODES.get(error_code, "未知错误")
             print(f"错误 [{error_code}]: {error_msg}", file=sys.stderr)
             sys.exit(1)
 
