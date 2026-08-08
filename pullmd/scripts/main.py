@@ -334,6 +334,20 @@ def run_selftest() -> bool:
     print(f"  模板完整性：{'✅' if template_ok else '❌'}")
     all_passed = all_passed and template_ok
     
+    # 测试置信度计算
+    print("\n置信度测试：")
+    test_parsed = {"key_info": ["a", "b", "c"], "content": "x" * 200}
+    conf = calculate_confidence(test_parsed, "text")
+    conf_ok = 0.0 <= conf <= 1.0
+    print(f"  置信度范围：{conf:.2f} {'✅' if conf_ok else '❌'}")
+    all_passed = all_passed and conf_ok
+    
+    # 测试错误码完整性
+    print("\n错误码完整性测试：")
+    error_ok = all(code in ERROR_MESSAGES for code in ["E001", "E002", "E003", "E004", "E005"])
+    print(f"  核心错误码：{'✅' if error_ok else '❌'}")
+    all_passed = all_passed and error_ok
+    
     print("\n" + "=" * 60)
     if all_passed:
         print("✅ 所有测试通过")

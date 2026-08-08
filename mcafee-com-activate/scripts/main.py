@@ -411,6 +411,22 @@ def run_selftest() -> bool:
         assert code in ERROR_MESSAGES, f"缺少错误码 {code}"
     print("  通过")
 
+    # 测试用例 9: 详细模式元数据
+    print("\n[用例 9] 详细模式元数据")
+    result9 = processor.process("测试内容 json 详细", completeness="detailed")
+    assert result9.success, f"用例9失败: {result9.error_message}"
+    assert "metadata" in result9.data, "详细模式应包含metadata"
+    assert result9.data["metadata"]["license"] == "MIT", "许可证应为MIT"
+    print("  通过")
+
+    # 测试用例 10: 批量失败项处理
+    print("\n[用例 10] 批量失败项处理")
+    batch_fail = "正常内容\n\n\n"
+    result10 = processor.process(batch_fail, is_batch=True)
+    assert not result10.success, "空行批量应失败"
+    assert result10.error_code == "E003", f"错误码应为E003, 实际: {result10.error_code}"
+    print(f"  通过 (错误码: {result10.error_code})")
+
     # 汇总
     print("\n" + "=" * 60)
     print(f"所有自检用例通过！共 {processor.get_stats()['processed']} 次处理")

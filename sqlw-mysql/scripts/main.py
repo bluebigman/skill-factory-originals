@@ -367,7 +367,7 @@ class CodeGenerator:
         lines.append("    )")
         lines.append("    cursor = conn.cursor()")
         lines.append("    try:")
-        lines.append("        for name in dir():" )
+        lines.append("        for name in dir():")
         lines.append("            if name.startswith('QUERY_') and not name.endswith(('_TYPE', '_TABLES', '_PARAMS')):")
         lines.append("                sql = globals()[name]")
         lines.append("                print(f'执行 {name}: {sql}')")

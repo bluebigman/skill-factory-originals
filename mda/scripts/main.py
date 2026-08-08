@@ -188,10 +188,8 @@ def check_confidence(data):
             issues.append(f"{path}: 值为空")
         elif isinstance(obj, str) and not obj.strip():
             issues.append(f"{path}: 空字符串")
-        elif isinstance(obj, (int, float)):
-            # 数值范围检查（宽松）
-            if isinstance(obj, float) and (obj != obj):  # NaN 检查
-                issues.append(f"{path}: 非数值(NaN)")
+        elif isinstance(obj, float) and (obj != obj):  # NaN 检查
+            issues.append(f"{path}: 非数值(NaN)")
 
     annotate_recursive(data)
     return data, issues

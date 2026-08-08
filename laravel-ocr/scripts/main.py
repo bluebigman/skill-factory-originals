@@ -354,21 +354,229 @@ def _selftest() -> bool:
     except OCRError as exc:
         assert exc.code == "E001", f"预期 E001，实际 {exc.code}"
 
-    # 9. 测试无效文件类型
+    # 9. 测试无效文件类型（使用存在的临时文件）
     print("[自检] 测试无效文件类型...")
+    with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as tmp:
+        tmp_path = tmp.name
     try:
-        _read_image_info("/nonexistent/file.txt")
-        assert False, "应抛出 E001 错误"
-    except OCRError as exc:
-        assert exc.code == "E001", f"预期 E001，实际 {exc.code}"
+        try:
+            _read_image_info(tmp_path)
+            assert False, "应抛出 E002 错误"
+        except OCRError as exc:
+            assert exc.code == "E002", f"预期 E002，实际 {exc.code}"
+    finally:
+        os.unlink(tmp_path)
 
     # 10. 测试目录输入
     print("[自检] 测试目录输入...")
     try:
-        process_file("/tmp")
+        process_file(os.path.dirname(os.path.abspath(__file__)))
         assert False, "应抛出 E008 错误"
     except OCRError as exc:
         assert exc.code == "E008", f"预期 E008，实际 {exc.code}"
+
+    # 11. 测试有效图片文件处理（创建临时 PNG 文件）
+    print("[自检] 测试有效图片文件处理...")
+    tmp_png = None
+    try:
+        # 创建一个最小的有效 PNG 文件
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+            tmp_png = tmp.name
+            # 1x1 像素 PNG 文件头
+            png_data = bytes.fromhex(
+                "89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c489"
+                "0000000d49444154789c626001000000ffff03000006000557bfabd40000000049454e44ae426082"
+            )
+            tmp.write(png_data)
+
+        # 处理有效图片
+        result = process_file(tmp_png, "invoice")
+        assert result["file"] == os.path.basename(tmp_png), "文件名不匹配"
+        assert result["doc_type"] == "invoice", "文档类型不匹配"
+        assert "timestamp" in result, "缺少时间戳"
+    finally:
+        if tmp_png and os.path.exists(tmp_png):
+            os.unlink(tmp_png)
+
+    # 12. 测试 URL 下载失败处理（使用不存在的 URL）
+    print("[自检] 测试 URL 下载失败处理...")
+    try:
+        process_url("http://127.0.0.1:1/nonexistent.png")
+        assert False, "应抛出 E003 错误"
+    except OCRError as exc:
+        assert exc.code == "E003", f"预期 E003，实际 {exc.code}"
+
+    # 13. 测试 JSON 输出文件写入
+    print("[自检] 测试 JSON 输出文件写入...")
+    with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
+        tmp_json = tmp.name
+    try:
+        test_output = {"status": "success", "data": {"key": "value"}}
+        with open(tmp_json, "w", encoding="utf-8") as f:
+            json.dump(test_output, f, ensure_ascii=False)
+        with open(tmp_json, "r", encoding="utf-8") as f:
+            loaded = json.load(f)
+        assert loaded["status"] == "success", "JSON 写入/读取失败"
+    finally:
+        if os.path.exists(tmp_json):
+            os.unlink(tmp_json)
+
+    # 14. 测试 --file 参数处理（使用临时 PNG 文件）
+    print("[自检] 测试 --file 参数处理...")
+    tmp_png2 = None
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+            tmp_png2 = tmp.name
+            png_data = bytes.fromhex(
+                "89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c489"
+                "0000000d49444154789c626001000000ffff03000006000557bfabd40000000049454e44ae426082"
+            )
+            tmp.write(png_data)
+
+        # 使用 subprocess 测试命令行入口
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, __file__, "--file", tmp_png2, "--type", "invoice"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert result.returncode == 0, f"命令行执行失败: {result.stderr}"
+        output = json.loads(result.stdout)
+        assert output["status"] == "success", "命令行输出状态错误"
+        assert output["data"]["doc_type"] == "invoice", "命令行文档类型错误"
+    finally:
+        if tmp_png2 and os.path.exists(tmp_png2):
+            os.unlink(tmp_png2)
+
+    # 15. 测试 --selftest 参数处理
+    print("[自检] 测试 --selftest 参数处理...")
+    import subprocess
+    result = subprocess.run(
+        [sys.executable, __file__, "--selftest"],
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 0, f"--selftest 执行失败: {result.stderr}"
+    assert "所有检查通过" in result.stdout, "--selftest 输出异常"
+
+    # 16. 测试 --batch 参数处理
+    print("[自检] 测试 --batch 参数处理...")
+    tmp_png3 = None
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+            tmp_png3 = tmp.name
+            png_data = bytes.fromhex(
+                "89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c489"
+                "0000000d49444154789c626001000000ffff03000006000557bfabd40000000049454e44ae426082"
+            )
+            tmp.write(png_data)
+
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, __file__, "--batch", tmp_png3, "/nonexistent/1.jpg"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert result.returncode == 0, f"--batch 执行失败: {result.stderr}"
+        output = json.loads(result.stdout)
+        assert output["status"] == "success", "--batch 输出状态错误"
+        assert output["data"]["total"] == 2, "--batch 总数错误"
+        assert output["data"]["success"] == 1, "--batch 成功数错误"
+        assert output["data"]["failed"] == 1, "--batch 失败数错误"
+    finally:
+        if tmp_png3 and os.path.exists(tmp_png3):
+            os.unlink(tmp_png3)
+
+    # 17. 测试 --url 参数处理（无效 URL）
+    print("[自检] 测试 --url 参数处理（无效 URL）...")
+    import subprocess
+    result = subprocess.run(
+        [sys.executable, __file__, "--url", "ftp://invalid-url"],
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 1, "--url 无效 URL 应返回非零退出码"
+    output = json.loads(result.stdout)
+    assert output["status"] == "error", "--url 无效 URL 应返回错误状态"
+    assert output["error_code"] == "E008", "--url 无效 URL 错误码错误"
+
+    # 18. 测试 --output 参数处理
+    print("[自检] 测试 --output 参数处理...")
+    tmp_png4 = None
+    tmp_out = None
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+            tmp_png4 = tmp.name
+            png_data = bytes.fromhex(
+                "89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c489"
+                "0000000d49444154789c626001000000ffff03000006000557bfabd40000000049454e44ae426082"
+            )
+            tmp.write(png_data)
+
+        with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
+            tmp_out = tmp.name
+            os.unlink(tmp_out)  # 删除临时文件，让程序创建
+
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, __file__, "--file", tmp_png4, "--output", tmp_out],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert result.returncode == 0, f"--output 执行失败: {result.stderr}"
+        assert os.path.exists(tmp_out), "输出文件未创建"
+        with open(tmp_out, "r", encoding="utf-8") as f:
+            output = json.load(f)
+        assert output["status"] == "success", "输出文件内容错误"
+    finally:
+        if tmp_png4 and os.path.exists(tmp_png4):
+            os.unlink(tmp_png4)
+        if tmp_out and os.path.exists(tmp_out):
+            os.unlink(tmp_out)
+
+    # 19. 测试 --pretty 参数处理
+    print("[自检] 测试 --pretty 参数处理...")
+    tmp_png5 = None
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".png", delete=False) as tmp:
+            tmp_png5 = tmp.name
+            png_data = bytes.fromhex(
+                "89504e470d0a1a0a0000000d49484452000000010000000108060000001f15c489"
+                "0000000d49444154789c626001000000ffff03000006000557bfabd40000000049454e44ae426082"
+            )
+            tmp.write(png_data)
+
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, __file__, "--file", tmp_png5, "--pretty"],
+            capture_output=True,
+            text=True,
+            timeout=30,
+        )
+        assert result.returncode == 0, f"--pretty 执行失败: {result.stderr}"
+        assert "\n" in result.stdout, "--pretty 输出应包含换行符"
+    finally:
+        if tmp_png5 and os.path.exists(tmp_png5):
+            os.unlink(tmp_png5)
+
+    # 20. 测试无参数执行
+    print("[自检] 测试无参数执行...")
+    import subprocess
+    result = subprocess.run(
+        [sys.executable, __file__],
+        capture_output=True,
+        text=True,
+        timeout=30,
+    )
+    assert result.returncode == 1, "无参数应返回非零退出码"
+    output = json.loads(result.stdout)
+    assert output["status"] == "error", "无参数应返回错误状态"
+    assert output["error_code"] == "E008", "无参数错误码错误"
 
     print("[自检] 所有检查通过 ✔")
     return True

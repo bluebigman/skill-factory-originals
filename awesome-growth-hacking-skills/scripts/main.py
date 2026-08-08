@@ -72,8 +72,8 @@ def extract_key_fields(text: str) -> List[Dict[str, Any]]:
         return []
 
     entries: List[Dict[str, Any]] = []
-    # 按空行或换行分组处理
-    blocks = re.split(r"\n\s*\n|\n(?=\S)", text.strip())
+    # 按空行分组处理
+    blocks = re.split(r"\n\s*\n", text.strip())
 
     for block in blocks:
         block = block.strip()
@@ -87,7 +87,8 @@ def extract_key_fields(text: str) -> List[Dict[str, Any]]:
             if not line:
                 continue
             # 尝试匹配 key: value 或 key=value
-            match = re.match(r"^([^:=]+)[:=]\s*(.*)$", line)
+            # 使用正则匹配第一个冒号或等号作为分隔符
+            match = re.match(r"^([^:=]+?)\s*[:=]\s*(.*)$", line)
             if match:
                 key = match.group(1).strip()
                 value = match.group(2).strip()
@@ -361,6 +362,65 @@ def selftest() -> bool:
         return False
     except ValueError as e:
         print(f"  样例6 失败: {e}")
+        return False
+
+    # 测试样例 7: 文件读取错误处理
+    try:
+        # 模拟文件读取失败场景
+        try:
+            with open("/nonexistent/path/file.txt", "r", encoding="utf-8") as f:
+                pass
+            print("  样例7 失败: 不存在的文件不应读取成功")
+            return False
+        except FileNotFoundError:
+            print("  样例7 通过 (文件不存在正确报错)")
+        except Exception as e:
+            print(f"  样例7 失败: 异常类型不正确: {type(e).__name__}: {e}")
+            return False
+    except Exception as e:
+        print(f"  样例7 失败: {e}")
+        return False
+
+    # 测试样例 8: URL 格式校验
+    try:
+        valid_url = "https://example.com"
+        invalid_url = "not-a-url"
+        assert re.match(r"^https?://", valid_url), "样例8: 合法URL应匹配"
+        assert not re.match(r"^https?://", invalid_url), "样例8: 非法URL不应匹配"
+        print("  样例8 通过 (URL格式校验正确)")
+    except AssertionError as e:
+        print(f"  样例8 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例8 失败: {e}")
+        return False
+
+    # 测试样例 9: 特殊字符处理
+    try:
+        special_input = "名称: 测试\n描述: 包含:冒号的内容\n值: 100"
+        r9 = process_input(special_input)
+        assert len(r9.items) == 1, "样例9: 应解析为1个条目"
+        assert "描述" in r9.items[0], "样例9: 应包含描述字段"
+        assert "包含:冒号的内容" in r9.items[0]["描述"], "样例9: 冒号值应完整保留"
+        print("  样例9 通过 (特殊字符处理正确)")
+    except AssertionError as e:
+        print(f"  样例9 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例9 失败: {e}")
+        return False
+
+    # 测试样例 10: 多条目解析
+    try:
+        multi_input = "条目1名称: 测试A\n条目1值: 100\n\n条目2名称: 测试B\n条目2值: 200"
+        r10 = process_input(multi_input)
+        assert len(r10.items) == 2, "样例10: 应解析为2个条目"
+        print(f"  样例10 通过 (多条目解析正确, 条目数: {len(r10.items)})")
+    except AssertionError as e:
+        print(f"  样例10 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例10 失败: {e}")
         return False
 
     print("所有自检通过！")

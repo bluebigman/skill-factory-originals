@@ -14,6 +14,8 @@ grit 技能 - 独立实现脚本
 import argparse
 import sys
 import json
+import os
+import time
 from typing import Dict, Any, List, Optional
 
 
@@ -215,6 +217,90 @@ class GritProcessor:
 
 
 # ============================================================
+# 批量处理与文件支持
+# ============================================================
+class BatchProcessor:
+    """批量处理与文件读写支持"""
+
+    def __init__(self, processor: GritProcessor):
+        self.processor = processor
+
+    def process_file(self, filepath: str, output_format: str = "json") -> Dict[str, Any]:
+        """处理单个文件，输出到带 _out 后缀的文件"""
+        if not os.path.exists(filepath):
+            raise ValueError(f"E004: 文件不存在: {filepath}")
+
+        # 读取文件内容
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
+        except Exception as e:
+            raise ValueError(f"E006: 读取文件失败: {e}")
+
+        # 尝试解析 JSON，否则作为纯文本
+        try:
+            data = json.loads(content)
+        except json.JSONDecodeError:
+            data = {"content": content}
+
+        data["output_format"] = output_format
+
+        # 处理
+        parsed = self.processor.collect_info(data)
+        result = self.processor.process(parsed)
+
+        # 写入输出文件
+        output_path = self._get_output_path(filepath)
+        output_content = self.processor.format_output(result)
+        with open(output_path, "w", encoding="utf-8") as f:
+            f.write(output_content)
+
+        return {
+            "input_file": filepath,
+            "output_file": output_path,
+            "status": "success",
+            "result": result,
+        }
+
+    def process_batch(self, filepaths: List[str], output_format: str = "json") -> Dict[str, Any]:
+        """批量处理多个文件"""
+        results = []
+        failures = []
+        total = len(filepaths)
+        success = 0
+
+        for filepath in filepaths:
+            try:
+                # 超时控制（模拟，实际用信号或线程）
+                start = time.time()
+                item = self.process_file(filepath, output_format)
+                elapsed = time.time() - start
+                if elapsed > 10:  # 10秒超时
+                    raise TimeoutError("处理超时")
+                results.append(item)
+                success += 1
+            except Exception as e:
+                failures.append({
+                    "file": filepath,
+                    "error": str(e),
+                })
+
+        return {
+            "total": total,
+            "success": success,
+            "failed": len(failures),
+            "skipped": 0,
+            "results": results,
+            "failures": failures,
+        }
+
+    def _get_output_path(self, filepath: str) -> str:
+        """生成输出文件路径（带 _out 后缀）"""
+        base, ext = os.path.splitext(filepath)
+        return f"{base}_out{ext}"
+
+
+# ============================================================
 # 自检模块
 # ============================================================
 def run_selftest() -> bool:
@@ -227,6 +313,7 @@ def run_selftest() -> bool:
     print("=" * 60)
 
     processor = GritProcessor()
+    batch_processor = BatchProcessor(processor)
     all_passed = True
 
     # ---------- 测试用例 1: 正常数据处理 ----------
@@ -365,6 +452,82 @@ def run_selftest() -> bool:
         assert "E003" in str(e), f"应包含 E003，实际: {e}"
         print("  ✓ 通过 (正确捕获 E003)")
 
+    # ---------- 测试用例 9: 文件处理 ----------
+    print("\n[测试9] 文件处理")
+    try:
+        # 创建临时测试文件
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as f:
+            f.write("这是文件内容，用于测试文件处理功能。")
+            temp_file = f.name
+
+        # 处理文件
+        item = batch_processor.process_file(temp_file, "json")
+        assert item["status"] == "success", "文件处理应成功"
+        assert os.path.exists(item["output_file"]), "输出文件应存在"
+
+        # 清理
+        os.unlink(temp_file)
+        os.unlink(item["output_file"])
+        print("  ✓ 通过")
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---------- 测试用例 10: 批量文件处理 ----------
+    print("\n[测试10] 批量文件处理")
+    try:
+        import tempfile
+        temp_files = []
+        for i in range(3):
+            with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as f:
+                f.write(f"批量测试文件 {i+1} 的内容")
+                temp_files.append(f.name)
+
+        # 批量处理
+        batch_result = batch_processor.process_batch(temp_files, "json")
+        assert batch_result["total"] == 3, "应处理3个文件"
+        assert batch_result["success"] == 3, "全部应成功"
+        assert batch_result["failed"] == 0, "不应有失败"
+
+        # 清理
+        for f in temp_files:
+            os.unlink(f)
+            out_f = batch_processor._get_output_path(f)
+            if os.path.exists(out_f):
+                os.unlink(out_f)
+        print("  ✓ 通过")
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---------- 测试用例 11: 幂等性 ----------
+    print("\n[测试11] 幂等性")
+    try:
+        test_data = {"content": "幂等性测试内容"}
+        parsed1 = processor.collect_info(test_data)
+        result1 = processor.process(parsed1)
+        parsed2 = processor.collect_info(test_data)
+        result2 = processor.process(parsed2)
+
+        assert result1 == result2, "相同输入应产生相同输出"
+        print("  ✓ 通过")
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---------- 测试用例 12: 错误码完整性 ----------
+    print("\n[测试12] 错误码完整性")
+    try:
+        expected_codes = ["E001", "E002", "E003", "E004", "E005"]
+        for code in expected_codes:
+            assert code in ERROR_CODES, f"缺少错误码 {code}"
+            assert ERROR_CODES[code], f"错误码 {code} 消息为空"
+        print("  ✓ 通过")
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
     # ---------- 汇总 ----------
     print("\n" + "=" * 60)
     if all_passed:
@@ -390,6 +553,17 @@ def main():
         help="输入数据（JSON字符串或纯文本）",
     )
     parser.add_argument(
+        "--file",
+        type=str,
+        help="输入文件路径",
+    )
+    parser.add_argument(
+        "--batch",
+        type=str,
+        nargs="+",
+        help="批量处理多个文件路径",
+    )
+    parser.add_argument(
         "--format",
         type=str,
         choices=["json", "text"],
@@ -409,10 +583,36 @@ def main():
         success = run_selftest()
         sys.exit(0 if success else 1)
 
+    # 批量文件处理模式
+    if args.batch:
+        try:
+            processor = GritProcessor()
+            batch_processor = BatchProcessor(processor)
+            result = batch_processor.process_batch(args.batch, args.format)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            if result["failed"] > 0:
+                sys.exit(1)
+            sys.exit(0)
+        except Exception as e:
+            print(f"错误: {e}", file=sys.stderr)
+            sys.exit(1)
+
+    # 单文件处理模式
+    if args.file:
+        try:
+            processor = GritProcessor()
+            batch_processor = BatchProcessor(processor)
+            result = batch_processor.process_file(args.file, args.format)
+            print(json.dumps(result, ensure_ascii=False, indent=2))
+            sys.exit(0)
+        except Exception as e:
+            print(f"错误: {e}", file=sys.stderr)
+            sys.exit(1)
+
     # 正常处理模式
     if not args.input:
         print(f"E001: {ERROR_CODES['E001']}", file=sys.stderr)
-        print("提示: 使用 --input 提供输入，或使用 --selftest 运行自检", file=sys.stderr)
+        print("提示: 使用 --input 提供输入，--file 处理文件，--batch 批量处理，或 --selftest 运行自检", file=sys.stderr)
         sys.exit(1)
 
     try:

@@ -90,7 +90,6 @@ def escape_latex(text: str) -> str:
 
 def inline_md_to_latex(text: str) -> str:
     """转换行内 Markdown 样式为 LaTeX"""
-    # 转义特殊字符（先处理代码，避免转义代码内容）
     # 行内代码
     text = re.sub(r'`([^`]+)`', r'\\texttt{\1}', text)
     # 粗体

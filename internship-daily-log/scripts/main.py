@@ -491,6 +491,16 @@ def run_selftest() -> bool:
         assert "任务:" in txt, "文本格式缺少任务字段"
         print("[PASS] 输出格式: md/json/txt 三种格式均正常生成")
 
+        # 9. 日期过滤测试
+        filtered_by_date = filter_records(records, date_from="2026-03-10", date_to="2026-03-11")
+        assert len(filtered_by_date) >= 2, "按日期过滤应至少返回2条"
+        print(f"[PASS] 日期过滤: 过滤后 {len(filtered_by_date)} 条记录")
+
+        # 10. 错误码完整性测试
+        for code in ERROR_CODES:
+            assert code.startswith("E") and len(code) == 4, f"错误码格式异常: {code}"
+        print("[PASS] 错误码完整性: 所有错误码格式正确")
+
         print("=== 自检全部通过 ===")
         return True
 
