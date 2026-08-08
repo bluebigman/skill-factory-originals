@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: acts-as-geocodable
 name: acts-as-geocodable
-displayName: 地理编码 地址解析 坐标映射
+displayName: 地理编码 地址解析 坐标转换
 description: 将地址文本解析为结构化地理数据并输出坐标与置信度。
-version: 1.0.2
+version: 1.0.1
 rules_version: cpr-20260808-n152
 license: MIT
 source_project: original
@@ -13,9 +13,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: GeoForge Studio
+author: LingMap Studio
 agent_created: true
-trigger_words: ["acts as geocodable", "地理编码", "地址转坐标", "geocode", "地址解析", "经纬度提取"]
+trigger_words: ["geocoding", "地址转坐标", "地理编码", "经纬度解析", "位置标准化"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -32,9 +32,35 @@ trigger_words: ["acts as geocodable", "地理编码", "地址转坐标", "geocod
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# 地理编码 Skill — 地址解析与坐标映射
+# acts-as-geocodable — 地理编码 Skill 文档
 
-本 Skill 提供一套轻量级的地理编码处理规范，帮助你将用户提供的地址描述（文本、文件或 URL 中的地址信息）转换为结构化的地理坐标结果，并附带置信度评估。适用于需要从非结构化文本中提取位置信息的场景。
+## 一、能力边界速查卡
+
+本 Skill 面向需要将「非结构化地址文本」转换为「结构化地理信息」的场景，适用于数据分析师、后端开发者、运营人员及任何需要批量处理位置数据的用户。
+
+### 能做（核心能力清单）
+
+| 编号 | 能力项 | 说明 | 输入示例 | 输出示例 |
+|------|--------|------|----------|----------|
+| 1 | 地址文本解析 | 从自由文本中提取省/市/区/街道/门牌号 | "北京市朝阳区建国路88号" | `{province:"北京市", city:"北京市", district:"朝阳区", street:"建国路", number:"88号"}` |
+| 2 | 坐标估算与输出 | 基于行政区划中心点或已知地标返回经纬度 | "上海市浦东新区" | `{lat:31.2304, lng:121.4737, source:"district_center"}` |
+| 3 | 关键信息保留 | 原输入中的非地址信息（如联系人、备注）不丢失，原样透传 | "张三 13800138000 北京市海淀区中关村大街1号" | `{address:{...}, extra:{contact:"张三", phone:"13800138000"}}` |
+| 4 | 置信度标注 | 每条结果附带置信度等级，区分精确匹配/模糊匹配/推测 | 见下文置信度门控 | `confidence: 0.85` |
+| 5 | 批量处理与格式定制 | 支持多行输入、JSON 数组输入，输出格式可选 JSON/CSV/表格 | 见下文参数表 | 见下文输出规范 |
+
+### 不能做（明确边界）
+
+- 不能访问实时地图服务或卫星影像，所有坐标均为静态参考值。
+- 不能解析非中文地址（英文、日文等需先自行翻译为中文）。
+- 不能处理加密、图片或语音中的地址信息，仅接受纯文本。
+- 不能保证坐标精确到建筑物级别，街道号缺失时只返回区级中心点。
+- 不执行任何形式的地址验证（如确认该地址是否真实存在）。
+
+### 适用对象
+
+- 需要将用户通讯录、订单收货地址、门店列表等批量转换为坐标的开发者。
+- 需要从日志、备注、自由文本中抽取位置信息的数据分析人员。
+- 需要为地图可视化准备数据集的运营人员。
 
 
 ## 许可证（License）
@@ -55,19 +81,3 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
-
-## 失败处理
-
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
-
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
-## 执行步骤
-
-1. 读取输入参数或交互输入。
-2. 按技能定义的处理流程执行核心逻辑。
-3. 输出结构化结果，并在完成后给出下一步建议。
