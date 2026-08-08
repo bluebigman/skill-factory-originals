@@ -447,4 +447,255 @@ def process_input(input_path: str, timeout: int = TIMEOUT) -> List[Bill]:
             bill.file = input_path
             results.append(bill)
         finally:
-            tmp
+            tmp.close()
+            tmp_path.unlink(missing_ok=True)
+        return results
+
+    # 检查是否为目录
+    path = Path(input_path)
+    if path.is_dir():
+        pdf_files = sorted(path.glob("*.pdf"))
+        if not pdf_files:
+            raise BillError("E009", f"目录中未找到 PDF 文件: {input_path}")
+        for pdf_file in pdf_files:
+            try:
+                bill = process_pdf(pdf_file)
+                results.append(bill)
+            except BillError as e:
+                # 单文件失败不中断整体
+                bill = Bill(file=str(pdf_file), error=f"[{e.code}] {e.detail}")
+                results.append(bill)
+        return results
+
+    # 单个文件
+    if not path.exists():
+        raise BillError("E001", f"文件不存在: {input_path}")
+    bill = process_pdf(path)
+    results.append(bill)
+    return results
+
+
+# ---------- 输出函数 ----------
+
+def _bill_to_dict(bill: Bill) -> Dict[str, Any]:
+    """将 Bill 转换为字典。"""
+    d = asdict(bill)
+    # 将 checks 转换为可读格式
+    if bill.checks:
+        d["checks"] = {k: {"passed": v[0], "message": v[1]} for k, v in bill.checks.items()}
+    return d
+
+
+def output_json(results: List[Bill], pretty: bool = False) -> str:
+    """输出 JSON 格式。"""
+    data = [_bill_to_dict(b) for b in results]
+    if pretty:
+        return json.dumps(data, ensure_ascii=False, indent=2)
+    return json.dumps(data, ensure_ascii=False)
+
+
+def output_jsonl(results: List[Bill]) -> str:
+    """输出 JSONL 格式。"""
+    lines = []
+    for b in results:
+        lines.append(json.dumps(_bill_to_dict(b), ensure_ascii=False))
+    return "\n".join(lines) + "\n"
+
+
+def output_csv(results: List[Bill]) -> str:
+    """输出 CSV 格式。"""
+    if not results:
+        return ""
+    fields = ["file", "code", "number", "date", "kind", "buyer", "buyer_tax", "seller", "seller_tax",
+              "amount", "tax", "total", "total_cn", "rate", "confidence", "error"]
+    output = []
+    header = ",".join(fields)
+    output.append(header)
+    for b in results:
+        row = []
+        for f in fields:
+            val = getattr(b, f, "")
+            if isinstance(val, str):
+                val = val.replace('"', '""')
+                row.append(f'"{val}"')
+            else:
+                row.append(str(val))
+        output.append(",".join(row))
+    return "\n".join(output) + "\n"
+
+
+def output_markdown(results: List[Bill]) -> str:
+    """输出 Markdown 表格。"""
+    if not results:
+        return ""
+    header = "| 文件 | 发票代码 | 发票号码 | 开票日期 | 类型 | 购买方 | 销售方 | 金额 | 税额 | 价税合计 | 校验结果 |"
+    sep = "|------|----------|----------|----------|------|--------|--------|------|------|----------|----------|"
+    lines = [header, sep]
+    for b in results:
+        check_status = "通过" if not b.error else "失败"
+        lines.append(f"| {b.file} | {b.code} | {b.number} | {b.date} | {b.kind} | {b.buyer} | {b.seller} | "
+                     f"{b.amount} | {b.tax} | {b.total} | {check_status} |")
+    return "\n".join(lines) + "\n"
+
+
+# ---------- 自检函数 ----------
+
+def _selftest() -> bool:
+    """运行自检。"""
+    print("=== pdf-invoice-parser 自检 ===")
+    ok = True
+
+    # 测试 1: 工具函数
+    print("[1/5] 工具函数测试...")
+    assert _is_pdf(b"%PDF-1.7"), "PDF 魔数检测失败"
+    assert not _is_pdf(b"not a pdf"), "非 PDF 检测失败"
+    assert _parse_amount("1,234.56") == Decimal("1234.56"), "金额解析失败"
+    assert _parse_amount("¥100.00") == Decimal("100.00"), "金额解析失败"
+    assert _parse_date("2024年01月01日") == "2024-01-01", "日期解析失败"
+    assert _parse_date("2024-1-1") == "2024-01-01", "日期解析失败"
+    print("  ✓ 通过")
+
+    # 测试 2: 发票解析
+    print("[2/5] 发票解析测试...")
+    sample_text = """
+    电子发票
+    发票代码：1234567890
+    发票号码：12345678
+    开票日期：2024年01月01日
+    购买方：测试公司
+    购买方纳税人识别号：91310000MA1FL1XXXX
+    销售方：供应商公司
+    销售方纳税人识别号：91310000MA1FL2XXXX
+    金额：100.00
+    税额：13.00
+    价税合计（小写）：¥113.00
+    价税合计（大写）：壹佰壹拾叁元整
+    税率：13%
+    """
+    bill = _parse_invoice(sample_text, "test.pdf")
+    assert bill.code == "1234567890", f"发票代码解析失败: {bill.code}"
+    assert bill.number == "12345678", f"发票号码解析失败: {bill.number}"
+    assert bill.date == "2024-01-01", f"日期解析失败: {bill.date}"
+    assert bill.kind == "电子发票", f"类型解析失败: {bill.kind}"
+    assert bill.amount == "100.00", f"金额解析失败: {bill.amount}"
+    assert bill.tax == "13.00", f"税额解析失败: {bill.tax}"
+    assert bill.total == "113.00", f"价税合计解析失败: {bill.total}"
+    assert bill.total_cn == "壹佰壹拾叁元整", f"大写金额解析失败: {bill.total_cn}"
+    print("  ✓ 通过")
+
+    # 测试 3: 一致性校验
+    print("[3/5] 一致性校验测试...")
+    bill.checks = _run_checks(bill)
+    assert bill.checks["amount_sum"][0], f"金额校验失败: {bill.checks['amount_sum'][1]}"
+    assert bill.checks["amount_cn"][0], f"大小写校验失败: {bill.checks['amount_cn'][1]}"
+    assert bill.checks["number_length"][0], f"号码位数校验失败: {bill.checks['number_length'][1]}"
+    assert bill.checks["date_valid"][0], f"日期校验失败: {bill.checks['date_valid'][1]}"
+    print("  ✓ 通过")
+
+    # 测试 4: 错误处理
+    print("[4/5] 错误处理测试...")
+    try:
+        process_pdf(Path("/nonexistent/file.pdf"))
+        assert False, "应抛出 E001 错误"
+    except BillError as e:
+        assert e.code == "E001", f"错误码错误: {e.code}"
+    print("  ✓ 通过")
+
+    # 测试 5: 输出格式
+    print("[5/5] 输出格式测试...")
+    json_out = output_json([bill])
+    assert json.loads(json_out), "JSON 输出无效"
+    jsonl_out = output_jsonl([bill])
+    assert jsonl_out.strip(), "JSONL 输出为空"
+    csv_out = output_csv([bill])
+    assert csv_out.strip(), "CSV 输出为空"
+    md_out = output_markdown([bill])
+    assert md_out.strip(), "Markdown 输出为空"
+    print("  ✓ 通过")
+
+    print("\n=== 自检全部通过 ===")
+    return True
+
+
+# ---------- 命令行入口 ----------
+
+def main() -> int:
+    """命令行入口。"""
+    parser = argparse.ArgumentParser(
+        description="PDF 发票解析与一致性校验",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""示例:
+  python main.py invoice.pdf
+  python main.py invoice.pdf -o result.json
+  python main.py ./invoices/ --format csv
+  python main.py https://example.com/invoice.pdf
+  python main.py --selftest
+        """
+    )
+    parser.add_argument("input", nargs="?", help="输入 PDF 文件、目录或 URL")
+    parser.add_argument("-o", "--output", help="输出文件路径（默认输出到 stdout）")
+    parser.add_argument("-f", "--format", choices=["json", "jsonl", "csv", "markdown"], default="json",
+                        help="输出格式（默认 json）")
+    parser.add_argument("--pretty", action="store_true", help="JSON 输出美化")
+    parser.add_argument("--timeout", type=int, default=TIMEOUT, help=f"网络请求超时秒数（默认 {TIMEOUT}）")
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+    parser.add_argument("-v", "--verbose", action="store_true", help="显示详细日志")
+
+    args = parser.parse_args()
+
+    if args.verbose:
+        logging.getLogger().setLevel(logging.INFO)
+
+    # 自检模式
+    if args.selftest:
+        ok = _selftest()
+        return 0 if ok else 1
+
+    # 检查输入参数
+    if not args.input:
+        parser.error("需要指定输入文件、目录或 URL（或使用 --selftest）")
+
+    try:
+        # 处理输入
+        results = process_input(args.input, timeout=args.timeout)
+
+        # 生成输出
+        if args.format == "json":
+            output = output_json(results, pretty=args.pretty)
+        elif args.format == "jsonl":
+            output = output_jsonl(results)
+        elif args.format == "csv":
+            output = output_csv(results)
+        elif args.format == "markdown":
+            output = output_markdown(results)
+        else:
+            output = output_json(results, pretty=args.pretty)
+
+        # 输出
+        if args.output:
+            _atomic_write(Path(args.output), output)
+            print(f"结果已写入: {args.output}", file=sys.stderr)
+        else:
+            print(output)
+
+        # 统计信息
+        success = sum(1 for b in results if not b.error)
+        failed = len(results) - success
+        print(f"\n处理完成: 共 {len(results)} 个文件，成功 {success} 个，失败 {failed} 个", file=sys.stderr)
+
+        return 0 if failed == 0 else 1
+
+    except BillError as e:
+        print(f"错误 [{e.code}]: {e.detail}", file=sys.stderr)
+        print(f"错误说明: {ERROR_DICT.get(e.code, '未知错误')}", file=sys.stderr)
+        return 1
+    except KeyboardInterrupt:
+        print("用户中断", file=sys.stderr)
+        return 130
+    except Exception as e:
+        print(f"未预期错误: {e}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())
