@@ -4,7 +4,7 @@ slug: advancedsql
 name: advancedsql
 displayName: SQL查询 数据转换 结果映射
 description: 将用户输入的数据、文件或URL转换为结构化SQL查询结果。
-version: 1.0.1
+version: 1.0.2
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/advancedsql
@@ -12,7 +12,7 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DataForge Studio
+author: toolkit-architect Studio
 agent_created: true
 trigger_words: ["SQL查询", "--selftest", "--version", "数据库查询", "SQL转换", "查询构建"]
 ---
@@ -81,3 +81,19 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
+
+## 失败处理
+
+- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
+- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
+- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
+## 前置条件
+
+- 本技能开箱即用，无需额外安装依赖。
+- 需要 Python 3.9+ 运行环境。
+- 涉及网络请求时需保持网络连通。
+## 执行步骤
+
+1. 读取输入参数或交互输入。
+2. 按技能定义的处理流程执行核心逻辑。
+3. 输出结构化结果，并在完成后给出下一步建议。
