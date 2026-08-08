@@ -1,9 +1,9 @@
 {
-  "frozen_at": "2026-08-07T11:50:20.587284",
+  "frozen_at": "2026-08-09T03:37:02.859552",
   "slug": "ai-learning-roadmap",
   "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
   "llm_base_url": "https://api.deepseek.com",
-  "pipeline_commit": "228aac695560ddbcb8805e5091bdb0b7f382f7d0",
+  "pipeline_commit": "0cdc3946863214aad39008ec160a6fc4918b8429",
   "dependencies": [
     "annotated-types==0.8.0",
     "anyio==4.14.2",

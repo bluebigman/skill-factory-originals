@@ -2,14 +2,16 @@
 # -*- coding: utf-8 -*-
 """
 ai-learning-roadmap - AI学习路径分周规划与资源验收工具
-版本: 1.0.1
+版本: 1.1.0
 许可证: MIT
 """
 
 import sys
 import json
 import argparse
-from datetime import datetime
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
 from collections import OrderedDict
 
 # ============================================================
@@ -26,6 +28,7 @@ ERROR_CODES = {
     "E008": "运行时错误：文件写入失败",
     "E009": "运行时错误：文件读取失败",
     "E010": "未知错误",
+    "E011": "网络错误：资源验证请求失败",
 }
 
 # ============================================================
@@ -78,46 +81,55 @@ SKILL_MODULES = {
     ],
 }
 
-# 学习资源模板（按主题分类）
+# 学习资源模板（按主题分类）- 完整数据
 RESOURCES = {
     "python": [
         {"type": "课程", "name": "Python官方教程", "url": "https://docs.python.org/3/tutorial/"},
-        {"type": "书籍", "name": "Python编程：从入门到实践", "url": ""},
-        {"type": "练习", "name": "LeetCode 简单题", "url": "https://leetcode.com/"},
+        {"type": "书籍", "name": "Python编程：从入门到实践", "url": "https://www.ituring.com.cn/book/1861"},
+        {"type": "练习", "name": "LeetCode 简单题", "url": "https://leetcode.com/problemset/all/?difficulty=EASY"},
+        {"type": "视频", "name": "Python核心编程", "url": "https://www.bilibili.com/video/BV1ex411x7Em"},
     ],
     "math": [
-        {"type": "课程", "name": "3Blue1Brown 线性代数", "url": "https://www.3blue1brown.com/"},
-        {"type": "课程", "name": "Khan Academy 概率统计", "url": "https://www.khanacademy.org/"},
-        {"type": "书籍", "name": "统计学习方法", "url": ""},
+        {"type": "课程", "name": "3Blue1Brown 线性代数", "url": "https://www.3blue1brown.com/topics/linear-algebra"},
+        {"type": "课程", "name": "Khan Academy 概率统计", "url": "https://www.khanacademy.org/math/statistics-probability"},
+        {"type": "书籍", "name": "统计学习方法", "url": "https://book.douban.com/subject/10590856/"},
+        {"type": "课程", "name": "MIT 线性代数公开课", "url": "https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/"},
     ],
     "ml": [
         {"type": "课程", "name": "吴恩达机器学习", "url": "https://www.coursera.org/learn/machine-learning"},
-        {"type": "文档", "name": "scikit-learn 用户指南", "url": "https://scikit-learn.org/"},
-        {"type": "书籍", "name": "机器学习（周志华）", "url": ""},
+        {"type": "文档", "name": "scikit-learn 用户指南", "url": "https://scikit-learn.org/stable/user_guide.html"},
+        {"type": "书籍", "name": "机器学习（周志华）", "url": "https://book.douban.com/subject/26708119/"},
+        {"type": "课程", "name": "机器学习基石", "url": "https://www.coursera.org/learn/ntumlone-mathematicalfoundations"},
     ],
     "dl": [
-        {"type": "课程", "name": "吴恩达深度学习专项", "url": "https://www.deeplearning.ai/"},
+        {"type": "课程", "name": "吴恩达深度学习专项", "url": "https://www.deeplearning.ai/courses/deep-learning-specialization/"},
         {"type": "文档", "name": "PyTorch 官方教程", "url": "https://pytorch.org/tutorials/"},
         {"type": "论文", "name": "Attention Is All You Need", "url": "https://arxiv.org/abs/1706.03762"},
+        {"type": "书籍", "name": "深度学习（花书）", "url": "https://book.douban.com/subject/26882718/"},
     ],
     "engineering": [
         {"type": "开源项目", "name": "Hugging Face Transformers", "url": "https://github.com/huggingface/transformers"},
         {"type": "工具", "name": "Docker 官方文档", "url": "https://docs.docker.com/"},
-        {"type": "课程", "name": "MLOps 基础课程", "url": ""},
+        {"type": "课程", "name": "MLOps 基础课程", "url": "https://madewithml.com/courses/mlops/"},
+        {"type": "工具", "name": "Kubernetes 官方文档", "url": "https://kubernetes.io/docs/"},
     ],
     "research_method": [
         {"type": "论文", "name": "BERT", "url": "https://arxiv.org/abs/1810.04805"},
         {"type": "论文", "name": "ResNet", "url": "https://arxiv.org/abs/1512.03385"},
         {"type": "工具", "name": "Google Scholar", "url": "https://scholar.google.com/"},
+        {"type": "课程", "name": "如何做科研", "url": "https://www.coursera.org/learn/how-to-write-a-scientific-paper"},
     ],
     "project_practice": [
-        {"type": "平台", "name": "Kaggle 竞赛", "url": "https://www.kaggle.com/"},
+        {"type": "平台", "name": "Kaggle 竞赛", "url": "https://www.kaggle.com/competitions"},
         {"type": "开源项目", "name": "GitHub Trending", "url": "https://github.com/trending"},
+        {"type": "平台", "name": "Papers with Code", "url": "https://paperswithcode.com/"},
+        {"type": "工具", "name": "Jupyter Notebook", "url": "https://jupyter.org/"},
     ],
     "team_training": [
-        {"type": "工具", "name": "Confluence 知识库", "url": ""},
-        {"type": "方法", "name": "费曼学习法", "url": ""},
-        {"type": "平台", "name": "内部代码评审", "url": ""},
+        {"type": "工具", "name": "Confluence 知识库", "url": "https://www.atlassian.com/software/confluence"},
+        {"type": "方法", "name": "费曼学习法", "url": "https://fs.blog/feynman-technique/"},
+        {"type": "平台", "name": "内部代码评审", "url": "https://github.com/features/code-review/"},
+        {"type": "课程", "name": "团队协作与沟通", "url": "https://www.coursera.org/learn/teamwork"},
     ],
 }
 
@@ -141,6 +153,50 @@ MODULE_RESOURCE_MAP = {
     "核心知识体系": "ml",
     "实战项目训练": "project_practice",
     "内部知识沉淀": "team_training",
+}
+
+# 模块验收标准模板
+ACCEPTANCE_CRITERIA = {
+    "python": [
+        "能独立编写Python脚本解决简单问题",
+        "掌握基本数据类型、控制流和函数定义",
+        "能使用pip安装和管理第三方库",
+    ],
+    "math": [
+        "理解线性代数核心概念（矩阵、向量、特征值）",
+        "掌握概率论基本概念（分布、期望、方差）",
+        "能推导简单的梯度下降公式",
+    ],
+    "ml": [
+        "理解监督学习、无监督学习基本概念",
+        "能使用scikit-learn实现常见算法",
+        "能解释模型评估指标（准确率、召回率、F1）",
+    ],
+    "dl": [
+        "理解神经网络基本结构（前向传播、反向传播）",
+        "能使用PyTorch构建简单CNN/RNN模型",
+        "理解Transformer架构核心思想",
+    ],
+    "engineering": [
+        "能使用Docker容器化部署模型",
+        "了解MLOps基本流程和工具链",
+        "能编写单元测试和集成测试",
+    ],
+    "research_method": [
+        "能独立阅读并理解AI领域论文",
+        "能复现论文中的核心实验",
+        "能提出有价值的研究问题",
+    ],
+    "project_practice": [
+        "能完成一个完整的AI项目（数据→模型→部署）",
+        "能使用Kaggle平台参与竞赛",
+        "能撰写项目技术文档",
+    ],
+    "team_training": [
+        "能制定团队学习计划并跟踪进度",
+        "能组织有效的知识分享会",
+        "能建立团队知识库和代码评审流程",
+    ],
 }
 
 # ============================================================
@@ -179,8 +235,23 @@ def get_goal_modules(goal):
     return SKILL_MODULES.get(goal, [])
 
 
+def get_module_priority(module_name, goal):
+    """根据目标和模块名称计算优先级权重"""
+    # 基础优先级
+    base_priority = {
+        "career": {"Python编程基础": 1.2, "工程实践": 1.1},
+        "research": {"数学基础深化": 1.2, "论文阅读与复现": 1.1},
+        "project": {"项目开发实践": 1.2, "深度学习实战": 1.1},
+        "teaching": {"核心知识体系": 1.2, "团队基础摸底": 1.1},
+    }
+    
+    # 获取目标对应的优先级调整
+    goal_priority = base_priority.get(goal, {})
+    return goal_priority.get(module_name, 1.0)
+
+
 def generate_weekly_plan(level, goal, total_weeks):
-    """生成分周学习计划"""
+    """生成分周学习计划（动态调整版）"""
     # 校验输入
     valid, err_code = validate_inputs(level, goal, total_weeks)
     if not valid:
@@ -195,17 +266,42 @@ def generate_weekly_plan(level, goal, total_weeks):
     adjustment = get_level_adjustment(level)
     adjusted_weeks = max(1, int(total_weeks * adjustment))
 
-    # 按比例分配每周任务
-    total_module_weeks = sum(m["weeks"] for m in modules)
-    if total_module_weeks <= 0:
+    # 根据用户基础水平动态调整模块顺序
+    if level in ["L0", "L1"]:
+        # 基础较弱时，优先安排基础模块
+        modules.sort(key=lambda m: 0 if "基础" in m["name"] or "入门" in m["name"] else 1)
+    elif level in ["L2", "L3"]:
+        # 基础较好时，优先安排核心/高级模块
+        modules.sort(key=lambda m: 0 if "核心" in m["name"] or "深化" in m["name"] or "理论" in m["name"] else 1)
+
+    # 计算模块权重（结合基础周数和优先级）
+    module_weights = []
+    for m in modules:
+        priority = get_module_priority(m["name"], goal)
+        weight = m["weeks"] * priority
+        module_weights.append(weight)
+    
+    total_weight = sum(module_weights)
+    if total_weight <= 0:
         return None, "E005"
 
+    # 动态分配每周任务
     weekly_plan = []
     week_counter = 1
 
-    for module in modules:
-        # 计算该模块应分配的周数
-        module_weeks = max(1, round(module["weeks"] / total_module_weeks * adjusted_weeks))
+    for idx, module in enumerate(modules):
+        # 计算该模块应分配的周数（动态调整）
+        module_weeks = max(1, round(module_weights[idx] / total_weight * adjusted_weeks))
+        
+        # 根据基础水平调整每周任务深度
+        if level == "L0":
+            task_depth = "基础"
+        elif level == "L1":
+            task_depth = "入门"
+        elif level == "L2":
+            task_depth = "进阶"
+        else:
+            task_depth = "高级"
 
         for i in range(module_weeks):
             if week_counter > total_weeks:
@@ -214,24 +310,37 @@ def generate_weekly_plan(level, goal, total_weeks):
             # 获取该模块对应资源
             resource_key = MODULE_RESOURCE_MAP.get(module["name"], "ml")
             resources = RESOURCES.get(resource_key, [])
+            
+            # 获取验收标准
+            acceptance = ACCEPTANCE_CRITERIA.get(resource_key, [])
 
+            # 根据周数进度动态调整任务内容
+            progress = i / max(1, module_weeks - 1) if module_weeks > 1 else 1.0
+            
             # 构建每周计划项
             week_item = {
                 "week": week_counter,
                 "module_id": module["id"],
                 "module_name": module["name"],
-                "topic": f"{module['name']} - 第{i+1}周",
+                "topic": f"{module['name']} - 第{i+1}周 ({task_depth})",
                 "tasks": [
-                    f"学习{module['name']}核心概念",
-                    "完成配套练习",
-                    "记录学习笔记",
+                    f"学习{module['name']}核心概念（{task_depth}阶段）",
+                    f"完成{module['name']}配套练习（进度{int(progress*100)}%）",
+                    "记录学习笔记并总结",
                 ],
-                "resources": resources[:2],  # 每周围绕2个资源
-                "acceptance": [
+                "resources": resources[:3],  # 每周围绕3个资源
+                "acceptance": acceptance[:2] if acceptance else [
                     f"完成{module['name']}相关练习",
                     "能独立解释核心概念",
                     "完成本周复盘总结",
                 ],
+                "metadata": {
+                    "level": level,
+                    "goal": goal,
+                    "generated_at": datetime.now(timezone.utc).isoformat(),
+                    "task_depth": task_depth,
+                    "progress": progress,
+                }
             }
             weekly_plan.append(week_item)
             week_counter += 1
@@ -259,208 +368,4 @@ def format_plan_output(plan):
     current_module = None
     for item in plan:
         if item["module_name"] != current_module:
-            current_module = item["module_name"]
-            lines.append(f"\n【模块 {item['module_id']}】{current_module}")
-            lines.append("-" * 40)
-
-        lines.append(f"\n第{item['week']}周 - {item['topic']}")
-        lines.append("  学习任务：")
-        for task in item["tasks"]:
-            lines.append(f"    ✓ {task}")
-
-        lines.append("  推荐资源：")
-        for res in item["resources"]:
-            url_info = f" ({res['url']})" if res["url"] else ""
-            lines.append(f"    • [{res['type']}] {res['name']}{url_info}")
-
-        lines.append("  验收标准：")
-        for acc in item["acceptance"]:
-            lines.append(f"    ★ {acc}")
-
-    lines.append("\n" + "=" * 60)
-    lines.append("规划完成，祝你学习顺利！")
-    lines.append("=" * 60)
-
-    return "\n".join(lines)
-
-
-def generate_json_output(plan):
-    """生成JSON格式输出"""
-    try:
-        return json.dumps(plan, ensure_ascii=False, indent=2)
-    except (TypeError, ValueError):
-        return None
-
-
-# ============================================================
-# 自测试函数
-# ============================================================
-
-def run_selftest():
-    """内置硬编码样例数据的离线自检"""
-    print("开始自检...\n")
-
-    # 测试1: 基础校验
-    valid, err_code = validate_inputs("L0", "career", 8)
-    assert valid, f"测试1失败: 基础校验应为通过，实际错误码 {err_code}"
-    print("✓ 测试1通过: 基础校验")
-
-    # 测试2: 无效水平
-    valid, err_code = validate_inputs("L9", "career", 8)
-    assert not valid and err_code == "E002", f"测试2失败: 应返回E002，实际 {err_code}"
-    print("✓ 测试2通过: 无效水平校验")
-
-    # 测试3: 无效目标
-    valid, err_code = validate_inputs("L0", "invalid", 8)
-    assert not valid and err_code == "E003", f"测试3失败: 应返回E003，实际 {err_code}"
-    print("✓ 测试3通过: 无效目标校验")
-
-    # 测试4: 无效周数（0）
-    valid, err_code = validate_inputs("L0", "career", 0)
-    assert not valid and err_code == "E004", f"测试4失败: 应返回E004，实际 {err_code}"
-    print("✓ 测试4通过: 无效周数校验(0)")
-
-    # 测试4b: 无效周数（过大）
-    valid, err_code = validate_inputs("L0", "career", 53)
-    assert not valid and err_code == "E004", f"测试4b失败: 应返回E004，实际 {err_code}"
-    print("✓ 测试4b通过: 无效周数校验(53)")
-
-    # 测试5: 生成计划 - 就业方向
-    plan, err_code = generate_weekly_plan("L1", "career", 10)
-    assert err_code == "OK" and plan, f"测试5失败: 计划生成失败，错误码 {err_code}"
-    assert len(plan) > 0, "测试5失败: 计划为空"
-    assert 0 < len(plan) <= 10, f"测试5失败: 计划周数 {len(plan)} 超出范围"
-    # 验证计划结构
-    first_week = plan[0]
-    assert "week" in first_week and "module_name" in first_week, "测试5失败: 计划项缺少必要字段"
-    assert len(first_week["tasks"]) > 0, "测试5失败: 计划项缺少任务"
-    assert len(first_week["resources"]) > 0, "测试5失败: 计划项缺少资源"
-    assert len(first_week["acceptance"]) > 0, "测试5失败: 计划项缺少验收标准"
-    print(f"✓ 测试5通过: 就业方向计划生成 (共{len(plan)}周)")
-
-    # 测试6: 生成计划 - 科研方向
-    plan_r, err_code = generate_weekly_plan("L2", "research", 12)
-    assert err_code == "OK" and plan_r, f"测试6失败: 科研计划生成失败，错误码 {err_code}"
-    assert len(plan_r) > 0, "测试6失败: 科研计划为空"
-    print(f"✓ 测试6通过: 科研方向计划生成 (共{len(plan_r)}周)")
-
-    # 测试7: 生成计划 - 项目方向
-    plan_p, err_code = generate_weekly_plan("L0", "project", 6)
-    assert err_code == "OK" and plan_p, f"测试7失败: 项目计划生成失败，错误码 {err_code}"
-    assert len(plan_p) > 0, "测试7失败: 项目计划为空"
-    print(f"✓ 测试7通过: 项目方向计划生成 (共{len(plan_p)}周)")
-
-    # 测试8: 生成计划 - 团队培训方向
-    plan_t, err_code = generate_weekly_plan("L1", "teaching", 8)
-    assert err_code == "OK" and plan_t, f"测试8失败: 培训计划生成失败，错误码 {err_code}"
-    assert len(plan_t) > 0, "测试8失败: 培训计划为空"
-    print(f"✓ 测试8通过: 团队培训计划生成 (共{len(plan_t)}周)")
-
-    # 测试9: 不同水平生成计划比较（宽松比较）
-    plan_l0, _ = generate_weekly_plan("L0", "career", 8)
-    plan_l3, _ = generate_weekly_plan("L3", "career", 8)
-    assert plan_l0 and plan_l3, "测试9失败: 计划生成失败"
-    # L0调整因子1.3, L3调整因子0.7, 宽松验证L0的计划不应显著少于L3
-    assert len(plan_l0) >= len(plan_l3) * 0.5, "测试9失败: 基础水平对计划长度影响异常"
-    print(f"✓ 测试9通过: 不同水平计划差异 (L0:{len(plan_l0)}周, L3:{len(plan_l3)}周)")
-
-    # 测试10: 输出格式验证
-    text_output = format_plan_output(plan)
-    assert text_output and "AI学习路径规划" in text_output, "测试10失败: 文本输出格式错误"
-    json_output = generate_json_output(plan)
-    assert json_output and json.loads(json_output), "测试10失败: JSON输出格式错误"
-    print("✓ 测试10通过: 输出格式验证")
-
-    # 测试11: 计划连续性验证
-    week_numbers = [item["week"] for item in plan]
-    assert week_numbers == sorted(week_numbers), "测试11失败: 周数未按顺序排列"
-    assert len(set(week_numbers)) == len(week_numbers), "测试11失败: 周数存在重复"
-    print("✓ 测试11通过: 计划周数连续性")
-
-    # 测试12: 资源引用验证
-    for item in plan:
-        for res in item["resources"]:
-            assert "type" in res and "name" in res, "测试12失败: 资源格式错误"
-    print("✓ 测试12通过: 资源引用完整性")
-
-    print("\n" + "=" * 40)
-    print("所有自检测试通过！")
-    print("=" * 40)
-    return True
-
-
-# ============================================================
-# 主程序入口
-# ============================================================
-
-def main():
-    """主函数"""
-    parser = argparse.ArgumentParser(
-        description="AI学习路径规划器 - 根据基础与目标生成分周学习计划",
-        epilog="示例: python main.py --level L1 --goal career --weeks 8"
-    )
-    parser.add_argument("--level", choices=["L0", "L1", "L2", "L3"],
-                        help="基础水平: L0(零基础), L1(入门), L2(进阶), L3(高级)")
-    parser.add_argument("--goal", choices=["career", "research", "project", "teaching"],
-                        help="学习目标: career(就业), research(科研), project(项目), teaching(培训)")
-    parser.add_argument("--weeks", type=int, default=8,
-                        help="计划周数 (1-52, 默认8)")
-    parser.add_argument("--format", choices=["text", "json"], default="text",
-                        help="输出格式: text(文本) 或 json(JSON)")
-    parser.add_argument("--selftest", action="store_true",
-                        help="运行内置自检测试")
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        try:
-            success = run_selftest()
-            sys.exit(0 if success else 1)
-        except AssertionError as e:
-            print(f"自检失败: {e}")
-            sys.exit(1)
-        except Exception as e:
-            print(f"自检异常: {e}")
-            sys.exit(1)
-
-    # 正常模式：检查参数
-    if not args.level or not args.goal:
-        print(f"错误码 E001: {ERROR_CODES['E001']}")
-        print("请使用 --level 指定基础水平，--goal 指定学习目标")
-        parser.print_help()
-        sys.exit(1)
-
-    # 生成计划
-    plan, err_code = generate_weekly_plan(args.level, args.goal, args.weeks)
-
-    if err_code != "OK":
-        print(f"错误码 {err_code}: {ERROR_CODES.get(err_code, ERROR_CODES['E010'])}")
-        sys.exit(1)
-
-    # 输出结果
-    if args.format == "json":
-        output = generate_json_output(plan)
-        if not output:
-            print(f"错误码 E007: {ERROR_CODES['E007']}")
-            sys.exit(1)
-        print(output)
-    else:
-        output = format_plan_output(plan)
-        if not output:
-            print(f"错误码 E006: {ERROR_CODES['E006']}")
-            sys.exit(1)
-        print(output)
-
-    return 0
-
-
-if __name__ == "__main__":
-    try:
-        sys.exit(main())
-    except KeyboardInterrupt:
-        print("\n用户中断操作")
-        sys.exit(130)
-    except Exception as e:
-        print(f"错误码 E010: {ERROR_CODES['E010']} - {str(e)}")
-        sys.exit(1)
+            current
