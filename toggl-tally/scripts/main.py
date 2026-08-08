@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 toggl-tally 工时数据整理技能 - 独立实现脚本
-版本: 1.0.2 (clean-room 实现)
+版本: 1.0.5 (clean-room 实现)
 """
 
 import json

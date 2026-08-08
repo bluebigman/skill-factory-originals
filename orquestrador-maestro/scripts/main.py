@@ -110,6 +110,9 @@ def extract_fields(text: str) -> Dict[str, Any]:
         except re.error:
             # 正则表达式错误，跳过该字段
             continue
+        except IndexError:
+            # 分组不存在，跳过
+            continue
     return fields
 
 

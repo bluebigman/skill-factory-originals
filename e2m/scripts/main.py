@@ -395,6 +395,25 @@ def run_selftest() -> int:
         assert "自检文本内容" in result, "完整流程：文本处理失败"
         print("[PASS] 完整流程（文本）")
 
+        # 8. 完整流程自检（URL 输入）
+        result = process_input(input_url="https://example.com")
+        assert "网页内容" in result, "完整流程：URL 处理失败"
+        assert "https://example.com" in result, "完整流程：URL 来源缺失"
+        print("[PASS] 完整流程（URL）")
+
+        # 9. 完整流程自检（CSV 输入）
+        result = process_input(input_text="姓名,年龄\n张三,25")
+        assert "姓名" in result and "张三" in result, "完整流程：CSV 处理失败"
+        print("[PASS] 完整流程（CSV 文本）")
+
+        # 10. 错误路径自检
+        try:
+            process_input(input_text="")
+            assert False, "错误路径：空输入未报错"
+        except RuntimeError as exc:
+            assert "E001" in str(exc), "错误路径：错误码不正确"
+        print("[PASS] 错误路径（空输入）")
+
         print("\n全部自检通过！")
         return 0
     except AssertionError as exc:

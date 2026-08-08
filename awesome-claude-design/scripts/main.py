@@ -265,60 +265,84 @@ def run_selftest() -> int:
 
     # 测试 1: 输入校验
     print("[自检] 测试输入校验...")
-    assert validate_input(None) == "E001", "空输入应返回 E001"
-    assert validate_input("") == "E001", "空字符串应返回 E001"
-    assert validate_input("  ") == "E001", "空白字符串应返回 E001"
-    assert validate_input({"a": 1}) is None, "非空字典应通过校验"
-    assert validate_input("hello") is None, "非空字符串应通过校验"
-    print("[自检] 输入校验测试通过 ✓")
+    try:
+        assert validate_input(None) == "E001", "空输入应返回 E001"
+        assert validate_input("") == "E001", "空字符串应返回 E001"
+        assert validate_input("  ") == "E001", "空白字符串应返回 E001"
+        assert validate_input({"a": 1}) is None, "非空字典应通过校验"
+        assert validate_input("hello") is None, "非空字符串应通过校验"
+        print("[自检] 输入校验测试通过 ✓")
+    except AssertionError as e:
+        print(f"[自检] 输入校验测试失败 ✗: {e}")
+        failures += 1
 
     # 测试 2: 字段提取与置信度
     print("[自检] 测试字段提取与置信度...")
-    fields, conf = extract_key_fields("示例文本")
-    assert fields["type"] == "text", "字符串应识别为 text 类型"
-    assert 0.0 <= conf <= 1.0, "置信度应在 [0,1] 区间"
+    try:
+        fields, conf = extract_key_fields("示例文本")
+        assert fields["type"] == "text", "字符串应识别为 text 类型"
+        assert 0.0 <= conf <= 1.0, "置信度应在 [0,1] 区间"
 
-    fields2, conf2 = extract_key_fields({"id": "x", "type": "custom", "content": "内容"})
-    assert fields2["id"] == "x", "应保留原始 id"
-    assert fields2["type"] == "custom", "应保留原始 type"
-    assert 0.0 <= conf2 <= 1.0, "置信度应在 [0,1] 区间"
-    print("[自检] 字段提取测试通过 ✓")
+        fields2, conf2 = extract_key_fields({"id": "x", "type": "custom", "content": "内容"})
+        assert fields2["id"] == "x", "应保留原始 id"
+        assert fields2["type"] == "custom", "应保留原始 type"
+        assert 0.0 <= conf2 <= 1.0, "置信度应在 [0,1] 区间"
+        print("[自检] 字段提取测试通过 ✓")
+    except AssertionError as e:
+        print(f"[自检] 字段提取测试失败 ✗: {e}")
+        failures += 1
 
     # 测试 3: 置信度评估
     print("[自检] 测试置信度评估...")
-    assert assess_confidence(0.95) == "直接输出", ">=0.9 应为直接输出"
-    assert assess_confidence(0.87) == "建议复核", "0.85-0.9 应为建议复核"
-    assert assess_confidence(0.5) == "[需核实]", "<0.85 应为需核实"
-    print("[自检] 置信度评估测试通过 ✓")
+    try:
+        assert assess_confidence(0.95) == "直接输出", ">=0.9 应为直接输出"
+        assert assess_confidence(0.87) == "建议复核", "0.85-0.9 应为建议复核"
+        assert assess_confidence(0.5) == "[需核实]", "<0.85 应为需核实"
+        print("[自检] 置信度评估测试通过 ✓")
+    except AssertionError as e:
+        print(f"[自检] 置信度评估测试失败 ✗: {e}")
+        failures += 1
 
     # 测试 4: 完整处理流程（使用内置样例）
     print("[自检] 测试完整处理流程...")
-    for sample in SELFTEST_SAMPLES:
-        output, status = process_input(sample)
-        assert status == "OK", f"样例处理应成功，实际状态: {status}"
-        assert output is not None and len(output) > 0, "输出不应为空"
-        # 验证输出可解析为 JSON
-        parsed = json.loads(output)
-        assert "content" in parsed, "输出应包含 content 字段"
-        assert "confidence" in parsed, "输出应包含 confidence 字段"
-        print(f"  样例 {sample['id']} 处理成功 ✓")
+    try:
+        for sample in SELFTEST_SAMPLES:
+            output, status = process_input(sample)
+            assert status == "OK", f"样例处理应成功，实际状态: {status}"
+            assert output is not None and len(output) > 0, "输出不应为空"
+            # 验证输出可解析为 JSON
+            parsed = json.loads(output)
+            assert "content" in parsed, "输出应包含 content 字段"
+            assert "confidence" in parsed, "输出应包含 confidence 字段"
+            print(f"  样例 {sample['id']} 处理成功 ✓")
+    except AssertionError as e:
+        print(f"[自检] 完整处理流程测试失败 ✗: {e}")
+        failures += 1
 
     # 测试 5: 批量处理
     print("[自检] 测试批量处理...")
-    batch_output, batch_status = batch_process(["项1", "项2", "项3"])
-    assert batch_status == "OK", "批量处理应成功"
-    parsed_batch = json.loads(batch_output)
-    assert parsed_batch["batch_size"] == 3, "批量大小应为 3"
-    assert parsed_batch["success_count"] == 3, "全部应成功"
-    print("[自检] 批量处理测试通过 ✓")
+    try:
+        batch_output, batch_status = batch_process(["项1", "项2", "项3"])
+        assert batch_status == "OK", "批量处理应成功"
+        parsed_batch = json.loads(batch_output)
+        assert parsed_batch["batch_size"] == 3, "批量大小应为 3"
+        assert parsed_batch["success_count"] == 3, "全部应成功"
+        print("[自检] 批量处理测试通过 ✓")
+    except AssertionError as e:
+        print(f"[自检] 批量处理测试失败 ✗: {e}")
+        failures += 1
 
     # 测试 6: 错误处理
     print("[自检] 测试错误处理...")
-    _, err = process_input(None)
-    assert err == "E001", "空输入应返回 E001"
-    _, err2 = process_input("")
-    assert err2 == "E001", "空字符串应返回 E001"
-    print("[自检] 错误处理测试通过 ✓")
+    try:
+        _, err = process_input(None)
+        assert err == "E001", "空输入应返回 E001"
+        _, err2 = process_input("")
+        assert err2 == "E001", "空字符串应返回 E001"
+        print("[自检] 错误处理测试通过 ✓")
+    except AssertionError as e:
+        print(f"[自检] 错误处理测试失败 ✗: {e}")
+        failures += 1
 
     if failures == 0:
         print("[自检] 全部测试通过 ✓✓✓")

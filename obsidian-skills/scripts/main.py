@@ -247,13 +247,6 @@ def generate_note(
 
     confidence = max(0.3, min(1.0, confidence))
 
-    # 置信度标注
-    if confidence < CONFIDENCE_THRESHOLD:
-        if not title:
-            pass  # 标题已提取，无需标注
-        if not tags:
-            pass  # 标签已标注
-
     note = NoteData(
         title=actual_title,
         content=text.strip(),
@@ -289,6 +282,12 @@ def render_template(note: NoteData, template: Optional[str] = None) -> str:
     # 处理额外的元数据字段
     for key, value in note.extra.items():
         result = result.replace(f"{{{key}}}", str(value))
+
+    # 处理未替换的占位符（标注需核实）
+    unresolved = re.findall(r"\{([^}]+)\}", result)
+    for field in unresolved:
+        if field not in replacements and field not in note.extra:
+            result = result.replace(f"{{{field}}}", f"[需核实:{field}]")
 
     return result
 
@@ -499,6 +498,65 @@ def run_selftest() -> bool:
     note = generate_note(short_text)
     assert note.confidence < 1.0, "短内容置信度应小于 1.0"
     print(f"  通过 ✓ 置信度: {note.confidence:.2f}")
+
+    # 测试 11: 模板占位符需核实标注
+    print("\n[测试 11] 模板占位符需核实标注")
+    custom_template = "标题: {title}\n未知字段: {unknown_field}\n内容: {content}"
+    note = generate_note("测试内容", title="测试", source="测试")
+    rendered = render_template(note, custom_template)
+    assert "[需核实:unknown_field]" in rendered, "未标注需核实字段"
+    print(f"  通过 ✓ 需核实标注: {rendered}")
+
+    # 测试 12: 文件处理（实际文件）
+    print("\n[测试 12] 文件处理（实际文件）")
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".md", delete=False, encoding="utf-8") as f:
+        f.write(sample_text)
+        temp_md_path = f.name
+
+    try:
+        result = process_file(temp_md_path, outdir=None)
+        assert result, "文件处理失败"
+        print(f"  通过 ✓ 文件处理成功")
+    finally:
+        Path(temp_md_path).unlink(missing_ok=True)
+
+    # 测试 13: 输出目录写入
+    print("\n[测试 13] 输出目录写入")
+    with tempfile.TemporaryDirectory() as tmpdir:
+        result = process_text(sample_text, title="目录测试", source="测试", outdir=tmpdir)
+        assert Path(result).exists(), f"输出文件不存在: {result}"
+        assert Path(result).suffix == ".md", f"输出文件应为 .md: {result}"
+        print(f"  通过 ✓ 输出文件: {result}")
+
+    # 测试 14: 不支持的文件类型
+    print("\n[测试 14] 不支持的文件类型")
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".xyz", delete=False, encoding="utf-8") as f:
+        f.write("test")
+        temp_xyz_path = f.name
+
+    try:
+        try:
+            process_file(temp_xyz_path)
+            assert False, "应抛出 E009"
+        except SkillError as exc:
+            assert exc.code == "E009", f"错误码应为 E009: {exc.code}"
+            print(f"  通过 ✓ 正确抛出 E009: {exc.message}")
+    finally:
+        Path(temp_xyz_path).unlink(missing_ok=True)
+
+    # 测试 15: 模板文件加载
+    print("\n[测试 15] 模板文件加载")
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".tpl", delete=False, encoding="utf-8") as f:
+        f.write("自定义模板: {title} | {content}")
+        temp_tpl_path = f.name
+
+    try:
+        template = Path(temp_tpl_path).read_text(encoding="utf-8")
+        result = process_text("测试内容", title="模板测试", source="测试", template=template)
+        assert "自定义模板: 模板测试 | 测试内容" in result, f"模板渲染失败: {result}"
+        print(f"  通过 ✓ 模板渲染成功")
+    finally:
+        Path(temp_tpl_path).unlink(missing_ok=True)
 
     print("\n" + "=" * 60)
     print("✅ 所有自检通过！")

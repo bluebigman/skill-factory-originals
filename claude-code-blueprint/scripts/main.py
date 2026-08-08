@@ -502,7 +502,7 @@ def run_selftest() -> int:
         failures += 1
         print(f"  失败: {str(e)}")
 
-    # 测试7: 错误处理
+    # 测试7: 错误处理 - 空输入应返回E001
     print("\n[测试7] 错误处理")
     try:
         process_input(input_data="")
@@ -511,6 +511,22 @@ def run_selftest() -> int:
     except BlueprintError as e:
         if e.code == "E001":
             print("  通过: 空输入正确报错")
+        else:
+            failures += 1
+            print(f"  失败: 错误码不正确: {e.code}")
+    except Exception as e:
+        failures += 1
+        print(f"  失败: {str(e)}")
+
+    # 测试8: 多输入源错误
+    print("\n[测试8] 多输入源错误")
+    try:
+        process_input(input_data="测试", filepath="test.txt")
+        print("  失败: 多输入源应触发错误")
+        failures += 1
+    except BlueprintError as e:
+        if e.code == "E009":
+            print("  通过: 多输入源正确报错")
         else:
             failures += 1
             print(f"  失败: 错误码不正确: {e.code}")

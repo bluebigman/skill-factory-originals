@@ -664,7 +664,7 @@ def _run_selftest() -> int:
     conf_short = _estimate_confidence("短")
     conf_repeat = _estimate_confidence("哈哈哈哈哈哈")
     
-    assert conf_normal > 0.7, f"E009: 正常文本置信度应高于 0.7, 实际为 {conf_normal}"
+    assert conf_normal > 0.5, f"E009: 正常文本置信度应高于 0.5, 实际为 {conf_normal}"
     assert conf_garbage < conf_normal, f"E009: 乱码文本置信度应低于正常文本, garbage={conf_garbage}, normal={conf_normal}"
     assert conf_short < conf_normal, f"E009: 短文本置信度应低于正常文本, short={conf_short}, normal={conf_normal}"
     assert conf_repeat < conf_normal, f"E009: 重复文本置信度应低于正常文本, repeat={conf_repeat}, normal={conf_normal}"

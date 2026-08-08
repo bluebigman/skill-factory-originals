@@ -23,7 +23,7 @@ from typing import Any, Dict, List, Optional, Tuple
 # ---------------------------------------------------------------------------
 SKILL_NAME = "marketingskills"
 SKILL_VERSION = "1.0.0"
-SKILL_DISPLAY_NAME = "未命名工具"
+SKILL_DISPLAY_NAME = "营销技能工具"
 
 # 置信度阈值
 HIGH_CONFIDENCE = 0.90

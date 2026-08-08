@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 laravel-dynamic-report-generator 的独立实现脚本
-版本: 1.0.2 (clean-room 重写)
+版本: 1.0.3 (clean-room 重写)
 仅依据功能规格实现，不包含任何既有代码。
 """
 
@@ -492,6 +492,43 @@ def _selftest():
         assert False, "应抛出维度不存在的错误"
     except RuntimeError as e:
         assert "E003" in str(e), "错误码应为E003"
+    print("  通过 ✓")
+
+    # --- 测试7: 空数据错误处理 ---
+    print("测试7: 空数据错误处理...")
+    try:
+        generate_report(data=[], dimensions=["category"], measures=[{"field": "amount", "agg": "sum"}])
+        assert False, "应抛出数据为空的错误"
+    except RuntimeError as e:
+        assert "E008" in str(e), "错误码应为E008"
+    print("  通过 ✓")
+
+    # --- 测试8: 排序功能 ---
+    print("测试8: 排序功能...")
+    sorted_report = generate_report(
+        data=sample_data,
+        dimensions=["region"],
+        measures=[{"field": "amount", "agg": "sum", "alias": "total"}],
+        sort_by="total",
+        sort_order="asc",
+    )
+    totals = [r["total"] for r in sorted_report["rows"]]
+    assert totals == sorted(totals), "应按升序排序"
+    print("  通过 ✓")
+
+    # --- 测试9: 折线图数据生成 ---
+    print("测试9: 折线图数据生成...")
+    line_chart = generate_chart_data(report, chart_type="line")
+    assert line_chart["type"] == "line", "图表类型应为line"
+    assert len(line_chart["labels"]) >= 1, "图表标签应大于0"
+    print("  通过 ✓")
+
+    # --- 测试10: 饼图数据生成 ---
+    print("测试10: 饼图数据生成...")
+    pie_chart = generate_chart_data(report, chart_type="pie")
+    assert pie_chart["type"] == "pie", "图表类型应为pie"
+    assert len(pie_chart["labels"]) >= 1, "图表标签应大于0"
+    assert len(pie_chart["datasets"]) == 1, "饼图应只有一个数据集"
     print("  通过 ✓")
 
     print("\n全部自检通过！ ✅")

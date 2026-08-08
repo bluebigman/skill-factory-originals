@@ -177,8 +177,9 @@ def read_input(path: str) -> str:
 def write_output(data, path: str) -> None:
     """将数据以 JSON 格式写入文件，失败时抛出 E002/E004。"""
     p = Path(path)
-    p.parent.mkdir(parents=True, exist_ok=True)  # 自动创建父目录
-    if not p.parent.exists():
+    try:
+        p.parent.mkdir(parents=True, exist_ok=True)
+    except Exception:
         err_exit("E002", f"无法创建目录: {p.parent}")
     try:
         json_str = json.dumps(data, ensure_ascii=False, indent=2)

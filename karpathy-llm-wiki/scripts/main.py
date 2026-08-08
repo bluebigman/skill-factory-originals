@@ -231,11 +231,11 @@ def parse_text_to_entries(text: str, title: Optional[str] = None) -> List[Knowle
 
     按段落切分，每段生成一个条目；若文本较短则整体生成一个条目。
     """
-    if not text or not text.strip():
-        raise SkillError("E001", "输入文本为空")
-
     if not isinstance(text, str):
         raise SkillError("E002", "输入必须是字符串")
+
+    if not text or not text.strip():
+        raise SkillError("E001", "输入文本为空")
 
     # 按空行切分为段落
     paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]

@@ -119,11 +119,17 @@ def parse_paper_text(text: str) -> PaperInfo:
     # 摘要：常见模式 "摘要" 或 "abstract"
     for i, line in enumerate(lines):
         lower = line.lower()
-        if lower.startswith(("摘要", "abstract")):
+        # 支持 "摘要:" 或 "摘要：" 或 "摘要" 单独一行
+        if lower.startswith("摘要") or lower.startswith("abstract"):
+            # 如果该行本身包含内容（如 "摘要: xxx"），则提取该行内容
+            if ":" in line or "：" in line:
+                raw = re.sub(r"^(摘要|abstract)\s*[:：]?\s*", "", line, flags=re.I)
+                abstract_lines = [raw] if raw.strip() else []
+            else:
+                abstract_lines = []
             # 收集后续行直到遇到下一个常见章节
-            abstract_lines = []
             for j in range(i + 1, min(i + 30, len(lines))):
-                if re.match(r"^(关键词|keywords|引言|introduction|方法|method|结论|conclusion)", lines[j], re.I):
+                if re.match(r"^(关键词|keywords|引言|introduction|方法|method|结论|conclusion|实验|result|experiment)", lines[j], re.I):
                     break
                 abstract_lines.append(lines[j])
             paper.abstract = " ".join(abstract_lines)[:2000]

@@ -298,6 +298,7 @@ def run_selftest() -> bool:
     assert "orders" in result2["table_name"].lower(), "测试2失败: 表名解析错误"
     assert result2["field_count"] >= 4, f"测试2失败: 字段数异常 ({result2['field_count']})"
     assert "Boolean" in result2["schema"] or "boolean" in result2["schema"].lower(), "测试2失败: 布尔类型未正确生成"
+    # 修复：检查 Float 类型是否存在于 schema 中（包括大小写）
     assert "Float" in result2["schema"] or "float" in result2["schema"].lower(), "测试2失败: 浮点类型未正确生成"
     print(f"  ✓ 测试2通过: 复杂表（含约束和多类型）")
 

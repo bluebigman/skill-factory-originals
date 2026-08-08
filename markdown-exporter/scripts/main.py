@@ -19,7 +19,8 @@ markdown-exporter 技能的全新独立实现（clean-room）。
 import argparse
 import sys
 import re
-from typing import Any, Dict, List, Optional, Tuple
+import json
+from typing import Any, Dict, List, Optional
 
 
 # ---------------------------------------------------------------------------
@@ -90,7 +91,6 @@ def parse_input(raw: str) -> List[str]:
     # 尝试 JSON 解析
     if text.startswith("[") and text.endswith("]"):
         try:
-            import json
             data = json.loads(text)
             if isinstance(data, list):
                 items = [str(x) for x in data if str(x).strip()]
@@ -163,4 +163,4 @@ def process_item(raw_item: str, source: str = "user") -> ParsedItem:
     item.keywords = extract_keywords(item.content)
     item.confidence = calculate_confidence(item.content)
     item.meta["length"] = len(item.content)
-    item.meta["has_code"] = "
+    item.meta["has_code"] = bool(re.search(r"

@@ -37,6 +37,7 @@ import os
 import sys
 import tempfile
 import urllib.request
+import urllib.parse
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -236,13 +237,14 @@ def recommend_chart_type(
 
     # 简单字段类型判断：尝试将第一列数据转为数值
     numeric_count = 0
-    for row in data[:50]:  # 抽样前50行判断
+    sample_size = min(50, len(data))
+    for row in data[:sample_size]:
         try:
             float(row[0])
             numeric_count += 1
         except (ValueError, IndexError):
             pass
-    first_col_numeric = numeric_count > max(1, len(data[:50]) * 0.5)
+    first_col_numeric = numeric_count > max(1, sample_size * 0.5)
 
     # 启发式推荐规则
     if n_cols == 2 and first_col_numeric:

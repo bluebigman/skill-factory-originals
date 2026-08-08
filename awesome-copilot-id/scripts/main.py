@@ -73,6 +73,8 @@ def _detect_type(data: Any) -> str:
         return "text"
     if isinstance(data, (dict, list)):
         return "json"
+    if isinstance(data, (int, float, bool)):
+        return "text"
     return "unknown"
 
 
@@ -295,7 +297,10 @@ def parse_single(data: Any) -> Dict[str, Any]:
     elif data_type == "csv":
         parsed = _parse_csv(data)
     elif data_type == "text":
-        parsed = {"content": data}
+        if isinstance(data, (int, float, bool)):
+            parsed = {"content": str(data)}
+        else:
+            parsed = {"content": data}
     else:
         raise SkillError("E002", f"不支持的数据类型: {type(data).__name__}")
 

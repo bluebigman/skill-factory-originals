@@ -15,8 +15,8 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+from datetime import datetime, timedelta
+from typing import Any, Dict, List, Optional
 
 
 # ============================================================
@@ -113,9 +113,9 @@ def extract_date(text: str) -> Optional[str]:
             if raw in ("今天", "今日"):
                 return datetime.now().strftime("%Y-%m-%d")
             if raw in ("昨天", "昨日"):
-                return (datetime.now().replace(day=datetime.now().day - 1)).strftime("%Y-%m-%d")
+                return (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
             if raw == "前天":
-                return (datetime.now().replace(day=datetime.now().day - 2)).strftime("%Y-%m-%d")
+                return (datetime.now() - timedelta(days=2)).strftime("%Y-%m-%d")
             # 处理绝对日期
             try:
                 raw_clean = raw.replace("年", "-").replace("月", "-").replace("日", "").replace("/", "-")

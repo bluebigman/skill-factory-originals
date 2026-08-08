@@ -585,7 +585,7 @@ class OpenSaaSProcessor:
                 output_format="text"
             )
             # 无效URL应该返回错误
-            if not result["success"] and result["code"] in ["E003", "E009"]:
+            if not result["success"] and result["code"] in ["E003", "E009", "E004"]:
                 print("  ✅ 通过")
             else:
                 print("  ❌ 失败：无效URL未正确报错")

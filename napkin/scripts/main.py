@@ -301,4 +301,213 @@ def export_records(export_format="md", base_dir=None, tag=None):
             lines.append("")
             lines.append("### 错误信息")
             lines.append("")
-            lines.append("
+            lines.append(rec.get("error", ""))
+            lines.append("")
+            lines.append("### 解决方案")
+            lines.append("")
+            lines.append(rec.get("solution", ""))
+            lines.append("")
+            lines.append("---")
+            lines.append("")
+        return "\n".join(lines)
+    else:  # txt
+        lines = ["napkin 项目记忆导出", "=" * 40, ""]
+        lines.append("导出时间: %s" % datetime.now().strftime(TIME_FORMAT))
+        lines.append("记录总数: %d" % len(records))
+        lines.append("")
+        for idx, rec in enumerate(records, 1):
+            lines.append("[%d] %s" % (idx, rec.get("title", "未命名")))
+            lines.append("    ID: %s" % rec.get("id", ""))
+            lines.append("    状态: %s" % rec.get("status", "active"))
+            lines.append("    创建: %s" % rec.get("created_at", ""))
+            lines.append("    更新: %s" % rec.get("updated_at", ""))
+            lines.append("    标签: %s" % ", ".join(rec.get("tags", [])))
+            lines.append("    错误: %s" % rec.get("error", ""))
+            lines.append("    解决: %s" % rec.get("solution", ""))
+            lines.append("")
+        return "\n".join(lines)
+
+
+def list_records(base_dir=None, tag=None):
+    """列出记录（简要信息）。"""
+    records = search_records(tag=tag, base_dir=base_dir)
+    return records
+
+
+# ---------------------------------------------------------------------------
+# 自检
+# ---------------------------------------------------------------------------
+
+
+def _selftest():
+    """离线自检：验证核心逻辑。"""
+    try:
+        # 使用临时目录
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # 测试添加
+            ids = []
+            for sample in SELFTEST_SAMPLES:
+                rid = add_record(
+                    title=sample["title"],
+                    error=sample["error"],
+                    solution=sample["solution"],
+                    tags=sample["tags"],
+                    base_dir=tmpdir,
+                )
+                ids.append(rid)
+
+            # 验证记录数
+            records = _load_records(tmpdir)
+            assert len(records) == 3, "记录数应为3"
+
+            # 测试搜索
+            results = search_records(keyword="连接池", base_dir=tmpdir)
+            assert len(results) == 1, "关键词搜索应返回1条"
+            assert results[0]["title"] == "数据库连接池耗尽"
+
+            results = search_records(tag="auth", base_dir=tmpdir)
+            assert len(results) == 1, "标签搜索应返回1条"
+            assert results[0]["title"] == "权限校验失败"
+
+            # 测试更新
+            update_record(ids[0], solution="更新后的解决方案", base_dir=tmpdir)
+            records = _load_records(tmpdir)
+            assert records[0]["solution"] == "更新后的解决方案", "解决方案应更新"
+
+            # 测试删除
+            delete_record(ids[1], base_dir=tmpdir)
+            records = _load_records(tmpdir)
+            assert len(records) == 2, "删除后应剩2条"
+
+            # 测试导出
+            md_content = export_records("md", base_dir=tmpdir)
+            assert "# napkin 项目记忆导出" in md_content, "MD导出应包含标题"
+            txt_content = export_records("txt", base_dir=tmpdir)
+            assert "napkin 项目记忆导出" in txt_content, "TXT导出应包含标题"
+
+            # 测试标签校验
+            try:
+                _validate_tags(["bad tag!"])
+                raise AssertionError("非法标签应报错")
+            except RuntimeError as e:
+                assert "E006" in str(e), "应返回E006错误"
+
+            # 测试时间解析
+            t = _parse_time("7d")
+            assert t, "相对时间解析失败"
+            t = _parse_time("2024-01-01 00:00:00")
+            assert t == "2024-01-01 00:00:00", "绝对时间解析失败"
+
+        print("自检通过: 所有核心逻辑验证成功")
+        return 0
+    except Exception as exc:
+        print("自检失败: %s" % exc, file=sys.stderr)
+        return 1
+
+
+# ---------------------------------------------------------------------------
+# CLI 入口
+# ---------------------------------------------------------------------------
+
+
+def main():
+    parser = argparse.ArgumentParser(description="napkin - 项目记忆与错误备忘工具")
+    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    subparsers = parser.add_subparsers(dest="command", help="子命令")
+
+    # add 命令
+    add_parser = subparsers.add_parser("add", help="添加记录")
+    add_parser.add_argument("--title", required=True, help="标题")
+    add_parser.add_argument("--error", required=True, help="错误信息")
+    add_parser.add_argument("--solution", required=True, help="解决方案")
+    add_parser.add_argument("--tag", action="append", help="标签（可多次指定）")
+    add_parser.add_argument("--created-at", help="创建时间（YYYY-MM-DD HH:MM:SS 或相对时间如 7d）")
+
+    # search 命令
+    search_parser = subparsers.add_parser("search", help="搜索记录")
+    search_parser.add_argument("--keyword", help="关键词")
+    search_parser.add_argument("--tag", help="标签")
+
+    # list 命令
+    list_parser = subparsers.add_parser("list", help="列出记录")
+    list_parser.add_argument("--tag", help="按标签过滤")
+
+    # update 命令
+    update_parser = subparsers.add_parser("update", help="更新记录")
+    update_parser.add_argument("--id", required=True, help="记录ID")
+    update_parser.add_argument("--solution", help="新的解决方案")
+    update_parser.add_argument("--status", choices=["active", "expired", "archived"], help="新状态")
+    update_parser.add_argument("--tag", action="append", help="新标签（可多次指定）")
+
+    # delete 命令
+    delete_parser = subparsers.add_parser("delete", help="删除记录")
+    delete_parser.add_argument("--id", required=True, help="记录ID")
+
+    # export 命令
+    export_parser = subparsers.add_parser("export", help="导出记录")
+    export_parser.add_argument("--format", choices=list(VALID_EXPORT_FORMATS), default="md", help="导出格式")
+    export_parser.add_argument("--tag", help="按标签过滤")
+
+    args = parser.parse_args()
+
+    if args.selftest:
+        sys.exit(_selftest())
+
+    if not args.command:
+        parser.print_help()
+        sys.exit(1)
+
+    try:
+        if args.command == "add":
+            rid = add_record(
+                title=args.title,
+                error=args.error,
+                solution=args.solution,
+                tags=args.tag,
+                created_at=args.created_at,
+            )
+            print("记录已添加: %s" % rid)
+
+        elif args.command == "search":
+            results = search_records(keyword=args.keyword, tag=args.tag)
+            if not results:
+                print("未找到匹配记录")
+            else:
+                for rec in results:
+                    print("[%s] %s (%s)" % (rec["id"], rec["title"], ", ".join(rec["tags"])))
+
+        elif args.command == "list":
+            results = list_records(tag=args.tag)
+            if not results:
+                print("暂无记录")
+            else:
+                for rec in results:
+                    print("[%s] %s [%s]" % (rec["id"], rec["title"], rec["status"]))
+
+        elif args.command == "update":
+            update_record(
+                record_id=args.id,
+                solution=args.solution,
+                status=args.status,
+                tags=args.tag,
+            )
+            print("记录已更新: %s" % args.id)
+
+        elif args.command == "delete":
+            delete_record(args.id)
+            print("记录已删除: %s" % args.id)
+
+        elif args.command == "export":
+            content = export_records(export_format=args.format, tag=args.tag)
+            print(content)
+
+        else:
+            raise RuntimeError("E009: 未知命令: %s" % args.command)
+
+    except RuntimeError as exc:
+        print("错误: %s" % exc, file=sys.stderr)
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

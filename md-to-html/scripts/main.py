@@ -45,6 +45,49 @@ class MDToHTMLConverter:
         """
         self.prefix = css_class_prefix
 
+    def _escape(self, text):
+        """转义 HTML 特殊字符"""
+        return html.escape(text, quote=False)
+
+    def _inline(self, text):
+        """处理行内 Markdown 语法（粗体、斜体、行内代码、链接）"""
+        # 转义 HTML 特殊字符（但保留用于标记的字符）
+        text = self._escape(text)
+
+        # 行内代码
+        text = re.sub(r'`([^`]+)`', r'<code>\1</code>', text)
+
+        # 粗体
+        text = re.sub(r'\*\*([^*]+)\*\*', r'<strong>\1</strong>', text)
+
+        # 斜体
+        text = re.sub(r'\*([^*]+)\*', r'<em>\1</em>', text)
+
+        # 链接 [text](url)
+        text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', r'<a href="\2">\1</a>', text)
+
+        return text
+
+    def _handle_heading(self, line):
+        """处理标题行"""
+        match = re.match(r'^(#{1,6})\s+(.*)', line)
+        if match:
+            level = len(match.group(1))
+            content = self._inline(match.group(2).strip())
+            return f'<h{level} class="{self.prefix}-h{level}">{content}</h{level}>'
+        return None
+
+    def _handle_list_item(self, line, list_type):
+        """处理列表项"""
+        if list_type == 'ul':
+            match = re.match(r'^\s*[-*+]\s+(.*)', line)
+        else:
+            match = re.match(r'^\s*\d+\.\s+(.*)', line)
+        if match:
+            content = self._inline(match.group(1).strip())
+            return f'<li class="{self.prefix}-li">{content}</li>'
+        return None
+
     def convert(self, markdown_text):
         """
         将 Markdown 文本转换为 HTML

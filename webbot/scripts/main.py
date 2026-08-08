@@ -185,7 +185,7 @@ def extract_field(text: str, field_name: str, rule: str) -> ExtractResult:
         "date": (r"\b(\d{4}[-/]\d{1,2}[-/]\d{1,2})\b", 1),
         "email": (r"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})", 1),
         "price": (r"([¥￥$€]?\s?\d+(?:\.\d{1,2})?)", 1),
-        "author": (r"(?:作者|作者[:：]\s*)([^\n,，。]+)", 1),
+        "author": (r"(?:作者|作者[:：]\s*|负责人[:：]\s*)([^\n,，。]+)", 1),
     }
 
     if field_name.lower() in builtin_rules:

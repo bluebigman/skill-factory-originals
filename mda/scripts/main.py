@@ -457,6 +457,32 @@ def selftest():
     except Exception as e:
         test_results.append(("URL 识别", False, f"异常: {e}"))
 
+    # 测试 6: 空数据处理
+    try:
+        empty_md = generate_markdown([], title="空列表")
+        assert "无数据" in empty_md
+        test_results.append(("空数据处理", True, "空列表正确输出"))
+    except AssertionError as e:
+        test_results.append(("空数据处理", False, f"断言失败: {e}"))
+
+    # 测试 7: XML 解析（内存中）
+    try:
+        xml_data = """<?xml version="1.0"?>
+        <root>
+            <item id="1">苹果</item>
+            <item id="2">香蕉</item>
+        </root>"""
+        root = ET.fromstring(xml_data)
+        items = root.findall('item')
+        assert len(items) == 2
+        assert items[0].text == "苹果"
+        assert items[1].get("id") == "2"
+        test_results.append(("XML 解析", True, "内存 XML 解析成功"))
+    except AssertionError as e:
+        test_results.append(("XML 解析", False, f"断言失败: {e}"))
+    except Exception as e:
+        test_results.append(("XML 解析", False, f"异常: {e}"))
+
     # 输出测试结果
     print("\n=== MDA 自检报告 ===")
     print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")

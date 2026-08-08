@@ -13,6 +13,7 @@ import argparse
 import json
 import os
 import re
+import struct
 import sys
 import tempfile
 import urllib.request
@@ -54,6 +55,15 @@ def _read_image_info(file_path: str) -> dict:
     读取图片基本信息（不依赖第三方图像库）。
     返回: {"width": int, "height": int, "format": str}
     """
+    # 先检查文件是否存在
+    if not os.path.isfile(file_path):
+        raise OCRError("E001", f"文件不存在: {file_path}")
+
+    # 检查扩展名
+    ext = Path(file_path).suffix.lower()
+    if ext not in SUPPORTED_IMAGE_EXTS:
+        raise OCRError("E002", f"不支持的文件类型: {ext}")
+
     try:
         with open(file_path, "rb") as f:
             header = f.read(32)
@@ -65,7 +75,7 @@ def _read_image_info(file_path: str) -> dict:
         try:
             with open(file_path, "rb") as f:
                 f.seek(16)
-                w, h = struct_unpack(">II", f.read(8))
+                w, h = struct.unpack(">II", f.read(8))
             return {"width": w, "height": h, "format": "png"}
         except Exception:
             return {"width": 0, "height": 0, "format": "png"}
@@ -79,12 +89,6 @@ def _read_image_info(file_path: str) -> dict:
         return {"width": 0, "height": 0, "format": "webp"}
 
     raise OCRError("E002", f"不支持的图片格式: {file_path}")
-
-
-def struct_unpack(fmt: str, data: bytes):
-    """简化版 struct.unpack，避免额外导入"""
-    import struct
-    return struct.unpack(fmt, data)
 
 
 # ---------------------------------------------------------------------------
@@ -333,6 +337,22 @@ def _selftest() -> bool:
     }
     json_str = json.dumps(test_result, ensure_ascii=False)
     assert json_str, "JSON 序列化失败"
+
+    # 7. 测试图片格式校验
+    print("[自检] 测试图片格式校验...")
+    try:
+        _read_image_info("/nonexistent/file.txt")
+        assert False, "应抛出 E002 错误"
+    except OCRError as exc:
+        assert exc.code == "E002", f"预期 E002，实际 {exc.code}"
+
+    # 8. 测试文件读取错误
+    print("[自检] 测试文件读取错误...")
+    try:
+        _read_image_info("/nonexistent/file.jpg")
+        assert False, "应抛出 E001 错误"
+    except OCRError as exc:
+        assert exc.code == "E001", f"预期 E001，实际 {exc.code}"
 
     print("[自检] 所有检查通过 ✔")
     return True

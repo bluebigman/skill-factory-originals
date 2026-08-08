@@ -92,6 +92,7 @@ def md_to_latex(markdown_text: str) -> str:
     latex_lines = []
     i = 0
     in_code_block = False
+    code_buffer = []
     in_table = False
     table_rows = []
     

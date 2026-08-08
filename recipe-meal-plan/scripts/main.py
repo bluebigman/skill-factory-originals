@@ -10,6 +10,7 @@
 
 import argparse
 import json
+import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
@@ -66,6 +67,7 @@ FOOD_DB: Dict[str, Tuple[int, int, int, int, float]] = {
     "青椒":     (22, 1, 5, 0, 3.0),
     "玉米":     (112, 4, 22, 1, 3.0),
     "红薯":     (90, 2, 21, 0, 2.0),
+    "生菜":     (15, 1, 3, 0, 3.0),
 }
 
 
@@ -77,7 +79,7 @@ RECIPE_DB: List[Dict[str, Any]] = [
     {
         "name": "牛奶燕麦粥",
         "meal_type": "早餐",
-        "ingredients": {"燕麦": 50, "牛奶": 250, "香蕉": 1},
+        "ingredients": {"燕麦": 50, "牛奶": 250, "香蕉": 100},
         "tags": ["清淡", "高纤"],
     },
     {
@@ -145,7 +147,6 @@ def _parse_taste_input(taste_str: str) -> List[str]:
     if not taste_str or not taste_str.strip():
         return []
     # 支持逗号、空格、顿号分隔
-    import re
     parts = re.split(r"[,，、\s]+", taste_str.strip())
     return [p for p in parts if p]
 
@@ -227,9 +228,6 @@ def _generate_weekly_plan(
     # 每天三餐
     weekdays = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
     meal_types = ["早餐", "午餐", "晚餐"]
-
-    # 计算每日预算（元/人/天）
-    daily_budget_per_person = budget_per_person
 
     # 存储每日计划
     weekly_plan = []
