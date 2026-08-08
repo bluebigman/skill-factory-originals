@@ -17,6 +17,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from functools import lru_cache
+import concurrent.futures
+from concurrent.futures import ThreadPoolExecutor
 
 try:
     from docx import Document
@@ -287,98 +289,107 @@ def _cached_analyze(text: str) -> Tuple[tuple, tuple]:
     )
     return risk_tuples, ()
 
-def analyze_contract_internal(text: str) -> List[Dict[str, str]]:
-    """分析合同文本，返回风险清单（内部实现）"""
-    risks = []
-    # 记录已匹配的条款位置，避免重复报告
-    matched_positions = set()
+def _analyze_category(category: str, normalized_text: str, matched_positions: set) -> Optional[Dict[str, str]]:
+    """分析单个类别（用于并行化）"""
+    rules = RISK_RULES[category]
     
+    # 检查是否包含该类别的关键词
+    has_keywords = any(kw in normalized_text for kw in rules["keywords"])
+    if not has_keywords:
+        return {
+            "category": category,
+            "level": "中",
+            "title": f"{category}条款缺失",
+            "detail": f"合同未包含{category}相关条款",
+            "suggestion": f"建议补充{category}条款"
+        }
+    
+    # 检查高风险模式（语义判断）
+    high_found = False
+    high_details = []
+    for rule in _COMPILED_RULES[category]['high']:
+        for match in rule['pattern'].finditer(normalized_text):
+            # 检查是否已匹配过该位置
+            pos_key = (category, 'high', rule['id'], match.start())
+            if pos_key in matched_positions:
+                continue
+            # 安全调用check，捕获可能的异常
+            try:
+                if rule['check'](match):
+                    high_found = True
+                    high_details.append(f"{rule['description']}: {match.group(0)[:50]}")
+                    matched_positions.add(pos_key)
+                    break
+            except (IndexError, ValueError) as e:
+                # 正则匹配组不存在或转换失败，跳过该规则
+                print(f"规则 {rule['id']} 匹配异常: {e}")
+                continue
+    
+    if high_found:
+        return {
+            "category": category,
+            "level": "高",
+            "title": f"{category}条款存在高风险",
+            "detail": f"发现高风险表述: {'; '.join(high_details[:3])}",
+            "suggestion": rules["high_risk"][0]["suggestion"]
+        }
+    
+    # 检查中风险模式（语义判断）
+    medium_found = False
+    medium_details = []
+    for rule in _COMPILED_RULES[category]['medium']:
+        for match in rule['pattern'].finditer(normalized_text):
+            # 检查是否已匹配过该位置
+            pos_key = (category, 'medium', rule['id'], match.start())
+            if pos_key in matched_positions:
+                continue
+            # 安全调用check，捕获可能的异常
+            try:
+                if rule['check'](match):
+                    medium_found = True
+                    medium_details.append(f"{rule['description']}: {match.group(0)[:50]}")
+                    matched_positions.add(pos_key)
+                    break
+            except (IndexError, ValueError) as e:
+                # 正则匹配组不存在或转换失败，跳过该规则
+                print(f"规则 {rule['id']} 匹配异常: {e}")
+                continue
+    
+    if medium_found:
+        return {
+            "category": category,
+            "level": "中",
+            "title": f"{category}条款需完善",
+            "detail": f"发现需完善的表述: {'; '.join(medium_details[:3])}",
+            "suggestion": rules["medium_risk"][0]["suggestion"]
+        }
+    
+    # 低风险
+    return {
+        "category": category,
+        "level": "低",
+        "title": f"{category}条款基本合规",
+        "detail": "条款存在但需人工复核",
+        "suggestion": rules["low_risk"][0]["suggestion"]
+    }
+
+def analyze_contract_internal(text: str) -> List[Dict[str, str]]:
+    """分析合同文本，返回风险清单（内部实现，支持并行化）"""
     # 规范化文本
     normalized_text = _normalize_text(text)
     
-    for category, rules in RISK_RULES.items():
-        # 检查是否包含该类别的关键词
-        has_keywords = any(kw in normalized_text for kw in rules["keywords"])
-        if not has_keywords:
-            risks.append({
-                "category": category,
-                "level": "中",
-                "title": f"{category}条款缺失",
-                "detail": f"合同未包含{category}相关条款",
-                "suggestion": f"建议补充{category}条款"
-            })
-            continue
-        
-        # 检查高风险模式（语义判断）
-        high_found = False
-        high_details = []
-        for rule in _COMPILED_RULES[category]['high']:
-            for match in rule['pattern'].finditer(normalized_text):
-                # 检查是否已匹配过该位置
-                pos_key = (category, 'high', rule['id'], match.start())
-                if pos_key in matched_positions:
-                    continue
-                # 安全调用check，捕获可能的异常
-                try:
-                    if rule['check'](match):
-                        high_found = True
-                        high_details.append(f"{rule['description']}: {match.group(0)[:50]}")
-                        matched_positions.add(pos_key)
-                        break
-                except (IndexError, ValueError) as e:
-                    # 正则匹配组不存在或转换失败，跳过该规则
-                    print(f"规则 {rule['id']} 匹配异常: {e}")
-                    continue
-        
-        if high_found:
-            risks.append({
-                "category": category,
-                "level": "高",
-                "title": f"{category}条款存在高风险",
-                "detail": f"发现高风险表述: {'; '.join(high_details[:3])}",
-                "suggestion": rules["high_risk"][0]["suggestion"]
-            })
-            continue
-        
-        # 检查中风险模式（语义判断）
-        medium_found = False
-        medium_details = []
-        for rule in _COMPILED_RULES[category]['medium']:
-            for match in rule['pattern'].finditer(normalized_text):
-                # 检查是否已匹配过该位置
-                pos_key = (category, 'medium', rule['id'], match.start())
-                if pos_key in matched_positions:
-                    continue
-                # 安全调用check，捕获可能的异常
-                try:
-                    if rule['check'](match):
-                        medium_found = True
-                        medium_details.append(f"{rule['description']}: {match.group(0)[:50]}")
-                        matched_positions.add(pos_key)
-                        break
-                except (IndexError, ValueError) as e:
-                    # 正则匹配组不存在或转换失败，跳过该规则
-                    print(f"规则 {rule['id']} 匹配异常: {e}")
-                    continue
-        
-        if medium_found:
-            risks.append({
-                "category": category,
-                "level": "中",
-                "title": f"{category}条款需完善",
-                "detail": f"发现需完善的表述: {'; '.join(medium_details[:3])}",
-                "suggestion": rules["medium_risk"][0]["suggestion"]
-            })
-            continue
-        
-        # 低风险
-        risks.append({
-            "category": category,
-            "level": "低",
-            "title": f"{category}条款基本合规",
-            "detail": "条款存在但需人工复核",
-            "suggestion": rules["low_risk"][0]["suggestion"]
-        })
+    # 使用线程池并行分析各个类别
+    matched_positions = set()
+    with ThreadPoolExecutor(max_workers=4) as executor:
+        futures = [
+            executor.submit(_analyze_category, category, normalized_text, matched_positions)
+            for category in RISK_RULES.keys()
+        ]
+        risks = [f.result() for f in concurrent.futures.as_completed(futures)]
+    
+    # 按类别顺序排序结果
+    category_order = list(RISK_RULES.keys())
+    risks.sort(key=lambda r: category_order.index(r['category']))
     
     return risks
 
@@ -397,52 +408,34 @@ def analyze_contract(text: str) -> List[Dict[str, str]]:
         for r in risk_tuples
     ]
 
+def _extract_docx_zipfile(path: Path) -> str:
+    """使用zipfile降级提取docx文本"""
+    try:
+        with zipfile.ZipFile(path, 'r') as z:
+            # 读取document.xml
+            with z.open('word/document.xml') as f:
+                content = f.read().decode('utf-8')
+            
+            # 提取段落文本
+            import xml.etree.ElementTree as ET
+            ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
+            root = ET.fromstring(content)
+            
+            texts = []
+            for para in root.iter('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}p'):
+                para_text = ''
+                for run in para.iter('{http://schemas.openxmlformats.org/wordprocessingml/2006/main}t'):
+                    if run.text:
+                        para_text += run.text
+                if para_text.strip():
+                    texts.append(para_text.strip())
+            
+            return '\n'.join(texts)
+    except Exception as e:
+        raise ValueError(f"docx文件解析失败: {e}")
+
 def extract_text_from_file(filepath: str) -> str:
     """从文件中提取文本内容，支持txt/md/docx格式，含异常处理和降级策略"""
     path = Path(filepath)
     if not path.exists():
         raise FileNotFoundError(f"文件不存在: {filepath}")
-    
-    # 检查文件大小（限制为50MB）
-    MAX_FILE_SIZE = 50 * 1024 * 1024  # 50MB
-    file_size = path.stat().st_size
-    if file_size > MAX_FILE_SIZE:
-        raise ValueError(f"文件过大（{file_size/1024/1024:.1f}MB），超过50MB限制")
-    
-    suffix = path.suffix.lower()
-    
-    if suffix in ['.txt', '.md']:
-        # 尝试多种编码
-        encodings = ['utf-8', 'gbk', 'gb2312', 'latin-1']
-        for encoding in encodings:
-            try:
-                return path.read_text(encoding=encoding)
-            except (UnicodeDecodeError, UnicodeError):
-                continue
-        raise ValueError(f"文件编码无法识别，请转换为UTF-8或GBK编码")
-    
-    elif suffix == '.docx':
-        # 优先使用python-docx
-        if Document is not None:
-            try:
-                doc = Document(path)
-                texts = [para.text for para in doc.paragraphs if para.text.strip()]
-                
-                # 提取表格文本
-                for table in doc.tables:
-                    for row in table.rows:
-                        row_texts = []
-                        for cell in row.cells:
-                            if cell.text.strip():
-                                row_texts.append(cell.text.strip())
-                        if row_texts:
-                            texts.append(' | '.join(row_texts))
-                
-                return '\n'.join(texts)
-            except Exception as e:
-                # 降级到zipfile提取
-                print(f"python-docx解析失败，尝试降级方案: {e}")
-                try:
-                    return _extract_docx_zipfile(path)
-                except Exception as e2:
-                    raise ValueError(f"docx文件解析失败: {e2}")
