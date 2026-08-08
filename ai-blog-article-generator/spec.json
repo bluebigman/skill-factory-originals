@@ -1,8 +1,8 @@
 {
   "slug": "ai-blog-article-generator",
   "name": "ai-blog-article-generator",
-  "description": "仅供学习与参考用途。使用本。当用户需要写作 内容创作、进行ai blog article generator相关操作时使用本技能，提供规范、可复用的处理流程与输出。",
-  "trigger_words": "- \"SEO文案",
+  "description": "The AI Blog Article Generator is a Python-based tool that utilizes the Cohere API to generate high-quality, SEO-optimize",
+  "trigger_words": "",
   "original_version": "1.0.0",
   "capability_outline": [
     "**能做（5项核心能力）：**",
@@ -18,6 +18,10 @@
     "3. 生成结果，并标注置信度：",
     "1. 将结果整理为约定格式输出",
     "2. 自查：字段完整性、格式正确性、置信度标注",
-    "3. 有疑问时向用户二次确认"
+    "3. 有疑问时向用户二次确认",
+    "- 输入不符合预期 → 返回错误说明与正确的输入格式示例",
+    "1. 收集用户输入并确认格式",
+    "2. 按功能逻辑处理输入内容",
+    "3. 生成结果并校验完整性"
   ]
 }
