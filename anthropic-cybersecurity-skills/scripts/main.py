@@ -638,8 +638,6 @@ def serialize_output(results: List[AnalysisResult], output_format: str, custom_f
             for m in r.mappings:
                 row = {
                     "input_text": r.input_text,
-                    "entity_type": m.framework,  # 简化
-                    "value": m.framework_id,
                     "framework": m.framework,
                     "framework_id": m.framework_id,
                     "framework_name": m.framework_name,

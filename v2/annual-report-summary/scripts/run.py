@@ -201,34 +201,26 @@ def selftest() -> int:
     assert got, "触发匹配失败"
     print("  [OK] 触发器匹配:", got)
 
-    # 测试2: 核心提取逻辑（使用真实数据源）
-    try:
-        real_data = fetch_real_data()
-        assert real_data, "真实数据获取失败"
-        assert 'roe' in real_data, "真实数据缺少ROE"
-        assert 'net_profit_growth' in real_data, "真实数据缺少净利润增长率"
-        print("  [OK] 真实数据源获取:", real_data)
-    except ConnectionError as e:
-        print(f"  [WARN] 真实数据源不可用，使用本地样本验证: {e}")
-        # 使用本地样本作为备选验证
-        test_text = """
-        公司年报显示，2023年度加权平均净资产收益率为15.23%，
-        归属于上市公司股东的净利润增长率为25.67%，
-        营业收入增长率为18.45%，资产负债率为45.67%。
-        """
-        extractor = IndicatorExtractor()
-        results = extractor.extract(test_text)
-        assert 'roe' in results, "ROE 提取失败"
-        assert 'net_profit_growth' in results, "净利润增长率提取失败"
-        assert 'revenue_growth' in results, "营收增长率提取失败"
-        assert 'debt_ratio' in results, "资产负债率提取失败"
-        assert abs(results['roe'] - 15.23) < 0.01, f"ROE 值错误: {results['roe']}"
-        assert abs(results['net_profit_growth'] - 25.67) < 0.01, f"净利润增长率错误: {results['net_profit_growth']}"
-        print("  [OK] 本地样本提取逻辑:", results)
+    # 测试2: 核心提取逻辑（使用本地样本验证，不依赖网络）
+    test_text = """
+    公司年报显示，2023年度加权平均净资产收益率为15.23%，
+    归属于上市公司股东的净利润增长率为25.67%，
+    营业收入增长率为18.45%，资产负债率为45.67%。
+    """
+    extractor = IndicatorExtractor()
+    results = extractor.extract(test_text)
+    assert 'roe' in results, "ROE 提取失败"
+    assert 'net_profit_growth' in results, "净利润增长率提取失败"
+    assert 'revenue_growth' in results, "营收增长率提取失败"
+    assert 'debt_ratio' in results, "资产负债率提取失败"
+    assert abs(results['roe'] - 15.23) < 0.01, f"ROE 值错误: {results['roe']}"
+    assert abs(results['net_profit_growth'] - 25.67) < 0.01, f"净利润增长率错误: {results['net_profit_growth']}"
+    assert abs(results['revenue_growth'] - 18.45) < 0.01, f"营收增长率错误: {results['revenue_growth']}"
+    assert abs(results['debt_ratio'] - 45.67) < 0.01, f"资产负债率错误: {results['debt_ratio']}"
+    print("  [OK] 核心提取逻辑:", results)
 
     # 测试3: 无效数据过滤
     invalid_text = "ROE为abc%，净利润增长率为xyz%"
-    extractor = IndicatorExtractor()
     invalid_results = extractor.extract(invalid_text)
     assert 'roe' not in invalid_results, "无效ROE未被过滤"
     assert 'net_profit_growth' not in invalid_results, "无效净利润增长率未被过滤"
@@ -243,26 +235,17 @@ def selftest() -> int:
 
     # 测试5: 文件提取
     test_file = HERE / "test_annual_report.txt"
-    test_text = """
-    公司年报显示，2023年度加权平均净资产收益率为15.23%，
-    归属于上市公司股东的净利润增长率为25.67%，
-    营业收入增长率为18.45%，资产负债率为45.67%。
-    """
     test_file.write_text(test_text, encoding='utf-8')
     try:
         file_results = extract_from_file(str(test_file))
         assert 'roe' in file_results, "文件提取失败"
+        assert abs(file_results['roe'] - 15.23) < 0.01, f"文件提取ROE值错误: {file_results['roe']}"
         print("  [OK] 文件提取:", file_results)
     finally:
         test_file.unlink(missing_ok=True)
 
-    # 测试6: 主流程调用（通过CLI入口）
+    # 测试6: 主流程调用（通过CLI入口，使用--text参数）
     import subprocess
-    test_text = """
-    公司年报显示，2023年度加权平均净资产收益率为15.23%，
-    归属于上市公司股东的净利润增长率为25.67%，
-    营业收入增长率为18.45%，资产负债率为45.67%。
-    """
     result = subprocess.run(
         [sys.executable, str(__file__), "--text", test_text, "--json"],
         capture_output=True, text=True, timeout=10
@@ -272,7 +255,10 @@ def selftest() -> int:
     assert 'indicators' in output, "主流程输出缺少indicators"
     assert 'roe' in output['indicators'], "主流程输出缺少ROE"
     assert abs(output['indicators']['roe'] - 15.23) < 0.01, f"主流程ROE值错误: {output['indicators']['roe']}"
-    print("  [OK] 主流程CLI调用:", output['indicators'])
+    assert 'timestamp' in output, "主流程输出缺少timestamp"
+    # 验证时间戳格式
+    datetime.fromisoformat(output['timestamp'])
+    print("  [OK] 主流程CLI调用(--text):", output['indicators'])
 
     # 测试7: 文件参数主流程调用
     test_file = HERE / "test_annual_report_cli.txt"
@@ -291,7 +277,7 @@ def selftest() -> int:
     finally:
         test_file.unlink(missing_ok=True)
 
-    # 测试8: 真实数据源调用（如果可用）
+    # 测试8: 真实数据源调用（如果可用，否则跳过）
     try:
         real_data = fetch_real_data()
         assert 'roe' in real_data, "真实数据源ROE缺失"
