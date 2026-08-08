@@ -1,12 +1,11 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: android-media-pack
 name: android-media-pack
-displayName: 媒体播放 迁移集成 调试优化
-description: 面向AI编码助手的AndroidX Media3技能包，覆盖迁移、播放器UI、流媒体、DRM与广告集成。
+displayName: Android媒体开发 播放器集成 ExoPlayer迁移
+description: AndroidX Media3 1.10.1 技能包，覆盖播放器迁移、Compose UI、流媒体与DRM集成。
 version: 1.0.1
+rules_version: cpr-20260808-n152
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/android-media-pack
@@ -14,9 +13,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: media-toolkit-studio
+author: MediaArchitect
 agent_created: true
-trigger_words: ["android-media-pack", "Media3", "ExoPlayer迁移", "Compose播放器", "流媒体播放", "DRM集成", "广告集成"]
+trigger_words: ["android-media-pack", "ExoPlayer迁移", "Media3播放器", "Compose播放器UI", "DRM集成", "流媒体播放"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -33,35 +32,25 @@ trigger_words: ["android-media-pack", "Media3", "ExoPlayer迁移", "Compose播�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# Android Media Pack — Skill 文档
+# Android Media Pack — Media3 1.10.1 技能文档
 
-## 1. 能力边界（一页纸速查卡）
+## 一、能力边界速查卡
 
-### 1.1 能做清单
+本技能面向 Android 应用开发者，聚焦于 AndroidX Media3 1.10.1 的工程落地。以下是能力边界的一页速查：
 
-| 编号 | 能力项 | 说明 | 输入要求 |
-|------|--------|------|----------|
-| C1 | 迁移辅助 | 将 ExoPlayer 2.x 代码迁移到 Media3 1.10.1 | 提供原始代码片段或迁移范围描述 |
-| C2 | Compose 播放器 UI 生成 | 生成基于 Jetpack Compose 的播放器界面代码 | 指定 UI 组件需求（如控制条、手势、全屏） |
-| C3 | 流媒体配置 | 配置 HLS / DASH / SmoothStreaming 播放参数 | 提供流地址与格式类型 |
-| C4 | DRM 集成方案 | 生成 Widevine 等 DRM 方案的接入代码 | 提供 DRM 方案类型与许可证服务器 URL |
-| C5 | 广告集成指引 | 提供 IMA / 自定义广告 Server 的接入步骤 | 指定广告 SDK 版本与广告标签类型 |
+| 维度 | 能做 | 不能做 |
+|------|------|--------|
+| 播放器迁移 | 从 ExoPlayer 2.x 迁移至 Media3 的代码路径梳理、API 映射、Gradle 依赖调整 | 自动重写全部业务代码，不处理自定义渲染器迁移 |
+| UI 构建 | 基于 Compose 的播放器界面搭建、控制器绑定、手势交互 | 不生成完整设计系统，不涉及自定义视图体系 |
+| 流媒体 | HLS/DASH/SmoothStreaming 的配置、自适应码率策略、缓存策略 | 不处理服务端流媒体协议实现 |
+| DRM | Widevine 集成、许可证 URL 配置、会话管理 | 不提供许可证服务器实现，不处理 FairPlay/PlayReady |
+| 广告 | IMA 广告 SDK 对接、广告播放器状态管理 | 不处理广告投放策略与素材制作 |
 
-### 1.2 不能做清单
+**适用对象**：已有 Android 基础、熟悉 Kotlin 与 Gradle、需要快速集成或迁移 Media3 的开发者。
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不执行代码 | 本 Skill 仅生成代码与配置建议，不负责编译、运行或调试 |
-| L2 | 不保证兼容性 | 生成的代码需结合具体项目环境验证，不承诺与所有第三方库版本兼容 |
-| L3 | 不提供安全审计 | 不负责 DRM 密钥管理、网络安全配置的全面审计 |
-| L4 | 不替代官方文档 | 涉及 API 细节变更时，以 AndroidX Media3 官方发布说明为准 |
+**输入要求**：用户需提供项目 Gradle 配置、现有播放器代码片段、或具体集成场景描述。
 
-### 1.3 适用对象
-
-- 正在将 ExoPlayer 2.x 项目迁移到 Media3 的 Android 开发者
-- 需要在 Compose 中快速搭建播放器界面的团队
-- 需要接入流媒体、DRM 或广告 SDK 的移动端工程师
-- AI 编码助手（如 Copilot、Codex 等）作为技能插件调用
+**输出形式**：代码示例、配置片段、迁移对照表、错误排查指引。
 
 
 ## 许可证（License）
@@ -82,61 +71,3 @@ The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
-
-## 前置条件
-
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
