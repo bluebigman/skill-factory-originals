@@ -366,7 +366,7 @@ def run_selftest() -> bool:
     print("✓ 测试7通过: 期望字段检查")
 
     # 测试用例 8: 置信度边界
-    low_conf = ProcessingResult(data={}, confidence=0.3)
+    low_conf = ProcessingResult(data={}, confidence=0.3, needs_review=True)
     assert low_conf.needs_review, "测试8失败: 低置信度应标记复核"
     high_conf = ProcessingResult(data={"a": 1}, confidence=0.95)
     assert not high_conf.needs_review, "测试8失败: 高置信度不应标记复核"

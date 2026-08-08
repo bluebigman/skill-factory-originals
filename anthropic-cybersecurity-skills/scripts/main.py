@@ -42,6 +42,7 @@ import argparse
 import csv
 import io
 import json
+import re
 import sys
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -158,7 +159,6 @@ def extract_entities(text: str) -> List[SecurityEntity]:
         return entities
 
     # 提取 IPv4 地址
-    import re
     ip_pattern = r"\b(?:\d{1,3}\.){3}\d{1,3}\b"
     for match in re.finditer(ip_pattern, text):
         ip = match.group()
@@ -655,7 +655,8 @@ def serialize_output(results: List[AnalysisResult], output_format: str, custom_f
             return ""
 
         output = io.StringIO()
-        writer = csv.DictWriter(output, fieldnames=list(rows[0].keys()))
+        fieldnames = list(rows[0].keys())
+        writer = csv.DictWriter(output, fieldnames=fieldnames)
         writer.writeheader()
         writer.writerows(rows)
         return output.getvalue()
@@ -664,4 +665,157 @@ def serialize_output(results: List[AnalysisResult], output_format: str, custom_f
         lines = ["# 安全分析结果", ""]
         for i, r in enumerate(results, 1):
             lines.append(f"## 输入 #{i}")
-            lines.append(f"
+            lines.append(f"**原始输入**: {r.input_text}")
+            lines.append("")
+            if r.entities:
+                lines.append("### 提取实体")
+                lines.append("")
+                lines.append("| 类型 | 值 | 上下文 |")
+                lines.append("|------|-----|--------|")
+                for e in r.entities:
+                    lines.append(f"| {e.entity_type} | {e.value} | {e.context} |")
+                lines.append("")
+            if r.mappings:
+                lines.append("### 框架映射")
+                lines.append("")
+                lines.append("| 框架 | ID | 名称 | 置信度 | 证据 |")
+                lines.append("|------|----|------|--------|------|")
+                for m in r.mappings:
+                    lines.append(f"| {m.framework} | {m.framework_id} | {m.framework_name} | {m.confidence} | {m.evidence} |")
+                lines.append("")
+            if r.notes:
+                lines.append("### 备注")
+                lines.append("")
+                for note in r.notes:
+                    lines.append(f"- {note}")
+                lines.append("")
+        return "\n".join(lines)
+
+    else:
+        raise ValueError(f"E004: 不支持的输出格式: {output_format}")
+
+
+# ---------------------------------------------------------------------------
+# 命令行入口
+# ---------------------------------------------------------------------------
+
+
+def read_input_file(filepath: str) -> str:
+    """读取输入文件内容。"""
+    try:
+        with open(filepath, "r", encoding="utf-8") as f:
+            return f.read()
+    except FileNotFoundError:
+        raise ValueError("E002: 输入文件无法读取")
+    except Exception as e:
+        raise ValueError(f"E002: 输入文件无法读取: {e}")
+
+
+def run_selftest() -> bool:
+    """运行自测，验证核心功能。"""
+    try:
+        # 测试实体提取
+        text = "检测到来自 192.168.1.100 的钓鱼攻击，使用了恶意软件 ransomware，目标为 example.com"
+        result = analyze_text(text)
+        assert len(result.entities) > 0, "实体提取失败"
+        assert any(e.entity_type == "ip" for e in result.entities), "IP 提取失败"
+        assert any(e.entity_type == "technique" for e in result.entities), "技术关键词提取失败"
+
+        # 测试框架映射
+        assert len(result.mappings) > 0, "框架映射失败"
+        assert all(m.framework in SUPPORTED_FRAMEWORKS for m in result.mappings), "框架名称不合法"
+        assert all(m.confidence in CONFIDENCE_LEVELS for m in result.mappings), "置信度不合法"
+
+        # 测试批量处理
+        batch = analyze_batch(["测试1", "测试2"])
+        assert len(batch) == 2, "批量处理失败"
+
+        # 测试输入解析
+        json_input = json.dumps(["测试1", "测试2"])
+        parsed = parse_input(json_input, "json")
+        assert len(parsed) == 2, "JSON 解析失败"
+
+        # 测试输出序列化
+        output = serialize_output(batch, "json")
+        assert json.loads(output), "JSON 输出失败"
+        output = serialize_output(batch, "csv")
+        assert "input_text" in output, "CSV 输出失败"
+        output = serialize_output(batch, "markdown")
+        assert "# 安全分析结果" in output, "Markdown 输出失败"
+
+        print("自测通过: 所有核心功能正常")
+        return True
+    except Exception as e:
+        print(f"自测失败: {e}")
+        return False
+
+
+def main() -> int:
+    """主入口函数。"""
+    parser = argparse.ArgumentParser(
+        description="安全分析·威胁建模·框架映射工具",
+        epilog="示例: python main.py --input data.json --output result.json --format json",
+    )
+    parser.add_argument("--input", "-i", help="输入文件路径（JSON/CSV/TXT）")
+    parser.add_argument("--output", "-o", help="输出文件路径（可选，默认输出到 stdout）")
+    parser.add_argument("--format", "-f", choices=OUTPUT_FORMATS, default="json", help="输出格式")
+    parser.add_argument("--input-format", choices=["json", "csv", "txt"], help="输入格式（默认根据扩展名推断）")
+    parser.add_argument("--fields", nargs="*", help="自定义输出字段（CSV 格式）")
+    parser.add_argument("--selftest", action="store_true", help="运行自测")
+    parser.add_argument("--version", action="version", version="1.0.0")
+
+    args = parser.parse_args()
+
+    # 自测模式
+    if args.selftest:
+        return 0 if run_selftest() else 1
+
+    # 需要输入文件
+    if not args.input:
+        parser.error("E001: 缺少 --input 参数")
+        return 1
+
+    try:
+        # 读取输入
+        data = read_input_file(args.input)
+
+        # 推断输入格式
+        input_format = args.input_format
+        if not input_format:
+            if args.input.endswith(".json"):
+                input_format = "json"
+            elif args.input.endswith(".csv"):
+                input_format = "csv"
+            elif args.input.endswith(".txt"):
+                input_format = "txt"
+            else:
+                input_format = "txt"
+
+        # 解析输入
+        texts = parse_input(data, input_format)
+
+        # 批量分析
+        results = analyze_batch(texts)
+
+        # 序列化输出
+        output = serialize_output(results, args.format, args.fields)
+
+        # 输出
+        if args.output:
+            with open(args.output, "w", encoding="utf-8") as f:
+                f.write(output)
+        else:
+            print(output)
+
+        return 0
+
+    except ValueError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"错误: E010 运行时异常: {e}", file=sys.stderr)
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(main())

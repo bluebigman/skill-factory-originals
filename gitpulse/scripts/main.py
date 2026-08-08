@@ -232,7 +232,11 @@ def process_input(raw_input: str) -> ProcessingResult:
     # Step 1: 校验输入
     valid, error_msg = validate_input(raw_input)
     if not valid:
-        result.error_code = error_msg.split(":")[0] if ":" in error_msg else "E003"
+        # 根据错误信息确定错误码
+        if "E001" in error_msg:
+            result.error_code = "E001"
+        else:
+            result.error_code = "E003"
         result.error_message = error_msg
         return result
     

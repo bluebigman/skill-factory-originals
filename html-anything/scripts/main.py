@@ -113,24 +113,10 @@ def _parse_markdown(text: str) -> str:
     lines = text.splitlines()
     html_parts: List[str] = []
     in_list = False
+    in_code_block = False
+    code_lines: List[str] = []
 
     for line in lines:
         stripped = line.strip()
-        # 标题
-        if stripped.startswith("### "):
-            html_parts.append(f"<h3>{_escape_html(stripped[4:])}</h3>")
-        elif stripped.startswith("## "):
-            html_parts.append(f"<h2>{_escape_html(stripped[3:])}</h2>")
-        elif stripped.startswith("# "):
-            html_parts.append(f"<h1>{_escape_html(stripped[2:])}</h1>")
-        # 列表项
-        elif stripped.startswith("- ") or stripped.startswith("* "):
-            if not in_list:
-                html_parts.append("<ul>")
-                in_list = True
-            html_parts.append(f"<li>{_escape_html(stripped[2:])}</li>")
-        # 引用
-        elif stripped.startswith("> "):
-            html_parts.append(f"<blockquote>{_escape_html(stripped[2:])}</blockquote>")
-        # 代码块
-        elif stripped.startswith("
+        # 代码块开始/结束
+        if stripped.startswith("

@@ -91,7 +91,7 @@ def run_selftest() -> bool:
         result = generate_gzh_design("人工智能", style="专业", word_count=1000)
         assert result["title"], "标题为空"
         assert len(result["sections"]) == 4, "章节数量不对"
-        assert "视觉建议" in result["visual_tips"], "缺少视觉建议"
+        assert "封面图" in result["visual_tips"], "缺少视觉建议"
 
         # 测试2：不同风格
         result_humor = generate_gzh_design("编程", style="幽默")

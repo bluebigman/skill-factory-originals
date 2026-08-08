@@ -19,6 +19,7 @@ scripts/main.py
 import argparse
 import sys
 import re
+import json
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Any
 
@@ -491,7 +492,6 @@ def main() -> int:
         for warning in result.warnings:
             print(f"警告: {warning}")
 
-    import json
     print(json.dumps(result.data, ensure_ascii=False, indent=2))
 
     return 0

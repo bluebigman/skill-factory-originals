@@ -48,7 +48,7 @@ ERROR_MESSAGES: Dict[str, str] = {
 CONFIDENCE_HIGH = 0.90      # ≥90% 直接输出
 CONFIDENCE_MEDIUM = 0.85    # 85%-90% 建议复核
 
-# 默认输出模板（修复：确保三引号字符串正确闭合）
+# 默认输出模板
 OUTPUT_TEMPLATE = (
     "# 处理结果\n\n"
     "> 生成时间：{timestamp}\n"

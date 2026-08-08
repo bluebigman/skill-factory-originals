@@ -99,6 +99,7 @@ class Field:
                  is_autoincrement: bool = False,
                  is_relation: bool = False,
                  relation_ref: Optional[str] = None,
+                 relation_field: Optional[str] = None,
                  uncertain: bool = False):
         self.name = name
         self.sql_type = sql_type
@@ -111,6 +112,7 @@ class Field:
         self.is_autoincrement = is_autoincrement
         self.is_relation = is_relation
         self.relation_ref = relation_ref
+        self.relation_field = relation_field
         self.uncertain = uncertain
 
     def to_prisma_field(self) -> str:
@@ -144,7 +146,8 @@ class Field:
                 except ValueError:
                     attrs.append(f"@default(\"{self.default_value}\")")
         if self.is_relation and self.relation_ref:
-            attrs.append(f"@relation(fields: [{self.name}], references: [id])")
+            ref_field = self.relation_field if self.relation_field else "id"
+            attrs.append(f"@relation(fields: [{self.name}], references: [{ref_field}])")
 
         if attrs:
             line += " " + " ".join(attrs)
@@ -201,6 +204,7 @@ class SQLParser:
         self.sql_text = sql_text
         self.models: List[Model] = []
         self.table_names: set = set()
+        self.table_models: Dict[str, Model] = {}
 
     def parse(self) -> List[Model]:
         """解析所有 CREATE TABLE 语句"""
@@ -223,6 +227,10 @@ class SQLParser:
             model = self._parse_create_table(stmt)
             if model:
                 self.models.append(model)
+                self.table_models[model.name.lower()] = model
+
+        # 第三遍处理外键关系（添加反向关系字段）
+        self._add_relation_fields()
 
         return self.models
 
@@ -461,9 +469,33 @@ class SQLParser:
                     if field.name in fk_columns:
                         field.is_relation = True
                         field.relation_ref = ref_table
+                        field.relation_field = ref_columns[0] if ref_columns else "id"
 
                 # 添加注释
                 model.comments.append(f"外键: {', '.join(fk_columns)} -> {ref_table}({', '.join(ref_columns)})")
+
+    def _add_relation_fields(self):
+        """为外键引用的表添加反向关系字段"""
+        for model in self.models:
+            for field in model.fields:
+                if field.is_relation and field.relation_ref:
+                    ref_table_name = field.relation_ref.lower()
+                    if ref_table_name in self.table_models:
+                        ref_model = self.table_models[ref_table_name]
+                        # 检查是否已存在反向关系字段
+                        existing = any(f.name == model.name.lower() for f in ref_model.fields)
+                        if not existing:
+                            # 添加反向关系字段
+                            relation_field = Field(
+                                name=model.name.lower(),
+                                sql_type="relation",
+                                prisma_type=model.name,
+                                is_required=False,
+                                is_relation=True,
+                                relation_ref=model.name,
+                                relation_field=field.name
+                            )
+                            ref_model.add_field(relation_field)
 
 
 # ============================================================

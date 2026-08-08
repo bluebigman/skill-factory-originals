@@ -118,7 +118,10 @@ def generate_god_config(processes: list) -> str:
             lines.append(f"    group.watch do |w|")
             lines.append(f"      w.name = '{p.name}'")
             lines.append(f"      w.group = '{p.group}'")
-            lines.append(f"      w.dir = '{p.directory}'" if p.directory else "      # w.dir = '/path/to/app'")
+            if p.directory:
+                lines.append(f"      w.dir = '{p.directory}'")
+            else:
+                lines.append("      # w.dir = '/path/to/app'")
             lines.append(f"      w.log = '{p.log_file}'")
             lines.append(f"      w.pid_file = '{p.pid_file}'")
             lines.append("")
@@ -167,7 +170,7 @@ def generate_god_config(processes: list) -> str:
 def validate_god_config(config_text: str) -> list:
     """
     校验 God 配置文件的语法和基本结构
-    返回 (是否通过, 问题列表)
+    返回问题列表（空列表表示通过）
     """
     issues = []
 

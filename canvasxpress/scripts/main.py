@@ -301,6 +301,18 @@ def generate_html(
         json_data = json.dumps(data, ensure_ascii=False)
         json_header = json.dumps(header, ensure_ascii=False)
 
+        # 根据图表类型调整配置
+        if chart_type == "scatter":
+            graph_config = "scatter"
+        elif chart_type == "bar":
+            graph_config = "bar"
+        elif chart_type == "heatmap":
+            graph_config = "heatmap"
+        elif chart_type == "boxplot":
+            graph_config = "boxplot"
+        else:
+            graph_config = "bar"
+
         html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -335,14 +347,14 @@ def generate_html(
             data: {{
                 y: data,
                 x: header.map(function(_, i) {{ return 'X' + (i + 1); }}),
-                type: '{chart_type}'
+                type: '{graph_config}'
             }},
             config: {{
                 title: '{title}',
                 xAxis: {{ title: header[0] }},
                 yAxis: {{ title: '值' }},
                 theme: 'CanvasXpress',
-                graphType: '{chart_type}'
+                graphType: '{graph_config}'
             }}
         }});
     </script>

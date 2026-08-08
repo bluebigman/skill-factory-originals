@@ -320,10 +320,12 @@ class SpecDrivenProcessor:
 
             for i in range(task_count):
                 task_id_counter += 1
-                req_indices = range(
-                    i * (len(module_reqs) // task_count),
-                    (i + 1) * (len(module_reqs) // task_count) if task_count > 1 else len(module_reqs),
-                )
+                if task_count > 1:
+                    start_idx = i * (len(module_reqs) // task_count)
+                    end_idx = (i + 1) * (len(module_reqs) // task_count) if i < task_count - 1 else len(module_reqs)
+                    req_indices = range(start_idx, end_idx)
+                else:
+                    req_indices = range(len(module_reqs))
 
                 task_title = f"{module_name}模块-任务{task_id_counter}"
                 task_desc = f"实现{module_name}模块的{len(list(req_indices))}个需求点"

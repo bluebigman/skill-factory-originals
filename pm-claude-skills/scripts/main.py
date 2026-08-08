@@ -381,10 +381,16 @@ class DataAnalyzer:
         variance = sum((x - mean) ** 2 for x in values) / n
         std_dev = variance ** 0.5
         
+        sorted_vals = sorted(values)
+        if n % 2 == 1:
+            median = sorted_vals[n // 2]
+        else:
+            median = (sorted_vals[n//2 - 1] + sorted_vals[n//2]) / 2
+        
         return {
             "count": n,
             "mean": mean,
-            "median": sorted(values)[n // 2] if n % 2 == 1 else (sorted(values)[n//2 - 1] + sorted(values)[n//2]) / 2,
+            "median": median,
             "min": min(values),
             "max": max(values),
             "std_dev": std_dev,

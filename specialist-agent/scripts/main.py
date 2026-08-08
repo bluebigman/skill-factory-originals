@@ -87,7 +87,10 @@ def extract_key_info(text: str) -> Dict[str, List[str]]:
     for key, pattern in KEYWORD_PATTERNS.items():
         matches = re.findall(pattern, text)
         if matches:
-            result[key] = matches[:5]  # 每种最多保留5条
+            # 清理匹配结果，去除多余空格
+            cleaned = [m.strip() for m in matches if m.strip()]
+            if cleaned:
+                result[key] = cleaned[:5]  # 每种最多保留5条
     return result
 
 

@@ -32,7 +32,6 @@ import json
 import os
 import re
 import sys
-import tempfile
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -93,7 +92,8 @@ class InputParser:
         if re.match(r'^https?://', text):
             result['_format'] = 'url'
             result['url'] = text
-            result['host'] = re.findall(r'://([^/]+)', text)[0] if re.findall(r'://([^/]+)', text) else 'unknown'
+            host_match = re.findall(r'://([^/]+)', text)
+            result['host'] = host_match[0] if host_match else 'unknown'
             return result
         
         # 尝试解析键值对

@@ -89,13 +89,13 @@ def parse_input(raw: str) -> Dict[str, Any]:
         # 移除千位分隔符后尝试转换
         clean_num = text.replace(",", "")
         num = float(clean_num)
+        # 验证确实是数字格式（避免 "1,2,3" 被误判为数字 123）
+        if text.count(",") > 0 and not clean_num.isdigit():
+            raise ValueError("包含多个逗号，不是合法数字")
         detected_type = "number"
         confidence = 0.9
         details["value"] = num
         details["is_integer"] = num.is_integer()
-        # 验证确实是数字格式（避免 "1,2,3" 被误判为数字 123）
-        if text.count(",") > 0 and not clean_num.isdigit():
-            raise ValueError("包含多个逗号，不是合法数字")
         return {
             "type": detected_type,
             "content": text,

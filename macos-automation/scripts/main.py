@@ -345,7 +345,7 @@ def run_selftest() -> bool:
     ]
     result_7 = processor.process(test_input_7)
     assert result_7.get("data") is not None, "测试7失败: 数据为空"
-    assert result_7["data"].get("batch_count") == 2, "测试7失败: 批量数量错误"
+    assert result_7["data"].get("batch_count") == 2, f"测试7失败: 批量数量错误，期望2，实际{result_7['data'].get('batch_count')}"
     print("[PASS] 测试7: 批量结果完整性")
 
     # 测试用例 8: URL 识别

@@ -146,7 +146,7 @@ class ImageProcessor:
 class TextSegmenter:
     """文本区域分割引擎"""
 
-    def __init__(self, min_block_size: int = 10, gap_threshold: int = 5):
+    def __init__(self, min_block_size: int = 5, gap_threshold: int = 3):
         """
         初始化分割器
 

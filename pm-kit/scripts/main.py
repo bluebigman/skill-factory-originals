@@ -57,9 +57,11 @@ def parse_input(raw_input: str) -> Dict[str, Any]:
     if not raw_input or not raw_input.strip():
         raise PMKitError("E001")
 
+    stripped = raw_input.strip()
+
     # 尝试解析为 JSON
     try:
-        data = json.loads(raw_input)
+        data = json.loads(stripped)
         if isinstance(data, dict):
             return data
         elif isinstance(data, list):
@@ -73,8 +75,6 @@ def parse_input(raw_input: str) -> Dict[str, Any]:
     except json.JSONDecodeError:
         # 非 JSON 格式，按文本处理
         # 但需要检查是否包含明显的 JSON 特征（如 { 或 [），如果是则报错
-        stripped = raw_input.strip()
-        # 更严格的检查：如果以 { 或 [ 开头，尝试定位第一个字符，如果后续内容明显不是合法 JSON 则报错
         if stripped.startswith('{') or stripped.startswith('['):
             # 尝试用 json.JSONDecoder 的 raw_decode 来进一步判断
             try:
@@ -86,6 +86,7 @@ def parse_input(raw_input: str) -> Dict[str, Any]:
                     raise PMKitError("E007", "JSON 解析失败，请检查输入格式")
                 # 如果完全解析成功，但上面 json.loads 失败了，说明是单个值（如数字、字符串等）
                 # 这种情况已经在上面处理了，这里不会到达
+                raise PMKitError("E007", "JSON 解析失败，请检查输入格式")
             except (json.JSONDecodeError, ValueError):
                 raise PMKitError("E007", "JSON 解析失败，请检查输入格式")
             # 如果 raw_decode 成功且没有剩余内容，但 json.loads 失败，说明是单个 JSON 值（数字/字符串等）

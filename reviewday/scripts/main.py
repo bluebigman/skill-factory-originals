@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 reviewday — 代码评审结构化汇总与置信标注
-版本: 1.0.3
+版本: 1.0.5
 """
 
 import argparse
@@ -57,9 +57,11 @@ class ReviewItem:
         """校验字段合法性"""
         if not self.file_path or not isinstance(self.file_path, str):
             error_exit("E009", "文件路径字段缺失或为空")
+        if not isinstance(self.description, str) or not self.description.strip():
+            error_exit("E006", "描述字段缺失或为空")
         if self.severity not in SEVERITY_LEVELS:
             error_exit("E007", f"无效的严重级别: {self.severity}")
-        if not (0.0 <= self.confidence <= 1.0):
+        if not isinstance(self.confidence, (int, float)) or not (0.0 <= self.confidence <= 1.0):
             error_exit("E008", f"置信度超出范围: {self.confidence}")
 
     def to_dict(self) -> dict:
@@ -357,6 +359,168 @@ src/utils.py:15 建议使用更高效的排序算法（重复项）
     json_items = parse_review_text(json_input)
     assert len(json_items) == 2, f"JSON解析应得2条，实际{len(json_items)}"
     print("  [通过] JSON 输入解析")
+
+    # 测试8: 空输入处理
+    empty_items = parse_review_text("")
+    assert len(empty_items) == 0, "空输入应返回空列表"
+    print("  [通过] 空输入处理")
+
+    # 测试9: 无效置信度校验
+    try:
+        invalid_item = ReviewItem("test.py", 1, "测试", "一般", 1.5)
+        invalid_item.validate()
+        assert False, "置信度超出范围应抛出错误"
+    except SystemExit:
+        print("  [通过] 无效置信度校验")
+
+    # 测试10: 无效严重级别校验
+    try:
+        invalid_item = ReviewItem("test.py", 1, "测试", "无效级别", 0.5)
+        invalid_item.validate()
+        assert False, "无效严重级别应抛出错误"
+    except SystemExit:
+        print("  [通过] 无效严重级别校验")
+
+    # 测试11: 边界置信度（0.0 和 1.0 应合法）
+    try:
+        edge_item = ReviewItem("test.py", 1, "边界测试", "一般", 0.0)
+        edge_item.validate()
+        edge_item2 = ReviewItem("test.py", 1, "边界测试", "一般", 1.0)
+        edge_item2.validate()
+        print("  [通过] 边界置信度校验")
+    except SystemExit:
+        assert False, "边界置信度不应抛出错误"
+
+    # 测试12: 文件路径缺失校验
+    try:
+        invalid_item = ReviewItem("", 1, "测试", "一般", 0.5)
+        invalid_item.validate()
+        assert False, "空文件路径应抛出错误"
+    except SystemExit:
+        print("  [通过] 空文件路径校验")
+
+    # 测试13: 负行号处理（不报错，但标记需核实）
+    neg_item = ReviewItem("test.py", -5, "负行号测试", "一般", 0.9)
+    neg_item.validate()
+    neg_dict = neg_item.to_dict()
+    assert neg_dict["line"] == -5, "负行号应保留"
+    print("  [通过] 负行号处理")
+
+    # 测试14: 高置信度不标记需核实
+    high_conf_item = ReviewItem("test.py", 10, "高置信度", "一般", 0.9)
+    high_conf_item.validate()
+    high_conf_dict = high_conf_item.to_dict()
+    assert "needs_verification" not in high_conf_dict, "高置信度不应标记需核实"
+    print("  [通过] 高置信度处理")
+
+    # 测试15: 中置信度（0.6）不标记需核实
+    med_conf_item = ReviewItem("test.py", 10, "中置信度", "一般", 0.6)
+    med_conf_item.validate()
+    med_conf_dict = med_conf_item.to_dict()
+    assert "needs_verification" not in med_conf_dict, "中置信度不应标记需核实"
+    print("  [通过] 中置信度处理")
+
+    # 测试16: 低置信度（0.59）标记需核实
+    low_conf_item2 = ReviewItem("test.py", 10, "低置信度", "一般", 0.59)
+    low_conf_item2.validate()
+    low_conf_dict2 = low_conf_item2.to_dict()
+    assert "needs_verification" in low_conf_dict2, "低置信度应标记需核实"
+    print("  [通过] 低置信度处理")
+
+    # 测试17: 空描述处理
+    try:
+        empty_desc_item = ReviewItem("test.py", 1, "", "一般", 0.5)
+        empty_desc_item.validate()
+        assert False, "空描述应抛出错误"
+    except SystemExit:
+        print("  [通过] 空描述校验")
+
+    # 测试18: 非字符串描述处理
+    try:
+        non_str_item = ReviewItem("test.py", 1, 12345, "一般", 0.5)
+        non_str_item.validate()
+        assert False, "非字符串描述应抛出错误"
+    except SystemExit:
+        print("  [通过] 非字符串描述校验")
+
+    # 测试19: 非字符串文件路径处理
+    try:
+        non_str_path = ReviewItem(12345, 1, "测试", "一般", 0.5)
+        non_str_path.validate()
+        assert False, "非字符串文件路径应抛出错误"
+    except SystemExit:
+        print("  [通过] 非字符串文件路径校验")
+
+    # 测试20: 文本解析 - 无行号格式
+    no_line_items = parse_review_text("src/config.py 配置文件缺少默认值")
+    assert len(no_line_items) == 1, f"无行号格式应解析1条，实际{len(no_line_items)}"
+    assert no_line_items[0].line_number == 0, "无行号格式行号应为0"
+    print("  [通过] 无行号格式解析")
+
+    # 测试21: 文本解析 - 带冒号无行号格式
+    colon_no_line_items = parse_review_text("src/config.py: 配置文件缺少默认值")
+    assert len(colon_no_line_items) == 1, f"冒号无行号格式应解析1条，实际{len(colon_no_line_items)}"
+    assert colon_no_line_items[0].line_number == 0, "冒号无行号格式行号应为0"
+    print("  [通过] 冒号无行号格式解析")
+
+    # 测试22: 文本解析 - 无效行跳过
+    invalid_line_items = parse_review_text("这是一行无效内容\nsrc/main.py:42 有效内容")
+    assert len(invalid_line_items) == 1, f"无效行应跳过，实际{len(invalid_line_items)}"
+    print("  [通过] 无效行跳过")
+
+    # 测试23: JSON 解析 - 单对象
+    single_obj_items = parse_review_text('{"file": "test.py", "line": 5, "description": "测试"}')
+    assert len(single_obj_items) == 1, f"单对象应解析1条，实际{len(single_obj_items)}"
+    print("  [通过] JSON 单对象解析")
+
+    # 测试24: JSON 解析 - 缺失字段跳过
+    missing_field_items = parse_review_text('[{"file": "test.py", "line": 5}, {"file": "test2.py", "description": "测试"}]')
+    assert len(missing_field_items) == 1, f"缺失字段应跳过，实际{len(missing_field_items)}"
+    print("  [通过] JSON 缺失字段跳过")
+
+    # 测试25: JSON 解析 - 非对象元素跳过
+    non_obj_items = parse_review_text('[1, 2, {"file": "test.py", "description": "测试"}]')
+    assert len(non_obj_items) == 1, f"非对象元素应跳过，实际{len(non_obj_items)}"
+    print("  [通过] JSON 非对象元素跳过")
+
+    # 测试26: 严重级别分类 - 关键词匹配
+    blocker_item = ReviewItem("test.py", 1, "系统崩溃", "一般", 0.9)
+    assert classify_severity(blocker_item) == "阻断", "崩溃应分类为阻断"
+    major_item = ReviewItem("test.py", 1, "内存泄漏", "一般", 0.9)
+    assert classify_severity(major_item) == "严重", "内存泄漏应分类为严重"
+    minor_item = ReviewItem("test.py", 1, "代码规范问题", "一般", 0.9)
+    assert classify_severity(minor_item) == "一般", "规范问题应分类为一般"
+    suggestion_item = ReviewItem("test.py", 1, "建议优化", "一般", 0.9)
+    assert classify_severity(suggestion_item) == "建议", "建议优化应分类为建议"
+    print("  [通过] 严重级别关键词分类")
+
+    # 测试27: 严重级别分类 - 无关键词保持原级别
+    no_keyword_item = ReviewItem("test.py", 1, "自定义问题", "严重", 0.9)
+    assert classify_severity(no_keyword_item) == "严重", "无关键词应保持原级别"
+    print("  [通过] 严重级别无关键词保持")
+
+    # 测试28: 报告生成 - 空列表
+    empty_report_json = generate_report([], "json")
+    assert empty_report_json == "[]", "空JSON报告应为[]"
+    empty_report_md = generate_report([], "markdown")
+    assert "无审查条目" in empty_report_md, "空Markdown报告应包含无审查条目"
+    print("  [通过] 空报告生成")
+
+    # 测试29: 报告生成 - 无效格式
+    try:
+        generate_report(items, "xml")
+        assert False, "无效格式应抛出错误"
+    except SystemExit:
+        print("  [通过] 无效格式校验")
+
+    # 测试30: 合并 - 不同描述相同位置不去重
+    diff_desc_items = [
+        ReviewItem("test.py", 1, "问题A", "一般", 0.9),
+        ReviewItem("test.py", 1, "问题B", "一般", 0.9),
+    ]
+    merged_diff = merge_review_items(diff_desc_items)
+    assert merged_diff["total_count"] == 2, "不同描述不应去重"
+    print("  [通过] 合并不同描述不去重")
 
     print("全部自检通过 ✓")
 

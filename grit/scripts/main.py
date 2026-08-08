@@ -330,6 +330,41 @@ def run_selftest() -> bool:
         print(f"  ✗ 失败: {e}")
         all_passed = False
 
+    # ---------- 测试用例 7: 纯文本输入 ----------
+    print("\n[测试7] 纯文本输入")
+    try:
+        test_data = "这是一段纯文本输入，用于测试非JSON字符串的处理流程。"
+        parsed = processor.collect_info(test_data)
+        result = processor.process(parsed)
+        output = processor.format_output(result)
+
+        # 宽松断言
+        assert result["status"] == "success", "状态应为 success"
+        assert result["source_type"] == "data", "来源类型应为 data"
+        assert result["confidence"] >= 70, f"置信度应>=70，实际: {result['confidence']}"
+        # 修复：检查输出中是否包含结构化数据的关键字段
+        assert "raw_content" in output or "内容长度" in output, "输出应包含结构化数据"
+        print("  ✓ 通过")
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        all_passed = False
+
+    # ---------- 测试用例 8: 不支持的输出格式 ----------
+    print("\n[测试8] 不支持的输出格式")
+    try:
+        test_data = {
+            "content": "测试内容",
+            "output_format": "xml",
+        }
+        parsed = processor.collect_info(test_data)
+        result = processor.process(parsed)
+        processor.format_output(result)
+        print("  ✗ 失败: 应抛出 E003 错误")
+        all_passed = False
+    except ValueError as e:
+        assert "E003" in str(e), f"应包含 E003，实际: {e}"
+        print("  ✓ 通过 (正确捕获 E003)")
+
     # ---------- 汇总 ----------
     print("\n" + "=" * 60)
     if all_passed:
@@ -386,10 +421,9 @@ def main():
         if args.format:
             # 通过 collect_info 处理格式
             if args.input.startswith("{"):
-                import json as json_mod
                 try:
-                    data = json_mod.loads(args.input)
-                except json_mod.JSONDecodeError:
+                    data = json.loads(args.input)
+                except json.JSONDecodeError:
                     data = {"content": args.input}
             else:
                 data = {"content": args.input}

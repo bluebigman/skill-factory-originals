@@ -3,7 +3,7 @@
 """
 context-mode 技能实现脚本
 功能：压缩工具输出、持久化会话记忆、提取关键信息、结构化格式输出、批量处理
-版本：1.0.5
+版本：1.0.10
 """
 
 import argparse
@@ -202,7 +202,7 @@ class TextCompressor:
             for pattern in important_patterns:
                 if re.search(pattern, line, re.IGNORECASE):
                     if line not in points:
-                        points.append(line[:100])  # 限制长度更短
+                        points.append(line[:80])  # 限制长度更短
                     break
 
             if len(points) >= self.max_key_points:
@@ -242,15 +242,15 @@ class TextCompressor:
         # 清理文本
         cleaned = re.sub(r'\s+', ' ', text.strip())
 
-        # 如果是短文本，返回前100字符
-        if len(cleaned) <= 100:
+        # 如果是短文本，返回前80字符
+        if len(cleaned) <= 80:
             return cleaned
 
         # 尝试提取首段
         paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
         if paragraphs:
             first_para = paragraphs[0]
-            if len(first_para) <= 100:
+            if len(first_para) <= 80:
                 return first_para
 
         # 提取关键句子（更短）
@@ -259,26 +259,26 @@ class TextCompressor:
 
         # 包含关键点的句子优先
         for sentence in sentences:
-            if len(sentence) > 150:  # 跳过过长的句子
+            if len(sentence) > 100:  # 跳过过长的句子
                 continue
             for point in key_points:
                 if point[:20] in sentence or any(w in sentence for w in point.split()[:2]):
-                    important_sentences.append(sentence[:100])  # 截断每个句子
+                    important_sentences.append(sentence[:80])  # 截断每个句子
                     break
             if len(important_sentences) >= 2:
                 break
 
         # 补充首句（截断）
         if not important_sentences and sentences:
-            first = sentences[0][:100]
+            first = sentences[0][:80]
             important_sentences.append(first)
 
         # 组合摘要
         summary = " ".join(important_sentences[:2])
-        if len(summary) > 200:
-            summary = summary[:197] + "..."
+        if len(summary) > 150:
+            summary = summary[:147] + "..."
 
-        return summary if summary else cleaned[:100]
+        return summary if summary else cleaned[:80]
 
     def _format_text(self, summary: str, key_points: List[str]) -> str:
         """文本格式输出（更紧凑）"""
@@ -294,10 +294,10 @@ class TextCompressor:
         lines = [
             "| 项目 | 内容 |",
             "|------|------|",
-            f"| 摘要 | {summary[:80]} |"
+            f"| 摘要 | {summary[:60]} |"
         ]
         for i, point in enumerate(key_points[:3], 1):  # 最多显示3个关键点
-            lines.append(f"| 要点{i} | {point[:80]} |")
+            lines.append(f"| 要点{i} | {point[:60]} |")
         return "\n".join(lines)
 
 

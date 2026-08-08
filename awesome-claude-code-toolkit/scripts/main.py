@@ -508,7 +508,7 @@ def run_selftest() -> bool:
     # 测试3: JSON 解析
     print("\n[测试3] JSON 解析")
     json_input = """[{"id": 1, "status": "active", "score": 95.5},
-                     {"id": 2, "status": "inactive", "score": 87}"""
+                     {"id": 2, "status": "inactive", "score": 87}]"""
     try:
         records = parse_json_input(json_input)
         assert len(records) == 2, f"预期2条记录，实际{len(records)}条"

@@ -15,6 +15,7 @@ import argparse
 import json
 import os
 import sys
+import re
 from typing import Any, Dict, List, Optional
 
 # ---------------------------------------------------------------------------
@@ -106,7 +107,6 @@ def extract_key_info(text: str) -> Dict[str, Any]:
     keyword_list = [k for k, _ in keywords]
 
     # 检测日期（简单正则）
-    import re
     date_match = re.search(r"\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?", text)
     date_str = date_match.group(0) if date_match else "未识别"
 

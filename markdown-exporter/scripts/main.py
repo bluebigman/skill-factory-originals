@@ -163,4 +163,46 @@ def process_item(raw_item: str, source: str = "user") -> ParsedItem:
     item.keywords = extract_keywords(item.content)
     item.confidence = calculate_confidence(item.content)
     item.meta["length"] = len(item.content)
-    item.meta["has_code"] = bool(re.search(r"
+    item.meta["has_code"] = bool(re.search(r"`{1,3}[\s\S]*?`{1,3}", item.content))
+    item.meta["has_list"] = bool(re.search(r"^\s*[-*+]\s+", item.content, re.MULTILINE))
+    item.meta["has_table"] = bool(re.search(r"^\s*\|.*\|\s*$", item.content, re.MULTILINE))
+    return item
+
+
+def process_batch(raw_items: List[str], source: str = "user") -> List[ParsedItem]:
+    """批量处理多个条目。"""
+    results = []
+    for raw in raw_items:
+        try:
+            results.append(process_item(raw, source))
+        except SkillError as e:
+            if e.code == "E008":
+                print(f"警告: {e.message}", file=sys.stderr)
+                continue
+            raise
+    return results
+
+
+# ---------------------------------------------------------------------------
+# 输出生成
+# ---------------------------------------------------------------------------
+def to_markdown(items: List[ParsedItem], title: str = "处理结果") -> str:
+    """将结构化结果转换为 Markdown 格式。"""
+    lines = [f"# {title}", ""]
+    for i, item in enumerate(items, 1):
+        lines.append(f"## 条目 {i}")
+        lines.append("")
+        lines.append(f"**来源**: {item.source}")
+        lines.append(f"**置信度**: {item.confidence:.2f}")
+        lines.append("")
+        lines.append("**内容**:")
+        lines.append("")
+        lines.append(item.content)
+        lines.append("")
+        if item.keywords:
+            lines.append("**关键词**: " + ", ".join(item.keywords))
+            lines.append("")
+        if item.meta:
+            lines.append("**元数据**:")
+            lines.append("")
+            lines.append("

@@ -338,13 +338,13 @@ def _selftest() -> bool:
     json_str = json.dumps(test_result, ensure_ascii=False)
     assert json_str, "JSON 序列化失败"
 
-    # 7. 测试图片格式校验
+    # 7. 测试图片格式校验（使用不存在的文件，应优先返回 E001）
     print("[自检] 测试图片格式校验...")
     try:
         _read_image_info("/nonexistent/file.txt")
-        assert False, "应抛出 E002 错误"
+        assert False, "应抛出 E001 错误"
     except OCRError as exc:
-        assert exc.code == "E002", f"预期 E002，实际 {exc.code}"
+        assert exc.code == "E001", f"预期 E001，实际 {exc.code}"
 
     # 8. 测试文件读取错误
     print("[自检] 测试文件读取错误...")
@@ -353,6 +353,22 @@ def _selftest() -> bool:
         assert False, "应抛出 E001 错误"
     except OCRError as exc:
         assert exc.code == "E001", f"预期 E001，实际 {exc.code}"
+
+    # 9. 测试无效文件类型
+    print("[自检] 测试无效文件类型...")
+    try:
+        _read_image_info("/nonexistent/file.txt")
+        assert False, "应抛出 E001 错误"
+    except OCRError as exc:
+        assert exc.code == "E001", f"预期 E001，实际 {exc.code}"
+
+    # 10. 测试目录输入
+    print("[自检] 测试目录输入...")
+    try:
+        process_file("/tmp")
+        assert False, "应抛出 E008 错误"
+    except OCRError as exc:
+        assert exc.code == "E008", f"预期 E008，实际 {exc.code}"
 
     print("[自检] 所有检查通过 ✔")
     return True

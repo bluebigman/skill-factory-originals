@@ -90,5 +90,4 @@ class MarkdownParser:
     # 识别有序列表项
     _OLIST_RE = re.compile(r'^[\s]*\d+[.)]\s+(.+)$')
 
-    # 识别代码块起始
-    _CODE_FENCE_RE = re.compile(r'^
+    # 识别代码块起始（

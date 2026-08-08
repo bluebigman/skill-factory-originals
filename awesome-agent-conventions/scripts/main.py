@@ -309,13 +309,14 @@ def validate_input(text: Optional[str]) -> Optional[str]:
     return None
 
 
-def format_error(error_code: str, **kwargs: Any) -> Dict[str, Any]:
+def format_error(error_code: str, *args: Any, **kwargs: Any) -> Dict[str, Any]:
     """
     格式化错误信息。
 
     参数:
         error_code: 错误码 (E001-E010)。
-        **kwargs: 用于替换话术中的占位符。
+        *args: 位置参数, 用于替换话术中的占位符。
+        **kwargs: 关键字参数, 用于替换话术中的占位符。
 
     返回:
         错误信息字典。
@@ -324,16 +325,17 @@ def format_error(error_code: str, **kwargs: Any) -> Dict[str, Any]:
     
     # 如果消息中包含 {} 占位符, 则进行格式化
     if "{}" in message:
-        # 如果没有提供参数, 则移除占位符
-        if not kwargs:
-            message = message.replace("{}", "")
-        else:
-            # 使用提供的参数进行格式化
+        # 合并位置参数和关键字参数
+        format_args = list(args) + list(kwargs.values())
+        if format_args:
             try:
-                message = message.format(*kwargs.values())
+                message = message.format(*format_args)
             except (KeyError, IndexError):
                 # 如果参数不匹配, 则移除占位符
                 message = message.replace("{}", "")
+        else:
+            # 如果没有提供参数, 则移除占位符
+            message = message.replace("{}", "")
     
     return {
         "error_code": error_code,

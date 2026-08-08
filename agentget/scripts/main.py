@@ -252,10 +252,11 @@ class BatchProcessor:
                 results.append(result_dict)
             except ValueError as e:
                 error_code = str(e)
+                error_msg = ERROR_CODES.get(error_code, "未知错误")
                 results.append({
                     "status": "error",
                     "error_code": error_code,
-                    "error_message": ERROR_CODES.get(error_code, "未知错误"),
+                    "error_message": error_msg,
                 })
         return results
 
@@ -383,6 +384,47 @@ def run_selftest() -> bool:
         result = processor.process(multi_line)
         assert result.data is not None, "多行文本应有输出"
         assert result.confidence > 0.5, "多行文本应有合理置信度"
+        print("  ✓ 通过")
+
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        return False
+
+    # 测试用例9: 边界输入
+    print("测试9: 边界输入")
+    try:
+        # 纯数字输入
+        result = processor.process("12345")
+        assert result.data is not None, "纯数字输入应有输出"
+        assert result.confidence > 0.3, "纯数字输入应有合理置信度"
+
+        # 特殊字符输入
+        result = processor.process("!@#$%^&*()")
+        assert result.data is not None, "特殊字符输入应有输出"
+        print("  ✓ 通过")
+
+    except Exception as e:
+        print(f"  ✗ 失败: {e}")
+        return False
+
+    # 测试用例10: 错误码格式化
+    print("测试10: 错误码格式化")
+    try:
+        # 测试E002错误码的格式化
+        error_msg = ERROR_CODES["E002"].format(missing="name,age")
+        assert "name,age" in error_msg, "E002错误码应包含缺失字段"
+
+        # 测试E003错误码的格式化
+        error_msg = ERROR_CODES["E003"].format(example='{"key": "value"}')
+        assert '{"key": "value"}' in error_msg, "E003错误码应包含示例"
+
+        # 测试E004错误码的格式化
+        error_msg = ERROR_CODES["E004"].format(suggestion="使用更专业的工具")
+        assert "使用更专业的工具" in error_msg, "E004错误码应包含建议"
+
+        # 测试E005错误码的格式化
+        error_msg = ERROR_CODES["E005"].format(suggestion="提供更多上下文信息")
+        assert "提供更多上下文信息" in error_msg, "E005错误码应包含建议"
         print("  ✓ 通过")
 
     except Exception as e:

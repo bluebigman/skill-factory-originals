@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 toggl-tally 工时数据整理技能 - 独立实现脚本
-版本: 1.0.5 (clean-room 实现)
+版本: 1.0.11 (clean-room 实现)
 """
 
 import json
@@ -600,6 +600,41 @@ def _run_selftest() -> bool:
         print("  [PASS] 时长格式解析")
     except AssertionError as e:
         print(f"  [FAIL] 时长解析测试: {e}")
+        return False
+
+    # 测试数据 7: 时间戳解析边界
+    try:
+        assert _parse_timestamp("2026-01-05T09:00:00") == "2026-01-05T09:00:00", "ISO格式解析失败"
+        assert _parse_timestamp("2026-01-05 09:00:00") == "2026-01-05T09:00:00", "空格格式解析失败"
+        assert _parse_timestamp("2026/01/05 09:00") == "2026-01-05T09:00:00", "斜杠格式解析失败"
+        assert _parse_timestamp("2026-01-05") == "2026-01-05T00:00:00", "日期格式解析失败"
+        assert _parse_timestamp(1767600000) is not None, "Unix时间戳解析失败"
+        assert _parse_timestamp("invalid") is None, "无效时间戳未返回 None"
+        print("  [PASS] 时间戳格式解析")
+    except AssertionError as e:
+        print(f"  [FAIL] 时间戳解析测试: {e}")
+        return False
+
+    # 测试数据 8: 无时长字段但有时间戳的记录
+    try:
+        test_data = json.dumps([
+            {
+                "project": "测试项目",
+                "description": "测试描述",
+                "start": "2026-01-10T09:00:00",
+                "end": "2026-01-10T11:30:00",
+            }
+        ])
+        result = process_data(test_data)
+        assert result["record_count"] == 1, "记录数错误"
+        assert result["records"][0]["duration_hours"] is not None, "时长未从时间戳计算"
+        assert abs(result["records"][0]["duration_hours"] - 2.5) < 0.01, "时长计算错误"
+        print("  [PASS] 时间戳自动计算时长")
+    except AssertionError as e:
+        print(f"  [FAIL] 时间戳计算测试: {e}")
+        return False
+    except Exception as e:
+        print(f"  [FAIL] 时间戳计算测试异常: {e}")
         return False
 
     print("所有自检通过！")
