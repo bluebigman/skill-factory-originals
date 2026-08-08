@@ -268,6 +268,80 @@ def run_selftest() -> int:
     assert it_6.confidence < 0.90, "短文本置信度应低于 0.90"
     print("  测试6（置信度标注）通过")
 
+    # --- 测试用例 7：空字符串输入应报 E001 ---
+    try:
+        processor.process([""])
+        print("  测试7（空字符串输入）失败：未抛出异常")
+        return 1
+    except AngrealError as e:
+        assert e.code == "E001", f"错误码应为 E001，实际 {e.code}"
+        print("  测试7（空字符串输入）通过")
+
+    # --- 测试用例 8：混合有效和无效输入 ---
+    try:
+        processor.process(["有效邮箱 a@b.com", "无效文本"])
+        print("  测试8（混合输入）失败：未抛出异常")
+        return 1
+    except AngrealError as e:
+        assert e.code == "E003", f"错误码应为 E003，实际 {e.code}"
+        print("  测试8（混合输入）通过")
+
+    # --- 测试用例 9：多字段提取 ---
+    sample_9 = ["联系 test@example.com 或 13812345678，日期 2026-03-15"]
+    result_9 = processor.process(sample_9)
+    it_9 = result_9.items[0]
+    assert len(it_9.extracted) >= 3, "应提取至少 3 个字段"
+    assert it_9.confidence >= 0.90, "多字段置信度应较高"
+    print("  测试9（多字段提取）通过")
+
+    # --- 测试用例 10：URL 提取 ---
+    sample_10 = ["访问 https://example.com/path?query=1 获取信息"]
+    result_10 = processor.process(sample_10)
+    it_10 = result_10.items[0]
+    assert "url" in it_10.extracted, "应提取到 url"
+    assert it_10.extracted["url"] == "https://example.com/path?query=1", "URL 提取不完整"
+    print("  测试10（URL 提取）通过")
+
+    # --- 测试用例 11：手机号提取 ---
+    sample_11 = ["联系电话 13912345678"]
+    result_11 = processor.process(sample_11)
+    it_11 = result_11.items[0]
+    assert "phone" in it_11.extracted, "应提取到 phone"
+    assert it_11.extracted["phone"] == "13912345678", "手机号提取错误"
+    print("  测试11（手机号提取）通过")
+
+    # --- 测试用例 12：日期提取 ---
+    sample_12 = ["截止日期 2026-12-31"]
+    result_12 = processor.process(sample_12)
+    it_12 = result_12.items[0]
+    assert "date" in it_12.extracted, "应提取到 date"
+    assert it_12.extracted["date"] == "2026-12-31", "日期提取错误"
+    print("  测试12（日期提取）通过")
+
+    # --- 测试用例 13：置信度上限 ---
+    sample_13 = ["这是一个很长的文本，包含多个字段：test@example.com 和 13812345678，日期 2026-03-15，还有 https://example.com 这个链接，内容足够长以触发所有置信度加成"]
+    result_13 = processor.process(sample_13)
+    it_13 = result_13.items[0]
+    assert it_13.confidence <= 0.98, "置信度不应超过 0.98"
+    assert it_13.confidence >= 0.95, "长文本多字段置信度应较高"
+    print("  测试13（置信度上限）通过")
+
+    # --- 测试用例 14：flags 标注 ---
+    sample_14 = ["简单邮箱 a@b.com"]  # 短文本，置信度应较低
+    result_14 = processor.process(sample_14)
+    it_14 = result_14.items[0]
+    assert it_14.confidence < 0.85, "短文本置信度应低于 0.85"
+    assert "[需核实]" in it_14.flags, "低置信度应标注 [需核实]"
+    print("  测试14（flags 标注）通过")
+
+    # --- 测试用例 15：建议复核标注 ---
+    sample_15 = ["这是一个中等长度的文本，包含邮箱 test@example.com，长度超过 10 个字符"]
+    result_15 = processor.process(sample_15)
+    it_15 = result_15.items[0]
+    assert 0.85 <= it_15.confidence < 0.90, "中等置信度应在 0.85~0.90 之间"
+    assert "建议复核" in it_15.flags, "中等置信度应标注 建议复核"
+    print("  测试15（建议复核标注）通过")
+
     print("[selftest] 全部通过")
     return 0
 

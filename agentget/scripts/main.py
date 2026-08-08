@@ -198,8 +198,8 @@ class AgentGetProcessor:
         try:
             json.loads(input_data)
             return "JSON"
-        except Exception as e:
-            print(f"警告: JSON格式检测失败: {str(e)}", file=sys.stderr)
+        except Exception:
+            pass
         if "=" in input_data:
             return "键值对"
         if ":" in input_data:

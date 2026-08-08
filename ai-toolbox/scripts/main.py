@@ -480,7 +480,7 @@ def main() -> int:
             success = _run_selftest()
             return 0 if success else 1
         except Exception as exc:
-            print(f"E008: 自检异常: {str(exc)}")
+            print(f"E008: 自检异常: {str(exc)}", file=sys.stderr)
             return 1
 
     # 处理输入
