@@ -1,0 +1,11 @@
+{
+  "slug": "acts-as-money",
+  "mode": "upgrade",
+  "target": 4.8,
+  "score_track": [
+    3.5,
+    3.5,
+    4.0
+  ],
+  "final_score": 4.0
+}
