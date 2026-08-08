@@ -5,7 +5,7 @@
 slug: cli-20260801
 name: HTTP命令行测试工具
 displayName: HTTP命令行测试工具
-description: HTTP命令行测试工具，支持REST API调试、请求构造、响应格式化与批量测试
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行cli相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.19
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
@@ -624,7 +624,7 @@ another-tool 0.9.1
 $ moltbot skills info my-skill
 # 输出示例
 name: my-skill
-description: A sample skill for testing
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行cli相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.2.0
 author: example@moltbot.dev
 dependencies:
@@ -815,7 +815,7 @@ db-backup           Backup PostgreSQL databases          2.0.0
 $ moltbot skills info web-search
 ---
 name: web-search
-description: Search the web via DuckDuckGo
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行cli相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.2.0
 author: moltbot-team
 tags: [search, web]
