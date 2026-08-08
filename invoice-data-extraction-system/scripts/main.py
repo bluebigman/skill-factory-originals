@@ -393,9 +393,12 @@ class InvoiceExtractor:
     def _extract_tax_id(self, text: str, side: str) -> str:
         """抽取纳税人识别号。side: buyer / seller"""
         prefix = "购买方" if side == "buyer" else "销售方"
+        # 改进：允许税号出现在名称之后，且可能跨行
         patterns = [
             rf"{prefix}[（(]?纳税人识别号[）)]?[：:\s]*([0-9A-Za-z\-]{{15,20}})",
             rf"{prefix}[（(]?税号[）)]?[：:\s]*([0-9A-Za-z\-]{{15,20}})",
+            rf"{prefix}[（(]?名称[）)]?[：:\s]*[^\n\r]*\s*纳税人识别号[：:\s]*([0-9A-Za-z\-]{{15,20}})",
+            rf"{prefix}[（(]?名称[）)]?[：:\s]*[^\n\r]*\s*税号[：:\s]*([0-9A-Za-z\-]{{15,20}})",
         ]
         for pat in patterns:
             m = re.search(pat, text)
