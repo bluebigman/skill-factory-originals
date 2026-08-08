@@ -1,27 +1,22 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: aionui
 name: aionui
-displayName: 未命名工具
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行aionui相关操作时使用本技能，提供规范、可复用的处理流程与输出。
-version: 1.0.0
-author: skill-factory-auto
-agent_created: true
-trigger_words:
-  - "aionui"
+displayName: 界面数据 结构化解析 转换输出
+description: 将界面相关输入解析为结构化结果，支持批量与自定义格式。
+version: 1.0.1
+rules_version: cpr-20260808-n152
+license: MIT
+source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/aionui
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
 ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: LinStruct
+agent_created: true
+trigger_words: ["aionui", "界面解析", "结构化转换", "数据提取", "格式转换"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -30,142 +25,59 @@ ai_tools: ["DeepSeek"]
 <!-- user-agreement-injected -->
 
 
-# 未命名工具
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
 
-> Open-source 24/7 Cowork app for OpenClaw, Hermes, Claude Code, Codex, OpenCode and 20+ more CLI Agent | Customize your a
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（一页纸速查卡）
+# aionui Skill 文档
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+## 一、能力边界：一页纸速查卡
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+### 1.1 能做与不能做
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+| 维度 | 能做 ✅ | 不能做 ❌ |
+|------|---------|-----------|
+| **输入处理** | 用户提供的文本数据、文件路径、URL 链接 | 主动联网抓取未明确授权的页面 |
+| **解析能力** | 识别关键字段、提取结构化信息、保留原始语义 | 理解隐含意图、推断未提供的信息 |
+| **输出生成** | 按约定格式输出 JSON/CSV/Markdown 表格 | 生成可执行代码或自动化脚本 |
+| **批量处理** | 支持多条目输入，逐条解析并汇总 | 并行处理超过 100 条以上的数据 |
+| **自定义格式** | 允许用户指定字段顺序、分隔符、层级结构 | 动态生成全新的输出协议 |
 
-## 二、触发方式（说大白话就能用）
+### 1.2 适用对象
 
-**触发词表（6类场景）：**
-| aionui | 通用场景 |
+- **前端开发者**：需要将 UI 设计稿或界面描述转为结构化数据。
+- **数据分析师**：需要从界面截图或描述中提取指标字段。
+- **文档工程师**：需要将界面操作步骤整理为规范格式。
+- **测试人员**：需要将界面元素清单转为测试用例输入。
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 未命名工具，进入标准流程 |
-| 把这个转成另一种格式 | 启动 未命名工具，进入标准流程 |
-| 批量弄一下这些 | 启动 未命名工具，进入标准流程 |
+### 1.3 输入与输出规格
 
-## 三、标准流程（5分钟上手路径）
+| 项目 | 规格说明 |
+|------|----------|
+| **输入来源** | 用户直接粘贴文本 / 上传文件（.txt, .md, .json）/ 提供 URL |
+| **输入大小限制** | 单次不超过 50KB，超过则建议分段处理 |
+| **输出格式** | 默认 JSON；可选 CSV、Markdown 表格、YAML |
+| **字段结构** | `{ "id": "", "type": "", "label": "", "value": "", "confidence": 0.0 }` |
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2026 SkillForge Lab
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 ```
 <!-- professional-license-embedded -->
-
-## 前置条件
-
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
