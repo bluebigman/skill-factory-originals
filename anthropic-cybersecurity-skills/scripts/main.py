@@ -44,7 +44,7 @@ import io
 import json
 import re
 import sys
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 # ---------------------------------------------------------------------------
 # 常量定义
