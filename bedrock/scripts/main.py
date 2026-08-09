@@ -10,7 +10,7 @@ import json
 import re
 import sys
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 
 # ============================================================
@@ -153,7 +153,13 @@ def extract_fields(text: str) -> List[FieldResult]:
             ))
 
     if not fields:
-        raise BedrockError("E004")
+        # 如果没有匹配到任何字段，尝试将整个文本作为"内容"字段输出
+        # 这样即使是非结构化文本也能得到结构化结果
+        fields.append(FieldResult(
+            name="content",
+            value=text[:200],
+            confidence="低",
+        ))
 
     return fields
 
@@ -350,6 +356,37 @@ def _run_selftest() -> int:
     except BedrockError as e:
         print(f"  [失败] 置信度标注: {e}")
         return 1
+
+    # --- 样例 6：边界条件（数字输入） ---
+    try:
+        result_num = process_single(12345)
+        assert result_num.source == "12345", "数字输入应转为字符串"
+        assert len(result_num.fields) >= 1, "数字输入应至少产生一个字段"
+        print("  [通过] 边界条件: 数字输入")
+    except AssertionError as e:
+        print(f"  [失败] 边界条件: {e}")
+        return 1
+    except BedrockError as e:
+        print(f"  [失败] 边界条件: {e}")
+        return 1
+
+    # --- 样例 7：批量输入格式错误 ---
+    try:
+        process_batch([])
+        print("  [失败] 批量输入格式: 空列表应抛异常")
+        return 1
+    except BedrockError as e:
+        assert e.code == "E005", "空列表错误码应为 E005"
+        print(f"  [通过] 批量输入格式: 空列表返回 {e.code}")
+
+    # --- 样例 8：不支持的输出格式 ---
+    try:
+        format_output([ParseResult(source="test", fields=[FieldResult("name", "张三")])], "xml")
+        print("  [失败] 输出格式: 不支持的格式应抛异常")
+        return 1
+    except BedrockError as e:
+        assert e.code == "E008", "不支持的格式错误码应为 E008"
+        print(f"  [通过] 输出格式: 不支持格式返回 {e.code}")
 
     print("[selftest] 全部自检通过 ✓")
     return 0

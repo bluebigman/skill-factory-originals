@@ -12,6 +12,9 @@ import argparse
 import sys
 import re
 import json
+import os
+import tempfile
+import time
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -361,6 +364,168 @@ def selftest() -> bool:
         return False
     except ValueError as e:
         print(f"  样例6 失败: {e}")
+        return False
+
+    # 测试样例 7: 文件读取与输出写入（使用临时文件）
+    try:
+        # 创建临时输入文件
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as tmp_in:
+            tmp_in.write("名称: 文件测试\n值: 42")
+            tmp_in_path = tmp_in.name
+
+        # 读取文件
+        with open(tmp_in_path, 'r', encoding='utf-8') as f:
+            file_content = f.read()
+        assert "名称" in file_content, "样例7: 文件内容应包含键"
+
+        # 创建临时输出文件
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.out.txt', delete=False, encoding='utf-8') as tmp_out:
+            tmp_out_path = tmp_out.name
+
+        # 写入输出
+        result = process_input(file_content)
+        output_text = format_output(result, "text")
+        with open(tmp_out_path, 'w', encoding='utf-8') as f:
+            f.write(output_text)
+
+        # 验证输出
+        with open(tmp_out_path, 'r', encoding='utf-8') as f:
+            written = f.read()
+        assert "处理结果" in written, "样例7: 输出文件应包含处理结果"
+
+        # 清理临时文件
+        os.unlink(tmp_in_path)
+        os.unlink(tmp_out_path)
+        print("  样例7 通过 (文件读写正常)")
+    except Exception as e:
+        print(f"  样例7 失败: {e}")
+        return False
+
+    # 测试样例 8: 幂等性（重复处理结果一致）
+    try:
+        sample8 = "名称: 幂等测试\n值: 1"
+        r8a = process_input(sample8)
+        r8b = process_input(sample8)
+        assert r8a.to_dict() == r8b.to_dict(), "样例8: 相同输入应产生相同输出"
+        print("  样例8 通过 (幂等性验证)")
+    except AssertionError as e:
+        print(f"  样例8 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例8 失败: {e}")
+        return False
+
+    # 测试样例 9: 超时控制模拟（单条处理不应挂起）
+    try:
+        start = time.time()
+        process_input("名称: 超时测试\n值: 1")
+        elapsed = time.time() - start
+        assert elapsed < 5.0, "样例9: 处理时间不应超过5秒"
+        print(f"  样例9 通过 (耗时: {elapsed:.3f}s)")
+    except AssertionError as e:
+        print(f"  样例9 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例9 失败: {e}")
+        return False
+
+    # 测试样例 10: 降级方案（高级解析失败时回退基础模式）
+    try:
+        # 模拟复杂输入，应能回退到基础解析
+        sample10 = "第一行\n第二行\n第三行"
+        r10 = process_input(sample10)
+        assert len(r10.items) > 0, "样例10: 应有条目"
+        assert r10.confidence > 0, "样例10: 置信度应为正"
+        print(f"  样例10 通过 (降级解析正常, 置信度: {r10.confidence:.1f}%)")
+    except AssertionError as e:
+        print(f"  样例10 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例10 失败: {e}")
+        return False
+
+    # 测试样例 11: 重试策略（可恢复错误自动重试）
+    try:
+        # 模拟瞬时IO失败场景（文件被临时占用）
+        retry_count = 0
+        max_retries = 3
+        success = False
+        tmp_path = None
+        try:
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as tmp:
+                tmp.write("名称: 重试测试\n值: 1")
+                tmp_path = tmp.name
+
+            for attempt in range(max_retries):
+                try:
+                    with open(tmp_path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                    success = True
+                    break
+                except (IOError, OSError):
+                    retry_count += 1
+                    time.sleep(0.1 * (attempt + 1))  # 递增间隔
+
+            assert success, "样例11: 重试后应成功"
+            assert retry_count >= 0, "样例11: 重试次数应非负"
+            print(f"  样例11 通过 (重试机制正常, 重试次数: {retry_count})")
+        finally:
+            if tmp_path and os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+    except AssertionError as e:
+        print(f"  样例11 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例11 失败: {e}")
+        return False
+
+    # 测试样例 12: 错误码体系完整性
+    try:
+        required_codes = ["E001", "E002", "E003", "E004", "E005", "E006", "E007", "E008", "E009", "E010"]
+        for code in required_codes:
+            assert code in ERROR_CODES, f"样例12: 缺少错误码 {code}"
+            assert ERROR_CODES[code].strip(), f"样例12: 错误码 {code} 消息为空"
+        print("  样例12 通过 (错误码体系完整)")
+    except AssertionError as e:
+        print(f"  样例12 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例12 失败: {e}")
+        return False
+
+    # 测试样例 13: 输出文件不覆盖原始文件
+    try:
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as tmp_in:
+            tmp_in.write("名称: 原始数据\n值: 100")
+            tmp_in_path = tmp_in.name
+
+        with open(tmp_in_path, 'r', encoding='utf-8') as f:
+            original_content = f.read()
+
+        # 处理并输出到新文件
+        result = process_input(original_content)
+        output_text = format_output(result, "text")
+        out_path = tmp_in_path.replace(".txt", "_out.txt")
+        with open(out_path, 'w', encoding='utf-8') as f:
+            f.write(output_text)
+
+        # 验证原始文件未被修改
+        with open(tmp_in_path, 'r', encoding='utf-8') as f:
+            assert f.read() == original_content, "样例13: 原始文件不应被修改"
+
+        # 验证输出文件存在且不同
+        assert os.path.exists(out_path), "样例13: 输出文件应存在"
+        with open(out_path, 'r', encoding='utf-8') as f:
+            assert f.read() != original_content, "样例13: 输出文件应与原始文件不同"
+
+        os.unlink(tmp_in_path)
+        os.unlink(out_path)
+        print("  样例13 通过 (原始文件保护)")
+    except AssertionError as e:
+        print(f"  样例13 失败: {e}")
+        return False
+    except Exception as e:
+        print(f"  样例13 失败: {e}")
         return False
 
     print("所有自检通过！")

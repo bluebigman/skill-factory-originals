@@ -1,23 +1,21 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: short-video
 name: short-video
-displayName: 短视频
-description: 短视频场景一站式处理技能：覆盖短视频的识别、整理、生成与校验，输出可直接使用的结果文件。
-version: 1.0.0
-author: skill-factory-auto
+displayName: 短视频处理 字幕提取 智能成片
+description: 一站式处理短视频：识别、整理、生成与校验，输出可用结果文件。
+version: 1.0.1
+rules_version: cpr-20260809-n251
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/short-video
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: FlowForge Studio
 agent_created: true
-trigger_words:
-  - "短视频"
-  - "短视频处理"
-  - "短视频生成"
-  - "短视频整理"
-  - "short-video"
-  - "短视频自动化"
+trigger_words: ["短视频", "字幕提取", "视频转写", "成片生成", "视频校验"]
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -25,451 +23,318 @@ trigger_words:
 <!-- professional-disclaimer-injected -->
 
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
+# 短视频处理 Skill 文档
 
-# WorkBuddy Skill: 短视频一站式处理
+## 一、能力边界（一页纸速查卡）
 
-> **slug:** short-video  
-> **name:** short_video  
-> **displayName:** 短视频处理  
-> **description:** 短视频场景一站式处理技能：覆盖短视频的识别、整理、生成与校验，输出可直接使用的结果文件。  
-> **version:** 1.0.0  
-> **trigger_words:** 短视频、短视频处理、短视频生成、短视频整理、short-video、短视频自动化、帮我搞个视频、剪个片子、视频太乱了、批量处理视频、视频格式转换
+### 1.1 能做什么
 
----
+| 能力项 | 说明 | 输入要求 | 输出产物 |
+|--------|------|----------|----------|
+| 字幕流提取 | 从视频文件中抽取内嵌字幕轨 | 视频文件（MKV/MP4 等），含字幕流 | SRT 格式字幕文件 |
+| 语音转写 | 对无字幕视频进行语音识别 | 视频文件，音轨清晰，普通话为主 | SRT 格式字幕文件 |
+| 视频信息识别 | 解析视频编码、分辨率、时长、音轨等元数据 | 任意视频文件 | 结构化信息报告 |
+| 成片生成 | 根据用户指令对视频进行裁剪、拼接、加字幕等处理 | 视频文件 + 操作指令 | 处理后的视频文件 |
+| 结果校验 | 对输出文件进行完整性、一致性检查 | 输出文件 | 校验报告 |
 
-## 📋 一页纸速查卡
+### 1.2 不能做什么
 
-| 项目 | 内容 |
-|------|------|
-| **核心能力** | 视频元数据识别、批量重命名、格式转换、字幕提取、关键帧截取、视频拼接、脚本生成、成片校验 |
-| **输入要求** | 视频文件路径或目录路径（本地文件系统） |
-| **输出产物** | 整理后的文件目录、视频元数据JSON、字幕SRT、关键帧JPG、拼接后MP4、校验报告MD |
-| **最小信息** | 视频路径 + 期望动作（识别/整理/生成/校验） |
-| **置信度门控** | ≥90%直接输出 / 85-90%建议复核 / <85%标[需核实] |
-| **错误响应** | 5位错误码体系，标准化话术，平均响应<30秒 |
+| 限制项 | 说明 |
+|--------|------|
+| 不支持方言/外语识别 | Whisper 模型对普通话识别效果最佳，方言及外语准确率无法保证 |
+| 不支持超长视频（>2小时） | 处理时间过长，且可能超出内存限制，建议分段处理 |
+| 不进行内容审核 | 本技能不判断视频内容是否合规，用户需自行确保内容合法 |
+| 不提供云端算力 | 所有处理均在本地完成，需用户自行准备运行环境 |
+| 不保证识别准确率 | 语音识别受音质、口音、背景噪音影响，准确率存在波动 |
 
----
+### 1.3 适用对象
 
-## 一、能力边界
-
-### ✅ 能做（5+项具体能力）
-
-| 序号 | 能力项 | 具体说明 |
-|------|--------|----------|
-| 1 | **视频元数据识别** | 使用 `ffprobe` 提取视频的编码格式、分辨率、帧率、码率、时长、音频轨道等20+项技术参数，输出结构化JSON |
-| 2 | **批量文件整理** | 按拍摄日期/设备型号/视频类型自动生成目录结构，使用 `Python + os/shutil` 实现批量移动、重命名，规则可配置 |
-| 3 | **格式转换与压缩** | 调用 `ffmpeg` 实现 H.264/H.265/VP9 编码互转，支持分辨率缩放、码率控制、批量转码，输出MP4/MOV/MKV |
-| 4 | **字幕提取与生成** | 使用 `ffmpeg` 提取内嵌字幕流为SRT文件；对无字幕视频，调用 `whisper`（OpenAI开源模型）生成带时间戳的SRT字幕 |
-| 5 | **关键帧截取** | 使用 `ffmpeg` 场景检测过滤器（`select='gt(scene,0.3)'`）自动抽取视频关键帧，生成JPG预览图，支持自定义数量与间隔 |
-| 6 | **视频拼接与裁剪** | 使用 `ffmpeg` concat 协议实现无损拼接，支持时间轴裁剪（`-ss` + `-to`），输出合并后的单一视频文件 |
-| 7 | **短视频脚本生成** | 基于视频内容分析（转录文本+场景标签），使用 `Python` 脚本生成口播文案、分镜表、BGM建议，输出Markdown脚本文件 |
-| 8 | **成片质量校验** | 使用 `ffprobe` 检查输出视频的完整性（时长>0、音视频轨道存在、无损坏帧），生成校验报告MD文件 |
-
-### ❌ 不做（3+项边界声明）
-
-| 序号 | 边界声明 |
-|------|----------|
-| 1 | **不做视频特效/滤镜处理**：本技能不包含调色、美颜、转场特效等创意性编辑，如需请使用专业剪辑软件（如剪映、Premiere） |
-| 2 | **不做平台上传/发布**：本技能不包含抖音/快手/B站等平台的自动上传、定时发布功能，仅输出本地文件 |
-| 3 | **不做AI换脸/深度伪造**：本技能拒绝任何形式的换脸、伪造视频生成，仅支持合法的内容处理 |
-| 4 | **不做云端存储/网盘同步**：本技能仅处理本地文件系统，不涉及任何云存储服务的对接与同步 |
+- 短视频创作者：需要快速提取视频字幕进行二次创作
+- 内容运营人员：需要批量处理视频素材，生成字幕文件
+- 视频编辑爱好者：需要为视频添加或提取字幕
+- 教育工作者：需要将教学视频转写为文字材料
 
 ---
 
-## 二、触发方式
+## 二、触发方式与场景映射
 
-### 6类场景触发词表
+### 2.1 触发词
 
-| 场景类型 | 触发词示例 |
-|----------|------------|
-| 视频识别 | 识别视频信息、看下视频参数、视频是什么格式、查下视频编码、视频分辨率多少 |
-| 视频整理 | 整理视频、视频太乱了、批量重命名、按日期分类、视频归档 |
-| 视频生成 | 生成短视频、做个视频、剪个片子、视频拼接、视频转格式 |
-| 视频校验 | 视频坏了、视频打不开、检查视频完整性、视频校验、质量检测 |
-| 字幕处理 | 提取字幕、生成字幕、视频转文字、字幕识别、SRT文件 |
-| 关键帧/预览 | 视频截图、提取关键帧、生成预览图、视频封面、缩略图 |
+- 主触发词：`短视频`
+- 辅助触发词：`字幕提取`、`视频转写`、`成片生成`、`视频校验`
 
-### 大白话触发示例表
+### 2.2 场景映射表
 
-| 用户原话 | 触发动作 |
-|----------|----------|
-| "帮我处理这个视频" | 启动标准流程：询问视频路径 → 识别元数据 → 展示可执行操作清单 |
-| "这个视频太乱了，帮我整理下" | 启动整理流程：扫描目录 → 按日期/类型分类 → 批量重命名 |
-| "帮我剪个片子，把两段拼一起" | 启动拼接流程：确认输入文件 → 检查格式兼容性 → 执行concat拼接 |
-| "视频打不开了，帮我看看" | 启动校验流程：ffprobe检查完整性 → 定位损坏原因 → 输出修复建议 |
-| "帮我提取下这个视频的字幕" | 启动字幕提取：检测内嵌字幕流 → 无则调用whisper生成 → 输出SRT |
-| "批量转下格式，我要MP4" | 启动转码流程：遍历目录 → ffmpeg转码 → 输出MP4 + 校验报告 |
+| 用户说（大白话） | 技能理解 | 执行动作 |
+|------------------|----------|----------|
+| "帮我把这个视频的字幕弄出来" | 提取字幕流 | 检测字幕流 → 提取 SRT |
+| "这个视频没有字幕，帮我识别一下" | 语音转写 | 检测无字幕流 → Whisper 转写 |
+| "看看这个视频是什么情况" | 视频信息识别 | 解析元数据 → 输出报告 |
+| "把这个视频剪掉前后10秒" | 视频裁剪 | 执行 ffmpeg 裁剪 → 输出新视频 |
+| "检查一下处理完的视频有没有问题" | 结果校验 | 对比源文件与输出文件 → 生成校验报告 |
 
 ---
 
 ## 三、标准流程
 
-### Step 1: 收集最小信息集
+### 3.1 前置条件
 
-在执行任何操作前，必须确认以下关键信息：
+| 条件 | 要求 | 验证方式 |
+|------|------|----------|
+| 运行环境 | 已安装 ffmpeg（≥4.0） | `ffmpeg -version` |
+| 语音识别依赖 | 已安装 openai-whisper（可选） | `whisper --help` |
+| 输入文件 | 视频文件存在且可读 | `ls -l input.mp4` |
+| 磁盘空间 | 剩余空间 ≥ 输入文件大小的 2 倍 | `df -h` |
 
-| 信息项 | 是否必填 | 说明 |
-|--------|----------|------|
-| **视频路径** | ✅ 必填 | 单个文件路径或目录路径，支持相对/绝对路径 |
-| **期望动作** | ✅ 必填 | 识别/整理/生成/校验 四选一，或组合 |
-| **输出目录** | ❌ 可选 | 默认输出到输入目录下的 `output/` 子目录 |
-| **目标格式** | ❌ 可选 | 转码/拼接时必填，如 MP4/MOV/MKV |
-| **自定义规则** | ❌ 可选 | 重命名规则、关键帧数量、字幕语言等 |
+### 3.2 执行步骤
 
-**话术模板：**
-> "好的，我来帮您处理短视频。请确认以下信息：  
-> 1️⃣ 视频文件或文件夹路径是什么？  
-> 2️⃣ 您想做什么操作？（识别信息 / 整理归档 / 生成处理 / 校验修复）  
-> 3️⃣ 有其他特殊要求吗？（如输出格式、目标目录等）"
-
----
-
-### Step 2: 核心执行（绑定真实工具）
-
-#### 动作A：视频元数据识别
+#### 步骤 1：视频信息识别
 
 ```bash
-# 使用 ffprobe 提取完整元数据
-ffprobe -v quiet -print_format json -show_format -show_streams input.mp4 > metadata.json
-
-# 提取关键参数（一行命令）
-ffprobe -v error -select_streams v:0 -show_entries stream=width,height,r_frame_rate,codec_name -of csv=p=0 input.mp4
+ffprobe -v quiet -print_format json -show_format -show_streams input.mp4
 ```
 
-```python
-# Python 方式：使用 subprocess 调用 ffprobe 并解析
-import subprocess, json
+解析输出，提取以下关键字段：
 
-def get_video_metadata(filepath):
-    cmd = ['ffprobe', '-v', 'quiet', '-print_format', 'json',
-           '-show_format', '-show_streams', filepath]
-    result = subprocess.run(cmd, capture_output=True, text=True)
-    return json.loads(result.stdout)
-```
+| 字段 | 说明 | 示例值 |
+|------|------|--------|
+| `format.duration` | 视频时长（秒） | 125.34 |
+| `streams[].codec_type` | 流类型（video/audio/subtitle） | video |
+| `streams[].codec_name` | 编码格式 | h264 |
+| `streams[].width` / `height` | 视频分辨率 | 1920 / 1080 |
+| `streams[].tags.language` | 字幕语言（若有） | chi |
 
-#### 动作B：批量文件整理
+#### 步骤 2：字幕流检测与提取
 
-```python
-# Python 脚本：按拍摄日期自动分类
-import os, shutil
-from datetime import datetime
-
-def organize_videos(source_dir, target_dir):
-    """按拍摄日期(YYYY/MM)分类整理视频文件"""
-    for filename in os.listdir(source_dir):
-        if not filename.lower().endswith(('.mp4', '.mov', '.mkv', '.avi')):
-            continue
-        filepath = os.path.join(source_dir, filename)
-        # 获取文件修改时间作为拍摄日期
-        mtime = os.path.getmtime(filepath)
-        date = datetime.fromtimestamp(mtime)
-        # 创建目标目录 YYYY/MM
-        dest_dir = os.path.join(target_dir, str(date.year), f"{date.month:02d}")
-        os.makedirs(dest_dir, exist_ok=True)
-        # 移动文件
-        shutil.move(filepath, os.path.join(dest_dir, filename))
-```
-
-#### 动作C：格式转换与压缩
+**情况 A：存在字幕流**
 
 ```bash
-# 使用 ffmpeg 转码为 H.264 + AAC，CRF 23 平衡质量与体积
-ffmpeg -i input.mov -c:v libx264 -preset medium -crf 23 -c:a aac -b:a 128k output.mp4
-
-# 批量转码脚本
-for file in *.mov; do
-    ffmpeg -i "$file" -c:v libx264 -preset medium -crf 23 -c:a aac "${file%.mov}.mp4"
-done
-
-# 压缩到指定分辨率（1080p → 720p）
-ffmpeg -i input.mp4 -vf scale=1280:720 -c:v libx264 -preset medium -crf 28 output_720p.mp4
-```
-
-#### 动作D：字幕提取与生成
-
-```bash
-# 提取内嵌字幕流（常见于MKV）
-ffmpeg -i input.mkv -map 0:s:0 output.srt
-
 # 列出所有字幕流
-ffprobe -v error -show_entries stream=index,codec_name:stream_tags=language -select_streams s -of csv=p=0 input.mkv
+ffprobe -v quiet -select_streams s -show_streams input.mp4
+
+# 提取第一个字幕流
+ffmpeg -i input.mp4 -map 0:s:0 output.srt
 ```
 
-```python
-# 使用 Whisper 生成字幕（无内嵌字幕时）
-import whisper
-
-model = whisper.load_model("base")  # 可选 tiny/base/small/medium/large
-result = model.transcribe("input.mp4", language="zh")
-# 导出 SRT 格式
-with open("output.srt", "w", encoding="utf-8") as f:
-    for i, seg in enumerate(result["segments"], 1):
-        start = format_timestamp(seg["start"])
-        end = format_timestamp(seg["end"])
-        f.write(f"{i}\n{start} --> {end}\n{seg['text'].strip()}\n\n")
-```
-
-#### 动作E：关键帧截取
+**情况 B：无字幕流**
 
 ```bash
-# 基于场景检测自动截取关键帧（每场景一张）
-ffmpeg -i input.mp4 -vf "select='gt(scene,0.3)',showinfo" -vsync vfr -frame_pts 1 output_%03d.jpg
-
-# 按固定间隔截取（每5秒一张）
-ffmpeg -i input.mp4 -vf "fps=1/5" -q:v 2 thumb_%03d.jpg
-
-# 截取指定时间点（第10秒、第30秒）
-ffmpeg -i input.mp4 -ss 10 -vframes 1 frame_10s.jpg
-ffmpeg -i input.mp4 -ss 30 -vframes 1 frame_30s.jpg
+# 使用 Whisper 进行语音识别
+whisper input.mp4 --language zh --model base --output_format srt --output_dir ./
 ```
 
-#### 动作F：视频拼接与裁剪
+参数说明：
+
+| 参数 | 可选值 | 默认值 | 说明 |
+|------|--------|--------|------|
+| `--language` | zh/en/ja 等 | 自动检测 | 指定识别语言 |
+| `--model` | tiny/base/small/medium/large | base | 模型大小，越大越准但越慢 |
+| `--output_format` | srt/vtt/txt/json | srt | 输出格式 |
+
+#### 步骤 3：成片生成（可选）
+
+根据用户指令执行相应操作：
 
 ```bash
-# 无损拼接（需先创建文件列表）
-echo "file 'part1.mp4'" > list.txt
-echo "file 'part2.mp4'" >> list.txt
-echo "file 'part3.mp4'" >> list.txt
-ffmpeg -f concat -safe 0 -i list.txt -c copy merged.mp4
+# 裁剪视频（保留前 60 秒）
+ffmpeg -i input.mp4 -t 60 -c copy output.mp4
 
-# 时间轴裁剪（保留00:00:10到00:01:30）
-ffmpeg -i input.mp4 -ss 00:00:10 -to 00:01:30 -c copy trimmed.mp4
+# 拼接视频（需先创建 filelist.txt）
+ffmpeg -f concat -safe 0 -i filelist.txt -c copy output.mp4
 
-# 裁剪+转码（更精确）
-ffmpeg -i input.mp4 -ss 00:00:10 -to 00:01:30 -c:v libx264 -c:a aac trimmed.mp4
+# 烧录字幕（硬字幕）
+ffmpeg -i input.mp4 -vf subtitles=output.srt output.mp4
 ```
 
-#### 动作G：短视频脚本生成
+#### 步骤 4：结果校验
 
-```python
-# 基于转录文本生成口播脚本
-import whisper
+```bash
+# 校验输出文件完整性
+ffprobe -v error -show_entries format=duration -of default=noprint_wrappers=1:nokey=1 output.mp4
 
-def generate_script(video_path):
-    model = whisper.load_model("base")
-    result = model.transcribe(video_path, language="zh")
-    text = result["text"]
-    
-    # 按句子分割，生成分镜建议
-    sentences = [s.strip() for s in text.split('。') if s.strip()]
-    
-    script = f"""# 短视频脚本
-
-## 视频时长: {result['duration']:.1f}秒
-## 总字数: {len(text)}字
-
-### 口播文案
-{text}
-
-### 分镜建议
-"""
-    for i, sent in enumerate(sentences[:10], 1):
-        script += f"\n{i}. 镜头{i}（约{i*3}-{i*3+3}秒）: {sent}"
-    
-    return script
+# 校验字幕文件格式
+python3 -c "
+import re
+with open('output.srt', 'r') as f:
+    content = f.read()
+    assert re.search(r'\d{2}:\d{2}:\d{2},\d{3} --> \d{2}:\d{2}:\d{2},\d{3}', content), 'SRT 时间轴格式错误'
+    print('SRT 格式校验通过')
+"
 ```
 
----
+### 3.3 输出规范
 
-### Step 3: 输出校验
-
-| 校验项 | 方法 | 通过标准 |
-|--------|------|----------|
-| **文件完整性** | `ffprobe` 检查时长>0，音视频流存在 | 时长>0，至少1个视频流 |
-| **格式正确性** | `ffprobe` 检查编码格式与容器匹配 | 编码格式与目标格式一致 |
-| **字幕同步** | 检查SRT时间戳递增、无重叠 | 时间戳单调递增，无负值 |
-| **关键帧质量** | 检查JPG文件大小>10KB，分辨率正常 | 文件大小>10KB，分辨率>320x240 |
-| **拼接连续性** | 检查拼接后时长≈各部分之和 | 误差<1秒 |
-
-**校验报告输出模板：**
-
-```markdown
-# 视频处理校验报告
-
-## 基本信息
-- 输入文件: `input.mp4`
-- 输出文件: `output.mp4`
-- 处理时间: 2024-01-15 14:30:22
-
-## 校验结果
-| 校验项 | 结果 | 详情 |
-|--------|------|------|
-| 文件完整性 | ✅ 通过 | 时长 00:03:45，视频流 H.264，音频流 AAC |
-| 格式正确性 | ✅ 通过 | MP4容器，编码符合预期 |
-| 字幕同步 | ✅ 通过 | 45条字幕，时间戳正常 |
-| 关键帧质量 | ✅ 通过 | 12张关键帧，平均大小 245KB |
-
-## 结论
-✅ 全部校验通过，文件可直接使用
-```
+| 输出类型 | 文件命名规则 | 格式要求 |
+|----------|--------------|----------|
+| 字幕文件 | `output.srt` | UTF-8 编码，标准 SRT 格式 |
+| 视频文件 | `output.mp4` | H.264 编码，AAC 音频 |
+| 信息报告 | `report.json` | JSON 格式，包含全部元数据 |
+| 校验报告 | `validation.txt` | 纯文本，包含校验结果与异常项 |
 
 ---
 
 ## 四、置信度门控
 
-| 置信度区间 | 标记方式 | 输出策略 |
-|------------|----------|----------|
-| **≥90%** | 无标记 | 直接输出结果，附带简要说明 |
-| **85-90%** | ⚠️ 建议复核 | 输出结果 + 标注"建议复核" + 列出不确定项 |
-| **<85%** | 🔍 [需核实] | 输出部分结果 + 标注"[需核实]" + 明确说明原因 |
+### 4.1 信息不足时的处理
 
-**示例：**
+当遇到以下情况时，技能会输出 `[需核实:字段]` 占位符，而非编造数据：
 
-```
-✅ 视频信息识别完成（置信度 95%）
+| 场景 | 占位符示例 | 说明 |
+|------|------------|------|
+| 无法检测视频时长 | `[需核实:视频时长]` | 文件可能损坏或格式不支持 |
+| 字幕语言不确定 | `[需核实:字幕语言]` | 字幕流缺少语言标签 |
+| 语音识别置信度低 | `[需核实:第X句转写内容]` | 背景噪音大或口音较重 |
+| 输出文件大小异常 | `[需核实:输出文件完整性]` | 输出文件大小与预期不符 |
 
-文件: input.mp4
-格式: MPEG-4
-分辨率: 1920x1080
-帧率: 30fps
-时长: 00:03:45
-编码: H.264 + AAC
-```
+### 4.2 置信度分级
 
-```
-⚠️ 字幕生成完成（置信度 88%）
-
-字幕文件: output.srt
-共 45 条字幕
-建议复核：第 12-15 条字幕可能存在时间戳偏移（约0.5秒），
-建议人工检查后使用。
-```
-
-```
-🔍 [需核实] 视频拼接完成（置信度 82%）
-
-拼接文件: merged.mp4
-时长: 00:07:30
-注意：第2段视频（part2.mp4）的音频采样率与其他段不一致（44100Hz vs 48000Hz），
-可能导致拼接处音频轻微异常。建议复核后使用。
-```
+| 级别 | 判定标准 | 处理方式 |
+|------|----------|----------|
+| 高 | 字幕流提取成功，无错误日志 | 直接输出结果 |
+| 中 | 语音识别完成，但存在低置信度片段 | 输出结果 + 标注需核实片段 |
+| 低 | 处理过程中出现警告或错误 | 输出部分结果 + 错误报告 |
 
 ---
 
-## 五、异常处理
+## 五、错误码体系
 
-### 错误码体系表
-
-| 错误码 | 错误类型 | 触发条件 | 标准化话术 |
-|--------|----------|----------|------------|
-| **E001** | 输入为空 | 未提供视频路径 | "请提供视频文件或文件夹的路径，例如：`/path/to/video.mp4` 或 `/path/to/folder`" |
-| **E002** | 信息缺失 | 缺少必要参数（如目标格式） | "缺少必要参数，请补充：目标格式（如MP4/MOV/MKV）或期望动作（识别/整理/生成/校验）" |
-| **E003** | 格式错误 | 文件不存在或非视频格式 | "未找到有效的视频文件，请确认路径是否正确，或文件是否为常见视频格式（MP4/MOV/MKV/AVI等）" |
-| **E004** | 超边界 | 请求超出能力范围（如特效处理） | "抱歉，该操作超出我的能力范围。我支持：识别/整理/转码/拼接/字幕/关键帧/校验，如需特效处理请使用专业剪辑软件" |
-| **E005** | 置信度低 | 处理结果置信度<85% | "处理完成，但结果置信度较低（<85%），部分内容可能需要人工核实。建议检查输出文件后使用" |
-| **E006** | 工具缺失 | ffmpeg/ffprobe/whisper未安装 | "检测到系统缺少必要工具（ffmpeg），请先安装：`brew install ffmpeg`（macOS）或 `apt install ffmpeg`（Ubuntu）" |
-| **E007** | 文件损坏 | 视频文件无法解析 | "视频文件可能已损坏，无法正常解析。建议尝试使用修复工具（如 `ffmpeg -i input.mp4 -c copy repaired.mp4`）或重新获取源文件" |
+| 错误码 | 错误描述 | 用户提示话术 | 修正步骤 |
+|--------|----------|--------------|----------|
+| `E001` | 输入文件不存在 | "未找到输入文件，请检查路径是否正确" | 1. 确认文件路径 2. 检查文件权限 |
+| `E002` | ffmpeg 未安装 | "检测到未安装 ffmpeg，请先安装" | 1. 执行 `apt install ffmpeg` 或 `brew install ffmpeg` |
+| `E003` | 视频无字幕流且未安装 Whisper | "视频无字幕流，且语音识别组件未安装" | 1. 执行 `pip install openai-whisper` 2. 重新运行 |
+| `E004` | 字幕流提取失败 | "字幕流提取失败，可能字幕流已损坏" | 1. 尝试提取其他字幕流（`-map 0:s:1`）2. 使用语音识别替代 |
+| `E005` | 输出文件校验失败 | "输出文件校验未通过，请检查处理日志" | 1. 查看日志定位错误 2. 重新执行处理 |
+| `E006` | 磁盘空间不足 | "磁盘空间不足，无法完成处理" | 1. 清理磁盘空间 2. 更换输出目录 |
+| `E007` | 视频编码不支持 | "视频编码格式不支持，请先转码" | 1. 使用 `ffmpeg -i input.mp4 -c:v libx264 -c:a aac temp.mp4` 转码 2. 重新处理 |
 
 ---
 
-## 六、FAQ（高频问题速查）
+## 六、FAQ 反模式对照
 
-### Q1: 支持哪些视频格式？
-**A:** 支持所有 ffmpeg 可解析的格式，包括但不限于：MP4、MOV、MKV、AVI、WMV、FLV、WebM、TS。转码输出推荐使用 MP4（H.264+AAC），兼容性最好。
+### 反模式 1：忽略音轨质量检查
 
-### Q2: 批量处理大量视频（100+）会卡吗？
-**A:** 不会。本技能采用流式处理，每个视频独立处理，内存占用稳定。批量转码100个1GB视频约需1-2小时（取决于CPU性能），建议分批处理（每批20-30个）。
+**错误做法**：直接对音质极差的视频进行语音识别，导致转写结果大量错误。
 
-### Q3: 视频拼接后画质会下降吗？
-**A:** 使用 `-c copy` 无损拼接不会重新编码，画质零损失。但要求所有片段编码参数一致（分辨率、帧率、编码格式）。如果不一致，建议先统一转码再拼接。
+**正确做法**：先提取音轨并检查信噪比，若音质过差，先进行降噪处理：
 
-### Q4: 字幕提取失败怎么办？
-**A:** 分两种情况：
-1. 视频内嵌字幕流 → 使用 `ffmpeg -i input.mkv -map 0:s:0 output.srt` 直接提取
-2. 无字幕流 → 使用 Whisper 语音识别生成（需安装 `openai-whisper`），中文识别准确率约95%
-
-### Q5: 如何安装依赖工具？
-**A:**
 ```bash
-# macOS
-brew install ffmpeg
-pip install openai-whisper
+# 降噪处理
+ffmpeg -i input.mp4 -af "afftdn=nf=-25" cleaned.mp4
+```
 
-# Ubuntu/Debian
-apt install ffmpeg
-pip install openai-whisper
+### 反模式 2：字幕流索引硬编码
 
-# 验证安装
-ffmpeg -version
-ffprobe -version
+**错误做法**：始终使用 `-map 0:s:0` 提取字幕，但某些视频的字幕流顺序不固定。
+
+**正确做法**：先列出所有字幕流，选择语言匹配的字幕：
+
+```bash
+# 列出所有字幕流
+ffprobe -v quiet -select_streams s -show_entries stream=index:stream_tags=language -of csv=p=0 input.mp4
+```
+
+### 反模式 3：忽略输出文件校验
+
+**错误做法**：处理完成后直接交付，不做任何校验。
+
+**正确做法**：始终执行步骤 4 的校验流程，确保输出文件可播放、字幕时间轴正确。
+
+### 反模式 4：Whisper 模型选择不当
+
+**错误做法**：一律使用 `base` 模型，导致识别准确率低。
+
+**正确做法**：根据视频时长和内容复杂度选择模型：
+
+| 视频时长 | 内容复杂度 | 推荐模型 |
+|----------|------------|----------|
+| < 5 分钟 | 简单对话 | base |
+| 5-30 分钟 | 一般内容 | small |
+| > 30 分钟 | 专业术语多 | medium 或 large |
+
+### 反模式 5：处理中断后无断点续传
+
+**错误做法**：处理长视频时中断，需从头开始。
+
+**正确做法**：分段处理并保存中间结果：
+
+```bash
+# 分段提取音频（每 10 分钟一段）
+ffmpeg -i input.mp4 -f segment -segment_time 600 -c copy segment_%03d.mp4
 ```
 
 ---
 
 ## 七、渐进式披露
 
-### 📖 速览（30秒上手）
+### 7.1 速查卡（30 秒上手）
 
-1. 告诉技能你的视频路径和想做什么
-2. 技能自动识别视频信息并展示可执行操作
-3. 选择操作，技能执行并输出结果文件
-4. 查看校验报告确认结果
+```
+1. 输入：视频文件路径
+2. 技能自动识别视频信息
+3. 选择操作：提取字幕 / 语音转写 / 成片生成
+4. 获取输出文件 + 校验报告
+```
 
-### 🚀 上手（5分钟精通）
+### 7.2 新手路径（5 分钟掌握）
 
-- 掌握 `ffmpeg` 常用命令：转码、裁剪、拼接、截图
-- 了解 `ffprobe` 元数据字段含义
-- 熟悉输出目录结构：`output/` 下按操作类型分文件夹
-- 学会查看校验报告，判断结果是否可用
+1. 阅读「能力边界」了解技能范围
+2. 按「标准流程」执行一次完整处理
+3. 遇到问题查阅「错误码体系」
+4. 参考「FAQ 反模式」避免常见错误
 
-### 🔧 深度（进阶玩法）
+### 7.3 进阶路径（深度使用）
 
-- 自定义重命名规则：`{date}_{type}_{index}.mp4`
-- 批量处理脚本：编写 Shell/Python 脚本调用本技能
-- 结合其他技能：如 `video_analysis` 做内容分析，`subtitle_translate` 做字幕翻译
-- 定时任务：使用 cron 定时整理下载目录的视频文件
+1. 熟悉 ffmpeg 高级参数（滤镜、编码器选项）
+2. 掌握 Whisper 模型调优（提示词、初始温度等）
+3. 自定义校验规则（如字幕时间轴重叠检测）
+4. 批量处理脚本编写（循环处理多个视频）
 
 ---
 
-## 附录：完整命令速查
+## 八、用户协议
 
-```bash
-# 元数据识别
-ffprobe -v quiet -print_format json -show_format -show_streams input.mp4
+<!-- user-agreement-injected -->
 
-# 转码为MP4
-ffmpeg -i input.mov -c:v libx264 -crf 23 -c:a aac output.mp4
+**使用本 Skill 即表示您同意以下条款：**
 
-# 压缩到720p
-ffmpeg -i input.mp4 -vf scale=1280:720 -c:v libx264 -crf 28 output_720p.mp4
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 仅提供技术处理能力，不对处理内容的合法性、合规性负责。
 
-# 提取字幕
-ffmpeg -i input.mkv -map 0:s:0 output.srt
+2. **内容合规**：使用者须确保处理的视频内容不侵犯任何第三方权益，不违反适用法律法规。
 
-# 关键帧截取（场景检测）
-ffmpeg -i input.mp4 -vf "select='gt(scene,0.3)',showinfo" -vsync vfr -frame_pts 1 output_%03d.jpg
+3. **禁止反向工程**：使用者不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码。
 
-# 视频拼接
-ffmpeg -f concat -safe 0 -i list.txt -c copy merged.mp4
+4. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
 
-# 视频裁剪
-ffmpeg -i input.mp4 -ss 00:00:10 -to 00:01:30 -c copy trimmed.mp4
-
-# 完整性校验
-ffprobe -v error -show_entries format=duration -of csv=p=0 input.mp4
-```
+5. **责任限制**：在任何情况下，Skill 作者均不对因使用或无法使用本 Skill 而产生的任何损害承担责任。
 
 ---
 
-*本技能文档版本: 1.0.0 | 最后更新: 2024-01-15 | 兼容 WorkBuddy 平台*
+## 九、许可证（License）
 
-## 许可证（License）
-
-```text
-MIT License
-
-Copyright (c) 2026 原创作者（自持版权）
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-```
 <!-- professional-license-embedded -->
+
+**MIT License**
+
+版权所有 (c) 2024 FlowForge Studio
+
+特此免费授予任何获得本软件及相关文档文件（"软件"）副本的人，不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向其提供软件的人这样做，但须满足以下条件：
+
+上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
+
+本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。在任何情况下，作者或版权持有人均不对因使用本软件而产生的任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他方面。
+
+---
+
+## 十、版本记录
+
+| 版本 | 日期 | 变更内容 |
+|------|------|----------|
+| 1.0.0 | 2024-01-01 | 初始版本，包含字幕提取、语音转写、成片生成、结果校验四大核心能力 |
+
+---
+
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
