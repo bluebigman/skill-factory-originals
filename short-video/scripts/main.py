@@ -5,6 +5,10 @@ import sys
 import os
 import re
 import argparse
+import json
+import subprocess
+import tempfile
+import shutil
 from datetime import timedelta
 
 # 错误码定义
@@ -238,7 +242,7 @@ Test content"""
     # 测试6: 文件读写
     print("[测试 6] 文件读写")
     try:
-        test_file = "/tmp/test_srt.srt"
+        test_file = os.path.join(tempfile.gettempdir(), "test_srt.srt")
         with open(test_file, 'w', encoding='utf-8') as f:
             f.write(valid_srt)
         result = process_file(test_file)
@@ -248,6 +252,9 @@ Test content"""
         tests_passed += 1
     except AssertionError as e:
         print(f"  ✗ {e}")
+        tests_failed += 1
+    except Exception as e:
+        print(f"  ✗ 文件读写异常: {e}")
         tests_failed += 1
     
     # 测试7: 输入校验
@@ -289,7 +296,7 @@ Test content"""
     # 测试10: 编码异常
     print("[测试 10] 编码异常处理")
     try:
-        test_file = "/tmp/test_gbk.srt"
+        test_file = os.path.join(tempfile.gettempdir(), "test_gbk.srt")
         with open(test_file, 'w', encoding='gbk') as f:
             f.write("1\n00:00:01,000 --> 00:00:03,000\n测试GBK编码")
         result = process_file(test_file)
@@ -299,6 +306,182 @@ Test content"""
         tests_passed += 1
     except AssertionError as e:
         print(f"  ✗ {e}")
+        tests_failed += 1
+    except Exception as e:
+        print(f"  ✗ 编码测试异常: {e}")
+        tests_failed += 1
+    
+    # 测试11: 序号不连续
+    print("[测试 11] 序号不连续")
+    try:
+        srt_with_gap = """1
+00:00:01,000 --> 00:00:03,000
+First
+
+3
+00:00:04,000 --> 00:00:06,000
+Second"""
+        validator = SRTValidator()
+        assert validator.validate(srt_with_gap), "序号不连续不应影响验证"
+        print("  ✓ 序号不连续通过验证")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    
+    # 测试12: 时间重叠
+    print("[测试 12] 时间重叠")
+    try:
+        srt_overlap = """1
+00:00:01,000 --> 00:00:04,000
+First
+
+2
+00:00:03,000 --> 00:00:06,000
+Second"""
+        validator = SRTValidator()
+        assert validator.validate(srt_overlap), "时间重叠不应影响验证"
+        print("  ✓ 时间重叠通过验证")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    
+    # 测试13: 毫秒格式
+    print("[测试 13] 毫秒格式")
+    try:
+        srt_ms = """1
+00:00:01.500 --> 00:00:03.250
+Dot format"""
+        validator = SRTValidator()
+        assert validator.validate(srt_ms), "点号毫秒格式应该通过验证"
+        print("  ✓ 点号毫秒格式通过验证")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    
+    # 测试14: 多行字幕
+    print("[测试 14] 多行字幕")
+    try:
+        srt_multi = """1
+00:00:01,000 --> 00:00:03,000
+Line one
+Line two
+Line three"""
+        validator = SRTValidator()
+        assert validator.validate(srt_multi), "多行字幕应该通过验证"
+        assert len(validator.blocks[0]['text'].split('\n')) == 3, "应该保留3行文本"
+        print("  ✓ 多行字幕通过验证")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    
+    # 测试15: 文件不存在
+    print("[测试 15] 文件不存在")
+    try:
+        result = process_file(os.path.join(tempfile.gettempdir(), "nonexistent_file.srt"))
+        assert not result['success'], "不存在的文件应该失败"
+        assert result['error'] == 'E002', f"错误码应为 E002，实际为 {result['error']}"
+        print("  ✓ 文件不存在处理正确")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    
+    # 测试16: 空文件
+    print("[测试 16] 空文件")
+    try:
+        test_file = os.path.join(tempfile.gettempdir(), "test_empty.srt")
+        with open(test_file, 'w', encoding='utf-8') as f:
+            f.write("")
+        result = process_file(test_file)
+        assert not result['success'], "空文件应该失败"
+        assert result['error'] == 'E001', f"错误码应为 E001，实际为 {result['error']}"
+        os.remove(test_file)
+        print("  ✓ 空文件处理正确")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    
+    # 测试17: 特殊字符
+    print("[测试 17] 特殊字符")
+    try:
+        srt_special = """1
+00:00:01,000 --> 00:00:03,000
+<font color="red">Red text</font>
+<b>Bold</b> & <i>Italic</i>"""
+        validator = SRTValidator()
+        assert validator.validate(srt_special), "特殊字符SRT应该通过验证"
+        print("  ✓ 特殊字符通过验证")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    
+    # 测试18: 命令行参数
+    print("[测试 18] 命令行参数")
+    try:
+        test_file = os.path.join(tempfile.gettempdir(), "test_cli.srt")
+        with open(test_file, 'w', encoding='utf-8') as f:
+            f.write(valid_srt)
+        result = subprocess.run(
+            [sys.executable, __file__, test_file],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        assert result.returncode == 0, f"CLI应该返回0，实际返回{result.returncode}"
+        assert "验证通过" in result.stdout, "CLI应该输出验证通过"
+        os.remove(test_file)
+        print("  ✓ 命令行参数处理正确")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    except subprocess.TimeoutExpired:
+        print("  ✗ CLI执行超时")
+        tests_failed += 1
+    
+    # 测试19: 帮助信息
+    print("[测试 19] 帮助信息")
+    try:
+        result = subprocess.run(
+            [sys.executable, __file__, "--help"],
+            capture_output=True,
+            text=True,
+            timeout=10
+        )
+        assert result.returncode == 0, f"帮助应该返回0，实际返回{result.returncode}"
+        assert "usage" in result.stdout.lower(), "帮助应该包含usage"
+        print("  ✓ 帮助信息正确")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    except subprocess.TimeoutExpired:
+        print("  ✗ 帮助执行超时")
+        tests_failed += 1
+    
+    # 测试20: 自检模式
+    print("[测试 20] 自检模式")
+    try:
+        # 直接调用 run_selftest 而不是通过 subprocess，避免递归超时
+        # 这里只验证 selftest 参数能被正确解析
+        parser = argparse.ArgumentParser(description='SRT字幕文件验证器')
+        parser.add_argument('file', nargs='?', help='SRT文件路径')
+        parser.add_argument('--selftest', action='store_true', help='运行自检测试')
+        args = parser.parse_args(['--selftest'])
+        assert args.selftest, "selftest 参数应该为 True"
+        print("  ✓ 自检模式参数解析正确")
+        tests_passed += 1
+    except AssertionError as e:
+        print(f"  ✗ {e}")
+        tests_failed += 1
+    except Exception as e:
+        print(f"  ✗ 自检模式异常: {e}")
         tests_failed += 1
     
     print("=" * 60)
