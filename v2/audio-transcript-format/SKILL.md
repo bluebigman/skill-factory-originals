@@ -1,3 +1,22 @@
+---
+slug: audio-transcript-format
+name: audio-transcript-format
+displayName: 语音转写整理
+description: 语音转写文本智能整理：分句、填充词清理、标点修复、段落分割、术语统一、待办/截止/异议/决策提取，多编码自动识别，内置 40 条自测。
+version: 1.0.0
+# === 法律合规声明（自动生成，请勿删除） ===
+license: MIT
+source_project: original
+source_url: https://skillhub.cn
+source_license_url: 
+copyright_holder: Skill Factory
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。本Skill为AI辅助生成内容。
+author: skill-factory-auto
+agent_created: true
+trigger_words: 
+---
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
