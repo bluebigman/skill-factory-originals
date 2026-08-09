@@ -3,7 +3,7 @@
 slug: ally-legal-assistant
 name: ally-legal-assistant
 displayName: 合同智审助手
-description: 面向法律与商务场景的合同条款解析、风险提示与结构化输出工具。
+description: 仅供学习与参考用途。使用本。当用户需要法律、进行ally legal assistant相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.1
 rules_version: cpr-20260808-n152
 license: MIT

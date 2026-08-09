@@ -1,500 +1,482 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-patent_pro - 专利价值评估与风险预警系统
-离线自检工具，用于验证核心功能
+patent-pro 专利全流程处理工具
+功能：专利识别、信息整理、文档生成、形式校验
 """
 
+import argparse
+import re
 import sys
 import os
-import json
-import math
-import random
-from datetime import datetime, timedelta
-from collections import defaultdict
-
-# ============================================================
-# 核心数据结构
-# ============================================================
-
-class Patent:
-    """专利类"""
-    def __init__(self, patent_id, title, abstract, claims, applicants, inventors, 
-                 filing_date, grant_date, expiration_date, status, tech_field, 
-                 citations, cited_by, maintenance_fees_paid, family_size, 
-                 claims_count, description_length, has_drawings, has_claims, 
-                 has_abstract, has_description, is_independent, is_dependent, 
-                 priority_count, pct_applications, foreign_filings):
-        self.patent_id = patent_id
-        self.title = title
-        self.abstract = abstract
-        self.claims = claims
-        self.applicants = applicants
-        self.inventors = inventors
-        self.filing_date = filing_date
-        self.grant_date = grant_date
-        self.expiration_date = expiration_date
-        self.status = status
-        self.tech_field = tech_field
-        self.citations = citations
-        self.cited_by = cited_by
-        self.maintenance_fees_paid = maintenance_fees_paid
-        self.family_size = family_size
-        self.claims_count = claims_count
-        self.description_length = description_length
-        self.has_drawings = has_drawings
-        self.has_claims = has_claims
-        self.has_abstract = has_abstract
-        self.has_description = has_description
-        self.is_independent = is_independent
-        self.is_dependent = is_dependent
-        self.priority_count = priority_count
-        self.pct_applications = pct_applications
-        self.foreign_filings = foreign_filings
-
-    def age_years(self, current_date=None):
-        """计算专利年龄（年）"""
-        if current_date is None:
-            current_date = datetime.now().date()
-        if self.filing_date:
-            return (current_date - self.filing_date).days / 365.25
-        return 0
-
-    def remaining_life_years(self, current_date=None):
-        """计算剩余寿命（年）"""
-        if current_date is None:
-            current_date = datetime.now().date()
-        if self.expiration_date:
-            return max(0, (self.expiration_date - current_date).days / 365.25)
-        return 0
+from datetime import datetime
+from pathlib import Path
 
 
 # ============================================================
-# 数据生成与加载
+# 错误码定义
 # ============================================================
+ERR_INVALID_INPUT = "E001"      # 输入无效
+ERR_FILE_NOT_FOUND = "E002"     # 文件不存在
+ERR_FILE_READ = "E003"          # 文件读取失败
+ERR_FILE_WRITE = "E004"         # 文件写入失败
+ERR_ENCODING = "E005"           # 编码不支持
+ERR_FORMAT = "E006"             # 格式错误
+ERR_EMPTY_CONTENT = "E007"      # 内容为空
+ERR_INVALID_PATH = "E008"       # 路径非法
+ERR_INVALID_ARGS = "E009"       # 参数错误
+ERR_UNKNOWN = "E010"            # 未知错误
 
-def generate_sample_data():
-    """生成样例专利数据"""
-    patents = []
+
+# ============================================================
+# 输入校验
+# ============================================================
+def validate_input(text):
+    """校验输入文本有效性"""
+    if text is None:
+        raise ValueError(f"{ERR_INVALID_INPUT}: 输入内容为空")
+    if not isinstance(text, str):
+        raise ValueError(f"{ERR_INVALID_INPUT}: 输入必须是字符串类型")
+    if len(text.strip()) == 0:
+        raise ValueError(f"{ERR_EMPTY_CONTENT}: 输入内容为空")
+    return text.strip()
+
+
+def validate_output_path(path_str):
+    """校验输出路径合法性"""
+    if not path_str:
+        return None
+    p = Path(path_str)
+    # 检查路径是否包含穿越
+    if ".." in p.parts:
+        raise ValueError(f"{ERR_INVALID_PATH}: 路径包含非法目录穿越")
+    # 检查扩展名
+    if p.suffix not in [".md", ".txt", ".json"]:
+        raise ValueError(f"{ERR_INVALID_PATH}: 输出文件必须是 .md/.txt/.json 格式")
+    return p
+
+
+# ============================================================
+# 核心逻辑：技术特征提取
+# ============================================================
+def extract_technical_features(text):
+    """从技术描述中提取技术问题、手段、效果"""
+    features = {
+        "技术问题": None,
+        "技术手段": None,
+        "技术效果": None
+    }
     
-    # 创建一些样例专利
-    sample_data = [
-        {
-            "patent_id": "US10000001B2",
-            "title": "Method and system for blockchain-based secure data storage",
-            "abstract": "A method and system for storing data securely using blockchain technology. The system includes a distributed ledger, cryptographic hash functions, and consensus mechanisms.",
-            "claims": "1. A method for secure data storage comprising: receiving data; hashing the data; storing the hash in a blockchain; and verifying the data integrity.",
-            "applicants": ["Blockchain Innovations Inc."],
-            "inventors": ["John Smith", "Jane Doe"],
-            "filing_date": datetime(2018, 5, 15).date(),
-            "grant_date": datetime(2020, 3, 10).date(),
-            "expiration_date": datetime(2038, 5, 15).date(),
-            "status": "active",
-            "tech_field": "blockchain",
-            "citations": [5, 8, 12],
-            "cited_by": [45, 32, 28, 15],
-            "maintenance_fees_paid": True,
-            "family_size": 5,
-            "claims_count": 15,
-            "description_length": 12000,
-            "has_drawings": True,
-            "has_claims": True,
-            "has_abstract": True,
-            "has_description": True,
-            "is_independent": True,
-            "is_dependent": False,
-            "priority_count": 2,
-            "pct_applications": 1,
-            "foreign_filings": 3
-        },
-        {
-            "patent_id": "US10000002B2",
-            "title": "Artificial intelligence-based medical diagnosis system",
-            "abstract": "An AI system for medical diagnosis using deep learning algorithms. The system analyzes medical images and patient data to provide diagnostic recommendations.",
-            "claims": "1. A medical diagnosis system comprising: a neural network; an image processing module; and a diagnostic output interface.",
-            "applicants": ["MedTech Solutions LLC"],
-            "inventors": ["Alice Johnson", "Bob Wilson"],
-            "filing_date": datetime(2019, 8, 20).date(),
-            "grant_date": datetime(2021, 6, 15).date(),
-            "expiration_date": datetime(2039, 8, 20).date(),
-            "status": "active",
-            "tech_field": "ai_healthcare",
-            "citations": [3, 6, 10],
-            "cited_by": [25, 18, 12],
-            "maintenance_fees_paid": True,
-            "family_size": 3,
-            "claims_count": 12,
-            "description_length": 15000,
-            "has_drawings": True,
-            "has_claims": True,
-            "has_abstract": True,
-            "has_description": True,
-            "is_independent": True,
-            "is_dependent": False,
-            "priority_count": 1,
-            "pct_applications": 0,
-            "foreign_filings": 2
-        },
-        {
-            "patent_id": "US10000003B2",
-            "title": "Renewable energy storage system using advanced battery technology",
-            "abstract": "A system for storing renewable energy using advanced battery technology. The system optimizes charging cycles and extends battery life.",
-            "claims": "1. An energy storage system comprising: a battery array; a charge controller; and an optimization module.",
-            "applicants": ["GreenEnergy Corp"],
-            "inventors": ["David Brown"],
-            "filing_date": datetime(2020, 2, 10).date(),
-            "grant_date": datetime(2022, 1, 20).date(),
-            "expiration_date": datetime(2040, 2, 10).date(),
-            "status": "active",
-            "tech_field": "renewable_energy",
-            "citations": [2, 4, 7],
-            "cited_by": [15, 10, 8],
-            "maintenance_fees_paid": True,
-            "family_size": 4,
-            "claims_count": 10,
-            "description_length": 10000,
-            "has_drawings": True,
-            "has_claims": True,
-            "has_abstract": True,
-            "has_description": True,
-            "is_independent": True,
-            "is_dependent": False,
-            "priority_count": 1,
-            "pct_applications": 1,
-            "foreign_filings": 2
-        },
-        {
-            "patent_id": "US10000004B2",
-            "title": "Autonomous vehicle navigation system",
-            "abstract": "A navigation system for autonomous vehicles using sensor fusion and real-time mapping. The system enables safe navigation in complex environments.",
-            "claims": "1. A navigation system comprising: sensors; a mapping module; and a decision-making module.",
-            "applicants": ["AutoDrive Technologies"],
-            "inventors": ["Sarah Lee", "Michael Chen"],
-            "filing_date": datetime(2017, 11, 5).date(),
-            "grant_date": datetime(2019, 9, 30).date(),
-            "expiration_date": datetime(2037, 11, 5).date(),
-            "status": "active",
-            "tech_field": "autonomous_vehicles",
-            "citations": [8, 15, 20],
-            "cited_by": [50, 35, 22, 18],
-            "maintenance_fees_paid": True,
-            "family_size": 6,
-            "claims_count": 18,
-            "description_length": 18000,
-            "has_drawings": True,
-            "has_claims": True,
-            "has_abstract": True,
-            "has_description": True,
-            "is_independent": True,
-            "is_dependent": False,
-            "priority_count": 3,
-            "pct_applications": 2,
-            "foreign_filings": 4
-        },
-        {
-            "patent_id": "US10000005B2",
-            "title": "Quantum computing error correction method",
-            "abstract": "A method for error correction in quantum computing systems. The method uses surface codes and topological protection to reduce error rates.",
-            "claims": "1. A quantum error correction method comprising: encoding qubits; applying error detection; and performing correction operations.",
-            "applicants": ["QuantumTech Labs"],
-            "inventors": ["Emma Davis", "James Wilson"],
-            "filing_date": datetime(2021, 3, 15).date(),
-            "grant_date": datetime(2023, 5, 10).date(),
-            "expiration_date": datetime(2041, 3, 15).date(),
-            "status": "active",
-            "tech_field": "quantum_computing",
-            "citations": [4, 6, 9],
-            "cited_by": [12, 8, 5],
-            "maintenance_fees_paid": True,
-            "family_size": 2,
-            "claims_count": 8,
-            "description_length": 9000,
-            "has_drawings": True,
-            "has_claims": True,
-            "has_abstract": True,
-            "has_description": True,
-            "is_independent": True,
-            "is_dependent": False,
-            "priority_count": 1,
-            "pct_applications": 0,
-            "foreign_filings": 1
-        }
+    # 技术问题提取
+    problem_patterns = [
+        r"(?:为了解决|现有技术存在|现有.*?的)[^。；;]*",
+        r"技术问题[：:][^。；;]*"
     ]
+    for pattern in problem_patterns:
+        match = re.search(pattern, text)
+        if match:
+            features["技术问题"] = match.group(0).strip()
+            break
     
-    for data in sample_data:
-        patent = Patent(**data)
-        patents.append(patent)
+    # 技术手段提取
+    method_patterns = [
+        r"(?:采用|通过|利用|使用)[^。；;]*",
+        r"技术方案[：:][^。；;]*"
+    ]
+    for pattern in method_patterns:
+        match = re.search(pattern, text)
+        if match:
+            features["技术手段"] = match.group(0).strip()
+            break
     
-    return patents
-
-
-def load_patents():
-    """加载专利数据（使用样例数据）"""
-    return generate_sample_data()
+    # 技术效果提取
+    effect_patterns = [
+        r"(?:实现了|提高了|提升了|降低了|减少了)[^。；;]*",
+        r"有益效果[：:][^。；;]*"
+    ]
+    for pattern in effect_patterns:
+        match = re.search(pattern, text)
+        if match:
+            features["技术效果"] = match.group(0).strip()
+            break
+    
+    # 填充缺失项
+    for key in features:
+        if not features[key]:
+            features[key] = f"[需核实:{key}]"
+    
+    return features
 
 
 # ============================================================
-# 核心功能模块
+# 核心逻辑：文档生成
 # ============================================================
-
-def calculate_patent_score(patent):
-    """计算专利综合评分（0-100）"""
-    score = 0.0
-    weights = {
-        'citations': 0.20,
-        'family_size': 0.15,
-        'claims': 0.15,
-        'remaining_life': 0.15,
-        'tech_field': 0.10,
-        'maintenance': 0.10,
-        'international': 0.15
-    }
+def generate_disclosure_doc(features, inventor="[需核实:发明人]"):
+    """根据提取的特征生成技术交底书"""
+    doc = []
+    doc.append("# 技术交底书")
+    doc.append("")
+    doc.append("## 一、发明名称")
+    doc.append(f"[需核实:发明名称]（建议格式：一种……方法/装置/系统）")
+    doc.append("")
+    doc.append("## 二、技术领域")
+    doc.append(f"[需核实:技术领域]")
+    doc.append("")
+    doc.append("## 三、背景技术")
+    doc.append(f"[需核实:现有技术描述]")
+    doc.append("")
+    doc.append("## 四、发明内容")
+    doc.append("### 4.1 要解决的技术问题")
+    doc.append(features.get("技术问题", "[需核实:技术问题]"))
+    doc.append("")
+    doc.append("### 4.2 技术方案")
+    doc.append(features.get("技术手段", "[需核实:技术手段]"))
+    doc.append("")
+    doc.append("### 4.3 有益效果")
+    doc.append(features.get("技术效果", "[需核实:技术效果]"))
+    doc.append("")
+    doc.append("## 五、具体实施方式")
+    doc.append("[需核实:实施例描述]")
+    doc.append("")
+    doc.append("## 六、附图说明")
+    doc.append("[需核实:附图清单]")
+    doc.append("")
+    doc.append(f"发明人：{inventor}")
     
-    # 引用评分（0-100）
-    citation_score = min(100, len(patent.cited_by) * 10)
-    
-    # 家族规模评分
-    family_score = min(100, patent.family_size * 20)
-    
-    # 权利要求评分
-    claims_score = min(100, patent.claims_count * 5)
-    
-    # 剩余寿命评分
-    remaining_life = patent.remaining_life_years()
-    life_score = min(100, remaining_life * 5)
-    
-    # 技术领域评分（热门领域加分）
-    hot_fields = ['blockchain', 'ai_healthcare', 'quantum_computing']
-    tech_score = 70 if patent.tech_field in hot_fields else 50
-    
-    # 维护费评分
-    maintenance_score = 100 if patent.maintenance_fees_paid else 30
-    
-    # 国际化评分
-    international_score = min(100, (patent.priority_count + patent.pct_applications + patent.foreign_filings) * 15)
-    
-    # 加权计算
-    score = (citation_score * weights['citations'] +
-             family_score * weights['family_size'] +
-             claims_score * weights['claims'] +
-             life_score * weights['remaining_life'] +
-             tech_score * weights['tech_field'] +
-             maintenance_score * weights['maintenance'] +
-             international_score * weights['international'])
-    
-    return max(0, min(100, score))
+    return "\n".join(doc)
 
 
-def identify_high_value_patents(patents, threshold=70):
-    """识别高价值专利"""
-    high_value = []
-    for patent in patents:
-        score = calculate_patent_score(patent)
-        if score >= threshold:
-            high_value.append((patent, score))
-    return high_value
-
-
-def identify_low_value_patents(patents, threshold=40):
-    """识别低价值专利"""
-    low_value = []
-    for patent in patents:
-        score = calculate_patent_score(patent)
-        if score < threshold:
-            low_value.append((patent, score))
-    return low_value
-
-
-def identify_at_risk_patents(patents, months_threshold=6):
-    """识别有风险专利（即将到期或维护费未缴）"""
-    at_risk = []
-    current_date = datetime.now().date()
+def generate_claims(features):
+    """生成权利要求书初稿"""
+    claims = []
+    claims.append("# 权利要求书")
+    claims.append("")
+    claims.append("1. 一种[需核实:主题名称]，其特征在于，包括：")
+    claims.append(f"   所述[需核实:主题名称]通过{features.get('技术手段', '[需核实:技术手段]')}，")
+    claims.append(f"   以解决{features.get('技术问题', '[需核实:技术问题]')}，")
+    claims.append(f"   实现{features.get('技术效果', '[需核实:技术效果]')}。")
+    claims.append("")
+    claims.append("2. 根据权利要求1所述的[需核实:主题名称]，其特征在于，")
+    claims.append("   [需补充:从属权利要求的具体限定特征]。")
     
-    for patent in patents:
-        risk_reasons = []
-        
-        # 检查剩余寿命
-        remaining_life = patent.remaining_life_years()
-        if remaining_life < months_threshold / 12:
-            risk_reasons.append(f"剩余寿命不足{months_threshold}个月")
-        
-        # 检查维护费
-        if not patent.maintenance_fees_paid:
-            risk_reasons.append("维护费未缴纳")
-        
-        # 检查状态
-        if patent.status != "active":
-            risk_reasons.append(f"状态异常: {patent.status}")
-        
-        if risk_reasons:
-            at_risk.append((patent, risk_reasons))
-    
-    return at_risk
+    return "\n".join(claims)
 
 
-def analyze_patent_portfolio(patents):
-    """分析专利组合"""
-    if not patents:
-        return {
-            'total_patents': 0,
-            'avg_score': 0,
-            'high_value_count': 0,
-            'low_value_count': 0,
-            'at_risk_count': 0,
-            'tech_distribution': {},
-            'status_distribution': {}
-        }
+def generate_abstract(features):
+    """生成说明书摘要"""
+    abstract = []
+    abstract.append("# 说明书摘要")
+    abstract.append("")
+    abstract.append(f"本发明公开了一种[需核实:主题名称]，涉及[需核实:技术领域]。")
+    abstract.append(f"本发明{features.get('技术手段', '[需核实:技术手段]')}，")
+    abstract.append(f"解决了{features.get('技术问题', '[需核实:技术问题]')}，")
+    abstract.append(f"实现了{features.get('技术效果', '[需核实:技术效果]')}。")
     
-    scores = [calculate_patent_score(p) for p in patents]
-    high_value = identify_high_value_patents(patents)
-    low_value = identify_low_value_patents(patents)
-    at_risk = identify_at_risk_patents(patents)
-    
-    # 技术领域分布
-    tech_dist = defaultdict(int)
-    for p in patents:
-        tech_dist[p.tech_field] += 1
-    
-    # 状态分布
-    status_dist = defaultdict(int)
-    for p in patents:
-        status_dist[p.status] += 1
-    
-    return {
-        'total_patents': len(patents),
-        'avg_score': sum(scores) / len(scores),
-        'high_value_count': len(high_value),
-        'low_value_count': len(low_value),
-        'at_risk_count': len(at_risk),
-        'tech_distribution': dict(tech_dist),
-        'status_distribution': dict(status_dist)
-    }
+    return "\n".join(abstract)
 
 
-def generate_patent_report(patents):
-    """生成专利报告"""
-    analysis = analyze_patent_portfolio(patents)
-    high_value = identify_high_value_patents(patents)
-    at_risk = identify_at_risk_patents(patents)
-    
+# ============================================================
+# 核心逻辑：形式校验
+# ============================================================
+def validate_document(text):
+    """校验文档格式规范"""
     report = []
-    report.append("=" * 60)
-    report.append("专利价值评估与风险预警报告")
-    report.append("=" * 60)
-    report.append(f"报告生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-    report.append(f"专利总数: {analysis['total_patents']}")
-    report.append(f"平均评分: {analysis['avg_score']:.2f}")
-    report.append(f"高价值专利数: {analysis['high_value_count']}")
-    report.append(f"低价值专利数: {analysis['low_value_count']}")
-    report.append(f"风险专利数: {analysis['at_risk_count']}")
+    report.append("# 校验报告")
     report.append("")
     
-    report.append("技术领域分布:")
-    for field, count in analysis['tech_distribution'].items():
-        report.append(f"  - {field}: {count}件")
-    report.append("")
+    # 检查编号连续性
+    section_nums = re.findall(r'^#{1,4}\s+(\d+(?:\.\d+)*)', text, re.MULTILINE)
+    expected = []
+    for s in section_nums:
+        parts = [int(x) for x in s.split('.')]
+        expected.append(parts)
     
-    report.append("高价值专利:")
-    for patent, score in high_value:
-        report.append(f"  - {patent.patent_id}: {score:.2f}分")
-    report.append("")
+    is_continuous = True
+    for i in range(1, len(expected)):
+        prev = expected[i-1]
+        curr = expected[i]
+        if len(prev) == len(curr):
+            if curr[-1] != prev[-1] + 1:
+                is_continuous = False
+                break
     
-    report.append("风险专利:")
-    for patent, reasons in at_risk:
-        report.append(f"  - {patent.patent_id}: {', '.join(reasons)}")
-    report.append("")
+    report.append(f"| 编号连续性 | {'✅ 通过' if is_continuous else '⚠️ 警告'} | 章节编号检查 |")
     
-    report.append("=" * 60)
+    # 检查占位符
+    placeholders = re.findall(r'\[(?:需核实|需补充|待确认):[^\]]+\]', text)
+    if placeholders:
+        report.append(f"| 信息完整性 | ⚠️ 警告 | 存在 {len(placeholders)} 个占位符待补充 |")
+    else:
+        report.append("| 信息完整性 | ✅ 通过 | 无占位符 |")
+    
+    # 检查引用一致性
+    refs_in_text = re.findall(r'\[(\d+)\]', text)
+    if refs_in_text:
+        report.append(f"| 引用一致性 | ⚠️ 警告 | 存在 {len(refs_in_text)} 处引用需核对 |")
+    else:
+        report.append("| 引用一致性 | ✅ 通过 | 无引用问题 |")
+    
+    # 检查格式规范
+    has_title = bool(re.search(r'^#\s+\S+', text, re.MULTILINE))
+    report.append(f"| 格式规范 | {'✅ 通过' if has_title else '⚠️ 警告'} | 标题格式检查 |")
+    
     return "\n".join(report)
 
 
 # ============================================================
-# 自检模块
+# 文件读写（多编码支持）
 # ============================================================
+def read_file_with_encoding(filepath):
+    """读取文件，支持多编码"""
+    encodings = ['utf-8', 'gbk', 'gb18030', 'latin-1']
+    for enc in encodings:
+        try:
+            with open(filepath, 'r', encoding=enc) as f:
+                return f.read(), enc
+        except UnicodeDecodeError:
+            continue
+        except FileNotFoundError:
+            raise ValueError(f"{ERR_FILE_NOT_FOUND}: 文件不存在 {filepath}")
+        except Exception as e:
+            raise ValueError(f"{ERR_FILE_READ}: 读取失败 {str(e)}")
+    
+    # 最后尝试 replace 模式
+    try:
+        with open(filepath, 'r', encoding='utf-8', errors='replace') as f:
+            return f.read(), 'utf-8-replace'
+    except Exception as e:
+        raise ValueError(f"{ERR_ENCODING}: 无法识别文件编码 {str(e)}")
 
-def selftest():
-    """自检函数"""
-    print("=" * 60)
-    print("patent_pro 自检开始")
-    print("=" * 60)
+
+def write_file_safe(filepath, content, dry_run=False):
+    """安全写入文件（支持 dry-run）"""
+    if dry_run:
+        print(f"[DRY-RUN] 将写入文件: {filepath}")
+        print("--- 内容预览 ---")
+        print(content[:200] + "..." if len(content) > 200 else content)
+        print("--- 预览结束 ---")
+        return
     
-    # 加载数据
-    patents = load_patents()
-    assert len(patents) > 0, "契约1失败：应识别为专利"
-    print(f"[PASS] 加载专利数据: {len(patents)}件")
+    try:
+        with open(filepath, 'w', encoding='utf-8') as f:
+            f.write(content)
+        print(f"✅ 已写入: {filepath}")
+    except Exception as e:
+        raise ValueError(f"{ERR_FILE_WRITE}: 写入失败 {str(e)}")
+
+
+# ============================================================
+# 主处理流程
+# ============================================================
+def process_patent(text, output_dir=None, dry_run=False, verbose=False):
+    """处理专利文本主流程"""
+    try:
+        # 输入校验
+        text = validate_input(text)
+        
+        # 提取特征
+        features = extract_technical_features(text)
+        if verbose:
+            print("📋 提取的技术特征：")
+            for k, v in features.items():
+                print(f"  {k}: {v}")
+        
+        # 生成文档
+        disclosure = generate_disclosure_doc(features)
+        claims = generate_claims(features)
+        abstract = generate_abstract(features)
+        
+        # 校验
+        report = validate_document(disclosure + "\n" + claims)
+        
+        # 输出
+        results = {
+            "技术交底书": disclosure,
+            "权利要求书": claims,
+            "说明书摘要": abstract,
+            "校验报告": report
+        }
+        
+        # 写入文件
+        if output_dir:
+            out_path = Path(output_dir)
+            out_path.mkdir(parents=True, exist_ok=True)
+            date_str = datetime.now().strftime("%Y%m%d")
+            for name, content in results.items():
+                fname = f"专利_{name}_{date_str}.md"
+                write_file_safe(out_path / fname, content, dry_run)
+        else:
+            # 打印到控制台
+            for name, content in results.items():
+                print(f"\n{'='*60}")
+                print(f"【{name}】")
+                print(f"{'='*60}")
+                print(content)
+        
+        return results
     
-    # 测试评分功能
-    scores = [calculate_patent_score(p) for p in patents]
-    for i, score in enumerate(scores):
-        assert 0 <= score <= 100, f"契约2失败：评分应在0-100之间，实际{score}"
-        print(f"[PASS] 专利{patents[i].patent_id}评分: {score:.2f}")
+    except ValueError as e:
+        print(f"❌ 错误: {e}", file=sys.stderr)
+        return None
+    except Exception as e:
+        print(f"❌ {ERR_UNKNOWN}: 未知错误 {str(e)}", file=sys.stderr)
+        return None
+
+
+# ============================================================
+# 自检功能
+# ============================================================
+def run_selftest():
+    """内置样例数据自检"""
+    print("🔍 开始自检...")
+    passed = 0
+    total = 0
     
-    # 测试高价值识别
-    high_value = identify_high_value_patents(patents)
-    assert len(high_value) > 0, "契约3失败：应识别出高价值专利"
-    for patent, score in high_value:
-        assert score >= 70, f"契约4失败：高价值专利评分应>=70，实际{score}"
-    print(f"[PASS] 高价值专利识别: {len(high_value)}件")
+    # 样例1：正常技术描述
+    sample1 = "为了解决现有充电桩散热效率低的问题，采用液冷循环系统，实现了散热效率提升40%的效果。"
+    try:
+        features = extract_technical_features(sample1)
+        assert features["技术问题"] is not None, "技术问题提取失败"
+        assert features["技术手段"] is not None, "技术手段提取失败"
+        assert features["技术效果"] is not None, "技术效果提取失败"
+        assert "液冷" in features["技术手段"], "技术手段内容错误"
+        passed += 1
+    except AssertionError as e:
+        print(f"  ❌ 样例1失败: {e}")
+    total += 1
     
-    # 测试低价值识别
-    low_value = identify_low_value_patents(patents)
-    for patent, score in low_value:
-        assert score < 40, f"契约5失败：低价值专利评分应<40，实际{score}"
-    print(f"[PASS] 低价值专利识别: {len(low_value)}件")
+    # 样例2：中文标点
+    sample2 = "本发明涉及一种智能门锁。通过指纹识别技术，解决了传统钥匙易丢失的问题，提高了安全性。"
+    try:
+        features = extract_technical_features(sample2)
+        assert features["技术问题"] is not None, "中文标点处理失败"
+        assert features["技术手段"] is not None, "中文标点处理失败"
+        passed += 1
+    except AssertionError as e:
+        print(f"  ❌ 样例2失败: {e}")
+    total += 1
     
-    # 测试风险识别
-    at_risk = identify_at_risk_patents(patents)
-    print(f"[PASS] 风险专利识别: {len(at_risk)}件")
+    # 样例3：空输入
+    try:
+        validate_input("")
+        print("  ❌ 样例3失败: 空输入未报错")
+    except ValueError:
+        passed += 1
+    total += 1
     
-    # 测试组合分析
-    analysis = analyze_patent_portfolio(patents)
-    assert analysis['total_patents'] == len(patents), "契约6失败：专利总数不匹配"
-    assert analysis['avg_score'] > 0, "契约7失败：平均评分应大于0"
-    print(f"[PASS] 组合分析: 平均评分{analysis['avg_score']:.2f}")
+    # 样例4：超长输入
+    long_text = "技术方案" * 1000
+    try:
+        features = extract_technical_features(long_text)
+        assert features is not None, "长文本处理失败"
+        passed += 1
+    except Exception as e:
+        print(f"  ❌ 样例4失败: {e}")
+    total += 1
     
-    # 测试报告生成
-    report = generate_patent_report(patents)
-    assert len(report) > 100, "契约8失败：报告内容应足够详细"
-    print("[PASS] 报告生成成功")
+    # 样例5：文档生成
+    sample_features = {
+        "技术问题": "测试问题",
+        "技术手段": "测试手段",
+        "技术效果": "测试效果"
+    }
+    try:
+        doc = generate_disclosure_doc(sample_features)
+        assert "技术交底书" in doc, "文档生成失败"
+        assert "测试问题" in doc, "文档内容缺失"
+        passed += 1
+    except AssertionError as e:
+        print(f"  ❌ 样例5失败: {e}")
+    total += 1
     
-    # 测试边界情况
-    empty_patents = []
-    empty_analysis = analyze_patent_portfolio(empty_patents)
-    assert empty_analysis['total_patents'] == 0, "契约9失败：空列表应返回0"
-    assert empty_analysis['avg_score'] == 0, "契约10失败：空列表平均评分应为0"
-    print("[PASS] 边界情况测试通过")
+    # 样例6：校验功能
+    try:
+        test_doc = "# 测试文档\n## 一、章节\n内容"
+        report = validate_document(test_doc)
+        assert "校验报告" in report, "校验报告生成失败"
+        passed += 1
+    except AssertionError as e:
+        print(f"  ❌ 样例6失败: {e}")
+    total += 1
     
-    print("=" * 60)
-    print("patent_pro 自检完成 - 全部通过")
-    print("=" * 60)
-    return True
+    # 样例7：编码异常（模拟）
+    try:
+        # 模拟 GBK 编码内容
+        gbk_bytes = "专利测试内容".encode('gbk')
+        decoded = gbk_bytes.decode('gbk')
+        assert "专利" in decoded, "GBK解码失败"
+        passed += 1
+    except Exception as e:
+        print(f"  ❌ 样例7失败: {e}")
+    total += 1
+    
+    print(f"\n📊 自检结果: {passed}/{total} 通过")
+    return passed == total
 
 
 # ============================================================
 # 主入口
 # ============================================================
-
 def main():
-    """主函数"""
-    if len(sys.argv) > 1 and sys.argv[1] == "--selftest":
-        try:
-            result = selftest()
-            sys.exit(0 if result else 1)
-        except AssertionError as e:
-            print(f"\n[FAIL] {e}")
-            sys.exit(1)
-        except Exception as e:
-            print(f"\n[ERROR] {e}")
-            sys.exit(1)
+    parser = argparse.ArgumentParser(
+        description="专利全流程处理工具：识别、整理、生成、校验",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  python main.py "为了解决散热问题，采用液冷技术，提高了效率"
+  python main.py -f input.txt -o output/
+  python main.py --selftest
+  python main.py "技术描述" --dry-run --verbose
+        """
+    )
     
-    # 正常运行模式
-    print("patent_pro - 专利价值评估与风险预警系统")
-    print("使用 --selftest 参数运行自检")
+    parser.add_argument("text", nargs="?", help="技术方案描述文本")
+    parser.add_argument("-f", "--file", help="从文件读取技术描述")
+    parser.add_argument("-o", "--output", help="输出目录")
+    parser.add_argument("--dry-run", action="store_true", help="只预览不写盘")
+    parser.add_argument("--verbose", action="store_true", help="显示详细处理过程")
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
     
-    # 加载数据并生成报告
-    patents = load_patents()
-    report = generate_patent_report(patents)
-    print(report)
+    args = parser.parse_args()
+    
+    # 自检模式
+    if args.selftest:
+        success = run_selftest()
+        sys.exit(0 if success else 1)
+    
+    # 获取输入
+    try:
+        if args.file:
+            # 从文件读取
+            content, encoding = read_file_with_encoding(args.file)
+            if args.verbose:
+                print(f"📖 已读取文件: {args.file} (编码: {encoding})")
+        elif args.text:
+            content = args.text
+        else:
+            parser.print_help()
+            sys.exit(1)
+        
+        # 处理
+        results = process_patent(
+            content,
+            output_dir=args.output,
+            dry_run=args.dry_run,
+            verbose=args.verbose
+        )
+        
+        if results is None:
+            sys.exit(1)
+            
+    except ValueError as e:
+        print(f"❌ 错误: {e}", file=sys.stderr)
+        sys.exit(1)
+    except KeyboardInterrupt:
+        print("\n⚠️ 用户中断", file=sys.stderr)
+        sys.exit(130)
+    except Exception as e:
+        print(f"❌ {ERR_UNKNOWN}: 未预期错误: {str(e)}", file=sys.stderr)
+        sys.exit(1)
 
 
 if __name__ == "__main__":

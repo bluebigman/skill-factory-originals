@@ -1,57 +1,339 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: patent-pro
 name: patent_pro
-displayName: 专利处理
+displayName: 专利全流程 撰写审核 技术交底
 description: 专利场景一站式处理：识别、整理、生成、校验，输出可直接使用的专利文档。
-version: 1.0.0
-trigger_words:
-  - 帮我处理专利
-  - 专利怎么弄
-  - 整理专利
-  - 生成专利
-  - 专利自动化
-  - 写专利
-  - 专利格式
-  - 专利文件
+version: 1.0.1
+rules_version: cpr-20260809-n251
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/patent-pro
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: LinguaCraft Studio
+agent_created: true
+trigger_words: 帮我处理专利, 专利撰写, 专利申请, 技术交底书, 专利检索, 专利分析
 ---
-
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# 专利处理（patent_pro）
 
-> **一页纸速查卡**
-> - **能做什么**：专利识别、格式整理、权利要求生成、说明书撰写辅助、专利检索、交底书生成、审查意见回复辅助。
-> - **不能做什么**：不提供法律意见、不保证专利授权、不替代专业代理师。
-> - **怎么触发**：直接说"帮我处理专利"、"这个专利怎么弄"、"整理一下专利文件"等。
-> - **标准流程**：收集信息 → 执行处理 → 输出校验。
-> - **输出分级**：置信度≥90%直接输出 / 85-90%标"建议复核" / <85%标"[需核实]"。
-> - **出错怎么办**：参考文末错误码表（E001-E005）。
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 许可证（License）
+# 专利全流程处理 Skill 文档
 
-```text
-MIT License
+## 一、能力边界速查卡（一页纸）
 
-Copyright (c) 2026 原创作者（自持版权）
+### 1.1 能做什么
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+| 能力模块 | 具体内容 | 输出物 |
+|---------|---------|-------|
+| 专利识别 | 从用户提供的技术描述、产品说明、研发日志中识别可专利点 | 技术特征清单 |
+| 信息整理 | 将散乱的技术信息按专利撰写规范重组为结构化字段 | 交底书框架 |
+| 文档生成 | 生成技术交底书、权利要求书初稿、说明书摘要 | 可编辑的 Markdown/Word 文档 |
+| 形式校验 | 检查文件格式、编号连续性、引用一致性、术语统一性 | 校验报告 |
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+### 1.2 不能做什么
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+| 限制项 | 说明 |
+|-------|------|
+| 不提供法律意见 | 不判断专利授权前景、不评估侵权风险、不给出规避设计建议 |
+| 不替代代理师 | 不负责向专利局提交申请、不处理审查意见答复 |
+| 不保证授权 | 任何关于"一定能授权"的表述均不成立 |
+| 不处理涉外申请 | 暂不支持 PCT 国际阶段、外国国家阶段申请文件生成 |
+| 不进行现有技术检索 | 不连接任何专利数据库，无法提供查新报告 |
+
+### 1.3 适用对象
+
+- **研发工程师**：需要将技术方案整理成规范文档
+- **企业 IPR**：需要批量处理技术交底书
+- **专利代理师**：需要快速生成初稿进行二次加工
+- **高校科研人员**：需要将科研成果转化为专利申请材料
+
+---
+
+## 二、触发方式与场景映射
+
+### 2.1 触发词
+
+- 主触发词：**帮我处理专利**
+- 同义触发词：专利撰写、专利申请、技术交底书、专利检索、专利分析
+
+### 2.2 场景映射表
+
+| 用户说（大白话） | 实际需求 | 本 Skill 动作 |
+|----------------|---------|--------------|
+| "我有个新想法，想申请专利" | 技术方案尚未文档化 | 启动"技术交底书生成"流程 |
+| "这是我们研发部写的材料，帮我看看" | 已有初稿需整理规范 | 启动"信息整理与结构化"流程 |
+| "帮我写个权利要求书" | 需要权利要求书初稿 | 启动"权利要求书生成"流程 |
+| "这文档格式对吗？" | 需要形式校验 | 启动"校验"流程 |
+| "帮我处理专利"（无附加说明） | 不确定具体需求 | 引导用户选择流程分支 |
+
+---
+
+## 三、标准执行流程
+
+### 3.1 前置条件
+
+| 条件 | 要求 | 缺失处理 |
+|------|------|---------|
+| 技术方案描述 | 至少包含技术问题、技术手段、技术效果三要素 | 提示用户补充，不进入生成阶段 |
+| 发明人信息 | 姓名、单位（可选） | 缺失时使用 [需核实:发明人] 占位 |
+| 技术领域 | 明确所属 IPC 分类号或技术领域描述 | 缺失时使用 [需核实:技术领域] 占位 |
+
+### 3.2 执行步骤（分步编号）
+
+#### 步骤 1：需求确认
+
+1. 接收用户输入，判断属于以下哪种场景：
+   - A. 从零生成（无任何材料）
+   - B. 材料整理（已有文档需结构化）
+   - C. 文档校验（已有文档需检查）
+2. 输出确认信息，格式如下：
+
 ```
+已识别场景：[A/B/C]
+所需材料清单：
+- 技术方案描述（必填）
+- 发明人信息（选填）
+- 现有技术参考（选填）
+请确认是否开始处理？
+```
+
+#### 步骤 2：技术特征提取
+
+1. 从用户描述中提取以下要素：
+
+| 要素 | 提取规则 | 示例 |
+|------|---------|------|
+| 技术问题 | 描述中"为了解决……"、"现有技术存在……"等引导语后的内容 | "现有充电桩散热效率低" |
+| 技术手段 | 描述中"采用……"、"通过……"等引导语后的内容 | "采用液冷循环系统" |
+| 技术效果 | 描述中"实现了……"、"提高了……"等引导语后的内容 | "散热效率提升40%" |
+
+2. 提取结果以结构化表格呈现，缺失项标注 `[需核实:字段名]`
+
+#### 步骤 3：文档生成
+
+根据步骤 2 的结构化信息，按以下模板生成文档：
+
+```
+# 技术交底书
+
+## 一、发明名称
+[需核实:发明名称]（建议格式：一种……方法/装置/系统）
+
+## 二、技术领域
+[需核实:技术领域]
+
+## 三、背景技术
+[需核实:现有技术描述]
+
+## 四、发明内容
+### 4.1 要解决的技术问题
+[需核实:技术问题]
+
+### 4.2 技术方案
+[需核实:技术手段详细描述]
+
+### 4.3 有益效果
+[需核实:技术效果]
+
+## 五、具体实施方式
+[需核实:实施例描述]
+
+## 六、附图说明
+[需核实:附图清单]
+```
+
+#### 步骤 4：形式校验
+
+对生成的文档执行以下检查项：
+
+| 检查项 | 规则 | 通过标准 |
+|--------|------|---------|
+| 编号连续性 | 章节编号、附图编号、权利要求编号 | 无跳号、无重复 |
+| 引用一致性 | 文中引用与参考文献列表 | 一一对应 |
+| 术语统一性 | 同一技术特征使用同一术语 | 全文无同义词混用 |
+| 格式规范 | 标题层级、段落缩进、字体统一 | 符合专利文档格式要求 |
+
+#### 步骤 5：输出交付
+
+输出格式：
+
+```
+# 输出文件清单
+1. 技术交底书.md（完整版）
+2. 校验报告.md（含检查项通过/不通过明细）
+
+# 校验报告示例
+| 检查项 | 结果 | 说明 |
+|--------|------|------|
+| 编号连续性 | ✅ 通过 | 章节编号 1-6 连续 |
+| 引用一致性 | ⚠️ 警告 | 第 3 节引用 [2] 但参考文献列表无此项 |
+| 术语统一性 | ✅ 通过 | "散热模块"全文统一 |
+| 格式规范 | ✅ 通过 | 标题层级正确 |
+```
+
+### 3.3 输出规范
+
+- 所有文档使用 Markdown 格式
+- 文件命名规则：`专利类型_发明名称_日期.md`
+- 日期格式：YYYYMMDD
+- 编码：UTF-8
+
+---
+
+## 四、置信度门控机制
+
+### 4.1 占位符规则
+
+当信息不足时，使用以下占位符，**严禁编造**：
+
+| 占位符 | 使用场景 | 示例 |
+|--------|---------|------|
+| `[需核实:字段名]` | 字段缺失或不确定 | `[需核实:发明人姓名]` |
+| `[需补充:描述]` | 描述不完整 | `[需补充:技术效果的具体数据]` |
+| `[待确认:选项]` | 存在多个可能值 | `[待确认:专利类型（发明/实用新型）]` |
+
+### 4.2 置信度分级
+
+| 置信度 | 判定标准 | 输出策略 |
+|--------|---------|---------|
+| 高（≥90%） | 所有必填字段完整，无冲突信息 | 直接生成完整文档 |
+| 中（70-89%） | 存在 1-2 个可选字段缺失 | 生成文档 + 标注占位符 |
+| 低（<70%） | 必填字段缺失或信息矛盾 | 暂停生成，要求用户补充 |
+
+### 4.3 信息冲突处理
+
+当用户提供的信息存在矛盾时：
+
+1. 列出冲突项
+2. 询问用户确认
+3. 未确认前使用 `[待确认:冲突项]` 标注
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|---------|---------|---------|
+| E001 | 输入为空 | "未检测到技术方案描述，请提供至少包含技术问题和技术手段的描述。" | 引导用户补充输入 |
+| E002 | 技术问题缺失 | "无法识别要解决的技术问题，请补充说明现有技术的不足。" | 提示用户补充背景技术 |
+| E003 | 技术手段缺失 | "无法识别技术方案的具体实现方式，请补充技术细节。" | 提示用户补充实施方式 |
+| E004 | 文档格式错误 | "输入文档格式不支持，请提供 Markdown 或纯文本格式。" | 转换格式后重试 |
+| E005 | 校验失败 | "文档存在 N 处格式问题，详见校验报告。" | 根据报告逐项修正 |
+| E006 | 信息冲突 | "检测到以下信息冲突：[冲突列表]，请确认以哪个为准。" | 用户确认后继续 |
+
+---
+
+## 六、FAQ 反模式对照
+
+### 6.1 常见坑
+
+| 坑位 | 错误做法 | 正确做法 |
+|------|---------|---------|
+| 坑 1：编造信息 | 用户未提供发明人，直接写"张三" | 使用 `[需核实:发明人]` 占位 |
+| 坑 2：过度承诺 | 说"这个专利一定能授权" | 说"文档已按规范生成，授权前景需由代理师评估" |
+| 坑 3：忽略现有技术 | 不询问用户是否有相近的现有技术 | 主动询问"是否有已知的相近技术方案？" |
+| 坑 4：术语混用 | 同一部件一会儿叫"散热器"一会儿叫"散热模块" | 全文统一使用首次出现的术语 |
+| 坑 5：跳过校验 | 生成后直接交付不检查 | 必须执行步骤 4 的形式校验 |
+
+### 6.2 反模式对照表
+
+| 反模式 | 表现 | 替代方案 |
+|--------|------|---------|
+| 万能模板 | 所有专利都用同一模板，不区分领域 | 根据技术领域调整章节侧重 |
+| 信息堆砌 | 把所有技术细节全部写入权利要求 | 区分必要技术特征和附加技术特征 |
+| 忽略用户 | 用户说"简单点"仍输出长篇文档 | 提供精简版和完整版两种输出 |
+
+---
+
+## 七、渐进式披露路径
+
+### 7.1 速查卡（30 秒上手）
+
+```
+1. 说"帮我处理专利"
+2. 选择场景：A 从零生成 / B 材料整理 / C 文档校验
+3. 提供技术方案描述（技术问题 + 技术手段 + 技术效果）
+4. 等待输出：技术交底书 + 校验报告
+5. 检查占位符 [需核实:xxx]，补充后重新生成
+```
+
+### 7.2 新手路径（首次使用）
+
+1. 阅读本速查卡
+2. 准备技术方案描述（建议 200-500 字）
+3. 执行场景 A（从零生成）
+4. 查看输出文档，重点关注占位符
+5. 补充占位符信息，重新生成
+
+### 7.3 进阶路径（熟练用户）
+
+1. 使用场景 B（材料整理）批量处理多份文档
+2. 使用场景 C（文档校验）检查代理机构返回的文件
+3. 结合校验报告优化文档格式
+4. 将生成文档作为初稿，交由代理师深度加工
+
+---
+
+## 八、参数配置表
+
+| 参数名 | 默认值 | 可选值 | 说明 |
+|--------|--------|--------|------|
+| `output_format` | `markdown` | `markdown`, `plain_text` | 输出文档格式 |
+| `detail_level` | `standard` | `brief`, `standard`, `detailed` | 文档详细程度 |
+| `patent_type` | `invention` | `invention`, `utility_model` | 专利类型 |
+| `language` | `zh-CN` | `zh-CN`, `en-US` | 文档语言 |
+| `include_claims` | `true` | `true`, `false` | 是否生成权利要求书初稿 |
+
+---
+
+## 九、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 输出的文档仅供参考，不构成任何法律意见或专利代理服务。
+2. **禁止反向工程**：使用者不得对本 Skill 的提示词、内部逻辑、生成机制进行反向工程、破解、提取或二次分发。
+3. **合规使用**：使用者应确保输入内容不侵犯第三方知识产权，不包含违法信息。
+4. **修改与终止**：本 Skill 作者保留随时修改、更新或终止本 Skill 的权利，恕不另行通知。
+
+---
+
+## 十、许可证（License）
+
 <!-- professional-license-embedded -->
+
+### MIT License
+
+Copyright (c) 2026 LinguaCraft Studio
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
