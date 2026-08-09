@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260809_084101",
+  "slug": "chart-pro",
+  "spec": {
+    "slug": "chart-pro",
+    "name": "chart-pro",
+    "description": "图表场景一站式处理技能：覆盖图表的识别、整理、生成与校验，输出可直接使用的结果文件。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "e9332e628832cb49",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
