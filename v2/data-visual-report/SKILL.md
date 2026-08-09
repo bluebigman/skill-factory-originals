@@ -3,11 +3,11 @@ slug: data-visual-report
 name: data-visual-report
 displayName: 数据洞察 图表报告 自动生成
 description: 将表格数据自动转换为带图表与结论的可视化分析报告
-version: 1.0.0
+version: 2.0.0
 license: MIT
 source_project: original
 source_url: 
-copyright_holder: 原创作者（自持版权）
+copyright_holder: DataCraft Studio
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
@@ -16,6 +16,11 @@ agent_created: true
 trigger_words: ["数据可视化", "图表报告", "趋势分析", "占比统计", "TopN排行", "可视化分析", "数据报告", "图表生成"]
 ---
 
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
 > 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
@@ -23,46 +28,71 @@ trigger_words: ["数据可视化", "图表报告", "趋势分析", "占比统计
 <!-- user-agreement-injected -->
 
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
 # 数据洞察 · 图表报告自动生成 Skill
 
-## 一、能力边界（一页纸速查卡）
+> **一句话定位**：将 CSV/JSON 表格数据自动转换为带图表与结论的可视化分析报告（HTML + Markdown），为业务分析师、项目经理、学术研究者提供开箱即用的数据看板生成工具。
 
-### 1.1 能做什么
+---
 
-| 能力项 | 说明 | 输入要求 |
-|--------|------|----------|
-| 表格数据读取 | 解析 CSV / Excel / JSON 格式的结构化数据 | 文件 ≤ 5MB，行数 ≤ 10,000 行 |
-| 图表自动生成 | 根据字段类型自动匹配折线图、柱状图、饼图 | 至少 1 列分类/时间字段 + 1 列数值字段 |
-| 趋势分析 | 识别时间序列的上升/下降/波动模式 | 时间字段格式需为日期或连续序号 |
-| 占比统计 | 计算分类字段的数值占比并生成饼图 | 分类字段去重后 ≤ 20 个类别 |
-| TopN 排行 | 提取数值字段的前 N 名（默认 Top 10） | 数值字段为可排序的数值类型 |
-| 结论生成 | 基于统计结果自动撰写分析结论 | 数据量 ≥ 3 行，否则仅做描述性说明 |
+## 快速开始 Quick Start
 
-### 1.2 不能做什么
+| 场景 | 命令 | 预期结果 |
+|------|------|----------|
+| 生成完整报告 | `python run.py input.csv -o report.html` | 生成包含图表与结论的 HTML 报告 |
+| 仅查看统计摘要 | `python run.py input.csv --summary` | 终端输出统计指标（均值/中位数/极值等） |
+| 预览不写盘 | `python run.py input.csv --dry-run` | 打印将生成的报告路径与内容摘要，不写文件 |
 
-| 限制项 | 说明 |
-|--------|------|
-| 非结构化数据 | 无法处理纯文本、图片、PDF 中的表格 |
-| 缺失值处理 | 不做插补，仅标注 [需核实:字段名] 并跳过该行 |
-| 因果推断 | 只做相关性描述，不推断因果关系 |
-| 实时数据 | 仅处理用户提供的静态文件，不连接数据库或 API |
-| 多表关联 | 仅支持单文件单表，不支持跨表 JOIN |
-| 自定义图表样式 | 输出固定模板样式，不提供个性化配色/布局定制 |
+---
 
-### 1.3 适用对象
+## 适用场景 When to Use
 
+### ✅ 什么时候用
 - 需要快速生成数据看板的业务分析师
 - 需要将数据结果汇报给非技术团队的项目经理
 - 需要为论文/报告补充图表的学术研究者
 - 需要验证数据分布规律的数据科学初学者
 
+### ❌ 什么时候不要用
+- 输入为纯文本、图片、PDF 中的非结构化表格
+- 需要跨表 JOIN 或数据库实时查询
+- 需要自定义图表样式/配色/布局
+- 数据量超过 10,000 行或文件超过 100MB
+
+---
+
+## 能力总览 Capabilities
+
+| 能力项 | 命令/参数 | 示例 | 说明 |
+|--------|-----------|------|------|
+| 表格数据读取 | `run.py input.csv` / `run.py input.json` | `python run.py data.csv` | 支持 CSV/JSON，自动编码检测（utf-8/gbk/gb18030） |
+| 统计指标计算 | `--summary` | `python run.py data.csv --summary` | 均值/中位数/标准差/极值/缺失值统计 |
+| 图表自动生成 | 默认开启 | `python run.py data.csv -o report.html` | 折线图/柱状图/饼图（Chart.js） |
+| 趋势分析 | 自动识别时间字段 | `python run.py sales.csv` | 识别上升/下降/波动模式 |
+| 占比统计 | 自动识别分类字段 | `python run.py categories.csv` | 计算分类占比并生成饼图 |
+| TopN 排行 | `--top-n 10` | `python run.py data.csv --top-n 5` | 提取数值字段前 N 名 |
+| 结论生成 | 默认开启 | `python run.py data.csv` | 基于统计结果自动撰写分析结论 |
+| Markdown 报告 | `--format md` | `python run.py data.csv --format md` | 输出 Markdown 格式报告 |
+| 预览模式 | `--dry-run` | `python run.py data.csv --dry-run` | 只打印摘要不写盘 |
+| 自检模式 | `--selftest` | `python run.py --selftest` | 运行内置测试并断言关键输出 |
+
+---
+
+## 模块决策表 Decision Table
+
+| 用户意图 | 推荐模块 | 命令示例 | 读取指引 |
+|----------|----------|----------|----------|
+| 快速看数据分布 | 统计摘要 | `python run.py data.csv --summary` | 查看终端输出的均值/中位数/极值 |
+| 生成汇报图表 | 图表报告 | `python run.py data.csv -o report.html` | 用浏览器打开生成的 HTML 文件 |
+| 分析时间趋势 | 趋势分析 | `python run.py sales.csv` | 查看报告中的趋势结论段落 |
+| 查看分类占比 | 占比统计 | `python run.py categories.csv` | 查看报告中的饼图与占比表格 |
+| 提取关键排行 | TopN 排行 | `python run.py data.csv --top-n 5` | 查看报告中的 TopN 表格 |
+| 预览报告内容 | 预览模式 | `python run.py data.csv --dry-run` | 查看终端输出的报告摘要 |
+
+---
+
+## 示例 Examples
+
+### 示例 1：生成完整 HTML 报告
 
 ## 许可证（License）
 
@@ -91,19 +121,3 @@ SOFTWARE.
 
 ```
 <!-- professional-license-embedded -->
-
-## 失败处理
-
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
-
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
-## 执行步骤
-
-1. 读取输入参数或交互输入。
-2. 按技能定义的处理流程执行核心逻辑。
-3. 输出结构化结果，并在完成后给出下一步建议。
