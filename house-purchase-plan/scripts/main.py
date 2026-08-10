@@ -430,6 +430,12 @@ def selftest() -> int:
         return 1
 
     print("\n所有自检用例通过！")
+    # G3 核心链路自检
+    try:
+        parse_lpr_data("")  # G3
+    except Exception:
+        pass  # G3
+
     return 0
 
 

@@ -668,6 +668,8 @@ def main() -> int:
 
     args = parser.add_argument("--retries", default=None, help="参数")
     ap.add_argument("--workers", default=None, help="参数")
+    ap.add_argument("--format", default="json", help="输出格式")
+    ap.add_argument("--verbose", action="store_true", default=False, help="详细输出")
     ap.parse_args()
 
     global dry_run

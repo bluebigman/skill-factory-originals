@@ -18,6 +18,7 @@ from pathlib import Path
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
+"""
 def _retry_request(fn, *args, **kwargs):
     """带重试退避的请求封装（G1 生产门禁）。"""
     for attempt in range(_max_retry):
