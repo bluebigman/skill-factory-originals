@@ -1,51 +1,344 @@
 ---
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
+<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: fund-pro
 name: fund-pro
-displayName: 基金
-description: 基金场景一站式处理技能：覆盖基金的识别、整理、生成与校验，输出可直接使用的结果文件。
-version: 1.0.0
-author: skill-factory-auto
+displayName: 基金体检 持仓穿透 定投测算
+description: 输入基金代码，自动生成体检报告与同类排名，支持定投测算与组合诊断。
+version: 1.0.1
+rules_version: cpr-20260810-n301
+license: MIT
+source_project: original
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/fund-pro
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
+ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: FundPulse Studio
 agent_created: true
-trigger_words:
-  - "基金"
-  - "基金处理"
-  - "基金生成"
-  - "基金整理"
-  - "fund-pro"
-  - "基金自动化"
+trigger_words: ["基金", "基金体检", "定投测算", "持仓穿透", "基金诊断"]
 ---
-
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# WorkBuddy Skill: fund_pro
+
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+# fund-pro 基金体检与诊断工作台
+
+## 一、能力边界（一页纸速查卡）
+
+### 1.1 能做什么
+
+| 能力项 | 说明 | 输出物 |
+|--------|------|--------|
+| 净值走势分析 | 拉取近1月/3月/1年/3年净值序列，计算区间收益 | 净值走势图数据表 |
+| 持仓穿透 | 穿透前十大重仓股/重仓债券，识别行业暴露 | 持仓穿透表 |
+| 费率结构解析 | 解析申购费、赎回费、管理费、托管费、销售服务费 | 费率明细卡 |
+| 基金经理业绩 | 统计在任基金经理任期回报、最大回撤、年化波动 | 经理业绩档案 |
+| 基金体检报告 | 综合收益/回撤/夏普/风险等级，输出体检结论 | 体检报告单 |
+| 同类排名对比 | 在同类别（如股票型/混合型/债券型）内分位数排名 | 排名对比表 |
+| 定投测算 | 按月定投模拟，输出定投收益率与累计收益曲线 | 定投测算表 |
+| 组合诊断 | 输入多只基金，计算相关性、重叠度、集中度 | 组合诊断报告 |
+
+### 1.2 不能做什么
+
+| 限制项 | 说明 |
+|--------|------|
+| 不提供买卖建议 | 不输出"买入/卖出/持有"指令性结论 |
+| 不预测未来收益 | 不承诺任何未来收益率或净值走势 |
+| 不覆盖非公募产品 | 私募、专户、信托、保险理财不在范围内 |
+| 不保证数据实时性 | 净值数据存在 T+1 或 T+2 延迟，以官方披露为准 |
+| 不处理场外衍生品 | QDII 分级、杠杆 ETF 等复杂结构仅做基础提示 |
+
+### 1.3 适用对象
+
+- 个人基金投资者（有基础投资知识）
+- 理财顾问（需快速生成客户投后报告）
+- 财经内容创作者（需数据支撑的基金分析素材）
+
+---
+
+## 二、触发方式与场景映射
+
+### 2.1 触发词
+
+| 触发词 | 场景示例 |
+|--------|----------|
+| 基金 | "帮我看看 005827 这只基金" |
+| 基金体检 | "给 110022 做个全面体检" |
+| 定投测算 | "每月投 2000 到 161725，定投 3 年收益如何" |
+| 持仓穿透 | "这只基金到底买了什么股票" |
+| 基金诊断 | "我的组合里有 5 只基金，帮我诊断一下" |
+
+### 2.2 场景映射表
+
+| 用户说 | 实际需求 | 执行动作 |
+|--------|----------|----------|
+| "这只基金靠谱吗" | 需要风险收益综合评估 | 生成体检报告 |
+| "和同类比怎么样" | 需要排名对比 | 生成同类排名 |
+| "定投还是一次性买" | 需要定投模拟 | 生成定投测算 |
+| "我的组合有没有问题" | 需要组合诊断 | 生成组合诊断报告 |
+| "基金经理换人了" | 需要经理业绩对比 | 生成经理档案 |
+
+---
+
+## 三、标准执行流程
+
+### 3.1 前置条件
+
+| 条件 | 要求 | 缺失处理 |
+|------|------|----------|
+| 基金代码 | 6位数字（如 005827） | 提示用户输入代码或名称 |
+| 基金名称 | 支持模糊匹配（如"易方达蓝筹"） | 返回候选列表供选择 |
+| 数据源 | 需联网获取公开数据 | 断网时提示无法获取实时数据 |
+| 时间范围 | 默认近1年，可指定 | 超出数据范围时截断处理 |
+
+### 3.2 执行步骤
+
+**Step 1：基金识别**
+- 解析输入，提取基金代码或名称关键词
+- 若为名称，调用模糊匹配接口，返回 Top 5 候选
+- 确认唯一基金后进入下一步
+
+**Step 2：数据拉取**
+- 净值序列：`get_nav_series(fund_code, start_date, end_date)`
+- 持仓数据：`get_holdings(fund_code, quarter)`
+- 费率数据：`get_fee_structure(fund_code)`
+- 经理数据：`get_manager_profile(fund_code)`
+
+**Step 3：指标计算**
+- 区间收益：`(期末净值 - 期初净值) / 期初净值`
+- 最大回撤：`max(1 - 净值/历史峰值)`
+- 夏普比率：`(年化收益 - 无风险利率) / 年化波动率`
+- 风险等级：基于波动率与回撤综合评定（低/中低/中/中高/高）
+
+**Step 4：同类排名**
+- 确定基金类别（股票型/混合型/债券型/指数型/QDII）
+- 获取同类基金池（不少于 50 只）
+- 计算各指标分位数，输出百分位排名
+
+**Step 5：报告生成**
+- 按模板组装体检报告
+- 附数据来源与计算口径说明
+- 输出 Markdown 格式文档
+
+### 3.3 输出规范
 
 ```markdown
+# 基金体检报告：易方达蓝筹精选（005827）
 
-## 许可证（License）
+## 基本信息
+- 基金全称：易方达蓝筹精选混合
+- 基金类型：混合型-偏股
+- 成立日期：2018-09-05
+- 最新规模：532.21 亿元（2026Q2）
 
-```text
-MIT License
+## 收益表现（近1年）
+- 区间收益：+12.34%
+- 年化收益：+12.34%
+- 同类平均：+8.21%
+- 同类百分位：23%（优于 77% 同类）
 
-Copyright (c) 2026 原创作者（自持版权）
+## 风险指标（近1年）
+- 最大回撤：-18.56%
+- 年化波动率：22.31%
+- 夏普比率：0.52
+- 风险等级：中高
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+## 持仓穿透（2026Q2）
+- 前三大行业：食品饮料（32%）、银行（18%）、医药生物（12%）
+- 前十大重仓股集中度：58.3%
+- 港股占比：22.1%
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+## 费率结构
+- 申购费：1.5%（第三方平台 0.15%）
+- 赎回费：0.5%（持有<7天 1.5%）
+- 管理费：1.5%/年
+- 托管费：0.25%/年
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+## 基金经理：张坤
+- 任期：2018-09-05 至今
+- 任期回报：+142.31%
+- 任期最大回撤：-32.45%
+- 年化波动率：24.12%
+
+## 体检结论
+- 收益能力：★★★★☆
+- 风险控制：★★★☆☆
+- 性价比：★★★★☆
+- 综合评级：A-
 ```
+
+---
+
+## 四、置信度门控
+
+### 4.1 数据缺失处理
+
+| 场景 | 处理方式 |
+|------|----------|
+| 净值数据缺失 | 输出 `[需核实:净值数据]`，不推算缺失值 |
+| 持仓数据未披露 | 输出 `[需核实:最新持仓]`，使用最近一期已披露数据并标注 |
+| 费率数据不完整 | 输出 `[需核实:费率]`，标注"以官方公告为准" |
+| 经理任期数据不全 | 输出 `[需核实:经理任期]`，仅展示可验证区间 |
+
+### 4.2 禁止行为
+
+- 不编造不存在的基金代码或名称
+- 不虚构历史净值或收益数据
+- 不推测未披露的持仓信息
+- 不将估算值标记为精确值
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| E001 | 基金代码格式错误 | "基金代码应为6位数字，请检查后重新输入" | 重新输入 6 位数字代码 |
+| E002 | 基金不存在 | "未找到代码为 XXXXXX 的基金，请确认代码或尝试输入基金名称" | 输入基金名称进行模糊搜索 |
+| E003 | 数据源连接失败 | "无法连接数据服务，请检查网络后重试" | 检查网络，稍后重试 |
+| E004 | 时间范围无效 | "起始日期不能晚于结束日期，且跨度不超过 10 年" | 调整时间范围 |
+| E005 | 同类基金池不足 | "同类基金数量不足 50 只，排名结果仅供参考" | 放宽类别范围或接受参考排名 |
+| E006 | 定投参数异常 | "定投金额需大于 0，定投周期需为周/月/季" | 修正参数后重试 |
+
+---
+
+## 六、FAQ 反模式对照
+
+### 6.1 常见坑
+
+| 坑位 | 错误做法 | 正确做法 |
+|------|----------|----------|
+| 只看收益不看风险 | 仅凭区间收益判断基金好坏 | 必须同时查看最大回撤与夏普比率 |
+| 忽略费率影响 | 不考虑申购费对定投收益的侵蚀 | 定投测算中计入费率成本 |
+| 持仓穿透不完整 | 只分析前十大重仓股 | 需结合行业分布与债券持仓 |
+| 排名基准错误 | 用股票型排名衡量债券型基金 | 严格按基金类别分组排名 |
+| 经理变更未识别 | 用历史经理业绩代表现任经理 | 区分任期区间，单独评估现任经理 |
+
+### 6.2 反模式对照表
+
+| 反模式 | 问题 | 替代方案 |
+|--------|------|----------|
+| "这只基金过去 3 年涨了 50%，未来也会涨" | 历史业绩不代表未来 | 输出风险指标与同类排名，不做预测 |
+| "夏普比率越高越好" | 夏普比率需结合波动率绝对值 | 同时展示波动率与回撤 |
+| "定投一定能摊平成本" | 单边下跌市场定投仍亏损 | 展示定投亏损情景模拟 |
+| "持仓集中度低就是分散" | 行业集中度高仍存在集中风险 | 穿透行业暴露，提示集中度 |
+
+---
+
+## 七、渐进式披露路径
+
+### 7.1 速查卡（新手路径）
+
+1. 输入基金代码 → 获取体检报告
+2. 查看"体检结论"星级与评级
+3. 对比"同类百分位"了解相对位置
+4. 阅读"风险指标"了解最大回撤
+
+### 7.2 进阶路径（进阶用户）
+
+1. 使用"持仓穿透"分析行业暴露
+2. 使用"定投测算"比较不同定投周期
+3. 使用"组合诊断"检查多基金重叠度
+4. 结合"经理档案"评估经理稳定性
+
+### 7.3 深度路径（专业用户）
+
+1. 导出净值序列进行自定义回测
+2. 对比不同时间窗口的夏普比率变化
+3. 分析持仓换手率与风格漂移
+4. 构建同类基金池进行多因子排序
+
+---
+
+## 八、参数配置表
+
+| 参数名 | 类型 | 默认值 | 取值范围 | 说明 |
+|--------|------|--------|----------|------|
+| `fund_code` | string | 无 | 6位数字 | 基金代码 |
+| `fund_name` | string | 无 | 任意字符串 | 基金名称关键词 |
+| `time_range` | string | "1y" | 1m/3m/6m/1y/3y/5y | 分析时间范围 |
+| `benchmark` | string | "同类平均" | 同类平均/沪深300/中证500 | 比较基准 |
+| `dca_amount` | number | 1000 | 100-100000 | 定投金额（元） |
+| `dca_frequency` | string | "monthly" | weekly/monthly/quarterly | 定投周期 |
+| `dca_period` | number | 36 | 6-120 | 定投月数 |
+| `risk_free_rate` | number | 0.02 | 0-0.05 | 无风险利率（年化） |
+
+---
+
+## 九、数据源与计算口径
+
+### 9.1 数据源优先级
+
+1. 基金公司官方公告（净值、分红、费率）
+2. 交易所披露数据（场内基金）
+3. 第三方数据平台（天天基金、晨星等）
+
+### 9.2 计算口径说明
+
+- 区间收益：采用复权净值计算，包含分红再投资
+- 最大回撤：基于日频净值计算
+- 夏普比率：年化计算，无风险利率默认 2%
+- 风险等级：波动率 <10% 为低，10-15% 为中低，15-20% 为中，20-25% 为中高，>25% 为高
+
+---
+
+## 十、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担全部责任。本 Skill 输出的所有分析结果仅供参考，不构成任何投资建议或投资承诺。因使用本 Skill 产生的任何直接或间接损失，Skill 作者及贡献者不承担任何责任。
+
+2. **数据准确性**：本 Skill 依赖公开数据源，不对数据的准确性、完整性、及时性作任何保证。用户应通过官方渠道核实关键数据。
+
+3. **禁止反向工程**：禁止对本 Skill 的代码、逻辑、数据结构进行反向工程、反编译、破解或试图提取源代码。
+
+4. **合规使用**：用户应遵守所在地法律法规，不得将本 Skill 用于任何非法目的。
+
+5. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性担保。
+
+---
+
+## 十一、许可证（License）
+
 <!-- professional-license-embedded -->
+
+### MIT License
+
+Copyright (c) 2026 FundPulse Studio
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## 十二、版本记录
+
+| 版本 | 日期 | 变更说明 |
+|------|------|----------|
+| 1.0.0 | 2026-08-10 | 初始版本，包含基金体检、持仓穿透、定投测算、组合诊断核心功能 |
+
+---
+
+*本 Skill 由 AI 辅助生成，仅供参考。投资有风险，决策需谨慎。*

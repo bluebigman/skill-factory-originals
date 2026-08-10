@@ -1,0 +1,8 @@
+{
+  "slug": "fund-pro",
+  "name": "fund-pro",
+  "description": "基金投资分析工具：输入基金代码或名称，自动拉取净值走势、持仓穿透、费率结构、基金经理业绩，输出基金体检报告（收益/回撤/夏普比率/风险等级）与同类排名对比，支持定投测算与组合诊断，生成可直接分享的投资分析文档。",
+  "trigger_words": "- \"基金",
+  "original_version": "1.0.0",
+  "capability_outline": []
+}
