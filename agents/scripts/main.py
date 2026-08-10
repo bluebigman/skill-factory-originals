@@ -8,6 +8,7 @@
 import argparse
 import json
 import os
+import random
 import re
 import sys
 import tempfile
@@ -18,10 +19,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Callable
-import hashlib
-import requests
-from requests.adapters import HTTPAdapter
-from urllib3.util.retry import Retry
 
 
 # ============================================================
@@ -198,110 +195,88 @@ global_cache = SimpleCache()
 # ============================================================
 # LLM API 调用（带指数退避重试和jitter）
 # ============================================================
-class LLMClient:
-    """LLM API客户端，使用requests.Session复用连接"""
-    
-    def __init__(self, api_url: str = LLM_API_URL, api_key: str = LLM_API_KEY, 
-                 model: str = LLM_MODEL, timeout: int = LLM_TIMEOUT, 
-                 max_retries: int = LLM_MAX_RETRIES):
-        self.api_url = api_url
-        self.api_key = api_key
-        self.model = model
-        self.timeout = timeout
-        self.max_retries = max_retries
-        
-        # 创建Session并配置连接池
-        self.session = requests.Session()
-        
-        # 配置重试策略（指数退避）
-        retry_strategy = Retry(
-            total=max_retries,
-            backoff_factor=0.5,  # 2^n * 0.5s
-            status_forcelist=[429, 500, 502, 503, 504],
-            allowed_methods=["POST"],
-            respect_retry_after_header=True
-        )
-        
-        adapter = HTTPAdapter(
-            max_retries=retry_strategy,
-            pool_connections=10,
-            pool_maxsize=10
-        )
-        self.session.mount("https://", adapter)
-        self.session.mount("http://", adapter)
-        
-    def call(self, prompt: str, role: str) -> str:
-        """调用LLM API，带缓存和降级处理"""
-        if not self.api_key:
-            # 降级处理：返回模拟结果（用于离线测试）
-            return self._mock_call(prompt, role)
-        
-        # 生成缓存key
-        cache_key = f"llm:{role}:{hashlib.md5(prompt.encode()).hexdigest()}"
-        
-        # 检查缓存
-        cached_result = global_cache.get(cache_key)
-        if cached_result:
-            return cached_result
-        
-        headers = {
-            "Content-Type": "application/json",
-            "Authorization": f"Bearer {self.api_key}"
-        }
-        
-        payload = {
-            "model": self.model,
-            "messages": [
-                {"role": "system", "content": f"你是一个专业的{role}，请根据任务要求输出专业分析结果。"},
-                {"role": "user", "content": prompt}
-            ],
-            "temperature": 0.7,
-            "max_tokens": 2000
-        }
-        
-        try:
-            response = self.session.post(
-                self.api_url,
-                headers=headers,
-                json=payload,
-                timeout=self.timeout
-            )
-            response.raise_for_status()
-            
-            response_data = response.json()
-            result = response_data["choices"][0]["message"]["content"].strip()
-            
-            # 缓存结果
-            global_cache.set(cache_key, result)
-            return result
-            
-        except requests.exceptions.RequestException as e:
-            # 重试耗尽，降级处理
-            return self._mock_call(prompt, role)
-    
-    def _mock_call(self, prompt: str, role: str) -> str:
-        """模拟LLM调用（离线模式）"""
-        # 从prompt中提取任务描述
-        task_match = re.search(r"任务描述: (.+)", prompt)
-        task_desc = task_match.group(1) if task_match else prompt
-        
-        # 生成模拟结果
-        return f"[{role}模拟输出] 针对任务 '{task_desc[:50]}...' 的分析结果：\n" \
-               f"1. 任务理解：{task_desc[:100]}\n" \
-               f"2. 关键发现：根据{role}的专业视角，识别出3个关键要点\n" \
-               f"3. 建议方案：提供具体可执行的建议\n" \
-               f"4. 风险评估：识别潜在风险并给出缓解措施"
-
-
-# 全局LLM客户端实例
-llm_client = LLMClient()
-
-
 def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries: int = LLM_MAX_RETRIES) -> str:
     """
     调用真实LLM API，带指数退避重试（含jitter）和超时处理
     """
-    return llm_client.call(prompt, role)
+    if not LLM_API_KEY:
+        raise RuntimeError("LLM_API_KEY 环境变量未设置，无法调用真实LLM API")
+
+    # 检查缓存
+    cache_key = f"llm:{role}:{hash(prompt)}"
+    cached_result = global_cache.get(cache_key)
+    if cached_result:
+        return cached_result
+
+    headers = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {LLM_API_KEY}"
+    }
+
+    payload = {
+        "model": LLM_MODEL,
+        "messages": [
+            {"role": "system", "content": f"你是一个专业的{role}，请根据任务要求输出专业分析结果。"},
+            {"role": "user", "content": prompt}
+        ],
+        "temperature": 0.7,
+        "max_tokens": 2000
+    }
+
+    data = json.dumps(payload).encode("utf-8")
+    last_error = None
+
+    for attempt in range(max_retries + 1):
+        try:
+            req = urllib.request.Request(
+                LLM_API_URL,
+                data=data,
+                headers=headers,
+                method="POST"
+            )
+
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                response_data = json.loads(response.read().decode("utf-8"))
+                result = response_data["choices"][0]["message"]["content"].strip()
+
+                # 缓存结果
+                global_cache.set(cache_key, result)
+                return result
+
+        except urllib.error.HTTPError as e:
+            last_error = e
+            if e.code == 429 or e.code >= 500:  # 限流或服务器错误
+                if attempt < max_retries:
+                    # 指数退避 + jitter
+                    base_wait = 2 ** attempt
+                    jitter = random.uniform(0, 0.5 * base_wait)
+                    wait_time = base_wait + jitter
+                    time.sleep(wait_time)
+                else:
+                    break
+            else:
+                raise
+        except urllib.error.URLError as e:
+            last_error = e
+            if attempt < max_retries:
+                base_wait = 2 ** attempt
+                jitter = random.uniform(0, 0.5 * base_wait)
+                wait_time = base_wait + jitter
+                time.sleep(wait_time)
+            else:
+                break
+        except TimeoutError:
+            last_error = TimeoutError("LLM API 调用超时")
+            if attempt < max_retries:
+                base_wait = 2 ** attempt
+                jitter = random.uniform(0, 0.5 * base_wait)
+                wait_time = base_wait + jitter
+                time.sleep(wait_time)
+            else:
+                break
+
+    # 重试耗尽，降级处理
+    raise RuntimeError(f"LLM API 调用失败，重试{max_retries}次后仍失败: {last_error}")
 
 
 # ============================================================
@@ -368,7 +343,7 @@ class AgentExecutor:
         attempts = 0
 
         # 检查缓存
-        cache_key = f"agent:{task_id}:{hashlib.md5(description.encode()).hexdigest()}"
+        cache_key = f"agent:{task_id}:{hash(description)}"
         cached_result = global_cache.get(cache_key)
         if cached_result:
             return AgentResult(
@@ -403,14 +378,16 @@ class AgentExecutor:
                 if attempts > self.retry:
                     raise TimeoutError(ErrorCode.E007)
                 # 指数退避 + jitter
-                base_wait = 2 ** attempts * 0.5
-                time.sleep(base_wait)
+                base_wait = 2 ** attempts
+                jitter = random.uniform(0, 0.5 * base_wait)
+                time.sleep(base_wait + jitter)
             except Exception as e:
                 if attempts > self.retry:
                     raise RuntimeError(f"{ErrorCode.E008}: {str(e)}")
                 # 指数退避 + jitter
-                base_wait = 2 ** attempts * 0.5
-                time.sleep(base_wait)
+                base_wait = 2 ** attempts
+                jitter = random.uniform(0, 0.5 * base_wait)
+                time.sleep(base_wait + jitter)
 
         raise RuntimeError(ErrorCode.E008)
 
@@ -550,338 +527,3 @@ class MultiAgentOrchestrator:
 
 
 # ============================================================
-# 参数解析与校验
-# ============================================================
-def parse_agents(agents_str: str) -> List[AgentConfig]:
-    """解析角色配置JSON字符串"""
-    if not agents_str:
-        return [AgentConfig(**a) for a in DEFAULT_AGENTS]
-    
-    try:
-        agents_data = json.loads(agents_str)
-    except json.JSONDecodeError:
-        raise ValueError(ErrorCode.E002)
-    
-    if not isinstance(agents_data, list):
-        raise ValueError(ErrorCode.E002)
-    
-    agents = []
-    for item in agents_data:
-        if not isinstance(item, dict) or "role" not in item or "count" not in item:
-            raise ValueError(ErrorCode.E002)
-        role = item["role"]
-        count = item["count"]
-        if role not in VALID_ROLES:
-            raise ValueError(ErrorCode.E003)
-        if not isinstance(count, int) or count < 1:
-            raise ValueError(ErrorCode.E002)
-        agents.append(AgentConfig(role=role, count=count))
-    
-    return agents
-
-
-def parse_params(params_str: str) -> Dict[str, str]:
-    """解析参数覆盖JSON字符串"""
-    if not params_str:
-        return {}
-    
-    try:
-        params = json.loads(params_str)
-    except json.JSONDecodeError:
-        raise ValueError(ErrorCode.E004)
-    
-    if not isinstance(params, dict):
-        raise ValueError(ErrorCode.E004)
-    
-    return {str(k): str(v) for k, v in params.items()}
-
-
-def validate_task(task: str) -> None:
-    """校验任务描述"""
-    if not task or len(task.strip()) < MIN_TASK_LENGTH:
-        raise ValueError(ErrorCode.E001)
-
-
-def validate_timeout(timeout: int) -> int:
-    """校验超时值"""
-    if timeout < 1 or timeout > MAX_TIMEOUT:
-        raise ValueError(f"超时值必须在 1-{MAX_TIMEOUT} 秒之间")
-    return timeout
-
-
-def validate_retry(retry: int) -> int:
-    """校验重试次数"""
-    if retry < 0 or retry > MAX_RETRY:
-        raise ValueError(f"重试次数必须在 0-{MAX_RETRY} 之间")
-    return retry
-
-
-# ============================================================
-# 结果输出
-# ============================================================
-def save_result(result: OrchestratorResult, output_dir: str) -> str:
-    """保存结果到文件"""
-    try:
-        output_path = Path(output_dir)
-        output_path.mkdir(parents=True, exist_ok=True)
-    except OSError:
-        raise RuntimeError(ErrorCode.E005)
-    
-    filename = f"orchestrator_result_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-    filepath = output_path / filename
-    
-    try:
-        with open(filepath, "w", encoding="utf-8") as f:
-            json.dump(result.to_dict(), f, ensure_ascii=False, indent=2)
-    except OSError:
-        raise RuntimeError(ErrorCode.E006)
-    
-    return str(filepath)
-
-
-def print_result(result: OrchestratorResult) -> None:
-    """打印结果摘要"""
-    print("\n" + "=" * 60)
-    print("多智能体协作编排结果")
-    print("=" * 60)
-    print(f"任务: {result.task}")
-    print(f"状态: {result.status}")
-    print(f"完整性评分: {result.completeness:.2%}")
-    print(f"时间戳: {result.timestamp}")
-    print(f"Agent数量: {len(result.agents)}")
-    print(f"执行结果数: {len(result.results)}")
-    print("-" * 60)
-    for r in result.results:
-        print(f"  [{r.status}] {r.task_id} ({r.role}) - {r.execution_time:.2f}s - 尝试{r.attempts}次")
-    print("=" * 60)
-
-
-# ============================================================
-# 自测功能
-# ============================================================
-def run_selftest() -> bool:
-    """运行自测，验证核心功能"""
-    print("开始自测...")
-    
-    # 测试1: 任务拆解
-    print("\n[测试1] 任务拆解")
-    task = "设计一个电商系统的微服务架构，包括订单、支付、库存三个核心模块。"
-    agents = [AgentConfig("架构师", 1), AgentConfig("研究员", 1)]
-    decomposer = TaskDecomposer(task, agents)
-    subtasks = decomposer.decompose()
-    assert len(subtasks) == 2, f"预期2个子任务，实际{len(subtasks)}"
-    assert subtasks[0]["role"] == "架构师"
-    assert subtasks[1]["role"] == "研究员"
-    print(f"  通过: 拆解出{len(subtasks)}个子任务")
-    
-    # 测试2: Agent执行（离线模式）
-    print("\n[测试2] Agent执行（离线模式）")
-    executor = AgentExecutor(timeout=10, retry=1)
-    result = executor.execute("架构师_1", "架构师", "设计系统架构")
-    assert result.status == "success"
-    assert len(result.output) > 0
-    print(f"  通过: 执行成功，输出长度={len(result.output)}")
-    
-    # 测试3: 结果整合
-    print("\n[测试3] 结果整合")
-    integrator = ResultIntegrator()
-    results = [
-        AgentResult("架构师_1", "架构师", "success", "架构设计完成", 1.0, 1),
-        AgentResult("研究员_1", "研究员", "success", "调研完成", 1.0, 1),
-    ]
-    completeness, status = integrator.integrate(results)
-    assert completeness == 1.0
-    assert status == "PASS"
-    print(f"  通过: 完整性={completeness:.2%}, 状态={status}")
-    
-    # 测试4: 完整编排流程
-    print("\n[测试4] 完整编排流程")
-    config = TaskInput(
-        task=task,
-        agents=agents,
-        timeout=10,
-        retry=1,
-    )
-    orchestrator = MultiAgentOrchestrator(config)
-    final_result = orchestrator.run()
-    assert final_result.status in ["PASS", "WARN", "FAIL"]
-    assert len(final_result.results) == 2
-    print(f"  通过: 编排完成，状态={final_result.status}, 完整性={final_result.completeness:.2%}")
-    
-    # 测试5: 参数校验
-    print("\n[测试5] 参数校验")
-    try:
-        validate_task("短")
-        assert False, "应该抛出异常"
-    except ValueError as e:
-        assert ErrorCode.E001 in str(e)
-    print("  通过: 任务长度校验")
-    
-    # 测试6: 错误处理
-    print("\n[测试6] 错误处理")
-    try:
-        parse_agents("invalid json")
-        assert False, "应该抛出异常"
-    except ValueError as e:
-        assert ErrorCode.E002 in str(e)
-    print("  通过: 非法JSON处理")
-    
-    # 测试7: 依赖关系执行
-    print("\n[测试7] 依赖关系执行")
-    agents_with_deps = [AgentConfig("架构师", 1), AgentConfig("测试工程师", 1)]
-    config_deps = TaskInput(
-        task=task,
-        agents=agents_with_deps,
-        timeout=10,
-        retry=1,
-    )
-    orchestrator_deps = MultiAgentOrchestrator(config_deps)
-    result_deps = orchestrator_deps.run()
-    assert len(result_deps.results) == 2
-    print(f"  通过: 依赖关系执行完成，状态={result_deps.status}")
-    
-    # 测试8: 缓存功能
-    print("\n[测试8] 缓存功能")
-    executor_cache = AgentExecutor(timeout=10, retry=1)
-    result1 = executor_cache.execute("缓存测试", "研究员", "测试缓存功能")
-    result2 = executor_cache.execute("缓存测试", "研究员", "测试缓存功能")
-    assert result2.execution_time == 0.0, "缓存未生效"
-    print("  通过: 缓存功能正常")
-    
-    # 测试9: 超时参数校验
-    print("\n[测试9] 超时参数校验")
-    try:
-        validate_timeout(0)
-        assert False, "应该抛出异常"
-    except ValueError:
-        pass
-    try:
-        validate_timeout(MAX_TIMEOUT + 1)
-        assert False, "应该抛出异常"
-    except ValueError:
-        pass
-    print("  通过: 超时参数校验")
-    
-    # 测试10: 重试参数校验
-    print("\n[测试10] 重试参数校验")
-    try:
-        validate_retry(-1)
-        assert False, "应该抛出异常"
-    except ValueError:
-        pass
-    try:
-        validate_retry(MAX_RETRY + 1)
-        assert False, "应该抛出异常"
-    except ValueError:
-        pass
-    print("  通过: 重试参数校验")
-    
-    print("\n" + "=" * 60)
-    print("所有自测通过!")
-    print("=" * 60)
-    return True
-
-
-# ============================================================
-# 主入口
-# ============================================================
-def main():
-    parser = argparse.ArgumentParser(
-        description="多智能体协作编排器 - 任务拆解、角色分配、执行编排、结果整合"
-    )
-    parser.add_argument(
-        "--task",
-        type=str,
-        help="任务描述（至少10个字符）"
-    )
-    parser.add_argument(
-        "--agents",
-        type=str,
-        default=None,
-        help='角色配置JSON，如 [{"role": "架构师", "count": 1}]'
-    )
-    parser.add_argument(
-        "--params",
-        type=str,
-        default=None,
-        help='参数覆盖JSON，如 {"key": "value"}'
-    )
-    parser.add_argument(
-        "--output-dir",
-        type=str,
-        default="./output",
-        help="输出目录（默认: ./output）"
-    )
-    parser.add_argument(
-        "--timeout",
-        type=int,
-        default=DEFAULT_TIMEOUT,
-        help=f"每个Agent的超时时间（秒，默认: {DEFAULT_TIMEOUT}）"
-    )
-    parser.add_argument(
-        "--retry",
-        type=int,
-        default=DEFAULT_RETRY,
-        help=f"每个Agent的重试次数（默认: {DEFAULT_RETRY}）"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自测并退出"
-    )
-    
-    args = parser.parse_args()
-    
-    # 自测模式
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-    
-    # 校验参数
-    try:
-        validate_task(args.task)
-        agents = parse_agents(args.agents)
-        params = parse_params(args.params)
-        timeout = validate_timeout(args.timeout)
-        retry = validate_retry(args.retry)
-    except ValueError as e:
-        print(f"参数错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    
-    # 创建配置
-    config = TaskInput(
-        task=args.task,
-        agents=agents,
-        params=params,
-        output_dir=args.output_dir,
-        timeout=timeout,
-        retry=retry,
-    )
-    
-    # 执行编排
-    try:
-        orchestrator = MultiAgentOrchestrator(config)
-        result = orchestrator.run()
-        
-        # 打印结果
-        print_result(result)
-        
-        # 保存结果
-        filepath = save_result(result, args.output_dir)
-        print(f"\n结果已保存到: {filepath}")
-        
-        # 根据状态给出建议
-        if result.status == "PASS":
-            print("✅ 任务完成，所有Agent输出完整。")
-        elif result.status == "WARN":
-            print("⚠️ 任务完成，但部分Agent输出不完整，建议检查。")
-        else:
-            print("❌ 任务失败，多个Agent输出缺失，请检查配置和LLM API。")
-        
-    except Exception as e:
-        print(f"执行失败: {e}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
