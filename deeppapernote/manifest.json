@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260811_043049",
+  "slug": "deeppapernote",
+  "spec": {
+    "slug": "deeppapernote",
+    "name": "deeppapernote",
+    "description": "深度阅读单篇论文，自动生成结构化 Obsidian 风格研究笔记。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "ab5669c04a6ee606",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
