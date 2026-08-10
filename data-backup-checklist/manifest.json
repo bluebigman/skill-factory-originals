@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260811_042917",
+  "slug": "data-backup-checklist",
+  "spec": {
+    "slug": "data-backup-checklist",
+    "name": "data-backup-checklist",
+    "description": "备份清单核对、版本差异追踪、恢复演练评分与风险分级预警。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 检查 Python 版本是否为 3.9+",
+      "2. 确认 `openpyxl` 已安装（如需 Excel 支持）",
+      "3. 查看 stderr 输出中的具体失败断言"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "1137063f2a36d614",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}

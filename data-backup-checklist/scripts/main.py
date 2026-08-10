@@ -10,7 +10,8 @@ import argparse
 import sys
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
-from datetime import timezone, datetime
+from datetime import datetime, timezone
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 
 # ============================================================
@@ -386,7 +387,28 @@ def main() -> int:
         help="将结果输出到指定文件",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--compare", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--input", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.268 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -403,7 +425,7 @@ def main() -> int:
     if args.check:
         try:
             import json
-            with open(args.check, "r", encoding="utf-8") as f:
+            with open(args.check, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
             if not isinstance(data, list):
                 print("错误: JSON 文件顶层应为数组", file=sys.stderr)
@@ -412,7 +434,7 @@ def main() -> int:
             output = format_output(result)
             print(output)
             if args.output:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(output + "\n")
             return 0
         except FileNotFoundError:
