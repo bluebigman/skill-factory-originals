@@ -1,0 +1,8 @@
+{
+  "slug": "deeppapernote",
+  "name": "deeppapernote",
+  "description": "深度阅读单篇论文，自动生成结构化 Obsidian 风格研究笔记。",
+  "trigger_words": "",
+  "original_version": "2.0.0",
+  "capability_outline": []
+}
