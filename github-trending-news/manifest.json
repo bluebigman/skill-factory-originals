@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260811_044615",
+  "slug": "github-trending-news",
+  "spec": {
+    "slug": "github-trending-news",
+    "name": "github-trending-news",
+    "description": "抓取GitHub Trending，按语言与日期过滤，生成结构化周报。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "2774f7ac5e36dbd1",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
