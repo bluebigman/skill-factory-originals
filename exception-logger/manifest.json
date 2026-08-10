@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260811_044228",
+  "slug": "exception-logger",
+  "spec": {
+    "slug": "exception-logger",
+    "name": "exception-logger",
+    "description": "捕获、结构化并分析 Python 异常日志，提供根因建议与修复指引，支持流式处理与批量分析。",
+    "cli_interface": [],
+    "capability_outline": [
+      "2. 根据 `--input` 读取输入（文件或直接文本），使用流式方式处理大文件。",
+      "3. 调用核心解析函数 `parse_exception` 提取异常信息。",
+      "4. 根据 `--format` 生成文本或 JSON 输出。",
+      "5. 若指定 `--output` 且非 `--dry-run`，原子化写入结果文件。",
+      "6. 若指定 `--verbose`，打印详细决策过程。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "c258b2c0cb504efa",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
