@@ -1,23 +1,25 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: dictionary-term-explain
 name: 术语释义助手
-displayName: 多场景术语拆解释义
+displayName: 场景拆解 概念边界 落地解释
 description: 按场景拆解术语含义，给出边界清晰、可落地的概念解释。
-version: 2.0.1
+version: 2.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/dictionary-term-explain
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 概念拆解工坊
+author: 术语工坊
 agent_created: true
-trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么意思", "通俗解释", "术语拆解", "概念辨析"]
+trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么意思", "通俗解释", "术语拆解", "概念辨析", "定义解读"]
 ---
+
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
 
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
@@ -26,50 +28,84 @@ trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么
 <!-- user-agreement-injected -->
 
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+# 术语释义助手（Term Explainer）
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+**一句话定位**：面向产品经理、技术写作者、新员工和跨部门协作人员，按「技术 / 业务 / 日常 / 学术」四类场景拆解术语含义，明确概念边界与常见误用，让抽象名词变得可落地、可沟通。
 
-# 术语释义助手 Skill 文档
+---
 
-## 一、能力边界（一页纸速查卡）
+## 快速开始 Quick Start
 
-### 1.1 能做什么
+| 场景 | 命令 | 预期结果 |
+|------|------|---------|
+| 解释单个术语 | `python run.py "微服务"` | 输出结构化解释（核心定义 / 场景拆解 / 概念边界 / 常见误用） |
+| 指定场景解释 | `python run.py "区块链" --scene 技术` | 只输出「技术」场景的解释，聚焦专业视角 |
+| 批量解释多个术语 | `python run.py --batch terms.json` | 依次输出每个术语的完整解释，以分隔线隔开 |
 
-| 能力项 | 说明 | 示例 |
-|--------|------|------|
-| 术语精确匹配 | 在本地知识库中查找术语，返回结构化解释 | 输入"区块链"，返回核心定义、场景拆解等 |
-| 场景化拆解 | 按用户指定场景（技术/商业/法律/日常等）生成针对性解释 | 指定"金融场景"解释"杠杆" |
-| 外部知识补充 | 本地未命中时，尝试调用维基百科 API 获取信息 | 输入"拓扑学"，本地无记录，转外部查询 |
-| 结构化输出 | 输出固定格式的 Markdown 文档，含核心定义、场景拆解、边界界定、常见误用 | 见 3.3 输出规范 |
+> 💡 **最常用**：`python run.py "微服务"` 即可获得全场景解释，无需额外参数。
 
-### 1.2 不能做什么
+---
 
-| 限制项 | 说明 |
-|--------|------|
-| 不处理超长输入 | 术语长度超过 100 字符直接拒绝，返回错误码 `E1001` |
-| 不编造知识 | 本地和外部均未命中时，返回错误码 `E1004`，不猜测含义 |
-| 不提供多语言翻译 | 仅支持中文输入和中文输出（术语本身可为外文） |
-| 不进行深度学术论证 | 提供概念性解释，不输出论文级分析或文献综述 |
-| 不处理模糊多义词 | 同一术语有多个完全无关含义时，要求用户明确指定场景，否则按默认场景处理 |
+## 适用场景 When to Use
 
-### 1.3 适用对象
+### ✅ 推荐使用
 
-- 需要快速理解陌生术语的职场新人
-- 跨领域协作时需要对齐概念的产品经理、设计师、工程师
-- 撰写文档时需要准确界定术语边界的写作者
-- 准备面试或汇报时需要清晰表达概念的学习者
+- **产品经理**向开发 / 设计 / 运营解释业务术语时
+- **技术写作者**编写文档时需要澄清概念边界时
+- **新员工 / 转岗人员**快速理解团队内部黑话时
+- **跨部门协作**消除术语理解偏差时
+- **学生 / 自学者**理解专业教材中的抽象概念时
 
+### ❌ 不推荐使用
+
+- 需要法律 / 医疗 / 财务等专业领域正式意见的场景
+- 需要逐字逐句翻译的场景
+- 需要权威定义（如 ISO 标准原文）的场景
+- 需要操作步骤或实施指导的场景（本工具只做概念解释）
+
+---
+
+## 能力总览 Capabilities
+
+| 能力 | 命令 / 参数 | 示例 |
+|------|------------|------|
+| 单个术语解释 | `python run.py <术语>` | `python run.py "微服务"` |
+| 指定场景解释 | `--scene <技术/业务/日常/学术/all>` | `python run.py "区块链" --scene 技术` |
+| 批量处理 JSON 文件 | `--batch <file.json>` | `python run.py --batch terms.json` |
+| 批量处理纯文本文件 | `--batch <file.txt>` | `python run.py --batch terms.txt` |
+| 预览模式（不执行查询） | `--dry-run` | `python run.py --batch terms.json --dry-run` |
+| 调试输出（详细日志） | `--verbose` | `python run.py "微服务" --verbose` |
+| 内置自测 | `--selftest` | `python run.py --selftest` |
+| 版本信息 | `--version` | `python run.py --version` |
+| 外部 API 兜底 | 自动触发（知识库未命中时） | 查询维基百科获取解释 |
+| LRU 缓存 | 自动启用（1024 条） | 重复查询秒回 |
+
+---
+
+## 模块决策表 Decision Table
+
+| 用户意图 | 推荐模块 / 命令 | 读取指引 |
+|---------|----------------|---------|
+| 快速了解一个术语 | `python run.py <术语>` | 查看「快速开始」 |
+| 需要特定场景的专业解释 | `python run.py <术语> --scene <场景>` | 查看「能力总览」 |
+| 批量解释多个术语 | `python run.py --batch <文件>` | 查看「批量处理」章节 |
+| 预览将处理的术语（不执行查询） | `python run.py --batch <文件> --dry-run` | 查看「预览模式」 |
+| 验证功能是否正常 | `python run.py --selftest` | 查看「自测」章节 |
+| 知识库未命中时 | 自动尝试维基百科 | 查看「外部 API 兜底」 |
+| 排查错误 | 查看错误码 | 查看「错误码」章节 |
+
+---
+
+## 示例 Examples
+
+### 示例 1：单个术语解释（全场景）
 
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) 2026 SkillForge Lab
+Copyright (c) {year} {holder}
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -80,63 +116,14 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 ```
 <!-- professional-license-embedded -->
-
-## 前置条件
-
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。

@@ -1,21 +1,19 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: agent-memory-hub
 name: agent-memory-hub
-displayName: 团队记忆 资产沉淀 知识复用
-description: 将对话、文档与代码沉淀为可复用的团队级记忆资产，支持治理与共享。
-version: 1.0.1
-rules_version: cpr-20260808-n152
+displayName: 记忆资产 团队索引 知识整理
+description: 将对话、文档、代码整理为四类记忆资产，生成团队共享索引。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agent-memory-hub
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LingWei
+author: 知汇工坊
 agent_created: true
-trigger_words: ["记忆管理", "知识沉淀", "资产复用", "团队知识库", "对话记忆", "技能封装", "LLM维基", "代码图谱"]
+trigger_words: ["记忆整理", "知识库构建", "代码图谱", "团队索引", "资产归档", "知识沉淀", "信息归档", "记忆库"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -34,35 +32,35 @@ trigger_words: ["记忆管理", "知识沉淀", "资产复用", "团队知识库
 
 # agent-memory-hub 技能文档
 
-## 一、能力边界：一页纸速查卡
+## 一、能力边界速查卡
 
-本技能面向需要将零散信息转化为结构化、可复用资产的团队或个人。它不替代知识管理系统，而是充当“信息炼油厂”——把输入的对话、文档、代码，提炼为四种标准化的记忆资产。
+本技能面向需要将零散信息转化为结构化团队资产的场景。以下内容帮助你在 30 秒内判断是否适用。
 
-### 1.1 能做（核心能力）
+| 维度 | 说明 |
+|------|------|
+| **核心用途** | 将对话记录、项目文档、代码片段整理为四类标准化记忆资产，并生成团队共享索引 |
+| **输入材料** | 对话文本、Markdown/PDF/Word 文档、代码文件、URL 链接 |
+| **输出产物** | 四类资产文件（对话记忆、文档记忆、代码记忆、决策记忆）+ 一份索引文件 |
+| **默认输出目录** | `./memory_assets/`（可在执行时指定其他路径） |
+| **处理方式** | 每份输入材料独立生成资产条目，不合并、不交叉引用 |
+| **批量上限** | 单次建议不超过 20 份材料，超出后分批执行 |
 
-| 编号 | 能力项 | 说明 | 适用输入 |
-|------|--------|------|----------|
-| C1 | 对话记忆化 | 将聊天记录提炼为带摘要、标签、决策点的结构化记忆条目 | 聊天导出文件、对话文本 |
-| C2 | 技能封装 | 从操作步骤、命令序列中提取可复用的技能模板（含参数、前置条件） | 操作手册、教程、命令日志 |
-| C3 | LLM维基构建 | 将概念解释、术语定义整理为可供大模型检索的维基条目（含别名、关联） | 术语表、FAQ、概念文档 |
-| C4 | 代码图谱生成 | 从代码仓库或代码片段中提取函数、类、依赖关系，生成调用关系图数据 | 代码文件、Git仓库导出 |
-| C5 | 批量与自定义格式 | 支持一次处理多个文件/URL，并可按用户指定的字段结构输出 | 多文件目录、URL列表 |
+### 能做与不能做
 
-### 1.2 不能做（明确边界）
+| ✅ 能做 | ❌ 不能做 |
+|--------|----------|
+| 标准格式的批量处理 | 对模糊或缺失信息进行猜测补全 |
+| 字段提取与结构化输出 | 修改原始输入文件内容 |
+| 失败明细追踪与报告 | 跨材料自动建立语义关联 |
+| 按模板生成四类资产 | 生成代码执行逻辑或运行程序 |
+| 生成团队共享索引 | 自动推送索引到远程仓库 |
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不执行代码 | 仅分析代码结构，不运行、不调试、不执行任何代码逻辑 |
-| L2 | 不自动写入知识库 | 生成结构化结果，由用户决定如何导入目标系统 |
-| L3 | 不处理加密/二进制内容 | 仅处理文本类数据（txt/md/json/py/js/ts等） |
-| L4 | 不保证信息真实性 | 对输入中的事实性错误不做校验，仅做结构化提取 |
-| L5 | 不跨语言翻译 | 保留原文语言，不做翻译处理 |
+### 适用对象
 
-### 1.3 适用对象
-
-- 需要建立团队知识库的AI代理开发者
-- 维护多项目文档体系的技术负责人
-- 希望将个人笔记转化为可共享资产的知识工作者
+- 需要沉淀项目经验的研发团队
+- 需要整理客户对话记录的售前/售后团队
+- 需要建立知识库的内容运营人员
+- 需要维护代码架构文档的技术负责人
 
 
 ## 许可证（License）
@@ -70,7 +68,7 @@ trigger_words: ["记忆管理", "知识沉淀", "资产复用", "团队知识库
 ```text
 MIT License
 
-Copyright (c) 2026 SkillForge Lab
+Copyright (c) {year} {holder}
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -81,5 +79,30 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 ```
 <!-- professional-license-embedded -->
+
+## 失败处理
+
+- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
+- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
+- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
+## 前置条件
+
+- 本技能开箱即用，无需额外安装依赖。
+- 需要 Python 3.9+ 运行环境。
+- 涉及网络请求时需保持网络连通。
+## 执行步骤
+
+1. 读取输入参数或交互输入。
+2. 按技能定义的处理流程执行核心逻辑。
+3. 输出结构化结果，并在完成后给出下一步建议。
