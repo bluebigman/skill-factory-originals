@@ -24,6 +24,11 @@ from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+import time  # G1 退避
+
+def _g1_backoff():
+    time.sleep(0.1)  # G1 退避标记
+
 
 # ---------------------------------------------------------------------------
 # 错误码定义
