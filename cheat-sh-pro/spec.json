@@ -1,13 +1,8 @@
 {
   "slug": "cheat-sh-pro",
-  "name": "命令行速查手册",
-  "description": "命令行速查手册，一条命令获取编程语言和工具示例，开发必备",
-  "trigger_words": "- \"cheat.sh",
-  "original_version": "1.0.13",
-  "capability_outline": [
-    "- 输出异常：确认输入格式，参考常见问题排查",
-    "1. 读取用户输入",
-    "2. 执行对应命令",
-    "3. 返回结果"
-  ]
+  "name": "cheat-sh-pro",
+  "description": "终端内即时获取编程语言与工具代码示例，支持模糊搜索、领域过滤、随机速查与 Markdown 导出，开发调试零切换。",
+  "trigger_words": "[\"cheat.sh\", \"命令行速查\", \"代码示例查询\", \"终端查手册\", \"命令速查\", \"开发调试速查\"]",
+  "original_version": "3.0.0",
+  "capability_outline": []
 }
