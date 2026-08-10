@@ -15,6 +15,7 @@ import sys
 import tempfile
 from datetime import datetime, timedelta, timezone
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 常量定义
@@ -1095,6 +1096,10 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行内置自测")
     
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 自测模式
     if args.selftest:
