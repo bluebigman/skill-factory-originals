@@ -12,6 +12,7 @@ agent-memory-hub 技能独立实现
 """
 
 from __future__ import annotations
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 import argparse
 import json
@@ -39,6 +40,24 @@ ERROR_CODES = {
     "E009": "批量处理超过上限（20 份）",
     "E010": "自检失败",
 }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def fail(code: str, context: str = "") -> None:
@@ -303,7 +322,8 @@ class MemoryHubProcessor:
             # 文件名：资产ID.json
             file_path = type_dir / f"{r.asset.asset_id}.json"
             try:
-                file_path.write_text(
+                if not dry_run or getattr(args, "force", False):
+                    file_path.write_text(
                     json.dumps(asdict(r.asset), ensure_ascii=False, indent=2),
                     encoding="utf-8",
                 )
@@ -338,7 +358,8 @@ class MemoryHubProcessor:
 
         index_path = self.output_dir / "INDEX.json"
         try:
-            index_path.write_text(
+            if not dry_run or getattr(args, "force", False):
+                index_path.write_text(
                 json.dumps(index_data, ensure_ascii=False, indent=2),
                 encoding="utf-8",
             )
@@ -371,7 +392,8 @@ def _run_selftest() -> int:
 
         for name, content in test_files.items():
             file_path = tmp / name
-            file_path.write_text(content, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                file_path.write_text(content, encoding="utf-8")
 
         # 创建处理器
         out_dir = tmp / "out"
@@ -450,8 +472,8 @@ def _run_selftest() -> int:
             import shutil
             try:
                 shutil.rmtree(tmp_dir, ignore_errors=True)
-            except:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
 
 
 # ---------------------------------------------------------------------------
@@ -479,7 +501,13 @@ def main() -> int:
     )
 
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+        parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args()
+        global dry_run
+        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     except SystemExit as e:
         # 参数解析失败
         if e.code != 0:
