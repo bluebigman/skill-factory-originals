@@ -29,6 +29,7 @@ from datetime import datetime, timezone
 from functools import wraps
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 class AiderError(Exception):
@@ -359,7 +360,7 @@ def parse_args():
     )
     
     # 文件选择参数
-    file_group = parser.add_mutually_exclusive_group(required=True)
+    file_group = parser.add_mutually_exclusive_group()
     file_group.add_argument(
         "--add", "-a",
         nargs="+",
@@ -391,6 +392,13 @@ def parse_args():
     # 提交参数
     parser.add_argument("--message", "-m", help="自定义提交信息")
     parser.add_argument("--yes", "-y", action="store_true", help="自动接受修改，不交互确认")
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     
     return parser.parse_args()
 
