@@ -1,0 +1,42 @@
+{
+  "timestamp": "20260811_044311",
+  "slug": "expense-reimburse",
+  "spec": {
+    "slug": "expense-reimburse",
+    "name": "expense-reimburse",
+    "description": "整理报销单据：文档真伪初查、金额核对、报销类别归类、生成报销明细表",
+    "cli_interface": [],
+    "capability_outline": [
+      "**能做（5项核心能力）：**",
+      "1. 将 发票/收据照片或金额清单 转换为结构化结果",
+      "2. 识别并保留输入中的关键信息（如：日期、金额、商家、发票号码）",
+      "3. 按约定格式生成输出（支持 Markdown 表格、CSV、JSON）",
+      "4. 对不确定项给出置信度提示（≥90%直接输出；85%-90%建议复核；<85%标注[需核实]）",
+      "5. 支持批量处理（一次最多 20 张）和自定义格式",
+      "- 输入来源：发票/收据照片或金额清单",
+      "- 输出格式要求（文件类型 / 字段结构）",
+      "1. 解析输入内容，识别关键信息（日期、金额、商家、发票号码、费用类别）",
+      "2. 按以下规则处理：",
+      "3. 生成结果，并标注置信度：",
+      "1. 将结果整理为约定格式输出（默认 Markdown 表格，可切换 CSV/JSON）",
+      "2. 自查：字段完整性、格式正确性、置信度标注",
+      "3. 有疑问时向用户二次确认",
+      "- 输入不符合预期 → 返回错误说明与正确的输入格式示例",
+      "1. 收集用户输入并确认格式",
+      "2. 按功能逻辑处理输入内容",
+      "3. 生成结果并校验完整性"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "d35e4411664b9514",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}

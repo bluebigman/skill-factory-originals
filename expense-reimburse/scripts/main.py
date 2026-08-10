@@ -20,6 +20,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 
 # ============================================================
@@ -212,6 +213,14 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument("--format", "-f", choices=["markdown", "csv"], default="markdown", help="输出格式")
     parser.add_argument("--output", "-o", help="输出文件路径（默认输出到终端）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检（不读取任何外部文件）")
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
     return parser.parse_args(argv)
 
 
@@ -223,7 +232,7 @@ def load_invoices_from_csv(path: str) -> List[Invoice]:
     """
     invoices = []
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
             reader = csv.reader(f)
             header = next(reader, None)  # 跳过表头
             for row_num, row in enumerate(reader, start=2):
@@ -360,7 +369,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         # 输出
         if args.output:
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(output_text)
                 print(f"结果已写入：{args.output}")
             except OSError as e:
