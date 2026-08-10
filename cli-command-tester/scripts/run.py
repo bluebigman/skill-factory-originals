@@ -22,6 +22,7 @@ import http.server
 import socketserver
 from datetime import datetime, timezone
 from http.client import HTTPResponse
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 try:
     import requests
@@ -196,6 +197,24 @@ class HTTPTester:
             'retries': self.max_retries,
             'error': f"网络错误: {last_error}"
         }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def format_response(result, verbose=False):
