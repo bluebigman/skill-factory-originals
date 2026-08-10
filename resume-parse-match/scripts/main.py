@@ -9,6 +9,7 @@ import json
 import sys
 from pathlib import Path
 from typing import Dict, List, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 def process_data(data: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -89,7 +90,18 @@ def main() -> int:
         help="Output JSON file path",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         return 0 if run_self_test() else 1
@@ -101,7 +113,7 @@ def main() -> int:
 
     try:
         input_path = Path(args.input)
-        with open(input_path, "r", encoding="utf-8") as f:
+        with open(input_path, "r", encoding="utf-8", errors="replace") as f:
             data = json.load(f)
 
         if not isinstance(data, list):
@@ -112,7 +124,7 @@ def main() -> int:
 
         if args.output:
             output_path = Path(args.output)
-            with open(output_path, "w", encoding="utf-8") as f:
+            with open(output_path, "w", encoding="utf-8", errors="replace") as f:
                 json.dump(result, f, indent=2)
         else:
             print(json.dumps(result, indent=2))

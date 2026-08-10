@@ -187,7 +187,7 @@ def mirror_text_to_structure(text: str) -> Dict[str, Any]:
 def mirror_file_to_structure(file_path: str) -> Dict[str, Any]:
     """从文本文件读取内容并结构化。"""
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()
     except FileNotFoundError:
         return {"_error": "E002", "_message": f"文件不存在: {file_path}"}
@@ -390,6 +390,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--json", action="store_true", help="输出JSON格式"
     )
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     return parser.parse_args()
 
 
@@ -438,7 +439,7 @@ def main() -> int:
             if args.batch:
                 # 批量模式：按行读取文件
                 try:
-                    with open(args.file, "r", encoding="utf-8") as f:
+                    with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                         lines = f.readlines()
                     result = mirror_batch_to_structure(lines)
                 except FileNotFoundError:

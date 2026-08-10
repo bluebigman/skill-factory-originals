@@ -31,6 +31,7 @@ import math
 import sys
 from collections import OrderedDict
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -86,6 +87,24 @@ class PortfolioData:
         self.total_pnl_pct: float = 0.0    # 总收益率
         self.period_return: float = 0.0    # 期间收益率（如周收益率）
         self.history_prices: Dict[str, List[float]] = {}  # 用于计算波动率/回撤
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def parse_input(raw_input: str) -> PortfolioData:
@@ -658,7 +677,18 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--json", action="store_true", help="以JSON格式输出结果")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -680,7 +710,7 @@ def main() -> int:
     # 检查输入是否为文件路径
     raw_input: str = args.input
     try:
-        with open(args.input, "r", encoding="utf-8") as f:
+        with open(args.input, "r", encoding="utf-8", errors="replace") as f:
             raw_input = f.read()
     except (OSError, IOError):
         # 不是文件，按原始字符串处理
@@ -711,7 +741,7 @@ def main() -> int:
     # 输出
     if args.output:
         try:
-            with open(args.output, "w", encoding="utf-8") as f:
+            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                 f.write(report)
             print(f"报告已写入: {args.output}")
         except OSError as e:

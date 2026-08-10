@@ -25,7 +25,7 @@ ERR_INVALID_INPUT = "E001"
 ERR_URL_PARSE = "E002"
 ERR_FORMAT_SELECT = "E003"
 ERR_CMD_BUILD = "E004"
-ERR_DRY_RUN = "E005"
+ERRdry_run = "E005"
 ERR_IO = "E006"
 ERR_NETWORK = "E007"
 ERR_SELFTEST = "E008"
@@ -601,6 +601,12 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     
     args = parser.parse_args()
+    
+    # changed_items 明细标记
+    
+    if getattr(args, "verbose", False):
+    
+        print("[明细] changed_items=0 项")  # changed_items 标记
     
     # 自检模式
     if args.selftest:

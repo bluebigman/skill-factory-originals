@@ -16,6 +16,7 @@ import sys
 import tempfile
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -407,7 +408,7 @@ class SkillManager:
 
         filepath = os.path.join(self.output_dir, f"{doc.slug}.json")
         try:
-            with open(filepath, "w", encoding="utf-8") as f:
+            with open(filepath, "w", encoding="utf-8", errors="replace") as f:
                 f.write(doc.to_json())
         except OSError as exc:
             raise SkillError("E003", f"无法写入文件: {exc}")
@@ -416,7 +417,7 @@ class SkillManager:
 def load_conversation(filepath: str) -> List[ConversationEntry]:
     """从JSON文件加载对话数据"""
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             data = json.load(f)
     except FileNotFoundError:
         raise SkillError("E002", f"文件不存在: {filepath}")
@@ -525,7 +526,7 @@ def run_selftest() -> bool:
         filepath = os.path.join(tmpdir, f"{result_doc.slug}.json")
         assert os.path.exists(filepath), "技能文件应已生成"
         # 验证文件内容
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             saved_data = json.load(f)
         assert saved_data["name"] == result_doc.name, "保存的数据应一致"
         # 验证脱敏生效
@@ -590,7 +591,13 @@ def main() -> int:
     )
 
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+        parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args()
+        global dry_run
+        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     except SystemExit as exc:
         if exc.code != 0:
             print(f"[E001] {ERROR_CODES['E001']}", file=sys.stderr)

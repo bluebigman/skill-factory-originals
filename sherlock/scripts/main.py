@@ -30,6 +30,8 @@ import traceback
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -663,7 +665,7 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
 
     # check 子命令
     check_parser = subparsers.add_parser("check", help="检查用户名")
-    check_parser.add_argument("usernames", nargs="+", help="要检查的用户名（可多个）")
+    check_parser.add_argument("--usernames", nargs="+", help="要检查的用户名（可多个）")
     check_parser.add_argument("--file", "-f", help="从文件读取用户名列表")
     check_parser.add_argument("--export", "-e", choices=["csv", "json", "none"], default="none",
                               help="导出结果格式（默认不导出）")
@@ -676,6 +678,11 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     # 全局参数
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     parser.add_argument("--version", action="version", version="sherlock 1.4.1 (clean-room)")
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
 
     return parser.parse_args(argv)
 
@@ -735,7 +742,7 @@ def cmd_check(args: argparse.Namespace) -> int:
     if args.export != "none":
         output_path = args.output
         if not output_path:
-            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
             output_path = f"sherlock_results_{timestamp}.{args.export}"
 
         ok, err = export_results(results, args.export, output_path)

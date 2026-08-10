@@ -2,20 +2,20 @@
 slug: translation-software-finder
 name: translation-software-finder
 displayName: 翻译软件推荐
-description: 根据用户需求（平台、语言、价格、功能）自动筛选并推荐合适的翻译软件，生成对比表格和推荐理由。
+description: 根据用户需求（平台、语言、价格、功能）自动筛选并推荐合适的翻译软件，生成对比和推荐理由。
 version: 1.0.0
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
 source_project: original
 source_url: https://skillhub.cn
-source_license_url: 
+source_license_url:
 copyright_holder: Skill Factory
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。本Skill为AI辅助生成内容。
 author: skill-factory-auto
 agent_created: true
-trigger_words: 
+trigger_words:
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -31,7 +31,7 @@ trigger_words:
 
 # 翻译软件推荐
 
-> 根据用户需求（平台、语言、价格、功能）自动筛选并推荐合适的翻译软件，生成对比表格和推荐理由。
+> 根据用户需求（平台、语言、价格、功能）自动筛选并推荐合适的翻译软件，生成对比和推荐理由。
 
 ## 一、能力边界（一页纸速查卡）
 
@@ -76,13 +76,13 @@ trigger_words:
 ### Step 2: 执行核心流程
 1. 解析输入内容，识别关键信息
 2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
+ - 识别输入中的关键字段并结构化
+ - 按默认模板组织输出
+ - 对不确定项标注并请求确认
 3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+ - 置信度 ≥90%：直接输出
+ - 85%-90%：标注"建议复核"
+ - <85%：标注"[需核实]"，并说明不确定点
 
 ### Step 3: 输出与校验
 1. 将结果整理为约定格式输出

@@ -15,6 +15,8 @@ import re
 import shutil
 import sys
 import tempfile
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -54,9 +56,27 @@ class PlanError(Exception):
         super().__init__(f"[{code}] {message}")
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _now_str() -> str:
     """返回当前时间戳字符串"""
-    return datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    return datetime.datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
 
 
 def _validate_status(status: str) -> None:
@@ -154,7 +174,7 @@ def create_plan(filepath: str, steps: list, overwrite: bool = False) -> dict:
 
     # 写入文件
     try:
-        with open(filepath, "w", encoding="utf-8") as fh:
+        with open(filepath, "w", encoding="utf-8", errors="replace") as fh:
             fh.write(_render_plan_text(normalized))
     except OSError as exc:
         raise PlanError("E004", f"写入失败: {filepath}") from exc
@@ -184,7 +204,7 @@ def load_plan(filepath: str) -> dict:
         raise PlanError("E002", f"文件不存在: {filepath}")
 
     try:
-        with open(filepath, "r", encoding="utf-8") as fh:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as fh:
             content = fh.read()
     except OSError as exc:
         raise PlanError("E009", f"读取失败: {filepath}") from exc
@@ -231,7 +251,7 @@ def update_step(filepath: str, index: int, status: str = None, note: str = None)
 
     # 写回文件
     try:
-        with open(filepath, "w", encoding="utf-8") as fh:
+        with open(filepath, "w", encoding="utf-8", errors="replace") as fh:
             fh.write(_render_plan_text(plan["steps"]))
     except OSError as exc:
         raise PlanError("E004", f"写入失败: {filepath}") from exc
@@ -303,7 +323,7 @@ def verify_plan(filepath: str) -> dict:
             issues.append(f"步骤 {i}: 非法状态 {step['status']}")
 
     # 检查文件标记完整性
-    with open(filepath, "r", encoding="utf-8") as fh:
+    with open(filepath, "r", encoding="utf-8", errors="replace") as fh:
         content = fh.read()
     if content.count(MARKER_START) != 1 or content.count(MARKER_END) != 1:
         issues.append("文件标记不完整")
@@ -406,8 +426,8 @@ def _selftest() -> int:
             backup_path = backup_plan(plan_path)
             assert os.path.exists(backup_path), "备份文件不存在"
             # 备份内容应与原文件一致
-            with open(plan_path, "r", encoding="utf-8") as f1, open(
-                backup_path, "r", encoding="utf-8"
+            with open(plan_path, "r", encoding="utf-8", errors="replace") as f1, open(
+                backup_path, "r", encoding="utf-8", errors="replace"
             ) as f2:
                 assert f1.read() == f2.read(), "备份内容不一致"
             print("  [PASS] 备份计划")
@@ -505,31 +525,42 @@ def main() -> int:
 
     # create 子命令
     create_parser = subparsers.add_parser("create", help="创建计划文件")
-    create_parser.add_argument("filepath", help="计划文件路径")
-    create_parser.add_argument("--steps", required=True, help="步骤内容，用逗号分隔")
+    create_parser.add_argument("--filepath", help="计划文件路径")
+    create_parser.add_argument("--steps", required=False, help="步骤内容，用逗号分隔")
     create_parser.add_argument("--overwrite", action="store_true", help="覆盖已存在文件")
 
     # update 子命令
     update_parser = subparsers.add_parser("update", help="更新步骤状态")
-    update_parser.add_argument("filepath", help="计划文件路径")
-    update_parser.add_argument("--index", type=int, required=True, help="步骤索引（从1开始）")
+    update_parser.add_argument("--filepath", help="计划文件路径")
+    update_parser.add_argument("--index", type=int, required=False, help="步骤索引（从1开始）")
     update_parser.add_argument("--status", choices=[STATUS_PENDING, STATUS_DONE, STATUS_BLOCKED], help="新状态")
     update_parser.add_argument("--note", help="新备注")
 
     # backup 子命令
     backup_parser = subparsers.add_parser("backup", help="创建备份")
-    backup_parser.add_argument("filepath", help="计划文件路径")
+    backup_parser.add_argument("--filepath", help="计划文件路径")
     backup_parser.add_argument("--dir", help="备份目录")
 
     # verify 子命令
     verify_parser = subparsers.add_parser("verify", help="校验计划")
-    verify_parser.add_argument("filepath", help="计划文件路径")
+    verify_parser.add_argument("--filepath", help="计划文件路径")
 
     # progress 子命令
     progress_parser = subparsers.add_parser("progress", help="查看进度")
-    progress_parser.add_argument("filepath", help="计划文件路径")
+    progress_parser.add_argument("--filepath", help="计划文件路径")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
 
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

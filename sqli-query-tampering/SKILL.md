@@ -7,7 +7,7 @@ description: 为Burp Suite Intruder生成定制SQL注入载荷，辅助安全测
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/sqli-query-tampering
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/sqli-query-tampering
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -42,7 +42,7 @@ trigger_words: ["SQL查询", "SQLi", "注入载荷", "查询篡改", "Intruder�
 | 1 | 载荷生成 | 根据用户提供的 SQL 查询模板，生成多种变体的注入载荷 |
 | 2 | 输入解析 | 从用户粘贴的文本、上传的文件或指定的 URL 中提取 SQL 查询片段 |
 | 3 | 关键信息识别 | 自动识别查询中的表名、字段名、WHERE 子句、ORDER BY 位置等关键锚点 |
-| 4 | 格式转换 | 将载荷输出为 Burp Intruder 可直接粘贴的列表格式（每行一个）或 JSON 数组 |
+| 4 | | 将载荷输出为 Burp Intruder 可直接粘贴的列式（每行一个）或 JSON 数组 |
 | 5 | 批量处理 | 支持一次处理多条查询模板，批量生成对应载荷集 |
 | 6 | 置信度标注 | 对识别不确定的字段或结构，输出 `[需核实:字段名]` 占位符 |
 
@@ -50,7 +50,7 @@ trigger_words: ["SQL查询", "SQLi", "注入载荷", "查询篡改", "Intruder�
 
 | 序号 | 限制项 | 说明 |
 |------|--------|------|
-| 1 | 不执行攻击 | 本 Skill 仅生成文本载荷，不发起网络请求，不连接任何目标系统 |
+| 1 | 不执行攻击 | 本 Skill 仅生成文本载荷，不发起网络，不连接任何目标系统 |
 | 2 | 不检测漏洞 | 不判断目标是否存在 SQL 注入漏洞，仅提供测试用输入变体 |
 | 3 | 不绕过 WAF | 不提供针对特定 WAF 产品的绕过方案，仅做通用语法变体 |
 | 4 | 不保证有效性 | 载荷是否生效取决于目标数据库类型、代码实现和防护措施，本 Skill 不做任何有效性承诺 |

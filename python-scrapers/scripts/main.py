@@ -20,6 +20,7 @@ import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 from typing import Any, Callable, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -478,7 +479,18 @@ def main() -> int:
     parser.add_argument("--output", "-o", help="输出文件路径（默认 stdout）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         return _selftest()
@@ -492,7 +504,7 @@ def main() -> int:
             if not path.exists():
                 print(f"{ERR_FILE_READ}: 文件不存在: {args.input}", file=sys.stderr)
                 return 1
-            source_text = path.read_text(encoding="utf-8")
+            source_text = path.read_text(encoding="utf-8", errors="replace")
         else:
             # 从 stdin 读取
             source_text = sys.stdin.read()
@@ -532,7 +544,8 @@ def main() -> int:
     # 输出
     try:
         if args.output:
-            Path(args.output).write_text(result, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                Path(args.output).write_text(result, encoding="utf-8")
         else:
             print(result)
     except Exception as e:

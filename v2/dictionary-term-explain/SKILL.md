@@ -16,6 +16,11 @@ agent_created: true
 trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么意思", "通俗解释", "术语拆解", "概念辨析", "定义解读"]
 ---
 
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
 > 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
@@ -23,125 +28,102 @@ trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么
 <!-- user-agreement-injected -->
 
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+# 术语释义助手（Term Explainer）
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+**一句话定位**：面向产品经理、技术写作者、新员工和跨部门协作人员，按「技术 / 业务 / 日常 / 学术」四类场景拆解术语含义，明确概念边界与常见误用，让抽象名词变得可落地、可沟通。
 
-# 术语释义助手 Skill 文档
+---
 
-## 一、能力边界速查卡
+## 快速开始 Quick Start
 
-### 1.1 能做与不能做
+| 场景 | 命令 | 预期结果 |
+|------|------|---------|
+| 解释单个术语 | `python run.py "微服务"` | 输出结构化解释（核心定义 / 场景拆解 / 概念边界 / 常见误用） |
+| 指定场景解释 | `python run.py "区块链" --scene 技术` | 只输出「技术」场景的解释，聚焦专业视角 |
+| 批量解释多个术语 | `python run.py --batch terms.json` | 依次输出每个术语的完整解释，以分隔线隔开 |
 
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|---------|-----------|
-| **输入处理** | 接受单个术语、短语、缩写、行业黑话（长度≤100字符） | 不接受整段文章或长文本的自动摘要 |
-| **解释方式** | 按场景（技术/业务/日常/学术）拆解含义 | 不提供单一笼统的字典式定义 |
-| **边界界定** | 明确术语的适用范围、邻近概念区分 | 不输出模糊的"大概意思" |
-| **落地建议** | 给出使用场景、注意事项、常见误用 | 不提供操作步骤或实施指导 |
-| **批量处理** | 支持同一目录下多个术语文件的批量解释（JSON/纯文本） | 不支持跨领域混合批量（需分领域执行） |
-| **输出格式** | 结构化 Markdown 表格 + 分层解释 | 不输出无结构的纯文本段落 |
-| **外部查询** | 内置知识库未命中时，尝试外部API（维基百科）兜底 | 不保证外部API可用性，失败时返回明确错误码 |
-| **缓存** | 对查询结果进行内存缓存（LRU） | 不提供持久化缓存 |
+> 💡 **最常用**：`python run.py "微服务"` 即可获得全场景解释，无需额外参数。
 
-### 1.2 适用对象
+---
 
-- **产品经理**：需要向开发/设计/运营解释业务术语
-- **技术写作者**：编写文档时需要澄清概念边界
-- **新员工/转岗人员**：快速理解团队内部黑话
-- **跨部门协作人员**：消除术语理解偏差
-- **学生/自学者**：理解专业教材中的抽象概念
+## 适用场景 When to Use
 
-### 1.3 不适用对象
+### ✅ 推荐使用
 
-- 需要法律/医疗/财务等专业领域正式意见的场景
+- **产品经理**向开发 / 设计 / 运营解释业务术语时
+- **技术写作者**编写文档时需要澄清概念边界时
+- **新员工 / 转岗人员**快速理解团队内部黑话时
+- **跨部门协作**消除术语理解偏差时
+- **学生 / 自学者**理解专业教材中的抽象概念时
+
+### ❌ 不推荐使用
+
+- 需要法律 / 医疗 / 财务等专业领域正式意见的场景
 - 需要逐字逐句翻译的场景
 - 需要权威定义（如 ISO 标准原文）的场景
+- 需要操作步骤或实施指导的场景（本工具只做概念解释）
 
-## 二、触发条件
+---
 
-### 2.1 触发词
+## 能力总览 Capabilities
 
-- 术语解释、名词释义、概念说明、这个词什么意思、通俗解释、术语拆解、概念辨析、定义解读
+| 能力 | 命令 / 参数 | 示例 |
+|------|------------|------|
+| 单个术语解释 | `python run.py <术语>` | `python run.py "微服务"` |
+| 指定场景解释 | `--scene <技术/业务/日常/学术/all>` | `python run.py "区块链" --scene 技术` |
+| 批量处理 JSON 文件 | `--batch <file.json>` | `python run.py --batch terms.json` |
+| 批量处理纯文本文件 | `--batch <file.txt>` | `python run.py --batch terms.txt` |
+| 预览模式（不执行查询） | `--dry-run` | `python run.py --batch terms.json --dry-run` |
+| 调试输出（详细日志） | `--verbose` | `python run.py "微服务" --verbose` |
+| 内置自测 | `--selftest` | `python run.py --selftest` |
+| 版本信息 | `--version` | `python run.py --version` |
+| 外部 API 兜底 | 自动触发（知识库未命中时） | 查询维基百科获取解释 |
+| LRU 缓存 | 自动启用（1024 条） | 重复查询秒回 |
 
-### 2.2 输入格式
+---
 
-- 单个术语：`python run.py "微服务"`
-- 批量文件：`python run.py --batch ./terms.json`
-- 指定场景：`python run.py "区块链" --scene 技术`
+## 模块决策表 Decision Table
 
-## 三、标准流程
+| 用户意图 | 推荐模块 / 命令 | 读取指引 |
+|---------|----------------|---------|
+| 快速了解一个术语 | `python run.py <术语>` | 查看「快速开始」 |
+| 需要特定场景的专业解释 | `python run.py <术语> --scene <场景>` | 查看「能力总览」 |
+| 批量解释多个术语 | `python run.py --batch <文件>` | 查看「批量处理」章节 |
+| 预览将处理的术语（不执行查询） | `python run.py --batch <文件> --dry-run` | 查看「预览模式」 |
+| 验证功能是否正常 | `python run.py --selftest` | 查看「自测」章节 |
+| 知识库未命中时 | 自动尝试维基百科 | 查看「外部 API 兜底」 |
+| 排查错误 | 查看错误码 | 查看「错误码」章节 |
 
-### 3.1 输入处理
+---
 
-1. 接收术语输入（命令行参数或批量文件）
-2. 校验输入合法性（非空、长度≤100字符）
-3. 规范化输入（去除首尾空白、统一大小写）
+## 示例 Examples
 
-### 3.2 知识库查询
-
-1. 在本地知识库中精确匹配术语
-2. 若命中，返回结构化解释（核心定义/场景拆解/边界界定/常见误用）
-3. 若未命中，尝试外部API（维基百科）查询
-4. 外部API失败时，返回错误码 `E1004` 并给出降级输出
-
-### 3.3 输出生成
-
-1. 按用户指定场景（默认全部）生成解释
-2. 输出结构化 Markdown 格式
-3. 包含核心定义、场景拆解、边界界定、常见误用
-
-## 四、置信度门控
-
-| 置信度等级 | 条件 | 输出行为 |
-|-----------|------|---------|
-| **高** | 本地知识库命中 | 直接输出完整解释 |
-| **中** | 外部API查询成功 | 输出解释并标注"外部来源" |
-| **低** | 外部API查询失败 | 输出错误码 `E1004` 和降级提示 |
-
-## 五、错误码
-
-| 错误码 | 含义 | 降级输出 |
-|--------|------|---------|
-| `E1001` | 输入为空 | 提示"请输入要解释的术语" |
-| `E1002` | 输入超长（>100字符） | 截断至100字符并警告 |
-| `E1003` | 批量文件不存在或格式错误 | 提示文件路径错误 |
-| `E1004` | 知识库未命中且外部API失败 | 提示"未找到该术语的解释" |
-| `E1005` | 批量文件编码无法识别 | 提示编码错误 |
-
-## 六、FAQ 反模式
-
-### 6.1 常见问题
-
-**Q: 为什么我的术语没有解释？**
-A: 可能原因：1) 术语不在知识库中；2) 外部API不可用。请检查错误码。
-
-**Q: 如何添加自定义术语？**
-A: 当前版本不支持动态添加，请修改 `TERM_KNOWLEDGE_BASE` 字典。
-
-**Q: 批量处理支持哪些格式？**
-A: 支持 JSON 数组（`["术语1","术语2"]`）和纯文本（每行一个术语）。
-
-### 6.2 反模式
-
-| 反模式 | 说明 | 正确做法 |
-|--------|------|---------|
-| 过度承诺 | 声称支持所有术语 | 明确知识库范围 |
-| 忽略错误 | 静默失败 | 返回错误码和降级输出 |
-| 性能陷阱 | 每次查询都访问外部API | 使用缓存和本地知识库优先 |
-| 编码假设 | 假设所有文件都是UTF-8 | 多编码检测和fallback |
+### 示例 1：单个术语解释（全场景）
 
 ## 许可证（License）
-## 失败处理
 
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
+```text
+MIT License
 
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
+Copyright (c) {year} {holder}
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+```
+<!-- professional-license-embedded -->

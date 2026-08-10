@@ -17,6 +17,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ========== 常量 ==========
 SUBJECTS = {"math", "chinese", "english", "physics", "chemistry"}
@@ -35,6 +36,24 @@ logger = logging.getLogger(__name__)
 
 # ========== 工具函数 ==========
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def utc_now() -> str:
     """返回 UTC 时间 ISO 格式"""
     return datetime.now(timezone.utc).isoformat()
@@ -44,7 +63,7 @@ def atomic_write(path: Path, content: str) -> None:
     """原子化写入文件（先写临时文件再替换）"""
     fd, tmp_path = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
     try:
-        with os.fdopen(fd, "w", encoding="utf-8") as f:
+        with os.fdopen(fd, "w", encoding="utf-8", errors="replace") as f:
             f.write(content)
         os.replace(tmp_path, path)
     except Exception:

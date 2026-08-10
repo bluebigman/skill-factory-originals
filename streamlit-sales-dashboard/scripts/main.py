@@ -17,6 +17,8 @@ from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -306,7 +308,7 @@ class OutputGenerator:
         # 生成报告
         report = {
             "meta": {
-                "generated_at": datetime.now().isoformat(),
+                "generated_at": datetime.now(timezone.utc).isoformat(),
                 "record_count": len(data.records),
                 "confidence": confidence,
                 "confidence_label": OutputGenerator._get_confidence_label(confidence),
@@ -471,6 +473,24 @@ class SelfTest:
 # ============================================================
 # 主入口
 # ============================================================
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def main():
     """主函数"""
     parser = argparse.ArgumentParser(
@@ -504,7 +524,18 @@ def main():
         help="运行自测",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自测模式
     if args.selftest:
@@ -517,7 +548,7 @@ def main():
         raw_input = args.input
         if args.input_file:
             try:
-                with open(args.input_file, "r", encoding="utf-8") as f:
+                with open(args.input_file, "r", encoding="utf-8", errors="replace") as f:
                     raw_input = f.read()
             except Exception as e:
                 raise SkillError("E006", f"文件读取失败: {str(e)}")
@@ -538,7 +569,7 @@ def main():
 
         if args.output:
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(output_json)
                 print(f"报告已保存到: {args.output}")
             except Exception as e:

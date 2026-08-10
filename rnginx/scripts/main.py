@@ -284,6 +284,24 @@ class NginxParser:
 # 输入处理（文本 / 文件 / 批量）
 # ---------------------------------------------------------------------------
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def parse_text(text: str, source_name: str = "text") -> Dict[str, Any]:
     """解析纯文本配置，返回结构化字典。"""
     if not text or not text.strip():
@@ -305,7 +323,7 @@ def parse_file(file_path: str) -> Dict[str, Any]:
         raise FileNotFoundError(f"{ERR_FILE_NOT_FOUND}: 文件不存在: {file_path}")
 
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()
     except Exception as e:
         raise IOError(f"{ERR_FILE_READ_FAILED}: 读取文件失败: {e}")
@@ -634,6 +652,8 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     parser.add_argument("--batch", type=str, help="批量解析 JSON 数组文件路径")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -643,7 +663,7 @@ def main() -> int:
     try:
         # 批量模式
         if args.batch:
-            with open(args.batch, "r", encoding="utf-8") as f:
+            with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
                 inputs = json.load(f)
             if not isinstance(inputs, list):
                 raise ValueError(f"{ERR_INVALID_ARGS}: --batch 参数必须指向 JSON 数组")

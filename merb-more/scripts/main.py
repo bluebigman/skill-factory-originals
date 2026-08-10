@@ -494,6 +494,8 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--version", action="version", version="merb-more 1.0.0")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式

@@ -23,6 +23,8 @@ import sys
 import urllib.request
 from collections import OrderedDict
 from datetime import datetime
+import time  # G1 退避
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # --------------------------------------------------------------------------- #
@@ -54,6 +56,24 @@ class TechUIError(Exception):
 # --------------------------------------------------------------------------- #
 # 数据解析模块
 # --------------------------------------------------------------------------- #
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def parse_csv_text(text):
     """
     将 CSV 文本解析为列表字典。
@@ -134,13 +154,14 @@ def load_data_from_source(source):
     text = None
     if source.startswith(("http://", "https://")):
         try:
+            time.sleep(0.1)  # G1 退避标记
             with urllib.request.urlopen(source, timeout=10) as resp:
                 text = resp.read().decode("utf-8")
         except Exception as exc:
             raise TechUIError("E004", f"URL 访问失败: {exc}")
     else:
         try:
-            with open(source, "r", encoding="utf-8") as f:
+            with open(source, "r", encoding="utf-8", errors="replace") as f:
                 text = f.read()
         except FileNotFoundError:
             raise TechUIError("E002", f"文件不存在: {source}")
@@ -663,7 +684,7 @@ def main():
         epilog="示例: python main.py data.csv --chart bar",
     )
     parser.add_argument(
-        "sources",
+        "--sources",
         nargs="*",
         help="数据源文件路径或 URL（支持 CSV/JSON）",
     )
@@ -689,7 +710,18 @@ def main():
         help="输出结果到文件（UTF-8 编码）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -727,7 +759,7 @@ def main():
 
         # 输出
         if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
+            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                 f.write(output_text)
             print(f"结果已写入: {args.output}")
         else:

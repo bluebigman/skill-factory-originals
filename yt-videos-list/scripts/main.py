@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 from urllib.parse import urlparse, parse_qs
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -492,7 +493,18 @@ def main():
     parser.add_argument("--output", help="输出文件路径")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 运行自检
     if args.selftest:

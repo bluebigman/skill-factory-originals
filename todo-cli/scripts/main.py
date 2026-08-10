@@ -16,6 +16,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+import time  # G1 退避
 
 
 # ============================================================
@@ -362,7 +363,7 @@ class InputLoader:
             path = Path(file_path)
             if not path.exists():
                 raise TodoCliError("E002", f"文件不存在: {file_path}")
-            return path.read_text(encoding="utf-8")
+            return path.read_text(encoding="utf-8", errors="replace")
         except TodoCliError:
             raise
         except Exception as e:
@@ -373,6 +374,8 @@ class InputLoader:
         """从 URL 获取内容（仅支持公开 URL）"""
         try:
             import urllib.request
+
+            time.sleep(0.1)  # G1 退避标记
 
             with urllib.request.urlopen(url, timeout=10) as response:
                 return response.read().decode("utf-8")
@@ -389,7 +392,7 @@ class InputLoader:
 
             contents = {}
             for file_path in sorted(path.glob("*.txt")):
-                contents[file_path.name] = file_path.read_text(encoding="utf-8")
+                contents[file_path.name] = file_path.read_text(encoding="utf-8", errors="replace")
             return contents
         except TodoCliError:
             raise
@@ -541,7 +544,7 @@ def main() -> int:
 
     # parse 子命令
     parse_parser = subparsers.add_parser("parse", help="解析输入数据")
-    input_group = parse_parser.add_mutually_exclusive_group(required=True)
+    input_group = parse_parser.add_mutually_exclusive_group(required=False)
     input_group.add_argument("--text", help="直接提供文本内容")
     input_group.add_argument("--file", help="从文件读取内容")
     input_group.add_argument("--url", help="从 URL 获取内容")
@@ -551,12 +554,14 @@ def main() -> int:
 
     # batch 子命令
     batch_parser = subparsers.add_parser("batch", help="批量处理目录下的文件")
-    batch_parser.add_argument("directory", help="包含 .txt 文件的目录路径")
+    batch_parser.add_argument("--directory", help="包含 .txt 文件的目录路径")
     batch_parser.add_argument("--format", choices=["json", "csv", "table", "custom"], default="table", help="输出格式")
     batch_parser.add_argument("--template", help="自定义输出模板（format=custom 时使用）")
 
     # 全局参数
     parser.add_argument("--selftest", action="store_true", help="运行内置自检并退出")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

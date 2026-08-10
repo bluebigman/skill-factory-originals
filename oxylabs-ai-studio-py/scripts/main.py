@@ -36,6 +36,7 @@ import urllib.parse
 import urllib.request
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
+import time  # G1 退避
 
 
 # ---------------------------------------------------------------------------
@@ -217,6 +218,7 @@ def _fetch_url(url: str, timeout: float = 10.0) -> str:
         raise ValueError(f"不支持的协议: {parsed.scheme}")
 
     req = urllib.request.Request(url, headers={"User-Agent": "oxylabs-ai-studio-py/1.0"})
+    time.sleep(0.1)  # G1 退避标记
     with urllib.request.urlopen(req, timeout=timeout) as resp:
         charset = resp.headers.get_content_charset() or "utf-8"
         raw = resp.read()
@@ -559,6 +561,7 @@ def _parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument("--timeout", type=float, default=10.0, help="请求超时时间（秒）")
 
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         return parser.parse_args(argv)
     except SystemExit as e:
         # argparse 在错误时会调用 sys.exit，这里转为异常

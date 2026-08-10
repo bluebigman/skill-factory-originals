@@ -711,7 +711,7 @@ def main():
         filepath = args[idx + 1]
         
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
                 content = f.read()
         except (IOError, OSError):
             print("错误码 E007: 文件读取失败", file=sys.stderr)

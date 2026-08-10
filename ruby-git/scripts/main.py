@@ -16,6 +16,7 @@ import tempfile
 import shutil
 from pathlib import Path
 from typing import List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -233,19 +234,19 @@ def build_parser() -> argparse.ArgumentParser:
 
     # init
     p_init = subparsers.add_parser("init", help="初始化仓库")
-    p_init.add_argument("path", help="仓库路径")
+    p_init.add_argument("--path", help="仓库路径")
 
     # status
     subparsers.add_parser("status", help="查看状态")
 
     # add
     p_add = subparsers.add_parser("add", help="暂存文件")
-    p_add.add_argument("files", nargs="*", help="要暂存的文件")
+    p_add.add_argument("--files", nargs="*", help="要暂存的文件")
     p_add.add_argument("-A", "--all", action="store_true", help="暂存所有")
 
     # commit
     p_commit = subparsers.add_parser("commit", help="创建提交")
-    p_commit.add_argument("-m", "--message", required=True, help="提交信息")
+    p_commit.add_argument("-m", "--message", required=False, help="提交信息")
 
     # branch
     p_branch = subparsers.add_parser("branch", help="分支管理")
@@ -255,7 +256,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     # checkout
     p_checkout = subparsers.add_parser("checkout", help="切换分支")
-    p_checkout.add_argument("branch", help="目标分支")
+    p_checkout.add_argument("--branch", help="目标分支")
 
     # log
     p_log = subparsers.add_parser("log", help="查看日志")
@@ -267,13 +268,13 @@ def build_parser() -> argparse.ArgumentParser:
 
     # remote
     p_remote = subparsers.add_parser("remote", help="远程操作")
-    p_remote.add_argument("action", choices=["add", "push", "pull"], help="远程操作")
-    p_remote.add_argument("name", nargs="?", default="origin", help="远程名称")
-    p_remote.add_argument("url", nargs="?", help="远程 URL（add 时需要）")
+    p_remote.add_argument("--action", choices=["add", "push", "pull"], help="远程操作")
+    p_remote.add_argument("--name", nargs="?", default="origin", help="远程名称")
+    p_remote.add_argument("--url", nargs="?", help="远程 URL（add 时需要）")
 
     # config
     p_config = subparsers.add_parser("config", help="配置读取")
-    p_config.add_argument("key", help="配置键名")
+    p_config.add_argument("--key", help="配置键名")
     p_config.add_argument("--global", dest="global_cfg", action="store_true", help="读取全局配置")
 
     return parser
@@ -339,7 +340,8 @@ def run_selftest() -> None:
 
         # 2. 创建测试文件
         test_file = Path(temp_dir) / "test.txt"
-        test_file.write_text("测试内容\n", encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            test_file.write_text("测试内容\n", encoding="utf-8")
         print("[PASS] 创建测试文件")
 
         # 3. 暂存文件
@@ -371,7 +373,8 @@ def run_selftest() -> None:
         print("[PASS] 分支管理")
 
         # 8. 差异对比
-        test_file.write_text("修改内容\n", encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            test_file.write_text("修改内容\n", encoding="utf-8")
         diff_output = ops.diff()
         assert "修改内容" in diff_output, f"差异异常: {diff_output}"
         print("[PASS] 差异对比")
@@ -402,7 +405,13 @@ def run_selftest() -> None:
 def main() -> None:
     """主程序入口"""
     parser = build_parser()
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = parser.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

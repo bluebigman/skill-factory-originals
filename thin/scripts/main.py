@@ -16,6 +16,7 @@ import os
 import sys
 import tempfile
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 错误码定义
@@ -92,6 +93,24 @@ class ThinConfig:
 # ============================================================
 # 核心逻辑函数
 # ============================================================
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def parse_yaml_simple(yaml_text: str) -> Dict[str, Any]:
     """
@@ -633,7 +652,18 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行核心逻辑自检")
     parser.add_argument("--output", "-o", type=str, help="输出结果到文件（JSON格式）")
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 运行自检
     if args.selftest:

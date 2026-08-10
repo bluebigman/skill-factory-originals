@@ -36,6 +36,24 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 # 核心解析逻辑
 # ============================================================
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def extract_fields_from_text(text: str) -> Dict[str, Any]:
     """
     从单条文本消息中提取结构化字段。
@@ -236,7 +254,7 @@ def read_input_file(filepath: str) -> Union[str, List, Dict]:
         raise ValueError(f"E004: 不支持的文件格式: {ext}")
 
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()
     except Exception as e:
         raise IOError(f"E003: 读取文件失败: {e}")
@@ -467,6 +485,8 @@ def main() -> int:
                         default="json", help="输出格式 (默认: json)")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     parser.add_argument("--version", action="version", version="starling 1.0.1")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

@@ -11,6 +11,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 HERE = Path(__file__).resolve().parent
 TRIGGERS = ["batch_image_resize"]
@@ -20,10 +21,28 @@ MAX_RETRIES = 3
 RETRY_BACKOFF = [1, 2, 4]  # seconds
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def load_spec() -> str:
     # 资产池/发布目录均为 SKILL.md 在技能根目录、scripts/ 为其子目录，故读父目录
     p = HERE.parent / "SKILL.md"
-    return p.read_text(encoding="utf-8") if p.exists() else ""
+    return p.read_text(encoding="utf-8", errors="replace") if p.exists() else ""
 
 
 def match_trigger(text: str):
@@ -41,7 +60,7 @@ def load_progress() -> Dict[str, List[str]]:
     """加载处理进度"""
     if PROGRESS_FILE.exists():
         try:
-            return json.loads(PROGRESS_FILE.read_text(encoding='utf-8'))
+            return json.loads(PROGRESS_FILE.read_text(encoding='utf-8', errors='replace'))
         except (json.JSONDecodeError, OSError):
             return {"completed": []}
     return {"completed": []}
@@ -49,9 +68,10 @@ def load_progress() -> Dict[str, List[str]]:
 
 def save_progress(completed: List[str]) -> None:
     """保存处理进度"""
-    PROGRESS_FILE.write_text(
+    if not dry_run or getattr(args, "force", False):
+        PROGRESS_FILE.write_text(
         json.dumps({"completed": completed, "timestamp": datetime.now(timezone.utc).isoformat()}, indent=2),
-        encoding='utf-8'
+        encoding='utf-8', errors='replace'
     )
 
 
@@ -330,7 +350,13 @@ def main():
     ap.add_argument("--quality", type=int, default=85, help="JPEG质量")
     ap.add_argument("--resume", action="store_true", help="断点续传")
     ap.add_argument("--rollback", action="store_true", help="回滚原图")
+    ap.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    ap.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    ap.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = ap.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     if args.selftest:
         return selftest()

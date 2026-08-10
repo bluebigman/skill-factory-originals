@@ -259,7 +259,7 @@ class SchemaInferencer:
     def from_json(filepath: str, sample_size: int = 100) -> Dict[str, Any]:
         """从JSON文件推断结构。"""
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
             if isinstance(data, list):
                 if not data:
@@ -610,6 +610,8 @@ def main() -> int:
     parser.add_argument("--order-by", nargs=2, action="append", metavar=("FIELD", "DIR"), help="排序字段和方向")
     parser.add_argument("--limit", type=int, help="限制返回行数")
     parser.add_argument("--offset", type=int, default=0, help="偏移量")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

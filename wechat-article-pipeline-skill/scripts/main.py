@@ -11,6 +11,7 @@ import argparse
 import re
 import sys
 import html as html_lib
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -37,6 +38,24 @@ class PipelineError(Exception):
 
 
 # ---------- 核心处理函数 ----------
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def extract_title(text: str) -> str:
     """从文本中提取标题。
@@ -363,7 +382,18 @@ def main() -> int:
         help="输出草稿 JSON 文件路径（可选，默认输出到 stdout）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -376,7 +406,7 @@ def main() -> int:
         return 2
 
     try:
-        with open(args.input, "r", encoding="utf-8") as f:
+        with open(args.input, "r", encoding="utf-8", errors="replace") as f:
             text = f.read()
 
         result = process_article(text)
@@ -386,7 +416,7 @@ def main() -> int:
         output_json = json.dumps(result, ensure_ascii=False, indent=2)
 
         if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
+            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                 f.write(output_json)
             print(f"草稿已写入: {args.output}")
         else:

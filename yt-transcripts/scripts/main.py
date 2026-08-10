@@ -438,6 +438,8 @@ def main() -> int:
     parser.add_argument("--timestamps", "-t", action="store_true", help="输出包含时间戳（仅 text 格式）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检程序")
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
     args = parser.parse_args()
     
     # 自检模式

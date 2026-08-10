@@ -112,6 +112,24 @@ ERROR_PATTERNS = [
 # ---------------------------------------------------------------------------
 # 工具函数
 # ---------------------------------------------------------------------------
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _read_json_file(file_path: str) -> Dict[str, Any]:
     """
     读取 JSON 文件并解析。
@@ -562,13 +580,15 @@ def main() -> int:
     )
 
     # 子命令或互斥选项
-    group = parser.add_mutually_exclusive_group(required=True)
+    group = parser.add_mutually_exclusive_group(required=False)
     group.add_argument("--selftest", action="store_true", help="执行离线自检（内置样例数据）")
     group.add_argument("--parse", metavar="JSON_PATH", help="解析指定的 settings.json 配置文件")
     group.add_argument("--template", action="store_true", help="生成配置模板并输出")
     group.add_argument("--envs", metavar="JSON_PATH", help="分析指定配置文件中的环境变量")
     group.add_argument("--orchestrate", metavar="JSON_PATH", help="检查指定配置文件的构建编排")
     group.add_argument("--diagnose", metavar="LOG_PATH", help="诊断指定的构建日志文件")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

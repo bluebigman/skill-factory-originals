@@ -545,6 +545,8 @@ def main() -> int:
     parser.add_argument("--timeout", type=float, default=10.0, help="单条处理超时（秒）")
     parser.add_argument("--retries", type=int, default=3, help="可恢复错误重试次数")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -569,7 +571,7 @@ def main() -> int:
             if not os.path.isfile(args.batch):
                 print(f"[E009] 批量文件不存在: {args.batch}")
                 return 9
-            with open(args.batch, "r", encoding="utf-8") as f:
+            with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
                 items = json.load(f)
             result = engine.process_batch(items)
             print(json.dumps(result, ensure_ascii=False, indent=2))

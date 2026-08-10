@@ -644,6 +644,8 @@ def main() -> int:
     parser.add_argument("--title", type=str, default="", help="视频标题（用于字幕文件输入）")
     parser.add_argument("--channel", type=str, default="", help="频道名（用于字幕文件输入）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     try:

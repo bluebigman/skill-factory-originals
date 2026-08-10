@@ -20,6 +20,7 @@ import re
 import sys
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Set, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 错误码定义
@@ -545,8 +546,8 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         epilog="示例: python main.py 'pattern' /path/to/dir -C 3"
     )
     
-    parser.add_argument("pattern", nargs="?", help="正则表达式模式")
-    parser.add_argument("paths", nargs="*", default=["."], help="搜索路径（默认当前目录）")
+    parser.add_argument("--pattern", nargs="?", help="正则表达式模式")
+    parser.add_argument("--paths", nargs="*", default=["."], help="搜索路径（默认当前目录）")
     
     parser.add_argument("-i", "--ignore-case", action="store_true", help="忽略大小写")
     parser.add_argument("-n", "--line-number", action="store_true", default=True, help="显示行号")
@@ -571,6 +572,13 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument("--glob", help="glob 模式过滤文件")
     parser.add_argument("-v", "--invert-match", action="store_true", help="反转匹配")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     
     return parser.parse_args(argv)
 

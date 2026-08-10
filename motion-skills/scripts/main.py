@@ -70,6 +70,24 @@ class MotionSkillError(Exception):
 # 数据解析模块
 # ============================================================
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def detect_input_type(data: str) -> str:
     """
     检测输入数据类型。
@@ -104,8 +122,8 @@ def detect_input_type(data: str) -> str:
                 header = lines[0].split(",")
                 if len(header) > 1:
                     return "csv"
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
 
     # 检查 JSON
     try:
@@ -713,6 +731,8 @@ def main() -> int:
         help="批量处理多个输入数据"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 运行自检
@@ -744,7 +764,7 @@ def main() -> int:
                 if file_size > MAX_FILE_SIZE:
                     raise MotionSkillError("E006", f"文件超过大小限制: {file_size} 字节")
 
-                with open(args.file, "r", encoding="utf-8") as f:
+                with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                     data = f.read()
             except FileNotFoundError:
                 print(f"错误: 文件不存在: {args.file}", file=sys.stderr)

@@ -188,6 +188,24 @@ TEMPLATES = {
 _PLACEHOLDER = re.compile(r"\{([a-z_]+)\}")
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _validate_scenario_lang_tone(scenario: str, lang: str, tone: str) -> None:
     """统一校验场景、语言、语气，避免重复代码。"""
     if scenario not in TEMPLATES:
@@ -258,13 +276,13 @@ def load_batch(path: str) -> list[dict]:
 
     try:
         if p.suffix.lower() == ".json":
-            rows = json.loads(p.read_text(encoding="utf-8"))
+            rows = json.loads(p.read_text(encoding="utf-8", errors="replace"))
             if not isinstance(rows, list):
                 raise DraftErr("E009", "JSON 顶层须为数组")
             # 确保每行都是字典
             rows = [r for r in rows if isinstance(r, dict)]
         else:
-            with open(p, encoding="utf-8", newline="") as f:
+            with open(p, encoding="utf-8", errors="replace", newline="") as f:
                 rows = [dict(r) for r in csv.DictReader(f)]
     except (json.JSONDecodeError, OSError, UnicodeDecodeError) as e:
         raise DraftErr("E009", str(e))

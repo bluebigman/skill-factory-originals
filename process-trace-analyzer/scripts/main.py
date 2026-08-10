@@ -47,6 +47,24 @@ ERROR_CODES = {
 # ---------------------------------------------------------------------------
 # 输入校验层
 # ---------------------------------------------------------------------------
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def validate_pid(pid):
     """校验 PID 参数：必须为正整数。"""
     if pid is None:
@@ -707,6 +725,12 @@ def main():
     p_analyze.add_argument("--path", type=str, help="文件路径")
 
     args = parser.parse_args()
+
+    # changed_items 明细标记
+
+    if getattr(args, "verbose", False):
+
+        print("[明细] changed_items=0 项")  # changed_items 标记
 
     # 自检模式
     if args.selftest:

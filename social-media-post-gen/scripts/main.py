@@ -369,6 +369,7 @@ def _parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument("--feature", dest="feature", default="品质", help="核心卖点")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--json", dest="as_json", action="store_true", help="以 JSON 格式输出")
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     return parser.parse_args(argv)
 
 

@@ -891,7 +891,7 @@ def main() -> int:
   python run.py --selftest                 运行自检
         """
     )
-    parser.add_argument("input", nargs="?", help="输入 CSV/JSON 文件路径")
+    parser.add_argument("--input", nargs="?", help="输入 CSV/JSON 文件路径")
     parser.add_argument("-o", "--output", help="输出报告文件路径")
     parser.add_argument("--format", choices=["html", "md"], default="html", help="输出格式")
     parser.add_argument("--summary", action="store_true", help="仅打印统计摘要")

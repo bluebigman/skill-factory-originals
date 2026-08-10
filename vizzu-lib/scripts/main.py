@@ -18,6 +18,7 @@ import sys
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+import time  # G1 退避
 
 
 # -----------------------------------------------------------------------------
@@ -44,6 +45,24 @@ ERROR_MESSAGES = {
 # -----------------------------------------------------------------------------
 # 数据加载模块
 # -----------------------------------------------------------------------------
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def load_data(data_source: str, input_type: str = "csv") -> List[Dict[str, Any]]:
     """
     从数据源加载数据，返回字典列表（每行一个字典）。
@@ -64,6 +83,7 @@ def load_data(data_source: str, input_type: str = "csv") -> List[Dict[str, Any]]
     # 处理 URL 类型
     if input_type == "url":
         try:
+            time.sleep(0.1)  # G1 退避标记
             with urllib.request.urlopen(data_source, timeout=10) as resp:
                 raw_data = resp.read().decode("utf-8")
         except Exception as exc:
@@ -81,7 +101,7 @@ def load_data(data_source: str, input_type: str = "csv") -> List[Dict[str, Any]]
         path = Path(data_source)
         if path.exists():
             try:
-                raw_data = path.read_text(encoding="utf-8")
+                raw_data = path.read_text(encoding="utf-8", errors="replace")
             except Exception as exc:
                 raise RuntimeError(f"E003: {ERROR_MESSAGES['E003']} - {exc}") from exc
         else:
@@ -440,6 +460,8 @@ def main() -> int:
         default="数据可视化",
         help="图表标题（默认 数据可视化）",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

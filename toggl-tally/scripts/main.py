@@ -10,6 +10,7 @@ import re
 import sys
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
 
 
 # 错误码定义
@@ -33,6 +34,24 @@ class TogglTallyError(Exception):
         self.error_code = error_code
         self.message = message or ERROR_CODES.get(error_code, "未知错误")
         super().__init__(f"[{error_code}] {self.message}")
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def _safe_float(value: Any) -> Optional[float]:
@@ -425,7 +444,7 @@ def process_data(input_data: Any) -> Dict[str, Any]:
             "total_hours": round(total_hours, 2),
             "high_confidence_count": high_conf,
             "records": unique_records,
-            "generated_at": datetime.now().strftime("%Y-%m-%dT%H:%M:%S"),
+            "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%S"),
         }
 
         return result
@@ -681,7 +700,7 @@ def main() -> int:
         # 尝试读取文件
         import os
         if os.path.isfile(input_arg):
-            with open(input_arg, "r", encoding="utf-8") as f:
+            with open(input_arg, "r", encoding="utf-8", errors="replace") as f:
                 input_data = f.read()
         else:
             # 尝试直接解析为 JSON

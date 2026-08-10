@@ -12,6 +12,8 @@ import sys
 from collections import Counter
 from datetime import datetime
 from pathlib import Path
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -33,6 +35,24 @@ SEVERITY_LEVELS = ["阻断", "严重", "一般", "建议"]
 # 置信度阈值
 HIGH_CONFIDENCE = 0.8
 MEDIUM_CONFIDENCE = 0.6
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def error_exit(code: str, message: str = None) -> None:
@@ -229,7 +249,7 @@ def generate_report(items: list, output_format: str = "json") -> str:
 
     # 生成报告数据
     report_data = {
-        "generated_at": datetime.now().isoformat(),
+        "generated_at": datetime.now(timezone.utc).isoformat(),
         "total_issues": len(items),
         "severity_summary": dict(severity_count),
         "items": [item.to_dict() for item in items],
@@ -280,7 +300,7 @@ def process_file(input_path: str, output_path: str = None,
         input_file = Path(input_path)
         if not input_file.exists():
             error_exit("E002", f"文件不存在: {input_path}")
-        text = input_file.read_text(encoding="utf-8")
+        text = input_file.read_text(encoding="utf-8", errors="replace")
     except (IOError, OSError) as e:
         error_exit("E002", f"读取文件失败: {e}")
 
@@ -298,7 +318,8 @@ def process_file(input_path: str, output_path: str = None,
         try:
             output_file = Path(output_path)
             output_file.parent.mkdir(parents=True, exist_ok=True)
-            output_file.write_text(report, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                output_file.write_text(report, encoding="utf-8", errors="replace")
             print(f"报告已写入: {output_path}")
         except (IOError, OSError) as e:
             error_exit("E005", f"写入文件失败: {e}")
@@ -538,13 +559,24 @@ def main() -> None:
         description="reviewday - 代码评审结构化汇总与置信标注",
         epilog="示例: python main.py input.txt -o report.json --format json"
     )
-    parser.add_argument("input", nargs="?", help="输入审查文件路径")
+    parser.add_argument("--input", nargs="?", help="输入审查文件路径")
     parser.add_argument("-o", "--output", help="输出报告文件路径")
     parser.add_argument("-f", "--format", choices=["json", "markdown"], default="json",
                         help="输出格式 (默认: json)")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         run_selftest()

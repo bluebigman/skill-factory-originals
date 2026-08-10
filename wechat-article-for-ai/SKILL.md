@@ -5,7 +5,7 @@
 slug: wechat-article-for-ai
 name: wechat-article-for-ai
 displayName: 公众号文章 Markdown 转换器
-description: 将微信公众号文章链接转为结构化 Markdown，支持批量处理与图片本地化。
+description: 将微信公众号文章链接转为结构化 Markdown，支持批量处理与本地化。
 version: 1.0.2
 license: MIT
 source_project: original
@@ -40,7 +40,7 @@ trigger_words: ["公众号文章", "wechat article", "微信文章转markdown", 
 |------|------|
 | ✅ 能做 | 将单个或多个微信公众号文章链接转换为结构化 Markdown 文档 |
 | ✅ 能做 | 自动提取标题、作者、发布时间、正文内容 |
-| ✅ 能做 | 将正文中的图片下载到本地并替换为相对路径引用 |
+| ✅ 能做 | 将正文中的下载到本地并替换为相对路径引用 |
 | ✅ 能做 | 批量处理多个 URL（每行一个） |
 | ✅ 能做 | 对抓取失败的任务自动重试（最多 3 次，间隔 2 秒） |
 | ❌ 不能做 | 处理非微信公众号域名的链接（如知乎、CSDN 等） |

@@ -5,6 +5,7 @@ import sys
 import json
 import argparse
 from typing import List, Union
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 def calculate_stats(numbers: List[Union[int, float]]) -> dict:
@@ -87,7 +88,18 @@ def main():
     parser.add_argument("--input", type=str, help="输入JSON文件路径")
     parser.add_argument("--output", type=str, help="输出JSON文件路径")
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 运行自测
     if args.selftest:

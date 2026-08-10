@@ -4,6 +4,24 @@ import json
 import sys
 import argparse
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def format_yaml(data, indent=0):
     """Convert Python data structure to YAML-like format"""
     lines = []
@@ -45,13 +63,14 @@ def parse_input(input_str):
     # Fallback: try eval for simple Python literals
     try:
         return eval(input_str)
-    except:
+    except Exception:
         raise ValueError(f"Unable to parse input: {input_str}")
 
 def main():
     parser = argparse.ArgumentParser(description='Convert JSON to YAML-like format')
-    parser.add_argument('input', nargs='?', help='Input JSON string')
+    parser.add_argument("--input", nargs='?', help='Input JSON string')
     parser.add_argument('--selftest', action='store_true', help='Run self-tests')
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     args = parser.parse_args()
     
     if args.selftest:

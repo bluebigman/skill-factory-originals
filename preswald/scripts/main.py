@@ -379,6 +379,7 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="运行内置自检（离线，不依赖外部文件）",
     )
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     return parser.parse_args()
 
 

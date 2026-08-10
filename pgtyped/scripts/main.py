@@ -16,6 +16,7 @@ import argparse
 import re
 import sys
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERR_OK = 0
@@ -69,6 +70,24 @@ TYPE_MAP: Dict[str, str] = {
     "money": "number",
     "oid": "number",
 }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def _map_type(sql_type: str) -> str:
@@ -413,7 +432,7 @@ class SqlFileProcessor:
     def process_file(self, file_path: str) -> str:
         """处理 SQL 文件，返回生成的 TypeScript 代码。"""
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
                 content = f.read()
         except Exception as e:
             raise IOError(f"{ERR_IO}: 无法读取文件 {file_path}: {e}")
@@ -573,7 +592,7 @@ def main() -> int:
         prog="pgtyped"
     )
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="输入 SQL 文件路径"
     )
@@ -592,7 +611,18 @@ def main() -> int:
         version="pgtyped 1.0.1 (独立实现)"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -609,7 +639,7 @@ def main() -> int:
 
         if args.output:
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(result)
                 print(f"已生成 TypeScript 代码: {args.output}")
             except Exception as e:

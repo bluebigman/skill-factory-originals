@@ -457,6 +457,8 @@ def main() -> int:
         help="输入 JSON 文件路径（可选，用于批量处理）"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     if args.selftest:

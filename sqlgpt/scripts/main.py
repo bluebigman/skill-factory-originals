@@ -706,7 +706,7 @@ def run_selftest() -> bool:
         try:
             SQLGenerator(dialect)
             print(f"  ✓ 支持方言: {dialect}")
-        except:
+        except Exception:
             print(f"  ✗ 不支持方言: {dialect}")
             all_passed = False
 
@@ -730,6 +730,8 @@ def main():
     parser.add_argument("--dialect", "-d", default="mysql", help="目标数据库方言 (mysql/postgresql/sqlite/sqlserver)")
     parser.add_argument("--selftest", action="store_true", help="运行自检程序")
     parser.add_argument("--tables", "-t", help="表结构JSON字符串，格式: {\"表名\": [\"字段1\", \"字段2\"]}")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

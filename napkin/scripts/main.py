@@ -39,6 +39,8 @@ import sys
 import tempfile
 import time
 from datetime import datetime, timedelta
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 常量定义
@@ -77,6 +79,24 @@ SELFTEST_SAMPLES = [
 # ---------------------------------------------------------------------------
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _get_storage_dir(base_dir=None):
     """获取存储目录路径。"""
     base = base_dir or os.getcwd()
@@ -106,7 +126,7 @@ def _load_records(base_dir=None):
     if not os.path.exists(data_file):
         return []
     try:
-        with open(data_file, "r", encoding="utf-8") as fh:
+        with open(data_file, "r", encoding="utf-8", errors="replace") as fh:
             raw = fh.read()
         if not raw.strip():
             return []
@@ -126,7 +146,7 @@ def _save_records(records, base_dir=None):
     data_file = os.path.join(storage_dir, DATA_FILENAME)
     tmp_file = data_file + ".tmp"
     try:
-        with open(tmp_file, "w", encoding="utf-8") as fh:
+        with open(tmp_file, "w", encoding="utf-8", errors="replace") as fh:
             json.dump(records, fh, ensure_ascii=False, indent=2)
         os.replace(tmp_file, data_file)
     except OSError as exc:
@@ -173,7 +193,7 @@ def _validate_tags(tags):
 def _parse_time(value):
     """解析时间字符串。支持 'YYYY-MM-DD HH:MM:SS' 或相对时间（如 '7d'）。"""
     if value is None:
-        return datetime.now().strftime(TIME_FORMAT)
+        return datetime.now(timezone.utc).strftime(TIME_FORMAT)
     value = str(value).strip()
     # 相对时间：数字+d/h
     rel = re.match(r"^(\d+)([dh])$", value)
@@ -181,7 +201,7 @@ def _parse_time(value):
         amount = int(rel.group(1))
         unit = rel.group(2)
         delta = timedelta(days=amount) if unit == "d" else timedelta(hours=amount)
-        return (datetime.now() - delta).strftime(TIME_FORMAT)
+        return (datetime.now(timezone.utc) - delta).strftime(TIME_FORMAT)
     # 绝对时间
     try:
         dt = datetime.strptime(value, TIME_FORMAT)
@@ -287,7 +307,7 @@ def export_records(export_format="md", base_dir=None, tag=None):
     records = search_records(tag=tag, base_dir=base_dir)
     if export_format == "md":
         lines = ["# napkin 项目记忆导出", ""]
-        lines.append("> 导出时间: %s" % datetime.now().strftime(TIME_FORMAT))
+        lines.append("> 导出时间: %s" % datetime.now(timezone.utc).strftime(TIME_FORMAT))
         lines.append("> 记录总数: %d" % len(records))
         lines.append("")
         for idx, rec in enumerate(records, 1):
@@ -312,7 +332,7 @@ def export_records(export_format="md", base_dir=None, tag=None):
         return "\n".join(lines)
     else:  # txt
         lines = ["napkin 项目记忆导出", "=" * 40, ""]
-        lines.append("导出时间: %s" % datetime.now().strftime(TIME_FORMAT))
+        lines.append("导出时间: %s" % datetime.now(timezone.utc).strftime(TIME_FORMAT))
         lines.append("记录总数: %d" % len(records))
         lines.append("")
         for idx, rec in enumerate(records, 1):
@@ -417,9 +437,9 @@ def main():
 
     # add 命令
     add_parser = subparsers.add_parser("add", help="添加记录")
-    add_parser.add_argument("--title", required=True, help="标题")
-    add_parser.add_argument("--error", required=True, help="错误信息")
-    add_parser.add_argument("--solution", required=True, help="解决方案")
+    add_parser.add_argument("--title", required=False, help="标题")
+    add_parser.add_argument("--error", required=False, help="错误信息")
+    add_parser.add_argument("--solution", required=False, help="解决方案")
     add_parser.add_argument("--tag", action="append", help="标签（可多次指定）")
     add_parser.add_argument("--created-at", help="创建时间（YYYY-MM-DD HH:MM:SS 或相对时间如 7d）")
 
@@ -434,21 +454,32 @@ def main():
 
     # update 命令
     update_parser = subparsers.add_parser("update", help="更新记录")
-    update_parser.add_argument("--id", required=True, help="记录ID")
+    update_parser.add_argument("--id", required=False, help="记录ID")
     update_parser.add_argument("--solution", help="新的解决方案")
     update_parser.add_argument("--status", choices=["active", "expired", "archived"], help="新状态")
     update_parser.add_argument("--tag", action="append", help="新标签（可多次指定）")
 
     # delete 命令
     delete_parser = subparsers.add_parser("delete", help="删除记录")
-    delete_parser.add_argument("--id", required=True, help="记录ID")
+    delete_parser.add_argument("--id", required=False, help="记录ID")
 
     # export 命令
     export_parser = subparsers.add_parser("export", help="导出记录")
     export_parser.add_argument("--format", choices=list(VALID_EXPORT_FORMATS), default="md", help="导出格式")
     export_parser.add_argument("--tag", help="按标签过滤")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         sys.exit(_selftest())

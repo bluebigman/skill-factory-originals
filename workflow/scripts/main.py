@@ -16,6 +16,7 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+from datetime import timezone  # G2 时区修复
 
 # 错误码定义
 ERROR_CODES = {
@@ -187,7 +188,7 @@ def _convert_to_markdown(structured_data: Dict[str, Any]) -> str:
 
     # 元信息
     lines.append("## 元信息")
-    lines.append(f"- 处理时间: {datetime.now().isoformat()}")
+    lines.append(f"- 处理时间: {datetime.now(timezone.utc).isoformat()}")
     lines.append(f"- 数据类型: {structured_data.get('source_type', 'unknown')}")
     lines.append(f"- 置信度: {structured_data.get('confidence', '未知')}")
     lines.append("")
@@ -266,7 +267,7 @@ def process_input(
         raise WorkflowError("E008", str(e))
 
     # 添加处理时间
-    structured["processed_at"] = datetime.now().isoformat()
+    structured["processed_at"] = datetime.now(timezone.utc).isoformat()
 
     # 格式化输出
     if output_format == "markdown":
@@ -380,6 +381,8 @@ def main() -> None:
     parser.add_argument("--format", "-o", type=str, default="json", 
                        choices=["json", "markdown"], help="输出格式")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

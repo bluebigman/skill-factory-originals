@@ -13,10 +13,28 @@ HERE = Path(__file__).resolve().parent
 TRIGGERS = ["ripgrep", "rg搜索", "代码搜索", "正则搜索", "grep替代", "搜代码", ""]
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def load_spec() -> str:
     # 资产池/发布目录均为 SKILL.md 在技能根目录、scripts/ 为其子目录，故读父目录
     p = HERE.parent / "SKILL.md"
-    return p.read_text(encoding="utf-8") if p.exists() else ""
+    return p.read_text(encoding="utf-8", errors="replace") if p.exists() else ""
 
 
 def match_trigger(text: str):
@@ -42,6 +60,7 @@ def main():
     ap.add_argument("--guide", action="store_true", help="打印能力速览")
     ap.add_argument("--match", default="", help="输入文本，匹配触发词")
     ap.add_argument("--selftest", action="store_true", help="离线自检")
+    ap.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     args = ap.parse_args()
     if args.selftest:
         return selftest()

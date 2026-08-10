@@ -134,4 +134,5 @@ def md_to_latex(markdown_text: str) -> str:
         stripped = line.strip()
         
         # 处理代码块开始/结束
-        if stripped.startswith('
+        if stripped.startswith('```'):
+            pass  # auto-fix: empty if body

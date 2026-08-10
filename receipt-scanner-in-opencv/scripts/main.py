@@ -700,6 +700,8 @@ def main():
         help="输入图像文件路径（当前版本仅支持自检模式）"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 处理 --version

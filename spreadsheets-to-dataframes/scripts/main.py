@@ -527,13 +527,15 @@ def main(argv: list = None) -> int:
         description="Excel/CSV 转 DataFrame 数据清洗与转换工具",
         epilog="示例: python scripts/main.py data.csv --sep ';' --encoding 'utf-8'",
     )
-    parser.add_argument("files", nargs="*", help="输入文件路径（支持多个，用于合并）")
+    parser.add_argument("--files", nargs="*", help="输入文件路径（支持多个，用于合并）")
     parser.add_argument("--sep", default=",", help="CSV 分隔符（默认逗号）")
     parser.add_argument("--encoding", default="utf-8", help="文件编码（默认 utf-8）")
     parser.add_argument("--merge", action="store_true", help="合并多个文件（要求列一致）")
     parser.add_argument("--json", action="store_true", dest="json_output", help="以 JSON 格式输出")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--version", action="version", version="spreadsheets-to-dataframes 1.0.1")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args(argv)
 

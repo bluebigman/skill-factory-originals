@@ -10,8 +10,8 @@ version: 1.1.2
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
 source_project: ajeetdsouza/zoxide
-source_url: https://github.com/ajeetdsouza/zoxide
-source_license_url: https://github.com/ajeetdsouza/zoxide/blob/main/LICENSE
+source_url: s://.com/ajeetdsouza/zoxide
+source_license_url: s://.com/ajeetdsouza/zoxide/blob/main/LICENSE
 copyright_holder: ajeetdsouza contributors
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -19,12 +19,12 @@ disclaimer: 本Skill基于开源项目ajeetdsouza/zoxide（MIT协议）进行AI�
 author: skill-factory-auto
 agent_created: true
 trigger_words:
-  - "zoxide"
-  - "跳转目录"
-  - "去上次的目录"
-  - "快速导航"
-  - "目录切换"
-  - "智能cd"
+ - "zoxide"
+ - "跳转目录"
+ - "去上次的目录"
+ - "快速导航"
+ - "目录切换"
+ - "智能cd"
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -47,14 +47,14 @@ trigger_words:
 - 它是一个基于 `zoxide` 命令的智能目录跳转工具。你只需要输入目录的部分名称，它就能根据你的历史访问频率和最近使用时间，自动跳转到最可能的那个目录。
 
 **核心能力（3项）：**
-1.  **智能匹配跳转**：输入关键词，自动匹配并跳转到最可能的目录。
-2.  **交互式选择**：当有多个匹配项时，提供交互式列表供你选择。
-3.  **历史记录管理**：自动记录、查询、添加和清理目录访问历史。
+1. **智能匹配跳转**：输入关键词，自动匹配并跳转到最可能的目录。
+2. **交互式选择**：当有多个匹配项时，提供交互式列表供你选择。
+3. **历史记录管理**：自动记录、查询、添加和清理目录访问历史。
 
 **快速上手（3步）：**
-1.  **安装**：`curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh -o /tmp/install.sh && sh /tmp/install.sh`（或使用包管理器，见 [安装指南](#81-快速安装与初始化installation--setup)）。
-2.  **配置**：在 Shell 配置文件中（如 `~/.bashrc`）添加 `source <(zoxide init bash)`。
-3.  **使用**：在终端输入 `z 关键词` 即可跳转。
+1. **安装**：`curl -sSfL s://raw.usercontent.com/ajeetdsouza/zoxide/main/install.sh -o /tmp/install.sh && sh /tmp/install.sh`（或使用包管理器，见 [安装指南](#81-快速安装与初始化installation--setup)）。
+2. **配置**：在 Shell 配置文件中（如 `~/.bashrc`）添加 `source <(zoxide init bash)`。
+3. **使用**：在终端输入 `z 关键词` 即可跳转。
 
 **阅读路径建议：**
 - **新手**：请从 [快速上手](#快速上手完整可运行示例) 开始，然后阅读 [触发方式](#二触发方式说大白话就能用) 和 [标准流程](#三标准流程5分钟上手路径)。

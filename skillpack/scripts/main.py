@@ -19,6 +19,7 @@ import zipfile
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 常量定义
@@ -71,7 +72,7 @@ def _safe_filename(name: str) -> str:
 def _read_json(path: Path) -> Optional[Dict]:
     """读取 JSON 文件，失败时返回 None。"""
     try:
-        return json.loads(path.read_text(encoding="utf-8"))
+        return json.loads(path.read_text(encoding="utf-8", errors="replace"))
     except Exception:
         return None
 
@@ -80,9 +81,10 @@ def _write_json(path: Path, data: Dict) -> None:
     """写入 JSON 文件，失败时抛出 E008。"""
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
+        if not dry_run or getattr(args, "force", False):
+            path.write_text(
             json.dumps(data, ensure_ascii=False, indent=2),
-            encoding="utf-8"
+            encoding="utf-8", errors="replace"
         )
     except Exception as exc:
         _raise("E008", path=str(path), reason=str(exc))
@@ -105,7 +107,7 @@ def _scan_dependencies(skill_dir: Path) -> List[str]:
     deps: List[str] = []
     req_file = skill_dir / "requirements.txt"
     if req_file.exists():
-        for line in req_file.read_text(encoding="utf-8").splitlines():
+        for line in req_file.read_text(encoding="utf-8", errors="replace").splitlines():
             line = line.strip()
             if line and not line.startswith("#"):
                 deps.append(line)
@@ -123,7 +125,7 @@ def _scan_dependencies(skill_dir: Path) -> List[str]:
             # 简单 YAML 解析（仅提取 dependencies 字段，不引入第三方库）
             try:
                 in_deps = False
-                for line in cfg_path.read_text(encoding="utf-8").splitlines():
+                for line in cfg_path.read_text(encoding="utf-8", errors="replace").splitlines():
                     stripped = line.strip()
                     if stripped.startswith("dependencies:"):
                         in_deps = True
@@ -133,12 +135,12 @@ def _scan_dependencies(skill_dir: Path) -> List[str]:
                             deps.append(stripped[2:].strip())
                         elif stripped and not stripped.startswith(("#", " ")):
                             in_deps = False
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
         elif cfg_path.name.lower() == "skill.md":
             # 从 Markdown 中提取依赖信息
             try:
-                content = cfg_path.read_text(encoding="utf-8")
+                content = cfg_path.read_text(encoding="utf-8", errors="replace")
                 # 查找依赖部分
                 dep_section = re.search(r'##?\s*依赖|##?\s*Dependencies', content, re.IGNORECASE)
                 if dep_section:
@@ -154,8 +156,8 @@ def _scan_dependencies(skill_dir: Path) -> List[str]:
                             dep = stripped[2:].strip()
                             if dep and not dep.startswith("#"):
                                 deps.append(dep)
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
 
     # 去重并保持顺序
     seen = set()
@@ -449,20 +451,22 @@ def _cmd_selftest(args) -> int:
             test_skill.mkdir()
             
             # 创建配置文件
-            (test_skill / "skill.json").write_text(
+            if not dry_run or getattr(args, "force", False):
+                (test_skill / "skill.json").write_text(
                 json.dumps({
                     "name": "test_skill",
                     "version": "1.0.0",
                     "description": "测试技能",
                     "dependencies": ["numpy", "requests>=2.0"]
                 }),
-                encoding="utf-8"
+                encoding="utf-8", errors="replace"
             )
             
             # 创建一些文件
-            (test_skill / "main.py").write_text("# test main\nprint('hello')\n", encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                (test_skill / "main.py").write_text("# test main\nprint('hello')\n", encoding="utf-8", errors="replace")
             (test_skill / "requirements.txt").write_text(
-                "# 依赖\nflask==2.0.1\npandas\n", encoding="utf-8"
+                "# 依赖\nflask==2.0.1\npandas\n", encoding="utf-8", errors="replace"
             )
             
             # 2. 测试打包
@@ -506,12 +510,12 @@ def _cmd_selftest(args) -> int:
             (batch_dir / "skill1").mkdir()
             (batch_dir / "skill1" / "skill.json").write_text(
                 json.dumps({"name": "skill1", "version": "1.0.0"}),
-                encoding="utf-8"
+                encoding="utf-8", errors="replace"
             )
             (batch_dir / "skill2").mkdir()
             (batch_dir / "skill2" / "skill.yaml").write_text(
                 "name: skill2\nversion: 1.0.0\n",
-                encoding="utf-8"
+                encoding="utf-8", errors="replace"
             )
             (batch_dir / "not_skill").mkdir()
             
@@ -550,7 +554,7 @@ def _cmd_selftest(args) -> int:
             skill_md_dir.mkdir()
             (skill_md_dir / "SKILL.md").write_text(
                 "# 测试技能\n\n## 依赖\n- package1\n- package2>=1.0\n\n## 其他\n内容\n",
-                encoding="utf-8"
+                encoding="utf-8", errors="replace"
             )
             md_deps = _scan_dependencies(skill_md_dir)
             assert "package1" in md_deps, "SKILL.md 依赖提取失败"
@@ -581,27 +585,27 @@ def main() -> int:
     
     # pack 命令
     pack_parser = subparsers.add_parser("pack", help="打包技能目录")
-    pack_parser.add_argument("skill_dir", help="技能目录路径")
-    pack_parser.add_argument("-o", "--output", required=True, help="输出包文件路径")
+    pack_parser.add_argument("--skill_dir", help="技能目录路径")
+    pack_parser.add_argument("-o", "--output", required=False, help="输出包文件路径")
     pack_parser.add_argument("-e", "--target-env", default="production", help="目标环境")
     pack_parser.set_defaults(func=_cmd_pack)
     
     # unpack 命令
     unpack_parser = subparsers.add_parser("unpack", help="解包技能包")
-    unpack_parser.add_argument("pack_path", help="技能包文件路径")
+    unpack_parser.add_argument("--pack_path", help="技能包文件路径")
     unpack_parser.add_argument("-o", "--output-dir", default=".", help="输出目录")
     unpack_parser.set_defaults(func=_cmd_unpack)
     
     # validate 命令
     validate_parser = subparsers.add_parser("validate", help="校验技能包版本")
-    validate_parser.add_argument("pack_path", help="技能包文件路径")
+    validate_parser.add_argument("--pack_path", help="技能包文件路径")
     validate_parser.add_argument("--min-version", default="0.0.0", help="最低版本要求")
     validate_parser.set_defaults(func=_cmd_validate)
     
     # batch 命令
     batch_parser = subparsers.add_parser("batch", help="批量打包技能目录")
-    batch_parser.add_argument("input_dir", help="包含多个技能目录的根目录")
-    batch_parser.add_argument("-o", "--output-dir", required=True, help="输出目录")
+    batch_parser.add_argument("--input_dir", help="包含多个技能目录的根目录")
+    batch_parser.add_argument("-o", "--output-dir", required=False, help="输出目录")
     batch_parser.add_argument("-e", "--target-env", default="production", help="目标环境")
     batch_parser.set_defaults(func=_cmd_batch)
     
@@ -609,7 +613,18 @@ def main() -> int:
     selftest_parser = subparsers.add_parser("selftest", help="运行自测")
     selftest_parser.set_defaults(func=_cmd_selftest)
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     if not args.command:
         parser.print_help()

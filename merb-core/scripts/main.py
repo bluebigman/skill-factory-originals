@@ -387,6 +387,8 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--batch", action="store_true", help="批量模式（配合 --file）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -400,7 +402,7 @@ def main() -> int:
 
         if args.file:
             try:
-                with open(args.file, "r", encoding="utf-8") as f:
+                with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                     texts = [line.strip() for line in f if line.strip()]
             except OSError as e:
                 print(f"错误 {ERR_OUTPUT_WRITE}: 无法读取文件 {args.file}: {e}", file=sys.stderr)

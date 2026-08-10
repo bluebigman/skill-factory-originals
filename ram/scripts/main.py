@@ -15,6 +15,7 @@ import os
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
 
 
 # ============================================================
@@ -50,7 +51,7 @@ class ParseResult:
         self.source = source
         self.source_type = source_type
         self.fields: Dict[str, ParsedField] = {}
-        self.created_at = datetime.now().isoformat()
+        self.created_at = datetime.now(timezone.utc).isoformat()
 
     def add_field(self, name: str, value: Any, confidence: str = "高") -> None:
         """添加或覆盖一个字段。"""
@@ -69,6 +70,24 @@ class ParseResult:
 # ============================================================
 # 输入识别与解析
 # ============================================================
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def detect_source_type(source: str) -> str:
     """
     识别输入来源类型。
@@ -97,7 +116,7 @@ def detect_source_type(source: str) -> str:
 def read_text_file(file_path: str) -> str:
     """读取文本文件内容。"""
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             return f.read()
     except FileNotFoundError:
         raise AppError("E003", f"文件不存在: {file_path}")
@@ -430,7 +449,7 @@ def main() -> int:
         epilog="示例: python main.py '名称: 测试\\n类型: 文档'",
     )
     parser.add_argument(
-        "inputs",
+        "--inputs",
         nargs="*",
         help="输入内容：文本、文件路径或 URL",
     )
@@ -450,6 +469,8 @@ def main() -> int:
         action="store_true",
         help="批量模式：每条输入单独处理",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

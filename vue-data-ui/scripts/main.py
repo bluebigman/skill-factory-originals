@@ -347,6 +347,7 @@ def main() -> int:
     parser.add_argument("--suggest", action="store_true", help="生成数据叙事建议")
 
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         args = parser.parse_args()
 
         # 自检模式

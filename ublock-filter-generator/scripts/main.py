@@ -136,6 +136,7 @@ def main():
     parser = argparse.ArgumentParser(description='规则解析器')
     parser.add_argument('--selftest', action='store_true', help='运行自检')
     parser.add_argument('--input', type=str, help='输入规则文本')
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     args = parser.parse_args()
     
     if args.selftest:

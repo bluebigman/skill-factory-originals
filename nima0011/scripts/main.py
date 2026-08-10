@@ -210,6 +210,24 @@ class BatchProcessor:
         return results
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def run_selftest() -> bool:
     """内置自检函数 - 使用硬编码样例数据"""
     print("=" * 60)
@@ -417,6 +435,8 @@ def main():
         action="version",
         version="nima0011 1.0.0"
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     

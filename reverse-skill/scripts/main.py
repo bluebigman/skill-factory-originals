@@ -128,8 +128,8 @@ class ReverseSkillParser:
         if self._looks_like_key_value(stripped):
             try:
                 return self._parse_key_value(stripped)
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
 
         # 默认按纯文本处理
         return self._parse_text(stripped)
@@ -841,6 +841,8 @@ def main() -> int:
         help="运行内置自检程序",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 运行自检
@@ -860,7 +862,7 @@ def main() -> int:
                 print(f"错误: 错误码 E009: {ERROR_CODES['E009']}", file=sys.stderr)
                 return 1
 
-            with open(args.file, "r", encoding="utf-8") as f:
+            with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                 input_data = f.read()
         except FileNotFoundError:
             print(f"错误: 错误码 E008: {ERROR_CODES['E008']}", file=sys.stderr)

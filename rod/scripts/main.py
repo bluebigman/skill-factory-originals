@@ -239,6 +239,24 @@ class RodEngine:
 # ============================================================
 # 自检模块（--selftest）
 # ============================================================
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def run_selftest() -> int:
     """
     内置自检功能，使用硬编码样例数据离线验证核心逻辑
@@ -374,7 +392,7 @@ def main() -> int:
     )
     
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="输入内容（文本/文件路径/URL），批量模式可传多个"
     )
@@ -404,6 +422,8 @@ def main() -> int:
         dest="custom_fields",
         help="自定义字段名（可多次指定）"
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     

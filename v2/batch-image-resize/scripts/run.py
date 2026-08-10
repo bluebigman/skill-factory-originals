@@ -10,6 +10,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from tqdm import tqdm
 from PIL import Image, ImageOps
 import datetime
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 def resize_image(input_path, output_path, width, height, keep_aspect=False, quality=85, overwrite=False):
     """

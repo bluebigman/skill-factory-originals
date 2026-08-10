@@ -375,7 +375,7 @@ def main() -> int:
         description="简历优化工具 - 结构化简历数据提取与输出"
     )
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="输入内容：JSON 字符串或纯文本",
     )
@@ -390,6 +390,8 @@ def main() -> int:
         action="store_true",
         help="运行内置自检（不读取外部文件）",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

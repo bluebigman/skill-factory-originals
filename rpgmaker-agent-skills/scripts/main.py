@@ -12,6 +12,7 @@ import json
 import os
 import sys
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -29,6 +30,24 @@ ERROR_CODES = {
     "E009": "不支持的导出格式（仅支持 CSV）",
     "E010": "内部逻辑错误（未预期的状态）",
 }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def fail(code: str, message: str) -> None:
@@ -82,7 +101,7 @@ class RPGMakerProject:
     def _read_project_version(self, flag_file: str) -> str:
         """从工程标志文件读取版本信息。"""
         try:
-            with open(flag_file, "r", encoding="utf-8") as f:
+            with open(flag_file, "r", encoding="utf-8", errors="replace") as f:
                 content = f.read().strip()
             # 尝试解析 JSON 格式的版本信息
             if content.startswith("{"):
@@ -98,7 +117,7 @@ class RPGMakerProject:
         system_file = os.path.join(data_dir, "System.json")
         if os.path.isfile(system_file):
             try:
-                with open(system_file, "r", encoding="utf-8") as f:
+                with open(system_file, "r", encoding="utf-8", errors="replace") as f:
                     system_data = json.load(f)
                 if "gameTitle" in system_data:
                     # 进一步区分 MV/MZ
@@ -107,8 +126,8 @@ class RPGMakerProject:
                     else:
                         self.project_type = "MV"
                     return
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
         fail("E004", "无法识别工程类型（既不是 MV 也不是 MZ）")
 
 
@@ -117,7 +136,7 @@ def load_json_file(file_path: str) -> Dict[str, Any]:
     if not os.path.isfile(file_path):
         fail("E001", f"文件不存在: {file_path}")
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             return json.load(f)
     except json.JSONDecodeError as e:
         fail("E002", f"JSON 解析失败: {file_path} - {str(e)}")
@@ -130,7 +149,7 @@ def load_json_file(file_path: str) -> Dict[str, Any]:
 def save_json_file(file_path: str, data: Dict[str, Any]) -> None:
     """安全保存 JSON 文件。"""
     try:
-        with open(file_path, "w", encoding="utf-8") as f:
+        with open(file_path, "w", encoding="utf-8", errors="replace") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
     except Exception as e:
         fail("E001", f"写入文件失败: {file_path} - {str(e)}")
@@ -253,7 +272,7 @@ def parse_plugins_js(project: RPGMakerProject) -> List[Dict[str, Any]]:
         fail("E006", "插件配置文件不存在")
 
     try:
-        with open(plugins_path, "r", encoding="utf-8") as f:
+        with open(plugins_path, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()
     except Exception as e:
         fail("E001", f"读取插件配置失败: {str(e)}")
@@ -341,7 +360,7 @@ def export_to_csv(data: List[Dict[str, Any]], output_path: str) -> None:
     headers = sorted(all_keys)
 
     try:
-        with open(output_path, "w", encoding="utf-8", newline="") as f:
+        with open(output_path, "w", encoding="utf-8", errors="replace", newline="") as f:
             # 写入表头
             f.write(",".join(headers) + "\n")
             # 写入数据行
@@ -371,7 +390,7 @@ def run_selftest() -> int:
     # ---------- 测试 1: JSON 加载与保存 ----------
     test_data = {"name": "测试", "list": [1, 2, 3], "nested": {"key": "value"}}
     import tempfile
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8") as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8", errors="replace") as f:
         json.dump(test_data, f, ensure_ascii=False)
         temp_path = f.name
 
@@ -389,13 +408,13 @@ def run_selftest() -> int:
         {"id": 2, "name": "角色B", "hp": 200},
         None,
     ]
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8") as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False, encoding="utf-8", errors="replace") as f:
         json.dump(test_db, f, ensure_ascii=False)
         temp_db_path = f.name
 
     try:
         # 模拟更新逻辑
-        db_data = json.loads(open(temp_db_path, "r", encoding="utf-8").read())
+        db_data = json.loads(open(temp_db_path, "r", encoding="utf-8", errors="replace").read())
         target = None
         for obj in db_data:
             if obj is not None and obj.get("id") == 1:
@@ -433,12 +452,12 @@ def run_selftest() -> int:
         {"id": 1, "name": "物品A", "desc": "包含,逗号"},
         {"id": 2, "name": "物品B", "desc": "普通描述"},
     ]
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8") as f:
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8", errors="replace") as f:
         csv_path = f.name
 
     try:
         export_to_csv(csv_data, csv_path)
-        with open(csv_path, "r", encoding="utf-8") as f:
+        with open(csv_path, "r", encoding="utf-8", errors="replace") as f:
             csv_content = f.read()
         assert "物品A" in csv_content, "CSV 内容缺失"
         assert '"包含,逗号"' in csv_content, "CSV 转义错误"
@@ -478,10 +497,10 @@ def run_selftest() -> int:
     # ---------- 测试 6: 工程类型识别（模拟） ----------
     with tempfile.TemporaryDirectory() as tmpdir:
         # 创建模拟 MV 工程
-        with open(os.path.join(tmpdir, "Game.rpgproject"), "w", encoding="utf-8") as f:
+        with open(os.path.join(tmpdir, "Game.rpgproject"), "w", encoding="utf-8", errors="replace") as f:
             f.write('{"version": "1.6.1"}')
         os.makedirs(os.path.join(tmpdir, "data"), exist_ok=True)
-        with open(os.path.join(tmpdir, "data", "System.json"), "w", encoding="utf-8") as f:
+        with open(os.path.join(tmpdir, "data", "System.json"), "w", encoding="utf-8", errors="replace") as f:
             json.dump({"gameTitle": "测试游戏", "advanced": {}}, f)
 
         # 手动模拟识别逻辑
@@ -544,7 +563,18 @@ def main() -> int:
         help="校验插件配置",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

@@ -25,10 +25,29 @@ from datetime import timezone
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 from logging.handlers import RotatingFileHandler
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 配置日志 - 默认使用临时目录，可通过 --log-file 覆盖
 DEFAULT_LOG_DIR = tempfile.gettempdir()
 DEFAULT_LOG_FILE = os.path.join(DEFAULT_LOG_DIR, 'agent_memory_hub.log')
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def setup_logging(log_file: str = DEFAULT_LOG_FILE) -> logging.Logger:
     """配置日志系统，支持文件轮转"""
@@ -179,8 +198,8 @@ def classify_file(filepath: Path, role_markers: Dict[str, str]) -> str:
             content = filepath.read_text(encoding="utf-8", errors="ignore")[:2000]
             if any(marker in content for marker in role_markers.keys()):
                 return "dialogue"
-        except Exception:
-            pass
+        except Exception as e:
+            print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
         return "document"
     elif ext in {".md", ".json", ".yaml", ".yml", ".csv"}:
         return "document"

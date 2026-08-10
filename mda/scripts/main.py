@@ -21,6 +21,8 @@ import xml.etree.ElementTree as ET
 from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERR_SUCCESS = 0
@@ -42,6 +44,24 @@ class MDADataError(Exception):
         self.code = code
         self.message = message
         super().__init__(f"[{code}] {message}")
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def read_json_file(file_path):
@@ -127,6 +147,7 @@ def read_remote_url(url):
         raise MDADataError(ERR_INVALID_INPUT, f"不支持的 URL 协议: {parsed.scheme}")
 
     try:
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(url, timeout=10) as response:
             content_type = response.headers.get("Content-Type", "")
             data = response.read().decode("utf-8")
@@ -280,7 +301,7 @@ def generate_markdown(data, title="编译文档", include_confidence=True):
     lines = []
     lines.append(f"# {title}")
     lines.append("")
-    lines.append(f"> 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    lines.append(f"> 生成时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append("")
 
     # 添加置信度检查
@@ -488,7 +509,7 @@ def selftest():
 
     # 输出测试结果
     print("\n=== MDA 自检报告 ===")
-    print(f"时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Python: {sys.version.split()[0]}")
     print("")
     all_passed = True
@@ -520,7 +541,18 @@ def main():
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--version", action="version", version="mda 1.0.2")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

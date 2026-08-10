@@ -415,6 +415,8 @@ def main() -> int:
         help="运行内置自检，验证核心逻辑",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -434,7 +436,7 @@ def main() -> int:
         # 读取输入
         if args.file:
             try:
-                with open(args.file, "r", encoding="utf-8") as f:
+                with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                     input_data = f.read()
             except OSError as exc:
                 print(f"[E008] 文件读取失败: {exc}", file=sys.stderr)

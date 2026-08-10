@@ -18,6 +18,7 @@ import sys
 import tempfile
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义 (E001-E010)
 ERR_FILE_NOT_FOUND = "E001"      # 输入文件不存在
@@ -412,13 +413,24 @@ def main() -> int:
         description="micro-editor 终端文本编辑器",
         epilog="示例: python scripts/main.py file.txt"
     )
-    parser.add_argument("file", nargs="?", help="要编辑的文件路径")
+    parser.add_argument("--file", nargs="?", help="要编辑的文件路径")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     parser.add_argument("--preview", action="store_true", help="显示预览后退出")
     parser.add_argument("--lang", default="python", help="语法高亮语言")
     parser.add_argument("--output", "-o", help="输出文件路径（默认带 _out 后缀）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

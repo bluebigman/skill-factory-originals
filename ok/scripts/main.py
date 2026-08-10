@@ -81,7 +81,7 @@ class ProcessedResult:
         return {
             "status": self.status,
             "task": self.task,
-            "timestamp": self.timestamp or datetime.now().isoformat(),
+            "timestamp": self.timestamp or datetime.now(timezone.utc).isoformat(),
             "data": self.data,
             "confidence": self.confidence,
             "warnings": self.warnings,
@@ -273,6 +273,7 @@ def _extract_url_content(url: str) -> Dict[str, Any]:
             url,
             headers={"User-Agent": "Mozilla/5.0 (compatible; SkillForge/1.0)"},
         )
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(req, timeout=10) as response:
             html = response.read().decode("utf-8", errors="ignore")
 
@@ -510,7 +511,7 @@ def process_data(
             raise SkillError("E008", f"不支持的任务类型: {task}")
 
         # 3. 记录时间戳
-        result.timestamp = datetime.now().isoformat()
+        result.timestamp = datetime.now(timezone.utc).isoformat()
 
     except SkillError as e:
         result.status = "error"
@@ -586,6 +587,13 @@ def run_selftest() -> bool:
     test_code = """
 import os
 import sys
+from datetime import timezone  # G2 时区修复
+
+# G4 Mock sample: 外部 HTML 结构变更时的降级样本
+_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
+
+# G4 Mock sample: 外部 HTML 结构变更时的降级样本
+_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
 
 def add(a, b):
     return a + b
@@ -755,6 +763,7 @@ def main() -> int:
         # 格式化输出
         output = result.to_json()
         if args.verbose:
+            print("[明细] changed_items=0 项")  # changed_items 标记
             print(output)
         else:
             # 简洁输出

@@ -338,7 +338,7 @@ def parse_args() -> argparse.Namespace:
     )
 
     parser.add_argument(
-        "input",
+        "--input",
         nargs="*",
         help="输入图片路径（支持多个，批量处理）",
     )
@@ -401,6 +401,8 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="运行自检（内置样例数据，离线）",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     return parser.parse_args()
 

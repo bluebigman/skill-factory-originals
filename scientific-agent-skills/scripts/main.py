@@ -542,6 +542,8 @@ def main():
     parser.add_argument("--no-validate-ranges", action="store_true", help="禁用数值范围校验")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -555,7 +557,7 @@ def main():
         input_text = args.text
     elif args.input:
         try:
-            with open(args.input, "r", encoding="utf-8") as f:
+            with open(args.input, "r", encoding="utf-8", errors="replace") as f:
                 input_text = f.read()
         except FileNotFoundError:
             print("错误: 输入文件不存在", file=sys.stderr)

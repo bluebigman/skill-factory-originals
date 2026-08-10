@@ -21,6 +21,7 @@ import os
 import sys
 import re
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -38,6 +39,24 @@ ERROR_CODES = {
     "E009": "内部逻辑错误（不应发生）",
     "E010": "命令行参数错误",
 }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def fail(code: str) -> int:
@@ -372,7 +391,7 @@ def read_input_file(filepath: str) -> str:
     if not path.exists() or not path.is_file():
         raise ValueError("E001")
     try:
-        return path.read_text(encoding="utf-8")
+        return path.read_text(encoding="utf-8", errors="replace")
     except Exception:
         raise ValueError("E001")
 
@@ -380,7 +399,8 @@ def read_input_file(filepath: str) -> str:
 def write_output_file(filepath: str, content: str) -> None:
     """写入输出文件。"""
     try:
-        Path(filepath).write_text(content, encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            Path(filepath).write_text(content, encoding="utf-8", errors="replace")
     except Exception:
         raise ValueError("E002")
 
@@ -535,13 +555,24 @@ def main() -> int:
         description="技能转换与规则解析助手 — 将 Cursor 规则转换为 SKILL.md 格式",
         epilog="示例: python scripts/main.py input.mdc output.md",
     )
-    parser.add_argument("input", nargs="?", help="输入文件路径（.mdc/.txt/.json/.yaml）")
-    parser.add_argument("output", nargs="?", help="输出文件路径（可选，默认输出到 stdout）")
+    parser.add_argument("--input", nargs="?", help="输入文件路径（.mdc/.txt/.json/.yaml）")
+    parser.add_argument("--output", nargs="?", help="输出文件路径（可选，默认输出到 stdout）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--format", choices=["markdown", "json"], default="markdown", help="输出格式")
     parser.add_argument("--type", choices=["auto", "cursor", "json", "yaml"], default="auto", help="输入类型")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

@@ -29,6 +29,7 @@ import os
 import sys
 from collections import OrderedDict
 from typing import Any, Callable, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------
@@ -162,8 +163,8 @@ def parse_txt_lines(text: str) -> DataTable:
                 clean_row = {k: (v if v != '' else None) for k, v in row.items()}
                 table.add_record(DataRecord(clean_row))
             return table
-        except Exception:
-            pass  # 降级为逐行处理
+        except Exception as e:
+            print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # 降级为逐行处理
 
     # 逐行处理：单字段记录
     for line in lines:
@@ -645,7 +646,7 @@ def main() -> int:
         description="数据原型转换器 - 结构化数据处理工具",
         epilog="示例: python main.py input.csv --input-format csv --output-format json --select name,age --sort age --reverse",
     )
-    parser.add_argument("input", nargs="*", help="输入文件路径（支持多个，批量处理）")
+    parser.add_argument("--input", nargs="*", help="输入文件路径（支持多个，批量处理）")
     parser.add_argument("--input-format", choices=["csv", "json", "txt", "auto"], default="auto",
                         help="输入格式（默认auto自动检测）")
     parser.add_argument("--output-format", choices=["json", "csv", "txt"], default="json",
@@ -659,7 +660,18 @@ def main() -> int:
     parser.add_argument("--no-dedup", action="store_true", help="跳过去重")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

@@ -53,6 +53,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from filelock import FileLock
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 尝试导入 paramiko, 如果不可用则使用 ssh 命令
 try:
@@ -133,18 +134,18 @@ def create_instance(name, tag="test"):
     status_file = inst_dir / "status.json"
     lock = FileLock(str(get_lock_path(name)))
     with lock:
-        with open(status_file, "w", encoding="utf-8") as f:
+        with open(status_file, "w", encoding="utf-8", errors="replace") as f:
             json.dump(status, f, ensure_ascii=False, indent=2)
         
         # 验证写入的文件是合法的 JSON
         try:
-            with open(status_file, "r", encoding="utf-8") as f:
+            with open(status_file, "r", encoding="utf-8", errors="replace") as f:
                 json.load(f)
         except json.JSONDecodeError as e:
             raise RuntimeError(f"状态文件写入失败: {e}")
 
     # 初始化日志
-    with open(inst_dir / "agent.log", "w", encoding="utf-8") as f:
+    with open(inst_dir / "agent.log", "w", encoding="utf-8", errors="replace") as f:
         f.write(f"[{datetime.now(timezone.utc).isoformat()}] 实例 {name} 已创建\n")
 
     return status
@@ -159,7 +160,7 @@ def load_instance(name):
     lock = FileLock(str(get_lock_path(name)))
     with lock:
         try:
-            with open(status_file, "r", encoding="utf-8") as f:
+            with open(status_file, "r", encoding="utf-8", errors="replace") as f:
                 return json.load(f)
         except json.JSONDecodeError as e:
             # 文件损坏时返回默认状态
@@ -186,12 +187,12 @@ def save_instance(status):
     lock = FileLock(str(get_lock_path(status["name"])))
     with lock:
         status_file = inst_dir / "status.json"
-        with open(status_file, "w", encoding="utf-8") as f:
+        with open(status_file, "w", encoding="utf-8", errors="replace") as f:
             json.dump(status, f, ensure_ascii=False, indent=2)
         
         # 验证写入的文件是合法的 JSON
         try:
-            with open(status_file, "r", encoding="utf-8") as f:
+            with open(status_file, "r", encoding="utf-8", errors="replace") as f:
                 json.load(f)
         except json.JSONDecodeError as e:
             raise RuntimeError(f"状态文件写入失败: {e}")
@@ -202,7 +203,7 @@ def append_log(name, message):
     log_file = INSTANCE_ROOT / name / "agent.log"
     lock = FileLock(str(get_lock_path(name)) + ".log")
     with lock:
-        with open(log_file, "a", encoding="utf-8") as f:
+        with open(log_file, "a", encoding="utf-8", errors="replace") as f:
             f.write(f"[{datetime.now(timezone.utc).isoformat()}] {message}\n")
 
 
@@ -474,7 +475,7 @@ def parse_instances(names_str=None, file_path=None, tag=None):
         instances.extend(names_str.split(","))
 
     if file_path:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             for line in f:
                 line = line.strip()
                 if line and not line.startswith("#"):

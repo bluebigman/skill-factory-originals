@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse, re, sys, json, time, urllib.request, urllib.error, urllib.parse
 from pathlib import Path
 from datetime import datetime, timezone
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 HERE = Path(__file__).resolve().parent
 TRIGGERS = ["annual-report-summary", "年报解读", "财报分析", "投资要点摘要", ""]
@@ -113,10 +114,28 @@ class IndicatorExtractor:
         return results
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def load_spec() -> str:
     # 资产池/发布目录均为 SKILL.md 在技能根目录、scripts/ 为其子目录，故读父目录
     p = HERE.parent / "SKILL.md"
-    return p.read_text(encoding="utf-8") if p.exists() else ""
+    return p.read_text(encoding="utf-8", errors="replace") if p.exists() else ""
 
 
 def match_trigger(text: str):
@@ -127,7 +146,7 @@ def match_trigger(text: str):
 def extract_from_file(file_path: str) -> dict:
     """从文件读取文本并提取指标"""
     try:
-        text = Path(file_path).read_text(encoding='utf-8')
+        text = Path(file_path).read_text(encoding='utf-8', errors='replace')
     except Exception as e:
         raise ValueError(f"无法读取文件: {e}")
     extractor = IndicatorExtractor()
@@ -238,7 +257,8 @@ def selftest() -> int:
 
     # 测试5: 文件提取
     test_file = HERE / "test_annual_report.txt"
-    test_file.write_text(test_text, encoding='utf-8')
+    if not dry_run or getattr(args, "force", False):
+        test_file.write_text(test_text, encoding='utf-8', errors='replace')
     try:
         file_results = extract_from_file(str(test_file))
         assert 'roe' in file_results, "文件提取失败"
@@ -265,7 +285,8 @@ def selftest() -> int:
 
     # 测试7: 文件参数主流程调用
     test_file = HERE / "test_annual_report_cli.txt"
-    test_file.write_text(test_text, encoding='utf-8')
+    if not dry_run or getattr(args, "force", False):
+        test_file.write_text(test_text, encoding='utf-8', errors='replace')
     try:
         result = subprocess.run(
             [sys.executable, str(__file__), "--file", str(test_file), "--json"],
@@ -302,7 +323,13 @@ def main():
     ap.add_argument("--match", default="", help="输入文本，匹配触发词")
     ap.add_argument("--selftest", action="store_true", help="离线自检")
     ap.add_argument("--realtime", action="store_true", help="从真实数据源获取最新年报数据")
+    ap.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    ap.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    ap.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = ap.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         return selftest()

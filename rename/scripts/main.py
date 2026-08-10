@@ -606,6 +606,8 @@ def main():
                         choices=["auto", "windows", "macos", "linux"],
                         help="操作步骤的目标平台（默认: auto）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式

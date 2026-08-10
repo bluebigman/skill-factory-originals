@@ -18,6 +18,7 @@ import json
 import re
 import sys
 from typing import Any, Dict, List, Optional
+from datetime import timezone  # G2 时区修复
 
 # 错误码定义
 ERROR_CODES = {
@@ -103,7 +104,7 @@ class PlaywrightSkill:
             # 从文件读取
             if "file" in data:
                 try:
-                    with open(data["file"], "r", encoding="utf-8") as f:
+                    with open(data["file"], "r", encoding="utf-8", errors="replace") as f:
                         urls = [line.strip() for line in f if line.strip()]
                 except Exception:
                     return self._error("E004")
@@ -293,7 +294,7 @@ class PlaywrightSkill:
     def _now() -> str:
         """当前时间字符串（无外部依赖）。"""
         import datetime
-        return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        return datetime.datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
     @staticmethod
     def _error(code: str, detail: str = "") -> Dict[str, Any]:
@@ -457,6 +458,8 @@ def main() -> int:
     parser.add_argument("--format", default="markdown", choices=["markdown", "json"], help="输出格式")
     parser.add_argument("--fields", help="输出字段白名单（逗号分隔）")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

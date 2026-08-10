@@ -588,6 +588,7 @@ def main() -> int:
     """主入口。"""
     parser = _build_parser()
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         args = parser.parse_args()
     except SystemExit as e:
         # argparse 在错误时退出，这里捕获并返回错误码

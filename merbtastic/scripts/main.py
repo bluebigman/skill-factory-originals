@@ -14,6 +14,7 @@ import re
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -74,6 +75,24 @@ class RouteRule:
 
 # ---------- 功能模块 ----------
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def parse_content_source(source: Any) -> List[ContentItem]:
     """
     C1: 内容源解析
@@ -92,7 +111,7 @@ def parse_content_source(source: Any) -> List[ContentItem]:
             if not p.exists():
                 raise MerbtasticError("E002", f"文件不存在: {source}")
             try:
-                with open(p, "r", encoding="utf-8") as f:
+                with open(p, "r", encoding="utf-8", errors="replace") as f:
                     data = json.load(f)
             except MerbtasticError:
                 raise
@@ -292,7 +311,8 @@ def generate_static_site(
             html_path = rel_dir / f"{item.slug}.html"
             html = _render_html(item)
             try:
-                html_path.write_text(html, encoding="utf-8")
+                if not dry_run or getattr(args, "force", False):
+                    html_path.write_text(html, encoding="utf-8", errors="replace")
                 generated.append(html_path)
             except Exception as e:
                 raise MerbtasticError("E009", f"写入文件失败: {e}")
@@ -301,7 +321,8 @@ def generate_static_site(
         index_html = _render_index(items)
         index_path = out / "index.html"
         try:
-            index_path.write_text(index_html, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                index_path.write_text(index_html, encoding="utf-8", errors="replace")
             generated.append(index_path)
         except Exception as e:
             raise MerbtasticError("E009", f"写入文件失败: {e}")
@@ -316,7 +337,8 @@ def generate_static_site(
                 sitemap_lines.append(f"/{item.content_type}/{item.slug}.html")
         sitemap_path = out / "sitemap.txt"
         try:
-            sitemap_path.write_text("\n".join(sitemap_lines), encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                sitemap_path.write_text("\n".join(sitemap_lines), encoding="utf-8", errors="replace")
             generated.append(sitemap_path)
         except Exception as e:
             raise MerbtasticError("E009", f"写入文件失败: {e}")
@@ -498,7 +520,7 @@ def _selftest() -> int:
         assert any(f.name == "sitemap.txt" for f in generated_files), "应生成 sitemap.txt"
         # 验证文件内容非空
         for f in generated_files:
-            content = f.read_text(encoding="utf-8")
+            content = f.read_text(encoding="utf-8", errors="replace")
             assert len(content) > 20, f"文件 {f.name} 内容过短"
         print(f"    ✓ 生成成功，共 {len(generated_files)} 个文件")
 
@@ -554,7 +576,18 @@ def main() -> int:
     parser.add_argument("--upstream", default="127.0.0.1:4000", help="Nginx 反向代理上游地址")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检并退出")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         try:

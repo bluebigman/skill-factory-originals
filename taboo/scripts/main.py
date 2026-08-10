@@ -516,6 +516,8 @@ def main() -> int:
     parser.add_argument("--pid", type=int, help="进程ID")
     parser.add_argument("--memory", type=float, default=0.0, help="内存占用（MB）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式

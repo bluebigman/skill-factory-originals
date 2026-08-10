@@ -440,6 +440,8 @@ def main():
     parser.add_argument("--resume", action="store_true", help="启用断点续跑")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
     args = parser.parse_args()
     
     # 自检模式

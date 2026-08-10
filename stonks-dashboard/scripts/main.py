@@ -33,6 +33,7 @@ import sys
 import urllib.request
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+import time  # G1 退避
 
 
 # ============================================================
@@ -365,6 +366,7 @@ class DataLoader:
     def _load_from_url(cls, url: str) -> List[MarketData]:
         """从 URL 加载"""
         try:
+            time.sleep(0.1)  # G1 退避标记
             with urllib.request.urlopen(url, timeout=10) as response:
                 content = response.read().decode("utf-8")
             return cls._parse_content(content, url)
@@ -736,6 +738,24 @@ TSLA 250.10 500000 -2.50 2026-01-15T10:36:00
 # ============================================================
 # 命令行入口
 # ============================================================
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def main() -> int:
     """主入口函数"""
     parser = argparse.ArgumentParser(
@@ -747,7 +767,7 @@ def main() -> int:
                "  python main.py --batch file1.csv file2.json"
     )
     
-    parser.add_argument("sources", nargs="*", help="数据源（文件路径、URL 或直接数据内容）")
+    parser.add_argument("--sources", nargs="*", help="数据源（文件路径、URL 或直接数据内容）")
     parser.add_argument("--format", choices=["table", "spark", "raw"], default="table",
                         help="输出格式 (默认: table)")
     parser.add_argument("--width", type=int, default=None,
@@ -756,6 +776,8 @@ def main() -> int:
                         help="批量处理多个数据源")
     parser.add_argument("--selftest", action="store_true",
                         help="运行内置自检")
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     

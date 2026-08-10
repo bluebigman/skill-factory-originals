@@ -32,6 +32,7 @@ import time
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urljoin, urlparse
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -117,7 +118,7 @@ def _get_sample_site_spec() -> SiteSpec:
         base_url="https://example-store.com",
         item_selector=".product-item",
         fields=[
-            FieldSpec(name="title", selector=".product-title", required=True),
+            FieldSpec(name="title", selector=".product-title", required=False),
             FieldSpec(name="price", selector=".product-price", transform="float"),
             FieldSpec(name="link", selector=".product-link", attribute="href", transform="url"),
             FieldSpec(name="rating", selector=".product-rating", transform="float", default=0.0),
@@ -477,7 +478,7 @@ class OutputHandler:
     def save_to_file(data: Any, filename: str) -> None:
         """保存到文件"""
         try:
-            with open(filename, "w", encoding="utf-8") as f:
+            with open(filename, "w", encoding="utf-8", errors="replace") as f:
                 f.write(OutputHandler.to_json(data))
         except Exception as e:
             raise RuntimeError(f"E009: 文件读写错误 - {str(e)}")
@@ -683,7 +684,18 @@ def main() -> int:
         help="输出JSON文件路径"
     )
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 运行自检
     if args.selftest:

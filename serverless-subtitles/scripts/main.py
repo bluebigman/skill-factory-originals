@@ -15,6 +15,7 @@ import time
 import re
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -80,6 +81,24 @@ class SubtitleResult:
 # ---------------------------------------------------------------------------
 # 核心逻辑：纯函数/无副作用
 # ---------------------------------------------------------------------------
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _normalize_text(raw: str) -> str:
     """清洗文本：去首尾空白、压缩多余空格。"""
     if not raw:
@@ -269,7 +288,7 @@ def read_input_file(path: str) -> str:
     if not os.path.isfile(path):
         raise SkillError("E006", f"文件不存在: {path}")
     try:
-        with open(path, "r", encoding="utf-8") as f:
+        with open(path, "r", encoding="utf-8", errors="replace") as f:
             return f.read()
     except Exception as e:
         raise SkillError("E006", f"读取失败: {e}")
@@ -278,7 +297,7 @@ def read_input_file(path: str) -> str:
 def write_output_file(path: str, content: str) -> None:
     """写入输出文件。"""
     try:
-        with open(path, "w", encoding="utf-8") as f:
+        with open(path, "w", encoding="utf-8", errors="replace") as f:
             f.write(content)
     except Exception as e:
         raise SkillError("E007", f"写入失败: {e}")
@@ -441,7 +460,18 @@ def main() -> int:
         help="输出文件路径（可选，默认打印到 stdout）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # --- 自检模式 ---
     if args.selftest:

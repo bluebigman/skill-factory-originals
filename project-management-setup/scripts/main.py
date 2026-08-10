@@ -434,6 +434,7 @@ def main() -> int:
 
     # 解析参数
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         args = parser.parse_args()
     except SystemExit as exc:
         # argparse 遇到错误会抛 SystemExit

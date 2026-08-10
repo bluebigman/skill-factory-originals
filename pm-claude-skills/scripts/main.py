@@ -20,6 +20,7 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
 
 
 # 错误码定义
@@ -55,7 +56,7 @@ class ProductData:
         self.fields: Dict[str, Any] = {}
         self.confidence: Dict[str, float] = {}
         self.metadata: Dict[str, Any] = {
-            "created_at": datetime.now().isoformat(),
+            "created_at": datetime.now(timezone.utc).isoformat(),
             "version": "1.0.1"
         }
 
@@ -805,6 +806,8 @@ def main():
         metavar="DATA_JSON",
         help="分析 JSON 格式的数据集"
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     

@@ -34,6 +34,7 @@ import sys
 import tempfile
 from dataclasses import dataclass, field, asdict
 from typing import Any, Callable, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -537,7 +538,13 @@ def handle_selftest() -> int:
 
 def main() -> int:
     parser = build_parser()
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = parser.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -584,7 +591,7 @@ def main() -> int:
 
     try:
         # 加载输入
-        with open(args.input, "r", encoding="utf-8") as f:
+        with open(args.input, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()
 
         if args.input_type == "csv":
@@ -616,7 +623,7 @@ def main() -> int:
             output_text = engine.export_csv(results)
 
         if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
+            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                 f.write(output_text)
             print(f"结果已写入: {args.output}")
         else:

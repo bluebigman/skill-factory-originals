@@ -15,6 +15,7 @@ from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -329,15 +330,18 @@ class SelfTest:
             config_dir.mkdir()
 
             # 写入模拟文件
-            (project_dir / "package.json").write_text(
+            if not dry_run or getattr(args, "force", False):
+                (project_dir / "package.json").write_text(
                 '{"name": "demo", "scripts": {"build": "tsc", "test": "jest"}}',
                 encoding="utf-8"
             )
-            (project_dir / "README.md").write_text(
+            if not dry_run or getattr(args, "force", False):
+                (project_dir / "README.md").write_text(
                 "# Demo Project\n规则: 使用 TypeScript 编写",
                 encoding="utf-8"
             )
-            (src_dir / "main.ts").write_text(
+            if not dry_run or getattr(args, "force", False):
+                (src_dir / "main.ts").write_text(
                 "// TODO: 实现主逻辑\n// HACK: 临时绕过 bug\nconst x = 1;",
                 encoding="utf-8"
             )
@@ -398,7 +402,7 @@ def main() -> int:
         epilog="示例: python main.py /path/to/project -o output.md"
     )
     parser.add_argument(
-        "path",
+        "--path",
         nargs="?",
         help="目标代码库路径",
         default=None
@@ -414,7 +418,18 @@ def main() -> int:
         help="运行内置自检并退出"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

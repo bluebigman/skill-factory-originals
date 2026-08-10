@@ -31,6 +31,7 @@ import re
 import sys
 import uuid
 from datetime import datetime
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ------------------------------------------------------------
@@ -357,7 +358,7 @@ def format_output(records, output_format):
 def read_input_file(file_path):
     """读取输入文件内容。"""
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             return f.read()
     except FileNotFoundError as e:
         raise ValueError(f"E006: 文件不存在: {file_path}") from e
@@ -368,7 +369,7 @@ def read_input_file(file_path):
 def write_output_file(file_path, content):
     """写入输出文件。"""
     try:
-        with open(file_path, "w", encoding="utf-8") as f:
+        with open(file_path, "w", encoding="utf-8", errors="replace") as f:
             f.write(content)
     except Exception as e:
         raise ValueError(f"E005: 写入文件失败: {e}") from e
@@ -514,7 +515,18 @@ def main():
     parser.add_argument("-t", "--text", help="直接传入文本（与 -i 二选一）")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

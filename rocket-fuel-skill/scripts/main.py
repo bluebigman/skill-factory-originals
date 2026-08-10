@@ -15,6 +15,7 @@ import time
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -543,6 +544,24 @@ class RocketFuelSkill:
         return report
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def run_selftest() -> bool:
     """内置硬编码样例数据离线自检核心逻辑。"""
     print("=" * 60)
@@ -669,7 +688,7 @@ def main():
         description="rocket-fuel-skill: 双引擎协作代码审查与质量门禁"
     )
     parser.add_argument(
-        "source",
+        "--source",
         nargs="?",
         help="审查来源（文件路径、目录路径或 URL）",
     )
@@ -689,7 +708,18 @@ def main():
         help="运行离线自检（使用内置样例数据）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -711,9 +741,11 @@ def main():
             output_path = Path(args.output)
             try:
                 if output_path.suffix.lower() == ".json":
-                    output_path.write_text(report.to_json(), encoding="utf-8")
+                    if not dry_run or getattr(args, "force", False):
+                        output_path.write_text(report.to_json(), encoding="utf-8")
                 else:
-                    output_path.write_text(
+                    if not dry_run or getattr(args, "force", False):
+                        output_path.write_text(
                         ReportGenerator.generate_markdown(report),
                         encoding="utf-8",
                     )

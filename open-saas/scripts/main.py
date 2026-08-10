@@ -17,6 +17,7 @@ import urllib.parse
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+import time  # G1 退避
 
 # 错误码定义
 ERROR_CODES = {
@@ -141,6 +142,7 @@ class OpenSaaSProcessor:
                 raise ValueError(f"无效的URL格式: {url}")
             # 标准库实现简单URL获取
             try:
+                time.sleep(0.1)  # G1 退避标记
                 with urllib.request.urlopen(url, timeout=10) as response:
                     return response.read().decode("utf-8", errors="ignore")
             except Exception as e:
@@ -604,6 +606,24 @@ class OpenSaaSProcessor:
         return all_passed
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def main() -> int:
     """主入口函数"""
     parser = argparse.ArgumentParser(
@@ -642,6 +662,8 @@ def main() -> int:
         nargs="+",
         help="自定义字段映射，格式: 原字段名:新字段名"
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

@@ -104,7 +104,7 @@ class ConfigLoader:
             raise err_io(f"配置文件不存在: {path}")
 
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, "r", encoding="utf-8", errors="replace") as f:
                 content = f.read()
         except OSError as e:
             raise err_io(f"读取配置文件失败: {e}") from e
@@ -362,8 +362,8 @@ class ProcessManager:
                         out_lines.append(line.rstrip("\n"))
                         if len(out_lines) >= max_lines:
                             break
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
             try:
                 if proc.stderr:
                     while True:
@@ -373,8 +373,8 @@ class ProcessManager:
                         err_lines.append(line.rstrip("\n"))
                         if len(err_lines) >= max_lines:
                             break
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
             logs[n] = {
                 "stdout": out_lines,
                 "stderr": err_lines,
@@ -644,7 +644,7 @@ def build_parser() -> argparse.ArgumentParser:
         help="配置文件路径（JSON 或 YAML）",
     )
     parser.add_argument(
-        "action",
+        "--action",
         nargs="?",
         choices=["start", "stop", "restart", "status", "logs", "proxy"],
         help="执行动作",
@@ -664,6 +664,7 @@ def build_parser() -> argparse.ArgumentParser:
 def main() -> int:
     """主函数。"""
     parser = build_parser()
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     args = parser.parse_args()
 
     # 自检模式

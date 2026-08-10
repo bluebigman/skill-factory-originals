@@ -389,6 +389,8 @@ def main() -> int:
     parser.add_argument("--batch", type=int, default=1, help="批量采集页数（默认 1）")
     parser.add_argument("--check", action="store_true", help="检查字段完整性")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式

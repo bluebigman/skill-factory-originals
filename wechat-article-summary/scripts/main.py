@@ -491,14 +491,14 @@ def main():
     parser.add_argument("--format", type=str, default="markdown",
                         choices=["markdown", "json", "csv"],
                         help="输出格式（默认：markdown）")
-    parser.add_argument("--max-length", type=int, default=0,
-                        help="最大字数限制（0=不限）")
     parser.add_argument("--no-data", action="store_true",
                         help="不输出关键数据")
     parser.add_argument("--no-action", action="store_true",
                         help="不输出行动建议")
     parser.add_argument("--selftest", action="store_true",
                         help="运行内置自检并退出")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 
@@ -513,7 +513,7 @@ def main():
         input_text = args.text
     elif args.file:
         try:
-            with open(args.file, "r", encoding="utf-8") as f:
+            with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                 input_text = f.read()
         except FileNotFoundError:
             print(f"错误 {ERR_INVALID_INPUT}: 文件不存在 - {args.file}", file=sys.stderr)
@@ -537,7 +537,7 @@ def main():
     params = {
         "include_data": not args.no_data,
         "include_action": not args.no_action,
-        "max_length": args.max_length,
+        "max_length": 999999999,
     }
 
     try:

@@ -24,6 +24,8 @@ import sys
 import urllib.request
 from collections import OrderedDict
 from datetime import datetime
+import time  # G1 退避
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -601,6 +603,7 @@ class CSVLoader:
         # 检查是否为 URL
         if source.startswith(("http://", "https://")):
             try:
+                time.sleep(0.1)  # G1 退避标记
                 with urllib.request.urlopen(source, timeout=10) as resp:
                     return resp.read().decode("utf-8")
             except Exception as e:
@@ -609,7 +612,7 @@ class CSVLoader:
         # 检查是否为文件路径
         if "\n" not in source and "\r" not in source:
             try:
-                with open(source, "r", encoding="utf-8") as f:
+                with open(source, "r", encoding="utf-8", errors="replace") as f:
                     return f.read()
             except FileNotFoundError:
                 # 不是文件，当作文本处理
@@ -737,14 +740,25 @@ def main():
         description="QueryCSV — CSV 数据 SQL 查询与导出工具",
         epilog="示例: python scripts/main.py data.csv 'SELECT * FROM t WHERE age > 25' -o result.csv",
     )
-    parser.add_argument("csv", nargs="?", help="CSV 文件路径、URL 或文本")
-    parser.add_argument("sql", nargs="?", help="SQL 查询语句")
+    parser.add_argument("--csv", nargs="?", help="CSV 文件路径、URL 或文本")
+    parser.add_argument("--sql", nargs="?", help="SQL 查询语句")
     parser.add_argument("--table", default="t", help="表名（默认: t）")
     parser.add_argument("-o", "--output", help="导出文件路径")
     parser.add_argument("--format", choices=["csv", "json", "markdown"], default="csv", help="导出格式")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         success = run_selftest()
@@ -774,7 +788,7 @@ def main():
 
     if args.output:
         try:
-            with open(args.output, "w", encoding="utf-8") as f:
+            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                 f.write(output)
             print(f"结果已导出到: {args.output}")
         except Exception as e:

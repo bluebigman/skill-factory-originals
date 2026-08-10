@@ -480,7 +480,7 @@ def main() -> int:
         epilog="示例: python main.py '列出当前目录文件'",
     )
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="自然语言指令",
     )
@@ -505,6 +505,8 @@ def main() -> int:
         action="store_true",
         help="以 JSON 格式输出",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

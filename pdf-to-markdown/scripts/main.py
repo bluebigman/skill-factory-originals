@@ -11,6 +11,7 @@ import re
 import json
 import argparse
 from typing import List, Dict, Any, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -28,6 +29,24 @@ ERROR_CODES = {
     "E009": "外部依赖缺失：需要安装额外库",
     "E010": "未知错误",
 }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def err(code: str, msg: str = "") -> None:
@@ -354,7 +373,7 @@ def main():
         epilog="示例: python main.py input.pdf -o output.md"
     )
     parser.add_argument(
-        "input", 
+        "--input", 
         nargs="?", 
         help="输入 PDF 文件路径"
     )
@@ -369,7 +388,18 @@ def main():
         help="运行内置自检并退出"
     )
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 自检模式
     if args.selftest:

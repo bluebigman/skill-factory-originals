@@ -32,6 +32,7 @@ import sys
 import tempfile
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -585,7 +586,18 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         help="运行内置自检（不依赖外部输入）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args(argv)
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 参数合法性检查
     if not args.selftest:
@@ -635,7 +647,7 @@ def main(argv: Optional[List[str]] = None) -> int:
                     print(f"E008: 输出目录不可写 — {str(exc)}", file=sys.stderr)
                     return 8
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(markdown_output)
                 print(f"文章已写入: {args.output}")
             except OSError as exc:

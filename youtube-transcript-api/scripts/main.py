@@ -525,24 +525,24 @@ def _build_parser() -> argparse.ArgumentParser:
 
     # list 子命令
     parser_list = subparsers.add_parser("list", help="列出视频可用的字幕轨道")
-    parser_list.add_argument("video", help="YouTube 视频 URL 或视频 ID")
+    parser_list.add_argument("--video", help="YouTube 视频 URL 或视频 ID")
     parser_list.set_defaults(func=_cmd_list)
 
     # get 子命令
     parser_get = subparsers.add_parser("get", help="获取结构化转写数据")
-    parser_get.add_argument("video", help="YouTube 视频 URL 或视频 ID")
+    parser_get.add_argument("--video", help="YouTube 视频 URL 或视频 ID")
     parser_get.add_argument("--language", "-l", default=None, help="指定语言代码或名称")
     parser_get.set_defaults(func=_cmd_get)
 
     # text 子命令
     parser_text = subparsers.add_parser("text", help="获取纯文本转写内容")
-    parser_text.add_argument("video", help="YouTube 视频 URL 或视频 ID")
+    parser_text.add_argument("--video", help="YouTube 视频 URL 或视频 ID")
     parser_text.add_argument("--language", "-l", default=None, help="指定语言代码或名称")
     parser_text.set_defaults(func=_cmd_text)
 
     # json 子命令
     parser_json = subparsers.add_parser("json", help="以 JSON 格式输出转写数据")
-    parser_json.add_argument("video", help="YouTube 视频 URL 或视频 ID")
+    parser_json.add_argument("--video", help="YouTube 视频 URL 或视频 ID")
     parser_json.add_argument("--language", "-l", default=None, help="指定语言代码或名称")
     parser_json.set_defaults(func=_cmd_json)
 
@@ -566,6 +566,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser = _build_parser()
 
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         args = parser.parse_args(argv)
         if not hasattr(args, "func"):
             parser.print_help()

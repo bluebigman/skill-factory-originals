@@ -18,6 +18,7 @@ import sys
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+import time  # G1 退避
 
 # ========== 错误码定义 ==========
 ERROR_CODES = {
@@ -188,6 +189,7 @@ def load_url(url: str) -> str:
     """获取 URL 内容，返回文本"""
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "scripd/1.0"})
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(req, timeout=15) as resp:
             data = resp.read()
             if len(data) > 10 * 1024 * 1024:
@@ -535,6 +537,8 @@ def main() -> int:
 
     # 自检参数
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

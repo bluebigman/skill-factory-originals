@@ -14,6 +14,7 @@ import re
 import sys
 from collections import OrderedDict
 from typing import Any, Dict, List, Optional, Tuple, Union
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -45,6 +46,24 @@ class SchemrError(Exception):
 # ============================================================
 # 类型推断模块
 # ============================================================
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def infer_type(value: Any) -> str:
     """
@@ -281,7 +300,7 @@ def load_from_file(file_path: str) -> Any:
         raise SchemrError("E002", f"文件不存在: {file_path}")
 
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()
     except Exception as exc:
         raise SchemrError("E002", f"文件读取失败: {exc}") from exc
@@ -415,7 +434,7 @@ def process_input(
     # 4. 写入文件（如果指定）
     if output_file:
         try:
-            with open(output_file, "w", encoding="utf-8") as f:
+            with open(output_file, "w", encoding="utf-8", errors="replace") as f:
                 f.write(result)
         except Exception as exc:
             raise SchemrError("E009", f"输出文件写入失败: {exc}") from exc
@@ -649,7 +668,18 @@ def main() -> int:
         help="运行内置自测（无需输入）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自测模式
     if args.selftest:

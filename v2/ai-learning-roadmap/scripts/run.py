@@ -285,3 +285,10 @@ def generate_roadmap(level: str, goal: str, weeks: int, hours_per_week: int) -> 
             for i in range(resources_per_week):
                 idx = (start_idx + i) % total_resources
                 res = resources[idx]
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    args = ap.parse_args()

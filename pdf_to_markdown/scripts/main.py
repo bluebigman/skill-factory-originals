@@ -14,6 +14,7 @@ import re
 import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -309,7 +310,8 @@ def process_pdf_file(pdf_path: Path, output_dir: Path) -> Dict:
         # 写入输出文件
         output_file = output_dir / (pdf_path.stem + ".md")
         try:
-            output_file.write_text(markdown_content, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                output_file.write_text(markdown_content, encoding="utf-8")
             result["output"] = str(output_file)
         except Exception as exc:
             raise PDFConverterError("E007", f"写入文件失败: {exc}") from exc
@@ -341,9 +343,10 @@ def process_directory(input_dir: Path, output_dir: Path) -> List[Dict]:
     if error_log:
         log_file = output_dir / "error_log.json"
         try:
-            log_file.write_text(json.dumps(error_log, ensure_ascii=False, indent=2), encoding="utf-8")
-        except Exception:
-            pass  # 日志写入失败不阻塞主流程
+            if not dry_run or getattr(args, "force", False):
+                log_file.write_text(json.dumps(error_log, ensure_ascii=False, indent=2), encoding="utf-8")
+        except Exception as e:
+            print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # 日志写入失败不阻塞主流程
 
     return results
 
@@ -422,7 +425,8 @@ def run_selftest() -> bool:
     # 测试非PDF文件
     try:
         temp_file = Path("test_not_pdf.txt")
-        temp_file.write_text("This is not a PDF", encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            temp_file.write_text("This is not a PDF", encoding="utf-8")
         try:
             parse_pdf_simple(temp_file)
             print("  [FAIL] 错误处理: 非PDF文件未抛出异常")
@@ -454,11 +458,11 @@ def main():
         epilog="示例: python main.py input_dir output_dir --selftest"
     )
     parser.add_argument(
-        "input", nargs="?", default=None,
+        "--input", nargs="?", default=None,
         help="输入路径（目录或PDF文件）"
     )
     parser.add_argument(
-        "output", nargs="?", default="output",
+        "--output", nargs="?", default="output",
         help="输出目录（默认: ./output）"
     )
     parser.add_argument(
@@ -469,7 +473,18 @@ def main():
         "--version", action="version", version="pdf_to_markdown 2.0.4"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

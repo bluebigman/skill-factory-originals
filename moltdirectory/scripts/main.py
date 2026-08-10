@@ -266,15 +266,15 @@ def build_parser() -> argparse.ArgumentParser:
 
     # search 命令
     search_parser = subparsers.add_parser("search", help="检索技能")
-    search_parser.add_argument("--keyword", type=str, required=True, help="搜索关键词")
+    search_parser.add_argument("--keyword", type=str, required=False, help="搜索关键词")
 
     # detail 命令
     detail_parser = subparsers.add_parser("detail", help="查看技能详情")
-    detail_parser.add_argument("--id", type=str, required=True, help="技能ID")
+    detail_parser.add_argument("--id", type=str, required=False, help="技能ID")
 
     # batch 命令
     batch_parser = subparsers.add_parser("batch", help="批量查询")
-    batch_parser.add_argument("--queries", type=str, nargs="+", required=True, help="多个查询词或ID")
+    batch_parser.add_argument("--queries", type=str, nargs="+", required=False, help="多个查询词或ID")
 
     # 全局输出格式选项
     parser.add_argument("--format", type=str, choices=["json", "text"], default="json",
@@ -419,6 +419,7 @@ def main() -> int:
     """主函数。解析参数并执行相应操作。"""
     parser = build_parser()
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         args = parser.parse_args()
     except SystemExit as e:
         # argparse 在 -h 或错误参数时退出

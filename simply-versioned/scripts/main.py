@@ -24,6 +24,7 @@ import sys
 import copy
 from datetime import datetime, timezone
 from collections import OrderedDict
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -77,7 +78,7 @@ class VersionStorage:
     def _load_from_file(self):
         """从文件加载版本数据"""
         try:
-            with open(self._storage_path, "r", encoding="utf-8") as f:
+            with open(self._storage_path, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
                 self._versions = OrderedDict(data.get("versions", {}))
                 self._current_version = data.get("current_version", 0)
@@ -94,7 +95,7 @@ class VersionStorage:
                 "versions": dict(self._versions),
                 "current_version": self._current_version,
             }
-            with open(self._storage_path, "w", encoding="utf-8") as f:
+            with open(self._storage_path, "w", encoding="utf-8", errors="replace") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
         except (IOError, OSError) as exc:
             raise VersionError("E005", f"无法写入存储文件: {exc}") from exc

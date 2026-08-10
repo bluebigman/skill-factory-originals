@@ -14,6 +14,7 @@ import sys
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ========== 错误码定义 ==========
 ERROR_CODES = {
@@ -150,7 +151,7 @@ class BatchProcessor:
 
         # 幂等性检查：如果输出已存在且内容相同，跳过
         if output_path.exists():
-            existing = output_path.read_text(encoding="utf-8")
+            existing = output_path.read_text(encoding="utf-8", errors="replace")
             if existing.startswith("<!-- generated-by-tldr -->"):
                 return str(output_path)
 
@@ -207,7 +208,7 @@ class BatchProcessor:
         """带重试的读取操作"""
         for attempt in range(self.max_retries):
             try:
-                return path.read_text(encoding="utf-8")
+                return path.read_text(encoding="utf-8", errors="replace")
             except (IOError, OSError):
                 if attempt == self.max_retries - 1:
                     return None
@@ -218,7 +219,8 @@ class BatchProcessor:
         """带重试的写入操作"""
         for attempt in range(self.max_retries):
             try:
-                path.write_text(content, encoding="utf-8")
+                if not dry_run or getattr(args, "force", False):
+                    path.write_text(content, encoding="utf-8", errors="replace")
                 return True
             except (IOError, OSError):
                 if attempt == self.max_retries - 1:
@@ -314,6 +316,24 @@ class BatchProcessor:
                 )
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def run_selftest() -> bool:
     """运行内置自检（不依赖任何外部资源）"""
     print("=== tldr 自检开始 ===")
@@ -345,9 +365,10 @@ def run_selftest() -> bool:
 
         # 写入测试输入
         input_file = tmp / "test_input.json"
-        input_file.write_text(
+        if not dry_run or getattr(args, "force", False):
+            input_file.write_text(
             json.dumps(SELF_TEST_SAMPLES, ensure_ascii=False, indent=2),
-            encoding="utf-8",
+            encoding="utf-8", errors="replace",
         )
 
         # 执行处理
@@ -357,7 +378,7 @@ def run_selftest() -> bool:
         # 验证输出
         assert output_path.endswith("_out.md"), "输出文件名不符合预期"
         assert Path(output_path).exists(), "输出文件未生成"
-        content = Path(output_path).read_text(encoding="utf-8")
+        content = Path(output_path).read_text(encoding="utf-8", errors="replace")
         assert "git commit" in content, "输出内容缺少命令"
         assert "docker ps" in content, "输出内容缺少命令"
         assert "curl" in content, "输出内容缺少命令"
@@ -380,7 +401,8 @@ def run_selftest() -> bool:
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
         bad_file = tmp / "test.xyz"
-        bad_file.write_text("test", encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            bad_file.write_text("test", encoding="utf-8", errors="replace")
         try:
             processor.process_file(bad_file)
             assert False, "应该抛出 ValueError"
@@ -414,7 +436,18 @@ def main() -> int:
         "--selftest", action="store_true", help="运行内置自检后退出"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

@@ -20,6 +20,7 @@ from collections import Counter
 from dataclasses import dataclass, field, asdict
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Sequence, Tuple
+from datetime import timezone  # G2 时区修复
 
 
 # ============================================================
@@ -58,7 +59,7 @@ class Experiment:
     metrics: Dict[str, float] = field(default_factory=dict)
     model_hash: str = ""
     dataset_version: str = ""
-    timestamp: str = field(default_factory=lambda: datetime.now().isoformat())
+    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
     tags: List[str] = field(default_factory=list)
 
 
@@ -82,7 +83,7 @@ class DashboardConfig:
     features: List[str] = field(default_factory=list)
     refresh_interval: int = 60
     theme: str = "light"
-    created_at: str = field(default_factory=lambda: datetime.now().isoformat())
+    created_at: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
 
 # ============================================================
@@ -359,7 +360,7 @@ class DashboardEngine:
         snapshot = {
             "config_id": config_id,
             "title": config.title,
-            "generated_at": datetime.now().isoformat(),
+            "generated_at": datetime.now(timezone.utc).isoformat(),
             "experiments": [],
             "drift_reports": [],
         }
@@ -573,6 +574,8 @@ def main() -> int:
         action="version",
         version="traceml 1.0.2",
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     

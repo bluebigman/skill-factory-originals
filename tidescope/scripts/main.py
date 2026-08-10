@@ -15,6 +15,7 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+import time  # G1 退避
 
 
 # ============================================================
@@ -264,6 +265,7 @@ def process_url(url: str, output_format: str = "json", template: Optional[Dict[s
     """
     try:
         import urllib.request
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(url, timeout=5) as response:
             text = response.read().decode("utf-8", errors="replace")
     except Exception as e:
@@ -415,6 +417,8 @@ def main() -> int:
                         help="输出格式（默认: json）")
     parser.add_argument("--template", type=str, help="自定义字段模板 JSON 字符串")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

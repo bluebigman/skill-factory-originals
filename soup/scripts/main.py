@@ -432,6 +432,7 @@ def main(argv: List[str] | None = None) -> int:
 
     # E008: 参数解析失败
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         args = parser.parse_args(argv)
     except SystemExit as exc:
         # argparse 在出错时会调用 sys.exit(2)

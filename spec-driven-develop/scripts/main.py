@@ -18,6 +18,7 @@ import sys
 import uuid
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
 
 # 错误码定义
 ERROR_CODES = {
@@ -153,7 +154,7 @@ class SpecDrivenProcessor:
         # 9. 组装结果
         result = {
             "meta": {
-                "generated_at": datetime.now().isoformat(),
+                "generated_at": datetime.now(timezone.utc).isoformat(),
                 "spec_version": "1.0.1",
                 "total_requirements": len(requirements),
                 "total_tasks": len(tasks),
@@ -374,7 +375,7 @@ class SpecDrivenProcessor:
         """生成架构决策记录摘要"""
         return {
             "title": "架构决策记录摘要",
-            "date": datetime.now().strftime("%Y-%m-%d"),
+            "date": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
             "modules": list(architecture.keys()),
             "total_tasks": len(tasks),
             "decisions": [
@@ -413,6 +414,24 @@ class SpecDrivenProcessor:
         }
 
         return {"issues": issues, "pr_template": pr_template}
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def format_output(result: Dict[str, Any], output_format: str = "json") -> str:
@@ -575,6 +594,8 @@ def main() -> None:
         help="输出格式（默认: json）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -588,7 +609,7 @@ def main() -> None:
         input_text = args.input
     elif args.file:
         try:
-            with open(args.file, "r", encoding="utf-8") as f:
+            with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                 input_text = f.read()
         except FileNotFoundError:
             print("错误: 文件不存在")

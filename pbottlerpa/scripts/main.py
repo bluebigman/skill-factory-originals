@@ -402,7 +402,7 @@ class RPAEngine:
 def load_workflow_config(filepath: str) -> WorkflowConfig:
     """从 JSON 文件加载流程配置。"""
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             raw = json.load(f)
     except FileNotFoundError as exc:
         raise RPAError("E002", f"配置文件不存在: {filepath}") from exc
@@ -616,6 +616,8 @@ def main() -> int:
         default=30,
         help="超时时间（秒），默认 30",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

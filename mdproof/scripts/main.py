@@ -28,6 +28,7 @@ import zlib
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ──────────────────────────── 错误码定义 ────────────────────────────
 # E001: 文件不存在
@@ -62,6 +63,24 @@ class MDProofError(Exception):
 
 # ──────────────────────────── 工具函数 ────────────────────────────
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def read_file(filepath: str) -> str:
     """读取文件内容，返回字符串。
 
@@ -81,11 +100,11 @@ def read_file(filepath: str) -> str:
         raise MDProofError("E001", f"路径不是文件: {filepath}")
     try:
         # 尝试 UTF-8 编码读取
-        return path.read_text(encoding="utf-8")
+        return path.read_text(encoding="utf-8", errors="replace")
     except UnicodeDecodeError:
         # 回退到 GBK 编码
         try:
-            return path.read_text(encoding="gbk")
+            return path.read_text(encoding="gbk", errors="replace")
         except Exception as exc:
             raise MDProofError("E002", f"文件读取失败（编码不支持）: {filepath}") from exc
     except Exception as exc:

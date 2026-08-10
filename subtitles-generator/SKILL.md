@@ -9,7 +9,7 @@ description: 从视频链接提取字幕，生成带时间轴的转录文本。
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/subtitles-generator
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/subtitles-generator
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -58,7 +58,7 @@ trigger_words: ["视频字幕", "字幕生成", "转录文本", "视频转文字
 
 | 项目 | 说明 |
 |------|------|
-| 输入来源 | 本地文件路径、http(s) 视频直链、youtube/bilibili 等平台分享链接 |
+| 输入来源 | 本地文件路径、(s) 视频直链、youtube/bilibili 等平台分享链接 |
 | 输出目录 | 默认与输入文件同目录，可通过 `--output-dir` 指定 |
 | 时间轴精度 | 毫秒级（SRT 标准格式） |
 | 置信度阈值 | 低于 0.6 的片段会标注 `[低置信度]` 前缀 |

@@ -5,7 +5,7 @@
 slug: receipt-scanner-in-opencv
 name: receipt-scanner-in-opencv
 displayName: 票据扫描 文本分割 结构化提取
-description: 基于OpenCV的票据图像文本分割与结构化提取工具。
+description: 基于OpenCV的票据文本分割与结构化提取工具。
 version: 1.0.2
 license: MIT
 source_project: original
@@ -16,7 +16,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: VisionCraft Studio
 agent_created: true
-trigger_words: ["发票识别", "票据扫描", "OCR预处理", "文本分割", "图像处理", "--selftest", "--version", "小票解析", "单据提取"]
+trigger_words: ["识别", "票据扫描", "OCR预处理", "文本分割", "处理", "--selftest", "--version", "小票解析", "单据提取"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -35,7 +35,7 @@ trigger_words: ["发票识别", "票据扫描", "OCR预处理", "文本分割", 
 
 # 票据扫描与文本分割 Skill 使用指南
 
-本 Skill 面向需要从票据图像（发票、小票、运单等）中定位文本区域并提取结构化信息的开发者。它基于 OpenCV 实现图像预处理、文本块分割和版面分析，为下游 OCR 引擎提供干净的输入。
+本 Skill 面向需要从票据（、小票、运单等）中定位文本区域并提取结构化信息的开发者。它基于 OpenCV 实现预处理、文本块分割和版面分析，为下游 OCR 引擎提供干净的输入。
 
 
 ## 许可证（License）

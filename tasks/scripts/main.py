@@ -24,6 +24,8 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -236,7 +238,7 @@ def normalize_date(value: str) -> str:
                 elif fmt == "md":
                     # 只有月日，默认年份为当前年份
                     month, day = groups
-                    year = datetime.now().year
+                    year = datetime.now(timezone.utc).year
                 return f"{int(year):04d}-{int(month):02d}-{int(day):02d}"
             except ValueError:
                 return value
@@ -476,7 +478,18 @@ def main() -> int:
     parser.add_argument("--no-dedup", action="store_true", help="不去重")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         return run_selftest()
@@ -490,7 +503,7 @@ def main() -> int:
         input_text = sys.stdin.read()
     elif args.input:
         try:
-            with open(args.input, "r", encoding="utf-8") as f:
+            with open(args.input, "r", encoding="utf-8", errors="replace") as f:
                 input_text = f.read()
         except OSError as e:
             print(f"错误: 无法读取输入文件: {e}", file=sys.stderr)
@@ -526,7 +539,7 @@ def main() -> int:
     # 输出
     if args.output:
         try:
-            with open(args.output, "w", encoding="utf-8") as f:
+            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                 f.write(result)
         except OSError as e:
             print(f"错误: 无法写入输出文件: {e}", file=sys.stderr)

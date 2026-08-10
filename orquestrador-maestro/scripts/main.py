@@ -456,6 +456,8 @@ def main() -> int:
         version="orquestrador-maestro 1.0.0",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式

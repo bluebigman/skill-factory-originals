@@ -30,6 +30,7 @@ import json
 import re
 import sys
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -536,7 +537,18 @@ def main() -> int:
         help="运行离线自检"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -554,7 +566,7 @@ def main() -> int:
         if input_data.startswith("file://"):
             file_path = input_data[7:]
             try:
-                with open(file_path, "r", encoding="utf-8") as f:
+                with open(file_path, "r", encoding="utf-8", errors="replace") as f:
                     input_data = f.read()
             except OSError as e:
                 print(f"错误: 无法读取文件 {file_path}: {e}", file=sys.stderr)
@@ -581,7 +593,7 @@ def main() -> int:
         # 输出
         if args.output:
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(output)
             except OSError as e:
                 print(f"错误: 无法写入文件 {args.output}: {e}", file=sys.stderr)

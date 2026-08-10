@@ -16,6 +16,7 @@ import time
 import urllib.request
 from collections import Counter
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 仅在显式 --demo 标志下使用
 DEMO_DATA = [
@@ -331,12 +332,14 @@ def generate_report(input_path, output_path, x_col=None, y_col=None, encoding=No
     # 生成 HTML
     html_content = render_html(x, ys, x_vals, stats, rows, truncated)
     html_path = Path(output_path) if output_path else path.with_suffix(".html")
-    html_path.write_text(html_content, encoding="utf-8")
+    if not dry_run or getattr(args, "force", False):
+        html_path.write_text(html_content, encoding="utf-8")
     
     # 生成 Markdown 结论
     md_content = make_conclusions(x, stats, truncated)
     md_path = html_path.with_suffix(".md")
-    md_path.write_text(md_content, encoding="utf-8")
+    if not dry_run or getattr(args, "force", False):
+        md_path.write_text(md_content, encoding="utf-8")
     
     return str(html_path), str(md_path), stats
 
@@ -364,3 +367,14 @@ def selftest() -> bool:
         headers, rows, truncated = read_csv(demo)
         if not rows or len(rows) != 12:
             print
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--dry-run", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--format", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--selftest", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--summary", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--top-n", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    args = ap.parse_args()

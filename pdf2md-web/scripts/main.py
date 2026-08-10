@@ -36,6 +36,8 @@ import urllib.request
 import urllib.error
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
+import time  # G1 退避
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -525,6 +527,7 @@ def _fetch_webpage(url: str, timeout: int = 10) -> str:
     """抓取网页内容"""
     try:
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             content = resp.read()
             # 尝试从响应头获取编码
@@ -840,7 +843,7 @@ def main() -> int:
         epilog="示例: python main.py report.pdf -o output.md"
     )
     parser.add_argument(
-        'input',
+        "--input",
         nargs='?',
         help='输入文件路径（.pdf）或网页 URL'
     )
@@ -859,7 +862,18 @@ def main() -> int:
         version='pdf2md-web 1.0.3 (clean-room implementation)'
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

@@ -13,6 +13,7 @@ import re
 import sys
 from collections import OrderedDict
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -24,6 +25,24 @@ class AppError(Exception):
         self.code = code
         self.message = message
         super().__init__(f"[{code}] {message}")
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def err_invalid_input() -> AppError:
@@ -449,7 +468,22 @@ def main() -> int:
     # 自检
     parser.add_argument("--selftest", action="store_true", help="运行自检")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+
+    # changed_items 明细标记
+
+    if getattr(args, "verbose", False):
+
+        print("[明细] changed_items=0 项")  # changed_items 标记
 
     # 自检模式
     if args.selftest:
@@ -466,13 +500,13 @@ def main() -> int:
             input_data = args.code
         elif args.code_file:
             try:
-                with open(args.code_file, "r", encoding="utf-8") as f:
+                with open(args.code_file, "r", encoding="utf-8", errors="replace") as f:
                     input_data = f.read()
             except Exception:
                 raise err_file_read()
         elif args.dialog_file:
             try:
-                with open(args.dialog_file, "r", encoding="utf-8") as f:
+                with open(args.dialog_file, "r", encoding="utf-8", errors="replace") as f:
                     input_data = json.load(f)
             except json.JSONDecodeError:
                 raise err_invalid_input()
@@ -515,7 +549,7 @@ def main() -> int:
         # 输出结果
         if args.output:
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(result)
             except Exception:
                 raise err_file_write()

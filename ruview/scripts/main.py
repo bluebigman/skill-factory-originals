@@ -84,7 +84,7 @@ def parse_signal_data(file_path: str) -> List[SignalSample]:
         if not os.path.exists(file_path):
             raise FileNotFoundError(ErrorCode.E002_FILE_NOT_FOUND)
         
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             reader = csv.reader(f)
             header = next(reader, None)
             if header and header[0].strip().lower().startswith("timestamp"):
@@ -720,6 +720,8 @@ def main() -> int:
         action="store_true",
         help="以JSON格式输出分析结果"
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     

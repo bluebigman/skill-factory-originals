@@ -12,6 +12,7 @@ import re
 import sys
 from collections.abc import Mapping, Sequence
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # 错误码定义
@@ -27,6 +28,24 @@ class ErrorCode:
     E008 = "E009: 字段提取失败（key不存在或类型不匹配）"
     E009 = "E010: 未知错误"
     E010 = "E003: 数据源类型不支持（仅支持 dict / list / str）"
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def _raise(code: str, detail: str = "") -> None:
@@ -343,7 +362,18 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--output", help="输出结果文件（JSON格式）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -365,13 +395,13 @@ def main() -> int:
                 _raise(ErrorCode.E001)
             data = json.loads(input_data)
         else:
-            with open(args.input, "r", encoding="utf-8") as f:
+            with open(args.input, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
 
         # 读取映射
         mapping = None
         if args.mapping:
-            with open(args.mapping, "r", encoding="utf-8") as f:
+            with open(args.mapping, "r", encoding="utf-8", errors="replace") as f:
                 mapping = json.load(f)
 
         # 必填字段
@@ -390,7 +420,7 @@ def main() -> int:
         # 输出
         output_json = json.dumps(result, ensure_ascii=False, indent=2)
         if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
+            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                 f.write(output_json)
         else:
             print(output_json)

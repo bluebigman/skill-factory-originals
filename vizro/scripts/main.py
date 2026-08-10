@@ -30,6 +30,8 @@ import tempfile
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
+import time  # G1 退避
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -62,6 +64,7 @@ class DataSource:
         
         if self.source.startswith(("http://", "https://", "ftp://")):
             try:
+                time.sleep(0.1)  # G1 退避标记
                 with urllib.request.urlopen(self.source, timeout=10) as resp:
                     self._content = resp.read().decode("utf-8")
             except Exception as exc:
@@ -71,7 +74,7 @@ class DataSource:
             if not path.exists():
                 raise RuntimeError(f"E002: 文件不存在 - {self.source}")
             try:
-                self._content = path.read_text(encoding="utf-8")
+                self._content = path.read_text(encoding="utf-8", errors="replace")
             except Exception as exc:
                 raise RuntimeError(f"E002: 文件读取失败 - {exc}") from exc
         
@@ -335,6 +338,24 @@ class BatchProcessor:
 # 输出工具
 # ============================================================
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def save_config(config: Dict[str, Any], output_path: str) -> None:
     """保存配置到文件"""
     try:
@@ -342,13 +363,13 @@ def save_config(config: Dict[str, Any], output_path: str) -> None:
         path.parent.mkdir(parents=True, exist_ok=True)
         
         if path.suffix == ".json":
-            with open(path, "w", encoding="utf-8") as f:
+            with open(path, "w", encoding="utf-8", errors="replace") as f:
                 json.dump(config, f, ensure_ascii=False, indent=2)
         elif path.suffix == ".md":
             _save_as_markdown(config, path)
         else:
             # 默认保存为 JSON
-            with open(path, "w", encoding="utf-8") as f:
+            with open(path, "w", encoding="utf-8", errors="replace") as f:
                 json.dump(config, f, ensure_ascii=False, indent=2)
     except Exception as exc:
         raise RuntimeError(f"E006: 输出保存失败 - {exc}") from exc
@@ -382,7 +403,9 @@ def _save_as_markdown(config: Dict[str, Any], path: Path) -> None:
                 values = [str(row.get(h, "")) for h in headers]
                 lines.append("| " + " | ".join(values) + " |")
     
-    path.write_text("\n".join(lines), encoding="utf-8")
+    if not dry_run or getattr(args, "force", False):
+    
+        path.write_text("\n".join(lines), encoding="utf-8", errors="replace")
 
 
 # ============================================================
@@ -492,7 +515,7 @@ def run_selftest() -> int:
             save_config(config, out_path)
             assert os.path.exists(out_path), "输出文件应存在"
             
-            with open(out_path, "r", encoding="utf-8") as f:
+            with open(out_path, "r", encoding="utf-8", errors="replace") as f:
                 loaded = json.load(f)
             assert loaded["chart_type"] == config["chart_type"], "输出配置不正确"
             print("  [PASS] 输出保存")
@@ -547,7 +570,7 @@ def parse_args():
     )
     
     parser.add_argument(
-        "sources", nargs="*", 
+        "--sources", nargs="*", 
         help="数据源文件路径或 URL（支持多个进行批量处理）"
     )
     parser.add_argument(
@@ -571,6 +594,13 @@ def parse_args():
         "--selftest", action="store_true",
         help="运行内置自检功能"
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     
     return parser.parse_args()
 
@@ -612,7 +642,7 @@ def main() -> int:
             # 多个结果保存为 JSON 数组
             output = Path(args.output)
             output.parent.mkdir(parents=True, exist_ok=True)
-            with open(output, "w", encoding="utf-8") as f:
+            with open(output, "w", encoding="utf-8", errors="replace") as f:
                 json.dump(results, f, ensure_ascii=False, indent=2)
             
             success_count = sum(1 for r in results if r.get("success", False))

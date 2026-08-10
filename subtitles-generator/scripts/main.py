@@ -28,6 +28,7 @@ import time
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -142,6 +143,24 @@ class SubtitleResult:
 
 
 # ---------- 工具函数 ----------
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def _format_timestamp_srt(ms: int) -> str:
     """毫秒转 SRT 时间戳格式: HH:MM:SS,mmm"""
@@ -516,7 +535,7 @@ def run_selftest() -> int:
             # 验证输出文件
             output_file = Path(tmpdir) / "test_video.srt"
             assert output_file.exists()
-            content = output_file.read_text(encoding="utf-8")
+            content = output_file.read_text(encoding="utf-8", errors="replace")
             assert "00:00:00,000" in content
             print("[PASS] 完整处理流程")
 
@@ -568,7 +587,7 @@ def main() -> int:
         """,
     )
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="输入视频/音频文件路径或 URL",
     )
@@ -588,7 +607,18 @@ def main() -> int:
         help="运行内置自检（不读取外部文件、不访问网络）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

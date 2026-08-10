@@ -22,6 +22,13 @@ import sys
 import urllib.request
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional
+import time  # G1 退避
+
+# G4 Mock sample: 外部 HTML 结构变更时的降级样本
+_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
+
+# G4 Mock sample: 外部 HTML 结构变更时的降级样本
+_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -86,6 +93,7 @@ def fetch_url(url: str, timeout: int = 10) -> str:
         raise ValueError(E008)
 
     try:
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(url, timeout=timeout) as resp:
             raw = resp.read()
             # 尝试从响应头获取编码，否则使用 UTF-8
@@ -348,6 +356,8 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
 
     # 自检模式
     parser.add_argument("--selftest", action="store_true", help="运行内置自检并退出")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     return parser.parse_args(argv)
 

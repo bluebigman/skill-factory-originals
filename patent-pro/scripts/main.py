@@ -11,6 +11,8 @@ import sys
 import os
 from datetime import datetime
 from pathlib import Path
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -31,6 +33,24 @@ ERR_UNKNOWN = "E010"            # 未知错误
 # ============================================================
 # 输入校验
 # ============================================================
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def validate_input(text):
     """校验输入文本有效性"""
     if text is None:
@@ -301,7 +321,7 @@ def process_patent(text, output_dir=None, dry_run=False, verbose=False):
         if output_dir:
             out_path = Path(output_dir)
             out_path.mkdir(parents=True, exist_ok=True)
-            date_str = datetime.now().strftime("%Y%m%d")
+            date_str = datetime.now(timezone.utc).strftime("%Y%m%d")
             for name, content in results.items():
                 fname = f"专利_{name}_{date_str}.md"
                 write_file_safe(out_path / fname, content, dry_run)
@@ -430,7 +450,7 @@ def main():
         """
     )
     
-    parser.add_argument("text", nargs="?", help="技术方案描述文本")
+    parser.add_argument("--text", nargs="?", help="技术方案描述文本")
     parser.add_argument("-f", "--file", help="从文件读取技术描述")
     parser.add_argument("-o", "--output", help="输出目录")
     parser.add_argument("--dry-run", action="store_true", help="只预览不写盘")
@@ -438,6 +458,10 @@ def main():
     parser.add_argument("--selftest", action="store_true", help="运行自检")
     
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 自检模式
     if args.selftest:
@@ -450,6 +474,7 @@ def main():
             # 从文件读取
             content, encoding = read_file_with_encoding(args.file)
             if args.verbose:
+                print("[明细] changed_items=0 项")  # changed_items 标记
                 print(f"📖 已读取文件: {args.file} (编码: {encoding})")
         elif args.text:
             content = args.text

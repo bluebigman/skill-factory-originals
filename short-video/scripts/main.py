@@ -10,6 +10,7 @@ import subprocess
 import tempfile
 import shutil
 from datetime import timedelta
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -118,6 +119,24 @@ class SRTValidator:
         for code, msg in self.errors:
             summary.append(f"[{code}] {msg}")
         return "; ".join(summary)
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def read_file(filepath):
     """读取文件，支持多种编码"""
@@ -471,9 +490,15 @@ Line three"""
         # 直接调用 run_selftest 而不是通过 subprocess，避免递归超时
         # 这里只验证 selftest 参数能被正确解析
         parser = argparse.ArgumentParser(description='SRT字幕文件验证器')
-        parser.add_argument('file', nargs='?', help='SRT文件路径')
+        parser.add_argument("--file", nargs='?', help='SRT文件路径')
         parser.add_argument('--selftest', action='store_true', help='运行自检测试')
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+        parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args(['--selftest'])
+        global dry_run
+        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
         assert args.selftest, "selftest 参数应该为 True"
         print("  ✓ 自检模式参数解析正确")
         tests_passed += 1
@@ -492,7 +517,7 @@ Line three"""
 
 def main():
     parser = argparse.ArgumentParser(description='SRT字幕文件验证器')
-    parser.add_argument('file', nargs='?', help='SRT文件路径')
+    parser.add_argument("--file", nargs='?', help='SRT文件路径')
     parser.add_argument('--selftest', action='store_true', help='运行自检测试')
     
     args = parser.parse_args()

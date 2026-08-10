@@ -14,7 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 数据桥接工坊
 agent_created: true
-trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "格式转换", "数据源转换", "订阅源转换", "版本库转订阅"]
+trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "", "数据源转换", "订阅源转换", "版本库转订阅"]
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
@@ -31,7 +31,7 @@ trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "格式转换", "数据
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# subtlety — 数据源格式转换与结构化输出 Skill
+# subtlety — 数据源与结构化输出 Skill
 
 ## 一、能力边界（一页纸速查卡）
 
@@ -48,7 +48,7 @@ trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "格式转换", "数据
 
 ### 1.2 不能做什么
 
-- 不能将二进制文件内容（如图片、压缩包）嵌入 RSS/Atom 正文，仅保留链接引用。
+- 不能将二进制文件内容（如、压缩包）嵌入 RSS/Atom 正文，仅保留链接引用。
 - 不能自动判断 SVN 提交的代码变更语义，只做日志层面的结构化转换。
 - 不能保证转换后的订阅源被所有阅读器完美兼容（不同阅读器对字段支持有差异）。
 - 不能处理无任何时间戳信息的源数据（无法生成 `updated` 字段时，会输出占位符而非猜测）。

@@ -275,6 +275,8 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser.add_argument("--selftest", action="store_true",
                         help="运行离线自检并退出")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args(argv)
 
     # 自检模式优先

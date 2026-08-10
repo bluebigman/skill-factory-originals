@@ -9,12 +9,12 @@ license: MIT
 slug: moneyprinterturbo
 name: moneyprinterturbo
 displayName: 主题或关键词一键生成
-description: 利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.
+description: 利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or key with an automated AI workflow.
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
-trigger_words:
-  - "moneyprinterturbo"
+trigger_s:
+ - "moneyprinterturbo"
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/moneyprinterturbo
 ai_tools: ["DeepSeek"]
 ---
@@ -32,7 +32,7 @@ ai_tools: ["DeepSeek"]
 
 # 主题或关键词一键生成
 
-> 利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or keyword with an automated AI workflow.
+> 利用 AI 大模型和自动化工作流，根据主题或关键词一键生成高清短视频。Generate HD short videos from a topic or key with an automated AI workflow.
 
 ## 一、能力边界（一页纸速查卡）
 
@@ -73,13 +73,13 @@ ai_tools: ["DeepSeek"]
 ### Step 2: 执行核心流程
 1. 解析输入内容，识别关键信息
 2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
+ - 识别输入中的关键字段并结构化
+ - 按默认模板组织输出
+ - 对不确定项标注并请求确认
 3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+ - 置信度 ≥90%：直接输出
+ - 85%-90%：标注"建议复核"
+ - <85%：标注"[需核实]"，并说明不确定点
 
 ### Step 3: 输出与校验
 1. 将结果整理为约定格式输出

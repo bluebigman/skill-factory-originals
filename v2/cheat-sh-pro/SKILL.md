@@ -1,9 +1,9 @@
 ---
 slug: cheat-sh-pro
-name: 命令行速查手册
-displayName: 终端速查 代码示例 即时检索
-description: 一条命令获取编程语言与工具示例，开发调试即时查阅。
-version: 1.0.0
+name: cheat-sh-pro
+displayName: 命令行速查手册
+description: 终端内即时获取编程语言与工具代码示例，支持模糊搜索、领域过滤、随机速查与 Markdown 导出，开发调试零切换。
+version: 2.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -16,6 +16,11 @@ agent_created: true
 trigger_words: ["cheat.sh", "命令行速查", "代码示例查询", "终端查手册", "命令速查", "开发调试速查"]
 ---
 
+> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
+> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
+<!-- professional-disclaimer-injected -->
+
+
 > 📜 **用户协议（User Agreement）**
 > 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
 > 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
@@ -23,45 +28,66 @@ trigger_words: ["cheat.sh", "命令行速查", "代码示例查询", "终端查�
 <!-- user-agreement-injected -->
 
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+# cheat-sh-pro — 命令行速查手册
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+> 一条命令，在终端内获取编程语言与工具的高质量代码示例。支持模糊搜索、领域过滤、随机速查与 Markdown 导出，让开发调试零切换、不打断心流。
 
-# 命令行速查手册（cheat-sh-pro）
+## 快速开始 Quick Start
 
-## 一、能力边界：一页纸速查卡
+| 场景 | 命令 | 预期结果 |
+|------|------|----------|
+| 查 Python 列表推导式 | `python run.py search python --query list` | 输出 python 领域下所有与 list 相关的命令及描述 |
+| 查 git 提交历史 | `python run.py search git --query log` | 输出 git 领域下与 log 相关的速查条目 |
+| 随机学一条命令 | `python run.py random docker` | 随机输出一条 docker 速查命令 |
+| 导出全部速查到文件 | `python run.py export --format markdown --output cheats.md` | 生成 Markdown 格式的速查手册文件 |
 
-### 能做什么
+## 适用场景 When to Use
 
-| 能力项 | 说明 | 示例 |
-|--------|------|------|
-| 查询编程语言语法 | 获取指定语言的核心语法示例 | `curl cheat.sh/python/lambda` |
-| 查询工具用法 | 获取命令行工具的参数与用法 | `curl cheat.sh/tar` |
-| 查询库/框架用法 | 获取特定库的常用操作示例 | `curl cheat.sh/numpy/array` |
-| 查询算法实现 | 获取常见算法的代码示例 | `curl cheat.sh/sort` |
-| 学习/速查双模式 | 支持学习模式（详细）与速查模式（精简） | `curl cheat.sh/python/lambda?T` |
-| 本地终端集成 | 无需浏览器，终端内直接查阅 | 配合 curl 使用 |
+**什么时候用：**
+- 在终端中开发调试，需要快速查阅某语言/工具的语法或用法
+- 学习新语言/框架时，希望快速获取核心代码示例
+- 在无图形界面的服务器/容器环境中工作，需要离线速查
+- 需要将常用命令整理成文档分享给团队
 
-### 不能做什么
+**什么时候不要用：**
+- 需要交互式问答或代码执行环境（本工具仅返回静态文本）
+- 需要中文翻译（速查内容以英文为主）
+- 查询社区尚未收录的冷门工具（返回结果可能为空）
 
-| 限制项 | 说明 |
-|--------|------|
-| 不提供代码执行环境 | 仅返回示例文本，不执行任何代码 |
-| 不保证示例的绝对正确性 | 示例来自社区贡献，可能存在过时或错误 |
-| 不提供交互式问答 | 仅返回静态文本，不支持多轮对话 |
-| 不覆盖所有工具/语言 | 仅覆盖社区已贡献的内容 |
-| 不提供中文翻译 | 返回内容以英文为主 |
+## 能力总览 Capabilities
 
-### 适用对象
+| 能力 | 命令/参数 | 示例 |
+|------|-----------|------|
+| 关键词搜索 | `search <domain> --query <keyword>` | `python run.py search python --query lambda` |
+| 领域过滤 | `--domain <domain>` | `python run.py search --domain git --query commit` |
+| 模糊匹配 | `search` 默认使用 difflib 模糊匹配 | `python run.py search python --query dict` |
+| 随机速查 | `random [domain]` | `python run.py random docker` |
+| 领域列表 | `list-domains` | `python run.py list-domains` |
+| Markdown 导出 | `export --format markdown --output <file>` | `python run.py export --format markdown --output cheats.md` |
+| JSON 导出 | `export --format json --output <file>` | `python run.py export --format json --output cheats.json` |
+| 预览导出 | `--dry-run` | `python run.py export --format markdown --dry-run` |
+| 自检 | `--selftest` | `python run.py --selftest` |
+| 详细输出 | `--verbose` | `python run.py search git --query log --verbose` |
 
-- 日常使用命令行的开发者
-- 需要快速查阅语法/用法的程序员
-- 学习新语言/工具时希望快速上手的学习者
-- 在无图形界面环境下工作的运维人员
+## 模块决策表 Decision Table
 
+| 用户意图 | 推荐模块 | 命令示例 |
+|----------|----------|----------|
+| 查某个语言/工具的特定用法 | `search` | `python run.py search python --query list` |
+| 随便学一条命令 | `random` | `python run.py random` |
+| 看有哪些领域可用 | `list-domains` | `python run.py list-domains` |
+| 整理速查手册 | `export` | `python run.py export --format markdown --output cheats.md` |
+| 验证工具是否正常 | `--selftest` | `python run.py --selftest` |
+
+## 示例 Examples
+
+### 示例 1：搜索 Python 的 lambda 用法
+
+```bash
+$ python run.py search python --query lambda
+```
+
+输出：
 
 ## 许可证（License）
 
@@ -90,19 +116,3 @@ SOFTWARE.
 
 ```
 <!-- professional-license-embedded -->
-
-## 失败处理
-
-- 命令执行失败或返回非零退出码时，程序会输出明确错误信息并给出排查建议。
-- 依赖缺失时提示安装命令；网络异常时建议重试并检查连接。
-- 异常情况不中断主流程，错误信息包含具体原因（error context），便于定位修复。
-## 前置条件
-
-- 本技能开箱即用，无需额外安装依赖。
-- 需要 Python 3.9+ 运行环境。
-- 涉及网络请求时需保持网络连通。
-## 执行步骤
-
-1. 读取输入参数或交互输入。
-2. 按技能定义的处理流程执行核心逻辑。
-3. 输出结构化结果，并在完成后给出下一步建议。

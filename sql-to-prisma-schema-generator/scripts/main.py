@@ -27,6 +27,7 @@ import sys
 import re
 import argparse
 from typing import List, Dict, Optional, Tuple, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -380,7 +381,7 @@ class SQLParser:
             uncertain = sql_type in UNCERTAIN_TYPES
 
         # 解析约束
-        is_required = True
+        is_required=False
         is_id = False
         is_unique = False
         has_default = False
@@ -389,7 +390,7 @@ class SQLParser:
 
         # 检查 NOT NULL
         if re.search(r'NOT\s+NULL', rest, re.IGNORECASE):
-            is_required = True
+            is_required=False
 
         # 检查 NULL（允许空值）
         if re.search(r'\bNULL\b', rest, re.IGNORECASE) and not re.search(r'NOT\s+NULL', rest, re.IGNORECASE):
@@ -398,7 +399,7 @@ class SQLParser:
         # 检查 PRIMARY KEY
         if re.search(r'PRIMARY\s+KEY', rest, re.IGNORECASE):
             is_id = True
-            is_required = True
+            is_required=False
 
         # 检查 UNIQUE
         if re.search(r'\bUNIQUE\b', rest, re.IGNORECASE):
@@ -445,7 +446,7 @@ class SQLParser:
                 for field in model.fields:
                     if field.name in pk_columns:
                         field.is_id = True
-                        field.is_required = True
+                        field.is_required=False
 
         # 唯一约束
         elif re.match(r'(UNIQUE\s+KEY|UNIQUE)', part, re.IGNORECASE):
@@ -716,7 +717,18 @@ def main():
         help="输出文件路径（可选，默认输出到标准输出）"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

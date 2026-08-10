@@ -259,6 +259,24 @@ class StoryProcessor:
 # ---------------------------------------------------------------------------
 # 序列化与辅助功能
 # ---------------------------------------------------------------------------
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def result_to_json(result: StoryResult) -> str:
     """将结果序列化为 JSON 字符串。"""
     try:
@@ -408,6 +426,8 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--min-len", type=int, default=20, help="最小素材长度（默认 20）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式优先
@@ -439,7 +459,7 @@ def main() -> int:
         # 文件处理
         if args.file:
             try:
-                with open(args.file, "r", encoding="utf-8") as f:
+                with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                     text = f.read()
             except Exception as exc:
                 raise StorySkillError("E006", f"读取文件失败: {exc}") from exc

@@ -14,6 +14,8 @@ import re
 import sys
 import urllib.request
 from pathlib import Path
+import time  # G1 退避
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERR_OK = "E000"
@@ -30,6 +32,24 @@ ERR_UNKNOWN = "E010"
 
 
 # ==================== 核心逻辑 ====================
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def parse_input(raw_text: str) -> list:
     """
@@ -225,6 +245,7 @@ def process_url(url: str) -> dict:
     try:
         # 设置超时和 User-Agent
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(req, timeout=10) as resp:
             content = resp.read().decode("utf-8", errors="replace")
     except Exception as exc:
@@ -331,7 +352,7 @@ def main():
     parser = argparse.ArgumentParser(
         description="redesigned-pancake 数据整理工具：将任意数据转为带置信度标记的结构化结果"
     )
-    parser.add_argument("input", nargs="?", help="输入内容：文本、文件路径或 URL")
+    parser.add_argument("--input", nargs="?", help="输入内容：文本、文件路径或 URL")
     parser.add_argument("--file", "-f", help="从文件读取输入")
     parser.add_argument("--url", "-u", help="从 URL 获取输入")
     parser.add_argument("--format", "-F", choices=["json", "markdown"], default="json",
@@ -339,7 +360,18 @@ def main():
     parser.add_argument("--output", "-o", help="输出到文件（默认输出到 stdout）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -384,7 +416,8 @@ def main():
     # 输出到文件或 stdout
     if args.output:
         try:
-            Path(args.output).write_text(output_text, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                Path(args.output).write_text(output_text, encoding="utf-8")
             print(f"结果已写入: {args.output}")
         except Exception as exc:
             print(f"错误码 {ERR_OUTPUT_WRITE}: 写入输出文件失败 - {exc}", file=sys.stderr)

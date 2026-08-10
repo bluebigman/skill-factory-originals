@@ -463,7 +463,7 @@ def main():
         help="运行内置自检测试（离线，无需外部依赖）"
     )
     parser.add_argument(
-        "query",
+        "--query",
         nargs="?",
         help="自然语言查询描述，例如: '从用户表查询所有年龄大于30的用户'"
     )
@@ -471,6 +471,8 @@ def main():
         "--table",
         help="指定表名（可选，若查询中未包含）"
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

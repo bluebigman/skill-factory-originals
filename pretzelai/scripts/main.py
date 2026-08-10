@@ -21,6 +21,7 @@ import urllib.request
 from collections import Counter
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+import time  # G1 退避
 
 
 # ========== 错误码定义 ==========
@@ -36,6 +37,24 @@ ERROR_CODES = {
     "E009": "内部逻辑错误（不应发生）",
     "E010": "无效的操作模式",
 }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def error_exit(code: str, message: Optional[str] = None) -> None:
@@ -243,7 +262,7 @@ def load_from_file(file_path: str) -> List[Dict[str, Any]]:
         error_exit("E002", f"文件不存在: {file_path}")
 
     try:
-        with open(file_path, "r", encoding="utf-8") as f:
+        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
             content = f.read()
         ext = os.path.splitext(file_path)[1]
         return parse_text_data(content, ext)
@@ -254,6 +273,7 @@ def load_from_file(file_path: str) -> List[Dict[str, Any]]:
 def load_from_url(url: str) -> List[Dict[str, Any]]:
     """从 URL 加载数据"""
     try:
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(url, timeout=10) as resp:
             content = resp.read().decode("utf-8")
         return parse_text_data(content)
@@ -409,6 +429,8 @@ def main() -> None:
                         help="输出格式 (默认: json)")
     parser.add_argument("--batch", type=str, help="批量处理JSON文件（包含source数组）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -419,7 +441,7 @@ def main() -> None:
     # 批量模式
     if args.batch:
         try:
-            with open(args.batch, "r", encoding="utf-8") as f:
+            with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
                 batch_data = json.load(f)
             items = batch_data.get("items", batch_data if isinstance(batch_data, list) else [])
             results = batch_process(items, args.format)

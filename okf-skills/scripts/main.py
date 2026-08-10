@@ -24,6 +24,7 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
 
 # 错误码定义
 ERROR_CODES = {
@@ -83,7 +84,7 @@ def extract_date(text: str) -> Tuple[Optional[str], float]:
                 year, month, day = int(groups[0]), int(groups[1]), int(groups[2])
             else:
                 month, day = int(groups[0]), int(groups[1])
-                year = datetime.now().year  # 默认当前年份
+                year = datetime.now(timezone.utc).year  # 默认当前年份
             try:
                 dt = datetime(year, month, day)
                 return dt.strftime("%Y-%m-%d"), conf
@@ -373,6 +374,8 @@ def main() -> None:
     parser.add_argument("--batch", type=str, help="批量处理文件路径")
     parser.add_argument("--input", type=str, help="输入文本或文件路径")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -389,7 +392,7 @@ def main() -> None:
     # 批量处理模式
     if args.batch:
         try:
-            with open(args.batch, "r", encoding="utf-8") as f:
+            with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
                 lines = f.readlines()
         except Exception as e:
             err("E007", str(e))
@@ -402,7 +405,7 @@ def main() -> None:
         if args.input:
             # 从文件读取
             try:
-                with open(args.input, "r", encoding="utf-8") as f:
+                with open(args.input, "r", encoding="utf-8", errors="replace") as f:
                     data = f.read()
             except Exception as e:
                 err("E007", str(e))

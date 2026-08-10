@@ -270,7 +270,7 @@ def output_table(records: list) -> str:
 def read_fields_from_file(filepath: str) -> str:
     """从文件读取字段定义"""
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             return f.read().strip()
     except FileNotFoundError:
         error_exit("E002", f"文件不存在: {filepath}")
@@ -294,6 +294,8 @@ def parse_arguments():
     parser.add_argument("--table", default="test_table", help="SQL输出时的表名，默认test_table")
     parser.add_argument("--version", "-v", action="store_true", help="显示版本信息")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     return parser.parse_args()
 

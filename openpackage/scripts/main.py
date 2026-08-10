@@ -16,6 +16,7 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -34,6 +35,24 @@ ERROR_CODES = {
 # 必填字段定义
 REQUIRED_FIELDS = ["name", "version", "description"]
 VALID_FORMATS = ["json", "yaml", "md"]
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def error_exit(code: str, message: Optional[str] = None) -> None:
@@ -139,7 +158,7 @@ def validate_metadata(metadata: Dict[str, Any]) -> List[str]:
 def read_file(path: Path) -> str:
     """读取文件内容，失败时抛出 E003。"""
     try:
-        return path.read_text(encoding="utf-8")
+        return path.read_text(encoding="utf-8", errors="replace")
     except Exception as e:
         error_exit("E003", f"读取文件 {path} 失败: {e}")
 
@@ -148,7 +167,8 @@ def write_file(path: Path, content: str) -> None:
     """写入文件内容，失败时抛出 E003。"""
     try:
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(content, encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            path.write_text(content, encoding="utf-8")
     except Exception as e:
         error_exit("E003", f"写入文件 {path} 失败: {e}")
 
@@ -330,7 +350,8 @@ tags: [test, demo]
     # 测试 validate_file（通过临时文件）
     with tempfile.TemporaryDirectory() as tmpdir:
         tmp_path = Path(tmpdir) / "sample.md"
-        tmp_path.write_text(sample_md, encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            tmp_path.write_text(sample_md, encoding="utf-8")
         is_valid, errors = validate_file(tmp_path)
         assert is_valid, f"文件校验失败：{errors}"
         print("  ✓ validate_file 通过")
@@ -508,26 +529,37 @@ def main() -> int:
 
     # organize 子命令
     org_parser = subparsers.add_parser("organize", help="整理技能包到统一目录结构")
-    org_parser.add_argument("source", help="源文件或目录路径")
-    org_parser.add_argument("target", help="目标目录路径")
+    org_parser.add_argument("--source", help="源文件或目录路径")
+    org_parser.add_argument("--target", help="目标目录路径")
     org_parser.add_argument("--tag", default=None, help="覆盖标签（默认使用 frontmatter 中的 tag 字段）")
 
     # convert 子命令
     conv_parser = subparsers.add_parser("convert", help="批量转换技能包格式")
-    conv_parser.add_argument("source", help="源文件或目录路径")
-    conv_parser.add_argument("target", help="目标文件或目录路径")
-    conv_parser.add_argument("--src-format", required=True, choices=VALID_FORMATS, help="源格式")
-    conv_parser.add_argument("--dst-format", required=True, choices=VALID_FORMATS, help="目标格式")
+    conv_parser.add_argument("--source", help="源文件或目录路径")
+    conv_parser.add_argument("--target", help="目标文件或目录路径")
+    conv_parser.add_argument("--src-format", required=False, choices=VALID_FORMATS, help="源格式")
+    conv_parser.add_argument("--dst-format", required=False, choices=VALID_FORMATS, help="目标格式")
 
     # validate 子命令
     val_parser = subparsers.add_parser("validate", help="校验技能包格式")
-    val_parser.add_argument("path", help="文件或目录路径")
+    val_parser.add_argument("--path", help="文件或目录路径")
 
     # list 子命令
     list_parser = subparsers.add_parser("list", help="列出目录下的技能包")
-    list_parser.add_argument("directory", help="目录路径")
+    list_parser.add_argument("--directory", help="目录路径")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
 
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

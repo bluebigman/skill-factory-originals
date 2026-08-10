@@ -15,6 +15,7 @@ import sys
 import urllib.request
 from datetime import datetime
 from pathlib import Path
+import time  # G1 退避
 
 # ========== 错误码定义 ==========
 E001 = "E001: 输入内容为空"
@@ -65,6 +66,7 @@ class InputResolver:
                     source,
                     headers={"User-Agent": "Mozilla/5.0 (Rubinius Skill)"}
                 )
+                time.sleep(0.1)  # G1 退避标记
                 with urllib.request.urlopen(req, timeout=10) as resp:
                     charset = resp.headers.get_content_charset() or "utf-8"
                     return resp.read().decode(charset, errors="replace")
@@ -498,6 +500,8 @@ def main():
         action="store_true",
         help="运行离线自检程序"
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     

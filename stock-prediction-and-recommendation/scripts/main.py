@@ -16,6 +16,7 @@ import statistics
 import sys
 from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -80,7 +81,7 @@ class DataParser:
     def _parse_json(filepath: str) -> List[Dict[str, Any]]:
         """解析 JSON 文件"""
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
         except Exception:
             raise ValueError(ERROR_CODES["E003"])
@@ -623,12 +624,23 @@ def main():
         description="股票预测与推荐分析工具（仅供学习参考，不构成投资建议）",
         epilog="示例: python main.py data.csv 或 python main.py --selftest",
     )
-    parser.add_argument("file", nargs="?", help="输入数据文件路径（CSV/JSON/Excel）")
+    parser.add_argument("--file", nargs="?", help="输入数据文件路径（CSV/JSON/Excel）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--output", "-o", help="输出报告到文件")
     parser.add_argument("--code", help="股票代码")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -663,7 +675,7 @@ def main():
             output_dir = os.path.dirname(os.path.abspath(output_path))
             if not os.path.exists(output_dir):
                 raise ValueError(ERROR_CODES["E008"])
-            with open(output_path, "w", encoding="utf-8") as f:
+            with open(output_path, "w", encoding="utf-8", errors="replace") as f:
                 f.write(report)
             print(f"报告已保存至: {output_path}")
         else:

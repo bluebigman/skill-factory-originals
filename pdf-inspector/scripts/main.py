@@ -31,6 +31,7 @@ import re
 import argparse
 import zlib
 from typing import Dict, Any, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 尝试导入第三方库（仅用于增强解析，非必需）
 try:
@@ -83,6 +84,24 @@ class PDFInspectionResult:
 # ============================================================
 # PDF解析核心函数
 # ============================================================
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def _parse_pdf_header(data: bytes) -> Dict[str, Any]:
     """
@@ -144,8 +163,8 @@ def _extract_text_from_stream(stream: bytes) -> List[str]:
                         text = cleaned.decode("utf-8", errors="ignore")
                         if text.strip():
                             text_parts.append(text)
-                    except:
-                        pass
+                    except Exception as e:
+                        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
     
     except zlib.error:
         # 不是压缩流，尝试直接解析
@@ -159,10 +178,10 @@ def _extract_text_from_stream(stream: bytes) -> List[str]:
                     text = cleaned.decode("utf-8", errors="ignore")
                     if text.strip():
                         text_parts.append(text)
-                except:
-                    pass
-        except:
-            pass
+                except Exception as e:
+                    print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
+        except Exception as e:
+            print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
     
     return text_parts
 
@@ -582,7 +601,7 @@ def main() -> int:
     )
     
     parser.add_argument(
-        "file",
+        "--file",
         nargs="?",
         help="PDF文件路径"
     )
@@ -599,7 +618,18 @@ def main() -> int:
         help="以JSON格式输出结果"
     )
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 自检模式
     if args.selftest:

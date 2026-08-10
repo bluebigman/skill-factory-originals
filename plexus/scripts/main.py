@@ -45,6 +45,24 @@ ERROR_CODES = {
 }
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def fail(code: str, message: str = "") -> None:
     """输出错误信息并退出程序"""
     err_msg = ERROR_CODES.get(code, ERROR_CODES["E010"])
@@ -499,7 +517,7 @@ class InputHandler:
     def read_file(filepath: str) -> str:
         """读取文件内容"""
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
                 return f.read()
         except FileNotFoundError:
             fail("E004", f"文件不存在: {filepath}")
@@ -669,6 +687,8 @@ def main() -> None:
         action="version",
         version="plexus 1.0.1",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

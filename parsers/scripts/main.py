@@ -33,6 +33,7 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
 
 
 # ---------------------------------------------------------------------------
@@ -481,7 +482,7 @@ def process_csv(records: List[Dict[str, str]]) -> BatchResult:
     summary = {
         "总行数": len(items),
         "字段数": len(records[0]) if records else 0,
-        "处理时间": datetime.now().isoformat(timespec="seconds"),
+        "处理时间": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     return BatchResult(items, summary)
 
@@ -637,6 +638,8 @@ def main() -> int:
                         help="输出格式")
     parser.add_argument("--selftest", action="store_true",
                         help="运行内置自检并退出")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

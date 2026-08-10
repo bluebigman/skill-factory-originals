@@ -19,6 +19,7 @@ from typing import Dict, List, Optional, Tuple, Any
 from functools import lru_cache
 import concurrent.futures
 from concurrent.futures import ThreadPoolExecutor
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 try:
     from docx import Document

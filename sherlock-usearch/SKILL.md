@@ -10,15 +10,15 @@ version: 1.3.17
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
 source_project: sherlock-project/sherlock
-source_url: https://github.com/sherlock-project/sherlock
-source_license_url: https://github.com/sherlock-project/sherlock/blob/master/LICENSE
+source_url: 文档s://.com/sherlock-project/sherlock
+source_license_url: s://.com/sherlock-project/sherlock/blob/master/LICENSE
 copyright_holder: sherlock-project contributors
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill基于开源项目sherlock-project/sherlock（MIT协议）进行AI增强封装与中文场景适配，使用本Skill即表示您同意遵守MIT许可证的全部条款。本Skill为AI辅助生成内容。
 author: skill-factory-auto
 agent_created: true
-trigger_words: 
+trigger_words:
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -116,13 +116,13 @@ A：已完成部分的输出有效，查看失败明细后只重跑失败项即�
 ```bash
 # 推荐使用 Python 3.9+ 虚拟环境
 python -m venv .venv
-source .venv/bin/activate  # Windows: .venv\Scripts\activate
+source .venv/bin/activate # Windows: .venv\Scripts\activate
 
 # 安装 sherlock（从 PyPI）
 pip install sherlock-project
 
 # 或从源码安装（开发模式）
-git clone https://github.com/sherlock-project/sherlock.git
+git clone s://.com/sherlock-project/sherlock.git
 cd sherlock
 pip install -r requirements.txt
 ```
@@ -147,20 +147,18 @@ python sherlock.py --usernames-file users.txt --output-dir ./results
 python sherlock.py --csv results.csv --json results.json --output-dir ./results
 
 # 常用参数说明
---timeout 30          # 单次请求超时（秒），默认 60
---retries 3           # 失败重试次数，默认 2
---concurrency 20      # 并发请求数，默认 10
---no-color            # 禁用彩色输出
---print-found         # 仅显示存在的账号
+--timeout 30 # 单次超时（秒），默认 60
+--retries 3 # 失败重试次数，默认 2 # 并发数，默认 10
+--no-color # 禁用彩色输出
+--print-found # 仅显示存在的账号
 ```
 
 ### 稳定性保障（具体数值）
 
 | 参数 | 默认值 | 说明 |
 |------|--------|------|
-| `--timeout` | 60 秒 | 单站点 HTTP 请求超时上限 |
+| `--timeout` | 60 秒 | 单站点 HTTP 超时上限 |
 | `--retries` | 2 次 | 网络错误（5xx/超时）后的重试次数，指数退避（1s, 2s） |
-| `--concurrency` | 10 | 最大并发线程数，防止被目标站点封禁 |
 | `--max-connection-retries` | 3 | 连接级失败的最大重试次数 |
 
 **失败降级策略**：当某个站点连续失败超过 `retries` 次数时，自动标记为 `[?]`（不确定），跳过该站点继续执行，不会中断整个任务。最终结果文件中会附带 `error` 字段说明失败原因（如 `timeout`, `connection_error`, `rate_limited`）。
@@ -185,9 +183,9 @@ python sherlock.py [用户名...] [选项]
 | `--json` | 标志 | 输出 JSON 格式结果（含站点名、状态、URL） |
 | `--csv` | 路径 | 输出 CSV 文件（列：username, site, status, url, error） |
 | `--output-dir` | 路径 | 结果保存目录（默认当前目录） |
-| `--timeout` | 整数 | 请求超时秒数（默认 60） |
-| `--verbose` | 标志 | 显示每个站点的具体请求信息（状态码、耗时） |
-| `--site` | 字符串 | 只检查指定站点（如 `--site github --site twitter`） |
+| `--timeout` | 整数 | 超时秒数（默认 60） |
+| `--verbose` | 标志 | 显示每个站点的具体信息（状态码、耗时） |
+| `--site` | 字符串 | 只检查指定站点（如 `--site --site twitter`） |
 | `--no-color` | 标志 | 禁用 ANSI 颜色输出 |
 
 **输出格式示例**：
@@ -198,9 +196,9 @@ $ python sherlock.py johndoe --json
 
 ```json
 [
-  {"site": "GitHub", "status": "exists", "url": "https://github.com/johndoe"},
-  {"site": "Twitter", "status": "missing", "url": "https://twitter.com/johndoe"},
-  {"site": "Instagram", "status": "unknown", "url": "https://instagram.com/johndoe", "error": "rate_limited"}
+ {"site": "GitHub", "status": "exists", "url": "s://.com/johndoe"},
+ {"site": "Twitter", "status": "missing", "url": "s://twitter.com/johndoe"},
+ {"site": "Instagram", "status": "unknown", "url": "s://instagram.com/johndoe", "error": "rate_limited"}
 ]
 ```
 
@@ -208,9 +206,9 @@ CSV 输出示例：
 
 ```csv
 username,site,status,url,error
-johndoe,GitHub,exists,https://github.com/johndoe,
-johndoe,Twitter,missing,https://twitter.com/johndoe,
-johndoe,Instagram,unknown,https://instagram.com/johndoe,rate_limited
+johndoe,GitHub,exists,s://.com/johndoe,
+johndoe,Twitter,missing,s://twitter.com/johndoe,
+johndoe,Instagram,unknown,s://instagram.com/johndoe,rate_limited
 ```
 
 ### 支持的平台列表（截至 v0.15.0）
@@ -246,20 +244,20 @@ sherlock 内置 **超过 400 个站点**（包含社交网络、论坛、博客�
 
 ```
 ┌─────────────────────────────────────────────────────┐
-│  sherlock 速查卡                                     │
+│ sherlock 速查卡 │
 ├─────────────────────────────────────────────────────┤
-│  1. 快速检查单个用户                                 │
-│     python sherlock.py alice                        │
-│  2. 批量检查 + 导出 JSON                             │
-│     python sherlock.py --usernames-file list.txt    │
-│                        --json out.json              │
-│  3. 只检查重点站点（如 GitHub + Twitter）            │
-│     python sherlock.py bob --site github --site twitter│
-│  4. 提高成功率（应对反爬）                           │
-│     python sherlock.py --timeout 30 --retries 5     │
-│                        --concurrency 5              │
-│  5. 结果中只看存在账号                               │
-│     python sherlock.py carol --print-found          │
+│ 1. 快速检查单个用户 │
+│ python sherlock.py alice │
+│ 2. 批量检查 + 导出 JSON │
+│ python sherlock.py --usernames-file list.txt │
+│ --json out.json │
+│ 3. 只检查重点站点（如 GitHub + Twitter） │
+│ python sherlock.py bob --site --site twitter│
+│ 4. 提高成功率（应对反爬） │
+│ python sherlock.py --timeout 30 --retries 5 │
+│ │
+│ 5. 结果中只看存在账号 │
+│ python sherlock.py carol --print-found │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -268,26 +266,26 @@ sherlock 内置 **超过 400 个站点**（包含社交网络、论坛、博客�
 1. **站点覆盖度分析**：官方文档仅列出站点数量，但未说明哪些站点需要登录后才能检查。本 Skill 补充：`--site` 参数可配合 `sherlock/resources/data.json` 中的 `"requires_auth": true` 字段，提前过滤掉需要登录的站点（如 Facebook、Instagram），避免大量 `[?]` 结果。
 
 2. **反检测策略建议**（官方未提供）：
-   - 使用 `--concurrency 5` 以下避免触发站点限流；
-   - 设置 `--timeout 10` 快速跳过慢响应站点，提高整体效率；
-   - 配合代理使用：`export HTTP_PROXY=http://proxy:8080`，sherlock 会自动遵循环境变量。
+ - 降低请求频率避免触发站点限流；
+ - 设置 `--timeout 10` 快速跳过慢响应站点，提高整体效率；
+ - 配合代理使用：`export HTTP_PROXY=://proxy:8080`，sherlock 会自动遵循环境变量。
 
 3. **结果后处理技巧**：
-   ```bash
-   # 提取所有存在账号的 URL
-   python sherlock.py alice --json | jq '.[] | select(.status=="exists") | .url'
-   # 统计不确定数量
-   python sherlock.py alice --json | jq '[.[] | select(.status=="unknown")] | length'
-   ```
+ ```bash
+ # 提取所有存在账号的 URL
+ python sherlock.py alice --json | jq '.[] | select(.status=="exists") | .url'
+ # 统计不确定数量
+ python sherlock.py alice --json | jq '[.[] | select(.status=="unknown")] | length'
+ ```
 
 4. **与 CI/CD 集成示例**（官方未提到）：
-   ```yaml
-   # .github/workflows/check-username.yml
-   - name: Check username availability
-     run: |
-       pip install sherlock-project
-       python sherlock.py ${{ github.event.inputs.username }} --json --output-dir results
-   ```
+ ```yaml
+ # ./workflows/check-username.yml
+ - name: Check username availability
+ run: |
+ pip install sherlock-project
+ python sherlock.py ${{ .event.inputs.username }} --json --output-dir results
+ ```
 
 ### 去模板化
 
@@ -306,7 +304,7 @@ sherlock 内置 **超过 400 个站点**（包含社交网络、论坛、博客�
 |------|----------|------|----------|
 | `[+]` | 绿色 `[+]` | 用户名存在 | HTTP 200，页面包含用户名标识或用户头像元素 |
 | `[-]` | 红色 `[-]` | 用户名不存在 | HTTP 404，或页面显示"用户不存在"文案 |
-| `[?]` | 黄色 `[?]` | 不确定 | 网络超时、验证码拦截、站点结构变更、或请求被限流 |
+| `[?]` | 黄色 `[?]` | 不确定 | 网络超时、验证码拦截、站点结构变更、或被限流 |
 
 **实际终端输出示例**：
 
@@ -314,10 +312,10 @@ sherlock 内置 **超过 400 个站点**（包含社交网络、论坛、博客�
 $ python sherlock.py johndoe --print-found
 
 [*] Checking username johndoe on:
-[+] GitHub: https://github.com/johndoe
-[+] Twitter: https://twitter.com/johndoe
-[-] Instagram: https://instagram.com/johndoe
-[?] Facebook: https://facebook.com/johndoe (error: rate_limited)
+[+] GitHub: s://.com/johndoe
+[+] Twitter: s://twitter.com/johndoe
+[-] Instagram: s://instagram.com/johndoe
+[?] Facebook: s://facebook.com/johndoe (error: rate_limited)
 [*] Done. Found 2 accounts, 1 missing, 1 uncertain.
 ```
 
@@ -329,22 +327,22 @@ $ python sherlock.py johndoe --print-found
 |------|------|------|------|
 | `site` | string | 站点名称 | `"GitHub"` |
 | `status` | string | `exists` / `missing` / `unknown` | `"exists"` |
-| `url` | string | 用户主页 URL 模板 | `"https://github.com/johndoe"` |
+| `url` | string | 用户主页 URL 模板 | `"s://.com/johndoe"` |
 | `error` | string (可选) | 仅当 status=unknown 时存在，说明原因 | `"timeout"`, `"rate_limited"`, `"blocked"` |
-| `http_status` | int (可选) | 实际 HTTP 状态码 | `200`, `404`, `429` |
-| `response_time` | float (可选) | 请求耗时（秒），需 `--verbose` | `1.23` |
+| `_status` | int (可选) | 实际 HTTP 状态码 | `200`, `404`, `429` |
+| `response_time` | float (可选) | 耗时（秒），需 `--verbose` | `1.23` |
 
 ### 如何验证输出正确性（自检步骤）
 
 1. **对照已知事实**：使用一个你确定存在的用户名（如 `torvalds`），检查 `[+]` 结果是否符合预期。
 2. **检查 URL 可访问性**：手动访问输出中的 URL，确认页面确实存在该用户。
 3. **查看 `--verbose` 日志**：
-   ```bash
-   python sherlock.py testuser --verbose
-   # 输出格式: [2025-01-01 10:00:00] GitHub -> 200 (1.2s) -> exists
-   ```
-   通过 HTTP 状态码与响应时间辅助判断：`200` 通常表示存在，`404` 表示不存在，`429`/`403` 表示被限流或拦截（此时应标记为 `[?]`）。
-4. **异常场景引导**：当结果全为 `[?]` 时，先检查网络连通性（`ping github.com`），再检查是否被代理拦截（尝试 `--no-color` 并观察是否有 SSL 错误），最后确认 `data.json` 中站点 URL 模板是否已过时（可通过 `--site github` 单独测试）。
+ ```bash
+ python sherlock.py testuser --verbose
+ # 输出格式: [2025-01-01 10:00:00] GitHub -> 200 (1.2s) -> exists
+ ```
+ 通过 HTTP 状态码与响应时间辅助判断：`200` 通常表示存在，`404` 表示不存在，`429`/`403` 表示被限流或拦截（此时应标记为 `[?]`）。
+4. **异常场景引导**：当结果全为 `[?]` 时，先检查网络连通性（`ping .com`），再检查是否被代理拦截（尝试 `--no-color` 并观察是否有 SSL 错误），最后确认 `data.json` 中站点 URL 模板是否已过时（可通过 `--site ` 单独测试）。
 
 ---
 
@@ -371,7 +369,7 @@ $ python sherlock.py johndoe --print-found
 pip install sherlock-project
 
 # 方式二：源码安装
-git clone https://github.com/sherlock-project/sherlock.git
+git clone s://.com/sherlock-project/sherlock.git
 cd sherlock
 pip install -r requirements.txt
 
@@ -406,7 +404,7 @@ python sherlock 用户名 --retries 3
 | `--list` | `--list <file>` | 无 | 从文件读取多个用户名 |
 | `--csv` | `--csv <file>` | 无 | 保存结果为 CSV |
 | `--json` | `--json <file>` | 无 | 保存结果为 JSON |
-| `--timeout` | `--timeout <秒>` | 30 | 单次请求超时时间 |
+| `--timeout` | `--timeout <秒>` | 30 | 单次超时时间 |
 | `--retries` | `--retries <次数>` | 2 | 失败重试次数 |
 | `--verbose` | `--verbose` | 关闭 | 显示详细执行日志 |
 
@@ -440,10 +438,10 @@ python sherlock [用户名] [选项]
 | `--json` | 标志 | 输出为 JSON 格式 | `sherlock johndoe --json` |
 | `--csv` | 标志 | 输出为 CSV 格式 | `sherlock johndoe --csv` |
 | `--output` | 路径 | 指定输出文件路径 | `sherlock johndoe --output result.txt` |
-| `--timeout` | 整数 | 请求超时秒数 | `sherlock johndoe --timeout 15` |
+| `--timeout` | 整数 | 超时秒数 | `sherlock johndoe --timeout 15` |
 | `--print-all` | 标志 | 显示所有平台结果 | `sherlock johndoe --print-all` |
 | `--no-color` | 标志 | 禁用彩色输出 | `sherlock johndoe --no-color` |
-| `--site` | 字符串 | 只查询指定平台 | `sherlock johndoe --site github` |
+| `--site` | 字符串 | 只查询指定平台 | `sherlock johndoe --site ` |
 | `--browse` | 标志 | 自动打开浏览器查看结果 | `sherlock johndoe --browse` |
 
 #### 3. 支持的平台列表（Supported Platforms）
@@ -459,21 +457,21 @@ python sherlock [用户名] [选项]
 ```json
 // JSON 输出示例
 {
-  "username": "johndoe",
-  "results": {
-    "github": {"status": "exists", "url": "https://github.com/johndoe"},
-    "twitter": {"status": "missing", "url": null},
-    "reddit": {"status": "unknown", "url": "https://reddit.com/user/johndoe"}
-  }
+ "username": "johndoe",
+ "results": {
+ "": {"status": "exists", "url": "s://.com/johndoe"},
+ "twitter": {"status": "missing", "url": null},
+ "reddit": {"status": "unknown", "url": "s://reddit.com/user/johndoe"}
+ }
 }
 ```
 
 ```csv
 # CSV 输出示例
 username,platform,status,url
-johndoe,github,exists,https://github.com/johndoe
+johndoe,,exists,s://.com/johndoe
 johndoe,twitter,missing,
-johndoe,reddit,unknown,https://reddit.com/user/johndoe
+johndoe,reddit,unknown,s://reddit.com/user/johndoe
 ```
 
 #### 5. 复杂场景示例（Complex Usage Examples）
@@ -482,7 +480,7 @@ johndoe,reddit,unknown,https://reddit.com/user/johndoe
 python sherlock --list users.txt --json result.json
 
 # 场景二：指定平台 + 超时控制
-python sherlock johndoe --site github --timeout 10
+python sherlock johndoe --site --timeout 10
 
 # 场景三：完整结果 + 无颜色输出
 python sherlock johndoe --print-all --no-color
@@ -502,16 +500,16 @@ python sherlock johndoe --browse
 #### 1. 30秒速查卡（30-Second Quick Reference）
 ```bash
 # 核心命令速查
-sherlock [用户]        # 基本查询
+sherlock [用户] # 基本查询
 sherlock [用户] --json # JSON 输出
-sherlock --list file   # 批量查询
-sherlock [用户] --site github  # 指定平台
+sherlock --list file # 批量查询
+sherlock [用户] --site # 指定平台
 ```
 
 #### 2. 高级使用技巧（Advanced Tips）
 | 技巧 | 描述 | 示例 |
 |------|------|------|
-| 代理设置 | 通过环境变量配置代理 | `export HTTP_PROXY=http://proxy:8080` |
+| 代理设置 | 通过环境变量配置代理 | `export HTTP_PROXY=://proxy:8080` |
 | 自定义超时 | 针对慢速平台调整超时 | `sherlock user --timeout 60` |
 | 结果过滤 | 只显示存在账号的平台 | `sherlock user --print-all \| grep exists` |
 | 定时监控 | 配合 cron 定期检查账号 | `0 */6 * * * sherlock user --json >> log.json` |
@@ -563,33 +561,33 @@ python sherlock competitor --print-all --verbose
 ```bash
 $ sherlock johndoe
 [*] Checking username johndoe on:
-[+] GitHub: https://github.com/johndoe
-[-] Twitter: https://twitter.com/johndoe
-[?] Instagram: https://instagram.com/johndoe (timed out)
+[+] GitHub: s://.com/johndoe
+[-] Twitter: s://twitter.com/johndoe
+[?] Instagram: s://instagram.com/johndoe (timed out)
 [*] Results: 1 found, 1 missing, 1 unknown
 ```
 
 ```json
 // JSON 输出完整结构
 {
-  "username": "johndoe",
-  "timestamp": "2024-01-15T10:30:00Z",
-  "total_sites": 300,
-  "checked_sites": 298,
-  "results": {
-    "github": {
-      "status": "exists",
-      "url": "https://github.com/johndoe",
-      "http_status": 200,
-      "response_time": 1.2
-    },
-    "twitter": {
-      "status": "missing",
-      "url": null,
-      "http_status": 404,
-      "response_time": 0.8
-    }
-  }
+ "username": "johndoe",
+ "timestamp": "2024-01-15T10:30:00Z",
+ "total_sites": 300,
+ "checked_sites": 298,
+ "results": {
+ "": {
+ "status": "exists",
+ "url": "s://.com/johndoe",
+ "_status": 200,
+ "response_time": 1.2
+ },
+ "twitter": {
+ "status": "missing",
+ "url": null,
+ "_status": 404,
+ "response_time": 0.8
+ }
+ }
 }
 ```
 
@@ -597,11 +595,11 @@ $ sherlock johndoe
 | 错误码 | 类别 | 描述 | 修复建议 |
 |--------|------|------|----------|
 | `E001` | 网络错误 | 无法连接到目标平台 | 检查网络连接，使用 `ping` 测试 |
-| `E002` | 超时错误 | 请求超过设定超时时间 | 增加 `--timeout` 值，或检查平台状态 |
+| `E002` | 超时错误 | 超过设定超时时间 | 增加 `--timeout` 值，或检查平台状态 |
 | `E003` | 解析错误 | 无法解析平台响应 | 更新 sherlock 版本，或报告 bug |
 | `E004` | 参数错误 | 命令行参数无效 | 使用 `sherlock --help` 查看参数说明 |
 | `E005` | 文件错误 | 无法读取输入文件 | 检查文件路径和权限 |
-| `E006` | 限流错误 | 平台返回 429 状态码 | 降低请求频率，增加 `--retries` |
+| `E006` | 限流错误 | 平台返回 429 状态码 | 降低频率，增加 `--retries` |
 
 #### 4. 异常处理策略（Error Handling Strategies）
 | 场景 | 检测方式 | 处理策略 |

@@ -13,6 +13,7 @@ import argparse
 import sys
 import re
 from typing import Dict, List, Optional, Tuple, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -73,6 +74,24 @@ class ProcessingResult:
 # ---------------------------------------------------------------------------
 # 核心处理函数
 # ---------------------------------------------------------------------------
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def validate_input(data: Any) -> Tuple[bool, str]:
     """
     校验输入数据（Step 1: 收集最小信息集）
@@ -375,7 +394,13 @@ def main() -> int:
 
     # 解析参数
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+        parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args()
+        global dry_run
+        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     except SystemExit as e:
         print(f"错误: {ERROR_CODES['E007']}")
         return 1
@@ -399,7 +424,7 @@ def main() -> int:
     input_text = args.input
     if args.file:
         try:
-            with open(args.file, "r", encoding="utf-8") as f:
+            with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                 input_text = f.read()
         except Exception as e:
             print(f"错误: {ERROR_CODES['E008']}: {e}")
@@ -425,7 +450,7 @@ def main() -> int:
         # 输出结果
         if args.output:
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(output)
                 print(f"结果已写入: {args.output}")
             except Exception as e:

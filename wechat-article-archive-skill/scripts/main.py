@@ -18,6 +18,7 @@ import zipfile
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义（对应规格第四章）
@@ -171,11 +172,11 @@ class ArticleArchiveProcessor:
             try:
                 ext = os.path.splitext(raw)[1].lower()
                 if ext == ".json":
-                    with open(raw, "r", encoding="utf-8") as f:
+                    with open(raw, "r", encoding="utf-8", errors="replace") as f:
                         data = json.load(f)
                         return data if isinstance(data, dict) else None
                 elif ext in (".txt", ".md"):
-                    with open(raw, "r", encoding="utf-8") as f:
+                    with open(raw, "r", encoding="utf-8", errors="replace") as f:
                         content = f.read()
                         return {"content": content}
                 else:
@@ -361,13 +362,13 @@ class ArticleArchiveProcessor:
                     "needs_review": record.needs_review,
                     "notes": record.notes,
                 }
-                with open(output_path, "w", encoding="utf-8") as f:
+                with open(output_path, "w", encoding="utf-8", errors="replace") as f:
                     json.dump(data, f, ensure_ascii=False, indent=2)
             else:
                 # 默认生成 Markdown 输出
                 output_path = os.path.join(temp_dir, "article.md")
                 md_content = self._build_markdown(record)
-                with open(output_path, "w", encoding="utf-8") as f:
+                with open(output_path, "w", encoding="utf-8", errors="replace") as f:
                     f.write(md_content)
 
             # 创建 ZIP 包（包含输出文件）
@@ -452,6 +453,24 @@ class ArticleArchiveProcessor:
 # ---------------------------------------------------------------------------
 # 自检模块
 # ---------------------------------------------------------------------------
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def run_selftest() -> int:
     """
     离线自检核心逻辑。
@@ -650,7 +669,18 @@ def main() -> int:
         help="运行离线自检（不依赖外部输入）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

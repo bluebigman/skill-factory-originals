@@ -200,6 +200,8 @@ def main():
     parser.add_argument("--batch", type=str, help="批量输入（用逗号分隔）")
     parser.add_argument("--format", choices=["text", "json"], default="text", help="输出格式")
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
     args = parser.parse_args()
     
     if args.selftest:

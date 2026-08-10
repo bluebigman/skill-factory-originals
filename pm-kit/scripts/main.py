@@ -41,6 +41,24 @@ class PMKitError(Exception):
 # 核心处理逻辑
 # ============================================================
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def parse_input(raw_input: str) -> Dict[str, Any]:
     """
     解析输入内容，识别关键信息并结构化。
@@ -422,6 +440,8 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行自检")
     parser.add_argument("--version", action="version", version="pm-kit 1.0.0")
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
     args = parser.parse_args()
     
     # 自检模式
@@ -436,14 +456,14 @@ def main() -> int:
         raw_input = args.input
     elif args.file:
         try:
-            with open(args.file, "r", encoding="utf-8") as f:
+            with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                 raw_input = f.read()
         except (IOError, OSError) as e:
             print(f"[E006] 文件读取失败: {e}", file=sys.stderr)
             return 1
     elif args.batch:
         try:
-            with open(args.batch, "r", encoding="utf-8") as f:
+            with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
                 inputs = [line.strip() for line in f if line.strip()]
             results = batch_process(inputs, args.format)
             print(json.dumps(results, ensure_ascii=False, indent=2))

@@ -37,6 +37,7 @@ import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -102,6 +103,24 @@ class ArticleData:
 # ============================================================
 # 核心解析逻辑
 # ============================================================
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def clean_html(raw_text: str) -> str:
     """
@@ -409,7 +428,7 @@ def read_file(file_path: str) -> Tuple[str, str]:
     encodings = ["utf-8", "gbk", "gb2312", "latin-1"]
     for encoding in encodings:
         try:
-            content = path.read_text(encoding=encoding)
+            content = path.read_text(encoding=encoding, errors="replace")
             return content, ext
         except UnicodeDecodeError:
             continue
@@ -762,7 +781,18 @@ def main():
     # 版本参数
     parser.add_argument("--version", "-v", action="version", version="oebfare 1.0.1")
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 运行自检
     if args.selftest:
@@ -791,7 +821,8 @@ def main():
         
         # 输出结果
         if args.output:
-            Path(args.output).write_text(output, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                Path(args.output).write_text(output, encoding="utf-8")
             print(f"结果已写入: {args.output}")
         else:
             print(output)

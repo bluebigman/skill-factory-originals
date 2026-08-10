@@ -37,6 +37,7 @@ import re
 import argparse
 from html.parser import HTMLParser
 from typing import List, Tuple, Optional
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -139,6 +140,24 @@ class XhtmlParser(HTMLParser):
 # ============================================================
 # 核心转换逻辑
 # ============================================================
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def parse_html(html: str) -> List[Tuple[str, str, dict]]:
     """解析 HTML 字符串，返回事件列表。"""
     parser = XhtmlParser()
@@ -509,7 +528,7 @@ def main():
         epilog='示例: python main.py "<p>Hello & welcome</p>"'
     )
     parser.add_argument(
-        'html', nargs='?', default=None,
+        "--html", nargs='?', default=None,
         help='要处理的 HTML 字符串'
     )
     parser.add_argument(
@@ -525,7 +544,18 @@ def main():
         help='将结果写入文件'
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 运行自检
     if args.selftest:

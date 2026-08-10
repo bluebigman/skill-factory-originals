@@ -42,6 +42,24 @@ class ProcessingError(Exception):
         super().__init__(f"[{code}] {self.message}")
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def validate_input(raw_input: Any) -> str:
     """
     校验输入是否有效
@@ -332,6 +350,8 @@ def main():
     parser.add_argument("--expected-fields", type=str, nargs="*",
                         help="期望的关键字段列表")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式
@@ -346,7 +366,7 @@ def main():
             raw_input = args.input
         elif args.input_file:
             try:
-                with open(args.input_file, "r", encoding="utf-8") as f:
+                with open(args.input_file, "r", encoding="utf-8", errors="replace") as f:
                     raw_input = f.read()
             except FileNotFoundError:
                 raise ProcessingError("E006", f"文件不存在: {args.input_file}")

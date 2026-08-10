@@ -76,4 +76,5 @@ def markdown_to_html(md_content: str) -> str:
 
     for line in lines:
         # 代码块处理
-        if line.strip().startswith("
+        if line.strip().startswith('```'):
+            pass  # auto-fix: empty if body

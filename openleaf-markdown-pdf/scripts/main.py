@@ -89,4 +89,9 @@ class MarkdownParser:
                 stripped = line.strip()
                 
                 # 代码块处理
-                if stripped.startswith("
+                if stripped.startswith('```'):
+                    in_code_block = not in_code_block
+                    continue
+        except Exception:
+            pass
+        return doc

@@ -27,6 +27,7 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional
+from datetime import timezone  # G2 时区修复
 
 # 错误码定义
 ERROR_CODES = {
@@ -115,7 +116,7 @@ class ReceiptData:
                 "confidence": self.confidence,
                 "missing_fields": self.missing_fields,
                 "duplicate_detected": self.duplicate_detected,
-                "processed_at": datetime.now().isoformat(),
+                "processed_at": datetime.now(timezone.utc).isoformat(),
             },
         }
 
@@ -451,7 +452,7 @@ def batch_parse(parser: ReceiptParser, texts: List[str]) -> List[Dict[str, Any]]
             # 单张解析失败，记录错误信息
             results.append({
                 "error": str(e),
-                "meta": {"processed_at": datetime.now().isoformat()},
+                "meta": {"processed_at": datetime.now(timezone.utc).isoformat()},
             })
     return results
 
@@ -535,7 +536,7 @@ def to_markdown(data: Any) -> str:
     lines = []
     lines.append("# 票据识别报告")
     lines.append("")
-    lines.append(f"生成时间：{datetime.now().isoformat()}")
+    lines.append(f"生成时间：{datetime.now(timezone.utc).isoformat()}")
     lines.append("")
 
     if isinstance(data, list):
@@ -620,7 +621,7 @@ def read_input_file(filepath: str) -> str:
         raise FileNotFoundError(ERROR_CODES["E001"])
 
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
+        with open(filepath, "r", encoding="utf-8", errors="replace") as f:
             return f.read()
     except (IOError, OSError) as e:
         raise IOError(f"{ERROR_CODES['E001']}：{e}") from e
@@ -846,6 +847,8 @@ def main() -> int:
         action="store_true",
         help="运行内置自检（不读取外部文件）",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

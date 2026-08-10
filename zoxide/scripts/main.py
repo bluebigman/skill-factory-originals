@@ -14,6 +14,7 @@ import sys
 import time
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 E001 = "E001: 参数错误"
@@ -77,7 +78,7 @@ class ZoxideDB:
             self.entries = {}
             return
         try:
-            with open(self.db_path, "r", encoding="utf-8") as f:
+            with open(self.db_path, "r", encoding="utf-8", errors="replace") as f:
                 raw_lines = f.readlines()
         except OSError:
             raise RuntimeError(E002)
@@ -94,7 +95,7 @@ class ZoxideDB:
     def save(self) -> None:
         """将记录写回文件"""
         try:
-            with open(self.db_path, "w", encoding="utf-8") as f:
+            with open(self.db_path, "w", encoding="utf-8", errors="replace") as f:
                 for entry in self.entries.values():
                     f.write(entry.to_line() + "\n")
         except OSError:
@@ -373,11 +374,11 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     # add 子命令
     p_add = sub.add_parser("add", help="记录目录访问")
-    p_add.add_argument("paths", nargs="+", help="要记录的目录路径")
+    p_add.add_argument("--paths", nargs="+", help="要记录的目录路径")
 
     # query 子命令
     p_query = sub.add_parser("query", help="查询并跳转")
-    p_query.add_argument("keyword", help="匹配关键词")
+    p_query.add_argument("--keyword", help="匹配关键词")
     p_query.add_argument("--limit", type=int, default=10, help="返回最大条数")
     p_query.add_argument("--interactive", "-i", action="store_true", help="交互选择")
 
@@ -386,13 +387,24 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     # remove 子命令
     p_rm = sub.add_parser("remove", help="删除记录")
-    p_rm.add_argument("paths", nargs="+", help="要删除的路径")
+    p_rm.add_argument("--paths", nargs="+", help="要删除的路径")
 
     # prune 子命令
     p_prune = sub.add_parser("prune", help="裁剪记录")
     p_prune.add_argument("--max", type=int, default=1000, help="最大保留条数")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args(argv)
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

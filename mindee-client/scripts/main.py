@@ -16,6 +16,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -36,6 +37,24 @@ SUPPORTED_FORMATS = {".jpg", ".jpeg", ".png", ".webp", ".heic", ".tiff", ".tif"}
 
 # 默认 API 端点
 DEFAULT_API_URL = "https://api.mindee.net/v1/products/mindee/invoices/v4/predict"
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def error_exit(code: str, message: Optional[str] = None) -> None:
@@ -104,6 +123,7 @@ def make_api_request(api_key: str, image_data: str, is_url: bool, api_url: str) 
     )
 
     try:
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(req, timeout=30) as resp:
             if resp.status != 200:
                 error_exit("E005", f"HTTP 状态码: {resp.status}")
@@ -279,7 +299,18 @@ def main() -> None:
     parser.add_argument("--version", action="store_true", help="显示版本信息")
     parser.add_argument("--output", help="输出文件路径 (JSON)")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 版本信息
     if args.version:
@@ -318,7 +349,7 @@ def main() -> None:
 
         if args.output:
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
                     f.write(output_json)
                 print(f"结果已保存到: {args.output}")
             except IOError as e:

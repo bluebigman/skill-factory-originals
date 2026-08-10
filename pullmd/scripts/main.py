@@ -24,6 +24,8 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -67,9 +69,27 @@ OUTPUT_TEMPLATE = (
 # 工具函数
 # ============================================================
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def get_timestamp() -> str:
     """获取当前时间戳字符串"""
-    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
 
 
 def validate_input(data: str) -> Tuple[bool, str]:
@@ -356,7 +376,7 @@ def main() -> int:
     )
     
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="待处理的数据/文件路径/URL"
     )
@@ -373,7 +393,18 @@ def main() -> int:
         help="输出文件路径（可选）"
     )
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 自检模式
     if args.selftest:

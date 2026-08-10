@@ -148,7 +148,7 @@ class DataParser:
     def parse_file(filepath: str) -> List[PullRequest]:
         """从文件读取并解析 PR 数据"""
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
                 content = f.read()
         except (IOError, OSError) as exc:
             raise RuntimeError(f"E002: 文件读取失败 - {filepath}: {exc}")
@@ -561,6 +561,24 @@ class SelfTest:
 # 主程序
 # ============================================================
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def parse_args(argv: List[str]) -> argparse.Namespace:
     """解析命令行参数"""
     parser = argparse.ArgumentParser(
@@ -568,7 +586,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         epilog="错误码: E001-E010，详见脚本头部注释",
     )
     parser.add_argument(
-        "data_file",
+        "--data_file",
         nargs="?",
         help="PR 数据 JSON 文件路径",
     )
@@ -583,6 +601,7 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         action="store_true",
         help="运行内置自检并退出",
     )
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     return parser.parse_args(argv)
 
 

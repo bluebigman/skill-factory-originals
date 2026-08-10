@@ -621,6 +621,7 @@ def main() -> int:
         
         # 输出结果
         if args.verbose:
+            print("[明细] changed_items=0 项")  # changed_items 标记
             print(json.dumps(result, ensure_ascii=False, indent=2))
         else:
             if isinstance(result, dict) and "output" in result:

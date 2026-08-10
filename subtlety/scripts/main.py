@@ -9,6 +9,7 @@ def main(argv=None):
     """Main entry point."""
     parser = argparse.ArgumentParser(description="Example CLI tool")
     parser.add_argument("--selftest", action="store_true", help="Run self-tests")
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     args = parser.parse_args(argv)
 
     if args.selftest:

@@ -38,6 +38,8 @@ import tempfile
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -107,7 +109,7 @@ class NoteData:
         self.content = content or ""
         self.source = source
         self.tags = tags or []
-        self.date = date or datetime.now().strftime("%Y-%m-%d")
+        self.date = date or datetime.now(timezone.utc).strftime("%Y-%m-%d")
         self.confidence = float(confidence)
         self.extra = extra or {}
 
@@ -331,7 +333,8 @@ def process_text(
 
         file_path = out_path / filename
         try:
-            file_path.write_text(markdown, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                file_path.write_text(markdown, encoding="utf-8")
         except OSError as exc:
             raise SkillError("E003", f"无法写入文件: {exc}") from exc
 
@@ -595,7 +598,18 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     parser.add_argument("--version", action="version", version="obsidian-skills 1.0.1")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

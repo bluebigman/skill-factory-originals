@@ -14,8 +14,8 @@ version: 1.0.0
 author: skill-factory-auto
 agent_created: true
 trigger_words:
-  - "公众号文章"
-  - "wechat article archive skill"
+ - "公众号文章"
+ - "wechat article archive skill"
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/wechat-article-archive-skill
 ai_tools: ["DeepSeek"]
 ---
@@ -33,7 +33,7 @@ ai_tools: ["DeepSeek"]
 
 # 公众号文章
 
-> Codex skill for archiving public WeChat articles as Markdown with local images and validated ZIP packages.
+> Codex skill for archiving public WeChat articles as Markdown with local s and validated ZIP packages.
 
 ## 一、能力边界（一页纸速查卡）
 
@@ -75,13 +75,13 @@ ai_tools: ["DeepSeek"]
 ### Step 2: 执行核心流程
 1. 解析输入内容，识别关键信息
 2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
+ - 识别输入中的关键字段并结构化
+ - 按默认模板组织输出
+ - 对不确定项标注并请求确认
 3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+ - 置信度 ≥90%：直接输出
+ - 85%-90%：标注"建议复核"
+ - <85%：标注"[需核实]"，并说明不确定点
 
 ### Step 3: 输出与校验
 1. 将结果整理为约定格式输出

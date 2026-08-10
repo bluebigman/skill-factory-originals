@@ -503,4 +503,4 @@ class CodeGenerator:
             if q.placeholders:
                 lines.append(f"| 占位符 | {', '.join(q.placeholders)} |")
             lines.append("")
-            lines.append("
+            lines.append("")

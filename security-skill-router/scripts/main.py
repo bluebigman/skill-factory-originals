@@ -405,6 +405,8 @@ def main() -> int:
         help="列出支持的任务类型",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     args = parser.parse_args()
 
     # 自检模式

@@ -36,6 +36,7 @@ import re
 import sys
 import hashlib
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -503,7 +504,7 @@ def write_output(data: str, output_path: Optional[str]) -> None:
     """写入输出文件或打印到标准输出。"""
     if output_path:
         try:
-            with open(output_path, "w", encoding="utf-8") as f:
+            with open(output_path, "w", encoding="utf-8", errors="replace") as f:
                 f.write(data)
         except Exception:
             raise ValueError("E007")
@@ -687,7 +688,13 @@ def main() -> int:
     )
 
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+        parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args()
+        global dry_run
+        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
         # 显示版本
         if args.version:

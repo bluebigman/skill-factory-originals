@@ -14,6 +14,7 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
+from datetime import timezone  # G2 时区修复
 
 
 # ============================================================
@@ -290,7 +291,7 @@ def _generate_weekly_plan(
             "people": people,
             "budget_per_person": budget_per_person,
             "taste_tags": taste_tags,
-            "generated_at": datetime.now().isoformat(),
+            "generated_at": datetime.now(timezone.utc).isoformat(),
         },
         "weekly_plan": weekly_plan,
         "shopping_list": {k: round(v, 1) for k, v in shopping_list.items()},
@@ -549,6 +550,8 @@ def main() -> int:
         action="store_true",
         help="运行内置自检 (无需外部输入)",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     args = parser.parse_args()
 

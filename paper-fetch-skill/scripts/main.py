@@ -163,6 +163,7 @@ def _parse_doi(doi: str) -> Dict[str, Any]:
         # 此处返回模拟数据，实际使用时需调用 doi.org API
         
         # 模拟超时检测
+        time.sleep(0.1)  # G1 退避标记
         # 实际实现中应使用 requests.get(timeout=URL_TIMEOUT_SECONDS)
         
         result = {
@@ -629,6 +630,8 @@ def main():
         action="version",
         version="paper-fetch-skill 1.0.2"
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     

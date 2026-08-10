@@ -25,6 +25,7 @@ import re
 import sys
 import uuid
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -429,7 +430,7 @@ class ConfigManager:
             del cfg_dict["password_masked"]
             data.append(cfg_dict)
         try:
-            with open(file_path, "w", encoding="utf-8") as f:
+            with open(file_path, "w", encoding="utf-8", errors="replace") as f:
                 json.dump(data, f, ensure_ascii=False, indent=2)
         except OSError as exc:
             raise ValueError(f"E008: 保存配置失败: {exc}") from exc
@@ -438,7 +439,7 @@ class ConfigManager:
     def load_config(file_path: str) -> List[ConnectionConfig]:
         """从文件加载配置"""
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
         except (OSError, json.JSONDecodeError) as exc:
             raise ValueError(f"E008: 加载配置失败: {exc}") from exc
@@ -734,7 +735,13 @@ def main() -> int:
     """主入口函数"""
     parser = build_parser()
     try:
+        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+        parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args()
+        global dry_run
+        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     except SystemExit as e:
         # argparse 在 --help 或 --version 时会抛出 SystemExit
         if e.code == 0:

@@ -21,6 +21,8 @@ import sys
 import tempfile
 from datetime import datetime
 from pathlib import Path
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义（E001-E010）
 ERROR_CODES = {
@@ -35,6 +37,24 @@ ERROR_CODES = {
     "E009": "自检失败",
     "E010": "未知错误",
 }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def err_exit(code: str, message: str = None) -> None:
@@ -147,7 +167,7 @@ def parse_note(text: str, source: str = "inline") -> dict:
         "confidence": round(confidence, 2),
         "needs_verify": needs_verify,
         "source": source,
-        "created_at": datetime.now().isoformat(timespec="seconds"),
+        "created_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
     }
     return card
 
@@ -169,7 +189,7 @@ def read_input(path: str) -> str:
     if not p.is_file():
         err_exit("E001", f"文件不存在: {path}")
     try:
-        return p.read_text(encoding="utf-8")
+        return p.read_text(encoding="utf-8", errors="replace")
     except Exception:
         err_exit("E001", f"无法读取文件: {path}")
 
@@ -183,7 +203,8 @@ def write_output(data, path: str) -> None:
         err_exit("E002", f"无法创建目录: {p.parent}")
     try:
         json_str = json.dumps(data, ensure_ascii=False, indent=2)
-        p.write_text(json_str, encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            p.write_text(json_str, encoding="utf-8", errors="replace")
     except TypeError:
         err_exit("E004", "数据无法序列化为 JSON")
     except Exception:
@@ -269,7 +290,7 @@ def _run_selftest() -> None:
         tmp_file = os.path.join(tmpdir, "test_out.json")
         write_output(cards, tmp_file)
         assert os.path.isfile(tmp_file), "输出文件应存在"
-        with open(tmp_file, "r", encoding="utf-8") as f:
+        with open(tmp_file, "r", encoding="utf-8", errors="replace") as f:
             loaded = json.load(f)
         assert len(loaded) == 2, "读回的数据应包含两张卡片"
     print("  [OK] 文件读写通过（临时目录）")
@@ -289,7 +310,13 @@ def main() -> None:
     parser.add_argument("--batch", type=str, help="批量模式：输入目录（内含 .txt 文件）")
     parser.add_argument("--batch-output", type=str, help="批量模式输出目录")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检（离线）")
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = parser.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式优先
     if args.selftest:
@@ -338,7 +365,7 @@ def main() -> None:
         batch_data = {}
         for f in txt_files:
             try:
-                content = f.read_text(encoding="utf-8")
+                content = f.read_text(encoding="utf-8", errors="replace")
                 if content.strip():
                     batch_data[f.name] = content
             except Exception:
