@@ -50,326 +50,376 @@ DEFAULT_CHEATS: Dict[str, List[Dict[str, str]]] = {
         {"cmd": "docker ps -a", "desc": "查看所有容器（含停止）", "scene": "找容器"},
         {"cmd": "docker images", "desc": "查看本地镜像列表", "scene": "确认镜像"},
         {"cmd": "docker exec -it c1 bash", "desc": "进入容器终端", "scene": "容器内调试"},
-        {"cmd": "docker logs -f c1", "desc": "跟踪容器日志", "scene": "排查应用报错"},
-        {"cmd": "docker system df", "desc": "查看磁盘占用", "scene": "清理前评估"},
-        {"cmd": "docker rmi $(docker images -q -f dangling=true)", "desc": "清理悬空镜像", "scene": "释放磁盘"},
-        {"cmd": "docker inspect c1 --format '{{.NetworkSettings.IPAddress}}'", "desc": "查容器IP", "scene": "容器间通信"},
-        {"cmd": "docker compose up -d", "desc": "后台启动编排服务", "scene": "启动服务栈"},
-        {"cmd": "docker stop $(docker ps -q)", "desc": "停止所有容器", "scene": "批量停止"},
-        {"cmd": "docker system prune -a", "desc": "清理所有未使用资源", "scene": "深度清理"},
+        {"cmd": "docker logs -f c1", "desc": "跟踪容器日志", "scene": "排查容器问题"},
+        {"cmd": "docker build -t myapp .", "desc": "构建镜像", "scene": "打包应用"},
+        {"cmd": "docker run -d -p 8080:80 nginx", "desc": "后台运行容器并映射端口", "scene": "部署服务"},
+        {"cmd": "docker stop c1", "desc": "停止容器", "scene": "停止服务"},
+        {"cmd": "docker rm c1", "desc": "删除容器", "scene": "清理容器"},
+        {"cmd": "docker rmi myapp", "desc": "删除镜像", "scene": "清理镜像"},
+        {"cmd": "docker network ls", "desc": "查看网络列表", "scene": "网络管理"},
     ],
     "python": [
-        {"cmd": "my_list = [1, 2, 3]", "desc": "定义列表", "scene": "基础数据结构"},
-        {"cmd": "my_dict = {'key': 'value'}", "desc": "定义字典", "scene": "键值对存储"},
-        {"cmd": "for i in range(10): print(i)", "desc": "循环打印", "scene": "迭代操作"},
-        {"cmd": "def my_func(x):\\n    return x * 2", "desc": "定义函数", "scene": "代码复用"},
-        {"cmd": "class MyClass:\\n    def __init__(self):\\n        self.value = 0", "desc": "定义类", "scene": "面向对象编程"},
-        {"cmd": "[x**2 for x in range(10)]", "desc": "列表推导式", "scene": "快速生成列表"},
-        {"cmd": "add = lambda x, y: x + y", "desc": "定义匿名函数", "scene": "简短函数"},
-        {"cmd": "@staticmethod\\ndef my_static(): pass", "desc": "静态方法", "scene": "无需实例的方法"},
-        {"cmd": "with open('file.txt') as f: data = f.read()", "desc": "读取文件", "scene": "文件操作"},
-        {"cmd": "import json\\ndata = json.loads('{\"a\": 1}')", "desc": "解析JSON", "scene": "数据处理"},
+        {"cmd": "python -m venv venv", "desc": "创建虚拟环境", "scene": "隔离项目依赖"},
+        {"cmd": "pip install -r requirements.txt", "desc": "安装依赖", "scene": "部署项目"},
+        {"cmd": "python -m pip list", "desc": "查看已安装包", "scene": "检查依赖"},
+        {"cmd": "python -c \"print('hi')\"", "desc": "执行单行代码", "scene": "快速测试"},
+        {"cmd": "python -m json.tool data.json", "desc": "格式化 JSON 文件", "scene": "调试 JSON"},
+        {"cmd": "python -m http.server 8000", "desc": "启动简易 HTTP 服务", "scene": "共享文件"},
+        {"cmd": "python -m pdb script.py", "desc": "调试 Python 脚本", "scene": "排查 bug"},
+        {"cmd": "python -m cProfile script.py", "desc": "性能分析", "scene": "优化性能"},
+        {"cmd": "python -m unittest test.py", "desc": "运行单元测试", "scene": "测试代码"},
+        {"cmd": "python -m pip freeze > requirements.txt", "desc": "导出依赖清单", "scene": "记录依赖"},
+    ],
+    "linux": [
+        {"cmd": "grep -r 'pattern' /path", "desc": "递归搜索文件内容", "scene": "查找代码"},
+        {"cmd": "find /path -name '*.py'", "desc": "按文件名查找", "scene": "定位文件"},
+        {"cmd": "ps aux | grep python", "desc": "查看进程", "scene": "检查运行状态"},
+        {"cmd": "kill -9 PID", "desc": "强制终止进程", "scene": "结束异常进程"},
+        {"cmd": "df -h", "desc": "查看磁盘使用情况", "scene": "检查磁盘空间"},
+        {"cmd": "du -sh *", "desc": "查看目录大小", "scene": "分析磁盘占用"},
+        {"cmd": "tar -czf archive.tar.gz /path", "desc": "压缩文件", "scene": "打包备份"},
+        {"cmd": "tar -xzf archive.tar.gz", "desc": "解压文件", "scene": "解压备份"},
+        {"cmd": "chmod +x script.sh", "desc": "添加执行权限", "scene": "运行脚本"},
+        {"cmd": "ln -s /target /link", "desc": "创建软链接", "scene": "快捷访问"},
+    ],
+    "mysql": [
+        {"cmd": "mysql -u root -p", "desc": "连接 MySQL", "scene": "数据库管理"},
+        {"cmd": "SHOW DATABASES;", "desc": "查看数据库列表", "scene": "浏览数据库"},
+        {"cmd": "USE dbname;", "desc": "切换数据库", "scene": "选择数据库"},
+        {"cmd": "SHOW TABLES;", "desc": "查看表列表", "scene": "浏览表"},
+        {"cmd": "DESCRIBE tablename;", "desc": "查看表结构", "scene": "了解表字段"},
+        {"cmd": "SELECT * FROM table LIMIT 10;", "desc": "查询前10条数据", "scene": "快速查看数据"},
+        {"cmd": "EXPLAIN SELECT ...;", "desc": "查看执行计划", "scene": "优化查询"},
+        {"cmd": "CREATE DATABASE dbname;", "desc": "创建数据库", "scene": "新建数据库"},
+        {"cmd": "DROP TABLE tablename;", "desc": "删除表", "scene": "清理表"},
+        {"cmd": "mysqldump -u root -p dbname > backup.sql", "desc": "备份数据库", "scene": "数据备份"},
     ],
 }
 
+# 领域别名映射（用于模糊匹配领域名）
+DOMAIN_ALIASES: Dict[str, str] = {
+    "py": "python",
+    "pyth": "python",
+    "dock": "docker",
+    "container": "docker",
+    "lin": "linux",
+    "bash": "linux",
+    "shell": "linux",
+    "mysql": "mysql",
+    "sql": "mysql",
+    "maria": "mysql",
+    "git": "git",
+    "github": "git",
+}
+
+# 错误码定义
+EXIT_OK = 0
+EXIT_USAGE_ERROR = 2
+EXIT_DATA_ERROR = 3
+EXIT_IO_ERROR = 4
+EXIT_UNKNOWN_ERROR = 5
+
 
 # ---------------------------------------------------------------------------
-# 数据加载与校验
+# 工具函数
 # ---------------------------------------------------------------------------
 
-def _read_text_safe(path):
-    """多编码安全读取（R3+R5 合规）"""
-    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
-        try:
-            with open(path, encoding=enc, errors="replace") as f:
-                return f.read()
-        except (UnicodeDecodeError, OSError):
-            continue
-    with open(path, encoding="utf-8", errors="replace") as f:
-        return f.read()
-
-# 批处理流式读取工具
-def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
+def utc_now_str() -> str:
+    """返回 UTC 当前时间的 ISO 格式字符串。"""
+    return datetime.now(timezone.utc).isoformat()
 
 
-def load_cheats(data_file: Optional[str] = None) -> Dict[str, List[Dict[str, str]]]:
+def normalize_domain(domain: str) -> str:
+    """将用户输入的领域名标准化为内置领域名。
+
+    支持别名映射和模糊匹配。若无法匹配，返回原字符串。
     """
-    加载速查数据。
+    domain_lower = domain.strip().lower()
+    if domain_lower in DEFAULT_CHEATS:
+        return domain_lower
+    if domain_lower in DOMAIN_ALIASES:
+        return DOMAIN_ALIASES[domain_lower]
+    # 模糊匹配
+    matches = difflib.get_close_matches(domain_lower, DEFAULT_CHEATS.keys(), n=1, cutoff=0.6)
+    if matches:
+        return matches[0]
+    return domain_lower
 
-    优先级: 外部文件 (CHEAT_SH_PRO_DATA 或 --data) > 内置默认数据
 
-    参数:
-        data_file: 外部数据文件路径（可选）
+def load_cheats(data_dir: Optional[Path] = None) -> Dict[str, List[Dict[str, str]]]:
+    """加载速查数据。
 
-    返回:
-        速查数据字典，格式: {领域: [{cmd, desc, scene}, ...]}
+    优先从 data_dir 加载 JSON 数据文件，若不存在则使用内置默认数据。
+    若 data_dir 中的文件损坏，降级使用内置数据并打印警告。
 
-    异常:
-        SystemExit: 外部文件格式错误时退出
+    Args:
+        data_dir: 可选的数据目录。若为 None，使用内置数据。
+
+    Returns:
+        速查数据字典，格式为 {domain: [{cmd, desc, scene}, ...]}
     """
-    # 确定数据文件路径
-    file_path = data_file or os.environ.get("CHEAT_SH_PRO_DATA")
-    if not file_path:
+    if data_dir is None:
         return DEFAULT_CHEATS
 
-    # 读取外部文件
+    data_file = data_dir / "cheats.json"
+    if not data_file.exists():
+        return DEFAULT_CHEATS
+
     try:
-        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+        with open(data_file, "r", encoding="utf-8") as f:
             data = json.load(f)
-    except FileNotFoundError:
-        print(f"[警告] 外部数据文件不存在: {file_path}，使用内置数据", file=sys.stderr)
-        return DEFAULT_CHEATS
-    except json.JSONDecodeError as e:
-        print(f"[错误] 外部数据文件格式错误: {e}，使用内置数据", file=sys.stderr)
-        return DEFAULT_CHEATS
-    except Exception as e:
-        print(f"[错误] 读取外部数据文件失败: {e}，使用内置数据", file=sys.stderr)
-        return DEFAULT_CHEATS
-
-    # 校验数据格式
-    if not isinstance(data, dict):
-        print("[错误] 外部数据必须是 JSON 对象（领域 -> 命令数组），使用内置数据", file=sys.stderr)
+        # 校验数据格式
+        if not isinstance(data, dict):
+            print(f"[警告] 数据文件格式错误（应为字典），使用内置数据: {data_file}", file=sys.stderr)
+            return DEFAULT_CHEATS
+        for domain, items in data.items():
+            if not isinstance(items, list):
+                print(f"[警告] 领域 {domain} 数据格式错误（应为列表），使用内置数据", file=sys.stderr)
+                return DEFAULT_CHEATS
+        return data
+    except (json.JSONDecodeError, OSError) as e:
+        print(f"[警告] 读取数据文件失败（{e}），使用内置数据: {data_file}", file=sys.stderr)
         return DEFAULT_CHEATS
 
-    validated: Dict[str, List[Dict[str, str]]] = {}
-    for domain, items in data.items():
-        if not isinstance(domain, str) or not isinstance(items, list):
-            continue
-        valid_items = []
-        for item in items:
-            if isinstance(item, dict) and "cmd" in item and "desc" in item:
-                valid_items.append({
-                    "cmd": str(item["cmd"]),
-                    "desc": str(item.get("desc", "")),
-                    "scene": str(item.get("scene", "")),
-                })
-        if valid_items:
-            validated[domain] = valid_items
 
-    if not validated:
-        print("[警告] 外部数据文件无有效内容，使用内置数据", file=sys.stderr)
-        return DEFAULT_CHEATS
+def save_cheats(data: Dict[str, List[Dict[str, str]]], data_dir: Path) -> bool:
+    """保存速查数据到指定目录。
 
-    return validated
+    原子化写入：先写临时文件，再替换目标文件。
+
+    Args:
+        data: 速查数据字典
+        data_dir: 目标数据目录
+
+    Returns:
+        是否保存成功
+    """
+    try:
+        data_dir.mkdir(parents=True, exist_ok=True)
+        data_file = data_dir / "cheats.json"
+        # 原子写入
+        fd, tmp_path = tempfile.mkstemp(dir=str(data_dir), suffix=".tmp")
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            os.replace(tmp_path, data_file)
+        except Exception:
+            # 清理临时文件
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
+            raise
+        return True
+    except OSError as e:
+        print(f"[错误] 保存数据失败: {e}", file=sys.stderr)
+        return False
 
 
 # ---------------------------------------------------------------------------
-# 搜索功能
+# 核心功能：搜索
 # ---------------------------------------------------------------------------
 
 def search_cheats(
     cheats: Dict[str, List[Dict[str, str]]],
+    domain: str,
     query: str,
-    domain: Optional[str] = None,
     verbose: bool = False,
-) -> List[Tuple[str, Dict[str, str], float]]:
-    """
-    在速查数据中搜索匹配项。
+) -> Tuple[int, List[Tuple[str, Dict[str, str], float]]]:
+    """在指定领域中搜索速查条目。
 
-    使用 difflib.SequenceMatcher 进行模糊匹配，匹配度 >= 0.4 的结果会被返回。
+    使用 difflib 模糊匹配，返回匹配度排序的结果。
 
-    参数:
+    Args:
         cheats: 速查数据字典
+        domain: 领域名（已标准化）
         query: 搜索关键词
-        domain: 领域过滤（可选）
         verbose: 是否输出详细匹配信息
 
-    返回:
-        匹配结果列表，每项为 (领域, 条目, 匹配度)
+    Returns:
+        (匹配数量, 匹配结果列表)
+        匹配结果列表元素为 (领域, 条目字典, 匹配度)
     """
+    if domain not in cheats:
+        return 0, []
+
+    query_lower = query.strip().lower()
+    if not query_lower:
+        return 0, []
+
     results: List[Tuple[str, Dict[str, str], float]] = []
-    query_lower = query.lower()
+    for item in cheats[domain]:
+        # 在 cmd、desc、scene 三个字段中搜索
+        searchable_text = f"{item.get('cmd', '')} {item.get('desc', '')} {item.get('scene', '')}"
+        searchable_lower = searchable_text.lower()
 
-    # 确定搜索范围
-    domains = [domain] if domain else list(cheats.keys())
+        # 精确匹配优先
+        if query_lower in searchable_lower:
+            score = 1.0
+        else:
+            # 模糊匹配
+            ratio = difflib.SequenceMatcher(None, query_lower, searchable_lower).ratio()
+            if ratio < 0.3:
+                continue
+            score = ratio
 
-    for dom in domains:
-        if dom not in cheats:
-            continue
-        for item in cheats[dom]:
-            # 计算匹配度
-            searchable = f"{item['cmd']} {item['desc']} {item['scene']}".lower()
-            ratio = difflib.SequenceMatcher(None, query_lower, searchable).ratio()
-            # 关键词包含匹配（更精确）
-            if query_lower in searchable:
-                ratio = max(ratio, 0.8)
-            if ratio >= 0.4:
-                results.append((dom, item, ratio))
+        results.append((domain, item, score))
 
-    # 按匹配度排序
+    # 按匹配度降序排序
     results.sort(key=lambda x: x[2], reverse=True)
 
     if verbose:
-        print(f"[详细] 搜索 '{query}' 在 {len(domains)} 个领域中找到 {len(results)} 条匹配")
+        for domain_name, item, score in results:
+            print(f"  [匹配度 {score:.2f}] {item.get('cmd', '')}")
 
-    return results
+    return len(results), results
 
 
 # ---------------------------------------------------------------------------
-# 随机速查
+# 核心功能：随机速查
 # ---------------------------------------------------------------------------
 
 def random_cheat(
     cheats: Dict[str, List[Dict[str, str]]],
     domain: Optional[str] = None,
-) -> Tuple[str, Dict[str, str]]:
-    """
-    随机获取一条速查命令。
+) -> Optional[Tuple[str, Dict[str, str]]]:
+    """随机获取一条速查条目。
 
-    参数:
+    Args:
         cheats: 速查数据字典
-        domain: 领域过滤（可选）
+        domain: 可选的领域名。若为 None，从所有领域中随机选择。
 
-    返回:
-        (领域, 条目)
-
-    异常:
-        ValueError: 指定领域不存在或速查数据为空
+    Returns:
+        (领域名, 条目字典) 或 None（无数据时）
     """
-    if domain:
-        if domain not in cheats:
-            raise ValueError(f"未找到领域: {domain}")
+    if not cheats:
+        return None
+
+    if domain is not None:
+        if domain not in cheats or not cheats[domain]:
+            return None
+        return domain, random.choice(cheats[domain])
+
+    # 从所有非空领域中随机选择
+    non_empty_domains = [d for d, items in cheats.items() if items]
+    if not non_empty_domains:
+        return None
+    chosen_domain = random.choice(non_empty_domains)
+    return chosen_domain, random.choice(cheats[chosen_domain])
+
+
+# ---------------------------------------------------------------------------
+# 核心功能：导出
+# ---------------------------------------------------------------------------
+
+def export_markdown(cheats: Dict[str, List[Dict[str, str]]]) -> str:
+    """将速查数据导出为 Markdown 格式。
+
+    Args:
+        cheats: 速查数据字典
+
+    Returns:
+        Markdown 格式的字符串
+    """
+    lines: List[str] = []
+    lines.append("# 命令行速查手册\n")
+    lines.append(f"> 生成时间: {utc_now_str()}\n")
+    lines.append(f"> 共 {len(cheats)} 个领域\n")
+
+    for domain in sorted(cheats.keys()):
         items = cheats[domain]
-        if not items:
-            raise ValueError(f"领域 '{domain}' 没有速查条目")
-        return domain, random.choice(items)
+        lines.append(f"\n## {domain}\n")
+        lines.append("| 命令 | 描述 | 场景 |")
+        lines.append("|------|------|------|")
+        for item in items:
+            cmd = item.get("cmd", "").replace("|", "\\|")
+            desc = item.get("desc", "").replace("|", "\\|")
+            scene = item.get("scene", "").replace("|", "\\|")
+            lines.append(f"| `{cmd}` | {desc} | {scene} |")
 
-    # 随机选一个领域
-    all_domains = list(cheats.keys())
-    if not all_domains:
-        raise ValueError("速查数据为空")
-    dom = random.choice(all_domains)
-    items = cheats[dom]
-    if not items:
-        raise ValueError(f"领域 '{dom}' 没有速查条目")
-    return dom, random.choice(items)
+    return "\n".join(lines) + "\n"
 
 
-# ---------------------------------------------------------------------------
-# 导出功能
-# ---------------------------------------------------------------------------
+def export_json(cheats: Dict[str, List[Dict[str, str]]]) -> str:
+    """将速查数据导出为 JSON 格式。
+
+    Args:
+        cheats: 速查数据字典
+
+    Returns:
+        JSON 格式的字符串
+    """
+    return json.dumps(cheats, ensure_ascii=False, indent=2)
+
 
 def export_cheats(
     cheats: Dict[str, List[Dict[str, str]]],
-    output_format: str,
-    output_path: Optional[str] = None,
+    fmt: str,
+    output: Optional[Path],
     dry_run: bool = False,
-    verbose: bool = False,
-) -> Optional[str]:
-    """
-    导出速查数据到文件。
+) -> bool:
+    """导出速查数据到文件或标准输出。
 
-    支持格式: markdown, json
-
-    参数:
+    Args:
         cheats: 速查数据字典
-        output_format: 导出格式 (markdown/json)
-        output_path: 输出文件路径（可选，默认输出到 stdout）
-        dry_run: 预览模式，不实际写文件
-        verbose: 详细输出
+        fmt: 导出格式（markdown 或 json）
+        output: 输出文件路径。若为 None，输出到标准输出。
+        dry_run: 是否仅预览（不写文件）
 
-    返回:
-        写入的文件路径（dry_run 或输出到 stdout 时返回 None）
+    Returns:
+        是否成功
     """
-    # 生成内容
-    if output_format == "markdown":
-        content = _format_markdown(cheats)
-    elif output_format == "json":
-        content = json.dumps(cheats, ensure_ascii=False, indent=2)
+    if fmt == "markdown":
+        content = export_markdown(cheats)
+    elif fmt == "json":
+        content = export_json(cheats)
     else:
-        raise ValueError(f"不支持的导出格式: {output_format}")
+        print(f"[错误] 不支持的导出格式: {fmt}", file=sys.stderr)
+        return False
 
-    # 输出到 stdout
-    if not output_path:
+    if output is None:
+        # 输出到标准输出
         print(content)
-        return None
+        return True
 
-    # dry-run 模式
     if dry_run:
-        domain_count = len(cheats)
-        item_count = sum(len(items) for items in cheats.values())
-        print(f"[dry-run] 将写入 {domain_count} 个领域的速查到: {output_path}")
-        print(f"[dry-run] 摘要: 共 {domain_count} 个领域, {item_count} 条命令")
-        print(f"[dry-run] 内容预览 ({len(content)} 字符):")
-        print(content[:500] + ("..." if len(content) > 500 else ""))
-        return None
+        print(f"[dry-run] 将写入 {output}（{len(content)} 字节）")
+        return True
 
-    # 原子写入
     try:
-        _atomic_write(output_path, content)
-        if verbose:
-            print(f"[成功] 已写入 {len(content)} 字符到 {output_path}")
-        return output_path
-    except Exception as e:
-        print(f"[错误] 无法写入文件: {e}", file=sys.stderr)
-        return None
-
-
-def _format_markdown(cheats: Dict[str, List[Dict[str, str]]]) -> str:
-    """将速查数据格式化为 Markdown 文本。"""
-    lines = ["# 命令行速查手册", ""]
-    lines.append(f"> 生成时间: {datetime.now(timezone.utc).isoformat()}")
-    lines.append("")
-
-    for domain in sorted(cheats.keys()):
-        lines.append(f"## {domain}")
-        lines.append("")
-        lines.append("| 命令 | 说明 | 场景 |")
-        lines.append("|------|------|------|")
-        for item in cheats[domain]:
-            cmd = item["cmd"].replace("|", "\\|")
-            desc = item["desc"].replace("|", "\\|")
-            scene = item["scene"].replace("|", "\\|")
-            lines.append(f"| `{cmd}` | {desc} | {scene} |")
-        lines.append("")
-
-    return "\n".join(lines)
-
-
-def _atomic_write(file_path: str, content: str) -> None:
-    """
-    原子写入文件。
-
-    先写入临时文件，再原子替换目标文件，避免写入中断导致文件损坏。
-
-    参数:
-        file_path: 目标文件路径
-        content: 要写入的内容
-
-    异常:
-        OSError: 写入失败时抛出
-    """
-    target = Path(file_path)
-    target_dir = target.parent if target.parent != Path("") else Path(".")
-
-    # 确保目录存在
-    target_dir.mkdir(parents=True, exist_ok=True)
-
-    # 写入临时文件
-    fd, temp_path = tempfile.mkstemp(dir=str(target_dir), prefix=".cheat_sh_", suffix=".tmp")
-    try:
-        with os.fdopen(fd, "w", encoding="utf-8") as f:
-            f.write(content)
-        # 原子替换
-        os.replace(temp_path, file_path)
-    except Exception:
-        # 清理临时文件
+        # 原子写入
+        output.parent.mkdir(parents=True, exist_ok=True)
+        fd, tmp_path = tempfile.mkstemp(dir=str(output.parent), suffix=".tmp")
         try:
-            os.unlink(temp_path)
-        except OSError:
-            pass
-        raise
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                f.write(content)
+            os.replace(tmp_path, output)
+        except Exception:
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
+            raise
+        print(f"[export] 已导出 {len(cheats)} 个领域到 {output}")
+        return True
+    except OSError as e:
+        print(f"[错误] 导出失败: {e}", file=sys.stderr)
+        return False
 
 
 # ---------------------------------------------------------------------------
-# 领域列表
+# 核心功能：领域列表
 # ---------------------------------------------------------------------------
 
 def list_domains(cheats: Dict[str, List[Dict[str, str]]]) -> List[str]:
-    """返回所有可用领域列表。"""
+    """获取所有可用领域名列表。
+
+    Args:
+        cheats: 速查数据字典
+
+    Returns:
+        排序后的领域名列表
+    """
     return sorted(cheats.keys())
 
 
@@ -378,52 +428,162 @@ def list_domains(cheats: Dict[str, List[Dict[str, str]]]) -> List[str]:
 # ---------------------------------------------------------------------------
 
 def run_selftest() -> int:
-    """
-    运行自检，验证核心功能。
+    """运行自检，验证核心功能正常。
 
-    返回:
-        0 表示全部通过，非 0 表示有失败
+    真实调用核心函数并断言关键输出。
+
+    Returns:
+        退出码（0 表示成功，非 0 表示失败）
     """
-    print("=== cheat-sh-pro 自检 ===")
+    print("[selftest] 开始自检...")
     failures = 0
 
-    # 1. 数据加载
-    print("[1/5] 数据加载...")
+    # 1. 测试数据加载
+    print("[selftest] 1. 测试数据加载...")
     cheats = load_cheats()
-    assert len(cheats) >= 3, f"内置数据至少应有 3 个领域，实际 {len(cheats)}"
-    assert "git" in cheats and "docker" in cheats and "python" in cheats, "缺少核心领域"
-    print(f"  ✓ 加载 {len(cheats)} 个领域")
+    if not cheats:
+        print("[selftest] 失败: 数据加载为空", file=sys.stderr)
+        failures += 1
+    else:
+        print(f"[selftest] 通过: 加载 {len(cheats)} 个领域")
 
-    # 2. 搜索功能
-    print("[2/5] 搜索功能...")
-    results = search_cheats(cheats, "log", domain="git")
-    assert len(results) > 0, "搜索 'log' 在 git 领域应有结果"
-    assert results[0][0] == "git", "搜索结果领域应为 git"
-    print(f"  ✓ 搜索 'log' 在 git 领域找到 {len(results)} 条")
+    # 2. 测试领域标准化
+    print("[selftest] 2. 测试领域标准化...")
+    test_cases = [
+        ("py", "python"),
+        ("PY", "python"),
+        ("dock", "docker"),
+        ("git", "git"),
+        ("unknown_domain_xyz", "unknown_domain_xyz"),
+    ]
+    for input_domain, expected in test_cases:
+        result = normalize_domain(input_domain)
+        if result != expected:
+            print(f"[selftest] 失败: normalize_domain('{input_domain}') = '{result}', 期望 '{expected}'", file=sys.stderr)
+            failures += 1
+        else:
+            print(f"[selftest] 通过: normalize_domain('{input_domain}') = '{result}'")
 
-    # 3. 随机速查
-    print("[3/5] 随机速查...")
-    dom, item = random_cheat(cheats, domain="docker")
-    assert dom == "docker", f"随机速查领域应为 docker，实际 {dom}"
-    assert "cmd" in item and "desc" in item, "随机速查条目应包含 cmd 和 desc"
-    print(f"  ✓ 随机获取: [{dom}] {item['cmd'][:50]}")
+    # 3. 测试搜索功能
+    print("[selftest] 3. 测试搜索功能...")
+    count, results = search_cheats(cheats, "python", "list")
+    if count == 0:
+        print("[selftest] 失败: 搜索 'python list' 无结果", file=sys.stderr)
+        failures += 1
+    else:
+        print(f"[selftest] 通过: 搜索 'python list' 返回 {count} 条结果")
 
-    # 4. 导出功能
-    print("[4/5] 导出功能...")
-    md_content = _format_markdown(cheats)
-    assert "## git" in md_content, "Markdown 导出应包含 git 领域"
-    assert "## docker" in md_content, "Markdown 导出应包含 docker 领域"
-    assert "| 命令 | 说明 | 场景 |" in md_content, "Markdown 导出应包含表格头"
-    print(f"  ✓ Markdown 导出 {len(md_content)} 字符")
+    # 测试空查询
+    count, results = search_cheats(cheats, "python", "")
+    if count != 0:
+        print("[selftest] 失败: 空查询应返回 0 条结果", file=sys.stderr)
+        failures += 1
+    else:
+        print("[selftest] 通过: 空查询返回 0 条结果")
 
-    # 5. 领域列表
-    print("[5/5] 领域列表...")
+    # 测试不存在的领域
+    count, results = search_cheats(cheats, "nonexistent", "test")
+    if count != 0:
+        print("[selftest] 失败: 不存在的领域应返回 0 条结果", file=sys.stderr)
+        failures += 1
+    else:
+        print("[selftest] 通过: 不存在的领域返回 0 条结果")
+
+    # 4. 测试随机速查
+    print("[selftest] 4. 测试随机速查...")
+    result = random_cheat(cheats, "git")
+    if result is None:
+        print("[selftest] 失败: 随机速查 git 返回 None", file=sys.stderr)
+        failures += 1
+    else:
+        domain, item = result
+        if domain != "git" or not item:
+            print("[selftest] 失败: 随机速查 git 返回异常结果", file=sys.stderr)
+            failures += 1
+        else:
+            print(f"[selftest] 通过: 随机速查 git 返回 '{item.get('cmd', '')}'")
+
+    # 测试不存在的领域
+    result = random_cheat(cheats, "nonexistent")
+    if result is not None:
+        print("[selftest] 失败: 随机速查不存在的领域应返回 None", file=sys.stderr)
+        failures += 1
+    else:
+        print("[selftest] 通过: 随机速查不存在的领域返回 None")
+
+    # 5. 测试导出功能
+    print("[selftest] 5. 测试导出功能...")
+    md_content = export_markdown(cheats)
+    if not md_content or "# 命令行速查手册" not in md_content:
+        print("[selftest] 失败: Markdown 导出内容异常", file=sys.stderr)
+        failures += 1
+    else:
+        print(f"[selftest] 通过: Markdown 导出 {len(md_content)} 字符")
+
+    json_content = export_json(cheats)
+    try:
+        parsed = json.loads(json_content)
+        if not isinstance(parsed, dict):
+            print("[selftest] 失败: JSON 导出格式错误", file=sys.stderr)
+            failures += 1
+        else:
+            print(f"[selftest] 通过: JSON 导出 {len(json_content)} 字符")
+    except json.JSONDecodeError as e:
+        print(f"[selftest] 失败: JSON 导出解析失败: {e}", file=sys.stderr)
+        failures += 1
+
+    # 6. 测试领域列表
+    print("[selftest] 6. 测试领域列表...")
     domains = list_domains(cheats)
-    assert "git" in domains and "python" in domains, "领域列表应包含核心领域"
-    print(f"  ✓ 领域列表: {', '.join(domains)}")
+    if not domains:
+        print("[selftest] 失败: 领域列表为空", file=sys.stderr)
+        failures += 1
+    else:
+        print(f"[selftest] 通过: 领域列表包含 {len(domains)} 个领域: {', '.join(domains[:3])}...")
 
-    print("\n=== 自检通过 ===")
-    return 0
+    # 7. 测试导出到文件（临时目录）
+    print("[selftest] 7. 测试导出到文件...")
+    with tempfile.TemporaryDirectory() as tmpdir:
+        tmp_path = Path(tmpdir) / "test_export.md"
+        success = export_cheats(cheats, "markdown", tmp_path, dry_run=False)
+        if not success or not tmp_path.exists():
+            print("[selftest] 失败: 导出到文件失败", file=sys.stderr)
+            failures += 1
+        else:
+            print(f"[selftest] 通过: 导出到文件 {tmp_path} ({tmp_path.stat().st_size} 字节)")
+
+        # 测试 dry-run
+        tmp_path2 = Path(tmpdir) / "test_dryrun.md"
+        success = export_cheats(cheats, "markdown", tmp_path2, dry_run=True)
+        if not success or tmp_path2.exists():
+            print("[selftest] 失败: dry-run 不应写文件", file=sys.stderr)
+            failures += 1
+        else:
+            print("[selftest] 通过: dry-run 不写文件")
+
+    # 8. 测试数据保存与加载
+    print("[selftest] 8. 测试数据保存与加载...")
+    with tempfile.TemporaryDirectory() as tmpdir:
+        data_dir = Path(tmpdir)
+        success = save_cheats(cheats, data_dir)
+        if not success:
+            print("[selftest] 失败: 保存数据失败", file=sys.stderr)
+            failures += 1
+        else:
+            loaded = load_cheats(data_dir)
+            if loaded != cheats:
+                print("[selftest] 失败: 加载的数据与保存的数据不一致", file=sys.stderr)
+                failures += 1
+            else:
+                print("[selftest] 通过: 数据保存与加载一致")
+
+    # 汇总
+    if failures == 0:
+        print("[selftest] 全部通过 ✓")
+        return EXIT_OK
+    else:
+        print(f"[selftest] {failures} 项失败 ✗", file=sys.stderr)
+        return EXIT_UNKNOWN_ERROR
 
 
 # ---------------------------------------------------------------------------
@@ -433,53 +593,48 @@ def run_selftest() -> int:
 def build_parser() -> argparse.ArgumentParser:
     """构建命令行参数解析器。"""
     parser = argparse.ArgumentParser(
-        prog="cheat-sh-pro",
-        description="命令行速查手册 — 终端内即时获取代码示例",
+        prog="run.py",
+        description="命令行速查手册 — 终端内即时获取编程语言与工具代码示例",
         epilog="示例: python run.py search python --query list",
     )
 
     subparsers = parser.add_subparsers(dest="command", help="子命令")
 
     # search 子命令
-    search_parser = subparsers.add_parser("search", help="搜索速查命令")
-    search_parser.add_argument("--domain", nargs="?", help="领域过滤（可选）")
+    search_parser = subparsers.add_parser("search", help="搜索速查条目")
+    search_parser.add_argument("--domain", help="领域名（如 python、git、docker）")
     search_parser.add_argument("--query", "-q", required=False, help="搜索关键词")
-    search_parser.add_argument("--verbose", "-v", action="store_true", help="详细输出")
-    search_parser.add_argument("--data", help="外部数据文件路径")
+    search_parser.add_argument("--verbose", "-v", action="store_true", help="显示匹配度详情")
 
     # random 子命令
-    random_parser = subparsers.add_parser("random", help="随机获取一条速查命令")
-    random_parser.add_argument("--domain", nargs="?", help="领域过滤（可选）")
-    random_parser.add_argument("--data", help="外部数据文件路径")
+    random_parser = subparsers.add_parser("random", help="随机获取一条速查")
+    random_parser.add_argument("--domain", nargs="?", default=None, help="领域名（可选）")
 
     # list-domains 子命令
-    list_parser = subparsers.add_parser("list-domains", help="列出所有可用领域")
-    list_parser.add_argument("--data", help="外部数据文件路径")
+    subparsers.add_parser("list-domains", help="列出所有可用领域")
 
     # export 子命令
     export_parser = subparsers.add_parser("export", help="导出速查数据")
     export_parser.add_argument("--format", "-f", choices=["markdown", "json"], default="markdown", help="导出格式")
-    export_parser.add_argument("--output", "-o", help="输出文件路径（默认输出到 stdout）")
-    export_parser.add_argument("--dry-run", action="store_true", help="预览模式，不实际写文件")
-    export_parser.add_argument("--verbose", "-v", action="store_true", help="详细输出")
-    export_parser.add_argument("--data", help="外部数据文件路径")
+    export_parser.add_argument("--output", "-o", type=Path, default=None, help="输出文件路径（默认输出到标准输出）")
+    export_parser.add_argument("--dry-run", action="store_true", help="仅预览，不写文件")
 
     # 全局参数
     parser.add_argument("--selftest", action="store_true", help="运行自检")
     parser.add_argument("--verbose", "-v", action="store_true", help="详细输出")
+    parser.add_argument("--data-dir", type=Path, default=None, help="自定义数据目录")
 
     return parser
 
 
 def main(argv: Optional[List[str]] = None) -> int:
-    """
-    主入口函数。
+    """主入口函数。
 
-    参数:
-        argv: 命令行参数列表（默认使用 sys.argv[1:]）
+    Args:
+        argv: 命令行参数列表。若为 None，使用 sys.argv[1:]。
 
-    返回:
-        退出码（0 成功，非 0 失败）
+    Returns:
+        退出码
     """
     parser = build_parser()
     args = parser.parse_args(argv)
@@ -488,81 +643,76 @@ def main(argv: Optional[List[str]] = None) -> int:
 
     # 自检模式
     if args.selftest:
-        try:
-            return run_selftest()
-        except AssertionError as e:
-            print(f"[自检失败] {e}", file=sys.stderr)
-            return 1
-        except Exception as e:
-            print(f"[自检异常] {e}", file=sys.stderr)
-            return 1
-
-    # 无子命令
-    if not args.command:
-        parser.print_help()
-        return 0
+        return run_selftest()
 
     # 加载数据
-    data_file = getattr(args, "data", None)
-    cheats = load_cheats(data_file)
+    cheats = load_cheats(args.data_dir)
 
-    # 执行子命令
-    try:
-        if args.command == "search":
-            results = search_cheats(cheats, args.query, args.domain, args.verbose)
-            if not results:
-                print(f"[错误] 未找到匹配结果: '{args.query}'")
-                return 1
-            for dom, item, score in results[:10]:
-                print(f"[{dom}] 匹配度 {score:.2f}:")
-                print(f"  cmd: {item['cmd']}")
-                print(f"  desc: {item['desc']}")
-                print(f"  scene: {item['scene']}")
-                print()
-            return 0
+    # 无子命令时显示帮助
+    if args.command is None:
+        parser.print_help()
+        return EXIT_USAGE_ERROR
 
-        elif args.command == "random":
-            try:
-                dom, item = random_cheat(cheats, args.domain)
-            except ValueError as e:
-                print(f"[错误] {e}")
-                return 1
-            print(f"[{dom}] 随机速查:")
-            print(f"  cmd: {item['cmd']}")
-            print(f"  desc: {item['desc']}")
-            print(f"  scene: {item['scene']}")
-            return 0
+    # 处理子命令
+    if args.command == "search":
+        domain = normalize_domain(args.domain)
+        if domain not in cheats:
+            print(f"[错误] 领域 '{args.domain}' 不存在。可用领域: {', '.join(list_domains(cheats))}", file=sys.stderr)
+            return EXIT_DATA_ERROR
 
-        elif args.command == "list-domains":
-            domains = list_domains(cheats)
-            if not domains:
-                print("[错误] 速查数据为空")
-                return 1
-            print(f"可用领域 ({len(domains)}):")
-            for dom in domains:
-                count = len(cheats[dom])
-                print(f"  - {dom} ({count} 条)")
-            return 0
+        count, results = search_cheats(cheats, domain, args.query, verbose=args.verbose)
+        if count == 0:
+            print(f"[提示] 在领域 '{domain}' 中未找到与 '{args.query}' 匹配的条目")
+            return EXIT_OK
 
-        elif args.command == "export":
-            result = export_cheats(
-                cheats,
-                args.format,
-                args.output,
-                args.dry_run,
-                args.verbose,
-            )
-            if args.output and not args.dry_run and result is None:
-                return 1
-            return 0
+        print(f"[{domain}] 匹配到 {count} 条结果:")
+        for domain_name, item, score in results:
+            print(f"  • {item.get('cmd', '')}")
+            print(f"    描述: {item.get('desc', '')}")
+            print(f"    场景: {item.get('scene', '')}")
+            if args.verbose:
+                print(f"    匹配度: {score:.2f}")
+        return EXIT_OK
 
-        else:
-            print(f"[错误] 未知命令: {args.command}")
-            return 1
+    elif args.command == "random":
+        domain = None
+        if args.domain:
+            domain = normalize_domain(args.domain)
+            if domain not in cheats:
+                print(f"[错误] 领域 '{args.domain}' 不存在。可用领域: {', '.join(list_domains(cheats))}", file=sys.stderr)
+                return EXIT_DATA_ERROR
 
-    except Exception as e:
-        print(f"[错误] 执行失败: {e}", file=sys.stderr)
-        return 1
+        result = random_cheat(cheats, domain)
+        if result is None:
+            print("[提示] 没有可用的速查数据")
+            return EXIT_DATA_ERROR
+
+        domain_name, item = result
+        print(f"[{domain_name}] 随机速查:")
+        print(f"  • {item.get('cmd', '')}")
+        print(f"    描述: {item.get('desc', '')}")
+        print(f"    场景: {item.get('scene', '')}")
+        return EXIT_OK
+
+    elif args.command == "list-domains":
+        domains = list_domains(cheats)
+        if not domains:
+            print("[提示] 没有可用的领域")
+            return EXIT_DATA_ERROR
+
+        print(f"可用领域（{len(domains)} 个）:")
+        for domain in domains:
+            count = len(cheats[domain])
+            print(f"  • {domain}（{count} 条速查）")
+        return EXIT_OK
+
+    elif args.command == "export":
+        success = export_cheats(cheats, args.format, args.output, dry_run=args.dry_run)
+        return EXIT_OK if success else EXIT_IO_ERROR
+
+    # 未知命令（理论上不会到达这里）
+    parser.print_help()
+    return EXIT_USAGE_ERROR
 
 
 if __name__ == "__main__":

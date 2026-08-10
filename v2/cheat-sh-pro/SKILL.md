@@ -3,7 +3,7 @@ slug: cheat-sh-pro
 name: cheat-sh-pro
 displayName: 命令行速查手册
 description: 终端内即时获取编程语言与工具代码示例，支持模糊搜索、领域过滤、随机速查与 Markdown 导出，开发调试零切换。
-version: 2.0.0
+version: 3.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -82,12 +82,6 @@ trigger_words: ["cheat.sh", "命令行速查", "代码示例查询", "终端查�
 ## 示例 Examples
 
 ### 示例 1：搜索 Python 的 lambda 用法
-
-```bash
-$ python run.py search python --query lambda
-```
-
-输出：
 
 ## 许可证（License）
 

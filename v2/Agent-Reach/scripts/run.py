@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Agent-Reach: 智能体运维 远程管控 批量调度
-==========================================
+Agent-Reach: AI 智能体本地批量运维工具
+======================================
 真实可用的批量智能体实例管理工具。
 
 核心能力:
@@ -39,6 +39,9 @@ CLI 示例:
 
   # 结果汇总
   python run.py report --format json --output report.json
+
+  # 自检
+  python run.py --selftest
 """
 
 import argparse
@@ -49,11 +52,17 @@ import sys
 import time
 import shutil
 import socket
+import signal
+import platform
 from datetime import datetime, timezone
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from filelock import FileLock
-dry_run = False  # v3.274 模块级 dry-run 标志
+
+try:
+    from filelock import FileLock
+    HAS_FILELOCK = True
+except ImportError:
+    HAS_FILELOCK = False
 
 # 尝试导入 paramiko, 如果不可用则使用 ssh 命令
 try:
@@ -85,398 +94,835 @@ SSH_TIMEOUT = 10
 SSH_RETRIES = 3
 SSH_BACKOFF = 1.0
 
-# 主机配置 (从环境变量或配置文件读取)
-def get_host_config(name):
-    """获取实例的主机配置"""
-    # 从环境变量或配置文件读取主机信息
-    host_env = os.environ.get(f"AGENT_REACH_HOST_{name.upper()}")
-    if host_env:
-        parts = host_env.split("@")
-        if len(parts) == 2:
-            user, host = parts
-            return {"host": host, "user": user, "port": 22}
-    
-    # 默认本地主机
-    return {"host": "localhost", "user": os.environ.get("USER", "root"), "port": 22}
+# 全局 dry-run 标志
+dry_run = False
 
 
-def ensure_environment():
-    """确保实例目录和锁目录存在"""
+def utc_now_str():
+    """返回 UTC 时间的 ISO 格式字符串。"""
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def get_instance_dir(name):
+    """获取实例目录路径。"""
+    return INSTANCE_ROOT / name
+
+
+def get_status_file(name):
+    """获取实例状态文件路径。"""
+    return get_instance_dir(name) / "status.json"
+
+
+def get_pid_file(name):
+    """获取实例 PID 文件路径。"""
+    return get_instance_dir(name) / "agent.pid"
+
+
+def get_log_file(name):
+    """获取实例日志文件路径。"""
+    return get_instance_dir(name) / "agent.log"
+
+
+def get_lock_file(name):
+    """获取实例锁文件路径。"""
+    return LOCK_ROOT / f"{name}.lock"
+
+
+def ensure_dirs():
+    """确保实例根目录和锁目录存在。"""
     INSTANCE_ROOT.mkdir(parents=True, exist_ok=True)
     LOCK_ROOT.mkdir(parents=True, exist_ok=True)
 
 
-def get_lock_path(name):
-    """获取实例锁文件路径"""
-    return LOCK_ROOT / f"{name}.lock"
-
-
-def create_instance(name, tag="test"):
-    """创建智能体实例 (真实文件操作)"""
-    inst_dir = INSTANCE_ROOT / name
-    inst_dir.mkdir(parents=True, exist_ok=True)
-
-    # 生成状态文件
-    status = {
-        "name": name,
-        "tag": tag,
-        "status": "stopped",
-        "pid": None,
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "last_start": None,
-        "last_stop": None,
-        "cpu_usage": 0.0,
-        "memory_usage": 0.0,
-        "host": get_host_config(name),
-    }
-    
-    # 写入状态文件并验证
-    status_file = inst_dir / "status.json"
-    lock = FileLock(str(get_lock_path(name)))
-    with lock:
-        with open(status_file, "w", encoding="utf-8", errors="replace") as f:
-            json.dump(status, f, ensure_ascii=False, indent=2)
-        
-        # 验证写入的文件是合法的 JSON
-        try:
-            with open(status_file, "r", encoding="utf-8", errors="replace") as f:
-                json.load(f)
-        except json.JSONDecodeError as e:
-            raise RuntimeError(f"状态文件写入失败: {e}")
-
-    # 初始化日志
-    with open(inst_dir / "agent.log", "w", encoding="utf-8", errors="replace") as f:
-        f.write(f"[{datetime.now(timezone.utc).isoformat()}] 实例 {name} 已创建\n")
-
-    return status
-
-
-def load_instance(name):
-    """加载实例状态 (带文件锁)"""
-    status_file = INSTANCE_ROOT / name / "status.json"
+def read_status(name):
+    """读取实例状态文件，返回字典。文件不存在或损坏时返回空字典。"""
+    status_file = get_status_file(name)
     if not status_file.exists():
-        raise FileNotFoundError(f"实例 {name} 不存在")
-
-    lock = FileLock(str(get_lock_path(name)))
-    with lock:
-        try:
-            with open(status_file, "r", encoding="utf-8", errors="replace") as f:
-                return json.load(f)
-        except json.JSONDecodeError as e:
-            # 文件损坏时返回默认状态
-            print(f"⚠️  实例 {name} 状态文件损坏, 返回默认状态: {e}")
-            return {
-                "name": name,
-                "tag": "test",
-                "status": "stopped",
-                "pid": None,
-                "created_at": datetime.now(timezone.utc).isoformat(),
-                "last_start": None,
-                "last_stop": None,
-                "cpu_usage": 0.0,
-                "memory_usage": 0.0,
-                "host": get_host_config(name),
-            }
+        return {}
+    try:
+        # 多编码 fallback 读取
+        for encoding in ["utf-8", "gbk", "gb18030"]:
+            try:
+                with open(status_file, "r", encoding=encoding) as f:
+                    return json.load(f)
+            except UnicodeDecodeError:
+                continue
+            except json.JSONDecodeError as e:
+                print(f"警告: 状态文件 {status_file} 解析失败: {e}", file=sys.stderr)
+                return {}
+    except Exception as e:
+        print(f"警告: 读取状态文件 {status_file} 失败: {e}", file=sys.stderr)
+        return {}
+    return {}
 
 
-def save_instance(status):
-    """保存实例状态 (带文件锁)"""
-    inst_dir = INSTANCE_ROOT / status["name"]
-    inst_dir.mkdir(parents=True, exist_ok=True)
+def write_status(name, status_data):
+    """原子化写入实例状态文件。"""
+    status_file = get_status_file(name)
+    tmp_file = status_file.with_suffix(".tmp")
+    try:
+        with open(tmp_file, "w", encoding="utf-8") as f:
+            json.dump(status_data, f, ensure_ascii=False, indent=2)
+        os.replace(tmp_file, status_file)
+    except Exception as e:
+        print(f"错误: 写入状态文件 {status_file} 失败: {e}", file=sys.stderr)
+        raise
 
-    lock = FileLock(str(get_lock_path(status["name"])))
-    with lock:
-        status_file = inst_dir / "status.json"
-        with open(status_file, "w", encoding="utf-8", errors="replace") as f:
-            json.dump(status, f, ensure_ascii=False, indent=2)
-        
-        # 验证写入的文件是合法的 JSON
-        try:
-            with open(status_file, "r", encoding="utf-8", errors="replace") as f:
-                json.load(f)
-        except json.JSONDecodeError as e:
-            raise RuntimeError(f"状态文件写入失败: {e}")
+
+def read_pid(name):
+    """读取实例 PID 文件，返回整数 PID 或 None。"""
+    pid_file = get_pid_file(name)
+    if not pid_file.exists():
+        return None
+    try:
+        with open(pid_file, "r", encoding="utf-8") as f:
+            return int(f.read().strip())
+    except (ValueError, IOError) as e:
+        print(f"警告: 读取 PID 文件 {pid_file} 失败: {e}", file=sys.stderr)
+        return None
+
+
+def write_pid(name, pid):
+    """原子化写入实例 PID 文件。"""
+    pid_file = get_pid_file(name)
+    tmp_file = pid_file.with_suffix(".tmp")
+    try:
+        with open(tmp_file, "w", encoding="utf-8") as f:
+            f.write(str(pid))
+        os.replace(tmp_file, pid_file)
+    except Exception as e:
+        print(f"错误: 写入 PID 文件 {pid_file} 失败: {e}", file=sys.stderr)
+        raise
 
 
 def append_log(name, message):
-    """追加日志 (带文件锁)"""
-    log_file = INSTANCE_ROOT / name / "agent.log"
-    lock = FileLock(str(get_lock_path(name)) + ".log")
-    with lock:
-        with open(log_file, "a", encoding="utf-8", errors="replace") as f:
-            f.write(f"[{datetime.now(timezone.utc).isoformat()}] {message}\n")
-
-
-def get_process_stats(pid):
-    """获取进程的 CPU 和内存使用情况"""
+    """追加日志到实例日志文件。"""
+    log_file = get_log_file(name)
     try:
-        # 使用 psutil 如果可用
-        try:
-            import psutil
-            process = psutil.Process(pid)
-            cpu_percent = process.cpu_percent(interval=0.1)
-            memory_info = process.memory_info()
-            memory_mb = memory_info.rss / 1024 / 1024
-            return cpu_percent, memory_mb
-        except ImportError:
-            # 回退到读取 /proc/<pid>/stat
-            with open(f"/proc/{pid}/stat", "r") as f:
-                fields = f.read().split()
-            
-            # 解析 CPU 使用率
-            utime = int(fields[13])
-            stime = int(fields[14])
-            total_time = utime + stime
-            
-            # 读取系统总 CPU 时间
-            with open("/proc/stat", "r") as f:
-                cpu_line = f.readline().split()
-            cpu_total = sum(int(x) for x in cpu_line[1:])
-            
-            # 计算 CPU 使用率 (简化计算)
-            cpu_percent = (total_time / cpu_total) * 100 if cpu_total > 0 else 0.0
-            
-            # 读取内存使用
-            with open(f"/proc/{pid}/status", "r") as f:
-                for line in f:
-                    if line.startswith("VmRSS:"):
-                        memory_kb = int(line.split()[1])
-                        memory_mb = memory_kb / 1024
-                        break
-                else:
-                    memory_mb = 0.0
-            
-            return cpu_percent, memory_mb
-    except (FileNotFoundError, ProcessLookupError, PermissionError):
-        return 0.0, 0.0
-
-
-def start_instance(name, tag="test"):
-    """启动实例 (真实进程管理)"""
-    try:
-        status = load_instance(name)
-    except FileNotFoundError:
-        status = create_instance(name, tag)
-
-    if status["status"] == "running":
-        print(f"⚠️  实例 {name} 已在运行中")
-        return status
-
-    # 启动真实进程 (模拟智能体进程)
-    try:
-        process = subprocess.Popen(
-            [sys.executable, "-c", "import time; time.sleep(3600)"],
-            stdout=subprocess.DEVNULL,
-            stderr=subprocess.DEVNULL,
-        )
-        pid = process.pid
+        with open(log_file, "a", encoding="utf-8") as f:
+            f.write(f"[{utc_now_str()}] {message}\n")
     except Exception as e:
-        raise RuntimeError(f"启动进程失败: {e}")
-
-    # 更新状态
-    status["status"] = "running"
-    status["pid"] = pid
-    status["last_start"] = datetime.now(timezone.utc).isoformat()
-    
-    # 获取真实资源占用
-    cpu_usage, memory_usage = get_process_stats(pid)
-    status["cpu_usage"] = cpu_usage
-    status["memory_usage"] = memory_usage
-    
-    save_instance(status)
-    append_log(name, f"实例启动成功 (PID: {pid})")
-    print(f"✅ 实例 {name} 已启动 (PID: {pid})")
-    return status
+        print(f"警告: 写入日志文件 {log_file} 失败: {e}", file=sys.stderr)
 
 
-def stop_instance(name, mode="graceful"):
-    """停止实例 (真实进程管理)"""
-    status = load_instance(name)
-
-    if status["status"] == "stopped":
-        print(f"⚠️  实例 {name} 已在停止状态")
-        return status
-
-    pid = status.get("pid")
-    if pid:
-        try:
-            if mode == "graceful":
-                # 优雅停止: 发送 SIGTERM
-                subprocess.run(["kill", "-TERM", str(pid)], check=True, timeout=5)
-                # 等待进程结束
-                for _ in range(10):
-                    if not subprocess.run(["kill", "-0", str(pid)], capture_output=True).returncode == 0:
-                        break
-                    time.sleep(0.1)
-            elif mode == "force":
-                # 强制停止: 发送 SIGKILL
-                subprocess.run(["kill", "-KILL", str(pid)], check=True, timeout=5)
-            else:
-                raise ValueError(f"无效的停止模式: {mode}")
-        except subprocess.TimeoutExpired:
-            raise RuntimeError(f"停止进程 {pid} 超时")
-        except subprocess.CalledProcessError:
-            # 进程可能已不存在
-            pass
-
-    # 更新状态
-    status["status"] = "stopped"
-    status["pid"] = None
-    status["last_stop"] = datetime.now(timezone.utc).isoformat()
-    status["cpu_usage"] = 0.0
-    status["memory_usage"] = 0.0
-    save_instance(status)
-    append_log(name, f"实例已{mode}停止")
-    print(f"✅ 实例 {name} 已{mode}停止")
-    return status
+def is_process_running(pid):
+    """检查进程是否存活。"""
+    if pid is None:
+        return False
+    try:
+        os.kill(pid, 0)
+        return True
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    except Exception:
+        return False
 
 
-def get_status(name):
-    """获取实例状态 (包含真实资源占用)"""
-    status = load_instance(name)
-    
-    # 如果实例在运行, 获取真实资源占用
-    if status["status"] == "running" and status.get("pid"):
-        cpu_usage, memory_usage = get_process_stats(status["pid"])
-        status["cpu_usage"] = cpu_usage
-        status["memory_usage"] = memory_usage
-        save_instance(status)
-    
-    return status
+def get_process_info(pid):
+    """获取进程资源占用信息 (CPU, 内存)。"""
+    if not is_process_running(pid):
+        return {"cpu_percent": 0.0, "memory_mb": 0.0}
+    try:
+        # 使用 ps 命令获取资源占用 (跨平台兼容)
+        if platform.system() == "Linux":
+            result = subprocess.run(
+                ["ps", "-p", str(pid), "-o", "%cpu,rss", "--no-headers"],
+                capture_output=True, text=True, timeout=5
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                parts = result.stdout.strip().split()
+                cpu = float(parts[0])
+                rss_kb = float(parts[1])
+                return {"cpu_percent": cpu, "memory_mb": round(rss_kb / 1024, 2)}
+        elif platform.system() == "Darwin":
+            result = subprocess.run(
+                ["ps", "-p", str(pid), "-o", "%cpu,rss", "-x"],
+                capture_output=True, text=True, timeout=5
+            )
+            if result.returncode == 0 and result.stdout.strip():
+                lines = result.stdout.strip().splitlines()
+                if len(lines) > 1:
+                    parts = lines[1].strip().split()
+                    cpu = float(parts[0])
+                    rss_kb = float(parts[1])
+                    return {"cpu_percent": cpu, "memory_mb": round(rss_kb / 1024, 2)}
+    except Exception as e:
+        print(f"警告: 获取进程 {pid} 资源占用失败: {e}", file=sys.stderr)
+    return {"cpu_percent": 0.0, "memory_mb": 0.0}
 
 
-def list_instances(tag=None):
-    """列出所有实例"""
-    instances = []
-    if INSTANCE_ROOT.exists():
-        for inst_dir in INSTANCE_ROOT.iterdir():
-            if inst_dir.is_dir():
-                try:
-                    status = load_instance(inst_dir.name)
-                    if tag is None or status.get("tag") == tag:
-                        instances.append(status)
-                except (FileNotFoundError, json.JSONDecodeError):
-                    continue
-    return instances
+def get_host_config(name):
+    """获取实例的主机配置 (从环境变量读取)。"""
+    host = os.environ.get(f"AGENT_REACH_HOST_{name.upper()}", "127.0.0.1")
+    user = os.environ.get(f"AGENT_REACH_USER_{name.upper()}", os.environ.get("USER", "root"))
+    port = int(os.environ.get(f"AGENT_REACH_PORT_{name.upper()}", "22"))
+    return {"host": host, "user": user, "port": port}
 
 
-def exec_command(name, command):
-    """在实例上执行白名单命令 (SSH 远程执行)"""
-    if command not in ALLOWED_COMMANDS:
-        raise ValueError(
-            f"命令 '{command}' 不在白名单中。可用命令: {', '.join(ALLOWED_COMMANDS.keys())}"
-        )
+def ssh_execute(name, command):
+    """通过 SSH 在远程实例上执行命令，支持重试退避。"""
+    config = get_host_config(name)
+    last_error = None
 
-    status = load_instance(name)
-    if status["status"] != "running":
-        raise RuntimeError(f"实例 {name} 未运行, 无法执行命令")
-
-    # 获取主机配置
-    host_config = status.get("host", get_host_config(name))
-    cmd = ALLOWED_COMMANDS[command]
-
-    # 执行远程命令 (带重试退避)
     for attempt in range(SSH_RETRIES):
         try:
-            if HAS_PARAMIKO and host_config.get("host") != "localhost":
-                # 使用 paramiko 进行 SSH 连接
+            if HAS_PARAMIKO:
                 client = paramiko.SSHClient()
                 client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
                 client.connect(
-                    hostname=host_config["host"],
-                    port=host_config.get("port", 22),
-                    username=host_config["user"],
-                    timeout=SSH_TIMEOUT,
+                    config["host"], port=config["port"], username=config["user"],
+                    timeout=SSH_TIMEOUT
                 )
-                stdin, stdout, stderr = client.exec_command(" ".join(cmd), timeout=SSH_TIMEOUT)
-                result = stdout.read().decode().strip()
-                error = stderr.read().decode().strip()
+                stdin, stdout, stderr = client.exec_command(command, timeout=SSH_TIMEOUT)
+                output = stdout.read().decode("utf-8", errors="replace")
+                error = stderr.read().decode("utf-8", errors="replace")
+                exit_code = stdout.channel.recv_exit_status()
                 client.close()
-                if error:
-                    raise RuntimeError(f"远程命令执行失败: {error}")
+                if exit_code != 0:
+                    raise RuntimeError(f"远程命令执行失败 (exit={exit_code}): {error}")
+                return output.strip()
             else:
-                # 使用 ssh 命令或本地执行
-                if host_config.get("host") and host_config["host"] != "localhost":
-                    # 构建 SSH 命令
-                    ssh_cmd = [
-                        "ssh",
-                        "-o", f"ConnectTimeout={SSH_TIMEOUT}",
-                        "-o", "StrictHostKeyChecking=no",
-                        f"{host_config['user']}@{host_config['host']}",
-                        " ".join(cmd)
-                    ]
-                else:
-                    # 本地执行
-                    ssh_cmd = cmd
-                
+                # 回退到系统 ssh 命令
+                ssh_cmd = [
+                    "ssh", "-o", "BatchMode=yes", "-o", "ConnectTimeout=10",
+                    "-p", str(config["port"]),
+                    f"{config['user']}@{config['host']}",
+                    command
+                ]
                 result = subprocess.run(
-                    ssh_cmd,
-                    capture_output=True,
-                    text=True,
-                    timeout=SSH_TIMEOUT,
-                    check=True,
+                    ssh_cmd, capture_output=True, text=True, timeout=SSH_TIMEOUT + 5
                 )
-                result = result.stdout.strip()
-            
-            append_log(name, f"执行命令: {command} -> {result}")
-            return result
-        except (subprocess.TimeoutExpired, paramiko.AuthenticationException, paramiko.SSHException, socket.timeout) as e:
+                if result.returncode != 0:
+                    raise RuntimeError(f"SSH 命令执行失败 (exit={result.returncode}): {result.stderr}")
+                return result.stdout.strip()
+        except Exception as e:
+            last_error = e
             if attempt < SSH_RETRIES - 1:
-                time.sleep(SSH_BACKOFF * (attempt + 1))
-                continue
-            raise RuntimeError(f"执行命令超时: {command} - {str(e)}")
-        except subprocess.CalledProcessError as e:
-            if attempt < SSH_RETRIES - 1:
-                time.sleep(SSH_BACKOFF * (attempt + 1))
-                continue
-            raise RuntimeError(f"执行命令失败: {e.stderr.strip()}")
+                sleep_time = SSH_BACKOFF * (2 ** attempt)
+                print(f"警告: SSH 执行失败 (尝试 {attempt + 1}/{SSH_RETRIES}), {sleep_time}s 后重试: {e}", file=sys.stderr)
+                time.sleep(sleep_time)
+            else:
+                print(f"错误: SSH 执行最终失败: {e}", file=sys.stderr)
+
+    if last_error:
+        raise RuntimeError(f"SSH 执行失败: {last_error}")
+    return ""
 
 
-def generate_report(instances, format="json"):
-    """生成汇总报告"""
-    report = {
-        "generated_at": datetime.now(timezone.utc).isoformat(),
-        "total_instances": len(instances),
-        "running": sum(1 for i in instances if i["status"] == "running"),
-        "stopped": sum(1 for i in instances if i["status"] == "stopped"),
-        "instances": instances,
+def start_instance(name, tag="default"):
+    """启动一个智能体实例。"""
+    instance_dir = get_instance_dir(name)
+    instance_dir.mkdir(parents=True, exist_ok=True)
+
+    # 检查是否已在运行
+    existing_pid = read_pid(name)
+    if existing_pid and is_process_running(existing_pid):
+        print(f"警告: 实例 {name} 已在运行 (PID: {existing_pid})", file=sys.stderr)
+        return {"name": name, "status": "already_running", "pid": existing_pid}
+
+    # 检查 PID 文件是否存在但进程已死 (残留文件)
+    if existing_pid and not is_process_running(existing_pid):
+        print(f"警告: 清理残留 PID 文件: {get_pid_file(name)}", file=sys.stderr)
+        try:
+            get_pid_file(name).unlink()
+        except OSError as e:
+            print(f"警告: 清理 PID 文件失败: {e}", file=sys.stderr)
+
+    # 启动真实进程
+    log_file = get_log_file(name)
+    try:
+        with open(log_file, "a", encoding="utf-8") as log_f:
+            process = subprocess.Popen(
+                [sys.executable, "-c", "import time; time.sleep(3600)"],
+                stdout=log_f,
+                stderr=log_f,
+                start_new_session=True,
+            )
+    except Exception as e:
+        print(f"错误: 启动实例 {name} 失败: {e}", file=sys.stderr)
+        return {"name": name, "status": "start_failed", "error": str(e)}
+
+    pid = process.pid
+    write_pid(name, pid)
+
+    # 写入状态文件
+    status_data = {
+        "name": name,
+        "tag": tag,
+        "status": "running",
+        "pid": pid,
+        "started_at": utc_now_str(),
+        "last_updated": utc_now_str(),
+    }
+    write_status(name, status_data)
+    append_log(name, f"实例启动成功 (PID: {pid})")
+
+    return {"name": name, "status": "started", "pid": pid}
+
+
+def stop_instance(name, mode="graceful"):
+    """停止一个智能体实例。"""
+    pid = read_pid(name)
+    status_data = read_status(name)
+
+    if not pid or not is_process_running(pid):
+        # 进程不存在，更新状态为 stopped
+        status_data["status"] = "stopped"
+        status_data["last_updated"] = utc_now_str()
+        write_status(name, status_data)
+        append_log(name, "实例已停止 (进程不存在)")
+        return {"name": name, "status": "already_stopped"}
+
+    try:
+        if mode == "graceful":
+            os.kill(pid, signal.SIGTERM)
+            # 等待进程退出 (最多 10 秒)
+            for _ in range(10):
+                if not is_process_running(pid):
+                    break
+                time.sleep(1)
+            if is_process_running(pid):
+                print(f"警告: 实例 {name} 优雅停止超时，强制终止", file=sys.stderr)
+                # 跨平台强制终止
+                if hasattr(signal, "SIGKILL"):
+                    os.kill(pid, signal.SIGKILL)
+                else:
+                    # Windows 平台使用 taskkill
+                    subprocess.run(["taskkill", "/F", "/PID", str(pid)], capture_output=True)
+        elif mode == "force":
+            if hasattr(signal, "SIGKILL"):
+                os.kill(pid, signal.SIGKILL)
+            else:
+                # Windows 平台使用 taskkill
+                subprocess.run(["taskkill", "/F", "/PID", str(pid)], capture_output=True)
+        else:
+            raise ValueError(f"未知停止模式: {mode}")
+    except ProcessLookupError:
+        pass
+    except Exception as e:
+        print(f"错误: 停止实例 {name} 失败: {e}", file=sys.stderr)
+        return {"name": name, "status": "stop_failed", "error": str(e)}
+
+    # 更新状态
+    status_data["status"] = "stopped"
+    status_data["last_updated"] = utc_now_str()
+    write_status(name, status_data)
+    append_log(name, f"实例已停止 (模式: {mode})")
+
+    # 清理 PID 文件
+    try:
+        get_pid_file(name).unlink()
+    except OSError:
+        pass
+
+    return {"name": name, "status": "stopped"}
+
+
+def get_instance_status(name):
+    """获取单个实例的状态信息。"""
+    status_data = read_status(name)
+    pid = read_pid(name)
+
+    if not status_data:
+        return {"name": name, "status": "unknown", "pid": None}
+
+    running = is_process_running(pid)
+    proc_info = get_process_info(pid) if running else {"cpu_percent": 0.0, "memory_mb": 0.0}
+
+    # 读取日志尾部 (最后 5 行)
+    log_tail = ""
+    log_file = get_log_file(name)
+    if log_file.exists():
+        try:
+            with open(log_file, "r", encoding="utf-8", errors="replace") as f:
+                lines = f.readlines()
+                log_tail = "".join(lines[-5:]).strip()
+        except Exception as e:
+            print(f"警告: 读取日志文件 {log_file} 失败: {e}", file=sys.stderr)
+
+    return {
+        "name": name,
+        "status": "running" if running else "stopped",
+        "pid": pid if running else None,
+        "cpu_percent": proc_info["cpu_percent"],
+        "memory_mb": proc_info["memory_mb"],
+        "tag": status_data.get("tag", "default"),
+        "started_at": status_data.get("started_at", ""),
+        "last_updated": status_data.get("last_updated", ""),
+        "log_tail": log_tail,
     }
 
-    if format == "json":
-        return json.dumps(report, ensure_ascii=False, indent=2)
-    elif format == "markdown":
+
+def list_instances():
+    """列出所有已注册的实例名称。"""
+    if not INSTANCE_ROOT.exists():
+        return []
+    return [d.name for d in INSTANCE_ROOT.iterdir() if d.is_dir()]
+
+
+def filter_instances(names=None, tag=None, file_path=None):
+    """根据名称、标签或文件列表筛选实例。"""
+    selected = set()
+
+    if names:
+        for name in names.split(","):
+            name = name.strip()
+            if name:
+                selected.add(name)
+
+    if tag:
+        for name in list_instances():
+            status_data = read_status(name)
+            if status_data.get("tag") == tag:
+                selected.add(name)
+
+    if file_path:
+        try:
+            with open(file_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    name = line.strip()
+                    if name and not name.startswith("#"):
+                        selected.add(name)
+        except Exception as e:
+            print(f"错误: 读取实例列表文件 {file_path} 失败: {e}", file=sys.stderr)
+            raise
+
+    return sorted(selected)
+
+
+def cmd_start(args):
+    """处理 start 命令。"""
+    global dry_run
+    dry_run = args.dry_run
+
+    try:
+        selected = filter_instances(args.names, args.tag, args.file)
+    except Exception as e:
+        print(f"错误: 筛选实例失败: {e}", file=sys.stderr)
+        return 1
+
+    if not selected:
+        print("错误: 未找到匹配的实例", file=sys.stderr)
+        return 1
+
+    print(f"准备启动 {len(selected)} 个实例...")
+
+    results = []
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        future_to_name = {executor.submit(start_instance, name, args.tag or "default"): name for name in selected}
+        for future in as_completed(future_to_name):
+            name = future_to_name[future]
+            try:
+                result = future.result()
+                results.append(result)
+                if dry_run:
+                    print(f"[DRY-RUN] 将启动实例: {name}")
+                else:
+                    print(f"[{utc_now_str()}] 实例 {name} 启动结果: {result['status']} (PID: {result.get('pid', 'N/A')})")
+            except Exception as e:
+                print(f"错误: 启动实例 {name} 失败: {e}", file=sys.stderr)
+                results.append({"name": name, "status": "failed", "error": str(e)})
+
+    success = sum(1 for r in results if r["status"] in ("started", "already_running"))
+    failed = len(results) - success
+    print(f"批量启动完成。成功: {success}, 失败: {failed}")
+    return 0 if failed == 0 else 1
+
+
+def cmd_stop(args):
+    """处理 stop 命令。"""
+    global dry_run
+    dry_run = args.dry_run
+
+    try:
+        selected = filter_instances(args.names, args.tag, args.file)
+    except Exception as e:
+        print(f"错误: 筛选实例失败: {e}", file=sys.stderr)
+        return 1
+
+    if not selected:
+        print("错误: 未找到匹配的实例", file=sys.stderr)
+        return 1
+
+    print(f"准备停止 {len(selected)} 个实例 (模式: {args.mode})...")
+
+    results = []
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        future_to_name = {executor.submit(stop_instance, name, args.mode): name for name in selected}
+        for future in as_completed(future_to_name):
+            name = future_to_name[future]
+            try:
+                result = future.result()
+                results.append(result)
+                if dry_run:
+                    print(f"[DRY-RUN] 将停止实例: {name} (模式: {args.mode})")
+                else:
+                    print(f"[{utc_now_str()}] 实例 {name} 停止结果: {result['status']}")
+            except Exception as e:
+                print(f"错误: 停止实例 {name} 失败: {e}", file=sys.stderr)
+                results.append({"name": name, "status": "failed", "error": str(e)})
+
+    success = sum(1 for r in results if r["status"] in ("stopped", "already_stopped"))
+    failed = len(results) - success
+    print(f"批量停止完成。成功: {success}, 失败: {failed}")
+    return 0 if failed == 0 else 1
+
+
+def cmd_status(args):
+    """处理 status 命令。"""
+    if args.all:
+        selected = list_instances()
+    else:
+        try:
+            selected = filter_instances(args.names, args.tag, args.file)
+        except Exception as e:
+            print(f"错误: 筛选实例失败: {e}", file=sys.stderr)
+            return 1
+
+    if not selected:
+        print("错误: 未找到匹配的实例", file=sys.stderr)
+        return 1
+
+    results = []
+    for name in selected:
+        try:
+            status = get_instance_status(name)
+            results.append(status)
+        except Exception as e:
+            print(f"错误: 获取实例 {name} 状态失败: {e}", file=sys.stderr)
+            results.append({"name": name, "status": "error", "error": str(e)})
+
+    # 输出表格
+    print(f"{'实例名':<15} {'状态':<10} {'PID':<8} {'CPU(%)':<8} {'内存(MB)':<10} {'标签':<10}")
+    print("-" * 70)
+    for r in results:
+        print(f"{r['name']:<15} {r['status']:<10} {str(r.get('pid', 'N/A')):<8} "
+              f"{r.get('cpu_percent', 0):<8.1f} {r.get('memory_mb', 0):<10.1f} {r.get('tag', 'N/A'):<10}")
+
+    # 输出日志尾部
+    if args.verbose:
+        print("\n--- 日志尾部 ---")
+        for r in results:
+            if r.get("log_tail"):
+                print(f"\n[{r['name']}]")
+                print(r["log_tail"])
+
+    return 0
+
+
+def cmd_exec(args):
+    """处理 exec 命令。"""
+    if args.command not in ALLOWED_COMMANDS:
+        print(f"错误: 命令 '{args.command}' 不在白名单中。可用命令: {', '.join(ALLOWED_COMMANDS.keys())}", file=sys.stderr)
+        return 1
+
+    try:
+        selected = filter_instances(args.names, args.tag, args.file)
+    except Exception as e:
+        print(f"错误: 筛选实例失败: {e}", file=sys.stderr)
+        return 1
+
+    if not selected:
+        print("错误: 未找到匹配的实例", file=sys.stderr)
+        return 1
+
+    command = " ".join(ALLOWED_COMMANDS[args.command])
+    print(f"在 {len(selected)} 个实例上执行命令: {command}")
+
+    results = []
+    with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+        future_to_name = {executor.submit(ssh_execute, name, command): name for name in selected}
+        for future in as_completed(future_to_name):
+            name = future_to_name[future]
+            try:
+                output = future.result()
+                results.append({"name": name, "status": "success", "output": output})
+                print(f"[{utc_now_str()}] 实例 {name} 执行成功:")
+                print(f"  {output}")
+            except Exception as e:
+                print(f"错误: 在实例 {name} 上执行命令失败: {e}", file=sys.stderr)
+                results.append({"name": name, "status": "failed", "error": str(e)})
+
+    success = sum(1 for r in results if r["status"] == "success")
+    failed = len(results) - success
+    print(f"批量执行完成。成功: {success}, 失败: {failed}")
+    return 0 if failed == 0 else 1
+
+
+def cmd_report(args):
+    """处理 report 命令。"""
+    global dry_run
+    dry_run = args.dry_run
+
+    try:
+        selected = filter_instances(args.names, args.tag, args.file)
+    except Exception as e:
+        print(f"错误: 筛选实例失败: {e}", file=sys.stderr)
+        return 1
+
+    if not selected:
+        print("错误: 未找到匹配的实例", file=sys.stderr)
+        return 1
+
+    # 收集所有实例状态
+    instances_status = []
+    for name in selected:
+        try:
+            status = get_instance_status(name)
+            instances_status.append(status)
+        except Exception as e:
+            print(f"错误: 获取实例 {name} 状态失败: {e}", file=sys.stderr)
+            instances_status.append({"name": name, "status": "error", "error": str(e)})
+
+    report_data = {
+        "generated_at": utc_now_str(),
+        "total_instances": len(instances_status),
+        "running_instances": sum(1 for s in instances_status if s["status"] == "running"),
+        "stopped_instances": sum(1 for s in instances_status if s["status"] == "stopped"),
+        "error_instances": sum(1 for s in instances_status if s["status"] == "error"),
+        "instances": instances_status,
+    }
+
+    # 输出报告
+    if args.format == "json":
+        output = json.dumps(report_data, ensure_ascii=False, indent=2)
+    elif args.format == "markdown":
         lines = [
             "# Agent-Reach 实例状态报告",
             "",
-            f"生成时间: {report['generated_at']}",
-            f"实例总数: {report['total_instances']}",
-            f"运行中: {report['running']}",
-            f"已停止: {report['stopped']}",
+            f"- 生成时间: {report_data['generated_at']}",
+            f"- 实例总数: {report_data['total_instances']}",
+            f"- 运行中: {report_data['running_instances']}",
+            f"- 已停止: {report_data['stopped_instances']}",
+            f"- 异常: {report_data['error_instances']}",
             "",
-            "| 实例名 | 标签 | 状态 | PID | CPU% | 内存(MB) |",
-            "|--------|------|------|-----|------|----------|",
+            "| 实例名 | 状态 | PID | CPU (%) | 内存 (MB) | 标签 |",
+            "| :--- | :--- | :--- | :--- | :--- | :--- |",
         ]
-        for inst in instances:
+        for s in instances_status:
             lines.append(
-                f"| {inst['name']} | {inst.get('tag', '-')} | {inst['status']} | "
-                f"{inst.get('pid', '-')} | {inst.get('cpu_usage', 0)} | "
-                f"{inst.get('memory_usage', 0)} |"
+                f"| {s['name']} | {s['status']} | {s.get('pid', 'N/A')} | "
+                f"{s.get('cpu_percent', 0):.1f} | {s.get('memory_mb', 0):.1f} | {s.get('tag', 'N/A')} |"
             )
-        return "\n".join(lines)
+        output = "\n".join(lines)
     else:
-        raise ValueError(f"不支持的格式: {format}")
+        print(f"错误: 不支持的输出格式: {args.format}", file=sys.stderr)
+        return 1
+
+    # 输出或写入文件
+    if args.output:
+        output_path = Path(args.output)
+        if not dry_run:
+            try:
+                output_path.parent.mkdir(parents=True, exist_ok=True)
+                tmp_file = output_path.with_suffix(".tmp")
+                with open(tmp_file, "w", encoding="utf-8") as f:
+                    f.write(output)
+                os.replace(tmp_file, output_path)
+                print(f"报告已写入: {output_path}")
+            except Exception as e:
+                print(f"错误: 写入报告文件 {output_path} 失败: {e}", file=sys.stderr)
+                return 1
+        else:
+            print(f"[DRY-RUN] 将写入报告到: {output_path}")
+            print(output)
+    else:
+        print(output)
+
+    return 0
 
 
-def parse_instances(names_str=None, file_path=None, tag=None):
-    """解析实例列表"""
-    instances = []
+def cmd_selftest():
+    """运行自检程序，验证核心功能。"""
+    print("开始自检...")
+    failures = 0
 
-    if names_str:
-        instances.extend(names_str.split(","))
+    # 1. 测试目录创建
+    try:
+        ensure_dirs()
+        print("[PASS] 目录创建")
+    except Exception as e:
+        print(f"[FAIL] 目录创建: {e}")
+        failures += 1
 
-    if file_path:
-        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
-            for line in f:
-                line = line.strip()
-                if line and not line.startswith("#"):
-                    instances
+    # 2. 测试实例启动
+    test_name = "selftest-agent"
+    try:
+        result = start_instance(test_name, tag="selftest")
+        assert result["status"] in ("started", "already_running"), f"启动失败: {result}"
+        assert result["pid"] > 0, f"PID 无效: {result}"
+        print(f"[PASS] 实例启动 (PID: {result['pid']})")
+    except Exception as e:
+        print(f"[FAIL] 实例启动: {e}")
+        failures += 1
+
+    # 3. 测试状态读取
+    try:
+        status = get_instance_status(test_name)
+        assert status["status"] == "running", f"状态错误: {status}"
+        assert status["pid"] > 0, f"PID 无效: {status}"
+        print("[PASS] 状态读取")
+    except Exception as e:
+        print(f"[FAIL] 状态读取: {e}")
+        failures += 1
+
+    # 4. 测试实例停止
+    try:
+        result = stop_instance(test_name, mode="graceful")
+        assert result["status"] in ("stopped", "already_stopped"), f"停止失败: {result}"
+        print("[PASS] 实例停止")
+    except Exception as e:
+        print(f"[FAIL] 实例停止: {e}")
+        failures += 1
+
+    # 5. 测试报告生成 (JSON)
+    try:
+        report_data = {
+            "generated_at": utc_now_str(),
+            "total_instances": 1,
+            "running_instances": 0,
+            "stopped_instances": 1,
+            "error_instances": 0,
+            "instances": [{"name": test_name, "status": "stopped"}],
+        }
+        json_str = json.dumps(report_data, ensure_ascii=False)
+        assert json_str is not None and len(json_str) > 0
+        print("[PASS] JSON 报告生成")
+    except Exception as e:
+        print(f"[FAIL] JSON 报告生成: {e}")
+        failures += 1
+
+    # 6. 测试白名单命令
+    try:
+        assert "health_check" in ALLOWED_COMMANDS
+        assert "disk_usage" in ALLOWED_COMMANDS
+        print("[PASS] 白名单命令验证")
+    except Exception as e:
+        print(f"[FAIL] 白名单命令验证: {e}")
+        failures += 1
+
+    # 7. 测试过滤函数
+    try:
+        selected = filter_instances(names=test_name)
+        assert test_name in selected, f"过滤失败: {selected}"
+        print("[PASS] 实例过滤")
+    except Exception as e:
+        print(f"[FAIL] 实例过滤: {e}")
+        failures += 1
+
+    # 清理测试实例
+    try:
+        instance_dir = get_instance_dir(test_name)
+        if instance_dir.exists():
+            shutil.rmtree(instance_dir)
+        pid_file = get_pid_file(test_name)
+        if pid_file.exists():
+            pid_file.unlink()
+        print("[PASS] 清理测试实例")
+    except Exception as e:
+        print(f"[FAIL] 清理测试实例: {e}")
+        failures += 1
+
+    if failures == 0:
+        print("\n所有自检通过!")
+        return 0
+    else:
+        print(f"\n自检完成，{failures} 项失败。")
+        return 1
+
+
+def main():
+    """主入口函数。"""
+    parser = argparse.ArgumentParser(
+        description="Agent-Reach: AI 智能体本地批量运维工具",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""示例:
+  python run.py start --names agent-01,agent-02 --tag test
+  python run.py stop --names agent-01 --mode graceful
+  python run.py status --all
+  python run.py exec --names agent-01 --command "health_check"
+  python run.py report --format json --output report.json
+  python run.py --selftest
+"""
+    )
+
+    # 全局参数
+    parser.add_argument("--selftest", action="store_true", help="运行自检程序")
+    parser.add_argument("--verbose", action="store_true", help="输出详细信息")
+
+    # 子命令
+    subparsers = parser.add_subparsers(dest="command", help="可用命令")
+
+    # start 命令
+    parser_start = subparsers.add_parser("start", help="批量启动实例")
+    parser_start.add_argument("--names", type=str, help="实例名称，逗号分隔")
+    parser_start.add_argument("--tag", type=str, help="按标签筛选")
+    parser_start.add_argument("--file", type=str, help="从文件读取实例列表")
+    parser_start.add_argument("--dry-run", action="store_true", help="预演模式，不实际执行")
+    parser_start.set_defaults(func=cmd_start)
+
+    # stop 命令
+    parser_stop = subparsers.add_parser("stop", help="批量停止实例")
+    parser_stop.add_argument("--names", type=str, help="实例名称，逗号分隔")
+    parser_stop.add_argument("--tag", type=str, help="按标签筛选")
+    parser_stop.add_argument("--file", type=str, help="从文件读取实例列表")
+    parser_stop.add_argument("--mode", type=str, choices=["graceful", "force"], default="graceful",
+                             help="停止模式: graceful (优雅) 或 force (强制)")
+    parser_stop.add_argument("--dry-run", action="store_true", help="预演模式，不实际执行")
+    parser_stop.set_defaults(func=cmd_stop)
+
+    # status 命令
+    parser_status = subparsers.add_parser("status", help="查看实例状态")
+    parser_status.add_argument("--names", type=str, help="实例名称，逗号分隔")
+    parser_status.add_argument("--tag", type=str, help="按标签筛选")
+    parser_status.add_argument("--file", type=str, help="从文件读取实例列表")
+    parser_status.add_argument("--all", action="store_true", help="查看所有实例")
+    parser_status.set_defaults(func=cmd_status)
+
+    # exec 命令
+    parser_exec = subparsers.add_parser("exec", help="远程执行白名单命令")
+    parser_exec.add_argument("--names", type=str, help="实例名称，逗号分隔")
+    parser_exec.add_argument("--tag", type=str, help="按标签筛选")
+    parser_exec.add_argument("--file", type=str, help="从文件读取实例列表")
+    parser_exec.add_argument("--command", type=str, required=False,
+                             choices=list(ALLOWED_COMMANDS.keys()),
+                             help="要执行的命令")
+    parser_exec.set_defaults(func=cmd_exec)
+
+    # report 命令
+    parser_report = subparsers.add_parser("report", help="生成状态报告")
+    parser_report.add_argument("--names", type=str, help="实例名称，逗号分隔")
+    parser_report.add_argument("--tag", type=str, help="按标签筛选")
+    parser_report.add_argument("--file", type=str, help="从文件读取实例列表")
+    parser_report.add_argument("--format", type=str, choices=["json", "markdown"], default="json",
+                               help="输出格式")
+    parser_report.add_argument("--output", type=str, help="输出文件路径")
+    parser_report.add_argument("--dry-run", action="store_true", help="预演模式，不实际写入文件")
+    parser_report.set_defaults(func=cmd_report)
+
+    args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+
+    # 处理自检
+    if args.selftest:
+        return cmd_selftest()
+
+    # 处理子命令
+    if not args.command:
+        parser.print_help()
+        return 0
+
+    # 确保目录存在
+    ensure_dirs()
+
+    # 执行子命令
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())

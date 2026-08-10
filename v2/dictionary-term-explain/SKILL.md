@@ -3,7 +3,7 @@ slug: dictionary-term-explain
 name: 术语释义助手
 displayName: 场景拆解 概念边界 落地解释
 description: 按场景拆解术语含义，给出边界清晰、可落地的概念解释。
-version: 2.0.0
+version: 3.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -100,12 +100,176 @@ trigger_words: ["术语解释", "名词释义", "概念说明", "这个词什么
 
 ### 示例 1：单个术语解释（全场景）
 
+```bash
+$ python run.py "微服务"
+```
+
+**输出**：
+
+```text
+【微服务】核心定义
+将单一应用拆分为一组小型独立服务，每个服务围绕业务能力构建，可独立部署和扩展。
+
+【技术场景】
+服务间通过 HTTP/RPC 轻量通信，每个服务拥有独立数据库，支持独立部署与水平扩展。
+
+【业务场景】
+团队可按业务域拆分，独立迭代发布，提升交付效率，降低单点故障影响。
+
+【日常场景】
+就像一家餐厅分成多个档口，每个档口独立出菜，互不干扰。
+
+【概念边界】
+微服务 ≠ 微架构；微服务是架构风格，微架构是单体应用内部模块化设计。
+
+【常见误用】
+误以为微服务一定比单体好——团队规模小、业务简单时，单体反而更高效。
+```
+
+### 示例 2：指定场景解释
+
+```bash
+$ python run.py "区块链" --scene 技术
+```
+
+**输出**：
+
+```text
+【区块链 · 技术场景】
+一种由密码学保障的分布式数据存储结构。
+技术实现上包含区块头（版本、时间戳、Merkle根）与区块体（交易列表）；
+共识机制包括PoW、PoS、PBFT等；
+典型应用包括以太坊智能合约平台、Hyperledger Fabric联盟链。
+```
+
+### 示例 3：批量处理 JSON 文件
+
+```bash
+$ cat terms.json
+{"terms": ["微服务", "区块链", "容器化"]}
+
+$ python run.py --batch terms.json
+```
+
+**输出**：
+
+```text
+========== 1/3 ==========
+【微服务】核心定义
+...
+
+========== 2/3 ==========
+【区块链】核心定义
+...
+
+========== 3/3 ==========
+【容器化】核心定义
+...
+```
+
+---
+
+## 安装与配置 Installation
+
+### 环境要求
+
+- Python 3.8+
+- 无第三方依赖（仅使用标准库）
+
+### 安装步骤
+
+```bash
+# 1. 下载 run.py 到本地目录
+# 2. 赋予执行权限（可选）
+chmod +x run.py
+
+# 3. 验证安装
+python run.py --version
+```
+
+### 环境变量
+
+| 变量名 | 用途 | 默认值 |
+|--------|------|--------|
+| `TERM_EXPLAINER_TIMEOUT` | 外部 API 超时时间（秒） | `5` |
+| `TERM_EXPLAINER_RETRIES` | 外部 API 最大重试次数 | `3` |
+
+---
+
+## 常见问题 Troubleshooting
+
+### 问题 1：知识库未命中，且外部 API 查询失败
+
+**现象**：输出 `E1004: 知识库未命中且外部API失败`
+
+**原因**：本地知识库没有该术语，且网络不可用或维基百科 API 返回错误。
+
+**解决办法**：
+- 检查网络连接
+- 确认术语拼写是否正确
+- 稍后重试（外部 API 可能临时不可用）
+
+### 问题 2：批量文件格式错误
+
+**现象**：输出 `E1003: 批量文件不存在或格式错误`
+
+**原因**：JSON 文件格式不正确，或纯文本文件编码无法识别。
+
+**解决办法**：
+- JSON 文件需包含 `{"terms": ["术语1", "术语2"]}` 结构
+- 纯文本文件每行一个术语，使用 UTF-8 或 GBK 编码
+
+### 问题 3：输入术语过长
+
+**现象**：输出 `E1002: 输入超长（>100字符）`
+
+**原因**：术语长度超过 100 字符限制。
+
+**解决办法**：缩短术语长度，或拆分查询。
+
+---
+
+## 最佳实践 Best Practices
+
+### 技巧
+
+1. **优先使用全场景解释**：不带 `--scene` 参数时，输出最全面，适合快速了解。
+2. **批量处理提高效率**：需要解释多个术语时，使用 `--batch` 参数一次处理。
+3. **预览模式安全操作**：不确定批量文件内容时，先使用 `--dry-run` 预览。
+
+### 边界与安全提醒
+
+- 本工具仅提供概念解释，不构成专业建议。
+- 涉及法律、医疗、财务等专业决策时，请咨询持证专业人士。
+- 外部 API 查询需要网络连接，且结果仅供参考。
+
+---
+
+## 相关资源 Related
+
+- [维基百科 API 文档](https://www.mediawiki.org/wiki/API:Main_page)
+- [Python 官方文档](https://docs.python.org/3/)
+
+---
+
+## 错误码 Error Codes
+
+| 错误码 | 含义 | 处理建议 |
+|--------|------|---------|
+| E1001 | 输入为空 | 提供非空术语 |
+| E1002 | 输入超长（>100字符） | 缩短术语长度 |
+| E1003 | 批量文件不存在或格式错误 | 检查文件路径和格式 |
+| E1004 | 知识库未命中且外部API失败 | 检查网络或稍后重试 |
+| E1005 | 批量文件编码无法识别 | 使用 UTF-8 或 GBK 编码 |
+
+---
+
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) {year} {holder}
+Copyright (c) 2024 术语工坊
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -124,6 +288,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 ```
-<!-- professional-license-embedded -->
