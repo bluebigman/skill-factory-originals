@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 """
 any2md - 文档转Markdown 结构化整理 格式转换
-版本: 1.0.2 (clean-room 独立实现)
+版本: 2.0.0 (clean-room 独立实现)
 """
 
 import sys
 import re
 import argparse
+import os
 from typing import List, Tuple, Dict, Any
 
 
@@ -51,5 +52,4 @@ def _detect_heading(line: str) -> Tuple[int, str]:
 def _detect_code_fence(line: str) -> bool:
     """检测是否为代码围栏开始/结束行。"""
     stripped = line.strip()
-    if stripped.startswith('```'):
-        pass  # auto-fix: empty if body
+    return stripped.startswith('
