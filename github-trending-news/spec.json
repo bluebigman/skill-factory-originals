@@ -1,0 +1,8 @@
+{
+  "slug": "github-trending-news",
+  "name": "github-trending-news",
+  "description": "抓取GitHub Trending，按语言与日期过滤，生成结构化周报。",
+  "trigger_words": "[\"github trending\", \"趋势周报\", \"开源热点\", \"仓库排行\", \"trending 报告\"]",
+  "original_version": "3.0.0",
+  "capability_outline": []
+}
