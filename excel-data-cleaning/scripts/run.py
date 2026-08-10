@@ -19,6 +19,7 @@ import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # Try to import openpyxl for XLSX support
 try:
