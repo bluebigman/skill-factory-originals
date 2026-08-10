@@ -27,6 +27,7 @@ import time
 from datetime import datetime, timezone, timedelta
 from collections import defaultdict
 from typing import Dict, List, Optional, Tuple, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 尝试导入可选依赖
 try:
@@ -381,7 +382,7 @@ class CustomerTracker:
         """原子写入文件"""
         temp_fd, temp_path = tempfile.mkstemp(dir=os.path.dirname(filepath) or ".")
         try:
-            with os.fdopen(temp_fd, "w", encoding="utf-8") as f:
+            with os.fdopen(temp_fd, "w", encoding="utf-8", errors="replace") as f:
                 f.write(content)
             os.replace(temp_path, filepath)
         except Exception:
