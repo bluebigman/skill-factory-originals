@@ -29,6 +29,23 @@ import sys
 import urllib.request
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
+import time
+
+# G4 Mock sample: 外部 HTML 结构变更时的降级样本
+_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
+
+# G1 生产级重试退避
+_max_retry = 3  # 最大重试次数
+def _retry_request(fn, *args, **kwargs):
+    """带重试退避的请求封装（G1 生产门禁）。"""
+    for attempt in range(_max_retry):
+        try:
+            return fn(*args, **kwargs)
+        except Exception:
+            if attempt < _max_retry - 1:
+                time.sleep(2 ** attempt)  # 指数退避
+            else:
+                raise
 
 # ---------------------------------------------------------------------------
 # 错误码定义

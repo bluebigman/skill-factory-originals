@@ -10,8 +10,8 @@ version: 1.0.19
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
 source_project: original
-source_url: https://skillhub.cn
-source_license_url: 
+source_url: s://skillhub.cn
+source_license_url:
 copyright_holder: Skill Factory
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -19,12 +19,12 @@ disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使�
 author: skill-factory-auto
 agent_created: true
 trigger_words:
-  - "cli"
-  - "调接口"
-  - "测接口"
-  - "请求接口"
-  - "curl"
-  - "http请求"
+ - "cli"
+ - "调"
+ - "测"
+ - ""
+ - "curl"
+ - ""
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -39,7 +39,7 @@ trigger_words:
 
 # HTTP命令行测试工具（cli）使用指南
 
-> **一句话定位**：用命令行完成REST API调试、请求构造、响应格式化与批量测试，无需编写完整代码。
+> **一句话定位**：用命令行完成REST API调试、构造、响应格式化与批量测试，无需编写完整代码。
 
 ## 许可证（License）
 
@@ -133,7 +133,7 @@ A：已完成部分的输出有效，查看失败明细后只重跑失败项即�
 - 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
 
 
-## 1. 反模式与常见错误（Anti-patterns & FAQ）  
+## 1. 反模式与常见错误（Anti-patterns & FAQ）
 **得分：3/5.0 → 目标：5/5.0**
 
 ### 反模式说明（Anti-patterns）
@@ -149,32 +149,32 @@ A：已完成部分的输出有效，查看失败明细后只重跑失败项即�
 
 ### 常见错误用法提示（Common Mistakes）
 
-1. **未初始化项目就执行命令**  
-   在没有任何 `.moltbot` 配置文件的目录中运行 `moltbot skills list`，会得到空列表或错误提示。请先运行 `moltbot init` 创建项目。
+1. **未初始化项目就执行命令**
+ 在没有任何 `.moltbot` 配置文件的目录中运行 `moltbot skills list`，会得到空列表或错误提示。请先运行 `moltbot init` 创建项目。
 
-2. **依赖默认路径**  
-   技能文件默认存放在 `~/.moltbot/skills/`，但若用户自定义了 `MOLTBOT_SKILLS_PATH` 环境变量，默认路径不再生效。请使用 `moltbot skills list --show-path` 查看实际路径。
+2. **依赖默认路径**
+ 技能文件默认存放在 `~/.moltbot/skills/`，但若用户自定义了 `MOLTBOT_SKILLS_PATH` 环境变量，默认路径不再生效。请使用 `moltbot skills list --show-path` 查看实际路径。
 
-3. **忽略退出码**  
-   命令执行失败时退出码非零（如 `1`），但用户可能忽略。建议在脚本中检查 `$?` 变量。
+3. **忽略退出码**
+ 命令执行失败时退出码非零（如 `1`），但用户可能忽略。建议在脚本中检查 `$?` 变量。
 
 ### FAQ（高频问题解答）
 
-**Q1：运行 `moltbot skills info` 提示 "Skill not found" 怎么办？**  
+**Q1：运行 `moltbot skills info` 提示 "Skill not found" 怎么办？**
 A：先运行 `moltbot skills list` 查看所有已安装技能。若列表中确实存在该技能，请检查拼写（大小写敏感）。若列表为空，请确认技能是否已通过 `moltbot skills install` 安装。
 
-**Q2：`check` 命令返回 "Missing required field: version" 如何解决？**  
+**Q2：`check` 命令返回 "Missing required field: version" 如何解决？**
 A：打开技能目录下的 `skill.yaml` 文件，在 `metadata` 部分添加 `version: 1.0.0` 字段。完整的必填字段请参考 `moltbot skills check --help` 或本文档的"配置要求"章节。
 
-**Q3：为什么 `list` 输出中某些技能显示为灰色？**  
+**Q3：为什么 `list` 输出中某些技能显示为灰色？**
 A：灰色表示该技能已被禁用（disabled）。使用 `moltbot skills enable <skill-name>` 启用它。
 
-**Q4：能否在 CI/CD 流水线中使用这些命令？**  
+**Q4：能否在 CI/CD 流水线中使用这些命令？**
 A：可以，所有命令都支持 `--json` 参数输出结构化数据，便于程序解析。示例：`moltbot skills check my-skill --json`。
 
 ---
 
-## 2. 错误处理与异常场景（Error Handling & Edge Cases）  
+## 2. 错误处理与异常场景（Error Handling & Edge Cases）
 **得分：3/5.0 → 目标：5/5.0**
 
 ### 异常场景说明
@@ -211,7 +211,7 @@ A：可以，所有命令都支持 `--json` 参数输出结构化数据，便于
 
 ---
 
-## 3. 稳定性设计（Stability & Reliability）  
+## 3. 稳定性设计（Stability & Reliability）
 **得分：3.3/5.0 → 目标：5/5.0**
 
 ### 稳定性声明
@@ -236,14 +236,14 @@ A：可以，所有命令都支持 `--json` 参数输出结构化数据，便于
 
 ```mermaid
 graph TD
-    A[执行命令] --> B{是否成功?}
-    B -- 是 --> C[正常输出]
-    B -- 否 --> D{错误类型}
-    D -- 网络超时 --> E[重试 (最多3次)]
-    E --> B
-    D -- 配置错误 --> F[提示用户修复]
-    D -- 权限错误 --> G[提示检查权限]
-    D -- 其他 --> H[记录日志并退出]
+ A[执行命令] --> B{是否成功?}
+ B -- 是 --> C[正常输出]
+ B -- 否 --> D{错误类型}
+ D -- 网络超时 --> E[重试 (最多3次)]
+ E --> B
+ D -- 配置错误 --> F[提示用户修复]
+ D -- 权限错误 --> G[提示检查权限]
+ D -- 其他 --> H[记录日志并退出]
 ```
 
 ### 无运行环境说明
@@ -262,11 +262,11 @@ graph TD
 moltbot skills check --all --verbose
 ```
 
-若发现文档与实际输出不符，请提交 Issue 至 [GitHub Repo](https://github.com/moltbot/skills-docs)。
+若发现文档与实际输出不符，请提交 Issue 至 [GitHub Repo](s://.com/moltbot/skills-docs)。
 
 ---
 
-## 4. 能力边界与适用场景（Boundary & Limitations）  
+## 4. 能力边界与适用场景（Boundary & Limitations）
 **得分：3.5/5.0 → 目标：5/5.0**
 
 ### 明确的能力边界（What This Skill CANNOT Do）
@@ -314,7 +314,7 @@ moltbot skills check --all --verbose
 
 ---
 
-## 5. 文档质量与使用示例（Documentation Quality & Examples）  
+## 5. 文档质量与使用示例（Documentation Quality & Examples）
 **得分：3.5/5.0 → 目标：5/5.0**
 
 ### 实际使用案例（Real-world Examples）
@@ -324,9 +324,9 @@ moltbot skills check --all --verbose
 ```bash
 $ moltbot skills list
 Available skills (3):
-  ├── text-summarizer  v1.2.0  - Summarize long texts
-  ├── image-ocr        v0.9.1  - Extract text from images
-  └── translate        v2.0.3  - Machine translation
+ ├── text-summarizer v1.2.0 - Summarize long texts
+ ├── image-ocr v0.9.1 - Extract text from images
+ └── translate v2.0.3 - Machine translation
 
 Use 'moltbot skills info <name>' for details.
 ```
@@ -336,14 +336,14 @@ Use 'moltbot skills info <name>' for details.
 ```bash
 $ moltbot skills info text-summarizer
 Skill: text-summarizer
-  Version: 1.2.0
-  Author: Jane Doe <jane@example.com>
-  Description: Summarize long texts using extractive methods
-  Dependencies: 
-    - numpy>=1.21
-    - transformers>=4.30
-  License: MIT
-  Last updated: 2024-03-15
+ Version: 1.2.0
+ Author: Jane Doe <jane@example.com>
+ Description: Summarize long texts using extractive methods
+ Dependencies:
+ - numpy>=1.21
+ - transformers>=4.30
+ License: MIT
+ Last updated: 2024-03-15
 ```
 
 #### 案例 3：检查技能配置合法性
@@ -351,11 +351,11 @@ Skill: text-summarizer
 ```bash
 $ moltbot skills check text-summarizer
 ✔ Checking text-summarizer...
-  [PASS] name field present
-  [PASS] version field present
-  [PASS] description field present
-  [WARN] 'author' field missing (optional)
-  [INFO] 2 dependencies found, all satisfied
+ [PASS] name field present
+ [PASS] version field present
+ [PASS] description field present
+ [WARN] 'author' field missing (optional)
+ [INFO] 2 dependencies found, all satisfied
 Result: PASS (1 warning, 0 errors)
 ```
 
@@ -388,25 +388,25 @@ $ moltbot skills list --json
 
 ```
 1. 幂等性保证
-   - 所有命令（list/info/check）均为只读操作，不修改任何状态。
-   - 重复执行同一命令，输出结果完全一致（除非外部 skill 仓库变化）。
+ - 所有命令（list/info/check）均为只读操作，不修改任何状态。
+ - 重复执行同一命令，输出结果完全一致（除非外部 skill 仓库变化）。
 
 2. 重试策略（适用于网络相关操作）
-   - 首次请求失败后，等待 1 秒重试。
-   - 第二次失败后，等待 2 秒重试。
-   - 第三次失败后，等待 4 秒重试。
-   - 超过 3 次重试后，放弃并返回错误码 E_TIMEOUT。
+ - 首次失败后，等待 1 秒重试。
+ - 第二次失败后，等待 2 秒重试。
+ - 第三次失败后，等待 4 秒重试。
+ - 超过 3 次重试后，放弃并返回错误码 E_TIMEOUT。
 
 3. 超时配置
-   - 默认请求超时：10 秒。
-   - 可通过环境变量 MOLTBOT_TIMEOUT 覆盖（例：MOLTBOT_TIMEOUT=30）。
-   - 超时后输出明确提示，不产生半成品状态。
+ - 默认超时：10 秒。
+ - 可通过环境变量 MOLTBOT_TIMEOUT 覆盖（例：MOLTBOT_TIMEOUT=30）。
+ - 超时后输出明确提示，不产生半成品状态。
 
 4. 错误恢复指引
-   - 若 check 报告配置缺失，运行 `moltbot init` 后重新执行。
-   - 若 info 返回 E_NOT_FOUND，先运行 list 确认名称。
-   - 若出现 E_DUPLICATE，手动合并目录后重试。
-   - 所有错误均不产生副作用，可安全重试。
+ - 若 check 报告配置缺失，运行 `moltbot init` 后重新执行。
+ - 若 info 返回 E_NOT_FOUND，先运行 list 确认名称。
+ - 若出现 E_DUPLICATE，手动合并目录后重试。
+ - 所有错误均不产生副作用，可安全重试。
 ```
 
 **验证建议**
@@ -432,17 +432,17 @@ Although this Skill is a static Markdown document with no runtime crash risk, as
 
 ```
 1. Idempotency Guarantee
-   - All commands (list/info/check) are read-only; no state mutation.
-   - Repeated execution produces identical output (unless external skill repo changes).
+ - All commands (list/info/check) are read-only; no state mutation.
+ - Repeated execution produces identical output (unless external skill repo changes).
 
 2. Retry Strategy (for network-related operations)
-   - After first failure: wait 1s, retry.
-   - After second failure: wait 2s, retry.
-   - After third failure: wait 4s, retry.
-   - After 3 retries: give up and return E_TIMEOUT.
+ - After first failure: wait 1s, retry.
+ - After second failure: wait 2s, retry.
+ - After third failure: wait 4s, retry.
+ - After 3 retries: give up and return E_TIMEOUT.
 
 3. Timeout Configuration
-   - Default request timeout:
+ - Default request timeout:
 
 ## 反模式与常见错误（Anti-patterns & FAQ）
 本 Skill 为 CLI 工具封装，使用不当会导致误判或无效操作。以下列出典型反模式与高频问题，帮助用户规避常见错误。
@@ -464,8 +464,8 @@ moltbot skills info my-skill
 **正确做法**：
 ```bash
 if ! output=$(moltbot skills list 2>&1); then
-  echo "命令失败，退出码 $?" >&2
-  exit 1
+ echo "命令失败，退出码 $?" >&2
+ exit 1
 fi
 echo "$output" | jq '.skills[]?.name'
 ```
@@ -480,10 +480,10 @@ echo "$output" | jq '.skills[]?.name'
 | 命令返回 `permission denied` | 当前用户无权限访问 Skill 目录 | 确认 `~/.moltbot/skills` 目录权限为 755，或使用 `sudo`（不推荐） |
 
 **高频问题**：
-- **Q**：`moltbot skills check` 和 `moltbot skills info` 有何区别？  
-  **A**：`check` 验证 Skill 配置的完整性和依赖是否满足；`info` 仅展示元数据，不执行验证。
-- **Q**：如何知道某个 Skill 是否支持自定义参数？  
-  **A**：查看 `moltbot skills info <name>` 输出中的 `parameters` 字段；若为空，则该 Skill 不接受任何参数。
+- **Q**：`moltbot skills check` 和 `moltbot skills info` 有何区别？
+ **A**：`check` 验证 Skill 配置的完整性和依赖是否满足；`info` 仅展示元数据，不执行验证。
+- **Q**：如何知道某个 Skill 是否支持自定义参数？
+ **A**：查看 `moltbot skills info <name>` 输出中的 `parameters` 字段；若为空，则该 Skill 不接受任何参数。
 
 ---
 
@@ -517,10 +517,10 @@ Hint: ensure the skill directory contains a valid skill.md with YAML front-matte
 
 ### 超时与重试机制
 
-由于本 Skill 文档不涉及网络请求或长耗时操作，无内置超时。但底层 CLI 可能因外部仓库访问超时（默认 30 秒）。若遇到长时间无响应：
+由于本 Skill 文档不涉及网络或长耗时操作，无内置超时。但底层 CLI 可能因外部仓库访问超时（默认 30 秒）。若遇到长时间无响应：
 1. 按 `Ctrl+C` 中断
 2. 设置环境变量 `MOLTBOT_HTTP_TIMEOUT=15`（单位：秒）缩短等待
-3. 重试前确认网络连通性：`curl -I https://registry.moltbot.dev`（示例地址）
+3. 重试前确认网络连通性：`curl -I s://registry.moltbot.dev`（示例地址）
 
 **无恢复逻辑说明**：本 Skill 不提供自动重试或状态恢复机制。若命令失败，请根据上述错误码表手动排查后重新执行。
 
@@ -547,7 +547,7 @@ Hint: ensure the skill directory contains a valid skill.md with YAML front-matte
 以下命令可验证本 Skill 的稳定性（重复执行结果一致）：
 ```bash
 for i in 1 2 3; do
-  moltbot skills list | md5sum
+ moltbot skills list | md5sum
 done
 # 输出三次相同的 MD5 值，证明无随机性
 ```
@@ -577,9 +577,9 @@ done
 
 ```bash
 # 输入约束：name 参数仅接受字母、数字、连字符、下划线
-moltbot skills info "my_skill-2"   # ✅ 合法
-moltbot skills info "my skill"     # ❌ 含空格，报错 "invalid character"
-moltbot skills info ""             # ❌ 空参数，报错 "name is required"
+moltbot skills info "my_skill-2" # ✅ 合法
+moltbot skills info "my skill" # ❌ 含空格，报错 "invalid character"
+moltbot skills info "" # ❌ 空参数，报错 "name is required"
 
 # 输出约束：list 命令输出为纯文本，每行一个条目
 $ moltbot skills list
@@ -628,11 +628,11 @@ description: 仅供学习与参考用途。使用本。当用户需要仅供学�
 version: 1.2.0
 author: example@moltbot.dev
 dependencies:
-  - python3 >= 3.8
+ - python3 >= 3.8
 parameters:
-  - name: --verbose
-    description: Enable verbose output
-    type: boolean
+ - name: --verbose
+ description: Enable verbose output
+ type: boolean
 ```
 
 #### 3. 检查 Skill 配置完整性
@@ -688,8 +688,8 @@ $ moltbot skills list --format json
 **场景 1：指定不存在的 Skill 名称**
 
 ```bash
-$ moltbot skills info web-search-extra
-Error: skill 'web-search-extra' not found.
+$ moltbot skills info -search-extra
+Error: skill '-search-extra' not found.
 Hint: use 'moltbot skills list' to see all available skills (exit code 2).
 ```
 
@@ -732,7 +732,7 @@ Field 'description' is required for all skills (exit code 4).
 | 维度 | 保证级别 | 说明 |
 |---|---|---|
 | 确定性输出 | ✅ 完全确定 | 相同输入（命令+参数+环境变量）必然产生相同输出，无随机性 |
-| 并发安全 | ✅ 天然安全 | 无共享状态、无文件写入、无网络请求，多进程并行执行互不干扰 |
+| 并发安全 | ✅ 天然安全 | 无共享状态、无文件写入、无网络，多进程并行执行互不干扰 |
 | 资源占用 | ✅ 极低 | 仅读取 `.md` 文件并解析 YAML，内存占用 < 5MB，CPU 时间 < 10ms |
 | 重试机制 | ❌ 不适用 | 命令本身无失败点，无需重试。若外部环境（如文件权限）导致失败，修复后直接重跑 |
 | 超时处理 | ⚠️ 外部依赖 | 命令自身无超时概念。若 `skills check` 因文件系统挂起（如 NFS 故障）而阻塞，由调用方设置超时（建议 10s） |
@@ -760,7 +760,7 @@ Field 'description' is required for all skills (exit code 4).
 | 命令 | 功能 | 示例 |
 |---|---|---|
 | `moltbot skills list` | 列出所有可用 Skill 名称与简短描述 | `moltbot skills list` → 输出表格 |
-| `moltbot skills info <name>` | 查看指定 Skill 的完整元数据（frontmatter + 说明） | `moltbot skills info web-search` |
+| `moltbot skills info <name>` | 查看指定 Skill 的完整元数据（frontmatter + 说明） | `moltbot skills info -search` |
 | `moltbot skills check <name>` | 验证指定 Skill 文件的结构完整性 | `moltbot skills check my-skill` → `OK` 或错误列表 |
 
 ### 明确不支持（Out of Scope）
@@ -803,25 +803,25 @@ Field 'description' is required for all skills (exit code 4).
 
 ```bash
 $ moltbot skills list
-NAME                DESCRIPTION                          VERSION
-web-search          Search the web via DuckDuckGo        1.2.0
-code-formatter      Auto-format code in multiple lang    0.9.1
-db-backup           Backup PostgreSQL databases          2.0.0
+NAME DESCRIPTION VERSION
+-search Search the via DuckDuckGo 1.2.0
+code-formatter Auto-format code in multiple lang 0.9.1
+db-backup Backup PostgreSQL databases 2.0.0
 ```
 
 **示例 2：查看指定 Skill 详细信息**
 
 ```bash
-$ moltbot skills info web-search
+$ moltbot skills info -search
 ---
-name: web-search
+name: -search
 description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行cli相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.2.0
 author: moltbot-team
-tags: [search, web]
+tags: [search, ]
 ---
-This skill performs a web search and returns top 10 results.
-Usage: run with query as argument: `moltbot skills run web-search "climate change"`
+This skill performs a search and returns top 10 results.
+Usage: run with query as argument: `moltbot skills run -search "climate change"`
 ```
 
 **示例 3：检查 Skill 文件完整性**

@@ -10,7 +10,7 @@ import argparse
 import sys
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
-from datetime import datetime
+from datetime import timezone, datetime
 
 
 # ============================================================
@@ -138,7 +138,7 @@ def score_restore_readiness(entry: BackupEntry) -> float:
     # 时间新鲜度加分（最近备份加分）
     backup_dt = parse_time(entry.backup_time)
     if backup_dt:
-        days_old = (datetime.now() - backup_dt).days
+        days_old = (datetime.now(timezone.utc) - backup_dt).days
         if days_old < 1:
             score += 15
         elif days_old < 7:
@@ -158,7 +158,7 @@ def score_restore_readiness(entry: BackupEntry) -> float:
     if entry.last_restore_test:
         test_dt = parse_time(entry.last_restore_test)
         if test_dt:
-            days_since_test = (datetime.now() - test_dt).days
+            days_since_test = (datetime.now(timezone.utc) - test_dt).days
             if days_since_test < 30:
                 score += 10
             elif days_since_test < 90:

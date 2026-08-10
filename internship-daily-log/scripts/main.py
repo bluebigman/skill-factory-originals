@@ -15,7 +15,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime, timedelta
+from datetime import timezone, datetime, timedelta
 from typing import Any, Dict, List, Optional
 
 
@@ -111,18 +111,18 @@ def extract_date(text: str) -> Optional[str]:
             raw = match.group()
             # 处理相对日期
             if raw in ("今天", "今日"):
-                return datetime.now().strftime("%Y-%m-%d")
+                return datetime.now(timezone.utc).strftime("%Y-%m-%d")
             if raw in ("昨天", "昨日"):
-                return (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+                return (datetime.now(timezone.utc) - timedelta(days=1)).strftime("%Y-%m-%d")
             if raw == "前天":
-                return (datetime.now() - timedelta(days=2)).strftime("%Y-%m-%d")
+                return (datetime.now(timezone.utc) - timedelta(days=2)).strftime("%Y-%m-%d")
             # 处理绝对日期
             try:
                 raw_clean = raw.replace("年", "-").replace("月", "-").replace("日", "").replace("/", "-")
                 # 补全年份
                 parts = raw_clean.split("-")
                 if len(parts) == 2:  # 只有月-日
-                    now = datetime.now()
+                    now = datetime.now(timezone.utc)
                     parts = [str(now.year)] + parts
                 if len(parts) == 3:
                     year = int(parts[0])

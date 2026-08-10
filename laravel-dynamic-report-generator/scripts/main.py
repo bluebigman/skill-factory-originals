@@ -10,7 +10,7 @@ import argparse
 import json
 import sys
 from collections import OrderedDict
-from datetime import datetime
+from datetime import timezone, datetime
 
 
 # ---------------------------------------------------------------------------
@@ -263,7 +263,7 @@ def generate_report(data, dimensions=None, measures=None, filters=None, sort_by=
             "meta": {
                 "total_rows": len(rows),
                 "source_rows": len(filtered),
-                "generated_at": datetime.now().isoformat(),
+                "generated_at": datetime.now(timezone.utc).isoformat(),
                 "dimensions": dimensions,
                 "measures": measures,
             },

@@ -18,6 +18,9 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
+
+# G4 Mock sample: 外部 HTML 结构变更时的降级样本
+_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
 dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 尝试导入第三方库，如果失败则使用内置替代

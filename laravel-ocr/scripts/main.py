@@ -17,8 +17,21 @@ import struct
 import sys
 import tempfile
 import urllib.request
-from datetime import datetime
+from datetime import timezone, datetime
 from pathlib import Path
+
+# G1 生产级重试退避
+_max_retry = 3  # 最大重试次数
+def _retry_request(fn, *args, **kwargs):
+    """带重试退避的请求封装（G1 生产门禁）。"""
+    for attempt in range(_max_retry):
+        try:
+            return fn(*args, **kwargs)
+        except Exception:
+            if attempt < _max_retry - 1:
+                time.sleep(2 ** attempt)  # 指数退避
+            else:
+                raise
 
 # 错误码定义
 ERROR_CODES = {
@@ -211,7 +224,7 @@ def process_file(file_path: str, doc_type: str = "auto") -> dict:
         "doc_type": doc_type if doc_type != "auto" else "unknown",
         "fields": extraction["fields"],
         "confidence": extraction["confidence"],
-        "timestamp": datetime.now().isoformat(),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
     return result

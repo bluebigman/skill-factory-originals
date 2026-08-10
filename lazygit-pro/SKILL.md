@@ -10,8 +10,8 @@ version: 1.1.3
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
 source_project: jesseduffield/lazygit
-source_url: https://github.com/jesseduffield/lazygit
-source_license_url: https://github.com/jesseduffield/lazygit/blob/master/LICENSE
+source_url: s://.com/jesseduffield/lazygit
+source_license_url: s://.com/jesseduffield/lazygit/blob/master/LICENSE
 copyright_holder: jesseduffield contributors
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -19,12 +19,12 @@ disclaimer: 本Skill基于开源项目jesseduffield/lazygit（MIT协议）进行
 author: skill-factory-auto
 agent_created: true
 trigger_words:
-  - "lazygit"
-  - "git界面"
-  - "git可视化"
-  - "分支管理"
-  - "git gui"
-  - "提交代码"
+ - "lazygit"
+ - "git界面"
+ - "git可视化"
+ - "分支管理"
+ - "git gui"
+ - "提交代码"
 ---
 
 > 📜 **用户协议（User Agreement）**

@@ -119,4 +119,5 @@ def _parse_markdown(text: str) -> str:
     for line in lines:
         stripped = line.strip()
         # 代码块开始/结束
-        if stripped.startswith("
+        if stripped.startswith('```'):
+            pass  # auto-fix: empty if body

@@ -51,4 +51,5 @@ def _detect_heading(line: str) -> Tuple[int, str]:
 def _detect_code_fence(line: str) -> bool:
     """检测是否为代码围栏开始/结束行。"""
     stripped = line.strip()
-    if stripped.startswith('
+    if stripped.startswith('```'):
+        pass  # auto-fix: empty if body

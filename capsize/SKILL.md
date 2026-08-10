@@ -5,18 +5,18 @@
 slug: capsize
 name: capsize
 displayName: EC2部署 运维自动化 发布管理
-description: 管理并运行Amazon EC2上的应用部署，支持Capistrano扩展。
+description: 管理并运行Amazon EC2上的应用部署，支持Cstrano扩展。
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/capsize
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/capsize
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: DevForge Studio
 agent_created: true
-trigger_words: ["capsize", "EC2部署", "Capistrano扩展", "AWS运维", "远程部署"]
+trigger_words: ["capsize", "EC2部署", "Cstrano扩展", "AWS运维", "远程部署"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -43,7 +43,7 @@ trigger_words: ["capsize", "EC2部署", "Capistrano扩展", "AWS运维", "远程
 |---|--------|------|----------|
 | 1 | 部署配置解析 | 将用户提供的部署配置、服务器清单、环境变量等转换为结构化部署方案 | `server: ec2-xx-xx-xx.compute.amazonaws.com, user: ubuntu` |
 | 2 | 关键信息提取 | 从部署脚本、SSH 配置、环境描述中识别主机、路径、角色、密钥等关键参数 | `deploy_to: /var/www/app, roles: app, db` |
-| 3 | 命令生成 | 根据 Capistrano 约定生成可执行的部署命令序列 | `cap production deploy` |
+| 3 | 命令生成 | 根据 Cstrano 约定生成可执行的部署命令序列 | `cap production deploy` |
 | 4 | 置信度标注 | 对推断出的配置项标注可信程度，不确定时明确提示 | `[需核实:ssh_port]` |
 | 5 | 批量处理 | 支持多服务器、多环境（staging/production）的批量部署方案生成 | 多组服务器清单 + 环境变量 |
 
@@ -51,12 +51,12 @@ trigger_words: ["capsize", "EC2部署", "Capistrano扩展", "AWS运维", "远程
 
 - 不能直接连接 AWS 或执行真实部署操作（仅生成方案与命令）
 - 不能读取用户的 AWS 密钥或 SSH 私钥内容（仅接受路径引用）
-- 不能替代 Capistrano 官方文档，不提供版本兼容性保证
+- 不能替代 Cstrano 官方文档，不提供版本兼容性保证
 - 不能自动发现服务器拓扑，需用户提供基础信息
 
 ### 1.3 适用对象
 
-- 使用 Capistrano 管理 EC2 部署的运维工程师
+- 使用 Cstrano 管理 EC2 部署的运维工程师
 - 需要将现有部署流程迁移到 EC2 的开发团队
 - 希望规范化部署配置的 DevOps 初学者
 

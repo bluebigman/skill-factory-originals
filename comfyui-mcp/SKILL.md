@@ -3,7 +3,7 @@
 slug: comfyui-mcp
 name: comfyui-mcp
 displayName: 本地创意工坊 ComfyUI 节点控制台
-description: 通过 MCP 协议在本地驱动 ComfyUI 完成图像、视频与音频生成任务。
+description: 通过 MCP 协议在本地驱动 ComfyUI 完成、视频与音频生成任务。
 version: 1.0.2
 license: MIT
 source_project: original
@@ -14,7 +14,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 林墨白
 agent_created: true
-trigger_words: ["comfyui-mcp", "图像生成", "视频生成", "音频生成", "ComfyUI 控制", "本地生成任务"]
+trigger_words: ["comfyui-mcp", "生成", "视频生成", "音频生成", "ComfyUI 控制", "本地生成任务"]
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
@@ -39,7 +39,7 @@ trigger_words: ["comfyui-mcp", "图像生成", "视频生成", "音频生成", "
 
 | 能力项 | 说明 | 输入示例 | 输出示例 |
 |--------|------|----------|----------|
-| 图像生成 | 调用本地 ComfyUI 工作流，生成静态图像 | `comfyui mcp 图像生成 --prompt "赛博朋克城市夜景" --steps 30` | 返回图像文件路径与预览图 |
+| 生成 | 调用本地 ComfyUI 工作流，生成静态 | `comfyui mcp 生成 --prompt "赛博朋克城市夜景" --steps 30` | 返回文件路径与预览图 |
 | 视频生成 | 驱动视频工作流，生成短视频片段 | `comfyui mcp 视频生成 --prompt "蝴蝶在花丛中飞舞" --frames 48` | 返回视频文件路径与元数据 |
 | 音频生成 | 调用音频节点，生成音效或配乐 | `comfyui mcp 音频生成 --prompt "雨声与雷声混合" --duration 10` | 返回音频文件路径与波形摘要 |
 | 工作流自检 | 检查当前 ComfyUI 服务是否可用 | `comfyui mcp --selftest` | 返回服务状态、节点数量、版本号 |
@@ -57,7 +57,7 @@ trigger_words: ["comfyui-mcp", "图像生成", "视频生成", "音频生成", "
 
 - 已安装并运行 ComfyUI 的本地用户。
 - 需要通过命令行或 MCP 协议批量触发生成任务的开发者。
-- 希望在自动化脚本中集成图像/视频/音频生成能力的工程师。
+- 希望在自动化脚本中集成/视频/音频生成能力的工程师。
 
 
 ## 许可证（License）

@@ -5,7 +5,8 @@ import sys
 import json
 import shutil
 import tempfile
-import datetime
+from datetime import datetime, timezone
+import datetime as _dt
 import argparse
 from pathlib import Path
 
@@ -22,7 +23,7 @@ def safe_delete_file(filepath):
     except Exception as e:
         # Fallback: rename and delete
         try:
-            temp_name = filepath.with_suffix('.tmp_' + str(datetime.datetime.now().timestamp()))
+            temp_name = filepath.with_suffix('.tmp_' + str(datetime.datetime.now(timezone.utc).timestamp()))
             filepath.rename(temp_name)
             temp_name.unlink()
             return {"success": True, "message": "File deleted with fallback"}
@@ -119,7 +120,7 @@ def string_operations(text, operation='reverse'):
 def date_time_operations(dt=None):
     """Perform date/time operations"""
     if dt is None:
-        dt = datetime.datetime.now()
+        dt = datetime.datetime.now(timezone.utc)
     
     return {
         "year": dt.year,

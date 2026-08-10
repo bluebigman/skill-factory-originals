@@ -34,7 +34,7 @@ trigger_words: ["awesome-chatgpt-repositories", "ChatGPT仓库", "开源项目�
 |------|------|
 | ✅ 能做 | 解析用户提供的仓库列表、URL、文本数据，提取仓库名称、描述、星标数、语言、许可证等字段 |
 | ✅ 能做 | 按主题（ChatGPT / OpenAI API / Codex）或自定义条件（语言、星标阈值）过滤仓库 |
-| ✅ 能做 | 输出 Markdown 表格、CSV、JSON 三种格式的结构化清单 |
+| ✅ 能做 | 输出 Markdown 、CSV、JSON 三种格式的结构化清单 |
 | ✅ 能做 | 对缺失字段标注 `[需核实:字段名]`，不猜测补全 |
 | ✅ 能做 | 批量处理多条仓库记录，支持去重与排序 |
 | ❌ 不能做 | 实时抓取 GitHub 数据（需用户提供数据源或 URL 内容） |
@@ -71,21 +71,21 @@ trigger_words: ["awesome-chatgpt-repositories", "ChatGPT仓库", "开源项目�
 
 1. **收集输入**：接收用户粘贴的文本、上传的文件（.txt / .csv / .json / .md）或 URL 内容。
 2. **解析记录**：按行或按分隔符拆分，识别每条仓库记录。支持格式：
-   - `owner/repo`（如 `openai/chatgpt`）
-   - 完整 URL（如 `https://github.com/openai/chatgpt`）
-   - 带描述的行（如 `openai/chatgpt - ChatGPT desktop app`）
+ - `owner/repo`（如 `openai/chatgpt`）
+ - 完整 URL（如 `https://github.com/openai/chatgpt`）
+ - 带描述的行（如 `openai/chatgpt - ChatGPT desktop app`）
 3. **字段提取**：从每条记录中提取以下字段（缺失则标注 `[需核实:字段名]`）：
-   - `name`：仓库全名（owner/repo）
-   - `url`：GitHub 地址
-   - `description`：仓库描述（若输入中未提供，标注需核实）
-   - `language`：主要编程语言（若输入中未提供，标注需核实）
-   - `stars`：星标数（若输入中未提供，标注需核实）
-   - `license`：许可证类型（若输入中未提供，标注需核实）
+ - `name`：仓库全名（owner/repo）
+ - `url`：GitHub 地址
+ - `description`：仓库描述（若输入中未提供，标注需核实）
+ - `language`：主要编程语言（若输入中未提供，标注需核实）
+ - `stars`：星标数（若输入中未提供，标注需核实）
+ - `license`：许可证类型（若输入中未提供，标注需核实）
 4. **过滤与排序**（可选）：
-   - 按语言过滤：`language:Python`
-   - 按星标阈值过滤：`stars:>5000`
-   - 按主题过滤：`topic:chatgpt` / `topic:openai-api` / `topic:codex`
-   - 排序规则：`sort:stars-desc`（默认）或 `sort:name-asc`
+ - 按语言过滤：`language:Python`
+ - 按星标阈值过滤：`stars:>5000`
+ - 按主题过滤：`topic:chatgpt` / `topic:openai-api` / `topic:codex`
+ - 排序规则：`sort:stars-desc`（默认）或 `sort:name-asc`
 5. **去重**：若多条记录指向同一仓库，保留信息最完整的一条。
 6. **生成输出**：按约定格式输出（见下节）。
 7. **自查**：检查字段完整性、格式正确性、置信度标注是否齐全。
@@ -94,11 +94,11 @@ trigger_words: ["awesome-chatgpt-repositories", "ChatGPT仓库", "开源项目�
 
 | 输出格式 | 适用场景 | 示例 |
 |----------|----------|------|
-| Markdown 表格 | 默认格式，适合阅读 | 见下方示例 |
-| CSV | 需要导入表格工具 | `name,url,description,language,stars,license` |
+| Markdown | 默认格式，适合阅读 | 见下方示例 |
+| CSV | 需要导入工具 | `name,url,description,language,stars,license` |
 | JSON | 需要程序化处理 | `[{"name":"openai/chatgpt","url":"...","stars":12345}]` |
 
-**Markdown 表格示例**：
+**Markdown 示例**：
 
 | 仓库名 | 描述 | 语言 | 星标 | 许可证 |
 |--------|------|------|------|--------|
@@ -122,7 +122,7 @@ trigger_words: ["awesome-chatgpt-repositories", "ChatGPT仓库", "开源项目�
 | `E001` | 输入为空或无法识别 | "未检测到有效的仓库记录。请提供 GitHub 仓库名（如 `openai/chatgpt`）或完整 URL。" | 引导用户粘贴仓库列表或文件 |
 | `E002` | 输入包含非仓库内容 | "检测到部分内容不是有效的 GitHub 仓库，已跳过。请确认输入格式。" | 展示跳过的条目，让用户确认是否保留 |
 | `E003` | 过滤条件无匹配结果 | "没有找到符合过滤条件的仓库。请放宽条件或检查拼写。" | 建议降低星标阈值或移除语言过滤 |
-| `E004` | 输出格式不支持 | "暂不支持该输出格式。当前支持：Markdown 表格、CSV、JSON。" | 列出支持格式，请用户重新选择 |
+| `E004` | 输出格式不支持 | "暂不支持该输出格式。当前支持：Markdown 、CSV、JSON。" | 列出支持格式，请用户重新选择 |
 
 ---
 

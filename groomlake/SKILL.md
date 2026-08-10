@@ -4,7 +4,7 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: groomlake
 name: groomlake
-displayName: 文件解析 格式转换 数据提取
+displayName: 文件解析 数据提取
 description: 解析Adobe系列文件格式，提取关键信息并转换为结构化数据。
 version: 1.0.1
 license: MIT
@@ -16,7 +16,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 格式工坊
 agent_created: true
-trigger_words: ["groomlake", "Adobe文件解析", "格式转换", "数据提取", "文件解析"]
+trigger_words: ["groomlake", "Adobe文件解析", "", "数据提取", "文件解析"]
 ---
 
 > 📜 **用户协议（User Agreement）**

@@ -34,7 +34,7 @@ import re
 import sys
 import tempfile
 from collections import OrderedDict
-from datetime import datetime
+from datetime import timezone, datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 # ---------------------------------------------------------------------------
@@ -828,7 +828,7 @@ def main(argv: Optional[List[str]] = None) -> int:
             "元信息": {
                 "工具": "evidence",
                 "版本": "1.0.1",
-                "处理时间": datetime.now().isoformat(),
+                "处理时间": datetime.now(timezone.utc).isoformat(),
                 "记录数": len(dataset),
                 "字段数": len(dataset.field_names),
             },

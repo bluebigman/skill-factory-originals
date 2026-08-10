@@ -13,7 +13,7 @@ import os
 import re
 import sys
 import tempfile
-from datetime import datetime
+from datetime import timezone, datetime
 from pathlib import Path
 
 # ========== 错误码定义 ==========
@@ -91,7 +91,7 @@ def generate_god_config(processes: list) -> str:
     """
     lines = []
     lines.append("# God 配置文件 - 由 god 工具自动生成")
-    lines.append(f"# 生成时间: {datetime.now().isoformat()}")
+    lines.append(f"# 生成时间: {datetime.now(timezone.utc).isoformat()}")
     lines.append("")
 
     # 全局配置

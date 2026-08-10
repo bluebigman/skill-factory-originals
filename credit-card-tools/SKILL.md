@@ -9,7 +9,7 @@ description: 命令行处理信用卡数据，解析识别并输出结构化结�
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/credit-card-tools
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/credit-card-tools
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -37,7 +37,7 @@ trigger_words: ["credit card tools", "信用卡工具", "卡片处理", "卡数�
 
 ## 一、能力边界速查卡
 
-本工具面向需要在命令行环境中处理信用卡相关数据的用户，包括开发者、运维人员、数据分析师等。使用场景包括但不限于：日志中的卡号提取、批量卡信息整理、接口返回数据的字段校验。
+本工具面向需要在命令行环境中处理信用卡相关数据的用户，包括开发者、运维人员、数据分析师等。使用场景包括但不限于：日志中的卡号提取、批量卡信息整理、返回数据的字段校验。
 
 ### 能做（5项核心能力）
 
@@ -45,7 +45,7 @@ trigger_words: ["credit card tools", "信用卡工具", "卡片处理", "卡数�
 |------|------|------|
 | 1 | 多源输入解析 | 接受用户直接粘贴的数据、本地文件路径、远程 URL 三种输入方式 |
 | 2 | 关键信息识别 | 自动识别卡号、有效期、持卡人姓名、CVV、账单地址等字段 |
-| 3 | 结构化输出 | 按 JSON / CSV / 表格三种格式输出解析结果 |
+| 3 | 结构化输出 | 按 JSON / CSV / 三种格式输出解析结果 |
 | 4 | 置信度标注 | 对每个字段标注 confidence 等级（high / medium / low） |
 | 5 | 批量与自定义 | 支持多卡批量处理，可通过参数自定义输出字段和格式 |
 
@@ -53,7 +53,7 @@ trigger_words: ["credit card tools", "信用卡工具", "卡片处理", "卡数�
 
 | 编号 | 限制 | 说明 |
 |------|------|------|
-| 1 | 不执行支付操作 | 本工具仅做数据解析，不发起任何交易请求 |
+| 1 | 不执行支付操作 | 本工具仅做数据解析，不发起任何交易 |
 | 2 | 不存储数据 | 处理完成后不落盘，除非用户显式指定输出文件 |
 | 3 | 不验证卡有效性 | 不连接发卡行或支付网络，不做 Luhn 校验以外的验证 |
 | 4 | 不处理加密数据 | 输入必须是明文或 base64 编码，不支持 PGP 等加密格式 |
@@ -63,7 +63,7 @@ trigger_words: ["credit card tools", "信用卡工具", "卡片处理", "卡数�
 
 - 需要从日志/文本中批量提取卡信息的开发人员
 - 需要整理测试用卡数据的 QA 工程师
-- 需要核对接口返回卡字段的数据分析人员
+- 需要核对返回卡字段的数据分析人员
 
 
 ## 许可证（License）

@@ -2,21 +2,21 @@
 > 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
 <!-- ai-generated-notice -->
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
-slug: invoice-data-extraction-system
-name: invoice-data-extraction-system
+slug: -data-extraction-system
+name: -data-extraction-system
 displayName: 票据解析 信息抽取 结构化输出
-description: 将发票PDF或图片转为结构化数据，含置信度标注与批量处理。
+description: 将PDF或转为结构化数据，含置信度标注与批量处理。
 version: 1.0.2
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/invoice-data-extraction-system
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/-data-extraction-system
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 数据工坊
 agent_created: true
-trigger_words: ["发票识别", "票据解析", "invoice data extraction", "发票信息抽取", "OCR结构化", "票据信息录入", "发票数据化"]
+trigger_words: ["识别", "票据解析", " data extraction", "信息抽取", "OCR结构化", "票据信息录入", "数据化"]
 ---
 
 > 📜 **用户协议（User Agreement）**
@@ -41,7 +41,7 @@ trigger_words: ["发票识别", "票据解析", "invoice data extraction", "发�
 
 | 能力项 | 说明 | 输入要求 |
 |--------|------|----------|
-| 单张识别 | 从一张发票图片/PDF中提取关键字段 | 清晰可读的扫描件或电子发票 |
+| 单张识别 | 从一张/PDF中提取关键字段 | 清晰可读的扫描件或电子 |
 | 批量处理 | 一次处理多张票据，输出汇总表 | 文件夹路径或文件列表 |
 | 置信度标注 | 每个字段附带可信度评分（0-1） | 自动计算，无需人工干预 |
 | 格式归一 | 日期、金额、税号等字段统一格式 | 自动完成 |
@@ -50,8 +50,8 @@ trigger_words: ["发票识别", "票据解析", "invoice data extraction", "发�
 ### 1.2 系统不能做什么
 
 - 不能识别手写模糊、严重倾斜、反光遮挡的票据
-- 不能处理非发票类文档（如合同、收据、订单）
-- 不能验证发票真伪（需对接税务系统）
+- 不能处理非类文档（如合同、收据、订单）
+- 不能验证真伪（需对接税务系统）
 - 不能自动修正原始数据错误（仅标注置信度）
 - 不能处理加密或损坏的 PDF 文件
 

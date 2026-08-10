@@ -76,4 +76,4 @@ class MarkdownExtractor:
         self.list_pattern = re.compile(r'^[-*]\s+(.+)$', re.MULTILINE)
         self.numbered_pattern = re.compile(r'^\d+\.\s+(.+)$', re.MULTILINE)
         self.table_pattern = re.compile(r'^\|(.+)\|$', re.MULTILINE)
-        self.code_pattern = re.compile(r'^
+        re.compile(r'^```', re.MULTILINE)

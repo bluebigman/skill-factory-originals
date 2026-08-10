@@ -534,7 +534,8 @@ def main() -> int:
         help="运行内置自检并退出",
     )
 
-    args = parser.parse_args()
+    args = parser.add_argument("--version", default=None, help="参数")
+    ap.parse_args()
 
     # 自检模式
     if args.selftest:

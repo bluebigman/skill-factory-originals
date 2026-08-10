@@ -29,7 +29,7 @@ import json
 import os
 import sys
 import tempfile
-from datetime import datetime
+from datetime import timezone, datetime
 from typing import Any, Dict, List, Optional
 
 
@@ -289,7 +289,7 @@ def _render_text(analysis: Dict[str, Any], title: str) -> str:
     lines = []
     lines.append("=" * 60)
     lines.append(f"  {title}")
-    lines.append(f"  生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    lines.append(f"  生成时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append("=" * 60)
 
     vc = analysis["value_col"]
@@ -333,7 +333,7 @@ def _render_markdown(analysis: Dict[str, Any], title: str) -> str:
     """渲染 Markdown 报告"""
     lines = []
     lines.append(f"# {title}")
-    lines.append(f"\n> 生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    lines.append(f"\n> 生成时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
     lines.append("")
 
     vc = analysis["value_col"]
@@ -419,7 +419,7 @@ tr:hover {{ background: #f5f5f5; }}
 <body>
 <div class="container">
 <h1>📊 {title}</h1>
-<p class="meta">生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | 记录数: {analysis['count']} | 数值列: <code>{vc}</code></p>
+<p class="meta">生成时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} | 记录数: {analysis['count']} | 数值列: <code>{vc}</code></p>
 
 <h2>📈 核心指标</h2>
 <table>

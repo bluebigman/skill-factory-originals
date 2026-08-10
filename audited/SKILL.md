@@ -8,7 +8,7 @@ version: 1.0.1
 rules_version: cpr-20260808-n152
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/audited
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/audited
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -43,7 +43,7 @@ trigger_words: ["audited", "acts_as_audited", "审计日志", "模型变更记�
 | 自动记录变更 | 在模型上启用后，每次 create / update / destroy 自动生成审计记录 | 需要追踪数据变更历史的业务系统 |
 | 关联用户追踪 | 记录操作者（当前登录用户）信息 | 多用户协作的后台管理系统 |
 | 自定义字段过滤 | 可指定只审计某些字段，或排除某些字段 | 避免记录敏感字段（如密码）或高频无意义字段 |
-| 审计记录查询 | 提供便捷的查询接口，按模型、记录、时间范围检索 | 合规审查、问题排查、操作回溯 |
+| 审计记录查询 | 提供便捷的查询，按模型、记录、时间范围检索 | 合规审查、问题排查、操作回溯 |
 | 关联对象审计 | 支持对关联对象（has_many 等）的变更进行审计 | 订单明细、子表数据变更追踪 |
 
 ### 1.2 能力边界声明

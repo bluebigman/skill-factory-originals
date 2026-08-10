@@ -48,7 +48,7 @@ trigger_words: ["agent-workflow-kit", "工作流评估", "风险评分", "任务
 |------|--------|------|
 | 1 | 不执行实际代码 | 本技能只做评估、编排与规则生成，不直接运行或部署代码 |
 | 2 | 不替代人工决策 | 风险评分是参考值，最终决策权在用户手中 |
-| 3 | 不处理无格式的纯口语输入 | 输入需具备基本可解析结构（如段落、列表、表格） |
+| 3 | 不处理无格式的纯口语输入 | 输入需具备基本可解析结构（如段落、列表、） |
 | 4 | 不保证信息绝对准确 | 所有输出均基于输入内容推断，存在信息缺失或偏差可能 |
 | 5 | 不跨域联想 | 仅处理输入中明确出现的信息，不做外部知识补全 |
 
@@ -138,34 +138,34 @@ trigger_words: ["agent-workflow-kit", "工作流评估", "风险评分", "任务
 
 ```json
 {
-  "meta": {
-    "schema_version": "1.0",
-    "processed_at": "2026-08-08T12:00:00Z",
-    "input_source": "user_upload",
-    "input_format": "pdf"
-  },
-  "extracted_fields": {
-    "project_name": "智能客服系统",
-    "timeline": "2026-Q3",
-    "tech_stack": ["Python", "FastAPI", "PostgreSQL"],
-    "team_size": 5
-  },
-  "risk_assessment": {
-    "overall_score": 42,
-    "risk_level": "中",
-    "dimensions": [
-      {"name": "需求明确度", "score": 55, "confidence": 80},
-      {"name": "技术可行性", "score": 70, "confidence": 90},
-      {"name": "时间合理性", "score": 30, "confidence": 60}
-    ]
-  },
-  "uncertainties": [
-    {"field": "timeline", "reason": "文档中仅提及'Q3'，未说明具体月份", "confidence": 60}
-  ],
-  "recommendations": [
-    "建议补充具体上线日期",
-    "技术栈版本信息缺失，建议确认"
-  ]
+ "meta": {
+ "schema_version": "1.0",
+ "processed_at": "2026-08-08T12:00:00Z",
+ "input_source": "user_upload",
+ "input_format": "pdf"
+ },
+ "extracted_fields": {
+ "project_name": "智能客服系统",
+ "timeline": "2026-Q3",
+ "tech_stack": ["Python", "FastAPI", "PostgreSQL"],
+ "team_size": 5
+ },
+ "risk_assessment": {
+ "overall_score": 42,
+ "risk_level": "中",
+ "dimensions": [
+ {"name": "需求明确度", "score": 55, "confidence": 80},
+ {"name": "技术可行性", "score": 70, "confidence": 90},
+ {"name": "时间合理性", "score": 30, "confidence": 60}
+ ]
+ },
+ "uncertainties": [
+ {"field": "timeline", "reason": "文档中仅提及'Q3'，未说明具体月份", "confidence": 60}
+ ],
+ "recommendations": [
+ "建议补充具体上线日期",
+ "技术栈版本信息缺失，建议确认"
+ ]
 }
 ```
 
@@ -198,15 +198,15 @@ trigger_words: ["agent-workflow-kit", "工作流评估", "风险评分", "任务
 
 ```
 检测到信息不足
-    ↓
+ ↓
 标记 [需核实:字段名]
-    ↓
+ ↓
 生成置信度报告（列出所有不确定项）
-    ↓
+ ↓
 输出结果中附带置信度报告
-    ↓
+ ↓
 等待用户确认或补充信息
-    ↓
+ ↓
 （可选）用户补充后重新计算
 ```
 
@@ -305,16 +305,16 @@ trigger_words: ["agent-workflow-kit", "工作流评估", "风险评分", "任务
 
 ```json
 {
-  "input_fields": {
-    "项目名": "project_name",
-    "负责人": "owner",
-    "截止": "deadline"
-  },
-  "output_fields": {
-    "project_name": "string",
-    "owner": "string",
-    "deadline": "date"
-  }
+ "input_fields": {
+ "项目名": "project_name",
+ "负责人": "owner",
+ "截止": "deadline"
+ },
+ "output_fields": {
+ "project_name": "string",
+ "owner": "string",
+ "deadline": "date"
+ }
 }
 ```
 
@@ -322,15 +322,15 @@ trigger_words: ["agent-workflow-kit", "工作流评估", "风险评分", "任务
 
 ```
 接收文件列表
-    ↓
+ ↓
 逐文件检测格式与编码
-    ↓
+ ↓
 按字段映射表解析
-    ↓
+ ↓
 逐条评分并标注置信度
-    ↓
+ ↓
 汇总输出 + 异常报告
-    ↓
+ ↓
 校验完整性 → 输出
 ```
 

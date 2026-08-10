@@ -666,7 +666,9 @@ def main() -> int:
 
     parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
 
-    args = parser.parse_args()
+    args = parser.add_argument("--retries", default=None, help="参数")
+    ap.add_argument("--workers", default=None, help="参数")
+    ap.parse_args()
 
     global dry_run
 

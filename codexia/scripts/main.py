@@ -20,7 +20,7 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import timezone, datetime
 
 # ---------------------------------------------------------------------------
 # 错误码定义（E001-E010）
@@ -191,7 +191,7 @@ def parse_single(raw_text: str) -> dict:
 
     # 时间戳
     try:
-        parsed_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        parsed_at = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S")
     except Exception:
         parsed_at = "未知时间"
 

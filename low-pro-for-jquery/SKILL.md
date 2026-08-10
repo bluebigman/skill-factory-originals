@@ -9,7 +9,7 @@ description: 将Low Pro行为框架移植为jQuery插件，提供声明式事件
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/low-pro-for-jquery
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/low-pro-for-jquery
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -44,13 +44,13 @@ trigger_words: ["low-pro-for-jquery", "jquery行为插件", "事件委托封装"
 | C1 | 行为声明式绑定 | 将 DOM 事件与业务逻辑解耦，通过配置对象声明行为 | 表单校验、列表操作按钮统一绑定 |
 | C2 | 事件委托封装 | 自动处理动态添加元素的监听，无需手动 rebind | SPA 路由切换后新渲染的 DOM 节点 |
 | C3 | 行为组合与继承 | 支持行为间继承与混入，复用公共逻辑 | 多个页面共享的"确认删除"行为 |
-| C4 | 批量处理与格式化 | 对一组 DOM 节点统一应用行为，支持自定义输出格式 | 表格行 hover 效果、统计上报 |
+| C4 | 批量处理与格式化 | 对一组 DOM 节点统一应用行为，支持自定义输出格式 | 行 hover 效果、统计上报 |
 | C5 | 置信度标注 | 在行为执行结果中标注匹配度与确定性 | 模糊匹配 DOM 节点时提示匹配概率 |
 
 ### 1.2 不能做（明确边界）
 
 - **不替代框架**：不提供完整 MVVM 能力，不处理数据双向绑定
-- **不处理跨域**：不封装 AJAX 请求，不解决跨域策略
+- **不处理跨域**：不封装 AJAX ，不解决跨域策略
 - **不兼容旧版 IE**：仅支持 jQuery 3.x 及以上版本
 - **不做性能魔法**：不承诺零开销，事件委托仍受 DOM 深度影响
 - **不生成业务代码**：只提供行为注册与触发机制，不自动生成业务逻辑

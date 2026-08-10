@@ -15,7 +15,8 @@ dev-motivation-cli 数据转换工具
 import argparse
 import json
 import sys
-import datetime
+from datetime import datetime, timezone
+import datetime as _dt
 from typing import Dict, Any, List
 
 # 错误码定义
@@ -159,7 +160,7 @@ def generate_example_data() -> Dict[str, Any]:
     """
     return {
         "message": "坚持就是胜利，继续加油！",
-        "timestamp": datetime.datetime.now().isoformat(),
+        "timestamp": datetime.datetime.now(timezone.utc).isoformat(),
         "level": "INFO",
         "author": "SkillForge Lab",
         "tool_version": "1.0.2",

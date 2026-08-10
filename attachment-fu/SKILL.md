@@ -32,7 +32,7 @@ trigger_words: ["attachment-fu", "附件处理", "文件转记录", "附件管�
 
 ## 一、能力边界速查卡
 
-本 Skill 的核心定位：**将用户提供的文件、数据或 URL 转换为符合约定格式的结构化附件记录**。它不是一个通用的文件存储工具，也不是一个数据清洗工具，而是一个“输入 → 解析 → 结构化输出”的转换器。
+本 Skill 的核心定位：**将用户提供的文件、数据或 URL 转换为符合约定格式的结构化附件记录**。它不是一个通用的文件存储工具，也不是一个工具，而是一个“输入 → 解析 → 结构化输出”的转换器。
 
 ### 1.1 能做（核心能力）
 
@@ -135,26 +135,26 @@ trigger_words: ["attachment-fu", "附件处理", "文件转记录", "附件管�
 
 ```json
 {
-  "record_id": "uuid-string",
-  "source_type": "local | url | data",
-  "original_input": "用户输入的原始值",
-  "parsed": {
-    "file_name": "report_2024.pdf",
-    "file_size_bytes": 2621440,
-    "mime_type": "application/pdf",
-    "extension": "pdf",
-    "modified_at": "2024-01-15T10:30:00Z",
-    "source_url": "https://example.com/report_2024.pdf"
-  },
-  "confidence": {
-    "file_name": 1.0,
-    "file_size_bytes": 1.0,
-    "mime_type": 0.95,
-    "extension": 1.0,
-    "modified_at": 0.8,
-    "source_url": 1.0
-  },
-  "warnings": ["modified_at 为推断值，原始来源未提供 Last-Modified 头"]
+ "record_id": "uuid-string",
+ "source_type": "local | url | data",
+ "original_input": "用户输入的原始值",
+ "parsed": {
+ "file_name": "report_2024.pdf",
+ "file_size_bytes": 2621440,
+ "mime_type": "application/pdf",
+ "extension": "pdf",
+ "modified_at": "2024-01-15T10:30:00Z",
+ "source_url": "https://example.com/report_2024.pdf"
+ },
+ "confidence": {
+ "file_name": 1.0,
+ "file_size_bytes": 1.0,
+ "mime_type": 0.95,
+ "extension": 1.0,
+ "modified_at": 0.8,
+ "source_url": 1.0
+ },
+ "warnings": ["modified_at 为推断值，原始来源未提供 Last-Modified 头"]
 }
 ```
 
@@ -297,24 +297,24 @@ attachment-fu 处理 /data/report_2024.pdf
 **输出：**
 ```json
 {
-  "record_id": "a3f8c2e1-9b4d-4f6a-8e2c-1d5b7a9c3e2f",
-  "source_type": "local",
-  "original_input": "/data/report_2024.pdf",
-  "parsed": {
-    "file_name": "report_2024.pdf",
-    "file_size_bytes": 2621440,
-    "mime_type": "application/pdf",
-    "extension": "pdf",
-    "modified_at": "2024-01-15T10:30:00Z"
-  },
-  "confidence": {
-    "file_name": 1.0,
-    "file_size_bytes": 1.0,
-    "mime_type": 0.95,
-    "extension": 1.0,
-    "modified_at": 1.0
-  },
-  "warnings": []
+ "record_id": "a3f8c2e1-9b4d-4f6a-8e2c-1d5b7a9c3e2f",
+ "source_type": "local",
+ "original_input": "/data/report_2024.pdf",
+ "parsed": {
+ "file_name": "report_2024.pdf",
+ "file_size_bytes": 2621440,
+ "mime_type": "application/pdf",
+ "extension": "pdf",
+ "modified_at": "2024-01-15T10:30:00Z"
+ },
+ "confidence": {
+ "file_name": 1.0,
+ "file_size_bytes": 1.0,
+ "mime_type": 0.95,
+ "extension": 1.0,
+ "modified_at": 1.0
+ },
+ "warnings": []
 }
 ```
 
@@ -328,26 +328,26 @@ attachment-fu 处理 https://example.com/files/data.csv?token=abc123
 **输出：**
 ```json
 {
-  "record_id": "b7d2e4f8-1a3c-4e5b-9f6d-2c8a0b4d6e7f",
-  "source_type": "url",
-  "original_input": "https://example.com/files/data.csv?token=abc123",
-  "parsed": {
-    "file_name": "data.csv",
-    "file_size_bytes": 1048576,
-    "mime_type": "text/csv",
-    "extension": "csv",
-    "modified_at": "2024-02-01T08:00:00Z",
-    "source_url": "https://example.com/files/data.csv"
-  },
-  "confidence": {
-    "file_name": 1.0,
-    "file_size_bytes": 0.9,
-    "mime_type": 0.85,
-    "extension": 1.0,
-    "modified_at": 0.7,
-    "source_url": 1.0
-  },
-  "warnings": ["modified_at 为推断值，原始来源未提供 Last-Modified 头"]
+ "record_id": "b7d2e4f8-1a3c-4e5b-9f6d-2c8a0b4d6e7f",
+ "source_type": "url",
+ "original_input": "https://example.com/files/data.csv?token=abc123",
+ "parsed": {
+ "file_name": "data.csv",
+ "file_size_bytes": 1048576,
+ "mime_type": "text/csv",
+ "extension": "csv",
+ "modified_at": "2024-02-01T08:00:00Z",
+ "source_url": "https://example.com/files/data.csv"
+ },
+ "confidence": {
+ "file_name": 1.0,
+ "file_size_bytes": 0.9,
+ "mime_type": 0.85,
+ "extension": 1.0,
+ "modified_at": 0.7,
+ "source_url": 1.0
+ },
+ "warnings": ["modified_at 为推断值，原始来源未提供 Last-Modified 头"]
 }
 ```
 

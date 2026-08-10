@@ -38,7 +38,7 @@ trigger_words: ["awesomeness", "rails bits", "rails 片段", "rails 组件", "ra
 |------|------|------|----------|----------|
 | 1 | **组件速查** | 根据关键词返回对应的 Rails 组件/库的用途、安装方式、核心用法 | `"pundit 怎么用"` | 返回 Pundit 的用途、Gemfile 配置、Policy 示例代码 |
 | 2 | **代码片段检索** | 按功能场景返回可复用的代码片段 | `"Rails 批量导入 CSV"` | 返回包含 `CSV.foreach` 的完整代码块及说明 |
-| 3 | **最佳实践比对** | 对比两种实现方式的优劣，给出推荐方案 | `"strong_parameters vs attr_accessible"` | 返回对比表格 + 推荐结论 |
+| 3 | **最佳实践比对** | 对比两种实现方式的优劣，给出推荐方案 | `"strong_parameters vs attr_accessible"` | 返回对比 + 推荐结论 |
 | 4 | **版本兼容提示** | 针对指定 Rails 版本给出兼容性注意点 | `"Rails 7 中 has_many through 注意什么"` | 返回版本差异说明及迁移建议 |
 | 5 | **批量处理** | 一次提交多个查询关键词，返回结构化结果列表 | `["scope", "callback", "concern"]` | 返回三个主题的速查卡片列表 |
 
@@ -89,7 +89,7 @@ trigger_words: ["awesomeness", "rails bits", "rails 片段", "rails 组件", "ra
 | 输入格式 | 自然语言或关键词列表 | 支持中英文混合输入 |
 | 必要信息 | 至少包含一个明确的查询主题 | 如 "scope"、"callback"、"CSV 导入" 等 |
 | 可选信息 | Rails 版本号 | 如 "Rails 7"、"Rails 6.1"，用于版本兼容提示 |
-| 可选信息 | 输出格式偏好 | 如 "表格"、"代码块"、"对比" |
+| 可选信息 | 输出格式偏好 | 如 ""、"代码块"、"对比" |
 
 ### 3.2 执行步骤（分步编号）
 
@@ -142,9 +142,9 @@ trigger_words: ["awesomeness", "rails bits", "rails 片段", "rails 组件", "ra
 
 ```ruby
 class Post < ApplicationRecord
-  scope :published, -> { where(published: true) }
-  scope :recent, -> { order(created_at: :desc) }
-  scope :by_author, ->(author_id) { where(author_id: author_id) }
+ scope :published, -> { where(published: true) }
+ scope :recent, -> { order(created_at: :desc) }
+ scope :by_author, ->(author_id) { where(author_id: author_id) }
 end
 
 # 用法
@@ -248,13 +248,13 @@ Post.published.recent.by_author(1)
 
 ```
 ┌─────────────────────────────────────────────┐
-│  awesomeness 速查卡                          │
+│ awesomeness 速查卡 │
 ├─────────────────────────────────────────────┤
-│  1. 输入关键词 → 获取速查卡片                  │
-│  2. 支持：scope / callback / concern / CSV   │
-│  3. 输出：用途 + 代码 + 注意事项               │
-│  4. 不确定时标注 [需核实:字段]                 │
-│  5. 批量查询最多 5 个主题                      │
+│ 1. 输入关键词 → 获取速查卡片 │
+│ 2. 支持：scope / callback / concern / CSV │
+│ 3. 输出：用途 + 代码 + 注意事项 │
+│ 4. 不确定时标注 [需核实:字段] │
+│ 5. 批量查询最多 5 个主题 │
 └─────────────────────────────────────────────┘
 ```
 
@@ -271,7 +271,7 @@ Post.published.recent.by_author(1)
 1. **批量查询**：一次提交多个相关主题，如 `["scope", "callback", "concern"]`
 2. **对比需求**：使用"对比"关键词，如 `"pundit vs cancancan 对比"`
 3. **版本专项**：指定 Rails 版本，获取兼容性提示
-4. **自定义输出**：要求表格、代码块等特定格式
+4. **自定义输出**：要求、代码块等特定格式
 5. **反馈修正**：发现错误时，明确指正，帮助改进知识库
 
 ---

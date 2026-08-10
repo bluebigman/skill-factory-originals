@@ -46,7 +46,7 @@ trigger_words: ["awesome-mcp-servers", "MCP服务器", "MCP资源", "服务器�
 2. **能力标签化**：为每个服务器生成 3-5 个能力标签（如 `文件访问`、`数据库`、`搜索`、`代码执行`）。
 3. **分类归组**：按功能领域（开发工具、数据存储、通信协作、AI 增强等）自动分组。
 4. **接入参数解析**：提取环境变量要求、启动命令、依赖项等接入关键信息。
-5. **对比速查输出**：生成 Markdown 表格或 JSON 结构，便于快速浏览与决策。
+5. **对比速查输出**：生成 Markdown 或 JSON 结构，便于快速浏览与决策。
 
 ### 不能做（明确边界）
 
@@ -130,7 +130,7 @@ trigger_words: ["awesome-mcp-servers", "MCP服务器", "MCP资源", "服务器�
 **步骤 5：自查与交付**
 
 - 检查字段完整性：每条记录是否包含名称、描述、分类
-- 检查格式正确性：表格列对齐、JSON 语法有效
+- 检查格式正确性：列对齐、JSON 语法有效
 - 检查置信度标注：所有低置信度字段是否已标记 `[需核实:字段名]`
 - 如有疑问，向用户二次确认后再输出最终结果
 
@@ -153,17 +153,17 @@ trigger_words: ["awesome-mcp-servers", "MCP服务器", "MCP资源", "服务器�
 
 ```json
 {
-  "generated_at": "2026-08-09T12:00:00Z",
-  "total_count": 2,
-  "servers": [
-    {
-      "name": "filesystem-server",
-      "capabilities": ["文件访问", "目录管理"],
-      "transport": "stdio",
-      "dependencies": ["Node.js 18+"],
-      "confidence": 0.95
-    }
-  ]
+ "generated_at": "2026-08-09T12:00:00Z",
+ "total_count": 2,
+ "servers": [
+ {
+ "name": "filesystem-server",
+ "capabilities": ["文件访问", "目录管理"],
+ "transport": "stdio",
+ "dependencies": ["Node.js 18+"],
+ "confidence": 0.95
+ }
+ ]
 }
 ```
 
@@ -203,10 +203,10 @@ trigger_words: ["awesome-mcp-servers", "MCP服务器", "MCP资源", "服务器�
 
 ```json
 {
-  "error_code": "E002",
-  "message": "输入内容无法识别为文本、Markdown 或 JSON，请检查格式。",
-  "suggestion": "请将内容粘贴为纯文本，或提供有效的 .md / .json 文件。",
-  "valid_example": "示例：'filesystem-server - 提供文件读写能力，基于 stdio 传输。'"
+ "error_code": "E002",
+ "message": "输入内容无法识别为文本、Markdown 或 JSON，请检查格式。",
+ "suggestion": "请将内容粘贴为纯文本，或提供有效的 .md / .json 文件。",
+ "valid_example": "示例：'filesystem-server - 提供文件读写能力，基于 stdio 传输。'"
 }
 ```
 
@@ -246,7 +246,7 @@ trigger_words: ["awesome-mcp-servers", "MCP服务器", "MCP资源", "服务器�
 ### 速查卡（30 秒上手）
 
 1. 用户提供 MCP 服务器信息 → 2. 本技能自动解析 → 3. 输出结构化速查表
-2. 默认输出 Markdown 表格，含名称、能力、传输方式、置信度
+2. 默认输出 Markdown ，含名称、能力、传输方式、置信度
 3. 信息不足时用 `[需核实:字段]` 占位，不猜测
 
 ### 新手路径（5 分钟掌握）

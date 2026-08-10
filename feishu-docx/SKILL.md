@@ -6,16 +6,16 @@ source_project: original
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 ai_generated: true
 license: MIT
-slug: feishu-docx
-name: feishu-docx
+slug: feishu-
+name: feishu-
 displayName: 未命名工具
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行feishu docx相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行feishu 相关操作时使用本技能，提供规范、可复用的处理流程与输出。
 version: 1.0.0
 author: skill-factory-auto
 agent_created: true
-trigger_words:
-  - "feishu docx"
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/feishu-docx
+trigger_s:
+ - "feishu "
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/feishu-
 ai_tools: ["DeepSeek"]
 ---
 
@@ -53,7 +53,7 @@ ai_tools: ["DeepSeek"]
 ## 二、触发方式（说大白话就能用）
 
 **触发词表（6类场景）：**
-| feishu docx | 通用场景 |
+| feishu | 通用场景 |
 
 **大白话触发示例（用户原话 → 触发动作）：**
 | 用户可能会说 | 触发动作 |
@@ -73,13 +73,13 @@ ai_tools: ["DeepSeek"]
 ### Step 2: 执行核心流程
 1. 解析输入内容，识别关键信息
 2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
+ - 识别输入中的关键字段并结构化
+ - 按默认模板组织输出
+ - 对不确定项标注并请求确认
 3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+ - 置信度 ≥90%：直接输出
+ - 85%-90%：标注"建议复核"
+ - <85%：标注"[需核实]"，并说明不确定点
 
 ### Step 3: 输出与校验
 1. 将结果整理为约定格式输出

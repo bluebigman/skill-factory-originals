@@ -9,7 +9,7 @@ description: 面向HEC系列软件的AI辅助脚本生成与自动化操作指�
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/hec-commander
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/hec-commander
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -48,7 +48,7 @@ trigger_words: ["hec-commander", "HEC-RAS", "HEC-HMS", "水文建模", "脚本�
 | ✅ 能做 | 对不确定的模型参数或 API 用法给出 [需核实:字段名] 占位提示 |
 | ❌ 不能做 | 直接运行或调试 HEC-RAS/HEC-HMS 软件（需用户本地安装并验证） |
 | ❌ 不能做 | 替代专业水文水力计算，不提供数值方法建议 |
-| ❌ 不能做 | 访问未公开的 API 接口或绕过软件授权机制 |
+| ❌ 不能做 | 访问未公开的 API 或绕过软件授权机制 |
 
 **适用对象**：已安装 HEC-RAS 6.x / HEC-HMS 4.x 并具备 Python 基础（或愿意学习）的建模人员。
 

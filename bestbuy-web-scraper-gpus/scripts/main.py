@@ -528,7 +528,10 @@ def main() -> int:
         help="逗号分隔的输出字段列表",
     )
 
-    args = parser.parse_args()
+    args = parser.add_argument("--url", default=None, help="参数")
+    ap.add_argument("--once", default=None, help="参数")
+    ap.add_argument("--interval", default=None, help="参数")
+    ap.parse_args()
 
     # 运行自检
     if args.selftest:

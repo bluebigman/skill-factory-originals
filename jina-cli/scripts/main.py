@@ -77,4 +77,4 @@ def extract_text_from_markdown(md_content: str) -> str:
         return ""
     
     # 移除代码块
-    text = re.sub(r'
+    re.sub(r'```.*?```', '', text, flags=re.S)

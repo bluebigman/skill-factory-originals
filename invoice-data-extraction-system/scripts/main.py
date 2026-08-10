@@ -18,7 +18,7 @@ import json
 import os
 import re
 import sys
-from datetime import datetime
+from datetime import timezone, datetime
 from pathlib import Path
 
 # ---------------------------------------------------------------------------
@@ -84,7 +84,7 @@ class InvoiceRecord:
     def __init__(self, source: str, fields: list = None):
         self.source = source
         self.fields = fields if fields else []
-        self.parsed_at = datetime.now().isoformat()
+        self.parsed_at = datetime.now(timezone.utc).isoformat()
 
     def add_field(self, field: InvoiceField):
         self.fields.append(field)

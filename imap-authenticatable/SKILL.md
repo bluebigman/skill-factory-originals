@@ -9,7 +9,7 @@ description: 基于任意IMAP服务器实现Rails应用的用户认证与登录�
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/imap-authenticatable
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/imap-authenticatable
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -52,7 +52,7 @@ trigger_words: ["imap authenticatable", "IMAP认证", "邮箱登录", "邮件服
 - 不负责邮箱账号的注册、密码重置或邮箱内容读取
 - 不处理 OAuth / OAuth2 / XOAUTH2 等非密码认证方式
 - 不提供 IMAP 服务器自身的搭建或运维
-- 不存储或缓存用户密码（仅用于单次认证请求）
+- 不存储或缓存用户密码（仅用于单次认证）
 - 不处理非 IMAP 协议（如 POP3、Exchange ActiveSync）
 
 ### 适用对象

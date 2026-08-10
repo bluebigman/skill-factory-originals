@@ -5,7 +5,7 @@
 import json
 import sys
 import os
-from datetime import datetime
+from datetime import timezone, datetime
 from collections import defaultdict
 
 class LineageAnalyzer:
@@ -22,7 +22,7 @@ class LineageAnalyzer:
             "name": name,
             "database": database,
             "schema": schema,
-            "created_at": datetime.now().isoformat()
+            "created_at": datetime.now(timezone.utc).isoformat()
         }
         
     def add_column(self, table, column, data_type="string", comment=""):
@@ -47,7 +47,7 @@ class LineageAnalyzer:
                 "column": target_column
             },
             "transform": transform,
-            "created_at": datetime.now().isoformat()
+            "created_at": datetime.now(timezone.utc).isoformat()
         }
         self.lineage.append(relation)
         return relation

@@ -8,7 +8,7 @@ version: 1.0.1
 rules_version: cpr-20260808-n152
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ambition
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/ambition
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -40,9 +40,9 @@ trigger_words: ["ambition", "数据转换", "信息提取", "结构化输出", "
 
 | 维度 | 能做 | 不能做 |
 |------|------|--------|
-| 输入类型 | 用户粘贴的文本、上传的 CSV/JSON/TXT 文件、可公开访问的 URL | 需要登录认证的私有系统、二进制文件（图片/音频/视频） |
-| 核心操作 | 解析内容、识别关键字段、按模板重组、批量处理 | 执行代码、修改源文件、发起网络请求（仅读取） |
-| 输出形式 | Markdown 表格、JSON 结构、CSV 行、自定义分隔符文本 | 生成图表、创建压缩包、直接写入用户磁盘 |
+| 输入类型 | 用户粘贴的文本、上传的 CSV/JSON/TXT 文件、可公开访问的 URL | 需要登录认证的私有系统、二进制文件（/音频/视频） |
+| 核心操作 | 解析内容、识别关键字段、按模板重组、批量处理 | 执行代码、修改源文件、发起网络（仅读取） |
+| 输出形式 | Markdown 、JSON 结构、CSV 行、自定义分隔符文本 | 生成图表、创建压缩包、直接写入用户磁盘 |
 | 质量保障 | 对每个输出字段标注置信度（高/中/低） | 对缺失信息进行猜测或编造 |
 | 批量能力 | 支持多行记录逐条处理，保持格式一致 | 跨文件关联分析、去重合并 |
 

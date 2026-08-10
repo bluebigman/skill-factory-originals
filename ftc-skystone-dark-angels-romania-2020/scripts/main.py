@@ -366,4 +366,4 @@ class ReportGenerator:
     def _generate_structure(self) -> List[str]:
         """生成目录结构"""
         lines = ["## 二、目录结构", ""]
-        lines.append("
+        lines.append("")

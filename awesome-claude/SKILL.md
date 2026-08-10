@@ -36,7 +36,7 @@ trigger_words: ["awesome-claude", "claude资产", "ai工作流", "mcp服务器",
 |------|------|--------|
 | 输入处理 | 接受用户提供的 URL、文件路径、粘贴文本、批量清单 | 不接受二进制大文件（>10MB）或加密内容 |
 | 资产类型 | 识别 Agent、MCP Server、Skill、Prompt 模板、工作流配置 | 不评估资产代码质量，不执行安全审计 |
-| 输出形式 | 生成结构化清单（Markdown 表格 / JSON）、分类汇总、字段提取 | 不生成可直接部署的完整项目代码 |
+| 输出形式 | 生成结构化清单（Markdown / JSON）、分类汇总、字段提取 | 不生成可直接部署的完整项目代码 |
 | 信息处理 | 保留关键元数据（名称、版本、用途、依赖、来源） | 不推断未明确给出的信息，不补全缺失字段 |
 | 批量操作 | 支持一次处理多条记录，统一格式输出 | 不支持跨批次状态记忆，每次调用相互独立 |
 
@@ -57,7 +57,7 @@ trigger_words: ["awesome-claude", "claude资产", "ai工作流", "mcp服务器",
 | ai工作流 | “这几个工作流配置帮我对比一下差异” | 字段对比 |
 | mcp服务器 | “从这段文本里找出所有 MCP 服务器条目” | 实体抽取 |
 | 技能检索 | “在下面这批技能描述里筛出能做文档处理的” | 条件筛选 |
-| 工作流导航 | “把这份导航文档转成表格给我” | 格式转换 |
+| 工作流导航 | “把这份导航文档转成给我” | 格式转换 |
 
 **触发判定规则**：用户消息中命中任一触发词，且包含可处理的具体内容（URL、文件路径、粘贴文本），即进入标准流程。若仅有触发词而无具体输入，技能将输出输入格式示例并等待用户补充。
 
@@ -73,7 +73,7 @@ trigger_words: ["awesome-claude", "claude资产", "ai工作流", "mcp服务器",
 |--------|------|----------------|
 | 输入内容 | 文本格式，可识别编码（UTF-8/GBK） | 提示用户转换为纯文本后重试 |
 | 输入规模 | 单次不超过 500 条记录或 50,000 字符 | 建议分批提交，每批 ≤ 上述阈值 |
-| 输出格式 | 用户指定或默认 Markdown 表格 | 用户可随时切换为 JSON 格式 |
+| 输出格式 | 用户指定或默认 Markdown | 用户可随时切换为 JSON 格式 |
 | 信息完整度 | 至少包含名称字段 | 缺少关键字段时按 3.4 节处理 |
 
 ### 3.2 执行步骤
@@ -115,7 +115,7 @@ trigger_words: ["awesome-claude", "claude资产", "ai工作流", "mcp服务器",
 
 ### 3.3 输出规范
 
-**默认输出（Markdown 表格）**：
+**默认输出（Markdown ）**：
 
 ```markdown
 | 名称 | 类型 | 描述 | 来源 | 版本 | 置信度 |
@@ -127,21 +127,21 @@ trigger_words: ["awesome-claude", "claude资产", "ai工作流", "mcp服务器",
 
 ```json
 [
-  {
-    "name": "example-agent",
-    "type": "agent",
-    "description": "示例代理，用于演示",
-    "source": "github.com/example",
-    "version": "v1.0.0",
-    "confidence": "high"
-  }
+ {
+ "name": "example-agent",
+ "type": "agent",
+ "description": "示例代理，用于演示",
+ "source": "github.com/example",
+ "version": "v1.0.0",
+ "confidence": "high"
+ }
 ]
 ```
 
 **自查清单**（输出前逐项确认）：
 
 - [ ] 所有 P0 字段是否已填充（缺失项是否已标注 `[需核实:字段名]`）
-- [ ] 格式是否为用户指定格式（默认 Markdown 表格）
+- [ ] 格式是否为用户指定格式（默认 Markdown ）
 - [ ] 每条记录是否附带置信度标注
 - [ ] 重复记录是否已去重
 
@@ -172,14 +172,14 @@ trigger_words: ["awesome-claude", "claude资产", "ai工作流", "mcp服务器",
 
 ## agent
 - name: doc-helper
-  description: 文档处理辅助代理
-  source: github.com/example/doc-helper
-  version: v2.1.0
+ description: 文档处理辅助代理
+ source: github.com/example/doc-helper
+ version: v2.1.0
 
 ## mcp-server
 - name: file-bridge
-  description: 文件系统桥接服务器
-  source: github.com/example/file-bridge
+ description: 文件系统桥接服务器
+ source: github.com/example/file-bridge
 ```
 
 ---
@@ -191,7 +191,7 @@ trigger_words: ["awesome-claude", "claude资产", "ai工作流", "mcp服务器",
 | 输入信息不足时强行输出 | 对缺失字段随意填写“未知”或猜测值 | 使用 `[需核实:字段名]` 占位，并提示用户补充 |
 | 混淆资产类型 | 将所有条目统一归类为 agent | 依据 description 关键词与上下文推断，并标注置信度 |
 | 忽略重复记录 | 原样输出所有条目，不做去重 | 按 name+source 去重，保留首条 |
-| 输出格式不一致 | 部分条目用表格、部分用列表 | 统一为单一格式（默认 Markdown 表格） |
+| 输出格式不一致 | 部分条目用、部分用列表 | 统一为单一格式（默认 Markdown ） |
 | 批量处理时丢失上下文 | 将批次间状态混淆，导致重复或遗漏 | 每次调用独立处理，批次间不做状态关联 |
 
 ---
@@ -201,7 +201,7 @@ trigger_words: ["awesome-claude", "claude资产", "ai工作流", "mcp服务器",
 ### 6.1 速查卡（30 秒上手）
 
 1. 提供输入（URL / 文件 / 粘贴文本）
-2. 指定输出格式（默认 Markdown 表格）
+2. 指定输出格式（默认 Markdown ）
 3. 获取结构化清单（含置信度标注）
 4. 缺失字段以 `[需核实:xxx]` 占位
 

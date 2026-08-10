@@ -1,20 +1,20 @@
 ---
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
-slug: invoice-parser
-name: invoice-parser
+slug: -parser
+name: -parser
 displayName: 票据解析 字段抽取 对账助手
-description: 从发票与采购单据中抽取结构化字段，辅助对账与归档。
+description: 从与采购单据中抽取结构化字段，辅助对账与归档。
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/invoice-parser
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/-parser
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 墨斗工作室
 agent_created: true
-trigger_words: ["发票识别", "票据解析", "采购单提取", "invoice-parser"]
+trigger_words: ["识别", "票据解析", "采购单提取", "-parser"]
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
@@ -33,7 +33,7 @@ trigger_words: ["发票识别", "票据解析", "采购单提取", "invoice-pars
 
 # 票据解析 Skill 使用指南
 
-本 Skill 面向需要从发票、采购订单等票据中提取结构化信息的场景。它接收用户提供的文件、链接或粘贴文本，输出统一格式的字段清单，并对不确定内容给出明确提示。
+本 Skill 面向需要从、采购订单等票据中提取结构化信息的场景。它接收用户提供的文件、链接或粘贴文本，输出统一格式的字段清单，并对不确定内容给出明确提示。
 
 
 ## 许可证（License）

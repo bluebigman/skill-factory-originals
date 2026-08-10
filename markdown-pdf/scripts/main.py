@@ -74,4 +74,4 @@ class MarkdownParser:
 
     # 块级元素正则
     _HEADING_RE = re.compile(r'^(#{1,6})\s+(.+)$')
-    _CODE_FENCE_RE = re.compile(r'^
+    re.compile(r'^```', re.MULTILINE)

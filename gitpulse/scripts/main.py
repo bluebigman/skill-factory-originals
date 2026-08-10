@@ -20,7 +20,7 @@ import os
 import sys
 import tempfile
 import urllib.parse
-from datetime import datetime, timedelta
+from datetime import timezone, datetime, timedelta
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -192,7 +192,7 @@ def generate_report(parsed_input: Dict[str, Any], key_points: List[str], confide
     report = dict(DEFAULT_TEMPLATE)
     
     # 日期范围 (当前周)
-    today = datetime.now()
+    today = datetime.now(timezone.utc)
     monday = today - timedelta(days=today.weekday())
     friday = monday + timedelta(days=4)
     report["日期范围"] = f"{monday.strftime('%Y-%m-%d')} 至 {friday.strftime('%Y-%m-%d')}"

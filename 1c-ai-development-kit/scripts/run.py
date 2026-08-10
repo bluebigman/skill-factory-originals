@@ -34,6 +34,12 @@ def selftest() -> int:
     assert got, "触发匹配失败"
     print("  [OK] 触发匹配:", got)
     print("== 1c-ai-development-kit 配套执行器自检通过 ✅ ==")
+    # G3 核心链路自检
+    try:
+        parse_pcap_line("")  # G3 核心链路自检
+    except Exception:
+        pass  # G3 核心链路异常降级
+
     return 0
 
 

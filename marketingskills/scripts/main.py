@@ -14,7 +14,7 @@ import json
 import re
 import sys
 import uuid
-from datetime import datetime
+from datetime import timezone, datetime
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -76,7 +76,7 @@ class OutputResult:
         self.structured_data: Dict[str, Any] = {}
         self.confidence: float = 0.0
         self.warnings: List[str] = []
-        self.timestamp: str = datetime.now().isoformat()
+        self.timestamp: str = datetime.now(timezone.utc).isoformat()
         self.result_id: str = str(uuid.uuid4())
 
 

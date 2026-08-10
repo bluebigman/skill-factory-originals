@@ -31,7 +31,7 @@ import os
 import re
 import sys
 import urllib.parse
-from datetime import datetime
+from datetime import timezone, datetime
 from pathlib import Path
 
 
@@ -109,7 +109,7 @@ def convert_text_to_markdown(content: str, source_name: str = "") -> str:
     lines = content.splitlines()
     output_lines = []
     output_lines.append(f"> 来源：{source_name or '文本输入'}")
-    output_lines.append(f"> 转换时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    output_lines.append(f"> 转换时间：{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
     output_lines.append("")
 
     for line in lines:
@@ -139,7 +139,7 @@ def convert_csv_to_markdown(content: str, source_name: str = "") -> str:
 
     output_lines = []
     output_lines.append(f"> 来源：{source_name or 'CSV 输入'}")
-    output_lines.append(f"> 转换时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    output_lines.append(f"> 转换时间：{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
     output_lines.append("")
 
     # 表头
@@ -187,7 +187,7 @@ def convert_html_to_markdown(content: str, source_name: str = "") -> str:
 
     output_lines = []
     output_lines.append(f"> 来源：{source_name or '网页内容'}")
-    output_lines.append(f"> 转换时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    output_lines.append(f"> 转换时间：{datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
     output_lines.append("")
     output_lines.append(text)
     return "\n".join(output_lines)

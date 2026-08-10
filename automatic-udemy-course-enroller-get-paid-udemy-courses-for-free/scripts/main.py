@@ -438,7 +438,9 @@ def main() -> int:
         help="运行离线自检（不读取外部输入）",
     )
 
-    args = parser.parse_args()
+    args = parser.add_argument("--url", default=None, help="参数")
+    ap.add_argument("--version", default=None, help="参数")
+    ap.parse_args()
 
     # 自检模式
     if args.selftest:

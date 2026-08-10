@@ -38,7 +38,7 @@ trigger_words: ["braid", "vendor branch", "供应商分支", "分支同步", "gi
 | 2 | 分支同步操作 | 将上游供应商的更新拉取并合并到本地供应商分支 |
 | 3 | 分支创建与注册 | 将外部仓库的某个分支或标签注册为本地供应商分支 |
 | 4 | 变更记录查看 | 展示供应商分支与上游之间的差异提交列表 |
-| 5 | 配置管理 | 查看和修改 braid 的配置文件（`.braids.json`） |
+| 5 | 配置管理 | 查看和修改 braid 的配置文件（`.braids.`） |
 
 ### 1.2 不能做什么
 
@@ -112,10 +112,10 @@ braid status
 ```
 Braid Status
 ------------
-vendor/libfoo   (from https://github.com/example/libfoo.git, branch: main)
-  Local:  a1b2c3d  (2024-01-15)
-  Upstream: e4f5a6b  (2024-02-01)
-  Status: behind by 3 commits
+vendor/libfoo (from https://github.com/example/libfoo.git, branch: main)
+ Local: a1b2c3d (2024-01-15)
+ Upstream: e4f5a6b (2024-02-01)
+ Status: behind by 3 commits
 ```
 
 #### 步骤 3：执行同步操作
@@ -158,12 +158,12 @@ braid log vendor/libfoo
 
 ```
 Commits in vendor/libfoo not in upstream:
-  9f8e7d6  (2024-01-20)  Local customization for internal API
-  7a6b5c4  (2024-01-18)  Add logging to debug connection issues
+ 9f8e7d6 (2024-01-20) Local customization for internal API
+ 7a6b5c4 (2024-01-18) Add logging to debug connection issues
 
 Commits in upstream not in vendor/libfoo:
-  e4f5a6b  (2024-02-01)  Fix memory leak in parser
-  d3c2b1a  (2024-01-28)  Update documentation
+ e4f5a6b (2024-02-01) Fix memory leak in parser
+ d3c2b1a (2024-01-28) Update documentation
 ```
 
 ### 3.3 输出规范
@@ -204,7 +204,7 @@ Commits in upstream not in vendor/libfoo:
 | `E002` | 分支未注册 | `Error: Branch 'xxx' is not registered as a vendor branch.` | 使用 `braid add` 注册该分支 |
 | `E003` | 上游仓库不可达 | `Error: Unable to fetch from upstream repository. Check network or URL.` | 检查网络连接，确认 URL 正确 |
 | `E004` | 合并冲突 | `Error: Merge conflict detected. Resolve conflicts manually.` | 使用 `git status` 查看冲突文件，手动解决后提交 |
-| `E005` | 配置损坏 | `Error: Invalid .braids.json configuration.` | 检查配置文件格式，必要时删除后重新配置 |
+| `E005` | 配置损坏 | `Error: Invalid .braids. configuration.` | 检查配置文件格式，必要时删除后重新配置 |
 | `E006` | 权限不足 | `Error: Permission denied. Check file permissions.` | 检查仓库目录和配置文件的读写权限 |
 | `E007` | 参数错误 | `Error: Invalid arguments. Use 'braid --help' for usage.` | 查看帮助文档，修正命令参数 |
 
@@ -226,7 +226,7 @@ Commits in upstream not in vendor/libfoo:
 
 | 反模式 | 正确做法 |
 |--------|----------|
-| 直接编辑 `.braids.json` 而不使用命令 | 始终使用 `braid add/remove` 管理配置 |
+| 直接编辑 `.braids.` 而不使用命令 | 始终使用 `braid add/remove` 管理配置 |
 | 在供应商分支上直接开发 | 在独立功能分支开发，通过合并引入 |
 | 忽略合并冲突直接强制推送 | 手动解决冲突，测试后再推送 |
 | 同时更新所有分支而不检查 | 逐个更新，验证每个分支的兼容性 |
@@ -246,7 +246,7 @@ Commits in upstream not in vendor/libfoo:
 ### 7.2 进阶用户指南（30 分钟）
 
 1. 学习 `braid add` 的参数组合（`--branch`、`--tag`、`--depth`）
-2. 理解 `.braids.json` 的配置结构
+2. 理解 `.braids.` 的配置结构
 3. 掌握冲突解决的标准流程
 4. 结合 CI/CD 实现自动化同步
 
@@ -260,24 +260,24 @@ Commits in upstream not in vendor/libfoo:
 
 ## 八、配置文件参考
 
-`.braids.json` 示例：
+`.braids.` 示例：
 
-```json
+```
 {
-  "braids": {
-    "vendor/libfoo": {
-      "url": "https://github.com/example/libfoo.git",
-      "branch": "main",
-      "tag": null,
-      "depth": 1
-    },
-    "vendor/libbar": {
-      "url": "https://gitlab.com/example/libbar.git",
-      "branch": "release/2.x",
-      "tag": null,
-      "depth": null
-    }
-  }
+ "braids": {
+ "vendor/libfoo": {
+ "url": "https://github.com/example/libfoo.git",
+ "branch": "main",
+ "tag": null,
+ "depth": 1
+ },
+ "vendor/libbar": {
+ "url": "https://gitlab.com/example/libbar.git",
+ "branch": "release/2.x",
+ "tag": null,
+ "depth": null
+ }
+ }
 }
 ```
 

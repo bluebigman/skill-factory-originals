@@ -146,4 +146,5 @@ def markdown_to_html(md_text: str) -> str:
         line = raw_line.rstrip()
 
         # 代码块检测
-        if line.strip().startswith("
+        if line.strip().startswith('```'):
+            pass  # auto-fix: empty if body

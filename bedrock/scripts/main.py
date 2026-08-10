@@ -9,7 +9,7 @@ bedrock 技能实现
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import timezone, datetime
 from typing import Any, Dict, List, Optional
 
 
@@ -65,7 +65,7 @@ class ParseResult:
     def __init__(self, source: str = "", fields: Optional[List[FieldResult]] = None):
         self.source = source
         self.fields = fields or []
-        self.timestamp = datetime.now().isoformat(timespec="seconds")
+        self.timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
 
     def to_dict(self) -> Dict[str, Any]:
         return {

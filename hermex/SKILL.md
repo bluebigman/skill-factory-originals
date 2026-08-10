@@ -9,7 +9,7 @@ description: 从网页、文件或数据中提取关键信息，按约定格式�
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/hermex
+source_url: s://.com/bluebigman/skill-factory-originals/tree/main/hermex
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
@@ -41,9 +41,9 @@ trigger_words: ["爬虫采集", "数据提取", "结构化输出", "网页抓取
 
 | 序号 | 能力项 | 说明 | 示例 |
 |------|--------|------|------|
-| 1 | 数据/文件/URL 输入解析 | 接受用户提供的文本、文件路径或网页链接作为输入源 | `https://example.com/products` |
+| 1 | 数据/文件/URL 输入解析 | 接受用户提供的文本、文件路径或网页链接作为输入源 | `s://example.com/products` |
 | 2 | 关键信息识别与保留 | 从原始内容中抽取实体、属性、关系等关键要素 | 商品名称、价格、库存状态 |
-| 3 | 按约定格式生成输出 | 根据用户指定的字段结构或默认模板输出结果 | JSON / CSV / Markdown 表格 |
+| 3 | 按约定格式生成输出 | 根据用户指定的字段结构或默认模板输出结果 | JSON / CSV / Markdown |
 | 4 | 置信度标注 | 对每个提取字段标注可信程度，低置信度时明确提示 | `confidence: 0.92` |
 | 5 | 批量处理与自定义格式 | 支持多条目循环处理，允许用户自定义输出字段和格式 | 批量抓取 50 个商品页 |
 
@@ -60,7 +60,7 @@ trigger_words: ["爬虫采集", "数据提取", "结构化输出", "网页抓取
 ### 🎯 适用对象
 
 - 需要从网页批量收集结构化数据的开发者
-- 需要将非结构化文本转为表格/JSON 的数据分析人员
+- 需要将非结构化文本转为/JSON 的数据分析人员
 - 需要定期采集特定网站信息的内容运营人员
 
 

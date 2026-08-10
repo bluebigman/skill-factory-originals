@@ -113,4 +113,5 @@ class MDToHTMLConverter:
             line = lines[i]
 
             # 代码块处理
-            if line.strip().startswith("
+            if line.strip().startswith('```'):
+                pass  # auto-fix: empty if body
