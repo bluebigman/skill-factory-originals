@@ -1,0 +1,14 @@
+{
+  "slug": "exception-logger",
+  "name": "exception-logger",
+  "description": "捕获、结构化并分析 Python 异常日志，提供根因建议与修复指引，支持流式处理与批量分析。",
+  "trigger_words": "[\"exception-logger\", \"异常日志\", \"exception log\", \"log analyzer\", \"错误日志分析\"]",
+  "original_version": "2.0.0",
+  "capability_outline": [
+    "2. 根据 `--input` 读取输入（文件或直接文本），使用流式方式处理大文件。",
+    "3. 调用核心解析函数 `parse_exception` 提取异常信息。",
+    "4. 根据 `--format` 生成文本或 JSON 输出。",
+    "5. 若指定 `--output` 且非 `--dry-run`，原子化写入结果文件。",
+    "6. 若指定 `--verbose`，打印详细决策过程。"
+  ]
+}
