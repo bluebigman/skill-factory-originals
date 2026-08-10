@@ -18,6 +18,7 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
 from concurrent.futures import ThreadPoolExecutor, as_completed
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 尝试导入第三方库，如果失败则使用内置替代
 try:
@@ -96,7 +97,7 @@ def read_cache(since: str, language: Optional[str]) -> Optional[Dict[str, Any]]:
     cache_path = get_cache_path(since, language)
     try:
         if os.path.exists(cache_path):
-            with open(cache_path, "r", encoding="utf-8") as f:
+            with open(cache_path, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
             # 检查缓存是否过期
             cached_time = datetime.fromisoformat(data.get("cached_at", ""))
@@ -116,7 +117,7 @@ def write_cache(since: str, language: Optional[str], repos: List[Dict[str, Any]]
             "cached_at": datetime.now(timezone.utc).isoformat(),
             "repos": repos,
         }
-        with open(cache_path, "w", encoding="utf-8") as f:
+        with open(cache_path, "w", encoding="utf-8", errors="replace") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
     except Exception as e:
         print(f"写入缓存失败: {e}", file=sys.stderr)
@@ -405,7 +406,7 @@ def atomic_write(filepath: str, content: str) -> bool:
 
         # 写入临时文件
         temp_path = filepath.with_suffix(filepath.suffix + ".tmp")
-        with open(temp_path, "w", encoding="utf-8") as f:
+        with open(temp_path, "w", encoding="utf-8", errors="replace") as f:
             f.write(content)
             f.flush()
             os.fsync(f.fileno())
