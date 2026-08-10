@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260811_034830",
+  "slug": "braid",
+  "spec": {
+    "slug": "braid",
+    "name": "braid",
+    "description": "追踪 Git 仓库中供应商分支的变更与同步状态，提供状态查看、同步、注册与变更日志功能。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "ed3078009a3b91ed",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
