@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260811_043135",
+  "slug": "dictionary-term-explain",
+  "spec": {
+    "slug": "dictionary-term-explain",
+    "name": "术语释义助手",
+    "description": "按场景拆解术语含义，给出边界清晰、可落地的概念解释。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. **优先使用全场景解释**：不带 `--scene` 参数时，输出最全面，适合快速了解。",
+      "2. **批量处理提高效率**：需要解释多个术语时，使用 `--batch` 参数一次处理。",
+      "3. **预览模式安全操作**：不确定批量文件内容时，先使用 `--dry-run` 预览。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "1c6934e88f71177f",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
