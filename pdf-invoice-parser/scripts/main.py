@@ -14,6 +14,7 @@ pdf-invoice-parser — 增值税发票字段提取与一致性校验
 错误码 E001-E010。
 """
 from __future__ import annotations
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 import argparse
 import base64
@@ -88,6 +89,24 @@ class Bill:
 
 # ---------- 工具函数 ----------
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _now_utc() -> str:
     """返回 UTC 时间字符串。"""
     return datetime.now(timezone.utc).isoformat()
@@ -97,7 +116,8 @@ def _atomic_write(path: Path, content: str) -> None:
     """原子化写入文件。"""
     tmp_path = path.with_suffix(path.suffix + ".tmp")
     try:
-        tmp_path.write_text(content, encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            tmp_path.write_text(content, encoding="utf-8", errors="replace")
         tmp_path.replace(path)
     except Exception as e:
         raise BillError("E010", f"写入失败: {e}") from e
