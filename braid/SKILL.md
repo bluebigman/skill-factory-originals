@@ -2,10 +2,10 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: braid
 name: braid
-displayName: 分支追踪 版本管理 仓库协作
-description: 追踪 Git 仓库中供应商分支的变更与同步状态。
-version: 1.0.1
-rules_version: cpr-20260809-n251
+displayName: 供应商分支 同步追踪 变更审计
+description: 追踪 Git 仓库中供应商分支的变更与同步状态，提供状态查看、同步、注册与变更日志功能。
+version: 1.2.1
+rules_version: cpr-20260810-n301
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/braid
@@ -13,9 +13,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge
+author: 林栖
 agent_created: true
-trigger_words: ["braid", "vendor branch", "供应商分支", "分支同步", "git vendor"]
+trigger_words: ["braid", "供应商分支", "vendor branch", "分支同步", "变更追踪", "同步状态", "分支注册"]
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -26,295 +26,238 @@ trigger_words: ["braid", "vendor branch", "供应商分支", "分支同步", "gi
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# braid — 供应商分支追踪工具
+# braid — 供应商分支同步追踪 Skill 文档
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
 ### 1.1 能做什么
 
-| 序号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 分支状态追踪 | 查看当前仓库中所有供应商分支的版本、来源 URL 及本地修改状态 |
-| 2 | 分支同步操作 | 将上游供应商的更新拉取并合并到本地供应商分支 |
-| 3 | 分支创建与注册 | 将外部仓库的某个分支或标签注册为本地供应商分支 |
-| 4 | 变更记录查看 | 展示供应商分支与上游之间的差异提交列表 |
-| 5 | 配置管理 | 查看和修改 braid 的配置文件（`.braids.`） |
+| 能力项 | 说明 | 对应 CLI 参数 |
+|--------|------|----------------|
+| 状态查看 | 查看当前仓库中所有已注册供应商分支的同步状态（领先/落后/分叉/干净） | `braid status` |
+| 同步执行 | 将上游供应商的变更拉取并合并到本地供应商分支 | `braid sync <branch-name>` |
+| 分支注册 | 将一个新的供应商分支纳入 braid 的追踪管理范围 | `braid register <branch-name> <upstream-url>` |
+| 变更日志 | 查看某个供应商分支的历史同步记录与变更摘要 | `braid log <branch-name>` |
+| 自检 | 验证 braid 自身安装与配置是否正常 | `braid --selftest` |
+| 版本查询 | 输出当前 braid 版本号 | `braid --version` |
 
 ### 1.2 不能做什么
 
-| 序号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不处理非 Git 仓库 | 仅在已初始化的 Git 仓库中工作 |
-| 2 | 不自动解决冲突 | 合并冲突需要人工介入处理 |
-| 3 | 不推送远程变更 | 所有操作默认在本地完成，推送需手动执行 |
-| 4 | 不支持子模块 | 仅跟踪分支，不管理 git submodule |
-| 5 | 不提供 GUI | 纯命令行工具，无图形界面 |
+| 限制项 | 说明 |
+|--------|------|
+| 不做代码审查 | braid 只追踪分支的同步状态，不分析代码质量或冲突内容 |
+| 不自动解决冲突 | 同步过程中若出现合并冲突，braid 会停止并提示人工介入 |
+| 不管理非 Git 依赖 | 仅适用于 Git 仓库内的分支，不处理 npm/pip 等包管理器的依赖同步 |
+| 不做远程推送 | braid 只拉取和合并，不会自动 push 到远程仓库 |
+| 不处理未注册分支 | 只有通过 `register` 注册的分支才会被追踪 |
 
 ### 1.3 适用对象
 
-- 需要维护第三方代码副本的开发者
-- 管理多个上游依赖的团队
-- 希望自动化供应商代码更新流程的运维人员
+- 维护多个上游供应商代码库的团队
+- 需要定期将第三方代码合并进自己项目的开发者
+- 希望自动化追踪供应商分支变更状态的 DevOps 工程师
 
 ---
 
-## 二、触发方式与场景映射
+## 二、触发方式
 
 ### 2.1 触发词
 
-- 直接命令：`braid` 后跟子命令
-- 场景触发：当用户提到"供应商分支"、"上游同步"、"vendor 更新"等关键词时，可建议使用本工具
+- 核心触发词：`braid`、`供应商分支`、`vendor branch`
+- 补充触发词：`分支同步`、`变更追踪`、`同步状态`、`分支注册`
 
 ### 2.2 场景映射表
 
-| 用户场景 | 推荐命令 | 说明 |
-|----------|----------|------|
-| 查看所有供应商分支状态 | `braid status` | 列出所有已注册的供应商分支及其状态 |
-| 更新某个供应商分支 | `braid update <branch-name>` | 拉取上游最新代码并合并 |
-| 注册新的供应商分支 | `braid add <url> <branch-name>` | 从指定 URL 注册分支 |
-| 查看某个分支的变更日志 | `braid log <branch-name>` | 显示该分支与上游的差异提交 |
-| 查看工具版本 | `braid --version` | 输出当前版本号 |
-| 运行自检 | `braid --selftest` | 检查工具安装是否正常 |
+| 用户场景（大白话） | 触发动作 | 实际执行 |
+|-------------------|----------|----------|
+| "帮我看看现在哪些供应商分支需要更新" | 状态查看 | `braid status` |
+| "把 xxx 分支和上游同步一下" | 同步执行 | `braid sync xxx` |
+| "这个新分支以后也要跟踪，帮我登记一下" | 分支注册 | `braid register xxx <url>` |
+| "这个分支最近都同步了些什么？" | 变更日志 | `braid log xxx` |
+| "braid 是不是装坏了？" | 自检 | `braid --selftest` |
+| "你用的是哪个版本？" | 版本查询 | `braid --version` |
 
 ---
 
-## 三、标准操作流程
+## 三、标准流程
 
 ### 3.1 前置条件
 
-| 条件 | 检查方法 | 失败处理 |
-|------|----------|----------|
-| Git 已安装 | `git --version` | 安装 Git 后重试 |
-| 当前目录为 Git 仓库 | `git rev-parse --git-dir` | 执行 `git init` 或切换到正确目录 |
-| braid 已安装 | `braid --version` | 参考安装文档完成安装 |
-| 网络可访问上游仓库 | `ping <上游域名>` 或 `curl -I <上游URL>` | 检查网络连接或代理设置 |
+| 条件 | 要求 | 验证方式 |
+|------|------|----------|
+| Git 仓库 | 当前目录必须是 Git 仓库 | `git rev-parse --is-inside-work-tree` 返回 `true` |
+| braid 已安装 | braid 命令可用 | `braid --version` 能正常输出 |
+| 分支已注册 | 目标分支必须已通过 `register` 注册 | `braid status` 中能看到该分支 |
+| 网络可达 | 上游 URL 可访问（若执行同步） | `git ls-remote <upstream-url>` 能返回引用列表 |
 
 ### 3.2 执行步骤
 
-#### 步骤 1：初始化检查
+#### 流程 A：状态查看
 
-```bash
-# 检查 Git 仓库状态
-git status
+1. 打开终端，进入目标 Git 仓库根目录。
+2. 执行 `braid status`。
+3. 查看输出表格，每一行代表一个已注册的供应商分支。
+4. 输出列说明：
 
-# 确认 braid 可用
-braid --version
-```
+| 列名 | 含义 | 可能值 |
+|------|------|--------|
+| Branch | 分支名称 | 任意合法 Git 分支名 |
+| Upstream | 上游地址 | URL 或本地路径 |
+| Status | 同步状态 | `clean` / `ahead` / `behind` / `diverged` / `unregistered` |
+| Last Sync | 最近一次同步时间 | ISO 8601 格式时间戳 |
+| Pending Commits | 待同步提交数 | 非负整数 |
 
-#### 步骤 2：查看当前供应商分支
+#### 流程 B：同步执行
 
-```bash
-braid status
-```
+1. 执行 `braid status` 确认目标分支当前状态。
+2. 若状态为 `behind` 或 `diverged`，执行 `braid sync <branch-name>`。
+3. braid 会依次执行以下操作：
+   - 拉取上游最新提交（`git fetch <upstream-url> <upstream-branch>`）
+   - 尝试将上游变更合并到本地供应商分支（`git merge`）
+   - 若合并成功，更新 Last Sync 时间戳
+   - 若合并冲突，停止并输出冲突文件列表
+4. 同步完成后，再次执行 `braid status` 确认状态变为 `clean`。
 
-**输出示例：**
+#### 流程 C：分支注册
 
-```
-Braid Status
-------------
-vendor/libfoo (from https://github.com/example/libfoo.git, branch: main)
- Local: a1b2c3d (2024-01-15)
- Upstream: e4f5a6b (2024-02-01)
- Status: behind by 3 commits
-```
+1. 执行 `braid register <branch-name> <upstream-url>`。
+2. braid 会验证：
+   - 本地分支是否存在（若不存在则报错）
+   - 上游 URL 是否可访问（`git ls-remote` 测试）
+3. 注册成功后，该分支会出现在 `braid status` 列表中。
+4. 注册信息存储在 `.braid/config.json` 文件中（位于仓库根目录）。
 
-#### 步骤 3：执行同步操作
+#### 流程 D：变更日志
 
-```bash
-# 更新单个分支
-braid update vendor/libfoo
-
-# 更新所有分支
-braid update --all
-```
-
-**同步过程说明：**
-
-1. braid 会先获取上游仓库的最新提交
-2. 计算本地分支与上游的差异
-3. 尝试将上游变更合并到本地分支
-4. 如果存在冲突，会提示用户手动解决
-
-#### 步骤 4：注册新分支
-
-```bash
-# 基本用法
-braid add https://github.com/example/libfoo.git vendor/libfoo
-
-# 指定上游分支
-braid add https://github.com/example/libfoo.git vendor/libfoo --branch main
-
-# 指定上游标签
-braid add https://github.com/example/libfoo.git vendor/libfoo --tag v1.2.0
-```
-
-#### 步骤 5：查看变更记录
-
-```bash
-braid log vendor/libfoo
-```
-
-**输出示例：**
-
-```
-Commits in vendor/libfoo not in upstream:
- 9f8e7d6 (2024-01-20) Local customization for internal API
- 7a6b5c4 (2024-01-18) Add logging to debug connection issues
-
-Commits in upstream not in vendor/libfoo:
- e4f5a6b (2024-02-01) Fix memory leak in parser
- d3c2b1a (2024-01-28) Update documentation
-```
+1. 执行 `braid log <branch-name>`。
+2. 输出按时间倒序排列的同步记录，每条记录包含：
+   - 同步时间
+   - 同步前状态 → 同步后状态
+   - 合并的提交数
+   - 冲突文件列表（若有）
 
 ### 3.3 输出规范
 
-所有命令的输出遵循以下格式：
-
-- **状态信息**：使用 `Key: Value` 格式，便于解析
-- **列表信息**：每行一个条目，使用缩进表示层级
-- **错误信息**：以 `Error:` 开头，后跟具体错误描述
+- 所有命令输出使用 UTF-8 编码。
+- 状态表格使用等宽字体对齐，列宽自适应。
+- 错误信息统一以 `[braid-error]` 前缀开头。
+- 警告信息统一以 `[braid-warn]` 前缀开头。
+- 成功信息统一以 `[braid-ok]` 前缀开头。
 
 ---
 
-## 四、置信度门控机制
+## 四、置信度门控
 
-### 4.1 信息不足时的处理
+当遇到以下情况时，braid 不会猜测或编造信息，而是输出占位符 `[需核实:字段]`：
 
-当 braid 无法获取完整信息时，会输出以下占位符：
+| 场景 | 输出示例 |
+|------|----------|
+| 上游 URL 无法访问，无法确认最新提交数 | `Pending Commits: [需核实:上游不可达]` |
+| 分支未注册，无法获取历史同步记录 | `Last Sync: [需核实:该分支未注册]` |
+| 配置文件损坏，无法读取注册信息 | `Upstream: [需核实:配置损坏]` |
+| 本地分支不存在，无法判断状态 | `Status: [需核实:分支不存在]` |
 
-| 占位符 | 含义 | 触发场景 |
-|--------|------|----------|
-| `[需核实:上游版本]` | 无法确定上游最新版本 | 网络不可达或上游仓库不存在 |
-| `[需核实:本地修改]` | 无法确定本地是否有未提交修改 | Git 索引损坏或权限不足 |
-| `[需核实:分支关系]` | 无法确定分支间的合并关系 | 分支历史被重写或强制推送 |
-
-### 4.2 不编造原则
-
-- 当无法获取上游信息时，不会猜测版本号或提交哈希
-- 当本地仓库状态不明确时，不会假设修改内容
-- 所有不确定信息都会明确标注，等待用户确认
+**原则**：宁可输出占位符，绝不虚构数据。用户看到 `[需核实:...]` 时应主动检查对应字段。
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
-|--------|----------|----------|----------|
-| `E001` | 非 Git 仓库 | `Error: Not a git repository. Run 'git init' first.` | 执行 `git init` 或切换到 Git 仓库目录 |
-| `E002` | 分支未注册 | `Error: Branch 'xxx' is not registered as a vendor branch.` | 使用 `braid add` 注册该分支 |
-| `E003` | 上游仓库不可达 | `Error: Unable to fetch from upstream repository. Check network or URL.` | 检查网络连接，确认 URL 正确 |
-| `E004` | 合并冲突 | `Error: Merge conflict detected. Resolve conflicts manually.` | 使用 `git status` 查看冲突文件，手动解决后提交 |
-| `E005` | 配置损坏 | `Error: Invalid .braids. configuration.` | 检查配置文件格式，必要时删除后重新配置 |
-| `E006` | 权限不足 | `Error: Permission denied. Check file permissions.` | 检查仓库目录和配置文件的读写权限 |
-| `E007` | 参数错误 | `Error: Invalid arguments. Use 'braid --help' for usage.` | 查看帮助文档，修正命令参数 |
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E001` | 当前目录不是 Git 仓库 | `[braid-error] E001: 当前目录不是 Git 仓库` | 切换到 Git 仓库根目录后重试 |
+| `E002` | 分支未注册 | `[braid-error] E002: 分支 'xxx' 未注册，请先执行 register` | 执行 `braid register xxx <upstream-url>` |
+| `E003` | 上游 URL 不可达 | `[braid-error] E003: 无法访问上游地址，请检查网络或 URL 拼写` | 确认 URL 正确且网络通畅 |
+| `E004` | 合并冲突 | `[braid-error] E004: 合并冲突，请手动解决以下文件：...` | 手动解决冲突后执行 `git add` 和 `git commit` |
+| `E005` | 本地分支不存在 | `[braid-error] E005: 本地分支 'xxx' 不存在` | 先创建分支或检查分支名拼写 |
+| `E006` | 配置文件损坏 | `[braid-error] E006: .braid/config.json 解析失败` | 检查配置文件 JSON 格式，必要时删除后重新注册 |
+| `E007` | 权限不足 | `[braid-error] E007: 没有写入 .braid 目录的权限` | 检查目录权限，或使用 sudo（谨慎） |
 
 ---
 
-## 六、FAQ 与反模式对照
+## 六、FAQ 反模式
 
-### 6.1 常见问题
+### 6.1 常见坑
 
-| 问题 | 原因 | 解决方案 |
-|------|------|----------|
-| 同步后本地修改丢失 | 未在同步前提交本地修改 | 同步前先 `git commit` 或 `git stash` |
-| 分支显示"无法解析" | 上游分支被删除或重命名 | 检查上游仓库，更新注册信息 |
-| 同步速度很慢 | 上游仓库体积大或网络慢 | 使用 `--depth 1` 浅克隆优化 |
-| 配置文件被误删 | 手动编辑时操作失误 | 使用 `braid add` 重新注册分支 |
-| 无法推送本地修改 | 未配置远程仓库 | 使用 `git remote add` 添加远程 |
+| 坑 | 反模式描述 | 正确做法 |
+|----|-----------|----------|
+| 坑 1：未注册就同步 | 直接对未注册分支执行 `sync`，报 E002 错误 | 先 `register` 再 `sync` |
+| 坑 2：忽略冲突信号 | 同步时看到冲突提示，强行 `git merge --abort` 后重试 | 手动解决冲突，不要反复 abort |
+| 坑 3：混淆本地分支与供应商分支 | 在供应商分支上直接开发新功能，导致下次同步时大量冲突 | 供应商分支只做同步，开发在独立功能分支进行 |
+| 坑 4：删除 .braid 目录 | 误删配置文件后所有分支状态丢失 | 定期备份 `.braid/config.json` |
+| 坑 5：同步后不验证 | 同步完成后不执行 `status` 确认状态 | 同步后必须执行 `status` 确认 `clean` |
 
-### 6.2 反模式对照
+### 6.2 反模式对照表
 
-| 反模式 | 正确做法 |
-|--------|----------|
-| 直接编辑 `.braids.` 而不使用命令 | 始终使用 `braid add/remove` 管理配置 |
-| 在供应商分支上直接开发 | 在独立功能分支开发，通过合并引入 |
-| 忽略合并冲突直接强制推送 | 手动解决冲突，测试后再推送 |
-| 同时更新所有分支而不检查 | 逐个更新，验证每个分支的兼容性 |
-| 删除供应商分支而不清理配置 | 使用 `braid remove` 同时清理配置 |
-
----
-
-## 七、渐进式披露路径
-
-### 7.1 新手快速上手（5 分钟）
-
-1. 确认环境：`braid --version`
-2. 查看现有分支：`braid status`
-3. 更新一个分支：`braid update <branch-name>`
-4. 遇到问题查看错误码表
-
-### 7.2 进阶用户指南（30 分钟）
-
-1. 学习 `braid add` 的参数组合（`--branch`、`--tag`、`--depth`）
-2. 理解 `.braids.` 的配置结构
-3. 掌握冲突解决的标准流程
-4. 结合 CI/CD 实现自动化同步
-
-### 7.3 高级技巧
-
-- 使用 `braid update --all` 配合定时任务实现自动同步
-- 通过 `braid log` 审计供应商代码的变更历史
-- 利用 `--dry-run` 参数预览同步效果（如支持）
+| 反模式 | 问题 | 替代方案 |
+|--------|------|----------|
+| 手动 `git fetch` + `git merge` 代替 braid | 无法记录同步历史，状态不可追踪 | 使用 `braid sync` 自动记录 |
+| 在供应商分支上直接改代码 | 下次同步必然冲突 | 新建功能分支，合并时再处理 |
+| 多个仓库手动维护同一供应商分支 | 状态不一致，容易遗漏 | 每个仓库独立注册，用 `braid status` 统一查看 |
+| 同步失败后反复重试 | 可能掩盖真实问题（如网络、权限） | 先查看错误码，按修正步骤处理 |
 
 ---
 
-## 八、配置文件参考
+## 七、渐进式披露
 
-`.braids.` 示例：
+### 7.1 速查卡（新手必读）
 
 ```
-{
- "braids": {
- "vendor/libfoo": {
- "url": "https://github.com/example/libfoo.git",
- "branch": "main",
- "tag": null,
- "depth": 1
- },
- "vendor/libbar": {
- "url": "https://gitlab.com/example/libbar.git",
- "branch": "release/2.x",
- "tag": null,
- "depth": null
- }
- }
-}
+braid status          # 查看所有供应商分支状态
+braid sync <branch>   # 同步指定分支
+braid register <branch> <url>  # 注册新分支
+braid log <branch>    # 查看同步历史
+braid --selftest      # 自检
+braid --version       # 版本号
 ```
 
-| 字段 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| `url` | string | 是 | 上游仓库地址 |
-| `branch` | string | 否 | 上游分支名（与 tag 二选一） |
-| `tag` | string | 否 | 上游标签名（与 branch 二选一） |
-| `depth` | number | 否 | 浅克隆深度，减少数据量 |
+### 7.2 分层次阅读路径
+
+#### 新手路径（5 分钟上手）
+
+1. 阅读「能力边界」了解 braid 能做什么。
+2. 执行 `braid --selftest` 确认环境正常。
+3. 对已有分支执行 `braid status` 查看当前状态。
+4. 若分支未注册，按「流程 C」注册。
+5. 对 `behind` 状态的分支执行 `braid sync`。
+
+#### 进阶路径（深入使用）
+
+1. 阅读「标准流程」了解每个命令的详细执行逻辑。
+2. 熟悉「错误码体系」，遇到问题能快速定位。
+3. 阅读「FAQ 反模式」避免常见陷阱。
+4. 定期执行 `braid log` 审计供应商分支的变更历史。
+5. 结合 CI/CD 流水线，在每次构建前自动执行 `braid status` 检查。
+
+#### 专家路径（定制化）
+
+1. 直接编辑 `.braid/config.json` 实现批量注册。
+2. 编写脚本调用 `braid status --json`（若支持）获取结构化输出。
+3. 将 braid 集成到 pre-commit 钩子中，同步前自动检查。
 
 ---
 
-## 九、用户协议
+## 八、用户协议
+
+**使用须知**：
+
+1. 本 Skill 提供的所有功能与指导，使用者应自行承担全部使用责任。因使用本 Skill 导致的任何直接或间接损失，作者不承担任何责任。
+2. 使用者不得对本 Skill 进行反向工程、反编译、破解或试图提取底层源代码（除非适用法律允许）。
+3. 使用者不得将本 Skill 用于任何违反法律法规或侵犯第三方权益的用途。
+4. 本 Skill 的配置信息（包括 `.braid/config.json`）属于用户数据，作者不收集、不存储、不分析任何用户数据。
 
 <!-- user-agreement-injected -->
 
-**使用条款：**
-
-1. 本工具按"原样"提供，使用者自行承担全部使用风险。
-2. 使用者应对使用本工具产生的任何结果（包括但不限于代码变更、数据丢失、仓库损坏）自行负责。
-3. 禁止对本工具进行反向工程、反编译或试图提取源代码（除非适用法律允许）。
-4. 使用者不得将本工具用于任何违法或未经授权的目的。
-5. 本工具不提供任何形式的明示或暗示担保，包括但不限于适销性和特定用途适用性。
-6. 使用本工具即表示您已阅读并同意本协议全部条款。
-
 ---
 
-## 十、许可证（License）
+## 九、许可证（License）
 
-<!-- professional-license-embedded -->
-
-**MIT License**
+本 Skill 基于 MIT 许可证发布。完整许可证文本如下：
 
 ```
 MIT License
 
-Copyright (c) 2024 原创作者（自持版权）
+Copyright (c) 2026 林栖
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -335,22 +278,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
----
-
-## 十一、版本历史
-
-| 版本 | 日期 | 变更内容 |
-|------|------|----------|
-| 1.0.0 | 2024-02-15 | 初始版本，包含核心分支追踪功能 |
+<!-- professional-license-embedded -->
 
 ---
 
-## 十二、支持与反馈
-
-- 使用问题：参考本文档的错误码表和 FAQ 部分
-- 功能建议：通过仓库 Issue 提交
-- 安全漏洞：请直接联系维护者，勿公开披露
-
----
-
-*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
+**免责声明**：本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档，并根据实际环境验证功能表现。
