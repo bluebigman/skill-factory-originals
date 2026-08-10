@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260811_033303",
+  "slug": "ambitious-activeldap",
+  "spec": {
+    "slug": "ambitious-activeldap",
+    "name": "ambitious-activeldap",
+    "description": "将ActiveLdap目录数据转换为结构化输出，支持批量处理与置信度标注。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "21c0556a8817b7c8",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
