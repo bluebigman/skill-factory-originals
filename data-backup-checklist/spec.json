@@ -1,0 +1,12 @@
+{
+  "slug": "data-backup-checklist",
+  "name": "data-backup-checklist",
+  "description": "备份清单核对、版本差异追踪、恢复演练评分与风险分级预警。",
+  "trigger_words": "[\"data-backup-checklist\", \"备份检查\", \"备份核对\", \"备份完整性\"]",
+  "original_version": "2.0.0",
+  "capability_outline": [
+    "1. 检查 Python 版本是否为 3.9+",
+    "2. 确认 `openpyxl` 已安装（如需 Excel 支持）",
+    "3. 查看 stderr 输出中的具体失败断言"
+  ]
+}
