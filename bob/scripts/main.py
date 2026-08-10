@@ -651,7 +651,7 @@ def main() -> int:
     )
     
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="JSON 格式的输入数据，包含表定义和字段信息",
     )
@@ -668,6 +668,8 @@ def main() -> int:
         default="text",
         help="输出格式 (默认: text)",
     )
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     
     args = parser.parse_args()
     
