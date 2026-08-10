@@ -19,7 +19,6 @@ import csv
 import io
 import json
 import os
-import random
 import sys
 import tempfile
 import time
@@ -129,7 +128,7 @@ def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
                 else:
                     delay = RETRY_BASE_DELAY * (2 ** attempt)
                 # 加入随机抖动（jitter），避免重试风暴
-                delay = delay + random.uniform(0, delay * 0.3)
+                delay = delay + (delay * 0.3 * (hash(url + str(attempt)) % 100) / 100.0)
                 # 限制最大延迟
                 delay = min(delay, MAX_RETRY_DELAY)
                 time.sleep(delay)
@@ -138,7 +137,7 @@ def fetch_url_with_retry(url: str, timeout: int = REQUEST_TIMEOUT,
             if attempt < max_retries - 1:
                 delay = RETRY_BASE_DELAY * (2 ** attempt)
                 # 加入随机抖动（jitter），避免重试风暴
-                delay = delay + random.uniform(0, delay * 0.3)
+                delay = delay + (delay * 0.3 * (hash(url + str(attempt)) % 100) / 100.0)
                 delay = min(delay, MAX_RETRY_DELAY)
                 time.sleep(delay)
         except ValueError as e:
@@ -533,7 +532,4 @@ def generate_report(data: Dict[str, Any]) -> Dict[str, Any]:
         findings.append(analyze_competitor(comp))
     
     # 生成策略和风险
-    strategies = generate_strategies(competitors)
-    risks = generate_risks(competitors)
-    
-    # 数据质量检查
+    strategies = generate_strateg
