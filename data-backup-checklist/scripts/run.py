@@ -28,6 +28,7 @@ import tempfile
 import shutil
 from datetime import datetime, timezone
 from collections import defaultdict
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 尝试导入 openpyxl（可选，用于 Excel 支持）
 try:
