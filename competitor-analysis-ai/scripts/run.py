@@ -193,8 +193,8 @@ def load_data_from_url(url: str) -> Dict[str, Any]:
                     competitors.append(comp)
             if competitors:
                 return {"competitors": competitors}
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
     
     # 尝试解析 HTML 表格
     try:
@@ -257,8 +257,8 @@ def load_data_from_url(url: str) -> Dict[str, Any]:
                         competitors.append(comp)
                 if competitors:
                     return {"competitors": competitors}
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
     
     raise ValueError("URL 返回的数据格式不支持，仅支持 JSON、CSV 或 HTML 表格")
 
