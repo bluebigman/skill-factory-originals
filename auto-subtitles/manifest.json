@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260811_034645",
+  "slug": "auto-subtitles",
+  "spec": {
+    "slug": "auto-subtitles",
+    "name": "auto-subtitles",
+    "description": "本地AI语音识别，将视频音频快速转为字幕与文本。 支持 word、json、http 格式处理",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "8121ccae81e6cd56",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
