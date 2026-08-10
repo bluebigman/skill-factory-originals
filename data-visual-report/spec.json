@@ -1,0 +1,10 @@
+{
+  "slug": "data-visual-report",
+  "name": "data-visual-report",
+  "description": "将表格数据自动转换为带图表与结论的可视化分析报告",
+  "trigger_words": "[\"数据可视化\", \"图表报告\", \"趋势分析\", \"占比统计\", \"TopN排行\", \"可视化分析\", \"数据报告\", \"图表生成\"]",
+  "original_version": "2.0.0",
+  "capability_outline": [
+    "- 输入为纯文本、图片、PDF 中的非结构化表格"
+  ]
+}
