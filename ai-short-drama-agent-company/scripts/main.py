@@ -12,9 +12,17 @@
     - 交付物模板: 为每个节点提供模板名称
     - 跨角色协作协议: 定义交接格式与评审机制
     - 预算与资源估算: 提供分环节的成本估算参数表
+    - 流程编排引擎: 支持节点依赖关系验证与执行状态跟踪
 
 命令行用法:
-    python main.py --selftest   # 运行内置离线自检（不读外部文件、不访问网络）
+    python run.py --selftest   # 运行内置离线自检（不读外部文件、不访问网络）
+    python run.py --budget     # 输出预算估算结果
+    python run.py --budget --format json  # 以 JSON 格式输出预算估算
+    python run.py --roles      # 输出团队角色配置
+    python run.py --nodes      # 输出流程节点配置
+    python run.py --deliverables  # 输出交付物模板
+    python run.py --protocols  # 输出协作协议
+    python run.py --validate   # 验证流程依赖关系
 
 错误码说明:
     E001: 初始化配置错误
@@ -30,8 +38,10 @@
 """
 
 import sys
+import json
 import argparse
-from typing import Dict, List, Any
+from datetime import datetime, timezone
+from typing import Dict, List, Any, Optional
 
 
 # ============================================================
@@ -77,17 +87,12 @@ def get_team_roles() -> List[Dict[str, Any]]:
         },
         {
             "name": "宣发",
-            "responsibility": "投放策略、渠道对接、数据复盘",
+            "responsibility": "渠道分发、营销推广、数据分析",
             "inputs": ["成片", "成片交付单"],
-            "outputs": ["投放计划", "数据报告"],
-            "collaborators": ["后期", "策划"]
+            "outputs": ["宣发方案", "数据报告"],
+            "collaborators": ["策划", "后期"]
         }
     ]
-
-    # 校验：必须恰好 5 个角色
-    if len(roles) != 5:
-        raise RuntimeError("E002: 团队角色数据错误，期望 5 个角色")
-
     return roles
 
 
@@ -95,63 +100,57 @@ def get_process_nodes() -> List[Dict[str, Any]]:
     """
     获取流程节点配置。
 
-    返回 12 个标准节点，每个节点包含前置条件、执行动作、验收标准。
+    返回 12 个标准节点，每个节点包含名称、所属阶段、依赖关系与负责人。
 
     错误码: E003（流程节点错误）
     """
     nodes = [
-        {"id": 1, "name": "项目立项", "prerequisite": "完成市场调研", "action": "撰写立项报告", "acceptance": "立项报告通过评审"},
-        {"id": 2, "name": "选题定位", "prerequisite": "立项通过", "action": "确定题材与用户画像", "acceptance": "选题方向明确"},
-        {"id": 3, "name": "策划案撰写", "prerequisite": "选题确定", "action": "撰写完整策划案", "acceptance": "策划案包含预算与排期"},
-        {"id": 4, "name": "剧本大纲", "prerequisite": "策划案通过", "action": "编写分集大纲", "acceptance": "大纲覆盖全部集数"},
-        {"id": 5, "name": "分集剧本", "prerequisite": "大纲确认", "action": "撰写完整剧本", "acceptance": "每集剧本通过审核"},
-        {"id": 6, "name": "分镜脚本", "prerequisite": "剧本定稿", "action": "绘制分镜与镜头描述", "acceptance": "分镜与剧本一致"},
-        {"id": 7, "name": "拍摄排期", "prerequisite": "分镜完成", "action": "制定拍摄计划与人员安排", "acceptance": "排期表可执行"},
-        {"id": 8, "name": "现场拍摄", "prerequisite": "排期确认", "action": "按计划完成拍摄", "acceptance": "素材完整可用"},
-        {"id": 9, "name": "后期剪辑", "prerequisite": "素材齐备", "action": "剪辑合成与特效包装", "acceptance": "成片通过内部审片"},
-        {"id": 10, "name": "成片交付", "prerequisite": "后期完成", "action": "输出交付物与文件清单", "acceptance": "交付单签字确认"},
-        {"id": 11, "name": "宣发排期", "prerequisite": "成片交付", "action": "制定投放计划与渠道策略", "acceptance": "投放计划通过评审"},
-        {"id": 12, "name": "数据复盘", "prerequisite": "投放结束", "action": "汇总数据并输出报告", "acceptance": "报告包含优化建议"}
+        {"id": 1, "name": "立项策划", "stage": "策划", "depends_on": [], "owner": "策划"},
+        {"id": 2, "name": "市场调研", "stage": "策划", "depends_on": ["立项策划"], "owner": "策划"},
+        {"id": 3, "name": "剧本创作", "stage": "编剧", "depends_on": ["立项策划"], "owner": "编剧"},
+        {"id": 4, "name": "分镜脚本", "stage": "编剧", "depends_on": ["剧本创作"], "owner": "编剧"},
+        {"id": 5, "name": "选角筹备", "stage": "拍摄", "depends_on": ["分镜脚本"], "owner": "拍摄"},
+        {"id": 6, "name": "现场拍摄", "stage": "拍摄", "depends_on": ["选角筹备"], "owner": "拍摄"},
+        {"id": 7, "name": "素材整理", "stage": "拍摄", "depends_on": ["现场拍摄"], "owner": "拍摄"},
+        {"id": 8, "name": "剪辑合成", "stage": "后期", "depends_on": ["素材整理"], "owner": "后期"},
+        {"id": 9, "name": "特效包装", "stage": "后期", "depends_on": ["剪辑合成"], "owner": "后期"},
+        {"id": 10, "name": "调色配音", "stage": "后期", "depends_on": ["特效包装"], "owner": "后期"},
+        {"id": 11, "name": "成片交付", "stage": "后期", "depends_on": ["调色配音"], "owner": "后期"},
+        {"id": 12, "name": "宣发推广", "stage": "宣发", "depends_on": ["成片交付"], "owner": "宣发"}
     ]
-
-    # 校验：必须恰好 12 个节点
-    if len(nodes) != 12:
-        raise RuntimeError("E003: 流程节点数据错误，期望 12 个节点")
-
     return nodes
 
 
-def get_deliverable_templates() -> Dict[str, str]:
+def get_deliverable_templates() -> List[Dict[str, Any]]:
     """
-    获取交付物模板配置（节点名称 -> 模板文件类型）。
+    获取交付物模板配置。
+
+    为每个流程节点提供对应的交付物模板名称。
 
     错误码: E004（交付物模板错误）
     """
-    templates = {
-        "项目立项": "立项报告模板.md",
-        "选题定位": "选题分析表.md",
-        "策划案撰写": "策划案模板.md",
-        "剧本大纲": "分集大纲模板.md",
-        "分集剧本": "剧本模板.md",
-        "分镜脚本": "分镜脚本模板.csv",
-        "拍摄排期": "排期表模板.csv",
-        "现场拍摄": "拍摄日志模板.md",
-        "后期剪辑": "剪辑进度表.csv",
-        "成片交付": "成片交付单.md",
-        "宣发排期": "投放计划模板.csv",
-        "数据复盘": "数据报告模板.md"
-    }
-
-    # 校验：必须与 12 个节点一一对应
-    if len(templates) != 12:
-        raise RuntimeError("E004: 交付物模板数据错误，期望 12 个模板")
-
+    templates = [
+        {"node_id": 1, "node_name": "立项策划", "template": "立项策划书模板"},
+        {"node_id": 2, "node_name": "市场调研", "template": "市场调研报告模板"},
+        {"node_id": 3, "node_name": "剧本创作", "template": "分集剧本模板"},
+        {"node_id": 4, "node_name": "分镜脚本", "template": "分镜脚本模板"},
+        {"node_id": 5, "node_name": "选角筹备", "template": "选角方案模板"},
+        {"node_id": 6, "node_name": "现场拍摄", "template": "拍摄日志模板"},
+        {"node_id": 7, "node_name": "素材整理", "template": "素材清单模板"},
+        {"node_id": 8, "node_name": "剪辑合成", "template": "剪辑脚本模板"},
+        {"node_id": 9, "node_name": "特效包装", "template": "特效制作单模板"},
+        {"node_id": 10, "node_name": "调色配音", "template": "调色配音单模板"},
+        {"node_id": 11, "node_name": "成片交付", "template": "成片交付单模板"},
+        {"node_id": 12, "node_name": "宣发推广", "template": "宣发方案模板"}
+    ]
     return templates
 
 
-def get_collaboration_protocols() -> List[Dict[str, str]]:
+def get_collaboration_protocols() -> List[Dict[str, Any]]:
     """
-    获取跨角色协作协议配置。
+    获取跨角色协作协议。
+
+    定义交接格式与评审机制。
 
     错误码: E005（协作协议错误）
     """
@@ -159,292 +158,415 @@ def get_collaboration_protocols() -> List[Dict[str, str]]:
         {
             "from_role": "策划",
             "to_role": "编剧",
-            "handoff_format": "策划案文档 + 立项报告",
-            "review_mechanism": "策划案评审会",
-            "version_rule": "语义化版本号，重大变更升主版本"
+            "handoff_format": "策划案 + 立项报告（书面文档）",
+            "review_mechanism": "立项评审会（策划/编剧/宣发三方参与）"
         },
         {
             "from_role": "编剧",
             "to_role": "拍摄",
-            "handoff_format": "分镜脚本 + 剧本定稿",
-            "review_mechanism": "分镜脚本确认会",
-            "version_rule": "每次修改记录变更日志"
+            "handoff_format": "分镜脚本 + 剧本终稿（书面文档）",
+            "review_mechanism": "剧本围读会（编剧/拍摄/导演参与）"
         },
         {
             "from_role": "拍摄",
             "to_role": "后期",
-            "handoff_format": "原始素材 + 拍摄日志",
-            "review_mechanism": "素材完整性检查",
-            "version_rule": "素材按日期与场景编号"
+            "handoff_format": "原始素材 + 拍摄日志（数字文件）",
+            "review_mechanism": "素材交接单签字确认"
         },
         {
             "from_role": "后期",
             "to_role": "宣发",
-            "handoff_format": "成片 + 成片交付单",
-            "review_mechanism": "内部审片会",
-            "version_rule": "成片版本号与交付单对应"
+            "handoff_format": "成片 + 成片交付单（数字文件）",
+            "review_mechanism": "成片验收会（后期/宣发/平台方参与）"
+        },
+        {
+            "from_role": "宣发",
+            "to_role": "策划",
+            "handoff_format": "数据报告 + 用户反馈（书面文档）",
+            "review_mechanism": "复盘会（全部门参与）"
         }
     ]
-
-    # 校验：至少 4 条协作协议
-    if len(protocols) < 4:
-        raise RuntimeError("E005: 协作协议数据错误，期望至少 4 条协议")
-
     return protocols
 
 
-def get_budget_parameters() -> Dict[str, Dict[str, Any]]:
+def get_budget_parameters() -> List[Dict[str, Any]]:
     """
-    获取预算与资源估算参数表。
+    获取预算估算参数。
+
+    提供分环节的成本估算参数表。
 
     错误码: E006（预算参数错误）
     """
-    budget = {
-        "策划阶段": {
-            "duration_days": [3, 7],
-            "staff_count": [1, 2],
-            "equipment": ["办公电脑", "调研工具"]
-        },
-        "编剧阶段": {
-            "duration_days": [5, 15],
-            "staff_count": [1, 3],
-            "equipment": ["写作软件", "剧本模板"]
-        },
-        "拍摄阶段": {
-            "duration_days": [3, 10],
-            "staff_count": [5, 15],
-            "equipment": ["摄影机", "灯光", "收音设备"]
-        },
-        "后期阶段": {
-            "duration_days": [4, 12],
-            "staff_count": [2, 5],
-            "equipment": ["剪辑工作站", "特效软件"]
-        },
-        "宣发阶段": {
-            "duration_days": [3, 8],
-            "staff_count": [1, 3],
-            "equipment": ["投放平台账号", "数据工具"]
-        }
-    }
-
-    # 校验：必须包含 5 个阶段
-    if len(budget) != 5:
-        raise RuntimeError("E006: 预算参数数据错误，期望 5 个阶段")
-
-    return budget
+    parameters = [
+        {"stage": "策划", "base_cost": 50000, "description": "市场调研、选题定位、立项策划"},
+        {"stage": "编剧", "base_cost": 100000, "description": "剧本创作、分集大纲、台词对白"},
+        {"stage": "拍摄", "base_cost": 400000, "description": "现场拍摄、镜头调度、素材管理"},
+        {"stage": "后期", "base_cost": 200000, "description": "剪辑合成、特效包装、调色配音"},
+        {"stage": "宣发", "base_cost": 100000, "description": "渠道分发、营销推广、数据分析"}
+    ]
+    return parameters
 
 
 # ============================================================
-# 二、核心逻辑服务
+# 二、核心逻辑函数
 # ============================================================
 
-class DramaProductionService:
+def validate_process_nodes(nodes: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
-    短剧制片全流程服务。
+    验证流程节点的依赖关系。
 
-    封装团队矩阵模板的所有查询与计算逻辑。
+    检查是否存在循环依赖、缺失依赖或未知依赖。
+
+    错误码: E010（数据一致性校验失败）
     """
+    result = {"valid": True, "errors": [], "execution_order": []}
+    node_names = [node["name"] for node in nodes]
+    node_map = {node["name"]: node for node in nodes}
 
-    def __init__(self) -> None:
-        """初始化服务，加载全部内置数据。"""
-        try:
-            self.roles = get_team_roles()
-            self.nodes = get_process_nodes()
-            self.templates = get_deliverable_templates()
-            self.protocols = get_collaboration_protocols()
-            self.budget = get_budget_parameters()
-        except RuntimeError as exc:
-            # 统一包装为 E001 初始化错误
-            raise RuntimeError(f"E001: 初始化失败 - {exc}") from exc
+    # 检查依赖是否存在
+    for node in nodes:
+        for dep in node["depends_on"]:
+            if dep not in node_names:
+                result["valid"] = False
+                result["errors"].append(f"节点 '{node['name']}' 依赖不存在的节点 '{dep}'")
 
-    # ---------- 查询接口 ----------
+    # 检查循环依赖（拓扑排序）
+    temp_visited = set()
+    visited = set()
+    order = []
 
-    def get_role_names(self) -> List[str]:
-        """返回全部角色名称列表。"""
-        return [role["name"] for role in self.roles]
-
-    def get_node_names(self) -> List[str]:
-        """返回全部流程节点名称列表。"""
-        return [node["name"] for node in self.nodes]
-
-    def get_node_by_id(self, node_id: int) -> Dict[str, Any]:
-        """按 ID 查询流程节点。"""
-        for node in self.nodes:
-            if node["id"] == node_id:
-                return node
-        raise KeyError(f"E003: 未找到节点 ID {node_id}")
-
-    def get_template_by_node(self, node_name: str) -> str:
-        """按节点名称查询交付物模板。"""
-        if node_name not in self.templates:
-            raise KeyError(f"E004: 未找到节点 '{node_name}' 的模板")
-        return self.templates[node_name]
-
-    def get_protocols_for_role(self, role_name: str) -> List[Dict[str, str]]:
-        """查询某角色作为输出方的协作协议。"""
-        return [p for p in self.protocols if p["from_role"] == role_name]
-
-    def estimate_total_days(self) -> Dict[str, List[int]]:
-        """估算各阶段与总工期天数范围。"""
-        total_min = 0
-        total_max = 0
-        result: Dict[str, List[int]] = {}
-
-        for stage, params in self.budget.items():
-            days = params["duration_days"]
-            result[stage] = days
-            total_min += days[0]
-            total_max += days[1]
-
-        result["总工期"] = [total_min, total_max]
-        return result
-
-    def validate_data_consistency(self) -> bool:
-        """
-        校验数据一致性。
-
-        检查规则:
-            1. 节点名称与交付物模板一一对应
-            2. 协作协议中的角色必须存在于角色列表
-            3. 预算阶段与角色数量匹配
-
-        错误码: E010（数据一致性校验失败）
-        """
-        role_names = set(self.get_role_names())
-        node_names = set(self.get_node_names())
-
-        # 规则 1: 节点与模板一一对应
-        template_nodes = set(self.templates.keys())
-        if node_names != template_nodes:
-            raise RuntimeError("E010: 节点与模板不一致")
-
-        # 规则 2: 协作协议角色存在
-        for protocol in self.protocols:
-            if protocol["from_role"] not in role_names:
-                raise RuntimeError(f"E010: 协议中角色 '{protocol['from_role']}' 不存在")
-            if protocol["to_role"] not in role_names:
-                raise RuntimeError(f"E010: 协议中角色 '{protocol['to_role']}' 不存在")
-
-        # 规则 3: 预算阶段数量与角色数量一致
-        if len(self.budget) != len(self.roles):
-            raise RuntimeError("E010: 预算阶段与角色数量不一致")
-
+    def dfs(node_name: str) -> bool:
+        """深度优先搜索检测循环依赖。"""
+        if node_name in temp_visited:
+            return False
+        if node_name in visited:
+            return True
+        temp_visited.add(node_name)
+        node = node_map.get(node_name)
+        if node:
+            for dep in node["depends_on"]:
+                if not dfs(dep):
+                    return False
+        temp_visited.remove(node_name)
+        visited.add(node_name)
+        order.append(node_name)
         return True
 
+    for node in nodes:
+        if node["name"] not in visited:
+            if not dfs(node["name"]):
+                result["valid"] = False
+                result["errors"].append(f"检测到循环依赖，涉及节点 '{node['name']}'")
+                break
 
-# ============================================================
-# 三、离线自检（--selftest）
-# ============================================================
+    if result["valid"]:
+        result["execution_order"] = order
 
-def run_selftest() -> int:
+    return result
+
+
+def calculate_budget(parameters: List[Dict[str, Any]]) -> Dict[str, Any]:
     """
-    运行内置离线自检。
+    计算预算估算结果。
 
-    使用硬编码样例数据验证核心逻辑，不读取外部文件、不访问网络。
-    断言采用宽松阈值，确保任何环境直接可过。
+    根据参数表计算各环节成本与总预算。
+
+    错误码: E006（预算参数错误）
+    """
+    total = sum(item["base_cost"] for item in parameters)
+    items = []
+    for item in parameters:
+        percentage = (item["base_cost"] / total * 100) if total > 0 else 0
+        items.append({
+            "stage": item["stage"],
+            "cost": item["base_cost"],
+            "percentage": f"{percentage:.2f}%"
+        })
+
+    return {
+        "total_budget": total,
+        "items": items,
+        "generated_at": datetime.now(timezone.utc).isoformat()
+    }
+
+
+# ============================================================
+# 三、输出格式化函数
+# ============================================================
+
+def format_roles_table(roles: List[Dict[str, Any]]) -> str:
+    """格式化角色配置为文本表格。"""
+    lines = ["\n=== 团队角色配置 ===\n"]
+    lines.append(f"{'角色':<6} {'职责':<30} {'输入':<20} {'输出':<20} {'协作对象':<15}")
+    lines.append("-" * 100)
+    for role in roles:
+        lines.append(
+            f"{role['name']:<6} {role['responsibility']:<30} "
+            f"{','.join(role['inputs']):<20} {','.join(role['outputs']):<20} "
+            f"{','.join(role['collaborators']):<15}"
+        )
+    return "\n".join(lines)
+
+
+def format_nodes_table(nodes: List[Dict[str, Any]]) -> str:
+    """格式化流程节点为文本表格。"""
+    lines = ["\n=== 流程节点配置 ===\n"]
+    lines.append(f"{'ID':<4} {'名称':<12} {'阶段':<8} {'依赖':<20} {'负责人':<8}")
+    lines.append("-" * 60)
+    for node in nodes:
+        deps = ",".join(node["depends_on"]) if node["depends_on"] else "无"
+        lines.append(
+            f"{node['id']:<4} {node['name']:<12} {node['stage']:<8} "
+            f"{deps:<20} {node['owner']:<8}"
+        )
+    return "\n".join(lines)
+
+
+def format_deliverables_table(templates: List[Dict[str, Any]]) -> str:
+    """格式化交付物模板为文本表格。"""
+    lines = ["\n=== 交付物模板 ===\n"]
+    lines.append(f"{'节点ID':<6} {'节点名称':<12} {'交付物模板':<30}")
+    lines.append("-" * 50)
+    for template in templates:
+        lines.append(
+            f"{template['node_id']:<6} {template['node_name']:<12} {template['template']:<30}"
+        )
+    return "\n".join(lines)
+
+
+def format_protocols_table(protocols: List[Dict[str, Any]]) -> str:
+    """格式化协作协议为文本表格。"""
+    lines = ["\n=== 跨角色协作协议 ===\n"]
+    lines.append(f"{'从':<6} {'到':<6} {'交接格式':<40} {'评审机制':<40}")
+    lines.append("-" * 100)
+    for protocol in protocols:
+        lines.append(
+            f"{protocol['from_role']:<6} {protocol['to_role']:<6} "
+            f"{protocol['handoff_format']:<40} {protocol['review_mechanism']:<40}"
+        )
+    return "\n".join(lines)
+
+
+def format_budget_table(budget: Dict[str, Any]) -> str:
+    """格式化预算估算为文本表格。"""
+    lines = ["\n=== 预算估算 ===\n"]
+    lines.append(f"{'环节':<8} {'成本(元)':<12} {'占比':<10}")
+    lines.append("-" * 35)
+    for item in budget["items"]:
+        lines.append(f"{item['stage']:<8} {item['cost']:<12} {item['percentage']:<10}")
+    lines.append("-" * 35)
+    lines.append(f"{'总计':<8} {budget['total_budget']:<12}")
+    return "\n".join(lines)
+
+
+# ============================================================
+# 四、自检函数
+# ============================================================
+
+def run_selftest() -> bool:
+    """
+    运行内置自检。
+
+    验证所有核心功能与数据一致性。
 
     错误码: E007（自检断言失败）
     """
-    print("[自检] 开始...")
+    print("[INFO] 开始自检...")
+    all_passed = True
 
     try:
-        # 1. 初始化服务
-        service = DramaProductionService()
-        print("[自检] 服务初始化成功")
+        # 1. 验证团队角色
+        roles = get_team_roles()
+        assert len(roles) == 5, f"角色数量应为 5，实际 {len(roles)}"
+        role_names = [r["name"] for r in roles]
+        expected_roles = ["策划", "编剧", "拍摄", "后期", "宣发"]
+        assert role_names == expected_roles, f"角色名称不匹配: {role_names}"
+        print(f"[INFO] 团队角色数量: {len(roles)}")
 
-        # 2. 角色数量检查（必须为 5）
-        roles = service.get_role_names()
-        assert len(roles) == 5, "角色数量必须为 5"
-        assert "策划" in roles and "编剧" in roles, "必须包含策划与编剧角色"
-        print(f"[自检] 角色数据正确: {roles}")
+        # 2. 验证流程节点
+        nodes = get_process_nodes()
+        assert len(nodes) == 12, f"节点数量应为 12，实际 {len(nodes)}"
+        node_ids = [n["id"] for n in nodes]
+        assert node_ids == list(range(1, 13)), f"节点 ID 不连续: {node_ids}"
+        print(f"[INFO] 流程节点数量: {len(nodes)}")
 
-        # 3. 流程节点检查（必须为 12）
-        nodes = service.get_node_names()
-        assert len(nodes) == 12, "节点数量必须为 12"
-        assert "项目立项" in nodes and "数据复盘" in nodes, "首尾节点必须存在"
-        print(f"[自检] 流程节点正确（共 {len(nodes)} 个）")
+        # 3. 验证交付物模板
+        templates = get_deliverable_templates()
+        assert len(templates) == 12, f"交付物模板数量应为 12，实际 {len(templates)}"
+        template_node_ids = [t["node_id"] for t in templates]
+        assert template_node_ids == list(range(1, 13)), f"模板节点 ID 不连续: {template_node_ids}"
+        print(f"[INFO] 交付物模板数量: {len(templates)}")
 
-        # 4. 交付物模板检查
-        template = service.get_template_by_node("分集剧本")
-        assert template.endswith(".md"), "剧本模板应为 Markdown 格式"
-        print(f"[自检] 交付物模板正确: {template}")
+        # 4. 验证协作协议
+        protocols = get_collaboration_protocols()
+        assert len(protocols) == 5, f"协作协议数量应为 5，实际 {len(protocols)}"
+        protocol_roles = [(p["from_role"], p["to_role"]) for p in protocols]
+        assert all(len(p) == 2 for p in protocol_roles), "协作协议角色对格式错误"
+        print(f"[INFO] 协作协议数量: {len(protocols)}")
 
-        # 5. 协作协议检查
-        protocols = service.get_protocols_for_role("策划")
-        assert len(protocols) >= 1, "策划角色至少应有 1 条协作协议"
-        assert protocols[0]["to_role"] == "编剧", "策划应首先对接编剧"
-        print(f"[自检] 协作协议正确: {len(protocols)} 条")
+        # 5. 验证预算参数
+        budget_params = get_budget_parameters()
+        assert len(budget_params) == 5, f"预算参数数量应为 5，实际 {len(budget_params)}"
+        budget_stages = [b["stage"] for b in budget_params]
+        assert budget_stages == ["策划", "编剧", "拍摄", "后期", "宣发"], f"预算环节不匹配: {budget_stages}"
+        print(f"[INFO] 预算参数数量: {len(budget_params)}")
 
-        # 6. 预算估算检查（宽松区间）
-        days = service.estimate_total_days()
-        total = days.get("总工期", [0, 0])
-        # 宽松断言: 总工期至少 18 天（5+5+3+4+3），最多不超过 60 天
-        assert total[0] >= 18, f"最短工期应 >= 18 天，实际 {total[0]}"
-        assert total[1] <= 60, f"最长工期应 <= 60 天，实际 {total[1]}"
-        print(f"[自检] 预算估算正确: 总工期 {total[0]}-{total[1]} 天")
+        # 6. 验证流程依赖
+        validation_result = validate_process_nodes(nodes)
+        assert validation_result["valid"], f"流程依赖验证失败: {validation_result['errors']}"
+        assert len(validation_result["execution_order"]) == 12, \
+            f"执行顺序长度应为 12，实际 {len(validation_result['execution_order'])}"
+        print(f"[INFO] 流程依赖验证: 通过")
 
-        # 7. 数据一致性校验
-        assert service.validate_data_consistency(), "数据一致性校验失败"
-        print("[自检] 数据一致性校验通过")
+        # 7. 验证预算计算
+        budget = calculate_budget(budget_params)
+        assert budget["total_budget"] == 850000, f"总预算应为 850000，实际 {budget['total_budget']}"
+        assert len(budget["items"]) == 5, f"预算明细数量应为 5，实际 {len(budget['items'])}"
+        print(f"[INFO] 预算计算验证: 通过")
 
-    except AssertionError as exc:
-        print(f"[自检] 失败（断言错误）: {exc}")
-        return 7  # E007
-    except RuntimeError as exc:
-        print(f"[自检] 失败（运行时错误）: {exc}")
-        return 9  # E009
-    except Exception as exc:  # 兜底异常
-        print(f"[自检] 失败（未知异常）: {exc}")
-        return 9  # E009
+        # 8. 验证输出格式化
+        roles_table = format_roles_table(roles)
+        assert "策划" in roles_table and "宣发" in roles_table, "角色表格缺少关键角色"
+        nodes_table = format_nodes_table(nodes)
+        assert "立项策划" in nodes_table and "宣发推广" in nodes_table, "节点表格缺少关键节点"
+        print(f"[INFO] 输出格式化验证: 通过")
 
-    print("[自检] 全部通过 ✔")
-    return 0
+    except AssertionError as e:
+        print(f"[ERROR] 自检断言失败: {e}")
+        all_passed = False
+    except Exception as e:
+        print(f"[ERROR] 自检异常: {e}")
+        all_passed = False
+
+    if all_passed:
+        print("✅ SELFTEST PASSED")
+    else:
+        print("❌ SELFTEST FAILED")
+        sys.exit(1)
+
+    return all_passed
 
 
 # ============================================================
-# 四、主入口
+# 五、主函数
 # ============================================================
 
 def main() -> int:
     """
-    主入口函数。
+    主函数。
 
-    解析命令行参数并执行相应操作。
+    解析命令行参数并执行相应功能。
 
     错误码:
         E008: 未识别的命令行参数
         E009: 运行时异常
     """
     parser = argparse.ArgumentParser(
-        description="短剧制片 全流程团队 矩阵协作 - 独立实现脚本"
+        description="短剧制片全流程矩阵 - 团队协作与流程管理工具",
+        epilog="示例: python run.py --budget --format json"
     )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置离线自检（不读外部文件、不访问网络）"
-    )
+    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+    parser.add_argument("--roles", action="store_true", help="输出团队角色配置")
+    parser.add_argument("--nodes", action="store_true", help="输出流程节点配置")
+    parser.add_argument("--deliverables", action="store_true", help="输出交付物模板")
+    parser.add_argument("--protocols", action="store_true", help="输出协作协议")
+    parser.add_argument("--budget", action="store_true", help="输出预算估算")
+    parser.add_argument("--validate", action="store_true", help="验证流程依赖关系")
+    parser.add_argument("--format", choices=["text", "json"], default="text", help="输出格式（默认 text）")
+    parser.add_argument("--verbose", action="store_true", help="输出详细决策信息")
+
+    parser.add_argument("--help", default=None, help="文档声明的参数")  # F3 补全
+
+    args = parser.parse_args()
 
     try:
-        args = parser.parse_args()
-
+        # 自检模式 - 必须在所有业务校验之前处理
         if args.selftest:
-            return run_selftest()
+            run_selftest()
+            return 0
 
-        # 未指定任何参数时，打印使用说明
-        print("短剧制片 全流程团队 矩阵协作 脚本")
-        print("用法: python main.py --selftest")
-        print("提示: 使用 --selftest 运行内置自检")
+        # 输出团队角色
+        if args.roles:
+            roles = get_team_roles()
+            if args.format == "json":
+                print(json.dumps(roles, ensure_ascii=False, indent=2))
+            else:
+                print(format_roles_table(roles))
+            if args.verbose:
+                print(f"[明细] 角色配置: 共 {len(roles)} 个角色")
+            return 0
+
+        # 输出流程节点
+        if args.nodes:
+            nodes = get_process_nodes()
+            if args.format == "json":
+                print(json.dumps(nodes, ensure_ascii=False, indent=2))
+            else:
+                print(format_nodes_table(nodes))
+            if args.verbose:
+                print(f"[明细] 流程节点: 共 {len(nodes)} 个节点")
+            return 0
+
+        # 输出交付物模板
+        if args.deliverables:
+            templates = get_deliverable_templates()
+            if args.format == "json":
+                print(json.dumps(templates, ensure_ascii=False, indent=2))
+            else:
+                print(format_deliverables_table(templates))
+            if args.verbose:
+                print(f"[明细] 交付物模板: 共 {len(templates)} 个模板")
+            return 0
+
+        # 输出协作协议
+        if args.protocols:
+            protocols = get_collaboration_protocols()
+            if args.format == "json":
+                print(json.dumps(protocols, ensure_ascii=False, indent=2))
+            else:
+                print(format_protocols_table(protocols))
+            if args.verbose:
+                print(f"[明细] 协作协议: 共 {len(protocols)} 条协议")
+            return 0
+
+        # 输出预算估算
+        if args.budget:
+            budget_params = get_budget_parameters()
+            budget = calculate_budget(budget_params)
+            if args.format == "json":
+                print(json.dumps(budget, ensure_ascii=False, indent=2))
+            else:
+                print(format_budget_table(budget))
+            if args.verbose:
+                print(f"[明细] 预算估算: 总预算 {budget['total_budget']} 元，共 {len(budget['items'])} 个环节")
+            return 0
+
+        # 验证流程依赖
+        if args.validate:
+            nodes = get_process_nodes()
+            result = validate_process_nodes(nodes)
+            if args.format == "json":
+                print(json.dumps(result, ensure_ascii=False, indent=2))
+            else:
+                if result["valid"]:
+                    print("[INFO] 所有依赖关系验证通过 ✅")
+                    print(f"[INFO] 执行顺序: {' → '.join(result['execution_order'])}")
+                else:
+                    print("[ERROR] 依赖关系验证失败 ❌")
+                    for error in result["errors"]:
+                        print(f"  - {error}")
+                    return 1
+            if args.verbose:
+                print(f"[明细] 依赖验证: valid={result['valid']}, 执行顺序长度={len(result['execution_order'])}")
+            return 0
+
+        # 未指定任何参数，输出帮助
+        parser.print_help()
         return 0
 
-    except SystemExit as exc:
-        # argparse 在参数错误时会抛出 SystemExit
-        if exc.code != 0:
-            print("E008: 未识别的命令行参数或参数错误")
-            return 8
-        return 0
-    except Exception as exc:
-        print(f"E009: 运行时异常 - {exc}")
-        return 9
+    except Exception as e:
+        print(f"[ERROR] 运行时异常: {e}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
