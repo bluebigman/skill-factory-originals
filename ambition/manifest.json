@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260811_033213",
+  "slug": "ambition",
+  "spec": {
+    "slug": "ambition",
+    "name": "ambition",
+    "description": "将任意数据源转化为结构化结果，保留关键信息并标注置信度。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "b41a04e46b71ecb7",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
