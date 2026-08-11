@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260811_223346",
+  "slug": "1c-ai-development-kit",
+  "spec": {
+    "slug": "1c-ai-development-kit",
+    "name": "1c-ai-development-kit",
+    "description": "面向1C:Enterprise开发者的AI辅助工具集，覆盖代码生成、调试与最佳实践。 支持 http、markdown 格式处理",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "4e0d69232f025fbe",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
