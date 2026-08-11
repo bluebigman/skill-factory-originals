@@ -1,485 +1,253 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""CSV to InDesign script converter with self-test functionality"""
+"""Template rendering engine with dry-run support."""
 
-import csv
-import json
-import os
 import sys
+import json
 import re
-import codecs
 from pathlib import Path
-from datetime import datetime
+from typing import Any, Dict, Optional
 
-class CSVConverter:
-    """Main converter class for CSV to InDesign JSX conversion"""
+class TemplateEngine:
+    """Simple template engine supporting variables, conditionals, loops, and filters."""
     
     def __init__(self):
-        self.error_codes = {
-            'SUCCESS': 0,
-            'FILE_NOT_FOUND': 1,
-            'INVALID_CSV': 2,
-            'INVALID_JSON': 3,
-            'PATH_VIOLATION': 4,
-            'ENCODING_ERROR': 5,
-            'GENERATION_ERROR': 6
-        }
-        self.allowed_dirs = []
-        self.set_default_allowed_dirs()
+        self.pattern = r'\{\{\s*([^}]+?)\s*\}\}'
+        self.condition_pattern = r'\{%\s*if\s+([^%]+?)\s*%\}(.*?)\{%\s*endif\s*%\}'
+        self.loop_pattern = r'\{%\s*for\s+(\w+)\s+in\s+([^%]+?)\s*%\}(.*?)\{%\s*endfor\s*%\}'
     
-    def set_default_allowed_dirs(self):
-        """Set default allowed directories for path validation"""
-        self.allowed_dirs = [
-            str(Path.home()),
-            os.getcwd(),
-            str(Path.home() / 'Documents'),
-            str(Path.home() / 'Desktop'),
-            str(Path.home() / 'Downloads')
-        ]
+    def render(self, template: str, context: Dict[str, Any]) -> str:
+        """Render template with given context."""
+        # Process loops first
+        result = self._process_loops(template, context)
+        # Process conditionals
+        result = self._process_conditionals(result, context)
+        # Process variables
+        result = self._process_variables(result, context)
+        return result
     
-    def validate_path(self, filepath):
-        """Validate if the filepath is in allowed directories"""
-        try:
-            path = Path(filepath).resolve()
+    def _process_loops(self, template: str, context: Dict[str, Any]) -> str:
+        """Process for loops in template."""
+        def replace_loop(match):
+            var_name = match.group(1)
+            iterable_name = match.group(2).strip()
+            body = match.group(3)
             
-            # Check if path exists
-            if not path.exists():
-                return False, "路径不存在"
+            if iterable_name not in context:
+                return ''
             
-            # Check if path is in allowed directories
-            for allowed_dir in self.allowed_dirs:
-                allowed_path = Path(allowed_dir).resolve()
-                if str(path).startswith(str(allowed_path)):
-                    return True, "路径有效"
+            iterable = context[iterable_name]
+            if not isinstance(iterable, (list, tuple)):
+                return ''
             
-            # Also check if parent directory exists and is accessible
-            if path.parent.exists():
-                return True, "父目录存在"
-            
-            return False, "路径不在允许目录中"
-        except Exception as e:
-            return False, f"路径校验异常: {str(e)}"
+            result = []
+            for item in iterable:
+                local_context = dict(context)
+                local_context[var_name] = item
+                result.append(self._process_variables(body, local_context))
+            return ''.join(result)
+        
+        return re.sub(self.loop_pattern, replace_loop, template, flags=re.DOTALL)
     
-    def parse_csv(self, content, encoding='utf-8-sig'):
-        """Parse CSV content with proper encoding handling"""
-        try:
-            # Handle BOM
-            if content.startswith('\ufeff'):
-                content = content[1:]
+    def _process_conditionals(self, template: str, context: Dict[str, Any]) -> str:
+        """Process if conditionals in template."""
+        def replace_condition(match):
+            condition = match.group(1).strip()
+            body = match.group(2)
             
-            # Parse CSV with proper handling of Chinese punctuation
-            reader = csv.DictReader(content.splitlines())
-            rows = []
-            for row in reader:
-                # Clean up values
-                cleaned_row = {}
-                for key, value in row.items():
-                    if key is not None:
-                        # Remove BOM and whitespace from keys
-                        clean_key = key.strip().lstrip('\ufeff')
-                        # Clean value
-                        if value is None:
-                            clean_value = ''
-                        else:
-                            clean_value = value.strip()
-                        cleaned_row[clean_key] = clean_value
-                if cleaned_row:
-                    rows.append(cleaned_row)
-            
-            return rows, None
-        except Exception as e:
-            return None, f"CSV解析失败: {str(e)}"
+            # Evaluate condition
+            if condition in context:
+                value = context[condition]
+                if value:
+                    return body
+            return ''
+        
+        return re.sub(self.condition_pattern, replace_condition, template, flags=re.DOTALL)
     
-    def parse_json(self, content):
-        """Parse JSON content"""
-        try:
-            data = json.loads(content)
-            if isinstance(data, list):
-                return data, None
-            elif isinstance(data, dict):
-                # Convert dict to list of dicts
-                if 'data' in data and isinstance(data['data'], list):
-                    return data['data'], None
-                else:
-                    return [data], None
-            else:
-                return None, "JSON格式错误：必须是对象或数组"
-        except json.JSONDecodeError as e:
-            return None, f"JSON解析失败: {str(e)}"
+    def _process_variables(self, template: str, context: Dict[str, Any]) -> str:
+        """Process variable substitutions with filters."""
+        def replace_var(match):
+            expr = match.group(1).strip()
+            
+            # Check for filters
+            parts = expr.split('|')
+            var_name = parts[0].strip()
+            
+            if var_name not in context:
+                return ''
+            
+            value = context[var_name]
+            
+            # Apply filters
+            for filter_part in parts[1:]:
+                filter_name = filter_part.strip()
+                if filter_name == 'upper':
+                    value = str(value).upper()
+                elif filter_name == 'lower':
+                    value = str(value).lower()
+                elif filter_name == 'trim':
+                    value = str(value).strip()
+                elif filter_name == 'length':
+                    value = len(value)
+            
+            return str(value)
+        
+        return re.sub(self.pattern, replace_var, template)
+
+
+def render_file(
+    template_file: str,
+    output_file: str,
+    context: Optional[Dict[str, Any]] = None,
+    dry_run: bool = False
+) -> None:
+    """
+    Render a template file with given context.
     
-    def generate_indesign_script(self, rows, output_path=None):
-        """Generate InDesign JSX script from data rows"""
-        try:
-            if not rows:
-                return None, "没有数据可生成"
-            
-            # Build JSX script
-            jsx_lines = [
-                '// InDesign Script Generated by CSV Converter',
-                '// Date: ' + datetime.now().strftime('%Y-%m-%d %H:%M:%S'),
-                '',
-                '#target indesign',
-                '',
-                'function main() {',
-                '    var doc = app.documents.add();',
-                '    var page = doc.pages[0];',
-                '    var yPos = 50;',
-                ''
-            ]
-            
-            # Add data rows
-            for i, row in enumerate(rows):
-                yPos = 50 + (i * 30)
-                jsx_lines.append(f'    // Row {i+1}')
-                
-                # Add text frames for each field
-                xPos = 50
-                for key, value in row.items():
-                    if value:
-                        # Escape special characters for JSX
-                        safe_value = str(value).replace('\\', '\\\\').replace('"', '\\"').replace("'", "\\'")
-                        safe_key = str(key).replace('\\', '\\\\').replace('"', '\\"')
-                        
-                        jsx_lines.append(f'    var tf_{i}_{len(jsx_lines)} = page.textFrames.add();')
-                        jsx_lines.append(f'    tf_{i}_{len(jsx_lines)}.geometricBounds = [{yPos}, {xPos}, {yPos+20}, {xPos+150}];')
-                        jsx_lines.append(f'    tf_{i}_{len(jsx_lines)}.contents = "{safe_key}: {safe_value}";')
-                        xPos += 160
-                
-                jsx_lines.append('')
-            
-            jsx_lines.extend([
-                '}',
-                '',
-                'main();',
-                ''
-            ])
-            
-            script_content = '\n'.join(jsx_lines)
-            
-            # Write to file if output path provided
-            if output_path:
-                with open(output_path, 'w', encoding='utf-8') as f:
-                    f.write(script_content)
-            
-            return script_content, None
-        except Exception as e:
-            return None, f"脚本生成失败: {str(e)}"
+    Args:
+        template_file: Path to template file
+        output_file: Path to output file
+        context: Dictionary of variables for rendering
+        dry_run: If True, print rendered content instead of writing
+    """
+    if context is None:
+        context = {}
     
-    def process_file(self, input_path, output_path=None, file_type=None):
-        """Process input file and generate output"""
-        try:
-            # Validate input path
-            valid, msg = self.validate_path(input_path)
-            if not valid:
-                return None, self.error_codes['PATH_VIOLATION'], msg
-            
-            # Read file content
-            try:
-                with open(input_path, 'rb') as f:
-                    raw_content = f.read()
-            except FileNotFoundError:
-                return None, self.error_codes['FILE_NOT_FOUND'], "文件不存在"
-            except Exception as e:
-                return None, self.error_codes['ENCODING_ERROR'], f"读取文件失败: {str(e)}"
-            
-            # Detect encoding
-            encoding = 'utf-8'
-            try:
-                # Try UTF-8 first
-                content = raw_content.decode('utf-8-sig')
-            except UnicodeDecodeError:
-                try:
-                    # Try GBK
-                    content = raw_content.decode('gbk')
-                    encoding = 'gbk'
-                except UnicodeDecodeError:
-                    return None, self.error_codes['ENCODING_ERROR'], "无法识别的编码格式"
-            
-            # Determine file type
-            if file_type is None:
-                ext = Path(input_path).suffix.lower()
-                if ext == '.csv':
-                    file_type = 'csv'
-                elif ext == '.json':
-                    file_type = 'json'
-                else:
-                    return None, self.error_codes['INVALID_CSV'], "不支持的文件类型"
-            
-            # Parse based on file type
-            if file_type == 'csv':
-                rows, error = self.parse_csv(content)
-            elif file_type == 'json':
-                rows, error = self.parse_json(content)
-            else:
-                return None, self.error_codes['INVALID_CSV'], "无效的文件类型"
-            
-            if error:
-                return None, self.error_codes['INVALID_CSV'], error
-            
-            # Generate InDesign script
-            if output_path:
-                script, gen_error = self.generate_indesign_script(rows, output_path)
-            else:
-                script, gen_error = self.generate_indesign_script(rows)
-            
-            if gen_error:
-                return None, self.error_codes['GENERATION_ERROR'], gen_error
-            
-            return script, self.error_codes['SUCCESS'], "处理成功"
-            
-        except Exception as e:
-            return None, self.error_codes['GENERATION_ERROR'], f"处理异常: {str(e)}"
+    # Read template
+    template_path = Path(template_file)
+    if not template_path.exists():
+        raise FileNotFoundError(f"Template file not found: {template_file}")
     
-    def generate_report(self, rows, output_path=None):
-        """Generate analysis report"""
-        try:
-            if not rows:
-                return "空数据集", None
-            
-            total_rows = len(rows)
-            total_fields = 0
-            field_names = set()
-            empty_fields = 0
-            non_empty_fields = 0
-            
-            for row in rows:
-                for key, value in row.items():
-                    field_names.add(key)
-                    total_fields += 1
-                    if value and value.strip():
-                        non_empty_fields += 1
-                    else:
-                        empty_fields += 1
-            
-            report_lines = [
-                "=== CSV 数据分析报告 ===",
-                f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}",
-                f"总行数: {total_rows}",
-                f"总字段数: {total_fields}",
-                f"字段名称: {', '.join(sorted(field_names))}",
-                f"非空字段数: {non_empty_fields}",
-                f"空字段数: {empty_fields}",
-                f"数据完整率: {non_empty_fields/max(total_fields,1)*100:.1f}%",
-                "",
-                "字段统计:"
-            ]
-            
-            for field in sorted(field_names):
-                field_count = sum(1 for row in rows if row.get(field))
-                report_lines.append(f"  - {field}: {field_count} 行有值")
-            
-            report = '\n'.join(report_lines)
-            
-            if output_path:
-                with open(output_path, 'w', encoding='utf-8') as f:
-                    f.write(report)
-            
-            return report, None
-        except Exception as e:
-            return None, f"报告生成失败: {str(e)}"
+    template_content = template_path.read_text(encoding='utf-8')
     
-    def generate_template(self, template_type='csv'):
-        """Generate template file"""
-        try:
-            if template_type == 'csv':
-                template = "姓名,年龄,城市,职业\n张三,25,北京,工程师\n李四,30,上海,设计师\n王五,28,广州,产品经理\n"
-            elif template_type == 'json':
-                template = json.dumps([
-                    {"姓名": "张三", "年龄": 25, "城市": "北京", "职业": "工程师"},
-                    {"姓名": "李四", "年龄": 30, "城市": "上海", "职业": "设计师"},
-                    {"姓名": "王五", "年龄": 28, "城市": "广州", "职业": "产品经理"}
-                ], ensure_ascii=False, indent=2)
-            else:
-                return None, "不支持的模板类型"
-            
-            return template, None
-        except Exception as e:
-            return None, f"模板生成失败: {str(e)}"
+    # Render template
+    engine = TemplateEngine()
+    rendered_content = engine.render(template_content, context)
     
-    def run_selftest(self):
-        """Run self-tests to verify functionality"""
-        print("=== 自检开始 ===\n")
-        passed = 0
-        total = 10
+    if dry_run:
+        # Print rendered content for preview
+        print(rendered_content)
+    else:
+        # Write to output file
+        output_path = Path(output_file)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(rendered_content, encoding='utf-8')
+
+
+def selftest() -> bool:
+    """Run self-tests to verify template engine functionality."""
+    engine = TemplateEngine()
+    
+    # Test 1: Basic variable substitution
+    template = "Hello, {{ name }}!"
+    result = engine.render(template, {"name": "World"})
+    assert result == "Hello, World!", f"Basic variable substitution failed: {result}"
+    assert "{{" not in result and "}}" not in result, "Template markers not fully processed"
+    
+    # Test 2: Multiple variables
+    template = "{{ first }} {{ second }}"
+    result = engine.render(template, {"first": "Hello", "second": "World"})
+    assert result == "Hello World", f"Multiple variable substitution failed: {result}"
+    
+    # Test 3: Missing variables
+    template = "Value: {{ missing_var }}"
+    result = engine.render(template, {})
+    assert result == "Value: ", f"Missing variable should return empty: {result}"
+    
+    # Test 4: Conditionals
+    template = "{% if show %}Visible{% endif %}"
+    result = engine.render(template, {"show": True})
+    assert result == "Visible", f"True condition failed: {result}"
+    
+    result = engine.render(template, {"show": False})
+    assert result == "", f"False condition should be empty: {result}"
+    
+    # Test 5: Loops
+    template = "{% for item in items %}{{ item }},{% endfor %}"
+    result = engine.render(template, {"items": ["a", "b", "c"]})
+    assert result == "a,b,c,", f"Loop failed: {result}"
+    
+    # Test 6: Filters
+    template = "{{ name|upper }}"
+    result = engine.render(template, {"name": "hello"})
+    assert result == "HELLO", f"Upper filter failed: {result}"
+    
+    template = "{{ name|lower }}"
+    result = engine.render(template, {"name": "HELLO"})
+    assert result == "hello", f"Lower filter failed: {result}"
+    
+    # Test 7: dry-run mode
+    import tempfile
+    import os
+    
+    with tempfile.TemporaryDirectory() as tmpdir:
+        template_file = os.path.join(tmpdir, "test.tpl")
+        output_file = os.path.join(tmpdir, "output.txt")
         
-        # Test 1: CSV parsing with Chinese punctuation and BOM
-        print("[测试 1] CSV 解析（中文标点 + BOM）")
-        try:
-            csv_content = '\ufeff姓名,年龄,城市\n张三,25,北京\n李四,30,上海\n'
-            rows, error = self.parse_csv(csv_content)
-            assert error is None, f"解析错误: {error}"
-            assert len(rows) >= 2, f"行数不足: {len(rows)}"
-            assert '姓名' in rows[0], "缺少姓名字段"
-            passed += 1
-            print("  ✓ 通过")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
+        with open(template_file, 'w') as f:
+            f.write("Hello, {{ name }}!")
         
-        # Test 2: JSON parsing
-        print("[测试 2] JSON 解析")
-        try:
-            json_content = '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
-            rows, error = self.parse_json(json_content)
-            assert error is None, f"解析错误: {error}"
-            assert len(rows) >= 2, f"行数不足: {len(rows)}"
-            passed += 1
-            print("  ✓ 通过")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
+        # Test dry_run=True (should not create output file)
+        render_file(template_file, output_file, {"name": "Test"}, dry_run=True)
+        assert not os.path.exists(output_file), "dry_run should not create output file"
         
-        # Test 3: Empty input handling
-        print("[测试 3] 空输入处理")
-        try:
-            rows, error = self.parse_csv("")
-            assert rows is not None or error is not None, "空输入处理异常"
-            passed += 1
-            print("  ✓ 通过")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
+        # Test normal rendering
+        render_file(template_file, output_file, {"name": "Test"})
+        assert os.path.exists(output_file), "Normal rendering should create output file"
         
-        # Test 4: InDesign script generation
-        print("[测试 4] InDesign 脚本生成")
-        try:
-            test_rows = [{"姓名": "张三", "年龄": "25"}]
-            script, error = self.generate_indesign_script(test_rows)
-            assert error is None, f"生成错误: {error}"
-            assert script is not None, "脚本为空"
-            assert 'main()' in script, "缺少main函数"
-            passed += 1
-            print("  ✓ 通过")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
-        
-        # Test 5: Long input handling
-        print("[测试 5] 超长输入处理")
-        try:
-            long_csv = "姓名,年龄\n" + "\n".join([f"用户{i},{i}" for i in range(10001)])
-            rows, error = self.parse_csv(long_csv)
-            assert error is None, f"解析错误: {error}"
-            assert len(rows) >= 10000, f"行数不足: {len(rows)}"
-            passed += 1
-            print("  ✓ 通过（处理 10001 行）")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
-        
-        # Test 6: Encoding error handling
-        print("[测试 6] 编码异常处理")
-        try:
-            # Test GBK encoding
-            gbk_content = "姓名,年龄\n张三,25\n".encode('gbk')
-            content = gbk_content.decode('gbk')
-            rows, error = self.parse_csv(content)
-            assert error is None, f"GBK解析错误: {error}"
-            assert len(rows) >= 1, "GBK解析行数不足"
-            passed += 1
-            print("  ✓ 通过（GBK 编码识别）")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
-        
-        # Test 7: Error code system
-        print("[测试 7] 错误码体系")
-        try:
-            assert self.error_codes['SUCCESS'] == 0, "成功码错误"
-            assert self.error_codes['FILE_NOT_FOUND'] >= 1, "文件不存在码错误"
-            assert self.error_codes['PATH_VIOLATION'] >= 1, "路径违规码错误"
-            passed += 1
-            print("  ✓ 通过")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
-        
-        # Test 8: Analysis report generation
-        print("[测试 8] 分析报告生成")
-        try:
-            test_rows = [{"姓名": "张三", "年龄": "25"}, {"姓名": "李四", "年龄": "30"}]
-            report, error = self.generate_report(test_rows)
-            assert error is None, f"报告生成错误: {error}"
-            assert report is not None, "报告为空"
-            assert '总行数' in report, "报告缺少总行数"
-            passed += 1
-            print("  ✓ 通过")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
-        
-        # Test 9: Path security validation
-        print("[测试 9] 路径安全校验")
-        try:
-            # Test valid path (current directory)
-            current_dir = os.getcwd()
-            valid, msg = self.validate_path(current_dir)
-            assert valid, f"有效路径被拒绝: {msg}"
-            
-            # Test valid path (home directory)
-            home_dir = str(Path.home())
-            valid, msg = self.validate_path(home_dir)
-            assert valid, f"主目录被拒绝: {msg}"
-            
-            # Test invalid path
-            invalid_path = "/nonexistent/path/to/file.txt"
-            valid, msg = self.validate_path(invalid_path)
-            assert not valid, "无效路径被接受"
-            
-            passed += 1
-            print("  ✓ 通过")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
-        
-        # Test 10: Template generation
-        print("[测试 10] 模板生成")
-        try:
-            template, error = self.generate_template('csv')
-            assert error is None, f"模板生成错误: {error}"
-            assert template is not None, "模板为空"
-            assert '姓名' in template, "模板缺少字段"
-            
-            json_template, error = self.generate_template('json')
-            assert error is None, f"JSON模板生成错误: {error}"
-            assert json_template is not None, "JSON模板为空"
-            passed += 1
-            print("  ✓ 通过")
-        except Exception as e:
-            print(f"  ✗ 失败: {str(e)}")
-        
-        print(f"\n=== 自检完成: {passed} 通过, {total - passed} 失败 ===")
-        return passed == total
+        with open(output_file, 'r') as f:
+            content = f.read()
+        assert content == "Hello, Test!", f"File content mismatch: {content}"
+    
+    return True
 
 
 def main():
-    """Main entry point"""
-    converter = CSVConverter()
+    """Main entry point."""
+    if len(sys.argv) > 1 and sys.argv[1] == "--selftest":
+        try:
+            selftest()
+            print("All tests passed!")
+            return 0
+        except AssertionError as e:
+            print(f"Test failed: {e}")
+            return 1
     
-    # Handle command line arguments
-    if len(sys.argv) < 2:
-        print("用法: python main.py <输入文件> [输出文件] [--selftest]")
-        print("      python main.py --selftest")
+    # Parse command line arguments
+    if len(sys.argv) < 3:
+        print("Usage: python main.py <template_file> <output_file> [--context JSON] [--dry-run]")
         return 1
     
-    if '--selftest' in sys.argv:
-        success = converter.run_selftest()
-        return 0 if success else 1
+    template_file = sys.argv[1]
+    output_file = sys.argv[2]
     
-    # Process file
-    input_file = sys.argv[1]
-    output_file = None
+    # Parse optional arguments
+    context = {}
+    dry_run = False
     
-    if len(sys.argv) >= 3 and not sys.argv[2].startswith('--'):
-        output_file = sys.argv[2]
+    i = 3
+    while i < len(sys.argv):
+        if sys.argv[i] == "--context" and i + 1 < len(sys.argv):
+            try:
+                context = json.loads(sys.argv[i + 1])
+                i += 2
+            except json.JSONDecodeError:
+                print("Invalid JSON context")
+                return 1
+        elif sys.argv[i] == "--dry-run":
+            dry_run = True
+            i += 1
+        else:
+            i += 1
     
-    # Determine file type
-    file_type = None
-    if '--csv' in sys.argv:
-        file_type = 'csv'
-    elif '--json' in sys.argv:
-        file_type = 'json'
-    
-    result, error_code, message = converter.process_file(input_file, output_file, file_type)
-    
-    if error_code == converter.error_codes['SUCCESS']:
-        print(f"处理成功: {message}")
-        if result and not output_file:
-            print(result)
+    try:
+        render_file(template_file, output_file, context, dry_run)
+        if dry_run:
+            print("Dry run completed (no file written)")
+        else:
+            print(f"Template rendered to {output_file}")
         return 0
-    else:
-        print(f"处理失败: {message}")
+    except Exception as e:
+        print(f"Error: {e}")
         return 1
 
 

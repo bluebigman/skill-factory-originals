@@ -559,9 +559,9 @@ def _parse_args(argv: List[str]) -> argparse.Namespace:
     parser.add_argument("--fields", required=False, help="字段配置，逗号分隔，格式: 字段名=选择器")
     parser.add_argument("--output", choices=["json", "csv", "plain"], default="json", help="输出格式")
     parser.add_argument("--timeout", type=float, default=10.0, help="请求超时时间（秒）")
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     try:
-        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         return parser.parse_args(argv)
     except SystemExit as e:
         # argparse 在错误时会调用 sys.exit，这里转为异常
