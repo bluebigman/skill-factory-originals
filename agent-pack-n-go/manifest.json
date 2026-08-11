@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260811_233951",
+  "slug": "agent-pack-n-go",
+  "spec": {
+    "slug": "agent-pack-n-go",
+    "name": "agent-pack-n-go",
+    "description": "克隆AI智能体至新设备，打包配置、记忆与技能，约25分钟完成。 支持 http、markdown 格式处理",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "a35e82978904687c",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
