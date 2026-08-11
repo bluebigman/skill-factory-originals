@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260811_230655",
+  "slug": "agency-agents",
+  "spec": {
+    "slug": "agency-agents",
+    "name": "agency-agency-agents",
+    "description": "将任意输入转化为结构化成果，支持多角色任务编排与批量处理。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "a5583f11baeb64a3",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
