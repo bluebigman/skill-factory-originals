@@ -1,0 +1,28 @@
+{
+  "timestamp": "20260811_224447",
+  "slug": "academic-research-skills",
+  "spec": {
+    "slug": "academic-research-skills",
+    "name": "academic-research-skills",
+    "description": "将研究资料转化为结构化成果，辅助论文写作全流程。 支持 csv、json、http 格式处理",
+    "cli_interface": [],
+    "capability_outline": [
+      "**能做：**",
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "fd0ec07018cbbd3f",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
