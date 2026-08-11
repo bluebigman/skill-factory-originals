@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260811_232316",
+  "slug": "agent-loop-engine",
+  "spec": {
+    "slug": "agent-loop-engine",
+    "name": "agent-loop-engine",
+    "description": "轻量级循环状态内核，管理长期运行的AI代理团队，支持持久目标与可验证交接。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "e86f0ec5316b9e19",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}

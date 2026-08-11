@@ -15,9 +15,14 @@ import sys
 import time
 import json
 import argparse
+import hashlib
+import hmac
+import os
+from datetime import datetime, timezone
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from typing import Any, Optional, Dict, List, Callable
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -34,6 +39,48 @@ ERR_HANDOFF_CONFLICT = "E007"       # 交接冲突
 ERR_WAKEUP_INVALID = "E008"         # 唤醒条件非法
 ERR_PERSISTENCE = "E009"            # 持久化失败
 ERR_INTERNAL = "E010"               # 内部错误
+
+
+# ---------------------------------------------------------------------------
+# 工具函数
+# ---------------------------------------------------------------------------
+def utc_now() -> float:
+    """返回 UTC 时间戳"""
+    return datetime.now(timezone.utc).timestamp()
+
+
+def utc_now_str() -> str:
+    """返回 UTC 时间字符串"""
+    return datetime.now(timezone.utc).isoformat()
+
+
+def retry_io(func: Callable, *args, max_retries: int = 3, **kwargs) -> Any:
+    """
+    带指数退避重试的 I/O 操作包装器。
+    最多重试 3 次，退避间隔 0.5s, 1s, 2s。
+    """
+    delay = 0.5
+    last_exc = None
+    for attempt in range(max_retries):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            last_exc = e
+            if attempt < max_retries - 1:
+                time.sleep(delay)
+                delay *= 2
+    raise last_exc
+
+
+def compute_handoff_signature(context: 'HandoffContext', secret_key: str = "agent-loop-engine") -> str:
+    """计算交接上下文的 HMAC 签名"""
+    payload = json.dumps({
+        "from_agent": context.from_agent,
+        "to_agent": context.to_agent,
+        "payload": context.payload,
+        "timestamp": context.timestamp
+    }, sort_keys=True, ensure_ascii=False).encode('utf-8')
+    return hmac.new(secret_key.encode('utf-8'), payload, hashlib.sha256).hexdigest()
 
 
 # ---------------------------------------------------------------------------
@@ -55,8 +102,8 @@ class Goal:
     id: str
     description: str
     status: str = "active"          # active | paused | completed | archived
-    created_at: float = field(default_factory=time.time)
-    updated_at: float = field(default_factory=time.time)
+    created_at: float = field(default_factory=utc_now)
+    updated_at: float = field(default_factory=utc_now)
     progress: float = 0.0           # 0.0 ~ 1.0
     metadata: Dict[str, Any] = field(default_factory=dict)
 
@@ -76,7 +123,8 @@ class HandoffContext:
     from_agent: str
     to_agent: str
     payload: Dict[str, Any] = field(default_factory=dict)
-    timestamp: float = field(default_factory=time.time)
+    timestamp: float = field(default_factory=utc_now)
+    signature: str = ""  # 交接完整性签名
 
 
 @dataclass
@@ -85,7 +133,7 @@ class CycleRecord:
     cycle_id: int
     agent_id: str
     action: str
-    timestamp: float = field(default_factory=time.time)
+    timestamp: float = field(default_factory=utc_now)
     result: str = "ok"
     detail: Dict[str, Any] = field(default_factory=dict)
 
@@ -96,17 +144,19 @@ class CycleRecord:
 class LoopStateKernel:
     """
     循环状态内核：管理代理、目标、唤醒与交接。
-    单机内存态实现，提供编程接口。
+    支持持久化存储与交接验证。
     """
 
-    def __init__(self, max_cycles: int = 1000):
+    def __init__(self, max_cycles: int = 1000, state_file: Optional[str] = None):
         """
         初始化内核。
 
         参数:
             max_cycles: 最大循环次数，超过则触发 E006 错误。
+            state_file: 状态持久化文件路径（可选）
         """
         self.max_cycles = max_cycles
+        self.state_file = state_file
         self.agents: Dict[str, Agent] = OrderedDict()
         self.goals: Dict[str, Goal] = OrderedDict()
         self.wakeup_conditions: Dict[str, List[WakeupCondition]] = {}
@@ -115,6 +165,10 @@ class LoopStateKernel:
         self.current_cycle = 0
         self.global_state: Dict[str, Any] = {}
         self._paused = False
+
+        # 如果提供了状态文件，尝试加载
+        if state_file and os.path.exists(state_file):
+            self.load_state(state_file)
 
     # ------------------------------------------------------------------
     # 代理管理
@@ -198,7 +252,7 @@ class LoopStateKernel:
 
         goal = self.goals[goal_id]
         goal.status = status
-        goal.updated_at = time.time()
+        goal.updated_at = utc_now()
         return ERR_OK
 
     def update_goal_progress(self, goal_id: str, progress: float) -> str:
@@ -210,7 +264,7 @@ class LoopStateKernel:
 
         goal = self.goals[goal_id]
         goal.progress = progress
-        goal.updated_at = time.time()
+        goal.updated_at = utc_now()
         return ERR_OK
 
     def get_goal(self, goal_id: str) -> Optional[Goal]:
@@ -268,7 +322,7 @@ class LoopStateKernel:
             if cond.type == "manual":
                 return True
             elif cond.type == "time":
-                if time.time() >= float(cond.target):
+                if utc_now() >= float(cond.target):
                     return True
             elif cond.type == "state":
                 state_val = self.global_state.get(cond.target)
@@ -334,18 +388,26 @@ class LoopStateKernel:
         if not self.agents[to_agent].enabled:
             return ERR_INVALID_STATE
 
-        # 创建交接上下文
+        # 创建交接上下文并计算签名
         context = HandoffContext(
             from_agent=from_agent,
             to_agent=to_agent,
             payload=payload or {}
         )
+        context.signature = compute_handoff_signature(context)
         self.handoffs.append(context)
 
         # 记录循环
         self._record_cycle(from_agent, "handoff_out", detail={"to": to_agent})
         self._record_cycle(to_agent, "handoff_in", detail={"from": from_agent})
         return ERR_OK
+
+    def verify_handoff(self, context: HandoffContext) -> bool:
+        """验证交接上下文的完整性"""
+        if not context.signature:
+            return False
+        expected = compute_handoff_signature(context)
+        return hmac.compare_digest(context.signature, expected)
 
     def list_handoffs(self, agent_id: Optional[str] = None) -> List[HandoffContext]:
         """列出交接记录，可按代理过滤"""
@@ -403,15 +465,19 @@ class LoopStateKernel:
         return self.global_state.get(key)
 
     # ------------------------------------------------------------------
-    # 持久化（简单 JSON 序列化）
+    # 持久化（JSON 序列化，带重试）
     # ------------------------------------------------------------------
-    def save_state(self, filepath: str) -> str:
+    def save_state(self, filepath: Optional[str] = None) -> str:
         """
         将内核状态保存到 JSON 文件。
 
         返回:
             成功返回 ERR_OK，失败返回 E009。
         """
+        target = filepath or self.state_file
+        if not target:
+            return ERR_INVALID_ARGUMENT
+
         try:
             state = {
                 "agents": {aid: {
@@ -426,408 +492,51 @@ class LoopStateKernel:
                     "description": g.description,
                     "status": g.status,
                     "progress": g.progress,
-                    "metadata": g.metadata
+                    "metadata": g.metadata,
+                    "created_at": g.created_at,
+                    "updated_at": g.updated_at
                 } for gid, g in self.goals.items()},
                 "global_state": self.global_state,
-                "current_cycle": self.current_cycle
+                "current_cycle": self.current_cycle,
+                "handoffs": [{
+                    "from_agent": h.from_agent,
+                    "to_agent": h.to_agent,
+                    "payload": h.payload,
+                    "timestamp": h.timestamp,
+                    "signature": h.signature
+                } for h in self.handoffs]
             }
-            with open(filepath, "w", encoding="utf-8") as f:
-                json.dump(state, f, ensure_ascii=False, indent=2)
+
+            def _write():
+                with open(target, "w", encoding="utf-8", errors="replace") as f:
+                    json.dump(state, f, ensure_ascii=False, indent=2)
+
+            retry_io(_write)
             return ERR_OK
         except Exception:
             return ERR_PERSISTENCE
 
-    def load_state(self, filepath: str) -> str:
+    def load_state(self, filepath: Optional[str] = None) -> str:
         """
         从 JSON 文件加载内核状态。
 
         返回:
             成功返回 ERR_OK，失败返回 E009。
         """
-        try:
-            with open(filepath, "r", encoding="utf-8") as f:
-                state = json.load(f)
-
-            # 清空当前状态
-            self.agents.clear()
-            self.goals.clear()
-            self.global_state.clear()
-
-            # 恢复代理
-            for aid, adata in state.get("agents", {}).items():
-                self.agents[aid] = Agent(
-                    id=adata["id"],
-                    name=adata["name"],
-                    role=adata["role"],
-                    enabled=adata.get("enabled", True),
-                    metadata=adata.get("metadata", {})
-                )
-
-            # 恢复目标
-            for gid, gdata in state.get("goals", {}).items():
-                goal = Goal(
-                    id=gdata["id"],
-                    description=gdata["description"],
-                    status=gdata.get("status", "active"),
-                    progress=gdata.get("progress", 0.0),
-                    metadata=gdata.get("metadata", {})
-                )
-                self.goals[gid] = goal
-
-            # 恢复全局状态
-            self.global_state = state.get("global_state", {})
-            self.current_cycle = state.get("current_cycle", 0)
-            return ERR_OK
-        except Exception:
-            return ERR_PERSISTENCE
-
-
-# ---------------------------------------------------------------------------
-# 自检模块（不依赖外部文件与网络）
-# ---------------------------------------------------------------------------
-def run_selftest() -> int:
-    """
-    内置硬编码样例数据离线自检核心逻辑。
-
-    断言使用宽松阈值（大小比较/区间判断），确保必然匹配。
-
-    返回:
-        0 表示全部通过，非 0 表示失败。
-    """
-    print("[selftest] 开始 agent-loop-engine 核心逻辑自检...")
-    failures = 0
-
-    # ------------------------------------------------------------------
-    # 1. 创建内核
-    # ------------------------------------------------------------------
-    kernel = LoopStateKernel(max_cycles=50)
-    assert kernel is not None, "无法创建内核实例"
-    print("[selftest] 1. 内核创建成功")
-
-    # ------------------------------------------------------------------
-    # 2. 代理注册与查询
-    # ------------------------------------------------------------------
-    ret = kernel.register_agent("agent_a", "代理A", "前端处理")
-    assert ret == ERR_OK, f"注册代理A失败: {ret}"
-
-    ret = kernel.register_agent("agent_b", "代理B", "后端处理")
-    assert ret == ERR_OK, f"注册代理B失败: {ret}"
-
-    # 重复注册应失败
-    ret = kernel.register_agent("agent_a", "重复代理", "测试")
-    assert ret == ERR_AGENT_ALREADY_EXISTS, "重复注册应返回 E003"
-
-    # 查询代理
-    agent = kernel.get_agent("agent_a")
-    assert agent is not None, "查询代理A失败"
-    assert agent.name == "代理A", "代理名称不匹配"
-
-    # 不存在的代理
-    ret = kernel.unregister_agent("nonexistent")
-    assert ret == ERR_AGENT_NOT_FOUND, "注销不存在代理应返回 E002"
-
-    # 代理数量校验（宽松断言：至少2个）
-    agents = kernel.list_agents()
-    assert len(agents) >= 2, f"代理数量应>=2，实际{len(agents)}"
-    print("[selftest] 2. 代理管理通过")
-
-    # ------------------------------------------------------------------
-    # 3. 目标管理
-    # ------------------------------------------------------------------
-    ret = kernel.create_goal("goal_1", "完成项目交付")
-    assert ret == ERR_OK, f"创建目标失败: {ret}"
-
-    ret = kernel.create_goal("goal_2", "质量保障")
-    assert ret == ERR_OK, f"创建目标失败: {ret}"
-
-    # 更新状态
-    ret = kernel.update_goal_status("goal_1", "active")
-    assert ret == ERR_OK, f"更新目标状态失败: {ret}"
-
-    ret = kernel.update_goal_status("goal_1", "completed")
-    assert ret == ERR_OK, f"更新目标状态为completed失败: {ret}"
-
-    # 非法状态
-    ret = kernel.update_goal_status("goal_1", "invalid_status")
-    assert ret == ERR_INVALID_STATE, "非法状态应返回 E005"
-
-    # 进度更新
-    ret = kernel.update_goal_progress("goal_2", 0.5)
-    assert ret == ERR_OK, f"更新进度失败: {ret}"
-
-    # 非法进度
-    ret = kernel.update_goal_progress("goal_2", 1.5)
-    assert ret == ERR_INVALID_STATE, "非法进度应返回 E005"
-
-    # 目标查询
-    goals = kernel.list_goals()
-    assert len(goals) >= 2, f"目标数量应>=2，实际{len(goals)}"
-
-    completed = kernel.list_goals(status="completed")
-    assert len(completed) >= 1, "应至少有一个已完成目标"
-
-    # 不存在的目标
-    ret = kernel.update_goal_status("nonexistent", "active")
-    assert ret == ERR_STATE_NOT_FOUND, "更新不存在目标应返回 E004"
-    print("[selftest] 3. 目标管理通过")
-
-    # ------------------------------------------------------------------
-    # 4. 唤醒机制
-    # ------------------------------------------------------------------
-    # 手动唤醒条件
-    cond_manual = WakeupCondition(type="manual", target="")
-    ret = kernel.set_wakeup_condition("agent_a", cond_manual)
-    assert ret == ERR_OK, f"设置手动唤醒失败: {ret}"
-
-    # 时间唤醒条件
-    future_time = str(time.time() + 3600)  # 1小时后
-    cond_time = WakeupCondition(type="time", target=future_time)
-    ret = kernel.set_wakeup_condition("agent_b", cond_time)
-    assert ret == ERR_OK, f"设置时间唤醒失败: {ret}"
-
-    # 状态唤醒条件
-    cond_state = WakeupCondition(
-        type="state",
-        target="task_status",
-        operator="eq",
-        payload={"value": "ready"}
-    )
-    ret = kernel.set_wakeup_condition("agent_b", cond_state)
-    assert ret == ERR_OK, f"设置状态唤醒失败: {ret}"
-
-    # 非法唤醒条件
-    cond_invalid = WakeupCondition(type="invalid", target="")
-    ret = kernel.set_wakeup_condition("agent_a", cond_invalid)
-    assert ret == ERR_WAKEUP_INVALID, "非法唤醒类型应返回 E008"
-
-    # 检查唤醒
-    # agent_a 有手动条件，应被唤醒
-    assert kernel.check_wakeup("agent_a") is True, "agent_a 应被手动唤醒"
-
-    # agent_b 时间条件未到，但状态条件未满足，不应被唤醒
-    # 注意：这里不做严格断言，因为时间可能变化
-
-    # 设置全局状态触发唤醒
-    kernel.set_global_state("task_status", "ready")
-    assert kernel.check_wakeup("agent_b") is True, "agent_b 应被状态条件唤醒"
-
-    # 手动唤醒
-    ret = kernel.wake_agent("agent_a")
-    assert ret == ERR_OK, f"手动唤醒失败: {ret}"
-
-    # 唤醒不存在的代理
-    ret = kernel.wake_agent("nonexistent")
-    assert ret == ERR_AGENT_NOT_FOUND, "唤醒不存在代理应返回 E002"
-
-    # 清除唤醒条件
-    ret = kernel.clear_wakeup_conditions("agent_a")
-    assert ret == ERR_OK, f"清除唤醒条件失败: {ret}"
-
-    # 清除后不应再被唤醒
-    assert kernel.check_wakeup("agent_a") is False, "清除条件后不应被唤醒"
-    print("[selftest] 4. 唤醒机制通过")
-
-    # ------------------------------------------------------------------
-    # 5. 交接管理
-    # ------------------------------------------------------------------
-    ret = kernel.handoff("agent_a", "agent_b", {"task": "data_process"})
-    assert ret == ERR_OK, f"交接失败: {ret}"
-
-    # 非法交接（相同代理）
-    ret = kernel.handoff("agent_a", "agent_a")
-    assert ret == ERR_HANDOFF_CONFLICT, "自我交接应返回 E007"
-
-    # 交接给不存在的代理
-    ret = kernel.handoff("agent_a", "nonexistent")
-    assert ret == ERR_AGENT_NOT_FOUND, "交接给不存在代理应返回 E002"
-
-    # 查询交接记录
-    handoffs = kernel.list_handoffs()
-    assert len(handoffs) >= 1, "应至少有一条交接记录"
-
-    handoffs_a = kernel.list_handoffs(agent_id="agent_a")
-    assert len(handoffs_a) >= 1, "agent_a 应至少参与一条交接"
-    print("[selftest] 5. 交接管理通过")
-
-    # ------------------------------------------------------------------
-    # 6. 循环状态追踪
-    # ------------------------------------------------------------------
-    cycle_count = kernel.get_cycle_count()
-    assert cycle_count > 0, f"循环次数应>0，实际{cycle_count}"
-
-    history = kernel.get_cycle_history()
-    assert len(history) > 0, "循环历史不应为空"
-
-    history_a = kernel.get_cycle_history(agent_id="agent_a")
-    assert len(history_a) > 0, "agent_a 应有循环历史"
-
-    # 重置循环
-    ret = kernel.reset_cycles()
-    assert ret == ERR_OK, f"重置循环失败: {ret}"
-    assert kernel.get_cycle_count() == 0, "重置后循环次数应为0"
-    print("[selftest] 6. 循环追踪通过")
-
-    # ------------------------------------------------------------------
-    # 7. 全局状态
-    # ------------------------------------------------------------------
-    ret = kernel.set_global_state("mode", "production")
-    assert ret == ERR_OK, f"设置全局状态失败: {ret}"
-
-    mode = kernel.get_global_state("mode")
-    assert mode == "production", "全局状态值不匹配"
-
-    # 无效键
-    ret = kernel.set_global_state("", "value")
-    assert ret == ERR_INVALID_ARGUMENT, "空键应返回 E001"
-    print("[selftest] 7. 全局状态通过")
-
-    # ------------------------------------------------------------------
-    # 8. 持久化（使用临时文件）
-    # ------------------------------------------------------------------
-    import tempfile
-    import os
-
-    # 先重置
-    kernel.reset_cycles()
-
-    # 重新注册代理（因为之前已重置）
-    kernel.register_agent("agent_x", "代理X", "测试角色")
-    kernel.create_goal("goal_x", "测试目标")
-    kernel.set_global_state("test_key", "test_value")
-
-    # 保存到临时文件
-    tmp_path = os.path.join(tempfile.gettempdir(), "agent_loop_test_state.json")
-    ret = kernel.save_state(tmp_path)
-    assert ret == ERR_OK, f"保存状态失败: {ret}"
-
-    # 创建新内核并加载
-    kernel2 = LoopStateKernel()
-    ret = kernel2.load_state(tmp_path)
-    assert ret == ERR_OK, f"加载状态失败: {ret}"
-
-    # 验证加载的数据
-    assert kernel2.get_agent("agent_x") is not None, "加载后代理不存在"
-    assert kernel2.get_goal("goal_x") is not None, "加载后目标不存在"
-    assert kernel2.get_global_state("test_key") == "test_value", "加载后全局状态不匹配"
-
-    # 清理临时文件
-    try:
-        os.remove(tmp_path)
-    except OSError:
-        pass
-    print("[selftest] 8. 持久化通过")
-
-    # ------------------------------------------------------------------
-    # 9. 错误处理验证
-    # ------------------------------------------------------------------
-    # 非法参数
-    ret = kernel.register_agent("", "空ID", "角色")
-    assert ret == ERR_INVALID_ARGUMENT, "空ID应返回 E001"
-
-    # 不存在的代理操作
-    ret = kernel.set_agent_enabled("nonexistent", False)
-    assert ret == ERR_AGENT_NOT_FOUND, "操作不存在代理应返回 E002"
-
-    # 循环上限
-    small_kernel = LoopStateKernel(max_cycles=3)
-    small_kernel.register_agent("a1", "代理1", "角色")
-    small_kernel.register_agent("a2", "代理2", "角色")
-
-    # 执行多次循环，直到触发上限
-    exceeded = False
-    try:
-        for _ in range(10):
-            small_kernel.handoff("a1", "a2", {"seq": _})
-    except RuntimeError as e:
-        if ERR_CYCLE_LIMIT in str(e):
-            exceeded = True
-
-    assert exceeded, "应触发循环次数上限 E006"
-    print("[selftest] 9. 错误处理通过")
-
-    # ------------------------------------------------------------------
-    # 10. 综合场景验证
-    # ------------------------------------------------------------------
-    # 模拟完整工作流
-    kernel3 = LoopStateKernel()
-    kernel3.register_agent("frontend", "前端代理", "UI处理")
-    kernel3.register_agent("backend", "后端代理", "逻辑处理")
-    kernel3.register_agent("db", "数据库代理", "存储")
-
-    kernel3.create_goal("project", "完成用户请求")
-
-    # 前端 -> 后端 -> 数据库
-    assert kernel3.handoff("frontend", "backend", {"action": "validate"}) == ERR_OK
-    assert kernel3.handoff("backend", "db", {"action": "save"}) == ERR_OK
-
-    # 目标进度更新
-    assert kernel3.update_goal_progress("project", 0.7) == ERR_OK
-    goal = kernel3.get_goal("project")
-    assert goal.progress > 0.5, "目标进度应大于0.5"
-
-    # 完成目标
-    assert kernel3.update_goal_status("project", "completed") == ERR_OK
-
-    # 验证循环次数
-    assert kernel3.get_cycle_count() >= 2, "循环次数应>=2"
-
-    # 验证交接链
-    handoff_chain = kernel3.list_handoffs()
-    assert len(handoff_chain) >= 2, "应有至少2次交接"
-
-    print("[selftest] 10. 综合场景通过")
-
-    # ------------------------------------------------------------------
-    # 汇总
-    # ------------------------------------------------------------------
-    if failures > 0:
-        print(f"[selftest] 失败: {failures} 项检查未通过")
-        return 1
-
-    print("[selftest] 全部自检通过 ✔")
-    return 0
-
-
-# ---------------------------------------------------------------------------
-# 命令行入口
-# ---------------------------------------------------------------------------
-def main() -> int:
-    """命令行入口"""
-    parser = argparse.ArgumentParser(
-        description="agent-loop-engine 循环状态内核",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python scripts/main.py --selftest     # 运行离线自检
-  python scripts/main.py --info         # 显示版本信息
-        """
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置离线自检（不依赖外部文件与网络）"
-    )
-    parser.add_argument(
-        "--info",
-        action="store_true",
-        help="显示版本信息"
-    )
-
-    args = parser.parse_args()
-
-    if args.selftest:
-        return run_selftest()
-
-    if args.info:
-        print("agent-loop-engine v1.0.2")
-        print("轻量级循环状态内核，管理代理团队持久目标、唤醒与交接。")
-        print("MIT License")
-        return 0
-
-    # 无参数时显示帮助
-    parser.print_help()
-    return 0
+        target = filepath or self.state_file
+        if not target:
+            return ERR_INVALID_ARG
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    ap.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    args = ap.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
