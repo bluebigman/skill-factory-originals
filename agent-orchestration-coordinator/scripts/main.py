@@ -692,6 +692,12 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="仅预览不执行（本脚本无落盘操作，保留参数以兼容）")
     parser.add_argument("--force", action="store_true", help="强制执行（本脚本无落盘操作，保留参数以兼容）")
 
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     # 自检模式

@@ -1,0 +1,32 @@
+{
+  "timestamp": "20260811_233419",
+  "slug": "agent-orchestration-coordinator",
+  "spec": {
+    "slug": "agent-orchestration-coordinator",
+    "name": "agent-orchestration-coordinator",
+    "description": "协调多个AI代理分工协作，跟踪任务进度并汇总结果，适用于复杂工作流编排。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. **任务结构化拆解**：将用户描述的自然语言任务，拆解为可独立执行的子任务清单，并为每个子任务标注依赖关系（无依赖的任务可并行）。",
+      "2. **代理角色匹配**：根据子任务类型（如检索、分析、写作、审查），推荐合适的代理角色或工具类型，并给出匹配理由。",
+      "3. **进度状态跟踪**：为每个子任务维护状态机（待分配 → 执行中 → 已完成 → 失败），支持中途查询整体进度。",
+      "4. **结果汇总与冲突消解**：收集各代理返回的结果，按预设模板合并；若多个代理对同一问题给出矛盾结论，在输出中并列展示并标注差异。",
+      "5. **置信度标注与人工复核建议**：对每个汇总结果标注置信度（高/中/低），置信度为\"低\"的条目自动标记 `[需核实:字段名]`，提示用户介入确认。",
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "e3aa204aa824a9e3",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
