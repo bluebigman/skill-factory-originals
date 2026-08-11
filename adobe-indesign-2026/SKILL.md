@@ -2,9 +2,9 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: adobe-indesign-2026
 name: adobe-indesign-2026
-displayName: 版式自动化 脚本批处理 工作流配置
+displayName: 版式自动化 脚本批处理 工作流调优
 description: InDesign 2026 脚本编写、批处理与工作流调优的实用操作指南。
-version: 1.0.2
+version: 1.0.3
 rules_version: cpr-20260811-n351
 license: MIT
 source_project: original
@@ -15,11 +15,7 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 版式工坊
 agent_created: true
-trigger_words: ["adobe indesign 2026", "indesign脚本", "indesign自动化", "版式批处理", "indesign工作流", "indesign脚本编写", "版式自动化处理"]
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
+trigger_words: ["adobe indesign 2026", "indesign脚本", "indesign自动化", "版式批处理", "indesign工作流", "indesign批量处理", "indesign脚本编写"]
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -27,246 +23,318 @@ trigger_words: ["adobe indesign 2026", "indesign脚本", "indesign自动化", "�
 <!-- professional-disclaimer-injected -->
 
 
-# Adobe InDesign 2026 脚本与工作流实用指南
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-## 一、能力边界（一页纸速查卡）
+# InDesign 2026 脚本编写与批处理操作指南
+
+## 一、能力边界：能做与不能做
 
 ### 1.1 本 Skill 能做什么
 
 | 能力项 | 具体说明 | 适用场景 |
 |--------|----------|----------|
-| 脚本编写 | 提供 ExtendScript / UXP 脚本片段，覆盖文档操作、对象创建、样式批量应用 | 批量生成页面元素、自动排版 |
-| 工作流优化 | 梳理从数据准备到成品导出的完整链路，含命名规范与文件组织建议 | 期刊排版、产品手册更新 |
-| 配置调整 | 说明首选项、脚本面板、快捷键等环境配置方法 | 团队统一环境、个人效率提升 |
-| 批处理方案 | 给出多文档批量处理的思路与代码骨架 | 多章节书籍、系列物料产出 |
+| 脚本编写 | 提供 `.jsx` 脚本编写规范、常用 API 调用示例 | 自动化重复性版式操作 |
+| 批处理 | 指导批量处理多文档的流程设计 | 杂志、画册、多页报告批量排版 |
+| 工作流调优 | 优化脚本执行效率、减少卡顿与报错 | 大型文档处理、频繁脚本运行 |
+| 脚本部署 | 说明脚本安装路径与加载方式 | 团队共享脚本、个人脚本管理 |
+| 错误排查 | 提供常见错误码与修正方案 | 脚本运行失败、异常中断 |
 
-### 1.2 本 Skill 不做什么
+### 1.2 本 Skill 不能做什么
 
-- 不提供视觉设计建议（配色、字体搭配等美学判断）。
-- 不替代官方文档，不解释每一个 API 的完整参数。
-- 不保证脚本在旧版本（低于 20.x）或非官方渠道版本上运行。
-- 不涉及插件开发（CEP/UXP 插件工程化）。
+| 限制项 | 说明 |
+|--------|------|
+| 不提供 GUI 自动化 | 不涉及鼠标键盘模拟操作 |
+| 不覆盖插件开发 | 不涉及 C++/Swift 原生插件编写 |
+| 不处理非脚本问题 | 不解决 InDesign 崩溃、字体缺失等系统性问题 |
+| 不保证脚本兼容性 | 不同版本 InDesign 的 DOM 对象可能有差异 |
 
-### 1.3 适用对象
+### 1.3 适用对象速查
 
-- 已安装 InDesign 2026（版本号 20.x 或更高）的排版人员。
-- 需要处理重复性版式任务的编辑、运营、设计人员。
-- 对脚本零基础但希望提升效率的初学者。
+- **版式设计师**：需要批量处理多页文档的重复操作
+- **出版编辑**：需要统一调整多文档格式
+- **自动化工程师**：需要将 InDesign 集成到自动化流水线
+- **团队管理者**：需要标准化团队脚本使用流程
 
 ---
 
 ## 二、触发方式与场景映射
 
-当你的需求与下表描述相符时，可调用本 Skill 获取操作指引。
+### 2.1 触发词
 
-| 触发词/短语 | 实际场景（大白话） | 你将获得 |
-|-------------|-------------------|----------|
-| "indesign脚本" | 我想让 InDesign 自动做某件事，不想手动点来点去 | 可直接运行的脚本示例与说明 |
-| "indesign自动化" | 每周都要做同样版式的周报，太烦了 | 批处理思路与代码骨架 |
-| "版式批处理" | 有 50 个文档需要统一改页眉页脚 | 多文档处理方案 |
-| "indesign工作流" | 团队协作时文件命名混乱、版本对不上 | 命名规范与流程建议 |
-| "indesign脚本编写" | 我想自己写脚本，但不知道从哪开始 | 语法基础、对象模型速览、调试技巧 |
+直接使用以下任一触发词即可激活本 Skill：
+
+- `adobe indesign 2026`
+- `indesign脚本`
+- `indesign自动化`
+- `版式批处理`
+- `indesign工作流`
+- `indesign批量处理`
+- `indesign脚本编写`
+
+### 2.2 场景映射表
+
+| 用户实际需求（大白话） | 对应能力模块 | 预期输出 |
+|----------------------|-------------|----------|
+| "我想让 InDesign 自动把 100 页的图片都压缩一下" | 批处理脚本设计 | 脚本代码 + 运行步骤 |
+| "每次排版都要手动调页边距，太烦了" | 脚本编写规范 | 自动化脚本示例 |
+| "团队里其他人怎么用我写的脚本？" | 脚本部署指南 | 安装路径 + 加载方法 |
+| "脚本跑一半报错了，怎么办？" | 错误排查 | 错误码对照表 + 修正步骤 |
+| "有没有办法让脚本跑得更快？" | 工作流调优 | 性能优化建议 |
 
 ---
 
 ## 三、标准操作流程
 
-### 3.1 前置条件检查
+### 3.1 前置条件
 
-| 检查项 | 要求 | 验证方法 |
+| 条件项 | 要求 | 验证方法 |
 |--------|------|----------|
-| 软件版本 | InDesign 2026（20.x+） | 帮助 > 关于 InDesign |
-| 脚本面板 | 已启用 | 窗口 > 实用程序 > 脚本（快捷键 Alt+Ctrl+F11） |
-| 数据文件 | CSV 编码为 UTF-8（如需外部数据） | 用记事本打开查看是否乱码 |
-| 测试文档 | 建议先复制正式文件副本进行验证 | 文件 > 存储副本 |
+| InDesign 版本 | 2026 或更高版本 | 帮助 > 关于 InDesign |
+| 脚本语言 | ExtendScript（`.jsx`） | 文件扩展名确认 |
+| 脚本面板 | 窗口 > 实用程序 > 脚本 | 面板可见即可 |
+| 文件权限 | 对脚本文件夹有读写权限 | 尝试新建文件 |
 
-### 3.2 执行步骤（以"批量创建文本框"为例）
+### 3.2 脚本部署流程
 
-**步骤 1：新建文档**
+**步骤 1：打开脚本面板**
 
-打开 InDesign 2026，执行 文件 > 新建 > 文档，设置页面尺寸为 A4（210×297mm），边距 20mm。
+启动 InDesign 2026，点击菜单栏 `窗口 > 实用程序 > 脚本`，确保脚本面板可见。
 
-**步骤 2：打开脚本面板**
+**步骤 2：定位用户脚本文件夹**
 
-窗口 > 实用程序 > 脚本，面板将出现在右侧。
+在脚本面板中，右键点击"用户"文件夹，选择"在资源管理器中显示"（Windows）或"在 Finder 中显示"（macOS）。系统会打开对应的文件管理器窗口。
 
-**步骤 3：粘贴并运行脚本**
+**步骤 3：放置脚本文件**
 
-在脚本面板中，右键点击"用户"文件夹，选择"在资源管理器中显示"。将以下代码保存为 `create_text_frames.jsx`，然后回到 InDesign，双击该文件运行：
+将编写好的 `.jsx` 文件复制到该文件夹中。建议使用英文文件名，避免中文文件名可能导致的编码问题。
+
+**步骤 4：刷新脚本面板**
+
+回到 InDesign，在脚本面板中右键点击"用户"文件夹，选择"刷新"。新放入的脚本文件会出现在列表中。
+
+**步骤 5：运行脚本**
+
+双击脚本名称即可运行。如需调试，可右键选择"编辑脚本"打开 ExtendScript 编辑器。
+
+### 3.3 脚本编写规范
+
+#### 3.3.1 基础结构模板
 
 ```javascript
-// 批量创建文本框脚本
-// 适用于 InDesign 2026 (v20.x)
-// 功能：在当前页面创建 3 个等宽文本框
+// 脚本名称：批量设置页边距
+// 功能描述：为当前文档所有页面设置统一页边距
+// 适用版本：InDesign 2026
 
-if (app.documents.length > 0) {
-    var doc = app.activeDocument;
-    var page = doc.pages[0];
-    var frameWidth = 60; // 单位：毫米
-    var frameHeight = 40;
-    var gap = 10;
-    var startX = 20;
-    var startY = 20;
-
-    for (var i = 0; i < 3; i++) {
-        var frame = page.textFrames.add();
-        frame.geometricBounds = [
-            startY,
-            startX + i * (frameWidth + gap),
-            startY + frameHeight,
-            startX + i * (frameWidth + gap) + frameWidth
-        ];
-        frame.contents = "文本框 " + (i + 1) + " - 创建时间: " + new Date().toLocaleString();
+// 主函数入口
+function main() {
+    // 检查是否有打开的文档
+    if (app.documents.length === 0) {
+        alert("请先打开一个文档");
+        return;
     }
-    alert("已创建 3 个文本框");
-} else {
-    alert("请先打开一个文档");
+    
+    var doc = app.activeDocument;
+    var margin = 20; // 页边距（毫米）
+    
+    // 遍历所有页面
+    for (var i = 0; i < doc.pages.length; i++) {
+        var page = doc.pages[i];
+        page.marginPreferences.top = margin;
+        page.marginPreferences.bottom = margin;
+        page.marginPreferences.left = margin;
+        page.marginPreferences.right = margin;
+    }
+    
+    alert("已完成 " + doc.pages.length + " 页的页边距设置");
 }
+
+// 执行主函数
+main();
 ```
 
-**步骤 4：查看结果**
+#### 3.3.2 常用 API 参数表
 
-观察页面，应出现 3 个水平排列的文本框，内容包含创建时间戳。
+| 操作对象 | 属性/方法 | 参数说明 | 示例值 |
+|----------|-----------|----------|--------|
+| 文档 | `pages` | 页面集合 | `doc.pages` |
+| 页面 | `marginPreferences` | 页边距设置 | `top/left/right/bottom` |
+| 页面 | `resize()` | 调整页面尺寸 | `[width, height]` |
+| 文本框架 | `contents` | 文本内容 | `frame.contents` |
+| 图片 | `place()` | 置入图片 | `frame.place(File)` |
+| 导出 | `exportFile()` | 导出文件 | `doc.exportFile(Format.PDF, File)` |
 
-### 3.3 输出规范
+#### 3.3.3 输出规范
 
-| 输出类型 | 命名规则 | 示例 |
-|----------|----------|------|
-| 脚本文件 | `功能描述_版本号.jsx` | `create_frames_v1.jsx` |
-| 导出文档 | `output_YYYYMMDD_HHMM.indd` | `output_20260811_1430.indd` |
-| 批处理日志 | `batch_log_YYYYMMDD.txt` | `batch_log_20260811.txt` |
+脚本运行后应满足以下输出要求：
+
+| 输出类型 | 规范要求 |
+|----------|----------|
+| 成功提示 | 明确说明完成的操作内容和数量 |
+| 失败提示 | 包含错误码和简要原因 |
+| 日志记录 | 建议使用 `$.writeln()` 输出到控制台 |
+| 文件输出 | 明确输出路径和文件名格式 |
 
 ---
 
 ## 四、置信度门控
 
-当遇到以下情况时，本 Skill 不会给出具体参数或代码，而是输出 `[需核实:字段]` 占位符，由你自行查阅官方文档或测试确认：
+### 4.1 信息不足时的处理
+
+当遇到以下情况时，输出 `[需核实:字段]` 占位符，不进行编造：
 
 | 场景 | 处理方式 |
 |------|----------|
-| 涉及 2026 新增 API 的具体签名 | 输出 `[需核实:API签名]`，建议查阅官方 ExtendScript 文档 |
-| 特定字体/插件的行为差异 | 输出 `[需核实:字体行为]`，建议在测试文档中验证 |
-| 跨平台（Mac/Windows）路径差异 | 输出 `[需核实:平台路径]`，建议使用 `Folder.selectDialog()` 避免硬编码 |
-| 与第三方工具（如 Excel 导出）的兼容性 | 输出 `[需核实:数据格式]`，建议先检查数据文件编码 |
+| 不确定 API 是否在当前版本可用 | `[需核实:API名称]` |
+| 不确定脚本兼容性 | `[需核实:InDesign版本]` |
+| 不确定文件路径 | `[需核实:文件路径]` |
+| 不确定参数取值范围 | `[需核实:参数范围]` |
 
-**原则：不编造、不猜测。** 信息不足时，宁可让用户去查证，也不提供可能出错的代码。
+### 4.2 核实建议
+
+- 查阅 Adobe 官方 ExtendScript 文档
+- 在 InDesign 中打开 ExtendScript 编辑器，使用"帮助 > 对象模型查看器"
+- 在脚本面板中右键脚本，选择"编辑脚本"进行调试
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 现象 | 可能原因 | 提示话术 | 修正步骤 |
-|--------|------|----------|----------|----------|
-| ERR_001 | 脚本运行无反应 | 脚本面板未启用 | "请确认脚本面板已打开（窗口 > 实用程序 > 脚本）" | 1. 打开脚本面板 2. 重新运行 |
-| ERR_002 | 报错 "Object is invalid" | 没有打开文档 | "请先新建或打开一个 InDesign 文档" | 1. 新建文档 2. 重试 |
-| ERR_003 | 中文内容乱码 | 脚本文件编码不是 UTF-8 | "请将脚本文件另存为 UTF-8 编码" | 1. 用记事本打开 2. 另存为时选择 UTF-8 |
-| ERR_004 | 坐标位置不对 | 单位设置不是毫米 | "请检查文档标尺单位是否为毫米" | 1. 编辑 > 首选项 > 单位 2. 改为毫米 |
-| ERR_005 | 数据导入失败 | CSV 编码问题 | "请确认 CSV 文件编码为 UTF-8" | 1. 用记事本打开 CSV 2. 另存为 UTF-8 |
-| ERR_006 | 脚本执行超时 | 循环次数过多 | "建议分批处理，或优化循环逻辑" | 1. 检查循环边界 2. 增加进度提示 |
+### 5.1 常见错误码对照表
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|----------|----------|----------|
+| ERR-001 | 无打开的文档 | "请先打开一个 InDesign 文档" | 打开文档后重新运行 |
+| ERR-002 | 脚本文件路径错误 | "找不到脚本文件，请检查路径" | 确认文件在用户脚本文件夹中 |
+| ERR-003 | API 不存在 | "当前版本不支持该 API" | 检查 InDesign 版本，改用兼容 API |
+| ERR-004 | 权限不足 | "没有权限执行该操作" | 检查文件/文件夹权限设置 |
+| ERR-005 | 文档锁定 | "文档已被锁定，无法修改" | 解锁文档后重试 |
+| ERR-006 | 内存不足 | "内存不足，请关闭其他程序" | 关闭不必要的程序后重试 |
+| ERR-007 | 脚本语法错误 | "脚本存在语法错误，请检查" | 在 ExtendScript 编辑器中调试 |
+
+### 5.2 错误处理示例
+
+```javascript
+function safeExecute() {
+    try {
+        // 业务逻辑
+        var doc = app.activeDocument;
+        // ... 其他操作
+    } catch (e) {
+        // 错误处理
+        var errorCode = "ERR-UNKNOWN";
+        if (e.message.indexOf("No open document") >= 0) {
+            errorCode = "ERR-001";
+        }
+        alert("错误 " + errorCode + "：" + e.message);
+    }
+}
+```
 
 ---
 
-## 六、FAQ 与反模式对照
+## 六、FAQ 反模式对照
 
-### 6.1 常见坑
+### 6.1 常见坑与反模式
 
-| 坑 | 反模式（错误做法） | 正模式（推荐做法） |
-|----|-------------------|-------------------|
-| 硬编码路径 | `var file = File("C:/Users/xxx/Desktop/data.csv")` | 使用 `File.openDialog()` 让用户选择文件 |
-| 忽略单位 | 直接写 `frame.geometricBounds = [0,0,100,100]` | 先设置 `doc.viewPreferences.horizontalMeasurementUnits = MeasurementUnits.MILLIMETERS` |
-| 不检查文档 | 直接操作 `app.activeDocument` | 先判断 `app.documents.length > 0` |
-| 一次性处理全部 | 一个循环处理 500 个对象 | 每 50 个暂停一次，或使用 `app.scriptPreferences.userInteractionLevel` 控制 |
-| 忘记保存 | 脚本执行完直接退出 | 在脚本末尾添加 `doc.save()` 或提示用户手动保存 |
+| 常见坑 | 反模式（错误做法） | 正确做法 |
+|--------|-------------------|----------|
+| 脚本运行后无反应 | 不检查是否有打开的文档 | 先检查 `app.documents.length` |
+| 脚本报错但不知道原因 | 不捕获异常 | 使用 `try-catch` 捕获并输出错误信息 |
+| 脚本在不同电脑上表现不同 | 使用绝对路径 | 使用相对路径或 `Folder.selectDialog()` |
+| 批量处理时卡死 | 一次处理所有页面 | 分批处理，每批之间 `app.wait(100)` |
+| 脚本修改了错误的对象 | 不指定具体文档/页面 | 始终使用 `app.activeDocument` 并验证 |
 
-### 6.2 反模式对照表
+### 6.2 性能调优建议
 
-| 反模式 | 问题 | 替代方案 |
-|--------|------|----------|
-| 复制粘贴网上代码不测试 | 版本不兼容、语法错误 | 先在测试文档上运行，逐步排查 |
-| 所有操作都写脚本 | 简单操作脚本化反而低效 | 评估 ROI，重复 3 次以上才值得写脚本 |
-| 脚本不写注释 | 三个月后自己都看不懂 | 关键步骤加注释，说明参数含义 |
-| 忽略错误处理 | 中途报错导致数据丢失 | 添加 try-catch 块，记录错误日志 |
-
----
-
-## 七、渐进式披露路径
-
-### 7.1 速查卡（30 秒上手）
-
-1. 打开 InDesign 2026 → 新建文档
-2. 窗口 > 实用程序 > 脚本
-3. 右键"用户"文件夹 → 在资源管理器中显示
-4. 将 `.jsx` 文件放入该文件夹
-5. 回到 InDesign，双击脚本文件运行
-
-### 7.2 新手路径（首次使用）
-
-- 先阅读本指南的"标准操作流程"章节
-- 从最简单的脚本开始（如创建文本框）
-- 逐步添加功能：循环 → 条件判断 → 外部数据导入
-- 遇到错误时对照"错误码体系"排查
-
-### 7.3 进阶路径（有脚本基础）
-
-- 学习 InDesign 对象模型（Document → Page → TextFrame）
-- 掌握事件监听（`app.addEventListener`）实现自动化触发
-- 研究批处理模式：遍历文件夹内所有 `.indd` 文件
-- 探索 UXP 新架构（InDesign 2026 支持 UXP 扩展）
+| 场景 | 优化前 | 优化后 |
+|------|--------|--------|
+| 批量修改 100 页 | 循环内每次访问 DOM | 先获取页面数组，再遍历 |
+| 频繁读写文件 | 每次操作都打开/关闭文件 | 批量读取到内存，统一处理 |
+| 大量图片处理 | 逐张置入 | 使用 `place()` 批量置入 |
+| 复杂计算 | 在脚本中计算 | 预计算好数据，脚本只做赋值 |
 
 ---
 
-## 八、实用参数速查表
+## 七、渐进式披露
 
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `MeasurementUnits.MILLIMETERS` | 枚举 | 点（pt） | 设置标尺单位 |
-| `app.scriptPreferences.userInteractionLevel` | 枚举 | `UserInteractionLevels.INTERACTIVE` | 控制脚本运行时是否弹出对话框 |
-| `doc.pages.count()` | 方法 | - | 获取页数 |
-| `page.textFrames.add()` | 方法 | - | 添加文本框 |
-| `frame.geometricBounds` | 数组 | - | 格式 `[上, 左, 下, 右]`，单位由标尺决定 |
-| `frame.contents` | 属性 | "" | 文本框内容（纯文本） |
+### 7.1 速查卡（一页纸）
+
+```
+InDesign 2026 脚本速查卡
+========================
+
+1. 打开脚本面板：窗口 > 实用程序 > 脚本
+2. 脚本位置：右键"用户"文件夹 > 在资源管理器中显示
+3. 脚本格式：.jsx 文件
+4. 运行方式：双击脚本名称
+5. 调试方式：右键 > 编辑脚本
+
+常用 API：
+- app.activeDocument → 当前文档
+- doc.pages → 页面集合
+- page.marginPreferences → 页边距
+- frame.contents → 文本内容
+- doc.exportFile() → 导出文件
+
+错误处理：
+- 使用 try-catch 捕获异常
+- 检查 app.documents.length 避免空文档
+- 使用 alert() 输出错误信息
+```
+
+### 7.2 新手阅读路径
+
+**第一步**：阅读"能力边界"章节，了解本 Skill 能做什么、不能做什么。
+
+**第二步**：按照"标准操作流程"中的步骤，完成第一个脚本的部署和运行。
+
+**第三步**：参考"脚本编写规范"中的模板，修改参数后运行，观察效果。
+
+**第四步**：遇到问题时，查阅"错误码体系"和"FAQ 反模式"章节。
+
+### 7.3 进阶阅读路径
+
+**第一步**：深入研究"脚本编写规范"中的 API 参数表，理解各参数含义。
+
+**第二步**：学习"工作流调优"建议，优化现有脚本性能。
+
+**第三步**：设计完整的批处理流程，结合"置信度门控"确保脚本健壮性。
+
+**第四步**：建立团队脚本库，统一脚本规范和错误处理标准。
 
 ---
 
-## 九、用户协议
+## 八、用户协议
 
 <!-- user-agreement-injected -->
 
 **使用本 Skill 即表示您同意以下条款：**
 
 1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于因脚本运行导致的文档损坏、数据丢失、工作效率变化等后果。
+
 2. **禁止反向工程**：不得对本 Skill 文档进行反向工程、反编译、破解或试图提取底层逻辑用于商业竞争。
+
 3. **合规使用**：使用者应确保其使用场景符合 Adobe 软件许可协议及相关法律法规。
+
 4. **无担保**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保。
 
 ---
 
-## 十、许可证（License）
+## 九、许可证（License）
 
 <!-- professional-license-embedded -->
 
-**MIT License**
+### MIT License
 
-Copyright (c) 2026 版式工坊
+版权所有 (c) 2026 版式工坊
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士，允许其不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向其提供软件的人士这样做，但须满足以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+本软件按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权行为或其他方面，由软件或软件的使用或其他交易引起、产生或与之相关。
 
 ---
 
-*本 Skill 由 AI 辅助生成，仅供参考。使用前请结合自身环境验证。*
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
