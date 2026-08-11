@@ -1,0 +1,37 @@
+{
+  "timestamp": "20260811_225548",
+  "slug": "acts-as-money",
+  "spec": {
+    "slug": "acts-as-money",
+    "name": "acts-as-money",
+    "description": "将任意来源的金额数据解析、校验并转换为标准货币结构化结果。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 解析混合文本中的金额数值（支持千分位、小数点、正负数、括号负数表示法）",
+      "2. 识别常见货币符号与 ISO 4217 三字母代码（USD、EUR、CNY、JPY 等）",
+      "3. 从文件（CSV/JSON）或公开 URL 中批量提取金额数据",
+      "4. 对解析结果标注置信度（高/中/低），低置信度时给出原因",
+      "5. 按用户指定的字段顺序或别名输出结果",
+      "1. 不执行实时汇率换算（仅保留原始币种与数值）",
+      "2. 不访问需要登录或认证的私有 URL",
+      "3. 不处理扫描件或图片中的金额（OCR 超出范围）",
+      "4. 不推断缺失的币种信息（若输入未标注币种，输出 `currency: null` 并降低置信度）",
+      "5. 不进行金额的加减乘除等运算",
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "5140c5fcb59f3fb8",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
