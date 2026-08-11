@@ -1,0 +1,28 @@
+{
+  "timestamp": "20260811_235613",
+  "slug": "agentic-awesome-skills",
+  "spec": {
+    "slug": "agentic-awesome-skills",
+    "name": "AI智能体技能运行器",
+    "description": "拉取并运行 GitHub 技能仓库，自动处理依赖与镜像，返回结构化执行结果。",
+    "cli_interface": [],
+    "capability_outline": [
+      "- 输入不符合预期 → 返回错误说明与正确的输入格式示例",
+      "1. 收集用户输入并确认格式",
+      "2. 按功能逻辑处理输入内容",
+      "3. 生成结果并校验完整性"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "9f391a84d4de852f",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
