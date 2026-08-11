@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260812_022105",
+  "slug": "cheat.sh",
+  "spec": {
+    "slug": "cheat.sh",
+    "name": "cheat-sh",
+    "description": "命令行速查手册 - 一条命令查到任意编程语言与工具的可用代码示例，无需安装、无需翻文档，开发必备速查",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. **中文查询**：直接说「Python 读文件」，脚本自动转译为 `python/read+file`",
+      "2. **多结果对比**：先不加 `--index` 看第一个，再用 `--index 2` 看其他写法",
+      "3. **管道处理**：始终加 `--plain` 避免颜色码干扰",
+      "4. **离线使用**：先 `--cache` 缓存常用查询，断网后仍可复查",
+      "5. **关键词收窄**：结果太多时，加具体关键词如 `python/read+json+file`"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "2c9d07bf7f5ac1b8",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
