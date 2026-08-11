@@ -1,8 +1,0 @@
-{
-  "slug": "1",
-  "name": "clause-review",
-  "description": "条款解析、合规审查与风险标注工具。输入合同/协议文本，输出结构化审查报告（Markdown/JSON），识别关键义务、风险点与合规建议。",
-  "trigger_words": "",
-  "original_version": "2.0.0",
-  "capability_outline": []
-}

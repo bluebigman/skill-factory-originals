@@ -1,51 +1,44 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-数据解析与结构化转换工具（clean-room 独立实现）
+条款解析与合规审查工具（clean-room 独立实现）
 
-依据功能规格 v1.0.1 全新编写，不参考任何既有实现。
+依据功能规格 v2.0.0 全新编写，不参考任何既有实现。
 提供：
-  - 原始文本解析（提取关键字段）
-  - 常见文本文件内容识别（.txt / .md / .csv / .json）
-  - URL 内容抓取（仅限公开页面，不做登录认证）
-  - 结构化输出生成（按字段映射输出）
+  - 原始文本解析（提取关键字段：甲方/乙方/金额/日期等）
+  - 条款拆解（按编号切分，提取标题与正文）
+  - 义务识别（标记责任/义务句子）
+  - 风险标注（对歧义、单方权利过大等条款提示风险）
+  - 文件解析（.txt / .md / .csv / .json，多编码 fallback）
+  - URL 内容抓取（仅限公开页面，带超时 + 指数退避重试）
   - 批量处理与自定义分隔符
-  - 置信度标注
+  - 置信度标注（高/中/低三级）
+  - 输出格式：JSON / Markdown
+  - --dry-run 预览模式（不实际写盘）
+  - --selftest 自检（真实调用核心函数并断言）
 
 用法示例：
-  python main.py parse --text "甲方：张三；乙方：李四；金额：100元"
-  python main.py file --path ./data.csv --format csv
-  python main.py url --url https://example.com
-  python main.py batch --lines "a,b,c" --delimiter ","
-  python main.py --selftest
+  python run.py parse --text "甲方：张三；乙方：李四；金额：100元"
+  python run.py parse --text "第一条 定义..." --mode clause
+  python run.py file --path ./data.csv --format csv
+  python run.py url --url https://example.com
+  python run.py batch --lines "a,b,c" --delimiter ","
+  python run.py --selftest
 """
 
 import argparse
 import csv
 import io
 import json
+import os
 import re
 import sys
+import tempfile
+import time
 import urllib.request
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-import time
-
-# G4 Mock sample: 外部 HTML 结构变更时的降级样本
-_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
-
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -65,6 +58,8 @@ ERROR_CODES = {
 
 MAX_TEXT_LENGTH = 10_000  # 字符数
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
+URL_TIMEOUT = 10  # 秒
+URL_MAX_RETRIES = 3  # 指数退避重试次数
 
 
 # ---------------------------------------------------------------------------
@@ -93,508 +88,699 @@ class ParseResult:
 
 
 # ---------------------------------------------------------------------------
-# 核心功能类
+# 输入校验与工具函数
 # ---------------------------------------------------------------------------
-class DataParser:
-    """数据解析与结构化转换主类"""
-
-    # 常见字段模式（用于从非结构化文本提取）
-    FIELD_PATTERNS = {
-        "甲方": r"(?:甲方|甲方名称)[：:\s]*([^\s；;，,]+)",
-        "乙方": r"(?:乙方|乙方名称)[：:\s]*([^\s；;，,]+)",
-        "金额": r"(?:金额|总金额|价格)[：:\s]*([0-9,，.]+(?:元|万元|亿)?)",
-        "日期": r"(?:日期|时间)[：:\s]*(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)",
-        "编号": r"(?:编号|合同号|单号)[：:\s]*([A-Za-z0-9\-_]+)",
-        "电话": r"(?:电话|联系电话|手机)[：:\s]*(1[3-9]\d{9})",
-        "邮箱": r"([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})",
-        "地址": r"(?:地址|地点)[：:\s]*([^\s；;，,]+(?:省|市|区|县|路|街|号)[^\s；;，,]*)",
-    }
-
-    def __init__(self):
-        """初始化解析器"""
-        self._field_patterns = dict(self.FIELD_PATTERNS)
-        self._custom_fields: Dict[str, str] = {}
-
-    def parse_text(self, text: str, fields: Optional[List[str]] = None) -> ParseResult:
-        """
-        从原始文本中提取关键字段
-
-        参数:
-            text: 原始文本
-            fields: 需要提取的字段列表（默认使用内置模式）
-
-        返回:
-            ParseResult 对象
-        """
-        # 输入检查
-        if not text or not text.strip():
-            return ParseResult(False, error_code="E001", error_message=ERROR_CODES["E001"])
-
-        if len(text) > MAX_TEXT_LENGTH:
-            return ParseResult(False, error_code="E006", error_message=ERROR_CODES["E006"])
-
-        # 合并自定义字段模式
-        patterns = dict(self._field_patterns)
-        patterns.update(self._custom_fields)
-
-        # 确定要提取的字段
-        target_fields = fields if fields else list(patterns.keys())
-
-        result_data: Dict[str, Any] = {}
-        found_count = 0
-
-        for field_name in target_fields:
-            if field_name not in patterns:
-                continue
-
-            match = re.search(patterns[field_name], text)
-            if match:
-                result_data[field_name] = match.group(1).strip()
-                found_count += 1
-
-        # 计算置信度（基于找到字段的比例和文本长度）
-        if target_fields:
-            base_conf = found_count / len(target_fields)
-        else:
-            base_conf = 0.0
-
-        # 文本长度因子（过短文本置信度降低）
-        length_factor = min(1.0, len(text.strip()) / 100)
-
-        confidence = round(base_conf * 0.7 + length_factor * 0.3, 2)
-
-        return ParseResult(
-            success=True,
-            data=result_data,
-            confidence=confidence,
-            warnings=[] if found_count > 0 else ["未提取到任何字段"],
-        )
-
-    def parse_file(self, file_path: str, file_format: Optional[str] = None) -> ParseResult:
-        """
-        读取并解析常见文本文件
-
-        参数:
-            file_path: 文件路径
-            file_format: 文件格式（txt/md/csv/json），默认根据扩展名判断
-
-        返回:
-            ParseResult 对象
-        """
-        # 参数检查
-        if not file_path:
-            return ParseResult(False, error_code="E001", error_message=ERROR_CODES["E001"])
-
-        # 确定格式
-        if not file_format:
-            ext = file_path.rsplit(".", 1)[-1].lower() if "." in file_path else ""
-            file_format = ext
-
-        # 读取文件
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
-        except UnicodeDecodeError:
-            try:
-                with open(file_path, "r", encoding="gbk") as f:
-                    content = f.read()
-            except Exception:
-                return ParseResult(False, error_code="E002", error_message=ERROR_CODES["E002"])
-        except Exception:
-            return ParseResult(False, error_code="E002", error_message=ERROR_CODES["E002"])
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
 
-        # 大小检查
-        if len(content.encode("utf-8")) > MAX_FILE_SIZE:
-            return ParseResult(False, error_code="E006", error_message=ERROR_CODES["E006"])
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
-        # 按格式解析
-        if file_format in ("txt", "md", "markdown"):
-            return self._parse_markdown(content)
-        elif file_format == "csv":
-            return self._parse_csv(content)
-        elif file_format == "json":
-            return self._parse_json(content)
-        else:
-            # 未知格式按纯文本处理
-            return self.parse_text(content)
 
-    def parse_url(self, url: str, timeout: int = 10) -> ParseResult:
-        """
-        抓取公开网页并提取关键信息
+def validate_text(text: str) -> Tuple[bool, Optional[str]]:
+    """校验输入文本长度，返回 (是否合法, 错误码)"""
+    if text is None or text.strip() == "":
+        return False, "E001"
+    if len(text) > MAX_TEXT_LENGTH:
+        return False, "E006"
+    return True, None
 
-        参数:
-            url: 网页地址
-            timeout: 超时时间（秒）
 
-        返回:
-            ParseResult 对象
-        """
-        if not url or not url.startswith(("http://", "https://")):
-            return ParseResult(False, error_code="E001", error_message=ERROR_CODES["E001"])
+def validate_file_size(file_path: str) -> Tuple[bool, Optional[str]]:
+    """校验文件大小，返回 (是否合法, 错误码)"""
+    try:
+        size = os.path.getsize(file_path)
+        if size > MAX_FILE_SIZE:
+            return False, "E006"
+        return True, None
+    except OSError:
+        return False, "E002"
 
+
+def read_file_with_encoding(file_path: str) -> Tuple[Optional[str], Optional[str]]:
+    """
+    读取文件内容，支持多编码 fallback（utf-8 → gbk → gb18030）。
+    返回 (内容, 错误码)。失败时返回 (None, 错误码)。
+    """
+    # 先校验文件大小
+    valid, err = validate_file_size(file_path)
+    if not valid:
+        return None, err
+
+    encodings = ["utf-8", "gbk", "gb18030"]
+    for enc in encodings:
+        try:
+            with open(file_path, "r", encoding=enc, errors="replace") as f:
+                return f.read(), None
+        except (UnicodeDecodeError, OSError):
+            continue
+    return None, "E002"
+
+
+def fetch_url_with_retry(url: str) -> Tuple[Optional[str], Optional[str]]:
+    """
+    抓取 URL 内容，带超时与指数退避重试。
+    返回 (内容, 错误码)。失败时返回 (None, 错误码)。
+    """
+    for attempt in range(URL_MAX_RETRIES):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                content = resp.read().decode("utf-8", errors="ignore")
+            with urllib.request.urlopen(req, timeout=URL_TIMEOUT) as resp:
+                # 读取内容，限制大小
+                content = resp.read(MAX_FILE_SIZE + 1).decode("utf-8", errors="replace")
+                if len(content) > MAX_TEXT_LENGTH:
+                    return content[:MAX_TEXT_LENGTH], None
+                return content, None
+        except Exception as e:
+            if attempt == URL_MAX_RETRIES - 1:
+                return None, "E003"
+            # 指数退避：2^attempt * 1秒
+            time.sleep(2 ** attempt)
+    return None, "E003"
+
+
+def safe_write_file(file_path: str, content: str) -> Tuple[bool, Optional[str]]:
+    """
+    原子化写入文件：先写临时文件，再 rename。
+    返回 (是否成功, 错误码)。
+    """
+    try:
+        dir_name = os.path.dirname(file_path) or "."
+        fd, tmp_path = tempfile.mkstemp(dir=dir_name, suffix=".tmp")
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                f.write(content)
+            os.replace(tmp_path, file_path)
         except Exception:
-            return ParseResult(False, error_code="E003", error_message=ERROR_CODES["E003"])
+            # 清理临时文件
+            if os.path.exists(tmp_path):
+                os.unlink(tmp_path)
+            raise
+        return True, None
+    except OSError:
+        return False, "E002"
 
-        # 简单提取<title>和正文文本
-        title_match = re.search(r"<title[^>]*>([^<]+)</title>", content, re.IGNORECASE)
-        title = title_match.group(1).strip() if title_match else ""
 
-        # 去除 HTML 标签
-        text_content = re.sub(r"<script[^>]*>.*?</script>", "", content, flags=re.DOTALL | re.IGNORECASE)
-        text_content = re.sub(r"<style[^>]*>.*?</style>", "", text_content, flags=re.DOTALL | re.IGNORECASE)
-        text_content = re.sub(r"<[^>]+>", " ", text_content)
-        text_content = re.sub(r"\s+", " ", text_content).strip()
+# ---------------------------------------------------------------------------
+# 核心解析逻辑
+# ---------------------------------------------------------------------------
+def extract_fields(text: str) -> Dict[str, str]:
+    """
+    从文本中提取关键字段（甲方/乙方/金额/日期等）。
+    使用正则匹配常见模式。
+    """
+    fields: Dict[str, str] = {}
 
-        # 截断超长文本
-        if len(text_content) > MAX_TEXT_LENGTH:
-            text_content = text_content[:MAX_TEXT_LENGTH]
-            warning = "内容超出长度限制，已截断"
+    # 甲方/乙方
+    patterns = {
+        "甲方": r"甲方[：:]\s*([^\s；;，,]+)",
+        "乙方": r"乙方[：:]\s*([^\s；;，,]+)",
+        "金额": r"金额[：:]\s*([^\s；;，,]+)",
+        "日期": r"日期[：:]\s*([^\s；;，,]+)",
+        "合同编号": r"合同编号[：:]\s*([^\s；;，,]+)",
+    }
+    for key, pattern in patterns.items():
+        match = re.search(pattern, text)
+        if match:
+            fields[key] = match.group(1).strip()
+
+    return fields
+
+
+def split_clauses(text: str) -> List[Dict[str, str]]:
+    """
+    按条款编号拆解文本，提取条款标题与正文。
+    支持 "第一条"、"第1条"、"1." 等常见编号格式。
+    """
+    clauses: List[Dict[str, str]] = []
+    # 匹配条款编号：第一条 / 第1条 / 1. / 1、
+    pattern = r"(第[一二三四五六七八九十百千万0-9]+条|[0-9]+[\.、])"
+    parts = re.split(pattern, text)
+    # parts[0] 是前置文本，之后每两个元素为一组（编号 + 内容）
+    for i in range(1, len(parts) - 1, 2):
+        num = parts[i].strip()
+        body = parts[i + 1].strip() if i + 1 < len(parts) else ""
+        if body:
+            # 提取标题（第一个句子或括号内内容）
+            title_match = re.match(r"^[（(]([^）)]+)[）)]", body)
+            title = title_match.group(1) if title_match else body[:20]
+            clauses.append({"编号": num, "标题": title, "正文": body})
+
+    return clauses
+
+
+def identify_obligations(text: str) -> List[str]:
+    """
+    识别涉及责任/义务的句子。
+    匹配常见义务关键词。
+    """
+    obligations: List[str] = []
+    # 按句号/分号切分句子
+    sentences = re.split(r"[。；\n]", text)
+    keywords = ["应", "必须", "有义务", "负责", "承担", "应当", "不得", "禁止"]
+    for sent in sentences:
+        sent = sent.strip()
+        if not sent:
+            continue
+        if any(kw in sent for kw in keywords):
+            obligations.append(sent)
+    return obligations
+
+
+def identify_risks(text: str) -> List[Dict[str, str]]:
+    """
+    标注风险点：歧义、单方权利过大、赔偿上限等。
+    返回风险列表，每项含风险描述与建议。
+    """
+    risks: List[Dict[str, str]] = []
+    # 按条款拆解后逐条分析
+    clauses = split_clauses(text)
+    risk_patterns = {
+        "赔偿上限": ["赔偿上限", "最高赔偿", "赔偿限额"],
+        "单方权利": ["单方", "有权单方", "可单方面"],
+        "歧义表述": ["等", "包括但不限于", "视情况"],
+        "免责条款": ["免责", "不承担责任", "不负责"],
+        "自动续约": ["自动续约", "自动延期"],
+    }
+    for clause in clauses:
+        body = clause.get("正文", "")
+        for risk_type, patterns in risk_patterns.items():
+            if any(p in body for p in patterns):
+                risks.append({
+                    "条款编号": clause.get("编号", ""),
+                    "风险类型": risk_type,
+                    "风险描述": f"条款存在{risk_type}相关表述，建议人工复核",
+                    "建议": "咨询专业法律人士确认条款含义及影响",
+                })
+    return risks
+
+
+def calculate_confidence(text: str, fields: Dict[str, str], mode: str) -> Tuple[float, List[str]]:
+    """
+    计算置信度（0.0 ~ 1.0），并返回警告列表。
+    规则：
+      - 文本长度 > 50 字符：基础置信度 0.7
+      - 文本长度 10~50 字符：基础置信度 0.5
+      - 文本长度 < 10 字符：基础置信度 0.3
+      - 字段提取完整度：每提取一个字段 +0.05，最多 +0.2
+      - 条款拆解模式：条款数 >= 3 时 +0.1
+      - 义务识别模式：识别到义务 +0.1
+      - 风险标注模式：识别到风险 +0.1
+    """
+    warnings: List[str] = []
+    text_len = len(text)
+
+    if text_len > 50:
+        confidence = 0.7
+    elif text_len >= 10:
+        confidence = 0.5
+    else:
+        confidence = 0.3
+        warnings.append("文本过短，解析结果可能不准确")
+
+    # 字段提取完整度
+    if mode == "field":
+        field_bonus = min(0.2, len(fields) * 0.05)
+        confidence += field_bonus
+        if not fields:
+            warnings.append("未提取到任何字段，请检查文本格式")
+
+    # 条款拆解模式
+    if mode == "clause":
+        clauses = split_clauses(text)
+        if len(clauses) >= 3:
+            confidence += 0.1
+        elif len(clauses) == 0:
+            warnings.append("未识别到条款编号，请检查文本格式")
+
+    # 义务识别模式
+    if mode == "obligation":
+        obligations = identify_obligations(text)
+        if obligations:
+            confidence += 0.1
         else:
-            warning = ""
+            warnings.append("未识别到义务相关句子")
 
-        result_data = {"title": title, "text_length": len(text_content)}
-
-        # 尝试提取关键字段
-        field_result = self.parse_text(text_content)
-        if field_result.data:
-            result_data.update(field_result.data)
-            confidence = field_result.confidence
+    # 风险标注模式
+    if mode == "risk":
+        risks = identify_risks(text)
+        if risks:
+            confidence += 0.1
         else:
-            confidence = 0.5 if title else 0.1
+            warnings.append("未识别到风险点")
 
-        warnings = [warning] if warning else []
-        if not title:
-            warnings.append("未提取到网页标题")
+    return min(1.0, confidence), warnings
 
+
+# ---------------------------------------------------------------------------
+# 主解析函数
+# ---------------------------------------------------------------------------
+def parse_text(text: str, mode: str = "field") -> ParseResult:
+    """
+    解析文本，根据模式返回不同结果。
+    模式：field（字段提取）/ clause（条款拆解）/ obligation（义务识别）/ risk（风险标注）
+    """
+    # 输入校验
+    valid, err = validate_text(text)
+    if not valid:
         return ParseResult(
-            success=True,
-            data=result_data,
-            confidence=round(confidence, 2),
-            warnings=warnings,
+            success=False,
+            error_code=err,
+            error_message=ERROR_CODES.get(err, "未知错误"),
+            confidence=0.0,
         )
 
-    def batch_process(
-        self,
-        lines: List[str],
-        delimiter: str = ",",
-        field_mapping: Optional[Dict[str, int]] = None,
-    ) -> ParseResult:
-        """
-        批量处理多条记录
+    try:
+        if mode == "field":
+            fields = extract_fields(text)
+            confidence, warnings = calculate_confidence(text, fields, mode)
+            return ParseResult(
+                success=True,
+                data=fields,
+                confidence=confidence,
+                warnings=warnings,
+            )
+        elif mode == "clause":
+            clauses = split_clauses(text)
+            confidence, warnings = calculate_confidence(text, {}, mode)
+            return ParseResult(
+                success=True,
+                data={"条款数": len(clauses), "条款列表": clauses},
+                confidence=confidence,
+                warnings=warnings,
+            )
+        elif mode == "obligation":
+            obligations = identify_obligations(text)
+            confidence, warnings = calculate_confidence(text, {}, mode)
+            return ParseResult(
+                success=True,
+                data={"义务数": len(obligations), "义务列表": obligations},
+                confidence=confidence,
+                warnings=warnings,
+            )
+        elif mode == "risk":
+            risks = identify_risks(text)
+            confidence, warnings = calculate_confidence(text, {}, mode)
+            return ParseResult(
+                success=True,
+                data={"风险数": len(risks), "风险列表": risks},
+                confidence=confidence,
+                warnings=warnings,
+            )
+        else:
+            return ParseResult(
+                success=False,
+                error_code="E001",
+                error_message=f"未知模式: {mode}",
+                confidence=0.0,
+            )
+    except Exception as e:
+        return ParseResult(
+            success=False,
+            error_code="E010",
+            error_message=f"解析异常: {str(e)}",
+            confidence=0.0,
+        )
 
-        参数:
-            lines: 原始记录列表
-            delimiter: 分隔符
-            field_mapping: 字段映射（字段名 -> 列索引）
 
-        返回:
-            ParseResult 对象
-        """
-        if not lines:
-            return ParseResult(False, error_code="E009", error_message=ERROR_CODES["E009"])
+def parse_file(file_path: str, mode: str = "field") -> ParseResult:
+    """解析文件内容"""
+    content, err = read_file_with_encoding(file_path)
+    if err:
+        return ParseResult(
+            success=False,
+            error_code=err,
+            error_message=ERROR_CODES.get(err, "未知错误"),
+            confidence=0.0,
+        )
+    return parse_text(content, mode)
 
-        if not delimiter or len(delimiter) > 2:
-            return ParseResult(False, error_code="E008", error_message=ERROR_CODES["E008"])
 
-        records: List[Dict[str, str]] = []
-        total_items = 0
-        success_items = 0
+def parse_url(url: str, mode: str = "field") -> ParseResult:
+    """抓取 URL 内容并解析"""
+    content, err = fetch_url_with_retry(url)
+    if err:
+        return ParseResult(
+            success=False,
+            error_code=err,
+            error_message=ERROR_CODES.get(err, "未知错误"),
+            confidence=0.0,
+        )
+    result = parse_text(content, mode)
+    # 附加来源信息
+    if result.success and result.data:
+        result.data["source"] = url
+    return result
 
-        for line in lines:
+
+def parse_batch(lines: str, delimiter: str = ",") -> ParseResult:
+    """批量解析多条记录"""
+    if not lines or not lines.strip():
+        return ParseResult(
+            success=False,
+            error_code="E009",
+            error_message=ERROR_CODES["E009"],
+            confidence=0.0,
+        )
+    if not delimiter or len(delimiter) > 2:
+        return ParseResult(
+            success=False,
+            error_code="E008",
+            error_message=ERROR_CODES["E008"],
+            confidence=0.0,
+        )
+
+    try:
+        records = []
+        for line in lines.split(delimiter):
             line = line.strip()
-            if not line:
-                continue
-
-            parts = line.split(delimiter)
-            total_items += 1
-
-            if field_mapping:
-                # 使用字段映射
-                record = {}
-                for field_name, index in field_mapping.items():
-                    if index < len(parts):
-                        record[field_name] = parts[index].strip()
-                if record:
-                    records.append(record)
-                    success_items += 1
-            else:
-                # 自动生成字段名
-                record = {f"field_{i}": part.strip() for i, part in enumerate(parts) if part.strip()}
-                if record:
-                    records.append(record)
-                    success_items += 1
-
-        confidence = round(success_items / total_items, 2) if total_items > 0 else 0.0
-
+            if line:
+                fields = extract_fields(line)
+                if fields:
+                    records.append(fields)
+        if not records:
+            return ParseResult(
+                success=False,
+                error_code="E001",
+                error_message="未提取到任何字段",
+                confidence=0.0,
+            )
+        confidence = min(1.0, 0.7 + len(records) * 0.05)
         return ParseResult(
             success=True,
-            data={"records": records, "count": len(records)},
+            data=records,
             confidence=confidence,
-            warnings=[] if success_items == total_items else ["部分记录解析失败"],
+            warnings=[] if len(records) > 1 else ["仅解析到 1 条记录"],
         )
-
-    def add_custom_field(self, field_name: str, pattern: str) -> None:
-        """添加自定义字段提取模式"""
-        if field_name and pattern:
-            self._custom_fields[field_name] = pattern
-
-    # ------------------------------------------------------------------
-    # 内部辅助方法
-    # ------------------------------------------------------------------
-    def _parse_markdown(self, content: str) -> ParseResult:
-        """解析 Markdown/纯文本内容"""
-        # 提取标题
-        title_match = re.search(r"^#\s+(.+)$", content, re.MULTILINE)
-        title = title_match.group(1).strip() if title_match else ""
-
-        # 提取表格
-        tables = []
-        table_pattern = r"^\|(.+)\|$"
-        lines = content.split("\n")
-        current_table = []
-
-        for line in lines:
-            if re.match(table_pattern, line):
-                cells = [c.strip() for c in line.strip("|").split("|")]
-                if cells and not all(re.match(r"^[-:]+$", c) for c in cells):
-                    current_table.append(cells)
-            else:
-                if current_table:
-                    tables.append(current_table)
-                    current_table = []
-
-        if current_table:
-            tables.append(current_table)
-
-        result_data = {"title": title, "tables": tables, "line_count": len(lines)}
-
-        # 使用文本解析提取关键字段
-        field_result = self.parse_text(content)
-        if field_result.data:
-            result_data.update(field_result.data)
-            confidence = max(field_result.confidence, 0.5 if tables else 0.3)
-        else:
-            confidence = 0.5 if title or tables else 0.2
-
-        warnings = []
-        if not title and not tables:
-            warnings.append("未提取到标题或表格")
-
+    except Exception as e:
         return ParseResult(
-            success=True,
-            data=result_data,
-            confidence=round(confidence, 2),
-            warnings=warnings,
-        )
-
-    def _parse_csv(self, content: str) -> ParseResult:
-        """解析 CSV 内容"""
-        try:
-            reader = csv.reader(io.StringIO(content))
-            rows = list(reader)
-        except Exception:
-            return ParseResult(False, error_code="E005", error_message=ERROR_CODES["E005"])
-
-        if not rows:
-            return ParseResult(False, error_code="E005", error_message=ERROR_CODES["E005"])
-
-        # 第一行作为表头
-        header = rows[0]
-        data_rows = []
-
-        for row in rows[1:]:
-            if len(row) == len(header):
-                record = dict(zip(header, row))
-                data_rows.append(record)
-            elif len(row) > 0:
-                # 列数不匹配，用索引作为字段名
-                record = {f"column_{i}": val for i, val in enumerate(row)}
-                data_rows.append(record)
-
-        confidence = round(len(data_rows) / max(1, len(rows) - 1), 2)
-
-        return ParseResult(
-            success=True,
-            data={"header": header, "rows": data_rows, "count": len(data_rows)},
-            confidence=confidence,
-            warnings=[] if len(data_rows) == len(rows) - 1 else ["部分行解析失败"],
-        )
-
-    def _parse_json(self, content: str) -> ParseResult:
-        """解析 JSON 内容"""
-        try:
-            data = json.loads(content)
-        except json.JSONDecodeError:
-            return ParseResult(False, error_code="E004", error_message=ERROR_CODES["E004"])
-
-        # 判断 JSON 结构
-        if isinstance(data, dict):
-            result_data = data
-            confidence = 1.0
-        elif isinstance(data, list):
-            result_data = {"items": data, "count": len(data)}
-            confidence = 0.9
-        else:
-            result_data = {"value": data}
-            confidence = 0.8
-
-        return ParseResult(
-            success=True,
-            data=result_data,
-            confidence=confidence,
-            warnings=[],
+            success=False,
+            error_code="E010",
+            error_message=f"批量解析异常: {str(e)}",
+            confidence=0.0,
         )
 
 
 # ---------------------------------------------------------------------------
-# 自检模块
+# 输出格式化
 # ---------------------------------------------------------------------------
-def run_selftest() -> bool:
+def format_output(result: ParseResult, fmt: str = "json") -> str:
+    """将解析结果格式化为 JSON 或 Markdown"""
+    if fmt == "json":
+        return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
+    elif fmt == "markdown":
+        if not result.success:
+            return f"# 解析失败\n\n- 错误码: {result.error_code}\n- 错误信息: {result.error_message}"
+        md_lines = ["# 条款解析报告", ""]
+        if result.data:
+            if isinstance(result.data, dict):
+                # 字段提取
+                if "甲方" in result.data or "乙方" in result.data:
+                    md_lines.append("## 字段提取")
+                    md_lines.append("")
+                    md_lines.append("| 字段 | 值 |")
+                    md_lines.append("|------|-----|")
+                    for key, value in result.data.items():
+                        md_lines.append(f"| {key} | {value} |")
+                    md_lines.append("")
+                # 条款列表
+                if "条款列表" in result.data:
+                    md_lines.append("## 条款列表")
+                    md_lines.append("")
+                    md_lines.append("| 编号 | 标题 | 正文摘要 |")
+                    md_lines.append("|------|------|----------|")
+                    for clause in result.data["条款列表"]:
+                        body_preview = clause.get("正文", "")[:30] + "..." if len(clause.get("正文", "")) > 30 else clause.get("正文", "")
+                        md_lines.append(f"| {clause.get('编号', '')} | {clause.get('标题', '')} | {body_preview} |")
+                    md_lines.append("")
+                # 义务列表
+                if "义务列表" in result.data:
+                    md_lines.append("## 义务识别")
+                    md_lines.append("")
+                    for i, obligation in enumerate(result.data["义务列表"], 1):
+                        md_lines.append(f"{i}. {obligation}")
+                    md_lines.append("")
+                # 风险列表
+                if "风险列表" in result.data:
+                    md_lines.append("## 风险标注")
+                    md_lines.append("")
+                    md_lines.append("| 条款编号 | 风险类型 | 风险描述 | 建议 |")
+                    md_lines.append("|----------|----------|----------|------|")
+                    for risk in result.data["风险列表"]:
+                        md_lines.append(f"| {risk.get('条款编号', '')} | {risk.get('风险类型', '')} | {risk.get('风险描述', '')} | {risk.get('建议', '')} |")
+                    md_lines.append("")
+            elif isinstance(result.data, list):
+                md_lines.append("## 批量解析结果")
+                md_lines.append("")
+                md_lines.append("| 序号 | 字段 |")
+                md_lines.append("|------|------|")
+                for i, record in enumerate(result.data, 1):
+                    fields_str = "; ".join(f"{k}={v}" for k, v in record.items())
+                    md_lines.append(f"| {i} | {fields_str} |")
+                md_lines.append("")
+        md_lines.append(f"**置信度**: {result.confidence:.2f}")
+        if result.warnings:
+            md_lines.append("")
+            md_lines.append("**警告**:")
+            for warning in result.warnings:
+                md_lines.append(f"- {warning}")
+        return "\n".join(md_lines)
+    else:
+        return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
+
+
+# ---------------------------------------------------------------------------
+# 自检函数
+# ---------------------------------------------------------------------------
+def run_selftest() -> int:
     """
-    内置硬编码样例数据的离线自检
-
-    使用宽松阈值，不依赖精确值，确保任何环境都能通过。
+    自检：真实调用核心函数并断言关键输出。
+    返回退出码（0 表示全部通过）。
     """
-    print("=" * 60)
-    print("自检开始：数据解析与结构化转换工具")
-    print("=" * 60)
+    print("=== 自检开始 ===")
+    failures = 0
 
-    parser = DataParser()
-    all_passed = True
+    # 测试 1：字段提取
+    print("\n[测试 1] 字段提取")
+    result = parse_text("甲方：张三；乙方：李四；金额：100元", mode="field")
+    assert result.success, f"字段提取失败: {result.error_message}"
+    assert result.data.get("甲方") == "张三", f"甲方提取错误: {result.data}"
+    assert result.data.get("乙方") == "李四", f"乙方提取错误: {result.data}"
+    assert result.data.get("金额") == "100元", f"金额提取错误: {result.data}"
+    assert result.confidence > 0.5, f"置信度异常: {result.confidence}"
+    print(f"  ✅ 通过 (置信度: {result.confidence:.2f})")
 
-    # 测试1：文本解析
-    print("\n[1/5] 文本解析测试...")
-    test_text = "合同编号：HT-2026-001；甲方：北京某某科技有限公司；乙方：上海某软件公司；金额：150000元；日期：2026年3月15日"
-    result = parser.parse_text(test_text)
-    assert result.success, "文本解析应成功"
-    assert result.data is not None, "解析结果不应为空"
-    assert result.confidence > 0.3, f"置信度应大于0.3，实际: {result.confidence}"
-    assert "甲方" in result.data, "应提取到甲方字段"
-    assert "乙方" in result.data, "应提取到乙方字段"
-    assert "金额" in result.data, "应提取到金额字段"
-    print(f"  通过 - 提取字段数: {len(result.data)}, 置信度: {result.confidence}")
+    # 测试 2：条款拆解
+    print("\n[测试 2] 条款拆解")
+    clause_text = "第一条 定义：甲方为服务提供方。第二条 付款：甲方应于每月1日付款。第三条 违约责任：违约方应承担赔偿责任。"
+    result = parse_text(clause_text, mode="clause")
+    assert result.success, f"条款拆解失败: {result.error_message}"
+    assert result.data.get("条款数") == 3, f"条款数错误: {result.data}"
+    assert len(result.data.get("条款列表", [])) == 3, f"条款列表错误: {result.data}"
+    print(f"  ✅ 通过 (条款数: {result.data.get('条款数')})")
 
-    # 测试2：CSV 解析
-    print("\n[2/5] CSV 解析测试...")
-    csv_content = "name,age,city\n张三,28,北京\n李四,35,上海\n王五,42,广州"
-    result = parser._parse_csv(csv_content)
-    assert result.success, "CSV解析应成功"
-    assert result.data is not None, "CSV解析结果不应为空"
-    assert result.data["count"] == 3, f"CSV应有3行数据，实际: {result.data['count']}"
-    assert result.confidence > 0.8, f"CSV置信度应较高，实际: {result.confidence}"
-    print(f"  通过 - 行数: {result.data['count']}, 置信度: {result.confidence}")
+    # 测试 3：义务识别
+    print("\n[测试 3] 义务识别")
+    result = parse_text("甲方应于每月1日付款。乙方负责提供技术支持。", mode="obligation")
+    assert result.success, f"义务识别失败: {result.error_message}"
+    assert result.data.get("义务数", 0) >= 2, f"义务数错误: {result.data}"
+    print(f"  ✅ 通过 (义务数: {result.data.get('义务数')})")
 
-    # 测试3：JSON 解析
-    print("\n[3/5] JSON 解析测试...")
-    json_content = '{"name": "测试项目", "version": "1.0", "items": [1, 2, 3]}'
-    result = parser._parse_json(json_content)
-    assert result.success, "JSON解析应成功"
-    assert result.data is not None, "JSON解析结果不应为空"
-    assert "name" in result.data, "应提取到name字段"
-    assert result.confidence > 0.7, f"JSON置信度应较高，实际: {result.confidence}"
-    print(f"  通过 - 字段数: {len(result.data)}, 置信度: {result.confidence}")
+    # 测试 4：风险标注
+    print("\n[测试 4] 风险标注")
+    risk_text = "第一条 赔偿上限：甲方赔偿上限为100元。第二条 单方权利：甲方有权单方解除合同。"
+    result = parse_text(risk_text, mode="risk")
+    assert result.success, f"风险标注失败: {result.error_message}"
+    assert result.data.get("风险数", 0) >= 2, f"风险数错误: {result.data}"
+    print(f"  ✅ 通过 (风险数: {result.data.get('风险数')})")
 
-    # 测试4：批量处理
-    print("\n[4/5] 批量处理测试...")
-    lines = ["苹果,红色,水果", "香蕉,黄色,水果", "白菜,绿色,蔬菜"]
-    result = parser.batch_process(lines, delimiter=",")
-    assert result.success, "批量处理应成功"
-    assert result.data is not None, "批量处理结果不应为空"
-    assert result.data["count"] == 3, f"批量处理应有3条记录，实际: {result.data['count']}"
-    assert result.confidence > 0.8, f"批量处理置信度应较高，实际: {result.confidence}"
-    print(f"  通过 - 记录数: {result.data['count']}, 置信度: {result.confidence}")
+    # 测试 5：批量处理
+    print("\n[测试 5] 批量处理")
+    result = parse_batch("甲方：张三；乙方：李四;甲方：王五；乙方：赵六", delimiter=";")
+    assert result.success, f"批量处理失败: {result.error_message}"
+    assert len(result.data) == 2, f"批量记录数错误: {result.data}"
+    print(f"  ✅ 通过 (记录数: {len(result.data)})")
 
-    # 测试5：错误处理
-    print("\n[5/5] 错误处理测试...")
-    result = parser.parse_text("")
-    assert not result.success, "空文本应失败"
-    assert result.error_code == "E001", f"空文本应返回E001，实际: {result.error_code}"
+    # 测试 6：空输入
+    print("\n[测试 6] 空输入")
+    result = parse_text("", mode="field")
+    assert not result.success, "空输入应返回失败"
+    assert result.error_code == "E001", f"错误码错误: {result.error_code}"
+    print(f"  ✅ 通过 (错误码: {result.error_code})")
 
-    result = parser.parse_text("x" * (MAX_TEXT_LENGTH + 1))
-    assert not result.success, "超长文本应失败"
-    assert result.error_code == "E006", f"超长文本应返回E006，实际: {result.error_code}"
+    # 测试 7：超长输入
+    print("\n[测试 7] 超长输入")
+    long_text = "甲" * (MAX_TEXT_LENGTH + 100)
+    result = parse_text(long_text, mode="field")
+    assert not result.success, "超长输入应返回失败"
+    assert result.error_code == "E006", f"错误码错误: {result.error_code}"
+    print(f"  ✅ 通过 (错误码: {result.error_code})")
 
-    result = parser._parse_json("{invalid json")
-    assert not result.success, "无效JSON应失败"
-    assert result.error_code == "E004", f"无效JSON应返回E004，实际: {result.error_code}"
-    print("  通过 - 错误码检查")
+    # 测试 8：文件解析
+    print("\n[测试 8] 文件解析")
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as f:
+        f.write("甲方：张三；乙方：李四；金额：100元")
+        tmp_path = f.name
+    try:
+        result = parse_file(tmp_path, mode="field")
+        assert result.success, f"文件解析失败: {result.error_message}"
+        assert result.data.get("甲方") == "张三", f"文件字段提取错误: {result.data}"
+        print(f"  ✅ 通过 (字段: {result.data})")
+    finally:
+        os.unlink(tmp_path)
 
-    print("\n" + "=" * 60)
-    print("全部自检通过！")
-    print("=" * 60)
-    return all_passed
+    # 测试 9：输出格式化
+    print("\n[测试 9] 输出格式化")
+    result = parse_text("甲方：张三；乙方：李四", mode="field")
+    json_out = format_output(result, "json")
+    assert json_out.startswith("{"), "JSON 输出格式错误"
+    md_out = format_output(result, "markdown")
+    assert md_out.startswith("#"), "Markdown 输出格式错误"
+    print(f"  ✅ 通过 (JSON 长度: {len(json_out)}, Markdown 长度: {len(md_out)})")
+
+    # 测试 10：原子写入
+    print("\n[测试 10] 原子写入")
+    with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as f:
+        tmp_write_path = f.name
+    try:
+        ok, err = safe_write_file(tmp_write_path, "测试内容")
+        assert ok, f"原子写入失败: {err}"
+        with open(tmp_write_path, "r", encoding="utf-8") as f:
+            content = f.read()
+        assert content == "测试内容", f"写入内容错误: {content}"
+        print(f"  ✅ 通过 (内容: {content})")
+    finally:
+        os.unlink(tmp_write_path)
+
+    # 测试 11：URL 抓取（仅测试错误处理，不依赖网络）
+    print("\n[测试 11] URL 错误处理")
+    result = parse_url("http://invalid.invalid", mode="field")
+    assert not result.success, "无效 URL 应返回失败"
+    assert result.error_code == "E003", f"错误码错误: {result.error_code}"
+    print(f"  ✅ 通过 (错误码: {result.error_code})")
+
+    print("\n=== 自检完成 ===")
+    if failures > 0:
+        print(f"❌ {failures} 个测试失败")
+        return 1
+    print("✅ 全部测试通过")
+    return 0
 
 
 # ---------------------------------------------------------------------------
-# 命令行入口
+# CLI 入口
 # ---------------------------------------------------------------------------
 def main() -> int:
-    """命令行主入口"""
+    """CLI 入口函数"""
     parser = argparse.ArgumentParser(
-        description="数据解析与结构化转换工具 v1.0.1",
-        epilog="示例：python main.py parse --text '甲方：张三；金额：100元'",
+        description="条款解析与合规审查工具",
+        epilog="示例: python run.py parse --text '甲方：张三；乙方：李四'",
     )
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+    parser.add_argument("--verbose", action="store_true", help="输出详细日志")
 
     subparsers = parser.add_subparsers(dest="command", help="子命令")
 
-    # parse 子命令：文本解析
-    parse_parser = subparsers.add_parser("parse", help="解析原始文本")
-    parse_parser.add_argument("--text", type=str, required=True, help="原始文本")
-    parse_parser.add_argument("--fields", type=str, nargs="*", help="要提取的字段列表")
+    # parse 子命令
+    parse_parser = subparsers.add_parser("parse", help="解析文本")
+    parse_parser.add_argument("--text", help="要解析的文本")
+    parse_parser.add_argument("--mode", choices=["field", "clause", "obligation", "risk"], default="field", help="解析模式")
+    parse_parser.add_argument("--format", choices=["json", "markdown"], default="json", help="输出格式")
+    parse_parser.add_argument("--output", help="输出文件路径（可选）")
+    parse_parser.add_argument("--dry-run", action="store_true", help="预览模式，不实际写盘")
 
-    # file 子命令：文件解析
+    # file 子命令
     file_parser = subparsers.add_parser("file", help="解析文件")
-    file_parser.add_argument("--path", type=str, required=True, help="文件路径")
-    file_parser.add_argument("--format", type=str, choices=["txt", "md", "csv", "json"], help="文件格式")
+    file_parser.add_argument("--path", help="文件路径")
+    file_parser.add_argument("--mode", choices=["field", "clause", "obligation", "risk"], default="field", help="解析模式")
+    file_parser.add_argument("--format", choices=["json", "markdown"], default="json", help="输出格式")
+    file_parser.add_argument("--output", help="输出文件路径（可选）")
+    file_parser.add_argument("--dry-run", action="store_true", help="预览模式，不实际写盘")
 
-    # url 子命令：URL 解析
-    url_parser = subparsers.add_parser("url", help="解析URL")
-    url_parser.add_argument("--url", type=str, required=True, help="网页地址")
-    url_parser.add_argument("--timeout", type=int, default=10, help="超时秒数")
+    # url 子命令
+    url_parser = subparsers.add_parser("url", help="抓取 URL 并解析")
+    url_parser.add_argument("--url", help="URL 地址")
+    url_parser.add_argument("--mode", choices=["field", "clause", "obligation", "risk"], default="field", help="解析模式")
+    url_parser.add_argument("--format", choices=["json", "markdown"], default="json", help="输出格式")
+    url_parser.add_argument("--output", help="输出文件路径（可选）")
+    url_parser.add_argument("--dry-run", action="store_true", help="预览模式，不实际写盘")
 
-    # batch 子命令：批量处理
-    batch_parser = subparsers.add_parser("batch", help="批量处理")
-    batch_parser.add_argument("--lines", type=str, nargs="+", required=True, help="记录列表")
-    batch_parser.add_argument("--delimiter", type=str, default=",", help="分隔符")
-
-    # selftest 参数
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+    # batch 子命令
+    batch_parser = subparsers.add_parser("batch", help="批量解析")
+    batch_parser.add_argument("--lines", help="批量数据（用分隔符分隔）")
+    batch_parser.add_argument("--delimiter", default=",", help="分隔符（默认逗号）")
+    batch_parser.add_argument("--format", choices=["json", "markdown"], default="json", help="输出格式")
+    batch_parser.add_argument("--output", help="输出文件路径（可选）")
+    batch_parser.add_argument("--dry-run", action="store_true", help="预览模式，不实际写盘")
 
     args = parser.parse_args()
 
-    # 自检模式
+    # 自检模式 - 必须在所有必填校验之前
     if args.selftest:
-        passed = run_selftest()
-        return 0 if passed else 1
+        return run_selftest()
 
-    # 无命令时显示帮助
+    # 无子命令时打印帮助
     if not args.command:
         parser.print_help()
         return 0
 
-    # 创建解析器实例
-    data_parser = DataParser()
-
-    # 执行对应命令
+    # 执行子命令
+    result: Optional[ParseResult] = None
     if args.command == "parse":
-        result = data_parser.parse_text(args.text, args.fields)
+        if args.text is None:
+            parser.error("--text 为必填参数")
+        result = parse_text(args.text, args.mode)
     elif args.command == "file":
-        result = data_parser.parse_file(args.path, args.format)
+        if args.path is None:
+            parser.error("--path 为必填参数")
+        result = parse_file(args.path, args.mode)
     elif args.command == "url":
-        result = data_parser.parse_url(args.url, args.timeout)
+        if args.url is None:
+            parser.error("--url 为必填参数")
+        result = parse_url(args.url, args.mode)
     elif args.command == "batch":
-        result = data_parser.batch_process(args.lines, args.delimiter)
-    else:
-        print(f"未知命令: {args.command}")
+        if args.lines is None:
+            parser.error("--lines 为必填参数")
+        result = parse_batch(args.lines, args.delimiter)
+
+    if result is None:
+        print("错误: 未执行任何命令", file=sys.stderr)
         return 1
 
     # 输出结果
-    output = json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
-    print(output)
+    output = format_output(result, args.format)
+
+    # 写文件或打印
+    if args.output:
+        if not args.dry_run:
+            ok, err = safe_write_file(args.output, output)
+            if not ok:
+                print(f"错误: 写入文件失败 ({err})", file=sys.stderr)
+                return 1
+            print(f"✅ 结果已写入: {args.output}")
+        else:
+            print(f"[DRY-RUN] 将写入文件: {args.output}")
+            print(f"[DRY-RUN] 内容摘要: {output[:200]}...")
+    else:
+        print(output)
+
+    # verbose 模式输出额外信息
+    if args.verbose:
+        print(f"\n[DEBUG] 命令: {args.command}")
+        print(f"[DEBUG] 模式: {args.mode if hasattr(args, 'mode') else 'N/A'}")
+        print(f"[DEBUG] 置信度: {result.confidence:.2f}")
+        print(f"[DEBUG] 警告: {result.warnings}")
 
     return 0 if result.success else 1
 

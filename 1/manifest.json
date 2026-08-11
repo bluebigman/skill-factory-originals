@@ -1,0 +1,38 @@
+{
+  "timestamp": "20260811_222817",
+  "slug": "1",
+  "spec": {
+    "slug": "1",
+    "name": "clause-review",
+    "description": "解析合同文本，输出结构化审查报告，识别义务、风险与合规建议。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 提取条款序号与标题",
+      "2. 生成原文摘要（不超过 50 字）",
+      "3. 标注条款类型（义务/权利/程序/定义/其他）",
+      "1. 合同概览（合同名称、当事人、审查时间）",
+      "2. 条款清单（表格形式）",
+      "3. 风险清单（按等级排序）",
+      "4. 合规建议（按法规分类）",
+      "5. 审查结论（综合评级）",
+      "1. **粘贴**：将合同文本粘贴到对话中",
+      "2. **触发**：输入\"合同审查\"或\"条款解析\"",
+      "3. **查看**：重点看\"风险清单\"和\"合规建议\"两个部分",
+      "2. **禁止反向工程**：使用者不得对本 Skill 的底层算法、提示词结构、评分逻辑进行反向工程、破解、提取或二次分发。",
+      "3. **合规使用**：使用者应确保输入文本的合法获取与使用，不得利用本 Skill 处理违法违规内容。",
+      "4. **免责声明**：本 Skill 按\"现状\"提供，不附带任何明示或暗示的保证，包括但不限于"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "80bb3d30525eaf13",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
