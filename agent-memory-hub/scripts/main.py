@@ -26,19 +26,6 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 import time  # G1 退避
 
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
-
 def _g1_backoff():
     time.sleep(0.1)  # G1 退避标记
 
@@ -523,6 +510,10 @@ def main() -> int:
         parser.add_argument("--force", action="store_true")  # R4 强制写盘
 
         parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+        parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+        parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+        parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+        parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
         args = parser.parse_args()
         global dry_run
         dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局

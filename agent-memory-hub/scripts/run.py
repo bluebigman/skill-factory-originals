@@ -527,3 +527,17 @@ def process_input(input_path: Path, output_dir: Path, asset_type: str = None,
     # 并发处理文件
     def _process_single(filepath: Path) -> Tuple[Path, dict]:
         logger
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    ap.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    args = ap.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局

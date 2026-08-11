@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260811_232849",
+  "slug": "agent-memory-hub",
+  "spec": {
+    "slug": "agent-memory-hub",
+    "name": "agent-memory-hub",
+    "description": "将对话、文档、代码整理为四类记忆资产，生成团队共享索引。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 读取输入参数或交互输入。",
+      "2. 按技能定义的处理流程执行核心逻辑。",
+      "3. 输出结构化结果，并在完成后给出下一步建议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "8f9edf4b98cc660e",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
