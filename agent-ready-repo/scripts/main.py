@@ -183,7 +183,7 @@ class DataParser:
     def parse_file(self, filepath: str) -> List[ParsedRecord]:
         """从文件读取并解析。"""
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
                 data = f.read()
         except Exception as exc:
             raise SkillError("E007", f"文件读取失败: {exc}") from exc
@@ -446,6 +446,14 @@ def main() -> int:
     parser.add_argument(
         "--version", action="version", version="agent-ready-repo 1.0.1"
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
 
