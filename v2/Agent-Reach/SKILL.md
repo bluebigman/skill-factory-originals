@@ -3,7 +3,7 @@ slug: Agent-Reach
 name: Agent-Reach
 displayName: 智能体运维 本地管控 批量调度
 description: 本地批量运维AI智能体实例，支持启停与状态监控。
-version: 3.1.0
+version: 4.0.0
 license: MIT
 source_project: original
 source_url: 
@@ -21,6 +21,7 @@ trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI�
 > 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
 > 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
 <!-- user-agreement-injected -->
+
 
 # Agent-Reach：AI 智能体本地批量运维工具
 
@@ -91,12 +92,212 @@ trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI�
 
 **命令：**
 
+```bash
+python run.py start --names agent-01,agent-02 --tag test
+```
+
+**预期输出：**
+
+```text
+[2026-08-12 10:00:00] INFO - Starting instance: agent-01 (tag: test)
+[2026-08-12 10:00:00] INFO - Instance agent-01 started with PID 12345
+[2026-08-12 10:00:00] INFO - Starting instance: agent-02 (tag: test)
+[2026-08-12 10:00:00] INFO - Instance agent-02 started with PID 12346
+[2026-08-12 10:00:00] INFO - Successfully started 2 instance(s).
+```
+
+### 示例 2：停止实例
+
+**命令：**
+
+```bash
+python run.py stop --names agent-01 --mode graceful
+```
+
+**预期输出：**
+
+```text
+[2026-08-12 10:05:00] INFO - Stopping instance: agent-01 (mode: graceful)
+[2026-08-12 10:05:00] INFO - Sent SIGTERM to PID 12345
+[2026-08-12 10:05:01] INFO - Instance agent-01 stopped successfully.
+```
+
+### 示例 3：状态巡检
+
+**命令：**
+
+```bash
+python run.py status --all
+```
+
+**预期输出：**
+
+```text
++-----------+---------+-------+--------+-----------+
+| Name      | Status  | PID   | CPU %  | Memory MB |
++===========+=========+=======+========+===========+
+| agent-01  | running | 12345 | 1.2    | 150.3     |
++-----------+---------+-------+--------+-----------+
+| agent-02  | stopped | -     | -      | -         |
++-----------+---------+-------+--------+-----------+
+```
+
+### 示例 4：远程执行
+
+**命令：**
+
+```bash
+python run.py exec --names agent-01 --command "health_check"
+```
+
+**预期输出：**
+
+```text
+[2026-08-12 10:10:00] INFO - Executing command 'health_check' on agent-01
+[2026-08-12 10:10:00] INFO - Output: OK - all systems healthy
+```
+
+### 示例 5：结果汇总
+
+**命令：**
+
+```bash
+python run.py report --format json --output report.json
+```
+
+**预期输出：**
+
+```text
+[2026-08-12 10:15:00] INFO - Report generated: report.json (2 instances)
+```
+
+## 安装与配置 Installation
+
+### 依赖
+
+- Python 3.8+
+- 可选依赖：
+  - `filelock`：用于状态文件的并发安全读写（推荐安装）
+  - `paramiko`：用于 SSH 远程执行（推荐安装）
+
+### 安装步骤
+
+```bash
+# 克隆或下载项目文件
+# 安装可选依赖（推荐）
+pip install filelock paramiko
+```
+
+### 环境变量
+
+| 变量名 | 说明 | 默认值 |
+| :--- | :--- | :--- |
+| `AGENT_REACH_ROOT` | 实例根目录 | `~/.agent_reach/instances` |
+| `AGENT_REACH_SSH_TIMEOUT` | SSH 超时时间（秒） | `10` |
+| `AGENT_REACH_SSH_RETRIES` | SSH 重试次数 | `3` |
+
+### 认证方式
+
+远程执行功能支持两种认证方式：
+1. **SSH 密钥**：默认使用 `~/.ssh/id_rsa` 密钥进行认证。
+2. **密码认证**：通过 `--password` 参数指定密码（不推荐在生产环境使用）。
+
+## 常见问题 Troubleshooting
+
+### 问题 1：启动实例时提示 "Permission denied"
+
+**原因**：当前用户没有权限创建实例目录或启动进程。
+
+**解决办法**：
+```bash
+# 检查目录权限
+ls -la ~/.agent_reach/
+# 手动创建目录并设置权限
+mkdir -p ~/.agent_reach/instances
+chmod 755 ~/.agent_reach
+```
+
+### 问题 2：状态巡检显示实例已停止，但进程仍然存在
+
+**原因**：实例可能进入了僵尸状态，或者状态文件未及时更新。
+
+**解决办法**：
+```bash
+# 手动检查进程
+ps aux | grep agent-01
+# 强制停止实例
+python run.py stop --names agent-01 --mode force
+```
+
+### 问题 3：远程执行命令超时
+
+**原因**：目标实例网络不可达，或 SSH 服务未启动。
+
+**解决办法**：
+```bash
+# 检查网络连通性
+ping -c 3 <instance-ip>
+# 检查 SSH 服务
+ssh -o ConnectTimeout=5 <instance-ip> "echo ok"
+```
+
+### 问题 4：报告生成失败，提示 "No instances found"
+
+**原因**：实例目录为空，或没有已注册的实例。
+
+**解决办法**：
+```bash
+# 检查实例目录
+ls -la ~/.agent_reach/instances/
+# 启动至少一个实例后再生成报告
+python run.py start --names agent-01
+```
+
+## 最佳实践 Best Practices
+
+### 安全预演
+
+在执行任何写操作（启动、停止、报告）之前，建议先使用 `--dry-run` 参数进行预演：
+
+```bash
+# 预演停止操作
+python run.py stop --names agent-01 --dry-run
+
+# 预演启动操作
+python run.py start --names agent-01 --dry-run
+```
+
+### 批量操作建议
+
+- 使用标签（`--tag`）对实例进行分组管理，便于批量操作。
+- 批量操作时建议使用 `--max-workers` 参数控制并发数，避免资源竞争。
+- 停止实例时优先使用 `graceful` 模式，确保实例正常退出。
+
+### 日志管理
+
+- 每个实例的日志保存在 `~/.agent_reach/instances/<name>/agent.log`。
+- 建议定期清理旧日志，避免磁盘空间不足。
+- 使用 `--verbose` 参数查看详细操作日志。
+
+### 安全提醒
+
+- 远程执行功能仅支持白名单命令，请勿修改 `ALLOWED_COMMANDS` 配置。
+- 不要在命令行中直接传递敏感信息（如密码），建议使用 SSH 密钥认证。
+- 定期备份 `~/.agent_reach` 目录，防止数据丢失。
+
+## 相关资源 Related
+
+- [GitHub 仓库](https://github.com/your-repo/agent-reach)（示例）
+- [Python subprocess 文档](https://docs.python.org/3/library/subprocess.html)
+- [paramiko 文档](https://docs.paramiko.org/)
+- [filelock 文档](https://py-filelock.readthedocs.io/)
+
 ## 许可证（License）
 
 ```text
 MIT License
 
-Copyright (c) {year} {holder}
+Copyright (c) 2026 远控工坊
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -115,6 +316,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
 ```
-<!-- professional-license-embedded -->
