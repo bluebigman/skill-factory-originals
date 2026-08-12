@@ -1,20 +1,22 @@
 {
-  "timestamp": "20260811_230655",
+  "timestamp": "20260812_221202",
   "slug": "agency-agents",
   "spec": {
     "slug": "agency-agents",
-    "name": "agency-agency-agents",
-    "description": "将任意输入转化为结构化成果，支持多角色任务编排与批量处理。",
+    "name": "agency-agents",
+    "description": "多角色任务编排与结构化交付工具，将任意文本输入解析为结构化数据，支持批量处理、置信度标注与多格式输出。",
     "cli_interface": [],
     "capability_outline": [
-      "1. 读取输入参数或交互输入。",
-      "2. 按技能定义的处理流程执行核心逻辑。",
-      "3. 输出结构化结果，并在完成后给出下一步建议。"
+      "1. 将 `run.py` 保存到目标目录",
+      "2. 赋予执行权限（可选）：`chmod +x run.py`",
+      "3. 验证安装：`python run.py --version`",
+      "- 输入文件每行一条记录",
+      "- 输出结果基于输入文本与规则匹配，不保证 100% 准确"
     ],
     "upstream": null,
     "derivation": "independent-implementation"
   },
-  "spec_hash": "a5583f11baeb64a3",
+  "spec_hash": "02ce8d1684538c37",
   "prompt_hash": "49-proxy",
   "prompt": "(49 代理生成，见 provenance)",
   "llm_model": "deepseek-chat",
