@@ -2,10 +2,10 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: agent-loop-engine
 name: agent-loop-engine
-displayName: 代理编排 循环状态 长期任务内核
-description: 管理长期运行AI代理团队，支持持久目标与可验证交接的轻量级状态内核。
-version: 1.0.2
-rules_version: cpr-20260811-n351
+displayName: 代理编排 循环内核 状态持久化
+description: 轻量级状态内核，管理长期运行AI代理团队，支持持久目标与可验证交接。
+version: 1.0.3
+rules_version: cpr-20260812-n376
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agent-loop-engine
@@ -13,9 +13,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge
+author: 林墨轩
 agent_created: true
-trigger_words: ["agent-loop-engine", "循环引擎", "代理编排", "状态内核", "长期运行代理", "任务循环", "代理生命周期"]
+trigger_words: ["agent-loop-engine", "循环引擎", "代理编排", "状态内核", "长期运行代理", "多代理协作", "任务交接管理"]
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -26,55 +26,61 @@ trigger_words: ["agent-loop-engine", "循环引擎", "代理编排", "状态内�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# agent-loop-engine 技能文档
+# agent-loop-engine 技能手册
 
-## 一、能力边界：一页纸速查卡
+## 一、能力边界（一页纸速查卡）
 
 ### 1.1 能做什么
 
 | 能力项 | 说明 | 典型场景 |
 |--------|------|----------|
-| 循环状态管理 | 维护代理在多次迭代中的状态快照，支持暂停/恢复 | 数据抓取任务分批次执行 |
-| 持久目标追踪 | 将高层目标拆解为可检查的子目标，记录完成度 | 月度报告自动生成流水线 |
-| 可验证交接 | 代理之间传递任务时生成交接凭证，接收方可校验完整性 | 分析代理将结果交给报告代理 |
-| 轻量级部署 | 不依赖外部数据库，单文件即可运行 | 本地脚本、CI/CD 流水线 |
-| 团队编排 | 管理多个代理的角色、优先级、依赖关系 | 内容创作团队（调研→撰写→校对） |
+| 多代理编排 | 管理多个代理实例，按序执行任务 | 数据采集 → 清洗 → 分析 → 报告 |
+| 状态持久化 | 将运行状态保存至文件，支持中断恢复 | 长时任务意外中断后继续 |
+| 交接凭证管理 | 记录代理间的任务交接凭证，可追溯 | 审计需求、问题回溯 |
+| 循环控制 | 自定义循环间隔与最大轮次 | 模拟异步轮询、定时任务 |
+| 置信度门控 | 信息不足时输出占位符，不编造数据 | 数据缺失时的安全降级 |
 
 ### 1.2 不能做什么
 
 | 限制项 | 说明 |
 |--------|------|
-| 不提供分布式调度 | 单进程内运行，不支持跨机器协调 |
-| 不包含持久化存储引擎 | 状态保存在内存或用户指定的文件中，不负责数据库管理 |
-| 不执行代理内部逻辑 | 只管理循环与交接，不代替代理做决策 |
-| 不保证任务成功 | 只保证状态流转正确，任务失败时提供错误码与回退路径 |
+| 不支持并行执行 | 代理按顺序执行，不提供并发调度 |
+| 不包含代理内部逻辑 | 代理的 `run(state)` 方法需使用者自行实现 |
+| 不提供分布式能力 | 仅限单进程内运行，不支持跨节点协调 |
+| 不保证任务成功 | 代理可能失败，需使用者设计异常恢复逻辑 |
+| 不存储业务数据 | 仅保存状态元数据，不负责业务数据持久化 |
 
 ### 1.3 适用对象
 
-- 需要运行超过 10 轮迭代的 AI 代理任务
-- 需要多个代理协作但不想引入重型框架的开发者
-- 需要审计代理决策轨迹的团队
+- 需要管理多个 AI 代理协作完成复杂任务的开发者
+- 需要任务中断后恢复能力的长期运行场景
+- 需要审计代理执行轨迹的团队
 
 ---
 
-## 二、触发方式与场景映射
+## 二、触发方式
 
 ### 2.1 触发词
 
-直接使用以下任一触发词即可激活本技能：
+| 触发词 | 场景说明 |
+|--------|----------|
+| `agent-loop-engine` | 直接调用引擎 |
+| `循环引擎` | 中文别名，用于中文环境 |
+| `代理编排` | 描述多代理协作场景 |
+| `状态内核` | 强调状态管理能力 |
+| `长期运行代理` | 长时任务场景 |
+| `多代理协作` | 团队协作场景 |
+| `任务交接管理` | 交接凭证相关场景 |
 
-```
-agent-loop-engine / 循环引擎 / 代理编排 / 状态内核 / 长期运行代理 / 任务循环 / 代理生命周期
-```
+### 2.2 场景映射表
 
-### 2.2 大白话场景映射表
-
-| 你说的话（场景） | 技能实际做的事 |
-|------------------|----------------|
-| “帮我盯着这个爬虫任务，跑三天别停” | 创建持久目标，每轮循环记录进度，崩溃后可从断点恢复 |
-| “让调研代理把结果交给写作代理” | 生成交接凭证，写作代理验证数据完整性后继续 |
-| “这个批量处理任务跑了一半挂了，怎么续？” | 读取状态快照，定位失败步骤，给出恢复命令 |
-| “我想看看每个代理都干了什么” | 输出完整的状态流转日志，含时间戳与决策依据 |
+| 用户说（大白话） | 引擎行为 |
+|------------------|----------|
+| "让几个代理轮流干活" | 按顺序执行代理列表 |
+| "干到一半断了，接着干" | 加载状态文件，从断点继续 |
+| "谁干的活，我要查" | 输出交接凭证列表 |
+| "慢点跑，别太急" | 设置 `--interval` 控制节奏 |
+| "某个代理挂了怎么办" | 捕获异常，记录错误码 E1004 |
 
 ---
 
@@ -82,71 +88,161 @@ agent-loop-engine / 循环引擎 / 代理编排 / 状态内核 / 长期运行代
 
 ### 3.1 前置条件
 
-| 条件 | 要求 | 检查方式 |
-|------|------|----------|
-| Python 环境 | ≥ 3.8 | `python --version` |
-| 输入参数 | 至少提供目标描述或代理列表 | 见 3.2 参数表 |
-| 状态文件权限 | 可写（若指定了 `--state-file`） | `touch /tmp/test.txt` |
+| 条件 | 要求 |
+|------|------|
+| Python 环境 | 3.8 及以上 |
+| 依赖 | 无第三方依赖，标准库即可 |
+| 代理类 | 实现 `run(state)` 接口，接收状态对象，返回更新后的状态 |
 
-### 3.2 参数表
+### 3.2 执行步骤
 
-| 参数名 | 类型 | 必填 | 默认值 | 说明 |
-|--------|------|------|--------|------|
-| `--goal` | string | 是 | 无 | 高层目标描述，如“抓取 100 页商品数据” |
-| `--agents` | string | 是 | 无 | 代理列表，逗号分隔，如“crawler,parser,reporter” |
-| `--max-loops` | int | 否 | 100 | 最大循环次数，防止死循环 |
-| `--state-file` | string | 否 | 内存 | 状态持久化文件路径，留空则不落盘 |
-| `--interval` | float | 否 | 1.0 | 每轮循环间隔秒数 |
-| `--selftest` | flag | 否 | 无 | 运行自检后退出 |
-| `--version` | flag | 否 | 无 | 输出版本号后退出 |
+#### 步骤 1：解析输入参数
 
-### 3.3 执行步骤
+```bash
+python agent_loop_engine.py --goal "完成数据分析" --agents agent1 agent2 --interval 2 --max-loops 10
+```
 
-1. **解析输入**：读取命令行参数，校验必填项。若缺少 `--goal` 或 `--agents`，输出错误码 `E1001` 并退出。
-2. **初始化状态**：创建状态对象，包含目标、代理列表、当前循环数、交接记录。
-3. **加载历史状态**（若指定 `--state-file`）：读取文件，合并到当前状态。
-4. **进入主循环**：
-   - 步骤 4.1：检查当前循环数是否超过 `--max-loops`，若超过则输出 `E1002` 并终止。
-   - 步骤 4.2：按顺序激活每个代理，传入当前状态。
-   - 步骤 4.3：收集代理返回的结果，更新状态。
-   - 步骤 4.4：生成交接凭证（含代理名、时间戳、结果哈希）。
-   - 步骤 4.5：若指定了状态文件，写入当前状态快照。
-   - 步骤 4.6：等待 `--interval` 秒，进入下一轮。
-5. **输出结果**：循环结束后，输出结构化 JSON，包含最终状态、各代理执行次数、交接凭证列表。
+**参数表：**
 
-### 3.4 输出规范
+| 参数 | 必填 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--goal` | 是 | 无 | 目标描述，字符串 |
+| `--agents` | 是 | 无 | 代理类名列表，空格分隔 |
+| `--state-file` | 否 | 无 | 状态文件路径，用于恢复 |
+| `--interval` | 否 | 1 | 循环间隔（秒） |
+| `--max-loops` | 否 | 100 | 最大循环轮次 |
+| `--selftest` | 否 | 无 | 运行自检后退出 |
+| `--version` | 否 | 无 | 输出版本后退出 |
 
-输出为 JSON 格式，示例：
+**错误处理：** 缺少 `--goal` 或 `--agents` 时，输出错误码 `E1001` 并退出。
+
+#### 步骤 2：初始化状态对象
+
+```python
+state = {
+    "goal": goal,
+    "agents": agents,
+    "loop_count": 0,
+    "handoffs": [],
+    "agent_stats": {agent: 0 for agent in agents}
+}
+```
+
+#### 步骤 3：加载历史状态（可选）
+
+若指定 `--state-file`：
+
+```python
+with open(state_file, "r") as f:
+    saved_state = json.load(f)
+# 合并：保留当前目标，恢复循环计数与交接记录
+state["loop_count"] = saved_state.get("loop_count", 0)
+state["handoffs"] = saved_state.get("handoffs", [])
+state["agent_stats"] = saved_state.get("agent_stats", state["agent_stats"])
+```
+
+#### 步骤 4：进入主循环
+
+```python
+while state["loop_count"] < max_loops:
+    for agent_name in agents:
+        try:
+            agent = load_agent(agent_name)
+            new_state = agent.run(state)
+            # 记录交接凭证
+            handoff = {
+                "from": agent_name,
+                "to": next_agent_name,
+                "timestamp": time.time(),
+                "status": "success"
+            }
+            state["handoffs"].append(handoff)
+            state["agent_stats"][agent_name] += 1
+        except Exception as e:
+            # 记录错误，不中断整体循环
+            handoff = {
+                "from": agent_name,
+                "to": next_agent_name,
+                "timestamp": time.time(),
+                "status": "failed",
+                "error": str(e)
+            }
+            state["handoffs"].append(handoff)
+    
+    state["loop_count"] += 1
+    time.sleep(interval)
+```
+
+#### 步骤 5：输出结果
+
+循环结束后，输出结构化 JSON：
 
 ```json
 {
   "status": "completed",
-  "goal": "抓取 100 页商品数据",
-  "total_loops": 5,
-  "agents": {
-    "crawler": {"executions": 5, "last_status": "success"},
-    "parser": {"executions": 5, "last_status": "success"}
+  "final_state": {
+    "goal": "完成数据分析",
+    "loop_count": 10,
+    "handoffs_count": 20
+  },
+  "agent_stats": {
+    "agent1": 10,
+    "agent2": 10
   },
   "handoffs": [
-    {"from": "crawler", "to": "parser", "timestamp": "2026-08-11T10:00:00Z", "hash": "a1b2c3"}
-  ],
-  "next_suggestion": "检查 parser 输出质量，或增加 reporter 代理生成摘要"
+    {
+      "from": "agent1",
+      "to": "agent2",
+      "timestamp": 1723456789.123,
+      "status": "success"
+    }
+  ]
 }
 ```
+
+### 3.3 输出规范
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `status` | string | `completed` 或 `interrupted` |
+| `final_state` | object | 最终状态快照 |
+| `agent_stats` | object | 各代理执行次数 |
+| `handoffs` | array | 交接凭证列表 |
 
 ---
 
 ## 四、置信度门控
 
-当信息不足时，**禁止编造数据**。使用以下占位符：
+### 4.1 占位符机制
 
-| 场景 | 占位符 | 示例 |
-|------|--------|------|
-| 代理返回结果缺失 | `[需核实:代理名_结果]` | `[需核实:crawler_结果]` |
-| 状态文件损坏 | `[需核实:状态文件_内容]` | `[需核实:状态文件_内容]` |
-| 目标完成度无法计算 | `[需核实:完成度_百分比]` | `[需核实:完成度_百分比]` |
+当信息不足时，使用 `[需核实:字段名]` 格式输出占位符，不编造数据。
 
-**规则**：任何占位符出现时，输出结果中 `status` 字段必须为 `"needs_verification"`，且附带 `verification_required` 列表。
+**示例：**
+
+```json
+{
+  "status": "completed",
+  "final_state": {
+    "goal": "完成数据分析",
+    "loop_count": 10,
+    "handoffs_count": 20,
+    "data_quality": "[需核实:数据完整性]"
+  }
+}
+```
+
+### 4.2 触发条件
+
+| 条件 | 处理方式 |
+|------|----------|
+| 代理返回状态缺少关键字段 | 输出占位符 `[需核实:字段名]` |
+| 状态文件损坏或格式错误 | 输出错误码 `E1002`，不尝试修复 |
+| 代理执行超时 | 输出错误码 `E1003`，记录超时信息 |
+
+### 4.3 传播机制
+
+- 占位符会沿交接链传播，后续代理可识别并跳过依赖该字段的逻辑
+- 最终输出中保留占位符，提示使用者数据缺失
 
 ---
 
@@ -154,55 +250,71 @@ agent-loop-engine / 循环引擎 / 代理编排 / 状态内核 / 长期运行代
 
 | 错误码 | 含义 | 提示话术 | 修正步骤 |
 |--------|------|----------|----------|
-| `E1001` | 缺少必填参数 | “请提供 --goal 和 --agents 参数” | 检查命令行参数，补全后重试 |
-| `E1002` | 超过最大循环次数 | “任务超过 max-loops 限制，已终止” | 调整 --max-loops 或检查代理是否卡死 |
-| `E1003` | 状态文件无法读取 | “状态文件不存在或权限不足” | 检查文件路径与读写权限 |
-| `E1004` | 代理执行异常 | “代理 xxx 在第 N 轮抛出异常” | 查看代理日志，修复后从断点恢复 |
-| `E1005` | 交接凭证校验失败 | “交接数据哈希不匹配，拒绝继续” | 检查代理间数据传递逻辑 |
+| `E1001` | 缺少必填参数 | "错误：缺少 --goal 或 --agents 参数" | 检查命令行参数，补齐必填项 |
+| `E1002` | 状态文件损坏 | "错误：状态文件无法解析" | 检查文件格式，确认 JSON 合法性 |
+| `E1003` | 代理执行超时 | "错误：代理执行超过最大时间限制" | 增加超时阈值，或优化代理逻辑 |
+| `E1004` | 代理执行异常 | "错误：代理执行失败，详情见交接记录" | 查看交接记录中的 error 字段，修复代理逻辑 |
+| `E1005` | 代理类不存在 | "错误：找不到代理类 [名称]" | 检查代理类名拼写，确认已导入 |
 
 ---
 
-## 六、FAQ 反模式对照
+## 六、FAQ 反模式
 
-| 常见坑 | 反模式（错误做法） | 正确做法 |
-|--------|---------------------|----------|
-| 死循环 | 不设置 --max-loops，让任务无限跑 | 始终设置合理上限，如 1000 |
-| 状态丢失 | 不指定 --state-file，任务中断后从头开始 | 指定状态文件，实现断点续跑 |
-| 交接混乱 | 代理间直接传对象，不生成凭证 | 每次交接生成哈希凭证，接收方校验 |
-| 目标漂移 | 循环中修改 --goal 参数 | 目标在初始化时固定，变更需重建任务 |
-| 日志爆炸 | 每轮循环打印全部状态 | 只输出变更部分与交接记录 |
+### 6.1 常见坑 1：忽略状态恢复
+
+**反模式：** 中断后重新运行，不指定 `--state-file`，导致从零开始。
+
+**正确做法：** 中断时保存状态文件，重新运行时指定 `--state-file` 恢复。
+
+### 6.2 常见坑 2：代理间数据传递错误
+
+**反模式：** 代理修改状态对象但不返回，导致数据丢失。
+
+**正确做法：** 代理必须返回更新后的状态对象，引擎使用返回值覆盖原状态。
+
+### 6.3 常见坑 3：无限循环
+
+**反模式：** 不设置 `--max-loops`，代理逻辑有误导致死循环。
+
+**正确做法：** 始终设置 `--max-loops`，并设计合理的退出条件。
+
+### 6.4 常见坑 4：交接凭证丢失
+
+**反模式：** 代理内部处理异常但不抛出，交接凭证记录为成功。
+
+**正确做法：** 代理捕获异常后重新抛出，引擎捕获后记录失败状态。
+
+### 6.5 常见坑 5：置信度门控被绕过
+
+**反模式：** 代理内部自行编造缺失数据，不使用占位符。
+
+**正确做法：** 代理遇到缺失数据时返回占位符，由引擎统一处理。
 
 ---
 
-## 七、渐进式披露：分层次阅读路径
+## 七、渐进式披露
 
 ### 7.1 速查卡（30 秒上手）
 
 ```bash
-# 最小示例：两个代理跑 5 轮
-python agent_loop_engine.py --goal "测试任务" --agents "a,b" --max-loops 5
-
-# 带状态持久化
-python agent_loop_engine.py --goal "抓取数据" --agents "crawler,parser" --state-file /tmp/state.json
-
-# 自检
-python agent_loop_engine.py --selftest
+# 最小示例
+python agent_loop_engine.py --goal "测试任务" --agents agent1 agent2 --max-loops 5
 ```
 
-### 7.2 新手路径（5 分钟）
+### 7.2 新手路径
 
-1. 阅读「能力边界」了解适用范围。
-2. 运行速查卡中的最小示例。
-3. 查看输出 JSON，理解 `status` 和 `handoffs` 字段。
-4. 尝试添加 `--state-file`，中断后重新运行，观察恢复行为。
+1. 阅读「能力边界」了解适用范围
+2. 运行速查卡中的最小示例
+3. 查看输出 JSON，理解 `status` 和 `handoffs` 字段
+4. 尝试添加 `--state-file`，中断后重新运行，观察恢复行为
 
-### 7.3 进阶路径（15 分钟）
+### 7.3 进阶路径
 
-1. 阅读「标准处理流程」中的参数表与执行步骤。
-2. 自定义代理类，实现 `run(state)` 接口。
-3. 使用 `--interval` 控制节奏，模拟真实异步场景。
-4. 检查错误码 `E1004` 的触发条件，设计代理异常恢复逻辑。
-5. 阅读「置信度门控」，理解占位符的传播机制。
+1. 阅读「标准处理流程」中的参数表与执行步骤
+2. 自定义代理类，实现 `run(state)` 接口
+3. 使用 `--interval` 控制节奏，模拟真实异步场景
+4. 检查错误码 `E1004` 的触发条件，设计代理异常恢复逻辑
+5. 阅读「置信度门控」，理解占位符的传播机制
 
 ---
 
@@ -210,12 +322,27 @@ python agent_loop_engine.py --selftest
 
 <!-- user-agreement-injected -->
 
-**使用本 Skill 即表示您同意以下条款：**
+**生效日期：** 2026 年 1 月 1 日
 
-1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于数据丢失、任务失败、决策失误等后果。
-2. **禁止反向工程**：不得对本 Skill 的源代码进行反向工程、反编译或试图提取底层算法（法律允许的除外）。
-3. **无担保**：本 Skill 按“现状”提供，不附带任何明示或暗示的担保。
-4. **合规使用**：使用者须确保使用场景符合当地法律法规，不得用于非法目的。
+**1. 责任承担**
+
+使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于数据丢失、任务失败、决策失误等后果。本 Skill 提供的是工具与指导，不替代使用者的专业判断。
+
+**2. 禁止反向工程**
+
+不得对本 Skill 的源代码进行反向工程、反编译或试图提取底层算法（法律允许的除外）。本 Skill 的架构设计与实现细节受版权保护。
+
+**3. 无担保**
+
+本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性等。
+
+**4. 合规使用**
+
+使用者须确保使用场景符合当地法律法规，不得用于非法目的，包括但不限于数据窃取、隐私侵犯、欺诈行为等。
+
+**5. 协议变更**
+
+本协议可能随 Skill 版本更新而调整，使用者应定期查阅最新版本。
 
 ---
 
@@ -223,28 +350,16 @@ python agent_loop_engine.py --selftest
 
 <!-- professional-license-embedded -->
 
-**MIT License**
+### MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+版权所有 (c) 2026 林墨轩
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士，不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向其提供软件的人士这样做，但须满足以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权行为或其他方面，由软件或软件的使用或其他交易引起、产生或与之相关。
 
 ---
 
-*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档并自行验证适用性。*
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读「用户协议」与「许可证」章节。*
