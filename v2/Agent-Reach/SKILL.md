@@ -3,7 +3,7 @@ slug: Agent-Reach
 name: Agent-Reach
 displayName: 智能体运维 本地管控 批量调度
 description: 本地批量运维AI智能体实例，支持启停与状态监控。
-version: 3.0.0
+version: 3.1.0
 license: MIT
 source_project: original
 source_url: 
@@ -21,7 +21,6 @@ trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI�
 > 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
 > 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
 <!-- user-agreement-injected -->
-
 
 # Agent-Reach：AI 智能体本地批量运维工具
 
@@ -91,180 +90,6 @@ trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI�
 ### 示例 1：批量启动实例
 
 **命令：**
-```bash
-python run.py start --names agent-01,agent-02 --tag test
-```
-
-**预期输出：**
-```text
-[2026-08-10 12:00:00] INFO - 开始批量启动实例...
-[2026-08-10 12:00:00] INFO - 实例 agent-01 启动成功 (PID: 12345)
-[2026-08-10 12:00:00] INFO - 实例 agent-02 启动成功 (PID: 12346)
-[2026-08-10 12:00:00] INFO - 批量启动完成。成功: 2, 失败: 0
-```
-
-### 示例 2：状态巡检
-
-**命令：**
-```bash
-python run.py status --all
-```
-
-**预期输出（Markdown 表格）：**
-```text
-| 实例名 | 状态 | PID | CPU (%) | 内存 (MB) | 最近日志 |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| agent-01 | running | 12345 | 1.2 | 350.5 | 2026-08-10 12:00:01 - 启动完成 |
-| agent-02 | stopped | - | 0.0 | 0.0 | 2026-08-10 12:00:02 - 已停止 |
-```
-
-### 示例 3：远程执行白名单命令
-
-**命令：**
-```bash
-python run.py exec --names agent-01 --command "health_check"
-```
-
-**预期输出：**
-```text
-[2026-08-10 12:00:00] INFO - 在实例 agent-01 上执行命令: health_check
-[2026-08-10 12:00:00] INFO - 执行结果: OK - all systems healthy
-```
-
-### 示例 4：生成 JSON 报告
-
-**命令：**
-```bash
-python run.py report --format json --output report.json
-```
-
-**预期输出：**
-```text
-[2026-08-10 12:00:00] INFO - 报告已生成: report.json
-```
-
-**report.json 内容示例：**
-```json
-{
-  "generated_at": "2026-08-10T12:00:00+00:00",
-  "instances": [
-    {
-      "name": "agent-01",
-      "status": "running",
-      "pid": 12345,
-      "cpu_percent": 1.2,
-      "memory_mb": 350.5,
-      "last_log": "2026-08-10 12:00:01 - 启动完成"
-    }
-  ]
-}
-```
-
-## 安装与配置 Installation
-
-### 环境要求
-
-- Python 3.8 及以上版本
-- Linux 或 macOS 操作系统
-- 可选：`filelock` 库（用于文件锁，推荐安装）
-- 可选：`paramiko` 库（用于 SSH 远程执行，推荐安装）
-
-### 安装依赖
-
-```bash
-pip install filelock paramiko
-```
-
-### 目录结构
-
-Agent-Reach 使用本地文件系统存储实例状态，默认根目录为 `~/.agent_reach/`。
-
-```text
-~/.agent_reach/
-├── instances/
-│   ├── agent-01/
-│   │   ├── status.json   # 实例状态信息
-│   │   ├── agent.pid     # 真实进程 PID
-│   │   └── agent.log     # 实例日志
-│   └── agent-02/
-│       ├── status.json
-│       ├── agent.pid
-│       └── agent.log
-└── locks/
-    └── agent-01.lock     # 文件锁
-```
-
-### 环境变量
-
-| 变量名 | 默认值 | 说明 |
-| :--- | :--- | :--- |
-| `AGENT_REACH_ROOT` | `~/.agent_reach` | 实例根目录，可自定义 |
-
-## 常见问题 Troubleshooting
-
-### 问题 1：启动实例时提示「实例已存在」
-
-**现象：** 执行 `start` 命令时，输出 `实例 agent-01 已存在`。
-
-**原因：** 实例目录已存在且状态文件显示实例正在运行。
-
-**解决办法：** 先执行 `stop` 命令停止实例，或使用 `--force` 参数强制覆盖。
-
-### 问题 2：状态巡检显示实例状态为「unknown」
-
-**现象：** 执行 `status` 命令时，实例状态显示为 `unknown`。
-
-**原因：** 状态文件缺失或损坏，或进程 PID 不存在。
-
-**解决办法：** 检查实例目录是否存在，确认进程是否被外部终止。必要时重新启动实例。
-
-### 问题 3：远程执行命令超时
-
-**现象：** 执行 `exec` 命令时，提示 `SSH 连接超时`。
-
-**原因：** 目标实例网络不可达，或 SSH 服务未启动。
-
-**解决办法：** 检查网络连通性，确认目标实例的 SSH 服务正常运行。可尝试增加 `--timeout` 参数值。
-
-### 问题 4：报告生成失败
-
-**现象：** 执行 `report` 命令时，提示 `无法写入报告文件`。
-
-**原因：** 输出路径无写入权限，或磁盘空间不足。
-
-**解决办法：** 检查输出路径权限，确认磁盘空间充足。
-
-## 最佳实践 Best Practices
-
-### 安全预演
-
-在执行任何写操作（启动、停止、报告）前，建议先使用 `--dry-run` 参数进行预演，确认操作影响范围。
-
-```bash
-python run.py stop --names agent-01 --dry-run
-```
-
-### 批量操作建议
-
-- 使用 `--tag` 参数按环境（test/prod/dev）批量操作，避免误操作。
-- 使用 `--file` 参数从文件读取实例列表，便于维护。
-- 批量操作时，Agent-Reach 默认使用 5 个并发线程，可通过 `--max-workers` 调整。
-
-### 日志管理
-
-- 每个实例的日志保存在 `agent.log` 文件中，可通过 `status` 命令查看最近日志。
-- 建议定期清理旧日志，避免磁盘空间不足。
-
-### 安全提醒
-
-- 远程执行仅支持白名单命令，请勿修改 `ALLOWED_COMMANDS` 添加危险命令。
-- 实例状态文件包含敏感信息，请确保目录权限正确。
-
-## 相关资源 Related
-
-- [filelock 文档](https://pypi.org/project/filelock/)
-- [paramiko 文档](https://pypi.org/project/paramiko/)
-- [Python subprocess 文档](https://docs.python.org/3/library/subprocess.html)
 
 ## 许可证（License）
 
