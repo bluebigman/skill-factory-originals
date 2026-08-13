@@ -452,6 +452,48 @@ def selftest():
     empty_manager2 = TaskManager.from_json(empty_json)
     assert len(empty_manager2.tasks) == 0, "Empty manager should deserialize to empty tasks"
     
+    # 测试批量处理边界
+    try:
+        processor.batch_process("nonexistent_dir", action="info")
+        assert False, "Should raise NotADirectoryError"
+    except NotADirectoryError:
+        pass
+    
+    # 测试压缩边界
+    try:
+        processor.compress_video("nonexistent.mp4", "output.mp4")
+        assert False, "Should raise FileNotFoundError"
+    except FileNotFoundError:
+        pass
+    
+    # 测试音频提取边界
+    try:
+        processor.extract_audio("nonexistent.mp4", "output.mp3")
+        assert False, "Should raise FileNotFoundError"
+    except FileNotFoundError:
+        pass
+    
+    # 测试缩略图边界
+    try:
+        processor.extract_thumbnail("nonexistent.mp4", "output.jpg")
+        assert False, "Should raise FileNotFoundError"
+    except FileNotFoundError:
+        pass
+    
+    # 测试GIF边界
+    try:
+        processor.generate_gif("nonexistent.mp4", "output.gif")
+        assert False, "Should raise FileNotFoundError"
+    except FileNotFoundError:
+        pass
+    
+    # 测试重命名边界
+    try:
+        processor.rename_by_time("nonexistent.mp4")
+        assert False, "Should raise FileNotFoundError"
+    except FileNotFoundError:
+        pass
+    
     print("All selftest assertions passed!")
 
 def main():
