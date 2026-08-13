@@ -1,0 +1,48 @@
+{
+  "timestamp": "20260813_220417",
+  "slug": "agentpack",
+  "spec": {
+    "slug": "agentpack",
+    "name": "agentpack",
+    "description": "基于关键词路由与缓存清理的智能体任务调度工具，提升批量操作效率。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 删除 ./tmp/cache_20240101.bin (2.3 MB)",
+      "2. 删除 ./tmp/session_tmp.log (1.1 MB)",
+      "3. 清空 ./tmp/ 目录下的 12 个临时文件",
+      "- 输入 `y`：正式执行",
+      "- 输入 `n`：取消操作，不产生任何变更",
+      "- 输入其他字符：重新提示，直到输入 `y` 或 `n`",
+      "1. **精确匹配优先**：完整匹配关键词优先于部分匹配",
+      "2. **多关键词组合**：多个关键词同时出现时，按优先级从高到低执行",
+      "3. **分号分隔**：使用分号 `;` 分隔多个子任务，按顺序执行",
+      "1. 验证环境：agentpack --version && agentpack --selftest",
+      "2. 预演预览：agentpack --dry-run <操作>",
+      "3. 正式执行：agentpack <操作> → 输入 y 确认",
+      "1. 阅读「能力边界」了解工具能做什么",
+      "2. 执行 `agentpack --version` 和 `agentpack --selftest` 验证环境",
+      "3. 用 `--dry-run` 模式尝试一次清理预览",
+      "4. 确认无误后正式执行",
+      "1. 掌握「关键词路由规则」，设计高效的任务描述",
+      "2. 使用分号串联多个子任务，实现批处理",
+      "3. 结合 `--project-dir` 实现多项目隔离管理",
+      "4. 熟悉「错误码体系」，快速定位和解决问题",
+      "1. 设计复杂的批量调度任务，优化执行顺序",
+      "2. 结合 CI/CD 流程，实现自动化清理和调度",
+      "3. 自定义路由规则，扩展工具能力",
+      "4. 编写脚本封装常用操作，提升效率"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "72337b3a73abd348",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
