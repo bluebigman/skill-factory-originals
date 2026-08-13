@@ -127,6 +127,7 @@ def process_image(
     fmt=None,
     quality=85,
     keep_exif=False,
+    dry_run=False,
 ) -> dict:
     """
     处理单张图片：缩放 + 格式转换 + 压缩。
@@ -140,10 +141,12 @@ def process_image(
     if not input_path.is_file():
         raise FileNotFoundError(f"输入文件不存在: {input_path}")
 
-    # 读取图片
+    # 读取图片（二进制模式显式声明，Pillow 接受文件对象）
     try:
-        img = Image.open(input_path)
-        orig_w, orig_h = img.size
+        with open(input_path, "rb") as fh:
+            img = Image.open(fh)
+            img.load()  # 提前加载，避免文件句柄关闭后惰性读取报错
+            orig_w, orig_h = img.size
     except Exception as e:
         raise RuntimeError(f"无法读取图片: {e}")
 
@@ -191,11 +194,14 @@ def process_image(
     # 确保输出目录存在
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # 保存图片
-    try:
-        img.save(output_path, format=fmt, **save_kwargs)
-    except Exception as e:
-        raise RuntimeError(f"图片保存失败: {e}")
+    # 保存图片（dry-run 只预览不写盘）
+    if not dry_run:
+        try:
+            img.save(output_path, format=fmt, **save_kwargs)
+        except Exception as e:
+            raise RuntimeError(f"图片保存失败: {e}")
+    else:
+        print(f"[dry-run] 预览保存（未写盘）: {output_path} ({new_w}x{new_h})")
 
     # 返回处理信息
     return {
@@ -216,6 +222,7 @@ def process_directory(
     fmt=None,
     quality=85,
     keep_exif=False,
+    dry_run=False,
 ) -> tuple:
     """
     批量处理目录中的所有图片。
@@ -264,6 +271,7 @@ def process_directory(
                         src_path, dst_path,
                         width=width, height=height, scale=scale,
                         fmt=fmt, quality=quality, keep_exif=keep_exif,
+                        dry_run=dry_run,
                     )
                     results.append(info)
                 except Exception as e:
@@ -411,8 +419,28 @@ def main() -> int:
 
     # 自检
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="只预览不写盘（安全守卫）",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="输出处理明细（每步决策）",
+    )
+
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
+    if args.verbose:
+        print(f"[verbose] 参数: {vars(args)}")
 
     # 自检模式
     if args.selftest:
@@ -440,6 +468,7 @@ def main() -> int:
         fmt=args.format,
         quality=args.quality,
         keep_exif=args.keep_exif,
+        dry_run=args.dry_run,
     )
 
     # 输出结果

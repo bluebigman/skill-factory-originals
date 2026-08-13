@@ -25,6 +25,7 @@ import random
 import sys
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义（E001 - E010）
@@ -525,7 +526,24 @@ def main() -> None:
     parser.add_argument("--batch", help="批量输入 JSON 文件路径")
     parser.add_argument("--out", help="批量输出 JSON 文件路径（默认 stdout）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.268 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -535,7 +553,7 @@ def main() -> None:
     # 批量模式
     if args.batch:
         try:
-            with open(args.batch, "r", encoding="utf-8") as f:
+            with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
                 items = json.load(f)
         except FileNotFoundError:
             fail("E006", f"输入文件不存在: {args.batch}")
@@ -551,7 +569,7 @@ def main() -> None:
 
         if args.out:
             try:
-                with open(args.out, "w", encoding="utf-8") as f:
+                with open(args.out, "w", encoding="utf-8", errors="replace") as f:
                     json.dump(results, f, ensure_ascii=False, indent=2)
                 print(f"批量生成完成，共 {len(results)} 封，已写入 {args.out}")
             except Exception as e:

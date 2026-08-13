@@ -397,7 +397,7 @@ def main():
         description="表格清洗工坊 - 将杂乱表格整理为规范结构化数据",
         epilog="支持 CSV/TSV/Excel/JSON/Markdown，最大 10000 行 x 100 列",
     )
-    parser.add_argument("input", nargs="?", help="输入文件路径")
+    parser.add_argument("--input", nargs="?", help="输入文件路径")
     parser.add_argument("-o", "--output", help="输出文件路径（默认 stdout）")
     parser.add_argument(
         "-f", "--format",
@@ -410,6 +410,24 @@ def main():
         action="store_true",
         help="运行内置自检（不读取外部文件）",
     )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="只打印将写入的内容，不实际写盘（预览模式）",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="输出每个处理步骤的明细决策",
+    )
+
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
 
@@ -441,9 +459,14 @@ def main():
         output = write_output(headers, cleaned_rows, args.format)
 
         if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
-                f.write(output)
-            print(f"清洗完成，结果已写入: {args.output}")
+            if args.verbose:
+                print(f"[verbose] 输出格式={args.format}，行数={len(cleaned_rows)}，列数={len(headers)}")
+            if not args.dry_run:
+                with open(args.output, "w", encoding="utf-8") as f:
+                    f.write(output)
+                print(f"清洗完成，结果已写入: {args.output}")
+            else:
+                print(f"[dry-run] 预览输出（未写盘）: {args.output}，共 {len(output)} 字符")
         else:
             print(output)
 

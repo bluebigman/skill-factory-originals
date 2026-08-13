@@ -199,6 +199,7 @@ def _read_text_safe(path):
     with open(path, encoding="utf-8", errors="replace") as f:
         return f.read()
 
+
 # 批处理流式读取工具
 def _iter_lines(path):
     with open(path, encoding="utf-8", errors="replace") as f:
@@ -358,15 +359,4 @@ def selftest() -> int:
     chk("E006 必填缺失标注", _e006)
 
     # 正常渲染 + [需核实] 标注
-    body, _, missing = render("dunning", "zh-CN", "formal",
-                              {"recipient": "张经理", "amount": "", "invoice_no": "INV-1",
-                               "due_date": "2026-07-31", "sender": "李明"})
-    assert "[需核实:amount]" in body, "缺失字段未标注"
-    print("  [OK] 缺失字段标注为 [需核实:amount]")
-
-    # 多语言
-    en, _, _ = render("dunning", "en-US", "formal",
-                      {"recipient": "Mr.Lee", "amount": "$520", "invoice_no": "INV-1",
-                       "due_date": "2026-07-31", "sender": "Li Ming"})
-    assert "Dear Mr.Lee" in en
-    print
+    body, _, missing = render

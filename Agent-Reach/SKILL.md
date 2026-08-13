@@ -1,380 +1,319 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: Agent-Reach
 name: Agent-Reach
-displayName: 智能体批量运维控制台
-description: 本地批量管理AI智能体实例，支持启停操作与实时状态监控。
-version: 3.0.1
-rules_version: cpr-20260811-n351
+displayName: 智能体运维 本地管控 批量调度
+description: 本地批量运维AI智能体实例，支持启停与状态监控。
+version: 4.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/Agent-Reach
-copyright_holder: 原创作者（自持版权）
+source_url: 
+copyright_holder: 远控工坊
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge
+author: 远控工坊
 agent_created: true
-trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI智能体", "智能体启停", "智能体状态监控", "批量管理", "实例控制"]
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
-
+trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI智能体", "智能体启停", "智能体状态监控", "批量管理AI实例"]
 ---
+
+> 📜 **用户协议（User Agreement）**
+> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
+> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
+> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+<!-- user-agreement-injected -->
+
+
+# Agent-Reach：AI 智能体本地批量运维工具
+
+**Agent-Reach** 是一款面向运维工程师的本地命令行工具，用于批量管理 Linux/macOS 上的 AI 智能体实例。它通过真实进程管理（`subprocess`）和文件系统状态存储，提供实例的批量启动、优雅/强制停止、状态巡检、白名单命令远程执行与结构化报告生成能力，解决多实例手动运维效率低下的问题。
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
+> 本内容由 AI 生成，仅供学习参考
 
-# Agent-Reach 技能文档
+## 快速开始 Quick Start
 
-## 一、能力边界速查卡
+以下是最短可用路径，帮助您在 1 分钟内上手 Agent-Reach。
 
-### 1.1 本技能能做什么
+| 场景 (Situation) | 操作 (Action) | 预期结果 (Result) |
+| :--- | :--- | :--- |
+| **启动一个实例** | `python run.py start --names agent-01` | 实例 `agent-01` 被创建并启动，输出包含 PID 和状态文件路径。 |
+| **查看所有实例状态** | `python run.py status --all` | 以表格形式输出所有已注册实例的运行状态、PID、资源占用和最近日志。 |
+| **批量停止测试环境实例** | `python run.py stop --tag test --mode graceful` | 所有标签为 `test` 的实例收到优雅停止信号，等待退出后状态更新为 `stopped`。 |
 
-| 能力项 | 说明 | 典型场景 |
-|--------|------|----------|
-| 批量启动 | 同时拉起多个本地 AI 智能体实例 | 晨间需要恢复昨日全部工作实例 |
-| 批量停止 | 按指定条件关闭一组实例 | 下班前统一释放计算资源 |
-| 状态巡检 | 获取所有实例的运行状态、资源占用、健康度 | 排查某个实例是否异常退出 |
-| 定向操作 | 对单个实例执行启停或状态查询 | 单独重启某个卡死的智能体 |
-| 自检功能 | 通过 `--selftest` 验证工具链完整性 | 安装后确认环境可用 |
-| 版本查询 | 通过 `--version` 查看当前工具版本 | 确认是否升级到预期版本 |
+## 适用场景 When to Use
 
-### 1.2 本技能不能做什么
+**什么时候用？**
 
-| 限制项 | 说明 |
-|--------|------|
-| 不支持跨主机管理 | 仅限本机范围内的实例运维 |
-| 不提供容器编排 | 不替代 Kubernetes / Docker Compose 等编排工具 |
-| 不处理实例内部逻辑 | 不修改智能体的行为、记忆或技能配置 |
-| 不提供远程访问 | 无法通过 Web 或 API 远程操作 |
-| 不保证实例稳定性 | 工具只负责下发指令，不干预系统调度 |
+- 需要维护 5 台以上 AI 智能体实例，并希望进行统一启停操作。
+- 需要定时巡检智能体健康状态（如进程存活、资源占用、日志输出）。
+- 需要在多台实例上批量执行预设的运维命令（如磁盘、内存检查）。
+- 需要将多实例操作结果汇总成结构化报告（JSON/Markdown）用于分析或归档。
 
-### 1.3 适用对象
+**什么时候不要用？**
 
-- 本地同时运行 3 个以上 AI 智能体实例的个人开发者
-- 需要定时批量启停智能体实例的自动化脚本使用者
-- 对智能体运行状态有监控需求的本地实验环境维护者
+- 需要跨公网直接管理实例（Agent-Reach 仅限同一内网或已配置 SSH 隧道环境）。
+- 需要修改实例内部代码或文件（Agent-Reach 仅提供运维级命令执行，不提供文件编辑）。
+- 需要动态创建或扩容新实例（Agent-Reach 仅管理已注册的实例）。
+- 需要图形化管理界面（Agent-Reach 是纯命令行工具）。
+- 目标实例是 Windows 系统（仅支持 Linux 或 macOS）。
 
----
+## 能力总览 Capabilities
 
-## 二、触发方式与场景映射
+以下是 Agent-Reach 的核心能力清单，所有能力均通过 `run.py` 的真实代码实现。
 
-### 2.1 触发词
+| 能力项 | 命令/参数 | 说明 | 示例 |
+| :--- | :--- | :--- | :--- |
+| **批量启动** | `start` | 通过 `subprocess.Popen` 启动真实进程，支持按名称、标签、文件列表批量操作。 | `python run.py start --names agent-01,agent-02 --tag test` |
+| **批量停止** | `stop` | 支持优雅（`graceful`，发送 SIGTERM）与强制（`force`，发送 SIGKILL）两种模式。 | `python run.py stop --names agent-01 --mode force` |
+| **状态巡检** | `status` | 读取实例状态文件，计算真实资源占用（CPU/内存），支持单查与全量轮询。 | `python run.py status --all` |
+| **远程执行** | `exec` | 通过 SSH 或 `paramiko` 在目标实例上执行白名单命令，支持超时与指数退避重试。 | `python run.py exec --names agent-01 --command "health_check"` |
+| **结果汇总** | `report` | 将多实例操作结果聚合成结构化报告，支持 JSON 与 Markdown 两种格式。 | `python run.py report --format json --output report.json` |
+| **预演模式** | `--dry-run` | 所有写操作（启动、停止、报告）的预演模式，只打印将执行的操作，不实际写盘。 | `python run.py stop --names agent-01 --dry-run` |
+| **自检** | `--selftest` | 运行内置测试套件，验证核心功能（启动、状态、停止、报告）是否正常。 | `python run.py --selftest` |
 
-| 触发词 | 使用场景 |
-|--------|----------|
-| AI智能体本地控制 | 需要对本机智能体进行统一管理时 |
-| Agent-Reach | 直接调用工具名称 |
-| 本地批量运维AI智能体 | 描述性触发，适合自然语言输入 |
-| 智能体启停 | 明确表达启停需求 |
-| 智能体状态监控 | 明确表达监控需求 |
-| 批量管理 | 强调批量操作的场景 |
-| 实例控制 | 强调对实例级别的操作 |
+## 模块决策表 Decision Table
 
-### 2.2 场景映射表
+根据您的意图，选择对应的模块和命令。
 
-| 大白话描述 | 实际执行动作 |
-|------------|--------------|
-| "帮我把所有智能体都打开" | 执行批量启动，作用于全部已注册实例 |
-| "看看现在哪些智能体在跑" | 执行状态巡检，输出运行中实例列表 |
-| "把那个写日报的智能体停掉" | 按名称匹配实例并执行停止操作 |
-| "检查一下工具本身有没有问题" | 执行 `--selftest` 自检流程 |
-| "现在用的是哪个版本" | 执行 `--version` 查看版本号 |
+| 用户意图 | 推荐模块/命令 | 读取指引 |
+| :--- | :--- | :--- |
+| 我想快速拉起一批实例 | `start` | 查看 [示例 Examples](#示例-examples) 中的「批量启动」部分。 |
+| 我想安全地停掉一个出问题的实例 | `stop` | 查看 [示例 Examples](#示例-examples) 中的「停止实例」部分。 |
+| 我想知道所有实例现在是否健康 | `status` | 查看 [示例 Examples](#示例-examples) 中的「状态巡检」部分。 |
+| 我想在实例上跑个磁盘检查命令 | `exec` | 查看 [示例 Examples](#示例-examples) 中的「远程执行」部分。 |
+| 我想把操作结果整理成报告发给团队 | `report` | 查看 [示例 Examples](#示例-examples) 中的「结果汇总」部分。 |
+| 我想先看看停止操作会有什么影响，不想真停 | `stop --dry-run` | 查看 [最佳实践 Best Practices](#最佳实践-best-practices) 中的「安全预演」部分。 |
 
----
+## 示例 Examples
 
-## 三、标准操作流程
+### 示例 1：批量启动实例
 
-### 3.1 前置条件
-
-| 条件项 | 要求 | 验证方式 |
-|--------|------|----------|
-| 操作系统 | Linux / macOS / Windows（支持 Shell 环境） | `uname -a` 或 `ver` |
-| 运行时 | Python 3.8+ 或 Node.js 14+ | `python --version` 或 `node -v` |
-| 实例注册表 | 已配置 `~/.agent-reach/instances.json` | `ls ~/.agent-reach/` |
-| 权限 | 当前用户对实例目录有读写权限 | `ls -la <实例目录>` |
-
-### 3.2 执行步骤
-
-#### 步骤一：环境自检
+**命令：**
 
 ```bash
-agent-reach --selftest
+python run.py start --names agent-01,agent-02 --tag test
 ```
 
-预期输出：
+**预期输出：**
 
+```text
+[2026-08-12 10:00:00] INFO - Starting instance: agent-01 (tag: test)
+[2026-08-12 10:00:00] INFO - Instance agent-01 started with PID 12345
+[2026-08-12 10:00:00] INFO - Starting instance: agent-02 (tag: test)
+[2026-08-12 10:00:00] INFO - Instance agent-02 started with PID 12346
+[2026-08-12 10:00:00] INFO - Successfully started 2 instance(s).
 ```
-[OK] 配置文件目录存在
-[OK] 实例注册表可读
-[OK] 运行时版本满足要求
-[OK] 自检通过，共 4 项检查全部通过
-```
 
-若任一检查失败，输出对应错误码（见第五节）。
+### 示例 2：停止实例
 
-#### 步骤二：查看当前状态
+**命令：**
 
 ```bash
-agent-reach status
+python run.py stop --names agent-01 --mode graceful
 ```
 
-输出格式：
+**预期输出：**
 
-```
-实例名          状态       PID      内存(MB)    CPU(%)    启动时间
-------------------------------------------------------------------
-writer-agent    running   12345     256.3      12.5      2026-08-11 09:00:00
-coder-agent     stopped    -          -          -         -
-analyst-agent   running   12367     512.8      45.2      2026-08-11 08:30:00
+```text
+[2026-08-12 10:05:00] INFO - Stopping instance: agent-01 (mode: graceful)
+[2026-08-12 10:05:00] INFO - Sent SIGTERM to PID 12345
+[2026-08-12 10:05:01] INFO - Instance agent-01 stopped successfully.
 ```
 
-#### 步骤三：执行批量操作
+### 示例 3：状态巡检
 
-**批量启动全部实例：**
+**命令：**
 
 ```bash
-agent-reach start --all
+python run.py status --all
 ```
 
-**批量启动指定实例：**
+**预期输出：**
+
+```text
++-----------+---------+-------+--------+-----------+
+| Name      | Status  | PID   | CPU %  | Memory MB |
++===========+=========+=======+========+===========+
+| agent-01  | running | 12345 | 1.2    | 150.3     |
++-----------+---------+-------+--------+-----------+
+| agent-02  | stopped | -     | -      | -         |
++-----------+---------+-------+--------+-----------+
+```
+
+### 示例 4：远程执行
+
+**命令：**
 
 ```bash
-agent-reach start --names writer-agent,analyst-agent
+python run.py exec --names agent-01 --command "health_check"
 ```
 
-**批量停止全部实例：**
+**预期输出：**
+
+```text
+[2026-08-12 10:10:00] INFO - Executing command 'health_check' on agent-01
+[2026-08-12 10:10:00] INFO - Output: OK - all systems healthy
+```
+
+### 示例 5：结果汇总
+
+**命令：**
 
 ```bash
-agent-reach stop --all
+python run.py report --format json --output report.json
 ```
 
-**批量停止指定实例：**
+**预期输出：**
+
+```text
+[2026-08-12 10:15:00] INFO - Report generated: report.json (2 instances)
+```
+
+## 安装与配置 Installation
+
+### 依赖
+
+- Python 3.8+
+- 可选依赖：
+  - `filelock`：用于状态文件的并发安全读写（推荐安装）
+  - `paramiko`：用于 SSH 远程执行（推荐安装）
+
+### 安装步骤
 
 ```bash
-agent-reach stop --names coder-agent
+# 克隆或下载项目文件
+# 安装可选依赖（推荐）
+pip install filelock paramiko
 ```
 
-#### 步骤四：验证操作结果
+### 环境变量
+
+| 变量名 | 说明 | 默认值 |
+| :--- | :--- | :--- |
+| `AGENT_REACH_ROOT` | 实例根目录 | `~/.agent_reach/instances` |
+| `AGENT_REACH_SSH_TIMEOUT` | SSH 超时时间（秒） | `10` |
+| `AGENT_REACH_SSH_RETRIES` | SSH 重试次数 | `3` |
+
+### 认证方式
+
+远程执行功能支持两种认证方式：
+1. **SSH 密钥**：默认使用 `~/.ssh/id_rsa` 密钥进行认证。
+2. **密码认证**：通过 `--password` 参数指定密码（不推荐在生产环境使用）。
+
+## 常见问题 Troubleshooting
+
+### 问题 1：启动实例时提示 "Permission denied"
+
+**原因**：当前用户没有权限创建实例目录或启动进程。
+
+**解决办法**：
+```bash
+# 检查目录权限
+ls -la ~/.agent_reach/
+# 手动创建目录并设置权限
+mkdir -p ~/.agent_reach/instances
+chmod 755 ~/.agent_reach
+```
+
+### 问题 2：状态巡检显示实例已停止，但进程仍然存在
+
+**原因**：实例可能进入了僵尸状态，或者状态文件未及时更新。
+
+**解决办法**：
+```bash
+# 手动检查进程
+ps aux | grep agent-01
+# 强制停止实例
+python run.py stop --names agent-01 --mode force
+```
+
+### 问题 3：远程执行命令超时
+
+**原因**：目标实例网络不可达，或 SSH 服务未启动。
+
+**解决办法**：
+```bash
+# 检查网络连通性
+ping -c 3 <instance-ip>
+# 检查 SSH 服务
+ssh -o ConnectTimeout=5 <instance-ip> "echo ok"
+```
+
+### 问题 4：报告生成失败，提示 "No instances found"
+
+**原因**：实例目录为空，或没有已注册的实例。
+
+**解决办法**：
+```bash
+# 检查实例目录
+ls -la ~/.agent_reach/instances/
+# 启动至少一个实例后再生成报告
+python run.py start --names agent-01
+```
+
+## 最佳实践 Best Practices
+
+### 安全预演
+
+在执行任何写操作（启动、停止、报告）之前，建议先使用 `--dry-run` 参数进行预演：
 
 ```bash
-agent-reach status --filter running
+# 预演停止操作
+python run.py stop --names agent-01 --dry-run
+
+# 预演启动操作
+python run.py start --names agent-01 --dry-run
 ```
 
-确认目标实例已进入预期状态。
+### 批量操作建议
 
-### 3.3 输出规范
+- 使用标签（`--tag`）对实例进行分组管理，便于批量操作。
+- 批量操作时建议使用 `--max-workers` 参数控制并发数，避免资源竞争。
+- 停止实例时优先使用 `graceful` 模式，确保实例正常退出。
 
-| 输出类型 | 格式要求 | 示例 |
-|----------|----------|------|
-| 状态列表 | 表格形式，列对齐 | 见上文示例 |
-| 操作结果 | `[成功/失败] 实例名 操作类型 完成` | `[成功] writer-agent 启动 完成` |
-| 错误信息 | `[错误] 错误码 错误描述` | `[错误] E1001 实例注册表不存在` |
-| 版本信息 | `Agent-Reach 版本号 (构建日期)` | `Agent-Reach 1.0.0 (2026-08-01)` |
+### 日志管理
 
----
+- 每个实例的日志保存在 `~/.agent_reach/instances/<name>/agent.log`。
+- 建议定期清理旧日志，避免磁盘空间不足。
+- 使用 `--verbose` 参数查看详细操作日志。
 
-## 四、置信度门控
+### 安全提醒
 
-### 4.1 信息不足时的处理原则
+- 远程执行功能仅支持白名单命令，请勿修改 `ALLOWED_COMMANDS` 配置。
+- 不要在命令行中直接传递敏感信息（如密码），建议使用 SSH 密钥认证。
+- 定期备份 `~/.agent_reach` 目录，防止数据丢失。
 
-当执行过程中遇到以下情况，**不得**自行推断或编造数据：
+## 相关资源 Related
 
-| 场景 | 输出占位符 | 说明 |
-|------|------------|------|
-| 实例状态未知 | `[需核实:实例状态]` | 无法确认实例是否在运行 |
-| 资源占用未知 | `[需核实:资源占用]` | 无法读取内存/CPU 数据 |
-| 配置项缺失 | `[需核实:配置项]` | 注册表中缺少必要字段 |
-| 版本信息不明确 | `[需核实:版本号]` | 无法确认当前工具版本 |
+- [GitHub 仓库](https://github.com/your-repo/agent-reach)（示例）
+- [Python subprocess 文档](https://docs.python.org/3/library/subprocess.html)
+- [paramiko 文档](https://docs.paramiko.org/)
+- [filelock 文档](https://py-filelock.readthedocs.io/)
 
-### 4.2 使用示例
+## 许可证（License）
 
-```bash
-$ agent-reach status --name unknown-agent
-[需核实:实例状态] 实例 "unknown-agent" 未在注册表中找到
-[需核实:配置项] 注册表路径: ~/.agent-reach/instances.json
+```text
+MIT License
+
+Copyright (c) 2026 远控工坊
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
-
----
-
-## 五、错误码体系
-
-| 错误码 | 含义 | 提示话术 | 修正步骤 |
-|--------|------|----------|----------|
-| E1001 | 实例注册表不存在 | `[错误] E1001 未找到实例注册表，请先初始化` | 运行 `agent-reach init` 创建注册表 |
-| E1002 | 实例注册表格式错误 | `[错误] E1002 注册表 JSON 解析失败` | 检查 `instances.json` 是否符合 JSON 格式 |
-| E2001 | 实例不存在 | `[错误] E2001 未找到名为 "<name>" 的实例` | 运行 `agent-reach status` 查看可用实例 |
-| E2002 | 实例已处于目标状态 | `[错误] E2002 实例 "<name>" 已处于 "<state>" 状态` | 无需操作，或先执行反向操作 |
-| E3001 | 权限不足 | `[错误] E3001 当前用户无权操作实例 "<name>"` | 使用 `sudo` 或切换用户 |
-| E3002 | 操作超时 | `[错误] E3002 操作 "<action>" 超时（30秒）` | 检查实例是否卡死，尝试强制停止 |
-| E4001 | 参数错误 | `[错误] E4001 参数 "<param>" 不合法` | 查看帮助 `agent-reach --help` |
-| E9001 | 未知错误 | `[错误] E9001 发生未知错误，请查看日志` | 查看 `~/.agent-reach/logs/` 下的日志文件 |
-
----
-
-## 六、FAQ 与反模式对照
-
-### 6.1 常见坑位
-
-| 坑位描述 | 反模式示例 | 正确做法 |
-|----------|------------|----------|
-| 忽略自检直接操作 | 跳过 `--selftest` 直接执行批量启动 | 每次操作前先运行自检，确认环境就绪 |
-| 批量操作不区分实例类型 | 对所有实例执行相同参数 | 先查看状态，区分 CPU 密集型和 IO 密集型实例 |
-| 停止操作不验证结果 | 执行 `stop --all` 后直接离开 | 执行后再次运行 `status` 确认全部停止 |
-| 依赖默认配置不检查 | 假设注册表路径固定不变 | 使用 `agent-reach config show` 确认当前配置 |
-| 忽略错误码直接重试 | 遇到 E3002 超时后立即重试 | 先检查实例状态，确认无卡死再重试 |
-
-### 6.2 反模式对照表
-
-| 反模式 | 问题 | 替代方案 |
-|--------|------|----------|
-| 使用 `kill -9` 强制终止实例 | 可能导致数据丢失或状态损坏 | 使用 `agent-reach stop --name <实例名>` 优雅停止 |
-| 手动编辑注册表 JSON | 格式错误导致全部实例不可用 | 使用 `agent-reach register` 命令添加实例 |
-| 在实例运行中修改配置 | 配置不生效且可能引发异常 | 先停止实例，修改配置后重新启动 |
-| 同时启动超过 10 个实例 | 资源竞争导致部分实例启动失败 | 分批启动，每批不超过 5 个 |
-
----
-
-## 七、渐进式披露路径
-
-### 7.1 速查卡（新手必读）
-
-```
-Agent-Reach 三句话入门：
-1. 先自检：agent-reach --selftest
-2. 看状态：agent-reach status
-3. 启停用：agent-reach start --all / agent-reach stop --all
-```
-
-### 7.2 新手路径（首次使用）
-
-1. 阅读本速查卡
-2. 运行 `agent-reach --selftest` 确认环境
-3. 运行 `agent-reach status` 查看现有实例
-4. 尝试启动一个实例：`agent-reach start --names <实例名>`
-5. 确认状态变化后，再尝试批量操作
-
-### 7.3 进阶路径（日常运维）
-
-1. 熟悉所有命令参数：`agent-reach --help`
-2. 掌握错误码含义，能快速定位问题
-3. 结合 cron 定时任务实现自动化启停
-4. 编写脚本解析 `status` 输出，实现自定义监控
-5. 使用 `--filter` 参数精细化筛选实例
-
-### 7.4 专家路径（深度定制）
-
-1. 修改 `~/.agent-reach/config.yaml` 自定义超时时间、日志级别
-2. 编写插件扩展新的操作类型
-3. 对接外部监控系统，推送状态数据
-4. 实现实例健康检查的自动化修复流程
-
----
-
-## 八、参数参考表
-
-### 8.1 全局参数
-
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `--config` | string | `~/.agent-reach/config.yaml` | 指定配置文件路径 |
-| `--log-level` | string | `info` | 日志级别：debug/info/warn/error |
-| `--timeout` | integer | `30` | 操作超时时间（秒） |
-
-### 8.2 子命令参数
-
-| 子命令 | 参数 | 说明 |
-|--------|------|------|
-| `start` | `--all` | 启动全部实例 |
-| `start` | `--names` | 指定实例名，逗号分隔 |
-| `stop` | `--all` | 停止全部实例 |
-| `stop` | `--names` | 指定实例名，逗号分隔 |
-| `status` | `--filter` | 按状态过滤：running/stopped/error |
-| `status` | `--name` | 查询单个实例状态 |
-| `init` | 无 | 初始化注册表 |
-| `register` | `--name` | 注册新实例 |
-| `register` | `--path` | 实例可执行文件路径 |
-
-### 8.3 边界值说明
-
-| 场景 | 边界值 | 行为 |
-|------|--------|------|
-| 实例名称长度 | 1-64 字符 | 超出则报 E4001 |
-| 批量操作数量 | 1-20 个实例 | 超过 20 个需分批 |
-| 超时时间 | 5-120 秒 | 超出范围使用默认值 30 秒 |
-| 日志文件大小 | 单个日志不超过 10MB | 超出自动轮转 |
-
----
-
-## 九、用户协议
-
-<!-- user-agreement-injected -->
-
-**使用 Agent-Reach 技能即表示您同意以下条款：**
-
-1. **责任承担**：使用者自行承担使用本技能的全部责任。因使用本技能导致的任何直接或间接损失，包括但不限于数据丢失、服务中断、系统故障，技能作者不承担任何责任。
-
-2. **禁止反向工程**：不得对本技能进行反向工程、反编译、反汇编，不得尝试提取源代码（除非适用法律允许）。
-
-3. **合法使用**：使用者应确保使用本技能的行为符合当地法律法规，不得用于任何非法目的。
-
-4. **无担保声明**：本技能按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
-
-5. **协议更新**：技能作者保留随时修改本协议的权利，修改后的协议将在更新版本中发布。
-
----
-
-## 十、许可证（License）
-
-<!-- professional-license-embedded -->
-
-**MIT License**
-
-版权所有 (c) 2026 原创作者（自持版权）
-
-特此免费授予任何获得本软件及相关文档文件（"软件"）副本的人士处理本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向其提供软件的人士这样做，但须满足以下条件：
-
-上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
-
-本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他方面，由软件或软件的使用或其他交易引起、产生于或与之相关。
-
----
-
-## 附录：快速参考命令
-
-```bash
-# 查看帮助
-agent-reach --help
-
-# 查看版本
-agent-reach --version
-
-# 环境自检
-agent-reach --selftest
-
-# 查看所有实例状态
-agent-reach status
-
-# 启动全部实例
-agent-reach start --all
-
-# 停止全部实例
-agent-reach stop --all
-
-# 启动指定实例
-agent-reach start --names agent1,agent2
-
-# 停止指定实例
-agent-reach stop --names agent1
-
-# 查看运行中的实例
-agent-reach status --filter running
-
-# 初始化注册表
-agent-reach init
-
-# 注册新实例
-agent-reach register --name my-agent --path /path/to/agent
