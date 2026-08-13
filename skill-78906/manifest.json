@@ -1,0 +1,32 @@
+{
+  "timestamp": "20260814_005358",
+  "slug": "skill-78906",
+  "spec": {
+    "slug": "skill-78906",
+    "name": "skill-78906",
+    "description": "起标题场景一站式处理技能：覆盖起标题的识别、整理、生成与校验，输出可直接使用的结果文件。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 提供更具体的主题描述（如\"写一篇关于AI在医疗领域应用的文章标题\"）",
+      "2. 指定目标受众（如\"面向30-40岁职场女性\"）",
+      "3. 提供参考标题（如\"类似'2024年最值得关注的AI医疗趋势'这种风格\"）",
+      "1. **E001-E003**：引导用户补充信息，重新进入Step 1",
+      "2. **E004**：明确告知边界，提供替代方案（如建议使用翻译工具）",
+      "3. **E005**：展示当前可生成的标题，同时列出信息补充建议",
+      "4. **E006**：自动分批处理，每批50条，逐批输出",
+      "5. **E007**：拦截输入，提供合规建议，等待用户修改后重试"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "a2cead184bca6050",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
