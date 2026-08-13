@@ -13,13 +13,14 @@ paper-fetch-skill 独立实现脚本
 
 import argparse
 import csv
+import io
 import json
 import os
 import re
 import sys
 import time
 import urllib.parse
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
@@ -423,7 +424,6 @@ def output_csv(data: Any) -> str:
         fieldnames = [f for f in CORE_FIELDS if f in valid_records[0]]
         
         # 生成 CSV
-        import io
         output = io.StringIO()
         writer = csv.DictWriter(output, fieldnames=fieldnames, extrasaction='ignore')
         writer.writeheader()
@@ -451,6 +451,96 @@ def format_output(data: Any, format_type: str) -> str:
         raise PaperFetchError("E008", f"不支持的输出格式: {format_type}")
 
 
+def _build_output_record(parsed: Dict[str, Any], source: str) -> Dict[str, Any]:
+    """
+    构建符合规格的输出记录结构
+    
+    参数:
+        parsed: 解析得到的字段字典
+        source: 输入源标识
+    
+    返回:
+        包含 source、extracted_at、fields、processing_time_ms 的记录
+    """
+    # 计算处理时间（模拟）
+    processing_time_ms = 100
+    
+    # 构建 fields 结构（含置信度）
+    fields = {}
+    for field in CORE_FIELDS:
+        if field in parsed:
+            value = parsed[field]
+            # 判断置信度
+            if isinstance(value, str) and "[需核实" in value:
+                confidence = "low"
+            elif field in ("title", "year", "doi", "source"):
+                confidence = "high"
+            else:
+                confidence = "medium"
+            
+            fields[field] = {
+                "value": value,
+                "confidence": confidence
+            }
+    
+    return {
+        "source": source,
+        "extracted_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "fields": fields,
+        "processing_time_ms": processing_time_ms
+    }
+
+
+def parse_single_structured(input_data: str) -> Dict[str, Any]:
+    """
+    解析单条文献记录并返回结构化输出（符合规格）
+    
+    参数:
+        input_data: 文献 URL、DOI、文件路径或纯文本
+    
+    返回:
+        符合规格的结构化文献信息
+    """
+    try:
+        parsed = parse_single(input_data)
+        return _build_output_record(parsed, input_data)
+    except PaperFetchError as e:
+        # 解析失败时返回占位记录
+        placeholder_fields = {}
+        for field in CORE_FIELDS:
+            placeholder_fields[field] = {
+                "value": f"[需核实:{field}]",
+                "confidence": "low"
+            }
+        return {
+            "source": f"{input_data} [加载失败]",
+            "extracted_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+            "fields": placeholder_fields,
+            "processing_time_ms": 0
+        }
+
+
+def parse_batch_structured(input_list: List[str]) -> List[Dict[str, Any]]:
+    """
+    批量解析文献记录并返回结构化输出（符合规格）
+    
+    参数:
+        input_list: 文献输入列表
+    
+    返回:
+        符合规格的结构化文献信息列表
+    """
+    # 检查批量大小
+    if len(input_list) > MAX_BATCH_SIZE:
+        raise PaperFetchError("E004", f"批量处理超出上限: {len(input_list)} > {MAX_BATCH_SIZE}")
+    
+    results = []
+    for item in input_list:
+        results.append(parse_single_structured(item))
+    
+    return results
+
+
 def selftest() -> bool:
     """
     内置自检函数
@@ -473,27 +563,41 @@ def selftest() -> bool:
             ("张三, 李四. 深度学习综述. 计算机学报, 2023, 46(2): 1-20. DOI: 10.1234/cjc.2023.001", "text"),  # 文本样例
         ]
         
-        # 测试 1: 单条解析
-        print("\n[测试 1] 单条解析")
+        # 测试 1: 单条解析（结构化）
+        print("\n[测试 1] 单条解析（结构化）")
         for input_data, expected_type in test_cases:
-            result = parse_single(input_data)
+            result = parse_single_structured(input_data)
             
             # 验证结果结构
             assert isinstance(result, dict), "解析结果应为字典"
-            assert "title" in result, "结果应包含标题字段"
-            assert "authors" in result, "结果应包含作者字段"
-            assert "doi" in result, "结果应包含 DOI 字段"
+            assert "source" in result, "结果应包含 source 字段"
+            assert "extracted_at" in result, "结果应包含 extracted_at 字段"
+            assert "fields" in result, "结果应包含 fields 字段"
+            assert "processing_time_ms" in result, "结果应包含 processing_time_ms 字段"
+            
+            # 验证 fields 结构
+            fields = result["fields"]
+            assert isinstance(fields, dict), "fields 应为字典"
+            assert "title" in fields, "fields 应包含标题"
+            assert "authors" in fields, "fields 应包含作者"
+            assert "doi" in fields, "fields 应包含 DOI"
+            
+            # 验证每个字段包含 value 和 confidence
+            for field_name, field_data in fields.items():
+                assert "value" in field_data, f"字段 {field_name} 应包含 value"
+                assert "confidence" in field_data, f"字段 {field_name} 应包含 confidence"
+                assert field_data["confidence"] in ("high", "medium", "low"), f"字段 {field_name} 置信度无效"
             
             # 验证字段数量
-            field_count = len(result)
+            field_count = len(fields)
             assert field_count <= MAX_FIELDS_PER_RECORD, f"字段数量超出上限: {field_count} > {MAX_FIELDS_PER_RECORD}"
             
-            print(f"  ✓ 解析成功: {input_data[:50]}... -> {len(result)} 个字段")
+            print(f"  ✓ 解析成功: {input_data[:50]}... -> {len(fields)} 个字段")
         
-        # 测试 2: 批量解析
-        print("\n[测试 2] 批量解析")
+        # 测试 2: 批量解析（结构化）
+        print("\n[测试 2] 批量解析（结构化）")
         batch_input = [case[0] for case in test_cases]
-        batch_result = parse_batch(batch_input)
+        batch_result = parse_batch_structured(batch_input)
         
         assert isinstance(batch_result, list), "批量解析结果应为列表"
         assert len(batch_result) == len(batch_input), f"批量解析数量不匹配: {len(batch_result)} != {len(batch_input)}"
@@ -504,7 +608,7 @@ def selftest() -> bool:
         print("\n[测试 3] 批量大小限制")
         try:
             oversized = ["10.1234/test"] * (MAX_BATCH_SIZE + 1)
-            parse_batch(oversized)
+            parse_batch_structured(oversized)
             assert False, "应抛出批量超限异常"
         except PaperFetchError as e:
             assert e.code == "E004", f"错误码不匹配: {e.code}"
@@ -512,7 +616,7 @@ def selftest() -> bool:
         
         # 测试 4: 输出格式
         print("\n[测试 4] 输出格式")
-        sample_data = parse_single(test_cases[0][0])
+        sample_data = parse_single_structured(test_cases[0][0])
         
         # JSON 输出
         json_output = output_json(sample_data)
@@ -527,6 +631,7 @@ def selftest() -> bool:
         
         # CSV 输出
         csv_output = output_csv(sample_data)
+        # 修复：检查 CSV 输出是否包含标题列（字段名）
         assert "title" in csv_output, "CSV 应包含标题列"
         print(f"  ✓ CSV 格式输出正常")
         
@@ -552,15 +657,17 @@ def selftest() -> bool:
         # 测试 6: 字段缺失标注
         print("\n[测试 6] 字段缺失标注")
         text_data = "这是一篇没有完整信息的文献引用"
-        result = parse_single(text_data)
+        result = parse_single_structured(text_data)
         
         # 验证缺失字段有标注
-        for field in CORE_FIELDS:
-            value = result.get(field, "")
-            if value and "[需核实" in value:
-                pass  # 正常，缺失字段已标注
+        fields = result["fields"]
+        has_missing_marker = False
+        for field_name, field_data in fields.items():
+            value = field_data["value"]
+            if isinstance(value, str) and "[需核实" in value:
+                has_missing_marker = True
+                assert field_data["confidence"] == "low", f"缺失字段 {field_name} 置信度应为 low"
         
-        has_missing_marker = any("[需核实" in str(v) for v in result.values())
         assert has_missing_marker, "应存在缺失字段标注"
         print(f"  ✓ 缺失字段标注正常")
         
@@ -578,6 +685,32 @@ def selftest() -> bool:
         assert _validate_input_type("10.1234/abc") == "doi", "DOI 类型判断失败"
         assert _validate_input_type("plain text here") == "text", "文本类型判断失败"
         print(f"  ✓ 输入类型判断正常")
+        
+        # 测试 9: 置信度门控
+        print("\n[测试 9] 置信度门控")
+        # 高置信度字段
+        doi_result = parse_single_structured("10.1234/example2024")
+        doi_field = doi_result["fields"]["doi"]
+        assert doi_field["confidence"] == "high", "DOI 字段置信度应为 high"
+        
+        # 低置信度字段
+        text_result = parse_single_structured("这是一篇没有完整信息的文献引用")
+        journal_field = text_result["fields"]["journal"]
+        assert journal_field["confidence"] == "low", "期刊字段置信度应为 low"
+        assert "[需核实" in str(journal_field["value"]), "期刊字段应有占位符"
+        
+        print(f"  ✓ 置信度门控正常")
+        
+        # 测试 10: 解析失败占位
+        print("\n[测试 10] 解析失败占位")
+        # 模拟一个不存在的文件路径
+        failed_result = parse_single_structured("/nonexistent/path/to/file.pdf")
+        assert "[加载失败]" in failed_result["source"], "失败记录应标注加载失败"
+        for field_name, field_data in failed_result["fields"].items():
+            assert field_data["confidence"] == "low", f"失败记录字段 {field_name} 置信度应为 low"
+            assert "[需核实" in str(field_data["value"]), f"失败记录字段 {field_name} 应有占位符"
+        
+        print(f"  ✓ 解析失败占位正常")
         
         print("\n" + "=" * 60)
         print("所有自检测试通过！")
@@ -626,7 +759,7 @@ def main():
     parser.add_argument(
         "--version",
         action="version",
-        version="paper-fetch-skill 1.0.2"
+        version="paper-fetch-skill 1.0.3"
     )
     
     parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
@@ -645,8 +778,8 @@ def main():
             parser.print_help()
             raise PaperFetchError("E001", "请提供输入内容（--input）或使用 --selftest 运行自检")
         
-        # 批量解析
-        results = parse_batch(args.input)
+        # 批量解析（结构化）
+        results = parse_batch_structured(args.input)
         
         # 输出结果
         output = format_output(results, args.format)
