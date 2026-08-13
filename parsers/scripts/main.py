@@ -31,9 +31,8 @@ import argparse
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-from datetime import timezone  # G2 时区修复
 
 
 # ---------------------------------------------------------------------------
