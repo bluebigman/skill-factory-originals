@@ -319,9 +319,9 @@ def main() -> int:
         action="store_true",
         help="运行内置自检（离线，不依赖外部资源）",
     )
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
 
     try:
-        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
         args = parser.parse_args()
 
         # 自检模式

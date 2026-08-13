@@ -22,9 +22,9 @@ import json
 import os
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-from datetime import timezone  # G2 时区修复
+
 dry_run = False  # v3.274 模块级 dry-run 标志
 
 
@@ -168,10 +168,9 @@ def parse_content(data: str, source_type: str) -> Dict[str, Any]:
             
             # 尝试读取文件内容
             try:
-                with open(filepath, 'r', encoding='utf-8') as f:
-                    content = f.read()
-                    result["content"] = content
-                    result["key_info"].append(f"文件类型：{os.path.splitext(filename)[1] or '未知'}")
+                content = _read_text_safe(filepath)
+                result["content"] = content
+                result["key_info"].append(f"文件类型：{os.path.splitext(filename)[1] or '未知'}")
             except (IOError, UnicodeDecodeError):
                 result["content"] = f"[无法读取文件内容：{filepath}]"
     
@@ -353,6 +352,26 @@ def run_selftest() -> bool:
     template_ok = "## 关键信息" in OUTPUT_TEMPLATE and "## 置信度评估" in OUTPUT_TEMPLATE
     print(f"  模板完整性：{'✅' if template_ok else '❌'}")
     all_passed = all_passed and template_ok
+    
+    # 测试文件读取（使用临时文件）
+    print("\n文件读取测试：")
+    import tempfile
+    temp_fd, temp_path = tempfile.mkstemp(suffix=".txt")
+    try:
+        with os.fdopen(temp_fd, 'w', encoding='utf-8') as f:
+            f.write("测试文件内容\n第二行内容")
+        
+        detected_type = detect_source_type(temp_path)
+        file_ok = detected_type == "file"
+        print(f"  临时文件类型检测：{detected_type} {'✅' if file_ok else '❌'}")
+        
+        markdown, exit_code = process_input(temp_path)
+        file_process_ok = exit_code == 0 and "测试文件内容" in markdown
+        print(f"  文件内容读取：{'✅' if file_process_ok else '❌'}")
+        
+        all_passed = all_passed and file_ok and file_process_ok
+    finally:
+        os.unlink(temp_path)
     
     print("\n" + "=" * 60)
     if all_passed:

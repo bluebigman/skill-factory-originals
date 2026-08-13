@@ -86,6 +86,12 @@ class SQLGenerator:
         "倒序": "DESC",
     }
 
+    # 常见表名关键词（用于识别表名）
+    TABLE_KEYWORDS = ["用户", "订单", "员工", "部门", "商品", "客户", "产品", "学生", "教师", "班级", "成绩", "账户", "交易", "日志", "记录"]
+
+    # 常见字段关键词（用于识别字段）
+    FIELD_KEYWORDS = ["年龄", "城市", "时间", "金额", "数量", "名称", "姓名", "性别", "工资", "部门", "订单", "用户", "状态", "价格", "日期"]
+
     def __init__(self):
         pass
 
@@ -166,13 +172,22 @@ class SQLGenerator:
         # 模式3: "查询xxx" 或 "统计xxx" 等，xxx可能是表名
         match = re.search(r"(?:查询|统计|计数|求和|平均|最大|最小|获取|列出|显示)\s*([\u4e00-\u9fa5_a-zA-Z][\u4e00-\u9fa5_a-zA-Z0-9_]*)", text)
         if match and "表" not in match.group(1):
-            # 检查是否可能是表名（后面没有其他明显字段）
             candidate = match.group(1)
-            # 如果后面跟着"所有"或"全部"，则可能是表名
-            if re.search(r"(?:所有|全部|每个|按|根据|其中|的)", text[match.end():]):
+            # 如果候选词在已知表名列表中，或后面跟着"所有"、"全部"、"每个"等词，则认为是表名
+            if candidate in self.TABLE_KEYWORDS or re.search(r"(?:所有|全部|每个|按|根据|其中|的)", text[match.end():]):
                 table = candidate
                 remaining = text.replace(match.group(0), " ", 1)
                 return table, remaining
+
+        # 模式4: 直接匹配已知表名关键词
+        for kw in self.TABLE_KEYWORDS:
+            if kw in text:
+                # 确保不是字段名的一部分（如"用户年龄"中的"用户"）
+                pattern = rf"(?<![\u4e00-\u9fa5_a-zA-Z0-9]){kw}(?![\u4e00-\u9fa5_a-zA-Z0-9])"
+                if re.search(pattern, text):
+                    table = kw
+                    remaining = text.replace(kw, " ", 1)
+                    return table, remaining
 
         return None, text
 
@@ -390,22 +405,22 @@ def run_selftest() -> bool:
         {
             "name": "基础查询",
             "input": "查询所有用户表",
-            "check": lambda r: "SELECT" in r["sql"] and "FROM" in r["sql"] and "user" in r["sql"]
+            "check": lambda r: "SELECT" in r["sql"] and "FROM" in r["sql"] and "用户" in r["sql"]
         },
         {
             "name": "条件过滤",
             "input": "从用户表查询所有年龄大于30的用户",
-            "check": lambda r: "WHERE" in r["sql"] and "age" in r["sql"] and ">" in r["sql"]
+            "check": lambda r: "WHERE" in r["sql"] and "年龄" in r["sql"] and ">" in r["sql"]
         },
         {
             "name": "聚合统计",
             "input": "统计订单表总金额",
-            "check": lambda r: "SUM" in r["sql"] and "amount" in r["sql"]
+            "check": lambda r: "SUM" in r["sql"] and "金额" in r["sql"]
         },
         {
             "name": "分组统计",
             "input": "统计每个部门的员工数量",
-            "check": lambda r: "COUNT" in r["sql"] and "GROUP BY" in r["sql"] and "department" in r["sql"]
+            "check": lambda r: "COUNT" in r["sql"] and "GROUP BY" in r["sql"] and "部门" in r["sql"]
         },
         {
             "name": "排序分页",
@@ -415,12 +430,12 @@ def run_selftest() -> bool:
         {
             "name": "多条件组合",
             "input": "从用户表查询年龄大于30并且城市等于北京的用户",
-            "check": lambda r: "AND" in r["sql"] and "city" in r["sql"] and "age" in r["sql"]
+            "check": lambda r: "AND" in r["sql"] and "城市" in r["sql"] and "年龄" in r["sql"]
         },
         {
             "name": "逻辑或条件",
             "input": "从用户表查询城市等于北京或者城市等于上海的用户",
-            "check": lambda r: "OR" in r["sql"] and "city" in r["sql"]
+            "check": lambda r: "OR" in r["sql"] and "城市" in r["sql"]
         },
     ]
 

@@ -368,13 +368,13 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="运行内置自检"
     )
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     return parser
 
 
 def main() -> int:
     """主入口函数。"""
     parser = build_parser()
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
     args = parser.parse_args()
 
     # 自检模式

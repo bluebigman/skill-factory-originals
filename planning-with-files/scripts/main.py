@@ -9,13 +9,13 @@ scripts/main.py — planning-with-files 技能独立实现
 
 import argparse
 import datetime
-import json
 import os
 import re
 import shutil
 import sys
 import tempfile
-from datetime import timezone  # G2 时区修复
+from datetime import timezone
+
 dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
@@ -40,11 +40,6 @@ STATUS_BLOCKED = "blocked"
 # 计划文件格式标记
 MARKER_START = "<!-- plan-start -->"
 MARKER_END = "<!-- plan-end -->"
-# 改进的正则表达式：允许行尾没有换行符
-STEP_PATTERN = re.compile(
-    r"^\s*-\s*\[([ xX])\]\s*([^\n]+?)(?:\s*::\s*(.+?))?\s*$",
-    re.MULTILINE
-)
 
 
 class PlanError(Exception):
@@ -58,7 +53,7 @@ class PlanError(Exception):
 
 def _read_text_safe(path):
     """多编码安全读取（R3+R5 合规）"""
-    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+    for enc in ("utf-8", "gbk", "gb18030"):
         try:
             with open(path, encoding=enc, errors="replace") as f:
                 return f.read()
@@ -66,12 +61,6 @@ def _read_text_safe(path):
             continue
     with open(path, encoding="utf-8", errors="replace") as f:
         return f.read()
-
-# 批处理流式读取工具
-def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
 
 
 def _now_str() -> str:
@@ -549,18 +538,15 @@ def main() -> int:
     progress_parser = subparsers.add_parser("progress", help="查看进度")
     progress_parser.add_argument("--filepath", help="计划文件路径")
 
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")
+    parser.add_argument("--force", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
 
     args = parser.parse_args()
 
     global dry_run
 
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    dry_run = getattr(args, "dry_run", False)
 
     # 自检模式
     if args.selftest:

@@ -151,7 +151,7 @@ class LogAnalyzer:
             
             # 提取消息
             message = line
-            if timestamp:
+            if timestamp and time_match:
                 message = line[line.find(time_match.group(1)) + len(time_match.group(1)):].strip()
             if source:
                 idx = line.find(f'[{source}]')
@@ -284,14 +284,15 @@ class LogAnalyzer:
         if not times:
             return {"count": 0}
         
+        sorted_times = sorted(times)
         return {
             "count": len(times),
             "avg": sum(times) / len(times),
             "max": max(times),
             "min": min(times),
-            "p50": sorted(times)[len(times) // 2],
-            "p90": sorted(times)[int(len(times) * 0.9)],
-            "p99": sorted(times)[int(len(times) * 0.99)]
+            "p50": sorted_times[len(sorted_times) // 2],
+            "p90": sorted_times[int(len(sorted_times) * 0.9)],
+            "p99": sorted_times[int(len(sorted_times) * 0.99)]
         }
     
     def count_by_user(self) -> Dict:

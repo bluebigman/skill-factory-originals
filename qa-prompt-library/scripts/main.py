@@ -368,6 +368,8 @@ def run_selftest() -> bool:
     # 大小写不敏感搜索
     case_search = library.search("TEST")
     assert len(case_search) > 0, "大小写不敏感搜索失败"
+    # 验证搜索到的条目确实包含 "test"（不区分大小写）
+    assert any("test" in " ".join([item.title, item.category, item.prompt, " ".join(item.tags)]).lower() for item in case_search), "搜索结果不匹配"
     print("[PASS] 大小写不敏感搜索")
 
     # ---- 测试 13: 类别过滤 ----

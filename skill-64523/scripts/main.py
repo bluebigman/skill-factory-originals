@@ -368,13 +368,6 @@ def validate_plan(plan: List[Tuple[str, str]], folder: str) -> Dict:
             if new_name not in other_files:
                 warnings.append(f"'{new_name}' 与现有文件重名，将被覆盖")
 
-    # 检查是否有文件被重命名为已存在的其他文件名（且该文件不在计划中）
-    planned_new_names = {new for _, new in plan}
-    for old_name, new_name in plan:
-        if new_name in existing_names and old_name not in existing_names:
-            # 新文件名与现有文件冲突，但旧文件不在现有文件中（不可能，因为旧文件必然存在）
-            pass
-
     return {"issues": issues, "warnings": warnings}
 
 
@@ -735,6 +728,45 @@ def run_selftest() -> int:
 
             assert len(result["issues"]) > 0, "应检测到重名冲突"
             print(f"  ✅ 通过: 重名冲突检测正确，发现 {len(result['issues'])} 个问题")
+    except Exception as e:
+        failures += 1
+        print(f"  ❌ 失败: {e}")
+
+    # ---- 测试 9: 后缀规则 ----
+    print("\n[测试 9] 后缀规则")
+    try:
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmpdir:
+            Path(tmpdir, "report.pdf").write_text("test", encoding="utf-8")
+            Path(tmpdir, "summary.docx").write_text("test", encoding="utf-8")
+
+            rule = {"type": "suffix", "value": "_final", "folder": tmpdir}
+            plan = build_rename_plan(tmpdir, rule)
+
+            assert len(plan) == 2, f"预期 2 个文件，实际 {len(plan)}"
+            for old_name, new_name in plan:
+                assert new_name.endswith("_final.pdf") or new_name.endswith("_final.docx"), f"后缀添加错误: {new_name}"
+
+            print(f"  ✅ 通过: 后缀添加正确")
+    except Exception as e:
+        failures += 1
+        print(f"  ❌ 失败: {e}")
+
+    # ---- 测试 10: 分隔符 ----
+    print("\n[测试 10] 分隔符")
+    try:
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmpdir:
+            Path(tmpdir, "report.pdf").write_text("test", encoding="utf-8")
+
+            rule = {"type": "prefix", "value": "2024", "separator": "-", "folder": tmpdir}
+            plan = build_rename_plan(tmpdir, rule)
+
+            assert len(plan) == 1, f"预期 1 个文件，实际 {len(plan)}"
+            old_name, new_name = plan[0]
+            assert new_name == "2024-report.pdf", f"分隔符处理错误: {new_name}"
+
+            print(f"  ✅ 通过: 分隔符处理正确")
     except Exception as e:
         failures += 1
         print(f"  ❌ 失败: {e}")

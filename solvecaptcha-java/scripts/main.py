@@ -18,7 +18,7 @@ import hashlib
 import json
 import re
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -286,12 +286,12 @@ def simulate_solve(request: Dict[str, Any]) -> Dict[str, Any]:
         # 行为验证返回 token
         result = {
             "captcha_id": f"{captcha_type}_{seed[:16]}",
-            "token": f"P0_{seed[:32]}_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}",
+            "token": f"P0_{seed[:32]}_{datetime.now(timezone.utc).strftime('%Y%m%d%H%M%S')}",
         }
 
     # 附加处理信息
     result["type"] = captcha_type
-    result["solved_at"] = datetime.utcnow().isoformat() + "Z"
+    result["solved_at"] = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     result["elapsed_ms"] = 500 + (int(seed[2:4], 16) % 2000)
 
     # 模拟代理使用

@@ -137,6 +137,7 @@ class ReceiptParser:
         re.compile(r'^欢迎光临\s*(.+?)(?:\s*$|\s+电话)'),
         re.compile(r'^(.+?)(?:小票|收据|发票|receipt|invoice)'),
         re.compile(r'^([\u4e00-\u9fa5]{2,}(?:餐厅|饭店|酒楼|超市|商店|便利店|咖啡店|奶茶店))$'),
+        re.compile(r'^([\u4e00-\u9fa5]{2,10})$'),  # 宽松匹配：任意2-10个中文字符作为商户名
     ]
 
     DATE_PATTERNS = [

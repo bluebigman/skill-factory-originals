@@ -11,11 +11,12 @@ import argparse
 import os
 import re
 import sys
+import tempfile
+import shutil
 from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -317,9 +318,6 @@ class SelfTest:
         print("开始自检...")
 
         # 构建内存中的模拟文件系统（使用临时目录）
-        import tempfile
-        import shutil
-
         temp_dir = Path(tempfile.mkdtemp(prefix="skill_selftest_"))
         try:
             # 创建模拟项目结构
@@ -330,18 +328,15 @@ class SelfTest:
             config_dir.mkdir()
 
             # 写入模拟文件
-            if not dry_run or getattr(args, "force", False):
-                (project_dir / "package.json").write_text(
+            (project_dir / "package.json").write_text(
                 '{"name": "demo", "scripts": {"build": "tsc", "test": "jest"}}',
                 encoding="utf-8"
             )
-            if not dry_run or getattr(args, "force", False):
-                (project_dir / "README.md").write_text(
+            (project_dir / "README.md").write_text(
                 "# Demo Project\n规则: 使用 TypeScript 编写",
                 encoding="utf-8"
             )
-            if not dry_run or getattr(args, "force", False):
-                (src_dir / "main.ts").write_text(
+            (src_dir / "main.ts").write_text(
                 "// TODO: 实现主逻辑\n// HACK: 临时绕过 bug\nconst x = 1;",
                 encoding="utf-8"
             )
@@ -417,19 +412,11 @@ def main() -> int:
         action="store_true",
         help="运行内置自检并退出"
     )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")
+    parser.add_argument("--force", action="store_true", help="强制写盘")
+    parser.add_argument("--dry-run", action="store_true", help="预览模式")
 
     args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -456,8 +443,11 @@ def main() -> int:
             output_path = Path(args.output)
             try:
                 output_path.parent.mkdir(parents=True, exist_ok=True)
-                output_path.write_text(doc, encoding="utf-8")
-                print(f"技能包已生成: {output_path}")
+                if args.dry_run and not args.force:
+                    print(f"[DRY-RUN] 将写入: {output_path}")
+                else:
+                    output_path.write_text(doc, encoding="utf-8")
+                    print(f"技能包已生成: {output_path}")
             except (IOError, OSError) as e:
                 print(f"E008: {ERROR_CODES['E008']}: {e}", file=sys.stderr)
                 return 8
