@@ -381,7 +381,7 @@ class SQLParser:
             uncertain = sql_type in UNCERTAIN_TYPES
 
         # 解析约束
-        is_required=False
+        is_required = True  # 默认必填
         is_id = False
         is_unique = False
         has_default = False
@@ -390,7 +390,7 @@ class SQLParser:
 
         # 检查 NOT NULL
         if re.search(r'NOT\s+NULL', rest, re.IGNORECASE):
-            is_required=False
+            is_required = True
 
         # 检查 NULL（允许空值）
         if re.search(r'\bNULL\b', rest, re.IGNORECASE) and not re.search(r'NOT\s+NULL', rest, re.IGNORECASE):
@@ -399,7 +399,7 @@ class SQLParser:
         # 检查 PRIMARY KEY
         if re.search(r'PRIMARY\s+KEY', rest, re.IGNORECASE):
             is_id = True
-            is_required=False
+            is_required = True
 
         # 检查 UNIQUE
         if re.search(r'\bUNIQUE\b', rest, re.IGNORECASE):
@@ -446,7 +446,7 @@ class SQLParser:
                 for field in model.fields:
                     if field.name in pk_columns:
                         field.is_id = True
-                        field.is_required=False
+                        field.is_required = True
 
         # 唯一约束
         elif re.match(r'(UNIQUE\s+KEY|UNIQUE)', part, re.IGNORECASE):
