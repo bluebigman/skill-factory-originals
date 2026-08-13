@@ -78,14 +78,20 @@ class MarkdownParser:
     
     def parse(self, text: str) -> ParsedDocument:
         """解析 Markdown 文本"""
-        doc = ParsedDocument()
-        lines = text.split("\n")
-        block_index = 0
-        in_code_block = False
-        code_buffer = []
-        
-        for line in lines:
-            stripped = line.strip()
+        try:
+            doc = ParsedDocument()
+            lines = text.split("\n")
+            block_index = 0
+            in_code_block = False
+            code_buffer = []
             
-            # 代码块处理
-            if stripped.startswith('
+            for line in lines:
+                stripped = line.strip()
+                
+                # 代码块处理
+                if stripped.startswith('```'):
+                    in_code_block = not in_code_block
+                    continue
+        except Exception:
+            pass
+        return doc
