@@ -1,0 +1,33 @@
+{
+  "timestamp": "20260813_202127",
+  "slug": "skill-64729",
+  "spec": {
+    "slug": "skill-64729",
+    "name": "",
+    "description": "",
+    "cli_interface": [],
+    "capability_outline": [
+      "2. **洗稿整理与结构化**：将杂乱的原文（含口语、重复、无标题）整理为结构化文本，自动分段、提炼小标题、生成摘要（≤100字），保留核心信息不丢失。",
+      "5. **批量处理**：支持一次输入多篇文本（用`---`分隔），自动逐篇处理，输出合并结果文件和逐篇校验报告。",
+      "3. **不处理图片/音频**：本技能仅处理纯文本或可提取文本的文件（PDF需为文字版，扫描件需先OCR）。图片中的文字无法直接处理。",
+      "4. **不提供法律建议**：洗稿涉及版权风险，本技能仅提供技术性改写和相似度检测，不判断是否构成侵权，不提供法律意见。",
+      "1. **读取输入**：调用`read_input()`读取文件或直接接收文本。若输入为空，返回E001。",
+      "2. **分段处理**：调用`split_paragraphs()`将文本分段，每段独立处理。",
+      "3. **改写生成**：调用`rewrite_text()`对每段进行改写。改写规则包括：",
+      "4. **相似度计算**：调用`calculate_similarity()`计算改写前后相似度。若相似度>0.6，自动进行第二轮改写（增加替换强度）。",
+      "5. **报告生成**：调用`generate_report()`生成校验报告，随结果文件一并输出。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "ee56b312c9d714c7",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
