@@ -1,0 +1,41 @@
+{
+  "timestamp": "20260814_050100",
+  "slug": "automatewithpython",
+  "spec": {
+    "slug": "automatewithpython",
+    "name": "automatewithpython",
+    "description": "将重复性文件与表格操作转化为可执行 Python 脚本，提升工作效率。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 准备一个 CSV 文件（如 `test.csv`）",
+      "2. 输入：`automatewithpython deduplicate test.csv`",
+      "3. 运行生成的脚本：`python script.py --input test.csv --output result.csv`",
+      "4. 打开 `result.csv` 查看结果",
+      "1. 阅读脚本源码，理解 pandas 基本操作",
+      "2. 尝试修改脚本参数（如 `--key` 指定去重列）",
+      "3. 组合多个操作（先清洗再转换格式）",
+      "4. 将脚本集成到定时任务（cron / 任务计划程序）",
+      "1. 基于生成的脚本封装为函数库",
+      "2. 添加自定义处理逻辑（如特殊业务规则）",
+      "3. 构建批处理流水线（多个脚本串联）",
+      "4. 将脚本参数化，支持配置文件驱动",
+      "1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任。包括但不限于因脚本运行导致的数据丢失、系统故障、业务中断等后果。",
+      "2. **数据安全**：使用者应确保输入数据的合法性和安全性。本 Skill 不存储用户数据，所有处理均在本地完成。请勿输入包含敏感个人信息或商业机密的数据。",
+      "3. **禁止反向工程**：使用者不得对本 Skill 生成的脚本进行反向工程、反编译或试图提取源代码（除明确授权的修改外）。",
+      "4. **合规使用**：使用者应遵守所在国家/地区的法律法规，不得使用本 Skill 从事任何违法活动，包括但不限于数据窃取、侵犯他人隐私、制作恶意软件等。",
+      "5. **修改与分发**：允许使用者基于本 Skill 进行修改和再分发，但需保留原始版权声明和本协议。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "e55abad936b1500c",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
