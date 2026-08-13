@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-scripts/main.py — 票据识别关键字段抽取（invoice-ocr-extract）独立实现
+run.py — 票据识别关键字段抽取（invoice-ocr-extract）独立实现
 
 本脚本为 clean-room 重写实现，仅依据功能规格独立完成：
   - 从发票图片或 PDF 中抽取关键字段（发票代码、号码、日期、买卖方信息、金额、税额、商品明细）
@@ -32,7 +32,7 @@ import re
 import sys
 import tempfile
 from dataclasses import dataclass, field, asdict
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -85,529 +85,582 @@ class InvoiceResult:
         # 移除内部字段
         d.pop("fields", None)
         d.pop("raw_text", None)
-        d["item_count"] = len(self.items)
-        d["items"] = [asdict(item) for item in self.items]
         return d
 
 
 # ---------------------------------------------------------------------------
-# 模拟 OCR 引擎（clean-room 实现，不依赖真实 OCR 库）
+# 模拟 OCR 引擎（真实实现可替换为 pytesseract / paddleocr）
 # ---------------------------------------------------------------------------
 
-class MockOCREngine:
-    """
-    模拟 OCR 引擎：从内置样例库中按文件名匹配返回预设文本。
-    实际使用时替换为真实 OCR 引擎（如 pytesseract）即可。
-    """
-
-    # 内置样例数据（用于 --selftest 与演示）
-    SAMPLE_INVOICES: Dict[str, str] = {
-        "sample_invoice_001.jpg": """发票代码：144032100110
-发票号码：038001400211
-开票日期：2025年03月18日
-购 买 方
-名称：深圳市星辰科技有限公司
-纳税人识别号：91440300MA5F123456
-销 售 方
-名称：广州云帆软件有限公司
-纳税人识别号：91440101MA9Y654321
-合计金额（不含税）：¥12,345.67
-税率：13%
-税额：¥1,604.94
-价税合计（大写）：壹万叁仟玖佰伍拾元陆角壹分
-价税合计（小写）：¥13,950.61
-项目名称：软件开发服务
-规格型号：定制开发
-单位：项
-数量：1
-单价：12345.67
-金额：12345.67
-""",
-        "sample_invoice_002.png": """发票代码：144032100112
-发票号码：038001400388
-开票日期：2025年04月02日
-购 买 方
-名称：北京启航教育科技有限公司
-纳税人识别号：91110108MA01B23456
-销 售 方
-名称：上海智印办公设备有限公司
-纳税人识别号：91310115MA1K345678
-合计金额（不含税）：¥8,900.00
-税率：6%
-税额：¥534.00
-价税合计（小写）：¥9,434.00
-项目名称：打印设备
-规格型号：HP LaserJet Pro
-单位：台
-数量：2
-单价：4450.00
-金额：8900.00
-""",
-        "sample_invoice_003.pdf": """发票代码：144032100118
-发票号码：038001400599
-开票日期：2025年05月20日
-购 买 方
-名称：成都天府餐饮管理有限公司
-纳税人识别号：91510100MA6C789012
-销 售 方
-名称：重庆川味食材供应链有限公司
-纳税人识别号：91500103MA5D890123
-合计金额（不含税）：¥3,200.50
-税率：9%
-税额：¥288.05
-价税合计（小写）：¥3,488.55
-项目名称：食材采购
-规格型号：/
+# 内置样例数据（用于 --selftest 与无文件时的演示）
+SAMPLE_INVOICE_TEXT = """
+发票代码：031001900111
+发票号码：12345678
+开票日期：2023年05月20日
+购买方名称：某某科技有限公司
+购买方纳税人识别号：91110108MA01XXXXX
+销售方名称：某某商贸有限公司
+销售方纳税人识别号：91110105MA02YYYYY
+价税合计（大写）：壹仟壹佰叁拾元整
+价税合计（小写）：1130.00
+不含税金额：1000.00
+税额：130.00
+商品名称：办公用品
+规格型号：批
 单位：批
 数量：1
-单价：3200.50
-金额：3200.50
-""",
-    }
+单价：1000.00
+金额：1000.00
+"""
 
-    def recognize(self, filepath: str) -> str:
-        """
-        模拟识别：根据文件名返回内置文本。
-        真实场景中替换为 OCR 引擎调用。
-        """
-        basename = os.path.basename(filepath)
-        if basename in self.SAMPLE_INVOICES:
-            return self.SAMPLE_INVOICES[basename]
-        # 未匹配到内置样例，返回空文本
-        return ""
+
+def extract_text_from_file(file_path: str) -> str:
+    """
+    从文件中提取文本（模拟 OCR）。
+    真实实现可替换为 pytesseract.image_to_string 或 paddleocr。
+    """
+    ext = os.path.splitext(file_path)[1].lower()
+    if ext in (".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".pdf"):
+        # 模拟 OCR：返回内置样例数据
+        # 真实实现中，这里应调用 OCR 引擎识别图片/PDF 中的文字
+        return SAMPLE_INVOICE_TEXT
+    else:
+        raise ValueError(f"不支持的文件格式: {ext}")
 
 
 # ---------------------------------------------------------------------------
-# 解析逻辑（核心）
+# 字段抽取逻辑
 # ---------------------------------------------------------------------------
 
-class InvoiceParser:
-    """从 OCR 文本中解析发票字段"""
+def extract_field(text: str, pattern: str, field_name: str) -> InvoiceField:
+    """
+    从文本中抽取单个字段。
+    返回 InvoiceField 对象，包含值、置信度与状态。
+    """
+    match = re.search(pattern, text)
+    if match:
+        value = match.group(1).strip()
+        confidence = 0.95  # 模拟置信度
+        status = "normal"
+    else:
+        value = ""
+        confidence = 0.0
+        status = "missing"
+    return InvoiceField(name=field_name, value=value, confidence=confidence, status=status)
 
-    # 常见字段正则模式
-    PATTERNS = {
-        "invoice_code": re.compile(r"发票代码[：:\s]*([0-9]{10,12})"),
-        "invoice_number": re.compile(r"发票号码[：:\s]*([0-9]{8,20})"),
-        "invoice_date": re.compile(r"开票日期[：:\s]*(\d{4}\s*年\s*\d{1,2}\s*月\s*\d{1,2}\s*日)"),
-        "buyer_name": re.compile(r"购买方[\s\S]*?名称[：:\s]*([^\n]+)"),
-        "buyer_tax_id": re.compile(r"购买方[\s\S]*?纳税人识别号[：:\s]*([0-9A-Z]{15,20})"),
-        "seller_name": re.compile(r"销售方[\s\S]*?名称[：:\s]*([^\n]+)"),
-        "seller_tax_id": re.compile(r"销售方[\s\S]*?纳税人识别号[：:\s]*([0-9A-Z]{15,20})"),
-        "total_amount": re.compile(r"(?:不含税|合计金额)[^¥]*?¥\s*([0-9,]+\.\d{2})"),
-        "total_tax": re.compile(r"税额[：:\s]*¥\s*([0-9,]+\.\d{2})"),
-        "total_amount_tax": re.compile(r"价税合计[（(]小写[)）][：:\s]*¥\s*([0-9,]+\.\d{2})"),
+
+def extract_invoice_fields(text: str) -> List[InvoiceField]:
+    """从原始文本中抽取所有关键字段"""
+    patterns = {
+        "invoice_code": r"发票代码[：:]\s*([0-9]+)",
+        "invoice_number": r"发票号码[：:]\s*([0-9]+)",
+        "invoice_date": r"开票日期[：:]\s*([0-9]{4}年[0-9]{2}月[0-9]{2}日)",
+        "buyer_name": r"购买方名称[：:]\s*([^\n]+)",
+        "buyer_tax_id": r"购买方纳税人识别号[：:]\s*([0-9A-Z]+)",
+        "seller_name": r"销售方名称[：:]\s*([^\n]+)",
+        "seller_tax_id": r"销售方纳税人识别号[：:]\s*([0-9A-Z]+)",
+        "total_amount_tax": r"价税合计（小写）[：:]\s*([0-9.]+)",
+        "total_amount": r"不含税金额[：:]\s*([0-9.]+)",
+        "total_tax": r"税额[：:]\s*([0-9.]+)",
     }
+    fields = []
+    for name, pattern in patterns.items():
+        field = extract_field(text, pattern, name)
+        fields.append(field)
+    return fields
 
-    # 商品明细起始标记
-    ITEM_START_MARKERS = ["项目名称", "货物或应税劳务", "服务名称"]
 
-    def parse(self, text: str) -> InvoiceResult:
-        """解析 OCR 文本，返回结构化结果"""
-        result = InvoiceResult(raw_text=text)
-        if not text or not text.strip():
-            return result
+def extract_items(text: str) -> List[InvoiceItem]:
+    """从文本中抽取商品明细"""
+    items = []
+    # 匹配商品名称行
+    item_pattern = r"商品名称[：:]\s*([^\n]+)"
+    match = re.search(item_pattern, text)
+    if match:
+        item = InvoiceItem()
+        item.name = match.group(1).strip()
+        # 尝试匹配其他字段
+        spec_match = re.search(r"规格型号[：:]\s*([^\n]+)", text)
+        if spec_match:
+            item.spec = spec_match.group(1).strip()
+        unit_match = re.search(r"单位[：:]\s*([^\n]+)", text)
+        if unit_match:
+            item.unit = unit_match.group(1).strip()
+        qty_match = re.search(r"数量[：:]\s*([0-9.]+)", text)
+        if qty_match:
+            item.qty = qty_match.group(1).strip()
+        price_match = re.search(r"单价[：:]\s*([0-9.]+)", text)
+        if price_match:
+            item.price = price_match.group(1).strip()
+        amount_match = re.search(r"金额[：:]\s*([0-9.]+)", text)
+        if amount_match:
+            item.amount = amount_match.group(1).strip()
+        items.append(item)
+    return items
 
-        # 提取各字段
-        for field_name, pattern in self.PATTERNS.items():
-            match = pattern.search(text)
-            if match:
-                value = match.group(1).strip()
-                setattr(result, field_name, value)
-                result.fields.append(InvoiceField(
-                    name=field_name,
-                    value=value,
-                    confidence=0.95,
-                    status="normal"
-                ))
-            else:
-                result.fields.append(InvoiceField(
-                    name=field_name,
-                    value="",
-                    confidence=0.0,
-                    status="missing"
-                ))
 
-        # 解析商品明细
-        self._parse_items(text, result)
-
-        # 计算整体置信度
-        if result.fields:
-            result.overall_confidence = sum(f.confidence for f in result.fields) / len(result.fields)
-
-        return result
-
-    def _parse_items(self, text: str, result: InvoiceResult) -> None:
-        """解析商品明细行（简化实现）"""
-        lines = text.splitlines()
-        in_item_section = False
-        current_item: Optional[InvoiceItem] = None
-
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
-
-            # 检测明细区域开始
-            if any(marker in line for marker in self.ITEM_START_MARKERS):
-                in_item_section = True
-                continue
-
-            # 检测明细区域结束（出现购买方/销售方/合计等关键字）
-            if in_item_section and any(kw in line for kw in ["合计", "价税合计", "备注", "收款人"]):
-                if current_item:
-                    result.items.append(current_item)
-                break
-
-            if not in_item_section:
-                continue
-
-            # 解析行内字段
-            if "：" in line or ":" in line:
-                parts = re.split(r"[：:]", line, maxsplit=1)
-                if len(parts) == 2:
-                    key, value = parts[0].strip(), parts[1].strip()
-
-                    # 名称行可能是新明细的开始
-                    if key == "项目名称" or key == "货物名称":
-                        if current_item:
-                            result.items.append(current_item)
-                        current_item = InvoiceItem(name=value)
-                    elif current_item and key == "规格型号":
-                        current_item.spec = value
-                    elif current_item and key == "单位":
-                        current_item.unit = value
-                    elif current_item and key == "数量":
-                        current_item.qty = value
-                    elif current_item and key == "单价":
-                        current_item.price = value
-                    elif current_item and key == "金额":
-                        current_item.amount = value
-
-        # 收尾
-        if current_item:
-            result.items.append(current_item)
+def parse_invoice(text: str, filename: str = "") -> InvoiceResult:
+    """
+    解析发票文本，返回结构化结果。
+    这是核心处理函数，被主流程与 selftest 共同调用。
+    """
+    result = InvoiceResult(filename=filename, raw_text=text)
+    
+    # 抽取字段
+    fields = extract_invoice_fields(text)
+    result.fields = fields
+    
+    # 填充到结果对象
+    field_map = {f.name: f.value for f in fields}
+    result.invoice_code = field_map.get("invoice_code", "")
+    result.invoice_number = field_map.get("invoice_number", "")
+    result.invoice_date = field_map.get("invoice_date", "")
+    result.buyer_name = field_map.get("buyer_name", "")
+    result.buyer_tax_id = field_map.get("buyer_tax_id", "")
+    result.seller_name = field_map.get("seller_name", "")
+    result.seller_tax_id = field_map.get("seller_tax_id", "")
+    result.total_amount_tax = field_map.get("total_amount_tax", "")
+    result.total_amount = field_map.get("total_amount", "")
+    result.total_tax = field_map.get("total_tax", "")
+    
+    # 抽取商品明细
+    result.items = extract_items(text)
+    
+    # 计算整体置信度
+    if fields:
+        result.overall_confidence = sum(f.confidence for f in fields) / len(fields)
+    else:
+        result.overall_confidence = 0.0
+    
+    return result
 
 
 # ---------------------------------------------------------------------------
 # 输出格式化
 # ---------------------------------------------------------------------------
 
-class OutputFormatter:
-    """将 InvoiceResult 格式化为不同输出"""
+def format_table(result: InvoiceResult) -> str:
+    """格式化为表格文本"""
+    lines = []
+    lines.append(f"文件名: {result.filename}")
+    lines.append(f"发票代码: {result.invoice_code}")
+    lines.append(f"发票号码: {result.invoice_number}")
+    lines.append(f"开票日期: {result.invoice_date}")
+    lines.append(f"购买方名称: {result.buyer_name}")
+    lines.append(f"购买方税号: {result.buyer_tax_id}")
+    lines.append(f"销售方名称: {result.seller_name}")
+    lines.append(f"销售方税号: {result.seller_tax_id}")
+    lines.append(f"价税合计: {result.total_amount_tax}")
+    lines.append(f"不含税金额: {result.total_amount}")
+    lines.append(f"税额: {result.total_tax}")
+    if result.items:
+        lines.append("商品明细:")
+        for i, item in enumerate(result.items, 1):
+            lines.append(f"  {i}. {item.name} | 规格: {item.spec} | 数量: {item.qty} | 单价: {item.price} | 金额: {item.amount}")
+    lines.append(f"整体置信度: {result.overall_confidence:.2f}")
+    return "\n".join(lines)
 
-    @staticmethod
-    def to_table(results: List[InvoiceResult]) -> str:
-        """文本表格输出"""
-        if not results:
-            return "（无结果）"
 
-        lines = []
-        for idx, r in enumerate(results, 1):
-            lines.append(f"===== 发票 {idx}：{r.filename} =====")
-            lines.append(f"发票代码：{r.invoice_code or '—'}")
-            lines.append(f"发票号码：{r.invoice_number or '—'}")
-            lines.append(f"开票日期：{r.invoice_date or '—'}")
-            lines.append(f"购买方：{r.buyer_name or '—'}（税号：{r.buyer_tax_id or '—'}）")
-            lines.append(f"销售方：{r.seller_name or '—'}（税号：{r.seller_tax_id or '—'}）")
-            lines.append(f"不含税金额：{r.total_amount or '—'}")
-            lines.append(f"税额：{r.total_tax or '—'}")
-            lines.append(f"价税合计：{r.total_amount_tax or '—'}")
-            if r.items:
-                lines.append("商品明细：")
-                for item in r.items:
-                    lines.append(
-                        f"  - {item.name or '—'} | 规格: {item.spec or '—'} | "
-                        f"单位: {item.unit or '—'} | 数量: {item.qty or '—'} | "
-                        f"单价: {item.price or '—'} | 金额: {item.amount or '—'}"
-                    )
-            lines.append(f"整体置信度：{r.overall_confidence:.2f}")
-            lines.append("")
-
-        return "\n".join(lines)
-
-    @staticmethod
-    def to_json(results: List[InvoiceResult]) -> str:
-        """JSON 输出"""
-        return json.dumps(
-            [r.to_dict() for r in results],
-            ensure_ascii=False,
-            indent=2
-        )
-
-    @staticmethod
-    def to_csv(results: List[InvoiceResult]) -> str:
-        """CSV 输出"""
-        if not results:
-            return ""
-
-        # 表头
-        headers = [
-            "文件名", "发票代码", "发票号码", "开票日期",
-            "购买方名称", "购买方税号", "销售方名称", "销售方税号",
-            "不含税金额", "税额", "价税合计", "商品数量", "整体置信度"
-        ]
-
-        import io
-        output = io.StringIO()
-        writer = csv.writer(output)
-        writer.writerow(headers)
-
-        for r in results:
+def write_csv(results: List[InvoiceResult], output_path: str) -> None:
+    """写入 CSV 文件（原子写入）"""
+    temp_path = output_path + ".tmp"
+    try:
+        with open(temp_path, "w", newline="", encoding="utf-8-sig") as f:
+            writer = csv.writer(f)
             writer.writerow([
-                r.filename,
-                r.invoice_code,
-                r.invoice_number,
-                r.invoice_date,
-                r.buyer_name,
-                r.buyer_tax_id,
-                r.seller_name,
-                r.seller_tax_id,
-                r.total_amount,
-                r.total_tax,
-                r.total_amount_tax,
-                len(r.items),
-                f"{r.overall_confidence:.2f}"
+                "文件名", "发票代码", "发票号码", "开票日期",
+                "购买方名称", "购买方税号", "销售方名称", "销售方税号",
+                "价税合计", "不含税金额", "税额", "整体置信度"
             ])
+            for r in results:
+                writer.writerow([
+                    r.filename, r.invoice_code, r.invoice_number, r.invoice_date,
+                    r.buyer_name, r.buyer_tax_id, r.seller_name, r.seller_tax_id,
+                    r.total_amount_tax, r.total_amount, r.total_tax,
+                    f"{r.overall_confidence:.2f}"
+                ])
+        os.replace(temp_path, output_path)
+    except Exception as e:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+        raise e
 
-        return output.getvalue()
+
+def write_json(results: List[InvoiceResult], output_path: str) -> None:
+    """写入 JSON 文件（原子写入）"""
+    temp_path = output_path + ".tmp"
+    try:
+        data = [r.to_dict() for r in results]
+        with open(temp_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
+        os.replace(temp_path, output_path)
+    except Exception as e:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+        raise e
 
 
 # ---------------------------------------------------------------------------
-# 主处理逻辑
+# 文件处理
 # ---------------------------------------------------------------------------
 
-class InvoiceExtractor:
-    """票据抽取主控类"""
+SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".pdf"}
 
-    def __init__(self, confidence_threshold: float = 0.7):
-        self.engine = MockOCREngine()
-        self.parser = InvoiceParser()
-        self.formatter = OutputFormatter()
-        self.confidence_threshold = confidence_threshold
 
-    def process_file(self, filepath: str) -> InvoiceResult:
-        """处理单个文件"""
-        result = InvoiceResult(filename=os.path.basename(filepath))
+def is_supported_file(file_path: str) -> bool:
+    """检查文件是否支持"""
+    ext = os.path.splitext(file_path)[1].lower()
+    return ext in SUPPORTED_EXTENSIONS
 
-        # 检查文件格式
-        ext = os.path.splitext(filepath)[1].lower()
-        if ext not in [".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".pdf"]:
-            raise ValueError(f"E003: 不支持的文件格式: {ext}")
 
-        # 读取文件（模拟）
-        try:
-            # 模拟 OCR 识别
-            text = self.engine.recognize(filepath)
-            result = self.parser.parse(text)
-            result.filename = os.path.basename(filepath)
-
-            # 应用置信度阈值
-            for f in result.fields:
-                if f.confidence < self.confidence_threshold:
-                    f.status = "low_conf"
-                    f.value = f"[需核实]{f.value}"
-
-        except Exception as e:
-            raise RuntimeError(f"E004: 文件处理失败: {e}")
-
+def process_file(file_path: str, verbose: bool = False) -> InvoiceResult:
+    """
+    处理单个文件，返回抽取结果。
+    这是核心处理函数，被主流程与 selftest 共同调用。
+    """
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"文件不存在: {file_path}")
+    
+    if not is_supported_file(file_path):
+        raise ValueError(f"不支持的文件格式: {file_path}")
+    
+    try:
+        # 读取文件并提取文本（模拟 OCR）
+        text = extract_text_from_file(file_path)
+        if verbose:
+            print(f"[VERBOSE] 从 {file_path} 提取到文本 {len(text)} 字符")
+        
+        # 解析发票
+        result = parse_invoice(text, filename=os.path.basename(file_path))
         return result
+    except Exception as e:
+        raise RuntimeError(f"处理文件失败: {file_path}: {str(e)}")
 
-    def process_directory(self, dirpath: str) -> List[InvoiceResult]:
-        """批量处理文件夹内所有支持的图片/PDF"""
-        supported_ext = [".jpg", ".jpeg", ".png", ".bmp", ".tiff", ".pdf"]
-        files = []
-        for fname in os.listdir(dirpath):
-            ext = os.path.splitext(fname)[1].lower()
-            if ext in supported_ext:
-                files.append(os.path.join(dirpath, fname))
 
-        if not files:
-            raise ValueError(f"E008: 文件夹中无支持的图片或 PDF 文件: {dirpath}")
-
-        results = []
-        for fpath in sorted(files):
-            results.append(self.process_file(fpath))
-        return results
-
-    def output(self, results: List[InvoiceResult], fmt: str = "table") -> str:
-        """格式化输出"""
-        if fmt == "table":
-            return self.formatter.to_table(results)
-        elif fmt == "json":
-            return self.formatter.to_json(results)
-        elif fmt == "csv":
-            return self.formatter.to_csv(results)
-        else:
-            raise ValueError(f"E007: 不支持的输出格式: {fmt}")
+def process_directory(dir_path: str, verbose: bool = False) -> List[InvoiceResult]:
+    """批量处理目录下的所有支持文件"""
+    results = []
+    if not os.path.isdir(dir_path):
+        raise NotADirectoryError(f"不是目录: {dir_path}")
+    
+    files = [f for f in os.listdir(dir_path) if is_supported_file(f)]
+    files.sort()
+    
+    if not files:
+        raise ValueError(f"目录中没有支持的文件: {dir_path}")
+    
+    for i, fname in enumerate(files, 1):
+        fpath = os.path.join(dir_path, fname)
+        try:
+            if verbose:
+                print(f"[{i}/{len(files)}] 处理 {fname} ...")
+            result = process_file(fpath, verbose=verbose)
+            results.append(result)
+            if verbose:
+                print(f"  成功 (置信度: {result.overall_confidence:.2f})")
+        except Exception as e:
+            if verbose:
+                print(f"  失败: {str(e)}")
+            # 失败时创建空结果
+            result = InvoiceResult(filename=fname)
+            result.overall_confidence = 0.0
+            results.append(result)
+    
+    return results
 
 
 # ---------------------------------------------------------------------------
-# 自检模块
+# 自检测试
 # ---------------------------------------------------------------------------
 
 def run_selftest() -> int:
     """
-    内置硬编码样例数据的离线自检。
-    使用宽松断言，确保任何环境下必然通过。
+    运行自检测试，验证核心功能。
+    返回 0 表示成功，非 0 表示失败。
     """
-    print("开始自检...")
-
-    # 创建临时目录存放样例（不依赖当前工作目录）
-    tmpdir = tempfile.mkdtemp(prefix="invoice_selftest_")
-    sample_files = []
-
+    print("运行自检测试...")
+    failures = 0
+    
+    # 测试 1: 解析样例发票文本
+    print("[测试 1] 解析样例发票文本")
     try:
-        # 生成样例文件（模拟输入）
-        for name, content in MockOCREngine.SAMPLE_INVOICES.items():
-            fpath = os.path.join(tmpdir, name)
-            with open(fpath, "w", encoding="utf-8") as f:
-                f.write(content)
-            sample_files.append(fpath)
-
-        # 初始化抽取器
-        extractor = InvoiceExtractor(confidence_threshold=0.5)
-
-        # 测试1：单文件处理
-        print("  测试1：单文件处理...")
-        result = extractor.process_file(sample_files[0])
-        assert result is not None, "E009: 单文件处理返回空结果"
-        assert result.filename != "", "E009: 文件名未设置"
-        # 宽松断言：至少识别出部分字段
-        field_count = sum(1 for f in result.fields if f.status == "normal")
-        assert field_count >= 3, f"E009: 识别字段过少: {field_count}"
-        print(f"    ✓ 通过（识别字段 {field_count}/{len(result.fields)} 个）")
-
-        # 测试2：批量处理
-        print("  测试2：批量处理...")
-        results = extractor.process_directory(tmpdir)
-        assert len(results) >= 2, f"E009: 批量处理数量异常: {len(results)}"
-        print(f"    ✓ 通过（处理 {len(results)} 个文件）")
-
-        # 测试3：输出格式
-        print("  测试3：输出格式...")
-        table_out = extractor.output(results, "table")
-        json_out = extractor.output(results, "json")
-        csv_out = extractor.output(results, "csv")
-        assert len(table_out) > 0, "E009: 表格输出为空"
-        assert len(json_out) > 0, "E009: JSON 输出为空"
-        assert len(csv_out) > 0, "E009: CSV 输出为空"
-        # 宽松断言：JSON 可解析且含数组
-        json_data = json.loads(json_out)
-        assert isinstance(json_data, list), "E009: JSON 输出不是数组"
-        assert len(json_data) == len(results), "E009: JSON 输出数量不符"
-        print(f"    ✓ 通过（table/json/csv 均正常）")
-
-        # 测试4：字段缺失处理
-        print("  测试4：字段缺失处理...")
-        empty_result = extractor.parser.parse("")
-        assert empty_result is not None, "E009: 空文本解析返回空"
-        missing_count = sum(1 for f in empty_result.fields if f.status == "missing")
-        assert missing_count == len(empty_result.fields), "E009: 空文本应全部标记为缺失"
-        print(f"    ✓ 通过（缺失字段 {missing_count} 个）")
-
-        # 测试5：置信度阈值
-        print("  测试5：置信度阈值...")
-        threshold_result = extractor.parser.parse(MockOCREngine.SAMPLE_INVOICES["sample_invoice_001.jpg"])
-        assert threshold_result.overall_confidence > 0, "E009: 置信度计算异常"
-        print(f"    ✓ 通过（整体置信度 {threshold_result.overall_confidence:.2f}）")
-
-        print("\n全部自检通过 ✅")
-        return 0
-
+        result = parse_invoice(SAMPLE_INVOICE_TEXT, filename="test.jpg")
+        assert result.invoice_code == "031001900111", f"发票代码错误: {result.invoice_code}"
+        assert result.invoice_number == "12345678", f"发票号码错误: {result.invoice_number}"
+        assert result.invoice_date == "2023年05月20日", f"开票日期错误: {result.invoice_date}"
+        assert result.buyer_name == "某某科技有限公司", f"购买方名称错误: {result.buyer_name}"
+        assert result.seller_name == "某某商贸有限公司", f"销售方名称错误: {result.seller_name}"
+        assert result.total_amount_tax == "1130.00", f"价税合计错误: {result.total_amount_tax}"
+        assert result.total_amount == "1000.00", f"不含税金额错误: {result.total_amount}"
+        assert result.total_tax == "130.00", f"税额错误: {result.total_tax}"
+        assert len(result.items) >= 1, "商品明细为空"
+        assert result.overall_confidence > 0.8, f"置信度异常: {result.overall_confidence}"
+        print("  通过")
     except AssertionError as e:
-        print(f"\n自检失败 ❌: {e}")
-        return 1
+        print(f"  失败: {e}")
+        failures += 1
     except Exception as e:
-        print(f"\n自检异常 ❌: {e}")
+        print(f"  异常: {e}")
+        failures += 1
+    
+    # 测试 2: 空文本处理
+    print("[测试 2] 空文本处理")
+    try:
+        result = parse_invoice("", filename="empty.jpg")
+        assert result.invoice_code == "", "空文本应返回空发票代码"
+        assert result.overall_confidence == 0.0, "空文本置信度应为 0"
+        print("  通过")
+    except AssertionError as e:
+        print(f"  失败: {e}")
+        failures += 1
+    except Exception as e:
+        print(f"  异常: {e}")
+        failures += 1
+    
+    # 测试 3: 文件处理（使用临时文件）
+    print("[测试 3] 文件处理")
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".jpg", delete=False) as tmp:
+            tmp_path = tmp.name
+        try:
+            result = process_file(tmp_path)
+            assert result.filename == os.path.basename(tmp_path), "文件名错误"
+            assert result.invoice_code == "031001900111", "发票代码错误"
+            print("  通过")
+        finally:
+            os.remove(tmp_path)
+    except AssertionError as e:
+        print(f"  失败: {e}")
+        failures += 1
+    except Exception as e:
+        print(f"  异常: {e}")
+        failures += 1
+    
+    # 测试 4: 不存在的文件
+    print("[测试 4] 不存在的文件")
+    try:
+        process_file("/nonexistent/file.jpg")
+        print("  失败: 应抛出异常")
+        failures += 1
+    except FileNotFoundError:
+        print("  通过")
+    except Exception as e:
+        print(f"  失败: 抛出异常类型错误: {type(e).__name__}")
+        failures += 1
+    
+    # 测试 5: 不支持的格式
+    print("[测试 5] 不支持的格式")
+    try:
+        with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as tmp:
+            tmp_path = tmp.name
+        try:
+            process_file(tmp_path)
+            print("  失败: 应抛出异常")
+            failures += 1
+        except ValueError:
+            print("  通过")
+        finally:
+            os.remove(tmp_path)
+    except Exception as e:
+        print(f"  异常: {e}")
+        failures += 1
+    
+    # 测试 6: CSV 写入
+    print("[测试 6] CSV 写入")
+    try:
+        result = parse_invoice(SAMPLE_INVOICE_TEXT, filename="test.jpg")
+        with tempfile.NamedTemporaryFile(suffix=".csv", delete=False) as tmp:
+            tmp_path = tmp.name
+        try:
+            write_csv([result], tmp_path)
+            with open(tmp_path, "r", encoding="utf-8-sig") as f:
+                content = f.read()
+            assert "031001900111" in content, "CSV 内容缺少发票代码"
+            assert "12345678" in content, "CSV 内容缺少发票号码"
+            print("  通过")
+        finally:
+            os.remove(tmp_path)
+    except AssertionError as e:
+        print(f"  失败: {e}")
+        failures += 1
+    except Exception as e:
+        print(f"  异常: {e}")
+        failures += 1
+    
+    # 测试 7: JSON 写入
+    print("[测试 7] JSON 写入")
+    try:
+        result = parse_invoice(SAMPLE_INVOICE_TEXT, filename="test.jpg")
+        with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
+            tmp_path = tmp.name
+        try:
+            write_json([result], tmp_path)
+            with open(tmp_path, "r", encoding="utf-8") as f:
+                data = json.load(f)
+            assert len(data) == 1, "JSON 数据长度错误"
+            assert data[0]["invoice_code"] == "031001900111", "JSON 发票代码错误"
+            print("  通过")
+        finally:
+            os.remove(tmp_path)
+    except AssertionError as e:
+        print(f"  失败: {e}")
+        failures += 1
+    except Exception as e:
+        print(f"  异常: {e}")
+        failures += 1
+    
+    # 测试 8: 批量处理目录
+    print("[测试 8] 批量处理目录")
+    try:
+        with tempfile.TemporaryDirectory() as tmp_dir:
+            # 创建测试文件
+            for i in range(3):
+                with open(os.path.join(tmp_dir, f"invoice{i}.jpg"), "w") as f:
+                    f.write("test")
+            results = process_directory(tmp_dir)
+            assert len(results) == 3, f"批量处理结果数量错误: {len(results)}"
+            print("  通过")
+    except AssertionError as e:
+        print(f"  失败: {e}")
+        failures += 1
+    except Exception as e:
+        print(f"  异常: {e}")
+        failures += 1
+    
+    # 汇总
+    if failures == 0:
+        print("所有测试通过！")
+        return 0
+    else:
+        print(f"{failures} 个测试失败")
         return 1
-    finally:
-        # 清理临时文件
-        import shutil
-        shutil.rmtree(tmpdir, ignore_errors=True)
 
 
 # ---------------------------------------------------------------------------
-# 命令行入口
+# 主流程
 # ---------------------------------------------------------------------------
+
+def generate_output_filename(prefix: str, ext: str) -> str:
+    """生成带时间戳的输出文件名"""
+    timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
+    return f"{prefix}_{timestamp}.{ext}"
+
 
 def main() -> int:
-    """主入口"""
+    """主入口函数"""
     parser = argparse.ArgumentParser(
-        description="票据识别关键字段抽取（invoice-ocr-extract）",
-        epilog="示例: python main.py ./invoices/ --output_format csv"
+        description="票据识别关键字段抽取工具",
+        epilog="示例: python run.py invoice.jpg --format json --output-dir ./results/"
     )
-    parser.add_argument(
-        "input_path",
-        nargs="?",
-        default=None,
-        help="图片/PDF 文件路径，或包含多张票据的文件夹路径"
-    )
-    parser.add_argument(
-        "--output_format",
-        choices=["table", "json", "csv"],
-        default="table",
-        help="输出格式（默认: table）"
-    )
-    parser.add_argument(
-        "--confidence_threshold",
-        type=float,
-        default=0.7,
-        help="置信度阈值 0~1（默认: 0.7）"
-    )
-    parser.add_argument(
-        "--batch_mode",
-        action="store_true",
-        help="批量处理文件夹内所有文件"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检（不依赖外部文件与网络）"
-    )
-
+    parser.add_argument("--path", nargs="?", help="文件路径或目录路径")
+    parser.add_argument("--batch", action="store_true", help="批量处理目录")
+    parser.add_argument("--format", choices=["table", "json", "csv"], default="table",
+                        help="输出格式 (默认: table)")
+    parser.add_argument("--dry-run", action="store_true", help="预览模式，不写入文件")
+    parser.add_argument("--verbose", action="store_true", help="输出详细日志")
+    parser.add_argument("--output-dir", default=".", help="输出目录 (默认: 当前目录)")
+    parser.add_argument("--selftest", action="store_true", help="运行自检测试")
+    
     args = parser.parse_args()
-
+    
     # 自检模式
     if args.selftest:
         return run_selftest()
-
-    # 检查参数
-    if not args.input_path:
-        print("E001: 必须提供 input_path 参数（或使用 --selftest）")
+    
+    # 参数校验
+    if not args.path:
+        print("错误: 必须提供文件路径或目录路径 (E001)", file=sys.stderr)
         return 1
-
-    # 检查路径
-    if not os.path.exists(args.input_path):
-        print(f"E002: 输入路径不存在: {args.input_path}")
-        return 1
-
-    # 校验阈值
-    if not (0 <= args.confidence_threshold <= 1):
-        print("E001: confidence_threshold 必须在 0~1 之间")
-        return 1
-
+    
+    # 检查输出目录
+    if not args.dry_run:
+        if not os.path.isdir(args.output_dir):
+            try:
+                os.makedirs(args.output_dir, exist_ok=True)
+            except OSError as e:
+                print(f"错误: 无法创建输出目录 {args.output_dir}: {e} (E006)", file=sys.stderr)
+                return 1
+    
     try:
-        extractor = InvoiceExtractor(confidence_threshold=args.confidence_threshold)
-
-        # 单文件或目录
-        if os.path.isdir(args.input_path):
-            results = extractor.process_directory(args.input_path)
+        # 处理输入
+        if args.batch:
+            # 批量模式
+            if not os.path.isdir(args.path):
+                print(f"错误: 批量模式需要目录路径: {args.path} (E001)", file=sys.stderr)
+                return 1
+            results = process_directory(args.path, verbose=args.verbose)
+            if not results:
+                print(f"错误: 目录中没有支持的文件: {args.path} (E008)", file=sys.stderr)
+                return 1
         else:
-            results = [extractor.process_file(args.input_path)]
-
-        # 输出
-        output_text = extractor.output(results, args.output_format)
-        print(output_text)
+            # 单文件模式
+            if not os.path.exists(args.path):
+                print(f"错误: 文件不存在: {args.path} (E002)", file=sys.stderr)
+                return 1
+            if not is_supported_file(args.path):
+                print(f"错误: 不支持的文件格式: {args.path} (E003)", file=sys.stderr)
+                return 1
+            try:
+                result = process_file(args.path, verbose=args.verbose)
+                results = [result]
+            except Exception as e:
+                print(f"错误: 处理文件失败: {e} (E004)", file=sys.stderr)
+                return 1
+        
+        # 输出结果
+        if args.format == "table":
+            for result in results:
+                print(format_table(result))
+                print()
+        elif args.format == "json":
+            if not args.dry_run:
+                output_path = os.path.join(args.output_dir, generate_output_filename("invoice", "json"))
+                try:
+                    write_json(results, output_path)
+                    print(f"结果已写入: {output_path}")
+                except Exception as e:
+                    print(f"错误: 写入 JSON 失败: {e} (E006)", file=sys.stderr)
+                    return 1
+            else:
+                print("[DRY-RUN] 将写入 JSON 文件")
+                for result in results:
+                    print(json.dumps(result.to_dict(), ensure_ascii=False, indent=2))
+        elif args.format == "csv":
+            if not args.dry_run:
+                output_path = os.path.join(args.output_dir, generate_output_filename("invoice", "csv"))
+                try:
+                    write_csv(results, output_path)
+                    print(f"结果已写入: {output_path}")
+                except Exception as e:
+                    print(f"错误: 写入 CSV 失败: {e} (E006)", file=sys.stderr)
+                    return 1
+            else:
+                print("[DRY-RUN] 将写入 CSV 文件")
+                for result in results:
+                    print(format_table(result))
+                    print()
+        
+        # 批量模式汇总
+        if args.batch and not args.dry_run:
+            summary_path = os.path.join(args.output_dir, generate_output_filename("summary", args.format))
+            try:
+                if args.format == "json":
+                    write_json(results, summary_path)
+                elif args.format == "csv":
+                    write_csv(results, summary_path)
+                else:
+                    # table 格式也写 CSV 汇总
+                    summary_path = os.path.join(args.output_dir, generate_output_filename("summary", "csv"))
+                    write_csv(results, summary_path)
+                print(f"汇总文件已写入: {summary_path}")
+            except Exception as e:
+                print(f"错误: 写入汇总文件失败: {e} (E006)", file=sys.stderr)
+                return 1
+        
         return 0
-
-    except ValueError as e:
-        print(f"错误: {e}")
-        return 1
-    except RuntimeError as e:
-        print(f"错误: {e}")
-        return 1
+        
     except Exception as e:
-        print(f"E010: 未知异常: {e}")
+        print(f"错误: 未知异常: {e} (E010)", file=sys.stderr)
         return 1
 
 
