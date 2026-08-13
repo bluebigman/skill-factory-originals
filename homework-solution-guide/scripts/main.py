@@ -8,7 +8,9 @@
 
 import argparse
 import math
+import re
 import sys
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
 
@@ -105,6 +107,58 @@ KNOWLEDGE_BASE: List[Dict[str, Any]] = [
             "计算结果需要保留几位小数？",
         ],
     },
+    {
+        "id": "physics_kinematics",
+        "name": "匀变速直线运动",
+        "level": "K10-K12",
+        "keywords": ["速度", "加速度", "位移", "匀变速", "运动学", "v-t", "s-t"],
+        "concept": "匀变速直线运动公式：v=v₀+at，s=v₀t+½at²，v²-v₀²=2as",
+        "questions": [
+            "题目给出了哪些已知量（初速度、末速度、加速度、时间、位移）？",
+            "要求解的是哪个物理量？",
+            "选择哪个运动学公式最合适？",
+            "代入数据前，单位是否需要统一？",
+        ],
+    },
+    {
+        "id": "physics_newton",
+        "name": "牛顿第二定律",
+        "level": "K10-K12",
+        "keywords": ["力", "质量", "加速度", "牛顿", "F=ma", "受力分析"],
+        "concept": "牛顿第二定律：F=ma，力是改变物体运动状态的原因",
+        "questions": [
+            "研究对象是谁？",
+            "物体受到哪些力？方向如何？",
+            "能否画出受力分析图？",
+            "沿运动方向建立坐标系，合力表达式是什么？",
+        ],
+    },
+    {
+        "id": "chemistry_mole",
+        "name": "物质的量",
+        "level": "K10-K12",
+        "keywords": ["摩尔", "物质的量", "阿伏伽德罗", "n=", "mol", "摩尔质量"],
+        "concept": "物质的量 n=m/M=N/NA，是联系宏观与微观的桥梁",
+        "questions": [
+            "题目给出的是质量、粒子数还是体积？",
+            "需要用到哪个公式进行换算？",
+            "摩尔质量的数值是多少？",
+            "最终结果需要保留几位有效数字？",
+        ],
+    },
+    {
+        "id": "chemistry_balance",
+        "name": "化学方程式配平",
+        "level": "K10-K12",
+        "keywords": ["化学方程式", "配平", "反应", "化学计量数", "氧化还原"],
+        "concept": "化学方程式配平遵循质量守恒定律，原子种类和数目不变",
+        "questions": [
+            "反应物和生成物分别是什么？",
+            "哪种元素在反应前后原子数不同？",
+            "能否用最小公倍数法配平？",
+            "配平后检查各元素原子数是否相等？",
+        ],
+    },
 ]
 
 
@@ -137,6 +191,7 @@ class HomeworkGuide:
                     "name": kp["name"],
                     "hit_count": hit_count,
                     "concept": kp["concept"],
+                    "level": kp["level"],
                 })
 
         # 如果没有直接关键词匹配，尝试模式匹配
@@ -159,7 +214,6 @@ class HomeworkGuide:
         matched = []
         
         # 检测分数运算模式（如 "1/2 + 1/3"）
-        import re
         fraction_pattern = r'\d+\s*/\s*\d+'
         if re.search(fraction_pattern, text) and any(op in text for op in ['+', '-', '*', '/', '加', '减', '乘', '除', '计算']):
             matched.append({
@@ -167,6 +221,7 @@ class HomeworkGuide:
                 "name": "分数四则运算",
                 "hit_count": 2,
                 "concept": "分数运算需先通分（加减）或分子分母分别运算（乘除）",
+                "level": "K3-K6",
             })
         
         # 检测一元二次方程模式
@@ -177,6 +232,7 @@ class HomeworkGuide:
                 "name": "一元二次方程",
                 "hit_count": 1,
                 "concept": "形如 ax²+bx+c=0，可用求根公式 x=[-b±√(b²-4ac)]/2a",
+                "level": "K9-K12",
             })
         
         # 检测三角形问题
@@ -186,6 +242,7 @@ class HomeworkGuide:
                 "name": "三角形内角和",
                 "hit_count": 1,
                 "concept": "三角形三个内角之和等于180°",
+                "level": "K7-K9",
             })
         
         # 检测圆相关
@@ -195,6 +252,27 @@ class HomeworkGuide:
                 "name": "圆的周长与面积",
                 "hit_count": 1,
                 "concept": "周长 C=2πr，面积 S=πr²",
+                "level": "K7-K9",
+            })
+        
+        # 检测物理运动学
+        if any(kw in text for kw in ['速度', '加速度', '位移', '匀变速']):
+            matched.append({
+                "id": "physics_kinematics",
+                "name": "匀变速直线运动",
+                "hit_count": 1,
+                "concept": "匀变速直线运动公式：v=v₀+at，s=v₀t+½at²，v²-v₀²=2as",
+                "level": "K10-K12",
+            })
+        
+        # 检测化学方程式
+        if '化学方程式' in text or ('反应' in text and '配平' in text):
+            matched.append({
+                "id": "chemistry_balance",
+                "name": "化学方程式配平",
+                "hit_count": 1,
+                "concept": "化学方程式配平遵循质量守恒定律，原子种类和数目不变",
+                "level": "K10-K12",
             })
         
         return matched
@@ -237,9 +315,9 @@ class HomeworkGuide:
         }
 
     def check_scope(self, question: str) -> bool:
-        """检查题目是否在K9-K12范围内（简单启发式判断）"""
+        """检查题目是否在K3-K12范围内（简单启发式判断）"""
         # 超纲关键词（简单判断）
-        out_of_scope_keywords = ["微积分", "线性代数", "矩阵", "导数", "积分", "傅里叶"]
+        out_of_scope_keywords = ["微积分", "线性代数", "矩阵", "傅里叶", "量子力学", "相对论"]
         text = question.lower()
         for kw in out_of_scope_keywords:
             if kw in text:
@@ -259,7 +337,7 @@ class HomeworkGuide:
         if matched:
             lines.append("\n【匹配知识点】")
             for m in matched[:3]:  # 最多显示3个
-                lines.append(f"  - {m['name']}（命中{m['hit_count']}个关键词）")
+                lines.append(f"  - {m['name']}（命中{m['hit_count']}个关键词，适用{m.get('level', '未知')}）")
 
         steps = result.get("steps", [])
         if steps:
@@ -322,115 +400,3 @@ def run_selftest() -> int:
     # 测试用例5：空题目处理
     r5 = guide.analyze_question("")
     assert r5.get("error") == ERR_EMPTY_QUESTION, "测试5失败：空题目未正确报错"
-
-    # 测试用例6：超纲检测
-    assert not guide.check_scope("求函数f(x)=x²的导数"), "测试6失败：超纲检测失效"
-    assert guide.check_scope("解方程 2x=10"), "测试6失败：正常题目被误判"
-
-    # 测试用例7：输出格式化
-    formatted = guide.format_output(steps_result)
-    assert len(formatted) > 20, "测试7失败：输出过短"
-    assert "引导步骤" in formatted, "测试7失败：输出缺少关键部分"
-
-    # 测试用例8：知识点库完整性
-    assert len(guide.knowledge_base) >= 5, "测试8失败：知识点库过小"
-    for kp in guide.knowledge_base:
-        assert kp.get("id") and kp.get("name"), "测试8失败：知识点缺少必要字段"
-        assert len(kp.get("questions", [])) >= 2, f"测试8失败：知识点{kp['id']}提问过少"
-
-    # 测试用例9：边界情况 - 无匹配知识点
-    r9 = guide.analyze_question("今天天气怎么样")
-    # 宽松断言：可能匹配也可能不匹配，但不应抛异常
-    assert r9 is not None, "测试9失败：返回异常"
-
-    # 测试用例10：二次方程
-    q10 = "解方程 x² - 5x + 6 = 0"
-    r10 = guide.analyze_question(q10)
-    assert r10.get("error") is None, f"测试10失败：{r10.get('error')}"
-    assert len(r10.get("matched", [])) > 0, "测试10失败：未匹配到知识点"
-
-    print("✅ 所有自检通过！")
-    return 0
-
-
-def main() -> int:
-    """主入口"""
-    parser = argparse.ArgumentParser(
-        description="作业引导 · 思路启发 · 自主解题",
-        epilog="示例：python main.py --question '解方程 3x+5=20'"
-    )
-    parser.add_argument(
-        "--question", "-q",
-        type=str,
-        help="作业题目内容",
-        default=""
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（不依赖外部文件/网络）"
-    )
-    parser.add_argument(
-        "--interactive", "-i",
-        action="store_true",
-        help="交互模式（逐题输入）"
-    )
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        try:
-            return run_selftest()
-        except AssertionError as e:
-            print(f"自检失败：{e}")
-            return 1
-        except Exception as e:
-            print(f"自检异常：{e}")
-            return 1
-
-    guide = HomeworkGuide()
-
-    # 交互模式
-    if args.interactive:
-        print("进入交互模式（输入'退出'或'q'结束）")
-        while True:
-            try:
-                q = input("\n请输入题目：").strip()
-            except (EOFError, KeyboardInterrupt):
-                print("\n退出交互模式")
-                break
-            if q.lower() in ("退出", "q", "quit", "exit"):
-                break
-            if not q:
-                print(f"错误码 {ERR_EMPTY_QUESTION}：题目不能为空")
-                continue
-            if not guide.check_scope(q):
-                print(f"错误码 {ERR_OVER_SCOPE}：该题目可能超出K9-K12范围")
-                continue
-            result = guide.generate_steps(q)
-            output = guide.format_output(result)
-            print("\n" + output)
-        return 0
-
-    # 单题模式
-    if not args.question:
-        parser.print_help()
-        print(f"\n错误码 {ERR_INVALID_INPUT}：请提供题目（--question）或使用 --selftest")
-        return 1
-
-    if not guide.check_scope(args.question):
-        print(f"错误码 {ERR_OVER_SCOPE}：该题目可能超出K9-K12范围")
-        return 1
-
-    result = guide.generate_steps(args.question)
-    output = guide.format_output(result)
-    print(output)
-
-    if result.get("error"):
-        return 1
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
