@@ -2,7 +2,7 @@
 slug: CLI-Anything
 name: 自然语言转命令工具
 displayName: 终端指令 中文转译 命令行速查
-description: 将中文操作意图精准翻译为可执行命令行，提升终端效率。
+description: 将中文操作意图精准翻译为可执行命令行，内置命令库检索与 JSON 结构化输出，提升终端效率。
 version: 1.0.0
 license: MIT
 source_project: original
@@ -64,6 +64,53 @@ trigger_words: ["自然语言转命令", "CLI生成", "命令翻译", "终端指
 - **目标用户**：日常使用终端的开发者、运维人员、数据分析师
 - **前置条件**：用户具备基础命令行认知（知道什么是参数、路径）
 - **不适用**：完全零基础用户（需先学习基本概念）
+
+## 二、用法
+
+```bash
+# 翻译中文意图为命令
+python scripts/run.py --text "查看当前目录文件"
+
+# 输出 JSON 结构化结果（含分类、匹配分数、提取到的参数），便于程序化调用
+python scripts/run.py --text "重启nginx服务" --json
+
+# 显示匹配诊断信息（分数 + 参数提取明细）
+python scripts/run.py --text "测试192.168.1.1的80端口" --verbose
+
+# 在命令库中检索
+python scripts/run.py --search docker
+
+# 浏览分类
+python scripts/run.py --list-categories
+python scripts/run.py --category 进程管理
+
+# 翻译后直接执行（高危命令二次确认，含未填充占位符时拒绝执行）
+python scripts/run.py --text "查看磁盘空间" --execute
+
+# 运行内置自检（12 项）
+python scripts/run.py --selftest
+```
+
+### 2.1 参数说明
+
+| 参数 | 作用 |
+|------|------|
+| `--text` / `-t` | 待翻译的中文操作意图 |
+| `--search` / `-s` | 按关键词检索命令库 |
+| `--category` / `-c` | 按分类浏览命令 |
+| `--list-categories` | 列出全部命令分类 |
+| `--json` | 以 JSON 格式输出（input/category/command/score/params） |
+| `--execute` | 翻译后实际执行，高危命令会二次确认 |
+| `--verbose` / `-v` | 输出匹配分数与参数提取诊断 |
+| `--selftest` | 运行内置自检，全通过返回退出码 0 |
+
+### 2.2 匹配机制说明
+
+- **关键词 + 同义词打分**：命中分类关键词得基础分，同义词命中额外加权。
+- **动作意图消歧**：按动词意图分组（读/导航/创建/删除/修改/启停/下载）做一致性加权与跨组惩罚，
+  解决「查看当前目录文件」被字符相似度误判为 `cd` 而非 `ls` 的问题。
+- **参数自动提取**：文件路径、URL、IP、端口（支持「80端口」与「端口80」两种语序）、
+  服务名、包名、替换对（old/new）均自动填入命令模板；未能提取的参数保留 `<占位符>` 并拒绝直接执行。
 
 
 ## 许可证（License）
