@@ -1,0 +1,30 @@
+{
+  "timestamp": "20260814_003443",
+  "slug": "skill-86804",
+  "spec": {
+    "slug": "skill-86804",
+    "name": "skill-86804",
+    "description": "表格整理场景一站式处理技能：覆盖表格整理的识别、整理、生成与校验，输出可直接使用的结果文件。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 表格文件路径（或直接拖拽文件到对话框）",
+      "2. 您希望解决什么问题？（例如：日期格式不统一 / 有重复数据 / 需要合并多个表）",
+      "3. 是否有特殊要求？（可选）",
+      "1. 提供表格文件路径",
+      "2. 说明整理需求（格式统一 / 去重 / 合并等）",
+      "3. 获取整理后的文件 + 校验报告"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "fc3761b5d8392552",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
