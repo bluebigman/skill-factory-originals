@@ -670,7 +670,7 @@ def run_selftest() -> bool:
 def get_version() -> str:
     """获取版本信息"""
     try:
-        return "1.0.7"
+        return "1.0.8"
     except Exception:
         raise_error("E010", "版本信息不可用")
 
