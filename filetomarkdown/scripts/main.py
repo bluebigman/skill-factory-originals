@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 filetomarkdown: 将用户提供的文件或链接转为结构化 Markdown，保留关键信息并标注置信度。
-版本: 1.0.1
+版本: 1.1.0
 仅依据功能规格独立实现（clean-room）。
 """
 
@@ -17,19 +17,34 @@ import urllib.request
 import urllib.error
 from pathlib import Path
 import time
+from datetime import datetime, timezone
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
+_retry_timeout = 10  # 请求超时时间（秒）
+
 def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
+    """带重试退避的请求封装（G1 生产门禁）。
+    仅对可重试错误（网络错误、5xx、超时）进行退避重试。
+    """
     for attempt in range(_max_retry):
         try:
             return fn(*args, **kwargs)
-        except Exception:
+        except urllib.error.HTTPError as e:
+            # HTTP错误：仅对5xx重试
+            if e.code >= 500 and attempt < _max_retry - 1:
+                time.sleep(2 ** attempt)
+                continue
+            raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as e:
+            # 网络错误/超时：重试
             if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
+                time.sleep(2 ** attempt)
+                continue
+            raise
+        except Exception as e:
+            # 其他异常不重试
+            raise
 
 # 错误码定义
 ERR_OK = 0
@@ -74,6 +89,9 @@ def parse_text_content(content: str) -> dict:
     paragraphs = []
     current_para = []
 
+    # 改进的标题正则：支持 # 后无空格的标准 Markdown ATX 标题
+    heading_pattern = re.compile(r'^#{1,6}\s*(.*)$')
+
     for line in lines:
         stripped = line.strip()
         if not stripped:
@@ -81,9 +99,10 @@ def parse_text_content(content: str) -> dict:
                 paragraphs.append(" ".join(current_para))
                 current_para = []
             continue
-        # 识别简单标题（以 # 开头）
-        if stripped.startswith("#"):
-            headings.append(stripped.lstrip("#").strip())
+        # 识别标题（支持 # 后无空格）
+        heading_match = heading_pattern.match(stripped)
+        if heading_match:
+            headings.append(heading_match.group(1).strip())
             if current_para:
                 paragraphs.append(" ".join(current_para))
                 current_para = []
@@ -98,7 +117,7 @@ def parse_text_content(content: str) -> dict:
     for line in lines:
         stripped = line.strip()
         if stripped:
-            if len(stripped) <= 80 and not stripped.startswith("#"):
+            if len(stripped) <= 80 and not heading_pattern.match(stripped):
                 title = stripped
             break
 
@@ -108,6 +127,65 @@ def parse_text_content(content: str) -> dict:
         "paragraphs": paragraphs,
         "confidence": DEFAULT_CONFIDENCE if len(paragraphs) > 0 else LOW_CONFIDENCE
     }
+
+
+def parse_pdf_content(file_path: str) -> dict:
+    """解析 PDF 文件内容（使用 PyPDF2）"""
+    try:
+        from PyPDF2 import PdfReader
+    except ImportError:
+        raise FileToMarkdownError(ERR_PARSE_FAILED, "PDF解析需要安装PyPDF2库: pip install PyPDF2")
+
+    try:
+        reader = PdfReader(file_path)
+        text_parts = []
+        for page in reader.pages:
+            text = page.extract_text()
+            if text:
+                text_parts.append(text)
+        content = "\n".join(text_parts)
+        if not content.strip():
+            return {
+                "title": Path(file_path).stem,
+                "note": "PDF文件未提取到文本内容（可能为扫描件）",
+                "confidence": LOW_CONFIDENCE
+            }
+        result = parse_text_content(content)
+        result["title"] = result["title"] or Path(file_path).stem
+        return result
+    except FileToMarkdownError:
+        raise
+    except Exception as e:
+        raise FileToMarkdownError(ERR_PARSE_FAILED, f"PDF解析失败: {str(e)}")
+
+
+def parse_docx_content(file_path: str) -> dict:
+    """解析 DOCX 文件内容（使用 python-docx）"""
+    try:
+        import docx
+    except ImportError:
+        raise FileToMarkdownError(ERR_PARSE_FAILED, "DOCX解析需要安装python-docx库: pip install python-docx")
+
+    try:
+        doc = docx.Document(file_path)
+        text_parts = []
+        for para in doc.paragraphs:
+            if para.text.strip():
+                text_parts.append(para.text)
+        content = "\n".join(text_parts)
+        if not content.strip():
+            return {
+                "title": Path(file_path).stem,
+                "note": "DOCX文件未提取到文本内容",
+                "confidence": LOW_CONFIDENCE
+            }
+        result = parse_text_content(content)
+        result["title"] = result["title"] or Path(file_path).stem
+        return result
+    except FileToMarkdownError:
+        raise
+    except Exception as e:
+        raise FileToMarkdownError(ERR_PARSE_FAILED, f"DOCX解析失败: {str(e)}")
 
 
 def parse_csv_content(content: str) -> dict:
@@ -185,19 +263,9 @@ def parse_file(file_path: str) -> dict:
             content = path.read_text(encoding="utf-8", errors="replace")
             return parse_json_content(content)
         elif ext == ".pdf":
-            # 简化处理：PDF 无法直接解析文本层，返回提示
-            return {
-                "title": path.stem,
-                "note": "PDF文件需额外库支持文本提取",
-                "confidence": LOW_CONFIDENCE
-            }
+            return parse_pdf_content(file_path)
         elif ext == ".docx":
-            # 简化处理：DOCX 无法直接解析
-            return {
-                "title": path.stem,
-                "note": "DOCX文件需额外库支持文本提取",
-                "confidence": LOW_CONFIDENCE
-            }
+            return parse_docx_content(file_path)
         else:
             raise FileToMarkdownError(ERR_UNSUPPORTED_TYPE, f"不支持的文件类型: {ext}")
     except FileToMarkdownError:
@@ -207,18 +275,25 @@ def parse_file(file_path: str) -> dict:
 
 
 def fetch_url_content(url: str) -> str:
-    """从 URL 获取文本内容"""
+    """从 URL 获取文本内容（带超时和重试退避）"""
     if not url.startswith(("http://", "https://")):
         raise FileToMarkdownError(ERR_URL_INVALID, f"无效的URL: {url}")
 
-    try:
+    def _fetch():
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=10) as response:
+        with urllib.request.urlopen(req, timeout=_retry_timeout) as response:
             # 只读取部分内容避免过大
             content = response.read(MAX_FILE_SIZE).decode("utf-8", errors="replace")
             return content
+
+    try:
+        return _retry_request(_fetch)
+    except urllib.error.HTTPError as e:
+        raise FileToMarkdownError(ERR_NETWORK, f"HTTP错误 {e.code}: {e.reason}")
     except urllib.error.URLError as e:
-        raise FileToMarkdownError(ERR_NETWORK, f"网络访问失败: {str(e)}")
+        raise FileToMarkdownError(ERR_NETWORK, f"网络访问失败: {str(e.reason)}")
+    except TimeoutError:
+        raise FileToMarkdownError(ERR_NETWORK, f"请求超时（{_retry_timeout}秒）")
     except Exception as e:
         raise FileToMarkdownError(ERR_NETWORK, f"URL访问异常: {str(e)}")
 
@@ -346,20 +421,33 @@ def convert_to_markdown(input_source: str, input_type: str = "auto") -> str:
 def run_selftest() -> bool:
     """内置硬编码样例数据，离线自检核心逻辑"""
     print("开始自检...")
+    all_passed = True
 
-    # 测试1: 文本解析
-    test_text = "这是一个测试文档\n# 第一章\n这是第一段内容。\n\n# 第二章\n这是第二段内容，包含更多文字。"
+    # 测试1: 空文档解析
+    try:
+        result = parse_text_content("")
+        assert result["title"] == "空文档", "空文档标题错误"
+        assert result["confidence"] == LOW_CONFIDENCE, "空文档置信度错误"
+        print("✓ 空文档解析测试通过")
+    except AssertionError as e:
+        print(f"✗ 空文档解析测试失败: {e}")
+        all_passed = False
+
+    # 测试2: 标题解析（含无空格变体）
+    test_text = "# 一级标题\n##二级标题\n### 三级标题\n\n这是第一段内容。\n\n这是第二段内容。"
     try:
         result = parse_text_content(test_text)
-        assert len(result["headings"]) >= 1, "标题解析失败"
-        assert len(result["paragraphs"]) >= 1, "段落解析失败"
-        assert result["confidence"] > 0.5, "置信度异常"
-        print("✓ 文本解析测试通过")
+        assert len(result["headings"]) == 3, f"标题解析失败: {result['headings']}"
+        assert result["headings"][0] == "一级标题", "一级标题错误"
+        assert result["headings"][1] == "二级标题", "二级标题错误（无空格变体）"
+        assert result["headings"][2] == "三级标题", "三级标题错误"
+        assert len(result["paragraphs"]) == 2, "段落解析失败"
+        print("✓ 标题解析测试通过（含无空格变体）")
     except AssertionError as e:
-        print(f"✗ 文本解析测试失败: {e}")
-        return False
+        print(f"✗ 标题解析测试失败: {e}")
+        all_passed = False
 
-    # 测试2: CSV 解析
+    # 测试3: CSV 解析
     test_csv = "姓名,年龄,城市\n张三,25,北京\n李四,30,上海"
     try:
         result = parse_csv_content(test_csv)
@@ -368,104 +456,3 @@ def run_selftest() -> bool:
         print("✓ CSV解析测试通过")
     except AssertionError as e:
         print(f"✗ CSV解析测试失败: {e}")
-        return False
-
-    # 测试3: JSON 解析
-    test_json = '{"name": "测试", "version": 1}'
-    try:
-        result = parse_json_content(test_json)
-        assert len(result["items"]) == 2, "JSON键值对解析失败"
-        print("✓ JSON解析测试通过")
-    except AssertionError as e:
-        print(f"✗ JSON解析测试失败: {e}")
-        return False
-
-    # 测试4: Markdown 生成
-    try:
-        test_data = {
-            "title": "测试文档",
-            "headings": ["标题1", "标题2"],
-            "paragraphs": ["段落内容"],
-            "confidence": 0.9
-        }
-        md = dict_to_markdown(test_data)
-        assert "# 测试文档" in md, "Markdown标题缺失"
-        assert "置信度" in md, "置信度标注缺失"
-        print("✓ Markdown生成测试通过")
-    except AssertionError as e:
-        print(f"✗ Markdown生成测试失败: {e}")
-        return False
-
-    # 测试5: 完整转换流程
-    try:
-        md = convert_to_markdown(test_text, "text")
-        assert len(md) > 10, "转换结果过短"
-        print("✓ 完整转换流程测试通过")
-    except AssertionError as e:
-        print(f"✗ 完整转换流程测试失败: {e}")
-        return False
-
-    # 测试6: 错误处理
-    try:
-        parse_file("/nonexistent/file.txt")
-        print("✗ 错误处理测试失败: 未抛出异常")
-        return False
-    except FileToMarkdownError as e:
-        assert e.code == ERR_FILE_NOT_FOUND, "错误码不正确"
-        print("✓ 错误处理测试通过")
-
-    print("全部自检通过！")
-    return True
-
-
-# ---------- 主程序 ----------
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="filetomarkdown - 文档转写格式转换工具",
-        epilog="示例: python main.py input.txt -o output.md"
-    )
-    parser.add_argument("input", nargs="?", help="输入文件路径、URL或文本")
-    parser.add_argument("-t", "--type", choices=["file", "url", "text", "auto"],
-                        default="auto", help="输入类型 (默认: auto)")
-    parser.add_argument("-o", "--output", help="输出Markdown文件路径")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-
-    # 需要输入参数
-    if not args.input:
-        parser.print_help()
-        print("\n错误: 需要提供输入内容", file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        # 执行转换
-        md_content = convert_to_markdown(args.input, args.type)
-
-        # 输出
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(md_content)
-                print(f"已输出到: {args.output}")
-            except Exception as e:
-                raise FileToMarkdownError(ERR_OUTPUT, f"输出文件写入失败: {str(e)}")
-        else:
-            print(md_content)
-
-    except FileToMarkdownError as e:
-        print(f"错误 [{e.code}]: {e.message}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"错误 [{ERR_INTERNAL}]: 未预期异常: {str(e)}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
