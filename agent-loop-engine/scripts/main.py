@@ -18,11 +18,17 @@ import argparse
 import hashlib
 import hmac
 import os
+import logging
+import threading
+from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from datetime import datetime, timezone
 from collections import OrderedDict
 from dataclasses import dataclass, field
 from typing import Any, Optional, Dict, List, Callable
-dry_run = False  # v3.274 模块级 dry-run 标志
+
+# 配置日志
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
@@ -54,26 +60,76 @@ def utc_now_str() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def retry_io(func: Callable, *args, max_retries: int = 3, **kwargs) -> Any:
+# 可重试的异常类型
+RETRYABLE_EXCEPTIONS = (ConnectionError, TimeoutError, OSError)
+
+
+def retry_io(func: Callable, *args, max_retries: int = 3, timeout: float = 5.0, **kwargs) -> Any:
     """
     带指数退避重试的 I/O 操作包装器。
-    最多重试 3 次，退避间隔 0.5s, 1s, 2s。
+    仅重试可重试异常（网络超时、连接错误等），永久错误（权限拒绝等）直接抛出。
+    每次尝试有超时控制。
+    
+    参数:
+        func: 要执行的函数
+        max_retries: 最大重试次数
+        timeout: 每次尝试的超时时间（秒）
+    
+    返回:
+        函数执行结果
+    
+    抛出:
+        最后一次异常（如果所有重试都失败）
     """
     delay = 0.5
     last_exc = None
+    
     for attempt in range(max_retries):
         try:
-            return func(*args, **kwargs)
-        except Exception as e:
+            # 使用 ThreadPoolExecutor 实现超时控制
+            with ThreadPoolExecutor(max_workers=1) as executor:
+                future = executor.submit(func, *args, **kwargs)
+                try:
+                    return future.result(timeout=timeout)
+                except FutureTimeoutError:
+                    future.cancel()
+                    raise TimeoutError(f"操作超时（{timeout}秒）")
+            
+        except RETRYABLE_EXCEPTIONS as e:
             last_exc = e
+            logger.warning(f"重试 {attempt + 1}/{max_retries}: {e}")
             if attempt < max_retries - 1:
                 time.sleep(delay)
                 delay *= 2
+        except Exception as e:
+            # 永久错误，不重试
+            logger.error(f"永久错误，不重试: {e}")
+            raise
+    
     raise last_exc
 
 
-def compute_handoff_signature(context: 'HandoffContext', secret_key: str = "agent-loop-engine") -> str:
+def get_secret_key() -> str:
+    """
+    从环境变量获取签名密钥。
+    如果未设置，抛出异常。
+    """
+    secret_key = os.environ.get("AGENT_LOOP_ENGINE_SECRET")
+    if not secret_key:
+        raise ValueError(
+            "未设置 AGENT_LOOP_ENGINE_SECRET 环境变量。"
+            "请设置强密钥以启用交接签名验证。"
+        )
+    if len(secret_key) < 16:
+        raise ValueError("AGENT_LOOP_ENGINE_SECRET 必须至少 16 个字符")
+    return secret_key
+
+
+def compute_handoff_signature(context: 'HandoffContext', secret_key: Optional[str] = None) -> str:
     """计算交接上下文的 HMAC 签名"""
+    if secret_key is None:
+        secret_key = get_secret_key()
+    
     payload = json.dumps({
         "from_agent": context.from_agent,
         "to_agent": context.to_agent,
@@ -139,6 +195,175 @@ class CycleRecord:
 
 
 # ---------------------------------------------------------------------------
+# 持久化层
+# ---------------------------------------------------------------------------
+class PersistenceLayer:
+    """
+    基于 JSON 文件的持久化层。
+    负责保存和加载内核状态。
+    """
+
+    def __init__(self, file_path: str):
+        self.file_path = file_path
+
+    def save(self, kernel: 'LoopStateKernel') -> str:
+        """
+        保存内核状态到 JSON 文件。
+        返回 ERR_OK 或错误码。
+        """
+        try:
+            state = {
+                "agents": {
+                    aid: {
+                        "id": a.id,
+                        "name": a.name,
+                        "role": a.role,
+                        "enabled": a.enabled,
+                        "metadata": a.metadata
+                    } for aid, a in kernel.agents.items()
+                },
+                "goals": {
+                    gid: {
+                        "id": g.id,
+                        "description": g.description,
+                        "status": g.status,
+                        "created_at": g.created_at,
+                        "updated_at": g.updated_at,
+                        "progress": g.progress,
+                        "metadata": g.metadata
+                    } for gid, g in kernel.goals.items()
+                },
+                "wakeup_conditions": {
+                    aid: [
+                        {
+                            "type": c.type,
+                            "target": c.target,
+                            "operator": c.operator,
+                            "payload": c.payload
+                        } for c in conditions
+                    ] for aid, conditions in kernel.wakeup_conditions.items()
+                },
+                "handoffs": [
+                    {
+                        "from_agent": h.from_agent,
+                        "to_agent": h.to_agent,
+                        "payload": h.payload,
+                        "timestamp": h.timestamp,
+                        "signature": h.signature
+                    } for h in kernel.handoffs
+                ],
+                "cycle_history": [
+                    {
+                        "cycle_id": r.cycle_id,
+                        "agent_id": r.agent_id,
+                        "action": r.action,
+                        "timestamp": r.timestamp,
+                        "result": r.result,
+                        "detail": r.detail
+                    } for r in kernel.cycle_history
+                ],
+                "current_cycle": kernel.current_cycle,
+                "global_state": kernel.global_state,
+                "max_cycles": kernel.max_cycles
+            }
+            
+            # 确保目录存在
+            os.makedirs(os.path.dirname(self.file_path) or '.', exist_ok=True)
+            
+            # 原子写入
+            temp_file = self.file_path + '.tmp'
+            with open(temp_file, 'w', encoding='utf-8') as f:
+                json.dump(state, f, ensure_ascii=False, indent=2)
+            os.replace(temp_file, self.file_path)
+            
+            return ERR_OK
+        except Exception as e:
+            logger.error(f"持久化保存失败: {e}")
+            return ERR_PERSISTENCE
+
+    def load(self, kernel: 'LoopStateKernel') -> str:
+        """
+        从 JSON 文件加载内核状态。
+        返回 ERR_OK 或错误码。
+        """
+        try:
+            if not os.path.exists(self.file_path):
+                return ERR_OK
+            
+            with open(self.file_path, 'r', encoding='utf-8') as f:
+                state = json.load(f)
+            
+            # 恢复代理
+            kernel.agents.clear()
+            for aid, agent_data in state.get("agents", {}).items():
+                kernel.agents[aid] = Agent(
+                    id=agent_data["id"],
+                    name=agent_data["name"],
+                    role=agent_data["role"],
+                    enabled=agent_data.get("enabled", True),
+                    metadata=agent_data.get("metadata", {})
+                )
+            
+            # 恢复目标
+            kernel.goals.clear()
+            for gid, goal_data in state.get("goals", {}).items():
+                kernel.goals[gid] = Goal(
+                    id=goal_data["id"],
+                    description=goal_data["description"],
+                    status=goal_data.get("status", "active"),
+                    created_at=goal_data.get("created_at", utc_now()),
+                    updated_at=goal_data.get("updated_at", utc_now()),
+                    progress=goal_data.get("progress", 0.0),
+                    metadata=goal_data.get("metadata", {})
+                )
+            
+            # 恢复唤醒条件
+            kernel.wakeup_conditions.clear()
+            for aid, conditions_data in state.get("wakeup_conditions", {}).items():
+                kernel.wakeup_conditions[aid] = [
+                    WakeupCondition(
+                        type=c["type"],
+                        target=c.get("target", ""),
+                        operator=c.get("operator", "eq"),
+                        payload=c.get("payload", {})
+                    ) for c in conditions_data
+                ]
+            
+            # 恢复交接记录
+            kernel.handoffs.clear()
+            for h_data in state.get("handoffs", []):
+                kernel.handoffs.append(HandoffContext(
+                    from_agent=h_data["from_agent"],
+                    to_agent=h_data["to_agent"],
+                    payload=h_data.get("payload", {}),
+                    timestamp=h_data.get("timestamp", utc_now()),
+                    signature=h_data.get("signature", "")
+                ))
+            
+            # 恢复循环历史
+            kernel.cycle_history.clear()
+            for r_data in state.get("cycle_history", []):
+                kernel.cycle_history.append(CycleRecord(
+                    cycle_id=r_data["cycle_id"],
+                    agent_id=r_data["agent_id"],
+                    action=r_data["action"],
+                    timestamp=r_data.get("timestamp", utc_now()),
+                    result=r_data.get("result", "ok"),
+                    detail=r_data.get("detail", {})
+                ))
+            
+            # 恢复其他状态
+            kernel.current_cycle = state.get("current_cycle", 0)
+            kernel.global_state = state.get("global_state", {})
+            kernel.max_cycles = state.get("max_cycles", kernel.max_cycles)
+            
+            return ERR_OK
+        except Exception as e:
+            logger.error(f"持久化加载失败: {e}")
+            return ERR_PERSISTENCE
+
+
+# ---------------------------------------------------------------------------
 # 循环状态内核
 # ---------------------------------------------------------------------------
 class LoopStateKernel:
@@ -165,10 +390,34 @@ class LoopStateKernel:
         self.current_cycle = 0
         self.global_state: Dict[str, Any] = {}
         self._paused = False
+        self.dry_run = False  # 实例属性，不影响核心功能
+        self.persistence = None
 
-        # 如果提供了状态文件，尝试加载
-        if state_file and os.path.exists(state_file):
-            self.load_state(state_file)
+        # 如果提供了状态文件，初始化持久化层并尝试加载
+        if state_file:
+            self.persistence = PersistenceLayer(state_file)
+            if os.path.exists(state_file):
+                result = self.persistence.load(self)
+                if result != ERR_OK:
+                    logger.warning(f"加载持久化状态失败: {result}")
+
+    # ------------------------------------------------------------------
+    # 持久化方法
+    # ------------------------------------------------------------------
+    def save_state(self) -> str:
+        """保存当前状态到持久化层"""
+        if not self.persistence:
+            return ERR_PERSISTENCE
+        return self.persistence.save(self)
+
+    def load_state(self, file_path: Optional[str] = None) -> str:
+        """从持久化层加载状态"""
+        if file_path:
+            self.persistence = PersistenceLayer(file_path)
+            self.state_file = file_path
+        if not self.persistence:
+            return ERR_PERSISTENCE
+        return self.persistence.load(self)
 
     # ------------------------------------------------------------------
     # 代理管理
@@ -275,268 +524,3 @@ class LoopStateKernel:
         """列出目标，可按状态过滤"""
         if status is None:
             return list(self.goals.values())
-        return [g for g in self.goals.values() if g.status == status]
-
-    # ------------------------------------------------------------------
-    # 唤醒机制
-    # ------------------------------------------------------------------
-    def set_wakeup_condition(self, agent_id: str, condition: WakeupCondition) -> str:
-        """
-        为代理设置唤醒条件。
-
-        条件类型:
-            - time:   在指定时间后唤醒（target 为时间戳）
-            - state:  当全局状态满足条件时唤醒
-            - manual: 手动唤醒
-        """
-        if agent_id not in self.agents:
-            return ERR_AGENT_NOT_FOUND
-        if condition.type not in ("time", "state", "manual"):
-            return ERR_WAKEUP_INVALID
-        if condition.type in ("time", "state") and not condition.target:
-            return ERR_WAKEUP_INVALID
-
-        if agent_id not in self.wakeup_conditions:
-            self.wakeup_conditions[agent_id] = []
-        self.wakeup_conditions[agent_id].append(condition)
-        return ERR_OK
-
-    def clear_wakeup_conditions(self, agent_id: str) -> str:
-        """清除代理的所有唤醒条件"""
-        if agent_id not in self.agents:
-            return ERR_AGENT_NOT_FOUND
-        self.wakeup_conditions.pop(agent_id, None)
-        return ERR_OK
-
-    def check_wakeup(self, agent_id: str) -> bool:
-        """
-        检查代理是否应被唤醒。
-
-        满足任一条件即返回 True。
-        """
-        if agent_id not in self.agents:
-            return False
-
-        conditions = self.wakeup_conditions.get(agent_id, [])
-        for cond in conditions:
-            if cond.type == "manual":
-                return True
-            elif cond.type == "time":
-                if utc_now() >= float(cond.target):
-                    return True
-            elif cond.type == "state":
-                state_val = self.global_state.get(cond.target)
-                if state_val is None:
-                    continue
-                if self._compare(state_val, cond.operator, cond.payload.get("value")):
-                    return True
-        return False
-
-    def wake_agent(self, agent_id: str) -> str:
-        """
-        手动唤醒代理。
-
-        返回:
-            成功返回 ERR_OK，代理不存在返回 E002。
-        """
-        if agent_id not in self.agents:
-            return ERR_AGENT_NOT_FOUND
-        if not self.agents[agent_id].enabled:
-            return ERR_INVALID_STATE
-
-        # 记录唤醒动作
-        self._record_cycle(agent_id, "wake")
-        return ERR_OK
-
-    @staticmethod
-    def _compare(actual: Any, operator: str, expected: Any) -> bool:
-        """比较操作符实现"""
-        try:
-            if operator == "eq":
-                return actual == expected
-            elif operator == "ne":
-                return actual != expected
-            elif operator == "gt":
-                return actual > expected
-            elif operator == "lt":
-                return actual < expected
-            elif operator == "ge":
-                return actual >= expected
-            elif operator == "le":
-                return actual <= expected
-        except TypeError:
-            return False
-        return False
-
-    # ------------------------------------------------------------------
-    # 交接管理
-    # ------------------------------------------------------------------
-    def handoff(self, from_agent: str, to_agent: str,
-                payload: Optional[Dict[str, Any]] = None) -> str:
-        """
-        在代理之间进行交接。
-
-        返回:
-            成功返回 ERR_OK，失败返回错误码。
-        """
-        if from_agent not in self.agents:
-            return ERR_AGENT_NOT_FOUND
-        if to_agent not in self.agents:
-            return ERR_AGENT_NOT_FOUND
-        if from_agent == to_agent:
-            return ERR_HANDOFF_CONFLICT
-        if not self.agents[to_agent].enabled:
-            return ERR_INVALID_STATE
-
-        # 创建交接上下文并计算签名
-        context = HandoffContext(
-            from_agent=from_agent,
-            to_agent=to_agent,
-            payload=payload or {}
-        )
-        context.signature = compute_handoff_signature(context)
-        self.handoffs.append(context)
-
-        # 记录循环
-        self._record_cycle(from_agent, "handoff_out", detail={"to": to_agent})
-        self._record_cycle(to_agent, "handoff_in", detail={"from": from_agent})
-        return ERR_OK
-
-    def verify_handoff(self, context: HandoffContext) -> bool:
-        """验证交接上下文的完整性"""
-        if not context.signature:
-            return False
-        expected = compute_handoff_signature(context)
-        return hmac.compare_digest(context.signature, expected)
-
-    def list_handoffs(self, agent_id: Optional[str] = None) -> List[HandoffContext]:
-        """列出交接记录，可按代理过滤"""
-        if agent_id is None:
-            return list(self.handoffs)
-        return [h for h in self.handoffs
-                if h.from_agent == agent_id or h.to_agent == agent_id]
-
-    # ------------------------------------------------------------------
-    # 循环状态追踪
-    # ------------------------------------------------------------------
-    def _record_cycle(self, agent_id: str, action: str,
-                      detail: Optional[Dict[str, Any]] = None) -> None:
-        """记录一次循环动作"""
-        if self.current_cycle >= self.max_cycles:
-            raise RuntimeError(f"{ERR_CYCLE_LIMIT}: 循环次数超过上限 {self.max_cycles}")
-
-        self.current_cycle += 1
-        record = CycleRecord(
-            cycle_id=self.current_cycle,
-            agent_id=agent_id,
-            action=action,
-            detail=detail or {}
-        )
-        self.cycle_history.append(record)
-
-    def get_cycle_count(self) -> int:
-        """获取当前循环次数"""
-        return self.current_cycle
-
-    def get_cycle_history(self, agent_id: Optional[str] = None) -> List[CycleRecord]:
-        """获取循环历史，可按代理过滤"""
-        if agent_id is None:
-            return list(self.cycle_history)
-        return [r for r in self.cycle_history if r.agent_id == agent_id]
-
-    def reset_cycles(self) -> str:
-        """重置循环计数"""
-        self.current_cycle = 0
-        self.cycle_history.clear()
-        return ERR_OK
-
-    # ------------------------------------------------------------------
-    # 全局状态管理
-    # ------------------------------------------------------------------
-    def set_global_state(self, key: str, value: Any) -> str:
-        """设置全局状态"""
-        if not key:
-            return ERR_INVALID_ARGUMENT
-        self.global_state[key] = value
-        return ERR_OK
-
-    def get_global_state(self, key: str) -> Any:
-        """获取全局状态"""
-        return self.global_state.get(key)
-
-    # ------------------------------------------------------------------
-    # 持久化（JSON 序列化，带重试）
-    # ------------------------------------------------------------------
-    def save_state(self, filepath: Optional[str] = None) -> str:
-        """
-        将内核状态保存到 JSON 文件。
-
-        返回:
-            成功返回 ERR_OK，失败返回 E009。
-        """
-        target = filepath or self.state_file
-        if not target:
-            return ERR_INVALID_ARGUMENT
-
-        try:
-            state = {
-                "agents": {aid: {
-                    "id": a.id,
-                    "name": a.name,
-                    "role": a.role,
-                    "enabled": a.enabled,
-                    "metadata": a.metadata
-                } for aid, a in self.agents.items()},
-                "goals": {gid: {
-                    "id": g.id,
-                    "description": g.description,
-                    "status": g.status,
-                    "progress": g.progress,
-                    "metadata": g.metadata,
-                    "created_at": g.created_at,
-                    "updated_at": g.updated_at
-                } for gid, g in self.goals.items()},
-                "global_state": self.global_state,
-                "current_cycle": self.current_cycle,
-                "handoffs": [{
-                    "from_agent": h.from_agent,
-                    "to_agent": h.to_agent,
-                    "payload": h.payload,
-                    "timestamp": h.timestamp,
-                    "signature": h.signature
-                } for h in self.handoffs]
-            }
-
-            def _write():
-                with open(target, "w", encoding="utf-8", errors="replace") as f:
-                    json.dump(state, f, ensure_ascii=False, indent=2)
-
-            retry_io(_write)
-            return ERR_OK
-        except Exception:
-            return ERR_PERSISTENCE
-
-    def load_state(self, filepath: Optional[str] = None) -> str:
-        """
-        从 JSON 文件加载内核状态。
-
-        返回:
-            成功返回 ERR_OK，失败返回 E009。
-        """
-        target = filepath or self.state_file
-        if not target:
-            return ERR_INVALID_ARG
-
-
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    ap.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    args = ap.parse_args()
-    global dry_run
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
