@@ -308,6 +308,4 @@ def html_to_markdown(html_text: str, image_map: Dict[str, str] = None) -> str:
     # 代码块
     text = re.sub(
         r'<pre[^>]*><code[^>]*>(.*?)</code></pre>',
-        lambda m: "\n```\n" + m.group(1) + "\n```\n",
-        text, flags=re.DOTALL | re.IGNORECASE
-    )
+        lambda m: "\n

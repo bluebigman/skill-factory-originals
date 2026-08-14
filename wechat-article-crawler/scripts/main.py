@@ -358,4 +358,4 @@ class _MDConverter(HTMLParser):
             self._in_pre = False
             code_text = "".join(self._pre_content).strip()
             self._flush_line()
-            self._lines.append("")
+            self._lines.append("

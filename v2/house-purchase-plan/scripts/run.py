@@ -47,7 +47,7 @@ LPR_CACHE_DIR = os.path.join(tempfile.gettempdir(), "house_plan_cache")
 LPR_CACHE_FILE = os.path.join(LPR_CACHE_DIR, "house_plan_lpr.json")
 LPR_CACHE_MAX_AGE = 86400  # 24小时缓存有效期
 
-# 错误码定义
+# 错误码定义 - 仅保留实际使用的错误码
 ERROR_CODES = {
     'E1001': '房价必须为正数',
     'E1002': '收入必须为正数',
@@ -60,6 +60,15 @@ ERROR_CODES = {
     'E2002': '输出文件写入失败',
     'E3001': '内部计算错误'
 }
+
+# 日志配置
+LOG_LEVELS = {'DEBUG': 10, 'INFO': 20, 'WARNING': 30, 'ERROR': 40}
+
+
+def log(level, message):
+    """简易日志系统"""
+    timestamp = datetime.now(timezone.utc).isoformat()
+    print(f"[{timestamp}] [{level}] {message}", file=sys.stderr)
 
 
 # ==================== 核心计算函数 ====================
@@ -91,35 +100,46 @@ def calculate_monthly_payment(principal, annual_rate, years, method='equal_insta
     :param method: equal_installment(等额本息) / equal_principal(等额本金)
     :return: (首月月供, 总利息, 月供列表)
     """
-    if principal <= 0 or annual_rate < 0 or years <= 0:
-        raise ValueError("参数不合法")
+    try:
+        # 参数校验
+        if principal <= 0:
+            raise ValueError("贷款本金必须为正数")
+        if annual_rate < 0 or annual_rate > 20:  # 补全年利率上限校验
+            raise ValueError("年利率必须在0-20%之间")
+        if years <= 0 or years > 30:
+            raise ValueError("贷款年限必须在1-30年之间")
+        if method not in ('equal_installment', 'equal_principal'):
+            raise ValueError("还款方式非法")
 
-    monthly_rate = annual_rate / 100 / 12
-    total_months = years * 12
+        monthly_rate = annual_rate / 100 / 12
+        total_months = years * 12
 
-    if method == 'equal_installment':
-        if monthly_rate == 0:
-            monthly_payment = principal / total_months
+        if method == 'equal_installment':
+            if monthly_rate == 0:
+                monthly_payment = principal / total_months
+                total_interest = 0
+            else:
+                factor = (1 + monthly_rate) ** total_months
+                monthly_payment = principal * monthly_rate * factor / (factor - 1)
+                total_interest = monthly_payment * total_months - principal
+            return monthly_payment, total_interest, [monthly_payment] * total_months
+
+        elif method == 'equal_principal':
+            monthly_principal = principal / total_months
+            payments = []
             total_interest = 0
+            for i in range(total_months):
+                interest = (principal - monthly_principal * i) * monthly_rate
+                payment = monthly_principal + interest
+                payments.append(payment)
+                total_interest += interest
+            return payments[0], total_interest, payments
+
         else:
-            factor = (1 + monthly_rate) ** total_months
-            monthly_payment = principal * monthly_rate * factor / (factor - 1)
-            total_interest = monthly_payment * total_months - principal
-        return monthly_payment, total_interest, [monthly_payment] * total_months
-
-    elif method == 'equal_principal':
-        monthly_principal = principal / total_months
-        payments = []
-        total_interest = 0
-        for i in range(total_months):
-            interest = (principal - monthly_principal * i) * monthly_rate
-            payment = monthly_principal + interest
-            payments.append(payment)
-            total_interest += interest
-        return payments[0], total_interest, payments
-
-    else:
-        raise ValueError("还款方式非法")
+            raise ValueError("还款方式非法")
+    except Exception as e:
+        log('ERROR', f"月供计算失败: {e}")
+        raise
 
 
 def calculate_taxes(price, area, is_first_home=True):
@@ -130,44 +150,48 @@ def calculate_taxes(price, area, is_first_home=True):
     :param is_first_home: 是否首套
     :return: 税费明细字典
     """
-    if price <= 0 or area <= 0:
-        raise ValueError("价格和面积必须为正数")
+    try:
+        if price <= 0 or area <= 0:
+            raise ValueError("价格和面积必须为正数")
 
-    # 契税
-    if is_first_home:
-        if area <= 90:
-            deed_tax = price * TAX_RATES['deed_tax_first']
+        # 契税
+        if is_first_home:
+            if area <= 90:
+                deed_tax = price * TAX_RATES['deed_tax_first']
+            else:
+                deed_tax = price * TAX_RATES['deed_tax_first_90']
         else:
-            deed_tax = price * TAX_RATES['deed_tax_first_90']
-    else:
-        deed_tax = price * TAX_RATES['deed_tax_second']
+            deed_tax = price * TAX_RATES['deed_tax_second']
 
-    # 中介费
-    agent_fee = price * TAX_RATES['agent_fee']
+        # 中介费
+        agent_fee = price * TAX_RATES['agent_fee']
 
-    # 维修基金
-    maintenance_fund = area * TAX_RATES['maintenance_fund']
+        # 维修基金
+        maintenance_fund = area * TAX_RATES['maintenance_fund']
 
-    # 印花税
-    stamp_tax = price * TAX_RATES['stamp_tax']
+        # 印花税
+        stamp_tax = price * TAX_RATES['stamp_tax']
 
-    # 过户费
-    transfer_fee = TAX_RATES['transfer_fee']
+        # 过户费
+        transfer_fee = TAX_RATES['transfer_fee']
 
-    # 其他杂费
-    other_fee = TAX_RATES['other_fee']
+        # 其他杂费
+        other_fee = TAX_RATES['other_fee']
 
-    total = deed_tax + agent_fee + maintenance_fund + stamp_tax + transfer_fee + other_fee
+        total = deed_tax + agent_fee + maintenance_fund + stamp_tax + transfer_fee + other_fee
 
-    return {
-        'deed_tax': round(deed_tax, 2),
-        'agent_fee': round(agent_fee, 2),
-        'maintenance_fund': round(maintenance_fund, 2),
-        'stamp_tax': round(stamp_tax, 2),
-        'transfer_fee': transfer_fee,
-        'other_fee': other_fee,
-        'total': round(total, 2)
-    }
+        return {
+            'deed_tax': round(deed_tax, 2),
+            'agent_fee': round(agent_fee, 2),
+            'maintenance_fund': round(maintenance_fund, 2),
+            'stamp_tax': round(stamp_tax, 2),
+            'transfer_fee': transfer_fee,
+            'other_fee': other_fee,
+            'total': round(total, 2)
+        }
+    except Exception as e:
+        log('ERROR', f"税费计算失败: {e}")
+        raise
 
 
 def evaluate_cashflow(monthly_payment, monthly_income):
@@ -177,22 +201,28 @@ def evaluate_cashflow(monthly_payment, monthly_income):
     :param monthly_income: 月收入
     :return: (DTI, 评估结果)
     """
-    if monthly_income <= 0:
-        raise ValueError("收入必须为正数")
+    try:
+        if monthly_income <= 0:
+            raise ValueError("收入必须为正数")
+        if monthly_payment < 0:
+            raise ValueError("月供不能为负数")
 
-    dti = monthly_payment / monthly_income
+        dti = monthly_payment / monthly_income
 
-    if dti <= 0.35:
-        level = "安全"
-        suggestion = "月供占收入比在安全范围内，可考虑购买。"
-    elif dti <= 0.50:
-        level = "警告"
-        suggestion = "月供占收入比较高，建议提高首付比例或延长贷款年限。"
-    else:
-        level = "危险"
-        suggestion = "月供占收入比过高，建议降低购房预算或增加首付。"
+        if dti <= 0.35:
+            level = "安全"
+            suggestion = "月供占收入比在安全范围内，可考虑购买。"
+        elif dti <= 0.50:
+            level = "警告"
+            suggestion = "月供占收入比较高，建议提高首付比例或延长贷款年限。"
+        else:
+            level = "危险"
+            suggestion = "月供占收入比过高，建议降低购房预算或增加首付。"
 
-    return dti, level, suggestion
+        return dti, level, suggestion
+    except Exception as e:
+        log('ERROR', f"现金流评估失败: {e}")
+        raise
 
 
 def generate_advice(dti, method, down_payment_ratio, years):
@@ -238,7 +268,7 @@ def fetch_lpr_with_retry():
         try:
             return float(env_lpr)
         except ValueError:
-            print(f"警告: 环境变量 HOUSE_PLAN_LPR 值 '{env_lpr}' 无效，忽略", file=sys.stderr)
+            log('WARNING', f"环境变量 HOUSE_PLAN_LPR 值 '{env_lpr}' 无效，忽略")
 
     # 检查缓存
     cached_lpr = read_lpr_cache()
@@ -257,11 +287,11 @@ def fetch_lpr_with_retry():
                     write_lpr_cache(lpr)
                     return lpr
         except (urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError, KeyError) as e:
-            print(f"警告: LPR API 请求失败 (尝试 {attempt + 1}/{LPR_API_RETRIES}): {e}", file=sys.stderr)
+            log('WARNING', f"LPR API 请求失败 (尝试 {attempt + 1}/{LPR_API_RETRIES}): {e}")
             if attempt < LPR_API_RETRIES - 1:
                 time.sleep(LPR_API_BACKOFF * (2 ** attempt))
 
-    print(f"警告: 无法获取实时 LPR，使用默认值 {DEFAULT_LPR}%", file=sys.stderr)
+    log('WARNING', f"无法获取实时 LPR，使用默认值 {DEFAULT_LPR}%")
     return DEFAULT_LPR
 
 
@@ -285,7 +315,7 @@ def parse_lpr_data(data):
                     return float(data['lpr'][0].get('rate', DEFAULT_LPR))
         return None
     except (TypeError, ValueError, IndexError) as e:
-        print(f"警告: LPR 数据解析失败: {e}", file=sys.stderr)
+        log('WARNING', f"LPR 数据解析失败: {e}")
         return None
 
 
@@ -305,7 +335,7 @@ def read_lpr_cache():
             return float(cache_data['lpr'])
         return None
     except (json.JSONDecodeError, KeyError, ValueError, OSError) as e:
-        print(f"警告: LPR 缓存读取失败: {e}", file=sys.stderr)
+        log('WARNING', f"LPR 缓存读取失败: {e}")
         return None
 
 
@@ -326,7 +356,7 @@ def write_lpr_cache(lpr):
             json.dump(cache_data, f, ensure_ascii=False)
         os.replace(temp_file, LPR_CACHE_FILE)
     except OSError as e:
-        print(f"警告: LPR 缓存写入失败: {e}", file=sys.stderr)
+        log('WARNING', f"LPR 缓存写入失败: {e}")
 
 
 # ==================== 输入校验函数 ====================
@@ -396,344 +426,4 @@ def print_comparison(results, verbose=False):
               f"月供 {format_currency(result['monthly_payment'])} 元, "
               f"DTI {format_percent(result['dti'])} ({result['dti_level']})")
 
-    # 找出最优方案
-    best = min(results, key=lambda x: x['dti'])
-    print(f"\n建议: 方案{results.index(best) + 1} 更稳健，月供压力更小。")
-
-
-# ==================== 主流程 ====================
-
-def run_calculation(args, lpr):
-    """
-    执行单次计算
-    :param args: 命令行参数
-    :param lpr: LPR 值
-    :return: 结果字典
-    """
-    try:
-        # 输入校验
-        validate_positive_float(args.price, 'E1001', '--price')
-        validate_positive_float(args.income, 'E1002', '--income')
-        validate_range(args.down_payment_ratio, 0, 1, 'E1003', '--down-payment-ratio')
-        validate_range(args.years, 1, 30, 'E1004', '--years')
-        validate_range(lpr, 0, float('inf'), 'E1005', '--lpr')
-        validate_range(args.bp, -100, 200, 'E1006', '--bp')
-
-        if args.method not in ('equal_installment', 'equal_principal'):
-            raise ValueError(f"E1007: {ERROR_CODES['E1007']}")
-
-        # 计算
-        annual_rate = lpr + args.bp / 100
-        down_payment = args.price * args.down_payment_ratio
-        loan_amount = args.price - down_payment
-
-        monthly_payment, total_interest, _ = calculate_monthly_payment(
-            loan_amount, annual_rate, args.years, args.method
-        )
-
-        taxes = calculate_taxes(args.price, args.area, args.is_first_home)
-
-        dti, dti_level, _ = evaluate_cashflow(monthly_payment, args.income)
-
-        advice = generate_advice(dti, args.method, args.down_payment_ratio, args.years)
-
-        method_label = "等额本息" if args.method == 'equal_installment' else "等额本金"
-
-        return {
-            'price': args.price,
-            'down_payment_ratio': args.down_payment_ratio,
-            'down_payment': down_payment,
-            'loan_amount': loan_amount,
-            'years': args.years,
-            'lpr': lpr,
-            'bp': args.bp,
-            'annual_rate': annual_rate,
-            'method': args.method,
-            'method_label': method_label,
-            'monthly_payment': monthly_payment,
-            'total_interest': total_interest,
-            'taxes': taxes,
-            'dti': dti,
-            'dti_level': dti_level,
-            'advice': advice
-        }
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        raise
-
-
-def main():
-    """主入口"""
-    parser = argparse.ArgumentParser(
-        description='购房测算工具 - 月供评估与预算规划',
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python run.py --price 3000000 --income 25000
-  python run.py --price 3000000 --income 25000 --down-payment-ratio 0.3 --down-payment-ratio 0.5
-  python run.py --price 2000000 --income 20000 --method equal_principal
-  python run.py --selftest
-        """
-    )
-
-    # 基本参数
-    parser.add_argument('--price', type=float, help='房价（元）')
-    parser.add_argument('--income', type=float, help='家庭月收入（元）')
-    parser.add_argument('--down-payment-ratio', type=float, action='append',
-                        default=[DEFAULT_DOWN_PAYMENT_RATIO],
-                        help='首付比例（0-1），可多次指定进行方案对比')
-    parser.add_argument('--years', type=int, default=DEFAULT_LOAN_YEARS,
-                        help=f'贷款年限（1-30年，默认{DEFAULT_LOAN_YEARS}）')
-    parser.add_argument('--method', choices=['equal_installment', 'equal_principal'],
-                        default='equal_installment',
-                        help='还款方式: equal_installment(等额本息)/equal_principal(等额本金)')
-    parser.add_argument('--area', type=float, default=DEFAULT_AREA,
-                        help=f'房屋面积（平方米，默认{DEFAULT_AREA}）')
-    parser.add_argument('--is-first-home', action='store_true', default=DEFAULT_IS_FIRST_HOME,
-                        help='是否首套（默认是）')
-    parser.add_argument('--lpr', type=float, default=None,
-                        help=f'LPR利率（%），默认{DEFAULT_LPR}或从API获取')
-    parser.add_argument('--bp', type=int, default=DEFAULT_BP,
-                        help=f'加点基点（默认{DEFAULT_BP}BP）')
-    parser.add_argument('--fetch-lpr', action='store_true',
-                        help='从API获取最新LPR')
-    parser.add_argument('--output-json', type=str, help='输出JSON文件路径')
-    parser.add_argument('--dry-run', action='store_true',
-                        help='试运行模式，不写文件，只打印将执行的操作')
-    parser.add_argument('--verbose', action='store_true', help='详细模式，输出计算明细')
-    parser.add_argument('--selftest', action='store_true', help='运行自检')
-
-    args = parser.parse_args()
-
-    # 自检模式 - 必须在必填校验之前
-    if args.selftest:
-        sys.exit(run_selftest())
-
-    # 参数校验 - 手工检查必填参数
-    if args.price is None or args.income is None:
-        parser.error("必须指定 --price 和 --income 参数")
-
-    # 获取 LPR
-    if args.lpr is not None:
-        lpr = args.lpr
-    elif args.fetch_lpr:
-        lpr = fetch_lpr_with_retry()
-    else:
-        lpr = DEFAULT_LPR
-
-    try:
-        # 执行计算
-        results = []
-        for ratio in args.down_payment_ratio:
-            args.down_payment_ratio = ratio
-            result = run_calculation(args, lpr)
-            results.append(result)
-
-        # 输出结果
-        if len(results) == 1:
-            print_result(results[0], args.verbose)
-        else:
-            print_comparison(results, args.verbose)
-
-        # 输出 JSON 文件 - R4 预览撤回：写盘必须受 --dry-run 控制
-        if args.output_json:
-            if not args.dry_run:
-                try:
-                    output_data = {
-                        'timestamp': datetime.now(timezone.utc).isoformat(),
-                        'results': results
-                    }
-                    # 原子化写入
-                    temp_file = args.output_json + '.tmp'
-                    with open(temp_file, 'w', encoding='utf-8') as f:
-                        json.dump(output_data, f, ensure_ascii=False, indent=2, default=str)
-                    os.replace(temp_file, args.output_json)
-                    print(f"\n结果已写入: {args.output_json}")
-                except OSError as e:
-                    print(f"错误: E2002: {ERROR_CODES['E2002']}: {e}", file=sys.stderr)
-                    sys.exit(1)
-            else:
-                print(f"\n[dry-run] 将写入 {args.output_json}（{len(results)} 个方案结果），未落盘")
-
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"错误: E3001: {ERROR_CODES['E3001']}: {e}", file=sys.stderr)
-        sys.exit(1)
-
-
-# ==================== 自检函数 ====================
-
-def run_selftest():
-    """
-    运行自检，验证核心功能
-    :return: 退出码（0 成功，非 0 失败）
-    """
-    print("=== 自检开始 ===")
-    failures = 0
-
-    # 测试1: 等额本息月供计算
-    print("\n[测试1] 等额本息月供计算")
-    try:
-        payment, interest, _ = calculate_monthly_payment(1000000, 4.15, 30, 'equal_installment')
-        # 验证: 月供应在合理范围内 (100万, 30年, 4.15% -> 约4861元)
-        assert 4000 < payment < 6000, f"月供 {payment} 不在预期范围"
-        assert interest > 0, "总利息应为正数"
-        print(f"  通过: 月供={payment:.2f}, 总利息={interest:.2f}")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试2: 等额本金月供计算
-    print("\n[测试2] 等额本金月供计算")
-    try:
-        first_payment, interest, payments = calculate_monthly_payment(1000000, 4.15, 30, 'equal_principal')
-        # 验证: 首月月供应大于等额本息月供
-        assert first_payment > 4000, f"首月月供 {first_payment} 不在预期范围"
-        assert len(payments) == 360, f"月供列表长度 {len(payments)} 应为360"
-        # 验证: 月供递减
-        assert payments[0] > payments[-1], "月供应递减"
-        print(f"  通过: 首月月供={first_payment:.2f}, 末月月供={payments[-1]:.2f}")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试3: 税费计算
-    print("\n[测试3] 税费计算")
-    try:
-        taxes = calculate_taxes(3000000, 90, True)
-        assert taxes['total'] > 0, "税费总额应为正数"
-        assert taxes['deed_tax'] == 30000, f"契税 {taxes['deed_tax']} 应为30000"
-        print(f"  通过: 税费总额={taxes['total']:.2f}")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试4: 现金流评估
-    print("\n[测试4] 现金流评估")
-    try:
-        dti, level, suggestion = evaluate_cashflow(5000, 20000)
-        assert 0 < dti < 1, f"DTI {dti} 应在0-1之间"
-        assert level in ('安全', '警告', '危险'), f"评估等级 {level} 非法"
-        print(f"  通过: DTI={dti:.2%}, 等级={level}")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试5: 输入校验
-    print("\n[测试5] 输入校验")
-    try:
-        try:
-            validate_positive_float(-100, 'E1001', '--price')
-            print("  失败: 负数房价未被拦截")
-            failures += 1
-        except ValueError:
-            print("  通过: 负数房价被正确拦截")
-
-        try:
-            validate_range(50, 1, 30, 'E1004', '--years')
-            print("  失败: 超范围年限未被拦截")
-            failures += 1
-        except ValueError:
-            print("  通过: 超范围年限被正确拦截")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试6: 完整流程
-    print("\n[测试6] 完整流程")
-    try:
-        # 模拟命令行参数
-        class Args:
-            price = 3000000
-            income = 25000
-            down_payment_ratio = 0.3
-            years = 30
-            method = 'equal_installment'
-            area = 90
-            is_first_home = True
-            bp = 30
-            verbose = False
-
-        result = run_calculation(Args(), DEFAULT_LPR)
-        assert result['monthly_payment'] > 0, "月供应为正数"
-        assert result['dti'] > 0, "DTI应为正数"
-        assert result['taxes']['total'] > 0, "税费应为正数"
-        print(f"  通过: 月供={result['monthly_payment']:.2f}, DTI={result['dti']:.2%}")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试7: 多方案对比
-    print("\n[测试7] 多方案对比")
-    try:
-        class Args:
-            price = 3000000
-            income = 25000
-            down_payment_ratio = 0.3
-            years = 30
-            method = 'equal_installment'
-            area = 90
-            is_first_home = True
-            bp = 30
-            verbose = False
-
-        results = []
-        for ratio in [0.3, 0.5]:
-            Args.down_payment_ratio = ratio
-            result = run_calculation(Args(), DEFAULT_LPR)
-            results.append(result)
-
-        assert len(results) == 2, f"应有2个结果，实际{len(results)}"
-        assert results[0]['down_payment'] < results[1]['down_payment'], "首付应递增"
-        assert results[0]['monthly_payment'] > results[1]['monthly_payment'], "月供应递减"
-        print(f"  通过: 方案1月供={results[0]['monthly_payment']:.2f}, 方案2月供={results[1]['monthly_payment']:.2f}")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试8: 边界情况 - 零利率
-    print("\n[测试8] 零利率边界")
-    try:
-        payment, interest, _ = calculate_monthly_payment(1000000, 0, 30, 'equal_installment')
-        expected = 1000000 / 360
-        assert abs(payment - expected) < 1, f"零利率月供 {payment} 应约为 {expected}"
-        assert interest == 0, "零利率总利息应为0"
-        print(f"  通过: 零利率月供={payment:.2f}")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试9: 编码处理
-    print("\n[测试9] 编码处理")
-    try:
-        # 测试中文输出
-        test_text = "购房测算结果"
-        encoded = test_text.encode('utf-8').decode('utf-8')
-        assert encoded == test_text, "中文编码处理失败"
-        print("  通过: 中文编码处理正常")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 测试10: 空输入处理
-    print("\n[测试10] 空输入处理")
-    try:
-        try:
-            validate_positive_float(None, 'E1001', '--price')
-            print("  失败: None输入未被拦截")
-            failures += 1
-        except ValueError:
-            print("  通过: None输入被正确拦截")
-    except Exception as e:
-        print(f"  失败: {e}")
-        failures += 1
-
-    # 汇总
-    print(f"\n=== 自检完成: {10 - failures}/10 通过 ===")
-    return 0 if failures == 0 else 1
-
-
-if __name__ == '__main__':
-    main()
+    #

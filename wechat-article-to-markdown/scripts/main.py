@@ -209,4 +209,4 @@ class WeChatArticleParser:
         ):
             code = self._clean_text(match.group(1))
             if code:
-                markdown_lines.append("")
+                markdown_lines.append("

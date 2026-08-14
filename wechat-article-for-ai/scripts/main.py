@@ -28,9 +28,6 @@ from typing import Dict, List, Optional
 # G4 Mock sample: 外部 HTML 结构变更时的降级样本
 _MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
 
-# G4 Mock sample: 外部 HTML 结构变更时的降级样本
-_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
-
 # ---------------------------------------------------------------------------
 # 错误码定义 (E001-E010)
 # ---------------------------------------------------------------------------
@@ -260,4 +257,4 @@ def html_to_markdown(html_fragment: str) -> str:
         code = re.sub(r'<[^>]+>', '', code)
         # 解码 HTML 实体
         code = html.unescape(code)
-        return "\n"
+        return "\n
