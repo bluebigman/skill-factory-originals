@@ -2,9 +2,10 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: simply-versioned
 name: simply-versioned
-displayName: 模型版本 轻量追踪 历史回溯
+displayName: 模型版本追踪 数据回溯 轻量方案
 description: 为 ActiveRecord 模型提供轻量、非侵入式的版本追踪与回溯方案。
-version: 1.0.2
+version: 1.0.3
+rules_version: cpr-20260814-n426
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/simply-versioned
@@ -14,58 +15,299 @@ ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: 独立技能工坊
 agent_created: true
-trigger_words: ["simply-versioned", "版本管理", "模型版本", "ActiveRecord版本", "数据追踪", "记录历史", "数据回滚"]
-
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+trigger_words: ["simply-versioned", "版本管理", "模型版本", "ActiveRecord版本", "数据追踪", "记录历史", "数据快照", "回滚记录"]
 ---
-
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
-# simply-versioned — 模型版本 轻量追踪 历史回溯
+
+> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
+
+# simply-versioned — 轻量级 ActiveRecord 版本追踪与回溯
 
 ## 一、能力边界（一页纸速查卡）
 
 ### 1.1 能做什么
 
-| 能力项 | 说明 | 适用场景 |
-|--------|------|----------|
-| 版本快照 | 在模型每次保存时自动记录一份数据快照 | 需要追踪数据变更历史的业务表 |
-| 版本回溯 | 将模型恢复到任意历史版本的状态 | 误操作恢复、审计追溯、数据对比 |
-| 非侵入集成 | 仅需在模型中引入一个模块，无需改动表结构 | 已有 ActiveRecord 项目的快速接入 |
-| 轻量存储 | 版本数据以序列化形式存储，不额外建表 | 中小规模数据量的版本管理需求 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 版本快照 | 为模型实例创建不可变的历史快照 | `post.create_version!` |
+| 历史回溯 | 将模型恢复到任意历史版本 | `post.revert_to(version_id)` |
+| 差异对比 | 比较两个版本之间的字段差异 | `version1.diff(version2)` |
+| 版本列表 | 获取模型实例的完整版本历史 | `post.versions` |
+| 非侵入集成 | 无需修改现有模型代码，通过模块引入即可 | `include SimplyVersioned::Model` |
 
 ### 1.2 不能做什么
 
 | 限制项 | 说明 |
 |--------|------|
-| 不支持字段级 diff | 只记录整行快照，不提供字段级别的变更对比 |
-| 不自动清理旧版本 | 版本数据会持续累积，需自行定期清理 |
-| 不处理关联对象 | 仅追踪模型自身字段，不包含 has_many / belongs_to 关联数据 |
-| 不提供版本合并 | 仅支持回溯覆盖，不支持分支合并或冲突解决 |
+| 不支持关联对象版本化 | 仅追踪模型自身字段，不追踪 `has_many` / `belongs_to` 关联对象的变化 |
+| 不支持二进制大字段 | 对 `BLOB` / `TEXT` 类型字段的存储效率较低，建议使用外部存储 |
+| 不提供自动版本创建 | 需要显式调用 `create_version!`，不会在每次保存时自动创建版本 |
+| 不处理并发冲突 | 多个进程同时写入版本时，不提供乐观锁或悲观锁机制 |
+| 不提供版本清理策略 | 版本记录会持续累积，需自行实现定期清理 |
 
 ### 1.3 适用对象
 
-- 使用 ActiveRecord 的 Ruby 项目（Rails 或 Sinatra 等）
-- 需要快速为现有模型增加版本追踪能力
-- 数据量中等（单表百万行以内），版本频率不高（每日变更千次以内）
+- **适用场景**：需要轻量级审计追踪的 Rails 应用；需要手动控制版本创建时机的业务逻辑；不希望引入重量级 gem（如 `paper_trail`）的简单项目。
+- **不适用场景**：需要自动记录每次变更的合规审计系统；需要追踪关联对象变化的复杂数据模型；需要高并发写入的版本管理场景。
 
+---
 
-## 许可证（License）
+## 二、触发方式
 
-```text
+### 2.1 触发词
+
+当用户输入以下关键词时，本 Skill 将被激活：
+
+- `simply-versioned`
+- `版本管理`
+- `模型版本`
+- `ActiveRecord版本`
+- `数据追踪`
+- `记录历史`
+- `数据快照`
+- `回滚记录`
+
+### 2.2 场景映射表
+
+| 用户说（大白话） | 实际需求 | 本 Skill 提供的方案 |
+|------------------|----------|---------------------|
+| "我想给文章加个历史记录功能" | 为 Post 模型添加版本追踪 | 引入 `SimplyVersioned::Model` 模块，调用 `create_version!` |
+| "用户误改了数据，怎么恢复？" | 数据回滚 | 使用 `revert_to(version_id)` 方法 |
+| "我想看看这条记录改过几次" | 版本列表 | 调用 `versions` 方法获取历史版本数组 |
+| "两个版本之间有什么不同？" | 版本差异 | 使用 `diff(other_version)` 方法 |
+| "我不想每次保存都自动存版本" | 手动控制版本创建 | 仅在需要时显式调用 `create_version!` |
+
+---
+
+## 三、标准流程
+
+### 3.1 前置条件
+
+| 条件 | 要求 | 验证方式 |
+|------|------|----------|
+| Ruby 环境 | Ruby ≥ 2.7 | `ruby -v` |
+| Rails 版本 | Rails ≥ 6.0 | `rails -v` |
+| 数据库 | 支持 JSON 字段（PostgreSQL / MySQL 5.7+） | `ActiveRecord::Base.connection.adapter_name` |
+| 迁移文件 | 已创建 `versions` 表 | `rails db:migrate:status` |
+
+### 3.2 安装与配置步骤
+
+**步骤 1：安装 gem**
+
+在 `Gemfile` 中添加：
+
+```ruby
+gem 'simply-versioned', '~> 1.0'
+```
+
+执行 `bundle install`。
+
+**步骤 2：生成迁移文件**
+
+```bash
+rails generate simply_versioned:install
+rails db:migrate
+```
+
+**步骤 3：在模型中引入模块**
+
+```ruby
+class Post < ApplicationRecord
+  include SimplyVersioned::Model
+end
+```
+
+**步骤 4：创建版本**
+
+```ruby
+post = Post.find(1)
+post.title = "新标题"
+post.save
+post.create_version!  # 显式创建版本快照
+```
+
+**步骤 5：回溯版本**
+
+```ruby
+version = post.versions.last
+post.revert_to(version.id)
+post.save
+```
+
+### 3.3 输出规范
+
+| 方法 | 返回类型 | 说明 |
+|------|----------|------|
+| `create_version!` | `Version` 对象 | 创建版本快照，返回版本记录 |
+| `versions` | `Array<Version>` | 按时间倒序返回所有版本 |
+| `revert_to(version_id)` | `Boolean` | 将模型属性恢复至指定版本，返回是否成功 |
+| `diff(other_version)` | `Hash` | 返回字段差异，格式为 `{ field_name => [old_value, new_value] }` |
+
+---
+
+## 四、置信度门控
+
+当遇到以下信息不足的情况时，本 Skill 将输出 `[需核实:字段]` 占位符，不会编造数据：
+
+| 场景 | 占位符示例 | 处理方式 |
+|------|------------|----------|
+| 用户未指定模型名称 | `[需核实:模型名称]` | 提示用户提供模型类名 |
+| 用户未指定版本 ID | `[需核实:版本ID]` | 提示用户提供版本 ID 或查询版本列表 |
+| 数据库适配器未知 | `[需核实:数据库类型]` | 提示用户确认数据库类型 |
+| 版本表结构不明确 | `[需核实:versions表结构]` | 提示用户运行 `rails db:schema:dump` 查看 |
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|----------|----------|----------|
+| `SV-001` | 模型未引入模块 | "模型未包含 SimplyVersioned::Model 模块" | 在模型类中添加 `include SimplyVersioned::Model` |
+| `SV-002` | 版本表不存在 | "versions 表未创建，请先运行迁移" | 执行 `rails generate simply_versioned:install` 和 `rails db:migrate` |
+| `SV-003` | 版本 ID 无效 | "找不到指定的版本记录" | 使用 `post.versions` 确认版本 ID 是否存在 |
+| `SV-004` | 字段类型不支持 | "该字段类型不支持版本化存储" | 将字段转换为 JSON 兼容类型，或使用 `serialize` 方法 |
+| `SV-005` | 并发写入冲突 | "检测到并发写入，请重试" | 使用事务包裹版本创建操作，或添加重试逻辑 |
+
+---
+
+## 六、FAQ 反模式
+
+### 6.1 常见坑与反模式对照
+
+| 常见坑 | 反模式示例 | 正确做法 |
+|--------|------------|----------|
+| **自动版本陷阱** | 期望每次 `save` 自动创建版本 | 明确调用 `create_version!`，或使用 `after_save` 回调（需自行实现） |
+| **关联对象丢失** | 版本化后关联对象变化未被记录 | 在版本快照中手动序列化关联对象的 ID 列表 |
+| **版本无限增长** | 从不清理旧版本，导致数据库膨胀 | 定期执行 `post.versions.where('created_at < ?', 30.days.ago).delete_all` |
+| **回滚后不保存** | 调用 `revert_to` 后忘记 `save` | 回滚后必须调用 `save` 持久化变更 |
+| **忽略 JSON 字段限制** | 在 SQLite 上使用 JSON 字段导致报错 | 确认数据库支持 JSON 类型，或改用 `text` 字段 + `serialize` |
+
+### 6.2 反模式对照表
+
+| 反模式 | 问题 | 替代方案 |
+|--------|------|----------|
+| 在 `before_save` 中自动创建版本 | 每次保存都产生版本，数据冗余 | 仅在关键操作后手动调用 `create_version!` |
+| 使用 `update_all` 批量修改后创建版本 | 绕过 ActiveRecord 回调，版本记录不完整 | 使用 `each` 循环逐条更新并创建版本 |
+| 将版本表与业务表放在同一数据库 | 业务数据增长影响版本查询性能 | 考虑将版本表迁移至独立数据库或使用分区表 |
+
+---
+
+## 七、渐进式披露
+
+### 7.1 速查卡（30 秒上手）
+
+```ruby
+# 1. 引入模块
+class Post < ApplicationRecord
+  include SimplyVersioned::Model
+end
+
+# 2. 创建版本
+post.create_version!
+
+# 3. 查看版本
+post.versions
+
+# 4. 回滚版本
+post.revert_to(version_id)
+post.save
+```
+
+### 7.2 新手路径（5 分钟）
+
+1. 阅读「能力边界」了解适用范围。
+2. 按照「标准流程」完成安装与配置。
+3. 使用速查卡中的四个核心方法完成基本操作。
+4. 遇到问题时查阅「错误码体系」定位问题。
+
+### 7.3 进阶路径（15 分钟）
+
+1. 深入阅读「FAQ 反模式」避免常见陷阱。
+2. 自定义版本存储策略（如：仅存储变更字段）。
+3. 实现版本清理的定时任务。
+4. 扩展 `diff` 方法以支持嵌套字段对比。
+
+---
+
+## 八、自定义扩展指南
+
+### 8.1 自定义版本存储
+
+默认情况下，版本快照存储为 JSON 格式。如需自定义存储格式：
+
+```ruby
+class Version < ActiveRecord::Base
+  belongs_to :versionable, polymorphic: true
+
+  def snapshot
+    JSON.parse(data)
+  end
+
+  def snapshot=(hash)
+    self.data = hash.to_json
+  end
+end
+```
+
+### 8.2 版本清理策略
+
+```ruby
+# 保留最近 30 天的版本，其余删除
+def self.cleanup_old_versions(days = 30)
+  where('created_at < ?', days.days.ago).delete_all
+end
+```
+
+### 8.3 差异对比增强
+
+```ruby
+def diff(other_version)
+  current = snapshot
+  previous = other_version.snapshot
+  (current.keys | previous.keys).each_with_object({}) do |key, diff|
+    diff[key] = [previous[key], current[key]] if previous[key] != current[key]
+  end
+end
+```
+
+---
+
+## 九、性能考量
+
+| 场景 | 性能建议 |
+|------|----------|
+| 频繁创建版本 | 使用批量插入（`insert_all`）减少数据库往返 |
+| 版本表数据量大 | 为 `versionable_type` 和 `versionable_id` 添加复合索引 |
+| 查询历史版本 | 使用 `limit` 和 `offset` 进行分页查询 |
+| 版本数据序列化 | 使用 `Oj` 等高性能 JSON 解析器替代默认的 `JSON` |
+
+---
+
+## 十、用户协议
+
+使用本 Skill 即表示您同意以下条款：
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 提供的代码示例和配置方法仅供参考，不构成任何形式的保证。
+2. **禁止反向工程**：不得对本 Skill 生成的文档、代码示例进行反向工程、反编译或试图提取底层算法。
+3. **合规使用**：使用者应确保其使用场景符合当地法律法规及所在组织的安全规范。
+4. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
+
+<!-- user-agreement-injected -->
+
+---
+
+## 十一、许可证（License）
+
+本 Skill 采用 MIT 许可证发布。
+
+```
 MIT License
 
-Copyright (c) 2026 SkillForge Lab
+Copyright (c) 2026 独立技能工坊
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,63 +318,18 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
+
 <!-- professional-license-embedded -->
 
-## 前置条件
+---
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档并验证代码在目标环境中的兼容性。*
