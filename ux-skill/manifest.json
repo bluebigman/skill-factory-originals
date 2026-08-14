@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260814_193541",
+  "slug": "ux-skill",
+  "spec": {
+    "slug": "ux-skill",
+    "name": "ux-skill",
+    "description": "面向AI编程工具的体验设计审查引擎，将输入转化为结构化诊断结果。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。",
+      "2. **试运行**：先用单个样本执行，核对输出字段与格式。",
+      "3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。",
+      "4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。",
+      "**能做**：标准格式的批量处理、字段提取与结构化输出、失败明细追踪。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "63d8de11c0ed481f",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
