@@ -19,7 +19,7 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-from urllib.parse import urlparse
+from urllib.parse import urlparse, quote_plus
 
 # ---------------------------------------------------------------------------
 # 错误码定义（E001-E012）
@@ -80,7 +80,7 @@ class ResearchCard:
 # ---------------------------------------------------------------------------
 # 核心处理函数
 # ---------------------------------------------------------------------------
-def _read_text_safe(path):
+def _read_text_safe(path: str) -> str:
     """多编码安全读取（R3+R5 合规）"""
     for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
         try:
@@ -91,10 +91,11 @@ def _read_text_safe(path):
     with open(path, encoding="utf-8", errors="replace") as f:
         return f.read()
 
-# 批处理流式读取工具
-def _iter_lines(path):
+
+def _iter_lines(path: str):
+    """流式读取文件行（用于大文件）"""
     with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
+        for line in f:
             yield line
 
 
@@ -126,7 +127,7 @@ def _extract_keywords(text: str, max_count: int = 8) -> List[str]:
     4. 降级：提取高频字符/单词
     """
     # 尝试提取引号内内容
-    quoted = re.findall(r"[""「『]([^""」』]+)[""」』]", text)
+    quoted = re.findall(r'[""「『]([^""」』]+)[""」』]', text)
     if quoted:
         result = []
         for q in quoted:
@@ -269,6 +270,34 @@ def _extract_limitations(text: str) -> List[str]:
     return limitations[:5]
 
 
+def _calculate_confidence(card: ResearchCard) -> float:
+    """
+    基于提取完整度计算置信度（0-1）。
+    规则：
+    - 标题存在 +0.3
+    - 作者存在 +0.2
+    - 年份存在 +0.15
+    - 关键词存在 +0.15
+    - 摘要存在 +0.1
+    - 结论存在 +0.1
+    基础分 0.2，最高 1.0
+    """
+    score = 0.2
+    if card.title:
+        score += 0.3
+    if card.authors:
+        score += 0.2
+    if card.year is not None:
+        score += 0.15
+    if card.keywords:
+        score += 0.15
+    if card.abstract:
+        score += 0.1
+    if card.conclusion:
+        score += 0.1
+    return min(1.0, score)
+
+
 def structure_text(text: str, source: str = "") -> ResearchCard:
     """
     将原始文本转换为结构化 ResearchCard。
@@ -291,7 +320,7 @@ def structure_text(text: str, source: str = "") -> ResearchCard:
     elif len(_split_sentences(cleaned)) > 1:
         abstract = _split_sentences(cleaned)[1][:200]
 
-    return ResearchCard(
+    card = ResearchCard(
         title=title,
         authors=_extract_authors(cleaned),
         year=_extract_year(cleaned),
@@ -303,6 +332,9 @@ def structure_text(text: str, source: str = "") -> ResearchCard:
         source=source,
         raw_text=cleaned,
     )
+    # 基于提取完整度重新计算置信度
+    card.confidence = _calculate_confidence(card)
+    return card
 
 
 def _process_single_item(item: Dict[str, str]) -> Tuple[Optional[ResearchCard], Optional[str]]:
@@ -399,65 +431,4 @@ def search_web(query: str, max_results: int = 5) -> List[Dict[str, str]]:
     if not query or not query.strip():
         raise AcademicSkillError("E001")
 
-    # 构建搜索 URL（使用 DuckDuckGo HTML 接口）
-    import urllib.parse
-    search_url = f"https://html.duckduckgo.com/html/?q={urllib.parse.quote(query)}"
-
-    try:
-        html = _http_get_with_retry(search_url)
-    except AcademicSkillError as e:
-        raise AcademicSkillError("E011", f"搜索失败: {e}")
-
-    # 解析搜索结果（简化解析）
-    results = []
-    # 匹配结果条目
-    result_pattern = re.compile(
-        r'<a[^>]*class="result__a"[^>]*href="([^"]*)"[^>]*>(.*?)</a>',
-        re.DOTALL
-    )
-    snippet_pattern = re.compile(
-        r'<a[^>]*class="result__snippet"[^>]*>(.*?)</a>',
-        re.DOTALL
-    )
-
-    matches = result_pattern.findall(html)
-    snippets = snippet_pattern.findall(html)
-
-    for i, (url, title) in enumerate(matches[:max_results]):
-        # 清理 HTML 标签
-        title_clean = re.sub(r'<[^>]+>', '', title).strip()
-        snippet = ""
-        if i < len(snippets):
-            snippet = re.sub(r'<[^>]+>', '', snippets[i]).strip()
-
-        results.append({
-            "title": title_clean,
-            "url": url,
-            "snippet": snippet,
-        })
-
-    return results
-
-
-# ---------------------------------------------------------------------------
-# 写作辅助功能（能力：写作）
-# ---------------------------------------------------------------------------
-def generate_abstract(card: ResearchCard, max_length: int = 200) -> str:
-    """
-    根据研究卡片生成摘要。
-    如果已有摘要则返回，否则从原文提取关键信息生成。
-    """
-    if card.abstract:
-        return card.abstract[:max_length]
-
-    # 从原文生成摘要
-
-
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-    args = ap.parse_args()
+    # 构建搜索 URL
