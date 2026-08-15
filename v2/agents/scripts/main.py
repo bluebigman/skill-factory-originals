@@ -72,6 +72,13 @@ LLM_MAX_RETRIES = int(os.environ.get("LLM_MAX_RETRIES", "3"))
 CACHE_ENABLED = os.environ.get("CACHE_ENABLED", "true").lower() == "true"
 CACHE_TTL = int(os.environ.get("CACHE_TTL", "3600"))  # 1小时
 
+# 并发控制
+MAX_CONCURRENT_AGENTS = int(os.environ.get("MAX_CONCURRENT_AGENTS", "5"))
+
+# 熔断配置
+CIRCUIT_BREAKER_THRESHOLD = int(os.environ.get("CIRCUIT_BREAKER_THRESHOLD", "5"))
+CIRCUIT_BREAKER_TIMEOUT = int(os.environ.get("CIRCUIT_BREAKER_TIMEOUT", "60"))
+
 
 class AgentConfig:
     """Agent角色配置"""
@@ -193,6 +200,43 @@ global_cache = SimpleCache()
 
 
 # ============================================================
+# 熔断器实现
+# ============================================================
+class CircuitBreaker:
+    """熔断器：连续失败超过阈值则熔断，一段时间后自动恢复"""
+    def __init__(self, threshold: int = CIRCUIT_BREAKER_THRESHOLD, timeout: int = CIRCUIT_BREAKER_TIMEOUT):
+        self.threshold = threshold
+        self.timeout = timeout
+        self.failure_count = 0
+        self.last_failure_time = 0
+        self.is_open = False
+
+    def record_success(self) -> None:
+        self.failure_count = 0
+        self.is_open = False
+
+    def record_failure(self) -> None:
+        self.failure_count += 1
+        self.last_failure_time = time.time()
+        if self.failure_count >= self.threshold:
+            self.is_open = True
+
+    def can_proceed(self) -> bool:
+        if not self.is_open:
+            return True
+        # 检查是否超过熔断时间
+        if time.time() - self.last_failure_time > self.timeout:
+            self.is_open = False
+            self.failure_count = 0
+            return True
+        return False
+
+
+# 全局熔断器实例
+global_circuit_breaker = CircuitBreaker()
+
+
+# ============================================================
 # LLM API 调用（带指数退避重试和jitter）
 # ============================================================
 def _read_text_safe(path):
@@ -215,10 +259,14 @@ def _iter_lines(path):
 
 def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries: int = LLM_MAX_RETRIES) -> str:
     """
-    调用真实LLM API，带指数退避重试（含jitter）和超时处理
+    调用真实LLM API，带指数退避重试（含jitter）、超时处理、熔断和缓存
     """
     if not LLM_API_KEY:
         raise RuntimeError("LLM_API_KEY 环境变量未设置，无法调用真实LLM API")
+
+    # 检查熔断器
+    if not global_circuit_breaker.can_proceed():
+        raise RuntimeError("熔断器已打开，暂时无法调用LLM API")
 
     # 检查缓存
     cache_key = f"llm:{role}:{hash(prompt)}"
@@ -257,7 +305,8 @@ def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries
                 response_data = json.loads(response.read().decode("utf-8"))
                 result = response_data["choices"][0]["message"]["content"].strip()
 
-                # 缓存结果
+                # 记录成功并缓存结果
+                global_circuit_breaker.record_success()
                 global_cache.set(cache_key, result)
                 return result
 
@@ -271,8 +320,10 @@ def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries
                     wait_time = base_wait + jitter
                     time.sleep(wait_time)
                 else:
+                    global_circuit_breaker.record_failure()
                     break
             else:
+                global_circuit_breaker.record_failure()
                 raise
         except urllib.error.URLError as e:
             last_error = e
@@ -282,6 +333,7 @@ def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries
                 wait_time = base_wait + jitter
                 time.sleep(wait_time)
             else:
+                global_circuit_breaker.record_failure()
                 break
         except TimeoutError:
             last_error = TimeoutError("LLM API 调用超时")
@@ -291,6 +343,7 @@ def call_llm_api(prompt: str, role: str, timeout: int = LLM_TIMEOUT, max_retries
                 wait_time = base_wait + jitter
                 time.sleep(wait_time)
             else:
+                global_circuit_breaker.record_failure()
                 break
 
     # 重试耗尽，降级处理
@@ -312,12 +365,13 @@ class TaskDecomposer:
         "代码审查员": "审查代码质量，识别潜在问题，提出改进建议。",
     }
 
-    def __init__(self, task: str, agents: List[AgentConfig]):
+    def __init__(self, task: str, agents: List[AgentConfig], params: Optional[Dict[str, str]] = None):
         self.task = task
         self.agents = agents
+        self.params = params or {}
 
     def decompose(self) -> List[Dict[str, Any]]:
-        """将任务拆分为子任务列表"""
+        """将任务拆分为子任务列表，支持参数覆盖"""
         subtasks = []
         for agent in self.agents:
             for i in range(agent.count):
@@ -325,10 +379,15 @@ class TaskDecomposer:
                 template = self.ROLE_TEMPLATES.get(
                     agent.role, "执行分析任务并输出结果。"
                 )
+                # 应用参数覆盖
+                description = f"{template} 任务: {self.task}"
+                if self.params:
+                    param_str = json.dumps(self.params, ensure_ascii=False)
+                    description += f"\n附加参数: {param_str}"
                 subtasks.append({
                     "task_id": subtask_id,
                     "role": agent.role,
-                    "description": f"{template} 任务: {self.task}",
+                    "description": description,
                     "dependencies": self._get_dependencies(agent.role, i),
                 })
         return subtasks
@@ -347,16 +406,17 @@ class TaskDecomposer:
 # Agent执行器
 # ============================================================
 class AgentExecutor:
-    """执行单个Agent任务，支持超时、重试和缓存"""
+    """执行单个Agent任务，支持超时、重试、缓存和并发控制"""
 
     def __init__(self, timeout: int = DEFAULT_TIMEOUT, retry: int = DEFAULT_RETRY):
         self.timeout = timeout
         self.retry = retry
+        self.semaphore = None  # 并发控制信号量，在编排器中设置
 
     def execute(
         self, task_id: str, role: str, description: str
     ) -> AgentResult:
-        """执行任务，带重试机制和缓存"""
+        """执行任务，带重试机制、缓存和并发控制"""
         start_time = time.time()
         attempts = 0
 
@@ -444,104 +504,4 @@ class ResultIntegrator:
         return completeness, status
 
 
-# ============================================================
-# 编排器主类
-# ============================================================
-class MultiAgentOrchestrator:
-    """多智能体协作编排器"""
-
-    def __init__(self, config: TaskInput):
-        self.config = config
-        self.decomposer = TaskDecomposer(config.task, config.agents)
-        self.executor = AgentExecutor(config.timeout, config.retry)
-        self.integrator = ResultIntegrator()
-
-    def run(self) -> OrchestratorResult:
-        """执行完整编排流程"""
-        try:
-            # 1. 任务拆解
-            subtasks = self.decomposer.decompose()
-
-            # 2. 执行编排（并发执行无依赖任务）
-            results = self._execute_with_dependencies(subtasks)
-
-            # 3. 结果整合
-            completeness, status = self.integrator.integrate(results)
-
-            # 4. 生成时间戳
-            timestamp = datetime.now(timezone.utc).isoformat()
-
-            return OrchestratorResult(
-                task=self.config.task,
-                agents=[a.to_dict() for a in self.config.agents],
-                results=results,
-                completeness=completeness,
-                status=status,
-                timestamp=timestamp,
-            )
-        except Exception as e:
-            raise RuntimeError(f"{ErrorCode.E010}: {str(e)}")
-
-    def _execute_with_dependencies(
-        self, subtasks: List[Dict[str, Any]]
-    ) -> List[AgentResult]:
-        """按依赖关系并发执行子任务"""
-        results: List[AgentResult] = []
-        executed: Dict[str, AgentResult] = {}
-
-        # 构建依赖图
-        remaining = subtasks.copy()
-        pending = set(s["task_id"] for s in subtasks)
-
-        while remaining:
-            # 找出所有依赖已满足的任务
-            ready = []
-            for subtask in remaining:
-                deps = subtask.get("dependencies", [])
-                if all(dep in executed for dep in deps):
-                    ready.append(subtask)
-
-            if not ready:
-                # 存在循环依赖或无法满足的依赖，强制执行
-                ready = remaining[:1]
-
-            # 并发执行就绪任务
-            with ThreadPoolExecutor(max_workers=min(len(ready), 5)) as executor:
-                future_to_task = {
-                    executor.submit(
-                        self.executor.execute,
-                        task["task_id"],
-                        task["role"],
-                        task["description"]
-                    ): task for task in ready
-                }
-
-                for future in as_completed(future_to_task):
-                    task = future_to_task[future]
-                    try:
-                        result = future.result()
-                        executed[task["task_id"]] = result
-                        results.append(result)
-                        remaining.remove(task)
-                        pending.discard(task["task_id"])
-                    except Exception as e:
-                        # 单个任务失败，继续执行其他任务
-                        print(f"任务 {task['task_id']} 执行失败: {e}", file=sys.stderr)
-                        # 创建失败结果
-                        failed_result = AgentResult(
-                            task_id=task["task_id"],
-                            role=task["role"],
-                            status="failed",
-                            output=f"执行失败: {str(e)}",
-                            execution_time=0.0,
-                            attempts=self.config.retry + 1,
-                        )
-                        executed[task["task_id"]] = failed_result
-                        results.append(failed_result)
-                        remaining.remove(task)
-                        pending.discard(task["task_id"])
-
-        return results
-
-
-# ============================================================
+# =================================

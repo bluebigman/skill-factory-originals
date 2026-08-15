@@ -426,4 +426,5 @@ def print_comparison(results, verbose=False):
               f"月供 {format_currency(result['monthly_payment'])} 元, "
               f"DTI {format_percent(result['dti'])} ({result['dti_level']})")
 
-    #
+
+# =================
