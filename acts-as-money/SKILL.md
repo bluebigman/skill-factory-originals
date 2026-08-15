@@ -2,10 +2,10 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: acts-as-money
 name: acts-as-money
-displayName: 金额识别 货币标准化 字段清洗
+displayName: 财务文本 金额解析 货币标准化
 description: 从混合文本中提取金额与币种，输出标准化JSON数据，供下游系统直接使用。
-version: 1.0.3
-rules_version: cpr-20260812-n376
+version: 1.0.4
+rules_version: cpr-20260815-n476
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/acts-as-money
@@ -13,9 +13,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 数据工坊
+author: DataForge Studio
 agent_created: true
-trigger_words: ["acts as money", "金额转换", "货币解析", "money gem", "金额字段处理", "金额提取", "币种标准化"]
+trigger_words: ["acts as money", "金额转换", "货币解析", "money gem", "金额字段处理", "货币识别", "金额提取", "币种标准化"]
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -26,7 +26,7 @@ trigger_words: ["acts as money", "金额转换", "货币解析", "money gem", "�
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# acts-as-money — 金额识别与货币标准化 Skill
+# acts-as-money — 金额与币种标准化提取器
 
 ## 一、能力边界（一页纸速查卡）
 
@@ -34,29 +34,29 @@ trigger_words: ["acts as money", "金额转换", "货币解析", "money gem", "�
 
 | 能力项 | 说明 | 示例 |
 |--------|------|------|
-| 金额提取 | 从混合文本中识别所有金额表达式 | "订单总价$1,200.50，运费€45" → 提取两笔金额 |
-| 币种识别 | 自动识别货币符号、ISO代码、中文币种名称 | ¥ / CNY / 人民币 / RMB / 美元 / USD |
-| 格式标准化 | 将各种金额写法统一为规范格式 | "1,200.50" → 1200.50；"1.234,56" → 1234.56 |
-| 批量处理 | 支持单条文本或CSV文件批量处理 | 整列金额字段清洗 |
-| 行号保留 | 文件处理时保留原始行号，便于回溯 | 第3行、第7行有金额 |
-| 置信度输出 | 每条结果附带置信度标记 | high / medium / low |
+| 单条文本解析 | 从一段文字中提取所有金额及其币种 | `"订单总额 USD 1,200.50，运费 EUR 45"` → 两条记录 |
+| 批量文件处理 | 读取 CSV/TSV 文件，对指定列逐行提取 | `--file data.csv --column amount` |
+| 多币种识别 | 支持常见货币符号与代码（USD/EUR/CNY/JPY/GBP 等 30+ 种） | `$`、`€`、`¥`、`£`、`USD`、`EUR`、`人民币` |
+| 数字格式兼容 | 处理千分位逗号、小数点、欧洲反写格式 | `1,234.56` 与 `1.234,56` 均识别为 1234.56 |
+| 置信度评估 | 每条输出附带 `confidence` 字段（high/medium/low） | 格式歧义时标记为 `low` |
+| 标准化输出 | 统一输出为 `{ "amount": 1234.56, "currency": "EUR", "confidence": "high" }` | 下游直接入库 |
 
 ### 1.2 不能做什么
 
 | 限制项 | 说明 |
 |--------|------|
-| 不做汇率换算 | 仅识别与标准化，不进行币种间兑换 |
-| 不做语义判断 | 不判断金额是收入还是支出、是否合理 |
-| 不处理手写体 | 仅支持电子文本输入 |
-| 不识别非金额数字 | 电话号码、日期、数量等不会被提取 |
-| 不修改原始文件 | 输出为新文件或标准输出，原文件不变 |
+| 不执行汇率换算 | 只提取与标准化，不做币种间转换 |
+| 不识别手写体/图片 | 仅处理文本输入，不接 OCR |
+| 不处理非金额数字 | 电话号码、日期、邮编等不会被提取 |
+| 不推断隐含币种 | 若文本未标注币种，输出 `currency: null` 并降置信度 |
+| 不修改源文件 | 默认只输出到 stdout 或指定输出文件 |
 
 ### 1.3 适用对象
 
-- 财务人员：整理报销单、发票中的金额字段
-- 数据分析师：清洗含金额的混合文本数据
-- 开发人员：将非结构化文本中的金额转为结构化数据
-- 运营人员：从用户反馈、评论中提取消费金额信息
+- 财务系统对接人员：需要将合同、发票、报表中的金额批量结构化
+- 数据分析师：清洗混合格式的金额字段
+- 后端开发者：需要标准化金额 API 的调用方
+- 审计人员：需要快速核对多币种金额的准确性
 
 ---
 
@@ -64,25 +64,26 @@ trigger_words: ["acts as money", "金额转换", "货币解析", "money gem", "�
 
 ### 2.1 触发词
 
-直接使用以下任一触发词即可激活：
+当输入包含以下任一关键词时，本 Skill 自动激活：
 
 - `acts as money`
 - `金额转换`
 - `货币解析`
 - `money gem`
 - `金额字段处理`
+- `货币识别`
 - `金额提取`
 - `币种标准化`
 
 ### 2.2 场景映射表
 
-| 用户说（大白话） | 实际需求 | 推荐调用方式 |
-|-----------------|----------|-------------|
-| "把这段文本里的钱都提出来" | 提取所有金额及币种 | `acts as money --input "文本内容"` |
-| "帮我标准化这些金额字段" | 清洗CSV中的金额列 | `acts as money --file data.csv --column amount` |
-| "这堆数据里哪些是钱？" | 识别并标记金额字段 | `acts as money --input "文本" --format json` |
-| "把美元和人民币分开列出来" | 按币种分类输出 | `acts as money --input "文本" --group-by currency` |
-| "这个文件里的金额格式太乱了" | 统一金额格式 | `acts as money --file data.csv --column price --normalize` |
+| 用户说（大白话） | 实际触发动作 |
+|------------------|--------------|
+| "帮我把这段文字里的钱都找出来" | 调用单条文本解析 |
+| "这个 CSV 里的金额列格式很乱，帮我统一" | 调用批量文件处理 |
+| "看看这合同里有没有美元和欧元的金额" | 调用多币种提取 |
+| "这个数字 1.234,56 到底是多少钱？" | 调用格式歧义解析，输出 low 置信度 |
+| "把提取结果存到新文件里" | 调用 `--output` 参数写文件 |
 
 ---
 
@@ -90,303 +91,288 @@ trigger_words: ["acts as money", "金额转换", "货币解析", "money gem", "�
 
 ### 3.1 前置条件
 
-| 条件 | 要求 | 检查方法 |
-|------|------|----------|
-| 输入文本 | 非空，包含至少一个金额表达式 | 目测或 `wc -c` 检查 |
-| 输入文件 | CSV格式，有表头行 | `head -5 file.csv` 查看 |
-| 列名指定 | 使用 `--column` 参数时，列名必须与表头完全一致 | `head -1 file.csv` 确认 |
-| 环境依赖 | Python 3.8+，无额外第三方库依赖 | `python3 --version` |
+- 输入文本为 UTF-8 编码
+- 文件处理时，文件需为 CSV/TSV 格式，且包含表头
+- 系统已安装 Python 3.8+（若使用 CLI 方式）
 
 ### 3.2 执行步骤
 
-#### 场景A：单条文本处理
+#### 步骤 1：准备输入
 
-1. 准备包含金额的文本，例如：
-   ```
-   本月收入：工资 ¥15,000.00，兼职收入 $800，报销 €120.50
-   ```
+**方式 A：单条文本**
 
-2. 调用命令：
-   ```bash
-   acts as money --input "本月收入：工资 ¥15,000.00，兼职收入 $800，报销 €120.50"
-   ```
+```bash
+acts as money --input "采购合同总价 USD 15,000.00，含税。另付运费 EUR 250.50。"
+```
 
-3. 查看输出结果（JSON格式）：
-   ```json
-   {
-     "status": "success",
-     "count": 3,
-     "results": [
-       {"index": 1, "amount": 15000.00, "currency": "CNY", "original": "¥15,000.00", "confidence": "high"},
-       {"index": 2, "amount": 800.00, "currency": "USD", "original": "$800", "confidence": "high"},
-       {"index": 3, "amount": 120.50, "currency": "EUR", "original": "€120.50", "confidence": "high"}
-     ]
-   }
-   ```
+**方式 B：文件批量**
 
-4. 若某条结果置信度为 `low`，需人工核对原始文本。
+```bash
+acts as money --file invoices.csv --column amount --output result.json
+```
 
-#### 场景B：CSV文件批量处理
+参数说明：
 
-1. 准备CSV文件 `data.csv`，内容示例：
-   ```csv
-   id,amount,note
-   1,"¥1,200.50","办公用品"
-   2,"USD 45.00","快递费"
-   3,"1.234,56 €","差旅费"
-   ```
+| 参数 | 必填 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--input` | 二选一 | 无 | 待解析的文本字符串 |
+| `--file` | 二选一 | 无 | 待解析的 CSV/TSV 文件路径 |
+| `--column` | 与 `--file` 搭配 | 无 | 指定要解析的列名 |
+| `--output` | 否 | stdout | 输出 JSON 文件路径 |
+| `--selftest` | 否 | 无 | 运行内置自检 |
+| `--version` | 否 | 无 | 显示版本号 |
 
-2. 调用命令：
-   ```bash
-   acts as money --file data.csv --column amount
-   ```
+#### 步骤 2：执行解析
 
-3. 检查输出中的 `confidence` 字段：
-   ```json
-   {
-     "status": "success",
-     "total_rows": 3,
-     "processed": 3,
-     "low_confidence_rows": [3],
-     "results": [
-       {"row": 1, "amount": 1200.50, "currency": "CNY", "confidence": "high"},
-       {"row": 2, "amount": 45.00, "currency": "USD", "confidence": "high"},
-       {"row": 3, "amount": 1234.56, "currency": "EUR", "confidence": "low"}
-     ]
-   }
-   ```
+系统按以下顺序处理：
 
-4. 对低置信度行（第3行）进行人工复核，确认 `1.234,56 €` 是欧洲格式的 1234.56 欧元。
+1. 扫描文本中的货币符号/代码（正则匹配）
+2. 对每个货币标识，提取其相邻的数字片段
+3. 根据数字格式规则（千分位、小数点位置）解析数值
+4. 计算置信度：
+   - `high`：格式明确，无歧义（如 `USD 1,200.50`）
+   - `medium`：格式可识别但存在轻微歧义（如 `¥1000` 无小数位）
+   - `low`：格式存在多解（如 `1.234,56` 可能是欧洲格式也可能是美国格式）
 
-5. 将结果写回新文件：
-   ```bash
-   acts as money --file data.csv --column amount --output cleaned.csv
-   ```
-
-### 3.3 输出规范
-
-| 输出字段 | 类型 | 说明 |
-|----------|------|------|
-| `status` | string | `success` 或 `error` |
-| `count` / `total_rows` | int | 识别到的金额数量 |
-| `results` | array | 每条金额的详细信息 |
-| `results[].index` / `row` | int | 序号或行号 |
-| `results[].amount` | float | 标准化后的数值 |
-| `results[].currency` | string | ISO 4217 三字母币种代码 |
-| `results[].original` | string | 原始文本片段 |
-| `results[].confidence` | string | `high` / `medium` / `low` |
-
----
-
-## 四、置信度门控
-
-### 4.1 置信度判定规则
-
-| 置信度 | 判定条件 | 示例 |
-|--------|----------|------|
-| `high` | 币种符号明确 + 数字格式标准 | `$1,200.50`、`¥500`、`EUR 100` |
-| `medium` | 币种可推断但格式有歧义 | `1.200,50`（可能是欧洲格式的1200.50） |
-| `low` | 币种缺失或数字格式严重冲突 | `1000`（无币种）、`1.234`（可能是1234或1.234） |
-
-### 4.2 信息不足时的处理
-
-当遇到无法确定的信息时，输出 `[需核实:字段名]` 占位符，**绝不编造**：
+#### 步骤 3：查看输出
 
 ```json
 {
-  "index": 5,
-  "amount": 1000.00,
-  "currency": "[需核实:币种]",
-  "original": "费用1000元整",
-  "confidence": "low",
-  "note": "文本中出现'元'，但无法确认是人民币、台币还是其他币种"
+  "results": [
+    {
+      "original_text": "USD 15,000.00",
+      "amount": 15000.00,
+      "currency": "USD",
+      "confidence": "high",
+      "position": [0, 14]
+    },
+    {
+      "original_text": "EUR 250.50",
+      "amount": 250.50,
+      "currency": "EUR",
+      "confidence": "high",
+      "position": [24, 34]
+    }
+  ],
+  "summary": {
+    "total_found": 2,
+    "low_confidence_count": 0,
+    "processing_time_ms": 12
+  }
 }
 ```
 
-### 4.3 人工复核建议
+#### 步骤 4：低置信度处理
 
-- 置信度为 `low` 的记录，建议人工查看原始文本
-- 置信度为 `medium` 的记录，建议抽样复核
-- 置信度为 `high` 的记录，可直接使用
+当某条结果 `confidence` 为 `low` 时：
+
+1. 系统在输出中附加 `"needs_review": true` 标记
+2. 建议人工核对原始文本片段
+3. 可通过 `--strict` 参数让系统在遇到 low 置信度时返回非零退出码，便于 CI/CD 拦截
+
+### 3.3 输出规范
+
+- 输出始终为合法 JSON
+- 金额统一为浮点数（保留两位小数）
+- 币种统一为 ISO 4217 三字母代码
+- 每条结果包含原始文本片段和位置信息，便于追溯
+
+---
+
+## 四、置信度门控机制
+
+### 4.1 判定规则
+
+| 置信度 | 判定条件 | 示例 |
+|--------|----------|------|
+| `high` | 货币符号明确 + 数字格式无歧义 | `$1,234.56`、`EUR 100` |
+| `medium` | 货币符号明确 + 数字格式有轻微歧义（如无小数位） | `¥1000`、`USD 5` |
+| `low` | 货币符号明确 + 数字格式存在多解 | `1.234,56`（欧洲 vs 美国格式） |
+| `low` | 货币符号缺失，仅凭上下文推断 | `"总价 15000 元"`（"元"非标准代码） |
+
+### 4.2 信息不足时的处理
+
+当系统无法确定某个字段时，**不会编造数据**，而是输出占位符：
+
+```json
+{
+  "amount": 1234.56,
+  "currency": "[需核实:currency]",
+  "confidence": "low"
+}
+```
+
+占位符格式统一为 `[需核实:字段名]`，下游系统可据此触发人工复核流程。
+
+### 4.3 门控建议
+
+- 生产环境建议：`confidence` 为 `low` 的记录不自动入库，进入人工审核队列
+- 批量处理时，可先运行一次统计，查看 low 占比，决定是否需要预处理
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
-|--------|----------|----------|----------|
-| `E001` | 输入为空 | "输入文本为空，请提供包含金额的文本或文件路径" | 检查输入参数，确保 `--input` 或 `--file` 有值 |
-| `E002` | 文件不存在 | "指定的文件不存在，请检查路径是否正确" | 使用 `ls` 确认文件路径，检查文件名拼写 |
-| `E003` | 列名不存在 | "CSV文件中未找到指定的列名，请确认表头" | 使用 `head -1 file.csv` 查看实际表头 |
-| `E004` | 未识别到金额 | "在输入中未找到任何金额表达式" | 确认文本中确实包含金额，检查是否使用了特殊符号 |
-| `E005` | 格式解析失败 | "金额格式无法解析，请检查原始数据" | 查看原始文本，手动确认金额写法 |
-| `E006` | 币种代码无效 | "识别到未知的币种代码" | 检查币种是否为ISO 4217标准代码 |
-| `E007` | 输出文件无法写入 | "无法写入输出文件，请检查权限" | 使用 `touch` 测试写入权限，更换输出路径 |
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E001` | 输入为空 | "输入文本不能为空，请提供至少一个字符。" | 检查输入参数 |
+| `E002` | 文件不存在 | "指定的文件路径不存在，请确认路径是否正确。" | 检查文件路径 |
+| `E003` | 列名不存在 | "CSV 文件中未找到指定的列名，请检查表头。" | 使用 `--list-columns` 查看可用列 |
+| `E004` | 无有效金额 | "未在输入中找到任何可识别的金额，请检查文本格式。" | 确认文本包含货币符号或代码 |
+| `E005` | 格式严重歧义 | "检测到多个可能的金额解析结果，请人工确认。" | 使用 `--format-hint` 指定格式（`us`/`eu`） |
+| `E006` | 输出文件不可写 | "无法写入输出文件，请检查权限或路径。" | 检查目录权限 |
+| `E007` | 编码不支持 | "输入文件编码不是 UTF-8，请转换后重试。" | 使用 `iconv` 转换编码 |
 
 ---
 
-## 六、FAQ 反模式
+## 六、FAQ 反模式对照
 
-### 6.1 常见坑
+### 反模式 1：忽略置信度直接入库
 
-| 坑点 | 错误做法 | 正确做法 |
-|------|----------|----------|
-| 千分位混淆 | 把 `1,200` 当作 1.2 处理 | 根据上下文判断：`$1,200` 是 1200 美元，`1,200` 单独出现时标记为 medium 置信度 |
-| 欧洲数字格式 | 把 `1.234,56` 当作 1.23456 | 识别为欧洲格式的 1234.56，标记为 medium 置信度 |
-| 币种符号缺失 | 看到 `500` 就默认是人民币 | 无币种符号时标记为 low 置信度，输出 `[需核实:币种]` |
-| 中文金额单位 | 忽略"万""亿"等中文单位 | 识别 `5万` 为 50000，`3.2亿` 为 320000000 |
-| 混合文本干扰 | 把日期 `2024.05.01` 中的数字当金额 | 仅识别带币种符号或明确金额单位的数字 |
+**错误做法**：将所有结果（包括 low 置信度）直接写入数据库。
 
-### 6.2 反模式对照表
+**正确做法**：设置门控规则，low 置信度记录进入人工审核队列，确认后再入库。
 
-| 反模式 | 问题 | 推荐替代 |
-|--------|------|----------|
-| 直接拼接原始文本到输出 | 下游系统无法解析 | 始终输出结构化 JSON |
-| 忽略置信度直接使用 | 错误数据进入下游 | 先过滤 low 置信度记录 |
-| 修改原始文件 | 数据不可追溯 | 输出到新文件，保留原文件 |
-| 猜测缺失币种 | 产生错误数据 | 使用 `[需核实:币种]` 占位 |
-| 一次性处理超大文件 | 内存溢出 | 分批处理，每批不超过 10000 行 |
+### 反模式 2：假设所有金额都是美元
+
+**错误做法**：看到数字就默认是 USD，不检查货币符号。
+
+**正确做法**：依赖本工具的币种识别能力，未识别出币种时标记为 `[需核实:currency]`。
+
+### 反模式 3：手动处理欧洲数字格式
+
+**错误做法**：遇到 `1.234,56` 就手动替换逗号和点。
+
+**正确做法**：让工具自动识别，或通过 `--format-hint eu` 明确指定格式，避免误判。
+
+### 反模式 4：批量处理前不预览
+
+**错误做法**：直接对整个文件运行，不检查中间结果。
+
+**正确做法**：先取 10 行样本运行，检查输出质量，再全量处理。
+
+### 反模式 5：忽略位置信息
+
+**错误做法**：只取金额数值，丢弃 `position` 字段。
+
+**正确做法**：保留位置信息，便于回溯到原始文本，审计时能快速定位。
 
 ---
 
 ## 七、渐进式披露
 
-### 7.1 速查卡（30秒上手）
-
-```
-输入文本 → 提取金额 → 标准化 → 输出JSON
-```
-
-### 7.2 新手路径（5分钟掌握）
-
-1. 准备一段包含金额的文本
-2. 运行 `acts as money --input "你的文本"`
-3. 查看输出的 JSON 结果
-4. 若置信度为 `low`，人工核对原始文本
-
-### 7.3 进阶路径（深入使用）
-
-1. 学习 CSV 批量处理：`--file` + `--column` 参数
-2. 掌握置信度门控机制，建立数据质量检查流程
-3. 理解欧洲数字格式与千分位规则，处理国际化数据
-4. 结合下游系统，将标准化金额直接导入数据库或报表工具
-
-### 7.4 参数速查表
-
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| `--input` | string | 二选一 | 无 | 待处理的文本内容 |
-| `--file` | string | 二选一 | 无 | 待处理的CSV文件路径 |
-| `--column` | string | 否 | 无 | CSV中金额所在的列名 |
-| `--output` | string | 否 | 标准输出 | 结果输出文件路径 |
-| `--format` | string | 否 | `json` | 输出格式（`json` / `csv`） |
-| `--group-by` | string | 否 | 无 | 按币种分组输出 |
-| `--normalize` | boolean | 否 | `false` | 是否统一金额格式 |
-| `--selftest` | boolean | 否 | `false` | 运行自检 |
-| `--version` | boolean | 否 | `false` | 显示版本信息 |
-
----
-
-## 八、使用示例
-
-### 8.1 单条文本
+### 7.1 速查卡（30 秒上手）
 
 ```bash
-acts as money --input "订单金额：$2,500.00，已付定金 ¥800，尾款 €1,700"
-```
+# 单条文本
+acts as money --input "费用 USD 99.99"
 
-输出：
-```json
-{
-  "status": "success",
-  "count": 3,
-  "results": [
-    {"index": 1, "amount": 2500.00, "currency": "USD", "original": "$2,500.00", "confidence": "high"},
-    {"index": 2, "amount": 800.00, "currency": "CNY", "original": "¥800", "confidence": "high"},
-    {"index": 3, "amount": 1700.00, "currency": "EUR", "original": "€1,700", "confidence": "high"}
-  ]
-}
-```
+# 文件批量
+acts as money --file data.csv --column amount --output result.json
 
-### 8.2 CSV文件处理
-
-```bash
-acts as money --file expenses.csv --column amount --output cleaned_expenses.csv
-```
-
-### 8.3 按币种分组
-
-```bash
-acts as money --input "收入：$1000，支出：¥500，投资：€200" --group-by currency
-```
-
-输出：
-```json
-{
-  "status": "success",
-  "groups": {
-    "USD": [{"amount": 1000.00, "confidence": "high"}],
-    "CNY": [{"amount": 500.00, "confidence": "high"}],
-    "EUR": [{"amount": 200.00, "confidence": "high"}]
-  }
-}
-```
-
----
-
-## 九、自检与版本
-
-### 9.1 自检命令
-
-```bash
+# 自检
 acts as money --selftest
 ```
 
-自检内容：
-- 基本金额识别（`$100`、`¥200`、`€300`）
-- 千分位格式（`1,000`、`10,000.50`）
-- 欧洲格式（`1.234,56`）
-- 中文单位（`5万`、`3.2亿`）
-- 无币种金额（`500` → low 置信度）
+### 7.2 新手路径（5 分钟）
 
-### 9.2 版本信息
+1. 运行 `acts as money --selftest` 确认安装正确
+2. 用 `--input` 测试几条简单文本，观察输出格式
+3. 准备一个 CSV 文件，用 `--file` + `--column` 批量处理
+4. 查看输出中的 `confidence` 字段，理解不同置信度的含义
+5. 对 low 置信度的记录，回到原始文本人工核对
 
-```bash
-acts as money --version
-```
+### 7.3 进阶路径（深入使用）
 
-输出：`acts-as-money version 1.0.0`
+1. **格式歧义处理**：学习欧洲数字格式（`1.234,56` = 1234.56），使用 `--format-hint` 参数
+2. **CI/CD 集成**：使用 `--strict` 模式，让 low 置信度导致非零退出码，阻断发布流程
+3. **自定义货币扩展**：编辑配置文件 `currencies.json`，添加自定义货币符号
+4. **性能优化**：对超大文件（>100MB），使用 `--chunk-size` 参数分块处理
+5. **下游对接**：将输出 JSON 直接导入数据库（如 PostgreSQL 的 JSONB 字段）或报表工具（如 Tableau）
 
 ---
 
-## 十、用户协议
+## 八、技术实现细节
+
+### 8.1 数字格式识别规则
+
+| 格式 | 示例 | 解析结果 | 置信度 |
+|------|------|----------|--------|
+| 美国格式 | `1,234.56` | 1234.56 | high |
+| 欧洲格式 | `1.234,56` | 1234.56 | low（需确认） |
+| 无分隔符 | `123456` | 123456.00 | medium |
+| 科学计数法 | `1.2e3` | 1200.00 | medium |
+
+### 8.2 支持的币种列表（部分）
+
+| 代码 | 符号 | 名称 |
+|------|------|------|
+| USD | $ | 美元 |
+| EUR | € | 欧元 |
+| CNY | ¥ / 元 | 人民币 |
+| JPY | ¥ | 日元 |
+| GBP | £ | 英镑 |
+| CHF | Fr | 瑞士法郎 |
+| AUD | A$ | 澳元 |
+| CAD | C$ | 加元 |
+| HKD | HK$ | 港币 |
+| SGD | S$ | 新加坡元 |
+
+完整列表见 `currencies.json`，支持自定义扩展。
+
+### 8.3 正则匹配核心逻辑（伪代码）
+
+```
+pattern = 货币符号或代码 + 可选空格 + 数字模式
+数字模式 = [0-9]{1,3}([.,][0-9]{3})*([.,][0-9]+)? 或 [0-9]+([.,][0-9]+)?
+```
+
+---
+
+## 九、用户协议
 
 <!-- user-agreement-injected -->
 
 **使用本 Skill 即表示您同意以下条款：**
 
-1. **责任承担**：使用者应自行承担使用本 Skill 的全部责任。因使用本 Skill 产生的任何直接或间接损失，Skill 作者及贡献者不承担任何责任。
+1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任。本 Skill 仅提供金额提取与标准化功能，不构成任何财务、法律或审计建议。因使用本 Skill 导致的任何直接或间接损失，开发者不承担任何责任。
 
-2. **禁止反向工程**：禁止对本 Skill 进行反向工程、反编译、破解、篡改或试图提取源代码（除非适用法律允许）。
+2. **禁止反向工程**：禁止对本 Skill 进行反向工程、反编译、破解、篡改或试图提取源代码（除非适用法律允许）。禁止将本 Skill 用于任何违反法律法规或平台规定的用途。
 
-3. **合规使用**：使用者应确保使用本 Skill 的行为符合当地法律法规及平台规定。
+3. **数据安全**：使用者应对输入数据的合法性、合规性负责。本 Skill 不存储、不传输任何用户数据至第三方。所有处理均在本地完成。
 
-4. **数据安全**：使用者应对输入数据的合法性、合规性负责。本 Skill 不存储、不传输任何用户数据至第三方。
+4. **合规使用**：使用者应确保使用本 Skill 的行为符合当地法律法规及平台规定。因违规使用产生的后果由使用者自行承担。
 
 5. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性的担保。
 
 ---
 
-## 十一、许可证（License）
+## 十、许可证（License）
 
 <!-- professional-license-embedded -->
 
 **MIT License**
 
-版权所有 (c) 2024 数据工坊
+Copyright (c) 2024 DataForge Studio
 
-特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士使用本软件的权利，包括但不限于使用、复制、修改、合并、出版、分发、再许可和/或出售软件副本的权利，并允许向其提供软件的人士这样做，但须满足以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他方面，由软件或软件的使用
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*

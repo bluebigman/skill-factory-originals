@@ -1,9 +1,9 @@
 {
-  "frozen_at": "2026-08-12T22:05:03.187746",
+  "frozen_at": "2026-08-15T21:39:54.579346",
   "slug": "acts-as-money",
   "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
   "llm_base_url": "https://api.deepseek.com",
-  "pipeline_commit": "5d4d75409877e6e4eacf4ddda1cb5bf10cc10a64",
+  "pipeline_commit": "084f271a213a27fe4753ef61185195289287484d",
   "dependencies": [
     "annotated-types==0.8.0",
     "anyio==4.14.2",
