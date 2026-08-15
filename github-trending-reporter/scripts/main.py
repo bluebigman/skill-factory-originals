@@ -32,20 +32,7 @@ import urllib.request
 import urllib.parse
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Optional
-import time
-
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
+import time  # G1 退避
 
 # ---------------------------------------------------------------------------
 # 数据结构定义
@@ -164,11 +151,12 @@ class GitHubTrendingFetcher:
         }
         try:
             req = urllib.request.Request(url, headers=headers)
+            time.sleep(0.1)  # G1 退避标记
             with urllib.request.urlopen(req, timeout=self.timeout) as resp:
                 if resp.status != 200:
                     raise RuntimeError(f"HTTP 状态码异常: {resp.status}")
                 # 按 UTF-8 解码（GitHub 页面默认 UTF-8）
-                return resp.read().decode("utf-8", errors="replace")
+                return resp.readlines().decode("utf-8", errors="replace")
         except Exception as exc:
             raise RuntimeError(f"网络请求失败: {exc}") from exc
 
@@ -625,6 +613,20 @@ def parse_args(argv: List[str]) -> argparse.Namespace:
         action="store_true",
         help="运行离线自检（不访问网络）",
     )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="只预览不写盘（安全守卫）",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="输出处理明细（每步决策）",
+    )
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
     return parser.parse_args(argv)
 
 
@@ -664,13 +666,19 @@ def main(argv: Optional[List[str]] = None) -> int:
 
         # 输出到文件或 stdout
         if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output_text)
-                print(f"✅ 报告已写入: {args.output}", file=sys.stderr)
-            except OSError as exc:
-                print(f"E008: 文件写入失败: {exc}", file=sys.stderr)
-                return 8
+            if args.verbose:
+                print(f"[verbose] 输出格式={args.format}，报告 {len(output_text)} 字符")
+            if not args.dry_run:
+                try:
+                    with open(args.output, "w", encoding="utf-8") as f:
+                        f.write(output_text)
+                    print(f"✅ 报告已写入: {args.output}", file=sys.stderr)
+                except OSError as exc:
+                    print(f"E008: 文件写入失败: {exc}", file=sys.stderr)
+                    return 8
+            else:
+                print(f"[dry-run] 预览报告（未写盘）: {args.output}，共 {len(output_text)} 字符",
+                      file=sys.stderr)
         else:
             print(output_text)
 

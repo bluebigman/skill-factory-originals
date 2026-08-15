@@ -1,0 +1,43 @@
+{
+  "timestamp": "20260816_031821",
+  "slug": "github-trending-reporter",
+  "spec": {
+    "slug": "github-trending-reporter",
+    "name": "github_trending_reporter",
+    "description": "自动抓取GitHub Trending，生成结构化周报，支持语言与日期筛选。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 明确的时间范围（今天/本周/本月）",
+      "2. 明确的语言筛选",
+      "3. 输出格式要求（默认 Markdown）",
+      "1. 使用 `--language javascript` 查看其他语言趋势",
+      "2. 使用 `--since monthly` 查看月度趋势",
+      "3. 将本报告导入 Notion/飞书等工具进行团队分享",
+      "1. **第一次使用**：运行 `--selftest` 确认环境正常",
+      "2. **基础使用**：不带参数运行，进入交互模式",
+      "3. **进阶使用**：使用 `--language` 和 `--since` 组合筛选",
+      "4. **自动化**：将命令加入 cron 定时任务",
+      "1. **自定义输出模板**：修改 `TEMPLATE` 常量",
+      "2. **扩展数据源**：在 `fetch_trending()` 中添加其他数据源",
+      "3. **集成通知**：在 `generate_report()` 后添加 Slack/邮件通知",
+      "4. **数据分析**：对多期周报做趋势对比分析",
+      "1. **责任承担**：使用者自行承担使用本 Skill 产生的全部责任。包括但不限于因数据不准确、输出错误、或使用不当导致的任何直接或间接损失。",
+      "2. **禁止反向工程**：不得对本 Skill 的源代码进行反向工程、反编译、破解或试图提取底层算法（法律允许的除外）。",
+      "3. **合规使用**：使用者应遵守 GitHub 的服务条款，不得利用本 Skill 进行高频抓取、绕过限流或其他违反平台规则的行为。",
+      "4. **数据使用**：本 Skill 输出的数据仅供学习参考，使用者应自行核实数据的准确性，不得将数据用于商业用途而未注明来源。",
+      "5. **免责声明**：本 Skill 按\"现状\"提供，不提供任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权性。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "b95427994a80efd8",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
