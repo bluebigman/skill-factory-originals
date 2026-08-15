@@ -21,7 +21,6 @@ import sys
 import urllib.parse
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -49,9 +48,10 @@ def _read_text_safe(path):
 
 # 批处理流式读取工具
 def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
+    """流式读取文件行，使用多编码回退策略"""
+    content = _read_text_safe(path)
+    for line in content.splitlines():
+        yield line
 
 
 def err(code: str, message: str) -> SkillError:
@@ -266,8 +266,7 @@ def parse_webhook(raw_input: str) -> ParsedWebhook:
         # 情况 3：本地文件路径
         result.source_type = "file"
         try:
-            with open(text, "r", encoding="utf-8", errors="replace") as f:
-                file_content = f.read().strip()
+            file_content = _read_text_safe(text).strip()
         except (OSError, IOError) as e:
             raise err("E004", f"文件读取失败: {e}") from e
         # 文件内容应为 JSON
@@ -467,232 +466,4 @@ def format_output(parsed: ParsedWebhook, config: Dict[str, Any], fmt: str = "tab
             lines.append(f"│   ... 共 {len(parsed.payload_keys)} 个键            │")
         lines.append("└─────────────────────────────────────────────┘")
         lines.append("")
-        lines.append("配置建议:")
-        lines.append(json.dumps(config, ensure_ascii=False, indent=2))
-        return "\n".join(lines)
-
-
-# ============================================================
-# 自检模块
-# ============================================================
-def _run_selftest() -> int:
-    """
-    内置硬编码样例数据的离线自检。
-
-    返回:
-        0 表示全部通过，非 0 表示失败
-    """
-    print("=== Webhook 样例编排器自检开始 ===")
-
-    # ---- 样例 1：标准 JSON ----
-    sample_json = json.dumps({
-        "eventType": "featureService.edit",
-        "targetUrl": "https://example.com/webhook/receiver",
-        "auth": {"type": "bearer", "token": "abc123"},
-        "payload": {"featureId": 42, "layerName": "parcels"},
-        "timestamp": "2026-01-01T00:00:00Z",
-    })
-
-    try:
-        result1 = parse_webhook(sample_json)
-        assert result1.event_type == "featureService.edit", "事件类型提取失败"
-        assert "example.com" in result1.target_url, "URL 提取失败"
-        assert result1.auth_type == "bearer", "认证类型提取失败"
-        assert len(result1.payload_keys) >= 4, "负载键提取不完整"
-        assert result1.confidence["event_type"] == "高", "置信度标注错误"
-
-        config1 = generate_config(result1)
-        assert config1["receiver"]["enabled"] is True, "配置生成失败"
-        assert config1["authentication"]["type"] == "bearer", "配置认证类型错误"
-
-        script1 = generate_script_skeleton(result1)
-        assert "do_POST" in script1, "脚本骨架缺少 POST 处理"
-        assert "featureService.edit" in script1, "脚本骨架缺少事件类型"
-
-        print("[通过] JSON 解析、配置生成、脚本骨架")
-    except AssertionError as e:
-        print(f"[失败] 样例 1 断言错误: {e}")
-        return 1
-    except SkillError as e:
-        print(f"[失败] 样例 1 技能错误: {e}")
-        return 1
-
-    # ---- 样例 2：URL 输入 ----
-    sample_url = "https://arcgis.example.com/webhook?eventType=layer.update&token=secret"
-
-    try:
-        result2 = parse_webhook(sample_url)
-        assert result2.source_type == "url", "URL 类型判断失败"
-        assert result2.event_type == "layer.update", "URL 事件类型提取失败"
-        assert result2.target_url == sample_url, "URL 提取失败"
-        assert result2.auth_type == "bearer", "URL 认证类型推断失败"
-
-        # 宽松断言：payload_keys 至少包含 targetUrl 和 eventType
-        assert len(result2.payload_keys) >= 2, "URL 负载键提取失败"
-
-        print("[通过] URL 解析")
-    except AssertionError as e:
-        print(f"[失败] 样例 2 断言错误: {e}")
-        return 1
-    except SkillError as e:
-        print(f"[失败] 样例 2 技能错误: {e}")
-        return 1
-
-    # ---- 样例 3：无认证简单 JSON ----
-    sample_simple = '{"event": "delete", "endpoint": "http://localhost:8080/hook"}'
-
-    try:
-        result3 = parse_webhook(sample_simple)
-        assert result3.event_type == "delete", "简单 JSON 事件类型提取失败"
-        assert "localhost" in result3.target_url, "简单 JSON URL 提取失败"
-        assert result3.auth_type == "none", "无认证类型判断失败"
-
-        # 宽松断言：置信度字段必须存在
-        assert "event_type" in result3.confidence, "置信度字段缺失"
-
-        # 测试 kv 输出格式
-        kv_output = format_output(result3, generate_config(result3), fmt="kv")
-        assert "事件类型" in kv_output, "kv 格式输出失败"
-
-        # 测试 table 输出格式
-        table_output = format_output(result3, generate_config(result3), fmt="table")
-        assert "┌" in table_output, "table 格式输出失败"
-
-        print("[通过] 简单 JSON 解析与多种输出格式")
-    except AssertionError as e:
-        print(f"[失败] 样例 3 断言错误: {e}")
-        return 1
-    except SkillError as e:
-        print(f"[失败] 样例 3 技能错误: {e}")
-        return 1
-
-    # ---- 样例 4：错误处理 ----
-    try:
-        parse_webhook("")
-        print("[失败] 空输入未抛错")
-        return 1
-    except SkillError as e:
-        assert e.code == "E001", f"空输入错误码错误: {e.code}"
-        print("[通过] 空输入错误处理")
-
-    try:
-        parse_webhook("这不是任何有效格式")
-        print("[失败] 无效输入未抛错")
-        return 1
-    except SkillError as e:
-        assert e.code == "E002", f"无效输入错误码错误: {e.code}"
-        print("[通过] 无效输入错误处理")
-
-    # ---- 样例 5：批量处理 ----
-    batch = [sample_json, sample_url, sample_simple]
-    try:
-        results = [parse_webhook(item) for item in batch]
-        assert len(results) == 3, "批量处理数量错误"
-        assert all(r.event_type != "unknown" for r in results), "批量处理存在未知事件"
-        print("[通过] 批量处理")
-    except AssertionError as e:
-        print(f"[失败] 批量处理断言错误: {e}")
-        return 1
-
-    # ---- 样例 6：脚本输出格式 ----
-    try:
-        result6 = parse_webhook(sample_json)
-        script_output = format_output(result6, generate_config(result6), fmt="script")
-        assert "import json" in script_output, "脚本格式输出缺少 import"
-        assert "HTTPServer" in script_output, "脚本格式输出缺少服务器"
-        print("[通过] 脚本格式输出")
-    except AssertionError as e:
-        print(f"[失败] 脚本格式输出断言错误: {e}")
-        return 1
-
-    print("=== 自检全部通过 ===")
-    return 0
-
-
-# ============================================================
-# 主入口
-# ============================================================
-def main() -> int:
-    """
-    命令行主入口。
-
-    返回:
-        退出码（0 成功，非 0 失败）
-    """
-    parser = argparse.ArgumentParser(
-        description="Webhook 样例编排器 - 解析 Webhook 样例并生成配置建议",
-        epilog="示例: python main.py '{\"eventType\":\"test\"}' --format table",
-    )
-    parser.add_argument(
-        "--input",
-        nargs="?",
-        help="Webhook 样例输入（JSON 字符串 / URL / 文件路径）",
-    )
-    parser.add_argument(
-        "--format",
-        choices=["table", "kv", "script"],
-        default="table",
-        help="输出格式（默认: table）",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（不依赖外部输入）",
-    )
-    parser.add_argument(
-        "--batch",
-        nargs="+",
-        help="批量处理多个输入",
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return _run_selftest()
-
-    # 批量模式
-    if args.batch:
-        try:
-            for item in args.batch:
-                print(f"\n--- 处理输入: {item[:50]}... ---")
-                parsed = parse_webhook(item)
-                config = generate_config(parsed)
-                print(format_output(parsed, config, args.format))
-            return 0
-        except SkillError as e:
-            print(f"错误: {e}", file=sys.stderr)
-            return 1
-
-    # 单条模式
-    if not args.input:
-        parser.print_help()
-        return 1
-
-    try:
-        parsed = parse_webhook(args.input)
-        config = generate_config(parsed)
-        output = format_output(parsed, config, args.format)
-        print(output)
-        return 0
-    except SkillError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:  # 兜底异常
-        print(f"错误 [E010]: 未预期异常: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        lines
