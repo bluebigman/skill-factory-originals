@@ -1,0 +1,36 @@
+{
+  "timestamp": "20260818_004938",
+  "slug": "git-wiki",
+  "spec": {
+    "slug": "git-wiki",
+    "name": "git-wiki",
+    "description": "将零散文档快速转化为 Git 版本控制的轻量 Wiki 站点。",
+    "cli_interface": [],
+    "capability_outline": [
+      "- 输出文件包含：原始内容（清洗后）、自动生成的元数据块（来源、处理时间）。",
+      "1. `---` 包裹的 YAML frontmatter（`title`、`source`、`date`）。",
+      "2. 正文内容（原始文本转换后的 Markdown）。",
+      "3. 文件末尾追加 `<!-- generated-by: git-wiki -->` 注释标记。",
+      "1. 阅读「能力边界速查卡」了解能做什么。",
+      "2. 准备一个包含 2-3 个 `.md` 文件的文件夹。",
+      "3. 触发词输入：\"git wiki 处理 /path/to/folder\"。",
+      "4. 查看输出目录下的 `_index.md` 和生成的页面文件。",
+      "1. 阅读「标准处理流程」中的步骤 3-5，了解元数据提取规则。",
+      "2. 尝试在源文件中添加 YAML frontmatter（`title`、`tags`），观察输出变化。",
+      "3. 使用 `[[双链]]` 语法在页面间建立关联，验证链接转换效果。",
+      "4. 结合 Git 钩子（如 `post-commit`）实现自动部署。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "62e42184de2b831e",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}

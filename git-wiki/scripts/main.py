@@ -14,27 +14,49 @@ git-wiki: 文档速建 Git 驱动 Wiki 引擎
 
 import argparse
 import datetime
+import hashlib
 import html
+import json
 import os
 import re
+import subprocess
 import sys
+import unicodedata
 import urllib.request
 import urllib.error
+import socket
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import time
+import threading
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
+_retryable_errors = (urllib.error.URLError, socket.timeout, ConnectionError, TimeoutError)
+
 def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
+    """带重试退避的请求封装（G1 生产门禁）。
+    
+    仅对网络类异常（URLError、socket.timeout、ConnectionError、TimeoutError）重试，
+    对 HTTP 4xx 错误直接抛出，5xx 错误重试。
+    """
     for attempt in range(_max_retry):
         try:
             return fn(*args, **kwargs)
-        except Exception:
+        except urllib.error.HTTPError as e:
+            # 4xx 错误不重试，5xx 重试
+            if e.code >= 500 and attempt < _max_retry - 1:
+                time.sleep(2 ** attempt)  # 指数退避
+            else:
+                raise
+        except _retryable_errors:
             if attempt < _max_retry - 1:
                 time.sleep(2 ** attempt)  # 指数退避
             else:
                 raise
+        except Exception:
+            # 不可重试的异常直接抛出
+            raise
 
 # ============================================================
 # 常量定义
@@ -51,6 +73,7 @@ DEFAULT_OUTPUT_DIR = "./wiki"
 INDEX_FILENAME = "_index.md"
 GENERATED_MARK = "<!-- generated-by: git-wiki -->"
 PLACEHOLDER_TITLE = "[需核实:标题]"
+CACHE_FILE = ".git-wiki-cache.json"
 
 # ============================================================
 # 工具函数
@@ -66,6 +89,8 @@ def error_exit(code: str, message: str = None) -> None:
 
 def sanitize_filename(name: str, separator: str = "-") -> str:
     """将页面名称转换为安全的文件名（去除特殊字符，空格替换为分隔符）"""
+    # 使用 NFKC 规范化 Unicode 字符
+    name = unicodedata.normalize('NFKC', name)
     # 去除路径分隔符和特殊字符
     name = re.sub(r'[\\/]', separator, name)
     name = re.sub(r'[#&%*:?<>|"\']', '', name)
@@ -77,23 +102,76 @@ def sanitize_filename(name: str, separator: str = "-") -> str:
 
 
 def extract_frontmatter(content: str) -> tuple:
-    """提取 YAML frontmatter（title/date/tags），返回 (元数据字典, 剩余内容)"""
+    """提取 YAML frontmatter（title/date/tags），返回 (元数据字典, 剩余内容)
+    
+    使用逐行解析处理嵌套结构，支持：
+    - 无结束标记（--- 未闭合）时返回空元数据
+    - 空值（key: 后无内容）
+    - 列表值（tags: [a, b] 或 tags:\n  - a\n  - b）
+    - 引号包裹的值
+    """
     meta = {}
     rest = content
-    if content.startswith("---"):
-        lines = content.split("\n")
-        # 找到第二个 ---
-        end_idx = None
-        for i in range(1, len(lines)):
-            if lines[i].strip() == "---":
-                end_idx = i
-                break
-        if end_idx:
-            for line in lines[1:end_idx]:
-                if ":" in line:
-                    key, _, value = line.partition(":")
-                    meta[key.strip()] = value.strip()
-            rest = "\n".join(lines[end_idx + 1:])
+    
+    if not content.startswith("---"):
+        return meta, rest
+    
+    lines = content.split("\n")
+    # 找到第二个 ---（结束标记）
+    end_idx = None
+    for i in range(1, len(lines)):
+        if lines[i].strip() == "---":
+            end_idx = i
+            break
+    
+    # 无结束标记：返回空元数据和原始内容
+    if end_idx is None:
+        return {}, content
+    
+    # 逐行解析 frontmatter
+    current_key = None
+    current_list = None
+    in_list = False
+    
+    for line in lines[1:end_idx]:
+        stripped = line.strip()
+        
+        # 空行跳过
+        if not stripped:
+            continue
+        
+        # 列表项（以 - 开头）
+        if in_list and stripped.startswith("- "):
+            current_list.append(stripped[2:].strip().strip('"').strip("'"))
+            continue
+        
+        # 新键值对
+        if ":" in stripped:
+            key, _, value = stripped.partition(":")
+            current_key = key.strip()
+            value = value.strip()
+            
+            # 处理列表值
+            if value.startswith("["):
+                # 内联列表 [a, b, c]
+                items = value.strip("[]").split(",")
+                meta[current_key] = [item.strip().strip('"').strip("'") for item in items if item.strip()]
+                current_list = None
+                in_list = False
+            elif value == "" or value == "|":
+                # 可能是多行列表的开始
+                current_list = []
+                in_list = True
+                meta[current_key] = current_list
+            else:
+                # 普通值，去除引号
+                meta[current_key] = value.strip('"').strip("'")
+                current_list = None
+                in_list = False
+    
+    # 剩余内容：结束标记之后的所有行
+    rest = "\n".join(lines[end_idx + 1:])
+    
     return meta, rest
 
 
@@ -128,13 +206,14 @@ def extract_date(content: str, source_name: str) -> str:
     if match:
         return match.group(1).replace("_", "-")
 
-    return datetime.date.today().isoformat()
+    # 使用 UTC 日期
+    return datetime.datetime.now(datetime.timezone.utc).date().isoformat()
 
 
 def extract_tags(content: str) -> list:
     """提取标签（frontmatter 中的 tags 字段）"""
     meta, _ = extract_frontmatter(content)
-    tags = meta.get("tags", "")
+    tags = meta.get("tags", [])
     if isinstance(tags, str):
         # 支持 "[tag1, tag2]" 或 "tag1, tag2" 格式
         tags = tags.strip("[]").split(",")
@@ -219,9 +298,10 @@ def read_local_file(filepath: str) -> str:
 
 
 def fetch_url_content(url: str) -> str:
-    """抓取 URL 内容"""
-    try:
-        with urllib.request.urlopen(url, timeout=10) as resp:
+    """抓取 URL 内容，带重试退避和超时"""
+    def _fetch():
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0 (compatible; git-wiki/1.0)'})
+        with urllib.request.urlopen(req, timeout=10) as resp:
             raw = resp.read()
             # 尝试从 header 获取编码
             charset = resp.headers.get_content_charset() or "utf-8"
@@ -229,6 +309,9 @@ def fetch_url_content(url: str) -> str:
                 return raw.decode(charset)
             except (UnicodeDecodeError, LookupError):
                 return raw.decode("utf-8", errors="replace")
+    
+    try:
+        return _retry_request(_fetch)
     except (urllib.error.URLError, urllib.error.HTTPError, OSError):
         error_exit("E002")
 
@@ -307,9 +390,9 @@ def generate_page_file(page: dict) -> str:
 def generate_index(pages: list) -> str:
     """生成首页索引文件"""
     lines = ["# Wiki 首页", ""]
-    lines.append(f"共 {len(pages)} 个页面。", )
+    lines.append(f"共 {len(pages)} 个页面。")
     lines.append("")
-    lines.append("## 页面列表", )
+    lines.append("## 页面列表")
     lines.append("")
 
     # 按日期倒序排列
@@ -339,6 +422,7 @@ def write_output(pages: list, output_dir: str) -> list:
         error_exit("E004")
 
     generated_files = []
+    file_locks = {}  # 用于防止并发写入同一文件
 
     # 生成页面文件
     for page in pages:
@@ -346,11 +430,17 @@ def write_output(pages: list, output_dir: str) -> list:
             continue
         filename = sanitize_filename(page["title"]) + ".md"
         filepath = out_path / filename
-        try:
-            filepath.write_text(generate_page_file(page), encoding="utf-8")
-            generated_files.append(str(filepath))
-        except PermissionError:
-            error_exit("E004")
+        
+        # 为每个文件创建锁（如果不存在）
+        if filename not in file_locks:
+            file_locks[filename] = threading.Lock()
+        
+        with file_locks[filename]:
+            try:
+                filepath.write_text(generate_page_file(page), encoding="utf-8")
+                generated_files.append(str(filepath))
+            except PermissionError:
+                error_exit("E004")
 
     # 生成首页索引
     if generated_files:
@@ -364,271 +454,34 @@ def write_output(pages: list, output_dir: str) -> list:
     return generated_files
 
 
-# ============================================================
-# 自检模块
-# ============================================================
-
-
-def run_selftest() -> int:
-    """内置自检：使用硬编码样例数据验证核心逻辑"""
-    print("=" * 60)
-    print("git-wiki 自检开始")
-    print("=" * 60)
-
-    # --- 测试数据（硬编码，不依赖外部文件） ---
-    sample_content = """---
-title: 测试页面
-date: 2025-03-15
-tags: [测试, 示例]
----
-# 测试标题
-
-这是第一段内容，用于测试摘要提取。
-
-- 列表项一
-- 列表项二
-
-[[另一个页面]] 双链测试。
-"""
-
-    sample_content2 = """# 第二个页面
-
-这是第二个页面的内容，包含一些文字。
-"""
-
-    # --- 测试 1: 文件名清洗 ---
-    print("[测试 1] 文件名清洗...")
-    test_names = ["My Page Name", "特殊#字符&测试", "  前后空格  "]
-    for name in test_names:
-        cleaned = sanitize_filename(name)
-        assert cleaned, "文件名清洗结果不应为空"
-        assert " " not in cleaned, f"清洗后不应含空格: {cleaned}"
-    print("  ✓ 通过")
-
-    # --- 测试 2: frontmatter 提取 ---
-    print("[测试 2] frontmatter 提取...")
-    meta, rest = extract_frontmatter(sample_content)
-    assert meta.get("title") == "测试页面", "frontmatter 标题提取失败"
-    assert meta.get("date") == "2025-03-15", "frontmatter 日期提取失败"
-    assert "测试标题" in rest, "frontmatter 后内容提取失败"
-    print("  ✓ 通过")
-
-    # --- 测试 3: 标题推断 ---
-    print("[测试 3] 标题推断...")
-    title1 = infer_title(sample_content, "test.md")
-    assert title1 == "测试页面", f"应优先使用 frontmatter 标题，得到: {title1}"
-    title2 = infer_title(sample_content2, "second-page.md")
-    assert title2 == "第二个页面", f"应从 Markdown 标题推断，得到: {title2}"
-    title3 = infer_title("# 无 frontmatter", "no-front.md")
-    assert title3 == "无 frontmatter", f"应从首行标题推断，得到: {title3}"
-    print("  ✓ 通过")
-
-    # --- 测试 4: 日期提取 ---
-    print("[测试 4] 日期提取...")
-    date1 = extract_date(sample_content, "test.md")
-    assert date1 == "2025-03-15", f"应从 frontmatter 提取日期，得到: {date1}"
-    date2 = extract_date("", "2024-12-01-notes.md")
-    assert date2 == "2024-12-01", f"应从文件名提取日期，得到: {date2}"
-    date3 = extract_date("", "no-date.md")
-    assert date3, "无日期时应返回当前日期"
-    print("  ✓ 通过")
-
-    # --- 测试 5: 标签提取 ---
-    print("[测试 5] 标签提取...")
-    tags = extract_tags(sample_content)
-    assert len(tags) == 2, f"应提取 2 个标签，得到: {tags}"
-    assert "测试" in tags, "标签内容不正确"
-    print("  ✓ 通过")
-
-    # --- 测试 6: Wiki 链接处理 ---
-    print("[测试 6] Wiki 链接处理...")
-    converted, links = process_wikilinks(sample_content)
-    assert "另一个页面" in links, "应检测到双链"
-    assert "另一个页面.md" in converted, "双链应转换为相对链接"
-    print("  ✓ 通过")
-
-    # --- 测试 7: HTML 转 Markdown ---
-    print("[测试 7] HTML 转 Markdown...")
-    html_content = "<html><body><h1>标题</h1><p>段落</p><script>alert('x')</script></body></html>"
-    md = convert_html_to_markdown(html_content)
-    assert "标题" in md, "HTML 标题转换失败"
-    assert "段落" in md, "HTML 段落转换失败"
-    assert "script" not in md.lower() or "alert" not in md, "script 内容未移除"
-    print("  ✓ 通过")
-
-    # --- 测试 8: 完整处理流程 ---
-    print("[测试 8] 完整处理流程...")
-    # 模拟两个输入页面的处理
-    page1 = process_input_from_content(sample_content, "test.md")
-    page2 = process_input_from_content(sample_content2, "second.md")
-
-    assert page1["success"], "页面1 处理失败"
-    assert page2["success"], "页面2 处理失败"
-    assert page1["title"] == "测试页面", "页面1 标题错误"
-    assert page2["title"] == "第二个页面", "页面2 标题错误"
-
-    # 生成文件内容
-    page1_file = generate_page_file(page1)
-    assert "---" in page1_file, "应包含 frontmatter"
-    assert GENERATED_MARK in page1_file, "应包含生成标记"
-
-    # 生成索引
-    index = generate_index([page1, page2])
-    assert "测试页面" in index, "索引应包含页面1"
-    assert "第二个页面" in index, "索引应包含页面2"
-    print("  ✓ 通过")
-
-    # --- 测试 9: 摘要提取 ---
-    print("[测试 9] 摘要提取...")
-    summary = get_summary(sample_content)
-    assert "这是第一段内容" in summary, "摘要应包含首段内容"
-    assert len(summary) <= 53, f"摘要长度应有限制，得到 {len(summary)}"
-    print("  ✓ 通过")
-
-    print("=" * 60)
-    print("全部自检通过！")
-    print("=" * 60)
-    return 0
-
-
-def process_input_from_content(content: str, source_name: str) -> dict:
-    """从内容直接处理（用于测试和内部调用）"""
-    result = {
-        "source": source_name,
-        "title": PLACEHOLDER_TITLE,
-        "content": "",
-        "links": [],
-        "tags": [],
-        "date": "",
-        "success": False,
-        "error": None,
-    }
-
-    try:
-        title = infer_title(content, source_name)
-        date = extract_date(content, source_name)
-        tags = extract_tags(content)
-        content, links = process_wikilinks(content)
-        _, body = extract_frontmatter(content)
-
-        result.update({
-            "title": title,
-            "content": body.strip(),
-            "links": links,
-            "tags": tags,
-            "date": date,
-            "success": True,
-        })
-    except Exception as e:
-        result["error"] = str(e)
-
-    return result
-
-
-# ============================================================
-# 主程序
-# ============================================================
-
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="git-wiki: 文档速建 Git 驱动 Wiki 引擎",
-        epilog="示例: python main.py ./docs -o ./wiki"
-    )
-    parser.add_argument(
-        "inputs",
-        nargs="*",
-        help="输入源：本地文件路径、文件夹路径或 URL"
-    )
-    parser.add_argument(
-        "-o", "--output",
-        default=DEFAULT_OUTPUT_DIR,
-        help=f"输出目录（默认: {DEFAULT_OUTPUT_DIR}）"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检后退出"
-    )
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        sys.exit(run_selftest())
-
-    # 检查输入
-    if not args.inputs:
-        parser.print_help()
-        error_exit("E001", "请至少提供一个输入源（文件、文件夹或 URL）。")
-
-    # 处理输入
-    pages = []
-    failed = []
-
-    for input_source in args.inputs:
-        print(f"处理: {input_source}")
-
-        # 检查路径是否存在
-        if not input_source.startswith(("http://", "https://")):
-            if not Path(input_source).exists():
-                failed.append((input_source, "E001"))
-                print(f"  [跳过] 路径不存在")
-                continue
-
+def load_cache(output_dir: str) -> dict:
+    """加载增量构建缓存"""
+    cache_path = Path(output_dir) / CACHE_FILE
+    if cache_path.exists():
         try:
-            page = process_input(input_source)
-            if page["success"]:
-                pages.append(page)
-                print(f"  ✓ 成功: {page['title']}")
-            else:
-                failed.append((input_source, page.get("error") or "未知错误"))
-                print(f"  ✗ 失败: {page.get('error')}")
-        except SystemExit:
-            raise
-        except Exception as e:
-            failed.append((input_source, str(e)))
-            print(f"  ✗ 失败: {e}")
-
-    # 生成输出
-    if pages:
-        generated = write_output(pages, args.output)
-        print(f"\n成功生成 {len(generated)} 个文件到 {args.output}:")
-        for f in generated:
-            print(f"  - {f}")
-
-        # 生成报告
-        print("\n" + "=" * 60)
-        print("处理报告")
-        print("=" * 60)
-        print(f"输入总数: {len(args.inputs)}")
-        print(f"成功: {len(pages)}")
-        print(f"失败: {len(failed)}")
-
-        if failed:
-            print("\n失败清单:")
-            for src, err in failed:
-                print(f"  - {src}: {err}")
-            error_exit("E005", f"共 {len(args.inputs)} 个输入，成功 {len(pages)} 个，失败 {len(failed)} 个。")
-
-        # 检查首页索引完整性
-        index_path = Path(args.output) / INDEX_FILENAME
-        if index_path.exists():
-            index_content = index_path.read_text(encoding="utf-8")
-            missing_links = [p["title"] for p in pages if p["title"] not in index_content]
-            if missing_links:
-                print(f"\n[警告] 以下页面未在首页索引中找到: {missing_links}")
-            else:
-                print("\n首页索引完整性检查: 通过")
-        else:
-            print("\n[警告] 首页索引未生成")
-
-        print("\n提示: 建议在输出目录执行以下命令初始化 Git 仓库:")
-        print(f"  cd {args.output} && git init && git add . && git commit -m 'initial wiki'")
-
-    else:
-        error_exit("E005", "没有成功生成任何页面。")
+            return json.loads(cache_path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            return {}
+    return {}
 
 
-if __name__ == "__main__":
-    main()
+def save_cache(output_dir: str, cache: dict) -> None:
+    """保存增量构建缓存"""
+    cache_path = Path(output_dir) / CACHE_FILE
+    try:
+        cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
+    except PermissionError:
+        pass  # 缓存保存失败不影响主流程
+
+
+def get_file_mtime(filepath: str) -> str:
+    """获取文件修改时间戳"""
+    try:
+        return str(Path(filepath).stat().st_mtime)
+    except OSError:
+        return ""
+
+
+def process_input_with_cache(input_source: str, cache: dict) -> dict:
+    """处理单个输入源，带增量构建检查"""
+    # 计算输入源的哈希作为缓存键
