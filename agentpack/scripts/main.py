@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-agentpack — 本地上下文路由引擎
-版本: 2.0.0 (生产级重写)
+agentpack — 智能体任务调度与缓存清理工具
+版本: 2.0.4
 """
 
 import argparse
@@ -80,388 +80,320 @@ def _atomic_write(path: str, content: str) -> None:
 
 
 class ContextRouter:
-    """本地上下文路由引擎核心类"""
-
-    # 关键词 → 模块映射
-    KEYWORD_MODULES = {
-        "清理": "cache_cleaner",
-        "缓存": "cache_cleaner",
-        "分析": "analyzer",
-        "重新分析": "analyzer",
-        "批量": "batch_ops",
-        "重命名": "batch_ops",
-        "报告": "reporter",
-        "生成": "reporter",
-        "预览": "preview",
-        "路由": "router",
-        "分发": "router",
-    }
-
-    # 模块名称映射
-    MODULE_NAMES = {
-        "cache_cleaner": "缓存管理模块",
-        "analyzer": "分析模块",
-        "batch_ops": "批量操作模块",
-        "reporter": "报告生成模块",
-        "preview": "预览模块",
-        "router": "路由模块",
-    }
+    """上下文路由引擎"""
 
     def __init__(self, project_dir: str = "."):
         self.project_dir = Path(project_dir)
-        self.cache_dir = self.project_dir / ".cache" / "agentpack"
-        self._validate_project()
+        self.tmp_dir = self.project_dir / "tmp"
+        self.cache_file = self.project_dir / ".agentpack_cache.json"
+        self._validate_project_dir()
 
-    def _validate_project(self) -> None:
-        """校验项目目录（R7 输入校验）"""
+    def _validate_project_dir(self) -> None:
+        """校验项目目录"""
         if not self.project_dir.exists():
             raise AgentPackError("E1001", f"项目目录不存在: {self.project_dir}")
         if not self.project_dir.is_dir():
-            raise AgentPackError("E1001", f"路径不是目录: {self.project_dir}")
+            raise AgentPackError("E1012", f"项目路径不是目录: {self.project_dir}")
         if not os.access(self.project_dir, os.R_OK):
             raise AgentPackError("E1013", f"项目目录不可读: {self.project_dir}")
 
-    def _validate_cache_writable(self) -> None:
-        """校验缓存目录可写（R7 输入校验）"""
+    def _ensure_tmp_dir(self) -> None:
+        """确保临时目录存在"""
         try:
-            self.cache_dir.mkdir(parents=True, exist_ok=True)
-            test_file = self.cache_dir / ".write_test"
-            test_file.write_text("test", encoding="utf-8")
-            test_file.unlink()
+            self.tmp_dir.mkdir(parents=True, exist_ok=True)
         except OSError as e:
-            raise AgentPackError("E1002", f"缓存目录不可写: {self.cache_dir} ({e})")
+            raise AgentPackError("E1006", f"缓存目录创建失败: {e}")
 
-    def extract_keywords(self, description: str) -> List[str]:
-        """从任务描述中提取关键词（R1 契约）"""
-        if not description or not description.strip():
+    def _get_tmp_files(self) -> List[Path]:
+        """获取临时目录下的所有文件"""
+        if not self.tmp_dir.exists():
+            return []
+        return [f for f in self.tmp_dir.iterdir() if f.is_file()]
+
+    def _format_size(self, size: int) -> str:
+        """格式化文件大小"""
+        if size < 1024:
+            return f"{size} B"
+        elif size < 1024 * 1024:
+            return f"{size / 1024:.1f} KB"
+        elif size < 1024 * 1024 * 1024:
+            return f"{size / (1024 * 1024):.1f} MB"
+        else:
+            return f"{size / (1024 * 1024 * 1024):.1f} GB"
+
+    def _parse_tasks(self, task_str: str) -> List[str]:
+        """解析任务字符串，支持分号分隔"""
+        if not task_str or not task_str.strip():
             raise AgentPackError("E1003", "任务描述为空")
-        keywords = []
-        for kw in self.KEYWORD_MODULES:
-            if kw in description:
-                keywords.append(kw)
-        return keywords
+        tasks = [t.strip() for t in task_str.split(";") if t.strip()]
+        if not tasks:
+            raise AgentPackError("E1003", "任务描述为空")
+        return tasks
 
-    def route(self, description: str) -> Tuple[List[str], float]:
-        """路由任务到模块，返回 (模块列表, 置信度)（R1 契约）"""
-        keywords = self.extract_keywords(description)
-        if not keywords:
-            return [], 0.0
+    def _route_task(self, task: str) -> str:
+        """路由单个任务到对应操作"""
+        task_lower = task.lower()
+        if "清理" in task_lower or "clean" in task_lower:
+            return "clean"
+        elif "分析" in task_lower or "analyze" in task_lower:
+            return "analyze"
+        else:
+            raise AgentPackError("E1009", f"路由目标不存在: {task}")
 
-        modules = []
-        for kw in keywords:
-            module = self.KEYWORD_MODULES[kw]
-            if module not in modules:
-                modules.append(module)
-
-        # 置信度 = 匹配关键词数 / 描述总词数 * 0.8 基础系数
-        total_words = len(re.findall(r"[\u4e00-\u9fff\w]+", description))
-        confidence = min(1.0, (len(keywords) / max(total_words, 1)) * 0.8 + 0.2)
-        return modules, confidence
-
-    def clean_cache(self, dry_run: bool = False) -> Dict[str, Any]:
-        """清理缓存目录（R4 预览/撤回）"""
-        self._validate_cache_writable()
-        result = {"module": "cache_cleaner", "action": "清理缓存", "files": [], "dry_run": dry_run}
-
-        if not self.cache_dir.exists():
-            result["message"] = "缓存目录不存在，无需清理"
-            return result
-
-        for item in self.cache_dir.iterdir():
-            if item.is_file():
-                result["files"].append(str(item))
-                if not dry_run:
-                    item.unlink()
-            elif item.is_dir():
-                for sub in item.rglob("*"):
-                    if sub.is_file():
-                        result["files"].append(str(sub))
-                        if not dry_run:
-                            sub.unlink()
-                if not dry_run:
-                    item.rmdir()
-
-        result["count"] = len(result["files"])
-        return result
-
-    def analyze(self, dry_run: bool = False) -> Dict[str, Any]:
-        """分析项目结构（R1 契约）"""
-        result = {"module": "analyzer", "action": "分析项目", "files": [], "dry_run": dry_run}
-
-        code_exts = {".py", ".js", ".ts", ".java", ".go", ".rs", ".c", ".cpp", ".h", ".hpp"}
-        for root, dirs, files in os.walk(self.project_dir):
-            # 跳过缓存目录
-            dirs[:] = [d for d in dirs if d not in {".cache", ".git", "__pycache__", "node_modules"}]
-            for fname in files:
-                ext = Path(fname).suffix
-                if ext in code_exts:
-                    fpath = Path(root) / fname
-                    result["files"].append(str(fpath))
-
-        result["count"] = len(result["files"])
-        return result
-
-    def batch_ops(self, dry_run: bool = False) -> Dict[str, Any]:
-        """批量操作预览（R4 预览/撤回）"""
-        result = {"module": "batch_ops", "action": "批量操作", "files": [], "dry_run": dry_run}
-
-        # 扫描项目中的文件，模拟批量重命名预览
-        for root, dirs, files in os.walk(self.project_dir):
-            dirs[:] = [d for d in dirs if d not in {".cache", ".git", "__pycache__", "node_modules"}]
-            for fname in files:
-                fpath = Path(root) / fname
-                result["files"].append(str(fpath))
-
-        result["count"] = len(result["files"])
-        return result
-
-    def reporter(self, dry_run: bool = False) -> Dict[str, Any]:
-        """生成报告（R1 契约）"""
-        result = {"module": "reporter", "action": "生成报告", "files": [], "dry_run": dry_run}
-
-        report_path = self.project_dir / "agentpack_report.json"
-        result["report_path"] = str(report_path)
-
-        if not dry_run:
-            report_data = {
-                "generated_at": datetime.now(timezone.utc).isoformat(),
-                "project_dir": str(self.project_dir),
-                "modules": ["cache_cleaner", "analyzer", "batch_ops", "reporter"],
-            }
-            _atomic_write(str(report_path), json.dumps(report_data, ensure_ascii=False, indent=2))
-
-        return result
-
-    def preview(self, dry_run: bool = False) -> Dict[str, Any]:
-        """预览操作（R4 预览/撤回）"""
-        result = {"module": "preview", "action": "预览操作", "files": [], "dry_run": dry_run}
-        result["message"] = "预览模式：以下操作将被执行"
-        return result
-
-    def router(self, dry_run: bool = False) -> Dict[str, Any]:
-        """路由模块（R1 契约）"""
-        result = {"module": "router", "action": "路由任务", "files": [], "dry_run": dry_run}
-        result["message"] = "路由模块：任务分发完成"
-        return result
-
-    def execute(self, modules: List[str], dry_run: bool = False) -> List[Dict[str, Any]]:
-        """按顺序执行模块（R1 契约）"""
-        results = []
-        module_map = {
-            "cache_cleaner": self.clean_cache,
-            "analyzer": self.analyze,
-            "batch_ops": self.batch_ops,
-            "reporter": self.reporter,
-            "preview": self.preview,
-            "router": self.router,
+    def clean_tmp(self, dry_run: bool = False, verbose: bool = False) -> Dict[str, Any]:
+        """清理临时文件"""
+        self._ensure_tmp_dir()
+        files = self._get_tmp_files()
+        result = {
+            "operation": "clean",
+            "dry_run": dry_run,
+            "files_deleted": [],
+            "total_size": 0,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
         }
 
-        for module in modules:
-            if module not in module_map:
-                raise AgentPackError("E1009", f"路由目标不存在: {module}")
+        for file_path in files:
             try:
-                result = module_map[module](dry_run=dry_run)
-                results.append(result)
-            except AgentPackError:
-                raise
-            except Exception as e:
-                raise AgentPackError("E1010", f"执行模块 {module} 失败: {e}")
+                file_size = file_path.stat().st_size
+                result["total_size"] += file_size
+                if verbose:
+                    print(f"[{'待删除' if dry_run else '已删除'}] {file_path} ({self._format_size(file_size)})")
+                if not dry_run:
+                    file_path.unlink()
+                result["files_deleted"].append(str(file_path))
+            except OSError as e:
+                print(f"[警告] 删除文件失败: {file_path} - {e}", file=sys.stderr)
 
+        if verbose:
+            action = "预演" if dry_run else "执行"
+            print(f"[{action}] 共 {len(result['files_deleted'])} 个文件将被删除，总大小 {self._format_size(result['total_size'])}")
+        return result
+
+    def analyze_tmp(self, verbose: bool = False) -> Dict[str, Any]:
+        """分析临时目录"""
+        self._ensure_tmp_dir()
+        files = self._get_tmp_files()
+        result = {
+            "operation": "analyze",
+            "file_count": len(files),
+            "total_size": 0,
+            "files": [],
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+
+        for file_path in files:
+            try:
+                file_size = file_path.stat().st_size
+                result["total_size"] += file_size
+                result["files"].append({
+                    "path": str(file_path),
+                    "size": file_size,
+                    "size_formatted": self._format_size(file_size),
+                })
+                if verbose:
+                    print(f"[分析] {file_path} ({self._format_size(file_size)})")
+            except OSError as e:
+                print(f"[警告] 读取文件信息失败: {file_path} - {e}", file=sys.stderr)
+
+        if verbose:
+            print(f"[分析] {self.tmp_dir}/ 目录下共 {result['file_count']} 个文件，总大小 {self._format_size(result['total_size'])}")
+        return result
+
+    def execute_tasks(self, task_str: str, dry_run: bool = False, verbose: bool = False) -> List[Dict[str, Any]]:
+        """执行任务序列"""
+        tasks = self._parse_tasks(task_str)
+        results = []
+        for task in tasks:
+            try:
+                route = self._route_task(task)
+                if route == "clean":
+                    result = self.clean_tmp(dry_run=dry_run, verbose=verbose)
+                elif route == "analyze":
+                    result = self.analyze_tmp(verbose=verbose)
+                else:
+                    raise AgentPackError("E1009", f"路由目标不存在: {task}")
+                results.append(result)
+            except AgentPackError as e:
+                print(f"[错误] {e}", file=sys.stderr)
+                results.append({"operation": "error", "error": str(e)})
         return results
 
-    def run_selftest(self) -> bool:
-        """运行自检（R1 契约）"""
-        print("[AgentPack] 开始自检...")
-        all_passed = True
-
-        # 测试 1: 关键词提取
+    def save_cache(self, data: Dict[str, Any]) -> None:
+        """保存缓存数据"""
         try:
-            keywords = self.extract_keywords("清理缓存并重新分析项目")
-            assert "清理" in keywords, "关键词提取失败: 缺少'清理'"
-            assert "缓存" in keywords, "关键词提取失败: 缺少'缓存'"
-            print("[PASS] 关键词提取")
-        except Exception as e:
-            print(f"[FAIL] 关键词提取: {e}")
-            all_passed = False
+            content = json.dumps(data, ensure_ascii=False, indent=2)
+            _atomic_write(str(self.cache_file), content)
+        except (OSError, TypeError) as e:
+            raise AgentPackError("E1008", f"缓存写入失败: {e}")
 
-        # 测试 2: 路由
+    def load_cache(self) -> Dict[str, Any]:
+        """加载缓存数据"""
+        if not self.cache_file.exists():
+            return {}
         try:
-            modules, confidence = self.route("清理缓存并重新分析项目")
-            assert "cache_cleaner" in modules, "路由失败: 缺少 cache_cleaner"
-            assert "analyzer" in modules, "路由失败: 缺少 analyzer"
-            assert confidence > 0.5, f"置信度异常: {confidence}"
-            print(f"[PASS] 路由 (置信度: {confidence:.2f})")
-        except Exception as e:
-            print(f"[FAIL] 路由: {e}")
-            all_passed = False
+            content = _read_text_safe(str(self.cache_file))
+            return json.loads(content)
+        except (OSError, json.JSONDecodeError) as e:
+            raise AgentPackError("E1007", f"缓存读取失败: {e}")
 
-        # 测试 3: 空输入
+
+def run_selftest() -> bool:
+    """运行自检测试，验证核心功能"""
+    print("[自检] 开始运行核心功能测试...")
+    test_dir = tempfile.mkdtemp(prefix="agentpack_selftest_")
+    try:
+        # 创建测试环境
+        test_project = Path(test_dir) / "project"
+        test_project.mkdir()
+        tmp_dir = test_project / "tmp"
+        tmp_dir.mkdir()
+
+        # 创建测试文件
+        test_file = tmp_dir / "test_cache.bin"
+        test_file.write_bytes(b"x" * 1024)  # 1KB 文件
+
+        # 测试 1: 关键词路由
+        router = ContextRouter(str(test_project))
+        route = router._route_task("清理")
+        assert route == "clean", f"关键词路由失败: 期望 'clean', 得到 '{route}'"
+        print("[自检] 关键词路由测试: 通过")
+
+        # 测试 2: 批量任务调度
+        tasks = router._parse_tasks("清理;分析")
+        assert len(tasks) == 2, f"批量任务解析失败: 期望 2 个任务, 得到 {len(tasks)}"
+        print("[自检] 批量任务调度测试: 通过")
+
+        # 测试 3: 缓存清理（预演模式）
+        dry_result = router.clean_tmp(dry_run=True)
+        assert dry_result["dry_run"] == True, "预演模式标志错误"
+        assert len(dry_result["files_deleted"]) == 1, f"预演模式应发现 1 个文件, 得到 {len(dry_result['files_deleted'])}"
+        assert test_file.exists(), "预演模式不应实际删除文件"
+        print("[自检] 预演模式测试: 通过")
+
+        # 测试 4: 缓存清理（实际执行）
+        clean_result = router.clean_tmp(dry_run=False)
+        assert len(clean_result["files_deleted"]) == 1, f"清理应删除 1 个文件, 得到 {len(clean_result['files_deleted'])}"
+        assert not test_file.exists(), "清理后文件应不存在"
+        print("[自检] 缓存清理测试: 通过")
+
+        # 测试 5: 分析功能
+        # 重新创建文件用于分析
+        test_file2 = tmp_dir / "test_analyze.txt"
+        test_file2.write_text("hello world", encoding="utf-8")
+        analyze_result = router.analyze_tmp()
+        assert analyze_result["file_count"] == 1, f"分析应发现 1 个文件, 得到 {analyze_result['file_count']}"
+        assert analyze_result["total_size"] > 0, "分析应检测到文件大小"
+        print("[自检] 分析功能测试: 通过")
+
+        # 测试 6: 缓存读写
+        cache_data = {"test": "data", "timestamp": datetime.now(timezone.utc).isoformat()}
+        router.save_cache(cache_data)
+        loaded = router.load_cache()
+        assert loaded.get("test") == "data", "缓存读写失败"
+        print("[自检] 缓存读写测试: 通过")
+
+        # 测试 7: 错误处理
         try:
-            self.extract_keywords("")
-            print("[FAIL] 空输入未报错")
-            all_passed = False
+            router._parse_tasks("")
+            assert False, "空任务应抛出异常"
         except AgentPackError as e:
-            assert e.code == "E1003", f"错误码异常: {e.code}"
-            print("[PASS] 空输入校验")
-        except Exception as e:
-            print(f"[FAIL] 空输入校验: {e}")
-            all_passed = False
+            assert e.code == "E1003", f"错误码错误: 期望 E1003, 得到 {e.code}"
+        print("[自检] 错误处理测试: 通过")
 
-        # 测试 4: 模糊输入
-        try:
-            modules, confidence = self.route("处理一下那个东西")
-            assert confidence == 0.0, f"模糊输入置信度异常: {confidence}"
-            assert len(modules) == 0, f"模糊输入路由异常: {modules}"
-            print("[PASS] 模糊输入处理")
-        except Exception as e:
-            print(f"[FAIL] 模糊输入处理: {e}")
-            all_passed = False
+        print("[自检] 全部测试通过: OK")
+        return True
 
-        # 测试 5: 缓存清理 dry-run
-        try:
-            result = self.clean_cache(dry_run=True)
-            assert result["dry_run"] is True, "dry-run 标志异常"
-            print("[PASS] 缓存清理 dry-run")
-        except Exception as e:
-            print(f"[FAIL] 缓存清理 dry-run: {e}")
-            all_passed = False
-
-        # 测试 6: 分析
-        try:
-            result = self.analyze(dry_run=True)
-            assert "files" in result, "分析结果缺少 files"
-            print(f"[PASS] 项目分析 (发现 {result['count']} 个文件)")
-        except Exception as e:
-            print(f"[FAIL] 项目分析: {e}")
-            all_passed = False
-
-        # 测试 7: 串联任务
-        try:
-            modules, confidence = self.route("清理缓存; 重新分析")
-            assert "cache_cleaner" in modules, "串联任务路由失败"
-            assert "analyzer" in modules, "串联任务路由失败"
-            print("[PASS] 串联任务路由")
-        except Exception as e:
-            print(f"[FAIL] 串联任务路由: {e}")
-            all_passed = False
-
-        # 测试 8: 原子写入
-        try:
-            test_path = self.cache_dir / "test_atomic.txt"
-            _atomic_write(str(test_path), "test content")
-            assert test_path.exists(), "原子写入失败"
-            test_path.unlink()
-            print("[PASS] 原子写入")
-        except Exception as e:
-            print(f"[FAIL] 原子写入: {e}")
-            all_passed = False
-
-        print(f"[AgentPack] 自检完成: {'全部通过' if all_passed else '存在失败'}")
-        return all_passed
+    except AssertionError as e:
+        print(f"[自检] 断言失败: {e}", file=sys.stderr)
+        return False
+    except Exception as e:
+        print(f"[自检] 未预期异常: {e}", file=sys.stderr)
+        return False
+    finally:
+        # 清理测试目录
+        import shutil
+        shutil.rmtree(test_dir, ignore_errors=True)
 
 
-def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
-    """解析命令行参数（R7 输入校验）"""
+def main() -> int:
+    """主入口"""
     parser = argparse.ArgumentParser(
-        prog="agentpack",
-        description="AgentPack 智能体路由与任务调度工具",
-        epilog="示例: agentpack '清理缓存; 重新分析' --dry-run",
+        description="agentpack — 智能体任务调度与缓存清理工具",
+        epilog="示例: python run.py 清理;分析 --dry-run"
     )
-    parser.add_argument("--task", nargs="?", help="任务描述，用分号分隔多个子任务")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--version", action="store_true", help="输出版本号")
-    parser.add_argument("--dry-run", action="store_true", help="预览模式，不实际执行")
-    parser.add_argument("--project-dir", default=".", help="项目目录（默认: 当前目录）")
-    parser.add_argument("--verbose", action="store_true", help="输出详细日志")
-    parser.add_argument("--output", help="输出结果到指定文件")
-    return parser.parse_args(argv)
+    parser.add_argument(
+        "--tasks",
+        nargs="?",
+        default=None,
+        help="要执行的任务，支持分号分隔多个任务（如: 清理;分析）"
+    )
+    parser.add_argument(
+        "--project-dir",
+        type=str,
+        default=".",
+        help="项目目录（默认: 当前目录）"
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="预演模式，只显示将要执行的操作，不实际执行"
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="详细输出模式"
+    )
+    parser.add_argument(
+        "--version",
+        action="store_true",
+        help="显示版本信息"
+    )
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行自检测试"
+    )
 
+    args = parser.parse_args()
 
-def format_output(results: List[Dict[str, Any]], confidence: float, elapsed: float) -> str:
-    """格式化输出结果（R6 可解释输出）"""
-    lines = ["[AgentPack] 任务执行完成"]
-    lines.append(f"- 路由模块: {len(results)} 个")
-    total_ops = sum(r.get("count", 0) for r in results)
-    lines.append(f"- 执行操作: {total_ops} 项")
-    lines.append(f"- 置信度: {confidence:.2f}")
-    lines.append(f"- 耗时: {elapsed:.2f}s")
-
-    for r in results:
-        module_name = r.get("module", "unknown")
-        action = r.get("action", "")
-        count = r.get("count", 0)
-        dry = r.get("dry_run", False)
-        mode = "预览" if dry else "执行"
-        lines.append(f"  - [{module_name}] {action}: {count} 项 ({mode})")
-        if r.get("message"):
-            lines.append(f"    {r['message']}")
-
-    return "\n".join(lines)
-
-
-def main(argv: Optional[List[str]] = None) -> int:
-    """主入口（R8 函数短小单一）"""
-    args = parse_args(argv)
-
+    # 版本信息
     if args.version:
-        print("agentpack 2.0.0")
+        print("agentpack v2.0.4")
         return 0
 
+    # 自检模式
     if args.selftest:
-        router = ContextRouter(args.project_dir)
-        return 0 if router.run_selftest() else 1
+        success = run_selftest()
+        return 0 if success else 1
 
-    if not args.task:
-        print("[AgentPack] 错误: 未提供任务描述", file=sys.stderr)
-        print("用法: agentpack '任务描述' [--dry-run] [--project-dir DIR]", file=sys.stderr)
+    # 检查任务参数
+    if not args.tasks:
+        print("[需核实:操作类型] 请指定要执行的操作，如\"清理\"或\"分析\"", file=sys.stderr)
         return 1
 
     try:
+        # 创建路由器
         router = ContextRouter(args.project_dir)
-        modules, confidence = router.route(args.task)
 
-        if confidence < 0.5:
-            print(f"[AgentPack] 置信度过低 ({confidence:.2f})，拒绝执行")
-            print("[需核实:关键词] 对应的任务无法路由。")
-            print("请补充具体操作关键词，如'清理'、'分析'、'批量重命名'等。")
-            return 1
+        # 执行任务
+        results = router.execute_tasks(
+            args.tasks,
+            dry_run=args.dry_run,
+            verbose=args.verbose
+        )
 
-        if confidence < 0.8:
-            print(f"[AgentPack] 置信度中等 ({confidence:.2f})，需要确认")
-            print(f"将执行模块: {', '.join(router.MODULE_NAMES.get(m, m) for m in modules)}")
-            print("请确认是否继续 (y/N): ", end="")
-            confirm = input().strip().lower()
-            if confirm not in ("y", "yes"):
-                print("[AgentPack] 已取消执行")
-                return 0
-
-        start_time = time.time()
-        results = router.execute(modules, dry_run=args.dry_run)
-        elapsed = time.time() - start_time
-
-        output = format_output(results, confidence, elapsed)
-        print(output)
-
-        if args.output:
-            output_data = {
-                "generated_at": datetime.now(timezone.utc).isoformat(),
-                "confidence": confidence,
-                "dry_run": args.dry_run,
-                "results": results,
-            }
-            _atomic_write(args.output, json.dumps(output_data, ensure_ascii=False, indent=2))
-            print(f"[AgentPack] 结果已写入: {args.output}")
-
-        return 0
+        # 检查是否有错误
+        has_error = any(r.get("operation") == "error" for r in results)
+        return 1 if has_error else 0
 
     except AgentPackError as e:
-        print(f"[AgentPack] 错误: {e}", file=sys.stderr)
+        print(f"[错误] {e}", file=sys.stderr)
         return 1
     except KeyboardInterrupt:
-        print("[AgentPack] 已中断", file=sys.stderr)
+        print("\n[中断] 用户取消操作", file=sys.stderr)
         return 130
     except Exception as e:
-        print(f"[AgentPack] 未知错误: {e}", file=sys.stderr)
+        print(f"[未知错误] {e}", file=sys.stderr)
         return 1
 
 
