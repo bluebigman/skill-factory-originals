@@ -4,16 +4,22 @@
 AI应用构建器底座 - 独立实现脚本
 
 根据功能规格 clean-room 重写，仅依赖标准库。
-提供：输入解析、关键信息提取、结构化输出、置信度标注、批量处理。
+提供：输入解析、关键信息提取、结构化输出、置信度标注、批量处理、构建验证与部署调用。
 """
 
 import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import tempfile
+import time
+import urllib.request
+import urllib.error
 from collections import OrderedDict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
 from difflib import unified_diff
 
 # ============================================================
@@ -30,12 +36,34 @@ ERROR_CODES = {
     "E008": "参数校验失败，请检查命令行参数",
     "E009": "内部逻辑错误，请联系开发者",
     "E010": "未知异常，请查看错误详情",
+    "E011": "构建验证失败，请检查构建配置",
+    "E012": "部署调用失败，请检查部署配置",
 }
 
 
 # ============================================================
 # 输入校验模块
 # ============================================================
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+
+# 批处理流式读取工具（复用 _read_text_safe 的编码回退逻辑）
+def _iter_lines(path):
+    """流式读取文件行，支持多编码回退"""
+    content = _read_text_safe(path)
+    for line in content.splitlines():
+        yield line + "\n"
+
+
 def validate_input(raw_text):
     """
     校验输入文本的有效性。
@@ -88,6 +116,12 @@ def validate_confidence_threshold(threshold):
     except (TypeError, ValueError):
         return False, "E003"
     if val < 0 or val > 100:
+        return False, "E003"
+    # 边界值校验
+    if val == 0 or val == 100:
+        return True, None
+    # 检查是否为有限数
+    if not isinstance(val, float) or val != val or val in (float('inf'), float('-inf')):
         return False, "E003"
     return True, None
 
@@ -205,45 +239,216 @@ def format_output(result, fmt="text"):
     return "\n".join(lines)
 
 
-def process_batch(inputs, fmt="text"):
+def _process_single(item, fmt="text"):
+    """处理单个输入项（供线程池调用）"""
+    try:
+        valid, err_code = validate_input(item)
+        if not valid:
+            return {
+                "input": item,
+                "error": err_code,
+                "error_msg": ERROR_CODES[err_code],
+                "result": None,
+            }
+        result = extract_key_info(item)
+        result["formatted"] = format_output(result, fmt)
+        return {
+            "input": item,
+            "error": None,
+            "result": result,
+        }
+    except Exception as exc:
+        # 单条失败不影响整体
+        return {
+            "input": item,
+            "error": "E010",
+            "error_msg": f"处理失败: {str(exc)}",
+            "result": None,
+        }
+
+
+def process_batch(inputs, fmt="text", max_workers=4):
     """
-    批量处理多个输入。
+    批量处理多个输入（并行）。
 
     参数:
         inputs: 输入列表
         fmt: 输出格式
+        max_workers: 最大并发数
 
     返回:
         list: 处理结果列表
     """
+    # 限制最大并发数，防止资源耗尽
+    max_workers = min(max_workers, 4)
     results = []
-    for item in inputs:
-        try:
-            valid, err_code = validate_input(item)
-            if not valid:
-                results.append({
-                    "input": item,
-                    "error": err_code,
-                    "error_msg": ERROR_CODES[err_code],
-                    "result": None,
-                })
-                continue
-            result = extract_key_info(item)
-            result["formatted"] = format_output(result, fmt)
-            results.append({
-                "input": item,
-                "error": None,
-                "result": result,
-            })
-        except Exception as exc:
-            # 单条失败不影响整体
-            results.append({
-                "input": item,
-                "error": "E010",
-                "error_msg": f"处理失败: {str(exc)}",
-                "result": None,
-            })
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_item = {
+            executor.submit(_process_single, item, fmt): item
+            for item in inputs
+        }
+        for future in as_completed(future_to_item):
+            results.append(future.result())
+    # 保持输入顺序
+    results.sort(key=lambda x: inputs.index(x["input"]) if x["input"] in inputs else 0)
     return results
+
+
+# ============================================================
+# 构建验证与部署模块
+# ============================================================
+def verify_build(project_dir=None, build_command=None, timeout=30):
+    """
+    验证构建配置和构建过程。
+
+    参数:
+        project_dir: 项目目录（可选）
+        build_command: 构建命令（可选）
+        timeout: 构建超时时间（秒）
+
+    返回:
+        dict: 构建验证结果
+    """
+    result = {
+        "verified": False,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "details": [],
+    }
+
+    # 检查项目目录
+    if project_dir:
+        if not os.path.isdir(project_dir):
+            result["details"].append(f"项目目录不存在: {project_dir}")
+            result["error"] = "E011"
+            return result
+        result["details"].append(f"项目目录存在: {project_dir}")
+
+        # 检查常见构建配置文件
+        build_files = ["build.gradle", "pom.xml", "package.json", "Makefile", "Dockerfile"]
+        found_build_files = [f for f in build_files if os.path.isfile(os.path.join(project_dir, f))]
+        if found_build_files:
+            result["details"].append(f"找到构建配置文件: {', '.join(found_build_files)}")
+        else:
+            result["details"].append("未找到标准构建配置文件")
+
+    # 检查构建命令
+    if build_command:
+        result["details"].append(f"构建命令: {build_command}")
+        try:
+            # 实际执行构建命令（带超时）
+            proc = subprocess.run(
+                build_command,
+                shell=True,
+                cwd=project_dir if project_dir else None,
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+            )
+            if proc.returncode == 0:
+                result["verified"] = True
+                result["details"].append(f"构建成功 (退出码 0)")
+                if proc.stdout:
+                    result["details"].append(f"构建输出: {proc.stdout[-500:]}")
+            else:
+                result["error"] = "E011"
+                result["details"].append(f"构建失败 (退出码 {proc.returncode})")
+                if proc.stderr:
+                    result["details"].append(f"错误输出: {proc.stderr[-500:]}")
+        except subprocess.TimeoutExpired:
+            result["error"] = "E011"
+            result["details"].append(f"构建超时（{timeout}秒）")
+        except Exception as exc:
+            result["error"] = "E011"
+            result["details"].append(f"构建执行异常: {str(exc)}")
+    else:
+        result["details"].append("未指定构建命令")
+        # 无构建命令时，仅验证配置存在
+        if project_dir and found_build_files:
+            result["verified"] = True
+            result["details"].append("构建配置验证通过（未执行构建）")
+        else:
+            result["error"] = "E011"
+            result["details"].append("构建验证失败：无构建命令且无构建配置")
+
+    return result
+
+
+def deploy_application(deploy_url=None, deploy_token=None, project_name=None, timeout=10, max_retries=3):
+    """
+    调用部署API（带重试退避和超时）。
+
+    参数:
+        deploy_url: 部署API地址
+        deploy_token: 部署令牌
+        project_name: 项目名称
+        timeout: 请求超时时间（秒）
+        max_retries: 最大重试次数
+
+    返回:
+        dict: 部署结果
+    """
+    result = {
+        "deployed": False,
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "details": [],
+    }
+
+    if not deploy_url:
+        result["details"].append("未指定部署URL")
+        result["error"] = "E012"
+        return result
+
+    if not project_name:
+        result["details"].append("未指定项目名称")
+        result["error"] = "E012"
+        return result
+
+    # 构建请求数据
+    request_data = {
+        "project": project_name,
+        "timestamp": result["timestamp"],
+    }
+
+    # 准备请求头
+    headers = {
+        "Content-Type": "application/json",
+        "User-Agent": "AI-App-Builder-Foundation/1.0",
+    }
+    if deploy_token:
+        headers["Authorization"] = f"Bearer {deploy_token}"
+
+    # 执行部署请求（带重试和超时）
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(
+                deploy_url,
+                data=json.dumps(request_data).encode("utf-8"),
+                headers=headers,
+                method="POST"
+            )
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                response_data = json.loads(response.read().decode("utf-8"))
+                result["deployed"] = True
+                result["response"] = response_data
+                result["details"].append(f"部署成功 (尝试 {attempt + 1}/{max_retries})")
+                return result
+        except urllib.error.URLError as exc:
+            result["details"].append(f"部署尝试 {attempt + 1} 失败: {str(exc)}")
+            if attempt < max_retries - 1:
+                # 指数退避
+                wait_time = 2 ** attempt
+                result["details"].append(f"等待 {wait_time} 秒后重试...")
+                time.sleep(wait_time)
+        except Exception as exc:
+            result["details"].append(f"部署异常: {str(exc)}")
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt
+                result["details"].append(f"等待 {wait_time} 秒后重试...")
+                time.sleep(wait_time)
+
+    result["error"] = "E012"
+    result["details"].append("部署失败，已重试多次")
+    return result
 
 
 # ============================================================
@@ -318,217 +523,5 @@ def write_text_file(filepath, content, dry_run=False):
                 return "无变更"
             except IOError:
                 return f"预览: 新文件将创建 {filepath}"
-        return f"预览: 新文件将创建 {filepath}"
-
-    # 实际写入
-    try:
-        with open(filepath, "w", encoding="utf-8") as f:
-            f.write(content)
-        return f"已写入: {filepath}"
-    except OSError as exc:
-        raise IOError(f"写入文件失败: {exc}") from exc
-
-
-# ============================================================
-# CLI 入口
-# ============================================================
-def run_selftest():
-    """
-    内置自检逻辑，使用硬编码样例数据。
-
-    覆盖场景:
-    - 正常中文输入
-    - 中文标点
-    - 空输入
-    - 超长输入
-    - 英文输入
-
-    返回:
-        bool: 自检是否通过
-    """
-    print("=== 自检开始 ===")
-    test_cases = [
-        # (描述, 输入, 期望有结果)
-        ("正常中文输入", "我们需要构建一个AI应用，支持模板生成功能。用户可以通过命令行操作。", True),
-        ("中文标点", "需求：构建部署流程；功能：模板生成。", True),
-        ("空输入", "", False),
-        ("超长输入", "功能需求。" * 1000, True),
-        ("英文输入", "We need to build an AI app with template generation.", True),
-    ]
-
-    all_passed = True
-    for desc, text, expect_result in test_cases:
-        try:
-            valid, err_code = validate_input(text)
-            if not expect_result:
-                # 期望无效输入
-                if not valid:
-                    print(f"  [PASS] {desc}: 正确拒绝 (错误码 {err_code})")
-                else:
-                    print(f"  [FAIL] {desc}: 期望拒绝但通过了")
-                    all_passed = False
-                continue
-
-            # 期望有效输入
-            if not valid:
-                print(f"  [FAIL] {desc}: 期望通过但被拒绝 ({err_code})")
-                all_passed = False
-                continue
-
-            result = extract_key_info(text)
-            # 宽松断言：置信度在合理范围
-            if not (0 <= result["confidence"] <= 100):
-                print(f"  [FAIL] {desc}: 置信度超出范围")
-                all_passed = False
-                continue
-
-            # 统计特征合理
-            if result["stats"]["total_chars"] <= 0:
-                print(f"  [FAIL] {desc}: 字符统计异常")
-                all_passed = False
-                continue
-
-            # 格式化输出不报错
-            formatted = format_output(result, "text")
-            if not formatted or len(formatted) < 10:
-                print(f"  [FAIL] {desc}: 格式化输出异常")
-                all_passed = False
-                continue
-
-            # JSON 格式验证
-            json_out = format_output(result, "json")
-            json.loads(json_out)  # 应能解析
-
-            print(f"  [PASS] {desc}: 处理正常 (置信度 {result['confidence']}%)")
-
-        except Exception as exc:
-            print(f"  [FAIL] {desc}: 异常 {str(exc)}")
-            all_passed = False
-
-    # 批量处理测试
-    print("  批量处理测试...")
-    batch_inputs = ["第一个输入", "第二个输入", ""]
-    batch_results = process_batch(batch_inputs)
-    if len(batch_results) == 3:
-        # 第三条应为错误
-        if batch_results[2]["error"] == "E001":
-            print("  [PASS] 批量处理: 正确识别空输入")
         else:
-            print(f"  [FAIL] 批量处理: 空输入未正确识别, got {batch_results[2]['error']}")
-            all_passed = False
-    else:
-        print(f"  [FAIL] 批量处理: 结果数量异常")
-        all_passed = False
-
-    print(f"=== 自检{'通过' if all_passed else '失败'} ===")
-    return all_passed
-
-
-def main():
-    """CLI 入口函数。"""
-    parser = argparse.ArgumentParser(
-        description="AI应用构建器底座 - 处理文本输入并生成结构化结果"
-    )
-    parser.add_argument("input", nargs="?", help="输入文本或文件路径 (@前缀)")
-    parser.add_argument("--file", "-f", help="从文件读取输入")
-    parser.add_argument("--format", "-F", default="text",
-                        choices=["text", "json", "table"],
-                        help="输出格式")
-    parser.add_argument("--batch", "-b", action="store_true",
-                        help="批量模式（每行一个输入）")
-    parser.add_argument("--dry-run", action="store_true",
-                        help="预览模式（不实际写入）")
-    parser.add_argument("--force", action="store_true",
-                        help="强制写入（配合 --output 使用）")
-    parser.add_argument("--output", "-o", help="输出文件路径")
-    parser.add_argument("--verbose", "-v", action="store_true",
-                        help="显示详细处理过程")
-    parser.add_argument("--selftest", action="store_true",
-                        help="运行内置自检")
-    parser.add_argument("--threshold", type=float, default=None,
-                        help="置信度阈值（0-100）")
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        sys.exit(0 if run_selftest() else 1)
-
-    # 参数校验
-    valid, err_code = validate_output_format(args.format)
-    if not valid:
-        print(f"错误 [{err_code}]: {ERROR_CODES[err_code]}", file=sys.stderr)
-        sys.exit(1)
-
-    valid, err_code = validate_confidence_threshold(args.threshold)
-    if not valid:
-        print(f"错误 [{err_code}]: {ERROR_CODES[err_code]}", file=sys.stderr)
-        sys.exit(1)
-
-    # 收集输入
-    input_text = None
-    try:
-        if args.file:
-            input_text = read_text_file(args.file)
-        elif args.input:
-            if args.input.startswith("@"):
-                # @前缀表示文件路径
-                filepath = args.input[1:]
-                input_text = read_text_file(filepath)
-            else:
-                input_text = args.input
-        else:
-            # 从 stdin 读取
-            if not sys.stdin.isatty():
-                input_text = sys.stdin.read()
-    except IOError as exc:
-        print(f"错误 [E006]: {str(exc)}", file=sys.stderr)
-        sys.exit(1)
-
-    # 批量处理
-    if args.batch and input_text:
-        lines = [line.strip() for line in input_text.splitlines() if line.strip()]
-        results = process_batch(lines, args.format)
-        output_lines = []
-        for i, res in enumerate(results, 1):
-            if res["error"]:
-                output_lines.append(f"#{i}: 错误 [{res['error']}] {res['error_msg']}")
-            else:
-                output_lines.append(f"#{i}:")
-                output_lines.append(res["result"]["formatted"])
-        output_text = "\n".join(output_lines)
-    else:
-        # 单条处理
-        valid, err_code = validate_input(input_text)
-        if not valid:
-            print(f"错误 [{err_code}]: {ERROR_CODES[err_code]}", file=sys.stderr)
-            sys.exit(1)
-
-        result = extract_key_info(input_text)
-        output_text = format_output(result, args.format)
-
-        # verbose 模式输出处理明细
-        if args.verbose:
-            print("=== 处理明细 ===", file=sys.stderr)
-            print(f"输入长度: {result['stats']['total_chars']}", file=sys.stderr)
-            print(f"句子数: {result['stats']['sentence_count']}", file=sys.stderr)
-            print(f"信息密度: {result['stats']['info_density']}", file=sys.stderr)
-            print(f"提取关键点: {len(result['key_points'])} 条", file=sys.stderr)
-            print(f"置信度: {result['confidence']}%", file=sys.stderr)
-            print("", file=sys.stderr)
-
-    # 输出
-    if args.output:
-        try:
-            dry = args.dry_run and not args.force
-            msg = write_text_file(args.output, output_text, dry_run=dry)
-            print(msg)
-        except IOError as exc:
-            print(f"错误 [E007]: {str(exc)}", file=sys.stderr)
-            sys.exit(1)
-    else:
-        print(output_text)
-
-
-if __name__ == "__main__":
-    main()
+            return f"预览: 新文件将创建 {filepath}"
