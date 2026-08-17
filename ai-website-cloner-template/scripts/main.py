@@ -3,11 +3,11 @@
 """
 站点克隆模板生成器（ai-website-cloner-template）
 =================================================
-将目标网站或本地 HTML 文件解析为结构化克隆模板（JSON），
+将目标网站或本地 HTML 文件解析为结构化克隆模板（JSON/YAML/HTML），
 供 AI 编码代理直接消费。
 
-作者: 林墨
-版本: 1.0.3
+作者: LinStruct
+版本: 2.0.0
 许可证: MIT
 """
 
@@ -24,22 +24,8 @@ from html.parser import HTMLParser
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set, Tuple
 import time
-
-# G4 Mock sample: 外部 HTML 结构变更时的降级样本
-_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
-
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
+from datetime import datetime, timezone
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -55,6 +41,16 @@ ERR_TEMPLATE_GEN_FAILED = "E007"  # 模板生成失败
 ERR_OUTPUT_WRITE_FAILED = "E008"  # 输出文件写入失败
 ERR_INTERNAL = "E009"           # 内部错误
 ERR_SELFTEST_FAILED = "E010"    # 自检失败
+
+# 网络请求配置
+REQUEST_TIMEOUT = 10  # 秒
+MAX_RETRIES = 3
+RETRY_BACKOFF = [1, 2, 4]  # 秒
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+
+# 缓存配置
+CACHE_DIR = Path.home() / ".cache" / "ai-website-cloner"
+CACHE_TTL = 3600  # 1小时
 
 
 # ---------------------------------------------------------------------------
@@ -72,28 +68,31 @@ SELFTEST_HTML = """
 </head>
 <body>
     <header class="site-header">
-        <nav class="nav-bar">
+        <nav class="main-nav">
             <ul>
                 <li><a href="/">首页</a></li>
+                <li><a href="/products">产品</a></li>
                 <li><a href="/about">关于</a></li>
-                <li><a href="/contact">联系</a></li>
             </ul>
         </nav>
     </header>
-    <main id="main-content">
-        <section class="hero-section">
-            <h1>欢迎光临</h1>
-            <p>这是一个示例页面，用于自检。</p>
-            <img src="/images/banner.jpg" alt="横幅">
-        </section>
-        <section class="features">
-            <div class="feature-card">
-                <h2>特性一</h2>
-                <p>描述文字。</p>
+    <main class="content-wrapper">
+        <h1>欢迎来到示例站点</h1>
+        <section class="product-grid">
+            <div class="product-card" data-id="1">
+                <h2 class="product-title">产品 A</h2>
+                <p class="product-price">¥99.00</p>
+                <img class="product-image" src="/images/a.jpg" alt="产品 A 图片">
             </div>
-            <div class="feature-card">
-                <h2>特性二</h2>
-                <p>描述文字。</p>
+            <div class="product-card" data-id="2">
+                <h2 class="product-title">产品 B</h2>
+                <p class="product-price">¥199.00</p>
+                <img class="product-image" src="/images/b.jpg" alt="产品 B 图片">
+            </div>
+            <div class="product-card" data-id="3">
+                <h2 class="product-title">产品 C</h2>
+                <p class="product-price">¥299.00</p>
+                <img class="product-image" src="/images/c.jpg" alt="产品 C 图片">
             </div>
         </section>
     </main>
@@ -106,442 +105,581 @@ SELFTEST_HTML = """
 
 
 # ---------------------------------------------------------------------------
-# HTML 解析器（基于标准库 html.parser）
+# 自定义 HTML 解析器
 # ---------------------------------------------------------------------------
 class StructureExtractor(HTMLParser):
-    """提取 HTML 的 DOM 结构、标签、类名、资源引用等关键信息。"""
+    """解析 HTML 并提取 DOM 结构信息。"""
 
     def __init__(self) -> None:
         super().__init__(convert_charrefs=True)
-        self.tags: Set[str] = set()               # 所有出现的标签名
-        self.classes: Set[str] = set()            # 所有出现的类名
-        self.ids: Set[str] = set()                # 所有出现的 id
-        self.attributes: Set[str] = set()         # 所有出现的属性名
-        self.links: List[str] = []                # 外部资源链接（css/js/img）
-        self.text_content: List[str] = []         # 页面文本内容（非空）
-        self.dom_tree: List[Dict[str, Any]] = []  # DOM 树（简化）
-        self._stack: List[Dict[str, Any]] = []    # 解析栈
-        self.has_viewport: bool = False           # 是否有 viewport meta 标签
-        self.has_media_queries: bool = False      # 是否有媒体查询
+        self.stack: List[Dict[str, Any]] = []
+        self.root: Optional[Dict[str, Any]] = None
+        self.repeated_blocks: Dict[str, Dict[str, Any]] = {}
+        self.static_elements: List[Dict[str, str]] = []
+        self.current_text: List[str] = []
+        self._current_path: List[str] = []
 
-    def handle_starttag(
-        self, tag: str, attrs: List[Tuple[str, Optional[str]]]
-    ) -> None:
+    def handle_starttag(self, tag: str, attrs: List[Tuple[str, Optional[str]]]) -> None:
         """处理开始标签。"""
-        self.tags.add(tag)
-        attr_dict: Dict[str, str] = {}
-        for key, value in attrs:
-            self.attributes.add(key)
-            attr_dict[key] = value if value is not None else ""
-            if key == "class" and value:
-                self.classes.update(value.split())
-            elif key == "id" and value:
-                self.ids.add(value)
-            elif key == "href" and value:
-                self.links.append(value)
-            elif key == "src" and value:
-                self.links.append(value)
-
-        # 检测 viewport meta 标签
-        if tag == "meta":
-            meta_attrs = {k: v for k, v in attrs}
-            if meta_attrs.get("name") == "viewport":
-                self.has_viewport = True
-
-        # 检测媒体查询属性（响应式设计的常见标志）
-        if "media" in attr_dict or "sizes" in attr_dict:
-            self.has_media_queries = True
-
-        node: Dict[str, Any] = {
+        attr_dict = {k: v for k, v in attrs if v is not None}
+        node = {
             "tag": tag,
             "attrs": attr_dict,
             "children": [],
+            "text": "",
+            "path": "/".join(self._current_path + [tag]),
         }
-        if self._stack:
-            self._stack[-1]["children"].append(node)
+        if self.stack:
+            self.stack[-1]["children"].append(node)
         else:
-            self.dom_tree.append(node)
-        self._stack.append(node)
+            self.root = node
+        self.stack.append(node)
+        self._current_path.append(tag)
 
     def handle_endtag(self, tag: str) -> None:
         """处理结束标签。"""
-        if self._stack:
-            self._stack.pop()
+        if self.stack:
+            node = self.stack.pop()
+            if self._current_path:
+                self._current_path.pop()
+            # 统计重复区块
+            self._track_repeated_block(node)
 
     def handle_data(self, data: str) -> None:
         """处理文本数据。"""
-        text = data.strip()
-        if text:
-            self.text_content.append(text)
+        if self.stack:
+            text = data.strip()
+            if text:
+                self.stack[-1]["text"] = text
 
+    def _track_repeated_block(self, node: Dict[str, Any]) -> None:
+        """识别重复出现的区块（如同类卡片、列表项）。"""
+        # 使用 tag + class 作为区块标识
+        class_name = node["attrs"].get("class", "")
+        if class_name:
+            key = f"{node['tag']}.{class_name}"
+            if key not in self.repeated_blocks:
+                self.repeated_blocks[key] = {
+                    "selector": key,
+                    "frequency": 0,
+                    "variables": [],
+                    "sample_node": node,
+                }
+            self.repeated_blocks[key]["frequency"] += 1
+            # 提取变量（子元素的 class 或 id）
+            for child in node["children"]:
+                child_class = child["attrs"].get("class", "")
+                child_id = child["attrs"].get("id", "")
+                if child_class:
+                    var_name = child_class.split()[-1]
+                elif child_id:
+                    var_name = child_id
+                else:
+                    var_name = child["tag"]
+                if var_name not in self.repeated_blocks[key]["variables"]:
+                    self.repeated_blocks[key]["variables"].append(var_name)
 
-def extract_structure(html_content: str) -> Dict[str, Any]:
-    """从 HTML 内容中提取结构化信息。"""
-    parser = StructureExtractor()
-    try:
-        parser.feed(html_content)
-        parser.close()
-    except Exception as exc:
-        raise RuntimeError(f"{ERR_HTML_PARSE_FAILED}: HTML 解析失败: {exc}") from exc
+    def get_static_elements(self) -> List[Dict[str, str]]:
+        """提取静态元素（如 header、footer、nav 等）。"""
+        static_tags = {"header", "footer", "nav", "main", "aside"}
+        result = []
+        for node in self._iter_nodes(self.root):
+            if node["tag"] in static_tags:
+                selector = node["tag"]
+                if "class" in node["attrs"]:
+                    selector += f".{node['attrs']['class']}"
+                result.append({"selector": selector, "type": "fixed"})
+        return result
 
-    return {
-        "tags": sorted(parser.tags),
-        "classes": sorted(parser.classes),
-        "ids": sorted(parser.ids),
-        "attributes": sorted(parser.attributes),
-        "resources": sorted(set(parser.links)),
-        "text_snippets": parser.text_content[:50],  # 最多保存 50 条文本片段
-        "dom_tree": parser.dom_tree,
-        "node_count": _count_nodes(parser.dom_tree),
-        "has_viewport": parser.has_viewport,
-        "has_media_queries": parser.has_media_queries,
-    }
-
-
-def _count_nodes(tree: List[Dict[str, Any]]) -> int:
-    """递归统计 DOM 节点数量。"""
-    count = 0
-    for node in tree:
-        count += 1
-        count += _count_nodes(node.get("children", []))
-    return count
+    def _iter_nodes(self, node: Optional[Dict[str, Any]]) -> Any:
+        """递归遍历节点树。"""
+        if node is None:
+            return
+        yield node
+        for child in node.get("children", []):
+            yield from self._iter_nodes(child)
 
 
 # ---------------------------------------------------------------------------
-# 模板生成核心逻辑
+# 核心功能函数
 # ---------------------------------------------------------------------------
-def build_template(
-    source: str,
-    content: str,
-    source_type: str = "url",
-) -> Dict[str, Any]:
+def fetch_url_content(url: str, timeout: int = REQUEST_TIMEOUT) -> Tuple[int, str]:
     """
-    根据原始内容生成结构化克隆模板。
+    获取 URL 内容，带超时和指数退避重试。
 
-    参数:
-        source: 来源标识（URL 或文件路径）
-        content: 原始 HTML 内容
-        source_type: 来源类型（"url" 或 "file"）
+    返回: (错误码, 内容字符串)
+    """
+    for attempt in range(MAX_RETRIES):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": USER_AGENT})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                content = response.read().decode("utf-8", errors="replace")
+                return ERR_OK, content
+        except urllib.error.HTTPError as e:
+            if attempt < MAX_RETRIES - 1:
+                time.sleep(RETRY_BACKOFF[attempt])
+            else:
+                return ERR_URL_FETCH_FAILED, f"HTTP 错误: {e.code}"
+        except urllib.error.URLError as e:
+            if attempt < MAX_RETRIES - 1:
+                time.sleep(RETRY_BACKOFF[attempt])
+            else:
+                return ERR_URL_FETCH_FAILED, f"URL 错误: {e.reason}"
+        except Exception as e:
+            if attempt < MAX_RETRIES - 1:
+                time.sleep(RETRY_BACKOFF[attempt])
+            else:
+                return ERR_URL_FETCH_FAILED, f"未知错误: {str(e)}"
+    return ERR_URL_FETCH_FAILED, "重试次数耗尽"
 
-    返回:
-        结构化模板字典
+
+def read_text_safe(path: Path) -> str:
+    """多编码读取文件，带降级处理。"""
+    for enc in ("utf-8", "gbk", "gb18030"):
+        try:
+            with open(path, encoding=enc) as f:
+                return f.read()
+        except UnicodeDecodeError:
+            continue
+        except OSError as e:
+            print(f"[WARN] 读取 {path} 失败，降级为空: {e}", file=sys.stderr)
+            return ""
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+
+def read_local_file(file_path: str) -> Tuple[int, str]:
+    """
+    读取本地文件，支持多编码。
+
+    返回: (错误码, 内容字符串)
+    """
+    path = Path(file_path)
+    if not path.exists():
+        return ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}"
+    if not path.is_file():
+        return ERR_FILE_READ_FAILED, f"不是文件: {file_path}"
+    if path.stat().st_size > 5 * 1024 * 1024:
+        return ERR_FILE_READ_FAILED, "文件大小超过 5MB 限制"
+
+    try:
+        content = read_text_safe(path)
+        if content:
+            return ERR_OK, content
+        return ERR_FILE_READ_FAILED, "无法识别文件编码"
+    except Exception as e:
+        return ERR_FILE_READ_FAILED, f"读取失败: {str(e)}"
+
+
+def parse_html_content(content: str) -> Tuple[int, Optional[StructureExtractor]]:
+    """
+    解析 HTML 内容。
+
+    返回: (错误码, 解析器实例)
     """
     if not content or not content.strip():
-        raise ValueError(f"{ERR_EMPTY_CONTENT}: 内容为空，无法生成模板")
+        return ERR_EMPTY_CONTENT, None
+    try:
+        parser = StructureExtractor()
+        parser.feed(content)
+        parser.close()
+        if parser.root is None:
+            return ERR_HTML_PARSE_FAILED, None
+        return ERR_OK, parser
+    except Exception as e:
+        return ERR_HTML_PARSE_FAILED, None
 
-    # 提取结构
-    structure = extract_structure(content)
 
-    # 生成内容哈希（用于标识）
-    content_hash = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
+def generate_template(parser: StructureExtractor, source_name: str) -> Dict[str, Any]:
+    """
+    生成模板字典。
 
-    # 推断布局框架类型（简单启发式）
-    layout_framework = _detect_framework(structure["tags"], structure["classes"])
-
-    # 推断响应式布局
-    responsive = _detect_responsive(
-        structure["tags"], 
-        structure["attributes"],
-        structure["has_viewport"],
-        structure["has_media_queries"]
-    )
-
-    # 构建模板
-    template: Dict[str, Any] = {
-        "template_meta": {
-            "version": "1.0.3",
-            "source": source,
-            "source_type": source_type,
-            "content_hash": content_hash,
-            "generated_by": "ai-website-cloner-template",
-        },
-        "page": {
-            "title": _extract_title(content),
-            "language": _extract_language(content),
-        },
-        "structure": {
-            "node_count": structure["node_count"],
-            "tags": structure["tags"],
-            "classes": structure["classes"],
-            "ids": structure["ids"],
-            "attributes": structure["attributes"],
-            "dom_tree": structure["dom_tree"],
-        },
-        "style_variables": _extract_style_variables(content),
-        "resources": {
-            "links": structure["resources"],
-            "count": len(structure["resources"]),
-        },
-        "layout": {
-            "framework": layout_framework,
-            "responsive": responsive,
-        },
-        "text_content": structure["text_snippets"],
+    返回: 模板字典
+    """
+    template = {
+        "template_name": source_name,
+        "version": "1.0.0",
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "root_element": parser.root["tag"] if parser.root else "html",
+        "repeated_blocks": [],
+        "static_elements": parser.get_static_elements(),
     }
+
+    # 处理重复区块
+    for selector, info in parser.repeated_blocks.items():
+        if info["frequency"] >= 2:  # 只保留出现 2 次以上的区块
+            block = {
+                "selector": selector,
+                "frequency": info["frequency"],
+                "variables": info["variables"],
+            }
+            template["repeated_blocks"].append(block)
 
     return template
 
 
-def _extract_title(html_content: str) -> str:
-    """提取页面标题。"""
-    match = re.search(r"<title[^>]*>([^<]+)</title>", html_content, re.IGNORECASE)
-    return match.group(1).strip() if match else ""
+def generate_structure_doc(parser: StructureExtractor, template: Dict[str, Any]) -> str:
+    """
+    生成结构说明文档（Markdown 格式）。
+
+    返回: Markdown 字符串
+    """
+    doc = []
+    doc.append("# 页面结构分析报告\n")
+    doc.append(f"- **生成时间**: {template['generated_at']}")
+    doc.append(f"- **根元素**: `{template['root_element']}`\n")
+
+    doc.append("## DOM 结构树\n")
+    doc.append("```text")
+    if parser.root:
+        _append_node_tree(doc, parser.root, 0)
+    doc.append("```\n")
+
+    doc.append("## 重复区块分析\n")
+    if template["repeated_blocks"]:
+        doc.append("| 选择器 | 出现次数 | 变量 |")
+        doc.append("|--------|----------|------|")
+        for block in template["repeated_blocks"]:
+            vars_str = ", ".join(f"`{v}`" for v in block["variables"])
+            doc.append(f"| `{block['selector']}` | {block['frequency']} | {vars_str} |")
+    else:
+        doc.append("未识别到重复区块。\n")
+
+    doc.append("\n## 静态元素\n")
+    if template["static_elements"]:
+        doc.append("| 选择器 | 类型 |")
+        doc.append("|--------|------|")
+        for elem in template["static_elements"]:
+            doc.append(f"| `{elem['selector']}` | {elem['type']} |")
+    else:
+        doc.append("未识别到静态元素。")
+
+    return "\n".join(doc)
 
 
-def _extract_language(html_content: str) -> str:
-    """提取页面语言。"""
-    match = re.search(r'<html[^>]*lang=["\']([^"\']+)["\']', html_content, re.IGNORECASE)
-    return match.group(1) if match else ""
+def _append_node_tree(doc: List[str], node: Dict[str, Any], depth: int) -> None:
+    """递归生成节点树文本。"""
+    indent = "  " * depth
+    attrs_str = ""
+    if "class" in node["attrs"]:
+        attrs_str += f".{node['attrs']['class']}"
+    if "id" in node["attrs"]:
+        attrs_str += f"#{node['attrs']['id']}"
+    doc.append(f"{indent}<{node['tag']}{attrs_str}>")
+    if node["text"]:
+        doc.append(f"{indent}  \"{node['text'][:50]}\"")
+    for child in node.get("children", []):
+        _append_node_tree(doc, child, depth + 1)
 
 
-def _detect_framework(tags: List[str], classes: List[str]) -> str:
-    """通过标签和类名推断前端框架。"""
-    tag_set = set(tags)
-    class_set = set(classes)
+def write_output_file(file_path: str, content: str, dry_run: bool = False) -> Tuple[int, str]:
+    """
+    原子化写入文件。
 
-    # React/Vue 常见特征
-    if any(c.startswith("react") for c in class_set):
-        return "react"
-    if any(c.startswith("vue") for c in class_set):
-        return "vue"
-    if any(c.startswith("ng-") for c in class_set):
-        return "angular"
-
-    # 静态站点常见特征
-    if "main" in tag_set and "section" in tag_set and "article" in tag_set:
-        return "static-html"
-
-    return "unknown"
-
-
-def _detect_responsive(
-    tags: List[str], 
-    attributes: List[str], 
-    has_viewport: bool, 
-    has_media_queries: bool
-) -> bool:
-    """检测是否为响应式布局。"""
-    # 检查是否有 viewport meta 标签（最重要的标志）
-    if has_viewport:
-        return True
-    
-    # 检查是否有媒体查询相关属性
-    if has_media_queries:
-        return True
-    
-    # 检查是否有响应式相关的标准属性
-    responsive_attrs = {"media", "sizes", "srcset", "picture"}
-    if any(attr in responsive_attrs for attr in attributes):
-        return True
-    
-    # 检查是否有响应式相关的标准标签
-    responsive_tags = {"picture", "source"}
-    if any(tag in responsive_tags for tag in tags):
-        return True
-    
-    return False
-
-
-def _extract_style_variables(html_content: str) -> Dict[str, str]:
-    """提取 CSS 变量（简化实现）。"""
-    variables: Dict[str, str] = {}
-    # 查找 :root 或选择器中的 --var-name: value 模式
-    pattern = r"--([a-zA-Z0-9_-]+)\s*:\s*([^;}\n]+)"
-    for match in re.finditer(pattern, html_content):
-        var_name = match.group(1).strip()
-        var_value = match.group(2).strip()
-        if var_name and var_value:
-            variables[var_name] = var_value
-    return variables
-
-
-# ---------------------------------------------------------------------------
-# 输入获取
-# ---------------------------------------------------------------------------
-def fetch_url_content(url: str) -> str:
-    """从 URL 获取 HTML 内容。"""
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=15) as response:
-            charset = response.headers.get_content_charset() or "utf-8"
-            data = response.read()
-            return data.decode(charset, errors="replace")
-    except urllib.error.URLError as exc:
-        raise RuntimeError(f"{ERR_URL_FETCH_FAILED}: 无法获取 URL 内容: {exc}") from exc
-    except Exception as exc:
-        raise RuntimeError(f"{ERR_URL_FETCH_FAILED}: URL 访问异常: {exc}") from exc
-
-
-def read_file_content(file_path: str) -> str:
-    """读取本地文件内容。"""
+    返回: (错误码, 消息)
+    """
     path = Path(file_path)
-    if not path.exists():
-        raise FileNotFoundError(f"{ERR_FILE_NOT_FOUND}: 文件不存在: {file_path}")
-    try:
-        return path.read_text(encoding="utf-8", errors="replace")
-    except Exception as exc:
-        raise RuntimeError(f"{ERR_FILE_READ_FAILED}: 文件读取失败: {exc}") from exc
+    if not dry_run:
+        try:
+            # 确保目录存在
+            path.parent.mkdir(parents=True, exist_ok=True)
+            # 原子写入：先写临时文件，再重命名
+            temp_path = path.with_suffix(path.suffix + ".tmp")
+            with open(temp_path, "w", encoding="utf-8") as f:
+                f.write(content)
+            os.replace(temp_path, path)
+            return ERR_OK, f"文件已写入: {path}"
+        except Exception as e:
+            return ERR_OUTPUT_WRITE_FAILED, f"写入失败: {str(e)}"
+    # 计算内容摘要
+    digest = hashlib.sha256(content.encode("utf-8")).hexdigest()[:16]
+    return ERR_OK, f"[DRY-RUN] 将写入文件: {path} (摘要: {digest})"
 
 
-# ---------------------------------------------------------------------------
-# 输出处理
-# ---------------------------------------------------------------------------
-def save_template(template: Dict[str, Any], output_path: str) -> None:
-    """将模板保存为 JSON 文件。"""
-    try:
-        with open(output_path, "w", encoding="utf-8") as f:
-            json.dump(template, f, ensure_ascii=False, indent=2)
-    except Exception as exc:
-        raise RuntimeError(f"{ERR_OUTPUT_WRITE_FAILED}: 输出文件写入失败: {exc}") from exc
-
-
-# ---------------------------------------------------------------------------
-# 自检功能
-# ---------------------------------------------------------------------------
-def run_selftest() -> bool:
+def format_template_output(template: Dict[str, Any], fmt: str) -> str:
     """
-    使用内置硬编码数据执行离线自检。
-    不读取外部文件、不访问网络、不依赖当前工作目录。
+    将模板字典格式化为指定格式的字符串。
+
+    返回: 格式化后的字符串
     """
-    print("开始自检...")
+    if fmt == "json":
+        return json.dumps(template, ensure_ascii=False, indent=2)
+    elif fmt == "yaml":
+        # 简单 YAML 序列化（不依赖第三方库）
+        lines = []
+        for key, value in template.items():
+            if isinstance(value, list):
+                lines.append(f"{key}:")
+                for item in value:
+                    if isinstance(item, dict):
+                        lines.append(f"  - {_dict_to_yaml(item, '    ')}")
+                    else:
+                        lines.append(f"  - {item}")
+            elif isinstance(value, dict):
+                lines.append(f"{key}:")
+                lines.append(_dict_to_yaml(value, "  "))
+            else:
+                lines.append(f"{key}: {value}")
+        return "\n".join(lines)
+    elif fmt == "html":
+        # 生成 HTML 骨架
+        html = ["<!DOCTYPE html>", "<html>", "<head>", "<meta charset=\"UTF-8\">", "</head>", "<body>"]
+        for elem in template["static_elements"]:
+            html.append(f"  <!-- {elem['selector']} -->")
+        for block in template["repeated_blocks"]:
+            html.append(f"  <!-- 重复区块: {block['selector']} (x{block['frequency']}) -->")
+            for var in block["variables"]:
+                html.append(f"    <!-- {{{{{var}}}}} -->")
+        html.append("</body>")
+        html.append("</html>")
+        return "\n".join(html)
+    else:
+        return json.dumps(template, ensure_ascii=False, indent=2)
 
-    try:
-        # 1. 使用硬编码 HTML 生成模板
-        template = build_template(
-            source="selftest://example.com",
-            content=SELFTEST_HTML,
-            source_type="selftest",
-        )
 
-        # 2. 验证模板基本结构
-        assert "template_meta" in template, "模板缺少 template_meta"
-        assert "page" in template, "模板缺少 page"
-        assert "structure" in template, "模板缺少 structure"
-        assert "resources" in template, "模板缺少 resources"
-        assert "layout" in template, "模板缺少 layout"
-
-        # 3. 验证页面信息
-        page = template["page"]
-        assert page.get("title") == "示例站点", f"标题提取错误: {page.get('title')}"
-        assert page.get("language") == "zh-CN", f"语言提取错误: {page.get('language')}"
-
-        # 4. 验证结构信息（宽松断言）
-        structure = template["structure"]
-        assert structure["node_count"] > 0, "DOM 节点数量应为正数"
-        assert "html" in structure["tags"], "缺少 html 标签"
-        assert "body" in structure["tags"], "缺少 body 标签"
-        assert "header" in structure["tags"], "缺少 header 标签"
-        assert "footer" in structure["tags"], "缺少 footer 标签"
-        assert "site-header" in structure["classes"], "缺少 site-header 类"
-        assert "site-footer" in structure["classes"], "缺少 site-footer 类"
-        assert "main-content" in structure["ids"], "缺少 main-content id"
-
-        # 5. 验证资源提取（宽松断言）
-        resources = template["resources"]
-        assert resources["count"] >= 3, f"资源数量应>=3，实际: {resources['count']}"
-        assert any("css" in r for r in resources["links"]), "缺少 CSS 资源"
-        assert any("img" in r or "image" in r for r in resources["links"]), "缺少图片资源"
-
-        # 6. 验证文本内容
-        text_content = template["text_content"]
-        assert len(text_content) > 0, "文本内容不应为空"
-        assert any("欢迎" in t for t in text_content), "缺少预期文本内容"
-
-        # 7. 验证布局信息
-        layout = template["layout"]
-        assert layout["framework"] in ("static-html", "unknown"), f"框架检测异常: {layout['framework']}"
-        assert layout["responsive"] is True, "应检测到响应式布局"
-
-        # 8. 验证 DOM 树
-        dom_tree = structure["dom_tree"]
-        assert len(dom_tree) > 0, "DOM 树不应为空"
-        assert dom_tree[0]["tag"] == "html", "DOM 树根节点应为 html"
-
-        print("✅ 自检全部通过！")
-        return True
-
-    except AssertionError as exc:
-        print(f"❌ 自检失败: {exc}")
-        return False
-    except Exception as exc:
-        print(f"❌ 自检异常: {exc}")
-        return False
+def _dict_to_yaml(d: Dict[str, Any], indent: str) -> str:
+    """将字典转换为 YAML 行。"""
+    lines = []
+    for key, value in d.items():
+        if isinstance(value, list):
+            lines.append(f"{indent}{key}:")
+            for item in value:
+                lines.append(f"{indent}  - {item}")
+        else:
+            lines.append(f"{indent}{key}: {value}")
+    return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
-# 主入口
+# 自检函数
+# ---------------------------------------------------------------------------
+def run_selftest() -> int:
+    """
+    运行自检，验证核心功能。
+
+    返回: 退出码（0 表示成功）
+    """
+    print("[SELFTEST] 开始自检...")
+    errors = []
+
+    # 测试 1: 解析 HTML
+    print("[SELFTEST] 测试 1: HTML 解析")
+    err, parser = parse_html_content(SELFTEST_HTML)
+    if err != ERR_OK or parser is None:
+        errors.append(f"HTML 解析失败: {err}")
+    else:
+        print(f"  [PASS] 解析成功，根元素: {parser.root['tag'] if parser.root else 'None'}")
+
+    # 测试 2: 生成模板
+    print("[SELFTEST] 测试 2: 模板生成")
+    if parser:
+        template = generate_template(parser, "selftest")
+        if template["root_element"] != "html":
+            errors.append(f"根元素错误: {template['root_element']}")
+        else:
+            print(f"  [PASS] 模板生成成功，重复区块数: {len(template['repeated_blocks'])}")
+
+        # 测试 3: 重复区块识别
+        print("[SELFTEST] 测试 3: 重复区块识别")
+        product_blocks = [b for b in template["repeated_blocks"] if "product-card" in b["selector"]]
+        if not product_blocks:
+            errors.append("未识别到 product-card 重复区块")
+        else:
+            block = product_blocks[0]
+            if block["frequency"] != 3:
+                errors.append(f"product-card 频率错误: {block['frequency']}，期望 3")
+            else:
+                print(f"  [PASS] product-card 频率: {block['frequency']}")
+
+        # 测试 4: 变量提取
+        print("[SELFTEST] 测试 4: 变量提取")
+        if product_blocks:
+            variables = product_blocks[0]["variables"]
+            expected_vars = {"product-title", "product-price", "product-image"}
+            if not expected_vars.issubset(set(variables)):
+                errors.append(f"变量提取不完整: {variables}")
+            else:
+                print(f"  [PASS] 变量提取: {variables}")
+
+    # 测试 5: 静态元素识别
+    print("[SELFTEST] 测试 5: 静态元素识别")
+    if parser:
+        static_elements = parser.get_static_elements()
+        static_selectors = [e["selector"] for e in static_elements]
+        if "header.site-header" not in static_selectors:
+            errors.append(f"未识别到 header.site-header: {static_selectors}")
+        else:
+            print(f"  [PASS] 静态元素: {static_selectors}")
+
+    # 测试 6: 文件写入（dry-run）
+    print("[SELFTEST] 测试 6: 文件写入（dry-run）")
+    err, msg = write_output_file("/tmp/test_output.json", "{}", dry_run=True)
+    if err != ERR_OK:
+        errors.append(f"dry-run 写入失败: {msg}")
+    else:
+        print(f"  [PASS] {msg}")
+
+    # 测试 7: 空内容处理
+    print("[SELFTEST] 测试 7: 空内容处理")
+    err, parser_empty = parse_html_content("")
+    if err != ERR_EMPTY_CONTENT:
+        errors.append(f"空内容处理失败: {err}")
+    else:
+        print("  [PASS] 空内容正确返回错误码")
+
+    # 测试 8: 无效 HTML
+    print("[SELFTEST] 测试 8: 无效 HTML")
+    err, parser_invalid = parse_html_content("<html><body>")
+    if err != ERR_OK or parser_invalid is None:
+        errors.append(f"无效 HTML 处理失败: {err}")
+    else:
+        print("  [PASS] 无效 HTML 被容错处理")
+
+    # 测试 9: 文件写入（真实写入）
+    print("[SELFTEST] 测试 9: 文件写入（真实写入）")
+    test_file = Path("/tmp/test_output_real.json")
+    err, msg = write_output_file(str(test_file), "{}", dry_run=False)
+    if err != ERR_OK:
+        errors.append(f"真实写入失败: {msg}")
+    elif not test_file.exists():
+        errors.append("真实写入后文件不存在")
+    else:
+        print(f"  [PASS] {msg}")
+
+    # 测试 10: 多编码读取
+    print("[SELFTEST] 测试 10: 多编码读取")
+    test_gbk_file = Path("/tmp/test_gbk.txt")
+    try:
+        test_gbk_file.write_text("测试中文", encoding="gbk")
+        content = read_text_safe(test_gbk_file)
+        if content != "测试中文":
+            errors.append(f"GBK 读取失败: {content}")
+        else:
+            print("  [PASS] GBK 编码读取成功")
+    except Exception as e:
+        errors.append(f"GBK 测试失败: {str(e)}")
+
+    # 汇总
+    if errors:
+        print(f"\n[SELFTEST] 失败: {len(errors)} 个错误")
+        for e in errors:
+            print(f"  - {e}")
+        return 1
+    else:
+        print("\n[SELFTEST] 全部通过")
+        return 0
+
+
+# ---------------------------------------------------------------------------
+# 主函数
 # ---------------------------------------------------------------------------
 def main() -> int:
-    """命令行主入口。"""
+    """主入口函数。"""
     parser = argparse.ArgumentParser(
-        description="站点克隆模板生成器 - 将网站或 HTML 文件转换为结构化克隆模板",
-        epilog="示例: python main.py --url https://example.com -o template.json",
+        description="网页结构萃取 模板生成器 - 将网页解析为结构化模板",
+        epilog="示例: python run.py --url https://example.com --output template.json"
     )
-    parser.add_argument("--url", type=str, help="目标网站 URL")
+    parser.add_argument("--url", type=str, help="目标网页 URL")
     parser.add_argument("--file", type=str, help="本地 HTML 文件路径")
-    parser.add_argument("-o", "--output", type=str, default="template.json", help="输出 JSON 文件路径")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--version", action="version", version="%(prog)s 1.0.3")
+    parser.add_argument("--html", type=str, help="直接传入 HTML 代码片段")
+    parser.add_argument("--output", type=str, default=".", help="输出目录或文件路径（默认: 当前目录）")
+    parser.add_argument("--format", type=str, choices=["json", "yaml", "html"], default="json", help="模板输出格式（默认: json）")
+    parser.add_argument("--verbose", action="store_true", help="输出详细日志")
+    parser.add_argument("--dry-run", action="store_true", help="预演模式，不实际写盘")
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+    parser.add_argument("--version", action="version", version="%(prog)s 2.0.0")
 
     args = parser.parse_args()
 
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+
     # 自检模式
     if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
+        return run_selftest()
 
-    # 参数校验
-    if not args.url and not args.file:
-        print(f"错误 [{ERR_INVALID_INPUT}]: 必须指定 --url 或 --file 参数")
-        parser.print_help()
+    # 输入校验
+    if not args.url and not args.file and not args.html:
+        print("错误: 必须提供 --url、--file 或 --html 参数之一", file=sys.stderr)
         return 1
 
-    if args.url and args.file:
-        print(f"错误 [{ERR_INVALID_INPUT}]: --url 和 --file 不能同时使用")
+    # 获取内容
+    content = ""
+    source_name = ""
+    if args.url:
+        print(f"[INFO] 开始解析 URL: {args.url}")
+        err, content = fetch_url_content(args.url)
+        if err != ERR_OK:
+            print(f"错误 [{err}]: {content}", file=sys.stderr)
+            return 1
+        source_name = urllib.parse.urlparse(args.url).netloc.replace(".", "_")
+    elif args.file:
+        print(f"[INFO] 开始解析本地文件: {args.file}")
+        err, content = read_local_file(args.file)
+        if err != ERR_OK:
+            print(f"错误 [{err}]: {content}", file=sys.stderr)
+            return 1
+        source_name = Path(args.file).stem
+    elif args.html:
+        print("[INFO] 开始解析 HTML 代码片段")
+        content = args.html
+        source_name = "html_snippet"
+
+    if args.verbose:
+        print(f"[VERBOSE] 内容长度: {len(content)} 字节")
+
+    # 解析 HTML
+    err, extractor = parse_html_content(content)
+    if err != ERR_OK or extractor is None:
+        print(f"错误 [{err}]: HTML 解析失败", file=sys.stderr)
         return 1
 
-    try:
-        # 获取输入内容
-        if args.url:
-            print(f"正在获取 URL: {args.url}")
-            content = fetch_url_content(args.url)
-            source_type = "url"
-            source = args.url
-        else:
-            print(f"正在读取文件: {args.file}")
-            content = read_file_content(args.file)
-            source_type = "file"
-            source = args.file
+    if args.verbose:
+        print(f"[VERBOSE] DOM 解析完成，根元素: {extractor.root['tag'] if extractor.root else 'None'}")
 
-        # 生成模板
-        print("正在生成模板...")
-        template = build_template(source=source, content=content, source_type=source_type)
+    # 生成模板
+    template = generate_template(extractor, source_name)
+    if args.verbose:
+        print(f"[VERBOSE] 识别到 {len(template['repeated_blocks'])} 个重复区块")
+        print(f"[VERBOSE] 识别到 {len(template['static_elements'])} 个静态元素")
 
-        # 保存输出
-        save_template(template, args.output)
-        print(f"✅ 模板已生成: {args.output}")
+    # 格式化输出
+    template_str = format_template_output(template, args.format)
+    structure_doc = generate_structure_doc(extractor, template)
 
-        # 输出摘要
-        structure = template["structure"]
-        resources = template["resources"]
-        print(f"   节点数: {structure['node_count']}")
-        print(f"   标签数: {len(structure['tags'])}")
-        print(f"   类名数: {len(structure['classes'])}")
-        print(f"   资源数: {resources['count']}")
-        print(f"   布局框架: {template['layout']['framework']}")
-        print(f"   响应式: {'是' if template['layout']['responsive'] else '否'}")
+    # 确定输出路径
+    output_path = Path(args.output)
+    if output_path.suffix:  # 用户指定了文件名
+        template_file = output_path
+        structure_file = output_path.with_name(output_path.stem + "_structure.md")
+    else:  # 用户指定了目录
+        output_path.mkdir(parents=True, exist_ok=True)
+        template_file = output_path / f"template.{args.format}"
+        structure_file = output_path / "structure.md"
 
-        return 0
+    # 写入文件
+    if args.dry_run:
+        print("[DRY-RUN] 预演模式，不实际写盘")
+        err, msg = write_output_file(str(template_file), template_str, dry_run=True)
+        print(msg)
+        err, msg = write_output_file(str(structure_file), structure_doc, dry_run=True)
+        print(msg)
+    else:
+        err, msg = write_output_file(str(template_file), template_str)
+        if err != ERR_OK:
+            print(f"错误 [{err}]: {msg}", file=sys.stderr)
+            return 1
+        print(f"[INFO] {msg}")
 
-    except FileNotFoundError as exc:
-        print(f"错误: {exc}")
-        return 1
-    except RuntimeError as exc:
-        print(f"错误: {exc}")
-        return 1
-    except Exception as exc:
-        print(f"错误 [{ERR_INTERNAL}]: 发生未预期的异常: {exc}")
-        return 1
+        err, msg = write_output_file(str(structure_file), structure_doc)
+        if err != ERR_OK:
+            print(f"错误 [{err}]: {msg}", file=sys.stderr)
+            return 1
+        print(f"[INFO] {msg}")
+
+    print("[INFO] 处理完成")
+    return 0
 
 
 if __name__ == "__main__":
