@@ -1,182 +1,144 @@
 #!/usr/bin/env python3
-# -*- coding: utf-8 -*-
-"""文本处理工具 - 支持编码检测、文本清洗和Diff生成"""
-
+"""AI 桌面客户端构建器 - 主脚本"""
 import argparse
 import sys
-import re
-import difflib
-import json
-import os
-from typing import List, Optional, Tuple, Dict, Any
+from pathlib import Path
 
-def detect_encoding(text: str) -> str:
-    """检测文本编码类型"""
-    if text is None:
-        return "unknown"
-    
-    # 检查是否包含中文字符
-    if re.search(r'[\u4e00-\u9fff]', text):
-        return "utf-8"
-    
-    # 检查是否包含其他Unicode字符
-    if re.search(r'[^\x00-\x7f]', text):
-        return "unicode"
-    
-    # 检查是否包含特殊字符
-    if re.search(r'[\x80-\xff]', text):
-        return "latin-1"
-    
-    return "ascii"
 
-def clean_text(text: str) -> str:
-    """清理文本：去除多余空白和特殊字符"""
-    if text is None:
-        return ""
-    
-    # 去除首尾空白
-    text = text.strip()
-    
-    # 将多个连续空白替换为单个空格
-    text = re.sub(r'\s+', ' ', text)
-    
-    # 去除控制字符
-    text = ''.join(char for char in text if ord(char) >= 32 or char in '\n\t')
-    
-    return text
-
-def generate_diff(text1: str, text2: str) -> str:
-    """生成两个文本的差异"""
-    if text1 is None:
-        text1 = ""
-    if text2 is None:
-        text2 = ""
-    
-    lines1 = text1.splitlines()
-    lines2 = text2.splitlines()
-    
-    diff = difflib.unified_diff(lines1, lines2, lineterm='')
-    return '\n'.join(diff)
-
-def process_text(text: str, operation: str = "clean") -> Dict[str, Any]:
-    """处理文本并返回结果"""
-    if text is None:
-        text = ""
-    
-    result = {
-        "original": text,
-        "encoding": detect_encoding(text),
-        "length": len(text),
-        "operation": operation
-    }
-    
-    if operation == "clean":
-        result["result"] = clean_text(text)
-    elif operation == "upper":
-        result["result"] = text.upper()
-    elif operation == "lower":
-        result["result"] = text.lower()
-    elif operation == "strip":
-        result["result"] = text.strip()
-    else:
-        result["result"] = text
-    
-    return result
-
-def process_batch(texts: List[str], operation: str = "clean") -> List[Dict[str, Any]]:
-    """批量处理文本"""
-    if texts is None:
-        return []
-    
-    results = []
-    for text in texts:
-        results.append(process_text(text, operation))
-    
-    return results
-
-def run_selftest() -> bool:
-    """运行自测"""
-    tests = [
-        ("空输入", lambda: process_text("")["length"] == 0),
-        ("None输入", lambda: process_text(None)["length"] == 0),
-        ("英文文本", lambda: process_text("Hello World")["encoding"] == "ascii"),
-        ("超长输入", lambda: process_text("x" * 10000)["length"] >= 10000),
-        ("中文标点", lambda: detect_encoding("你好，世界！") == "utf-8"),
-        ("混合编码", lambda: detect_encoding("Hello 你好 World") == "utf-8"),
-        ("批量处理", lambda: len(process_batch(["a", "b", "c"])) == 3),
-        ("中文编码", lambda: detect_encoding("中文测试") == "utf-8"),
-        ("输出格式", lambda: isinstance(process_text("test"), dict)),
-        ("Diff生成", lambda: len(generate_diff("line1\nline2", "line1\nline3")) > 0),
-        ("错误码", lambda: process_text("")["operation"] == "clean")
-    ]
-    
-    passed = 0
-    failed = 0
-    
-    print("[RUN] 开始自检...")
-    
-    for name, test_func in tests:
+def read_text_safe(path):
+    """安全读取文本文件，支持多编码降级"""
+    for enc in ("utf-8", "gbk", "gb18030"):
         try:
-            if test_func():
-                print(f"[PASS] {name}")
-                passed += 1
-            else:
-                print(f"[FAIL] {name}: 断言失败")
-                failed += 1
-        except Exception as e:
-            print(f"[FAIL] {name}: {str(e)}")
-            failed += 1
-    
-    print(f"\n自检完成: {passed} 通过, {failed} 失败")
-    
-    return failed == 0
+            with open(path, encoding=enc) as f:
+                return f.read()
+        except UnicodeDecodeError:
+            continue
+        except OSError as e:
+            print(f"[WARN] 读取 {path} 失败，降级为空: {e}", file=sys.stderr)
+            return ""
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+
+def load_rows(path):
+    """加载数据行，带异常降级"""
+    try:
+        content = read_text_safe(path)
+        rows = []
+        for line in content.splitlines():
+            line = line.strip()
+            if line:
+                rows.append(line)
+        return rows
+    except Exception as e:
+        print(f"[WARN] 解析 {path} 失败，降级为空集: {e}", file=sys.stderr)
+        return []
+
+
+def save(path, data, dry_run=False):
+    """写入文件，支持 dry-run 预览"""
+    if not dry_run:
+        tmp = Path(str(path) + ".tmp")
+        tmp.write_text(data, encoding="utf-8")
+        tmp.replace(path)
+        print(f"[写入] {path}")
+        return True
+    print(f"[dry-run] 将写入 {path}（{len(data)} 字节），未落盘")
+    return False
+
+
+def _selftest():
+    """自测函数：验证核心功能"""
+    import tempfile
+    import os
+
+    # 测试数据
+    test_content = "line1\nline2\nline3\n"
+    test_path = Path(tempfile.mktemp(suffix=".txt"))
+
+    # 测试 read_text_safe
+    test_path.write_text(test_content, encoding="utf-8")
+    assert read_text_safe(test_path) == test_content, "read_text_safe 读取失败"
+
+    # 测试 load_rows
+    rows = load_rows(test_path)
+    assert len(rows) == 3, f"load_rows 应返回 3 行，实际 {len(rows)}"
+    assert rows[0] == "line1", "第一行内容错误"
+    assert rows[1] == "line2", "第二行内容错误"
+    assert rows[2] == "line3", "第三行内容错误"
+
+    # 测试 save 的 dry-run 模式
+    save_path = Path(tempfile.mktemp(suffix=".txt"))
+    result = save(save_path, "test data", dry_run=True)
+    assert result is False, "dry-run 应返回 False"
+    assert not save_path.exists(), "dry-run 不应创建文件"
+
+    # 测试 save 的正常写入
+    result = save(save_path, "test data", dry_run=False)
+    assert result is True, "正常写入应返回 True"
+    assert save_path.exists(), "正常写入应创建文件"
+    assert save_path.read_text(encoding="utf-8") == "test data", "写入内容不匹配"
+
+    # 测试异常降级
+    nonexist_path = Path("/nonexistent/path/file.txt")
+    assert load_rows(nonexist_path) == [], "不存在的文件应返回空列表"
+
+    # 清理测试文件
+    for p in [test_path, save_path]:
+        if p.exists():
+            p.unlink()
+
+    print("[selftest] 全部断言通过")
+    return 0
+
 
 def main():
-    parser = argparse.ArgumentParser(description="文本处理工具")
-    parser.add_argument("--selftest", action="store_true", help="运行自测")
-    parser.add_argument("--text", type=str, help="要处理的文本")
-    parser.add_argument("--operation", type=str, default="clean", 
-                       choices=["clean", "upper", "lower", "strip"],
-                       help="操作类型")
-    parser.add_argument("--batch", type=str, help="批量处理，用逗号分隔")
-    parser.add_argument("--diff", nargs=2, metavar=("TEXT1", "TEXT2"), 
-                       help="生成两个文本的差异")
-    parser.add_argument("--json", action="store_true", help="输出JSON格式")
-    
-    args = parser.parse_args()
-    
+    ap = argparse.ArgumentParser(description="AI 桌面客户端构建器")
+    ap.add_argument("--input", help="输入文件路径")
+    ap.add_argument("--price", type=float, help="房屋总价（万元）")
+    ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--verbose", action="store_true")
+    args = ap.parse_args()
+
     if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-    
-    if args.diff:
-        diff = generate_diff(args.diff[0], args.diff[1])
-        print(diff)
-        return
-    
-    if args.batch:
-        texts = args.batch.split(",")
-        results = process_batch(texts, args.operation)
-    elif args.text is not None:
-        results = process_text(args.text, args.operation)
+        return _selftest()
+
+    if args.price is None:
+        ap.error("--price 为必填参数")
+
+    # 业务逻辑
+    if args.input:
+        rows = load_rows(args.input)
+        changed_items = []
+        skipped = 0
+
+        for idx, row in enumerate(rows):
+            # 模拟处理：计算价格相关指标
+            try:
+                price = args.price
+                before = row
+                after = f"{row} (价格: {price}万)"
+                changed_items.append({"name": row, "before": before, "after": after})
+
+                if args.verbose:
+                    print(f"[明细] {idx}. {row}: {before} -> {after}")
+            except Exception as e:
+                skipped += 1
+                print(f"[WARN] 处理第 {idx} 行失败: {e}", file=sys.stderr)
+
+        print(f"[汇总] changed={len(changed_items)} 项，skipped={skipped} 项")
+
+        if not args.dry_run:
+            output_path = Path("output.txt")
+            output_data = "\n".join([item["after"] for item in changed_items])
+            save(output_path, output_data, dry_run=False)
     else:
-        # 从stdin读取
-        text = sys.stdin.read()
-        results = process_text(text, args.operation)
-    
-    if args.json:
-        print(json.dumps(results, ensure_ascii=False, indent=2))
-    else:
-        if isinstance(results, list):
-            for r in results:
-                print(f"原始: {r['original'][:50]}...")
-                print(f"结果: {r['result'][:50]}...")
-                print(f"编码: {r['encoding']}, 长度: {r['length']}")
-                print("---")
-        else:
-            print(f"原始: {results['original'][:50]}...")
-            print(f"结果: {results['result'][:50]}...")
-            print(f"编码: {results['encoding']}, 长度: {results['length']}")
+        print("[INFO] 未提供输入文件，仅演示参数校验")
+        print(f"[INFO] 价格: {args.price} 万元")
+
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
