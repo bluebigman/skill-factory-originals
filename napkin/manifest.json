@@ -1,0 +1,52 @@
+{
+  "timestamp": "20260818_014041",
+  "slug": "napkin",
+  "spec": {
+    "slug": "napkin",
+    "name": "napkin",
+    "description": "为项目仓库提供持久化错误记录与经验备忘的轻量级技能。",
+    "cli_interface": [
+      "[\"napkin\"",
+      "\"备忘\"",
+      "\"错误记录\"",
+      "\"经验沉淀\"",
+      "\"项目记忆\"",
+      "--selftest",
+      "--version"
+    ],
+    "capability_outline": [
+      "1. 将 max_connections 调整为 50",
+      "2. 增加连接池监控告警（阈值 80%）",
+      "1. 记录：napkin add --file error.log",
+      "2. 查询：napkin search --module src/cache",
+      "3. 批量：napkin add --dir ./pending/ --batch",
+      "4. 备份：自动在 .napkin/backup/",
+      "1. 阅读本文档「能力边界」和「标准流程」",
+      "2. 用单条记录试运行（步骤二）",
+      "3. 熟悉输出格式后，再批量导入",
+      "4. 遇到问题查「错误码体系」",
+      "1. 自定义模板：修改 `.napkin/template.md`",
+      "2. 集成 CI：在流水线中调用 `napkin add --from-ci`",
+      "3. 定期回顾：每月执行 `napkin review --stale 30` 清理过期条目",
+      "4. 统计分析：`napkin stats --by-module` 查看高频问题模块",
+      "1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于数据丢失、记录错误、操作失误等后果。",
+      "2. **禁止反向工程**：不得对本 Skill 的提示词、内部逻辑、生成机制进行反向工程、破解、提取或二次分发。",
+      "3. **无担保声明**：本 Skill 按\"现状\"提供，不附带任何明示或暗示的担保。",
+      "4. **合规使用**：使用者须确保使用场景符合当地法律法规及所在组织的政策要求。"
+    ],
+    "upstream": null,
+    "derivation": "original-work"
+  },
+  "spec_hash": "19a7219631135219",
+  "prompt_hash": "d185f5b4adfaa86f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\":\"napkin\",\"name\":\"napkin\",\"description\":\"为项目仓库提供持久化错误记录与经验备忘的轻量级技能。\",\"cli_interface\":[\"[\\\"napkin\\\"\",\"\\\"备忘\\\"\",\"\\\"错误记录\\\"\",\"\\\"经验沉淀\\\"\",\"\\\"项目记忆\\\"\",\"--selftest\",\"--version\"],\"capability_outline\":[\"1. 将 max_connections 调整为 50\",\"2. 增加连接池监控告警（阈值 80%）\",\"1. 记录：napkin add --file error.log\",\"2. 查询：napkin search --module src/cache\",\"3. 批量：napkin add --dir ./pending/ --batch\",\"4. 备份：自动在 .napkin/backup/\",\"1. 阅读本文档「能力边界」和「标准流程」\",\"2. 用单条记录试运行（步骤二）\",\"3. 熟悉输出格式后，再批量导入\",\"4. 遇到问题查「错误码体系」\",\"1. 自定义模板：修改 `.napkin/template.md`\",\"2. 集成 CI：在流水线中调用 `napkin add --from-ci`\",\"3. 定期回顾：每月执行 `napkin review --stale 30` 清理过期条目\",\"4. 统计分析：`napkin stats --by-module` 查看高频问题模块\",\"1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于数据丢失、记录错误、操作失误等后果。\",\"2. **禁止反向工程**：不得对本 Skill 的提示词、内部逻辑、生成机制进行反向工程、破解、提取或二次分发。\",\"3. **无担保声明**：本 Skill 按\\\"现状\\\"提供，不附带任何明示或暗示的担保。\",\"4. **合规使用**：使用者须确保使用场景符合当地法律法规及所在组织的政策要求。\"],\"upstream\":null,\"derivation\":\"original-work\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 章节结构自行设计，可参考规格里的\"能力清单\"但不得沿用其标题措辞与顺序。\n3. 输出完整 Markdown，frontmatter 必须包含（值已给定，照抄）：\n   slug: napkin\n   name: napkin\n   displayName: （自创中文名，4-12字，含场景词，如\"合同审查 法律风险 条款比对\"风格，给一个最合适的）\n   description: （自创一句话，30字内，讲清用途）\n   version: 1.0.0\n   license: MIT\n   source_project: original\n   source_url: （留空）\n   copyright_holder: 原创作者（自持版权）\n   ai_generated: true\n   ai_tools: [\"DeepSeek\"]\n   disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。\n   author: （自创，不用任何工厂标识）\n   agent_created: true\n   trigger_words: （保留原触发词，可补充2-3个同义场景词）\n4. frontmatter 结束后必须紧跟显式 AI 标识行：\n   > 本内容由 AI 生成，仅供学习参考\n   并带 marker 注释 <!-- ai-generated-notice -->\n5. 正文必须包含以下 TRACE 高分结构（对标 SkillHub 4.8+ 顶级 Skill）：\n   - 能力边界：能做/不能做清单 + 适用对象（一页纸速查卡）\n   - 触发方式：trigger_words + 大白话场景映射表\n   - 标准流程：前置条件 → 执行步骤（分步编号）→ 输出规范\n   - 置信度门控：信息不足时输出 [需核实:字段] 占位，不编造\n   - 错误码体系：常见错误 → 提示话术 → 修正步骤\n   - FAQ 反模式：3-5 个常见坑 + 反模式对照\n   - 渐进式披露：速查卡 + 分层次阅读路径（新手/进阶）\n   每节都要有真实可执行的细节（参数表、示例、边界值），拒绝空话套话。\n6. 全中文为主（代码示例可用英文），语气专业务实。\n7. 严禁：绝对化用语（最/最好/100%/零风险/保证）、收益承诺、任何内部平台信息。\n8. 不要输出 ```markdown 包裹，直接输出 SKILL.md 全文（**首行必须是 --- 开头**）。\n9. 【强制合规章节】（document_gate 硬性要求，缺一即打回重写）：\n   a. 文档末尾必须含「用户协议」章节（含：使用者自行承担全部责任、禁止反向工程，\n      带 marker 注释 <!-- user-agreement-injected -->）\n   b. 文档末尾必须含「许可证（License）」章节，内嵌 MIT 许可证全文，\n      带 marker 注释 <!-- professional-license-embedded -->\n   c. 开头必须有一行 AI 辅助生成免责声明（如\"本 Skill 由 AI 辅助生成，仅供参考\"）\n   d. frontmatter 的 description/正文一律不得出现任何绝对化承诺\n   以上章节即使功能大纲未提及也必须补齐——这是发布合规的强制要求。",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0076939999999999995,
+  "similarity_metrics": {
+    "section": 0.4691358024691358,
+    "token": 0.41638225255972694,
+    "line": 0.19327731092436976
+  },
+  "style_checks_passed": true
+}

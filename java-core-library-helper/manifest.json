@@ -1,0 +1,53 @@
+{
+  "timestamp": "20260818_015552",
+  "slug": "java-core-library-helper",
+  "spec": {
+    "slug": "java-core-library-helper",
+    "name": "java-core-library-helper",
+    "description": "Guava 与 Java 核心库实用指南，覆盖集合、缓存、并发与函数式编程。",
+    "cli_interface": [
+      "[\"java-core-library-helper\"",
+      "\"Guava\"",
+      "\"Java集合操作\"",
+      "\"Java缓存\"",
+      "\"Java并发工具\"",
+      "--selftest",
+      "--version"
+    ],
+    "capability_outline": [
+      "- 输入应为**具体的代码片段或需求描述**，而非泛泛的\"讲讲 Guava\"",
+      "1. **确认 JDK 版本**：若未说明，默认按 JDK 8 语法编写示例，并输出 `[需核实:JDK版本]` 提示。",
+      "2. **确认 Guava 版本**：若未指定，默认按 33.x 编写示例，并标注 `[需核实:版本兼容性]`。",
+      "3. **确认依赖已引入**：若用户未提供 `pom.xml` 或 `build.gradle` 片段，默认假设依赖已配置。",
+      "1. 判断需求是**不可变集合**还是 **Multimap**。",
+      "2. 若为不可变集合，参考 4.1.1 的创建方式。",
+      "3. 若为 Multimap，参考 4.1.2 的增删查操作。",
+      "4. 将示例代码粘贴到项目中，替换变量名与业务逻辑。",
+      "1. 判断是否需要**自动加载**（LoadingCache）还是**手动管理**（Cache）。",
+      "2. 参考 4.2.1 配置 CacheLoader 与过期策略。",
+      "3. 若需同时设置写入过期与刷新，参考 4.2.2 的参数组合。",
+      "4. 运行示例，观察缓存命中与过期行为。",
+      "1. 判断是**限流**（RateLimiter）还是**异步回调**（ListenableFuture）。",
+      "2. 限流场景参考 4.3.1，设置 QPS 并调用 acquire/tryAcquire。",
+      "3. 异步场景参考 4.3.2，使用 addCallback 处理成功/失败。",
+      "4. 若涉及更复杂的锁或监控，查阅官方文档（本指南不展开）。",
+      "1. **未覆盖的方法**：若用户询问的方法不在本指南中，输出 `[需核实:方法名]` 并建议查阅官方 Javadoc。",
+      "2. **版本差异**：若用户未指定 Guava 版本，默认按 33.x 编写，并标注 `[需核实:版本兼容性]`。",
+      "3. **JDK 版本**：若用户未说明 JDK 版本，默认按 JDK 8 语法编写，并提示 `[需核实:JDK版本]`。"
+    ],
+    "upstream": null,
+    "derivation": "original-work"
+  },
+  "spec_hash": "17a103f514e8a646",
+  "prompt_hash": "e3449e6b3059f326",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\":\"java-core-library-helper\",\"name\":\"java-core-library-helper\",\"description\":\"Guava 与 Java 核心库实用指南，覆盖集合、缓存、并发与函数式编程。\",\"cli_interface\":[\"[\\\"java-core-library-helper\\\"\",\"\\\"Guava\\\"\",\"\\\"Java集合操作\\\"\",\"\\\"Java缓存\\\"\",\"\\\"Java并发工具\\\"\",\"--selftest\",\"--version\"],\"capability_outline\":[\"- 输入应为**具体的代码片段或需求描述**，而非泛泛的\\\"讲讲 Guava\\\"\",\"1. **确认 JDK 版本**：若未说明，默认按 JDK 8 语法编写示例，并输出 `[需核实:JDK版本]` 提示。\",\"2. **确认 Guava 版本**：若未指定，默认按 33.x 编写示例，并标注 `[需核实:版本兼容性]`。\",\"3. **确认依赖已引入**：若用户未提供 `pom.xml` 或 `build.gradle` 片段，默认假设依赖已配置。\",\"1. 判断需求是**不可变集合**还是 **Multimap**。\",\"2. 若为不可变集合，参考 4.1.1 的创建方式。\",\"3. 若为 Multimap，参考 4.1.2 的增删查操作。\",\"4. 将示例代码粘贴到项目中，替换变量名与业务逻辑。\",\"1. 判断是否需要**自动加载**（LoadingCache）还是**手动管理**（Cache）。\",\"2. 参考 4.2.1 配置 CacheLoader 与过期策略。\",\"3. 若需同时设置写入过期与刷新，参考 4.2.2 的参数组合。\",\"4. 运行示例，观察缓存命中与过期行为。\",\"1. 判断是**限流**（RateLimiter）还是**异步回调**（ListenableFuture）。\",\"2. 限流场景参考 4.3.1，设置 QPS 并调用 acquire/tryAcquire。\",\"3. 异步场景参考 4.3.2，使用 addCallback 处理成功/失败。\",\"4. 若涉及更复杂的锁或监控，查阅官方文档（本指南不展开）。\",\"1. **未覆盖的方法**：若用户询问的方法不在本指南中，输出 `[需核实:方法名]` 并建议查阅官方 Javadoc。\",\"2. **版本差异**：若用户未指定 Guava 版本，默认按 33.x 编写，并标注 `[需核实:版本兼容性]`。\",\"3. **JDK 版本**：若用户未说明 JDK 版本，默认按 JDK 8 语法编写，并提示 `[需核实:JDK版本]`。\"],\"upstream\":null,\"derivation\":\"original-work\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 章节结构自行设计，可参考规格里的\"能力清单\"但不得沿用其标题措辞与顺序。\n3. 输出完整 Markdown，frontmatter 必须包含（值已给定，照抄）：\n   slug: java-core-library-helper\n   name: java-core-library-helper\n   displayName: （自创中文名，4-12字，含场景词，如\"合同审查 法律风险 条款比对\"风格，给一个最合适的）\n   description: （自创一句话，30字内，讲清用途）\n   version: 1.0.0\n   license: MIT\n   source_project: original\n   source_url: （留空）\n   copyright_holder: 原创作者（自持版权）\n   ai_generated: true\n   ai_tools: [\"DeepSeek\"]\n   disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。\n   author: （自创，不用任何工厂标识）\n   agent_created: true\n   trigger_words: （保留原触发词，可补充2-3个同义场景词）\n4. frontmatter 结束后必须紧跟显式 AI 标识行：\n   > 本内容由 AI 生成，仅供学习参考\n   并带 marker 注释 <!-- ai-generated-notice -->\n5. 正文必须包含以下 TRACE 高分结构（对标 SkillHub 4.8+ 顶级 Skill）：\n   - 能力边界：能做/不能做清单 + 适用对象（一页纸速查卡）\n   - 触发方式：trigger_words + 大白话场景映射表\n   - 标准流程：前置条件 → 执行步骤（分步编号）→ 输出规范\n   - 置信度门控：信息不足时输出 [需核实:字段] 占位，不编造\n   - 错误码体系：常见错误 → 提示话术 → 修正步骤\n   - FAQ 反模式：3-5 个常见坑 + 反模式对照\n   - 渐进式披露：速查卡 + 分层次阅读路径（新手/进阶）\n   每节都要有真实可执行的细节（参数表、示例、边界值），拒绝空话套话。\n6. 全中文为主（代码示例可用英文），语气专业务实。\n7. 严禁：绝对化用语（最/最好/100%/零风险/保证）、收益承诺、任何内部平台信息。\n8. 不要输出 ```markdown 包裹，直接输出 SKILL.md 全文（**首行必须是 --- 开头**）。\n9. 【强制合规章节】（document_gate 硬性要求，缺一即打回重写）：\n   a. 文档末尾必须含「用户协议」章节（含：使用者自行承担全部责任、禁止反向工程，\n      带 marker 注释 <!-- user-agreement-injected -->）\n   b. 文档末尾必须含「许可证（License）」章节，内嵌 MIT 许可证全文，\n      带 marker 注释 <!-- professional-license-embedded -->\n   c. 开头必须有一行 AI 辅助生成免责声明（如\"本 Skill 由 AI 辅助生成，仅供参考\"）\n   d. frontmatter 的 description/正文一律不得出现任何绝对化承诺\n   以上章节即使功能大纲未提及也必须补齐——这是发布合规的强制要求。",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.009149,
+  "similarity_metrics": {
+    "section": 0.11320754716981132,
+    "token": 0.27466774063632704,
+    "line": 0.09565217391304348
+  },
+  "style_checks_passed": true
+}
