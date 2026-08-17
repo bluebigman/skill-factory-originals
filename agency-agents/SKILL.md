@@ -1,303 +1,318 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: agency-agents
 name: agency-agents
-displayName: 多角色任务编排 结构化交付 批量处理
-description: 将任意文本输入解析为结构化数据，支持批量处理、置信度标注与多格式输出。
-version: 1.1.1
-rules_version: cpr-20260812-n376
+displayName: 文本解析 多角色编排 结构化交付
+description: 将任意文本解析为结构化数据，支持批量处理与置信度标注。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agency-agents
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge Studio
+author: LingDataWorks
 agent_created: true
-trigger_words: ["agency-agents", "多角色编排", "结构化交付", "批量解析", "任务编排"]
+trigger_words: ["agency-agents", "多角色编排", "结构化交付", "批量解析", "任务编排", "文本转结构化", "数据抽取"]
+---
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
----
+# agency-agents — 文本结构化解析与多角色编排 Skill
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+## 一、能力边界（一页纸速查卡）
 
+### 1.1 工具能做什么
 
-# agency-agents — 多角色任务编排与结构化交付工具
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 文本转结构化 | 将非结构化文本按规则抽取为 JSON 字段 | 从"张三，13800138000，北京"抽取姓名/电话/城市 |
+| 批量处理 | 每行一条记录，一次处理多行 | 1000 行客户信息批量解析 |
+| 置信度标注 | 每条记录输出 `confidence` 分数（0~1） | 0.85 表示高置信度 |
+| 多格式输出 | 默认 JSON，可扩展 CSV/XML | `result.json` / `result.csv` |
+| 规则可配置 | 通过 `rules.json` 自定义解析规则 | 新增正则表达式或关键词列表 |
+| 自检模式 | `--selftest` 验证规则正确性 | 修改规则后运行自检 |
 
-## 一、能力边界：一页纸速查卡
+### 1.2 工具不能做什么
 
-### 1.1 工具定位
-
-`agency-agents` 是一个命令行工具，核心功能是将**自由文本输入**转换为**结构化数据**。它模拟多角色协作流程（如“提取→分类→校验→输出”），但实际执行时完全依赖本地规则引擎，不调用外部 AI 服务。
-
-### 1.2 能做 / 不能做清单
-
-| 维度 | ✅ 能做 | ❌ 不能做 |
-|------|---------|-----------|
-| **输入处理** | 读取文本文件，每行视为一条独立记录 | 不支持 PDF、Word、扫描件等二进制格式 |
-| **解析能力** | 基于正则表达式与关键词规则，提取字段、打标签、分类 | 不执行语义理解、情感分析、上下文推理 |
-| **批量操作** | 单次运行可处理数千行记录，输出结果与输入行一一对应 | 不维护跨批次状态，每次运行相互独立 |
-| **置信度标注** | 每条输出记录附带 `confidence` 字段（0.0~1.0） | 置信度仅反映规则匹配强度，不代表真实准确率 |
-| **输出格式** | 支持 JSON、CSV、JSONL 三种格式 | 不支持 XML、YAML 或自定义模板 |
-| **扩展性** | 可通过修改规则文件（`rules.json`）调整解析逻辑 | 不支持插件机制或运行时动态加载代码 |
+| 限制项 | 说明 |
+|--------|------|
+| 非标准文本处理 | 输入文本严重偏离规则时，可能输出低置信度或字段缺失 |
+| 语义理解 | 不进行自然语言语义分析，仅基于规则匹配 |
+| 实时学习 | 不会自动从错误中学习，需手动调整规则 |
+| 跨语言支持 | 默认仅支持中文与英文，其他语言需自定义规则 |
 
 ### 1.3 适用对象
 
-- **数据清洗人员**：需要将杂乱的日志、评论、表单文本快速转为表格数据。
-- **自动化流程开发者**：在 CI/CD 管道中嵌入文本预处理步骤。
-- **业务分析师**：对批量反馈文本进行初步分类与关键词提取。
-- **教育/研究用途**：演示规则引擎与结构化输出的基本概念。
-
-### 1.4 已知限制
-
-- 规则匹配基于字面模式，对同义词、俚语、拼写错误不敏感。
-- 输出准确性依赖输入文本的规范性，非标准文本可能导致低置信度或字段缺失。
-- 工具不提供图形界面，所有交互通过命令行完成。
+- 需要将大量文本记录转为结构化数据的运营人员
+- 需要批量清洗数据的分析师
+- 需要将文本输入接入自动化管道的开发者
 
 ---
 
-## 二、触发方式与场景映射
+## 二、触发方式
 
 ### 2.1 触发词
 
-- **主触发词**：`agency-agents`
-- **同义场景词**：`多角色编排`、`结构化交付`、`批量解析`、`任务编排`
+| 触发词 | 场景说明 |
+|--------|----------|
+| `agency-agents` | 直接调用工具主命令 |
+| `多角色编排` | 需要将文本按不同角色/维度拆分解析时 |
+| `结构化交付` | 需要输出 JSON 等结构化格式时 |
+| `批量解析` | 处理多行文本记录时 |
+| `任务编排` | 将解析任务嵌入自动化流程时 |
+| `文本转结构化` | 通用场景，将自由文本转为字段 |
+| `数据抽取` | 从文本中提取指定信息时 |
 
 ### 2.2 场景映射表
 
-| 用户说（大白话） | 实际执行动作 | 对应命令 |
-|------------------|--------------|----------|
-| “帮我把这些评论按正面/负面分类” | 运行工具，使用内置情感词典规则 | `python run.py --input comments.txt --task classify` |
-| “提取所有订单号和时间戳” | 运行工具，使用正则提取规则 | `python run.py --input logs.txt --task extract --fields order_id,timestamp` |
-| “把结果转成 CSV 给我” | 运行工具，指定输出格式 | `python run.py --input data.txt --output result.csv --format csv` |
-| “测试一下工具是否正常” | 运行自检程序 | `python run.py --selftest` |
-| “查看版本号” | 显示版本信息 | `python run.py --version` |
+| 用户说（大白话） | 实际执行 |
+|------------------|----------|
+| "帮我把这些客户信息整理成表格" | 运行工具，按规则抽取姓名/电话/地址等字段 |
+| "这批订单备注太乱了，统一格式" | 批量解析，输出结构化 JSON |
+| "我要把日志里的错误码提取出来" | 配置规则，提取错误码字段 |
+| "每天自动跑一遍这个解析" | 结合 cron 或 CI 管道调用工具 |
 
 ---
 
-## 三、标准流程：从安装到交付
+## 三、标准流程
 
 ### 3.1 前置条件
 
-| 条件 | 要求 | 验证方法 |
-|------|------|----------|
-| Python 环境 | 3.8 及以上 | `python --version` |
-| 依赖包 | 无（仅标准库） | — |
-| 输入文件 | UTF-8 编码，每行一条记录 | `file -bi input.txt` |
-| 磁盘空间 | 至少 10MB 可用空间 | `df -h` |
+| 条件 | 要求 |
+|------|------|
+| 运行环境 | Python 3.8+，或可执行 `run.py` 的 Shell 环境 |
+| 输入文件 | `input.txt`，每行一条记录，UTF-8 编码 |
+| 规则文件（可选） | `rules.json`，定义解析规则 |
+| 工作目录 | 建议使用独立目录，如 `/opt/agency-agents/` |
 
-### 3.2 安装步骤
+### 3.2 执行步骤
 
-1. **获取脚本**：将 `run.py` 文件保存到目标工作目录（如 `/opt/agency-agents/`）。
-2. **赋予执行权限（可选）**：
-   ```bash
-   chmod +x run.py
-   ```
-3. **验证安装**：
-   ```bash
-   python run.py --version
-   ```
-   预期输出：
-   ```
-   agency-agents version 1.0.0
-   ```
+**步骤 1：获取脚本**
 
-### 3.3 执行步骤（分步编号）
+将 `run.py` 保存到目标工作目录：
 
-1. **准备输入文件**：创建 `input.txt`，每行一条待处理记录。示例：
-   ```
-   订单#A1001 于2024-03-15发货，金额￥299
-   用户反馈：物流太慢，差评
-   [INFO] 2024-03-16 10:22:33 服务重启完成
-   ```
+```bash
+mkdir -p /opt/agency-agents
+cp run.py /opt/agency-agents/
+cd /opt/agency-agents
+```
 
-2. **选择任务类型**：通过 `--task` 参数指定解析模式。
-   | 任务类型 | 说明 | 示例规则 |
-   |----------|------|----------|
-   | `extract` | 提取指定字段 | 订单号、日期、金额 |
-   | `classify` | 按关键词分类 | 正面/负面/中性 |
-   | `tag` | 打标签 | 紧急、待处理、已完成 |
+**步骤 2：赋予执行权限（可选）**
 
-3. **运行工具**：
-   ```bash
-   python run.py --input input.txt --task extract --fields order_id,date,amount --output result.json --format json
-   ```
+```bash
+chmod +x run.py
+```
 
-4. **检查输出**：打开 `result.json`，每条记录包含 `raw_text`、`parsed_data`、`confidence` 三个字段。
+**步骤 3：验证安装**
 
-5. **处理低置信度记录**：筛选 `confidence < 0.6` 的记录，人工复核。
+```bash
+python3 run.py --version
+# 输出示例：agency-agents v1.0.0
+```
 
-### 3.4 输出规范
+**步骤 4：准备输入文件**
+
+创建 `input.txt`，每行一条记录：
+
+```text
+张三，13800138000，北京朝阳区
+李四，13900139000，上海浦东新区
+王五，13700137000，广州天河区
+```
+
+**步骤 5：选择任务类型并运行**
+
+```bash
+python3 run.py --task contact_parse --input input.txt --output result.json
+```
+
+参数说明：
+
+| 参数 | 必填 | 说明 | 默认值 |
+|------|------|------|--------|
+| `--task` | 是 | 解析模式，对应 `rules.json` 中的规则组 | 无 |
+| `--input` | 是 | 输入文件路径 | 无 |
+| `--output` | 否 | 输出文件路径 | `result.json` |
+| `--format` | 否 | 输出格式：`json` / `csv` / `xml` | `json` |
+| `--selftest` | 否 | 运行自检模式 | 无 |
+| `--version` | 否 | 显示版本号 | 无 |
+
+**步骤 6：检查输出**
+
+打开 `result.json`，每条记录包含三个字段：
+
+```json
+[
+  {
+    "raw_text": "张三，13800138000，北京朝阳区",
+    "parsed_data": {
+      "name": "张三",
+      "phone": "13800138000",
+      "city": "北京"
+    },
+    "confidence": 0.92
+  }
+]
+```
+
+**步骤 7：处理低置信度记录**
+
+筛选 `confidence < 0.6` 的记录，人工复核：
+
+```bash
+python3 -c "
+import json
+with open('result.json') as f:
+    data = json.load(f)
+low_conf = [d for d in data if d['confidence'] < 0.6]
+print(f'低置信度记录数: {len(low_conf)}')
+for d in low_conf:
+    print(d['raw_text'])
+"
+```
+
+### 3.3 输出规范
 
 | 字段 | 类型 | 说明 |
 |------|------|------|
-| `raw_text` | string | 原始输入行 |
-| `parsed_data` | object | 解析后的结构化字段，键为字段名，值为字符串或 null |
-| `confidence` | float | 0.0~1.0，表示规则匹配强度 |
-| `warnings` | array | 解析过程中的警告信息（如字段缺失） |
-
-**JSON 输出示例**：
-```json
-{
-  "raw_text": "订单#A1001 于2024-03-15发货，金额￥299",
-  "parsed_data": {
-    "order_id": "A1001",
-    "date": "2024-03-15",
-    "amount": "299"
-  },
-  "confidence": 0.95,
-  "warnings": []
-}
-```
+| `raw_text` | string | 原始输入文本 |
+| `parsed_data` | object | 解析后的结构化字段，缺失字段为 `null` |
+| `confidence` | float | 置信度分数，范围 0~1 |
 
 ---
 
-## 四、置信度门控机制
+## 四、置信度门控
 
 ### 4.1 置信度计算规则
 
-- **完全匹配**（所有字段均命中规则）：`confidence = 1.0`
-- **部分匹配**（至少一个字段命中）：`confidence = 命中字段数 / 期望字段数`
-- **零匹配**（无字段命中）：`confidence = 0.0`
+| 条件 | 置信度区间 | 处理方式 |
+|------|------------|----------|
+| 所有规则字段均匹配 | 0.8 ~ 1.0 | 正常输出 |
+| 部分字段匹配 | 0.4 ~ 0.8 | 缺失字段置 `null`，添加 warning |
+| 关键字段不匹配 | 0 ~ 0.4 | 输出占位符，建议人工复核 |
 
 ### 4.2 信息不足时的处理
 
-当输入文本无法满足字段提取要求时，工具**不会编造数据**，而是：
+当输入文本无法满足规则要求时，按以下顺序处理：
 
 1. 在 `parsed_data` 中将缺失字段设为 `null`。
 2. 在 `warnings` 数组中添加说明。
 3. 输出占位符 `[需核实:字段名]` 到 `parsed_data` 对应键。
 
-**示例**：
+示例：
+
 ```json
 {
-  "raw_text": "订单#B2024 已发货",
+  "raw_text": "张三，电话未知",
   "parsed_data": {
-    "order_id": "B2024",
-    "date": "[需核实:date]",
-    "amount": "[需核实:amount]"
+    "name": "张三",
+    "phone": "[需核实:phone]",
+    "city": null
   },
-  "confidence": 0.33,
-  "warnings": ["字段 date 未匹配到规则", "字段 amount 未匹配到规则"]
+  "confidence": 0.35,
+  "warnings": ["phone 字段无法匹配，已输出占位符"]
 }
 ```
 
-### 4.3 置信度阈值建议
+### 4.3 门控原则
 
-| 使用场景 | 建议阈值 | 处理方式 |
-|----------|----------|----------|
-| 自动化管道 | 0.8 | 低于阈值自动丢弃或转人工队列 |
-| 数据分析 | 0.6 | 低于阈值标记为“低质量”，分析时排除 |
-| 人工复核 | 0.0~1.0 | 全部人工检查，阈值仅作参考 |
+- **不编造**：无法确定的信息绝不虚构，一律使用占位符或 `null`。
+- **可追溯**：所有低置信度记录均附带 `warnings` 说明原因。
+- **可干预**：用户可手动修改 `rules.json` 后重新运行。
 
 ---
 
 ## 五、错误码体系
 
-### 5.1 常见错误与修正
-
-| 错误码 | 错误信息 | 可能原因 | 修正步骤 |
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
 |--------|----------|----------|----------|
-| `E001` | `Input file not found` | 输入文件路径错误 | 检查文件是否存在，使用绝对路径 |
-| `E002` | `Invalid task type` | `--task` 参数值不在支持列表中 | 运行 `python run.py --help` 查看支持的任务类型 |
-| `E003` | `Output format not supported` | `--format` 参数值不是 `json`/`csv`/`jsonl` | 重新指定格式，注意大小写 |
-| `E004` | `Empty input file` | 输入文件为空或只有空行 | 检查文件内容，确保每行有有效文本 |
-| `E005` | `Encoding error` | 文件不是 UTF-8 编码 | 使用 `iconv` 转换编码，或另存为 UTF-8 |
-| `E006` | `Permission denied` | 输出目录无写入权限 | 使用 `chmod` 修改目录权限，或指定其他输出路径 |
+| `E001` | 输入文件不存在 | "输入文件未找到，请检查路径" | 确认 `--input` 路径正确，文件存在 |
+| `E002` | 规则文件格式错误 | "rules.json 解析失败，请检查 JSON 语法" | 使用 `json.tool` 校验：`python3 -m json.tool rules.json` |
+| `E003` | 任务类型未定义 | "指定的 --task 在规则文件中不存在" | 查看 `rules.json` 中的 `tasks` 键，确认任务名 |
+| `E004` | 输出目录无写入权限 | "无法写入输出文件，请检查目录权限" | 使用 `chmod` 或更换输出路径 |
+| `E005` | 输入文本为空 | "输入文件为空，请添加至少一条记录" | 检查 `input.txt` 内容 |
+| `E006` | 规则正则表达式错误 | "规则中的正则表达式编译失败" | 使用在线工具验证正则，修正后重试 |
+| `E007` | 批量处理超限 | "单次处理超过 10000 条记录上限" | 拆分输入文件，分批处理 |
 
-### 5.2 错误提示话术
+---
 
-当发生错误时，工具会输出如下格式：
+## 六、FAQ 反模式
+
+### 6.1 常见坑与反模式对照
+
+| 常见坑 | 反模式（错误做法） | 正确做法 |
+|--------|-------------------|----------|
+| 输入文本格式混乱 | 直接运行工具，期望自动纠正 | 先人工抽样检查，统一格式后再批量处理 |
+| 规则修改后不验证 | 直接跑全量数据 | 先运行 `--selftest` 验证规则正确性 |
+| 忽略置信度 | 全量采用解析结果，不筛选 | 设置阈值（如 0.6），低置信度记录人工复核 |
+| 规则过于严格 | 正则表达式写死，导致大量字段缺失 | 使用宽松匹配 + 占位符机制，保留可追溯性 |
+| 一次性处理超大文件 | 单次运行 10 万行记录 | 分批处理，每批不超过 10000 条 |
+
+### 6.2 反模式示例
+
+**反模式 1：忽略 `--selftest`**
+
+```bash
+# 错误：修改规则后直接跑全量
+python3 run.py --task custom --input all.txt
+
+# 正确：先自检
+python3 run.py --selftest --task custom
+python3 run.py --task custom --input all.txt
 ```
-[ERROR] E001: Input file not found: /path/to/nonexistent.txt
-建议：请检查文件路径是否正确，或使用 --help 查看参数说明。
-```
 
-### 5.3 自检模式
+**反模式 2：不设置信度阈值**
 
-运行 `python run.py --selftest` 可执行内置测试用例，验证工具功能完整性。预期输出：
-```
-Self-test passed: 8/8 checks OK
+```bash
+# 错误：全量采用
+python3 run.py --task parse --input data.txt --output result.json
+
+# 正确：筛选低置信度
+python3 run.py --task parse --input data.txt --output result.json
+python3 -c "import json; [print(d['raw_text']) for d in json.load(open('result.json')) if d['confidence'] < 0.6]"
 ```
 
 ---
 
-## 六、FAQ 反模式对照
-
-### 6.1 常见坑与正确做法
-
-| 反模式（错误做法） | 后果 | 正确做法 |
-|---------------------|------|----------|
-| 输入文件包含空行或特殊字符 | 解析结果出现空记录或乱码 | 预处理输入文件，去除空行，统一编码 |
-| 期望工具理解语义 | 输出结果与预期不符，置信度低 | 明确工具基于规则匹配，调整输入文本格式 |
-| 忽略 `confidence` 字段 | 低质量数据混入分析结果 | 设置阈值过滤，或人工复核低置信度记录 |
-| 修改 `rules.json` 后不测试 | 规则语法错误导致运行失败 | 修改后先运行 `--selftest` 验证 |
-| 将工具用于非文本数据 | 无法处理，报错或输出空结果 | 确认输入为纯文本格式 |
-
-### 6.2 反模式对照表
-
-| 场景 | 反模式 | 推荐模式 |
-|------|--------|----------|
-| 处理中文文本 | 使用英文正则规则 | 在 `rules.json` 中添加中文关键词规则 |
-| 处理超长文本（>1000字） | 整行输入 | 预先截断或分段处理 |
-| 批量处理 10 万条记录 | 单次运行 | 分批处理，每批 1 万条，避免内存溢出 |
-| 需要实时响应 | 每次运行都解析规则文件 | 将规则文件预加载到内存（需二次开发） |
-
----
-
-## 七、渐进式披露：分层次阅读路径
+## 七、渐进式披露
 
 ### 7.1 速查卡（30 秒上手）
 
 ```bash
-# 安装
-python run.py --version
+# 1. 准备输入
+echo "张三，13800138000，北京" > input.txt
 
-# 基本用法
-python run.py --input input.txt --task extract --fields order_id,date
+# 2. 运行解析
+python3 run.py --task contact_parse --input input.txt --output result.json
 
-# 指定输出格式
-python run.py --input input.txt --task classify --output result.csv --format csv
-
-# 自检
-python run.py --selftest
+# 3. 查看结果
+cat result.json
 ```
 
-### 7.2 新手路径（首次使用）
+### 7.2 分层次阅读路径
+
+**新手路径（首次使用）**
 
 1. 阅读「一、能力边界」了解工具能做什么。
 2. 按照「三、标准流程」完成一次完整运行。
 3. 查看输出 JSON 文件，理解 `parsed_data` 和 `confidence` 字段。
 4. 遇到问题查阅「五、错误码体系」。
 
-### 7.3 进阶路径（深度定制）
+**进阶路径（自定义规则）**
 
 1. 阅读 `rules.json` 文件，理解规则结构（正则表达式、关键词列表）。
 2. 修改规则以适配特定业务场景。
 3. 使用 `--selftest` 验证规则修改的正确性。
 4. 结合外部脚本（如 Python、Shell）实现自动化管道。
 
-### 7.4 规则文件结构说明
+**专家路径（深度集成）**
 
-`rules.json` 位于工具同目录下，结构如下：
-```json
-{
-  "extract": {
-    "order_id": "正则表达式",
-    "date": "正则表达式",
-    "amount": "正则表达式"
-  },
-  "classify": {
-    "positive": ["好评", "满意", "推荐"],
-    "negative": ["差评", "失望", "退货"]
-  }
-}
-```
+1. 将 `run.py` 嵌入 CI/CD 管道，实现定时批量解析。
+2. 编写后处理脚本，自动处理低置信度记录。
+3. 扩展 `rules.json` 支持多语言、多格式输入。
+4. 将输出接入数据仓库或 BI 工具。
 
 ---
 
@@ -307,13 +322,13 @@ python run.py --selftest
 
 **使用前请仔细阅读以下条款，使用本工具即视为同意本协议。**
 
-1. **责任承担**：使用者自行承担因使用本工具产生的全部责任。包括但不限于数据丢失、业务中断、决策失误等直接或间接损失。本工具按“现状”提供，不提供任何形式的明示或暗示担保。
+1. **责任承担**：使用者应自行承担使用本工具的全部责任。本工具输出结果仅供参考，不构成任何专业建议。使用者应自行验证输出数据的准确性与适用性。因使用本工具产生的任何直接或间接损失，工具作者不承担任何责任。
 
 2. **禁止反向工程**：使用者不得对本工具进行反向工程、反编译、反汇编，或试图提取源代码（除非适用法律允许）。不得移除或修改任何版权声明。
 
 3. **合规使用**：使用者应确保使用本工具的行为符合当地法律法规，不得用于任何非法目的。
 
-4. **免责声明**：本工具输出结果仅供参考，不构成任何专业建议。使用者应自行验证输出数据的准确性与适用性。
+4. **免责声明**：本工具按"现状"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权保证。
 
 ---
 
@@ -323,26 +338,14 @@ python run.py --selftest
 
 **MIT License**
 
-Copyright (c) 2024 LinguaForge Studio
+版权所有 (c) 2025 原创作者（自持版权）
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士处理本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向他人提供本软件，但须满足以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在本软件的所有副本或实质性部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+本软件按"现状"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他方面，由本软件或本软件的使用或其他交易引起、产生或与之相关。
 
 ---
 
-*文档版本：1.0.0 | 最后更新：2024-08-12 | 生成方式：AI 辅助*
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
