@@ -1,9 +1,9 @@
 {
-  "frozen_at": "2026-08-16T07:13:59.299496",
+  "frozen_at": "2026-08-17T21:46:07.685988",
   "slug": "academic-research-skills",
   "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
   "llm_base_url": "https://api.deepseek.com",
-  "pipeline_commit": "a7970b75d81be1c78122241aaf6206f93423b5c1",
+  "pipeline_commit": "781962028c4f461d872e9156db514f4bdc652207",
   "dependencies": [
     "annotated-types==0.8.0",
     "anyio==4.14.2",
