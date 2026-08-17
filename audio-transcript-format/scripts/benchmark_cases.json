@@ -1,0 +1,982 @@
+[
+ {
+  "text": "李工需要周五前提交原型。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "王经理负责跟进客户。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "明天中午开会，记得订会议室。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "我们决定采用 A 方案。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "但是预算有限，我觉得有风险。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "请你尽快整理会议纪要发给大家。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "这个方案成本低效果好。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "大家辛苦了，今天先到这里。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "天气不错，适合户外活动。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "不需要再讨论这个问题了。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "不用给我发邮件了。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "需要确认一下这个数据吗？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "我们不需要额外的预算。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "项目下个月底前必须上线。",
+  "expected": [
+   "deadlines"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "张律师需要在开庭前提交答辩状。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "法院裁定驳回上诉。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "这份合同有瑕疵，我方提出异议。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "请在法定期限内完成补正。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "双方达成调解协议。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "原告不服一审判决。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "证据材料需要归档备案。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "开庭日期定在下周二。",
+  "expected": [
+   "deadlines"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "患者需要按时服药，饭后半小时。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "医生确诊为肺炎。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "这个症状疑似流感，需进一步检查。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "请安排复诊，两周后随访。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "治疗方案确定为手术。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "剂量需要调整，从明天开始减量。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "血压监测要每周记录。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "这个问题暂时不处理。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "吃饭了吗？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "这部电影很好看。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "我们已经讨论了很久。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "明天天气怎么样？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "张三需要在下周三之前把合同寄出去。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "记得带身份证和复印件。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "恐怕这个价格我们接受不了。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "大家一致同意按新流程执行。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "我反对这个方案，风险太大。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "项目组负责整理测试报告。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "本周五下午三点开评审会。",
+  "expected": [
+   "deadlines"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "会议确定了下季度的目标。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "这个需求还没定，再想想。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "老板拍板定了，就按这个来。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "别忘了明天上午的例会。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "我们需要扩大市场份额。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "截至本周五，所有反馈必须提交。",
+  "expected": [
+   "deadlines"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "这个版本有兼容性问题。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "我们确认了下周的排期。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "厨房的灯坏了，需要换一个。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "这本书我已经读完了。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "公司今年业绩不错。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "地铁人很多，我迟到了。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "这个功能下版本再做。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "他说了很多，但没什么重点。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "大家加油，争取早日完成。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "晚上一起吃饭吧。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "这周不用加班了。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "不需要采购新设备。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "刘医生负责这个病人的后续治疗。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "医嘱要求空腹抽血。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "患者有药物过敏史，需谨慎用药。",
+  "expected": [
+   "disagreements",
+   "actions"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "护士每三小时监测一次体温。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "建议住院观察两天。",
+  "expected": [
+   "decisions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "病理结果待查，先不做结论。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "出院后每周复查一次。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "这个检查不能确诊，需要鉴别。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "药量从每天两次调整为三次。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "乙方需要在举证期内提交证据。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "一审判决认定合同有效。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "对方抗辩称没有收到通知。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "请在立案后三日内缴纳诉讼费。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "本案证据不足，不予支持。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "调解不成再另行起诉。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "合同需要盖章后生效。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "上诉期是判决送达之日起十五日内。",
+  "expected": [
+   "deadlines"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "仲裁庭裁定中止审理。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "我们下周对一下细节。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "会上没有达成共识，下次再议。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "分工安排确认一下：你负责设计。",
+  "expected": [
+   "decisions",
+   "actions"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "这个议题有争议，先搁置。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "秘书处需要把纪要发给大家。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "下次会议定在周五。",
+  "expected": [
+   "deadlines"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "会议决定成立专项小组。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "大家看这个数据，是不是有问题？",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "我这边需要两天时间评估。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "会议纪要明天上午发到群里。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "不需要再安排新的会议了。",
+  "expected": [],
+  "domain": "meeting"
+ },
+ {
+  "text": "那今天就这样，散会。",
+  "expected": [],
+  "domain": "meeting"
+ },
+ {
+  "text": "请问这个报表什么时候要？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "我刚才说的是另一个问题。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "他可能记错了时间。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "我们先看下历史数据。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "这个价格已经包含运费了。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "那边的事情我不太清楚。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "周末去爬山，有兴趣的报名。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "没事，慢慢来。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "这批货的质量没有问题。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "后面还有几个议题没讨论。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "无需担心，已经处理好了。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "不用着急，月底前给到就行。",
+  "expected": [
+   "deadlines"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "麻烦您尽快确认一下这个订单。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "我们想再约个时间谈谈合作。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "会议确定了三个重点方向。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "老板拍板定了这个方案。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "双方确认了合作条款。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "委员会通过了新章程。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "医生确定采用保守治疗。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "我们落实了整改措施。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "方案敲定了，按这个执行。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "就这么定了，不再讨论。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "合同约定采用仲裁方式。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "董事会批准了预算。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "治疗方案确定为口服药。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "大家同意这个分配方案。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "会议确认了里程碑节点。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "产品方向定了，做企业版。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "麻烦确认一下。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "我确认过，没有问题。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "确定吗？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "请再确定一下这个事。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "确认没有遗漏了吗？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "我们要不要确认一下？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "这个结论还不能确定。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "到底确定不确定？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "稍后确认后回复你。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "确认函明天发出。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "他说确定，但我存疑。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "先确认资源再说。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "general"
+ },
+ {
+  "text": "这个数据我确定过两次。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "请确认下是否可行。",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "不是确定过了吗？",
+  "expected": [],
+  "domain": "general"
+ },
+ {
+  "text": "乙方应在收到通知后七日内答辩。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "本案依法适用简易程序。",
+  "expected": [],
+  "domain": "legal"
+ },
+ {
+  "text": "判决书已经送达双方。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "原告主张违约金过高，请求酌减。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "需要补充鉴定材料。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "本案中止审理，等待另案结果。",
+  "expected": [
+   "decisions"
+  ],
+  "domain": "legal"
+ },
+ {
+  "text": "病人每天早晚各服一次药。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "化验单显示指标异常。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "建议做进一步检查。",
+  "expected": [
+   "actions"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "护士需要每两小时巡视一次。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "这个药先停两天观察。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "出院手续明天办理。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "medical"
+ },
+ {
+  "text": "会上安排了下一阶段分工。",
+  "expected": [
+   "actions",
+   "decisions"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "这事先放放，不急。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "本次会议纪要明天发出。",
+  "expected": [
+   "actions",
+   "deadlines"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "有不同意见的会后单独沟通。",
+  "expected": [
+   "disagreements"
+  ],
+  "domain": "meeting"
+ },
+ {
+  "text": "下周例会移到周三。",
+  "expected": [
+   "deadlines"
+  ],
+  "domain": "meeting"
+ }
+]
