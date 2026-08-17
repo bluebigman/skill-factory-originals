@@ -1,471 +1,478 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-邮件撰写技能 - 独立实现脚本
+ACG 结构化文本处理器 - 本地规则驱动的文本批处理与结构化提取引擎
 
-本脚本依据功能规格独立实现，不复制任何既有代码。
-提供邮件撰写相关的核心逻辑：信息收集引导、内容处理、置信度评估、错误处理。
+将零散、非结构化的文本批量转换为结构化数据（JSON / Markdown / CSV），
+支持自定义正则规则提取关键字段、置信度评分与低置信度标记。
+
+纯 Python 标准库实现，无第三方依赖，不调用外部 AI API。
 """
 
 import argparse
-import sys
+import csv
+import json
+import os
 import re
-from typing import Dict, List, Optional, Tuple, Any
+import sys
+import tempfile
+import time
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Tuple, Union
 
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 常量定义
 # ============================================================
 
-# 错误码定义
 ERROR_CODES = {
-    "E001": "请提供待处理的内容，格式为：用户提供的数据/文件/URL",
-    "E002": "还缺少以下信息，请补充：...",
-    "E003": "输入格式不符合要求，示例：...",
-    "E004": "这超出了本工具的能力范围，建议...",
-    "E005": "结果无法确定，建议：...",
+    "E001": "输入文件不存在或无权限访问",
+    "E002": "文件编码无法识别，请转换为 UTF-8 或使用 --encoding 指定",
+    "E003": "规则文件格式错误或无法解析",
+    "E004": "不支持的输出格式，可选 json/markdown/csv",
+    "E005": "规则中未定义任何字段",
+    "E006": "内存不足，请减小 --chunk-size",
+    "E007": "输出目录不存在，请先创建或使用 --force 自动创建",
+    "E008": "未知错误，请查看详细日志",
 }
 
-# 触发词表
-TRIGGER_WORDS = [
-    "邮件撰写",
-    "ai content generator using gpt 3 acg",
-    "帮我处理一下这个",
-    "把这个转成另一种格式",
-    "批量弄一下这些",
-]
+SUPPORTED_FORMATS = ["json", "markdown", "csv"]
+SUPPORTED_ENCODINGS = ["utf-8", "gbk", "gb18030"]
 
-# 能力边界声明
-CAPABILITY_NOTES = {
-    "do": [
-        "将用户提供的数据/文件/URL转换为结构化结果",
-        "识别并保留输入中的关键信息",
-        "按约定格式生成输出",
-        "对不确定项给出置信度提示",
-        "支持批量处理和自定义格式",
-    ],
-    "not_do": [
-        "不执行超出输入范围的分析",
-        "不保证绝对准确，低置信度会标注",
-        "不访问网络或外部服务",
-    ],
+# 默认提取规则（内置）
+DEFAULT_RULES = {
+    "fields": [
+        {"name": "date", "pattern": r"\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?", "description": "日期"},
+        {"name": "phone", "pattern": r"1[3-9]\d{9}", "description": "手机号"},
+        {"name": "amount", "pattern": r"(\d+(?:\.\d+)?)\s*(?:元|万元|人民币|RMB|CNY)", "description": "金额"},
+        {"name": "email", "pattern": r"[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}", "description": "邮箱"},
+    ]
 }
 
-# 默认输出模板字段
-DEFAULT_FIELDS = ["标题", "正文", "关键信息", "置信度"]
+# 置信度阈值
+CONFIDENCE_THRESHOLD = 0.5
+CONFIDENCE_PENALTY = 0.7
+
+# 版本信息
+VERSION = "3.1.0"
+
+# ============================================================
+# 异常定义
+# ============================================================
+
+class ACGError(Exception):
+    """ACG 基础异常"""
+    def __init__(self, code: str, message: str):
+        self.code = code
+        self.message = message
+        super().__init__(f"[{code}] {message}")
+
+
+class InputValidationError(ACGError):
+    """输入校验异常"""
+    pass
+
+
+class FileProcessingError(ACGError):
+    """文件处理异常"""
+    pass
+
+
+class RuleParsingError(ACGError):
+    """规则解析异常"""
+    pass
+
+
+class OutputFormatError(ACGError):
+    """输出格式异常"""
+    pass
 
 
 # ============================================================
-# 核心逻辑类
+# 工具函数
 # ============================================================
 
-class ContentProcessor:
-    """内容处理器 - 负责解析输入、识别关键信息、生成结构化输出"""
-
-    def __init__(self) -> None:
-        """初始化处理器"""
-        self.fields = DEFAULT_FIELDS
-        self.min_confidence_direct = 0.90  # 直接输出阈值
-        self.min_confidence_review = 0.85  # 建议复核阈值
-
-    def validate_input(self, raw_input: str) -> Tuple[bool, Optional[str]]:
-        """
-        验证输入是否有效
-
-        参数:
-            raw_input: 原始输入字符串
-
-        返回:
-            (是否有效, 错误码或None)
-        """
-        if not raw_input or not raw_input.strip():
-            return False, "E001"
-        return True, None
-
-    def extract_key_info(self, raw_input: str) -> Dict[str, Any]:
-        """
-        从输入中提取关键信息
-
-        参数:
-            raw_input: 原始输入字符串
-
-        返回:
-            包含关键信息的字典
-        """
-        info = {
-            "content": raw_input.strip(),
-            "length": len(raw_input.strip()),
-            "has_url": self._detect_url(raw_input),
-            "has_email": self._detect_email(raw_input),
-            "has_date": self._detect_date(raw_input),
-            "keywords": self._extract_keywords(raw_input),
-        }
-        return info
-
-    def _detect_url(self, text: str) -> bool:
-        """检测是否包含URL"""
-        url_pattern = r'https?://[^\s]+'
-        return bool(re.search(url_pattern, text))
-
-    def _detect_email(self, text: str) -> bool:
-        """检测是否包含邮箱地址"""
-        email_pattern = r'[\w\.-]+@[\w\.-]+\.\w+'
-        return bool(re.search(email_pattern, text))
-
-    def _detect_date(self, text: str) -> bool:
-        """检测是否包含日期"""
-        date_patterns = [
-            r'\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?',  # 2024-01-01 或 2024年1月1日
-            r'\d{1,2}[-/月]\d{1,2}日?',  # 01-01 或 1月1日
-        ]
-        return any(re.search(pattern, text) for pattern in date_patterns)
-
-    def _extract_keywords(self, text: str) -> List[str]:
-        """提取关键词（简单分词）"""
-        # 简单关键词提取：按空格分割，过滤短词和常见停用词
-        stop_words = {"的", "了", "和", "是", "在", "有", "我", "你", "他", "她", "它",
-                      "the", "a", "an", "and", "or", "but", "is", "are", "was", "were"}
-        words = re.findall(r'[\u4e00-\u9fff]+|[a-zA-Z]+', text.lower())
-        keywords = [w for w in words if len(w) >= 2 and w not in stop_words]
-        return list(set(keywords))[:10]  # 最多返回10个关键词
-
-    def calculate_confidence(self, key_info: Dict[str, Any]) -> float:
-        """
-        计算置信度
-
-        参数:
-            key_info: 关键信息字典
-
-        返回:
-            置信度分数 (0-1)
-        """
-        # 基准置信度
-        confidence = 0.70
-
-        # 根据关键信息丰富度调整
-        if key_info["content"]:
-            confidence += 0.05
-
-        if key_info["has_url"]:
-            confidence += 0.05
-
-        if key_info["has_email"]:
-            confidence += 0.05
-
-        if key_info["has_date"]:
-            confidence += 0.05
-
-        # 关键词数量影响
-        keyword_count = len(key_info["keywords"])
-        if keyword_count >= 5:
-            confidence += 0.05
-        elif keyword_count >= 3:
-            confidence += 0.03
-        elif keyword_count >= 1:
-            confidence += 0.01
-
-        # 内容长度影响
-        content_length = key_info["length"]
-        if content_length > 200:
-            confidence += 0.05
-        elif content_length > 100:
-            confidence += 0.03
-        elif content_length > 50:
-            confidence += 0.01
-
-        # 限制在合理范围内
-        return max(0.1, min(0.99, confidence))
-
-    def generate_output(self, raw_input: str) -> Dict[str, Any]:
-        """
-        生成结构化输出
-
-        参数:
-            raw_input: 原始输入
-
-        返回:
-            结构化输出字典
-        """
-        # 验证输入
-        valid, error_code = self.validate_input(raw_input)
-        if not valid:
-            return {
-                "success": False,
-                "error_code": error_code,
-                "error_message": ERROR_CODES[error_code],
-            }
-
-        # 提取关键信息
-        key_info = self.extract_key_info(raw_input)
-
-        # 计算置信度
-        confidence = self.calculate_confidence(key_info)
-
-        # 生成输出
-        output = {
-            "success": True,
-            "title": self._generate_title(key_info),
-            "content": self._generate_content(key_info),
-            "key_info": key_info,
-            "confidence": confidence,
-            "confidence_label": self._get_confidence_label(confidence),
-        }
-
-        return output
-
-    def _generate_title(self, key_info: Dict[str, Any]) -> str:
-        """生成标题"""
-        keywords = key_info["keywords"]
-        if keywords:
-            return f"关于{'、'.join(keywords[:3])}的邮件"
-        return "待处理邮件"
-
-    def _generate_content(self, key_info: Dict[str, Any]) -> str:
-        """生成正文内容"""
-        parts = []
-
-        # 开头问候
-        parts.append("您好，")
-
-        # 正文主体
-        content = key_info["content"]
-        if len(content) > 100:
-            parts.append(content[:100] + "...")
-        else:
-            parts.append(content)
-
-        # 结尾
-        parts.append("此致")
-
-        return "\n\n".join(parts)
-
-    def _get_confidence_label(self, confidence: float) -> str:
-        """获取置信度标签"""
-        if confidence >= self.min_confidence_direct:
-            return "直接输出"
-        elif confidence >= self.min_confidence_review:
-            return "建议复核"
-        else:
-            return "[需核实]"
-
-    def process_batch(self, inputs: List[str]) -> List[Dict[str, Any]]:
-        """
-        批量处理输入
-
-        参数:
-            inputs: 输入列表
-
-        返回:
-            结果列表
-        """
-        return [self.generate_output(item) for item in inputs]
+def utc_now() -> str:
+    """返回 UTC 当前时间的 ISO 格式字符串"""
+    return datetime.now(timezone.utc).isoformat()
 
 
-# ============================================================
-# 自检模块
-# ============================================================
-
-def run_selftest() -> bool:
+def safe_read_file(file_path: str, encoding: Optional[str] = None) -> str:
     """
-    运行自检测试
-
-    使用内置硬编码样例数据，不依赖外部文件、网络或特定工作目录。
-
-    返回:
-        测试是否通过
+    安全读取文件内容，支持多编码 fallback。
+    优先使用指定编码，否则尝试 utf-8 → gbk → gb18030。
     """
-    print("=" * 60)
-    print("开始自检 (Self-Test)")
-    print("=" * 60)
+    encodings = [encoding] if encoding else ["utf-8", "gbk", "gb18030"]
+    for enc in encodings:
+        try:
+            with open(file_path, "r", encoding=enc) as f:
+                return f.read()
+        except UnicodeDecodeError:
+            continue
+        except FileNotFoundError:
+            raise FileProcessingError("E001", ERROR_CODES["E001"])
+        except PermissionError:
+            raise FileProcessingError("E001", ERROR_CODES["E001"])
+    raise FileProcessingError("E002", ERROR_CODES["E002"])
 
-    processor = ContentProcessor()
-    all_passed = True
 
-    # 测试用例 1: 正常输入
-    print("\n[测试 1] 正常输入处理")
-    test_input_1 = "请帮我撰写一封关于项目进度的邮件，收件人是客户张三，日期是2024年3月15日，主要内容是汇报本周完成的工作和下周计划。"
-    result_1 = processor.generate_output(test_input_1)
-    assert result_1["success"], f"测试1失败: 处理失败 {result_1.get('error_message')}"
-    assert result_1["confidence"] > 0.7, f"测试1失败: 置信度过低 {result_1['confidence']}"
-    assert result_1["title"], "测试1失败: 标题为空"
-    assert result_1["content"], "测试1失败: 内容为空"
-    print(f"  ✓ 通过 (置信度: {result_1['confidence']:.2f}, 标签: {result_1['confidence_label']})")
+def safe_write_file(file_path: str, content: str, encoding: str = "utf-8") -> None:
+    """原子化写入文件，避免写入中断导致文件损坏"""
+    temp_fd, temp_path = tempfile.mkstemp(dir=os.path.dirname(file_path) or ".")
+    try:
+        with os.fdopen(temp_fd, "w", encoding=encoding) as f:
+            f.write(content)
+        os.replace(temp_path, file_path)
+    except Exception as e:
+        os.unlink(temp_path)
+        raise FileProcessingError("E008", f"写入文件失败: {e}")
 
-    # 测试用例 2: 空输入处理
-    print("\n[测试 2] 空输入处理")
-    test_input_2 = ""
-    result_2 = processor.generate_output(test_input_2)
-    assert not result_2["success"], "测试2失败: 空输入应该失败"
-    assert result_2["error_code"] == "E001", f"测试2失败: 错误码应为E001, 实际为{result_2['error_code']}"
-    print(f"  ✓ 通过 (错误码: {result_2['error_code']})")
 
-    # 测试用例 3: 批量处理
-    print("\n[测试 3] 批量处理")
-    test_inputs_3 = [
-        "请处理这个文档，包含合同信息，签署日期2024年1月1日，金额100万。",
-        "这是另一个请求，关于税务申报，截止日期3月31日。",
-        "简单请求",
-    ]
-    results_3 = processor.process_batch(test_inputs_3)
-    assert len(results_3) == 3, f"测试3失败: 应返回3个结果, 实际{len(results_3)}"
-    assert results_3[0]["success"], "测试3失败: 第一个输入处理失败"
-    assert results_3[1]["success"], "测试3失败: 第二个输入处理失败"
-    print(f"  ✓ 通过 ({len(results_3)} 个结果)")
+def validate_input_file(file_path: str) -> None:
+    """校验输入文件是否存在且可读"""
+    if not os.path.isfile(file_path):
+        raise InputValidationError("E001", ERROR_CODES["E001"])
+    if not os.access(file_path, os.R_OK):
+        raise InputValidationError("E001", ERROR_CODES["E001"])
 
-    # 测试用例 4: 关键信息提取
-    print("\n[测试 4] 关键信息提取")
-    test_input_4 = "请处理 https://example.com/doc/123 和 test@email.com 的相关内容，日期2024年6月1日。"
-    key_info_4 = processor.extract_key_info(test_input_4)
-    assert key_info_4["has_url"], "测试4失败: 应检测到URL"
-    assert key_info_4["has_email"], "测试4失败: 应检测到邮箱"
-    assert key_info_4["has_date"], "测试4失败: 应检测到日期"
-    print(f"  ✓ 通过 (URL: {key_info_4['has_url']}, 邮箱: {key_info_4['has_email']}, 日期: {key_info_4['has_date']})")
 
-    # 测试用例 5: 置信度评估
-    print("\n[测试 5] 置信度评估")
-    test_input_5a = "简单输入"
-    test_input_5b = "这是一段较长的输入内容，包含多个关键词：项目、进度、客户、合同、日期、金额、方案、执行、验收、交付。同时包含URL https://example.com 和邮箱 test@email.com，日期为2024年12月31日。"
-    conf_5a = processor.calculate_confidence(processor.extract_key_info(test_input_5a))
-    conf_5b = processor.calculate_confidence(processor.extract_key_info(test_input_5b))
-    assert 0 < conf_5a < 1, f"测试5失败: 置信度应在0-1之间, 实际{conf_5a}"
-    assert 0 < conf_5b < 1, f"测试5失败: 置信度应在0-1之间, 实际{conf_5b}"
-    assert conf_5b > conf_5a, f"测试5失败: 信息丰富输入置信度应更高 ({conf_5a} vs {conf_5b})"
-    print(f"  ✓ 通过 (简单: {conf_5a:.2f}, 丰富: {conf_5b:.2f})")
+def validate_output_dir(output_path: str, force: bool = False) -> None:
+    """校验输出目录是否存在，必要时创建"""
+    out_dir = os.path.dirname(output_path)
+    if out_dir and not os.path.isdir(out_dir):
+        if force:
+            os.makedirs(out_dir, exist_ok=True)
+        else:
+            raise InputValidationError("E007", ERROR_CODES["E007"])
 
-    # 测试用例 6: 错误处理
-    print("\n[测试 6] 错误处理")
-    error_test_cases = [
-        ("", "E001"),  # 空输入
-    ]
-    for test_input, expected_error in error_test_cases:
-        result = processor.generate_output(test_input)
-        assert result["error_code"] == expected_error, \
-            f"测试6失败: 期望{expected_error}, 实际{result['error_code']}"
-    print(f"  ✓ 通过 ({len(error_test_cases)} 个错误场景)")
 
-    # 测试用例 7: 触发词识别
-    print("\n[测试 7] 触发词识别")
-    trigger_test_cases = [
-        "邮件撰写",  # 直接触发词
-        "帮我处理一下这个",  # 大白话触发
-        "ai content generator using gpt 3 acg",  # 英文触发词
-    ]
-    for trigger in trigger_test_cases:
-        assert trigger in TRIGGER_WORDS, f"测试7失败: '{trigger}' 应在触发词表中"
-    print(f"  ✓ 通过 ({len(trigger_test_cases)} 个触发词)")
+def load_rules(rules_path: Optional[str]) -> Dict[str, Any]:
+    """加载自定义规则，若未指定则使用默认规则"""
+    if rules_path is None:
+        return DEFAULT_RULES
+    try:
+        with open(rules_path, "r", encoding="utf-8") as f:
+            rules = json.load(f)
+        if "fields" not in rules or not isinstance(rules["fields"], list) or len(rules["fields"]) == 0:
+            raise RuleParsingError("E005", ERROR_CODES["E005"])
+        return rules
+    except json.JSONDecodeError:
+        raise RuleParsingError("E003", ERROR_CODES["E003"])
+    except FileNotFoundError:
+        raise RuleParsingError("E003", ERROR_CODES["E003"])
 
-    # 测试用例 8: 能力边界
-    print("\n[测试 8] 能力边界")
-    assert len(CAPABILITY_NOTES["do"]) == 5, "测试8失败: 应有5项能做声明"
-    assert len(CAPABILITY_NOTES["not_do"]) == 3, "测试8失败: 应有3项不做声明"
-    print(f"  ✓ 通过 (能做: {len(CAPABILITY_NOTES['do'])}项, 不做: {len(CAPABILITY_NOTES['not_do'])}项)")
 
-    # 测试用例 9: 输出格式
-    print("\n[测试 9] 输出格式")
-    test_input_9 = "请生成一封商务邮件，包含合同、报价、时间安排等信息。"
-    result_9 = processor.generate_output(test_input_9)
-    required_fields = ["title", "content", "confidence", "success"]
-    for field in required_fields:
-        assert field in result_9, f"测试9失败: 输出缺少字段 '{field}'"
-    print(f"  ✓ 通过 (字段: {', '.join(required_fields)})")
-
-    # 测试用例 10: 批量输入错误处理
-    print("\n[测试 10] 批量输入错误处理")
-    mixed_inputs = ["有效输入", "", "另一个有效输入"]
-    mixed_results = processor.process_batch(mixed_inputs)
-    assert mixed_results[0]["success"], "测试10失败: 第一个输入应成功"
-    assert not mixed_results[1]["success"], "测试10失败: 空输入应失败"
-    assert mixed_results[2]["success"], "测试10失败: 第三个输入应成功"
-    print(f"  ✓ 通过 (成功: {sum(1 for r in mixed_results if r['success'])}/{len(mixed_results)})")
-
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("全部自检通过 ✓")
-    else:
-        print("存在自检失败 ✗")
-    print("=" * 60)
-    return all_passed
+def compile_patterns(rules: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """预编译正则表达式，提高匹配效率"""
+    compiled = []
+    for field in rules["fields"]:
+        try:
+            compiled.append({
+                "name": field["name"],
+                "pattern": re.compile(field["pattern"]),
+                "description": field.get("description", ""),
+            })
+        except re.error as e:
+            raise RuleParsingError("E003", f"规则 {field['name']} 正则错误: {e}")
+    return compiled
 
 
 # ============================================================
-# 主函数
+# 核心提取逻辑
+# ============================================================
+
+def extract_fields(text: str, compiled_rules: List[Dict[str, Any]]) -> Dict[str, str]:
+    """从文本中提取所有规则匹配的字段"""
+    fields = {}
+    for rule in compiled_rules:
+        match = rule["pattern"].search(text)
+        if match:
+            fields[rule["name"]] = match.group(0)
+    return fields
+
+
+def calculate_confidence(text: str, fields: Dict[str, str], compiled_rules: List[Dict[str, Any]]) -> float:
+    """
+    计算置信度：
+    - 基础分 = 匹配字段数 / 总字段数
+    - 若文本长度 < 10，惩罚 0.7
+    """
+    if not compiled_rules:
+        return 0.0
+    base_score = len(fields) / len(compiled_rules)
+    if len(text.strip()) < 10:
+        base_score *= CONFIDENCE_PENALTY
+    return round(min(base_score, 1.0), 2)
+
+
+def process_text(text: str, compiled_rules: List[Dict[str, Any]], min_confidence: float = 0.0) -> Dict[str, Any]:
+    """处理单条文本，返回结构化结果"""
+    fields = extract_fields(text, compiled_rules)
+    confidence = calculate_confidence(text, fields, compiled_rules)
+    result = {
+        "raw_text": text.strip(),
+        "fields": fields,
+        "confidence": confidence,
+    }
+    if confidence < min_confidence:
+        result["low_confidence"] = True
+    return result
+
+
+def process_file_stream(file_path: str, compiled_rules: List[Dict[str, Any]], chunk_size: int = 1000) -> List[Dict[str, Any]]:
+    """
+    流式处理文件，按行读取并分块处理。
+    返回所有记录列表。
+    """
+    results = []
+    buffer = []
+    try:
+        with open(file_path, "r", encoding="utf-8") as f:
+            for line in f:
+                buffer.append(line)
+                if len(buffer) >= chunk_size:
+                    chunk_text = "".join(buffer)
+                    results.append(process_text(chunk_text, compiled_rules))
+                    buffer = []
+            if buffer:
+                chunk_text = "".join(buffer)
+                results.append(process_text(chunk_text, compiled_rules))
+    except UnicodeDecodeError:
+        # 尝试 GBK 编码
+        try:
+            with open(file_path, "r", encoding="gbk") as f:
+                for line in f:
+                    buffer.append(line)
+                    if len(buffer) >= chunk_size:
+                        chunk_text = "".join(buffer)
+                        results.append(process_text(chunk_text, compiled_rules))
+                        buffer = []
+                if buffer:
+                    chunk_text = "".join(buffer)
+                    results.append(process_text(chunk_text, compiled_rules))
+        except Exception as e:
+            raise FileProcessingError("E002", ERROR_CODES["E002"])
+    except Exception as e:
+        raise FileProcessingError("E008", f"读取文件失败: {e}")
+    return results
+
+
+# ============================================================
+# 输出格式化
+# ============================================================
+
+def format_json(results: List[Dict[str, Any]]) -> str:
+    """格式化 JSON 输出"""
+    return json.dumps(results, ensure_ascii=False, indent=2)
+
+
+def format_markdown(results: List[Dict[str, Any]]) -> str:
+    """格式化 Markdown 表格输出"""
+    if not results:
+        return "| 字段 | 值 |\n|------|-----|\n"
+    # 收集所有字段名
+    all_fields = set()
+    for r in results:
+        all_fields.update(r["fields"].keys())
+    all_fields = sorted(all_fields)
+    
+    lines = ["| 原始文本 | " + " | ".join(all_fields) + " | 置信度 |"]
+    lines.append("|----------|" + "|".join(["------"] * len(all_fields)) + "|--------|")
+    for r in results:
+        row = [r["raw_text"].replace("|", "\\|")[:50]]
+        for field in all_fields:
+            row.append(r["fields"].get(field, ""))
+        row.append(str(r["confidence"]))
+        lines.append("| " + " | ".join(row) + " |")
+    return "\n".join(lines)
+
+
+def format_csv(results: List[Dict[str, Any]]) -> str:
+    """格式化 CSV 输出"""
+    if not results:
+        return ""
+    all_fields = set()
+    for r in results:
+        all_fields.update(r["fields"].keys())
+    all_fields = sorted(all_fields)
+    
+    output = []
+    header = ["raw_text"] + all_fields + ["confidence"]
+    output.append(",".join(header))
+    for r in results:
+        row = [r["raw_text"].replace(",", " ")]
+        for field in all_fields:
+            row.append(r["fields"].get(field, ""))
+        row.append(str(r["confidence"]))
+        output.append(",".join(row))
+    return "\n".join(output)
+
+
+def write_output(file_path: str, content: str, dry_run: bool = False) -> None:
+    """写入输出文件，支持 dry-run 模式"""
+    if dry_run:
+        print(f"[DRY-RUN] 将写入文件: {file_path}")
+        print(f"[DRY-RUN] 内容摘要: {content[:100]}...")
+        return
+    safe_write_file(file_path, content)
+
+
+# ============================================================
+# 自检函数
+# ============================================================
+
+def run_selftest() -> int:
+    """运行自检，验证核心功能"""
+    print("[SELFTEST] 开始自检...")
+    
+    # 测试 1: 默认规则提取
+    test_text = "2023-10-01 用户 13812345678 消费 299.00 元，联系 support@example.com"
+    compiled_rules = compile_patterns(DEFAULT_RULES)
+    result = process_text(test_text, compiled_rules)
+    assert "date" in result["fields"], "日期提取失败"
+    assert "phone" in result["fields"], "手机号提取失败"
+    assert "amount" in result["fields"], "金额提取失败"
+    assert "email" in result["fields"], "邮箱提取失败"
+    assert result["confidence"] > 0.5, "置信度计算异常"
+    print("[SELFTEST] 字段提取测试通过")
+    
+    # 测试 2: 空输入处理
+    empty_result = process_text("", compiled_rules)
+    assert empty_result["fields"] == {}, "空输入应返回空字段"
+    assert empty_result["confidence"] == 0.0, "空输入置信度应为 0"
+    print("[SELFTEST] 空输入测试通过")
+    
+    # 测试 3: 编码处理
+    test_file = tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8")
+    test_file.write("测试文本 13812345678")
+    test_file.close()
+    try:
+        content = safe_read_file(test_file.name)
+        assert "测试" in content, "UTF-8 读取失败"
+    finally:
+        os.unlink(test_file.name)
+    print("[SELFTEST] 编码处理测试通过")
+    
+    # 测试 4: 输出格式
+    test_results = [{"raw_text": "test", "fields": {"phone": "13812345678"}, "confidence": 0.8}]
+    json_out = format_json(test_results)
+    assert "13812345678" in json_out, "JSON 输出异常"
+    md_out = format_markdown(test_results)
+    assert "13812345678" in md_out, "Markdown 输出异常"
+    csv_out = format_csv(test_results)
+    assert "13812345678" in csv_out, "CSV 输出异常"
+    print("[SELFTEST] 输出格式测试通过")
+    
+    # 测试 5: 文件流式处理
+    test_file = tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8")
+    for i in range(10):
+        test_file.write(f"2023-10-01 用户 1381234567{i} 消费 {i}.00 元\n")
+    test_file.close()
+    try:
+        results = process_file_stream(test_file.name, compiled_rules, chunk_size=3)
+        assert len(results) >= 4, f"流式处理结果数量异常: {len(results)}"
+    finally:
+        os.unlink(test_file.name)
+    print("[SELFTEST] 流式处理测试通过")
+    
+    print("[OK] 环境正常，依赖库齐全")
+    return 0
+
+
+# ============================================================
+# 主入口
 # ============================================================
 
 def main() -> int:
-    """
-    主入口函数
-
-    返回:
-        退出码 (0: 成功, 非0: 失败)
-    """
+    """CLI 主入口"""
+    global dry_run
+    
     parser = argparse.ArgumentParser(
-        description="邮件撰写技能 - 内容处理工具",
-        epilog="示例: python main.py --input '请帮我写一封邮件'"
+        description="ACG 结构化文本处理器 - 本地规则驱动的文本批处理与结构化提取引擎",
+        epilog=f"版本 {VERSION} | MIT License"
     )
-
-    parser.add_argument(
-        "--input", "-i",
-        type=str,
-        help="待处理的输入内容"
-    )
-
-    parser.add_argument(
-        "--batch",
-        type=str,
-        nargs="+",
-        help="批量处理多个输入"
-    )
-
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自检测试"
-    )
-
-    parser.add_argument(
-        "--version",
-        action="version",
-        version="邮件撰写技能 v1.0.0"
-    )
-
+    parser.add_argument("--input", "-i", type=str, help="输入文件路径")
+    parser.add_argument("--output", "-o", type=str, help="输出文件路径（默认自动生成）")
+    parser.add_argument("--format", "-f", type=str, choices=SUPPORTED_FORMATS, default="json", help="输出格式")
+    parser.add_argument("--rules", "-r", type=str, help="自定义规则文件路径")
+    parser.add_argument("--min-confidence", type=float, default=0.0, help="最低置信度阈值")
+    parser.add_argument("--dry-run", action="store_true", help="预览模式，不写入文件")
+    parser.add_argument("--verbose", "-v", action="store_true", help="详细日志")
+    parser.add_argument("--encoding", type=str, choices=SUPPORTED_ENCODINGS, help="输入文件编码")
+    parser.add_argument("--chunk-size", type=int, default=1000, help="分块大小（行数）")
+    parser.add_argument("--force", action="store_true", help="自动创建输出目录")
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+    
     args = parser.parse_args()
-
-    # 运行自检
+    
+    # 自检模式
     if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
-
-    # 创建处理器
-    processor = ContentProcessor()
-
-    # 批量处理
-    if args.batch:
-        results = processor.process_batch(args.batch)
-        for i, result in enumerate(results, 1):
-            print(f"\n--- 结果 {i} ---")
-            if result["success"]:
-                print(f"标题: {result['title']}")
-                print(f"内容: {result['content']}")
-                print(f"置信度: {result['confidence']:.2f} ({result['confidence_label']})")
-            else:
-                print(f"错误: {result['error_message']}")
-        return 0
-
-    # 单个处理
-    if args.input:
-        result = processor.generate_output(args.input)
-        if result["success"]:
-            print(f"标题: {result['title']}")
-            print(f"内容: {result['content']}")
-            print(f"置信度: {result['confidence']:.2f} ({result['confidence_label']})")
-            return 0
+        return run_selftest()
+    
+    # 参数校验
+    if not args.input:
+        print("[E001] 必须指定 --input 参数", file=sys.stderr)
+        return 1
+    
+    # 设置全局 dry-run
+    dry_run = args.dry_run
+    
+    try:
+        # 校验输入文件
+        validate_input_file(args.input)
+        
+        # 加载规则
+        rules = load_rules(args.rules)
+        compiled_rules = compile_patterns(rules)
+        
+        # 处理文件
+        results = process_file_stream(args.input, compiled_rules, args.chunk_size)
+        
+        # 过滤低置信度
+        if args.min_confidence > 0:
+            results = [r for r in results if r["confidence"] >= args.min_confidence]
+        
+        # 生成输出
+        if args.format == "json":
+            content = format_json(results)
+        elif args.format == "markdown":
+            content = format_markdown(results)
+        elif args.format == "csv":
+            content = format_csv(results)
         else:
-            print(f"错误: {result['error_message']}")
-            return 1
-
-    # 无输入参数，显示帮助
-    parser.print_help()
-    return 0
+            raise OutputFormatError("E004", ERROR_CODES["E004"])
+        
+        # 确定输出路径
+        if args.output:
+            output_path = args.output
+        else:
+            base = os.path.splitext(args.input)[0]
+            output_path = f"{base}_output.{args.format}"
+        
+        # 校验输出目录
+        validate_output_dir(output_path, args.force)
+        
+        # 写入输出
+        write_output(output_path, content, args.dry_run)
+        
+        if args.verbose:
+            print(f"[VERBOSE] 处理完成: {len(results)} 条记录")
+            for i, r in enumerate(results[:5], 1):
+                print(f"[VERBOSE] 记录 {i}: 提取到字段 {', '.join(r['fields'].keys())}")
+        
+        if not args.dry_run:
+            print(f"[OK] 输出已写入: {output_path}")
+        
+        return 0
+        
+    except ACGError as e:
+        print(f"[{e.code}] {e.message}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"[E008] 未知错误: {e}", file=sys.stderr)
+        return 1
 
 
 if __name__ == "__main__":
