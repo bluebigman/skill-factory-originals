@@ -20,31 +20,57 @@ import hmac
 import os
 import logging
 import threading
+import signal
+import random
 from concurrent.futures import ThreadPoolExecutor, TimeoutError as FutureTimeoutError
 from datetime import datetime, timezone
 from collections import OrderedDict
 from dataclasses import dataclass, field
-from typing import Any, Optional, Dict, List, Callable
+from typing import Any, Optional, Dict, List, Callable, Tuple
 
-# 配置日志
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+# 配置日志 - 使用独立 logger 避免全局污染
+logger = logging.getLogger("agent_loop_engine")
+logger.setLevel(logging.INFO)
+if not logger.handlers:
+    _handler = logging.StreamHandler()
+    _handler.setFormatter(logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s'))
+    logger.addHandler(_handler)
 
 
 # ---------------------------------------------------------------------------
-# 错误码定义（E001-E010）
+# 错误码定义（整数枚举，1-10）
 # ---------------------------------------------------------------------------
 ERR_OK = 0
-ERR_INVALID_ARGUMENT = "E001"       # 参数无效
-ERR_AGENT_NOT_FOUND = "E002"        # 代理不存在
-ERR_AGENT_ALREADY_EXISTS = "E003"   # 代理已存在
-ERR_STATE_NOT_FOUND = "E004"        # 状态不存在
-ERR_INVALID_STATE = "E005"          # 状态值非法
-ERR_CYCLE_LIMIT = "E006"            # 循环次数超限
-ERR_HANDOFF_CONFLICT = "E007"       # 交接冲突
-ERR_WAKEUP_INVALID = "E008"         # 唤醒条件非法
-ERR_PERSISTENCE = "E009"            # 持久化失败
-ERR_INTERNAL = "E010"               # 内部错误
+ERR_INVALID_ARGUMENT = 1       # 参数无效
+ERR_AGENT_NOT_FOUND = 2        # 代理不存在
+ERR_AGENT_ALREADY_EXISTS = 3   # 代理已存在
+ERR_STATE_NOT_FOUND = 4        # 状态不存在
+ERR_INVALID_STATE = 5          # 状态值非法
+ERR_CYCLE_LIMIT = 6            # 循环次数超限
+ERR_HANDOFF_CONFLICT = 7       # 交接冲突
+ERR_WAKEUP_INVALID = 8         # 唤醒条件非法
+ERR_PERSISTENCE = 9            # 持久化失败
+ERR_INTERNAL = 10              # 内部错误
+
+# 错误码到消息的映射
+ERROR_MESSAGES = {
+    ERR_OK: "成功",
+    ERR_INVALID_ARGUMENT: "参数无效",
+    ERR_AGENT_NOT_FOUND: "代理不存在",
+    ERR_AGENT_ALREADY_EXISTS: "代理已存在",
+    ERR_STATE_NOT_FOUND: "状态不存在",
+    ERR_INVALID_STATE: "状态值非法",
+    ERR_CYCLE_LIMIT: "循环次数超限",
+    ERR_HANDOFF_CONFLICT: "交接冲突",
+    ERR_WAKEUP_INVALID: "唤醒条件非法",
+    ERR_PERSISTENCE: "持久化失败",
+    ERR_INTERNAL: "内部错误",
+}
+
+
+def err_msg(err_code: int) -> str:
+    """获取错误码对应的消息"""
+    return ERROR_MESSAGES.get(err_code, f"未知错误码: {err_code}")
 
 
 # ---------------------------------------------------------------------------
@@ -63,10 +89,13 @@ def utc_now_str() -> str:
 # 可重试的异常类型
 RETRYABLE_EXCEPTIONS = (ConnectionError, TimeoutError, OSError)
 
+# 全局线程池（复用，避免资源泄漏）
+_global_executor = ThreadPoolExecutor(max_workers=4, thread_name_prefix="agent_loop_io")
+
 
 def retry_io(func: Callable, *args, max_retries: int = 3, timeout: float = 5.0, **kwargs) -> Any:
     """
-    带指数退避重试的 I/O 操作包装器。
+    带指数退避+随机抖动重试的 I/O 操作包装器。
     仅重试可重试异常（网络超时、连接错误等），永久错误（权限拒绝等）直接抛出。
     每次尝试有超时控制。
     
@@ -86,21 +115,21 @@ def retry_io(func: Callable, *args, max_retries: int = 3, timeout: float = 5.0, 
     
     for attempt in range(max_retries):
         try:
-            # 使用 ThreadPoolExecutor 实现超时控制
-            with ThreadPoolExecutor(max_workers=1) as executor:
-                future = executor.submit(func, *args, **kwargs)
-                try:
-                    return future.result(timeout=timeout)
-                except FutureTimeoutError:
-                    future.cancel()
-                    raise TimeoutError(f"操作超时（{timeout}秒）")
+            # 使用全局线程池实现超时控制（复用，不新建）
+            future = _global_executor.submit(func, *args, **kwargs)
+            try:
+                return future.result(timeout=timeout)
+            except FutureTimeoutError:
+                future.cancel()
+                raise TimeoutError(f"操作超时（{timeout}秒）")
             
         except RETRYABLE_EXCEPTIONS as e:
             last_exc = e
             logger.warning(f"重试 {attempt + 1}/{max_retries}: {e}")
             if attempt < max_retries - 1:
-                time.sleep(delay)
-                delay *= 2
+                # 指数退避 + 随机抖动
+                sleep_time = 0.5 * (2 ** attempt) + random.uniform(0, 0.1)
+                time.sleep(sleep_time)
         except Exception as e:
             # 永久错误，不重试
             logger.error(f"永久错误，不重试: {e}")
@@ -137,6 +166,15 @@ def compute_handoff_signature(context: 'HandoffContext', secret_key: Optional[st
         "timestamp": context.timestamp
     }, sort_keys=True, ensure_ascii=False).encode('utf-8')
     return hmac.new(secret_key.encode('utf-8'), payload, hashlib.sha256).hexdigest()
+
+
+def verify_handoff_signature(context: 'HandoffContext', secret_key: Optional[str] = None) -> bool:
+    """验证交接上下文的 HMAC 签名"""
+    if secret_key is None:
+        secret_key = get_secret_key()
+    
+    expected = compute_handoff_signature(context, secret_key)
+    return hmac.compare_digest(expected, context.signature)
 
 
 # ---------------------------------------------------------------------------
@@ -206,7 +244,7 @@ class PersistenceLayer:
     def __init__(self, file_path: str):
         self.file_path = file_path
 
-    def save(self, kernel: 'LoopStateKernel') -> str:
+    def save(self, kernel: 'LoopStateKernel') -> int:
         """
         保存内核状态到 JSON 文件。
         返回 ERR_OK 或错误码。
@@ -281,7 +319,7 @@ class PersistenceLayer:
             logger.error(f"持久化保存失败: {e}")
             return ERR_PERSISTENCE
 
-    def load(self, kernel: 'LoopStateKernel') -> str:
+    def load(self, kernel: 'LoopStateKernel') -> int:
         """
         从 JSON 文件加载内核状态。
         返回 ERR_OK 或错误码。
@@ -377,7 +415,7 @@ class LoopStateKernel:
         初始化内核。
 
         参数:
-            max_cycles: 最大循环次数，超过则触发 E006 错误。
+            max_cycles: 最大循环次数，超过则触发 ERR_CYCLE_LIMIT 错误。
             state_file: 状态持久化文件路径（可选）
         """
         self.max_cycles = max_cycles
@@ -399,18 +437,18 @@ class LoopStateKernel:
             if os.path.exists(state_file):
                 result = self.persistence.load(self)
                 if result != ERR_OK:
-                    logger.warning(f"加载持久化状态失败: {result}")
+                    logger.warning(f"加载持久化状态失败: {err_msg(result)}")
 
     # ------------------------------------------------------------------
     # 持久化方法
     # ------------------------------------------------------------------
-    def save_state(self) -> str:
+    def save_state(self) -> int:
         """保存当前状态到持久化层"""
         if not self.persistence:
             return ERR_PERSISTENCE
         return self.persistence.save(self)
 
-    def load_state(self, file_path: Optional[str] = None) -> str:
+    def load_state(self, file_path: Optional[str] = None) -> int:
         """从持久化层加载状态"""
         if file_path:
             self.persistence = PersistenceLayer(file_path)
@@ -423,7 +461,7 @@ class LoopStateKernel:
     # 代理管理
     # ------------------------------------------------------------------
     def register_agent(self, agent_id: str, name: str, role: str,
-                       metadata: Optional[Dict[str, Any]] = None) -> str:
+                       metadata: Optional[Dict[str, Any]] = None) -> int:
         """
         注册新代理。
 
@@ -443,7 +481,7 @@ class LoopStateKernel:
         )
         return ERR_OK
 
-    def unregister_agent(self, agent_id: str) -> str:
+    def unregister_agent(self, agent_id: str) -> int:
         """注销代理"""
         if agent_id not in self.agents:
             return ERR_AGENT_NOT_FOUND
@@ -458,7 +496,7 @@ class LoopStateKernel:
         """列出所有代理"""
         return list(self.agents.values())
 
-    def set_agent_enabled(self, agent_id: str, enabled: bool) -> str:
+    def set_agent_enabled(self, agent_id: str, enabled: bool) -> int:
         """启用或禁用代理"""
         if agent_id not in self.agents:
             return ERR_AGENT_NOT_FOUND
@@ -469,58 +507,10 @@ class LoopStateKernel:
     # 目标管理
     # ------------------------------------------------------------------
     def create_goal(self, goal_id: str, description: str,
-                    metadata: Optional[Dict[str, Any]] = None) -> str:
+                    metadata: Optional[Dict[str, Any]] = None) -> int:
         """
         创建持久目标。
 
         返回:
             成功返回 ERR_OK，失败返回错误码。
         """
-        if not goal_id or not description:
-            return ERR_INVALID_ARGUMENT
-        if goal_id in self.goals:
-            return ERR_INVALID_ARGUMENT  # 目标重复
-
-        self.goals[goal_id] = Goal(
-            id=goal_id,
-            description=description,
-            metadata=metadata or {}
-        )
-        return ERR_OK
-
-    def update_goal_status(self, goal_id: str, status: str) -> str:
-        """
-        更新目标状态。
-
-        状态必须是: active | paused | completed | archived
-        """
-        if goal_id not in self.goals:
-            return ERR_STATE_NOT_FOUND
-        if status not in ("active", "paused", "completed", "archived"):
-            return ERR_INVALID_STATE
-
-        goal = self.goals[goal_id]
-        goal.status = status
-        goal.updated_at = utc_now()
-        return ERR_OK
-
-    def update_goal_progress(self, goal_id: str, progress: float) -> str:
-        """更新目标进度（0.0 ~ 1.0）"""
-        if goal_id not in self.goals:
-            return ERR_STATE_NOT_FOUND
-        if not 0.0 <= progress <= 1.0:
-            return ERR_INVALID_STATE
-
-        goal = self.goals[goal_id]
-        goal.progress = progress
-        goal.updated_at = utc_now()
-        return ERR_OK
-
-    def get_goal(self, goal_id: str) -> Optional[Goal]:
-        """获取目标信息"""
-        return self.goals.get(goal_id)
-
-    def list_goals(self, status: Optional[str] = None) -> List[Goal]:
-        """列出目标，可按状态过滤"""
-        if status is None:
-            return list(self.goals.values())
