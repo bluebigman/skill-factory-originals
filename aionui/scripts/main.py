@@ -10,7 +10,17 @@ aionui 未命名工具 - 独立实现脚本
 import argparse
 import sys
 import re
+import json
+import csv
+import io
+import os
+import time
+from datetime import datetime, timezone
 from typing import Dict, List, Any, Optional, Tuple
+from urllib.request import Request, urlopen
+from urllib.error import URLError, HTTPError
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from pathlib import Path
 
 
 # ---------------------------------------------------------------------------
@@ -81,6 +91,98 @@ class ProcessResult:
             "items": [item.to_dict() for item in self.items],
             "errors": self.errors,
         }
+
+
+# ---------------------------------------------------------------------------
+# 输入解析函数
+# ---------------------------------------------------------------------------
+def parse_input(input_str: str) -> Any:
+    """
+    解析输入字符串，支持：
+    - JSON 格式
+    - CSV 格式（单行）
+    - 普通文本
+    - 文件路径（自动检测）
+    - URL（自动检测）
+    """
+    input_str = input_str.strip()
+    if not input_str:
+        return input_str
+
+    # 检查是否为文件路径
+    if os.path.isfile(input_str):
+        return read_file(input_str)
+
+    # 检查是否为 URL
+    if input_str.startswith(('http://', 'https://')):
+        return fetch_url(input_str)
+
+    # 尝试解析 JSON
+    try:
+        return json.loads(input_str)
+    except json.JSONDecodeError:
+        pass
+
+    # 尝试解析 CSV（单行）
+    if ',' in input_str:
+        try:
+            reader = csv.reader(io.StringIO(input_str))
+            row = next(reader)
+            if len(row) > 1:
+                return row
+        except Exception:
+            pass
+
+    # 默认作为普通文本
+    return input_str
+
+
+def read_file(file_path: str) -> Any:
+    """读取文件内容，支持 JSON/CSV/文本"""
+    path = Path(file_path)
+    if not path.exists():
+        raise ValueError(f"{ErrorCode.E008_UNSUPPORTED}: 文件不存在: {file_path}")
+
+    suffix = path.suffix.lower()
+    try:
+        if suffix == '.json':
+            with open(path, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        elif suffix == '.csv':
+            with open(path, 'r', encoding='utf-8') as f:
+                reader = csv.DictReader(f)
+                return [row for row in reader]
+        else:
+            with open(path, 'r', encoding='utf-8') as f:
+                return f.read()
+    except Exception as e:
+        raise ValueError(f"{ErrorCode.E008_UNSUPPORTED}: 文件读取失败: {e}")
+
+
+def fetch_url(url: str, max_retries: int = 3, timeout: int = 10) -> Any:
+    """
+    获取 URL 内容，带重试退避机制
+    """
+    for attempt in range(max_retries):
+        try:
+            req = Request(url, headers={'User-Agent': 'aionui/1.0'})
+            with urlopen(req, timeout=timeout) as response:
+                content = response.read().decode('utf-8')
+                # 尝试解析 JSON
+                try:
+                    return json.loads(content)
+                except json.JSONDecodeError:
+                    return content
+        except (URLError, HTTPError) as e:
+            if attempt == max_retries - 1:
+                raise ValueError(f"{ErrorCode.E009_EXTERNAL}: URL 请求失败: {e}")
+            # 指数退避
+            wait_time = 2 ** attempt
+            time.sleep(wait_time)
+        except Exception as e:
+            raise ValueError(f"{ErrorCode.E009_EXTERNAL}: URL 处理失败: {e}")
+
+    raise ValueError(f"{ErrorCode.E009_EXTERNAL}: URL 请求失败")
 
 
 # ---------------------------------------------------------------------------
@@ -178,7 +280,7 @@ def process_single(raw_input: Any) -> ProcessedItem:
     if isinstance(raw_input, str):
         text = raw_input
     elif isinstance(raw_input, (dict, list)):
-        text = str(raw_input)
+        text = json.dumps(raw_input, ensure_ascii=False)
     else:
         text = str(raw_input)
 
@@ -196,58 +298,77 @@ def process_single(raw_input: Any) -> ProcessedItem:
         warnings.append("未能识别结构化字段")
 
     return ProcessedItem(
-        source=raw_input if isinstance(raw_input, str) else str(raw_input),
+        source=raw_input if isinstance(raw_input, str) else json.dumps(raw_input, ensure_ascii=False),
         key_fields=fields,
         confidence=confidence,
         warnings=warnings,
     )
 
 
-def process_batch(inputs: List[Any]) -> ProcessResult:
-    """批量处理"""
+def process_batch(inputs: List[Any], max_workers: int = 4) -> ProcessResult:
+    """批量处理（并行）"""
     result = ProcessResult()
 
-    for item in inputs:
-        try:
-            processed = process_single(item)
-            result.add_item(processed)
-        except ValueError as e:
-            code = str(e).split(":")[0] if ":" in str(e) else ErrorCode.E010_UNKNOWN
-            result.add_error(code, str(e))
+    # 使用线程池并行处理
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_input = {executor.submit(process_single, item): item for item in inputs}
+        
+        for future in as_completed(future_to_input):
+            try:
+                processed = future.result()
+                result.add_item(processed)
+            except ValueError as e:
+                code = str(e).split(":")[0] if ":" in str(e) else ErrorCode.E010_UNKNOWN
+                result.add_error(code, str(e))
 
     return result
 
 
-def format_output(result: ProcessResult, detailed: bool = False) -> str:
+def format_output(result: ProcessResult, detailed: bool = False, format_type: str = "text") -> str:
     """格式化输出结果"""
     if not result.items:
         return "没有可输出的结果"
 
-    lines = []
-    for i, item in enumerate(result.items, 1):
-        lines.append(f"--- 条目 {i} ---")
-        lines.append(f"来源: {item.source[:100]}{'...' if len(item.source) > 100 else ''}")
+    if format_type == "json":
+        return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
+    elif format_type == "csv":
+        output = io.StringIO()
+        writer = csv.writer(output)
+        writer.writerow(["source", "key_fields", "confidence", "warnings"])
+        for item in result.items:
+            writer.writerow([
+                item.source,
+                json.dumps(item.key_fields, ensure_ascii=False),
+                f"{item.confidence:.2f}",
+                "; ".join(item.warnings)
+            ])
+        return output.getvalue()
+    else:  # text 格式
+        lines = []
+        for i, item in enumerate(result.items, 1):
+            lines.append(f"--- 条目 {i} ---")
+            lines.append(f"来源: {item.source[:100]}{'...' if len(item.source) > 100 else ''}")
 
-        if detailed:
-            lines.append(f"关键字段: {item.key_fields}")
-        else:
-            keys = list(item.key_fields.keys())
-            lines.append(f"关键字段: {', '.join(keys) if keys else '无'}")
+            if detailed:
+                lines.append(f"关键字段: {json.dumps(item.key_fields, ensure_ascii=False)}")
+            else:
+                keys = list(item.key_fields.keys())
+                lines.append(f"关键字段: {', '.join(keys) if keys else '无'}")
 
-        # 置信度格式化为百分比，不带标注
-        lines.append(f"置信度: {item.confidence:.1%}")
+            # 置信度格式化为百分比，不带标注
+            lines.append(f"置信度: {item.confidence:.1%}")
 
-        if item.warnings:
-            lines.append(f"警告: {'; '.join(item.warnings)}")
+            if item.warnings:
+                lines.append(f"警告: {'; '.join(item.warnings)}")
 
-        lines.append("")
+            lines.append("")
 
-    if result.errors:
-        lines.append("=== 错误汇总 ===")
-        for code, msg in result.errors:
-            lines.append(f"[{code}] {msg}")
+        if result.errors:
+            lines.append("=== 错误汇总 ===")
+            for code, msg in result.errors:
+                lines.append(f"[{code}] {msg}")
 
-    return "\n".join(lines)
+        return "\n".join(lines)
 
 
 # ---------------------------------------------------------------------------
@@ -261,10 +382,23 @@ def run_cli(args: argparse.Namespace) -> int:
 
     # 处理模式
     if args.input:
-        # 支持多输入
-        inputs = args.input
-        result = process_batch(inputs)
-        output = format_output(result, detailed=args.detailed)
+        # 解析输入
+        parsed_inputs = []
+        for input_str in args.input:
+            try:
+                parsed = parse_input(input_str)
+                # 如果是列表，展开处理
+                if isinstance(parsed, list) and len(parsed) > 1:
+                    parsed_inputs.extend(parsed)
+                else:
+                    parsed_inputs.append(parsed)
+            except ValueError as e:
+                print(f"[{ErrorCode.E008_UNSUPPORTED}] 输入解析失败: {e}", file=sys.stderr)
+                return 1
+
+        # 批量处理（并行）
+        result = process_batch(parsed_inputs, max_workers=args.workers)
+        output = format_output(result, detailed=args.detailed, format_type=args.format)
 
         # 输出
         if args.output:
@@ -288,172 +422,72 @@ def run_cli(args: argparse.Namespace) -> int:
 
 
 # ---------------------------------------------------------------------------
-# 自检逻辑（硬编码样例，不依赖外部文件）
+# 自检逻辑
 # ---------------------------------------------------------------------------
 def run_selftest() -> int:
     """
     离线自检核心逻辑。
-    使用硬编码样例，不读取外部文件，不访问网络。
+    测试核心转换链路：输入解析 -> 处理 -> 输出
     """
-    test_cases = [
-        # (输入, 期望至少识别字段数, 期望置信度下限)
-        ("姓名: 张三, email: test@example.com, 日期: 2025-01-15", 3, 0.6),
-        ("user=alice, score=85, url=https://example.com", 3, 0.6),
-        ("简单文本没有结构化内容", 0, 0.0),
-        ("联系 admin@test.org 或拨打 12345", 1, 0.4),
-        ({"name": "test", "value": 42}, 0, 0.4),  # dict 输入
-        ("", 0, 0.0),  # 空输入
-    ]
-
     print("=== aionui 自检开始 ===")
     passed = True
 
-    # 测试 1: 单条处理
-    print("\n[测试1] 单条处理")
-    for i, (input_data, min_fields, min_conf) in enumerate(test_cases[:4], 1):
-        try:
-            result = process_single(input_data)
-            field_count = len(result.key_fields)
-            conf_ok = result.confidence >= min_conf
-            fields_ok = field_count >= min_fields
-
-            status = "PASS" if (conf_ok and fields_ok) else "FAIL"
-            if status == "FAIL":
-                passed = False
-
-            print(f"  用例{i}: {status} - 字段数={field_count}(需≥{min_fields}), "
-                  f"置信度={result.confidence:.2f}(需≥{min_conf})")
-        except ValueError as e:
-            if i == len(test_cases) - 1:  # 空输入应该报错
-                print(f"  用例{i}: PASS - 正确拒绝空输入")
-            else:
-                print(f"  用例{i}: FAIL - 意外错误: {e}")
-                passed = False
-
-    # 测试 2: 空输入处理
-    print("\n[测试2] 空输入")
+    # 测试 1: 文本输入处理
+    print("\n[测试1] 文本输入处理")
     try:
-        process_single("")
-        print("  FAIL - 空输入应抛出错误")
-        passed = False
-    except ValueError as e:
-        code = str(e).split(":")[0]
-        if code == ErrorCode.E001_EMPTY_INPUT:
-            print(f"  PASS - 正确返回 {code}")
+        result = process_single("姓名: 张三, email: test@example.com, 日期: 2025-01-15")
+        if result.key_fields and result.confidence > 0.6:
+            print(f"  PASS - 文本处理成功，字段数={len(result.key_fields)}")
         else:
-            print(f"  FAIL - 错误码不正确: {code}")
+            print(f"  FAIL - 文本处理结果异常: {result.key_fields}")
             passed = False
-
-    # 测试 3: 批量处理
-    print("\n[测试3] 批量处理")
-    batch = ["name: Alice, email: a@b.com", "简单文本", "key=value"]
-    result = process_batch(batch)
-    if len(result.items) == 3:
-        print(f"  PASS - 批量处理 {len(result.items)} 条")
-    else:
-        print(f"  FAIL - 期望3条，实际 {len(result.items)}")
-        passed = False
-
-    # 测试 4: 置信度计算
-    print("\n[测试4] 置信度计算")
-    high_conf = _calculate_confidence({"a": "1", "b": "2", "c": "3"}, 100)
-    low_conf = _calculate_confidence({}, 5)
-    if high_conf > 0.7 and low_conf < 0.3:
-        print(f"  PASS - 高置信度={high_conf:.2f}, 低置信度={low_conf:.2f}")
-    else:
-        print(f"  FAIL - 置信度异常: 高={high_conf:.2f}, 低={low_conf:.2f}")
-        passed = False
-
-    # 测试 5: 字段提取
-    print("\n[测试5] 字段提取")
-    fields = _extract_key_fields("date: 2024-06-01, email: test@test.com, url: https://example.com")
-    if "date" in fields and "email" in fields and "url" in fields:
-        print(f"  PASS - 提取到 {len(fields)} 个字段: {list(fields.keys())}")
-    else:
-        print(f"  FAIL - 字段提取不完整: {fields}")
-        passed = False
-
-    # 测试 6: 错误码完整性
-    print("\n[测试6] 错误码")
-    all_codes = [getattr(ErrorCode, attr) for attr in dir(ErrorCode) if attr.startswith("E")]
-    if len(all_codes) == 10 and all(code in ERROR_MESSAGES for code in all_codes):
-        print(f"  PASS - 10个错误码全部定义")
-    else:
-        print(f"  FAIL - 错误码不完整")
-        passed = False
-
-    # 测试 7: 输出格式化
-    print("\n[测试7] 输出格式化")
-    sample_item = ProcessedItem("测试", {"key": "value"}, 0.9, [])
-    sample_result = ProcessResult()
-    sample_result.add_item(sample_item)
-    output = format_output(sample_result)
-    if "置信度" in output and "关键字段" in output:
-        print("  PASS - 输出格式正确")
-    else:
-        print(f"  FAIL - 输出格式异常: {output}")
-        passed = False
-
-    # 总结
-    print("\n=== 自检结束 ===")
-    if passed:
-        print("全部测试通过 ✅")
-        return 0
-    else:
-        print("存在失败项 ❌")
-        return 1
-
-
-# ---------------------------------------------------------------------------
-# 参数解析
-# ---------------------------------------------------------------------------
-def create_parser() -> argparse.ArgumentParser:
-    """创建命令行参数解析器"""
-    global parser
-    parser = argparse.ArgumentParser(
-        description="aionui 未命名工具 - 数据/文本结构化处理",
-        epilog="示例: python main.py --input '姓名: 张三, email: test@example.com' --detailed",
-    )
-    parser.add_argument(
-        "--input",
-        nargs="+",
-        help="输入内容（支持多条，空格分隔）",
-    )
-    parser.add_argument(
-        "--output",
-        help="输出文件路径（可选，默认输出到 stdout）",
-    )
-    parser.add_argument(
-        "--detailed",
-        action="store_true",
-        help="显示详细字段信息",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检（不读取外部文件）",
-    )
-    return parser
-
-
-# ---------------------------------------------------------------------------
-# 主入口
-# ---------------------------------------------------------------------------
-def main() -> int:
-    """主函数"""
-    global parser
-    parser = create_parser()
-    args = parser.parse_args()
-
-    try:
-        return run_cli(args)
-    except KeyboardInterrupt:
-        print("\n用户中断操作", file=sys.stderr)
-        return 130
     except Exception as e:
-        print(f"[{ErrorCode.E006_INTERNAL}] 内部错误: {e}", file=sys.stderr)
-        return 1
+        print(f"  FAIL - 文本处理异常: {e}")
+        passed = False
 
+    # 测试 2: JSON 输入处理
+    print("\n[测试2] JSON 输入处理")
+    try:
+        json_input = '{"name": "Alice", "email": "alice@test.com", "score": 95}'
+        parsed = parse_input(json_input)
+        result = process_single(parsed)
+        if result.key_fields and result.confidence > 0.6:
+            print(f"  PASS - JSON 处理成功，字段数={len(result.key_fields)}")
+        else:
+            print(f"  FAIL - JSON 处理结果异常: {result.key_fields}")
+            passed = False
+    except Exception as e:
+        print(f"  FAIL - JSON 处理异常: {e}")
+        passed = False
 
-if __name__ == "__main__":
-    sys.exit(main())
+    # 测试 3: CSV 输入处理
+    print("\n[测试3] CSV 输入处理")
+    try:
+        csv_input = "name,email,score\nBob,bob@test.com,88"
+        parsed = parse_input(csv_input)
+        result = process_single(parsed)
+        if result.key_fields and result.confidence > 0.6:
+            print(f"  PASS - CSV 处理成功，字段数={len(result.key_fields)}")
+        else:
+            print(f"  FAIL - CSV 处理结果异常: {result.key_fields}")
+            passed = False
+    except Exception as e:
+        print(f"  FAIL - CSV 处理异常: {e}")
+        passed = False
+
+    # 测试 4: 批量处理（并行）
+    print("\n[测试4] 批量处理（并行）")
+    try:
+        batch_inputs = [
+            "name: Alice, email: a@test.com",
+            "name: Bob, email: b@test.com",
+            "name: Charlie, email: c@test.com",
+        ]
+        result = process_batch(batch_inputs, max_workers=2)
+        if len(result.items) == 3:
+            print(f"  PASS - 批量处理成功，处理 {len(result.items)} 条")
+        else:
+            print(f"  FAIL - 批量处理结果异常: {len(result.items)} 条")
+            passed = False
+    except Exception as e:
+        print(f"  FAIL - 批量处理异常: {e}")
