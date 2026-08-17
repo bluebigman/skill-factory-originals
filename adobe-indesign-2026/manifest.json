@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260818_041106",
+  "slug": "adobe-indesign-2026",
+  "spec": {
+    "slug": "adobe-indesign-2026",
+    "name": "adobe-indesign-2026",
+    "description": "为 InDesign 2026 生成、部署、调试 .jsx 脚本，实现多文档批量排版与工作流自动化。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 打开 InDesign 2026，点击 `窗口 > 实用程序 > 脚本`",
+      "2. 右键点击\"用户\"文件夹，选择\"在资源管理器中显示\"（Windows）或\"在 Finder 中显示\"（macOS）",
+      "3. 将生成的 `.jsx` 文件复制到该文件夹",
+      "4. 在脚本面板右键点击\"用户\"文件夹，选择\"刷新\"",
+      "5. 双击脚本名称运行"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "aa3562937fd0c255",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
