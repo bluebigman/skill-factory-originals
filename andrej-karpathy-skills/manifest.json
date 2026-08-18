@@ -1,0 +1,50 @@
+{
+  "timestamp": "20260818_233029",
+  "slug": "andrej-karpathy-skills",
+  "spec": {
+    "slug": "andrej-karpathy-skills",
+    "name": "andrej-karpathy-skills",
+    "description": "基于LLM编码缺陷观察，规范AI协作行为，提升代码质量。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 读取项目文件树（排除 `node_modules`、`.git`、`venv` 等目录）。",
+      "2. 读取依赖清单（`package.json`、`requirements.txt`、`go.mod` 等）。",
+      "3. 若有 Git 仓库，读取最近 10 条提交记录。",
+      "4. 检查 `.coding-standards.md` 是否存在，若存在则加载为规范基准。",
+      "2. **任务拆解粒度**：评估任务拆解是否合理。单个任务超过 200 行代码改动为\"过大\"；单次改动少于 5 行但涉及 10 个以上文件为\"碎片化\"。",
+      "3. **验证反馈闭环**：检查是否每次修改后都执行了测试。若最近 3 次修改均无测试记录，标记为闭环断裂。",
+      "1. **摘要**：检查范围、发现的问题总数、严重程度分布。",
+      "2. **缺陷明细**：每条缺陷的编号、位置、描述、证据、修复建议。",
+      "3. **上下文评估**：上下文使用率、约束保留情况、任务拆解评分。",
+      "4. **行动清单**：按优先级排列的下一步操作。",
+      "5. **置信度标注**：每条结论标注置信度（高/中/低），低置信度结论使用 `[需核实:...]` 占位。",
+      "1. 阅读本速查卡，了解基本操作。",
+      "2. 运行 `andrej-karpathy-skills --selftest` 验证技能完整性。",
+      "3. 在小型项目（< 1000 行代码）上试用 `quick` 模式。",
+      "4. 阅读 6.1 节反模式对照，避免常见错误。",
+      "5. 逐步过渡到 `full` 模式，体验完整检查流程。",
+      "1. 深入学习 4.2 节 7 类缺陷模式的详细特征与规避策略。",
+      "2. 自定义 `.coding-standards.md`，将团队规范融入检查流程。",
+      "3. 使用 `audit` 模式对历史代码进行全量审计。",
+      "4. 结合 CI/CD 流水线，将本 Skill 集成到代码提交门禁。",
+      "5. 根据实际使用反馈，调整 `strictness` 参数平衡效率与质量。",
+      "1. 检查项目根目录是否存在 `.coding-standards.md`。",
+      "2. 若存在，解析 YAML frontmatter 和正文章节。",
+      "3. 将规范内容合并到检查流程中，作为缺陷判定的补充依据。",
+      "4. 若规范文件格式错误，报错 E-106 并回退到内置默认规范。",
+      "2. **禁止反向工程**：禁止对本 Skill 进行反向工程、反编译、破解或试图提取底层算法。禁止将本 Skill 用于任何商业用途的再分发。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "96a0691ebe8b461f",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
