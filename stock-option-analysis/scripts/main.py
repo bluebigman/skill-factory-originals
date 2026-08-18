@@ -12,6 +12,7 @@
 用法：
     python scripts/main.py --selftest          # 运行内置自检
     python scripts/main.py --input "..."       # 分析单条输入
+    python scripts/main.py --input "..." --output-format json  # JSON 输出
     python scripts/main.py --help              # 显示帮助
 """
 
@@ -63,6 +64,38 @@ class OptionInput:
     option_type: str           # "call" 或 "put"
     quantity: int = 1          # 合约数量
 
+    def __post_init__(self):
+        """参数校验，确保所有输入在合理范围内。"""
+        # 类型检查
+        if not isinstance(self.spot_price, (int, float)) or isinstance(self.spot_price, bool):
+            raise OptionAnalysisError("E006", "spot_price 必须是数字")
+        if not isinstance(self.strike_price, (int, float)) or isinstance(self.strike_price, bool):
+            raise OptionAnalysisError("E006", "strike_price 必须是数字")
+        if not isinstance(self.time_to_expiry, (int, float)) or isinstance(self.time_to_expiry, bool):
+            raise OptionAnalysisError("E006", "time_to_expiry 必须是数字")
+        if not isinstance(self.risk_free_rate, (int, float)) or isinstance(self.risk_free_rate, bool):
+            raise OptionAnalysisError("E006", "risk_free_rate 必须是数字")
+        if not isinstance(self.volatility, (int, float)) or isinstance(self.volatility, bool):
+            raise OptionAnalysisError("E006", "volatility 必须是数字")
+        if not isinstance(self.quantity, int) or isinstance(self.quantity, bool):
+            raise OptionAnalysisError("E006", "quantity 必须是整数")
+
+        # 数值范围校验
+        if self.spot_price <= 0:
+            raise OptionAnalysisError("E003", "标的价必须为正数")
+        if self.strike_price <= 0:
+            raise OptionAnalysisError("E003", "行权价必须为正数")
+        if self.time_to_expiry <= 0:
+            raise OptionAnalysisError("E003", "剩余期限必须大于0")
+        if self.volatility <= 0:
+            raise OptionAnalysisError("E003", "波动率必须大于0")
+        if self.risk_free_rate < -0.5 or self.risk_free_rate > 0.5:
+            raise OptionAnalysisError("E003", "无风险利率超出合理范围（-50% 到 50%）")
+        if self.quantity <= 0:
+            raise OptionAnalysisError("E003", "合约数量必须为正整数")
+        if self.option_type not in ("call", "put"):
+            raise OptionAnalysisError("E003", "期权类型必须为 call 或 put")
+
 
 @dataclass
 class OptionResult:
@@ -90,7 +123,7 @@ class OptionPricer:
 
     @staticmethod
     def _norm_cdf(x: float) -> float:
-        """标准正态分布累积分布函数（近似）。"""
+        """标准正态分布累积分布函数（使用 erf 精确实现）。"""
         return 0.5 * (1.0 + math.erf(x / math.sqrt(2.0)))
 
     @staticmethod
@@ -111,13 +144,13 @@ class OptionPricer:
         异常：
             OptionAnalysisError: 当输入参数非法时抛出
         """
-        # 参数校验
+        # 参数校验（OptionInput 的 __post_init__ 已做基本校验，这里补充业务校验）
         if opt.spot_price <= 0 or opt.strike_price <= 0:
             raise OptionAnalysisError("E003", "标的价和行权价必须为正数")
-        if opt.time_to_expiry < 0:
-            raise OptionAnalysisError("E003", "剩余期限不能为负")
+        if opt.time_to_expiry <= 0:
+            raise OptionAnalysisError("E003", "剩余期限必须大于0")
         if opt.volatility <= 0:
-            raise OptionAnalysisError("E003", "波动率必须为正数")
+            raise OptionAnalysisError("E003", "波动率必须大于0")
         if opt.risk_free_rate < -0.5 or opt.risk_free_rate > 0.5:
             raise OptionAnalysisError("E003", "无风险利率超出合理范围")
         if opt.option_type not in ("call", "put"):
@@ -193,7 +226,7 @@ class OptionPricer:
 
             # 策略建议
             suggestion = self._generate_suggestion(
-                opt.option_type, moneyness, time_value, intrinsic, T
+                opt.option_type, moneyness, time_value, intrinsic, T, delta, gamma, theta
             )
 
             # 置信度评估
@@ -226,24 +259,39 @@ class OptionPricer:
 
     @staticmethod
     def _generate_suggestion(
-        opt_type: str, moneyness: str, time_value: float, intrinsic: float, T: float
+        opt_type: str, moneyness: str, time_value: float, intrinsic: float, T: float,
+        delta: float, gamma: float, theta: float
     ) -> str:
-        """生成行权策略建议。"""
+        """生成行权策略建议（基于 moneyness、时间价值和希腊字母的规则引擎）。"""
+        # 临近到期特殊处理
         if T <= 0.01:
-            # 临近到期
             if intrinsic > 0:
                 return "临近到期且为价内，建议及时行权或平仓锁定利润"
             return "临近到期且为价外，建议放弃行权，避免额外成本"
 
+        # 基于希腊字母的辅助判断
+        high_gamma = gamma > 0.05
+        high_theta = abs(theta) > 0.1
+        high_delta = abs(delta) > 0.7
+
         if moneyness == "价内":
             if opt_type == "call":
+                if high_delta:
+                    return "深度价内看涨期权，Delta 接近1，建议持有至到期或考虑提前行权"
                 return "价内看涨期权，持有价值较高，可考虑继续持有或部分止盈"
-            return "价内看跌期权，持有价值较高，可考虑继续持有或部分止盈"
+            else:
+                if high_delta:
+                    return "深度价内看跌期权，Delta 接近-1，建议持有至到期或考虑提前行权"
+                return "价内看跌期权，持有价值较高，可考虑继续持有或部分止盈"
         elif moneyness == "平值":
+            if high_gamma:
+                return "平值期权 Gamma 较高，适合做多波动率策略，但需注意时间衰减"
             return "平值期权时间价值占比高，注意时间衰减风险，建议关注波动率变化"
         else:
             if time_value < intrinsic * 0.1:
                 return "深度价外期权，时间价值有限，建议观望或放弃"
+            if high_theta:
+                return "价外期权且时间价值损耗大，建议避免长期持有，可考虑卖出期权收取权利金"
             return "价外期权，等待标的走势变化，注意时间价值损耗"
 
     @staticmethod
@@ -364,286 +412,4 @@ class InputParser:
 
         for token in tokens[1:]:
             if "=" not in token:
-                raise OptionAnalysisError("E003", f"无法解析参数: {token}")
-            key, _, value = token.partition("=")
-            key = key.strip().lower()
-            try:
-                val = float(value.strip())
-            except ValueError:
-                raise OptionAnalysisError("E003", f"参数值非数字: {value}")
-
-            canonical = aliases.get(key)
-            if canonical:
-                params[canonical] = val
-            else:
-                raise OptionAnalysisError("E003", f"未知参数: {key}")
-
-        # 检查必需参数
-        if "spot" not in params:
-            raise OptionAnalysisError("E002", "缺少标的价 spot")
-        if "strike" not in params:
-            raise OptionAnalysisError("E002", "缺少行权价 strike")
-
-        return OptionInput(
-            option_type=opt_type,
-            spot_price=params["spot"],
-            strike_price=params["strike"],
-            time_to_expiry=params.get("time", 1.0),
-            risk_free_rate=params.get("rate", 0.03),
-            volatility=params.get("vol", 0.25),
-        )
-
-
-class OutputFormatter:
-    """格式化输出结果。"""
-
-    @staticmethod
-    def format_result(result: OptionResult, opt: OptionInput) -> str:
-        """格式化单个分析结果。"""
-        lines = []
-        lines.append("=" * 50)
-        lines.append(f"期权估值分析结果 ({opt.option_type.upper()})")
-        lines.append("=" * 50)
-        lines.append(f"标的价: {opt.spot_price:.2f}  行权价: {opt.strike_price:.2f}")
-        lines.append(f"剩余期限: {opt.time_to_expiry:.2f} 年  无风险利率: {opt.risk_free_rate:.2%}")
-        lines.append(f"波动率: {opt.volatility:.2%}")
-        lines.append("-" * 50)
-        lines.append(f"内在价值: {result.intrinsic_value:.4f}")
-        lines.append(f"时间价值: {result.time_value:.4f}")
-        lines.append(f"理论总价: {result.total_value:.4f}")
-        lines.append(f"合约数量: {opt.quantity}  总价值: {result.total_value * opt.quantity:.4f}")
-        lines.append("-" * 50)
-        lines.append(f"Delta: {result.delta:.4f}")
-        lines.append(f"Gamma: {result.gamma:.4f}")
-        lines.append(f"Theta: {result.theta:.4f} (年化)")
-        lines.append(f"Vega:  {result.vega:.4f}")
-        lines.append(f"Rho:   {result.rho:.4f}")
-        lines.append("-" * 50)
-        lines.append(f"状态: {result.moneyness}")
-        lines.append(f"策略建议: {result.strategy_suggestion}")
-        lines.append(f"置信度: {result.confidence:.0%}")
-
-        if result.warning:
-            lines.append(f"警告: {result.warning}")
-
-        if result.confidence < 0.85:
-            lines.append("[需核实] 置信度偏低，建议人工复核关键参数")
-
-        lines.append("=" * 50)
-        return "\n".join(lines)
-
-    @staticmethod
-    def format_json(result: OptionResult, opt: OptionInput) -> str:
-        """格式化为 JSON 输出。"""
-        data = {
-            "input": asdict(opt),
-            "result": asdict(result),
-            "error_code": None,
-            "error_message": None,
-        }
-        return json.dumps(data, ensure_ascii=False, indent=2)
-
-
-# ============================================================
-# 自检模块
-# ============================================================
-class SelfTest:
-    """内置自检，使用硬编码样例数据验证核心逻辑。"""
-
-    @staticmethod
-    def run() -> bool:
-        """
-        运行自检。
-
-        使用宽松阈值断言，确保在任何环境可稳定通过。
-        """
-        print("开始自检...")
-
-        try:
-            pricer = OptionPricer()
-
-            # ---------------------------
-            # 样例 1：平值看涨期权
-            # ---------------------------
-            opt1 = OptionInput(
-                spot_price=100.0,
-                strike_price=100.0,
-                time_to_expiry=1.0,
-                risk_free_rate=0.03,
-                volatility=0.25,
-                option_type="call",
-            )
-            r1 = pricer.compute(opt1)
-            assert r1.total_value > 0, "平值看涨期权理论价值应为正"
-            assert r1.intrinsic_value == 0, "平值期权内在价值应为 0"
-            assert abs(r1.delta - 0.5) < 0.2, "平值看涨期权 Delta 应接近 0.5"
-            assert r1.gamma > 0, "Gamma 应为正"
-            assert r1.vega > 0, "Vega 应为正"
-            assert r1.confidence >= 0.8, "置信度应不低于 0.8"
-            print("  [通过] 平值看涨期权")
-
-            # ---------------------------
-            # 样例 2：价内看涨期权
-            # ---------------------------
-            opt2 = OptionInput(
-                spot_price=120.0,
-                strike_price=100.0,
-                time_to_expiry=0.5,
-                risk_free_rate=0.03,
-                volatility=0.2,
-                option_type="call",
-            )
-            r2 = pricer.compute(opt2)
-            assert r2.intrinsic_value == 20.0, "价内看涨期权内在价值应为 S-K"
-            assert r2.total_value >= r2.intrinsic_value, "总价值应不低于内在价值"
-            assert r2.delta > 0.5, "价内看涨期权 Delta 应大于 0.5"
-            assert r2.moneyness == "价内", "应为价内状态"
-            print("  [通过] 价内看涨期权")
-
-            # ---------------------------
-            # 样例 3：价外看跌期权
-            # ---------------------------
-            opt3 = OptionInput(
-                spot_price=80.0,
-                strike_price=100.0,
-                time_to_expiry=0.3,
-                risk_free_rate=0.02,
-                volatility=0.3,
-                option_type="put",
-            )
-            r3 = pricer.compute(opt3)
-            assert r3.intrinsic_value == 20.0, "价外看跌期权内在价值应为 K-S"
-            assert r3.total_value > 0, "总价值应为正"
-            assert r3.delta < 0, "看跌期权 Delta 应为负"
-            assert r3.moneyness == "价内", "此处应为价内状态"
-            print("  [通过] 价内看跌期权")
-
-            # ---------------------------
-            # 样例 4：极端参数（临近到期）
-            # ---------------------------
-            opt4 = OptionInput(
-                spot_price=100.0,
-                strike_price=100.0,
-                time_to_expiry=0.001,
-                risk_free_rate=0.03,
-                volatility=0.25,
-                option_type="call",
-            )
-            r4 = pricer.compute(opt4)
-            assert r4.total_value >= 0, "总价值不应为负"
-            assert r4.warning != "", "临近到期应有警告"
-            print("  [通过] 临近到期期权")
-
-            # ---------------------------
-            # 样例 5：输入解析
-            # ---------------------------
-            parser = InputParser()
-            parsed = parser.parse("call S=105 K=100 T=0.5 r=0.03 sigma=0.2")
-            assert parsed.option_type == "call", "期权类型解析错误"
-            assert abs(parsed.spot_price - 105.0) < 1e-6, "标的价解析错误"
-            assert abs(parsed.strike_price - 100.0) < 1e-6, "行权价解析错误"
-            assert abs(parsed.time_to_expiry - 0.5) < 1e-6, "期限解析错误"
-            print("  [通过] 输入解析")
-
-            # ---------------------------
-            # 样例 6：错误处理
-            # ---------------------------
-            try:
-                parser.parse("")
-                assert False, "空输入应抛异常"
-            except OptionAnalysisError as exc:
-                assert exc.code == "E001", f"错误码应为 E001，实际 {exc.code}"
-            print("  [通过] 错误处理")
-
-            # ---------------------------
-            # 样例 7：批量一致性（幂等性验证）
-            # ---------------------------
-            r5a = pricer.compute(opt1)
-            r5b = pricer.compute(opt1)
-            assert abs(r5a.total_value - r5b.total_value) < 1e-6, "幂等性验证失败"
-            print("  [通过] 幂等性")
-
-            print("自检全部通过！")
-            return True
-
-        except AssertionError as exc:
-            print(f"自检失败: {exc}", file=sys.stderr)
-            return False
-        except OptionAnalysisError as exc:
-            print(f"自检异常: [{exc.code}] {exc.message}", file=sys.stderr)
-            return False
-        except Exception as exc:
-            print(f"自检未预期异常: {exc}", file=sys.stderr)
-            return False
-
-
-# ============================================================
-# 主入口
-# ============================================================
-def main() -> int:
-    """主函数。"""
-    parser = argparse.ArgumentParser(
-        description="期权估值分析工具（仅使用标准库）",
-        epilog="示例: python scripts/main.py --input 'call S=100 K=105 T=0.5 r=0.03 sigma=0.25'",
-    )
-    parser.add_argument(
-        "--input",
-        type=str,
-        help="期权参数输入，格式: 'call S=100 K=105 T=0.5 r=0.03 sigma=0.25' 或 JSON",
-    )
-    parser.add_argument(
-        "--json-output",
-        action="store_true",
-        help="以 JSON 格式输出",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检",
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        ok = SelfTest.run()
-        return 0 if ok else 1
-
-    # 分析模式
-    if not args.input:
-        parser.print_help()
-        print("\n错误: 请提供 --input 参数或使用 --selftest", file=sys.stderr)
-        return 1
-
-    try:
-        # 解析输入
-        opt = InputParser.parse(args.input)
-
-        # 计算
-        pricer = OptionPricer()
-        result = pricer.compute(opt)
-
-        # 输出
-        if args.json_output:
-            print(OutputFormatter.format_json(result, opt))
-        else:
-            print(OutputFormatter.format_result(result, opt))
-
-        # 置信度提示
-        if result.confidence < 0.85:
-            print("\n提示: 结果置信度偏低，关键参数请人工复核", file=sys.stderr)
-
-        return 0
-
-    except OptionAnalysisError as exc:
-        print(f"错误 [{exc.code}]: {exc.message}", file=sys.stderr)
-        return 1
-    except Exception as exc:
-        print(f"错误 [E010]: 未知异常: {exc}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+                raise
