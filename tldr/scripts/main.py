@@ -14,7 +14,7 @@ import sys
 import time
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 # ========== 错误码定义 ==========
 ERROR_CODES = {
@@ -447,7 +447,7 @@ def main() -> int:
 
     global dry_run
 
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    dry_run = getattr(args, "dry_run", False)  # v3.268 同步到全局
 
     # 自检模式
     if args.selftest:
