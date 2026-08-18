@@ -1,0 +1,46 @@
+{
+  "timestamp": "20260818_193425",
+  "slug": "tidescope",
+  "spec": {
+    "slug": "tidescope",
+    "name": "tidescope",
+    "description": "将各类数据源转换为结构化结果，供学习与参考使用。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 查看 `warnings` 数组中的每条记录",
+      "2. 对标记为 `[需核实]` 的字段进行人工确认",
+      "3. 确认后手动修正输出文件或修改源数据重新转换",
+      "1. mkdir -p input output",
+      "2. cp your_data.csv input/",
+      "3. tidescope --input input/your_data.csv --output output/your_data.json",
+      "4. 打开 output/your_data.json 查看结果",
+      "5. 查看 warnings 部分处理 [需核实] 字段",
+      "1. 运行 `tidescope --selftest` 确认工具正常",
+      "2. 准备一个小的 CSV 文件（<100 行）放入 `input/`",
+      "3. 执行单文件转换命令",
+      "4. 打开输出文件，对照本文档的\"输出规范\"检查结构",
+      "5. 查看 `warnings` 部分，理解每个警告的含义",
+      "6. 尝试修改源数据中的问题字段，重新转换",
+      "1. 创建 `mapping.json` 自定义字段映射：",
+      "2. 使用批量模式处理整个目录",
+      "3. 编写脚本读取输出 JSON 进行后续分析",
+      "4. 结合 `warnings` 输出建立数据质量监控流程",
+      "2. **数据安全**：使用者应对输入数据的合法性、合规性负责。请勿将敏感数据（如个人隐私、商业机密）用于未经授权的场景。",
+      "3. **禁止反向工程**：禁止对本工具进行反向工程、反编译、破解或试图提取源代码（除非适用法律允许）。",
+      "4. **合规使用**：使用者应遵守所在地法律法规，不得将本工具用于任何非法目的。",
+      "5. **修改与分发**：在遵守 MIT 许可证的前提下，您可以修改和分发本工具，但需保留原始版权声明。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "0084ae9358834e7d",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
