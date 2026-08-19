@@ -2,10 +2,10 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: autoresearch
 name: autoresearch
-displayName: 单卡微调 自动调研 数据准备
-description: 面向单GPU nanochat训练场景，自动完成数据采集、清洗与结构化整理。
-version: 1.0.1
-rules_version: cpr-20260809-n251
+displayName: 数据采集清洗 单卡训练 语料整理
+description: 面向单GPU nanochat训练，自动完成数据采集、清洗与结构化整理。
+version: 2.0.1
+rules_version: cpr-20260819-n551
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/autoresearch
@@ -13,9 +13,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LingResearch
+author: DataPilot Studio
 agent_created: true
-trigger_words: ["autoresearch", "自动调研", "数据整理", "nanochat训练", "单卡微调"]
+trigger_words: ["autoresearch", "自动调研", "数据整理", "nanochat训练", "单卡微调", "语料清洗", "数据集构建"]
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -26,56 +26,61 @@ trigger_words: ["autoresearch", "自动调研", "数据整理", "nanochat训练"
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# 单卡微调 自动调研 数据准备 Skill 文档
+# autoresearch — 单卡训练数据自动采集与清洗 Skill
 
 ## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做（核心能力清单）
+### 1.1 能做什么
 
-| 序号 | 能力项 | 说明 | 输入示例 | 输出示例 |
-|------|--------|------|----------|----------|
-| 1 | 数据/文件/URL 结构化转换 | 将用户提供的原始材料解析为统一格式 | 一段文本、CSV文件、网页链接 | 结构化 JSON 或 Markdown 表格 |
-| 2 | 关键信息识别与保留 | 自动提取输入中的核心实体、数值、结论 | 论文摘要、训练日志 | 关键字段列表 |
-| 3 | 约定格式输出 | 按用户指定的 schema 生成结果 | 用户指定字段结构 | 符合 schema 的输出文件 |
-| 4 | 置信度标注 | 对不确定的字段标注置信度等级 | 模糊数据、缺失值 | `[需核实:字段名]` 占位 |
-| 5 | 批量处理与自定义格式 | 支持多文件/多URL批量处理，可定制输出模板 | 10个CSV文件、5个URL | 批量处理报告 |
+| 能力项 | 说明 | 输出形态 |
+|--------|------|----------|
+| 数据采集 | 从指定源（本地目录、URL列表、简单API）抓取文本数据 | 原始文本文件集 |
+| 数据清洗 | 去除重复、噪声、HTML标签、特殊字符、过短片段 | 清洗后文本文件 |
+| 结构化整理 | 按对话格式（instruction/input/output）或纯文本段落重组 | JSONL / JSON / TXT |
+| 质量预筛 | 基于长度、重复度、困惑度估算给出置信度评分 | 置信度字段（0.0~1.0） |
+| 预览模式 | 不写盘，仅打印处理效果样本 | 终端输出 |
 
-### 1.2 不能做（明确边界）
+### 1.2 不能做什么
 
-- **不能** 执行实际的模型训练或推理任务
-- **不能** 访问需要登录认证的私有数据源
-- **不能** 保证数据的绝对准确性和完整性
-- **不能** 替代人工对关键决策的审核
-- **不能** 处理超过 100MB 的单个文件
+| 限制项 | 说明 |
+|--------|------|
+| 不支持多GPU分布式训练 | 仅面向单卡 nanochat 微调场景 |
+| 不做语义级去重 | 仅做文本相似度（n-gram）去重，不识别语义相同但表述不同的内容 |
+| 不生成新数据 | 不进行数据增强、改写、翻译等生成操作 |
+| 不处理非文本数据 | 图片、音频、视频等多媒体内容不在处理范围内 |
+| 不保证数据质量 | 置信度评分仅作参考，最终质量需人工确认 |
 
 ### 1.3 适用对象
 
-- 正在准备 nanochat 单卡微调数据集的工程师
-- 需要快速整理训练语料的算法研究员
-- 需要批量清洗数据的 AI 应用开发者
+- 使用 nanochat 框架进行单卡微调的研究者/开发者
+- 需要快速整理本地散落文本为训练语料的个人或小团队
+- 对数据清洗有基本认知，愿意人工抽检的进阶用户
 
 ---
 
-## 二、触发方式
+## 二、触发方式与场景映射
 
 ### 2.1 触发词
 
-| 触发词 | 场景描述 |
+| 触发词 | 场景说明 |
 |--------|----------|
-| `autoresearch` | 直接调用本 Skill 的指令词 |
-| `自动调研` | 中文场景下的等价触发词 |
-| `数据整理` | 当用户需要整理训练数据时触发 |
-| `nanochat训练` | 明确提到 nanochat 微调场景时触发 |
-| `单卡微调` | 单 GPU 训练数据准备场景 |
+| `autoresearch` | 直接调用主命令 |
+| `自动调研` | 中文场景下的数据采集请求 |
+| `数据整理` | 需要清洗/结构化已有数据 |
+| `nanochat训练` | 明确针对 nanochat 微调的数据准备 |
+| `单卡微调` | 单GPU训练前的数据预处理 |
+| `语料清洗` | 去除噪声、重复内容的操作 |
+| `数据集构建` | 从零开始搭建训练数据集 |
 
 ### 2.2 场景映射表
 
-| 用户实际需求（大白话） | 触发动作 |
-|------------------------|----------|
-| "帮我整理这些训练数据" | 启动数据清洗与结构化流程 |
-| "把这个网页内容转成训练格式" | 启动 URL 抓取与转换流程 |
-| "我有100个文件要处理" | 启动批量处理模式 |
-| "这个CSV格式不对，帮我改一下" | 启动格式转换流程 |
+| 用户说 | 实际需求 | Skill 响应 |
+|--------|----------|------------|
+| "我有一堆txt文件想训练用" | 清洗+结构化 | 执行 `--mode clean --format jsonl` |
+| "帮我抓几个网页做语料" | 数据采集 | 执行 `--mode fetch --urls-file urls.txt` |
+| "这个数据集太乱了" | 清洗+去重 | 执行 `--mode clean --dedupe true` |
+| "想看看处理效果" | 预览 | 执行 `--dry-run --verbose` |
+| "要跑nanochat了" | 完整流程 | 执行 `--mode all --format jsonl` |
 
 ---
 
@@ -83,102 +88,118 @@ trigger_words: ["autoresearch", "自动调研", "数据整理", "nanochat训练"
 
 ### 3.1 前置条件
 
-| 条件项 | 要求 | 检查方式 |
-|--------|------|----------|
-| 输入数据 | 文件大小 ≤ 100MB，或 URL 可公开访问 | 自动检测 |
-| 输出格式 | 用户已明确指定或使用默认 JSON 格式 | 对话确认 |
-| 运行环境 | Python 3.8+，已安装 requests, pandas | 环境检测 |
+| 条件 | 要求 | 检查方式 |
+|------|------|----------|
+| Python | ≥ 3.9 | `python --version` |
+| 依赖包 | `click`, `jieba`, `regex`, `tqdm` | `pip list` 或 `pip install -r requirements.txt` |
+| 磁盘空间 | 至少为原始数据量的 3 倍 | `df -h` |
+| 输入数据 | 文本文件（.txt/.md/.json）或 URL 列表 | 确认路径存在 |
 
 ### 3.2 执行步骤
 
-**步骤 1：输入收集与确认**
+#### 步骤 1：初始化环境
 
-```
-输入类型：文件 / URL / 文本
-处理动作：
-  1.1 接收用户输入
-  1.2 检测输入类型
-  1.3 确认输出格式（默认 JSON）
-  1.4 确认批量模式（单条/多条）
-```
+```bash
+# 安装依赖（首次使用）
+pip install click jieba regex tqdm
 
-**步骤 2：内容解析**
-
-```
-解析规则：
-  2.1 文本 → 按段落/句子切分
-  2.2 CSV → 按行/列解析，识别表头
-  2.3 URL → 抓取正文，去除导航/广告
-  2.4 多文件 → 逐个解析，保持独立
+# 验证安装
+python -c "import click, jieba, regex, tqdm; print('OK')"
 ```
 
-**步骤 3：关键信息提取**
+#### 步骤 2：配置参数
 
-```
-提取策略：
-  3.1 实体识别：人名、机构、模型名、数据集名
-  3.2 数值提取：参数量、训练轮数、学习率
-  3.3 结论提取：摘要、关键句、指标值
-  3.4 关系识别：数据来源、处理流程、结果对比
+| 参数 | 默认值 | 说明 | 示例 |
+|------|--------|------|------|
+| `--input` | `./data/raw` | 输入目录或文件 | `--input ./my_data` |
+| `--output` | `./data/processed` | 输出目录 | `--output ./train_data` |
+| `--format` | `jsonl` | 输出格式：jsonl/json/txt | `--format json` |
+| `--min-confidence` | `0.6` | 置信度阈值，低于此值标记为待审 | `--min-confidence 0.8` |
+| `--dedupe` | `true` | 是否启用 n-gram 去重 | `--dedupe false` |
+| `--dry-run` | `false` | 预览模式，不写盘 | `--dry-run --verbose` |
+| `--verbose` | `false` | 输出详细日志 | `--verbose` |
+| `--mode` | `all` | 执行模式：all/fetch/clean | `--mode clean` |
+| `--urls-file` | 无 | URL 列表文件（每行一个） | `--urls-file urls.txt` |
+
+#### 步骤 3：运行主脚本
+
+```bash
+# 完整流程（采集+清洗+结构化）
+python autoresearch.py --mode all --input ./raw --output ./processed --format jsonl
+
+# 仅清洗本地已有数据
+python autoresearch.py --mode clean --input ./raw --output ./cleaned --dedupe true
+
+# 预览模式（推荐先跑一次）
+python autoresearch.py --mode clean --input ./raw --dry-run --verbose
 ```
 
-**步骤 4：结果生成与校验**
+#### 步骤 4：验证输出
 
+```bash
+# 检查输出文件
+ls -la ./processed/
+# 预期看到：data.jsonl, stats.json, rejected.json
+
+# 查看统计信息
+cat ./processed/stats.json
+# 预期包含：total_records, passed_records, rejected_records, avg_confidence
 ```
-输出规范：
-  4.1 按约定 schema 组织字段
-  4.2 缺失字段标注 [需核实:字段名]
-  4.3 完整性检查：必填字段是否齐全
-  4.4 格式校验：JSON 语法、字段类型
-```
+
+#### 步骤 5：异常处理
+
+| 错误现象 | 可能原因 | 处理方式 |
+|----------|----------|----------|
+| 输出为空 | 输入路径错误或数据格式不支持 | 检查 `--input` 路径，确认文件为 .txt/.md/.json |
+| 置信度普遍偏低 | 数据噪声大或长度过短 | 调整 `--min-confidence` 至 0.4~0.5，或先人工粗筛 |
+| 去重过度 | n-gram 阈值过高 | 在代码中调整 `--ngram-size`（默认 5） |
+| 内存溢出 | 单文件过大 | 拆分文件，或使用 `--chunk-size`（默认 10000 条/批） |
 
 ### 3.3 输出规范
 
-**默认输出格式（JSON）**：
+| 输出文件 | 格式 | 内容说明 |
+|----------|------|----------|
+| `data.jsonl` | JSONL | 每行一条记录，含 `text`、`confidence`、`source` 字段 |
+| `stats.json` | JSON | 处理统计：总数、通过数、拒绝数、平均置信度 |
+| `rejected.json` | JSON | 未通过置信度阈值的数据，含拒绝原因 |
+
+**记录示例（JSONL）：**
 
 ```json
-{
-  "meta": {
-    "source_type": "file|url|text",
-    "source_count": 1,
-    "processed_at": "2026-08-09T12:00:00Z"
-  },
-  "data": [
-    {
-      "id": 1,
-      "content": "原始内容摘要",
-      "key_entities": ["entity1", "entity2"],
-      "metrics": {"param_count": "7B", "learning_rate": "2e-5"},
-      "confidence": 0.95,
-      "notes": "补充说明"
-    }
-  ]
-}
+{"text": "用户提问：什么是注意力机制？\n回答：注意力机制是一种让模型关注输入序列中重要部分的技术...", "confidence": 0.87, "source": "tech_blog_001.txt"}
+{"text": "深度学习中的梯度消失问题可以通过残差连接缓解...", "confidence": 0.72, "source": "notes_003.md"}
 ```
 
 ---
 
-## 四、置信度门控机制
+## 四、置信度门控
 
-### 4.1 置信度等级定义
+### 4.1 置信度计算规则
 
-| 等级 | 数值范围 | 含义 | 处理方式 |
-|------|----------|------|----------|
-| 高 | 0.85-1.0 | 信息完整且来源可靠 | 直接输出 |
-| 中 | 0.60-0.84 | 信息基本完整，部分存疑 | 标注提示 |
-| 低 | 0.00-0.59 | 信息缺失或矛盾 | 使用 `[需核实:字段]` 占位 |
+| 因素 | 权重 | 说明 |
+|------|------|------|
+| 文本长度 | 30% | 少于 50 字符扣分，多于 500 字符加分 |
+| 重复度 | 30% | 与已处理文本 n-gram 相似度 > 0.8 扣分 |
+| 特殊字符占比 | 20% | 非中英文/数字字符占比 > 20% 扣分 |
+| 结构完整性 | 20% | 含明显截断（无结尾标点）扣分 |
 
-### 4.2 占位符使用规则
+### 4.2 门控规则
 
-- 格式：`[需核实:字段名]`
-- 场景：数据缺失、来源不可靠、信息矛盾
-- 示例：`[需核实:learning_rate]` 表示学习率字段无法确认
+- **置信度 ≥ 阈值**：自动通过，进入输出文件
+- **置信度 < 阈值**：写入 `rejected.json`，不进入训练集
+- **信息不足时**：输出 `[需核实:字段名]` 占位符，不编造内容
 
-### 4.3 禁止行为
+**示例：**
 
-- **禁止** 编造不存在的数值或结论
-- **禁止** 用默认值填充未知字段
-- **禁止** 忽略置信度标注直接输出
+```json
+{"text": "[需核实:source] 这段文本来源不明，且内容不完整...", "confidence": 0.31, "status": "rejected"}
+```
+
+### 4.3 人工抽检建议
+
+- 每处理 1000 条记录，抽检 50 条（5%）
+- 重点检查：置信度在 0.5~0.7 之间的边缘数据
+- 抽检时关注：语义连贯性、事实准确性、格式一致性
 
 ---
 
@@ -186,12 +207,13 @@ trigger_words: ["autoresearch", "自动调研", "数据整理", "nanochat训练"
 
 | 错误码 | 错误描述 | 提示话术 | 修正步骤 |
 |--------|----------|----------|----------|
-| E001 | 输入文件不存在 | "未找到指定文件，请检查路径是否正确" | 1. 确认文件路径 2. 重新输入 |
-| E002 | URL 无法访问 | "目标 URL 返回 404 或超时" | 1. 检查 URL 拼写 2. 确认网络连接 |
-| E003 | 文件格式不支持 | "仅支持 txt/csv/json/md 格式" | 1. 转换文件格式 2. 重新上传 |
-| E004 | 文件超过大小限制 | "文件超过 100MB 限制" | 1. 拆分文件 2. 压缩后上传 |
-| E005 | 输出格式冲突 | "指定的输出格式与默认 schema 冲突" | 1. 确认输出格式 2. 调整 schema |
-| E006 | 批量处理中断 | "第 N 个文件处理失败，已跳过" | 1. 查看错误日志 2. 单独处理失败文件 |
+| `E001` | 输入路径不存在 | "输入路径无效，请检查 --input 参数" | 确认路径存在，或创建目录 |
+| `E002` | 输出目录无写入权限 | "输出目录无写入权限，请检查权限设置" | `chmod +w ./output` 或更换目录 |
+| `E003` | 依赖包缺失 | "缺少依赖包：jieba，请先安装" | `pip install jieba` |
+| `E004` | URL 无法访问 | "URL 请求失败：{url}，已跳过" | 检查网络，或从 urls.txt 中移除该 URL |
+| `E005` | 数据格式不支持 | "文件 {file} 格式不支持，仅支持 .txt/.md/.json" | 转换格式后重试 |
+| `E006` | 内存不足 | "处理批次过大，内存不足" | 减小 `--chunk-size` 至 5000 或更低 |
+| `E007` | 输出格式无效 | "输出格式无效，可选：jsonl/json/txt" | 检查 `--format` 参数拼写 |
 
 ---
 
@@ -199,21 +221,32 @@ trigger_words: ["autoresearch", "自动调研", "数据整理", "nanochat训练"
 
 ### 6.1 常见坑与反模式
 
-| 常见坑 | 反模式示例 | 正确做法 |
-|--------|------------|----------|
-| 忽略置信度 | 直接输出所有字段，不标注不确定项 | 对不确定字段使用 `[需核实:字段]` |
-| 过度清洗 | 删除所有特殊字符，导致语义丢失 | 保留必要的标点和格式标记 |
-| 格式硬编码 | 只支持 JSON 输出，拒绝其他格式 | 提供模板机制，支持自定义 schema |
-| 批量处理无日志 | 批量失败后无法定位问题 | 记录每个文件的处理状态和错误信息 |
-| 忽略输入校验 | 直接处理异常格式导致崩溃 | 前置校验输入类型和大小 |
+| 坑 | 反模式（错误做法） | 正模式（正确做法） |
+|----|-------------------|-------------------|
+| **跳过预览直接跑** | 直接执行完整流程，发现输出格式不对，浪费算力 | 先跑 `--dry-run --verbose` 确认效果 |
+| **置信度阈值设太高** | 设 0.9，导致 80% 数据被拒，训练数据不足 | 从 0.6 起步，根据 rejected.json 调整 |
+| **不保留原始数据** | 直接覆盖原文件，清洗效果不理想时无法回退 | 处理前 `cp -r ./raw ./raw_backup` |
+| **完全信任置信度** | 置信度 0.9 的数据直接入训练集，不抽检 | 即使高置信度，也抽检 5% 记录 |
+| **忽略 rejected.json** | 只看通过的记录，不分析被拒原因 | 定期查看 rejected.json，了解数据短板 |
 
-### 6.2 反模式对照表
+### 6.2 反模式示例
 
-| 反模式 | 问题描述 | 推荐替代方案 |
-|--------|----------|--------------|
-| 静默失败 | 处理失败但不提示用户 | 明确返回错误码和修正建议 |
-| 过度承诺 | 声称"保证100%准确" | 明确说明置信度范围和限制 |
-| 无版本控制 | 输出格式变更无记录 | 在 meta 中记录 schema 版本 |
+**反模式：**
+
+```bash
+# 直接跑完整流程，不预览
+python autoresearch.py --mode all --input ./raw --output ./processed
+# 结果：输出格式不是想要的 jsonl，且大量数据被误删
+```
+
+**正模式：**
+
+```bash
+# 先预览
+python autoresearch.py --mode clean --input ./raw --dry-run --verbose
+# 确认效果后，正式运行
+python autoresearch.py --mode clean --input ./raw --output ./processed --format jsonl --min-confidence 0.6
+```
 
 ---
 
@@ -221,105 +254,89 @@ trigger_words: ["autoresearch", "自动调研", "数据整理", "nanochat训练"
 
 ### 7.1 速查卡（30秒上手）
 
-```
-1. 输入：文件/URL/文本
-2. 确认输出格式（默认 JSON）
-3. 运行：autoresearch --input <路径> --format json
-4. 检查输出中的 [需核实] 字段
-5. 完成
+```bash
+# 三步上手
+pip install click jieba regex tqdm
+python autoresearch.py --mode clean --input ./raw --dry-run --verbose
+python autoresearch.py --mode clean --input ./raw --output ./processed --format jsonl
 ```
 
 ### 7.2 新手路径（首次使用）
 
-1. 阅读「能力边界」了解适用范围
-2. 使用默认 JSON 格式处理一个小文件
-3. 检查输出中的置信度标注
-4. 参考「错误码体系」处理常见问题
+1. 阅读「能力边界」了解工具限制
+2. 准备一个小规模测试集（10~20 个文件）
+3. 执行 `--dry-run --verbose` 预览效果
+4. 确认无误后正式运行
+5. 查看 `stats.json` 和 `rejected.json` 了解处理情况
+6. 人工抽检 5% 输出数据
 
-### 7.3 进阶路径（深度使用）
+### 7.3 进阶路径（熟练用户）
 
-1. 自定义输出 schema 满足特定需求
-2. 使用批量模式处理多文件
-3. 结合「置信度门控」设计数据审核流程
-4. 参考「FAQ 反模式」优化处理策略
+1. 自定义 `--min-confidence` 和 `--ngram-size` 参数
+2. 使用 `--mode fetch` 采集网络数据，配合 `--urls-file`
+3. 分析 `rejected.json` 中的拒绝原因，优化输入数据质量
+4. 将 `stats.json` 作为数据质量报告，持续跟踪改进
+5. 结合 nanochat 训练结果，反向调整数据清洗策略
 
 ---
 
-## 八、命令行接口
+## 八、附录
 
-### 8.1 参数说明
+### 8.1 完整参数表
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| `--input` | string | 是 | 无 | 输入文件路径或 URL |
-| `--format` | string | 否 | json | 输出格式（json/csv/md） |
-| `--batch` | boolean | 否 | false | 批量处理模式 |
-| `--output` | string | 否 | stdout | 输出文件路径 |
-| `--selftest` | boolean | 否 | false | 运行自检 |
-| `--version` | boolean | 否 | false | 显示版本号 |
+| 参数 | 类型 | 默认值 | 必填 | 说明 |
+|------|------|--------|------|------|
+| `--input` | string | `./data/raw` | 否 | 输入目录或文件路径 |
+| `--output` | string | `./data/processed` | 否 | 输出目录 |
+| `--format` | string | `jsonl` | 否 | 输出格式：jsonl/json/txt |
+| `--min-confidence` | float | `0.6` | 否 | 置信度阈值（0.0~1.0） |
+| `--dedupe` | bool | `true` | 否 | 是否启用去重 |
+| `--dry-run` | bool | `false` | 否 | 预览模式，不写盘 |
+| `--verbose` | bool | `false` | 否 | 详细日志输出 |
+| `--mode` | string | `all` | 否 | 执行模式：all/fetch/clean |
+| `--urls-file` | string | 无 | 否 | URL 列表文件路径 |
+| `--chunk-size` | int | `10000` | 否 | 每批处理记录数 |
+| `--ngram-size` | int | `5` | 否 | 去重时 n-gram 大小 |
 
-### 8.2 使用示例
+### 8.2 目录结构建议
 
-```bash
-# 单文件处理
-python autoresearch.py --input data.txt --format json
-
-# URL 抓取
-python autoresearch.py --input https://example.com/doc --format md
-
-# 批量处理
-python autoresearch.py --input ./data_dir/ --batch --output result.json
-
-# 自检
-python autoresearch.py --selftest
+```
+project/
+├── raw/                  # 原始数据（只读）
+├── raw_backup/           # 原始数据备份
+├── processed/            # 处理输出
+│   ├── data.jsonl
+│   ├── stats.json
+│   └── rejected.json
+├── urls.txt              # URL 列表（可选）
+└── autoresearch.py       # 主脚本
 ```
 
 ---
 
-## 九、用户协议
-
-<!-- user-agreement-injected -->
+## 用户协议
 
 **使用本 Skill 即表示您同意以下条款：**
 
-1. **责任承担**：使用者自行承担使用本 Skill 产生的全部责任。本 Skill 提供的数据处理结果仅供参考，不构成任何形式的保证或承诺。
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 提供的数据处理建议和输出结果仅供参考，不构成任何形式的保证或承诺。
+2. **禁止反向工程**：不得对本 Skill 的代码、逻辑、算法进行反向工程、反编译或试图提取源代码（除非适用法律允许）。
+3. **数据合规**：使用者需确保输入数据的合法性和合规性，不得使用本 Skill 处理违法违规内容。
+4. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性保证。
 
-2. **禁止反向工程**：禁止对本 Skill 进行反向工程、反编译、破解或试图提取源代码。
-
-3. **合规使用**：使用者应确保使用本 Skill 的行为符合当地法律法规及道德规范。
-
-4. **免责声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权保证。
-
-5. **数据安全**：使用者应自行负责输入数据的合法性和安全性，本 Skill 不承担数据泄露或损失的责任。
+<!-- user-agreement-injected -->
 
 ---
 
-## 十、许可证（License）
-
-<!-- professional-license-embedded -->
+## 许可证（License）
 
 **MIT License**
 
-Copyright (c) 2026 LingResearch
+版权所有 (c) 2025 原创作者（自持版权）
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士使用本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向提供软件的人士授权上述行为，但须满足以下条件：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+本软件按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他方面，由软件或软件的使用或其他交易引起、产生或与之相关。
 
----
-
-*本文档由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
+<!-- professional-license-embedded -->

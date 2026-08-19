@@ -1,0 +1,33 @@
+{
+  "timestamp": "20260820_014951",
+  "slug": "autoresearch",
+  "spec": {
+    "slug": "autoresearch",
+    "name": "autoresearch",
+    "description": "面向单GPU nanochat训练，自动完成数据采集、清洗与结构化整理。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. **先预览再写盘**：使用 `--dry-run --verbose` 查看处理效果，确认无误后再正式运行",
+      "2. **合理设置置信度阈值**：`--min-confidence 0.6` 适合大多数场景，高要求数据可设为 0.8",
+      "3. **定期抽检**：即使置信度很高，也建议人工抽检 5% 的记录",
+      "4. **保留原始数据**：处理前备份原始文件，便于回溯",
+      "1. **初始化**：确认运行环境满足前置条件，安装所需依赖。",
+      "2. **配置**：根据使用场景配置参数（输入路径、输出格式等）。",
+      "3. **运行**：执行主脚本或按 Skill 指引操作。",
+      "4. **验证**：检查输出结果是否符合预期。",
+      "5. **异常处理**：如遇错误，参考失败处理章节排查。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "3f878b7938a179ed",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}

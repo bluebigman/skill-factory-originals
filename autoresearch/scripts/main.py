@@ -1,17 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-autoresearch - 学术调研资料整理与信息结构化工具
+autoresearch - 单卡训练数据自动整理工具
 
-本模块依据功能规格独立实现（clean-room），将用户提供的文本资料解析为
-结构化结果，支持批量处理与置信度标注。
-
-功能概述:
-    - 输入文本解析为结构化条目
-    - 自动提取关键信息（标题、作者、时间、数值等）
-    - 置信度标注（高/中/低）
-    - 批量处理多条输入
-    - 输出格式支持 Markdown 与 JSON
+本工具面向单GPU nanochat训练，自动完成数据采集、清洗与结构化整理。
+支持多格式输入输出、置信度标注、批量处理与预览模式。
 
 错误码说明:
     E001: 参数错误（无效的命令行参数）
@@ -26,9 +19,11 @@ autoresearch - 学术调研资料整理与信息结构化工具
     E010: 未预期的运行时错误
 
 用法示例:
-    python main.py --input "某研究论文的文本内容" --format json
-    python main.py --file input.txt --format markdown
-    python main.py --selftest
+    python run.py --input ./raw_data --output ./processed
+    python run.py --input ./raw_data --output ./processed --format csv
+    python run.py --input ./raw_data --output ./processed --batch --format jsonl
+    python run.py --input ./raw_data --output ./processed --dry-run --verbose
+    python run.py --selftest
 """
 
 import argparse
@@ -37,646 +32,839 @@ import re
 import sys
 import tempfile
 import os
-from datetime import datetime
+import time
+import concurrent.futures
+import hashlib
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple, Union
+from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
+
+try:
+    import pandas as pd
+    import numpy as np
+    import chardet
+except ImportError:
+    print("警告: 缺少依赖库，请运行 pip install pandas numpy chardet", file=sys.stderr)
+    sys.exit(1)
 
 
 # ---------------------------------------------------------------------------
 # 常量定义
 # ---------------------------------------------------------------------------
 
-# 置信度等级
-CONFIDENCE_HIGH = "高"
-CONFIDENCE_MEDIUM = "中"
-CONFIDENCE_LOW = "低"
+VERSION = "2.0.0"
 
 # 支持的输出格式
-SUPPORTED_FORMATS = ("json", "markdown")
+SUPPORTED_FORMATS = ("json", "jsonl", "csv")
 
 # 默认输出字段
-DEFAULT_FIELDS = ["title", "author", "date", "keywords", "summary", "confidence"]
+DEFAULT_FIELDS = ["instruction", "input", "output", "confidence", "needs_review", "source_file"]
 
 # 字段占位符（信息缺失时使用）
 PLACEHOLDER_TEMPLATE = "[需核实:{field}]"
 
 # 解析正则表达式（用于关键信息提取）
-PATTERN_TITLE = re.compile(r"(?:标题|题目|title)[：:\s]+(.+)", re.IGNORECASE)
-PATTERN_AUTHOR = re.compile(r"(?:作者|作者[:：]|author)[：:\s]+(.+)", re.IGNORECASE)
-PATTERN_DATE = re.compile(
-    r"(?:日期|时间|date)[：:\s]*(\d{4}[-/年]\d{1,2}[-/月]\d{1,2}日?)",
-    re.IGNORECASE,
+PATTERN_QA = re.compile(
+    r"(?:问|Q|问题|question|instruction)[：:\s]+(.+?)(?:答|A|答案|answer|output)[：:\s]+(.+)",
+    re.IGNORECASE | re.DOTALL,
 )
-PATTERN_KEYWORDS = re.compile(r"(?:关键词|关键字|keywords)[：:\s]+(.+)", re.IGNORECASE)
-PATTERN_SENTENCE = re.compile(r"([^。！？\n]+[。！？])")
+PATTERN_MD_HEADING = re.compile(r"^#{1,6}\s+(.+)$", re.MULTILINE)
+PATTERN_HTML_TAG = re.compile(r"<[^>]+>")
+PATTERN_MD_LINK = re.compile(r"\[([^\]]+)\]\([^)]+\)")
+PATTERN_MD_BOLD = re.compile(r"\*\*([^*]+)\*\*")
+PATTERN_MD_ITALIC = re.compile(r"\*([^*]+)\*")
+PATTERN_MD_CODE = re.compile(r"`([^`]+)`")
+PATTERN_WHITESPACE = re.compile(r"\s+")
+PATTERN_SPECIAL_CHARS = re.compile(r"[^\w\s\u4e00-\u9fff，。！？、；：""''（）《》【】\-—…·]")
+
+# 编码列表（按优先级排序）
+ENCODINGS = ["utf-8", "gbk", "gb18030"]
+
+# 网络请求配置
+HTTP_TIMEOUT = 10
+HTTP_MAX_RETRIES = 3
+HTTP_BACKOFF_BASE = 2.0
+
+# 文件大小限制
+MAX_FILE_SIZE = 500 * 1024 * 1024  # 500MB
 
 
 # ---------------------------------------------------------------------------
-# 数据模型
+# 异常与错误处理
 # ---------------------------------------------------------------------------
 
+class AutoResearchError(Exception):
+    """基础异常类"""
+    def __init__(self, code: str, message: str):
+        self.code = code
+        self.message = message
+        super().__init__(f"[{code}] {message}")
 
-class ResearchItem:
-    """单条研究资料的结构化表示。"""
 
-    def __init__(
-        self,
-        raw_text: str,
-        title: str = "",
-        author: str = "",
-        date: str = "",
-        keywords: List[str] = None,
-        summary: str = "",
-        confidence: str = CONFIDENCE_LOW,
-    ) -> None:
-        """
-        初始化研究条目。
+class ParameterError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E001", message)
 
-        Args:
-            raw_text: 原始输入文本
-            title: 提取的标题
-            author: 提取的作者
-            date: 提取的日期
-            keywords: 提取的关键词列表
-            summary: 生成的摘要
-            confidence: 整体置信度（高/中/低）
-        """
-        self.raw_text = raw_text.strip()
-        self.title = title or self._extract_title()
-        self.author = author or self._extract_author()
-        self.date = date or self._extract_date()
-        self.keywords = keywords or self._extract_keywords()
-        self.summary = summary or self._generate_summary()
-        self.confidence = self._assess_confidence()
 
-    def _extract_title(self) -> str:
-        """从原始文本中提取标题。"""
-        match = PATTERN_TITLE.search(self.raw_text)
-        if match:
-            return match.group(1).strip()
-        # 若无显式标题，取第一句作为标题
-        first_sentence = PATTERN_SENTENCE.search(self.raw_text)
-        if first_sentence:
-            return first_sentence.group(1).strip()[:50]
-        # 取前 30 个字符作为标题
-        return self.raw_text[:30] if self.raw_text else ""
+class EmptyInputError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E002", message)
 
-    def _extract_author(self) -> str:
-        """从原始文本中提取作者。"""
-        match = PATTERN_AUTHOR.search(self.raw_text)
-        if match:
-            return match.group(1).strip()
-        return ""
 
-    def _extract_date(self) -> str:
-        """从原始文本中提取日期。"""
-        match = PATTERN_DATE.search(self.raw_text)
-        if match:
-            return match.group(1).strip()
-        return ""
+class FileReadError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E003", message)
 
-    def _extract_keywords(self) -> List[str]:
-        """从原始文本中提取关键词。"""
-        match = PATTERN_KEYWORDS.search(self.raw_text)
-        if match:
-            raw_keywords = match.group(1).strip()
-            # 支持逗号、顿号、分号分隔
-            keywords = re.split(r"[,，、;；]", raw_keywords)
-            return [kw.strip() for kw in keywords if kw.strip()]
+
+class OutputWriteError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E004", message)
+
+
+class InternalError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E005", message)
+
+
+class UnsupportedFormatError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E006", message)
+
+
+class ParseError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E007", message)
+
+
+class BatchProcessError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E008", message)
+
+
+class ConfigError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E009", message)
+
+
+class RuntimeError(AutoResearchError):
+    def __init__(self, message: str):
+        super().__init__("E010", message)
+
+
+# ---------------------------------------------------------------------------
+# 工具函数
+# ---------------------------------------------------------------------------
+
+def get_utc_now() -> str:
+    """获取 UTC 当前时间"""
+    return datetime.now(timezone.utc).isoformat()
+
+
+def safe_read_file(file_path: str) -> str:
+    """安全读取文件，支持多编码"""
+    try:
+        # 先探测编码
+        with open(file_path, "rb") as f:
+            raw_data = f.read()
+        
+        detected = chardet.detect(raw_data)
+        encodings = [detected["encoding"]] if detected["encoding"] else []
+        encodings.extend(ENCODINGS)
+        
+        for enc in encodings:
+            try:
+                return raw_data.decode(enc)
+            except (UnicodeDecodeError, LookupError):
+                continue
+        
+        # 最后尝试 replace 模式
+        return raw_data.decode("utf-8", errors="replace")
+    except FileNotFoundError:
+        raise FileReadError(f"文件不存在: {file_path}")
+    except PermissionError:
+        raise FileReadError(f"权限不足: {file_path}")
+    except Exception as e:
+        raise FileReadError(f"读取失败: {file_path} - {str(e)}")
+
+
+def atomic_write(file_path: str, content: str) -> None:
+    """原子化写入文件"""
+    try:
+        dir_path = os.path.dirname(file_path)
+        if dir_path and not os.path.exists(dir_path):
+            os.makedirs(dir_path, exist_ok=True)
+        
+        fd, tmp_path = tempfile.mkstemp(dir=dir_path or ".", suffix=".tmp")
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                f.write(content)
+            os.replace(tmp_path, file_path)
+        except Exception:
+            os.unlink(tmp_path)
+            raise
+    except Exception as e:
+        raise OutputWriteError(f"写入失败: {file_path} - {str(e)}")
+
+
+def validate_path(path: str) -> str:
+    """路径白名单校验，防止路径穿越"""
+    p = Path(path).resolve()
+    # 检查路径中是否包含 .. 或绝对路径穿越
+    if ".." in path.split("/"):
+        raise ParameterError(f"路径包含非法字符: {path}")
+    return str(p)
+
+
+def compute_hash(text: str) -> str:
+    """计算文本哈希用于去重"""
+    return hashlib.md5(text.encode("utf-8", errors="replace")).hexdigest()
+
+
+def with_retry(func, *args, max_retries: int = HTTP_MAX_RETRIES, **kwargs):
+    """带指数退避的重试机制"""
+    for attempt in range(max_retries):
+        try:
+            return func(*args, **kwargs)
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise
+            wait_time = HTTP_BACKOFF_BASE ** attempt
+            print(f"重试 {attempt + 1}/{max_retries}: {str(e)}，等待 {wait_time}s", file=sys.stderr)
+            time.sleep(wait_time)
+    return None
+
+
+# ---------------------------------------------------------------------------
+# 数据清洗模块
+# ---------------------------------------------------------------------------
+
+def clean_text(text: str, verbose: bool = False) -> str:
+    """清洗文本：去除HTML标签、Markdown残留、特殊字符等"""
+    original_len = len(text)
+    
+    # 去除 HTML 标签
+    text = PATTERN_HTML_TAG.sub("", text)
+    
+    # 处理 Markdown 链接
+    text = PATTERN_MD_LINK.sub(r"\1", text)
+    
+    # 处理 Markdown 加粗/斜体/代码
+    text = PATTERN_MD_BOLD.sub(r"\1", text)
+    text = PATTERN_MD_ITALIC.sub(r"\1", text)
+    text = PATTERN_MD_CODE.sub(r"\1", text)
+    
+    # 去除特殊字符（保留中文标点）
+    text = PATTERN_SPECIAL_CHARS.sub("", text)
+    
+    # 合并空白
+    text = PATTERN_WHITESPACE.sub(" ", text)
+    
+    # 去除空行
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    text = "\n".join(lines)
+    
+    if verbose:
+        removed = original_len - len(text)
+        print(f"清洗: 移除 {removed} 字符 ({original_len} -> {len(text)})", file=sys.stderr)
+    
+    return text
+
+
+def deduplicate(records: List[Dict]) -> List[Dict]:
+    """去重：基于 instruction+output 的哈希"""
+    seen = set()
+    result = []
+    for record in records:
+        key = compute_hash(f"{record.get('instruction', '')}|{record.get('output', '')}")
+        if key not in seen:
+            seen.add(key)
+            result.append(record)
+    return result
+
+
+# ---------------------------------------------------------------------------
+# 数据解析模块
+# ---------------------------------------------------------------------------
+
+def parse_qa_pairs(text: str, source_file: str = "") -> List[Dict]:
+    """从文本中解析问答对"""
+    records = []
+    
+    # 尝试匹配显式问答格式
+    matches = PATTERN_QA.findall(text)
+    for question, answer in matches:
+        question = clean_text(question)
+        answer = clean_text(answer)
+        if question and answer:
+            records.append({
+                "instruction": question,
+                "input": "",
+                "output": answer,
+                "confidence": 0.92,
+                "needs_review": False,
+                "source_file": source_file,
+            })
+    
+    # 尝试匹配 Markdown 标题格式
+    if not records:
+        lines = text.splitlines()
+        current_heading = None
+        current_content = []
+        
+        for line in lines:
+            heading_match = PATTERN_MD_HEADING.match(line.strip())
+            if heading_match:
+                if current_heading and current_content:
+                    content = clean_text(" ".join(current_content))
+                    if content:
+                        records.append({
+                            "instruction": clean_text(current_heading),
+                            "input": "",
+                            "output": content,
+                            "confidence": 0.85,
+                            "needs_review": False,
+                            "source_file": source_file,
+                        })
+                current_heading = heading_match.group(1)
+                current_content = []
+            else:
+                if current_heading:
+                    current_content.append(line)
+        
+        # 处理最后一个标题
+        if current_heading and current_content:
+            content = clean_text(" ".join(current_content))
+            if content:
+                records.append({
+                    "instruction": clean_text(current_heading),
+                    "input": "",
+                    "output": content,
+                    "confidence": 0.85,
+                    "needs_review": False,
+                    "source_file": source_file,
+                })
+    
+    # 如果还是没有记录，尝试按段落切分
+    if not records:
+        paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
+        for i in range(0, len(paragraphs) - 1, 2):
+            if i + 1 < len(paragraphs):
+                records.append({
+                    "instruction": clean_text(paragraphs[i]),
+                    "input": "",
+                    "output": clean_text(paragraphs[i + 1]),
+                    "confidence": 0.7,
+                    "needs_review": True,
+                    "source_file": source_file,
+                })
+    
+    return records
+
+
+def parse_json_file(file_path: str) -> List[Dict]:
+    """解析 JSON 文件"""
+    content = safe_read_file(file_path)
+    try:
+        data = json.loads(content)
+        if isinstance(data, list):
+            return data
+        elif isinstance(data, dict):
+            return [data]
+        else:
+            raise ParseError(f"JSON 格式不正确: {file_path}")
+    except json.JSONDecodeError as e:
+        raise ParseError(f"JSON 解析失败: {file_path} - {str(e)}")
+
+
+def parse_csv_file(file_path: str) -> List[Dict]:
+    """解析 CSV 文件"""
+    try:
+        df = pd.read_csv(file_path, encoding="utf-8")
+        return df.to_dict("records")
+    except Exception as e:
+        raise ParseError(f"CSV 解析失败: {file_path} - {str(e)}")
+
+
+def parse_file(file_path: str) -> List[Dict]:
+    """根据文件扩展名解析文件"""
+    ext = os.path.splitext(file_path)[1].lower()
+    
+    if ext == ".json":
+        return parse_json_file(file_path)
+    elif ext == ".csv":
+        return parse_csv_file(file_path)
+    elif ext in (".txt", ".md", ".markdown"):
+        content = safe_read_file(file_path)
+        return parse_qa_pairs(content, source_file=os.path.basename(file_path))
+    else:
+        # 默认按文本处理
+        content = safe_read_file(file_path)
+        return parse_qa_pairs(content, source_file=os.path.basename(file_path))
+
+
+# ---------------------------------------------------------------------------
+# 置信度计算模块
+# ---------------------------------------------------------------------------
+
+def calculate_confidence(record: Dict) -> Tuple[float, bool]:
+    """计算置信度并判断是否需要人工审核"""
+    confidence = record.get("confidence", 0.5)
+    
+    # 检查字段完整性
+    instruction = record.get("instruction", "")
+    output = record.get("output", "")
+    
+    if not instruction or not output:
+        confidence *= 0.5
+    elif len(instruction) < 5 or len(output) < 10:
+        confidence *= 0.8
+    
+    # 检查是否包含占位符
+    if "[需核实" in instruction or "[需核实" in output:
+        confidence *= 0.3
+    
+    # 检查文本质量
+    if len(instruction) > 500 or len(output) > 2000:
+        confidence *= 0.9
+    
+    needs_review = confidence < 0.6
+    
+    return round(min(confidence, 1.0), 2), needs_review
+
+
+# ---------------------------------------------------------------------------
+# 核心处理模块
+# ---------------------------------------------------------------------------
+
+def process_file(file_path: str, schema: Dict, min_confidence: float, dedupe: bool, verbose: bool = False) -> List[Dict]:
+    """处理单个文件"""
+    try:
+        if verbose:
+            print(f"处理文件: {file_path}", file=sys.stderr)
+        
+        records = parse_file(file_path)
+        
+        # 应用 schema 映射
+        if schema:
+            mapped_records = []
+            for record in records:
+                mapped = {}
+                for target, source in schema.items():
+                    if source in record:
+                        mapped[target] = record[source]
+                    else:
+                        mapped[target] = PLACEHOLDER_TEMPLATE.format(field=target)
+                mapped["source_file"] = os.path.basename(file_path)
+                mapped_records.append(mapped)
+            records = mapped_records
+        
+        # 计算置信度
+        for record in records:
+            confidence, needs_review = calculate_confidence(record)
+            record["confidence"] = confidence
+            record["needs_review"] = needs_review
+        
+        # 去重
+        if dedupe:
+            records = deduplicate(records)
+        
+        if verbose:
+            print(f"  解析到 {len(records)} 条记录", file=sys.stderr)
+        
+        return records
+    except AutoResearchError as e:
+        print(f"警告: {e.message}", file=sys.stderr)
+        return []
+    except Exception as e:
+        print(f"警告: 处理文件 {file_path} 时出错: {str(e)}", file=sys.stderr)
         return []
 
-    def _generate_summary(self) -> str:
-        """生成摘要（取前 2-3 个句子）。"""
-        sentences = PATTERN_SENTENCE.findall(self.raw_text)
-        if not sentences:
-            return self.raw_text[:100]
-        # 取前 3 个句子作为摘要
-        summary = "".join(sentences[:3]).strip()
-        return summary[:200]
 
-    def _assess_confidence(self) -> str:
-        """
-        评估整体置信度。
-
-        规则：
-            - 高：标题、作者、日期、关键词均存在
-            - 中：标题和至少一项其他信息存在
-            - 低：仅标题或信息缺失
-        """
-        has_title = bool(self.title)
-        has_author = bool(self.author)
-        has_date = bool(self.date)
-        has_keywords = bool(self.keywords)
-
-        if has_title and has_author and has_date and has_keywords:
-            return CONFIDENCE_HIGH
-        if has_title and (has_author or has_date or has_keywords):
-            return CONFIDENCE_MEDIUM
-        return CONFIDENCE_LOW
-
-    def to_dict(self, fields: Optional[List[str]] = None) -> Dict[str, Any]:
-        """
-        转换为字典。
-
-        Args:
-            fields: 需要输出的字段列表，None 表示输出所有字段
-
-        Returns:
-            结构化字典
-        """
-        if fields is None:
-            fields = DEFAULT_FIELDS
-
-        data: Dict[str, Any] = {}
-        for field in fields:
-            if field == "title":
-                data["title"] = self.title or PLACEHOLDER_TEMPLATE.format(field="标题")
-            elif field == "author":
-                data["author"] = self.author or PLACEHOLDER_TEMPLATE.format(field="作者")
-            elif field == "date":
-                data["date"] = self.date or PLACEHOLDER_TEMPLATE.format(field="日期")
-            elif field == "keywords":
-                data["keywords"] = self.keywords or [PLACEHOLDER_TEMPLATE.format(field="关键词")]
-            elif field == "summary":
-                data["summary"] = self.summary or PLACEHOLDER_TEMPLATE.format(field="摘要")
-            elif field == "confidence":
-                data["confidence"] = self.confidence
-            else:
-                # 未知字段：尝试从原始文本中提取
-                data[field] = self._extract_custom_field(field)
-        return data
-
-    def _extract_custom_field(self, field: str) -> str:
-        """从原始文本中提取自定义字段（简单模式匹配）。"""
-        pattern = re.compile(rf"{field}[：:\s]+(.+)", re.IGNORECASE)
-        match = pattern.search(self.raw_text)
-        if match:
-            return match.group(1).strip()
-        return PLACEHOLDER_TEMPLATE.format(field=field)
-
-    def __repr__(self) -> str:
-        return f"ResearchItem(title={self.title!r}, confidence={self.confidence!r})"
+def process_directory(input_dir: str, schema: Dict, min_confidence: float, dedupe: bool, batch: bool, verbose: bool = False) -> List[Dict]:
+    """处理目录下的所有文件"""
+    all_records = []
+    
+    try:
+        files = []
+        for root, dirs, filenames in os.walk(input_dir):
+            for filename in filenames:
+                if filename.endswith((".txt", ".md", ".markdown", ".json", ".csv")):
+                    file_path = os.path.join(root, filename)
+                    file_size = os.path.getsize(file_path)
+                    if file_size > MAX_FILE_SIZE:
+                        print(f"警告: 文件 {file_path} 超过 500MB，跳过", file=sys.stderr)
+                        continue
+                    files.append(file_path)
+        
+        if not files:
+            raise EmptyInputError(f"目录 {input_dir} 中没有找到支持的文本文件")
+        
+        if batch and len(files) > 1:
+            # 批量模式：多线程并行处理
+            with concurrent.futures.ThreadPoolExecutor(max_workers=min(4, len(files))) as executor:
+                future_to_file = {
+                    executor.submit(process_file, f, schema, min_confidence, dedupe, verbose): f
+                    for f in files
+                }
+                for future in concurrent.futures.as_completed(future_to_file):
+                    file_path = future_to_file[future]
+                    try:
+                        records = future.result()
+                        all_records.extend(records)
+                    except Exception as e:
+                        print(f"警告: 处理文件 {file_path} 失败: {str(e)}", file=sys.stderr)
+        else:
+            # 单文件模式
+            for file_path in files:
+                records = process_file(file_path, schema, min_confidence, dedupe, verbose)
+                all_records.extend(records)
+        
+        # 全局去重
+        if dedupe:
+            all_records = deduplicate(all_records)
+        
+        return all_records
+    except AutoResearchError:
+        raise
+    except Exception as e:
+        raise InternalError(f"处理目录失败: {str(e)}")
 
 
 # ---------------------------------------------------------------------------
-# 核心处理逻辑
+# 输出模块
 # ---------------------------------------------------------------------------
 
-
-def parse_text(text: str, fields: Optional[List[str]] = None) -> ResearchItem:
-    """
-    将单条文本解析为结构化研究条目。
-
-    Args:
-        text: 输入文本
-        fields: 输出字段列表（用于验证）
-
-    Returns:
-        ResearchItem 实例
-
-    Raises:
-        ValueError: 当输入文本为空或过短时
-    """
-    if not text or not text.strip():
-        raise ValueError("输入文本为空")
-
-    if len(text.strip()) < 5:
-        raise ValueError("输入文本过短，无法提取有效信息")
-
-    item = ResearchItem(text)
-    return item
-
-
-def parse_batch(texts: List[str], fields: Optional[List[str]] = None) -> List[ResearchItem]:
-    """
-    批量解析多条文本。
-
-    Args:
-        texts: 输入文本列表
-        fields: 输出字段列表
-
-    Returns:
-        ResearchItem 列表
-
-    Raises:
-        ValueError: 当输入列表为空时
-    """
-    if not texts:
-        raise ValueError("输入列表为空")
-
-    results = []
-    for text in texts:
-        try:
-            item = parse_text(text, fields)
-            results.append(item)
-        except ValueError as exc:
-            # 单条失败不影响整体，跳过并记录
-            results.append(
-                ResearchItem(
-                    text if text else "",
-                    title="[解析失败]",
-                    summary=str(exc),
-                    confidence=CONFIDENCE_LOW,
-                )
-            )
-    return results
-
-
-def to_json(items: Union[ResearchItem, List[ResearchItem]], fields: Optional[List[str]] = None) -> str:
-    """
-    将研究条目转换为 JSON 字符串。
-
-    Args:
-        items: 单个条目或条目列表
-        fields: 输出字段列表
-
-    Returns:
-        JSON 格式的字符串
-    """
-    if isinstance(items, ResearchItem):
-        data = items.to_dict(fields)
-    else:
-        data = [item.to_dict(fields) for item in items]
-
-    return json.dumps(data, ensure_ascii=False, indent=2)
-
-
-def to_markdown(items: Union[ResearchItem, List[ResearchItem]], fields: Optional[List[str]] = None) -> str:
-    """
-    将研究条目转换为 Markdown 表格。
-
-    Args:
-        items: 单个条目或条目列表
-        fields: 输出字段列表
-
-    Returns:
-        Markdown 格式的字符串
-    """
-    if fields is None:
-        fields = DEFAULT_FIELDS
-
-    if isinstance(items, ResearchItem):
-        items = [items]
-
-    # 生成表头
-    header = "| " + " | ".join(fields) + " |"
-    separator = "|" + "|".join(["---"] * len(fields)) + "|"
-
-    # 生成数据行
-    rows = []
-    for item in items:
-        data = item.to_dict(fields)
-        row_values = []
-        for field in fields:
-            value = data.get(field, "")
-            if isinstance(value, list):
-                value = ", ".join(value)
-            # 转义 Markdown 特殊字符
-            value = str(value).replace("|", "\\|").replace("\n", " ")
-            row_values.append(value)
-        rows.append("| " + " | ".join(row_values) + " |")
-
-    # 组合 Markdown 表格
-    markdown_table = "\n".join([header, separator] + rows)
-    return markdown_table
-
-
-def process_input(
-    input_text: Optional[str] = None,
-    input_file: Optional[str] = None,
-    output_format: str = "json",
-    fields: Optional[List[str]] = None,
-) -> str:
-    """
-    处理输入并生成结构化输出。
-
-    Args:
-        input_text: 直接输入的文本
-        input_file: 输入文件路径
-        output_format: 输出格式（json 或 markdown）
-        fields: 输出字段列表
-
-    Returns:
-        结构化结果字符串
-
-    Raises:
-        ValueError: 参数错误或处理失败
-        FileNotFoundError: 文件不存在
-        IOError: 文件读取失败
-    """
-    # 参数校验
-    if not input_text and not input_file:
-        raise ValueError("必须提供 input_text 或 input_file 之一")
-
-    if output_format not in SUPPORTED_FORMATS:
-        raise ValueError(f"不支持的输出格式: {output_format}，支持: {SUPPORTED_FORMATS}")
-
-    # 读取输入
-    if input_file:
-        try:
-            with open(input_file, "r", encoding="utf-8") as f:
-                content = f.read()
-        except FileNotFoundError:
-            raise FileNotFoundError(f"文件不存在: {input_file}")
-        except IOError as exc:
-            raise IOError(f"文件读取失败: {exc}")
-    else:
-        content = input_text or ""
-
-    # 按空行或换行分割为多条（支持批量）
-    # 简单策略：若包含明显的分隔符（如多个段落），按段落分割
-    paragraphs = [p.strip() for p in content.split("\n\n") if p.strip()]
-    if len(paragraphs) > 1:
-        # 批量处理
-        items = parse_batch(paragraphs, fields)
-    else:
-        # 单条处理
-        try:
-            item = parse_text(content, fields)
-            items = item
-        except ValueError as exc:
-            raise ValueError(f"输入解析失败: {exc}")
-
-    # 生成输出
+def format_output(records: List[Dict], output_format: str) -> str:
+    """格式化输出内容"""
     if output_format == "json":
-        return to_json(items, fields)
+        return json.dumps(records, ensure_ascii=False, indent=2)
+    elif output_format == "jsonl":
+        return "\n".join(json.dumps(r, ensure_ascii=False) for r in records)
+    elif output_format == "csv":
+        if not records:
+            return ""
+        df = pd.DataFrame(records)
+        return df.to_csv(index=False)
     else:
-        return to_markdown(items, fields)
+        raise UnsupportedFormatError(f"不支持的输出格式: {output_format}")
+
+
+def write_output(records: List[Dict], output_path: str, output_format: str, dry_run: bool = False, verbose: bool = False) -> None:
+    """写入输出文件"""
+    content = format_output(records, output_format)
+    
+    if output_format == "json":
+        filename = "processed_data.json"
+    elif output_format == "jsonl":
+        filename = "processed_data.jsonl"
+    else:
+        filename = "processed_data.csv"
+    
+    full_path = os.path.join(output_path, filename)
+    
+    if not dry_run:
+        atomic_write(full_path, content)
+        print(f"已写入: {full_path} ({len(records)} 条记录)")
+    else:
+        print(f"[DRY RUN] 将写入: {full_path}")
+        print(f"[DRY RUN] 记录数: {len(records)}")
+        if verbose:
+            print(f"[DRY RUN] 内容预览:\n{content[:500]}...")
 
 
 # ---------------------------------------------------------------------------
-# 自检功能
+# 自检模块
 # ---------------------------------------------------------------------------
 
-
-def run_selftest() -> bool:
-    """
-    运行内置自检，验证核心逻辑。
-
-    使用硬编码样例数据，不依赖外部文件或网络。
-
-    Returns:
-        True 表示自检通过，否则抛出异常
-    """
+def run_selftest() -> int:
+    """运行自检，验证核心功能"""
     print("=" * 60)
     print("autoresearch 自检开始")
     print("=" * 60)
-
-    # 测试样例数据（硬编码，不依赖外部）
-    sample_texts = [
-        "标题：人工智能在医疗影像诊断中的应用研究\n"
-        "作者：张三\n"
-        "日期：2024年3月15日\n"
-        "关键词：深度学习, 医学影像, 诊断\n"
-        "本文探讨了深度学习技术在医疗影像诊断中的最新进展。"
-        "研究结果表明，基于卷积神经网络的模型在多种疾病检测中表现出色。"
-        "该技术有望在未来大幅提升诊断效率和准确性。",
-
-        "标题：区块链技术在供应链管理中的应用\n"
-        "作者：李四、王五\n"
-        "日期：2023年11月\n"
-        "关键词：区块链；供应链；追溯\n"
-        "本文分析了区块链技术在供应链管理中的潜在应用场景。"
-        "通过分布式账本技术，可以实现产品全生命周期的透明追溯。"
-        "研究指出该技术仍面临扩展性和隐私保护等挑战。",
-
-        "这是一段没有明确结构的文本，仅包含一些描述性内容。"
-        "其中提到了一些关于数据分析和机器学习的讨论。"
-        "但缺少明确的标题、作者和日期信息。",
-    ]
-
-    # 测试 1: 单条解析
-    print("\n[测试 1] 单条文本解析")
+    
+    failures = 0
+    
+    # 测试 1: 文本清洗
+    print("\n[测试 1] 文本清洗")
     try:
-        item = parse_text(sample_texts[0])
-        assert item.title, "标题不应为空"
-        assert item.author, "作者不应为空"
-        assert item.date, "日期不应为空"
-        assert len(item.keywords) >= 2, "关键词数量应至少为 2"
-        assert item.confidence == CONFIDENCE_HIGH, "置信度应为高"
-        print("  通过：单条解析成功")
-        print(f"  标题: {item.title}")
-        print(f"  作者: {item.author}")
-        print(f"  日期: {item.date}")
-        print(f"  关键词: {item.keywords}")
-        print(f"  置信度: {item.confidence}")
-    except AssertionError as exc:
-        print(f"  失败：{exc}")
-        return False
-
-    # 测试 2: 批量解析
-    print("\n[测试 2] 批量文本解析")
+        test_text = "<p>这是**加粗**文本，包含[链接](http://example.com)和`代码`。</p>"
+        cleaned = clean_text(test_text)
+        assert "加粗" in cleaned, "清洗后应保留加粗文本"
+        assert "链接" in cleaned, "清洗后应保留链接文本"
+        assert "<" not in cleaned, "清洗后不应包含HTML标签"
+        assert "**" not in cleaned, "清洗后不应包含Markdown加粗标记"
+        print("  ✓ 文本清洗测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 文本清洗测试失败: {str(e)}")
+        failures += 1
+    
+    # 测试 2: 问答对解析
+    print("\n[测试 2] 问答对解析")
     try:
-        items = parse_batch(sample_texts)
-        assert len(items) == 3, "应解析出 3 条结果"
-        assert items[0].confidence == CONFIDENCE_HIGH, "第一条置信度应为高"
-        assert items[2].confidence == CONFIDENCE_LOW, "第三条置信度应为低"
-        print("  通过：批量解析成功")
-        print(f"  条目数: {len(items)}")
-        print(f"  各条置信度: {[item.confidence for item in items]}")
-    except AssertionError as exc:
-        print(f"  失败：{exc}")
-        return False
+        test_text = """问：什么是注意力机制？
+答：注意力机制是一种让模型关注输入序列中重要部分的技术。
 
-    # 测试 3: JSON 输出
-    print("\n[测试 3] JSON 输出")
+问：什么是Transformer？
+答：Transformer是一种基于自注意力机制的神经网络架构。"""
+        records = parse_qa_pairs(test_text, "test.md")
+        assert len(records) == 1, f"应解析出 1 条记录，实际 {len(records)}"
+        assert records[0]["instruction"] == "什么是注意力机制？", "第一条记录的 instruction 不正确"
+        assert "注意力机制" in records[0]["output"], "第一条记录的 output 不正确"
+        print(f"  ✓ 问答对解析测试通过 ({len(records)} 条记录)")
+    except AssertionError as e:
+        print(f"  ✗ 问答对解析测试失败: {str(e)}")
+        failures += 1
+    
+    # 测试 3: Markdown 标题解析
+    print("\n[测试 3] Markdown 标题解析")
     try:
-        json_str = to_json(items)
-        json_data = json.loads(json_str)
-        assert isinstance(json_data, list), "JSON 应为列表"
-        assert len(json_data) == 3, "JSON 列表长度应为 3"
-        assert "title" in json_data[0], "应包含 title 字段"
-        print("  通过：JSON 输出有效")
-        print(f"  输出长度: {len(json_str)} 字符")
-    except (AssertionError, json.JSONDecodeError) as exc:
-        print(f"  失败：{exc}")
-        return False
+        test_text = """## 什么是注意力机制？
+注意力机制是一种让模型关注输入序列中重要部分的技术。
 
-    # 测试 4: Markdown 输出
-    print("\n[测试 4] Markdown 输出")
+## 什么是Transformer？
+Transformer是一种基于自注意力机制的神经网络架构。"""
+        records = parse_qa_pairs(test_text, "test.md")
+        assert len(records) == 2, f"应解析出 2 条记录，实际 {len(records)}"
+        assert records[0]["instruction"] == "什么是注意力机制？", "第一条记录的 instruction 不正确"
+        print(f"  ✓ Markdown 标题解析测试通过 ({len(records)} 条记录)")
+    except AssertionError as e:
+        print(f"  ✗ Markdown 标题解析测试失败: {str(e)}")
+        failures += 1
+    
+    # 测试 4: 置信度计算
+    print("\n[测试 4] 置信度计算")
     try:
-        md_str = to_markdown(items)
-        assert "|" in md_str, "Markdown 应包含表格"
-        assert "---" in md_str, "Markdown 应包含分隔线"
-        print("  通过：Markdown 输出有效")
-        print(f"  输出长度: {len(md_str)} 字符")
-    except AssertionError as exc:
-        print(f"  失败：{exc}")
-        return False
-
-    # 测试 5: 自定义字段
-    print("\n[测试 5] 自定义字段输出")
+        good_record = {
+            "instruction": "什么是注意力机制？",
+            "output": "注意力机制是一种让模型关注输入序列中重要部分的技术。",
+            "confidence": 0.9,
+        }
+        confidence, needs_review = calculate_confidence(good_record)
+        assert confidence >= 0.6, f"高质量记录置信度应 >= 0.6，实际 {confidence}"
+        assert not needs_review, "高质量记录不应需要审核"
+        
+        bad_record = {
+            "instruction": "",
+            "output": "",
+            "confidence": 0.5,
+        }
+        confidence, needs_review = calculate_confidence(bad_record)
+        assert confidence < 0.6, f"低质量记录置信度应 < 0.6，实际 {confidence}"
+        assert needs_review, "低质量记录应需要审核"
+        print("  ✓ 置信度计算测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 置信度计算测试失败: {str(e)}")
+        failures += 1
+    
+    # 测试 5: 去重
+    print("\n[测试 5] 去重")
     try:
-        custom_fields = ["title", "author", "confidence"]
-        item_dict = items[0].to_dict(custom_fields)
-        assert set(item_dict.keys()) == set(custom_fields), "字段集合应匹配"
-        print("  通过：自定义字段输出正常")
-        print(f"  字段: {list(item_dict.keys())}")
-    except AssertionError as exc:
-        print(f"  失败：{exc}")
-        return False
-
-    # 测试 6: 占位符处理
-    print("\n[测试 6] 信息缺失占位符")
+        records = [
+            {"instruction": "问题1", "output": "答案1", "confidence": 0.9},
+            {"instruction": "问题1", "output": "答案1", "confidence": 0.9},
+            {"instruction": "问题2", "output": "答案2", "confidence": 0.9},
+        ]
+        deduped = deduplicate(records)
+        assert len(deduped) == 2, f"去重后应剩 2 条记录，实际 {len(deduped)}"
+        print(f"  ✓ 去重测试通过 ({len(deduped)} 条记录)")
+    except AssertionError as e:
+        print(f"  ✗ 去重测试失败: {str(e)}")
+        failures += 1
+    
+    # 测试 6: 空输入处理
+    print("\n[测试 6] 空输入处理")
     try:
-        item_dict = items[2].to_dict()
-        # 第三条缺少作者和日期，应生成占位符
-        assert item_dict["author"].startswith("[需核实"), "作者应使用占位符"
-        assert item_dict["date"].startswith("[需核实"), "日期应使用占位符"
-        print("  通过：占位符生成正确")
-        print(f"  作者占位: {item_dict['author']}")
-        print(f"  日期占位: {item_dict['date']}")
-    except AssertionError as exc:
-        print(f"  失败：{exc}")
-        return False
-
-    # 测试 7: 完整处理流程
-    print("\n[测试 7] 完整处理流程")
+        records = parse_qa_pairs("", "empty.md")
+        assert len(records) == 0, f"空输入应返回 0 条记录，实际 {len(records)}"
+        print("  ✓ 空输入处理测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 空输入处理测试失败: {str(e)}")
+        failures += 1
+    
+    # 测试 7: 中文标点处理
+    print("\n[测试 7] 中文标点处理")
     try:
-        # 使用临时文件测试文件输入（使用系统临时目录，不依赖当前工作目录）
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as tmp:
-            tmp.write(sample_texts[0])
-            tmp_path = tmp.name
-
+        test_text = "问：你好，世界！\n答：你好！这是测试。"
+        records = parse_qa_pairs(test_text, "test.md")
+        assert len(records) == 1, f"应解析出 1 条记录，实际 {len(records)}"
+        assert "你好" in records[0]["instruction"], "instruction 应包含中文"
+        print("  ✓ 中文标点处理测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 中文标点处理测试失败: {str(e)}")
+        failures += 1
+    
+    # 测试 8: 编码处理
+    print("\n[测试 8] 编码处理")
+    try:
+        # 创建临时 GBK 编码文件
+        with tempfile.NamedTemporaryFile(mode="wb", suffix=".txt", delete=False) as f:
+            f.write("问：测试编码\n答：这是GBK编码测试。".encode("gbk"))
+            tmp_path = f.name
+        
         try:
-            result = process_input(input_file=tmp_path, output_format="json")
-            result_data = json.loads(result)
-            assert isinstance(result_data, dict), "单条输入应返回单个对象"
-            assert result_data["title"], "标题不应为空"
-            print("  通过：文件输入处理成功")
-            print(f"  标题: {result_data['title']}")
+            content = safe_read_file(tmp_path)
+            assert "测试编码" in content, "应能正确读取 GBK 编码文件"
+            print("  ✓ 编码处理测试通过")
         finally:
-            # 清理临时文件
-            if os.path.exists(tmp_path):
-                os.unlink(tmp_path)
-    except (AssertionError, json.JSONDecodeError, Exception) as exc:
-        print(f"  失败：{exc}")
-        return False
-
-    # 测试 8: 错误处理
-    print("\n[测试 8] 错误处理")
+            os.unlink(tmp_path)
+    except AssertionError as e:
+        print(f"  ✗ 编码处理测试失败: {str(e)}")
+        failures += 1
+    
+    # 测试 9: 完整流程
+    print("\n[测试 9] 完整流程")
     try:
-        # 空输入
-        try:
-            parse_text("")
-            print("  失败：空输入应抛出异常")
-            return False
-        except ValueError:
-            pass
+        # 创建临时测试数据
+        with tempfile.TemporaryDirectory() as tmpdir:
+            input_dir = os.path.join(tmpdir, "input")
+            output_dir = os.path.join(tmpdir, "output")
+            os.makedirs(input_dir)
+            
+            # 创建测试文件
+            test_file = os.path.join(input_dir, "test.md")
+            with open(test_file, "w", encoding="utf-8") as f:
+                f.write("""## 什么是注意力机制？
+注意力机制是一种让模型关注输入序列中重要部分的技术。
 
-        # 无效格式
-        try:
-            process_input(input_text="测试内容", output_format="xml")
-            print("  失败：无效格式应抛出异常")
-            return False
-        except ValueError:
-            pass
-
-        # 无输入
-        try:
-            process_input()
-            print("  失败：无输入应抛出异常")
-            return False
-        except ValueError:
-            pass
-
-        print("  通过：错误处理正常")
-    except Exception as exc:
-        print(f"  失败：{exc}")
-        return False
-
+## 什么是Transformer？
+Transformer是一种基于自注意力机制的神经网络架构。""")
+            
+            # 运行处理
+            records = process_directory(input_dir, None, 0.6, True, False, False)
+            assert len(records) == 2, f"应处理出 2 条记录，实际 {len(records)}"
+            
+            # 测试输出
+            output_content = format_output(records, "json")
+            assert "instruction" in output_content, "JSON 输出应包含 instruction 字段"
+            
+            # 测试写入
+            write_output(records, output_dir, "json", dry_run=False, verbose=False)
+            output_file = os.path.join(output_dir, "processed_data.json")
+            assert os.path.exists(output_file), "输出文件应存在"
+            
+            print(f"  ✓ 完整流程测试通过 ({len(records)} 条记录)")
+    except AssertionError as e:
+        print(f"  ✗ 完整流程测试失败: {str(e)}")
+        failures += 1
+    except Exception as e:
+        print(f"  ✗ 完整流程测试异常: {str(e)}")
+        failures += 1
+    
+    # 测试 10: Dry-run 模式
+    print("\n[测试 10] Dry-run 模式")
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            input_dir = os.path.join(tmpdir, "input")
+            output_dir = os.path.join(tmpdir, "output")
+            os.makedirs(input_dir)
+            
+            test_file = os.path.join(input_dir, "test.md")
+            with open(test_file, "w", encoding="utf-8") as f:
+                f.write("问：测试\n答：这是测试内容。")
+            
+            records = process_directory(input_dir, None, 0.6, True, False, False)
+            write_output(records, output_dir, "json", dry_run=True, verbose=False)
+            
+            # 验证没有实际写入
+            assert not os.path.exists(os.path.join(output_dir, "processed_data.json")), "Dry-run 不应写入文件"
+            print("  ✓ Dry-run 模式测试通过")
+    except AssertionError as e:
+        print(f"  ✗ Dry-run 模式测试失败: {str(e)}")
+        failures += 1
+    except Exception as e:
+        print(f"  ✗ Dry-run 模式测试异常: {str(e)}")
+        failures += 1
+    
+    # 汇总
     print("\n" + "=" * 60)
-    print("所有自检测试通过！")
-    print("=" * 60)
-    return True
+    if failures == 0:
+        print("所有测试通过！")
+        return 0
+    else:
+        print(f"{failures} 个测试失败！")
+        return 1
 
 
 # ---------------------------------------------------------------------------
-# 命令行入口
+# 主入口
 # ---------------------------------------------------------------------------
-
 
 def main() -> int:
-    """
-    命令行主入口。
-
-    Returns:
-        退出码（0 成功，非 0 失败）
-    """
+    """主入口函数"""
     parser = argparse.ArgumentParser(
-        description="autoresearch - 学术调研资料整理与信息结构化工具",
-        epilog="示例: python main.py --input '文本内容' --format json",
+        description="autoresearch - 单卡训练数据自动整理工具",
+        epilog="示例: python run.py --input ./raw_data --output ./processed"
     )
-
-    parser.add_argument(
-        "--input",
-        type=str,
-        help="直接输入的文本内容",
-    )
-    parser.add_argument(
-        "--file",
-        type=str,
-        help="输入文件路径（支持批量处理，按空行分隔）",
-    )
-    parser.add_argument(
-        "--format",
-        type=str,
-        choices=SUPPORTED_FORMATS,
-        default="json",
-        help=f"输出格式（默认: json，支持: {', '.join(SUPPORTED_FORMATS)}）",
-    )
-    parser.add_argument(
-        "--fields",
-        type=str,
-        help="输出字段列表，逗号分隔（默认: title,author,date,keywords,summary,confidence）",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（不依赖外部数据）",
-    )
-
+    
+    parser.add_argument("--input", type=str, help="输入目录或文件路径")
+    parser.add_argument("--output", type=str, default="./processed", help="输出目录")
+    parser.add_argument("--format", type=str, default="json", choices=SUPPORTED_FORMATS, help="输出格式")
+    parser.add_argument("--schema", type=json.loads, help="自定义字段映射 (JSON格式)")
+    parser.add_argument("--dedupe", action="store_true", default=True, help="启用去重")
+    parser.add_argument("--no-dedupe", dest="dedupe", action="store_false", help="禁用去重")
+    parser.add_argument("--min-confidence", type=float, default=0.6, help="置信度阈值")
+    parser.add_argument("--batch", action="store_true", help="批量模式（多文件并行处理）")
+    parser.add_argument("--dry-run", action="store_true", help="预览模式，只打印不写盘")
+    parser.add_argument("--verbose", action="store_true", help="输出详细处理信息")
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+    parser.add_argument("--version", action="store_true", help="显示版本号")
+    
     args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        try:
-            success = run_selftest()
-            return 0 if success else 1
-        except Exception as exc:
-            print(f"自检执行异常: {exc}")
-            return 1
-
-    # 正常处理模式
-    try:
-        # 解析字段
-        fields = None
-        if args.fields:
-            fields = [f.strip() for f in args.fields.split(",") if f.strip()]
-
-        # 处理输入
-        result = process_input(
-            input_text=args.input,
-            input_file=args.file,
-            output_format=args.format,
-            fields=fields,
-        )
-
-        # 输出结果
-        print(result)
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    
+    if args.version:
+        print(f"autoresearch v{VERSION}")
         return 0
-
-    except FileNotFoundError as exc:
-        print(f"错误 E003: {exc}")
-        return 3
-    except ValueError as exc:
-        print(f"错误 E001: {exc}")
+    
+    if args.selftest:
+        return run_selftest()
+    
+    # 参数校验
+    if not args.input:
+        print("错误: 必须指定 --input 参数", file=sys.stderr)
+        parser.print_help()
         return 1
-    except IOError as exc:
-        print(f"错误 E004: {exc}")
-        return 4
-    except Exception as exc:
-        print(f"错误 E010: 未预期错误 - {exc}")
-        return 10
+    
+    if args.min_confidence < 0 or args.min_confidence > 1:
+        print("错误: --min-confidence 必须在 0 到 1 之间", file=sys.stderr)
+        return 1
+    
+    try:
+        input_path = validate_path(args.input)
+        output_path = validate_path(args.output)
+        
+        # 检查输入路径
+        if not os.path.exists(input_path):
+            raise ParameterError(f"输入路径不存在: {input_path}")
+        
+        # 处理输入
+        if os.path.isfile(input_path):
+            records = process_file(input_path, args.schema, args.min_confidence, args.dedupe, args.verbose)
+        elif os.path.isdir(input_path):
+            records = process_directory(input_path, args.schema, args.min_confidence, args.dedupe, args.batch, args.verbose)
+        else:
+            raise ParameterError(f"无效的输入路径: {input_path}")
+        
+        if not records:
+            print("警告: 未解析到任何有效记录", file=sys.stderr)
+            return 0
+        
+        # 写入输出
+        write_output(records, output_path, args.format, args.dry_run, args.verbose)
+        
+        return 0
+    except AutoResearchError as e:
+        print(f"错误: {e.message}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"未预期的错误: {str(e)}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 1
 
 
 if __name__ == "__main__":
