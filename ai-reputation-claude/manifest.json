@@ -1,0 +1,27 @@
+{
+  "timestamp": "20260820_014606",
+  "slug": "ai-reputation-claude",
+  "spec": {
+    "slug": "ai-reputation-claude",
+    "name": "ai-reputation-claude",
+    "description": "分析在线评论，量化品牌声誉，对标竞品，生成可执行洞察报告。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1.  将 `run.py` 文件保存到您的项目目录。",
+      "2.  确保您的 Python 环境已正确配置。",
+      "3.  无需安装任何额外的 pip 包。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "2f363dadfc75fb34",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}

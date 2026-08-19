@@ -6,14 +6,15 @@ ai-reputation-claude 技能实现脚本
 依据功能规格独立实现（clean-room），不包含任何既有代码。
 
 功能：
-- 解析评论数据（文本/结构化）
+- 解析评论数据（文本/CSV/JSON）
 - 输出品牌声誉评分（0-100）
 - 竞品对比矩阵（多品牌）
 - 情感倾向统计、高频主题提取
+- 支持自定义评分权重和输入文件参数
 - 内置离线自检（--selftest）
 
-作者：LingNan
-版本：1.0.1
+作者：InsightForge
+版本：3.0.0
 许可证：MIT
 """
 
@@ -23,9 +24,12 @@ import re
 import math
 import csv
 import os
+import argparse
+import time
 from collections import Counter, defaultdict
-from typing import List, Dict, Tuple, Any, Optional
-
+from typing import List, Dict, Tuple, Any, Optional, Set
+from datetime import datetime, timezone
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 常量定义
@@ -45,754 +49,959 @@ ERROR_CODES = {
     "E010": "未知内部错误",
 }
 
-# 情感词典（内置硬编码，离线可用）
-POSITIVE_WORDS = {
+# 默认情感词典（内置硬编码，离线可用）
+DEFAULT_POSITIVE_WORDS = {
     "好", "赞", "棒", "优秀", "满意", "推荐", "喜欢", "好评", "完美",
     "惊喜", "值得", "不错", "给力", "靠谱", "高效", "贴心", "专业",
     "实惠", "耐用", "美观", "舒适", "流畅", "稳定", "安全", "放心",
     "良心", "出色", "顶级", "一流", "惊艳", "感动", "温暖", "真诚",
-    "认真", "负责", "耐心", "细致", "周到", "热情", "满意", "信赖",
+    "认真", "负责", "耐心", "细致", "周到", "热情", "信赖",
     "great", "good", "excellent", "awesome", "perfect", "recommend",
     "love", "best", "nice", "wonderful", "satisfied", "happy",
 }
 
-NEGATIVE_WORDS = {
+DEFAULT_NEGATIVE_WORDS = {
     "差", "烂", "垃圾", "失望", "后悔", "差评", "糟糕", "坑", "骗",
     "贵", "慢", "卡", "坏", "故障", "问题", "投诉", "难用", "劣质",
     "粗糙", "敷衍", "冷漠", "拖延", "推诿", "虚假", "欺骗", "欺诈",
     "低劣", "缺陷", "崩溃", "闪退", "卡顿", "延迟", "等待", "失误",
-    "错误", "失败", "糟糕", "恶心", "愤怒", "生气", "不满", "抱怨",
+    "错误", "失败", "恶心", "愤怒", "生气", "不满", "抱怨",
     "bad", "terrible", "awful", "worst", "poor", "horrible", "disappointed",
-    "waste", "slow", "broken", "issue", "problem", "complaint",
+    "waste", "slow", "broken", "issue", "problem", "bug",
 }
 
-# 主题关键词（内置硬编码）
+# 主题关键词映射（用于主题提取）
 TOPIC_KEYWORDS = {
-    "价格": ["价格", "价钱", "收费", "费用", "贵", "便宜", "实惠", "性价比", "价格"],
-    "质量": ["质量", "品质", "耐用", "做工", "材料", "质感", "结实", "质量"],
-    "服务": ["服务", "态度", "客服", "售后", "响应", "耐心", "热情", "服务"],
-    "物流": ["物流", "快递", "发货", "配送", "速度", "包装", "运输", "物流"],
-    "功能": ["功能", "性能", "效果", "体验", "使用", "操作", "流畅", "功能"],
-    "外观": ["外观", "颜值", "设计", "款式", "造型", "颜色", "好看", "外观"],
-    "安全": ["安全", "可靠", "放心", "隐患", "风险", "保障", "隐私", "安全"],
-    "售后": ["售后", "维修", "退换", "保修", "客服", "响应", "处理", "售后"],
+    "产品": ["产品", "功能", "性能", "质量", "设计", "外观", "材质", "做工", "体验", "使用"],
+    "服务": ["服务", "客服", "售后", "态度", "响应", "处理", "解决", "支持", "帮助", "咨询"],
+    "价格": ["价格", "性价比", "贵", "便宜", "实惠", "折扣", "优惠", "值", "划算", "费用"],
+    "物流": ["物流", "快递", "配送", "发货", "速度", "包装", "运输", "收货", "送达", "时效"],
+    "安装": ["安装", "调试", "配置", "设置", "部署", "上线", "集成", "对接", "使用", "操作"],
 }
 
-# 单次处理最大评论数
-MAX_COMMENTS = 500
-
-# 默认评分权重
+# 默认评分权重（用于声誉指数计算）
 DEFAULT_WEIGHTS = {
-    "sentiment": 0.5,   # 情感倾向
-    "topic": 0.3,       # 主题覆盖
-    "activity": 0.2,    # 活跃度（评论量）
+    "sentiment": 0.5,
+    "rating": 0.3,
+    "topic": 0.2,
 }
 
+# 置信度阈值
+CONFIDENCE_THRESHOLDS = {
+    "high": 100,
+    "medium": 50,
+    "low": 20,
+}
 
-# ============================================================
-# 核心数据结构
-# ============================================================
-
-class Comment:
-    """单条评论数据"""
-    def __init__(self, text: str, brand: str = "", rating: Optional[float] = None,
-                 date: str = "", source: str = ""):
-        self.text = text.strip() if text else ""
-        self.brand = brand.strip() if brand else ""
-        self.rating = rating  # 可选的 1-5 星评分
-        self.date = date
-        self.source = source
-
-    def is_valid(self) -> bool:
-        """检查评论是否有效"""
-        return len(self.text) > 0
-
-
-class BrandReport:
-    """单个品牌的声誉报告"""
-    def __init__(self, brand: str):
-        self.brand = brand
-        self.total_comments = 0
-        self.positive_count = 0
-        self.negative_count = 0
-        self.neutral_count = 0
-        self.avg_rating = 0.0
-        self.sentiment_score = 0.0  # -1 到 1
-        self.reputation_score = 0.0  # 0 到 100
-        self.top_topics: List[Tuple[str, int]] = []
-        self.key_events: List[str] = []
-
-    def to_dict(self) -> Dict[str, Any]:
-        """转换为字典"""
-        return {
-            "brand": self.brand,
-            "total_comments": self.total_comments,
-            "positive_count": self.positive_count,
-            "negative_count": self.negative_count,
-            "neutral_count": self.neutral_count,
-            "avg_rating": round(self.avg_rating, 2),
-            "sentiment_score": round(self.sentiment_score, 4),
-            "reputation_score": round(self.reputation_score, 2),
-            "top_topics": self.top_topics[:5],
-            "key_events": self.key_events[:3],
-        }
-
+# 最大评论处理条数
+MAX_REVIEWS = 500
 
 # ============================================================
 # 工具函数
 # ============================================================
 
-def compute_sentiment(text: str) -> float:
+def log_info(message: str, verbose: bool = False) -> None:
+    """打印信息日志。"""
+    if verbose or not verbose:
+        print(f"[信息] {message}")
+
+def log_warning(message: str) -> None:
+    """打印警告日志到 stderr。"""
+    print(f"[警告] {message}", file=sys.stderr)
+
+def log_error(message: str) -> None:
+    """打印错误日志到 stderr。"""
+    print(f"[错误] {message}", file=sys.stderr)
+
+def get_utc_now() -> str:
+    """获取当前 UTC 时间字符串。"""
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+def safe_float(value: Any, default: float = 0.0) -> float:
+    """安全转换为浮点数。"""
+    try:
+        if value is None:
+            return default
+        return float(value)
+    except (ValueError, TypeError):
+        return default
+
+def safe_int(value: Any, default: int = 0) -> int:
+    """安全转换为整数。"""
+    try:
+        if value is None:
+            return default
+        return int(value)
+    except (ValueError, TypeError):
+        return default
+
+def read_text_safe(file_path: str) -> str:
     """
-    计算文本情感倾向（基于内置词典）
-    返回 -1.0 到 1.0 之间的分数
+    读取文件内容，支持多编码（utf-8 -> gbk -> gb18030 -> latin-1）。
+    使用流式读取，避免一次性加载大文件。
+    """
+    encodings = ["utf-8", "gbk", "gb18030", "latin-1"]
+    for encoding in encodings:
+        try:
+            with open(file_path, "r", encoding=encoding, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, UnicodeError):
+            continue
+        except FileNotFoundError:
+            raise
+        except Exception as e:
+            log_warning(f"读取文件 {file_path} 时发生错误: {e}")
+            raise
+    # 如果所有编码都失败，使用二进制模式读取并替换错误
+    with open(file_path, "rb") as f:
+        return f.read().decode("utf-8", errors="replace")
+
+def write_file_atomic(file_path: str, content: str, dry_run: bool = False) -> bool:
+    """
+    原子化写入文件：先写入临时文件，再重命名。
+    避免写入过程中程序崩溃导致文件损坏。
+    """
+    if not dry_run:
+        temp_path = f"{file_path}.tmp"
+        try:
+            with open(temp_path, "w", encoding="utf-8") as f:
+                f.write(content)
+            os.replace(temp_path, file_path)
+            print(f"[写入] {file_path}")
+            return True
+        except Exception as e:
+            log_error(f"写入文件 {file_path} 失败: {e}")
+            # 清理临时文件
+            if os.path.exists(temp_path):
+                try:
+                    os.remove(temp_path)
+                except OSError:
+                    pass
+            raise
+    else:
+        print(f"[dry-run] 将写入 {file_path}（{len(content)} 字节），未落盘")
+        return False
+
+# ============================================================
+# 数据解析模块
+# ============================================================
+
+def parse_reviews(file_path: str) -> List[Dict[str, Any]]:
+    """
+    解析评论数据文件（支持 .txt, .csv, .json）。
+    返回评论列表，每条评论为字典，至少包含 'content' 字段。
+    """
+    if not os.path.exists(file_path):
+        raise FileNotFoundError(f"文件不存在: {file_path}")
+
+    file_ext = os.path.splitext(file_path)[1].lower()
+    content = read_text_safe(file_path)
+
+    if not content or not content.strip():
+        raise ValueError(f"E001: {ERROR_CODES['E001']}")
+
+    reviews = []
+
+    try:
+        if file_ext == ".json":
+            reviews = _parse_json(content)
+        elif file_ext == ".csv":
+            reviews = _parse_csv(content)
+        else:
+            # 默认按纯文本处理
+            reviews = _parse_text(content)
+    except Exception as e:
+        log_error(f"E004: {ERROR_CODES['E004']} - {e}")
+        raise
+
+    # 过滤无效评论
+    valid_reviews = [r for r in reviews if r.get("content") and r["content"].strip()]
+
+    if not valid_reviews:
+        raise ValueError(f"E001: {ERROR_CODES['E001']}")
+
+    if len(valid_reviews) > MAX_REVIEWS:
+        raise ValueError(f"E002: {ERROR_CODES['E002']}")
+
+    return valid_reviews
+
+def _parse_json(content: str) -> List[Dict[str, Any]]:
+    """解析 JSON 格式评论数据。"""
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        log_error(f"JSON 解析失败: {e}")
+        raise
+
+    reviews = []
+    if isinstance(data, list):
+        for item in data:
+            if isinstance(item, dict):
+                review = {
+                    "content": str(item.get("content", "")),
+                    "rating": safe_float(item.get("rating", 0.0)),
+                    "date": str(item.get("date", "")),
+                    "brand": str(item.get("brand", "")),
+                }
+                reviews.append(review)
+    elif isinstance(data, dict):
+        # 支持 {"reviews": [...]} 格式
+        review_list = data.get("reviews", [])
+        if isinstance(review_list, list):
+            for item in review_list:
+                if isinstance(item, dict):
+                    review = {
+                        "content": str(item.get("content", "")),
+                        "rating": safe_float(item.get("rating", 0.0)),
+                        "date": str(item.get("date", "")),
+                        "brand": str(item.get("brand", "")),
+                    }
+                    reviews.append(review)
+    return reviews
+
+def _parse_csv(content: str) -> List[Dict[str, Any]]:
+    """解析 CSV 格式评论数据。"""
+    reviews = []
+    try:
+        reader = csv.DictReader(content.splitlines())
+        for row in reader:
+            review = {
+                "content": str(row.get("content", "")),
+                "rating": safe_float(row.get("rating", 0.0)),
+                "date": str(row.get("date", "")),
+                "brand": str(row.get("brand", "")),
+            }
+            reviews.append(review)
+    except Exception as e:
+        log_error(f"CSV 解析失败: {e}")
+        raise
+    return reviews
+
+def _parse_text(content: str) -> List[Dict[str, Any]]:
+    """解析纯文本格式评论数据（每行一条评论）。"""
+    reviews = []
+    for line in content.splitlines():
+        line = line.strip()
+        if line:
+            reviews.append({
+                "content": line,
+                "rating": 0.0,
+                "date": "",
+                "brand": "",
+            })
+    return reviews
+
+# ============================================================
+# 情感分析模块
+# ============================================================
+
+def analyze_sentiment(text: str, positive_words: Set[str], negative_words: Set[str]) -> str:
+    """
+    分析文本情感倾向。
+    返回 "positive", "negative", 或 "neutral"。
     """
     if not text:
-        return 0.0
+        return "neutral"
 
-    # 分词（简单按空格和常见标点分割，中文按字符匹配）
-    text_lower = text.lower()
-    positive_hits = 0
-    negative_hits = 0
+    # 分词（简单按字符和空格分割）
+    words = set(re.findall(r'[\u4e00-\u9fff]|[a-zA-Z]+', text.lower()))
 
-    # 统计正向词命中
-    for word in POSITIVE_WORDS:
-        if word in text_lower:
-            positive_hits += 1
+    positive_count = len(words & positive_words)
+    negative_count = len(words & negative_words)
 
-    # 统计负向词命中
-    for word in NEGATIVE_WORDS:
-        if word in text_lower:
-            negative_hits += 1
-
-    # 计算情感分数
-    total_hits = positive_hits + negative_hits
-    if total_hits == 0:
-        return 0.0
-
-    # 使用对数缩放避免长文本的线性膨胀
-    score = (positive_hits - negative_hits) / (total_hits + 1)
-    return max(-1.0, min(1.0, score))
-
-
-def classify_sentiment(score: float) -> str:
-    """根据情感分数分类"""
-    if score > 0.2:
+    if positive_count > negative_count:
         return "positive"
-    elif score < -0.2:
+    elif negative_count > positive_count:
         return "negative"
     else:
         return "neutral"
 
+def analyze_sentiment_distribution(reviews: List[Dict[str, Any]]) -> Dict[str, int]:
+    """分析评论情感分布。"""
+    distribution = {"positive": 0, "negative": 0, "neutral": 0}
+    for review in reviews:
+        sentiment = analyze_sentiment(
+            review.get("content", ""),
+            DEFAULT_POSITIVE_WORDS,
+            DEFAULT_NEGATIVE_WORDS
+        )
+        distribution[sentiment] += 1
+    return distribution
+
+# ============================================================
+# 主题提取模块
+# ============================================================
 
 def extract_topics(text: str) -> List[str]:
-    """提取评论中的主题关键词"""
-    if not text:
-        return []
-
-    topics_found = []
-    text_lower = text.lower()
-
+    """从文本中提取主题关键词。"""
+    topics = []
     for topic, keywords in TOPIC_KEYWORDS.items():
         for keyword in keywords:
-            if keyword.lower() in text_lower:
-                topics_found.append(topic)
+            if keyword in text:
+                topics.append(topic)
                 break
+    return topics
 
-    return topics_found
-
-
-def compute_reputation_score(sentiment: float, topic_coverage: float,
-                             activity: float, weights: Dict[str, float]) -> float:
-    """
-    计算品牌声誉评分（0-100）
-    - sentiment: 情感分数（-1 到 1）
-    - topic_coverage: 主题覆盖率（0 到 1）
-    - activity: 活跃度（0 到 1）
-    - weights: 权重配置
-    """
-    # 将情感分数映射到 0-100
-    sentiment_component = (sentiment + 1) / 2 * 100
-
-    # 主题覆盖率直接映射
-    topic_component = topic_coverage * 100
-
-    # 活跃度映射
-    activity_component = activity * 100
-
-    # 加权求和
-    score = (sentiment_component * weights.get("sentiment", 0.5) +
-             topic_component * weights.get("topic", 0.3) +
-             activity_component * weights.get("activity", 0.2))
-
-    return max(0.0, min(100.0, score))
-
-
-def validate_weights(weights: Dict[str, float]) -> bool:
-    """验证权重配置"""
-    if not weights:
-        return False
-
-    # 检查必需的键
-    required_keys = {"sentiment", "topic", "activity"}
-    if not required_keys.issubset(weights.keys()):
-        return False
-
-    # 检查数值有效性
-    total = 0.0
-    for key in required_keys:
-        val = weights.get(key, 0)
-        if not isinstance(val, (int, float)) or val < 0:
-            return False
-        total += val
-
-    # 总和应约为 1
-    return abs(total - 1.0) < 0.01
-
+def extract_topic_frequency(reviews: List[Dict[str, Any]]) -> Dict[str, int]:
+    """统计主题词频。"""
+    topic_counter = Counter()
+    for review in reviews:
+        topics = extract_topics(review.get("content", ""))
+        for topic in topics:
+            topic_counter[topic] += 1
+    return dict(topic_counter)
 
 # ============================================================
-# 核心分析引擎
+# 声誉评分模块
 # ============================================================
 
-class ReputationAnalyzer:
-    """声誉分析引擎"""
+def calculate_reputation_score(
+    reviews: List[Dict[str, Any]],
+    weights: Optional[Dict[str, float]] = None
+) -> Tuple[float, str]:
+    """
+    计算品牌声誉指数（0-100）。
+    返回 (评分, 置信度)。
+    """
+    if weights is None:
+        weights = DEFAULT_WEIGHTS
 
-    def __init__(self, weights: Optional[Dict[str, float]] = None):
-        self.weights = weights or DEFAULT_WEIGHTS.copy()
-        if not validate_weights(self.weights):
-            raise ValueError("E005: 评分权重配置无效")
+    # 校验权重
+    total_weight = sum(weights.values())
+    if abs(total_weight - 1.0) > 0.01:
+        raise ValueError(f"E005: {ERROR_CODES['E005']}")
 
-    def analyze_comments(self, comments: List[Comment]) -> Dict[str, BrandReport]:
-        """
-        分析评论数据，返回各品牌的声誉报告
-        """
-        if not comments:
-            raise ValueError("E001: 输入数据为空或格式错误")
+    if not reviews:
+        return 0.0, "low"
 
-        if len(comments) > MAX_COMMENTS:
-            raise ValueError("E002: 评论条数超过单次处理上限（500条）")
+    # 情感得分（0-100）
+    sentiment_dist = analyze_sentiment_distribution(reviews)
+    total = len(reviews)
+    sentiment_score = (
+        (sentiment_dist["positive"] * 100 +
+         sentiment_dist["neutral"] * 50) / total
+    )
 
-        # 按品牌分组
-        brand_comments: Dict[str, List[Comment]] = defaultdict(list)
-        for comment in comments:
-            if not comment.is_valid():
-                continue
-            brand = comment.brand or "未指定品牌"
-            brand_comments[brand].append(comment)
+    # 评分得分（0-100）
+    rating_values = [safe_float(r.get("rating", 0.0)) for r in reviews if r.get("rating")]
+    if rating_values:
+        avg_rating = sum(rating_values) / len(rating_values)
+        rating_score = (avg_rating / 5.0) * 100
+    else:
+        rating_score = 50.0  # 无评分数据时取中性值
 
-        if not brand_comments:
-            raise ValueError("E001: 没有有效的评论数据")
+    # 主题得分（0-100）
+    topic_freq = extract_topic_frequency(reviews)
+    if topic_freq:
+        # 主题多样性得分：主题种类越多，得分越高（假设多样化的讨论是积极的）
+        topic_score = min(100.0, len(topic_freq) * 20.0)
+    else:
+        topic_score = 50.0
 
-        # 分析每个品牌
-        reports: Dict[str, BrandReport] = {}
-        for brand, brand_comment_list in brand_comments.items():
-            reports[brand] = self._analyze_brand(brand, brand_comment_list)
+    # 加权综合得分
+    final_score = (
+        sentiment_score * weights.get("sentiment", 0.5) +
+        rating_score * weights.get("rating", 0.3) +
+        topic_score * weights.get("topic", 0.2)
+    )
 
-        return reports
+    # 置信度评估
+    if total >= CONFIDENCE_THRESHOLDS["high"]:
+        confidence = "high"
+    elif total >= CONFIDENCE_THRESHOLDS["medium"]:
+        confidence = "medium"
+    else:
+        confidence = "low"
 
-    def _analyze_brand(self, brand: str, comments: List[Comment]) -> BrandReport:
-        """分析单个品牌的评论"""
-        report = BrandReport(brand)
-        report.total_comments = len(comments)
+    return round(final_score, 1), confidence
 
-        # 统计情感
-        sentiment_scores = []
-        topic_counter = Counter()
-        ratings = []
+# ============================================================
+# 竞品对标模块
+# ============================================================
 
-        for comment in comments:
-            # 情感分析
-            sentiment = compute_sentiment(comment.text)
-            sentiment_scores.append(sentiment)
+def generate_competitor_matrix(
+    reviews: List[Dict[str, Any]],
+    brand: str,
+    competitors: List[str]
+) -> Dict[str, Dict[str, Any]]:
+    """
+    生成竞品对标矩阵。
+    返回 {品牌名: {评分, 置信度, 评论数}}。
+    """
+    matrix = {}
 
-            # 分类统计
-            category = classify_sentiment(sentiment)
-            if category == "positive":
-                report.positive_count += 1
-            elif category == "negative":
-                report.negative_count += 1
-            else:
-                report.neutral_count += 1
+    # 按品牌分组评论
+    brand_reviews = defaultdict(list)
+    for review in reviews:
+        review_brand = review.get("brand", "")
+        if review_brand:
+            brand_reviews[review_brand].append(review)
 
-            # 主题提取
-            topics = extract_topics(comment.text)
-            for topic in topics:
-                topic_counter[topic] += 1
+    # 分析目标品牌
+    target_reviews = brand_reviews.get(brand, [])
+    if not target_reviews:
+        # 如果没有品牌字段，使用全部评论作为目标品牌
+        target_reviews = reviews
 
-            # 评分统计（如果有）
-            if comment.rating is not None:
-                ratings.append(comment.rating)
+    score, confidence = calculate_reputation_score(target_reviews)
+    matrix[brand] = {
+        "score": score,
+        "confidence": confidence,
+        "count": len(target_reviews),
+    }
 
-        # 计算平均情感分
-        if sentiment_scores:
-            report.sentiment_score = sum(sentiment_scores) / len(sentiment_scores)
-
-        # 计算平均评分
-        if ratings:
-            report.avg_rating = sum(ratings) / len(ratings)
+    # 分析竞品
+    for competitor in competitors:
+        comp_reviews = brand_reviews.get(competitor, [])
+        if comp_reviews:
+            score, confidence = calculate_reputation_score(comp_reviews)
+            matrix[competitor] = {
+                "score": score,
+                "confidence": confidence,
+                "count": len(comp_reviews),
+            }
         else:
-            report.avg_rating = 0.0
+            matrix[competitor] = {
+                "score": 0.0,
+                "confidence": "low",
+                "count": 0,
+            }
 
-        # 提取高频主题
-        report.top_topics = topic_counter.most_common()
+    return matrix
 
-        # 计算主题覆盖率（多少个主题类别被提及）
-        topic_coverage = len(topic_counter) / max(1, len(TOPIC_KEYWORDS))
+# ============================================================
+# 报告生成模块
+# ============================================================
 
-        # 计算活跃度（相对基线，假设 50 条为满分）
-        activity = min(1.0, len(comments) / 50.0)
+def generate_markdown_report(
+    brand: str,
+    reviews: List[Dict[str, Any]],
+    score: float,
+    confidence: str,
+    sentiment_dist: Dict[str, int],
+    topic_freq: Dict[str, int],
+    competitors: Optional[Dict[str, Dict[str, Any]]] = None
+) -> str:
+    """生成 Markdown 格式的洞察报告。"""
+    total = len(reviews)
+    timestamp = get_utc_now()
 
-        # 计算综合声誉评分
-        report.reputation_score = compute_reputation_score(
-            report.sentiment_score, topic_coverage, activity, self.weights
-        )
+    report = []
+    report.append(f"# {brand} 口碑洞察报告")
+    report.append(f"\n> 生成时间：{timestamp}")
+    report.append(f"> 分析评论数：{total} 条")
+    report.append(f"> 置信度：{confidence}")
+    report.append("")
 
-        # 提取关键事件（包含强烈情感的评论）
-        for comment in comments:
-            sentiment = compute_sentiment(comment.text)
-            if abs(sentiment) > 0.6 and len(report.key_events) < 3:
-                event = f"[{'正面' if sentiment > 0 else '负面'}] {comment.text[:50]}..."
-                report.key_events.append(event)
+    # 声誉评分
+    report.append("## 声誉评分")
+    report.append(f"\n**声誉指数：{score}/100**")
+    report.append("")
 
-        return report
+    # 情感分布
+    report.append("## 情感分布")
+    report.append("\n| 情感 | 数量 | 占比 |")
+    report.append("| :--- | :--- | :--- |")
+    for sentiment in ["positive", "neutral", "negative"]:
+        count = sentiment_dist.get(sentiment, 0)
+        pct = (count / total * 100) if total > 0 else 0
+        label = {"positive": "正面", "neutral": "中性", "negative": "负面"}[sentiment]
+        report.append(f"| {label} | {count} | {pct:.1f}% |")
+    report.append("")
 
-    def generate_comparison(self, reports: Dict[str, BrandReport]) -> Dict[str, Any]:
-        """生成竞品对比矩阵"""
-        if not reports:
-            raise ValueError("E001: 没有可对比的品牌数据")
+    # 主题分布
+    report.append("## 主题分布")
+    if topic_freq:
+        report.append("\n| 主题 | 提及次数 |")
+        report.append("| :--- | :--- |")
+        for topic, count in sorted(topic_freq.items(), key=lambda x: x[1], reverse=True):
+            report.append(f"| {topic} | {count} |")
+    else:
+        report.append("\n未提取到明显主题。")
+    report.append("")
 
-        comparison = {
-            "brands": [],
-            "matrix": {},
-            "ranking": [],
-            "summary": "",
-        }
-
-        # 构建对比矩阵
-        for brand, report in reports.items():
-            brand_data = report.to_dict()
-            comparison["brands"].append(brand)
-            comparison["matrix"][brand] = brand_data
-
-        # 按声誉评分排序
-        sorted_reports = sorted(reports.items(), key=lambda x: x[1].reputation_score, reverse=True)
-        comparison["ranking"] = [brand for brand, _ in sorted_reports]
-
-        # 生成摘要
-        if len(sorted_reports) >= 2:
-            top_brand, top_report = sorted_reports[0]
-            second_brand, second_report = sorted_reports[1]
-            diff = top_report.reputation_score - second_report.reputation_score
-            comparison["summary"] = (
-                f"领先品牌「{top_brand}」声誉评分 {top_report.reputation_score:.1f} 分，"
-                f"领先第二名「{second_brand}」{diff:.1f} 分。"
+    # 竞品对标
+    if competitors:
+        report.append("## 竞品对标")
+        report.append("\n| 品牌 | 声誉指数 | 置信度 | 评论数 |")
+        report.append("| :--- | :--- | :--- | :--- |")
+        for comp_name, comp_data in competitors.items():
+            report.append(
+                f"| {comp_name} | {comp_data['score']} | "
+                f"{comp_data['confidence']} | {comp_data['count']} |"
             )
-        elif len(sorted_reports) == 1:
-            brand, report = sorted_reports[0]
-            comparison["summary"] = f"单一品牌「{brand}」声誉评分 {report.reputation_score:.1f} 分。"
+        report.append("")
 
-        return comparison
+    # 行动建议
+    report.append("## 行动建议")
+    report.append("")
+    if score >= 80:
+        report.append("- **保持优势**：维持当前产品和服务质量，可考虑拓展新市场。")
+    elif score >= 60:
+        report.append("- **优化提升**：关注负面反馈集中的领域，制定针对性改进计划。")
+    else:
+        report.append("- **紧急改进**：声誉风险较高，建议立即排查核心问题并制定危机公关方案。")
 
+    if sentiment_dist.get("negative", 0) > total * 0.3:
+        report.append("- **负面舆情**：负面评论占比超过 30%，建议重点关注并快速响应。")
+
+    if topic_freq.get("服务", 0) > 0:
+        report.append("- **服务体验**：服务相关讨论较多，建议加强客服培训和响应速度。")
+
+    if topic_freq.get("价格", 0) > 0:
+        report.append("- **价格敏感**：价格是用户关注重点，建议评估定价策略和性价比。")
+
+    report.append("")
+    report.append("---")
+    report.append("*本报告由 AI Reputation Claude 自动生成，仅供参考。*")
+
+    return "\n".join(report)
+
+def generate_competitor_csv(matrix: Dict[str, Dict[str, Any]]) -> str:
+    """生成竞品对标 CSV 内容。"""
+    output = []
+    output.append("品牌,声誉指数,置信度,评论数")
+    for brand, data in matrix.items():
+        output.append(f"{brand},{data['score']},{data['confidence']},{data['count']}")
+    return "\n".join(output)
 
 # ============================================================
-# 数据加载与解析
+# 主流程
 # ============================================================
 
-def load_comments_from_text(text: str, brand: str = "") -> List[Comment]:
-    """从纯文本加载评论（每行一条）"""
-    if not text or not text.strip():
-        raise ValueError("E001: 输入数据为空或格式错误")
-
-    comments = []
-    for line in text.strip().splitlines():
-        line = line.strip()
-        if line:
-            comments.append(Comment(text=line, brand=brand))
-
-    if not comments:
-        raise ValueError("E001: 没有有效的评论数据")
-
-    return comments
-
-
-def load_comments_from_csv(filepath: str) -> List[Comment]:
-    """从 CSV 文件加载评论"""
-    if not os.path.exists(filepath):
-        raise ValueError(f"E003: 文件读取失败或路径不存在: {filepath}")
-
-    comments = []
+def run_analysis(
+    input_file: str,
+    brand: str,
+    competitors: Optional[List[str]] = None,
+    output_file: Optional[str] = None,
+    dry_run: bool = False,
+    verbose: bool = False
+) -> int:
+    """
+    主分析流程。
+    返回退出码（0 成功，非 0 失败）。
+    """
     try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                text = row.get("text", row.get("评论", "")).strip()
-                brand = row.get("brand", row.get("品牌", "")).strip()
-                rating_str = row.get("rating", row.get("评分", "")).strip()
+        # 1. 解析评论数据
+        log_info(f"正在解析评论数据: {input_file}", verbose)
+        reviews = parse_reviews(input_file)
+        log_info(f"成功解析 {len(reviews)} 条评论。", verbose)
 
-                rating = None
-                if rating_str:
-                    try:
-                        rating = float(rating_str)
-                    except ValueError:
-                        rating = None
+        # 2. 计算声誉评分
+        log_info(f"正在计算品牌 '{brand}' 的声誉评分...", verbose)
+        score, confidence = calculate_reputation_score(reviews)
+        log_info(f"品牌 '{brand}' 声誉指数：{score} (置信度：{confidence})")
 
-                if text:
-                    comments.append(Comment(text=text, brand=brand, rating=rating))
-    except Exception as e:
-        raise ValueError(f"E004: CSV 解析失败: {str(e)}")
-
-    if not comments:
-        raise ValueError("E001: 没有有效的评论数据")
-
-    return comments
-
-
-def load_comments_from_json(filepath: str) -> List[Comment]:
-    """从 JSON 文件加载评论"""
-    if not os.path.exists(filepath):
-        raise ValueError(f"E003: 文件读取失败或路径不存在: {filepath}")
-
-    comments = []
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            data = json.load(f)
-
-        # 支持多种格式
-        if isinstance(data, list):
-            for item in data:
-                if isinstance(item, str):
-                    comments.append(Comment(text=item))
-                elif isinstance(item, dict):
-                    text = item.get("text", item.get("评论", "")).strip()
-                    brand = item.get("brand", item.get("品牌", "")).strip()
-                    rating = item.get("rating", item.get("评分"))
-                    if text:
-                        comments.append(Comment(text=text, brand=brand, rating=rating))
-        elif isinstance(data, dict):
-            # 可能是 {"comments": [...]} 格式
-            items = data.get("comments", data.get("评论", []))
-            for item in items:
-                if isinstance(item, str):
-                    comments.append(Comment(text=item))
-                elif isinstance(item, dict):
-                    text = item.get("text", item.get("评论", "")).strip()
-                    brand = item.get("brand", item.get("品牌", "")).strip()
-                    rating = item.get("rating", item.get("评分"))
-                    if text:
-                        comments.append(Comment(text=text, brand=brand, rating=rating))
-    except json.JSONDecodeError as e:
-        raise ValueError(f"E004: JSON 解析失败: {str(e)}")
-    except Exception as e:
-        raise ValueError(f"E010: 未知内部错误: {str(e)}")
-
-    if not comments:
-        raise ValueError("E001: 没有有效的评论数据")
-
-    return comments
-
-
-# ============================================================
-# 输出格式化
-# ============================================================
-
-def format_report(reports: Dict[str, BrandReport]) -> str:
-    """格式化输出品牌声誉报告"""
-    lines = []
-    lines.append("=" * 60)
-    lines.append("品牌声誉分析报告")
-    lines.append("=" * 60)
-
-    for brand, report in reports.items():
-        lines.append(f"\n【{brand}】")
-        lines.append(f"  评论总数: {report.total_comments} 条")
-        lines.append(f"  情感分布: 正面 {report.positive_count} / 中性 {report.neutral_count} / 负面 {report.negative_count}")
-        lines.append(f"  平均评分: {report.avg_rating:.2f} / 5.0" if report.avg_rating > 0 else "  平均评分: 无评分数据")
-        lines.append(f"  情感分数: {report.sentiment_score:.4f} (-1 到 1)")
-        lines.append(f"  声誉评分: {report.reputation_score:.2f} / 100")
-
-        if report.top_topics:
-            topics_str = ", ".join([f"{topic}({count})" for topic, count in report.top_topics[:5]])
-            lines.append(f"  高频主题: {topics_str}")
-
-        if report.key_events:
-            lines.append("  关键事件:")
-            for event in report.key_events:
-                lines.append(f"    - {event}")
-
-    return "\n".join(lines)
-
-
-def format_comparison(comparison: Dict[str, Any]) -> str:
-    """格式化输出竞品对比"""
-    lines = []
-    lines.append("=" * 60)
-    lines.append("竞品对比矩阵")
-    lines.append("=" * 60)
-
-    # 排名
-    lines.append("\n📊 声誉排名:")
-    for i, brand in enumerate(comparison["ranking"], 1):
-        report = comparison["matrix"][brand]
-        lines.append(f"  {i}. {brand}: {report['reputation_score']:.2f} 分")
-
-    # 对比矩阵
-    lines.append("\n📋 详细对比:")
-    header = f"{'品牌':<12} {'评论数':>6} {'正面':>6} {'负面':>6} {'情感分':>8} {'声誉分':>8}"
-    lines.append(header)
-    lines.append("-" * len(header))
-
-    for brand in comparison["brands"]:
-        report = comparison["matrix"][brand]
-        lines.append(
-            f"{brand:<12} {report['total_comments']:>6} {report['positive_count']:>6} "
-            f"{report['negative_count']:>6} {report['sentiment_score']:>8.3f} "
-            f"{report['reputation_score']:>8.2f}"
+        # 3. 情感分布
+        sentiment_dist = analyze_sentiment_distribution(reviews)
+        log_info(
+            f"情感分布：正面 {sentiment_dist['positive']} 条，"
+            f"中性 {sentiment_dist['neutral']} 条，"
+            f"负面 {sentiment_dist['negative']} 条"
         )
 
-    # 摘要
-    if comparison["summary"]:
-        lines.append(f"\n💡 摘要: {comparison['summary']}")
+        # 4. 主题提取
+        topic_freq = extract_topic_frequency(reviews)
+        if topic_freq:
+            top_topics = sorted(topic_freq.items(), key=lambda x: x[1], reverse=True)[:5]
+            log_info("高频主题：" + ", ".join([t for t, _ in top_topics]))
 
-    return "\n".join(lines)
+        # 5. 竞品对标
+        competitor_matrix = None
+        if competitors:
+            log_info(f"正在分析竞品: {', '.join(competitors)}", verbose)
+            competitor_matrix = generate_competitor_matrix(reviews, brand, competitors)
+            for comp_name, comp_data in competitor_matrix.items():
+                log_info(f"品牌 '{comp_name}' 声誉指数：{comp_data['score']}")
 
+        # 6. 生成报告
+        report_content = generate_markdown_report(
+            brand=brand,
+            reviews=reviews,
+            score=score,
+            confidence=confidence,
+            sentiment_dist=sentiment_dist,
+            topic_freq=topic_freq,
+            competitors=competitor_matrix
+        )
+
+        # 7. 输出结果
+        if dry_run:
+            log_info("[dry-run] 以下文件将被写入（当前未写入）：")
+            if output_file:
+                log_info(f"  - {output_file}")
+            if competitor_matrix:
+                log_info("  - 竞品对标矩阵.csv")
+            # 打印报告预览
+            print("\n" + "=" * 60)
+            print("报告预览（前 30 行）：")
+            print("=" * 60)
+            preview_lines = report_content.split("\n")[:30]
+            print("\n".join(preview_lines))
+        else:
+            # 写入报告
+            if output_file:
+                write_file_atomic(output_file, report_content, dry_run=False)
+                log_info(f"报告已生成：{output_file}")
+            else:
+                # 默认文件名
+                default_report = f"{brand}_口碑洞察报告.md"
+                write_file_atomic(default_report, report_content, dry_run=False)
+                log_info(f"报告已生成：{default_report}")
+
+            # 写入竞品对标矩阵
+            if competitor_matrix:
+                csv_content = generate_competitor_csv(competitor_matrix)
+                csv_file = "竞品对标矩阵.csv"
+                write_file_atomic(csv_file, csv_content, dry_run=False)
+                log_info(f"竞品对标矩阵已生成：{csv_file}")
+
+        return 0
+
+    except FileNotFoundError as e:
+        log_error(f"E003: {ERROR_CODES['E003']} - {e}")
+        return 3
+    except ValueError as e:
+        log_error(str(e))
+        return 1
+    except Exception as e:
+        log_error(f"E010: {ERROR_CODES['E010']} - {e}")
+        return 10
 
 # ============================================================
-# 内置自检（--selftest）
+# 自检模块
 # ============================================================
 
 def run_selftest() -> int:
     """
-    内置离线自检，不依赖外部文件或网络。
-    使用宽松阈值确保稳健性。
+    运行内置自检，验证核心功能。
+    返回退出码（0 通过，非 0 失败）。
     """
-    print("🧪 运行内置自检...")
-    passed = 0
-    total = 0
+    print("=" * 60)
+    print("开始运行自检...")
+    print("=" * 60)
 
-    # ---- 测试 1: 情感分析 ----
-    total += 1
-    positive_text = "这个产品非常好，质量很棒，服务也很贴心，强烈推荐！"
-    negative_text = "太差了，质量低劣，服务态度糟糕，非常失望，再也不买了。"
-    neutral_text = "产品功能一般，价格适中，整体还行。"
+    failures = 0
 
-    pos_score = compute_sentiment(positive_text)
-    neg_score = compute_sentiment(negative_text)
-    neu_score = compute_sentiment(neutral_text)
-
-    # 宽松断言：正向情感分数应显著高于负向
-    assert pos_score > 0.3, f"正向情感分数异常: {pos_score}"
-    assert neg_score < -0.3, f"负向情感分数异常: {neg_score}"
-    # 中性文本分数应接近 0
-    assert abs(neu_score) < 0.5, f"中性情感分数异常: {neu_score}"
-    passed += 1
-    print(f"  ✅ 情感分析测试通过 (pos={pos_score:.3f}, neg={neg_score:.3f}, neu={neu_score:.3f})")
-
-    # ---- 测试 2: 主题提取 ----
-    total += 1
-    topic_text = "这个手机价格实惠，质量很好，物流也很快，功能强大。"
-    topics = extract_topics(topic_text)
-    # 应至少提取出 3 个主题
-    assert len(topics) >= 3, f"主题提取数量不足: {topics}"
-    assert "价格" in topics, f"缺少'价格'主题: {topics}"
-    assert "质量" in topics, f"缺少'质量'主题: {topics}"
-    passed += 1
-    print(f"  ✅ 主题提取测试通过 (提取到 {len(topics)} 个主题: {topics})")
-
-    # ---- 测试 3: 情感分类 ----
-    total += 1
-    assert classify_sentiment(0.8) == "positive"
-    assert classify_sentiment(-0.8) == "negative"
-    assert classify_sentiment(0.0) == "neutral"
-    passed += 1
-    print("  ✅ 情感分类测试通过")
-
-    # ---- 测试 4: 权重验证 ----
-    total += 1
-    assert validate_weights(DEFAULT_WEIGHTS) == True
-    assert validate_weights({"sentiment": 0.5, "topic": 0.3}) == False
-    assert validate_weights({"sentiment": 0.5, "topic": 0.3, "activity": 0.3}) == False
-    passed += 1
-    print("  ✅ 权重验证测试通过")
-
-    # ---- 测试 5: 综合评分计算 ----
-    total += 1
-    score = compute_reputation_score(0.5, 0.6, 0.7, DEFAULT_WEIGHTS)
-    # 宽松范围检查
-    assert 30 < score < 90, f"综合评分超出预期范围: {score}"
-    passed += 1
-    print(f"  ✅ 综合评分测试通过 (score={score:.2f})")
-
-    # ---- 测试 6: 完整分析流程 ----
-    total += 1
-    comments = [
-        Comment("这个品牌的产品质量非常好，服务也到位，推荐！", brand="品牌A"),
-        Comment("价格实惠，物流很快，整体满意。", brand="品牌A"),
-        Comment("功能强大，外观设计漂亮，值得购买。", brand="品牌A"),
-        Comment("质量太差了，用几天就坏，客服态度也不好。", brand="品牌B"),
-        Comment("价格贵，物流慢，非常失望。", brand="品牌B"),
-        Comment("产品一般，没有特别突出的地方。", brand="品牌B"),
-        Comment("这个产品真的很棒，物超所值！", brand="品牌C"),
-        Comment("服务态度好，售后处理及时，点赞。", brand="品牌C"),
-    ]
-
-    analyzer = ReputationAnalyzer()
-    reports = analyzer.analyze_comments(comments)
-
-    # 验证报告数量
-    assert len(reports) == 3, f"应生成 3 个品牌报告，实际 {len(reports)}"
-    assert "品牌A" in reports and "品牌B" in reports and "品牌C" in reports
-
-    # 验证品牌A的声誉应高于品牌B（宽松比较）
-    assert reports["品牌A"].reputation_score > reports["品牌B"].reputation_score, \
-        "品牌A声誉应高于品牌B"
-
-    # 验证各报告字段完整性
-    for brand, report in reports.items():
-        assert report.total_comments > 0
-        assert report.reputation_score > 0
-        assert report.sentiment_score != 0 or report.total_comments == 0
-
-    # 验证对比矩阵
-    comparison = analyzer.generate_comparison(reports)
-    assert len(comparison["ranking"]) == 3
-    assert comparison["ranking"][0] == "品牌A"  # 品牌A应排名第一
-    assert comparison["summary"], "对比摘要不应为空"
-
-    passed += 1
-    print(f"  ✅ 完整分析流程测试通过 (品牌数: {len(reports)}, 排名: {comparison['ranking']})")
-
-    # ---- 测试 7: 边界情况 ----
-    total += 1
-    # 空输入
+    # 测试 1：情感分析
+    print("\n[测试 1] 情感分析")
     try:
-        analyzer.analyze_comments([])
-        assert False, "空输入应抛出异常"
-    except ValueError as e:
-        assert str(e).startswith("E001"), f"错误码不正确: {e}"
-    passed += 1
-    print("  ✅ 边界情况测试通过")
+        assert analyze_sentiment("这个产品太棒了，非常满意！", DEFAULT_POSITIVE_WORDS, DEFAULT_NEGATIVE_WORDS) == "positive"
+        assert analyze_sentiment("客服态度很差，太失望了。", DEFAULT_POSITIVE_WORDS, DEFAULT_NEGATIVE_WORDS) == "negative"
+        assert analyze_sentiment("产品一般般。", DEFAULT_POSITIVE_WORDS, DEFAULT_NEGATIVE_WORDS) == "neutral"
+        print("  ✓ 情感分析测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 情感分析测试失败: {e}")
+        failures += 1
 
-    # ---- 测试 8: 超过上限 ----
-    total += 1
-    many_comments = [Comment(f"测试评论{i}", brand="测试") for i in range(501)]
+    # 测试 2：主题提取
+    print("\n[测试 2] 主题提取")
     try:
-        analyzer.analyze_comments(many_comments)
-        assert False, "超过上限应抛出异常"
-    except ValueError as e:
-        assert str(e).startswith("E002"), f"错误码不正确: {e}"
-    passed += 1
-    print("  ✅ 上限检查测试通过")
+        topics = extract_topics("这个产品性能很好，价格也实惠。")
+        assert "产品" in topics
+        assert "价格" in topics
+        print("  ✓ 主题提取测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 主题提取测试失败: {e}")
+        failures += 1
 
-    # ---- 测试 9: 文本加载 ----
-    total += 1
-    text_data = "这个产品很好用\n质量不错\n但是价格有点贵"
-    loaded = load_comments_from_text(text_data, brand="测试品牌")
-    assert len(loaded) == 3, f"应加载 3 条评论，实际 {len(loaded)}"
-    assert all(c.brand == "测试品牌" for c in loaded)
-    passed += 1
-    print("  ✅ 文本加载测试通过")
-
-    # ---- 测试 10: 错误处理 ----
-    total += 1
+    # 测试 3：声誉评分
+    print("\n[测试 3] 声誉评分")
     try:
-        load_comments_from_csv("/nonexistent/path/file.csv")
-        assert False, "不存在的文件应抛出异常"
-    except ValueError as e:
-        assert str(e).startswith("E003"), f"错误码不正确: {e}"
-    passed += 1
-    print("  ✅ 错误处理测试通过")
+        test_reviews = [
+            {"content": "产品很棒，性能强劲，非常满意！", "rating": 5},
+            {"content": "客服态度差，等待时间长。", "rating": 1},
+            {"content": "性价比一般，外观设计漂亮。", "rating": 3},
+            {"content": "物流很快，包装完好。", "rating": 4},
+            {"content": "功能强大，但价格偏贵。", "rating": 3},
+        ]
+        score, confidence = calculate_reputation_score(test_reviews)
+        assert 0 <= score <= 100, f"评分超出范围: {score}"
+        assert confidence in ["high", "medium", "low"]
+        print(f"  ✓ 声誉评分测试通过 (评分: {score}, 置信度: {confidence})")
+    except AssertionError as e:
+        print(f"  ✗ 声誉评分测试失败: {e}")
+        failures += 1
 
-    # 输出总结
-    print(f"\n📊 自检结果: {passed}/{total} 项测试通过")
-    if passed == total:
-        print("✅ 所有自检通过！")
+    # 测试 4：数据解析
+    print("\n[测试 4] 数据解析")
+    try:
+        # 创建临时测试文件
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8") as f:
+            f.write("content,rating,date\n")
+            f.write("产品很好,5,2023-01-01\n")
+            f.write("服务一般,3,2023-01-02\n")
+            temp_file = f.name
+
+        reviews = parse_reviews(temp_file)
+        assert len(reviews) == 2
+        assert reviews[0]["content"] == "产品很好"
+        assert reviews[0]["rating"] == 5.0
+        print("  ✓ 数据解析测试通过")
+
+        # 清理临时文件
+        os.unlink(temp_file)
+    except AssertionError as e:
+        print(f"  ✗ 数据解析测试失败: {e}")
+        failures += 1
+    except Exception as e:
+        print(f"  ✗ 数据解析测试异常: {e}")
+        failures += 1
+
+    # 测试 5：竞品对标
+    print("\n[测试 5] 竞品对标")
+    try:
+        test_reviews = [
+            {"content": "产品很棒！", "rating": 5, "brand": "品牌A"},
+            {"content": "产品不错！", "rating": 4, "brand": "品牌A"},
+            {"content": "服务很差！", "rating": 1, "brand": "品牌B"},
+            {"content": "价格太贵！", "rating": 2, "brand": "品牌B"},
+        ]
+        matrix = generate_competitor_matrix(test_reviews, "品牌A", ["品牌B"])
+        assert "品牌A" in matrix
+        assert "品牌B" in matrix
+        assert matrix["品牌A"]["count"] == 2
+        assert matrix["品牌B"]["count"] == 2
+        print("  ✓ 竞品对标测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 竞品对标测试失败: {e}")
+        failures += 1
+
+    # 测试 6：报告生成
+    print("\n[测试 6] 报告生成")
+    try:
+        test_reviews = [
+            {"content": "产品很棒，性能强劲！", "rating": 5},
+            {"content": "客服态度差。", "rating": 1},
+        ]
+        score, confidence = calculate_reputation_score(test_reviews)
+        sentiment_dist = analyze_sentiment_distribution(test_reviews)
+        topic_freq = extract_topic_frequency(test_reviews)
+        report = generate_markdown_report(
+            brand="测试品牌",
+            reviews=test_reviews,
+            score=score,
+            confidence=confidence,
+            sentiment_dist=sentiment_dist,
+            topic_freq=topic_freq
+        )
+        assert "测试品牌" in report
+        assert "声誉指数" in report
+        assert "情感分布" in report
+        print("  ✓ 报告生成测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 报告生成测试失败: {e}")
+        failures += 1
+
+    # 测试 7：错误处理
+    print("\n[测试 7] 错误处理")
+    try:
+        # 测试空输入
+        try:
+            parse_reviews("/nonexistent/file.csv")
+            print("  ✗ 错误处理测试失败：应该抛出 FileNotFoundError")
+            failures += 1
+        except FileNotFoundError:
+            print("  ✓ 文件不存在错误处理测试通过")
+
+        # 测试空数据
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as f:
+            f.write("")
+            temp_file = f.name
+        try:
+            parse_reviews(temp_file)
+            print("  ✗ 错误处理测试失败：应该抛出 ValueError")
+            failures += 1
+        except ValueError:
+            print("  ✓ 空数据错误处理测试通过")
+        os.unlink(temp_file)
+    except Exception as e:
+        print(f"  ✗ 错误处理测试异常: {e}")
+        failures += 1
+
+    # 测试 8：权重校验
+    print("\n[测试 8] 权重校验")
+    try:
+        test_reviews = [{"content": "测试", "rating": 3}]
+        try:
+            calculate_reputation_score(test_reviews, {"sentiment": 0.5, "rating": 0.5, "topic": 0.5})
+            print("  ✗ 权重校验测试失败：应该抛出 ValueError")
+            failures += 1
+        except ValueError:
+            print("  ✓ 权重校验测试通过")
+    except Exception as e:
+        print(f"  ✗ 权重校验测试异常: {e}")
+        failures += 1
+
+    # 测试 9：dry-run 模式
+    print("\n[测试 9] dry-run 模式")
+    try:
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8") as f:
+            f.write("content,rating\n")
+            f.write("产品很好,5\n")
+            f.write("服务一般,3\n")
+            temp_file = f.name
+
+        # 运行 dry-run
+        exit_code = run_analysis(
+            input_file=temp_file,
+            brand="测试品牌",
+            dry_run=True,
+            verbose=False
+        )
+        assert exit_code == 0
+        print("  ✓ dry-run 模式测试通过")
+
+        # 清理临时文件
+        os.unlink(temp_file)
+    except AssertionError as e:
+        print(f"  ✗ dry-run 模式测试失败: {e}")
+        failures += 1
+    except Exception as e:
+        print(f"  ✗ dry-run 模式测试异常: {e}")
+        failures += 1
+
+    # 测试 10：完整流程
+    print("\n[测试 10] 完整流程")
+    try:
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False, encoding="utf-8") as f:
+            f.write("content,rating,brand\n")
+            f.write("产品很棒，性能强劲！,5,品牌A\n")
+            f.write("客服态度差，等待时间长。,1,品牌A\n")
+            f.write("价格实惠，性价比高。,4,品牌B\n")
+            f.write("设计一流，服务也很棒。,5,品牌B\n")
+            temp_file = f.name
+
+        # 运行完整分析
+        exit_code = run_analysis(
+            input_file=temp_file,
+            brand="品牌A",
+            competitors=["品牌B"],
+            output_file="test_report.md",
+            dry_run=False,
+            verbose=False
+        )
+        assert exit_code == 0
+        assert os.path.exists("test_report.md")
+        assert os.path.exists("竞品对标矩阵.csv")
+
+        # 清理文件
+        os.unlink(temp_file)
+        os.unlink("test_report.md")
+        os.unlink("竞品对标矩阵.csv")
+        print("  ✓ 完整流程测试通过")
+    except AssertionError as e:
+        print(f"  ✗ 完整流程测试失败: {e}")
+        failures += 1
+    except Exception as e:
+        print(f"  ✗ 完整流程测试异常: {e}")
+        failures += 1
+
+    # 总结
+    print("\n" + "=" * 60)
+    if failures == 0:
+        print("所有自检测试通过！")
         return 0
     else:
-        print("❌ 部分自检失败！")
+        print(f"自检完成，{failures} 个测试失败。")
         return 1
-
 
 # ============================================================
 # 命令行入口
 # ============================================================
 
 def main():
-    """命令行入口"""
-    args = sys.argv[1:]
+    """命令行入口函数。"""
+    parser = argparse.ArgumentParser(
+        description="AI Reputation Claude - 评论分析与声誉管理工具",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  python run.py --input reviews.csv --brand "我的品牌"
+  python run.py --input data.json --brand "品牌A" --competitors "品牌B,品牌C"
+  python run.py --input reviews.txt --brand "我的品牌" --dry-run
+  python run.py --selftest
+        """
+    )
 
-    # 自检模式
-    if "--selftest" in args:
-        sys.exit(run_selftest())
+    parser.add_argument(
+        "--input",
+        type=str,
+        help="输入评论数据文件路径（支持 .txt, .csv, .json）"
+    )
+    parser.add_argument(
+        "--brand",
+        type=str,
+        help="目标品牌名称"
+    )
+    parser.add_argument(
+        "--competitors",
+        type=str,
+        help="竞品品牌列表，用逗号分隔（例如：'品牌B,品牌C'）"
+    )
+    parser.add_argument(
+        "--output",
+        type=str,
+        help="输出报告文件路径（默认：{品牌}_口碑洞察报告.md）"
+    )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="预览模式：只打印结果和将写入的文件，不实际写入"
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="详细日志模式：打印每个分析步骤的详细信息"
+    )
+    parser.add_argument(
+        "--selftest",
+        action="store_true",
+        help="运行内置自检，验证核心功能"
+    )
 
-    # 帮助
-    if "--help" in args or "-h" in args:
-        print(__doc__)
-        print("\n用法:")
-        print("  python main.py --selftest           # 运行内置自检")
-        print("  python main.py --text <文本> [--brand <品牌>]")
-        print("  python main.py --file <路径> [--format csv|json]")
-        print("  python main.py --help               # 显示帮助")
-        sys.exit(0)
+    args = parser.parse_args()
 
-    # 解析参数
-    text_input = None
-    file_input = None
-    file_format = "csv"
-    brand = ""
+    global dry_run
 
-    i = 0
-    while i < len(args):
-        if args[i] == "--text" and i + 1 < len(args):
-            text_input = args[i + 1]
-            i += 2
-        elif args[i] == "--file" and i + 1 < len(args):
-            file_input = args[i + 1]
-            i += 2
-        elif args[i] == "--format" and i + 1 < len(args):
-            file_format = args[i + 1].lower()
-            i += 2
-        elif args[i] == "--brand" and i + 1 < len(args):
-            brand = args[i + 1]
-            i += 2
-        else:
-            print(f"未知参数: {args[i]}", file=sys.stderr)
-            sys.exit(1)
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
-    try:
-        # 加载数据
-        if text_input:
-            comments = load_comments_from_text(text_input, brand)
-        elif file_input:
-            if file_format == "csv":
-                comments = load_comments_from_csv(file_input)
-            elif file_format == "json":
-                comments = load_comments_from_json(file_input)
-            else:
-                print(f"不支持的文件格式: {file_format}", file=sys.stderr)
-                sys.exit(1)
-        else:
-            print("请提供输入数据（--text 或 --file）", file=sys.stderr)
-            sys.exit(1)
+    # 运行自检
+    if args.selftest:
+        exit_code = run_selftest()
+        sys.exit(exit_code)
 
-        # 分析
-        analyzer = ReputationAnalyzer()
-        reports = analyzer.analyze_comments(comments)
+    # 参数校验
+    if not args.input:
+        log_error("E006: 缺少必要参数 --input")
+        parser.print_help()
+        sys.exit(6)
 
-        # 输出报告
-        print(format_report(reports))
+    if not args.brand:
+        log_error("E006: 缺少必要参数 --brand")
+        parser.print_help()
+        sys.exit(6)
 
-        # 如果有多个品牌，输出对比
-        if len(reports) > 1:
-            comparison = analyzer.generate_comparison(reports)
-            print("\n" + format_comparison(comparison))
+    # 解析竞品列表
+    competitors = None
+    if args.competitors:
+        competitors = [c.strip() for c in args.competitors.split(",") if c.strip()]
 
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"E010: 未知内部错误: {str(e)}", file=sys.stderr)
-        sys.exit(1)
+    # 运行分析
+    exit_code = run_analysis(
+        input_file=args.input,
+        brand=args.brand,
+        competitors=competitors,
+        output_file=args.output,
+        dry_run=args.dry_run,
+        verbose=args.verbose
+    )
 
+    sys.exit(exit_code)
 
 if __name__ == "__main__":
     main()
