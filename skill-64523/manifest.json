@@ -1,0 +1,28 @@
+{
+  "timestamp": "20260820_062535",
+  "slug": "skill-64523",
+  "spec": {
+    "slug": "skill-64523",
+    "name": "",
+    "description": "",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 告诉我要处理哪个文件夹",
+      "2. 说明重命名规则（加前缀/序号/替换等）",
+      "3. 获取对照表预览 + 可执行脚本",
+      "4. 本地运行脚本完成重命名"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "c458f333105ee178",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
