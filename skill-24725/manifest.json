@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260820_060954",
+  "slug": "skill-24725",
+  "spec": {
+    "slug": "skill-24725",
+    "name": "screen-recording-pro",
+    "description": "录屏文件一站式工程化处理：识别、压缩、转码、拼接、字幕提取与批量整理，输出可直接交付的结果文件。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "3a533604036bf83d",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
