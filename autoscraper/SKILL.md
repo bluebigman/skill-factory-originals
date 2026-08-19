@@ -2,10 +2,10 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: autoscraper
 name: autoscraper
-displayName: 网页数据自动采集与结构化提取
-description: 智能轻量级网页抓取工具，自动识别页面数据并输出结构化结果。
-version: 1.0.1
-rules_version: cpr-20260809-n251
+displayName: 网页数据采集 结构化提取 批量抓取
+description: 基于规则与AI辅助的网页数据采集与结构化提取工具，支持批量抓取、多格式输出与置信度门控。
+version: 2.0.1
+rules_version: cpr-20260819-n551
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/autoscraper
@@ -13,9 +13,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DataFlow Studio
+author: DataCraft Studio
 agent_created: true
-trigger_words: ["autoscraper", "网页抓取", "数据采集", "爬虫", "web scraping", "页面解析", "结构化提取"]
+trigger_words: ["autoscraper", "网页抓取", "数据采集", "爬虫", "信息提取", "页面解析", "结构化数据"]
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -26,310 +26,313 @@ trigger_words: ["autoscraper", "网页抓取", "数据采集", "爬虫", "web sc
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# AutoScraper 技能文档
+# autoscraper — 网页数据采集与结构化提取工具
 
-## 一、能力边界速查卡
+## 一、能力边界（一页纸速查卡）
 
-### ✅ 能做（核心能力清单）
+### 1.1 能做什么
 
-| 序号 | 能力项 | 说明 | 适用场景示例 |
-|------|--------|------|--------------|
-| 1 | 智能页面抓取 | 给定 URL 后自动分析页面结构，提取关键数据 | 商品价格监控、新闻标题聚合 |
-| 2 | 规则自学习 | 用户提供少量示例数据，工具自动学习提取规则 | 从列表页提取重复结构的数据 |
-| 3 | 多格式输出 | 支持 JSON、CSV、Python 字典等结构化输出 | 数据清洗、API 数据源准备 |
-| 4 | 批量 URL 处理 | 同一规则应用于多个页面，批量产出结果 | 多页面商品信息对比 |
-| 5 | 轻量级集成 | 纯 Python 实现，无重型依赖，可嵌入现有脚本 | 爬虫脚本、数据处理管道 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 规则匹配 | 基于 CSS 选择器 / XPath 提取页面元素 | `#product-title`, `//div[@class="price"]` |
+| AI 辅助识别 | 对模糊区域进行语义推断，辅助定位目标字段 | 识别"发布日期"附近的日期文本 |
+| 批量抓取 | 支持多 URL 列表输入，顺序或并发抓取 | 100 个商品页依次提取 |
+| 多格式输出 | 输出 JSON / CSV / Markdown 表格 | `--format json` |
+| 置信度门控 | 对低置信度字段输出 `[需核实:字段名]` 占位 | 不编造数据 |
+| 增量更新 | 基于内容哈希跳过未变化页面 | `--incremental` |
 
-### ❌ 不能做（明确边界）
+### 1.2 不能做什么（明确边界）
 
-| 序号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不处理动态渲染页面 | 需要 JavaScript 执行才能加载内容的页面（如 SPA 应用）无法直接抓取 |
-| 2 | 不绕过访问控制 | 不处理登录墙、验证码、IP 封锁等反爬机制 |
-| 3 | 不保证数据完整性 | 页面结构变化可能导致提取失败，需定期维护规则 |
-| 4 | 不处理非 HTML 内容 | PDF、图片、音视频等二进制内容不在处理范围内 |
-| 5 | 不提供分布式抓取 | 单机运行，不支持集群调度 |
+| 限制项 | 说明 |
+|--------|------|
+| 不处理登录态 | 需要会话认证的页面需预先提供 Cookie 文件 |
+| 不执行复杂 JS 渲染 | 对重度 SPA 页面需配合无头浏览器（外部工具） |
+| 不自动绕过反爬 | 不提供验证码识别、IP 轮换等对抗功能 |
+| 不保证字段完整性 | 页面结构变化时，提取结果可能缺失字段 |
+| 不承担数据合规责任 | 使用者需自行确认目标网站的数据采集合法性 |
 
-### 🎯 适用对象
+### 1.3 适用对象
 
-- **数据工程师**：快速搭建数据采集管道
-- **业务分析师**：从竞品网站提取公开数据做对比分析
-- **Python 开发者**：需要轻量级抓取能力的项目集成
-- **研究人员**：采集公开学术信息、新闻数据
-
----
-
-## 二、触发方式与场景映射
-
-### 触发词
-
-直接使用以下任一词汇即可激活本技能：
-
-- `autoscraper`
-- `网页抓取`
-- `数据采集`
-- `爬虫`
-- `web scraping`
-- `页面解析`
-- `结构化提取`
-
-### 场景映射表
-
-| 用户说（大白话） | 实际需求 | 技能响应方式 |
-|------------------|----------|--------------|
-| "帮我抓一下这个网页上的商品价格" | 从商品列表页提取价格数据 | 分析页面结构，提取价格字段并输出结构化数据 |
-| "这个网站上的新闻标题怎么批量获取？" | 批量提取新闻标题列表 | 学习标题规则，批量应用于多个页面 |
-| "我想把网页表格转成 Excel 格式" | 提取 HTML 表格数据 | 识别 table 结构，输出 CSV 格式 |
-| "每天自动监控这个页面的价格变化" | 定期抓取并对比数据 | 提供可重复执行的抓取脚本模板 |
+- 需要定期采集公开数据的分析师
+- 构建结构化数据集的研究人员
+- 需要监控竞品公开信息的运营人员
+- 对网页内容进行归档整理的开发者
 
 ---
 
-## 三、标准工作流程
+## 二、触发方式
 
-### 前置条件
+### 2.1 触发词
 
-| 条件项 | 要求 | 检查方式 |
-|--------|------|----------|
-| Python 环境 | Python 3.7+ | `python --version` |
-| 安装 AutoScraper | 已安装 autoscraper 库 | `pip show autoscraper` |
-| 目标 URL 可访问 | 页面可正常打开，非登录墙 | 浏览器直接访问验证 |
-| 页面结构明确 | 目标数据在 HTML 中可见 | 浏览器查看源代码确认 |
+当对话中出现以下任一词汇时，自动激活本 Skill：
 
-### 执行步骤
+- 核心触发：`autoscraper`、`网页抓取`、`数据采集`、`爬虫`、`信息提取`
+- 补充触发：`页面解析`、`结构化数据`、`批量采集`
 
-#### 第一步：环境准备
+### 2.2 场景映射表
+
+| 用户说（大白话） | 实际需求 | 本 Skill 响应 |
+|------------------|----------|---------------|
+| "帮我把这个网页上的商品价格都抓下来" | 提取列表页中的价格字段 | 提供选择器方案 + 执行命令 |
+| "我想批量下载这个网站的文章标题和发布时间" | 多页面字段提取 | 生成批量抓取配置 |
+| "这个页面的数据怎么导出成 Excel" | 格式转换 | 输出 CSV 格式命令 |
+| "抓到的数据不太准，有些是空的" | 提取精度问题 | 诊断选择器 + 调整置信度阈值 |
+
+---
+
+## 三、标准流程
+
+### 3.1 前置条件
+
+| 条件 | 要求 | 验证方式 |
+|------|------|----------|
+| Python 环境 | ≥ 3.8 | `python --version` |
+| 网络连通 | 目标站点可访问 | `curl -I <目标URL>` |
+| 输出目录 | 存在且有写权限 | `mkdir -p ./output && touch ./output/.write_test` |
+| 目标 URL | 完整且有效 | 浏览器中可正常打开 |
+
+### 3.2 执行步骤（分步编号）
+
+**Step 1：初始化配置**
 
 ```bash
-# 安装 AutoScraper
-pip install autoscraper
-
-# 验证安装
-python -c "from autoscraper import AutoScraper; print('OK')"
+autoscraper init --project my_scraper
 ```
 
-#### 第二步：基础抓取流程
+生成项目骨架，包含 `config.yaml` 和 `selectors.json`。
 
-```python
-from autoscraper import AutoScraper
+**Step 2：定义选择器**
 
-# 1. 创建实例
-scraper = AutoScraper()
+编辑 `selectors.json`：
 
-# 2. 提供示例数据（关键步骤）
-url = 'https://example.com/products'
-wanted_list = ['¥299', '无线耳机']  # 从页面中复制想要提取的示例值
-
-# 3. 学习规则
-scraper.build(url, wanted_list)
-
-# 4. 应用规则到新页面
-result = scraper.get_result_similar('https://example.com/products?page=2')
-print(result)
+```json
+{
+  "fields": {
+    "title": {"selector": "h1.product-title", "type": "text"},
+    "price": {"selector": "span.price-value", "type": "float"},
+    "availability": {"selector": ".stock-status", "type": "text", "required": false}
+  },
+  "page": {
+    "list_item": "div.product-card",
+    "pagination": "a.next-page"
+  }
+}
 ```
 
-#### 第三步：批量处理
+**Step 3：干跑验证**
 
-```python
-# 批量处理多个 URL
-urls = [
-    'https://example.com/products?page=1',
-    'https://example.com/products?page=2',
-    'https://example.com/products?page=3'
-]
-
-for url in urls:
-    result = scraper.get_result_similar(url)
-    print(f"{url}: {result}")
+```bash
+autoscraper run --url https://example.com/products --dry-run --verbose
 ```
 
-#### 第四步：结果保存
+输出将显示每个字段的匹配状态和置信度。
 
-```python
-import json
-import csv
+**Step 4：正式抓取**
 
-# 保存为 JSON
-with open('output.json', 'w', encoding='utf-8') as f:
-    json.dump(result, f, ensure_ascii=False, indent=2)
-
-# 保存为 CSV
-with open('output.csv', 'w', newline='', encoding='utf-8') as f:
-    writer = csv.writer(f)
-    writer.writerow(['字段1', '字段2'])
-    for item in result:
-        writer.writerow(item)
+```bash
+autoscraper run --url https://example.com/products --format json --output ./output/data.json
 ```
 
-### 输出规范
+**Step 5：检查输出**
 
-| 输出类型 | 格式 | 示例 |
-|----------|------|------|
-| 单页结果 | Python 列表 | `['¥299', '无线耳机']` |
-| 多页结果 | 列表的列表 | `[['¥299', '无线耳机'], ['¥399', '降噪耳机']]` |
-| 结构化输出 | JSON 格式 | `{"price": "¥299", "name": "无线耳机"}` |
+```bash
+cat ./output/data.json | jq '.'
+```
+
+### 3.3 输出规范
+
+| 格式 | 适用场景 | 示例 |
+|------|----------|------|
+| JSON | 程序化处理 | `{"title": "商品A", "price": 199.0}` |
+| CSV | Excel 分析 | `title,price\n商品A,199.0` |
+| Markdown | 文档嵌入 | `\| 商品A \| 199.0 \|` |
 
 ---
 
-## 四、置信度门控机制
+## 四、置信度门控
 
-### 置信度等级
+### 4.1 置信度评分机制
 
-| 等级 | 标识 | 含义 | 处理方式 |
-|------|------|------|----------|
-| 高 | ✅ 置信度 ≥ 90% | 提取结果与示例数据高度匹配 | 直接输出 |
-| 中 | ⚠️ 置信度 70%-89% | 部分字段匹配，可能存在偏差 | 输出结果并提示人工复核 |
-| 低 | ❓ 置信度 < 70% | 页面结构变化或规则失效 | 输出 `[需核实:字段名]` 占位符 |
+每个提取字段附带 0-1 的置信度分数：
 
-### 信息不足处理规则
+| 分数区间 | 含义 | 处理方式 |
+|----------|------|----------|
+| 0.9 - 1.0 | 高置信，选择器精确匹配 | 直接输出 |
+| 0.7 - 0.9 | 中置信，存在轻微歧义 | 输出并附带警告 |
+| 0.5 - 0.7 | 低置信，需要人工确认 | 输出 `[需核实:字段名]` |
+| < 0.5 | 极低置信，疑似错误 | 丢弃字段，记录日志 |
 
-1. **字段缺失**：当目标字段在页面中不存在时，输出 `[需核实:字段名]`，不编造数据
-2. **结构变化**：当页面结构改变导致规则失效时，提示用户重新提供示例数据
-3. **多值歧义**：当多个元素匹配同一规则时，全部输出并标注"存在多个匹配项"
+### 4.2 门控阈值配置
 
-```python
-# 置信度检查示例
-result = scraper.get_result_similar(url)
-if not result:
-    print("[需核实:目标数据] 页面结构可能已变化，请重新提供示例数据")
-elif len(result) < len(wanted_list):
-    print(f"⚠️ 部分字段缺失，期望 {len(wanted_list)} 个，实际获取 {len(result)} 个")
+```yaml
+confidence:
+  global_threshold: 0.7        # 全局阈值
+  field_overrides:
+    price: 0.85                # 价格字段要求更高
+    description: 0.5           # 描述字段可放宽
 ```
+
+### 4.3 不编造原则
+
+当信息不足时，遵循以下规则：
+
+1. **缺失字段** → 输出 `[需核实:字段名]`，不猜测值
+2. **类型不匹配** → 输出 `[需核实:字段名]`，不强制转换
+3. **多值冲突** → 输出 `[需核实:字段名]`，不随机选取
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 错误描述 | 用户提示话术 | 修正步骤 |
-|--------|----------|--------------|----------|
-| E001 | URL 无法访问 | "目标地址无法访问，请检查网络或 URL 是否正确" | 1. 浏览器打开 URL 验证<br>2. 检查网络连接<br>3. 确认无访问限制 |
-| E002 | 示例数据不匹配 | "提供的示例数据在页面中未找到，请确认示例值准确" | 1. 从页面复制精确文本<br>2. 去除多余空格<br>3. 确认数据在 HTML 中可见 |
-| E003 | 规则学习失败 | "无法从当前页面学习提取规则，页面结构可能过于复杂" | 1. 简化示例数据<br>2. 尝试更具体的文本片段<br>3. 检查页面是否为动态渲染 |
-| E004 | 批量处理中断 | "批量处理过程中出现异常，已停止后续操作" | 1. 检查异常 URL<br>2. 单独处理失败项<br>3. 添加重试机制 |
-| E005 | 输出格式错误 | "输出格式不符合预期，请检查字段映射" | 1. 确认字段名称<br>2. 检查数据类型<br>3. 调整输出配置 |
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| E001 | 选择器无匹配 | "未找到与选择器匹配的元素" | 1. 使用 `--dry-run --verbose` 查看详细匹配信息；2. 在浏览器开发者工具中重新验证选择器；3. 检查是否因懒加载导致元素未渲染（滚动页面后重试） |
+| E002 | 网络超时 | "请求超时，请检查网络或增加超时时间" | 1. 使用 `--timeout 60` 增加超时时间；2. 使用 `--retries 5` 增加重试次数；3. 检查网络连接和代理设置 |
+| E003 | 输出写入失败 | "无法写入输出文件，请检查路径权限" | 1. 检查输出目录是否存在且有写权限；2. 使用 `--dry-run` 先预览输出内容；3. 更换输出路径 |
+| E004 | 配置解析错误 | "配置文件格式不正确，请检查 JSON/YAML 语法" | 1. 使用 `autoscraper validate --config <path>` 验证；2. 检查引号和逗号；3. 参考示例配置 |
+| E005 | 批量任务中断 | "批量抓取在第 N 个 URL 处中断" | 1. 使用 `--resume` 从断点继续；2. 检查中断 URL 的响应状态；3. 将该 URL 加入黑名单后重试 |
+| E006 | 置信度过低 | "提取结果置信度低于阈值，已标记需核实" | 1. 检查选择器是否指向正确元素；2. 调整字段级阈值；3. 使用 AI 辅助模式重新识别 |
 
 ---
 
-## 六、FAQ 与反模式对照
+## 六、FAQ 反模式
 
-### 常见坑位
+### 6.1 常见坑与反模式对照
 
-| 坑位 | 错误做法（反模式） | 正确做法 |
-|------|-------------------|----------|
-| 坑 1：示例数据不精确 | 使用模糊描述如"价格"作为示例 | 使用页面上的精确文本如"¥299"作为示例 |
-| 坑 2：忽略页面结构变化 | 一次学习永久使用，不维护规则 | 定期重新学习规则，监控提取成功率 |
-| 坑 3：过度依赖单一规则 | 只用一个示例数据训练，覆盖不全 | 提供 2-3 个不同位置的示例，增强规则鲁棒性 |
-| 坑 4：忽略异常处理 | 不处理空结果和异常情况 | 添加空值检查和错误捕获机制 |
-| 坑 5：混淆静态与动态内容 | 试图抓取 AJAX 加载的内容 | 确认数据在 HTML 源码中可见，否则需配合其他工具 |
+| 常见坑 | 反模式（错误做法） | 正确做法 |
+|--------|---------------------|----------|
+| 选择器过于宽泛 | 使用 `div` 作为选择器 | 使用带 class 或 id 的精确选择器，如 `div.product-card > h2` |
+| 忽略页面结构变化 | 一次配置永久使用 | 定期（如每周）运行 `--dry-run` 检查选择器有效性 |
+| 盲目信任提取结果 | 不检查置信度直接入库 | 设置合理阈值，对低置信字段进行人工复核 |
+| 并发请求过猛 | 默认 10 并发直接跑 | 从 1 并发开始，逐步增加，观察目标站点响应 |
+| 忽略 robots.txt | 直接抓取被禁止路径 | 先检查 `robots.txt`，遵守站点规则 |
 
-### 反模式对照表
+### 6.2 反模式示例
 
-| 反模式 | 问题 | 推荐替代方案 |
-|--------|------|--------------|
-| 用 AutoScraper 抓取需要登录的数据 | 无法绕过认证 | 使用 Selenium 或 Playwright 处理认证流程 |
-| 抓取频率过高导致 IP 被封 | 违反网站使用条款 | 设置合理请求间隔，遵守 robots.txt |
-| 将抓取数据用于商业用途 | 可能涉及版权问题 | 确认数据使用许可，遵守相关法律法规 |
-
----
-
-## 七、渐进式学习路径
-
-### 🚀 新手快速上手（5 分钟）
-
-1. 安装：`pip install autoscraper`
-2. 复制下方最小示例，替换 URL 和示例数据
-3. 运行并查看输出
-
-```python
-from autoscraper import AutoScraper
-
-url = 'https://example.com'
-wanted_list = ['示例文本']  # 替换为页面上的实际文本
-scraper = AutoScraper()
-scraper.build(url, wanted_list)
-print(scraper.get_result_similar(url))
-```
-
-### 🔧 进阶用户指南
-
-#### 规则持久化
-
-```python
-# 保存学习到的规则
-scraper.save('my_scraper_rules.json')
-
-# 加载已有规则
-scraper = AutoScraper()
-scraper.load('my_scraper_rules.json')
-```
-
-#### 自定义分组
-
-```python
-# 按组管理不同数据类型的规则
-scraper.build(url, wanted_list, group_id='products')
-scraper.build(url, ['其他数据'], group_id='metadata')
-
-# 按组提取
-result = scraper.get_result_similar(url, group_id='products')
-```
-
-#### 性能优化建议
-
-| 场景 | 建议 |
-|------|------|
-| 大量 URL 抓取 | 使用 `asyncio` 异步处理 |
-| 频繁规则更新 | 使用 `group_id` 分组管理 |
-| 结果后处理 | 配合 `pandas` 进行数据清洗 |
-| 定时任务 | 使用 `cron` 或 `schedule` 库调度 |
-
----
-
-## 八、命令行工具
-
-AutoScraper 提供命令行接口：
+**反模式 1：不验证直接生产**
 
 ```bash
-# 查看版本
-python -m autoscraper --version
+# 错误：跳过干跑直接抓取
+autoscraper run --url https://example.com --format csv --output data.csv
 
-# 运行自检
-python -m autoscraper --selftest
+# 正确：先干跑验证
+autoscraper run --url https://example.com --dry-run --verbose
+```
+
+**反模式 2：忽略错误码**
+
+```bash
+# 错误：E001 后继续批量抓取
+autoscraper run --urls urls.txt --continue-on-error
+
+# 正确：先修复选择器
+autoscraper run --url https://example.com --dry-run --verbose
+# 修复 selectors.json 后重新执行
 ```
 
 ---
 
-## 用户协议
+## 七、渐进式披露
+
+### 7.1 速查卡（30 秒上手）
+
+```bash
+# 1. 初始化
+autoscraper init --project my_scraper
+
+# 2. 编辑 selectors.json（定义要提取的字段）
+
+# 3. 干跑验证
+autoscraper run --url <目标URL> --dry-run
+
+# 4. 正式抓取
+autoscraper run --url <目标URL> --format json --output result.json
+
+# 5. 查看结果
+cat result.json
+```
+
+### 7.2 新手路径（首次使用）
+
+1. 阅读「能力边界」了解工具范围
+2. 使用「速查卡」完成第一次抓取
+3. 遇到问题时查阅「错误码体系」
+4. 熟悉后阅读「标准流程」深入了解配置项
+
+### 7.3 进阶路径（深度使用）
+
+1. 掌握「置信度门控」的阈值调优
+2. 学习批量抓取与增量更新
+3. 自定义选择器模板复用
+4. 结合外部工具处理 JS 渲染页面
+5. 建立定期验证机制确保提取稳定性
+
+---
+
+## 八、参数参考表
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--url` | string | 无 | 目标页面 URL |
+| `--urls` | file | 无 | URL 列表文件（每行一个） |
+| `--format` | string | `json` | 输出格式：json/csv/markdown |
+| `--output` | path | `./output` | 输出文件路径 |
+| `--dry-run` | flag | false | 干跑模式，不写入文件 |
+| `--verbose` | flag | false | 输出详细日志 |
+| `--timeout` | int | 30 | 请求超时（秒） |
+| `--retries` | int | 3 | 失败重试次数 |
+| `--concurrency` | int | 1 | 并发请求数 |
+| `--incremental` | flag | false | 增量模式，跳过未变化页面 |
+| `--resume` | flag | false | 从上次中断处继续 |
+| `--threshold` | float | 0.7 | 全局置信度阈值 |
+| `--config` | path | `./config.yaml` | 配置文件路径 |
+
+---
+
+## 九、用户协议
 
 <!-- user-agreement-injected -->
 
 **使用本 Skill 即表示您同意以下条款：**
 
-1. **责任承担**：使用者自行承担使用本 Skill 的全部责任。因使用本 Skill 产生的任何直接或间接损失，包括但不限于数据丢失、业务中断、法律纠纷，本 Skill 作者及贡献者不承担任何责任。
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于数据采集的合法性、数据使用的合规性、以及对第三方网站造成的影响。
 
-2. **合法使用**：使用者承诺将本 Skill 仅用于合法目的，遵守适用的法律法规、网站服务条款和 robots.txt 协议。使用者应自行确认目标网站的数据抓取行为合规。
+2. **合法使用**：使用者承诺仅将本 Skill 用于合法目的，遵守目标网站的 `robots.txt` 规则、服务条款及相关法律法规。
 
 3. **禁止反向工程**：使用者不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码（除非适用法律允许）。
 
-4. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
+4. **无担保**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性。
 
-5. **使用限制**：使用者不得将本 Skill 用于任何可能损害第三方权益的活动，包括但不限于侵犯知识产权、侵犯隐私、干扰服务正常运行等行为。
+5. **免责**：在任何情况下，Skill 作者均不对因使用或无法使用本 Skill 而产生的任何损害承担责任，包括但不限于直接损害、间接损害、附带损害或利润损失。
 
 ---
 
-## 许可证（License）
+## 十、许可证（License）
 
 <!-- professional-license-embedded -->
 
 **MIT License**
 
-版权所有 (c) 2024 DataFlow Studio
+Copyright (c) 2024 DataCraft Studio
 
-特此免费授予任何获得本软件及相关文档文件（"软件"）副本的人士处理本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向其提供软件的人士这样做，但须满足以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-本软件按"现状"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权行为或其他方面，由软件或软件的使用或其他交易引起或与之相关。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ---
 
-*本文档由 AI 辅助生成，仅供参考。使用前请阅读 AutoScraper 官方文档获取最新信息。*
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档并自行验证适用性。*
