@@ -1,0 +1,41 @@
+{
+  "timestamp": "20260820_063515",
+  "slug": "skill-88616",
+  "spec": {
+    "slug": "skill-88616",
+    "name": "skill-88616",
+    "description": "反欺诈场景一站式处理：识别、整理、生成与校验，输出可直接使用的结果文件。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 数据文件格式为 CSV、Excel（.xlsx）或 JSON，编码为 UTF-8。",
+      "2. 数据中至少包含一个可识别的唯一标识字段（如 `id`、`order_no`）。",
+      "3. 自定义规则文件（如有）为 JSON 格式，结构符合下文规范。",
+      "- 输出最终文件：`fraud_analysis_summary.json` + 分片结果目录。",
+      "1. 阅读「能力边界速查卡」了解基本范围。",
+      "2. 准备一份 CSV 数据文件（含 id 和 amount 字段）。",
+      "3. 直接调用技能，使用默认规则集。",
+      "4. 查看输出的 `fraud_analysis_summary.json` 了解整体风险分布。",
+      "1. 学习「自定义规则 JSON 格式」，编写业务专属规则。",
+      "2. 调整 `dtype` 参数优化内存占用。",
+      "3. 对超过 5 万条的数据启用并行分片处理。",
+      "4. 结合「校验报告」迭代优化数据质量。",
+      "1. **责任承担**：使用者应自行承担因使用本技能产生的全部责任。本技能输出的风险分析结果和建议仅供参考，不构成任何形式的保证或承诺。",
+      "2. **禁止反向工程**：使用者不得对本技能进行反向工程、反编译、破解或试图提取底层算法逻辑。",
+      "3. **数据合规**：使用者应确保输入数据来源合法，不包含侵犯第三方权益的信息。因数据使用引发的纠纷由使用者自行解决。",
+      "4. **无法律意见**：本技能输出内容不构成法律意见，涉及法律纠纷请咨询专业律师。",
+      "5. **修改与终止**：技能作者保留随时修改、更新或终止本技能的权利，恕不另行通知。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "e11c0e8da9f61514",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
