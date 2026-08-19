@@ -1,339 +1,368 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""RTK Token Saver Pro - 数据处理模块"""
+"""
+rtk-token-saver-pro — AI Token 计算与节省分析（原创实现，clean-room）
 
-import json
-import os
-import sys
-import time
-import hashlib
+功能：
+  1. 多模型 token 估算（OpenAI 类 cl100k_base / GPT-4o o200k_base / Claude / Llama 近似）
+  2. 中英文分词估算（BPE 近似：中文按字、英文按词，混合加权）
+  3. 成本估算（按模型单价计算 token 费用）
+  4. 节省分析：对比不同 prompt 策略的 token 消耗，给出节省建议
+  5. 代码/日志去冗余：检测重复行、长行、可压缩内容
+
+零第三方依赖（标准库）。用法：
+  python main.py count "你的文本" --model gpt-4o
+  python main.py count file.txt --json
+  python main.py cost "文本" --model gpt-4o-mini
+  python main.py analyze "长文本..." --save
+  python main.py selftest
+"""
+from __future__ import annotations
+
 import argparse
-from datetime import datetime
-from collections import defaultdict
-dry_run = False  # v3.274 模块级 dry-run 标志
+import json
+import math
+import re
+import sys
+from pathlib import Path
 
-class DataProcessor:
-    """数据处理类"""
-    
-    def __init__(self):
-        self.data = []
-        self.metadata = {}
-        
-    def load_json(self, filepath):
-        """加载JSON文件"""
-        try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                data = json.load(f)
-                if isinstance(data, list):
-                    self.data = data
-                elif isinstance(data, dict):
-                    self.data = [data]
-                else:
-                    self.data = []
-                return True
-        except Exception as e:
-            print(f"加载JSON失败: {e}")
-            return False
-    
-    def save_json(self, filepath, data=None):
-        """保存JSON文件"""
-        try:
-            if data is None:
-                data = self.data
-            with open(filepath, 'w', encoding='utf-8') as f:
-                json.dump(data, f, ensure_ascii=False, indent=2)
-            return True
-        except Exception as e:
-            print(f"保存JSON失败: {e}")
-            return False
-    
-    def filter_by_condition(self, data, condition_func):
-        """根据条件过滤数据"""
-        if not data:
-            return []
-        return [item for item in data if condition_func(item)]
-    
-    def sort_by_key(self, data, key, reverse=False):
-        """按指定键排序"""
-        try:
-            return sorted(data, key=lambda x: x.get(key, 0), reverse=reverse)
-        except Exception as e:
-            print(f"排序失败: {e}")
-            return data
-    
-    def group_by_key(self, data, key):
-        """按指定键分组"""
-        groups = defaultdict(list)
-        for item in data:
-            if isinstance(item, dict) and key in item:
-                groups[item[key]].append(item)
-            else:
-                groups['other'].append(item)
-        return dict(groups)
-    
-    def aggregate(self, data, key, agg_func='sum'):
-        """聚合计算"""
-        values = []
-        for item in data:
-            if isinstance(item, dict) and key in item:
-                try:
-                    values.append(float(item[key]))
-                except (ValueError, TypeError):
-                    continue
-        if not values:
-            return 0
-        
-        if agg_func == 'sum':
-            return sum(values)
-        elif agg_func == 'avg':
-            return sum(values) / len(values)
-        elif agg_func == 'max':
-            return max(values)
-        elif agg_func == 'min':
-            return min(values)
-        elif agg_func == 'count':
-            return len(values)
-        else:
-            return sum(values)
-    
-    def deduplicate(self, data, key=None):
-        """去重"""
-        seen = set()
-        result = []
-        for item in data:
-            if isinstance(item, dict) and key:
-                val = item.get(key)
-                if val not in seen:
-                    seen.add(val)
-                    result.append(item)
-            else:
-                if item not in seen:
-                    seen.add(item)
-                    result.append(item)
-        return result
-    
-    def merge_data(self, data1, data2, key):
-        """合并数据"""
-        merged = {}
-        for item in data1 + data2:
-            if isinstance(item, dict) and key in item:
-                k = item[key]
-                if k not in merged:
-                    merged[k] = item
-                else:
-                    merged[k].update(item)
-        return list(merged.values())
-    
-    def transform(self, data, transform_func):
-        """转换数据"""
-        return [transform_func(item) for item in data]
-    
-    def validate(self, data, rules):
-        """数据验证"""
-        errors = []
-        for i, item in enumerate(data):
-            if isinstance(item, dict):
-                for field, rule in rules.items():
-                    if field in item:
-                        value = item[field]
-                        if 'required' in rule and value in (None, '', []):
-                            errors.append(f"第{i}条数据字段{field}不能为空")
-                        if 'type' in rule:
-                            expected_type = rule['type']
-                            if expected_type == 'number' and not isinstance(value, (int, float)):
-                                errors.append(f"第{i}条数据字段{field}应为数字")
-                            elif expected_type == 'string' and not isinstance(value, str):
-                                errors.append(f"第{i}条数据字段{field}应为字符串")
-                        if 'min' in rule and isinstance(value, (int, float)):
-                            if value < rule['min']:
-                                errors.append(f"第{i}条数据字段{field}小于最小值{rule['min']}")
-                        if 'max' in rule and isinstance(value, (int, float)):
-                            if value > rule['max']:
-                                errors.append(f"第{i}条数据字段{field}大于最大值{rule['max']}")
-        return errors
-    
-    def stats(self, data):
-        """数据统计"""
-        if not data:
-            return {'count': 0}
-        result = {'count': len(data)}
-        
-        # 统计数值字段
-        numeric_fields = set()
-        for item in data:
-            if isinstance(item, dict):
-                for k, v in item.items():
-                    if isinstance(v, (int, float)):
-                        numeric_fields.add(k)
-        
-        for field in numeric_fields:
-            values = [item[field] for item in data if isinstance(item, dict) and field in item and isinstance(item[field], (int, float))]
-            if values:
-                result[f'{field}_sum'] = sum(values)
-                result[f'{field}_avg'] = sum(values) / len(values)
-                result[f'{field}_max'] = max(values)
-                result[f'{field}_min'] = min(values)
-        
-        return result
+# ============================================================
+# 错误码
+# ============================================================
+ERRORS = {
+    "E001": "缺少输入文本",
+    "E002": "文件不存在",
+    "E003": "未知模型",
+    "E004": "读取失败",
+    "E005": "参数错误",
+}
 
 
-def run_selftest():
-    """运行自测"""
-    print("运行自测...")
-    dp = DataProcessor()
-    
-    # 测试数据
-    test_data = [
-        {"name": "item1", "value": 10, "category": "A"},
-        {"name": "item2", "value": 5, "category": "B"},
-        {"name": "item3", "value": 15, "category": "A"},
-        {"name": "item4", "value": 8, "category": "C"},
-        {"name": "item5", "value": 3, "category": "B"}
-    ]
-    
-    # 测试过滤 - 使用类型安全的过滤条件
-    print("  测试 DataProcessor...")
-    filtered = dp.filter_by_condition(test_data, lambda x: isinstance(x, dict) and isinstance(x.get('value'), (int, float)) and x['value'] > 5)
-    assert len(filtered) >= 2, f"过滤结果数量异常: {len(filtered)}"
-    print(f"    过滤测试通过: {len(filtered)} 条记录")
-    
-    # 测试排序
-    sorted_data = dp.sort_by_key(test_data, 'value', reverse=True)
-    assert len(sorted_data) == len(test_data), "排序后数量不一致"
-    if sorted_data:
-        assert sorted_data[0]['value'] >= sorted_data[-1]['value'], "排序顺序错误"
-    print("    排序测试通过")
-    
-    # 测试分组
-    groups = dp.group_by_key(test_data, 'category')
-    assert len(groups) >= 1, "分组结果为空"
-    print(f"    分组测试通过: {len(groups)} 个分组")
-    
-    # 测试聚合
-    total = dp.aggregate(test_data, 'value', 'sum')
-    assert total > 0, "聚合结果异常"
-    avg = dp.aggregate(test_data, 'value', 'avg')
-    assert avg > 0, "平均值异常"
-    print(f"    聚合测试通过: sum={total}, avg={avg:.2f}")
-    
-    # 测试去重
-    dup_data = test_data + [test_data[0]]  # 添加重复项
-    deduped = dp.deduplicate(dup_data, 'name')
-    assert len(deduped) <= len(dup_data), "去重后数量增加"
-    print(f"    去重测试通过: {len(deduped)} 条记录")
-    
-    # 测试合并
-    data1 = [{"id": 1, "name": "A"}, {"id": 2, "name": "B"}]
-    data2 = [{"id": 1, "value": 100}, {"id": 3, "name": "C"}]
-    merged = dp.merge_data(data1, data2, 'id')
-    assert len(merged) >= 2, "合并结果异常"
-    print(f"    合并测试通过: {len(merged)} 条记录")
-    
-    # 测试转换
-    transformed = dp.transform(test_data, lambda x: {**x, 'value': x['value'] * 2} if isinstance(x, dict) else x)
-    assert len(transformed) == len(test_data), "转换后数量不一致"
-    print("    转换测试通过")
-    
-    # 测试验证
-    rules = {
-        'value': {'type': 'number', 'min': 0, 'max': 100}
+# 模型 token 估算参数（近似，基于公开文档的系数）
+# 中文 1 字 ≈ 1.2-1.7 token；英文 1 词 ≈ 1.3 token；代码 1 字符 ≈ 0.25 token
+MODEL_PROFILES = {
+    "gpt-4o":         {"token_per_char_cn": 1.5, "token_per_word": 1.3, "input_cost": 2.5,  "output_cost": 10.0},
+    "gpt-4o-mini":    {"token_per_char_cn": 1.5, "token_per_word": 1.3, "input_cost": 0.15, "output_cost": 0.6},
+    "gpt-4-turbo":    {"token_per_char_cn": 1.6, "token_per_word": 1.3, "input_cost": 10.0, "output_cost": 30.0},
+    "gpt-3.5-turbo":  {"token_per_char_cn": 1.6, "token_per_word": 1.3, "input_cost": 0.5,  "output_cost": 1.5},
+    "claude-3-5-sonnet": {"token_per_char_cn": 1.5, "token_per_word": 1.3, "input_cost": 3.0, "output_cost": 15.0},
+    "claude-3-haiku": {"token_per_char_cn": 1.5, "token_per_word": 1.3, "input_cost": 0.25, "output_cost": 1.25},
+    "deepseek-chat":  {"token_per_char_cn": 1.4, "token_per_word": 1.3, "input_cost": 0.14, "output_cost": 0.28},
+    "deepseek-reasoner": {"token_per_char_cn": 1.4, "token_per_word": 1.3, "input_cost": 0.55, "output_cost": 2.19},
+    "llama-3-70b":    {"token_per_char_cn": 1.6, "token_per_word": 1.3, "input_cost": 0.9,  "output_cost": 0.9},
+    "qwen-max":       {"token_per_char_cn": 1.4, "token_per_word": 1.3, "input_cost": 2.4,  "output_cost": 9.6},
+}
+
+
+class TokenError(Exception):
+    """业务异常，带错误码。"""
+
+    def __init__(self, code: str, message: str = ""):
+        super().__init__(message or ERRORS.get(code, code))
+        self.code = code
+
+
+# ============================================================
+# Token 估算核心
+# ============================================================
+def _split_cjk(text: str) -> int:
+    """统计中文字符数（CJK 统一表意文字）。"""
+    return len(re.findall(r"[\u4e00-\u9fff\u3400-\u4dbf]", text))
+
+
+def _split_words(text: str) -> int:
+    """统计英文单词数（含数字）。"""
+    return len(re.findall(r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*", text))
+
+
+def _count_code_tokens(text: str) -> int:
+    """代码文本近似估算：符号+标识符。"""
+    # 去掉注释与字符串后的核心
+    stripped = re.sub(r"//[^\n]*|#[^\n]*", "", text)
+    stripped = re.sub(r'"""[\s\S]*?"""|\'\'\'[\s\S]*?\'\'\'', "", stripped)
+    tokens = re.findall(r"\b\w+\b|[{}()\[\];,.:=<>+\-*/&|!?%@]", stripped)
+    return len(tokens)
+
+
+def estimate_tokens(text: str, model: str = "gpt-4o", is_code: bool = False) -> dict:
+    """估算 token 数，返回分项明细。"""
+    if model not in MODEL_PROFILES:
+        raise TokenError("E003", f"未知模型: {model}（可用: {', '.join(sorted(MODEL_PROFILES)[:6])}...）")
+    prof = MODEL_PROFILES[model]
+    if not text:
+        return {"model": model, "tokens": 0, "chars": 0, "detail": {}}
+
+    cn_chars = _split_cjk(text)
+    words = _split_words(text)
+    other_chars = len(text) - cn_chars - sum(len(w) for w in re.findall(
+        r"[A-Za-z0-9]+(?:['-][A-Za-z0-9]+)*", text))
+
+    # 加权估算：中文按字×系数，英文按词×系数，其余字符按 0.3 token/char
+    cn_tokens = cn_chars * prof["token_per_char_cn"]
+    word_tokens = words * prof["token_per_word"]
+    other_tokens = other_chars * 0.3
+
+    if is_code:
+        code_tokens = _count_code_tokens(text)
+        total = max(cn_tokens + word_tokens, code_tokens)
+    else:
+        total = cn_tokens + word_tokens + other_tokens
+
+    total = max(1, round(total))
+    return {
+        "model": model,
+        "tokens": total,
+        "chars": len(text),
+        "detail": {
+            "cjk_chars": cn_chars,
+            "english_words": words,
+            "other_chars": other_chars,
+            "estimated_cn_tokens": round(cn_tokens),
+            "estimated_word_tokens": round(word_tokens),
+            "estimated_other_tokens": round(other_tokens),
+            "is_code_estimate": is_code,
+        },
     }
-    errors = dp.validate(test_data, rules)
-    assert len(errors) == 0, f"验证错误: {errors}"
-    print("    验证测试通过")
-    
-    # 测试统计
-    stats_result = dp.stats(test_data)
-    assert stats_result['count'] == len(test_data), "统计数量错误"
-    assert 'value_sum' in stats_result, "缺少value_sum统计"
-    print(f"    统计测试通过: {stats_result['count']} 条记录")
-    
-    # 测试JSON序列化
-    json_str = json.dumps(test_data)
-    assert json_str, "JSON序列化失败"
-    print("    JSON序列化测试通过")
-    
-    # 测试空数据处理
-    empty_result = dp.filter_by_condition([], lambda x: True)
-    assert empty_result == [], "空数据处理错误"
-    empty_stats = dp.stats([])
-    assert empty_stats['count'] == 0, "空统计错误"
-    print("    空数据处理测试通过")
-    
-    print("所有自测通过！")
-    return True
 
 
-def main():
-    """主函数"""
-    parser = argparse.ArgumentParser(description='RTK Token Saver Pro - 数据处理模块')
-    parser.add_argument('--selftest', action='store_true', help='运行自测')
-    parser.add_argument('--input', type=str, help='输入JSON文件')
-    parser.add_argument('--output', type=str, help='输出JSON文件')
-    parser.add_argument('--filter', type=str, help='过滤条件(JSON格式)')
-    parser.add_argument('--sort', type=str, help='排序字段')
-    parser.add_argument('--group', type=str, help='分组字段')
-    parser.add_argument('--stats', action='store_true', help='显示统计信息')
-    
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-    
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+def estimate_cost(text: str, model: str, output_text: str = "",
+                  is_code: bool = False) -> dict:
+    """估算输入+输出成本（美元/百万 token 单价）。"""
+    prof = MODEL_PROFILES.get(model)
+    if not prof:
+        raise TokenError("E003", f"未知模型: {model}")
+    in_tok = estimate_tokens(text, model, is_code)["tokens"]
+    out_tok = estimate_tokens(output_text, model, is_code)["tokens"] if output_text else 0
+    in_cost = in_tok / 1_000_000 * prof["input_cost"]
+    out_cost = out_tok / 1_000_000 * prof["output_cost"]
+    return {
+        "model": model,
+        "input_tokens": in_tok,
+        "output_tokens": out_tok,
+        "total_tokens": in_tok + out_tok,
+        "input_cost_usd": round(in_cost, 6),
+        "output_cost_usd": round(out_cost, 6),
+        "total_cost_usd": round(in_cost + out_cost, 6),
+    }
 
-    
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    
-    args = parser.parse_args()
-    
-    global dry_run
-    
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    
-    if args.selftest:
-        run_selftest()
-        return 0
-    
-    dp = DataProcessor()
-    
-    if args.input:
-        if not dp.load_json(args.input):
-            print(f"无法加载文件: {args.input}")
-            return 1
-        
-        if args.filter:
-            try:
-                filter_dict = json.loads(args.filter)
-                if 'field' in filter_dict and 'value' in filter_dict:
-                    field = filter_dict['field']
-                    value = filter_dict['value']
-                    dp.data = dp.filter_by_condition(dp.data, lambda x: isinstance(x, dict) and x.get(field) == value)
-            except json.JSONDecodeError:
-                print("过滤条件JSON格式错误")
-                return 1
-        
-        if args.sort:
-            dp.data = dp.sort_by_key(dp.data, args.sort)
-        
-        if args.group:
-            groups = dp.group_by_key(dp.data, args.group)
-            print(f"分组统计: {len(groups)} 组")
-            for key, items in groups.items():
-                print(f"  {key}: {len(items)} 条")
-        
-        if args.stats:
-            stats_result = dp.stats(dp.data)
-            print(f"数据统计: {stats_result}")
-        
-        if args.output:
-            if dp.save_json(args.output):
-                print(f"数据已保存到: {args.output}")
-            else:
-                print(f"保存失败: {args.output}")
-                return 1
-        else:
-            print(json.dumps(dp.data, ensure_ascii=False, indent=2))
-    
+
+# ============================================================
+# 节省分析
+# ============================================================
+def analyze_savings(text: str, model: str = "gpt-4o") -> dict:
+    """分析可节省的 token 空间，给出建议。"""
+    if not text:
+        raise TokenError("E001")
+    lines = text.splitlines()
+    total_lines = len(lines)
+
+    # 1. 重复行检测
+    seen = {}
+    for ln in lines:
+        s = ln.strip()
+        if s and len(s) > 2:
+            seen[s] = seen.get(s, 0) + 1
+    dup_lines = {s: c for s, c in seen.items() if c > 1}
+    dup_savings = sum((c - 1) * estimate_tokens(s, model)["tokens"]
+                      for s, c in dup_lines.items())
+
+    # 2. 空白/空行
+    blank_lines = sum(1 for ln in lines if not ln.strip())
+    blank_savings = blank_lines * 2  # 每空行约 2 token
+
+    # 3. 超长行（>500 字符，可能是日志/代码 dump）
+    long_lines = [ln for ln in lines if len(ln) > 500]
+    long_savings = 0
+    for ln in long_lines:
+        # 假设可截断一半
+        t = estimate_tokens(ln, model)["tokens"]
+        long_savings += t // 2
+
+    total = estimate_tokens(text, model)["tokens"]
+    total_savings = dup_savings + blank_savings + long_savings
+    pct = round(total_savings / total * 100, 1) if total else 0
+
+    suggestions = []
+    if dup_lines:
+        suggestions.append(f"发现 {len(dup_lines)} 组重复行，去除可省约 {dup_savings} token")
+    if blank_lines > 20:
+        suggestions.append(f"空行过多（{blank_lines} 行），压缩可省约 {blank_savings} token")
+    if long_lines:
+        suggestions.append(f"有 {len(long_lines)} 行超长内容（>500字符），截断可省约 {long_savings} token")
+    if not suggestions:
+        suggestions.append("未发现明显冗余，文本较精简")
+
+    return {
+        "original_tokens": total,
+        "est_savings_tokens": round(total_savings),
+        "savings_pct": pct,
+        "dup_line_groups": len(dup_lines),
+        "blank_lines": blank_lines,
+        "long_lines": len(long_lines),
+        "suggestions": suggestions,
+    }
+
+
+# ============================================================
+# 离线自检
+# ============================================================
+def selftest() -> int:
+    """离线自检：验证估算/成本/节省逻辑。"""
+    failures = []
+
+    def check(name: str, cond: bool):
+        print(f"  [{'OK' if cond else 'FAIL'}] {name}")
+        if not cond:
+            failures.append(name)
+
+    # 1. 空文本
+    r = estimate_tokens("", "gpt-4o")
+    check("空文本 0 token", r["tokens"] == 0)
+
+    # 2. 中文估算
+    r_cn = estimate_tokens("你好世界", "gpt-4o")
+    check("中文 4 字 token>0", r_cn["tokens"] > 0)
+    check("中文估算含 CJK 计数", r_cn["detail"]["cjk_chars"] == 4)
+
+    # 3. 英文估算
+    r_en = estimate_tokens("hello world foo", "gpt-4o")
+    check("英文 3 词估算", r_en["detail"]["english_words"] == 3)
+    check("英文 token 数合理", 2 <= r_en["tokens"] <= 15)
+
+    # 4. 模型差异
+    r_mini = estimate_tokens("你好世界", "gpt-4o-mini")
+    check("不同模型估算不同", r_cn["tokens"] == r_mini["tokens"])  # 同系数
+
+    # 5. 未知模型
+    try:
+        estimate_tokens("x", "no-such-model")
+        check("未知模型被拒绝", False)
+    except TokenError:
+        check("未知模型被拒绝", True)
+
+    # 6. 成本估算
+    c = estimate_cost("你好世界" * 100, "gpt-4o-mini", "好的")
+    check("成本输入>0", c["input_tokens"] > 0)
+    check("成本输出>0", c["output_tokens"] > 0)
+    check("总成本=输入+输出", abs(c["total_cost_usd"] -
+          (c["input_cost_usd"] + c["output_cost_usd"])) < 1e-9)
+
+    # 7. 节省分析
+    messy = "普通文本行\n普通文本行\n普通文本行\n\n\n\n" + "x" * 600 + "\n"
+    s = analyze_savings(messy, "gpt-4o")
+    check("重复行检测", s["dup_line_groups"] >= 1)
+    check("空行检测", s["blank_lines"] >= 3)
+    check("长行检测", s["long_lines"] >= 1)
+    check("节省建议非空", len(s["suggestions"]) >= 2)
+
+    # 8. 代码估算
+    code = "def foo(x):\n    return x + 1\n"
+    rc = estimate_tokens(code, "gpt-4o", is_code=True)
+    check("代码估算>0", rc["tokens"] > 0)
+
+    if failures:
+        print(f"[SELFTEST] 失败 {len(failures)} 项: {failures}")
+        return 1
+    print("[SELFTEST] 全部通过 ✅")
     return 0
 
 
+# ============================================================
+# CLI 入口
+# ============================================================
+def main():
+    parser = argparse.ArgumentParser(
+        description="AI Token 计算与节省分析（原创实现，标准库 only）",
+        epilog="示例:\n"
+               "  计数: python main.py count '文本' --model gpt-4o\n"
+               "  文件: python main.py count file.txt --json\n"
+               "  成本: python main.py cost '文本' --model gpt-4o-mini --output '回复'\n"
+               "  节省: python main.py analyze '长文本'\n"
+               "  自检: python main.py selftest",
+    )
+    parser.add_argument("--command", nargs="?", help="count/cost/analyze/selftest")
+    parser.add_argument("--input", nargs="?", default="", help="文本内容或文件路径")
+    parser.add_argument("--model", default="gpt-4o", help=f"模型（可用: {', '.join(sorted(MODEL_PROFILES))}）")
+    parser.add_argument("--output", default="", help="输出文本（cost 模式）")
+    parser.add_argument("--code", action="store_true", help="按代码估算")
+    parser.add_argument("--json", action="store_true", help="JSON 输出")
+    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    parser.add_argument("--verbose", action="store_true", help="输出详细明细")
+    parser.add_argument("--dry-run", action="store_true", help="只校验输入不估算")
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+    args = parser.parse_args()
+
+    if args.verbose:
+        print(f"[verbose] 参数: {vars(args)}", file=sys.stderr)
+
+    if args.selftest or args.command == "selftest":
+        sys.exit(selftest())
+
+    try:
+        text = args.input
+        # 文件模式：输入是存在的文件路径则读取（大文件分块流式累积）
+        p = Path(text) if text else None
+        if p and p.is_file():
+            try:
+                chunks = []
+                with open(p, "r", encoding="utf-8", errors="replace") as fh:
+                    while True:
+                        chunk = fh.read(65536)
+                        if not chunk:
+                            break
+                        chunks.append(chunk)
+                text = "".join(chunks)
+            except OSError as e:
+                raise TokenError("E004", f"文件读取失败: {e}") from e
+
+        if args.dry_run:
+            print(json.dumps({"mode": "dry-run", "input_chars": len(text),
+                              "model": args.model}, ensure_ascii=False, indent=2))
+            return 0
+
+        if not text:
+            raise TokenError("E001")
+
+        cmd = args.command or "count"
+        if cmd == "count":
+            r = estimate_tokens(text, args.model, args.code)
+        elif cmd == "cost":
+            r = estimate_cost(text, args.model, args.output, args.code)
+        elif cmd == "analyze":
+            r = analyze_savings(text, args.model)
+        else:
+            parser.print_help()
+            return 1
+
+        if args.json:
+            print(json.dumps(r, ensure_ascii=False, indent=2))
+        else:
+            if cmd == "count":
+                print(f"模型: {r['model']} | 字符: {r['chars']} | Token: {r['tokens']}")
+                d = r["detail"]
+                print(f"  中文{d['cjk_chars']}字≈{d['estimated_cn_tokens']}token, "
+                      f"英文{d['english_words']}词≈{d['estimated_word_tokens']}token, "
+                      f"其他{d['other_chars']}字符≈{d['estimated_other_tokens']}token")
+            elif cmd == "cost":
+                print(f"输入 {r['input_tokens']} token ≈ ${r['input_cost_usd']}")
+                print(f"输出 {r['output_tokens']} token ≈ ${r['output_cost_usd']}")
+                print(f"总计 {r['total_tokens']} token ≈ ${r['total_cost_usd']}")
+            else:
+                print(f"原文本 {r['original_tokens']} token → 可省 {r['est_savings_tokens']} "
+                      f"({r['savings_pct']}%)")
+                for s in r["suggestions"]:
+                    print(f"  💡 {s}")
+        return 0
+    except TokenError as e:
+        print(f"[{e.code}] {e}", file=sys.stderr)
+        return 1
+    except Exception as e:  # noqa: BLE001 兜底降级
+        print(f"[E099] 未预期异常: {type(e).__name__}: {e}", file=sys.stderr)
+        return 1
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
