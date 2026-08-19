@@ -1,27 +1,15 @@
 {
   "slug": "ai-content-generator-using-gpt-3-acg",
-  "name": "ai-content-generator-using-gpt-3-acg",
-  "description": "The  ACG is a good text generator because it generates the content from scratch , that is based upon the user input ,  p",
+  "name": "acg-structured-text-processor",
+  "description": "本地规则驱动的文本批处理与结构化提取引擎，支持JSON/Markdown/CSV输出与置信度标注。",
   "trigger_words": "",
-  "original_version": "1.0.0",
+  "original_version": "3.1.0",
   "capability_outline": [
-    "**能做（5项核心能力）：**",
-    "1. 将 用户提供的数据/文件/URL 转换为结构化结果",
-    "2. 识别并保留输入中的关键信息",
-    "3. 按约定格式生成输出",
-    "4. 对不确定项给出置信度提示",
-    "5. 支持批量处理和自定义格式",
-    "- 输入来源：用户提供的数据/文件/URL",
-    "- 输出格式要求（文件类型 / 字段结构）",
-    "1. 解析输入内容，识别关键信息",
-    "2. 按以下规则处理：",
-    "3. 生成结果，并标注置信度：",
-    "1. 将结果整理为约定格式输出",
-    "2. 自查：字段完整性、格式正确性、置信度标注",
-    "3. 有疑问时向用户二次确认",
-    "- 输入不符合预期 → 返回错误说明与正确的输入格式示例",
-    "1. 收集用户输入并确认格式",
-    "2. 按功能逻辑处理输入内容",
-    "3. 生成结果并校验完整性"
+    "- 输入文件超过 50MB（建议先分块）",
+    "1. **使用预览模式**：在正式处理前，先用 `--dry-run` 预览结果，确认提取规则正确。",
+    "2. **自定义规则**：根据实际需求编写 `rules.json`，提高提取精度。",
+    "3. **处理大文件**：使用 `--chunk-size` 分块处理，避免内存溢出。",
+    "4. **指定编码**：处理非 UTF-8 文件时，使用 `--encoding` 指定编码。",
+    "5. **置信度过滤**：使用 `--min-confidence` 过滤低置信度记录，提高数据质量。"
   ]
 }
