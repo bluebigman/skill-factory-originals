@@ -16,9 +16,9 @@ scripts/main.py — Rails 代码片段速查与生成工具（独立实现）
 import argparse
 import json
 import sys
+import re
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义（E001 - E010）
@@ -295,266 +295,216 @@ end''',
 
 
 # ---------------------------------------------------------------------------
-# 核心功能函数
+# 片段生成功能（核心能力实现）
 # ---------------------------------------------------------------------------
-def list_snippets(library: Dict[str, Snippet]) -> None:
-    """列出所有可用片段。"""
-    print("=== Rails 代码片段列表 ===")
-    print(f"共 {len(library)} 个片段\n")
-
-    # 按分类分组
-    grouped: Dict[str, List[Snippet]] = {}
-    for snippet in library.values():
-        grouped.setdefault(snippet.category, []).append(snippet)
-
-    for category in sorted(grouped.keys()):
-        print(f"--- {category} ---")
-        for snippet in grouped[category]:
-            print(f"  {snippet.key:30s} {snippet.title}")
-        print()
-
-
-def get_snippet(library: Dict[str, Snippet], key: str) -> None:
-    """获取并输出指定片段。"""
-    snippet = library.get(key)
-    if not snippet:
-        fail("E002", f"片段 '{key}' 不存在")
-
-    print(f"=== {snippet.title} ===")
-    print(f"分类: {snippet.category}")
-    print(f"标签: {', '.join(snippet.tags)}")
-    print(f"描述: {snippet.description}\n")
-    print("代码:")
-    print(snippet.code)
-
-
-def search_snippets(library: Dict[str, Snippet], keyword: str) -> List[Snippet]:
-    """按关键词搜索片段（匹配标题、标签、描述、代码）。"""
-    keyword_lower = keyword.lower()
-
-    results = []
-    for snippet in library.values():
-        # 搜索范围：标题、标签、描述、代码
-        searchable_text = " ".join([
-            snippet.title,
-            snippet.category,
-            " ".join(snippet.tags),
-            snippet.description,
-            snippet.code,
-        ]).lower()
-
-        if keyword_lower in searchable_text:
-            results.append(snippet)
-
-    print(f"搜索关键词: '{keyword}'")
-    print(f"找到 {len(results)} 个匹配片段\n")
-
-    for snippet in results:
-        print(f"  [{snippet.category}] {snippet.key}: {snippet.title}")
-        print(f"    标签: {', '.join(snippet.tags)}")
-        print(f"    描述: {snippet.description}")
-        print()
-
-    return results
-
-
-def export_json(library: Dict[str, Snippet], output_path: str) -> None:
-    """将片段库导出为 JSON 文件。"""
-    try:
-        data = {
-            key: {
-                "key": s.key,
-                "title": s.title,
-                "category": s.category,
-                "tags": s.tags,
-                "code": s.code,
-                "description": s.description,
-            }
-            for key, s in library.items()
-        }
-        json_str = json.dumps(data, ensure_ascii=False, indent=2)
-    except (TypeError, ValueError) as e:
-        fail("E004", str(e))
-
-    try:
-        with open(output_path, "w", encoding="utf-8", errors="replace") as f:
-            f.write(json_str)
-        print(f"片段库已导出到: {output_path}")
-    except OSError as e:
-        fail("E005", str(e))
-
-
-# ---------------------------------------------------------------------------
-# 自检功能
-# ---------------------------------------------------------------------------
-def run_selftest() -> None:
-    """运行内置自检，验证核心逻辑正确性。"""
-    print("=== 开始自检 ===")
-
-    # 1. 构建片段库
-    library = build_snippet_library()
-    if not library:
-        fail("E007", "内置片段库为空")
-    print(f"[通过] 片段库构建成功，共 {len(library)} 个片段")
-
-    # 2. 验证关键片段存在
-    required_keys = [
-        "model_belongs_to",
-        "model_has_many",
-        "controller_restful",
-        "route_resources",
-        "migration_create_table",
-        "view_form",
-    ]
-    for key in required_keys:
-        if key not in library:
-            fail("E007", f"缺少关键片段: {key}")
-    print("[通过] 关键片段完整性检查")
-
-    # 3. 验证片段内容非空
-    for key, snippet in library.items():
-        if not snippet.code.strip():
-            fail("E006", f"片段 '{key}' 代码为空")
-        if not snippet.title.strip():
-            fail("E006", f"片段 '{key}' 标题为空")
-        if not snippet.category.strip():
-            fail("E006", f"片段 '{key}' 分类为空")
-    print("[通过] 片段内容完整性检查")
-
-    # 4. 验证搜索功能
-    search_results = search_snippets(library, "关联")
-    if len(search_results) < 2:  # 至少应有 belongs_to 和 has_many
-        fail("E008", "搜索 '关联' 结果数量异常")
-    print("[通过] 搜索功能（关键词: 关联）")
-
-    # 5. 验证搜索无结果情况
-    empty_results = search_snippets(library, "不存在的关键词xyz")
-    if empty_results:
-        fail("E008", "搜索不存在的关键词应返回空结果")
-    print("[通过] 搜索功能（无匹配场景）")
-
-    # 6. 验证获取片段功能
-    test_snippet = library.get("model_belongs_to")
-    if not test_snippet:
-        fail("E002", "无法获取片段 model_belongs_to")
-    if "belongs_to" not in test_snippet.code:
-        fail("E008", "片段内容包含 belongs_to")
-    print("[通过] 获取片段功能")
-
-    # 7. 验证分类统计
-    categories = {}
-    for snippet in library.values():
-        categories[snippet.category] = categories.get(snippet.category, 0) + 1
-    if "model" not in categories or "controller" not in categories:
-        fail("E008", "分类统计异常")
-    print(f"[通过] 分类统计: {categories}")
-
-    # 8. 验证 JSON 导出
-    try:
-        data = {
-            key: {
-                "key": s.key,
-                "title": s.title,
-                "category": s.category,
-                "tags": s.tags,
-                "code": s.code,
-                "description": s.description,
-            }
-            for key, s in library.items()
-        }
-        json_str = json.dumps(data, ensure_ascii=False)
-        if not json_str:
-            fail("E004", "JSON 导出为空")
-    except (TypeError, ValueError) as e:
-        fail("E004", str(e))
-    print("[通过] JSON 序列化")
-
-    print("\n=== 全部自检通过 ===")
-
-
-# ---------------------------------------------------------------------------
-# 命令行入口
-# ---------------------------------------------------------------------------
-def main() -> None:
-    """主入口函数。"""
-    parser = argparse.ArgumentParser(
-        description="Rails 代码片段速查与生成工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""示例:
-  %(prog)s --list
-  %(prog)s --get model_belongs_to
-  %(prog)s --search 关联
-  %(prog)s --export snippets.json
-  %(prog)s --selftest
-""",
+def generate_snippet(
+    model_name: str,
+    fields: Optional[List[str]] = None,
+    associations: Optional[List[str]] = None,
+    validations: Optional[List[str]] = None,
+) -> Snippet:
+    """
+    根据用户输入动态生成 Rails 模型片段。
+    
+    Args:
+        model_name: 模型名称（如 "Post"）
+        fields: 字段列表（如 ["title:string", "content:text"]）
+        associations: 关联列表（如 ["belongs_to:user"]）
+        validations: 验证列表（如 ["presence:title"]）
+    
+    Returns:
+        生成的 Snippet 对象
+    """
+    if not model_name or not model_name.strip():
+        fail("E009", "模型名称不能为空")
+    
+    # 清理模型名称
+    model_name = model_name.strip()
+    if not re.match(r'^[A-Z][A-Za-z0-9]*$', model_name):
+        fail("E009", f"模型名称 '{model_name}' 格式不正确，应为驼峰命名")
+    
+    fields = fields or []
+    associations = associations or []
+    validations = validations or []
+    
+    # 生成模型代码
+    lines = [f"class {model_name} < ApplicationRecord"]
+    
+    # 添加关联
+    for assoc in associations:
+        assoc = assoc.strip()
+        if ":" in assoc:
+            assoc_type, assoc_name = assoc.split(":", 1)
+            assoc_type = assoc_type.strip()
+            assoc_name = assoc_name.strip()
+            if assoc_type in ("belongs_to", "has_many", "has_one", "has_and_belongs_to_many"):
+                lines.append(f"  {assoc_type} :{assoc_name}")
+            else:
+                fail("E009", f"不支持的关联类型: {assoc_type}")
+    
+    # 添加验证
+    for validation in validations:
+        validation = validation.strip()
+        if ":" in validation:
+            v_type, v_field = validation.split(":", 1)
+            v_type = v_type.strip()
+            v_field = v_field.strip()
+            if v_type in ("presence", "uniqueness", "numericality", "length"):
+                if v_type == "length":
+                    lines.append(f"  validates :{v_field}, length: {{ maximum: 255 }}")
+                else:
+                    lines.append(f"  validates :{v_field}, {v_type}: true")
+            else:
+                fail("E009", f"不支持的验证类型: {v_type}")
+    
+    # 添加字段作为 attr_accessor 注释（实际字段由迁移管理）
+    if fields:
+        lines.append("")
+        lines.append("  # 字段（由迁移管理）:")
+        for field in fields:
+            field = field.strip()
+            if ":" in field:
+                f_name, f_type = field.split(":", 1)
+                lines.append(f"  #   {f_name.strip()}: {f_type.strip()}")
+            else:
+                lines.append(f"  #   {field}")
+    
+    lines.append("end")
+    code = "\n".join(lines)
+    
+    # 生成标签
+    tags = ["生成", "模型"]
+    tags.extend([a.split(":")[0].strip() for a in associations if ":" in a])
+    tags.extend([v.split(":")[0].strip() for v in validations if ":" in v])
+    
+    return Snippet(
+        key=f"generated_{model_name.lower()}",
+        title=f"生成的 {model_name} 模型",
+        category="model",
+        tags=tags,
+        code=code,
+        description=f"根据用户输入动态生成的 {model_name} 模型片段",
     )
 
-    parser.add_argument(
-        "--list",
-        action="store_true",
-        help="列出所有可用片段",
-    )
-    parser.add_argument(
-        "--get",
-        metavar="KEY",
-        help="获取指定片段（使用片段 key）",
-    )
-    parser.add_argument(
-        "--search",
-        metavar="KEYWORD",
-        help="按关键词搜索片段",
-    )
-    parser.add_argument(
-        "--export",
-        metavar="OUTPUT_FILE",
-        help="将片段库导出为 JSON 文件",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检",
-    )
 
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        run_selftest()
-        return
-
-    # 构建片段库
-    library = build_snippet_library()
-
-    # 根据参数执行对应操作
-    try:
-        if args.list:
-            list_snippets(library)
-        elif args.get:
-            get_snippet(library, args.get)
-        elif args.search:
-            if not args.search.strip():
-                fail("E003", "搜索关键词不能为空")
-            search_snippets(library, args.search.strip())
-        elif args.export:
-            export_json(library, args.export)
+def generate_controller(
+    resource_name: str,
+    actions: Optional[List[str]] = None,
+) -> Snippet:
+    """
+    根据用户输入动态生成 Rails 控制器片段。
+    
+    Args:
+        resource_name: 资源名称（如 "posts"）
+        actions: 需要生成的动作列表（如 ["index", "show", "create"]）
+    
+    Returns:
+        生成的 Snippet 对象
+    """
+    if not resource_name or not resource_name.strip():
+        fail("E009", "资源名称不能为空")
+    
+    resource_name = resource_name.strip().lower()
+    if not re.match(r'^[a-z][a-z0-9_]*$', resource_name):
+        fail("E009", f"资源名称 '{resource_name}' 格式不正确，应为小写蛇形命名")
+    
+    actions = actions or ["index", "show", "new", "create", "edit", "update", "destroy"]
+    model_name = resource_name.singularize() if hasattr(resource_name, 'singularize') else resource_name.rstrip('s')
+    model_class = model_name.capitalize()
+    
+    lines = [f"class {model_class}Controller < ApplicationController"]
+    
+    # 添加 before_action
+    if any(a in actions for a in ["show", "edit", "update", "destroy"]):
+        lines.append(f"  before_action :set_{model_name}, only: {[a for a in actions if a in ['show', 'edit', 'update', 'destroy']]}")
+        lines.append("")
+    
+    # 生成动作
+    for action in actions:
+        action = action.strip()
+        if action == "index":
+            lines.append(f"  def index")
+            lines.append(f"    @{resource_name} = {model_class}.all")
+            lines.append(f"  end")
+        elif action == "show":
+            lines.append(f"  def show")
+            lines.append(f"  end")
+        elif action == "new":
+            lines.append(f"  def new")
+            lines.append(f"    @{model_name} = {model_class}.new")
+            lines.append(f"  end")
+        elif action == "create":
+            lines.append(f"  def create")
+            lines.append(f"    @{model_name} = {model_class}.new({model_name}_params)")
+            lines.append(f"    if @{model_name}.save")
+            lines.append(f"      redirect_to @{model_name}, notice: \"{model_class}创建成功\"")
+            lines.append(f"    else")
+            lines.append(f"      render :new, status: :unprocessable_entity")
+            lines.append(f"    end")
+            lines.append(f"  end")
+        elif action == "edit":
+            lines.append(f"  def edit")
+            lines.append(f"  end")
+        elif action == "update":
+            lines.append(f"  def update")
+            lines.append(f"    if @{model_name}.update({model_name}_params)")
+            lines.append(f"      redirect_to @{model_name}, notice: \"{model_class}更新成功\"")
+            lines.append(f"    else")
+            lines.append(f"      render :edit, status: :unprocessable_entity")
+            lines.append(f"    end")
+            lines.append(f"  end")
+        elif action == "destroy":
+            lines.append(f"  def destroy")
+            lines.append(f"    @{model_name}.destroy")
+            lines.append(f"    redirect_to {resource_name}_url, notice: \"{model_class}已删除\"")
+            lines.append(f"  end")
         else:
-            parser.print_help()
-    except KeyboardInterrupt:
-        fail("E010", "用户中断操作")
-    except Exception as e:  # 兜底异常处理
-        fail("E010", str(e))
+            fail("E009", f"不支持的动作: {action}")
+        lines.append("")
+    
+    # 添加 private 方法
+    lines.append("  private")
+    lines.append("")
+    lines.append(f"  def set_{model_name}")
+    lines.append(f"    @{model_name} = {model_class}.find(params[:id])")
+    lines.append(f"  end")
+    lines.append("")
+    lines.append(f"  def {model_name}_params")
+    lines.append(f"    params.require(:{model_name}).permit(:title, :content)")
+    lines.append(f"  end")
+    lines.append("end")
+    
+    code = "\n".join(lines)
+    
+    return Snippet(
+        key=f"generated_{resource_name}_controller",
+        title=f"生成的 {model_class} 控制器",
+        category="controller",
+        tags=["生成", "控制器", "RESTful"],
+        code=code,
+        description=f"根据用户输入动态生成的 {model_class} 控制器片段",
+    )
 
 
-if __name__ == "__main__":
-    main()
+def generate_route(
+    resource_name: str,
+    nested_resources: Optional[List[str]] = None,
+) -> Snippet:
+    """
+    根据用户输入动态生成 Rails 路由片段。
+    
+    Args:
+        resource_name: 资源名称（如 "posts"）
+        nested_resources: 嵌套资源列表（如 ["comments"]）
+    
+    Returns:
+        生成的 Snippet 对象
+    """
+    if not resource_name or not resource_name.strip():
+        fail("E009", "资源名称不能为空")
+    
+    resource_name = resource_name.strip().lower()
+    if not re.match(r'^[a-z][a-z0-9_]*$', resource_name):
+        fail("E009", f"资源名称 '{resource_name}' 格式不正确，应为小写蛇形命名")
+    
+    nested_resources = nested_res
