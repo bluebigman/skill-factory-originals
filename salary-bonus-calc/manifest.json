@@ -1,0 +1,38 @@
+{
+  "timestamp": "20260820_035619",
+  "slug": "salary-bonus-calc",
+  "spec": {
+    "slug": "salary-bonus-calc",
+    "name": "salary-bonus-calc",
+    "description": "薪资 工资条 个税社保 薪酬核算。薪酬核算 个税社保 工资条生成。输入考勤绩效与社保基数，自动核算工资奖金、个税五险一金，输出工资条与汇总表。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 收集上述前置条件中的全部数据",
+      "2. 校验数据完整性，缺项主动询问",
+      "3. 校验数据合理性（如出勤天数不超过当月应出勤天数）",
+      "1. 生成工资条（每人一张，明细到每个加减项）",
+      "2. 生成部门汇总表（按部门汇总应发、代扣、实发、单位承担成本）",
+      "3. 回写累计数据（累计收入、累计已缴税），供下月滚动使用",
+      "1. 阅读速查卡，了解基本输入输出",
+      "2. 用单人测算功能验证一个员工的工资",
+      "3. 对照工资条格式，确认输出符合预期",
+      "4. 逐步增加批量核算、年终奖比选等功能",
+      "1. 配置当地社保参数（税率表、比例、上下限）",
+      "2. 使用年终奖方案比选功能，避开临界点",
+      "3. 使用异常校验功能，做月度异常复盘",
+      "4. 与上月数据做环比，波动 >20% 的人挑出来人工确认"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "92aecb79f0e7a2cb",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
