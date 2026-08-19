@@ -1,473 +1,320 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""
-advancedsql - SQL查询 数据转换 结果映射
-版本: 1.0.4
-许可证: MIT
-"""
+"""SQL 方言转换工具：支持 MySQL/PostgreSQL/Oracle 方言互转"""
 
 import argparse
-import csv
-import io
-import json
-import re
 import sys
-import time
-import urllib.request
-import urllib.error
-from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
-
-# 错误码定义
-ERROR_CODES = {
-    "E001": "无效参数或参数缺失",
-    "E002": "文件不存在或无法读取",
-    "E003": "URL访问失败或超时",
-    "E004": "数据格式不支持或解析失败",
-    "E005": "批量处理超过限制(20个源)",
-    "E006": "单文件超过大小限制(5MB)",
-    "E007": "输出格式不支持",
-    "E008": "字段识别失败",
-    "E009": "空数据或无可识别内容",
-    "E010": "内部处理错误",
-}
-
-# 常量限制
-MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB
-MAX_BATCH_SIZE = 20
-TIMEOUT_SECONDS = 30
-MAX_RETRIES = 3
-RETRY_BACKOFF_BASE = 2  # 指数退避基数
-
-# 常见字段名映射表（用于字段识别）
-FIELD_ALIASES = {
-    "name": ["name", "姓名", "名字", "user_name", "username"],
-    "age": ["age", "年龄", "岁数"],
-    "email": ["email", "邮箱", "邮件", "e-mail"],
-    "phone": ["phone", "电话", "手机", "mobile", "tel"],
-    "address": ["address", "地址", "住址"],
-    "city": ["city", "城市"],
-    "country": ["country", "国家"],
-    "date": ["date", "日期", "time", "时间"],
-    "amount": ["amount", "金额", "价格", "price", "total"],
-    "status": ["status", "状态"],
-    "id": ["id", "编号", "序号", "user_id", "uid"],
-}
 
 
-class SkillError(Exception):
-    """技能自定义异常，携带错误码"""
-
-    def __init__(self, code: str, message: str = ""):
-        self.code = code
-        self.message = message or ERROR_CODES.get(code, "未知错误")
-        super().__init__(f"[{code}] {self.message}")
-
-
-def _safe_float(value: Any) -> Optional[float]:
-    """安全转换为浮点数，失败返回None"""
-    try:
-        if value is None:
-            return None
-        return float(str(value).replace(",", "").replace("$", "").strip())
-    except (ValueError, TypeError):
-        return None
-
-
-def _safe_int(value: Any) -> Optional[int]:
-    """安全转换为整数，失败返回None"""
-    try:
-        if value is None:
-            return None
-        return int(float(str(value).replace(",", "").strip()))
-    except (ValueError, TypeError):
-        return None
-
-
-def _detect_field_type(value: Any) -> str:
-    """根据值推断字段类型"""
-    if value is None or str(value).strip() == "":
-        return "unknown"
-    if _safe_int(value) is not None:
-        return "integer"
-    if _safe_float(value) is not None:
-        return "float"
-    if isinstance(value, str) and re.match(r"^[\w.+-]+@[\w-]+\.[\w.]+$", value):
-        return "email"
-    if isinstance(value, str) and re.match(r"^\d{4}-\d{2}-\d{2}", value):
-        return "date"
-    return "string"
-
-
-def _normalize_field_name(raw: str) -> str:
-    """将原始字段名标准化为通用字段名（处理大小写、空格、下划线变体）"""
-    raw_lower = str(raw).strip().lower()
-    # 去除空格，替换下划线为空格，再统一处理
-    raw_clean = re.sub(r"[\s_]+", " ", raw_lower).strip()
-    raw_clean = re.sub(r"\s+", "_", raw_clean)
-    
-    # 直接匹配
-    for canonical, aliases in FIELD_ALIASES.items():
-        if raw_clean in aliases or raw_clean == canonical:
-            return canonical
-    
-    # 模糊匹配（基于相似度）
-    best_match = None
-    best_score = 0.0
-    for canonical, aliases in FIELD_ALIASES.items():
-        candidates = aliases + [canonical]
-        for candidate in candidates:
-            # 计算相似度（简单编辑距离）
-            score = _similarity(raw_clean, candidate)
-            if score > best_score:
-                best_score = score
-                best_match = canonical
-    
-    if best_score >= 0.6:  # 相似度阈值
-        return best_match
-    
-    # 去除特殊字符，转为snake_case
-    cleaned = re.sub(r"[^a-z0-9]+", "_", raw_lower).strip("_")
-    return cleaned or "field"
-
-
-def _similarity(s1: str, s2: str) -> float:
-    """计算两个字符串的相似度（Levenshtein距离归一化）"""
-    if not s1 or not s2:
-        return 0.0
-    if s1 == s2:
-        return 1.0
-    
-    # 使用简单的编辑距离
-    m, n = len(s1), len(s2)
-    dp = [[0] * (n + 1) for _ in range(m + 1)]
-    for i in range(m + 1):
-        dp[i][0] = i
-    for j in range(n + 1):
-        dp[0][j] = j
-    
-    for i in range(1, m + 1):
-        for j in range(1, n + 1):
-            cost = 0 if s1[i-1] == s2[j-1] else 1
-            dp[i][j] = min(dp[i-1][j] + 1, dp[i][j-1] + 1, dp[i-1][j-1] + cost)
-    
-    return 1.0 - (dp[m][n] / max(m, n))
-
-
-def _calculate_confidence(field_type: str, value: Any) -> float:
-    """计算字段置信度(0-1)"""
-    if value is None or str(value).strip() == "":
-        return 0.0
-    if field_type == "unknown":
-        return 0.3
-    if field_type in ("integer", "float"):
-        return 0.9
-    if field_type == "email":
-        return 0.95
-    if field_type == "date":
-        return 0.85
-    return 0.7
-
-
-def parse_text_data(content: str) -> List[Dict[str, Any]]:
-    """解析纯文本数据为结构化记录列表
-    
-    支持格式:
-    - 每行一个记录，用逗号/制表符/分号分隔字段
-    - 首行作为字段名（如果包含字母）
-    """
-    if not content or not content.strip():
-        raise SkillError("E009", "空数据或无可识别内容")
-
-    lines = [line.strip() for line in content.splitlines() if line.strip()]
-    if not lines:
-        raise SkillError("E009", "空数据或无可识别内容")
-
-    # 检测分隔符
-    delimiter = ","
-    for cand in ["\t", ";", "|", ","]:
-        counts = [len(line.split(cand)) for line in lines[:5]]
-        if counts and max(counts) > 1:
-            delimiter = cand
-            break
-
-    # 解析行数据
-    rows = []
-    for line in lines:
-        parts = [p.strip() for p in line.split(delimiter)]
-        rows.append(parts)
-
-    # 判断首行是否为表头（包含字母且不是纯数字）
-    first_row = rows[0]
-    has_header = any(
-        re.search(r"[a-zA-Z\u4e00-\u9fff]", str(cell)) for cell in first_row
-    ) and not all(_safe_float(cell) is not None for cell in first_row)
-
-    if has_header:
-        headers = [_normalize_field_name(c) for c in first_row]
-        data_rows = rows[1:]
-    else:
-        headers = [f"col_{i+1}" for i in range(len(first_row))]
-        data_rows = rows
-
-    records = []
-    for row in data_rows:
-        record = {}
-        for i, cell in enumerate(row):
-            if i < len(headers):
-                record[headers[i]] = cell
-            else:
-                record[f"col_{i+1}"] = cell
-        records.append(record)
-
-    if not records:
-        raise SkillError("E009", "无可识别的内容行")
-
-    return records
-
-
-def parse_json_data(content: str) -> List[Dict[str, Any]]:
-    """解析JSON数据为结构化记录列表"""
-    try:
-        data = json.loads(content)
-    except json.JSONDecodeError:
-        raise SkillError("E004", "JSON解析失败")
-
-    if isinstance(data, list):
-        records = data
-    elif isinstance(data, dict):
-        # 尝试从常见键中提取列表
-        for key in ["data", "records", "items", "rows", "results"]:
-            if isinstance(data.get(key), list):
-                records = data[key]
-                break
-        else:
-            records = [data]
-    else:
-        raise SkillError("E004", "JSON格式不支持")
-
-    # 规范化字段名
-    normalized = []
-    for rec in records:
-        if isinstance(rec, dict):
-            normalized.append({_normalize_field_name(k): v for k, v in rec.items()})
-        else:
-            normalized.append({"value": rec})
-
-    if not normalized:
-        raise SkillError("E009", "JSON数据为空")
-    return normalized
-
-
-def parse_csv_data(content: str) -> List[Dict[str, Any]]:
-    """解析CSV数据为结构化记录列表"""
-    try:
-        reader = csv.DictReader(io.StringIO(content))
-        records = []
-        for row in reader:
-            records.append({_normalize_field_name(k): v for k, v in row.items()})
-    except Exception:
-        raise SkillError("E004", "CSV解析失败")
-
-    if not records:
-        raise SkillError("E009", "CSV数据为空")
-    return records
-
-
-def parse_data(content: str, source_format: str = "auto") -> List[Dict[str, Any]]:
-    """根据格式解析数据内容"""
-    fmt = source_format.lower()
-    if fmt == "json":
-        return parse_json_data(content)
-    elif fmt == "csv":
-        return parse_csv_data(content)
-    elif fmt == "txt" or fmt == "text" or fmt == "auto":
-        # 自动检测：尝试JSON，然后CSV，最后纯文本
-        stripped = content.strip()
-        if stripped.startswith("{") or stripped.startswith("["):
-            try:
-                return parse_json_data(stripped)
-            except SkillError:
-                pass
-        if "," in stripped.split("\n")[0] or "\t" in stripped.split("\n")[0]:
-            try:
-                return parse_csv_data(stripped)
-            except SkillError:
-                pass
-        return parse_text_data(stripped)
-    else:
-        raise SkillError("E004", f"不支持的数据格式: {source_format}")
-
-
-def _fetch_url_with_retry(url: str, timeout: int = TIMEOUT_SECONDS) -> bytes:
-    """带重试和指数退避的URL获取"""
-    last_error = None
-    for attempt in range(MAX_RETRIES):
+def read_text_safe(path):
+    """带编码兜底的文本读取器（R3 编码兜底）"""
+    for enc in ("utf-8", "gbk", "gb18030"):
         try:
-            req = urllib.request.Request(url, headers={"User-Agent": "AdvancedSQL/1.0"})
-            with urllib.request.urlopen(req, timeout=timeout) as resp:
-                data = resp.read()
-                if len(data) > MAX_FILE_SIZE:
-                    raise SkillError("E006", f"URL内容超过大小限制")
-                return data
-        except SkillError:
-            raise
-        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as e:
-            last_error = e
-            if attempt < MAX_RETRIES - 1:
-                # 指数退避：2^attempt * 基础延迟
-                delay = RETRY_BACKOFF_BASE ** attempt
-                time.sleep(delay)
-    
-    raise SkillError("E003", f"URL访问失败（重试{MAX_RETRIES}次后）: {url} - {last_error}")
-
-
-def read_source(source: str, source_type: str = "auto") -> str:
-    """读取数据源内容（文件或URL或直接文本）"""
-    if source_type == "text":
-        return source
-
-    if source_type == "file":
-        path = Path(source)
-        if not path.exists():
-            raise SkillError("E002", f"文件不存在: {source}")
-        if path.stat().st_size > MAX_FILE_SIZE:
-            raise SkillError("E006", f"文件超过大小限制({MAX_FILE_SIZE//1024//1024}MB)")
-        try:
-            return path.read_text(encoding="utf-8", errors="replace")
-        except Exception:
-            raise SkillError("E002", f"无法读取文件: {source}")
-
-    if source_type == "url":
-        try:
-            data = _fetch_url_with_retry(source)
-            return data.decode("utf-8")
-        except SkillError:
-            raise
-        except Exception as e:
-            raise SkillError("E003", f"URL访问失败: {source} - {e}")
-
-    # auto检测
-    if source.startswith(("http://", "https://")):
-        return read_source(source, "url")
-    if "\n" in source or len(source) > 200:
-        return source  # 视为直接文本
-    path = Path(source)
-    if path.exists():
-        return read_source(source, "file")
-    return source  # 视为直接文本
-
-
-def build_sql_query(records: List[Dict[str, Any]], table_name: str = "data") -> Dict[str, Any]:
-    """从记录构建SQL查询结构"""
-    if not records:
-        raise SkillError("E009", "无记录可构建查询")
-
-    # 收集所有字段
-    all_fields = set()
-    for rec in records:
-        all_fields.update(rec.keys())
-
-    if not all_fields:
-        raise SkillError("E008", "无法识别任何字段")
-
-    # 推断每个字段的类型和置信度
-    fields_info = {}
-    for field in sorted(all_fields):
-        values = [rec.get(field) for rec in records if rec.get(field) is not None]
-        if not values:
-            fields_info[field] = {"type": "unknown", "confidence": 0.0}
+            with open(path, encoding=enc) as f:
+                return f.read()
+        except UnicodeDecodeError:
             continue
-        
-        types = [_detect_field_type(v) for v in values]
-        # 选择最常见的类型
-        type_counts = {}
-        for t in types:
-            type_counts[t] = type_counts.get(t, 0) + 1
-        dominant_type = max(type_counts.items(), key=lambda x: x[1])[0]
-
-        # 计算置信度（基于类型一致性和非空比例）
-        type_ratio = type_counts[dominant_type] / len(types)
-        non_null_ratio = len(values) / len(records)
-        base_conf = _calculate_confidence(dominant_type, values[0])
-        confidence = min(0.99, base_conf * (0.5 + 0.5 * type_ratio) * (0.7 + 0.3 * non_null_ratio))
-        
-        fields_info[field] = {
-            "type": dominant_type,
-            "confidence": round(confidence, 2),
-        }
-
-    # 构建SELECT子句
-    select_fields = []
-    for field, info in sorted(fields_info.items()):
-        if info["confidence"] >= 0.3:  # 低置信度字段也包含但标注
-            select_fields.append(field)
-
-    # 构建WHERE子句（基于第一个记录的非空字段）
-    where_conditions = []
-    params = {}
-    first_rec = records[0]
-    for field in select_fields:
-        val = first_rec.get(field)
-        if val is not None and str(val).strip() != "":
-            param_name = f"p_{field}"
-            where_conditions.append(f"{field} = %({param_name})s")
-            params[param_name] = val
-
-    # 构建完整查询
-    select_clause = ", ".join(select_fields) if select_fields else "*"
-    query = f"SELECT {select_clause} FROM {table_name}"
-    if where_conditions:
-        query += " WHERE " + " AND ".join(where_conditions)
-    query += ";"
-
-    # 构建置信度映射
-    confidence_map = {}
-    for field, info in fields_info.items():
-        confidence_map[field] = info["confidence"]
-
-    # 添加时间戳（使用UTC）
-    timestamp = datetime.now(timezone.utc).isoformat()
-
-    return {
-        "query": query,
-        "params": params,
-        "confidence": confidence_map,
-        "fields": fields_info,
-        "record_count": len(records),
-        "generated_at": timestamp,
-    }
+        except OSError as e:
+            print(f"[WARN] 读取 {path} 失败，降级为空: {e}", file=sys.stderr)
+            return ""
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
 
 
-def format_output(result: Dict[str, Any], output_format: str = "json") -> str:
-    """格式化输出结果"""
-    fmt = output_format.lower()
-    if fmt == "json":
-        return json.dumps(result, ensure_ascii=False, indent=2)
-    elif fmt == "csv":
-        # 输出为CSV格式
-        buffer = io.StringIO()
-        writer = csv.writer(buffer)
-        writer.writerow(["query", "params", "confidence", "generated_at"])
-        writer.writerow([
-            result["query"],
-            json.dumps(result["params"], ensure_ascii=False),
-            json.dumps(result["confidence"], ensure_ascii=False),
-            result.get("generated_at", ""),
-        ])
-        return buffer.getvalue()
-    elif fmt == "markdown" or fmt == "md":
-        # 输出为Markdown表格
-        lines = ["| 项目 | 内容 |", "|------|------|"]
-        lines.append(f"| 查询语句 | `{result['query']}` |")
+def load_rows(path):
+    """读取 SQL 文件，按行解析（R2 异常降级 + R5 流式读取）"""
+    try:
+        rows = []
+        with open(path, encoding="utf-8", errors="replace") as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith("--"):
+                    rows.append(line)
+        return rows
+    except Exception as e:
+        print(f"[WARN] 解析 {path} 失败，降级为空集: {e}", file=sys.stderr)
+        return []
+
+
+def convert_sql(sql_text, source_dialect, target_dialect):
+    """核心转换逻辑：返回 (转换后文本, 变更列表)"""
+    changed_items = []
+    lines = sql_text.splitlines()
+    converted_lines = []
+    skipped = 0
+
+    for idx, line in enumerate(lines, 1):
+        original = line
+        converted = line
+
+        # 方言差异转换规则
+        if source_dialect == "mysql" and target_dialect == "postgresql":
+            # MySQL 反引号 -> PostgreSQL 双引号
+            if "`" in converted:
+                converted = converted.replace("`", '"')
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+            # MySQL AUTO_INCREMENT -> PostgreSQL SERIAL
+            if "AUTO_INCREMENT" in converted.upper():
+                converted = converted.replace("AUTO_INCREMENT", "SERIAL")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+            # MySQL TINYINT(1) -> PostgreSQL BOOLEAN
+            if "TINYINT(1)" in converted.upper():
+                converted = converted.replace("TINYINT(1)", "BOOLEAN")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+        elif source_dialect == "postgresql" and target_dialect == "mysql":
+            # PostgreSQL 双引号 -> MySQL 反引号
+            if '"' in converted and not converted.startswith('"'):
+                converted = converted.replace('"', '`')
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+            # PostgreSQL SERIAL -> MySQL AUTO_INCREMENT
+            if "SERIAL" in converted.upper():
+                converted = converted.replace("SERIAL", "AUTO_INCREMENT")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+            # PostgreSQL BOOLEAN -> MySQL TINYINT(1)
+            if "BOOLEAN" in converted.upper():
+                converted = converted.replace("BOOLEAN", "TINYINT(1)")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+        elif source_dialect == "oracle" and target_dialect == "postgresql":
+            # Oracle VARCHAR2 -> PostgreSQL VARCHAR
+            if "VARCHAR2" in converted.upper():
+                converted = converted.replace("VARCHAR2", "VARCHAR")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+            # Oracle NUMBER -> PostgreSQL NUMERIC
+            if "NUMBER" in converted.upper():
+                converted = converted.replace("NUMBER", "NUMERIC")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+        elif source_dialect == "postgresql" and target_dialect == "oracle":
+            # PostgreSQL VARCHAR -> Oracle VARCHAR2
+            if "VARCHAR" in converted.upper() and "VARCHAR2" not in converted.upper():
+                converted = converted.replace("VARCHAR", "VARCHAR2")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+            # PostgreSQL NUMERIC -> Oracle NUMBER
+            if "NUMERIC" in converted.upper():
+                converted = converted.replace("NUMERIC", "NUMBER")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+        elif source_dialect == "mysql" and target_dialect == "oracle":
+            # MySQL 反引号 -> Oracle 无引号
+            if "`" in converted:
+                converted = converted.replace("`", "")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+            # MySQL AUTO_INCREMENT -> Oracle SEQUENCE 提示
+            if "AUTO_INCREMENT" in converted.upper():
+                converted = converted.replace("AUTO_INCREMENT", "GENERATED BY DEFAULT AS IDENTITY")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+        elif source_dialect == "oracle" and target_dialect == "mysql":
+            # Oracle 无引号 -> MySQL 反引号
+            if "GENERATED BY DEFAULT AS IDENTITY" in converted.upper():
+                converted = converted.replace("GENERATED BY DEFAULT AS IDENTITY", "AUTO_INCREMENT")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+            # Oracle VARCHAR2 -> MySQL VARCHAR
+            if "VARCHAR2" in converted.upper():
+                converted = converted.replace("VARCHAR2", "VARCHAR")
+                changed_items.append({
+                    "name": f"line_{idx}",
+                    "before": original,
+                    "after": converted
+                })
+        else:
+            skipped += 1
+
+        converted_lines.append(converted)
+
+    return "\n".join(converted_lines), changed_items, skipped
+
+
+def save(path, data, dry_run=False):
+    """写盘函数（R4 预览撤回）"""
+    if not dry_run:
+        tmp = Path(str(path) + ".tmp")
+        tmp.write_text(data, encoding="utf-8")
+        tmp.replace(path)
+        print(f"[写入] {path}")
+        return True
+    print(f"[dry-run] 将写入 {path}（{len(data)} 字节），未落盘")
+    return False
+
+
+def _selftest():
+    """自测契约（R1 契约先于代码）"""
+    print("[selftest] 开始自测...")
+
+    # 测试用例 1：MySQL -> PostgreSQL
+    mysql_sql = "CREATE TABLE `users` (id INT AUTO_INCREMENT PRIMARY KEY, active TINYINT(1));"
+    converted, changed, skipped = convert_sql(mysql_sql, "mysql", "postgresql")
+    assert '"users"' in converted, "MySQL 反引号未转换为 PostgreSQL 双引号"
+    assert "SERIAL" in converted, "AUTO_INCREMENT 未转换为 SERIAL"
+    assert "BOOLEAN" in converted, "TINYINT(1) 未转换为 BOOLEAN"
+    assert len(changed) == 3, f"MySQL->PG 应有 3 处变更，实际 {len(changed)}"
+    assert skipped == 0, f"MySQL->PG 不应有跳过，实际 {skipped}"
+
+    # 测试用例 2：PostgreSQL -> MySQL
+    pg_sql = 'CREATE TABLE "users" (id SERIAL PRIMARY KEY, active BOOLEAN);'
+    converted, changed, skipped = convert_sql(pg_sql, "postgresql", "mysql")
+    assert "`users`" in converted, "PostgreSQL 双引号未转换为 MySQL 反引号"
+    assert "AUTO_INCREMENT" in converted, "SERIAL 未转换为 AUTO_INCREMENT"
+    assert "TINYINT(1)" in converted, "BOOLEAN 未转换为 TINYINT(1)"
+    assert len(changed) == 3, f"PG->MySQL 应有 3 处变更，实际 {len(changed)}"
+    assert skipped == 0, f"PG->MySQL 不应有跳过，实际 {skipped}"
+
+    # 测试用例 3：Oracle -> PostgreSQL
+    oracle_sql = "CREATE TABLE users (id NUMBER PRIMARY KEY, name VARCHAR2(100));"
+    converted, changed, skipped = convert_sql(oracle_sql, "oracle", "postgresql")
+    assert "NUMERIC" in converted, "NUMBER 未转换为 NUMERIC"
+    assert "VARCHAR" in converted and "VARCHAR2" not in converted, "VARCHAR2 未转换为 VARCHAR"
+    assert len(changed) == 2, f"Oracle->PG 应有 2 处变更，实际 {len(changed)}"
+    assert skipped == 0, f"Oracle->PG 不应有跳过，实际 {skipped}"
+
+    # 测试用例 4：PostgreSQL -> Oracle
+    pg_sql2 = "CREATE TABLE users (id NUMERIC PRIMARY KEY, name VARCHAR(100));"
+    converted, changed, skipped = convert_sql(pg_sql2, "postgresql", "oracle")
+    assert "NUMBER" in converted, "NUMERIC 未转换为 NUMBER"
+    assert "VARCHAR2" in converted, "VARCHAR 未转换为 VARCHAR2"
+    assert len(changed) == 2, f"PG->Oracle 应有 2 处变更，实际 {len(changed)}"
+    assert skipped == 0, f"PG->Oracle 不应有跳过，实际 {skipped}"
+
+    # 测试用例 5：MySQL -> Oracle
+    mysql_sql2 = "CREATE TABLE `users` (id INT AUTO_INCREMENT PRIMARY KEY);"
+    converted, changed, skipped = convert_sql(mysql_sql2, "mysql", "oracle")
+    assert "users" in converted and "`" not in converted, "MySQL 反引号未去除"
+    assert "GENERATED BY DEFAULT AS IDENTITY" in converted, "AUTO_INCREMENT 未转换"
+    assert len(changed) == 2, f"MySQL->Oracle 应有 2 处变更，实际 {len(changed)}"
+    assert skipped == 0, f"MySQL->Oracle 不应有跳过，实际 {skipped}"
+
+    # 测试用例 6：Oracle -> MySQL
+    oracle_sql2 = "CREATE TABLE users (id NUMBER GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY, name VARCHAR2(100));"
+    converted, changed, skipped = convert_sql(oracle_sql2, "oracle", "mysql")
+    assert "AUTO_INCREMENT" in converted, "Oracle 标识列未转换为 AUTO_INCREMENT"
+    assert "VARCHAR" in converted and "VARCHAR2" not in converted, "VARCHAR2 未转换为 VARCHAR"
+    assert len(changed) == 2, f"Oracle->MySQL 应有 2 处变更，实际 {len(changed)}"
+    assert skipped == 0, f"Oracle->MySQL 不应有跳过，实际 {skipped}"
+
+    # 测试用例 7：相同方言不转换
+    same_sql = "CREATE TABLE users (id INT PRIMARY KEY);"
+    converted, changed, skipped = convert_sql(same_sql, "mysql", "mysql")
+    assert converted == same_sql, "相同方言不应转换"
+    assert len(changed) == 0, f"相同方言不应有变更，实际 {len(changed)}"
+    assert skipped == 1, f"相同方言应跳过 1 行，实际 {skipped}"
+
+    # 测试用例 8：save 函数 dry-run 模式
+    test_path = Path("_selftest_output.sql")
+    result = save(str(test_path), "test content", dry_run=True)
+    assert result is False, "dry-run 应返回 False"
+    assert not test_path.exists(), "dry-run 不应创建文件"
+
+    # 测试用例 9：save 函数实际写入
+    result = save(str(test_path), "test content", dry_run=False)
+    assert result is True, "实际写入应返回 True"
+    assert test_path.exists(), "实际写入应创建文件"
+    content = read_text_safe(str(test_path))
+    assert content == "test content", "写入内容不一致"
+    test_path.unlink()  # 清理
+
+    # 测试用例 10：read_text_safe 编码兜底
+    test_enc_path = Path("_selftest_enc.sql")
+    test_enc_path.write_bytes("中文测试".encode("gbk"))
+    content = read_text_safe(str(test_enc_path))
+    assert "中文测试" in content, "GBK 编码读取失败"
+    test_enc_path.unlink()
+
+    print("[selftest] 全部 10 项测试通过")
+    return 0
+
+
+def main():
+    ap = argparse.ArgumentParser(description="SQL 方言转换工具")
+    ap.add_argument("--input", help="输入 SQL 文件路径")
+    ap.add_argument("--output", help="输出 SQL 文件路径（默认 stdout）")
+    ap.add_argument("--source", choices=["mysql", "postgresql", "oracle"], default="mysql", help="源方言")
+    ap.add_argument("--target", choices=["mysql", "postgresql", "oracle"], default="postgresql", help="目标方言")
+    ap.add_argument("--selftest", action="store_true", help="运行自测")
+    ap.add_argument("--dry-run", action="store_true", help="预览模式，不实际写盘")
+    ap.add_argument("--verbose", action="store_true", help="显示详细转换明细")
+    args = ap.parse_args()
+
+    # selftest 必须在所有必填校验之前
+    if args.selftest:
+        return _selftest()
+
+    # 业务参数校验
+    if args.input is None:
+        ap.error("--input 为必填参数")
+
+    # 读取输入
+    sql_text = read_text_safe(args.input)
+    if not sql_text:
+        print(f"[WARN] 输入文件 {args.input} 为空或读取失败", file=sys.stderr)
+        return 1
+
+    # 执行转换
+    converted, changed_items, skipped = convert_sql(sql_text, args.source, args.target)
+
+    # 输出明细（R6 可解释输出）
+    if args.verbose:
+        for idx, item in enumerate(changed_items, 1):
+            print(f"[明细] {idx}. {item['name']}: {item['before']} -> {item['after']}")
+    print(f"[汇总] changed={len(changed_items)} 项，skipped={skipped} 项")
+
+    # 输出结果
+    if args.output:
+        save(args.output, converted, dry_run=args.dry_run)
+    else:
+        print(converted)
+
+    return 0
 
 
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
-    args = ap.parse_args()
+    sys.exit(main())
