@@ -1,27 +1,18 @@
 {
   "slug": "ai-blog-article-generator",
   "name": "ai-blog-article-generator",
-  "description": "The AI Blog Article Generator is a Python-based tool that utilizes the Cohere API to generate high-quality, SEO-optimize",
+  "description": "将数据、文件或URL转换为结构化、SEO友好的博客文章草稿。支持CSV/JSON/TXT/MD文件、公开网页URL和纯文本输入，生成含frontmatter元信息的Markdown文章，内置置信度门控与错误码体系。",
   "trigger_words": "",
-  "original_version": "1.0.0",
+  "original_version": "2.0.0",
   "capability_outline": [
-    "**能做（5项核心能力）：**",
-    "1. 将 用户提供的数据/文件/URL 转换为结构化结果",
-    "2. 识别并保留输入中的关键信息",
-    "3. 按约定格式生成输出",
-    "4. 对不确定项给出置信度提示",
-    "5. 支持批量处理和自定义格式",
-    "- 输入来源：用户提供的数据/文件/URL",
-    "- 输出格式要求（文件类型 / 字段结构）",
-    "1. 解析输入内容，识别关键信息",
-    "2. 按以下规则处理：",
-    "3. 生成结果，并标注置信度：",
-    "1. 将结果整理为约定格式输出",
-    "2. 自查：字段完整性、格式正确性、置信度标注",
-    "3. 有疑问时向用户二次确认",
-    "- 输入不符合预期 → 返回错误说明与正确的输入格式示例",
-    "1. 收集用户输入并确认格式",
-    "2. 按功能逻辑处理输入内容",
-    "3. 生成结果并校验完整性"
+    "- 输入是需要登录的网页或加密文件",
+    "1. 检查网络连接：`curl -I https://api.cohere.com`",
+    "2. 确认 API Key 有效：`echo $COHERE_API_KEY`",
+    "3. 重试（内置指数退避重试，最多 3 次）",
+    "1. **补充事实数据与引用来源**——AI 生成内容可能包含不准确信息",
+    "2. **调整语气以匹配品牌风格**——默认语气为专业中性",
+    "3. **检查 SEO 标题长度**——建议 30-60 字符",
+    "4. **验证关键词密度**——建议 1-3%",
+    "5. **人工审核全文**——确保逻辑连贯、无事实错误"
   ]
 }
