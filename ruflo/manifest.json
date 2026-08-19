@@ -1,0 +1,28 @@
+{
+  "timestamp": "20260820_074935",
+  "slug": "ruflo",
+  "spec": {
+    "slug": "ruflo",
+    "name": "ruflo",
+    "description": "将任意数据源解析为结构化结果，支持多智能体协同与批量处理。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。",
+      "2. **试运行**：先用单个样本执行，核对输出字段与格式。",
+      "3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。",
+      "4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "8bb9eccd37fca9c0",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
