@@ -2,10 +2,10 @@
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: ai-content-generator-using-gpt-3-acg
 name: acg-structured-text-processor
-displayName: 文本批处理 规则引擎 结构化提取
-description: 本地规则驱动的文本批处理与结构化提取工具，支持多格式输出与置信度标注。
-version: 3.1.1
-rules_version: cpr-20260819-n551
+displayName: 文本清洗 规则抽取 置信评分
+description: 本地规则驱动的文本批处理与结构化提取引擎，支持自定义正则、置信度评分与多格式输出。
+version: 3.2.2
+rules_version: cpr-20260820-n601
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ai-content-generator-using-gpt-3-acg
@@ -13,9 +13,9 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 林墨研
+author: 林墨工坊
 agent_created: true
-trigger_words: ["文本批处理", "结构化提取", "规则引擎", "数据清洗", "格式转换", "批量处理"]
+trigger_words: ["文本批处理", "结构化提取", "规则引擎", "数据清洗", "格式转换", "正则抽取", "字段解析"]
 ---
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
@@ -26,118 +26,201 @@ trigger_words: ["文本批处理", "结构化提取", "规则引擎", "数据清
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# ACG 结构化文本处理器 — 技能文档
+# acg-structured-text-processor 技能手册
 
 ## 一、能力边界速查卡
 
-本工具是一个**本地规则驱动的文本批处理与结构化提取引擎**。它不依赖云端 API，不进行语义理解，而是通过用户定义的规则（正则、字典、模板）对文本进行模式匹配、字段抽取和格式重组。
+本工具定位为**本地规则驱动的文本批处理与结构化提取引擎**。它不依赖外部 API，所有处理均在本地完成，适合对格式相对规整的文本进行字段抽取、清洗与格式转换。
 
-| 维度 | 能做 | 不能做 |
-|------|------|--------|
-| 输入格式 | 纯文本、JSON、Markdown、CSV | 扫描件 OCR、手写体识别 |
-| 处理方式 | 规则匹配、字段提取、格式转换 | 语义理解、情感分析、意图识别 |
-| 输出格式 | JSON、Markdown、CSV（带置信度） | 直接写入数据库（需二次开发） |
-| 文件大小 | 建议 ≤ 50MB/文件，支持分块 | 超过 50MB 需先手动分块 |
-| 编码支持 | UTF-8 及常见编码（GBK、Big5 等） | 二进制文件、加密文件 |
-| 自定义能力 | 支持 `rules.json` 自定义规则 | 不支持运行时动态编译代码 |
+### 1.1 能做什么
 
-**适用对象**：需要批量清洗日志、抽取合同关键字段、转换数据格式的开发者或数据分析师。不适合需要理解上下文语义的场景。
+| 能力项 | 说明 | 典型场景 |
+|--------|------|----------|
+| 正则抽取 | 基于用户自定义的正则规则，从文本中提取指定字段 | 从日志中提取 IP、时间戳、错误码 |
+| 批量处理 | 支持单文件或多文件批量处理 | 批量清洗 CSV 中的脏数据 |
+| 置信度评分 | 对每条提取结果给出 0~1 的置信度分数 | 判断提取结果是否可靠 |
+| 多格式输出 | 支持 JSON、CSV 等输出格式 | 输出为 JSON 供下游程序消费 |
+| 流式处理 | 支持大文件分块读取，控制内存占用 | 处理 GB 级日志文件 |
+| 规则预检 | 提供 `--selftest` 模式验证规则正确性 | 上线前验证规则是否匹配预期 |
+
+### 1.2 不能做什么
+
+| 限制项 | 说明 |
+|--------|------|
+| 语义理解 | 无法理解文本含义，仅做模式匹配 |
+| 非结构化文本 | 对自由散文、口语化文本效果较差 |
+| 跨语言泛化 | 正则规则需针对目标语言单独编写 |
+| 自动纠错 | 不会自动修正提取结果，需人工或后处理脚本介入 |
+| 云端同步 | 所有处理均在本地，无云端能力 |
+
+### 1.3 适用对象
+
+- 需要从日志、配置文件、报表中批量提取字段的运维/开发人员
+- 需要清洗脏数据的数据分析人员
+- 需要将非结构化文本转为结构化记录的业务运营人员
 
 ---
 
 ## 二、触发方式与场景映射
 
-当你的任务涉及以下关键词时，可调用本技能：
+当用户输入以下意图时，本技能应被触发：
 
-| 触发词 | 典型场景 |
-|--------|----------|
-| 文本批处理 | 批量提取 1000 份日志中的 IP 地址和错误码 |
-| 结构化提取 | 从非结构化报告中抽取日期、金额、负责人 |
-| 规则引擎 | 按正则规则过滤敏感信息 |
-| 数据清洗 | 去除 CSV 中的重复行和格式错误 |
-| 格式转换 | 将 Markdown 表格转为 JSON 数组 |
-| 批量处理 | 多文件统一提取字段并汇总 |
-
-**大白话示例**：
-- “帮我把这堆 txt 里的手机号都抠出来，按 CSV 存”——触发
-- “把这几百个 JSON 里的 `name` 字段抽出来做成表格”——触发
-- “理解一下这段话的感情色彩”——不触发（超出能力）
+| 触发词/短语 | 场景示例 | 本技能动作 |
+|-------------|----------|------------|
+| 文本批处理 | "帮我把这批日志里的时间戳都提出来" | 引导用户编写规则并执行提取 |
+| 结构化提取 | "从这些订单记录里抽出金额和日期" | 提供规则模板并运行提取 |
+| 规则引擎 | "我想用正则从文本里抓字段" | 讲解规则文件格式并给出示例 |
+| 数据清洗 | "这个 CSV 里有好多空行和乱码，帮我清一下" | 提供清洗规则模板并执行 |
+| 格式转换 | "把这份 txt 转成 JSON 格式" | 指导配置输出格式并运行 |
 
 ---
 
-## 三、标准执行流程
+## 三、标准操作流程
 
 ### 3.1 前置条件
 
-| 条件 | 要求 |
-|------|------|
-| 输入文件 | 文本格式，≤50MB（超过需分块） |
-| 规则文件 | `rules.json`（可选，默认内置通用规则） |
-| 运行环境 | Python 3.8+，安装 `acg-processor` 包 |
-| 编码 | 默认 UTF-8，其他编码需指定 `--encoding` |
+- Python 3.8+ 环境
+- 已安装 `acg_processor.py` 脚本（随本技能分发）
+- 输入文件编码为 UTF-8（或其他明确指定的编码）
 
 ### 3.2 执行步骤
 
-1. **预览模式验证规则**（必做）
-   ```bash
-   acg-processor --dry-run -i input.txt -r rules.json
-   ```
-   此命令不生成输出文件，仅打印前 10 条提取结果，用于确认规则是否命中。
+#### 第一步：编写规则文件（rules.json）
 
-2. **正式处理**
-   ```bash
-   acg-processor -i input.txt -o output.json -r rules.json --format json
-   ```
+规则文件是核心配置，定义如何从文本中提取字段。参考以下模板：
 
-3. **大文件分块处理**
-   ```bash
-   acg-processor -i big_file.txt -o out/ --chunk-size 10MB --format csv
-   ```
-   `--chunk-size` 按内存占用自动切分，每块独立处理，结果合并输出。
+```json
+{
+  "version": "1.0",
+  "rules": [
+    {
+      "name": "timestamp",
+      "pattern": "(\\d{4}-\\d{2}-\\d{2}[T\\s]\\d{2}:\\d{2}:\\d{2})",
+      "type": "datetime",
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "name": "ip_address",
+      "pattern": "((?:\\d{1,3}\\.){3}\\d{1,3})",
+      "type": "string",
+      "required": false,
+      "weight": 0.8
+    },
+    {
+      "name": "error_code",
+      "pattern": "(ERR-\\d{4})",
+      "type": "string",
+      "required": false,
+      "weight": 0.6
+    }
+  ],
+  "global": {
+    "encoding": "utf-8",
+    "line_separator": "\n",
+    "confidence_threshold": 0.8
+  }
+}
+```
 
-4. **置信度过滤**
-   ```bash
-   acg-processor -i input.txt -o clean.json --min-confidence 0.8
-   ```
-   低于 0.8 的记录将被丢弃，并在日志中标注 `[LOW_CONF]`。
+**字段说明：**
 
-5. **指定编码**
-   ```bash
-   acg-processor -i gbk_file.txt -o out.json --encoding gbk
-   ```
+| 字段 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `name` | string | 是 | 字段名，输出时作为 key |
+| `pattern` | string | 是 | 正则表达式，需包含捕获组 `()` |
+| `type` | string | 否 | 字段类型（datetime/string/number），用于后处理 |
+| `required` | boolean | 否 | 是否必填字段，影响置信度计算 |
+| `weight` | number | 否 | 字段权重，默认 1.0，影响置信度评分 |
+
+#### 第二步：运行处理命令
+
+```bash
+python acg_processor.py --input 输入文件 --rules rules.json --output 输出文件
+```
+
+**常用参数：**
+
+| 参数 | 说明 | 默认值 |
+|------|------|--------|
+| `--input` | 输入文件路径（必填） | 无 |
+| `--rules` | 规则文件路径（必填） | 无 |
+| `--output` | 输出文件路径（必填） | 无 |
+| `--output-format` | 输出格式：json/csv | json |
+| `--stream` | 启用流式处理模式 | false |
+| `--chunk-size` | 流式处理时每块行数 | 1000 |
+| `--max-memory` | 最大内存占用（MB） | 512 |
+| `--rule-priority` | 多规则优先级（逗号分隔的规则名） | 按规则文件顺序 |
+| `--dry-run` | 预览提取效果，不写文件 | false |
+| `--selftest` | 运行规则自检 | false |
+| `--version` | 显示版本号 | 无 |
+
+#### 第三步：查看输出结果
+
+输出 JSON 格式示例：
+
+```json
+{
+  "meta": {
+    "input_file": "sample.log",
+    "rules_file": "rules.json",
+    "processed_lines": 1250,
+    "matched_lines": 1180,
+    "avg_confidence": 0.87
+  },
+  "records": [
+    {
+      "line_number": 1,
+      "timestamp": "2026-08-20 14:23:01",
+      "ip_address": "192.168.1.1",
+      "error_code": "ERR-2048",
+      "confidence": 0.95
+    },
+    {
+      "line_number": 2,
+      "timestamp": "2026-08-20 14:23:05",
+      "ip_address": null,
+      "error_code": "ERR-1024",
+      "confidence": 0.72
+    }
+  ]
+}
+```
+
+#### 第四步：检查置信度
+
+- **置信度 ≥ 0.8**：提取结果可靠，可直接使用
+- **置信度 0.5~0.8**：部分字段可能缺失，建议人工复核
+- **置信度 < 0.5**：提取结果不可靠，需调整规则
 
 ### 3.3 输出规范
 
-- **JSON 输出**：数组格式，每条记录含 `data`（提取字段）和 `confidence`（0-1 浮点数）。
-- **Markdown 输出**：表格形式，第一行为字段名，末列固定为 `置信度`。
-- **CSV 输出**：UTF-8 编码，带表头，置信度列名为 `confidence`。
-
-**示例输出（JSON）**：
-```json
-[
-  {
-    "data": {"ip": "192.168.1.1", "error_code": "E404"},
-    "confidence": 0.95
-  }
-]
-```
+- 输出文件编码为 UTF-8
+- JSON 格式包含 `meta` 和 `records` 两个顶层字段
+- 每条记录包含 `line_number` 和 `confidence` 字段
+- CSV 格式首行为字段名，后续行为数据
 
 ---
 
 ## 四、置信度门控机制
 
-当规则匹配不完整或字段缺失时，系统**不会编造数据**，而是执行以下策略：
+当提取结果信息不足时，本工具遵循以下原则：
 
-| 情况 | 输出行为 |
-|------|----------|
-| 字段缺失 | 输出 `[需核实:字段名]` 占位符 |
-| 置信度 < 0.5 | 丢弃该记录，日志记录原因 |
-| 置信度 0.5-0.8 | 保留记录，标记 `[LOW_CONF]` |
-| 规则冲突 | 取最高置信度规则结果，标注 `[CONFLICT]` |
+1. **不编造数据**：未匹配到的字段输出 `null`，绝不猜测填充
+2. **显式占位**：对于关键字段缺失，输出 `[需核实:字段名]` 占位符
+3. **置信度标记**：每条记录附带置信度分数，低于阈值的记录在输出中标记 `"low_confidence": true`
 
-**示例**：
+示例：
+
 ```json
-{"data": {"ip": "192.168.1.1", "error_code": "[需核实:error_code]"}, "confidence": 0.72}
+{
+  "line_number": 15,
+  "timestamp": "[需核实:timestamp]",
+  "ip_address": "10.0.0.8",
+  "error_code": null,
+  "confidence": 0.45,
+  "low_confidence": true
+}
 ```
 
 ---
@@ -146,84 +229,100 @@ trigger_words: ["文本批处理", "结构化提取", "规则引擎", "数据清
 
 | 错误码 | 含义 | 提示话术 | 修正步骤 |
 |--------|------|----------|----------|
-| `E001` | 文件不存在 | 输入文件路径无效，请检查 | 确认路径，使用绝对路径 |
-| `E002` | 编码错误 | 文件编码与指定不符 | 使用 `--encoding` 指定正确编码 |
-| `E003` | 规则语法错误 | `rules.json` 解析失败 | 用 `json.tool` 校验规则文件 |
-| `E004` | 内存溢出 | 文件过大，超出可用内存 | 使用 `--chunk-size` 分块处理 |
-| `E005` | 无匹配结果 | 规则未命中任何文本 | 检查规则正则，使用 `--dry-run` 调试 |
-| `E006` | 输出格式冲突 | 指定格式与文件扩展名不符 | 统一 `--format` 与输出文件后缀 |
+| `E001` | 输入文件不存在 | "找不到输入文件，请检查路径" | 确认文件路径是否正确 |
+| `E002` | 规则文件格式错误 | "规则文件不是合法的 JSON" | 用 `json.tool` 校验格式 |
+| `E003` | 正则表达式无效 | "第 N 条规则的正则无法编译" | 检查正则语法，建议先用在线工具验证 |
+| `E004` | 输出目录无权限 | "无法写入输出文件，请检查权限" | 更换输出路径或调整目录权限 |
+| `E005` | 内存不足 | "处理过程中内存占用超限" | 启用 `--stream` 模式并调小 `--chunk-size` |
+| `E006` | 编码不支持 | "无法识别输入文件编码" | 使用 `--encoding` 参数指定编码 |
 
 ---
 
-## 六、FAQ 反模式对照
+## 六、FAQ 与反模式
 
-| 常见坑 | 反模式（错误做法） | 正确做法 |
-|--------|-------------------|----------|
-| 规则过宽 | 用 `.*` 匹配所有内容 | 使用锚点 `^...$` 和字符类 `[0-9]` |
-| 忽略编码 | 直接处理 GBK 文件 | 先 `file` 命令检测编码，再指定 |
-| 大文件硬跑 | 一次性加载 100MB 文件 | 分块处理，每块 ≤ 10MB |
-| 不验证规则 | 直接全量处理 | 先 `--dry-run` 预览前 10 条 |
-| 置信度一刀切 | 全部接受或全部拒绝 | 按业务需求设 `--min-confidence` |
+### 6.1 常见坑
+
+| 坑 | 反模式示例 | 正确做法 |
+|----|------------|----------|
+| 贪婪匹配 | `pattern: "(.*)"` 匹配整行 | 使用非贪婪 `(.*?)` 或精确字符类 |
+| 忽略转义 | `pattern: "(\\d+)"` 在 JSON 中写错 | JSON 中反斜杠需双写：`"(\\\\d+)"` |
+| 无捕获组 | `pattern: "\\d{4}"` 没有括号 | 确保有捕获组：`"(\\d{4})"` |
+| 规则过宽 | `pattern: "(.*)"` 匹配所有内容 | 收窄匹配范围，增加前后锚点 |
+| 忽略编码 | 输入文件是 GBK 却按 UTF-8 读 | 明确指定 `--encoding gbk` |
+
+### 6.2 反模式对照
+
+**反模式 1：一次处理所有数据**
+- ❌ 直接对 10GB 文件运行，导致内存溢出
+- ✅ 先用 `--dry-run` 在小样本上测试，再启用 `--stream` 分批处理
+
+**反模式 2：规则一次写到位**
+- ❌ 写完规则直接跑全量数据，结果大量不匹配
+- ✅ 先用 `--selftest` 验证规则，再处理小文件（<1MB）测试效果
+
+**反模式 3：忽略置信度**
+- ❌ 直接使用所有提取结果，不检查置信度
+- ✅ 设置 `confidence_threshold`，对低置信度记录进行二次清洗
 
 ---
 
 ## 七、渐进式阅读路径
 
-### 新手路径（5 分钟上手）
-1. 阅读「能力边界速查卡」确认工具适用性。
-2. 使用内置规则跑一次 `--dry-run`。
-3. 按「标准执行流程」第 2 步生成第一个输出文件。
+### 7.1 新手速查（5 分钟上手）
 
-### 进阶路径（深度定制）
-1. 学习编写 `rules.json`（正则 + 字段映射）。
-2. 理解置信度计算逻辑（规则命中率 × 字段完整率）。
-3. 结合 `--chunk-size` 和 `--min-confidence` 处理生产级数据。
+1. 复制 3.2 节的规则模板
+2. 修改字段名和正则表达式
+3. 运行 `python acg_processor.py --input 测试文件 --rules rules.json --output result.json --dry-run`
+4. 查看输出结果，调整规则直到满意
+5. 去掉 `--dry-run` 正式运行
+
+### 7.2 进阶路径（深入使用）
+
+1. 掌握流式处理参数（`--stream`、`--chunk-size`、`--max-memory`）
+2. 设计多规则优先级（`--rule-priority` 参数）
+3. 使用 `--output-format csv` 与 Excel 自动化流程对接
+4. 编写后处理脚本，对低置信度记录进行二次清洗
+
+### 7.3 高级技巧
+
+- **多规则协同**：为同一字段配置多条规则，按优先级依次尝试
+- **动态权重**：根据字段重要性调整 `weight`，影响置信度计算
+- **后处理管道**：将输出结果接入 Python/Pandas 脚本，实现复杂清洗逻辑
 
 ---
 
 ## 八、用户协议
 
-使用本 Skill 即表示您同意以下条款：
-
-1. **责任承担**：使用者自行承担因使用本工具产生的全部责任，包括但不限于数据丢失、处理结果错误、合规风险。
-2. **禁止反向工程**：不得对本 Skill 的规则引擎核心逻辑进行逆向工程、反编译或试图提取源代码。
-3. **合规使用**：不得使用本工具处理违反法律法规的数据，包括个人隐私信息、受版权保护内容。
-4. **无担保**：本工具按“现状”提供，不附带任何明示或暗示的担保。
-
 <!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于因规则配置错误、输出结果误用、数据处理不当等造成的任何直接或间接损失。
+
+2. **禁止反向工程**：未经授权，不得对本 Skill 的底层实现进行反向工程、反编译、破解或试图获取源代码（除 MIT 许可证明确允许的范围外）。
+
+3. **数据安全**：使用者需自行确保输入数据的合法性与合规性。本 Skill 不收集、不上传任何用户数据，所有处理均在本地完成。
+
+4. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性及不侵权保证。
+
+5. **合规使用**：使用者不得将本 Skill 用于任何违反法律法规、侵犯第三方权益或违背公序良俗的场景。
 
 ---
 
 ## 九、许可证（License）
 
-本 Skill 采用 MIT 许可证发布。
-
-```
-MIT License
-
-Copyright (c) 2026 林墨研
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
-
 <!-- professional-license-embedded -->
+
+**MIT License**
+
+版权所有 (c) 2026 林墨工坊
+
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士处理软件的权限，包括不受限制地使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向其提供软件的人士这样做，但须满足以下条件：
+
+上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
+
+本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和不侵权保证。在任何情况下，作者或版权持有人均不对因使用本软件或与本软件有关的任何索赔、损害或其他责任负责，无论是在合同、侵权或其他方面。
 
 ---
 
-*文档版本：1.0.0 | 最后更新：2026-08-19*
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
