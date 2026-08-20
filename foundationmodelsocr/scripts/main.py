@@ -12,7 +12,11 @@ import json
 import os
 import re
 import sys
+import time
+import hashlib
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field, asdict
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 
 # 错误码定义
@@ -80,7 +84,7 @@ class ReceiptParser:
     """
 
     # 字段提取规则：key -> (正则模式, 字段类型)
-    # 使用宽松匹配，避免过度约束
+    # 使用非贪婪匹配和边界限定，避免贪婪匹配到行尾
     FIELD_PATTERNS: Dict[str, Tuple[str, str]] = {
         "invoice_number": (r"(发票号码|发票号|NO\.?|No\.?)\s*[:：]?\s*([A-Za-z0-9\-]{4,20})", "str"),
         "invoice_date": (r"(开票日期|日期|date)\s*[:：]?\s*(\d{4}[-/年.]\d{1,2}[-/月.]\d{1,2}日?)", "str"),
@@ -92,8 +96,8 @@ class ReceiptParser:
             r"(税额|税金|tax)\s*[:：]?\s*[¥￥]?\s*(\d{1,3}(?:,\d{3})*(?:\.\d{1,2})?|\d+(?:\.\d{1,2})?)",
             "float"
         ),
-        "seller_name": (r"(销售方|卖方|收款方|seller|收款人)\s*[:：]?\s*([^\n]{2,50})", "str"),
-        "buyer_name": (r"(购买方|买方|付款方|buyer|付款人)\s*[:：]?\s*([^\n]{2,50})", "str"),
+        "seller_name": (r"(销售方|卖方|收款方|seller|收款人)\s*[:：]?\s*([^\n]{2,50}?)(?=\n|$)", "str"),
+        "buyer_name": (r"(购买方|买方|付款方|buyer|付款人)\s*[:：]?\s*([^\n]{2,50}?)(?=\n|$)", "str"),
     }
 
     def __init__(self, confidence_default: float = 0.85):
@@ -115,13 +119,54 @@ class ReceiptParser:
             # 取最后一个捕获组作为值
             raw_value = match.group(match.lastindex or 2)
             value = self._convert_value(raw_value, type_hint)
-            # 置信度：命中即给默认值，可根据匹配长度微调（保持宽松）
-            conf = self.confidence_default
-            if len(raw_value) < 4:
-                conf = max(0.5, conf - 0.2)  # 短值置信度略低
+            # 根据匹配质量动态计算置信度
+            conf = self._calculate_confidence(key, raw_value, value, type_hint)
             doc.fields.append(FieldResult(key=key, value=value, confidence=round(conf, 2)))
 
         return doc
+
+    def _calculate_confidence(self, key: str, raw_value: str, value: Any, type_hint: str) -> float:
+        """根据匹配质量动态计算置信度。"""
+        conf = self.confidence_default
+        
+        # 基础长度检查
+        if len(raw_value) < 4:
+            conf -= 0.2
+        
+        # 字段特定校验
+        if key == "invoice_number":
+            # 发票号码格式校验：字母数字连字符
+            if re.match(r'^[A-Za-z0-9\-]+$', raw_value):
+                conf += 0.05
+            else:
+                conf -= 0.1
+        elif key == "invoice_date":
+            # 日期格式校验
+            date_patterns = [
+                r'^\d{4}-\d{1,2}-\d{1,2}$',  # YYYY-MM-DD
+                r'^\d{4}年\d{1,2}月\d{1,2}日$',  # YYYY年MM月DD日
+                r'^\d{4}/\d{1,2}/\d{1,2}$',  # YYYY/MM/DD
+                r'^\d{4}\.\d{1,2}\.\d{1,2}$',  # YYYY.MM.DD
+            ]
+            if any(re.match(p, raw_value) for p in date_patterns):
+                conf += 0.05
+            else:
+                conf -= 0.1
+        elif key in ("total_amount", "tax_amount"):
+            # 金额格式校验
+            if isinstance(value, float):
+                conf += 0.05
+            else:
+                conf -= 0.1
+        elif key in ("seller_name", "buyer_name"):
+            # 名称长度检查
+            if len(raw_value) >= 4:
+                conf += 0.05
+            else:
+                conf -= 0.1
+        
+        # 限制在 [0, 1] 范围
+        return max(0.0, min(1.0, conf))
 
     @staticmethod
     def _convert_value(raw: str, type_hint: str) -> Any:
@@ -181,24 +226,60 @@ def parse_file(filepath: str, parser: ReceiptParser) -> DocumentResult:
     return parser.parse_text(text, source=os.path.basename(filepath))
 
 
-def parse_batch(filepaths: List[str], parser: ReceiptParser) -> List[DocumentResult]:
-    """批量解析，单文件失败不中断整体。"""
+def parse_batch(filepaths: List[str], parser: ReceiptParser, max_workers: int = 4) -> List[DocumentResult]:
+    """批量解析，使用线程池并发处理，单文件失败不中断整体。"""
     results = []
-    has_error = False
+    failed_items = []
+    
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        future_to_file = {executor.submit(parse_file, fp, parser): fp for fp in filepaths}
+        for future in as_completed(future_to_file):
+            fp = future_to_file[future]
+            try:
+                result = future.result()
+                results.append(result)
+            except SkillError as e:
+                failed_items.append((fp, e.code))
+                results.append(DocumentResult(
+                    source=os.path.basename(fp),
+                    status="error",
+                    error_code=e.code,
+                    raw_text="",
+                ))
+            except Exception as e:
+                failed_items.append((fp, "E010"))
+                results.append(DocumentResult(
+                    source=os.path.basename(fp),
+                    status="error",
+                    error_code="E010",
+                    raw_text="",
+                ))
+    
+    # 按原始顺序排序结果
+    results.sort(key=lambda r: filepaths.index(r.source) if r.source in [os.path.basename(f) for f in filepaths] else 0)
+    
+    return results
+
+
+def retry_failed(filepaths: List[str], parser: ReceiptParser, max_retries: int = 3) -> List[DocumentResult]:
+    """对失败项进行重试。"""
+    results = []
     for fp in filepaths:
-        try:
-            results.append(parse_file(fp, parser))
-        except SkillError as e:
-            has_error = True
-            results.append(DocumentResult(
-                source=os.path.basename(fp),
-                status="error",
-                error_code=e.code,
-                raw_text="",
-            ))
-    if has_error:
-        # 不抛出异常，由调用方检查 status
-        pass
+        for attempt in range(max_retries):
+            try:
+                result = parse_file(fp, parser)
+                results.append(result)
+                break
+            except SkillError as e:
+                if attempt == max_retries - 1:
+                    results.append(DocumentResult(
+                        source=os.path.basename(fp),
+                        status="error",
+                        error_code=e.code,
+                        raw_text="",
+                    ))
+                else:
+                    time.sleep(2 ** attempt)  # 指数退避
     return results
 
 
@@ -237,129 +318,103 @@ def build_arg_parser() -> argparse.ArgumentParser:
     p.add_argument("-o", "--output", help="输出 JSON 文件路径（可选，默认打印到 stdout）")
     p.add_argument("--selftest", action="store_true", help="运行内置离线自检")
     p.add_argument("--confidence", type=float, default=0.85, help="默认置信度(0~1)")
+    p.add_argument("--retry", action="store_true", help="对失败项自动重试")
+    p.add_argument("--max-workers", type=int, default=4, help="并发处理线程数")
     return p
 
 
 def run_selftest() -> int:
-    """内置硬编码样例自检，不依赖任何外部资源。"""
+    """内置硬编码样例自检，验证核心解析链路。"""
     print("[SELFTEST] 开始离线自检...")
-
-    # 硬编码测试样例
-    sample_text = """
-    增值税普通发票
-    发票号码: INV-2026-0001
-    开票日期: 2026年03月15日
-    购买方: 测试采购有限公司
-    销售方: 测试销售有限公司
-    价税合计: ¥1,280.50
-    税额: 147.28
-    备注: 测试专用
-    """
+    
+    # 测试样例：包含多种日期格式
+    test_samples = [
+        {
+            "text": """
+            增值税普通发票
+            发票号码: INV-2026-0001
+            开票日期: 2026-03-15
+            购买方: 测试采购有限公司
+            销售方: 测试销售有限公司
+            价税合计: ¥1,280.50
+            税额: 147.28
+            备注: 测试专用
+            """,
+            "expected_date": "2026-03-15",
+            "expected_total": 1280.50,
+            "expected_tax": 147.28
+        },
+        {
+            "text": """
+            增值税普通发票
+            发票号码: INV-2026-0002
+            开票日期: 2026年03月15日
+            购买方: 测试采购有限公司
+            销售方: 测试销售有限公司
+            价税合计: ¥2,560.00
+            税额: 294.56
+            备注: 测试专用
+            """,
+            "expected_date": "2026年03月15日",
+            "expected_total": 2560.00,
+            "expected_tax": 294.56
+        },
+        {
+            "text": """
+            增值税普通发票
+            发票号码: INV-2026-0003
+            开票日期: 2026/03/15
+            购买方: 测试采购有限公司
+            销售方: 测试销售有限公司
+            价税合计: ¥3,840.50
+            税额: 441.84
+            备注: 测试专用
+            """,
+            "expected_date": "2026/03/15",
+            "expected_total": 3840.50,
+            "expected_tax": 441.84
+        }
+    ]
 
     parser = ReceiptParser(confidence_default=0.85)
-    try:
-        result = parser.parse_text(sample_text, source="selftest")
-    except SkillError as e:
-        print(f"[SELFTEST] 解析失败: {e}")
-        return 1
-
-    # 字段存在性检查（宽松断言）
-    field_map = {f.key: f for f in result.fields}
-    required_keys = ["invoice_number", "invoice_date", "total_amount", "tax_amount", "seller_name", "buyer_name"]
-
-    missing = [k for k in required_keys if k not in field_map]
-    if missing:
-        print(f"[SELFTEST] 失败: 缺少字段 {missing}")
-        return 1
-
-    # 值范围检查（宽松阈值）
-    total = field_map["total_amount"].value
-    tax = field_map["tax_amount"].value
-    if not (1000 <= total <= 2000):
-        print(f"[SELFTEST] 失败: 总金额 {total} 不在预期范围 [1000, 2000]")
-        return 1
-    if not (100 <= tax <= 200):
-        print(f"[SELFTEST] 失败: 税额 {tax} 不在预期范围 [100, 200]")
-        return 1
-
-    # 置信度合理性检查
-    for f in result.fields:
-        if not (0.0 <= f.confidence <= 1.0):
-            print(f"[SELFTEST] 失败: 置信度越界 {f.confidence}")
+    
+    for idx, sample in enumerate(test_samples):
+        try:
+            result = parser.parse_text(sample["text"], source=f"selftest_{idx}")
+        except SkillError as e:
+            print(f"[SELFTEST] 样例 {idx} 解析失败: {e}")
             return 1
 
-    # JSON 序列化验证
-    try:
-        json_out = save_results([result])
-        parsed_json = json.loads(json_out)
-        if len(parsed_json) != 1 or parsed_json[0]["status"] != "ok":
-            raise ValueError("序列化结果异常")
-    except (SkillError, ValueError) as e:
-        print(f"[SELFTEST] 失败: JSON 序列化异常 {e}")
-        return 1
+        # 字段存在性检查
+        field_map = {f.key: f for f in result.fields}
+        required_keys = ["invoice_number", "invoice_date", "total_amount", "tax_amount", "seller_name", "buyer_name"]
+        
+        missing = [k for k in required_keys if k not in field_map]
+        if missing:
+            print(f"[SELFTEST] 样例 {idx} 失败: 缺少字段 {missing}")
+            return 1
 
-    print("[SELFTEST] 通过 ✓")
-    return 0
+        # 日期格式验证
+        if field_map["invoice_date"].value != sample["expected_date"]:
+            print(f"[SELFTEST] 样例 {idx} 失败: 日期 {field_map['invoice_date'].value} != 期望 {sample['expected_date']}")
+            return 1
 
+        # 金额范围检查
+        total = field_map["total_amount"].value
+        tax = field_map["tax_amount"].value
+        if not isinstance(total, float) or not isinstance(tax, float):
+            print(f"[SELFTEST] 样例 {idx} 失败: 金额类型错误")
+            return 1
+        
+        # 金额值验证
+        if abs(total - sample["expected_total"]) > 0.01:
+            print(f"[SELFTEST] 样例 {idx} 失败: 总金额 {total} != 期望 {sample['expected_total']}")
+            return 1
+        if abs(tax - sample["expected_tax"]) > 0.01:
+            print(f"[SELFTEST] 样例 {idx} 失败: 税额 {tax} != 期望 {sample['expected_tax']}")
+            return 1
 
-def main() -> int:
-    """CLI 入口。"""
-    args = build_arg_parser().parse_args()
-
-    # 自检模式优先
-    if args.selftest:
-        return run_selftest()
-
-    # 参数校验
-    if not args.files and not args.dir:
-        print("错误: 必须提供 -f 或 -d 参数", file=sys.stderr)
-        return 2
-
-    if args.files and args.dir:
-        print("错误: -f 与 -d 不能同时使用", file=sys.stderr)
-        return 2
-
-    if not (0.0 <= args.confidence <= 1.0):
-        print("错误: --confidence 必须在 [0,1] 区间", file=sys.stderr)
-        return 2
-
-    parser = ReceiptParser(confidence_default=args.confidence)
-
-    # 收集文件列表
-    file_list: List[str] = []
-    if args.files:
-        file_list = args.files
-    elif args.dir:
-        if not os.path.isdir(args.dir):
-            print(f"错误: 目录不存在 {args.dir}", file=sys.stderr)
-            return 2
-        for fname in sorted(os.listdir(args.dir)):
-            fpath = os.path.join(args.dir, fname)
-            if os.path.isfile(fpath) and os.path.splitext(fname)[1].lower() in SUPPORTED_EXTENSIONS:
-                file_list.append(fpath)
-
-    if not file_list:
-        print("错误: 未找到可处理的文件", file=sys.stderr)
-        return 2
-
-    try:
-        results = parse_batch(file_list, parser)
-        json_output = save_results(results, args.output)
-        if not args.output:
-            print(json_output)
-    except SkillError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"错误: [E010] 内部异常: {e}", file=sys.stderr)
-        return 1
-
-    # 检查是否有失败项
-    if any(r.status == "error" for r in results):
-        print("警告: 部分文件解析失败，请检查输出中的 error_code", file=sys.stderr)
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        # 置信度合理性检查
+        for f in result.fields:
+            if not (0.0 <= f.confidence <= 1.0):
+                print
