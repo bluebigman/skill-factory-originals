@@ -1,0 +1,35 @@
+{
+  "timestamp": "20260820_135253",
+  "slug": "ruflo",
+  "spec": {
+    "slug": "ruflo",
+    "name": "ruflo",
+    "description": "将任意数据源解析为结构化结果，支持多智能体协同与批量处理。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 出现占位符时，校验报告必须列出对应记录 ID 和字段名",
+      "2. 用户需手动补充确认后，重新执行该条记录的解析",
+      "3. 未确认前，该记录不参与最终合并输出",
+      "1. 所有文件放同一目录",
+      "2. 先跑一个文件试效果",
+      "3. 确认无误再批量跑",
+      "4. 原始文件永远备份",
+      "2. **数据安全**：使用者应确保待处理数据不包含违反法律法规的内容。本 Skill 不收集、不上传任何用户数据，所有处理均在本地完成。",
+      "3. **禁止反向工程**：使用者不得对本 Skill 的底层实现进行反向工程、反编译、破解或试图提取源代码逻辑（法律法规另有规定的除外）。",
+      "4. **无担保声明**：本 Skill 按\"现状\"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。",
+      "5. **协议更新**：Skill 提供方保留随时修改本协议的权利，修改后的协议将在更新版本中公布。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "eaf95f0bd7b80f95",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
