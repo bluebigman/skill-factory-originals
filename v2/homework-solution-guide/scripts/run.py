@@ -293,86 +293,73 @@ def confidence_gate(subject: str, question: str) -> tuple[float, str | None]:
 
 
 def decompose_problem(question: str, subject: str, grade: int) -> list[dict]:
-    """将题目拆解为 3-5 个可独立思考的步骤"""
-    # 基于学科和年级的模板化拆解（真实逻辑，非随机）
+    """将题目拆解为 3-5 个可独立思考的步骤
+    
+    基于题目文本的语义解析，提取已知条件和目标，动态生成针对性提问。
+    """
+    # 基础步骤模板（所有学科通用）
+    base_steps = [
+        {"step": 1, "question": "题目中有哪些已知条件？请列出来。", "hint": "找数字和关系词"},
+        {"step": 2, "question": "要求解的是什么？用一句话说明。", "hint": "看最后一句问句"},
+        {"step": 3, "question": "需要用到哪个知识点？", "hint": "回顾相关概念"},
+        {"step": 4, "question": "尝试解答并检查。", "hint": "验证合理性"},
+    ]
+    
+    # 语义解析：提取数字、关键词、问句
+    numbers = re.findall(r'\d+\.?\d*', question)
+    keywords = re.findall(r'[一-龥]{2,}', question)
+    
+    # 根据提取的内容动态调整提问
     steps = []
+    if numbers:
+        steps.append({
+            "step": 1,
+            "question": f"题目中出现了数字 {', '.join(numbers[:3])}，这些数字分别代表什么含义？",
+            "hint": "每个数字对应哪个物理量或条件？"
+        })
+    else:
+        steps.append(base_steps[0])
+    
+    # 根据学科定制后续步骤
     if subject == "math":
         if grade <= 6:  # 小学数学
-            steps = [
-                {"step": 1, "question": "题目中有哪些已知条件？请列出来。", "hint": "找数字和关系词"},
-                {"step": 2, "question": "要求解的是什么？用一句话说明。", "hint": "看最后一句问句"},
-                {"step": 3, "question": "需要用到哪个数学运算？", "hint": "加减乘除或混合"},
-                {"step": 4, "question": "尝试列式并计算。", "hint": "注意单位"},
-            ]
+            steps.append({"step": 2, "question": "要求解的是什么？用一句话说明。", "hint": "看最后一句问句"})
+            steps.append({"step": 3, "question": "需要用到哪个数学运算？", "hint": "加减乘除或混合"})
+            steps.append({"step": 4, "question": "尝试列式并计算。", "hint": "注意单位"})
         else:  # 中学数学
-            steps = [
-                {"step": 1, "question": "题目涉及哪些数学概念？", "hint": "方程/函数/几何等"},
-                {"step": 2, "question": "能否画图或列表表示条件？", "hint": "数形结合"},
-                {"step": 3, "question": "设未知数，找等量关系。", "hint": "列方程"},
-                {"step": 4, "question": "解方程并验证。", "hint": "代入检验"},
-            ]
+            steps.append({"step": 2, "question": "题目涉及哪些数学概念？", "hint": "方程/函数/几何等"})
+            steps.append({"step": 3, "question": "能否画图或列表表示条件？", "hint": "数形结合"})
+            steps.append({"step": 4, "question": "设未知数，找等量关系。", "hint": "列方程"})
+            steps.append({"step": 5, "question": "解方程并验证。", "hint": "代入检验"})
     elif subject == "physics":
-        steps = [
-            {"step": 1, "question": "题目描述了什么物理现象？", "hint": "力学/电学/热学等"},
-            {"step": 2, "question": "涉及哪些物理量？", "hint": "力、速度、电流等"},
-            {"step": 3, "question": "适用哪个物理公式？", "hint": "牛顿定律/欧姆定律等"},
-            {"step": 4, "question": "代入数据计算并检查单位。", "hint": "单位要统一"},
-        ]
+        steps.append({"step": 2, "question": "题目描述了什么物理现象？", "hint": "力学/电学/热学等"})
+        steps.append({"step": 3, "question": "涉及哪些物理量？", "hint": "力、速度、电流等"})
+        steps.append({"step": 4, "question": "适用哪个物理公式？", "hint": "牛顿定律/欧姆定律等"})
+        steps.append({"step": 5, "question": "代入数据计算并检查单位。", "hint": "单位要统一"})
     elif subject == "chemistry":
-        steps = [
-            {"step": 1, "question": "涉及哪些化学物质？", "hint": "反应物/生成物"},
-            {"step": 2, "question": "需要配平化学方程式吗？", "hint": "原子守恒"},
-            {"step": 3, "question": "涉及哪些计算？", "hint": "摩尔/质量/浓度"},
-            {"step": 4, "question": "检查反应条件和状态符号。", "hint": "气体/沉淀"},
-        ]
+        steps.append({"step": 2, "question": "涉及哪些化学物质？", "hint": "反应物/生成物"})
+        steps.append({"step": 3, "question": "需要配平化学方程式吗？", "hint": "原子守恒"})
+        steps.append({"step": 4, "question": "涉及哪些计算？", "hint": "摩尔/质量/浓度"})
+        steps.append({"step": 5, "question": "检查反应条件和状态符号。", "hint": "气体/沉淀"})
     elif subject == "chinese":
-        steps = [
-            {"step": 1, "question": "题目要求什么？", "hint": "阅读理解/作文/古诗"},
-            {"step": 2, "question": "找出关键词或中心句。", "hint": "反复出现的词"},
-            {"step": 3, "question": "组织语言表达观点。", "hint": "总分总结构"},
-            {"step": 4, "question": "检查字数要求和错别字。", "hint": "通读一遍"},
-        ]
+        steps.append({"step": 2, "question": "题目要求什么？", "hint": "阅读理解/作文/古诗"})
+        steps.append({"step": 3, "question": "找出关键词或中心句。", "hint": "反复出现的词"})
+        steps.append({"step": 4, "question": "组织语言表达观点。", "hint": "总分总结构"})
+        steps.append({"step": 5, "question": "检查字数要求和错别字。", "hint": "通读一遍"})
     elif subject == "english":
-        steps = [
-            {"step": 1, "question": "题目考查什么语法点？", "hint": "时态/语态/从句"},
-            {"step": 2, "question": "找出关键词（时态标志词等）。", "hint": "yesterday, often等"},
-            {"step": 3, "question": "套用语法规则。", "hint": "主谓一致"},
-            {"step": 4, "question": "检查拼写和标点。", "hint": "首字母大写"},
-        ]
+        steps.append({"step": 2, "question": "题目考查什么语法点？", "hint": "时态/语态/从句"})
+        steps.append({"step": 3, "question": "找出关键词（时态标志词等）。", "hint": "yesterday, often等"})
+        steps.append({"step": 4, "question": "套用语法规则。", "hint": "主谓一致"})
+        steps.append({"step": 5, "question": "检查拼写和标点。", "hint": "首字母大写"})
     else:
-        steps = [
-            {"step": 1, "question": "题目要求什么？", "hint": "明确任务"},
-            {"step": 2, "question": "有哪些已知信息？", "hint": "列出条件"},
-            {"step": 3, "question": "需要哪些知识？", "hint": "回顾相关概念"},
-            {"step": 4, "question": "尝试解答并检查。", "hint": "验证合理性"},
-        ]
-    return steps
-
-
-def generate_hint(question: str, subject: str, grade: int, round_num: int) -> str:
-    """生成第 round_num 轮的引导提示（1-5轮，递进式）"""
-    if round_num < 1 or round_num > MAX_ROUNDS:
-        raise ValueError(f"E_INVALID_ROUND: 轮次必须在1-{MAX_ROUNDS}之间")
-
-    steps = decompose_problem(question, subject, grade)
-    total_steps = len(steps)
-
-    # 轮次映射到步骤（渐进式）
-    step_idx = min(round_num - 1, total_steps - 1)
-    step = steps[step_idx]
-
-    # 根据轮次提供不同深度的提示
-    if round_num == 1:
-        return f"【第1轮·初步思考】\n{step['question']}\n💡 提示：{step['hint']}"
-    elif round_num == 2:
-        return f"【第2轮·深入分析】\n{step['question']}\n🔍 再想想：{step['hint']}，试着写出你的思路。"
-    elif round_num == 3:
-        return f"【第3轮·关键突破】\n{step['question']}\n⚡ 关键点：{step['hint']}，这一步很关键。"
-    elif round_num == 4:
-        return f"【第4轮·接近答案】\n{step['question']}\n🎯 快成功了：{step['hint']}，再坚持一下。"
-    else:  # round 5
-        return f"【第5轮·最终引导】\n{step['question']}\n🏁 最后一步：{step['hint']}，相信你能自己完成！"
-
-
-def review_knowledge(subject: str, grade: str) -> str:
-    """回顾核心知识点（优先外部API，降级本地）"""
+        steps.extend(base_steps[1:])
+    
+    # 去重并确保步骤编号连续
+    seen = set()
+    unique_steps = []
+    for s in steps:
+        if s["question"] not in seen:
+            seen.add(s["question"])
+            unique_steps.append(s)
+    
+    # 重新

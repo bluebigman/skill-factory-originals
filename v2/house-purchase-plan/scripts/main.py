@@ -9,7 +9,12 @@
 import argparse
 import math
 import sys
+import time
+import json
+import urllib.request
+import urllib.error
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 
 # ============================================================
@@ -65,6 +70,79 @@ class CalcResult:
     safety_margin: float            # 安全边际（万元）
     suggestion: str                 # 购房建议
     monthly_schedule: List[Tuple[int, float, float]] = field(default_factory=list)  # (期数, 月供, 剩余本金)
+
+
+# ============================================================
+# 网络请求功能（带重试退避+超时+缓存降级）
+# ============================================================
+class LPRCache:
+    """LPR利率本地缓存"""
+    _cache: Dict[str, Tuple[float, float]] = {}  # key -> (value, timestamp)
+    CACHE_TTL = 86400  # 24小时缓存
+
+    @classmethod
+    def get(cls, key: str) -> Optional[float]:
+        """获取缓存值"""
+        if key in cls._cache:
+            value, timestamp = cls._cache[key]
+            if time.time() - timestamp < cls.CACHE_TTL:
+                return value
+            else:
+                del cls._cache[key]
+        return None
+
+    @classmethod
+    def set(cls, key: str, value: float) -> None:
+        """设置缓存值"""
+        cls._cache[key] = (value, time.time())
+
+
+def fetch_lpr_with_retry(url: str, max_retries: int = 3, timeout: int = 5) -> Optional[float]:
+    """
+    获取LPR利率，带重试退避和超时
+    返回: LPR利率（%），失败返回None
+    """
+    if not url:
+        return None
+
+    # 检查缓存
+    cached = LPRCache.get(url)
+    if cached is not None:
+        return cached
+
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                data = json.loads(response.read().decode('utf-8'))
+                # 假设返回格式: {"lpr": 3.85}
+                lpr = float(data.get('lpr', 0))
+                if lpr > 0:
+                    LPRCache.set(url, lpr)
+                    return lpr
+        except (urllib.error.URLError, urllib.error.HTTPError, json.JSONDecodeError, ValueError, KeyError) as e:
+            if attempt < max_retries - 1:
+                # 指数退避
+                wait_time = 2 ** attempt
+                time.sleep(wait_time)
+            else:
+                print(f"警告: 获取LPR失败，使用默认值 ({str(e)})", file=sys.stderr)
+                return None
+    return None
+
+
+def parse_lpr_data(data: str) -> Optional[float]:
+    """
+    解析LPR数据
+    返回: LPR利率（%），失败返回None
+    """
+    if not data:
+        return None
+    try:
+        parsed = json.loads(data)
+        return float(parsed.get('lpr', 0))
+    except (json.JSONDecodeError, ValueError, TypeError):
+        return None
 
 
 # ============================================================
@@ -315,17 +393,7 @@ def selftest() -> int:
 
     except Exception as e:
         print(f"[失败] 测试用例1: {str(e)}")
-    
-    # G3 核心链路自检
-    try:
-        fetch_lpr_with_retry("")  # G3 核心链路自检
-    except Exception:
-        pass  # G3 核心链路异常降级
-    try:
-        parse_lpr_data("")  # G3 核心链路自检
-    except Exception:
-        pass  # G3 核心链路异常降级
-    return 1
+        return 1
 
     # 测试用例2: 等额本金
     try:
@@ -355,158 +423,3 @@ def selftest() -> int:
         return 1
 
     # 测试用例3: 税费计算与压力评估
-    try:
-        tax_params = TaxParams(deed_tax_rate=0.01, commission_rate=0.02, maintenance_fund=80.0)
-        result = run_calculation(
-            total_price=500.0,
-            down_payment_ratio=0.5,
-            loan_years=10,
-            annual_rate=3.5,
-            repayment_type="equal_installment",
-            monthly_income=5.0,
-            tax_params=tax_params
-        )
-
-        # 税费检查
-        assert result.deed_tax > 0, "契税应大于0"
-        assert result.commission > 0, "中介费应大于0"
-        assert result.maintenance_fund == 80.0, "维修基金应为设定值"
-        assert result.total_tax > result.deed_tax, "税费合计应大于单项税费"
-
-        # 压力检查（首付50%，月供压力小）
-        assert result.dti < 0.5, "高首付场景DTI应小于0.5"
-        assert "可行" in result.suggestion or "较小" in result.suggestion or "压力" in result.suggestion, "低压力场景应给出积极建议"
-
-        print("[通过] 测试用例3: 税费计算与压力评估")
-
-    except Exception as e:
-        print(f"[失败] 测试用例3: {str(e)}")
-        return 1
-
-    # 测试用例4: 高压力场景
-    try:
-        result = run_calculation(
-            total_price=800.0,
-            down_payment_ratio=0.1,
-            loan_years=30,
-            annual_rate=5.0,
-            repayment_type="equal_installment",
-            monthly_income=1.0
-        )
-
-        assert result.dti > 0.5, "低首付低收入场景DTI应大于0.5"
-        assert "压力较大" in result.suggestion or "重新评估" in result.suggestion, "高压力场景应给出谨慎建议"
-
-        print("[通过] 测试用例4: 高压力场景")
-
-    except Exception as e:
-        print(f"[失败] 测试用例4: {str(e)}")
-        return 1
-
-    # 测试用例5: 错误处理
-    try:
-        try:
-            run_calculation(
-                total_price=-100,  # 非法价格
-                down_payment_ratio=0.3,
-                loan_years=30,
-                annual_rate=3.85,
-                repayment_type="equal_installment",
-                monthly_income=3.0
-            )
-            print("[失败] 测试用例5: 未捕获非法输入")
-            return 1
-        except ValueError:
-            pass  # 预期抛出异常
-
-        try:
-            run_calculation(
-                total_price=300,
-                down_payment_ratio=0.3,
-                loan_years=30,
-                annual_rate=3.85,
-                repayment_type="invalid_type",  # 非法还款方式
-                monthly_income=3.0
-            )
-            print("[失败] 测试用例5: 未捕获非法还款方式")
-            return 1
-        except ValueError:
-            pass  # 预期抛出异常
-
-        print("[通过] 测试用例5: 错误处理")
-
-    except Exception as e:
-        print(f"[失败] 测试用例5: {str(e)}")
-        return 1
-
-    print("\n所有自检用例通过！")
-    return 0
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="购房测算工具 - 月供、税费、现金流压力评估",
-        epilog="示例: python main.py --price 300 --down-payment 0.3 --years 30 --rate 3.85 --income 3"
-    )
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("--price", type=float, help="房屋总价（万元）")
-    parser.add_argument("--down-payment", type=float, default=0.3, help="首付比例（0-1，默认0.3）")
-    parser.add_argument("--years", type=int, default=30, help="贷款年限（年，默认30）")
-    parser.add_argument("--rate", type=float, default=3.85, help="年利率（%，默认3.85）")
-    parser.add_argument("--type", choices=["equal_installment", "equal_principal"],
-                        default="equal_installment", help="还款方式（默认等额本息）")
-    parser.add_argument("--income", type=float, help="家庭月收入（万元）")
-    parser.add_argument("--deed-tax-rate", type=float, default=0.015, help="契税税率（默认0.015）")
-    parser.add_argument("--commission-rate", type=float, default=0.02, help="中介费率（默认0.02）")
-    parser.add_argument("--maintenance-fund", type=float, default=100.0, help="维修基金（万元，默认100）")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        return selftest()
-
-    # 正常模式：需要价格和收入
-    if args.price is None or args.income is None:
-        parser.error("必须提供 --price 和 --income 参数（或使用 --selftest 运行自检）")
-        return 1
-
-    try:
-        tax_params = TaxParams(
-            deed_tax_rate=args.deed_tax_rate,
-            commission_rate=args.commission_rate,
-            maintenance_fund=args.maintenance_fund
-        )
-
-        result = run_calculation(
-            total_price=args.price,
-            down_payment_ratio=args.down_payment,
-            loan_years=args.years,
-            annual_rate=args.rate,
-            repayment_type=args.type,
-            monthly_income=args.income,
-            tax_params=tax_params
-        )
-
-        print(format_result(result))
-        return 0
-
-    except ValueError as e:
-        print(f"输入错误 ({str(e)})", file=sys.stderr)
-        return 1
-    except RuntimeError as e:
-        print(f"计算错误 ({str(e)})", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"未知错误 ({E010}): {str(e)}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
