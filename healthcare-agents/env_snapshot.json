@@ -1,9 +1,9 @@
 {
-  "frozen_at": "2026-08-18T06:11:15.224061",
+  "frozen_at": "2026-08-21T03:57:53.172270",
   "slug": "healthcare-agents",
   "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
   "llm_base_url": "https://api.deepseek.com",
-  "pipeline_commit": "1c37a11076f3fae428d8bc3779de92a404cfe91a",
+  "pipeline_commit": "58482ba0419fe7d973a8578bfc862b0a34e62fb1",
   "dependencies": [
     "annotated-types==0.8.0",
     "anyio==4.14.2",
