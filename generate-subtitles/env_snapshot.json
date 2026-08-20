@@ -1,9 +1,9 @@
 {
-  "frozen_at": "2026-08-15T03:08:48.671627",
+  "frozen_at": "2026-08-21T03:52:44.949057",
   "slug": "generate-subtitles",
   "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
   "llm_base_url": "https://api.deepseek.com",
-  "pipeline_commit": "d24660ead0335c4eaf7910aa39f32b995900df51",
+  "pipeline_commit": "58482ba0419fe7d973a8578bfc862b0a34e62fb1",
   "dependencies": [
     "annotated-types==0.8.0",
     "anyio==4.14.2",
