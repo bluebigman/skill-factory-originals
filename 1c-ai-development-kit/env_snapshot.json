@@ -1,9 +1,9 @@
 {
-  "frozen_at": "2026-08-13T21:42:20.925707",
+  "frozen_at": "2026-08-20T21:43:03.436814",
   "slug": "1c-ai-development-kit",
   "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
   "llm_base_url": "https://api.deepseek.com",
-  "pipeline_commit": "14eb08633676fa17bad20298f0ff1365fb581850",
+  "pipeline_commit": "58482ba0419fe7d973a8578bfc862b0a34e62fb1",
   "dependencies": [
     "annotated-types==0.8.0",
     "anyio==4.14.2",
