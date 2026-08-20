@@ -1,0 +1,33 @@
+{
+  "timestamp": "20260820_081217",
+  "slug": "scrapecraft",
+  "spec": {
+    "slug": "scrapecraft",
+    "name": "scrapecraft",
+    "description": "用自然语言构建、测试并部署网页采集流程的可视化编辑器。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 打开页面: https://example.com/products",
+      "2. 提取字段: name, price, review_count",
+      "3. 翻页: 3 次 (CSS 选择器: .pagination .next)",
+      "4. 输出格式: JSON",
+      "1. 描述需求 → 2. 生成流程 → 3. 单样本试运行 → 4. 校验字段 → 5. 批量执行 → 6. 抽查结果",
+      "1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于数据采集的合法性、目标网站的使用条款遵守情况。",
+      "2. **禁止反向工程**：不得对本 Skill 的代码、流程定义进行反向工程、反编译或试图提取底层算法。",
+      "3. **合规使用**：使用者应确保采集行为符合相关法律法规及目标网站的 robots.txt 规定。",
+      "4. **免责声明**：本 Skill 按\"现状\"提供，不附带任何明示或暗示的保证。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "6b4a4a486def0b00",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
