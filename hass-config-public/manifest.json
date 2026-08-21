@@ -1,0 +1,38 @@
+{
+  "timestamp": "20260821_134154",
+  "slug": "hass-config-public",
+  "spec": {
+    "slug": "hass-config-public",
+    "name": "hass-config-public",
+    "description": "解析Home Assistant仪表盘配置，提取结构化信息并生成可视化方案建议。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. [建议内容]（优先级：高/中/低）",
+      "1. 准备一个 YAML 格式的仪表盘配置文件",
+      "2. 运行单样本试运行命令（见 3.2 Step 2）",
+      "3. 查看输出的概览部分，确认解析成功",
+      "4. 阅读\"可视化建议\"章节，获取优化思路",
+      "5. 如有错误码，按第五节表格逐项修正",
+      "1. 将多个配置文件放入同一目录",
+      "2. 使用 `--input-dir` 参数批量执行",
+      "3. 编写脚本解析输出的 Markdown 报告",
+      "4. 结合 `entity_count` 和 `card_types` 做配置复杂度评估",
+      "5. 将建议列表接入自动化流程，生成优化工单",
+      "2. 建议为 `history-graph` 卡片增加 `hours_to_show: 24` 参数（优先级：中）",
+      "3. **合规使用**：使用者应遵守当地法律法规及 Home Assistant 相关开源协议。不得将本 Skill 用于任何非法目的。",
+      "4. **免责声明**：本 Skill 按\"现状\"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性保证。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "9ab0bee73a1d6ff9",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}

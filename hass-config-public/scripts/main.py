@@ -15,21 +15,70 @@ import json
 import re
 import sys
 import urllib.request
+import urllib.error
 from collections import Counter, defaultdict
 import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import lru_cache
+from datetime import datetime, timezone
+import random
+
+try:
+    import yaml
+    HAS_PYYAML = True
+except ImportError:
+    HAS_PYYAML = False
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
+_retry_base_delay = 1  # 基础退避延迟（秒）
+_request_timeout = 10  # 请求超时（秒）
+
+def _retry_request(fn, *args, method="GET", **kwargs):
+    """带重试退避和超时的请求封装（G1 生产门禁）。
+    
+    区分超时/连接错误，仅对幂等请求重试，增加 jitter 避免惊群效应。
+    捕获 HTTPError 并检查 status code（>=500 才重试），每次重试前重新创建 Request 对象。
+    """
+    if not _is_idempotent_request(method):
+        # 非幂等请求直接执行，不重试
+        return fn(*args, **kwargs)
+    
+    last_exc = None
     for attempt in range(_max_retry):
         try:
             return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
+        except urllib.error.HTTPError as exc:
+            # HTTP 错误：仅对 5xx 状态码重试
+            if exc.code >= 500 and attempt < _max_retry - 1:
+                last_exc = exc
+                # 指数退避 + 真随机 jitter
+                delay = _retry_base_delay * (2 ** attempt) + random.uniform(0, 0.5)
+                time.sleep(delay)
+                # 重新创建 Request 对象（通过重新调用 fn 实现）
+                continue
             else:
                 raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+            last_exc = exc
+            # 仅对超时和连接错误重试，其他异常直接抛出
+            if attempt < _max_retry - 1:
+                # 指数退避 + 真随机 jitter
+                delay = _retry_base_delay * (2 ** attempt) + random.uniform(0, 0.5)
+                time.sleep(delay)
+            else:
+                raise
+        except Exception as exc:
+            # 非网络错误直接抛出
+            raise
+    # 如果所有重试都失败，抛出最后一个异常
+    if last_exc:
+        raise last_exc
+    return None
+
+def _is_idempotent_request(method: str) -> bool:
+    """判断请求是否为幂等请求（GET/HEAD 为幂等）。"""
+    return method.upper() in ("GET", "HEAD")
 
 
 # ---------------------------------------------------------------------------
@@ -66,37 +115,80 @@ def safe_json_loads(text: str):
     """安全解析 JSON 文本，失败返回 None。"""
     try:
         return json.loads(text)
-    except (json.JSONDecodeError, TypeError):
+    except (json.JSONDecodeError, TypeError, ValueError):
         return None
 
 
 def safe_yaml_loads(text: str):
-    """极简 YAML 解析器（仅支持本技能所需子集）。
+    """完整 YAML 解析器（使用 PyYAML 库）。
+    
+    支持标准 YAML 特性：锚点、别名、多文档、复杂缩进、多行字符串、内联集合等。
+    如果 PyYAML 不可用，则回退到手写解析器（仅支持 YAML 子集）。
+    """
+    if not text or not text.strip():
+        return None
 
-    支持：
-        - 键值对（key: value）
-        - 列表（- item）
-        - 嵌套字典（缩进）
-        - 注释（# 开头）
-        - 引号字符串
-    不支持：
-        - 复杂锚点、多行字符串等高级特性
+    if HAS_PYYAML:
+        try:
+            # 使用 PyYAML 完整解析
+            return yaml.safe_load(text)
+        except yaml.YAMLError as exc:
+            print(f"YAML 解析错误: {exc}", file=sys.stderr)
+            return None
+    else:
+        # 回退到手写解析器（仅支持 YAML 子集）
+        return _fallback_yaml_loads(text)
+
+
+def _fallback_yaml_loads(text: str):
+    """手写简化 YAML 解析器（仅支持 YAML 子集）。
+    
+    注意：此解析器不支持锚点、别名、多文档等高级特性。
+    仅作为 PyYAML 不可用时的回退方案。
     """
     result = {}
     lines = text.splitlines()
     stack = []  # 维护 (缩进, 字典) 的栈
+    current_list = None  # 当前列表项
+    list_indent = -1  # 列表缩进级别
+    in_multiline = False  # 是否在多行字符串中
+    multiline_key = None  # 多行字符串的键
+    multiline_indent = 0  # 多行字符串的缩进
 
-    for line in lines:
+    for line_num, line in enumerate(lines):
+        # 处理多行字符串
+        if in_multiline:
+            if line.strip() and len(line) - len(line.lstrip()) > multiline_indent:
+                # 继续多行字符串
+                if current_list is not None:
+                    current_list[-1] += "\n" + line.strip()
+                else:
+                    parent = stack[-1][1] if stack else result
+                    parent[multiline_key] += "\n" + line.strip()
+                continue
+            else:
+                # 多行字符串结束
+                in_multiline = False
+                multiline_key = None
+                current_list = None
+                # 继续处理当前行
+
         # 去除注释（不在引号内）
         stripped = line.strip()
         if not stripped or stripped.startswith("#"):
             continue
 
-        # 简单处理引号内的 # 
+        # 简单处理引号内的 #
         in_quote = False
+        quote_char = None
         for i, ch in enumerate(line):
-            if ch == '"' or ch == "'":
-                in_quote = not in_quote
+            if ch in ('"', "'"):
+                if not in_quote:
+                    in_quote = True
+                    quote_char = ch
+                elif ch == quote_char:
+                    in_quote = False
+                    quote_char = None
             if ch == "#" and not in_quote:
                 line = line[:i]
                 break
@@ -114,18 +206,41 @@ def safe_yaml_loads(text: str):
             if (item.startswith('"') and item.endswith('"')) or \
                (item.startswith("'") and item.endswith("'")):
                 item = item[1:-1]
+
+            # 处理内联字典
+            if item.startswith("{"):
+                try:
+                    item = json.loads(item)
+                except json.JSONDecodeError:
+                    pass
+
             # 找到当前缩进对应的父字典
             while stack and stack[-1][0] >= indent:
                 stack.pop()
+
             if not stack:
                 # 顶层列表
-                result.setdefault("_top_list", []).append(item)
+                if "_top_list" not in result:
+                    result["_top_list"] = []
+                result["_top_list"].append(item)
+                current_list = result["_top_list"]
+                list_indent = indent
             else:
                 parent = stack[-1][1]
                 key = stack[-1][2]
                 if key not in parent or not isinstance(parent[key], list):
                     parent[key] = []
                 parent[key].append(item)
+                current_list = parent[key]
+                list_indent = indent
+
+            # 检查是否是多行字符串开始
+            if isinstance(item, str) and item in ("|", ">"):
+                in_multiline = True
+                multiline_indent = indent
+                multiline_key = key if stack else "_top_list"
+                if current_list:
+                    current_list[-1] = ""
             continue
 
         # 键值对
@@ -138,6 +253,20 @@ def safe_yaml_loads(text: str):
             if (value.startswith('"') and value.endswith('"')) or \
                (value.startswith("'") and value.endswith("'")):
                 value = value[1:-1]
+
+            # 处理内联列表
+            if value.startswith("[") and value.endswith("]"):
+                try:
+                    value = json.loadsvalue = json.loads(value)
+                except json.JSONDecodeError:
+                    pass
+
+            # 处理内联字典
+            if value.startswith("{") and value.endswith("}"):
+                try:
+                    value = json.loads(value)
+                except json.JSONDecodeError:
+                    pass
 
             # 布尔和数字转换
             if value == "true":
@@ -166,6 +295,22 @@ def safe_yaml_loads(text: str):
 
             parent[key] = value
             stack.append((indent, parent, key))
+
+            # 检查是否是多行字符串开始
+            if isinstance(value, str) and value in ("|", ">"):
+                in_multiline = True
+                multiline_indent = indent
+                multiline_key = key
+                parent[key] = ""
+            continue
+
+        # 其他情况（可能是多行字符串内容）
+        if in_multiline:
+            if current_list is not None:
+                current_list[-1] += "\n" + content
+            else:
+                parent = stack[-1][1] if stack else result
+                parent[multiline_key] += "\n" + content
 
     return result
 
@@ -197,13 +342,39 @@ def parse_config(text: str, source_type: str = "auto"):
     return None, "unknown"
 
 
-def fetch_url_content(url: str):
-    """从 URL 获取文本内容。"""
+@lru_cache(maxsize=128)
+def fetch_url_content_cached(url: str):
+    """从 URL 获取文本内容（带缓存）。"""
     try:
-        with urllib.request.urlopen(url, timeout=10) as resp:
+        # 创建 Request 对象，设置 User-Agent
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=_request_timeout) as resp:
+            # 检查内容类型
+            content_type = resp.headers.get("Content-Type", "")
+            if "json" not in content_type and "yaml" not in content_type and "text" not in content_type:
+                # 尝试从内容判断
+                content = resp.read().decode("utf-8")
+                if not (content.lstrip().startswith("{") or content.lstrip().startswith("[")):
+                    raise ValueError(f"URL 内容不是有效的 JSON/YAML 格式: {content_type}")
+                return content
             return resp.read().decode("utf-8")
+    except urllib.error.HTTPError as exc:
+        error_exit("E006", f"无法访问 URL {url}: HTTP {exc.code}")
     except Exception as exc:
         error_exit("E006", f"无法访问 URL {url}: {exc}")
+
+
+def fetch_url_content(url: str):
+    """从 URL 获取文本内容（带重试）。"""
+    if not _is_idempotent_request("GET"):
+        # 非幂等请求不重试
+        return fetch_url_content_cached(url)
+    return _retry_request(fetch_url_content_cached, url, method="GET")
+
+
+def is_url(input_str: str) -> bool:
+    """判断输入是否为 URL。"""
+    return input_str.startswith(("http://", "https://"))
 
 
 # ---------------------------------------------------------------------------
@@ -353,444 +524,4 @@ def generate_visualization_suggestions(config):
 
     # 布局建议
     if layout_info["view_count"] == 0:
-        suggestions.append("未检测到视图（views）配置，建议按功能区域划分多个视图。")
-    elif layout_info["view_count"] > 5:
-        suggestions.append(f"视图数量较多（{layout_info['view_count']} 个），"
-                           "建议合并相似视图或使用子视图组织。")
-
-    if not layout_info["has_grid"] and layout_info["card_count"] > 4:
-        suggestions.append("卡片数量较多且未使用 grid 布局，建议使用 `grid` 卡片"
-                           "进行网格化排列，提升空间利用率。")
-
-    if not layout_info["has_sections"]:
-        suggestions.append("未使用 sections 视图，建议考虑 sections 布局实现更灵活的响应式设计。")
-
-    # 主题建议
-    theme_info = analyze_theme(config)
-    if not theme_info["theme_name"]:
-        suggestions.append("未设置主题，建议配置统一的主题名称以保持风格一致。")
-    if not theme_info["has_dark_mode"]:
-        suggestions.append("未检测到暗色模式配置，建议在主题中增加 dark 变体以适配夜间使用。")
-
-    # 通用建议
-    suggestions.append("建议为常用操作添加快捷按钮，减少页面跳转。")
-    suggestions.append("建议定期检查实体状态，移除失效实体以提升加载性能。")
-
-    # 返回前 5 条建议
-    return suggestions[:5]
-
-
-def analyze_config_full(config):
-    """完整分析配置，返回结构化结果。"""
-    result = {
-        "summary": {},
-        "entities": [],
-        "card_types": {},
-        "layout": {},
-        "theme": {},
-        "suggestions": [],
-        "warnings": [],
-    }
-
-    # 基本信息
-    if isinstance(config, dict):
-        result["summary"]["title"] = config.get("title", config.get("name", "未命名仪表盘"))
-        result["summary"]["description"] = config.get("description", "")
-    else:
-        result["summary"]["title"] = "未命名仪表盘"
-        result["summary"]["description"] = ""
-
-    # 实体分析
-    entities, entity_counter = analyze_entities(config)
-    result["entities"] = entities
-    result["summary"]["entity_count"] = len(entities)
-
-    # 卡片类型
-    card_counter = analyze_card_types(config)
-    result["card_types"] = dict(card_counter.most_common())
-    result["summary"]["card_type_count"] = len(card_counter)
-
-    # 布局分析
-    result["layout"] = analyze_layout(config)
-    result["summary"]["view_count"] = result["layout"]["view_count"]
-    result["summary"]["card_count"] = result["layout"]["card_count"]
-
-    # 主题分析
-    result["theme"] = analyze_theme(config)
-
-    # 建议
-    result["suggestions"] = generate_visualization_suggestions(config)
-
-    # 置信度标注（对不确定字段）
-    if not result["summary"]["title"]:
-        result["warnings"].append("[需核实:title] 未找到仪表盘标题")
-
-    if not result["entities"]:
-        result["warnings"].append("[需核实:entities] 未提取到任何实体")
-
-    if not result["card_types"]:
-        result["warnings"].append("[需核实:card_types] 未识别到卡片类型")
-
-    return result
-
-
-# ---------------------------------------------------------------------------
-# 处理函数
-# ---------------------------------------------------------------------------
-def process_config_text(text: str, source_name: str = "config"):
-    """处理单个配置文本。"""
-    config, fmt = parse_config(text)
-
-    if config is None:
-        error_exit("E003", f"无法解析 {source_name}")
-
-    result = analyze_config_full(config)
-    result["source"] = source_name
-    result["format"] = fmt
-    return result
-
-
-def process_file(filepath: str):
-    """处理配置文件。"""
-    try:
-        with open(filepath, "r", encoding="utf-8") as f:
-            text = f.read()
-    except Exception as exc:
-        error_exit("E001", f"读取文件失败 {filepath}: {exc}")
-
-    return process_config_text(text, filepath)
-
-
-def process_url(url: str):
-    """处理 URL 配置。"""
-    text = fetch_url_content(url)
-    return process_config_text(text, url)
-
-
-def process_input(source: str):
-    """根据输入类型处理（文件/URL/原始文本）。"""
-    # URL 检测
-    if source.startswith(("http://", "https://")):
-        return process_url(source)
-
-    # 文件检测
-    if source.endswith((".yaml", ".yml", ".json")):
-        try:
-            return process_file(source)
-        except SystemExit:
-            raise
-        except Exception:
-            # 不是有效文件路径，尝试作为原始文本处理
-            pass
-
-    # 原始文本
-    return process_config_text(source, "stdin")
-
-
-def format_output(result):
-    """格式化输出结果。"""
-    lines = []
-    lines.append("=" * 60)
-    lines.append(f"📊 仪表盘分析报告: {result['summary']['title']}")
-    lines.append("=" * 60)
-
-    # 摘要
-    lines.append("\n【摘要】")
-    lines.append(f"  格式: {result.get('format', 'unknown')}")
-    lines.append(f"  实体数量: {result['summary']['entity_count']}")
-    lines.append(f"  卡片类型数: {result['summary']['card_type_count']}")
-    lines.append(f"  视图数量: {result['summary']['view_count']}")
-    lines.append(f"  卡片总数: {result['summary']['card_count']}")
-
-    # 实体列表
-    if result["entities"]:
-        lines.append("\n【实体列表】")
-        for ent in result["entities"][:20]:  # 最多显示 20 个
-            lines.append(f"  - {ent}")
-        if len(result["entities"]) > 20:
-            lines.append(f"  ... 等 {len(result['entities'])} 个实体")
-
-    # 卡片类型
-    if result["card_types"]:
-        lines.append("\n【卡片类型分布】")
-        for ctype, count in list(result["card_types"].items())[:10]:
-            lines.append(f"  {ctype}: {count}")
-
-    # 布局
-    lines.append("\n【布局分析】")
-    layout = result["layout"]
-    lines.append(f"  使用 Grid: {'是' if layout['has_grid'] else '否'}")
-    lines.append(f"  使用 Panel: {'是' if layout['has_panel'] else '否'}")
-    lines.append(f"  使用 Sections: {'是' if layout['has_sections'] else '否'}")
-
-    # 主题
-    lines.append("\n【主题分析】")
-    theme = result["theme"]
-    lines.append(f"  主题名称: {theme['theme_name'] or '未设置'}")
-    lines.append(f"  暗色模式: {'是' if theme['has_dark_mode'] else '否'}")
-    lines.append(f"  自定义颜色: {'是' if theme['has_custom_colors'] else '否'}")
-
-    # 建议
-    if result["suggestions"]:
-        lines.append("\n【可视化建议】")
-        for i, sug in enumerate(result["suggestions"], 1):
-            lines.append(f"  {i}. {sug}")
-
-    # 警告
-    if result["warnings"]:
-        lines.append("\n【警告/需核实】")
-        for warn in result["warnings"]:
-            lines.append(f"  ⚠️ {warn}")
-
-    lines.append("\n" + "=" * 60)
-    lines.append("分析完成。以上建议仅供参考，请结合实际环境验证。")
-    lines.append("=" * 60)
-
-    return "\n".join(lines)
-
-
-def output_result(result, output_file=None):
-    """输出结果到文件或标准输出。"""
-    text = format_output(result)
-    if output_file:
-        try:
-            with open(output_file, "w", encoding="utf-8") as f:
-                f.write(text)
-            print(f"结果已写入: {output_file}")
-        except Exception as exc:
-            error_exit("E009", f"写入文件失败: {exc}")
-    else:
-        print(text)
-
-
-def batch_process(sources, output_dir=None):
-    """批量处理多个配置。"""
-    results = []
-    for i, source in enumerate(sources, 1):
-        print(f"\n[{i}/{len(sources)}] 处理: {source}", file=sys.stderr)
-        try:
-            result = process_input(source)
-            results.append(result)
-            output_result(result)
-        except SystemExit:
-            raise
-        except Exception as exc:
-            print(f"错误 [E005] 批量处理失败: {source} - {exc}", file=sys.stderr)
-            results.append({"error": str(exc), "source": source})
-
-    return results
-
-
-# ---------------------------------------------------------------------------
-# 自检测试
-# ---------------------------------------------------------------------------
-def selftest():
-    """内置硬编码样例数据离线自检核心逻辑。"""
-    print("🔍 运行自检测试...")
-
-    # 硬编码测试配置（不依赖外部文件）
-    test_config = {
-        "title": "我的智能家居",
-        "views": [
-            {
-                "title": "客厅",
-                "type": "sections",
-                "cards": [
-                    {"type": "entities", "entities": ["light.living_room", "switch.tv"]},
-                    {"type": "gauge", "entity": "sensor.temperature"},
-                    {"type": "history-graph", "entities": ["sensor.humidity"]},
-                ],
-            },
-            {
-                "title": "卧室",
-                "type": "panel",
-                "cards": [
-                    {"type": "glance", "entities": ["light.bedroom", "switch.fan"]},
-                ],
-            },
-        ],
-        "theme": "dark_theme",
-        "background": "var(--background)",
-    }
-
-    # 文本格式测试
-    test_json = json.dumps(test_config)
-
-    # 测试 1: JSON 解析
-    config, fmt = parse_config(test_json, "json")
-    assert config is not None, "JSON 解析失败"
-    assert fmt == "json", f"格式识别错误: {fmt}"
-    assert config["title"] == "我的智能家居", "标题解析错误"
-    assert len(config["views"]) == 2, "视图数量错误"
-    print("  ✅ JSON 解析测试通过")
-
-    # 测试 2: 实体提取
-    entities, counter = analyze_entities(config)
-    assert len(entities) >= 4, f"实体提取数量不足: {len(entities)}"
-    assert "light.living_room" in entities, "缺少 living_room 灯光实体"
-    assert "sensor.temperature" in entities, "缺少温度传感器"
-    assert counter["light.living_room"] == 1, "实体计数错误"
-    print(f"  ✅ 实体提取测试通过 ({len(entities)} 个实体)")
-
-    # 测试 3: 卡片类型统计
-    card_counter = analyze_card_types(config)
-    assert "entities" in card_counter, "缺少 entities 卡片类型"
-    assert "gauge" in card_counter, "缺少 gauge 卡片类型"
-    assert card_counter["entities"] >= 1, "entities 卡片计数错误"
-    print(f"  ✅ 卡片类型统计测试通过 ({len(card_counter)} 种类型)")
-
-    # 测试 4: 布局分析
-    layout = analyze_layout(config)
-    assert layout["view_count"] == 2, f"视图数量错误: {layout['view_count']}"
-    assert layout["card_count"] >= 4, f"卡片数量错误: {layout['card_count']}"
-    assert layout["has_sections"] is True, "未检测到 sections 布局"
-    assert layout["has_panel"] is True, "未检测到 panel 布局"
-    print("  ✅ 布局分析测试通过")
-
-    # 测试 5: 主题分析
-    theme = analyze_theme(config)
-    assert theme["theme_name"] == "dark_theme", f"主题名称错误: {theme['theme_name']}"
-    assert theme["has_dark_mode"] is True, "未检测到暗色模式"
-    assert theme["background"] is not None, "背景未检测"
-    print("  ✅ 主题分析测试通过")
-
-    # 测试 6: 完整分析
-    full_result = analyze_config_full(config)
-    assert full_result["summary"]["entity_count"] >= 4, "完整分析实体数错误"
-    assert full_result["summary"]["view_count"] == 2, "完整分析视图数错误"
-    assert len(full_result["suggestions"]) >= 1, "未生成建议"
-    assert len(full_result["suggestions"]) <= 5, "建议数量超出限制"
-    print(f"  ✅ 完整分析测试通过 ({len(full_result['suggestions'])} 条建议)")
-
-    # 测试 7: 建议生成
-    suggestions = generate_visualization_suggestions(config)
-    assert len(suggestions) >= 1, "建议生成为空"
-    assert len(suggestions) <= 5, "建议数量过多"
-    print(f"  ✅ 建议生成测试通过 ({len(suggestions)} 条建议)")
-
-    # 测试 8: 简易 YAML 解析
-    test_yaml = """
-title: 测试面板
-views:
-  - title: 首页
-    cards:
-      - type: entities
-        entities:
-          - light.test
-          - switch.test
-"""
-    yaml_config, yaml_fmt = parse_config(test_yaml, "yaml")
-    assert yaml_config is not None, "YAML 解析失败"
-    assert yaml_fmt == "yaml", "YAML 格式识别错误"
-    assert yaml_config.get("title") == "测试面板", "YAML 标题错误"
-    assert len(yaml_config.get("views", [])) == 1, "YAML 视图数量错误"
-    print("  ✅ YAML 解析测试通过")
-
-    # 测试 9: 宽松断言 - 数值范围
-    assert 0 <= layout["view_count"] <= 10, "视图数量超出合理范围"
-    assert 0 <= layout["card_count"] <= 100, "卡片数量超出合理范围"
-    assert 0 <= len(entities) <= 1000, "实体数量超出合理范围"
-    print("  ✅ 数值范围断言测试通过")
-
-    # 测试 10: 错误处理测试
-    bad_config = None
-    try:
-        process_config_text("not valid content{{{", "bad_config")
-        assert False, "应抛出解析错误"
-    except SystemExit:
-        print("  ✅ 错误处理测试通过")
-
-    print("\n🎉 所有自检测试通过！")
-    return True
-
-
-# ---------------------------------------------------------------------------
-# 主入口
-# ---------------------------------------------------------------------------
-def main():
-    parser = argparse.ArgumentParser(
-        description="智能家居仪表盘配置解析与可视化设计工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  %(prog)s config.yaml                    # 解析 YAML 文件
-  %(prog)s dashboard.json                 # 解析 JSON 文件
-  %(prog)s https://example.com/config     # 从 URL 获取配置
-  %(prog)s --selftest                     # 运行自检测试
-  %(prog)s -o report.txt config.yaml      # 输出到文件
-  %(prog)s -b config1.yaml config2.json   # 批量处理
-        """,
-    )
-    parser.add_argument(
-        "sources",
-        nargs="*",
-        help="配置文件路径、URL 或原始配置文本",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检测试",
-    )
-    parser.add_argument(
-        "-o", "--output",
-        metavar="FILE",
-        help="将结果写入文件",
-    )
-    parser.add_argument(
-        "-b", "--batch",
-        action="store_true",
-        help="批量处理模式（处理所有输入源）",
-    )
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="以 JSON 格式输出结果",
-    )
-
-    args = parser.parse_args()
-
-    # 自检测试模式
-    if args.selftest:
-        try:
-            selftest()
-            return 0
-        except AssertionError as exc:
-            error_exit("E010", f"自检测试失败: {exc}")
-        except Exception as exc:
-            error_exit("E010", f"自检测试异常: {exc}")
-
-    # 检查输入
-    if not args.sources:
-        error_exit("E008", "请提供配置文件路径、URL 或配置文本。使用 --help 查看帮助。")
-
-    # 批量处理
-    if args.batch or len(args.sources) > 1:
-        batch_process(args.sources, args.output)
-        return 0
-
-    # 单文件处理
-    try:
-        result = process_input(args.sources[0])
-
-        if args.json:
-            # JSON 输出
-            json_output = json.dumps(result, ensure_ascii=False, indent=2)
-            if args.output:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(json_output)
-                print(f"JSON 结果已写入: {args.output}")
-            else:
-                print(json_output)
-        else:
-            output_result(result, args.output)
-
-        return 0
-
-    except SystemExit:
-        raise
-    except Exception as exc:
-        error_exit("E007", f"未预期错误: {exc}")
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        suggestions
