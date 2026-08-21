@@ -1,0 +1,43 @@
+{
+  "timestamp": "20260821_140430",
+  "slug": "scientific-agent-skills",
+  "spec": {
+    "slug": "scientific-agent-skills",
+    "name": "scientific-agent-skills",
+    "description": "将科研数据、文件或URL转化为结构化结果，辅助科学分析。",
+    "cli_interface": [],
+    "capability_outline": [
+      "- 输出文件命名规则：`原文件名_processed.ext`",
+      "1. 阅读「能力边界速查卡」了解基本功能",
+      "2. 准备一个 CSV 文件",
+      "3. 触发 `科研数据处理` + 文件路径",
+      "4. 查看输出预览，确认格式",
+      "5. 使用默认参数完成处理",
+      "1. 学习「标准执行流程」中的参数配置",
+      "2. 自定义字段映射字典",
+      "3. 使用批量模式处理多文件",
+      "4. 解读置信度评分和数据质量报告",
+      "5. 结合外部工具（如 pandas）进一步分析",
+      "1. 修改 schema 定义以匹配特定领域标准",
+      "2. 编写自定义清洗规则（如单位换算）",
+      "3. 集成到自动化工作流中",
+      "4. 扩展支持自定义文件格式",
+      "2. **数据安全**：使用者应确保输入数据不包含个人隐私信息、商业机密或受法律保护的数据。本 Skill 不提供数据加密传输功能，请勿处理敏感数据。",
+      "3. **禁止反向工程**：使用者不得对本 Skill 进行反向工程、反编译、破解或试图提取底层算法。不得移除、修改或遮蔽文档中的任何版权声明。",
+      "4. **合规使用**：使用者应遵守所在国家/地区的法律法规，不得将本 Skill 用于非法用途，包括但不限于数据窃取、侵犯他人知识产权等行为。",
+      "5. **免责声明**：本 Skill 按\"原样\"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权保证。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "fcf0be0c0d49fbea",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
