@@ -359,20 +359,20 @@ def build_parser() -> argparse.ArgumentParser:
 
     # 图像生成
     img_parser = subparsers.add_parser("图像生成", help="生成静态图像")
-    img_parser.add_argument("--prompt", required=True, help="生成提示词")
+    img_parser.add_argument("--prompt", required=False, help="生成提示词")
     img_parser.add_argument("--steps", type=int, default=30, help="采样步数（默认30）")
     img_parser.add_argument("--width", type=int, default=1024, help="图像宽度")
     img_parser.add_argument("--height", type=int, default=1024, help="图像高度")
 
     # 视频生成
     vid_parser = subparsers.add_parser("视频生成", help="生成短视频片段")
-    vid_parser.add_argument("--prompt", required=True, help="生成提示词")
+    vid_parser.add_argument("--prompt", required=False, help="生成提示词")
     vid_parser.add_argument("--frames", type=int, default=48, help="帧数（默认48）")
     vid_parser.add_argument("--fps", type=int, default=24, help="帧率（默认24）")
 
     # 音频生成
     aud_parser = subparsers.add_parser("音频生成", help="生成音效或配乐")
-    aud_parser.add_argument("--prompt", required=True, help="生成提示词")
+    aud_parser.add_argument("--prompt", required=False, help="生成提示词")
     aud_parser.add_argument("--duration", type=int, default=10, help="时长秒数（默认10）")
 
     # 工作流自检

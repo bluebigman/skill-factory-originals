@@ -271,8 +271,8 @@ class ContentParser:
                     ))
                 if items:
                     return items
-            except Exception:
-                pass  # 表格解析失败，降级
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # 表格解析失败，降级
 
         # 无表格或解析失败，按标题分段
         segments = re.split(r'\n(?=#{1,6}\s)', content)

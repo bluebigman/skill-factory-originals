@@ -5,6 +5,7 @@ import argparse
 import json
 import sys
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 def run_selftest() -> int:
@@ -25,7 +26,8 @@ def run_selftest() -> int:
     # Test 2: File operations
     try:
         test_file = Path("test_tmp.txt")
-        test_file.write_text("hello")
+        if not dry_run or getattr(args, "force", False):
+            test_file.write_text("hello")
         assert test_file.read_text() == "hello"
         test_file.unlink()
         tests_passed += 1
@@ -59,7 +61,12 @@ def main() -> int:
         action="version",
         version="1.0.0",
     )
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = parser.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         return run_selftest()

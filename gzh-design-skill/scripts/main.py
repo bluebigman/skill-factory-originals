@@ -5,6 +5,7 @@ import sys
 import tempfile
 import re
 from typing import Dict, List, Optional, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # --- 技能核心逻辑 ---
 
@@ -130,7 +131,16 @@ def main():
     parser.add_argument("--format", type=str, default="text", choices=["text", "json", "markdown"], help="输出格式")
     parser.add_argument("--output", type=str, help="输出文件路径（可选）")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         success = run_selftest()

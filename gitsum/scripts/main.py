@@ -257,7 +257,7 @@ def _parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         help="运行内置离线自检（不读外部文件、不访问网络）",
     )
     parser.add_argument(
-        "inputs",
+        "--inputs",
         nargs="*",
         help="待处理的输入文本（可多条）",
     )

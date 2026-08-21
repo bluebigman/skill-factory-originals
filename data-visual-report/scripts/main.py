@@ -31,6 +31,7 @@ import sys
 import tempfile
 from datetime import timezone, datetime
 from typing import Any, Dict, List, Optional
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -494,7 +495,7 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
         description="数据洞察 · 图表报告自动生成（Clean-Room 独立实现）",
         epilog="示例: python main.py input.csv -v 销售额 -c 地区 -o report.md -f markdown",
     )
-    parser.add_argument("input", nargs="?", help="输入数据文件（CSV/JSON）")
+    parser.add_argument("--input", nargs="?", help="输入数据文件（CSV/JSON）")
     # -v 不再设为必选，因为 --selftest 模式不需要
     parser.add_argument("-v", "--value-col", help="数值列名")
     parser.add_argument("-c", "--category-col", help="分类列名（可选，用于占比统计）")
@@ -502,6 +503,9 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     parser.add_argument("-o", "--output", help="输出文件路径（默认输出到 stdout）")
     parser.add_argument("-f", "--format", choices=["text", "markdown", "html"], default="text", help="输出格式")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     return parser.parse_args(argv)
 
 

@@ -9,6 +9,7 @@ from datetime import datetime, timezone
 import datetime as _dt
 import argparse
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 def safe_delete_file(filepath):
     """Safely delete a file with fallback mechanisms"""
@@ -181,7 +182,8 @@ def run_selftest():
     # Test file operations
     test_dir = Path(tempfile.mkdtemp())
     test_file = test_dir / "test.txt"
-    test_file.write_text("Test content")
+    if not dry_run or getattr(args, "force", False):
+        test_file.write_text("Test content")
     
     delete_result = safe_delete_file(test_file)
     assert delete_result["success"] == True, "File deletion failed"
@@ -200,7 +202,16 @@ def main():
     parser.add_argument("--reverse", type=str, help="反转字符串")
     parser.add_argument("--delete", type=str, help="安全删除文件")
     
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     if args.selftest:
         run_selftest()

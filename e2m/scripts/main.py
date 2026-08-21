@@ -33,6 +33,7 @@ import sys
 import urllib.parse
 from datetime import timezone, datetime
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -251,8 +252,8 @@ def convert_pdf_to_markdown(content: bytes, source_name: str = "") -> str:
             for t in texts:
                 try:
                     text_parts.append(t.decode("utf-8", errors="ignore"))
-                except Exception:
-                    pass
+                except Exception as e:
+                    print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
 
         if not text_parts:
             fail("E008", "PDF 无文本层或无法提取文本")
@@ -337,7 +338,8 @@ def process_input(input_path: str = "", input_url: str = "", input_text: str = "
 
     if output_path:
         try:
-            Path(output_path).write_text(result, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                Path(output_path).write_text(result, encoding="utf-8")
         except Exception as exc:
             fail("E009", f"写入 {output_path} 失败: {exc}")
 
@@ -439,7 +441,16 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     parser.add_argument("--version", action="version", version="e2m 1.0.2")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         return run_selftest()

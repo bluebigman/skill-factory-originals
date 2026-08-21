@@ -25,6 +25,7 @@ import urllib.request
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 import time
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
@@ -375,7 +376,7 @@ def main() -> None:
         epilog="示例: glowstick data.csv | glowstick https://example.com/data.json | glowstick --selftest"
     )
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="输入文件路径或URL"
     )
@@ -390,7 +391,16 @@ def main() -> None:
         version="glowstick 1.0.2"
     )
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

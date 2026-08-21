@@ -567,7 +567,7 @@ def main() -> int:
         help="以 JSON 格式输出结果",
     )
     parser.add_argument(
-        "sql_text",
+        "--sql_text",
         nargs="?",
         default=None,
         help="待处理的 SQL 查询文本",

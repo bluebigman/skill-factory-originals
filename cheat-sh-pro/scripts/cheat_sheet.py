@@ -12,6 +12,7 @@ import re
 import sys
 import tempfile
 from datetime import datetime, timezone
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 CHEATS = {
     "git": [
@@ -300,7 +301,12 @@ def main():
     parser.add_argument("--export", type=str, metavar="FILE", help="导出全部速查到 Markdown 文件")
     parser.add_argument("--list-domains", action="store_true", help="列出所有可用领域")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = parser.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检
     if args.selftest:

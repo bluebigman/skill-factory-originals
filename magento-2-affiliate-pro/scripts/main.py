@@ -29,6 +29,7 @@ import json
 import os
 import sys
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -454,7 +455,7 @@ def main(argv=None):
         description="Magento2 联盟营销配置审查工具 (magento-2-affiliate-pro)"
     )
     parser.add_argument(
-        "config_path",
+        "--config_path",
         nargs="?",
         help="配置文件路径（支持 .json / .yaml / .yml）"
     )
@@ -469,7 +470,16 @@ def main(argv=None):
         help="仅输出汇总信息，不输出每条检查详情"
     )
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args(argv)
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

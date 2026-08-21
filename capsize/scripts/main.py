@@ -19,6 +19,7 @@ import re
 import sys
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Optional, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 错误码定义
@@ -638,7 +639,16 @@ def main():
     parser.add_argument("--output", "-o", help="输出文件路径 (JSON格式)")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         success = run_selftest()

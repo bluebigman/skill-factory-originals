@@ -433,8 +433,8 @@ def selftest() -> int:
     # G3 核心链路自检
     try:
         parse_lpr_data("")  # G3
-    except Exception:
-        pass  # G3
+    except Exception as e:
+        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # G3
 
     return 0
 

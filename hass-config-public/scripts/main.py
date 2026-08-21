@@ -17,6 +17,7 @@ import sys
 import urllib.request
 from collections import Counter, defaultdict
 import time
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
@@ -722,7 +723,7 @@ def main():
         """,
     )
     parser.add_argument(
-        "sources",
+        "--sources",
         nargs="*",
         help="配置文件路径、URL 或原始配置文本",
     )
@@ -747,7 +748,16 @@ def main():
         help="以 JSON 格式输出结果",
     )
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检测试模式
     if args.selftest:

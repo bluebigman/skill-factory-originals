@@ -543,25 +543,25 @@ def main() -> int:
 
     # search 命令
     search_parser = subparsers.add_parser("search", help="搜索代码片段")
-    search_parser.add_argument("query", type=str, help="搜索关键词")
+    search_parser.add_argument("--query", type=str, help="搜索关键词")
 
     # explain 命令
     explain_parser = subparsers.add_parser("explain", help="解析片段原理")
-    explain_parser.add_argument("snippet_id", type=str, help="片段 ID")
+    explain_parser.add_argument("--snippet_id", type=str, help="片段 ID")
 
     # transform 命令
     transform_parser = subparsers.add_parser("transform", help="代码适配转换")
-    transform_parser.add_argument("snippet_id", type=str, help="片段 ID")
-    transform_parser.add_argument("direction", type=str, choices=["es5_to_es6", "es6_to_es5"],
+    transform_parser.add_argument("--snippet_id", type=str, help="片段 ID")
+    transform_parser.add_argument("--direction", type=str, choices=["es5_to_es6", "es6_to_es5"],
                                   help="转换方向")
 
     # combine 命令
     combine_parser = subparsers.add_parser("combine", help="片段组合")
-    combine_parser.add_argument("ids", nargs="+", type=str, help="要组合的片段 ID 列表（至少 2 个）")
+    combine_parser.add_argument("--ids", nargs="+", type=str, help="要组合的片段 ID 列表（至少 2 个）")
 
     # boundary 命令
     boundary_parser = subparsers.add_parser("boundary", help="查看边界条件")
-    boundary_parser.add_argument("snippet_id", type=str, help="片段 ID")
+    boundary_parser.add_argument("--snippet_id", type=str, help="片段 ID")
 
     # capabilities 命令
     subparsers.add_parser("capabilities", help="查看能力边界")

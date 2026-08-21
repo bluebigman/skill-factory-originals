@@ -196,8 +196,8 @@ class IMAPAuthenticator:
                 # 登录成功，登出
                 try:
                     conn.logout()
-                except Exception:
-                    pass  # 登出失败不影响结果
+                except Exception as e:
+                    print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # 登出失败不影响结果
                 return AuthResult(
                     success=True, code=ERROR_CODES["SUCCESS"],
                     message="认证成功",
@@ -242,8 +242,8 @@ class IMAPAuthenticator:
             # 确保连接关闭
             try:
                 conn.logout()
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
 
 
 def run_selftest() -> bool:

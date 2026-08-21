@@ -43,6 +43,7 @@ import sys
 import tempfile
 from collections import defaultdict
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------

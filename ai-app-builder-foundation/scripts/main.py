@@ -21,6 +21,7 @@ from collections import OrderedDict
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
 from difflib import unified_diff
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 错误码定义（与规格一致）

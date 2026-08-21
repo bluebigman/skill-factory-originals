@@ -120,6 +120,14 @@ def regenerate() -> int:
 
 
 if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--all", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--format", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--names", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--selftest", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--tag", default=None, help="文档声明的参数")  # F3 补全
+    args = ap.parse_args()
     rc = check_env()
     rc2 = check_merkle()
     final = rc if rc > 0 else rc2

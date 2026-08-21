@@ -13,6 +13,7 @@ import hashlib
 import argparse
 from collections import Counter
 from typing import List, Tuple, Dict, Set, Optional
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 设置随机种子保证可重复性
 random.seed(42)
@@ -348,7 +349,16 @@ def main():
     parser.add_argument('--aggressive', action='store_true', help='使用激进模式')
     parser.add_argument('--selftest', action='store_true', help='运行自检测试')
     
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     if args.selftest:
         success = run_selftest()

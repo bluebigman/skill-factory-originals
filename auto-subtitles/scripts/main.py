@@ -34,6 +34,7 @@ import os
 import re
 import sys
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -618,14 +619,23 @@ def main():
         description="字幕转录与处理工具 auto-subtitles",
         epilog="示例: python scripts/main.py input.srt -f json -o output.json",
     )
-    parser.add_argument("input", nargs="?", help="输入字幕文件或目录")
+    parser.add_argument("--input", nargs="?", help="输入字幕文件或目录")
     parser.add_argument("-o", "--output", help="输出文件路径（单文件模式）")
     parser.add_argument("-f", "--format", default="srt", help="输出格式: srt/vtt/json/md")
     parser.add_argument("-t", "--translate", help="翻译目标语言（如 zh）")
     parser.add_argument("-d", "--directory", action="store_true", help="批量处理目录模式")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

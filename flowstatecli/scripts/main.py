@@ -9,6 +9,7 @@ import sys
 import tempfile
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------- 类型映射 ----------
 type_map = {
@@ -240,7 +241,8 @@ def read_commits_from_file(filepath: str) -> List[Dict]:
 def write_output(content: str, output_file: Optional[str] = None) -> None:
     """将内容写入文件或标准输出。"""
     if output_file:
-        Path(output_file).write_text(content, encoding="utf-8")
+        if not dry_run or getattr(args, "force", False):
+            Path(output_file).write_text(content, encoding="utf-8")
     else:
         print(content)
 
@@ -323,7 +325,7 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="输入文件路径（JSON 或纯文本），若不提供则从标准输入读取",
     )
@@ -348,7 +350,16 @@ def main():
         version="flowstatecli 1.0.0",
     )
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         success = run_selftest()

@@ -18,6 +18,7 @@ import re
 import sys
 import traceback
 from collections import OrderedDict
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义（E001-E010）
@@ -697,6 +698,10 @@ def main():
     parser.add_argument("--json", action="store_true", help="以 JSON 格式输出结构化结果")
 
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

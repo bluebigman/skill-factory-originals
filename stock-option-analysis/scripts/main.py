@@ -413,3 +413,13 @@ class InputParser:
         for token in tokens[1:]:
             if "=" not in token:
                 raise
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--file", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--help", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--r", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--selftest", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--version", default=None, help="文档声明的参数")  # F3 补全
+    args = ap.parse_args()

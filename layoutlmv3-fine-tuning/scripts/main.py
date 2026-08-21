@@ -17,6 +17,7 @@ import zipfile
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 标准库优先，无第三方依赖（如需 OCR 可安装 pytesseract 或 paddleocr，但核心逻辑不依赖）
 # pip install pytesseract  # 可选，用于 OCR 增强
@@ -525,7 +526,8 @@ def run_selftest() -> int:
         with tempfile.TemporaryDirectory() as tmpdir:
             # 创建一个模拟的无效文件
             test_file = Path(tmpdir) / "test.txt"
-            test_file.write_text("not an image", encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                test_file.write_text("not an image", encoding="utf-8")
 
             parser = DocumentParser()
             try:
@@ -558,7 +560,8 @@ def run_selftest() -> int:
             in_dir.mkdir()
 
             # 创建模拟文件
-            (in_dir / "empty_dir.txt").write_text("placeholder", encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                (in_dir / "empty_dir.txt").write_text("placeholder", encoding="utf-8")
 
             processor = BatchProcessor()
             result = processor.process_directory(str(in_dir), str(out_dir))
@@ -643,7 +646,16 @@ def main() -> int:
         help="自定义字段映射规则 JSON 文件路径（可选）",
     )
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

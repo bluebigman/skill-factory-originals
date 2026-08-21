@@ -10,6 +10,7 @@ import sys
 import os
 import re
 from typing import Dict, List, Tuple, Optional, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 错误码定义
@@ -554,6 +555,10 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="仅预览不执行实际输出")
     
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 自检模式
     if args.selftest:

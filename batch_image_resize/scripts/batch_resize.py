@@ -29,6 +29,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import time
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 try:
     from PIL import Image
@@ -357,7 +358,8 @@ def selftest():
         
         # 测试6: 不支持的文件格式
         bad_file = input_dir / "test.txt"
-        bad_file.write_text("not an image")
+        if not dry_run:
+            bad_file.write_text("not an image")
         try:
             get_image_files(bad_file)
             assert False, "应抛出格式不支持错误"
@@ -425,7 +427,7 @@ def main():
     )
     
     # 输入参数
-    parser.add_argument('--input', '-i', required=True, help='输入文件夹路径或单文件路径')
+    parser.add_argument('--input', '-i', required=False, help='输入文件夹路径或单文件路径')
     parser.add_argument('--output', '-o', help='输出目录（默认: 输入目录下的 output/）')
     
     # 尺寸调整参数（四选一）

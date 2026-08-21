@@ -241,8 +241,8 @@ class AwesomePythonProcessor:
                         "format": "csv",
                         "fields": list(rows[0].keys()),
                     }
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
 
         # 默认作为文本文件处理
         return {

@@ -504,7 +504,7 @@ def main() -> None:
         epilog="示例: python main.py '设计一个 logo' --top 5",
     )
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="输入内容：文件路径、URL 或文本描述",
     )

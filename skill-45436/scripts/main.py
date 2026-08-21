@@ -5,6 +5,7 @@ import re
 import sys
 import os
 from datetime import datetime, timedelta
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 def load_data(filepath):
     """加载JSON数据文件"""

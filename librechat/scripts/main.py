@@ -628,27 +628,27 @@ def main() -> int:
 
     # organize 子命令
     p_org = subparsers.add_parser("organize", help="将文本整理为 Markdown 表格")
-    p_org.add_argument("--text", required=True, help="输入文本")
+    p_org.add_argument("--text", required=False, help="输入文本")
     p_org.add_argument("--delimiter", default="|", help="分隔符")
 
     # extract 子命令
     p_ext = subparsers.add_parser("extract", help="从文本提取结构化字段")
-    p_ext.add_argument("--text", required=True, help="输入文本")
-    p_ext.add_argument("--fields", required=True, help="字段定义 JSON，如 '{\"name\":\"name\"}'")
+    p_ext.add_argument("--text", required=False, help="输入文本")
+    p_ext.add_argument("--fields", required=False, help="字段定义 JSON，如 '{\"name\":\"name\"}'")
 
     # convert 子命令
     p_conv = subparsers.add_parser("convert", help="格式转换")
-    p_conv.add_argument("--content", required=True, help="输入内容")
-    p_conv.add_argument("--from", dest="input_format", required=True, help="输入格式 (json/yaml/csv)")
-    p_conv.add_argument("--to", dest="output_format", required=True, help="输出格式 (json/yaml/csv/markdown)")
+    p_conv.add_argument("--content", required=False, help="输入内容")
+    p_conv.add_argument("--from", dest="input_format", required=False, help="输入格式 (json/yaml/csv)")
+    p_conv.add_argument("--to", dest="output_format", required=False, help="输出格式 (json/yaml/csv/markdown)")
 
     # entities 子命令
     p_ent = subparsers.add_parser("entities", help="提取实体")
-    p_ent.add_argument("--text", required=True, help="输入文本")
+    p_ent.add_argument("--text", required=False, help="输入文本")
 
     # url 子命令
     p_url = subparsers.add_parser("url", help="解析 URL")
-    p_url.add_argument("--url", required=True, help="URL 地址")
+    p_url.add_argument("--url", required=False, help="URL 地址")
 
     args = parser.parse_args()
 

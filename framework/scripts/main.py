@@ -33,6 +33,7 @@ import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Union
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -289,7 +290,8 @@ class SiteBuilder:
     <ul>{links}</ul>
 </body>
 </html>"""
-            (self.output_dir / "index.html").write_text(html, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                (self.output_dir / "index.html").write_text(html, encoding="utf-8")
         except Exception as e:
             raise RuntimeError(f"E006: 首页写入失败: {e}")
 
@@ -320,7 +322,8 @@ class SiteBuilder:
 </body>
 </html>"""
             filename = f"page_{index}.html"
-            (self.output_dir / filename).write_text(html, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                (self.output_dir / filename).write_text(html, encoding="utf-8")
         except Exception as e:
             raise RuntimeError(f"E005: 页面生成失败: {e}")
 
@@ -332,7 +335,8 @@ class SiteBuilder:
             for i, ds in enumerate(self.config.data_sources):
                 if ds.inline_data is not None:
                     filename = f"data_{i}.json"
-                    (data_dir / filename).write_text(
+                    if not dry_run or getattr(args, "force", False):
+                        (data_dir / filename).write_text(
                         json.dumps(ds.inline_data, ensure_ascii=False, indent=2),
                         encoding="utf-8"
                     )
@@ -502,7 +506,16 @@ def main() -> int:
         help="输出目录（默认: ./dist）"
     )
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

@@ -36,6 +36,7 @@ import tempfile
 from collections import OrderedDict
 from datetime import timezone, datetime
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 常量定义
@@ -407,8 +408,8 @@ def generate_chart_data(dataset: DataSet, chart_type: str = "柱状图") -> Dict
                 pairs = sorted(zip(labels, values), key=lambda x: _parse_date(x[0]) or datetime.min)
                 chart_data["标签"] = [p[0] for p in pairs]
                 chart_data["数值"] = [p[1] for p in pairs]
-            except Exception:
-                pass  # 排序失败则保持原顺序
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # 排序失败则保持原顺序
 
     return chart_data
 
@@ -780,7 +781,12 @@ def main(argv: Optional[List[str]] = None) -> int:
     parser = _build_parser()
 
     try:
+        parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args(argv)
+        global dry_run
+        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     except SystemExit as exc:
         # 参数错误
         return int(exc.code) if exc.code else 1

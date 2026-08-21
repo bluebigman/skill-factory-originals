@@ -26,6 +26,7 @@ import json
 import sys
 import re
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 常量与配置
@@ -532,6 +533,8 @@ def main() -> int:
     ap.add_argument("--once", default=None, help="参数")
     ap.add_argument("--interval", default=None, help="参数")
     ap.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 运行自检
     if args.selftest:

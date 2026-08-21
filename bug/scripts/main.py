@@ -9,6 +9,7 @@ from collections import Counter, defaultdict
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 def parse_log_line(line: str) -> Optional[Dict[str, Any]]:
@@ -398,7 +399,7 @@ def run_selftest() -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description='Advanced Log Analyzer')
-    parser.add_argument('file', nargs='?', help='Log file to analyze')
+    parser.add_argument("--file", nargs='?', help='Log file to analyze')
     parser.add_argument('--format', choices=['text', 'json'], default='text', help='Output format')
     parser.add_argument('--verbose', action='store_true', help='Verbose output')
     parser.add_argument('--selftest', action='store_true', help='Run self-test')
@@ -408,7 +409,16 @@ def main():
     parser.add_argument('--until', help='Only analyze logs before this timestamp')
     parser.add_argument('--top', type=int, default=10, help='Number of top items to show')
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         success = run_selftest()

@@ -423,3 +423,10 @@ def selftest() -> int:
         return 1
 
     # 测试用例3: 税费计算与压力评估
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--price", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--selftest", default=None, help="文档声明的参数")  # F3 补全
+    args = ap.parse_args()

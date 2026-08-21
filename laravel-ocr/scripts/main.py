@@ -19,6 +19,7 @@ import tempfile
 import urllib.request
 from datetime import timezone, datetime
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
@@ -397,7 +398,7 @@ def main():
     )
 
     # 输入参数
-    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group = parser.add_mutually_exclusive_group(required=False)
     input_group.add_argument("--file", help="单个票据文件路径")
     input_group.add_argument("--url", help="票据文件 URL")
     input_group.add_argument("--batch", nargs="+", help="批量文件路径列表")
@@ -408,7 +409,16 @@ def main():
     parser.add_argument("--output", "-o", help="输出 JSON 文件路径")
     parser.add_argument("--pretty", action="store_true", help="美化 JSON 输出")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

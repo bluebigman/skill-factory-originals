@@ -15,6 +15,7 @@ import sys
 import tempfile
 from datetime import timezone, datetime
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ========== 错误码定义 ==========
 ERROR_CODES = {
@@ -522,7 +523,16 @@ def main():
     parser.add_argument("--group", help="组名")
     parser.add_argument("--input", help="输入文本")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     try:
         # 自检模式
@@ -553,7 +563,8 @@ def main():
             config = generate_god_config(processes)
 
             if args.output:
-                Path(args.output).write_text(config, encoding="utf-8")
+                if not dry_run or getattr(args, "force", False):
+                    Path(args.output).write_text(config, encoding="utf-8")
                 print(f"配置已生成: {args.output}")
             else:
                 print(config)

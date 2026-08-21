@@ -12,6 +12,7 @@ import argparse
 import re
 import sys
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -499,7 +500,12 @@ def main() -> None:
     )
 
     try:
+        parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args()
+        global dry_run
+        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     except SystemExit:
         # argparse 在参数错误时会自行退出，这里捕获并转为 E007
         error_exit("E007", "命令行参数解析失败")

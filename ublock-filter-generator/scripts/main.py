@@ -369,7 +369,7 @@ def main():
         description="uBlock Filter Generator — 广告拦截规则生成器",
         epilog="示例: python main.py '屏蔽 example.com 的广告'"
     )
-    parser.add_argument("text", nargs="?", help="自然语言描述，如 '屏蔽 example.com 的广告'")
+    parser.add_argument("--text", nargs="?", help="自然语言描述，如 '屏蔽 example.com 的广告'")
     parser.add_argument("--domain", help="目标域名（可选）")
     parser.add_argument("--element", help="元素选择器，如 .banner-ad 或 #ad-sidebar（可选）")
     parser.add_argument("--request", help="请求 URL 或域名片段（可选）")

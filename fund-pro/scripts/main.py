@@ -7,6 +7,7 @@ import time
 import argparse
 from collections import Counter, defaultdict
 from typing import List, Dict, Any
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 def analyze_logs(log_data: List[Dict[str, Any]]) -> Dict[str, Any]:
@@ -273,7 +274,16 @@ def main():
     parser.add_argument("--output", type=str, help="输出报告文件路径")
     parser.add_argument("--threshold", type=float, default=0.1, help="异常检测阈值")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     if args.selftest:
         selftest()

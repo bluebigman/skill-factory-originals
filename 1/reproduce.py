@@ -37,8 +37,8 @@ def check_env() -> int:
             if "==" in l:
                 k, _, v = l.partition("==")
                 cur_deps[k.strip()] = v.strip()
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
     for d in env_snap.get("dependencies", []):
         if "==" in d:
             k, _, v = d.partition("==")

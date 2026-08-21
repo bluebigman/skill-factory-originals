@@ -16,6 +16,7 @@ from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from urllib.parse import urlparse
 import time
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
@@ -775,7 +776,7 @@ def main():
         """,
     )
 
-    input_group = parser.add_mutually_exclusive_group(required=True)
+    input_group = parser.add_mutually_exclusive_group(required=False)
     input_group.add_argument("--input", help="输入文件路径（JSON 格式）")
     input_group.add_argument("--markdown", help="输入 Markdown 文件路径")
     input_group.add_argument("--url", help="从 URL 获取内容")
@@ -785,7 +786,16 @@ def main():
     parser.add_argument("--theme", help="主题 JSON 字符串，如 '{\"primary\": \"#ff0000\"}'")
     parser.add_argument("--list-themes", action="store_true", help="列出可用主题变量")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

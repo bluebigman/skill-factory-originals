@@ -33,6 +33,7 @@ import time
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
@@ -311,8 +312,8 @@ class ImageProcessor:
         if exif_data is not None and save_format in ("JPEG", "WEBP", "TIFF"):
             try:
                 kwargs["exif"] = exif_data
-            except Exception:
-                pass  # EXIF 保存失败不影响主流程
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # EXIF 保存失败不影响主流程
 
         # PNG 压缩级别
         if save_format == "PNG":
@@ -583,8 +584,8 @@ def main():
     )
 
     # 输入输出参数
-    parser.add_argument("input", nargs="*", help="输入文件或文件夹路径")
-    parser.add_argument("output", nargs="?", help="输出文件或目录路径")
+    parser.add_argument("--input", nargs="*", help="输入文件或文件夹路径")
+    parser.add_argument("--output", nargs="?", help="输出文件或目录路径")
 
     # 处理参数
     parser.add_argument("--quality", type=int, default=85,
@@ -612,7 +613,16 @@ def main():
     parser.add_argument("--selftest", action="store_true",
                         help="运行自检测试")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

@@ -20,6 +20,7 @@ import uuid
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Optional, Any
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -536,6 +537,8 @@ def main() -> int:
 
     args = parser.add_argument("--version", default=None, help="参数")
     ap.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

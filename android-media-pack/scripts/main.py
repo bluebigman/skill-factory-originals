@@ -461,7 +461,7 @@ COMMAND_HANDLERS = {
     "help": handle_help,
 }
 
-# 定义各命令的参数（不设置 required=True，改为在 handler 中检查）
+# 定义各命令的参数（不设置 required=False，改为在 handler 中检查）
 COMMAND_ARGS = {
     "migrate": [
         (["--code"], {"type": str, "default": None, "help": "原始代码片段"}),
@@ -493,7 +493,7 @@ def build_parser() -> argparse.ArgumentParser:
         description="android-media-pack 技能包命令行工具",
         add_help=False,
     )
-    parser.add_argument("command", nargs="?", choices=list(COMMAND_HANDLERS.keys()) + [None],
+    parser.add_argument("--command", nargs="?", choices=list(COMMAND_HANDLERS.keys()) + [None],
                         default=None, help="要执行的命令")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
     parser.add_argument("--help", action="store_true", help="显示帮助")

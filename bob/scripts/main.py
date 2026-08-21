@@ -651,7 +651,7 @@ def main() -> int:
     )
     
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="JSON 格式的输入数据，包含表定义和字段信息",
     )

@@ -7,6 +7,7 @@ import json
 import hashlib
 from datetime import datetime
 from collections import OrderedDict
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 def read_table(filepath, encoding='utf-8'):
     """读取表格文件，支持csv/tsv/txt"""

@@ -55,8 +55,8 @@ def selftest() -> int:
     # G3 核心链路自检
     try:
         parse_platform("")  # G3 核心链路自检
-    except Exception:
-        pass  # G3 核心链路异常降级
+    except Exception as e:
+        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # G3 核心链路异常降级
 
     return 0
 

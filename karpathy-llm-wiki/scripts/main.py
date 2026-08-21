@@ -19,6 +19,7 @@ import re
 import sys
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Set, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -482,6 +483,9 @@ def _parse_args() -> argparse.Namespace:
         type=str,
         help="输出文件路径（可选，默认输出到 stdout）",
     )
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     return parser.parse_args()
 
 

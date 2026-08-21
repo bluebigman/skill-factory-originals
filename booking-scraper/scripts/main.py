@@ -35,6 +35,7 @@ import urllib.request
 from html.parser import HTMLParser
 from typing import Any, Dict, List, Optional
 import time
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
@@ -369,6 +370,9 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     parser.add_argument("--out", help="输出文件路径（默认 stdout）")
     parser.add_argument("--format", choices=["json", "markdown"], default="json", help="输出格式")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     return parser.parse_args(argv)
 
 

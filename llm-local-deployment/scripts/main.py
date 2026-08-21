@@ -154,13 +154,13 @@ def run_selftest() -> bool:
 
 def main():
     parser = argparse.ArgumentParser(description="Local LLM deployment helper")
-    parser.add_argument("--model-size", required=True, choices=["7b", "13b", "30b", "70b"],
+    parser.add_argument("--model-size", required=False, choices=["7b", "13b", "30b", "70b"],
                         help="Model size in billions of parameters")
-    parser.add_argument("--gpu-vram", required=True, type=float,
+    parser.add_argument("--gpu-vram", required=False, type=float,
                         help="GPU VRAM in GB (0 if no GPU)")
     parser.add_argument("--gpu-model", default=None,
                         help="GPU model name (optional)")
-    parser.add_argument("--memory", required=True, type=float,
+    parser.add_argument("--memory", required=False, type=float,
                         help="System RAM in GB")
     parser.add_argument("--framework", default="auto",
                         choices=["auto", "ollama", "vllm", "llamacpp", "sglang"],

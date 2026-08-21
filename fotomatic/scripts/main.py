@@ -593,7 +593,7 @@ def main() -> int:
         description="fotomatic — 闪光快照参数提取 (图片/URL/文本 → 结构化参数)"
     )
     parser.add_argument(
-        "inputs",
+        "--inputs",
         nargs="*",
         help="输入内容：文件路径、URL 或数据文本（支持多个，最多 20 个）",
     )

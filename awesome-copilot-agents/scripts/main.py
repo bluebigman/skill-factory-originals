@@ -396,7 +396,7 @@ def main() -> int:
         epilog="示例: python main.py 'https://github.com/openai/codex' --format json",
     )
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         default=None,
         help="包含GitHub链接的文本或URL（至少一个）",

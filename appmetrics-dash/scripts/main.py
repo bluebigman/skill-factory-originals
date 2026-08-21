@@ -518,7 +518,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     )
 
     # 输入参数
-    parser.add_argument("sources", nargs="*", help="输入文件路径或 URL（支持多个）")
+    parser.add_argument("--sources", nargs="*", help="输入文件路径或 URL（支持多个）")
     parser.add_argument("--format", "-f", choices=["json", "csv"], default="json", help="输出格式")
     parser.add_argument("--filter", nargs="*", help="仅输出指定指标（可多个）")
     parser.add_argument("--fields", nargs="*", help="自定义输出字段顺序")

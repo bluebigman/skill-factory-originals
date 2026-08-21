@@ -36,6 +36,7 @@ from collections import OrderedDict
 from datetime import datetime
 from typing import Any, Dict, List, Optional, Tuple
 import time
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
@@ -100,8 +101,8 @@ def parse_input(data: str, input_format: str = "auto") -> Any:
         if "," in stripped or "\t" in stripped:
             try:
                 return _parse_delimited(stripped)
-            except Exception:
-                pass
+            except Exception as e:
+                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
         return _parse_lines(stripped)
     elif fmt == "json":
         try:
@@ -542,7 +543,16 @@ def main() -> int:
     parser.add_argument("--output-dir", default="./outputs", help="批量处理输出目录")
     parser.add_argument("--url", help="从 URL 获取数据")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

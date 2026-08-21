@@ -556,7 +556,7 @@ def run_selftest() -> bool:
         '    global x\n',
         '    try:\n',
         '        pass\n',
-        '    except:\n',
+        '    except Exception:\n',
         '        pass\n',
         '    api_key = "abcdef123456"\n',
         '    return True\n',

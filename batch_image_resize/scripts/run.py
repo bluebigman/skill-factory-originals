@@ -11,6 +11,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 HERE = Path(__file__).resolve().parent
 TRIGGERS = ["batch_image_resize"]
@@ -49,7 +50,8 @@ def load_progress() -> Dict[str, List[str]]:
 
 def save_progress(completed: List[str]) -> None:
     """保存处理进度"""
-    PROGRESS_FILE.write_text(
+    if not dry_run or getattr(args, "force", False):
+        PROGRESS_FILE.write_text(
         json.dumps({"completed": completed, "timestamp": datetime.now(timezone.utc).isoformat()}, indent=2),
         encoding='utf-8'
     )
@@ -297,7 +299,12 @@ def main():
     ap.add_argument("--quality", type=int, default=85, help="JPEG质量")
     ap.add_argument("--resume", action="store_true", help="断点续传")
     ap.add_argument("--rollback", action="store_true", help="回滚原图")
+    ap.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    ap.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = ap.parse_args()
+    global dry_run
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     if args.selftest:
         return selftest()

@@ -37,8 +37,8 @@ def check_env() -> int:
             if "==" in l:
                 k, _, v = l.partition("==")
                 cur_deps[k.strip()] = v.strip()
-    except Exception:
-        pass
+    except Exception as e:
+        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
     for d in env_snap.get("dependencies", []):
         if "==" in d:
             k, _, v = d.partition("==")
@@ -102,6 +102,10 @@ def regenerate() -> int:
 
 
 if __name__ == "__main__":
+    import argparse
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--input", default=None, help="文档声明的参数")  # F3 补全
+    args = ap.parse_args()
     rc = check_env()
     rc2 = check_merkle()
     final = rc if rc > 0 else rc2

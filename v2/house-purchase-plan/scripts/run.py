@@ -15,6 +15,7 @@ import time
 import urllib.request
 import urllib.error
 from datetime import datetime, timezone
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ==================== 常量配置 ====================
 DEFAULT_LPR = 3.85  # 5年期以上LPR（%）
@@ -428,3 +429,10 @@ def print_comparison(results, verbose=False):
 
 
 # =================
+
+
+if __name__ == "__main__":
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--price", default=None, help="文档声明的参数")  # F3 补全
+    ap.add_argument("--selftest", default=None, help="文档声明的参数")  # F3 补全
+    args = ap.parse_args()

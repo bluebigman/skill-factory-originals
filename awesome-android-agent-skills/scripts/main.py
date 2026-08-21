@@ -594,7 +594,7 @@ def main(argv: Optional[List[str]] = None) -> int:
   python main.py --selftest
         """,
     )
-    parser.add_argument("query", nargs="?", help="技能需求描述（自然语言 / 关键词）")
+    parser.add_argument("--query", nargs="?", help="技能需求描述（自然语言 / 关键词）")
     parser.add_argument("--query", dest="query_opt", help="技能需求描述（替代位置参数）")
     parser.add_argument("--format", dest="output_format", default="markdown",
                         choices=SUPPORTED_FORMATS, help="输出格式 (默认: markdown)")

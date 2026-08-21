@@ -18,8 +18,9 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Any
 from functools import lru_cache
 import concurrent.futures
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import xml.etree.ElementTree as ET
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 try:
     from docx import Document
@@ -386,7 +387,7 @@ def analyze_contract_internal(text: str) -> List[Dict[str, str]]:
             executor.submit(_analyze_category, category, normalized_text, matched_positions)
             for category in RISK_RULES.keys()
         ]
-        risks = [f.result() for f in concurrent.futures.as_completed(futures)]
+        risks = [f.result() for f in as_completed(futures)]
     
     # 按类别顺序排序结果
     category_order = list(RISK_RULES.keys())

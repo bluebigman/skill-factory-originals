@@ -509,7 +509,7 @@ def parse_args():
     )
     
     parser.add_argument(
-        "text",
+        "--text",
         nargs="?",
         help="要处理的文本内容",
     )

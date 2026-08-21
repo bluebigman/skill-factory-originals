@@ -29,6 +29,7 @@ import shutil
 import sys
 import tempfile
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================

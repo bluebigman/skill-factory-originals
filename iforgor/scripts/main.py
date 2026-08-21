@@ -381,7 +381,7 @@ def main():
         epilog="示例: iforgor python list-comprehension"
     )
     parser.add_argument(
-        "args",
+        "--args",
         nargs="*",
         help="语言和关键词，如: python list-comprehension"
     )

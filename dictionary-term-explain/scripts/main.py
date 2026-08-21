@@ -408,7 +408,7 @@ def parse_args(argv: list[str]) -> argparse.Namespace:
     )
 
     parser.add_argument(
-        "term",
+        "--term",
         nargs="?",
         default=None,
         help="要解释的术语名称（必填，除非使用 --selftest）",

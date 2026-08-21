@@ -15,6 +15,7 @@ import time
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Optional
 from urllib.parse import urljoin
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -277,7 +278,16 @@ def main() -> int:
     parser.add_argument("--incremental", action="store_true",
                         help="启用增量模式（基于上次时间戳）")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

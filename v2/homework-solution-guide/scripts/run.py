@@ -17,6 +17,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 from pathlib import Path
+
 dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ========== 常量 ==========
@@ -38,7 +39,7 @@ logger = logging.getLogger(__name__)
 
 def _read_text_safe(path):
     """多编码安全读取（R3+R5 合规）"""
-    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+    for enc in ("utf-8", "gbk", "gb18030"):
         try:
             with open(path, encoding=enc, errors="replace") as f:
                 return f.read()
@@ -47,10 +48,10 @@ def _read_text_safe(path):
     with open(path, encoding="utf-8", errors="replace") as f:
         return f.read()
 
-# 批处理流式读取工具
 def _iter_lines(path):
+    """批处理流式读取工具"""
     with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
+        for line in f:
             yield line
 
 
@@ -89,30 +90,25 @@ def http_get_with_retry(url: str, params: dict = None) -> str:
                 if resp.status != 200:
                     raise RuntimeError(f"E_HTTP_{resp.status}: HTTP状态码 {resp.status}")
                 content = resp.read().decode("utf-8")
-                # 响应内容校验：非空且可解析
                 if not content or len(content.strip()) < 2:
                     raise RuntimeError("E_EMPTY_RESPONSE: 响应内容为空")
                 return content
         except urllib.error.HTTPError as e:
-            # HTTP 错误码处理
             if e.code >= 500 or e.code == 429:
-                # 5xx 和 429 重试
                 if attempt == MAX_RETRIES - 1:
                     raise RuntimeError(f"E_HTTP_{e.code}: HTTP错误: {e.reason}")
                 delay = BASE_DELAY * (2 ** attempt)
                 logger.warning(f"HTTP {e.code} 错误，{delay:.1f}秒后重试 ({attempt+1}/{MAX_RETRIES})")
                 time.sleep(delay)
             else:
-                # 4xx 直接抛出
                 raise RuntimeError(f"E_HTTP_{e.code}: HTTP错误: {e.reason}")
         except (urllib.error.URLError, TimeoutError, OSError) as e:
-            # 网络层错误
             if attempt == MAX_RETRIES - 1:
                 raise RuntimeError(f"E_NETWORK: 网络请求失败: {e}")
             delay = BASE_DELAY * (2 ** attempt)
             logger.warning(f"网络错误，{delay:.1f}秒后重试 ({attempt+1}/{MAX_RETRIES})")
             time.sleep(delay)
-    raise RuntimeError("E_NETWORK: 不可达")  # 理论不可达
+    raise RuntimeError("E_NETWORK: 不可达")
 
 
 # ========== 本地知识库（内置，无外部依赖） ==========
@@ -154,11 +150,108 @@ LOCAL_MISTAKE_ANALYSIS = {
     "时间不足": "建议：练习限时做题，提高效率。"
 }
 
+# 完整知识点库（覆盖 K3-K12 核心题型）
+KNOWLEDGE_BASE = {
+    "math": {
+        "小学": {
+            "四则运算": ["加减乘除混合运算", "运算顺序", "括号使用"],
+            "分数": ["分数加减", "分数乘除", "分数比较"],
+            "小数": ["小数加减", "小数乘除", "小数与分数转换"],
+            "几何初步": ["长方形面积", "正方形面积", "三角形面积", "圆周长"],
+            "应用题": ["行程问题", "工程问题", "价格问题", "年龄问题"]
+        },
+        "初中": {
+            "方程": ["一元一次方程", "二元一次方程组", "分式方程"],
+            "不等式": ["一元一次不等式", "不等式组"],
+            "函数": ["正比例函数", "一次函数", "反比例函数"],
+            "几何": ["三角形全等", "三角形相似", "勾股定理", "圆的性质"],
+            "概率统计": ["平均数", "中位数", "众数", "概率计算"]
+        },
+        "高中": {
+            "函数": ["函数定义域", "函数值域", "单调性", "奇偶性"],
+            "导数": ["导数计算", "导数应用", "极值问题"],
+            "数列": ["等差数列", "等比数列", "数列求和"],
+            "三角函数": ["三角恒等变换", "三角函数图像", "解三角形"],
+            "向量": ["向量运算", "向量平行垂直", "向量应用"],
+            "解析几何": ["直线方程", "圆方程", "椭圆", "双曲线", "抛物线"],
+            "立体几何": ["空间几何体", "线面关系", "面面关系", "体积表面积"]
+        }
+    },
+    "chinese": {
+        "小学": {
+            "拼音": ["声母韵母", "整体认读音节", "声调"],
+            "字词": ["形近字", "多音字", "近义词反义词"],
+            "阅读理解": ["找中心句", "概括段意", "理解词语"],
+            "看图写话": ["观察图片", "组织语言", "表达完整"]
+        },
+        "初中": {
+            "文言文": ["实词虚词", "句式翻译", "文言文理解"],
+            "现代文阅读": ["记叙文阅读", "说明文阅读", "议论文阅读"],
+            "作文": ["审题立意", "结构安排", "语言表达"],
+            "古诗词": ["诗词鉴赏", "名句默写", "意象分析"]
+        },
+        "高中": {
+            "古诗文鉴赏": ["诗歌意象", "诗歌手法", "诗歌情感"],
+            "论述类文本": ["论点论据", "论证方法", "逻辑分析"],
+            "实用类文本": ["信息筛选", "概括分析", "评价应用"],
+            "写作": ["材料作文", "议论文写作", "记叙文写作"]
+        }
+    },
+    "english": {
+        "小学": {
+            "基础词汇": ["颜色", "数字", "动物", "食物"],
+            "简单句型": ["be动词", "一般疑问句", "特殊疑问句"],
+            "日常对话": ["问候", "介绍", "购物", "问路"]
+        },
+        "初中": {
+            "时态": ["一般现在时", "一般过去时", "现在进行时", "现在完成时"],
+            "语态": ["被动语态", "主动语态转换"],
+            "从句": ["宾语从句", "定语从句", "状语从句"],
+            "阅读理解": ["细节理解", "主旨大意", "推理判断"]
+        },
+        "高中": {
+            "虚拟语气": ["条件虚拟", "愿望虚拟", "建议虚拟"],
+            "非谓语动词": ["不定式", "动名词", "分词"],
+            "高级句型": ["倒装句", "强调句", "省略句"],
+            "写作": ["应用文写作", "议论文写作", "图表作文"]
+        }
+    },
+    "physics": {
+        "初中": {
+            "力学": ["力的概念", "重力", "摩擦力", "压强"],
+            "光学": ["光的反射", "光的折射", "透镜"],
+            "电学基础": ["电路连接", "电流电压", "电阻"],
+            "声学": ["声音产生", "声音传播", "乐音三要素"]
+        },
+        "高中": {
+            "牛顿定律": ["牛顿第一定律", "牛顿第二定律", "牛顿第三定律"],
+            "电磁学": ["电场", "磁场", "电磁感应"],
+            "热学": ["分子动理论", "热力学定律", "气体性质"],
+            "原子物理": ["原子结构", "核反应", "放射性"]
+        }
+    },
+    "chemistry": {
+        "初中": {
+            "元素": ["元素符号", "元素周期表", "元素性质"],
+            "化合物": ["氧化物", "酸碱盐", "有机物"],
+            "化学方程式": ["方程式配平", "方程式计算", "反应类型"],
+            "实验基础": ["实验仪器", "实验操作", "实验安全"]
+        },
+        "高中": {
+            "化学反应原理": ["反应速率", "化学平衡", "电离平衡"],
+            "有机化学": ["烷烃烯烃", "醇醛酸", "酯化反应"],
+            "结构化学": ["原子结构", "分子结构", "晶体结构"],
+            "实验化学": ["定量实验", "定性实验", "实验设计"]
+        }
+    }
+}
+
 
 def review_knowledge_local(subject: str, grade: str) -> str:
     """本地知识点回顾（内置知识库）"""
-    if subject in LOCAL_KNOWLEDGE_BASE and grade in LOCAL_KNOWLEDGE_BASE[subject]:
-        return LOCAL_KNOWLEDGE_BASE[subject][grade]
+    if subject in KNOWLEDGE_BASE and grade in KNOWLEDGE_BASE[subject]:
+        topics = KNOWLEDGE_BASE[subject][grade]
+        return "、".join(topics.keys())
     return "请参考课本对应章节，重点掌握基本概念和典型例题。"
 
 
@@ -178,7 +271,6 @@ def fetch_knowledge(subject: str, grade: int) -> dict:
     使用 Wikipedia 公共 API 作为真实可用的知识来源。
     失败时降级到本地知识库。
     """
-    # 将学科映射为 Wikipedia 搜索关键词
     subject_keywords = {
         "math": "mathematics",
         "chinese": "Chinese language",
@@ -188,7 +280,6 @@ def fetch_knowledge(subject: str, grade: int) -> dict:
     }
     keyword = subject_keywords.get(subject, subject)
     
-    # 根据年级段调整搜索词
     grade_keywords = {
         "小学": "elementary",
         "初中": "middle school",
@@ -203,7 +294,6 @@ def fetch_knowledge(subject: str, grade: int) -> dict:
     search_term = f"{grade_str} {keyword} education"
     
     try:
-        # 使用 Wikipedia 的 REST API（真实可用）
         url = "https://en.wikipedia.org/w/api.php"
         params = {
             "action": "query",
@@ -215,22 +305,18 @@ def fetch_knowledge(subject: str, grade: int) -> dict:
         response = http_get_with_retry(url, params)
         data = json.loads(response)
         
-        # 解析搜索结果
         search_results = data.get("query", {}).get("search", [])
         if search_results:
             title = search_results[0]["title"]
             snippet = search_results[0].get("snippet", "")
-            # 清理 HTML 标签
             snippet = re.sub(r'<[^>]+>', '', snippet)
             knowledge = f"参考知识点：{title} - {snippet}"
             return {"source": "external", "data": {"knowledge": knowledge}}
         else:
-            # 无搜索结果时降级
             logger.warning("外部知识库无搜索结果，降级为本地知识库")
             return {"source": "local", "data": review_knowledge_local(subject, grade)}
             
     except (RuntimeError, json.JSONDecodeError) as e:
-        # 网络错误或JSON解析错误才降级
         logger.warning(f"外部知识库API调用失败，降级为本地知识库: {e}")
         return {"source": "local", "data": review_knowledge_local(subject, grade)}
 
@@ -242,7 +328,6 @@ def fetch_mistake_analysis(error_type: str) -> dict:
     失败时降级到本地知识库。
     """
     try:
-        # 使用 DuckDuckGo 的 Instant Answer API（真实可用）
         url = "https://api.duckduckgo.com/"
         params = {
             "q": f"{error_type} study tips",
@@ -253,18 +338,15 @@ def fetch_mistake_analysis(error_type: str) -> dict:
         response = http_get_with_retry(url, params)
         data = json.loads(response)
         
-        # 解析结果
         abstract = data.get("AbstractText", "")
         if abstract:
             advice = f"参考建议：{abstract}"
             return {"source": "external", "data": {"advice": advice}}
         else:
-            # 无结果时降级
             logger.warning("外部错题分析API无结果，降级为本地知识库")
             return {"source": "local", "data": analyze_mistake_local(error_type)}
             
     except (RuntimeError, json.JSONDecodeError) as e:
-        # 网络错误或JSON解析错误才降级
         logger.warning(f"外部错题分析API调用失败，降级为本地知识库: {e}")
         return {"source": "local", "data": analyze_mistake_local(error_type)}
 
@@ -305,61 +387,4 @@ def decompose_problem(question: str, subject: str, grade: int) -> list[dict]:
         {"step": 4, "question": "尝试解答并检查。", "hint": "验证合理性"},
     ]
     
-    # 语义解析：提取数字、关键词、问句
-    numbers = re.findall(r'\d+\.?\d*', question)
-    keywords = re.findall(r'[一-龥]{2,}', question)
-    
-    # 根据提取的内容动态调整提问
-    steps = []
-    if numbers:
-        steps.append({
-            "step": 1,
-            "question": f"题目中出现了数字 {', '.join(numbers[:3])}，这些数字分别代表什么含义？",
-            "hint": "每个数字对应哪个物理量或条件？"
-        })
-    else:
-        steps.append(base_steps[0])
-    
-    # 根据学科定制后续步骤
-    if subject == "math":
-        if grade <= 6:  # 小学数学
-            steps.append({"step": 2, "question": "要求解的是什么？用一句话说明。", "hint": "看最后一句问句"})
-            steps.append({"step": 3, "question": "需要用到哪个数学运算？", "hint": "加减乘除或混合"})
-            steps.append({"step": 4, "question": "尝试列式并计算。", "hint": "注意单位"})
-        else:  # 中学数学
-            steps.append({"step": 2, "question": "题目涉及哪些数学概念？", "hint": "方程/函数/几何等"})
-            steps.append({"step": 3, "question": "能否画图或列表表示条件？", "hint": "数形结合"})
-            steps.append({"step": 4, "question": "设未知数，找等量关系。", "hint": "列方程"})
-            steps.append({"step": 5, "question": "解方程并验证。", "hint": "代入检验"})
-    elif subject == "physics":
-        steps.append({"step": 2, "question": "题目描述了什么物理现象？", "hint": "力学/电学/热学等"})
-        steps.append({"step": 3, "question": "涉及哪些物理量？", "hint": "力、速度、电流等"})
-        steps.append({"step": 4, "question": "适用哪个物理公式？", "hint": "牛顿定律/欧姆定律等"})
-        steps.append({"step": 5, "question": "代入数据计算并检查单位。", "hint": "单位要统一"})
-    elif subject == "chemistry":
-        steps.append({"step": 2, "question": "涉及哪些化学物质？", "hint": "反应物/生成物"})
-        steps.append({"step": 3, "question": "需要配平化学方程式吗？", "hint": "原子守恒"})
-        steps.append({"step": 4, "question": "涉及哪些计算？", "hint": "摩尔/质量/浓度"})
-        steps.append({"step": 5, "question": "检查反应条件和状态符号。", "hint": "气体/沉淀"})
-    elif subject == "chinese":
-        steps.append({"step": 2, "question": "题目要求什么？", "hint": "阅读理解/作文/古诗"})
-        steps.append({"step": 3, "question": "找出关键词或中心句。", "hint": "反复出现的词"})
-        steps.append({"step": 4, "question": "组织语言表达观点。", "hint": "总分总结构"})
-        steps.append({"step": 5, "question": "检查字数要求和错别字。", "hint": "通读一遍"})
-    elif subject == "english":
-        steps.append({"step": 2, "question": "题目考查什么语法点？", "hint": "时态/语态/从句"})
-        steps.append({"step": 3, "question": "找出关键词（时态标志词等）。", "hint": "yesterday, often等"})
-        steps.append({"step": 4, "question": "套用语法规则。", "hint": "主谓一致"})
-        steps.append({"step": 5, "question": "检查拼写和标点。", "hint": "首字母大写"})
-    else:
-        steps.extend(base_steps[1:])
-    
-    # 去重并确保步骤编号连续
-    seen = set()
-    unique_steps = []
-    for s in steps:
-        if s["question"] not in seen:
-            seen.add(s["question"])
-            unique_steps.append(s)
-    
-    # 重新
+    # 语义解析：提取数字、关键词

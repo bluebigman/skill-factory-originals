@@ -10,6 +10,7 @@ import re
 import sys
 from collections import Counter
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============ 核心功能 ============
 
@@ -313,7 +314,8 @@ def run_selftest():
     try:
         # 创建临时测试文件
         temp_file = Path("test_titles.txt")
-        temp_file.write_text("标题一\n标题二\n标题三\n", encoding='utf-8')
+        if not dry_run or getattr(args, "force", False):
+            temp_file.write_text("标题一\n标题二\n标题三\n", encoding='utf-8')
         
         titles = read_titles_from_file("test_titles.txt")
         assert len(titles) >= 3, "文件读取标题数量不足"
@@ -337,7 +339,8 @@ def run_selftest():
         
         # 存在的路径应该通过
         temp_file = Path("test_path.txt")
-        temp_file.write_text("test", encoding='utf-8')
+        if not dry_run or getattr(args, "force", False):
+            temp_file.write_text("test", encoding='utf-8')
         validate_path("test_path.txt")
         temp_file.unlink()
         
@@ -363,7 +366,16 @@ def main():
     parser.add_argument("--file", "-f", help="从文件读取标题")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
     
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     if args.selftest:
         success = run_selftest()

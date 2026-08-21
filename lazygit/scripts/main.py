@@ -22,6 +22,7 @@ import sys
 import tempfile
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -615,7 +616,7 @@ def main() -> None:
 
     # keys 命令
     keys_parser = subparsers.add_parser("keys", help="键位速查")
-    keys_parser.add_argument("keyword", nargs="?", default="", help="搜索关键词（留空显示全部）")
+    keys_parser.add_argument("--keyword", nargs="?", default="", help="搜索关键词（留空显示全部）")
 
     # fix 命令
     subparsers.add_parser("fix", help="仓库诊断：识别问题并给出操作建议")
@@ -626,7 +627,16 @@ def main() -> None:
     # selftest 参数
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
 
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+
     args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:

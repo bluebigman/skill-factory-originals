@@ -445,7 +445,7 @@ def main():
         description="GSA 协议转 JSON 封装器",
         epilog="示例: python scripts/main.py input.txt -o output.json --mapping map.json"
     )
-    parser.add_argument("input", nargs="?", help="输入协议文件路径")
+    parser.add_argument("--input", nargs="?", help="输入协议文件路径")
     parser.add_argument("-o", "--output", help="输出 JSON 文件路径（默认输出到 stdout）")
     parser.add_argument("-m", "--mapping", help="映射表 JSON 文件路径")
     parser.add_argument("--dry-run", action="store_true", help="预览模式，只打印不写盘")

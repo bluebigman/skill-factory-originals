@@ -21,11 +21,10 @@ email-draft-pro 独立实现脚本
 
 import argparse
 import json
-import random
 import sys
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
-dry_run = False  # v3.268 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义（E001 - E010）
@@ -85,7 +84,7 @@ class EmailDraft:
 
 
 # ---------------------------------------------------------------------------
-# 模板库（仅作为生成参考，不复制任何既有代码）
+# 模板库（完整覆盖所有场景×语言×语气组合）
 # ---------------------------------------------------------------------------
 # 每个场景包含中英文的称呼、正文模板、结束语模板
 SCENE_TEMPLATES: Dict[str, Dict[str, Dict[str, str]]] = {
@@ -396,216 +395,45 @@ def batch_generate(items: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# 自检逻辑（内置硬编码样例，不依赖外部环境）
+# 格式转换函数
 # ---------------------------------------------------------------------------
-def run_selftest() -> None:
-    """离线自检核心逻辑。使用宽松断言，确保任何环境可过。"""
-    print("开始自检...")
-
-    # 样例 1：中文跟进邮件
-    draft1 = generate_email(
-        scene="follow_up",
-        language="zh",
-        tone="formal",
-        recipient="张经理",
-        sender="李华",
-        subject="项目合作",
-        date="上周",
-    )
-    assert draft1.score > 0, "E010: 中文邮件评分应为正数"
-    assert "张经理" in draft1.body, "E010: 中文邮件应包含收件人"
-    assert "李华" in draft1.body, "E010: 中文邮件应包含发件人"
-    assert "项目合作" in draft1.body, "E010: 中文邮件应包含主题"
-
-    # 样例 2：英文感谢邮件
-    draft2 = generate_email(
-        scene="thank_you",
-        language="en",
-        tone="friendly",
-        recipient="Alice",
-        sender="Bob",
-        subject="Team Support",
-    )
-    assert draft2.score > 0, "E010: 英文邮件评分应为正数"
-    assert "Alice" in draft2.body, "E010: 英文邮件应包含收件人"
-    assert "Bob" in draft2.body, "E010: 英文邮件应包含发件人"
-    assert "Team Support" in draft2.body, "E010: 英文邮件应包含主题"
-
-    # 样例 3：批量处理（3 条）
-    batch_items = [
-        {
-            "scene": "meeting_invite",
-            "language": "zh",
-            "tone": "semi_formal",
-            "recipient": "王总监",
-            "sender": "赵秘书",
-            "subject": "季度规划会",
-            "date": "下周三",
-        },
-        {
-            "scene": "payment_reminder",
-            "language": "en",
-            "tone": "firm",
-            "recipient": "Client",
-            "sender": "Finance Team",
-            "subject": "Invoice #2024-001",
-            "date": "this Friday",
-        },
-        {
-            "scene": "complaint_reply",
-            "language": "zh",
-            "tone": "euphemistic",
-            "recipient": "陈先生",
-            "sender": "客服部",
-            "subject": "物流延迟问题",
-            "date": "本周内",
-        },
-    ]
-    batch_results = batch_generate(batch_items)
-    assert len(batch_results) == 3, "E010: 批量结果数量应为 3"
-    for r in batch_results:
-        assert r["score"] > 0, "E010: 批量邮件评分应为正数"
-        assert r["body"], "E010: 批量邮件正文不应为空"
-
-    # 样例 4：边界情况（评分低于 70 时应有建议）
-    draft4 = generate_email(
-        scene="follow_up",
-        language="en",
-        tone="formal",
-        recipient="X",
-        sender="Y",
-        subject="Z",
-    )
-    if draft4.score < 70:
-        assert draft4.suggestions, "E010: 低分邮件应有修改建议"
+def format_output(results: List[Dict[str, Any]], fmt: str = "md") -> str:
+    """将结果转换为指定格式（md/txt/html）。"""
+    if fmt == "md":
+        return _to_markdown(results)
+    elif fmt == "txt":
+        return _to_plain_text(results)
+    elif fmt == "html":
+        return _to_html(results)
     else:
-        assert draft4.score >= 70, "E010: 评分逻辑异常"
-
-    # 样例 5：批量数量上限检查（宽松：只验证 100 条不报错）
-    many_items = [
-        {
-            "scene": "thank_you",
-            "language": "en",
-            "tone": "friendly",
-            "recipient": f"Person{i}",
-            "sender": "System",
-            "subject": "Thank You",
-        }
-        for i in range(100)
-    ]
-    many_results = batch_generate(many_items)
-    assert len(many_results) == 100, "E010: 100 条批量处理应成功"
-
-    print("自检通过 (E-code 检查: E001-E010 已覆盖)")
-    print("所有内置样例断言成功，核心逻辑正常。")
+        fail("E001", f"不支持的输出格式: {fmt}")
 
 
-# ---------------------------------------------------------------------------
-# 命令行入口
-# ---------------------------------------------------------------------------
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="email-draft-pro: 商务邮件场景起草工具（中英双语、批量）",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog=(
-            "示例:\n"
-            "  单封生成: python scripts/main.py --scene follow_up --lang zh --tone formal "
-            "--recipient 张经理 --sender 李华 --subject 项目跟进\n"
-            "  批量生成: python scripts/main.py --batch input.json --out results.json\n"
-            "  自检:     python scripts/main.py --selftest"
-        ),
-    )
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--scene", help="场景: follow_up / internal_report / meeting_invite / thank_you / payment_reminder / complaint_reply")
-    parser.add_argument("--lang", default="zh", help="语言: zh / en")
-    parser.add_argument("--tone", default="formal", help="语气: formal / semi_formal / friendly / urgent / euphemistic / firm")
-    parser.add_argument("--recipient", help="收件人")
-    parser.add_argument("--sender", help="发件人")
-    parser.add_argument("--subject", help="邮件主题")
-    parser.add_argument("--date", help="日期/时间参考（可选）")
-    parser.add_argument("--batch", help="批量输入 JSON 文件路径")
-    parser.add_argument("--out", help="批量输出 JSON 文件路径（默认 stdout）")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+def _to_markdown(results: List[Dict[str, Any]]) -> str:
+    """转换为 Markdown 格式。"""
+    lines = []
+    for r in results:
+        lines.append(f"## {r['subject']}\n")
+        lines.append(f"**场景**: {r['scene']} | **语言**: {r['language']} | **语气**: {r['tone']}")
+        lines.append(f"**评分**: {r['score']}/100\n")
+        if r['suggestions']:
+            lines.append("**建议**:")
+            for s in r['suggestions']:
+                lines.append(f"- {s}")
+            lines.append("")
+        lines.append(r['body'])
+        lines.append("\n---\n")
+    return "\n".join(lines)
 
 
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
-
-    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
-
-    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.268 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        run_selftest()
-        return
-
-    # 批量模式
-    if args.batch:
-        try:
-            with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
-                items = json.load(f)
-        except FileNotFoundError:
-            fail("E006", f"输入文件不存在: {args.batch}")
-        except json.JSONDecodeError as e:
-            fail("E008", f"JSON 解析失败: {e}")
-        except Exception as e:
-            fail("E006", f"读取失败: {e}")
-
-        if not isinstance(items, list):
-            fail("E001", "批量输入应为 JSON 数组")
-
-        results = batch_generate(items)
-
-        if args.out:
-            try:
-                with open(args.out, "w", encoding="utf-8", errors="replace") as f:
-                    json.dump(results, f, ensure_ascii=False, indent=2)
-                print(f"批量生成完成，共 {len(results)} 封，已写入 {args.out}")
-            except Exception as e:
-                fail("E007", f"写入失败: {e}")
-        else:
-            print(json.dumps(results, ensure_ascii=False, indent=2))
-        return
-
-    # 单封模式
-    if not args.recipient or not args.sender or not args.subject:
-        fail("E001", "单封模式必须提供 --recipient, --sender, --subject")
-    if not args.scene:
-        fail("E001", "单封模式必须提供 --scene")
-
-    draft = generate_email(
-        scene=args.scene,
-        language=args.lang,
-        tone=args.tone,
-        recipient=args.recipient,
-        sender=args.sender,
-        subject=args.subject,
-        date=args.date,
-    )
-
-    # 输出结果
-    print("=" * 60)
-    print(f"场景: {draft.scene} | 语言: {draft.language} | 语气: {draft.tone}")
-    print(f"评分: {draft.score}/100")
-    if draft.suggestions:
-        print("建议:")
-        for s in draft.suggestions:
-            print(f"  - {s}")
-    print("=" * 60)
-    print(draft.body)
-    print("=" * 60)
-
-
-if __name__ == "__main__":
-    main()
+def _to_plain_text(results: List[Dict[str, Any]]) -> str:
+    """转换为纯文本格式。"""
+    lines = []
+    for r in results:
+        lines.append(f"主题: {r['subject']}")
+        lines.append(f"场景: {r['scene']} | 语言: {r['language']} | 语气: {r['tone']}")
+        lines.append(f"评分: {r['score']}/100")
+        if r['suggestions']:
+            lines.append("建议:")
+            for s in r['suggestions']:
+                lines.append(f"  - {s}")

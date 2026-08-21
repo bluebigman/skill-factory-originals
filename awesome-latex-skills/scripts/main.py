@@ -34,6 +34,7 @@ import json
 import argparse
 from collections import OrderedDict
 from datetime import datetime
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -786,7 +787,16 @@ def main():
     parser.add_argument("--output", "-o", metavar="FILE", help="输出文件（默认输出到 stdout）")
     parser.add_argument("--json", action="store_true", help="以 JSON 格式输出")
     
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 自检模式
     if args.selftest:

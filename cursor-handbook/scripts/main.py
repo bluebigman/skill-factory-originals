@@ -37,6 +37,7 @@ import argparse
 from dataclasses import dataclass, field, asdict
 from typing import List, Dict, Optional, Any, Tuple
 from pathlib import Path
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -519,7 +520,8 @@ references: [R002]
 ---
 这是规则的具体内容描述。
 """
-            test_file.write_text(test_content, encoding="utf-8")
+            if not dry_run or getattr(args, "force", False):
+                test_file.write_text(test_content, encoding="utf-8")
             
             rule = parse_rule_file(str(test_file))
             assert rule.rule_id == "R001", "rule_id 解析失败"
@@ -705,7 +707,7 @@ def main():
     )
     
     parser.add_argument(
-        "input",
+        "--input",
         nargs="?",
         help="规则文件或目录路径"
     )
@@ -753,7 +755,16 @@ def main():
         help="仅校验规则，不生成输出"
     )
     
+    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+
+    
+    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    
     args = parser.parse_args()
+    
+    global dry_run
+    
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 运行自检
     if args.selftest:
@@ -806,7 +817,8 @@ def main():
             output_path = Path(args.output)
             try:
                 output_path.parent.mkdir(parents=True, exist_ok=True)
-                output_path.write_text(output_content, encoding="utf-8")
+                if not dry_run or getattr(args, "force", False):
+                    output_path.write_text(output_content, encoding="utf-8")
                 print(f"输出已写入: {output_path}")
             except Exception as exc:
                 print(f"E007: 输出目录不可写: {output_path.parent} - {exc}", file=sys.stderr)
