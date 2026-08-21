@@ -1,38 +1,48 @@
 {
-  "timestamp": "20260818_061115",
+  "timestamp": "20260821_134337",
   "slug": "healthcare-agents",
   "spec": {
     "slug": "healthcare-agents",
     "name": "healthcare-agents",
-    "description": "面向美国医疗行政场景的51个专科AI智能体便携工具包。",
-    "cli_interface": [
-      "[\"healthcare agents\"",
-      "\"医疗行政智能体\"",
-      "\"医疗流程自动化\"",
-      "\"healthcare admin agents\"",
-      "\"医疗行政工作流\"]",
-      "--selftest",
-      "--version"
-    ],
+    "description": "51个专科AI智能体，处理美国医疗行政数据清洗与字段映射。",
+    "cli_interface": [],
     "capability_outline": [
-      "1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。",
-      "2. **试运行**：先用单个样本执行，核对输出字段与格式。",
-      "3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。",
-      "4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。"
+      "1. 打开 `processing_log.json`，筛选 `resolution: \"needs_review\"` 的记录",
+      "2. 根据 `file` 和 `record_id` 定位原始记录",
+      "3. 核对 `values` 中的多个值，确定正确值",
+      "4. 手动修正输出 CSV 中的占位符",
+      "1. 把文件放到 `./medical_input/`",
+      "2. 检查 `test.csv` 字段格式",
+      "4. 查看 `processing_log.json` 确认处理结果",
+      "5. 抽查输出文件，确认无 `[需核实:]` 占位符",
+      "1. 阅读「一、能力边界」了解工具包能做什么、不能做什么",
+      "2. 阅读「三、标准流程」的步骤 1-2，完成首次试运行",
+      "3. 阅读「六、FAQ 反模式」避免常见错误",
+      "4. 遇到问题时查阅「五、错误码体系」",
+      "1. 阅读「三、标准流程」的步骤 3-4，掌握批量执行和校验技巧",
+      "2. 阅读「四、置信度门控」理解占位符机制，建立数据质量意识",
+      "3. 根据附录 A 的专科代码表，自定义专科映射规则",
+      "4. 修改 `run_agents.py` 中的字段映射逻辑，适配特殊业务需求",
+      "1. 阅读「三、标准流程」的输出规范，设计自定义输出模板",
+      "2. 扩展 51 个专科的模板规则，增加新的专科类型",
+      "3. 集成到现有医疗管理系统，通过 API 调用本工具包",
+      "4. 开发自动化校验脚本，将 `validate_results.py` 集成到 CI/CD 流程",
+      "2. **禁止反向工程**：使用者不得对本工具包进行反向工程、反编译、反汇编，不得尝试提取源代码、算法或底层逻辑。",
+      "3. **数据合规**：使用者须确保输入数据符合 HIPAA 及其他适用法规要求，不得上传包含受保护健康信息（PHI）的未脱敏数据。",
+      "4. **无担保**：本工具包按\"现状\"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。",
+      "5. **争议解决**：因本协议产生的争议，适用中华人民共和国法律，由北京市朝阳区人民法院管辖。"
     ],
     "upstream": null,
-    "derivation": "original-work"
+    "derivation": "independent-implementation"
   },
-  "spec_hash": "79879472c208af30",
-  "prompt_hash": "32e71175c501ba98",
-  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\":\"healthcare-agents\",\"name\":\"healthcare-agents\",\"description\":\"面向美国医疗行政场景的51个专科AI智能体便携工具包。\",\"cli_interface\":[\"[\\\"healthcare agents\\\"\",\"\\\"医疗行政智能体\\\"\",\"\\\"医疗流程自动化\\\"\",\"\\\"healthcare admin agents\\\"\",\"\\\"医疗行政工作流\\\"]\",\"--selftest\",\"--version\"],\"capability_outline\":[\"1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。\",\"2. **试运行**：先用单个样本执行，核对输出字段与格式。\",\"3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。\",\"4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。\"],\"upstream\":null,\"derivation\":\"original-work\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 章节结构自行设计，可参考规格里的\"能力清单\"但不得沿用其标题措辞与顺序。\n3. 输出完整 Markdown，frontmatter 必须包含（值已给定，照抄）：\n   slug: healthcare-agents\n   name: healthcare-agents\n   displayName: （自创中文名，4-12字，含场景词，如\"合同审查 法律风险 条款比对\"风格，给一个最合适的）\n   description: （自创一句话，30字内，讲清用途）\n   version: 1.0.0\n   license: MIT\n   source_project: original\n   source_url: （留空）\n   copyright_holder: 原创作者（自持版权）\n   ai_generated: true\n   ai_tools: [\"DeepSeek\"]\n   disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。\n   author: （自创，不用任何工厂标识）\n   agent_created: true\n   trigger_words: （保留原触发词，可补充2-3个同义场景词）\n4. frontmatter 结束后必须紧跟显式 AI 标识行：\n   > 本内容由 AI 生成，仅供学习参考\n   并带 marker 注释 <!-- ai-generated-notice -->\n5. 正文必须包含以下 TRACE 高分结构（对标 SkillHub 4.8+ 顶级 Skill）：\n   - 能力边界：能做/不能做清单 + 适用对象（一页纸速查卡）\n   - 触发方式：trigger_words + 大白话场景映射表\n   - 标准流程：前置条件 → 执行步骤（分步编号）→ 输出规范\n   - 置信度门控：信息不足时输出 [需核实:字段] 占位，不编造\n   - 错误码体系：常见错误 → 提示话术 → 修正步骤\n   - FAQ 反模式：3-5 个常见坑 + 反模式对照\n   - 渐进式披露：速查卡 + 分层次阅读路径（新手/进阶）\n   每节都要有真实可执行的细节（参数表、示例、边界值），拒绝空话套话。\n6. 全中文为主（代码示例可用英文），语气专业务实。\n7. 严禁：绝对化用语（最/最好/100%/零风险/保证）、收益承诺、任何内部平台信息。\n8. 不要输出 ```markdown 包裹，直接输出 SKILL.md 全文（**首行必须是 --- 开头**）。\n9. 【强制合规章节】（document_gate 硬性要求，缺一即打回重写）：\n   a. 文档末尾必须含「用户协议」章节（含：使用者自行承担全部责任、禁止反向工程，\n      带 marker 注释 <!-- user-agreement-injected -->）\n   b. 文档末尾必须含「许可证（License）」章节，内嵌 MIT 许可证全文，\n      带 marker 注释 <!-- professional-license-embedded -->\n   c. 开头必须有一行 AI 辅助生成免责声明（如\"本 Skill 由 AI 辅助生成，仅供参考\"）\n   d. frontmatter 的 description/正文一律不得出现任何绝对化承诺\n   以上章节即使功能大纲未提及也必须补齐——这是发布合规的强制要求。",
+  "spec_hash": "ee782cb208414b9e",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
   "llm_model": "deepseek-chat",
   "llm_temperature": 0.9,
-  "cost_usd": 0.005866,
+  "cost_usd": 0.0,
   "similarity_metrics": {
-    "section": 0.12121212121212122,
-    "token": 0.3069590085795996,
-    "line": 0.11711711711711711
+    "mode": "49-proxy"
   },
   "style_checks_passed": true
 }
