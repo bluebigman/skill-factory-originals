@@ -1,0 +1,32 @@
+{
+  "timestamp": "20260821_134531",
+  "slug": "lazygit-pro",
+  "spec": {
+    "slug": "lazygit-pro",
+    "name": "lazygit",
+    "description": "终端里的Git图形界面，分支合并、冲突解决、交互式暂存一站式搞定。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 确认 lazygit 已安装：运行 `lazygit --version`，版本号需 ≥ 0.40",
+      "2. 确认当前目录是 Git 仓库：运行 `git status` 无报错",
+      "3. 终端宽度建议 ≥ 100 字符，否则面板可能错位",
+      "1. **责任承担**：使用者自行承担使用本 Skill 的全部责任。因操作不当导致的代码丢失、仓库损坏、数据损失等后果，本 Skill 作者不承担任何责任。",
+      "2. **禁止反向工程**：不得对本 Skill 文档进行反向工程、反编译、破解或试图提取底层逻辑。",
+      "3. **合规使用**：使用者应遵守所在国家/地区的法律法规，不得将本 Skill 用于非法用途。",
+      "4. **无担保声明**：本 Skill 按\"现状\"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。",
+      "5. **修改与分发**：允许在保留本协议的前提下修改和分发本 Skill，但需注明原始出处。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "9461be7d5f3d33df",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
