@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260821_080022",
+  "slug": "meeting-pro",
+  "spec": {
+    "slug": "meeting-pro",
+    "name": "meeting-pro",
+    "description": "一站式会议处理：录音转文字、纪要生成、行动项提取与校验。支持批量处理与置信度门控。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "748912868c8ed43a",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
