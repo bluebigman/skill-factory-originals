@@ -1,0 +1,43 @@
+{
+  "timestamp": "20260821_135131",
+  "slug": "notewise",
+  "spec": {
+    "slug": "notewise",
+    "name": "notewise",
+    "description": "将零散笔记转化为结构化知识卡片，辅助学习与复盘。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 放文件 → 同一目录，UTF-8 编码",
+      "2. 试运行 → notewise --input 单文件 --output ./output/",
+      "3. 核对 → 检查 card_type 和 confidence",
+      "4. 批量 → notewise --input ./notes/ --output ./output/ --batch",
+      "5. 校验 → notewise --verify ./output/ --report ./output/verification.json",
+      "1. 阅读本速查卡，了解基本流程",
+      "2. 准备 1-2 个测试文件，执行步骤 1-2",
+      "3. 观察输出格式，对照「输出规范」理解字段含义",
+      "4. 熟悉置信度门控规则，了解 `[需核实]` 的含义",
+      "5. 完成一次完整流程（步骤 1-4）",
+      "1. 掌握错误码体系，能独立排查 E001-E007",
+      "2. 理解置信度判定规则，能区分不同置信度场景",
+      "3. 能手动修正低置信度卡片，补充缺失信息",
+      "4. 能利用关联图谱发现知识盲区，主动补充学习",
+      "5. 能自定义输出模板（修改 `config.yaml` 中的模板字段）",
+      "2. **数据安全**：使用者应自行确保输入数据的合法性与安全性。本 Skill 不承担因输入数据引发的任何法律纠纷或数据泄露责任。",
+      "3. **禁止反向工程**：使用者不得对本 Skill 的底层算法、提示词结构进行反向工程、反编译或试图提取源代码。",
+      "4. **合规使用**：使用者应遵守所在地法律法规，不得将本 Skill 用于任何非法目的。",
+      "5. **协议更新**：本协议可能随 Skill 版本更新而调整，使用者应定期查阅最新版本。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "ab90dff72fda4c46",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
