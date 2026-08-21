@@ -1,0 +1,44 @@
+{
+  "timestamp": "20260821_134739",
+  "slug": "meeting-pro",
+  "spec": {
+    "slug": "meeting-pro",
+    "name": "meeting-pro",
+    "description": "一站式会议处理：录音转文字、纪要生成、行动项提取与校验。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. 确认优先开发移动端功能",
+      "2. 暂缓桌面端重构计划",
+      "1. 安装：pip install meeting-pro",
+      "2. 自检：meeting-pro --selftest",
+      "3. 处理：meeting-pro process 音频文件.m4a",
+      "4. 查看：./results/ 目录下的纪要.md 和 行动项.json",
+      "5. 校验：meeting-pro validate 行动项.json",
+      "1. 阅读「一、能力边界」了解适用范围",
+      "2. 按「三、标准处理流程」步骤二执行单文件处理",
+      "3. 查看输出文件，理解纪要结构和行动项格式",
+      "4. 遇到问题查阅「五、错误码体系」",
+      "1. 掌握「四、置信度门控」的占位符处理",
+      "2. 配置自定义术语表提升转写准确率",
+      "3. 使用批量处理 + 断点续跑处理多会议",
+      "4. 编写规则文件定制行动项校验逻辑",
+      "5. 集成到CI/CD流程实现会议纪要自动化归档",
+      "2. **禁止反向工程**：不得对本 Skill 的源代码、算法、模型权重进行反向工程、反编译、反汇编或任何形式的破解尝试。",
+      "3. **合规使用**：使用者应确保使用本工具处理的内容符合当地法律法规，不侵犯第三方知识产权，不涉及违法违规信息。",
+      "4. **数据安全**：使用者应对输入数据的安全性负责，敏感信息请自行评估处理风险。",
+      "5. **无担保声明**：本工具按\"现状\"提供，不附带任何明示或暗示的担保。"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "11f5d2ea86383ecf",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
