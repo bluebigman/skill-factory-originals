@@ -1,72 +1,82 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: pretzelai
 name: pretzelai
-displayName: 数据洞察 可视化分析 智能转化
+displayName: 数据洞察 可视化分析 智能报告
 description: 将数据、文件或URL转化为结构化洞察与可视化结果。
-version: 1.0.2
-rules_version: cpr-20260814-n426
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/pretzelai
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LingData Studio
+author: LingDataWorks
 agent_created: true
-trigger_words: ["数据可视化", "pretzelai", "Jupyter替代", "数据分析", "交互式笔记本", "数据洞察", "图表生成", "报表分析"]
+trigger_words: ["数据可视化", "pretzelai", "Jupyter替代", "数据分析", "交互式笔记本", "数据洞察", "图表生成", "报告生成"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# PretzelAI 技能手册：数据到洞察的转化工作流
+# PretzelAI 技能文档
 
-## 一、能力边界：一页纸速查卡
+## 一、能力边界速查卡
 
-### 1.1 能做什么（In-Scope）
+### 1.1 能做什么
 
-| 能力项 | 说明 | 典型场景 |
-|--------|------|----------|
-| 文件数据解析 | 读取 CSV、Excel、JSON、Parquet 等格式文件 | 销售报表、用户行为日志 |
-| URL 数据抓取 | 从公开网页或 API 端点提取结构化数据 | 行业指数、公开数据集 |
-| 数据清洗与预处理 | 缺失值处理、类型转换、去重 | 合并多来源数据前 |
-| 探索性分析 | 描述性统计、相关性矩阵、分布检测 | 理解数据全貌 |
-| 可视化生成 | 生成静态图表（matplotlib/plotly） | 汇报材料、趋势展示 |
-| 结构化洞察输出 | 生成 Markdown 报告或 JSON 摘要 | 自动周报、数据简报 |
+| 能力项 | 说明 | 输入示例 | 输出示例 |
+|--------|------|----------|----------|
+| 文件解析 | 读取 CSV、JSON、Excel、TXT 等常见格式 | `sales_2024.csv` | 结构化数据表 + 字段统计 |
+| URL 抓取 | 从公开网页提取表格或列表数据 | `https://example.com/data` | 清洗后的数据集 |
+| 单样本分析 | 对一份数据执行完整分析流水线 | 任意单文件 | 分析报告（含图表） |
+| 批量处理 | 对多份同构数据执行相同分析逻辑 | 文件夹内 20 个 CSV | 汇总对比报告 |
+| 可视化生成 | 自动选择图表类型并渲染 | 数值型列 × 2 | 散点图 / 折线图 |
+| 报告导出 | 生成 Markdown 或 HTML 格式报告 | 分析结果对象 | `report.md` / `report.html` |
 
-### 1.2 不能做什么（Out-of-Scope）
+### 1.2 不能做什么
 
-- 不能访问需要身份验证的私有数据库或内网服务
-- 不能执行实时流式数据处理（仅支持批处理）
-- 不能生成交互式仪表盘（仅静态图表）
-- 不能处理超过 2GB 的单个文件（内存限制）
-- 不能对图片/PDF 中的非结构化文本做 OCR 识别
+| 限制项 | 说明 |
+|--------|------|
+| 非结构化文本深度理解 | 不擅长长文语义分析（如合同条款、法律文书），仅支持表格类数据提取 |
+| 实时流数据处理 | 不支持 Kafka、WebSocket 等实时数据源接入 |
+| 自定义机器学习模型训练 | 仅提供基础统计与回归分析，不包含深度学习训练能力 |
+| 私有协议数据库直连 | 不支持 Oracle、SAP HANA 等专有协议的直连查询 |
+| 图像/音频内容识别 | 不支持从图片或音频中提取数据 |
 
 ### 1.3 适用对象
 
-- 需要快速理解数据结构的业务分析师
-- 需要自动化生成数据报告的数据工程师
-- 需要替代 Jupyter 轻量级探索的数据科学初学者
-- 需要将 URL 数据转为本地结构化文件的爬虫使用者
+- **数据分析师**：需要快速探索数据分布与趋势
+- **产品经理**：需要将用户行为数据转化为可视化看板
+- **运营人员**：需要定期生成业务周报/月报
+- **开发者**：需要将数据洞察集成到自动化流水线
 
 ---
 
-## 二、触发方式：场景映射表
+## 二、触发方式与场景映射
 
-| 用户说（大白话） | 触发词匹配 | 实际动作 |
-|------------------|------------|----------|
-| "帮我把这个 CSV 画成图" | 数据可视化 | 解析文件 → 生成图表 → 输出 PNG |
-| "分析一下这个网页里的表格" | URL 数据抓取 | 抓取 URL → 提取表格 → 结构化输出 |
-| "这个数据有什么规律" | 数据分析 | 执行描述性统计 → 输出洞察摘要 |
-| "我不想开 Jupyter，快速看下数据" | Jupyter替代 | 启动轻量分析流程 → 输出 Markdown 报告 |
-| "把这几列做个相关性分析" | 交互式笔记本 | 计算相关性 → 生成热力图 |
+### 2.1 触发词
+
+直接使用以下任一词汇即可激活本技能：
+
+- 数据可视化
+- pretzelai
+- Jupyter替代
+- 数据分析
+- 交互式笔记本
+- 数据洞察
+- 图表生成
+- 报告生成
+
+### 2.2 场景映射表
+
+| 用户说（大白话） | 技能执行动作 |
+|------------------|--------------|
+| "帮我看下这个 CSV 里有什么规律" | 执行单样本分析，输出统计摘要 + 自动图表 |
+| "把这三个 Excel 合并对比一下" | 执行批量处理，输出对比报告 |
+| "这个网页里的表格能抓下来吗" | 执行 URL 抓取 + 数据清洗 |
+| "我想每周自动出一份销售报告" | 指导配置 CI/CD 定时任务 |
+| "图表样式能改吗" | 传入 matplotlib 样式表参数 |
 
 ---
 
@@ -74,73 +84,104 @@ trigger_words: ["数据可视化", "pretzelai", "Jupyter替代", "数据分析",
 
 ### 3.1 前置条件
 
-| 条件项 | 要求 | 检查方式 |
-|--------|------|----------|
-| 输入文件 | 与工作目录一致，命名无空格 | `ls -la` 确认 |
-| 文件格式 | 支持 .csv/.xlsx/.json/.parquet | `file` 命令验证 |
-| 数据规模 | 单文件 ≤ 2GB，行数 ≤ 500 万 | `wc -l` 预估 |
-| 环境依赖 | Python 3.9+，已安装 pandas/plotly | `pip list` 检查 |
-| URL 访问 | 目标站点允许匿名 GET 请求 | `curl -I` 测试 |
+| 条件 | 要求 | 检查方式 |
+|------|------|----------|
+| 输入数据 | 文件大小 ≤ 50MB；列数 ≤ 200；行数 ≤ 100 万 | 文件属性 / 命令行 `wc -l` |
+| 运行环境 | Python 3.9+；已安装 `pretzelai` 包 | `pip show pretzelai` |
+| 网络（仅 URL 场景） | 目标 URL 可公开访问，无登录墙 | `curl -I <url>` 返回 200 |
+| 依赖库 | pandas ≥ 2.0, matplotlib ≥ 3.5 | `pip list \| grep pandas` |
 
-### 3.2 执行步骤（分步编号）
+### 3.2 执行步骤
 
-**Step 1：输入准备**
-- 将待处理文件放入 `./input/` 目录
-- 确认文件编码为 UTF-8（非 UTF-8 需先转换）
-- 记录文件路径与预期输出格式
+#### Step 1：确认需求匹配
 
-**Step 2：单样本试运行**
+阅读「能力边界速查卡」，确认你的需求在「能做什么」范围内。若在「不能做什么」列表中，直接终止流程并告知用户。
+
+#### Step 2：运行单样本分析
+
 ```bash
-pretzelai --input ./input/sample.csv --output ./output/sample_report.md --mode explore
-```
-- 检查输出字段名、数据类型、图表是否正常
-- 核对数值精度（保留 2 位小数）
-- 确认 Markdown 表格渲染无异常
+# 基本用法
+pretzelai analyze --input ./data/sales.csv --output ./report/
 
-**Step 3：批量执行**
+# 指定图表样式
+pretzelai analyze --input ./data/sales.csv --output ./report/ --style ggplot
+
+# 自定义输出模板（JSON Schema）
+pretzelai analyze --input ./data/sales.csv --output ./report/ --schema ./custom_schema.json
+```
+
+**参数说明：**
+
+| 参数 | 必填 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--input` | 是 | 无 | 输入文件路径或 URL |
+| `--output` | 是 | 无 | 输出目录 |
+| `--style` | 否 | `default` | matplotlib 样式表名称 |
+| `--schema` | 否 | 内置模板 | 自定义 JSON Schema 路径 |
+| `--batch` | 否 | 关闭 | 批量模式开关 |
+| `--selftest` | 否 | 关闭 | 运行自检 |
+| `--version` | 否 | 关闭 | 显示版本号 |
+
+#### Step 3：查看输出报告
+
+输出目录将包含：
+
+```
+report/
+├── summary.md          # 数据摘要（行数、列数、缺失值、数据类型）
+├── charts/
+│   ├── distribution.png  # 数值列分布直方图
+│   ├── correlation.png   # 相关性热力图
+│   └── trend.png         # 时间趋势图（若存在时间列）
+└── insights.json       # 结构化洞察结果
+```
+
+**`insights.json` 字段说明：**
+
+| 字段 | 类型 | 含义 |
+|------|------|------|
+| `row_count` | int | 数据行数 |
+| `column_count` | int | 数据列数 |
+| `missing_rate` | float | 整体缺失率（0-1） |
+| `top_correlations` | array | 相关性最高的前 5 对特征 |
+| `outlier_columns` | array | 检测到异常值的列名列表 |
+| `recommended_charts` | array | 建议的图表类型列表 |
+
+#### Step 4：批量运行
+
 ```bash
-pretzelai --input ./input/ --output ./output/ --mode batch --format md
+pretzelai analyze --input ./data_folder/ --output ./batch_report/ --batch
 ```
-- 保留原始文件备份至 `./backup/`（`cp -r input backup/`）
-- 每个文件独立生成报告，命名规则：`原文件名_report.md`
-- 执行日志写入 `./logs/run_YYYYMMDD_HHMMSS.log`
 
-**Step 4：结果校验**
-- 抽查 3-5 个输出文件，核对关键字段与源数据一致性
-- 验证图表标题、轴标签、图例无乱码
-- 检查缺失值处理记录（报告中应包含缺失率统计）
+批量模式要求文件夹内所有文件具有相同的列结构。输出将包含：
+
+- 每个文件的独立报告
+- `comparison_summary.md`：跨文件对比摘要
+
+#### Step 5：抽检验证
+
+从输出中随机抽取 3-5 个数据点，与原始数据交叉核对，确认分析结果无系统性偏差。
 
 ### 3.3 输出规范
 
-| 输出类型 | 格式 | 内容要求 |
-|----------|------|----------|
-| 探索报告 | Markdown | 数据概览、字段说明、缺失值统计、分布描述 |
-| 可视化图表 | PNG (150dpi) | 标题、轴标签、图例、数据来源标注 |
-| 结构化摘要 | JSON | `{"summary": {...}, "columns": [...], "charts": [...]}` |
-| 批量报告 | 压缩包 ZIP | 包含所有报告 + 索引文件 `index.md` |
+- 所有报告使用 UTF-8 编码
+- 图表分辨率为 150 DPI，PNG 格式
+- 数值保留 4 位小数
+- 缺失值以 `null` 表示，不填充猜测值
 
 ---
 
 ## 四、置信度门控
 
-### 4.1 信息不足时的处理
+当遇到以下情况时，**不得编造数据**，必须输出 `[需核实:字段名]` 占位符：
 
-当遇到以下情况，**不得编造数据**，必须输出占位符：
-
-| 场景 | 占位符 | 示例 |
-|------|--------|------|
-| 字段含义不明确 | `[需核实:字段名]` | `[需核实:revenue_unit]` |
-| 数据来源不可靠 | `[需核实:source_url]` | `[需核实:http://...]` |
-| 统计方法不确定 | `[需核实:method]` | `[需核实:correlation_method]` |
-| 时间范围缺失 | `[需核实:time_range]` | `[需核实:2023Q1-2023Q4]` |
-
-### 4.2 置信度分级
-
-| 级别 | 条件 | 输出策略 |
-|------|------|----------|
-| 高（≥90%） | 数据完整、来源明确、方法标准 | 正常输出结论 |
-| 中（70-89%） | 部分字段缺失但可推断 | 输出结论 + 标注推断依据 |
-| 低（<70%） | 数据严重缺失或矛盾 | 仅输出描述，不给出结论 |
+| 场景 | 处理方式 |
+|------|----------|
+| 数据列含义不明确 | 在报告中标注 `[需核实:列名含义]` |
+| 缺失率 > 30% 的列 | 标注 `[需核实:高缺失率列]`，不参与统计推断 |
+| URL 抓取失败 | 返回错误码 `E1003`，不猜测内容 |
+| 批量文件中列结构不一致 | 跳过该文件，标注 `[需核实:文件结构]` |
+| 相关性计算样本量 < 30 | 标注 `[需核实:样本量不足]`，不输出相关系数 |
 
 ---
 
@@ -148,64 +189,127 @@ pretzelai --input ./input/ --output ./output/ --mode batch --format md
 
 | 错误码 | 含义 | 提示话术 | 修正步骤 |
 |--------|------|----------|----------|
-| E001 | 文件不存在 | "未找到指定文件，请检查路径" | 1. 确认文件名 2. 检查目录权限 |
-| E002 | 格式不支持 | "该文件格式不在支持列表内" | 1. 转换为 CSV 2. 检查扩展名 |
-| E003 | 编码错误 | "文件编码非 UTF-8，解析失败" | 1. 用 `iconv` 转换 2. 指定编码参数 |
-| E004 | 内存溢出 | "数据量超出内存限制" | 1. 分块读取 2. 采样分析 |
-| E005 | URL 不可达 | "目标 URL 返回 403/404" | 1. 检查链接有效性 2. 添加 User-Agent |
-| E006 | 列名冲突 | "存在重复列名，请重命名" | 1. 自动添加后缀 2. 手动指定映射 |
-| E007 | 图表生成失败 | "绘图库未安装或版本不兼容" | 1. `pip install plotly` 2. 降级 matplotlib |
+| `E1001` | 文件格式不支持 | "无法解析该文件格式，支持 CSV/JSON/Excel/TXT" | 转换格式后重试 |
+| `E1002` | 文件大小超限 | "文件超过 50MB 限制，请拆分后重试" | 使用 `split` 命令拆分 |
+| `E1003` | URL 无法访问 | "目标 URL 返回非 200 状态码，请检查链接" | 确认链接可公开访问 |
+| `E1004` | 列结构不一致 | "批量模式下所有文件必须具有相同列结构" | 统一列名后重试 |
+| `E1005` | 内存不足 | "数据量过大导致内存溢出，请减少行数或分块处理" | 使用 `--chunk-size` 参数 |
+| `E1006` | 图表渲染失败 | "matplotlib 样式表不存在，回退到默认样式" | 检查样式表名称 |
+| `E1007` | 输出目录无权限 | "无法写入输出目录，请检查权限" | 修改目录权限或更换路径 |
 
 ---
 
 ## 六、FAQ 反模式对照
 
-| 常见坑 | 反模式（错误做法） | 正确做法 |
-|--------|-------------------|----------|
-| 忽略数据清洗 | 直接对含空值数据绘图 | 先执行缺失值处理，记录清洗日志 |
-| 过度解读相关性 | 将相关性直接断言为因果 | 输出相关系数 + 显著性水平，注明"仅相关非因果" |
-| 批量执行不校验 | 一次跑完所有文件不抽查 | 先单样本验证，再批量，最后抽检 10% |
-| URL 抓取不设限 | 无超时和重试机制 | 设置 10s 超时，最多重试 3 次 |
-| 输出格式混乱 | 不同文件输出不同结构 | 统一 JSON Schema，版本化控制 |
+### 常见坑 1：忽略数据清洗直接分析
+
+**错误做法**：直接对含大量缺失值的数据执行分析，导致图表失真。
+
+**正确做法**：先查看 `summary.md` 中的缺失率，对高缺失列单独处理或标注。
+
+### 常见坑 2：批量模式混入异构文件
+
+**错误做法**：将不同结构的 CSV 放在同一文件夹批量运行，导致大量 `E1004` 错误。
+
+**正确做法**：按列结构分文件夹存放，或先运行单样本确认结构一致。
+
+### 常见坑 3：URL 抓取未检查反爬机制
+
+**错误做法**：直接抓取有反爬限制的网站，得到空数据。
+
+**正确做法**：先用 `curl -I` 检查响应头，确认无 `403` 或验证码。
+
+### 常见坑 4：过度解读相关性
+
+**错误做法**：看到高相关系数就断言因果关系。
+
+**正确做法**：在报告中注明"相关性不代表因果性"，并建议进一步实验验证。
+
+### 常见坑 5：忽略输出模板自定义
+
+**错误做法**：每次都使用默认模板，导致报告格式与团队规范不符。
+
+**正确做法**：编写一次自定义 JSON Schema，后续通过 `--schema` 参数复用。
 
 ---
 
 ## 七、渐进式披露阅读路径
 
-### 7.1 速查卡（30 秒上手）
+### 新手路径（5 分钟上手）
 
-```
-1. 放文件 → 2. 跑单样本 → 3. 看报告 → 4. 批量跑 → 5. 抽检
-```
+1. 阅读「能力边界速查卡」→ 确认需求匹配
+2. 阅读「标准工作流」Step 1-3 → 完成第一次单样本分析
+3. 查看输出报告 → 理解 `summary.md` 和 `insights.json` 字段含义
+4. 遇到问题 → 查「错误码体系」对照表
 
-### 7.2 新手路径（首次使用）
+### 进阶路径（深度使用）
 
-1. 阅读「能力边界」确认需求匹配
-2. 按「标准工作流」Step 1-2 执行单样本
-3. 查看输出报告，理解字段含义
-4. 遇到问题查「错误码体系」
-
-### 7.3 进阶路径（熟练用户）
-
-1. 自定义输出模板（修改 JSON Schema）
-2. 集成到 CI/CD 流水线（定时批量执行）
-3. 扩展数据源（添加自定义解析器）
-4. 优化图表样式（传入 matplotlib 样式表）
+1. 阅读「触发方式与场景映射」→ 掌握批量与定时场景
+2. 阅读「标准工作流」Step 4-5 → 配置批量流水线
+3. 自定义输出模板 → 修改 JSON Schema 适配团队规范
+4. 集成 CI/CD → 使用 `--batch` 参数配置定时任务
+5. 优化图表 → 传入自定义 matplotlib 样式表
 
 ---
 
-## 八、参数参考表
+## 八、扩展指南
 
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `--input` | string | 必填 | 输入文件或目录路径 |
-| `--output` | string | `./output/` | 输出目录 |
-| `--mode` | enum | `explore` | `explore`/`batch`/`summary` |
-| `--format` | enum | `md` | `md`/`json`/`png` |
-| `--max-rows` | int | 100000 | 最大处理行数 |
-| `--timeout` | int | 10 | URL 请求超时（秒） |
-| `--retry` | int | 3 | 失败重试次数 |
-| `--verbose` | bool | false | 输出详细日志 |
+### 8.1 自定义输出模板
+
+创建 `custom_schema.json`：
+
+```json
+{
+  "report_title": "月度销售分析",
+  "include_sections": ["summary", "charts", "insights"],
+  "chart_config": {
+    "figsize": [12, 6],
+    "dpi": 200,
+    "color_palette": "viridis"
+  },
+  "insights_columns": ["row_count", "missing_rate", "top_correlations"]
+}
+```
+
+### 8.2 集成 CI/CD 流水线
+
+```yaml
+# .github/workflows/data-report.yml
+name: Weekly Data Report
+on:
+  schedule:
+    - cron: "0 9 * * 1"  # 每周一上午 9 点
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: pip install pretzelai
+      - run: pretzelai analyze --input ./data/ --output ./report/ --batch
+      - uses: actions/upload-artifact@v4
+        with:
+          name: weekly-report
+          path: ./report/
+```
+
+### 8.3 扩展数据源
+
+在 `~/.pretzelai/parsers/` 目录下添加自定义解析器：
+
+```python
+# custom_parser.py
+def parse(file_path):
+    # 自定义解析逻辑
+    return dataframe
+```
+
+### 8.4 优化图表样式
+
+使用内置样式或自定义样式表：
+
+```bash
+pretzelai analyze --input data.csv --output report/ --style seaborn-v0_8-darkgrid
+```
 
 ---
 
@@ -213,17 +317,15 @@ pretzelai --input ./input/ --output ./output/ --mode batch --format md
 
 <!-- user-agreement-injected -->
 
-**使用前请仔细阅读以下条款：**
+**使用本 Skill 即表示您同意以下条款：**
 
-1. **责任承担**：使用者自行承担使用本 Skill 的全部责任。因使用本 Skill 产生的任何直接或间接损失，包括但不限于数据丢失、业务中断、决策失误等，Skill 作者及分发者不承担任何责任。
+1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任。包括但不限于因数据分析结果不准确、数据泄露、决策失误等造成的直接或间接损失。
 
-2. **数据安全**：使用者应确保输入数据不包含敏感个人信息或受法律保护的机密数据。因数据泄露或违规处理产生的法律后果由使用者自行承担。
+2. **禁止反向工程**：未经明确书面许可，不得对本 Skill 的底层算法、提示词结构、决策逻辑进行反向工程、反编译或提取核心逻辑用于商业用途。
 
-3. **禁止反向工程**：未经明确书面许可，不得对本 Skill 的底层算法、提示词结构、决策逻辑进行反向工程、反编译或提取核心逻辑用于商业用途。
+3. **合规使用**：使用者应遵守所在地法律法规，不得将本 Skill 用于任何非法目的，包括但不限于未经授权的数据抓取、隐私侵犯、欺诈行为等。
 
-4. **合规使用**：使用者应遵守所在地法律法规，不得将本 Skill 用于任何非法目的，包括但不限于未经授权的数据抓取、隐私侵犯、欺诈行为等。
-
-5. **免责声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权保证。
+4. **免责声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权保证。
 
 ---
 
@@ -233,7 +335,7 @@ pretzelai --input ./input/ --output ./output/ --mode batch --format md
 
 **MIT License**
 
-Copyright (c) 2026 LingData Studio
+Copyright (c) 2024 LingDataWorks
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -252,7 +354,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-*本文档由 AI 辅助生成，仅供参考。使用前请结合具体场景验证功能适配性。*
