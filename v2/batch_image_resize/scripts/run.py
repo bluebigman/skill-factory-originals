@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-batch_image_resize — 配套执行器（原创实现，clean-room）
-技能「batch_image_resize」的轻量辅助脚本：解析同目录 SKILL.md，提供 CLI 入口、触发词匹配、能力速览。
-零第三方依赖。
+batch_image_resize — 命令行工具（原创实现，clean-room）
+技能「batch_image_resize」的完整实现核心业务逻辑，提供 CLI 入口、参数化控制、自检与真实数据处理。
+含真实业务实现与第三方依赖。
 """
 from __future__ import annotations
 import argparse, re, sys, json, time, shutil, hashlib, os, tempfile
 from pathlib import Path
+import batch_resize as _biz  # 真实业务模块
 from datetime import datetime, timezone
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Optional, Tuple
@@ -340,63 +341,10 @@ def selftest() -> int:
 
 
 def main():
-    ap = argparse.ArgumentParser(description="batch_image_resize 配套执行器")
-    ap.add_argument("--guide", action="store_true", help="打印能力速览")
-    ap.add_argument("--match", default="", help="输入文本，匹配触发词")
-    ap.add_argument("--selftest", action="store_true", help="离线自检")
-    ap.add_argument("--input", type=Path, help="输入图片目录")
-    ap.add_argument("--output", type=Path, help="输出目录")
-    ap.add_argument("--max-width", type=int, default=1920, help="最大宽度")
-    ap.add_argument("--quality", type=int, default=85, help="JPEG质量")
-    ap.add_argument("--resume", action="store_true", help="断点续传")
-    ap.add_argument("--rollback", action="store_true", help="回滚原图")
-    ap.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-    ap.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    ap.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    args = ap.parse_args()
-    global dry_run
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    
-    if args.selftest:
-        return selftest()
-    
-    if args.match:
-        print("命中触发词:", match_trigger(args.match))
-        return 0
-    
-    if args.guide:
-        md = load_spec()
-        print("\n".join(l for l in md.splitlines() if l.strip())[:40])
-        return 0
-    
-    if args.rollback:
-        if not args.input:
-            print("错误: --rollback 需要 --input 指定目录")
-            return 1
-        input_dir = Path(args.input)
-        files = get_image_files(input_dir)
-        restore_originals(files)
-        print(f"已从备份恢复 {len(files)} 个文件")
-        return 0
-    
-    if args.input and args.output:
-        result = process_images(
-            args.input, args.output,
-            max_width=args.max_width,
-            quality=args.quality,
-            resume=args.resume
-        )
-        print(f"处理完成: 成功{result['success']}张, 失败{result['failed']}张")
-        if result["errors"]:
-            print("错误详情:")
-            for err in result["errors"]:
-                print(f"  - {err}")
-        return 0 if result["failed"] == 0 else 1
-    
-    print("用法: python run.py --guide | --match 文本 | --selftest | --input DIR --output DIR [--max-width N] [--quality N] [--resume] [--rollback]")
-    return 0
+    """委托给真实业务实现（batch_resize.py）"""
+    return _biz.main()
 
 
 if __name__ == "__main__":
+    import sys
     sys.exit(main())

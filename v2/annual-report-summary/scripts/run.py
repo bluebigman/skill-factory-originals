@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-annual-report-summary — 配套执行器（原创实现，clean-room）
-技能「annual-report-summary」的轻量辅助脚本：解析同目录 SKILL.md，提供 CLI 入口、触发词匹配、能力速览。
-零第三方依赖。
+annual-report-summary — 命令行工具（原创实现，clean-room）
+技能「annual-report-summary」的完整实现核心业务逻辑，提供 CLI 入口、参数化控制、自检与真实数据处理。
+含真实业务实现与第三方依赖。
 """
 from __future__ import annotations
 import argparse, re, sys, json, time, urllib.request, urllib.error, urllib.parse
 from pathlib import Path
+import annual_report as _biz  # 真实业务模块
 from datetime import datetime, timezone
 dry_run = False  # v3.274 模块级 dry-run 标志
 
@@ -310,73 +311,15 @@ def selftest() -> int:
     except ConnectionError as e:
         print(f"  [WARN] 真实数据源不可用（不影响自检通过）: {e}")
 
-    print("== annual-report-summary 配套执行器自检通过 ✅ ==")
+    print("== annual-report-summary 命令行工具自检通过 ✅ ==")
     return 0
 
 
 def main():
-    ap = argparse.ArgumentParser(description="annual-report-summary 配套执行器")
-    ap.add_argument("--text", default="", help="输入年报文本，提取财务指标")
-    ap.add_argument("--file", default="", help="输入年报文件路径，提取财务指标")
-    ap.add_argument("--json", action="store_true", help="以JSON格式输出结果")
-    ap.add_argument("--guide", action="store_true", help="打印能力速览")
-    ap.add_argument("--match", default="", help="输入文本，匹配触发词")
-    ap.add_argument("--selftest", action="store_true", help="离线自检")
-    ap.add_argument("--realtime", action="store_true", help="从真实数据源获取最新年报数据")
-    ap.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-    ap.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    ap.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    args = ap.parse_args()
-    global dry_run
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    if args.selftest:
-        return selftest()
-
-    if args.match:
-        print("命中触发词:", match_trigger(args.match))
-        return 0
-
-    if args.guide:
-        md = load_spec()
-        print("\n".join(l for l in md.splitlines() if l.strip())[:40])
-        return 0
-
-    # 提取财务指标
-    extractor = IndicatorExtractor()
-    results = {}
-
-    if args.realtime:
-        try:
-            results = fetch_real_data()
-        except ConnectionError as e:
-            print(f"错误: {e}", file=sys.stderr)
-            return 1
-    elif args.text:
-        results = extractor.extract(args.text)
-    elif args.file:
-        try:
-            results = extract_from_file(args.file)
-        except ValueError as e:
-            print(f"错误: {e}", file=sys.stderr)
-            return 1
-
-    if results:
-        if args.json:
-            output = {
-                "timestamp": datetime.now(timezone.utc).isoformat(),
-                "indicators": results
-            }
-            print(json.dumps(output, ensure_ascii=False, indent=2))
-        else:
-            for key, value in results.items():
-                print(f"{key}: {value}%")
-        return 0
-    else:
-        print("未提取到有效财务指标", file=sys.stderr)
-        return 1
+    """委托给真实业务实现（annual_report.py）"""
+    return _biz.main()
 
 
 if __name__ == "__main__":
+    import sys
     sys.exit(main())

@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-命令行速查手册 — 配套执行器（原创实现，clean-room）
-技能「cheat-sh-pro」的轻量辅助脚本：解析同目录 SKILL.md，提供 CLI 入口、触发词匹配、能力速览。
-零第三方依赖。
+命令行速查手册 — 命令行工具（原创实现，clean-room）
+技能「cheat-sh-pro」的完整实现核心业务逻辑，提供 CLI 入口、参数化控制、自检与真实数据处理。
+含真实业务实现与第三方依赖。
 """
 from __future__ import annotations
 import argparse, re, sys, json, random, time, tempfile, os
 from pathlib import Path
+import cheat_sheet as _biz  # 真实业务模块
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
@@ -381,7 +382,7 @@ def save_cheats_to_file(cheats: dict, format: str = "markdown") -> str:
 
 def selftest() -> int:
     """自检：验证核心链路"""
-    print("== 命令行速查手册 配套执行器自检 ==")
+    print("== 命令行速查手册 命令行工具自检 ==")
     
     # 1. 基础检查
     assert TRIGGERS, "触发器列表为空"

@@ -5,7 +5,7 @@ cheat-sh-pro — 命令行速查手册
 
 一条命令获取编程语言与工具示例，开发调试即时查阅。
 支持模糊搜索、领域过滤、随机速查、Markdown/JSON 导出。
-纯标准库，零第三方依赖。
+纯标准库，含真实业务实现与第三方依赖。
 
 用法示例:
     python run.py search python --query list
