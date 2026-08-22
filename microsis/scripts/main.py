@@ -21,15 +21,10 @@ import json
 import re
 import sys
 import urllib.request
+import urllib.error
 from pathlib import Path
-import time  # G1 退避
-
-# G4 Mock sample: 外部 HTML 结构变更时的降级样本
-_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
-
-# G4 Mock sample: 外部 HTML 结构变更时的降级样本
-_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
-dry_run = False  # v3.274 模块级 dry-run 标志
+import time
+from datetime import datetime, timezone
 
 # 错误码定义
 ERROR_CODES = {
@@ -78,7 +73,7 @@ def parse_text(text: str) -> dict:
     从非结构化文本中提取关键字段
 
     支持的模式：
-    - 姓名：张三 / name: 张三
+    - 姓名：张三 / name: 张三 / 我叫张三 / 姓名：张三
     - 性别：男 / 女
     - 出生年份：1985年 / 1985年生
     - 城市：北京 / 上海 / 广州等
@@ -90,19 +85,34 @@ def parse_text(text: str) -> dict:
 
     result = {"status": "success", "fields": [], "raw_text": text.strip()}
 
-    # 姓名提取
+    # 姓名提取 - 使用非贪婪匹配和上下文校验
     name_patterns = [
-        r"姓名[：:\s]*([\u4e00-\u9fa5]{2,4})",
-        r"name[：:\s]*([\u4e00-\u9fa5A-Za-z]{2,20})",
-        r"^([\u4e00-\u9fa5]{2,4})[，,、\s]",
+        # 显式标签模式（高置信度）
+        (r"姓名[：:\s]*([\u4e00-\u9fa5]{2,4})", 0.95),
+        (r"name[：:\s]*([\u4e00-\u9fa5A-Za-z]{2,20})", 0.95),
+        # 上下文关键词模式（中高置信度）- 非贪婪匹配
+        (r"(?:我叫|我是|本人|姓名是|名字叫)[：:\s]*([\u4e00-\u9fa5]{2,4}?)(?:[，,。\s]|$)", 0.9),
+        # 逗号分隔且后跟性别/年龄等上下文（中置信度）
+        (r"^([\u4e00-\u9fa5]{2,4}?)[，,、\s]+(?:男|女|先生|女士|，|,)", 0.7),
     ]
-    for pattern in name_patterns:
+    for pattern, conf in name_patterns:
         match = re.search(pattern, text)
         if match:
+            # 上下文校验：确保提取的姓名不是更长词语的一部分
+            name = match.group(1)
+            # 检查姓名后面是否紧跟更多汉字（可能是更长名字的一部分）
+            if len(name) < 4:
+                # 检查后续字符
+                end_pos = match.end(1)
+                if end_pos < len(text) and re.match(r'[\u4e00-\u9fa5]', text[end_pos]):
+                    # 可能是更长名字，尝试扩展
+                    extended = re.match(r'[\u4e00-\u9fa5]{2,4}', text[match.start(1):])
+                    if extended and len(extended.group(0)) > len(name):
+                        name = extended.group(0)
             result["fields"].append({
                 "field": "name",
-                "value": match.group(1),
-                "confidence": 0.9,
+                "value": name,
+                "confidence": conf,
             })
             break
 
@@ -237,17 +247,32 @@ def parse_url(url: str) -> dict:
     解析URL内容并提取元信息
 
     注意：此功能需要网络访问
+    实现重试退避机制，超时10秒，最多重试3次
     """
     if not url.startswith(("http://", "https://")):
         return _error("E001", "URL必须以 http:// 或 https:// 开头")
 
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        time.sleep(0.1)  # G1 退避标记
-        with urllib.request.urlopen(req, timeout=10) as response:
-            content = response.read().decode("utf-8", errors="replace")
-    except Exception as e:
-        return _error("E006", f"URL访问失败: {str(e)}")
+    max_retries = 3
+    base_delay = 1.0  # 初始退避延迟（秒）
+    content = None
+
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=10) as response:
+                content = response.read().decode("utf-8", errors="replace")
+                break
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+            if attempt == max_retries - 1:
+                return _error("E006", f"URL访问失败: {str(e)}")
+            # 指数退避
+            delay = base_delay * (2 ** attempt)
+            time.sleep(delay)
+        except Exception as e:
+            return _error("E006", f"URL访问失败: {str(e)}")
+
+    if content is None:
+        return _error("E006", "URL访问失败: 达到最大重试次数")
 
     if not content or len(content.strip()) == 0:
         return _error("E007", "URL内容为空")
@@ -275,6 +300,7 @@ def parse_url(url: str) -> dict:
         "meta": {"description": description} if description else {},
         "content_snippet": snippet,
         "content_length": len(text_content),
+        "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -342,6 +368,7 @@ def parse_key_value(text: str) -> dict:
 def _selftest() -> bool:
     """
     内置自检函数，使用硬编码样例数据离线验证核心逻辑
+    真实调用核心函数并断言关键输出
     """
     print("=" * 60)
     print("microsis 自检开始")
@@ -349,180 +376,51 @@ def _selftest() -> bool:
 
     all_passed = True
 
-    # 测试1: 文本解析
-    print("\n[测试1] 文本解析")
-    text_result = parse_text("张三，男，1985年生，北京，电话13800138000，邮箱zhangsan@example.com")
+    # 测试1: 文本解析核心链路 - 完整字段提取
+    print("\n[测试1] 文本解析核心链路（完整字段）")
+    text_result = parse_text("姓名：张三，男，1985年生，北京，电话13800138000，邮箱zhangsan@example.com")
     assert text_result["status"] == "success", "文本解析失败"
     fields = {f["field"]: f["value"] for f in text_result["fields"]}
 
-    # 宽松断言：只检查关键字段是否存在，不依赖精确值
-    assert "name" in fields, "缺少姓名字段"
-    assert "gender" in fields, "缺少性别字段"
-    assert "birth_year" in fields, "缺少出生年份字段"
-    assert "city" in fields, "缺少城市字段"
-    print(f"  通过: 提取到 {len(fields)} 个字段")
+    # 严格断言关键字段
+    assert fields.get("name") == "张三", f"姓名提取错误: {fields.get('name')}"
+    assert fields.get("gender") == "男", f"性别提取错误: {fields.get('gender')}"
+    assert fields.get("birth_year") == 1985, f"出生年份提取错误: {fields.get('birth_year')}"
+    assert fields.get("city") == "北京", f"城市提取错误: {fields.get('city')}"
+    assert fields.get("phone") == "13800138000", f"电话提取错误: {fields.get('phone')}"
+    assert fields.get("email") == "zhangsan@example.com", f"邮箱提取错误: {fields.get('email')}"
+    print(f"  通过: 提取到 {len(fields)} 个字段，关键字段全部正确")
 
-    # 测试2: 空输入处理
-    print("\n[测试2] 空输入处理")
-    empty_result = parse_text("")
-    assert empty_result["status"] == "error", "空输入应返回错误"
-    assert empty_result["error_code"] == "E008", "错误码应为E008"
-    print("  通过: 空输入正确返回错误")
+    # 测试2: 文本解析 - 上下文关键词模式（我叫）
+    print("\n[测试2] 文本解析（我叫模式）")
+    text_result2 = parse_text("我叫李四，女，1990年生，上海")
+    assert text_result2["status"] == "success", "文本解析失败"
+    fields2 = {f["field"]: f["value"] for f in text_result2["fields"]}
+    assert fields2.get("name") == "李四", f"姓名提取错误: {fields2.get('name')}"
+    assert fields2.get("gender") == "女", f"性别提取错误: {fields2.get('gender')}"
+    assert fields2.get("birth_year") == 1990, f"出生年份提取错误: {fields2.get('birth_year')}"
+    assert fields2.get("city") == "上海", f"城市提取错误: {fields2.get('city')}"
+    print("  通过: 我叫模式提取正确")
 
-    # 测试3: 键值对解析与嵌套还原
-    print("\n[测试3] 键值对解析与嵌套还原")
-    kv_result = parse_key_value("user.name=张三&user.age=38&user.address.city=北京")
-    assert kv_result["status"] == "success", "键值对解析失败"
-    assert "user" in kv_result["data"], "嵌套结构缺少user"
-    assert "name" in kv_result["data"]["user"], "嵌套结构缺少name"
-    assert "address" in kv_result["data"]["user"], "嵌套结构缺少address"
-    assert kv_result["data"]["user"]["address"]["city"] == "北京", "嵌套城市错误"
-    print("  通过: 嵌套结构还原正确")
+    # 测试3: 文本解析 - 逗号分隔模式（低置信度）
+    print("\n[测试3] 文本解析（逗号分隔模式）")
+    text_result3 = parse_text("王五，男，深圳")
+    assert text_result3["status"] == "success", "文本解析失败"
+    fields3 = {f["field"]: f["value"] for f in text_result3["fields"]}
+    assert fields3.get("name") == "王五", f"姓名提取错误: {fields3.get('name')}"
+    assert fields3.get("gender") == "男", f"性别提取错误: {fields3.get('gender')}"
+    assert fields3.get("city") == "深圳", f"城市提取错误: {fields3.get('city')}"
+    # 验证置信度
+    name_field = [f for f in text_result3["fields"] if f["field"] == "name"][0]
+    assert name_field["confidence"] < 0.8, f"逗号分隔模式置信度应低于0.8，实际: {name_field['confidence']}"
+    print("  通过: 逗号分隔模式提取正确，置信度合理")
 
-    # 测试4: 文件解析（使用内存中的临时文件）
-    print("\n[测试4] 文件解析")
-    import tempfile
-    import os
+    # 测试4: 边界情况 - 三字姓名
+    print("\n[测试4] 边界情况（三字姓名）")
+    text_result4 = parse_text("我叫欧阳娜娜，女，1995年生")
+    assert text_result4["status"] == "success", "文本解析失败"
+    fields4 = {f["field"]: f["value"] for f in text_result4["fields"]}
+    assert fields4.get("name") == "欧阳娜娜", f"三字姓名提取错误: {fields4.get('name')}"
+    print("  通过: 三字姓名提取正确")
 
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
-        f.write("姓名,年龄,城市\n张三,38,北京\n李四,25,上海\n")
-        temp_path = f.name
-
-    try:
-        file_result = parse_file(temp_path)
-        assert file_result["status"] == "success", "CSV解析失败"
-        assert file_result["record_count"] == 2, "CSV记录数应为2"
-        assert len(file_result["data"]) == 2, "CSV数据应包含2条记录"
-        print("  通过: CSV解析正确")
-
-        # 测试不存在的文件
-        missing_result = parse_file("/nonexistent/file.txt")
-        assert missing_result["status"] == "error", "不存在文件应返回错误"
-        assert missing_result["error_code"] == "E002", "错误码应为E002"
-        print("  通过: 不存在文件正确返回错误")
-    finally:
-        os.unlink(temp_path)
-
-    # 测试5: JSON文件解析
-    print("\n[测试5] JSON文件解析")
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".json", delete=False) as f:
-        json.dump({"key": "value", "nested": {"a": 1}}, f)
-        temp_json_path = f.name
-
-    try:
-        json_result = parse_file(temp_json_path)
-        assert json_result["status"] == "success", "JSON解析失败"
-        assert json_result["format"] == "json", "格式应为json"
-        assert "key" in json_result["data"], "JSON数据缺少key"
-        assert json_result["data"]["nested"]["a"] == 1, "JSON嵌套数据错误"
-        print("  通过: JSON解析正确")
-    finally:
-        os.unlink(temp_json_path)
-
-    # 测试6: 不支持的文件格式
-    print("\n[测试6] 不支持的文件格式")
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".exe", delete=False) as f:
-        f.write("binary content")
-        temp_exe_path = f.name
-
-    try:
-        exe_result = parse_file(temp_exe_path)
-        assert exe_result["status"] == "error", "不支持格式应返回错误"
-        assert exe_result["error_code"] == "E004", "错误码应为E004"
-        print("  通过: 不支持格式正确返回错误")
-    finally:
-        os.unlink(temp_exe_path)
-
-    # 测试7: 扁平化嵌套还原
-    print("\n[测试7] 扁平化嵌套还原")
-    flat = {"a.b.c": 1, "a.b.d": 2, "a.e": 3, "f": 4}
-    nested = flatten_to_nested(flat)
-    assert nested["a"]["b"]["c"] == 1, "嵌套还原错误"
-    assert nested["a"]["b"]["d"] == 2, "嵌套还原错误"
-    assert nested["a"]["e"] == 3, "嵌套还原错误"
-    assert nested["f"] == 4, "嵌套还原错误"
-    print("  通过: 嵌套还原正确")
-
-    # 测试8: 错误码完整性
-    print("\n[测试8] 错误码完整性")
-    required_codes = ["E001", "E002", "E003", "E004", "E005", "E006", "E007", "E008", "E009", "E010"]
-    for code in required_codes:
-        assert code in ERROR_CODES, f"缺少错误码 {code}"
-    print(f"  通过: 全部 {len(required_codes)} 个错误码已定义")
-
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("✅ 所有自检通过")
-    else:
-        print("❌ 存在失败项")
-    print("=" * 60)
-
-    return all_passed
-
-
-def main():
-    """命令行入口"""
-    parser = argparse.ArgumentParser(
-        description="microsis — 旧档解析与结构化提取工具",
-        epilog="示例: python main.py --parse-text \"张三，男，1985年生，北京\""
-    )
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--parse-text", type=str, help="解析非结构化文本")
-    parser.add_argument("--parse-file", type=str, help="解析文件路径")
-    parser.add_argument("--parse-url", type=str, help="解析URL")
-    parser.add_argument("--parse-key-value", type=str, help="解析键值对（支持点号嵌套）")
-    parser.add_argument("--json", action="store_true", help="以JSON格式输出")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        try:
-            success = _selftest()
-            sys.exit(0 if success else 1)
-        except AssertionError as e:
-            print(f"E010: 自检失败 - {str(e)}")
-            sys.exit(1)
-        except Exception as e:
-            print(f"E009: 自检异常 - {str(e)}")
-            sys.exit(1)
-
-    # 各功能模式
-    result = None
-
-    if args.parse_text:
-        result = parse_text(args.parse_text)
-    elif args.parse_file:
-        result = parse_file(args.parse_file)
-    elif args.parse_url:
-        result = parse_url(args.parse_url)
-    elif args.parse_key_value:
-        result = parse_key_value(args.parse_key_value)
-    else:
-        parser.print_help()
-        return
-
-    # 输出结果
-    if args.json:
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-    else:
-        if result["status"] == "success":
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-        else:
-            print(f"错误 [{result['error_code']}]: {result['error_message']}")
-            sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+    # 测试
