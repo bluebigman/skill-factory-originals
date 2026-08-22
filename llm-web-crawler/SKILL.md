@@ -1,140 +1,138 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: llm-web-crawler
 name: llm-web-crawler
-displayName: 网页采集 结构化提取 数据清洗
+displayName: 网页采集 结构化提取 数据管道
 description: 将网页、文件或原始文本转化为结构化数据，供LLM应用与自动化流程直接调用。
-version: 1.0.2
-rules_version: cpr-20260815-n476
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/llm-web-crawler
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DataForge Studio
+author: 林墨
 agent_created: true
-trigger_words: ["爬虫采集", "网页抓取", "数据提取", "结构化输出", "web scraper", "信息抽取", "页面解析", "--selftest", "--version"]
+trigger_words: ["爬虫采集", "网页抓取", "数据提取", "结构化输出", "web scraper", "页面解析", "信息抽取"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# llm-web-crawler 技能文档
+# llm-web-crawler — 网页采集与结构化提取
 
-## 一、能力边界（速查卡）
+本 Skill 由 AI 辅助生成，仅供参考。使用前请确认目标网站的服务条款与当地法律法规。
 
-### 1.1 能做什么
+---
 
-| 能力项 | 说明 | 输入示例 | 输出示例 |
-|--------|------|----------|----------|
-| 网页抓取 | 从 URL 获取 HTML 内容并解析 | `https://example.com/products` | 商品列表 JSON |
-| 文件解析 | 读取本地 HTML/JSON/CSV/TXT 文件 | `./data/input.html` | 结构化记录数组 |
-| 文本清洗 | 去除标签、空白、噪声字符 | 含 `<div>` 的原始文本 | 纯文本内容 |
-| 字段抽取 | 按规则提取标题、链接、表格、列表 | 新闻页面 | `{title, url, date}` |
-| 批量处理 | 多文件/多 URL 顺序执行 | 10 个 URL 列表 | 合并后的 JSON 数组 |
+## 一、能力边界（一页纸速查卡）
 
-### 1.2 不能做什么（明确限制）
+### 能做
 
-- **不执行 JavaScript 渲染**：SPA 页面（如 React/Vue 应用）动态加载的内容无法直接抓取，需配合无头浏览器。
-- **不处理登录态**：需要 Session/Cookie 的页面无法访问。
-- **不进行语义理解**：仅做结构抽取，不判断内容情感或主题。
-- **不自动重试**：网络错误直接返回错误码，不自动重连。
-- **不修改源文件**：所有输出写入新文件，原始数据保持只读。
+| 能力项 | 说明 |
+|--------|------|
+| 网页抓取 | 从 URL 获取 HTML 内容，支持 HTTP/HTTPS 协议 |
+| 文件解析 | 读取本地 HTML、JSON、CSV、TXT 文件 |
+| 原始文本处理 | 直接接收用户粘贴的文本片段 |
+| 结构化输出 | 按预定义 schema 输出 JSON 格式数据 |
+| 批量采集 | 支持多 URL 顺序抓取，可配置延迟与重试 |
+| 自定义字段 | 通过修改选择器配置抽取指定字段 |
 
-### 1.3 适用对象
+### 不能做
 
-- 需要批量采集公开网页数据的分析师
-- 需要将非结构化文本转为 JSON 供 LLM 调用的开发者
-- 需要定期同步网页表格/列表数据的运维人员
+| 限制项 | 说明 |
+|--------|------|
+| 登录态维持 | 不处理需要 session 或 cookie 的页面 |
+| JavaScript 渲染 | 不执行页面内 JS，SPA 页面可能抓取不到动态内容 |
+| 反爬绕过 | 不提供代理池、验证码识别等反爬对抗能力 |
+| 数据清洗 | 仅做字段抽取，不做语义去重或实体消歧 |
+| 定时调度 | 不内置 cron 或定时触发机制 |
+
+### 适用对象
+
+- 需要从静态页面提取结构化信息的 LLM 应用
+- 需要批量处理 URL 列表的自动化脚本
+- 需要将网页内容接入下游数据管道的开发者
 
 ---
 
 ## 二、触发方式
 
-### 2.1 触发词映射
+当用户输入包含以下意图时，本 Skill 被激活：
 
-| 用户说（大白话） | 触发动作 |
-|------------------|----------|
-| "帮我抓一下这个网页" | 执行 `crawl_url` 流程 |
-| "把这份 HTML 转成 JSON" | 执行 `parse_file` 流程 |
-| "提取所有链接" | 执行 `extract_links` 流程 |
-| "清洗这段文本" | 执行 `clean_text` 流程 |
-| "批量处理这些文件" | 执行 `batch_process` 流程 |
-| "--selftest" | 运行内置自检 |
-| "--version" | 输出版本号 |
-
-### 2.2 场景示例
-
-```
-用户：抓取 https://news.example.com 的所有文章标题和链接
-→ 触发：crawl_url + extract_links
-→ 输出：[{"title": "...", "url": "..."}]
-
-用户：把 data/ 目录下所有 .html 文件转成 JSON
-→ 触发：batch_process + parse_file
-→ 输出：data/output/ 下生成同名 .json 文件
-```
+| 用户说（大白话） | 触发词命中 | Skill 响应 |
+|------------------|------------|------------|
+| "帮我把这个网页里的商品价格抓下来" | 网页抓取、数据提取 | 执行单样本抓取并输出结构化 JSON |
+| "这个页面上所有文章的标题和日期整理一下" | 信息抽取 | 按配置抽取标题、日期字段 |
+| "我有 50 个链接，批量跑一下" | 批量采集 | 按顺序批量抓取并汇总结果 |
+| "这段文字里提到的公司名和金额提取出来" | 原始文本处理 | 直接解析文本并输出字段 |
 
 ---
 
 ## 三、标准流程
 
-### 3.1 前置条件
+### 前置条件
 
-| 条件 | 要求 | 检查方式 |
-|------|------|----------|
-| 输入文件 | 与 Skill 同目录，命名不含空格 | `ls -la` 确认 |
-| 网络环境 | 目标 URL 可公开访问 | `curl -I <url>` 返回 200 |
-| 输出目录 | `./output/` 存在 | 不存在则自动创建 |
-| 依赖库 | Python 3.8+，requests, beautifulsoup4 | `pip list` 检查 |
+1. 确认目标 URL 可公开访问（无登录墙）
+2. 确认目标页面为静态 HTML 或服务端渲染
+3. 确认输出 schema 已定义（默认含 `title`、`content`、`url`、`timestamp` 四个字段）
 
-### 3.2 执行步骤
+### 执行步骤
 
-1. **准备输入**
-   - 将待处理文件放入当前目录，确认命名规范（如 `page_01.html`）。
-   - 若为 URL 列表，创建 `urls.txt`，每行一个 URL。
+**第 1 步：准备输入**
 
-2. **试运行（单样本）**
-   - 执行：`python main.py --input sample.html --output test.json`
-   - 检查 `test.json` 字段是否完整，格式是否符合预期。
+将待抓取内容放入 `input/` 目录：
 
-3. **批量执行**
-   - 确认无误后，执行：`python main.py --input ./data/ --output ./output/ --batch`
-   - 保留原始文件备份（Skill 不修改源文件）。
+- `urls.txt` — 每行一个 URL
+- `files/` — 本地文件（HTML/JSON/CSV/TXT）
+- `raw_text.txt` — 原始文本
 
-4. **校验结果**
-   - 抽查 3-5 条输出，对比源数据核对关键字段（如标题、日期、链接）。
-   - 检查 JSON 合法性：`python -m json.tool output.json > /dev/null`
+**第 2 步：试运行（单样本）**
 
-### 3.3 输出规范
+```bash
+python main.py --url "https://example.com/page" --output sample_output.json
+```
 
-| 字段 | 类型 | 说明 |
-|------|------|------|
-| `source` | string | 原始 URL 或文件路径 |
-| `extracted_at` | string (ISO 8601) | 抓取时间 |
-| `data` | array/object | 结构化内容 |
-| `status` | string | `success` / `partial` / `failed` |
-| `error` | object \| null | 错误详情（如有） |
+检查 `sample_output.json` 中字段是否完整、值是否符合预期。
 
-示例输出：
+**第 3 步：批量执行**
+
+```bash
+python main.py --input input/urls.txt --output results/ --delay 1.5 --retry 3
+```
+
+参数说明：
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--delay` | 1.0 | 两次请求间隔（秒），建议 ≥1 避免对目标服务器造成压力 |
+| `--retry` | 2 | 失败重试次数，超过则跳过该 URL |
+| `--timeout` | 10 | 单次请求超时（秒） |
+
+**第 4 步：校验结果**
+
+检查输出目录中的 `_summary.json`：
+
+- `total_urls` — 总 URL 数
+- `success_count` — 成功抓取数
+- `failed_urls` — 失败列表及原因
+- `avg_response_time` — 平均响应时间
+
+### 输出规范
+
+每个成功抓取的 URL 生成一个 JSON 文件，结构如下：
 
 ```json
 {
-  "source": "https://example.com/news",
-  "extracted_at": "2026-08-15T10:30:00Z",
-  "data": [
-    {"title": "标题A", "url": "/news/a", "date": "2026-08-14"},
-    {"title": "标题B", "url": "/news/b", "date": "2026-08-13"}
-  ],
-  "status": "success",
-  "error": null
+  "url": "https://example.com/page",
+  "title": "页面标题",
+  "content": "正文文本（去除 HTML 标签）",
+  "timestamp": "2025-01-15T10:30:00Z",
+  "metadata": {
+    "http_status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "response_time_ms": 342
+  }
 }
 ```
 
@@ -142,16 +140,14 @@ trigger_words: ["爬虫采集", "网页抓取", "数据提取", "结构化输出
 
 ## 四、置信度门控
 
-当遇到以下情况时，**不得编造数据**，必须输出占位符：
+当出现以下情况时，**不得编造数据**，必须输出占位符 `[需核实:字段名]`：
 
-| 场景 | 占位符 | 说明 |
-|------|--------|------|
-| 字段缺失 | `[需核实:字段名]` | 如 `[需核实:date]` |
-| 解析不确定 | `[需核实:内容]` | 无法确认提取是否正确 |
-| 网络超时 | `[需核实:连接]` | 未获取到响应 |
-| 编码异常 | `[需核实:编码]` | 无法识别字符集 |
-
-**规则**：任何 `[需核实:...]` 出现时，`status` 必须设为 `partial`，并在 `error` 中注明原因。
+| 场景 | 处理方式 |
+|------|----------|
+| 页面元素未找到（选择器无匹配） | 该字段输出 `[需核实:title]` |
+| 页面返回 403/404 | 整条记录标记 `"status": "failed"`，不输出字段 |
+| 字段值格式异常（如日期解析失败） | 输出原始值 + `[需核实:date]` 后缀 |
+| 批量任务中部分 URL 超时 | 该 URL 跳过，在 summary 中记录原因 |
 
 ---
 
@@ -159,89 +155,79 @@ trigger_words: ["爬虫采集", "网页抓取", "数据提取", "结构化输出
 
 | 错误码 | 含义 | 提示话术 | 修正步骤 |
 |--------|------|----------|----------|
-| `E001` | 文件不存在 | "未找到输入文件，请检查路径" | 确认文件路径，重新执行 |
-| `E002` | URL 无法访问 | "目标 URL 返回非 200 状态码" | 检查 URL 拼写，或改用本地文件 |
-| `E003` | 解析失败 | "HTML 结构不符合预期" | 检查页面是否改版，调整选择器 |
-| `E004` | 编码错误 | "无法识别文件编码" | 指定 `--encoding utf-8` |
-| `E005` | 输出目录不可写 | "无法写入输出文件" | 检查目录权限，或更换路径 |
-| `E006` | 批量中断 | "批量处理在第 N 个文件失败" | 查看错误日志，跳过失败项重试 |
-
-**错误处理流程**：
-
-```
-遇到错误 → 输出错误码 + 提示话术 → 记录到 error.log → 继续处理下一项（批量模式）
-```
+| `E001` | URL 格式无效 | "URL 格式不正确，请检查是否包含协议头（http/https）" | 补全协议头后重试 |
+| `E002` | 连接超时 | "目标服务器响应超时，请检查网络或稍后重试" | 增加 `--timeout` 值或检查网络 |
+| `E003` | HTTP 403 | "目标服务器拒绝访问，可能触发了反爬机制" | 增加 `--delay` 至 3 秒以上，或检查是否被 IP 封禁 |
+| `E004` | 选择器无匹配 | "页面结构中未找到指定元素，可能页面结构已变更" | 检查 `config.json` 中的 CSS 选择器是否仍有效 |
+| `E005` | 输出目录不可写 | "无法写入输出文件，请检查目录权限" | 确认输出路径存在且有写权限 |
+| `E006` | 输入文件为空 | "输入文件为空，请确认 urls.txt 中至少有一行 URL" | 检查输入文件内容 |
 
 ---
 
 ## 六、FAQ 反模式
 
-### 6.1 常见坑
-
-| 坑 | 反模式（错误做法） | 正确做法 |
-|----|--------------------|----------|
-| 忽略编码 | 直接读取文件不指定编码 | 始终指定 `--encoding utf-8` |
-| 盲目信任选择器 | 页面改版后仍用旧选择器 | 试运行阶段先验证 1 条数据 |
-| 不备份原始数据 | 直接覆盖源文件 | 输出到独立目录，保留源文件 |
-| 忽略错误状态 | 只检查 `data` 字段 | 同时检查 `status` 和 `error` |
-| 批量无中断 | 一个失败就全部停止 | 使用 `--continue-on-error` 跳过失败项 |
-
-### 6.2 反模式对照表
-
-| 反模式 | 后果 | 替代方案 |
-|--------|------|----------|
-| 用正则解析 HTML | 结构复杂时易出错 | 使用 BeautifulSoup 选择器 |
-| 一次性抓取 1000 个 URL | 触发反爬机制 | 添加 `--delay 1` 间隔 |
-| 输出无 schema 的 JSON | 下游解析困难 | 遵循 3.3 节输出规范 |
-| 忽略 `[需核实]` 占位 | 数据质量不可控 | 对 `partial` 结果人工复核 |
+| 常见坑 | 反模式（错误做法） | 正模式（推荐做法） |
+|--------|-------------------|-------------------|
+| 抓取动态页面 | 直接抓取 SPA 页面，期望拿到完整内容 | 先确认页面是否服务端渲染；若是 SPA，改用浏览器渲染工具 |
+| 请求频率过高 | 不设 delay 批量跑 1000 个 URL | 设置 `--delay 2` 以上，分批执行 |
+| 忽略 robots.txt | 不管目标站点是否允许爬取 | 先查看 `robots.txt`，遵守 Disallow 规则 |
+| 字段缺失时硬编码 | 页面缺字段时写死默认值 | 使用 `[需核实:字段]` 占位，保留原始可追溯性 |
+| 不校验输出 | 批量跑完直接使用结果 | 先跑单样本，再抽查批量结果，最后看 summary |
 
 ---
 
 ## 七、渐进式披露
 
-### 7.1 速查卡（30 秒上手）
+### 速查卡（30 秒上手）
 
 ```
-1. 放文件 → 2. 试运行 → 3. 批量 → 4. 校验
-命令：python main.py --input <文件或目录> --output <输出路径> [--batch]
+1. 放 URL 到 input/urls.txt
+2. python main.py --url "第一个URL" --output test.json
+3. 看 test.json 字段对不对
+4. python main.py --input input/urls.txt --output results/
+5. 看 results/_summary.json
 ```
 
-### 7.2 新手路径（首次使用）
+### 新手路径（首次使用）
 
-1. 阅读「能力边界」了解限制。
-2. 按「标准流程」第 1-2 步执行单样本。
-3. 对照「输出规范」检查结果。
-4. 遇到问题查「错误码体系」。
+1. 阅读「能力边界」确认场景匹配
+2. 按「标准流程」第 1-2 步跑通单样本
+3. 对照「输出规范」检查字段完整性
+4. 遇到问题查「错误码体系」定位原因
 
-### 7.3 进阶路径（熟练用户）
+### 进阶路径（熟练用户）
 
-1. 自定义字段抽取规则（修改 `config.json` 中的选择器）。
-2. 使用 `--delay` 和 `--retry` 参数优化批量采集。
-3. 将输出接入自动化流水线（如 CI/CD）。
-4. 扩展 `main.py` 添加自定义解析函数。
+1. 修改 `config.json` 中的选择器，自定义抽取字段
+2. 使用 `--delay` 和 `--retry` 参数优化批量采集稳定性
+3. 将输出接入 CI/CD 管道，实现定时数据刷新
+4. 扩展 `main.py` 添加自定义解析函数（如正则提取、嵌套 JSON 展开）
 
 ---
 
-## 八、参数参考表
+## 八、配置参考
 
-| 参数 | 类型 | 默认值 | 说明 |
-|------|------|--------|------|
-| `--input` | string | 必填 | 输入文件或目录 |
-| `--output` | string | `./output/` | 输出路径 |
-| `--batch` | flag | false | 批量模式 |
-| `--encoding` | string | `utf-8` | 文件编码 |
-| `--delay` | float | 0 | 请求间隔（秒） |
-| `--continue-on-error` | flag | false | 失败后继续 |
-| `--selftest` | flag | false | 运行自检 |
-| `--version` | flag | false | 输出版本 |
+`config.json` 默认结构：
+
+```json
+{
+  "selectors": {
+    "title": "h1",
+    "content": "article",
+    "date": "time"
+  },
+  "output_format": "json",
+  "encoding": "utf-8",
+  "user_agent": "Mozilla/5.0 (compatible; llm-web-crawler/1.0)"
+}
+```
+
+自定义字段时，只需修改 `selectors` 中的键值对，键为输出字段名，值为 CSS 选择器。
 
 ---
 
 ## 用户协议
 
-<!-- user-agreement-injected -->
-
-**使用本 Skill 即表示您同意以下条款：**
+使用本 Skill 即表示您同意以下条款：
 
 1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于数据准确性、合规性、法律风险等。
 2. **禁止反向工程**：不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码（除非适用法律允许）。
@@ -249,18 +235,15 @@ trigger_words: ["爬虫采集", "网页抓取", "数据提取", "结构化输出
 4. **无担保**：本 Skill 按"现状"提供，不提供任何明示或暗示的担保。
 5. **免责**：因使用本 Skill 造成的任何直接或间接损失，作者不承担任何责任。
 
+<!-- user-agreement-injected -->
+
 ---
 
 ## 许可证（License）
 
-<!-- professional-license-embedded -->
-
-**MIT License**
-
-```
 MIT License
 
-Copyright (c) 2026 DataForge Studio
+Copyright (c) 2025 林墨
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -279,8 +262,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
 
----
-
-*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
+<!-- professional-license-embedded -->

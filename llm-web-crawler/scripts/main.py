@@ -593,7 +593,6 @@ def main() -> None:
                         help="输出格式 (默认: json)")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
     parser.add_argument("--batch-file", type=str, help="批量处理输入文件（每行一条）")
-    parser.add_argument("--input", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
 
