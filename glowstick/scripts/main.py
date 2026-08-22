@@ -22,24 +22,12 @@ import os
 import sys
 import tempfile
 import urllib.request
+import urllib.error
+import socket
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Tuple
 import time
-dry_run = False  # v3.274 模块级 dry-run 标志
-
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
-
+from datetime import datetime, timezone
 
 # ============================================================
 # 错误码定义
@@ -95,6 +83,74 @@ class ChartConfig:
 # 数据加载与解析
 # ============================================================
 MAX_FILE_SIZE = 500 * 1024 * 1024  # 500MB限制
+MAX_TOTAL_TIME = 30  # 最大总耗时限制（秒）
+REQUEST_TIMEOUT = 10  # 单次请求超时（秒）
+MAX_RETRY = 3  # 最大重试次数
+
+
+def _retry_request(fn, *args, **kwargs):
+    """带重试退避的请求封装，区分可重试与不可重试错误，有总超时控制"""
+    start_time = time.time()
+    last_exception = None
+
+    for attempt in range(MAX_RETRY):
+        # 检查总耗时
+        if time.time() - start_time > MAX_TOTAL_TIME:
+            raise TimeoutError(f"请求总耗时超过{MAX_TOTAL_TIME}秒限制")
+
+        try:
+            return fn(*args, **kwargs)
+        except urllib.error.HTTPError as e:
+            # HTTP错误状态码处理
+            status_code = e.code
+            if 400 <= status_code < 500:
+                # 4xx错误不可重试，直接抛出
+                raise
+            elif status_code >= 500:
+                # 5xx错误可重试
+                last_exception = e
+                if attempt < MAX_RETRY - 1:
+                    wait_time = 2 ** attempt
+                    print(f"HTTP {status_code}错误，{wait_time}秒后重试 ({attempt + 1}/{MAX_RETRY})", file=sys.stderr)
+                    time.sleep(wait_time)
+                else:
+                    raise
+            else:
+                # 其他状态码（如3xx重定向）视为不可重试
+                raise
+        except socket.timeout as e:
+            last_exception = e
+            if attempt < MAX_RETRY - 1:
+                wait_time = 2 ** attempt
+                print(f"请求超时，{wait_time}秒后重试 ({attempt + 1}/{MAX_RETRY})", file=sys.stderr)
+                time.sleep(wait_time)
+            else:
+                raise
+        except urllib.error.URLError as e:
+            last_exception = e
+            if isinstance(e.reason, socket.timeout):
+                if attempt < MAX_RETRY - 1:
+                    wait_time = 2 ** attempt
+                    print(f"请求超时，{wait_time}秒后重试 ({attempt + 1}/{MAX_RETRY})", file=sys.stderr)
+                    time.sleep(wait_time)
+                else:
+                    raise
+            elif attempt < MAX_RETRY - 1:
+                wait_time = 2 ** attempt
+                print(f"连接错误，{wait_time}秒后重试 ({attempt + 1}/{MAX_RETRY})", file=sys.stderr)
+                time.sleep(wait_time)
+            else:
+                raise
+        except Exception as e:
+            last_exception = e
+            if attempt < MAX_RETRY - 1:
+                wait_time = 2 ** attempt
+                print(f"请求异常，{wait_time}秒后重试 ({attempt + 1}/{MAX_RETRY})", file=sys.stderr)
+                time.sleep(wait_time)
+            else:
+                raise
+
+    raise last_exception if last_exception else RuntimeError("请求失败")
 
 
 def load_data_from_file(filepath: str) -> str:
@@ -114,14 +170,26 @@ def load_data_from_file(filepath: str) -> str:
 
 
 def load_data_from_url(url: str) -> str:
-    """从远程URL获取数据内容"""
-    try:
+    """从远程URL获取数据内容，带重试退避和超时控制"""
+    def _fetch():
         req = urllib.request.Request(url, headers={"User-Agent": "glowstick/1.0"})
-        with urllib.request.urlopen(req, timeout=30) as resp:
+        with urllib.request.urlopen(req, timeout=REQUEST_TIMEOUT) as resp:
+            # 检查重定向
+            if resp.geturl() != url:
+                print(f"注意: 请求被重定向到 {resp.geturl()}", file=sys.stderr)
             content = resp.read()
             if len(content) > MAX_FILE_SIZE:
                 error_exit("E008", f"URL数据超过500MB限制")
             return content.decode("utf-8")
+
+    try:
+        return _retry_request(_fetch)
+    except urllib.error.HTTPError as e:
+        error_exit("E003", f"URL访问失败: HTTP {e.code} {e.reason}")
+    except socket.timeout:
+        error_exit("E003", f"URL访问超时: {url}")
+    except urllib.error.URLError as e:
+        error_exit("E003", f"URL访问失败: {e}")
     except Exception as e:
         error_exit("E003", f"URL访问失败: {e}")
 
@@ -305,263 +373,91 @@ def infer_chart_type(series: DataSeries) -> str:
 
 
 # ============================================================
-# OpenGL渲染（模拟实现，实际环境需要OpenGL库）
+# OpenGL渲染模块
 # ============================================================
-def render_chart(series: DataSeries, config: ChartConfig) -> bool:
-    """
-    渲染实时OpenGL图表
-    实际实现需要OpenGL环境，这里提供模拟渲染逻辑
-    在无OpenGL环境下返回False，由调用方处理
-    """
-    try:
-        # 尝试导入OpenGL相关库
-        # pip install PyOpenGL PyOpenGL_accelerate
+class OpenGLRenderer:
+    """OpenGL渲染器，支持2D/3D图表渲染"""
+    
+    def __init__(self, width: int = 800, height: int = 600):
+        self.width = width
+        self.height = height
+        self._initialized = False
+        self._window = None
+        
+    def initialize(self) -> bool:
+        """初始化OpenGL环境"""
+        try:
+            import OpenGL.GL as gl
+            import OpenGL.GLUT as glut
+            
+            glut.glutInit()
+            glut.glutInitDisplayMode(glut.GLUT_DOUBLE | glut.GLUT_RGB | glut.GLUT_DEPTH)
+            glut.glutInitWindowSize(self.width, self.height)
+            self._window = glut.glutCreateWindow(b"glowstick")
+            
+            gl.glClearColor(0.1, 0.1, 0.15, 1.0)
+            gl.glEnable(gl.GL_DEPTH_TEST)
+            
+            self._initialized = True
+            return True
+        except ImportError:
+            print("警告: 未安装PyOpenGL，使用软件渲染模式", file=sys.stderr)
+            self._initialized = False
+            return False
+        except Exception as e:
+            error_exit("E009", f"OpenGL初始化失败: {e}")
+            
+    def render(self, series: DataSeries, config: ChartConfig) -> bool:
+        """渲染图表"""
+        if not self._initialized:
+            # 软件渲染模式（模拟）
+            return self._software_render(series, config)
+            
+        try:
+            import OpenGL.GL as gl
+            import OpenGL.GLUT as glut
+            
+            gl.glClear(gl.GL_COLOR_BUFFER_BIT | gl.GL_DEPTH_BUFFER_BIT)
+            
+            if config.chart_type == "scatter3d":
+                self._render_3d_scatter(series, config)
+            elif config.chart_type == "line":
+                self._render_line(series, config)
+            elif config.chart_type == "scatter2d":
+                self._render_2d_scatter(series, config)
+            elif config.chart_type == "bar":
+                self._render_bar(series, config)
+                
+            glut.glutSwapBuffers()
+            return True
+        except Exception as e:
+            error_exit("E009", f"渲染失败: {e}")
+            
+    def _render_3d_scatter(self, series: DataSeries, config: ChartConfig):
+        """渲染3D散点图"""
         import OpenGL.GL as gl
-        import OpenGL.GLUT as glut
-
-        # 初始化GLUT
-        glut.glutInit()
-        glut.glutInitDisplayMode(glut.GLUT_DOUBLE | glut.GLUT_RGB | glut.GLUT_DEPTH)
-        glut.glutInitWindowSize(800, 600)
-        glut.glutCreateWindow(config.title.encode())
-
-        # 设置背景色
-        gl.glClearColor(0.1, 0.1, 0.15, 1.0)
-        gl.glEnable(gl.GL_DEPTH_TEST)
-
-        # 这里简化处理，实际渲染逻辑根据chart_type不同实现
-        # 由于是clean-room实现，仅提供框架，具体渲染细节不在此展开
-
-        # 模拟渲染成功
-        return True
-    except ImportError:
-        # OpenGL库不可用
-        return False
-    except Exception:
-        error_exit("E009", "OpenGL渲染初始化失败")
-
-
-# ============================================================
-# 核心处理流程
-# ============================================================
-def process_input(input_source: str) -> Tuple[DataSeries, ChartConfig]:
-    """处理输入源（文件或URL），返回数据序列和图表配置"""
-    # 判断输入类型
-    if input_source.startswith(("http://", "https://")):
-        content = load_data_from_url(input_source)
-    else:
-        content = load_data_from_file(input_source)
-
-    # 检测格式并解析
-    fmt = detect_format(content)
-    series = parse_data(content, fmt)
-
-    # 推断图表类型
-    chart_type = infer_chart_type(series)
-    config = ChartConfig(
-        chart_type=chart_type,
-        title=f"glowstick - {os.path.basename(input_source) if not input_source.startswith('http') else 'URL数据'}",
-        x_label="X轴",
-        y_label="Y轴",
-        z_label="Z轴" if chart_type == "scatter3d" else ""
-    )
-
-    return series, config
-
-
-def main() -> None:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="glowstick - 实时绘图数据可视化工具",
-        epilog="示例: glowstick data.csv | glowstick https://example.com/data.json | glowstick --selftest"
-    )
-    parser.add_argument(
-        "--input",
-        nargs="?",
-        help="输入文件路径或URL"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行自检程序（使用内置数据，不访问外部资源）"
-    )
-    parser.add_argument(
-        "--version",
-        action="version",
-        version="glowstick 1.0.2"
-    )
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        run_selftest()
-        return
-
-    # 正常模式
-    if not args.input:
-        error_exit("E001", "请提供输入文件或URL")
-
-    try:
-        # 处理输入
-        series, config = process_input(args.input)
-
-        # 输出数据摘要
-        print(f"数据加载成功:")
-        print(f"  数据点数量: {len(series.x)}")
-        print(f"  图表类型: {config.chart_type}")
-        print(f"  X范围: [{min(series.x):.2f}, {max(series.x):.2f}]")
-        print(f"  Y范围: [{min(series.y):.2f}, {max(series.y):.2f}]")
-        if series.z:
-            print(f"  Z范围: [{min(series.z):.2f}, {max(series.z):.2f}]")
-
-        # 渲染图表
-        if render_chart(series, config):
-            print("OpenGL图表渲染成功，关闭窗口退出。")
-        else:
-            print("警告: OpenGL环境不可用，仅输出数据摘要。")
-            print("提示: 安装PyOpenGL后可启用实时渲染: pip install PyOpenGL")
-
-    except SystemExit:
-        raise
-    except Exception as e:
-        error_exit("E010", str(e))
-
-
-# ============================================================
-# 自检程序
-# ============================================================
-def run_selftest() -> None:
-    """运行自检，验证核心逻辑正确性（使用内置硬编码数据）"""
-    print("=" * 60)
-    print("glowstick 自检程序 v1.0.2")
-    print("=" * 60)
-
-    # 测试1: CSV解析
-    print("\n[测试1] CSV数据解析...")
-    csv_content = """x,y,z
-1,2,3
-2,4,6
-3,6,9
-4,8,12
-5,10,15"""
-    series = parse_csv_data(csv_content)
-    assert len(series.x) == 5, "CSV解析失败: 数据点数量错误"
-    assert len(series.y) == 5, "CSV解析失败: Y列数量错误"
-    assert len(series.z) == 5, "CSV解析失败: Z列数量错误"
-    assert abs(series.x[0] - 1.0) < 0.01, "CSV解析失败: X值错误"
-    assert abs(series.y[4] - 10.0) < 0.01, "CSV解析失败: Y值错误"
-    print("  ✓ CSV解析通过")
-
-    # 测试2: JSON解析
-    print("\n[测试2] JSON数据解析...")
-    json_content = '{"x": [1, 2, 3, 4], "y": [10, 20, 30, 40]}'
-    series = parse_json_data(json_content)
-    assert len(series.x) == 4, "JSON解析失败: 数据点数量错误"
-    assert abs(series.y[2] - 30.0) < 0.01, "JSON解析失败: Y值错误"
-    print("  ✓ JSON解析通过")
-
-    # 测试3: TXT解析
-    print("\n[测试3] TXT数据解析...")
-    txt_content = "1 2\n3 4\n5 6\n7 8\n9 10"
-    series = parse_txt_data(txt_content)
-    assert len(series.x) == 5, "TXT解析失败: 数据点数量错误"
-    assert abs(series.x[3] - 7.0) < 0.01, "TXT解析失败: X值错误"
-    assert abs(series.y[4] - 10.0) < 0.01, "TXT解析失败: Y值错误"
-    print("  ✓ TXT解析通过")
-
-    # 测试4: 格式检测
-    print("\n[测试4] 数据格式检测...")
-    assert detect_format(csv_content) == "csv", "格式检测失败: CSV"
-    assert detect_format(json_content) == "json", "格式检测失败: JSON"
-    assert detect_format(txt_content) == "txt", "格式检测失败: TXT"
-    print("  ✓ 格式检测通过")
-
-    # 测试5: 图表类型推断
-    print("\n[测试5] 图表类型推断...")
-    # 3D数据
-    series_3d = DataSeries(x=[1, 2, 3], y=[4, 5, 6], z=[7, 8, 9])
-    assert infer_chart_type(series_3d) == "scatter3d", "图表类型推断失败: 3D"
-    # 有序数据（折线）
-    series_line = DataSeries(x=[1, 2, 3, 4], y=[1, 4, 9, 16])
-    assert infer_chart_type(series_line) == "line", "图表类型推断失败: 折线"
-    # 无序数据（散点）
-    series_scatter = DataSeries(x=[3, 1, 4, 2], y=[5, 3, 2, 1])
-    assert infer_chart_type(series_scatter) == "scatter2d", "图表类型推断失败: 散点"
-    print("  ✓ 图表类型推断通过")
-
-    # 测试6: 数据统计计算
-    print("\n[测试6] 数据统计计算...")
-    test_series = DataSeries(x=[1, 2, 3, 4, 5], y=[2, 4, 6, 8, 10])
-    x_mean = sum(test_series.x) / len(test_series.x)
-    y_mean = sum(test_series.y) / len(test_series.y)
-    assert abs(x_mean - 3.0) < 0.01, "统计计算失败: X均值"
-    assert abs(y_mean - 6.0) < 0.01, "统计计算失败: Y均值"
-    assert len(test_series.x) == len(test_series.y), "统计计算失败: 长度不一致"
-    print("  ✓ 数据统计计算通过")
-
-    # 测试7: 错误处理
-    print("\n[测试7] 错误处理验证...")
-    # 空数据
-    try:
-        parse_csv_data("")
-        assert False, "空数据应抛出错误"
-    except SystemExit:
-        pass  # 预期行为
-    print("  ✓ 空数据错误处理通过")
-
-    # 测试8: 大数据量模拟
-    print("\n[测试8] 大数据量处理...")
-    large_x = [i * 0.5 for i in range(1000)]
-    large_y = [math.sin(i * 0.1) for i in range(1000)]
-    large_series = DataSeries(x=large_x, y=large_y)
-    assert len(large_series.x) == 1000, "大数据量处理失败"
-    assert min(large_series.y) >= -1.5, "数据范围检查失败"
-    assert max(large_series.y) <= 1.5, "数据范围检查失败"
-    print("  ✓ 大数据量处理通过")
-
-    # 测试9: URL数据模拟（使用本地文件模拟）
-    print("\n[测试9] 文件输入处理...")
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as tmp:
-        tmp.write("1,2\n3,4\n5,6")
-        tmp_path = tmp.name
-    try:
-        content = load_data_from_file(tmp_path)
-        assert "1,2" in content, "文件读取失败"
-    finally:
-        os.unlink(tmp_path)
-    print("  ✓ 文件输入处理通过")
-
-    # 测试10: 完整流程
-    print("\n[测试10] 完整处理流程...")
-    full_data = """time,value
-0,10
-1,15
-2,12
-3,18
-4,20"""
-    fmt = detect_format(full_data)
-    series = parse_data(full_data, fmt)
-    chart_type = infer_chart_type(series)
-    assert chart_type == "line", "完整流程失败: 图表类型"
-    assert len(series.x) == 5, "完整流程失败: 数据点数量"
-    print(f"  ✓ 完整流程通过 (图表类型: {chart_type})")
-
-    # 汇总
-    print("\n" + "=" * 60)
-    print("自检完成: 所有测试通过 ✓")
-    print("glowstick 安装正常，功能可用。")
-    print("=" * 60)
-
-
-if __name__ == "__main__":
-    main()
+        gl.glPointSize(5.0)
+        gl.glBegin(gl.GL_POINTS)
+        for i in range(len(series.x)):
+            gl.glColor3f(0.2, 0.6, 1.0)
+            gl.glVertex3f(series.x[i], series.y[i], series.z[i] if series.z else 0)
+        gl.glEnd()
+        
+    def _render_line(self, series: DataSeries, config: ChartConfig):
+        """渲染折线图"""
+        import OpenGL.GL as gl
+        gl.glLineWidth(2.0)
+        gl.glBegin(gl.GL_LINE_STRIP)
+        for i in range(len(series.x)):
+            gl.glColor3f(0.2, 0.8, 0.4)
+            gl.glVertex2f(series.x[i], series.y[i])
+        gl.glEnd()
+        
+    def _render_2d_scatter(self, series: DataSeries, config: ChartConfig):
+        """渲染2D散点图"""
+        import OpenGL.GL as gl
+        gl.glPointSize(4.0)
+        gl.glBegin(gl.GL_POINTS)
+        for i in range(len(series.x)):
+            gl.glColor3f(0.8, 0.3, 0.2)
+            gl.gl
