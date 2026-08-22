@@ -317,6 +317,12 @@ def main() -> int:
         help="筛选条件，JSON 格式，如 '{\"open_source\": true}'",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     # 自检模式
@@ -329,7 +335,7 @@ def main() -> int:
 
     # 读取输入文件
     try:
-        with open(args.input, "r", encoding="utf-8") as f:
+        with open(args.input, "r", encoding="utf-8", errors="replace") as f:
             raw_data = json.load(f)
     except FileNotFoundError:
         _error_exit("E001", f"文件不存在: {args.input}")
