@@ -1,8 +1,0 @@
-{
-  "slug": "cheat-sh-pro",
-  "name": "cheat-sh-pro",
-  "description": "终端内即时获取编程语言与工具代码示例，支持模糊搜索、领域过滤、随机速查与 Markdown 导出，开发调试零切换。",
-  "trigger_words": "[\"cheat.sh\", \"命令行速查\", \"代码示例查询\", \"终端查手册\", \"命令速查\", \"开发调试速查\"]",
-  "original_version": "3.0.0",
-  "capability_outline": []
-}

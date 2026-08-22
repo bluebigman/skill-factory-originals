@@ -10,7 +10,7 @@ import argparse, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TRIGGERS = ["cheat-sh-pro"]
+TRIGGERS = ["cheat.sh", "命令行示例", "速查命令", "工具用法", ""]
 
 
 def load_spec() -> str:
