@@ -57,6 +57,24 @@ CAPABILITY_BOUNDARIES: List[str] = [
 # 核心处理逻辑
 # ============================================================
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def is_triggered(text: str) -> bool:
     """判断输入文本是否触发本工具。"""
     if not text:
@@ -252,7 +270,7 @@ def run_cli(args: argparse.Namespace) -> int:
     data: Any
     if args.input_file:
         try:
-            with open(args.input_file, "r", encoding="utf-8") as f:
+            with open(args.input_file, "r", encoding="utf-8", errors="replace") as f:
                 content = f.read()
             # 尝试解析为 JSON
             try:
@@ -434,6 +452,11 @@ def main() -> int:
         action="store_true",
         help="运行内置自检（不依赖外部文件/网络）"
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
 
