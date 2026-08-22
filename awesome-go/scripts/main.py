@@ -720,6 +720,11 @@ def build_arg_parser() -> argparse.ArgumentParser:
 def main() -> int:
     """主函数"""
     parser = build_arg_parser()
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
     args = parser.parse_args()
 
     # 自检模式
