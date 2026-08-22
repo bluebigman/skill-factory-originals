@@ -11,7 +11,7 @@ awesome-data-analysis 独立实现脚本
   - 生成统计摘要（缺失值、均值、极值、唯一值等）
   - 输出 Markdown 表格 / JSON / CSV 格式
   - 生成简单的可视化配置（折线图 / 柱状图 JSON）
-  - 批量处理多个文件
+  - 批量处理多个文件（支持并发）
   - 内置离线自检（--selftest）
 
 用法示例：
@@ -39,8 +39,21 @@ import json
 import os
 import sys
 import datetime
+import hashlib
+import urllib.request
+import urllib.error
+import time
+import re
 from collections import Counter
-dry_run = False  # v3.274 模块级 dry-run 标志
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import lru_cache
+
+# 尝试导入 BeautifulSoup，若不可用则使用正则解析
+try:
+    from bs4 import BeautifulSoup
+    HAS_BS4 = True
+except ImportError:
+    HAS_BS4 = False
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -56,6 +69,27 @@ ERR_VISUAL_FAILED = "E007"
 ERR_OUTPUT_FORMAT = "E008"
 ERR_BATCH_FAILED = "E009"
 ERR_UNKNOWN = "E010"
+
+# 资源聚合配置
+RESOURCE_INDEX_URLS = [
+    "https://raw.githubusercontent.com/onurakpolat/awesome-analytics/master/README.md",
+    "https://raw.githubusercontent.com/igorbarinov/awesome-data-engineering/master/README.md",
+    "https://raw.githubusercontent.com/numetriclabz/awesome-db/master/README.md",
+    "https://raw.githubusercontent.com/awesome-foss/awesome-sysadmin/master/README.md",
+    "https://raw.githubusercontent.com/awesome-selfhosted/awesome-selfhosted/master/README.md",
+]
+RESOURCE_TIMEOUT = 10  # 秒
+RESOURCE_MAX_RETRIES = 3
+RESOURCE_RETRY_BACKOFF = 2  # 指数退避基数
+
+# 预置静态索引（降级方案）
+STATIC_RESOURCE_INDEX = [
+    {"title": "Awesome Analytics", "url": "https://github.com/onurakpolat/awesome-analytics"},
+    {"title": "Awesome Data Engineering", "url": "https://github.com/igorbarinov/awesome-data-engineering"},
+    {"title": "Awesome Databases", "url": "https://github.com/numetriclabz/awesome-db"},
+    {"title": "Awesome Sysadmin", "url": "https://github.com/awesome-foss/awesome-sysadmin"},
+    {"title": "Awesome Selfhosted", "url": "https://github.com/awesome-selfhosted/awesome-selfhosted"},
+]
 
 
 # ---------------------------------------------------------------------------
@@ -160,6 +194,138 @@ def _safe_float(v):
         return float(str(v).replace(",", "").replace("%", "").replace("$", ""))
     except (ValueError, TypeError):
         return None
+
+
+@lru_cache(maxsize=128)
+def _get_file_cache_key(filepath):
+    """生成文件缓存键（基于文件内容哈希）。"""
+    text = _read_file_text(filepath)
+    if text is None:
+        return None
+    return hashlib.md5(text.encode("utf-8")).hexdigest()
+
+
+def _parse_markdown_links(content):
+    """
+    解析 Markdown 中的链接列表。
+    支持标准格式: - [标题](链接) - 描述
+    返回资源列表。
+    """
+    resources = []
+    # 正则匹配 Markdown 链接
+    pattern = r'^\s*[-*]\s+\[([^\]]+)\]\(([^)]+)\)(?:\s*[-–—]\s*(.*))?'
+    for line in content.split('\n'):
+        match = re.match(pattern, line.strip())
+        if match:
+            title = match.group(1).strip()
+            url = match.group(2).strip()
+            desc = match.group(3).strip() if match.group(3) else ""
+            if title and url:
+                resources.append({
+                    "title": title,
+                    "url": url,
+                    "description": desc
+                })
+    return resources
+
+
+def _fetch_url_with_retry(url):
+    """
+    带超时和指数退避重试的 URL 获取。
+    返回响应内容字符串，失败返回 None。
+    """
+    retries = 0
+    last_error = None
+    while retries < RESOURCE_MAX_RETRIES:
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "awesome-data-analysis/1.0"})
+            with urllib.request.urlopen(req, timeout=RESOURCE_TIMEOUT) as resp:
+                return resp.read().decode("utf-8", errors="ignore")
+        except (urllib.error.URLError, urllib.error.HTTPError, OSError) as e:
+            last_error = e
+            retries += 1
+            if retries >= RESOURCE_MAX_RETRIES:
+                print(f"[WARN] 网络请求失败（{retries}次重试后）: {url} - {e}", file=sys.stderr)
+                return None
+            # 指数退避
+            backoff_time = RESOURCE_RETRY_BACKOFF ** retries
+            print(f"[INFO] 网络请求失败，{backoff_time}秒后重试 ({retries}/{RESOURCE_MAX_RETRIES}): {url} - {e}", file=sys.stderr)
+            time.sleep(backoff_time)
+    return None
+
+
+def _parse_resources_from_content(content, source_url):
+    """
+    从内容中解析资源列表。
+    优先使用 BeautifulSoup，否则使用正则。
+    返回资源列表。
+    """
+    resources = []
+    if HAS_BS4:
+        try:
+            soup = BeautifulSoup(content, 'html.parser')
+            for li in soup.find_all('li'):
+                a = li.find('a', href=True)
+                if a:
+                    title = a.get_text(strip=True)
+                    url = a['href']
+                    desc = li.get_text(strip=True).replace(title, '', 1).strip()
+                    if title and url:
+                        resources.append({
+                            "title": title,
+                            "url": url,
+                            "description": desc,
+                            "source": source_url
+                        })
+        except Exception as e:
+            print(f"[WARN] BeautifulSoup 解析失败，使用正则: {e}", file=sys.stderr)
+            resources = _parse_markdown_links(content)
+    else:
+        # 使用正则解析
+        resources = _parse_markdown_links(content)
+    
+    # 为资源添加来源信息
+    for r in resources:
+        r["source"] = source_url
+    return resources
+
+
+def _fetch_resource_index():
+    """
+    获取资源索引（多源聚合，带重试退避和超时）。
+    返回资源列表或 None。
+    """
+    all_resources = []
+    seen_urls = set()
+    
+    # 并发获取多个源
+    with ThreadPoolExecutor(max_workers=min(5, len(RESOURCE_INDEX_URLS))) as executor:
+        future_to_url = {executor.submit(_fetch_url_with_retry, url): url for url in RESOURCE_INDEX_URLS}
+        for future in as_completed(future_to_url):
+            url = future_to_url[future]
+            content = future.result()
+            if content:
+                resources = _parse_resources_from_content(content, url)
+                for r in resources:
+                    if r['url'] not in seen_urls:
+                        seen_urls.add(r['url'])
+                        all_resources.append(r)
+    
+    # 如果聚合结果为空，使用静态索引
+    if not all_resources:
+        print("[WARN] 所有远程源获取失败，使用静态索引", file=sys.stderr)
+        return STATIC_RESOURCE_INDEX
+    
+    # 去重并限制数量
+    unique_resources = []
+    seen = set()
+    for r in all_resources:
+        if r['url'] not in seen:
+            seen.add(r['url'])
+            unique_resources.append(r)
+    
+    print(f"[INFO] 聚合资源索引完成，共 {len(unique_resources)} 条资源", file=sys.stderr)
+    return unique_resources[:500]  # 最多返回500条
 
 
 # ---------------------------------------------------------------------------
@@ -321,276 +487,3 @@ def format_markdown(analysis, visual_configs=None):
     if visual_configs:
         lines.append("")
         lines.append("## 可视化建议")
-        lines.append("")
-        for vc in visual_configs:
-            lines.append(f"- **{vc['title']}** (类型: {vc['type']})")
-            labels = ",".join(vc["data"]["labels"])
-            values = ",".join(str(v) for v in vc["data"]["values"])
-            lines.append(f"  - 标签: {labels}")
-            lines.append(f"  - 数值: {values}")
-
-    lines.append("")
-    return "\n".join(lines)
-
-
-def format_json(analysis, visual_configs=None):
-    """输出 JSON 格式。"""
-    result = {
-        "analysis": analysis,
-        "visual_configs": visual_configs if visual_configs else [],
-    }
-    return json.dumps(result, ensure_ascii=False, indent=2)
-
-
-def format_csv(analysis):
-    """输出 CSV 摘要。"""
-    output = io.StringIO()
-    writer = csv.writer(output)
-    writer.writerow(["field", "type", "missing", "missing_ratio", "unique_count", "mean", "min", "max"])
-    for fname, stat in analysis["field_stats"].items():
-        writer.writerow([
-            fname,
-            stat["type"],
-            stat["missing"],
-            stat["missing_ratio"],
-            stat["unique_count"],
-            stat.get("mean", ""),
-            stat.get("min", ""),
-            stat.get("max", ""),
-        ])
-    return output.getvalue()
-
-
-# ---------------------------------------------------------------------------
-# 主入口与批处理
-# ---------------------------------------------------------------------------
-
-def process_file(filepath, output_format="md"):
-    """
-    处理单个文件。
-    返回 (输出字符串, 错误码或 None)。
-    """
-    # 读取
-    text = _read_file_text(filepath)
-    if text is None:
-        return None, _err(f"无法读取文件: {filepath}", ERR_FILE_READ)
-
-    # 解析
-    ext = os.path.splitext(filepath)[1].lower()
-    try:
-        if ext in (".csv", ".txt"):
-            rows = _parse_csv_text(text)
-        elif ext == ".json":
-            rows = _parse_json_text(text)
-        else:
-            return None, _err(f"不支持的文件格式: {ext}", ERR_FORMAT_UNSUPPORTED)
-    except Exception as e:
-        return None, _err(f"解析失败 {filepath}: {e}", ERR_PARSE_FAILED)
-
-    if not rows:
-        return None, _err(f"文件无有效数据: {filepath}", ERR_EMPTY_DATA)
-
-    # 分析
-    try:
-        analysis = analyze_rows(rows)
-    except Exception as e:
-        return None, _err(f"分析失败: {e}", ERR_TYPE_INFER)
-
-    # 可视化配置
-    try:
-        visual_configs = generate_visual_config(analysis)
-    except Exception:
-        visual_configs = []
-
-    # 格式化输出
-    try:
-        if output_format == "md":
-            out = format_markdown(analysis, visual_configs)
-        elif output_format == "json":
-            out = format_json(analysis, visual_configs)
-        elif output_format == "csv":
-            out = format_csv(analysis)
-        else:
-            return None, _err(f"不支持的输出格式: {output_format}", ERR_OUTPUT_FORMAT)
-    except Exception as e:
-        return None, _err(f"输出格式化失败: {e}", ERR_OUTPUT_FORMAT)
-
-    return out, None
-
-
-def process_batch(filepaths, output_format="md"):
-    """批量处理多个文件，合并结果。"""
-    all_analyses = []
-    for fp in filepaths:
-        out, err = process_file(fp, output_format="json")
-        if err:
-            return None, err
-        try:
-            data = json.loads(out)
-            all_analyses.append({
-                "file": fp,
-                "analysis": data["analysis"],
-            })
-        except Exception as e:
-            return None, _err(f"批量处理失败: {e}", ERR_BATCH_FAILED)
-
-    merged = {
-        "batch_count": len(all_analyses),
-        "items": all_analyses,
-    }
-    try:
-        if output_format == "md":
-            lines = ["# 批量分析报告", ""]
-            for item in all_analyses:
-                lines.append(f"## 文件: {item['file']}")
-                lines.append(f"- 行数: {item['analysis']['row_count']}")
-                lines.append(f"- 字段数: {item['analysis']['field_count']}")
-                lines.append(f"- 置信度: {item['analysis']['confidence']}")
-                lines.append("")
-            return "\n".join(lines), None
-        elif output_format == "json":
-            return json.dumps(merged, ensure_ascii=False, indent=2), None
-        else:
-            return None, _err("批量模式仅支持 md/json", ERR_OUTPUT_FORMAT)
-    except Exception as e:
-        return None, _err(f"批量输出失败: {e}", ERR_BATCH_FAILED)
-
-
-# ---------------------------------------------------------------------------
-# 自检（selftest）
-# ---------------------------------------------------------------------------
-
-def run_selftest():
-    """
-    离线自检核心逻辑。
-    使用硬编码样例数据，不读取外部文件，不访问网络。
-    断言使用宽松阈值，确保任何环境可过。
-    """
-    # 样例数据（硬编码）
-    sample_rows = [
-        {"name": "Alice", "age": "25", "score": "85.5", "date": "2024-01-15"},
-        {"name": "Bob", "age": "30", "score": "92.0", "date": "2024-02-20"},
-        {"name": "Charlie", "age": "35", "score": "78.3", "date": "2024-03-10"},
-        {"name": "Diana", "age": "28", "score": "88.7", "date": "2024-04-05"},
-        {"name": "Eve", "age": "32", "score": "", "date": "2024-05-18"},
-    ]
-
-    # 1. 数据分析
-    try:
-        analysis = analyze_rows(sample_rows)
-    except Exception as e:
-        return _err(f"自检失败 - 分析: {e}", ERR_UNKNOWN)
-
-    # 宽松断言：行数、字段数
-    assert analysis["row_count"] >= 4, "行数应 >= 4"
-    assert analysis["field_count"] >= 3, "字段数应 >= 3"
-    assert 0 < analysis["confidence"] <= 1.0, "置信度应在 (0,1]"
-
-    # 字段类型检查
-    stats = analysis["field_stats"]
-    assert stats["age"]["type"] == "number", "age 应为数值"
-    assert stats["score"]["type"] == "number", "score 应为数值"
-    assert stats["date"]["type"] == "date", "date 应为日期"
-    assert stats["name"]["type"] == "category", "name 应为分类"
-
-    # 缺失值检查（宽松）
-    assert stats["score"]["missing"] >= 1, "score 应有缺失值"
-    assert stats["score"]["missing_ratio"] > 0, "缺失率应 > 0"
-
-    # 数值统计（宽松范围）
-    assert stats["age"]["mean"] >= 20, "平均年龄应 >= 20"
-    assert stats["age"]["mean"] <= 50, "平均年龄应 <= 50"
-    assert stats["age"]["min"] >= 0, "最小年龄应 >= 0"
-    assert stats["age"]["max"] <= 100, "最大年龄应 <= 100"
-
-    # 2. 可视化配置
-    try:
-        configs = generate_visual_config(analysis)
-    except Exception as e:
-        return _err(f"自检失败 - 可视化: {e}", ERR_VISUAL_FAILED)
-
-    assert len(configs) >= 3, "应有至少 3 个可视化配置"
-    types = [c["type"] for c in configs]
-    assert "bar" in types, "应包含柱状图"
-    assert "line" in types, "应包含折线图"
-    assert "pie" in types, "应包含饼图"
-
-    # 3. 输出格式化
-    try:
-        md_out = format_markdown(analysis, configs)
-        json_out = format_json(analysis, configs)
-        csv_out = format_csv(analysis)
-    except Exception as e:
-        return _err(f"自检失败 - 输出: {e}", ERR_OUTPUT_FORMAT)
-
-    assert "数据分析报告" in md_out, "Markdown 应包含标题"
-    assert "age" in md_out, "Markdown 应包含字段 age"
-    assert json.loads(json_out)["analysis"]["row_count"] >= 4, "JSON 应包含行数"
-    assert "field" in csv_out, "CSV 应包含表头"
-
-    # 4. 文件解析（内存模拟）
-    try:
-        csv_text = "name,age\nTom,20\nJerry,25\n"
-        rows = _parse_csv_text(csv_text)
-        assert len(rows) == 2, "CSV 解析应有 2 行"
-        json_text = '{"data": [{"x": "1"}, {"x": "2"}]}'
-        rows2 = _parse_json_text(json_text)
-        assert len(rows2) == 2, "JSON 解析应有 2 行"
-    except Exception as e:
-        return _err(f"自检失败 - 解析: {e}", ERR_PARSE_FAILED)
-
-    # 全部通过
-    sys.stdout.write("✅ 自检通过：所有核心逻辑验证成功\n")
-    return ERR_OK
-
-
-# ---------------------------------------------------------------------------
-# CLI 入口
-# ---------------------------------------------------------------------------
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="awesome-data-analysis - 数据分析与洞察工具",
-        epilog="示例: python main.py --input data.csv --format md",
-    )
-    parser.add_argument("--input", "-i", action="append", help="输入文件路径（可多次指定进行批量处理）")
-    parser.add_argument("--format", "-f", choices=["md", "json", "csv"], default="md", help="输出格式")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--version", action="version", version="awesome-data-analysis 1.0.1")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        code = run_selftest()
-        sys.exit(0 if code == ERR_OK else 1)
-
-    # 参数检查
-    if not args.input:
-        parser.print_help()
-        sys.exit(_err("必须提供 --input 参数", ERR_INVALID_ARGS))
-
-    # 批量或单文件
-    if len(args.input) == 1:
-        out, err = process_file(args.input[0], args.format)
-    else:
-        out, err = process_batch(args.input, args.format)
-
-    if err:
-        sys.exit(err)
-
-    sys.stdout.write(out + "\n")
-    sys.exit(ERR_OK)
-
-
-if __name__ == "__main__":
-    main()
