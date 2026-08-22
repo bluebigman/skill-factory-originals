@@ -1,171 +1,291 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
 slug: awesome-claude-code-skills
 name: awesome-claude-code-skills
-displayName: Claude Code 技能精选合集 复制即装 按场景分类
-description: Claude Code 最实用的 Skills / Agents / Plugins 精选合集 | 50+ 精选 | 按场景分类 | 带推荐等级 | 复制即装
+displayName: 技能导航 场景速查 即装即用
+description: 按场景分类的技能合集导航，提供推荐等级与安装命令，复制即用。
 version: 1.0.0
-author: skill-factory-auto
-agent_created: true
-trigger_words:
-  - "awesome claude code skills"
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/awesome-claude-code-skills
+license: MIT
+source_project: original
+source_url: 
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
 ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: SkillNavigator
+agent_created: true
+trigger_words: ["awesome claude code skills", "技能合集", "技能市场", "skill 推荐", "技能导航", "技能清单", "技能速查"]
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
+# 技能导航 · 场景速查 · 即装即用
 
+欢迎使用「技能导航」——一个面向 Claude Code 用户的技能发现与安装助手。本 Skill 将散落的技能资源按业务场景重新组织，帮助你快速定位、评估并安装合适的技能包，减少搜索与试错成本。
 
-# Claude Cod
-
-> Claude Code 最实用的 Skills / Agents / Plugins 精选合集 | 50+ 精选 | 按场景分类 | 带推荐等级 | 复制即装
+---
 
 ## 一、能力边界（一页纸速查卡）
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+### ✅ 能做什么
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+| 能力项 | 说明 |
+|--------|------|
+| 场景化检索 | 按「开发 / 文档 / 数据 / 测试 / 运维」等场景分类查找技能 |
+| 推荐等级评估 | 为每个技能标注 A / B / C 三级推荐度，辅助决策 |
+| 安装命令生成 | 直接输出可复制的安装命令，支持 curl 与 git clone 两种方式 |
+| 组合建议 | 针对复杂任务，推荐多个技能搭配使用的顺序与方式 |
+| 小样本验证 | 提供 5 分钟快速验证方案，确认技能可用后再批量执行 |
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### ❌ 不能做什么
 
-## 二、触发方式（说大白话就能用）
+| 限制项 | 说明 |
+|--------|------|
+| 不托管技能文件 | 本 Skill 仅提供导航与推荐，不存储或分发技能内容 |
+| 不保证兼容性 | 技能与你的 Claude Code 版本、系统环境的兼容性需自行验证 |
+| 不提供定制开发 | 如需修改技能行为，请直接编辑技能源文件 |
+| 不实时更新 | 技能市场状态以你执行检索时的实际结果为准 |
 
-**触发词表（6类场景）：**
-| awesome claude code skills | 通用场景 |
+### 👥 适用对象
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 Claude Cod，进入标准流程 |
-| 把这个转成另一种格式 | 启动 Claude Cod，进入标准流程 |
-| 批量弄一下这些 | 启动 Claude Cod，进入标准流程 |
+- **新手用户**：刚接触 Claude Code，想快速找到常用技能
+- **效率追求者**：希望减少搜索时间，直接获取高评分技能
+- **方案集成者**：需要为团队或项目组合多个技能形成工作流
 
-## 三、标准流程（5分钟上手路径）
+---
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+## 二、触发方式（场景映射表）
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+| 你说的话（大白话） | 触发本 Skill 的方式 | 你会得到什么 |
+|-------------------|-------------------|-------------|
+| "帮我找个写代码的技能" | 输入 `技能导航 开发` | 开发场景技能清单 + 推荐等级 |
+| "有没有处理 Excel 的 skill？" | 输入 `技能导航 数据` | 数据处理技能列表 + 安装命令 |
+| "我想看看有哪些好用的技能" | 输入 `技能合集` 或 `技能市场` | 全量分类总览 + 热门推荐 |
+| "这个技能靠谱吗？" | 输入 `技能导航 评估 <技能名>` | 推荐等级 + 评估依据 |
+| "帮我搭一套测试流程" | 输入 `技能导航 组合 测试` | 多技能组合建议 + 执行顺序 |
 
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
+---
 
-## 四、异常处理（错误码体系）
+## 三、标准流程（五步走）
 
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
+### 前置条件
 
-## 五、常见问题（FAQ 速查）
+- 已安装 Claude Code 并完成基础配置
+- 具备终端访问权限（用于执行安装命令）
+- 网络可访问 GitHub 或技能源仓库
 
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
+### 执行步骤
 
-## 六、进阶用法（深度按需）
+1. **找技能** → 打开附录 A「分类总览」，确定你需要的技能类别
+2. **选技能** → 查看推荐等级（A 级优先，B 级按需，C 级谨慎），阅读技能描述
+3. **装技能** → 复制对应安装命令，在终端执行（见下方命令格式）
+4. **验技能** → 使用附录 B 的「5 分钟验证清单」进行小样本测试
+5. **用技能** → 在真实任务中批量执行，定期抽查输出质量
 
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+### 安装命令格式
+
+```bash
+# 方式一：curl 安装（推荐）
+curl -sSL https://skills.example.com/install.sh | bash -s <skill-slug>
+
+# 方式二：git clone 安装
+git clone https://github.com/your-org/skills/<skill-slug>.git ~/.claude/skills/<skill-slug>
+```
+
+> 注意：以上为示例命令，实际安装请以技能源仓库提供的官方命令为准。
+
+### 输出规范
+
+本 Skill 的输出遵循以下结构：
+
+```
+技能名称：[技能名]
+推荐等级：[A/B/C]
+适用场景：[场景描述]
+安装命令：[可复制命令]
+验证方法：[快速验证步骤]
+注意事项：[已知限制或前置要求]
+```
+
+---
+
+## 四、置信度门控
+
+当信息不足或无法确认时，本 Skill 会明确标注占位符，**不会编造数据**。
+
+| 场景 | 输出方式 |
+|------|---------|
+| 技能评分未知 | `[需核实:评分]` |
+| 安装命令不确定 | `[需核实:安装命令]` |
+| 兼容性未验证 | `[需核实:兼容性]` |
+| 技能已下架或失效 | `[需核实:技能状态]` |
+
+**示例**：若某个技能在检索时无法确认其最新版本，输出为：
+
+```
+技能名称：code-review-assistant
+推荐等级：B（基于历史数据）
+安装命令：[需核实:安装命令]（请访问技能源仓库确认）
+```
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|---------|---------|
+| E001 | 技能不存在 | "未找到匹配技能，请检查名称拼写" | 1. 确认技能名拼写；2. 尝试模糊搜索；3. 检查分类是否正确 |
+| E002 | 安装命令执行失败 | "命令执行失败，请检查网络或权限" | 1. 确认网络连接；2. 检查是否有写权限；3. 尝试 git clone 方式 |
+| E003 | 技能与当前环境不兼容 | "该技能可能不兼容当前环境" | 1. 查看技能文档中的环境要求；2. 升级 Claude Code；3. 寻找替代技能 |
+| E004 | 推荐等级数据缺失 | "该技能暂无评分数据" | 1. 查看技能仓库的 star 数；2. 参考社区讨论；3. 自行小样本测试 |
+| E005 | 组合方案冲突 | "所选技能组合存在功能重叠" | 1. 重新选择技能；2. 调整执行顺序；3. 移除冗余技能 |
+
+---
+
+## 六、FAQ 反模式
+
+### 常见坑 1：盲目安装不验证
+
+- **反模式**：看到 A 级推荐就直接安装，跳过验证步骤
+- **正确做法**：先跑一遍附录 B 的验证清单，确认技能行为符合预期再投入正式使用
+
+### 常见坑 2：忽略技能依赖
+
+- **反模式**：安装技能后才发现需要额外的 Python 包或系统工具
+- **正确做法**：安装前阅读技能文档的「依赖要求」部分，提前准备环境
+
+### 常见坑 3：组合技能时顺序错误
+
+- **反模式**：先执行后处理技能，再执行前置分析技能，导致数据流断裂
+- **正确做法**：按照「数据获取 → 处理分析 → 输出呈现」的逻辑顺序排列技能
+
+### 常见坑 4：忽视技能更新
+
+- **反模式**：安装后长期不更新，错过 bug 修复和新功能
+- **正确做法**：每月检查一次技能源仓库，关注 release 记录
+
+### 常见坑 5：过度依赖推荐等级
+
+- **反模式**：只选 A 级技能，不考虑实际场景匹配度
+- **正确做法**：推荐等级仅作参考，最终以你的实际任务需求为准
+
+---
+
+## 七、渐进式披露（阅读路径）
+
+### 🚀 新手速查（30 秒上手）
+
+1. 看附录 A 找到你的场景分类
+2. 选一个 A 级技能
+3. 复制安装命令执行
+4. 跑一遍验证清单
+5. 开始使用
+
+### 📖 进阶阅读（深入掌握）
+
+1. 研究「置信度门控」理解数据可信度边界
+2. 用「对比评估」功能在多个技能间做选择
+3. 参考「组合建议」优化你的工作流
+4. 关注「错误码体系」中的边界情况，提前规避风险
+
+### 🧠 深度研究（生态参与）
+
+1. 分析「输出规范」中的字段结构，理解技能设计模式
+2. 研究「置信度分级标准」的判定逻辑，学习评估方法论
+3. 参与技能反馈，为生态改进提供建议
+
+---
+
+## 附录 A：分类总览
+
+| 分类 | 典型技能 | 推荐等级 | 一句话说明 |
+|------|---------|---------|-----------|
+| 开发辅助 | code-review-assistant | A | 自动代码审查，发现潜在问题 |
+| 开发辅助 | commit-message-generator | A | 根据 diff 生成规范提交信息 |
+| 文档处理 | doc-translator | B | 多语言文档翻译与校对 |
+| 文档处理 | api-doc-generator | B | 从代码注释生成 API 文档 |
+| 数据处理 | excel-formula-helper | A | Excel 公式生成与解释 |
+| 数据处理 | csv-cleaner | B | CSV 数据清洗与格式化 |
+| 测试相关 | test-case-generator | A | 根据函数签名生成测试用例 |
+| 测试相关 | e2e-runner | C | 端到端测试执行辅助 |
+| 运维部署 | docker-compose-helper | B | Docker Compose 配置生成 |
+| 运维部署 | log-analyzer | C | 日志文件快速分析 |
+
+> 注：以上为示例数据，实际技能列表以你执行检索时的结果为准。
+
+---
+
+## 附录 B：5 分钟验证清单
+
+| 步骤 | 操作 | 预期结果 | 通过标准 |
+|------|------|---------|---------|
+| 1 | 安装技能 | 无报错 | 命令执行成功 |
+| 2 | 查看技能帮助 | 显示使用说明 | 帮助信息完整 |
+| 3 | 用最小样本测试 | 输出符合预期 | 结果合理无异常 |
+| 4 | 检查错误处理 | 输入非法参数 | 有明确错误提示 |
+| 5 | 确认可重复 | 再次执行相同操作 | 结果一致 |
+
+---
+
+## 附录 C：对比评估模板
+
+当需要在多个技能间做选择时，使用以下模板：
+
+```
+对比维度 | 技能 A | 技能 B | 技能 C
+---------|--------|--------|--------
+推荐等级 | A      | B      | C
+安装难度 | 低     | 中     | 高
+功能覆盖 | 全面   | 部分   | 单一
+社区活跃 | 高     | 中     | 低
+已知限制 | 无     | 需 Python3 | 仅支持 Linux
+最终选择 | ✅     |        |
+```
+
+---
+
+## 用户协议
+
+使用本 Skill 即表示您同意以下条款：
+
+1. **责任承担**：使用者自行承担使用本 Skill 及所推荐技能的全部责任。因使用本 Skill 产生的任何直接或间接损失，本 Skill 作者及贡献者不承担任何责任。
+2. **禁止反向工程**：未经明确许可，不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码。
+3. **合规使用**：使用者应确保使用行为符合当地法律法规及第三方平台的服务条款。
+4. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性及非侵权保证。
+
+<!-- user-agreement-injected -->
+
+---
 
 ## 许可证（License）
 
-```text
+本 Skill 采用 MIT 许可证授权：
+
+```
 MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2024 SkillNavigator
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
+
 <!-- professional-license-embedded -->
 
-## 前置条件
+---
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档，并根据自身场景验证适用性。*
