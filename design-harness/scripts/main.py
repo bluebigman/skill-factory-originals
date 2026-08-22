@@ -10,6 +10,7 @@ design-harness 技能实现脚本
     python scripts/main.py --help
     python scripts/main.py --selftest
     python scripts/main.py --input design.json --output proto.html --format html
+    python scripts/main.py --input design.json --output report.json --format json
 """
 
 import argparse
@@ -17,9 +18,10 @@ import json
 import os
 import sys
 import tempfile
+import traceback
 from dataclasses import dataclass, field, asdict
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -91,14 +93,26 @@ def parse_design_data(data: Dict[str, Any]) -> DesignDocument:
     if not isinstance(data, dict):
         fail("E008", "顶层数据必须是 JSON 对象")
 
-    # 必需字段检查
-    if "components" not in data:
-        fail("E003", "缺少必需字段 'components'")
+    # 必需字段检查 - 显式检查 title、width、height、components
+    required_fields = ["title", "width", "height", "components"]
+    for field_name in required_fields:
+        if field_name not in data:
+            fail("E003", f"缺少必需字段 '{field_name}'")
+
+    # 字段类型检查
+    if not isinstance(data["title"], str):
+        fail("E008", "'title' 字段必须是字符串")
+    if not isinstance(data["width"], (int, float)) or data["width"] <= 0:
+        fail("E008", "'width' 字段必须是正数")
+    if not isinstance(data["height"], (int, float)) or data["height"] <= 0:
+        fail("E008", "'height' 字段必须是正数")
+    if not isinstance(data["components"], list):
+        fail("E008", "'components' 字段必须是列表")
 
     doc = DesignDocument(
-        title=str(data.get("title", "未命名设计")),
-        width=int(data.get("width", 375)),
-        height=int(data.get("height", 812)),
+        title=str(data["title"]),
+        width=int(data["width"]),
+        height=int(data["height"]),
     )
 
     # 解析断点（可选）
@@ -110,9 +124,6 @@ def parse_design_data(data: Dict[str, Any]) -> DesignDocument:
 
     # 解析组件列表
     comp_list = data["components"]
-    if not isinstance(comp_list, list):
-        fail("E008", "'components' 字段必须是列表")
-
     for item in comp_list:
         if not isinstance(item, dict):
             fail("E008", "组件必须是 JSON 对象")
@@ -120,6 +131,11 @@ def parse_design_data(data: Dict[str, Any]) -> DesignDocument:
         ctype = item.get("type", "")
         if ctype not in ("button", "input", "text", "image", "container"):
             fail("E006", f"未知组件类型: {ctype}")
+
+        # 组件字段类型检查
+        for field_name in ["x", "y", "width", "height", "font_size"]:
+            if field_name in item and not isinstance(item[field_name], (int, float)):
+                fail("E008", f"组件字段 '{field_name}' 必须是数字")
 
         comp = DesignComponent(
             type=ctype,
@@ -248,6 +264,128 @@ def generate_js(doc: DesignDocument) -> str:
     return "\n".join(lines)
 
 
+# ---------------------------------------------------------------------------
+# 核心逻辑：验证与置信度评估
+# ---------------------------------------------------------------------------
+def validate_prototype(doc: DesignDocument) -> Dict[str, Any]:
+    """
+    验证设计稿的完整性和可生成性，返回验证结果和置信度评分。
+    置信度评分基于字段完整性、组件类型合法性和交互定义完整性。
+    """
+    validation_results = {
+        "valid": True,
+        "errors": [],
+        "warnings": [],
+        "checks": {}
+    }
+
+    # 检查1: 画布尺寸
+    if doc.width <= 0 or doc.height <= 0:
+        validation_results["valid"] = False
+        validation_results["errors"].append("画布尺寸必须为正数")
+    else:
+        validation_results["checks"]["canvas_size"] = "通过"
+
+    # 检查2: 组件数量
+    if len(doc.components) == 0:
+        validation_results["valid"] = False
+        validation_results["errors"].append("设计稿中没有任何组件")
+    else:
+        validation_results["checks"]["component_count"] = f"{len(doc.components)} 个组件"
+
+    # 检查3: 组件类型合法性
+    valid_types = {"button", "input", "text", "image", "container"}
+    for i, comp in enumerate(doc.components):
+        if comp.type not in valid_types:
+            validation_results["valid"] = False
+            validation_results["errors"].append(f"组件 #{i} 类型非法: {comp.type}")
+        else:
+            # 检查坐标是否在画布内
+            if comp.x < 0 or comp.y < 0 or comp.x + comp.width > doc.width or comp.y + comp.height > doc.height:
+                validation_results["warnings"].append(f"组件 '{comp.label}' 超出画布边界")
+
+    # 检查4: 交互组件定义
+    interactive_components = [c for c in doc.components if c.interactive]
+    for comp in interactive_components:
+        if not comp.action:
+            validation_results["warnings"].append(f"交互组件 '{comp.label}' 未定义动作")
+
+    # 计算置信度评分（0-100）
+    score = 100.0
+    deductions = 0.0
+
+    # 字段完整性检查
+    total_fields = 0
+    filled_fields = 0
+    for comp in doc.components:
+        fields = ["type", "label", "x", "y", "width", "height", "color", "font_size"]
+        for field_name in fields:
+            total_fields += 1
+            value = getattr(comp, field_name)
+            if value not in (None, "", 0, False):
+                filled_fields += 1
+
+    if total_fields > 0:
+        field_completeness = filled_fields / total_fields
+        deductions += (1 - field_completeness) * 20  # 字段完整性占20分
+
+    # 交互定义完整性
+    if interactive_components:
+        defined_actions = sum(1 for c in interactive_components if c.action)
+        action_completeness = defined_actions / len(interactive_components)
+        deductions += (1 - action_completeness) * 15  # 交互定义占15分
+
+    # 画布利用率
+    if doc.components:
+        used_area = sum(c.width * c.height for c in doc.components)
+        canvas_area = doc.width * doc.height
+        if canvas_area > 0:
+            utilization = min(used_area / canvas_area, 1.0)
+            if utilization < 0.1:
+                deductions += 5  # 画布利用率过低扣5分
+
+    # 警告扣分
+    deductions += len(validation_results["warnings"]) * 2  # 每个警告扣2分
+
+    # 错误扣分
+    if not validation_results["valid"]:
+        deductions += 30  # 无效设计直接扣30分
+
+    score = max(0, min(100, 100 - deductions))
+    validation_results["confidence_score"] = round(score, 1)
+
+    return validation_results
+
+
+def generate_json_report(doc: DesignDocument, validation: Dict[str, Any]) -> Dict[str, Any]:
+    """生成结构化 JSON 报告。"""
+    report = {
+        "title": doc.title,
+        "canvas": {
+            "width": doc.width,
+            "height": doc.height,
+            "breakpoints": doc.breakpoints
+        },
+        "components": {
+            "total": len(doc.components),
+            "interactive": sum(1 for c in doc.components if c.interactive),
+            "types": {}
+        },
+        "validation": validation,
+        "generated_at": datetime.now(timezone.utc).isoformat(),
+        "tool": "design-harness",
+        "version": "1.0.2"
+    }
+
+    # 统计组件类型
+    for comp in doc.components:
+        if comp.type not in report["components"]["types"]:
+            report["components"]["types"][comp.type] = 0
+        report["components"]["types"][comp.type] += 1
+
+    return report
+
+
 def export_design(doc: DesignDocument, output_dir: str, fmt: str) -> Dict[str, str]:
     """
     将 DesignDocument 导出为指定格式的文件。
@@ -256,290 +394,9 @@ def export_design(doc: DesignDocument, output_dir: str, fmt: str) -> Dict[str, s
     os.makedirs(output_dir, exist_ok=True)
     generated: Dict[str, str] = {}
 
+    # 验证设计稿
+    validation = validate_prototype(doc)
+
     if fmt == "html":
         html_content = generate_html(doc)
-        html_path = os.path.join(output_dir, "index.html")
-        with open(html_path, "w", encoding="utf-8") as f:
-            f.write(html_content)
-        generated["html"] = html_path
-
-    elif fmt == "css":
-        css_content = generate_css(doc)
-        css_path = os.path.join(output_dir, "style.css")
-        with open(css_path, "w", encoding="utf-8") as f:
-            f.write(css_content)
-        generated["css"] = css_path
-
-    elif fmt == "js":
-        js_content = generate_js(doc)
-        js_path = os.path.join(output_dir, "interactions.js")
-        with open(js_path, "w", encoding="utf-8") as f:
-            f.write(js_content)
-        generated["js"] = js_path
-
-    elif fmt == "json":
-        json_path = os.path.join(output_dir, "design.json")
-        with open(json_path, "w", encoding="utf-8") as f:
-            json.dump(asdict(doc), f, ensure_ascii=False, indent=2)
-        generated["json"] = json_path
-
-    elif fmt == "vue":
-        # Vue 单文件组件原型（简化输出）
-        html_part = generate_html(doc)
-        vue_content = f"""
-<template>
-{html_part}
-</template>
-
-<script>
-export default {{
-  name: 'DesignPrototype',
-  data() {{
-    return {{
-      title: '{doc.title}',
-      components: {json.dumps(asdict(doc)['components'], ensure_ascii=False)}
-    }}
-  }},
-  mounted() {{
-    console.log('[design-harness] Vue 原型已加载');
-  }}
-}}
-</script>
-
-<style scoped>
-{generate_css(doc)}
-</style>
-"""
-        vue_path = os.path.join(output_dir, "Prototype.vue")
-        with open(vue_path, "w", encoding="utf-8") as f:
-            f.write(vue_content)
-        generated["vue"] = vue_path
-
-    elif fmt == "react":
-        # React 函数组件原型（简化输出）
-        html_part = generate_html(doc)
-        react_content = f"""
-import React from 'react';
-
-const DesignPrototype = () => {{
-  return (
-    <>
-      {html_part}
-    </>
-  );
-}};
-
-export default DesignPrototype;
-"""
-        react_path = os.path.join(output_dir, "DesignPrototype.jsx")
-        with open(react_path, "w", encoding="utf-8") as f:
-            f.write(react_content)
-        generated["react"] = react_path
-
-    else:
-        fail("E004", f"不支持的输出格式: {fmt}")
-
-    return generated
-
-
-# ---------------------------------------------------------------------------
-# 自检逻辑（--selftest）
-# ---------------------------------------------------------------------------
-def run_selftest() -> None:
-    """
-    内置硬编码样例数据，离线自检核心逻辑。
-    不读外部文件、不依赖当前工作目录、不访问网络。
-    """
-    # 硬编码样例：一个简单的登录页设计
-    sample_data = {
-        "title": "登录页原型",
-        "width": 375,
-        "height": 812,
-        "breakpoints": [375, 768, 1024],
-        "components": [
-            {"type": "text", "label": "欢迎登录", "x": 20, "y": 80, "width": 200, "height": 40, "font_size": 24, "color": "#333333"},
-            {"type": "input", "label": "请输入用户名", "x": 20, "y": 150, "width": 335, "height": 48},
-            {"type": "input", "label": "请输入密码", "x": 20, "y": 210, "width": 335, "height": 48},
-            {"type": "button", "label": "登 录", "x": 20, "y": 280, "width": 335, "height": 48, "color": "#4A90D9", "interactive": True, "action": "提交登录表单"},
-            {"type": "button", "label": "注册账号", "x": 20, "y": 340, "width": 335, "height": 40, "color": "#FFFFFF", "interactive": True, "action": "跳转到注册页"},
-            {"type": "container", "label": "底部信息栏", "x": 0, "y": 750, "width": 375, "height": 62, "color": "#F8F8F8"},
-        ],
-    }
-
-    # ---- 检查 1: 解析逻辑 ----
-    doc = parse_design_data(sample_data)
-    assert doc.title == "登录页原型", "标题解析错误"
-    assert doc.width == 375, "宽度解析错误"
-    assert doc.height == 812, "高度解析错误"
-    assert len(doc.components) == 6, f"组件数量错误: {len(doc.components)}"
-    assert doc.components[0].type == "text", "第一个组件类型错误"
-    assert doc.components[3].interactive is True, "按钮交互标记错误"
-    assert len(doc.breakpoints) == 3, "断点解析错误"
-
-    # ---- 检查 2: HTML 生成逻辑 ----
-    html = generate_html(doc)
-    assert "<!DOCTYPE html>" in html, "HTML 缺少 DOCTYPE"
-    assert "登录页原型" in html, "HTML 缺少标题"
-    assert "data-component=\"button\"" in html, "HTML 缺少按钮组件"
-    assert "data-component=\"input\"" in html, "HTML 缺少输入框组件"
-    assert "data-component=\"text\"" in html, "HTML 缺少文本组件"
-    assert "data-component=\"container\"" in html, "HTML 缺少容器组件"
-    assert "@media" in html, "HTML 缺少响应式媒体查询"
-    # 宽松检查：组件数量应 >= 5
-    assert html.count("data-component=") >= 5, "HTML 组件数量不足"
-
-    # ---- 检查 3: CSS 生成逻辑 ----
-    css = generate_css(doc)
-    assert "design-canvas" in css, "CSS 缺少画布样式"
-    assert "data-component='button'" in css, "CSS 缺少按钮样式"
-    assert "@media" in css, "CSS 缺少响应式规则"
-
-    # ---- 检查 4: JS 交互标注逻辑 ----
-    js = generate_js(doc)
-    assert "design-harness" in js, "JS 缺少标识"
-    assert "__designInteractions" in js, "JS 缺少交互数组"
-    # 宽松检查：至少包含一个交互
-    assert js.count("interactions.push") >= 1, "JS 交互标注数量不足"
-
-    # ---- 检查 5: 导出逻辑（使用临时目录） ----
-    with tempfile.TemporaryDirectory() as tmpdir:
-        # 测试 HTML 导出
-        files = export_design(doc, tmpdir, "html")
-        assert os.path.exists(files["html"]), "HTML 文件未生成"
-        with open(files["html"], "r", encoding="utf-8") as f:
-            content = f.read()
-        assert len(content) > 100, "HTML 文件内容过短"
-
-        # 测试 JSON 导出
-        files = export_design(doc, tmpdir, "json")
-        assert os.path.exists(files["json"]), "JSON 文件未生成"
-        with open(files["json"], "r", encoding="utf-8") as f:
-            json_data = json.load(f)
-        assert json_data["title"] == "登录页原型", "JSON 导出内容错误"
-
-        # 测试 CSS 导出
-        files = export_design(doc, tmpdir, "css")
-        assert os.path.exists(files["css"]), "CSS 文件未生成"
-
-        # 测试 JS 导出
-        files = export_design(doc, tmpdir, "js")
-        assert os.path.exists(files["js"]), "JS 文件未生成"
-
-        # 测试 Vue 导出
-        files = export_design(doc, tmpdir, "vue")
-        assert os.path.exists(files["vue"]), "Vue 文件未生成"
-
-        # 测试 React 导出
-        files = export_design(doc, tmpdir, "react")
-        assert os.path.exists(files["react"]), "React 文件未生成"
-
-    # ---- 检查 6: 错误处理 ----
-    # 缺少 components 字段
-    try:
-        parse_design_data({"title": "无组件"})
-        fail("E009", "缺少 components 字段时未报错")
-    except SystemExit as e:
-        assert e.code != 0, "错误退出码不正确"
-
-    # 未知组件类型
-    try:
-        parse_design_data({"components": [{"type": "unknown_type"}]})
-        fail("E009", "未知组件类型时未报错")
-    except SystemExit as e:
-        assert e.code != 0, "错误退出码不正确"
-
-    # 不支持的输出格式
-    try:
-        export_design(doc, tempfile.gettempdir(), "exe")
-        fail("E009", "不支持的输出格式时未报错")
-    except SystemExit as e:
-        assert e.code != 0, "错误退出码不正确"
-
-    # 全部检查通过
-    print("[selftest] 全部自检通过 ✔")
-
-
-# ---------------------------------------------------------------------------
-# 主入口
-# ---------------------------------------------------------------------------
-def main() -> None:
-    parser = argparse.ArgumentParser(
-        description="design-harness: 将设计稿转为可验证的前端原型",
-        epilog="示例: python main.py --input design.json --output proto --format html",
-    )
-    parser.add_argument("--input", "-i", help="输入设计稿 JSON 文件路径")
-    parser.add_argument("--output", "-o", default="./output", help="输出目录（默认: ./output）")
-    parser.add_argument(
-        "--format", "-f",
-        default="html",
-        choices=["html", "css", "js", "json", "vue", "react"],
-        help="输出格式（默认: html）",
-    )
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检（不读外部文件）")
-    parser.add_argument("--version", action="version", version="design-harness 1.0.1")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        if args.input:
-            fail("E007", "--selftest 与 --input 不能同时使用")
-        run_selftest()
-        return
-
-    # 正常处理模式
-    if not args.input:
-        fail("E001", "请提供 --input 参数（或使用 --selftest 运行自检）")
-
-    # 读取输入文件
-    if not os.path.isfile(args.input):
-        fail("E001", f"输入文件不存在: {args.input}")
-
-    try:
-        with open(args.input, "r", encoding="utf-8") as f:
-            raw_data = json.load(f)
-    except json.JSONDecodeError as e:
-        fail("E002", f"JSON 解析失败: {e}")
-    except OSError as e:
-        fail("E001", f"文件读取失败: {e}")
-
-    # 解析设计稿
-    doc = parse_design_data(raw_data)
-
-    # 导出
-    try:
-        generated = export_design(doc, args.output, args.format)
-    except OSError as e:
-        fail("E005", f"输出失败: {e}")
-
-    # 输出结果摘要
-    print(f"✅ 设计稿 '{doc.title}' 已生成 {args.format} 原型:")
-    for key, path in generated.items():
-        print(f"   - {key}: {path}")
-
-    # 置信度提示
-    interactive_count = sum(1 for c in doc.components if c.interactive)
-    print(f"\n📊 置信度评估:")
-    print(f"   - 组件总数: {len(doc.components)}")
-    print(f"   - 交互组件: {interactive_count}")
-    if len(doc.components) > 0:
-        print(f"   - 交互覆盖率: {interactive_count / len(doc.components) * 100:.0f}%")
-    print(f"   - 提示: 原型仅用于设计验证，非生产级代码")
-
-
-if __name__ == "__main__":
-    try:
-        main()
-    except SystemExit:
-        raise
-    except Exception as e:
-        fail("E010", f"未捕获异常: {e}")
+        html
