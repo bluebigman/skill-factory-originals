@@ -1,173 +1,296 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
 slug: plotsense
 name: plotsense
-displayName: 数据可视化
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行plotsense相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+displayName: 数据洞察 图表感知 结构解析
+description: 将数据、文件或URL转化为结构化结果，识别关键信息并标注置信度。
 version: 1.0.0
-author: skill-factory-auto
-agent_created: true
-trigger_words:
-  - "数据可视化"
-  - "plotsense"
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/plotsense
+license: MIT
+source_project: original
+source_url: 
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
 ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 知微
+agent_created: true
+trigger_words: ["plotsense", "图表感知", "数据解析", "结构化输出", "信息提取"]
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
-
-# 数据可视化
-
-> PlotSense is an AI-powered assistant that helps data professionals and analysts make smarter, faster, and more explainab
+# plotsense — 数据感知与结构化输出 Skill
 
 ## 一、能力边界（一页纸速查卡）
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+### 1.1 能做（5项核心能力）
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+| 序号 | 能力项 | 说明 | 适用场景示例 |
+|------|--------|------|--------------|
+| 1 | 数据/文件/URL 转结构化结果 | 将输入内容解析为字段化、可复用的结构化数据 | 从 CSV 提取字段、从网页提取表格 |
+| 2 | 关键信息识别与保留 | 自动识别输入中的核心实体、数值、关系，并保留上下文 | 从报告中提取日期、金额、责任人 |
+| 3 | 按约定格式生成输出 | 遵循用户指定的输出模板或默认 schema 输出 | 输出 JSON、Markdown 表格、键值对 |
+| 4 | 置信度提示 | 对每个输出字段标注置信度等级（高/中/低） | 识别模糊字段时标注"中置信度" |
+| 5 | 批量处理与自定义格式 | 支持多文件/多 URL 批量执行，支持自定义输出模板 | 批量解析 100 个日志文件 |
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### 1.2 不能做（明确边界）
 
-## 二、触发方式（说大白话就能用）
+| 序号 | 限制项 | 说明 |
+|------|--------|------|
+| 1 | 不执行代码 | 本 Skill 不运行 Python/Shell 等代码，仅做文本解析与结构转换 |
+| 2 | 不访问付费/登录墙内容 | 无法解析需要认证或付费的 URL 内容 |
+| 3 | 不做语义推理 | 不进行因果推断、趋势预测等高级分析 |
+| 4 | 不修改原始文件 | 所有操作均为只读，输出为独立结果文件 |
+| 5 | 不保证 100% 准确 | 对模糊输入会标注置信度，不承诺绝对正确 |
 
-**触发词表（6类场景）：**
-| 数据可视化 | 通用场景 |
-| plotsense | 通用场景 |
+### 1.3 适用对象
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 数据可视化，进入标准流程 |
-| 把这个转成另一种格式 | 启动 数据可视化，进入标准流程 |
-| 批量弄一下这些 | 启动 数据可视化，进入标准流程 |
+- 需要快速将非结构化数据转为结构化格式的开发者
+- 需要批量提取文档/URL 中关键字段的运营人员
+- 需要统一数据格式以便入库或分析的数据工程师
 
-## 三、标准流程（5分钟上手路径）
+---
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+## 二、触发方式
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+### 2.1 触发词
 
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
+使用以下任一关键词即可激活本 Skill：
 
-## 四、异常处理（错误码体系）
+- `plotsense`
+- `图表感知`
+- `数据解析`
+- `结构化输出`
+- `信息提取`
+- `字段提取`
 
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
+### 2.2 场景映射表
 
-## 五、常见问题（FAQ 速查）
+| 用户说（大白话） | 实际触发动作 |
+|------------------|--------------|
+| "帮我把这个 CSV 转成 JSON" | 解析 CSV → 输出 JSON 结构化数据 |
+| "从这个网页里提取所有价格信息" | 抓取 URL → 提取价格字段 → 结构化输出 |
+| "把这三个日志文件的错误码都列出来" | 批量解析日志 → 提取错误码字段 |
+| "这个报告里的日期和金额帮我整理一下" | 解析文档 → 提取日期+金额 → 表格输出 |
+| "按我给的模板输出结果" | 读取用户模板 → 按模板字段映射输出 |
 
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
+---
 
-## 六、进阶用法（深度按需）
+## 三、标准流程
 
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+### 3.1 前置条件
 
-## 许可证（License）
+| 条件项 | 要求 |
+|--------|------|
+| 输入文件 | 与 Skill 运行目录一致，命名规范统一（如 `input_001.csv`） |
+| 输入格式 | 支持：CSV、JSON、TXT、Markdown、HTML（URL） |
+| 输出模板（可选） | 用户可提供自定义字段映射模板 |
+| 运行环境 | 无需特殊依赖，纯文本处理 |
 
-```text
-MIT License
+### 3.2 执行步骤
 
-Copyright (c) 2026 原创作者（自持版权）
+#### 步骤 1：准备输入
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+1. 将待处理文件放入当前工作目录。
+2. 确认文件命名规范一致（如 `data_01.csv`、`data_02.csv`）。
+3. 若输入为 URL，确认链接可公开访问。
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+#### 步骤 2：试运行（单样本验证）
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+1. 选取 1 个样本文件执行解析。
+2. 核对输出字段是否完整、格式是否正确。
+3. 若输出不符合预期，调整解析规则或模板。
+
+#### 步骤 3：批量执行
+
+1. 确认试运行无误后，对全量数据执行。
+2. 保留原始文件备份（建议复制到 `backup/` 目录）。
+3. 输出结果文件命名规则：`output_<原文件名>.json`。
+
+#### 步骤 4：校验结果
+
+1. 抽查 10% 输出条目。
+2. 核对关键字段（如 ID、日期、金额）与源数据一致性。
+3. 对置信度标注为"低"的字段进行人工复核。
+
+### 3.3 输出规范
+
+#### 默认输出格式（JSON）
+
+```json
+{
+  "source": "input_001.csv",
+  "parsed_at": "2025-01-15T10:30:00Z",
+  "record_count": 3,
+  "records": [
+    {
+      "id": "001",
+      "date": "2025-01-10",
+      "amount": 1234.56,
+      "confidence": {
+        "id": "high",
+        "date": "high",
+        "amount": "medium"
+      }
+    }
+  ]
+}
 ```
+
+#### 字段置信度等级
+
+| 等级 | 含义 | 适用条件 |
+|------|------|----------|
+| high | 明确无误 | 字段值完整、格式标准、无歧义 |
+| medium | 基本可信 | 字段值存在轻微格式差异或上下文模糊 |
+| low | 需人工确认 | 字段缺失、格式异常、存在多义性 |
+
+#### 自定义输出模板
+
+用户可提供模板文件 `template.json`：
+
+```json
+{
+  "field_mapping": {
+    "原字段名": "目标字段名"
+  },
+  "output_format": "json|markdown|csv"
+}
+```
+
+---
+
+## 四、置信度门控
+
+### 4.1 原则
+
+**不编造、不猜测、不补全。** 当信息不足时，使用占位符 `[需核实:字段名]` 标记，并标注置信度为 `low`。
+
+### 4.2 触发条件
+
+| 场景 | 处理方式 |
+|------|----------|
+| 字段缺失 | 输出 `[需核实:字段名]`，置信度 `low` |
+| 字段格式异常 | 保留原始值，标注 `[需核实:字段名]`，置信度 `low` |
+| 字段值存在多义性 | 输出最可能值，标注 `[需核实:字段名]`，置信度 `medium` |
+| 无法解析的输入 | 返回错误码 `E1001`，不输出部分结果 |
+
+### 4.3 示例
+
+输入：`日期：2025/1/10，金额：约1200元`
+
+输出：
+
+```json
+{
+  "date": "2025-01-10",
+  "amount": "[需核实:amount]",
+  "confidence": {
+    "date": "high",
+    "amount": "low"
+  }
+}
+```
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 用户提示话术 | 修正步骤 |
+|--------|------|--------------|----------|
+| E1001 | 输入不可解析 | "无法识别输入内容，请检查文件格式或 URL 有效性。" | 1. 确认文件非空且格式正确；2. 确认 URL 可公开访问 |
+| E1002 | 字段映射冲突 | "模板字段映射存在冲突，请检查 template.json。" | 1. 检查映射是否有重复目标字段；2. 删除冲突映射 |
+| E1003 | 批量处理中断 | "批量处理在第 N 个文件处中断，请检查该文件。" | 1. 定位失败文件；2. 单独执行该文件排查问题 |
+| E1004 | 输出目录不可写 | "无法写入输出文件，请检查目录权限。" | 1. 确认目录存在；2. 修改目录写权限 |
+| E1005 | 置信度过低 | "输出结果中超过 30% 字段置信度为 low，建议人工复核。" | 1. 检查源数据质量；2. 调整解析规则 |
+
+---
+
+## 六、FAQ 反模式
+
+### 6.1 常见坑
+
+| 坑 | 反模式（错误做法） | 正确做法 |
+|----|-------------------|----------|
+| 忽略试运行 | 直接跑全量数据，结果格式全错 | 先跑 1 个样本，确认格式后再批量 |
+| 覆盖原始文件 | 输出直接覆盖输入文件 | 保留原始文件，输出到独立目录 |
+| 编造缺失字段 | 对缺失字段随意补默认值 | 使用 `[需核实:字段]` 占位，标注 low 置信度 |
+| 忽略置信度 | 所有字段一律标 high | 根据实际解析情况如实标注 |
+| 不校验结果 | 输出后直接交付，不抽查 | 至少抽查 10% 输出与源数据比对 |
+
+### 6.2 反模式对照表
+
+| 场景 | 反模式 | 正模式 |
+|------|--------|--------|
+| 用户要求"直接给我结果" | 跳过试运行直接全量处理 | 先说明试运行必要性，快速跑 1 个样本 |
+| 用户说"这个字段肯定有" | 强行补全缺失字段 | 如实标注 `[需核实:字段]` |
+| 用户要求"把所有数字都提取" | 无差别提取所有数字 | 先确认数字的业务含义，再按字段提取 |
+
+---
+
+## 七、渐进式披露
+
+### 7.1 速查卡（30 秒上手）
+
+```
+1. 放文件 → 2. 跑 1 个样本 → 3. 核对输出 → 4. 批量跑 → 5. 抽查结果
+```
+
+### 7.2 新手路径（首次使用）
+
+1. 阅读「能力边界」了解能做什么。
+2. 按「标准流程」步骤 1-2 完成单样本测试。
+3. 确认输出格式符合预期后，再执行批量。
+4. 遇到问题查「错误码体系」。
+
+### 7.3 进阶路径（熟练用户）
+
+1. 自定义 `template.json` 实现字段映射。
+2. 使用批量处理时，预先规划好文件命名规范。
+3. 对低置信度字段建立人工复核流程。
+4. 结合错误码 E1005 设置置信度阈值告警。
+
+---
+
+## 八、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 提供的输出仅供参考，不构成任何形式的保证或承诺。
+2. **禁止反向工程**：不得对本 Skill 进行反向工程、反编译、破解或试图提取底层算法。
+3. **合法使用**：使用者须确保输入数据来源合法，不得使用本 Skill 处理违法违规内容。
+4. **无担保**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保。
+
+---
+
+## 九、许可证（License）
+
 <!-- professional-license-embedded -->
 
-## 前置条件
+**MIT License**
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
+Copyright (c) 2025 知微
 
-## 执行步骤
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## 输出
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
+---
 
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供学习参考。使用前请阅读相关文档。*
