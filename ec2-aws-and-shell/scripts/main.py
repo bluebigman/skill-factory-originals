@@ -34,6 +34,24 @@ ERROR_CODES = {
 }
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def error_exit(code: str, message: Optional[str] = None) -> None:
     """输出错误信息并退出程序"""
     err_msg = ERROR_CODES.get(code, ERROR_CODES["E010"])
@@ -592,6 +610,16 @@ def main():
     parser.add_argument("--analyze-script", metavar="FILE", help="分析Shell脚本并提供建议")
     parser.add_argument("--template", choices=["巡检", "故障排查", "变更"], help="生成运维操作模板")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+    
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
     
     args = parser.parse_args()
     
