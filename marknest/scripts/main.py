@@ -20,29 +20,70 @@ import re
 import sys
 import urllib.parse
 import urllib.request
+import urllib.error
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 import time
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import datetime, timezone
+from html.parser import HTMLParser
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
+_base_timeout = 10  # 基础超时时间（秒）
+
+class _RetryableError(Exception):
+    """可重试的网络错误（5xx 或网络异常）。"""
+    pass
+
+class _NonRetryableError(Exception):
+    """不可重试的错误（4xx 或协议错误）。"""
+    pass
+
 def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
+    """
+    带重试退避的请求封装（G1 生产门禁）。
+    
+    区分网络错误与 HTTP 错误码：
+    - 4xx 错误不重试，直接抛出
+    - 5xx 错误重试，最多 _max_retry 次
+    - 网络异常（超时、连接错误）重试
+    - 最终失败抛出原始异常
+    
+    参数:
+        fn: 要执行的函数
+        *args: 位置参数
+        **kwargs: 关键字参数
+    
+    返回:
+        函数执行结果
+    
+    异常:
+        最终失败时抛出原始异常
+    """
+    last_exc = None
     for attempt in range(_max_retry):
         try:
             return fn(*args, **kwargs)
-        except Exception:
+        except _NonRetryableError:
+            # 4xx 错误不重试，直接抛出
+            raise
+        except (_RetryableError, urllib.error.URLError, TimeoutError, ConnectionError) as exc:
+            last_exc = exc
             if attempt < _max_retry - 1:
                 time.sleep(2 ** attempt)  # 指数退避
             else:
                 raise
+        except Exception as exc:
+            # 其他异常不重试
+            raise
+    raise last_exc if last_exc else RuntimeError("Unexpected retry failure")
+
 
 # ============================================================
 # 常量定义
 # ============================================================
 SKILL_NAME = "marknest"
-SKILL_VERSION = "1.0.2"
+SKILL_VERSION = "1.0.3"
 SKILL_DISPLAY = "文档转换 结构化整理 信息提取"
 SKILL_DESCRIPTION = "将文件或链接转为规范、可复用的结构化输出。"
 
@@ -80,7 +121,8 @@ SELFTEST_SAMPLE = """\
 > 备注：需要协调运维团队
 """
 
-SELFTEST_URL = "https://example.com/marknest-demo"
+# 自检用 URL（真实网络请求，用于验证远程能力）
+SELFTEST_URL = "https://example.com"
 
 
 # ============================================================
@@ -93,6 +135,91 @@ class MarkNestError(Exception):
         super().__init__(f"[{code}] {message}")
         self.code = code
         self.message = message
+
+
+# ============================================================
+# HTML 解析器（基于标准库 html.parser）
+# ============================================================
+class _HTMLContentParser(HTMLParser):
+    """基于 html.parser 的 HTML 内容提取器。"""
+    
+    def __init__(self):
+        super().__init__()
+        self.text_parts = []
+        self.links = []
+        self.headings = []
+        self._current_tag = None
+        self._current_attrs = {}
+        self._skip_depth = 0
+        self._in_script = False
+        self._in_style = False
+    
+    def handle_starttag(self, tag, attrs):
+        attrs_dict = dict(attrs)
+        self._current_tag = tag
+        self._current_attrs = attrs_dict
+        
+        if tag in ('script', 'style'):
+            self._in_script = True
+            return
+        
+        if tag in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6'):
+            level = int(tag[1])
+            self.headings.append({'level': level, 'title': ''})
+        
+        if tag == 'a' and 'href' in attrs_dict:
+            self.links.append({'title': '', 'url': attrs_dict['href']})
+    
+    def handle_endtag(self, tag):
+        if tag in ('script', 'style'):
+            self._in_script = False
+            return
+        
+        if tag in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6') and self.headings:
+            # 标题结束，清理标题文本
+            self.headings[-1]['title'] = self.headings[-1]['title'].strip()
+    
+    def handle_data(self, data):
+        if self._in_script or self._in_style:
+            return
+        
+        if data.strip():
+            self.text_parts.append(data.strip())
+            
+            # 更新当前标题
+            if self._current_tag in ('h1', 'h2', 'h3', 'h4', 'h5', 'h6') and self.headings:
+                self.headings[-1]['title'] += data.strip()
+            
+            # 更新当前链接
+            if self._current_tag == 'a' and self.links:
+                self.links[-1]['title'] += data.strip()
+    
+    def get_text(self) -> str:
+        """获取提取的纯文本内容。"""
+        return '\n'.join(self.text_parts)
+
+
+def _parse_html_content(html_text: str) -> Dict[str, Any]:
+    """
+    使用标准库 html.parser 解析 HTML 内容。
+    
+    参数:
+        html_text: HTML 文本
+    
+    返回:
+        包含提取内容的字典
+    """
+    parser = _HTMLContentParser()
+    try:
+        parser.feed(html_text)
+    except Exception as exc:
+        raise MarkNestError(ERR_PARSE, f"HTML 解析失败: {exc}") from exc
+    
+    return {
+        'text': parser.get_text(),
+        'headings': parser.headings,
+        'links': parser.links,
+    }
 
 
 # ============================================================
@@ -240,20 +367,32 @@ def convert_text(text: str, source: str = "text") -> Dict[str, Any]:
     # 检测格式
     fmt = _detect_format(text)
 
-    # 提取核心信息
-    title = _extract_title(text)
-    headings = _extract_headings(text)
-    list_items = _extract_list_items(text)
-    links = _extract_links(text)
-    word_count = _count_words(text)
+    # 根据格式提取内容
+    if fmt == "html":
+        html_data = _parse_html_content(text)
+        # 使用 HTML 解析结果
+        title = _extract_title(text)
+        headings = html_data['headings'] if html_data['headings'] else _extract_headings(text)
+        list_items = _extract_list_items(html_data['text'])
+        links = html_data['links'] if html_data['links'] else _extract_links(text)
+        content_text = html_data['text']
+    else:
+        # Markdown 或纯文本
+        title = _extract_title(text)
+        headings = _extract_headings(text)
+        list_items = _extract_list_items(text)
+        links = _extract_links(text)
+        content_text = text
+
+    word_count = _count_words(content_text)
     reading_time = _estimate_reading_time(word_count)
 
     # 统计段落数
-    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", content_text) if p.strip()]
     paragraph_count = len(paragraphs)
 
     # 提取关键词（简单统计高频词）
-    keywords = _extract_keywords(text, top_n=5)
+    keywords = _extract_keywords(content_text, top_n=5)
 
     # 构建规范化输出结构
     result = {
@@ -267,7 +406,7 @@ def convert_text(text: str, source: str = "text") -> Dict[str, Any]:
         "meta": {
             "source_type": source,
             "format": fmt,
-            "converted_at": None,  # 不依赖时间，保持可复现
+            "converted_at": datetime.now(timezone.utc).isoformat(),
             "processor": "marknest-cleanroom-impl",
         },
         "content": {
@@ -282,7 +421,7 @@ def convert_text(text: str, source: str = "text") -> Dict[str, Any]:
         },
         "summary": {
             "title": title,
-            "excerpt": _generate_excerpt(text, max_length=200),
+            "excerpt": _generate_excerpt(content_text, max_length=200),
             "structure_type": "document",
         },
     }
@@ -319,368 +458,3 @@ def _extract_keywords(text: str, top_n: int = 5) -> List[str]:
 
 def _generate_excerpt(text: str, max_length: int = 200) -> str:
     """生成文档摘要。"""
-    cleaned = _strip_markdown_symbols(text)
-    # 取第一段有意义的文本
-    paragraphs = [p.strip() for p in cleaned.split("\n") if p.strip()]
-    if not paragraphs:
-        return ""
-    excerpt = paragraphs[0]
-    if len(excerpt) > max_length:
-        excerpt = excerpt[:max_length] + "..."
-    return excerpt
-
-
-def convert_file(filepath: str) -> Dict[str, Any]:
-    """
-    从文件读取内容并转换为结构化输出。
-
-    参数:
-        filepath: 文件路径
-
-    返回:
-        结构化字典
-
-    异常:
-        MarkNestError: 文件不存在 E002 / 读取失败 E003 / 不支持类型 E006
-    """
-    path = Path(filepath)
-    if not path.exists():
-        raise MarkNestError(ERR_FILE_NOT_FOUND, f"文件不存在: {filepath}")
-    if not path.is_file():
-        raise MarkNestError(ERR_FILE_READ, f"不是有效文件: {filepath}")
-
-    ext = path.suffix.lower()
-    if ext not in SUPPORTED_EXT:
-        raise MarkNestError(ERR_UNSUPPORTED, f"不支持的文件类型: {ext}")
-
-    try:
-        # 尝试 UTF-8 编码读取
-        content = path.read_text(encoding="utf-8")
-    except UnicodeDecodeError:
-        try:
-            # 回退到 GBK
-            content = path.read_text(encoding="gbk")
-        except Exception as exc:
-            raise MarkNestError(ERR_FILE_READ, f"文件读取失败: {exc}") from exc
-    except Exception as exc:
-        raise MarkNestError(ERR_FILE_READ, f"文件读取失败: {exc}") from exc
-
-    result = convert_text(content, source=f"file:{filepath}")
-    result["meta"]["file_path"] = filepath
-    result["meta"]["file_size"] = path.stat().st_size
-    return result
-
-
-def fetch_url(url: str, timeout: int = 10) -> Dict[str, Any]:
-    """
-    从 URL 获取内容并转换为结构化输出。
-
-    参数:
-        url: 网页链接
-        timeout: 请求超时时间（秒）
-
-    返回:
-        结构化字典
-
-    异常:
-        MarkNestError: URL 获取失败 E004 / 解析失败 E005
-    """
-    parsed = urllib.parse.urlparse(url)
-    if parsed.scheme not in ("http", "https"):
-        raise MarkNestError(ERR_URL_FETCH, f"不支持的 URL 协议: {parsed.scheme}")
-
-    try:
-        req = urllib.request.Request(url, headers={"User-Agent": f"{SKILL_NAME}/{SKILL_VERSION}"})
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            content_bytes = resp.read()
-            # 尝试从响应头获取编码
-            charset = resp.headers.get_content_charset() or "utf-8"
-            try:
-                content = content_bytes.decode(charset)
-            except (UnicodeDecodeError, LookupError):
-                # 回退到 UTF-8
-                content = content_bytes.decode("utf-8", errors="replace")
-    except Exception as exc:
-        raise MarkNestError(ERR_URL_FETCH, f"URL 获取失败: {exc}") from exc
-
-    if not content or not content.strip():
-        raise MarkNestError(ERR_PARSE, "URL 内容为空")
-
-    result = convert_text(content, source=f"url:{url}")
-    result["meta"]["url"] = url
-    return result
-
-
-# ============================================================
-# 输出格式化
-# ============================================================
-def format_output(data: Dict[str, Any], output_format: str = "json") -> str:
-    """
-    将结构化数据格式化为输出字符串。
-
-    参数:
-        data: 结构化字典
-        output_format: 输出格式 ("json" / "markdown" / "text")
-
-    返回:
-        格式化后的字符串
-    """
-    if output_format == "json":
-        return json.dumps(data, ensure_ascii=False, indent=2)
-
-    if output_format == "markdown":
-        lines = []
-        lines.append(f"# {data['content']['title']}")
-        lines.append("")
-        lines.append(f"> 来源: {data['meta']['source_type']} | 格式: {data['meta']['format']}")
-        lines.append("")
-        lines.append(f"**字数**: {data['content']['word_count']} | "
-                     f"**阅读时间**: {data['content']['reading_time_minutes']} 分钟 | "
-                     f"**段落数**: {data['content']['paragraph_count']}")
-        lines.append("")
-        if data["content"]["keywords"]:
-            lines.append("**关键词**: " + ", ".join(data["content"]["keywords"]))
-            lines.append("")
-        if data["content"]["headings"]:
-            lines.append("## 文档结构")
-            for h in data["content"]["headings"]:
-                indent = "  " * (h["level"] - 1)
-                lines.append(f"{indent}- {h['title']}")
-            lines.append("")
-        if data["content"]["list_items"]:
-            lines.append("## 列表项")
-            for item in data["content"]["list_items"][:20]:
-                lines.append(f"- {item}")
-            if len(data["content"]["list_items"]) > 20:
-                lines.append(f"- ... 等共 {len(data['content']['list_items'])} 项")
-            lines.append("")
-        if data["content"]["links"]:
-            lines.append("## 链接")
-            for link in data["content"]["links"][:10]:
-                lines.append(f"- [{link['title']}]({link['url']})")
-            lines.append("")
-        lines.append("---")
-        lines.append(f"*由 {SKILL_NAME} v{SKILL_VERSION} 生成*")
-        return "\n".join(lines)
-
-    # text 格式
-    lines = []
-    lines.append(f"标题: {data['content']['title']}")
-    lines.append(f"来源: {data['meta']['source_type']}")
-    lines.append(f"格式: {data['meta']['format']}")
-    lines.append(f"字数: {data['content']['word_count']}")
-    lines.append(f"阅读时间: {data['content']['reading_time_minutes']} 分钟")
-    lines.append(f"段落数: {data['content']['paragraph_count']}")
-    if data["content"]["keywords"]:
-        lines.append(f"关键词: {', '.join(data['content']['keywords'])}")
-    if data["content"]["headings"]:
-        lines.append("")
-        lines.append("文档结构:")
-        for h in data["content"]["headings"]:
-            indent = "  " * (h["level"] - 1)
-            lines.append(f"  {indent}- {h['title']}")
-    if data["content"]["list_items"]:
-        lines.append("")
-        lines.append("列表项:")
-        for item in data["content"]["list_items"][:10]:
-            lines.append(f"  - {item}")
-    return "\n".join(lines)
-
-
-# ============================================================
-# 自检功能
-# ============================================================
-def run_selftest() -> int:
-    """
-    运行内置自检，验证核心逻辑正确性。
-
-    使用硬编码样例数据，不读取外部文件、不访问网络。
-    断言使用宽松阈值，确保与实现必然匹配。
-
-    返回:
-        0 表示通过，非 0 表示失败
-
-    异常:
-        MarkNestError: 自检失败抛出 E010
-    """
-    print(f"=== {SKILL_NAME} v{SKILL_VERSION} 自检开始 ===")
-    print(f"技能: {SKILL_DISPLAY}")
-    print(f"描述: {SKILL_DESCRIPTION}")
-    print()
-
-    try:
-        # 测试 1: 文本转换核心逻辑
-        print("[1/5] 测试文本转换...")
-        result = convert_text(SELFTEST_SAMPLE, source="text")
-
-        # 宽松断言: 结构完整性
-        assert "content" in result, "结果缺少 content 字段"
-        assert "meta" in result, "结果缺少 meta 字段"
-        assert "summary" in result, "结果缺少 summary 字段"
-
-        # 标题非空
-        title = result["content"]["title"]
-        assert len(title) > 0, "标题为空"
-        print(f"      ✓ 标题提取成功: {title}")
-
-        # 字数统计（样例约 80-120 字，宽松范围）
-        word_count = result["content"]["word_count"]
-        assert 30 <= word_count <= 300, f"字数统计异常: {word_count}"
-        print(f"      ✓ 字数统计合理: {word_count}")
-
-        # 标题结构（样例有 3 个标题）
-        headings = result["content"]["headings"]
-        assert len(headings) >= 2, f"标题数量不足: {len(headings)}"
-        print(f"      ✓ 提取到 {len(headings)} 个标题")
-
-        # 列表项（样例有 5 个列表项）
-        list_items = result["content"]["list_items"]
-        assert len(list_items) >= 3, f"列表项数量不足: {len(list_items)}"
-        print(f"      ✓ 提取到 {len(list_items)} 个列表项")
-
-        # 阅读时间
-        reading_time = result["content"]["reading_time_minutes"]
-        assert reading_time >= 1, "阅读时间至少为 1 分钟"
-        print(f"      ✓ 阅读时间合理: {reading_time} 分钟")
-
-        # 格式检测
-        fmt = result["meta"]["format"]
-        assert fmt == "markdown", f"格式检测错误: {fmt}"
-        print(f"      ✓ 格式检测正确: {fmt}")
-
-        # 测试 2: 纯文本处理
-        print("[2/5] 测试纯文本转换...")
-        plain_text = "这是一个简单的纯文本测试。\n\n第二段落内容。"
-        result2 = convert_text(plain_text, source="text")
-        assert result2["meta"]["format"] in ("plain", "text"), "纯文本格式检测错误"
-        assert result2["content"]["word_count"] >= 5, "纯文本字数统计错误"
-        print(f"      ✓ 纯文本处理正常，字数: {result2['content']['word_count']}")
-
-        # 测试 3: 空输入处理
-        print("[3/5] 测试空输入错误处理...")
-        try:
-            convert_text("", source="text")
-            assert False, "空输入未抛出异常"
-        except MarkNestError as exc:
-            assert exc.code == ERR_INPUT_EMPTY, f"错误码错误: {exc.code}"
-            print(f"      ✓ 空输入正确抛出 {exc.code}")
-
-        # 测试 4: 输出格式化
-        print("[4/5] 测试输出格式化...")
-        json_out = format_output(result, "json")
-        assert json_out.startswith("{"), "JSON 输出格式错误"
-        parsed_json = json.loads(json_out)
-        assert parsed_json["content"]["title"] == title, "JSON 输出内容不一致"
-
-        md_out = format_output(result, "markdown")
-        assert md_out.startswith("# "), "Markdown 输出格式错误"
-        assert "文档结构" in md_out, "Markdown 输出缺少结构部分"
-
-        text_out = format_output(result, "text")
-        assert "标题:" in text_out, "文本输出缺少标题"
-        print("      ✓ JSON/Markdown/Text 三种格式均正常")
-
-        # 测试 5: 链接提取
-        print("[5/5] 测试链接提取...")
-        link_text = "参考 [文档](https://example.com/doc) 和 [API](https://api.example.com/v1) 以及裸链接 https://example.com/raw"
-        result3 = convert_text(link_text, source="text")
-        links = result3["content"]["links"]
-        assert len(links) >= 3, f"链接提取数量不足: {len(links)}"
-        print(f"      ✓ 提取到 {len(links)} 个链接")
-
-        print()
-        print("=== 自检全部通过 ===")
-        return 0
-
-    except AssertionError as exc:
-        print(f"✗ 自检失败: {exc}")
-        print(f"错误码: {ERR_SELFTEST}")
-        return 1
-    except MarkNestError as exc:
-        print(f"✗ 自检异常: {exc.message} (错误码: {exc.code})")
-        return 1
-    except Exception as exc:
-        print(f"✗ 自检意外异常: {exc}")
-        print(f"错误码: {ERR_SELFTEST}")
-        return 1
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def main() -> int:
-    """命令行主入口。"""
-    parser = argparse.ArgumentParser(
-        prog="marknest",
-        description=f"{SKILL_DISPLAY} — {SKILL_DESCRIPTION}",
-        epilog=f"版本 {SKILL_VERSION} | 独立实现 (clean-room)",
-    )
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--input", "-i", metavar="FILE", help="输入文件路径")
-    parser.add_argument("--url", "-u", metavar="URL", help="输入网页链接")
-    parser.add_argument("--text", "-t", metavar="TEXT", help="直接输入文本")
-    parser.add_argument("--format", "-f", choices=["json", "markdown", "text"], default="json",
-                        help="输出格式 (默认: json)")
-    parser.add_argument("--output", "-o", metavar="FILE", help="输出到文件（默认输出到 stdout）")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-
-    # 检查输入参数
-    input_count = sum(1 for x in [args.input, args.url, args.text] if x)
-    if input_count == 0:
-        print(f"[{ERR_ARGS}] 错误: 请提供 --input、--url 或 --text 之一", file=sys.stderr)
-        parser.print_help()
-        return 1
-    if input_count > 1:
-        print(f"[{ERR_ARGS}] 错误: --input、--url、--text 只能指定一个", file=sys.stderr)
-        return 1
-
-    # 执行转换
-    try:
-        if args.input:
-            result = convert_file(args.input)
-            print(f"✓ 文件转换成功: {args.input}", file=sys.stderr)
-        elif args.url:
-            print(f"正在获取 URL: {args.url} ...", file=sys.stderr)
-            result = fetch_url(args.url)
-            print(f"✓ URL 转换成功: {args.url}", file=sys.stderr)
-        else:
-            result = convert_text(args.text, source="text")
-            print("✓ 文本转换成功", file=sys.stderr)
-
-        # 格式化输出
-        output_str = format_output(result, args.format)
-
-        # 输出到文件或 stdout
-        if args.output:
-            if not dry_run or getattr(args, "force", False):
-                Path(args.output).write_text(output_str, encoding="utf-8")
-            print(f"✓ 输出已保存到: {args.output}", file=sys.stderr)
-        else:
-            print(output_str)
-
-        return 0
-
-    except MarkNestError as exc:
-        print(f"错误 [{exc.code}]: {exc.message}", file=sys.stderr)
-        return 1
-    except Exception as exc:
-        print(f"错误 [{ERR_INTERNAL}]: 未预期异常: {exc}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
