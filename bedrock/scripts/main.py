@@ -6,11 +6,18 @@ bedrock 技能实现
 仅依赖标准库，独立实现（clean-room）。
 """
 
+import argparse
 import json
+import os
 import re
 import sys
-from datetime import timezone, datetime
-from typing import Any, Dict, List, Optional
+import tempfile
+import threading
+import time
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Tuple
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -46,14 +53,13 @@ class BedrockError(Exception):
 class FieldResult:
     """单个字段的提取结果。"""
 
-    def __init__(self, name: str, value: Any, confidence: str = "低"):
+    def __init__(self, name: str, value: Any, confidence: float):
         self.name = name
         self.value = value
-        self.confidence = confidence  # 高 / 中 / 低
+        self.confidence = confidence  # 0.0 ~ 1.0
 
     def to_dict(self) -> Dict[str, Any]:
         return {
-            "field": self.name,
             "value": self.value,
             "confidence": self.confidence,
         }
@@ -68,389 +74,500 @@ class ParseResult:
         self.timestamp = datetime.now(timezone.utc).isoformat(timespec="seconds")
 
     def to_dict(self) -> Dict[str, Any]:
+        data = {}
+        for field in self.fields:
+            data[field.name] = field.to_dict()
         return {
-            "source": self.source,
-            "timestamp": self.timestamp,
-            "fields": [f.to_dict() for f in self.fields],
+            "data": data,
+            "summary": self._build_summary(),
+        }
+
+    def _build_summary(self) -> Dict[str, Any]:
+        if not self.fields:
+            return {
+                "total_fields": 0,
+                "needs_review": 0,
+                "avg_confidence": 0.0,
+            }
+        total = len(self.fields)
+        needs_review = sum(1 for f in self.fields if f.confidence < 0.7)
+        avg_conf = sum(f.confidence for f in self.fields) / total
+        return {
+            "total_fields": total,
+            "needs_review": needs_review,
+            "avg_confidence": round(avg_conf, 4),
         }
 
 
 # ============================================================
-# 字段提取规则（硬编码，不依赖外部资源）
+# 内置字段提取规则（自动推断）
 # ============================================================
 
-# 字段名称 -> 正则表达式模式
-FIELD_PATTERNS: Dict[str, str] = {
-    "姓名": r"(?:姓名|名字|称呼)[:：\s]*([\u4e00-\u9fa5]{2,4})",
-    "电话": r"(?:电话|手机|联系方式)[:：\s]*((?:1[3-9]\d{9})|(?:\d{3,4}[-]?\d{7,8})|(?:\d{5,}))",
-    "邮箱": r"(?:邮箱|电子邮件|Email|E-mail)[:：\s]*([\w.\-]+@[\w\-]+\.[\w.\-]+)",
-    "日期": r"(?:日期|时间|日期时间)[:：\s]*(\d{4}[-/]\d{1,2}[-/]\d{1,2})",
-    "金额": r"(?:金额|价格|费用)[:：\s]*([0-9]+(?:\.[0-9]{1,2})?)\s*(元|人民币|CNY|￥)?",
-    "编号": r"(?:编号|单号|订单号|ID|No\.?)[:：\s]*([A-Za-z0-9\-]{4,20})",
-    "地址": r"(?:地址|位置|地点)[:：\s]*([\u4e00-\u9fa50-9A-Za-z\-\s]{5,50})",
-    "备注": r"(?:备注|说明|描述)[:：\s]*(.{3,100})",
-}
-
-# 字段中文名 -> 标准输出键名
-FIELD_KEYS = {
-    "姓名": "name",
-    "电话": "phone",
-    "邮箱": "email",
-    "日期": "date",
-    "金额": "amount",
-    "编号": "id",
-    "地址": "address",
-    "备注": "remark",
-}
+BUILTIN_RULES = [
+    {
+        "name": "order_id",
+        "pattern": r"订单号[：:\s]*([A-Z]\d{4,6})",
+        "type": "string",
+    },
+    {
+        "name": "amount",
+        "pattern": r"金额[：:\s]*([0-9.]+)\s*元",
+        "type": "float",
+    },
+    {
+        "name": "date",
+        "pattern": r"日期[：:\s]*([0-9]{4}-[0-9]{2}-[0-9]{2})",
+        "type": "date",
+    },
+    {
+        "name": "user_id",
+        "pattern": r"用户[IDid]{0,2}[：:\s]*([a-zA-Z0-9_]+)",
+        "type": "string",
+    },
+    {
+        "name": "phone",
+        "pattern": r"电话[：:\s]*(1[3-9]\d{9})",
+        "type": "string",
+    },
+    {
+        "name": "email",
+        "pattern": r"邮箱[：:\s]*([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})",
+        "type": "string",
+    },
+]
 
 
 # ============================================================
-# 核心逻辑
+# 字段提取核心逻辑
 # ============================================================
 
-def validate_input(data: Any) -> str:
-    """校验输入数据，返回文本内容。"""
-    if data is None:
+def _convert_type(value: str, field_type: str) -> Tuple[Any, float]:
+    """类型转换，返回 (转换后的值, 置信度)。"""
+    try:
+        if field_type == "int":
+            return int(value), 0.95
+        elif field_type == "float":
+            return float(value), 0.95
+        elif field_type == "date":
+            # 尝试解析 ISO 8601 日期
+            datetime.strptime(value, "%Y-%m-%d")
+            return value, 0.95
+        else:
+            return value, 0.95
+    except (ValueError, TypeError):
+        # 类型转换失败，降级为字符串
+        return value, 0.75
+
+
+def extract_fields(text: str, config: Optional[Dict] = None) -> List[FieldResult]:
+    """从文本中提取字段。"""
+    if not text or not text.strip():
         raise BedrockError("E001")
 
-    if isinstance(data, str):
-        text = data.strip()
-        if not text:
-            raise BedrockError("E001")
-        return text
+    # 合并内置规则与自定义规则
+    rules = list(BUILTIN_RULES)
+    custom_rules = []
+    if config and "field_mappings" in config:
+        for name, rule in config["field_mappings"].items():
+            custom_rules.append({
+                "name": name,
+                "pattern": rule.get("pattern", ""),
+                "type": rule.get("type", "string"),
+                "required": rule.get("required", False),
+            })
+        # 自定义规则优先
+        rules = custom_rules + rules
 
-    if isinstance(data, dict) or isinstance(data, list):
-        # 尝试将结构化数据转为 JSON 文本
+    fields = []
+    for rule in rules:
         try:
-            return json.dumps(data, ensure_ascii=False)
-        except Exception:
-            raise BedrockError("E002")
-
-    if isinstance(data, (int, float, bool)):
-        return str(data)
-
-    raise BedrockError("E002")
-
-
-def extract_fields(text: str) -> List[FieldResult]:
-    """从文本中提取关键字段。"""
-    fields: List[FieldResult] = []
-
-    for field_name, pattern in FIELD_PATTERNS.items():
-        match = re.search(pattern, text)
-        if match:
-            raw_value = match.group(1).strip()
-            if not raw_value:
+            pattern = rule.get("pattern", "")
+            if not pattern:
                 continue
-
-            # 计算置信度（宽松规则）
-            confidence = _calc_confidence(field_name, raw_value, text)
-
-            fields.append(FieldResult(
-                name=FIELD_KEYS.get(field_name, field_name),
-                value=raw_value,
-                confidence=confidence,
-            ))
+            match = re.search(pattern, text)
+            if match:
+                raw_value = match.group(1)
+                value, conf = _convert_type(raw_value, rule.get("type", "string"))
+                fields.append(FieldResult(rule["name"], value, conf))
+            elif rule.get("required", False):
+                # 必填字段缺失，标记低置信度
+                fields.append(FieldResult(rule["name"], None, 0.0))
+        except re.error as e:
+            print(f"WARNING: 正则错误 [{rule.get('name', 'unknown')}]: {e}", file=sys.stderr)
+            continue
 
     if not fields:
-        # 如果没有匹配到任何字段，尝试将整个文本作为"内容"字段输出
-        # 这样即使是非结构化文本也能得到结构化结果
-        fields.append(FieldResult(
-            name="content",
-            value=text[:200],
-            confidence="低",
-        ))
+        raise BedrockError("E004")
 
     return fields
 
 
-def _calc_confidence(field_name: str, value: str, full_text: str) -> str:
-    """基于简单规则计算置信度（高/中/低）。"""
-    try:
-        # 基础得分：字段模式匹配成功即有一定置信度
-        score = 0.5
+# ============================================================
+# 输入处理
+# ============================================================
 
-        # 值长度增加置信度
-        if len(value) >= 6:
-            score += 0.2
-
-        # 值中包含数字增加置信度（对电话、金额、编号等）
-        if field_name in ("电话", "金额", "编号") and re.search(r"\d", value):
-            score += 0.2
-
-        # 值在原文中出现多次增加置信度
-        if full_text.count(value) > 1:
-            score += 0.1
-
-        # 值包含特定格式特征增加置信度
-        if field_name == "邮箱" and "@" in value:
-            score += 0.2
-        if field_name == "电话":
-            if re.fullmatch(r"1[3-9]\d{9}", value):
-                score += 0.1  # 完整手机号
-            elif len(value) >= 7:
-                score += 0.05  # 较长的电话号码
-        if field_name == "日期" and re.fullmatch(r"\d{4}[-/]\d{1,2}[-/]\d{1,2}", value):
-            score += 0.1
-
-        # 映射为高中低
-        if score >= 0.8:
-            return "高"
-        elif score >= 0.6:
-            return "中"
-        else:
-            return "低"
-    except Exception:
-        # 任何计算异常都返回低置信度，不阻断主流程
-        return "低"
-
-
-def process_single(data: Any) -> ParseResult:
-    """处理单条数据。"""
-    text = validate_input(data)
-    fields = extract_fields(text)
-    return ParseResult(source=text[:200], fields=fields)
-
-
-def process_batch(data_list: List[Any]) -> List[ParseResult]:
-    """批量处理多组数据。"""
-    if not isinstance(data_list, list) or len(data_list) == 0:
-        raise BedrockError("E005")
-
-    results = []
-    for item in data_list:
+def _read_with_encoding(file_path: str) -> str:
+    """多编码读取文件：utf-8 → gbk → gb18030 三级 fallback。"""
+    encodings = ["utf-8", "gbk", "gb18030"]
+    for enc in encodings:
         try:
-            result = process_single(item)
-            results.append(result)
-        except BedrockError:
-            # 单条失败不阻断批量流程，跳过并继续
+            with open(file_path, "r", encoding=enc) as f:
+                return f.read()
+        except UnicodeDecodeError:
             continue
+        except FileNotFoundError:
+            raise BedrockError("E001", f"文件不存在: {file_path}")
+    # 最后兜底：errors="replace"
+    with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+        return f.read()
 
-    if not results:
-        raise BedrockError("E004")
 
-    return results
+def _parse_single_input(raw: str) -> str:
+    """解析单条输入，支持 JSON 包装或纯文本。"""
+    raw = raw.strip()
+    if not raw:
+        raise BedrockError("E001")
 
-
-def format_output(results: List[ParseResult], output_format: str = "json") -> str:
-    """格式化输出结果。"""
+    # 尝试 JSON 解析
     try:
-        if output_format == "json":
-            data = [r.to_dict() for r in results]
-            if len(results) == 1:
-                data = data[0]
-            return json.dumps(data, ensure_ascii=False, indent=2)
-        elif output_format == "table":
-            # 简单表格输出（CSV 风格）
-            lines = []
-            for r in results:
-                for f in r.fields:
-                    lines.append(f"{r.timestamp},{f.name},{f.value},{f.confidence}")
-            return "\n".join(lines)
+        data = json.loads(raw)
+        if isinstance(data, dict) and "raw" in data:
+            return str(data["raw"])
+        elif isinstance(data, str):
+            return data
         else:
-            raise BedrockError("E008", f"不支持的输出格式: {output_format}")
-    except BedrockError:
-        raise
-    except Exception:
-        raise BedrockError("E006")
+            return json.dumps(data, ensure_ascii=False)
+    except json.JSONDecodeError:
+        # 纯文本，直接返回
+        return raw
 
 
 # ============================================================
-# 命令行入口
+# 批量处理
 # ============================================================
 
-def _run_selftest() -> int:
-    """内置自检逻辑：使用硬编码样例数据离线验证核心功能。"""
-    print("[selftest] 开始自检...")
+def process_batch(input_file: str, config: Optional[Dict] = None,
+                  dry_run: bool = False, verbose: bool = False) -> Dict[str, Any]:
+    """批量处理输入文件，返回汇总统计。"""
+    stats = {
+        "total_records": 0,
+        "success_count": 0,
+        "needs_review_count": 0,
+        "avg_confidence": 0.0,
+        "failed_records": [],
+    }
+    conf_sum = 0.0
 
-    # --- 样例 1：单条文本解析 ---
-    sample1 = "姓名: 张三, 电话: 13812345678, 邮箱: zhangsan@example.com, 日期: 2024-03-15"
     try:
-        result1 = process_single(sample1)
-        assert len(result1.fields) >= 3, "应至少提取 3 个字段"
-        field_names = [f.name for f in result1.fields]
-        assert "name" in field_names, "应包含姓名"
-        assert "phone" in field_names, "应包含电话"
-        assert "email" in field_names, "应包含邮箱"
+        with open(input_file, "r", encoding="utf-8", errors="replace") as f:
+            for line_num, line in enumerate(f, 1):
+                line = line.strip()
+                if not line:
+                    continue
+                stats["total_records"] += 1
+                try:
+                    text = _parse_single_input(line)
+                    fields = extract_fields(text, config)
+                    result = ParseResult(source=line, fields=fields)
+                    result_dict = result.to_dict()
 
-        # 宽松断言：值非空即可
-        for f in result1.fields:
-            assert f.value, "字段值不应为空"
-            assert f.confidence in ("高", "中", "低"), "置信度取值非法"
+                    if verbose:
+                        print(f"行 {line_num}: 提取 {len(fields)} 个字段", file=sys.stderr)
+                        for field in fields:
+                            print(f"  - {field.name}: {field.value} (置信度: {field.confidence})", file=sys.stderr)
 
-        print(f"  [通过] 单条文本解析: {len(result1.fields)} 个字段")
+                    # 输出结果
+                    output_line = json.dumps(result_dict, ensure_ascii=False)
+                    if not dry_run:
+                        print(output_line)
+                    else:
+                        print(f"[DRY-RUN] 行 {line_num}: {output_line}")
+
+                    stats["success_count"] += 1
+                    if result_dict["summary"]["needs_review"] > 0:
+                        stats["needs_review_count"] += 1
+                    conf_sum += result_dict["summary"]["avg_confidence"]
+
+                except BedrockError as e:
+                    stats["failed_records"].append(line_num)
+                    print(f"ERROR: 行 {line_num}: {e}", file=sys.stderr)
+                except Exception as e:
+                    stats["failed_records"].append(line_num)
+                    print(f"ERROR: 行 {line_num}: 未知错误 {e}", file=sys.stderr)
+
+    except FileNotFoundError:
+        raise BedrockError("E001", f"文件不存在: {input_file}")
+    except Exception as e:
+        raise BedrockError("E005", f"批量处理失败: {e}")
+
+    if stats["total_records"] > 0:
+        stats["avg_confidence"] = round(conf_sum / stats["total_records"], 4)
+
+    return stats
+
+
+# ============================================================
+# 原子化文件写入
+# ============================================================
+
+def atomic_write(file_path: str, content: str, dry_run: bool = False) -> bool:
+    """原子化写入文件：先写临时文件，再 rename。"""
+    if not dry_run:
+        dir_name = os.path.dirname(os.path.abspath(file_path))
+        fd, tmp_path = tempfile.mkstemp(dir=dir_name, prefix=".tmp_", suffix=".json")
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                f.write(content)
+            os.replace(tmp_path, file_path)
+            print(f"[写入] {file_path}")
+            return True
+        except Exception:
+            # 清理临时文件
+            try:
+                os.unlink(tmp_path)
+            except OSError:
+                pass
+            raise
+    print(f"[dry-run] 将写入 {file_path}（{len(content)} 字节），未落盘")
+    return False
+
+
+# ============================================================
+# 自检函数
+# ============================================================
+
+def run_selftest() -> int:
+    """运行自检，验证核心功能。"""
+    print("=== bedrock selftest ===")
+
+    # 测试 1：单条解析
+    print("\n[测试 1] 单条解析")
+    test_input = "订单号 A12345，金额 89.90 元，日期 2024-03-15"
+    try:
+        fields = extract_fields(test_input)
+        assert len(fields) >= 3, f"期望至少 3 个字段，实际 {len(fields)}"
+        field_names = [f.name for f in fields]
+        assert "order_id" in field_names, f"缺少 order_id: {field_names}"
+        assert "amount" in field_names, f"缺少 amount: {field_names}"
+        assert "date" in field_names, f"缺少 date: {field_names}"
+        for f in fields:
+            assert 0.0 <= f.confidence <= 1.0, f"置信度越界: {f.confidence}"
+        print(f"  PASS: 提取 {len(fields)} 个字段，置信度均有效")
     except AssertionError as e:
-        print(f"  [失败] 单条文本解析: {e}")
+        print(f"  FAIL: {e}")
+        return 1
+    except Exception as e:
+        print(f"  FAIL: 异常 {e}")
+        return 1
+
+    # 测试 2：空输入
+    print("\n[测试 2] 空输入处理")
+    try:
+        extract_fields("")
+        print("  FAIL: 空输入未抛出异常")
         return 1
     except BedrockError as e:
-        print(f"  [失败] 单条文本解析: {e}")
+        assert e.code == "E001", f"错误码错误: {e.code}"
+        print(f"  PASS: 正确抛出 E001")
+    except Exception as e:
+        print(f"  FAIL: 异常类型错误 {e}")
         return 1
 
-    # --- 样例 2：批量处理 ---
-    sample_batch = [
-        "姓名: 李四, 金额: 99.50元, 编号: ORD-2024-001",
-        "姓名: 王五, 电话: 13912345678, 地址: 北京市朝阳区",
-        "姓名: 赵六, 邮箱: zhaoliu@test.com, 日期: 2024/06/30",
-    ]
+    # 测试 3：自定义配置
+    print("\n[测试 3] 自定义配置")
+    config = {
+        "field_mappings": {
+            "custom_id": {
+                "pattern": r"编号[：:\s]*([A-Z]\d{3})",
+                "type": "string",
+                "required": True,
+            }
+        },
+        "confidence_threshold": 0.7,
+    }
     try:
-        batch_results = process_batch(sample_batch)
-        assert len(batch_results) >= 2, "批量处理应至少成功 2 条"
-        for r in batch_results:
-            assert len(r.fields) >= 1, "每条结果应至少 1 个字段"
-
-        print(f"  [通过] 批量处理: {len(batch_results)} 条成功")
+        fields = extract_fields("编号 X123，金额 45 元", config)
+        assert len(fields) >= 1, "自定义配置未生效"
+        custom_fields = [f for f in fields if f.name == "custom_id"]
+        assert len(custom_fields) == 1, f"custom_id 提取失败: {fields}"
+        assert custom_fields[0].value == "X123", f"custom_id 值错误: {custom_fields[0].value}"
+        print(f"  PASS: 自定义配置生效，提取值 {custom_fields[0].value}")
     except AssertionError as e:
-        print(f"  [失败] 批量处理: {e}")
+        print(f"  FAIL: {e}")
         return 1
-    except BedrockError as e:
-        print(f"  [失败] 批量处理: {e}")
+    except Exception as e:
+        print(f"  FAIL: 异常 {e}")
         return 1
 
-    # --- 样例 3：输出格式化 ---
+    # 测试 4：类型转换
+    print("\n[测试 4] 类型转换")
     try:
-        json_out = format_output(batch_results, "json")
-        parsed = json.loads(json_out)
-        assert parsed is not None, "JSON 输出应可解析"
-
-        table_out = format_output(batch_results, "table")
-        assert len(table_out) > 0, "表格输出不应为空"
-
-        print("  [通过] 输出格式化 (json/table)")
+        fields = extract_fields("金额 89.90 元")
+        amount_fields = [f for f in fields if f.name == "amount"]
+        assert len(amount_fields) == 1, "amount 提取失败"
+        assert isinstance(amount_fields[0].value, float), f"amount 类型错误: {type(amount_fields[0].value)}"
+        assert abs(amount_fields[0].value - 89.9) < 0.01, f"amount 值错误: {amount_fields[0].value}"
+        print(f"  PASS: 类型转换正确，值 {amount_fields[0].value}")
     except AssertionError as e:
-        print(f"  [失败] 输出格式化: {e}")
+        print(f"  FAIL: {e}")
         return 1
-    except BedrockError as e:
-        print(f"  [失败] 输出格式化: {e}")
+    except Exception as e:
+        print(f"  FAIL: 异常 {e}")
         return 1
 
-    # --- 样例 4：错误处理 ---
+    # 测试 5：批量处理（临时文件）
+    print("\n[测试 5] 批量处理")
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as f:
+        f.write("订单号 A12345，金额 89.90 元，日期 2024-03-15\n")
+        f.write("订单号 B67890，金额 12.50 元，日期 2024-03-16\n")
+        f.write("无效数据行\n")
+        tmp_file = f.name
     try:
-        process_single("")
-        print("  [失败] 错误处理: 空输入应抛异常")
-        return 1
-    except BedrockError as e:
-        assert e.code == "E001", "空输入错误码应为 E001"
-        print(f"  [通过] 错误处理: 空输入返回 {e.code}")
-
-    # --- 样例 5：置信度标注 ---
-    try:
-        sample5 = "姓名: 张三, 电话: 13812345678"
-        result5 = process_single(sample5)
-        phone_field = [f for f in result5.fields if f.name == "phone"]
-        assert len(phone_field) == 1, "应找到电话字段"
-        assert phone_field[0].confidence in ("高", "中"), "完整手机号置信度应为中或高"
-
-        sample5b = "姓名: 张三, 电话: 12345"
-        result5b = process_single(sample5b)
-        phone_field_b = [f for f in result5b.fields if f.name == "phone"]
-        assert len(phone_field_b) == 1, "应找到电话字段"
-        # 宽松断言：短号码置信度不应高于完整号码
-        conf_map = {"高": 3, "中": 2, "低": 1}
-        assert conf_map[phone_field_b[0].confidence] <= conf_map[phone_field[0].confidence], \
-            "短号码置信度不应高于完整号码"
-
-        print("  [通过] 置信度标注逻辑")
+        stats = process_batch(tmp_file, dry_run=True)
+        assert stats["total_records"] == 3, f"总记录数错误: {stats['total_records']}"
+        assert stats["success_count"] >= 2, f"成功数错误: {stats['success_count']}"
+        assert len(stats["failed_records"]) >= 1, f"失败数错误: {stats['failed_records']}"
+        print(f"  PASS: 批量处理统计正确 (成功 {stats['success_count']}/{stats['total_records']})")
     except AssertionError as e:
-        print(f"  [失败] 置信度标注: {e}")
+        print(f"  FAIL: {e}")
         return 1
-    except BedrockError as e:
-        print(f"  [失败] 置信度标注: {e}")
+    except Exception as e:
+        print(f"  FAIL: 异常 {e}")
         return 1
+    finally:
+        os.unlink(tmp_file)
 
-    # --- 样例 6：边界条件（数字输入） ---
+    # 测试 6：中文编码
+    print("\n[测试 6] 中文编码")
     try:
-        result_num = process_single(12345)
-        assert result_num.source == "12345", "数字输入应转为字符串"
-        assert len(result_num.fields) >= 1, "数字输入应至少产生一个字段"
-        print("  [通过] 边界条件: 数字输入")
+        fields = extract_fields("订单号 A12345，金额 89.90 元")
+        assert len(fields) >= 2, f"中文解析失败: {fields}"
+        print(f"  PASS: 中文解析正常")
     except AssertionError as e:
-        print(f"  [失败] 边界条件: {e}")
+        print(f"  FAIL: {e}")
         return 1
-    except BedrockError as e:
-        print(f"  [失败] 边界条件: {e}")
+    except Exception as e:
+        print(f"  FAIL: 异常 {e}")
         return 1
 
-    # --- 样例 7：批量输入格式错误 ---
+    # 测试 7：ParseResult 序列化
+    print("\n[测试 7] 序列化")
     try:
-        process_batch([])
-        print("  [失败] 批量输入格式: 空列表应抛异常")
+        fields = extract_fields("订单号 A12345，金额 89.90 元")
+        result = ParseResult(source="test", fields=fields)
+        result_dict = result.to_dict()
+        assert "data" in result_dict, "缺少 data 键"
+        assert "summary" in result_dict, "缺少 summary 键"
+        assert "total_fields" in result_dict["summary"], "缺少 total_fields"
+        assert "avg_confidence" in result_dict["summary"], "缺少 avg_confidence"
+        json_str = json.dumps(result_dict, ensure_ascii=False)
+        assert len(json_str) > 0, "序列化结果为空"
+        print(f"  PASS: 序列化正常")
+    except AssertionError as e:
+        print(f"  FAIL: {e}")
         return 1
-    except BedrockError as e:
-        assert e.code == "E005", "空列表错误码应为 E005"
-        print(f"  [通过] 批量输入格式: 空列表返回 {e.code}")
-
-    # --- 样例 8：不支持的输出格式 ---
-    try:
-        format_output([ParseResult(source="test", fields=[FieldResult("name", "张三")])], "xml")
-        print("  [失败] 输出格式: 不支持的格式应抛异常")
+    except Exception as e:
+        print(f"  FAIL: 异常 {e}")
         return 1
-    except BedrockError as e:
-        assert e.code == "E008", "不支持的格式错误码应为 E008"
-        print(f"  [通过] 输出格式: 不支持格式返回 {e.code}")
 
-    print("[selftest] 全部自检通过 ✓")
+    print("\n=== SELFTEST PASSED ===")
     return 0
 
 
-def main(argv: Optional[List[str]] = None) -> int:
-    """主入口函数。"""
-    argv = argv if argv is not None else sys.argv[1:]
+# ============================================================
+# CLI 入口
+# ============================================================
 
-    # 自检模式
-    if "--selftest" in argv:
-        return _run_selftest()
+def main() -> int:
+    """CLI 主入口。"""
+    parser = argparse.ArgumentParser(
+        prog="bedrock",
+        description="数据规整与结构化抽取工具",
+    )
+    subparsers = parser.add_subparsers(dest="command", help="子命令")
 
-    # 参数解析（极简命令行）
-    try:
-        # 支持 --input 或直接传入文本
-        input_text = None
-        output_format = "json"
+    # parse 子命令
+    parse_parser = subparsers.add_parser("parse", help="解析数据")
+    parse_parser.add_argument("--single", action="store_true", help="单条解析（从 stdin 读取）")
+    parse_parser.add_argument("--batch", action="store_true", help="批量解析（从文件读取）")
+    parse_parser.add_argument("--input", type=str, help="输入文件路径（批量模式）")
+    parse_parser.add_argument("--config", type=str, help="配置文件路径（JSON）")
+    parse_parser.add_argument("--dry-run", action="store_true", help="预览模式，不写盘")
+    parse_parser.add_argument("--verbose", action="store_true", help="输出详细日志")
 
-        i = 0
-        while i < len(argv):
-            if argv[i] == "--input" and i + 1 < len(argv):
-                input_text = argv[i + 1]
-                i += 2
-            elif argv[i] == "--format" and i + 1 < len(argv):
-                output_format = argv[i + 1]
-                i += 2
-            elif argv[i] == "--help" or argv[i] == "-h":
-                print("用法: python main.py [--input 文本] [--format json|table] [--selftest]")
-                print("      直接传文本: python main.py \"姓名: 张三, 电话: 13812345678\"")
+    # selftest 子命令
+    subparsers.add_parser("selftest", help="运行自检")
+
+    # 添加 --selftest 顶层参数（兼容验收脚本调用方式）
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+
+    args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+
+    # 优先处理 --selftest 顶层参数
+    if args.selftest:
+        return run_selftest()
+
+    if args.command == "selftest":
+        return run_selftest()
+
+    if args.command == "parse":
+        # 加载配置
+        config = None
+        if args.config:
+            try:
+                with open(args.config, "r", encoding="utf-8") as f:
+                    config = json.load(f)
+            except FileNotFoundError:
+                print(f"ERROR: 配置文件不存在: {args.config}", file=sys.stderr)
+                return 1
+            except json.JSONDecodeError as e:
+                print(f"ERROR: 配置文件 JSON 解析失败: {e}", file=sys.stderr)
+                return 1
+
+        if args.single:
+            # 单条解析
+            try:
+                raw = sys.stdin.read()
+                text = _parse_single_input(raw)
+                fields = extract_fields(text, config)
+                result = ParseResult(source=text, fields=fields)
+                print(json.dumps(result.to_dict(), ensure_ascii=False, indent=2))
                 return 0
-            else:
-                # 将非参数内容视为输入文本
-                if input_text is None:
-                    input_text = argv[i]
-                else:
-                    input_text += " " + argv[i]
-                i += 1
+            except BedrockError as e:
+                print(f"ERROR: {e}", file=sys.stderr)
+                return 1
+            except Exception as e:
+                print(f"ERROR: 未知错误 {e}", file=sys.stderr)
+                return 1
 
-        if input_text is None:
-            print("错误: 未提供输入数据。使用 --input 指定文本，或使用 --selftest 自检。")
+        elif args.batch:
+            # 批量解析
+            if not args.input:
+                print("ERROR: 批量模式需要 --input 参数", file=sys.stderr)
+                return 1
+            try:
+                stats = process_batch(args.input, config, args.dry_run, args.verbose)
+                # 输出汇总统计（到 stderr，不污染 stdout 的 JSON Lines）
+                print(json.dumps(stats, ensure_ascii=False, indent=2), file=sys.stderr)
+                return 0
+            except BedrockError as e:
+                print(f"ERROR: {e}", file=sys.stderr)
+                return 1
+            except Exception as e:
+                print(f"ERROR: 未知错误 {e}", file=sys.stderr)
+                return 1
+        else:
+            print("ERROR: 请指定 --single 或 --batch", file=sys.stderr)
             return 1
 
-        # 尝试解析为批量（JSON 数组）
-        try:
-            parsed_input = json.loads(input_text)
-            if isinstance(parsed_input, list):
-                results = process_batch(parsed_input)
-            else:
-                results = [process_single(parsed_input)]
-        except json.JSONDecodeError:
-            # 不是 JSON，按单条文本处理
-            results = [process_single(input_text)]
-
-        output = format_output(results, output_format)
-        print(output)
-        return 0
-
-    except BedrockError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"错误: [{ERROR_CODES['E010']}] {e}", file=sys.stderr)
-        return 1
+    # 无子命令，显示帮助
+    parser.print_help()
+    return 0
 
 
 if __name__ == "__main__":
