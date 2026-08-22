@@ -496,7 +496,7 @@ def main() -> int:
     )
 
     parser.add_argument(
-        "--inputs", nargs="*",
+        "inputs", nargs="*",
         help="输入数据: GitHub URL、仓库名 (owner/repo) 或包含仓库信息的文本"
     )
     parser.add_argument(
