@@ -1,258 +1,355 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: agentic-awesome-skills
 name: AI智能体技能运行器
-displayName: 技能调度 仓库拉取 镜像加速
-description: 拉取并运行 GitHub 技能仓库，自动处理依赖与镜像，返回结构化执行结果。
-version: 1.0.44
-rules_version: cpr-20260811-n351
+displayName: 技能仓库调度 依赖镜像 结构化执行
+description: 拉取GitHub技能仓库，自动处理依赖镜像，返回结构化执行结果。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agentic-awesome-skills
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 技能工坊·林默
+author: 流云架构师
 agent_created: true
-trigger_words: ["agentic-awesome-skills", "技能运行", "技能拉取", "技能执行", "仓库运行", "技能调度"]
+trigger_words: ["技能运行", "技能拉取", "技能执行", "仓库运行", "技能调用", "技能调度", "仓库执行"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# AI智能体技能运行器（Skill Runner）
+# AI智能体技能运行器 — 使用指南
 
-## 一、能力边界：一页纸速查卡
-
-本 Skill 负责从 GitHub 拉取技能仓库、解析依赖、执行技能逻辑，并返回结构化的执行结果。它不是一个技能创作工具，也不负责技能内容的正确性。
-
-| 能力维度 | 支持 | 不支持 |
-|---------|------|--------|
-| 拉取公开 GitHub 仓库 | ✅ 支持 HTTPS 与 SSH 协议 | ❌ 不支持私有仓库（需 Token 注入） |
-| 自动安装依赖 | ✅ 支持 requirements.txt / package.json / go.mod | ❌ 不支持 Conda 环境切换 |
-| 镜像加速 | ✅ 支持 ghproxy / gh-proxy 等公共镜像 | ❌ 不支持自定义镜像源配置 |
-| 执行技能主逻辑 | ✅ 支持 Python / Node.js / Shell 三种运行时 | ❌ 不支持 Docker 容器化执行 |
-| 返回结构化结果 | ✅ 输出 JSON 格式（含 stdout / stderr / exit_code） | ❌ 不支持流式输出 |
-| 自检与版本查询 | ✅ 支持 `--selftest` 与 `--version` | ❌ 不支持交互式调试模式 |
-
-**适用对象**：需要批量运行多个技能仓库的 AI Agent 开发者、自动化流水线维护者、技能市场运营人员。
-
-**不适用对象**：需要可视化界面操作的非技术用户、需要实时日志追踪的调试场景。
+本 Skill 用于从 GitHub 拉取技能仓库、自动处理依赖镜像、执行技能并返回结构化 JSON 结果。以下内容按「速查卡 → 详细流程 → 进阶配置」分层组织，请根据自身经验水平选择阅读路径。
 
 ---
 
-## 二、触发方式：场景映射表
+## 一、能力边界（一页纸速查卡）
 
-当用户输入以下意图时，本 Skill 将被激活：
+### 能做
 
-| 用户原话（大白话） | 触发词命中 | 实际执行动作 |
-|-------------------|-----------|-------------|
-| "帮我跑一下那个技能仓库" | 技能运行 | 拉取仓库 → 解析依赖 → 执行主逻辑 |
-| "把 GitHub 上的技能拉下来用" | 技能拉取 | 仅拉取仓库并输出路径，不执行 |
-| "运行 agentic-awesome-skills 自检" | agentic-awesome-skills | 执行 `--selftest` 内置自检流程 |
-| "这个技能怎么跑不起来" | 技能执行 | 进入错误诊断模式，输出修正步骤 |
-| "查一下版本" | --version | 输出当前 Skill 版本号 |
+| 能力项 | 说明 |
+|--------|------|
+| 仓库探测 | 检查目标仓库是否存在、是否公开、网络是否可达 |
+| 技能拉取 | 克隆公开技能仓库到本地工作区 |
+| 依赖镜像 | 自动读取 `config/mirrors.json`，替换依赖源为镜像地址 |
+| 技能执行 | 按 `skill.json` 定义运行技能，捕获 stdout/stderr |
+| 结构化输出 | 返回 JSON，包含状态码、执行日志、产物路径、耗时等字段 |
+| 自检模式 | `--selftest` 验证本机环境（Git、网络、运行时）是否就绪 |
 
-**触发优先级**：显式命令行参数（`--selftest` / `--version`） > 仓库 URL 输入 > 模糊意图匹配。
+### 不能做
+
+| 限制项 | 说明 |
+|--------|------|
+| 私有仓库 | 无法克隆需要鉴权的私有仓库（无凭据注入机制） |
+| 交互式技能 | 不支持需要 TTY 交互的终端程序（如 vim、htop） |
+| 跨平台运行时 | 仅支持 `runtimes/` 目录下已注册的运行时适配器 |
+| 依赖自动修复 | 镜像替换仅覆盖 `mirrors.json` 中列出的依赖源，其余报错需人工介入 |
+| 无限重试 | 网络超时默认 30 秒，超时即失败，不自动重试 |
+
+### 适用对象
+
+- 需要批量运行多个技能仓库的自动化流水线
+- 希望将技能执行结果接入自有监控/报表系统的开发者
+- 在受限网络环境中需要依赖镜像加速的团队
 
 ---
 
-## 三、标准流程：从输入到输出
+## 二、触发方式
 
-### 3.1 前置条件
+### 触发词
 
-| 条件项 | 要求 | 校验方式 |
-|--------|------|---------|
-| 网络连通性 | 可访问 github.com 或镜像站 | `curl -I https://github.com` 返回 200 |
-| 运行时环境 | Python ≥ 3.8 / Node ≥ 14 / Bash ≥ 4.0 | `python3 --version` 等命令检查 |
-| 磁盘空间 | 至少 500MB 可用空间 | `df -h` 检查 |
-| 输入格式 | 合法的 GitHub 仓库 URL 或 `owner/repo` 格式 | 正则匹配 `^[A-Za-z0-9-]+/[A-Za-z0-9-]+$` |
+直接使用以下任一短语即可唤起本 Skill：
 
-### 3.2 执行步骤
+- 技能运行 / 技能拉取 / 技能执行 / 仓库运行 / 技能调用
+- 技能调度 / 仓库执行（补充触发词）
 
-**Step 1：输入收集与格式确认**
+### 场景映射表
 
-接收用户输入，执行格式校验：
+| 你说的话 | 实际动作 |
+|----------|----------|
+| "帮我跑一下 octocat/Hello-World 这个仓库" | 执行 `技能拉取 --repo octocat/Hello-World`，然后尝试运行 |
+| "检查一下网络通不通" | 执行 `curl -I https://github.com` 并报告结果 |
+| "这个技能跑完结果存哪了" | 解析 JSON 输出的 `artifacts` 字段，给出绝对路径 |
+| "批量跑 5 个仓库" | 循环调用 `技能执行 --repo <name>`，汇总 JSON 数组 |
 
-```
-输入示例：
-- https://github.com/owner/repo
-- owner/repo
-- git@github.com:owner/repo.git
-```
+---
 
-校验规则：
-- URL 必须包含 `github.com` 域名
-- `owner/repo` 格式必须符合正则 `^[A-Za-z0-9-]+/[A-Za-z0-9-]+$`
-- 不支持 GitLab / Bitbucket 等其他平台
+## 三、标准流程
 
-**Step 2：仓库拉取**
+### 前置条件
+
+| 条件 | 检查方式 |
+|------|----------|
+| 本机已安装 Git | `git --version` 返回非空 |
+| 网络可访问 GitHub | `curl -I https://github.com` 返回 200 或 301 |
+| 目标仓库为公开仓库 | 浏览器访问仓库页面，确认无锁图标 |
+| 运行时依赖已安装 | 根据 `skill.json` 的 `runtime` 字段，确认对应解释器存在 |
+
+### 执行步骤
+
+#### 第一步：环境自检
 
 ```bash
-# 优先使用镜像加速
-git clone https://ghproxy.com/https://github.com/owner/repo.git /tmp/skills/repo
-# 镜像失败则直连
-git clone https://github.com/owner/repo.git /tmp/skills/repo
+agentic-awesome-skills --selftest
 ```
 
-镜像选择顺序：`ghproxy.com` → `gh-proxy.com` → 直连。每个镜像超时 30 秒。
+预期输出（JSON）：
 
-**Step 3：依赖解析与安装**
+```json
+{
+  "status": "ok",
+  "checks": {
+    "git": "2.39.2",
+    "network": "reachable",
+    "runtime": "python3.11"
+  }
+}
+```
 
-检测仓库根目录下的依赖清单文件：
+若任一检查失败，输出 `"status": "degraded"` 并列出失败项。
 
-| 文件 | 运行时 | 安装命令 |
-|------|--------|---------|
-| requirements.txt | Python | `pip install -r requirements.txt` |
-| package.json | Node.js | `npm install` |
-| go.mod | Go | `go mod download` |
+#### 第二步：拉取仓库
 
-若同时存在多个依赖文件，按 Python → Node → Go 顺序依次安装。安装失败不中断流程，记录错误后继续。
+```bash
+agentic-awesome-skills 技能拉取 --repo octocat/Hello-World
+```
 
-**Step 4：主逻辑执行**
+参数说明：
 
-查找执行入口，优先级：
-1. `main.py`
-2. `index.js`
-3. `run.sh`
-4. `skill.json` 中声明的 `entry` 字段
+| 参数 | 必填 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--repo` | 是 | 无 | 格式为 `owner/repo` |
+| `--branch` | 否 | `main` | 指定分支 |
+| `--depth` | 否 | `1` | 浅克隆深度，设为 `0` 表示完整克隆 |
 
-执行命令：`python3 main.py` / `node index.js` / `bash run.sh`
+#### 第三步：执行技能
 
-**Step 5：结果收集与校验**
+```bash
+agentic-awesome-skills 技能执行 --repo owner/simple-skill
+```
 
-捕获 stdout、stderr 和退出码，校验输出完整性：
+执行前自动完成：
+
+1. 读取仓库根目录 `skill.json`
+2. 校验 `skill.json` 必填字段（`name`、`version`、`entry`）
+3. 根据 `runtime` 字段选择适配器（`runtimes/` 目录下）
+4. 读取 `config/mirrors.json`，替换依赖源
+5. 运行入口文件，捕获输出
+
+#### 第四步：查看输出
+
+返回 JSON 结构示例：
 
 ```json
 {
   "status": "success",
+  "repo": "owner/simple-skill",
   "exit_code": 0,
-  "stdout": "...",
+  "stdout": "Hello from skill",
   "stderr": "",
-  "output_files": ["/tmp/skills/repo/output.json"],
-  "execution_time_ms": 1234
+  "duration_ms": 1234,
+  "artifacts": ["/tmp/agentic-skills/owner/simple-skill/output.json"],
+  "mirror_used": true
 }
 ```
 
-完整性校验规则：
-- stdout 非空（除非技能设计为静默执行）
-- 退出码为 0 或技能文档中声明的预期非零值
-- 若声明了输出文件，必须实际存在
+字段说明：
 
-### 3.3 输出规范
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `status` | string | `success` / `failed` / `skipped` |
+| `exit_code` | int | 进程退出码，0 为成功 |
+| `stdout` | string | 标准输出全文 |
+| `stderr` | string | 错误输出全文 |
+| `duration_ms` | int | 执行耗时（毫秒） |
+| `artifacts` | array | 产物文件绝对路径列表 |
+| `mirror_used` | bool | 是否启用了镜像替换 |
 
-所有输出统一为 JSON 格式，包含以下字段：
+### 输出规范
 
-| 字段 | 类型 | 必填 | 说明 |
-|------|------|------|------|
-| status | string | ✅ | `success` / `partial_success` / `failed` |
-| exit_code | int | ✅ | 进程退出码 |
-| stdout | string | ✅ | 标准输出内容 |
-| stderr | string | ✅ | 错误输出内容 |
-| output_files | array | ❌ | 生成的输出文件路径列表 |
-| execution_time_ms | int | ✅ | 总执行耗时（毫秒） |
-| error_code | string | ❌ | 失败时的错误码（见第五节） |
+- 所有输出均为 UTF-8 编码 JSON
+- 日志写入 `logs/exec_<timestamp>.log`
+- 产物默认保存在 `/tmp/agentic-skills/<owner>/<repo>/` 下
+- 若需持久化，请参考「进阶配置」第 3 条
 
 ---
 
 ## 四、置信度门控
 
-当遇到以下信息不足的情况，本 Skill 不会编造数据，而是输出占位符：
+当出现以下情况时，本 Skill **不会**编造结果，而是输出占位符 `[需核实:字段]`：
 
-| 场景 | 输出占位符 | 后续处理 |
-|------|-----------|---------|
-| 仓库未声明依赖清单 | `[需核实:依赖声明文件]` | 跳过依赖安装，直接执行主逻辑 |
-| 主逻辑入口不明确 | `[需核实:执行入口]` | 尝试常见入口，全部失败则报错 |
-| 输出文件路径未声明 | `[需核实:输出路径]` | 仅返回 stdout 内容 |
-| 技能版本号未知 | `[需核实:技能版本]` | 在结果中标记 `version: "unknown"` |
+| 场景 | 输出示例 |
+|------|----------|
+| 仓库存在但 `skill.json` 缺失 | `{"status": "failed", "error": "[需核实:skill.json] 未找到入口定义"}` |
+| 网络超时但无法确认仓库状态 | `{"status": "unknown", "error": "[需核实:网络连通性] 请手动访问仓库页面确认"}` |
+| 运行时版本未知 | `{"status": "failed", "error": "[需核实:runtime版本] 请检查 skill.json 的 runtime 字段"}` |
 
-**门控原则**：宁可返回不完整结果，绝不虚构执行数据。
+**原则**：信息不足时，宁可返回占位符，也不猜测或伪造数据。
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 含义 | 用户提示话术 | 修正步骤 |
-|--------|------|-------------|---------|
-| `E001` | 输入格式不合法 | "输入格式有误，请使用 `owner/repo` 或完整 GitHub URL" | 重新输入，参考 3.2 节格式示例 |
-| `E002` | 仓库拉取失败 | "无法拉取仓库，请检查网络或仓库是否存在" | 1. 确认仓库公开 2. 尝试更换镜像 3. 检查网络代理 |
-| `E003` | 依赖安装失败 | "依赖安装失败，请查看 stderr 中的具体错误" | 1. 手动安装缺失依赖 2. 检查 Python/Node 版本兼容性 |
-| `E004` | 主逻辑执行失败 | "技能执行报错，退出码非零" | 1. 查看 stderr 定位错误 2. 检查输入参数 3. 联系技能作者 |
-| `E005` | 输出校验失败 | "执行完成但输出不完整" | 1. 检查技能文档确认预期输出 2. 查看 output_files 是否生成 |
-| `E006` | 运行时环境不满足 | "当前环境缺少必要运行时" | 安装对应运行时（Python/Node/Go）后重试 |
-| `E007` | 超时 | "执行超过 300 秒，已强制终止" | 1. 确认技能是否设计为长时运行 2. 调整超时阈值 |
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E001` | 仓库不存在 | "仓库 owner/repo 未找到，请检查拼写" | 1. 浏览器访问确认 2. 检查 owner 大小写 |
+| `E002` | 仓库为私有 | "该仓库为私有，无法克隆" | 1. 确认仓库可见性 2. 使用公开仓库 |
+| `E003` | 网络不可达 | "无法连接 GitHub，请检查网络" | 1. `curl -I https://github.com` 2. 配置代理 |
+| `E004` | `skill.json` 缺失 | "仓库缺少技能定义文件" | 1. 检查仓库根目录 2. 确认文件命名 |
+| `E005` | 运行时不适配 | "未找到对应运行时适配器" | 1. 查看 `runtimes/` 目录 2. 添加自定义适配器 |
+| `E006` | 依赖安装失败 | "依赖安装失败，请查看 stderr" | 1. 检查 `mirrors.json` 2. 手动安装依赖 |
+| `E007` | 执行超时 | "执行超过 30 秒，已终止" | 1. 修改超时配置 2. 优化技能逻辑 |
 
 ---
 
-## 六、FAQ 反模式对照
+## 六、FAQ 反模式
 
-| 常见坑 | 反模式（错误做法） | 正模式（正确做法） |
-|--------|-------------------|-------------------|
-| 依赖冲突 | 直接 `pip install` 覆盖全局环境 | 使用虚拟环境（venv）隔离依赖 |
-| 镜像失效 | 只配置一个镜像源 | 配置镜像列表，按顺序自动切换 |
-| 入口文件缺失 | 报错后直接放弃 | 检查 `skill.json` 声明，或扫描目录下可执行文件 |
-| 输出编码问题 | 忽略编码直接拼接字符串 | 统一使用 UTF-8 编码，捕获时指定 `encoding='utf-8'` |
-| 仓库更新 | 每次拉取全量 clone | 使用 `--depth 1` 浅克隆，加速拉取 |
+### 反模式 1：忽略自检直接拉取
 
----
+**错误做法**：跳过 `--selftest`，直接执行拉取，遇到网络错误才排查。
 
-## 七、渐进式披露：分层次阅读路径
+**正确做法**：先运行自检，确认 Git 和网络就绪后再操作。
 
-### 速查卡（30 秒上手）
+### 反模式 2：依赖镜像配置错误
 
-```
-输入: owner/repo
-→ 拉取 → 装依赖 → 执行 → 输出 JSON
-```
+**错误做法**：修改 `mirrors.json` 时，将 `"source"` 和 `"target"` 写反，导致依赖源指向无效地址。
 
-### 新手路径（5 分钟掌握）
+**正确做法**：`source` 为原始地址，`target` 为镜像地址。修改后先跑一次测试仓库验证。
 
-1. 阅读「能力边界」了解支持范围
-2. 按「标准流程」的 Step 1-3 操作
-3. 遇到问题查「错误码体系」
+### 反模式 3：忽略 `exit_code` 只看 `status`
 
-### 进阶路径（深入定制）
+**错误做法**：`status` 为 `success` 就认为技能完全正确，忽略 `exit_code` 非零的情况。
 
-1. 修改镜像列表：编辑 `config/mirrors.json`
-2. 自定义超时：设置环境变量 `SKILL_RUNNER_TIMEOUT=600`
-3. 扩展运行时：在 `runtimes/` 目录添加新的运行时适配器
-4. 集成 CI/CD：调用 CLI 接口，解析 JSON 输出
+**正确做法**：`status` 表示流程是否走通，`exit_code` 表示技能自身是否成功。两者需同时检查。
+
+### 反模式 4：产物路径写死
+
+**错误做法**：在脚本中硬编码 `/tmp/agentic-skills/` 路径，导致清理临时文件后脚本失效。
+
+**正确做法**：每次执行后从 JSON 输出的 `artifacts` 字段动态获取路径。
+
+### 反模式 5：批量执行无超时控制
+
+**错误做法**：循环执行 10 个仓库，不设置总超时，导致整体任务挂起。
+
+**正确做法**：为每个仓库设置独立超时，并设置整体任务的最大执行时间。
 
 ---
 
-## 八、CLI 接口参考
+## 七、渐进式披露
 
+### 速查卡（新手必读）
+
+1. 先跑 `--selftest`
+2. 拉取用 `技能拉取 --repo owner/repo`
+3. 执行用 `技能执行 --repo owner/repo`
+4. 结果看 JSON 的 `status` 和 `exit_code`
+5. 出错查错误码表
+
+### 进阶路径（有经验用户）
+
+#### 1. 理解 `skill.json` 规范
+
+```json
+{
+  "name": "my-skill",
+  "version": "1.0.0",
+  "entry": "run.py",
+  "runtime": "python3",
+  "dependencies": ["requests>=2.0"],
+  "timeout": 30
+}
 ```
-agentic-awesome-skills [options] [repo]
 
-Options:
-  --selftest    运行内置自检流程，验证环境配置
-  --version     输出版本号
-  --timeout N   设置执行超时（秒），默认 300
-  --mirror URL  指定镜像地址，覆盖默认配置
-  --no-deps     跳过依赖安装步骤
-  --output PATH 指定输出文件路径
+必填字段：`name`、`version`、`entry`、`runtime`
+可选字段：`dependencies`、`timeout`（默认 30 秒）
 
-Examples:
-  agentic-awesome-skills owner/repo
-  agentic-awesome-skills --selftest
-  agentic-awesome-skills --version
-  agentic-awesome-skills --no-deps --timeout 600 owner/repo
+#### 2. 实现依赖缓存机制
+
+在 `config/mirrors.json` 中增加 `cache_dir` 字段：
+
+```json
+{
+  "cache_dir": "/var/cache/agentic-skills",
+  "mirrors": [
+    {"source": "https://pypi.org/simple", "target": "https://mirror.example.com/pypi"}
+  ]
+}
+```
+
+缓存命中时跳过下载，日志中输出 `"cache": "hit"`。
+
+#### 3. 输出文件持久化
+
+设置环境变量 `AGENTIC_ARTIFACT_DIR`：
+
+```bash
+export AGENTIC_ARTIFACT_DIR=/data/skill-outputs
+```
+
+执行后，`artifacts` 中的文件会自动复制到该目录，并保留原始相对路径。
+
+#### 4. 集成 CI/CD
+
+示例 GitHub Actions 片段：
+
+```yaml
+- name: Run skill
+  run: |
+    agentic-awesome-skills 技能执行 --repo owner/simple-skill
+  env:
+    AGENTIC_ARTIFACT_DIR: ${{ github.workspace }}/artifacts
+```
+
+---
+
+## 八、配置参考
+
+### `config/mirrors.json` 结构
+
+```json
+{
+  "mirrors": [
+    {
+      "source": "https://registry.npmjs.org",
+      "target": "https://registry.npmmirror.com",
+      "enabled": true
+    }
+  ],
+  "timeout_seconds": 30
+}
+```
+
+| 字段 | 类型 | 说明 |
+|------|------|------|
+| `mirrors[].source` | string | 原始依赖源地址 |
+| `mirrors[].target` | string | 镜像地址 |
+| `mirrors[].enabled` | bool | 是否启用该镜像 |
+| `timeout_seconds` | int | 全局超时时间，默认 30 |
+
+### `runtimes/` 目录适配器
+
+每个适配器为一个可执行脚本，命名格式：`<runtime-name>.sh`
+
+示例 `python3.sh`：
+
+```bash
+#!/bin/bash
+# 用法: python3.sh <entry_file> <timeout_seconds>
+timeout "$2" python3 "$1"
 ```
 
 ---
 
 ## 九、用户协议
 
-使用本 Skill 即表示您同意以下条款：
+<!-- user-agreement-injected -->
 
-1. **责任承担**：使用者自行承担全部责任。本 Skill 仅提供技能拉取与执行的自动化能力，不对技能内容本身的质量、安全性、合法性负责。因使用本 Skill 或其所拉取的技能仓库导致的任何直接或间接损失，均由使用者自行承担。
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者应自行承担使用本 Skill 的全部责任。包括但不限于：所拉取技能仓库的合法性、执行结果的安全性、以及对下游系统的影响。本 Skill 提供者不对因使用本 Skill 而产生的任何直接或间接损失负责。
 
 2. **禁止反向工程**：使用者不得对本 Skill 的源代码进行反向工程、反编译、破解或试图提取其底层算法逻辑，除非适用法律明确允许。
 
@@ -260,18 +357,15 @@ Examples:
 
 4. **免责声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权保证。
 
-<!-- user-agreement-injected -->
-
 ---
 
 ## 十、许可证（License）
 
-本 Skill 采用 MIT 许可证发布。
+<!-- professional-license-embedded -->
 
-```
 MIT License
 
-Copyright (c) 2026 技能工坊·林默
+Copyright (c) 2024 流云架构师
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -290,9 +384,6 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
-
-<!-- professional-license-embedded -->
 
 ---
 
