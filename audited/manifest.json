@@ -1,5 +1,5 @@
 {
-  "timestamp": "20260818_001501",
+  "timestamp": "20260818_042049",
   "slug": "audited",
   "spec": {
     "slug": "audited",
@@ -48,9 +48,9 @@
   "llm_temperature": 0.9,
   "cost_usd": 0.00953,
   "similarity_metrics": {
-    "section": 0.0761904761904762,
-    "token": 0.25631360723709007,
-    "line": 0.08299595141700405
+    "section": 0.11363636363636363,
+    "token": 0.2544642857142857,
+    "line": 0.11677282377919321
   },
   "style_checks_passed": true
 }
