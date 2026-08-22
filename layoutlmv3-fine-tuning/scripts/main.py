@@ -17,7 +17,7 @@ import zipfile
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 # 标准库优先，无第三方依赖（如需 OCR 可安装 pytesseract 或 paddleocr，但核心逻辑不依赖）
 # pip install pytesseract  # 可选，用于 OCR 增强
@@ -646,16 +646,26 @@ def main() -> int:
         help="自定义字段映射规则 JSON 文件路径（可选）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     parser.add_argument("--force", action="store_true")  # R4 强制写盘
 
 
     parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
 
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     global dry_run
 
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    dry_run = getattr(args, "dry_run", False)  # v3.268 同步到全局
 
     # 自检模式
     if args.selftest:
