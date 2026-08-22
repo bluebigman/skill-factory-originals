@@ -22,7 +22,6 @@ import sys
 import tempfile
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -440,7 +439,7 @@ keybinding:
 # ---------------------------------------------------------------------------
 # 自检功能
 # ---------------------------------------------------------------------------
-def run_selftest() -> bool:
+def run_selftest(dry_run: bool = False) -> bool:
     """离线自检核心逻辑，不依赖外部文件/网络。"""
     try:
         # 1. 测试键位搜索
@@ -472,8 +471,9 @@ def run_selftest() -> bool:
 
                 # 创建文件并检查未提交状态
                 test_file = os.path.join(tmpdir, "test.txt")
-                with open(test_file, "w") as f:
-                    f.write("test content")
+                if not dry_run:
+                    with open(test_file, "w", encoding="utf-8", errors="replace") as f:
+                        f.write("test content")
                 status = get_repo_status(tmpdir)
                 assert status.has_uncommitted, "未提交更改未被检测"
 
@@ -626,21 +626,32 @@ def main() -> None:
 
     # selftest 参数
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="只预览不写盘（安全守卫）",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="输出处理明细（每步决策）",
+    )
 
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
 
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
 
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    if args.verbose:
+        print(f"[verbose] 参数: {vars(args)}")
 
     # 自检模式
     if args.selftest:
-        success = run_selftest()
+        success = run_selftest(dry_run=args.dry_run)
         sys.exit(0 if success else 1)
 
     # 无子命令
