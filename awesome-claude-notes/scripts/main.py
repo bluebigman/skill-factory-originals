@@ -453,6 +453,12 @@ def main() -> int:
         version="awesome-claude-notes 1.0.1",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     # 自检模式
@@ -470,7 +476,7 @@ def main() -> int:
         elif args.input.endswith((".txt", ".md", ".csv")):
             # 从文件读取
             try:
-                with open(args.input, "r", encoding="utf-8") as f:
+                with open(args.input, "r", encoding="utf-8", errors="replace") as f:
                     input_text = f.read().strip()
             except (IOError, OSError) as exc:
                 print(f"E008: 文件读取失败 - {exc}", file=sys.stderr)
