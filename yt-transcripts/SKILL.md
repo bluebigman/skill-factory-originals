@@ -1,377 +1,228 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: yt-transcripts
 name: yt-transcripts
 displayName: 视频字幕提取 转录下载 批量处理
 description: 从YouTube链接提取字幕文本，支持多格式输出与批量处理。
-version: 1.0.2
-rules_version: cpr-20260815-n451
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/yt-transcripts
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge
+author: 林默
 agent_created: true
-trigger_words: ["视频字幕", "youtube transcript", "yt字幕", "视频转录", "字幕下载", "视频转文字", "字幕提取", "caption extract"]
+trigger_words: ["视频字幕", "youtube transcript", "yt字幕", "视频转录", "字幕下载", "视频文字稿", "字幕抓取"]
 ---
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
+# YouTube 字幕提取 Skill 文档
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+本 Skill 由 AI 辅助生成，仅供参考。使用前请确认目标视频的字幕开放权限与平台服务条款。
 
-
-> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
-
-# YouTube 字幕提取与转录 Skill 文档
+---
 
 ## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做与不能做
+### 能做
 
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|---------|-----------|
-| 输入类型 | 公开 YouTube 视频链接（标准 URL 格式） | 私有视频、会员专属视频、地区限制内容 |
-| 字幕来源 | 自动生成字幕（ASR）、手动上传字幕、多语言轨道 | 无字幕轨道的纯音乐视频、直播回放（部分） |
-| 输出格式 | 纯文本（TXT）、带时间戳（SRT/VTT）、JSON 结构化 | 翻译后的字幕（需另接翻译服务） |
-| 处理规模 | 单条链接、批量链接（≤ 200 条/批次） | 超过 200 条需分批，否则触发限流 |
-| 附加能力 | 时间戳保留、语言筛选、去重合并 | 视频下载、音频转写（非 YouTube 源） |
+| 能力项 | 说明 |
+|--------|------|
+| 单条字幕提取 | 输入 YouTube 视频 ID 或完整链接，提取默认语言字幕 |
+| 多语言选择 | 指定语言代码（如 `en`、`zh-Hans`、`ja`）提取对应字幕 |
+| 批量视频处理 | 循环调用提取接口，汇总生成 CSV 清单 |
+| 字幕文本落盘 | 将提取结果保存为 `.txt` 或 `.srt` 格式文件 |
+| 时间戳保留 | 输出时可选保留字幕时间轴信息 |
 
-### 1.2 适用对象
+### 不能做
 
-- **内容研究者**：需要快速获取视频讲稿进行文本分析
-- **自媒体运营**：转载或二次创作时需要原始字幕参考
-- **语言学习者**：获取双语对照素材（需配合翻译工具）
-- **数据标注团队**：为 NLP 模型准备语音转写训练数据
+| 限制项 | 说明 |
+|--------|------|
+| 无字幕视频 | 视频本身未开启字幕轨道时无法提取 |
+| 会员限定内容 | 需登录或付费才能观看的视频无法访问 |
+| 实时直播流 | 仅支持已发布的视频，不支持直播中的流媒体 |
+| 音频转写 | 本 Skill 不包含语音识别能力，仅提取已有字幕 |
+| 非 YouTube 平台 | 不支持 Bilibili、Vimeo 等其他视频平台 |
 
-### 1.3 环境要求
+### 适用对象
 
-| 项目 | 最低要求 | 推荐配置 |
-|------|----------|----------|
-| Python | 3.8+ | 3.10+ |
-| 网络 | 可访问 YouTube | 稳定代理（视网络环境） |
-| 依赖包 | youtube-transcript-api ≥ 1.0 | 最新版 + requests |
-| 磁盘空间 | 10MB（临时缓存） | 100MB（批量处理） |
+- 需要快速获取视频文字稿的内容创作者
+- 需要批量整理课程字幕的学习者
+- 需要做视频内容分析的调研人员
 
 ---
 
-## 二、触发方式与场景映射
+## 二、触发方式
 
-### 2.1 触发词速查
+当你的请求中包含以下任一关键词时，本 Skill 将被激活：
 
-| 用户说（大白话） | 触发词命中 | Skill 响应 |
-|------------------|------------|------------|
-| "帮我把这个视频的字幕弄下来" | 视频字幕 / 字幕下载 | 提取字幕并保存为 TXT |
-| "YouTube 视频转文字" | youtube transcript / 视频转文字 | 提取并输出纯文本 |
-| "这个视频的 transcript 给我" | yt字幕 / caption extract | 提取并输出 JSON 格式 |
-| "批量下载几个视频的字幕" | 视频转录 / 字幕提取 | 批量处理并打包输出 |
-
-### 2.2 场景映射表
-
-| 场景编号 | 用户意图 | 推荐输出格式 | 附加参数 |
-|----------|----------|--------------|----------|
-| S1 | 快速浏览视频内容 | TXT（无时间戳） | `--format txt` |
-| S2 | 制作双语字幕 | SRT（带时间戳） | `--format srt --lang en,zh` |
-| S3 | 数据分析/语料构建 | JSON（结构化） | `--format json --include-meta` |
-| S4 | 多视频对比研究 | 批量 TXT + 汇总 CSV | `--batch --output-dir ./out` |
+| 触发词 | 场景示例（大白话） |
+|--------|-------------------|
+| 视频字幕 | "帮我提取这个视频的字幕" |
+| youtube transcript | "Get the transcript of this YouTube video" |
+| yt字幕 | "这个 yt 视频的字幕能导出来吗" |
+| 视频转录 | "把这段视频转录成文字" |
+| 字幕下载 | "下载这个视频的字幕文件" |
+| 视频文字稿 | "我想要这个视频的完整文字稿" |
+| 字幕抓取 | "抓取这个频道所有视频的字幕" |
 
 ---
 
 ## 三、标准操作流程
 
-### 3.1 前置条件检查
+### 前置条件
 
-```
-□ 已安装 Python 3.8+ 环境
-□ 已安装 youtube-transcript-api 库（pip install youtube-transcript-api）
-□ 网络可访问 YouTube（建议测试：curl -I https://www.youtube.com）
-□ 目标视频链接格式正确（https://www.youtube.com/watch?v=VIDEO_ID）
-□ 已确认视频存在字幕轨道（可通过 YouTube 页面右下角 CC 图标检查）
-```
+| 条件 | 要求 |
+|------|------|
+| Python 环境 | 3.8 及以上版本 |
+| 依赖库 | `youtube-transcript-api`（安装命令见下文） |
+| 网络 | 可正常访问 YouTube 服务 |
+| 视频 ID | 从链接中提取，格式为 `v=` 参数后的 11 位字符 |
 
-### 3.2 执行步骤（分步编号）
+### 执行步骤
 
-#### 步骤 1：初始化环境
+**步骤 1：安装依赖库**
 
 ```bash
-# 安装依赖（如未安装）
-pip install youtube-transcript-api==1.0.1
-
-# 验证安装
-python -c "from youtube_transcript_api import YouTubeTranscriptApi; print('OK')"
+pip install youtube-transcript-api
 ```
 
-#### 步骤 2：单条字幕提取（试运行）
+**步骤 2：单条字幕提取**
 
 ```python
 from youtube_transcript_api import YouTubeTranscriptApi
 
-# 替换为实际视频 ID（URL 中 v= 后面的部分）
+# 方式一：直接使用视频 ID
 video_id = "dQw4w9WgXcQ"
+transcript = YouTubeTranscriptApi.fetch(video_id, languages=['en'])
 
-# 初始化 API 客户端
-api = YouTubeTranscriptApi()
+# 方式二：从完整链接中解析 ID
+url = "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+video_id = url.split("v=")[1][:11]
 
-# 获取可用字幕轨道列表
-transcript_list = api.list(video_id)
-print("可用字幕语言:", [t.language_code for t in transcript_list])
-
-# 提取英文字幕（自动选择）
-transcript = api.fetch(video_id, languages=['en'])
-text = "\n".join([entry.text for entry in transcript])
-print(text[:500])  # 预览前 500 字符
+# 遍历字幕内容
+for entry in transcript:
+    print(f"[{entry['start']:.2f}s] {entry['text']}")
 ```
 
-#### 步骤 3：格式转换与保存
+**步骤 3：保存为文件**
 
 ```python
-import json
+# 保存为纯文本
+with open("transcript.txt", "w", encoding="utf-8") as f:
+    for entry in transcript:
+        f.write(entry['text'] + "\n")
 
-def save_transcript(transcript, output_format='txt', output_path='output'):
-    """将字幕对象保存为指定格式"""
-    if output_format == 'txt':
-        with open(f'{output_path}.txt', 'w', encoding='utf-8') as f:
-            for entry in transcript:
-                f.write(entry.text + '\n')
-    
-    elif output_format == 'srt':
-        with open(f'{output_path}.srt', 'w', encoding='utf-8') as f:
-            for i, entry in enumerate(transcript, 1):
-                start = format_timestamp(entry.start)
-                end = format_timestamp(entry.start + entry.duration)
-                f.write(f"{i}\n{start} --> {end}\n{entry.text}\n\n")
-    
-    elif output_format == 'json':
-        data = [{
-            'start': entry.start,
-            'duration': entry.duration,
-            'text': entry.text
-        } for entry in transcript]
-        with open(f'{output_path}.json', 'w', encoding='utf-8') as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-
-def format_timestamp(seconds):
-    """将秒数转换为 SRT 时间戳格式"""
-    ms = int((seconds % 1) * 1000)
-    s = int(seconds) % 60
-    m = (int(seconds) // 60) % 60
-    h = int(seconds) // 3600
-    return f"{h:02d}:{m:02d}:{s:02d},{ms:03d}"
+# 保存为 SRT 格式（带时间戳）
+with open("transcript.srt", "w", encoding="utf-8") as f:
+    for i, entry in enumerate(transcript, 1):
+        start = entry['start']
+        duration = entry.get('duration', 0)
+        end = start + duration
+        f.write(f"{i}\n")
+        f.write(f"{format_timestamp(start)} --> {format_timestamp(end)}\n")
+        f.write(f"{entry['text']}\n\n")
 ```
 
-#### 步骤 4：批量处理
+### 输出规范
 
-```python
-import csv
-import os
-from youtube_transcript_api import YouTubeTranscriptApi
-
-def batch_process(video_ids, output_dir='./transcripts'):
-    """批量提取字幕并生成汇总 CSV"""
-    os.makedirs(output_dir, exist_ok=True)
-    api = YouTubeTranscriptApi()
-    results = []
-    
-    for vid in video_ids:
-        try:
-            transcript = api.fetch(vid, languages=['en'])
-            save_transcript(transcript, 'txt', f"{output_dir}/{vid}")
-            results.append({
-                'video_id': vid,
-                'status': 'success',
-                'segments': len(transcript),
-                'error': ''
-            })
-        except Exception as e:
-            results.append({
-                'video_id': vid,
-                'status': 'failed',
-                'segments': 0,
-                'error': str(e)
-            })
-    
-    # 写入汇总 CSV
-    with open(f'{output_dir}/summary.csv', 'w', newline='', encoding='utf-8') as f:
-        writer = csv.DictWriter(f, fieldnames=['video_id', 'status', 'segments', 'error'])
-        writer.writeheader()
-        writer.writerows(results)
-    
-    return results
-
-# 使用示例
-video_ids = ["dQw4w9WgXcQ", "9bZkp7q19f0", "kJQP7kiw5Fk"]
-batch_process(video_ids)
-```
-
-#### 步骤 5：校验输出
-
-```python
-# 校验脚本：检查输出文件是否完整
-def validate_output(filepath, expected_min_chars=100):
-    """验证输出文件是否满足基本要求"""
-    if not os.path.exists(filepath):
-        return False, "文件不存在"
-    
-    with open(filepath, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    if len(content) < expected_min_chars:
-        return False, f"内容过短（{len(content)} 字符）"
-    
-    # 检查是否有异常字符
-    if '\x00' in content:
-        return False, "包含空字节"
-    
-    return True, "校验通过"
-
-# 执行校验
-ok, msg = validate_output("./transcripts/dQw4w9WgXcQ.txt")
-print(f"校验结果: {msg}")
-```
-
-### 3.3 输出规范
-
-| 输出格式 | 文件扩展名 | 编码 | 结构说明 |
-|----------|------------|------|----------|
-| 纯文本 | .txt | UTF-8 | 每行一条字幕文本，无时间戳 |
-| 字幕文件 | .srt | UTF-8 | 序号 + 时间码 + 文本，标准 SRT 格式 |
-| WebVTT | .vtt | UTF-8 | 带 WEBVTT 头部，兼容 HTML5 播放器 |
-| 结构化数据 | .json | UTF-8 | 数组对象，含 start/duration/text 字段 |
+| 输出类型 | 格式要求 | 适用场景 |
+|----------|----------|----------|
+| 纯文本 | 每行一条字幕文本，无时间戳 | 快速阅读、内容摘要 |
+| SRT 字幕 | 标准字幕序号 + 时间轴 + 文本 | 视频剪辑、字幕压制 |
+| CSV 汇总 | 视频ID, 语言, 字幕长度, 文件路径 | 批量处理结果归档 |
 
 ---
 
-## 四、置信度门控机制
+## 四、置信度门控
 
-### 4.1 信息不足时的处理
+当遇到以下信息不足的情况时，本 Skill 不会编造数据，而是输出占位符：
 
-当遇到以下情况时，**不得编造或猜测**，必须输出占位符：
+| 场景 | 输出占位 |
+|------|----------|
+| 视频 ID 无法从链接中解析 | `[需核实:视频ID]` |
+| 指定语言的字幕不存在 | `[需核实:可用语言列表]` |
+| 字幕内容为空或全部为自动翻译 | `[需核实:字幕来源]` |
+| 批量处理中某个视频失败 | `[需核实:失败原因]` |
 
-| 场景 | 占位符 | 说明 |
-|------|--------|------|
-| 视频 ID 无法从 URL 解析 | `[需核实:video_id]` | 请用户提供完整 URL |
-| 字幕语言不确定 | `[需核实:language]` | 列出可用语言供用户选择 |
-| 字幕内容不完整（中途中断） | `[需核实:transcript_completeness]` | 提示可能缺失部分段落 |
-| 时间戳精度存疑 | `[需核实:timestamp_accuracy]` | 自动生成字幕可能有偏差 |
+**示例**：
 
-### 4.2 置信度分级
-
-| 置信度等级 | 判定标准 | 输出策略 |
-|------------|----------|----------|
-| 高（≥90%） | 手动字幕 + 完整提取 + 无异常 | 直接输出，无需额外说明 |
-| 中（70-89%） | 自动生成字幕 + 提取成功 | 输出时附带"自动生成字幕，可能存在识别误差"提示 |
-| 低（<70%） | 部分提取失败 / 语言不匹配 | 输出占位符 + 建议人工核对 |
+```
+视频链接: https://www.youtube.com/watch?v=abc123
+提取结果: [需核实:视频ID] 无法解析，请检查链接格式是否正确
+```
 
 ---
 
 ## 五、错误码体系
 
-### 5.1 常见错误与处理
-
-| 错误码 | 错误类型 | 用户提示话术 | 修正步骤 |
-|--------|----------|--------------|----------|
-| E001 | 视频不存在或已删除 | "该视频无法访问，请检查链接是否正确" | 1. 确认 URL 格式；2. 检查视频是否公开 |
-| E002 | 无可用字幕轨道 | "该视频未提供任何字幕，无法提取" | 1. 确认视频有 CC 字幕；2. 尝试其他语言 |
-| E003 | 语言不支持 | "所选语言无字幕，可用语言为：[列表]" | 1. 查看可用语言；2. 更换语言参数 |
-| E004 | 网络超时 | "连接 YouTube 超时，请检查网络后重试" | 1. 检查网络连接；2. 增加重试次数 |
-| E005 | 请求频率过高 | "请求过于频繁，请稍后重试" | 1. 增加间隔时间；2. 减少批量数量 |
-| E006 | 字幕被禁用 | "该视频的字幕已被上传者禁用" | 1. 联系视频作者；2. 使用第三方工具 |
-
-### 5.2 错误处理代码模板
-
-```python
-from youtube_transcript_api import (
-    VideoUnavailable,
-    TranscriptsDisabled,
-    NoTranscriptFound,
-    RequestBlocked
-)
-
-def safe_fetch(video_id, languages=['en'], max_retries=3):
-    """带错误处理的字幕提取函数"""
-    for attempt in range(max_retries):
-        try:
-            api = YouTubeTranscriptApi()
-            transcript = api.fetch(video_id, languages=languages)
-            return transcript
-        
-        except VideoUnavailable:
-            return None, "E001: 视频不可用"
-        except TranscriptsDisabled:
-            return None, "E006: 字幕被禁用"
-        except NoTranscriptFound:
-            return None, "E002: 无匹配语言字幕"
-        except RequestBlocked:
-            if attempt < max_retries - 1:
-                time.sleep(5 * (attempt + 1))  # 指数退避
-                continue
-            return None, "E005: 请求被限制"
-        except Exception as e:
-            return None, f"未知错误: {str(e)}"
-    
-    return None, "E004: 网络超时"
-```
+| 错误码 | 常见原因 | 提示话术 | 修正步骤 |
+|--------|----------|----------|----------|
+| `E001` | 视频 ID 格式错误 | "无法从输入中识别有效的视频 ID" | 检查链接是否完整，确认 `v=` 参数存在 |
+| `E002` | 指定语言字幕不存在 | "该视频未提供所请求语言的字幕" | 调用 `list_transcripts()` 查看可用语言 |
+| `E003` | 视频无任何字幕轨道 | "该视频未开启字幕功能" | 确认视频本身包含字幕，或考虑其他视频源 |
+| `E004` | 网络连接失败 | "无法连接到 YouTube 服务" | 检查网络代理设置，确认可访问 YouTube |
+| `E005` | 依赖库未安装 | "缺少 youtube-transcript-api 库" | 执行 `pip install youtube-transcript-api` |
+| `E006` | 批量处理中断 | "批量任务在第 N 个视频处中断" | 记录已完成项，从断点处继续执行 |
 
 ---
 
-## 六、FAQ 反模式对照
+## 六、FAQ 反模式
 
-### 6.1 常见坑与正确做法
+### 反模式 1：忽略语言参数
 
-| 坑编号 | 反模式（错误做法） | 正确做法 | 原因说明 |
-|--------|-------------------|----------|----------|
-| F1 | 直接使用完整 URL 而非视频 ID | 从 URL 中提取 `v=` 参数值 | API 仅接受视频 ID |
-| F2 | 忽略语言参数，默认提取 | 明确指定 `languages=['en']` | 部分视频多语言，默认可能取错 |
-| F3 | 批量处理不设间隔 | 每次请求间隔 1-2 秒 | 避免触发限流机制 |
-| F4 | 输出文件覆盖原文件 | 使用时间戳或序号命名 | 保留历史版本便于回溯 |
-| F5 | 不校验输出直接使用 | 先抽样检查 3-5 条记录 | 自动字幕可能存在错别字 |
+**错误做法**：直接调用 `fetch(video_id)` 而不指定语言，导致返回默认语言字幕。
 
-### 6.2 反模式代码示例
+**正确做法**：明确指定目标语言，如 `languages=['zh-Hans', 'en']`，并处理语言回退逻辑。
 
-```python
-# ❌ 反模式：直接传 URL
-transcript = api.fetch("https://www.youtube.com/watch?v=abc123")  # 报错！
+### 反模式 2：未处理字幕不存在异常
 
-# ✅ 正确做法：提取视频 ID
-video_id = "abc123"
-transcript = api.fetch(video_id)
+**错误做法**：假设所有视频都有字幕，直接遍历结果。
 
-# ❌ 反模式：不指定语言
-transcript = api.fetch(video_id)  # 可能随机选择语言
+**正确做法**：使用 `try-except` 捕获 `NoTranscriptFound` 异常，并给出友好提示。
 
-# ✅ 正确做法：明确指定
-transcript = api.fetch(video_id, languages=['en', 'zh-Hans'])
-```
+### 反模式 3：批量处理无容错机制
+
+**错误做法**：批量循环中一个视频失败导致整个脚本崩溃。
+
+**正确做法**：为每个视频单独捕获异常，记录失败原因后继续处理后续视频。
+
+### 反模式 4：混淆自动翻译与人工字幕
+
+**错误做法**：将自动翻译字幕当作人工精校字幕使用。
+
+**正确做法**：检查 `transcript.is_generated` 属性，区分自动生成与人工字幕。
+
+### 反模式 5：忽略时间戳精度
+
+**错误做法**：直接使用浮点秒数作为 SRT 时间轴。
+
+**正确做法**：将秒数格式化为 `HH:MM:SS,mmm` 格式，确保时间轴精度。
 
 ---
 
-## 七、渐进式披露路径
+## 七、渐进式披露
 
-### 7.1 速查卡（30 秒上手）
+### 速查卡（30 秒上手）
 
 ```
-1. 安装：pip install youtube-transcript-api
-2. 提取：api.fetch("视频ID", languages=['en'])
-3. 保存：遍历 transcript 写入文件
-4. 批量：循环调用 + 汇总 CSV
+1. pip install youtube-transcript-api
+2. 获取视频 ID（链接中 v= 后面的部分）
+3. 调用 fetch(video_id, languages=['en'])
+4. 遍历结果写入文件
 ```
 
-### 7.2 新手路径（首次使用）
+### 新手路径（首次使用）
 
-1. 阅读「能力边界」了解适用范围
+1. 阅读「能力边界」确认需求在支持范围内
 2. 按「标准操作流程」步骤 1-3 完成单条提取
-3. 使用「错误码体系」排查常见问题
-4. 参考「FAQ 反模式」避免踩坑
+3. 遇到问题对照「错误码体系」排查
+4. 参考「FAQ 反模式」避免常见错误
 
-### 7.3 进阶路径（深度使用）
+### 进阶路径（熟练使用）
 
 1. 掌握「批量处理」与「输出规范」自定义格式
 2. 结合「置信度门控」设计自动化质检流程
@@ -380,45 +231,55 @@ transcript = api.fetch(video_id, languages=['en', 'zh-Hans'])
 
 ---
 
-## 八、参数配置参考
+## 八、批量处理示例
 
-### 8.1 核心参数表
+```python
+import csv
+from youtube_transcript_api import YouTubeTranscriptApi
 
-| 参数名 | 类型 | 默认值 | 可选值 | 说明 |
-|--------|------|--------|--------|------|
-| `video_id` | str | 必填 | - | YouTube 视频 ID |
-| `languages` | list | ['en'] | ['en','zh-Hans','ja','ko','es','fr','de'] | 字幕语言优先级 |
-| `format` | str | 'txt' | 'txt','srt','vtt','json' | 输出格式 |
-| `output_dir` | str | './output' | 任意路径 | 输出目录 |
-| `batch_size` | int | 50 | 1-200 | 批量处理数量 |
-| `retry_count` | int | 3 | 0-10 | 失败重试次数 |
-| `timeout` | int | 10 | 5-60 | 请求超时（秒） |
+video_ids = ["id1", "id2", "id3"]
+results = []
 
-### 8.2 边界值说明
+for vid in video_ids:
+    try:
+        transcript = YouTubeTranscriptApi.fetch(vid, languages=['en'])
+        text = "\n".join([entry['text'] for entry in transcript])
+        results.append([vid, "en", len(transcript), "success"])
+        
+        with open(f"{vid}_transcript.txt", "w", encoding="utf-8") as f:
+            f.write(text)
+    except Exception as e:
+        results.append([vid, "N/A", 0, f"failed: {str(e)}"])
 
-- **视频时长**：支持 1 分钟至 12 小时的视频（超过 4 小时建议分段处理）
-- **字幕条数**：单视频最多 5000 条字幕段（超出自动截断并警告）
-- **批量上限**：单次最多 200 个视频（超出需分批，间隔 ≥ 60 秒）
-- **文件大小**：单文件最大 50MB（超出自动分卷）
+with open("batch_results.csv", "w", newline="", encoding="utf-8") as f:
+    writer = csv.writer(f)
+    writer.writerow(["video_id", "language", "length", "status"])
+    writer.writerows(results)
+```
 
 ---
 
 ## 九、用户协议
 
-使用本 Skill 即表示您同意以下条款：
+<!-- user-agreement-injected -->
 
 1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于因字幕内容准确性、版权合规性、数据使用方式等引发的任何法律纠纷或损失。
+
 2. **禁止反向工程**：不得对本 Skill 的代码、逻辑、结构进行反向工程、反编译、破解或试图提取源代码。
-3. **合法用途**：本 Skill 仅限用于合法目的。使用者应遵守 YouTube 服务条款及当地法律法规，不得用于侵犯他人知识产权、隐私权或其他合法权益的行为。
-4. **无担保声明**：本 Skill 按
 
+3. **合规使用**：使用者应遵守 YouTube 平台服务条款及相关版权法律法规，仅将本 Skill 用于合法目的。
 
-## 许可证（License）
+4. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保。作者不对字幕提取的完整性、准确性或适用性作任何承诺。
 
-```text
-MIT License
+---
 
-Copyright (c) 2026 SkillForge Lab
+## 十、许可证（License）
+
+<!-- professional-license-embedded -->
+
+### MIT License
+
+Copyright (c) 2024 林默
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -429,5 +290,15 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-```
-<!-- professional-license-embedded -->
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+*文档版本：1.0.0 | 最后更新：2024年*
