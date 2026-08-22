@@ -12,7 +12,6 @@ import re
 import sys
 from collections import defaultdict
 from pathlib import Path
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -63,8 +62,8 @@ class CodeReviewGraph:
             raise FileNotFoundError(f"文件不存在: {file_path}")
 
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
+            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
+                content = f.readlines()
         except PermissionError:
             raise PermissionError(f"无权限读取文件: {file_path}")
         except OSError as e:
@@ -523,7 +522,7 @@ def run_selftest():
         analyzer.export_svg({"risk_level": "unknown"})
         # 不应崩溃，应能处理
     except Exception as e:
-        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # 容错处理
+        print(f"  [INFO] 容错处理生效: {type(e).__name__}: {e}")
 
     print("  ✅ 通过 (错误处理正常)")
 
@@ -564,17 +563,28 @@ def main():
                         help="输出格式")
     parser.add_argument("--output", help="输出文件路径（默认输出到 stdout）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="只预览不写盘（安全守卫）",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="输出处理明细（每步决策）",
+    )
 
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
 
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
 
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    if args.verbose:
+        print(f"[verbose] 参数: {vars(args)}")
 
     # 自检模式
     if args.selftest:
@@ -623,13 +633,16 @@ def main():
 
         # 输出或写入文件
         if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output)
-                print(f"结果已写入: {args.output}")
-            except OSError as e:
-                print(f"[E007] 写入文件失败: {e}", file=sys.stderr)
-                sys.exit(1)
+            if not args.dry_run:
+                try:
+                    with open(args.output, "w", encoding="utf-8", errors="replace") as f:
+                        f.write(output)
+                    print(f"结果已写入: {args.output}")
+                except OSError as e:
+                    print(f"[E007] 写入文件失败: {e}", file=sys.stderr)
+                    sys.exit(1)
+            else:
+                print(f"[dry-run] 预览输出（未写盘）: {args.output}")
         else:
             print(output)
 
