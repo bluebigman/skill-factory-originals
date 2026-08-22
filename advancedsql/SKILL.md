@@ -1,27 +1,20 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: advancedsql
 name: advancedsql
-displayName: 数据查询 SQL 方言适配 结果集生成
+displayName: 数据查询 方言适配 语句优化
 description: 将自然语言或数据文件转换为结构化 SQL 查询与结果集，支持多方言适配与优化建议。
-version: 2.0.1
-rules_version: cpr-20260819-n551
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/advancedsql
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: QueryForge Studio
+author: LingQuery Studio
 agent_created: true
-trigger_words: ["advancedsql", "SQL生成", "自然语言转SQL", "方言适配", "查询优化", "数据文件转SQL"]
+trigger_words: ["advancedsql", "SQL生成", "自然语言转SQL", "方言转换", "查询优化", "SQL翻译", "NL2SQL"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
@@ -30,29 +23,32 @@ trigger_words: ["advancedsql", "SQL生成", "自然语言转SQL", "方言适配"
 
 ## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做与不能做
+### 1.1 能做什么
 
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|--------|----------|
-| 输入处理 | 自然语言描述、CSV/JSON/Excel 文件、已有 SQL 片段 | 二进制数据文件、加密数据库文件 |
-| SQL 生成 | SELECT/JOIN/GROUP BY/窗口函数/子查询/CTE | 数据库管理命令（GRANT/REVOKE）、DDL 自动执行 |
-| 方言适配 | MySQL、PostgreSQL、SQLite、SQL Server、Oracle、BigQuery | 非关系型查询语言（MongoDB Aggregation、Elasticsearch DSL） |
-| 结果输出 | 结构化结果集（JSON/CSV 格式）、执行计划解读 | 直接连接数据库执行（需用户自行执行） |
-| 优化建议 | 索引建议、查询重写、执行计划分析 | 自动索引创建、自动性能调优 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 自然语言转 SQL | 将中文/英文描述转换为可执行查询语句 | "查过去7天订单量" → `SELECT COUNT(*) FROM orders WHERE created_at >= NOW() - INTERVAL 7 DAY` |
+| 数据文件转 SQL | 从 CSV/JSON/Excel 结构推断建表语句与查询 | 读取 CSV 表头与样例行，生成 `CREATE TABLE` 与 `INSERT` 模板 |
+| 多方言适配 | 在 MySQL / PostgreSQL / SQL Server / SQLite / Oracle / BigQuery 之间互转 | 将 `LIMIT 10` 转为 SQL Server 的 `SELECT TOP 10` |
+| 查询优化建议 | 分析执行计划风险，给出索引、改写、分页等建议 | 检测 `SELECT *` 与全表扫描风险，建议覆盖索引 |
+| 结果集格式化 | 将查询结果按 Markdown 表格 / JSON / CSV 输出 | 输出 `| id | name |` 格式表格 |
 
-### 1.2 适用对象
+### 1.2 不能做什么（明确边界）
 
-- **数据分析师**：快速将业务问题转化为可执行 SQL
-- **后端开发者**：需要多数据库方言适配的查询逻辑
-- **数据产品经理**：验证数据需求的可实现性
-- **运维工程师**：排查慢查询并获取优化方向
+| 不可用场景 | 原因 | 替代方案 |
+|-----------|------|---------|
+| 连接真实数据库执行查询 | 本技能不持有数据库凭据，不发起网络连接 | 使用 `sqlite3` 等本地工具自行执行生成的 SQL |
+| 处理超过 50MB 的数据文件 | 上下文窗口有限，超出部分无法完整解析 | 先对数据做抽样或分片，再逐段提交 |
+| 生成 DDL 以外的存储过程/触发器 | 复杂度超出安全范围，易产生误操作 | 仅生成 `CREATE TABLE` / `CREATE INDEX` 等基础 DDL |
+| 保证 SQL 在特定版本 100% 兼容 | 各数据库版本间存在细微差异 | 生成后标注方言版本，建议在目标库执行 `EXPLAIN` 验证 |
+| 处理含敏感信息的文件 | 隐私与合规风险 | 请自行脱敏后再提交 |
 
-### 1.3 输入限制
+### 1.3 适用对象
 
-- 自然语言描述不超过 500 字
-- 数据文件大小不超过 10MB
-- 单次生成的 SQL 语句不超过 200 行
-- 方言适配最多同时指定 3 种目标方言
+- 数据分析师：快速将业务问题转为可执行查询
+- 后端开发：跨数据库迁移时做方言转换
+- 数据产品经理：验证数据需求可行性
+- 运维工程师：从慢查询日志反推优化建议
 
 ---
 
@@ -60,25 +56,18 @@ trigger_words: ["advancedsql", "SQL生成", "自然语言转SQL", "方言适配"
 
 ### 2.1 触发词
 
-直接使用 `advancedsql` 或以下同义场景词触发：
-
-| 场景词 | 示例用法 |
-|--------|----------|
-| SQL生成 | "帮我生成一个查询最近30天订单的SQL" |
-| 自然语言转SQL | "把'统计各部门平均薪资'转成SQL" |
-| 方言适配 | "把这个查询改成PostgreSQL语法" |
-| 查询优化 | "这个SQL太慢了，帮我优化一下" |
-| 数据文件转SQL | "根据这个CSV文件生成建表语句和查询" |
+- 主触发词：`advancedsql`
+- 同义触发词：`SQL生成`、`自然语言转SQL`、`方言转换`、`查询优化`、`SQL翻译`、`NL2SQL`
 
 ### 2.2 场景映射表
 
-| 用户说（大白话） | 实际需求 | 触发动作 |
-|-----------------|---------|---------|
-| "我有一堆数据想查一下" | 从数据文件提取信息 | 解析文件 → 生成建表语句 → 生成查询 |
-| "这个查询在MySQL能跑，Oracle不行" | 方言转换 | 识别源方言 → 转换目标方言 → 输出兼容代码 |
-| "报表要按周汇总，怎么写" | 时间维度聚合 | 生成 GROUP BY 周粒度的查询 |
-| "两个表关联后数据变多了" | JOIN 逻辑问题 | 检查关联条件 → 提供去重方案 |
-| "这个SQL跑了10分钟" | 性能问题 | 分析执行计划 → 给出优化建议 |
+| 用户说（大白话） | 触发动作 | 输出物 |
+|----------------|---------|--------|
+| "帮我写个 SQL，查一下上个月每个部门的平均薪资" | 自然语言转 SQL | 标准 SQL + 执行说明 |
+| "这个 MySQL 的查询怎么改成 PostgreSQL 的？" | 方言转换 | 目标方言 SQL + 差异对照表 |
+| "我有个 CSV 文件，想导入数据库" | 数据文件转 DDL | CREATE TABLE + 导入建议 |
+| "这条查询太慢了，怎么优化？" | 查询优化 | 问题诊断 + 改写方案 + 索引建议 |
+| "把这段 SQL 翻译成 BigQuery 语法" | 方言转换 | BigQuery 方言 SQL |
 
 ---
 
@@ -86,88 +75,103 @@ trigger_words: ["advancedsql", "SQL生成", "自然语言转SQL", "方言适配"
 
 ### 3.1 前置条件
 
-- 用户需明确提供：数据源类型（文件/描述/已有SQL）
-- 若为文件输入，需确认文件格式（CSV/JSON/Excel）及编码
-- 若需方言适配，需指定源方言和目标方言
-- 若需优化建议，需提供执行计划或表结构信息
+| 条件 | 要求 | 缺失处理 |
+|------|------|---------|
+| 输入内容 | 自然语言描述 / SQL 语句 / 数据文件路径 | 提示用户补充输入 |
+| 目标方言 | 明确指定（默认 MySQL 8.0） | 使用默认值并提示 |
+| 表结构信息 | 若涉及 JOIN，需提供表关系描述 | 输出 [需核实:表关系] 占位符 |
+| 数据文件 | 需提供表头与至少 3 行样例数据 | 无法推断字段类型时输出占位符 |
 
-### 3.2 执行步骤
+### 3.2 执行步骤（分步编号）
 
-**步骤 1：需求解析（输入阶段）**
+**步骤 1：意图识别**
+- 解析输入内容，判断属于以下四类之一：
+  - A. 自然语言 → 生成 SQL
+  - B. SQL → 方言转换
+  - C. 数据文件 → 生成 DDL + 查询模板
+  - D. SQL → 优化建议
 
-| 输入类型 | 解析动作 | 输出中间产物 |
-|---------|---------|-------------|
-| 自然语言 | 提取实体（表名、字段、条件、聚合方式） | 结构化查询意图 |
-| 数据文件 | 识别列类型、推断主键、检测数据分布 | 表结构定义草案 |
-| 已有SQL | 语法解析、方言识别、逻辑拆解 | AST 抽象语法树 |
+**步骤 2：信息补全**
+- 检查缺失信息，按优先级提问：
+  1. 目标数据库类型与版本
+  2. 涉及的表名与关键字段
+  3. 时间范围/过滤条件等业务约束
+- 若用户未提供且无法推断，使用 `[需核实:字段名]` 占位
 
-**步骤 2：SQL 生成（转换阶段）**
+**步骤 3：生成/转换**
+- 按目标方言语法规则生成 SQL
+- 遵循以下默认规范：
+  - 关键字大写（`SELECT`、`FROM`、`WHERE`）
+  - 表名/字段名使用反引号（MySQL）或双引号（标准 SQL）
+  - 字符串使用单引号
+  - 分页统一使用 `LIMIT`（非 SQL Server 方言）
 
-1. 根据查询意图构建逻辑查询计划
-2. 映射到目标方言的语法规则
-3. 生成带注释的 SQL 代码
-4. 标注潜在风险点（如全表扫描、隐式类型转换）
+**步骤 4：自检与标注**
+- 检查以下常见问题：
+  - [ ] 是否存在 `SELECT *`（提示可优化）
+  - [ ] JOIN 条件是否完整
+  - [ ] 聚合函数是否缺少 `GROUP BY`
+  - [ ] 日期函数是否与方言匹配
+- 在输出中标注风险点
 
-**步骤 3：结果集构造（输出阶段）**
+**步骤 5：输出规范**
 
-- 若输入为数据文件：模拟执行并返回前 100 行结果
-- 若输入为自然语言：返回 SQL 及预期结果结构说明
-- 若输入为已有 SQL：返回优化后的 SQL 及对比说明
+输出格式固定为：
 
-**步骤 4：优化建议（增值阶段）**
+```markdown
+### 生成结果
+```sql
+-- 目标方言: MySQL 8.0
+-- 生成时间: 2025-01-15
+SELECT ...
+```
 
-- 索引建议：基于 WHERE/JOIN 条件推荐复合索引
-- 查询重写：将子查询改为 JOIN、避免 SELECT *
-- 执行策略：建议分区、分页、缓存等策略
+### 执行说明
+- 表名: `orders` — 订单主表
+- 关键字段: `created_at` — 下单时间（DATETIME）
+- 风险提示: 无
 
-### 3.3 输出规范
-
-```json
-{
-  "status": "success",
-  "sql": "SELECT ...",
-  "dialect": "mysql",
-  "result_preview": [{"column": "value"}],
-  "optimization_tips": ["建议在 user_id 上建立索引"],
-  "risk_warnings": ["该查询涉及全表扫描，数据量超过100万行时建议添加WHERE条件"]
-}
+### 优化建议（如有）
+1. 建议在 `created_at` 上建立索引
+2. 可考虑将 `OR` 改写为 `UNION ALL` 以提升性能
 ```
 
 ---
 
 ## 四、置信度门控
 
-### 4.1 信息不足处理
+### 4.1 占位符规则
 
-当输入信息不足以生成准确 SQL 时，使用 `[需核实:字段]` 占位，不编造：
+当信息不足时，使用以下占位符，**绝不编造**：
 
-| 场景 | 占位示例 | 用户需补充 |
-|------|---------|-----------|
-| 表名不明确 | `SELECT * FROM [需核实:表名]` | 实际表名 |
-| 字段名模糊 | `WHERE [需核实:日期字段] > '2024-01-01'` | 具体字段名 |
-| 关联条件缺失 | `JOIN orders ON [需核实:关联字段]` | 两表关联键 |
-| 聚合粒度不明 | `GROUP BY [需核实:分组维度]` | 按什么维度分组 |
+| 占位符 | 含义 | 示例 |
+|--------|------|------|
+| `[需核实:表名]` | 无法确定表名 | `SELECT * FROM [需核实:表名]` |
+| `[需核实:字段类型]` | 无法从样例推断字段类型 | `CREATE TABLE t (id [需核实:字段类型])` |
+| `[需核实:表关系]` | JOIN 条件不明确 | `FROM a JOIN b ON [需核实:表关系]` |
+| `[需核实:时间范围]` | 时间过滤条件缺失 | `WHERE created_at > [需核实:时间范围]` |
 
 ### 4.2 置信度分级
 
-| 置信度 | 判定标准 | 输出策略 |
-|--------|---------|---------|
-| 高（≥90%） | 所有表名、字段、条件明确 | 直接输出完整 SQL |
-| 中（70-89%） | 部分字段需推断 | 输出 SQL + 标注推断字段 |
-| 低（<70%） | 关键信息缺失 | 输出占位符 + 引导用户补充 |
+| 级别 | 判定标准 | 输出行为 |
+|------|---------|---------|
+| 高（≥90%） | 输入完整、无歧义 | 直接输出最终 SQL |
+| 中（70%-89%） | 部分信息缺失但可推断 | 输出 SQL + 标注推断依据 |
+| 低（<70%） | 关键信息缺失 | 输出占位符 + 列出待确认问题清单 |
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+| 错误码 | 错误场景 | 提示话术 | 修正步骤 |
 |--------|---------|---------|---------|
-| ASQL-001 | 无法识别的文件格式 | "该文件格式暂不支持，请提供 CSV、JSON 或 Excel 文件" | 转换文件格式后重试 |
-| ASQL-002 | 自然语言描述过于模糊 | "描述中缺少关键查询条件，请补充表名、筛选条件或聚合方式" | 按模板重新描述：查询[表]中[字段]，按[条件]筛选，按[维度]聚合 |
-| ASQL-003 | 方言转换失败 | "目标方言不支持该语法特性，已保留源语法并标注" | 检查目标方言版本，或简化查询逻辑 |
-| ASQL-004 | 数据文件列类型推断失败 | "无法自动识别[列名]的数据类型，请手动指定" | 提供列类型映射，如 `date_col: DATE` |
-| ASQL-005 | SQL 语法错误 | "生成的 SQL 存在语法问题，已标记错误位置" | 根据错误位置修正表名或字段名 |
-| ASQL-006 | 优化建议生成失败 | "无法生成优化建议，请提供执行计划或表结构信息" | 执行 `EXPLAIN` 并粘贴结果 |
+| E001 | 输入为空 | "请提供需要转换的自然语言描述或 SQL 语句" | 重新输入有效内容 |
+| E002 | 方言不支持 | "当前支持 MySQL/PostgreSQL/SQL Server/SQLite/Oracle/BigQuery，您输入的方言不在支持列表" | 更换为支持列表内的方言 |
+| E003 | 数据文件格式无法解析 | "无法识别文件格式，请提供 CSV/JSON/Excel 格式，且包含表头行" | 检查文件格式后重试 |
+| E004 | 字段名冲突 | "检测到字段名 'id' 在 JOIN 中不明确，请指定表别名" | 添加表别名前缀，如 `o.id` |
+| E005 | 聚合函数缺少 GROUP BY | "使用了 COUNT(*) 但未指定 GROUP BY，可能导致结果不符合预期" | 补充 GROUP BY 子句 |
+| E006 | 日期函数方言不匹配 | "DATE_FORMAT 是 MySQL 专用函数，PostgreSQL 应使用 TO_CHAR" | 按目标方言替换日期函数 |
+| E007 | 上下文超限 | "输入内容超过处理上限（约 50MB 数据文件或 8000 token 文本）" | 拆分输入，分段处理 |
 
 ---
 
@@ -175,37 +179,22 @@ trigger_words: ["advancedsql", "SQL生成", "自然语言转SQL", "方言适配"
 
 ### 6.1 常见坑与反模式对照
 
-| 坑 | 反模式（错误做法） | 正确做法 |
-|----|-------------------|---------|
-| 忽略方言差异 | 直接复制 MySQL 的 `LIMIT` 到 SQL Server | 使用 `TOP` 或 `OFFSET FETCH` 适配语法 |
-| 过度依赖 AI 生成 | 不检查生成的 SQL 直接执行 | 先审查 WHERE 条件和 JOIN 逻辑 |
-| 忽略数据量级 | 对亿级表不加 WHERE 条件 | 强制添加时间范围或分页限制 |
-| 混淆字段类型 | 对字符串字段使用数值比较 | 确认字段类型后使用正确的比较操作符 |
-| 忽视 NULL 处理 | 使用 `= NULL` 而非 `IS NULL` | 明确 NULL 语义，使用 `IS NULL` 或 `COALESCE` |
+| 反模式（错误做法） | 正确做法 | 原因 |
+|-------------------|---------|------|
+| 直接执行生成的 SQL 而不检查 | 先在测试库执行 `EXPLAIN` 验证 | 方言差异可能导致语法错误 |
+| 忽略占位符直接运行 | 将所有 `[需核实:xxx]` 替换为实际值后再执行 | 占位符不是合法 SQL |
+| 将 CSV 全量导入而不做类型检查 | 先检查每列数据类型，再生成 DDL | 隐式类型转换可能导致数据丢失 |
+| 使用 `SELECT *` 且不限制行数 | 明确列出所需字段，并添加 `LIMIT` | 减少网络传输与内存占用 |
+| 在 WHERE 中对索引列使用函数 | 改写为范围查询或计算后比较 | 函数会导致索引失效 |
 
-### 6.2 反模式示例
+### 6.2 进阶反模式
 
-**反模式 1：无脑使用 SELECT ***
-
-```sql
--- ❌ 错误
-SELECT * FROM orders WHERE customer_id = 123;
-
--- ✅ 正确
-SELECT order_id, order_date, total_amount 
-FROM orders 
-WHERE customer_id = 123;
-```
-
-**反模式 2：忽略时区问题**
-
-```sql
--- ❌ 错误（直接比较日期字符串）
-WHERE create_time >= '2024-01-01'
-
--- ✅ 正确（显式转换时区）
-WHERE create_time >= TIMESTAMP '2024-01-01 00:00:00' AT TIME ZONE 'Asia/Shanghai'
-```
+| 反模式 | 正确做法 | 原因 |
+|--------|---------|------|
+| 使用 `OR` 连接多个条件 | 改写为 `UNION ALL` 或 `IN` | OR 可能导致全表扫描 |
+| 在循环中逐条执行 INSERT | 使用批量 `INSERT` 或 `LOAD DATA` | 减少事务开销 |
+| 忽略时区差异 | 统一使用 UTC 存储，展示时转换 | 避免夏令时等时区问题 |
+| 使用 `DISTINCT` 去重 | 先确认是否真的需要去重，或改用 `GROUP BY` | DISTINCT 可能掩盖数据质量问题 |
 
 ---
 
@@ -214,109 +203,70 @@ WHERE create_time >= TIMESTAMP '2024-01-01 00:00:00' AT TIME ZONE 'Asia/Shanghai
 ### 7.1 速查卡（30 秒上手）
 
 ```
-输入 → 输出 流程：
-1. 说清需求：表名 + 字段 + 条件 + 聚合
-2. 指定方言：MySQL / PG / SQLite / SQL Server / Oracle / BigQuery
-3. 获取结果：SQL + 预览 + 优化建议
+输入 → 输出
+"查用户表前10条" → SELECT * FROM users LIMIT 10;
+"MySQL转PostgreSQL" → 方言转换 + 差异说明
+"CSV转建表语句" → CREATE TABLE + 导入建议
+"优化这条SQL" → 诊断 + 改写 + 索引建议
 ```
 
 ### 7.2 新手路径（首次使用）
 
-1. 阅读「能力边界」了解适用范围
-2. 使用「触发方式」中的示例模板描述需求
-3. 检查输出中的 `risk_warnings` 字段
-4. 在测试环境执行生成的 SQL
+1. 阅读「能力边界」确认本技能是否满足需求
+2. 使用「触发方式」中的场景映射表找到对应场景
+3. 按「标准流程」步骤 1-3 提交输入
+4. 检查输出中的占位符，替换为实际值
+5. 在测试环境执行验证
 
 ### 7.3 进阶路径（熟练用户）
 
-1. 利用「方言适配」进行跨数据库迁移
-2. 结合「优化建议」重构慢查询
-3. 使用「置信度门控」处理复杂业务场景
-4. 参考「错误码体系」快速定位问题
-
-### 7.4 专家路径（深度定制）
-
-- 自定义方言模板：在配置文件中添加新的方言规则
-- 扩展文件解析器：支持 Parquet、Avro 等格式
-- 集成执行计划分析：对接 EXPLAIN 输出进行深度优化
+1. 深入理解「置信度门控」的分级逻辑，主动补充信息提升输出质量
+2. 参考「错误码体系」快速定位问题
+3. 阅读「FAQ 反模式」避免常见性能陷阱
+4. 结合「优化建议」对复杂查询做索引与改写调优
+5. 利用方言转换能力做跨数据库迁移的预研
 
 ---
 
-## 八、参数配置参考
+## 八、参数速查表
 
-### 8.1 方言支持矩阵
-
-| 方言 | 分页语法 | 字符串拼接 | 日期函数 | 窗口函数 |
-|------|---------|-----------|---------|---------|
-| MySQL | LIMIT/OFFSET | CONCAT() | DATE_FORMAT() | 8.0+ 支持 |
-| PostgreSQL | LIMIT/OFFSET | \|\| | TO_CHAR() | 完整支持 |
-| SQLite | LIMIT/OFFSET | \|\| | DATE() | 3.25+ 支持 |
-| SQL Server | OFFSET/FETCH | + | FORMAT() | 完整支持 |
-| Oracle | ROWNUM/OFFSET | \|\| | TO_CHAR() | 完整支持 |
-| BigQuery | LIMIT/OFFSET | CONCAT() | FORMAT_DATE() | 完整支持 |
-
-### 8.2 文件解析规则
-
-| 文件类型 | 支持扩展名 | 编码要求 | 大小限制 |
-|---------|-----------|---------|---------|
-| CSV | .csv | UTF-8/GBK | 10MB |
-| JSON | .json | UTF-8 | 10MB |
-| Excel | .xlsx/.xls | - | 10MB |
+| 参数 | 可选值 | 默认值 | 说明 |
+|------|--------|--------|------|
+| `dialect` | `mysql` / `postgresql` / `sqlserver` / `sqlite` / `oracle` / `bigquery` | `mysql` | 目标 SQL 方言 |
+| `format` | `markdown` / `json` / `csv` | `markdown` | 结果集输出格式 |
+| `include_optimization` | `true` / `false` | `true` | 是否附带优化建议 |
+| `max_rows` | 1-10000 | `100` | 查询结果最大行数限制 |
+| `case_style` | `upper` / `lower` / `camel` | `upper` | SQL 关键字大小写风格 |
 
 ---
 
 ## 九、用户协议
 
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 生成的 SQL 语句、优化建议及方言转换结果仅供参考，使用者应在实际环境中充分测试后再投入使用。
+2. **禁止反向工程**：不得对本 Skill 的提示词、内部逻辑、生成机制进行反向工程、破解、提取或二次分发。
+3. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性及不侵权保证。
+4. **合规使用**：使用者应确保输入数据不包含违反法律法规的内容，且使用场景符合所在司法管辖区的规定。
+
 <!-- user-agreement-injected -->
-
-**使用须知：**
-
-1. 本 Skill 生成的 SQL 代码仅供学习和参考，使用者需自行验证其在目标环境中的正确性和安全性。
-2. 使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于数据丢失、系统故障、业务损失等。
-3. 禁止对本 Skill 进行反向工程、反编译、破解或试图提取底层算法。
-4. 本 Skill 不提供任何形式的明示或暗示担保，包括但不限于适销性、特定用途适用性和非侵权保证。
-5. 使用者应遵守相关法律法规，不得将本 Skill 用于非法目的。
 
 ---
 
 ## 十、许可证（License）
 
+**MIT License**
+
+版权所有 (c) 2025 原创作者（自持版权）
+
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士使用、复制、修改、合并、出版、分发、再许可及/或销售软件副本的权利，但须满足以下条件：
+
+上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
+
+本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性及不侵权保证。在任何情况下，作者或版权持有人均不对因使用本软件而产生的任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他诉讼中。
+
+---
+
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
+
 <!-- professional-license-embedded -->
-
-### MIT License
-
-Copyright (c) 2024 QueryForge Studio
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
----
-
-## 附录：版本信息
-
-- **版本号**：1.0.0
-- **更新日期**：2024-01-15
-- **变更记录**：
-  - 初始版本发布
-  - 支持 6 种主流 SQL 方言
-  - 内置 6 个错误码处理机制
-  - 提供 3 层渐进式学习路径
-
----
-
-*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档并验证输出结果。*
