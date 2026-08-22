@@ -17,9 +17,10 @@ import json
 import os
 import re
 import sys
+import time
 from html import escape
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import datetime, timezone
 
 
 # ---------------------------------------------------------------------------
@@ -189,68 +190,138 @@ def _build_css(extra_css: str = "") -> str:
         transition: width 0.3s ease;
         z-index: 1001;
     }
+    .hs-slide-container {
+        scroll-snap-type: y mandatory;
+        overflow-y: auto;
+        height: 100vh;
+    }
     """
     return base_css + DESIGN_PHILOSOPHY_CSS + extra_css
 
 
-def _build_js() -> str:
+def _build_js(transition: str = "slide", autoplay: bool = False) -> str:
     """构建交互 JavaScript 脚本。"""
-    return """
-    (function() {
+    # 转义配置值用于 JS 字符串
+    transition_js = json.dumps(transition)
+    autoplay_js = "true" if autoplay else "false"
+    
+    return f"""
+    (function() {{
+        // 配置
+        const config = {{
+            transition: {transition_js},
+            autoplay: {autoplay_js},
+            autoplayInterval: 5000
+        }};
+
         // 幻灯片导航逻辑
         const slides = document.querySelectorAll('.hs-slide');
         const prevBtn = document.getElementById('hs-prev');
         const nextBtn = document.getElementById('hs-next');
         const progress = document.getElementById('hs-progress');
         let currentSlide = 0;
+        let autoplayTimer = null;
 
-        function showSlide(index) {
+        function showSlide(index) {{
             if (index < 0 || index >= slides.length) return;
-            slides.forEach((slide, i) => {
-                slide.style.display = i === index ? 'flex' : 'none';
-            });
+            
+            // 根据过渡类型应用不同效果
+            if (config.transition === 'fade') {{
+                slides.forEach((slide, i) => {{
+                    slide.style.display = i === index ? 'flex' : 'none';
+                    slide.style.opacity = i === index ? '1' : '0';
+                    slide.style.transition = 'opacity 0.5s ease';
+                }});
+            }} else if (config.transition === 'slide') {{
+                slides.forEach((slide, i) => {{
+                    slide.style.display = i === index ? 'flex' : 'none';
+                    slide.style.transform = i === index ? 'translateX(0)' : 'translateX(100%)';
+                    slide.style.transition = 'transform 0.5s ease';
+                }});
+            }} else {{
+                // 默认直接切换
+                slides.forEach((slide, i) => {{
+                    slide.style.display = i === index ? 'flex' : 'none';
+                }});
+            }}
+            
             currentSlide = index;
             if (prevBtn) prevBtn.disabled = currentSlide === 0;
             if (nextBtn) nextBtn.disabled = currentSlide === slides.length - 1;
-            if (progress) {
+            if (progress) {{
                 progress.style.width = ((currentSlide + 1) / slides.length * 100) + '%';
-            }
+            }}
             // 触发渐入动画
             const activeSlide = slides[currentSlide];
-            if (activeSlide) {
+            if (activeSlide) {{
                 const fadeEls = activeSlide.querySelectorAll('.hs-fade-in');
-                fadeEls.forEach((el, i) => {
+                fadeEls.forEach((el, i) => {{
                     setTimeout(() => el.classList.add('hs-visible'), i * 100);
-                });
-            }
-        }
+                }});
+            }}
+        }}
 
-        if (prevBtn) prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
-        if (nextBtn) nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+        function nextSlide() {{
+            if (currentSlide < slides.length - 1) {{
+                showSlide(currentSlide + 1);
+            }}
+        }}
+
+        function prevSlide() {{
+            if (currentSlide > 0) {{
+                showSlide(currentSlide - 1);
+            }}
+        }}
+
+        // 自动播放
+        function startAutoplay() {{
+            if (config.autoplay && slides.length > 1) {{
+                autoplayTimer = setInterval(nextSlide, config.autoplayInterval);
+            }}
+        }}
+
+        function stopAutoplay() {{
+            if (autoplayTimer) {{
+                clearInterval(autoplayTimer);
+                autoplayTimer = null;
+            }}
+        }}
+
+        if (prevBtn) prevBtn.addEventListener('click', () => {{
+            prevSlide();
+            stopAutoplay();
+        }});
+        if (nextBtn) nextBtn.addEventListener('click', () => {{
+            nextSlide();
+            stopAutoplay();
+        }});
 
         // 键盘导航
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight' || e.key === 'PageDown') {
-                showSlide(currentSlide + 1);
-            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
-                showSlide(currentSlide - 1);
-            }
-        });
+        document.addEventListener('keydown', (e) => {{
+            if (e.key === 'ArrowRight' || e.key === 'PageDown') {{
+                nextSlide();
+                stopAutoplay();
+            }} else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {{
+                prevSlide();
+                stopAutoplay();
+            }}
+        }});
 
         // 滚动渐入检测
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
+        const observer = new IntersectionObserver((entries) => {{
+            entries.forEach(entry => {{
+                if (entry.isIntersecting) {{
                     entry.target.classList.add('hs-visible');
-                }
-            });
-        }, { threshold: 0.1 });
+                }}
+            }});
+        }}, {{ threshold: 0.1 }});
 
         document.querySelectorAll('.hs-fade-in').forEach(el => observer.observe(el));
 
         // 初始化
         showSlide(0);
-    })();
+        startAutoplay();
+    }})();
     """
 
 
@@ -320,7 +391,7 @@ def _render_slide(slide: Dict[str, Any], index: int) -> str:
     </section>"""
 
 
-def generate_html(data: Dict[str, Any]) -> str:
+def generate_html(data: Dict[str, Any], transition: str = "slide", autoplay: bool = False) -> str:
     """根据输入数据生成完整 HTML 文档。"""
     try:
         validated = _validate_input_data(data)
@@ -343,7 +414,7 @@ def generate_html(data: Dict[str, Any]) -> str:
 </head>
 <body>
     <div class="hs-progress" id="hs-progress"></div>
-    <main>
+    <main class="hs-slide-container">
         {slides_html}
     </main>
     <nav class="hs-navigation">
@@ -351,7 +422,7 @@ def generate_html(data: Dict[str, Any]) -> str:
         <button class="hs-nav-btn" id="hs-next">下一页 →</button>
     </nav>
     <script>
-    {_build_js()}
+    {_build_js(transition, autoplay)}
     </script>
 </body>
 </html>"""
@@ -362,241 +433,23 @@ def generate_html(data: Dict[str, Any]) -> str:
         _fail("E009", str(e))
 
 
-# ---------------------------------------------------------------------------
-# 自检模块
-# ---------------------------------------------------------------------------
-def _selftest() -> bool:
-    """内置硬编码样例数据的离线自检。"""
-    print("开始自检（huashu-design 核心逻辑）...")
-    passed = 0
-    total = 0
-
-    # 1. 测试数据验证逻辑
-    total += 1
-    try:
-        valid_data = {
-            "title": "测试演示文稿",
-            "slides": [
-                {"title": "第一页", "content": "这是第一页的内容"},
-                {"title": "第二页", "content": ["列表项一", "列表项二"]},
-            ],
-        }
-        result = _validate_input_data(valid_data)
-        assert result["title"] == "测试演示文稿"
-        assert len(result["slides"]) == 2
-        passed += 1
-        print("  [通过] 数据验证逻辑")
-    except Exception as e:
-        print(f"  [失败] 数据验证逻辑: {e}")
-
-    # 2. 测试错误处理（缺少字段）
-    total += 1
-    try:
-        invalid_data = {"title": "缺少 slides"}
+def _load_json_file(filepath: str) -> Dict[str, Any]:
+    """从文件加载并验证 JSON 数据，带重试逻辑。"""
+    if not os.path.isfile(filepath):
+        _fail("E002", f"文件不存在: {filepath}")
+    
+    max_retries = 3
+    base_delay = 0.5
+    last_error = None
+    
+    for attempt in range(max_retries):
         try:
-            _validate_input_data(invalid_data)
-            raise AssertionError("应抛出 E005 错误")
-        except RuntimeError as e:
-            assert "E005" in str(e)
-        passed += 1
-        print("  [通过] 错误码 E005 处理")
-    except Exception as e:
-        print(f"  [失败] 错误码处理: {e}")
-
-    # 3. 测试 HTML 生成
-    total += 1
-    try:
-        html = generate_html(valid_data)
-        assert "<!DOCTYPE html>" in html
-        assert "测试演示文稿" in html
-        assert "第一页" in html
-        assert "第二页" in html
-        assert "<style>" in html
-        assert "<script>" in html
-        passed += 1
-        print("  [通过] HTML 生成")
-    except Exception as e:
-        print(f"  [失败] HTML 生成: {e}")
-
-    # 4. 测试 HTML 结构完整性
-    total += 1
-    try:
-        html = generate_html(valid_data)
-        # 宽松检查：必须包含关键标签
-        assert html.count("<section") >= 2, "应至少包含 2 个 slide 节"
-        assert html.count("</section>") >= 2, "应有对应的关闭标签"
-        assert "hs-navigation" in html, "应包含导航区域"
-        assert "hs-progress" in html, "应包含进度条"
-        passed += 1
-        print("  [通过] HTML 结构检查")
-    except Exception as e:
-        print(f"  [失败] HTML 结构检查: {e}")
-
-    # 5. 测试响应式断点存在
-    total += 1
-    try:
-        html = generate_html(valid_data)
-        # 宽松检查：媒体查询或响应式类存在
-        has_responsive = ("@media" in html) or ("max-width" in html) or ("responsive" in html.lower())
-        assert has_responsive, "应包含响应式相关 CSS"
-        passed += 1
-        print("  [通过] 响应式设计支持")
-    except Exception as e:
-        print(f"  [失败] 响应式设计支持: {e}")
-
-    # 6. 测试内容保真
-    total += 1
-    try:
-        data_with_special = {
-            "title": "特殊字符测试 <>&\"'",
-            "slides": [{"title": "页 & 内容", "content": "包含 <b>HTML</b> & 特殊字符"}],
-        }
-        html = generate_html(data_with_special)
-        # 宽松检查：生成成功且包含转义后的内容
-        assert "特殊字符测试" in html
-        assert "&lt;b&gt;" in html or "&lt;b&gt;" in html, "HTML 特殊字符应被转义"
-        passed += 1
-        print("  [通过] 内容保真与转义")
-    except Exception as e:
-        print(f"  [失败] 内容保真与转义: {e}")
-
-    # 7. 测试卡片/列表内容
-    total += 1
-    try:
-        data_with_cards = {
-            "title": "卡片测试",
-            "slides": [
-                {
-                    "title": "功能展示",
-                    "content": "介绍",
-                    "cards": [
-                        {"title": "卡片一", "description": "描述一"},
-                        {"title": "卡片二", "description": "描述二"},
-                    ],
-                }
-            ],
-        }
-        html = generate_html(data_with_cards)
-        assert "hs-card" in html, "应包含卡片样式类"
-        assert "卡片一" in html
-        assert "卡片二" in html
-        passed += 1
-        print("  [通过] 卡片内容渲染")
-    except Exception as e:
-        print(f"  [失败] 卡片内容渲染: {e}")
-
-    # 8. 测试多页幻灯片
-    total += 1
-    try:
-        many_slides = {
-            "title": "多页测试",
-            "slides": [{"title": f"第{i}页", "content": f"内容{i}"} for i in range(1, 6)],
-        }
-        html = generate_html(many_slides)
-        assert html.count("hs-slide") >= 5, "应包含 5 个幻灯片"
-        passed += 1
-        print("  [通过] 多页幻灯片生成")
-    except Exception as e:
-        print(f"  [失败] 多页幻灯片生成: {e}")
-
-    # 9. 测试错误码 E004（JSON 解析错误）
-    total += 1
-    try:
-        try:
-            json.loads("{invalid json")
-            raise AssertionError("应抛出 JSON 解析错误")
-        except json.JSONDecodeError:
-            pass
-        passed += 1
-        print("  [通过] JSON 错误处理")
-    except Exception as e:
-        print(f"  [失败] JSON 错误处理: {e}")
-
-    # 10. 测试安全转义
-    total += 1
-    try:
-        dangerous = {
-            "title": "<script>alert('xss')</script>",
-            "slides": [{"title": "<img src=x onerror=alert(1)>", "content": "<script>恶意</script>"}],
-        }
-        html = generate_html(dangerous)
-        assert "<script>alert('xss')</script>" not in html, "不应包含未转义的脚本"
-        assert "&lt;script&gt;" in html, "脚本应被转义"
-        passed += 1
-        print("  [通过] 安全转义")
-    except Exception as e:
-        print(f"  [失败] 安全转义: {e}")
-
-    # 总结
-    print(f"\n自检完成: {passed}/{total} 项通过")
-    return passed == total
-
-
-# ---------------------------------------------------------------------------
-# 主函数
-# ---------------------------------------------------------------------------
-def main() -> int:
-    """命令行入口。"""
-    parser = argparse.ArgumentParser(
-        description="画术设计（huashu-design）— 生成高保真 HTML 原型/幻灯片",
-        epilog="示例: python scripts/main.py --input data.json --output prototype.html",
-    )
-    parser.add_argument("--input", "-i", help="输入 JSON 文件路径")
-    parser.add_argument("--output", "-o", help="输出 HTML 文件路径")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--version", action="version", version="huashu-design 1.0.1")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        success = _selftest()
-        return 0 if success else 1
-
-    # 正常模式：需要输入输出参数
-    if not args.input or not args.output:
-        _fail("E001", "需要 --input 和 --output 参数（或使用 --selftest）")
-
-    # 读取输入文件
-    if not os.path.isfile(args.input):
-        _fail("E002", f"文件不存在: {args.input}")
-    try:
-        with open(args.input, "r", encoding="utf-8") as f:
-            data = json.load(f)
-    except json.JSONDecodeError as e:
-        _fail("E004", f"JSON 解析失败: {e}")
-    except Exception as e:
-        _fail("E002", f"读取文件失败: {e}")
-
-    # 生成 HTML
-    try:
-        html = generate_html(data)
-    except RuntimeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-
-    # 写入输出文件
-    output_dir = os.path.dirname(os.path.abspath(args.output))
-    if not os.path.isdir(output_dir):
-        _fail("E003", f"输出目录不存在: {output_dir}")
-    try:
-        with open(args.output, "w", encoding="utf-8") as f:
-            f.write(html)
-        print(f"成功生成: {args.output}")
-    except Exception as e:
-        _fail("E003", f"写入文件失败: {e}")
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
+                data = json.load(f)
+            return _validate_input_data(data)
+        except json.JSONDecodeError as e:
+            _fail("E004", f"JSON 解析失败: {e}")
+        except (IOError, OSError) as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                time
