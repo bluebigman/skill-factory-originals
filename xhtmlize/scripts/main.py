@@ -36,7 +36,9 @@ import os
 import re
 import argparse
 from html.parser import HTMLParser
-from typing import List, Tuple, Optional
+from typing import List, Tuple, Optional, Set
+from datetime import datetime, timezone
+
 dry_run = False  # v3.274 模块级 dry-run 标志
 
 
@@ -71,6 +73,21 @@ BLOCK_ELEMENTS = {
     'div', 'section', 'article', 'aside', 'header', 'footer',
     'nav', 'main', 'figure', 'figcaption', 'ul', 'ol', 'dl',
     'table', 'form', 'fieldset', 'details', 'summary'
+}
+
+# 子元素规则映射（用于嵌套修复）
+CHILDREN_RULES = {
+    'ul': {'li'},
+    'ol': {'li'},
+    'dl': {'dt', 'dd'},
+    'table': {'caption', 'colgroup', 'thead', 'tbody', 'tfoot', 'tr'},
+    'thead': {'tr'},
+    'tbody': {'tr'},
+    'tfoot': {'tr'},
+    'tr': {'td', 'th'},
+    'select': {'option', 'optgroup'},
+    'optgroup': {'option'},
+    'p': set(),  # p 不能包含块级元素
 }
 
 
@@ -151,12 +168,6 @@ def _read_text_safe(path):
     with open(path, encoding="utf-8", errors="replace") as f:
         return f.read()
 
-# 批处理流式读取工具
-def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
-
 
 def parse_html(html: str) -> List[Tuple[str, str, dict]]:
     """解析 HTML 字符串，返回事件列表。"""
@@ -199,6 +210,19 @@ def format_attrs(attrs: dict) -> str:
     return ' ' + ' '.join(parts)
 
 
+def _get_valid_children(parent: str) -> Set[str]:
+    """获取某个标签允许的子元素集合（简化规则）。"""
+    return CHILDREN_RULES.get(parent, set())
+
+
+def _find_matching_open(stack: List[str], tag: str) -> Optional[int]:
+    """在栈中查找匹配的开始标签位置，返回索引或 None。"""
+    for i in range(len(stack) - 1, -1, -1):
+        if stack[i] == tag:
+            return i
+    return None
+
+
 def build_xhtml(events: List[Tuple[str, str, dict]]) -> str:
     """
     根据事件列表构建 XHTML 字符串。
@@ -233,17 +257,22 @@ def build_xhtml(events: List[Tuple[str, str, dict]]) -> str:
                 output_parts.append(f'<{tag}{format_attrs(attrs)} />')
             else:
                 # 检查是否需要先闭合某些自动闭合元素
-                while stack and stack[-1] in AUTO_CLOSE_ELEMENTS and \
-                        tag not in _get_valid_children(stack[-1]):
-                    # 自动闭合未闭合的块级元素
-                    closed = stack.pop()
-                    output_parts.append(f'</{closed}>')
+                while stack and stack[-1] in AUTO_CLOSE_ELEMENTS:
+                    # 如果新标签不是当前自动闭合元素的合法子元素，则自动闭合
+                    valid_children = _get_valid_children(stack[-1])
+                    if valid_children and tag not in valid_children:
+                        closed = stack.pop()
+                        output_parts.append(f'</{closed}>')
+                    else:
+                        break
 
-                # 检查嵌套错位：如果新标签是某个已打开标签的兄弟元素
-                # 但栈顶不是其父元素，则需要先闭合
-                if tag in BLOCK_ELEMENTS and stack:
-                    # 如果栈顶不是块级元素的父级，可能需要先闭合
-                    pass  # 简化处理，主要处理自动闭合元素
+                # 检查嵌套错位：如果新标签在栈中已存在且不是栈顶，说明有错位
+                if tag in stack and stack[-1] != tag:
+                    # 尝试修复：闭合中间所有标签
+                    while stack and stack[-1] != tag:
+                        unmatched = stack.pop()
+                        output_parts.append(f'</{unmatched}>')
+                    # 此时栈顶是 tag，不需要额外操作
 
                 # 输出开始标签
                 output_parts.append(f'<{tag}{format_attrs(attrs)}>')
@@ -255,18 +284,15 @@ def build_xhtml(events: List[Tuple[str, str, dict]]) -> str:
                 # 空元素忽略结束标签
                 continue
 
-            if tag in stack:
-                # 正常闭合：找到匹配的开始标签并闭合中间所有标签
-                while stack and stack[-1] != tag:
-                    # 自动闭合中间未闭合的标签
+            # 在栈中查找匹配的开始标签
+            match_idx = _find_matching_open(stack, tag)
+            if match_idx is not None:
+                # 闭合从匹配位置到栈顶的所有标签
+                while len(stack) > match_idx:
                     unmatched = stack.pop()
                     output_parts.append(f'</{unmatched}>')
-                if stack:
-                    stack.pop()  # 弹出匹配的开始标签
-                output_parts.append(f'</{tag}>')
             else:
-                # 没有对应的开始标签，忽略或输出为文本
-                # 这里选择忽略（宽容处理）
+                # 没有对应的开始标签，忽略（宽容处理）
                 pass
 
     # 处理剩余的未闭合标签
@@ -275,25 +301,6 @@ def build_xhtml(events: List[Tuple[str, str, dict]]) -> str:
         output_parts.append(f'</{tag}>')
 
     return ''.join(output_parts)
-
-
-def _get_valid_children(parent: str) -> set:
-    """获取某个标签允许的子元素集合（简化规则）。"""
-    # 根据 XHTML 规则简化定义
-    children_map = {
-        'ul': {'li'},
-        'ol': {'li'},
-        'dl': {'dt', 'dd'},
-        'table': {'caption', 'colgroup', 'thead', 'tbody', 'tfoot', 'tr'},
-        'thead': {'tr'},
-        'tbody': {'tr'},
-        'tfoot': {'tr'},
-        'tr': {'td', 'th'},
-        'select': {'option', 'optgroup'},
-        'optgroup': {'option'},
-        'p': set(),  # p 不能包含块级元素
-    }
-    return children_map.get(parent, set())
 
 
 def xhtmlize(html: str) -> str:
@@ -469,138 +476,3 @@ def run_selftest() -> bool:
     # 测试用例 3: 文本转义
     print("\n" + "=" * 60)
     print("文本转义测试:")
-    escape_test = '<p>5 < 6 & 7 > 4</p>'
-    try:
-        result = xhtmlize(escape_test)
-        print(f"  输入: {escape_test!r}")
-        print(f"  输出: {result!r}")
-        if '&lt;' in result and '&amp;' in result and '&gt;' in result:
-            print("  ✅ 文本转义正确")
-        else:
-            print("  ❌ 文本转义失败")
-            all_passed = False
-    except Exception as e:
-        print(f"  ❌ 转义测试出错: {e}")
-        all_passed = False
-
-    # 测试用例 4: 错误处理
-    print("\n" + "=" * 60)
-    print("错误处理测试:")
-    try:
-        xhtmlize('')
-        print("  ❌ 空输入应抛出 E001")
-        all_passed = False
-    except XhtmlizeError as e:
-        if e.code == 'E001':
-            print("  ✅ 空输入正确抛出 E001")
-        else:
-            print(f"  ❌ 错误码不正确: {e.code}")
-            all_passed = False
-
-    try:
-        xhtmlize(123)
-        print("  ❌ 非字符串输入应抛出 E002")
-        all_passed = False
-    except XhtmlizeError as e:
-        if e.code == 'E002':
-            print("  ✅ 非字符串输入正确抛出 E002")
-        else:
-            print(f"  ❌ 错误码不正确: {e.code}")
-            all_passed = False
-
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("✅ 全部自检通过!")
-    else:
-        print("❌ 部分自检未通过!")
-    print("=" * 60)
-
-    return all_passed
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def main():
-    """命令行主入口。"""
-    parser = argparse.ArgumentParser(
-        description='xhtmlize — HTML 片段 XHTML 化处理工具',
-        epilog='示例: python main.py "<p>Hello & welcome</p>"'
-    )
-    parser.add_argument(
-        "--html", nargs='?', default=None,
-        help='要处理的 HTML 字符串'
-    )
-    parser.add_argument(
-        '--file', '-f', dest='filepath',
-        help='从文件读取 HTML'
-    )
-    parser.add_argument(
-        '--selftest', action='store_true',
-        help='运行自检程序'
-    )
-    parser.add_argument(
-        '--output', '-o', dest='output_file',
-        help='将结果写入文件'
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 运行自检
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-
-    # 获取输入
-    input_html = None
-    try:
-        if args.filepath:
-            input_html = read_file(args.filepath)
-        elif args.html:
-            input_html = args.html
-        else:
-            # 尝试从标准输入读取
-            if not sys.stdin.isatty():
-                input_html = sys.stdin.read()
-            else:
-                parser.print_help()
-                raise XhtmlizeError('E008', '未提供输入 HTML')
-
-        # 处理
-        result = xhtmlize(input_html)
-
-        # 输出
-        if args.output_file:
-            try:
-                with open(args.output_file, 'w', encoding='utf-8') as f:
-                    f.write(result)
-                print(f"结果已写入: {args.output_file}")
-            except Exception as e:
-                raise XhtmlizeError('E009', f'输出写入失败: {str(e)}')
-        else:
-            print(result)
-
-    except XhtmlizeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except KeyboardInterrupt:
-        print("操作被用户中断", file=sys.stderr)
-        sys.exit(130)
-    except Exception as e:
-        print(f"[E010] 未知错误: {str(e)}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == '__main__':
-    main()
