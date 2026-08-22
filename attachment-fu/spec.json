@@ -1,8 +1,0 @@
-{
-  "slug": "attachment-fu",
-  "name": "attachment-fu",
-  "description": "将文件、数据或 URL 转为结构化附件记录，提取元数据并输出 JSON/CSV。",
-  "trigger_words": "",
-  "original_version": "2.0.0",
-  "capability_outline": []
-}
