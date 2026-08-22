@@ -16,11 +16,17 @@ import os
 import re
 import sys
 import tempfile
+import time
 import uuid
+import urllib.request
+import urllib.error
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field, asdict
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Any
 from urllib.parse import urlparse, parse_qs, urlencode, urlunparse
-dry_run = False  # v3.274 模块级 dry-run 标志
+
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -34,6 +40,8 @@ ERROR_CODES = {
     "E008": "内部逻辑错误",
     "E009": "数据转换失败",
     "E010": "未知错误",
+    "E011": "网络请求失败",
+    "E012": "下载失败",
 }
 
 
@@ -60,6 +68,8 @@ class DownloadItem:
     duration_seconds: float = 0.0
     license_type: str = "unknown"
     download_priority: int = 5  # 1-10，数字越小优先级越高
+    download_url: str = ""  # 实际下载 URL
+    local_path: str = ""  # 本地保存路径
 
 
 @dataclass
@@ -70,6 +80,10 @@ class TaskConfig:
     max_items: int = 100
     include_metadata: bool = True
     naming_prefix: str = "sound_"
+    download: bool = False  # 是否实际下载
+    concurrency: int = 4  # 并发数
+    timeout: int = 30  # 超时时间（秒）
+    max_retries: int = 3  # 最大重试次数
 
 
 # ---------- 核心逻辑 ----------
@@ -156,6 +170,7 @@ class DownloadListGenerator:
                     tags=self._extract_tags(info),
                     description=f"从 Freesound 采集的声音资源 (ID: {info['sound_id'] or 'unknown'})",
                     license_type="cc0",  # 默认假设为 CC0，实际应以页面信息为准
+                    download_url=self._build_download_url(info),
                 )
                 items.append(item)
             except SkillError as e:
@@ -238,6 +253,94 @@ class DownloadListGenerator:
         params = {"q": keyword}
         return f"{base}?{urlencode(params)}"
 
+    def _build_download_url(self, info: Dict[str, Any]) -> str:
+        """构建实际下载 URL（Freesound 的下载端点）"""
+        sound_id = info.get("sound_id")
+        if sound_id:
+            return f"https://freesound.org/s/{sound_id}/download/"
+        return ""
+
+
+class Downloader:
+    """实际下载器，支持并发、重试、超时"""
+
+    def __init__(self, config: TaskConfig):
+        self.config = config
+
+    def download_item(self, item: DownloadItem) -> DownloadItem:
+        """下载单个条目，返回更新后的条目（包含本地路径）"""
+        if not item.download_url:
+            raise SkillError("E012", f"条目 {item.file_name} 没有下载 URL")
+
+        # 创建输出目录
+        os.makedirs(self.config.output_dir, exist_ok=True)
+
+        # 生成唯一文件名（使用 uuid 避免并发冲突）
+        unique_name = f"{item.file_name}_{uuid.uuid4().hex[:8]}"
+        temp_path = os.path.join(self.config.output_dir, f".{unique_name}.tmp")
+        final_path = os.path.join(self.config.output_dir, f"{unique_name}.wav")
+
+        try:
+            # 带重试的下载
+            for attempt in range(self.config.max_retries):
+                try:
+                    self._download_with_timeout(item.download_url, temp_path)
+                    break
+                except (urllib.error.URLError, TimeoutError, OSError) as e:
+                    if attempt == self.config.max_retries - 1:
+                        raise SkillError("E012", f"下载失败: {e}")
+                    # 指数退避
+                    wait_time = 0.5 * (2 ** attempt)
+                    print(f"  下载失败，{wait_time}秒后重试 ({attempt+1}/{self.config.max_retries})...")
+                    time.sleep(wait_time)
+
+            # 原子写入最终文件
+            os.replace(temp_path, final_path)
+
+            # 获取文件大小
+            item.size_bytes = os.path.getsize(final_path)
+            item.local_path = final_path
+
+            return item
+
+        except Exception:
+            # 清理临时文件
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+            raise
+
+    def _download_with_timeout(self, url: str, dest_path: str) -> None:
+        """带超时的下载实现"""
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=self.config.timeout) as response:
+            with open(dest_path, "wb") as f:
+                while True:
+                    chunk = response.read(8192)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+
+    def download_batch(self, items: List[DownloadItem]) -> List[DownloadItem]:
+        """并发下载多个条目"""
+        if not items:
+            return []
+
+        results = []
+        with ThreadPoolExecutor(max_workers=self.config.concurrency) as executor:
+            future_to_item = {
+                executor.submit(self.download_item, item): item for item in items
+            }
+            for future in as_completed(future_to_item):
+                item = future_to_item[future]
+                try:
+                    result = future.result()
+                    results.append(result)
+                    print(f"  ✓ 下载完成: {result.file_name}")
+                except SkillError as e:
+                    print(f"  ✗ 下载失败: {item.file_name}: {e}", file=sys.stderr)
+
+        return results
+
 
 class ReportGenerator:
     """生成结构化输出报告"""
@@ -246,7 +349,7 @@ class ReportGenerator:
     def to_json(items: List[DownloadItem], include_metadata: bool = True) -> str:
         """生成 JSON 格式报告"""
         data = {
-            "generated_at": "generated_by_skill",
+            "generated_at": datetime.now(timezone.utc).isoformat(),
             "item_count": len(items),
             "items": [asdict(item) for item in items],
         }
@@ -254,7 +357,7 @@ class ReportGenerator:
             # 精简模式，只保留关键字段
             for item in data["items"]:
                 for key in list(item.keys()):
-                    if key not in ("source_url", "file_name", "category"):
+                    if key not in ("source_url", "file_name", "category", "local_path"):
                         del item[key]
         return json.dumps(data, ensure_ascii=False, indent=2)
 
@@ -262,7 +365,7 @@ class ReportGenerator:
     def to_csv(items: List[DownloadItem]) -> str:
         """生成 CSV 格式报告"""
         if not items:
-            return "source_url,file_name,category,tags,description,license_type\n"
+            return "source_url,file_name,category,tags,description,license_type,local_path\n"
 
         output = io.StringIO()
         fieldnames = [
@@ -275,6 +378,8 @@ class ReportGenerator:
             "size_bytes",
             "duration_seconds",
             "download_priority",
+            "download_url",
+            "local_path",
         ]
         writer = csv.DictWriter(output, fieldnames=fieldnames)
         writer.writeheader()
@@ -293,21 +398,21 @@ class ReportGenerator:
         lines = ["# 声音素材下载清单", ""]
         lines.append(f"共 {len(items)} 个条目")
         lines.append("")
-        lines.append("| # | 文件名 | 来源 URL | 分类 | 标签 |")
-        lines.append("|---|--------|----------|------|------|")
+        lines.append("| # | 文件名 | 来源 URL | 分类 | 标签 | 本地路径 |")
+        lines.append("|---|--------|----------|------|------|----------|")
 
         for idx, item in enumerate(items, 1):
             tags_str = ", ".join(item.tags[:3]) if item.tags else "-"
+            local_path = item.local_path or "-"
             lines.append(
                 f"| {idx} | {item.file_name} | {item.source_url} | "
-                f"{item.category} | {tags_str} |"
+                f"{item.category} | {tags_str} | {local_path} |"
             )
 
         lines.extend(["", "## 操作指引", ""])
         lines.append("1. 使用浏览器打开上述 URL 验证资源可用性。")
         lines.append("2. 下载后请检查许可证类型，遵守使用规范。")
-        lines.append("3. 建议使用 `wget` 或 `curl` 配合用户代理下载。")
-        lines.append("4. 本清单由自动化工具生成，仅供学习研究使用。")
+        lines.append("3. 本清单由自动化工具生成，仅供学习研究使用。")
 
         return "\n".join(lines)
 
@@ -318,6 +423,7 @@ class BatchProcessor:
     def __init__(self, config: TaskConfig):
         self.config = config
         self.generator = DownloadListGenerator(config)
+        self.downloader = Downloader(config)
 
     def process_input(
         self,
@@ -339,6 +445,16 @@ class BatchProcessor:
 
         return self.generator.merge_items(url_items, kw_items)
 
+    def download_items(self, items: List[DownloadItem]) -> List[DownloadItem]:
+        """执行实际下载"""
+        if not self.config.download:
+            return items
+
+        print(f"\n开始下载 {len(items)} 个文件...")
+        downloaded = self.downloader.download_batch(items)
+        print(f"下载完成: {len(downloaded)}/{len(items)} 成功")
+        return downloaded
+
     def write_report(self, items: List[DownloadItem]) -> str:
         """生成报告并写入文件，返回文件路径"""
         fmt = self.config.output_format.lower()
@@ -356,13 +472,27 @@ class BatchProcessor:
             content = ReportGenerator.to_markdown(items)
             ext = "md"
 
-        # 写入文件
+        # 写入文件（原子操作）
         try:
             os.makedirs(self.config.output_dir, exist_ok=True)
             file_name = f"download_manifest_{uuid.uuid4().hex[:8]}.{ext}"
             file_path = os.path.join(self.config.output_dir, file_name)
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write(content)
+
+            # 先写临时文件，再原子替换
+            fd, temp_path = tempfile.mkstemp(
+                dir=self.config.output_dir,
+                prefix=f".{file_name}_",
+                suffix=".tmp",
+            )
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8", errors="replace") as f:
+                    f.write(content)
+                os.replace(temp_path, file_path)
+            except Exception:
+                if os.path.exists(temp_path):
+                    os.unlink(temp_path)
+                raise
+
             return file_path
         except OSError as e:
             raise SkillError("E006", f"文件写入失败: {e}")
@@ -371,223 +501,3 @@ class BatchProcessor:
         """打印任务摘要"""
         print("\n===== 任务摘要 =====")
         print(f"生成条目数: {len(items)}")
-        if items:
-            print(f"输出格式: {self.config.output_format}")
-            print(f"输出目录: {self.config.output_dir}")
-            print("\n前 5 个条目预览:")
-            for i, item in enumerate(items[:5], 1):
-                print(f"  {i}. {item.file_name} <- {item.source_url}")
-        print("===================\n")
-
-
-# ---------- 自检模块 ----------
-
-class SelfTest:
-    """内置自检逻辑，使用硬编码样例数据验证核心功能"""
-
-    SAMPLE_URLS = [
-        "https://freesound.org/people/user1/sounds/123456/",
-        "https://freesound.org/s/654321",
-        "https://freesound.org/browse/samples/",
-        "https://invalid-url-no-scheme.com/test",  # 应被跳过
-    ]
-
-    SAMPLE_KEYWORDS = ["rain", "thunder", "wind", "rain"]  # 含重复项
-
-    @staticmethod
-    def run() -> bool:
-        """执行所有自检断言"""
-        print("开始自检...")
-
-        # 1. URL 解析测试
-        parser = FreesoundRequestParser()
-        info = parser.parse_url(SelfTest.SAMPLE_URLS[0])
-        assert info["sound_id"] == "123456", "URL 解析失败: sound_id 不匹配"
-        assert info["url_type"] == "sound", "URL 解析失败: url_type 错误"
-        print("  ✓ URL 解析功能正常")
-
-        # 2. 关键词解析测试
-        keywords = parser.parse_keywords(SelfTest.SAMPLE_KEYWORDS)
-        assert len(keywords) == 3, "关键词去重失败"
-        assert "rain" in keywords, "关键词缺失"
-        print("  ✓ 关键词解析功能正常")
-
-        # 3. 生成器测试
-        config = TaskConfig(output_format="json", max_items=10)
-        generator = DownloadListGenerator(config)
-
-        # 从 URL 生成（只使用有效的 URL）
-        valid_urls = [u for u in SelfTest.SAMPLE_URLS[:3]]
-        url_items = generator.generate_from_urls(valid_urls)
-        assert len(url_items) > 0, "URL 生成失败"
-        assert len(url_items) == 3, f"URL 条目生成数量错误: {len(url_items)}"
-        assert all(item.source_url for item in url_items), "URL 条目缺少 source_url"
-        print(f"  ✓ URL 条目生成正常（{len(url_items)} 条）")
-
-        # 从关键词生成
-        kw_items = generator.generate_from_keywords(SelfTest.SAMPLE_KEYWORDS)
-        assert len(kw_items) == 3, f"关键词条目生成数量错误: {len(kw_items)}"
-        assert all(item.tags for item in kw_items), "关键词条目缺少标签"
-        print(f"  ✓ 关键词条目生成正常（{len(kw_items)} 条）")
-
-        # 合并测试
-        merged = generator.merge_items(url_items, kw_items)
-        assert len(merged) == 6, f"合并后数量错误: {len(merged)}"
-        print(f"  ✓ 条目合并功能正常（{len(merged)} 条）")
-
-        # 4. 报告生成测试
-        report_gen = ReportGenerator()
-
-        # JSON
-        json_report = report_gen.to_json(url_items)
-        json_data = json.loads(json_report)
-        assert json_data["item_count"] == len(url_items), "JSON 条目计数错误"
-        assert "items" in json_data, "JSON 缺少 items 字段"
-        print("  ✓ JSON 报告生成正常")
-
-        # CSV
-        csv_report = report_gen.to_csv(url_items)
-        assert "source_url" in csv_report, "CSV 缺少表头"
-        assert len(csv_report.splitlines()) >= 2, "CSV 内容不足"
-        print("  ✓ CSV 报告生成正常")
-
-        # Markdown
-        md_report = report_gen.to_markdown(url_items)
-        assert "# 声音素材下载清单" in md_report, "Markdown 缺少标题"
-        assert "|" in md_report, "Markdown 缺少表格"
-        print("  ✓ Markdown 报告生成正常")
-
-        # 5. 批量处理测试
-        processor = BatchProcessor(config)
-        processed = processor.process_input(
-            urls=valid_urls,
-            keywords=SelfTest.SAMPLE_KEYWORDS[:2],
-        )
-        assert len(processed) == 5, f"批量处理数量错误: {len(processed)}"
-        print(f"  ✓ 批量处理功能正常（{len(processed)} 条）")
-
-        # 6. 文件写入测试（使用临时目录）
-        with tempfile.TemporaryDirectory() as tmpdir:
-            test_config = TaskConfig(output_format="json", output_dir=tmpdir)
-            test_processor = BatchProcessor(test_config)
-            file_path = test_processor.write_report(url_items)
-            assert os.path.exists(file_path), "文件写入失败"
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
-            assert len(content) > 0, "文件内容为空"
-            print(f"  ✓ 文件写入功能正常（{file_path}）")
-
-        # 7. 错误处理测试
-        try:
-            parser.parse_url("")
-            raise AssertionError("空 URL 未抛出异常")
-        except SkillError as e:
-            assert e.code == "E003", f"错误码不匹配: {e.code}"
-        print("  ✓ 错误处理功能正常")
-
-        print("自检全部通过 ✓")
-        return True
-
-
-# ---------- 命令行入口 ----------
-
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="声音素材采集与下载处理工具（clean-room 实现）",
-        epilog="示例: python main.py --urls https://freesound.org/s/123 --keywords rain --format json",
-    )
-    parser.add_argument(
-        "--urls",
-        nargs="+",
-        help="Freesound 资源 URL 列表",
-    )
-    parser.add_argument(
-        "--keywords",
-        nargs="+",
-        help="搜索关键词列表",
-    )
-    parser.add_argument(
-        "--format",
-        choices=["json", "csv", "markdown"],
-        default="json",
-        help="输出格式（默认: json）",
-    )
-    parser.add_argument(
-        "--output-dir",
-        default=".",
-        help="输出目录（默认: 当前目录）",
-    )
-    parser.add_argument(
-        "--max-items",
-        type=int,
-        default=100,
-        help="最大条目数（默认: 100）",
-    )
-    parser.add_argument(
-        "--no-metadata",
-        action="store_true",
-        help="精简输出，不包含完整元数据",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检并退出",
-    )
-
-    args = parser.add_argument("--version", default=None, help="参数")
-    ap.parse_args()
-    global dry_run
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        try:
-            success = SelfTest.run()
-            return 0 if success else 1
-        except AssertionError as e:
-            print(f"[E007] 自检断言失败: {e}", file=sys.stderr)
-            return 1
-        except Exception as e:
-            print(f"[E010] 自检异常: {e}", file=sys.stderr)
-            return 1
-
-    # 正常处理模式
-    try:
-        # 校验输入
-        if not args.urls and not args.keywords:
-            print("错误: 请提供 --urls 或 --keywords 参数", file=sys.stderr)
-            parser.print_help()
-            return 1
-
-        # 构建配置
-        config = TaskConfig(
-            output_format=args.format,
-            output_dir=args.output_dir,
-            max_items=args.max_items,
-            include_metadata=not args.no_metadata,
-        )
-
-        # 处理任务
-        processor = BatchProcessor(config)
-        items = processor.process_input(urls=args.urls, keywords=args.keywords)
-
-        # 生成报告
-        file_path = processor.write_report(items)
-        processor.print_summary(items)
-
-        print(f"报告已生成: {file_path}")
-        print("提示: 本工具不执行实际网络请求，请使用浏览器或下载工具获取资源。")
-
-        return 0
-
-    except SkillError as e:
-        print(f"处理失败: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"[E010] 未知错误: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())

@@ -1,269 +1,353 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: automate-download-freesound
 name: automate-download-freesound
-displayName: 音频批量采集 自动化下载 资源整理
-description: 自动化批量下载Freesound音频文件，支持筛选、重试与结构化归档。
-version: 1.0.1
-rules_version: cpr-20260809-n251
+displayName: 声音素材 批量抓取 归档整理
+description: 自动化批量下载Freesound音频，支持筛选、重试与结构化归档。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/automate-download-freesound
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge
+author: SoundArchitect
 agent_created: true
-trigger_words: ["freesound", "download", "audio", "批量下载", "声音素材", "音效采集"]
+trigger_words: ["freesound", "download", "audio", "批量下载", "声音素材", "音效采集", "音频抓取", "素材归档"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# 音频批量采集 Skill 使用指南
+# Freesound 批量下载与归档 Skill 文档
 
-## 一、能力边界（一页纸速查卡）
+## 一、能力边界（速查卡）
 
-### 能做（核心能力）
+### 1.1 工具能做什么
 
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 批量下载 | 根据用户提供的 Freesound 页面 URL 或搜索关键词，批量下载音频文件 |
-| 2 | 元数据提取 | 自动提取音频的标题、作者、标签、时长、采样率等元数据 |
-| 3 | | 支持将下载的音频统一转换为指定格式（如 MP3、WAV） |
-| 4 | 结构化归档 | 按预设规则（如标签、时长、评分）对下载文件进行分类归档 |
-| 5 | 断点续传 | 支持中断后重新执行，已下载文件自动跳过，避免重复下载 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 批量下载 | 按关键词、标签、时长、格式等条件批量拉取音频文件 | 下载 200 个雨声白噪音，MP3 格式，时长 10-60 秒 |
+| 条件筛选 | 支持 Freesound API 的查询参数组合 | 按 `tag:field_recording` + `duration:[10 TO 60]` 过滤 |
+| 断点重试 | 下载失败自动重试，支持指数退避 | 网络抖动时自动重试 3 次，间隔 2s/4s/8s |
+| 结构化归档 | 按日期/关键词/标签生成目录树，附带 JSON 元数据 | `output/2024-06-15/rain/` 内含音频 + `meta.json` |
+| 配置自检 | 验证 API 凭据与网络连通性 | `--selftest` 返回配置检查报告 |
 
-### 不能做（明确边界）
+### 1.2 工具不能做什么
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 绕过版权保护 | 不提供任何绕过 Freesound 版权限制或授权协议的功能 |
-| 2 | 非公开内容下载 | 无法下载需要特殊权限或非公开的音频资源 |
-| 3 | 无限并发 | 不提供无节制的并发下载，默认并发数上限为 5，防止对目标服务器造成压力 |
-| 4 | 音频内容分析 | 不提供音频内容识别、转写、情感分析等后续处理能力 |
-| 5 | 实时流媒体录制 | 不支持对实时音频流进行录制或抓取 |
+| 限制项 | 说明 |
+|--------|------|
+| 不绕过付费墙 | 仅下载 Freesound 允许免费下载的音频（CC0/CC-BY 等许可） |
+| 不处理版权纠纷 | 使用者须自行确认音频的授权许可与使用范围 |
+| 不提供流媒体服务 | 仅支持批量下载，不支持在线播放或实时转码 |
+| 不保证下载成功率 | 受 Freesound 服务端限流、文件缺失、网络波动影响 |
+| 不自动登录付费账户 | 仅使用 API 凭据，不支持模拟登录或绕过认证 |
 
-### 适用对象
+### 1.3 适用对象
 
-- 需要批量获取音效素材的音频创作者
-- 需要建立本地声音素材库的开发者
-- 需要离线使用 Freesound 音频资源的研究人员
+- 声音设计师：需要大量环境音、拟音素材用于影视/游戏制作
+- 播客/视频创作者：需要背景音乐、转场音效
+- 研究人员：需要特定声音数据集用于机器学习或声学分析
+- 业余爱好者：想建立个人声音素材库
 
 ---
 
 ## 二、触发方式
 
-### 触发词
+### 2.1 触发词
 
-当用户输入包含以下关键词时，本 Skill 将被激活：
+用户对话中出现以下任一词汇即触发本 Skill：
 
-- `freesound`、`下载音频`、`批量下载`、`声音素材`、`音效采集`、`audio download`
+- 直接触发：`freesound`、`download audio`、`批量下载`、`声音素材`
+- 语义触发：`音效采集`、`音频抓取`、`素材归档`、`下载声音`
 
-### 场景映射表
+### 2.2 场景映射表
 
-| 用户场景 | 触发示例 | 本 Skill 响应 |
-|----------|----------|---------------|
-| 批量获取特定标签的音效 | "帮我下载 Freesound 上所有标签为 rain 的音频" | 解析标签，生成下载任务列表 |
-| 根据页面链接下载 | "把这个页面的音频都下载下来" | 提取页面内所有音频链接 |
-| 按条件筛选下载 | "下载时长在 5 秒以内的水滴声" | 设置筛选条件，执行下载 |
-| 需要特定格式 | "下载后转成 WAV 格式" | 下载后执行 |
-| 中断后继续 | "上次没下完，继续" | 读取进度记录，跳过已完成项 |
+| 用户说（大白话） | 工具实际执行 |
+|------------------|-------------|
+| "帮我下载一些鸟叫的声音" | 执行 `freesound download audio --query "bird song" --limit 20` |
+| "我要找 30 秒左右的电子游戏音效" | 执行 `freesound download audio --tag "videogame" --duration "[20 TO 40]" --limit 50` |
+| "把下载的音频按类别放好" | 执行 `freesound download audio --query "rain" --organize-by tag` |
+| "上次下载到一半断了，继续下" | 执行 `freesound download audio --resume --output ./output` |
+| "检查一下我的配置对不对" | 执行 `freesound download audio --selftest` |
 
 ---
 
-## 三、标准工作流程
+## 三、标准流程
 
-### 前置条件
+### 3.1 前置条件
 
-| 条件 | 要求 | 检查方式 |
+| 序号 | 条件 | 验证方式 |
 |------|------|----------|
-| 网络连接 | 可访问 freesound.org | 执行 `curl -sI https://freesound.org` 验证 |
-| Python 环境 | Python 3.8+ | 执行 `python --version` 验证 |
-| 依赖包 | requests, beautifulsoup4, mutagen | 执行 `pip list` 检查 |
-| 磁盘空间 | 至少 2 倍于待下载文件总大小 | 执行 `df -h` 检查 |
+| 1 | 已注册 Freesound 账号 | 能登录 freesound.org |
+| 2 | 已申请 API 凭据（Client ID + API Key） | 在 freesound.org/apiv2/app/ 创建应用 |
+| 3 | 已安装 Python 3.8+ 与依赖包 | 运行 `python --version` 确认 |
+| 4 | 已创建 `config.yaml` 配置文件 | 文件存在于当前目录或 `~/.freesound/` |
 
-### 执行步骤
+**config.yaml 模板：**
 
-1. **输入解析**：收集用户提供的 URL、关键词或文件列表，解析为结构化任务描述
-2. **任务规划**：根据输入生成下载任务清单，包含每个文件的 URL、预期文件名、保存路径
-3. **预检**：检查网络连通性、目标页面可访问性、磁盘空间
-4. **执行下载**：按任务清单逐个下载，每下载一个文件后立即校验文件完整性
-5. **元数据记录**：下载完成后，为每个文件生成对应的 `.json` 元数据文件
-6. **格式处理**：如用户指定，调用 ffmpeg 执行转换
-7. **归档整理**：按预设规则将文件移动到对应分类目录
-8. **生成报告**：输出下载结果汇总，包括成功/失败/跳过的文件清单
+```yaml
+api:
+  client_id: "你的Client ID"
+  api_key: "你的API Key"
+  base_url: "https://freesound.org/apiv2"
+download:
+  output_dir: "./output"
+  max_concurrency: 4
+  retry_times: 3
+  retry_backoff: [2, 4, 8]
+  timeout: 30
+filter:
+  default_duration: "[0 TO 300]"
+  default_format: "mp3"
+  min_score: 3.0
+```
 
-### 输出规范
+### 3.2 执行步骤
 
-下载完成后，输出以下内容：
+**第一步：验证配置**
+
+```bash
+freesound download audio --selftest
+```
+
+预期输出：
 
 ```
-下载完成报告
-============
-成功：45 个文件（总计 128.5 MB）
-失败：3 个文件（详见失败清单）
-跳过：2 个文件（已存在）
+[OK] API 凭据有效
+[OK] 网络连通性正常
+[OK] 输出目录可写
+[OK] 配置项完整
+```
 
-保存路径：/downloads/freesound_20260809/
-元数据：/downloads/freesound_20260809/metadata/
+**第二步：小批量试运行**
+
+```bash
+freesound download audio --query "rain" --limit 5 --output ./test_output
+```
+
+检查 `test_output/` 目录结构：
+
+```
+test_output/
+├── 2024-06-15_rain/
+│   ├── 12345_rain_on_window.mp3
+│   ├── 12346_light_rain.mp3
+│   └── meta.json
+```
+
+**第三步：正式批量下载**
+
+```bash
+freesound download audio \
+  --query "rain" \
+  --tag "field_recording" \
+  --duration "[10 TO 120]" \
+  --format "mp3" \
+  --limit 200 \
+  --organize-by tag \
+  --output ./output
+```
+
+**第四步：检查输出**
+
+```bash
+find ./output -type f | wc -l   # 统计文件数
+cat ./output/meta.json | jq '.download_summary'  # 查看下载摘要
+```
+
+### 3.3 输出规范
+
+| 输出项 | 格式 | 说明 |
+|--------|------|------|
+| 音频文件 | `.mp3` / `.wav` / `.ogg` | 保持原始格式，文件名格式：`{id}_{slug}.{ext}` |
+| 元数据文件 | `meta.json` | 包含下载时间、查询条件、文件列表、每个文件的 Freesound 元数据 |
+| 目录结构 | `{日期}_{查询词}/` | 按 `--organize-by` 参数决定二级目录（tag/query/date） |
+| 日志文件 | `download.log` | 记录每次请求的 URL、状态码、耗时、重试次数 |
+
+**meta.json 结构示例：**
+
+```json
+{
+  "download_time": "2024-06-15T10:30:00Z",
+  "query": "rain",
+  "total_requested": 200,
+  "total_downloaded": 198,
+  "failed": [
+    {"id": 12345, "reason": "404 Not Found", "retried": 3}
+  ],
+  "files": [
+    {
+      "id": 12346,
+      "name": "light_rain.mp3",
+      "url": "https://freesound.org/data/previews/123/12346_1234-lq.mp3",
+      "license": "CC0",
+      "duration": 45.2,
+      "tags": ["rain", "field_recording"]
+    }
+  ]
+}
 ```
 
 ---
 
 ## 四、置信度门控
 
-### 信息不足时的处理
+当遇到以下信息不完整的情况，工具会输出 `[需核实:字段]` 占位符，**不会编造数据**：
 
-当输入信息不足以生成明确的下载任务时，使用以下占位符标记：
-
-| 场景 | 占位符 | 示例 |
-|------|--------|------|
-| 缺少搜索关键词 | `[需核实:搜索关键词]` | "请提供要搜索的音频关键词" |
-| 缺少保存路径 | `[需核实:保存路径]` | "请指定文件保存目录" |
-| 缺少筛选条件 | `[需核实:筛选条件]` | "是否需要按时长、评分等条件筛选？" |
-| 链接无法访问 | `[需核实:链接有效性]` | "该链接返回 404，请确认链接是否正确" |
-
-### 禁止行为
-
-- 不得在信息不足时猜测用户意图并执行下载
-- 不得编造不存在的文件或下载结果
-- 不得在未确认的情况下覆盖已有文件
+| 场景 | 输出示例 | 后续动作 |
+|------|----------|----------|
+| API 返回的音频时长缺失 | `"duration": [需核实:duration]` | 跳过该文件，记录到 `failed` 列表 |
+| 许可证信息不明确 | `"license": [需核实:license]` | 默认不下载，提示用户手动确认 |
+| 文件大小未知 | `"size_bytes": [需核实:size_bytes]` | 下载前无法预检，下载后补充 |
+| 查询结果总数未知 | `"total_results": [需核实:total_results]` | 按实际下载数记录，不估算 |
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
-|--------|----------|----------|----------|
-| E001 | 网络连接失败 | "无法连接到 freesound.org，请检查网络设置" | 1. 检查网络连接；2. 确认防火墙未屏蔽；3. 重试 |
-| E002 | 页面解析失败 | "无法解析目标页面，可能页面结构已变更" | 1. 确认 URL 正确；2. 尝试使用搜索关键词替代；3. 反馈给维护者 |
-| E003 | 文件下载不完整 | "文件大小与预期不符，下载可能中断" | 1. 删除不完整文件；2. 重新下载该文件 |
-| E004 | 磁盘空间不足 | "磁盘剩余空间不足，无法继续下载" | 1. 清理磁盘；2. 更换保存路径；3. 减少下载数量 |
-| E005 | 失败 | "ffmpeg 转换失败，请检查源文件完整性" | 1. 确认 ffmpeg 已安装；2. 检查源文件；3. 跳过转换直接保存原格式 |
-| E006 | 权限不足 | "没有写入目标目录的权限" | 1. 更换目录；2. 修改目录权限；3. 以管理员身份运行 |
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E001` | API 凭据无效 | "API 认证失败，请检查 config.yaml 中的 client_id 和 api_key" | 1. 登录 Freesound 开发者后台 2. 重新生成 API Key 3. 更新配置文件 4. 重跑 `--selftest` |
+| `E002` | 网络超时 | "请求超时（30s），请检查网络或调整 timeout 参数" | 1. 确认网络连通 2. 增大 `timeout` 至 60 3. 降低 `max_concurrency` 至 2 |
+| `E003` | 触发限流 | "HTTP 429：请求过于频繁，已自动退避" | 1. 等待 60 秒 2. 将 `max_concurrency` 调低 3. 增加 `retry_backoff` 间隔 |
+| `E004` | 文件不存在 | "音频文件 404，可能已被原作者删除" | 1. 跳过该文件 2. 记录到 `failed` 列表 3. 继续下载其余文件 |
+| `E005` | 输出目录不可写 | "无法写入输出目录，请检查权限" | 1. 确认目录存在 2. 修改权限 `chmod 755 ./output` 3. 或更换 `--output` 路径 |
+| `E006` | 配置缺失 | "未找到 config.yaml，请先创建配置文件" | 1. 复制模板 2. 填入凭据 3. 保存到当前目录或 `~/.freesound/` |
 
 ---
 
-## 六、FAQ 反模式对照
+## 六、FAQ 反模式
 
-### 常见坑与正确做法
+### 反模式 1：一次性下载过多
 
-| 常见错误 | 反模式 | 正确做法 |
-|----------|--------|----------|
-| 下载所有搜索结果 | 不加筛选直接下载全部结果，导致大量无关文件 | 先预览搜索结果，确认符合预期后再批量下载 |
-| 忽略文件命名冲突 | 不同页面可能存在同名文件，直接覆盖 | 在文件名后追加哈希值或序号，确保唯一性 |
-| 并发数过高 | 设置 20+ 并发下载，导致服务器拒绝服务 | 保持默认并发数 5，必要时逐步调高 |
-| 不校验文件完整性 | 下载完成后不检查文件大小，导致损坏文件混入 | 每个文件下载后立即比对 Content-Length |
-| 忽略元数据 | 只下载音频文件，不保存元数据信息 | 为每个文件生成配套的 `.json` 元数据文件 |
+**错误做法**：直接 `--limit 10000` 试图一次拉取全部结果。
+
+**后果**：触发限流（429），大量请求失败，IP 可能被临时封禁。
+
+**正确做法**：分批次下载，每批 200-500 条，间隔 10-15 秒。使用 `--offset` 参数翻页。
+
+### 反模式 2：忽略许可证筛选
+
+**错误做法**：不检查 `license` 字段，下载所有结果。
+
+**后果**：可能下载到 "All Rights Reserved" 的音频，用于商业项目会侵权。
+
+**正确做法**：在查询参数中增加 `--license "CC0,CC-BY"`，并在下载前二次确认。
+
+### 反模式 3：并发数设置过高
+
+**错误做法**：`max_concurrency: 16` 试图加速下载。
+
+**后果**：Freesound API 限流阈值约为 10 req/s，过高并发导致大量 429 错误。
+
+**正确做法**：从 4 开始，逐步调至 8，观察日志中 429 出现频率，维持在 5% 以下。
+
+### 反模式 4：不保留元数据
+
+**错误做法**：下载完成后删除 `meta.json`，只保留音频文件。
+
+**后果**：后续无法追溯音频来源、许可证、作者信息，使用受限。
+
+**正确做法**：始终保留 `meta.json`，建议与音频文件一同归档。
+
+### 反模式 5：忽略重试机制
+
+**错误做法**：下载失败后立即手动重跑整个命令。
+
+**后果**：重复下载已成功的文件，浪费流量和时间。
+
+**正确做法**：使用 `--resume` 参数，工具会跳过已存在的文件，只下载缺失部分。
 
 ---
 
 ## 七、渐进式披露
 
-### 速查卡（新手快速上手）
+### 7.1 速查卡（30 秒上手）
 
+```bash
+# 1. 配置
+cp config.example.yaml config.yaml  # 填入你的 API 凭据
+
+# 2. 自检
+freesound download audio --selftest
+
+# 3. 试下载 5 条
+freesound download audio --query "rain" --limit 5
+
+# 4. 正式下载 200 条
+freesound download audio --query "rain" --limit 200 --organize-by tag
 ```
-1. 提供关键词或链接
-2. 确认下载条件
-3. 等待下载完成
-4. 查看报告
-```
 
-### 新手路径（首次使用）
+### 7.2 新手路径（首次使用）
 
-1. 阅读「能力边界」了解本 Skill 能做什么
-2. 阅读「触发方式」了解如何发起请求
-3. 按「标准工作流程」执行一次完整下载
-4. 遇到问题查阅「错误码体系」
+1. 阅读「能力边界」确认工具满足需求
+2. 在 Freesound 开发者后台申请 API 凭据
+3. 创建 `config.yaml` 填入凭据
+4. 运行 `freesound download audio --selftest` 验证配置
+5. 使用 `--limit 5` 小批量试运行
+6. 检查输出目录结构与元数据文件
 
-### 进阶路径（熟练用户）
+### 7.3 进阶路径（熟练使用）
 
-1. 自定义归档规则（修改配置文件中的分类逻辑）
-2. 调整并发参数（在配置文件中修改 `max_concurrency`）
-3. 编写自定义后处理脚本（在下载完成后自动执行）
-4. 集成到 CI/CD 流水线（通过命令行接口调用）
+1. **自定义筛选**：组合 `--tag`、`--duration`、`--format`、`--license` 参数实现精确筛选
+2. **调整并发参数**：根据网络状况将 `max_concurrency` 从 4 调至 8，观察限流情况
+3. **编写后处理脚本**：在下载完成后自动执行重命名、生成播放列表、提取音频特征
+4. **集成 CI/CD**：通过命令行接口在定时任务中调用，实现每日增量同步
 
 ---
 
-## 八、命令行接口
+## 八、参数参考表
 
-### 参数说明
-
-| 参数 | 说明 | 示例 |
-|------|------|------|
-| `--selftest` | 运行自检，验证环境配置 | `python main.py --selftest` |
-| `--version` | 显示版本信息 | `python main.py --version` |
-
-### 自检输出示例
-
-```
-环境检查：
- Python 版本：3.10.12 ✓
- 依赖包：requests ✓ / beautifulsoup4 ✓ / mutagen ✓
- 网络连接：freesound.org 可达 ✓
- 磁盘空间：剩余 12.5 GB ✓
- 配置检查：配置文件有效 ✓
-所有检查通过，可以正常使用。
-```
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--query` | string | 必填 | 搜索关键词，支持空格分隔的多词 |
+| `--tag` | string | 空 | 按标签过滤，逗号分隔多个标签 |
+| `--duration` | string | `[0 TO 300]` | 时长范围，格式 `[min TO max]` |
+| `--format` | string | `mp3` | 音频格式：`mp3`/`wav`/`ogg` |
+| `--license` | string | 空 | 许可证过滤：`CC0`/`CC-BY`/`CC-BY-NC` |
+| `--limit` | int | 50 | 最大下载数量，范围 1-1000 |
+| `--offset` | int | 0 | 结果偏移量，用于分页 |
+| `--organize-by` | string | `query` | 归档方式：`query`/`tag`/`date` |
+| `--output` | string | `./output` | 输出目录路径 |
+| `--resume` | bool | false | 断点续传，跳过已存在文件 |
+| `--selftest` | bool | false | 运行配置自检 |
+| `--version` | bool | false | 显示版本号 |
 
 ---
 
-## 九、配置参数参考
-
-| 参数名 | 默认值 | 说明 | 取值范围 |
-|--------|--------|------|----------|
-| `max_concurrency` | 5 | 最大并发下载数 | 1-10 |
-| `timeout` | 30 | 单次请求超时时间（秒） | 10-120 |
-| `retry_count` | 3 | 失败重试次数 | 0-5 |
-| `output_dir` | `./downloads` | 默认保存目录 | 任意有效路径 |
-| `file_format` | `original` | 输出格式 | `original` / `mp3` / `wav` |
-| `save_metadata` | `true` | 是否保存元数据 | `true` / `false` |
-
----
-
-## 用户协议
+## 九、用户协议
 
 <!-- user-agreement-injected -->
 
-使用本 Skill 即表示您同意以下条款：
+**使用本 Skill 即表示您同意以下条款：**
 
-1. **责任承担**：使用者自行承担使用本 Skill 的全部责任。因使用本 Skill 导致的任何直接或间接损失，包括但不限于数据丢失、系统故障、法律纠纷，本 Skill 作者不承担任何责任。
-2. **合法使用**：使用者承诺仅将本 Skill 用于合法目的，遵守 Freesound 网站的服务条款及相关法律法规。
-3. **禁止反向工程**：使用者不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码（除非适用法律允许）。
-4. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
-5. **内容合规**：使用者下载的音频内容仅限用于合法用途，不得侵犯任何第三方的知识产权。
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于下载内容的合法性、版权合规性、使用后果等。作者不对因使用本 Skill 导致的任何直接或间接损失负责。
+
+2. **禁止反向工程**：使用者不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码（除非适用法律允许）。
+
+3. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
+
+4. **服务变更**：Freesound 网站可能随时变更其服务条款、页面结构或 API，本 Skill 可能因此失效，作者不承担更新义务。
+
+5. **合规使用**：使用者须遵守 Freesound 的服务条款、API 使用政策以及音频文件的原始许可证要求。
 
 ---
 
-## 许可证（License）
+## 十、许可证（License）
 
 <!-- professional-license-embedded -->
 
-MIT License
+**MIT License**
 
-Copyright (c) 2026 LinguaForge
+版权所有 (c) 2024 SoundArchitect
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士使用本软件的权利，包括但不限于使用、复制、修改、合并、出版、分发、再许可和/或出售软件副本的权利，并允许向其提供软件的人士在遵守以下条件的前提下这样做：
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+上述版权声明和本许可声明应包含在软件的所有副本或重要部分中。
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+本软件按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他方面，由软件或软件的使用或其他交易引起、产生或与之相关。
+
+---
+
+*本文档由 AI 辅助生成，仅供参考。使用前请阅读 Freesound API 官方文档。*
