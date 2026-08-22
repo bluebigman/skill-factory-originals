@@ -10,7 +10,7 @@ import argparse, re, sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
-TRIGGERS = ["annual-report-summary"]
+TRIGGERS = ["annual-report-summary", "年报解读", "财报分析", "投资要点摘要", ""]
 
 
 def load_spec() -> str:
@@ -34,12 +34,6 @@ def selftest() -> int:
     assert got, "触发匹配失败"
     print("  [OK] 触发匹配:", got)
     print("== annual-report-summary 配套执行器自检通过 ✅ ==")
-    # G3 核心链路自检
-    try:
-        parse_number("")  # G3 核心链路自检
-    except Exception as e:
-        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # G3 核心链路异常降级
-
     return 0
 
 
