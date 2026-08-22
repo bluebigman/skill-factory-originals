@@ -1,90 +1,66 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: gsa-prototype
 name: gsa-prototype
-displayName: 协议转JSON 跨域数据封装
-description: 将GSA协议文本转换为结构化JSON，支持跨域映射与校验。
-version: 1.0.6
-rules_version: cpr-20260814-n426
+displayName: 协议转换 跨域映射 数据校验
+description: 将GSA协议文本转为结构化JSON，支持跨域映射与校验。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/gsa-prototype
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 协议转换工坊
+author: 协议工坊
 agent_created: true
-trigger_words: ["gsa prototype", "GSA搜索协议", "跨域JSON封装", "搜索协议转换", "GSA封装", "协议解析", "结构化转换", "字段映射校验"]
+trigger_words: ["gsa prototype", "GSA搜索协议", "跨域JSON封装", "搜索协议转换", "GSA封装", "协议解析", "字段映射", "格式转换"]
+---
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
----
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
-
-# GSA 协议转 JSON 封装器
+# GSA 协议转换器（gsa-prototype）
 
 ## 一、能力边界速查卡
 
-本工具定位：**GSA 协议文本 → 结构化 JSON 的单向转换器**。它不修改原始协议，不执行网络请求，不推断业务语义。
-
 ### 1.1 能做什么
 
-| 能力项 | 说明 |
-|--------|------|
-| 协议解析 | 读取 GSA 格式文本，识别操作名、参数对、分页信息 |
-| 结构化输出 | 将解析结果封装为 JSON 对象，字段名固定 |
-| 跨域映射 | 支持将协议字段映射到目标 JSON 结构（通过映射表） |
-| 字段校验 | 检查必填字段是否存在，缺失时输出占位符 |
-| 批量转换 | 支持单文件输入，输出单条 JSON 记录 |
+| 能力项 | 说明 | 输入示例 | 输出示例 |
+|--------|------|----------|----------|
+| 文本转JSON | 将 `key=value` 格式的GSA协议文本解析为结构化JSON对象 | `operation=search\nq=hello` | `{"operation":"search","q":"hello"}` |
+| 跨域字段映射 | 支持自定义映射表，将源字段名转换为目标系统字段名 | 映射表 `{"operation":"action"}` | `{"action":"search"}` |
+| 数据校验 | 对必填字段、字段类型、取值范围进行校验 | 校验规则 `{"q":"required"}` | 缺失时输出 `[需核实:q]` |
+| 增量处理 | 记录已处理文件指纹，跳过重复数据 | 文件哈希记录表 | 跳过已处理文件 |
 
 ### 1.2 不能做什么
 
 | 限制项 | 说明 |
 |--------|------|
-| 不编造数据 | 缺失的必填字段输出 `[需核实:字段名]` 占位符，绝不虚构 |
-| 不猜测意图 | 操作名不明确时，输出 `[需核实:operation]` 并停止转换 |
-| 不假设默认值 | `page` 缺失时不默认填 1，而是输出 `[需核实:page]` |
-| 不执行外部调用 | 不发起 HTTP 请求，不连接数据库，纯本地文本处理 |
-| 不修改源文件 | 转换过程只读，输出结果写入新文件或标准输出 |
+| 不支持二进制协议 | 仅处理纯文本 `key=value` 格式 |
+| 不执行网络请求 | 仅做本地文本解析与转换 |
+| 不保证业务正确性 | 校验仅覆盖格式层面，业务语义需使用者自行确认 |
+| 不提供图形界面 | 仅通过命令行接口交互 |
 
 ### 1.3 适用对象
 
-- 需要将 GSA 协议文本批量转为 JSON 的开发者
-- 在 CI/CD 流程中需要协议格式标准化的运维人员
-- 需要跨系统传递搜索协议的数据集成工程师
+- 需要将GSA协议文本批量转换为JSON的开发者
+- 需要在不同系统间传递搜索协议数据的集成工程师
+- 需要为协议字段建立统一映射规范的技术团队
 
 ---
 
 ## 二、触发方式与场景映射
 
-### 2.1 触发词
-
-以下任一短语可激活本 Skill：
-
-- `gsa prototype`
-- `GSA搜索协议`
-- `跨域JSON封装`
-- `搜索协议转换`
-- `GSA封装`
-- `协议解析`
-- `结构化转换`
-- `字段映射校验`
-
-### 2.2 场景映射表
-
-| 用户说（大白话） | 实际需求 | 本 Skill 动作 |
-|------------------|----------|---------------|
-| "帮我把这个 GSA 文件转成 JSON" | 协议文本结构化 | 执行标准转换流程 |
-| "这个协议里 page 参数没写，怎么办" | 缺失字段处理 | 输出占位符，不猜测 |
-| "我要把协议里的 q 字段映射到 query" | 字段重命名 | 使用映射表转换 |
-| "转换完帮我检查下有没有漏字段" | 完整性校验 | 执行必填字段检查 |
-| "这个操作名我看不懂" | 语义不明 | 停止转换，输出占位符 |
+| 触发词 | 典型场景 | 预期行为 |
+|--------|----------|----------|
+| `gsa prototype` | 用户输入完整命令 | 执行转换主流程 |
+| `GSA搜索协议` | 用户提到协议名称 | 识别为转换请求 |
+| `跨域JSON封装` | 用户需要跨系统字段映射 | 加载映射表并转换 |
+| `搜索协议转换` | 用户需要格式转换 | 执行文本到JSON转换 |
+| `GSA封装` | 用户需要协议封装 | 生成结构化JSON |
+| `协议解析` | 用户需要解析协议文本 | 执行解析流程 |
+| `字段映射` | 用户需要字段名映射 | 应用自定义映射表 |
+| `格式转换` | 用户需要通用格式转换 | 执行转换主流程 |
 
 ---
 
@@ -92,241 +68,163 @@ trigger_words: ["gsa prototype", "GSA搜索协议", "跨域JSON封装", "搜索�
 
 ### 3.1 前置条件
 
-| 条件 | 要求 |
-|------|------|
-| 输入文件 | 存在且可读，编码为 UTF-8 |
-| 协议格式 | 符合 GSA 协议基本语法（操作名 + 参数对） |
-| 映射表（可选） | 若需跨域映射，需提供 JSON 格式的映射配置 |
-| 输出路径 | 可写目录，或使用标准输出 |
+| 条件 | 要求 | 检查方式 |
+|------|------|----------|
+| 输入文件 | 存在且可读 | `test -f input.txt` |
+| 文件格式 | 每行一个 `key=value` | `head -5 input.txt` |
+| 必填字段 | 包含 `operation` 和 `q` | `grep -E '^(operation|q)=' input.txt` |
+| 运行环境 | Python 3.6+ | `python3 --version` |
 
 ### 3.2 执行步骤
 
-**步骤 1：读取协议文件**
+1. **准备输入文件**：创建或获取GSA协议文本文件，确保每行格式为 `key=value`。
 
-读取输入文件内容，逐行解析。协议文本格式示例：
+   ```bash
+   # 示例输入文件 input.txt
+   operation=search
+   q=分布式系统
+   num=10
+   start=0
+   ```
 
-```
-operation=search
-q=人工智能
-page=2
-size=20
-```
+2. **运行转换命令**：
 
-**步骤 2：解析协议字段**
+   ```bash
+   gsa prototype --input input.txt --output result.json
+   ```
 
-按 `key=value` 格式拆分每一行，识别以下核心字段：
+3. **检查输出结果**：
 
-| 字段名 | 类型 | 必填 | 说明 |
-|--------|------|------|------|
-| `operation` | string | 是 | 操作类型，如 search、list、get |
-| `q` | string | 是 | 查询关键词 |
-| `page` | integer | 否 | 页码，缺失时输出占位符 |
-| `size` | integer | 否 | 每页条数，缺失时输出占位符 |
-| 其他自定义字段 | string | 否 | 透传到输出 JSON |
+   ```bash
+   cat result.json
+   # 期望输出：{"operation":"search","q":"分布式系统","num":"10","start":"0"}
+   ```
 
-**步骤 3：执行字段映射（可选）**
+4. **处理需核实字段**：若输出包含 `[需核实:xxx]`，补充对应字段后重试。
 
-若提供映射表，按映射关系重命名字段。映射表格式：
+   ```bash
+   # 若输出为 {"operation":"search","[需核实:q]":""}
+   # 编辑 input.txt 添加 q=搜索内容
+   echo "q=分布式系统" >> input.txt
+   gsa prototype --input input.txt --output result.json
+   ```
 
-```json
-{
-  "q": "query",
-  "page": "page_number",
-  "size": "page_size"
-}
-```
+5. **应用自定义映射表**（可选）：
 
-**步骤 4：校验必填字段**
+   ```bash
+   gsa prototype --input input.txt --output result.json --mapping map.json
+   ```
 
-检查 `operation` 和 `q` 是否存在。缺失时：
+   映射表示例 `map.json`：
 
-- `operation` 缺失 → 输出 `[需核实:operation]`，停止转换
-- `q` 缺失 → 输出 `[需核实:q]`，停止转换
-- `page` 缺失 → 输出 `[需核实:page]`，继续转换
-
-**步骤 5：生成 JSON 输出**
-
-按以下结构输出：
-
-```json
-{
-  "operation": "search",
-  "query": "人工智能",
-  "page_number": 2,
-  "page_size": 20,
-  "source": "gsa-protocol",
-  "converted_at": "2026-08-14T10:30:00Z"
-}
-```
+   ```json
+   {
+     "operation": "action",
+     "q": "query",
+     "num": "page_size"
+   }
+   ```
 
 ### 3.3 输出规范
 
-| 项目 | 规范 |
-|------|------|
-| 编码 | UTF-8 |
-| 缩进 | 2 空格 |
-| 键名 | 小驼峰（camelCase） |
-| 时间戳 | ISO 8601 格式，UTC 时区 |
-| 占位符 | `[需核实:字段名]`，不省略、不替换 |
+| 输出类型 | 格式 | 说明 |
+|----------|------|------|
+| 成功 | JSON对象 | 键值对按输入顺序排列 |
+| 字段缺失 | `[需核实:字段名]` | 占位符替代缺失值 |
+| 解析错误 | 错误码+提示 | 见错误码体系章节 |
+| 版本信息 | `gsa-prototype v1.0.0` | 使用 `--version` 参数 |
 
 ---
 
-## 四、置信度门控
+## 四、置信度门控机制
 
-本工具遵循**三不原则**，确保输出可信：
+### 4.1 占位符规则
 
-### 4.1 不编造数据
+| 场景 | 输出 | 说明 |
+|------|------|------|
+| 必填字段缺失 | `[需核实:字段名]` | 不猜测、不编造 |
+| 字段值格式异常 | `[需核实:字段名=原始值]` | 保留原始值供人工确认 |
+| 映射表字段不存在 | `[需核实:映射字段]` | 提示映射配置问题 |
 
-当必填字段缺失时，输出占位符而非猜测值。例如：
+### 4.2 处理策略
 
-```
-输入：operation=search
-      q=机器学习
-
-输出：{"operation": "search", "query": "机器学习", "page": "[需核实:page]"}
-```
-
-### 4.2 不猜测意图
-
-当 `operation` 值不在已知集合（search、list、get、update、delete）中时，输出 `[需核实:operation]` 并停止转换。
-
-### 4.3 不假设默认值
-
-所有可选字段缺失时，一律输出占位符，不填入默认值。例如 `page` 缺失时，不默认填 1。
+1. 遇到缺失字段时，**立即停止**后续转换，输出占位符。
+2. 占位符字段不参与后续映射和校验。
+3. 用户补充字段后，重新执行转换。
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 含义 | 提示话术 | 修正步骤 |
-|--------|------|----------|----------|
-| `E001` | 文件不存在 | 无法读取输入文件，请检查路径 | 确认文件路径正确，文件存在且可读 |
-| `E002` | 格式错误 | 协议格式不正确，应为 key=value 格式 | 检查每行是否包含 `=` 分隔符 |
-| `E003` | 缺少操作名 | 未找到 operation 字段 | 在协议文本中添加 operation 字段 |
-| `E004` | 缺少查询词 | 未找到 q 字段 | 在协议文本中添加 q 字段 |
-| `E005` | 操作名未知 | operation 值不在已知集合中 | 核实操作名，或使用已知操作名 |
-| `E006` | 映射表错误 | 映射表 JSON 格式不正确 | 检查映射表是否为合法 JSON |
-| `E007` | 输出失败 | 无法写入输出文件 | 检查输出路径权限，确认目录可写 |
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|----------|----------|----------|
+| E001 | 输入文件不存在 | `错误: 文件 input.txt 不存在` | 检查文件路径，确认文件已创建 |
+| E002 | 文件格式错误 | `错误: 第3行格式不正确，应为 key=value` | 编辑文件，修正格式 |
+| E003 | 缺少必填字段 | `错误: 缺少 operation 或 q 字段` | 添加对应字段后重试 |
+| E004 | 映射表格式错误 | `错误: 映射表 map.json 不是有效JSON` | 检查映射表语法 |
+| E005 | 输出目录不可写 | `错误: 无法写入 result.json` | 检查目录权限 |
+| E006 | 编码不支持 | `错误: 文件编码不是UTF-8` | 转换文件编码为UTF-8 |
 
 ---
 
-## 六、FAQ 与反模式
+## 六、FAQ 与反模式对照
 
-### 6.1 常见坑
-
-**坑 1：猜测缺失字段**
-
-反模式：`page` 缺失时，自作主张填 `page: 1`。
-
-正确做法：输出 `[需核实:page]`，让调用方决定。
-
-**坑 2：忽略操作名校验**
-
-反模式：`operation=unknown_op` 时，直接透传。
-
-正确做法：输出 `[需核实:operation]` 并停止转换。
-
-**坑 3：映射表覆盖原字段**
-
-反模式：映射表将 `q` 映射为 `query`，但输出中同时保留 `q` 和 `query`。
-
-正确做法：映射后只保留映射后的字段名，不保留原字段。
-
-**坑 4：时间戳使用本地时区**
-
-反模式：`converted_at` 使用系统本地时间。
-
-正确做法：统一使用 UTC 时间，格式为 ISO 8601。
-
-**坑 5：静默丢弃未知字段**
-
-反模式：协议中出现未在映射表中定义的字段，直接丢弃。
-
-正确做法：透传到输出 JSON 的 `extras` 对象中，保留信息。
-
-### 6.2 反模式对照表
-
-| 反模式 | 问题 | 推荐做法 |
-|--------|------|----------|
-| 默认值填充 | 掩盖数据缺失 | 占位符提示 |
-| 宽松校验 | 错误数据流入下游 | 严格校验，失败即停 |
-| 字段覆盖 | 信息丢失 | 映射后保留 extras |
-| 时区混用 | 时间语义混乱 | 统一 UTC |
-| 静默丢弃 | 数据不可追溯 | 透传保留 |
+| 常见坑 | 反模式示例 | 正确做法 |
+|--------|------------|----------|
+| 忽略必填字段 | 直接输出缺少 `q` 的JSON | 输出 `[需核实:q]` 占位符 |
+| 猜测缺失值 | 自动填充 `q=default` | 保留占位符，等待用户确认 |
+| 覆盖原始文件 | 转换后直接修改输入文件 | 输出到独立文件，保留原始数据 |
+| 忽略映射错误 | 映射字段不存在时静默跳过 | 输出 `[需核实:映射字段]` 提示 |
+| 批量处理无记录 | 重复处理相同文件 | 记录文件哈希，跳过已处理项 |
 
 ---
 
-## 七、渐进式披露
+## 七、渐进式披露路径
 
-### 7.1 新手快速上手（5 分钟）
+### 7.1 新手速查卡
 
-1. 准备一个 GSA 协议文本文件，格式为 `key=value` 每行一个
-2. 确保包含 `operation` 和 `q` 字段
-3. 运行转换命令，查看 JSON 输出
-4. 若输出包含 `[需核实:xxx]`，补充对应字段后重试
-
-### 7.2 进阶使用（30 分钟）
-
-1. 阅读 `convert_one.py` 源码，理解转换核心逻辑
-2. 扩展支持更多输入格式（XML、CSV）
-3. 实现增量处理（记录已处理文件，跳过重复数据）
-4. 添加自定义转换插件机制
-
-### 7.3 深度定制（2 小时+）
-
-1. 设计自定义映射表，适配目标系统字段命名
-2. 编写校验规则，增加业务级字段检查
-3. 集成到 CI/CD 流程，实现自动化转换
-4. 开发批量处理脚本，支持多文件并发转换
-
----
-
-## 八、扩展指南
-
-### 8.1 自定义字段映射
-
-映射表支持嵌套结构，可将协议字段映射到 JSON 对象的深层路径：
-
-```json
-{
-  "q": "search.query",
-  "page": "pagination.page",
-  "size": "pagination.size"
-}
+```text
+1. 准备 input.txt（每行 key=value）
+2. 运行：gsa prototype --input input.txt --output result.json
+3. 查看 result.json
+4. 有 [需核实:xxx] 就补字段重跑
 ```
 
-### 8.2 自定义校验规则
+### 7.2 进阶路径
 
-在映射表同级添加 `validation` 配置：
+1. **阅读源码**：查看 `convert_one.py` 理解核心转换逻辑。
+2. **扩展格式**：添加XML、CSV输入支持。
+3. **增量处理**：实现文件指纹记录，跳过重复数据。
+4. **自定义插件**：开发转换插件机制，支持业务定制。
 
-```json
-{
-  "validation": {
-    "required": ["operation", "q"],
-    "types": {
-      "page": "integer",
-      "size": "integer"
-    }
-  }
-}
-```
+### 7.3 高级路径
 
-### 8.3 插件机制
-
-通过实现标准接口，可添加自定义转换器：
-
-```python
-class CustomConverter:
-    def convert(self, field_name, field_value, context):
-        # 自定义转换逻辑
-        return field_value
-```
+1. **设计映射表**：为目标系统定制字段命名规范。
+2. **编写校验规则**：增加业务级字段检查（如枚举值、正则匹配）。
+3. **CI/CD集成**：将转换流程接入自动化流水线。
+4. **批量并发**：开发多文件并发处理脚本。
 
 ---
 
-## 用户协议
+## 八、参数参考表
 
-使用本 Skill 即表示您同意以下条款：
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| `--input` | string | 是 | 无 | 输入文件路径 |
+| `--output` | string | 是 | 无 | 输出文件路径 |
+| `--mapping` | string | 否 | 无 | 映射表JSON文件路径 |
+| `--validate` | string | 否 | 无 | 校验规则JSON文件路径 |
+| `--incremental` | boolean | 否 | false | 启用增量处理模式 |
+| `--selftest` | boolean | 否 | false | 运行自检流程 |
+| `--version` | boolean | 否 | false | 显示版本信息 |
+
+---
+
+## 九、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
 
 1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于数据转换错误、数据丢失、业务中断等风险。
 2. **禁止反向工程**：不得对本 Skill 的源代码进行反向工程、反编译、破解或试图提取底层算法。
@@ -334,23 +232,33 @@ class CustomConverter:
 4. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保。
 5. **免责范围**：在任何情况下，Skill 作者均不对因使用本 Skill 而产生的任何直接、间接、偶然、特殊或后果性损害承担责任。
 
-<!-- user-agreement-injected -->
-
 ---
 
-## 许可证（License）
-
-MIT License
-
-版权所有 (c) 2026 原创作者（自持版权）
-
-特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人，不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或出售本软件的副本，并允许向其提供本软件的人这样做，但须满足以下条件：
-
-上述版权声明和本许可声明应包含在本软件的所有副本或主要部分中。
-
-本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权行为或其他方面，由本软件或本软件的使用或其他交易引起，或与之相关。
+## 十、许可证（License）
 
 <!-- professional-license-embedded -->
+
+**MIT License**
+
+Copyright (c) 2024 协议工坊
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
 ---
 

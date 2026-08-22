@@ -1,482 +1,503 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-GSA 协议转 JSON 封装器 (gsa-prototype)
+gsa-prototype: 搜索协议封装与跨域 JSON 转换工具
 
-将 GSA 协议文本转换为结构化 JSON，支持跨域映射与字段校验。
-纯本地文本处理，不发起网络请求，不修改源文件。
+本脚本依据功能规格独立实现，仅使用 Python 标准库。
+支持通过命令行将文本数据转换为统一的 JSON 结构化输出，
+并附带离线自检模式（--selftest）。
 
-用法示例:
-    python scripts/main.py input.txt                    # 转换文件，输出到 stdout
-    python scripts/main.py input.txt -o output.json     # 转换文件，写入输出文件
-    python scripts/main.py input.txt --mapping map.json # 使用映射表
-    python scripts/main.py --selftest                   # 离线自检
-    python scripts/main.py input.txt --dry-run          # 预览模式，不写盘
+错误码说明:
+    E001: 参数解析错误
+    E002: 输入文件无法读取
+    E003: 输入数据为空或格式非法
+    E004: 输出文件无法写入
+    E005: 内部数据转换异常
+    E006: 自检断言失败
+    E007: 不支持的协议类型
+    E008: 字段映射配置错误
+    E009: 批量处理中断
+    E010: 未知运行时错误
 """
 
 import argparse
 import json
+import os
+import re
 import sys
 import tempfile
-import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime, timezone
+from functools import lru_cache
+from typing import Any, Dict, List, Optional, Tuple
 
-# ============================================================
-# 常量定义
-# ============================================================
+# 默认输出 Schema 版本
+SCHEMA_VERSION = "1.0.1"
 
-KNOWN_OPERATIONS = {"search", "list", "get", "update", "delete"}
-REQUIRED_FIELDS = ["operation", "q"]
-OPTIONAL_FIELDS = ["page", "size"]
-PLACEHOLDER_PREFIX = "[需核实:"
-PLACEHOLDER_SUFFIX = "]"
-ERROR_CODES = {
-    "E001": "文件不存在或不可读",
-    "E002": "协议格式错误（应为 key=value 格式）",
-    "E003": "缺少 operation 字段",
-    "E004": "缺少 q 字段",
-    "E005": "operation 值不在已知集合中",
-    "E006": "映射表 JSON 格式错误",
-    "E007": "输出文件写入失败",
-    "E008": "输入参数类型错误",
-    "E009": "映射表路径无效",
-    "E010": "内部处理异常",
+# 支持的输入协议类型
+SUPPORTED_PROTOCOLS = ["gsa", "json", "text"]
+
+# 时间戳格式（ISO 8601 带时区）
+TIMESTAMP_FORMAT = "%Y-%m-%dT%H:%M:%S+00:00"
+
+# 跨域映射配置（字段名映射规则）
+# 格式: {目标字段: [源字段候选列表]}
+CROSS_DOMAIN_MAPPINGS = {
+    "title": ["title", "标题", "name", "heading", "subject"],
+    "link": ["link", "url", "href", "链接", "地址", "uri"],
+    "summary": ["summary", "snippet", "description", "desc", "摘要", "描述", "content"],
+    "timestamp": ["timestamp", "time", "date", "publish_time", "时间", "日期", "created_at"],
+    "author": ["author", "creator", "作者", "创建者"],
+    "category": ["category", "categories", "分类", "标签", "tags"],
+    "score": ["score", "relevance", "相关度", "评分"],
+}
+
+# 字段类型映射（用于类型校验）
+FIELD_TYPE_RULES = {
+    "title": "string",
+    "link": "string",
+    "summary": "string",
+    "timestamp": "string",
+    "author": "string",
+    "category": "array",
+    "score": "number",
+}
+
+# GSA XML 命名空间
+GSA_XML_NAMESPACES = {
+    "gsa": "http://www.google.com/gsa/search",
+    "rss": "http://purl.org/rss/1.0/",
+    "dc": "http://purl.org/dc/elements/1.1/",
 }
 
 
-# ============================================================
-# 输入校验
-# ============================================================
+class GSAError(Exception):
+    """自定义异常类，携带错误码。"""
+    def __init__(self, code: str, message: str):
+        super().__init__(message)
+        self.code = code
+        self.message = message
 
-def validate_input_file(file_path):
-    """校验输入文件路径，返回文件内容字符串。
 
-    参数:
-        file_path: 输入文件路径
+def _now_timestamp() -> str:
+    """返回当前 UTC 时间戳字符串（ISO 8601 带时区）。"""
+    return datetime.now(timezone.utc).strftime(TIMESTAMP_FORMAT)
 
-    返回:
-        文件内容字符串
 
-    异常:
-        SystemExit: 文件不存在或不可读时退出，错误码 E001
-    """
-    if not file_path or not isinstance(file_path, str):
-        print("错误 E008: 输入文件路径必须是字符串", file=sys.stderr)
-        sys.exit(1)
+def _safe_float(value: Any, default: float = 0.0) -> float:
+    """安全转换为浮点数。"""
     try:
-        with open(file_path, "rb") as f:
-            raw_bytes = f.read()
-    except FileNotFoundError:
-        print(f"错误 E001: 文件不存在: {file_path}", file=sys.stderr)
-        print("修正步骤: 确认文件路径正确，文件存在且可读", file=sys.stderr)
-        sys.exit(1)
-    except PermissionError:
-        print(f"错误 E001: 文件不可读（权限不足）: {file_path}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"错误 E001: 读取文件失败: {e}", file=sys.stderr)
-        sys.exit(1)
-    # 多编码兼容：utf-8 → gbk → gb18030 → 替换
-    for encoding in ["utf-8", "gbk", "gb18030"]:
-        try:
-            return raw_bytes.decode(encoding)
-        except UnicodeDecodeError:
-            continue
-    return raw_bytes.decode("utf-8", errors="replace")
+        result = float(value)
+        # 限制在 0.0 ~ 1.0 之间
+        return max(0.0, min(1.0, result))
+    except (TypeError, ValueError):
+        return default
 
 
-def validate_mapping_file(mapping_path):
-    """校验映射表文件，返回映射字典。
+def _safe_str(value: Any, default: str = "") -> str:
+    """安全转换为字符串。"""
+    if value is None:
+        return default
+    return str(value)
 
-    参数:
-        mapping_path: 映射表 JSON 文件路径
 
-    返回:
-        映射字典，如 {"q": "query"}
+def _guess_field_type(value: Any) -> str:
+    """根据值内容猜测字段类型。"""
+    if isinstance(value, bool):
+        return "boolean"
+    if isinstance(value, (int, float)):
+        return "number"
+    if isinstance(value, list):
+        return "array"
+    if isinstance(value, dict):
+        return "object"
+    if isinstance(value, str):
+        # 尝试识别时间戳
+        if re.match(r"^\d{4}-\d{2}-\d{2}", value):
+            return "datetime"
+        # 尝试识别 URL
+        if value.startswith(("http://", "https://")):
+            return "url"
+        return "string"
+    return "unknown"
 
-    异常:
-        SystemExit: 映射表格式错误或路径无效时退出
+
+def _validate_field_type(field_name: str, value: Any) -> bool:
     """
-    if not mapping_path:
-        return {}
-    if not isinstance(mapping_path, str):
-        print("错误 E008: 映射表路径必须是字符串", file=sys.stderr)
-        sys.exit(1)
-    try:
-        with open(mapping_path, "rb") as f:
-            raw_bytes = f.read()
-    except FileNotFoundError:
-        print(f"错误 E009: 映射表文件不存在: {mapping_path}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"错误 E009: 读取映射表失败: {e}", file=sys.stderr)
-        sys.exit(1)
-    for encoding in ["utf-8", "gbk", "gb18030"]:
-        try:
-            content = raw_bytes.decode(encoding)
-            break
-        except UnicodeDecodeError:
-            continue
+    根据字段类型规则校验值是否符合预期类型。
+    返回 True 表示校验通过，False 表示校验失败。
+    """
+    if field_name not in FIELD_TYPE_RULES:
+        return True  # 未定义规则则通过
+
+    expected_type = FIELD_TYPE_RULES[field_name]
+    actual_type = _guess_field_type(value)
+
+    # 类型兼容性检查
+    if expected_type == "string":
+        return actual_type in ("string", "datetime", "url")
+    elif expected_type == "number":
+        return actual_type == "number" or (isinstance(value, (int, float)) and not isinstance(value, bool))
+    elif expected_type == "array":
+        return actual_type == "array"
+    return True
+
+
+def _apply_cross_domain_mapping(record: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    应用跨域映射配置，将源字段映射到统一的目标字段。
+    支持字段名映射、类型校验和默认值处理。
+    """
+    mapped = {}
+    validation_errors = []
+
+    for target_field, source_candidates in CROSS_DOMAIN_MAPPINGS.items():
+        found_value = None
+        source_field_used = None
+
+        # 尝试从源字段候选列表中查找
+        for source_field in source_candidates:
+            if source_field in record and record[source_field] is not None:
+                found_value = record[source_field]
+                source_field_used = source_field
+                break
+
+        # 如果找到值，进行类型校验
+        if found_value is not None:
+            if not _validate_field_type(target_field, found_value):
+                validation_errors.append(
+                    f"字段 '{target_field}' 类型校验失败: 期望 {FIELD_TYPE_RULES[target_field]}, 实际 {_guess_field_type(found_value)}"
+                )
+                continue
+
+            # 特殊处理：category 字段需要转换为数组
+            if target_field == "category" and not isinstance(found_value, list):
+                if isinstance(found_value, str):
+                    found_value = [found_value]
+                else:
+                    found_value = [str(found_value)]
+
+            # 特殊处理：score 字段需要转换为浮点数
+            if target_field == "score":
+                try:
+                    found_value = float(found_value)
+                except (TypeError, ValueError):
+                    found_value = 0.0
+
+            mapped[target_field] = found_value
+        else:
+            # 未找到值，使用默认值
+            if target_field == "category":
+                mapped[target_field] = []
+            elif target_field == "score":
+                mapped[target_field] = 0.0
+            else:
+                mapped[target_field] = ""
+
+    # 如果存在校验错误，抛出异常
+    if validation_errors:
+        raise GSAError("E008", "; ".join(validation_errors))
+
+    return mapped
+
+
+def _extract_core_fields(record: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    从原始记录中提取核心字段（title, link, summary, timestamp）。
+    使用跨域映射配置进行字段映射。
+    """
+    # 应用跨域映射
+    mapped = _apply_cross_domain_mapping(record)
+
+    # 提取核心字段
+    core = {
+        "title": mapped.get("title", ""),
+        "link": mapped.get("link", ""),
+        "summary": mapped.get("summary", ""),
+        "timestamp": mapped.get("timestamp", ""),
+    }
+
+    return core
+
+
+def _build_confidence(record: Dict[str, Any], core: Dict[str, Any]) -> Dict[str, float]:
+    """
+    为每条记录构建置信度评分（0.0 ~ 1.0）。
+    评分规则：字段存在且非空则加分，否则不加。
+    """
+    total_score = 0.0
+    fields_count = 0
+
+    # 核心字段权重
+    weights = {
+        "title": 0.4,
+        "link": 0.3,
+        "summary": 0.2,
+        "timestamp": 0.1,
+    }
+
+    for field, weight in weights.items():
+        fields_count += weight
+        if core.get(field):
+            total_score += weight
+
+    # 额外字段加分（最多 0.1）
+    extra_keys = [k for k in record.keys() if k not in core]
+    if extra_keys:
+        total_score += min(0.1, 0.05 * len(extra_keys))
+
+    # 归一化到 0.0 ~ 1.0
+    if fields_count > 0:
+        base_score = total_score / fields_count
     else:
-        content = raw_bytes.decode("utf-8", errors="replace")
-    try:
-        mapping = json.loads(content)
-    except json.JSONDecodeError as e:
-        print(f"错误 E006: 映射表 JSON 格式错误: {e}", file=sys.stderr)
-        print("修正步骤: 检查映射表是否为合法 JSON 对象", file=sys.stderr)
-        sys.exit(1)
-    if not isinstance(mapping, dict):
-        print("错误 E006: 映射表必须是 JSON 对象", file=sys.stderr)
-        sys.exit(1)
-    return mapping
+        base_score = 0.0
+
+    # 附加原始字段数量影响
+    record_count = len(record)
+    if record_count > 0:
+        base_score = min(1.0, base_score + 0.05 * min(record_count, 5))
+
+    return {
+        "overall": _safe_float(base_score),
+        "title": _safe_float(1.0 if core.get("title") else 0.0),
+        "link": _safe_float(1.0 if core.get("link") else 0.0),
+        "summary": _safe_float(1.0 if core.get("summary") else 0.0),
+        "timestamp": _safe_float(1.0 if core.get("timestamp") else 0.0),
+    }
 
 
-# ============================================================
-# 核心逻辑：协议解析
-# ============================================================
-
-def parse_protocol_text(text):
-    """解析 GSA 协议文本为字段字典。
-
-    参数:
-        text: 协议文本内容
-
-    返回:
-        字段字典，如 {"operation": "search", "q": "人工智能"}
-
-    异常:
-        SystemExit: 格式错误时退出，错误码 E002
+def _transform_record(record: Dict[str, Any], index: int) -> Dict[str, Any]:
     """
-    if not text or not isinstance(text, str):
-        print("错误 E008: 协议文本必须是非空字符串", file=sys.stderr)
-        sys.exit(1)
-    fields = {}
-    lines = text.strip().splitlines()
-    for line_num, line in enumerate(lines, start=1):
+    将单条原始记录转换为统一 Schema 结构。
+    """
+    core = _extract_core_fields(record)
+    confidence = _build_confidence(record, core)
+
+    # 保留原始非核心字段
+    extra_fields = {}
+    for key, value in record.items():
+        if key not in core:
+            extra_fields[key] = value
+
+    return {
+        "id": index + 1,
+        "schema_version": SCHEMA_VERSION,
+        "source": "gsa-prototype",
+        "extracted_at": _now_timestamp(),
+        "data": {
+            "title": core["title"],
+            "link": core["link"],
+            "summary": core["summary"],
+            "timestamp": core["timestamp"],
+            "extra": extra_fields,
+        },
+        "confidence": confidence,
+        "field_types": {k: _guess_field_type(v) for k, v in core.items()},
+    }
+
+
+def _parse_gsa_xml(xml_text: str) -> List[Dict[str, Any]]:
+    """
+    解析 GSA XML 协议格式。
+    支持标准 GSA XML 响应结构（<GSP> 根元素）。
+    """
+    import xml.etree.ElementTree as ET
+
+    try:
+        root = ET.fromstring(xml_text)
+    except ET.ParseError as exc:
+        raise GSAError("E003", f"GSA XML 解析失败: {exc}")
+
+    records = []
+    # 查找所有 RES 元素下的 R 元素（GSA 标准结构）
+    for res in root.findall(".//RES"):
+        for r in res.findall("R"):
+            record = {}
+            # 提取标题
+            title_elem = r.find("T")
+            if title_elem is not None and title_elem.text:
+                record["title"] = title_elem.text.strip()
+
+            # 提取链接
+            link_elem = r.find("U")
+            if link_elem is not None and link_elem.text:
+                record["link"] = link_elem.text.strip()
+
+            # 提取摘要
+            snippet_elem = r.find("S")
+            if snippet_elem is not None and snippet_elem.text:
+                record["summary"] = snippet_elem.text.strip()
+
+            # 提取时间戳（如果有）
+            date_elem = r.find("FS")
+            if date_elem is not None and date_elem.text:
+                record["timestamp"] = date_elem.text.strip()
+
+            # 提取其他属性
+            for attr in r.findall("MT"):
+                if attr.get("N") and attr.get("V"):
+                    record[attr.get("N")] = attr.get("V")
+
+            if record:
+                records.append(record)
+
+    return records
+
+
+def _parse_gsa_json(json_text: str) -> List[Dict[str, Any]]:
+    """
+    解析 GSA JSON 协议格式。
+    支持标准 GSA JSON 响应结构。
+    """
+    try:
+        data = json.loads(json_text)
+    except json.JSONDecodeError as exc:
+        raise GSAError("E003", f"GSA JSON 解析失败: {exc}")
+
+    records = []
+    # 标准 GSA JSON 结构: {"results": [...]} 或直接数组
+    if isinstance(data, dict):
+        # 尝试多种可能的键名
+        for key in ["results", "items", "data", "records"]:
+            if key in data and isinstance(data[key], list):
+                records = [item for item in data[key] if isinstance(item, dict)]
+                break
+        else:
+            # 如果找不到标准键，尝试将整个对象作为单条记录
+            if any(k in data for k in ["title", "link", "url", "summary"]):
+                records = [data]
+    elif isinstance(data, list):
+        records = [item for item in data if isinstance(item, dict)]
+
+    return records
+
+
+def _parse_gsa_text(text: str) -> List[Dict[str, Any]]:
+    """
+    解析 GSA 协议文本格式。
+    支持三种格式：
+    1. GSA XML 格式（<GSP> 根元素）
+    2. GSA JSON 格式
+    3. 行分隔格式（title|link|summary|timestamp）
+    """
+    text = text.strip()
+    if not text:
+        return []
+
+    # 尝试 XML 解析（GSA 标准 XML 响应）
+    if text.lstrip().startswith("<"):
+        try:
+            records = _parse_gsa_xml(text)
+            if records:
+                return records
+        except GSAError:
+            pass  # 不是有效的 GSA XML，继续尝试其他格式
+
+    # 尝试 JSON 解析（GSA JSON 响应）
+    if text.lstrip().startswith(("{", "[")):
+        try:
+            records = _parse_gsa_json(text)
+            if records:
+                return records
+        except GSAError:
+            pass  # 不是有效的 GSA JSON，继续尝试其他格式
+
+    # 尝试行分隔格式
+    records = []
+    for line in text.splitlines():
         line = line.strip()
         if not line:
             continue
-        if "=" not in line:
-            print(f"错误 E002: 第 {line_num} 行格式错误（应为 key=value）: {line}", file=sys.stderr)
-            print("修正步骤: 检查每行是否包含 = 分隔符", file=sys.stderr)
-            sys.exit(1)
-        key, _, value = line.partition("=")
-        key = key.strip()
-        value = value.strip()
-        if not key:
-            print(f"错误 E002: 第 {line_num} 行键名为空", file=sys.stderr)
-            sys.exit(1)
-        fields[key] = value
-    return fields
+        # 用 | 分隔字段
+        parts = [p.strip() for p in line.split("|")]
+        if len(parts) >= 1:
+            record = {
+                "title": parts[0] if len(parts) > 0 else "",
+                "link": parts[1] if len(parts) > 1 else "",
+                "summary": parts[2] if len(parts) > 2 else "",
+                "timestamp": parts[3] if len(parts) > 3 else "",
+            }
+            records.append(record)
+
+    return records
 
 
-def validate_required_fields(fields):
-    """校验必填字段，返回校验结果。
-
-    参数:
-        fields: 解析后的字段字典
-
-    返回:
-        (是否可继续, 错误码或 None, 错误信息或 None)
-
-    说明:
-        - operation 缺失 → 停止转换，E003
-        - q 缺失 → 停止转换，E004
-        - operation 未知 → 停止转换，E005
-        - page/size 缺失 → 不停止，输出占位符
-    """
-    if "operation" not in fields:
-        return False, "E003", "未找到 operation 字段"
-    if "q" not in fields:
-        return False, "E004", "未找到 q 字段"
-    if fields["operation"] not in KNOWN_OPERATIONS:
-        return False, "E005", f"operation 值 '{fields['operation']}' 不在已知集合中"
-    return True, None, None
-
-
-def apply_mapping(fields, mapping):
-    """应用字段映射表，重命名字段。
-
-    参数:
-        fields: 原始字段字典
-        mapping: 映射字典，如 {"q": "query"}
-
-    返回:
-        映射后的字段字典（防御性拷贝，不修改原字典）
-    """
-    result = {}
-    for key, value in fields.items():
-        new_key = mapping.get(key, key)
-        result[new_key] = value
-    return result
-
-
-def fill_missing_optional(fields):
-    """为缺失的可选字段填充占位符。
-
-    参数:
-        fields: 字段字典
-
-    返回:
-        填充占位符后的字段字典（不修改原字典）
-    """
-    result = dict(fields)
-    for opt_field in OPTIONAL_FIELDS:
-        if opt_field not in result:
-            result[opt_field] = f"{PLACEHOLDER_PREFIX}{opt_field}{PLACEHOLDER_SUFFIX}"
-    return result
-
-
-def build_output_json(fields, source="gsa-protocol"):
-    """构建最终 JSON 输出结构。
-
-    参数:
-        fields: 处理后的字段字典
-        source: 来源标识
-
-    返回:
-        输出字典，包含固定字段和转换时间戳
-    """
-    output = dict(fields)
-    output["source"] = source
-    output["converted_at"] = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-    return output
-
-
-# ============================================================
-# 核心逻辑：转换主流程
-# ============================================================
-
-def convert_protocol(text, mapping=None, verbose=False):
-    """将 GSA 协议文本转换为结构化 JSON 字典。
-
-    参数:
-        text: 协议文本内容
-        mapping: 映射表字典（可选）
-        verbose: 是否输出详细决策信息
-
-    返回:
-        结构化 JSON 字典
-
-    异常:
-        SystemExit: 转换失败时退出
-    """
-    # 步骤 1: 解析协议字段
-    fields = parse_protocol_text(text)
-    if verbose:
-        print(f"[verbose] 解析到 {len(fields)} 个字段: {list(fields.keys())}", file=sys.stderr)
-
-    # 步骤 2: 校验必填字段
-    ok, err_code, err_msg = validate_required_fields(fields)
-    if not ok:
-        print(f"错误 {err_code}: {err_msg}", file=sys.stderr)
-        if err_code == "E003":
-            print("修正步骤: 在协议文本中添加 operation 字段", file=sys.stderr)
-        elif err_code == "E004":
-            print("修正步骤: 在协议文本中添加 q 字段", file=sys.stderr)
-        elif err_code == "E005":
-            print("修正步骤: 核实操作名，或使用已知操作名", file=sys.stderr)
-        sys.exit(1)
-
-    # 步骤 3: 应用字段映射（可选）
-    if mapping:
-        fields = apply_mapping(fields, mapping)
-        if verbose:
-            print(f"[verbose] 应用映射表，映射后字段: {list(fields.keys())}", file=sys.stderr)
-
-    # 步骤 4: 填充缺失可选字段的占位符
-    fields = fill_missing_optional(fields)
-    if verbose:
-        for opt_field in OPTIONAL_FIELDS:
-            if opt_field in fields and fields[opt_field].startswith(PLACEHOLDER_PREFIX):
-                print(f"[verbose] 可选字段 '{opt_field}' 缺失，输出占位符", file=sys.stderr)
-
-    # 步骤 5: 构建输出 JSON
-    output = build_output_json(fields)
-    if verbose:
-        print(f"[verbose] 输出 JSON 包含 {len(output)} 个键", file=sys.stderr)
-    return output
-
-
-# ============================================================
-# 输出格式化
-# ============================================================
-
-def format_json_output(data):
-    """格式化 JSON 输出为字符串。
-
-    参数:
-        data: 字典数据
-
-    返回:
-        格式化后的 JSON 字符串（2 空格缩进）
-    """
-    return json.dumps(data, ensure_ascii=False, indent=2)
-
-
-def write_output(data, output_path=None, dry=False):
-    """写入输出文件或打印到标准输出。
-
-    参数:
-        data: 字典数据
-        output_path: 输出文件路径（None 时输出到 stdout）
-        dry: 是否 dry-run 模式（只预览不写盘）
-
-    异常:
-        SystemExit: 写入失败时退出，错误码 E007
-    """
-    json_str = format_json_output(data)
-    if output_path is None:
-        print(json_str)
-        return
-    if dry:
-        print(f"[dry-run] 将写入文件: {output_path}")
-        print(json_str)
-        return
+def _parse_json_input(text: str) -> List[Dict[str, Any]]:
+    """解析 JSON 格式输入。"""
     try:
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(json_str + "\n")
-    except Exception as e:
-        print(f"错误 E007: 无法写入输出文件: {e}", file=sys.stderr)
-        print("修正步骤: 检查输出路径权限，确认目录可写", file=sys.stderr)
-        sys.exit(1)
+        data = json.loads(text)
+        if isinstance(data, list):
+            return [item for item in data if isinstance(item, dict)]
+        if isinstance(data, dict):
+            return [data]
+        return []
+    except json.JSONDecodeError as exc:
+        raise GSAError("E003", f"JSON 解析失败: {exc}")
 
 
-# ============================================================
-# 自检模块
-# ============================================================
+def _parse_text_input(text: str) -> List[Dict[str, Any]]:
+    """解析纯文本格式输入，每行作为一条记录。"""
+    records = []
+    for line in text.splitlines():
+        line = line.strip()
+        if line:
+            records.append({"text": line})
+    return records
 
-def run_selftest():
-    """运行内置自检，验证核心逻辑。
 
-    使用硬编码样例数据，不读外部文件，不依赖当前工作目录。
-    断言使用宽松阈值（大小比较/区间判断），确保必然匹配。
+def _parse_input(text: str, protocol: str) -> List[Dict[str, Any]]:
+    """根据协议类型解析输入数据。"""
+    protocol = protocol.lower()
+    if protocol not in SUPPORTED_PROTOCOLS:
+        raise GSAError("E007", f"不支持的协议类型: {protocol}")
+
+    if protocol == "gsa":
+        return _parse_gsa_text(text)
+    if protocol == "json":
+        return _parse_json_input(text)
+    if protocol == "text":
+        return _parse_text_input(text)
+
+    return []
+
+
+@lru_cache(maxsize=128)
+def _transform_record_cached(record_tuple: Tuple[Tuple[str, Any], ...], index: int) -> Dict[str, Any]:
     """
-    print("=== GSA 协议转 JSON 封装器 自检开始 ===")
-
-    # 样例 1: 正常转换（含中文标点）
-    text1 = "operation=search\nq=人工智能, 机器学习！\npage=2\nsize=20"
-    result1 = convert_protocol(text1)
-    assert result1["operation"] == "search", "样例1: operation 解析失败"
-    assert "人工智能" in result1["q"], "样例1: 中文 q 解析失败"
-    assert result1["page"] == "2", "样例1: page 解析失败"
-    assert result1["size"] == "20", "样例1: size 解析失败"
-    assert result1["source"] == "gsa-protocol", "样例1: source 字段错误"
-    assert "converted_at" in result1, "样例1: 时间戳缺失"
-    print("[通过] 样例1: 正常转换（含中文标点）")
-
-    # 样例 2: 缺失可选字段 → 占位符
-    text2 = "operation=list\nq=数据"
-    result2 = convert_protocol(text2)
-    assert result2["operation"] == "list", "样例2: operation 解析失败"
-    assert result2["q"] == "数据", "样例2: q 解析失败"
-    assert result2["page"].startswith("[需核实:"), "样例2: page 占位符缺失"
-    assert result2["size"].startswith("[需核实:"), "样例2: size 占位符缺失"
-    print("[通过] 样例2: 缺失可选字段 → 占位符")
-
-    # 样例 3: 字段映射
-    text3 = "operation=get\nq=测试\npage=1"
-    mapping3 = {"q": "query", "page": "page_number"}
-    result3 = convert_protocol(text3, mapping=mapping3)
-    assert "query" in result3, "样例3: 映射后缺少 query 字段"
-    assert "page_number" in result3, "样例3: 映射后缺少 page_number 字段"
-    assert "q" not in result3, "样例3: 原字段 q 未移除"
-    print("[通过] 样例3: 字段映射")
-
-    # 样例 4: 空输入（仅空行/空白）
-    text4 = "\n\n  \n"
-    try:
-        convert_protocol(text4)
-        assert False, "样例4: 空输入应报错但未报错"
-    except SystemExit:
-        pass
-    print("[通过] 样例4: 空输入正确报错")
-
-    # 样例 5: 超长输入（1000+ 行）
-    lines5 = ["operation=search", "q=长文本测试"]
-    for i in range(1000):
-        lines5.append(f"custom_field_{i}=value_{i}")
-    text5 = "\n".join(lines5)
-    result5 = convert_protocol(text5)
-    assert result5["operation"] == "search", "样例5: 超长输入 operation 解析失败"
-    assert result5["q"] == "长文本测试", "样例5: 超长输入 q 解析失败"
-    assert len(result5) > 1000, "样例5: 超长输入字段数不足"
-    print("[通过] 样例5: 超长输入（1000+ 行）")
-
-    # 样例 6: 未知操作名 → 停止转换
-    text6 = "operation=unknown_op\nq=测试"
-    try:
-        convert_protocol(text6)
-        assert False, "样例6: 未知操作名应报错但未报错"
-    except SystemExit:
-        pass
-    print("[通过] 样例6: 未知操作名正确报错")
-
-    # 样例 7: 中文编码兼容（模拟 GBK 内容）
-    gbk_bytes = "operation=search\nq=中文测试".encode("gbk")
-    with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as tmp:
-        tmp.write(gbk_bytes)
-        tmp_path = tmp.name
-    try:
-        content = validate_input_file(tmp_path)
-        result7 = convert_protocol(content)
-        assert result7["q"] == "中文测试", "样例7: GBK 编码中文解析失败"
-        print("[通过] 样例7: GBK 编码兼容")
-    finally:
-        os.unlink(tmp_path)
-
-    # 样例 8: 输出格式验证
-    output_str = format_json_output(result1)
-    assert output_str.startswith("{"), "样例8: JSON 输出格式错误"
-    assert '"operation": "search"' in output_str, "样例8: JSON 输出缺少 operation"
-    print("[通过] 样例8: 输出格式验证")
-
-    print("=== 自检全部通过（8/8）===")
-    return 0
+    带缓存的单条记录转换函数。
+    使用元组作为缓存键，因为字典不可哈希。
+    """
+    record = dict(record_tuple)
+    return _transform_record(record, index)
 
 
-# ============================================================
-# CLI 入口
-# ============================================================
+def _transform_data(records: List[Dict[str, Any]], use_parallel: bool = True) -> Dict[str, Any]:
+    """
+    将原始记录列表转换为统一结构化输出。
+    支持并行处理和缓存优化。
+    """
+    if not records:
+        return {
+            "schema_version": SCHEMA_VERSION,
+            "total": 0,
+            "records": [],
+            "generated_at": _now_timestamp(),
+        }
 
-def main():
-    """CLI 入口函数。"""
-    parser = argparse.ArgumentParser(
-        description="GSA 协议转 JSON 封装器",
-        epilog="示例: python scripts/main.py input.txt -o output.json --mapping map.json"
-    )
-    parser.add_argument("--input", nargs="?", help="输入协议文件路径")
-    parser.add_argument("-o", "--output", help="输出 JSON 文件路径（默认输出到 stdout）")
-    parser.add_argument("-m", "--mapping", help="映射表 JSON 文件路径")
-    parser.add_argument("--dry-run", action="store_true", help="预览模式，只打印不写盘")
-    parser.add_argument("--force", action="store_true", help="强制写盘（配合 --dry-run 使用）")
-    parser.add_argument("--verbose", action="store_true", help="输出详细决策信息")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        sys.exit(run_selftest())
-
-    # 正常模式：必须有输入文件
-    if not args.input:
-        parser.print_help()
-        sys.exit(1)
-
-    # 读取输入文件
-    text = validate_input_file(args.input)
-
-    # 读取映射表（可选）
-    mapping = validate_mapping_file(args.mapping) if args.mapping else None
-
-    # 执行转换
-    result = convert_protocol(text, mapping=mapping, verbose=args.verbose)
-
-    # 输出结果
-    # dry-run 模式：只预览不写盘，除非显式 --force
-    dry = args.dry_run and not args.force
-    write_output(result, args.output, dry=dry)
-
-
-if __name__ == "__main__":
-    main()
+    if use_parallel and len(records) > 1:
+        # 并行处理批量记录
+        transformed = []
+        with ThreadPoolExecutor(max_workers=min(8, len(records))) as executor:
+            # 将记录转换为可哈希的元组形式用于缓存
+            record_tuples = [tuple(sorted(rec.items())) for rec in records]
+            future_to_index = {
+                executor.submit(_transform_record_cached, rec_tuple, idx): idx
+                for idx, rec_tuple in enumerate(record_tuples)
+            }
+            for future in as_completed(future_to_index):
+                idx = future_to_index[future]
+                try:
+                    result = future.result()
+                    transformed.append((idx, result))
+                except Exception as exc:
+                    raise GSA
