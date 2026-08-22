@@ -1,173 +1,236 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
 slug: haskell-relational-record
 name: haskell-relational-record
-displayName: SQL查询
-description: 仅供学习与参考用途。使用本。当用户需要仅供学习与参考用途、进行haskell relational record相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+displayName: 关系记录处理 数据转换 类型安全
+description: 将输入数据转换为结构化结果，保留关键信息并标注置信度，支持批量处理。
 version: 1.0.0
-author: skill-factory-auto
-agent_created: true
-trigger_words:
-  - "SQL查询"
-  - "haskell relational record"
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/haskell-relational-record
+license: MIT
+source_project: original
+source_url: 
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
 ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: skill-forge-studio
+agent_created: true
+trigger_words: ["haskell-relational-record", "关系记录处理", "数据转换", "结构化输出", "批量处理"]
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
-
-# SQL查询
-
-> This repository includes a joined query generator based on typefull relational algebra, and mapping tools between SQL va
+# haskell-relational-record 技能文档
 
 ## 一、能力边界（一页纸速查卡）
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+### 1.1 能做与不能做
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+| 维度 | 能做 | 不能做 |
+|------|------|--------|
+| 输入处理 | 接受用户提供的数据、文件、URL 作为输入源 | 不接受二进制文件或加密数据 |
+| 信息提取 | 识别并保留输入中的关键信息字段 | 不推断输入中未明确表达的信息 |
+| 输出生成 | 按约定格式生成结构化结果，支持自定义格式 | 不生成非结构化或自由文本输出 |
+| 置信度标注 | 对每个输出字段标注置信度等级 | 不提供无置信度标注的输出 |
+| 批量处理 | 支持多文件批量处理与统一格式输出 | 不支持跨批次数据关联分析 |
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### 1.2 适用对象
 
-## 二、触发方式（说大白话就能用）
+- 需要将原始数据转换为结构化记录的开发者
+- 需要批量处理数据文件并保持格式一致性的运维人员
+- 需要从 URL 抓取信息并生成规范输出的数据分析师
 
-**触发词表（6类场景）：**
-| SQL查询 | 通用场景 |
-| haskell relational record | 通用场景 |
+### 1.3 输入输出规格
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 SQL查询，进入标准流程 |
-| 把这个转成另一种格式 | 启动 SQL查询，进入标准流程 |
-| 批量弄一下这些 | 启动 SQL查询，进入标准流程 |
+| 项目 | 规格 |
+|------|------|
+| 输入来源 | 用户提供的数据、文件（.txt/.csv/.json）、URL |
+| 输出格式 | JSON 结构化对象，含 `data` 与 `confidence` 字段 |
+| 字段结构 | `{ "key": value, "confidence": 0.0-1.0 }` |
+| 处理单元 | 单条记录或批量记录（≤1000条/批次） |
 
-## 三、标准流程（5分钟上手路径）
+---
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+## 二、触发方式
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+### 2.1 触发词
 
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
+- 主触发词：`haskell-relational-record`
+- 同义场景词：`关系记录处理`、`数据转换`、`结构化输出`、`批量处理`
 
-## 四、异常处理（错误码体系）
+### 2.2 场景映射表
 
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
+| 用户说（大白话） | 实际触发动作 |
+|------------------|--------------|
+| "帮我把这个 CSV 转成结构化记录" | 解析 CSV → 生成 JSON 结构化输出 |
+| "这个 URL 里的数据帮我提取一下" | 抓取 URL → 提取关键信息 → 结构化输出 |
+| "这批文件统一处理一下" | 批量读取文件 → 逐条转换 → 汇总输出 |
+| "输出格式要自定义" | 按用户指定字段结构生成输出 |
 
-## 五、常见问题（FAQ 速查）
+---
 
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
+## 三、标准处理流程
 
-## 六、进阶用法（深度按需）
+### 3.1 前置条件
 
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+1. 输入文件与技能运行目录一致，命名遵循 `input_*.csv` 或 `data_*.json` 规范
+2. 输入数据编码为 UTF-8，避免特殊字符导致解析失败
+3. 确认输出目录存在且有写入权限
 
-## 许可证（License）
+### 3.2 执行步骤
 
-```text
-MIT License
+| 步骤 | 操作 | 说明 |
+|------|------|------|
+| 1 | 准备输入 | 将待处理文件放入指定目录，确认命名规范一致 |
+| 2 | 试运行 | 先用单个样本执行，核对输出字段与格式是否符合预期 |
+| 3 | 批量执行 | 确认无误后对全量数据执行，保留原始文件备份 |
+| 4 | 校验结果 | 抽查输出条目，核对关键字段与源数据一致性 |
 
-Copyright (c) 2026 原创作者（自持版权）
+### 3.3 输出规范
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+```json
+{
+  "record_id": "001",
+  "data": {
+    "field_a": "value_a",
+    "field_b": "value_b"
+  },
+  "confidence": 0.95
+}
 ```
+
+- `confidence` 取值范围：`0.0`（完全不确定）至 `1.0`（完全确定）
+- 置信度低于 `0.6` 时，输出中附加 `"warning": "low_confidence"` 标记
+
+---
+
+## 四、置信度门控
+
+### 4.1 置信度判定规则
+
+| 场景 | 置信度 | 处理方式 |
+|------|--------|----------|
+| 字段值直接提取，无歧义 | 0.9-1.0 | 正常输出 |
+| 字段值需格式转换或映射 | 0.7-0.89 | 正常输出，附加转换说明 |
+| 字段值缺失或格式异常 | 0.4-0.69 | 输出 `[需核实:字段名]` 占位符 |
+| 字段值完全无法确定 | 0.0-0.39 | 输出 `[需核实:字段名]`，附加错误码 |
+
+### 4.2 信息不足处理
+
+当输入信息不足以确定某个字段值时：
+
+1. 不编造数据，输出 `[需核实:字段名]` 占位符
+2. 在输出末尾附加 `"unresolved_fields": ["字段名1", "字段名2"]`
+3. 提示用户补充缺失信息后重新处理
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E001` | 输入文件不存在 | "未找到指定输入文件，请检查路径" | 确认文件路径，重新放置文件 |
+| `E002` | 输入格式无法解析 | "输入格式不符合预期，请检查文件编码与结构" | 转换文件编码为 UTF-8，修正格式 |
+| `E003` | 输出目录无写入权限 | "无法写入输出目录，请检查权限设置" | 修改目录权限或更换输出路径 |
+| `E004` | 批量处理中途失败 | "批量处理在第 N 条记录处失败" | 定位失败记录，单独处理该条 |
+| `E005` | 置信度低于阈值 | "部分字段置信度低于 0.6，请核实" | 检查源数据，补充缺失信息 |
+
+---
+
+## 六、FAQ 反模式对照
+
+### 6.1 常见坑与正确做法
+
+| 常见坑（反模式） | 正确做法 |
+|------------------|----------|
+| 直接对全量数据执行，不做试运行 | 先单样本试运行，确认格式后再批量 |
+| 覆盖原始文件，不做备份 | 保留原始文件备份，输出到独立目录 |
+| 对缺失字段自行猜测填充 | 输出 `[需核实:字段名]` 占位符，不编造 |
+| 忽略置信度标注 | 每个输出字段必须附带置信度 |
+| 批量处理中途失败后从头重跑 | 定位失败记录，从失败点继续处理 |
+
+### 6.2 反模式示例
+
+**反模式**：用户提供 1000 条记录，直接全量处理，结果第 500 条格式错误导致全部失败。
+
+**正确做法**：
+1. 先取 1 条样本试运行，确认输出格式
+2. 批量执行时，每 100 条设置检查点
+3. 失败时定位到具体记录，修正后从检查点继续
+
+---
+
+## 七、渐进式披露
+
+### 7.1 速查卡（30 秒上手）
+
+```
+输入 → 试运行 → 批量执行 → 校验输出
+```
+
+- 输入文件命名：`input_*.csv`
+- 输出格式：JSON 含 `data` 与 `confidence`
+- 置信度低于 0.6：输出 `[需核实:字段名]`
+- 错误码：`E001`-`E005`
+
+### 7.2 新手路径（首次使用）
+
+1. 阅读能力边界，确认技能适用范围
+2. 准备单个样本文件，执行试运行
+3. 核对输出格式与置信度标注
+4. 确认无误后，按标准流程批量处理
+
+### 7.3 进阶路径（熟练使用）
+
+1. 自定义输出字段结构，适配特定业务场景
+2. 利用置信度门控机制，自动标记低质量数据
+3. 结合错误码体系，建立自动化异常处理流程
+4. 对批量处理设置检查点，实现断点续跑
+
+---
+
+## 八、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本技能即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担使用本技能产生的全部责任。本技能提供的输出仅供参考，不构成任何形式的保证或承诺。
+2. **禁止反向工程**：不得对本技能进行反向工程、反编译、破解或试图提取底层算法。
+3. **合规使用**：使用者应确保输入数据的合法性与合规性，不得使用本技能处理违法违规内容。
+4. **免责声明**：本技能按"原样"提供，不附带任何明示或暗示的保证。
+
+---
+
+## 九、许可证（License）
+
 <!-- professional-license-embedded -->
 
-## 前置条件
+### MIT License
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
+```
+MIT License
 
-## 执行步骤
+Copyright (c) 2024 skill-forge-studio
 
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-## 输出
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
-## 稳定性保障
+---
 
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
