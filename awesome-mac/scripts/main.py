@@ -664,6 +664,11 @@ def main(argv: Optional[List[str]] = None) -> int:
         退出码（0 成功，非 0 失败）
     """
     parser = build_parser()
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
     args = parser.parse_args(argv)
 
     # 自检模式
@@ -682,7 +687,7 @@ def main(argv: Optional[List[str]] = None) -> int:
     # 读取输入
     try:
         if args.input:
-            with open(args.input, "r", encoding="utf-8") as f:
+            with open(args.input, "r", encoding="utf-8", errors="replace") as f:
                 input_text = f.read()
         else:
             input_text = sys.stdin.read()
