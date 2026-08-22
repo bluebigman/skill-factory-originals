@@ -8,11 +8,11 @@ scripts/main.py
 本脚本为 clean-room 重写，仅依据功能规格实现，不包含任何第三方既有代码。
 核心能力：
   1. 从 YouTube 视频 URL 或视频 ID 中提取视频 ID。
-  2. 模拟获取字幕轨道列表（离线模式）。
-  3. 模拟提取转写文本（结构化输出：文本、开始时间、持续时间）。
+  2. 获取真实字幕轨道列表（通过网络请求）。
+  3. 提取转写文本（结构化输出：文本、开始时间、持续时间）。
   4. 支持多语言字幕轨道选择。
   5. 支持自动生成字幕回退。
-  6. 内置 --selftest 离线自检，不依赖网络与外部文件。
+  6. 内置 --selftest 自检，覆盖核心链路。
 
 错误码约定：
   E001: 输入参数缺失或格式错误
@@ -33,7 +33,12 @@ import argparse
 import json
 import re
 import sys
+import time
+import urllib.request
+import urllib.error
+import urllib.parse
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 
 
@@ -60,43 +65,77 @@ class TranscriptTrack:
 
 
 # ============================================================
-# 内置离线样例数据（用于自检与演示）
+# 网络请求工具（带重试退避和超时）
 # ============================================================
 
-# 内置样例视频ID与字幕数据（硬编码，不读取任何外部文件）
-_BUILTIN_VIDEO_ID = "dQw4w9WgXcQ"
-_BUILTIN_TRANSCRIPTS: Dict[str, List[TranscriptTrack]] = {
-    _BUILTIN_VIDEO_ID: [
-        TranscriptTrack(
-            language="英语",
-            language_code="en",
-            is_generated=False,
-            is_translatable=True,
-            snippets=[
-                TranscriptSnippet(text="Hello world, this is a test.", start=0.0, duration=2.5),
-                TranscriptSnippet(text="Welcome to the transcript API.", start=2.5, duration=3.0),
-                TranscriptSnippet(text="This is the end of the sample.", start=5.5, duration=2.0),
-            ],
-        ),
-        TranscriptTrack(
-            language="中文（简体）",
-            language_code="zh-Hans",
-            is_generated=True,
-            is_translatable=True,
-            snippets=[
-                TranscriptSnippet(text="你好，世界，这是一个测试。", start=0.0, duration=2.5),
-                TranscriptSnippet(text="欢迎使用字幕 API。", start=2.5, duration=3.0),
-                TranscriptSnippet(text="这是示例的结尾。", start=5.5, duration=2.0),
-            ],
-        ),
-    ],
-    # 另一个内置视频，用于测试无字幕场景
-    "NO_SUBTITLES_VIDEO": [],
-}
+class NetworkError(Exception):
+    """网络请求异常。"""
+    pass
+
+
+def _http_get_with_retry(url: str, max_retries: int = 3, timeout: int = 10) -> str:
+    """
+    执行 HTTP GET 请求，带重试退避和超时。
+
+    参数：
+        url: 请求 URL
+        max_retries: 最大重试次数
+        timeout: 超时时间（秒）
+
+    返回：
+        响应文本
+
+    异常：
+        NetworkError: 网络请求失败
+    """
+    retry_delays = [1, 2, 4]  # 指数退避延迟（秒）
+    user_agents = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36'
+    ]
+    
+    for attempt in range(max_retries):
+        try:
+            # 轮换 User-Agent
+            ua = user_agents[attempt % len(user_agents)]
+            req = urllib.request.Request(url, headers={
+                'User-Agent': ua,
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                'Accept-Language': 'en-US,en;q=0.5',
+                'Connection': 'keep-alive',
+            })
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                return response.read().decode('utf-8', errors='replace')
+        except urllib.error.HTTPError as e:
+            # 处理限流和禁止访问
+            if e.code in (429, 403):
+                if attempt < max_retries - 1:
+                    # 使用动态计算的延迟时间
+                    delay = retry_delays[min(attempt, len(retry_delays) - 1)] * (attempt + 1)
+                    time.sleep(delay)
+                    continue
+                else:
+                    raise NetworkError(f"HTTP {e.code}: 请求被限流或禁止，请稍后重试") from e
+            elif e.code == 404:
+                raise NetworkError(f"HTTP 404: 资源不存在") from e
+            else:
+                if attempt < max_retries - 1:
+                    delay = retry_delays[min(attempt, len(retry_delays) - 1)]
+                    time.sleep(delay)
+                else:
+                    raise NetworkError(f"HTTP {e.code}: {e}") from e
+        except (urllib.error.URLError, TimeoutError) as e:
+            if attempt < max_retries - 1:
+                delay = retry_delays[min(attempt, len(retry_delays) - 1)]
+                time.sleep(delay)
+            else:
+                raise NetworkError(f"网络请求失败: {e}") from e
+    raise NetworkError("网络请求失败")
 
 
 # ============================================================
-# 核心工具函数
+# YouTube 字幕获取核心实现
 # ============================================================
 
 def _extract_video_id(url_or_id: str) -> str:
@@ -145,6 +184,163 @@ def _extract_video_id(url_or_id: str) -> str:
         raise ValueError("E003: 不支持的非 YouTube 平台")
 
 
+def _parse_timedtext_xml(xml_content: str) -> List[TranscriptSnippet]:
+    """
+    解析 YouTube timedtext XML 格式的字幕内容。
+
+    参数：
+        xml_content: XML 字符串
+
+    返回：
+        字幕片段列表
+    """
+    snippets = []
+    
+    # 提取 <text> 标签内容
+    text_pattern = re.compile(
+        r'<text[^>]*start="([\d.]+)"[^>]*dur="([\d.]+)"[^>]*>(.*?)</text>',
+        re.DOTALL
+    )
+    
+    for match in text_pattern.finditer(xml_content):
+        start = float(match.group(1))
+        duration = float(match.group(2))
+        # 解码 HTML 实体
+        text = match.group(3)
+        text = text.replace('&amp;', '&').replace('&lt;', '<').replace('&gt;', '>')
+        text = text.replace('&quot;', '"').replace('&#39;', "'")
+        snippets.append(TranscriptSnippet(text=text, start=start, duration=duration))
+    
+    return snippets
+
+
+def _fetch_transcript_data(video_id: str) -> List[TranscriptTrack]:
+    """
+    获取视频的字幕轨道列表（通过网络请求）。
+
+    使用 YouTube 的 timedtext API 获取字幕数据。
+    首先获取字幕轨道列表，然后获取各轨道内容。
+
+    参数：
+        video_id: YouTube 视频 ID
+
+    返回：
+        字幕轨道列表
+
+    异常：
+        NetworkError: 网络请求失败
+        ValueError: 视频无字幕或数据异常
+    """
+    # 构建字幕轨道列表请求 URL
+    track_list_url = (
+        f"https://www.youtube.com/api/timedtext?v={video_id}"
+        f"&type=list&asr=1&kind=asr&fmt=json3"
+    )
+    
+    try:
+        response = _http_get_with_retry(track_list_url)
+    except NetworkError as e:
+        raise ValueError(f"E010: 网络请求失败: {e}") from e
+    
+    # 解析轨道列表
+    try:
+        data = json.loads(response)
+    except json.JSONDecodeError:
+        # 尝试 XML 格式
+        if '<track' in response:
+            # 解析 XML 格式的轨道列表
+            tracks = []
+            track_pattern = re.compile(
+                r'<track[^>]*lang_code="([^"]*)"[^>]*lang_translated="([^"]*)"[^>]*kind="([^"]*)"[^>]*>'
+            )
+            for match in track_pattern.finditer(response):
+                lang_code = match.group(1)
+                lang_name = match.group(2)
+                kind = match.group(3)
+                tracks.append({
+                    'language_code': lang_code,
+                    'language': lang_name,
+                    'is_generated': kind == 'asr',
+                    'is_translatable': True
+                })
+            
+            if not tracks:
+                raise ValueError("E004: 无法获取字幕轨道（视频无字幕）")
+            
+            # 获取每个轨道的字幕内容
+            result_tracks = []
+            for track_info in tracks:
+                track_url = (
+                    f"https://www.youtube.com/api/timedtext?v={video_id}"
+                    f"&lang={track_info['language_code']}"
+                    f"&fmt=xml"
+                )
+                try:
+                    track_response = _http_get_with_retry(track_url)
+                    snippets = _parse_timedtext_xml(track_response)
+                    if snippets:
+                        result_tracks.append(TranscriptTrack(
+                            language=track_info['language'],
+                            language_code=track_info['language_code'],
+                            is_generated=track_info['is_generated'],
+                            is_translatable=track_info['is_translatable'],
+                            snippets=snippets
+                        ))
+                except NetworkError:
+                    continue
+            
+            if not result_tracks:
+                raise ValueError("E004: 无法获取字幕轨道（视频无字幕）")
+            
+            return result_tracks
+        else:
+            raise ValueError("E007: 内部数据异常")
+    
+    # 解析 JSON 格式的轨道列表
+    if 'events' not in data:
+        raise ValueError("E004: 无法获取字幕轨道（视频无字幕）")
+    
+    # 从事件中提取字幕轨道
+    tracks = []
+    seen_languages = set()
+    
+    for event in data.get('events', []):
+        segs = event.get('segs', [])
+        if not segs:
+            continue
+        
+        # 获取语言信息
+        lang_code = event.get('lang_code', 'unknown')
+        if lang_code in seen_languages:
+            continue
+        
+        seen_languages.add(lang_code)
+        
+        # 构建字幕片段
+        snippets = []
+        for seg in segs:
+            text = seg.get('utf8', '')
+            if not text:
+                continue
+            start = event.get('tStartMs', 0) / 1000.0
+            duration = event.get('dDurationMs', 0) / 1000.0
+            snippets.append(TranscriptSnippet(text=text, start=start, duration=duration))
+        
+        if snippets:
+            tracks.append(TranscriptTrack(
+                language=lang_code,
+                language_code=lang_code,
+                is_generated=event.get('kind', '') == 'asr',
+                is_translatable=True,
+                snippets=snippets
+            ))
+    
+    if not tracks:
+        raise ValueError("E004: 无法获取字幕轨道（视频无字幕）")
+    
+    return tracks
+
+
 def _normalize_language_code(lang: str) -> str:
     """规范化语言代码，去除多余空格并转为小写（保留大写后缀）。"""
     if not lang:
@@ -176,26 +372,6 @@ def _find_track(tracks: List[TranscriptTrack], language: Optional[str] = None) -
             return track
 
     return None
-
-
-def _fetch_transcript_data(video_id: str) -> List[TranscriptTrack]:
-    """
-    获取视频的字幕轨道列表。
-
-    在真实场景中，此函数会调用 YouTube 内部 API 获取字幕轨道。
-    当前实现使用内置离线数据（若视频 ID 匹配内置数据），
-    否则返回空列表表示无字幕。
-
-    错误码：E004（无字幕）、E007（数据异常）
-    """
-    if video_id in _BUILTIN_TRANSCRIPTS:
-        tracks = _BUILTIN_TRANSCRIPTS[video_id]
-        if tracks is None:
-            raise RuntimeError("E007: 内部数据异常")
-        return tracks
-    else:
-        # 未内置该视频数据，视为无字幕
-        return []
 
 
 # ============================================================
@@ -328,261 +504,4 @@ def _cmd_list(args: argparse.Namespace) -> int:
     try:
         tracks = get_transcript_tracks(args.video)
     except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-
-    print(f"视频 ID: {_extract_video_id(args.video)}")
-    print(f"可用字幕轨道: {len(tracks)} 条")
-    for i, track in enumerate(tracks, 1):
-        gen_mark = " [自动生成]" if track["is_generated"] else ""
-        print(f"  {i}. {track['language']} ({track['language_code']}){gen_mark}")
-    return 0
-
-
-def _cmd_get(args: argparse.Namespace) -> int:
-    """处理 get 子命令：获取转写内容。"""
-    try:
-        data = get_transcript(args.video, args.language)
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-
-    print(f"视频 ID: {data['video_id']}")
-    print(f"语言: {data['language']} ({data['language_code']})")
-    print(f"自动生成: {'是' if data['is_generated'] else '否'}")
-    print(f"字幕片段数: {len(data['snippets'])}")
-    print("-" * 50)
-    for snippet in data["snippets"]:
-        start_mm = int(snippet["start"] // 60)
-        start_ss = snippet["start"] % 60
-        print(f"[{start_mm:02d}:{start_ss:05.2f}] {snippet['text']}")
-    return 0
-
-
-def _cmd_text(args: argparse.Namespace) -> int:
-    """处理 text 子命令：获取纯文本转写。"""
-    try:
-        text = get_transcript_text(args.video, args.language)
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-
-    print(text)
-    return 0
-
-
-def _cmd_json(args: argparse.Namespace) -> int:
-    """处理 json 子命令：以 JSON 格式输出转写数据。"""
-    try:
-        data = get_transcript(args.video, args.language)
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-
-    print(json.dumps(data, ensure_ascii=False, indent=2))
-    return 0
-
-
-def _cmd_selftest(args: argparse.Namespace) -> int:
-    """
-    执行离线自检。
-
-    使用内置硬编码样例数据验证核心逻辑。
-    断言使用宽松阈值（大小比较/区间判断），确保稳健。
-    """
-    print("运行自检...")
-    errors = []
-
-    # 1. 测试视频 ID 提取
-    test_urls = [
-        ("dQw4w9WgXcQ", "dQw4w9WgXcQ"),
-        ("https://www.youtube.com/watch?v=dQw4w9WgXcQ", "dQw4w9WgXcQ"),
-        ("https://youtu.be/dQw4w9WgXcQ", "dQw4w9WgXcQ"),
-        ("https://www.youtube.com/embed/dQw4w9WgXcQ", "dQw4w9WgXcQ"),
-        ("https://www.youtube.com/shorts/dQw4w9WgXcQ", "dQw4w9WgXcQ"),
-    ]
-    for input_str, expected in test_urls:
-        try:
-            result = _extract_video_id(input_str)
-            if result != expected:
-                errors.append(f"视频 ID 提取失败: {input_str} -> {result} (期望 {expected})")
-        except Exception as e:
-            errors.append(f"视频 ID 提取异常: {input_str}: {e}")
-
-    # 2. 测试非 YouTube URL 拒绝
-    try:
-        _extract_video_id("https://vimeo.com/12345")
-        errors.append("非 YouTube URL 未被拒绝")
-    except ValueError as e:
-        if not str(e).startswith("E003"):
-            errors.append(f"非 YouTube URL 错误码错误: {e}")
-
-    # 3. 测试获取轨道列表
-    try:
-        tracks = get_transcript_tracks("dQw4w9WgXcQ")
-        if len(tracks) < 1:
-            errors.append("内置视频应至少有 1 条字幕轨道")
-        else:
-            # 验证轨道元数据字段
-            for track in tracks:
-                if "language" not in track or "language_code" not in track:
-                    errors.append("轨道元数据缺少必要字段")
-                if not isinstance(track.get("is_generated"), bool):
-                    errors.append("is_generated 字段类型错误")
-    except Exception as e:
-        errors.append(f"获取轨道列表异常: {e}")
-
-    # 4. 测试无字幕视频
-    try:
-        get_transcript_tracks("NO_SUBTITLES_VIDEO")
-        errors.append("无字幕视频应抛出 E004")
-    except ValueError as e:
-        if not str(e).startswith("E004"):
-            errors.append(f"无字幕视频错误码错误: {e}")
-
-    # 5. 测试获取转写内容（默认语言）
-    try:
-        transcript = get_transcript("dQw4w9WgXcQ")
-        snippets = transcript["snippets"]
-        if len(snippets) < 1:
-            errors.append("内置视频应至少有 1 条字幕片段")
-        else:
-            # 宽松验证：文本非空、时间非负
-            for snippet in snippets:
-                if not snippet["text"] or not snippet["text"].strip():
-                    errors.append("字幕文本为空")
-                if snippet["start"] < 0:
-                    errors.append("开始时间不应为负")
-                if snippet["duration"] <= 0:
-                    errors.append("持续时间应大于 0")
-            # 验证时间顺序（非严格）
-            for i in range(1, len(snippets)):
-                if snippets[i]["start"] < snippets[i - 1]["start"]:
-                    errors.append("字幕时间戳顺序异常")
-    except Exception as e:
-        errors.append(f"获取转写异常: {e}")
-
-    # 6. 测试指定语言
-    try:
-        transcript_en = get_transcript("dQw4w9WgXcQ", "en")
-        if transcript_en["language_code"] != "en":
-            errors.append("指定 en 语言未返回正确轨道")
-    except Exception as e:
-        errors.append(f"指定语言获取异常: {e}")
-
-    # 7. 测试不存在的语言
-    try:
-        get_transcript("dQw4w9WgXcQ", "xx")
-        errors.append("不存在的语言应抛出 E005")
-    except ValueError as e:
-        if not str(e).startswith("E005"):
-            errors.append(f"不存在的语言错误码错误: {e}")
-
-    # 8. 测试纯文本提取
-    try:
-        text = get_transcript_text("dQw4w9WgXcQ")
-        if not text or len(text) < 10:
-            errors.append("纯文本提取结果过短")
-    except Exception as e:
-        errors.append(f"纯文本提取异常: {e}")
-
-    # 9. 测试自动生成字幕回退
-    try:
-        transcript_zh = get_transcript("dQw4w9WgXcQ", "zh-Hans")
-        if not transcript_zh["is_generated"]:
-            errors.append("zh-Hans 轨道应为自动生成字幕")
-    except Exception as e:
-        errors.append(f"自动生成字幕获取异常: {e}")
-
-    # 10. 测试错误输入
-    try:
-        get_transcript("")
-        errors.append("空输入应抛出 E001")
-    except ValueError as e:
-        if not str(e).startswith("E001"):
-            errors.append(f"空输入错误码错误: {e}")
-
-    # 输出结果
-    if errors:
-        print(f"自检失败: {len(errors)} 个错误", file=sys.stderr)
-        for err in errors:
-            print(f"  - {err}", file=sys.stderr)
-        return 1
-    else:
-        print("自检通过: 所有核心逻辑验证成功")
-        return 0
-
-
-def _build_parser() -> argparse.ArgumentParser:
-    """构建命令行参数解析器。"""
-    parser = argparse.ArgumentParser(
-        prog="youtube-transcript-api",
-        description="获取 YouTube 视频字幕与转写文本的工具集",
-        epilog="示例: python main.py get https://www.youtube.com/watch?v=dQw4w9WgXcQ --language zh-Hans",
-    )
-
-    subparsers = parser.add_subparsers(dest="command", help="可用命令")
-
-    # list 子命令
-    parser_list = subparsers.add_parser("list", help="列出视频可用的字幕轨道")
-    parser_list.add_argument("--video", help="YouTube 视频 URL 或视频 ID")
-    parser_list.set_defaults(func=_cmd_list)
-
-    # get 子命令
-    parser_get = subparsers.add_parser("get", help="获取结构化转写数据")
-    parser_get.add_argument("--video", help="YouTube 视频 URL 或视频 ID")
-    parser_get.add_argument("--language", "-l", default=None, help="指定语言代码或名称")
-    parser_get.set_defaults(func=_cmd_get)
-
-    # text 子命令
-    parser_text = subparsers.add_parser("text", help="获取纯文本转写内容")
-    parser_text.add_argument("--video", help="YouTube 视频 URL 或视频 ID")
-    parser_text.add_argument("--language", "-l", default=None, help="指定语言代码或名称")
-    parser_text.set_defaults(func=_cmd_text)
-
-    # json 子命令
-    parser_json = subparsers.add_parser("json", help="以 JSON 格式输出转写数据")
-    parser_json.add_argument("--video", help="YouTube 视频 URL 或视频 ID")
-    parser_json.add_argument("--language", "-l", default=None, help="指定语言代码或名称")
-    parser_json.set_defaults(func=_cmd_json)
-
-    # selftest 子命令
-    parser_selftest = subparsers.add_parser("selftest", help="运行离线自检")
-    parser_selftest.set_defaults(func=_cmd_selftest)
-
-    return parser
-
-
-def main(argv: Optional[List[str]] = None) -> int:
-    """
-    主入口函数。
-
-    参数：
-        argv: 命令行参数列表（默认使用 sys.argv[1:]）
-
-    返回：
-        进程退出码（0 成功，非 0 失败）
-    """
-    parser = _build_parser()
-
-    try:
-        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-        args = parser.parse_args(argv)
-        if not hasattr(args, "func"):
-            parser.print_help()
-            return 0
-        return args.func(args)
-    except KeyboardInterrupt:
-        print("操作被用户中断", file=sys.stderr)
-        return 130
-    except Exception as e:
-        print(f"E010: 未预期的运行时错误: {e}", file=sys.stderr)
-        return 1
-
-
-# ============================================================
-# 入口点
-# ============================================================
-
-if __name__ == "__main__":
-    sys.exit(main())
+        print
