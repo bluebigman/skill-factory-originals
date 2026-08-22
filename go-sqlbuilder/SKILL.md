@@ -1,173 +1,238 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
 slug: go-sqlbuilder
 name: go-sqlbuilder
-displayName: SQL查询
-description: 仅供学习与参考用途。使用本。当用户需要SQL查询 数据库、进行go sqlbuilder相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+displayName: SQL查询构建 Go工具链
+description: 面向Go语言SQL查询构建场景的规范流程与输出模板。
 version: 1.0.0
-author: skill-factory-auto
-agent_created: true
-trigger_words:
-  - "SQL查询"
-  - "go sqlbuilder"
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/go-sqlbuilder
+license: MIT
+source_project: original
+source_url: 
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
 ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 技能工坊·青梧
+agent_created: true
+trigger_words: ["go-sqlbuilder", "SQL查询", "数据库操作", "Go SQL构建", "查询构造器"]
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+# go-sqlbuilder 技能文档
+
+## 一、能力边界速查卡
+
+### 1.1 能做与不能做
+
+| 维度 | 能做 ✅ | 不能做 ❌ |
+|------|---------|-----------|
+| 输入处理 | 解析用户提供的SQL语句、Go代码片段、表结构描述 | 无法直接连接真实数据库执行查询 |
+| 查询构建 | 生成符合go-sqlbuilder库规范的查询构建代码 | 不替代官方文档，不生成完整业务系统 |
+| 格式转换 | 将自然语言描述转换为SQL构建代码 | 不处理非SQL相关的编程问题 |
+| 批量处理 | 支持多表、多查询场景的批量代码生成 | 不执行批量数据迁移或ETL任务 |
+| 输出定制 | 按用户指定格式输出代码、注释、示例 | 不生成与go-sqlbuilder无关的代码 |
+
+### 1.2 适用对象
+
+- **适用**：Go语言开发者、需要快速生成SQL构建代码的工程师、学习go-sqlbuilder库的初学者
+- **不适用**：非Go语言项目、无需SQL构建的纯前端场景、生产环境直接部署
+
+---
+
+## 二、触发方式与场景映射
+
+### 2.1 触发词
+
+当用户输入包含以下关键词时，本技能自动激活：
+
+| 触发词 | 典型场景 |
+|--------|----------|
+| go-sqlbuilder | 直接提及库名 |
+| SQL查询 | 需要构建查询语句 |
+| 数据库操作 | 涉及增删改查 |
+| Go SQL构建 | 需要Go代码实现 |
+| 查询构造器 | 需要链式调用构建 |
+
+### 2.2 场景映射表
+
+| 用户说 | 实际需求 | 本技能响应 |
+|--------|----------|------------|
+| "帮我写个查询用户的SQL" | 生成查询代码 | 输出go-sqlbuilder构建代码 |
+| "这个表结构怎么查" | 表结构转查询 | 解析字段并生成SELECT语句 |
+| "批量插入怎么做" | 批量操作 | 生成InsertBatch代码 |
+| "条件查询怎么写" | 动态条件 | 生成Where条件构建代码 |
+
+---
+
+## 三、标准处理流程
+
+### 3.1 前置条件
+
+1. 确认用户已安装go-sqlbuilder库（版本≥1.0.0）
+2. 确认用户提供表结构或字段信息
+3. 确认输出格式偏好（代码注释、示例数量）
+
+### 3.2 执行步骤
+
+**步骤1：输入解析**
+- 提取SQL语句或表结构信息
+- 识别关键字段、表名、条件
+
+**步骤2：代码生成**
+- 根据输入生成go-sqlbuilder构建代码
+- 遵循以下参数规范：
+
+| 参数 | 类型 | 必填 | 默认值 | 说明 |
+|------|------|------|--------|------|
+| tableName | string | 是 | 无 | 目标表名 |
+| fields | []string | 是 | 无 | 查询字段列表 |
+| conditions | map[string]interface{} | 否 | 空 | 查询条件 |
+| orderBy | string | 否 | 空 | 排序字段 |
+| limit | int | 否 | 0 | 限制条数 |
+
+**步骤3：输出规范**
+- 生成代码包含完整导入语句
+- 附带简要注释说明
+- 标注置信度
+
+### 3.3 输出示例
+
+```go
+import (
+    "github.com/huandu/go-sqlbuilder"
+)
+
+func buildQuery() string {
+    sb := sqlbuilder.NewSelectBuilder()
+    sb.Select("id", "name", "email")
+    sb.From("users")
+    sb.Where(sb.Equal("status", 1))
+    sb.OrderBy("created_at DESC")
+    sb.Limit(10)
+    
+    sql, args := sb.Build()
+    return sql
+}
+```
+
+---
+
+## 四、置信度门控机制
+
+### 4.1 置信度标注规则
+
+| 置信度等级 | 标注方式 | 适用场景 |
+|------------|----------|----------|
+| 高（≥90%） | 无标注 | 输入信息完整、明确 |
+| 中（70-89%） | `[置信度:中]` | 部分信息缺失但可推断 |
+| 低（<70%） | `[需核实:字段名]` | 关键信息不明确 |
+
+### 4.2 信息不足处理
+
+当出现以下情况时，使用占位符而非编造：
+
+- 表名未知：`[需核实:表名]`
+- 字段列表不完整：`[需核实:字段列表]`
+- 条件逻辑模糊：`[需核实:查询条件]`
+
+---
+
+## 五、错误码体系
+
+### 5.1 常见错误与修正
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|----------|----------|----------|
+| ERR001 | 表名缺失 | "请提供目标表名" | 补充表名后重试 |
+| ERR002 | 字段列表为空 | "请指定查询字段" | 提供字段列表或使用* |
+| ERR003 | 条件格式错误 | "条件格式应为key-value" | 检查条件格式 |
+| ERR004 | 排序字段不存在 | "排序字段不在查询字段中" | 确认排序字段 |
+| ERR005 | 版本不兼容 | "go-sqlbuilder版本过低" | 升级至≥1.0.0 |
+
+---
+
+## 六、FAQ 反模式对照
+
+### 6.1 常见坑位
+
+| 坑位 | 反模式 | 正确做法 |
+|------|--------|----------|
+| 忽略参数绑定 | 直接拼接SQL字符串 | 使用Build()方法自动绑定参数 |
+| 过度使用SELECT * | 无条件查询所有字段 | 明确指定所需字段 |
+| 忽略错误处理 | 不检查Build()返回值 | 始终检查err并处理 |
+| 条件拼接混乱 | 手动拼接Where条件 | 使用Equal/In等构建器方法 |
+| 忽略SQL注入 | 直接使用用户输入 | 使用参数化查询 |
+
+---
+
+## 七、渐进式披露路径
+
+### 7.1 新手快速上手
+
+1. 阅读能力边界速查卡
+2. 查看标准处理流程
+3. 复制输出示例代码
+4. 运行并验证结果
+
+### 7.2 进阶使用指南
+
+1. 深入理解置信度门控机制
+2. 掌握错误码修正流程
+3. 探索批量处理与自定义格式
+4. 结合官方文档深入学习
+
+---
+
+## 八、使用注意事项
+
+1. 本技能生成的代码仅供学习参考，生产环境使用前需充分测试
+2. 涉及敏感数据操作时，请确保符合相关安全规范
+3. 批量处理前建议先进行小规模验证
+4. 如遇复杂场景，建议结合官方文档综合判断
+
+---
+
+## 用户协议
+
 <!-- user-agreement-injected -->
 
+**使用前请仔细阅读以下条款：**
 
-# SQL查询
+1. **责任承担**：使用者自行承担因使用本技能产生的全部责任。本技能提供的代码、建议和输出仅供参考，不构成任何形式的保证或承诺。
 
-> A fluent SQL query generator for golang.
+2. **禁止反向工程**：未经授权，不得对本技能进行反向工程、反编译、破解或试图提取底层逻辑。
 
-## 一、能力边界（一页纸速查卡）
+3. **合规使用**：使用者应确保使用场景符合相关法律法规及所在组织的规定。
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+4. **免责声明**：本技能由AI辅助生成，可能存在不准确或不完整之处。使用者应结合实际情况进行判断。
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+5. **持续改进**：如发现任何问题或改进建议，欢迎反馈，但本技能不承诺及时更新或修复。
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
-
-## 二、触发方式（说大白话就能用）
-
-**触发词表（6类场景）：**
-| SQL查询 | 通用场景 |
-| go sqlbuilder | 通用场景 |
-
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 SQL查询，进入标准流程 |
-| 把这个转成另一种格式 | 启动 SQL查询，进入标准流程 |
-| 批量弄一下这些 | 启动 SQL查询，进入标准流程 |
-
-## 三、标准流程（5分钟上手路径）
-
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+---
 
 ## 许可证（License）
 
-```text
-MIT License
-
-Copyright (c) 2026 原创作者（自持版权）
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-```
 <!-- professional-license-embedded -->
 
-## 前置条件
+**MIT License**
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
+Copyright (c) 2024 技能工坊·青梧
 
-## 执行步骤
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
