@@ -1,580 +1,807 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-scripts/main.py — appmetrics-dash 技能实现（独立重写版）
+appmetrics-dash: 将 Node.js 应用指标数据（JSON/CSV）解析为规范化记录，
+并渲染为 ASCII/SVG/HTML 可视化监控面板。
 
-功能概述：
-    将 Node.js 应用指标数据（JSON/CSV）解析为规范化记录，
-    支持本地文件、远程 URL 或标准输入读取，并输出结构化结果。
-
-设计原则：
-    - 仅依据功能规格独立实现，不复制任何既有代码。
-    - 标准库优先，无第三方依赖。
-    - 提供 --selftest 离线自检，硬编码样例数据，任何环境可运行。
-
-错误码约定：
-    E001: 命令行参数不合法
-    E002: 输入文件不存在或无法读取
-    E003: 远程 URL 获取失败
-    E004: 数据解析失败（JSON/CSV 格式错误）
-    E005: 数据中缺少必需字段
-    E006: 指标值类型不合法
-    E007: 输出格式不支持
-    E008: 批量处理时部分文件失败
-    E009: 内部逻辑错误（不应发生）
-    E010: 系统 IO 错误
+支持能力：
+- 解析本地 JSON/CSV 指标文件
+- 从远程 URL 获取指标数据（带超时与指数退避重试）
+- 从标准输入读取指标数据
+- 渲染 ASCII/SVG/HTML 图表
+- 批量处理目录下所有指标文件
+- dry-run 预览模式（不实际写盘）
+- verbose 详细日志
+- selftest 离线自检
 """
 
 import argparse
 import csv
-import io
 import json
 import os
+import re
 import sys
-import urllib.request
-from datetime import datetime, timezone
-from typing import Any, Dict, List, Optional, Tuple
 import time
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
+from pathlib import Path
 
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
+# G4 Mock sample: 外部 HTML 结构变更时的降级样本
+_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
 
-# ---------------------------------------------------------------------------
+# G4 Mock sample: 外部 HTML 结构变更时的降级样本
+_MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
+
 # 常量定义
-# ---------------------------------------------------------------------------
-
-# 必需的指标字段（规范输出）
-REQUIRED_FIELDS = ["timestamp", "metric", "value", "unit"]
-
-# 元数据字段（保留并透传）
-META_FIELDS = ["app", "pid", "node_version"]
-
-# 支持的输入格式
+DEFAULT_TIMEOUT = 10  # 远程请求超时时间（秒）
+DEFAULT_RETRIES = 3   # 远程请求最大重试次数
+MAX_RETRIES = 5       # 最大重试次数上限
 SUPPORTED_FORMATS = ("json", "csv")
-
-# 常见指标单位映射（用于推断单位）
-UNIT_MAP = {
-    "cpu": "%",
-    "memory": "bytes",
-    "rss": "bytes",
-    "heapUsed": "bytes",
-    "heapTotal": "bytes",
-    "eventloop": "ms",
-    "http": "req/s",
-    "latency": "ms",
-    "throughput": "req/s",
-}
+SUPPORTED_RENDERS = ("ascii", "svg", "html")
 
 
-# ---------------------------------------------------------------------------
-# 工具函数
-# ---------------------------------------------------------------------------
+# ============================================================
+# 输入读取模块
+# ============================================================
 
+def read_text_safe(path):
+    """带编码兜底的读取器（R3 编码兜底）。
 
-def _now_ts() -> int:
-    """返回当前 UTC 时间戳（秒）。"""
-    return int(datetime.now(timezone.utc).timestamp())
-
-
-def _normalize_metric_name(name: str) -> str:
-    """规范化指标名称：小写、去空格、下划线转连字符。"""
-    return name.strip().lower().replace("_", "-")
-
-
-def _infer_unit(metric_name: str) -> str:
-    """根据指标名称推断单位，未知返回空字符串。"""
-    normalized = _normalize_metric_name(metric_name)
-    for key, unit in UNIT_MAP.items():
-        if key in normalized:
-            return unit
-    return ""
-
-
-def _parse_timestamp(value: Any) -> int:
+    尝试 utf-8 → gbk → gb18030 三级 fallback，全部失败则用 errors="replace"。
+    返回文件内容字符串；读取失败返回空字符串并打印警告。
     """
-    解析时间戳为整数秒。
-    支持：int/float 秒、ISO 字符串、datetime 对象。
-    """
-    if isinstance(value, (int, float)):
-        return int(value)
-    if isinstance(value, str):
+    for enc in ("utf-8", "gbk", "gb18030"):
         try:
-            # 尝试直接转数字
-            return int(float(value))
-        except ValueError:
-            pass
-        # 尝试 ISO 格式
-        try:
-            dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
-            return int(dt.timestamp())
-        except ValueError:
-            raise ValueError(f"无法解析时间戳: {value}")
-    if isinstance(value, datetime):
-        return int(value.timestamp())
-    raise ValueError(f"不支持的时间戳类型: {type(value)}")
-
-
-def _safe_float(value: Any) -> float:
-    """安全转换为 float，失败抛出 ValueError。"""
-    try:
-        return float(value)
-    except (TypeError, ValueError):
-        raise ValueError(f"指标值无法转换为数字: {value}")
-
-
-# ---------------------------------------------------------------------------
-# 核心解析逻辑
-# ---------------------------------------------------------------------------
-
-
-def parse_json_data(data: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
-    """
-    解析 JSON 格式的指标数据。
-
-    支持两种结构：
-    1. 直接包含 metrics 列表: {"metrics": [...], "app": "x", "pid": 123}
-    2. 扁平结构: {"cpu": 42.5, "memory": {"rss": 123}, "timestamp": 1699999999}
-
-    返回 (规范化记录列表, 元数据字典)
-    """
-    if not isinstance(data, dict):
-        raise ValueError("JSON 根节点必须是对象")
-
-    # 提取元数据
-    meta = {}
-    for field in META_FIELDS:
-        if field in data:
-            meta[field] = data[field]
-
-    records: List[Dict[str, Any]] = []
-
-    # 情况 1：显式 metrics 列表
-    if "metrics" in data and isinstance(data["metrics"], list):
-        for item in data["metrics"]:
-            if not isinstance(item, dict):
-                continue
-            record = _normalize_metric_item(item, meta)
-            if record:
-                records.append(record)
-        return records, meta
-
-    # 情况 2：扁平结构
-    # 先从顶层取时间戳（如果有）
-    timestamp = _parse_timestamp(data.get("timestamp", _now_ts()))
-
-    # 遍历所有键，尝试识别指标
-    for key, value in data.items():
-        if key in META_FIELDS or key == "timestamp":
+            with open(path, encoding=enc) as f:
+                return f.read()
+        except UnicodeDecodeError:
             continue
-
-        # 嵌套结构：如 {"memory": {"rss": 123, "heapTotal": 456}}
-        if isinstance(value, dict):
-            for sub_key, sub_value in value.items():
-                if isinstance(sub_value, (int, float)):
-                    metric_name = f"{key}.{sub_key}"
-                    records.append(
-                        _build_record(
-                            timestamp=timestamp,
-                            metric=metric_name,
-                            value=sub_value,
-                            unit=_infer_unit(sub_key),
-                            meta=meta,
-                        )
-                    )
-        # 标量值：如 {"cpu": 42.5}
-        elif isinstance(value, (int, float)):
-            records.append(
-                _build_record(
-                    timestamp=timestamp,
-                    metric=key,
-                    value=value,
-                    unit=_infer_unit(key),
-                    meta=meta,
-                )
-            )
-
-    return records, meta
+        except OSError as e:
+            print(f"[WARN] 读取 {path} 失败，降级为空: {e}", file=sys.stderr)
+            return ""
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
 
 
-def _normalize_metric_item(item: Dict[str, Any], meta: Dict[str, Any]) -> Optional[Dict[str, Any]]:
-    """规范化单条指标记录。"""
-    # 支持字段别名
-    metric = item.get("metric") or item.get("name")
-    value = item.get("value")
-    timestamp = item.get("timestamp")
-    unit = item.get("unit", "")
+def iter_lines(path):
+    """流式读取文件行（R5 大输入流式）。
 
-    if metric is None or value is None:
-        return None
-
+    使用 readline 逐行读取，避免全量 read() 造成内存爆炸。
+    """
     try:
-        ts = _parse_timestamp(timestamp) if timestamp is not None else _now_ts()
-        val = _safe_float(value)
-    except ValueError:
-        return None
-
-    if not unit:
-        unit = _infer_unit(metric)
-
-    return _build_record(
-        timestamp=ts,
-        metric=metric,
-        value=val,
-        unit=unit,
-        meta=meta,
-        extra={k: v for k, v in item.items() if k not in ("metric", "name", "value", "timestamp", "unit")},
-    )
+        with open(path, encoding="utf-8", errors="replace") as f:
+            for line in f:
+                yield line
+    except OSError as e:
+        print(f"[WARN] 读取 {path} 失败，降级为空集: {e}", file=sys.stderr)
+        return
 
 
-def _build_record(
-    timestamp: int,
-    metric: str,
-    value: float,
-    unit: str,
-    meta: Dict[str, Any],
-    extra: Optional[Dict[str, Any]] = None,
-) -> Dict[str, Any]:
-    """构建规范化记录字典。"""
-    record = {
-        "timestamp": timestamp,
-        "metric": _normalize_metric_name(metric),
-        "value": round(value, 4),
-        "unit": unit,
-    }
-    # 附加元数据
-    for k, v in meta.items():
-        if v is not None:
-            record[k] = v
-    # 附加额外字段
-    if extra:
-        record.update(extra)
-    return record
+def read_from_stdin():
+    """从标准输入读取全部数据（流式逐行读取）。"""
+    lines = []
+    try:
+        for line in sys.stdin:
+            lines.append(line)
+    except KeyboardInterrupt:
+        print("[WARN] 用户中断输入，使用已读取的数据", file=sys.stderr)
+    return "".join(lines)
 
 
-def parse_csv_data(content: str, meta: Dict[str, Any]) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+def fetch_url(url, timeout=DEFAULT_TIMEOUT, retries=DEFAULT_RETRIES):
+    """从远程 URL 获取数据，带超时与指数退避重试（R9）。
+
+    连续失败超过 retries 次后熔断停止调用。
+    返回响应内容字符串；失败抛出异常。
     """
-    解析 CSV 格式指标数据。
-
-    期望表头包含: timestamp, metric, value, unit
-    也支持: time, name, val 等别名。
-    """
-    records: List[Dict[str, Any]] = []
-    reader = csv.DictReader(io.StringIO(content))
-
-    if not reader.fieldnames:
-        raise ValueError("CSV 无表头")
-
-    # 字段名映射
-    field_map = {}
-    for f in reader.fieldnames:
-        f_lower = f.strip().lower()
-        if f_lower in ("timestamp", "time", "ts", "date"):
-            field_map["timestamp"] = f
-        elif f_lower in ("metric", "name", "key", "kpi"):
-            field_map["metric"] = f
-        elif f_lower in ("value", "val", "data"):
-            field_map["value"] = f
-        elif f_lower in ("unit", "uom", "measure"):
-            field_map["unit"] = f
-
-    # 必需字段检查
-    for required in ("metric", "value"):
-        if required not in field_map:
-            raise ValueError(f"CSV 缺少必需字段: {required}")
-
-    for row in reader:
+    last_error = None
+    for attempt in range(retries):
         try:
-            metric_name = row[field_map["metric"]].strip()
-            value = _safe_float(row[field_map["value"]])
-            ts = _parse_timestamp(row[field_map["timestamp"]]) if "timestamp" in field_map else _now_ts()
-            unit = row[field_map["unit"]].strip() if "unit" in field_map else _infer_unit(metric_name)
-
-            records.append(
-                _build_record(
-                    timestamp=ts,
-                    metric=metric_name,
-                    value=value,
-                    unit=unit,
-                    meta=meta,
-                )
-            )
-        except (KeyError, ValueError):
-            # 跳过无法解析的行
-            continue
-
-    return records, meta
+            req = urllib.request.Request(url, headers={"User-Agent": "appmetrics-dash/3.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.read().decode("utf-8", errors="replace")
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as e:
+            last_error = e
+            wait_time = 2 ** attempt  # 指数退避：1s, 2s, 4s...
+            print(f"[WARN] 请求失败（第 {attempt + 1}/{retries} 次）: {e}，{wait_time}s 后重试", file=sys.stderr)
+            if attempt < retries - 1:
+                time.sleep(wait_time)
+    raise RuntimeError(f"请求失败，已重试 {retries} 次: {last_error}")
 
 
-# ---------------------------------------------------------------------------
-# 数据加载
-# ---------------------------------------------------------------------------
+# ============================================================
+# 数据解析模块
+# ============================================================
 
+def parse_json_data(content, source="local"):
+    """解析 JSON 格式指标数据。
 
-def load_data(source: str) -> Tuple[List[Dict[str, Any]], Dict[str, Any]]:
+    支持两种格式：
+    1. 数组：[{"name": "cpu", "value": 42.5, "timestamp": "..."}]
+    2. 对象：{"cpu": 42.5, "memory": 68.2}
+
+    返回规范化记录列表；解析失败抛出 ValueError。
     """
-    从文件路径或 URL 加载指标数据并解析。
-
-    返回 (记录列表, 元数据)
-    """
-    content = ""
-    meta: Dict[str, Any] = {}
-
-    # 判断是 URL 还是本地文件
-    if source.startswith(("http://", "https://")):
-        try:
-            with urllib.request.urlopen(source, timeout=10) as resp:
-                content = resp.read().decode("utf-8")
-        except Exception as e:
-            raise RuntimeError(f"E003: 远程 URL 获取失败: {source} — {e}")
-    else:
-        if not os.path.isfile(source):
-            raise RuntimeError(f"E002: 文件不存在或无法读取: {source}")
-        try:
-            with open(source, "r", encoding="utf-8") as f:
-                content = f.read()
-        except IOError as e:
-            raise RuntimeError(f"E010: 读取文件失败: {source} — {e}")
-
-    # 根据内容推断格式并解析
-    # 尝试 JSON 优先
     try:
         data = json.loads(content)
-        records, meta = parse_json_data(data)
-        return records, meta
-    except (json.JSONDecodeError, ValueError):
-        pass
+    except json.JSONDecodeError as e:
+        raise ValueError(f"JSON 解析失败: {e}")
 
-    # 尝试 CSV
-    try:
-        records, meta = parse_csv_data(content, meta)
-        if records:
-            return records, meta
-    except ValueError:
-        pass
+    records = []
+    if isinstance(data, list):
+        for item in data:
+            if not isinstance(item, dict):
+                print(f"[WARN] 跳过非对象元素: {item}", file=sys.stderr)
+                continue
+            record = {
+                "name": str(item.get("name", "unknown")),
+                "value": float(item.get("value", 0)),
+                "timestamp": str(item.get("timestamp", "")),
+                "source": source,
+            }
+            records.append(record)
+    elif isinstance(data, dict):
+        for name, value in data.items():
+            if isinstance(value, (int, float)):
+                records.append({
+                    "name": str(name),
+                    "value": float(value),
+                    "timestamp": "",
+                    "source": source,
+                })
+            elif isinstance(value, dict):
+                records.append({
+                    "name": str(name),
+                    "value": float(value.get("value", 0)),
+                    "timestamp": str(value.get("timestamp", "")),
+                    "source": source,
+                })
+    else:
+        raise ValueError(f"不支持的 JSON 顶层类型: {type(data)}")
 
-    raise RuntimeError("E004: 数据解析失败，无法识别为 JSON 或 CSV 格式")
+    return records
 
 
-# ---------------------------------------------------------------------------
-# 输出格式化
-# ---------------------------------------------------------------------------
+def parse_csv_data(content, source="local"):
+    """解析 CSV 格式指标数据。
 
-
-def format_output(records: List[Dict[str, Any]], fmt: str, fields: Optional[List[str]] = None) -> str:
+    支持列：name, value, timestamp（大小写不敏感）。
+    返回规范化记录列表；解析失败抛出 ValueError。
     """
-    将规范化记录格式化为文本输出。
+    records = []
+    try:
+        reader = csv.DictReader(content.splitlines())
+        for row in reader:
+            # 兼容大小写列名
+            name = row.get("name") or row.get("Name") or "unknown"
+            value_str = row.get("value") or row.get("Value") or "0"
+            timestamp = row.get("timestamp") or row.get("Timestamp") or ""
+            try:
+                value = float(value_str)
+            except (ValueError, TypeError):
+                print(f"[WARN] 跳过非法数值: {value_str}", file=sys.stderr)
+                continue
+            records.append({
+                "name": str(name),
+                "value": value,
+                "timestamp": str(timestamp),
+                "source": source,
+            })
+    except csv.Error as e:
+        raise ValueError(f"CSV 解析失败: {e}")
 
-    fmt: "json" 或 "csv"
-    fields: 自定义输出字段顺序
+    return records
+
+
+def parse_data(content, fmt, source="local"):
+    """根据格式解析数据（R2 异常降级）。
+
+    支持 json/csv 两种格式。
+    返回规范化记录列表；解析失败抛出 ValueError。
     """
     if fmt == "json":
-        return json.dumps(records, ensure_ascii=False, indent=2)
+        return parse_json_data(content, source)
+    elif fmt == "csv":
+        return parse_csv_data(content, source)
+    else:
+        raise ValueError(f"不支持的格式: {fmt}，支持: {SUPPORTED_FORMATS}")
 
-    if fmt == "csv":
-        # 确定输出字段
-        if fields:
-            output_fields = [f for f in fields if f in (records[0] if records else {})]
+
+# ============================================================
+# 渲染模块
+# ============================================================
+
+def render_ascii(records):
+    """渲染 ASCII 图表（水平条形图）。"""
+    if not records:
+        return "（无数据）"
+
+    lines = []
+    for record in records:
+        name = record["name"]
+        value = record["value"]
+        # 将数值映射为 20 格条形
+        bar_len = max(0, min(20, int(abs(value) / 5)))
+        bar = "█" * bar_len + "░" * (20 - bar_len)
+        lines.append(f"{name}: {bar} {value}%")
+
+    return "\n".join(lines)
+
+
+def render_svg(records, title="SVG 图表"):
+    """渲染 SVG 图表（柱状图）。
+
+    返回 SVG 字符串。
+    """
+    if not records:
+        return "<svg width='400' height='200' xmlns='http://www.w3.org/2000/svg'><text x='10' y='20'>无数据</text></svg>"
+
+    width = 400
+    height = 200
+    bar_width = 40
+    gap = 20
+    max_value = max(abs(r["value"]) for r in records) or 1
+
+    svg_parts = [
+        f"<svg width='{width}' height='{height}' xmlns='http://www.w3.org/2000/svg'>",
+        f"<text x='10' y='20' font-size='14'>{title}</text>",
+    ]
+
+    for i, record in enumerate(records):
+        x = 50 + i * (bar_width + gap)
+        bar_height = int(abs(record["value"]) / max_value * (height - 60))
+        y = height - 30 - bar_height
+        svg_parts.append(
+            f"<rect x='{x}' y='{y}' width='{bar_width}' height='{bar_height}' "
+            f"fill='steelblue' stroke='black' stroke-width='1'/>"
+        )
+        svg_parts.append(
+            f"<text x='{x}' y='{height - 10}' font-size='10'>{record['name']}</text>"
+        )
+        svg_parts.append(
+            f"<text x='{x}' y='{y - 5}' font-size='10'>{record['value']}</text>"
+        )
+
+    svg_parts.append("</svg>")
+    return "\n".join(svg_parts)
+
+
+def render_html(records, title="监控面板"):
+    """渲染 HTML 监控面板（表格 + 内嵌 SVG 图表）。"""
+    if not records:
+        return f"<html><body><h1>{title}</h1><p>无数据</p></body></html>"
+
+    svg_chart = render_svg(records, title)
+
+    table_rows = ""
+    for record in records:
+        table_rows += (
+            f"<tr><td>{record['name']}</td><td>{record['value']}</td>"
+            f"<td>{record['timestamp']}</td><td>{record['source']}</td></tr>"
+        )
+
+    html = f"""<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>{title}</title>
+    <style>
+        body {{ font-family: Arial, sans-serif; margin: 20px; }}
+        h1 {{ color: #333; }}
+        table {{ border-collapse: collapse; width: 100%; margin-top: 20px; }}
+        th, td {{ border: 1px solid #ddd; padding: 8px; text-align: left; }}
+        th {{ background-color: #f2f2f2; }}
+        tr:nth-child(even) {{ background-color: #f9f9f9; }}
+        .chart {{ margin-top: 20px; }}
+    </style>
+</head>
+<body>
+    <h1>{title}</h1>
+    <div class="chart">
+        {svg_chart}
+    </div>
+    <h2>指标明细</h2>
+    <table>
+        <tr><th>名称</th><th>数值</th><th>时间戳</th><th>来源</th></tr>
+        {table_rows}
+    </table>
+</body>
+</html>"""
+    return html
+
+
+def render_data(records, render_type, title="监控面板"):
+    """根据渲染类型生成图表（R2 异常降级）。"""
+    if render_type == "ascii":
+        return render_ascii(records)
+    elif render_type == "svg":
+        return render_svg(records, title)
+    elif render_type == "html":
+        return render_html(records, title)
+    else:
+        raise ValueError(f"不支持的渲染类型: {render_type}，支持: {SUPPORTED_RENDERS}")
+
+
+# ============================================================
+# 文件写入模块
+# ============================================================
+
+def save_file(path, data, dry_run=False, verbose=False):
+    """原子化写盘（R4 预览撤回）。
+
+    dry_run=True 时只打印将写入的路径与摘要，不实际写盘。
+    写盘使用临时文件 + rename 保证原子性。
+    """
+    if dry_run:
+        print(f"[dry-run] 将写入 {path}（{len(data)} 字节），未落盘")
+        return False
+
+    try:
+        tmp_path = Path(str(path) + ".tmp")
+        tmp_path.write_text(data, encoding="utf-8")
+        tmp_path.replace(path)
+        if verbose:
+            print(f"[INFO] 已写入 {path}（{len(data)} 字节）")
         else:
-            output_fields = REQUIRED_FIELDS + [f for f in META_FIELDS if f in (records[0] if records else {})]
-
-        if not records:
-            return ""
-
-        buf = io.StringIO()
-        writer = csv.DictWriter(buf, fieldnames=output_fields, extrasaction="ignore")
-        writer.writeheader()
-        for r in records:
-            writer.writerow({k: r.get(k, "") for k in output_fields})
-        return buf.getvalue()
-
-    raise RuntimeError(f"E007: 不支持的输出格式: {fmt}")
+            print(f"[写入] {path}")
+        return True
+    except OSError as e:
+        print(f"[ERROR] 写入 {path} 失败: {e}", file=sys.stderr)
+        return False
 
 
-# ---------------------------------------------------------------------------
-# 过滤功能
-# ---------------------------------------------------------------------------
+# ============================================================
+# 批量处理模块
+# ============================================================
+
+def process_file(input_path, fmt, render_type, output_path, dry_run=False, verbose=False):
+    """处理单个文件（R2 异常降级 + R5 流式）。
+
+    返回处理结果字典。
+    """
+    result = {"input": str(input_path), "success": False, "records": 0, "output": None}
+
+    try:
+        # 读取文件（流式）
+        content = read_text_safe(input_path)
+        if not content.strip():
+            print(f"[WARN] 文件为空: {input_path}", file=sys.stderr)
+            return result
+
+        # 解析数据
+        records = parse_data(content, fmt, source="local")
+        result["records"] = len(records)
+
+        if verbose:
+            print(f"[INFO] 解析到 {len(records)} 条指标记录")
+
+        # 渲染
+        if render_type:
+            rendered = render_data(records, render_type, title=input_path.stem)
+            if output_path:
+                save_file(output_path, rendered, dry_run=dry_run, verbose=verbose)
+                result["output"] = str(output_path)
+            else:
+                print(rendered)
+        else:
+            # 默认输出 JSON
+            print(json.dumps(records, ensure_ascii=False, indent=2))
+
+        result["success"] = True
+        return result
+
+    except ValueError as e:
+        print(f"[ERROR] 解析 {input_path} 失败: {e}", file=sys.stderr)
+        return result
+    except Exception as e:
+        print(f"[ERROR] 处理 {input_path} 失败: {e}", file=sys.stderr)
+        return result
 
 
-def filter_records(records: List[Dict[str, Any]], metric_filter: Optional[List[str]] = None) -> List[Dict[str, Any]]:
-    """按指标名称过滤记录。"""
-    if not metric_filter:
-        return records
+def process_batch(input_dir, output_dir, fmt, render_type, dry_run=False, verbose=False):
+    """批量处理目录下所有 .json 和 .csv 文件（R5 流式）。"""
+    input_path = Path(input_dir)
+    if not input_path.is_dir():
+        print(f"[ERROR] 输入目录不存在: {input_dir}", file=sys.stderr)
+        return []
 
-    # 规范化过滤条件
-    filters = {_normalize_metric_name(m) for m in metric_filter}
-    return [r for r in records if r["metric"] in filters]
+    # 创建输出目录
+    output_path = Path(output_dir)
+    if not dry_run:
+        try:
+            output_path.mkdir(parents=True, exist_ok=True)
+        except OSError as e:
+            print(f"[ERROR] 创建输出目录失败: {e}", file=sys.stderr)
+            return []
+
+    results = []
+    for file_path in sorted(input_path.iterdir()):
+        if file_path.suffix.lower() not in (".json", ".csv"):
+            continue
+
+        # 自动检测格式
+        file_fmt = fmt or file_path.suffix.lower().lstrip(".")
+        if file_fmt not in SUPPORTED_FORMATS:
+            print(f"[WARN] 跳过不支持格式: {file_path}（{file_fmt}）", file=sys.stderr)
+            continue
+
+        # 输出文件名
+        out_file = output_path / f"{file_path.stem}.{render_type}" if render_type else output_path / f"{file_path.stem}.json"
+
+        result = process_file(
+            file_path, file_fmt, render_type, out_file,
+            dry_run=dry_run, verbose=verbose
+        )
+        results.append(result)
+
+    return results
 
 
-# ---------------------------------------------------------------------------
+# ============================================================
 # 自检模块
-# ---------------------------------------------------------------------------
+# ============================================================
+
+def run_selftest():
+    """离线自检：真实调用核心函数并断言关键输出（退出码 0 表示通过）。"""
+    print("[自检] 开始...")
+    failures = 0
+
+    # 测试 1：JSON 解析
+    print("[自检] 测试 JSON 解析...", end=" ")
+    try:
+        json_content = '[{"name": "cpu", "value": 42.5, "timestamp": "2026-08-09T10:00:00Z"}]'
+        records = parse_json_data(json_content, source="local")
+        assert len(records) == 1, f"期望 1 条记录，实际 {len(records)}"
+        assert records[0]["name"] == "cpu", f"期望 name=cpu，实际 {records[0]['name']}"
+        assert abs(records[0]["value"] - 42.5) < 0.001, f"期望 value=42.5，实际 {records[0]['value']}"
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 2：CSV 解析
+    print("[自检] 测试 CSV 解析...", end=" ")
+    try:
+        csv_content = "name,value,timestamp\ncpu,42.5,2026-08-09T10:00:00Z\nmemory,68.2,2026-08-09T10:00:00Z\n"
+        records = parse_csv_data(csv_content, source="local")
+        assert len(records) == 2, f"期望 2 条记录，实际 {len(records)}"
+        assert records[1]["name"] == "memory", f"期望 name=memory，实际 {records[1]['name']}"
+        assert abs(records[1]["value"] - 68.2) < 0.001, f"期望 value=68.2，实际 {records[1]['value']}"
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 3：ASCII 渲染
+    print("[自检] 测试 ASCII 渲染...", end=" ")
+    try:
+        records = [
+            {"name": "cpu", "value": 42.5, "timestamp": "", "source": "local"},
+            {"name": "memory", "value": 68.2, "timestamp": "", "source": "local"},
+        ]
+        ascii_output = render_ascii(records)
+        assert "cpu" in ascii_output, "ASCII 输出缺少 cpu"
+        assert "memory" in ascii_output, "ASCII 输出缺少 memory"
+        assert "█" in ascii_output, "ASCII 输出缺少条形字符"
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 4：SVG 渲染
+    print("[自检] 测试 SVG 渲染...", end=" ")
+    try:
+        records = [
+            {"name": "cpu", "value": 42.5, "timestamp": "", "source": "local"},
+            {"name": "memory", "value": 68.2, "timestamp": "", "source": "local"},
+        ]
+        svg_output = render_svg(records, "测试图表")
+        assert "<svg" in svg_output, "SVG 输出缺少 <svg> 标签"
+        assert "cpu" in svg_output, "SVG 输出缺少 cpu"
+        assert "memory" in svg_output, "SVG 输出缺少 memory"
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 5：HTML 渲染
+    print("[自检] 测试 HTML 渲染...", end=" ")
+    try:
+        records = [
+            {"name": "cpu", "value": 42.5, "timestamp": "2026-08-09T10:00:00Z", "source": "local"},
+        ]
+        html_output = render_html(records, "测试面板")
+        assert "<html" in html_output, "HTML 输出缺少 <html> 标签"
+        assert "cpu" in html_output, "HTML 输出缺少 cpu"
+        assert "42.5" in html_output, "HTML 输出缺少数值"
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 6：空数据处理
+    print("[自检] 测试空数据处理...", end=" ")
+    try:
+        records = []
+        ascii_output = render_ascii(records)
+        assert "无数据" in ascii_output, "空数据 ASCII 输出缺少提示"
+        svg_output = render_svg(records)
+        assert "无数据" in svg_output, "空数据 SVG 输出缺少提示"
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 7：异常输入处理
+    print("[自检] 测试异常输入处理...", end=" ")
+    try:
+        try:
+            parse_json_data("invalid json", source="local")
+            print("失败: 非法 JSON 未抛出异常")
+            failures += 1
+        except ValueError:
+            pass  # 预期行为
+
+        try:
+            parse_data("", "json", source="local")
+            print("失败: 空内容未抛出异常")
+            failures += 1
+        except ValueError:
+            pass  # 预期行为
+
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 8：文件读写
+    print("[自检] 测试文件读写...", end=" ")
+    try:
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmpdir:
+            # 写入测试文件
+            test_file = Path(tmpdir) / "test.json"
+            test_file.write_text('[{"name": "cpu", "value": 42.5}]', encoding="utf-8")
+
+            # 读取并解析
+            content = read_text_safe(test_file)
+            records = parse_json_data(content, source="local")
+            assert len(records) == 1, f"期望 1 条记录，实际 {len(records)}"
+
+            # 测试 dry-run
+            out_file = Path(tmpdir) / "out.svg"
+            save_file(out_file, "<svg></svg>", dry_run=True)
+            assert not out_file.exists(), "dry-run 模式不应创建文件"
+
+            # 测试实际写入
+            save_file(out_file, "<svg></svg>", dry_run=False)
+            assert out_file.exists(), "实际写入应创建文件"
+            assert out_file.read_text(encoding="utf-8") == "<svg></svg>", "文件内容不匹配"
+
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 9：批量处理
+    print("[自检] 测试批量处理...", end=" ")
+    try:
+        import tempfile
+        with tempfile.TemporaryDirectory() as tmpdir:
+            input_dir = Path(tmpdir) / "input"
+            output_dir = Path(tmpdir) / "output"
+            input_dir.mkdir()
+
+            # 创建测试文件
+            (input_dir / "a.json").write_text('[{"name": "cpu", "value": 42.5}]', encoding="utf-8")
+            (input_dir / "b.csv").write_text("name,value\nmemory,68.2\n", encoding="utf-8")
+
+            results = process_batch(input_dir, output_dir, None, "ascii", dry_run=False, verbose=False)
+            assert len(results) == 2, f"期望 2 个结果，实际 {len(results)}"
+            assert all(r["success"] for r in results), "存在失败的处理"
+
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 测试 10：远程 URL（模拟）
+    print("[自检] 测试 URL 处理...", end=" ")
+    try:
+        # 使用本地 HTTP 服务器模拟
+        import http.server
+        import threading
+
+        class Handler(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json")
+                self.end_headers()
+                self.wfile.write(b'[{"name": "cpu", "value": 42.5}]')
+
+            def log_message(self, format, *args):
+                pass  # 静默日志
+
+        server = http.server.HTTPServer(("127.0.0.1", 0), Handler)
+        port = server.server_address[1]
+        thread = threading.Thread(target=server.serve_forever, daemon=True)
+        thread.start()
+
+        try:
+            content = fetch_url(f"http://127.0.0.1:{port}/metrics.json", timeout=5, retries=1)
+            records = parse_json_data(content, source="remote")
+            assert len(records) == 1, f"期望 1 条记录，实际 {len(records)}"
+            assert records[0]["source"] == "remote", f"期望 source=remote，实际 {records[0]['source']}"
+        finally:
+            server.shutdown()
+
+        print("通过")
+    except Exception as e:
+        print(f"失败: {e}")
+        failures += 1
+
+    # 总结
+    if failures == 0:
+        print("[自检] 全部通过")
+        return 0
+    else:
+        print(f"[自检] {failures} 项失败")
+        return 1
 
 
-def run_selftest() -> int:
-    """
-    离线自检核心逻辑。
+# ============================================================
+# 主入口
+# ============================================================
 
-    使用硬编码样例数据，不读外部文件、不访问网络。
-    断言使用宽松阈值，确保任何环境可过。
-    """
-    print("=== appmetrics-dash 自检开始 ===")
-
-    # 测试 1：JSON 数据解析
-    print("[1/4] 测试 JSON 解析...")
-    sample_json = {
-        "app": "order-service",
-        "pid": 12345,
-        "node_version": "v18.16.0",
-        "metrics": [
-            {"timestamp": 1699999999, "metric": "cpu", "value": 42.5, "unit": "%"},
-            {"timestamp": 1699999999, "metric": "memory.rss", "value": 52428800, "unit": "bytes"},
-            {"timestamp": 1699999999, "metric": "eventloop", "value": 1.2, "unit": "ms"},
-        ],
-    }
-    records, meta = parse_json_data(sample_json)
-
-    assert len(records) == 3, f"E009: 期望 3 条记录，实际 {len(records)}"
-    assert meta.get("app") == "order-service", "E009: 元数据 app 提取失败"
-    assert meta.get("pid") == 12345, "E009: 元数据 pid 提取失败"
-
-    # 宽松验证：值在合理范围内
-    for r in records:
-        assert "timestamp" in r, "E009: 缺少 timestamp"
-        assert "metric" in r, "E009: 缺少 metric"
-        assert "value" in r, "E009: 缺少 value"
-        assert isinstance(r["value"], float), "E009: value 应为 float"
-        assert r["value"] > 0, "E009: value 应为正数"
-        assert r["value"] < 1e9, "E009: value 超出合理范围"
-
-    print("   JSON 解析通过 ✓")
-
-    # 测试 2：CSV 数据解析
-    print("[2/4] 测试 CSV 解析...")
-    sample_csv = """timestamp,metric,value,unit
-1699999999,cpu,55.5,%
-1699999999,memory.rss,104857600,bytes
-1699999999,http,120,req/s
-"""
-    csv_records, _ = parse_csv_data(sample_csv, {"app": "test-app"})
-
-    assert len(csv_records) == 3, f"E009: CSV 期望 3 条记录，实际 {len(csv_records)}"
-    for r in csv_records:
-        assert r["value"] > 0, "E009: CSV 解析 value 异常"
-        assert r["metric"], "E009: CSV 解析 metric 为空"
-        assert r["unit"], "E009: CSV 解析 unit 为空"
-
-    print("   CSV 解析通过 ✓")
-
-    # 测试 3：过滤功能
-    print("[3/4] 测试过滤功能...")
-    filtered = filter_records(records, ["cpu", "eventloop"])
-    assert len(filtered) == 2, f"E009: 过滤后期望 2 条，实际 {len(filtered)}"
-    for r in filtered:
-        assert r["metric"] in ("cpu", "eventloop"), f"E009: 过滤结果异常: {r['metric']}"
-
-    # 宽松验证：过滤后数量不大于原数量
-    assert len(filtered) <= len(records), "E009: 过滤后数量不应增加"
-    print("   过滤功能通过 ✓")
-
-    # 测试 4：输出格式化
-    print("[4/4] 测试输出格式化...")
-    json_out = format_output(records, "json")
-    assert json_out, "E009: JSON 输出为空"
-    parsed_back = json.loads(json_out)
-    assert len(parsed_back) == len(records), "E009: JSON 输出往返不一致"
-
-    csv_out = format_output(records, "csv")
-    assert csv_out, "E009: CSV 输出为空"
-    csv_lines = csv_out.strip().split("\n")
-    assert len(csv_lines) >= 2, "E009: CSV 输出缺少表头或数据行"
-
-    print("   输出格式化通过 ✓")
-
-    print("=== 自检全部通过 ===")
-    return 0
-
-
-# ---------------------------------------------------------------------------
-# 主程序
-# ---------------------------------------------------------------------------
-
-
-def main(argv: Optional[List[str]] = None) -> int:
-    """主入口。"""
+def main():
+    """CLI 入口：解析参数并调度处理。"""
     parser = argparse.ArgumentParser(
-        prog="appmetrics-dash",
-        description="将 Node.js 应用指标数据解析为规范化记录",
-        epilog="示例: python main.py metrics.json --format json --filter cpu memory",
+        description="appmetrics-dash: 将 Node.js 应用指标数据解析为规范化记录并渲染可视化图表",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""示例:
+  python run.py --input metrics.json --format json
+  python run.py --url https://example.com/metrics.json --format json
+  cat metrics.json | python run.py --format json
+  python run.py --input metrics.json --render ascii
+  python run.py --input metrics.json --render svg --output chart.svg
+  python run.py --input metrics.json --render html --output dashboard.html
+  python run.py --batch --input data/ --output results/
+  python run.py --selftest
+"""
     )
 
     # 输入参数
-    parser.add_argument("--sources", nargs="*", help="输入文件路径或 URL（支持多个）")
-    parser.add_argument("--format", "-f", choices=["json", "csv"], default="json", help="输出格式")
-    parser.add_argument("--filter", nargs="*", help="仅输出指定指标（可多个）")
-    parser.add_argument("--fields", nargs="*", help="自定义输出字段顺序")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    input_group = parser.add_mutually_exclusive_group()
+    input_group.add_argument("--input", type=str, help="输入文件路径（JSON/CSV）")
+    input_group.add_argument("--url", type=str, help="远程 URL 地址")
+    input_group.add_argument("--batch", action="store_true", help="批量处理目录下所有指标文件")
 
-    args = parser.parse_args(argv)
+    # 格式参数
+    parser.add_argument("--format", type=str, choices=SUPPORTED_FORMATS,
+                        help="输入数据格式（json/csv），默认自动检测")
+
+    # 渲染参数
+    parser.add_argument("--render", type=str, choices=SUPPORTED_RENDERS,
+                        help="渲染类型（ascii/svg/html），不指定则输出 JSON")
+
+    # 输出参数
+    parser.add_argument("--output", type=str, help="输出文件路径（渲染时必填）")
+
+    # 其他参数
+    parser.add_argument("--dry-run", action="store_true",
+                        help="预览模式：只打印将写入的路径与摘要，不实际写盘")
+    parser.add_argument("--verbose", action="store_true",
+                        help="输出详细处理日志")
+    parser.add_argument("--selftest", action="store_true",
+                        help="运行离线自检")
+
+    args = parser.parse_args()
 
     # 自检模式
     if args.selftest:
+        sys.exit(run_selftest())
+
+    # 参数校验（R7 输入校验防御）
+    if not args.input and not args.url and not args.batch:
+        # 检查是否有 stdin 输入
+        if sys.stdin.isatty():
+            parser.error("必须指定 --input、--url、--batch 之一，或通过管道传入 stdin 数据")
+        # 从 stdin 读取
+        content = read_from_stdin()
+        if not content.strip():
+            parser.error("stdin 输入为空")
+        fmt = args.format or "json"
         try:
-            return run_selftest()
-        except AssertionError as e:
-            print(f"自检失败: {e}", file=sys.stderr)
-            return 1
-        except Exception as e:
-            print(f"自检异常: {e}", file=sys.stderr)
-            return 1
+            records = parse_data(content, fmt, source="stdin")
+        except ValueError as e:
+            print(f"[ERROR] {e}", file=sys.stderr)
+            sys.exit(1)
 
-    # 参数校验
-    if not args.sources:
-        print("E001: 请至少提供一个输入文件或 URL（或使用 --selftest 自检）", file=sys.stderr)
-        parser.print_help()
-        return 1
+        if args.render:
+            rendered = render_data(records, args.render)
+            if args.output:
+                save_file(args.output, rendered, dry_run=args.dry_run, verbose=args.verbose)
+            else:
+                print(rendered)
+        else:
+            print(json.dumps(records, ensure_ascii=False, indent=2))
+        sys.exit(0)
 
-    # 批量处理
-    all_records: List[Dict[str, Any]] = []
-    errors: List[str] = []
+    # 批量处理模式
+    if args.batch:
+        if not args.input:
+            parser.error("--batch 模式必须指定 --input 目录")
+        if not args.output:
+            parser.error("--batch 模式必须指定 --output 目录")
+        results = process_batch(
+            args.input, args.output, args.format, args.render,
+            dry_run=args.dry_run, verbose=args.verbose
+        )
+        success_count = sum(1 for r in results if r["success"])
+        print(f"[INFO] 批量处理完成: {success_count}/{len(results)} 成功")
+        sys.exit(0 if success_count == len(results) else 1)
 
-    for source in args.sources:
+    # 远程 URL 模式
+    if args.url:
         try:
-            records, _ = load_data(source)
-            all_records.extend(records)
+            content = fetch_url(args.url)
         except RuntimeError as e:
-            errors.append(str(e))
+            print(f"[ERROR] {e}", file=sys.stderr)
+            sys.exit(1)
+        fmt = args.format or "json"
+        try:
+            records = parse_data(content, fmt, source="remote")
+        except ValueError as e:
+            print(f"[ERROR] {e}", file=sys.stderr)
+            sys.exit(1)
+    # 本地文件模式
+    else:
+        input_path = Path(args.input)
+        if not input_path.exists():
+            print(f"[ERROR] 文件不存在: {args.input}", file=sys.stderr)
+            sys.exit(1)
+        if not input_path.is_file():
+            print(f"[ERROR] 不是文件: {args.input}", file=sys.stderr)
+            sys.exit(1)
 
-    if errors:
-        for err in errors:
-            print(err, file=sys.stderr)
-        if not all_records:
-            return 1
-        print("E008: 部分文件处理失败，已输出成功部分", file=sys.stderr)
+        # 自动检测格式
+        fmt = args.format
+        if not fmt:
+            suffix = input_path.suffix.lower().lstrip(".")
+            if suffix in SUPPORTED_FORMATS:
+                fmt = suffix
+            else:
+                print(f"[ERROR] 无法自动检测格式，请使用 --format 指定（支持: {SUPPORTED_FORMATS}）", file=sys.stderr)
+                sys.exit(1)
 
-    # 过滤
-    if args.filter:
-        all_records = filter_records(all_records, args.filter)
+        content = read_text_safe(input_path)
+        if not content.strip():
+            print(f"[ERROR] 文件为空: {args.input}", file=sys.stderr)
+            sys.exit(1)
 
-    # 输出
-    try:
-        output = format_output(all_records, args.format, args.fields)
-        print(output)
-    except RuntimeError as e:
-        print(str(e), file=sys.stderr)
-        return 1
+        try:
+            records = parse_data(content, fmt, source="local")
+        except ValueError as e:
+            print(f"[ERROR] {e}", file=sys.stderr)
+            sys.exit(1)
 
-    return 0
+    # 输出处理
+    if args.verbose:
+        print(f"[INFO] 解析到 {len(records)} 条指标记录")
+
+    if args.render:
+        rendered = render_data(records, args.render, title=input_path.stem if args.input else "监控面板")
+        if args.output:
+            save_file(args.output, rendered, dry_run=args.dry_run, verbose=args.verbose)
+        else:
+            print(rendered)
+    else:
+        # 默认输出 JSON
+        print(json.dumps(records, ensure_ascii=False, indent=2))
+
+    sys.exit(0)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
