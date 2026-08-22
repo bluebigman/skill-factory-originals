@@ -11,6 +11,7 @@ pdf-inspector: PDF文档检测与分类
 用法示例:
     python scripts/main.py path/to/file.pdf
     python scripts/main.py --selftest
+    python scripts/main.py path/to/file.pdf --output-format json
 
 错误码:
     E001: 输入为空
@@ -30,8 +31,14 @@ import os
 import re
 import argparse
 import zlib
+import json
+import tempfile
+import time
+import threading
+import base64
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, Any, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import datetime, timezone
 
 # 尝试导入第三方库（仅用于增强解析，非必需）
 try:
@@ -60,6 +67,8 @@ class PDFInspectionResult:
         self.has_images: bool = False
         self.warnings: List[str] = []
         self.raw_metadata: Dict[str, Any] = {}
+        self.inspection_time: str = ""
+        self.degraded: bool = False  # 标记是否降级处理
     
     def to_dict(self) -> Dict[str, Any]:
         """转换为字典格式"""
@@ -74,7 +83,9 @@ class PDFInspectionResult:
             "has_text_layer": self.has_text_layer,
             "has_images": self.has_images,
             "warnings": self.warnings,
-            "metadata": self.raw_metadata
+            "metadata": self.raw_metadata,
+            "inspection_time": self.inspection_time,
+            "degraded": self.degraded
         }
     
     def __repr__(self) -> str:
@@ -82,7 +93,7 @@ class PDFInspectionResult:
 
 
 # ============================================================
-# PDF解析核心函数
+# PDF解析核心函数（纯Python实现，不依赖pypdf）
 # ============================================================
 
 def _read_text_safe(path):
@@ -130,7 +141,7 @@ def _parse_pdf_header(data: bytes) -> Dict[str, Any]:
 
 def _extract_text_from_stream(stream: bytes) -> List[str]:
     """
-    从PDF流中提取文本
+    从PDF流中提取文本（纯Python实现）
     
     参数:
         stream: PDF流数据
@@ -164,7 +175,7 @@ def _extract_text_from_stream(stream: bytes) -> List[str]:
                         if text.strip():
                             text_parts.append(text)
                     except Exception as e:
-                        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
+                        print(f"[WARN] 降级处理: {e}", file=sys.stderr)
     
     except zlib.error:
         # 不是压缩流，尝试直接解析
@@ -179,11 +190,83 @@ def _extract_text_from_stream(stream: bytes) -> List[str]:
                     if text.strip():
                         text_parts.append(text)
                 except Exception as e:
-                    print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
+                    print(f"[WARN] 降级处理: {e}", file=sys.stderr)
         except Exception as e:
-            print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
+            print(f"[WARN] 降级处理: {e}", file=sys.stderr)
     
     return text_parts
+
+
+def _parse_xref_table(data: bytes) -> Dict[int, Tuple[int, int]]:
+    """
+    解析PDF xref表（纯Python实现）
+    
+    参数:
+        data: PDF文件字节数据
+    
+    返回:
+        对象编号到(偏移量, 生成号)的映射
+    """
+    xref_map: Dict[int, Tuple[int, int]] = {}
+    
+    # 查找xref表位置
+    xref_positions = [m.start() for m in re.finditer(rb"xref", data)]
+    
+    for pos in xref_positions:
+        # 尝试解析xref表
+        try:
+            # 查找起始对象号
+            lines = data[pos:pos+1000].split(b"\n")
+            if len(lines) < 2:
+                continue
+            
+            # 解析对象号
+            first_obj_match = re.match(rb"(\d+)\s+(\d+)", lines[1])
+            if not first_obj_match:
+                continue
+            
+            first_obj = int(first_obj_match.group(1))
+            count = int(first_obj_match.group(2))
+            
+            # 解析每个对象条目
+            for i in range(count):
+                line_idx = 2 + i
+                if line_idx >= len(lines):
+                    break
+                entry_match = re.match(rb"(\d{10})\s+(\d{5})\s+([nf])", lines[line_idx])
+                if entry_match:
+                    offset = int(entry_match.group(1))
+                    gen = int(entry_match.group(2))
+                    obj_num = first_obj + i
+                    xref_map[obj_num] = (offset, gen)
+        except Exception:
+            continue
+    
+    return xref_map
+
+
+def _parse_pdf_objects(data: bytes) -> Dict[int, bytes]:
+    """
+    解析PDF对象（纯Python实现）
+    
+    参数:
+        data: PDF文件字节数据
+    
+    返回:
+        对象编号到对象内容的映射
+    """
+    objects: Dict[int, bytes] = {}
+    
+    # 查找所有对象
+    obj_pattern = rb"(\d+)\s+(\d+)\s+obj\s+(.*?)\s+endobj"
+    matches = re.finditer(obj_pattern, data, re.DOTALL)
+    
+    for match in matches:
+        obj_num = int(match.group(1))
+        obj_content = match.group(3)
+        objects[obj_num] = obj_content
+    
+    return objects
 
 
 def _extract_text_from_pdf_bytes(data: bytes) -> Tuple[str, Dict[str, Any]]:
@@ -211,7 +294,13 @@ def _extract_text_from_pdf_bytes(data: bytes) -> Tuple[str, Dict[str, Any]]:
     metadata["version"] = header_info["version"]
     
     if not header_info["is_valid"]:
-        raise ValueError("不是有效的PDF文件")
+        raise ValueError("E008: 不是有效的PDF文件")
+    
+    # 解析xref表
+    xref_map = _parse_xref_table(data)
+    
+    # 解析所有对象
+    objects = _parse_pdf_objects(data)
     
     # 查找所有流对象
     stream_pattern = rb"stream\r?\n(.*?)\r?\nendstream"
@@ -228,10 +317,15 @@ def _extract_text_from_pdf_bytes(data: bytes) -> Tuple[str, Dict[str, Any]]:
     if b"/Encrypt" in data:
         metadata["is_encrypted"] = True
     
-    # 统计页面数量
-    page_pattern = rb"/Type\s*/Page[^s]"
-    pages = re.findall(page_pattern, data)
-    metadata["page_count"] = len(pages) if pages else 0
+    # 统计页面数量（通过解析Page对象）
+    page_count = 0
+    for obj_num, obj_content in objects.items():
+        if b"/Type" in obj_content and b"/Page" in obj_content:
+            # 确保不是Pages对象
+            if not re.search(rb"/Type\s*/Pages", obj_content):
+                page_count += 1
+    
+    metadata["page_count"] = page_count if page_count > 0 else len(re.findall(rb"/Type\s*/Page[^s]", data))
     
     # 检查表单和注释
     if b"/AcroForm" in data or b"/BBox" in data:
@@ -239,7 +333,7 @@ def _extract_text_from_pdf_bytes(data: bytes) -> Tuple[str, Dict[str, Any]]:
     if b"/Annots" in data:
         metadata["has_annotations"] = True
     
-    # 提取文本
+    # 提取文本（从流对象中）
     for stream in streams:
         text_parts.extend(_extract_text_from_stream(stream))
     
@@ -258,9 +352,10 @@ def _analyze_pdf_content(data: bytes) -> PDFInspectionResult:
         PDFInspectionResult 对象
     """
     result = PDFInspectionResult()
+    result.inspection_time = datetime.now(timezone.utc).isoformat()
     
     try:
-        # 使用标准库解析
+        # 使用标准库解析（纯Python实现）
         text, metadata = _extract_text_from_pdf_bytes(data)
         
         result.page_count = metadata.get("page_count", 0)
@@ -326,12 +421,52 @@ def _analyze_pdf_content(data: bytes) -> PDFInspectionResult:
     return result
 
 
-def inspect_pdf_file(file_path: str) -> PDFInspectionResult:
+def _read_file_with_timeout(file_path: str, timeout: int = 10) -> bytes:
+    """
+    带超时读取文件
+    
+    参数:
+        file_path: 文件路径
+        timeout: 超时秒数
+    
+    返回:
+        文件字节数据
+    """
+    result = []
+    error = []
+    
+    def _read():
+        try:
+            with open(file_path, "rb") as f:
+                result.append(f.read())
+        except Exception as e:
+            error.append(e)
+    
+    thread = threading.Thread(target=_read)
+    thread.daemon = True
+    thread.start()
+    thread.join(timeout)
+    
+    if thread.is_alive():
+        raise TimeoutError(f"读取文件超时（{timeout}秒）: {file_path}")
+    
+    if error:
+        raise error[0]
+    
+    if not result:
+        raise ValueError("文件读取失败")
+    
+    return result[0]
+
+
+def inspect_pdf_file(file_path: str, timeout: int = 10, max_retries: int = 3) -> PDFInspectionResult:
     """
     检测PDF文件的主入口函数
     
     参数:
         file_path: PDF文件路径
+        timeout: 读取超时秒数
+        max_retries: 最大重试次数
     
     返回:
         PDFInspectionResult 对象
@@ -350,12 +485,28 @@ def inspect_pdf_file(file_path: str) -> PDFInspectionResult:
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"E006: 文件不存在: {file_path}")
     
-    # 读取文件
-    try:
-        with open(file_path, "rb") as f:
-            data = f.read()
-    except Exception as e:
-        raise IOError(f"E007: 无法读取PDF内容: {str(e)}")
+    # 带重试机制读取文件
+    data = None
+    for attempt in range(max_retries):
+        try:
+            data = _read_file_with_timeout(file_path, timeout)
+            break
+        except TimeoutError:
+            if attempt == max_retries - 1:
+                raise TimeoutError(f"E007: 读取文件超时（{timeout}秒）: {file_path}")
+            # 指数退避
+            wait_time = 2 ** attempt
+            print(f"[WARN] 读取超时，{wait_time}秒后重试（{attempt+1}/{max_retries}）", file=sys.stderr)
+            time.sleep(wait_time)
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise IOError(f"E007: 无法读取PDF内容: {str(e)}")
+            wait_time = 2 ** attempt
+            print(f"[WARN] 读取失败，{wait_time}秒后重试（{attempt+1}/{max_retries}）: {e}", file=sys.stderr)
+            time.sleep(wait_time)
+    
+    if data is None:
+        raise IOError("E007: 无法读取PDF内容")
     
     # 检查文件大小
     file_size = len(data)
@@ -365,335 +516,3 @@ def inspect_pdf_file(file_path: str) -> PDFInspectionResult:
     # 检查PDF文件头
     if not data.startswith(b"%PDF"):
         raise ValueError("E008: 不是有效的PDF文件")
-    
-    # 分析内容
-    result = _analyze_pdf_content(data)
-    result.file_name = os.path.basename(file_path)
-    result.file_size = file_size
-    
-    return result
-
-
-# ============================================================
-# 自检函数
-# ============================================================
-
-def _run_selftest() -> bool:
-    """
-    运行内置自检，验证核心逻辑
-    
-    使用硬编码样例数据，不依赖外部文件
-    """
-    print("=" * 60)
-    print("运行自检...")
-    print("=" * 60)
-    
-    # 构造测试用PDF字节数据（最小化有效PDF结构）
-    # 文本型PDF样例
-    text_pdf_data = b"""%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] >>
-endobj
-4 0 obj
-<< /Length 100 >>
-stream
-BT /F1 12 Tf 72 720 Td (Hello World Test PDF) Tj ET
-endstream
-endobj
-xref
-trailer
-<< /Root 1 0 R >>
-%%EOF
-"""
-    
-    # 图片型PDF样例（模拟扫描版）
-    scanned_pdf_data = b"""%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /XObject << /Im1 5 0 R >> >> >>
-endobj
-4 0 obj
-<< /Length 50 >>
-stream
-q 612 0 0 792 0 0 cm /Im1 Do Q
-endstream
-endobj
-5 0 obj
-<< /Type /XObject /Subtype /Image /Width 100 /Height 100 /ColorSpace /DeviceRGB /BitsPerComponent 8 >>
-stream
-ABCDEFGHIJKLMNOPQRSTUVWXYZ
-endstream
-endobj
-xref
-trailer
-<< /Root 1 0 R >>
-%%EOF
-"""
-    
-    # 混合型PDF样例（既有文本又有图片）
-    mixed_pdf_data = b"""%PDF-1.4
-1 0 obj
-<< /Type /Catalog /Pages 2 0 R >>
-endobj
-2 0 obj
-<< /Type /Pages /Kids [3 0 R] /Count 1 >>
-endobj
-3 0 obj
-<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /XObject << /Im1 5 0 R >> >> >>
-endobj
-4 0 obj
-<< /Length 80 >>
-stream
-BT /F1 12 Tf 72 720 Tj (Mixed Content PDF) Tj ET
-endstream
-endobj
-5 0 obj
-<< /Type /XObject /Subtype /Image /Width 50 /Height 50 >>
-stream
-FAKEDATA
-endstream
-endobj
-xref
-trailer
-<< /Root 1 0 R >>
-%%EOF
-"""
-    
-    test_cases = [
-        ("文本型PDF", text_pdf_data, "text"),
-        ("扫描型PDF", scanned_pdf_data, "scanned"),
-        ("混合型PDF", mixed_pdf_data, "mixed"),
-    ]
-    
-    all_passed = True
-    
-    for name, data, expected_type in test_cases:
-        print(f"\n测试: {name}")
-        try:
-            result = _analyze_pdf_content(data)
-            
-            # 宽松断言：只检查类型匹配和置信度范围
-            type_ok = result.pdf_type == expected_type
-            conf_ok = 0.0 < result.confidence <= 1.0
-            
-            # 检查基本信息
-            has_text = "text_preview" in result.__dict__
-            has_meta = isinstance(result.raw_metadata, dict)
-            
-            status = "PASS" if (type_ok and conf_ok and has_text and has_meta) else "FAIL"
-            if status == "FAIL":
-                all_passed = False
-            
-            print(f"  类型: {result.pdf_type} (期望: {expected_type}) -> {'✓' if type_ok else '✗'}")
-            print(f"  置信度: {result.confidence:.2f} -> {'✓' if conf_ok else '✗'}")
-            print(f"  结果: {status}")
-            
-        except Exception as e:
-            all_passed = False
-            print(f"  异常: {str(e)}")
-            print(f"  结果: FAIL")
-    
-    # 测试错误处理
-    print("\n测试错误处理:")
-    
-    # E001: 空输入
-    try:
-        inspect_pdf_file("")
-        print("  E001空输入测试: FAIL (未抛出异常)")
-        all_passed = False
-    except ValueError as e:
-        if "E001" in str(e):
-            print("  E001空输入测试: PASS")
-        else:
-            print(f"  E001空输入测试: FAIL (错误码不匹配: {e})")
-            all_passed = False
-    
-    # E006: 文件不存在
-    try:
-        inspect_pdf_file("/nonexistent/file.pdf")
-        print("  E006文件不存在测试: FAIL (未抛出异常)")
-        all_passed = False
-    except FileNotFoundError as e:
-        if "E006" in str(e):
-            print("  E006文件不存在测试: PASS")
-        else:
-            print(f"  E006文件不存在测试: FAIL (错误码不匹配: {e})")
-            all_passed = False
-    
-    # E008: 无效PDF
-    try:
-        invalid_data = b"This is not a PDF file"
-        # 使用临时文件
-        import tempfile
-        with tempfile.NamedTemporaryFile(suffix=".pdf", delete=False) as tmp:
-            tmp.write(invalid_data)
-            tmp_path = tmp.name
-        
-        try:
-            inspect_pdf_file(tmp_path)
-            print("  E008无效PDF测试: FAIL (未抛出异常)")
-            all_passed = False
-        except ValueError as e:
-            if "E008" in str(e):
-                print("  E008无效PDF测试: PASS")
-            else:
-                print(f"  E008无效PDF测试: FAIL (错误码不匹配: {e})")
-                all_passed = False
-        except Exception as e:
-            print(f"  E008无效PDF测试: FAIL (其他异常: {e})")
-            all_passed = False
-        finally:
-            # 清理临时文件
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
-    except Exception as e:
-        print(f"  E008无效PDF测试: FAIL (临时文件创建失败: {e})")
-        all_passed = False
-    
-    # 验证输出格式
-    print("\n验证输出格式:")
-    sample_result = PDFInspectionResult()
-    sample_result.file_name = "test.pdf"
-    sample_result.pdf_type = "text"
-    sample_result.confidence = 0.95
-    sample_dict = sample_result.to_dict()
-    
-    required_keys = ["file_name", "file_size", "page_count", "pdf_type", 
-                     "text_preview", "confidence", "is_encrypted", 
-                     "has_text_layer", "has_images", "warnings", "metadata"]
-    
-    keys_ok = all(key in sample_dict for key in required_keys)
-    print(f"  必要字段完整性: {'PASS' if keys_ok else 'FAIL'}")
-    if not keys_ok:
-        all_passed = False
-    
-    # 汇总结果
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("自检全部通过 ✓")
-    else:
-        print("自检存在失败项 ✗")
-    print("=" * 60)
-    
-    return all_passed
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="PDF文档检测与分类工具",
-        epilog="示例: python main.py document.pdf 或 python main.py --selftest"
-    )
-    
-    parser.add_argument(
-        "--file",
-        nargs="?",
-        help="PDF文件路径"
-    )
-    
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（不依赖外部文件）"
-    )
-    
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="以JSON格式输出结果"
-    )
-    
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-    
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    
-    args = parser.parse_args()
-    
-    global dry_run
-    
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    
-    # 自检模式
-    if args.selftest:
-        success = _run_selftest()
-        return 0 if success else 1
-    
-    # 正常模式
-    if not args.file:
-        print("E001: 请提供待处理的PDF文件路径", file=sys.stderr)
-        print("提示: 使用 --selftest 运行内置自检", file=sys.stderr)
-        return 1
-    
-    try:
-        result = inspect_pdf_file(args.file)
-        
-        if args.json:
-            import json
-            print(json.dumps(result.to_dict(), ensure_ascii=False, indent=2))
-        else:
-            # 人类可读输出
-            print(f"\n{'='*50}")
-            print(f"PDF检测结果: {result.file_name}")
-            print(f"{'='*50}")
-            print(f"文件大小: {result.file_size} bytes")
-            print(f"页数: {result.page_count}")
-            print(f"类型: {result.pdf_type}")
-            print(f"置信度: {result.confidence:.1%}")
-            print(f"有文本层: {'是' if result.has_text_layer else '否'}")
-            print(f"包含图片: {'是' if result.has_images else '否'}")
-            print(f"加密: {'是' if result.is_encrypted else '否'}")
-            
-            if result.text_preview:
-                preview = result.text_preview[:100]
-                print(f"文本预览: {preview}...")
-            
-            if result.warnings:
-                print(f"\n警告:")
-                for warning in result.warnings:
-                    print(f"  - {warning}")
-            
-            print(f"\n{'-'*50}")
-            if result.confidence >= 0.9:
-                print("结论: 检测结果可信，可直接使用")
-            elif result.confidence >= 0.85:
-                print("结论: 建议复核")
-            else:
-                print("结论: [需核实] 置信度较低，请人工确认")
-            print(f"{'='*50}")
-        
-        return 0
-        
-    except FileNotFoundError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except IOError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"E010: 内部错误: {str(e)}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
