@@ -1,186 +1,308 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
 slug: durable-object-deployer
 name: durable-object-deployer
-displayName: 分布式持久对象部署器
-description: 部署和管理自托管分布式持久对象（Durable Objects），支持配置生成、部署验证和状态监控。
+displayName: 持久对象部署 配置生成 校验监控
+description: 生成、校验与监控自托管持久对象的部署配置，支持多格式输入与YAML输出。
 version: 1.0.0
-# === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
 source_project: original
-source_url: https://skillhub.cn
-source_license_url: 
-copyright_holder: Skill Factory
+source_url: ""
+copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。本Skill为AI辅助生成内容。
-author: skill-factory-auto
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: config-craftsman
 agent_created: true
-trigger_words: 
+trigger_words: ["durable-object-deployer", "持久对象部署", "部署配置生成", "配置校验", "YAML输出"]
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
-
-# 分布式持久对象部署器
-
-> 部署和管理自托管分布式持久对象（Durable Objects），支持配置生成、部署验证和状态监控。
+# 持久对象部署配置生成与校验 Skill
 
 ## 一、能力边界（一页纸速查卡）
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
+### 1.1 能做什么
 
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
+| 能力项 | 说明 | 输入格式 | 输出格式 |
+|--------|------|----------|----------|
+| 配置生成 | 将结构化描述转换为部署配置 | JSON / CSV / 键值对 | YAML |
+| 配置校验 | 检查配置的完整性、类型正确性、必填项 | YAML / JSON | 校验报告（Markdown） |
+| 配置监控 | 对比当前配置与期望状态，输出差异清单 | YAML + 期望状态 | 差异报告 |
+| 自检 | 验证 Skill 自身运行环境 | 无 | 版本与环境信息 |
 
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
+### 1.2 不能做什么
 
-## 二、触发方式（说大白话就能用）
+- 不能直接执行部署操作（不调用任何部署 API 或 SSH）
+- 不能自动修复配置错误（仅提供修正建议）
+- 不能处理加密密钥或敏感凭据的存储
+- 不能保证配置在特定运行环境中的实际可用性
 
-**触发词表（6类场景）：**
-| durable objects | 通用场景 |
-| 持久对象 | 通用场景 |
-| 分布式部署 | 通用场景 |
-| celld | 通用场景 |
-| 自托管 | 通用场景 |
+### 1.3 适用对象
 
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 分布式持久对象部署器，进入标准流程 |
-| 把这个转成另一种格式 | 启动 分布式持久对象部署器，进入标准流程 |
-| 批量弄一下这些 | 启动 分布式持久对象部署器，进入标准流程 |
+- 需要为自托管持久对象服务编写部署配置的运维人员
+- 需要批量转换配置格式的自动化流水线
+- 需要定期校验配置一致性的 SRE 团队
 
-## 三、标准流程（5分钟上手路径）
+---
 
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
+## 二、触发方式
 
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
+### 2.1 触发词
 
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
+| 触发词 | 场景描述 |
+|--------|----------|
+| durable-object-deployer | 直接调用本 Skill 的完整能力 |
+| 持久对象部署 | 需要生成或校验持久对象部署配置 |
+| 部署配置生成 | 需要从结构化数据生成 YAML 配置 |
+| 配置校验 | 需要检查已有配置的正确性 |
+| YAML输出 | 需要将其他格式转换为 YAML |
 
-## 四、异常处理（错误码体系）
+### 2.2 场景映射表
 
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
+| 用户说（大白话） | Skill 执行动作 |
+|------------------|----------------|
+| "帮我生成一个持久对象的部署配置" | 收集必要参数 → 生成 YAML 配置 |
+| "这个配置对不对？" | 解析配置 → 执行校验 → 输出报告 |
+| "把 CSV 转成部署配置" | 读取 CSV → 映射字段 → 生成 YAML |
+| "对比一下线上和期望的配置差异" | 解析两份配置 → 输出差异清单 |
 
-## 五、常见问题（FAQ 速查）
+---
 
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
+## 三、标准流程
 
-## 六、进阶用法（深度按需）
+### 3.1 前置条件
 
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
+| 条件 | 要求 | 缺失时的处理 |
+|------|------|--------------|
+| 输入数据 | 至少包含对象名称和存储类型 | 返回错误码 E1001 |
+| 输入格式 | JSON / CSV / 键值对（key=value，每行一个） | 返回错误码 E1002 |
+| 输出目录 | 有写入权限 | 返回错误码 E1003 |
 
-## 失败处理
-- 输入不符合预期 → 返回错误说明与正确的输入格式示例
-- 执行中异常 → 保留中间结果，报告失败原因与已处理进度
-- 依赖缺失 → 给出安装命令并重试一次
+### 3.2 执行步骤
 
-## 前置条件
-- 无特殊环境要求
+#### 步骤 1：解析输入
 
-## 执行步骤
-1. 收集用户输入并确认格式
-2. 按功能逻辑处理输入内容
-3. 生成结果并校验完整性
+- 检测输入格式（JSON / CSV / 键值对）
+- 提取字段：`name`（必填）、`storage_type`（必填）、`replicas`（可选，默认 3）、`region`（可选，默认 `auto`）、`ttl_seconds`（可选，默认 86400）、`tags`（可选，键值对列表）
 
-## 输出
-- 结构化文本结果，附处理说明
+**示例输入（JSON）：**
 
-## 许可证（License）
-
-```text
-MIT License
-
-Copyright (c) 2026 Skill Factory
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
+```json
+{
+  "name": "user-session-store",
+  "storage_type": "sqlite",
+  "replicas": 3,
+  "region": "us-east-1",
+  "ttl_seconds": 3600,
+  "tags": {"env": "prod", "team": "platform"}
+}
 ```
+
+#### 步骤 2：字段映射与默认值填充
+
+| 字段 | 必填 | 默认值 | 类型约束 |
+|------|------|--------|----------|
+| `name` | 是 | 无 | 字符串，1-64 字符，仅允许小写字母、数字、连字符 |
+| `storage_type` | 是 | 无 | 枚举：`sqlite` / `postgres` / `redis` / `memory` |
+| `replicas` | 否 | 3 | 整数，1-10 |
+| `region` | 否 | `auto` | 字符串，1-32 字符 |
+| `ttl_seconds` | 否 | 86400 | 整数，60-31536000 |
+| `tags` | 否 | 空 | 键值对，键和值均为字符串 |
+
+#### 步骤 3：生成 YAML 配置
+
+输出模板：
+
+```yaml
+object:
+  name: user-session-store
+  storage:
+    type: sqlite
+    ttl_seconds: 3600
+  deployment:
+    replicas: 3
+    region: us-east-1
+  tags:
+    env: prod
+    team: platform
+```
+
+#### 步骤 4：执行校验
+
+校验规则：
+
+1. 必填字段是否存在
+2. 字段类型是否符合约束
+3. 枚举值是否合法
+4. 标签键值对格式是否正确
+
+#### 步骤 5：输出校验报告
+
+报告格式（Markdown）：
+
+```markdown
+# 配置校验报告
+
+- 对象名称: user-session-store
+- 校验时间: 2025-01-15T10:30:00Z
+- 结果: ✅ 通过（3 项检查全部通过）
+
+## 检查明细
+
+| 检查项 | 状态 | 说明 |
+|--------|------|------|
+| 必填字段 | ✅ | name, storage_type 均存在 |
+| 类型约束 | ✅ | 所有字段类型正确 |
+| 枚举值 | ✅ | storage_type=sqlite 合法 |
+```
+
+### 3.3 输出规范
+
+| 场景 | 输出文件 | 格式 |
+|------|----------|------|
+| 配置生成 | `deployment-<name>.yaml` | YAML |
+| 配置校验 | `validation-report-<name>.md` | Markdown |
+| 配置监控 | `diff-report-<name>.md` | Markdown |
+
+---
+
+## 四、置信度门控
+
+当输入信息不足以生成完整配置时，使用 `[需核实:字段名]` 占位，不编造数据。
+
+**示例：**
+
+```yaml
+object:
+  name: [需核实:name]
+  storage:
+    type: [需核实:storage_type]
+```
+
+同时在校验报告中标注：
+
+```markdown
+> ⚠️ 以下字段信息不足，已使用占位符，请人工核实后重新生成：
+> - name
+> - storage_type
+```
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|----------|----------|----------|
+| E1001 | 缺少必填字段 | "输入数据缺少必填字段：name 或 storage_type" | 补充必填字段后重试 |
+| E1002 | 输入格式无法识别 | "无法识别输入格式，支持 JSON、CSV、键值对" | 转换为支持的格式后重试 |
+| E1003 | 输出目录无写入权限 | "目标目录不可写，请检查权限" | 修改目录权限或更换目录 |
+| E1004 | 字段类型错误 | "字段 replicas 应为整数，实际为字符串" | 修正字段类型后重试 |
+| E1005 | 枚举值不合法 | "storage_type 仅支持 sqlite/postgres/redis/memory" | 使用合法枚举值 |
+| E1006 | 名称格式不合法 | "name 仅允许小写字母、数字、连字符，长度 1-64" | 修正名称格式 |
+
+---
+
+## 六、FAQ 反模式
+
+### 6.1 常见坑
+
+| 坑 | 反模式示例 | 正确做法 |
+|----|------------|----------|
+| 忽略默认值 | 不提供 replicas 就认为不需要副本 | 明确了解默认值 3，按需覆盖 |
+| 枚举值拼写错误 | 写 `sqllite` 而不是 `sqlite` | 使用校验功能提前发现 |
+| 标签格式错误 | 使用 `env=prod,team=platform` 而不是键值对 | 遵循 `key: value` 格式 |
+| 忽略 TTL | 不设置 ttl_seconds 导致数据永久保留 | 根据业务需求显式设置 |
+| 名称含大写 | 使用 `UserSessionStore` 而不是 `user-session-store` | 遵循命名规范 |
+
+### 6.2 反模式对照表
+
+| 反模式 | 问题 | 替代方案 |
+|--------|------|----------|
+| 手动编辑 YAML 而不校验 | 容易引入语法错误 | 生成后自动执行校验步骤 |
+| 复制粘贴旧配置改名字 | 残留无关字段 | 从结构化输入重新生成 |
+| 将所有配置写在一个文件 | 难以维护和监控 | 按对象拆分，独立文件 |
+| 忽略校验报告中的警告 | 潜在问题被掩盖 | 所有警告必须人工确认 |
+
+---
+
+## 七、渐进式披露
+
+### 7.1 速查卡（新手必读）
+
+1. 准备输入数据（JSON/CSV/键值对）
+2. 调用 Skill，指定输入文件路径
+3. 获取生成的 YAML 配置和校验报告
+4. 人工确认报告中的 `[需核实]` 占位符
+5. 将配置部署到目标环境
+
+### 7.2 进阶路径（有经验用户）
+
+- **批量处理**：支持一次传入多个输入文件，生成多个配置
+- **自定义模板**：可通过环境变量 `DO_TEMPLATE_PATH` 指定自定义 YAML 模板
+- **监控模式**：使用 `--monitor` 参数，对比当前配置与期望状态，输出差异报告
+- **CI/CD 集成**：在流水线中调用 `--selftest` 验证 Skill 环境，然后执行配置生成与校验
+
+### 7.3 分层次阅读路径
+
+| 读者类型 | 建议阅读章节 |
+|----------|--------------|
+| 首次使用者 | 一、二、三、七（速查卡） |
+| 日常使用者 | 三、四、五、六 |
+| 集成开发者 | 三（完整流程）、五（错误码）、七（进阶路径） |
+
+---
+
+## 八、命令行接口
+
+```bash
+# 生成配置
+durable-object-deployer --input input.json --output ./configs
+
+# 校验配置
+durable-object-deployer --validate ./configs/deployment-user-session-store.yaml
+
+# 监控差异
+durable-object-deployer --monitor ./configs/deployment-user-session-store.yaml --expected ./expected-state.yaml
+
+# 自检
+durable-object-deployer --selftest
+
+# 版本信息
+durable-object-deployer --version
+```
+
+---
+
+## 九、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用条款：**
+
+1. **责任承担**：使用者自行承担使用本 Skill 的全部责任。因使用本 Skill 生成的配置所导致的任何直接或间接损失，Skill 作者不承担任何责任。
+2. **禁止反向工程**：使用者不得对本 Skill 进行反向工程、反编译、破解或试图提取底层算法。
+3. **合规使用**：使用者应确保使用本 Skill 的行为符合当地法律法规及所在组织的安全政策。
+4. **无担保**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
+5. **配置验证**：使用者应在部署前对生成的配置进行充分测试，确认其符合实际运行环境要求。
+
+---
+
+## 十、许可证（License）
+
 <!-- professional-license-embedded -->
 
-## 稳定性保障
+**MIT License**
 
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
+版权所有 (c) 2025 原创作者（自持版权）
 
-## FAQ 与反模式
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士使用本软件的权利，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向他人提供本软件，但须满足以下条件：
 
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
+上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
 
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
+本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。在任何情况下，作者或版权持有人均不对因使用本软件而产生的任何索赔、损害或其他责任负责，无论是在合同、侵权或其他方面。
 
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
+---
 
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
