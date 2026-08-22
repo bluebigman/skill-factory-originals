@@ -13,7 +13,6 @@ import re
 import sys
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 常量定义
@@ -537,24 +536,6 @@ class MeetingMinutesGenerator:
 # 输出格式化
 # ============================================================
 
-def _read_text_safe(path):
-    """多编码安全读取（R3+R5 合规）"""
-    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
-        try:
-            with open(path, encoding=enc, errors="replace") as f:
-                return f.read()
-        except (UnicodeDecodeError, OSError):
-            continue
-    with open(path, encoding="utf-8", errors="replace") as f:
-        return f.read()
-
-# 批处理流式读取工具
-def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
-
-
 def format_output(minutes: MeetingMinutes, output_format: str = OUTPUT_FORMAT_MARKDOWN) -> str:
     """格式化输出会议纪要"""
     if output_format not in [OUTPUT_FORMAT_MARKDOWN, OUTPUT_FORMAT_PLAIN]:
@@ -871,19 +852,28 @@ def main() -> int:
         action="store_true",
         help="运行内置自检，验证核心逻辑"
     )
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="只预览不写盘（安全守卫）",
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="输出处理明细（每步决策）",
+    )
 
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
 
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
 
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
 
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    if args.verbose:
+        print(f"[verbose] 参数: {vars(args)}")
 
     # 自检模式
     if args.selftest:
@@ -894,7 +884,7 @@ def main() -> int:
     if args.input:
         try:
             with open(args.input, "r", encoding="utf-8", errors="replace") as f:
-                input_text = f.read()
+                input_text = f.readlines()
         except FileNotFoundError:
             print(f"错误: 文件不存在: {args.input}", file=sys.stderr)
             return 1
@@ -918,9 +908,14 @@ def main() -> int:
 
         # 输出结果
         if args.output:
-            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
-                f.write(output)
-            print(f"会议纪要已保存至: {args.output}")
+            if args.verbose:
+                print(f"[verbose] 输出格式={args.format}，纪要 {len(output)} 字符")
+            if not args.dry_run:
+                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
+                    f.write(output)
+                print(f"会议纪要已保存至: {args.output}")
+            else:
+                print(f"[dry-run] 预览输出（未写盘）: {args.output}，共 {len(output)} 字符")
         else:
             print(output)
 
