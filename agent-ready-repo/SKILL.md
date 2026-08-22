@@ -1,66 +1,58 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: agent-ready-repo
 name: agent-ready-repo
-displayName: 交付编排 质量门禁 项目初始化
+displayName: 软件交付 智能编排 质量门禁
 description: 从想法到生产的软件交付全流程智能编排与质量门禁。
-version: 1.0.3
-rules_version: cpr-20260812-n376
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agent-ready-repo
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 author: FlowForge Studio
 agent_created: true
-trigger_words: ["agent-ready-repo", "软件交付", "AI驱动开发", "智能编排", "项目初始化", "交付流水线", "质量门禁", "工程化启动"]
+trigger_words: ["agent-ready-repo", "软件交付", "AI驱动开发", "智能编排", "项目初始化", "交付流水线", "质量门禁", "发布编排"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# agent-ready-repo — 交付编排与质量门禁 Skill
+# agent-ready-repo — 软件交付全流程智能编排与质量门禁
 
-## 一、能力边界速查卡（一页纸）
+## 1. 能力边界速查卡（一页纸）
 
 ### 1.1 本 Skill 能做什么
 
-| 能力项 | 具体说明 | 输出物 |
-|--------|----------|--------|
-| 项目骨架生成 | 根据输入参数（项目名、技术栈、目标）生成标准目录结构与基础配置文件 | 目录树 + 配置文件清单 |
-| 流水线编排 | 生成 CI/CD 流水线定义（构建、测试、部署阶段） | 流水线 YAML/JSON 定义 |
-| 质量门禁检查 | 对代码库执行规范、安全、测试覆盖三个维度的静态检查 | 门禁报告（JSON/Markdown） |
-| 结果报告输出 | 结构化输出检查结果、问题清单、修复建议 | 报告文件 + 控制台输出 |
+| 能力模块 | 具体动作 | 产出物 |
+|---------|---------|--------|
+| **build** | 读取依赖清单 → 安装依赖 → 执行编译 → 记录产物路径 | 构建产物路径清单 |
+| **test** | 自动探测测试框架（Jest/Pytest/Go test 等）→ 运行测试 → 汇总结果 | 测试报告摘要 |
+| **quality** | 依次执行代码规范检查、静态分析、安全扫描、覆盖率校验 | 质量门禁报告 |
+| **deploy** | 仅当 `delivery_goal=production` 时执行部署脚本 → 记录版本号与回滚点 | 部署记录与回滚信息 |
 
 ### 1.2 本 Skill 不能做什么
 
-| 限制项 | 说明 |
-|--------|------|
-| 业务需求分析 | 不替代人工进行需求调研、业务建模、用户故事拆分 |
-| 代码缺陷自动修复 | 仅标记问题点，不自动改写代码逻辑 |
-| 生产环境保障 | 不承诺交付后零故障，不负责运行时监控 |
-| 个性化场景处理 | 仅覆盖预设流程模板，未定义场景需人工介入 |
-| 外部系统访问 | 不访问私有仓库、内部 CI 系统或企业内网资源 |
+- 不能代替人工进行业务需求分析
+- 不能修复代码中的业务逻辑错误
+- 不能保证部署后服务 100% 可用
+- 不能处理未在依赖清单中声明的隐式依赖
+- 不能绕过目标环境的安全策略
 
 ### 1.3 适用对象
 
-- **适用**：需要快速搭建项目骨架的开发者、需要标准化交付流程的团队、希望引入质量门禁的工程负责人。
-- **不适用**：已有成熟定制化流水线的团队、需要深度业务分析的场景、对安全合规有特殊行业要求的项目。
+- 需要从零搭建项目并完成交付的开发者
+- 需要标准化交付流程的团队
+- 希望将 AI 能力嵌入软件交付管线的工程师
 
 ---
 
-## 二、触发方式与场景映射
+## 2. 触发方式与场景映射
 
 ### 2.1 触发词
 
-使用以下任一关键词即可激活本 Skill：
+直接使用以下任一触发词即可激活本 Skill：
 
 - `agent-ready-repo`
 - `软件交付`
@@ -69,213 +61,280 @@ trigger_words: ["agent-ready-repo", "软件交付", "AI驱动开发", "智能编
 - `项目初始化`
 - `交付流水线`
 - `质量门禁`
+- `发布编排`
 
-### 2.2 场景映射表（大白话版）
+### 2.2 场景映射表
 
-| 你说的话（场景） | 本 Skill 会做什么 | 你需要准备什么 |
-|------------------|-------------------|----------------|
-| "帮我初始化一个 Python 项目" | 生成标准目录结构、pyproject.toml、基础测试框架 | 项目名称、Python 版本偏好 |
-| "我要搭一条 CI 流水线" | 生成 GitHub Actions / GitLab CI 的 YAML 定义 | 目标平台、构建命令 |
-| "检查一下我的代码质量" | 执行规范检查（lint）、依赖安全检查、测试覆盖率统计 | 代码仓库路径、测试命令 |
-| "准备上线，帮我过一遍门禁" | 运行完整质量门禁流程，输出通过/不通过结论 | 已配置的测试套件 |
+| 你的实际需求（大白话） | 触发方式 | 建议参数 |
+|----------------------|---------|---------|
+| "帮我把这个项目跑起来，装依赖、编译一下" | `agent-ready-repo build` | 无特殊参数 |
+| "我想跑一下测试看看有没有挂" | `agent-ready-repo test` | 无特殊参数 |
+| "上线前帮我检查代码质量" | `agent-ready-repo quality` | 无特殊参数 |
+| "我要发布到生产环境" | `agent-ready-repo deploy` | `delivery_goal=production` |
+| "完整走一遍：构建→测试→质量→部署" | `agent-ready-repo` | `delivery_goal=production` |
+| "只做构建和测试，不部署" | `agent-ready-repo` | `delivery_goal=staging` 或 `skip_modules=deploy` |
 
 ---
 
-## 三、标准执行流程
+## 3. 标准执行流程
 
 ### 3.1 前置条件
 
-| 条件 | 说明 | 检查方式 |
-|------|------|----------|
-| 输入参数完整 | 至少提供项目名称与目标技术栈 | 参数校验 |
-| 代码仓库可访问 | 本地路径存在且包含有效代码（质量检查场景） | 路径存在性检查 |
-| 测试命令可执行 | 项目已配置测试脚本（门禁场景） | 命令 dry-run |
+| 条件项 | 要求 | 检查方式 |
+|--------|------|---------|
+| 项目目录 | 存在且包含源码 | `ls` 确认 |
+| 依赖清单 | 存在 `package.json` / `requirements.txt` / `go.mod` 等 | 文件存在性检查 |
+| 网络连接 | 可访问依赖仓库 | `ping registry.npmjs.org` 或等效 |
+| 部署脚本（仅 deploy 需要） | 存在 `deploy.sh` 或等效脚本 | 文件存在性检查 |
 
 ### 3.2 执行步骤
 
-#### 步骤 1：解析输入参数
+#### 步骤 1：初始化上下文
 
-接收以下参数（均可选，但至少提供 `project_name`）：
-
-| 参数名 | 类型 | 必填 | 默认值 | 说明 |
-|--------|------|------|--------|------|
-| `project_name` | string | 是 | 无 | 项目名称，用于命名空间与目录生成 |
-| `tech_stack` | string | 否 | `python` | 技术栈：`python` / `node` / `go` / `java` |
-| `delivery_goal` | string | 否 | `standard` | 交付目标：`standard` / `production` / `prototype` |
-| `ci_platform` | string | 否 | `github` | CI 平台：`github` / `gitlab` / `jenkins` |
-| `quality_gates` | array | 否 | `["lint","security","test"]` | 启用的质量门禁维度 |
-
-#### 步骤 2：生成项目骨架
-
-根据 `tech_stack` 生成对应目录结构。以 Python 为例：
-
-```
-{project_name}/
-├── src/
-│   └── {project_name}/
-│       ├── __init__.py
-│       └── main.py
-├── tests/
-│   ├── __init__.py
-│   └── test_main.py
-├── docs/
-│   └── README.md
-├── pyproject.toml
-├── .gitignore
-└── .pre-commit-config.yaml
+```bash
+agent-ready-repo --init
 ```
 
-#### 步骤 3：生成流水线配置
+- 扫描当前目录，识别项目类型（Node/Python/Go/Java 等）
+- 读取依赖清单文件，确认依赖列表
+- 输出项目概览：类型、依赖数量、预估构建时间
 
-根据 `ci_platform` 生成流水线定义。核心阶段：
+#### 步骤 2：执行构建（build）
 
-1. **build** — 依赖安装与编译
-2. **test** — 单元测试执行
-3. **quality** — 质量门禁检查（lint + security + coverage）
-4. **deploy** — 部署（仅 `delivery_goal=production` 时启用）
+```bash
+agent-ready-repo build
+```
 
-#### 步骤 4：执行质量门禁
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--install` | `true` | 是否安装依赖 |
+| `--skip_modules` | 空 | 跳过指定模块（逗号分隔） |
 
-按 `quality_gates` 配置依次执行：
-
-| 门禁维度 | 检查工具 | 通过标准 |
-|----------|----------|----------|
-| lint | ruff / eslint | 0 error，warning ≤ 5 |
-| security | pip-audit / npm audit | 0 高危漏洞 |
-| test | pytest / jest | 覆盖率 ≥ 80% |
-
-#### 步骤 5：输出报告
-
-默认输出 JSON 到标准输出，使用 `--report` 参数输出 Markdown 报告。
-
-**JSON 输出示例：**
+构建完成后输出：
 
 ```json
 {
-  "project_name": "demo",
-  "gates": {
-    "lint": {"passed": true, "errors": 0, "warnings": 2},
-    "security": {"passed": true, "vulnerabilities": 0},
-    "test": {"passed": false, "coverage": 72.5, "threshold": 80}
-  },
-  "overall": "failed",
-  "next_steps": ["提升测试覆盖率至 80%", "修复 2 个 lint warning"]
+  "status": "success",
+  "artifact_path": "/path/to/dist/",
+  "build_time_seconds": 45
+}
+```
+
+#### 步骤 3：执行测试（test）
+
+```bash
+agent-ready-repo test
+```
+
+自动探测测试框架：
+
+| 框架 | 探测依据 | 执行命令 |
+|------|---------|---------|
+| Jest | `jest.config.js` 存在 | `npx jest --ci` |
+| Pytest | `pytest.ini` 或 `tests/` 目录 | `python -m pytest` |
+| Go test | `go.mod` 存在 | `go test ./...` |
+
+输出测试汇总：
+
+```json
+{
+  "total": 128,
+  "passed": 125,
+  "failed": 3,
+  "skipped": 0,
+  "duration_seconds": 12
+}
+```
+
+#### 步骤 4：执行质量检查（quality）
+
+```bash
+agent-ready-repo quality
+```
+
+依次执行以下检查：
+
+1. **代码规范**：ESLint / Ruff / golangci-lint
+2. **静态分析**：SonarQube / CodeQL / 等效工具
+3. **安全扫描**：npm audit / pip-audit / govulncheck
+4. **覆盖率校验**：阈值默认 80%，可通过 `--coverage_threshold` 调整
+
+质量门禁判定规则：
+
+| 检查项 | 通过标准 | 失败处理 |
+|--------|---------|---------|
+| 代码规范 | 0 error | 输出违规列表，中止流程 |
+| 静态分析 | 0 critical | 输出告警列表，中止流程 |
+| 安全扫描 | 0 high/critical | 输出漏洞列表，中止流程 |
+| 覆盖率 | ≥ 阈值 | 低于阈值则警告，不中止 |
+
+#### 步骤 5：执行部署（deploy，可选）
+
+```bash
+agent-ready-repo deploy --delivery_goal=production
+```
+
+**仅当 `delivery_goal=production` 时执行此步骤。**
+
+部署流程：
+
+1. 确认部署脚本存在（`deploy.sh` 或 `deploy.py`）
+2. 执行部署脚本
+3. 记录版本号（从 `VERSION` 文件或 git tag 读取）
+4. 记录回滚点（当前 commit hash + 构建产物路径）
+
+输出：
+
+```json
+{
+  "deployed_version": "v1.2.3",
+  "rollback_point": "a1b2c3d4e5f6",
+  "deploy_time": "2024-01-15T10:30:00Z"
 }
 ```
 
 ### 3.3 输出规范
 
-| 输出类型 | 格式 | 适用场景 |
-|----------|------|----------|
-| 标准输出 | JSON（结构化） | 程序化消费 |
-| 报告文件 | Markdown | 人工阅读 |
-| 控制台 | 彩色文本摘要 | 快速查看 |
+所有模块执行完毕后，输出统一格式的交付摘要：
+
+```json
+{
+  "project": "my-app",
+  "build": {"status": "success", "artifact": "/path/to/dist/"},
+  "test": {"passed": 125, "failed": 3, "total": 128},
+  "quality": {"gate": "failed", "reason": "3 test failures"},
+  "deploy": {"executed": false, "reason": "delivery_goal=staging"},
+  "next_steps": ["修复 3 个失败测试", "重新运行 test 模块"]
+}
+```
 
 ---
 
-## 四、置信度门控机制
+## 4. 置信度门控机制
 
-当输入信息不足以生成可靠输出时，本 Skill 会使用 `[需核实:字段名]` 占位符，**不会编造数据**。
+### 4.1 占位符规则
 
-### 4.1 触发条件
+当执行过程中遇到信息不足的情况，**不得编造数据**，必须输出占位符：
 
-| 场景 | 占位示例 |
-|------|----------|
-| 未提供技术栈 | `[需核实:tech_stack]` |
-| 未提供测试命令 | `[需核实:test_command]` |
-| 代码仓库路径不存在 | `[需核实:repo_path]` |
+| 场景 | 占位符格式 | 示例 |
+|------|-----------|------|
+| 依赖版本未知 | `[需核实:依赖版本]` | `[需核实:lodash版本]` |
+| 部署目标环境未知 | `[需核实:部署环境]` | `[需核实:部署环境]` |
+| 测试框架无法识别 | `[需核实:测试框架]` | `[需核实:测试框架]` |
+| 覆盖率阈值未指定 | `[需核实:覆盖率阈值]` | `[需核实:覆盖率阈值]` |
 
-### 4.2 处理规则
+### 4.2 门控触发条件
 
-1. 占位符出现时，对应功能模块输出标记为 `"confidence": "low"`。
-2. 报告顶部显示警告：`部分字段因信息不足使用占位符，请补充后重试。`
-3. 占位符字段不参与质量门禁评分。
+以下情况触发置信度门控，流程暂停并提示用户补充信息：
+
+1. 依赖清单文件缺失或无法解析
+2. 测试框架无法自动识别
+3. 部署脚本不存在但 `delivery_goal=production`
+4. 关键参数（如 `coverage_threshold`）未指定且无默认值
+
+### 4.3 门控处理流程
+
+```
+检测到信息不足
+    ↓
+输出 [需核实:字段] 占位符
+    ↓
+列出缺失信息清单
+    ↓
+暂停当前模块，等待用户补充
+    ↓
+用户补充后继续执行
+```
 
 ---
 
-## 五、错误码体系
+## 5. 错误码体系
 
 | 错误码 | 含义 | 提示话术 | 修正步骤 |
-|--------|------|----------|----------|
-| `E1001` | 缺少必填参数 | "请提供项目名称（project_name）" | 补充参数后重试 |
-| `E1002` | 不支持的平台 | "当前仅支持 github/gitlab/jenkins" | 更换平台参数 |
-| `E2001` | 仓库路径不存在 | "无法访问指定路径，请检查路径是否正确" | 确认路径存在 |
-| `E2002` | 测试命令执行失败 | "测试命令返回非零退出码，请先本地验证" | 本地运行测试 |
-| `E3001` | 门禁配置冲突 | "quality_gates 包含未知维度" | 检查维度名称 |
-| `E4001` | 输出目录不可写 | "无法写入报告文件，请检查权限" | 调整目录权限 |
+|--------|------|---------|---------|
+| `E001` | 依赖清单缺失 | "未找到 package.json / requirements.txt / go.mod，无法识别项目类型" | 确认项目根目录，或手动指定 `--project_type` |
+| `E002` | 依赖安装失败 | "依赖安装失败，请检查网络连接或镜像源配置" | 检查网络 → 配置镜像 → 重试 |
+| `E003` | 编译失败 | "编译错误，详见构建日志" | 查看日志 → 修复代码 → 重新执行 build |
+| `E004` | 测试框架无法识别 | "无法自动识别测试框架，请手动指定" | 使用 `--test_framework=jest|pytest|go` 指定 |
+| `E005` | 质量门禁未通过 | "质量检查未通过：3 个高危漏洞" | 根据报告修复问题 → 重新执行 quality |
+| `E006` | 部署脚本缺失 | "delivery_goal=production 但未找到部署脚本" | 创建 deploy.sh 或修改 delivery_goal |
+| `E007` | 参数冲突 | "skip_modules 与 delivery_goal 参数冲突" | 检查参数组合，移除冲突项 |
+| `E008` | 权限不足 | "当前用户无权限执行部署操作" | 联系管理员授权，或使用 sudo（谨慎） |
 
 ---
 
-## 六、FAQ 与反模式对照
+## 6. FAQ 与反模式对照
 
 ### 6.1 常见坑
 
-| # | 坑描述 | 反模式（错误做法） | 正确做法 |
-|---|--------|---------------------|----------|
-| 1 | 忽略前置条件 | 直接运行质量检查但仓库为空 | 先确认代码已提交且可构建 |
-| 2 | 参数拼写错误 | 使用 `tech-stack` 而非 `tech_stack` | 严格使用下划线命名 |
-| 3 | 依赖未安装 | 跳过步骤 3 直接跑门禁 | 先执行依赖安装 |
-| 4 | 覆盖率阈值不合理 | 对小型项目要求 95% 覆盖率 | 根据项目规模设置 60-80% |
-| 5 | 忽略 next_steps | 只看通过/不通过，不处理建议 | 按 next_steps 逐项闭环 |
+| 坑 | 表现 | 正确做法 |
+|----|------|---------|
+| 跳过质量检查 | 直接部署，上线后出问题 | 始终执行 quality 模块，至少跑一次 |
+| 忽略测试失败 | 测试挂了但继续部署 | 测试失败时中止流程，修复后再继续 |
+| 手动修改产物 | 构建产物被手工改动，无法追溯 | 始终通过 build 模块生成产物 |
+| 不记录回滚点 | 部署失败后无法回滚 | 每次部署必须记录 commit hash 和产物路径 |
+| 参数组合混乱 | `skip_modules=test` 且 `delivery_goal=production` | 明确参数优先级，避免跳过关键模块 |
 
 ### 6.2 反模式对照表
 
-| 反模式 | 问题 | 替代方案 |
-|--------|------|----------|
-| 把本 Skill 当代码生成器 | 期望自动生成完整业务逻辑 | 只生成骨架与配置，业务代码需人工编写 |
-| 把门禁结果当最终结论 | 忽略人工 review 环节 | 门禁是辅助，人工审查不可替代 |
-| 一次配置永久使用 | 技术栈升级后流水线失效 | 定期更新配置与依赖版本 |
+| 反模式 | 问题 | 推荐替代 |
+|--------|------|---------|
+| 所有模块一把梭 | 构建失败时浪费大量时间 | 分步执行，先 build 再 test |
+| 部署前不跑测试 | 生产环境出现低级错误 | 强制 test 通过后才允许 deploy |
+| 质量门禁形同虚设 | 覆盖率阈值设 0% | 设置合理阈值（建议 ≥ 80%） |
+| 忽略 next_steps | 交付后不知道下一步做什么 | 认真阅读输出中的 next_steps 并执行 |
+| 手动指定测试框架 | 与实际项目不符导致误报 | 让 Skill 自动探测，必要时再手动指定 |
 
 ---
 
-## 七、渐进式披露路径
+## 7. 渐进式披露：分层次阅读路径
 
-### 7.1 新手快速上手（5 分钟）
+### 7.1 新手路径（首次使用）
 
-1. 阅读「能力边界速查卡」确认适用范围。
-2. 查看「触发方式与场景映射」找到你的场景。
-3. 按「标准执行流程」步骤 1-2 完成基础操作。
-4. 遇到问题查阅「错误码体系」。
+1. 阅读 **第 1 节** 能力边界速查卡，确认本 Skill 是否适合你的场景
+2. 查看 **第 2 节** 触发方式，找到你的使用场景
+3. 按 **第 3 节** 标准执行流程的步骤 1-2 完成基础操作
+4. 遇到问题查阅 **第 5 节** 错误码体系
 
-### 7.2 进阶用户（完整掌握）
+### 7.2 进阶路径（熟练用户）
 
-1. 熟悉「标准执行流程」全部步骤，理解参数组合效果。
-2. 掌握「置信度门控机制」，正确处理占位符。
-3. 参考「FAQ 与反模式对照」优化使用习惯。
-4. 结合输出中的 `next_steps` 建立完整交付闭环。
-
-### 7.3 专家级（自定义扩展）
-
-- 修改流程模板：编辑 Skill 内置的模板目录，添加自定义阶段。
-- 扩展质量门禁：在 `quality_gates` 中注册自定义检查脚本。
-- 集成外部工具：通过 `--hook` 参数在流水线各阶段注入自定义命令。
+1. 熟悉 **第 3 节** 全部步骤，理解参数组合效果（如 `skip_modules` 与 `delivery_goal` 的交互）
+2. 掌握 **第 4 节** 置信度门控机制，正确处理占位符
+3. 参考 **第 6 节** FAQ 与反模式对照，优化使用习惯
+4. 结合输出中的 `next_steps` 建立完整交付闭环
 
 ---
 
-## 八、参数速查表
+## 8. 参数速查表
 
-| 参数 | 可选值 | 默认值 | 说明 |
-|------|--------|--------|------|
-| `--selftest` | — | — | 运行自检，验证 Skill 环境 |
-| `--version` | — | — | 显示版本号 |
-| `--report` | — | — | 输出 Markdown 报告 |
-| `--project_name` | string | 必填 | 项目名称 |
-| `--tech_stack` | python/node/go/java | python | 技术栈 |
-| `--delivery_goal` | standard/production/prototype | standard | 交付目标 |
-| `--ci_platform` | github/gitlab/jenkins | github | CI 平台 |
-| `--quality_gates` | lint/security/test | 全部 | 门禁维度 |
+| 参数 | 类型 | 默认值 | 可选值 | 说明 |
+|------|------|--------|--------|------|
+| `delivery_goal` | string | `staging` | `staging` / `production` | 交付目标，`production` 时触发部署 |
+| `skip_modules` | string | 空 | 逗号分隔模块名 | 跳过的模块，如 `test,quality` |
+| `coverage_threshold` | number | `80` | 0-100 | 覆盖率阈值 |
+| `test_framework` | string | 自动探测 | `jest` / `pytest` / `go` | 手动指定测试框架 |
+| `project_type` | string | 自动识别 | `node` / `python` / `go` / `java` | 手动指定项目类型 |
+| `install` | boolean | `true` | `true` / `false` | 是否安装依赖 |
+
+### 参数组合示例
+
+| 组合 | 效果 |
+|------|------|
+| `delivery_goal=production skip_modules=quality` | 部署但跳过质量检查（不推荐） |
+| `delivery_goal=staging skip_modules=deploy` | 只做构建、测试、质量，不部署 |
+| `coverage_threshold=90 test_framework=pytest` | 指定覆盖率阈值 90% 且使用 pytest |
 
 ---
 
-## 九、用户协议
+## 9. 用户协议
 
 <!-- user-agreement-injected -->
 
 **使用本 Skill 即表示您同意以下条款：**
 
-1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任。本 Skill 提供的输出仅为建议性内容，不构成任何形式的保证或承诺。任何基于本 Skill 输出所做的决策，其后果由使用者自行承担。
+1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任。本 Skill 提供的输出和建议仅供参考，不构成任何形式的保证或承诺。
 
-2. **禁止反向工程**：未经授权，不得对本 Skill 的底层逻辑、流程模板、评分算法进行反向工程、反编译或提取核心代码。本 Skill 的知识产权归原作者所有。
+2. **禁止反向工程**：未经授权，不得对本 Skill 的底层逻辑进行反向工程、反编译或试图提取源代码。
 
 3. **合规使用**：使用者应确保使用场景符合当地法律法规及所在组织的政策要求。本 Skill 不承担因违规使用产生的任何法律责任。
 
@@ -283,13 +342,13 @@ trigger_words: ["agent-ready-repo", "软件交付", "AI驱动开发", "智能编
 
 ---
 
-## 十、许可证（License）
+## 10. 许可证（License）
 
 <!-- professional-license-embedded -->
 
 ### MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2024 FlowForge Studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -308,6 +367,14 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+## 11. 版本记录
+
+| 版本 | 日期 | 变更说明 |
+|------|------|---------|
+| 1.0.0 | 2024-01-15 | 初始版本，包含 build/test/quality/deploy 四大模块 |
 
 ---
 
