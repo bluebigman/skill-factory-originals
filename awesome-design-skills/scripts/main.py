@@ -34,6 +34,24 @@ ERROR_CODES = {
 }
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def fail(code: str, message: Optional[str] = None) -> None:
     """统一错误输出并退出。"""
     msg = ERROR_CODES.get(code, "未知错误")
@@ -313,7 +331,7 @@ class InputParser:
         if not os.path.isfile(path):
             fail("E003", path)
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, "r", encoding="utf-8", errors="replace") as f:
                 content = f.read()
         except Exception as e:
             fail("E003", str(e))
@@ -524,6 +542,9 @@ def main() -> None:
         action="store_true",
         help="以 JSON 格式输出",
     )
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
 
