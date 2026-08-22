@@ -510,10 +510,6 @@ def main() -> int:
         parser.add_argument("--force", action="store_true")  # R4 强制写盘
 
         parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-        parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
-        parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
-        parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
-        parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
         args = parser.parse_args()
         global dry_run
         dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
