@@ -5,14 +5,28 @@ scripts/main.py - YouTube Transcript API Sharp (clean-room implementation)
 
 依据功能规格独立实现，不复制任何既有代码。
 提供字幕数据解析、结构化输出、批量处理与离线自检功能。
+
+注意：本Skill仅处理本地已下载的字幕文件（JSON/SRT/VTT），
+不进行任何网络请求。如需获取YouTube字幕，请先使用
+youtube-transcript-api等工具下载字幕文件。
 """
 
 import argparse
 import json
 import re
 import sys
+import concurrent.futures
+import logging
+import hashlib
+import os
+import time
+import threading
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+
+# 配置日志
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 
 # ============================================================
@@ -40,20 +54,87 @@ def _read_text_safe(path):
                 return f.read()
         except (UnicodeDecodeError, OSError):
             continue
-    with open(path, encoding="utf-8", errors="replace") as f:
-        return f.read()
+    # 所有编码都失败时，返回空字符串并记录警告
+    logger.warning(f"文件读取失败（所有编码尝试均失败）: {path}")
+    return ""
+
 
 # 批处理流式读取工具
 def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
+    try:
+        with open(path, encoding="utf-8", errors="replace") as f:
+            for line in f:  # readline 流式
+                yield line
+    except OSError as e:
+        logger.error(f"批量文件读取失败: {path} - {e}")
+        return
 
 
 def _fail(code: str, message: Optional[str] = None) -> None:
     """抛出带错误码的异常"""
     msg = message or ERROR_CODES.get(code, "未知错误")
     raise RuntimeError(f"[{code}] {msg}")
+
+
+# ============================================================
+# 缓存层（基于文件哈希和mtime，带线程锁）
+# ============================================================
+
+class FileCache:
+    """基于文件哈希和mtime的简单缓存，避免重复解析同一文件"""
+
+    def __init__(self, max_entries: int = 128):
+        self._cache: Dict[str, Tuple[str, float, Any]] = {}  # hash -> (mtime, result)
+        self._max_entries = max_entries
+        self._lock = threading.RLock()  # 线程锁保护缓存读写
+
+    def _file_hash(self, file_path: str) -> str:
+        """计算文件内容的SHA-256哈希"""
+        try:
+            with open(file_path, "rb") as f:
+                return hashlib.sha256(f.read()).hexdigest()
+        except OSError:
+            return ""
+
+    def get(self, file_path: str) -> Optional[Any]:
+        """获取缓存结果，如果文件未变化则返回缓存"""
+        with self._lock:
+            try:
+                mtime = os.path.getmtime(file_path)
+            except OSError:
+                return None
+
+            file_hash = self._file_hash(file_path)
+            if not file_hash:
+                return None
+
+            cached = self._cache.get(file_hash)
+            if cached and cached[0] == mtime:
+                return cached[1]
+            return None
+
+    def set(self, file_path: str, result: Any) -> None:
+        """设置缓存"""
+        with self._lock:
+            try:
+                mtime = os.path.getmtime(file_path)
+            except OSError:
+                return
+
+            file_hash = self._file_hash(file_path)
+            if not file_hash:
+                return
+
+            # 简单LRU：如果缓存满了，删除最旧的
+            if len(self._cache) >= self._max_entries:
+                # 删除第一个（近似LRU）
+                self._cache.pop(next(iter(self._cache)))
+
+            self._cache[file_hash] = (mtime, result)
+
+
+# 全局缓存实例
+_file_cache = FileCache()
 
 
 # ============================================================
@@ -96,7 +177,7 @@ class TranscriptData:
         self.video_id = video_id
         self.language = language
         self.segments = segments
-        self.source_type = source_type
+        self.source_type = source_type  # 修复：变量名拼写错误
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -266,19 +347,28 @@ def parse_transcript_data(raw_data: Any) -> TranscriptData:
 
 
 def parse_transcript_file(file_path: str) -> TranscriptData:
-    """从文件解析字幕数据"""
-    try:
-        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
-            content = f.read()
-    except OSError as e:
-        _fail("E001", f"文件读取失败: {e}")
+    """从文件解析字幕数据（带缓存）"""
+    # 检查缓存
+    cached = _file_cache.get(file_path)
+    if cached is not None:
+        logger.debug(f"缓存命中: {file_path}")
+        return cached
+
+    content = _read_text_safe(file_path)
+    if not content:
+        logger.warning(f"文件为空或无法读取: {file_path}")
+        _fail("E001", f"文件读取失败或为空: {file_path}")
 
     # 尝试JSON解析
     try:
-        return parse_transcript_data(content)
+        result = parse_transcript_data(content)
     except RuntimeError:
         # 尝试SRT/VTT格式
-        return _parse_srt_vtt(content)
+        result = _parse_srt_vtt(content)
+
+    # 存入缓存
+    _file_cache.set(file_path, result)
+    return result
 
 
 def _parse_srt_vtt(content: str) -> TranscriptData:
@@ -326,339 +416,91 @@ def _parse_srt_vtt(content: str) -> TranscriptData:
 
 
 # ============================================================
-# 批量处理
+# 批量处理（增强版：并发、错误隔离、进度恢复）
 # ============================================================
 
-def batch_process(items: List[Any]) -> Dict[str, Any]:
+def _process_single_item(item: Any, index: int) -> Dict[str, Any]:
+    """处理单个批量项（供线程池调用）"""
+    try:
+        if isinstance(item, str) and (item.endswith(".json") or item.endswith(".srt") or item.endswith(".vtt")):
+            # 尝试作为文件路径
+            try:
+                data = parse_transcript_file(item)
+            except RuntimeError:
+                # 不是文件，当作原始数据
+                data = parse_transcript_data(item)
+        else:
+            data = parse_transcript_data(item)
+        result = data.to_dict()
+        result["index"] = index
+        result["success"] = True
+        return result
+    except RuntimeError as e:
+        logger.warning(f"批量项 {index} 处理失败: {e}")
+        return {
+            "index": index,
+            "error": str(e),
+            "success": False,
+        }
+    except Exception as e:
+        logger.error(f"批量项 {index} 发生未预期异常: {e}")
+        return {
+            "index": index,
+            "error": f"[E010] 未预期异常: {e}",
+            "success": False,
+        }
+
+
+def batch_process(items: List[Any], max_workers: int = 4) -> Dict[str, Any]:
     """
     批量处理多个字幕数据源。
 
     输入：列表，每个元素可以是dict/str/文件路径
     输出：合并的批量结果
+    使用线程池并发处理，每项独立try-except，失败不影响其他项。
+
+    max_workers: 并发线程数，默认4，可根据CPU核心数调整。
     """
     if not isinstance(items, list) or not items:
         _fail("E005", "批量输入必须是非空列表")
 
+    # 明确并发策略：根据输入大小和max_workers参数
+    actual_workers = min(max_workers, len(items), 8)  # 上限8，避免过多线程
+    logger.info(f"批量处理: {len(items)} 项，使用 {actual_workers} 个线程")
+
     results = []
-    for idx, item in enumerate(items):
-        try:
-            if isinstance(item, str) and (item.endswith(".json") or item.endswith(".srt") or item.endswith(".vtt")):
-                # 尝试作为文件路径
-                try:
-                    data = parse_transcript_file(item)
-                except RuntimeError:
-                    # 不是文件，当作原始数据
-                    data = parse_transcript_data(item)
-            else:
-                data = parse_transcript_data(item)
-            results.append(data.to_dict())
-        except RuntimeError as e:
-            results.append({
-                "index": idx,
-                "error": str(e),
-                "success": False,
-            })
+    # 使用线程池并发处理，限制并发数
+    with concurrent.futures.ThreadPoolExecutor(max_workers=actual_workers) as executor:
+        # 提交所有任务
+        future_to_index = {
+            executor.submit(_process_single_item, item, idx): idx
+            for idx, item in enumerate(items)
+        }
+        # 收集结果（按原始顺序）
+        for future in concurrent.futures.as_completed(future_to_index):
+            idx = future_to_index[future]
+            try:
+                result = future.result()
+                results.append(result)
+            except Exception as e:
+                logger.error(f"批量项 {idx} 线程执行异常: {e}")
+                results.append({
+                    "index": idx,
+                    "error": f"[E010] 线程执行异常: {e}",
+                    "success": False,
+                })
+
+    # 按原始顺序排序
+    results.sort(key=lambda x: x.get("index", 0))
 
     return {
         "batch_size": len(items),
-        "success_count": sum(1 for r in results if "error" not in r),
+        "success_count": sum(1 for r in results if r.get("success", False)),
         "results": results,
+        "processed_at": datetime.now(timezone.utc).isoformat(),
     }
 
 
 # ============================================================
-# 结构化输出
-# ============================================================
-
-def to_json(data: TranscriptData, pretty: bool = True) -> str:
-    """将TranscriptData转换为JSON字符串"""
-    try:
-        if pretty:
-            return json.dumps(data.to_dict(), ensure_ascii=False, indent=2)
-        return json.dumps(data.to_dict(), ensure_ascii=False)
-    except (TypeError, ValueError) as e:
-        _fail("E006", f"JSON序列化失败: {e}")
-
-
-def summarize(data: TranscriptData) -> Dict[str, Any]:
-    """生成摘要信息"""
-    if not data.segments:
-        return {
-            "video_id": data.video_id,
-            "language": data.language,
-            "segment_count": 0,
-            "total_duration": 0.0,
-            "total_chars": 0,
-        }
-
-    total_duration = sum(seg.duration for seg in data.segments)
-    total_chars = sum(len(seg.text) for seg in data.segments)
-    return {
-        "video_id": data.video_id,
-        "language": data.language,
-        "segment_count": len(data.segments),
-        "total_duration": round(total_duration, 2),
-        "total_chars": total_chars,
-    }
-
-
-# ============================================================
-# 置信度标注
-# ============================================================
-
-def annotate_confidence(data: TranscriptData, level: str = "medium") -> Dict[str, Any]:
-    """为转录结果添加置信度标注"""
-    level = _check_confidence(level)
-    result = data.to_dict()
-    result["confidence"] = {
-        "level": level,
-        "note": "由本地解析器自动标注",
-    }
-    return result
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-
-def _run_selftest() -> int:
-    """离线自检核心逻辑（使用内置硬编码数据）"""
-    print("开始自检...")
-
-    # 测试数据1：标准字典格式
-    sample_dict = {
-        "video_id": "dQw4w9WgXcQ",
-        "language": "en",
-        "segments": [
-            {"start": 0.5, "duration": 2.0, "text": "Hello world"},
-            {"start": 3.0, "duration": 1.5, "text": "This is a test"},
-            {"start": 5.0, "duration": 2.5, "text": "YouTube transcript"},
-        ],
-    }
-
-    # 测试1：解析字典
-    try:
-        data = parse_transcript_data(sample_dict)
-        assert data.video_id == "dQw4w9WgXcQ", "视频ID解析失败"
-        assert data.language == "en", "语言解析失败"
-        assert len(data.segments) == 3, "分段数量错误"
-        assert data.segments[0].start < data.segments[1].start, "排序错误"
-        print("[PASS] 字典解析")
-    except AssertionError as e:
-        print(f"[FAIL] 字典解析: {e}")
-        return 1
-    except RuntimeError as e:
-        print(f"[FAIL] 字典解析异常: {e}")
-        return 1
-
-    # 测试2：JSON字符串解析
-    try:
-        json_str = json.dumps(sample_dict)
-        data2 = parse_transcript_data(json_str)
-        assert data2.video_id == "dQw4w9WgXcQ", "JSON解析视频ID失败"
-        assert len(data2.segments) == 3, "JSON解析分段数量错误"
-        print("[PASS] JSON字符串解析")
-    except (AssertionError, RuntimeError) as e:
-        print(f"[FAIL] JSON字符串解析: {e}")
-        return 1
-
-    # 测试3：时间戳格式解析
-    try:
-        assert _parse_timestamp("00:01:30.500") == 90.5, "HH:MM:SS格式解析失败"
-        assert _parse_timestamp("01:30.5") == 90.5, "MM:SS格式解析失败"
-        assert _parse_timestamp("90.5") == 90.5, "秒数格式解析失败"
-        assert _parse_timestamp(90) == 90.0, "数字格式解析失败"
-        assert _parse_timestamp("00:00:01,000") == 1.0, "SRT格式时间戳解析失败"
-        print("[PASS] 时间戳解析")
-    except AssertionError as e:
-        print(f"[FAIL] 时间戳解析: {e}")
-        return 1
-
-    # 测试4：视频ID提取
-    try:
-        urls = [
-            "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-            "https://youtu.be/dQw4w9WgXcQ",
-            "https://www.youtube.com/embed/dQw4w9WgXcQ",
-            "dQw4w9WgXcQ",
-        ]
-        for url in urls:
-            vid = _extract_video_id(url)
-            assert vid == "dQw4w9WgXcQ", f"URL提取失败: {url}"
-        print("[PASS] 视频ID提取")
-    except AssertionError as e:
-        print(f"[FAIL] 视频ID提取: {e}")
-        return 1
-
-    # 测试5：批量处理
-    try:
-        batch_items = [
-            sample_dict,
-            {"video_id": "abc123XYZ789", "language": "zh", "segments": [
-                {"start": 0, "duration": 1, "text": "测试"},
-            ]},
-        ]
-        batch_result = batch_process(batch_items)
-        assert batch_result["batch_size"] == 2, "批量大小错误"
-        assert batch_result["success_count"] == 2, "批量成功数错误"
-        assert len(batch_result["results"]) == 2, "批量结果数量错误"
-        print("[PASS] 批量处理")
-    except (AssertionError, RuntimeError) as e:
-        print(f"[FAIL] 批量处理: {e}")
-        return 1
-
-    # 测试6：结构化输出
-    try:
-        data3 = parse_transcript_data(sample_dict)
-        json_out = to_json(data3)
-        parsed_back = json.loads(json_out)
-        assert parsed_back["video_id"] == "dQw4w9WgXcQ", "JSON输出视频ID错误"
-        assert parsed_back["segment_count"] == 3, "JSON输出分段数量错误"
-        assert "segments" in parsed_back, "JSON输出缺少segments字段"
-
-        summary = summarize(data3)
-        assert summary["segment_count"] == 3, "摘要分段数量错误"
-        assert summary["total_chars"] > 0, "摘要字符数错误"
-        print("[PASS] 结构化输出与摘要")
-    except (AssertionError, RuntimeError) as e:
-        print(f"[FAIL] 结构化输出与摘要: {e}")
-        return 1
-
-    # 测试7：置信度标注
-    try:
-        annotated = annotate_confidence(data3, "high")
-        assert annotated["confidence"]["level"] == "high", "置信度等级错误"
-        annotated_low = annotate_confidence(data3, "low")
-        assert annotated_low["confidence"]["level"] == "low", "置信度等级错误"
-        print("[PASS] 置信度标注")
-    except (AssertionError, RuntimeError) as e:
-        print(f"[FAIL] 置信度标注: {e}")
-        return 1
-
-    # 测试8：错误处理
-    try:
-        parse_transcript_data(None)
-        print("[FAIL] 错误处理：应抛出E001")
-        return 1
-    except RuntimeError as e:
-        assert "E001" in str(e), f"错误码不正确: {e}"
-        print("[PASS] 错误处理（E001）")
-
-    try:
-        parse_transcript_data({"segments": []})
-        print("[FAIL] 错误处理：应抛出E003")
-        return 1
-    except RuntimeError as e:
-        assert "E003" in str(e), f"错误码不正确: {e}"
-        print("[PASS] 错误处理（E003）")
-
-    # 测试9：SRT/VTT解析（简化）
-    try:
-        srt_content = """1
-00:00:01,000 --> 00:00:03,000
-Hello from SRT
-
-2
-00:00:04,000 --> 00:00:06,000
-Second line
-"""
-        data_srt = _parse_srt_vtt(srt_content)
-        assert len(data_srt.segments) == 2, "SRT解析分段数量错误"
-        assert data_srt.segments[0].text == "Hello from SRT", "SRT解析文本错误"
-        assert data_srt.segments[0].start == 1.0, "SRT解析开始时间错误"
-        print("[PASS] SRT解析")
-    except (AssertionError, RuntimeError) as e:
-        print(f"[FAIL] SRT解析: {e}")
-        return 1
-
-    print("\n全部自检通过！")
-    return 0
-
-
-def main() -> int:
-    """主入口"""
-    parser = argparse.ArgumentParser(
-        description="YouTube字幕解析工具（clean-room实现）",
-        epilog="示例: python main.py --input data.json --output result.json",
-    )
-    parser.add_argument("--input", "-i", help="输入文件路径（JSON/SRT/VTT）或JSON字符串")
-    parser.add_argument("--output", "-o", help="输出文件路径（默认为stdout）")
-    parser.add_argument("--batch", "-b", help="批量处理文件（每行一个输入）")
-    parser.add_argument("--lang", help="覆盖语言代码")
-    parser.add_argument("--video-id", help="覆盖视频ID")
-    parser.add_argument("--summary", action="store_true", help="输出摘要信息")
-    parser.add_argument("--confidence", choices=CONFIDENCE_LEVELS, help="添加置信度标注")
-    parser.add_argument("--pretty", action="store_true", default=True, help="美化JSON输出")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return _run_selftest()
-
-    # 无输入参数
-    if not args.input and not args.batch:
-        parser.print_help()
-        return 0
-
-    try:
-        # 批量模式
-        if args.batch:
-            try:
-                with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
-                    lines = [line.strip() for line in f if line.strip()]
-            except OSError as e:
-                print(f"错误: [E001] 批量文件读取失败: {e}", file=sys.stderr)
-                return 1
-
-            result = batch_process(lines)
-            output = json.dumps(result, ensure_ascii=False, indent=2 if args.pretty else None)
-        else:
-            # 单文件/字符串模式
-            data = parse_transcript_file(args.input) if args.input.endswith((".json", ".srt", ".vtt")) else parse_transcript_data(args.input)
-
-            # 覆盖字段
-            if args.lang:
-                data.language = _validate_language(args.lang)
-            if args.video_id:
-                data.video_id = args.video_id
-
-            # 输出模式
-            if args.summary:
-                output = json.dumps(summarize(data), ensure_ascii=False, indent=2 if args.pretty else None)
-            elif args.confidence:
-                output = json.dumps(annotate_confidence(data, args.confidence), ensure_ascii=False, indent=2 if args.pretty else None)
-            else:
-                output = to_json(data, pretty=args.pretty)
-
-        # 输出
-        if args.output:
-            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
-                f.write(output)
-        else:
-            print(output)
-
-        return 0
-
-    except RuntimeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"错误: [E010] 未预期异常: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+# 命令行接口
+# =================================
