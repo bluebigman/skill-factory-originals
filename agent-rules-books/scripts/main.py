@@ -864,6 +864,7 @@ def main() -> int:
         int: 退出码
     """
     parser = create_parser()
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
     args = parser.parse_args()
 
     # 自检模式
