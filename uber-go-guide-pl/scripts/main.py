@@ -7,14 +7,22 @@
   - 仅依据功能规格独立实现（clean-room）。
   - 标准库实现，无第三方依赖。
   - 支持 --selftest 离线自检。
+  - 支持 --dry-run 预览模式。
 """
 
 import argparse
 import sys
 import re
+import json
+import time
+import urllib.request
+import urllib.error
+import urllib.parse
+import os
+import sqlite3
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple, Any
-dry_run = False  # v3.274 模块级 dry-run 标志
-
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 # ---------------------------------------------------------------------------
 # 错误码定义（E001-E010）
@@ -43,6 +51,58 @@ CONFIDENCE_MEDIUM = 85
 # 默认输出模板字段
 DEFAULT_FIELDS = ["原文", "译文", "置信度", "备注"]
 
+# 翻译 API 配置（使用 MyMemory 免费 API）
+TRANSLATE_API_URL = "https://api.mymemory.translated.net/get"
+TRANSLATE_API_TIMEOUT = 10  # 秒
+TRANSLATE_API_MAX_RETRIES = 3
+TRANSLATE_API_MAX_BACKOFF = 8  # 最大退避时间（秒）
+
+# 最大输入长度限制
+MAX_INPUT_LENGTH = 5000
+
+# 批量处理并发数
+BATCH_MAX_WORKERS = 4
+
+# 缓存配置
+CACHE_TTL = 3600  # 1小时
+CACHE_DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), ".translation_cache.db")
+
+# Uber Go 指南专属术语表（英文 -> 波兰语）
+UBER_GO_TERMS: Dict[str, str] = {
+    "goroutine": "gorutyna",
+    "channel": "kanał",
+    "mutex": "mutex",
+    "interface": "interfejs",
+    "struct": "struktura",
+    "slice": "wycinek",
+    "map": "mapa",
+    "defer": "odroczenie",
+    "panic": "panika",
+    "recover": "odzyskiwanie",
+    "concurrency": "współbieżność",
+    "parallelism": "równoległość",
+    "deadlock": "zakleszczenie",
+    "race condition": "wyścig danych",
+    "goroutine leak": "wyciek gorutyny",
+    "context": "kontekst",
+    "error handling": "obsługa błędów",
+    "dependency injection": "wstrzykiwanie zależności",
+    "code review": "przegląd kodu",
+    "best practice": "najlepsza praktyka",
+}
+
+# Uber Go 风格规则（正则表达式 -> 建议）
+UBER_GO_STYLE_RULES: List[Tuple[str, str, str]] = [
+    (r"\bvar\s+\w+\s+=\s+0\b", "Użyj 'var x int' zamiast 'var x = 0'", "zero_value"),
+    (r"\bfor\s+\w+\s*:=\s*0\s*;\s*\w+\s*<\s*\w+\s*;\s*\w+\+\s*\{", "Rozważ użycie 'for range'", "loop_style"),
+    (r"\bif\s+\w+\s*!=\s*nil\s*\{", "Rozważ użycie 'if err != nil' z wczesnym powrotem", "error_check"),
+    (r"\bpanic\(", "Unikaj panic w kodzie produkcyjnym", "panic_usage"),
+    (r"\brecover\(", "Używaj recover tylko w wyjątkowych przypadkach", "recover_usage"),
+    (r"\binterface\s*\{\s*\}", "Unikaj pustych interfejsów", "empty_interface"),
+    (r"\bstring\(\[\]byte\(", "Użyj string(bytes) zamiast string([]byte(...))", "string_conversion"),
+    (r"\bdefer\s+\w+\.Close\(\)", "Sprawdź błędy przy defer Close()", "defer_close"),
+]
+
 
 # ---------------------------------------------------------------------------
 # 核心数据结构
@@ -69,6 +129,137 @@ class ProcessingResult:
             "数据": self.items,
             "错误": self.errors,
         }
+
+
+# ---------------------------------------------------------------------------
+# 缓存管理（SQLite 持久化）
+# ---------------------------------------------------------------------------
+def _init_cache_db() -> None:
+    """初始化 SQLite 缓存数据库"""
+    try:
+        conn = sqlite3.connect(CACHE_DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("""
+            CREATE TABLE IF NOT EXISTS translation_cache (
+                cache_key TEXT PRIMARY KEY,
+                translated_text TEXT NOT NULL,
+                timestamp REAL NOT NULL
+            )
+        """)
+        conn.commit()
+        conn.close()
+    except sqlite3.Error as e:
+        print(f"[缓存] 初始化数据库失败: {e}")
+
+
+def _get_cached_translation(cache_key: str) -> Optional[str]:
+    """从 SQLite 缓存获取翻译结果"""
+    try:
+        conn = sqlite3.connect(CACHE_DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute(
+            "SELECT translated_text, timestamp FROM translation_cache WHERE cache_key = ?",
+            (cache_key,)
+        )
+        row = cursor.fetchone()
+        conn.close()
+        
+        if row:
+            translated_text, timestamp = row
+            if time.time() - timestamp <= CACHE_TTL:
+                return translated_text
+            else:
+                # 过期，删除
+                _delete_cached_translation(cache_key)
+        return None
+    except sqlite3.Error:
+        return None
+
+
+def _set_cached_translation(cache_key: str, translated_text: str) -> None:
+    """将翻译结果写入 SQLite 缓存"""
+    try:
+        conn = sqlite3.connect(CACHE_DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT OR REPLACE INTO translation_cache (cache_key, translated_text, timestamp) VALUES (?, ?, ?)",
+            (cache_key, translated_text, time.time())
+        )
+        conn.commit()
+        conn.close()
+    except sqlite3.Error:
+        pass
+
+
+def _delete_cached_translation(cache_key: str) -> None:
+    """删除过期的缓存条目"""
+    try:
+        conn = sqlite3.connect(CACHE_DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM translation_cache WHERE cache_key = ?", (cache_key,))
+        conn.commit()
+        conn.close()
+    except sqlite3.Error:
+        pass
+
+
+def _cleanup_cache() -> None:
+    """清理过期缓存"""
+    try:
+        conn = sqlite3.connect(CACHE_DB_PATH)
+        cursor = conn.cursor()
+        cursor.execute("DELETE FROM translation_cache WHERE timestamp < ?", (time.time() - CACHE_TTL,))
+        conn.commit()
+        conn.close()
+    except sqlite3.Error:
+        pass
+
+
+# ---------------------------------------------------------------------------
+# Uber Go 专属处理函数
+# ---------------------------------------------------------------------------
+def _apply_uber_go_terms(text: str) -> str:
+    """应用 Uber Go 术语表进行术语替换"""
+    result = text
+    for eng, pl in UBER_GO_TERMS.items():
+        # 不区分大小写替换，保持原格式
+        result = re.sub(r'\b' + re.escape(eng) + r'\b', pl, result, flags=re.IGNORECASE)
+    return result
+
+
+def _check_uber_go_style(text: str) -> List[str]:
+    """检查 Uber Go 风格规则，返回违规建议列表"""
+    suggestions = []
+    for pattern, suggestion, rule_id in UBER_GO_STYLE_RULES:
+        if re.search(pattern, text):
+            suggestions.append(f"[{rule_id}] {suggestion}")
+    return suggestions
+
+
+def _validate_api_response(data: Any) -> Tuple[bool, str]:
+    """
+    校验 API 响应 JSON 结构
+    返回: (是否有效, 错误信息)
+    """
+    if not isinstance(data, dict):
+        return False, "API 响应不是 JSON 对象"
+    
+    if "responseStatus" not in data:
+        return False, "API 响应缺少 responseStatus 字段"
+    
+    if data.get("responseStatus") != 200:
+        return False, f"API 返回错误状态: {data.get('responseStatus')}"
+    
+    if "responseData" not in data or not isinstance(data["responseData"], dict):
+        return False, "API 响应缺少 responseData 对象"
+    
+    if "translatedText" not in data["responseData"]:
+        return False, "API 响应缺少 translatedText 字段"
+    
+    if not isinstance(data["responseData"]["translatedText"], str):
+        return False, "translatedText 字段不是字符串"
+    
+    return True, ""
 
 
 # ---------------------------------------------------------------------------
@@ -103,6 +294,8 @@ def validate_input(data: Any) -> Tuple[bool, str]:
         return False, "E001"
     if isinstance(data, (list, tuple)) and len(data) == 0:
         return False, "E001"
+    if isinstance(data, str) and len(data) > MAX_INPUT_LENGTH:
+        return False, "E009"
     return True, ""
 
 
@@ -160,87 +353,72 @@ def compute_confidence(info: Dict[str, Any]) -> float:
     return min(score, 99.0)
 
 
-def format_output(result: ProcessingResult, output_format: str = "text") -> str:
+def _translate_with_api(text: str, target_lang: str) -> Tuple[str, float]:
     """
-    格式化输出结果（Step 3）
-    支持: text / json / csv
+    调用翻译 API 进行真实翻译。
+    使用 MyMemory 免费 API，支持指数退避重试和超时。
+    返回: (翻译结果, 置信度)
     """
-    if output_format == "json":
-        import json
-        return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
+    # 清理过期缓存
+    _cleanup_cache()
 
-    elif output_format == "csv":
-        lines = [",".join(DEFAULT_FIELDS)]
-        for item in result.items:
-            lines.append(",".join([
-                f'"{item["原文"]}"',
-                f'"{item["译文"]}"',
-                str(item["置信度"]),
-                f'"{item["备注"]}"',
-            ]))
-        return "\n".join(lines)
+    # 检查缓存
+    cache_key = f"{text}|{target_lang}"
+    cached_result = _get_cached_translation(cache_key)
+    if cached_result:
+        return cached_result, 95.0
 
-    else:  # text 默认
-        lines = []
-        for i, item in enumerate(result.items, 1):
-            lines.append(f"[{i}] 原文: {item['原文']}")
-            lines.append(f"    译文: {item['译文']}")
-            lines.append(f"    置信度: {item['置信度']}%")
-            if item["备注"]:
-                lines.append(f"    备注: {item['备注']}")
-            lines.append("")
-        lines.append(f"平均置信度: {result.overall_confidence:.1f}%")
-        return "\n".join(lines)
+    # 构建请求参数
+    params = {
+        "q": text,
+        "langpair": f"en|{target_lang}",
+    }
+    url = f"{TRANSLATE_API_URL}?{urllib.parse.urlencode(params)}"
+
+    # 指数退避重试机制
+    for attempt in range(TRANSLATE_API_MAX_RETRIES):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "uber-go-guide-pl/1.0"})
+            with urllib.request.urlopen(req, timeout=TRANSLATE_API_TIMEOUT) as response:
+                data = json.loads(response.read().decode("utf-8"))
+                
+                # 校验 API 响应结构
+                is_valid, error_msg = _validate_api_response(data)
+                if not is_valid:
+                    raise ValueError(f"API 响应格式错误: {error_msg}")
+                
+                translated = data["responseData"]["translatedText"]
+                if translated:
+                    # 置信度基于 API 响应质量
+                    confidence = 95.0 if data.get("responseDetails") == "" else 90.0
+                    # 缓存结果（带时间戳）
+                    _set_cached_translation(cache_key, translated)
+                    return translated, confidence
+                else:
+                    raise ValueError("API 返回空翻译结果")
+                    
+        except (urllib.error.URLError, urllib.error.HTTPError, ValueError, TimeoutError) as e:
+            if attempt < TRANSLATE_API_MAX_RETRIES - 1:
+                # 指数退避 + 随机抖动（2^n * 0.5~1.5s），最大不超过 TRANSLATE_API_MAX_BACKOFF
+                base_wait = (2 ** attempt) * 0.5
+                jitter = random.uniform(0.5, 1.5)
+                wait_time = min(base_wait * jitter, TRANSLATE_API_MAX_BACKOFF)
+                print(f"[翻译API] 第{attempt + 1}次尝试失败: {e}, {wait_time:.2f}秒后重试...")
+                time.sleep(wait_time)
+            else:
+                # 最后一次失败，返回错误码
+                print(f"[翻译API] 所有重试均失败: {e}")
+                return "", 0.0
+
+    return "", 0.0
 
 
-def process_text(text: str, target_lang: str = "pl") -> ProcessingResult:
+def _rule_based_translate(text: str, target_lang: str) -> Tuple[str, float]:
     """
-    核心处理流程（Step 2: 执行核心流程）
-    对输入文本进行翻译润色处理（模拟）。
-    实际场景中，这里会调用翻译服务或语言模型。
-    本实现中，使用规则进行简单处理。
+    基于规则的翻译（离线备用方案）。
+    支持常见英文到波兰语的简单翻译。
+    返回: (翻译结果, 置信度)
     """
-    result = ProcessingResult()
-
-    # 校验输入
-    ok, err_code = validate_input(text)
-    if not ok:
-        result.errors.append(ERROR_CODES[err_code])
-        return result
-
-    # 提取关键信息
-    info = extract_key_info(text)
-
-    # 计算置信度
-    confidence = compute_confidence(info)
-
-    # 模拟翻译润色（规则替换）
-    # 注意: 这里仅做演示，实际应调用外部服务
-    translated = _mock_translate(text, target_lang)
-
-    # 构建结果
-    note = ""
-    if confidence < CONFIDENCE_MEDIUM:
-        note = "[需核实]"
-    elif confidence < CONFIDENCE_HIGH:
-        note = "建议复核"
-
-    result.add_item(text, translated, confidence, note)
-
-    # 计算平均置信度
-    if result.items:
-        total_conf = sum(item["置信度"] for item in result.items)
-        result.overall_confidence = total_conf / len(result.items)
-
-    return result
-
-
-def _mock_translate(text: str, target_lang: str) -> str:
-    """
-    模拟翻译函数（仅用于演示和自检）。
-    实际实现中，应调用翻译 API 或语言模型。
-    """
-    # 简单规则: 将常见英文词替换为波兰语
     translations = {
         "hello": "cześć",
         "world": "świat",
@@ -250,224 +428,47 @@ def _mock_translate(text: str, target_lang: str) -> str:
         "please": "proszę",
         "yes": "tak",
         "no": "nie",
+        "help": "pomoc",
+        "friend": "przyjaciel",
+        "love": "miłość",
+        "time": "czas",
+        "day": "dzień",
+        "night": "noc",
+        "food": "jedzenie",
+        "water": "woda",
     }
 
     words = text.split()
     translated_words = []
+    matched_count = 0
     for word in words:
         lower_word = word.lower().strip(".,!?;:")
         if lower_word in translations:
             translated_words.append(translations[lower_word])
+            matched_count += 1
         else:
             translated_words.append(word)
 
-    return " ".join(translated_words)
+    translated = " ".join(translated_words)
+    # 置信度基于匹配率
+    if len(words) > 0:
+        confidence = 80.0 + (matched_count / len(words)) * 15.0
+    else:
+        confidence = 80.0
+
+    return translated, min(confidence, 95.0)
 
 
-def batch_process(inputs: List[str], target_lang: str = "pl") -> ProcessingResult:
+def _polish_text(text: str) -> str:
     """
-    批量处理（进阶用法）
+    润色算法：基于规则的文本优化。
+    包括：
+    - 去除多余空格
+    - 统一标点符号
+    - 首字母大写
+    - 修正常见拼写错误
     """
-    result = ProcessingResult()
-
-    for text in inputs:
-        sub_result = process_text(text, target_lang)
-        result.items.extend(sub_result.items)
-        result.errors.extend(sub_result.errors)
-
-    if result.items:
-        total_conf = sum(item["置信度"] for item in result.items)
-        result.overall_confidence = total_conf / len(result.items)
-
-    return result
-
-
-# ---------------------------------------------------------------------------
-# 自检函数（--selftest）
-# ---------------------------------------------------------------------------
-def run_selftest() -> bool:
-    """
-    离线自检核心逻辑。
-    使用内置硬编码样例数据，不依赖外部资源。
-    断言使用宽松阈值，确保稳健。
-    """
-    print("[自检] 开始...")
-
-    # 测试 1: 单条文本处理
-    print("[自检] 测试1: 单条文本处理")
-    text1 = "hello world"
-    result1 = process_text(text1, "pl")
-    assert len(result1.items) == 1, "测试1失败: 应产生1条结果"
-    assert result1.items[0]["原文"] == text1, "测试1失败: 原文不匹配"
-    assert result1.items[0]["译文"] != "", "测试1失败: 译文不应为空"
-    assert 0 <= result1.items[0]["置信度"] <= 100, "测试1失败: 置信度应在0-100之间"
-    print("[自检] 测试1: 通过")
-
-    # 测试 2: 空输入处理
-    print("[自检] 测试2: 空输入处理")
-    result2 = process_text("", "pl")
-    assert len(result2.errors) > 0, "测试2失败: 空输入应产生错误"
-    assert result2.errors[0] == ERROR_CODES["E001"], "测试2失败: 错误码应为 E001"
-    print("[自检] 测试2: 通过")
-
-    # 测试 3: 批量处理
-    print("[自检] 测试3: 批量处理")
-    inputs = ["good morning", "thank you", "please help"]
-    result3 = batch_process(inputs, "pl")
-    assert len(result3.items) == 3, "测试3失败: 应产生3条结果"
-    assert result3.overall_confidence > 0, "测试3失败: 平均置信度应大于0"
-    print("[自检] 测试3: 通过")
-
-    # 测试 4: 置信度计算
-    print("[自检] 测试4: 置信度计算")
-    info_with_keywords = {"keywords": ["翻译"], "length": 100}
-    conf_high = compute_confidence(info_with_keywords)
-    info_plain = {"length": 10}
-    conf_low = compute_confidence(info_plain)
-    assert conf_high > conf_low, "测试4失败: 有关键词时置信度应更高"
-    assert conf_high >= 80, "测试4失败: 置信度应不低于80"
-    print("[自检] 测试4: 通过")
-
-    # 测试 5: 格式化输出
-    print("[自检] 测试5: 格式化输出")
-    result5 = process_text("hello world", "pl")
-    text_out = format_output(result5, "text")
-    json_out = format_output(result5, "json")
-    csv_out = format_output(result5, "csv")
-    assert len(text_out) > 0, "测试5失败: 文本输出不应为空"
-    assert len(json_out) > 0, "测试5失败: JSON输出不应为空"
-    assert len(csv_out) > 0, "测试5失败: CSV输出不应为空"
-    print("[自检] 测试5: 通过")
-
-    # 测试 6: 关键信息提取
-    print("[自检] 测试6: 关键信息提取")
-    test_text = "请翻译这个文件: /path/to/file.txt 以及 https://example.com"
-    info6 = extract_key_info(test_text)
-    assert "files" in info6, "测试6失败: 应提取到文件路径"
-    assert "urls" in info6, "测试6失败: 应提取到URL"
-    assert len(info6["files"]) > 0, "测试6失败: 文件列表不应为空"
-    assert len(info6["urls"]) > 0, "测试6失败: URL列表不应为空"
-    print("[自检] 测试6: 通过")
-
-    # 测试 7: 错误处理
-    print("[自检] 测试7: 错误处理")
-    assert "E001" in ERROR_CODES, "测试7失败: 应包含 E001"
-    assert "E010" in ERROR_CODES, "测试7失败: 应包含 E010"
-    assert len(ERROR_CODES) == 10, "测试7失败: 应有10个错误码"
-    print("[自检] 测试7: 通过")
-
-    # 测试 8: 批量空输入
-    print("[自检] 测试8: 批量空输入")
-    result8 = batch_process([], "pl")
-    assert len(result8.items) == 0, "测试8失败: 空批量应无结果"
-    print("[自检] 测试8: 通过")
-
-    print("[自检] 全部通过!")
-    return True
-
-
-# ---------------------------------------------------------------------------
-# 主函数
-# ---------------------------------------------------------------------------
-def main() -> int:
-    """
-    主入口函数
-    """
-    parser = argparse.ArgumentParser(
-        description="uber-go-guide-pl 翻译润色技能工具",
-        epilog="示例: python main.py --input 'hello world' --lang pl --format text"
-    )
-
-    # 输入参数
-    parser.add_argument("--input", type=str, help="待处理的文本内容")
-    parser.add_argument("--file", type=str, help="输入文件路径")
-    parser.add_argument("--lang", type=str, default="pl", help="目标语言 (默认: pl)")
-
-    # 输出参数
-    parser.add_argument("--format", type=str, choices=["text", "json", "csv"],
-                       default="text", help="输出格式 (默认: text)")
-    parser.add_argument("--output", type=str, help="输出文件路径")
-
-    # 功能参数
-    parser.add_argument("--batch", action="store_true", help="批量处理模式")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-
-    # 解析参数
-    try:
-        parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-        parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-        args = parser.parse_args()
-        global dry_run
-        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    except SystemExit as e:
-        print(f"错误: {ERROR_CODES['E007']}")
-        return 1
-
-    # 自检模式
-    if args.selftest:
-        try:
-            success = run_selftest()
-            return 0 if success else 1
-        except Exception as e:
-            print(f"[自检] 失败: {e}")
-            return 1
-
-    # 检查是否有输入
-    if not args.input and not args.file:
-        print(f"错误: {ERROR_CODES['E001']}")
-        print("请提供 --input 或 --file 参数")
-        return 1
-
-    # 读取输入
-    input_text = args.input
-    if args.file:
-        try:
-            with open(args.file, "r", encoding="utf-8", errors="replace") as f:
-                input_text = f.read()
-        except Exception as e:
-            print(f"错误: {ERROR_CODES['E008']}: {e}")
-            return 1
-
-    # 处理输入
-    try:
-        if args.batch:
-            # 批量模式: 按行处理
-            lines = input_text.strip().split("\n")
-            result = batch_process(lines, args.lang)
-        else:
-            result = process_text(input_text, args.lang)
-
-        # 检查是否有错误
-        if result.errors:
-            for err in result.errors:
-                print(f"警告: {err}")
-
-        # 格式化输出
-        output = format_output(result, args.format)
-
-        # 输出结果
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
-                    f.write(output)
-                print(f"结果已写入: {args.output}")
-            except Exception as e:
-                print(f"错误: {ERROR_CODES['E008']}: {e}")
-                return 1
-        else:
-            print(output)
-
-        return 0
-
-    except Exception as e:
-        print(f"错误: {ERROR_CODES['E006']}: {e}")
-        return 1
-
-
-# ---------------------------------------------------------------------------
-# 程序入口
-# ---------------------------------------------------------------------------
-if __name__ == "__main__":
-    sys.exit(main())
+    polished = text.strip()
+    
+    # 去除多余空格
+    polished = re.sub
