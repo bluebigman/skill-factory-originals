@@ -3,7 +3,7 @@
 """
 context-mode 技能实现脚本
 功能：压缩工具输出、持久化会话记忆、提取关键信息、结构化格式输出、批量处理
-版本：1.0.12
+版本：2.0.0
 """
 
 import argparse
@@ -17,7 +17,6 @@ from collections import Counter, OrderedDict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 dry_run = False  # v3.274 模块级 dry-run 标志
-
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -66,460 +65,342 @@ class CompressionResult:
 class SessionMemory:
     """会话记忆管理器"""
     def __init__(self, memory_file: Optional[str] = None):
-        self.memory_file = memory_file
-        self.memory: Dict[str, Any] = {}
-        if memory_file:
-            self._load()
-
-    def _load(self) -> None:
-        """从文件加载记忆"""
-        try:
-            if os.path.exists(self.memory_file):
-                with open(self.memory_file, "r", encoding="utf-8") as f:
-                    self.memory = json.load(f)
-        except Exception as e:
-            raise RuntimeError(f"{ErrorCode.E005}: {e}") from e
-
-    def save(self) -> None:
-        """保存记忆到文件"""
-        if not self.memory_file:
-            return
-        try:
-            with open(self.memory_file, "w", encoding="utf-8") as f:
-                json.dump(self.memory, f, ensure_ascii=False, indent=2)
-        except Exception as e:
-            raise RuntimeError(f"{ErrorCode.E004}: {e}") from e
-
-    def add_key_decision(self, decision: str, context: Optional[str] = None) -> None:
-        """添加关键决策"""
-        if "decisions" not in self.memory:
-            self.memory["decisions"] = []
-        self.memory["decisions"].append({
-            "timestamp": time.time(),
-            "decision": decision,
-            "context": context or ""
-        })
-
-    def add_user_preference(self, key: str, value: Any) -> None:
-        """添加用户偏好"""
-        if "preferences" not in self.memory:
-            self.memory["preferences"] = {}
-        self.memory["preferences"][key] = value
-
-    def add_project_constraint(self, constraint: str) -> None:
-        """添加项目约束"""
-        if "constraints" not in self.memory:
-            self.memory["constraints"] = []
-        self.memory["constraints"].append(constraint)
-
-    def get_context_summary(self) -> str:
-        """生成记忆摘要"""
-        parts = []
-        if "decisions" in self.memory and self.memory["decisions"]:
-            parts.append("关键决策:")
-            for d in self.memory["decisions"][-3:]:  # 最近3条
-                parts.append(f"  - {d['decision']}")
-        if "preferences" in self.memory and self.memory["preferences"]:
-            parts.append("用户偏好:")
-            for k, v in list(self.memory["preferences"].items())[:5]:
-                parts.append(f"  - {k}: {v}")
-        if "constraints" in self.memory and self.memory["constraints"]:
-            parts.append("项目约束:")
-            for c in self.memory["constraints"][-3:]:
-                parts.append(f"  - {c}")
-        return "\n".join(parts) if parts else "暂无记忆内容"
-
-
-# ---------------------------------------------------------------------------
-# 文本处理核心逻辑
-# ---------------------------------------------------------------------------
-class TextCompressor:
-    """文本压缩器 - 核心功能实现"""
-
-    # 常见停止词（用于关键词提取）
-    STOP_WORDS = {
-        "the", "a", "an", "and", "or", "but", "if", "then", "else", "for",
-        "of", "in", "on", "at", "to", "from", "with", "without", "by",
-        "是", "的", "了", "在", "和", "与", "或", "及", "等", "被", "把",
-        "this", "that", "these", "those", "is", "are", "was", "were",
-        "be", "been", "being", "have", "has", "had", "do", "does", "did"
-    }
-
-    def __init__(self, max_key_points: int = 5):
-        self.max_key_points = max_key_points
-
-    def compress(self, text: str, output_format: str = "text") -> CompressionResult:
-        """压缩文本内容"""
-        if not text or not text.strip():
-            raise ValueError(ErrorCode.E002)
-
-        original_length = len(text)
-
-        # 提取关键信息
-        key_points = self._extract_key_points(text)
-
-        # 生成摘要
-        summary = self._generate_summary(text, key_points)
-
-        # 根据格式生成压缩结果
-        if output_format == "text":
-            result = self._format_text(summary, key_points)
-        elif output_format == "json":
-            result = json.dumps({
-                "summary": summary,
-                "key_points": key_points
-            }, ensure_ascii=False, indent=2)
-        elif output_format == "table":
-            result = self._format_table(summary, key_points)
-        else:
-            raise ValueError(ErrorCode.E003)
-
-        return CompressionResult(
-            original_length=original_length,
-            compressed_length=len(result),
-            summary=summary,
-            key_points=key_points
+        self.memory_file = memory_file or os.environ.get(
+            "CONTEXT_MODE_MEMORY_FILE",
+            str(Path.home() / ".context_mode_memory.json")
         )
 
-    def _extract_key_points(self, text: str) -> List[str]:
-        """提取关键信息点"""
-        points = []
-        lines = text.split("\n")
+    def load(self) -> List[str]:
+        """加载记忆列表"""
+        try:
+            if not os.path.exists(self.memory_file):
+                return []
+            with open(self.memory_file, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if isinstance(data, list):
+                    return data
+                return []
+        except Exception as e:
+            print(f"警告: 记忆文件读取失败: {e}", file=sys.stderr)
+            return []
 
-        # 优先提取包含特殊标记的行
-        important_patterns = [
-            r"(?:错误|error|失败|fail|exception|warning|警告)",  # 错误相关
-            r"(?:成功|完成|success|complete|passed|通过)",       # 成功相关
-            r"(?:版本|version|v\d+\.\d+\.\d+)",                  # 版本信息
-            r"(?:耗时|时间|duration|time).{0,20}(?:\d+\.?\d*\s*(?:ms|s|秒|毫秒))",  # 时间信息
-            r"(?:文件|路径|path|file).{0,30}(?:[\w\-./\\]+\.\w+)",  # 文件路径
-        ]
+    def save(self, text: str) -> bool:
+        """保存一条记忆"""
+        try:
+            memories = self.load()
+            memories.append(text)
+            # 原子写入
+            tmp_file = self.memory_file + ".tmp"
+            with open(tmp_file, "w", encoding="utf-8") as f:
+                json.dump(memories, f, ensure_ascii=False, indent=2)
+            os.replace(tmp_file, self.memory_file)
+            return True
+        except Exception as e:
+            print(f"错误: 记忆文件写入失败: {e}", file=sys.stderr)
+            return False
 
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
-            # 检查是否匹配重要模式
-            for pattern in important_patterns:
-                if re.search(pattern, line, re.IGNORECASE):
-                    if line not in points:
-                        points.append(line[:80])  # 限制长度更短
-                    break
 
-            if len(points) >= self.max_key_points:
+# ---------------------------------------------------------------------------
+# 核心功能函数
+# ---------------------------------------------------------------------------
+def read_file_with_encoding(filepath: str) -> str:
+    """读取文件，自动处理多编码"""
+    encodings = ["utf-8", "gbk", "gb18030"]
+    for enc in encodings:
+        try:
+            with open(filepath, "r", encoding=enc) as f:
+                return f.read()
+        except UnicodeDecodeError:
+            continue
+        except FileNotFoundError:
+            raise FileNotFoundError(f"E001: 参数错误 - 输入文件不存在: {filepath}")
+    # 最后尝试 replace 模式
+    with open(filepath, "r", encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+
+def compress_text(text: str, max_key_points: int = 10) -> CompressionResult:
+    """压缩文本为结构化摘要"""
+    if not text or not text.strip():
+        return CompressionResult(0, 0, "空输入", [])
+
+    lines = text.splitlines()
+    total_lines = len(lines)
+
+    # 统计日志级别
+    level_counter = Counter()
+    error_lines = []
+    for line in lines:
+        for level in ["ERROR", "WARN", "INFO", "DEBUG", "FATAL"]:
+            if level in line.upper():
+                level_counter[level] += 1
+                if level in ["ERROR", "FATAL"]:
+                    error_lines.append(line)
                 break
 
-        # 如果关键点不够，提取高频词组合
-        if len(points) < self.max_key_points:
-            words = self._extract_high_frequency_words(text)
-            for word in words:
-                if len(points) >= self.max_key_points:
-                    break
-                if word not in points:
-                    points.append(word)
+    # 提取关键信息
+    key_points = []
+    if error_lines:
+        key_points.append(f"发现 {len(error_lines)} 条错误/致命日志")
+        for err in error_lines[:3]:
+            key_points.append(f"错误: {err.strip()[:100]}")
 
-        return points[:self.max_key_points]
+    if level_counter:
+        level_summary = ", ".join(f"{k}: {v}条" for k, v in level_counter.most_common())
+        key_points.append(f"日志级别统计: {level_summary}")
 
-    def _extract_high_frequency_words(self, text: str) -> List[str]:
-        """提取高频关键词"""
-        # 清理文本
-        cleaned = re.sub(r'[^\w\s\u4e00-\u9fff]', ' ', text.lower())
-        words = cleaned.split()
+    # 生成摘要
+    summary_parts = [f"共 {total_lines} 行"]
+    if level_counter:
+        summary_parts.append(f"主要级别: {level_counter.most_common(1)[0][0]}")
+    summary = "；".join(summary_parts)
 
-        # 过滤停止词和短词
-        meaningful_words = [
-            w for w in words
-            if w not in self.STOP_WORDS and len(w) > 2
-        ]
+    # 计算压缩后长度（模拟压缩后的文本长度）
+    compressed_text = summary + " | " + " | ".join(key_points)
+    compressed_length = len(compressed_text)
 
-        # 统计词频
-        word_counts = Counter(meaningful_words)
+    return CompressionResult(len(text), compressed_length, summary, key_points[:max_key_points])
 
-        # 返回高频词
-        return [word for word, _ in word_counts.most_common(10)]
 
-    def _generate_summary(self, text: str, key_points: List[str]) -> str:
-        """生成文本摘要"""
-        # 清理文本
-        cleaned = re.sub(r'\s+', ' ', text.strip())
+def extract_key_info(text: str, keywords: List[str], context_lines: int = 0) -> Dict[str, Any]:
+    """提取包含关键词的行及上下文"""
+    if not text or not keywords:
+        return {"matches": [], "total_matches": 0}
 
-        # 如果是短文本，返回前80字符
-        if len(cleaned) <= 80:
-            return cleaned
+    lines = text.splitlines()
+    matches = []
+    for i, line in enumerate(lines):
+        if any(kw.lower() in line.lower() for kw in keywords):
+            match_entry = {
+                "line_number": i + 1,
+                "content": line.strip(),
+                "context": []
+            }
+            # 添加上下文
+            start = max(0, i - context_lines)
+            end = min(len(lines), i + context_lines + 1)
+            for j in range(start, end):
+                if j != i:
+                    match_entry["context"].append({
+                        "line_number": j + 1,
+                        "content": lines[j].strip()
+                    })
+            matches.append(match_entry)
 
-        # 尝试提取首段
-        paragraphs = [p.strip() for p in text.split("\n\n") if p.strip()]
-        if paragraphs:
-            first_para = paragraphs[0]
-            if len(first_para) <= 80:
-                return first_para
+    return {"matches": matches, "total_matches": len(matches)}
 
-        # 提取关键句子（更短）
-        sentences = re.split(r'(?<=[.!?。！？])\s+', cleaned)
-        important_sentences = []
 
-        # 包含关键点的句子优先
-        for sentence in sentences:
-            if len(sentence) > 100:  # 跳过过长的句子
+def format_output(result: Any, fmt: str = "md") -> str:
+    """格式化输出"""
+    if fmt == "json":
+        if isinstance(result, CompressionResult):
+            return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
+        return json.dumps(result, ensure_ascii=False, indent=2)
+    elif fmt == "kv":
+        if isinstance(result, CompressionResult):
+            d = result.to_dict()
+            return "\n".join(f"{k}: {v}" for k, v in d.items())
+        elif isinstance(result, dict):
+            return "\n".join(f"{k}: {v}" for k, v in result.items())
+        return str(result)
+    else:  # md
+        if isinstance(result, CompressionResult):
+            lines = [
+                "# 压缩摘要",
+                "",
+                f"- 原始长度: {result.original_length} 字符",
+                f"- 压缩后长度: {result.compressed_length} 字符",
+                f"- 压缩率: {result.reduction_ratio * 100:.1f}%",
+                "",
+                "## 关键信息",
+            ]
+            for point in result.key_points:
+                lines.append(f"- {point}")
+            return "\n".join(lines)
+        elif isinstance(result, dict) and "matches" in result:
+            lines = ["# 关键信息提取结果", ""]
+            lines.append(f"共找到 {result['total_matches']} 条匹配")
+            for m in result["matches"]:
+                lines.append(f"\n### 行 {m['line_number']}")
+                lines.append(f"内容: {m['content']}")
+                if m["context"]:
+                    lines.append("上下文:")
+                    for ctx in m["context"]:
+                        lines.append(f"  行 {ctx['line_number']}: {ctx['content']}")
+            return "\n".join(lines)
+        return str(result)
+
+
+def atomic_write(filepath: str, content: str) -> bool:
+    """原子写入文件"""
+    try:
+        tmp_file = filepath + ".tmp"
+        with open(tmp_file, "w", encoding="utf-8") as f:
+            f.write(content)
+        os.replace(tmp_file, filepath)
+        return True
+    except Exception as e:
+        print(f"错误: 写入文件失败: {e}", file=sys.stderr)
+        return False
+
+
+# ---------------------------------------------------------------------------
+# 批量处理
+# ---------------------------------------------------------------------------
+def batch_process(directory: str, output_dir: str, fmt: str = "md", dry_run: bool = False) -> Dict[str, Any]:
+    """批量处理目录下的所有 .log 和 .txt 文件"""
+    if not os.path.isdir(directory):
+        raise ValueError(f"E001: 参数错误 - 目录不存在: {directory}")
+
+    os.makedirs(output_dir, exist_ok=True)
+    results = {"total": 0, "success": 0, "skipped": 0, "failed": 0, "failures": []}
+
+    for filepath in sorted(Path(directory).glob("*")):
+        if filepath.suffix.lower() not in [".log", ".txt", ".json", ".md"]:
+            results["skipped"] += 1
+            continue
+
+        results["total"] += 1
+        try:
+            content = read_file_with_encoding(str(filepath))
+            if not content.strip():
+                results["skipped"] += 1
                 continue
-            for point in key_points:
-                if point[:20] in sentence or any(w in sentence for w in point.split()[:2]):
-                    important_sentences.append(sentence[:80])  # 截断每个句子
-                    break
-            if len(important_sentences) >= 2:
-                break
 
-        # 补充首句（截断）
-        if not important_sentences and sentences:
-            first = sentences[0][:80]
-            important_sentences.append(first)
+            result = compress_text(content)
+            output_content = format_output(result, fmt)
+            output_file = Path(output_dir) / f"{filepath.stem}_out.{fmt}"
 
-        # 组合摘要
-        summary = " ".join(important_sentences[:2])
-        if len(summary) > 150:
-            summary = summary[:147] + "..."
+            if dry_run:
+                print(f"[DRY-RUN] 将写入: {output_file}")
+                print(f"[DRY-RUN] 内容摘要: {result.summary}")
+            else:
+                if atomic_write(str(output_file), output_content):
+                    results["success"] += 1
+                else:
+                    results["failed"] += 1
+                    results["failures"].append({"file": str(filepath), "reason": "写入失败"})
+        except Exception as e:
+            results["failed"] += 1
+            results["failures"].append({"file": str(filepath), "reason": str(e)})
 
-        return summary if summary else cleaned[:80]
-
-    def _format_text(self, summary: str, key_points: List[str]) -> str:
-        """文本格式输出（更紧凑）"""
-        lines = [f"摘要: {summary}"]
-        if key_points:
-            lines.append("关键:")
-            for point in key_points[:3]:  # 最多显示3个关键点
-                lines.append(f"• {point}")
-        return "\n".join(lines)
-
-    def _format_table(self, summary: str, key_points: List[str]) -> str:
-        """表格格式输出（更紧凑）"""
-        lines = [
-            "| 项目 | 内容 |",
-            "|------|------|",
-            f"| 摘要 | {summary[:60]} |"
-        ]
-        for i, point in enumerate(key_points[:3], 1):  # 最多显示3个关键点
-            lines.append(f"| 要点{i} | {point[:60]} |")
-        return "\n".join(lines)
+    return results
 
 
 # ---------------------------------------------------------------------------
-# 批量处理功能
-# ---------------------------------------------------------------------------
-class BatchProcessor:
-    """批量处理多个输入源"""
-
-    def __init__(self, compressor: TextCompressor):
-        self.compressor = compressor
-
-    def process_batch(self, inputs: List[str], output_format: str = "text") -> List[Dict[str, Any]]:
-        """批量压缩多个输入"""
-        if not inputs:
-            raise ValueError(ErrorCode.E007)
-
-        results = []
-        for i, text in enumerate(inputs, 1):
-            try:
-                result = self.compressor.compress(text, output_format)
-                results.append({
-                    "index": i,
-                    "status": "success",
-                    "data": result.to_dict()
-                })
-            except Exception as e:
-                results.append({
-                    "index": i,
-                    "status": "error",
-                    "error": str(e)
-                })
-
-        return results
-
-
-# ---------------------------------------------------------------------------
-# 自检功能
+# 自检函数
 # ---------------------------------------------------------------------------
 def run_selftest() -> bool:
-    """离线自检核心逻辑"""
+    """运行自检，验证核心功能"""
     print("开始自检...")
+    all_passed = True
 
-    # 创建压缩器
-    compressor = TextCompressor()
+    # 测试1: 压缩功能
+    print("\n[测试1] 压缩功能")
+    test_text = """2026-08-11 10:00:01 INFO Starting application
+2026-08-11 10:00:02 DEBUG Loading config
+2026-08-11 10:00:03 ERROR Failed to connect to database: timeout
+2026-08-11 10:00:04 WARN Retrying connection (attempt 1/3)
+2026-08-11 10:00:05 INFO Connection established"""
+    result = compress_text(test_text)
+    assert result.original_length > 0, "原始长度应为正数"
+    assert result.compressed_length > 0, "压缩后长度应为正数"
+    assert result.reduction_ratio > 0, "压缩率应为正数"
+    assert len(result.key_points) > 0, "应有关键信息"
+    print(f"  通过: 压缩率 {result.reduction_ratio * 100:.1f}%")
+    print(f"  关键信息: {result.key_points}")
 
-    # 测试1: 基本压缩功能
-    test_text = """
-    构建日志 v2.3.1
-    编译成功: 42个模块通过
-    警告: 3个模块存在过时依赖
-    错误: 无
-    耗时: 12.5秒
-    输出路径: /build/output/app.jar
-    """
-    try:
-        result = compressor.compress(test_text, "text")
-        # 宽松断言：压缩后长度应明显小于原文
-        assert result.compressed_length < result.original_length, \
-            f"压缩后长度应小于原文: {result.compressed_length} vs {result.original_length}"
-        # 压缩率应大于0.1
-        assert result.reduction_ratio > 0.1, \
-            f"压缩率应大于0.1: {result.reduction_ratio}"
-        # 摘要不应为空
-        assert len(result.summary) > 0, "摘要不应为空"
-        # 关键信息不应为空
-        assert len(result.key_points) > 0, "关键信息不应为空"
-        print("✓ 基本压缩功能通过")
-    except AssertionError as e:
-        print(f"✗ 基本压缩功能失败: {e}")
+    # 测试2: 空输入
+    print("\n[测试2] 空输入处理")
+    result = compress_text("")
+    assert result.original_length == 0, "空输入原始长度应为0"
+    assert result.summary == "空输入", "空输入摘要应为'空输入'"
+    print("  通过: 空输入正确处理")
+
+    # 测试3: 关键信息提取
+    print("\n[测试3] 关键信息提取")
+    extract_result = extract_key_info(test_text, ["ERROR", "WARN"], context_lines=1)
+    assert extract_result["total_matches"] == 2, f"应找到2条匹配，实际{extract_result['total_matches']}"
+    assert len(extract_result["matches"][0]["context"]) > 0, "应有上下文"
+    print(f"  通过: 找到 {extract_result['total_matches']} 条匹配")
+
+    # 测试4: 记忆功能
+    print("\n[测试4] 会话记忆")
+    import tempfile
+    with tempfile.NamedTemporaryFile(suffix=".json", delete=False) as tmp:
+        tmp_path = tmp.name
+    memory = SessionMemory(tmp_path)
+    assert memory.save("测试记忆1"), "保存记忆应成功"
+    assert memory.save("测试记忆2"), "保存记忆应成功"
+    memories = memory.load()
+    assert len(memories) == 2, f"应加载2条记忆，实际{len(memories)}"
+    assert memories[0] == "测试记忆1", "第一条记忆内容不符"
+    os.unlink(tmp_path)
+    print("  通过: 记忆保存和加载正常")
+
+    # 测试5: 格式输出
+    print("\n[测试5] 格式输出")
+    md_output = format_output(result, "md")
+    assert "压缩摘要" in md_output, "Markdown输出应包含标题"
+    json_output = format_output(result, "json")
+    json_data = json.loads(json_output)
+    assert "original_length" in json_data, "JSON输出应包含original_length"
+    kv_output = format_output(result, "kv")
+    assert "original_length:" in kv_output, "KV输出应包含original_length"
+    print("  通过: 三种格式输出正常")
+
+    # 测试6: 批量处理（dry-run）
+    print("\n[测试6] 批量处理 dry-run")
+    with tempfile.TemporaryDirectory() as tmpdir:
+        # 创建测试文件
+        test_file = Path(tmpdir) / "test.log"
+        if not dry_run:
+            test_file.write_text(test_text, encoding="utf-8")
+        out_dir = Path(tmpdir) / "out"
+        results = batch_process(tmpdir, str(out_dir), dry_run=True)
+        assert results["total"] == 1, f"应处理1个文件，实际{results['total']}"
+        assert not (out_dir / "test_out.md").exists(), "dry-run不应写文件"
+    print("  通过: dry-run 不写盘")
+
+    # 测试7: 编码处理
+    print("\n[测试7] 编码处理")
+    with tempfile.NamedTemporaryFile(suffix=".txt", delete=False) as tmp:
+        tmp_path = tmp.name
+    # 写入 GBK 编码
+    with open(tmp_path, "w", encoding="gbk") as f:
+        f.write("测试中文内容\n第二行")
+    content = read_file_with_encoding(tmp_path)
+    assert "测试中文内容" in content, "GBK编码读取失败"
+    os.unlink(tmp_path)
+    print("  通过: GBK编码正确读取")
+
+    print("\n" + "=" * 40)
+    if all_passed:
+        print("所有自检通过 ✓")
+        return True
+    else:
+        print("存在失败项 ✗")
         return False
-
-    # 测试2: JSON格式输出
-    try:
-        result = compressor.compress(test_text, "json")
-        # 宽松断言：应能解析为JSON
-        assert result.compressed_length > 0, "JSON输出长度应大于0"
-        print("✓ JSON格式输出通过")
-    except (json.JSONDecodeError, AssertionError) as e:
-        print(f"✗ JSON格式输出失败: {e}")
-        return False
-
-    # 测试3: 表格格式输出
-    try:
-        result = compressor.compress(test_text, "table")
-        assert "|" in result.summary, "表格格式应包含竖线分隔符"
-        assert result.compressed_length > 0, "表格输出长度应大于0"
-        print("✓ 表格格式输出通过")
-    except AssertionError as e:
-        print(f"✗ 表格格式输出失败: {e}")
-        return False
-
-    # 测试4: 会话记忆功能
-    try:
-        memory = SessionMemory()
-        memory.add_key_decision("采用微服务架构重构")
-        memory.add_user_preference("日志级别", "debug")
-        memory.add_project_constraint("Python 3.9+")
-        context = memory.get_context_summary()
-        assert "微服务" in context, "记忆应包含关键决策"
-        assert "debug" in context, "记忆应包含用户偏好"
-        print("✓ 会话记忆功能通过")
-    except AssertionError as e:
-        print(f"✗ 会话记忆功能失败: {e}")
-        return False
-
-    # 测试5: 批量处理功能
-    try:
-        processor = BatchProcessor(compressor)
-        batch_inputs = [
-            "错误: 连接超时 耗时: 3秒",
-            "成功: 部署完成 版本: 1.0.0",
-            "警告: 磁盘空间不足"
-        ]
-        results = processor.process_batch(batch_inputs)
-        assert len(results) == 3, f"应处理3个输入，实际{len(results)}"
-        assert all(r["status"] == "success" for r in results), "所有输入应处理成功"
-        print("✓ 批量处理功能通过")
-    except AssertionError as e:
-        print(f"✗ 批量处理功能失败: {e}")
-        return False
-
-    # 测试6: 错误处理
-    try:
-        try:
-            compressor.compress("", "text")
-            assert False, "空输入应抛出异常"
-        except ValueError:
-            pass
-
-        try:
-            compressor.compress("有效文本", "unsupported_format")
-            assert False, "不支持格式应抛出异常"
-        except ValueError:
-            pass
-
-        print("✓ 错误处理通过")
-    except AssertionError as e:
-        print(f"✗ 错误处理失败: {e}")
-        return False
-
-    # 测试7: 长文本处理
-    try:
-        long_text = "内容 " * 1000  # 2000字符
-        result = compressor.compress(long_text, "text")
-        assert result.compressed_length < len(long_text), "长文本应被压缩"
-        print("✓ 长文本处理通过")
-    except AssertionError as e:
-        print(f"✗ 长文本处理失败: {e}")
-        return False
-
-    print("\n全部自检通过！")
-    return True
 
 
 # ---------------------------------------------------------------------------
-# 命令行入口
+# 主函数
 # ---------------------------------------------------------------------------
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="context-mode: 上下文压缩、会话记忆、输出精简工具"
-    )
-    parser.add_argument(
-        "--compress", "-c",
-        type=str,
-        help="要压缩的文本内容"
-    )
-    parser.add_argument(
-        "--file", "-f",
-        type=str,
-        help="从文件读取内容进行压缩"
-    )
-    parser.add_argument(
-        "--format", "-fmt",
-        choices=["text", "json", "table"],
-        default="text",
-        help="输出格式 (默认: text)"
-    )
-    parser.add_argument(
-        "--memory", "-m",
-        type=str,
-        help="会话记忆文件路径"
-    )
-    parser.add_argument(
-        "--add-decision", "-d",
-        type=str,
-        help="添加关键决策到会话记忆"
-    )
-    parser.add_argument(
-        "--add-preference", "-p",
-        nargs=2,
-        metavar=("KEY", "VALUE"),
-        help="添加用户偏好到会话记忆"
-    )
-    parser.add_argument(
-        "--add-constraint", "-con",
-        type=str,
-        help="添加项目约束到会话记忆"
-    )
-    parser.add_argument(
-        "--show-memory", "-s",
-        action="store_true",
-        help="显示会话记忆内容"
-    )
-    parser.add_argument(
-        "--batch", "-b",
-        type=str,
-        nargs="+",
-        help="批量处理多个文本输入"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检"
-    )
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+def main():
+    parser = argparse.ArgumentParser(description="context-mode: 上下文压缩与会话记忆工具")
+    parser.add_argument("--command", choices=["compress", "batch", "memory", "extract", "selftest"],
+                        help="要执行的命令")
+    parser.add_argument("-i", "--input", help="输入文件路径")
+    parser.add_argument("-o", "--output", help="输出文件路径")
+    parser.add_argument("-d", "--dir", help="批量处理目录")
+    parser.add_argument("--key", help="提取关键词（逗号分隔）")
+    parser.add_argument("--context", type=int, default=0, help="提取时上下文行数")
+    parser.add_argument("--format", choices=["md", "json", "kv"], default="md", help="输出格式")
+    parser.add_argument("--dry-run", action="store_true", help="试运行不写盘")
+    parser.add_argument("--verbose", action="store_true", help="详细模式")
+    parser.add_argument("--save", help="保存记忆内容")
+    parser.add_argument("--load", action="store_true", help="加载记忆")
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
 
     args = parser.parse_args()
 
@@ -528,81 +409,101 @@ def main() -> int:
     dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
-    if args.selftest:
+    if args.command == "selftest" or args.selftest:
         success = run_selftest()
-        return 0 if success else 1
+        sys.exit(0 if success else 1)
 
-    try:
-        # 会话记忆操作
-        memory = SessionMemory(args.memory) if args.memory else SessionMemory()
+    # 压缩命令
+    if args.command == "compress":
+        if not args.input:
+            print(f"错误: {ErrorCode.E001} - 缺少输入文件", file=sys.stderr)
+            sys.exit(1)
+        try:
+            content = read_file_with_encoding(args.input)
+            result = compress_text(content)
+            output_content = format_output(result, args.format)
 
-        if args.add_decision:
-            memory.add_key_decision(args.add_decision)
-            memory.save()
-            print(f"已添加关键决策: {args.add_decision}")
+            if args.dry_run:
+                print(f"[DRY-RUN] 将写入: {args.output or 'stdout'}")
+                print(f"[DRY-RUN] 压缩率: {result.reduction_ratio * 100:.1f}%")
+                print(f"[DRY-RUN] 摘要: {result.summary}")
+                if args.verbose:
+                    print("\n[DRY-RUN] 完整输出预览:")
+                    print(output_content)
+            else:
+                if args.output:
+                    if atomic_write(args.output, output_content):
+                        print(f"压缩完成: {args.input} -> {args.output}")
+                        print(f"压缩率: {result.reduction_ratio * 100:.1f}%")
+                    else:
+                        print(f"错误: {ErrorCode.E004}", file=sys.stderr)
+                        sys.exit(1)
+                else:
+                    print(output_content)
+        except Exception as e:
+            print(f"错误: {e}", file=sys.stderr)
+            sys.exit(1)
 
-        if args.add_preference:
-            memory.add_user_preference(args.add_preference[0], args.add_preference[1])
-            memory.save()
-            print(f"已添加用户偏好: {args.add_preference[0]} = {args.add_preference[1]}")
+    # 批量命令
+    elif args.command == "batch":
+        if not args.dir:
+            print(f"错误: {ErrorCode.E001} - 缺少目录参数", file=sys.stderr)
+            sys.exit(1)
+        try:
+            output_dir = args.output or "./output"
+            results = batch_process(args.dir, output_dir, args.format, args.dry_run)
+            print(f"处理完成: {results['total']} 个文件")
+            print(f"成功: {results['success']}, 跳过: {results['skipped']}, 失败: {results['failed']}")
+            if results["failures"]:
+                print("\n失败明细:")
+                for failure in results["failures"]:
+                    print(f"  - {failure['file']}: {failure['reason']}")
+        except Exception as e:
+            print(f"错误: {e}", file=sys.stderr)
+            sys.exit(1)
 
-        if args.add_constraint:
-            memory.add_project_constraint(args.add_constraint)
-            memory.save()
-            print(f"已添加项目约束: {args.add_constraint}")
-
-        if args.show_memory:
-            print("=== 会话记忆 ===")
-            print(memory.get_context_summary())
-
-        # 压缩操作
-        compressor = TextCompressor()
-
-        if args.batch:
-            # 批量处理
-            processor = BatchProcessor(compressor)
-            results = processor.process_batch(args.batch, args.format)
-            print(json.dumps(results, ensure_ascii=False, indent=2))
-        elif args.file:
-            # 从文件读取
-            try:
-                with open(args.file, "r", encoding="utf-8") as f:
-                    content = f.read()
-                result = compressor.compress(content, args.format)
-                print(result.summary)
-                print(f"\n[统计] 原始: {result.original_length} 字符, "
-                      f"压缩后: {result.compressed_length} 字符, "
-                      f"压缩率: {result.reduction_ratio:.1%}")
-            except FileNotFoundError:
-                print(f"{ErrorCode.E005}: 文件 {args.file} 不存在", file=sys.stderr)
-                return 5
-        elif args.compress:
-            # 直接压缩
-            result = compressor.compress(args.compress, args.format)
-            print(result.summary)
-            if result.key_points:
-                print("\n关键信息:")
-                for point in result.key_points:
-                    print(f"  - {point}")
-            print(f"\n[统计] 原始: {result.original_length} 字符, "
-                  f"压缩后: {result.compressed_length} 字符, "
-                  f"压缩率: {result.reduction_ratio:.1%}")
+    # 记忆命令
+    elif args.command == "memory":
+        memory = SessionMemory()
+        if args.save:
+            if memory.save(args.save):
+                print(f"已保存记忆: {args.save}")
+            else:
+                print(f"错误: {ErrorCode.E004}", file=sys.stderr)
+                sys.exit(1)
+        elif args.load:
+            memories = memory.load()
+            if memories:
+                print("加载记忆:")
+                for i, m in enumerate(memories, 1):
+                    print(f"{i}. {m}")
+            else:
+                print("暂无记忆")
         else:
-            # 没有操作参数时显示帮助
-            parser.print_help()
+            print(f"错误: {ErrorCode.E001} - 需要 --save 或 --load", file=sys.stderr)
+            sys.exit(1)
 
-        return 0
+    # 提取命令
+    elif args.command == "extract":
+        if not args.input or not args.key:
+            print(f"错误: {ErrorCode.E001} - 需要输入文件和关键词", file=sys.stderr)
+            sys.exit(1)
+        try:
+            content = read_file_with_encoding(args.input)
+            keywords = [k.strip() for k in args.key.split(",")]
+            result = extract_key_info(content, keywords, args.context)
+            output_content = format_output(result, args.format)
 
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except RuntimeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 2
-    except Exception as e:
-        print(f"{ErrorCode.E010}: 未预期的错误 - {e}", file=sys.stderr)
-        return 3
+            if args.dry_run:
+                print(f"[DRY-RUN] 将输出 {result['total_matches']} 条匹配")
+                if args.verbose:
+                    print(output_content)
+            else:
+                print(output_content)
+        except Exception as e:
+            print(f"错误: {e}", file=sys.stderr)
+            sys.exit(1)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
