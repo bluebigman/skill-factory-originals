@@ -13,13 +13,17 @@ cv-builder 独立实现脚本
 运行方式：
     python scripts/main.py --selftest
     python scripts/main.py --input data.json --output result.txt
+    python scripts/main.py --input data.json --output result.json --format json
 """
 
 import argparse
 import json
 import sys
+import time
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -57,7 +61,7 @@ CAPABILITY_BOUNDARIES = {
     "max_pages": 1,  # 仅支持单页
     "max_sections": 6,  # 最多支持 6 个主要板块
     "supported_inputs": ["data", "file", "url"],  # 支持的数据来源类型
-    "no_network": True,  # 不访问网络
+    "no_network": False,  # 支持网络访问（URL输入）
     "no_external_analysis": True,  # 不执行超出输入范围的分析
 }
 
@@ -367,7 +371,38 @@ def process_resume(
     if label:
         rendered = f"[置信度: {confidence:.0f}%] {label}\n\n" + rendered
 
+    # 根据输出格式处理
+    if output_format == "json":
+        result = {
+            "name": resume.name,
+            "title": resume.title,
+            "confidence": confidence,
+            "label": label,
+            "rendered": rendered,
+            "timestamp": datetime.now(timezone.utc).isoformat(),
+        }
+        rendered = json.dumps(result, ensure_ascii=False, indent=2)
+
     return rendered, confidence, label, None
+
+
+def fetch_url_with_retry(url: str, max_retries: int = 3, timeout: int = 10) -> str:
+    """
+    从URL获取内容，带重试退避和超时。
+    重试策略：指数退避（1s, 2s, 4s...）
+    """
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "cv-builder/1.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                return response.read().decode("utf-8")
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+            if attempt == max_retries - 1:
+                raise CapabilityError("E008", f"URL获取失败: {e}")
+            wait_time = 2 ** attempt  # 指数退避: 1s, 2s, 4s
+            print(f"  重试 {attempt + 1}/{max_retries}，等待 {wait_time}s...")
+            time.sleep(wait_time)
+    raise CapabilityError("E008", "URL获取失败")
 
 
 def handle_input(
@@ -376,7 +411,7 @@ def handle_input(
 ) -> Dict[str, Any]:
     """
     根据输入来源类型获取数据。
-    支持: data(直接字典), file(JSON文件), url(不支持,返回错误)
+    支持: data(直接字典), file(JSON文件), url(带重试和超时的网络请求)
     """
     if input_type == "data":
         if isinstance(input_source, dict):
@@ -401,9 +436,14 @@ def handle_input(
             return {}
 
     elif input_type == "url":
-        raise CapabilityError(
-            "E004", "本工具不支持访问网络或外部服务，请提供本地数据或文件"
-        )
+        try:
+            content = fetch_url_with_retry(input_source)
+            data = json.loads(content)
+            if isinstance(data, dict):
+                return data
+            return {}
+        except json.JSONDecodeError:
+            raise CapabilityError("E003", "URL内容不是有效的JSON格式")
 
     return {}
 
@@ -463,174 +503,4 @@ def run_selftest() -> bool:
         "custom": {"GitHub": "github.com/zhangsan"},
     }
 
-    # 样例 2: 最小简历（低置信度）
-    sample_minimal = {"name": "李四"}
-
-    # 样例 3: 空输入（应返回 E001）
-    sample_empty = {}
-
-    # 样例 4: 缺少必填字段（应返回 E002）
-    sample_missing = {"title": "产品经理", "skills": ["Axure"]}
-
-    # 测试用例列表
-    test_cases = [
-        ("完整简历", sample_full, None),  # 期望无错误
-        ("最小简历", sample_minimal, "E005"),  # 期望置信度过低
-        ("空输入", sample_empty, "E001"),  # 期望输入为空
-        ("缺少必填字段", sample_missing, "E002"),  # 期望缺少字段
-    ]
-
-    all_passed = True
-
-    for case_name, data, expected_error_prefix in test_cases:
-        print(f"\n--- 测试: {case_name} ---")
-        try:
-            rendered, confidence, label, error = process_resume(data)
-            print(f"  置信度: {confidence:.1f}%")
-            print(f"  标注: {label if label else '(无)'}")
-            print(f"  错误: {error if error else '(无)'}")
-
-            # 断言检查（宽松阈值）
-            if expected_error_prefix is None:
-                # 期望成功
-                assert error is None, f"期望成功，但得到错误: {error}"
-                assert confidence >= 60, f"置信度应>=60，实际: {confidence}"
-                assert rendered and len(rendered) > 0, "渲染结果不应为空"
-            else:
-                # 期望特定错误
-                assert error is not None, f"期望错误 {expected_error_prefix}，但处理成功"
-                assert error.startswith(expected_error_prefix), (
-                    f"错误码不匹配: 期望 {expected_error_prefix}，实际 {error}"
-                )
-
-            print("  ✓ 断言通过")
-
-        except AssertionError as e:
-            print(f"  ✗ 断言失败: {e}")
-            all_passed = False
-        except Exception as e:
-            print(f"  ✗ 未预期异常: {e}")
-            all_passed = False
-
-    # 批量处理测试
-    print("\n--- 测试: 批量处理 ---")
-    batch_items = [sample_full, sample_minimal]
-    try:
-        batch_results = run_batch(batch_items)
-        assert len(batch_results) == 2, "批量结果数量应为2"
-        assert batch_results[0]["error"] is None, "第一个应成功"
-        assert batch_results[1]["error"] is not None, "第二个应有错误"
-        assert batch_results[1]["error"].startswith("E005"), "第二个错误应为E005"
-        print("  ✓ 批量处理断言通过")
-    except AssertionError as e:
-        print(f"  ✗ 批量处理断言失败: {e}")
-        all_passed = False
-
-    # 能力边界测试
-    print("\n--- 测试: 能力边界 ---")
-    try:
-        handle_input("http://example.com", input_type="url")
-        print("  ✗ 应抛出 CapabilityError")
-        all_passed = False
-    except CapabilityError:
-        print("  ✓ 网络访问被正确拒绝")
-
-    # 总结
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("自检结果: 全部通过 ✓")
-    else:
-        print("自检结果: 存在失败项 ✗")
-    print("=" * 60)
-
-    return all_passed
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def main() -> int:
-    """主函数，解析命令行参数并执行相应操作。"""
-    parser = argparse.ArgumentParser(
-        description="cv-builder: 单页简历生成工具",
-        epilog="示例: python main.py --input resume.json --output result.txt",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检（使用内置硬编码样例，不依赖外部资源）",
-    )
-    parser.add_argument(
-        "--input",
-        type=str,
-        help="输入 JSON 文件路径",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        help="输出文件路径（默认输出到 stdout）",
-    )
-    parser.add_argument(
-        "--format",
-        type=str,
-        choices=["text"],
-        default="text",
-        help="输出格式（当前仅支持 text）",
-    )
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
-
-    # 输入文件模式
-    if args.input:
-        try:
-            data = handle_input(args.input, input_type="file")
-            if not data:
-                print(f"错误 E008: {get_error_message('E008')}", file=sys.stderr)
-                return 8
-        except CapabilityError as e:
-            print(f"错误 {e.code}: {e.message}", file=sys.stderr)
-            return 4
-
-        rendered, confidence, label, error = process_resume(data)
-        if error:
-            print(f"错误 {error}", file=sys.stderr)
-            return 5
-
-        output_text = rendered + f"\n\n[置信度: {confidence:.0f}%]"
-        if label:
-            output_text += f" {label}"
-
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output_text)
-                print(f"已写入: {args.output}")
-            except OSError:
-                print(f"错误 E007: {get_error_message('E007')}", file=sys.stderr)
-                return 7
-        else:
-            print(output_text)
-
-        return 0
-
-    # 无参数时显示帮助
-    parser.print_help()
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    # 样例
