@@ -1,173 +1,237 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
 slug: scraper-make-ez
 name: scraper-make-ez
-displayName: 爬虫采集
-description: 仅供学习与参考用途。使用本。当用户需要网页抓取 数据采集、进行scraper make ez相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+displayName: 网页采集 数据清洗 结构化输出
+description: 将网页、文件或原始数据转化为规范结构化结果，附置信度标注。
 version: 1.0.0
-author: skill-factory-auto
-agent_created: true
-trigger_words:
-  - "爬虫采集"
-  - "scraper make ez"
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/scraper-make-ez
+license: MIT
+source_project: original
+source_url: 
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
 ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: 数据工坊·林默
+agent_created: true
+trigger_words: ["网页抓取", "数据采集", "scraper make ez", "爬虫", "结构化输出", "数据清洗"]
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+# scraper-make-ez 技能手册
+
+## 一、能力边界速查卡
+
+本技能用于将**非结构化或半结构化输入**（网页、文本、CSV、JSON 等）转换为**符合约定字段结构的结果**，并给出每条结果的置信度评估。
+
+| 维度 | 说明 |
+|------|------|
+| **输入来源** | 用户直接粘贴的文本 / 本地文件路径 / URL 地址 |
+| **输出格式** | JSON（默认）、CSV（可选）、Markdown 表格（可选） |
+| **核心能力** | 字段提取、类型识别、批量处理、置信度标注、格式转换 |
+| **不处理** | 验证码破解、登录态绕过、反爬对抗、数据真实性核验 |
+| **适用对象** | 个人学习研究、原型验证、小规模数据整理（≤5000 条/批） |
+
+**不能做的事：**
+
+- 不执行任何违反目标网站 robots.txt 或服务条款的抓取行为
+- 不处理包含个人隐私（身份证、手机号、住址）的批量数据
+- 不保证提取字段 100% 准确——所有输出均带置信度标记
+
+---
+
+## 二、触发方式与场景映射
+
+当你的请求中出现以下任一情况时，本技能自动激活：
+
+| 触发词（含变体） | 典型用户表述 | 本技能响应 |
+|------------------|--------------|------------|
+| 网页抓取 / 爬虫 | "帮我把这个页面里的商品信息抓下来" | 解析 HTML → 提取商品字段 |
+| 数据采集 / 收集 | "采集这 50 个 URL 里的标题和日期" | 批量请求 → 结构化输出 |
+| scraper make ez | "用 scraper make ez 处理一下" | 按标准流程执行 |
+| 数据清洗 / 整理 | "把这个 CSV 里的脏数据整理成规整格式" | 字段映射 → 类型校正 |
+| 结构化输出 | "把这段文本转成 JSON" | 语义解析 → 键值对输出 |
+
+**场景示例：**
+
+- 输入：`https://example.com/news/2024/01/15/article-123` → 输出：`{"title": "...", "date": "2024-01-15", "author": "...", "confidence": 0.92}`
+- 输入：`data.csv`（含 200 行混合格式数据）→ 输出：清洗后的 `data_clean.json`
+
+---
+
+## 三、标准执行流程
+
+### 前置条件
+
+1. 待处理文件与工作目录在同一路径下，文件名不含空格或特殊字符
+2. URL 可直接访问（无证书错误、无重定向循环）
+3. 用户已明确输出格式偏好（默认 JSON）
+
+### 执行步骤
+
+| 步骤 | 操作 | 说明 |
+|------|------|------|
+| 1 | **输入确认** | 识别输入类型（文本/文件/URL），确认字段需求 |
+| 2 | **单样本试运行** | 取 1 条数据执行完整流程，核对输出字段与格式 |
+| 3 | **批量执行** | 确认无误后处理全量数据，保留原始文件备份 |
+| 4 | **置信度标注** | 每条结果附加 `confidence` 字段（0.0~1.0） |
+| 5 | **输出生成** | 按约定格式输出，附字段完整性自查表 |
+| 6 | **结果校验** | 抽查 ≥5% 输出条目，与源数据比对关键字段 |
+
+### 输出规范
+
+```json
+{
+  "schema_version": "1.0",
+  "generated_at": "2024-01-15T10:30:00Z",
+  "total_items": 2,
+  "items": [
+    {
+      "title": "示例标题",
+      "date": "2024-01-15",
+      "author": "张三",
+      "confidence": 0.95,
+      "warnings": []
+    },
+    {
+      "title": "缺失标题",
+      "date": null,
+      "author": "李四",
+      "confidence": 0.60,
+      "warnings": ["title 字段缺失，已置空"]
+    }
+  ]
+}
+```
+
+**字段完整性自查表：**
+
+| 检查项 | 通过标准 |
+|--------|----------|
+| 必填字段 | 所有约定字段均存在（值可为 null） |
+| 类型正确 | 日期为 ISO 格式，数值为 Number 类型 |
+| 置信度标注 | 每条结果均有 0.0~1.0 的 confidence 值 |
+| 警告信息 | 缺失/异常字段有明确 warnings 说明 |
+
+---
+
+## 四、置信度门控机制
+
+当信息不足以确定某个字段值时，**不猜测、不编造**，按以下规则处理：
+
+| 场景 | 处理方式 | 示例 |
+|------|----------|------|
+| 字段缺失 | 置为 `null`，confidence 降 0.2 | `"author": null` |
+| 格式冲突 | 保留原始值，标注 `[需核实:字段名]` | `"date": "[需核实:date]"` |
+| 多值歧义 | 取第一个，warnings 中列出全部候选 | `"warnings": ["存在多个日期，已取首个"]` |
+| 编码异常 | 替换为 U+FFFD，confidence 降 0.3 | `"title": "商品���名"` |
+
+**置信度评分规则：**
+
+- 基础分 1.0，每出现一次缺失/异常扣 0.1~0.3
+- 低于 0.5 的结果在输出中单独标记 `"needs_review": true`
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| E001 | 输入为空 | "未检测到有效输入，请提供文本、文件路径或 URL" | 检查输入参数 |
+| E002 | URL 无法访问 | "目标 URL 返回 404/超时，请确认地址有效性" | 手动浏览器验证 URL |
+| E003 | 文件格式不支持 | "仅支持 .txt/.csv/.json/.html 格式" | 转换格式后重试 |
+| E004 | 字段映射失败 | "无法将源数据映射到目标字段结构" | 检查源数据表头/键名 |
+| E005 | 批量处理中断 | "第 N 条数据异常，已停止处理" | 移除异常数据后重试 |
+| E006 | 输出写入失败 | "目标路径无写入权限或磁盘已满" | 更换输出路径 |
+
+---
+
+## 六、FAQ 与反模式对照
+
+| 常见坑 | 反模式（错误做法） | 正模式（推荐做法） |
+|--------|---------------------|---------------------|
+| 忽略试运行 | 直接批量处理 5000 条，发现字段全错 | 先跑 1 条样本，确认 schema 正确再全量 |
+| 覆盖原始文件 | 清洗后直接覆盖源 CSV | 输出到新文件 `_clean.json`，保留原件 |
+| 无置信度标注 | 输出结果不带任何质量指示 | 每条附 confidence 和 warnings |
+| 编造缺失值 | 日期缺失时填"2024-01-01" | 置 null 并标注 `[需核实:date]` |
+| 忽略编码问题 | 直接丢弃乱码字符 | 替换为 U+FFFD 并记录 warning |
+
+---
+
+## 七、渐进式阅读路径
+
+### 新手路径（5 分钟上手）
+
+1. 阅读「能力边界速查卡」确认本技能是否适用
+2. 准备一个单条数据样本
+3. 按「标准执行流程」步骤 1-2 执行
+4. 查看输出 JSON 的 confidence 字段
+
+### 进阶路径（深度使用）
+
+1. 熟悉「置信度门控机制」，理解各扣分场景
+2. 掌握「错误码体系」，能自主排查 E001~E006
+3. 自定义字段映射规则（需在输入时声明 schema）
+4. 批量处理前编写校验脚本，自动比对源数据与输出
+
+### 自定义格式示例
+
+```json
+{
+  "custom_schema": {
+    "title": "string",
+    "price": "number",
+    "in_stock": "boolean"
+  }
+}
+```
+
+---
+
+## 八、用户协议
+
+使用本技能即表示您同意以下条款：
+
+1. **责任承担**：使用者自行承担因使用本技能产生的全部责任，包括但不限于数据合法性、目标网站合规性、输出结果准确性。
+2. **合法用途**：本技能仅供学习、研究、个人参考使用，禁止用于商业爬取、隐私侵犯、数据倒卖等非法场景。
+3. **禁止反向工程**：不得对本技能的逻辑、提示词结构进行反向工程、反编译或提取核心算法。
+4. **无担保声明**：本技能按"现状"提供，不附带任何明示或暗示的担保。
+
 <!-- user-agreement-injected -->
 
+---
 
-# 爬虫采集
+## 九、许可证（License）
 
-> A powerful starter template for building undetectable web scrapers and browser automation bots.
+本技能采用 MIT 许可证授权：
 
-## 一、能力边界（一页纸速查卡）
-
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
-
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
-
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
-
-## 二、触发方式（说大白话就能用）
-
-**触发词表（6类场景）：**
-| 爬虫采集 | 通用场景 |
-| scraper make ez | 通用场景 |
-
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 爬虫采集，进入标准流程 |
-| 把这个转成另一种格式 | 启动 爬虫采集，进入标准流程 |
-| 批量弄一下这些 | 启动 爬虫采集，进入标准流程 |
-
-## 三、标准流程（5分钟上手路径）
-
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
-
-## 许可证（License）
-
-```text
+```
 MIT License
 
-Copyright (c) 2026 原创作者（自持版权）
+Copyright (c) 2024 数据工坊·林默
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
+
 <!-- professional-license-embedded -->
 
-## 前置条件
+---
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
