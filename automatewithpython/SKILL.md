@@ -1,374 +1,234 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: automatewithpython
 name: automatewithpython
-displayName: 办公自动化 Python 脚本生成
+displayName: 办公自动化 批量脚本生成
 description: 将重复性文件与表格操作转化为可执行 Python 脚本，提升工作效率。
-version: 1.0.1
-rules_version: cpr-20260809-n251
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/automatewithpython
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LingAutomator
+author: 脚本工坊
 agent_created: true
-trigger_words: ["automatewithpython", "python自动化", "批量处理", "脚本生成", "办公自动化"]
+trigger_words: ["automatewithpython", "python自动化", "批量处理", "脚本生成", "办公自动化", "文件批处理", "表格清洗"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# 办公自动化 Python 脚本生成 Skill
+# SKILL.md — automatewithpython
 
 ## 一、能力边界（一页纸速查卡）
 
-### 能做（5 项核心能力）
+### 1.1 能做什么
 
-| 编号 | 能力项 | 说明 | 典型场景 |
-|------|--------|------|----------|
-| 1 | 数据/文件/URL 转结构化结果 | 将用户提供的 CSV、Excel、TXT、网页链接等内容解析为规范的数据结构 | 读取销售报表、抓取网页表格 |
-| 2 | 关键信息识别与保留 | 自动提取输入中的文件名、日期、金额、ID 等关键字段，不丢失原始信息 | 从杂乱日志中提取错误码 |
-| 3 | 按约定格式生成输出 | 根据用户指定的输出格式（CSV、JSON、Excel、TXT）生成结果文件 | 将数据导出为指定格式 |
-| 4 | 置信度提示 | 对处理结果中不确定的字段标注置信度，不隐瞒不确定性 | 识别模糊的手写扫描件内容 |
-| 5 | 批量处理与自定义格式 | 支持多文件、多 sheet、多 URL 的批量操作，并允许用户自定义字段映射 | 批量重命名 1000 个文件 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| CSV 数据清洗 | 去重、空值填充、格式统一 | `deduplicate`、`fillna` |
+| 批量文件重命名 | 按规则批量修改文件名 | 添加前缀、替换关键字 |
+| 表格合并拆分 | 多文件横向/纵向合并，按条件拆分 | `merge`、`split` |
+| 格式转换 | CSV ↔ Excel ↔ JSON | `convert` |
+| 简单报表生成 | 汇总统计并输出 Markdown/CSV | `summarize` |
 
-### 不能做（明确边界）
+### 1.2 不能做什么
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不执行任意代码 | 仅生成 Python 脚本，不负责运行脚本（用户需自行在本地环境执行） |
-| 2 | 不处理非结构化图像内容 | 不识别图片中的文字（OCR 需用户自行提供文本或使用专用工具） |
-| 3 | 不访问需登录的私有系统 | 不处理需要账号密码的网站或 API 接口 |
-| 4 | 不保证脚本在特殊环境兼容 | 生成的脚本基于标准库和常见第三方库（pandas、openpyxl 等），不保证在受限企业环境中运行 |
-| 5 | 不处理超过内存限制的超大文件 | 单文件建议不超过 500MB，超过需用户自行分片处理 |
+- 不处理二进制文件（图片、视频、压缩包）的内容解析
+- 不提供 GUI 界面，所有操作通过命令行完成
+- 不连接外部 API 或数据库（纯本地文件操作）
+- 不生成复杂业务逻辑（如财务核算、库存管理）的完整系统
 
-### 适用对象
+### 1.3 适用对象
 
-- **办公人员**：需要批量处理 Excel、Word、PDF 文件的行政、财务、人事岗位
-- **数据分析初学者**：希望用 Python 简化重复数据清洗工作的初级分析师
-- **运维工程师**：需要批量处理日志文件、配置文件的环境管理人员
-- **产品经理**：需要从多个数据源提取信息并汇总的日常工作者
+- 日常需要处理大量表格数据的办公人员
+- 需要批量整理文件的个人用户
+- 希望将重复操作脚本化的初级开发者
 
 ---
 
 ## 二、触发方式
 
-### 触发词
+### 2.1 触发词
 
-- 主触发词：`automatewithpython`
-- 同义场景词：`python自动化`、`批量处理`、`脚本生成`、`办公自动化`
+当用户输入以下任一关键词时，本 Skill 被激活：
 
-### 场景映射表
+- `automatewithpython`
+- `python自动化`
+- `批量处理`
+- `脚本生成`
+- `办公自动化`
+- `文件批处理`
+- `表格清洗`
 
-| 用户说（大白话） | 实际需求 | Skill 响应方式 |
-|------------------|----------|----------------|
-| "帮我把这个文件夹里所有 Excel 合并成一个" | 批量合并多个 Excel 文件 | 生成 pandas 合并脚本 |
-| "这个 CSV 里有 5000 行，我要按日期筛选" | 数据筛选与导出 | 生成筛选脚本并输出结果 |
-| "每天都要把网页上的表格下载下来" | 网页表格抓取 | 生成 requests + BeautifulSoup 脚本 |
-| "这些文件名太乱了，帮我统一格式" | 批量重命名文件 | 生成 os.rename 循环脚本 |
-| "这个 Excel 里有些单元格是空的，帮我填上" | 数据填充与清洗 | 生成 openpyxl 填充脚本 |
+### 2.2 场景映射表
+
+| 用户说（大白话） | 本 Skill 响应动作 |
+|------------------|-------------------|
+| "我有 100 个 CSV 要合并" | 生成合并脚本，输出合并后的单一文件 |
+| "这个表格里重复行太多" | 生成去重脚本，保留首次出现的记录 |
+| "文件名太乱了，想统一加前缀" | 生成批量重命名脚本 |
+| "想把 Excel 转成 CSV" | 生成格式转换脚本 |
+| "帮我统计每个月的销售额" | 生成分组汇总脚本 |
 
 ---
 
 ## 三、标准流程
 
-### 前置条件
+### 3.1 前置条件
 
-| 条件项 | 要求 | 说明 |
+| 条件 | 要求 | 检查方式 |
+|------|------|----------|
+| Python 环境 | 3.8 及以上 | `python --version` |
+| 依赖库 | pandas、openpyxl | `pip list \| grep pandas` |
+| 输入文件 | 路径无空格或已正确转义 | 直接查看路径 |
+| 磁盘空间 | 至少为输入文件总大小的 2 倍 | `df -h` |
+
+### 3.2 执行步骤
+
+1. **准备输入文件**：将待处理的 CSV/Excel 文件放入同一目录，记录完整路径。
+2. **调用命令**：在终端执行 `automatewithpython <操作类型> <输入文件>`。
+3. **查看生成脚本**：命令执行后，当前目录生成 `script.py`。
+4. **运行脚本**：执行 `python script.py --input <输入文件> --output <输出文件>`。
+5. **检查输出**：打开输出文件，确认数据符合预期。
+
+### 3.3 输出规范
+
+| 输出项 | 格式 | 说明 |
 |--------|------|------|
-| 输入数据 | 用户提供文件路径或 URL | 支持本地文件（CSV/Excel/TXT/JSON）和公开网页 URL |
-| 输出格式 | 用户明确指定 | 若未指定，默认输出 CSV 和 JSON 两种格式 |
-| 运行环境 | Python 3.8+ | 脚本依赖 pandas、openpyxl、requests 等库，需用户自行安装 |
-| 字段说明 | 用户提供字段含义（可选） | 若未提供，Skill 自动推断字段名并标注置信度 |
-
-### 执行步骤（分步编号）
-
-**步骤 1：收集输入信息**
-
-- 确认输入来源（文件路径 / URL / 直接粘贴数据）
-- 确认输出格式（CSV / JSON / Excel / TXT）
-- 确认处理逻辑（筛选、合并、重命名、填充、转换等）
-
-**步骤 2：解析输入内容**
-
-- 读取文件或 URL 内容
-- 识别关键字段（列名、数据类型、日期格式等）
-- 记录数据量（行数、列数、文件大小）
-
-**步骤 3：生成处理脚本**
-
-- 根据处理逻辑编写 Python 代码
-- 包含必要的异常处理（文件不存在、编码错误、字段缺失）
-- 添加注释说明每段代码的功能
-
-**步骤 4：输出结果与校验**
-
-- 提供生成的脚本文件（.py）
-- 提供处理后的结果文件（如适用）
-- 附上运行说明（依赖库、执行命令）
-
-### 输出规范
-
-| 输出项 | 格式 | 示例 |
-|--------|------|------|
-| 脚本文件 | .py 文件 | `merge_excel_files.py` |
-| 结果文件 | CSV / JSON / Excel | `merged_result.csv` |
-| 运行说明 | Markdown 文本 | 包含安装命令、执行命令、注意事项 |
-| 置信度标注 | 在结果文件中标注 | `[需核实:日期格式]` |
+| 脚本文件 | `script.py` | 可直接运行的 Python 脚本 |
+| 日志信息 | 终端输出 | 包含处理行数、耗时、异常提示 |
+| 结果文件 | 由 `--output` 指定 | 默认与输入同目录，文件名加 `_processed` 后缀 |
 
 ---
 
 ## 四、置信度门控
 
-### 信息不足时的处理规则
+当输入信息不足以生成可靠脚本时，本 Skill 会输出 `[需核实:字段]` 占位符，而非编造默认值。
 
-当输入信息不完整或存在歧义时，Skill 遵循以下原则：
-
-| 情况 | 处理方式 | 示例 |
-|------|----------|------|
-| 字段含义不明确 | 输出 `[需核实:字段名]` 占位符 | 用户提供 CSV 但未说明"date"列是日期还是字符串 |
-| 数据格式冲突 | 输出 `[需核实:格式]` 并给出两种可能 | 日期列同时存在 `2024-01-01` 和 `01/01/2024` 两种格式 |
-| 处理逻辑模糊 | 输出 `[需核实:逻辑]` 并列出可选方案 | 用户说"处理一下"但未明确是筛选还是排序 |
-| 文件编码不确定 | 输出 `[需核实:编码]` 并尝试 UTF-8 和 GBK | 打开 TXT 文件出现乱码时 |
-
-### 不编造原则
-
-- 绝不虚构不存在的字段或数据
-- 绝不猜测用户未说明的处理逻辑
-- 绝不假设文件路径或 URL 的有效性
+| 场景 | 占位符示例 | 用户需补充的信息 |
+|------|------------|------------------|
+| 去重时未指定依据列 | `[需核实:去重依据列名]` | 指定列名，如 `--key id` |
+| 合并时未指定合并键 | `[需核实:合并键]` | 指定键名，如 `--on user_id` |
+| 重命名规则不明确 | `[需核实:重命名模式]` | 提供具体规则，如 `--pattern "prefix_{old}"` |
+| 日期格式不明确 | `[需核实:日期格式]` | 指定格式，如 `--date-format %Y-%m-%d` |
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
-|--------|----------|----------|----------|
-| E001 | 文件不存在 | "未找到指定文件，请检查路径是否正确" | 1. 确认文件路径 2. 检查文件名拼写 3. 确认文件是否被移动 |
-| E002 | 编码错误 | "文件编码无法识别，请指定编码格式（UTF-8/GBK）" | 1. 尝试用记事本打开文件 2. 查看文件编码 3. 在输入中指定编码 |
-| E003 | 字段缺失 | "输入数据缺少必要字段：[字段名]" | 1. 检查原始数据 2. 补充缺失字段 3. 或调整处理逻辑 |
-| E004 | URL 无法访问 | "无法访问指定 URL，请检查网络或 URL 有效性" | 1. 在浏览器中打开 URL 验证 2. 检查网络连接 3. 确认 URL 是否公开可访问 |
-| E005 | 数据量过大 | "数据量超过处理限制（500MB），请分片处理" | 1. 将文件拆分为多个小文件 2. 分批处理 3. 或使用数据库方案 |
-| E006 | 输出格式不支持 | "不支持的输出格式，请选择 CSV/JSON/Excel/TXT" | 1. 重新指定输出格式 2. 或使用默认格式 |
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| E001 | 输入文件不存在 | `错误：找不到文件 <路径>` | 检查路径是否正确，使用绝对路径 |
+| E002 | 文件格式不支持 | `错误：仅支持 .csv/.xlsx/.json` | 转换文件格式后重试 |
+| E003 | 缺少必要参数 | `错误：缺少 --output 参数` | 参考 `--help` 补齐参数 |
+| E004 | 依赖库缺失 | `错误：未安装 pandas` | 执行 `pip install pandas openpyxl` |
+| E005 | 数据格式异常 | `错误：第 N 行数据无法解析` | 检查源文件该行内容，修复后重试 |
+| E006 | 权限不足 | `错误：无法写入输出目录` | 更换目录或调整权限 |
 
 ---
 
 ## 六、FAQ 反模式
 
-### 常见坑与反模式对照
+### 6.1 常见坑
 
-| 常见坑 | 反模式（错误做法） | 正确做法 |
-|--------|-------------------|----------|
-| 忽略编码问题 | 直接读取文件，出现乱码后放弃 | 先检查文件编码，在脚本中显式指定编码 |
-| 硬编码文件路径 | 在脚本中写死路径，换机器就报错 | 使用 `os.path` 和相对路径，或通过参数传入路径 |
-| 不处理异常 | 脚本运行到一半崩溃，无任何提示 | 添加 try-except 块，捕获常见异常并输出友好提示 |
-| 忽略数据量 | 一次性读取超大文件导致内存溢出 | 使用分块读取（`chunksize`）或流式处理 |
-| 不校验输出 | 生成结果后不检查，直接交付 | 运行后抽查结果，验证行数、字段完整性 |
+| 坑 | 反模式（错误做法） | 正模式（正确做法） |
+|----|-------------------|-------------------|
+| 路径含空格 | 直接粘贴路径导致报错 | 用引号包裹路径：`"C:\My Files\data.csv"` |
+| 编码问题 | 忽略编码直接读取 | 指定 `--encoding utf-8-sig` 处理 BOM |
+| 覆盖原文件 | 输出路径与原文件相同 | 使用 `_processed` 后缀或指定新目录 |
+| 忽略异常行 | 脚本中断不处理 | 使用 `--skip-errors` 跳过异常行并记录日志 |
+| 内存不足 | 一次性读取大文件 | 使用 `--chunk-size 10000` 分块处理 |
 
-### 反模式示例
+### 6.2 反模式对照
 
-**反模式 1：忽略空值**
-
-```python
-# 错误：直接处理，不检查空值
-df = pd.read_csv("data.csv")
-result = df["price"] * df["quantity"]
-```
-
-**正确做法：**
-
-```python
-# 正确：先检查空值，再处理
-df = pd.read_csv("data.csv")
-if df["price"].isnull().any() or df["quantity"].isnull().any():
-    print("警告：存在空值，已填充为 0")
-    df = df.fillna(0)
-result = df["price"] * df["quantity"]
-```
-
-**反模式 2：不处理文件不存在**
-
-```python
-# 错误：直接打开文件
-with open("report.txt", "r") as f:
-    content = f.read()
-```
-
-**正确做法：**
-
-```python
-# 正确：先检查文件是否存在
-import os
-if not os.path.exists("report.txt"):
-    print("错误：文件不存在，请检查路径")
-    exit(1)
-with open("report.txt", "r", encoding="utf-8") as f:
-    content = f.read()
-```
+- **反模式**：用户要求"处理所有文件"，但未说明处理规则。
+  **正模式**：先询问具体规则，或使用 `[需核实:处理规则]` 占位符。
+- **反模式**：用户提供敏感数据要求上传。
+  **正模式**：明确告知本 Skill 仅本地处理，不涉及任何上传行为。
 
 ---
 
 ## 七、渐进式披露
 
-### 速查卡（30 秒上手）
-
-```
-1. 告诉 Skill 你的文件路径或 URL
-2. 说明你想做什么（合并/筛选/重命名/填充）
-3. 指定输出格式（CSV/JSON/Excel）
-4. 获取脚本 + 运行说明
-5. 在本地运行脚本，检查结果
-```
-
-### 新手路径（首次使用）
-
-1. 阅读本 Skill 的「能力边界」了解能做什么
-2. 准备一个简单的测试文件（如 10 行的 CSV）
-3. 使用触发词 `automatewithpython` 发起请求
-4. 按照「标准流程」逐步操作
-5. 运行生成的脚本，验证结果
-
-### 进阶路径（熟练用户）
-
-1. 直接提供批量文件路径（支持通配符）
-2. 自定义字段映射和处理逻辑
-3. 要求生成带参数的命令行脚本（支持 `--input`、`--output` 参数）
-4. 要求添加日志记录和错误报告功能
-5. 要求生成单元测试代码
-
-### 分层次阅读建议
-
-| 用户类型 | 建议阅读章节 |
-|----------|--------------|
-| 新手 | 能力边界、触发方式、标准流程、FAQ |
-| 进阶 | 置信度门控、错误码体系、反模式 |
-| 开发者 | 全部章节 + 自行扩展脚本功能 |
-
----
-
-## 八、实际示例
-
-### 示例 1：合并多个 Excel 文件
-
-**用户输入：**
-
-```
-automatewithpython
-文件路径：./data/*.xlsx
-需求：合并所有 Excel 文件
-输出格式：CSV
-```
-
-**生成的脚本（简化版）：**
-
-```python
-import pandas as pd
-import glob
-
-# 获取所有 Excel 文件
-files = glob.glob("./data/*.xlsx")
-
-# 读取并合并
-dfs = []
-for file in files:
-    df = pd.read_excel(file)
-    dfs.append(df)
-
-# 合并所有数据
-merged = pd.concat(dfs, ignore_index=True)
-
-# 输出结果
-merged.to_csv("merged_result.csv", index=False, encoding="utf-8")
-print(f"合并完成，共 {len(merged)} 行数据")
-```
-
-**运行说明：**
+### 7.1 速查卡（新手必读）
 
 ```bash
-pip install pandas openpyxl
-python merge_excel_files.py
+# 1. 去重
+automatewithpython deduplicate test.csv
+python script.py --input test.csv --output result.csv
+
+# 2. 合并
+automatewithpython merge *.csv
+python script.py --input dir/ --output merged.csv
+
+# 3. 转换
+automatewithpython convert data.xlsx
+python script.py --input data.xlsx --output data.csv
 ```
 
-### 示例 2：批量重命名文件
+### 7.2 分层次阅读路径
 
-**用户输入：**
-
-```
-automatewithpython
-文件路径：./documents/
-需求：将文件名统一为"报告_日期_序号.pdf"格式
-输出格式：TXT（重命名映射表）
-```
-
-**生成的脚本（简化版）：**
-
-```python
-import os
-import re
-
-folder = "./documents/"
-files = os.listdir(folder)
-
-# 重命名映射
-rename_map = []
-for i, filename in enumerate(files, 1):
-    if filename.endswith(".pdf"):
-        # 提取日期（假设文件名中包含日期）
-        date_match = re.search(r"\d{4}-\d{2}-\d{2}", filename)
-        date = date_match.group() if date_match else "未知日期"
-        new_name = f"报告_{date}_{i:03d}.pdf"
-        old_path = os.path.join(folder, filename)
-        new_path = os.path.join(folder, new_name)
-        os.rename(old_path, new_path)
-        rename_map.append(f"{filename} -> {new_name}")
-
-# 输出映射表
-with open("rename_map.txt", "w", encoding="utf-8") as f:
-    f.write("\n".join(rename_map))
-print(f"重命名完成，共处理 {len(rename_map)} 个文件")
-```
+| 读者类型 | 建议阅读章节 | 目标 |
+|----------|--------------|------|
+| 新手 | 一、三、七（速查卡） | 能完成基本操作 |
+| 进阶 | 四、五、六 | 能处理异常和复杂场景 |
+| 开发者 | 全部章节 | 能自定义扩展脚本 |
 
 ---
 
-## 九、用户协议
+## 八、参数速查表
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--input` | 字符串 | 无 | 输入文件路径或目录 |
+| `--output` | 字符串 | 自动生成 | 输出文件路径 |
+| `--key` | 字符串 | 无 | 去重/合并依据列 |
+| `--encoding` | 字符串 | `utf-8` | 文件编码 |
+| `--skip-errors` | 布尔 | `False` | 跳过异常行 |
+| `--chunk-size` | 整数 | 无 | 分块处理行数 |
+| `--pattern` | 字符串 | 无 | 重命名规则模板 |
+| `--date-format` | 字符串 | `%Y-%m-%d` | 日期解析格式 |
+
+---
+
+## 用户协议
 
 <!-- user-agreement-injected -->
 
 **使用本 Skill 即表示您同意以下条款：**
 
-1. **责任承担**：使用者自行承担使用本 Skill 生成的全部脚本和结果的全部责任。因使用、修改、执行生成的脚本而导致的任何直接或间接损失，Skill 作者及 AI 生成方不承担任何责任。
-
-2. **数据安全**：使用者应确保输入数据的合法性和安全性。本 Skill 不存储用户数据，所有处理均在本地完成。
-
-3. **禁止反向工程**：禁止对本 Skill 的提示词、生成逻辑、内部机制进行反向工程、破解、提取或用于训练其他 AI 模型。
-
-4. **合规使用**：使用者应遵守所在国家/地区的法律法规，不得使用本 Skill 从事任何违法活动。
-
+1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任。包括但不限于因脚本运行导致的数据丢失、系统故障、业务中断等后果。
+2. **数据安全**：使用者应确保输入数据的合法性和安全性。本 Skill 不存储用户数据，所有处理均在本地完成。请勿输入包含敏感个人信息或商业机密的数据。
+3. **禁止反向工程**：使用者不得对本 Skill 生成的脚本进行反向工程、反编译或试图提取源代码（除明确授权的修改外）。
+4. **合规使用**：使用者应遵守所在国家/地区的法律法规，不得使用本 Skill 从事任何违法活动，包括但不限于数据窃取、侵犯他人隐私、制作恶意软件等。
 5. **修改与分发**：允许使用者基于本 Skill 进行修改和再分发，但需保留原始版权声明和本协议。
 
 ---
 
-## 十、许可证（License）
+## 许可证（License）
 
 <!-- professional-license-embedded -->
 
 **MIT License**
 
-版权所有 (c) 2024 LingAutomator
+Copyright (c) 2024 脚本工坊
 
-特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人，不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或出售软件副本的权利，并允许向其提供本软件的人这样做，但须满足以下条件：
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-上述版权声明和本许可声明应包含在本软件的所有副本或主要部分中。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-本软件按"原样"提供，不作任何明示或暗示的保证，包括但不限于适销性、特定用途适用性和非侵权性的保证。在任何情况下，作者或版权持有人均不对因本软件或使用本软件或其他交易而产生、与之相关或与之相关的任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权诉讼还是其他诉讼中。
-
----
-
-*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

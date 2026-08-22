@@ -18,7 +18,7 @@ import tempfile
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 
 # =============================================================================
@@ -875,16 +875,19 @@ def main():
         help="将生成的脚本保存到文件"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     parser.add_argument("--force", action="store_true")  # R4 强制写盘
 
 
     parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
 
     global dry_run
 
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    dry_run = getattr(args, "dry_run", False)  # v3.268 同步到全局
 
     # 自检模式
     if args.selftest:
