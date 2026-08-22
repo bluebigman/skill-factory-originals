@@ -1,141 +1,255 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: plexus
 name: plexus
-displayName: 多智能体工具链 一键装配 环境配置
+displayName: 智能体工具链 批量配置与编排
 description: 为AI编程工具批量配置MCP服务、技能与规则，支持主流CLI智能体。
-version: 1.0.1
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/plexus
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: skill-forge-studio
+author: LingToolsmith
 agent_created: true
-trigger_words: ["plexus", "MCP配置", "技能安装", "规则同步", "AI工具链", "环境初始化", "智能体配置"]
+trigger_words: ["plexus", "MCP配置", "技能安装", "规则同步", "AI工具链", "智能体配置", "CLI工具集成"]
 ---
-
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# SKILL.md — plexus 技能文档
+# Plexus Skill 文档
 
-## 1. 能力边界速查卡
+## 1. 能力边界（一页纸速查卡）
 
-### 1.1 能做什么（核心能力清单）
+### 1.1 能做什么
 
-| 编号 | 能力项 | 说明 | 适用场景示例 |
-|------|--------|------|--------------|
-| C1 | 数据/文件/URL 结构化转换 | 将用户提供的原始输入（文本、文件路径、网页链接）解析为结构化结果 | 从 README 中提取 MCP 配置项 |
-| C2 | 关键信息识别与保留 | 自动过滤无关内容，保留服务名、端口、命令、参数等关键字段 | 识别 docker-compose 中的服务定义 |
-| C3 | 按约定格式生成输出 | 根据用户指定的格式（JSON/YAML/TOML）输出配置结果 | 生成 `.mcp.json` 或 `settings.json` 片段 |
-| C4 | 置信度标注 | 对识别结果给出可信度评估，低置信度字段明确标注 | 识别到疑似路径但无法确认时标注 `[需核实:path]` |
-| C5 | 批量处理与自定义格式 | 支持多文件/多 URL 输入，支持用户自定义输出模板 | 批量转换 10 个仓库的配置为统一格式 |
+| 能力项 | 说明 | 输入示例 |
+|--------|------|----------|
+| MCP 服务批量配置 | 为多个 CLI 智能体统一写入 MCP 服务端点配置 | `plexus mcp --add server=github --url=https://mcp.example.com/sse` |
+| 技能包安装 | 将本地或远程技能包注册到目标智能体的技能目录 | `plexus skill --install ./skills/pdf-tools` |
+| 规则同步 | 将项目级规则文件分发到各智能体的规则加载路径 | `plexus rules --sync ./.plexus/rules/` |
+| 配置审计 | 检查现有配置的完整性与冲突项 | `plexus --selftest` |
+| 版本查询 | 输出当前工具链版本信息 | `plexus --version` |
 
-### 1.2 不能做什么（明确边界）
+### 1.2 不能做什么
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不执行远程安装 | 本 Skill 仅生成配置内容，不直接调用系统命令安装软件 |
-| L2 | 不保证兼容性 | 生成的配置是否适配目标工具版本，需用户自行验证 |
-| L3 | 不处理二进制文件 | 仅支持文本类文件（`.md`、`.json`、`.yaml`、`.toml`、`.txt` 等） |
-| L4 | 不进行身份认证 | 涉及 API Key、Token 等敏感信息，仅做占位符处理，不代填 |
+- 不能直接修改智能体二进制文件或核心引擎逻辑。
+- 不能自动重启或热加载正在运行的智能体进程（需手动重启）。
+- 不能解析或转换非标准格式的 MCP 协议（如私有二进制协议）。
+- 不能保证所有第三方 MCP 服务的可用性与稳定性。
 
 ### 1.3 适用对象
 
-- 使用 Claude Code、Codex、Cursor、Gemini CLI、Qwen Code 等 CLI 工具的开发者
-- 需要统一管理多个 AI 工具配置的团队或个人
-- 需要将现有项目配置迁移到新 AI 工具链的迁移场景
+- 使用 Claude Code、Codex CLI、Gemini CLI 等命令行智能体的开发者。
+- 需要统一管理多项目、多智能体配置的团队维护者。
+- 希望在 CI/CD 流水线中自动化配置同步的运维工程师。
 
+---
 
-## 许可证（License）
+## 2. 触发方式与场景映射
 
-```text
-MIT License
+### 2.1 触发词
 
-Copyright (c) 2026 SkillForge Lab
+直接使用 `plexus` 命令，或以下同义场景词：
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+- `MCP配置`
+- `技能安装`
+- `规则同步`
+- `AI工具链`
+- `智能体配置`
+- `CLI工具集成`
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+### 2.2 场景映射表
+
+| 用户说（大白话） | 实际触发动作 | 命令示例 |
+|------------------|--------------|----------|
+| "帮我把这个 MCP 服务加到所有智能体里" | 批量添加 MCP 端点 | `plexus mcp --add --global` |
+| "新来的同事需要装那套 PDF 技能" | 安装技能包到指定智能体 | `plexus skill --install ./skills/pdf-tools --target claude-code` |
+| "项目规则改了，同步一下" | 同步规则文件 | `plexus rules --sync` |
+| "检查一下我的配置有没有问题" | 运行自检 | `plexus --selftest` |
+| "你现在什么版本？" | 查询版本 | `plexus --version` |
+
+---
+
+## 3. 标准流程
+
+### 3.1 前置条件
+
+| 条件 | 要求 | 校验方式 |
+|------|------|----------|
+| 操作系统 | Linux/macOS/Windows (WSL2) | `uname -a` 或 `ver` |
+| 运行时 | Node.js ≥ 18 或 Python ≥ 3.9 | `node -v` / `python3 --version` |
+| 配置文件 | 目标智能体已初始化（存在配置目录） | 检查 `~/.claude-code/` 或 `~/.codex/` 等 |
+| 网络 | 若安装远程技能包需外网访问 | `curl -I https://registry.npmjs.org` |
+
+### 3.2 执行步骤（分步编号）
+
+#### 步骤 1：读取输入参数
+
+```bash
+plexus mcp --add server=github --url=https://mcp.example.com/sse --target all
 ```
+
+参数表：
+
+| 参数 | 必填 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--add` | 是 | - | 添加操作 |
+| `server` | 是 | - | MCP 服务名称（字母数字下划线） |
+| `--url` | 是 | - | 服务端点 URL（http/https/ws） |
+| `--target` | 否 | `all` | 目标智能体：`all`/`claude-code`/`codex`/`gemini-cli` |
+| `--global` | 否 | `false` | 写入全局配置而非项目配置 |
+
+#### 步骤 2：执行核心逻辑
+
+- 解析参数，校验 URL 格式与协议白名单（http/https/ws）。
+- 读取目标智能体的配置文件（JSON/YAML/TOML 自动识别）。
+- 合并 MCP 服务条目，检测重名冲突（若冲突则报错码 `E1002`）。
+- 写入配置前自动备份原文件为 `.bak` 后缀。
+
+#### 步骤 3：输出结构化结果
+
+```json
+{
+  "status": "success",
+  "operation": "mcp.add",
+  "targets": ["claude-code", "codex"],
+  "added": ["github"],
+  "conflicts": [],
+  "backup_paths": ["~/.claude-code/config.json.bak"]
+}
+```
+
+#### 步骤 4：给出下一步建议
+
+- 若添加成功：提示 `请重启目标智能体以加载新配置`。
+- 若存在冲突：提示 `运行 plexus mcp --list 查看当前全部服务`。
+- 若自检失败：提示 `运行 plexus --selftest --verbose 获取详细日志`。
+
+### 3.3 输出规范
+
+- 所有命令输出均为 JSON 格式（除非指定 `--human` 参数）。
+- 退出码：`0` 成功，`1` 参数错误，`2` 运行时错误，`3` 配置冲突。
+- 日志输出到 stderr，结构化结果输出到 stdout。
+
+---
+
+## 4. 置信度门控
+
+当出现以下情况时，**不得**编造或猜测信息，必须输出 `[需核实:字段]` 占位符：
+
+| 场景 | 占位符示例 | 处理方式 |
+|------|------------|----------|
+| 目标智能体类型未知 | `[需核实:target_type]` | 提示用户指定 `--target` |
+| MCP 服务协议无法识别 | `[需核实:protocol]` | 拒绝写入并提示检查 URL |
+| 技能包依赖版本不明确 | `[需核实:dependency_version]` | 跳过安装并列出缺失依赖 |
+| 规则文件格式非标准 | `[需核实:rule_format]` | 提示用户提供 schema 或示例 |
+
+示例输出：
+
+```json
+{
+  "status": "blocked",
+  "reason": "无法识别 MCP 协议",
+  "placeholder": "[需核实:protocol]",
+  "suggestion": "请确认 URL 以 http://、https:// 或 ws:// 开头"
+}
+```
+
+---
+
+## 5. 错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E1001` | 参数缺失 | `缺少必要参数：--url` | 补充参数后重试 |
+| `E1002` | 配置冲突 | `服务名 github 已存在，请使用 --force 覆盖` | 加 `--force` 或换名 |
+| `E1003` | 目标智能体不存在 | `未找到 claude-code 的配置目录` | 先初始化该智能体 |
+| `E2001` | 网络超时 | `无法连接远程技能仓库，请检查网络` | 重试或改用本地路径 |
+| `E2002` | 权限不足 | `配置文件只读，请检查文件权限` | `chmod +w` 后重试 |
+| `E3001` | 格式解析失败 | `配置文件不是合法的 JSON/TOML` | 手动修复或恢复 `.bak` 备份 |
+
+---
+
+## 6. FAQ 反模式对照
+
+| 常见坑（反模式） | 正确做法 |
+|------------------|----------|
+| 直接手动编辑多个智能体的配置文件，导致格式不一致 | 统一使用 `plexus` 命令管理，保证格式一致 |
+| 在配置中添加未验证的 MCP 服务 URL，导致智能体启动失败 | 先 `curl -I` 验证端点可访问性，再写入配置 |
+| 忽略备份文件，配置出错后无法回滚 | 每次写入前自动备份，出错时用 `.bak` 恢复 |
+| 将项目级规则同步到全局目录，污染其他项目 | 明确区分 `--project` 与 `--global` 作用域 |
+| 安装技能包时跳过依赖检查，运行时才发现缺失 | 安装前执行 `plexus skill --check-deps` 预检 |
+
+---
+
+## 7. 渐进式披露
+
+### 7.1 速查卡（30 秒上手）
+
+```bash
+# 查看版本
+plexus --version
+
+# 添加一个 MCP 服务到所有智能体
+plexus mcp --add server=github --url=https://mcp.example.com/sse --target all
+
+# 安装本地技能包
+plexus skill --install ./skills/pdf-tools
+
+# 同步规则文件
+plexus rules --sync
+
+# 自检配置
+plexus --selftest
+```
+
+### 7.2 新手路径（首次使用）
+
+1. 运行 `plexus --selftest` 确认环境就绪。
+2. 使用 `plexus mcp --add` 添加第一个 MCP 服务。
+3. 使用 `plexus skill --install` 安装一个技能包。
+4. 重启智能体，验证配置生效。
+
+### 7.3 进阶路径（批量管理）
+
+1. 编写配置文件 `plexus.config.json` 声明全部服务与技能。
+2. 使用 `plexus apply --config plexus.config.json` 一键应用。
+3. 在 CI 中集成 `plexus --selftest --strict` 作为质量门禁。
+4. 使用 `plexus export` 导出当前配置用于团队共享。
+
+---
+
+## 8. 用户协议
+
+<!-- user-agreement-injected -->
+
+**使用须知：**
+
+1. 本 Skill 仅提供配置管理与编排指导，不构成对任何第三方服务的认可或担保。
+2. 使用者应自行评估并承担因配置变更、技能安装、规则同步等操作可能引发的全部风险与责任。
+3. 禁止对本 Skill 进行反向工程、反编译、破解或试图提取底层源代码（除非适用法律明确允许）。
+4. 使用者应确保其操作符合所在组织的信息安全政策与相关法律法规。
+5. 本 Skill 不提供任何形式的明示或默示保证，包括但不限于适销性、特定用途适用性及非侵权性。
+
+---
+
+## 9. 许可证（License）
+
 <!-- professional-license-embedded -->
 
-## 前置条件
+**MIT License**
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
+版权所有 (c) 2025 原创作者（自持版权）
 
-## 执行步骤
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士使用、复制、修改、合并、发布、分发、再许可及/或出售软件副本的权利，但须满足以下条件：
 
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
+上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
 
-## 输出
+本软件按"原样"提供，不附带任何明示或默示的保证，包括但不限于适销性、特定用途适用性及非侵权性保证。在任何情况下，作者或版权持有人均不对因使用本软件而产生的任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他诉讼中。
 
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
+---
 
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档并自行验证。*
