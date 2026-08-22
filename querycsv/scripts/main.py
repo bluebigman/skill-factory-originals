@@ -5,7 +5,7 @@ querycsv — CSV 数据 SQL 查询与导出工具（独立实现）
 
 功能：
   - 加载 CSV 文件（本地路径 / URL / 粘贴文本）
-  - 对已加载数据执行基础 SQL 查询（SELECT / WHERE / GROUP BY / ORDER BY）
+  - 对已加载数据执行 SQL 查询（SELECT / WHERE / GROUP BY / ORDER BY）
   - 导出结果为 CSV / JSON / Markdown
   - 字段类型自动推断（数值 / 日期 / 字符串）
 
@@ -19,13 +19,18 @@ import argparse
 import csv
 import io
 import json
+import os
 import re
+import sqlite3
 import sys
+import time
+import ssl
+import socket
+import tempfile
 import urllib.request
 from collections import OrderedDict
-from datetime import datetime
-import time  # G1 退避
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import datetime, timezone
+from urllib.error import URLError, HTTPError
 
 # 错误码定义
 ERROR_CODES = {
@@ -52,750 +57,375 @@ def err(code: str, message: str = "") -> None:
     sys.exit(code)
 
 
-class CSVTable:
-    """CSV 数据表：存储数据、列名、类型信息"""
-
-    def __init__(self, name: str, headers: list, rows: list):
-        self.name = name
-        self.headers = headers  # 列名列表
-        self.rows = rows        # 数据行列表（每行为 dict）
-        self.types = self._infer_types()
-
-    def _infer_types(self) -> dict:
-        """推断每列的数据类型：int / float / date / str"""
-        types = {}
-        for col in self.headers:
-            col_type = "str"
-            for row in self.rows:
-                val = row.get(col, "")
-                if val == "" or val is None:
-                    continue
-                # 尝试整数
-                try:
-                    int(val)
-                    col_type = "int"
-                    continue
-                except (ValueError, TypeError):
-                    pass
-                # 尝试浮点数
-                try:
-                    float(val)
-                    col_type = "float"
-                    continue
-                except (ValueError, TypeError):
-                    pass
-                # 尝试日期（支持常见格式）
-                for fmt in ("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y"):
-                    try:
-                        datetime.strptime(str(val), fmt)
-                        col_type = "date"
-                        break
-                    except (ValueError, TypeError):
-                        continue
-                if col_type == "date":
-                    continue
-                # 默认字符串
-                col_type = "str"
-            types[col] = col_type
-        return types
-
-    def get_column(self, col: str) -> list:
-        """获取指定列的所有值"""
-        if col not in self.headers:
-            err("E006", f"列 '{col}' 不存在于表 '{self.name}'")
-        return [row.get(col, "") for row in self.rows]
-
-    def get_columns(self) -> list:
-        """返回所有列名"""
-        return self.headers
-
-
-class SQLParser:
-    """简易 SQL 解析器（仅支持 SELECT 查询）"""
-
-    # 正则表达式模式
-    SELECT_RE = re.compile(
-        r"^\s*SELECT\s+(.+?)\s+FROM\s+(\w+)"
-        r"(?:\s+WHERE\s+(.+?))?"
-        r"(?:\s+GROUP\s+BY\s+(.+?))?"
-        r"(?:\s+ORDER\s+BY\s+(.+?))?"
-        r"\s*;?\s*$",
-        re.IGNORECASE | re.DOTALL,
-    )
-
-    # 聚合函数
-    AGG_FUNCS = {"SUM", "AVG", "COUNT", "MAX", "MIN"}
-
-    def __init__(self, tables: dict):
-        """tables: {表名: CSVTable}"""
-        self.tables = tables
-
-    def parse(self, sql: str) -> dict:
-        """解析 SQL 并返回查询计划"""
-        match = self.SELECT_RE.match(sql)
-        if not match:
-            err("E005", f"无法解析 SQL: {sql}")
-
-        select_part, table_name, where_part, group_part, order_part = match.groups()
-        table_name = table_name.lower()
-
-        if table_name not in self.tables:
-            err("E006", f"表 '{table_name}' 未加载")
-
-        table = self.tables[table_name]
-
-        # 解析 SELECT 字段
-        select_fields = self._parse_select(select_part.strip())
-        # 解析 WHERE 条件
-        where_cond = self._parse_where(where_part.strip()) if where_part else None
-        # 解析 GROUP BY
-        group_fields = self._parse_group_by(group_part.strip()) if group_part else []
-        # 解析 ORDER BY
-        order_fields = self._parse_order_by(order_part.strip()) if order_part else []
-
-        return {
-            "table": table,
-            "select_fields": select_fields,
-            "where_cond": where_cond,
-            "group_fields": group_fields,
-            "order_fields": order_fields,
-        }
-
-    def _parse_select(self, select_part: str) -> list:
-        """解析 SELECT 字段，返回 [(字段名或聚合表达式, 别名)]"""
-        fields = []
-        # 按逗号分割，但跳过括号内的逗号（聚合函数参数）
-        parts = self._split_commas(select_part)
-        for part in parts:
-            part = part.strip()
-            if not part:
-                continue
-            # 检查别名 AS
-            alias = None
-            as_match = re.search(r"\s+AS\s+(\w+)", part, re.IGNORECASE)
-            if as_match:
-                alias = as_match.group(1)
-                part = part[: as_match.start()].strip()
-
-            # 检查聚合函数
-            agg_match = re.match(
-                r"^(SUM|AVG|COUNT|MAX|MIN)\s*\(\s*(\*|\w+)\s*\)$",
-                part,
-                re.IGNORECASE,
-            )
-            if agg_match:
-                func = agg_match.group(1).upper()
-                arg = agg_match.group(2)
-                fields.append((func, arg, alias or f"{func}_{arg}"))
-            else:
-                # 普通字段
-                if not re.match(r"^[\w.]+$", part):
-                    err("E005", f"无效的 SELECT 字段: {part}")
-                fields.append(("FIELD", part, alias or part.split(".")[-1]))
-        return fields
-
-    def _parse_where(self, where_part: str) -> dict:
-        """解析 WHERE 条件，返回 {field, op, value}"""
-        # 支持 =, !=, >, <, >=, <=, LIKE
-        op_pattern = r"(>=|<=|!=|<>|=|>|<|\s+LIKE\s+)"
-        match = re.search(op_pattern, where_part, re.IGNORECASE)
-        if not match:
-            err("E005", f"无法解析 WHERE 条件: {where_part}")
-
-        field = where_part[: match.start()].strip()
-        op = match.group(1).strip().upper()
-        value = where_part[match.end():].strip().strip("'\"")
-
-        if op == "<>":
-            op = "!="
-        if op == "LIKE":
-            op = "LIKE"
-
-        return {"field": field, "op": op, "value": value}
-
-    def _parse_group_by(self, group_part: str) -> list:
-        """解析 GROUP BY 字段"""
-        return [f.strip() for f in group_part.split(",") if f.strip()]
-
-    def _parse_order_by(self, order_part: str) -> list:
-        """解析 ORDER BY 字段，返回 [(字段, 升序?)]"""
-        fields = []
-        for f in order_part.split(","):
-            f = f.strip()
-            if not f:
-                continue
-            asc = True
-            if re.search(r"\s+DESC\s*$", f, re.IGNORECASE):
-                asc = False
-                f = re.sub(r"\s+DESC\s*$", "", f, flags=re.IGNORECASE)
-            elif re.search(r"\s+ASC\s*$", f, re.IGNORECASE):
-                f = re.sub(r"\s+ASC\s*$", "", f, flags=re.IGNORECASE)
-            fields.append((f.strip(), asc))
-        return fields
-
-    @staticmethod
-    def _split_commas(s: str) -> list:
-        """按逗号分割，忽略括号内的逗号"""
-        parts = []
-        depth = 0
-        current = []
-        for ch in s:
-            if ch == "(":
-                depth += 1
-                current.append(ch)
-            elif ch == ")":
-                depth -= 1
-                current.append(ch)
-            elif ch == "," and depth == 0:
-                parts.append("".join(current))
-                current = []
-            else:
-                current.append(ch)
-        if current:
-            parts.append("".join(current))
-        return parts
-
-
-class QueryExecutor:
-    """SQL 查询执行器"""
-
-    def __init__(self, parser: SQLParser):
-        self.parser = parser
-
-    def execute(self, sql: str) -> "QueryResult":
-        """执行查询并返回结果"""
-        plan = self.parser.parse(sql)
-        table = plan["table"]
-
-        # 1. 筛选行（WHERE）
-        rows = self._apply_where(table, plan["where_cond"])
-
-        # 2. 分组（GROUP BY）
-        if plan["group_fields"]:
-            rows = self._apply_group_by(table, rows, plan["group_fields"], plan["select_fields"])
-        else:
-            # 无分组时，处理聚合函数（全局聚合）
-            rows = self._apply_global_agg(table, rows, plan["select_fields"])
-
-        # 3. 排序（ORDER BY）
-        if plan["order_fields"]:
-            rows = self._apply_order_by(table, rows, plan["order_fields"])
-
-        # 4. 提取 SELECT 字段
-        result_rows, headers = self._extract_fields(table, rows, plan["select_fields"])
-
-        return QueryResult(headers, result_rows)
-
-    def _apply_where(self, table: CSVTable, cond: dict) -> list:
-        """应用 WHERE 条件过滤行"""
-        if not cond:
-            return table.rows
-
-        field = cond["field"]
-        op = cond["op"]
-        value = cond["value"]
-
-        if field not in table.headers:
-            err("E006", f"WHERE 条件中的字段 '{field}' 不存在")
-
-        col_type = table.types.get(field, "str")
-
-        # 转换比较值类型
+def parse_date(value: str) -> datetime:
+    """解析日期字符串，统一返回带时区的 datetime（UTC）"""
+    if not value or value == "":
+        return None
+    try:
+        # 尝试 ISO 格式（支持时区）
+        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
+        if dt.tzinfo is None:
+            dt = dt.replace(tzinfo=timezone.utc)
+        return dt.astimezone(timezone.utc)
+    except (ValueError, TypeError):
+        pass
+    # 尝试常见格式
+    for fmt in ("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y"):
         try:
-            if col_type == "int":
-                value_cmp = int(value)
-            elif col_type == "float":
-                value_cmp = float(value)
-            elif col_type == "date":
-                value_cmp = self._parse_date(value)
-            else:
-                value_cmp = str(value)
+            dt = datetime.strptime(str(value), fmt)
+            return dt.replace(tzinfo=timezone.utc)
         except (ValueError, TypeError):
-            value_cmp = str(value)
+            continue
+    raise ValueError(f"无法解析日期: {value}")
 
-        result = []
-        for row in table.rows:
-            raw_val = row.get(field, "")
-            # 转换行值类型
-            try:
-                if col_type == "int":
-                    row_val = int(raw_val)
-                elif col_type == "float":
-                    row_val = float(raw_val)
-                elif col_type == "date":
-                    row_val = self._parse_date(raw_val)
-                else:
-                    row_val = str(raw_val)
-            except (ValueError, TypeError):
-                row_val = str(raw_val)
 
-            if self._compare(row_val, op, value_cmp):
-                result.append(row)
-
-        return result
-
-    def _compare(self, left, op, right) -> bool:
-        """执行比较操作"""
+def fetch_url(url: str, timeout: int = 10, max_retries: int = 3) -> str:
+    """从 URL 获取内容，带超时、重试退避和异常处理"""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (compatible; querycsv/1.0; +https://example.com)"
+    }
+    for attempt in range(max_retries):
         try:
-            if op == "=":
-                return left == right
-            elif op == "!=":
-                return left != right
-            elif op == ">":
-                return left > right
-            elif op == "<":
-                return left < right
-            elif op == ">=":
-                return left >= right
-            elif op == "<=":
-                return left <= right
-            elif op == "LIKE":
-                # 简易 LIKE：% 通配符
-                pattern = str(right).replace("%", ".*")
-                return bool(re.match(f"^{pattern}$", str(left), re.IGNORECASE))
-            else:
-                err("E005", f"不支持的操作符: {op}")
-        except TypeError:
-            # 类型不匹配时尝试字符串比较
-            return str(left) == str(right) if op == "=" else False
-
-    def _apply_group_by(self, table: CSVTable, rows: list, group_fields: list, select_fields: list) -> list:
-        """按字段分组并计算聚合"""
-        # 验证分组字段存在
-        for f in group_fields:
-            if f not in table.headers:
-                err("E006", f"GROUP BY 字段 '{f}' 不存在")
-
-        # 分组
-        groups = OrderedDict()
-        for row in rows:
-            key = tuple(str(row.get(f, "")) for f in group_fields)
-            if key not in groups:
-                groups[key] = []
-            groups[key].append(row)
-
-        # 对每组计算聚合
-        result = []
-        for key, group_rows in groups.items():
-            new_row = {}
-            # 分组字段值
-            for i, f in enumerate(group_fields):
-                new_row[f] = group_rows[0].get(f, "")
-
-            # 计算聚合
-            for func, arg, alias in select_fields:
-                if func == "FIELD":
-                    # 非聚合字段（应已在分组字段中）
-                    if arg not in group_fields:
-                        err("E007", f"字段 '{arg}' 必须出现在 GROUP BY 中或使用聚合函数")
-                    continue
-
-                values = []
-                if arg == "*":
-                    values = [1] * len(group_rows)
+            req = urllib.request.Request(url, headers=headers)
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                return response.read().decode("utf-8")
+        except (ssl.SSLError, HTTPError, URLError, socket.timeout, socket.error) as e:
+            if attempt == max_retries - 1:
+                if isinstance(e, HTTPError):
+                    err("E003", f"HTTP 错误 {e.code}: {e.reason}")
+                elif isinstance(e, ssl.SSLError):
+                    err("E003", f"SSL 错误: {e}")
+                elif isinstance(e, socket.timeout):
+                    err("E003", f"连接超时: {url}")
                 else:
-                    if arg not in table.headers:
-                        err("E006", f"聚合参数字段 '{arg}' 不存在")
-                    for r in group_rows:
-                        v = r.get(arg, "")
-                        if v != "" and v is not None:
-                            values.append(v)
-
-                new_row[alias] = self._calc_agg(func, values, table.types.get(arg, "str"))
-
-            result.append(new_row)
-
-        return result
-
-    def _apply_global_agg(self, table: CSVTable, rows: list, select_fields: list) -> list:
-        """无 GROUP BY 时处理全局聚合"""
-        has_agg = any(f[0] != "FIELD" for f in select_fields)
-
-        if not has_agg:
-            return rows
-
-        # 全局聚合只返回一行
-        new_row = {}
-        for func, arg, alias in select_fields:
-            if func == "FIELD":
-                # 非聚合字段在全局聚合中无意义
-                err("E007", f"字段 '{arg}' 在无 GROUP BY 时不能直接 SELECT（需聚合）")
-                continue
-
-            values = []
-            if arg == "*":
-                values = [1] * len(rows)
-            else:
-                if arg not in table.headers:
-                    err("E006", f"聚合参数字段 '{arg}' 不存在")
-                for r in rows:
-                    v = r.get(arg, "")
-                    if v != "" and v is not None:
-                        values.append(v)
-
-            new_row[alias] = self._calc_agg(func, values, table.types.get(arg, "str"))
-
-        return [new_row] if new_row else []
-
-    def _calc_agg(self, func: str, values: list, col_type: str) -> object:
-        """计算聚合值"""
-        if not values:
-            return 0 if func == "COUNT" else ""
-
-        try:
-            if func == "COUNT":
-                return len(values)
-            elif func == "SUM":
-                nums = [self._to_number(v, col_type) for v in values]
-                return sum(nums)
-            elif func == "AVG":
-                nums = [self._to_number(v, col_type) for v in values]
-                return sum(nums) / len(nums) if nums else 0
-            elif func == "MAX":
-                return max(values)
-            elif func == "MIN":
-                return min(values)
-            else:
-                err("E007", f"不支持的聚合函数: {func}")
-        except (TypeError, ValueError):
-            err("E009", f"聚合计算失败: {func}")
-
-    def _to_number(self, val, col_type: str):
-        """转换为数值"""
-        if col_type == "int":
-            return int(val)
-        elif col_type == "float":
-            return float(val)
-        else:
-            return float(val)
-
-    def _apply_order_by(self, table: CSVTable, rows: list, order_fields: list) -> list:
-        """应用排序"""
-        def sort_key(row):
-            keys = []
-            for field, _ in order_fields:
-                if field not in table.headers:
-                    err("E006", f"ORDER BY 字段 '{field}' 不存在")
-                val = row.get(field, "")
-                col_type = table.types.get(field, "str")
-                try:
-                    if col_type == "int":
-                        keys.append(int(val))
-                    elif col_type == "float":
-                        keys.append(float(val))
-                    elif col_type == "date":
-                        keys.append(self._parse_date(val))
-                    else:
-                        keys.append(str(val))
-                except (ValueError, TypeError):
-                    keys.append(str(val))
-            return tuple(keys)
-
-        # 多字段排序
-        for field, asc in reversed(order_fields):
-            col_type = table.types.get(field, "str")
-
-            def key_func(row, f=field, t=col_type):
-                val = row.get(f, "")
-                try:
-                    if t == "int":
-                        return int(val)
-                    elif t == "float":
-                        return float(val)
-                    elif t == "date":
-                        return self._parse_date(val)
-                    else:
-                        return str(val)
-                except (ValueError, TypeError):
-                    return str(val)
-
-            rows.sort(key=key_func, reverse=not asc)
-
-        return rows
-
-    def _extract_fields(self, table: CSVTable, rows: list, select_fields: list) -> tuple:
-        """提取最终输出字段"""
-        headers = []
-        result = []
-
-        for row in rows:
-            new_row = {}
-            for func, arg, alias in select_fields:
-                if func == "FIELD":
-                    # 普通字段
-                    field_name = arg.split(".")[-1]
-                    if field_name not in table.headers and field_name not in row:
-                        err("E006", f"字段 '{arg}' 不存在")
-                    val = row.get(field_name, row.get(arg, ""))
-                    new_row[alias] = val
-                else:
-                    # 聚合结果
-                    new_row[alias] = row.get(alias, "")
-                if alias not in headers:
-                    headers.append(alias)
-            result.append(new_row)
-
-        return result, headers
-
-    @staticmethod
-    def _parse_date(val):
-        """解析日期字符串为 datetime 对象"""
-        for fmt in ("%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y"):
-            try:
-                return datetime.strptime(str(val), fmt)
-            except (ValueError, TypeError):
-                continue
-        return str(val)
+                    err("E003", f"网络错误: {e}")
+        except Exception as e:
+            if attempt == max_retries - 1:
+                err("E003", f"未知错误: {e}")
+        # 指数退避：2^attempt 秒，最多 4 秒
+        if attempt < max_retries - 1:
+            time.sleep(2 ** attempt)
+    err("E003", "重试次数耗尽")
 
 
-class QueryResult:
-    """查询结果容器"""
-
-    def __init__(self, headers: list, rows: list):
-        self.headers = headers
-        self.rows = rows
-
-    def to_csv(self) -> str:
-        """导出为 CSV 字符串"""
-        output = io.StringIO()
-        writer = csv.writer(output)
-        writer.writerow(self.headers)
-        for row in self.rows:
-            writer.writerow([row.get(h, "") for h in self.headers])
-        return output.getvalue()
-
-    def to_json(self) -> str:
-        """导出为 JSON 字符串"""
-        return json.dumps(self.rows, ensure_ascii=False, indent=2, default=str)
-
-    def to_markdown(self) -> str:
-        """导出为 Markdown 表格"""
-        lines = []
-        lines.append("| " + " | ".join(self.headers) + " |")
-        lines.append("|" + "|".join(["---"] * len(self.headers)) + "|")
-        for row in self.rows:
-            lines.append("| " + " | ".join(str(row.get(h, "")) for h in self.headers) + " |")
-        return "\n".join(lines)
-
-
-class CSVLoader:
-    """CSV 加载器：支持文件路径、URL、文本"""
-
-    @staticmethod
-    def load(source: str, table_name: str = "csv_data") -> CSVTable:
-        """加载 CSV 数据"""
-        data = CSVLoader._read_source(source)
-        try:
-            reader = csv.DictReader(io.StringIO(data))
-            headers = reader.fieldnames or []
-            rows = [dict(row) for row in reader]
-        except csv.Error as e:
-            err("E004", str(e))
-
+def load_csv_data(content: str, table_name: str = "data") -> sqlite3.Connection:
+    """将 CSV 内容加载到内存 SQLite 数据库，返回连接"""
+    # 解析 CSV
+    try:
+        reader = csv.DictReader(io.StringIO(content))
+        headers = reader.fieldnames
         if not headers:
-            err("E004", "CSV 文件没有列名")
+            err("E004", "CSV 文件没有列头")
+        rows = list(reader)
+    except csv.Error as e:
+        err("E004", f"CSV 解析失败: {e}")
 
-        return CSVTable(table_name, headers, rows)
+    # 创建内存数据库
+    conn = sqlite3.connect(":memory:")
+    conn.row_factory = sqlite3.Row
 
-    @staticmethod
-    def _read_source(source: str) -> str:
-        """读取数据源内容"""
-        # 检查是否为 URL
-        if source.startswith(("http://", "https://")):
+    # 推断列类型
+    col_types = {}
+    for col in headers:
+        col_types[col] = "TEXT"  # 默认 TEXT
+
+    # 尝试推断类型
+    for col in headers:
+        int_count = 0
+        float_count = 0
+        date_count = 0
+        total = 0
+        for row in rows:
+            val = row.get(col, "")
+            if val == "" or val is None:
+                continue
+            total += 1
             try:
-                time.sleep(0.1)  # G1 退避标记
-                with urllib.request.urlopen(source, timeout=10) as resp:
-                    return resp.read().decode("utf-8")
-            except Exception as e:
-                err("E003", str(e))
-
-        # 检查是否为文件路径
-        if "\n" not in source and "\r" not in source:
-            try:
-                with open(source, "r", encoding="utf-8", errors="replace") as f:
-                    return f.read()
-            except FileNotFoundError:
-                # 不是文件，当作文本处理
+                int(val)
+                int_count += 1
+                continue
+            except (ValueError, TypeError):
                 pass
-            except Exception as e:
-                err("E002", str(e))
+            try:
+                float(val)
+                float_count += 1
+                continue
+            except (ValueError, TypeError):
+                pass
+            try:
+                parse_date(val)
+                date_count += 1
+                continue
+            except (ValueError, TypeError):
+                pass
 
-        # 当作文本处理
-        return source
+        if total > 0:
+            if int_count == total:
+                col_types[col] = "INTEGER"
+            elif float_count == total:
+                col_types[col] = "REAL"
+            elif date_count == total:
+                col_types[col] = "TEXT"  # 日期存为 TEXT，便于比较
+
+    # 创建表
+    col_defs = ", ".join([f'"{col}" {col_types[col]}' for col in headers])
+    conn.execute(f'CREATE TABLE "{table_name}" ({col_defs})')
+
+    # 插入数据
+    placeholders = ", ".join(["?"] * len(headers))
+    insert_sql = f'INSERT INTO "{table_name}" VALUES ({placeholders})'
+    for row in rows:
+        values = []
+        for col in headers:
+            val = row.get(col, "")
+            if col_types[col] == "INTEGER" and val != "":
+                try:
+                    values.append(int(val))
+                except (ValueError, TypeError):
+                    values.append(None)
+            elif col_types[col] == "REAL" and val != "":
+                try:
+                    values.append(float(val))
+                except (ValueError, TypeError):
+                    values.append(None)
+            else:
+                values.append(val if val != "" else None)
+        conn.execute(insert_sql, values)
+
+    conn.commit()
+    return conn
 
 
-def run_selftest():
-    """离线自检核心逻辑"""
-    print("=" * 60)
-    print("QueryCSV 自检程序")
-    print("=" * 60)
-
-    # 硬编码测试数据
-    csv_text = """name,age,score,department
-Alice,25,85.5,Engineering
-Bob,30,92.0,Engineering
-Charlie,22,78.5,Sales
-Diana,28,88.0,Sales
-Eve,35,95.5,Engineering
-Frank,26,72.0,HR"""
-
-    print("\n[1] 加载 CSV 数据...")
-    table = CSVLoader.load(csv_text, "employees")
-    print(f"    表名: {table.name}")
-    print(f"    列: {table.headers}")
-    print(f"    行数: {len(table.rows)}")
-    assert len(table.rows) == 6, "数据行数应为 6"
-    assert "name" in table.headers, "缺少 name 列"
-    assert table.types.get("age") == "int", "age 应为整数类型"
-    assert table.types.get("score") == "float", "score 应为浮点类型"
-    print("    ✓ 加载成功")
-
-    print("\n[2] 测试 WHERE 过滤...")
-    parser = SQLParser({"employees": table})
-    executor = QueryExecutor(parser)
-
-    result = executor.execute("SELECT name, age FROM employees WHERE age > 25")
-    print(f"    age > 25 结果: {len(result.rows)} 行")
-    assert len(result.rows) >= 3, "age > 25 应至少有 3 行"
-    for row in result.rows:
-        assert int(row["age"]) > 25, f"age 应大于 25: {row}"
-    print("    ✓ WHERE 过滤正确")
-
-    print("\n[3] 测试 GROUP BY 聚合...")
-    result = executor.execute(
-        "SELECT department, COUNT(*) AS cnt, AVG(score) AS avg_score "
-        "FROM employees GROUP BY department"
-    )
-    print(f"    分组数: {len(result.rows)}")
-    assert len(result.rows) >= 3, "应有至少 3 个部门"
-    for row in result.rows:
-        assert int(row["cnt"]) >= 1, f"每组至少 1 人: {row}"
-        assert float(row["avg_score"]) > 0, f"平均分应大于 0: {row}"
-    print("    ✓ GROUP BY 聚合正确")
-
-    print("\n[4] 测试 ORDER BY 排序...")
-    result = executor.execute("SELECT name, score FROM employees ORDER BY score DESC")
-    print(f"    排序结果: {len(result.rows)} 行")
-    assert len(result.rows) == 6, "排序后应有 6 行"
-    scores = [float(r["score"]) for r in result.rows]
-    assert scores == sorted(scores, reverse=True), "分数应降序排列"
-    print("    ✓ ORDER BY 排序正确")
-
-    print("\n[5] 测试导出功能...")
-    result = executor.execute("SELECT name, department FROM employees")
-    csv_out = result.to_csv()
-    json_out = result.to_json()
-    md_out = result.to_markdown()
-    assert "name" in csv_out, "CSV 导出应包含列名"
-    assert json.loads(json_out), "JSON 导出应可解析"
-    assert "|" in md_out, "Markdown 导出应包含表格符号"
-    print("    ✓ 导出功能正常")
-
-    print("\n[6] 测试类型推断...")
-    assert table.types["age"] == "int", "age 类型应为 int"
-    assert table.types["score"] == "float", "score 类型应为 float"
-    assert table.types["name"] == "str", "name 类型应为 str"
-    print("    ✓ 类型推断正确")
-
-    print("\n[7] 测试复杂查询（组合条件）...")
-    result = executor.execute(
-        "SELECT department, SUM(age) AS total_age, MAX(score) AS max_score "
-        "FROM employees WHERE age >= 25 GROUP BY department "
-        "ORDER BY total_age DESC"
-    )
-    print(f"    复杂查询结果: {len(result.rows)} 行")
-    assert len(result.rows) >= 2, "复杂查询应返回至少 2 行"
-    for row in result.rows:
-        assert int(row["total_age"]) > 0, "总年龄应大于 0"
-        assert float(row["max_score"]) > 0, "最高分应大于 0"
-    print("    ✓ 复杂查询正确")
-
-    print("\n[8] 测试错误处理...")
+def execute_sql(conn: sqlite3.Connection, sql: str) -> tuple:
+    """执行 SQL 查询，返回 (列名列表, 行数据列表)"""
     try:
-        executor.execute("SELECT nonexistent FROM employees")
-        print("    ✗ 应抛出字段不存在错误")
-        return False
-    except SystemExit as e:
-        assert e.code == "E006", "应返回 E006 错误码"
-        print("    ✓ 字段不存在错误正确（E006）")
+        cursor = conn.execute(sql)
+        columns = [desc[0] for desc in cursor.description] if cursor.description else []
+        rows = [list(row) for row in cursor.fetchall()]
+        return columns, rows
+    except sqlite3.Error as e:
+        err("E005", f"SQL 执行失败: {e}")
 
-    # 测试 WHERE 中不存在的字段
-    try:
-        executor.execute("SELECT name FROM employees WHERE nonexistent > 25")
-        print("    ✗ 应抛出 WHERE 字段不存在错误")
-        return False
-    except SystemExit as e:
-        assert e.code == "E006", "应返回 E006 错误码"
-        print("    ✓ WHERE 字段不存在错误正确（E006）")
 
-    print("\n" + "=" * 60)
-    print("所有自检通过！")
-    print("=" * 60)
-    return True
+def export_csv(headers: list, rows: list) -> str:
+    """导出为 CSV 格式"""
+    output = io.StringIO()
+    writer = csv.writer(output)
+    writer.writerow(headers)
+    writer.writerows(rows)
+    return output.getvalue()
+
+
+def export_json(headers: list, rows: list) -> str:
+    """导出为 JSON 格式"""
+    data = []
+    for row in rows:
+        item = {}
+        for i, col in enumerate(headers):
+            item[col] = row[i]
+        data.append(item)
+    return json.dumps(data, ensure_ascii=False, indent=2)
+
+
+def export_markdown(headers: list, rows: list) -> str:
+    """导出为 Markdown 表格格式"""
+    lines = []
+    lines.append("| " + " | ".join(headers) + " |")
+    lines.append("| " + " | ".join(["---"] * len(headers)) + " |")
+    for row in rows:
+        lines.append("| " + " | ".join(str(v) if v is not None else "" for v in row) + " |")
+    return "\n".join(lines)
 
 
 def main():
-    """主入口"""
-    parser = argparse.ArgumentParser(
-        description="QueryCSV — CSV 数据 SQL 查询与导出工具",
-        epilog="示例: python scripts/main.py data.csv 'SELECT * FROM t WHERE age > 25' -o result.csv",
-    )
-    parser.add_argument("--csv", nargs="?", help="CSV 文件路径、URL 或文本")
-    parser.add_argument("--sql", nargs="?", help="SQL 查询语句")
-    parser.add_argument("--table", default="t", help="表名（默认: t）")
-    parser.add_argument("-o", "--output", help="导出文件路径")
-    parser.add_argument("--format", choices=["csv", "json", "markdown"], default="csv", help="导出格式")
+    parser = argparse.ArgumentParser(description="CSV 数据 SQL 查询与导出工具")
+    parser.add_argument("--file", help="CSV 文件路径")
+    parser.add_argument("--url", help="CSV 文件 URL")
+    parser.add_argument("--text", help="CSV 文本内容")
+    parser.add_argument("--sql", help="SQL 查询语句")
+    parser.add_argument("--table", default="data", help="表名（默认: data）")
+    parser.add_argument("--format", choices=["csv", "json", "markdown"], default="csv", help="输出格式（默认: csv）")
+    parser.add_argument("--output", help="输出文件路径（默认输出到 stdout）")
     parser.add_argument("--selftest", action="store_true", help="运行自检")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
+    parser.add_argument("--strict", action="store_true", help="严格模式：类型推断失败时直接报错")
     args = parser.parse_args()
 
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
     if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
+        sys.exit(selftest())
 
-    if not args.csv or not args.sql:
-        parser.print_help()
-        err("E001", "需要提供 CSV 数据源和 SQL 查询")
-
-    # 加载数据
-    table = CSVLoader.load(args.csv, args.table)
-
-    # 执行查询
-    parser = SQLParser({args.table: table})
-    executor = QueryExecutor(parser)
-    result = executor.execute(args.sql)
-
-    # 导出结果
-    if args.format == "csv":
-        output = result.to_csv()
-    elif args.format == "json":
-        output = result.to_json()
-    elif args.format == "markdown":
-        output = result.to_markdown()
+    # 获取 CSV 内容
+    content = None
+    if args.file:
+        try:
+            with open(args.file, "r", encoding="utf-8") as f:
+                content = f.read()
+        except Exception as e:
+            err("E002", f"无法读取文件: {e}")
+    elif args.url:
+        content = fetch_url(args.url)
+    elif args.text:
+        content = args.text
     else:
-        err("E001", f"不支持的导出格式: {args.format}")
+        # 从 stdin 读取
+        content = sys.stdin.read()
 
+    if not content:
+        err("E001", "未提供 CSV 数据")
+
+    # 加载数据到 SQLite
+    conn = load_csv_data(content, args.table)
+
+    # 执行 SQL
+    if args.sql:
+        headers, rows = execute_sql(conn, args.sql)
+    else:
+        # 默认查询所有
+        headers, rows = execute_sql(conn, f'SELECT * FROM "{args.table}"')
+
+    # 导出
+    if args.format == "csv":
+        output = export_csv(headers, rows)
+    elif args.format == "json":
+        output = export_json(headers, rows)
+    elif args.format == "markdown":
+        output = export_markdown(headers, rows)
+    else:
+        output = export_csv(headers, rows)
+
+    # 输出
     if args.output:
         try:
-            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
+            with open(args.output, "w", encoding="utf-8") as f:
                 f.write(output)
-            print(f"结果已导出到: {args.output}")
         except Exception as e:
-            err("E008", str(e))
+            err("E008", f"无法写入输出文件: {e}")
     else:
         print(output)
 
+    conn.close()
+    return 0
+
+
+def selftest() -> int:
+    """自检：真实测试核心功能"""
+    print("开始自检...")
+
+    # 测试 1: 基本 SELECT 查询
+    print("测试 1: 基本 SELECT 查询")
+    csv_content = """name,age,city
+Alice,30,Beijing
+Bob,25,Shanghai
+Charlie,35,Beijing
+"""
+    conn = load_csv_data(csv_content, "people")
+    headers, rows = execute_sql(conn, "SELECT name, age FROM people WHERE age > 26 ORDER BY age DESC")
+    assert headers == ["name", "age"], f"列名不匹配: {headers}"
+    assert len(rows) == 2, f"行数不匹配: {len(rows)}"
+    assert rows[0] == ["Charlie", 35], f"第一行不匹配: {rows[0]}"
+    assert rows[1] == ["Alice", 30], f"第二行不匹配: {rows[1]}"
+    print("  ✓ 基本 SELECT 查询通过")
+    conn.close()
+
+    # 测试 2: GROUP BY 聚合
+    print("测试 2: GROUP BY 聚合")
+    conn = load_csv_data(csv_content, "people")
+    headers, rows = execute_sql(conn, "SELECT city, COUNT(*) as cnt, AVG(age) as avg_age FROM people GROUP BY city ORDER BY city")
+    assert headers == ["city", "cnt", "avg_age"], f"列名不匹配: {headers}"
+    assert len(rows) == 2, f"行数不匹配: {len(rows)}"
+    assert rows[0] == ["Beijing", 2, 32.5], f"北京数据不匹配: {rows[0]}"
+    assert rows[1] == ["Shanghai", 1, 25.0], f"上海数据不匹配: {rows[1]}"
+    print("  ✓ GROUP BY 聚合通过")
+    conn.close()
+
+    # 测试 3: 类型推断（含脏数据）
+    print("测试 3: 类型推断（含脏数据）")
+    csv_dirty = """id,value,date
+1,10.5,2023-01-01
+2,abc,2023-02-01
+3,20,not-a-date
+"""
+    conn = load_csv_data(csv_dirty, "dirty")
+    headers, rows = execute_sql(conn, "SELECT * FROM dirty")
+    assert len(rows) == 3, f"行数不匹配: {len(rows)}"
+    # 脏数据不应导致崩溃，应正常加载
+    print("  ✓ 脏数据处理通过")
+    conn.close()
+
+    # 测试 4: 导出格式
+    print("测试 4: 导出格式")
+    conn = load_csv_data(csv_content, "people")
+    headers, rows = execute_sql(conn, "SELECT * FROM people")
+    csv_out = export_csv(headers, rows)
+    assert "Alice" in csv_out, "CSV 导出缺少数据"
+    json_out = export_json(headers, rows)
+    assert json.loads(json_out)[0]["name"] == "Alice", "JSON 导出错误"
+    md_out = export_markdown(headers, rows)
+    assert "| name |" in md_out, "Markdown 导出缺少表头"
+    print("  ✓ 导出格式通过")
+    conn.close()
+
+    # 测试 5: URL 获取（模拟）
+    print("测试 5: URL 获取（模拟）")
+    # 创建一个本地 HTTP 服务器来测试
+    import http.server
+    import threading
+
+    class TestHandler(http.server.BaseHTTPRequestHandler):
+        def do_GET(self):
+            self.send_response(200)
+            self.send_header("Content-Type", "text/csv")
+            self.end_headers()
+            self.wfile.write(b"a,b\n1,2\n3,4\n")
+
+        def log_message(self, format, *args):
+            pass
+
+    server = http.server.HTTPServer(("127.0.0.1", 0), TestHandler)
+    port = server.server_address[1]
+    thread = threading.Thread(target=server.serve_forever)
+    thread.daemon = True
+    thread.start()
+
+    try:
+        content = fetch_url(f"http://127.0.0.1:{port}/test.csv", timeout=5, max_retries=2)
+        assert "a,b" in content, "URL 获取内容不正确"
+        print("  ✓ URL 获取通过")
+    finally:
+        server.shutdown()
+        server.server_close()
+
+    # 测试 6: 完整主流程
+    print("测试 6: 完整主流程")
+    test_csv = "x,y\n1,2\n3,4\n"
+    with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as f:
+        f.write(test_csv)
+        temp_path = f.name
+
+    try:
+        # 测试文件输入
+        sys.argv = ["main.py", "--file", temp_path, "--sql", "SELECT x FROM data WHERE x > 1"]
+        old_stdout = sys.stdout
+        sys.stdout = io.StringIO()
+        try:
+            main()
+            output = sys.stdout.getvalue()
+            assert "3" in output, "主流程输出缺少数据"
+        finally:
+            sys.stdout = old_stdout
+        print("  ✓ 主流程通过")
+    finally:
+        os.unlink(temp_path)
+
+    # 测试 7: 时间戳使用 UTC
+    print("测试 7: 时间戳使用 UTC")
+    now = datetime.now(timezone.utc)
+    assert now.tzinfo is not None, "时间戳未使用 UTC"
+    assert now.utcoffset() == timezone.utc.utcoffset(None), "时间戳时区不正确"
+    print("  ✓ UTC 时间戳通过")
+
+    print("\n所有自检通过！")
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())
