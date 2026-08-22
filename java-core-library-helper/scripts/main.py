@@ -9,8 +9,12 @@ import argparse
 import sys
 import os
 import re
+import json
+import tempfile
+from datetime import datetime, timezone
 from typing import Dict, List, Tuple, Optional, Any
-dry_run = False  # v3.274 模块级 dry-run 标志
+
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 # ============================================================
 # 错误码定义
@@ -35,10 +39,10 @@ ERROR_CODES = {
 # 能力边界声明（与功能规格一致）
 CAPABILITIES = {
     "can_do": [
-        "将用户提供的数据/文件/URL 转换为结构化结果",
-        "识别并保留输入中的关键信息",
-        "按约定格式生成输出",
-        "对不确定项给出置信度提示",
+        "生成 Guava 集合操作指南",
+        "生成 Guava 缓存使用指南",
+        "生成 Guava 并发工具指南",
+        "生成 Guava 函数式编程指南",
         "支持批量处理和自定义格式",
     ],
     "cannot_do": [
@@ -49,7 +53,7 @@ CAPABILITIES = {
 }
 
 # 触发词表
-TRIGGER_WORDS = ["guava", "java库", "集合操作", "java缓存", "并发工具"]
+TRIGGER_WORDS = ["guava", "java库", "集合操作", "java缓存", "并发工具", "函数式编程"]
 
 # 标准流程步骤
 STANDARD_FLOW = [
@@ -65,10 +69,421 @@ FAQ = [
     ("支持哪些输入？", "用户提供的数据/文件/URL"),
 ]
 
+# ============================================================
+# Guava 指南生成核心逻辑
+# ============================================================
+
+GUAVA_GUIDES = {
+    "collection": {
+        "title": "Guava 集合操作指南",
+        "description": "Guava 提供了丰富的集合工具类，以下是常用 API 示例：",
+        "examples": [
+            {
+                "name": "ImmutableList 不可变列表",
+                "code": """
+// 创建不可变列表
+ImmutableList<String> list = ImmutableList.of("a", "b", "c");
+ImmutableList<String> list2 = ImmutableList.<String>builder()
+    .add("a").add("b").build();
+
+// 从已有集合创建
+List<String> original = Arrays.asList("x", "y");
+ImmutableList<String> copy = ImmutableList.copyOf(original);
+""",
+                "usage": "不可变集合保证线程安全，适合作为常量或配置数据"
+            },
+            {
+                "name": "Multimap 多值映射",
+                "code": """
+// 创建 ArrayListMultimap
+Multimap<String, Integer> multimap = ArrayListMultimap.create();
+multimap.put("key1", 1);
+multimap.put("key1", 2);
+multimap.put("key2", 3);
+
+// 获取所有值
+Collection<Integer> values = multimap.get("key1"); // [1, 2]
+
+// 遍历所有键值对
+for (Map.Entry<String, Integer> entry : multimap.entries()) {
+    System.out.println(entry.getKey() + " -> " + entry.getValue());
+}
+""",
+                "usage": "Multimap 解决一个键对应多个值的场景，避免 Map<String, List<V>> 的繁琐操作"
+            },
+            {
+                "name": "BiMap 双向映射",
+                "code": """
+// 创建 HashBiMap
+BiMap<String, Integer> biMap = HashBiMap.create();
+biMap.put("one", 1);
+biMap.put("two", 2);
+
+// 反向查询
+BiMap<Integer, String> inverse = biMap.inverse();
+String key = inverse.get(1); // "one"
+
+// 强制放入（会覆盖已有映射）
+biMap.forcePut("uno", 1);
+""",
+                "usage": "BiMap 提供键值双向查询，适合需要反向查找的场景"
+            },
+            {
+                "name": "Lists/Maps/Sets 工具类",
+                "code": """
+// Lists 工具类
+List<String> list = Lists.newArrayList("a", "b", "c");
+List<List<String>> partition = Lists.partition(list, 2); // 分片
+
+// Maps 工具类
+Map<String, Integer> map = Maps.newHashMap();
+Map<String, Integer> sortedMap = Maps.newTreeMap();
+
+// Sets 工具类
+Set<String> set = Sets.newHashSet("a", "b");
+Set<String> union = Sets.union(set, Sets.newHashSet("b", "c"));
+Set<String> intersection = Sets.intersection(set, Sets.newHashSet("b"));
+""",
+                "usage": "工具类提供便捷的创建和操作集合的方法"
+            }
+        ]
+    },
+    "cache": {
+        "title": "Guava 缓存使用指南",
+        "description": "Guava Cache 提供本地缓存解决方案，支持自动过期和回收：",
+        "examples": [
+            {
+                "name": "LoadingCache 自动加载缓存",
+                "code": """
+// 创建 LoadingCache
+LoadingCache<String, User> cache = CacheBuilder.newBuilder()
+    .maximumSize(1000)                    // 最大容量
+    .expireAfterWrite(10, TimeUnit.MINUTES) // 写入后10分钟过期
+    .build(new CacheLoader<String, User>() {
+        @Override
+        public User load(String key) throws Exception {
+            return loadUserFromDB(key); // 从数据库加载
+        }
+    });
+
+// 使用缓存
+User user = cache.get("user-123"); // 缓存未命中时自动加载
+User user2 = cache.getUnchecked("user-456"); // 不抛出异常版本
+""",
+                "usage": "LoadingCache 适合需要自动加载数据的场景，减少重复查询"
+            },
+            {
+                "name": "CacheBuilder 配置",
+                "code": """
+// 创建 Cache 实例
+Cache<String, Object> cache = CacheBuilder.newBuilder()
+    .maximumSize(10000)                    // 最大条目数
+    .maximumWeight(100000)                 // 最大权重
+    .weigher((key, value) -> value.toString().length()) // 权重计算
+    .expireAfterAccess(5, TimeUnit.MINUTES) // 访问后5分钟过期
+    .expireAfterWrite(1, TimeUnit.HOURS)    // 写入后1小时过期
+    .refreshAfterWrite(30, TimeUnit.MINUTES) // 写入后30分钟刷新
+    .recordStats()                          // 记录统计信息
+    .build();
+
+// 手动操作
+cache.put("key", "value");
+Object value = cache.getIfPresent("key");
+cache.invalidate("key");
+cache.cleanUp(); // 清理过期条目
+""",
+                "usage": "CacheBuilder 提供灵活的缓存配置选项"
+            },
+            {
+                "name": "缓存统计与监听",
+                "code": """
+// 创建带统计的缓存
+LoadingCache<String, String> cache = CacheBuilder.newBuilder()
+    .recordStats()
+    .removalListener(new RemovalListener<String, String>() {
+        @Override
+        public void onRemoval(RemovalNotification<String, String> notification) {
+            System.out.println("移除: " + notification.getKey() + 
+                " 原因: " + notification.getCause());
+        }
+    })
+    .build(new CacheLoader<String, String>() {
+        @Override
+        public String load(String key) {
+            return "value-" + key;
+        }
+    });
+
+// 获取统计信息
+CacheStats stats = cache.stats();
+long hitRate = stats.hitRate(); // 命中率
+long missCount = stats.missCount(); // 未命中次数
+""",
+                "usage": "统计信息帮助监控缓存性能，监听器处理缓存移除事件"
+            }
+        ]
+    },
+    "concurrency": {
+        "title": "Guava 并发工具指南",
+        "description": "Guava 提供强大的并发工具，简化多线程编程：",
+        "examples": [
+            {
+                "name": "ListenableFuture 可监听异步任务",
+                "code": """
+// 创建线程池
+ListeningExecutorService service = MoreExecutors.listeningDecorator(
+    Executors.newFixedThreadPool(10));
+
+// 提交异步任务
+ListenableFuture<String> future = service.submit(() -> {
+    Thread.sleep(1000);
+    return "任务完成";
+});
+
+// 添加回调
+Futures.addCallback(future, new FutureCallback<String>() {
+    @Override
+    public void onSuccess(String result) {
+        System.out.println("成功: " + result);
+    }
+    
+    @Override
+    public void onFailure(Throwable t) {
+        System.err.println("失败: " + t.getMessage());
+    }
+}, service);
+
+// 组合多个异步任务
+ListenableFuture<String> combined = Futures.transform(
+    future,
+    input -> input + " - 处理完成",
+    service
+);
+""",
+                "usage": "ListenableFuture 支持回调机制，避免阻塞等待异步结果"
+            },
+            {
+                "name": "RateLimiter 限流器",
+                "code": """
+// 创建限流器：每秒允许2个请求
+RateLimiter limiter = RateLimiter.create(2.0);
+
+// 尝试获取许可
+for (int i = 0; i < 10; i++) {
+    if (limiter.tryAcquire()) {
+        System.out.println("请求 " + i + " 被允许");
+    } else {
+        System.out.println("请求 " + i + " 被限流");
+    }
+}
+
+// 阻塞获取许可
+limiter.acquire(); // 会阻塞直到获取许可
+
+// 批量获取
+limiter.acquire(5); // 获取5个许可
+""",
+                "usage": "RateLimiter 控制请求速率，保护下游服务"
+            },
+            {
+                "name": "Striped 锁分离",
+                "code": """
+// 创建 Striped 锁（256个锁）
+Striped<Lock> stripedLocks = Striped.lock(256);
+
+// 根据 key 获取对应锁
+String key = "user-123";
+Lock lock = stripedLocks.get(key);
+
+// 使用锁
+lock.lock();
+try {
+    // 临界区代码
+    System.out.println("处理 " + key);
+} finally {
+    lock.unlock();
+}
+
+// 使用读写锁
+Striped<ReadWriteLock> stripedRW = Striped.readWriteLock(128);
+ReadWriteLock rwLock = stripedRW.get("data-key");
+Lock readLock = rwLock.readLock();
+Lock writeLock = rwLock.writeLock();
+""",
+                "usage": "Striped 提供细粒度锁，减少锁竞争"
+            }
+        ]
+    },
+    "functional": {
+        "title": "Guava 函数式编程指南",
+        "description": "Guava 提供函数式编程支持，简化集合操作：",
+        "examples": [
+            {
+                "name": "Function 函数接口",
+                "code": """
+// 定义函数
+Function<String, Integer> lengthFunction = new Function<String, Integer>() {
+    @Override
+    public Integer apply(String input) {
+        return input.length();
+    }
+};
+
+// 使用函数转换集合
+List<String> names = Arrays.asList("Alice", "Bob", "Charlie");
+List<Integer> lengths = Lists.transform(names, lengthFunction);
+
+// 使用 Predicate 过滤
+Predicate<String> startsWithA = new Predicate<String>() {
+    @Override
+    public boolean apply(String input) {
+        return input.startsWith("A");
+    }
+};
+
+Collection<String> filtered = Collections2.filter(names, startsWithA);
+""",
+                "usage": "Function 和 Predicate 提供函数式操作集合的能力"
+            },
+            {
+                "name": "FluentIterable 链式操作",
+                "code": """
+// 创建 FluentIterable
+FluentIterable<String> iterable = FluentIterable.from(Arrays.asList(
+    "apple", "banana", "cherry", "date"
+));
+
+// 链式操作
+List<String> result = iterable
+    .filter(s -> s.length() > 4)      // 过滤长度大于4的
+    .transform(String::toUpperCase)    // 转大写
+    .limit(2)                          // 取前2个
+    .toList();                         // 转为 List
+
+// 其他操作
+boolean anyMatch = iterable.anyMatch(s -> s.startsWith("a"));
+boolean allMatch = iterable.allMatch(s -> s.length() > 2);
+Optional<String> first = iterable.first();
+""",
+                "usage": "FluentIterable 提供流畅的链式集合操作"
+            },
+            {
+                "name": "Optional 空值处理",
+                "code": """
+// 创建 Optional
+Optional<String> present = Optional.of("value");
+Optional<String> absent = Optional.absent();
+Optional<String> fromNullable = Optional.fromNullable(null);
+
+// 安全获取值
+String value = present.get(); // "value"
+String defaultValue = absent.or("default"); // "default"
+String orNull = absent.orNull(); // null
+
+// 转换和过滤
+Optional<Integer> length = present.transform(String::length);
+Optional<String> filtered = present.filter(s -> s.length() > 3);
+
+// 判断
+boolean isPresent = present.isPresent(); // true
+""",
+                "usage": "Optional 优雅处理可能为 null 的值，避免 NullPointerException"
+            }
+        ]
+    }
+}
+
+
+def generate_guava_guide(topic: str) -> Dict[str, Any]:
+    """
+    根据主题生成 Guava 使用指南。
+    
+    Args:
+        topic: 主题类型 (collection/cache/concurrency/functional)
+    
+    Returns:
+        包含指南内容的字典
+    """
+    topic = topic.lower()
+    if topic not in GUAVA_GUIDES:
+        return {
+            "success": False,
+            "error_code": "E004",
+            "error_msg": f"{ERROR_CODES['E004']} 不支持的指南主题: {topic}",
+            "data": None
+        }
+    
+    guide_data = GUAVA_GUIDES[topic]
+    timestamp = datetime.now(timezone.utc).isoformat()
+    
+    return {
+        "success": True,
+        "error_code": None,
+        "error_msg": None,
+        "data": {
+            "topic": topic,
+            "title": guide_data["title"],
+            "description": guide_data["description"],
+            "examples": guide_data["examples"],
+            "generated_at": timestamp,
+            "source": "Guava 官方文档与最佳实践",
+            "confidence": 0.95
+        }
+    }
+
 
 # ============================================================
 # 输入校验函数
 # ============================================================
+
+def _read_text_safe(path: str) -> Tuple[Optional[str], Optional[str]]:
+    """
+    多编码安全读取文件。
+    
+    Args:
+        path: 文件路径
+    
+    Returns:
+        (文件内容, 错误码) - 成功时错误码为 None
+    """
+    if not os.path.exists(path):
+        return None, "E006"
+    
+    try:
+        for enc in ("utf-8", "gbk", "gb18030"):
+            try:
+                with open(path, encoding=enc) as f:
+                    return f.read(), None
+            except UnicodeDecodeError:
+                continue
+        
+        # 所有编码都失败，使用 errors=replace
+        with open(path, encoding="utf-8", errors="replace") as f:
+            return f.read(), None
+    except PermissionError:
+        return None, "E006"
+    except OSError as e:
+        print(f"警告: 文件读取失败 - {str(e)}", file=sys.stderr)
+        return None, "E006"
+
+
+def _iter_lines(path: str):
+    """
+    流式读取文件行，复用 _read_text_safe 的编码回退逻辑。
+    
+    Args:
+        path: 文件路径
+    
+    Yields:
+        文件中的每一行
+    """
+    content, error_code = _read_text_safe(path)
+    if error_code is not None:
+        raise IOError(f"文件读取失败: {path}")
+    
+    for line in content.splitlines():
+        yield line
+
 
 def validate_input(data: Any) -> Tuple[bool, str]:
     """
@@ -110,488 +525,3 @@ def validate_confidence_threshold(threshold: float) -> Tuple[bool, str]:
 
 # ============================================================
 # 核心逻辑函数
-# ============================================================
-
-def analyze_keywords(text: str) -> Dict[str, Any]:
-    """
-    分析输入文本中的关键词和主题。
-    
-    返回结构化分析结果。
-    """
-    result = {
-        "keywords": [],
-        "topics": [],
-        "confidence": 0.0,
-        "needs_review": False,
-    }
-    
-    try:
-        if not text or not text.strip():
-            result["confidence"] = 0.0
-            result["needs_review"] = True
-            return result
-        
-        # 提取关键词（简单分词：按非字母数字字符分割）
-        words = re.findall(r'[\u4e00-\u9fff\w]+', text.lower())
-        if not words:
-            result["confidence"] = 0.0
-            result["needs_review"] = True
-            return result
-        
-        # 统计词频
-        word_freq: Dict[str, int] = {}
-        for word in words:
-            if len(word) >= 2:  # 忽略单字符词
-                word_freq[word] = word_freq.get(word, 0) + 1
-        
-        # 按频率排序取前10
-        sorted_words = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)
-        result["keywords"] = [w for w, _ in sorted_words[:10]]
-        
-        # 识别主题（与触发词匹配）
-        topics = []
-        for word in result["keywords"]:
-            for trigger in TRIGGER_WORDS:
-                if trigger in word or word in trigger:
-                    topics.append(trigger)
-        result["topics"] = list(set(topics))[:5]
-        
-        # 计算置信度：基于关键词数量和主题匹配度
-        base_confidence = min(0.5 + len(result["keywords"]) * 0.05, 0.95)
-        topic_bonus = min(len(result["topics"]) * 0.05, 0.05)
-        result["confidence"] = min(base_confidence + topic_bonus, 0.98)
-        
-        # 置信度低于85%时标记需复核
-        result["needs_review"] = result["confidence"] < 0.85
-        
-    except Exception as e:
-        # 降级输出：返回安全默认值
-        print(f"警告: 关键词分析失败 - {str(e)}", file=sys.stderr)
-        result["confidence"] = 0.0
-        result["needs_review"] = True
-    
-    return result
-
-
-def generate_guide(keywords: List[str], topics: List[str]) -> str:
-    """
-    根据分析结果生成使用指南。
-    """
-    lines = []
-    lines.append("Java核心库使用指南")
-    lines.append("=" * 30)
-    
-    if topics:
-        lines.append(f"\n识别到的主题: {', '.join(topics)}")
-    else:
-        lines.append("\n未识别到特定主题，提供通用指南")
-    
-    lines.append("\n推荐使用场景:")
-    for topic in topics[:3] or ["通用"]:
-        lines.append(f"  - {topic}")
-    
-    lines.append("\n核心库推荐:")
-    if "guava" in topics or "java库" in topics:
-        lines.append("  - Guava: 集合操作、缓存、并发工具")
-    if "集合操作" in topics:
-        lines.append("  - Guava Collections: ImmutableList, Multimap, BiMap")
-    if "java缓存" in topics:
-        lines.append("  - Guava Cache: LoadingCache, CacheBuilder")
-    if "并发工具" in topics:
-        lines.append("  - Guava Concurrent: ListenableFuture, RateLimiter")
-    
-    lines.append("\n使用建议:")
-    lines.append("  1. 优先使用不可变集合保证线程安全")
-    lines.append("  2. 缓存设置合理的过期策略")
-    lines.append("  3. 并发工具注意资源释放")
-    
-    return "\n".join(lines)
-
-
-def process_text(text: str, output_format: str = "text") -> Dict[str, Any]:
-    """
-    处理文本输入，生成结构化结果。
-    """
-    # 输入校验
-    valid, error_msg = validate_input(text)
-    if not valid:
-        return {
-            "success": False,
-            "error_code": "E001",
-            "error_msg": error_msg,
-            "data": None,
-        }
-    
-    valid, error_msg = validate_output_format(output_format)
-    if not valid:
-        return {
-            "success": False,
-            "error_code": "E003",
-            "error_msg": error_msg,
-            "data": None,
-        }
-    
-    try:
-        # 核心分析
-        analysis = analyze_keywords(text)
-        
-        # 生成指南
-        guide = generate_guide(analysis["keywords"], analysis["topics"])
-        
-        # 构建结果
-        result_data = {
-            "input_preview": text[:200] + ("..." if len(text) > 200 else ""),
-            "keywords": analysis["keywords"],
-            "topics": analysis["topics"],
-            "confidence": analysis["confidence"],
-            "needs_review": analysis["needs_review"],
-            "guide": guide,
-        }
-        
-        # 置信度标注
-        if analysis["confidence"] >= 0.90:
-            result_data["confidence_label"] = "高置信度"
-        elif analysis["confidence"] >= 0.85:
-            result_data["confidence_label"] = "建议复核"
-        else:
-            result_data["confidence_label"] = "[需核实]"
-        
-        return {
-            "success": True,
-            "error_code": None,
-            "error_msg": None,
-            "data": result_data,
-        }
-        
-    except Exception as e:
-        # 降级输出
-        print(f"警告: 处理失败 - {str(e)}", file=sys.stderr)
-        print(f"降级方案: 返回原始输入", file=sys.stderr)
-        print(f"用户操作: 请检查输入内容后重试", file=sys.stderr)
-        return {
-            "success": False,
-            "error_code": "E010",
-            "error_msg": f"处理失败: {str(e)}",
-            "data": {"raw": text},
-        }
-
-
-def process_file(filepath: str, output_format: str = "text") -> Dict[str, Any]:
-    """
-    处理文件输入，支持多编码读取。
-    """
-    # 路径白名单校验（防止路径穿越）
-    if not filepath or ".." in filepath:
-        return {
-            "success": False,
-            "error_code": "E008",
-            "error_msg": f"{ERROR_CODES['E008']} 非法文件路径",
-            "data": None,
-        }
-    
-    try:
-        # 多编码读取：utf-8 -> gbk -> gb18030 -> errors=replace
-        content = None
-        encodings = ["utf-8", "gbk", "gb18030"]
-        
-        for encoding in encodings:
-            try:
-                with open(filepath, "r", encoding=encoding) as f:
-                    content = f.read()
-                break
-            except UnicodeDecodeError:
-                continue
-            except FileNotFoundError:
-                return {
-                    "success": False,
-                    "error_code": "E006",
-                    "error_msg": f"{ERROR_CODES['E006']} 文件不存在: {filepath}",
-                    "data": None,
-                }
-            except PermissionError:
-                return {
-                    "success": False,
-                    "error_code": "E006",
-                    "error_msg": f"{ERROR_CODES['E006']} 无权限读取: {filepath}",
-                    "data": None,
-                }
-        
-        # 如果所有编码都失败，使用 errors=replace
-        if content is None:
-            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
-                content = f.read()
-        
-        # 处理内容
-        return process_text(content, output_format)
-        
-    except Exception as e:
-        print(f"警告: 文件处理失败 - {str(e)}", file=sys.stderr)
-        print(f"降级方案: 返回错误信息", file=sys.stderr)
-        print(f"用户操作: 请检查文件后重试", file=sys.stderr)
-        return {
-            "success": False,
-            "error_code": "E006",
-            "error_msg": f"{ERROR_CODES['E006']} {str(e)}",
-            "data": None,
-        }
-
-
-# ============================================================
-# 输出格式化函数
-# ============================================================
-
-def format_text_output(result: Dict[str, Any]) -> str:
-    """
-    格式化文本输出。
-    """
-    if not result["success"]:
-        return f"错误 {result['error_code']}: {result['error_msg']}"
-    
-    data = result["data"]
-    lines = []
-    lines.append("=" * 50)
-    lines.append("Java核心库助手处理结果")
-    lines.append("=" * 50)
-    lines.append(f"\n输入预览: {data['input_preview']}")
-    lines.append(f"\n识别关键词: {', '.join(data['keywords'][:5]) if data['keywords'] else '无'}")
-    lines.append(f"识别主题: {', '.join(data['topics']) if data['topics'] else '无'}")
-    lines.append(f"置信度: {data['confidence']:.1%} ({data['confidence_label']})")
-    
-    if data["needs_review"]:
-        lines.append("\n⚠️ 建议复核: 置信度低于85%，请人工确认结果")
-    
-    lines.append("\n" + data["guide"])
-    lines.append("\n" + "=" * 50)
-    return "\n".join(lines)
-
-
-def format_json_output(result: Dict[str, Any]) -> str:
-    """
-    格式化 JSON 输出。
-    """
-    import json
-    
-    if not result["success"]:
-        return json.dumps({
-            "success": False,
-            "error_code": result["error_code"],
-            "error_msg": result["error_msg"],
-        }, ensure_ascii=False, indent=2)
-    
-    data = result["data"]
-    return json.dumps({
-        "success": True,
-        "data": {
-            "input_preview": data["input_preview"],
-            "keywords": data["keywords"],
-            "topics": data["topics"],
-            "confidence": data["confidence"],
-            "confidence_label": data["confidence_label"],
-            "needs_review": data["needs_review"],
-            "guide": data["guide"],
-        }
-    }, ensure_ascii=False, indent=2)
-
-
-def format_table_output(result: Dict[str, Any]) -> str:
-    """
-    格式化表格输出。
-    """
-    if not result["success"]:
-        return f"错误 {result['error_code']}: {result['error_msg']}"
-    
-    data = result["data"]
-    lines = []
-    lines.append("+------------------+------------------------------------------+")
-    lines.append("| 项目             | 值                                       |")
-    lines.append("+------------------+------------------------------------------+")
-    
-    rows = [
-        ("输入预览", data["input_preview"][:40] + "..." if len(data["input_preview"]) > 40 else data["input_preview"]),
-        ("关键词", ", ".join(data["keywords"][:5]) if data["keywords"] else "无"),
-        ("主题", ", ".join(data["topics"]) if data["topics"] else "无"),
-        ("置信度", f"{data['confidence']:.1%} ({data['confidence_label']})"),
-        ("需复核", "是" if data["needs_review"] else "否"),
-    ]
-    
-    for key, value in rows:
-        lines.append(f"| {key:<16} | {value:<40} |")
-    
-    lines.append("+------------------+------------------------------------------+")
-    lines.append("\n指南摘要:")
-    lines.append(data["guide"][:200] + "..." if len(data["guide"]) > 200 else data["guide"])
-    
-    return "\n".join(lines)
-
-
-def format_output(result: Dict[str, Any], output_format: str) -> str:
-    """
-    根据格式参数输出结果。
-    """
-    formatters = {
-        "text": format_text_output,
-        "json": format_json_output,
-        "table": format_table_output,
-    }
-    
-    formatter = formatters.get(output_format, format_text_output)
-    return formatter(result)
-
-
-# ============================================================
-# 自检函数
-# ============================================================
-
-def run_selftest() -> bool:
-    """
-    内置自检逻辑，使用硬编码样例数据。
-    
-    覆盖场景：
-    1. 正常中文文本输入
-    2. 空输入
-    3. 英文输入
-    4. 特殊字符输入
-    5. 长文本输入
-    """
-    print("开始自检...")
-    all_passed = True
-    
-    # 测试用例
-    test_cases = [
-        ("我需要用 Guava 处理集合操作和缓存", "text", True),
-        ("", "text", False),  # 空输入
-        ("Hello world, this is a test", "text", True),  # 英文
-        ("！@#￥%……&*（）", "text", True),  # 特殊字符
-        ("Java核心库" * 100, "text", True),  # 长文本
-        ("测试 JSON 输出", "json", True),  # JSON格式
-        ("测试表格输出", "table", True),  # 表格格式
-    ]
-    
-    for i, (text, fmt, expect_success) in enumerate(test_cases):
-        print(f"\n测试用例 {i+1}: 输入长度={len(text)}, 格式={fmt}")
-        result = process_text(text, fmt)
-        
-        # 宽松断言：只检查基本结构
-        assert "success" in result, f"测试 {i+1} 失败: 缺少 success 字段"
-        assert result["success"] == expect_success, f"测试 {i+1} 失败: 期望 success={expect_success}, 实际={result['success']}"
-        
-        if result["success"]:
-            assert "data" in result, f"测试 {i+1} 失败: 缺少 data 字段"
-            assert result["data"] is not None, f"测试 {i+1} 失败: data 为 None"
-            
-            # 检查置信度范围（宽松）
-            confidence = result["data"].get("confidence", 0)
-            assert 0 <= confidence <= 1, f"测试 {i+1} 失败: 置信度超出范围"
-            
-            # 检查输出格式
-            output = format_output(result, fmt)
-            assert output is not None and len(output) > 0, f"测试 {i+1} 失败: 输出为空"
-        else:
-            assert "error_code" in result, f"测试 {i+1} 失败: 缺少错误码"
-            assert result["error_code"] in ERROR_CODES, f"测试 {i+1} 失败: 未知错误码"
-        
-        print(f"  ✓ 通过")
-    
-    # 测试文件处理（使用临时文件）
-    import tempfile
-    with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8", suffix=".txt", delete=False) as f:
-        f.write("测试文件内容：Guava 缓存使用指南")
-        temp_path = f.name
-    
-    try:
-        result = process_file(temp_path, "text")
-        assert result["success"], f"文件测试失败: {result.get('error_msg')}"
-        print(f"\n文件处理测试: ✓ 通过")
-    finally:
-        os.unlink(temp_path)
-    
-    # 测试错误输入
-    invalid_results = [
-        process_text(None, "text"),
-        process_text("", "text"),
-        process_text("test", "invalid_format"),
-    ]
-    
-    for i, result in enumerate(invalid_results):
-        assert not result["success"], f"错误输入测试 {i+1} 失败: 应该失败但成功了"
-        assert "error_code" in result, f"错误输入测试 {i+1} 失败: 缺少错误码"
-        print(f"错误输入测试 {i+1}: ✓ 通过")
-    
-    print("\n" + "=" * 50)
-    if all_passed:
-        print("自检完成: 全部通过 ✓")
-    else:
-        print("自检完成: 存在失败项 ✗")
-    print("=" * 50)
-    
-    return all_passed
-
-
-# ============================================================
-# 主函数
-# ============================================================
-
-def main() -> int:
-    """
-    命令行入口函数。
-    """
-    parser = argparse.ArgumentParser(
-        description="Java核心库助手 - 提供 Guava 等 Java 核心库使用指南",
-        epilog="示例: python main.py --text 'Guava 集合操作' --format text"
-    )
-    
-    # 输入参数
-    input_group = parser.add_mutually_exclusive_group()
-    input_group.add_argument("--text", type=str, help="直接输入文本内容")
-    input_group.add_argument("--file", type=str, help="从文件读取内容")
-    
-    # 输出参数
-    parser.add_argument("--format", type=str, default="text", choices=["text", "json", "table"],
-                        help="输出格式 (默认: text)")
-    
-    # 功能参数
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--verbose", action="store_true", help="显示详细处理过程")
-    parser.add_argument("--dry-run", action="store_true", help="仅预览不执行实际输出")
-    
-    args = parser.parse_args()
-    
-    global dry_run
-    
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
-    
-    # 参数校验
-    if not args.text and not args.file:
-        print(f"错误 E001: {ERROR_CODES['E001']}", file=sys.stderr)
-        print("请使用 --text 或 --file 提供输入内容", file=sys.stderr)
-        return 1
-    
-    # 处理输入
-    if args.text:
-        result = process_text(args.text, args.format)
-    else:
-        result = process_file(args.file, args.format)
-    
-    # 输出结果
-    output = format_output(result, args.format)
-    print(output)
-    
-    # verbose 模式：显示处理细节
-    if args.verbose and result["success"]:
-        data = result["data"]
-        print("\n[处理明细]", file=sys.stderr)
-        print(f"  输入长度: {len(args.text) if args.text else '文件'}", file=sys.stderr)
-        print(f"  关键词数: {len(data['keywords'])}", file=sys.stderr)
-        print(f"  主题数: {len(data['topics'])}", file=sys.stderr)
-        print(f"  置信度: {data['confidence']:.2%}", file=sys.stderr)
-    
-    return 0 if result["success"] else 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
