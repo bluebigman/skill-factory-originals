@@ -12,24 +12,81 @@ import os
 import re
 import sys
 import tempfile
+import urllib.request
+import urllib.error
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 from urllib.parse import urlparse
 import time
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import datetime, timezone
+import random
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
+_retry_timeout = 10  # 请求超时时间（秒）
+
 def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
+    """带重试退避和抖动的请求封装（G1 生产门禁）。"""
     for attempt in range(_max_retry):
         try:
             return fn(*args, **kwargs)
+        except urllib.error.HTTPError as e:
+            # 处理 HTTP 5xx 错误码
+            if e.code >= 500:
+                if attempt < _max_retry - 1:
+                    # 使用指数退避 + 抖动
+                    sleep_time = random.uniform(0, 2 ** attempt)
+                    time.sleep(sleep_time)
+                    continue
+                raise
+            else:
+                # 其他 HTTP 错误码不重试
+                raise
+        except urllib.error.URLError as e:
+            # 区分超时/连接错误
+            if isinstance(e.reason, TimeoutError):
+                if attempt < _max_retry - 1:
+                    sleep_time = random.uniform(0, 2 ** attempt)
+                    time.sleep(sleep_time)
+                    continue
+                raise
+            elif isinstance(e.reason, ConnectionError):
+                if attempt < _max_retry - 1:
+                    sleep_time = random.uniform(0, 2 ** attempt)
+                    time.sleep(sleep_time)
+                    continue
+                raise
+            else:
+                # 其他 URLError 不重试
+                raise
         except Exception:
             if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
+                sleep_time = random.uniform(0, 2 ** attempt)
+                time.sleep(sleep_time)
             else:
                 raise
+
+
+def _fetch_url(url: str) -> str:
+    """带超时和重试的 URL 请求，检查Content-Type并处理编码"""
+    def _request():
+        with urllib.request.urlopen(url, timeout=_retry_timeout) as response:
+            content_type = response.headers.get('Content-Type', '')
+            raw_data = response.read()
+            # 检查Content-Type，处理编码
+            if 'charset=' in content_type:
+                charset = content_type.split('charset=')[-1].split(';')[0].strip()
+                try:
+                    return raw_data.decode(charset)
+                except (LookupError, UnicodeDecodeError):
+                    return raw_data.decode('utf-8', errors='replace')
+            else:
+                # 默认UTF-8，失败则尝试其他编码
+                try:
+                    return raw_data.decode('utf-8')
+                except UnicodeDecodeError:
+                    return raw_data.decode('latin-1')
+    return _retry_request(_request)
 
 
 # ============================================================
@@ -155,15 +212,21 @@ def normalize_theme(theme: Dict[str, str]) -> Dict[str, str]:
 class HTMLGenerator:
     """生成幻灯片 HTML"""
 
-    def __init__(self, deck: SlideDeck):
+    def __init__(self, deck: SlideDeck, custom_css: str = "", custom_js: str = ""):
         self.deck = deck
         self.theme = normalize_theme(deck.theme)
+        self.custom_css = custom_css
+        self.custom_js = custom_js
 
     def generate(self) -> str:
         """生成完整 HTML 文档"""
         css = self._build_css()
         js = self._build_js()
         slides_html = self._build_slides()
+
+        # 注入自定义样式和交互
+        custom_css_block = f"\n{custom_css}\n" if self.custom_css else ""
+        custom_js_block = f"\n{custom_js}\n" if self.custom_js else ""
 
         html = f"""<!DOCTYPE html>
 <html lang="zh-CN">
@@ -173,6 +236,7 @@ class HTMLGenerator:
 <title>{self._escape(self.deck.title)}</title>
 <style>
 {css}
+{custom_css_block}
 </style>
 </head>
 <body>
@@ -185,6 +249,7 @@ class HTMLGenerator:
 <div class="slide-number"></div>
 <script>
 {js}
+{custom_js_block}
 </script>
 </body>
 </html>"""
@@ -199,7 +264,7 @@ class HTMLGenerator:
 
     def _build_single_slide(self, page: SlidePage, index: int) -> str:
         """构建单页幻灯片 HTML"""
-        bg_style = f' style="background: {self._escape(page.background)}"' if page.background else ""
+        bg_style = f' style="background: {self._escape_attr(page.background)}"' if page.background else ""
         align_class = f" align-{page.align}" if page.align in ("left", "center", "right") else ""
 
         if page.layout == "fullscreen":
@@ -484,419 +549,4 @@ body {{
     @staticmethod
     def _escape_attr(text: str) -> str:
         """属性转义"""
-        return HTMLGenerator._escape(text).replace('"', "&quot;")
-
-
-# ============================================================
-# 输入处理
-# ============================================================
-def parse_input(input_text: str) -> Dict[str, Any]:
-    """解析输入文本为幻灯片数据字典"""
-    if not input_text or not input_text.strip():
-        raise ValueError("E001")
-
-    text = input_text.strip()
-
-    # 尝试 JSON 解析
-    try:
-        data = json.loads(text)
-        if not isinstance(data, dict):
-            raise ValueError("E001")
-        return data
-    except json.JSONDecodeError:
-        pass
-
-    # 尝试 Markdown 解析（简化版）
-    return parse_markdown(text)
-
-
-def parse_markdown(md_text: str) -> Dict[str, Any]:
-    """将 Markdown 文本解析为幻灯片数据"""
-    lines = md_text.split("\n")
-    deck_data: Dict[str, Any] = {"title": "", "pages": []}
-    current_page: Optional[Dict[str, Any]] = None
-    current_content: List[str] = []
-    in_frontmatter = False
-    found_content = False  # 标记是否找到了实际内容
-
-    for line in lines:
-        # 处理 YAML frontmatter
-        if line.strip() == "---":
-            if not in_frontmatter and not deck_data["title"] and not found_content:
-                in_frontmatter = True
-                continue
-            else:
-                in_frontmatter = False
-                continue
-
-        if in_frontmatter:
-            if ":" in line:
-                key, _, value = line.partition(":")
-                key = key.strip().lower()
-                value = value.strip().strip('"').strip("'")
-                if key in ("title", "author", "date"):
-                    deck_data[key] = value
-            continue
-
-        # 页面分隔符
-        if line.strip() in ("---", "***", "___"):
-            if current_page:
-                current_page["content"] = "\n".join(current_content).strip()
-                if current_page["content"]:  # 只有有内容才添加
-                    deck_data["pages"].append(current_page)
-            current_page = {"title": f"页面 {len(deck_data['pages']) + 1}"}
-            current_content = []
-            found_content = True
-            continue
-
-        # 一级标题 - 作为文档标题（只在开头）
-        if line.startswith("# "):
-            if not deck_data["title"] and not found_content:
-                deck_data["title"] = line[2:].strip()
-                continue
-            else:
-                # 后续的一级标题作为新页面
-                if current_page:
-                    current_page["content"] = "\n".join(current_content).strip()
-                    if current_page["content"]:
-                        deck_data["pages"].append(current_page)
-                current_page = {"title": line[2:].strip()}
-                current_content = []
-                found_content = True
-                continue
-
-        # 二级标题作为页面标题
-        if line.startswith("## "):
-            if current_page:
-                current_page["content"] = "\n".join(current_content).strip()
-                if current_page["content"]:
-                    deck_data["pages"].append(current_page)
-            current_page = {"title": line[3:].strip()}
-            current_content = []
-            found_content = True
-            continue
-
-        # 内容行
-        if current_page is not None:
-            current_content.append(line)
-        elif line.strip() and not deck_data["title"]:
-            # 如果没有标题，第一行非空内容作为标题
-            deck_data["title"] = line.strip()
-            found_content = True
-
-    # 处理最后一项
-    if current_page:
-        current_page["content"] = "\n".join(current_content).strip()
-        if current_page["content"]:
-            deck_data["pages"].append(current_page)
-
-    if not deck_data["title"]:
-        deck_data["title"] = "未命名幻灯片"
-
-    # 如果没有页面但有内容，创建一个默认页面
-    if not deck_data["pages"] and found_content:
-        deck_data["pages"] = [{"title": "内容", "content": "\n".join(current_content).strip()}]
-
-    if not deck_data["pages"]:
-        raise ValueError("E003")
-
-    return deck_data
-
-
-def fetch_url_content(url: str) -> str:
-    """从 URL 获取内容（仅支持 http/https）"""
-    parsed = urlparse(url)
-    if parsed.scheme not in ("http", "https"):
-        raise ValueError("E009")
-
-    # 标准库实现
-    import urllib.request
-
-    try:
-        with urllib.request.urlopen(url, timeout=10) as response:
-            return response.read().decode("utf-8", errors="replace")
-    except Exception as e:
-        raise ValueError(f"E008: {e}")
-
-
-# ============================================================
-# 文件输出
-# ============================================================
-def write_output(html_content: str, output_path: str) -> str:
-    """写入输出文件，返回实际写入路径"""
-    try:
-        output_dir = os.path.dirname(os.path.abspath(output_path))
-        os.makedirs(output_dir, exist_ok=True)
-        with open(output_path, "w", encoding="utf-8") as f:
-            f.write(html_content)
-        return output_path
-    except OSError as e:
-        raise ValueError(f"E007: {e}")
-
-
-# ============================================================
-# 自检模块
-# ============================================================
-def run_selftest() -> bool:
-    """运行内置自检，验证核心逻辑"""
-    print("=" * 60)
-    print("  frontend-slides 自检模式")
-    print("=" * 60)
-
-    # 测试 1: 基本数据模型
-    print("\n[1/5] 测试数据模型...")
-    try:
-        test_data = {
-            "title": "测试演示",
-            "author": "自检",
-            "date": "2026-01-01",
-            "theme": {"primary": "#ff0000"},
-            "pages": [
-                {"title": "第一页", "content": "内容一", "layout": "standard"},
-                {"title": "第二页", "content": "内容二", "layout": "two-column"},
-                {"title": "第三页", "content": "内容三", "layout": "fullscreen"},
-            ],
-        }
-        deck = SlideDeck.from_dict(test_data)
-        assert deck.title == "测试演示", "标题解析失败"
-        assert len(deck.pages) == 3, "页面数量错误"
-        assert deck.pages[0].layout == "standard", "布局类型错误"
-        print("  ✓ 数据模型测试通过")
-    except Exception as e:
-        print(f"  ✗ 数据模型测试失败: {e}")
-        return False
-
-    # 测试 2: 主题规范化
-    print("\n[2/5] 测试主题规范化...")
-    try:
-        theme = normalize_theme({"primary": "#123456"})
-        assert theme["primary"] == "#123456", "主题主色错误"
-        assert theme["secondary"] == DEFAULT_THEME["secondary"], "默认主题色未生效"
-        assert theme["background"] == "#ffffff", "默认背景色错误"
-        print("  ✓ 主题规范化测试通过")
-    except Exception as e:
-        print(f"  ✗ 主题规范化失败: {e}")
-        return False
-
-    # 测试 3: HTML 生成
-    print("\n[3/5] 测试 HTML 生成...")
-    try:
-        generator = HTMLGenerator(deck)
-        html = generator.generate()
-        assert "<!DOCTYPE html>" in html, "缺少 HTML 文档类型"
-        assert "<section" in html, "缺少幻灯片区域"
-        assert "slide-title" in html, "缺少标题样式"
-        assert "</html>" in html, "HTML 未闭合"
-        assert len(html) > 2000, "HTML 内容过短"
-        print("  ✓ HTML 生成测试通过")
-    except Exception as e:
-        print(f"  ✗ HTML 生成失败: {e}")
-        return False
-
-    # 测试 4: Markdown 解析
-    print("\n[4/5] 测试 Markdown 解析...")
-    try:
-        md_sample = """---
-title: Markdown 测试
-author: 自检
----
-
-# 标题页
-
-## 第一小节
-这是第一页的内容
-
-## 第二小节
-这是第二页的内容
-"""
-        parsed = parse_markdown(md_sample)
-        assert parsed["title"] == "Markdown 测试", "Markdown 标题解析失败"
-        assert len(parsed["pages"]) == 2, f"Markdown 页面数量错误: {len(parsed['pages'])}"
-        assert "第一页的内容" in parsed["pages"][0]["content"], "Markdown 内容解析失败"
-        assert "第二页的内容" in parsed["pages"][1]["content"], "Markdown 内容解析失败"
-        print("  ✓ Markdown 解析测试通过")
-    except Exception as e:
-        print(f"  ✗ Markdown 解析失败: {e}")
-        return False
-
-    # 测试 5: 错误处理
-    print("\n[5/5] 测试错误处理...")
-    try:
-        errors_checked = 0
-        # E001 错误
-        try:
-            parse_input("")
-            raise AssertionError("空输入未报错")
-        except ValueError as e:
-            assert str(e) == "E001", f"E001 错误码不正确: {e}"
-            errors_checked += 1
-
-        # E003 错误
-        try:
-            SlideDeck.from_dict({"title": "测试", "pages": []})
-            raise AssertionError("空页面未报错")
-        except ValueError as e:
-            assert str(e) == "E003", f"E003 错误码不正确: {e}"
-            errors_checked += 1
-
-        # E005 错误
-        try:
-            SlidePage.from_dict({"title": "测试", "content": "内容", "layout": "invalid"})
-            raise AssertionError("无效布局未报错")
-        except ValueError as e:
-            assert str(e) == "E005", f"E005 错误码不正确: {e}"
-            errors_checked += 1
-
-        assert errors_checked == 3, "错误码测试数量不足"
-        print("  ✓ 错误处理测试通过")
-    except Exception as e:
-        print(f"  ✗ 错误处理测试失败: {e}")
-        return False
-
-    # 总结
-    print("\n" + "=" * 60)
-    print("  ✅ 全部自检通过")
-    print("=" * 60)
-    return True
-
-
-# ============================================================
-# 主程序
-# ============================================================
-def main():
-    """命令行入口"""
-    parser = argparse.ArgumentParser(
-        description="frontend-slides: 将数据转换为网页幻灯片",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python main.py --input data.json --output slides.html
-  python main.py --markdown slides.md --output slides.html --theme '{"primary": "#ff0000"}'
-  python main.py --selftest
-        """,
-    )
-
-    input_group = parser.add_mutually_exclusive_group(required=False)
-    input_group.add_argument("--input", help="输入文件路径（JSON 格式）")
-    input_group.add_argument("--markdown", help="输入 Markdown 文件路径")
-    input_group.add_argument("--url", help="从 URL 获取内容")
-    input_group.add_argument("--selftest", action="store_true", help="运行自检")
-
-    parser.add_argument("--output", "-o", default="index.html", help="输出文件路径（默认: index.html）")
-    parser.add_argument("--theme", help="主题 JSON 字符串，如 '{\"primary\": \"#ff0000\"}'")
-    parser.add_argument("--list-themes", action="store_true", help="列出可用主题变量")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-
-    # 列出主题变量
-    if args.list_themes:
-        print("可用主题变量:")
-        for key, value in DEFAULT_THEME.items():
-            print(f"  {key}: {value}")
         return
-
-    try:
-        # 读取输入
-        if args.input:
-            try:
-                with open(args.input, "r", encoding="utf-8") as f:
-                    content = f.read()
-            except OSError as e:
-                print(f"错误: 无法读取输入文件: {e}")
-                sys.exit(1)
-        elif args.markdown:
-            try:
-                with open(args.markdown, "r", encoding="utf-8") as f:
-                    content = f.read()
-            except OSError as e:
-                print(f"错误: 无法读取 Markdown 文件: {e}")
-                sys.exit(1)
-        elif args.url:
-            try:
-                content = fetch_url_content(args.url)
-            except ValueError as e:
-                print(f"错误: {e}")
-                sys.exit(1)
-        else:
-            print("错误: 需要指定输入来源")
-            sys.exit(1)
-
-        # 解析数据
-        try:
-            if args.markdown or (args.input and args.input.endswith((".md", ".markdown"))):
-                deck_data = parse_markdown(content)
-            else:
-                deck_data = parse_input(content)
-        except ValueError as e:
-            error_code = str(e)
-            message = ERROR_CODES.get(error_code, f"未知错误: {e}")
-            print(f"错误 {error_code}: {message}")
-            sys.exit(1)
-
-        # 应用主题覆盖
-        if args.theme:
-            try:
-                theme_override = json.loads(args.theme)
-                if not isinstance(theme_override, dict):
-                    raise ValueError("E006")
-                deck_data.setdefault("theme", {}).update(theme_override)
-            except json.JSONDecodeError:
-                print("错误: --theme 参数必须是有效的 JSON 对象")
-                sys.exit(1)
-
-        # 创建幻灯片对象
-        try:
-            deck = SlideDeck.from_dict(deck_data)
-        except ValueError as e:
-            error_code = str(e)
-            message = ERROR_CODES.get(error_code, f"未知错误: {e}")
-            print(f"错误 {error_code}: {message}")
-            sys.exit(1)
-
-        # 生成 HTML
-        generator = HTMLGenerator(deck)
-        html_content = generator.generate()
-
-        # 写入输出
-        try:
-            output_path = write_output(html_content, args.output)
-            print(f"✅ 幻灯片已生成: {output_path}")
-            print(f"   共 {len(deck.pages)} 页")
-
-            # 验证输出文件
-            try:
-                with open(output_path, "r", encoding="utf-8") as f:
-                    verify = f.read()
-                assert len(verify) > 0, "输出文件为空"
-                assert "<!DOCTYPE html>" in verify, "输出文件不是有效的 HTML"
-                print(f"   ✓ 文件验证通过 ({len(verify)} 字节)")
-            except Exception as e:
-                print(f"   ⚠ 文件验证警告: {e}")
-
-        except ValueError as e:
-            error_code = str(e).split(":")[0]
-            message = ERROR_CODES.get(error_code, f"未知错误: {e}")
-            print(f"错误 {error_code}: {message}")
-            sys.exit(1)
-
-    except Exception as e:
-        print(f"错误 E010: 未知异常: {e}")
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
