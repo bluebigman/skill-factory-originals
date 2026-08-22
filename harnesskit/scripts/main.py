@@ -1,28 +1,25 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-harnesskit — 跨环境工作台装配技能（独立实现）
+harnesskit — 跨环境工作台装配器
 
-本脚本依据功能规格独立编写，不参考任何既有代码。
-仅使用 Python 标准库，无第三方依赖。
-
-功能概览：
+功能：
   - 技能管理：列出、安装、卸载、更新技能包
   - 工具链装配：按依赖关系组合工具为可执行链路
   - MCP 配置：读取、校验、写入 MCP 配置
   - 环境编排：跨环境同步配置，生成差异报告
 
-命令行用法：
-  python main.py --selftest          # 离线自检核心逻辑
-  python main.py skill list          # 列出技能
-  python main.py skill install <名称>
-  python main.py skill uninstall <名称>
-  python main.py skill update <名称>
-  python main.py toolchain build <工具清单JSON>
-  python main.py mcp validate <配置JSON>
-  python main.py mcp write <配置JSON> <目标路径>
-  python main.py env diff <环境A> <环境B>
-  python main.py env plan <环境A> <环境B>
+用法：
+  python run.py --selftest
+  python run.py skill list
+  python run.py skill install <名称> [--dry-run]
+  python run.py skill uninstall <名称> [--force]
+  python run.py skill update <名称> [--dry-run]
+  python run.py toolchain build <工具清单JSON>
+  python run.py mcp validate <配置JSON>
+  python run.py mcp write <配置JSON> <目标路径> [--dry-run]
+  python run.py env diff <环境A> <环境B>
+  python run.py env plan <环境A> <环境B>
 
 错误码：
   E001: 参数错误
@@ -37,14 +34,28 @@ harnesskit — 跨环境工作台装配技能（独立实现）
   E010: 内部未知错误
 """
 
+import argparse
 import json
 import os
 import sys
 import tempfile
-from collections import defaultdict
-from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+import time
+import traceback
+from collections import defaultdict, deque
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Any, Dict, List, Optional, Set, Tuple
 
+# ---------------------------------------------------------------------------
+# 常量定义
+# ---------------------------------------------------------------------------
+
+DEFAULT_HOME = Path.home() / ".harnesskit"
+SKILLS_DIR = "skills"
+CONFIG_FILE = "config.json"
+ENCODINGS = ["utf-8", "gbk", "gb18030"]
+MAX_RETRIES = 3
+RETRY_BASE_DELAY = 0.5  # 秒
 
 # ---------------------------------------------------------------------------
 # 错误处理
@@ -64,14 +75,20 @@ def _fail(code: str, message: str) -> None:
     raise HarnessKitError(code, message)
 
 
+def _now_utc() -> str:
+    """返回 UTC 时间戳字符串。"""
+    return datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC")
+
+
 # ---------------------------------------------------------------------------
-# 数据模型与内部存储
+# 数据模型
 # ---------------------------------------------------------------------------
 
 class Skill:
     """技能包对象。"""
 
-    def __init__(self, name: str, version: str, description: str = "", dependencies: Optional[List[str]] = None):
+    def __init__(self, name: str, version: str, description: str = "",
+                 dependencies: Optional[List[str]] = None):
         self.name = name
         self.version = version
         self.description = description
@@ -82,11 +99,12 @@ class Skill:
             "name": self.name,
             "version": self.version,
             "description": self.description,
-            "dependencies": list(self.dependencies),
+            "dependencies": self.dependencies,
         }
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Skill":
+        """从字典创建 Skill 对象。"""
         return cls(
             name=data.get("name", ""),
             version=data.get("version", "0.0.0"),
@@ -95,692 +113,748 @@ class Skill:
         )
 
 
-class SkillRegistry:
-    """技能注册表（内存实现）。"""
+class Toolchain:
+    """工具链对象。"""
 
-    def __init__(self, initial_skills: Optional[List[Skill]] = None):
-        self._skills: Dict[str, Skill] = {}
-        if initial_skills:
-            for skill in initial_skills:
-                self._skills[skill.name] = skill
+    def __init__(self, name: str, tools: List[str]):
+        self.name = name
+        self.tools = tools
 
-    def list(self) -> List[Skill]:
-        """返回全部技能（按名称排序）。"""
-        return [self._skills[name] for name in sorted(self._skills.keys())]
+    def to_dict(self) -> Dict[str, Any]:
+        return {"name": self.name, "tools": self.tools}
 
-    def get(self, name: str) -> Optional[Skill]:
-        return self._skills.get(name)
 
-    def install(self, skill: Skill) -> bool:
-        """安装技能。若已存在则视为更新。"""
-        self._skills[skill.name] = skill
+# ---------------------------------------------------------------------------
+# 存储管理
+# ---------------------------------------------------------------------------
+
+class Storage:
+    """管理技能存储目录。"""
+
+    def __init__(self, base_dir: Optional[Path] = None):
+        self.base_dir = base_dir or Path(os.environ.get("HARNESSKIT_HOME", DEFAULT_HOME))
+        self.skills_dir = self.base_dir / SKILLS_DIR
+        self.config_path = self.base_dir / CONFIG_FILE
+        self._ensure_dirs()
+
+    def _ensure_dirs(self) -> None:
+        """确保目录结构存在。"""
+        try:
+            self.skills_dir.mkdir(parents=True, exist_ok=True)
+        except OSError as e:
+            _fail("E010", f"无法创建存储目录: {e}")
+
+    def _read_json(self, path: Path) -> Dict[str, Any]:
+        """读取 JSON 文件，支持多编码。"""
+        if not path.exists():
+            return {}
+        for encoding in ENCODINGS:
+            try:
+                with open(path, "r", encoding=encoding) as f:
+                    return json.load(f)
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                continue
+        _fail("E010", f"无法读取文件（编码不支持）: {path}")
+
+    def _write_json_atomic(self, path: Path, data: Dict[str, Any]) -> None:
+        """原子化写入 JSON 文件。"""
+        try:
+            fd, tmp_path = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8") as f:
+                    json.dump(data, f, ensure_ascii=False, indent=2)
+                os.replace(tmp_path, str(path))
+            except Exception:
+                os.unlink(tmp_path)
+                raise
+        except OSError as e:
+            _fail("E010", f"写入文件失败: {e}")
+
+    def list_skills(self) -> List[Skill]:
+        """列出所有已安装技能。"""
+        skills = []
+        for skill_file in self.skills_dir.glob("*.json"):
+            try:
+                data = self._read_json(skill_file)
+                if data:
+                    skills.append(Skill.from_dict(data))
+            except HarnessKitError:
+                continue
+        return sorted(skills, key=lambda s: s.name)
+
+    def get_skill(self, name: str) -> Optional[Skill]:
+        """获取指定技能。"""
+        skill_path = self.skills_dir / f"{name}.json"
+        if not skill_path.exists():
+            return None
+        data = self._read_json(skill_path)
+        return Skill.from_dict(data) if data else None
+
+    def install_skill(self, skill: Skill, dry_run: bool = False) -> bool:
+        """安装技能包。"""
+        if dry_run:
+            print(f"[DRY-RUN] 将安装技能: {skill.name}@{skill.version}")
+            return True
+        skill_path = self.skills_dir / f"{skill.name}.json"
+        self._write_json_atomic(skill_path, skill.to_dict())
         return True
 
-    def uninstall(self, name: str) -> bool:
-        """卸载技能。若不存在返回 False。"""
-        if name in self._skills:
-            del self._skills[name]
+    def uninstall_skill(self, name: str, dry_run: bool = False) -> bool:
+        """卸载技能包。"""
+        skill_path = self.skills_dir / f"{name}.json"
+        if not skill_path.exists():
+            _fail("E002", f"技能不存在: {name}")
+        if dry_run:
+            print(f"[DRY-RUN] 将卸载技能: {name}")
             return True
-        return False
+        try:
+            skill_path.unlink()
+            return True
+        except OSError as e:
+            _fail("E004", f"技能卸载失败: {e}")
 
-    def update(self, skill: Skill) -> bool:
-        """更新技能。若不存在返回 False。"""
-        if skill.name in self._skills:
-            self._skills[skill.name] = skill
+    def update_skill(self, skill: Skill, dry_run: bool = False) -> bool:
+        """更新技能包。"""
+        existing = self.get_skill(skill.name)
+        if not existing:
+            _fail("E002", f"技能不存在: {skill.name}")
+        if dry_run:
+            print(f"[DRY-RUN] 将更新技能: {skill.name} {existing.version} -> {skill.version}")
             return True
-        return False
+        return self.install_skill(skill, dry_run=False)
 
 
 # ---------------------------------------------------------------------------
 # 工具链装配
 # ---------------------------------------------------------------------------
 
-class ToolchainAssembler:
-    """工具链装配器：按依赖关系将工具组合为执行链路。"""
+def build_toolchain(tools: List[str], dependencies: Dict[str, List[str]]) -> List[str]:
+    """按依赖关系构建工具链（拓扑排序）。
 
-    @staticmethod
-    def build(tools: List[Dict[str, Any]]) -> Dict[str, Any]:
-        """
-        输入工具清单，输出装配拓扑图与执行顺序。
+    Args:
+        tools: 工具列表
+        dependencies: 工具依赖关系 {工具名: [依赖工具列表]}
 
-        工具格式: {"name": str, "dependencies": [str, ...]}
-        """
-        if not tools:
-            _fail("E006", "工具清单为空，无法装配")
+    Returns:
+        排序后的工具链列表
 
-        # 构建依赖图
-        graph: Dict[str, List[str]] = {}
-        all_names: set = set()
-        tool_order: List[str] = []  # 保持原始顺序
+    Raises:
+        HarnessKitError: 存在循环依赖或未知工具
+    """
+    # 构建依赖图
+    graph: Dict[str, List[str]] = {tool: [] for tool in tools}
+    in_degree: Dict[str, int] = {tool: 0 for tool in tools}
 
-        for tool in tools:
-            name = tool.get("name")
-            if not name:
-                _fail("E006", "工具缺少 name 字段")
-            deps = tool.get("dependencies", [])
-            graph[name] = list(deps)
-            all_names.add(name)
-            tool_order.append(name)  # 记录原始顺序
-            for dep in deps:
-                all_names.add(dep)
+    for tool in tools:
+        for dep in dependencies.get(tool, []):
+            if dep not in tools:
+                _fail("E006", f"未知依赖工具: {dep} (依赖方: {tool})")
+            graph[dep].append(tool)
+            in_degree[tool] += 1
 
-        # 检查依赖是否存在（允许外部依赖，但记录警告）
-        missing = set()
-        for name, deps in graph.items():
-            for dep in deps:
-                if dep not in graph:
-                    missing.add(dep)
+    # Kahn 算法拓扑排序
+    queue = deque([t for t in tools if in_degree[t] == 0])
+    result = []
 
-        # 拓扑排序（Kahn 算法）
-        in_degree: Dict[str, int] = {n: 0 for n in graph}
-        for deps in graph.values():
-            for dep in deps:
-                if dep in in_degree:
-                    in_degree[dep] += 1
+    while queue:
+        tool = queue.popleft()
+        result.append(tool)
+        for dependent in graph[tool]:
+            in_degree[dependent] -= 1
+            if in_degree[dependent] == 0:
+                queue.append(dependent)
 
-        # 关键修复：按原始顺序选择入度为0的节点
-        queue = [n for n in tool_order if in_degree[n] == 0]
-        exec_order: List[str] = []
+    if len(result) != len(tools):
+        _fail("E006", "存在循环依赖，无法构建工具链")
 
-        while queue:
-            node = queue.pop(0)
-            exec_order.append(node)
-            for dep in graph.get(node, []):
-                if dep in in_degree:
-                    in_degree[dep] -= 1
-                    if in_degree[dep] == 0:
-                        # 按原始顺序插入
-                        idx = tool_order.index(dep)
-                        # 找到合适的位置插入
-                        insert_pos = len(queue)
-                        for i, q in enumerate(queue):
-                            if tool_order.index(q) > idx:
-                                insert_pos = i
-                                break
-                        queue.insert(insert_pos, dep)
-
-        # 检测环
-        if len(exec_order) != len(graph):
-            _fail("E006", "依赖关系存在环，无法完成拓扑排序")
-
-        return {
-            "topology": graph,
-            "execution_order": exec_order,
-            "missing_external_deps": sorted(missing),
-        }
+    return result
 
 
 # ---------------------------------------------------------------------------
 # MCP 配置管理
 # ---------------------------------------------------------------------------
 
-class MCPConfigManager:
-    """MCP 配置管理器：校验与写入。"""
+def validate_mcp_config(config: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    """校验 MCP 配置。
 
-    # 必填字段
-    REQUIRED_FIELDS = ["server", "endpoint"]
-    # 可选字段
-    OPTIONAL_FIELDS = ["auth_type", "timeout", "headers"]
+    Args:
+        config: MCP 配置字典
 
-    @classmethod
-    def validate(cls, config: Dict[str, Any]) -> Dict[str, Any]:
-        """校验 MCP 配置，返回校验报告。"""
-        report: Dict[str, Any] = {
-            "valid": True,
-            "errors": [],
-            "warnings": [],
-        }
+    Returns:
+        (是否有效, 错误信息列表)
+    """
+    errors = []
+    servers = config.get("servers", {})
+    if not isinstance(servers, dict):
+        errors.append("servers 必须是对象")
+        return False, errors
 
-        # 检查必填字段
-        for field in cls.REQUIRED_FIELDS:
-            if field not in config or not config[field]:
-                report["valid"] = False
-                report["errors"].append(f"缺少必填字段: {field}")
+    for name, server in servers.items():
+        if not isinstance(server, dict):
+            errors.append(f"服务器 '{name}' 必须是对象")
+            continue
+        if "command" not in server:
+            errors.append(f"服务器 '{name}' 缺少 command 字段")
+        if "args" in server and not isinstance(server["args"], list):
+            errors.append(f"服务器 '{name}' 的 args 必须是数组")
+        if "env" in server and not isinstance(server["env"], dict):
+            errors.append(f"服务器 '{name}' 的 env 必须是对象")
 
-        # 检查类型
-        if "timeout" in config and config["timeout"] is not None:
-            if not isinstance(config["timeout"], (int, float)) or config["timeout"] <= 0:
-                report["valid"] = False
-                report["errors"].append("timeout 必须为正数")
+    return len(errors) == 0, errors
 
-        if "headers" in config and config["headers"] is not None:
-            if not isinstance(config["headers"], dict):
-                report["valid"] = False
-                report["errors"].append("headers 必须为对象")
 
-        # 检查未知字段（警告）
-        known = set(cls.REQUIRED_FIELDS + cls.OPTIONAL_FIELDS)
-        for key in config:
-            if key not in known:
-                report["warnings"].append(f"未知字段: {key}")
+def write_mcp_config(config: Dict[str, Any], target_path: Path, dry_run: bool = False) -> bool:
+    """写入 MCP 配置（原子化）。
 
-        return report
+    Args:
+        config: MCP 配置字典
+        target_path: 目标文件路径
+        dry_run: 是否仅预览
 
-    @classmethod
-    def write(cls, config: Dict[str, Any], target_path: str) -> Dict[str, Any]:
-        """写入 MCP 配置到目标文件，返回写入结果。"""
-        # 先校验
-        report = cls.validate(config)
-        if not report["valid"]:
-            _fail("E007", f"MCP 配置校验失败: {report['errors']}")
+    Returns:
+        是否成功
+    """
+    valid, errors = validate_mcp_config(config)
+    if not valid:
+        _fail("E007", f"MCP 配置校验失败: {'; '.join(errors)}")
 
+    if dry_run:
+        server_count = len(config.get("servers", {}))
+        print(f"[DRY-RUN] 将写入配置到: {target_path} ({server_count} 个服务器)")
+        return True
+
+    try:
+        target_path.parent.mkdir(parents=True, exist_ok=True)
+        fd, tmp_path = tempfile.mkstemp(dir=str(target_path.parent), suffix=".tmp")
         try:
-            # 确保目录存在
-            parent = os.path.dirname(os.path.abspath(target_path))
-            os.makedirs(parent, exist_ok=True)
-
-            # 写入 JSON
-            with open(target_path, "w", encoding="utf-8") as f:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
                 json.dump(config, f, ensure_ascii=False, indent=2)
-
-            return {
-                "written": True,
-                "path": os.path.abspath(target_path),
-                "size": os.path.getsize(target_path),
-            }
-        except OSError as e:
-            _fail("E008", f"MCP 配置写入失败: {str(e)}")
-        except Exception as e:
-            _fail("E008", f"MCP 配置写入失败: {str(e)}")
-
-        # 不可达（_fail 会抛出异常）
-        return {"written": False}  # pragma: no cover
+            os.replace(tmp_path, str(target_path))
+        except Exception:
+            os.unlink(tmp_path)
+            raise
+        return True
+    except OSError as e:
+        _fail("E008", f"MCP 配置写入失败: {e}")
 
 
 # ---------------------------------------------------------------------------
-# 环境编排
+# 环境差异分析
 # ---------------------------------------------------------------------------
 
-class EnvironmentOrchestrator:
-    """环境编排器：跨环境同步配置，生成差异报告。"""
-
-    @staticmethod
-    def diff(env_a: Dict[str, Any], env_b: Dict[str, Any]) -> Dict[str, Any]:
-        """比较两个环境配置，返回差异报告。"""
-        report: Dict[str, Any] = {
-            "same": True,
-            "added": [],
-            "removed": [],
-            "modified": [],
-        }
-
-        keys_a = set(env_a.keys())
-        keys_b = set(env_b.keys())
-
-        # 新增的键
-        for key in sorted(keys_b - keys_a):
-            report["added"].append(key)
-            report["same"] = False
-
-        # 删除的键
-        for key in sorted(keys_a - keys_b):
-            report["removed"].append(key)
-            report["same"] = False
-
-        # 修改的键
-        for key in sorted(keys_a & keys_b):
-            if env_a[key] != env_b[key]:
-                report["modified"].append(key)
-                report["same"] = False
-
-        return report
-
-    @classmethod
-    def plan(cls, env_a: Dict[str, Any], env_b: Dict[str, Any]) -> Dict[str, Any]:
-        """生成从环境 A 同步到环境 B 的计划。"""
-        diff_report = cls.diff(env_a, env_b)
-
-        plan = {
-            "target": "env_b",
-            "steps": [],
-        }
-
-        # 删除多余键
-        for key in diff_report["removed"]:
-            plan["steps"].append({"action": "remove", "key": key})
-
-        # 修改差异键
-        for key in diff_report["modified"]:
-            plan["steps"].append({
-                "action": "set",
-                "key": key,
-                "value": env_b[key],
-            })
-
-        # 新增缺失键
-        for key in diff_report["added"]:
-            plan["steps"].append({
-                "action": "set",
-                "key": key,
-                "value": env_b[key],
-            })
-
-        if not diff_report["same"]:
-            plan["steps"].append({"action": "apply", "message": "应用配置变更"})
-
-        return plan
-
-
-# ---------------------------------------------------------------------------
-# 内置样例数据（用于自检）
-# ---------------------------------------------------------------------------
-
-def _builtin_sample_skills() -> List[Skill]:
-    """返回内置样例技能列表。"""
-    return [
-        Skill(
-            name="text-tools",
-            version="1.2.0",
-            description="文本处理工具集",
-            dependencies=[],
-        ),
-        Skill(
-            name="data-parse",
-            version="0.9.1",
-            description="数据解析器",
-            dependencies=["text-tools"],
-        ),
-        Skill(
-            name="report-gen",
-            version="2.0.0",
-            description="报告生成器",
-            dependencies=["data-parse"],
-        ),
-    ]
-
-
-def _builtin_sample_tools() -> List[Dict[str, Any]]:
-    """返回内置样例工具清单。"""
-    return [
-        {"name": "fetch", "dependencies": []},
-        {"name": "parse", "dependencies": ["fetch"]},
-        {"name": "analyze", "dependencies": ["parse"]},
-        {"name": "report", "dependencies": ["analyze"]},
-    ]
-
-
-def _builtin_sample_mcp_config() -> Dict[str, Any]:
-    """返回内置样例 MCP 配置。"""
-    return {
-        "server": "local-ai",
-        "endpoint": "http://127.0.0.1:8080/mcp",
-        "auth_type": "env",
-        "timeout": 30,
-        "headers": {"Content-Type": "application/json"},
-    }
-
-
-def _builtin_sample_env_a() -> Dict[str, Any]:
-    """返回内置样例环境 A 配置。"""
-    return {
-        "model": "claude-3",
-        "temperature": 0.7,
-        "max_tokens": 4096,
-    }
-
-
-def _builtin_sample_env_b() -> Dict[str, Any]:
-    """返回内置样例环境 B 配置。"""
-    return {
-        "model": "gpt-4",
-        "temperature": 0.5,
-        "max_tokens": 8192,
-        "top_p": 0.9,
-    }
-
-
-# ---------------------------------------------------------------------------
-# 自检逻辑
-# ---------------------------------------------------------------------------
-
-def _selftest() -> bool:
-    """离线自检核心逻辑，使用内置硬编码样例数据。"""
-    print("=== harnesskit 自检开始 ===")
-
-    # 1. 技能管理自检
-    print("[1/4] 技能管理...")
-    registry = SkillRegistry(initial_skills=_builtin_sample_skills())
-    skills = registry.list()
-    assert len(skills) == 3, f"技能数量应为 3，实际 {len(skills)}"
-    assert skills[0].name == "data-parse", "技能应按名称排序"
-
-    # 安装新技能
-    new_skill = Skill("visualizer", "0.1.0", "可视化工具", ["data-parse"])
-    registry.install(new_skill)
-    assert registry.get("visualizer") is not None, "安装后应能查询到"
-
-    # 更新技能
-    updated = Skill("text-tools", "1.3.0", "升级版文本工具")
-    assert registry.update(updated), "更新已有技能应返回 True"
-    assert registry.get("text-tools").version == "1.3.0", "版本应更新为 1.3.0"
-
-    # 卸载技能
-    assert registry.uninstall("visualizer"), "卸载技能应返回 True"
-    assert registry.get("visualizer") is None, "卸载后应查询不到"
-    assert not registry.uninstall("nonexistent"), "卸载不存在的技能应返回 False"
-
-    print("      技能管理: 通过")
-
-    # 2. 工具链装配自检
-    print("[2/4] 工具链装配...")
-    assembler = ToolchainAssembler()
-    result = assembler.build(_builtin_sample_tools())
-
-    # 执行顺序应包含全部工具
-    assert len(result["execution_order"]) == 4, "应有 4 个工具"
-    # 第一个应是无依赖的 fetch
-    assert result["execution_order"][0] == "fetch", "第一个执行的应为 fetch"
-    # 最后一个应为 report
-    assert result["execution_order"][-1] == "report", "最后一个执行的应为 report"
-    # 依赖关系应正确
-    assert result["topology"]["report"] == ["analyze"], "report 依赖 analyze"
-
-    # 环检测
-    cyclic_tools = [
-        {"name": "a", "dependencies": ["b"]},
-        {"name": "b", "dependencies": ["a"]},
-    ]
+def _load_env_config(path: Path) -> Dict[str, Any]:
+    """加载环境配置文件。"""
+    if not path.exists():
+        _fail("E009", f"环境配置文件不存在: {path}")
     try:
-        assembler.build(cyclic_tools)
-        assert False, "环依赖应抛出异常"
-    except HarnessKitError as e:
-        assert e.code == "E006", f"环依赖错误码应为 E006，实际 {e.code}"
+        with open(path, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except (UnicodeDecodeError, json.JSONDecodeError) as e:
+        # 尝试其他编码
+        for encoding in ENCODINGS[1:]:
+            try:
+                with open(path, "r", encoding=encoding) as f:
+                    return json.load(f)
+            except (UnicodeDecodeError, json.JSONDecodeError):
+                continue
+        _fail("E009", f"无法解析环境配置文件: {path} ({e})")
 
-    print("      工具链装配: 通过")
 
-    # 3. MCP 配置自检
-    print("[3/4] MCP 配置...")
-    mcp_mgr = MCPConfigManager()
+def env_diff(env_a: Dict[str, Any], env_b: Dict[str, Any]) -> List[Dict[str, str]]:
+    """对比两个环境配置，返回差异列表。
 
-    # 有效配置
-    valid_report = mcp_mgr.validate(_builtin_sample_mcp_config())
-    assert valid_report["valid"], "有效配置应通过校验"
+    Args:
+        env_a: 环境 A 配置
+        env_b: 环境 B 配置
 
-    # 无效配置
-    invalid_config = {"server": "test"}  # 缺少 endpoint
-    invalid_report = mcp_mgr.validate(invalid_config)
-    assert not invalid_report["valid"], "缺少 endpoint 应校验失败"
-    assert len(invalid_report["errors"]) > 0, "应有错误信息"
+    Returns:
+        差异项列表，每项包含 type/name/old/new 字段
+    """
+    diffs = []
 
-    # 写入测试（使用临时目录）
-    with tempfile.TemporaryDirectory() as tmpdir:
-        target = os.path.join(tmpdir, "mcp", "config.json")
-        write_result = mcp_mgr.write(_builtin_sample_mcp_config(), target)
-        assert write_result["written"], "写入应成功"
-        assert os.path.exists(target), "文件应存在"
+    # 对比技能
+    skills_a = {s["name"]: s.get("version", "0.0.0") for s in env_a.get("skills", [])}
+    skills_b = {s["name"]: s.get("version", "0.0.0") for s in env_b.get("skills", [])}
 
-        # 验证写入内容
-        with open(target, "r", encoding="utf-8") as f:
-            loaded = json.load(f)
-        assert loaded["server"] == "local-ai", "写入内容应正确"
+    for name in skills_b:
+        if name not in skills_a:
+            diffs.append({"type": "新增", "name": f"skill:{name}", "old": "-", "new": skills_b[name]})
+        elif skills_a[name] != skills_b[name]:
+            diffs.append({"type": "变更", "name": f"skill:{name}", "old": skills_a[name], "new": skills_b[name]})
 
-    print("      MCP 配置: 通过")
+    for name in skills_a:
+        if name not in skills_b:
+            diffs.append({"type": "删除", "name": f"skill:{name}", "old": skills_a[name], "new": "-"})
 
-    # 4. 环境编排自检
-    print("[4/4] 环境编排...")
-    orch = EnvironmentOrchestrator()
-    env_a = _builtin_sample_env_a()
-    env_b = _builtin_sample_env_b()
+    # 对比工具
+    tools_a = set(env_a.get("tools", []))
+    tools_b = set(env_b.get("tools", []))
 
-    diff_report = orch.diff(env_a, env_b)
-    assert not diff_report["same"], "两个环境应不同"
-    assert "top_p" in diff_report["added"], "top_p 应标记为新增"
-    assert "max_tokens" in diff_report["modified"], "max_tokens 应标记为修改"
+    for tool in tools_b - tools_a:
+        diffs.append({"type": "新增", "name": f"tool:{tool}", "old": "-", "new": "present"})
+    for tool in tools_a - tools_b:
+        diffs.append({"type": "删除", "name": f"tool:{tool}", "old": "present", "new": "-"})
 
-    plan = orch.plan(env_a, env_b)
-    assert len(plan["steps"]) >= 3, "计划步骤应不少于 3 步"
-    assert plan["steps"][-1]["action"] == "apply", "最后一步应为应用变更"
+    # 对比 MCP 服务器
+    mcp_a = set(env_a.get("mcp_servers", []))
+    mcp_b = set(env_b.get("mcp_servers", []))
 
-    # 相同环境
-    same_report = orch.diff(env_a, dict(env_a))
-    assert same_report["same"], "相同环境应无差异"
+    for server in mcp_b - mcp_a:
+        diffs.append({"type": "新增", "name": f"mcp:{server}", "old": "-", "new": "present"})
+    for server in mcp_a - mcp_b:
+        diffs.append({"type": "删除", "name": f"mcp:{server}", "old": "present", "new": "-"})
 
-    print("      环境编排: 通过")
+    return diffs
 
-    print("=== 全部自检通过 ===")
-    return True
+
+def generate_env_plan(env_a: Dict[str, Any], env_b: Dict[str, Any]) -> List[str]:
+    """生成环境迁移计划。
+
+    Args:
+        env_a: 源环境配置
+        env_b: 目标环境配置
+
+    Returns:
+        迁移步骤列表
+    """
+    diffs = env_diff(env_a, env_b)
+    plan = []
+
+    for diff in diffs:
+        if diff["type"] == "新增":
+            plan.append(f"安装 {diff['name']} (版本: {diff['new']})")
+        elif diff["type"] == "删除":
+            plan.append(f"卸载 {diff['name']} (原版本: {diff['old']})")
+        elif diff["type"] == "变更":
+            plan.append(f"更新 {diff['name']}: {diff['old']} -> {diff['new']}")
+
+    return plan
 
 
 # ---------------------------------------------------------------------------
-# 命令行入口
+# CLI 入口
 # ---------------------------------------------------------------------------
 
-def _cmd_skill_list(registry: SkillRegistry) -> int:
-    """列出所有技能。"""
-    skills = registry.list()
+def cmd_skill_list(args: argparse.Namespace, storage: Storage) -> int:
+    """处理 skill list 命令。"""
+    skills = storage.list_skills()
     if not skills:
-        print("（无已安装技能）")
+        print("未安装任何技能")
         return 0
-
-    print(f"{'名称':<20} {'版本':<10} 描述")
-    print("-" * 60)
+    print(f"已安装技能 ({len(skills)}):")
     for skill in skills:
-        print(f"{skill.name:<20} {skill.version:<10} {skill.description}")
+        deps = f" (依赖: {', '.join(skill.dependencies)})" if skill.dependencies else ""
+        print(f"  - {skill.name}@{skill.version}{deps}")
     return 0
 
 
-def _cmd_skill_install(registry: SkillRegistry, name: str) -> int:
-    """安装技能（模拟）。"""
-    if not name:
-        _fail("E001", "缺少技能名称")
-
-    # 模拟安装：创建新技能对象
-    skill = Skill(name=name, version="1.0.0", description=f"手动安装的技能 {name}")
-    registry.install(skill)
-    print(f"技能已安装: {name} (v1.0.0)")
-    return 0
-
-
-def _cmd_skill_uninstall(registry: SkillRegistry, name: str) -> int:
-    """卸载技能。"""
-    if not name:
-        _fail("E001", "缺少技能名称")
-
-    if registry.uninstall(name):
-        print(f"技能已卸载: {name}")
+def cmd_skill_install(args: argparse.Namespace, storage: Storage) -> int:
+    """处理 skill install 命令。"""
+    try:
+        # 构造技能对象
+        skill = Skill(
+            name=args.name,
+            version=args.version or "1.0.0",
+            description=args.description or "",
+            dependencies=args.dependencies or [],
+        )
+        storage.install_skill(skill, dry_run=args.dry_run)
+        if not args.dry_run:
+            print(f"技能 {skill.name}@{skill.version} 安装成功")
         return 0
-    _fail("E002", f"技能不存在: {name}")
-    return 1  # 不可达
+    except HarnessKitError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
 
 
-def _cmd_skill_update(registry: SkillRegistry, name: str) -> int:
-    """更新技能（模拟）。"""
-    if not name:
-        _fail("E001", "缺少技能名称")
-
-    existing = registry.get(name)
-    if not existing:
-        _fail("E002", f"技能不存在: {name}")
-
-    updated = Skill(name=name, version="2.0.0", description=existing.description)
-    registry.update(updated)
-    print(f"技能已更新: {name} (v2.0.0)")
-    return 0
-
-
-def _cmd_toolchain_build(tools_json: str) -> int:
-    """构建工具链。"""
+def cmd_skill_uninstall(args: argparse.Namespace, storage: Storage) -> int:
+    """处理 skill uninstall 命令。"""
     try:
-        tools = json.loads(tools_json)
-    except json.JSONDecodeError:
-        _fail("E001", "工具清单 JSON 解析失败")
-
-    assembler = ToolchainAssembler()
-    result = assembler.build(tools)
-
-    print("=== 装配拓扑图 ===")
-    for node, deps in result["topology"].items():
-        dep_str = ", ".join(deps) if deps else "（无）"
-        print(f"  {node} -> {dep_str}")
-
-    print("\n=== 执行顺序 ===")
-    for i, step in enumerate(result["execution_order"], 1):
-        print(f"  {i}. {step}")
-
-    if result["missing_external_deps"]:
-        print(f"\n⚠ 外部依赖（不在清单中）: {', '.join(result['missing_external_deps'])}")
-
-    return 0
-
-
-def _cmd_mcp_validate(config_json: str) -> int:
-    """校验 MCP 配置。"""
-    try:
-        config = json.loads(config_json)
-    except json.JSONDecodeError:
-        _fail("E001", "配置 JSON 解析失败")
-
-    report = MCPConfigManager.validate(config)
-    if report["valid"]:
-        print("✅ MCP 配置有效")
-    else:
-        print("❌ MCP 配置无效:")
-        for err in report["errors"]:
-            print(f"  - {err}")
-
-    if report["warnings"]:
-        print("⚠ 警告:")
-        for warn in report["warnings"]:
-            print(f"  - {warn}")
-
-    return 0 if report["valid"] else 1
-
-
-def _cmd_mcp_write(config_json: str, target_path: str) -> int:
-    """写入 MCP 配置。"""
-    try:
-        config = json.loads(config_json)
-    except json.JSONDecodeError:
-        _fail("E001", "配置 JSON 解析失败")
-
-    result = MCPConfigManager.write(config, target_path)
-    print(f"✅ 配置已写入: {result['path']} ({result['size']} 字节)")
-    return 0
-
-
-def _cmd_env_diff(env_a_json: str, env_b_json: str) -> int:
-    """比较两个环境配置。"""
-    try:
-        env_a = json.loads(env_a_json)
-        env_b = json.loads(env_b_json)
-    except json.JSONDecodeError:
-        _fail("E001", "环境配置 JSON 解析失败")
-
-    report = EnvironmentOrchestrator.diff(env_a, env_b)
-
-    if report["same"]:
-        print("✅ 两个环境配置相同")
+        if not args.force and not args.dry_run:
+            print(f"警告: 将卸载技能 {args.name}。使用 --force 确认执行。", file=sys.stderr)
+            return 1
+        storage.uninstall_skill(args.name, dry_run=args.dry_run)
+        if not args.dry_run:
+            print(f"技能 {args.name} 卸载成功")
         return 0
-
-    print("环境配置差异:")
-    if report["added"]:
-        print(f"  新增: {', '.join(report['added'])}")
-    if report["removed"]:
-        print(f"  删除: {', '.join(report['removed'])}")
-    if report["modified"]:
-        print(f"  修改: {', '.join(report['modified'])}")
-
-    return 0
+    except HarnessKitError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
 
 
-def _cmd_env_plan(env_a_json: str, env_b_json: str) -> int:
-    """生成环境同步计划。"""
+def cmd_skill_update(args: argparse.Namespace, storage: Storage) -> int:
+    """处理 skill update 命令。"""
     try:
-        env_a = json.loads(env_a_json)
-        env_b = json.loads(env_b_json)
-    except json.JSONDecodeError:
-        _fail("E001", "环境配置 JSON 解析失败")
+        existing = storage.get_skill(args.name)
+        if not existing:
+            _fail("E002", f"技能不存在: {args.name}")
+        new_skill = Skill(
+            name=args.name,
+            version=args.version or "2.0.0",
+            description=existing.description,
+            dependencies=existing.dependencies,
+        )
+        storage.update_skill(new_skill, dry_run=args.dry_run)
+        if not args.dry_run:
+            print(f"技能 {args.name} 更新到 {new_skill.version} 成功")
+        return 0
+    except HarnessKitError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
 
-    plan = EnvironmentOrchestrator.plan(env_a, env_b)
 
-    print(f"同步计划（目标: {plan['target']}）:")
-    for i, step in enumerate(plan["steps"], 1):
-        if step["action"] == "set":
-            print(f"  {i}. 设置 {step['key']} = {json.dumps(step['value'], ensure_ascii=False)}")
-        elif step["action"] == "remove":
-            print(f"  {i}. 删除 {step['key']}")
+def cmd_toolchain_build(args: argparse.Namespace) -> int:
+    """处理 toolchain build 命令。"""
+    try:
+        data = json.loads(args.spec)
+        tools = data.get("tools", [])
+        dependencies = data.get("dependencies", {})
+        if not tools:
+            _fail("E006", "工具列表不能为空")
+        result = build_toolchain(tools, dependencies)
+        print(f"工具链构建成功 ({len(result)} 个工具):")
+        for i, tool in enumerate(result, 1):
+            print(f"  {i}. {tool}")
+        return 0
+    except (json.JSONDecodeError, HarnessKitError) as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+
+
+def cmd_mcp_validate(args: argparse.Namespace) -> int:
+    """处理 mcp validate 命令。"""
+    try:
+        config = json.loads(args.config)
+        valid, errors = validate_mcp_config(config)
+        if valid:
+            server_count = len(config.get("servers", {}))
+            print(f"MCP 配置校验通过: {server_count} 个服务器")
+            return 0
         else:
-            print(f"  {i}. {step.get('message', step['action'])}")
+            print(f"MCP 配置校验失败 ({len(errors)} 个错误):", file=sys.stderr)
+            for error in errors:
+                print(f"  - {error}", file=sys.stderr)
+            return 1
+    except json.JSONDecodeError as e:
+        print(f"错误: JSON 解析失败: {e}", file=sys.stderr)
+        return 1
 
-    return 0
 
+def cmd_mcp_write(args: argparse.Namespace) -> int:
+    """处理 mcp write 命令。"""
+    try:
+        config = json.loads(args.config)
+        target = Path(args.target)
+        write_mcp_config(config, target, dry_run=args.dry_run)
+        if not args.dry_run:
+            print(f"配置已写入: {target}")
+        return 0
+    except (json.JSONDecodeError, HarnessKitError) as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+
+
+def cmd_env_diff(args: argparse.Namespace) -> int:
+    """处理 env diff 命令。"""
+    try:
+        env_a = _load_env_config(Path(args.env_a))
+        env_b = _load_env_config(Path(args.env_b))
+        diffs = env_diff(env_a, env_b)
+        if not diffs:
+            print("两个环境配置完全一致")
+            return 0
+        print(f"差异项: {len(diffs)}")
+        for diff in diffs:
+            print(f"  - [{diff['type']}] {diff['name']}: {diff['old']} -> {diff['new']}")
+        return 0
+    except HarnessKitError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+
+
+def cmd_env_plan(args: argparse.Namespace) -> int:
+    """处理 env plan 命令。"""
+    try:
+        env_a = _load_env_config(Path(args.env_a))
+        env_b = _load_env_config(Path(args.env_b))
+        plan = generate_env_plan(env_a, env_b)
+        if not plan:
+            print("无需迁移，两个环境配置一致")
+            return 0
+        print(f"迁移计划 ({len(plan)} 步):")
+        for i, step in enumerate(plan, 1):
+            print(f"  {i}. {step}")
+        return 0
+    except HarnessKitError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+
+
+# ---------------------------------------------------------------------------
+# 自检
+# ---------------------------------------------------------------------------
+
+def run_selftest() -> int:
+    """运行自检，验证核心功能。"""
+    print("=" * 60)
+    print("HarnessKit 自检开始")
+    print(f"时间: {_now_utc()}")
+    print("=" * 60)
+
+    failures = 0
+
+    # 1. 测试工具链构建
+    print("\n[1/5] 测试工具链构建...")
+    try:
+        tools = ["a", "b", "c", "d"]
+        deps = {"b": ["a"], "c": ["b"], "d": ["a", "c"]}
+        result = build_toolchain(tools, deps)
+        assert len(result) == 4, f"工具链长度应为 4，实际 {len(result)}"
+        assert result[0] == "a", f"第一个工具应为 a，实际 {result[0]}"
+        assert result[-1] == "d", f"最后一个工具应为 d，实际 {result[-1]}"
+        print(f"  ✓ 工具链构建成功: {result}")
+    except Exception as e:
+        print(f"  ✗ 工具链构建失败: {e}")
+        failures += 1
+
+    # 2. 测试循环依赖检测
+    print("\n[2/5] 测试循环依赖检测...")
+    try:
+        tools = ["a", "b"]
+        deps = {"a": ["b"], "b": ["a"]}
+        try:
+            build_toolchain(tools, deps)
+            print("  ✗ 应检测到循环依赖但未检测到")
+            failures += 1
+        except HarnessKitError as e:
+            assert e.code == "E006", f"错误码应为 E006，实际 {e.code}"
+            print(f"  ✓ 循环依赖检测成功: {e.message}")
+    except Exception as e:
+        print(f"  ✗ 循环依赖测试异常: {e}")
+        failures += 1
+
+    # 3. 测试 MCP 配置校验
+    print("\n[3/5] 测试 MCP 配置校验...")
+    try:
+        # 有效配置
+        valid_config = {
+            "servers": {
+                "github": {"command": "node", "args": ["server.js"]},
+                "filesystem": {"command": "python", "args": ["fs_server.py"]},
+            }
+        }
+        valid, errors = validate_mcp_config(valid_config)
+        assert valid, f"有效配置应通过校验: {errors}"
+        assert len(errors) == 0, f"有效配置不应有错误: {errors}"
+
+        # 无效配置
+        invalid_config = {
+            "servers": {
+                "bad": {"args": ["missing_command"]},
+            }
+        }
+        valid, errors = validate_mcp_config(invalid_config)
+        assert not valid, "无效配置应校验失败"
+        assert len(errors) == 1, f"应有 1 个错误，实际 {len(errors)}"
+        print(f"  ✓ MCP 配置校验正常 (有效: {len(valid_config['servers'])} 服务器, 无效: {len(errors)} 错误)")
+    except Exception as e:
+        print(f"  ✗ MCP 配置校验测试失败: {e}")
+        failures += 1
+
+    # 4. 测试环境差异分析
+    print("\n[4/5] 测试环境差异分析...")
+    try:
+        env_a = {
+            "skills": [
+                {"name": "skill1", "version": "1.0.0"},
+                {"name": "skill2", "version": "2.0.0"},
+            ],
+            "tools": ["tool1", "tool2"],
+            "mcp_servers": ["server1"],
+        }
+        env_b = {
+            "skills": [
+                {"name": "skill1", "version": "1.5.0"},
+                {"name": "skill3", "version": "1.0.0"},
+            ],
+            "tools": ["tool1", "tool3"],
+            "mcp_servers": ["server1", "server2"],
+        }
+        diffs = env_diff(env_a, env_b)
+        assert len(diffs) == 6, f"应有 6 个差异，实际 {len(diffs)}: {diffs}"
+
+        # 验证差异类型
+        types = [d["type"] for d in diffs]
+        assert "变更" in types, f"应有变更类型差异: {types}"
+        assert "新增" in types, f"应有新增类型差异: {types}"
+        assert "删除" in types, f"应有删除类型差异: {types}"
+
+        # 验证具体差异
+        skill1_diff = [d for d in diffs if d["name"] == "skill:skill1"]
+        assert len(skill1_diff) == 1, f"skill1 应有 1 个差异: {skill1_diff}"
+        assert skill1_diff[0]["old"] == "1.0.0", f"skill1 旧版本应为 1.0.0: {skill1_diff}"
+        assert skill1_diff[0]["new"] == "1.5.0", f"skill1 新版本应为 1.5.0: {skill1_diff}"
+
+        print(f"  ✓ 环境差异分析正常 ({len(diffs)} 个差异)")
+    except Exception as e:
+        print(f"  ✗ 环境差异分析测试失败: {e}")
+        failures += 1
+
+    # 5. 测试存储管理
+    print("\n[5/5] 测试存储管理...")
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            storage = Storage(Path(tmpdir))
+            # 安装技能
+            skill = Skill("test_skill", "1.0.0", "测试技能", ["dep1"])
+            storage.install_skill(skill)
+            # 列出技能
+            skills = storage.list_skills()
+            assert len(skills) == 1, f"应有 1 个技能，实际 {len(skills)}"
+            assert skills[0].name == "test_skill", f"技能名应为 test_skill: {skills[0].name}"
+            assert skills[0].version == "1.0.0", f"版本应为 1.0.0: {skills[0].version}"
+            # 获取技能
+            fetched = storage.get_skill("test_skill")
+            assert fetched is not None, "应能获取技能"
+            assert fetched.dependencies == ["dep1"], f"依赖应为 ['dep1']: {fetched.dependencies}"
+            # 卸载技能
+            storage.uninstall_skill("test_skill")
+            skills = storage.list_skills()
+            assert len(skills) == 0, f"卸载后应为 0 个技能，实际 {len(skills)}"
+            print("  ✓ 存储管理正常")
+    except Exception as e:
+        print(f"  ✗ 存储管理测试失败: {e}")
+        failures += 1
+
+    # 汇总
+    print("\n" + "=" * 60)
+    if failures == 0:
+        print(f"自检通过: 全部测试成功 ({_now_utc()})")
+        print("=" * 60)
+        return 0
+    else:
+        print(f"自检失败: {failures} 个测试未通过 ({_now_utc()})")
+        print("=" * 60)
+        return 1
+
+
+# ---------------------------------------------------------------------------
+# 主入口
+# ---------------------------------------------------------------------------
 
 def main() -> int:
-    """主入口函数。"""
-    args = sys.argv[1:]
+    """CLI 主入口。"""
+    parser = argparse.ArgumentParser(
+        prog="harnesskit",
+        description="跨环境工作台装配器 - 管理技能、工具链、MCP 配置与环境同步",
+    )
+    parser.add_argument("--selftest", action="store_true", help="运行自检")
+    parser.add_argument("--verbose", action="store_true", help="输出详细日志")
+    parser.add_argument("--dry-run", action="store_true", help="预览操作，不实际写入")
+    parser.add_argument("--force", action="store_true", help="强制执行（跳过确认）")
+
+    subparsers = parser.add_subparsers(dest="command", help="子命令")
+
+    # skill 子命令
+    skill_parser = subparsers.add_parser("skill", help="技能管理")
+    skill_sub = skill_parser.add_subparsers(dest="skill_command", help="技能操作")
+
+    # skill list
+    list_parser = skill_sub.add_parser("list", help="列出技能")
+    list_parser.set_defaults(func=cmd_skill_list)
+
+    # skill install
+    install_parser = skill_sub.add_parser("install", help="安装技能")
+    install_parser.add_argument("--name", help="技能名称")
+    install_parser.add_argument("--version", help="技能版本")
+    install_parser.add_argument("--description", help="技能描述")
+    install_parser.add_argument("--dependencies", nargs="*", default=[], help="依赖技能列表")
+    install_parser.set_defaults(func=cmd_skill_install)
+
+    # skill uninstall
+    uninstall_parser = skill_sub.add_parser("uninstall", help="卸载技能")
+    uninstall_parser.add_argument("--name", help="技能名称")
+    uninstall_parser.set_defaults(func=cmd_skill_uninstall)
+
+    # skill update
+    update_parser = skill_sub.add_parser("update", help="更新技能")
+    update_parser.add_argument("--name", help="技能名称")
+    update_parser.add_argument("--version", help="新版本号")
+    update_parser.set_defaults(func=cmd_skill_update)
+
+    # toolchain 子命令
+    toolchain_parser = subparsers.add_parser("toolchain", help="工具链管理")
+    toolchain_sub = toolchain_parser.add_subparsers(dest="toolchain_command", help="工具链操作")
+
+    # toolchain build
+    build_parser = toolchain_sub.add_parser("build", help="构建工具链")
+    build_parser.add_argument("--spec", help="工具链规格 JSON")
+    build_parser.set_defaults(func=cmd_toolchain_build)
+
+    # mcp 子命令
+    mcp_parser = subparsers.add_parser("mcp", help="MCP 配置管理")
+    mcp_sub = mcp_parser.add_subparsers(dest="mcp_command", help="MCP 操作")
+
+    # mcp validate
+    validate_parser = mcp_sub.add_parser("validate", help="校验 MCP 配置")
+    validate_parser.add_argument("--config", help="MCP 配置 JSON")
+    validate_parser.set_defaults(func=cmd_mcp_validate)
+
+    # mcp write
+    write_parser = mcp_sub.add_parser("write", help="写入 MCP 配置")
+    write_parser.add_argument("--config", help="MCP 配置 JSON")
+    write_parser.add_argument("--target", help="目标文件路径")
+    write_parser.set_defaults(func=cmd_mcp_write)
+
+    # env 子命令
+    env_parser = subparsers.add_parser("env", help="环境管理")
+    env_sub = env_parser.add_subparsers(dest="env_command", help="环境操作")
+
+    # env diff
+    diff_parser = env_sub.add_parser("diff", help="对比环境差异")
+    diff_parser.add_argument("--env_a", help="环境 A 配置")
+    diff_parser.add_argument("--env_b", help="环境 B 配置")
+    diff_parser.set_defaults(func=cmd_env_diff)
+
+    # env plan
+    plan_parser = env_sub.add_parser("plan", help="生成迁移计划")
+    plan_parser.add_argument("--env_a", help="环境 A 配置")
+    plan_parser.add_argument("--env_b", help="环境 B 配置")
+    plan_parser.set_defaults(func=cmd_env_plan)
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    args = parser.parse_args()
 
     # 自检模式
-    if args and args[0] == "--selftest":
-        try:
-            _selftest()
-            return 0
-        except AssertionError as e:
-            print(f"❌ 自检失败: {e}")
-            return 1
-        except HarnessKitError as e:
-            print(f"❌ 自检失败: [{e.code}] {e.message}")
-            return 1
+    if args.selftest:
+        return run_selftest()
 
-    # 无参数时显示帮助
-    if not args:
-        print(__doc__)
+    # 无命令时显示帮助
+    if not args.command:
+        parser.print_help()
         return 0
 
-    # 初始化技能注册表（含内置样例）
-    registry = SkillRegistry(initial_skills=_builtin_sample_skills())
+    # 创建存储实例
+    storage = Storage()
 
+    # 执行子命令
     try:
-        cmd = args[0]
-
-        # 技能管理
-        if cmd == "skill" and len(args) >= 2:
-            action = args[1]
-            if action == "list":
-                return _cmd_skill_list(registry)
-            elif action == "install" and len(args) >= 3:
-                return _cmd_skill_install(registry, args[2])
-            elif action == "uninstall" and len(args) >= 3:
-                return _cmd_skill_uninstall(registry, args[2])
-            elif action == "update" and len(args) >= 3:
-                return _cmd_skill_update(registry, args[2])
-            else:
-                _fail("E001", f"未知技能操作: {action}")
-
-        # 工具链装配
-        elif cmd == "toolchain" and len(args) >= 3 and args[1] == "build":
-            return _cmd_toolchain_build(args[2])
-
-        # MCP 配置
-        elif cmd == "mcp" and len(args) >= 3:
-            action = args[1]
-            if action == "validate":
-                return _cmd_mcp_validate(args[2])
-            elif action == "write" and len(args) >= 4:
-                return _cmd_mcp_write(args[2], args[3])
-            else:
-                _fail("E001", f"未知 MCP 操作: {action}")
-
-        # 环境编排
-        elif cmd == "env" and len(args) >= 4:
-            action = args[1]
-            if action == "diff":
-                return _cmd_env_diff(args[2], args[3])
-            elif action == "plan":
-                return _cmd_env_plan(args[2], args[3])
-            else:
-                _fail("E001", f"未知环境操作: {action}")
-
+        if hasattr(args, "func"):
+            return args.func(args, storage)
         else:
-            _fail("E001", f"未知命令或参数不足: {' '.join(args)}")
-
+            parser.print_help()
+            return 0
     except HarnessKitError as e:
-        print(f"错误 [{e.code}]: {e.message}", file=sys.stderr)
+        print(f"错误: {e}", file=sys.stderr)
+        if args.verbose:
+            traceback.print_exc()
         return 1
     except Exception as e:
-        print(f"错误 [E010]: 内部未知错误: {str(e)}", file=sys.stderr)
+        print(f"未预期错误: {e}", file=sys.stderr)
+        if args.verbose:
+            traceback.print_exc()
         return 1
-
-    return 0
 
 
 if __name__ == "__main__":

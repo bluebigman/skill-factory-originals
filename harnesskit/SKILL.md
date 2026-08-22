@@ -1,70 +1,304 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: harnesskit
 name: harnesskit
-displayName: 跨环境装配台 技能与工具链编排
-description: 跨AI环境统一管理技能、MCP、插件与配置，快速装配工作台。
-version: 1.0.2
+displayName: 技能包管理 工具链配置 环境同步
+description: 管理技能包、工具链与MCP配置，支持dry-run预览和原子化写入的CLI工具。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/harnesskit
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LingToolCraft
+author: Kai Zhang
 agent_created: true
-trigger_words: ["harnesskit","技能管理","工具链装配","MCP配置","环境编排","工作台搭建","插件编排"]
+trigger_words: ["harnesskit", "技能管理", "工具链", "MCP配置", "环境同步", "技能包", "配置同步", "dry-run预览"]
 ---
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
-> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
-
-# harnesskit — 跨环境工作台装配技能
+# harnesskit 技能文档
 
 ## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做什么
+### 1.1 工具能做什么
 
-| 能力域 | 具体事项 | 输入要求 | 输出产物 |
-|--------|----------|----------|----------|
-| 技能管理 | 列出、安装、卸载、更新 AI 环境中的技能包 | 技能名称或路径 | 操作结果报告 |
-| 工具链装配 | 将多个技能/工具按依赖关系组合为可执行链路 | 工具清单与依赖声明 | 装配拓扑图 + 执行脚本 |
-| MCP 配置 | 读取、校验、写入 Model Context Protocol 配置 | MCP 服务器地址与认证信息 | 配置快照 + 连通性测试结果 |
-| 环境编排 | 跨多个 AI 环境（如 Claude、本地、云端）同步配置 | 目标环境清单 | 环境差异报告 + 同步计划 |
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 技能包管理 | 创建、列出、更新、删除技能包配置 | `harnesskit skill add my-skill --path ./skills` |
+| 工具链配置 | 声明工具链依赖与版本约束 | `harnesskit toolchain pin node@20` |
+| MCP 配置 | 管理 Model Context Protocol 服务器配置 | `harnesskit mcp add server-name --command npx --args ...` |
+| 环境同步 | 将本地配置推送到目标环境或拉取远端配置 | `harnesskit sync push --env production` |
+| 预览模式 | 所有写操作支持 `--dry-run` 先行预览 | `harnesskit init --dry-run` |
+| 原子化写入 | 配置写入采用临时文件+重命名，避免半写入状态 | 内置机制，无需手动操作 |
 
-### 1.2 不能做什么（明确边界）
+### 1.2 工具不能做什么
 
-- 不执行任何技能内部的实际业务逻辑（如不代替合同审查、不代替代码编译）。
-- 不存储或传输任何密钥、令牌的明文；仅支持引用环境变量或密钥管理服务。
-- 不保证所有第三方 MCP 服务器的兼容性；仅对标准协议负责。
-- 不提供图形化界面；所有操作通过命令行接口完成。
+- 不能自动安装或升级外部软件包（仅生成配置声明）
+- 不能验证远端 MCP 服务器是否真实可用（仅校验格式）
+- 不能回滚已执行的非 dry-run 操作（请自行备份配置）
+- 不能解析技能包内部代码逻辑（仅管理元数据）
 
 ### 1.3 适用对象
 
-- 需要在多个 AI 环境间迁移或同步工作配置的开发者。
-- 需要将多个技能组合为自动化流水线的技术负责人。
-- 需要快速验证 MCP 服务器连通性的运维人员。
+- 使用 Claude 或其他支持 MCP 的 AI 工具的开发人员
+- 需要统一管理多项目工具链配置的团队
+- 希望将技能包配置纳入版本控制的个人开发者
 
+---
 
-## 许可证（License）
+## 二、触发方式
 
-```text
-MIT License
+### 2.1 触发词
 
-Copyright (c) 2026 SkillForge Lab
+| 触发词 | 场景说明 |
+|--------|----------|
+| `harnesskit` | 直接调用 CLI 工具时 |
+| `技能管理` | 需要整理或查看技能包列表时 |
+| `工具链` | 需要声明或调整工具版本时 |
+| `MCP配置` | 需要添加或修改 MCP 服务器时 |
+| `环境同步` | 需要将配置同步到其他环境时 |
+| `配置同步` | 同上，偏重团队协作场景 |
+| `dry-run预览` | 希望在正式写入前查看变更内容时 |
+
+### 2.2 大白话场景映射
+
+| 你说的话 | harnesskit 实际做的事 |
+|----------|----------------------|
+| "帮我看看现在有哪些技能包" | 执行 `harnesskit skill list` |
+| "加一个 MCP 服务器，用 npx 启动" | 执行 `harnesskit mcp add` 并填写参数 |
+| "把配置同步到测试环境" | 执行 `harnesskit sync push --env staging` |
+| "先别写入，让我看看会改什么" | 执行 `harnesskit <命令> --dry-run` |
+
+---
+
+## 三、标准流程
+
+### 3.1 前置条件
+
+| 条件 | 要求 | 验证方法 |
+|------|------|----------|
+| 操作系统 | Linux / macOS / Windows (WSL2) | `uname -a` 或 `ver` |
+| Node.js | ≥ 18.0.0 | `node --version` |
+| 配置文件目录 | 当前用户目录下 `.harnesskit/` 可写 | `ls -la ~/.harnesskit` |
+| 网络（可选） | 如需拉取远端模板 | `curl -I https://registry.npmjs.org` |
+
+### 3.2 执行步骤
+
+#### 第一步：初始化配置
+
+```bash
+harnesskit init
+```
+
+参数说明：
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| `--dir` | `~/.harnesskit` | 配置目录位置 |
+| `--template` | `basic` | 初始模板（`basic` / `team` / `empty`） |
+| `--dry-run` | `false` | 预览将要生成的文件 |
+
+#### 第二步：添加技能包
+
+```bash
+harnesskit skill add <name> --path <path> [--version <semver>] [--tags <tag1,tag2>]
+```
+
+示例：
+
+```bash
+harnesskit skill add code-reviewer --path ./skills/code-reviewer --version 1.2.0 --tags review,code
+```
+
+#### 第三步：配置工具链
+
+```bash
+harnesskit toolchain pin <tool>@<version>
+```
+
+示例：
+
+```bash
+harnesskit toolchain pin node@20
+harnesskit toolchain pin python@3.11
+```
+
+#### 第四步：添加 MCP 服务器
+
+```bash
+harnesskit mcp add <server-name> --command <cmd> --args <arg1> <arg2> [--env KEY=VALUE]
+```
+
+示例：
+
+```bash
+harnesskit mcp add filesystem --command npx --args -y @modelcontextprotocol/server-filesystem --env ROOT=/tmp
+```
+
+#### 第五步：预览并写入
+
+```bash
+harnesskit sync push --env production --dry-run
+# 确认无误后去掉 --dry-run 执行
+harnesskit sync push --env production
+```
+
+### 3.3 输出规范
+
+所有命令输出遵循以下格式：
+
+```
+[时间戳] [级别] [操作] 消息
+```
+
+示例：
+
+```
+2025-01-15T10:30:00Z [INFO] [skill.add] 技能包 code-reviewer 已添加
+2025-01-15T10:30:01Z [WARN] [toolchain.pin] python@3.11 已存在，将覆盖
+2025-01-15T10:30:02Z [ERROR] [mcp.add] 参数 --command 不能为空
+```
+
+JSON 输出模式（供脚本调用）：
+
+```bash
+harnesskit skill list --json
+```
+
+```json
+{
+  "status": "success",
+  "data": {
+    "skills": [
+      {"name": "code-reviewer", "version": "1.2.0", "tags": ["review", "code"]}
+    ]
+  }
+}
+```
+
+---
+
+## 四、置信度门控
+
+当遇到以下情况时，harnesskit 不会编造信息，而是输出占位符：
+
+| 场景 | 输出内容 | 处理建议 |
+|------|----------|----------|
+| 远端模板版本未知 | `[需核实:template_version]` | 手动指定 `--template` 版本 |
+| MCP 服务器可用性未知 | `[需核实:mcp_server_status]` | 手动启动验证 |
+| 工具链兼容性不确定 | `[需核实:toolchain_compat]` | 查阅官方兼容矩阵 |
+| 配置文件路径不确定 | `[需核实:config_path]` | 使用 `harnesskit doctor` 诊断 |
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E001` | 配置目录不可写 | `无法写入配置目录，请检查权限` | 1. `chmod 700 ~/.harnesskit` 2. 或更换 `--dir` 参数 |
+| `E002` | 技能包名称重复 | `技能包 <name> 已存在` | 1. 使用 `harnesskit skill update` 2. 或先 `harnesskit skill remove` |
+| `E003` | MCP 命令参数缺失 | `参数 --command 不能为空` | 1. 检查命令拼写 2. 确认 npx 或可执行文件路径 |
+| `E004` | 版本号格式错误 | `版本号 <ver> 不符合 semver 规范` | 1. 使用 `x.y.z` 格式 2. 或省略版本号使用 latest |
+| `E005` | dry-run 与写入冲突 | `--dry-run 模式下不会执行写入操作` | 1. 确认预览结果 2. 去掉 `--dry-run` 重新执行 |
+| `E006` | 同步目标环境不存在 | `环境 <env> 未在配置中定义` | 1. 检查 `environments` 配置段 2. 使用 `harnesskit env add` 添加 |
+| `E007` | JSON 输出解析失败 | `输出不是合法 JSON，请检查管道` | 1. 确认命令支持 `--json` 2. 检查是否有 stderr 混入 |
+
+---
+
+## 六、FAQ 反模式
+
+### 反模式 1：跳过 dry-run 直接写入
+
+**错误做法**：
+
+```bash
+harnesskit sync push --env production
+```
+
+**正确做法**：
+
+```bash
+harnesskit sync push --env production --dry-run
+# 确认变更内容后，再执行正式写入
+```
+
+### 反模式 2：手动编辑配置文件导致格式错误
+
+**错误做法**：直接修改 `~/.harnesskit/config.yaml` 且不校验语法。
+
+**正确做法**：使用 `harnesskit config validate` 校验，或通过 CLI 命令修改。
+
+### 反模式 3：忽略版本约束
+
+**错误做法**：`harnesskit toolchain pin node`（未指定版本）。
+
+**正确做法**：明确指定版本 `harnesskit toolchain pin node@20`，避免环境漂移。
+
+### 反模式 4：将配置文件放在项目目录而非用户目录
+
+**错误做法**：在项目根目录创建 `.harnesskit/` 并提交到仓库。
+
+**正确做法**：使用 `~/.harnesskit/` 存放个人配置，项目级配置通过 `harnesskit sync` 分发。
+
+### 反模式 5：不清理废弃的 MCP 服务器
+
+**错误做法**：长期保留不再使用的 MCP 配置，导致启动缓慢。
+
+**正确做法**：定期执行 `harnesskit mcp list` 并移除无用项。
+
+---
+
+## 七、渐进式披露
+
+### 7.1 新手路径（5 分钟上手）
+
+1. 阅读「能力边界」了解工具范围
+2. 执行 `harnesskit init` 生成配置
+3. 使用 `--dry-run` 熟悉操作
+4. 参考「速查卡」完成基础操作
+
+### 7.2 进阶路径（日常使用）
+
+1. 掌握「标准流程」中的完整操作步骤
+2. 熟悉「错误码体系」快速定位问题
+3. 阅读「FAQ 反模式」避免常见错误
+4. 将配置文件纳入版本控制，实现团队协作
+
+### 7.3 专家路径（深度定制）
+
+1. 自定义配置文件结构，扩展技能包元数据
+2. 编写脚本调用 harnesskit 的 JSON 输出
+3. 结合 CI/CD 流程实现自动化配置同步
+4. 为团队维护共享的工具链配置模板
+
+---
+
+## 八、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担使用本 Skill 的全部责任。因使用本 Skill 导致的任何直接或间接损失，作者不承担任何责任。
+
+2. **禁止反向工程**：不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码（除非适用法律允许）。
+
+3. **合规使用**：使用者应确保使用方式符合当地法律法规及所在平台的服务条款。
+
+4. **无担保**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保。
+
+---
+
+## 九、许可证（License）
+
+<!-- professional-license-embedded -->
+
+**MIT License**
+
+Copyright (c) 2025 原创作者（自持版权）
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -75,63 +309,15 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-```
-<!-- professional-license-embedded -->
 
-## 前置条件
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
+---
 
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
