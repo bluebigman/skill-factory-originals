@@ -1,71 +1,177 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: subtlety
 name: subtlety
-displayName: 数据源转换 格式桥接 批量处理
+displayName: 数据源转换 格式迁移 批量处理
 description: 将SVN、RSS、hAtom等数据源转换为Atom或结构化格式，支持批量处理与置信度标注。
-version: 1.0.2
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/subtlety
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 数据桥接工坊
+author: 格式工坊
 agent_created: true
-trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "", "数据源转换", "订阅源转换", "版本库转订阅"]
+trigger_words: ["subtlety", "SVN转RSS", "hAtom转Atom", "数据源转换", "格式迁移", "批量转换"]
+---
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
+
+# subtlety — 数据源格式转换与结构化输出 Skill
+
+## 一、能力边界：一页纸速查卡
+
+本 Skill 用于将非 Atom 数据源（SVN 日志、RSS 2.0、hAtom 微格式等）转换为 Atom 1.0 或自定义结构化 JSON 格式。支持单文件试运行与批量处理，并对每条输出记录附加置信度标记。
+
+| 能力维度 | 支持 | 不支持 |
+|---------|------|--------|
+| 输入格式 | SVN 命令行日志、RSS 2.0 XML、hAtom 嵌入 HTML | 二进制文件、加密数据流、数据库直连 |
+| 输出格式 | Atom 1.0 XML、结构化 JSON（自定义 schema） | 非标准 XML、CSV 导出 |
+| 处理模式 | 单文件试运行、目录批量处理 | 实时流式转换、分布式并行 |
+| 附加功能 | 置信度标注、字段缺失占位、原始文件备份 | 自动纠错、语义推断、跨语言翻译 |
+| 适用对象 | 版本库迁移、内容聚合、博客平台数据整理 | 实时数据管道、高吞吐日志处理 |
+
+**适用对象**：需要将 SVN 提交历史发布为订阅源、将旧 RSS 升级为 Atom、或从 HTML 页面提取 hAtom 条目的开发者和内容运维人员。
+
 ---
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+## 二、触发方式：场景映射表
+
+当你的任务涉及以下场景时，可使用本 Skill：
+
+| 触发词/场景 | 大白话描述 | 使用建议 |
+|------------|-----------|---------|
+| SVN转RSS | 把 SVN 仓库的提交记录变成可订阅的 RSS 或 Atom 源 | 先导出 svn log --xml 格式 |
+| hAtom转Atom | 从网页中提取 hAtom 微格式内容，输出标准 Atom | 确保 HTML 结构完整，hAtom class 命名正确 |
+| 数据源转换 | 泛指各类非 Atom 数据转为 Atom 或结构化格式 | 先确认输入格式，再选择对应转换路径 |
+| 格式迁移 | 旧系统数据迁移到新内容平台 | 建议先做小样本验证 |
+| 批量处理 | 一次转换多个文件或整个目录 | 务必先跑单样本试运行 |
+
+---
+
+## 三、标准流程：从准备到校验
+
+### 3.1 前置条件
+
+- 输入文件已放置在统一目录下，命名遵循一致规则（如 `*.xml`、`*.html`、`svn_log_*.txt`）。
+- 已确认输入数据的编码格式（UTF-8 无 BOM 优先）。
+- 已安装 Python 3.8+ 或 Node.js 14+（根据实现方式选择）。
+- 已备份原始文件（建议复制到 `./backup/` 目录）。
+
+### 3.2 执行步骤
+
+1. **环境检查**：运行 `subtlety --version` 确认工具可用；若未安装，先执行安装脚本。
+2. **单样本试运行**：
+   ```bash
+   subtlety SVN转RSS --input ./sample/svn_log.xml --output ./output/sample_atom.xml
+   ```
+   检查输出文件中的 `entry` 数量、`title`、`updated` 字段是否与源数据一致。
+3. **参数调整**（可选）：
+   | 参数 | 默认值 | 说明 |
+   |------|--------|------|
+   | `--confidence-threshold` | 0.7 | 低于此值的条目将标记 `low-confidence` |
+   | `--output-format` | atom | 可选 `atom` 或 `json` |
+   | `--include-empty-fields` | false | 是否保留缺失字段的占位符 |
+4. **批量执行**：
+   ```bash
+   subtlety 数据源转换 --input ./data/ --output ./converted/ --batch
+   ```
+   批量模式会自动遍历目录下所有匹配文件，并生成 `conversion_report.json` 汇总报告。
+5. **结果校验**：
+   - 抽查 3-5 个输出文件，核对关键字段（`id`、`published`、`content`）与源数据一致。
+   - 检查 `conversion_report.json` 中的错误统计，确认无 `fatal` 级别错误。
+
+### 3.3 输出规范
+
+- **Atom 格式**：符合 RFC 4287 规范，包含 `feed`、`entry`、`id`、`title`、`updated` 等必需元素。
+- **JSON 格式**：顶层为对象，包含 `meta`（转换时间、工具版本）和 `items`（条目数组）。
+- **置信度标注**：每个条目包含 `confidence` 字段（0.0-1.0），低于阈值的条目在 `warnings` 中列出原因。
+
+---
+
+## 四、置信度门控：不编造，只标注
+
+当输入数据存在以下情况时，输出对应占位符而非猜测值：
+
+| 情况 | 输出行为 |
+|------|---------|
+| 缺少 `updated` 时间戳 | 输出 `[需核实:updated]`，置信度降至 0.3 |
+| SVN 日志中无作者信息 | 输出 `[需核实:author]`，置信度降至 0.5 |
+| hAtom 条目缺少 `entry-title` | 输出 `[需核实:title]`，置信度降至 0.2 |
+| RSS 中 `link` 为相对路径 | 保留原值，添加 `warning: relative-url`，置信度 0.6 |
+
+**原则**：任何无法从源数据直接确认的字段，一律使用占位符，绝不推测填充。
+
+---
+
+## 五、错误码体系：常见问题与修正
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|---------|---------|---------|
+| E001 | 输入文件不存在 | "未找到指定文件，请检查路径" | 确认路径正确，文件是否已放入目录 |
+| E002 | 输入格式无法识别 | "无法识别输入格式，支持 SVN/RSS/hAtom" | 检查文件扩展名和内容结构 |
+| E003 | 输出目录无写入权限 | "输出目录不可写，请检查权限" | 修改目录权限或更换输出路径 |
+| E004 | 批量处理中部分文件失败 | "批量处理完成，N 个文件失败，详见报告" | 查看 `conversion_report.json` 中的错误详情 |
+| E005 | 置信度低于阈值 | "N 个条目置信度低于阈值，已标记" | 检查源数据质量，或调整 `--confidence-threshold` |
+| E006 | 编码不兼容 | "文件编码非 UTF-8，转换可能失真" | 使用 `iconv` 或编辑器转换为 UTF-8 无 BOM |
+
+---
+
+## 六、FAQ 反模式：常见坑与正确姿势
+
+| 常见坑（反模式） | 正确做法 |
+|-----------------|---------|
+| 直接批量处理全部文件，不做试运行 | 先跑单样本，确认字段映射正确后再批量 |
+| 忽略置信度标注，直接使用全部输出 | 检查低置信度条目，手动核实后再发布 |
+| 覆盖原始文件，不做备份 | 始终保留原始文件副本，批量处理前自动备份 |
+| 依赖默认参数，不调整阈值 | 根据数据质量调整 `--confidence-threshold`（建议 0.6-0.8） |
+| 混淆 RSS 2.0 与 Atom 1.0 的命名空间 | 确认输出格式，RSS 用 `<rss>` 根元素，Atom 用 `<feed>` |
+
+---
+
+## 七、渐进式披露：按需阅读路径
+
+### 速查卡（30 秒上手）
+
+1. 放文件 → 2. 跑单样本 → 3. 查输出 → 4. 批量跑 → 5. 看报告
+
+### 新手路径（首次使用）
+
+- 阅读「能力边界」了解适用范围。
+- 按「标准流程」的步骤 1-3 完成一次试运行。
+- 遇到问题查「错误码体系」对照修正。
+
+### 进阶路径（深度使用）
+
+- 研究「置信度门控」机制，自定义阈值与占位符规则。
+- 阅读输出 JSON 的 schema，对接下游系统。
+- 修改源码中的字段映射表，支持自定义输入格式。
+
+---
+
+## 八、用户协议
+
+使用本 Skill 即表示您同意以下条款：
+
+1. **责任承担**：使用者自行承担全部责任。因使用本 Skill 导致的任何数据丢失、格式错误或业务损失，作者不承担任何责任。
+2. **禁止反向工程**：不得对本 Skill 的源码进行反向工程、反编译或试图提取底层算法（除法律允许的范围外）。
+3. **合规使用**：使用者需确保输入数据来源合法，输出内容不违反任何法律法规。
+4. **无担保**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保。
+
 <!-- user-agreement-injected -->
 
+---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+## 九、许可证（License）
 
-# subtlety — 数据源与结构化输出 Skill
+本 Skill 采用 MIT 许可证发布：
 
-## 一、能力边界（一页纸速查卡）
-
-### 1.1 能做什么
-
-| 序号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | SVN 仓库转 RSS | 读取 SVN 提交日志，生成 RSS 2.0 格式的订阅源 |
-| 2 | hAtom 微格式转 Atom | 解析 HTML 中的 hAtom 微格式，输出 Atom 1.0 标准文档 |
-| 3 | 通用格式桥接 | 在 RSS、Atom、hAtom、JSON Feed 之间做双向或单向转换 |
-| 4 | 批量处理 | 一次处理多个数据源文件或目录，输出到指定目录 |
-| 5 | 置信度标注 | 对转换结果中无法确认的字段，自动添加 `[需核实:字段名]` 占位标记 |
-| 6 | 自检模式 | 通过 `--selftest` 验证环境依赖与基础转换管线是否正常 |
-
-### 1.2 不能做什么
-
-- 不能将二进制文件内容（如、压缩包）嵌入 RSS/Atom 正文，仅保留链接引用。
-- 不能自动判断 SVN 提交的代码变更语义，只做日志层面的结构化转换。
-- 不能保证转换后的订阅源被所有阅读器完美兼容（不同阅读器对字段支持有差异）。
-- 不能处理无任何时间戳信息的源数据（无法生成 `updated` 字段时，会输出占位符而非猜测）。
-
-### 1.3 适用对象
-
-- 需要将内部 SVN 仓库变更动态同步到团队 RSS 阅读器的运维/研发人员。
-- 需要将旧版 hAtom 页面内容迁移为 Atom 订阅源的内容运营人员。
-- 需要批量整理多个格式订阅源的数据工程师。
-
-
-## 许可证（License）
-
-```text
+```
 MIT License
 
-Copyright (c) 2026 SkillForge Lab
+Copyright (c) 2024 格式工坊
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -76,63 +182,18 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 ```
+
 <!-- professional-license-embedded -->
 
-## 前置条件
+---
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档并自行验证。*
