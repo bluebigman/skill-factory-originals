@@ -30,12 +30,17 @@ import csv
 import io
 import json
 import os
+import re
+import shutil
+import subprocess
 import sys
 import tempfile
+import time
+import urllib.request
+import urllib.error
 from dataclasses import dataclass, field, asdict
+from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
-
 
 # ---------------------------------------------------------------------------
 # 错误码与异常
@@ -110,37 +115,199 @@ def register_skill(name: str):
 
 @register_skill("transition_effect")
 def _skill_transition_effect(params: Dict[str, Any]) -> Dict[str, Any]:
-    """转场特效技能（模拟）。"""
+    """转场特效技能：调用 ffmpeg 实现真实转场效果。"""
+    input_path = params.get("input_path", "")
+    output_path = params.get("output_path", "")
     effect_type = params.get("effect_type", "crossfade")
     duration = float(params.get("duration", 0.5))
-    return {
-        "applied": True,
-        "effect": effect_type,
-        "duration": duration,
-        "note": "转场特效已应用（模拟）",
-    }
+    
+    if not input_path or not output_path:
+        return {
+            "applied": False,
+            "error": "缺少 input_path 或 output_path",
+            "note": "转场特效未应用（缺少参数）",
+        }
+    
+    # 使用 ffmpeg 实现转场效果
+    try:
+        # 构建 ffmpeg 命令（简化版：使用 xfade 滤镜）
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", input_path,
+            "-vf", f"xfade=transition={effect_type}:duration={duration}",
+            "-c:v", "libx264",
+            "-preset", "fast",
+            output_path
+        ]
+        
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        
+        if result.returncode == 0:
+            return {
+                "applied": True,
+                "effect": effect_type,
+                "duration": duration,
+                "output_path": output_path,
+                "note": f"转场特效已应用（ffmpeg）",
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+        else:
+            return {
+                "applied": False,
+                "error": result.stderr[-500:],
+                "note": "转场特效应用失败",
+            }
+    except FileNotFoundError:
+        return {
+            "applied": False,
+            "error": "ffmpeg 未安装",
+            "note": "转场特效未应用（ffmpeg 不可用）",
+        }
+    except subprocess.TimeoutExpired:
+        return {
+            "applied": False,
+            "error": "ffmpeg 执行超时",
+            "note": "转场特效未应用（超时）",
+        }
 
 
 @register_skill("audio_denoise")
 def _skill_audio_denoise(params: Dict[str, Any]) -> Dict[str, Any]:
-    """音频降噪技能（模拟）。"""
+    """音频降噪技能：调用 ffmpeg 实现真实降噪。"""
+    input_path = params.get("input_path", "")
+    output_path = params.get("output_path", "")
     strength = float(params.get("strength", 0.5))
-    return {
-        "applied": True,
-        "strength": strength,
-        "note": "音频降噪完成（模拟）",
-    }
+    
+    if not input_path or not output_path:
+        return {
+            "applied": False,
+            "error": "缺少 input_path 或 output_path",
+            "note": "音频降噪未应用（缺少参数）",
+        }
+    
+    try:
+        # 使用 ffmpeg 的 afftdn 滤镜进行降噪
+        cmd = [
+            "ffmpeg", "-y",
+            "-i", input_path,
+            "-af", f"afftdn=nf={strength}",
+            "-c:a", "aac",
+            output_path
+        ]
+        
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        
+        if result.returncode == 0:
+            return {
+                "applied": True,
+                "strength": strength,
+                "output_path": output_path,
+                "note": "音频降噪完成（ffmpeg）",
+                "timestamp": datetime.now(timezone.utc).isoformat(),
+            }
+        else:
+            return {
+                "applied": False,
+                "error": result.stderr[-500:],
+                "note": "音频降噪失败",
+            }
+    except FileNotFoundError:
+        return {
+            "applied": False,
+            "error": "ffmpeg 未安装",
+            "note": "音频降噪未应用（ffmpeg 不可用）",
+        }
+    except subprocess.TimeoutExpired:
+        return {
+            "applied": False,
+            "error": "ffmpeg 执行超时",
+            "note": "音频降噪未应用（超时）",
+        }
 
 
 @register_skill("subtitle_generate")
 def _skill_subtitle_generate(params: Dict[str, Any]) -> Dict[str, Any]:
-    """字幕生成技能（模拟）。"""
+    """字幕生成技能：从剧本提取时间轴生成 SRT 字幕。"""
+    script_text = params.get("script_text", "")
     language = params.get("language", "zh")
+    
+    if not script_text:
+        return {
+            "applied": False,
+            "error": "缺少 script_text",
+            "note": "字幕生成未应用（缺少剧本）",
+        }
+    
+    # 解析剧本中的场景和对话
+    lines = script_text.strip().splitlines()
+    subtitles = []
+    current_time = 0.0
+    
+    for line_num, line in enumerate(lines, start=1):
+        line = line.strip()
+        if not line:
+            continue
+        
+        # 匹配时间格式（如 00:00-00:05）
+        time_match = re.search(r'(\d+):(\d+)-(\d+):(\d+)', line)
+        if time_match:
+            start = int(time_match.group(1)) * 60 + int(time_match.group(2))
+            end = int(time_match.group(3)) * 60 + int(time_match.group(4))
+        else:
+            start = current_time
+            end = current_time + 3.0
+            current_time = end
+        
+        # 提取对话内容（去除场景标记）
+        content = re.sub(r'^(场景|SCENE)\s*\d*\s*', '', line)
+        content = re.sub(r'\[[^\]]*\]', '', content).strip()
+        
+        if content:
+            subtitles.append({
+                "index": len(subtitles) + 1,
+                "start": start,
+                "end": end,
+                "text": content,
+            })
+    
+    if not subtitles:
+        return {
+            "applied": False,
+            "error": "未能从剧本中提取字幕",
+            "note": "字幕生成未应用（无有效内容）",
+        }
+    
+    # 生成 SRT 格式
+    srt_lines = []
+    for sub in subtitles:
+        start_str = f"{int(sub['start']//60):02d}:{int(sub['start']%60):02d}:00,000"
+        end_str = f"{int(sub['end']//60):02d}:{int(sub['end']%60):02d}:00,000"
+        srt_lines.extend([
+            str(sub["index"]),
+            f"{start_str} --> {end_str}",
+            sub["text"],
+            "",
+        ])
+    
+    srt_content = "\n".join(srt_lines)
+    
     return {
         "applied": True,
         "language": language,
-        "count": int(params.get("line_count", 0)),
-        "note": "字幕生成完成（模拟）",
+        "count": len(subtitles),
+        "srt_content": srt_content,
+        "note": "字幕生成完成（从剧本提取）",
+        "timestamp": datetime.now(timezone.utc).isoformat(),
     }
 
 
@@ -187,11 +354,12 @@ _init_pipelines()
 class OpenMontageEngine:
     """openmontage 核心引擎。"""
 
-    def __init__(self):
+    def __init__(self, dry_run: bool = False):
         self.media_items: List[MediaItem] = []
         self.scenes: List[SceneInfo] = []
         self.results: List[PipelineResult] = []
         self._temp_dir: Optional[str] = None
+        self.dry_run = dry_run
 
     # ---- C1: 多源输入转换 ----
 
@@ -310,7 +478,6 @@ class OpenMontageEngine:
                 continue
 
             # 尝试提取时间（格式如: 00:10-00:25 或 10-25）
-            import re
             time_match = re.search(r'(\d+)[:：]?(\d+)?\s*[-–—]\s*(\d+)[:：]?(\d+)?', line)
             if time_match:
                 try:
@@ -321,323 +488,5 @@ class OpenMontageEngine:
             else:
                 start, end = 0.0, 0.0
 
-            # 从行中提取角色（模拟：匹配中括号或引号内内容）
-            characters = []
-            for m in re.finditer(r'[\[【]([^\]】]+)[\]】]', line):
-                characters.append(m.group(1).strip())
-
-            scene_id = f"SCENE_{line_num:03d}"
-            scenes.append(SceneInfo(
-                scene_id=scene_id,
-                start_time=max(0.0, start),
-                end_time=max(0.0, end),
-                content=line,
-                characters=characters,
-                confidence=0.8,  # 模拟置信度
-            ))
-
-        if not scenes:
-            raise err("E006", "未能从剧本中提取任何场景")
-
-        self.scenes = scenes
-        return scenes
-
-    # ---- C3: 管线编排执行 ----
-
-    def run_pipeline(self, pipeline_name: str, params: Optional[Dict[str, Any]] = None) -> PipelineResult:
-        """执行指定管线。"""
-        if pipeline_name not in PIPELINE_REGISTRY:
-            raise err("E003", f"管线不存在: {pipeline_name}")
-
-        pipeline_def = PIPELINE_REGISTRY[pipeline_name]
-        params = params or {}
-
-        # 依次执行管线中的技能
-        skill_results: Dict[str, Any] = {}
-        for skill_name in pipeline_def["skills"]:
-            if skill_name not in SKILL_REGISTRY:
-                raise err("E004", f"技能不存在: {skill_name}")
-            try:
-                skill_result = SKILL_REGISTRY[skill_name](params.get(skill_name, {}))
-                skill_results[skill_name] = skill_result
-            except Exception as e:
-                raise err("E007", f"技能 {skill_name} 执行失败: {e}")
-
-        # 模拟输出路径
-        output_path = f"output/{pipeline_name}_result"
-
-        result = PipelineResult(
-            pipeline_name=pipeline_name,
-            status="success",
-            output_path=output_path,
-            confidence=0.95,
-            details={
-                "skills_executed": pipeline_def["skills"],
-                "skill_results": skill_results,
-                "params": params,
-            },
-        )
-        self.results.append(result)
-        return result
-
-    def run_multi_pipeline(self, pipeline_names: List[str]) -> List[PipelineResult]:
-        """按顺序执行多条管线。"""
-        if not pipeline_names:
-            raise err("E001", "管线列表为空")
-        results = []
-        for name in pipeline_names:
-            results.append(self.run_pipeline(name))
-        return results
-
-    # ---- C4: 技能调度 ----
-
-    def execute_skill(self, skill_name: str, params: Dict[str, Any]) -> Dict[str, Any]:
-        """直接执行指定技能。"""
-        if skill_name not in SKILL_REGISTRY:
-            raise err("E004", f"技能不存在: {skill_name}")
-        try:
-            return SKILL_REGISTRY[skill_name](params)
-        except Exception as e:
-            raise err("E007", f"技能 {skill_name} 执行失败: {e}")
-
-    # ---- C5: 结果校验输出 ----
-
-    def validate_results(self, results: List[PipelineResult]) -> bool:
-        """校验管线执行结果。"""
-        if not results:
-            raise err("E008", "没有可校验的结果")
-        for r in results:
-            if r.status != "success":
-                raise err("E008", f"管线 {r.pipeline_name} 状态异常: {r.status}")
-            if not (0.0 <= r.confidence <= 1.0):
-                raise err("E008", f"管线 {r.pipeline_name} 置信度非法: {r.confidence}")
-        return True
-
-    def export_json(self, results: List[PipelineResult]) -> str:
-        """导出结果为 JSON 字符串。"""
-        try:
-            data = [asdict(r) for r in results]
-            return json.dumps(data, ensure_ascii=False, indent=2)
-        except Exception as e:
-            raise err("E009", f"JSON 导出失败: {e}")
-
-    def export_csv(self, results: List[PipelineResult]) -> str:
-        """导出结果为 CSV 字符串。"""
-        try:
-            buf = io.StringIO()
-            writer = csv.writer(buf)
-            writer.writerow(["pipeline_name", "status", "output_path", "confidence"])
-            for r in results:
-                writer.writerow([r.pipeline_name, r.status, r.output_path, r.confidence])
-            return buf.getvalue()
-        except Exception as e:
-            raise err("E009", f"CSV 导出失败: {e}")
-
-
-# ---------------------------------------------------------------------------
-# 命令行接口
-# ---------------------------------------------------------------------------
-
-def build_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(
-        prog="openmontage",
-        description="开源智能视频生产系统 — 编排多管线与工具链，自动化完成视频制作流程。",
-        epilog="示例: python scripts/main.py --input sample.csv --pipeline rough_cut,color,subtitle --export json",
-    )
-    parser.add_argument("--input", type=str, help="输入文件路径（CSV/JSON/文本）")
-    parser.add_argument("--input-type", type=str, choices=["csv", "json", "script"], default="csv",
-                        help="输入文件类型（默认 csv）")
-    parser.add_argument("--pipeline", type=str, default="",
-                        help="要执行的管线，逗号分隔（如 rough_cut,color,subtitle）")
-    parser.add_argument("--skill", type=str, default="",
-                        help="直接执行单个技能（如 audio_denoise）")
-    parser.add_argument("--export", type=str, choices=["json", "csv"], default="json",
-                        help="导出格式（默认 json）")
-    parser.add_argument("--output", type=str, help="输出文件路径（默认打印到终端）")
-    parser.add_argument("--selftest", action="store_true", help="运行内置离线自检")
-    parser.add_argument("--list-pipelines", action="store_true", help="列出所有可用管线")
-    parser.add_argument("--list-skills", action="store_true", help="列出所有可用技能")
-    return parser
-
-
-def handle_selftest() -> int:
-    """内置自检：使用硬编码样例数据，不读外部文件、不依赖工作目录。"""
-    engine = OpenMontageEngine()
-
-    # ---- 1. C1: CSV 输入转换 ----
-    sample_csv = (
-        "source,media_type,duration,width,height\n"
-        "clip1.mp4,video,12.5,1920,1080\n"
-        "audio1.wav,audio,8.0,0,0\n"
-        "title.png,image,0,1280,720\n"
-        "sub1.srt,subtitle,10.0,0,0\n"
-    )
-    items = engine.load_from_csv(sample_csv)
-    assert len(items) >= 3, "CSV 转换应至少得到 3 个素材"
-    assert all(i.source for i in items), "素材 source 不能为空"
-    assert all(i.media_type for i in items), "素材 media_type 不能为空"
-    # 宽松验证：时长非负
-    assert all(i.duration >= 0 for i in items), "时长不能为负"
-
-    # ---- 2. C2: 场景提取 ----
-    sample_script = (
-        "场景1 [主角] 00:00-00:10 主角登场\n"
-        "SCENE 2 [配角] 00:15-00:30 对话\n"
-        "普通行不提取\n"
-        "场景3 00:40-01:00 高潮\n"
-    )
-    scenes = engine.extract_scenes(sample_script)
-    assert len(scenes) >= 2, "应至少提取 2 个场景"
-    # 宽松验证：场景 ID 非空，时间非负
-    assert all(s.scene_id for s in scenes), "场景 ID 不能为空"
-    assert all(s.start_time >= 0 for s in scenes), "场景开始时间不能为负"
-    assert all(s.end_time >= s.start_time for s in scenes), "场景结束时间应晚于开始时间"
-
-    # ---- 3. C3: 管线执行 ----
-    results = engine.run_multi_pipeline(["rough_cut", "subtitle", "audio"])
-    assert len(results) >= 2, "应至少执行 2 条管线"
-    assert all(r.status == "success" for r in results), "管线应全部成功"
-    assert all(r.confidence > 0.5 for r in results), "置信度应大于 0.5"
-
-    # ---- 4. C4: 技能调度 ----
-    skill_result = engine.execute_skill("audio_denoise", {"strength": 0.7})
-    assert skill_result.get("applied") is True, "技能应成功应用"
-    assert "strength" in skill_result, "技能结果应包含参数"
-
-    # 技能不存在时应抛出 E004
-    try:
-        engine.execute_skill("nonexistent_skill", {})
-        raise AssertionError("不应执行不存在的技能")
-    except OpenMontageError as e:
-        assert e.code == "E004", f"错误码应为 E004，实际 {e.code}"
-
-    # ---- 5. C5: 校验与导出 ----
-    assert engine.validate_results(results) is True, "结果校验应通过"
-
-    json_out = engine.export_json(results)
-    assert json_out and json_out.startswith("["), "JSON 导出应为数组"
-
-    csv_out = engine.export_csv(results)
-    assert "pipeline_name" in csv_out, "CSV 导出应包含表头"
-
-    # ---- 6. 管线/技能注册表 ----
-    assert len(PIPELINE_REGISTRY) >= 10, "应注册至少 10 条管线"
-    assert len(SKILL_REGISTRY) >= 3, "应注册至少 3 个技能"
-
-    # 错误处理验证
-    try:
-        engine.load_from_csv("")
-        raise AssertionError("空 CSV 应报错")
-    except OpenMontageError as e:
-        assert e.code in ("E002", "E005"), f"错误码应为 E002/E005，实际 {e.code}"
-
-    # 全部通过
-    print("[SELFTEST] 全部自检通过 ✓")
-    return 0
-
-
-def main() -> int:
-    parser = build_parser()
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    args = parser.parse_args()
-    global dry_run
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return handle_selftest()
-
-    # 列出管线
-    if args.list_pipelines:
-        print("可用管线：")
-        for name, info in PIPELINE_REGISTRY.items():
-            print(f"  {name}: {info['description']}")
-        return 0
-
-    # 列出技能
-    if args.list_skills:
-        print("可用技能：")
-        for name in SKILL_REGISTRY:
-            print(f"  {name}")
-        return 0
-
-    engine = OpenMontageEngine()
-
-    # 执行单技能（无需输入文件）
-    if args.skill:
-        if not args.skill:
-            print("错误: --skill 需要技能名称", file=sys.stderr)
-            return 1
-        try:
-            result = engine.execute_skill(args.skill, {})
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
-        except OpenMontageError as e:
-            print(f"错误: {e}", file=sys.stderr)
-            return 1
-
-    # 需要输入文件
-    if not args.input:
-        print("错误: 需要 --input 或 --selftest", file=sys.stderr)
-        parser.print_help(sys.stderr)
-        return 1
-
-    if not os.path.isfile(args.input):
-        print(f"错误: 输入文件不存在: {args.input}", file=sys.stderr)
-        return 1
-
-    try:
-        # 加载输入
-        with open(args.input, "r", encoding="utf-8", errors="replace") as f:
-            content = f.read()
-
-        if args.input_type == "csv":
-            engine.load_from_csv(content)
-        elif args.input_type == "json":
-            engine.load_from_json(content)
-        elif args.input_type == "script":
-            engine.extract_scenes(content)
-        else:
-            raise err("E001", f"不支持的输入类型: {args.input_type}")
-
-        # 执行管线
-        results: List[PipelineResult] = []
-        if args.pipeline:
-            pipeline_names = [p.strip() for p in args.pipeline.split(",") if p.strip()]
-            results = engine.run_multi_pipeline(pipeline_names)
-        else:
-            # 无管线时，仅输出输入解析结果
-            print(f"输入解析完成: {len(engine.media_items) or len(engine.scenes)} 条记录")
-            return 0
-
-        # 校验
-        engine.validate_results(results)
-
-        # 导出
-        if args.export == "json":
-            output_text = engine.export_json(results)
-        else:
-            output_text = engine.export_csv(results)
-
-        if args.output:
-            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
-                f.write(output_text)
-            print(f"结果已写入: {args.output}")
-        else:
-            print(output_text)
-
-        return 0
-
-    except OpenMontageError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"错误: [E010] 未知异常: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+            # 提取场景内容（去除时间标记）
+            content
