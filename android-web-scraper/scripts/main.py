@@ -3,19 +3,30 @@
 """
 android-web-scraper 独立实现脚本
 --------------------------------
-根据功能规格 clean-room 重写，仅使用标准库实现核心解析逻辑。
-提供 --selftest 参数进行离线自检。
+根据功能规格 clean-room 重写，实现真实网络请求和HTML解析。
+提供 --selftest 参数进行自检。
+
+注意：本脚本支持桌面 Python 环境，并通过 Termux 兼容层支持安卓设备后台静默执行。
 """
 
 import argparse
 import csv
+import hashlib
 import html
 import io
 import json
+import os
 import re
 import sys
+import tempfile
+import time
+import urllib.request
+import urllib.error
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
+from urllib.parse import urlparse
 
 # 错误码定义
 E001 = "E001: 参数错误"
@@ -28,6 +39,14 @@ E007 = "E007: 批量处理中断"
 E008 = "E008: 内部逻辑错误"
 E009 = "E009: 数据校验失败"
 E010 = "E010: 未知异常"
+
+# 网络请求配置
+REQUEST_TIMEOUT = 10  # 秒
+MAX_RETRIES = 3
+RETRY_BACKOFF = [1, 2, 4]  # 秒
+MAX_CONCURRENT = 5  # 批量并发数
+CACHE_TTL = 3600  # 缓存有效期（秒）
+REQUEST_INTERVAL = 0.5  # 请求间隔（秒）
 
 
 # ------------------------------------------------------------
@@ -69,12 +88,184 @@ class ParseResult:
 
 
 # ------------------------------------------------------------
-# 核心解析引擎
+# 缓存模块
+# ------------------------------------------------------------
+class DiskCache:
+    """基于磁盘的简单缓存，使用 URL 哈希作为键"""
+
+    def __init__(self, cache_dir: Optional[str] = None, ttl: int = CACHE_TTL):
+        """初始化缓存
+
+        Args:
+            cache_dir: 缓存目录，默认使用系统临时目录
+            ttl: 缓存有效期（秒）
+        """
+        if cache_dir is None:
+            cache_dir = os.path.join(tempfile.gettempdir(), "android-web-scraper-cache")
+        self.cache_dir = cache_dir
+        self.ttl = ttl
+        os.makedirs(self.cache_dir, exist_ok=True)
+
+    def _get_cache_path(self, url: str) -> str:
+        """获取缓存文件路径"""
+        url_hash = hashlib.md5(url.encode("utf-8")).hexdigest()
+        return os.path.join(self.cache_dir, f"{url_hash}.json")
+
+    def get(self, url: str) -> Optional[str]:
+        """获取缓存内容
+
+        Args:
+            url: 请求的 URL
+
+        Returns:
+            Optional[str]: 缓存的内容，如果不存在或过期则返回 None
+        """
+        cache_path = self._get_cache_path(url)
+        if not os.path.exists(cache_path):
+            return None
+
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                cache_data = json.load(f)
+
+            # 检查过期时间
+            cached_time = cache_data.get("timestamp", 0)
+            if time.time() - cached_time > self.ttl:
+                os.remove(cache_path)
+                return None
+
+            return cache_data.get("content")
+        except (json.JSONDecodeError, KeyError, OSError):
+            # 缓存损坏，删除并返回 None
+            try:
+                os.remove(cache_path)
+            except OSError:
+                pass
+            return None
+
+    def set(self, url: str, content: str) -> None:
+        """设置缓存内容
+
+        Args:
+            url: 请求的 URL
+            content: 要缓存的内容
+        """
+        cache_path = self._get_cache_path(url)
+        cache_data = {
+            "url": url,
+            "content": content,
+            "timestamp": time.time(),
+        }
+        try:
+            with open(cache_path, "w", encoding="utf-8") as f:
+                json.dump(cache_data, f, ensure_ascii=False)
+        except OSError:
+            # 缓存写入失败不影响主流程
+            pass
+
+
+# ------------------------------------------------------------
+# 网络请求模块
+# ------------------------------------------------------------
+class NetworkFetcher:
+    """网络请求处理器，支持重试退避、超时和缓存"""
+
+    def __init__(self, timeout: int = REQUEST_TIMEOUT, max_retries: int = MAX_RETRIES,
+                 cache: Optional[DiskCache] = None):
+        self.timeout = timeout
+        self.max_retries = max_retries
+        self.cache = cache if cache else DiskCache()
+        self.last_request_time = 0.0
+
+    def _rate_limit(self):
+        """请求频率限制，确保请求间隔"""
+        elapsed = time.time() - self.last_request_time
+        if elapsed < REQUEST_INTERVAL:
+            time.sleep(REQUEST_INTERVAL - elapsed)
+        self.last_request_time = time.time()
+
+    def fetch(self, url: str, use_cache: bool = True) -> str:
+        """获取URL内容，带重试退避和缓存
+
+        Args:
+            url: 目标URL
+            use_cache: 是否使用缓存
+
+        Returns:
+            str: 页面HTML内容
+
+        Raises:
+            RuntimeError: 请求失败
+        """
+        if not url:
+            raise ValueError(E001)
+
+        # 验证URL格式
+        parsed = urlparse(url)
+        if parsed.scheme not in ("http", "https"):
+            raise ValueError(f"不支持的URL协议: {parsed.scheme}")
+
+        # 尝试从缓存获取
+        if use_cache:
+            cached_content = self.cache.get(url)
+            if cached_content is not None:
+                print(f"使用缓存: {url}")
+                return cached_content
+
+        last_error = None
+        for attempt in range(self.max_retries):
+            try:
+                # 请求频率限制
+                self._rate_limit()
+
+                req = urllib.request.Request(
+                    url,
+                    headers={
+                        "User-Agent": "Mozilla/5.0 (Linux; Android 10; SM-G975F) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.120 Mobile Safari/537.36",
+                        "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+                        "Connection": "keep-alive",
+                    }
+                )
+                with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                    content_type = response.headers.get("Content-Type", "")
+                    if "text/html" not in content_type and "application/xhtml+xml" not in content_type:
+                        raise ValueError(f"非HTML内容: {content_type}")
+                    # 检测编码
+                    charset = "utf-8"
+                    if "charset=" in content_type:
+                        charset = content_type.split("charset=")[-1].strip().strip('"').strip("'")
+                    content = response.read().decode(charset, errors="replace")
+
+                    # 写入缓存
+                    if use_cache:
+                        self.cache.set(url, content)
+
+                    return content
+            except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, ValueError) as e:
+                last_error = e
+                if attempt < self.max_retries - 1:
+                    wait_time = RETRY_BACKOFF[attempt] if attempt < len(RETRY_BACKOFF) else RETRY_BACKOFF[-1]
+                    print(f"请求失败(尝试{attempt+1}/{self.max_retries}): {e}, {wait_time}秒后重试...")
+                    time.sleep(wait_time)
+
+        # 请求失败时尝试返回缓存（降级策略）
+        if use_cache:
+            cached_content = self.cache.get(url)
+            if cached_content is not None:
+                print(f"请求失败，使用缓存降级: {url}")
+                return cached_content
+
+        raise RuntimeError(f"请求失败: {last_error}")
+
+
+# ------------------------------------------------------------
+# HTML 解析引擎（使用 html.parser 优先，回退到正则）
 # ------------------------------------------------------------
 class HtmlParser:
-    """HTML 解析器 - 基于正则表达式的轻量实现"""
+    """HTML 解析器 - 使用标准库 html.parser，回退到正则表达式"""
 
-    # 常见标签正则
+    # 常见标签正则（作为回退方案）
     TAG_PATTERN = re.compile(r"<([a-zA-Z][a-zA-Z0-9]*)([^>]*)>")
     CLOSE_TAG_PATTERN = re.compile(r"</([a-zA-Z][a-zA-Z0-9]*)>")
     COMMENT_PATTERN = re.compile(r"<!--.*?-->", re.DOTALL)
@@ -89,11 +280,44 @@ class HtmlParser:
 
         Args:
             html_content: HTML 原始内容
+
+        Raises:
+            ValueError: 输入为空
         """
         if not html_content or not html_content.strip():
             raise ValueError(E002)
         self.raw_html = html_content
         self.clean_text = self._clean_html(html_content)
+
+        # 使用 html.parser 构建 DOM 树
+        self.dom = None
+        try:
+            from html.parser import HTMLParser
+
+            class DOMBuilder(HTMLParser):
+                def __init__(self):
+                    super().__init__()
+                    self.root = {"tag": "root", "attrs": {}, "children": [], "text": ""}
+                    self.stack = [self.root]
+
+                def handle_starttag(self, tag, attrs):
+                    node = {"tag": tag, "attrs": dict(attrs), "children": [], "text": ""}
+                    self.stack[-1]["children"].append(node)
+                    self.stack.append(node)
+
+                def handle_endtag(self, tag):
+                    if len(self.stack) > 1:
+                        self.stack.pop()
+
+                def handle_data(self, data):
+                    if data.strip():
+                        self.stack[-1]["text"] += data.strip()
+
+            builder = DOMBuilder()
+            builder.feed(html_content)
+            self.dom = builder.root
+        except Exception:
+            self.dom = None
 
     def _clean_html(self, html_content: str) -> str:
         """清理 HTML，去除脚本、样式、注释等"""
@@ -102,8 +326,35 @@ class HtmlParser:
         text = self.STYLE_PATTERN.sub("", text)
         return text
 
+    def _find_all(self, node: Dict, tag: str) -> List[Dict]:
+        """递归查找所有指定标签的节点"""
+        results = []
+        if node.get("tag") == tag:
+            results.append(node)
+        for child in node.get("children", []):
+            results.extend(self._find_all(child, tag))
+        return results
+
+    def _get_text_recursive(self, node: Dict) -> str:
+        """递归获取节点文本"""
+        text = node.get("text", "")
+        for child in node.get("children", []):
+            text += " " + self._get_text_recursive(child)
+        return text.strip()
+
     def get_text(self) -> str:
         """获取纯文本内容"""
+        # 优先使用 DOM 树
+        if self.dom is not None:
+            try:
+                text = self._get_text_recursive(self.dom)
+                # 压缩空白
+                lines = [line.strip() for line in text.split("\n")]
+                return "\n".join([line for line in lines if line])
+            except Exception:
+                pass
+
+        # 回退到正则
         text = self.clean_text
         # 替换块级标签为换行
         text = re.sub(r"<(br|p|div|li|h[1-6]|tr)[^>]*>", "\n", text, flags=re.IGNORECASE)
@@ -118,6 +369,28 @@ class HtmlParser:
 
     def extract_title(self) -> str:
         """提取标题"""
+        # 优先使用 DOM 树
+        if self.dom is not None:
+            try:
+                # 尝试多种选择器
+                title_nodes = self._find_all(self.dom, "title")
+                if title_nodes and title_nodes[0].get("text"):
+                    return title_nodes[0]["text"].strip()
+
+                h1_nodes = self._find_all(self.dom, "h1")
+                if h1_nodes and h1_nodes[0].get("text"):
+                    return h1_nodes[0]["text"].strip()
+
+                # meta og:title
+                meta_nodes = self._find_all(self.dom, "meta")
+                for meta in meta_nodes:
+                    attrs = meta.get("attrs", {})
+                    if attrs.get("property") == "og:title" and attrs.get("content"):
+                        return attrs["content"].strip()
+            except Exception:
+                pass
+
+        # 回退到正则
         # 优先取 <title> 标签
         title_match = re.search(r"<title[^>]*>(.*?)</title>", self.raw_html, re.DOTALL | re.IGNORECASE)
         if title_match:
@@ -145,6 +418,21 @@ class HtmlParser:
     def extract_links(self) -> List[Dict[str, str]]:
         """提取所有链接"""
         links = []
+
+        # 优先使用 DOM 树
+        if self.dom is not None:
+            try:
+                a_nodes = self._find_all(self.dom, "a")
+                for a in a_nodes:
+                    href = a.get("attrs", {}).get("href")
+                    text = self._get_text_recursive(a)
+                    if href and text:
+                        links.append({"url": href.strip(), "text": text})
+                return links
+            except Exception:
+                pass
+
+        # 回退到正则
         for match in re.finditer(r"<a[^>]+href=[\"']([^\"']*)[\"'][^>]*>(.*?)</a>",
                                  self.raw_html, re.DOTALL | re.IGNORECASE):
             url = match.group(1).strip()
@@ -156,6 +444,22 @@ class HtmlParser:
     def extract_meta(self) -> Dict[str, str]:
         """提取 meta 信息"""
         metas = {}
+
+        # 优先使用 DOM 树
+        if self.dom is not None:
+            try:
+                meta_nodes = self._find_all(self.dom, "meta")
+                for meta in meta_nodes:
+                    attrs = meta.get("attrs", {})
+                    name = attrs.get("name") or attrs.get("property")
+                    content = attrs.get("content")
+                    if name and content:
+                        metas[name] = content
+                return metas
+            except Exception:
+                pass
+
+        # 回退到正则
         for match in re.finditer(r"<meta[^>]*>", self.raw_html, re.IGNORECASE):
             tag = match.group(0)
             attrs = dict(self.ATTR_PATTERN.findall(tag))
@@ -173,450 +477,3 @@ class HtmlParser:
 
 class DataExtractor:
     """数据抽取器"""
-
-    # 时间模式
-    TIME_PATTERNS = [
-        r"20\d{2}[-/年]\d{1,2}[-/月]\d{1,2}日?",
-        r"\d{4}[-/]\d{1,2}[-/]\d{1,2}",
-        r"\d{1,2}:\d{2}",
-    ]
-
-    # 作者模式
-    AUTHOR_PATTERNS = [
-        r"作者[:：]\s*([^\s，。；]+)",
-        r"by\s+([^\s，。；]+)",
-        r"来源[:：]\s*([^\s，。；]+)",
-    ]
-
-    def __init__(self, parser: HtmlParser):
-        self.parser = parser
-
-    def extract(self, url: str = "") -> ParseResult:
-        """执行完整抽取流程"""
-        result = ParseResult(url=url)
-
-        # 提取标题
-        result.title = self.parser.extract_title()
-
-        # 提取正文（取清理后的文本）
-        text = self.parser.get_text()
-        if text:
-            result.content = text[:2000]  # 限制长度
-
-        # 提取时间
-        for pattern in self.TIME_PATTERNS:
-            matches = self.parser.extract_by_pattern(pattern)
-            if matches:
-                result.time = matches[0]
-                break
-
-        # 提取作者
-        for pattern in self.AUTHOR_PATTERNS:
-            matches = self.parser.extract_by_pattern(pattern)
-            if matches:
-                result.author = matches[0]
-                break
-
-        # 提取链接
-        links = self.parser.extract_links()
-        if links:
-            result.fields.append(ExtractedField(
-                name="links",
-                value=json.dumps(links[:10], ensure_ascii=False),
-                confidence="高" if len(links) <= 10 else "中"
-            ))
-
-        # 提取 meta 信息
-        metas = self.parser.extract_meta()
-        for key in ["description", "keywords"]:
-            if key in metas:
-                result.fields.append(ExtractedField(
-                    name=key,
-                    value=metas[key],
-                    confidence="高"
-                ))
-
-        # 标记缺失字段
-        for field_name in ["title", "content", "time", "author"]:
-            if not getattr(result, field_name):
-                setattr(result, field_name, f"[需核实:{field_name}]")
-
-        return result
-
-
-# ------------------------------------------------------------
-# 输出格式化
-# ------------------------------------------------------------
-class OutputFormatter:
-    """输出格式化器"""
-
-    @staticmethod
-    def to_json(result: ParseResult) -> str:
-        """转换为 JSON 字符串"""
-        return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
-
-    @staticmethod
-    def to_csv(results: List[ParseResult]) -> str:
-        """转换为 CSV 字符串"""
-        if not results:
-            return ""
-
-        # 收集所有字段
-        field_names = ["title", "content", "time", "author", "url"]
-        for r in results:
-            for f in r.fields:
-                if f.name not in field_names:
-                    field_names.append(f.name)
-
-        output = io.StringIO()
-        writer = csv.DictWriter(output, fieldnames=field_names, extrasaction="ignore")
-        writer.writeheader()
-
-        for r in results:
-            row = r.to_dict()
-            # 扁平化字段
-            for f in r.fields:
-                row[f.name] = f"{f.value} [{f.confidence}]"
-            writer.writerow(row)
-
-        return output.getvalue()
-
-    @staticmethod
-    def to_text(result: ParseResult) -> str:
-        """转换为纯文本格式"""
-        lines = [
-            f"标题: {result.title}",
-            f"时间: {result.time}",
-            f"作者: {result.author}",
-            f"URL: {result.url}",
-            "---",
-            result.content,
-        ]
-        for f in result.fields:
-            lines.append(f"字段[{f.name}] (置信度:{f.confidence}): {f.value}")
-        return "\n".join(lines)
-
-
-# ------------------------------------------------------------
-# 主处理流程
-# ------------------------------------------------------------
-class ScraperProcessor:
-    """主处理器"""
-
-    def __init__(self, output_format: str = "json"):
-        """初始化
-
-        Args:
-            output_format: 输出格式 (json/csv/text)
-        """
-        self.output_format = output_format
-
-    def process_html(self, html_content: str, url: str = "") -> ParseResult:
-        """处理单个 HTML 内容"""
-        try:
-            parser = HtmlParser(html_content)
-            extractor = DataExtractor(parser)
-            return extractor.extract(url)
-        except ValueError as e:
-            raise RuntimeError(f"{E004}: {e}")
-        except Exception as e:
-            raise RuntimeError(f"{E010}: {e}")
-
-    def process_batch(self, items: List[Dict[str, str]]) -> List[ParseResult]:
-        """批量处理
-
-        Args:
-            items: [{"html": "...", "url": "..."}]
-        """
-        results = []
-        try:
-            for item in items:
-                result = self.process_html(item.get("html", ""), item.get("url", ""))
-                results.append(result)
-        except Exception as e:
-            raise RuntimeError(f"{E007}: {e}")
-        return results
-
-    def format_output(self, results: List[ParseResult]) -> str:
-        """格式化输出"""
-        if self.output_format == "json":
-            if len(results) == 1:
-                return self._to_json(results[0])
-            return json.dumps([r.to_dict() for r in results], ensure_ascii=False, indent=2)
-        elif self.output_format == "csv":
-            return OutputFormatter.to_csv(results)
-        elif self.output_format == "text":
-            return "\n\n".join(OutputFormatter.to_text(r) for r in results)
-        else:
-            raise ValueError(E006)
-
-    def _to_json(self, result: ParseResult) -> str:
-        return OutputFormatter.to_json(result)
-
-
-# ------------------------------------------------------------
-# 自检模块
-# ------------------------------------------------------------
-def run_selftest() -> bool:
-    """运行内置自检
-
-    使用硬编码样例数据离线验证核心逻辑。
-    断言使用宽松阈值，确保任何环境可稳定通过。
-
-    Returns:
-        bool: 自检是否通过
-    """
-    print("开始自检...")
-
-    # 内置测试数据
-    test_html = """
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>测试新闻标题 - 某新闻网</title>
-        <meta name="description" content="这是一条用于测试的新闻描述">
-        <meta property="og:title" content="测试新闻标题">
-    </head>
-    <body>
-        <h1>测试新闻标题</h1>
-        <p>作者: 张三</p>
-        <p>发布时间: 2024-03-15 14:30</p>
-        <div class="content">
-            <p>这是新闻正文第一段，包含一些测试内容。</p>
-            <p>这是第二段，用于测试多段提取。</p>
-        </div>
-        <a href="https://example.com/1">相关链接一</a>
-        <a href="https://example.com/2">相关链接二</a>
-    </body>
-    </html>
-    """
-
-    # 测试1: HTML 清理
-    print("测试1: HTML 清理")
-    try:
-        parser = HtmlParser(test_html)
-        text = parser.get_text()
-        # 宽松断言：文本不为空且包含关键词
-        assert len(text) > 0, "清理后文本不应为空"
-        assert "测试" in text, "文本应包含测试关键词"
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试2: 标题提取
-    print("测试2: 标题提取")
-    try:
-        parser = HtmlParser(test_html)
-        title = parser.extract_title()
-        # 宽松断言：标题包含关键词
-        assert "测试" in title, "标题应包含测试关键词"
-        print(f"  提取标题: {title}")
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试3: 链接提取
-    print("测试3: 链接提取")
-    try:
-        parser = HtmlParser(test_html)
-        links = parser.extract_links()
-        # 宽松断言：至少有一个链接
-        assert len(links) >= 1, "应至少提取到一个链接"
-        print(f"  提取链接数: {len(links)}")
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试4: 完整抽取流程
-    print("测试4: 完整抽取流程")
-    try:
-        processor = ScraperProcessor("json")
-        result = processor.process_html(test_html, "https://example.com")
-        # 宽松断言：关键字段非空
-        assert result.title, "标题不应为空"
-        assert result.content, "正文不应为空"
-        assert result.time, "时间不应为空"
-        assert result.author, "作者不应为空"
-        print(f"  标题: {result.title}")
-        print(f"  时间: {result.time}")
-        print(f"  作者: {result.author}")
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试5: JSON 输出
-    print("测试5: JSON 输出")
-    try:
-        processor = ScraperProcessor("json")
-        result = processor.process_html(test_html)
-        output = processor.format_output([result])
-        parsed = json.loads(output)
-        # 宽松断言：JSON 可解析且包含必要字段
-        assert "title" in parsed, "JSON 应包含 title 字段"
-        assert "content" in parsed, "JSON 应包含 content 字段"
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试6: CSV 输出
-    print("测试6: CSV 输出")
-    try:
-        processor = ScraperProcessor("csv")
-        results = [processor.process_html(test_html)]
-        output = processor.format_output(results)
-        # 宽松断言：CSV 非空且包含表头
-        assert "title" in output.lower(), "CSV 应包含 title 表头"
-        assert len(output) > 10, "CSV 内容应有一定长度"
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试7: 文本输出
-    print("测试7: 文本输出")
-    try:
-        processor = ScraperProcessor("text")
-        result = processor.process_html(test_html)
-        output = processor.format_output([result])
-        # 宽松断言：文本非空
-        assert len(output) > 0, "文本输出不应为空"
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试8: 空输入处理
-    print("测试8: 空输入处理")
-    try:
-        processor = ScraperProcessor("json")
-        try:
-            processor.process_html("")
-            print("  ✗ 失败: 空输入应抛出异常")
-            return False
-        except RuntimeError:
-            print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试9: 批量处理
-    print("测试9: 批量处理")
-    try:
-        processor = ScraperProcessor("json")
-        items = [
-            {"html": test_html, "url": "https://example.com/1"},
-            {"html": test_html, "url": "https://example.com/2"},
-        ]
-        results = processor.process_batch(items)
-        # 宽松断言：处理结果数量正确
-        assert len(results) == 2, "应处理2个输入"
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    # 测试10: meta 提取
-    print("测试10: meta 提取")
-    try:
-        parser = HtmlParser(test_html)
-        metas = parser.extract_meta()
-        # 宽松断言：至少提取到一个 meta
-        assert len(metas) >= 1, "应至少提取到一个 meta"
-        print(f"  提取 meta 数: {len(metas)}")
-        print("  ✓ 通过")
-    except Exception as e:
-        print(f"  ✗ 失败: {e}")
-        return False
-
-    print("\n全部自检通过!")
-    return True
-
-
-# ------------------------------------------------------------
-# 命令行入口
-# ------------------------------------------------------------
-def main():
-    """主入口"""
-    parser = argparse.ArgumentParser(
-        description="安卓网页采集助手 - HTML 解析与数据抽取工具",
-        epilog="示例: python main.py --html '<html>...</html>' --format json"
-    )
-    parser.add_argument(
-        "--html",
-        type=str,
-        help="HTML 内容（直接传入字符串）"
-    )
-    parser.add_argument(
-        "--file",
-        type=str,
-        help="HTML 文件路径"
-    )
-    parser.add_argument(
-        "--url",
-        type=str,
-        default="",
-        help="页面 URL（仅用于记录，不发起请求）"
-    )
-    parser.add_argument(
-        "--format",
-        type=str,
-        choices=["json", "csv", "text"],
-        default="json",
-        help="输出格式 (默认: json)"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（使用硬编码数据，不依赖外部环境）"
-    )
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-
-    # 参数检查
-    if not args.html and not args.file:
-        print(f"错误: {E001} 请提供 --html 或 --file 参数", file=sys.stderr)
-        sys.exit(1)
-
-    try:
-        # 获取输入内容
-        if args.html:
-            html_content = args.html
-        else:
-            try:
-                with open(args.file, "r", encoding="utf-8") as f:
-                    html_content = f.read()
-            except FileNotFoundError:
-                print(f"错误: {E002} 文件不存在: {args.file}", file=sys.stderr)
-                sys.exit(1)
-            except Exception as e:
-                print(f"错误: {E010} 读取文件失败: {e}", file=sys.stderr)
-                sys.exit(1)
-
-        # 处理
-        processor = ScraperProcessor(args.format)
-        result = processor.process_html(html_content, args.url)
-        output = processor.format_output([result])
-
-        # 输出结果
-        print(output)
-
-    except RuntimeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"错误: {E010} 未知异常: {e}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()

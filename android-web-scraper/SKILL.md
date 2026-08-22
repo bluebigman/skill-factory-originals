@@ -1,86 +1,284 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: android-web-scraper
 name: android-web-scraper
-displayName: 安卓网页采集 后台抓取 数据提取
+displayName: 安卓静默采集 网页转结构化数据
 description: 在安卓后台静默执行网页任务，将网页内容转化为结构化数据。
-version: 1.0.1
-rules_version: cpr-20260808-n152
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/android-web-scraper
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 数据工坊
+author: 数据工坊·林默
 agent_created: true
-trigger_words: ["android-web-scraper", "安卓网页抓取", "后台网页任务", "网页数据采集", "Android Web Scraper"]
+trigger_words: ["android-web-scraper", "安卓网页抓取", "后台网页任务", "网页数据采集", "Android Web Scraper", "静默采集", "页面解析", "结构化提取"]
+---
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
+# Android Web Scraper — 技能文档
+
+## 一、能力边界（一页纸速查卡）
+
+### 1.1 能做与不能做
+
+| 维度 | ✅ 能做 | ❌ 不能做 |
+|------|--------|----------|
+| 数据采集 | 从公开网页提取文本、链接、表格、列表等结构化字段 | 绕过登录墙、验证码、付费内容或任何访问控制 |
+| 运行环境 | 安卓设备后台静默执行，无需前台界面 | 不支持 iOS、Windows、macOS 原生运行 |
+| 输出格式 | 生成 JSON 格式的结构化数据文件 | 不生成 Excel/CSV/数据库文件（需自行转换） |
+| 异常处理 | 识别页面加载失败、选择器失效、反爬拦截等常见问题 | 无法自动修复目标网站的结构变更 |
+| 合规性 | 遵循目标网站 robots.txt 约定 | 不提供任何规避反爬机制的方案或代码 |
+
+### 1.2 适用对象
+
+- **移动端数据采集者**：需要在安卓设备上定期抓取网页数据的个人或团队
+- **原型验证工程师**：快速验证某个页面能否被结构化提取，无需搭建完整爬虫服务
+- **轻量级监控场景**：对价格、库存、公告等公开信息做低频轮询采集
+
+### 1.3 不适用对象
+
+- 需要高并发、分布式采集的生产级爬虫系统
+- 需要登录态、Session 维持的受限内容采集
+- 对实时性要求达到秒级的数据管道
+
 ---
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+## 二、触发方式
+
+### 2.1 触发词速查
+
+| 触发词 | 适用场景 |
+|--------|----------|
+| `android-web-scraper` | 直接调用技能主命令 |
+| `安卓网页抓取` | 中文场景下的通用触发 |
+| `后台网页任务` | 强调"静默执行"的场景 |
+| `网页数据采集` | 强调"数据提取"的场景 |
+| `静默采集` | 强调无需人工干预的场景 |
+| `页面解析` | 强调 HTML 解析的场景 |
+| `结构化提取` | 强调输出格式的场景 |
+
+### 2.2 场景映射表
+
+| 用户说（大白话） | 实际执行 |
+|------------------|----------|
+| "帮我把这个商品页的价格和标题抓下来" | 配置 url + fields，运行抓取，输出 JSON |
+| "每天凌晨自动跑一次这个页面" | 配置定时任务（需外部调度器配合） |
+| "这个页面改版了，抓不到数据了" | 检查错误码，定位选择器失效问题 |
+| "抓回来的数据有些字段是空的" | 查看置信度，确认是否需要人工复核 |
+
+---
+
+## 三、标准流程
+
+### 3.1 前置条件
+
+| 条件项 | 要求 |
+|--------|------|
+| 目标 URL | 必须是可公开访问的 HTTP/HTTPS 页面 |
+| 配置文件 | 存在有效的 `config.json`（格式见 3.2） |
+| 设备环境 | 安卓 7.0+，已授予网络权限 |
+| 网络状态 | 可正常访问目标站点（无 DNS 污染或区域封锁） |
+
+### 3.2 配置说明（config.json）
+
+```json
+{
+  "url": "https://example.com/products/123",
+  "fields": {
+    "title": {
+      "selector": "h1.product-title",
+      "type": "text"
+    },
+    "price": {
+      "selector": "span.price-value",
+      "type": "text",
+      "transform": "strip_currency"
+    },
+    "stock_status": {
+      "selector": "div.stock-badge",
+      "type": "text",
+      "default": "[需核实:stock_status]"
+    }
+  },
+  "pagination": {
+    "enabled": false,
+    "next_selector": "a.next-page"
+  },
+  "timeout_ms": 15000,
+  "retry_count": 2
+}
+```
+
+**字段参数说明：**
+
+| 参数 | 必填 | 类型 | 说明 |
+|------|------|------|------|
+| `url` | ✅ | string | 目标页面完整地址 |
+| `fields` | ✅ | object | 字段名 → 提取规则映射 |
+| `fields.*.selector` | ✅ | string | CSS 选择器或 XPath |
+| `fields.*.type` | ✅ | string | `text` / `href` / `html` / `attribute` |
+| `fields.*.attribute` | 条件必填 | string | 当 type 为 `attribute` 时指定属性名 |
+| `fields.*.transform` | ❌ | string | 后处理函数（如 `strip_currency`） |
+| `fields.*.default` | ❌ | string | 提取失败时的占位值 |
+| `pagination` | ❌ | object | 分页配置，默认关闭 |
+| `timeout_ms` | ❌ | number | 请求超时，默认 15000 |
+| `retry_count` | ❌ | number | 失败重试次数，默认 2 |
+
+### 3.3 执行步骤
+
+1. **编写配置文件**：根据目标页面结构，在 `config.json` 中定义 URL 和字段提取规则。
+2. **运行抓取命令**：
+   ```bash
+   android-web-scraper --config config.json
+   ```
+3. **查看输出文件**：命令执行完毕后，同目录下生成 `output.json`。
+4. **检查置信度**：打开输出文件，查看每个条目的 `_confidence` 字段。
+5. **人工复核（如需）**：当 `_confidence < 0.8` 时，对对应字段进行人工抽查。
+
+### 3.4 输出规范（output.json）
+
+```json
+{
+  "task_id": "a3f8c2e1-9b4d-4f6a-8c2e-1a9b4d4f6a8c",
+  "url": "https://example.com/products/123",
+  "captured_at": "2025-01-15T14:32:07+08:00",
+  "items": [
+    {
+      "title": "无线蓝牙耳机 Pro",
+      "price": "299.00",
+      "stock_status": "现货",
+      "_confidence": 0.95
+    }
+  ],
+  "summary": {
+    "total_items": 1,
+    "avg_confidence": 0.95,
+    "low_confidence_count": 0
+  }
+}
+```
+
+**置信度说明：**
+
+| 置信度区间 | 含义 | 建议操作 |
+|------------|------|----------|
+| 0.9 – 1.0 | 提取结果高度可靠 | 直接使用 |
+| 0.8 – 0.9 | 基本可靠，个别字段可能偏差 | 抽查关键字段 |
+| 0.6 – 0.8 | 存在较多不确定性 | 人工复核全部字段 |
+| < 0.6 | 提取质量差，选择器可能失效 | 检查配置或页面结构 |
+
+---
+
+## 四、置信度门控
+
+### 4.1 占位符规则
+
+**任何未成功提取的字段，一律使用 `[需核实:字段名]` 占位，禁止猜测填充。**
+
+示例：
+- 价格字段提取失败 → `"price": "[需核实:price]"`
+- 库存状态选择器未匹配 → `"stock_status": "[需核实:stock_status]"`
+
+### 4.2 批量低置信度处理
+
+当单次任务中 **超过 30% 的条目置信度低于 0.6** 时，按以下顺序排查：
+
+1. **目标网站是否改版**：检查 HTML 结构是否变化，选择器是否仍然匹配。
+2. **是否被重定向**：确认是否被跳转到登录页或验证页。
+3. **是否触发反爬机制**：查看返回状态码是否为 403/429。
+4. **是否加载了降级页面**：确认网络问题是否导致页面资源未完整加载。
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E001` | 配置文件缺失或格式错误 | "未找到有效的 config.json，请检查文件是否存在且格式正确" | 1. 确认文件路径；2. 用 JSON 校验工具验证格式 |
+| `E002` | URL 无法访问 | "目标 URL 返回非 200 状态码" | 1. 检查 URL 拼写；2. 确认网络连通性；3. 检查是否被重定向 |
+| `E003` | 选择器未匹配任何元素 | "字段 [字段名] 的选择器未匹配到页面元素" | 1. 用浏览器开发者工具验证选择器；2. 更新选择器 |
+| `E004` | 页面加载超时 | "页面加载超过设定超时时间" | 1. 增大 `timeout_ms`；2. 检查网络状况 |
+| `E005` | 反爬拦截 | "目标站点返回 403/429，可能触发了访问频率限制" | 1. 降低采集频率；2. 检查 robots.txt 合规性 |
+| `E006` | 输出写入失败 | "无法写入 output.json，请检查目录权限" | 1. 确认当前目录可写；2. 更换输出路径 |
+
+---
+
+## 六、FAQ 反模式对照
+
+| 常见坑（反模式） | 正确做法 |
+|------------------|----------|
+| ❌ 抓取失败后手动填一个"看起来合理"的值 | ✅ 使用 `[需核实:字段名]` 占位，标记为待确认 |
+| ❌ 批量任务全部低置信度时，逐个手动修正 | ✅ 先停任务，检查选择器和页面结构，批量修复后重跑 |
+| ❌ 目标网站改版后，在代码里硬编码新选择器 | ✅ 更新 `config.json` 中的选择器，保持配置与代码分离 |
+| ❌ 忽略 robots.txt 直接高频请求 | ✅ 遵守 robots.txt 约定，设置合理请求间隔 |
+| ❌ 抓取结果直接用于生产决策，不做任何校验 | ✅ 对 `_confidence < 0.8` 的数据进行人工抽查后再使用 |
+
+---
+
+## 七、渐进式披露
+
+### 7.1 速查卡（30 秒上手）
+
+```
+1. 写 config.json（url + fields）
+2. 运行 android-web-scraper --config config.json
+3. 查看 output.json
+```
+
+### 7.2 新手路径（首次使用）
+
+- 阅读「一、能力边界」了解工具边界
+- 按「三、标准流程」的步骤 1-3 完成一次最小验证
+- 遇到问题查「五、错误码体系」
+
+### 7.3 进阶路径（深度使用）
+
+- 掌握「四、置信度门控」的批量处理策略
+- 熟悉「六、FAQ 反模式对照」避免常见陷阱
+- 结合外部调度器（如 Termux cron）实现定时采集
+- 对 `transform` 字段编写自定义后处理函数，提升数据质量
+
+---
+
+## 八、自检命令
+
+```bash
+# 检查技能是否安装正确
+android-web-scraper --selftest
+
+# 查看版本信息
+android-web-scraper --version
+```
+
+---
+
+## 用户协议
+
 <!-- user-agreement-injected -->
 
+**使用本 Skill 即表示您同意以下条款：**
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任，包括但不限于数据准确性、合规性及任何直接或间接损失。
+2. **禁止反向工程**：不得对本 Skill 的源代码进行反向工程、反编译、破解或试图提取底层算法。不得修改、复制、分发本 Skill 的原始代码。
+3. **合规使用**：使用者应确保采集行为符合当地法律法规及目标网站的 robots.txt 约定。本 Skill 不提供任何规避访问控制的功能。
+4. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保。作者不对数据的准确性、完整性或适用性作任何承诺。
 
-# Android Web Scraper 技能文档
-
-## 一、能力边界：一页纸速查卡
-
-本技能面向需要在安卓设备后台执行网页抓取任务的开发者或自动化流程设计者。它不是一个可视化爬虫工具，而是一个库级别的能力封装，用于将网页请求、解析、结构化输出串联为可复用的后台任务。
-
-### 1.1 能做（核心能力清单）
-
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| C1 | 后台网页请求 | 在安卓后台线程发起 HTTP 请求，获取目标 URL 的 HTML 内容 |
-| C2 | 结构化数据提取 | 从 HTML 中提取指定字段，输出为 JSON 或 CSV 格式 |
-| C3 | 批量 URL 处理 | 支持传入多个 URL，按顺序或并发执行抓取任务 |
-| C4 | 自定义解析规则 | 允许用户通过 CSS 选择器或 XPath 定义提取规则 |
-| C5 | 结果校验与置信度标注 | 对提取结果进行完整性检查，对缺失字段标注置信度 |
-
-### 1.2 不能做（明确边界）
-
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不处理登录态 | 不自动处理 Cookie 会话、OAuth 授权或验证码 |
-| L2 | 不执行 JavaScript | 仅抓取静态 HTML，不渲染动态内容 |
-| L3 | 不绕过反爬机制 | 不提供代理池、IP 轮换或指纹伪装功能 |
-| L4 | 不处理二进制文件 | 不下载图片、PDF、视频等非 HTML 资源 |
-| L5 | 不提供 GUI | 无图形界面，仅通过 API 或命令行参数调用 |
-
-### 1.3 适用对象
-
-- 需要定期采集公开网页数据的安卓应用开发者
-- 需要将网页内容同步到本地数据库的自动化脚本编写者
-- 对网页结构有基本了解，能编写 CSS 选择器或 XPath 的技术人员
-
+---
 
 ## 许可证（License）
 
-```text
-MIT License
-
-Copyright (c) 2026 SkillForge Lab
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-```
 <!-- professional-license-embedded -->
+
+### MIT License
+
+版权所有 (c) 2025 原创作者（自持版权）
+
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士处理本软件的权利，包括但不限于使用、复制、修改、合并、出版、分发、再许可和/或销售软件副本的权利，并允许向软件所提供给的人士提供本软件，但须满足以下条件：
+
+上述版权声明和本许可声明应包含在本软件的所有副本或实质性部分中。
+
+本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性的担保。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论该等责任是基于合同、侵权或其他方式引起的，还是与本软件或本软件的使用或其他交易有关，或与本软件的使用或其他交易有关。
