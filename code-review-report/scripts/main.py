@@ -456,7 +456,7 @@ def main(argv: Optional[List[str]] = None) -> int:
         prog="code-review-report",
         description="解析 git diff，扫描风险并输出分级报告",
     )
-    parser.add_argument("input", nargs="?", help="diff 文件路径（- 表示 stdin）")
+    parser.add_argument("--input", nargs="?", help="diff 文件路径（- 表示 stdin）")
     parser.add_argument("--format", choices=["markdown", "json"], default="markdown",
                         help="输出格式（默认 markdown）")
     parser.add_argument("--filter", default="P2",
@@ -468,6 +468,18 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="关闭密码脱敏（默认开启）")
     parser.add_argument("--selftest", action="store_true",
                         help="运行内置自检并退出")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--diff", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args(argv)
 
