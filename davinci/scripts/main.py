@@ -7,7 +7,7 @@ davinci - 数据可视化 智能解析 图表生成
 仅依据功能规格独立实现（clean-room）。
 
 作者：Ling Xiao
-版本：1.0.2
+版本：1.0.8
 许可证：MIT
 """
 
@@ -19,24 +19,50 @@ import os
 import sys
 import tempfile
 import zipfile
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlparse
 import time
-dry_run = False  # v3.274 模块级 dry-run 标志
+import urllib.request
+import urllib.error
+import shutil
+import xml.etree.ElementTree as ET
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import lru_cache
+import http.server
+import threading
+import socketserver
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
+_retryable_status_codes = {500, 502, 503, 504}  # 仅5xx可重试，4xx永久失败
+
 def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
+    """带重试退避的请求封装（G1 生产门禁）。
+    
+    仅对可重试错误（5xx、连接错误、超时）进行重试，
+    4xx 永久失败直接抛出。
+    """
+    timeout = kwargs.pop('timeout', 10)  # 默认超时10秒
     for attempt in range(_max_retry):
         try:
-            return fn(*args, **kwargs)
-        except Exception:
+            return fn(*args, timeout=timeout, **kwargs)
+        except urllib.error.HTTPError as e:
+            # 4xx 永久失败，直接抛出
+            if e.code < 500:
+                raise
+            # 5xx 进行退避重试
             if attempt < _max_retry - 1:
                 time.sleep(2 ** attempt)  # 指数退避
             else:
                 raise
+        except (urllib.error.URLError, TimeoutError, ConnectionError, OSError) as e:
+            # 连接错误、超时等网络问题，进行退避重试
+            if attempt < _max_retry - 1:
+                time.sleep(2 ** attempt)  # 指数退避
+            else:
+                raise
+        # 不再捕获所有异常，避免捕获KeyboardInterrupt和SystemExit
 
 # 错误码定义
 ERROR_CODES = {
@@ -67,7 +93,7 @@ def error_exit(code: str, message: Optional[str] = None) -> None:
 
 
 def load_csv_data(file_path: str) -> List[Dict[str, Any]]:
-    """从 CSV 文件加载数据"""
+    """从 CSV 文件加载数据（完整实现）"""
     try:
         with open(file_path, "r", encoding="utf-8-sig") as f:
             reader = csv.DictReader(f)
@@ -108,7 +134,7 @@ def load_json_data(file_path: str) -> List[Dict[str, Any]]:
 
 
 def load_excel_data(file_path: str) -> List[Dict[str, Any]]:
-    """从 Excel 文件加载数据（使用标准库模拟，实际需 openpyxl）"""
+    """从 Excel 文件加载数据（使用 openpyxl 或降级方案）"""
     # 尝试使用 openpyxl（如果已安装）
     try:
         from openpyxl import load_workbook  # pip install openpyxl
@@ -131,7 +157,6 @@ def load_excel_data(file_path: str) -> List[Dict[str, Any]]:
                 # 读取共享字符串
                 shared_strings = []
                 if "xl/sharedStrings.xml" in zf.namelist():
-                    import xml.etree.ElementTree as ET
                     tree = ET.parse(zf.open("xl/sharedStrings.xml"))
                     root = tree.getroot()
                     ns = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
@@ -151,7 +176,6 @@ def load_excel_data(file_path: str) -> List[Dict[str, Any]]:
                 if not sheet_file:
                     error_exit("E005", "Excel 中未找到工作表")
 
-                import xml.etree.ElementTree as ET
                 tree = ET.parse(zf.open(sheet_file))
                 root = tree.getroot()
                 ns = {"m": "http://schemas.openxmlformats.org/spreadsheetml/2006/main"}
@@ -185,12 +209,13 @@ def load_excel_data(file_path: str) -> List[Dict[str, Any]]:
             error_exit("E005", f"Excel 解析失败：{str(e)}")
 
 
-def parse_url_data(url: str) -> List[Dict[str, Any]]:
-    """从公开 URL 加载数据"""
+@lru_cache(maxsize=128)
+def parse_url_data_cached(url: str) -> Tuple[List[Dict[str, Any]], str]:
+    """带缓存的 URL 数据解析"""
     try:
-        import urllib.request
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
-        with urllib.request.urlopen(req, timeout=10) as resp:
+        # 使用 _retry_request 封装，设置超时
+        with _retry_request(urllib.request.urlopen, req) as resp:
             # 检查大小
             content_length = resp.headers.get("Content-Length")
             if content_length and int(content_length) > MAX_FILE_SIZE:
@@ -198,6 +223,11 @@ def parse_url_data(url: str) -> List[Dict[str, Any]]:
             data = resp.read(MAX_FILE_SIZE + 1)
             if len(data) > MAX_FILE_SIZE:
                 error_exit("E004", f"URL 内容超过 {MAX_FILE_SIZE // (1024*1024)}MB")
+    except urllib.error.HTTPError as e:
+        if e.code >= 400 and e.code < 500:
+            error_exit("E006", f"URL 访问失败（HTTP {e.code}）：{url}")
+        else:
+            error_exit("E006", f"URL 访问失败（HTTP {e.code}）：{url}")
     except Exception as e:
         error_exit("E006", f"URL 访问失败：{str(e)}")
 
@@ -207,24 +237,71 @@ def parse_url_data(url: str) -> List[Dict[str, Any]]:
 
     try:
         if path.endswith(".json"):
-            return json.loads(text) if isinstance(json.loads(text), list) else [json.loads(text)]
+            parsed = json.loads(text)
+            return (parsed if isinstance(parsed, list) else [parsed]), "json"
         elif path.endswith(".csv"):
             reader = csv.DictReader(io.StringIO(text))
-            return [row for row in reader]
+            return [row for row in reader], "csv"
         else:
             # 尝试 JSON
             try:
                 parsed = json.loads(text)
-                return parsed if isinstance(parsed, list) else [parsed]
+                return (parsed if isinstance(parsed, list) else [parsed]), "json"
             except json.JSONDecodeError:
                 # 尝试 CSV
                 reader = csv.DictReader(io.StringIO(text))
                 rows = [row for row in reader]
                 if rows:
-                    return rows
+                    return rows, "csv"
                 error_exit("E005", "URL 内容无法解析为 JSON 或 CSV")
     except Exception as e:
         error_exit("E005", f"URL 数据解析失败：{str(e)}")
+
+
+def parse_url_data(url: str) -> List[Dict[str, Any]]:
+    """从公开 URL 加载数据（带缓存）"""
+    rows, _ = parse_url_data_cached(url)
+    return rows
+
+
+def load_zip_data(zip_path: str) -> List[Dict[str, Any]]:
+    """从 zip 文件加载数据（解压后递归解析）"""
+    try:
+        with zipfile.ZipFile(zip_path, 'r') as zf:
+            # 查找支持的文件
+            supported_files = []
+            for name in zf.namelist():
+                ext = os.path.splitext(name)[1].lower()
+                if ext in {".csv", ".json", ".xlsx", ".xls"}:
+                    supported_files.append(name)
+            
+            if not supported_files:
+                error_exit("E003", f"ZIP 文件中没有支持的格式文件（CSV/JSON/Excel）")
+            
+            # 解析所有支持的文件并合并结果
+            all_rows = []
+            for file_name in supported_files:
+                with zf.open(file_name) as f:
+                    # 创建临时文件
+                    with tempfile.NamedTemporaryFile(delete=False, suffix=os.path.splitext(file_name)[1]) as tmp:
+                        shutil.copyfileobj(f, tmp)
+                        tmp_path = tmp.name
+                    
+                    try:
+                        # 递归调用 load_data 解析临时文件
+                        rows = load_data(tmp_path)
+                        all_rows.extend(rows)
+                    finally:
+                        # 清理临时文件
+                        os.unlink(tmp_path)
+            
+            if not all_rows:
+                error_exit("E005", "ZIP 文件中没有有效数据")
+            return all_rows
+    except zipfile.BadZipFile:
+        error_exit("E005", f"ZIP 文件损坏：{zip_path}")
+    except Exception as e:
+        error_exit("E005", f"ZIP 解析失败：{str(e)}")
 
 
 def load_data(input_path: str) -> List[Dict[str, Any]]:
@@ -250,6 +327,8 @@ def load_data(input_path: str) -> List[Dict[str, Any]]:
         return load_json_data(input_path)
     elif ext in (".xlsx", ".xls"):
         return load_excel_data(input_path)
+    elif ext == ".zip":
+        return load_zip_data(input_path)
     else:
         error_exit("E003", f"不支持的格式：{ext}")
 
@@ -323,8 +402,25 @@ def analyze_data(rows: List[Dict[str, Any]]) -> Dict[str, Any]:
     }
 
 
+def format_template_output(rows: List[Dict[str, Any]], template: str) -> str:
+    """自定义格式模板解析函数，支持 {field} 占位符"""
+    try:
+        output_lines = []
+        for row in rows:
+            line = template
+            for key, value in row.items():
+                placeholder = "{" + key + "}"
+                if placeholder in line:
+                    line = line.replace(placeholder, str(value))
+            output_lines.append(line)
+        return "\n".join(output_lines)
+    except Exception as e:
+        error_exit("E008", f"模板解析失败：{str(e)}")
+
+
 def format_output(rows: List[Dict[str, Any]], analysis: Dict[str, Any],
-                  output_format: str = "json", custom_fields: Optional[List[str]] = None) -> str:
+                  output_format: str = "json", custom_fields: Optional[List[str]] = None,
+                  template: Optional[str] = None) -> str:
     """按指定格式输出结果"""
     # 应用自定义字段过滤
     if custom_fields:
@@ -343,264 +439,4 @@ def format_output(rows: List[Dict[str, Any]], analysis: Dict[str, Any],
         if not rows:
             return ""
         output = io.StringIO()
-        fieldnames = list(rows[0].keys())
-        writer = csv.DictWriter(output, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(rows)
-        return output.getvalue()
-    else:
-        error_exit("E008", f"不支持的输出格式：{output_format}")
-
-
-def process_single_file(file_path: str, output_format: str = "json",
-                        custom_fields: Optional[List[str]] = None) -> Dict[str, Any]:
-    """处理单个文件"""
-    try:
-        rows = load_data(file_path)
-        analysis = analyze_data(rows)
-        output = format_output(rows, analysis, output_format, custom_fields)
-        return {
-            "file": file_path,
-            "status": "success",
-            "row_count": len(rows),
-            "output": output,
-        }
-    except SystemExit as e:
-        # 捕获 error_exit 的退出
-        raise
-    except Exception as e:
-        return {
-            "file": file_path,
-            "status": "error",
-            "error": f"E010: {str(e)}",
-        }
-
-
-def process_batch(file_paths: List[str], output_format: str = "json",
-                  custom_fields: Optional[List[str]] = None) -> List[Dict[str, Any]]:
-    """批量处理多个文件"""
-    results = []
-    has_error = False
-    for file_path in file_paths:
-        try:
-            result = process_single_file(file_path, output_format, custom_fields)
-            results.append(result)
-            if result["status"] == "error":
-                has_error = True
-        except SystemExit as e:
-            results.append({"file": file_path, "status": "error", "error": f"E010: {str(e)}"})
-            has_error = True
-
-    if has_error:
-        error_exit("E007", "部分文件处理失败，请查看详细错误信息")
-    return results
-
-
-def run_selftest() -> None:
-    """内置硬编码样例数据自检核心逻辑（离线、不依赖外部文件）"""
-    print("[自检] 开始运行内置测试样例...")
-
-    # 测试用例 1：CSV 数据解析与置信度分析
-    print("[自检] 测试 1：CSV 数据解析与置信度分析")
-    csv_content = """区域,销售额,日期,备注
-华东,15000,2025-01-15,
-华北,12000,2025-01-16,重点客户
-华南,18000,2025-01-17,
-西南,,2025-01-18,新开拓
-"""
-    csv_file = os.path.join(tempfile.gettempdir(), "selftest_sample.csv")
-    try:
-        with open(csv_file, "w", encoding="utf-8") as f:
-            f.write(csv_content)
-        rows = load_csv_data(csv_file)
-        assert len(rows) == 4, f"CSV 应解析出 4 行，实际 {len(rows)}"
-        assert "区域" in rows[0], "缺少 '区域' 字段"
-        assert "销售额" in rows[0], "缺少 '销售额' 字段"
-
-        analysis = analyze_data(rows)
-        assert analysis["total_rows"] == 4, "总行数应为 4"
-        assert analysis["field_count"] >= 3, "字段数应至少为 3"
-        # 置信度检查：日期字段应为高置信度
-        date_field = analysis["fields"].get("日期", {})
-        assert date_field.get("confidence") == "高", "日期字段应高置信度"
-        print("  ✓ CSV 解析与置信度分析通过")
-    finally:
-        if os.path.exists(csv_file):
-            os.remove(csv_file)
-
-    # 测试用例 2：JSON 数据解析
-    print("[自检] 测试 2：JSON 数据解析")
-    json_data = [
-        {"name": "产品A", "price": 100, "stock": 50},
-        {"name": "产品B", "price": 200, "stock": 30},
-        {"name": "产品C", "price": 150, "stock": 0},
-    ]
-    json_file = os.path.join(tempfile.gettempdir(), "selftest_sample.json")
-    try:
-        with open(json_file, "w", encoding="utf-8") as f:
-            json.dump(json_data, f)
-        rows = load_json_data(json_file)
-        assert len(rows) == 3, f"JSON 应解析出 3 行，实际 {len(rows)}"
-        assert rows[0]["name"] == "产品A", "第一条记录名称应为产品A"
-        analysis = analyze_data(rows)
-        assert analysis["total_rows"] == 3, "总行数应为 3"
-        # 数值字段应为 numeric 类型
-        price_field = analysis["fields"].get("price", {})
-        assert price_field.get("type") == "numeric", "price 字段应为数值类型"
-        print("  ✓ JSON 解析通过")
-    finally:
-        if os.path.exists(json_file):
-            os.remove(json_file)
-
-    # 测试用例 3：自定义字段过滤
-    print("[自检] 测试 3：自定义字段过滤")
-    rows = [
-        {"a": 1, "b": 2, "c": 3},
-        {"a": 4, "b": 5, "c": 6},
-    ]
-    output = format_output(rows, {"total_rows": 2, "field_count": 3, "fields": {}},
-                           custom_fields=["a", "c"])
-    parsed_output = json.loads(output)
-    assert "b" not in parsed_output["data"][0], "自定义字段过滤后不应包含 b"
-    assert "a" in parsed_output["data"][0], "自定义字段过滤后应包含 a"
-    print("  ✓ 自定义字段过滤通过")
-
-    # 测试用例 4：批量处理（含错误处理）
-    print("[自检] 测试 4：批量处理")
-    temp_dir = tempfile.mkdtemp(prefix="selftest_batch_")
-    try:
-        file1 = os.path.join(temp_dir, "data1.csv")
-        file2 = os.path.join(temp_dir, "data2.csv")
-        with open(file1, "w", encoding="utf-8") as f:
-            f.write("x,y\n1,2\n3,4\n")
-        with open(file2, "w", encoding="utf-8") as f:
-            f.write("x,y\n5,6\n")
-
-        results = process_batch([file1, file2])
-        assert len(results) == 2, "批量处理应返回 2 个结果"
-        assert all(r["status"] == "success" for r in results), "所有文件应处理成功"
-        assert results[0]["row_count"] == 2, "第一个文件应有 2 行"
-        assert results[1]["row_count"] == 1, "第二个文件应有 1 行"
-        print("  ✓ 批量处理通过")
-    finally:
-        import shutil
-        shutil.rmtree(temp_dir, ignore_errors=True)
-
-    # 测试用例 5：URL 格式识别
-    print("[自检] 测试 5：URL 格式识别")
-    # 验证 URL 检测逻辑
-    test_urls = [
-        "http://example.com/data.csv",
-        "https://example.com/data.json",
-        "https://example.com/api/data",
-    ]
-    for url in test_urls:
-        assert url.startswith(("http://", "https://")), f"URL 应以 http(s):// 开头: {url}"
-        assert urlparse(url).scheme in ("http", "https"), f"URL scheme 应为 http/https: {url}"
-    
-    # 验证非 URL 路径不会被误判
-    normal_path = "/tmp/data.csv"
-    assert not normal_path.startswith(("http://", "https://")), "普通路径不应被识别为 URL"
-    
-    # 验证 load_data 能正确识别 URL 并尝试访问（预期会失败，因为示例 URL 不可访问）
-    # 这里只验证函数存在和 URL 识别逻辑
-    assert callable(parse_url_data), "parse_url_data 应可调用"
-    assert callable(load_data), "load_data 应可调用"
-    print("  ✓ URL 格式识别通过")
-
-    # 测试用例 6：错误码完整性
-    print("[自检] 测试 6：错误码完整性")
-    required_codes = ["E001", "E002", "E003", "E004", "E005", "E006", "E007", "E008", "E009", "E010"]
-    for code in required_codes:
-        assert code in ERROR_CODES, f"缺少错误码 {code}"
-    print("  ✓ 错误码完整性通过")
-
-    # 测试用例 7：格式输出测试
-    print("[自检] 测试 7：格式输出测试")
-    test_rows = [
-        {"name": "测试1", "value": 10},
-        {"name": "测试2", "value": 20},
-    ]
-    json_output = format_output(test_rows, {"total_rows": 2, "field_count": 2, "fields": {}}, output_format="json")
-    parsed_json = json.loads(json_output)
-    assert parsed_json["data"][0]["name"] == "测试1", "JSON 输出应包含正确数据"
-    
-    csv_output = format_output(test_rows, {"total_rows": 2, "field_count": 2, "fields": {}}, output_format="csv")
-    assert "name,value" in csv_output, "CSV 输出应包含表头"
-    assert "测试1,10" in csv_output, "CSV 输出应包含数据行"
-    print("  ✓ 格式输出测试通过")
-
-    print("\n[自检] 全部测试通过！")
-
-
-def main() -> None:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="davinci - 数据可视化智能解析工具",
-        epilog="示例：python main.py data.csv -f json -o result.json"
-    )
-    parser.add_argument("--files", nargs="*", help="输入文件路径或URL（支持多个）")
-    parser.add_argument("-f", "--format", choices=["json", "csv"], default="json",
-                        help="输出格式（默认：json）")
-    parser.add_argument("-o", "--output", help="输出文件路径（默认输出到标准输出）")
-    parser.add_argument("--fields", nargs="*", help="自定义输出字段列表")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("--version", action="version", version="davinci 1.0.2")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        run_selftest()
-        return
-
-    # 参数检查
-    if not args.files:
-        error_exit("E001", "请提供至少一个输入文件或URL")
-
-    try:
-        # 处理单文件或多文件
-        if len(args.files) == 1:
-            result = process_single_file(args.files[0], args.format, args.fields)
-            if result["status"] == "error":
-                error_exit("E010", result["error"])
-            output_text = result["output"]
-        else:
-            results = process_batch(args.files, args.format, args.fields)
-            # 批量模式输出汇总 JSON
-            summary = {
-                "total_files": len(results),
-                "success_count": sum(1 for r in results if r["status"] == "success"),
-                "error_count": sum(1 for r in results if r["status"] == "error"),
-                "results": results,
-            }
-            output_text = json.dumps(summary, ensure_ascii=False, indent=2)
-
-        # 输出结果
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output_text)
-                print(f"结果已写入：{args.output}")
-            except Exception as e:
-                error_exit("E009", f"写入文件失败：{str(e)}")
-        else:
-            print(output_text)
-
-    except SystemExit:
-        raise
-    except Exception as e:
-        error_exit("E010", f"未预期的异常：{str(e)}")
-
-
-if __name__ == "__main__":
-    main()
+        fieldnames = list
