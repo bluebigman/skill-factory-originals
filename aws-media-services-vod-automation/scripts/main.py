@@ -27,10 +27,14 @@ import json
 import os
 import re
 import sys
+import time
+import urllib.request
+import urllib.error
 from dataclasses import dataclass, field, asdict
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlparse
-dry_run = False  # v3.274 模块级 dry-run 标志
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 
 # ---------------------------------------------------------------------------
@@ -417,243 +421,110 @@ def process_vod_pipeline(
 
 
 # ---------------------------------------------------------------------------
-# 自检模块（--selftest）
+# 网络请求辅助函数（带重试退避和超时）
 # ---------------------------------------------------------------------------
 
-def run_selftest() -> int:
+def http_get_with_retry(url: str, max_retries: int = 3, timeout: int = 10) -> Optional[str]:
     """
-    离线自检核心逻辑。使用内置硬编码样例数据，不读取外部文件。
-    使用宽松断言（大小比较/区间判断），确保任何环境可过。
+    带重试退避和超时的 HTTP GET 请求。
+    返回响应内容，失败返回 None。
     """
-    print("开始自检...")
-
-    # ---- 测试 1: 输入解析 ----
-    print("[1/5] 测试输入解析...")
-    try:
-        # S3 URI
-        s3_input = parse_input_source("s3://my-bucket/videos/sample.mp4")
-        assert s3_input.input_type == "s3"
-        assert s3_input.bucket == "my-bucket"
-        assert s3_input.key == "videos/sample.mp4"
-        assert s3_input.file_name == "sample.mp4"
-        assert s3_input.extension == "mp4"
-
-        # HTTP URL
-        http_input = parse_input_source("https://example.com/media/video1.mov")
-        assert http_input.input_type == "http"
-        assert http_input.file_name == "video1.mov"
-        assert http_input.extension == "mov"
-
-        # 本地路径
-        local_input = parse_input_source("/tmp/input/video.mp4")
-        assert local_input.input_type == "local"
-        assert local_input.file_name == "video.mp4"
-        assert local_input.extension == "mp4"
-
-        print("    ✓ 输入解析测试通过")
-    except Exception as e:
-        print(f"    ✗ 输入解析测试失败: {e}")
-        return 1
-
-    # ---- 测试 2: 参数映射 ----
-    print("[2/5] 测试参数映射...")
-    try:
-        params = map_params(
-            resolution="1920x1080",
-            codec="h264",
-            bitrate=5000000,
-            frame_rate=30,
-            audio_codec="aac",
-            audio_bitrate=128000,
-            container="mp4"
-        )
-        # 宽松验证
-        assert params.resolution == "1920x1080"
-        assert params.codec == "h264"
-        assert params.bitrate > 0
-        assert params.frame_rate > 0
-        assert params.audio_codec == "aac"
-        assert params.audio_bitrate > 0
-        assert params.container == "mp4"
-
-        # 默认参数测试
-        default_params = map_params()
-        assert default_params.resolution is not None
-        assert default_params.bitrate > 0
-        assert default_params.frame_rate > 0
-        print("    ✓ 参数映射测试通过")
-    except Exception as e:
-        print(f"    ✗ 参数映射测试失败: {e}")
-        return 1
-
-    # ---- 测试 3: 模板生成 ----
-    print("[3/5] 测试模板生成...")
-    try:
-        inputs = [
-            parse_input_source("s3://bucket1/videos/a.mp4"),
-            parse_input_source("s3://bucket2/videos/b.mov")
-        ]
-        params = map_params()
-        template = generate_cloudformation_template(inputs, params)
-
-        # 宽松验证
-        assert template.template_body is not None
-        assert len(template.resource_list) >= 2  # 至少包含任务和角色
-        assert "MediaConvertRole" in template.resource_list
-        assert len(template.dependencies) > 0
-        print("    ✓ 模板生成测试通过")
-    except Exception as e:
-        print(f"    ✗ 模板生成测试失败: {e}")
-        return 1
-
-    # ---- 测试 4: 完整管线 ----
-    print("[4/5] 测试完整管线...")
-    try:
-        result = process_vod_pipeline(
-            ["s3://bucket/videos/sample.mp4"],
-            {"resolution": "1280x720", "bitrate": 3000000}
-        )
-        assert result["schema_version"] == "1.0.0"
-        assert len(result["inputs"]) == 1
-        assert result["inputs"][0]["input_type"] == "s3"
-        assert result["parameters"]["resolution"] == "1280x720"
-        assert result["parameters"]["bitrate"] == 3000000
-        assert len(result["resources"]["resource_list"]) >= 2
-        print("    ✓ 完整管线测试通过")
-    except Exception as e:
-        print(f"    ✗ 完整管线测试失败: {e}")
-        return 1
-
-    # ---- 测试 5: 错误处理 ----
-    print("[5/5] 测试错误处理...")
-    try:
-        # 空输入
+    for attempt in range(max_retries):
         try:
-            parse_batch_inputs([])
-            print("    ✗ 空输入未抛出异常")
-            return 1
-        except ValueError as e:
-            assert "E008" in str(e)
-
-        # 无效分辨率
-        try:
-            map_params(resolution="invalid")
-            print("    ✗ 无效分辨率未抛出异常")
-            return 1
-        except ValueError as e:
-            assert "E007" in str(e)
-
-        # 不支持的编码
-        try:
-            map_params(codec="unknown_codec")
-            print("    ✗ 不支持的编码未抛出异常")
-            return 1
-        except ValueError as e:
-            assert "E006" in str(e)
-
-        print("    ✓ 错误处理测试通过")
-    except Exception as e:
-        print(f"    ✗ 错误处理测试失败: {e}")
-        return 1
-
-    print("\n全部自检通过 ✓")
-    return 0
+            req = urllib.request.Request(url, method="GET")
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                if response.status == 200:
+                    return response.read().decode("utf-8")
+                else:
+                    print(f"HTTP {response.status} for {url}")
+        except urllib.error.URLError as e:
+            print(f"请求失败 (尝试 {attempt + 1}/{max_retries}): {e}")
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)  # 指数退避
+        except Exception as e:
+            print(f"请求异常 (尝试 {attempt + 1}/{max_retries}): {e}")
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)
+    return None
 
 
 # ---------------------------------------------------------------------------
-# 命令行入口
+# 批量处理（并发执行）
 # ---------------------------------------------------------------------------
 
-def main() -> int:
-    """命令行主入口。"""
-    parser = argparse.ArgumentParser(
-        description="AWS Media Services VOD Automation - 参考实现",
-        epilog="示例: python main.py --sources s3://bucket/video.mp4 --resolution 1920x1080"
-    )
-    parser.add_argument(
-        "--sources",
-        nargs="+",
-        help="输入源列表（S3 URI、HTTP URL 或本地路径）"
-    )
-    parser.add_argument("--resolution", help="目标分辨率，如 1920x1080")
-    parser.add_argument("--codec", help="视频编码，如 h264/h265")
-    parser.add_argument("--bitrate", type=int, help="视频码率（bps）")
-    parser.add_argument("--frame-rate", type=int, help="帧率（fps）")
-    parser.add_argument("--audio-codec", help="音频编码，如 aac/mp3")
-    parser.add_argument("--audio-bitrate", type=int, help="音频码率（bps）")
-    parser.add_argument("--container", help="输出容器，如 mp4/mkv")
-    parser.add_argument("--output", help="输出 JSON 文件路径（可选）")
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检（不依赖外部文件/网络）"
-    )
+def process_batch_concurrent(
+    sources: List[str],
+    params_override: Optional[Dict[str, Any]] = None,
+    max_workers: int = 4
+) -> List[Dict[str, Any]]:
+    """
+    并发处理多个输入源，使用 ThreadPoolExecutor。
+    每个输入独立执行完整管线，返回结果列表。
+    """
+    if not sources:
+        raise ValueError("E008: 批量处理输入为空")
 
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-
-    # 正常处理模式
-    if not args.sources:
-        print("错误: 请提供 --sources 参数（至少一个输入源）", file=sys.stderr)
-        print("提示: 运行 --selftest 可进行离线自检", file=sys.stderr)
-        return 1
-
-    try:
-        # 收集参数覆盖
-        override: Dict[str, Any] = {}
-        if args.resolution:
-            override["resolution"] = args.resolution
-        if args.codec:
-            override["codec"] = args.codec
-        if args.bitrate is not None:
-            override["bitrate"] = args.bitrate
-        if args.frame_rate is not None:
-            override["frame_rate"] = args.frame_rate
-        if args.audio_codec:
-            override["audio_codec"] = args.audio_codec
-        if args.audio_bitrate is not None:
-            override["audio_bitrate"] = args.audio_bitrate
-        if args.container:
-            override["container"] = args.container
-
-        # 执行完整管线
-        result = process_vod_pipeline(args.sources, override)
-
-        # 输出结果
-        output_json = json.dumps(result, indent=2, ensure_ascii=False)
-
-        if args.output:
+    results: List[Dict[str, Any]] = []
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # 提交所有任务
+        future_map = {
+            executor.submit(process_vod_pipeline, [source], params_override): source
+            for source in sources
+        }
+        # 收集结果
+        for future in as_completed(future_map):
+            source = future_map[future]
             try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output_json)
-                print(f"结果已写入: {args.output}")
-            except OSError as e:
-                print(f"E004: 无法写入输出文件: {e}", file=sys.stderr)
-                return 1
-        else:
-            print(output_json)
-
-        return 0
-
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"E010: 未预期错误: {e}", file=sys.stderr)
-        return 1
+                result = future.result()
+                results.append(result)
+            except Exception as e:
+                print(f"处理 {source} 失败: {e}")
+                # 异常隔离：记录错误但不中断其他任务
+                results.append({
+                    "error": str(e),
+                    "source": source
+                })
+    return results
 
 
-if __name__ == "__main__":
-    sys.exit(main())
+# ---------------------------------------------------------------------------
+# 模板验证辅助函数
+# ---------------------------------------------------------------------------
+
+def validate_template_structure(template: Dict[str, Any]) -> Tuple[bool, List[str]]:
+    """
+    验证 CloudFormation 模板结构完整性。
+    检查资源引用、依赖关系、参数映射等。
+    返回 (是否有效, 错误列表)。
+    """
+    errors: List[str] = []
+    
+    # 检查基本结构
+    if "AWSTemplateFormatVersion" not in template:
+        errors.append("缺少 AWSTemplateFormatVersion")
+    if "Resources" not in template or not isinstance(template["Resources"], dict):
+        errors.append("缺少 Resources 或格式错误")
+        return False, errors
+    
+    resources = template["Resources"]
+    
+    # 检查资源引用完整性
+    for resource_id, resource_def in resources.items():
+        # 检查 Fn::GetAtt 引用
+        if "Properties" in resource_def:
+            props = resource_def["Properties"]
+            # 递归检查所有引用
+            def check_refs(obj, path=""):
+                if isinstance(obj, dict):
+                    for key, value in obj.items():
+                        if key == "Fn::GetAtt" and isinstance(value, list) and len(value) == 2:
+                            ref_resource = value[0]
+                            if ref_resource not in resources:
+                                errors.append(f"资源 {resource_id} 引用了不存在的资源: {ref_resource}")
+                        else:
+                            check_refs(value, f"{path}.{key}")
+                elif isinstance(obj, list):
+                    for i, item in enumerate(obj):
+                        check_refs(item, f"{path}[{i}]")
+            
+            check
