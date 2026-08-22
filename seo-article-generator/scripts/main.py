@@ -3,7 +3,7 @@
 """
 seo-article-generator 独立实现脚本
 ----------------------------------
-基于功能规格的 clean-room 实现，提供关键词解析、内容结构生成等核心能力。
+基于真实搜索数据与网页内容的SEO文章生成器，提供关键词解析、内容结构生成等核心能力。
 
 用法示例:
     python scripts/main.py --selftest
@@ -11,11 +11,20 @@ seo-article-generator 独立实现脚本
 """
 
 import argparse
+import json
 import re
 import sys
+import time
+import urllib.parse
+import urllib.request
+import urllib.error
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import os
+import hashlib
+from collections import OrderedDict
 
 # 错误码定义
 ERROR_CODES = {
@@ -29,6 +38,8 @@ ERROR_CODES = {
     "E008": "内部逻辑错误",
     "E009": "输出写入失败",
     "E010": "未知错误",
+    "E011": "网络请求失败",
+    "E012": "搜索结果为空",
 }
 
 
@@ -40,6 +51,8 @@ class KeywordAnalysis:
     search_intent: str = ""
     target_audience: str = ""
     sub_keywords: List[str] = field(default_factory=list)
+    search_results: List[Dict] = field(default_factory=list)
+    source_urls: List[str] = field(default_factory=list)
 
 
 @dataclass
@@ -50,6 +63,209 @@ class ArticleOutline:
     h2_sections: List[str] = field(default_factory=list)
     h3_subsections: Dict[str, List[str]] = field(default_factory=dict)
     missing_fields: List[str] = field(default_factory=list)
+    sources: List[str] = field(default_factory=list)
+
+
+class LRUCache:
+    """带TTL和容量上限的LRU缓存"""
+    def __init__(self, capacity: int = 100, ttl: int = 3600):
+        self.capacity = capacity
+        self.ttl = ttl
+        self.cache = OrderedDict()
+        self.timestamps = {}
+    
+    def get(self, key: str):
+        if key not in self.cache:
+            return None
+        # 检查TTL
+        if time.time() - self.timestamps[key] > self.ttl:
+            self._remove(key)
+            return None
+        # 更新访问顺序
+        value = self.cache.pop(key)
+        self.cache[key] = value
+        return value
+    
+    def put(self, key: str, value):
+        if key in self.cache:
+            self.cache.pop(key)
+        elif len(self.cache) >= self.capacity:
+            # 移除最久未使用的
+            oldest = next(iter(self.cache))
+            self._remove(oldest)
+        self.cache[key] = value
+        self.timestamps[key] = time.time()
+    
+    def _remove(self, key: str):
+        if key in self.cache:
+            self.cache.pop(key)
+        if key in self.timestamps:
+            self.timestamps.pop(key)
+
+
+class SearchAPIClient:
+    """搜索API客户端 - 使用DuckDuckGo HTML搜索端点获取真实结果"""
+    
+    BASE_URL = "https://html.duckduckgo.com/html/"
+    TIMEOUT = 10
+    MAX_RETRIES = 3
+    RETRY_DELAY = 2  # 秒
+    
+    def __init__(self):
+        self.cache = LRUCache(capacity=100, ttl=3600)  # 带TTL和容量的LRU缓存
+    
+    def search(self, query: str, max_results: int = 5) -> List[Dict]:
+        """执行搜索请求，带重试退避机制和缓存"""
+        # 检查缓存
+        cache_key = hashlib.md5(query.encode()).hexdigest()
+        cached = self.cache.get(cache_key)
+        if cached is not None:
+            return cached[:max_results]
+        
+        params = {
+            'q': query,
+            'kl': 'cn-zh',  # 中文搜索结果
+        }
+        url = f"{self.BASE_URL}?{urllib.parse.urlencode(params)}"
+        
+        for attempt in range(self.MAX_RETRIES):
+            try:
+                req = urllib.request.Request(url, headers={
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                })
+                with urllib.request.urlopen(req, timeout=self.TIMEOUT) as response:
+                    html_content = response.read().decode('utf-8', errors='replace')
+                    results = self._parse_results(html_content)
+                    if results:
+                        # 缓存结果
+                        self.cache.put(cache_key, results)
+                        return results[:max_results]
+                    else:
+                        # 结果为空，抛出E012错误
+                        raise ValueError("E012: 搜索结果为空")
+            except urllib.error.HTTPError as e:
+                if e.code == 429 or e.code >= 500:
+                    # 限流或服务器错误，指数退避
+                    if attempt < self.MAX_RETRIES - 1:
+                        time.sleep(self.RETRY_DELAY * (2 ** attempt))
+                        continue
+                    else:
+                        raise ConnectionError(f"E011: 搜索请求失败 - HTTP {e.code}")
+                else:
+                    raise ConnectionError(f"E011: 搜索请求失败 - HTTP {e.code}")
+            except (urllib.error.URLError, TimeoutError) as e:
+                if attempt < self.MAX_RETRIES - 1:
+                    time.sleep(self.RETRY_DELAY * (attempt + 1))
+                else:
+                    raise ConnectionError(f"E011: 搜索请求失败 - {str(e)}")
+            except ValueError as e:
+                # E012错误，直接抛出
+                raise
+        
+        return []
+    
+    def _parse_results(self, html_content: str) -> List[Dict]:
+        """解析DuckDuckGo HTML搜索结果，带结构变化检测"""
+        results = []
+        
+        try:
+            # 使用正则提取搜索结果
+            # DuckDuckGo HTML结果结构: <a class="result__a" href="...">标题</a>
+            # <a class="result__snippet" ...>摘要</a>
+            
+            # 提取所有结果块
+            result_blocks = re.findall(
+                r'<div class="result[^"]*".*?</div>',
+                html_content,
+                re.DOTALL
+            )
+            
+            for block in result_blocks[:10]:  # 最多解析10个结果
+                # 提取标题
+                title_match = re.search(r'class="result__a"[^>]*>(.*?)</a>', block, re.DOTALL)
+                # 提取URL
+                url_match = re.search(r'class="result__a"[^>]*href="([^"]*)"', block)
+                # 提取摘要
+                snippet_match = re.search(r'class="result__snippet"[^>]*>(.*?)</a>', block, re.DOTALL)
+                
+                if title_match and url_match:
+                    # 清理HTML标签
+                    title = re.sub(r'<[^>]+>', '', title_match.group(1)).strip()
+                    url = url_match.group(1)
+                    snippet = ''
+                    if snippet_match:
+                        snippet = re.sub(r'<[^>]+>', '', snippet_match.group(1)).strip()
+                    
+                    # 处理DuckDuckGo的重定向URL
+                    if 'uddg=' in url:
+                        url = urllib.parse.unquote(url.split('uddg=')[1].split('&')[0])
+                    
+                    if title and url:
+                        results.append({
+                            'title': title[:200],
+                            'url': url,
+                            'snippet': snippet[:300]
+                        })
+            
+            # 结构变化检测：如果HTML包含搜索结果标记但解析结果为空，抛出E005
+            if 'result__a' in html_content and not results:
+                raise ValueError("E005: 文档解析失败 - 搜索结果结构可能已变化")
+                
+        except Exception as e:
+            if isinstance(e, ValueError):
+                raise
+            # 其他解析异常，抛出E005
+            raise ValueError(f"E005: 文档解析失败 - {str(e)}")
+        
+        return results
+
+
+class WebContentFetcher:
+    """网页内容抓取器"""
+    
+    TIMEOUT = 10
+    MAX_RETRIES = 3
+    RETRY_DELAY = 2
+    
+    def __init__(self):
+        self.cache = LRUCache(capacity=50, ttl=1800)  # 带TTL和容量的LRU缓存
+    
+    def fetch_content(self, url: str) -> str:
+        """抓取网页内容，带缓存和重试机制"""
+        cached = self.cache.get(url)
+        if cached is not None:
+            return cached
+        
+        for attempt in range(self.MAX_RETRIES):
+            try:
+                req = urllib.request.Request(url, headers={
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+                })
+                with urllib.request.urlopen(req, timeout=self.TIMEOUT) as response:
+                    content = response.read().decode('utf-8', errors='replace')
+                    # 简单提取文本内容（去除HTML标签）
+                    text = re.sub(r'<script[^>]*>.*?</script>', ' ', content, flags=re.DOTALL)
+                    text = re.sub(r'<style[^>]*>.*?</style>', ' ', text, flags=re.DOTALL)
+                    text = re.sub(r'<[^>]+>', ' ', text)
+                    text = re.sub(r'\s+', ' ', text).strip()
+                    self.cache.put(url, text[:5000])  # 缓存前5000字符
+                    return self.cache.get(url)
+            except urllib.error.HTTPError as e:
+                if e.code == 429 or e.code >= 500:
+                    if attempt < self.MAX_RETRIES - 1:
+                        time.sleep(self.RETRY_DELAY * (2 ** attempt))
+                        continue
+                    else:
+                        return ""  # 降级：返回空内容
+                else:
+                    return ""
+            except (urllib.error.URLError, TimeoutError) as e:
+                if attempt < self.MAX_RETRIES - 1:
+                    time.sleep(self.RETRY_DELAY * (attempt + 1))
+                else:
+                    return ""  # 降级：返回空内容
+        
+        return ""
 
 
 class SEOArticleGenerator:
@@ -74,8 +290,11 @@ class SEOArticleGenerator:
     # 常见停用词（用于主题提取）
     STOP_WORDS = {"的", "了", "和", "是", "在", "有", "与", "及", "或", "年", "月", "日"}
 
-    def __init__(self, max_keyword_length: int = 100):
+    def __init__(self, max_keyword_length: int = 100, use_web: bool = True):
         self.max_keyword_length = max_keyword_length
+        self.use_web = use_web
+        self.search_client = SearchAPIClient() if use_web else None
+        self.fetcher = WebContentFetcher() if use_web else None
 
     def analyze_keyword(self, keyword: str) -> KeywordAnalysis:
         """解析关键词，提取核心主题、搜索意图和目标受众"""
@@ -86,13 +305,7 @@ class SEOArticleGenerator:
         if len(keyword) > self.max_keyword_length:
             raise ValueError(f"E003: 关键词长度超出限制（最大{self.max_keyword_length}字符）")
 
-        # 提取核心主题：去除停用词和意图词
-        core_terms = []
-        for char in keyword:
-            if char not in self.STOP_WORDS and char.isalnum():
-                core_terms.append(char)
-
-        # 简单主题提取：取第一个有意义的词段
+        # 提取核心主题
         core_topic = self._extract_core_topic(keyword)
 
         # 识别搜索意图
@@ -104,12 +317,26 @@ class SEOArticleGenerator:
         # 生成子关键词
         sub_keywords = self._generate_sub_keywords(keyword, core_topic)
 
+        # 获取真实搜索数据
+        search_results = []
+        source_urls = []
+        if self.use_web and self.search_client:
+            try:
+                search_results = self.search_client.search(keyword)
+                source_urls = [r['url'] for r in search_results if r.get('url')]
+            except (ConnectionError, ValueError) as e:
+                print(f"警告: 搜索请求失败，使用本地模式 - {e}")
+                search_results = []
+                source_urls = []
+
         return KeywordAnalysis(
             raw_keyword=keyword,
             core_topic=core_topic,
             search_intent=search_intent,
             target_audience=target_audience,
             sub_keywords=sub_keywords,
+            search_results=search_results,
+            source_urls=source_urls,
         )
 
     def _extract_core_topic(self, keyword: str) -> str:
@@ -183,6 +410,18 @@ class SEOArticleGenerator:
         try:
             analysis = self.analyze_keyword(keyword)
 
+            # 获取网页内容用于增强生成
+            web_content = ""
+            if self.use_web and self.fetcher and analysis.source_urls:
+                # 并发抓取前2个来源，限制并发数
+                with ThreadPoolExecutor(max_workers=2) as executor:
+                    futures = [executor.submit(self.fetcher.fetch_content, url) 
+                              for url in analysis.source_urls[:2]]
+                    for future in as_completed(futures):
+                        content = future.result()
+                        if content:
+                            web_content += content + " "
+
             # 生成标题
             title = self._generate_title(analysis)
 
@@ -190,10 +429,10 @@ class SEOArticleGenerator:
             h1 = analysis.core_topic if analysis.core_topic else keyword
 
             # 生成 H2 段落
-            h2_sections = self._generate_h2_sections(analysis)
+            h2_sections = self._generate_h2_sections(analysis, web_content)
 
             # 生成 H3 子段落
-            h3_subsections = self._generate_h3_subsections(h2_sections)
+            h3_subsections = self._generate_h3_subsections(h2_sections, web_content)
 
             # 标记缺失字段
             missing = self._identify_missing_fields(analysis)
@@ -204,6 +443,7 @@ class SEOArticleGenerator:
                 h2_sections=h2_sections,
                 h3_subsections=h3_subsections,
                 missing_fields=missing,
+                sources=analysis.source_urls,
             )
         except ValueError as e:
             raise ValueError(f"E006: 文章结构生成失败 - {str(e)}")
@@ -212,276 +452,4 @@ class SEOArticleGenerator:
 
     def _generate_title(self, analysis: KeywordAnalysis) -> str:
         """生成文章标题"""
-        topic = analysis.core_topic
-        intent = analysis.search_intent
-
-        if intent == "对比":
-            return f"{topic}全面对比：优缺点与选购建议"
-        elif intent == "选购":
-            return f"{topic}选购指南：{analysis.target_audience}必看"
-        elif intent == "教程":
-            return f"{topic}完全教程：从入门到精通"
-        else:
-            return f"{topic}最新趋势与深度分析"
-
-    def _generate_h2_sections(self, analysis: KeywordAnalysis) -> List[str]:
-        """生成 H2 章节列表"""
-        topic = analysis.core_topic
-        intent = analysis.search_intent
-
-        sections = [
-            f"什么是{topic}？",
-            f"{topic}的核心优势",
-            f"如何选择适合的{topic}",
-        ]
-
-        if intent == "对比":
-            sections.append(f"{topic}主流品牌对比")
-        elif intent == "教程":
-            sections.append(f"{topic}实战操作步骤")
-
-        sections.append(f"{topic}常见问题与解答")
-        return sections
-
-    def _generate_h3_subsections(self, h2_sections: List[str]) -> Dict[str, List[str]]:
-        """为每个 H2 生成 H3 子段落"""
-        h3_map = {}
-        for section in h2_sections:
-            # 根据章节类型生成子段落
-            if "什么是" in section:
-                h3_map[section] = ["定义与概述", "核心特点", "应用场景"]
-            elif "优势" in section:
-                h3_map[section] = ["性能优势", "成本优势", "用户体验"]
-            elif "选择" in section:
-                h3_map[section] = ["关键因素", "预算考虑", "品牌参考"]
-            elif "对比" in section:
-                h3_map[section] = ["规格对比", "性能对比", "价格对比"]
-            elif "操作" in section:
-                h3_map[section] = ["准备工作", "执行步骤", "注意事项"]
-            else:
-                h3_map[section] = ["常见问题", "解决方案", "专家建议"]
-
-        return h3_map
-
-    def _identify_missing_fields(self, analysis: KeywordAnalysis) -> List[str]:
-        """识别缺失的信息字段"""
-        missing = []
-        if not analysis.core_topic:
-            missing.append("核心主题")
-        if not analysis.search_intent:
-            missing.append("搜索意图")
-        if not analysis.target_audience:
-            missing.append("目标受众")
-        return missing
-
-    def format_outline(self, outline: ArticleOutline) -> str:
-        """将大纲格式化为可读文本"""
-        lines = []
-        lines.append(f"# {outline.title}")
-        lines.append("")
-        lines.append(f"## {outline.h1}")
-        lines.append("")
-
-        for h2 in outline.h2_sections:
-            lines.append(f"### {h2}")
-            for h3 in outline.h3_subsections.get(h2, []):
-                lines.append(f"#### {h3}")
-            lines.append("")
-
-        if outline.missing_fields:
-            lines.append("---")
-            lines.append("**缺失字段提醒：**")
-            for field_name in outline.missing_fields:
-                lines.append(f"- [需核实:{field_name}]")
-
-        return "\n".join(lines)
-
-
-def run_selftest() -> bool:
-    """内置自检函数，使用硬编码样例数据验证核心逻辑"""
-    print("=" * 60)
-    print("开始自检 (selftest)...")
-    print("=" * 60)
-
-    # 创建生成器实例
-    generator = SEOArticleGenerator()
-
-    # 测试样例 1: 对比类关键词
-    print("\n[测试1] 对比类关键词解析")
-    kw1 = "2025年家庭储能电池选购指南"
-    try:
-        analysis1 = generator.analyze_keyword(kw1)
-        # 宽松断言：核心主题非空
-        assert len(analysis1.core_topic) > 0, "核心主题不能为空"
-        # 宽松断言：意图识别为选购或对比
-        assert analysis1.search_intent in ["选购", "对比", "综合"], "意图识别异常"
-        # 宽松断言：子关键词数量合理
-        assert 1 <= len(analysis1.sub_keywords) <= 8, "子关键词数量异常"
-        print(f"  ✓ 关键词解析成功: 主题={analysis1.core_topic}, 意图={analysis1.search_intent}")
-    except Exception as e:
-        print(f"  ✗ 测试1失败: {e}")
-        return False
-
-    # 测试样例 2: 教程类关键词
-    print("\n[测试2] 教程类关键词解析")
-    kw2 = "如何搭建个人博客网站"
-    try:
-        analysis2 = generator.analyze_keyword(kw2)
-        assert analysis2.core_topic, "核心主题不能为空"
-        assert analysis2.search_intent in ["教程", "综合"], "意图识别异常"
-        print(f"  ✓ 关键词解析成功: 主题={analysis2.core_topic}, 意图={analysis2.search_intent}")
-    except Exception as e:
-        print(f"  ✗ 测试2失败: {e}")
-        return False
-
-    # 测试样例 3: 文章大纲生成
-    print("\n[测试3] 文章大纲生成")
-    try:
-        outline = generator.generate_outline(kw1)
-        # 宽松断言：标题非空
-        assert len(outline.title) > 0, "标题不能为空"
-        # 宽松断言：H1 非空
-        assert len(outline.h1) > 0, "H1 不能为空"
-        # 宽松断言：H2 章节数量合理
-        assert 3 <= len(outline.h2_sections) <= 8, "H2 章节数量异常"
-        # 宽松断言：每个 H2 都有 H3 子段落
-        for h2 in outline.h2_sections:
-            assert len(outline.h3_subsections.get(h2, [])) > 0, f"H2 '{h2}' 缺少H3子段落"
-        print(f"  ✓ 大纲生成成功: 标题={outline.title}")
-        print(f"    包含 {len(outline.h2_sections)} 个H2章节")
-    except Exception as e:
-        print(f"  ✗ 测试3失败: {e}")
-        return False
-
-    # 测试样例 4: 格式输出
-    print("\n[测试4] 大纲格式化输出")
-    try:
-        outline = generator.generate_outline(kw2)
-        formatted = generator.format_outline(outline)
-        # 宽松断言：输出文本非空且包含标题
-        assert len(formatted) > 50, "格式化输出过短"
-        assert outline.title in formatted, "标题未出现在输出中"
-        print(f"  ✓ 格式化输出成功，文本长度={len(formatted)}字符")
-    except Exception as e:
-        print(f"  ✗ 测试4失败: {e}")
-        return False
-
-    # 测试样例 5: 错误处理
-    print("\n[测试5] 错误处理验证")
-    try:
-        # 空关键词应抛出异常
-        generator.analyze_keyword("")
-        print("  ✗ 测试5失败: 空关键词未抛出异常")
-        return False
-    except ValueError as e:
-        assert "E002" in str(e), "错误码不正确"
-        print(f"  ✓ 空关键词错误处理正确: {e}")
-
-    try:
-        # 超长关键词应抛出异常
-        generator.analyze_keyword("长" * 200)
-        print("  ✗ 测试5失败: 超长关键词未抛出异常")
-        return False
-    except ValueError as e:
-        assert "E003" in str(e), "错误码不正确"
-        print(f"  ✓ 超长关键词错误处理正确: {e}")
-
-    # 测试样例 6: 批量处理
-    print("\n[测试6] 批量处理验证")
-    keywords = ["SEO优化技巧", "内容营销策略", "关键词研究工具"]
-    try:
-        outlines = []
-        for kw in keywords:
-            outline = generator.generate_outline(kw)
-            outlines.append(outline)
-        assert len(outlines) == len(keywords), "批量处理数量不匹配"
-        for i, outline in enumerate(outlines):
-            assert len(outline.title) > 0, f"第{i+1}个大纲标题为空"
-        print(f"  ✓ 批量处理成功，共生成 {len(outlines)} 个大纲")
-    except Exception as e:
-        print(f"  ✗ 测试6失败: {e}")
-        return False
-
-    print("\n" + "=" * 60)
-    print("自检全部通过！")
-    print("=" * 60)
-    return True
-
-
-def main():
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="SEO文章生成器 - 基于关键词生成文章大纲",
-        epilog="示例: python scripts/main.py --keyword '2025年家庭储能电池选购指南'"
-    )
-    parser.add_argument(
-        "--keyword",
-        type=str,
-        help="要分析的关键词",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        help="输出文件路径（可选，默认输出到终端）",
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-
-    # 关键词模式
-    if not args.keyword:
-        print("E001: 参数缺失，请提供 --keyword 或使用 --selftest")
-        sys.exit(1)
-
-    try:
-        # 创建生成器
-        generator = SEOArticleGenerator()
-
-        # 生成大纲
-        outline = generator.generate_outline(args.keyword)
-
-        # 格式化输出
-        formatted = generator.format_outline(outline)
-
-        # 输出结果
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
-                    f.write(formatted)
-                print(f"大纲已保存到: {args.output}")
-            except Exception as e:
-                print(f"E009: 输出写入失败 - {e}")
-                sys.exit(1)
-        else:
-            print(formatted)
-
-    except ValueError as e:
-        print(f"错误: {e}")
-        sys.exit(1)
-    except Exception as e:
-        print(f"E010: 未知错误 - {e}")
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+        topic = analysis.core
