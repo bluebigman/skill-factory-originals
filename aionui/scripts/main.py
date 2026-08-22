@@ -21,7 +21,6 @@ from urllib.request import Request, urlopen
 from urllib.error import URLError, HTTPError
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ---------------------------------------------------------------------------
@@ -131,8 +130,8 @@ def parse_input(input_str: str) -> Any:
             row = next(reader)
             if len(row) > 1:
                 return row
-        except Exception as e:
-            print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
+        except Exception:
+            pass
 
     # 默认作为普通文本
     return input_str
