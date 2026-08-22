@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-图像批处理工具（image-processing-tool）v1.0.1
+图像批处理工具（image-processing-tool）v1.0.5
 批量调整尺寸、压缩体积、转换格式。
 仅依赖标准库，支持 --selftest 离线自检。
 """
@@ -13,7 +13,9 @@ import os
 import struct
 import sys
 import zlib
-dry_run = False  # v3.274 模块级 dry-run 标志
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
 
 # 错误码定义
 ERROR_CODES = {
@@ -31,7 +33,7 @@ ERROR_CODES = {
 
 
 # ---------------------------------------------------------------------------
-# 极简 PNG 编解码（仅支持静态真彩/灰度 PNG，满足自检与基本处理）
+# 极简 PNG 编解码（支持灰度、RGB、RGBA、调色板类型）
 # 不依赖 Pillow，使用标准库 zlib/struct 实现
 # ---------------------------------------------------------------------------
 
@@ -53,6 +55,8 @@ def _parse_png(data: bytes):
     width = height = color_type = bit_depth = None
     chunks = []
     idat_data = b""
+    palette = None
+    trns_data = None
 
     while pos < len(data):
         length = struct.unpack(">I", data[pos:pos + 4])[0]
@@ -64,14 +68,39 @@ def _parse_png(data: bytes):
             width, height, bit_depth, color_type = struct.unpack(">IIBB", chunk_data[:10])
         elif chunk_type == b"IDAT":
             idat_data += chunk_data
+        elif chunk_type == b"PLTE":
+            palette = chunk_data
+        elif chunk_type == b"tRNS":
+            trns_data = chunk_data
 
         pos += 12 + length
 
     if width is None or height is None:
         raise ValueError("PNG 缺少 IHDR")
 
-    # 解压 IDAT
-    raw = zlib.decompress(idat_data)
+    # 检查是否 interlaced
+    if len(chunks) > 0:
+        for ct, cd in chunks:
+            if ct == b"IHDR" and len(cd) >= 13:
+                interlace = cd[12]
+                if interlace != 0:
+                    raise ValueError("不支持 interlaced PNG")
+
+    # 解压 IDAT（修复：使用 decompressobj 连续喂入所有 IDAT 块）
+    decompressor = zlib.decompressobj()
+    raw = b""
+    for ct, cd in chunks:
+        if ct == b"IDAT":
+            try:
+                raw += decompressor.decompress(cd)
+            except zlib.error as e:
+                raise ValueError(f"IDAT 解压失败: {e}")
+
+    # 处理剩余的解压数据
+    try:
+        raw += decompressor.flush()
+    except zlib.error as e:
+        raise ValueError(f"IDAT 解压失败: {e}")
 
     # 根据颜色类型计算每像素字节数
     if color_type == 0:  # 灰度
@@ -80,11 +109,24 @@ def _parse_png(data: bytes):
     elif color_type == 2:  # 真彩 RGB
         channels = 3
         bytes_per_pixel = channels * (bit_depth // 8)
+    elif color_type == 3:  # 调色板
+        channels = 1
+        bytes_per_pixel = 1
+    elif color_type == 4:  # 灰度+alpha
+        channels = 2
+        bytes_per_pixel = channels * (bit_depth // 8)
     elif color_type == 6:  # RGBA
         channels = 4
         bytes_per_pixel = channels * (bit_depth // 8)
     else:
         raise ValueError(f"不支持的 PNG 颜色类型: {color_type}")
+
+    # 校验解压后数据长度
+    expected_len = height * (1 + width * bytes_per_pixel)
+    if len(raw) != expected_len:
+        raise ValueError(
+            f"PNG 数据长度不匹配: 期望 {expected_len} 字节, 实际 {len(raw)} 字节"
+        )
 
     # 解析滤波后的扫描线
     stride = width * bytes_per_pixel
@@ -136,7 +178,7 @@ def _parse_png(data: bytes):
         pixels.extend(line)
         prev_line = line
 
-    return width, height, color_type, bit_depth, bytes(pixels), chunks
+    return width, height, color_type, bit_depth, bytes(pixels), chunks, palette, trns_data
 
 
 def _encode_png(width: int, height: int, pixels: bytes, color_type: int = 2,
@@ -289,7 +331,7 @@ class Image:
         """从字节数据解码图片"""
         try:
             if data.startswith(PNG_SIGNATURE):
-                w, h, ct, bd, pixels, _ = _parse_png(data)
+                w, h, ct, bd, pixels, chunks, palette, trns = _parse_png(data)
                 if ct == 0:  # 灰度转 RGB
                     rgb = bytearray()
                     for p in pixels:
@@ -297,6 +339,23 @@ class Image:
                     return cls(w, h, bytes(rgb))
                 elif ct == 2:  # RGB
                     return cls(w, h, pixels)
+                elif ct == 3:  # 调色板
+                    if palette is None:
+                        raise ValueError("调色板 PNG 缺少 PLTE chunk")
+                    rgb = bytearray()
+                    for idx in pixels:
+                        if idx * 3 + 2 < len(palette):
+                            r, g, b = palette[idx * 3], palette[idx * 3 + 1], palette[idx * 3 + 2]
+                            rgb.extend((r, g, b))
+                        else:
+                            raise ValueError("调色板索引越界")
+                    return cls(w, h, bytes(rgb))
+                elif ct == 4:  # 灰度+alpha 转 RGB
+                    rgb = bytearray()
+                    for i in range(0, len(pixels), 2):
+                        gray = pixels[i]
+                        rgb.extend((gray, gray, gray))
+                    return cls(w, h, bytes(rgb))
                 elif ct == 6:  # RGBA 转 RGB（丢弃 alpha）
                     rgb = bytearray()
                     for i in range(0, len(pixels), 4):
@@ -341,216 +400,4 @@ class Image:
                 dst_idx = (y * width + x) * 3
                 dst[dst_idx] = self.rgb_pixels[src_idx]
                 dst[dst_idx + 1] = self.rgb_pixels[src_idx + 1]
-                dst[dst_idx + 2] = self.rgb_pixels[src_idx + 2]
-        return Image(width, height, bytes(dst))
-
-    def compress(self, quality: int = 85) -> bytes:
-        """无损压缩（仅对 PNG 有效，通过优化滤波实现）"""
-        # 简单实现：使用更高压缩级别重新编码
-        return self.to_bytes("png")
-
-
-# ---------------------------------------------------------------------------
-# 批处理逻辑
-# ---------------------------------------------------------------------------
-
-def process_file(input_path: str, output_dir: str, fmt: str = "png",
-                 width: int = None, height: int = None, quality: int = 85) -> str:
-    """处理单个文件，返回输出路径"""
-    if not os.path.isfile(input_path):
-        raise FileNotFoundError(ERROR_CODES["E001"])
-
-    with open(input_path, "rb") as f:
-        data = f.read()
-
-    # 检查动图
-    if data.startswith(b"GIF8"):
-        raise ValueError(ERROR_CODES["E008"])
-    if data.startswith(PNG_SIGNATURE) and b"acTL" in data:
-        raise ValueError(ERROR_CODES["E008"])
-
-    img = Image.from_bytes(data)
-
-    # 尺寸调整
-    if width and height:
-        img = img.resize(width, height)
-
-    # 编码输出
-    out_data = img.to_bytes(fmt, quality)
-
-    # 生成输出文件名
-    base = os.path.splitext(os.path.basename(input_path))[0]
-    out_name = f"{base}.{fmt.lower()}"
-    if fmt.lower() in ("jpg", "jpeg"):
-        out_name = f"{base}.jpg"
-    out_path = os.path.join(output_dir, out_name)
-
-    with open(out_path, "wb") as f:
-        f.write(out_data)
-
-    return out_path
-
-
-def process_directory(input_dir: str, output_dir: str, fmt: str = "png",
-                      width: int = None, height: int = None, quality: int = 85) -> list:
-    """处理目录下所有图片，返回输出路径列表"""
-    if not os.path.isdir(input_dir):
-        raise FileNotFoundError(ERROR_CODES["E001"])
-    os.makedirs(output_dir, exist_ok=True)
-
-    results = []
-    for fname in sorted(os.listdir(input_dir)):
-        fpath = os.path.join(input_dir, fname)
-        if not os.path.isfile(fpath):
-            continue
-        ext = os.path.splitext(fname)[1].lower()
-        if ext not in (".png", ".jpg", ".jpeg", ".bmp"):
-            continue
-        try:
-            out = process_file(fpath, output_dir, fmt, width, height, quality)
-            results.append(out)
-        except Exception as e:
-            print(f"  跳过 {fname}: {e}", file=sys.stderr)
-    return results
-
-
-# ---------------------------------------------------------------------------
-# 自检模块
-# ---------------------------------------------------------------------------
-
-def _selftest() -> int:
-    """内置硬编码样例数据，离线自检核心逻辑"""
-    print("开始自检...")
-
-    # 构造 4x2 测试图像（红色渐变）
-    test_width, test_height = 4, 2
-    test_pixels = bytearray()
-    for y in range(test_height):
-        for x in range(test_width):
-            r = int(x * 255 / max(test_width - 1, 1))
-            g = int(y * 255 / max(test_height - 1, 1))
-            b = 128
-            test_pixels.extend((r, g, b))
-    test_pixels = bytes(test_pixels)
-
-    # 1. PNG 编码/解码
-    print("  [1/4] PNG 编解码...")
-    png_data = _encode_png(test_width, test_height, test_pixels, color_type=2)
-    img = Image.from_bytes(png_data)
-    assert img.width == test_width, "PNG 宽度不一致"
-    assert img.height == test_height, "PNG 高度不一致"
-    assert len(img.rgb_pixels) == test_width * test_height * 3, "PNG 像素数据长度错误"
-    # 宽松校验：像素值偏差不超过 5
-    for i in range(0, len(test_pixels), 3):
-        dr = abs(img.rgb_pixels[i] - test_pixels[i])
-        dg = abs(img.rgb_pixels[i + 1] - test_pixels[i + 1])
-        db = abs(img.rgb_pixels[i + 2] - test_pixels[i + 2])
-        assert dr <= 5 and dg <= 5 and db <= 5, f"PNG 像素偏差过大: {dr},{dg},{db}"
-    print("    通过")
-
-    # 2. BMP 编码/解码
-    print("  [2/4] BMP 编解码...")
-    bmp_data = _encode_bmp(test_width, test_height, test_pixels)
-    img2 = Image.from_bytes(bmp_data)
-    assert img2.width == test_width, "BMP 宽度不一致"
-    assert img2.height == test_height, "BMP 高度不一致"
-    for i in range(0, len(test_pixels), 3):
-        dr = abs(img2.rgb_pixels[i] - test_pixels[i])
-        dg = abs(img2.rgb_pixels[i + 1] - test_pixels[i + 1])
-        db = abs(img2.rgb_pixels[i + 2] - test_pixels[i + 2])
-        assert dr <= 5 and dg <= 5 and db <= 5, f"BMP 像素偏差过大: {dr},{dg},{db}"
-    print("    通过")
-
-    # 3. 尺寸调整
-    print("  [3/4] 尺寸调整...")
-    resized = img.resize(8, 4)
-    assert resized.width == 8, "缩放后宽度错误"
-    assert resized.height == 4, "缩放后高度错误"
-    assert len(resized.rgb_pixels) == 8 * 4 * 3, "缩放后像素数据长度错误"
-    # 验证缩放后图像非空
-    assert any(resized.rgb_pixels), "缩放后图像为空"
-    print("    通过")
-
-    # 4. 格式转换与压缩
-    print("  [4/4] 格式转换与压缩...")
-    # PNG -> BMP
-    bmp_from_png = img.to_bytes("bmp")
-    assert bmp_from_png[:2] == b"BM", "PNG 转 BMP 失败"
-    # BMP -> PNG
-    png_from_bmp = img2.to_bytes("png")
-    assert png_from_bmp.startswith(PNG_SIGNATURE), "BMP 转 PNG 失败"
-    # 压缩（无损）
-    compressed = img.compress(quality=85)
-    assert len(compressed) > 0, "压缩结果为空"
-    print("    通过")
-
-    print("全部自检通过！")
-    return 0
-
-
-# ---------------------------------------------------------------------------
-# 主入口
-# ---------------------------------------------------------------------------
-
-def main():
-    parser = argparse.ArgumentParser(
-        description="图像批处理工具：尺寸调整、压缩、格式转换",
-        epilog="示例: python main.py -i input_dir -o output_dir -f png -W 800 -H 600"
-    )
-    parser.add_argument("-i", "--input", help="输入文件或目录")
-    parser.add_argument("-o", "--output", default="output", help="输出目录（默认: output）")
-    parser.add_argument("-f", "--format", default="png", choices=["png", "bmp", "jpg", "jpeg"],
-                        help="输出格式（默认: png）")
-    parser.add_argument("-W", "--width", type=int, help="目标宽度（像素）")
-    parser.add_argument("-H", "--height", type=int, help="目标高度（像素）")
-    parser.add_argument("-q", "--quality", type=int, default=85, help="压缩质量 1-100（默认: 85）")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检并退出")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    if args.selftest:
-        sys.exit(_selftest())
-
-    if not args.input:
-        print(ERROR_CODES["E001"], file=sys.stderr)
-        parser.print_help()
-        sys.exit(1)
-
-    try:
-        os.makedirs(args.output, exist_ok=True)
-
-        if os.path.isdir(args.input):
-            print(f"批量处理目录: {args.input}")
-            results = process_directory(args.input, args.output, args.format,
-                                        args.width, args.height, args.quality)
-            print(f"处理完成，共 {len(results)} 个文件")
-            for r in results:
-                print(f"  -> {r}")
-        else:
-            print(f"处理文件: {args.input}")
-            out = process_file(args.input, args.output, args.format,
-                               args.width, args.height, args.quality)
-            print(f"  -> {out}")
-
-    except FileNotFoundError as e:
-        print(f"错误 {e}", file=sys.stderr)
-        sys.exit(1)
-    except ValueError as e:
-        print(f"错误 {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"错误 {ERROR_CODES['E010']}: {e}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+                dst[dst_idx + 2]
