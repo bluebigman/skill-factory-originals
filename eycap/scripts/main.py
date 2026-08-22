@@ -23,6 +23,7 @@ eycap — Engine Yard 平台 Capistrano 部署配方工作台
 
 import sys
 import re
+import argparse
 from typing import Dict, List, Tuple
 
 
@@ -434,6 +435,26 @@ end
         failures += 1
         print("[eycap]   失败: %s" % e)
 
+    # --- 测试 6: 完整链路（生成→校验→解释） ---
+    print("[eycap] 测试 6: 完整链路（生成→校验→解释）")
+    try:
+        # 生成
+        generated = generate_recipe("node", ["app", "util"])
+        # 校验
+        report = validate_recipe(generated)
+        fatal_codes = {"E004", "E005", "E006"}
+        fatal_errors = [r for r in report if r["code"] in fatal_codes]
+        assert len(fatal_errors) == 0, "生成的配方校验失败: %s" % fatal_errors
+        # 解释
+        steps = explain_recipe(generated)
+        assert len(steps) >= 5, "解释步骤数量过少"
+        assert any("安装" in s for s in steps), "缺少安装步骤说明"
+        assert any("构建" in s for s in steps), "缺少构建步骤说明"
+        print("[eycap]   通过")
+    except Exception as e:
+        failures += 1
+        print("[eycap]   失败: %s" % e)
+
     # --- 汇总 ---
     if failures == 0:
         print("[eycap] 全部自检通过 ✓")
@@ -449,104 +470,40 @@ end
 
 def main() -> int:
     """命令行主入口。"""
-    args = sys.argv[1:]
+    parser = argparse.ArgumentParser(
+        description="eycap — Engine Yard Capistrano 部署配方工作台",
+        epilog="示例: python main.py --generate --type rails --roles app,db"
+    )
+    parser.add_argument(
+        "--generate", action="store_true",
+        help="生成部署配方"
+    )
+    parser.add_argument(
+        "--validate", action="store_true",
+        help="校验部署配方"
+    )
+    parser.add_argument(
+        "--explain", action="store_true",
+        help="解释部署配方"
+    )
+    parser.add_argument(
+        "--selftest", action="store_true",
+        help="运行离线自检"
+    )
+    parser.add_argument(
+        "--type", choices=SUPPORTED_APP_TYPES,
+        help="应用类型 (rails/node/static)"
+    )
+    parser.add_argument(
+        "--roles", help="角色列表，逗号分隔 (app/util/db)"
+    )
+    parser.add_argument(
+        "--file", help="配方文件路径（用于 validate/explain）"
+    )
+    parser.add_argument(
+        "--custom-tasks", help="自定义任务列表，逗号分隔"
+    )
 
-    # 自检模式
-    if "--selftest" in args:
-        return run_selftest()
+    args = parser.parse_args()
 
-    # 无参数时显示帮助
-    if not args:
-        print("eycap — Engine Yard Capistrano 部署配方工作台")
-        print("用法:")
-        print("  python main.py --selftest           # 运行离线自检")
-        print("  python main.py generate --type rails --roles app,db")
-        print("  python main.py validate --file deploy.rb")
-        print("  python main.py explain --file deploy.rb")
-        return 0
-
-    # 解析子命令
-    command = args[0]
-
-    if command == "generate":
-        # 解析参数
-        app_type = None
-        roles = []
-        for i in range(1, len(args)):
-            if args[i] == "--type" and i + 1 < len(args):
-                app_type = args[i + 1]
-            elif args[i] == "--roles" and i + 1 < len(args):
-                roles = [r.strip() for r in args[i + 1].split(",") if r.strip()]
-
-        try:
-            script = generate_recipe(app_type or "rails", roles or ["app"])
-            print(script)
-            return 0
-        except ValueError as e:
-            print("错误: %s" % e, file=sys.stderr)
-            return 1
-
-    elif command == "validate":
-        # 校验模式需要读取文件
-        file_path = None
-        for i in range(1, len(args)):
-            if args[i] == "--file" and i + 1 < len(args):
-                file_path = args[i + 1]
-
-        if not file_path:
-            print("错误: E008 缺少 --file 参数", file=sys.stderr)
-            return 1
-
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
-            report = validate_recipe(content)
-            if not report:
-                print("校验通过：配方语法正确，无依赖或变量错误")
-                return 0
-            else:
-                print("校验结果（%d 项）:" % len(report))
-                for item in report:
-                    print("  [%s] %s" % (item["code"], item["message"]))
-                return 2
-        except FileNotFoundError:
-            print("错误: 文件不存在: %s" % file_path, file=sys.stderr)
-            return 1
-        except ValueError as e:
-            print("错误: %s" % e, file=sys.stderr)
-            return 1
-
-    elif command == "explain":
-        # 解释模式需要读取文件
-        file_path = None
-        for i in range(1, len(args)):
-            if args[i] == "--file" and i + 1 < len(args):
-                file_path = args[i + 1]
-
-        if not file_path:
-            print("错误: E008 缺少 --file 参数", file=sys.stderr)
-            return 1
-
-        try:
-            with open(file_path, "r", encoding="utf-8") as f:
-                content = f.read()
-            steps = explain_recipe(content)
-            print("部署步骤说明:")
-            for step in steps:
-                print("  - %s" % step)
-            return 0
-        except FileNotFoundError:
-            print("错误: 文件不存在: %s" % file_path, file=sys.stderr)
-            return 1
-        except ValueError as e:
-            print("错误: %s" % e, file=sys.stderr)
-            return 1
-
-    else:
-        print("错误: E001 未知命令 '%s'" % command, file=sys.stderr)
-        print("可用命令: generate, validate, explain, --selftest", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    # 自检
