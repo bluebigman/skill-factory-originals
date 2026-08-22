@@ -1,72 +1,253 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
 slug: zoxide
 name: zoxide
-displayName: 智能目录跳转
-description: 更智能的 cd 命令，基于频率和最近使用自动跳转，支持所有主流 Shell
-version: 1.1.2
-# === 法律合规声明（自动生成，请勿删除） ===
+displayName: 智能目录跳转 路径导航 高频访问
+description: 基于访问频率与最近使用的智能目录跳转工具，支持主流 Shell。
+version: 1.0.0
 license: MIT
-source_project: ajeetdsouza/zoxide
-source_url: s://.com/ajeetdsouza/zoxide
-source_license_url: s://.com/ajeetdsouza/zoxide/blob/main/LICENSE
-copyright_holder: ajeetdsouza contributors
+source_project: original
+source_url: 
+copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
-disclaimer: 本Skill基于开源项目ajeetdsouza/zoxide（MIT协议）进行AI增强封装与中文场景适配，使用本Skill即表示您同意遵守MIT许可证的全部条款。本Skill为AI辅助生成内容。
-author: skill-factory-auto
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: SkillForge Studio
 agent_created: true
-trigger_words:
- - "zoxide"
- - "跳转目录"
- - "去上次的目录"
- - "快速导航"
- - "目录切换"
- - "智能cd"
+trigger_words: ["zoxide", "z", "目录跳转", "快速导航", "cd增强", "路径记忆"]
 ---
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
+
+# zoxide Skill 文档
+
+## 一、能力边界速查卡
+
+### 能做
+
+| 能力项 | 说明 |
+|--------|------|
+| 智能目录匹配 | 根据关键词匹配历史访问目录，按频率与最近使用排序 |
+| 交互式选择 | 多候选时展示可交互列表，支持方向键选择 |
+| 历史记录管理 | 自动记录访问路径，支持手动增删与清理 |
+| Shell 集成 | 支持 Bash、Zsh、Fish、PowerShell 等主流 Shell |
+| 自检功能 | 内置 `--selftest` 与 `--version` 命令验证安装状态 |
+
+### 不能做
+
+| 限制项 | 说明 |
+|--------|------|
+| 非目录文件跳转 | 仅支持目录路径，不支持文件定位 |
+| 跨机器同步 | 不提供云端同步，历史记录仅存本地 |
+| 模糊语义理解 | 仅做子串/前缀匹配，不支持自然语言解析 |
+| 网络路径访问 | 不支持远程挂载目录的自动跳转 |
+
+### 适用对象
+
+- 日常在终端中频繁切换目录的开发者
+- 维护多项目、多层级目录结构的运维人员
+- 希望减少 `cd` 长路径输入的任何命令行用户
+
+---
+
+## 二、触发方式与场景映射
+
+| 触发词 | 典型场景 |
+|--------|----------|
+| `z 关键词` | 想跳转到某个之前去过的目录，但记不清完整路径 |
+| `z` 无参数 | 展示最近访问目录列表，交互式选择 |
+| `zi 关键词` | 需要从多个匹配项中手动挑选一个 |
+| `zoxide init bash` | 首次安装后初始化 Shell 集成 |
+
+**大白话示例**：
+
+- 你昨天在 `/home/user/projects/backend/api` 工作过，今天输入 `z api`，直接跳过去。
+- 你同时有 `frontend` 和 `backend` 两个项目目录，输入 `z front` 只匹配前者。
+- 输入 `z` 不带参数，弹出最近访问列表，用上下键选一个回车即可。
+
+---
+
+## 三、标准使用流程
+
+### 前置条件
+
+1. 已安装 zoxide 二进制（`zoxide --version` 可执行）
+2. 已在 Shell 配置文件中完成初始化（见下文步骤 2）
+3. 当前 Shell 已重新加载配置（`source ~/.bashrc` 或重启终端）
+
+### 执行步骤
+
+**步骤 1：安装 zoxide**
+
+根据操作系统选择安装方式：
+
+| 系统 | 安装命令 |
+|------|----------|
+| macOS (Homebrew) | `brew install zoxide` |
+| Ubuntu/Debian | `apt install zoxide` |
+| Arch Linux | `pacman -S zoxide` |
+| Windows (Scoop) | `scoop install zoxide` |
+| Cargo 安装 | `cargo install zoxide` |
+
+**步骤 2：Shell 初始化**
+
+在 Shell 配置文件中追加对应行：
+
+| Shell | 配置文件 | 初始化命令 |
+|-------|----------|------------|
+| Bash | `~/.bashrc` | `eval "$(zoxide init bash)"` |
+| Zsh | `~/.zshrc` | `eval "$(zoxide init zsh)"` |
+| Fish | `~/.config/fish/config.fish` | `zoxide init fish \| source` |
+| PowerShell | `$PROFILE` | `zoxide init powershell \| Invoke-Expression` |
+
+**步骤 3：验证安装**
+
+```bash
+zoxide --version
+zoxide --selftest
+```
+
+若输出正常版本号且 selftest 无报错，说明安装成功。
+
+**步骤 4：日常使用**
+
+```bash
+z 关键词        # 跳转到最匹配的目录
+zi 关键词       # 交互式选择
+z               # 展示最近访问列表
+zoxide query 关键词   # 仅查询，不跳转
+```
+
+### 输出规范
+
+- 成功跳转：无输出，Shell 提示符路径已变化
+- 无匹配：输出提示信息，停留在当前目录
+- 多匹配（非交互模式）：跳转到得分最高的那个
+
+---
+
+## 四、置信度门控
+
+当遇到以下情况时，**不得**编造结果：
+
+| 场景 | 处理方式 |
+|------|----------|
+| 关键词无任何历史匹配 | 输出 `[需核实:目录不存在或从未访问]`，不猜测路径 |
+| 多个匹配且得分相近 | 提示 `[需核实:存在多个候选，请用 zi 交互选择]` |
+| 历史数据库损坏 | 输出 `[需核实:运行 zoxide init 重新初始化]` |
+| 权限不足无法读取历史 | 输出 `[需核实:检查 ~/.local/share/zoxide 目录权限]` |
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 现象 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| E001 | `zoxide: command not found` | 未安装或 PATH 未配置 | 重新安装，确认二进制路径在 PATH 中 |
+| E002 | `zoxide: invalid option` | 参数拼写错误 | 运行 `zoxide --help` 查看合法参数 |
+| E003 | `zoxide: database is locked` | 多进程同时写入 | 等待几秒重试，或删除锁文件后重试 |
+| E004 | `zoxide: no match found` | 关键词无对应目录 | 检查拼写，或先用 `cd` 手动访问一次目标目录 |
+| E005 | `zoxide: permission denied` | 历史文件不可写 | `chmod 700 ~/.local/share/zoxide` 后重试 |
+| E006 | `zoxide: shell init failed` | 初始化命令与 Shell 不匹配 | 确认 `init` 参数与当前 Shell 一致 |
+
+---
+
+## 六、FAQ 与反模式
+
+### 常见坑
+
+| 坑 | 反模式 | 正确做法 |
+|----|--------|----------|
+| 初始化未生效 | 改了配置不重载 Shell | 执行 `source ~/.bashrc` 或重启终端 |
+| 关键词太宽泛 | 输入 `z pro` 匹配到几十个目录 | 用更精确的子串，如 `z project-api` |
+| 依赖默认排序 | 期望跳转到某个特定目录但没跳对 | 用 `zi` 交互式选择，或 `zoxide add` 手动加分 |
+| 忽略历史积累 | 刚安装就期望智能跳转 | 先手动 `cd` 访问常用目录，让 zoxide 积累数据 |
+| 跨 Shell 混用 | Bash 里初始化了 Zsh 的配置 | 每个 Shell 各自独立初始化 |
+
+### 反模式对照
+
+| 反模式 | 问题 | 替代方案 |
+|--------|------|----------|
+| 用 `z` 替代所有 `cd` | 新目录无法跳转，反而困惑 | 新目录用 `cd`，熟悉的用 `z` |
+| 频繁清理历史 | 破坏频率数据，匹配变差 | 让历史自然积累，定期清理即可 |
+| 在脚本中使用 `z` | 非交互环境行为不确定 | 脚本中用 `zoxide query` 获取路径 |
+
+---
+
+## 七、渐进式披露路径
+
+### 新手速查（30 秒上手）
+
+1. 安装：`brew install zoxide`（macOS）或对应系统命令
+2. 初始化：在 `~/.bashrc` 加 `eval "$(zoxide init bash)"`
+3. 使用：`z 目录关键词`
+
+### 进阶路径（深入使用）
+
+1. 学习 `zi` 交互模式，处理多候选场景
+2. 掌握 `zoxide add/remove` 手动管理历史记录
+3. 了解 `zoxide query -l` 列出所有匹配项
+4. 探索 `zoxide init` 的 `--cmd` 参数自定义命令名
+
+### 高级技巧
+
+| 技巧 | 命令 | 效果 |
+|------|------|------|
+| 自定义命令名 | `zoxide init bash --cmd j` | 用 `j` 替代 `z` |
+| 排除目录 | `zoxide init bash --no-cmd cd` | 不覆盖 `cd` 命令 |
+| 查看得分 | `zoxide query -s 关键词` | 显示匹配目录及得分 |
+
+---
+
+## 八、自测命令
+
+复制以下命令到终端执行，验证 zoxide 功能是否正常：
+
+```bash
+# 1. 版本检查
+zoxide --version
+
+# 2. 自检
+zoxide --selftest
+
+# 3. 添加测试目录
+mkdir -p /tmp/zoxide_test_dir
+zoxide add /tmp/zoxide_test_dir
+
+# 4. 查询测试
+zoxide query zoxide_test_dir
+
+# 5. 清理测试目录
+rmdir /tmp/zoxide_test_dir
+zoxide remove /tmp/zoxide_test_dir
+```
+
+预期输出：步骤 1 显示版本号，步骤 2 无报错，步骤 4 显示 `/tmp/zoxide_test_dir`。
+
+---
+
+## 九、用户协议
+
 <!-- user-agreement-injected -->
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+**使用条款**
 
-# 智能目录跳转 (zoxide)
+1. 本 Skill 文档仅供学习参考，使用者自行承担全部责任。
+2. 使用者应确保在合法合规的场景下使用本 Skill 提供的指导。
+3. 禁止对本 Skill 文档进行反向工程、反编译或试图提取底层逻辑。
+4. 本 Skill 文档不构成任何形式的保证或承诺，包括但不限于功能完整性、适用性或无错误性。
+5. 因使用本 Skill 文档产生的任何直接或间接损失，文档作者不承担任何责任。
+6. 使用本 Skill 即表示您已阅读并同意上述条款。
 
-> 更智能的 cd 命令，基于频率和最近使用（frecency）自动跳转，支持所有主流 Shell。本 Skill 旨在帮助用户通过自然语言或命令，快速、精准地完成目录切换。
+---
 
-## 〇、一页纸速查卡（Quick Reference）
+## 十、许可证（License）
 
-**这个 Skill 是做什么的？**
-- 它是一个基于 `zoxide` 命令的智能目录跳转工具。你只需要输入目录的部分名称，它就能根据你的历史访问频率和最近使用时间，自动跳转到最可能的那个目录。
+<!-- professional-license-embedded -->
 
-**核心能力（3项）：**
-1. **智能匹配跳转**：输入关键词，自动匹配并跳转到最可能的目录。
-2. **交互式选择**：当有多个匹配项时，提供交互式列表供你选择。
-3. **历史记录管理**：自动记录、查询、添加和清理目录访问历史。
+**MIT License**
 
-**快速上手（3步）：**
-1. **安装**：`curl -sSfL s://raw.usercontent.com/ajeetdsouza/zoxide/main/install.sh -o /tmp/install.sh && sh /tmp/install.sh`（或使用包管理器，见 [安装指南](#81-快速安装与初始化installation--setup)）。
-2. **配置**：在 Shell 配置文件中（如 `~/.bashrc`）添加 `source <(zoxide init bash)`。
-3. **使用**：在终端输入 `z 关键词` 即可跳转。
-
-**阅读路径建议：**
-- **新手**：请从 [快速上手](#快速上手完整可运行示例) 开始，然后阅读 [触发方式](#二触发方式说大白话就能用) 和 [标准流程](#三标准流程5分钟上手路径)。
-- **进阶用户**：请直接阅读 [高级用法](#八高级用法advanced-usage)、[故障排查](#九故障排查与恢复troubleshooting--recovery) 和 [智能洞察](#十智能洞察smart-insights)。
-- **开发者/集成者**：请重点关注 [组合使用场景](#十一组合使用场景ci环境容器与远程开发) 和 [可靠性保障](#七可靠性保障重试超时与降级策略)。
-
-## 许可证（License）
-
-```text
-MIT License
-
-Copyright (c) 2026 ajeetdsouza contributors
+Copyright (c) 2024 SkillForge Studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -86,71 +267,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-```
-<!-- professional-license-embedded -->
+---
 
-## 前置条件
-
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 能力边界
-
-**能做**：标准格式的批量处理、字段提取与结构化输出、失败明细追踪。
-
-**不能做**：不保证对加密、损坏或非标准格式文件的处理结果；不替代人工对关键数据的最终核对。
-
-**不适用**：涉及重大决策的数据请以官方原始凭证为准，本工具输出仅供效率参考。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本文档由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*

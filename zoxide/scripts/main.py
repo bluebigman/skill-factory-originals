@@ -6,15 +6,18 @@ scripts/main.py — zoxide 智能目录跳转核心逻辑（独立实现）
 本脚本仅依据功能规格重新实现，不参考任何既有代码。
 提供核心算法：frecency 评分、路径匹配、记录管理、交互选择。
 支持 --selftest 离线自检，不依赖外部文件与网络。
+
+注意：本脚本仅提供核心算法和命令行接口，不包含 Shell 集成（hook/别名）。
+Shell 集成需由外部脚本（如 zoxide init 生成的代码）调用本程序的 add/query 子命令完成。
 """
 
 import argparse
 import os
 import sys
+import tempfile
 import time
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 E001 = "E001: 参数错误"
@@ -33,6 +36,9 @@ DEFAULT_DB = os.path.join(os.path.expanduser("~"), ".zoxide_db.txt")
 
 # 时间衰减半衰期（秒），约 30 天
 HALF_LIFE = 30 * 24 * 3600
+
+# 损坏行阈值：超过此数量则抛出 E005
+BAD_LINE_THRESHOLD = 10
 
 
 @dataclass
@@ -83,21 +89,40 @@ class ZoxideDB:
         except OSError:
             raise RuntimeError(E002)
         self.entries = {}
+        bad_lines = 0
         for line in raw_lines:
             line = line.strip()
             if not line:
                 continue
             entry = Entry.from_line(line)
             if entry is None:
-                raise RuntimeError(E005)
+                bad_lines += 1
+                if bad_lines > BAD_LINE_THRESHOLD:
+                    raise RuntimeError(E005)
+                continue  # 跳过坏行，不中断加载
             self.entries[entry.path] = entry
+        if bad_lines > 0:
+            print(f"警告: 跳过 {bad_lines} 条损坏记录", file=sys.stderr)
 
     def save(self) -> None:
-        """将记录写回文件"""
+        """将记录写回文件（原子写入）"""
         try:
-            with open(self.db_path, "w", encoding="utf-8", errors="replace") as f:
-                for entry in self.entries.values():
-                    f.write(entry.to_line() + "\n")
+            # 使用临时文件 + os.replace() 实现原子写入
+            fd, tmp_path = tempfile.mkstemp(
+                dir=os.path.dirname(self.db_path) or ".",
+                prefix=".zoxide_db_",
+                suffix=".tmp"
+            )
+            try:
+                with os.fdopen(fd, "w", encoding="utf-8", errors="replace") as f:
+                    for entry in self.entries.values():
+                        f.write(entry.to_line() + "\n")
+                os.replace(tmp_path, self.db_path)
+            except Exception:
+                # 清理临时文件
+                if os.path.exists(tmp_path):
+                    os.unlink(tmp_path)
+                raise
         except OSError:
             raise RuntimeError(E003)
 
@@ -351,6 +376,72 @@ def run_selftest() -> int:
         # 单条直接返回
         assert interactive_select(test_entries[:1]).path == "/opt/a"
 
+        # 13. 原子写入测试（使用临时文件）
+        import tempfile
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".db", delete=False) as tmp:
+            tmp_db_path = tmp.name
+        try:
+            db3 = ZoxideDB(db_path=tmp_db_path)
+            db3.entries = {
+                "/test/atomic": Entry(path="/test/atomic", score=1.0, last_visit=1.0, visit_count=1)
+            }
+            db3.save()
+            # 验证文件存在且内容正确
+            assert os.path.exists(tmp_db_path), "数据库文件应存在"
+            with open(tmp_db_path, "r") as f:
+                content = f.read()
+            assert "/test/atomic" in content, "内容应包含记录"
+        finally:
+            if os.path.exists(tmp_db_path):
+                os.unlink(tmp_db_path)
+
+        # 14. 损坏行容错测试
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".db", delete=False) as tmp:
+            tmp.write("bad_line_no_tabs\n")
+            tmp.write("/valid/path\t1.0\t1000\t1\n")
+            tmp_db_path = tmp.name
+        try:
+            db4 = ZoxideDB(db_path=tmp_db_path)
+            db4.load()
+            assert len(db4.entries) == 1, "应跳过坏行，保留有效记录"
+            assert "/valid/path" in db4.entries, "有效记录应被加载"
+        finally:
+            if os.path.exists(tmp_db_path):
+                os.unlink(tmp_db_path)
+
+        # 15. 损坏行阈值测试（超过阈值应抛出 E005）
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".db", delete=False) as tmp:
+            for i in range(BAD_LINE_THRESHOLD + 1):
+                tmp.write(f"bad_line_{i}\n")
+            tmp_db_path = tmp.name
+        try:
+            db5 = ZoxideDB(db_path=tmp_db_path)
+            try:
+                db5.load()
+                assert False, "应抛出 E005 错误"
+            except RuntimeError as e:
+                assert str(e) == E005, f"错误码应为 E005，实际: {e}"
+        finally:
+            if os.path.exists(tmp_db_path):
+                os.unlink(tmp_db_path)
+
+        # 16. 核心链路测试：add → save → load → query
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".db", delete=False) as tmp:
+            tmp_db_path = tmp.name
+        try:
+            db6 = ZoxideDB(db_path=tmp_db_path)
+            db6.add("/tmp/core_test_dir")
+            db6.save()
+            
+            db7 = ZoxideDB(db_path=tmp_db_path)
+            db7.load()
+            results = db7.query("core_test")
+            assert len(results) == 1, "核心链路查询应有结果"
+            assert results[0].path == "/tmp/core_test_dir", "核心链路路径应匹配"
+        finally:
+            if os.path.exists(tmp_db_path):
+                os.unlink(tmp_db_path)
+
         print("自检通过: 所有核心逻辑验证成功")
         return 0
 
@@ -364,78 +455,4 @@ def run_selftest() -> int:
 
 # ---------- 主入口 ----------
 def main(argv: Optional[List[str]] = None) -> int:
-    parser = argparse.ArgumentParser(
-        prog="zoxide",
-        description="智能目录跳转工具（基于 frecency 算法）",
-    )
-    parser.add_argument("--db", default=DEFAULT_DB, help="数据库文件路径")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    sub = parser.add_subparsers(dest="command")
-
-    # add 子命令
-    p_add = sub.add_parser("add", help="记录目录访问")
-    p_add.add_argument("--paths", nargs="+", help="要记录的目录路径")
-
-    # query 子命令
-    p_query = sub.add_parser("query", help="查询并跳转")
-    p_query.add_argument("--keyword", help="匹配关键词")
-    p_query.add_argument("--limit", type=int, default=10, help="返回最大条数")
-    p_query.add_argument("--interactive", "-i", action="store_true", help="交互选择")
-
-    # list 子命令
-    sub.add_parser("list", help="列出所有记录")
-
-    # remove 子命令
-    p_rm = sub.add_parser("remove", help="删除记录")
-    p_rm.add_argument("--paths", nargs="+", help="要删除的路径")
-
-    # prune 子命令
-    p_prune = sub.add_parser("prune", help="裁剪记录")
-    p_prune.add_argument("--max", type=int, default=1000, help="最大保留条数")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args(argv)
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-
-    # 无子命令
-    if not args.command:
-        parser.print_help()
-        return 0
-
-    try:
-        if args.command == "add":
-            return cmd_add(args)
-        elif args.command == "query":
-            return cmd_query(args)
-        elif args.command == "list":
-            return cmd_list(args)
-        elif args.command == "remove":
-            return cmd_remove(args)
-        elif args.command == "prune":
-            return cmd_prune(args)
-        else:
-            print(E001)
-            return 1
-    except RuntimeError as e:
-        print(f"运行错误: {e}")
-        return 1
-    except Exception as e:
-        print(f"{E010}: {e}")
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    parser = argparse
