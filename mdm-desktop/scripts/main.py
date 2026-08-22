@@ -1,28 +1,10 @@
-
-def _read_text_safe(path):
-    """多编码安全读取（R3+R5 合规）"""
-    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
-        try:
-            with open(path, encoding=enc, errors="replace") as f:
-                return f.read()
-        except (UnicodeDecodeError, OSError):
-            continue
-    with open(path, encoding="utf-8", errors="replace") as f:
-        return f.read()
-
-# 批处理流式读取工具
-def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
-
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 mdm-desktop — 文档转 Markdown 技能实现脚本（独立重写版）
 
 本脚本依据功能规格独立实现，核心能力包括：
-1. 多格式输入解析（PDF/DOCX/HWP 的文本提取抽象接口）
+1. 多格式输入解析（PDF/DOCX/HWP 的文本提取）
 2. 关键信息识别（标题层级、表格、列表、代码块等）
 3. 结构化 Markdown 输出（带元数据头）
 4. 置信度标注（对不确定内容进行标记）
@@ -38,9 +20,14 @@ import os
 import re
 import sys
 from dataclasses import dataclass, field
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+import concurrent.futures
+import threading
+import tempfile
+import subprocess
+import shutil
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -81,7 +68,7 @@ class ConversionResult:
 
 
 # ---------------------------------------------------------------------------
-# 核心解析器（抽象接口 + 简化实现）
+# 核心解析器（抽象接口 + 实现）
 # ---------------------------------------------------------------------------
 class BaseParser:
     """解析器基类，定义统一接口"""
@@ -94,7 +81,7 @@ class BaseParser:
 
 
 class PdfParser(BaseParser):
-    """PDF 解析器（简化实现：提取文本行并做基础结构识别）"""
+    """PDF 解析器（使用 pdfplumber 提取表格和布局）"""
     @staticmethod
     def get_supported_exts() -> List[str]:
         return [".pdf"]
@@ -102,29 +89,55 @@ class PdfParser(BaseParser):
     def parse(self, file_path: str) -> List[DocumentElement]:
         elements: List[DocumentElement] = []
         try:
-            # 模拟 PDF 文本提取：实际场景可接入 pdfplumber/PyPDF2
-            # pip install pdfplumber
-            raw_text = self._extract_text(file_path)
-            elements = self._structure_text(raw_text)
+            # 检查 pdfplumber 是否可用
+            try:
+                import pdfplumber
+            except ImportError:
+                raise RuntimeError(
+                    "pdfplumber 未安装。请运行 `pip install pdfplumber` 安装依赖。"
+                )
+
+            with pdfplumber.open(file_path) as pdf:
+                for page in pdf.pages:
+                    # 提取表格
+                    tables = page.extract_tables()
+                    for table in tables:
+                        if table:
+                            elements.append(self._table_to_element(table))
+                    
+                    # 提取文本行
+                    page_text = page.extract_text()
+                    if page_text:
+                        elements.extend(self._structure_text(page_text))
+                        
+                    # 提取图片（作为引用）
+                    for img in page.images:
+                        elements.append(DocumentElement(
+                            kind="image",
+                            content=f"![image]({img.get('name', 'image')})",
+                            meta={"x0": img.get("x0"), "y0": img.get("y0")}
+                        ))
+        except RuntimeError:
+            raise
         except Exception as exc:
             raise RuntimeError(f"PDF解析失败: {exc}") from exc
         return elements
 
-    def _extract_text(self, file_path: str) -> str:
-        """提取纯文本（演示用：从文件读取二进制并解码，实际应使用专业库）"""
-        # 简化实现：尝试读取文件内容，若为文本则直接使用
-        try:
-            with open(file_path, "rb") as f:
-                data = f.read()
-            # 尝试多种编码解码
-            for enc in ("utf-8", "gbk", "latin-1"):
-                try:
-                    return data.decode(enc)
-                except UnicodeDecodeError:
-                    continue
-            return ""
-        except Exception as exc:
-            raise RuntimeError(f"文件读取失败: {exc}") from exc
+    def _table_to_element(self, table: List[List]) -> DocumentElement:
+        """将表格数据转换为 Markdown 表格元素"""
+        if not table:
+            return DocumentElement(kind="table", content="")
+        
+        # 构建 Markdown 表格
+        lines = []
+        for i, row in enumerate(table):
+            cells = [str(cell).replace("|", "\\|") if cell else "" for cell in row]
+            lines.append("| " + " | ".join(cells) + " |")
+            if i == 0:
+                # 添加分隔行
+                lines.append("|" + "|".join(["---"] * len(cells)) + "|")
+        
+        return DocumentElement(kind="table", content="\n".join(lines))
 
     def _structure_text(self, text: str) -> List[DocumentElement]:
         """将纯文本转换为结构化元素"""
