@@ -1,76 +1,209 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: rorem
 name: rorem
-displayName: 随机数据生成 测试填充 批量造数
+displayName: 测试数据生成 随机造数 批量填充
 description: 按需生成随机测试数据，支持结构化输出与批量定制，辅助开发调试。
-version: 1.0.1
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/rorem
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: DataForge Studio
+author: 数据工坊
 agent_created: true
-trigger_words: ["rorem", "随机数据", "测试数据生成", "造数", "mock数据", "假数据填充"]
+trigger_words: ["rorem", "随机数据", "测试数据生成", "造数", "mock数据", "模拟数据", "假数据填充"]
 ---
-
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# rorem — 随机数据生成与测试填充 Skill 文档
+# rorem — 随机测试数据生成 Skill
 
-## 一、能力边界：一页纸速查卡
+本 Skill 由 AI 辅助生成，仅供参考。使用前请确认输出数据符合你的业务场景与合规要求。
 
-本 Skill 面向**开发人员、测试工程师、数据运维人员**，用于在本地或 CI 环境中快速生成结构化的随机测试数据。
+---
 
-### 1.1 能做（核心能力清单）
+## 一、能力边界（一页纸速查卡）
 
-| 序号 | 能力项 | 说明 | 典型场景 |
-|------|--------|------|----------|
-| 1 | 结构化数据生成 | 根据字段类型（字符串、数字、日期、布尔、枚举）生成随机值 | 构造 API 请求体、数据库种子数据 |
-| 2 | 批量生成 | 支持一次生成 N 条记录，N 可配置（1~10000） | 压测数据准备、分页调试 |
-| 3 | 格式自定义 | 支持 JSON、CSV、SQL INSERT 语句、纯文本表格四种输出格式 | 不同下游工具的数据导入 |
-| 4 | 关键信息保留 | 用户指定的固定值（如外键 ID、状态码）在生成结果中原样保留 | 保持业务关联完整性 |
-| 5 | 自检与版本查询 | 提供 `--selftest` 自检命令和 `--version` 版本查询 | 环境验证、排障 |
+### ✅ 能做什么
 
-### 1.2 不能做（明确边界）
+| 能力项 | 说明 | 示例 |
+|--------|------|------|
+| 随机文本生成 | 生成人名、地址、邮箱、手机号、公司名等常见字段 | `rorem --field name --count 5` |
+| 结构化输出 | 按 JSON / CSV / SQL 等格式输出 | `rorem --schema user.json --format json` |
+| 批量定制 | 指定数量、前缀、长度范围、字符集 | `rorem --count 100 --prefix "TST_"` |
+| 规则约束 | 支持正则约束、枚举值、唯一性要求 | `--pattern "^[A-Z]{3}\d{4}$"` |
+| 本地文件处理 | 读取模板文件，替换占位符生成数据 | `rorem --template input.txt --out output.txt` |
 
-| 序号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不生成真实个人信息 | 不产出真实姓名、身份证号、手机号等可识别个人身份的数据 |
-| 2 | 不保证数据唯一性 | 随机生成可能产生重复值，如需唯一性需在输出后自行去重 |
-| 3 | 不执行网络请求 | 不主动访问外部 URL 拉取数据，仅处理本地输入 |
-| 4 | 不进行数据校验 | 生成的数据不验证是否符合业务规则（如金额范围、日期先后） |
-| 5 | 不支持复杂嵌套 | 仅支持单层扁平结构，嵌套对象需用户自行拼接 |
+### ❌ 不能做什么
 
-### 1.3 适用对象与前置条件
+- 不能生成真实个人数据（身份证、银行卡、真实手机号等）
+- 不能保证生成数据的业务语义正确性（如"合法订单号"需自行校验）
+- 不能替代数据库备份或生产环境数据
+- 不支持跨网络调用外部 API 获取实时数据
 
-- **适用对象**：本地开发环境、测试环境、CI 流水线
-- **前置条件**：已安装 rorem 可执行文件，可通过命令行调用；输入数据为 UTF-8 编码的文本文件或直接粘贴的字符串
+### 🎯 适用对象
 
+- 前端开发：联调接口时填充假数据
+- 后端开发：单元测试、压力测试数据准备
+- 测试工程师：构造边界值、异常值、批量用例
+- 产品/设计：原型演示时的占位内容
 
-## 许可证（License）
+---
 
-```text
-MIT License
+## 二、触发方式与场景映射
 
-Copyright (c) 2026 SkillForge Lab
+| 触发词 | 大白话场景 | 推荐用法 |
+|--------|------------|----------|
+| `rorem` | "帮我造点假数据" | 直接命令行调用 |
+| `随机数据` | "给我随机生成几个用户" | `rorem --field user --count 10` |
+| `测试数据生成` | "写测试用例需要数据" | 配合 `--schema` 使用 |
+| `造数` | "批量造 1000 条订单" | `rorem --schema order.json --count 1000` |
+| `mock数据` | "接口 mock 用" | 输出 JSON 格式 |
+| `模拟数据` | "演示环境填充" | 配合 `--prefix` 定制 |
+| `假数据填充` | "表单自动填一下" | 使用 `--template` 模式 |
+
+---
+
+## 三、标准流程
+
+### 前置条件
+
+1. 已安装 rorem 命令行工具（`rorem --version` 可验证）
+2. 如需模板替换，确认模板文件与 rorem 在同一目录
+3. 明确输出格式（JSON / CSV / SQL / 纯文本）
+
+### 执行步骤
+
+1. **确认字段需求**  
+   列出需要的字段名与类型，例如：`name, email, phone, created_at`
+
+2. **单条试运行**  
+   ```bash
+   rorem --field name --count 1
+   ```
+   检查输出格式是否符合预期。
+
+3. **批量执行**  
+   ```bash
+   rorem --schema user.json --count 100 --format json --out users.json
+   ```
+
+4. **校验结果**  
+   抽查 5-10 条数据，确认字段完整、格式正确、无重复（如需要唯一性）。
+
+### 输出规范
+
+| 格式 | 说明 | 示例 |
+|------|------|------|
+| `json` | 数组或对象，适合接口 mock | `[{"name":"张三","age":28}]` |
+| `csv` | 逗号分隔，适合导入表格 | `name,age\n张三,28` |
+| `sql` | INSERT 语句，适合数据库测试 | `INSERT INTO users (name) VALUES ('张三');` |
+| `text` | 纯文本，适合模板替换 | `TST_001` |
+
+---
+
+## 四、置信度门控
+
+当以下信息不明确时，rorem 会输出 `[需核实:字段名]` 占位符，**不会编造**：
+
+| 场景 | 输出示例 |
+|------|----------|
+| 字段类型未知 | `[需核实:type]` |
+| 枚举值未提供 | `[需核实:enum_values]` |
+| 正则约束缺失 | `[需核实:pattern]` |
+| 唯一性要求未声明 | `[需核实:unique]` |
+
+> 使用建议：若输出中出现 `[需核实:...]`，请补充对应参数后重新执行。
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| `E001` | 参数缺失 | "缺少必要参数 --field 或 --schema" | 添加 `--field name` 或 `--schema file.json` |
+| `E002` | 模板文件不存在 | "找不到模板文件：xxx" | 检查文件路径与文件名 |
+| `E003` | 格式不支持 | "不支持的输出格式：xxx" | 使用 `json/csv/sql/text` 之一 |
+| `E004` | 数量超限 | "请求数量超出上限（最大 10000）" | 减少 `--count` 值 |
+| `E005` | 正则不合法 | "正则表达式解析失败" | 检查 `--pattern` 语法 |
+| `E006` | 唯一性冲突 | "无法在约束下生成足够唯一值" | 扩大字符集或减少数量 |
+
+---
+
+## 六、FAQ 反模式对照
+
+| 常见坑 | 反模式示例 | 正确做法 |
+|--------|------------|----------|
+| 忽略字段类型 | `--field age` 生成字母 | 明确类型：`--field age --type int` |
+| 不校验唯一性 | 批量生成 100 条，出现重复 ID | 添加 `--unique` 参数 |
+| 模板路径错误 | 模板在子目录，直接写文件名 | 使用相对路径 `./templates/input.txt` |
+| 输出覆盖原文件 | 直接 `--out input.txt` 覆盖模板 | 先备份原文件，或输出到新文件 |
+| 忽略边界值 | 只生成正常数据，不测空值/超长 | 使用 `--include-null --max-length 100` |
+
+---
+
+## 七、渐进式披露
+
+### 🟢 新手路径（5 分钟上手）
+
+1. 运行 `rorem --field name --count 3` 看效果
+2. 尝试 `--format json` 切换输出
+3. 用 `--template` 替换一个文本文件中的占位符
+
+### 🟡 进阶路径（30 分钟精通）
+
+1. 编写 schema 文件（JSON 格式定义字段与约束）
+2. 使用 `--pattern` 自定义正则规则
+3. 结合 `--unique` 与 `--count` 生成大规模测试集
+4. 用 `--out` 输出到文件，配合脚本自动化
+
+---
+
+## 八、参数速查表
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--field` | string | 无 | 字段名（如 name, email） |
+| `--schema` | file | 无 | 字段定义文件（JSON） |
+| `--count` | int | 1 | 生成条数（1-10000） |
+| `--format` | string | text | 输出格式：json/csv/sql/text |
+| `--prefix` | string | 空 | 生成值前缀 |
+| `--pattern` | string | 空 | 正则约束 |
+| `--unique` | bool | false | 是否要求唯一值 |
+| `--out` | file | 标准输出 | 输出文件路径 |
+| `--template` | file | 无 | 模板文件路径 |
+| `--type` | string | string | 字段类型：string/int/float/bool/date |
+| `--min` / `--max` | int | 0/100 | 数值范围 |
+| `--include-null` | bool | false | 是否包含空值 |
+| `--selftest` | flag | - | 自检安装 |
+| `--version` | flag | - | 查看版本 |
+
+---
+
+## 九、用户协议
+
+<!-- user-agreement-injected -->
+
+使用本 Skill 即表示您同意以下条款：
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于数据准确性、合规性、安全性等。
+2. **禁止反向工程**：不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码。
+3. **合法用途**：本 Skill 仅用于合法的开发、测试、学习目的，禁止用于生成欺诈、侵权或违法内容。
+4. **无担保**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保。
+5. **修改与分发**：允许修改与再分发，但需保留原始版权声明。
+
+---
+
+## 十、许可证（License）
+
+<!-- professional-license-embedded -->
+
+### MIT License
+
+Copyright (c) 2024 数据工坊
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -81,63 +214,15 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-```
-<!-- professional-license-embedded -->
 
-## 前置条件
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
+---
 
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*文档版本：1.0.0 | 最后更新：2024年*
