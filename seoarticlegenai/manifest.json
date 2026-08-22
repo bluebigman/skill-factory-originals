@@ -1,28 +1,54 @@
 {
-  "timestamp": "20260816_051558",
+  "timestamp": "20260818_022053",
   "slug": "seoarticlegenai",
   "spec": {
     "slug": "seoarticlegenai",
     "name": "seoarticlegenai",
-    "description": "基于AI的SEO文章生成器，将数据与URL转化为结构化搜索优化内容。",
-    "cli_interface": [],
+    "description": "将数据与URL转化为结构化搜索优化内容，辅助SEO文章批量生成。",
+    "cli_interface": [
+      "[\"SEO文案\"",
+      "\"SEO文章生成\"",
+      "\"搜索优化写作\"",
+      "\"关键词内容创作\"",
+      "\"seoarticlegenai\"",
+      "--selftest",
+      "--version"
+    ],
     "capability_outline": [
-      "1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。",
-      "2. **试运行**：先用单个样本执行，核对输出字段与格式。",
-      "3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。",
-      "4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。"
+      "1. **文件准备**：将所有待处理的数据文件（`.csv`、`.json`、`.txt`）放入同一工作目录。",
+      "1. 指定一个样本文件，例如 `sample.csv`。",
+      "2. 运行命令：`seoarticlegenai --input sample.csv --output sample_output.md`",
+      "3. 检查输出文件中的以下字段：",
+      "4. 核对输出内容是否与源数据一致，无乱码或字段错位。",
+      "1. 确认试运行无误后，对全量文件执行。",
+      "2. 运行命令：`seoarticlegenai --input ./data_folder/ --output ./output_folder/`",
+      "3. **重要**：在执行前，将原始数据目录复制一份备份，命名为 `data_backup_YYYYMMDD`。",
+      "1. 随机抽取 3-5 个输出文件。",
+      "2. 核对以下关键点：",
+      "1. 把数据文件放一个文件夹。",
+      "2. 先跑一个文件试试。",
+      "3. 检查输出格式对不对。",
+      "4. 备份原始数据。",
+      "5. 批量跑所有文件。",
+      "6. 抽查几个结果，人工修改。",
+      "1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任。包括但不限于因内容错误、遗漏或不合规导致的任何损失。",
+      "2. **禁止反向工程**：不得对本 Skill 的底层代码、算法或逻辑进行反向工程、反编译或试图提取源代码。",
+      "3. **内容合规**：使用者需确保输入数据与输出内容符合当地法律法规及平台政策。",
+      "4. **无担保声明**：本 Skill 按“现状”提供，不附带任何明示或暗示的担保。"
     ],
     "upstream": null,
-    "derivation": "independent-implementation"
+    "derivation": "original-work"
   },
-  "spec_hash": "0d21a3ea3fa112ae",
-  "prompt_hash": "49-proxy",
-  "prompt": "(49 代理生成，见 provenance)",
+  "spec_hash": "b270cb518f48a5df",
+  "prompt_hash": "bf5728101cae348c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\":\"seoarticlegenai\",\"name\":\"seoarticlegenai\",\"description\":\"将数据与URL转化为结构化搜索优化内容，辅助SEO文章批量生成。\",\"cli_interface\":[\"[\\\"SEO文案\\\"\",\"\\\"SEO文章生成\\\"\",\"\\\"搜索优化写作\\\"\",\"\\\"关键词内容创作\\\"\",\"\\\"seoarticlegenai\\\"\",\"--selftest\",\"--version\"],\"capability_outline\":[\"1. **文件准备**：将所有待处理的数据文件（`.csv`、`.json`、`.txt`）放入同一工作目录。\",\"1. 指定一个样本文件，例如 `sample.csv`。\",\"2. 运行命令：`seoarticlegenai --input sample.csv --output sample_output.md`\",\"3. 检查输出文件中的以下字段：\",\"4. 核对输出内容是否与源数据一致，无乱码或字段错位。\",\"1. 确认试运行无误后，对全量文件执行。\",\"2. 运行命令：`seoarticlegenai --input ./data_folder/ --output ./output_folder/`\",\"3. **重要**：在执行前，将原始数据目录复制一份备份，命名为 `data_backup_YYYYMMDD`。\",\"1. 随机抽取 3-5 个输出文件。\",\"2. 核对以下关键点：\",\"1. 把数据文件放一个文件夹。\",\"2. 先跑一个文件试试。\",\"3. 检查输出格式对不对。\",\"4. 备份原始数据。\",\"5. 批量跑所有文件。\",\"6. 抽查几个结果，人工修改。\",\"1. **责任承担**：使用者应自行承担因使用本 Skill 产生的全部责任。包括但不限于因内容错误、遗漏或不合规导致的任何损失。\",\"2. **禁止反向工程**：不得对本 Skill 的底层代码、算法或逻辑进行反向工程、反编译或试图提取源代码。\",\"3. **内容合规**：使用者需确保输入数据与输出内容符合当地法律法规及平台政策。\",\"4. **无担保声明**：本 Skill 按“现状”提供，不附带任何明示或暗示的担保。\"],\"upstream\":null,\"derivation\":\"original-work\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 章节结构自行设计，可参考规格里的\"能力清单\"但不得沿用其标题措辞与顺序。\n3. 输出完整 Markdown，frontmatter 必须包含（值已给定，照抄）：\n   slug: seoarticlegenai\n   name: seoarticlegenai\n   displayName: （自创中文名，4-12字，含场景词，如\"合同审查 法律风险 条款比对\"风格，给一个最合适的）\n   description: （自创一句话，30字内，讲清用途）\n   version: 1.0.0\n   license: MIT\n   source_project: original\n   source_url: （留空）\n   copyright_holder: 原创作者（自持版权）\n   ai_generated: true\n   ai_tools: [\"DeepSeek\"]\n   disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。\n   author: （自创，不用任何工厂标识）\n   agent_created: true\n   trigger_words: （保留原触发词，可补充2-3个同义场景词）\n4. frontmatter 结束后必须紧跟显式 AI 标识行：\n   > 本内容由 AI 生成，仅供学习参考\n   并带 marker 注释 <!-- ai-generated-notice -->\n5. 正文必须包含以下 TRACE 高分结构（对标 SkillHub 4.8+ 顶级 Skill）：\n   - 能力边界：能做/不能做清单 + 适用对象（一页纸速查卡）\n   - 触发方式：trigger_words + 大白话场景映射表\n   - 标准流程：前置条件 → 执行步骤（分步编号）→ 输出规范\n   - 置信度门控：信息不足时输出 [需核实:字段] 占位，不编造\n   - 错误码体系：常见错误 → 提示话术 → 修正步骤\n   - FAQ 反模式：3-5 个常见坑 + 反模式对照\n   - 渐进式披露：速查卡 + 分层次阅读路径（新手/进阶）\n   每节都要有真实可执行的细节（参数表、示例、边界值），拒绝空话套话。\n6. 全中文为主（代码示例可用英文），语气专业务实。\n7. 严禁：绝对化用语（最/最好/100%/零风险/保证）、收益承诺、任何内部平台信息。\n8. 不要输出 ```markdown 包裹，直接输出 SKILL.md 全文（**首行必须是 --- 开头**）。\n9. 【强制合规章节】（document_gate 硬性要求，缺一即打回重写）：\n   a. 文档末尾必须含「用户协议」章节（含：使用者自行承担全部责任、禁止反向工程，\n      带 marker 注释 <!-- user-agreement-injected -->）\n   b. 文档末尾必须含「许可证（License）」章节，内嵌 MIT 许可证全文，\n      带 marker 注释 <!-- professional-license-embedded -->\n   c. 开头必须有一行 AI 辅助生成免责声明（如\"本 Skill 由 AI 辅助生成，仅供参考\"）\n   d. frontmatter 的 description/正文一律不得出现任何绝对化承诺\n   以上章节即使功能大纲未提及也必须补齐——这是发布合规的强制要求。",
   "llm_model": "deepseek-chat",
   "llm_temperature": 0.9,
-  "cost_usd": 0.0,
+  "cost_usd": 0.005679999999999999,
   "similarity_metrics": {
-    "mode": "49-proxy"
+    "section": 0.18181818181818182,
+    "token": 0.4860248447204969,
+    "line": 0.14559386973180077
   },
   "style_checks_passed": true
 }

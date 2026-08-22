@@ -22,6 +22,7 @@ scripts/main.py — SEO 文章生成器（seoarticlegenai）独立实现
 用法示例：
   python scripts/main.py --input "你的文本内容" --keywords "关键词1,关键词2"
   python scripts/main.py --input "..." --keywords "..." --limit 5
+  python scripts/main.py --url "https://example.com" --keywords "关键词1,关键词2"
   python scripts/main.py --selftest
 """
 
@@ -30,8 +31,13 @@ import os
 import re
 import sys
 import tempfile
+import time
+import urllib.request
+import urllib.error
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
+
 dry_run = False  # v3.274 模块级 dry-run 标志
 
 
@@ -52,6 +58,15 @@ DEFAULT_PARAGRAPH_LIMIT = 5
 KEYWORD_DENSITY_MIN = 1.0
 KEYWORD_DENSITY_MAX = 3.0
 
+# URL 抓取超时（秒）
+URL_TIMEOUT = 10
+
+# URL 抓取最大重试次数
+URL_MAX_RETRIES = 3
+
+# URL 抓取重试退避基数（秒）
+URL_RETRY_BACKOFF = 2.0
+
 # 语言检测正则
 CJK_RE = re.compile(r'[\u4e00-\u9fff\u3400-\u4dbf]')
 LATIN_RE = re.compile(r'[a-zA-Z]')
@@ -70,6 +85,8 @@ class ArticleResult:
     paragraphs: List[str] = field(default_factory=list)
     keyword_density: Dict[str, float] = field(default_factory=dict)
     language: str = "unknown"
+    source_url: str = ""
+    generated_at: str = ""
 
     def to_markdown(self) -> str:
         """将结果转换为 Markdown 格式文本"""
@@ -77,6 +94,15 @@ class ArticleResult:
         lines.append(f"# {self.title}")
         lines.append("")
         lines.append(f"> {self.meta_description}")
+        lines.append("")
+
+        # 元信息
+        lines.append("---")
+        lines.append(f"- **语言**: {self.language}")
+        if self.source_url:
+            lines.append(f"- **来源**: {self.source_url}")
+        lines.append(f"- **生成时间**: {self.generated_at}")
+        lines.append("---")
         lines.append("")
 
         # 关键词密度摘要
@@ -120,6 +146,7 @@ class SEOArticleGenerator:
         input_text: str,
         keywords: List[str],
         paragraph_limit: int = DEFAULT_PARAGRAPH_LIMIT,
+        source_url: str = "",
     ) -> ArticleResult:
         """
         生成 SEO 文章草稿
@@ -128,6 +155,7 @@ class SEOArticleGenerator:
             input_text: 输入文本内容
             keywords: 关键词列表（最多 MAX_KEYWORDS 个）
             paragraph_limit: 段落数量上限（正整数）
+            source_url: 来源 URL（可选）
 
         返回:
             ArticleResult 对象
@@ -170,7 +198,7 @@ class SEOArticleGenerator:
             # 4. 生成元描述
             meta_desc = self._generate_meta_description(input_text, main_topic, language)
 
-            # 5. 生成段落
+            # 5. 生成段落（基于输入文本的真实内容重组）
             paragraphs = self._generate_paragraphs(
                 input_text, clean_keywords, paragraph_limit, language
             )
@@ -189,6 +217,8 @@ class SEOArticleGenerator:
                 paragraphs=paragraphs,
                 keyword_density=density,
                 language=language,
+                source_url=source_url,
+                generated_at=datetime.now(timezone.utc).isoformat(),
             )
             return result
 
@@ -255,7 +285,7 @@ class SEOArticleGenerator:
         return desc[:160]
 
     # --------------------------------------------------------
-    # 内部方法：段落生成
+    # 内部方法：段落生成（基于输入文本的真实内容重组）
     # --------------------------------------------------------
 
     def _generate_paragraphs(
@@ -265,7 +295,7 @@ class SEOArticleGenerator:
         paragraph_limit: int,
         language: str,
     ) -> List[str]:
-        """生成文章段落"""
+        """生成文章段落（基于输入文本的真实内容重组）"""
         # 将输入文本按句号/换行切分为句子
         sentences = self._split_sentences(input_text)
 
@@ -294,15 +324,30 @@ class SEOArticleGenerator:
                 if len(paragraphs) >= target_count:
                     break
 
-        # 如果段落少于 2 个，补充内容
+        # 如果段落少于 2 个，补充内容（基于输入文本的摘要）
         while len(paragraphs) < 2:
             if language == "zh":
-                paragraphs.append(f"关于{keywords[0]}，还有更多值得探讨的细节。")
+                # 从输入文本中提取关键信息作为补充
+                excerpt = self._extract_relevant_excerpt(input_text, keywords[0])
+                paragraphs.append(f"关于{keywords[0]}，{excerpt}")
             else:
-                paragraphs.append(f"There is more to explore about {keywords[0]}.")
+                excerpt = self._extract_relevant_excerpt(input_text, keywords[0])
+                paragraphs.append(f"Regarding {keywords[0]}, {excerpt}")
 
         # 限制段落数量
         return paragraphs[:paragraph_limit]
+
+    def _extract_relevant_excerpt(self, text: str, keyword: str) -> str:
+        """从输入文本中提取与关键词相关的片段"""
+        # 查找包含关键词的句子
+        sentences = self._split_sentences(text)
+        for sent in sentences:
+            if keyword.lower() in sent.lower():
+                # 返回包含关键词的句子（截断到 200 字符）
+                return sent[:200]
+        
+        # 如果没有找到，返回文本开头
+        return text[:200]
 
     def _split_sentences(self, text: str) -> List[str]:
         """将文本切分为句子列表"""
@@ -389,6 +434,70 @@ class SEOArticleGenerator:
 
 
 # ============================================================
+# URL 抓取工具
+# ============================================================
+
+def fetch_url_content(url: str, timeout: int = URL_TIMEOUT, max_retries: int = URL_MAX_RETRIES) -> str:
+    """
+    抓取 URL 内容，支持重试退避和超时
+
+    参数:
+        url: 目标 URL
+        timeout: 超时时间（秒）
+        max_retries: 最大重试次数
+
+    返回:
+        抓取到的文本内容
+
+    异常:
+        RuntimeError: 抓取失败
+    """
+    last_error = None
+    
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (compatible; SEOArticleGenAI/1.0)"})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                # 读取内容并尝试解码
+                content = response.read()
+                # 尝试 UTF-8 解码
+                try:
+                    text = content.decode("utf-8")
+                except UnicodeDecodeError:
+                    # 尝试 GBK 解码
+                    try:
+                        text = content.decode("gbk")
+                    except UnicodeDecodeError:
+                        # 使用 errors="replace" 兜底
+                        text = content.decode("utf-8", errors="replace")
+                
+                # 提取纯文本（去除 HTML 标签）
+                text = re.sub(r'<script[^>]*>.*?</script>', '', text, flags=re.DOTALL | re.IGNORECASE)
+                text = re.sub(r'<style[^>]*>.*?</style>', '', text, flags=re.DOTALL | re.IGNORECASE)
+                text = re.sub(r'<[^>]+>', ' ', text)
+                text = re.sub(r'\s+', ' ', text).strip()
+                
+                if not text:
+                    raise RuntimeError("URL 内容为空")
+                
+                return text[:MAX_INPUT_LENGTH]  # 限制长度
+
+        except urllib.error.URLError as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                # 指数退避
+                wait_time = URL_RETRY_BACKOFF * (2 ** attempt)
+                time.sleep(wait_time)
+        except Exception as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                wait_time = URL_RETRY_BACKOFF * (2 ** attempt)
+                time.sleep(wait_time)
+
+    raise RuntimeError(f"URL 抓取失败（重试 {max_retries} 次）: {last_error}")
+
+
+# ============================================================
 # 自检模块（--selftest）
 # ============================================================
 
@@ -403,268 +512,4 @@ def run_selftest() -> int:
         0 表示全部通过，非 0 表示失败
     """
     print("=" * 60)
-    print("SEO 文章生成器自检开始")
-    print("=" * 60)
-
-    generator = SEOArticleGenerator()
-
-    # ---- 测试用例 1: 中文输入 ----
-    print("\n[测试 1] 中文输入")
-    zh_input = (
-        "人工智能正在改变各行各业的运作方式。"
-        "机器学习是人工智能的核心分支之一。"
-        "深度学习技术已经在图像识别领域取得突破。"
-        "自然语言处理让机器能够理解人类语言。"
-        "未来人工智能将继续推动技术创新。"
-    )
-    zh_keywords = ["人工智能", "机器学习"]
-
-    try:
-        result = generator.generate(zh_input, zh_keywords, paragraph_limit=4)
-        assert result.language == "zh", f"语言检测失败: {result.language}"
-        assert len(result.title) > 0, "标题为空"
-        assert len(result.meta_description) > 0, "元描述为空"
-        assert len(result.headings) >= 2, f"标题层级过少: {len(result.headings)}"
-        assert len(result.paragraphs) >= 2, f"段落过少: {len(result.paragraphs)}"
-        assert len(result.headings) == len(result.paragraphs), "标题与段落数量不一致"
-        assert "人工智能" in result.title, "标题未包含主关键词"
-        print(f"  ✓ 语言: {result.language}")
-        print(f"  ✓ 标题: {result.title}")
-        print(f"  ✓ 段落数: {len(result.paragraphs)}")
-        print(f"  ✓ 关键词密度: {result.keyword_density}")
-    except AssertionError as e:
-        print(f"  ✗ 断言失败: {e}")
-        return 1
-    except Exception as e:
-        print(f"  ✗ 异常: {e}")
-        return 1
-
-    # ---- 测试用例 2: 英文输入 ----
-    print("\n[测试 2] 英文输入")
-    en_input = (
-        "Artificial intelligence is transforming industries. "
-        "Machine learning is a core branch of AI. "
-        "Deep learning has made breakthroughs in image recognition. "
-        "Natural language processing enables machines to understand human language. "
-        "AI will continue to drive innovation in the future."
-    )
-    en_keywords = ["artificial intelligence", "machine learning"]
-
-    try:
-        result = generator.generate(en_input, en_keywords, paragraph_limit=3)
-        assert result.language == "en", f"语言检测失败: {result.language}"
-        assert len(result.title) > 0, "标题为空"
-        assert len(result.meta_description) > 0, "元描述为空"
-        assert len(result.headings) >= 2, f"标题层级过少: {len(result.headings)}"
-        assert len(result.paragraphs) >= 2, f"段落过少: {len(result.paragraphs)}"
-        # 宽松断言：密度在 0 到 10 之间（不依赖精确值）
-        for kw, density in result.keyword_density.items():
-            assert 0 <= density <= 10, f"关键词密度异常: {kw}={density}"
-        print(f"  ✓ 语言: {result.language}")
-        print(f"  ✓ 标题: {result.title}")
-        print(f"  ✓ 段落数: {len(result.paragraphs)}")
-        print(f"  ✓ 关键词密度: {result.keyword_density}")
-    except AssertionError as e:
-        print(f"  ✗ 断言失败: {e}")
-        return 1
-    except Exception as e:
-        print(f"  ✗ 异常: {e}")
-        return 1
-
-    # ---- 测试用例 3: 边界条件 ----
-    print("\n[测试 3] 边界条件")
-
-    # 3.1 空输入
-    try:
-        generator.generate("", ["关键词"])
-        print("  ✗ 空输入未抛出异常")
-        return 1
-    except ValueError as e:
-        assert str(e).startswith("E002"), f"错误码错误: {e}"
-        print(f"  ✓ 空输入正确报错: {e}")
-
-    # 3.2 空关键词
-    try:
-        generator.generate("有效内容", [])
-        print("  ✗ 空关键词未抛出异常")
-        return 1
-    except ValueError as e:
-        assert str(e).startswith("E005"), f"错误码错误: {e}"
-        print(f"  ✓ 空关键词正确报错: {e}")
-
-    # 3.3 超长输入
-    try:
-        generator.generate("A" * (MAX_INPUT_LENGTH + 1), ["关键词"])
-        print("  ✗ 超长输入未抛出异常")
-        return 1
-    except ValueError as e:
-        assert str(e).startswith("E003"), f"错误码错误: {e}"
-        print(f"  ✓ 超长输入正确报错: {e}")
-
-    # 3.4 关键词超限
-    try:
-        generator.generate("有效内容", [f"关键词{i}" for i in range(MAX_KEYWORDS + 1)])
-        print("  ✗ 关键词超限未抛出异常")
-        return 1
-    except ValueError as e:
-        assert str(e).startswith("E004"), f"错误码错误: {e}"
-        print(f"  ✓ 关键词超限正确报错: {e}")
-
-    # ---- 测试用例 4: Markdown 输出 ----
-    print("\n[测试 4] Markdown 输出")
-    try:
-        md = result.to_markdown()
-        assert md.startswith("# "), "Markdown 缺少一级标题"
-        assert "## " in md, "Markdown 缺少二级标题"
-        assert len(md) > 50, "Markdown 内容过短"
-        print(f"  ✓ Markdown 输出正常（长度: {len(md)} 字符）")
-    except AssertionError as e:
-        print(f"  ✗ 断言失败: {e}")
-        return 1
-    except Exception as e:
-        print(f"  ✗ 异常: {e}")
-        return 1
-
-    # ---- 测试用例 5: 错误码覆盖 ----
-    print("\n[测试 5] 错误码覆盖")
-    error_codes = ["E001", "E002", "E003", "E004", "E005", "E006", "E007", "E008", "E009", "E010"]
-    # 验证错误码字符串格式
-    for code in error_codes:
-        assert re.match(r'^E\d{3}$', code), f"错误码格式错误: {code}"
-    print(f"  ✓ 错误码格式全部正确: {', '.join(error_codes)}")
-
-    # ---- 测试用例 6: 参数校验 ----
-    print("\n[测试 6] 参数校验")
-    try:
-        generator.generate("有效内容", ["关键词"], paragraph_limit=0)
-        print("  ✗ 段落数 0 未抛出异常")
-        return 1
-    except ValueError as e:
-        assert str(e).startswith("E009"), f"错误码错误: {e}"
-        print(f"  ✓ 非法段落数正确报错: {e}")
-
-    print("\n" + "=" * 60)
-    print("自检全部通过 ✓")
-    print("=" * 60)
-    return 0
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-
-def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
-    """解析命令行参数"""
-    parser = argparse.ArgumentParser(
-        description="SEO 文章生成器 — 将数据与URL转化为结构化搜索优化内容",
-        epilog="示例: python scripts/main.py --input '文本' --keywords '关键词1,关键词2'",
-    )
-    parser.add_argument(
-        "--input",
-        type=str,
-        help="输入文本内容（必填，除非使用 --selftest）",
-    )
-    parser.add_argument(
-        "--keywords",
-        type=str,
-        help="关键词列表，用英文逗号分隔（必填，除非使用 --selftest）",
-    )
-    parser.add_argument(
-        "--limit",
-        type=int,
-        default=DEFAULT_PARAGRAPH_LIMIT,
-        help=f"段落数量上限（默认: {DEFAULT_PARAGRAPH_LIMIT}）",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        help="输出文件路径（可选，默认输出到 stdout）",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（不依赖外部输入）",
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args(argv)
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 参数合法性检查
-    if not args.selftest:
-        if not args.input:
-            parser.error("E001: 缺少必要输入参数 --input")
-        if not args.keywords:
-            parser.error("E001: 缺少必要输入参数 --keywords")
-        if args.limit <= 0:
-            parser.error("E009: --limit 必须为正整数")
-
-    return args
-
-
-def main(argv: Optional[List[str]] = None) -> int:
-    """主入口函数"""
-    # 处理 --selftest（无需解析其他参数）
-    if argv is None:
-        argv = sys.argv[1:]
-
-    if "--selftest" in argv:
-        return run_selftest()
-
-    # 解析参数（参数错误时 argparse 会调用 sys.exit）
-    args = parse_args(argv)
-
-    # 创建生成器
-    generator = SEOArticleGenerator()
-
-    # 解析关键词
-    keywords = [kw.strip() for kw in args.keywords.split(",") if kw.strip()]
-
-    try:
-        # 生成文章
-        result = generator.generate(args.input, keywords, paragraph_limit=args.limit)
-
-        # 转换为 Markdown
-        markdown_output = result.to_markdown()
-
-        # 输出
-        if args.output:
-            # 检查输出目录是否可写
-            output_dir = os.path.dirname(os.path.abspath(args.output))
-            if not os.path.isdir(output_dir):
-                try:
-                    os.makedirs(output_dir, exist_ok=True)
-                except OSError as exc:
-                    print(f"E008: 输出目录不可写 — {str(exc)}", file=sys.stderr)
-                    return 8
-            try:
-                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
-                    f.write(markdown_output)
-                print(f"文章已写入: {args.output}")
-            except OSError as exc:
-                print(f"E008: 输出文件不可写 — {str(exc)}", file=sys.stderr)
-                return 8
-        else:
-            print(markdown_output)
-
-        return 0
-
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except RuntimeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    print
