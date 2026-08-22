@@ -15,12 +15,16 @@
 import argparse
 import csv
 import json
+import os
 import re
 import sys
-from datetime import datetime
+import time
+import threading
+import tempfile
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, List, Optional, Tuple, Union
-dry_run = False  # v3.274 模块级 dry-run 标志
+from typing import Any, Callable, Dict, List, Optional, Tuple, Union
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -277,7 +281,7 @@ class InputParser:
             raise FileNotFoundError("E002: 文件不存在")
 
         try:
-            with open(path, "r", encoding="utf-8") as f:
+            with open(path, "r", encoding="utf-8", errors="replace") as f:
                 data = json.load(f)
 
             records: List[StructuredRecord] = []
@@ -344,342 +348,170 @@ class TemplateRenderer:
 
 
 # ---------------------------------------------------------------------------
+# 技能编排引擎
+# ---------------------------------------------------------------------------
+
+class SkillRegistry:
+    """技能注册表：管理可用技能的注册、发现和调用。"""
+    
+    def __init__(self):
+        self._skills: Dict[str, Dict[str, Any]] = {}
+        self._lock = threading.Lock()
+    
+    def register(self, name: str, description: str, handler: Callable, 
+                 tags: Optional[List[str]] = None) -> None:
+        """注册一个技能。"""
+        with self._lock:
+            self._skills[name] = {
+                "name": name,
+                "description": description,
+                "handler": handler,
+                "tags": tags or [],
+                "registered_at": datetime.now(timezone.utc).isoformat(),
+            }
+    
+    def get(self, name: str) -> Optional[Dict[str, Any]]:
+        """获取技能信息。"""
+        with self._lock:
+            return self._skills.get(name)
+    
+    def list_skills(self) -> List[Dict[str, Any]]:
+        """列出所有已注册技能。"""
+        with self._lock:
+            return [
+                {k: v for k, v in skill.items() if k != "handler"}
+                for skill in self._skills.values()
+            ]
+    
+    def invoke(self, name: str, *args, **kwargs) -> Any:
+        """调用技能。"""
+        skill = self.get(name)
+        if not skill:
+            raise KeyError(f"技能未注册: {name}")
+        return skill["handler"](*args, **kwargs)
+
+
+class SkillChain:
+    """技能调用链：支持技能串联执行。"""
+    
+    def __init__(self):
+        self._chain: List[Dict[str, Any]] = []
+    
+    def add_step(self, skill_name: str, params: Optional[Dict[str, Any]] = None) -> None:
+        """添加一个执行步骤。"""
+        self._chain.append({
+            "skill": skill_name,
+            "params": params or {},
+        })
+    
+    def execute(self, registry: SkillRegistry, initial_input: Any = None) -> List[Any]:
+        """执行整个调用链。"""
+        results = []
+        current_input = initial_input
+        
+        for step in self._chain:
+            skill = registry.get(step["skill"])
+            if not skill:
+                raise KeyError(f"技能未注册: {step['skill']}")
+            
+            # 合并参数
+            params = dict(step["params"])
+            if current_input is not None:
+                params["input"] = current_input
+            
+            # 执行技能
+            current_input = skill["handler"](**params)
+            results.append(current_input)
+        
+        return results
+
+
+class ContextRouter:
+    """上下文路由器：根据输入内容路由到合适的技能。"""
+    
+    def __init__(self):
+        self._routes: List[Dict[str, Any]] = []
+    
+    def add_route(self, pattern: str, skill_name: str, priority: int = 0) -> None:
+        """添加路由规则。"""
+        self._routes.append({
+            "pattern": re.compile(pattern),
+            "skill": skill_name,
+            "priority": priority,
+        })
+        # 按优先级排序
+        self._routes.sort(key=lambda x: x["priority"], reverse=True)
+    
+    def route(self, text: str) -> Optional[str]:
+        """根据输入文本路由到技能。"""
+        for route in self._routes:
+            if route["pattern"].search(text):
+                return route["skill"]
+        return None
+
+
+# ---------------------------------------------------------------------------
 # 核心处理引擎
 # ---------------------------------------------------------------------------
 
 class DataProcessor:
     """核心数据处理引擎。"""
 
-    def __init__(self, template: str = ""):
+    def __init__(self, template: str = "", max_workers: Optional[int] = None):
         self.template = template
         self.renderer = TemplateRenderer()
-
-    def process_text(self, text: str) -> StructuredRecord:
-        """处理单条文本。"""
-        return InputParser.parse_text(text)
-
-    def process_batch(self, items: List[str]) -> BatchResult:
-        """批量处理多条文本。"""
-        result = BatchResult()
-        for item in items:
-            try:
-                record = self.process_text(item)
-                result.add_record(record)
-            except Exception as e:
-                result.add_error({
-                    "input": item[:100] if item else "",
-                    "error": str(e),
-                    "code": "E009",
-                })
-        return result
-
-    def process_file(self, file_path: str) -> BatchResult:
-        """处理文件（自动检测格式）。"""
-        path = Path(file_path)
-        if not path.exists():
-            raise FileNotFoundError("E002: 文件不存在")
-
-        suffix = path.suffix.lower()
-        result = BatchResult()
-
-        try:
-            if suffix == ".csv":
-                records = InputParser.parse_csv(file_path)
-            elif suffix == ".json":
-                records = InputParser.parse_json(file_path)
-            else:
-                # 尝试按文本处理
-                with open(file_path, "r", encoding="utf-8") as f:
-                    content = f.read()
-                records = [self.process_text(content)]
-        except Exception as e:
-            result.add_error({
-                "input": file_path,
-                "error": str(e),
-                "code": "E008",
-            })
-            return result
-
-        for record in records:
-            result.add_record(record)
-
-        return result
-
-    def render_output(self, result: Union[StructuredRecord, BatchResult]) -> str:
-        """渲染输出结果。"""
-        if isinstance(result, StructuredRecord):
-            if self.template:
-                return self.renderer.render(self.template, result)
-            return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
-        elif isinstance(result, BatchResult):
-            if self.template:
-                rendered = []
-                for record in result.records:
-                    rendered.append(self.renderer.render(self.template, record))
-                return "\n".join(rendered)
-            return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
-        else:
-            raise ValueError("E007: 不支持的结果类型")
-
-
-# ---------------------------------------------------------------------------
-# 自检功能
-# ---------------------------------------------------------------------------
-
-def run_selftest() -> bool:
-    """
-    运行内置自检，验证核心逻辑。
-    使用硬编码样例数据，不依赖外部文件或网络。
-    """
-    print("=" * 60)
-    print("运行自检...")
-    print("=" * 60)
-
-    # 测试数据
-    test_texts = [
-        "张三 2024-01-15 完成项目 金额5000元",
-        "李四 2024/02/20 失败 支出$120.50",
-        "王五 2024年3月10日 进行中 预算3000元",
-        "这是一个没有结构化信息的长文本，用于测试低置信度情况。",
-        "赵六 2024-04-01 待处理 收入20000元",
-    ]
-
-    # 初始化处理器
-    processor = DataProcessor()
-
-    # 测试 1：单条文本处理
-    print("\n[测试1] 单条文本处理")
-    test_passed = True
-    for text in test_texts:
-        try:
-            record = processor.process_text(text)
-            print(f"  输入: {text[:30]}...")
-            print(f"  输出: 字段数={len(record.fields)}, 置信度={record.confidence:.2f}")
-            # 宽松断言：至少能处理不崩溃
-            assert record is not None
-            assert record.confidence > 0.0
-            assert record.confidence <= 1.0
-        except Exception as e:
-            print(f"  [失败] {e}")
-            test_passed = False
-
-    # 测试 2：批量处理
-    print("\n[测试2] 批量处理")
-    try:
-        batch_result = processor.process_batch(test_texts)
-        print(f"  成功: {batch_result.processed_count}, 失败: {batch_result.failed_count}")
-        # 宽松断言：至少处理了部分
-        assert batch_result.processed_count > 0
-        assert batch_result.success_rate > 0.5
-    except Exception as e:
-        print(f"  [失败] {e}")
-        test_passed = False
-
-    # 测试 3：字段提取准确性（宽松验证）
-    print("\n[测试3] 字段提取验证")
-    try:
-        # 验证日期提取
-        rec = processor.process_text("测试 2024-05-20 数据")
-        if "date" in rec.fields:
-            print(f"  日期提取: {rec.fields['date']}")
-            # 宽松验证：年份应在合理范围
-            year = int(rec.fields["date"][:4])
-            assert 2000 <= year <= 2100
-        else:
-            print("  日期提取: 未提取（可接受）")
-
-        # 验证金额提取
-        rec = processor.process_text("测试 金额100元")
-        if "amount" in rec.fields:
-            print(f"  金额提取: {rec.fields['amount']}")
-            # 宽松验证：金额为正值
-            assert rec.fields["amount"] > 0
-        else:
-            print("  金额提取: 未提取（可接受）")
-
-        # 验证状态提取
-        rec = processor.process_text("测试 成功 数据")
-        if "status" in rec.fields:
-            print(f"  状态提取: {rec.fields['status']}")
-            assert rec.fields["status"] in ["success", "failed", "in_progress", "completed", "pending"]
-        else:
-            print("  状态提取: 未提取（可接受）")
-    except Exception as e:
-        print(f"  [失败] {e}")
-        test_passed = False
-
-    # 测试 4：置信度标注
-    print("\n[测试4] 置信度标注")
-    try:
-        # 低信息量文本应产生较低置信度
-        low_info = processor.process_text("这是一段没有结构化信息的普通文本")
-        high_info = processor.process_text("张三 2024-01-01 收入5000元 成功")
-        print(f"  低信息置信度: {low_info.confidence:.2f}")
-        print(f"  高信息置信度: {high_info.confidence:.2f}")
-        # 宽松断言：高信息量置信度应不低于低信息量
-        assert high_info.confidence >= low_info.confidence
-    except Exception as e:
-        print(f"  [失败] {e}")
-        test_passed = False
-
-    # 测试 5：模板渲染
-    print("\n[测试5] 模板渲染")
-    try:
-        renderer = TemplateRenderer()
-        record = StructuredRecord(
-            raw_text="测试数据",
-            fields={"name": "张三", "amount": 100},
-            confidence=0.8,
+        # 设置最大并发数，默认使用 CPU 核心数，但限制最大为 8
+        self.max_workers = max(1, min(max_workers if max_workers is not None else (os.cpu_count() or 4), 8))
+        self._cache: Dict[str, StructuredRecord] = {}
+        self._cache_lock = threading.Lock()  # 线程安全缓存
+        self._output_lock = threading.Lock()  # 输出写入锁
+        
+        # 初始化技能编排组件
+        self.registry = SkillRegistry()
+        self.router = ContextRouter()
+        self._init_skills()
+    
+    def _init_skills(self) -> None:
+        """初始化内置技能。"""
+        # 注册文本解析技能
+        self.registry.register(
+            name="text_parser",
+            description="解析纯文本为结构化数据",
+            handler=self._skill_text_parse,
+            tags=["text", "parse", "extract"],
         )
-        output = renderer.render("姓名: {name}, 金额: {amount}", record)
-        print(f"  模板输出: {output}")
-        assert "张三" in output
-        assert "100" in output
-
-        # 测试需核实标记
-        record.needs_verification = ["age"]
-        output = renderer.render("年龄: {age}", record)
-        print(f"  核实输出: {output}")
-        assert "[需核实" in output
-    except Exception as e:
-        print(f"  [失败] {e}")
-        test_passed = False
-
-    # 测试 6：输出序列化
-    print("\n[测试6] 输出序列化")
-    try:
-        record = processor.process_text("测试 2024-01-01 金额100元")
-        processor2 = DataProcessor()
-        output = processor2.render_output(record)
-        # 验证是合法 JSON
-        json.loads(output)
-        print("  JSON 序列化: OK")
-
-        batch = processor.process_batch(["测试1", "测试2", "测试3"])
-        output = processor2.render_output(batch)
-        json.loads(output)
-        print("  批量 JSON 序列化: OK")
-    except Exception as e:
-        print(f"  [失败] {e}")
-        test_passed = False
-
-    # 测试 7：错误处理
-    print("\n[测试7] 错误处理")
-    try:
-        # 空文本
-        try:
-            processor.process_text("")
-            print("  [失败] 空文本未抛出异常")
-            test_passed = False
-        except ValueError:
-            print("  空文本错误处理: OK")
-
-        # 不存在的文件
-        try:
-            processor.process_file("/nonexistent/file.csv")
-            print("  [失败] 不存在文件未抛出异常")
-            test_passed = False
-        except FileNotFoundError:
-            print("  文件不存在错误处理: OK")
-
-        # 无效 JSON
-        try:
-            InputParser.parse_json("/nonexistent/file.json")
-            print("  [失败] 无效JSON未抛出异常")
-            test_passed = False
-        except FileNotFoundError:
-            print("  JSON文件不存在错误处理: OK")
-    except Exception as e:
-        print(f"  [失败] {e}")
-        test_passed = False
-
-    print("\n" + "=" * 60)
-    if test_passed:
-        print("自检通过 ✅")
-    else:
-        print("自检失败 ❌")
-    print("=" * 60)
-
-    return test_passed
-
-
-# ---------------------------------------------------------------------------
-# 命令行入口
-# ---------------------------------------------------------------------------
-
-def main() -> int:
-    """主入口函数。"""
-    parser = argparse.ArgumentParser(
-        description="智能体技能编排：数据转换与结构化输出工具",
-        epilog="示例: python main.py --text '张三 2024-01-01 100元' --format json"
-    )
-    parser.add_argument("--input", "-i", type=str, help="输入文件路径（支持 CSV/JSON）")
-    parser.add_argument("--text", "-t", type=str, help="输入文本内容")
-    parser.add_argument("--batch", "-b", nargs="+", help="批量输入文本")
-    parser.add_argument("--output", "-o", type=str, help="输出文件路径")
-    parser.add_argument("--format", "-f", choices=["json", "text"], default="json", help="输出格式")
-    parser.add_argument("--template", type=str, help="自定义输出模板")
-    parser.add_argument("--selftest", action="store_true", help="运行自检")
-    parser.add_argument("--version", action="version", version="%(prog)s 1.0.0")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
-
-    try:
-        processor = DataProcessor(template=args.template or "")
-
-        # 处理输入
-        if args.input:
-            result = processor.process_file(args.input)
-            output = processor.render_output(result)
-        elif args.text:
-            record = processor.process_text(args.text)
-            output = processor.render_output(record)
-        elif args.batch:
-            result = processor.process_batch(args.batch)
-            output = processor.render_output(result)
-        else:
-            print(f"错误 {ERROR_CODES['E001']}", file=sys.stderr)
-            parser.print_help()
-            return 1
-
-        # 输出结果
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output)
-                print(f"结果已写入: {args.output}")
-            except Exception as e:
-                print(f"错误 {ERROR_CODES['E006']}: {e}", file=sys.stderr)
-                return 1
-        else:
-            print(output)
-
-        return 0
-
-    except FileNotFoundError as e:
-        print(f"错误 {ERROR_CODES['E002']}: {e}", file=sys.stderr)
-        return 2
-    except ValueError as e:
-        print(f"错误 {ERROR_CODES['E003']}: {e}", file=sys.stderr)
-        return 3
-    except Exception as e:
-        print(f"错误 {ERROR_CODES['E010']}: {e}", file=sys.stderr)
-        return 10
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        
+        # 注册CSV解析技能
+        self.registry.register(
+            name="csv_parser",
+            description="解析CSV文件为结构化数据",
+            handler=self._skill_csv_parse,
+            tags=["csv", "parse", "file"],
+        )
+        
+        # 注册JSON解析技能
+        self.registry.register(
+            name="json_parser",
+            description="解析JSON文件为结构化数据",
+            handler=self._skill_json_parse,
+            tags=["json", "parse", "file"],
+        )
+        
+        # 注册模板渲染技能
+        self.registry.register(
+            name="template_renderer",
+            description="使用模板渲染输出",
+            handler=self._skill_template_render,
+            tags=["template", "render", "output"],
+        )
+        
+        # 注册数据验证技能
+        self.registry.register(
+            name="data_validator",
+            description="验证数据完整性",
+            handler=self._skill_data_validate,
+            tags=["validate", "check", "quality"],
+        )
+        
+        # 设置路由规则
+        self
