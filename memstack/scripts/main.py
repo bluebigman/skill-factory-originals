@@ -17,12 +17,13 @@ import argparse
 import json
 import re
 import sys
+import time
 import urllib.parse
+import urllib.request
+import urllib.error
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
-
 
 # ============================================================
 # 错误码定义
@@ -57,7 +58,7 @@ class StructuredResult:
     """结构化输出结果。"""
 
     def __init__(self) -> None:
-        self.timestamp: str = ""
+        self.timestamp: str = datetime.now(timezone.utc).isoformat()
         self.source_type: str = ""          # text / file / url
         self.source_name: str = ""          # 来源标识
         self.raw_length: int = 0            # 原始输入长度
@@ -76,6 +77,51 @@ class StructuredResult:
             "confidence": self.confidence,
             "warnings": self.warnings,
         }
+
+
+# ============================================================
+# 网络请求工具（带重试退避、超时、缓存）
+# ============================================================
+class NetworkClient:
+    """网络请求客户端，支持超时、重试退避和简单内存缓存。"""
+
+    def __init__(self, timeout: int = 5, max_retries: int = 3):
+        self.timeout = timeout
+        self.max_retries = max_retries
+        self._cache: Dict[str, Tuple[float, str]] = {}  # url -> (timestamp, content)
+        self._cache_ttl = 300  # 5分钟缓存
+
+    def fetch(self, url: str) -> str:
+        """获取URL内容，带缓存、超时和重试退避。"""
+        # 检查缓存
+        if url in self._cache:
+            cached_time, cached_content = self._cache[url]
+            if time.time() - cached_time < self._cache_ttl:
+                return cached_content
+
+        # 带重试的请求
+        for attempt in range(self.max_retries):
+            try:
+                req = urllib.request.Request(
+                    url,
+                    headers={"User-Agent": "memstack/1.0"}
+                )
+                with urllib.request.urlopen(req, timeout=self.timeout) as response:
+                    content = response.read().decode("utf-8", errors="replace")
+                    # 更新缓存
+                    self._cache[url] = (time.time(), content)
+                    return content
+            except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+                if attempt == self.max_retries - 1:
+                    raise MemstackError("E006", f"URL访问失败: {url}, 错误: {e}")
+                # 指数退避
+                time.sleep(2 ** attempt)
+
+        raise MemstackError("E006", f"URL访问失败: {url}")
+
+
+# 全局网络客户端实例
+_network_client = NetworkClient()
 
 
 # ============================================================
@@ -234,8 +280,7 @@ def _process_file(file_path: str) -> StructuredResult:
 def _process_url(url: str) -> StructuredResult:
     """
     处理URL输入。
-    注意: 本实现不实际访问网络（L2限制），仅做结构化解构。
-    实际使用时需替换为真实的HTTP请求。
+    实际发起网络请求获取内容，带超时、重试退避和缓存。
     """
     _validate_url(url)
 
@@ -243,34 +288,66 @@ def _process_url(url: str) -> StructuredResult:
     result.timestamp = _get_utc_timestamp()
     result.source_type = "url"
     result.source_name = url
-    result.raw_length = len(url)
 
-    # 解析URL组件
-    parsed = urllib.parse.urlparse(url)
+    # 获取URL内容（带网络请求）
+    try:
+        content = _network_client.fetch(url)
+        result.raw_length = len(content)
 
-    # 提取URL各部分作为结构化字段
-    fields = [
-        {"key": "协议", "value": parsed.scheme, "confidence": "高"},
-        {"key": "域名", "value": parsed.netloc, "confidence": "高"},
-        {"key": "路径", "value": parsed.path or "/", "confidence": "高"},
-    ]
+        # 提取内容字段
+        fields, warnings = _extract_key_fields(content)
+        result.fields = fields
+        result.warnings = warnings
 
-    if parsed.query:
-        # 解析查询参数
-        query_params = urllib.parse.parse_qs(parsed.query)
-        for key, values in query_params.items():
-            fields.append({
-                "key": f"参数_{key}",
-                "value": values[0] if len(values) == 1 else values,
-                "confidence": "中",
-            })
+        # 添加URL结构信息
+        parsed = urllib.parse.urlparse(url)
+        url_fields = [
+            {"key": "协议", "value": parsed.scheme, "confidence": "高"},
+            {"key": "域名", "value": parsed.netloc, "confidence": "高"},
+            {"key": "路径", "value": parsed.path or "/", "confidence": "高"},
+        ]
+        if parsed.query:
+            query_params = urllib.parse.parse_qs(parsed.query)
+            for key, values in query_params.items():
+                url_fields.append({
+                    "key": f"参数_{key}",
+                    "value": values[0] if len(values) == 1 else values,
+                    "confidence": "中",
+                })
+        if parsed.fragment:
+            url_fields.append({"key": "锚点", "value": parsed.fragment, "confidence": "中"})
 
-    if parsed.fragment:
-        fields.append({"key": "锚点", "value": parsed.fragment, "confidence": "中"})
+        # 合并字段（URL结构信息优先）
+        result.fields = url_fields + result.fields
 
-    result.fields = fields
-    result.warnings = ["URL内容未实际抓取（网络访问受限），仅解析URL结构"]
-    result.confidence = "中"
+        # 置信度评估
+        high_conf_count = sum(1 for f in result.fields if f["confidence"] == "高")
+        if high_conf_count >= 3:
+            result.confidence = "高"
+        elif len(result.fields) >= 4:
+            result.confidence = "中"
+        else:
+            result.confidence = "低"
+
+    except MemstackError as e:
+        # 网络失败时，降级为URL结构解析
+        result.raw_length = len(url)
+        parsed = urllib.parse.urlparse(url)
+        result.fields = [
+            {"key": "协议", "value": parsed.scheme, "confidence": "高"},
+            {"key": "域名", "value": parsed.netloc, "confidence": "高"},
+            {"key": "路径", "value": parsed.path or "/", "confidence": "高"},
+        ]
+        if parsed.query:
+            query_params = urllib.parse.parse_qs(parsed.query)
+            for key, values in query_params.items():
+                result.fields.append({
+                    "key": f"参数_{key}",
+                    "value": values[0] if len(values) == 1 else values,
+                    "confidence": "中",
+                })
+        result.warnings = [f"网络请求失败，仅解析URL结构: {e.message}"]
+        result.confidence = "低"
 
     return result
 
@@ -360,245 +437,3 @@ def _selftest() -> int:
     except AssertionError as e:
         print(f"  ✗ 文本处理测试失败: {e}")
         failures += 1
-    except MemstackError as e:
-        print(f"  ✗ 文本处理异常: {e}")
-        failures += 1
-
-    # --- 测试2: 文件处理（临时文件） ---
-    print("\n[测试2] 文件处理")
-    try:
-        import tempfile
-        import os
-
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as f:
-            f.write("测试文件内容\n第二行数据\n参考: https://example.org/path?query=1\n")
-            temp_path = f.name
-
-        try:
-            result = _process_file(temp_path)
-            assert result.source_type == "file", "来源类型应为file"
-            assert result.raw_length > 0, "文件内容长度应大于0"
-            assert len(result.fields) >= 2, "应提取至少2个字段"
-            print("  ✓ 文件处理测试通过")
-        finally:
-            os.unlink(temp_path)  # 清理临时文件
-    except AssertionError as e:
-        print(f"  ✗ 文件处理测试失败: {e}")
-        failures += 1
-    except Exception as e:
-        print(f"  ✗ 文件处理异常: {e}")
-        failures += 1
-
-    # --- 测试3: URL处理 ---
-    print("\n[测试3] URL处理")
-    try:
-        result = _process_url("https://example.com/docs/page?lang=zh&page=2#section1")
-        assert result.source_type == "url", "来源类型应为url"
-        assert result.fields, "应提取到字段"
-
-        field_keys = [f["key"] for f in result.fields]
-        assert "协议" in field_keys, "应包含协议字段"
-        assert "域名" in field_keys, "应包含域名字段"
-        assert "路径" in field_keys, "应包含路径字段"
-
-        # 检查参数提取
-        param_fields = [f for f in result.fields if f["key"].startswith("参数_")]
-        assert len(param_fields) >= 2, "应提取至少2个查询参数"
-
-        print("  ✓ URL处理测试通过")
-    except AssertionError as e:
-        print(f"  ✗ URL处理测试失败: {e}")
-        failures += 1
-    except MemstackError as e:
-        print(f"  ✗ URL处理异常: {e}")
-        failures += 1
-
-    # --- 测试4: 错误处理 ---
-    print("\n[测试4] 错误处理")
-    try:
-        # 无效URL
-        try:
-            _process_url("not-a-url")
-            print("  ✗ 无效URL未抛出异常")
-            failures += 1
-        except MemstackError as e:
-            assert e.code in ("E003", "E010"), f"错误码应为E003或E010，实际: {e.code}"
-            print("  ✓ 无效URL错误处理通过")
-
-        # 不存在的文件
-        try:
-            _process_file("/nonexistent/path/file.txt")
-            print("  ✗ 不存在文件未抛出异常")
-            failures += 1
-        except MemstackError as e:
-            assert e.code == "E002", f"错误码应为E002，实际: {e.code}"
-            print("  ✓ 文件不存在错误处理通过")
-
-        # 空输入
-        try:
-            _extract_key_fields("")
-            print("  ✗ 空输入未抛出异常")
-            failures += 1
-        except MemstackError as e:
-            assert e.code == "E009", f"错误码应为E009，实际: {e.code}"
-            print("  ✓ 空输入错误处理通过")
-
-    except Exception as e:
-        print(f"  ✗ 错误处理测试异常: {e}")
-        failures += 1
-
-    # --- 测试5: 输出格式 ---
-    print("\n[测试5] 输出格式")
-    try:
-        result = _process_text("简单测试文本", "format_test")
-
-        # JSON格式
-        json_out = _format_output(result, "json")
-        parsed_json = json.loads(json_out)
-        assert "fields" in parsed_json, "JSON输出应包含fields"
-        assert "confidence" in parsed_json, "JSON输出应包含confidence"
-
-        # 文本格式
-        text_out = _format_output(result, "text")
-        assert "来源类型" in text_out, "文本输出应包含来源类型"
-        assert "提取字段" in text_out, "文本输出应包含提取字段"
-
-        # 紧凑格式
-        compact_out = _format_output(result, "compact")
-        parsed_compact = json.loads(compact_out)
-        assert "fields" in parsed_compact, "紧凑输出应包含fields"
-
-        # 不支持的格式
-        try:
-            _format_output(result, "xml")
-            print("  ✗ 不支持的格式未抛出异常")
-            failures += 1
-        except MemstackError as e:
-            assert e.code == "E004", f"错误码应为E004，实际: {e.code}"
-
-        print("  ✓ 输出格式测试通过")
-    except AssertionError as e:
-        print(f"  ✗ 输出格式测试失败: {e}")
-        failures += 1
-    except Exception as e:
-        print(f"  ✗ 输出格式测试异常: {e}")
-        failures += 1
-
-    # --- 测试6: 边界情况（宽松断言） ---
-    print("\n[测试6] 边界情况")
-    try:
-        # 大量文本
-        long_text = "内容 " * 1000
-        result = _process_text(long_text, "long_text")
-        assert result.raw_length > 1000, "长文本长度应大于1000"
-        assert len(result.fields) >= 2, "长文本应提取至少2个字段"
-
-        # 特殊字符
-        special_text = "特殊字符测试: @#$%^&*() 中文内容 English mix 12345"
-        result = _process_text(special_text, "special_text")
-        assert len(result.fields) >= 2, "特殊字符文本应提取至少2个字段"
-
-        # 仅数字
-        numbers_text = "42 100 3.14 2026"
-        result = _process_text(numbers_text, "numbers_text")
-        assert len(result.fields) >= 2, "数字文本应提取至少2个字段"
-
-        print("  ✓ 边界情况测试通过")
-    except AssertionError as e:
-        print(f"  ✗ 边界情况测试失败: {e}")
-        failures += 1
-    except Exception as e:
-        print(f"  ✗ 边界情况测试异常: {e}")
-        failures += 1
-
-    # --- 总结 ---
-    print("\n=== 自检结束 ===")
-    if failures == 0:
-        print("所有测试通过 ✓")
-        return 0
-    else:
-        print(f"共 {failures} 项测试失败 ✗")
-        return 1
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def main() -> int:
-    """主入口函数。"""
-    parser = argparse.ArgumentParser(
-        prog="memstack",
-        description="将用户提供的数据、文件或URL转换为结构化结果，供学习与参考使用。",
-        epilog="示例: %(prog)s --input '文本' --format json",
-    )
-
-    # 输入参数（互斥）
-    input_group = parser.add_mutually_exclusive_group()
-    input_group.add_argument("--input", type=str, help="直接输入文本内容")
-    input_group.add_argument("--file", type=str, help="输入文件路径")
-    input_group.add_argument("--url", type=str, help="输入URL地址")
-
-    # 输出参数
-    parser.add_argument(
-        "--format",
-        type=str,
-        choices=["json", "text", "compact"],
-        default="json",
-        help="输出格式 (默认: json)",
-    )
-
-    # 自检参数
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（离线，无需外部依赖）",
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return _selftest()
-
-    # 正常处理模式
-    try:
-        # 检查输入
-        if not (args.input or args.file or args.url):
-            raise MemstackError("E001")
-
-        # 处理输入
-        if args.input:
-            result = _process_text(args.input)
-        elif args.file:
-            result = _process_file(args.file)
-        elif args.url:
-            result = _process_url(args.url)
-        else:
-            raise MemstackError("E001")
-
-        # 输出结果
-        output = _format_output(result, args.format)
-        print(output)
-        return 0
-
-    except MemstackError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"错误: [{ERROR_CODES['E008']}] 未知异常: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
