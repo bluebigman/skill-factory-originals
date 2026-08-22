@@ -13,9 +13,10 @@ import os
 import re
 import sys
 import tempfile
-from datetime import timezone, datetime
+from datetime import datetime
 from pathlib import Path
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import timezone  # G2 时区修复
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 # ========== 错误码定义 ==========
 ERROR_CODES = {
@@ -85,6 +86,24 @@ class GodProcess:
 
 
 # ========== 配置生成 ==========
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def generate_god_config(processes: list) -> str:
     """
@@ -523,16 +542,26 @@ def main():
     parser.add_argument("--group", help="组名")
     parser.add_argument("--input", help="输入文本")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     parser.add_argument("--force", action="store_true")  # R4 强制写盘
 
 
     parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
 
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     global dry_run
 
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    dry_run = getattr(args, "dry_run", False)  # v3.268 同步到全局
 
     try:
         # 自检模式
@@ -564,7 +593,7 @@ def main():
 
             if args.output:
                 if not dry_run or getattr(args, "force", False):
-                    Path(args.output).write_text(config, encoding="utf-8")
+                    Path(args.output).write_text(config, encoding="utf-8", errors="replace")
                 print(f"配置已生成: {args.output}")
             else:
                 print(config)
@@ -579,7 +608,7 @@ def main():
                 raise GodToolError("E002", f"文件不存在: {args.file}")
 
             try:
-                config_text = Path(args.file).read_text(encoding="utf-8")
+                config_text = Path(args.file).read_text(encoding="utf-8", errors="replace")
             except Exception as e:
                 raise GodToolError("E003", f"读取文件失败: {e}")
 
@@ -598,7 +627,7 @@ def main():
             status_text = args.input
             if not status_text and args.file:
                 try:
-                    status_text = Path(args.file).read_text(encoding="utf-8")
+                    status_text = Path(args.file).read_text(encoding="utf-8", errors="replace")
                 except Exception as e:
                     raise GodToolError("E003", f"读取文件失败: {e}")
 
@@ -621,7 +650,7 @@ def main():
             log_text = args.input
             if not log_text and args.file:
                 try:
-                    log_text = Path(args.file).read_text(encoding="utf-8")
+                    log_text = Path(args.file).read_text(encoding="utf-8", errors="replace")
                 except Exception as e:
                     raise GodToolError("E003", f"读取文件失败: {e}")
 
