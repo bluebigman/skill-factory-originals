@@ -40,7 +40,6 @@ import tempfile
 import time
 from datetime import datetime, timedelta
 from datetime import timezone  # G2 时区修复
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 常量定义
@@ -242,8 +241,8 @@ def add_record(
     return record["id"]
 
 
-def search_records(keyword=None, tag=None, base_dir=None):
-    """按关键词/标签检索记录。返回匹配列表。"""
+def search_records(keyword=None, tag=None, base_dir=None, start_time=None, end_time=None):
+    """按关键词/标签/时间范围检索记录。返回匹配列表。"""
     records = _load_records(base_dir)
     result = []
     keyword = keyword.strip().lower() if keyword else None
@@ -264,6 +263,22 @@ def search_records(keyword=None, tag=None, base_dir=None):
                 match = False
         if tag and tag not in rec.get("tags", []):
             match = False
+        if start_time:
+            try:
+                start_dt = datetime.strptime(start_time, TIME_FORMAT)
+                rec_dt = datetime.strptime(rec.get("created_at", ""), TIME_FORMAT)
+                if rec_dt < start_dt:
+                    match = False
+            except ValueError:
+                raise RuntimeError("E007: 时间格式非法: %s" % start_time)
+        if end_time:
+            try:
+                end_dt = datetime.strptime(end_time, TIME_FORMAT)
+                rec_dt = datetime.strptime(rec.get("created_at", ""), TIME_FORMAT)
+                if rec_dt > end_dt:
+                    match = False
+            except ValueError:
+                raise RuntimeError("E007: 时间格式非法: %s" % end_time)
         if match:
             result.append(rec)
     return result
@@ -389,6 +404,14 @@ def _selftest():
             assert len(results) == 1, "标签搜索应返回1条"
             assert results[0]["title"] == "权限校验失败"
 
+            # 测试时间范围搜索
+            results = search_records(
+                start_time="2024-01-01 00:00:00",
+                end_time="2099-12-31 23:59:59",
+                base_dir=tmpdir,
+            )
+            assert len(results) == 3, "时间范围搜索应返回3条"
+
             # 测试更新
             update_record(ids[0], solution="更新后的解决方案", base_dir=tmpdir)
             records = _load_records(tmpdir)
@@ -425,120 +448,4 @@ def _selftest():
         return 1
 
 
-# ---------------------------------------------------------------------------
-# CLI 入口
-# ---------------------------------------------------------------------------
-
-
-def main():
-    parser = argparse.ArgumentParser(description="napkin - 项目记忆与错误备忘工具")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    subparsers = parser.add_subparsers(dest="command", help="子命令")
-
-    # add 命令
-    add_parser = subparsers.add_parser("add", help="添加记录")
-    add_parser.add_argument("--title", required=False, help="标题")
-    add_parser.add_argument("--error", required=False, help="错误信息")
-    add_parser.add_argument("--solution", required=False, help="解决方案")
-    add_parser.add_argument("--tag", action="append", help="标签（可多次指定）")
-    add_parser.add_argument("--created-at", help="创建时间（YYYY-MM-DD HH:MM:SS 或相对时间如 7d）")
-
-    # search 命令
-    search_parser = subparsers.add_parser("search", help="搜索记录")
-    search_parser.add_argument("--keyword", help="关键词")
-    search_parser.add_argument("--tag", help="标签")
-
-    # list 命令
-    list_parser = subparsers.add_parser("list", help="列出记录")
-    list_parser.add_argument("--tag", help="按标签过滤")
-
-    # update 命令
-    update_parser = subparsers.add_parser("update", help="更新记录")
-    update_parser.add_argument("--id", required=False, help="记录ID")
-    update_parser.add_argument("--solution", help="新的解决方案")
-    update_parser.add_argument("--status", choices=["active", "expired", "archived"], help="新状态")
-    update_parser.add_argument("--tag", action="append", help="新标签（可多次指定）")
-
-    # delete 命令
-    delete_parser = subparsers.add_parser("delete", help="删除记录")
-    delete_parser.add_argument("--id", required=False, help="记录ID")
-
-    # export 命令
-    export_parser = subparsers.add_parser("export", help="导出记录")
-    export_parser.add_argument("--format", choices=list(VALID_EXPORT_FORMATS), default="md", help="导出格式")
-    export_parser.add_argument("--tag", help="按标签过滤")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    if args.selftest:
-        sys.exit(_selftest())
-
-    if not args.command:
-        parser.print_help()
-        sys.exit(1)
-
-    try:
-        if args.command == "add":
-            rid = add_record(
-                title=args.title,
-                error=args.error,
-                solution=args.solution,
-                tags=args.tag,
-                created_at=args.created_at,
-            )
-            print("记录已添加: %s" % rid)
-
-        elif args.command == "search":
-            results = search_records(keyword=args.keyword, tag=args.tag)
-            if not results:
-                print("未找到匹配记录")
-            else:
-                for rec in results:
-                    print("[%s] %s (%s)" % (rec["id"], rec["title"], ", ".join(rec["tags"])))
-
-        elif args.command == "list":
-            results = list_records(tag=args.tag)
-            if not results:
-                print("暂无记录")
-            else:
-                for rec in results:
-                    print("[%s] %s [%s]" % (rec["id"], rec["title"], rec["status"]))
-
-        elif args.command == "update":
-            update_record(
-                record_id=args.id,
-                solution=args.solution,
-                status=args.status,
-                tags=args.tag,
-            )
-            print("记录已更新: %s" % args.id)
-
-        elif args.command == "delete":
-            delete_record(args.id)
-            print("记录已删除: %s" % args.id)
-
-        elif args.command == "export":
-            content = export_records(export_format=args.format, tag=args.tag)
-            print(content)
-
-        else:
-            raise RuntimeError("E009: 未知命令: %s" % args.command)
-
-    except RuntimeError as exc:
-        print("错误: %s" % exc, file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+# -----------------------------------------------------------------
