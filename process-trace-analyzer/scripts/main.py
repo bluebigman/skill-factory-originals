@@ -724,12 +724,17 @@ def main():
     p_analyze.add_argument("--name", type=str, help="进程名称")
     p_analyze.add_argument("--path", type=str, help="文件路径")
 
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
-
     # changed_items 明细标记
-
     if getattr(args, "verbose", False):
-
         print("[明细] changed_items=0 项")  # changed_items 标记
 
     # 自检模式
