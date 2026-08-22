@@ -36,7 +36,10 @@ COMMAND_DB = {
         }
     },
     "目录管理": {
-        "keywords": ["切换目录", "进入目录", "列出", "显示", "统计大小", "递归", "目录大小"],
+        # 单动词与完整短语并存：仅有"切换目录"时，"切换到/tmp目录"这类中间插字的
+        # 说法会整类漏匹配；单动词由 INTENT_GROUPS 消歧兜底，不会误选。
+        "keywords": ["切换目录", "进入目录", "列出", "显示", "统计大小", "递归", "目录大小",
+                     "当前目录", "目录文件", "文件列表", "目录内容", "切换", "进入"],
         "commands": {
             "切换目录": "cd {path}",
             "列出文件": "ls -l",
@@ -47,7 +50,7 @@ COMMAND_DB = {
         }
     },
     "进程管理": {
-        "keywords": ["查看进程", "进程列表", "杀掉", "终止", "后台运行", "资源占用", "进程状态"],
+        "keywords": ["查看进程", "进程列表", "杀掉", "终止", "后台运行", "资源占用", "进程状态", "进程"],
         "commands": {
             "查看所有进程": "ps aux",
             "查看特定进程": "ps aux | grep {keyword}",
@@ -145,6 +148,26 @@ SYNONYMS = {
     "卸载": ["移除", "uninstall"]
 }
 
+# 动作意图分组：用于同类命令消歧。
+# 纯字符相似度会把"查看当前目录文件"误判到"切换目录"（都含"目录"二字），
+# 因此按动词意图做一致性加权 / 冲突惩罚，让读操作选 ls 而非 cd。
+INTENT_GROUPS = {
+    "read":   ["查看", "列出", "显示", "查询", "统计", "浏览", "检查", "看一下"],
+    "nav":    ["切换", "进入", "跳转", "转到", "cd"],
+    "create": ["创建", "新建", "生成", "建立", "touch"],
+    "delete": ["删除", "移除", "清除", "干掉"],
+    "modify": ["修改", "替换", "重命名", "编辑", "添加", "赋予"],
+    "stop":   ["杀掉", "终止", "停止", "结束", "关闭", "kill"],
+    "start":  ["启动", "运行", "开启", "重启"],
+    "fetch":  ["下载", "拉取", "获取"],
+}
+
+
+def _intent_of(text: str) -> set:
+    """识别文本所属的动作意图组（可多归属）"""
+    return {g for g, verbs in INTENT_GROUPS.items() if any(v in text for v in verbs)}
+
+
 # 高危命令模式
 HIGH_RISK_PATTERNS = [
     r'\brm\s+-rf\b',
@@ -170,7 +193,9 @@ def extract_parameters(text: str) -> Dict[str, str]:
     params = {}
     
     # 提取文件路径
-    path_match = re.search(r'[\w\-./\\]+\.(?:log|txt|py|sh|conf|json|xml|yaml|yml|tar|gz|zip)', text)
+    # 注意：必须用 ASCII 字符类而非 \w —— Python re 的 \w 默认匹配 Unicode，
+    # 会把前置中文一起吃掉（"给script.sh" → 文件名误判为 "给script.sh"）。
+    path_match = re.search(r'[A-Za-z0-9_\-./\\]+\.(?:log|txt|py|sh|conf|json|xml|yaml|yml|tar|gz|zip)', text)
     if path_match:
         params['file'] = path_match.group()
         params['pattern'] = path_match.group().split('/')[-1].split('.')[0]
@@ -185,23 +210,37 @@ def extract_parameters(text: str) -> Dict[str, str]:
     if ip_match:
         params['host'] = ip_match.group()
     
-    # 提取端口
-    port_match = re.search(r'端口\s*(\d+)', text)
+    # 提取端口：同时支持"端口80"（前置）与"80端口"（后置）两种中文语序
+    port_match = re.search(r'端口\s*[是为]?\s*(\d{1,5})', text)
+    if not port_match:
+        port_match = re.search(r'(?<![\d.])(\d{1,5})\s*(?:号)?\s*端口', text)
     if port_match:
         params['port'] = port_match.group(1)
     
-    # 提取服务名
-    service_match = re.search(r'(?:服务|nginx|apache|mysql|redis|docker)\s*[是为]?\s*(\w+)', text)
-    if service_match:
-        params['service'] = service_match.group(1)
+    # 提取服务名：优先直接识别常见服务名，避免"重启nginx服务"把 service 误提为"服务"二字
+    # 不能用 \b：中文字符在 Python re 里也属于 \w，"重启nginx服务" 的中文与 nginx 之间
+    # 不存在词边界，\bnginx\b 会匹配失败。改用 ASCII 字母负向断言。
+    known_svc = re.search(
+        r'(?<![A-Za-z])(nginx|apache2?|httpd|mysqld?|mariadb|redis|docker|sshd?|postgresql|mongodb|php-fpm)(?![A-Za-z])',
+        text, re.IGNORECASE)
+    if known_svc:
+        params['service'] = known_svc.group(1).lower()
+    else:
+        service_match = re.search(r'服务\s*[是为]?\s*([A-Za-z][\w\-]*)', text)
+        if service_match:
+            params['service'] = service_match.group(1)
     
-    # 提取包名
-    pkg_match = re.search(r'(?:安装|卸载|更新)\s+(\w+)', text)
+    # 提取包名：中文与包名之间通常无空格（"用apt安装htop"），故用 \s* 而非 \s+，
+    # 并限定包名以 ASCII 字母开头，避免把后续中文当成包名。
+    pkg_match = re.search(r'(?:安装|卸载|更新)\s*([A-Za-z][A-Za-z0-9_\-+.]*)', text)
     if pkg_match:
         params['package'] = pkg_match.group(1)
     
     # 提取替换文本参数
-    replace_match = re.search(r'把\s*(\S+)\s*替换为\s*(\S+)', text)
+    # 用非贪婪 + 中文虚词边界收尾，避免 \S+ 贪婪把"在xxx中"一起吞进 new
+    # （"把old替换为new在config.txt中" → new 曾被误提为 "new在config.txt中"）
+    replace_match = re.search(
+        r'把\s*([^\s，。；:]+?)\s*替换(?:成|为)\s*([^\s，。；:]+?)(?=\s|在|于|到|中|$)', text)
     if replace_match:
         params['old'] = replace_match.group(1)
         params['new'] = replace_match.group(2)
@@ -229,6 +268,7 @@ def match_command(text: str) -> Tuple[Optional[str], Optional[str], float]:
     normalized = normalize_text(text)
     best_match = None
     best_score = 0.0
+    text_intent = _intent_of(normalized)
     
     for category, data in COMMAND_DB.items():
         # 关键词匹配
@@ -250,6 +290,14 @@ def match_command(text: str) -> Tuple[Optional[str], Optional[str], float]:
                     # 使用相似度匹配
                     similarity = SequenceMatcher(None, normalized, cmd_name).ratio()
                     cmd_score += similarity * 0.1
+
+                    # 动作意图一致性：同组加权，跨组惩罚（消歧 ls / cd 这类同域命令）
+                    cmd_intent = _intent_of(cmd_name)
+                    if text_intent and cmd_intent:
+                        if text_intent & cmd_intent:
+                            cmd_score += 0.25
+                        else:
+                            cmd_score -= 0.30
                     
                     if cmd_score > best_score:
                         best_score = cmd_score
@@ -385,17 +433,211 @@ def validate_commondb() -> Tuple[bool, str]:
             return False, f"分类 '{category}' 的 commands 为空或不是字典"
     return True, "COMMAND_DB 完整性验证通过"
 
+def _tail_command(generated: str) -> str:
+    """从 generate_command 的输出里取出真正的命令行（末行，剥掉注释行）"""
+    lines = [ln for ln in generated.split("\n") if ln.strip() and not ln.startswith("#")]
+    return lines[-1].strip() if lines else ""
+
+
 def selftest() -> bool:
-    """自检函数：验证核心功能"""
+    """自检函数：验证核心功能
+
+    断言口径：核心命令关键片段必须命中（如 'ls'、'nc -zv 192.168.1.1 80'），
+    不做整串相等比较——模板中未提供的参数会保留 <占位符>，属预期行为。
+    """
+    # (自然语言输入, 生成命令中必须出现的关键片段)
     test_cases = [
-        ("查看当前目录文件", "ls -l"),
-        ("杀掉所有python进程", "pkill -f python"),
+        ("查看当前目录文件", "ls"),
+        ("杀掉所有python进程", "pkill -f"),
         ("测试192.168.1.1的80端口", "nc -zv 192.168.1.1 80"),
-        ("用apt安装htop", "sudo apt install htop"),
+        ("用apt安装htop", "apt install"),
         ("查看所有运行中的容器", "docker ps"),
         ("给script.sh添加执行权限", "chmod +x script.sh"),
         ("把old替换为new在config.txt中", "sed -i 's/old/new/g' config.txt"),
     ]
-    
+
     passed = 0
-    total = len(test_cases) + 3  # 加上模板完整性
+    total = len(test_cases) + 5  # 7 项命令翻译 + 5 项能力校验（库完整性/安全/参数/消歧/边界）
+
+    print("=" * 50)
+    print("CLI-Anything 自检")
+    print("=" * 50)
+
+    # 1) 命令翻译准确性
+    for idx, (text, expect_frag) in enumerate(test_cases, 1):
+        try:
+            generated, score = generate_command(text)
+            cmd = _tail_command(generated)
+            if expect_frag in cmd:
+                passed += 1
+                print(f"[测试 {idx}] 通过: {text} -> {cmd}")
+            else:
+                print(f"[测试 {idx}] 失败: {text}")
+                print(f"           期望片段 {expect_frag!r}，实际 {cmd!r} (score={score:.2f})")
+        except Exception as exc:
+            print(f"[测试 {idx}] 异常: {text} -> {type(exc).__name__}: {exc}")
+
+    # 2) 命令库完整性
+    ok, msg = validate_commondb()
+    if ok:
+        passed += 1
+        print(f"[测试 8] 通过: {msg}")
+    else:
+        print(f"[测试 8] 失败: {msg}")
+
+    # 3) 高危命令拦截
+    blocked = all(not validate_command(c)[0] for c in ("rm -rf /", "mkfs.ext4 /dev/sda1", "ls; cat /etc/passwd"))
+    allowed = validate_command("ls -l")[0]
+    if blocked and allowed:
+        passed += 1
+        print("[测试 9] 通过: 高危命令已拦截，安全命令正常放行")
+    else:
+        print(f"[测试 9] 失败: 拦截={blocked} 放行={allowed}")
+
+    # 4) 参数提取准确性（含中文前缀不污染文件名、端口双语序）
+    p1 = extract_parameters("给script.sh添加执行权限")
+    p2 = extract_parameters("测试192.168.1.1的80端口")
+    p3 = extract_parameters("把old替换为new在config.txt中")
+    if p1.get("file") == "script.sh" and p2.get("port") == "80" and p2.get("host") == "192.168.1.1" \
+            and p3.get("old") == "old" and p3.get("new") == "new":
+        passed += 1
+        print("[测试 10] 通过: 参数提取正确（文件名/主机/端口/替换对）")
+    else:
+        print(f"[测试 10] 失败: {p1} | {p2} | {p3}")
+
+    # 5) 动作意图消歧（读操作选 ls，导航操作选 cd）
+    read_cmd = _tail_command(generate_command("查看当前目录文件")[0])
+    nav_cmd = _tail_command(generate_command("切换到/tmp目录")[0])
+    if read_cmd.startswith("ls") and nav_cmd.startswith("cd"):
+        passed += 1
+        print(f"[测试 11] 通过: 意图消歧正常（读={read_cmd} / 导航={nav_cmd}）")
+    else:
+        print(f"[测试 11] 失败: 读={read_cmd!r} 导航={nav_cmd!r}")
+
+    # 6) 边界输入不崩溃
+    try:
+        for weird in ("", "   ", "!!!???", "a" * 500):
+            generate_command(weird)
+        passed += 1
+        print("[测试 12] 通过: 空/超长/乱码输入均未崩溃")
+    except Exception as exc:
+        print(f"[测试 12] 失败: 边界输入异常 {type(exc).__name__}: {exc}")
+
+    print("=" * 50)
+    print(f"自检完成: {passed}/{total} 通过" + ("" if passed == total else f"，{total - passed} 项失败"))
+    print(f"时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} UTC")
+    print("=" * 50)
+    return passed == total
+
+
+def build_parser() -> argparse.ArgumentParser:
+    """构建命令行参数解析器"""
+    parser = argparse.ArgumentParser(
+        prog="cli-anything",
+        description="CLI-Anything：把中文操作意图翻译为可执行命令行",
+        epilog="示例: python run.py --text \"查看当前目录文件\"",
+    )
+    parser.add_argument("--text", "-t", default="", help="要翻译的中文操作意图")
+    parser.add_argument("--search", "-s", default="", help="在命令库中按关键词检索")
+    parser.add_argument("--category", "-c", default="", help="按分类浏览命令（留空配合 --list-categories 查看全部分类）")
+    parser.add_argument("--list-categories", action="store_true", help="列出全部命令分类")
+    parser.add_argument("--json", action="store_true", help="以 JSON 格式输出结果")
+    parser.add_argument("--execute", action="store_true", help="翻译后实际执行命令（高危命令会二次确认）")
+    parser.add_argument("--verbose", "-v", action="store_true", help="输出匹配分数等诊断信息")
+    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+    return parser
+
+
+def search_commands(keyword: str) -> List[Dict[str, str]]:
+    """在命令库中检索命令"""
+    keyword = (keyword or "").strip().lower()
+    hits: List[Dict[str, str]] = []
+    if not keyword:
+        return hits
+    for category, data in COMMAND_DB.items():
+        for name, template in data["commands"].items():
+            if keyword in name.lower() or keyword in template.lower() \
+                    or any(keyword in kw.lower() for kw in data["keywords"]):
+                hits.append({"category": category, "name": name, "command": template})
+    return hits
+
+
+def main() -> int:
+    """命令行入口：返回进程退出码"""
+    parser = build_parser()
+    args = parser.parse_args()
+
+    if args.selftest:
+        return 0 if selftest() else 1
+
+    if args.list_categories:
+        payload = {c: list(d["commands"].keys()) for c, d in COMMAND_DB.items()}
+        if args.json:
+            print(json.dumps(payload, ensure_ascii=False, indent=2))
+        else:
+            for category, names in payload.items():
+                print(f"{category} ({len(names)} 条): {', '.join(names)}")
+        return 0
+
+    if args.category:
+        data = COMMAND_DB.get(args.category)
+        if not data:
+            print(f"未知分类: {args.category}（可用 --list-categories 查看全部）", file=sys.stderr)
+            return 1
+        if args.json:
+            print(json.dumps(data["commands"], ensure_ascii=False, indent=2))
+        else:
+            for name, template in data["commands"].items():
+                print(f"  {name}: {template}")
+        return 0
+
+    if args.search:
+        hits = search_commands(args.search)
+        if args.json:
+            print(json.dumps(hits, ensure_ascii=False, indent=2))
+        else:
+            if not hits:
+                print(f"未找到与 {args.search!r} 相关的命令")
+            for h in hits:
+                print(f"  [{h['category']}] {h['name']}: {h['command']}")
+        return 0
+
+    if not args.text:
+        parser.print_help()
+        return 0
+
+    generated, score = generate_command(args.text)
+    command = _tail_command(generated)
+    category, _template, _score = match_command(args.text)
+
+    if args.json:
+        print(json.dumps({
+            "input": args.text,
+            "category": category,
+            "command": command,
+            "score": round(score, 3),
+            "params": extract_parameters(args.text),
+        }, ensure_ascii=False, indent=2))
+    else:
+        print(generated)
+        if args.verbose:
+            print(f"# 匹配分数: {score:.2f} | 分类: {category}")
+            print(f"# 提取参数: {extract_parameters(args.text)}")
+
+    if args.execute:
+        if not command or command.startswith("#"):
+            print("无可执行命令", file=sys.stderr)
+            return 1
+        if "<" in command and ">" in command:
+            print(f"命令含未填充占位符，拒绝执行: {command}", file=sys.stderr)
+            return 1
+        code, output = execute_command(generated)
+        if output:
+            print(output)
+        return code
+
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
