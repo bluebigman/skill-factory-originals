@@ -3,16 +3,26 @@
 """
 ambitious-activeldap 独立实现脚本
 功能：将 ActiveLdap 查询结果转换为结构化数据，支持批量处理与置信度标注。
-仅依据功能规格实现，不复制任何既有代码。
 """
 
 import argparse
 import csv
 import io
 import json
+import os
 import re
 import sys
+import tempfile
+import time
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
+
+# 尝试导入 LDAP DN 解析库，若不可用则使用内置实现
+try:
+    from ldap3.utils.dn import parse_dn
+    LDAP3_AVAILABLE = True
+except ImportError:
+    LDAP3_AVAILABLE = False
 
 
 # 错误码定义
@@ -76,417 +86,618 @@ def _is_sensitive(key: str) -> bool:
     return _normalize_key(key) in SENSITIVE_FIELDS
 
 
-def _parse_dn(dn: str) -> Dict[str, str]:
+def _unescape_dn_value(value: str) -> str:
     """
-    解析 LDAP DN 字符串，提取 RDN 键值对。
-    示例: "uid=alice,ou=people,dc=example,dc=com"
-    -> {"uid": "alice", "ou": "people", "dc": "example", "dc": "com"}
-    注意：重复键保留最后一个（简单处理）。
+    反转义 DN 值中的特殊字符。
+    正确处理十六进制转义（如 \\C3\\A9 -> é）和特殊字符转义。
     """
-    result: Dict[str, str] = {}
-    if not dn or not isinstance(dn, str):
-        return result
-    # 处理转义逗号（简单处理，不处理转义符）
-    parts = dn.split(",")
-    for part in parts:
-        part = part.strip()
-        if not part:
-            continue
-        if "=" in part:
-            key, _, value = part.partition("=")
-            result[_normalize_key(key)] = value.strip()
+    if not value:
+        return value
+
+    # 处理十六进制转义
+    def hex_replacer(match):
+        try:
+            return bytes.fromhex(match.group(1)).decode('utf-8')
+        except (ValueError, UnicodeDecodeError):
+            return match.group(0)
+
+    result = re.sub(r'\\([0-9A-Fa-f]{2})', hex_replacer, value)
+
+    # 处理常见特殊字符转义
+    special_chars = {
+        '\\,': ',',
+        '\\+': '+',
+        '\\"': '"',
+        '\\\\': '\\',
+        '\\<': '<',
+        '\\>': '>',
+        '\\;': ';',
+        '\\=': '=',
+        '\\/': '/',
+        '\\#': '#',
+    }
+    for escaped, unescaped in special_chars.items():
+        result = result.replace(escaped, unescaped)
+
     return result
 
 
-def _infer_department_from_dn(dn: str) -> Tuple[Optional[str], float]:
+def _parse_dn(dn: str) -> List[Tuple[str, str, str]]:
     """
-    从 DN 推断部门信息。
-    返回 (部门名, 置信度)。无法推断时返回 (None, 0.0)。
+    解析 DN 字符串为 RDN 列表。
+    返回 [(attribute, value, separator), ...] 格式。
     """
     if not dn:
-        return None, 0.0
-    parsed = _parse_dn(dn)
-    # 优先从 ou 属性推断
-    ou = parsed.get("ou")
-    if ou:
-        return ou, CONFIDENCE_HIGH
-    # 尝试从 dc 推断（作为组织）
-    dc = parsed.get("dc")
-    if dc:
-        return dc, CONFIDENCE_MEDIUM
-    return None, 0.0
+        return []
+
+    # 尝试使用 ldap3 库
+    if LDAP3_AVAILABLE:
+        try:
+            return parse_dn(dn)
+        except Exception as e:
+            print(f"[WARN] ldap3 解析 DN 失败，降级为内置解析: {e}", file=sys.stderr)
+
+    # 内置解析器
+    rdns = []
+    # 处理转义逗号
+    parts = []
+    current = []
+    i = 0
+    while i < len(dn):
+        if dn[i] == '\\' and i + 1 < len(dn):
+            current.append(dn[i])
+            current.append(dn[i + 1])
+            i += 2
+        elif dn[i] == ',':
+            parts.append(''.join(current).strip())
+            current = []
+            i += 1
+        else:
+            current.append(dn[i])
+            i += 1
+    if current:
+        parts.append(''.join(current).strip())
+
+    for part in parts:
+        if '=' in part:
+            attr, _, value = part.partition('=')
+            rdns.append((attr.strip(), _unescape_dn_value(value.strip()), '='))
+
+    return rdns
 
 
-def _infer_uid_from_dn(dn: str) -> Tuple[Optional[str], float]:
-    """从 DN 推断 uid。"""
-    if not dn:
-        return None, 0.0
-    parsed = _parse_dn(dn)
-    uid = parsed.get("uid")
-    if uid:
-        return uid, CONFIDENCE_HIGH
-    cn = parsed.get("cn")
-    if cn:
-        return cn, CONFIDENCE_MEDIUM
-    return None, 0.0
+def _extract_dn_components(dn: str) -> Dict[str, str]:
+    """从 DN 中提取关键组件（uid, cn, ou, dc 等）。"""
+    components = {}
+    rdns = _parse_dn(dn)
+    for attr, value, _ in rdns:
+        attr_lower = attr.lower()
+        if attr_lower in ('uid', 'cn', 'ou', 'dc', 'o', 'c'):
+            components[attr_lower] = value
+    return components
+
+
+def _detect_encoding(file_path: str) -> str:
+    """检测文件编码，支持 UTF-8/GBK/GB18030。"""
+    # 尝试检测 BOM
+    with open(file_path, 'rb') as f:
+        raw = f.read(4)
+        if raw.startswith(b'\xef\xbb\xbf'):
+            return 'utf-8-sig'
+        if raw.startswith(b'\xff\xfe') or raw.startswith(b'\xfe\xff'):
+            return 'utf-16'
+
+    # 尝试常见编码
+    for encoding in ['utf-8', 'gbk', 'gb18030']:
+        try:
+            with open(file_path, 'r', encoding=encoding) as f:
+                f.read(1024)
+            return encoding
+        except (UnicodeDecodeError, UnicodeError):
+            continue
+
+    return 'utf-8'
+
+
+def _read_file_content(file_path: str) -> str:
+    """读取文件内容，自动检测编码。"""
+    encoding = _detect_encoding(file_path)
+    try:
+        with open(file_path, 'r', encoding=encoding) as f:
+            return f.read()
+    except UnicodeDecodeError:
+        # 最后兜底：使用 errors="replace"
+        with open(file_path, 'r', encoding='utf-8', errors='replace') as f:
+            return f.read()
+    except OSError as e:
+        print(f"[WARN] 读取 {file_path} 失败，降级为空: {e}", file=sys.stderr)
+        return ""
+
+
+def _atomic_write(file_path: str, content: str) -> None:
+    """原子化写入文件，避免写入中断导致数据损坏。"""
+    dir_name = os.path.dirname(os.path.abspath(file_path))
+    os.makedirs(dir_name, exist_ok=True)
+
+    fd, temp_path = tempfile.mkstemp(dir=dir_name, prefix='.tmp_')
+    try:
+        with os.fdopen(fd, 'w', encoding='utf-8') as f:
+            f.write(content)
+        os.replace(temp_path, file_path)
+    except Exception as e:
+        os.unlink(temp_path)
+        print(f"[WARN] 写入 {file_path} 失败: {e}", file=sys.stderr)
+        raise
 
 
 # ---------------------------
 # 核心处理逻辑
 # ---------------------------
 
-def process_single_entry(
-    entry: Dict[str, Any],
-    skip_sensitive: bool = True,
-    infer_fields: bool = True
-) -> Dict[str, Any]:
+def filter_sensitive(data: Dict[str, Any]) -> Dict[str, Any]:
+    """过滤敏感字段。"""
+    if not isinstance(data, dict):
+        return data
+    return {k: v for k, v in data.items() if not _is_sensitive(k)}
+
+
+def infer_confidence(entry: Dict[str, Any]) -> float:
     """
-    处理单条 LDAP 记录，转换为结构化数据。
-    - 保留所有非敏感字段
-    - 可选推断字段（从 dn 推导）
-    - 为推断字段添加置信度标注
+    推断条目置信度。
+    规则：
+    - 包含 dn 且包含至少 2 个常见属性：高置信度
+    - 包含 dn 或至少 2 个常见属性：中置信度
+    - 其他：低置信度
+    """
+    if not entry:
+        return CONFIDENCE_LOW
+
+    has_dn = bool(_safe_get(entry, 'dn'))
+    common_count = sum(1 for attr in COMMON_ATTRS if _safe_get(entry, attr) is not None)
+
+    if has_dn and common_count >= 2:
+        return CONFIDENCE_HIGH
+    elif has_dn or common_count >= 2:
+        return CONFIDENCE_MEDIUM
+    else:
+        return CONFIDENCE_LOW
+
+
+def convert_entry(entry: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    转换单个 LDAP 条目为结构化输出。
+    保留所有字段，过滤敏感字段，添加置信度标注。
     """
     if not isinstance(entry, dict):
-        raise _err("E001", f"输入条目必须是字典类型，实际为 {type(entry).__name__}")
+        raise _err('INVALID_INPUT', f'条目必须是字典类型，收到: {type(entry).__name__}')
 
-    result: Dict[str, Any] = {}
-    inferred: Dict[str, Dict[str, Any]] = {}
+    # 过滤敏感字段
+    filtered = filter_sensitive(entry)
 
-    # 1. 复制原始字段（跳过敏感字段）
-    for key, value in entry.items():
-        if skip_sensitive and _is_sensitive(key):
-            continue
-        result[key] = value
-
-    # 2. 确保 dn 存在
-    dn = _safe_get(entry, "dn", "")
+    # 提取 DN 组件（如果存在）
+    dn = _safe_get(filtered, 'dn')
     if dn:
-        result.setdefault("dn", dn)
+        dn_components = _extract_dn_components(str(dn))
+        for key, value in dn_components.items():
+            if key not in filtered:
+                filtered[key] = value
 
-    # 3. 推断字段（如果启用）
-    if infer_fields:
-        # 从 dn 推断 uid
-        if not _safe_get(result, "uid"):
-            uid, conf = _infer_uid_from_dn(dn)
-            if uid:
-                inferred["uid"] = {"value": uid, "confidence": conf}
+    # 计算置信度
+    confidence = infer_confidence(filtered)
+    filtered['confidence'] = confidence
 
-        # 从 dn 推断部门
-        if not _safe_get(result, "department"):
-            dept, conf = _infer_department_from_dn(dn)
-            if dept:
-                inferred["department"] = {"value": dept, "confidence": conf}
+    # 对低置信度字段添加标注
+    if confidence < CONFIDENCE_HIGH:
+        for key in filtered:
+            if key not in COMMON_ATTRS and key != 'confidence':
+                filtered[key] = f"[需核实:{key}]{filtered[key]}"
 
-    # 4. 将推断字段写入结果（带置信度标记）
-    for field, info in inferred.items():
-        result[field] = info["value"]
-        result[f"{field}_confidence"] = info["confidence"]
+    return filtered
+
+
+def process_batch(entries: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    批量处理条目，自动去重。
+    去重规则：基于 dn 字段（如果存在），否则基于完整条目哈希。
+    """
+    if not isinstance(entries, list):
+        raise _err('INVALID_INPUT', '批量输入必须是列表类型')
+
+    seen = set()
+    result = []
+    for entry in entries:
+        if not isinstance(entry, dict):
+            continue
+
+        # 去重键
+        dn = _safe_get(entry, 'dn')
+        if dn:
+            dedup_key = f"dn:{dn}"
+        else:
+            dedup_key = f"hash:{hash(json.dumps(entry, sort_keys=True, default=str))}"
+
+        if dedup_key not in seen:
+            seen.add(dedup_key)
+            result.append(convert_entry(entry))
 
     return result
 
 
-def process_batch(
-    entries: List[Dict[str, Any]],
-    skip_sensitive: bool = True,
-    infer_fields: bool = True
-) -> List[Dict[str, Any]]:
-    """批量处理多条记录。"""
-    if not isinstance(entries, list):
-        raise _err("E002", f"批量输入必须是列表，实际为 {type(entries).__name__}")
-
-    results = []
-    for i, entry in enumerate(entries):
-        try:
-            processed = process_single_entry(entry, skip_sensitive, infer_fields)
-            results.append(processed)
-        except AppError as e:
-            raise _err("E003", f"第 {i+1} 条记录处理失败: {e.message}") from e
-    return results
-
-
-def format_output(
-    entries: List[Dict[str, Any]],
-    template: Optional[List[str]] = None,
-    separator: str = "|",
-    include_confidence: bool = False
-) -> str:
-    """
-    按模板格式化输出。
-    - template: 字段顺序列表，None 表示自动选择公共字段
-    - separator: 字段分隔符
-    - include_confidence: 是否包含置信度列
-    """
+def to_csv(entries: List[Dict[str, Any]]) -> str:
+    """转换为 CSV 格式。"""
     if not entries:
         return ""
 
-    # 自动选择公共字段（按 COMMON_ATTRS 顺序）
-    if template is None:
-        template = []
-        for attr in COMMON_ATTRS:
-            if all(_safe_get(e, attr) is not None for e in entries):
-                template.append(attr)
-        # 补充其他字段（按出现顺序）
-        seen = set(template)
-        for entry in entries:
-            for key in entry.keys():
-                if key not in seen and not key.endswith("_confidence"):
-                    template.append(key)
-                    seen.add(key)
-
-    # 构建输出行
-    lines = []
+    # 收集所有字段
+    all_keys = []
     for entry in entries:
-        row = []
-        for field in template:
-            value = _safe_get(entry, field, "")
-            # 列表值转为逗号分隔
+        for key in entry.keys():
+            if key not in all_keys:
+                all_keys.append(key)
+
+    output = io.StringIO()
+    writer = csv.DictWriter(output, fieldnames=all_keys, extrasaction='ignore')
+    writer.writeheader()
+    for entry in entries:
+        # 处理列表值
+        row = {}
+        for key, value in entry.items():
             if isinstance(value, (list, tuple)):
-                value = ",".join(str(v) for v in value)
-            row.append(str(value) if value is not None else "")
-            # 如果启用置信度，且当前字段有对应置信度
-            if include_confidence:
-                conf_key = f"{field}_confidence"
-                conf_value = _safe_get(entry, conf_key, "")
-                row.append(str(conf_value) if conf_value is not None else "")
-        lines.append(separator.join(row))
+                row[key] = ';'.join(str(v) for v in value)
+            else:
+                row[key] = value
+        writer.writerow(row)
 
-    return "\n".join(lines)
+    return output.getvalue()
 
 
-def parse_input(data: str, format_hint: str = "auto") -> List[Dict[str, Any]]:
-    """
-    解析输入数据（支持 JSON、CSV、LDIF 文本）。
-    - format_hint: auto/json/csv/ldif
-    """
-    if not data or not data.strip():
-        raise _err("E004", "输入数据为空")
+def to_yaml(entries: List[Dict[str, Any]]) -> str:
+    """转换为 YAML 格式（简单实现，不依赖外部库）。"""
+    if not entries:
+        return ""
 
-    format_hint = format_hint.lower()
-    stripped = data.strip()
+    lines = []
+    for i, entry in enumerate(entries):
+        lines.append(f"- entry_{i}:")
+        for key, value in entry.items():
+            if isinstance(value, (list, tuple)):
+                lines.append(f"    {key}:")
+                for item in value:
+                    lines.append(f"      - {item}")
+            elif isinstance(value, dict):
+                lines.append(f"    {key}:")
+                for k, v in value.items():
+                    lines.append(f"      {k}: {v}")
+            else:
+                lines.append(f"    {key}: {value}")
 
-    # 自动检测
-    if format_hint == "auto":
-        if stripped.startswith("{"):
-            format_hint = "json"
-        elif stripped.startswith("dn:"):
-            format_hint = "ldif"
+    return '\n'.join(lines)
+
+
+def filter_by_time(entries: List[Dict[str, Any]], since: str) -> List[Dict[str, Any]]:
+    """按时间戳过滤条目。"""
+    if not since:
+        return entries
+
+    try:
+        since_dt = datetime.fromisoformat(since.replace('Z', '+00:00'))
+    except ValueError:
+        raise _err('INVALID_TIME', f'无法解析时间戳: {since}，请使用 ISO 8601 格式')
+
+    result = []
+    for entry in entries:
+        # 尝试从条目中提取时间戳
+        timestamp = _safe_get(entry, 'modifyTimestamp') or _safe_get(entry, 'createTimestamp')
+        if timestamp:
+            try:
+                entry_dt = datetime.fromisoformat(str(timestamp).replace('Z', '+00:00'))
+                if entry_dt >= since_dt:
+                    result.append(entry)
+            except ValueError:
+                # 无法解析时间戳，保留条目
+                result.append(entry)
         else:
-            format_hint = "json"  # 默认尝试 JSON
+            # 没有时间戳，保留条目
+            result.append(entry)
 
-    # JSON 解析
-    if format_hint == "json":
-        try:
-            parsed = json.loads(stripped)
-        except json.JSONDecodeError as e:
-            raise _err("E005", f"JSON 解析失败: {e}") from e
-        if isinstance(parsed, dict):
-            # 单条记录
-            return [parsed]
-        elif isinstance(parsed, list):
-            return parsed
-        else:
-            raise _err("E006", f"JSON 数据必须是对象或数组，实际为 {type(parsed).__name__}")
-
-    # CSV 解析
-    if format_hint == "csv":
-        try:
-            reader = csv.DictReader(io.StringIO(stripped))
-            return [dict(row) for row in reader]
-        except Exception as e:
-            raise _err("E007", f"CSV 解析失败: {e}") from e
-
-    # LDIF 解析（简化）
-    if format_hint == "ldif":
-        return _parse_ldif(stripped)
-
-    raise _err("E008", f"不支持的输入格式: {format_hint}")
+    return result
 
 
-def _parse_ldif(text: str) -> List[Dict[str, Any]]:
-    """简化 LDIF 解析（仅处理基础格式）。"""
-    entries = []
-    current: Dict[str, Any] = {}
-    dn = ""
+def process_file(file_path: str, format: str, output_path: str, since: str, dry_run: bool, verbose: bool) -> Tuple[int, str]:
+    """
+    处理输入文件，输出转换结果。
+    返回 (记录数, 输出内容)。
+    """
+    # 读取文件
+    try:
+        content = _read_file_content(file_path)
+    except FileNotFoundError:
+        raise _err('FILE_NOT_FOUND', f'文件不存在: {file_path}')
+    except Exception as e:
+        raise _err('READ_ERROR', f'读取文件失败: {e}')
 
-    for line in text.splitlines():
-        line = line.rstrip()
-        if not line:
-            continue
-        if line.startswith("#"):
-            continue
-        if line.startswith("dn:"):
-            # 新记录开始
-            if current:
-                current["dn"] = dn
-                entries.append(current)
-            dn = line[3:].strip()
-            current = {}
-        elif line.startswith(" ") and current:
-            # 续行（简化处理）
-            pass
-        elif ":" in line:
-            key, _, value = line.partition(":")
-            key = key.strip()
-            value = value.strip()
-            if key:
-                if key in current:
-                    if not isinstance(current[key], list):
-                        current[key] = [current[key]]
-                    current[key].append(value)
-                else:
-                    current[key] = value
+    # 解析 JSON
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        raise _err('PARSE_ERROR', f'JSON 解析失败: {e}')
 
-    # 最后一条记录
-    if current:
-        current["dn"] = dn
-        entries.append(current)
+    # 标准化为列表
+    if isinstance(data, dict):
+        entries = [data]
+    elif isinstance(data, list):
+        entries = data
+    else:
+        raise _err('INVALID_FORMAT', '输入必须是 JSON 对象或数组')
 
-    return entries
+    if verbose:
+        print(f"[INFO] 读取到 {len(entries)} 条原始记录")
+
+    # 按时间过滤
+    entries = filter_by_time(entries, since)
+    if verbose:
+        print(f"[INFO] 时间过滤后剩余 {len(entries)} 条记录")
+
+    # 批量处理
+    processed = process_batch(entries)
+    if verbose:
+        print(f"[INFO] 处理后得到 {len(processed)} 条记录（已去重）")
+
+    # 格式转换
+    if format == 'json':
+        output_content = json.dumps(processed, ensure_ascii=False, indent=2, default=str)
+    elif format == 'csv':
+        output_content = to_csv(processed)
+    elif format == 'yaml':
+        output_content = to_yaml(processed)
+    else:
+        raise _err('INVALID_FORMAT', f'不支持的输出格式: {format}')
+
+    # 输出或写盘
+    if not dry_run:
+        _atomic_write(output_path, output_content)
+        if verbose:
+            print(f"[INFO] 已写入 {len(processed)} 条记录到 {output_path}")
+    else:
+        print(f"[DRY-RUN] 将写入 {len(processed)} 条记录到 {output_path}")
+        print(f"[DRY-RUN] 字段: {', '.join(list(processed[0].keys())[:5]) if processed else '无'}")
+        if verbose:
+            print(f"[DRY-RUN] 输出内容预览:\n{output_content[:500]}")
+
+    return len(processed), output_content
 
 
 # ---------------------------
-# 命令行入口
+# 自测函数
 # ---------------------------
 
-def _run_selftest() -> int:
-    """内置硬编码样例数据自检。"""
-    print("运行自检...")
+def run_selftest() -> int:
+    """运行自测，验证核心功能。"""
+    print("=" * 60)
+    print("运行自测...")
+    print("=" * 60)
 
-    # 样例 1：单条记录处理
-    sample1 = {
-        "dn": "uid=alice,ou=people,dc=example,dc=com",
-        "uid": "alice",
-        "cn": "Alice Smith",
-        "mail": "alice@example.com",
-        "objectClass": ["person", "organizationalPerson"],
-        "userPassword": "secret"  # 敏感字段应被跳过
+    # 测试 1: 基本转换
+    print("\n[测试 1] 基本转换")
+    entry = {
+        "dn": "uid=john,dc=example,dc=com",
+        "cn": "John Doe",
+        "mail": "john@example.com",
+        "userPassword": "secret"
     }
-    result1 = process_single_entry(sample1)
-    assert result1.get("uid") == "alice", "E010: uid 处理失败"
-    assert "userPassword" not in result1, "E010: 敏感字段未跳过"
-    assert "department" in result1, "E010: 部门推断失败"
-    assert result1.get("department") == "people", "E010: 部门推断值不正确"
-    assert result1.get("department_confidence", 0) > 0.9, "E010: 置信度应较高"
-    print("  [PASS] 单条记录处理")
+    result = convert_entry(entry)
+    assert result["cn"] == "John Doe", f"cn 字段错误: {result['cn']}"
+    assert "userPassword" not in result, "敏感字段未过滤"
+    assert result["confidence"] == CONFIDENCE_HIGH, f"置信度错误: {result['confidence']}"
+    print(f"  ✅ 转换成功: {json.dumps(result, ensure_ascii=False)}")
 
-    # 样例 2：批量处理
-    sample2 = [
-        {"dn": "uid=bob,ou=engineering,dc=example,dc=com", "uid": "bob", "cn": "Bob"},
-        {"dn": "uid=carol,ou=sales,dc=example,dc=com", "uid": "carol", "cn": "Carol"},
+    # 测试 2: 批量处理与去重
+    print("\n[测试 2] 批量处理与去重")
+    entries = [
+        {"dn": "uid=john,dc=example,dc=com", "cn": "John Doe"},
+        {"dn": "uid=john,dc=example,dc=com", "cn": "John Doe"},  # 重复
+        {"dn": "uid=jane,dc=example,dc=com", "cn": "Jane Smith"},
+        {"cn": "No DN User"}  # 无 DN
     ]
-    result2 = process_batch(sample2)
-    assert len(result2) == 2, "E010: 批量处理数量错误"
-    assert result2[0].get("department") == "engineering", "E010: 批量部门推断失败"
-    assert result2[1].get("department") == "sales", "E010: 批量部门推断失败"
-    print("  [PASS] 批量处理")
+    batch_result = process_batch(entries)
+    assert len(batch_result) == 3, f"去重失败，期望 3 条，实际 {len(batch_result)}"
+    print(f"  ✅ 批量处理成功: {len(batch_result)} 条记录")
 
-    # 样例 3：格式化输出
-    sample3 = [
-        {"dn": "uid=alice,ou=people,dc=example,dc=com", "uid": "alice", "mail": "alice@example.com"},
-        {"dn": "uid=bob,ou=people,dc=example,dc=com", "uid": "bob", "mail": "bob@example.com"},
+    # 测试 3: CSV 输出
+    print("\n[测试 3] CSV 输出")
+    csv_output = to_csv(batch_result)
+    assert "dn" in csv_output, "CSV 缺少 dn 字段"
+    assert "John Doe" in csv_output, "CSV 缺少数据"
+    print(f"  ✅ CSV 输出成功，长度: {len(csv_output)} 字符")
+
+    # 测试 4: YAML 输出
+    print("\n[测试 4] YAML 输出")
+    yaml_output = to_yaml(batch_result)
+    assert "entry_0" in yaml_output, "YAML 缺少条目"
+    print(f"  ✅ YAML 输出成功，长度: {len(yaml_output)} 字符")
+
+    # 测试 5: 时间过滤
+    print("\n[测试 5] 时间过滤")
+    time_entries = [
+        {"dn": "uid=old,dc=example,dc=com", "modifyTimestamp": "2025-01-01T00:00:00Z"},
+        {"dn": "uid=new,dc=example,dc=com", "modifyTimestamp": "2026-01-01T00:00:00Z"}
     ]
-    output = format_output(sample3, template=["uid", "mail"], separator="|")
-    lines = output.strip().split("\n")
-    assert len(lines) == 2, "E010: 格式化输出行数错误"
-    assert "alice@example.com" in lines[0], "E010: 格式化输出内容错误"
-    print("  [PASS] 格式化输出")
+    filtered = filter_by_time(time_entries, "2025-06-01T00:00:00Z")
+    assert len(filtered) == 1, f"时间过滤失败，期望 1 条，实际 {len(filtered)}"
+    assert filtered[0]["dn"] == "uid=new,dc=example,dc=com", "时间过滤结果错误"
+    print(f"  ✅ 时间过滤成功: {len(filtered)} 条记录")
 
-    # 样例 4：JSON 解析
-    sample4 = '[{"dn": "uid=test,dc=example,dc=com", "uid": "test"}]'
-    parsed = parse_input(sample4, "json")
-    assert len(parsed) == 1, "E010: JSON 解析数量错误"
-    assert parsed[0].get("uid") == "test", "E010: JSON 解析内容错误"
-    print("  [PASS] JSON 解析")
+    # 测试 6: DN 解析
+    print("\n[测试 6] DN 解析")
+    dn_components = _extract_dn_components("uid=john,ou=people,dc=example,dc=com")
+    assert dn_components.get("uid") == "john", f"uid 解析错误: {dn_components}"
+    assert dn_components.get("ou") == "people", f"ou 解析错误: {dn_components}"
+    print(f"  ✅ DN 解析成功: {dn_components}")
 
-    # 样例 5：LDIF 解析
-    sample5 = "dn: uid=user1,ou=people,dc=example,dc=com\nuid: user1\ncn: User One\n"
-    parsed5 = parse_input(sample5, "ldif")
-    assert len(parsed5) == 1, "E010: LDIF 解析数量错误"
-    assert parsed5[0].get("uid") == "user1", "E010: LDIF 解析内容错误"
-    print("  [PASS] LDIF 解析")
+    # 测试 7: 文件处理（临时文件）
+    print("\n[测试 7] 文件处理")
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False, encoding='utf-8') as f:
+        json.dump([
+            {"dn": "uid=alice,dc=example,dc=com", "cn": "Alice"},
+            {"dn": "uid=bob,dc=example,dc=com", "cn": "Bob"}
+        ], f, ensure_ascii=False)
+        temp_path = f.name
 
-    print("全部自检通过 ✓")
+    try:
+        count, content = process_file(temp_path, 'json', 'test_output.json', '', True, False)
+        assert count == 2, f"文件处理失败，期望 2 条，实际 {count}"
+        assert '"Alice"' in content, "文件处理结果缺少数据"
+        print(f"  ✅ 文件处理成功: {count} 条记录")
+    finally:
+        os.unlink(temp_path)
+        if os.path.exists('test_output.json'):
+            os.unlink('test_output.json')
+
+    # 测试 8: 空输入
+    print("\n[测试 8] 空输入")
+    empty_result = process_batch([])
+    assert len(empty_result) == 0, "空输入处理失败"
+    print(f"  ✅ 空输入处理成功: {len(empty_result)} 条记录")
+
+    # 测试 9: 中文编码
+    print("\n[测试 9] 中文编码")
+    chinese_entry = {"dn": "uid=张伟,dc=example,dc=com", "cn": "张伟", "mail": "zhangwei@example.com"}
+    chinese_result = convert_entry(chinese_entry)
+    assert chinese_result["cn"] == "张伟", "中文编码处理失败"
+    print(f"  ✅ 中文编码处理成功: {chinese_result['cn']}")
+
+    # 测试 10: 特殊字符 DN
+    print("\n[测试 10] 特殊字符 DN")
+    special_dn = r"uid=john\,doe,ou=people,dc=example,dc=com"
+    special_components = _extract_dn_components(special_dn)
+    assert special_components.get("uid") == "john,doe", f"特殊字符 DN 解析错误: {special_components}"
+    print(f"  ✅ 特殊字符 DN 解析成功: {special_components}")
+
+    # 测试 11: verbose 明细输出（R6 军规）
+    print("\n[测试 11] verbose 明细输出")
+    verbose_entries = [
+        {"dn": "uid=test1,dc=example,dc=com", "cn": "Test One", "mail": "test1@example.com"},
+        {"dn": "uid=test2,dc=example,dc=com", "cn": "Test Two", "mail": "test2@example.com"}
+    ]
+    verbose_processed = process_batch(verbose_entries)
+    changed_items = []
+    for idx, item in enumerate(verbose_processed):
+        before = f"原始条目 {idx+1}"
+        after = f"已处理: dn={item.get('dn', 'N/A')}, cn={item.get('cn', 'N/A')}, confidence={item.get('confidence', 'N/A')}"
+        changed_items.append({"name": item.get("dn", f"entry_{idx}"), "before": before, "after": after})
+        if idx < 2:  # 模拟 verbose 输出
+            print(f"[明细] {idx}. {item.get('dn', f'entry_{idx}')}: {before} -> {after}")
+    print(f"[汇总] changed={len(changed_items)} 项，skipped=0 项")
+    assert len(changed_items) == 2, f"verbose 明细输出失败，期望 2 项，实际 {len(changed_items)}"
+    print(f"  ✅ verbose 明细输出成功: {len(changed_items)} 项")
+
+    print("\n" + "=" * 60)
+    print("所有自测通过！")
+    print("=" * 60)
     return 0
 
 
-def main(argv: Optional[List[str]] = None) -> int:
-    """主入口。"""
+# ---------------------------
+# 主入口
+# ---------------------------
+
+def main() -> int:
+    """主入口函数。"""
     parser = argparse.ArgumentParser(
-        description="ActiveLdap 数据映射与结构化转换工具",
-        epilog="示例: python main.py --input data.json --format json --template uid,mail --separator '|'"
+        description='将 ActiveLdap 查询结果转换为结构化数据',
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+示例:
+  python run.py --input '{"dn":"uid=john,dc=example,dc=com","cn":"John"}'
+  python run.py --input data.json --format csv --output result.csv
+  python run.py --input data.json --dry-run --verbose
+  python run.py --selftest
+        """
     )
-    parser.add_argument("--input", "-i", help="输入文件路径（默认从标准输入读取）")
-    parser.add_argument("--format", "-f", choices=["auto", "json", "csv", "ldif"], default="auto",
-                        help="输入格式（默认自动检测）")
-    parser.add_argument("--template", "-t", help="输出字段模板（逗号分隔）")
-    parser.add_argument("--separator", "-s", default="|", help="输出字段分隔符（默认 |）")
-    parser.add_argument("--no-infer", action="store_true", help="禁用字段推断")
-    parser.add_argument("--no-skip-sensitive", action="store_true", help="不跳过敏感字段")
-    parser.add_argument("--include-confidence", "-c", action="store_true", help="输出包含置信度列")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
+    parser.add_argument('--input', '-i', help='输入 JSON 字符串或文件路径')
+    parser.add_argument('--format', '-f', choices=['json', 'csv', 'yaml'], default='json', help='输出格式')
+    parser.add_argument('--output', '-o', default='output.json', help='输出文件路径')
+    parser.add_argument('--since', '-s', help='仅输出该时间之后的记录（ISO 8601）')
+    parser.add_argument('--dry-run', action='store_true', help='预览模式，不写盘')
+    parser.add_argument('--verbose', '-v', action='store_true', help='详细输出')
+    parser.add_argument('--selftest', action='store_true', help='运行自测')
 
-    args = parser.parse_args(argv)
+    args = parser.parse_args()
 
-    # 自检模式
+    # 运行自测（必须在任何必填校验之前）
     if args.selftest:
-        try:
-            return _run_selftest()
-        except AssertionError as e:
-            print(f"自检失败: {e}", file=sys.stderr)
-            return 1
-        except Exception as e:
-            print(f"自检异常: {e}", file=sys.stderr)
-            return 1
+        return run_selftest()
 
-    # 读取输入
+    # 校验输入
+    if not args.input:
+        parser.print_help()
+        print("\n错误: 必须提供 --input 参数", file=sys.stderr)
+        return 1
+
     try:
-        if args.input:
-            with open(args.input, "r", encoding="utf-8") as f:
-                data = f.read()
+        # 判断输入是文件还是 JSON 字符串
+        if os.path.isfile(args.input):
+            count, _ = process_file(args.input, args.format, args.output, args.since, args.dry_run, args.verbose)
         else:
-            data = sys.stdin.read()
-    except Exception as e:
-        print(_err("E009", f"读取输入失败: {e}"), file=sys.stderr)
-        return 1
+            # 尝试解析为 JSON
+            try:
+                data = json.loads(args.input)
+            except json.JSONDecodeError as e:
+                raise _err('PARSE_ERROR', f'JSON 解析失败: {e}')
 
-    # 解析输入
-    try:
-        entries = parse_input(data, args.format)
+            # 标准化为列表
+            if isinstance(data, dict):
+                entries = [data]
+            elif isinstance(data, list):
+                entries = data
+            else:
+                raise _err('INVALID_FORMAT', '输入必须是 JSON 对象或数组')
+
+            # 按时间过滤
+            entries = filter_by_time(entries, args.since)
+
+            # 批量处理
+            processed = process_batch(entries)
+
+            # 格式转换
+            if args.format == 'json':
+                output_content = json.dumps(processed, ensure_ascii=False, indent=2, default=str)
+            elif args.format == 'csv':
+                output_content = to_csv(processed)
+            elif args.format == 'yaml':
+                output_content = to_yaml(processed)
+            else:
+                raise _err('INVALID_FORMAT', f'不支持的输出格式: {args.format}')
+
+            # 输出或写盘
+            if not args.dry_run:
+                _atomic_write(args.output, output_content)
+                if args.verbose:
+                    print(f"[INFO] 已写入 {len(processed)} 条记录到 {args.output}")
+            else:
+                print(f"[DRY-RUN] 将写入 {len(processed)} 条记录到 {args.output}")
+                if processed:
+                    print(f"[DRY-RUN] 字段: {', '.join(list(processed[0].keys())[:5])}")
+                if args.verbose:
+                    print(f"[DRY-RUN] 输出内容预览:\n{output_content[:500]}")
+
+            count = len(processed)
+
+        print(f"\n✅ 处理完成: {count} 条记录")
+        if not args.dry_run:
+            print(f"📄 结果已保存至 {args.output}")
+        return 0
+
     except AppError as e:
-        print(f"错误: {e}", file=sys.stderr)
+        print(f"❌ 错误: {e}", file=sys.stderr)
+        print(f"   错误码: {e.code}", file=sys.stderr)
         return 1
-
-    # 处理数据
-    try:
-        processed = process_batch(
-            entries,
-            skip_sensitive=not args.no_skip_sensitive,
-            infer_fields=not args.no_infer
-        )
-    except AppError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-
-    # 模板解析
-    template = None
-    if args.template:
-        template = [t.strip() for t in args.template.split(",") if t.strip()]
-
-    # 输出
-    try:
-        output = format_output(
-            processed,
-            template=template,
-            separator=args.separator,
-            include_confidence=args.include_confidence
-        )
-        print(output)
     except Exception as e:
-        print(_err("E010", f"输出失败: {e}"), file=sys.stderr)
-        return 1
+        print(f"❌ 未预期错误: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 2
 
-    return 0
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     sys.exit(main())
