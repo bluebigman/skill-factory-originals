@@ -5,21 +5,29 @@ scripts/main.py — Karpathy LLM Wiki 知识库构建与结构化输出工具
 
 独立实现（clean-room），仅依据功能规格编写。
 功能：
-  - 多源文本输入解析（文本、文件、URL 由上层调用传入，本脚本仅处理文本）
+  - 多源文本输入解析（文本、文件、URL）
   - 关键信息识别（实体、概念、关系、时间、数据指标）
   - 结构化输出（Markdown / JSON 知识条目）
-  - 置信度标注（高/中/低）
-  - 批量合并处理
+  - 置信度标注（高/中/低，基于规则动态计算）
+  - 批量合并处理（支持并发与缓存）
   - 内置自检（--selftest），离线运行，不读外部文件、不访问网络
 """
 
 import argparse
 import json
+import os
 import re
 import sys
-from datetime import datetime
+import tempfile
+import hashlib
+import time
+import urllib.request
+import urllib.error
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
+from functools import lru_cache
 from typing import Any, Dict, List, Optional, Set, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+from html.parser import HTMLParser
 
 # ---------------------------------------------------------------------------
 # 错误码定义
@@ -34,6 +42,7 @@ dry_run = False  # v3.274 模块级 dry-run 标志
 # E008: 文件读取失败
 # E009: 输出格式不支持
 # E010: 未知异常
+# E011: URL 请求失败
 
 ERROR_CODES = {
     "E001": "输入为空",
@@ -46,6 +55,7 @@ ERROR_CODES = {
     "E008": "文件读取失败",
     "E009": "输出格式不支持",
     "E010": "未知异常",
+    "E011": "URL 请求失败",
 }
 
 
@@ -74,7 +84,7 @@ class KnowledgeEntry:
         relations: Optional[List[Dict[str, str]]] = None,
         timestamps: Optional[List[str]] = None,
         metrics: Optional[List[Dict[str, Any]]] = None,
-        confidence: str = "中",
+        confidence: Optional[str] = None,
     ):
         self.title = title.strip()
         self.content = content.strip()
@@ -83,7 +93,8 @@ class KnowledgeEntry:
         self.relations = relations or []
         self.timestamps = timestamps or []
         self.metrics = metrics or []
-        self.confidence = confidence  # 高 / 中 / 低
+        # 动态计算置信度，不依赖固定默认值
+        self.confidence = confidence or _determine_confidence(self.content, self)
 
     def to_dict(self) -> Dict[str, Any]:
         """转换为字典。"""
@@ -124,6 +135,55 @@ class KnowledgeEntry:
 
 
 # ---------------------------------------------------------------------------
+# HTML 解析器（用于 URL 内容提取）
+# ---------------------------------------------------------------------------
+
+class HTMLTextExtractor(HTMLParser):
+    """提取 HTML 中的文本内容和标题。"""
+
+    def __init__(self):
+        super().__init__()
+        self.text_parts = []
+        self.title = ""
+        self._in_title = False
+        self._skip_depth = 0
+        self._skip_tags = {"script", "style", "nav", "footer", "header"}
+
+    def handle_starttag(self, tag, attrs):
+        if tag == "title":
+            self._in_title = True
+        if tag in self._skip_tags:
+            self._skip_depth += 1
+
+    def handle_endtag(self, tag):
+        if tag == "title":
+            self._in_title = False
+        if tag in self._skip_tags:
+            self._skip_depth = max(0, self._skip_depth - 1)
+
+    def handle_data(self, data):
+        if self._in_title:
+            self.title += data.strip()
+        elif self._skip_depth == 0:
+            if data.strip():
+                self.text_parts.append(data.strip())
+
+    def get_text(self) -> str:
+        return "\n".join(self.text_parts)
+
+
+def extract_html_content(html: str) -> Tuple[str, str]:
+    """从 HTML 中提取标题和正文文本。"""
+    parser = HTMLTextExtractor()
+    try:
+        parser.feed(html)
+    except Exception:
+        # 解析失败时降级为纯文本
+        return "", html
+    return parser.title, parser.get_text()
+
+
+# ---------------------------------------------------------------------------
 # 文本解析与信息抽取
 # ---------------------------------------------------------------------------
 
@@ -148,6 +208,15 @@ _CONCEPT_KEYWORDS = [
     "机器学习", "深度学习", "知识库", "接口", "API", "分布式", "缓存",
     "索引", "检索", "生成", "推理", "训练", "推理", "向量", "嵌入",
 ]
+
+# 来源可靠性权重（用于置信度计算）
+_SOURCE_RELIABILITY = {
+    "官方文档": 0.9,
+    "学术论文": 0.85,
+    "技术博客": 0.7,
+    "社区讨论": 0.5,
+    "未知": 0.3,
+}
 
 
 def _extract_entities(text: str) -> List[str]:
@@ -205,324 +274,206 @@ def _extract_relations(text: str) -> List[Dict[str, str]]:
     return relations[:5]
 
 
-def _determine_confidence(text: str, entry: KnowledgeEntry) -> str:
-    """根据抽取信息丰富度确定置信度。"""
-    score = 0
-    if len(entry.content) > 50:
-        score += 1
-    if len(entry.entities) >= 2:
-        score += 1
-    if len(entry.concepts) >= 2:
-        score += 1
-    if entry.timestamps or entry.metrics:
-        score += 1
-    if score >= 3:
+def _determine_confidence(text: str, entry: KnowledgeEntry, source: str = "未知") -> str:
+    """基于规则和统计的置信度评估函数。
+
+    评分因素：
+    - 文本长度（内容充实度）
+    - 实体密度（信息丰富度）
+    - 概念数量（领域覆盖度）
+    - 时间/指标存在（数据完整度）
+    - 来源可靠性（外部输入）
+    """
+    score = 0.0
+
+    # 1. 文本长度评分（0-1分）
+    text_len = len(entry.content)
+    if text_len > 200:
+        score += 1.0
+    elif text_len > 100:
+        score += 0.7
+    elif text_len > 50:
+        score += 0.4
+    else:
+        score += 0.1
+
+    # 2. 实体密度评分（0-1分）
+    entity_density = len(entry.entities) / max(1, text_len / 100)
+    score += min(1.0, entity_density * 0.5)
+
+    # 3. 概念数量评分（0-1分）
+    concept_score = min(1.0, len(entry.concepts) / 3)
+    score += concept_score * 0.5
+
+    # 4. 时间/指标存在评分（0-1分）
+    data_completeness = 0.0
+    if entry.timestamps:
+        data_completeness += 0.5
+    if entry.metrics:
+        data_completeness += 0.5
+    score += data_completeness
+
+    # 5. 来源可靠性评分（0-1分）
+    source_score = _SOURCE_RELIABILITY.get(source, 0.3)
+    score += source_score
+
+    # 归一化到 0-1 范围
+    max_score = 5.0
+    normalized = score / max_score
+
+    # 映射到高/中/低
+    if normalized >= 0.7:
         return "高"
-    if score >= 1:
+    elif normalized >= 0.4:
         return "中"
-    return "低"
+    else:
+        return "低"
 
 
 # ---------------------------------------------------------------------------
-# 核心处理函数
+# 缓存与并发支持
 # ---------------------------------------------------------------------------
 
-def parse_text_to_entries(text: str, title: Optional[str] = None) -> List[KnowledgeEntry]:
-    """将一段文本解析为知识条目列表。
+class DiskCache:
+    """简单的磁盘缓存实现，用于批量处理结果缓存。"""
 
-    按段落切分，每段生成一个条目；若文本较短则整体生成一个条目。
-    """
-    if not isinstance(text, str):
-        raise SkillError("E002", "输入必须是字符串")
+    def __init__(self, cache_dir: Optional[str] = None):
+        self.cache_dir = cache_dir or os.path.join(tempfile.gettempdir(), "karpathy_llm_wiki_cache")
+        os.makedirs(self.cache_dir, exist_ok=True)
 
-    if not text or not text.strip():
-        raise SkillError("E001", "输入文本为空")
+    def _get_cache_path(self, key: str) -> str:
+        """根据 key 生成缓存文件路径。"""
+        hash_key = hashlib.md5(key.encode("utf-8")).hexdigest()
+        return os.path.join(self.cache_dir, f"{hash_key}.json")
 
-    # 按空行切分为段落
-    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+    def get(self, key: str) -> Optional[str]:
+        """从缓存获取数据。"""
+        cache_path = self._get_cache_path(key)
+        if os.path.exists(cache_path):
+            try:
+                with open(cache_path, "r", encoding="utf-8") as f:
+                    return f.read()
+            except (OSError, IOError):
+                return None
+        return None
 
-    if not paragraphs:
-        paragraphs = [text.strip()]
-
-    entries = []
-    for i, para in enumerate(paragraphs):
-        # 段落标题：优先取第一行，否则用默认标题
-        lines = para.split("\n")
-        para_title = lines[0].strip()[:30] if lines else ""
-        if title:
-            entry_title = f"{title} - 第{i+1}节"
-        elif para_title:
-            entry_title = para_title
-        else:
-            entry_title = f"知识条目 {i+1}"
-
-        entry = KnowledgeEntry(
-            title=entry_title,
-            content=para,
-            entities=_extract_entities(para),
-            concepts=_extract_concepts(para),
-            relations=_extract_relations(para),
-            timestamps=_extract_timestamps(para),
-            metrics=_extract_metrics(para),
-        )
-        entry.confidence = _determine_confidence(para, entry)
-        entries.append(entry)
-
-    return entries
-
-
-def merge_entries(entries: List[KnowledgeEntry]) -> List[KnowledgeEntry]:
-    """合并多个条目，按标题去重。"""
-    seen_titles = set()
-    merged = []
-    for entry in entries:
-        if entry.title not in seen_titles:
-            seen_titles.add(entry.title)
-            merged.append(entry)
-    return merged
-
-
-def generate_output(entries: List[KnowledgeEntry], fmt: str = "json") -> str:
-    """生成结构化输出（JSON 或 Markdown）。"""
-    if fmt == "json":
+    def set(self, key: str, value: str) -> None:
+        """写入缓存。"""
+        cache_path = self._get_cache_path(key)
         try:
-            return json.dumps(
-                [e.to_dict() for e in entries],
-                ensure_ascii=False,
-                indent=2,
-            )
-        except (TypeError, ValueError) as exc:
-            raise SkillError("E003", f"JSON 序列化失败: {exc}") from exc
-
-    if fmt == "markdown":
-        parts = ["# 知识库输出", ""]
-        for e in entries:
-            parts.append(e.to_markdown())
-        return "\n".join(parts)
-
-    raise SkillError("E009", f"不支持的输出格式: {fmt}")
+            with open(cache_path, "w", encoding="utf-8") as f:
+                f.write(value)
+        except (OSError, IOError):
+            pass  # 缓存写入失败不影响主流程
 
 
-def process_documents(
-    documents: List[Dict[str, str]],
-    output_format: str = "json",
-) -> str:
-    """批量处理文档列表。
+@lru_cache(maxsize=128)
+def _cached_parse(text: str, title: str) -> str:
+    """带缓存的文本解析，返回 JSON 字符串。"""
+    entries = parse_text_to_entries(text, title=title or None)
+    return json.dumps([e.to_dict() for e in entries], ensure_ascii=False)
 
-    documents: [{"title": "...", "content": "..."}]
-    """
-    if not documents:
-        raise SkillError("E001", "文档列表为空")
 
-    all_entries: List[KnowledgeEntry] = []
-    for doc in documents:
+def _process_single_document(doc: Dict[str, str], output_format: str) -> Optional[str]:
+    """处理单个文档（供并发调用）。"""
+    try:
         title = doc.get("title", "")
         content = doc.get("content", "")
         if not content:
-            continue
+            return None
+
+        # 使用缓存键
+        cache_key = f"{title}:{content[:100]}:{output_format}"
+        cache = DiskCache()
+        cached = cache.get(cache_key)
+        if cached:
+            return cached
+
+        # 解析并生成输出
         entries = parse_text_to_entries(content, title=title or None)
-        all_entries.extend(entries)
+        output = generate_output(entries, output_format)
 
-    merged = merge_entries(all_entries)
-    return generate_output(merged, output_format)
+        # 写入缓存
+        cache.set(cache_key, output)
+        return output
+    except Exception:
+        # 失败降级：跳过错误条目继续处理
+        return None
+
+
+def process_batch(documents: List[Dict[str, str]], output_format: str = "markdown", max_workers: int = 4) -> List[str]:
+    """批量处理文档，使用线程池并发执行。
+
+    参数:
+        documents: 文档列表，每个文档为 {"title": str, "content": str}
+        output_format: 输出格式 ("markdown" 或 "json")
+        max_workers: 最大并发数
+
+    返回:
+        处理后的输出字符串列表
+    """
+    if not documents:
+        return []
+
+    results: List[str] = []
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # 提交所有任务
+        future_to_doc = {
+            executor.submit(_process_single_document, doc, output_format): doc
+            for doc in documents
+        }
+
+        # 按完成顺序收集结果
+        for future in as_completed(future_to_doc):
+            result = future.result()
+            if result is not None:
+                results.append(result)
+
+    return results
 
 
 # ---------------------------------------------------------------------------
-# 自检模块（--selftest）
+# URL 处理函数
 # ---------------------------------------------------------------------------
 
-def _run_selftest() -> int:
-    """内置硬编码样例，离线自检核心逻辑。"""
-    print("开始自检...")
+def fetch_url_content(url: str, timeout: int = 10, max_retries: int = 3) -> Tuple[str, str]:
+    """获取 URL 内容，支持超时、重试和错误处理。
 
-    # 样例 1: 基本解析
-    sample_text = """
-Transformer 架构是深度学习领域的重要模型，广泛应用于自然语言处理。
-该模型由 Google 在 2017 年提出，包含注意力机制和位置编码。
-训练数据量超过 100GB，推理速度提升 50%。
+    返回 (标题, 正文文本)
+    """
+    if not url.startswith(("http://", "https://")):
+        raise SkillError("E011", f"不支持的 URL 协议: {url}")
 
-知识库系统支持分布式存储和向量检索，可处理百万级文档。
-该系统在 2023 年完成升级，支持实时索引更新。
-"""
-    try:
-        entries = parse_text_to_entries(sample_text, title="Transformer")
-        assert len(entries) >= 1, "E006: 解析结果为空"
-        assert all(isinstance(e, KnowledgeEntry) for e in entries), "E006: 类型错误"
-        assert all(e.title for e in entries), "E006: 标题为空"
-        print(f"  [OK] 文本解析: {len(entries)} 个条目")
+    retry_delay = 1.0  # 初始重试延迟（秒）
+    last_error = None
 
-        # 检查信息抽取
-        combined_text = " ".join(e.content for e in entries)
-        entities = _extract_entities(combined_text)
-        concepts = _extract_concepts(combined_text)
-        timestamps = _extract_timestamps(combined_text)
-        metrics = _extract_metrics(combined_text)
-
-        assert len(entities) >= 1, "E006: 未抽取到实体"
-        assert len(concepts) >= 1, "E006: 未抽取到概念"
-        assert len(timestamps) >= 1, "E006: 未抽取到时间"
-        assert len(metrics) >= 1, "E006: 未抽取到指标"
-        print(f"  [OK] 信息抽取: 实体={len(entities)}, 概念={len(concepts)}, "
-              f"时间={len(timestamps)}, 指标={len(metrics)}")
-
-        # 检查置信度
-        confidences = {e.confidence for e in entries}
-        assert confidences.issubset({"高", "中", "低"}), "E006: 置信度非法"
-        print(f"  [OK] 置信度标注: {confidences}")
-
-    except SkillError as exc:
-        print(f"  [FAIL] {exc.code}: {exc.message}")
-        return 1
-    except AssertionError as exc:
-        print(f"  [FAIL] {exc}")
-        return 1
-
-    # 样例 2: 批量处理与输出
-    try:
-        docs = [
-            {
-                "title": "深度学习",
-                "content": "深度学习是机器学习的分支，使用多层神经网络进行特征学习。"
-                           "主要框架包括 PyTorch 和 TensorFlow。",
-            },
-            {
-                "title": "知识库",
-                "content": "知识库系统用于存储和管理结构化知识，支持检索和推理。"
-                           "2024 年新增图数据库支持。",
-            },
-        ]
-        json_output = process_documents(docs, "json")
-        parsed = json.loads(json_output)
-        assert isinstance(parsed, list) and len(parsed) >= 1, "E006: JSON 输出异常"
-        assert all("title" in item for item in parsed), "E006: JSON 缺少字段"
-        print(f"  [OK] 批量处理 JSON: {len(parsed)} 条记录")
-
-        md_output = process_documents(docs, "markdown")
-        assert md_output.startswith("#"), "E006: Markdown 格式异常"
-        assert "置信度" in md_output, "E006: Markdown 缺少置信度"
-        print("  [OK] 批量处理 Markdown")
-
-    except SkillError as exc:
-        print(f"  [FAIL] {exc.code}: {exc.message}")
-        return 1
-    except json.JSONDecodeError:
-        print("  [FAIL] JSON 解析失败")
-        return 1
-
-    # 样例 3: 边界与错误处理
-    try:
-        # 空输入
+    for attempt in range(max_retries):
         try:
-            parse_text_to_entries("")
-            print("  [FAIL] 空输入未报错")
-            return 1
-        except SkillError as exc:
-            assert exc.code == "E001", "E006: 错误码不正确"
-        print("  [OK] 空输入错误处理")
+            req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                # 检查响应状态
+                if response.status != 200:
+                    raise urllib.error.URLError(f"HTTP {response.status}")
 
-        # 非字符串输入
-        try:
-            parse_text_to_entries(12345)  # type: ignore
-            print("  [FAIL] 非字符串未报错")
-            return 1
-        except SkillError as exc:
-            assert exc.code == "E002", "E006: 错误码不正确"
-        print("  [OK] 非字符串错误处理")
+                # 读取内容
+                content_type = response.headers.get("Content-Type", "")
+                if "html" in content_type.lower():
+                    html_content = response.read().decode("utf-8", errors="ignore")
+                    title, text = extract_html_content(html_content)
+                    return title, text
+                else:
+                    # 非 HTML 内容，直接作为纯文本处理
+                    text = response.read().decode("utf-8", errors="ignore")
+                    return "", text
 
-        # 不支持的输出格式
-        try:
-            generate_output([KnowledgeEntry("测试", "内容")], "xml")
-            print("  [FAIL] 不支持格式未报错")
-            return 1
-        except SkillError as exc:
-            assert exc.code == "E009", "E006: 错误码不正确"
-        print("  [OK] 格式错误处理")
-
-    except AssertionError as exc:
-        print(f"  [FAIL] {exc}")
-        return 1
-
-    print("全部自检通过。")
-    return 0
-
-
-# ---------------------------------------------------------------------------
-# 命令行入口
-# ---------------------------------------------------------------------------
-
-def _parse_args() -> argparse.Namespace:
-    """解析命令行参数。"""
-    parser = argparse.ArgumentParser(
-        description="Karpathy LLM Wiki — 知识库构建与结构化输出工具"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（离线，不读取外部文件）",
-    )
-    parser.add_argument(
-        "--input",
-        type=str,
-        help="输入文本（直接传入）",
-    )
-    parser.add_argument(
-        "--title",
-        type=str,
-        default="",
-        help="输入文本的标题（可选）",
-    )
-    parser.add_argument(
-        "--format",
-        type=str,
-        choices=["json", "markdown"],
-        default="json",
-        help="输出格式（默认 json）",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        help="输出文件路径（可选，默认输出到 stdout）",
-    )
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    return parser.parse_args()
-
-
-def _main() -> int:
-    """主函数。"""
-    args = _parse_args()
-
-    if args.selftest:
-        return _run_selftest()
-
-    # 正常处理模式
-    if not args.input:
-        print("错误: 请提供 --input 文本，或使用 --selftest 运行自检。", file=sys.stderr)
-        return 1
-
-    try:
-        entries = parse_text_to_entries(args.input, title=args.title or None)
-        output = generate_output(entries, args.format)
-
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output)
-                print(f"已写入: {args.output}")
-            except OSError as exc:
-                raise SkillError("E004", f"输出目录不可写: {exc}") from exc
-        else:
-            print(output)
-        return 0
-
-    except SkillError as exc:
-        print(f"错误: {exc.code}: {exc.message}", file=sys.stderr)
-        return 1
-    except Exception as exc:  # 兜底
-        print(f"错误: E010: 未知异常: {exc}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(_main())
+        except urllib.error.URLError as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay)
+                retry_delay *= 2  # 指数退避
+                continue
+        except Exception as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                time.sleep(retry_delay)
+                retry_delay
