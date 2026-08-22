@@ -14,21 +14,24 @@ subtitles-generator 技能实现脚本
 - 说话人区分（双人对话）、静音段跳过
 
 命令行用法：
-    python scripts/main.py <input_path> [--output-dir DIR] [--format srt|vtt|txt|json]
-    python scripts/main.py --selftest   # 离线自检
+    python main.py <input_path> [--output-dir DIR] [--format srt|vtt|txt|json]
+    python main.py --selftest   # 离线自检
 """
 
 import argparse
 import json
 import os
 import re
+import subprocess
 import sys
 import tempfile
 import time
+import urllib.request
+import urllib.error
 from dataclasses import dataclass, field, asdict
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple, Union
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -230,12 +233,64 @@ def _validate_input(path: str) -> None:
             raise RuntimeError("E002: 不支持的输入格式")
 
 
+def _download_url(url: str, timeout: int = 30, max_retries: int = 3) -> str:
+    """
+    下载 URL 到临时文件，带重试退避和超时
+    
+    参数:
+        url: 下载地址
+        timeout: 超时时间（秒）
+        max_retries: 最大重试次数
+    
+    返回:
+        临时文件路径
+    """
+    # 创建临时文件
+    fd, temp_path = tempfile.mkstemp(suffix=Path(url).suffix or ".tmp")
+    os.close(fd)
+    
+    for attempt in range(max_retries):
+        try:
+            # 设置请求头模拟浏览器
+            req = urllib.request.Request(url, headers={
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            })
+            
+            # 下载文件
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                with open(temp_path, 'wb') as f:
+                    while True:
+                        chunk = response.read(8192)
+                        if not chunk:
+                            break
+                        f.write(chunk)
+            
+            return temp_path
+            
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as e:
+            if attempt == max_retries - 1:
+                # 清理临时文件
+                try:
+                    os.unlink(temp_path)
+                except OSError:
+                    pass
+                raise RuntimeError(f"E007: URL 下载失败: {e}") from e
+            
+            # 指数退避
+            wait_time = 2 ** attempt
+            print(f"下载失败，{wait_time}秒后重试 ({attempt + 1}/{max_retries})...")
+            time.sleep(wait_time)
+    
+    # 不应该到达这里
+    raise RuntimeError("E007: URL 下载失败")
+
+
 # ---------- 核心处理逻辑 ----------
 
 class SubtitleGenerator:
     """
     字幕生成器主类
-    注：实际语音识别需要外部库（如 whisper），此处提供接口和降级方案
+    使用 whisper 进行语音识别，ffmpeg 进行音频提取
     """
 
     def __init__(self, confidence_threshold: float = 0.6):
@@ -246,6 +301,7 @@ class SubtitleGenerator:
         input_path: str,
         output_dir: Optional[str] = None,
         output_format: str = "srt",
+        language: Optional[str] = None,
     ) -> SubtitleResult:
         """
         处理输入文件，生成字幕
@@ -254,6 +310,7 @@ class SubtitleGenerator:
             input_path: 输入文件路径或 URL
             output_dir: 输出目录（默认与输入同目录）
             output_format: 输出格式 (srt/vtt/txt/json)
+            language: 指定语言（可选，默认自动检测）
 
         返回:
             SubtitleResult 对象
@@ -284,33 +341,50 @@ class SubtitleGenerator:
             raise RuntimeError("E009: 无效的输出格式")
 
         try:
-            # 提取音频（模拟）
-            audio_path = self._extract_audio(input_path)
+            # 处理输入：如果是 URL 则下载
+            local_path = input_path
+            if _is_url(input_path):
+                print(f"正在下载: {input_path}")
+                local_path = _download_url(input_path)
+                print(f"下载完成: {local_path}")
 
-            # 语音识别（模拟）
-            segments = self._recognize_speech(audio_path)
+            # 提取音频
+            audio_path = self._extract_audio(local_path)
+
+            # 语音识别
+            segments = self._recognize_speech(audio_path, language)
 
             # 语言检测
             full_text = " ".join(s.text for s in segments)
-            language = _detect_language(full_text)
-            if language == "unknown":
-                language = "zh"  # 默认中文
+            if language:
+                detected_language = language
+            else:
+                detected_language = _detect_language(full_text)
+                if detected_language == "unknown":
+                    detected_language = "zh"  # 默认中文
 
             # 构建结果
             result = SubtitleResult(
                 source=input_path,
-                language=language,
+                language=detected_language,
                 segments=segments,
                 metadata={
                     "generator": "subtitles-generator v1.0.1",
                     "confidence_threshold": self.confidence_threshold,
-                    "generated_at": time.strftime("%Y-%m-%d %H:%M:%S"),
+                    "generated_at": datetime.now(timezone.utc).isoformat(),
                     "segment_count": len(segments),
                 },
             )
 
             # 写入文件
             self._write_output(result, out_dir, output_format)
+
+            # 清理临时文件
+            if _is_url(input_path) and local_path != input_path:
+                try:
+                    os.unlink(local_path)
+                except OSError:
+                    pass
 
             return result
 
@@ -321,75 +395,106 @@ class SubtitleGenerator:
 
     def _extract_audio(self, input_path: str) -> str:
         """
-        提取音频（模拟实现）
-        实际项目中可调用 ffmpeg 等工具
+        提取音频，使用 ffmpeg
+        
+        参数:
+            input_path: 输入文件路径
+        
+        返回:
+            音频文件路径
         """
-        # 模拟提取过程
-        if _is_url(input_path):
-            # 模拟下载
-            time.sleep(0.1)
-            return "downloaded_audio.wav"
-        return input_path
+        # 检查 ffmpeg 是否可用
+        try:
+            subprocess.run(["ffmpeg", "-version"], capture_output=True, check=True)
+        except (subprocess.SubprocessError, FileNotFoundError):
+            raise RuntimeError("E004: ffmpeg 未安装，无法提取音频")
 
-    def _recognize_speech(self, audio_path: str) -> List[SubtitleSegment]:
-        """
-        语音识别（模拟实现）
-        实际项目中可集成 whisper 等模型
+        # 创建临时音频文件
+        fd, temp_audio = tempfile.mkstemp(suffix=".wav")
+        os.close(fd)
 
-        此处返回模拟数据，真实实现会调用语音识别引擎
+        try:
+            # 提取音频
+            cmd = [
+                "ffmpeg",
+                "-i", input_path,
+                "-vn",  # 禁用视频
+                "-acodec", "pcm_s16le",  # PCM 16-bit
+                "-ar", "16000",  # 16kHz
+                "-ac", "1",  # 单声道
+                "-y",  # 覆盖输出
+                temp_audio
+            ]
+            
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=300)
+            
+            if result.returncode != 0:
+                raise RuntimeError(f"E004: 音频提取失败: {result.stderr[:200]}")
+            
+            return temp_audio
+            
+        except subprocess.TimeoutExpired:
+            try:
+                os.unlink(temp_audio)
+            except OSError:
+                pass
+            raise RuntimeError("E004: 音频提取超时")
+        except Exception as e:
+            try:
+                os.unlink(temp_audio)
+            except OSError:
+                pass
+            if isinstance(e, RuntimeError):
+                raise
+            raise RuntimeError(f"E004: 音频提取失败: {e}") from e
+
+    def _recognize_speech(self, audio_path: str, language: Optional[str] = None) -> List[SubtitleSegment]:
         """
-        # 模拟识别结果
-        segments = [
-            SubtitleSegment(
-                index=1,
-                start_ms=0,
-                end_ms=3200,
-                text="大家好，欢迎观看本视频教程。",
-                confidence=0.95,
-                speaker="Speaker A",
-            ),
-            SubtitleSegment(
-                index=2,
-                start_ms=3500,
-                end_ms=6800,
-                text="今天我们来学习如何使用字幕生成工具。",
-                confidence=0.92,
-                speaker="Speaker A",
-            ),
-            SubtitleSegment(
-                index=3,
-                start_ms=7000,
-                end_ms=10500,
-                text="这个工具可以自动提取视频中的语音并生成字幕。",
-                confidence=0.88,
-                speaker="Speaker B",
-            ),
-            SubtitleSegment(
-                index=4,
-                start_ms=10800,
-                end_ms=14000,
-                text="支持多种语言，包括中文、英文、日文等。",
-                confidence=0.85,
-                speaker="Speaker B",
-            ),
-            SubtitleSegment(
-                index=5,
-                start_ms=14300,
-                end_ms=17000,
-                text="输出格式支持SRT、VTT、TXT和JSON。",
-                confidence=0.78,
-                speaker="Speaker A",
-            ),
-            SubtitleSegment(
-                index=6,
-                start_ms=17500,
-                end_ms=20000,
-                text="下面我们来看具体的使用方法。",
-                confidence=0.65,
-                speaker="Speaker B",
-            ),
-        ]
-        return segments
+        语音识别，使用 whisper
+        
+        参数:
+            audio_path: 音频文件路径
+            language: 指定语言（可选）
+        
+        返回:
+            字幕片段列表
+        """
+        # 检查 whisper 是否可用
+        try:
+            import whisper
+        except ImportError:
+            raise RuntimeError("E005: whisper 未安装，请运行 pip install openai-whisper")
+
+        try:
+            # 加载模型
+            model = whisper.load_model("base")
+            
+            # 转写
+            result = model.transcribe(
+                audio_path,
+                language=language,  # 如果为 None 则自动检测
+                fp16=False,  # CPU 兼容
+            )
+            
+            # 构建字幕片段
+            segments = []
+            for i, seg in enumerate(result["segments"], 1):
+                segments.append(
+                    SubtitleSegment(
+                        index=i,
+                        start_ms=int(seg["start"] * 1000),
+                        end_ms=int(seg["end"] * 1000),
+                        text=seg["text"].strip(),
+                        confidence=seg.get("confidence", 1.0),
+                    )
+                )
+            
+            return segments
+            
+        except Exception as e:
+            if isinstance(e, RuntimeError):
+                raise
+            raise RuntimeError(f"E005: 语音识别失败: {e}") from e
 
     def _write_output(self, result: SubtitleResult, out_dir: Path, fmt: str) -> Path:
         """写入输出文件"""
@@ -404,259 +509,4 @@ class SubtitleGenerator:
 
         # 生成内容
         if fmt == "srt":
-            content = result.to_srt()
-        elif fmt == "vtt":
-            content = result.to_vtt()
-        elif fmt == "txt":
-            content = result.to_txt()
-        elif fmt == "json":
-            content = result.to_json()
-        else:
-            raise RuntimeError("E009: 无效的输出格式")
-
-        try:
-            with open(output_path, "w", encoding="utf-8") as f:
-                f.write(content)
-        except OSError as e:
-            raise RuntimeError(f"E006: 字幕文件生成失败: {e}") from e
-
-        return output_path
-
-
-# ---------- 自测功能 ----------
-
-def run_selftest() -> int:
-    """
-    内置自测：使用硬编码样例数据验证核心逻辑
-    不读取外部文件、不依赖当前工作目录、不访问网络
-    """
-    print("=== subtitles-generator 自检开始 ===")
-    errors = []
-
-    # 测试 1: 时间戳格式化
-    try:
-        srt_ts = _format_timestamp_srt(3661000)  # 1:01:01.000
-        assert "01:01:01,000" == srt_ts, f"SRT 时间戳错误: {srt_ts}"
-        vtt_ts = _format_timestamp_vtt(3661000)
-        assert "01:01:01.000" == vtt_ts, f"VTT 时间戳错误: {vtt_ts}"
-        print("[PASS] 时间戳格式化")
-    except AssertionError as e:
-        errors.append(f"时间戳格式化: {e}")
-        print(f"[FAIL] 时间戳格式化: {e}")
-
-    # 测试 2: 语言检测
-    try:
-        zh_lang = _detect_language("你好世界，这是中文测试")
-        assert zh_lang == "zh", f"中文检测失败: {zh_lang}"
-        en_lang = _detect_language("Hello world, this is English")
-        assert en_lang == "en", f"英文检测失败: {en_lang}"
-        ja_lang = _detect_language("こんにちは世界")
-        assert ja_lang == "ja", f"日文检测失败: {ja_lang}"
-        print("[PASS] 语言检测")
-    except AssertionError as e:
-        errors.append(f"语言检测: {e}")
-        print(f"[FAIL] 语言检测: {e}")
-
-    # 测试 3: 字幕结果序列化
-    try:
-        segments = [
-            SubtitleSegment(index=1, start_ms=0, end_ms=2000, text="测试字幕", confidence=0.9),
-            SubtitleSegment(index=2, start_ms=2500, end_ms=4000, text="低置信度测试", confidence=0.5),
-            SubtitleSegment(index=3, start_ms=4500, end_ms=6000, text="静音段", is_silence=True),
-        ]
-        result = SubtitleResult(source="test.mp4", language="zh", segments=segments)
-
-        # SRT 格式
-        srt_content = result.to_srt()
-        assert "00:00:00,000 --> 00:00:02,000" in srt_content
-        assert "[低置信度]" in srt_content
-        assert "静音段" not in srt_content  # 静音段应被跳过
-        print("[PASS] SRT 生成")
-
-        # VTT 格式
-        vtt_content = result.to_vtt()
-        assert vtt_content.startswith("WEBVTT")
-        assert "00:00:00.000 --> 00:00:02.000" in vtt_content
-        print("[PASS] VTT 生成")
-
-        # TXT 格式
-        txt_content = result.to_txt()
-        assert "测试字幕" in txt_content
-        assert "静音段" not in txt_content
-        print("[PASS] TXT 生成")
-
-        # JSON 格式
-        json_content = result.to_json()
-        json_data = json.loads(json_content)
-        assert len(json_data["segments"]) == 3
-        assert json_data["segments"][0]["text"] == "测试字幕"
-        assert json_data["segments"][2]["is_silence"] is True
-        print("[PASS] JSON 生成")
-
-    except AssertionError as e:
-        errors.append(f"字幕序列化: {e}")
-        print(f"[FAIL] 字幕序列化: {e}")
-    except Exception as e:
-        errors.append(f"字幕序列化异常: {e}")
-        print(f"[FAIL] 字幕序列化异常: {e}")
-
-    # 测试 4: 输入验证
-    try:
-        _validate_input("nonexistent_file.mp4")
-        errors.append("输入验证: 不存在的文件应抛异常")
-        print("[FAIL] 输入验证: 不存在的文件应抛异常")
-    except RuntimeError as e:
-        assert "E001" in str(e), f"错误码 E001 未正确抛出: {e}"
-        print("[PASS] 输入验证 (不存在文件)")
-    except Exception as e:
-        errors.append(f"输入验证: {e}")
-        print(f"[FAIL] 输入验证: {e}")
-
-    # 测试 5: 完整处理流程（使用模拟数据）
-    try:
-        # 创建临时目录
-        with tempfile.TemporaryDirectory() as tmpdir:
-            # 模拟输入文件
-            input_file = Path(tmpdir) / "test_video.mp4"
-            input_file.write_bytes(b"fake video data")  # 仅用于测试
-
-            generator = SubtitleGenerator()
-            result = generator.process(
-                str(input_file),
-                output_dir=tmpdir,
-                output_format="srt",
-            )
-
-            # 验证结果
-            assert result.language in {"zh", "en", "ja", "ko", "fr", "de", "es"}
-            assert len(result.segments) > 0
-            assert all(s.end_ms > s.start_ms for s in result.segments)
-
-            # 验证输出文件
-            output_file = Path(tmpdir) / "test_video.srt"
-            assert output_file.exists()
-            content = output_file.read_text(encoding="utf-8", errors="replace")
-            assert "00:00:00,000" in content
-            print("[PASS] 完整处理流程")
-
-    except AssertionError as e:
-        errors.append(f"完整处理流程: {e}")
-        print(f"[FAIL] 完整处理流程: {e}")
-    except Exception as e:
-        errors.append(f"完整处理流程异常: {e}")
-        print(f"[FAIL] 完整处理流程异常: {e}")
-
-    # 测试 6: 错误处理
-    try:
-        generator = SubtitleGenerator()
-        try:
-            generator.process("/nonexistent/path/file.mp4")
-            errors.append("错误处理: 应抛出异常")
-            print("[FAIL] 错误处理: 应抛出异常")
-        except RuntimeError as e:
-            assert "E001" in str(e), f"错误码 E001 未正确抛出: {e}"
-            print("[PASS] 错误处理 E001")
-    except Exception as e:
-        errors.append(f"错误处理: {e}")
-        print(f"[FAIL] 错误处理: {e}")
-
-    # 汇总结果
-    print(f"\n=== 自检完成: {len(errors)} 个错误 ===")
-    if errors:
-        for err in errors:
-            print(f"  - {err}")
-        return 1
-    else:
-        print("全部测试通过 ✅")
-        return 0
-
-
-# ---------- 主入口 ----------
-
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="视频字幕生成器 - 从视频/音频提取字幕并生成时间轴转录文本",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python main.py video.mp4
-  python main.py video.mp4 --output-dir ./subtitles --format json
-  python main.py https://example.com/video.mp4 --format vtt
-  python main.py --selftest
-        """,
-    )
-    parser.add_argument(
-        "--input",
-        nargs="?",
-        help="输入视频/音频文件路径或 URL",
-    )
-    parser.add_argument(
-        "--output-dir",
-        help="输出目录（默认与输入文件同目录）",
-    )
-    parser.add_argument(
-        "--format",
-        choices=["srt", "vtt", "txt", "json"],
-        default="srt",
-        help="输出格式（默认: srt）",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（不读取外部文件、不访问网络）",
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-
-    # 正常处理模式
-    if not args.input:
-        parser.print_help()
-        return 1
-
-    try:
-        generator = SubtitleGenerator()
-        result = generator.process(
-            args.input,
-            output_dir=args.output_dir,
-            output_format=args.format,
-        )
-
-        # 输出结果摘要
-        print(f"✅ 字幕生成完成")
-        print(f"  源文件: {result.source}")
-        print(f"  语言: {result.language}")
-        print(f"  片段数: {len(result.segments)}")
-        print(f"  元数据: {json.dumps(result.metadata, ensure_ascii=False, indent=2)}")
-
-        return 0
-
-    except RuntimeError as e:
-        print(f"❌ 错误: {e}", file=sys.stderr)
-        # 提取错误码
-        if str(e)[:4] in ERROR_CODES:
-            print(f"  错误码: {str(e)[:4]} - {ERROR_CODES[str(e)[:4]]}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"❌ 未预期错误: {e}", file=sys.stderr)
-        print(f"  错误码: E010 - {ERROR_CODES['E010']}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+            content
