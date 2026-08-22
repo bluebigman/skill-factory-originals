@@ -1,8 +1,0 @@
-{
-  "slug": "braid",
-  "name": "braid",
-  "description": "追踪 Git 仓库中供应商分支的变更与同步状态，提供状态查看、同步、注册与变更日志功能。",
-  "trigger_words": "",
-  "original_version": "1.2.0",
-  "capability_outline": []
-}
