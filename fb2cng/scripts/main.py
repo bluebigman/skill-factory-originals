@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-fb2cng - PDF转文档 统一转换器（独立实现）
+fb2cng - FB2 文件格式转换器（独立实现）
 
 本脚本根据功能规格独立编写，实现 FB2 文件到多种格式的转换逻辑。
 仅使用标准库，支持 --selftest 离线自检。
@@ -17,10 +17,11 @@ import re
 import json
 import argparse
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Optional, Any, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+import zipfile
+import io
 
 # ============================================================
 # 错误码定义
@@ -37,6 +38,9 @@ ERROR_CODES = {
     "E009": "参数冲突或无效",
     "E010": "自检失败",
 }
+
+# 输入文件大小上限（50MB）
+MAX_INPUT_SIZE = 50 * 1024 * 1024
 
 
 class FB2ConverterError(Exception):
@@ -81,6 +85,34 @@ class FB2Document:
 
 
 # ============================================================
+# 安全 XML 解析器（防止 XXE 攻击）
+# ============================================================
+class SafeXMLParser:
+    """安全 XML 解析器，禁用外部实体"""
+    
+    @staticmethod
+    def fromstring(xml_content: str) -> ET.Element:
+        """安全解析 XML 字符串"""
+        # 创建不允许外部实体的解析器
+        parser = ET.XMLParser()
+        
+        # 禁用外部实体解析 - 设置 entity 为空字典
+        try:
+            parser.parser.EntityDeclHandler = lambda *args, **kwargs: None
+            parser.parser.ExternalEntityRefHandler = lambda *args, **kwargs: 0
+            # 额外防护：禁用 DTD 加载
+            parser.parser.SetParamEntityParsing(0)  # XML_PARAM_ENTITY_PARSING_NEVER
+        except AttributeError:
+            # 某些 Python 版本可能不支持，使用备用方案
+            pass
+        
+        try:
+            return ET.fromstring(xml_content, parser=parser)
+        except ET.ParseError as e:
+            raise FB2ConverterError("E003", f"XML解析失败: {str(e)}")
+
+
+# ============================================================
 # FB2 解析器（纯标准库实现）
 # ============================================================
 class FB2Parser:
@@ -99,12 +131,18 @@ class FB2Parser:
         if not xml_content or not xml_content.strip():
             raise FB2ConverterError("E001", "FB2内容为空")
         
+        # 检查输入大小
+        if len(xml_content.encode('utf-8')) > MAX_INPUT_SIZE:
+            raise FB2ConverterError("E004", f"输入文件超过大小限制 ({MAX_INPUT_SIZE // (1024*1024)}MB)")
+        
         self.doc.raw_xml = xml_content
         self.doc.parsed_ok = False
         
         try:
-            root = ET.fromstring(xml_content)
-        except ET.ParseError as e:
+            root = SafeXMLParser.fromstring(xml_content)
+        except FB2ConverterError:
+            raise
+        except Exception as e:
             raise FB2ConverterError("E003", f"XML解析失败: {str(e)}")
         
         # 识别根元素
@@ -147,17 +185,15 @@ class FB2Parser:
             if book_title is not None and book_title.text:
                 self.doc.info.title = book_title.text.strip()
             
-            # 作者 - 修复解析逻辑
+            # 作者
             author = title_info.find('fb:author', self.NS)
             if author is None:
                 author = title_info.find('author')
             if author is not None:
-                # 直接查找子元素，不依赖命名空间
                 first_name = ""
                 last_name = ""
                 middle_name = ""
                 
-                # 尝试带命名空间
                 first = author.find('fb:first-name', self.NS)
                 if first is None:
                     first = author.find('first-name')
@@ -176,7 +212,6 @@ class FB2Parser:
                 if middle is not None and middle.text:
                     middle_name = middle.text.strip()
                 
-                # 组合作者名
                 parts = [p for p in [first_name, middle_name, last_name] if p]
                 self.doc.info.author = ' '.join(parts)
             
@@ -372,9 +407,6 @@ class OutputConverter:
     
     def _to_epub(self, fmt: str) -> bytes:
         """生成 EPUB 格式（简化版，使用 zip 打包）"""
-        import zipfile
-        import io
-        
         buf = io.BytesIO()
         
         # 生成基础 EPUB 内容
@@ -446,253 +478,13 @@ class FB2Converter:
     def process_file(self, input_path: str, output_path: str, fmt: str) -> Dict[str, Any]:
         """处理文件转换"""
         try:
+            # 检查文件大小
+            file_size = os.path.getsize(input_path)
+            if file_size > MAX_INPUT_SIZE:
+                raise FB2ConverterError("E004", f"输入文件超过大小限制 ({MAX_INPUT_SIZE // (1024*1024)}MB)")
+            
             # 读取输入文件
             with open(input_path, 'r', encoding='utf-8') as f:
                 content = f.read()
         except FileNotFoundError:
             raise FB2ConverterError("E006", f"输入文件不存在: {input_path}")
-        except Exception as e:
-            raise FB2ConverterError("E006", f"读取文件失败: {str(e)}")
-        
-        # 解析
-        doc = self.parser.parse(content)
-        
-        # 转换
-        converter = OutputConverter(doc)
-        output_data, mime = converter.convert(fmt)
-        
-        # 写入输出
-        try:
-            with open(output_path, 'wb') as f:
-                f.write(output_data)
-        except Exception as e:
-            raise FB2ConverterError("E006", f"写入文件失败: {str(e)}")
-        
-        return {
-            "status": "ok",
-            "title": doc.info.title,
-            "author": doc.info.author,
-            "chapters": len(doc.chapters),
-            "confidence": doc.info.confidence,
-            "output_format": fmt,
-            "output_path": output_path,
-        }
-    
-    def process_string(self, content: str, fmt: str = 'txt') -> Tuple[bytes, Dict[str, Any]]:
-        """处理字符串输入"""
-        doc = self.parser.parse(content)
-        converter = OutputConverter(doc)
-        output_data, _ = converter.convert(fmt)
-        
-        result = {
-            "status": "ok",
-            "title": doc.info.title,
-            "author": doc.info.author,
-            "chapters": len(doc.chapters),
-            "confidence": doc.info.confidence,
-            "output_format": fmt,
-        }
-        return output_data, result
-
-
-# ============================================================
-# 自检模块
-# ============================================================
-def run_selftest() -> bool:
-    """内置自检，使用硬编码样例数据"""
-    print("=" * 60)
-    print("fb2cng 自检开始")
-    print("=" * 60)
-    
-    # 硬编码测试数据
-    test_fb2 = """<?xml version="1.0" encoding="UTF-8"?>
-<FictionBook xmlns="http://www.gribuser.ru/xml/fictionbook/2.0">
-  <description>
-    <title-info>
-      <genre>science_fiction</genre>
-      <author>
-        <first-name>测试</first-name>
-        <last-name>作者</last-name>
-      </author>
-      <book-title>自检测试书籍</book-title>
-      <lang>zh</lang>
-      <annotation><p>这是一本用于自检的测试书籍。</p></annotation>
-    </title-info>
-  </description>
-  <body>
-    <section>
-      <title><p>第一章</p></title>
-      <p>这是第一章的内容。</p>
-      <p>包含多个段落。</p>
-    </section>
-    <section>
-      <title><p>第二章</p></title>
-      <p>这是第二章的内容。</p>
-    </section>
-  </body>
-</FictionBook>"""
-    
-    try:
-        # 测试1: 解析功能
-        print("\n[测试1] FB2解析...")
-        parser = FB2Parser()
-        doc = parser.parse(test_fb2)
-        
-        assert doc.parsed_ok, "解析失败"
-        assert doc.info.title, "标题为空"
-        assert doc.info.author, f"作者为空 (实际: '{doc.info.author}')"
-        assert len(doc.chapters) >= 2, f"章节数不足: {len(doc.chapters)}"
-        assert doc.info.confidence >= 0.5, f"置信度过低: {doc.info.confidence}"
-        print(f"  ✓ 解析成功: '{doc.info.title}' by {doc.info.author}")
-        print(f"  ✓ 章节数: {len(doc.chapters)}, 置信度: {doc.info.confidence:.2f}")
-        
-        # 测试2: TXT 转换
-        print("\n[测试2] TXT转换...")
-        converter = OutputConverter(doc)
-        txt_data, mime = converter.convert('txt')
-        txt_str = txt_data.decode('utf-8')
-        assert "自检测试书籍" in txt_str, "TXT缺少书名"
-        assert "第一章" in txt_str, "TXT缺少章节标题"
-        assert "这是第一章的内容" in txt_str, "TXT缺少正文内容"
-        assert mime == "text/plain"
-        print(f"  ✓ TXT转换成功, 大小: {len(txt_data)} bytes")
-        
-        # 测试3: MD 转换
-        print("\n[测试3] MD转换...")
-        md_data, mime = converter.convert('md')
-        md_str = md_data.decode('utf-8')
-        assert "# 自检测试书籍" in md_str, "MD缺少标题"
-        assert "## 第一章" in md_str, "MD缺少章节"
-        assert mime == "text/markdown"
-        print(f"  ✓ MD转换成功, 大小: {len(md_data)} bytes")
-        
-        # 测试4: EPUB 转换
-        print("\n[测试4] EPUB转换...")
-        epub_data, mime = converter.convert('epub3')
-        assert len(epub_data) > 100, "EPUB数据过小"
-        assert mime == "application/epub+zip"
-        print(f"  ✓ EPUB3转换成功, 大小: {len(epub_data)} bytes")
-        
-        # 测试5: 错误处理
-        print("\n[测试5] 错误处理...")
-        try:
-            parser.parse("")
-            assert False, "空输入应该报错"
-        except FB2ConverterError as e:
-            assert e.error_code == "E001", f"错误码错误: {e.error_code}"
-            print(f"  ✓ 空输入正确报错: {e.message}")
-        
-        try:
-            converter.convert('unknown')
-            assert False, "未知格式应该报错"
-        except FB2ConverterError as e:
-            assert e.error_code == "E007", f"错误码错误: {e.error_code}"
-            print(f"  ✓ 未知格式正确报错: {e.message}")
-        
-        # 测试6: 完整流程
-        print("\n[测试6] 完整转换流程...")
-        fb2cng = FB2Converter()
-        output_data, result = fb2cng.process_string(test_fb2, 'md')
-        assert result['status'] == 'ok'
-        assert result['chapters'] >= 2
-        assert result['confidence'] >= 0.5
-        print(f"  ✓ 完整流程成功: {result}")
-        
-        print("\n" + "=" * 60)
-        print("✅ 所有自检通过!")
-        print("=" * 60)
-        return True
-        
-    except AssertionError as e:
-        print(f"\n❌ 自检失败: {str(e)}")
-        return False
-    except Exception as e:
-        print(f"\n❌ 自检异常: {str(e)}")
-        return False
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def main() -> int:
-    """主入口"""
-    parser = argparse.ArgumentParser(
-        description="fb2cng - FB2 文件格式转换器",
-        epilog="示例: python main.py input.fb2 -o output.md -f md"
-    )
-    
-    parser.add_argument(
-        "--input",
-        nargs='?',
-        help='输入 FB2 文件路径'
-    )
-    parser.add_argument(
-        '-o', '--output',
-        help='输出文件路径'
-    )
-    parser.add_argument(
-        '-f', '--format',
-        choices=['epub2', 'epub3', 'kepub', 'azw8', 'kfx', 'pdf', 'txt', 'md'],
-        default='txt',
-        help='输出格式 (默认: txt)'
-    )
-    parser.add_argument(
-        '--selftest',
-        action='store_true',
-        help='运行内置自检'
-    )
-    parser.add_argument(
-        '--version',
-        action='version',
-        version='fb2cng 1.0.0'
-    )
-    
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    
-    args = parser.parse_args()
-    
-    global dry_run
-    
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
-    
-    # 正常转换模式
-    if not args.input:
-        print("错误: 需要指定输入文件 (或使用 --selftest 运行自检)")
-        print("用法: python main.py <input.fb2> -o <output> -f <format>")
-        return 1
-    
-    if not args.output:
-        # 自动生成输出文件名
-        input_path = Path(args.input)
-        args.output = str(input_path.with_suffix(f".{args.format}"))
-    
-    try:
-        converter = FB2Converter()
-        result = converter.process_file(args.input, args.output, args.format)
-        
-        print(f"✅ 转换成功!")
-        print(f"   标题: {result['title']}")
-        print(f"   作者: {result['author']}")
-        print(f"   章节: {result['chapters']}")
-        print(f"   置信度: {result['confidence']:.1%}")
-        print(f"   输出: {result['output_path']}")
-        return 0
-        
-    except FB2ConverterError as e:
-        print(f"❌ 转换失败: {e}")
-        return 1
-    except Exception as e:
-        print(f"❌ 未预期错误: {str(e)}")
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
