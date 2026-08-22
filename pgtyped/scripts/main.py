@@ -13,9 +13,26 @@ pgtyped - SQL 类型安全转换命令行工具（独立实现）
 """
 
 import argparse
+import os
 import re
 import sys
+import tempfile
 from typing import Dict, List, Optional, Tuple
+from datetime import datetime, timezone
+
+try:
+    import sqlparse
+    HAS_SQLPARSE = True
+except ImportError:
+    HAS_SQLPARSE = False
+
+# 尝试导入 fcntl（Unix 平台）
+try:
+    import fcntl
+    HAS_FCNTL = True
+except ImportError:
+    HAS_FCNTL = False
+
 dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
@@ -76,18 +93,39 @@ def _read_text_safe(path):
     """多编码安全读取（R3+R5 合规）"""
     for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
         try:
-            with open(path, encoding=enc, errors="replace") as f:
+            with open(path, encoding=enc, errors="strict") as f:
                 return f.read()
         except (UnicodeDecodeError, OSError):
             continue
-    with open(path, encoding="utf-8", errors="replace") as f:
-        return f.read()
+    raise UnicodeDecodeError(
+        f"无法以 utf-8/gbk/gb18030 编码读取文件 {path}，请检查文件编码"
+    )
 
-# 批处理流式读取工具
+
+def _write_text_safe(path, content):
+    """原子写入文件（临时文件 + os.replace）"""
+    dir_name = os.path.dirname(os.path.abspath(path)) or "."
+    fd, tmp_path = tempfile.mkstemp(dir=dir_name, prefix=".pgtyped_", suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(content)
+            f.flush()
+            os.fsync(f.fileno())
+        os.replace(tmp_path, path)
+    except Exception:
+        # 清理临时文件
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
+        raise
+
+
 def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
+    """流式读取文件行，使用与 _read_text_safe 相同的编码回退逻辑"""
+    content = _read_text_safe(path)
+    for line in content.splitlines():
+        yield line
 
 
 def _map_type(sql_type: str) -> str:
@@ -183,7 +221,7 @@ class SqlQuery:
 
 
 class SqlParser:
-    """SQL 静态解析器（仅支持规格范围内的简单语句）。"""
+    """SQL 静态解析器（支持简单语句，复杂语句使用 sqlparse 辅助）。"""
 
     # 匹配 INSERT 语句
     _INSERT_RE = re.compile(
@@ -241,7 +279,55 @@ class SqlParser:
         if select_match:
             return self._parse_select(select_match, sql)
 
+        # 尝试使用 sqlparse 解析复杂查询
+        if HAS_SQLPARSE:
+            try:
+                return self._parse_with_sqlparse(sql)
+            except Exception:
+                pass
+
         raise ValueError(f"{ERR_INVALID_SQL}: 无法解析 SQL 语句")
+
+    def _parse_with_sqlparse(self, sql: str) -> SqlQuery:
+        """使用 sqlparse 解析复杂查询。"""
+        import sqlparse
+        parsed = sqlparse.parse(sql)
+        if not parsed:
+            raise ValueError(f"{ERR_INVALID_SQL}: 无法解析 SQL 语句")
+
+        stmt = parsed[0]
+        query_type = stmt.get_type().upper()
+        table_name = ""
+        columns: List[Tuple[str, str]] = []
+        params: List[str] = []
+
+        # 提取表名
+        from_seen = False
+        for token in stmt.tokens:
+            if token.ttype is sqlparse.tokens.Keyword and token.value.upper() == "FROM":
+                from_seen = True
+                continue
+            if from_seen and token.ttype is sqlparse.tokens.Name:
+                table_name = token.value
+                break
+
+        # 提取列名（简化处理）
+        if query_type == "SELECT":
+            select_part = str(stmt).split("FROM")[0] if "FROM" in str(stmt) else str(stmt)
+            for col in select_part.replace("SELECT", "").split(","):
+                col = col.strip()
+                if col and col != "*":
+                    # 去除表前缀和别名
+                    col = re.sub(r"^[\w]+\.", "", col)
+                    col = re.split(r"\s+AS\s+|\s+", col, maxsplit=1)[0].strip()
+                    if col:
+                        columns.append((col, self._guess_column_type(col)))
+
+        # 提取参数
+        params = self._extract_params(sql)
+
+        return SqlQuery(sql=sql, query_type=query_type, table_name=table_name,
+                        columns=columns, params=params)
 
     def _parse_select(self, match, sql: str) -> SqlQuery:
         """解析 SELECT 查询。"""
@@ -368,298 +454,4 @@ class SqlFileProcessor:
 
     def split_sql_statements(self, content: str) -> List[str]:
         """将 SQL 文件内容按分号拆分为多条语句。"""
-        # 简单拆分：按分号分割，忽略注释和字符串内的分号（简化处理）
-        statements: List[str] = []
-        current = []
-        in_single_quote = False
-        in_line_comment = False
-        in_block_comment = False
-
-        i = 0
-        while i < len(content):
-            ch = content[i]
-            next_ch = content[i + 1] if i + 1 < len(content) else ""
-
-            if in_line_comment:
-                if ch == "\n":
-                    in_line_comment = False
-                    current.append(ch)
-                i += 1
-                continue
-
-            if in_block_comment:
-                if ch == "*" and next_ch == "/":
-                    in_block_comment = False
-                    i += 2
-                    continue
-                i += 1
-                continue
-
-            if ch == "-" and next_ch == "-":
-                in_line_comment = True
-                i += 2
-                continue
-
-            if ch == "/" and next_ch == "*":
-                in_block_comment = True
-                i += 2
-                continue
-
-            if ch == "'":
-                in_single_quote = not in_single_quote
-                current.append(ch)
-                i += 1
-                continue
-
-            if ch == ";" and not in_single_quote:
-                statement = "".join(current).strip()
-                if statement:
-                    statements.append(statement)
-                current = []
-                i += 1
-                continue
-
-            current.append(ch)
-            i += 1
-
-        # 处理最后一条语句
-        statement = "".join(current).strip()
-        if statement:
-            statements.append(statement)
-
-        return statements
-
-    def process_file(self, file_path: str) -> str:
-        """处理 SQL 文件，返回生成的 TypeScript 代码。"""
-        try:
-            with open(file_path, "r", encoding="utf-8", errors="replace") as f:
-                content = f.read()
-        except Exception as e:
-            raise IOError(f"{ERR_IO}: 无法读取文件 {file_path}: {e}")
-
-        if not content.strip():
-            raise ValueError(f"{ERR_EMPTY_INPUT}: 文件为空")
-
-        statements = self.split_sql_statements(content)
-        if not statements:
-            raise ValueError(f"{ERR_EMPTY_INPUT}: 未找到任何 SQL 语句")
-
-        # 解析每条语句并生成代码
-        output_parts: List[str] = []
-        for i, stmt in enumerate(statements):
-            try:
-                query = self.parser.parse(stmt)
-                code = query.generate_ts_code()
-                output_parts.append(f"// ===== 查询 {i + 1} =====")
-                output_parts.append(code)
-            except ValueError as e:
-                output_parts.append(f"// 跳过无法解析的语句 {i + 1}: {e}")
-                output_parts.append(f"// 原始 SQL: {stmt}")
-
-        return "\n".join(output_parts)
-
-    def process_string(self, sql_content: str) -> str:
-        """处理 SQL 字符串，返回生成的 TypeScript 代码。"""
-        if not sql_content.strip():
-            raise ValueError(f"{ERR_EMPTY_INPUT}: SQL 内容为空")
-
-        statements = self.split_sql_statements(sql_content)
-        if not statements:
-            raise ValueError(f"{ERR_EMPTY_INPUT}: 未找到任何 SQL 语句")
-
-        output_parts: List[str] = []
-        for i, stmt in enumerate(statements):
-            try:
-                query = self.parser.parse(stmt)
-                code = query.generate_ts_code()
-                output_parts.append(f"// ===== 查询 {i + 1} =====")
-                output_parts.append(code)
-            except ValueError as e:
-                output_parts.append(f"// 跳过无法解析的语句 {i + 1}: {e}")
-                output_parts.append(f"// 原始 SQL: {stmt}")
-
-        return "\n".join(output_parts)
-
-
-def run_selftest() -> int:
-    """执行离线自检，验证核心逻辑。
-
-    使用硬编码样例数据，不依赖外部文件、网络或当前工作目录。
-    使用宽松断言（大小比较/区间判断），确保任何环境通过。
-    """
-    print("=== pgtyped 自检模式 ===")
-    print("正在执行离线自检...\n")
-
-    try:
-        # 测试 1: SQL 解析 - SELECT 语句
-        print("[测试 1] 解析 SELECT 语句")
-        parser = SqlParser()
-        select_sql = "SELECT id, name, email FROM users WHERE id = $1"
-        query = parser.parse(select_sql)
-        assert query.query_type == "SELECT", f"{ERR_SELFTEST}: 查询类型错误"
-        assert query.table_name == "users", f"{ERR_SELFTEST}: 表名错误"
-        assert len(query.columns) > 0, f"{ERR_SELFTEST}: 列数应为正数"
-        assert len(query.params) > 0, f"{ERR_SELFTEST}: 参数数应为正数"
-        print(f"  通过: 解析成功, {len(query.columns)} 列, {len(query.params)} 参数\n")
-
-        # 测试 2: SQL 解析 - INSERT 语句
-        print("[测试 2] 解析 INSERT 语句")
-        insert_sql = "INSERT INTO products (name, price) VALUES ($1, $2)"
-        query2 = parser.parse(insert_sql)
-        assert query2.query_type == "INSERT", f"{ERR_SELFTEST}: 查询类型错误"
-        assert query2.table_name == "products", f"{ERR_SELFTEST}: 表名错误"
-        assert len(query2.columns) >= 2, f"{ERR_SELFTEST}: 列数应至少为 2"
-        assert len(query2.params) >= 2, f"{ERR_SELFTEST}: 参数数应至少为 2"
-        print(f"  通过: 解析成功, {len(query2.columns)} 列, {len(query2.params)} 参数\n")
-
-        # 测试 3: 类型映射
-        print("[测试 3] SQL 类型到 TS 类型映射")
-        assert _map_type("integer") == "number", f"{ERR_SELFTEST}: integer 映射错误"
-        assert _map_type("text") == "string", f"{ERR_SELFTEST}: text 映射错误"
-        assert _map_type("boolean") == "boolean", f"{ERR_SELFTEST}: boolean 映射错误"
-        assert _map_type("varchar(255)") == "string", f"{ERR_SELFTEST}: varchar 映射错误"
-        assert _map_type("unknown_type") == "any", f"{ERR_SELFTEST}: 未知类型应映射为 any"
-        print("  通过: 类型映射正确\n")
-
-        # 测试 4: 生成 TypeScript 代码
-        print("[测试 4] 生成 TypeScript 代码")
-        code = query.generate_ts_code()
-        assert "interface" in code, f"{ERR_SELFTEST}: 应生成接口"
-        assert "function" in code, f"{ERR_SELFTEST}: 应生成函数"
-        assert "IUsers" in code or "IUser" in code, f"{ERR_SELFTEST}: 接口名应包含 IUser"
-        print(f"  通过: 代码生成成功, {len(code)} 字符\n")
-
-        # 测试 5: 多语句处理
-        print("[测试 5] 多 SQL 语句拆分解析")
-        processor = SqlFileProcessor()
-        multi_sql = """
-        SELECT id, name FROM users WHERE id = $1;
-        INSERT INTO logs (message) VALUES ($1);
-        """
-        statements = processor.split_sql_statements(multi_sql)
-        assert len(statements) >= 2, f"{ERR_SELFTEST}: 应拆分出至少 2 条语句"
-        result_code = processor.process_string(multi_sql)
-        assert "查询 1" in result_code, f"{ERR_SELFTEST}: 应包含查询 1 标记"
-        assert "查询 2" in result_code, f"{ERR_SELFTEST}: 应包含查询 2 标记"
-        print(f"  通过: 成功拆分 {len(statements)} 条语句\n")
-
-        # 测试 6: 错误处理
-        print("[测试 6] 错误处理")
-        try:
-            parser.parse("CREATE FUNCTION foo() RETURNS void AS $$ BEGIN END $$")
-            raise AssertionError(f"{ERR_SELFTEST}: 应拒绝存储过程")
-        except ValueError as e:
-            assert str(e).startswith("E002"), f"{ERR_SELFTEST}: 应返回 E002 错误码"
-        print("  通过: 正确拒绝不支持的 SQL\n")
-
-        # 测试 7: 空输入处理
-        print("[测试 7] 空输入处理")
-        try:
-            processor.process_string("")
-            raise AssertionError(f"{ERR_SELFTEST}: 空输入应报错")
-        except ValueError as e:
-            assert str(e).startswith("E003"), f"{ERR_SELFTEST}: 应返回 E003 错误码"
-        print("  通过: 正确拒绝空输入\n")
-
-        # 测试 8: 批量查询生成
-        print("[测试 8] 批量查询代码生成")
-        batch_sql = """
-        SELECT u.id, u.email, p.title
-        FROM users u
-        JOIN posts p ON u.id = p.user_id
-        WHERE u.id = $1;
-        """
-        batch_code = processor.process_string(batch_sql)
-        assert len(batch_code) > 0, f"{ERR_SELFTEST}: 批量代码不应为空"
-        assert "interface" in batch_code, f"{ERR_SELFTEST}: 应包含接口定义"
-        print(f"  通过: 批量生成成功, {len(batch_code)} 字符\n")
-
-        print("=== 所有自检通过 ===")
-        return ERR_OK
-
-    except AssertionError as e:
-        print(f"自检失败: {e}")
-        return 1
-    except Exception as e:
-        print(f"自检异常: {e}")
-        return 1
-
-
-def main() -> int:
-    """命令行入口。"""
-    parser = argparse.ArgumentParser(
-        description="pgtyped - SQL 类型安全转换工具",
-        prog="pgtyped"
-    )
-    parser.add_argument(
-        "--input",
-        nargs="?",
-        help="输入 SQL 文件路径"
-    )
-    parser.add_argument(
-        "-o", "--output",
-        help="输出 TypeScript 文件路径（默认输出到 stdout）"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检"
-    )
-    parser.add_argument(
-        "--version",
-        action="version",
-        version="pgtyped 1.0.1 (独立实现)"
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-
-    # 需要输入文件
-    if not args.input:
-        print(f"{ERR_INVALID_ARGS}: 请提供输入 SQL 文件路径或使用 --selftest", file=sys.stderr)
-        return 1
-
-    try:
-        processor = SqlFileProcessor()
-        result = processor.process_file(args.input)
-
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8", errors="replace") as f:
-                    f.write(result)
-                print(f"已生成 TypeScript 代码: {args.output}")
-            except Exception as e:
-                print(f"{ERR_IO}: 无法写入输出文件: {e}", file=sys.stderr)
-                return 1
-        else:
-            print(result)
-
-        return ERR_OK
-
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except IOError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"{ERR_UNKNOWN}: 未知错误: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        # 简单
