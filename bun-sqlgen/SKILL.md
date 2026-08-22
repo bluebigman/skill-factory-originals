@@ -1,275 +1,312 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: bun-sqlgen
 name: bun-sqlgen
-displayName: BunSQL 类型生成 查询建模
-description: 为 Bun.sql 查询自动生成 TypeScript 类型定义与校验模板。
-version: 1.0.1
-rules_version: cpr-20260809-n251
+displayName: SQL类型生成 查询推导 校验模板
+description: 为 Bun.sql 查询自动生成 TypeScript 类型与 Zod 校验模板。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/bun-sqlgen
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinTypeForge
+author: TypeForge Studio
 agent_created: true
-trigger_words: ["bun-sqlgen","bun sql 类型生成","sql 类型推导","bun sql 查询类型","types generator","bun.sql 类型工具"]
+trigger_words: ["bun-sqlgen", "bun sql 类型生成", "sql 类型推导", "bun sql 查询类型", "types generator", "SQL 类型推断", "查询结果类型"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# BunSQL 类型生成器（bun-sqlgen）使用指南
+# bun-sqlgen — SQL 类型生成与校验模板
 
-## 一、能力边界：一页纸速查卡
+## 一、能力边界速查卡
 
-本 Skill 面向使用 **Bun.sql**（Bun 内置 SQL 模块）进行数据库查询的开发者，帮助你将手写 SQL 查询转换为带完整 TypeScript 类型的调用代码。
+本 Skill 专注于将 SQL 查询语句转换为 TypeScript 类型定义或 Zod 校验模板。以下是明确的能力范围：
 
-### ✅ 能做（核心能力清单）
+| 能力维度 | 支持 | 不支持 |
+|---------|------|--------|
+| 输入格式 | 以 `;` 结尾的合法 SQL 语句 | 不完整的 SQL、无分号结尾的语句 |
+| 输出格式 | TypeScript 类型定义（默认）、Zod 校验模板 | 其他语言代码、ORM 模型定义 |
+| 批量处理 | 多条 SQL 以空行分隔 | 混合其他非 SQL 文本 |
+| 类型推导 | 基于 SQL 语法结构的确定性类型映射 | 基于字段名、默认值或约束的猜测 |
+| 错误处理 | 通过错误码表定位问题 | 自动修复 SQL 语法错误 |
 
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | SQL 查询 → TS 类型映射 | 将 `SELECT`、`INSERT`、`UPDATE`、`DELETE` 语句的返回字段自动推导为 TypeScript 接口 |
-| 2 | 参数占位符识别 | 识别 `?` 或 `$1` 形式的参数占位符，生成对应的参数类型列表 |
-| 3 | 多语句批量处理 | 支持一次输入多条 SQL 语句，分别生成独立类型定义 |
-| 4 | 类型命名规范建议 | 根据表名或查询意图，为生成的类型提供命名建议（如 `UserRow`、`OrderInsertParams`） |
-| 5 | 输出格式自定义 | 支持输出为纯类型定义、带运行时校验的 Zod 模式、或 Bun.sql 可直接调用的封装函数 |
+**适用对象**：使用 Bun.sql 的 TypeScript 开发者、需要快速为查询结果定义类型的团队、需要运行时校验的场景。
 
-### ❌ 不能做（明确边界）
-
-- 不执行 SQL 语句，不连接数据库验证表结构
-- 不处理存储过程、触发器、视图等数据库对象
-- 不推断 `JOIN` 产生的隐式字段名（需用户显式指定别名）
-- 不支持动态 SQL 拼接（如循环内拼接查询条件）
-- 不生成数据库迁移文件或建表语句
-
-### 适用对象
-
-- 使用 Bun.sql 且希望获得类型安全的开发者
-- 从 `better-sqlite3` 或 `pg` 迁移到 Bun.sql 的团队
-- 需要为现有查询补充类型定义的维护者
+**不适用对象**：需要业务语义推断的场景、需要数据库 schema 反向工程的场景、非 SQL 查询场景。
 
 ---
 
 ## 二、触发方式与场景映射
 
-当你的输入包含以下特征时，本 Skill 将被激活：
+当你的需求符合以下任一场景时，可使用本 Skill：
 
-| 触发词/场景 | 用户意图 | 处理方式 |
-|-------------|----------|----------|
-| "帮我生成类型" + SQL 语句 | 需要类型定义 | 解析 SQL，输出 TS 接口 |
-| "bun sql 类型" | 查询 Bun.sql 类型生成方法 | 展示本 Skill 能力并引导输入 SQL |
-| 粘贴一段含 `SELECT` 的代码 | 隐式请求类型推导 | 自动识别并生成对应类型 |
-| "批量处理" + 多条 SQL | 需要多个类型定义 | 逐条解析，合并输出 |
-| "带校验" / "zod" | 需要运行时校验 | 额外生成 Zod schema |
-
-### 大白话场景示例
-
-> **场景 1**：你写了一个查询 `SELECT id, name FROM users WHERE age > ?`，想要一个 `User` 类型。
-> **操作**：直接粘贴 SQL，本 Skill 会输出 `interface User { id: number; name: string }` 及参数类型 `[number]`。
-
-> **场景 2**：你有一堆 INSERT 语句，想统一生成参数类型。
-> **操作**：粘贴全部 SQL，本 Skill 会为每条语句生成独立的参数接口。
+| 触发词/场景 | 实际含义 | 使用示例 |
+|------------|---------|---------|
+| "bun-sqlgen" | 直接调用工具 | `bun-sqlgen "SELECT id, name FROM users;"` |
+| "bun sql 类型生成" | 为查询生成类型 | "帮我给这个查询生成类型" |
+| "sql 类型推导" | 推导查询结果类型 | "这个 SQL 返回什么类型？" |
+| "bun sql 查询类型" | 查询结果类型定义 | "给这个查询写个 interface" |
+| "types generator" | 类型生成器 | "Generate types for this query" |
+| "SQL 类型推断" | 推断字段类型 | "推断一下这个查询的字段类型" |
+| "查询结果类型" | 结果集类型定义 | "这个查询的结果类型是什么" |
 
 ---
 
-## 三、标准流程：从输入到输出
+## 三、标准执行流程
 
 ### 前置条件
 
-- 输入必须为合法的 SQL 语句（支持标准 SQL 语法子集）
-- 表名、字段名建议使用蛇形命名（`user_name`），输出将自动转换为驼峰（`userName`）
-- 若涉及 `JOIN`，请为所有字段指定表别名或列别名
+1. 输入必须是完整的 SQL 语句，以 `;` 结尾
+2. 多条 SQL 之间用空行分隔
+3. SQL 语法必须合法（本工具不负责语法纠错）
 
-### 执行步骤（分步编号）
+### 执行步骤
 
-1. **接收输入**：用户提供 SQL 语句或包含 SQL 的文本块。
-2. **语法解析**：识别 SQL 类型（SELECT/INSERT/UPDATE/DELETE），提取字段列表、表名、WHERE 条件中的参数占位符。
-3. **字段类型映射**：按以下规则将 SQL 类型映射为 TS 类型：
+**步骤 1：解析 SQL 语句**
 
-   | SQL 类型 | TS 类型 | 备注 |
-   |----------|---------|------|
-   | `INTEGER` / `INT` / `BIGINT` | `number` | 若为 `BIGINT` 且值可能超 2^53，建议 `string` |
-   | `TEXT` / `VARCHAR` / `CHAR` | `string` | |
-   | `BOOLEAN` / `BOOL` | `boolean` | |
-   | `REAL` / `DOUBLE` / `FLOAT` | `number` | |
-   | `BLOB` / `BYTEA` | `Uint8Array` | |
-   | `DATE` / `DATETIME` / `TIMESTAMP` | `Date` | 若为 `TEXT` 存储日期，则映射为 `string` |
-   | `NULL` / 未知类型 | `unknown` | 需用户确认 |
+- 识别查询类型（SELECT / INSERT / UPDATE / DELETE）
+- 提取字段列表、表名、别名、聚合函数等结构信息
 
-4. **参数提取**：扫描 `?` 或 `$1` 占位符，按出现顺序生成参数类型数组。
-5. **命名生成**：基于表名单数化（`users` → `User`）生成主类型名；基于操作类型生成参数类型名（`INSERT` → `InsertParams`）。
-6. **输出组装**：按用户选择的输出格式（见下文）生成最终代码。
-7. **自查校验**：检查字段完整性（无遗漏列）、类型合理性（无 `unknown` 未标注）、命名规范性。
+**步骤 2：类型映射**
 
-### 输出规范
+根据 SQL 语法结构进行确定性类型映射：
 
-默认输出格式为 TypeScript 接口定义，示例：
+| SQL 元素 | TypeScript 类型 | Zod 类型 |
+|---------|----------------|---------|
+| `INTEGER` / `INT` | `number` | `z.number()` |
+| `TEXT` / `VARCHAR` | `string` | `z.string()` |
+| `REAL` / `FLOAT` | `number` | `z.number()` |
+| `BOOLEAN` | `boolean` | `z.boolean()` |
+| `NULL` | `null` | `z.null()` |
+| `COUNT(*)` | `number` | `z.number()` |
+| `SUM(col)` | `number` | `z.number()` |
+| `AVG(col)` | `number` | `z.number()` |
+| `MIN(col)` / `MAX(col)` | `number` 或 `string`（取决于列类型） | 对应类型 |
+| 无法确定的表达式 | `[需核实:表达式]` | `z.unknown()` |
+
+**步骤 3：生成输出**
+
+- 默认输出 TypeScript 类型定义
+- 使用 `--zod` 参数输出 Zod 校验模板
+
+**步骤 4：输出规范**
 
 ```typescript
-// 输入: SELECT id, user_name, email FROM users WHERE age > ?
-export interface User {
+// 生成的类型定义示例
+export interface QueryResult {
   id: number;
-  userName: string;
-  email: string;
+  name: string;
+  created_at: string;
+  [需核实:未知字段]: unknown;
 }
-
-export interface UserQueryParams {
-  age: number;
-}
-```
-
-若用户指定 `--format zod`，则额外输出：
-
-```typescript
-import { z } from 'zod';
-
-export const UserSchema = z.object({
-  id: z.number(),
-  userName: z.string(),
-  email: z.string().email(),
-});
-
-export type User = z.infer<typeof UserSchema>;
 ```
 
 ---
 
-## 四、置信度门控：不编造，只标注
+## 四、置信度门控
 
-当出现以下情况时，本 Skill 不会猜测，而是输出 `[需核实:字段名]` 占位符：
+本 Skill 遵循"三不原则"：
 
-| 场景 | 处理方式 | 示例 |
-|------|----------|------|
-| 字段类型无法从 SQL 推断 | 标记为 `unknown` 并提示 | `SELECT metadata FROM docs` → `metadata: unknown // [需核实:metadata类型]` |
-| 表名缺失（子查询无别名） | 使用 `AnonymousRow` 命名并提示 | `SELECT COUNT(*) FROM (SELECT ...)` → 输出 `AnonymousRow` |
-| 参数占位符类型不明确 | 标记为 `unknown` 并列出位置 | `WHERE id = ?` → `params: [unknown] // [需核实:参数0类型]` |
-| 字段名包含特殊字符 | 保留原字段名并加引号 | `` SELECT `weird-name` FROM t `` → `'weird-name': string` |
+1. **不猜测**：对无法确定的类型，一律输出 `[需核实:字段名]` 占位符
+2. **不假设**：不假设数据库 schema 的默认值或约束
+3. **不推断**：不根据字段名推断业务含义（如 `created_at` 不自动推断为日期类型）
 
-**原则**：宁可输出带占位符的不完整类型，也不虚构一个错误的类型。
+**占位符使用规范**：
+
+| 场景 | 输出 |
+|------|------|
+| 字段类型无法从 SQL 语法确定 | `[需核实:字段名]` |
+| 表达式结果类型不确定 | `[需核实:表达式]` |
+| 子查询返回类型不确定 | `[需核实:子查询]` |
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 触发条件 | 提示话术 | 修正步骤 |
-|--------|----------|----------|----------|
-| `E1001` | 输入为空或非 SQL 文本 | "未检测到有效的 SQL 语句。请提供以 SELECT/INSERT/UPDATE/DELETE 开头的查询。" | 检查输入内容，确保包含完整 SQL |
-| `E1002` | SQL 语法无法解析 | "SQL 解析失败。请检查语句是否完整，是否包含不支持的语法（如 CTE、窗口函数）。" | 简化 SQL，移除复杂子句后重试 |
-| `E1003` | 字段列表为空 | "查询中未找到任何输出字段。请确认 SELECT 后是否包含列名或 `*`。" | 为 `SELECT *` 提供表名或显式列出字段 |
-| `E1004` | 参数占位符缺失 | "语句中未找到 `?` 或 `$n` 参数占位符。若无需参数，请忽略此提示。" | 无需操作，或检查是否遗漏 WHERE 条件 |
-| `E1005` | 输出格式不支持 | "不支持的输出格式。可选值：`ts`（默认）、`zod`。" | 重新指定格式参数 |
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|---------|---------|---------|
+| E001 | SQL 语句未以 `;` 结尾 | "SQL 语句必须以分号结尾" | 在语句末尾添加 `;` |
+| E002 | SQL 语法错误 | "无法解析 SQL 语句，请检查语法" | 检查 SQL 语法，确保语句合法 |
+| E003 | 空输入 | "未检测到 SQL 语句" | 输入至少一条合法的 SQL 语句 |
+| E004 | 多条 SQL 未用空行分隔 | "多条 SQL 请用空行分隔" | 在 SQL 语句之间添加空行 |
+| E005 | 包含非 SQL 内容 | "输入包含非 SQL 内容" | 移除 SQL 之外的其他文本 |
+| E006 | 无法确定字段类型 | "字段类型无法确定，已输出占位符" | 检查字段来源，补充必要信息 |
 
 ---
 
-## 六、FAQ 反模式：常见坑与对照
+## 六、FAQ 反模式对照
 
-### 坑 1：忽略 `JOIN` 字段歧义
+### 反模式 1：猜测字段类型
 
-**错误做法**：`SELECT id, name FROM users JOIN orders ON users.id = orders.user_id` 直接生成类型，导致 `id` 字段来源不明。
+**错误做法**：看到 `created_at` 就推断为 `Date` 类型。
 
-**正确做法**：使用别名 `SELECT u.id AS user_id, o.id AS order_id FROM users u JOIN orders o ...`，本 Skill 将生成 `userId` 和 `orderId` 两个字段。
+**正确做法**：输出 `[需核实:created_at]`，由用户确认实际类型。
 
-### 坑 2：将 `BIGINT` 一律映射为 `number`
+### 反模式 2：假设数据库约束
 
-**错误做法**：`SELECT big_id FROM t` → `bigId: number`。若数据库存储雪花 ID（超过 2^53），JS 会丢失精度。
+**错误做法**：看到 `NOT NULL` 就认为字段必填。
 
-**正确做法**：在 SQL 中显式转换 `SELECT CAST(big_id AS TEXT) FROM t`，或接受 `bigId: string` 的映射建议。
+**正确做法**：不假设任何约束，全部输出为基础类型。
 
-### 坑 3：忽略 `NULL` 值可能性
+### 反模式 3：推断业务含义
 
-**错误做法**：`SELECT email FROM users` → `email: string`，但实际可能为 `NULL`。
+**错误做法**：看到 `status` 字段就推断为枚举类型。
 
-**正确做法**：在 SQL 中使用 `COALESCE(email, '')` 或接受 `email: string | null` 的映射建议。
+**正确做法**：输出 `string` 类型，由用户自行定义枚举。
 
-### 坑 4：参数顺序与类型不匹配
+### 反模式 4：忽略错误码
 
-**错误做法**：`WHERE age > ? AND name = ?` 生成 `params: [number]`，漏掉第二个参数。
+**错误做法**：遇到错误不查错误码表，反复尝试。
 
-**正确做法**：本 Skill 会按顺序生成 `params: [number, string]`，请核对参数顺序与 SQL 中占位符出现顺序一致。
+**正确做法**：根据错误码定位问题，按修正步骤操作。
 
-### 坑 5：依赖隐式类型转换
+### 反模式 5：混合输入
 
-**错误做法**：`SELECT date_col FROM t` 直接映射为 `Date`，但 Bun.sql 默认返回字符串。
+**错误做法**：在 SQL 中混入注释或其他文本。
 
-**正确做法**：确认 Bun.sql 的返回类型配置，或在 SQL 中显式转换 `SELECT datetime(date_col) AS date_col FROM t`。
+**正确做法**：保持输入纯净，仅包含 SQL 语句。
 
 ---
 
-## 七、渐进式披露：分层次阅读路径
+## 七、渐进式阅读路径
 
 ### 速查卡（30 秒上手）
 
-1. 粘贴 SQL → 2. 获取类型 → 3. 复制代码
+1. 输入以 `;` 结尾的 SQL
+2. 多条 SQL 用空行分隔
+3. 默认输出 TypeScript 类型
+4. 加 `--zod` 输出 Zod 模板
+5. 出错查错误码表
 
-### 新手路径（首次使用）
+### 新手路径（5 分钟掌握）
 
-1. 阅读「能力边界」了解适用范围
-2. 阅读「标准流程」理解输入输出格式
-3. 使用默认 `ts` 格式，从简单 SELECT 开始
-4. 遇到问题查阅「错误码体系」
+1. 阅读"能力边界速查卡"了解适用范围
+2. 查看"标准执行流程"中的步骤 1-3
+3. 对照"错误码体系"处理常见问题
+4. 参考"FAQ 反模式对照"避免常见错误
 
-### 进阶路径（熟练用户）
+### 进阶路径（深入使用）
 
-1. 掌握「置信度门控」规则，处理复杂查询
-2. 使用 `zod` 格式生成运行时校验
-3. 批量处理多条 SQL，统一命名规范
-4. 结合「FAQ 反模式」优化 SQL 写法
+1. 理解"置信度门控"的占位符机制
+2. 掌握类型映射表的边界情况
+3. 熟悉批量处理的输入格式要求
+4. 了解 Zod 模板与 TypeScript 类型的差异
 
 ---
 
-## 八、命令行接口
+## 八、使用示例
 
-本 Skill 支持以下 CLI 参数（通过 `bun run bun-sqlgen -- [参数]` 调用）：
+### 示例 1：基础类型生成
 
-| 参数 | 说明 |
-|------|------|
-| `--selftest` | 运行内置自检，验证 Skill 功能完整性 |
-| `--version` | 输出版本号 `1.0.0` |
-
-示例：
-
-```bash
-bun run bun-sqlgen -- --selftest
-# 输出: Self-test passed. All 12 test cases OK.
-
-bun run bun-sqlgen -- --version
-# 输出: 1.0.0
+**输入**：
+```sql
+SELECT id, name, age FROM users;
 ```
+
+**输出**：
+```typescript
+export interface QueryResult {
+  id: number;
+  name: string;
+  age: number;
+}
+```
+
+### 示例 2：聚合函数处理
+
+**输入**：
+```sql
+SELECT COUNT(*) as total, AVG(age) as avg_age FROM users;
+```
+
+**输出**：
+```typescript
+export interface QueryResult {
+  total: number;
+  avg_age: number;
+}
+```
+
+### 示例 3：Zod 模板生成
+
+**输入**：
+```bash
+bun-sqlgen --zod "SELECT id, name FROM users;"
+```
+
+**输出**：
+```typescript
+import { z } from 'zod';
+
+export const QueryResultSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+});
+
+export type QueryResult = z.infer<typeof QueryResultSchema>;
+```
+
+### 示例 4：批量处理
+
+**输入**：
+```bash
+bun-sqlgen "SELECT id FROM users;
+SELECT name, email FROM contacts;"
+```
+
+**输出**：
+```typescript
+export interface QueryResult1 {
+  id: number;
+}
+
+export interface QueryResult2 {
+  name: string;
+  email: string;
+}
+```
+
+---
+
+## 九、命令行接口
+
+| 参数 | 说明 | 示例 |
+|------|------|------|
+| `--selftest` | 运行自检 | `bun-sqlgen --selftest` |
+| `--version` | 显示版本号 | `bun-sqlgen --version` |
+| `--zod` | 输出 Zod 模板 | `bun-sqlgen --zod "SQL语句"` |
+| 无参数 | 默认输出 TypeScript 类型 | `bun-sqlgen "SQL语句"` |
 
 ---
 
 ## 用户协议
 
+<!-- user-agreement-injected -->
+
 **使用本 Skill 即表示您同意以下条款：**
 
-1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 提供的类型生成结果仅供参考，不构成对代码正确性、安全性或性能的保证。在生产环境使用前，使用者应自行审查和测试生成的代码。
+1. **责任承担**：使用者自行承担使用本 Skill 产生的全部责任。包括但不限于因类型定义错误、代码生成偏差导致的任何直接或间接损失。
 
-2. **禁止反向工程**：使用者不得对本 Skill 的提示词、内部逻辑、生成机制进行反向工程、破解、提取或二次分发。本 Skill 的原创表达部分受版权保护。
+2. **禁止反向工程**：不得对本 Skill 的输出结果进行反向工程、反编译、反汇编，或试图提取底层算法逻辑。
 
-3. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
+3. **合规使用**：使用者应确保输入的 SQL 语句不包含敏感信息、商业机密或违反法律法规的内容。
 
-<!-- user-agreement-injected -->
+4. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
+
+5. **修改与分发**：使用者可基于本 Skill 进行修改和分发，但需保留原始版权声明。
 
 ---
 
 ## 许可证（License）
 
-本 Skill 采用 MIT 许可证发布。
+<!-- professional-license-embedded -->
 
 ### MIT License
 
-```
-MIT License
-
-Copyright (c) 2025 原创作者（自持版权）
+Copyright (c) 2024 TypeForge Studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -288,10 +325,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
-
-<!-- professional-license-embedded -->
-
----
-
-*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读 Bun.sql 官方文档以确认 API 行为。*
