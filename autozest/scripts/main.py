@@ -369,6 +369,11 @@ def main() -> int:
         help="批量模式（输入按行分割，每行作为独立条目）",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     # 自检模式
@@ -380,7 +385,7 @@ def main() -> int:
         # 获取输入
         if args.file:
             try:
-                with open(args.file, "r", encoding="utf-8") as f:
+                with open(args.file, "r", encoding="utf-8", errors="replace") as f:
                     raw_input = f.read()
             except OSError as e:
                 print(f"[E010] 读取文件失败: {e}", file=sys.stderr)
