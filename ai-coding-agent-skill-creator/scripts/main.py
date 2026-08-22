@@ -14,7 +14,6 @@ from datetime import datetime, timezone
 from pathlib import Path
 from functools import lru_cache
 from typing import List, Dict, Any, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # GitHub 趋势 API 端点（可通过环境变量配置）
 GITHUB_TRENDING_API = os.environ.get(

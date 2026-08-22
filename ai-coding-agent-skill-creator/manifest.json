@@ -1,5 +1,5 @@
 {
-  "timestamp": "20260818_000409",
+  "timestamp": "20260818_042042",
   "slug": "ai-coding-agent-skill-creator",
   "spec": {
     "slug": "ai-coding-agent-skill-creator",
@@ -48,11 +48,11 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\":\"ai-coding-agent-skill-creator\",\"name\":\"ai-coding-agent-skill-creator\",\"description\":\"将数据或文件转化为结构化技能包，支持参数定义与输出验证。\",\"cli_interface\":[\"[\\\"技能封装\\\"\",\"\\\"skill creator\\\"\",\"\\\"技能生成\\\"\",\"\\\"技能定义\\\"\",\"\\\"参数抽象\\\"\",\"--selftest\",\"--version\"],\"capability_outline\":[\"1. 准备数据文件（CSV/JSON/TXT）\",\"2. 运行: skill creator --input data.csv\",\"3. 按提示输入技能名称和校验规则\",\"4. 获取技能包: ./skill_output/<技能名称>/\",\"5. 运行自检: skill creator --selftest\",\"1. 阅读「能力边界」了解工具能做什么\",\"2. 阅读「触发方式」了解如何启动\",\"3. 按「标准流程」完成一次完整操作\",\"4. 遇到问题查「错误码体系」\",\"1. 掌握「自定义校验」：正则、枚举、范围\",\"2. 学习「复杂处理逻辑」：多表关联、条件分支\",\"3. 配置「输出 Schema 映射」：字段重命名、类型转换\",\"4. 集成到 CI/CD 流程：编写自动化脚本\",\"5. 编写单元测试覆盖边界场景\",\"1. 设计可复用的参数模板库\",\"2. 实现插件式处理引擎\",\"3. 构建技能版本管理机制\",\"4. 编写性能优化策略（大数据量分片处理）\",\"1. **责任承担**：使用者自行承担全部责任。本 Skill 提供的输出仅供参考，不构成任何形式的保证或承诺。\",\"2. **禁止反向工程**：禁止对本 Skill 进行反向工程、反编译、破解或试图提取源代码。\",\"3. **数据合规**：使用者应确保输入数据的合法性与合规性，不得使用本 Skill 处理违法违规内容。\",\"4. **数据隐私**：本 Skill 不收集、存储或传输任何用户数据，所有处理均在本地完成。\",\"5. **免责声明**：因使用本 Skill 产生的任何直接或间接损失，作者不承担任何责任。\",\"6. **协议确认**：使用本 Skill 即视为同意本协议全部条款。\"],\"upstream\":null,\"derivation\":\"original-work\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 章节结构自行设计，可参考规格里的\"能力清单\"但不得沿用其标题措辞与顺序。\n3. 输出完整 Markdown，frontmatter 必须包含（值已给定，照抄）：\n   slug: ai-coding-agent-skill-creator\n   name: ai-coding-agent-skill-creator\n   displayName: （自创中文名，4-12字，含场景词，如\"合同审查 法律风险 条款比对\"风格，给一个最合适的）\n   description: （自创一句话，30字内，讲清用途）\n   version: 1.0.0\n   license: MIT\n   source_project: original\n   source_url: （留空）\n   copyright_holder: 原创作者（自持版权）\n   ai_generated: true\n   ai_tools: [\"DeepSeek\"]\n   disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。\n   author: （自创，不用任何工厂标识）\n   agent_created: true\n   trigger_words: （保留原触发词，可补充2-3个同义场景词）\n4. frontmatter 结束后必须紧跟显式 AI 标识行：\n   > 本内容由 AI 生成，仅供学习参考\n   并带 marker 注释 <!-- ai-generated-notice -->\n5. 正文必须包含以下 TRACE 高分结构（对标 SkillHub 4.8+ 顶级 Skill）：\n   - 能力边界：能做/不能做清单 + 适用对象（一页纸速查卡）\n   - 触发方式：trigger_words + 大白话场景映射表\n   - 标准流程：前置条件 → 执行步骤（分步编号）→ 输出规范\n   - 置信度门控：信息不足时输出 [需核实:字段] 占位，不编造\n   - 错误码体系：常见错误 → 提示话术 → 修正步骤\n   - FAQ 反模式：3-5 个常见坑 + 反模式对照\n   - 渐进式披露：速查卡 + 分层次阅读路径（新手/进阶）\n   每节都要有真实可执行的细节（参数表、示例、边界值），拒绝空话套话。\n6. 全中文为主（代码示例可用英文），语气专业务实。\n7. 严禁：绝对化用语（最/最好/100%/零风险/保证）、收益承诺、任何内部平台信息。\n8. 不要输出 ```markdown 包裹，直接输出 SKILL.md 全文（**首行必须是 --- 开头**）。\n9. 【强制合规章节】（document_gate 硬性要求，缺一即打回重写）：\n   a. 文档末尾必须含「用户协议」章节（含：使用者自行承担全部责任、禁止反向工程，\n      带 marker 注释 <!-- user-agreement-injected -->）\n   b. 文档末尾必须含「许可证（License）」章节，内嵌 MIT 许可证全文，\n      带 marker 注释 <!-- professional-license-embedded -->\n   c. 开头必须有一行 AI 辅助生成免责声明（如\"本 Skill 由 AI 辅助生成，仅供参考\"）\n   d. frontmatter 的 description/正文一律不得出现任何绝对化承诺\n   以上章节即使功能大纲未提及也必须补齐——这是发布合规的强制要求。",
   "llm_model": "deepseek-chat",
   "llm_temperature": 0.9,
-  "cost_usd": 0.008885,
+  "cost_usd": 0.008563,
   "similarity_metrics": {
-    "section": 0.12962962962962962,
-    "token": 0.23298178331735378,
-    "line": 0.08514851485148515
+    "section": 0.18947368421052632,
+    "token": 0.2685656154628688,
+    "line": 0.10068649885583524
   },
   "style_checks_passed": true
 }
