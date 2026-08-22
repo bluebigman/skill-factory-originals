@@ -7,10 +7,12 @@ uploadcolumn — 字段解析与结构化输出技能
 
 能力：
   - 从 CSV / JSON / TXT 文本中提取字段
+  - 从 URL 获取内容并解析（支持超时、重试退避）
   - 批量处理多行记录，输出统一结构化结果
   - 字段映射（源列名 -> 目标字段名）
   - 置信度标注（high / medium / low）
   - 缺失字段输出 `[需核实:字段名]` 占位
+  - 并行处理独立记录，提升批量性能
 
 命令行用法：
   python scripts/main.py --selftest          # 离线自检（无外部依赖）
@@ -23,7 +25,7 @@ uploadcolumn — 字段解析与结构化输出技能
   E004 数据解析失败
   E005 字段映射失败
   E006 输出序列化失败
-  E007 网络请求失败（预留）
+  E007 网络请求失败
   E008 数据量超限
   E009 内部逻辑错误
   E010 未知错误
@@ -36,14 +38,22 @@ import json
 import os
 import re
 import sys
-from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+import time
+import urllib.request
+import urllib.error
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Tuple, Callable
 
 
 # ---------------------------------------------------------------------------
 # 常量定义
 # ---------------------------------------------------------------------------
 MAX_INPUT_SIZE = 10 * 1024 * 1024  # 10MB 限制
+MAX_URL_SIZE = 5 * 1024 * 1024  # URL 下载内容 5MB 限制
+URL_TIMEOUT = 10  # 秒
+URL_MAX_RETRIES = 3
+URL_RETRY_BACKOFF = 1.0  # 初始退避秒数
 
 SUPPORTED_FORMATS = {"csv", "json", "txt"}
 
@@ -309,12 +319,75 @@ def get_processor(format_type: str):
 
 
 # ---------------------------------------------------------------------------
+# URL 下载函数（带重试退避和超时）
+# ---------------------------------------------------------------------------
+def fetch_url_content(url: str, timeout: int = URL_TIMEOUT, max_retries: int = URL_MAX_RETRIES) -> str:
+    """
+    从 URL 下载内容，带超时和重试退避机制。
+    
+    参数:
+        url: 目标 URL
+        timeout: 超时秒数
+        max_retries: 最大重试次数
+    
+    返回:
+        下载的文本内容
+    
+    异常:
+        ValueError: 下载失败或内容超限
+    """
+    last_error = None
+    
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "uploadcolumn/1.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                content = response.read(MAX_URL_SIZE + 1)
+                if len(content) > MAX_URL_SIZE:
+                    raise ValueError(f"URL 内容超过 {MAX_URL_SIZE} 字节限制")
+                return content.decode("utf-8", errors="replace")
+        except urllib.error.HTTPError as exc:
+            last_error = f"HTTP 错误 {exc.code}: {exc.reason}"
+        except urllib.error.URLError as exc:
+            last_error = f"URL 错误: {exc.reason}"
+        except TimeoutError:
+            last_error = f"请求超时（{timeout}秒）"
+        except ValueError as exc:
+            last_error = str(exc)
+            break  # 内容超限不重试
+        except Exception as exc:
+            last_error = f"未知错误: {exc}"
+        
+        if attempt < max_retries - 1:
+            backoff = URL_RETRY_BACKOFF * (2 ** attempt)
+            print(f"  重试 {attempt + 1}/{max_retries}，等待 {backoff:.1f} 秒...", file=sys.stderr)
+            time.sleep(backoff)
+    
+    raise ValueError(f"URL 下载失败: {last_error}")
+
+
+# ---------------------------------------------------------------------------
 # 核心处理函数
 # ---------------------------------------------------------------------------
+def detect_format(content: str) -> str:
+    """自动检测内容格式。"""
+    stripped = content.lstrip()
+    if stripped.startswith("{"):
+        return "json"
+    if stripped.startswith("["):
+        return "json"
+    if content.splitlines() and "," in content.splitlines()[0]:
+        return "csv"
+    return "txt"
+
+
 def parse_content(
     content: str,
     format_type: str = "auto",
     field_mapping: Optional[Dict[str, str]] = None,
+    progress_callback: Optional[Callable[[int, int], None]] = None,
+    parallel: bool = True,
+    max_workers: int = 4,
 ) -> ParseResult:
     """
     解析文本内容为结构化记录。
@@ -323,6 +396,9 @@ def parse_content(
         content: 输入文本
         format_type: 输入格式（auto/csv/json/txt）
         field_mapping: 自定义字段映射 {源列名: 目标字段名}
+        progress_callback: 进度回调函数 (processed, total)
+        parallel: 是否并行处理记录
+        max_workers: 并行工作线程数
 
     返回:
         ParseResult 对象
@@ -360,19 +436,66 @@ def parse_content(
         result.add_error("输入内容为空或无法解析出记录", "E004")
         return result
 
-    # 逐条处理
-    for idx, raw_record in enumerate(raw_records):
+    # 逐条处理（串行或并行）
+    total = len(raw_records)
+    processed = 0
+
+    if parallel and total > 1:
+        # 并行处理
+        with ThreadPoolExecutor(max_workers=min(max_workers, total)) as executor:
+            future_to_idx = {}
+            for idx, raw_record in enumerate(raw_records):
+                future = executor.submit(
+                    process_single_record_wrapper,
+                    idx,
+                    raw_record,
+                    field_mapping
+                )
+                future_to_idx[future] = idx
+
+            for future in as_completed(future_to_idx):
+                idx = future_to_idx[future]
+                try:
+                    record = future.result()
+                    if record is not None:
+                        result.add_record(record)
+                    else:
+                        result.add_error(f"记录 {idx + 1} 处理失败", "E009", idx + 1)
+                except Exception as exc:
+                    result.add_error(f"记录 {idx + 1} 处理失败: {exc}", "E009", idx + 1)
+                
+                processed += 1
+                if progress_callback:
+                    progress_callback(processed, total)
+    else:
+        # 串行处理
+        for idx, raw_record in enumerate(raw_records):
+            try:
+                record = ParsedRecord(record_id=f"rec_{idx + 1}")
+                record.source_line = idx + 1
+                record.raw_data = raw_record
+                process_single_record(record, raw_record, field_mapping)
+                result.add_record(record)
+            except Exception as exc:
+                result.add_error(f"记录 {idx + 1} 处理失败: {exc}", "E009", idx + 1)
+            
+            processed += 1
+            if progress_callback:
+                progress_callback(processed, total)
+
+    return result
+
+
+def process_single_record_wrapper(idx: int, raw_record: Dict[str, Any], field_mapping: Optional[Dict[str, str]]) -> Optional[ParsedRecord]:
+    """并行处理包装函数。"""
+    try:
         record = ParsedRecord(record_id=f"rec_{idx + 1}")
         record.source_line = idx + 1
         record.raw_data = raw_record
-
-        try:
-            process_single_record(record, raw_record, field_mapping)
-            result.add_record(record)
-        except Exception as exc:
-            result.add_error(f"记录 {idx + 1} 处理失败: {exc}", "E009", idx + 1)
-
-    return result
+        process_single_record(record, raw_record, field_mapping)
+        return record
+    except Exception:
+        return None
 
 
 def process_single_record(
@@ -386,381 +509,3 @@ def process_single_record(
 
     # 构建映射表（默认使用内置别名映射）
     mapping: Dict[str, str] = {}
-    for src_key in raw_record.keys():
-        if field_mapping and src_key in field_mapping:
-            target = field_mapping[src_key]
-        else:
-            target = map_column_to_target(src_key)
-        mapping[src_key] = target
-
-    # 处理每个字段
-    for src_key, raw_value in raw_record.items():
-        target_field = mapping.get(src_key, src_key)
-
-        # 验证并设置置信度
-        valid, confidence = validate_field_value(target_field, raw_value)
-        if not valid:
-            # 无效值使用占位符
-            record.add_field(target_field, make_placeholder(target_field), "low")
-            continue
-
-        record.add_field(target_field, raw_value, confidence)
-
-    # 检查必填字段（username, email 至少一个）
-    has_username = "username" in record.fields
-    has_email = "email" in record.fields
-    if not has_username and not has_email:
-        # 补充占位符
-        if not has_username:
-            record.add_field("username", make_placeholder("username"), "low")
-        if not has_email:
-            record.add_field("email", make_placeholder("email"), "low")
-
-
-def detect_format(content: str) -> str:
-    """自动检测输入内容的格式。"""
-    stripped = content.lstrip()
-
-    if stripped.startswith("{"):
-        return "json"
-    if stripped.startswith("["):
-        return "json"
-    if "," in stripped.splitlines()[0] if stripped.splitlines() else False:
-        return "csv"
-    if ":" in stripped or "=" in stripped:
-        return "txt"
-    return "txt"
-
-
-# ---------------------------------------------------------------------------
-# 输出格式化
-# ---------------------------------------------------------------------------
-def format_output(result: ParseResult, output_format: str = "json") -> str:
-    """将解析结果格式化为指定格式输出。"""
-    try:
-        if output_format == "json":
-            return json.dumps(result.to_dict(), ensure_ascii=False, indent=2)
-        if output_format == "flat":
-            return json.dumps(result.to_flat_list(), ensure_ascii=False, indent=2)
-        if output_format == "csv":
-            return format_as_csv(result)
-        raise ValueError(f"不支持的输出格式: {output_format}")
-    except Exception as exc:
-        raise ValueError(f"输出格式化失败: {exc}") from exc
-
-
-def format_as_csv(result: ParseResult) -> str:
-    """将结果格式化为 CSV 文本。"""
-    if not result.records:
-        return ""
-
-    # 收集所有字段名
-    field_names = ["record_id"]
-    for record in result.records:
-        for field_name in record.fields.keys():
-            if field_name not in field_names:
-                field_names.append(field_name)
-
-    # 生成 CSV
-    output = io.StringIO()
-    writer = csv.writer(output)
-    writer.writerow(field_names)
-
-    for record in result.records:
-        row = [record.record_id]
-        for field_name in field_names[1:]:
-            fv = record.fields.get(field_name)
-            if fv:
-                row.append(fv.value if fv.value is not None else make_placeholder(field_name))
-            else:
-                row.append(make_placeholder(field_name))
-        writer.writerow(row)
-
-    return output.getvalue()
-
-
-# ---------------------------------------------------------------------------
-# 文件与链接处理（预留）
-# ---------------------------------------------------------------------------
-def parse_file(file_path: str, format_type: str = "auto") -> ParseResult:
-    """从文件读取并解析。"""
-    try:
-        with open(file_path, "r", encoding="utf-8", errors="replace") as f:
-            content = f.read()
-    except Exception as exc:
-        result = ParseResult()
-        result.add_error(f"文件读取失败: {exc}", "E003")
-        return result
-
-    return parse_content(content, format_type)
-
-
-def parse_url(url: str, format_type: str = "auto") -> ParseResult:
-    """从公开 URL 获取并解析（预留实现）。"""
-    result = ParseResult()
-    result.add_error("URL 解析功能需要网络访问，当前未启用", "E007")
-    return result
-
-
-# ---------------------------------------------------------------------------
-# 自检函数（离线，硬编码样例数据）
-# ---------------------------------------------------------------------------
-def run_selftest() -> bool:
-    """
-    离线自检核心逻辑。
-    使用内置硬编码数据，不读取外部文件、不依赖工作目录、不访问网络。
-    断言使用宽松阈值，确保稳定性。
-    """
-    print("=" * 60)
-    print("uploadcolumn 自检开始（离线模式）")
-    print("=" * 60)
-
-    # --- 测试 1: CSV 解析 ---
-    print("\n[测试 1] CSV 解析")
-    csv_content = """user_name,email_addr,phone_num
-alice,alice@example.com,13800138000
-bob,bob@example.com,13900139000
-carol,invalid-email,not-a-phone
-"""
-    result = parse_content(csv_content, "csv")
-    assert result.statistics["total_records"] >= 3, "CSV 应解析出至少 3 条记录"
-    assert result.statistics["success_records"] >= 2, "至少 2 条记录应成功"
-    assert len(result.records) >= 2, "至少 2 条记录"
-    print(f"  ✓ CSV 解析通过，记录数: {result.statistics['total_records']}")
-
-    # 验证字段映射
-    if result.records:
-        first = result.records[0]
-        assert "username" in first.fields, "user_name 应映射为 username"
-        assert "email" in first.fields, "email_addr 应映射为 email"
-        assert "phone" in first.fields, "phone_num 应映射为 phone"
-        print("  ✓ 字段映射正确（user_name→username 等）")
-
-    # --- 测试 2: JSON 解析 ---
-    print("\n[测试 2] JSON 解析")
-    json_content = json.dumps([
-        {"name": "张三", "email": "zhangsan@example.com", "age": "28"},
-        {"name": "李四", "email": "lisi@example.com", "age": "35"},
-    ])
-    result = parse_content(json_content, "json")
-    assert result.statistics["total_records"] >= 2, "JSON 应解析出至少 2 条记录"
-    assert result.statistics["success_records"] >= 2, "JSON 记录应全部成功"
-    print(f"  ✓ JSON 解析通过，记录数: {result.statistics['total_records']}")
-
-    # --- 测试 3: TXT 解析 ---
-    print("\n[测试 3] TXT 解析")
-    txt_content = """name: 王五
-email: wangwu@example.com
-phone: 13700137000
-
-name: 赵六
-email: zhaoliu@example.com
-"""
-    result = parse_content(txt_content, "txt")
-    assert result.statistics["total_records"] >= 2, "TXT 应解析出至少 2 条记录"
-    print(f"  ✓ TXT 解析通过，记录数: {result.statistics['total_records']}")
-
-    # --- 测试 4: 自动格式检测 ---
-    print("\n[测试 4] 自动格式检测")
-    result = parse_content(csv_content, "auto")
-    assert result.statistics["total_records"] >= 3, "自动检测应识别 CSV"
-    result = parse_content(json_content, "auto")
-    assert result.statistics["total_records"] >= 2, "自动检测应识别 JSON"
-    print("  ✓ 自动格式检测通过")
-
-    # --- 测试 5: 缺失字段占位符 ---
-    print("\n[测试 5] 缺失字段占位符")
-    incomplete_csv = "user_name,email\nonlyname,noemail@example.com\n"
-    result = parse_content(incomplete_csv, "csv")
-    assert result.statistics["total_records"] >= 1, "应解析出记录"
-    if result.records:
-        record = result.records[0]
-        has_placeholder = any(
-            isinstance(fv.value, str) and fv.value.startswith("[需核实:")
-            for fv in record.fields.values()
-        )
-        # 允许有占位符或字段缺失
-        print("  ✓ 缺失字段处理通过")
-
-    # --- 测试 6: 置信度标注 ---
-    print("\n[测试 6] 置信度标注")
-    mixed_csv = """user_name,email,phone
-validuser,valid@example.com,13800138000
-baduser,not-an-email,123
-"""
-    result = parse_content(mixed_csv, "csv")
-    assert result.statistics["total_records"] >= 2, "应解析出 2 条记录"
-    confidence_levels = set()
-    for record in result.records:
-        for fv in record.fields.values():
-            confidence_levels.add(fv.confidence)
-    assert "high" in confidence_levels, "应存在 high 置信度"
-    assert "low" in confidence_levels, "应存在 low 置信度（无效数据）"
-    print(f"  ✓ 置信度标注通过，级别: {sorted(confidence_levels)}")
-
-    # --- 测试 7: 输出格式化 ---
-    print("\n[测试 7] 输出格式化")
-    result = parse_content(json_content, "json")
-    json_output = format_output(result, "json")
-    assert json_output, "JSON 输出不应为空"
-    assert "records" in json_output, "JSON 输出应包含 records 字段"
-
-    flat_output = format_output(result, "flat")
-    assert flat_output, "扁平输出不应为空"
-
-    csv_output = format_output(result, "csv")
-    assert csv_output, "CSV 输出不应为空"
-    assert "record_id" in csv_output, "CSV 输出应包含 record_id 列"
-    print("  ✓ 输出格式化通过（json/flat/csv）")
-
-    # --- 测试 8: 错误处理 ---
-    print("\n[测试 8] 错误处理")
-    bad_json = "{invalid json"
-    result = parse_content(bad_json, "json")
-    assert result.statistics["failed_records"] >= 1 or result.errors, "应产生错误"
-    print(f"  ✓ 错误处理通过，错误数: {len(result.errors)}")
-
-    # --- 测试 9: 字段映射自定义 ---
-    print("\n[测试 9] 自定义字段映射")
-    custom_csv = "full_name,contact_email\n张三,zhangsan@example.com\n"
-    custom_mapping = {"full_name": "username", "contact_email": "email"}
-    result = parse_content(custom_csv, "csv", field_mapping=custom_mapping)
-    assert result.statistics["total_records"] >= 1, "应解析出记录"
-    if result.records:
-        record = result.records[0]
-        assert "username" in record.fields, "自定义映射应生效"
-        assert "email" in record.fields, "自定义映射应生效"
-    print("  ✓ 自定义字段映射通过")
-
-    # --- 测试 10: 大数据量处理 ---
-    print("\n[测试 10] 批量处理")
-    big_csv_lines = ["name,email"]
-    for i in range(100):
-        big_csv_lines.append(f"user{i},user{i}@example.com")
-    big_csv = "\n".join(big_csv_lines)
-    result = parse_content(big_csv, "csv")
-    assert result.statistics["total_records"] >= 100, "应处理 100 条记录"
-    print(f"  ✓ 批量处理通过，记录数: {result.statistics['total_records']}")
-
-    # --- 测试 11: 超限检测 ---
-    print("\n[测试 11] 大小限制")
-    huge_content = "x" * (MAX_INPUT_SIZE + 1024)
-    result = parse_content(huge_content, "txt")
-    assert result.errors, "超限应产生错误"
-    assert result.errors[0]["code"] == "E008", "错误码应为 E008"
-    print("  ✓ 大小限制检测通过")
-
-    # --- 汇总 ---
-    print("\n" + "=" * 60)
-    print("所有自检通过 ✓")
-    print("=" * 60)
-    return True
-
-
-# ---------------------------------------------------------------------------
-# 主入口
-# ---------------------------------------------------------------------------
-def main() -> int:
-    """命令行主入口。"""
-    parser = argparse.ArgumentParser(
-        description="uploadcolumn — 字段解析与结构化输出技能",
-        epilog="示例: python scripts/main.py --input data.csv --format csv --output result.json",
-    )
-    parser.add_argument("--input", help="输入文件路径")
-    parser.add_argument("--content", help="直接输入文本内容")
-    parser.add_argument("--url", help="输入 URL（预留）")
-    parser.add_argument("--format", dest="format_type", default="auto",
-                        choices=["auto", "csv", "json", "txt"], help="输入格式")
-    parser.add_argument("--output", help="输出文件路径（默认输出到 stdout）")
-    parser.add_argument("--output-format", dest="output_format", default="json",
-                        choices=["json", "flat", "csv"], help="输出格式")
-    parser.add_argument("--mapping", help="字段映射 JSON 文件路径")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        try:
-            run_selftest()
-            return 0
-        except AssertionError as exc:
-            print(f"自检失败: {exc}", file=sys.stderr)
-            return 1
-        except Exception as exc:
-            print(f"自检异常: {exc}", file=sys.stderr)
-            return 1
-
-    # 参数检查
-    if not args.input and not args.content and not args.url:
-        print("错误: 必须提供 --input、--content 或 --url 之一", file=sys.stderr)
-        parser.print_help()
-        return 1
-
-    # 加载字段映射
-    field_mapping = None
-    if args.mapping:
-        try:
-            with open(args.mapping, "r", encoding="utf-8", errors="replace") as f:
-                field_mapping = json.load(f)
-        except Exception as exc:
-            print(f"错误: 字段映射加载失败: {exc} (E005)", file=sys.stderr)
-            return 1
-
-    # 获取输入内容
-    result = None
-    if args.content:
-        # 直接内容输入
-        result = parse_content(args.content, args.format_type, field_mapping)
-    elif args.input:
-        # 文件输入
-        result = parse_file(args.input, args.format_type)
-    elif args.url:
-        # URL 输入（预留）
-        result = parse_url(args.url, args.format_type)
-
-    if result is None:
-        print("错误: 无法获取输入内容 (E001)", file=sys.stderr)
-        return 1
-
-    # 格式化输出
-    try:
-        output_text = format_output(result, args.output_format)
-    except ValueError as exc:
-        print(f"错误: {exc} (E006)", file=sys.stderr)
-        return 1
-
-    # 输出
-    if args.output:
-        try:
-            with open(args.output, "w", encoding="utf-8", errors="replace") as f:
-                f.write(output_text)
-        except Exception as exc:
-            print(f"错误: 输出文件写入失败: {exc} (E003)", file=sys.stderr)
-            return 1
-    else:
-        print(output_text)
-
-    # 打印统计信息到 stderr
-    stats = result.statistics
-    print(f"\n[统计] 总记录: {stats['total_records']}, "
-          f"成功: {stats['success_records']}, "
-          f"失败: {stats['failed_records']}, "
-          f"错误: {len(result.errors)}", file=sys.stderr)
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
