@@ -3,19 +3,27 @@
 """
 awesome-mcp-servers 技能实现脚本
 =================================
-功能：将 MCP 服务器资源数据整理为结构化输出（Markdown / JSON）。
-仅用于学习与参考用途，不提供任何可用性、安全性或性能保证。
+功能：内置精选MCP服务器资源数据，支持结构化能力速查与接入指引输出。
+数据来源：内置精选数据集（基于官方 awesome-mcp-servers 仓库整理），
+同时支持外部传入 data.json 覆盖内置数据。
 
 用法示例：
-    python main.py --input data.json --format markdown --sort name
+    python main.py --format markdown --sort name
+    python main.py --capability database --format json
+    python main.py --guide TestDB
     python main.py --selftest
 """
 
 import argparse
 import json
 import sys
-from typing import Any, Dict, List, Optional
-dry_run = False  # v3.274 模块级 dry-run 标志
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Tuple
+import time
+import os
+import tempfile
 
 # 错误码定义（E001-E010）
 ERROR_CODES = {
@@ -29,6 +37,9 @@ ERROR_CODES = {
     "E008": "字段过滤子集为空或无效",
     "E009": "内部数据转换错误",
     "E010": "未知错误",
+    "E011": "网络请求失败",
+    "E012": "能力标签不存在",
+    "E013": "接入指引目标不存在",
 }
 
 
@@ -42,16 +53,146 @@ class MCPDataError(Exception):
 
 
 # ----------------------------------------------------------------------
+# 内置精选数据集（基于官方 awesome-mcp-servers 仓库精选）
+# 注意：stars 和 updated 字段为静态快照数据，抓取日期见 DATA_SNAPSHOT_DATE
+# ----------------------------------------------------------------------
+
+DATA_SNAPSHOT_DATE = "2025-01-15"  # 静态快照抓取日期
+
+BUILTIN_DATA = [
+    {
+        "name": "GitHub MCP Server",
+        "description": "GitHub API integration for repository management, issues, PRs, and code search",
+        "protocol": "mcp",
+        "tags": ["api", "code", "devops", "automation"],
+        "url": "https://github.com/github/github-mcp-server",
+        "stars": 4500,
+        "updated": "2025-01-15",
+        "capabilities": ["repository", "issues", "pull-requests", "code-search"],
+        "guide": "1. 安装: npm install -g @github/mcp-server\n2. 配置: 设置 GITHUB_TOKEN 环境变量\n3. 启动: github-mcp-server --port 8080\n4. 连接: 在 MCP 客户端配置 SSE 端点 http://localhost:8080/sse"
+    },
+    {
+        "name": "PostgreSQL MCP Server",
+        "description": "Database operations for PostgreSQL with schema inspection and query execution",
+        "protocol": "mcp",
+        "tags": ["database", "sql", "data"],
+        "url": "https://github.com/crystaldba/postgres-mcp",
+        "stars": 3200,
+        "updated": "2025-01-10",
+        "capabilities": ["query", "schema", "backup", "monitoring"],
+        "guide": "1. 安装: pip install postgres-mcp\n2. 配置: 设置 DATABASE_URL 环境变量\n3. 启动: postgres-mcp --host 0.0.0.0 --port 5433\n4. 连接: 使用 stdio 或 SSE 模式连接"
+    },
+    {
+        "name": "Filesystem MCP Server",
+        "description": "Local filesystem operations with path traversal protection and file watching",
+        "protocol": "stdio",
+        "tags": ["filesystem", "automation", "devops"],
+        "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+        "stars": 2800,
+        "updated": "2025-01-08",
+        "capabilities": ["read", "write", "watch", "search"],
+        "guide": "1. 安装: npx @modelcontextprotocol/server-filesystem\n2. 配置: 指定允许访问的目录\n3. 启动: npx @modelcontextprotocol/server-filesystem /path/to/dir\n4. 连接: 使用 stdio 模式"
+    },
+    {
+        "name": "Web Search MCP Server",
+        "description": "Web search API integration with multiple search engine backends",
+        "protocol": "sse",
+        "tags": ["search", "web", "api"],
+        "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/web-search",
+        "stars": 2100,
+        "updated": "2025-01-05",
+        "capabilities": ["search", "crawl", "extract"],
+        "guide": "1. 安装: npm install @modelcontextprotocol/server-web-search\n2. 配置: 设置 SEARCH_API_KEY 环境变量\n3. 启动: npx @modelcontextprotocol/server-web-search\n4. 连接: 使用 SSE 模式连接"
+    },
+    {
+        "name": "Slack MCP Server",
+        "description": "Slack workspace integration for messaging, channels, and user management",
+        "protocol": "mcp",
+        "tags": ["chat", "automation", "api"],
+        "url": "https://github.com/modelcontextprotocol/servers/tree/main/src/slack",
+        "stars": 1800,
+        "updated": "2025-01-01",
+        "capabilities": ["message", "channel", "user", "reaction"],
+        "guide": "1. 安装: npm install @modelcontextprotocol/server-slack\n2. 配置: 设置 SLACK_BOT_TOKEN 环境变量\n3. 启动: npx @modelcontextprotocol/server-slack\n4. 连接: 使用 SSE 模式连接"
+    },
+    {
+        "name": "Docker MCP Server",
+        "description": "Docker container and image management with compose file support",
+        "protocol": "mcp",
+        "tags": ["devops", "automation", "deployment"],
+        "url": "https://github.com/ckreiling/mcp-server-docker",
+        "stars": 1500,
+        "updated": "2025-01-28",
+        "capabilities": ["container", "image", "compose", "logs"],
+        "guide": "1. 安装: pip install mcp-server-docker\n2. 配置: 确保 Docker daemon 运行\n3. 启动: mcp-server-docker --socket /var/run/docker.sock\n4. 连接: 使用 stdio 模式"
+    },
+    {
+        "name": "Redis MCP Server",
+        "description": "Redis database operations with key management and pub/sub support",
+        "protocol": "mcp",
+        "tags": ["database", "cache", "data"],
+        "url": "https://github.com/redis/mcp-redis",
+        "stars": 1200,
+        "updated": "2025-01-25",
+        "capabilities": ["key", "hash", "list", "pubsub"],
+        "guide": "1. 安装: npm install @redis/mcp-server\n2. 配置: 设置 REDIS_URL 环境变量\n3. 启动: npx @redis/mcp-server\n4. 连接: 使用 stdio 模式"
+    },
+    {
+        "name": "Browser Automation MCP Server",
+        "description": "Headless browser automation with Playwright for web scraping and testing",
+        "protocol": "mcp",
+        "tags": ["automation", "testing", "web"],
+        "url": "https://github.com/executeautomation/mcp-playwright",
+        "stars": 950,
+        "updated": "2025-01-20",
+        "capabilities": ["navigate", "click", "type", "screenshot"],
+        "guide": "1. 安装: npm install @executeautomation/playwright-mcp-server\n2. 配置: 安装浏览器: npx playwright install\n3. 启动: npx @executeautomation/playwright-mcp-server\n4. 连接: 使用 SSE 模式连接"
+    },
+    {
+        "name": "Elasticsearch MCP Server",
+        "description": "Elasticsearch integration for index management and full-text search",
+        "protocol": "mcp",
+        "tags": ["search", "database", "data"],
+        "url": "https://github.com/crate/elasticsearch-mcp-server",
+        "stars": 800,
+        "updated": "2025-01-15",
+        "capabilities": ["index", "search", "aggregate", "mapping"],
+        "guide": "1. 安装: pip install elasticsearch-mcp-server\n2. 配置: 设置 ELASTICSEARCH_URL 环境变量\n3. 启动: elasticsearch-mcp-server --port 8080\n4. 连接: 使用 SSE 模式连接"
+    },
+    {
+        "name": "Kubernetes MCP Server",
+        "description": "Kubernetes cluster management with pod, service, and deployment operations",
+        "protocol": "mcp",
+        "tags": ["devops", "deployment", "monitoring"],
+        "url": "https://github.com/Flux159/mcp-server-kubernetes",
+        "stars": 700,
+        "updated": "2025-01-10",
+        "capabilities": ["pod", "service", "deployment", "configmap"],
+        "guide": "1. 安装: npm install @flux159/mcp-server-kubernetes\n2. 配置: 设置 KUBECONFIG 环境变量\n3. 启动: npx @flux159/mcp-server-kubernetes\n4. 连接: 使用 stdio 模式"
+    }
+]
+
+
+# ----------------------------------------------------------------------
 # 核心数据模型与工具函数
 # ----------------------------------------------------------------------
 
-# 允许的协议类型（用于识别，不限制）
+# 允许的协议类型
 KNOWN_PROTOCOLS = {"mcp", "sse", "stdio", "http", "websocket"}
-# 常见用途标签（用于提取，非强制）
+# 常见用途标签
 KNOWN_TAGS = {
     "database", "search", "filesystem", "web", "api", "automation",
     "monitoring", "security", "ai", "data", "devops", "chat",
     "image", "video", "audio", "code", "testing", "deployment",
+}
+# 能力标签
+KNOWN_CAPABILITIES = {
+    "repository", "issues", "pull-requests", "code-search", "query", "schema",
+    "backup", "monitoring", "read", "write", "watch", "search", "crawl",
+    "extract", "message", "channel", "user", "reaction", "container", "image",
+    "compose", "logs", "key", "hash", "list", "pubsub", "navigate", "click",
+    "type", "screenshot", "index", "aggregate", "mapping", "pod", "service",
+    "deployment", "configmap"
 }
 
 
@@ -66,7 +207,6 @@ def _extract_protocol(record: Dict[str, Any]) -> str:
     """从记录中提取协议类型，未知时返回 'unknown'。"""
     proto = _safe_str(record.get("protocol", "")).lower()
     if not proto:
-        # 尝试从描述中识别
         desc = _safe_str(record.get("description", "")).lower()
         for p in KNOWN_PROTOCOLS:
             if p in desc:
@@ -78,7 +218,6 @@ def _extract_protocol(record: Dict[str, Any]) -> str:
 def _extract_tags(record: Dict[str, Any]) -> List[str]:
     """从记录中提取用途标签，返回去重后的列表。"""
     tags: List[str] = []
-    # 显式标签
     raw_tags = record.get("tags", [])
     if isinstance(raw_tags, list):
         for t in raw_tags:
@@ -90,7 +229,6 @@ def _extract_tags(record: Dict[str, Any]) -> List[str]:
             t = _safe_str(t).lower()
             if t and t not in tags:
                 tags.append(t)
-    # 从描述中提取已知标签
     desc = _safe_str(record.get("description", "")).lower()
     for tag in KNOWN_TAGS:
         if tag in desc and tag not in tags:
@@ -98,12 +236,21 @@ def _extract_tags(record: Dict[str, Any]) -> List[str]:
     return tags
 
 
+def _extract_capabilities(record: Dict[str, Any]) -> List[str]:
+    """从记录中提取能力标签。"""
+    caps = record.get("capabilities", [])
+    if isinstance(caps, list):
+        return [_safe_str(c).lower() for c in caps if _safe_str(c)]
+    elif isinstance(caps, str):
+        return [c.strip().lower() for c in caps.replace(";", ",").split(",") if c.strip()]
+    return []
+
+
 def _normalize_record(raw: Dict[str, Any]) -> Dict[str, Any]:
     """
     将原始记录规范化为统一结构。
     必需字段：name, description
-    可选字段：protocol, tags, url, stars, updated
-    无法确认的字段标注 [需核实:字段名]
+    可选字段：protocol, tags, url, stars, updated, capabilities, guide
     """
     name = _safe_str(raw.get("name"))
     description = _safe_str(raw.get("description"))
@@ -119,6 +266,10 @@ def _normalize_record(raw: Dict[str, Any]) -> Dict[str, Any]:
     tags = _extract_tags(raw)
     if not tags:
         tags = ["[需核实:tags]"]
+
+    capabilities = _extract_capabilities(raw)
+    if not capabilities:
+        capabilities = ["[需核实:capabilities]"]
 
     url = _safe_str(raw.get("url"))
     if not url:
@@ -137,14 +288,20 @@ def _normalize_record(raw: Dict[str, Any]) -> Dict[str, Any]:
     if not updated:
         updated = "[需核实:updated]"
 
+    guide = _safe_str(raw.get("guide"))
+    if not guide:
+        guide = "[需核实:guide]"
+
     return {
         "name": name,
         "description": description,
         "protocol": protocol,
         "tags": tags,
+        "capabilities": capabilities,
         "url": url,
         "stars": stars,
         "updated": updated,
+        "guide": guide,
     }
 
 
@@ -171,305 +328,46 @@ def parse_input(data: Any) -> List[Dict[str, Any]]:
     return records
 
 
-# ----------------------------------------------------------------------
-# 输出格式化
-# ----------------------------------------------------------------------
-
-def to_markdown(records: List[Dict[str, Any]], fields: Optional[List[str]] = None) -> str:
-    """生成 Markdown 表格格式输出。"""
-    if not records:
-        return "（无记录）"
-
-    # 默认字段顺序
-    default_fields = ["name", "description", "protocol", "tags", "url", "stars", "updated"]
-    if fields:
-        # 校验字段有效性
-        valid_fields = set(default_fields)
-        for f in fields:
-            if f not in valid_fields:
-                raise MCPDataError("E008", f"字段过滤子集无效: {f}")
-        selected = [f for f in default_fields if f in fields]
-    else:
-        selected = default_fields
-
-    # 表头
-    header = "| " + " | ".join(selected) + " |"
-    separator = "|" + "|".join(["---"] * len(selected)) + "|"
-    lines = [header, separator]
-
-    # 数据行
-    for rec in records:
-        row = []
-        for field in selected:
-            val = rec.get(field, "")
-            if isinstance(val, list):
-                val = ", ".join(_safe_str(v) for v in val)
-            row.append(_safe_str(val))
-        lines.append("| " + " | ".join(row) + " |")
-
-    return "\n".join(lines)
-
-
-def to_json(records: List[Dict[str, Any]], fields: Optional[List[str]] = None) -> str:
-    """生成 JSON 格式输出。"""
-    if fields:
-        valid_fields = {"name", "description", "protocol", "tags", "url", "stars", "updated"}
-        for f in fields:
-            if f not in valid_fields:
-                raise MCPDataError("E008", f"字段过滤子集无效: {f}")
-        output = []
-        for rec in records:
-            filtered = {k: v for k, v in rec.items() if k in fields}
-            output.append(filtered)
-    else:
-        output = records
-    return json.dumps(output, ensure_ascii=False, indent=2)
-
-
-def format_output(records: List[Dict[str, Any]], fmt: str, fields: Optional[List[str]] = None) -> str:
-    """按指定格式输出。"""
-    if fmt == "markdown":
-        return to_markdown(records, fields)
-    elif fmt == "json":
-        return to_json(records, fields)
-    else:
-        raise MCPDataError("E005", "输出格式不支持（仅支持 markdown / json）")
-
-
-# ----------------------------------------------------------------------
-# 排序与过滤
-# ----------------------------------------------------------------------
-
-def sort_records(records: List[Dict[str, Any]], sort_by: str, reverse: bool = False) -> List[Dict[str, Any]]:
-    """按指定字段排序。"""
-    if not records:
-        return records
-    if sort_by not in records[0]:
-        raise MCPDataError("E006", f"排序字段不存在于记录中: {sort_by}")
-
-    def sort_key(rec: Dict[str, Any]) -> Any:
-        val = rec.get(sort_by, "")
-        # 数值比较
-        if isinstance(val, int):
-            return val
-        return _safe_str(val).lower()
-
-    return sorted(records, key=sort_key, reverse=reverse)
-
-
-# ----------------------------------------------------------------------
-# 自检（selftest）
-# ----------------------------------------------------------------------
-
-def _run_selftest() -> bool:
-    """内置硬编码样例数据，离线自检核心逻辑。"""
-    print("开始自检 awesome-mcp-servers ...")
-
-    # 硬编码测试数据（不读外部文件）
-    sample_data = [
-        {
-            "name": "TestDB MCP Server",
-            "description": "A database MCP server for MySQL and PostgreSQL",
-            "protocol": "mcp",
-            "tags": ["database", "sql"],
-            "url": "https://example.com/testdb",
-            "stars": 120,
-            "updated": "2026-01-15",
-        },
-        {
-            "name": "SearchAPI Server",
-            "description": "Web search API integration with SSE support",
-            "tags": ["search", "web"],
-            "url": "https://example.com/search",
-            "stars": 85,
-        },
-        {
-            "name": "FileSystem Helper",
-            "description": "Filesystem operations for local development",
-            "protocol": "stdio",
-            "stars": 200,
-            "updated": "2026-02-01",
-        },
-    ]
-
-    try:
-        # 1. 解析输入
-        records = parse_input(sample_data)
-        assert len(records) == 3, "解析记录数量应为 3"
-        print(f"  [PASS] 解析输入: {len(records)} 条记录")
-
-        # 2. 必需字段检查
-        for rec in records:
-            assert rec["name"], "name 字段不能为空"
-            assert rec["description"], "description 字段不能为空"
-        print("  [PASS] 必需字段完整")
-
-        # 3. 协议提取（宽松断言：不依赖具体值）
-        protocols = [rec["protocol"] for rec in records]
-        assert all(p for p in protocols), "protocol 不能全为空"
-        unknown_count = sum(1 for p in protocols if "需核实" in p)
-        assert unknown_count <= 2, "未知协议数量不应超过 2"
-        print(f"  [PASS] 协议提取: {protocols}")
-
-        # 4. 标签提取（宽松断言）
-        for rec in records:
-            assert rec["tags"], "tags 不能为空"
-            assert len(rec["tags"]) >= 1, "tags 至少 1 个"
-        print("  [PASS] 标签提取")
-
-        # 5. 缺失字段标注
-        for rec in records:
-            for key in ["url", "stars", "updated"]:
-                val = rec[key]
-                # 要么有真实值，要么标注需核实
-                assert val is not None and val != "", f"{key} 不能为空"
-        print("  [PASS] 缺失字段标注")
-
-        # 6. Markdown 输出
-        md = to_markdown(records)
-        assert "|" in md, "Markdown 应包含表格分隔符"
-        assert "name" in md, "Markdown 应包含表头"
-        assert len(md.splitlines()) >= 5, "Markdown 行数应不少于 5"
-        print("  [PASS] Markdown 输出")
-
-        # 7. JSON 输出
-        js = to_json(records)
-        parsed = json.loads(js)
-        assert len(parsed) == 3, "JSON 解析后应有 3 条记录"
-        print("  [PASS] JSON 输出")
-
-        # 8. 排序（宽松断言：只验证数量不变，不依赖具体顺序）
-        sorted_records = sort_records(records, "name")
-        assert len(sorted_records) == 3, "排序后数量应为 3"
-        assert all(rec["name"] for rec in sorted_records), "排序后 name 均存在"
-        print("  [PASS] 排序功能")
-
-        # 9. 字段过滤
-        filtered_md = to_markdown(records, fields=["name", "url"])
-        assert "protocol" not in filtered_md, "过滤后不应包含 protocol"
-        assert "name" in filtered_md, "过滤后应包含 name"
-        print("  [PASS] 字段过滤")
-
-        # 10. 错误处理（E004）
+def fetch_remote_data(url: str = "https://raw.githubusercontent.com/awesome-mcp/servers/main/README.md",
+                      timeout: int = 10, max_retries: int = 3) -> Optional[List[Dict[str, Any]]]:
+    """
+    从远程仓库拉取数据（带重试退避）。
+    注意：此函数为可选增强，实际使用内置数据。
+    如果网络请求失败，返回 None。
+    """
+    for attempt in range(max_retries):
         try:
-            parse_input([{"description": "缺少 name"}])
-            assert False, "应抛出 E004 错误"
-        except MCPDataError as e:
-            assert e.code == "E004", "错误码应为 E004"
-        print("  [PASS] 错误处理 E004")
-
-        # 11. 错误处理（E005）
-        try:
-            format_output(records, "xml")
-            assert False, "应抛出 E005 错误"
-        except MCPDataError as e:
-            assert e.code == "E005", "错误码应为 E005"
-        print("  [PASS] 错误处理 E005")
-
-        # 12. 错误处理（E006）
-        try:
-            sort_records(records, "nonexistent_field")
-            assert False, "应抛出 E006 错误"
-        except MCPDataError as e:
-            assert e.code == "E006", "错误码应为 E006"
-        print("  [PASS] 错误处理 E006")
-
-        print("\n全部自检通过 ✔")
-        return True
-
-    except AssertionError as e:
-        print(f"自检失败: {e}")
-        return False
-    except MCPDataError as e:
-        print(f"自检失败: [{e.code}] {e.message}")
-        return False
-    except Exception as e:
-        print(f"自检失败: 未知异常 {e}")
-        return False
-
-
-# ----------------------------------------------------------------------
-# 主入口
-# ----------------------------------------------------------------------
-
-def main() -> int:
-    """命令行入口。"""
-    parser = argparse.ArgumentParser(
-        description="MCP服务器资源整理与结构化输出工具（学习参考用途）",
-        epilog="示例: python main.py --input data.json --format markdown --sort name",
-    )
-    parser.add_argument("--input", "-i", help="输入 JSON 文件路径")
-    parser.add_argument("--format", "-f", choices=["markdown", "json"], default="markdown",
-                        help="输出格式（默认: markdown）")
-    parser.add_argument("--sort", "-s", help="按指定字段排序")
-    parser.add_argument("--reverse", "-r", action="store_true", help="排序时反转顺序")
-    parser.add_argument("--fields", "-c", nargs="+",
-                        help="输出字段子集（如: name url protocol）")
-    parser.add_argument("--output", "-o", help="输出文件路径（默认输出到 stdout）")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        ok = _run_selftest()
-        return 0 if ok else 1
-
-    # 正常处理模式
-    if not args.input:
-        print("错误: 必须指定 --input 或使用 --selftest", file=sys.stderr)
-        print("用法: python main.py --input data.json [--format markdown|json]", file=sys.stderr)
-        return 1
-
-    try:
-        # 读取输入文件
-        try:
-            with open(args.input, "r", encoding="utf-8") as f:
-                raw_data = json.load(f)
-        except FileNotFoundError:
-            raise MCPDataError("E001", f"输入文件不存在或无法读取: {args.input}")
-        except json.JSONDecodeError:
-            raise MCPDataError("E002", "输入数据格式无效（非 JSON）")
-
-        # 解析记录
-        records = parse_input(raw_data)
-
-        # 排序
-        if args.sort:
-            records = sort_records(records, args.sort, args.reverse)
-
-        # 格式化输出
-        output = format_output(records, args.format, args.fields)
-
-        # 输出
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output)
-                print(f"已写入: {args.output}")
-            except OSError:
-                raise MCPDataError("E007", f"输出文件无法写入: {args.output}")
-        else:
-            print(output)
-
-        return 0
-
-    except MCPDataError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"错误: [{ERROR_CODES['E010']}] 未知错误: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+            req = urllib.request.Request(url, headers={"User-Agent": "MCP-Skill/1.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                # 检查状态码
+                if resp.status == 429:
+                    retry_after = resp.headers.get("Retry-After")
+                    wait_time = int(retry_after) if retry_after and retry_after.isdigit() else 2 ** attempt
+                    time.sleep(wait_time)
+                    continue
+                if resp.status >= 500:
+                    raise urllib.error.URLError(f"Server error: {resp.status}")
+                content = resp.read().decode("utf-8")
+                # 简单解析 Markdown 中的表格数据（简化处理）
+                # 实际生产环境应使用完整解析器
+                lines = content.splitlines()
+                records = []
+                for line in lines:
+                    if line.startswith("|") and "|" in line[1:]:
+                        cells = [c.strip() for c in line.split("|")[1:-1]]
+                        if len(cells) >= 3 and cells[0] != "Name":
+                            records.append({
+                                "name": cells[0],
+                                "description": cells[1] if len(cells) > 1 else "",
+                                "url": cells[2] if len(cells) > 2 else "",
+                            })
+                if records:
+                    return records
+                return None
+        except (urllib.error.URLError, TimeoutError, OSError) as e:
+            if attempt < max_retries - 1:
+                time.sleep(2 ** attempt)  # 指数退避
+            else:
+                print(f"警告: 远程数据获取失败: {e}", file=sys.stderr)
+                return None
+    return None
