@@ -1,9 +1,9 @@
 {
-  "frozen_at": "2026-08-18T21:32:08.209585",
+  "frozen_at": "2026-08-17T23:45:06.540096",
   "slug": "6s191-mit-deeplearning",
   "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
   "llm_base_url": "https://api.deepseek.com",
-  "pipeline_commit": "214d54e332400651b942e17f0b3a9ac51318ed4d",
+  "pipeline_commit": "1c37a11076f3fae428d8bc3779de92a404cfe91a",
   "dependencies": [
     "annotated-types==0.8.0",
     "anyio==4.14.2",
