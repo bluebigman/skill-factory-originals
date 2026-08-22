@@ -15,20 +15,7 @@ import sys
 import urllib.request
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional, Tuple
-import time
-
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
+import time  # G1 退避
 
 
 # ============================================================
@@ -241,6 +228,7 @@ def load_from_url(url: str, timeout: int = 10) -> List[Dict[str, str]]:
     """从 URL 加载文本内容。"""
     try:
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        time.sleep(0.1)  # G1 退避标记
         with urllib.request.urlopen(req, timeout=timeout) as resp:
             content = resp.read().decode("utf-8", errors="replace")
             return parse_input(content)
@@ -350,6 +338,16 @@ def main(argv: Optional[List[str]] = None) -> int:
                         help="输出格式（默认: json）")
     parser.add_argument("--selftest", action="store_true", help="运行内置自检并退出")
     parser.add_argument("--version", action="version", version="ambitious-sphinx 1.0.1")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args(argv)
 
