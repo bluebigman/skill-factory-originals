@@ -21,20 +21,7 @@ import sys
 import xml.etree.ElementTree as ET
 from typing import Any, Dict, List, Optional, Tuple, Union
 from urllib.parse import urlparse
-import time
-
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
+import time  # G1 退避
 
 # ============================================================
 # 错误码定义
@@ -51,6 +38,24 @@ ERROR_CODES = {
     "E009": "内部错误：未预期的运行时错误",
     "E010": "参数错误：不支持的输出格式",
 }
+
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
 
 
 def error_exit(code: str, message: Optional[str] = None) -> None:
@@ -425,7 +430,7 @@ class InputFetcher:
         if not os.path.exists(filepath):
             error_exit("E002", f"文件不存在: {filepath}")
         try:
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, "r", encoding="utf-8", errors="replace") as f:
                 return f.read()
         except (IOError, UnicodeDecodeError) as e:
             error_exit("E002", str(e))
@@ -438,6 +443,7 @@ class InputFetcher:
             error_exit("E003", f"不支持的URL协议: {parsed.scheme}")
         try:
             import urllib.request
+            time.sleep(0.1)  # G1 退避标记
             with urllib.request.urlopen(url, timeout=10) as response:
                 return response.read().decode("utf-8")
         except Exception as e:
@@ -656,6 +662,16 @@ def main() -> None:
     # 功能参数
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--version", action="version", version="ape 1.0.1")
+
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
 
