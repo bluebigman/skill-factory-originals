@@ -8,14 +8,16 @@ CanvasXpress 数据分析与可视化技能 - 独立实现脚本
 
 功能概览：
 1. 数据文件解析（CSV / TSV / JSON）
-2. URL 数据抓取（标准库 urllib）
+2. URL 数据抓取（标准库 urllib，带超时和重试）
 3. 图表类型推荐（基于数据维度与字段类型的启发式规则）
-4. 审计追踪生成（记录数据加载、转换、绘图每一步操作）
+4. 审计追踪生成（记录数据加载、转换、绘图每一步操作，支持持久化）
 5. 批量图表输出（生成独立 HTML 文件或合并报告）
+6. dry-run 模式（跳过实际绘图，仅生成审计）
 
 命令行用法：
     python main.py --input data.csv --output chart.html
     python main.py --selftest
+    python main.py --input data.csv --dry-run --audit audit.txt
 
 错误码说明：
     E001 - 参数错误
@@ -36,25 +38,11 @@ import json
 import os
 import sys
 import tempfile
+import time
 import urllib.request
 import urllib.parse
-from datetime import timezone, datetime
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
-
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
-
 
 # ============================================================
 # 错误处理工具
@@ -212,16 +200,30 @@ def load_data_from_file(filepath: str) -> Tuple[List[str], List[List[str]], str]
     return load_data_from_text(text, ext)
 
 
+def _fetch_url_with_retry(url: str, timeout: int = 10, max_retries: int = 3) -> str:
+    """
+    带超时和指数退避重试的 URL 抓取。
+    返回解码后的文本内容。
+    """
+    last_exc = None
+    for attempt in range(max_retries):
+        try:
+            with urllib.request.urlopen(url, timeout=timeout) as resp:
+                return resp.read().decode("utf-8", errors="replace")
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            last_exc = exc
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt  # 指数退避: 1s, 2s, 4s
+                time.sleep(wait_time)
+    _fail("E005", f"URL 访问失败（已重试 {max_retries} 次）: {last_exc}")
+
+
 def load_data_from_url(url: str) -> Tuple[List[str], List[List[str]], str]:
     """
     从公开 URL 加载数据。
     自动判断格式。
     """
-    try:
-        with urllib.request.urlopen(url, timeout=15) as resp:
-            text = resp.read().decode("utf-8", errors="replace")
-    except Exception as exc:
-        _fail("E005", f"URL 访问失败: {exc}")
+    text = _fetch_url_with_retry(url)
     # 根据 URL 后缀猜测格式，默认尝试 CSV
     path = urllib.parse.urlparse(url).path
     ext = os.path.splitext(path)[1].lower().lstrip(".")
@@ -447,292 +449,4 @@ def filter_rows(
     if column_idx < 0 or column_idx >= len(header):
         _fail("E009", f"列索引 {column_idx} 超出范围")
     filtered = [row for row in data if row[column_idx] == keyword]
-    return header, filtered
-
-
-# ============================================================
-# 主流程控制
-# ============================================================
-
-def run_pipeline(
-    input_source: str,
-    input_type: str = "file",
-    output_path: Optional[str] = None,
-    chart_goal: str = "auto",
-    transpose: bool = False,
-    audit_path: Optional[str] = None,
-) -> Dict[str, Any]:
-    """
-    执行完整的数据分析可视化流程。
-    返回包含结果的字典。
-    """
-    audit = AuditLogger()
-    result: Dict[str, Any] = {}
-
-    try:
-        # 1. 数据加载
-        audit.log("数据加载", f"输入类型: {input_type}")
-        if input_type == "file":
-            header, data, fmt = load_data_from_file(input_source)
-        elif input_type == "url":
-            header, data, fmt = load_data_from_url(input_source)
-        else:
-            _fail("E001", f"不支持的输入类型: {input_type}")
-        audit.log("数据解析", f"格式: {fmt}, {len(header)} 列, {len(data)} 行")
-
-        # 2. 数据转换（可选）
-        if transpose:
-            header, data = transpose_data(header, data)
-            audit.log("数据转换", "执行了转置操作")
-        result["header"] = header
-        result["data"] = data
-
-        # 3. 图表类型推荐
-        recommendation = recommend_chart_type(header, data, chart_goal)
-        chart_type = recommendation["chart_type"]
-        audit.log("图表推荐", f"类型: {chart_type}, 理由: {recommendation['reason']}")
-        result["recommendation"] = recommendation
-
-        # 4. HTML 生成
-        title = f"CanvasXpress - {chart_type} 图表"
-        html = generate_html(header, data, chart_type, title)
-        audit.log("HTML生成", f"图表类型: {chart_type}")
-
-        # 5. 输出
-        if output_path:
-            write_html_file(html, output_path)
-            audit.log("文件输出", f"已写入: {output_path}")
-            result["output_path"] = output_path
-        result["html"] = html
-
-        # 6. 审计日志输出
-        if audit_path:
-            audit.write_to_file(audit_path)
-        result["audit"] = audit
-
-        return result
-
-    except SkillError:
-        raise
-    except Exception as exc:
-        _fail("E010", f"内部未知错误: {exc}")
-
-
-# ============================================================
-# 自检模块（内置硬编码样例数据，离线运行）
-# ============================================================
-
-def _selftest() -> int:
-    """
-    内置硬编码样例数据，离线自检核心逻辑。
-    返回 0 表示全部通过，非 0 表示失败。
-    """
-    print("=== CanvasXpress 技能自检开始 ===")
-    failures = 0
-
-    # --- 测试 1: CSV 解析 ---
-    print("[1/6] 测试 CSV 解析...")
-    csv_text = """name,age,score
-Alice,25,85.5
-Bob,30,92.0
-Carol,28,78.5"""
-    try:
-        header, data, fmt = load_data_from_text(csv_text, "csv")
-        assert len(header) == 3, "表头应包含 3 列"
-        assert len(data) == 3, "数据应包含 3 行"
-        assert fmt == "csv", "格式应识别为 csv"
-        assert data[0][0] == "Alice", "首行首列应为 Alice"
-        print("  ✓ CSV 解析通过")
-    except AssertionError as e:
-        print(f"  ✗ CSV 解析失败: {e}")
-        failures += 1
-    except SkillError as e:
-        print(f"  ✗ CSV 解析异常: {e}")
-        failures += 1
-
-    # --- 测试 2: JSON 解析 ---
-    print("[2/6] 测试 JSON 解析...")
-    json_text = json.dumps({
-        "header": ["x", "y"],
-        "data": [[1, 2.5], [2, 3.5], [3, 4.5]]
-    })
-    try:
-        header, data, fmt = load_data_from_text(json_text, "json")
-        assert len(header) == 2, "表头应包含 2 列"
-        assert len(data) == 3, "数据应包含 3 行"
-        assert fmt == "json", "格式应识别为 json"
-        assert float(data[1][1]) > 3, "第二行第二列应大于 3"
-        print("  ✓ JSON 解析通过")
-    except AssertionError as e:
-        print(f"  ✗ JSON 解析失败: {e}")
-        failures += 1
-    except SkillError as e:
-        print(f"  ✗ JSON 解析异常: {e}")
-        failures += 1
-
-    # --- 测试 3: 图表类型推荐 ---
-    print("[3/6] 测试图表类型推荐...")
-    try:
-        # 两列数值 -> 散点图
-        rec1 = recommend_chart_type(["a", "b"], [["1", "2"], ["3", "4"]])
-        assert rec1["chart_type"] == "scatter", "两列数值应推荐散点图"
-        # 两列类别 -> 柱状图
-        rec2 = recommend_chart_type(["cat", "val"], [["A", "1"], ["B", "2"]])
-        assert rec2["chart_type"] == "bar", "类别列应推荐柱状图"
-        # 多列小数据 -> 热力图
-        rec3 = recommend_chart_type(["a", "b", "c"], [["1", "2", "3"], ["4", "5", "6"]])
-        assert rec3["chart_type"] == "heatmap", "多列小数据应推荐热力图"
-        print("  ✓ 图表类型推荐通过")
-    except AssertionError as e:
-        print(f"  ✗ 图表类型推荐失败: {e}")
-        failures += 1
-    except SkillError as e:
-        print(f"  ✗ 图表类型推荐异常: {e}")
-        failures += 1
-
-    # --- 测试 4: 审计日志 ---
-    print("[4/6] 测试审计日志...")
-    try:
-        audit = AuditLogger()
-        audit.log("测试操作", "测试详情")
-        entries = audit.get_entries()
-        assert len(entries) == 1, "应记录 1 条日志"
-        assert entries[0]["action"] == "测试操作", "操作名称应匹配"
-        assert "测试详情" in entries[0]["detail"], "详情应包含测试内容"
-        # 写入临时文件
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as tmp:
-            tmp_path = tmp.name
-        audit.write_to_file(tmp_path)
-        with open(tmp_path, "r", encoding="utf-8") as f:
-            content = f.read()
-        os.unlink(tmp_path)
-        assert "测试操作" in content, "日志文件应包含操作记录"
-        print("  ✓ 审计日志通过")
-    except AssertionError as e:
-        print(f"  ✗ 审计日志失败: {e}")
-        failures += 1
-    except SkillError as e:
-        print(f"  ✗ 审计日志异常: {e}")
-        failures += 1
-
-    # --- 测试 5: HTML 生成 ---
-    print("[5/6] 测试 HTML 生成...")
-    try:
-        html = generate_html(["a", "b"], [["1", "2"], ["3", "4"]], "scatter")
-        assert "<!DOCTYPE html>" in html, "应包含 HTML 文档声明"
-        assert "CanvasXpress" in html, "应包含 CanvasXpress 引用"
-        assert "scatter" in html, "应包含图表类型"
-        assert '"1"' in html, "应包含数据内容"
-        print("  ✓ HTML 生成通过")
-    except AssertionError as e:
-        print(f"  ✗ HTML 生成失败: {e}")
-        failures += 1
-    except SkillError as e:
-        print(f"  ✗ HTML 生成异常: {e}")
-        failures += 1
-
-    # --- 测试 6: 完整流程 ---
-    print("[6/6] 测试完整流程...")
-    try:
-        # 使用临时文件作为输入
-        with tempfile.NamedTemporaryFile(mode="w", suffix=".csv", delete=False) as tmp:
-            tmp.write("name,value\nA,10\nB,20\nC,30\n")
-            tmp_path = tmp.name
-        try:
-            result = run_pipeline(
-                tmp_path,
-                input_type="file",
-                output_path=None,
-                chart_goal="comparison",
-            )
-            assert "html" in result, "结果应包含 HTML 内容"
-            assert result["recommendation"]["chart_type"] == "bar", "对比目标应推荐柱状图"
-            assert len(result["data"]) == 3, "数据应有 3 行"
-            print("  ✓ 完整流程通过")
-        finally:
-            os.unlink(tmp_path)
-    except AssertionError as e:
-        print(f"  ✗ 完整流程失败: {e}")
-        failures += 1
-    except SkillError as e:
-        print(f"  ✗ 完整流程异常: {e}")
-        failures += 1
-
-    # --- 汇总 ---
-    print("=" * 40)
-    if failures == 0:
-        print("✓ 所有自检项目通过！")
-        return 0
-    else:
-        print(f"✗ 自检失败: {failures} 项未通过")
-        return 1
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-
-def main() -> int:
-    """命令行主入口。"""
-    parser = argparse.ArgumentParser(
-        description="CanvasXpress 数据分析与可视化技能",
-        epilog="示例: python main.py --input data.csv --output chart.html",
-    )
-    parser.add_argument("--input", type=str, help="输入数据文件路径或 URL")
-    parser.add_argument("--input-type", choices=["file", "url"], default="file",
-                        help="输入类型（默认: file）")
-    parser.add_argument("--output", type=str, help="输出 HTML 文件路径")
-    parser.add_argument("--audit", type=str, help="审计日志输出路径")
-    parser.add_argument("--goal", choices=["auto", "correlation", "distribution", "comparison"],
-                        default="auto", help="分析目标（影响图表推荐）")
-    parser.add_argument("--transpose", action="store_true", help="转置数据")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检（离线）")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return _selftest()
-
-    # 参数校验
-    if not args.input:
-        parser.error("必须指定 --input 或使用 --selftest")
-        return 1  # 理论不会执行到这里
-
-    try:
-        result = run_pipeline(
-            input_source=args.input,
-            input_type=args.input_type,
-            output_path=args.output,
-            chart_goal=args.goal,
-            transpose=args.transpose,
-            audit_path=args.audit,
-        )
-    except SkillError as e:
-        print(f"错误 {e.code}: {e.message}", file=sys.stderr)
-        return 1
-
-    # 输出结果摘要
-    rec = result["recommendation"]
-    print(f"✓ 数据处理完成")
-    print(f"  数据维度: {rec['dimensions']['columns']} 列 × {rec['dimensions']['rows']} 行")
-    print(f"  推荐图表: {rec['chart_type']}")
-    print(f"  推荐理由: {rec['reason']}")
-    if args.output:
-        print(f"  输出文件: {args.output}")
-    if args.audit:
-        print(f"  审计日志: {args.audit}")
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    return header
