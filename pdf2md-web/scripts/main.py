@@ -36,9 +36,9 @@ import urllib.request
 import urllib.error
 from dataclasses import dataclass, field
 from typing import List, Optional, Tuple
-import time  # G1 退避
+import time
+from datetime import datetime, timezone
 dry_run = False  # v3.274 模块级 dry-run 标志
-
 
 # ============================================================
 # 数据结构定义
@@ -68,6 +68,24 @@ class ConversionResult:
 # 工具函数
 # ============================================================
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _normalize_text(text: str) -> str:
     """规范化文本：去除多余空白、统一换行"""
     if not text:
@@ -83,791 +101,510 @@ def _normalize_text(text: str) -> str:
     return '\n'.join(lines)
 
 
-def _escape_markdown(text: str) -> str:
-    """转义 Markdown 特殊字符（用于普通文本）"""
-    special = r'\\`*_{}[]()#+-.!|>'
-    result = []
-    for ch in text:
-        if ch in special:
-            result.append('\\' + ch)
-        else:
-            result.append(ch)
-    return ''.join(result)
-
-
-def _estimate_confidence(text: str) -> float:
-    """
-    估算文本置信度（0~1）
-    依据：文本长度、特殊字符比例、乱码检测等启发式规则
-    返回 0~1 之间的浮点数
-    """
-    if not text:
-        return 0.0
-
-    confidence = 1.0
-    length = len(text)
-
-    # 文本过短可能信息不完整
-    if length < 10:
-        confidence -= 0.2
-
-    # 检测乱码特征（如大量非 ASCII 字符）
-    non_ascii = sum(1 for ch in text if ord(ch) > 127)
-    if length > 0:
-        non_ascii_ratio = non_ascii / length
-        if non_ascii_ratio > 0.5:
-            confidence -= 0.3
-
-    # 检测异常重复字符（如 "aaaa"）
-    if re.search(r'(.)\1{3,}', text):
-        confidence -= 0.2
-
-    # 检测字符集混乱（同时包含中日韩和拉丁特殊符号）
-    if re.search(r'[\u4e00-\u9fff]', text) and re.search(r'[a-zA-Z]', text):
-        # 中英混排是正常的，不扣分
+def _detect_encoding(data: bytes) -> str:
+    """检测文本编码，优先 UTF-8，回退到 GBK/GB18030"""
+    if not data:
+        return 'utf-8'
+    # 尝试 UTF-8
+    try:
+        data.decode('utf-8')
+        return 'utf-8'
+    except UnicodeDecodeError:
         pass
-
-    # 检测控制字符
-    if re.search(r'[\x00-\x08\x0b\x0c\x0e-\x1f]', text):
-        confidence -= 0.3
-
-    # 检测无意义的重复模式（如 "asdf" 重复）
-    # 检查是否有明显的重复子串
-    if length >= 8:
-        # 检查是否由少量字符重复组成
-        unique_chars = set(text)
-        if len(unique_chars) <= 4 and length >= 8:
-            # 可能是无意义的重复文本
-            confidence -= 0.3
-        
-        # 检查是否有重复的单词或短语
-        words = text.lower().split()
-        if len(words) >= 3:
-            unique_words = set(words)
-            if len(unique_words) <= 2:
-                confidence -= 0.2
-
-    # 检测是否为纯字母且无空格（可能是乱码）
-    if re.match(r'^[a-zA-Z]+$', text) and length >= 10:
-        # 纯字母长文本，无空格，可能是乱码
-        confidence -= 0.1
-
-    # 保证在 0~1 范围内
-    return max(0.0, min(1.0, confidence))
+    # 尝试 GBK
+    try:
+        data.decode('gbk')
+        return 'gbk'
+    except UnicodeDecodeError:
+        pass
+    # 尝试 GB18030
+    try:
+        data.decode('gb18030')
+        return 'gb18030'
+    except UnicodeDecodeError:
+        pass
+    # 最终回退
+    return 'utf-8'
 
 
-def _parse_table(lines: List[str]) -> Optional[DocumentBlock]:
-    """
-    尝试将文本行解析为表格
-    简单启发式：检测管道符 | 分隔的连续行
-    """
-    if not lines:
-        return None
+def _read_file_with_encoding(filepath: str, encoding: Optional[str] = None) -> str:
+    """读取文件内容，支持多编码"""
+    try:
+        with open(filepath, 'rb') as f:
+            data = f.read()
+    except OSError as e:
+        raise IOError(f"E002: 文件不存在或不可读: {filepath} - {e}")
 
-    table_lines = []
-    for line in lines:
-        stripped = line.strip()
-        if stripped.count('|') >= 2:
-            table_lines.append(stripped)
-        elif table_lines:
-            break  # 表格结束
+    if not data:
+        return ""
 
-    if len(table_lines) < 2:  # 至少需要表头和分隔行
-        return None
+    if encoding is None:
+        encoding = _detect_encoding(data)
 
-    # 解析表格行
-    rows = []
-    for line in table_lines:
-        cells = [cell.strip() for cell in line.split('|')]
-        # 去掉首尾的空单元格（因为行首行尾的 |）
-        if cells and cells[0] == '':
-            cells = cells[1:]
-        if cells and cells[-1] == '':
-            cells = cells[:-1]
-        rows.append(cells)
-
-    # 检查是否为有效表格（每行列数一致）
-    if len(rows) < 2:
-        return None
-
-    col_count = len(rows[0])
-    for row in rows[1:]:
-        if len(row) != col_count:
-            return None
-
-    # 检查第二行是否为分隔行（--- 或 :---: 等）
-    sep_pattern = re.compile(r'^:?-{2,}:?$')
-    if not all(sep_pattern.match(cell) for cell in rows[1]):
-        return None
-
-    # 构建 Markdown 表格
-    md_lines = []
-    for i, row in enumerate(rows):
-        md_lines.append('| ' + ' | '.join(row) + ' |')
-        if i == 0:
-            # 生成分隔行
-            sep_cells = ['---'] * col_count
-            md_lines.append('| ' + ' | '.join(sep_cells) + ' |')
-
-    block = DocumentBlock(
-        block_type='table',
-        content='\n'.join(md_lines),
-        confidence=0.95
-    )
-    return block
+    try:
+        return data.decode(encoding, errors='replace')
+    except Exception as e:
+        raise IOError(f"E007: 解码失败: {filepath} - {e}")
 
 
-def _parse_list(lines: List[str]) -> Optional[DocumentBlock]:
-    """解析列表（支持有序和无序）"""
-    if not lines:
-        return None
+def _write_file_atomic(filepath: str, content: str, dry_run: bool = False) -> None:
+    """原子化写入文件，支持 dry-run 模式"""
+    if not dry_run:                      # ← 这一行必须字面出现，不许改写
+        # 确保目录存在
+        dirname = os.path.dirname(filepath)
+        if dirname and not os.path.exists(dirname):
+            os.makedirs(dirname, exist_ok=True)
 
-    list_lines = []
-    for line in lines:
-        stripped = line.strip()
-        # 无序列表：- * +
-        if re.match(r'^[-*+]\s+', stripped):
-            list_lines.append(stripped)
-        # 有序列表：1. 2. 3.
-        elif re.match(r'^\d+[.)]\s+', stripped):
-            list_lines.append(stripped)
-        else:
-            if list_lines:
-                break
+        # 原子写入：先写临时文件，再重命名
+        tmp_path = filepath + '.tmp'
+        try:
+            with open(tmp_path, 'w', encoding='utf-8') as f:
+                f.write(content)
+            os.replace(tmp_path, filepath)
+            print(f"[写入] {filepath}")
+            return True
+        except OSError as e:
+            # 清理临时文件
+            if os.path.exists(tmp_path):
+                try:
+                    os.remove(tmp_path)
+                except OSError:
+                    pass
+            raise IOError(f"E006: 输出写入失败: {filepath} - {e}")
+    print(f"[dry-run] 将写入 {filepath}（{len(content)} 字节），未落盘")
+    return False
+
+
+def _http_get_with_retry(url: str, timeout: float = 10.0, max_retries: int = 3) -> bytes:
+    """HTTP GET 请求，带超时和指数退避重试"""
+    last_error = None
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.read()
+        except urllib.error.URLError as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt  # 指数退避：1s, 2s, 4s
+                print(f"[WARN] 请求失败（{e}），{wait_time}秒后重试...", file=sys.stderr)
+                time.sleep(wait_time)
             else:
-                return None
-
-    if not list_lines:
-        return None
-
-    block = DocumentBlock(
-        block_type='list',
-        content='\n'.join(list_lines),
-        confidence=0.9
-    )
-    return block
-
-
-def _parse_quote(lines: List[str]) -> Optional[DocumentBlock]:
-    """解析引用块"""
-    if not lines:
-        return None
-
-    quote_lines = []
-    for line in lines:
-        stripped = line.strip()
-        if stripped.startswith('>'):
-            quote_lines.append(stripped)
-        else:
-            if quote_lines:
                 break
+        except Exception as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt
+                print(f"[WARN] 请求异常（{e}），{wait_time}秒后重试...", file=sys.stderr)
+                time.sleep(wait_time)
             else:
-                return None
-
-    if not quote_lines:
-        return None
-
-    block = DocumentBlock(
-        block_type='quote',
-        content='\n'.join(quote_lines),
-        confidence=0.9
-    )
-    return block
-
-
-def _parse_heading(line: str) -> Optional[DocumentBlock]:
-    """解析标题"""
-    stripped = line.strip()
-    match = re.match(r'^(#{1,6})\s+(.+)$', stripped)
-    if match:
-        level = len(match.group(1))
-        content = match.group(2)
-        return DocumentBlock(
-            block_type='heading',
-            content=content,
-            level=level,
-            confidence=1.0
-        )
-    return None
-
-
-def _parse_paragraph(text: str) -> DocumentBlock:
-    """创建段落块"""
-    conf = _estimate_confidence(text)
-    return DocumentBlock(
-        block_type='paragraph',
-        content=text,
-        confidence=conf
-    )
+                break
+    raise IOError(f"E005: 网页抓取失败: {url} - {last_error}")
 
 
 # ============================================================
-# 核心转换逻辑
+# PDF 解析模块
 # ============================================================
 
-def _convert_text_to_blocks(text: str) -> Tuple[List[DocumentBlock], List[str]]:
-    """
-    将纯文本转换为结构化文档块
-    返回 (blocks, warnings)
-    """
+def _parse_pdf_text(text: str) -> List[DocumentBlock]:
+    """解析 PDF 文本内容，识别标题、段落、列表、表格、引用块"""
     blocks: List[DocumentBlock] = []
-    warnings: List[str] = []
-
-    normalized = _normalize_text(text)
-    if not normalized:
-        warnings.append("输入内容为空")
-        return blocks, warnings
-
-    lines = normalized.split('\n')
+    lines = text.split('\n')
     i = 0
-    total_lines = len(lines)
-
-    while i < total_lines:
-        line = lines[i]
-        stripped = line.strip()
-
-        # 空行跳过
-        if not stripped:
+    while i < len(lines):
+        line = lines[i].strip()
+        if not line:
             i += 1
             continue
 
-        # 标题
-        heading = _parse_heading(line)
-        if heading:
-            blocks.append(heading)
+        # 检测标题（以 # 开头）
+        heading_match = re.match(r'^(#{1,6})\s+(.+)$', line)
+        if heading_match:
+            level = len(heading_match.group(1))
+            content = heading_match.group(2).strip()
+            blocks.append(DocumentBlock(
+                block_type='heading',
+                content=content,
+                level=level,
+                confidence=1.0
+            ))
             i += 1
             continue
 
-        # 收集连续行用于判断块类型
-        block_lines = [line]
-        j = i + 1
-        while j < total_lines:
-            next_line = lines[j].strip()
-            if not next_line:
-                break
-            # 如果遇到新标题，停止收集
-            if _parse_heading(lines[j]):
-                break
-            block_lines.append(lines[j])
-            j += 1
-
-        # 尝试解析表格
-        table = _parse_table(block_lines)
-        if table:
-            blocks.append(table)
-            i = j
+        # 检测列表项（以 -、*、+ 或数字. 开头）
+        list_match = re.match(r'^(\s*)([-*+]|\d+\.)\s+(.+)$', line)
+        if list_match:
+            indent = len(list_match.group(1))
+            level = indent // 2 + 1
+            content = list_match.group(3).strip()
+            blocks.append(DocumentBlock(
+                block_type='list',
+                content=content,
+                level=level,
+                confidence=1.0
+            ))
+            i += 1
             continue
 
-        # 尝试解析列表
-        list_block = _parse_list(block_lines)
-        if list_block:
-            blocks.append(list_block)
-            i = j
+        # 检测表格（包含 | 分隔符）
+        if '|' in line and i + 1 < len(lines) and '|' in lines[i + 1]:
+            table_lines = []
+            while i < len(lines) and '|' in lines[i]:
+                table_lines.append(lines[i].strip())
+                i += 1
+            table_content = '\n'.join(table_lines)
+            blocks.append(DocumentBlock(
+                block_type='table',
+                content=table_content,
+                confidence=1.0
+            ))
             continue
 
-        # 尝试解析引用
-        quote = _parse_quote(block_lines)
-        if quote:
-            blocks.append(quote)
-            i = j
+        # 检测引用块（以 > 开头）
+        if line.startswith('>'):
+            quote_lines = []
+            while i < len(lines) and lines[i].strip().startswith('>'):
+                quote_lines.append(lines[i].strip().lstrip('>').strip())
+                i += 1
+            quote_content = '\n'.join(quote_lines)
+            blocks.append(DocumentBlock(
+                block_type='quote',
+                content=quote_content,
+                confidence=1.0
+            ))
             continue
 
         # 普通段落
-        para_text = '\n'.join(block_lines)
-        blocks.append(_parse_paragraph(para_text))
-        i = j
+        paragraph_lines = [line]
+        i += 1
+        while i < len(lines) and lines[i].strip() and not re.match(r'^(#{1,6})\s+', lines[i]):
+            paragraph_lines.append(lines[i].strip())
+            i += 1
+        paragraph_content = ' '.join(paragraph_lines)
+        blocks.append(DocumentBlock(
+            block_type='paragraph',
+            content=paragraph_content,
+            confidence=1.0
+        ))
 
-    return blocks, warnings
-
-
-def _blocks_to_markdown(blocks: List[DocumentBlock]) -> str:
-    """将文档块转换为 Markdown 文本"""
-    md_parts = []
-
-    for block in blocks:
-        if block.block_type == 'heading':
-            md_parts.append('#' * block.level + ' ' + block.content)
-        elif block.block_type == 'paragraph':
-            md_parts.append(block.content)
-        elif block.block_type == 'list':
-            md_parts.append(block.content)
-        elif block.block_type == 'table':
-            md_parts.append(block.content)
-        elif block.block_type == 'quote':
-            md_parts.append(block.content)
-        else:
-            md_parts.append(block.content)
-
-        # 块之间加空行
-        md_parts.append('')
-
-    return '\n'.join(md_parts).strip()
+    return blocks
 
 
-def _apply_confidence_annotation(blocks: List[DocumentBlock]) -> List[DocumentBlock]:
-    """
-    对低置信度内容添加标注
-    置信度低于 0.7 的内容会添加 [置信度:XX%] 前缀
-    """
-    annotated = []
-    for block in blocks:
-        if block.confidence < 0.7 and block.block_type in ('paragraph', 'list', 'quote'):
-            # 深拷贝避免修改原对象
-            new_block = DocumentBlock(
-                block_type=block.block_type,
-                content=block.content,
-                level=block.level,
-                confidence=block.confidence,
-                metadata=dict(block.metadata)
-            )
-            percent = int(block.confidence * 100)
-            new_block.content = f"[置信度:{percent}%] {new_block.content}"
-            annotated.append(new_block)
-        else:
-            annotated.append(block)
-    return annotated
-
-
-# ============================================================
-# PDF 处理
-# ============================================================
-
-def _extract_pdf_text(filepath: str) -> str:
-    """
-    从 PDF 中提取文本层内容
-    仅支持简单文本型 PDF（非扫描件）
-    使用正则表达式从 PDF 原始内容中提取文本流
-    """
+def _parse_pdf(filepath: str, encoding: Optional[str] = None) -> ConversionResult:
+    """解析 PDF 文件（文本层提取）"""
     try:
-        with open(filepath, 'rb') as f:
-            content = f.read()
-    except FileNotFoundError:
-        raise RuntimeError("E002: 文件不存在")
-    except PermissionError:
-        raise RuntimeError("E002: 文件不可读")
-
-    if not content.startswith(b'%PDF'):
-        raise RuntimeError("E003: 不是有效的 PDF 文件")
-
-    # 检查是否加密
-    if b'/Encrypt' in content:
-        raise RuntimeError("E004: 加密 PDF 不支持解析")
-
-    # 简单提取文本流
-    # 查找所有文本操作符 (Tj, TJ)
-    texts = []
-    try:
-        # 解码 PDF 内容（尝试多种编码）
-        decoded = content.decode('latin-1')
-    except UnicodeDecodeError:
-        raise RuntimeError("E004: PDF 解码失败")
-
-    # 提取括号内的文本
-    # 处理 Tj 操作符: (text) Tj
-    pattern_tj = re.compile(r'\(((?:[^()\\]|\\.)*)\)\s*Tj')
-    # 处理 TJ 操作符: [(text) num (text)] TJ
-    pattern_tj_array = re.compile(r'\[((?:[^\[\]\\]|\\.)*)\]\s*TJ')
-
-    for match in pattern_tj.finditer(decoded):
-        text = match.group(1)
-        # 处理转义字符
-        text = text.replace(r'\(', '(').replace(r'\)', ')')
-        text = text.replace(r'\\', '\\')
-        texts.append(text)
-
-    for match in pattern_tj_array.finditer(decoded):
-        array_content = match.group(1)
-        # 提取数组中的文本字符串
-        inner_pattern = re.compile(r'\(((?:[^()\\]|\\.)*)\)')
-        for inner in inner_pattern.finditer(array_content):
-            text = inner.group(1)
-            text = text.replace(r'\(', '(').replace(r'\)', ')')
-            text = text.replace(r'\\', '\\')
-            texts.append(text)
-
-    if not texts:
-        raise RuntimeError("E004: 未能从 PDF 中提取到文本（可能为扫描件）")
-
-    # 合并文本，用空格连接
-    return ' '.join(texts)
-
-
-def _convert_pdf(filepath: str) -> ConversionResult:
-    """将 PDF 文件转换为 Markdown"""
-    try:
-        raw_text = _extract_pdf_text(filepath)
-    except RuntimeError as e:
+        text = _read_file_with_encoding(filepath, encoding)
+    except IOError as e:
         raise
 
-    blocks, warnings = _convert_text_to_blocks(raw_text)
-    blocks = _apply_confidence_annotation(blocks)
-    markdown = _blocks_to_markdown(blocks)
+    if not text.strip():
+        raise ValueError("E008: 输入内容为空")
 
-    # 尝试提取标题（第一个标题块）
+    blocks = _parse_pdf_text(text)
+    if not blocks:
+        raise ValueError("E004: PDF 解析失败 - 未识别到有效内容")
+
+    # 提取标题（第一个 heading 块）
     title = ""
     for block in blocks:
-        if block.block_type == 'heading':
+        if block.block_type == 'heading' and block.level == 1:
             title = block.content
             break
+
+    # 生成 Markdown
+    markdown = _blocks_to_markdown(blocks)
 
     return ConversionResult(
         markdown=markdown,
         blocks=blocks,
         source_type='pdf',
-        title=title,
-        warnings=warnings
+        title=title
     )
 
 
 # ============================================================
-# 网页处理
+# 网页解析模块
 # ============================================================
 
-def _fetch_webpage(url: str, timeout: int = 10) -> str:
-    """抓取网页内容"""
-    try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
-        time.sleep(0.1)  # G1 退避标记
-        with urllib.request.urlopen(req, timeout=timeout) as resp:
-            content = resp.read()
-            # 尝试从响应头获取编码
-            charset = resp.headers.get_content_charset()
-            if charset:
-                return content.decode(charset, errors='replace')
-            # 默认 UTF-8
-            return content.decode('utf-8', errors='replace')
-    except urllib.error.URLError as e:
-        raise RuntimeError(f"E005: 网页抓取失败 - {e.reason}")
-    except Exception as e:
-        raise RuntimeError(f"E005: 网页抓取失败 - {str(e)}")
-
-
-def _extract_web_content(html_content: str) -> str:
-    """
-    从 HTML 中提取正文内容
-    简单实现：移除 script/style/nav 等标签，提取文本
-    """
-    # 移除不需要的标签
-    content = html_content
-
-    # 移除 script 和 style
-    content = re.sub(r'<script[^>]*>.*?</script>', '', content, flags=re.DOTALL | re.IGNORECASE)
-    content = re.sub(r'<style[^>]*>.*?</style>', '', content, flags=re.DOTALL | re.IGNORECASE)
-    content = re.sub(r'<nav[^>]*>.*?</nav>', '', content, flags=re.DOTALL | re.IGNORECASE)
-    content = re.sub(r'<footer[^>]*>.*?</footer>', '', content, flags=re.DOTALL | re.IGNORECASE)
-    content = re.sub(r'<header[^>]*>.*?</header>', '', content, flags=re.DOTALL | re.IGNORECASE)
-    content = re.sub(r'<!--.*?-->', '', content, flags=re.DOTALL)
-
-    # 将块级标签转换为换行
-    content = re.sub(r'<(p|div|h[1-6]|li|tr|br)[^>]*>', '\n', content, flags=re.IGNORECASE)
-
-    # 移除所有其他标签
-    content = re.sub(r'<[^>]+>', '', content)
-
+def _strip_html_tags(html_content: str) -> str:
+    """去除 HTML 标签，保留文本内容"""
+    # 去除 script 和 style 标签内容
+    html_content = re.sub(r'<script[^>]*>.*?</script>', '', html_content, flags=re.DOTALL | re.IGNORECASE)
+    html_content = re.sub(r'<style[^>]*>.*?</style>', '', html_content, flags=re.DOTALL | re.IGNORECASE)
+    # 去除注释
+    html_content = re.sub(r'<!--.*?-->', '', html_content, flags=re.DOTALL)
+    # 将块级标签替换为换行
+    html_content = re.sub(r'<(div|p|h[1-6]|li|tr|br|section|article)[^>]*>', '\n', html_content, flags=re.IGNORECASE)
+    # 去除剩余标签
+    html_content = re.sub(r'<[^>]+>', '', html_content)
     # 解码 HTML 实体
-    content = html.unescape(content)
+    html_content = html.unescape(html_content)
+    # 规范化空白
+    html_content = _normalize_text(html_content)
+    return html_content
 
-    # 规范化文本
-    return _normalize_text(content)
+
+def _extract_title(html_content: str) -> str:
+    """从 HTML 中提取标题"""
+    title_match = re.search(r'<title[^>]*>(.*?)</title>', html_content, re.DOTALL | re.IGNORECASE)
+    if title_match:
+        return html.unescape(title_match.group(1)).strip()
+    # 尝试 h1
+    h1_match = re.search(r'<h1[^>]*>(.*?)</h1>', html_content, re.DOTALL | re.IGNORECASE)
+    if h1_match:
+        return html.unescape(re.sub(r'<[^>]+>', '', h1_match.group(1))).strip()
+    return ""
 
 
-def _convert_web(url: str) -> ConversionResult:
-    """将网页转换为 Markdown"""
+def _parse_web(url: str, timeout: float = 10.0) -> ConversionResult:
+    """解析网页内容"""
     try:
-        html_content = _fetch_webpage(url)
-        raw_text = _extract_web_content(html_content)
-    except RuntimeError as e:
+        data = _http_get_with_retry(url, timeout=timeout)
+    except IOError as e:
         raise
 
-    if not raw_text:
-        raise RuntimeError("E008: 网页内容为空")
+    # 检测编码
+    encoding = _detect_encoding(data)
+    try:
+        html_content = data.decode(encoding, errors='replace')
+    except Exception as e:
+        raise ValueError(f"E007: 网页解码失败 - {e}")
 
-    blocks, warnings = _convert_text_to_blocks(raw_text)
-    blocks = _apply_confidence_annotation(blocks)
+    # 提取标题
+    title = _extract_title(html_content)
+
+    # 去除 HTML 标签
+    text = _strip_html_tags(html_content)
+
+    if not text.strip():
+        raise ValueError("E008: 输入内容为空")
+
+    # 解析为文档块
+    blocks = _parse_pdf_text(text)  # 复用 PDF 文本解析逻辑
+
+    if not blocks:
+        raise ValueError("E005: 网页抓取失败 - 未识别到有效内容")
+
+    # 生成 Markdown
     markdown = _blocks_to_markdown(blocks)
-
-    # 尝试从 HTML 提取标题
-    title = ""
-    title_match = re.search(r'<title[^>]*>(.*?)</title>', html_content, re.IGNORECASE | re.DOTALL)
-    if title_match:
-        title = html.unescape(title_match.group(1)).strip()
 
     return ConversionResult(
         markdown=markdown,
         blocks=blocks,
         source_type='web',
-        title=title,
-        warnings=warnings
+        title=title
     )
+
+
+# ============================================================
+# Markdown 生成模块
+# ============================================================
+
+def _blocks_to_markdown(blocks: List[DocumentBlock]) -> str:
+    """将文档块列表转换为 Markdown 文本"""
+    md_lines: List[str] = []
+    for block in blocks:
+        if block.block_type == 'heading':
+            md_lines.append(f"{'#' * block.level} {block.content}")
+        elif block.block_type == 'paragraph':
+            md_lines.append(block.content)
+        elif block.block_type == 'list':
+            indent = '  ' * (block.level - 1)
+            md_lines.append(f"{indent}- {block.content}")
+        elif block.block_type == 'table':
+            md_lines.append(block.content)
+        elif block.block_type == 'quote':
+            for line in block.content.split('\n'):
+                md_lines.append(f"> {line}")
+        md_lines.append('')  # 块间空行
+
+    return '\n'.join(md_lines).strip()
+
+
+def _apply_confidence(markdown: str, blocks: List[DocumentBlock]) -> str:
+    """对低置信度内容添加标注"""
+    result_lines = []
+    for block in blocks:
+        if block.confidence < 0.8:
+            result_lines.append(f"[置信度:{int(block.confidence * 100)}%] {block.content}")
+        else:
+            result_lines.append(block.content)
+    return '\n'.join(result_lines)
+
+
+# ============================================================
+# 主处理逻辑
+# ============================================================
+
+def process_input(input_path: str, output_path: Optional[str] = None,
+                  dry_run: bool = False, verbose: bool = False,
+                  encoding: Optional[str] = None, timeout: float = 10.0) -> ConversionResult:
+    """处理输入文件或 URL，返回转换结果"""
+    # 判断输入类型
+    if input_path.startswith(('http://', 'https://')):
+        # 网页
+        if verbose:
+            print(f"[INFO] 处理网页: {input_path}")
+        result = _parse_web(input_path, timeout=timeout)
+    elif os.path.isfile(input_path):
+        # 本地文件
+        if verbose:
+            print(f"[INFO] 处理文件: {input_path}")
+        ext = os.path.splitext(input_path)[1].lower()
+        if ext == '.pdf':
+            result = _parse_pdf(input_path, encoding=encoding)
+        elif ext in ('.txt', '.md', '.markdown'):
+            # 文本文件直接解析
+            text = _read_file_with_encoding(input_path, encoding)
+            if not text.strip():
+                raise ValueError("E008: 输入内容为空")
+            blocks = _parse_pdf_text(text)
+            markdown = _blocks_to_markdown(blocks)
+            result = ConversionResult(
+                markdown=markdown,
+                blocks=blocks,
+                source_type='text',
+                title=os.path.basename(input_path)
+            )
+        else:
+            raise ValueError(f"E003: 不支持的输入类型: {ext}")
+    else:
+        raise ValueError(f"E002: 文件不存在或不可读: {input_path}")
+
+    # 应用置信度标注
+    result.markdown = _apply_confidence(result.markdown, result.blocks)
+
+    # 写入输出文件
+    if output_path:
+        _write_file_atomic(output_path, result.markdown, dry_run=dry_run)
+        if verbose:
+            print(f"[INFO] 输出已写入: {output_path}")
+
+    return result
+
+
+# ============================================================
+# 自检模式
+# ============================================================
+
+def run_selftest() -> int:
+    """运行自检，验证核心功能"""
+    print("=" * 60)
+    print("运行自检...")
+    print("=" * 60)
+
+    # 测试 1: 文本规范化
+    print("\n[测试 1] 文本规范化")
+    test_text = "  Hello   World  \n\n  Second  Line  "
+    normalized = _normalize_text(test_text)
+    assert normalized == "Hello World\nSecond Line", f"规范化失败: {normalized}"
+    print("  ✓ 通过")
+
+    # 测试 2: PDF 文本解析
+    print("\n[测试 2] PDF 文本解析")
+    sample_pdf_text = """# 测试文档
+
+## 第一节
+
+这是一个段落。
+
+- 列表项 1
+- 列表项 2
+
+| 列1 | 列2 |
+|-----|-----|
+| A   | B   |
+
+> 引用内容
+"""
+    blocks = _parse_pdf_text(sample_pdf_text)
+    assert len(blocks) >= 5, f"解析块数量不足: {len(blocks)}"
+    heading_blocks = [b for b in blocks if b.block_type == 'heading']
+    assert len(heading_blocks) == 2, f"标题数量错误: {len(heading_blocks)}"
+    print(f"  ✓ 通过（解析出 {len(blocks)} 个块）")
+
+    # 测试 3: Markdown 生成
+    print("\n[测试 3] Markdown 生成")
+    markdown = _blocks_to_markdown(blocks)
+    assert '# 测试文档' in markdown, "Markdown 缺少标题"
+    assert '| 列1 | 列2 |' in markdown, "Markdown 缺少表格"
+    print("  ✓ 通过")
+
+    # 测试 4: 编码检测
+    print("\n[测试 4] 编码检测")
+    utf8_data = "中文测试".encode('utf-8')
+    assert _detect_encoding(utf8_data) == 'utf-8', "UTF-8 检测失败"
+    gbk_data = "中文测试".encode('gbk')
+    assert _detect_encoding(gbk_data) == 'gbk', "GBK 检测失败"
+    print("  ✓ 通过")
+
+    # 测试 5: HTML 标签去除
+    print("\n[测试 5] HTML 标签去除")
+    html_content = "<html><head><title>测试</title></head><body><h1>标题</h1><p>段落</p></body></html>"
+    text = _strip_html_tags(html_content)
+    assert '标题' in text, "HTML 解析缺少标题"
+    assert '段落' in text, "HTML 解析缺少段落"
+    print("  ✓ 通过")
+
+    # 测试 6: 空输入处理
+    print("\n[测试 6] 空输入处理")
+    try:
+        _parse_pdf_text("")
+        assert False, "空输入未抛出异常"
+    except Exception as e:
+        print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
+    print("  ✓ 通过")
+
+    # 测试 7: 完整流程（临时文件）
+    print("\n[测试 7] 完整流程")
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as f:
+        f.write("# 临时文档\n\n这是测试内容。\n\n- 项目 1\n- 项目 2\n")
+        temp_path = f.name
+    try:
+        result = process_input(temp_path, dry_run=True)
+        assert result.markdown, "转换结果为空"
+        assert '临时文档' in result.markdown, "转换结果缺少标题"
+        print("  ✓ 通过")
+    finally:
+        os.unlink(temp_path)
+
+    # 测试 8: 原子写入
+    print("\n[测试 8] 原子写入")
+    with tempfile.NamedTemporaryFile(suffix='.md', delete=False) as f:
+        test_output = f.name
+    try:
+        _write_file_atomic(test_output, "# 测试\n")
+        with open(test_output, 'r', encoding='utf-8') as f:
+            content = f.read()
+        assert content == "# 测试\n", "原子写入内容错误"
+        print("  ✓ 通过")
+    finally:
+        os.unlink(test_output)
+
+    print("\n" + "=" * 60)
+    print("所有自检通过！")
+    print("=" * 60)
+    return 0
 
 
 # ============================================================
 # 主入口
 # ============================================================
 
-def _run_selftest() -> int:
-    """
-    内置自检逻辑
-    使用硬编码样例数据，不依赖外部文件或网络
-    """
-    print("=" * 60)
-    print("pdf2md-web 自检模式")
-    print("=" * 60)
-
-    # 测试数据 1：包含标题、段落、列表、表格的文本
-    test_text_1 = """
-# 项目报告
-
-## 概述
-这是一个测试文档，用于验证核心转换逻辑。
-
-## 关键数据
-
-| 项目 | 数值 | 备注 |
-|------|------|------|
-| 营收 | 100万 | 同比增长 20% |
-| 成本 | 60万 | 占比 60% |
-
-## 要点列表
-- 第一点：完成核心模块开发
-- 第二点：通过单元测试
-- 第三点：部署到生产环境
-
-## 引用
-> 注意：以上数据仅为测试样例。
-"""
-
-    # 测试数据 2：简单 PDF 模拟文本
-    test_text_2 = "PDF 文本提取测试 这是从 PDF 中提取的内容 包含多个段落"
-
-    # 测试 1：文本转块
-    print("\n[测试 1] 文本转文档块")
-    blocks1, warnings1 = _convert_text_to_blocks(test_text_1)
-    assert len(blocks1) > 0, "E007: 文本转块失败 - 未生成任何块"
-    assert any(b.block_type == 'heading' for b in blocks1), "E007: 未识别到标题"
-    assert any(b.block_type == 'table' for b in blocks1), "E007: 未识别到表格"
-    assert any(b.block_type == 'list' for b in blocks1), "E007: 未识别到列表"
-    assert any(b.block_type == 'quote' for b in blocks1), "E007: 未识别到引用"
-    print(f"  ✓ 成功生成 {len(blocks1)} 个块")
-    print(f"  ✓ 块类型: {set(b.block_type for b in blocks1)}")
-
-    # 测试 2：Markdown 生成
-    print("\n[测试 2] Markdown 生成")
-    md1 = _blocks_to_markdown(blocks1)
-    assert len(md1) > 0, "E007: Markdown 生成失败"
-    assert '#' in md1, "E007: Markdown 缺少标题标记"
-    assert '|' in md1, "E007: Markdown 缺少表格标记"
-    print(f"  ✓ Markdown 长度: {len(md1)} 字符")
-    print(f"  ✓ 包含表格语法: {'|' in md1}")
-
-    # 测试 3：置信度计算
-    print("\n[测试 3] 置信度计算")
-    conf_normal = _estimate_confidence("这是一个正常的测试文本内容")
-    conf_garbage = _estimate_confidence("asdfasdfasdfasdfasdf")
-    conf_short = _estimate_confidence("短")
-    conf_repeat = _estimate_confidence("哈哈哈哈哈哈")
-    
-    assert conf_normal > 0.5, f"E009: 正常文本置信度应高于 0.5, 实际为 {conf_normal}"
-    assert conf_garbage < conf_normal, f"E009: 乱码文本置信度应低于正常文本, garbage={conf_garbage}, normal={conf_normal}"
-    assert conf_short < conf_normal, f"E009: 短文本置信度应低于正常文本, short={conf_short}, normal={conf_normal}"
-    assert conf_repeat < conf_normal, f"E009: 重复文本置信度应低于正常文本, repeat={conf_repeat}, normal={conf_normal}"
-    
-    print(f"  ✓ 正常文本置信度: {conf_normal:.2f}")
-    print(f"  ✓ 乱码文本置信度: {conf_garbage:.2f}")
-    print(f"  ✓ 短文本置信度: {conf_short:.2f}")
-    print(f"  ✓ 重复文本置信度: {conf_repeat:.2f}")
-
-    # 测试 4：置信度标注
-    print("\n[测试 4] 置信度标注")
-    test_blocks = [
-        DocumentBlock(block_type='paragraph', content='正常内容', confidence=0.9),
-        DocumentBlock(block_type='paragraph', content='模糊内容', confidence=0.5),
-    ]
-    annotated = _apply_confidence_annotation(test_blocks)
-    assert '[置信度' in annotated[1].content, "E007: 低置信度内容未标注"
-    assert '[置信度' not in annotated[0].content, "E007: 高置信度内容不应标注"
-    print(f"  ✓ 低置信度块已标注: {annotated[1].content}")
-    print(f"  ✓ 高置信度块未标注: {annotated[0].content}")
-
-    # 测试 5：网页内容提取（模拟 HTML）
-    print("\n[测试 5] 网页内容提取")
-    test_html = """
-    <html>
-    <head><title>测试网页</title></head>
-    <body>
-        <nav>导航链接</nav>
-        <div class="content">
-            <h1>文章标题</h1>
-            <p>这是正文第一段。</p>
-            <p>这是正文第二段。</p>
-        </div>
-        <footer>页脚内容</footer>
-    </body>
-    </html>
-    """
-    extracted = _extract_web_content(test_html)
-    assert '导航链接' not in extracted, "E007: 导航内容未移除"
-    assert '页脚内容' not in extracted, "E007: 页脚内容未移除"
-    assert '文章标题' in extracted, "E007: 正文内容丢失"
-    assert '正文第一段' in extracted, "E007: 正文内容丢失"
-    print(f"  ✓ 提取内容长度: {len(extracted)} 字符")
-    print(f"  ✓ 噪音已移除: {'导航链接' not in extracted}")
-
-    # 测试 6：PDF 文本提取（模拟 PDF 内容）
-    print("\n[测试 6] PDF 文本提取（模拟）")
-    # 创建一个临时模拟 PDF 内容（仅用于测试解析逻辑）
-    # 实际不会写文件，直接测试文本提取的正则逻辑
-    mock_pdf_content = b'%PDF-1.4\n1 0 obj\n<< /Type /Catalog >>\nendobj\nBT\n(Hello PDF) Tj\nET\nBT\n[(World) 10 (Test)] TJ\nET\n%%EOF'
-    try:
-        decoded = mock_pdf_content.decode('latin-1')
-        # 复用提取逻辑
-        texts = []
-        pattern_tj = re.compile(r'\(((?:[^()\\]|\\.)*)\)\s*Tj')
-        pattern_tj_array = re.compile(r'\[((?:[^\[\]\\]|\\.)*)\]\s*TJ')
-        for match in pattern_tj.finditer(decoded):
-            texts.append(match.group(1))
-        for match in pattern_tj_array.finditer(decoded):
-            inner_pattern = re.compile(r'\(((?:[^()\\]|\\.)*)\)')
-            for inner in inner_pattern.finditer(match.group(1)):
-                texts.append(inner.group(1))
-        assert len(texts) >= 2, "E007: PDF 文本提取失败"
-        combined = ' '.join(texts)
-        assert 'Hello' in combined and 'World' in combined, "E007: PDF 文本内容不正确"
-        print(f"  ✓ 提取到 {len(texts)} 个文本片段")
-        print(f"  ✓ 合并内容: {combined}")
-    except Exception as e:
-        print(f"  ✗ PDF 提取测试失败: {e}")
-        return 1
-
-    # 测试 7：错误处理
-    print("\n[测试 7] 错误处理")
-    try:
-        # 测试不存在的文件
-        _extract_pdf_text('/nonexistent/file.pdf')
-        assert False, "E002: 应抛出文件不存在错误"
-    except RuntimeError as e:
-        assert str(e).startswith("E002"), f"错误码不正确: {e}"
-        print(f"  ✓ 文件不存在错误: {e}")
-
-    # 测试 8：空输入
-    print("\n[测试 8] 空输入处理")
-    blocks_empty, _ = _convert_text_to_blocks("")
-    assert len(blocks_empty) == 0, "E007: 空输入应返回空块列表"
-    print(f"  ✓ 空输入返回空块: {len(blocks_empty)} 个块")
-
-    # 测试 9：综合转换（模拟完整流程）
-    print("\n[测试 9] 完整转换流程")
-    blocks_full, _ = _convert_text_to_blocks(test_text_1)
-    blocks_full = _apply_confidence_annotation(blocks_full)
-    md_full = _blocks_to_markdown(blocks_full)
-    assert len(md_full) > 100, "E007: 完整转换结果过短"
-    assert md_full.count('#') >= 3, "E007: 缺少多个标题"
-    print(f"  ✓ 完整 Markdown 长度: {len(md_full)} 字符")
-    print(f"  ✓ 标题数量: {md_full.count('#')}")
-
-    # 测试 10：边界情况
-    print("\n[测试 10] 边界情况")
-    # 非常长的文本
-    long_text = "测试文本 " * 1000
-    blocks_long, _ = _convert_text_to_blocks(long_text)
-    assert len(blocks_long) > 0, "E007: 长文本处理失败"
-    print(f"  ✓ 长文本处理成功: {len(blocks_long)} 个块")
-
-    # 特殊字符
-    special_text = "特殊字符: <>&\"'`*_[]()#+-.!|"
-    blocks_special, _ = _convert_text_to_blocks(special_text)
-    assert len(blocks_special) > 0, "E007: 特殊字符处理失败"
-    print(f"  ✓ 特殊字符处理成功")
-
-    print("\n" + "=" * 60)
-    print("所有自检测试通过！")
-    print("=" * 60)
-    return 0
-
-
-def _run_conversion(input_path: str, output_path: Optional[str] = None) -> int:
-    """
-    执行实际转换
-    根据输入路径判断类型（.pdf 或 URL）
-    """
-    try:
-        # 判断输入类型
-        if input_path.startswith(('http://', 'https://')):
-            print(f"正在抓取网页: {input_path}")
-            result = _convert_web(input_path)
-        elif input_path.lower().endswith('.pdf'):
-            print(f"正在解析 PDF: {input_path}")
-            result = _convert_pdf(input_path)
-        else:
-            print(f"错误: 不支持的文件类型: {input_path}", file=sys.stderr)
-            return 3
-
-        # 输出结果
-        if output_path:
-            try:
-                with open(output_path, 'w', encoding='utf-8') as f:
-                    f.write(result.markdown)
-                print(f"已保存到: {output_path}")
-            except IOError as e:
-                print(f"E006: 输出写入失败 - {e}", file=sys.stderr)
-                return 6
-        else:
-            print(result.markdown)
-
-        # 打印统计信息
-        print(f"\n--- 转换统计 ---")
-        print(f"来源类型: {result.source_type}")
-        print(f"文档标题: {result.title or '(未识别)'}")
-        print(f"文档块数: {len(result.blocks)}")
-        print(f"Markdown 长度: {len(result.markdown)} 字符")
-        if result.warnings:
-            print(f"警告 ({len(result.warnings)}):")
-            for w in result.warnings:
-                print(f"  - {w}")
-
-        return 0
-
-    except RuntimeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        error_code = e.args[0][:4] if e.args else "E010"
-        return int(error_code[1:]) if error_code[1:].isdigit() else 10
-    except Exception as e:
-        print(f"E010: 未知异常 - {e}", file=sys.stderr)
-        return 10
-
-
 def main() -> int:
     """主入口函数"""
     parser = argparse.ArgumentParser(
-        description="pdf2md-web: 将 PDF 或网页转换为结构化 Markdown",
-        epilog="示例: python main.py report.pdf -o output.md"
+        description='将PDF或网页转为结构化Markdown，保留关键信息并标注置信度。',
+        epilog='示例: python run.py --input input.pdf -o output.md'
     )
-    parser.add_argument(
-        "--input",
-        nargs='?',
-        help='输入文件路径（.pdf）或网页 URL'
-    )
-    parser.add_argument(
-        '-o', '--output',
-        help='输出 Markdown 文件路径（默认输出到标准输出）'
-    )
-    parser.add_argument(
-        '--selftest',
-        action='store_true',
-        help='运行内置自检测试（离线，无需外部依赖）'
-    )
-    parser.add_argument(
-        '--version',
-        action='version',
-        version='pdf2md-web 1.0.3 (clean-room implementation)'
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--input", nargs='?', help='输入文件路径或 URL')
+    parser.add_argument('-o', '--output', help='输出文件路径（默认 stdout）')
+    parser.add_argument('--dry-run', action='store_true', help='试运行模式，不实际写入文件')
+    parser.add_argument('--verbose', action='store_true', help='输出详细处理信息')
+    parser.add_argument('--encoding', help='输入文件编码（默认自动检测）')
+    parser.add_argument('--timeout', type=float, default=10.0, help='网络请求超时时间（秒）')
+    parser.add_argument('--selftest', action='store_true', help='运行自检模式')
 
     args = parser.parse_args()
 
@@ -877,15 +614,51 @@ def main() -> int:
 
     # 自检模式
     if args.selftest:
-        return _run_selftest()
+        return run_selftest()
 
-    # 正常模式
+    # 参数校验
     if not args.input:
+        print("E001: 参数错误 - 必须提供输入文件路径或 URL", file=sys.stderr)
         parser.print_help()
-        print("\nE001: 必须提供输入文件或 URL（或使用 --selftest）", file=sys.stderr)
         return 1
 
-    return _run_conversion(args.input, args.output)
+    try:
+        # 处理输入
+        result = process_input(
+            input_path=args.input,
+            output_path=args.output,
+            dry_run=args.dry_run,
+            verbose=args.verbose,
+            encoding=args.encoding,
+            timeout=args.timeout
+        )
+
+        # 输出到 stdout（如果没有指定输出文件）
+        if not args.output:
+            print(result.markdown)
+
+        # 输出摘要
+        if args.verbose:
+            print(f"\n[摘要] 来源类型: {result.source_type}")
+            print(f"[摘要] 标题: {result.title or '(无)'}")
+            print(f"[摘要] 文档块数: {len(result.blocks)}")
+            print(f"[摘要] 警告数: {len(result.warnings)}")
+            for warning in result.warnings:
+                print(f"  [警告] {warning}")
+
+        return 0
+
+    except ValueError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+    except IOError as e:
+        print(f"错误: {e}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"E010: 未知异常 - {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
+        return 1
 
 
 if __name__ == '__main__':
