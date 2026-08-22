@@ -1,171 +1,249 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-copyright_holder: 原创作者（自持版权）
-source_project: original
-disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-ai_generated: true
-license: MIT
 slug: gitsum
 name: gitsum
-displayName: 未命名工具
-description: 仅供学习与参考用途。使用本。当用户需要Git代码管理、进行gitsum相关操作时使用本技能，提供规范、可复用的处理流程与输出。
+displayName: Git代码管理 提交规范 仓库操作
+description: 将Git操作需求转化为结构化执行方案，提供规范流程与输出。
 version: 1.0.0
-author: skill-factory-auto
-agent_created: true
-trigger_words:
-  - "gitsum"
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/gitsum
+license: MIT
+source_project: original
+source_url: 
+copyright_holder: 原创作者（自持版权）
+ai_generated: true
 ai_tools: ["DeepSeek"]
+disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
+author: CodeCraft Studio
+agent_created: true
+trigger_words: ["gitsum", "git代码管理", "git操作", "代码提交", "仓库管理", "版本控制"]
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考
+<!-- ai-generated-notice -->
 
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
+# GitSum 技能文档
+
+## 一、能力边界速查卡
+
+### 1.1 能做与不能做
+
+| 维度 | 能做 ✅ | 不能做 ❌ |
+|------|---------|-----------|
+| 输入处理 | 解析用户提供的Git命令、仓库路径、文件路径、URL | 无法直接访问本地文件系统或远程仓库 |
+| 信息提取 | 从用户描述中识别操作类型、目标分支、文件范围 | 无法自动推断未提及的仓库信息 |
+| 流程生成 | 生成规范化的Git操作步骤与命令序列 | 不替代用户执行任何实际命令 |
+| 结果输出 | 输出结构化操作方案、检查清单、回滚预案 | 不保证操作结果（依赖用户环境） |
+| 批量处理 | 支持多文件/多分支场景的方案编排 | 不处理超出Git范畴的需求（如CI/CD配置） |
+
+### 1.2 适用对象
+
+- **适用**：需要规范化Git操作流程的开发者、需要批量处理提交任务的团队、学习Git标准流程的新手。
+- **不适用**：需要直接操作远程服务器的场景、需要图形化界面交互的场景、非Git版本控制需求。
+
+---
+
+## 二、触发方式与场景映射
+
+### 2.1 触发词
+
+- 核心触发词：`gitsum`、`git代码管理`、`git操作`
+- 补充触发词：`代码提交`、`仓库管理`、`版本控制`、`分支合并`
+
+### 2.2 场景映射表
+
+| 用户说（大白话） | 实际需求 | 技能响应 |
+|------------------|----------|----------|
+| "帮我把这几个文件提交一下" | 提交指定文件到当前分支 | 生成add/commit命令序列及提交信息模板 |
+| "我要把dev合并到main" | 分支合并操作 | 生成merge/rebase方案及冲突处理预案 |
+| "看看这个仓库的提交历史" | 查看日志 | 生成log查询命令及输出格式建议 |
+| "我改乱了，想回退" | 版本回退 | 生成reset/revert方案及数据安全提示 |
+| "批量处理多个仓库" | 多仓库操作 | 生成循环处理脚本框架及校验步骤 |
+
+---
+
+## 三、标准处理流程
+
+### 3.1 前置条件
+
+| 条件项 | 要求 | 缺失处理 |
+|--------|------|----------|
+| 仓库路径 | 用户需提供本地仓库路径或确认当前目录 | 输出 [需核实:仓库路径] 占位符 |
+| 操作类型 | 明确提交/合并/回退/查询等意图 | 列出可选操作类型请用户选择 |
+| 目标分支 | 涉及分支操作时需指定 | 默认使用当前分支并标注假设 |
+| 文件范围 | 提交操作需明确文件列表 | 提示用户补充或默认全部改动 |
+
+### 3.2 执行步骤
+
+**第一步：需求解析**
+1. 提取用户描述中的操作动词（提交/合并/回退/查询）
+2. 识别涉及的仓库路径、分支名、文件名
+3. 确认操作约束（如是否强制推送、是否需要保留历史）
+
+**第二步：方案生成**
+1. 根据操作类型选择对应命令模板
+2. 填入用户提供的具体参数
+3. 补充安全检查项（如`git status`预检）
+
+**第三步：输出与确认**
+1. 输出完整操作步骤清单
+2. 标注每步的预期结果
+3. 对不确定参数使用 `[需核实:参数名]` 标注
+
+### 3.3 输出规范
+
+```markdown
+## 操作方案
+
+### 操作类型
+[提交/合并/回退/查询]
+
+### 前置检查
+- [ ] 仓库路径确认：[路径或占位符]
+- [ ] 当前分支确认：[分支名]
+- [ ] 工作区状态检查：`git status`
+
+### 执行步骤
+1. [命令1] — 预期结果：[描述]
+2. [命令2] — 预期结果：[描述]
+
+### 回滚预案
+- 如步骤2失败，执行：[回滚命令]
+
+### 置信度标注
+- 参数完整性：[高/中/低]
+- 需用户确认项：[列出所有占位符]
+```
+
+---
+
+## 四、置信度门控机制
+
+### 4.1 信息不足处理规则
+
+| 缺失信息类型 | 处理方式 | 示例 |
+|--------------|----------|------|
+| 仓库路径 | 输出 `[需核实:仓库路径]` | `cd [需核实:仓库路径]` |
+| 分支名称 | 默认当前分支并标注 | `git merge [需核实:目标分支]` |
+| 文件列表 | 提示用户补充或使用`git add -A` | `git add [需核实:文件列表]` |
+| 提交信息 | 生成模板供用户填写 | `git commit -m "[需核实:提交说明]"` |
+
+### 4.2 禁止行为
+
+- 不猜测用户未提及的仓库地址
+- 不假设分支存在（需用户确认）
+- 不编造文件路径或提交历史
+- 不推荐可能造成数据丢失的命令（如`git push --force`）而不加警告
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 场景 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| GS-001 | 未提供仓库路径 | "请提供本地仓库路径，或确认当前目录即为目标仓库" | 1. 询问路径 2. 或建议运行`pwd`确认 |
+| GS-002 | 操作类型不明确 | "请明确操作类型：提交/合并/回退/查询/其他" | 1. 列出可选类型 2. 请用户选择 |
+| GS-003 | 分支信息缺失 | "涉及分支操作，请指定源分支和目标分支" | 1. 提示`git branch -a`查看 2. 请用户补充 |
+| GS-004 | 文件路径无效 | "指定的文件路径不存在，请核对" | 1. 提示`ls`查看 2. 请用户修正 |
+| GS-005 | 命令冲突 | "该操作可能覆盖现有改动，请确认" | 1. 提示风险 2. 建议先`git stash` |
+
+---
+
+## 六、FAQ 与反模式对照
+
+### 6.1 常见坑
+
+| 坑编号 | 常见错误做法 | 反模式示例 | 正确做法 |
+|--------|--------------|------------|----------|
+| F-01 | 跳过预检直接执行 | 直接`git push`而不先`git status` | 先检查工作区状态，确认无未提交改动 |
+| F-02 | 合并前不备份 | 直接`git merge`无回退方案 | 先记录当前HEAD位置，准备回退命令 |
+| F-03 | 提交信息模糊 | `git commit -m "fix"` | 使用规范格式：`type(scope): description` |
+| F-04 | 忽略冲突可能 | 假设合并必然成功 | 准备冲突解决预案，了解`git mergetool` |
+| F-05 | 批量操作无校验 | 循环执行命令不检查中间结果 | 每步执行后检查退出码和输出 |
+
+### 6.2 反模式对照表
+
+| 反模式 | 问题 | 替代方案 |
+|--------|------|----------|
+| 盲目复制命令 | 不理解命令含义，出错难排查 | 理解每条命令的作用和参数 |
+| 忽略错误信息 | 看到报错就放弃 | 阅读错误信息，定位问题根源 |
+| 不保留原始状态 | 操作前不记录当前状态 | 使用`git log --oneline -5`记录位置 |
+| 一次性执行过多操作 | 多个操作混在一起难排查 | 分步执行，每步验证 |
+
+---
+
+## 七、渐进式披露路径
+
+### 7.1 速查卡（新手路径）
+
+1. 确认仓库路径 → 2. 明确操作类型 → 3. 获取命令序列 → 4. 执行并验证
+
+### 7.2 进阶路径（有经验开发者）
+
+1. 自定义命令模板
+2. 批量处理脚本生成
+3. 复杂分支策略（rebase vs merge）
+4. 钩子脚本集成建议
+
+### 7.3 专家路径
+
+1. 自定义Git别名与函数
+2. 工作流优化（Git Flow / Trunk Based）
+3. 自动化测试集成
+4. 性能优化（浅克隆、稀疏检出）
+
+---
+
+## 八、参数参考表
+
+| 参数名 | 类型 | 必填 | 默认值 | 说明 |
+|--------|------|------|--------|------|
+| repo_path | string | 是 | 无 | 本地仓库路径 |
+| operation | enum | 是 | 无 | commit/merge/revert/log/status |
+| branch | string | 否 | 当前分支 | 目标分支名 |
+| files | array | 否 | 全部改动 | 文件列表 |
+| message | string | 条件必填 | 无 | 提交信息（commit时必填） |
+| force | boolean | 否 | false | 是否允许强制操作 |
+
+---
+
+## 九、用户协议
+
 <!-- user-agreement-injected -->
 
+**使用本 Skill 即表示您同意以下条款：**
 
-# 未命名工具
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 提供的所有命令、流程和建议仅供参考，不构成任何形式的保证。
+2. **操作风险**：Git 操作可能造成不可逆的数据变更。执行任何命令前，请确保已备份重要数据，并理解命令的完整含义。
+3. **禁止反向工程**：禁止对本 Skill 文档进行反向工程、破解、篡改或用于任何商业用途。
+4. **环境差异**：不同操作系统、Git 版本可能导致命令行为差异，请根据实际环境调整。
+5. **免责声明**：本 Skill 不承担因操作失误、数据丢失、代码冲突等造成的任何直接或间接损失。
 
-> basic darcsum feelalike for Git
+---
 
-## 一、能力边界（一页纸速查卡）
+## 十、许可证（License）
 
-**能做（5项核心能力）：**
-1. 将 用户提供的数据/文件/URL 转换为结构化结果
-2. 识别并保留输入中的关键信息
-3. 按约定格式生成输出
-4. 对不确定项给出置信度提示
-5. 支持批量处理和自定义格式
-
-**不做（3项边界声明）：**
-- 不做：不执行超出输入范围的分析
-- 不做：不保证绝对准确，低置信度会标注
-- 不做：不访问网络或外部服务
-
-> 如果用户的需求超出以上边界，明确告知无法处理并说明原因，不强行执行。
-
-## 二、触发方式（说大白话就能用）
-
-**触发词表（6类场景）：**
-| gitsum | 通用场景 |
-
-**大白话触发示例（用户原话 → 触发动作）：**
-| 用户可能会说 | 触发动作 |
-|---|---|
-| 帮我处理一下这个 | 启动 未命名工具，进入标准流程 |
-| 把这个转成另一种格式 | 启动 未命名工具，进入标准流程 |
-| 批量弄一下这些 | 启动 未命名工具，进入标准流程 |
-
-## 三、标准流程（5分钟上手路径）
-
-### Step 1: 收集最小信息集
-向用户确认以下关键信息（缺失则引导补采，不臆测）：
-- 输入来源：用户提供的数据/文件/URL
-- 输出格式要求（文件类型 / 字段结构）
-- 期望的完整度（快速骨架 / 详细成品）
-
-### Step 2: 执行核心流程
-1. 解析输入内容，识别关键信息
-2. 按以下规则处理：
-   - 识别输入中的关键字段并结构化
-   - 按默认模板组织输出
-   - 对不确定项标注并请求确认
-3. 生成结果，并标注置信度：
-   - 置信度 ≥90%：直接输出
-   - 85%-90%：标注"建议复核"
-   - <85%：标注"[需核实]"，并说明不确定点
-
-### Step 3: 输出与校验
-1. 将结果整理为约定格式输出
-2. 自查：字段完整性、格式正确性、置信度标注
-3. 有疑问时向用户二次确认
-
-## 四、异常处理（错误码体系）
-
-| 错误码 | 场景 | 标准化话术 |
-|---|---|---|
-| E001 | 输入为空 | "请提供待处理的内容，格式为：用户提供的数据/文件/URL" |
-| E002 | 关键信息缺失 | "还缺少以下信息，请补充：..."（逐项追问） |
-| E003 | 输入格式错误 | "输入格式不符合要求，示例：..." |
-| E004 | 超出能力边界 | "这超出了本工具的能力范围，建议..." |
-| E005 | 置信度过低 | "结果无法确定，建议：..." |
-
-## 五、常见问题（FAQ 速查）
-
-- Q1: 处理速度如何？ → 骨架结果 1 分钟内，详细结果视输入量而定
-- Q2: 会不会出错？ → 低置信度内容会标注 [需核实]，请人工复核关键结果
-- Q3: 支持哪些输入？ → 用户提供的数据/文件/URL
-
-## 六、进阶用法（深度按需）
-
-- 批量处理：连续提供多个输入，按同一规则逐项处理
-- 自定义输出：说明期望的格式/字段，按需生成
-- 与其它工具组合：可串联其他 Skill 形成工作流
-
-## 许可证（License）
-
-```text
-MIT License
-
-Copyright (c) 2026 原创作者（自持版权）
-
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-```
 <!-- professional-license-embedded -->
 
-## 前置条件
+**MIT License**
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
+Copyright (c) 2024 原创作者（自持版权）
 
-## 执行步骤
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-## 输出
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
+---
 
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本 Skill 由 AI 辅助生成，仅供学习参考。使用前请阅读相关文档并自行验证命令安全性。*
