@@ -514,10 +514,3 @@ class LoopStateKernel:
         返回:
             成功返回 ERR_OK，失败返回错误码。
         """
-
-
-if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--interval", default=None, help="文档声明的参数")  # F3 补全
-    ap.add_argument("--state-file", default=None, help="文档声明的参数")  # F3 补全
-    args = ap.parse_args()
