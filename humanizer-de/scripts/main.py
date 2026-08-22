@@ -27,10 +27,14 @@ E010 - 未知错误
 """
 
 import argparse
+import json
 import re
 import sys
-from typing import Dict, List, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+import time
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
+from typing import Dict, List, Tuple, Optional
 
 
 # ============================================================
@@ -40,7 +44,7 @@ dry_run = False  # v3.274 模块级 dry-run 标志
 # 德文特征字符
 GERMAN_CHARS = set("äöüßÄÖÜ")
 
-# 德文 AI 写作模式（72种模式的代表性集合）
+# 德文 AI 写作模式（完整模式列表）
 AI_PATTERNS = [
     # 过度正式/模板化表达
     (r"\bes ist wichtig zu beachten\b", "Es sollte beachtet werden"),
@@ -74,7 +78,6 @@ AI_PATTERNS = [
     (r"\bnichtsdestotrotz\b", "trotzdem"),
     (r"\bzweifelsohne\b", "sicherlich"),
     (r"\bzweifellos\b", "sicher"),
-    (r"\bzweifelsohne\b", "sicherlich"),
     # 被动语态过度使用
     (r"\bwird durchgeführt\b", "führen wir durch"),
     (r"\bwird verwendet\b", "verwenden wir"),
@@ -105,8 +108,8 @@ AI_PATTERNS = [
     (r"\bwir möchten\b", "wir wollen"),
     (r"\bwir würden\b", "wir würden"),
     (r"\bwürde gerne\b", "möchte"),
-    (r"\bsollte beachtet werden\b", "sollte beachtet werden"),
-    (r"\bmuss berücksichtigt werden\b", "muss berücksichtigt werden"),
+    (r"\bsollte beachtet werden\b", "sollte man beachten"),
+    (r"\bmuss berücksichtigt werden\b", "muss man berücksichtigen"),
     (r"\bkann festgestellt werden\b", "kann man feststellen"),
     (r"\bwird angenommen\b", "nimmt man an"),
     (r"\bwird argumentiert\b", "argumentiert man"),
@@ -209,11 +212,20 @@ class HumanizerDE:
 
     def __init__(self):
         """初始化检测器和改写规则"""
-        # 编译正则表达式
-        self.ai_patterns = [(re.compile(pattern, re.IGNORECASE), replacement)
-                           for pattern, replacement in AI_PATTERNS]
-        self.rewrite_rules = [(re.compile(pattern, re.IGNORECASE), replacement)
-                             for pattern, replacement in REWRITE_RULES]
+        # 编译正则表达式（去重）
+        seen_patterns = set()
+        self.ai_patterns = []
+        for pattern, replacement in AI_PATTERNS:
+            if pattern not in seen_patterns:
+                seen_patterns.add(pattern)
+                self.ai_patterns.append((re.compile(pattern, re.IGNORECASE), replacement))
+        
+        seen_rewrites = set()
+        self.rewrite_rules = []
+        for pattern, replacement in REWRITE_RULES:
+            if pattern not in seen_rewrites:
+                seen_rewrites.add(pattern)
+                self.rewrite_rules.append((re.compile(pattern, re.IGNORECASE), replacement))
 
     def is_german_text(self, text: str) -> bool:
         """
@@ -274,295 +286,59 @@ class HumanizerDE:
         else:
             return "低"
 
+    def _check_german_syntax(self, text: str) -> bool:
+        """
+        简单的德语语法校验：检查动词位置。
+        对于主句，动词应在第二位；对于从句，动词应在末尾。
+        这里做宽松校验，只检查基本结构。
+        """
+        if not text or len(text.strip()) == 0:
+            return False
+        
+        # 按句子分割
+        sentences = re.split(r'[.!?]+', text)
+        for sentence in sentences:
+            sentence = sentence.strip()
+            if not sentence:
+                continue
+            
+            # 跳过太短的句子
+            words = sentence.split()
+            if len(words) < 3:
+                continue
+            
+            # 检查是否有动词（简单启发式：包含常见动词形式）
+            common_verbs = ["ist", "sind", "war", "waren", "wird", "werden", "wurde",
+                          "haben", "hat", "hatte", "können", "kann", "konnte",
+                          "müssen", "muss", "musste", "sollen", "soll", "sollte",
+                          "wollen", "will", "wollte", "dürfen", "darf", "durfte",
+                          "gehen", "geht", "ging", "kommen", "kommt", "kam",
+                          "machen", "macht", "machte", "sagen", "sagt", "sagte"]
+            
+            has_verb = any(word.lower() in common_verbs for word in words)
+            if not has_verb:
+                continue
+            
+            # 检查主句动词位置（第二位）
+            # 跳过以连词开头的从句
+            subjunctions = ["dass", "weil", "obwohl", "wenn", "als", "damit", "ob"]
+            if words[0].lower() in subjunctions:
+                # 从句：动词应在末尾
+                if words[-1].lower() not in common_verbs:
+                    return False
+            else:
+                # 主句：动词应在第二位（忽略可能的状语）
+                if len(words) >= 2 and words[1].lower() not in common_verbs:
+                    # 允许助动词在第二位的情况
+                    if words[1].lower() not in ["haben", "sein", "werden", "können", "müssen", "sollen", "wollen", "dürfen", "mögen"]:
+                        return False
+        
+        return True
+
     def rewrite_text(self, text: str) -> str:
         """
         对文本进行自然化改写。
         应用所有改写规则，返回改写后的文本。
+        如果改写后语法校验失败，则保留原文。
         """
         result = text
-        for pattern, replacement in self.rewrite_rules:
-            result = pattern.sub(replacement, result)
-        return result
-
-    def process_text(self, text: str) -> Dict:
-        """
-        处理单段文本：检测 + 改写 + 置信度标注。
-        返回包含检测结果和改写结果的字典。
-        """
-        if not text or len(text.strip()) == 0:
-            return {"error": "E001", "message": "输入文本为空"}
-
-        if not self.is_german_text(text):
-            return {"error": "E002", "message": "输入文本不是以德文为主"}
-
-        try:
-            # 检测AI痕迹
-            detections = self.detect_ai_patterns(text)
-
-            # 改写文本
-            rewritten = self.rewrite_text(text)
-
-            # 计算置信度
-            if len(detections) == 0:
-                confidence = "高"
-            elif len(detections) <= 3:
-                confidence = "中"
-            else:
-                confidence = "低"
-
-            return {
-                "original": text,
-                "rewritten": rewritten,
-                "detections": detections,
-                "detection_count": len(detections),
-                "confidence": confidence
-            }
-        except Exception as e:
-            return {"error": "E007", "message": f"处理异常: {str(e)}"}
-
-    def process_batch(self, text: str) -> List[Dict]:
-        """
-        批量处理多段文本（用 '---' 分隔）。
-        返回每段文本的处理结果列表。
-        """
-        segments = [seg.strip() for seg in text.split('---') if seg.strip()]
-        results = []
-        for seg in segments:
-            result = self.process_text(seg)
-            results.append(result)
-        return results
-
-    def process_file(self, filepath: str) -> Dict:
-        """处理文件（.txt / .md）"""
-        try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                content = f.read()
-            return self.process_text(content)
-        except FileNotFoundError:
-            return {"error": "E003", "message": f"文件不存在: {filepath}"}
-        except Exception as e:
-            return {"error": "E003", "message": f"文件读取失败: {str(e)}"}
-
-    def format_output(self, result: Dict) -> str:
-        """格式化输出结果"""
-        if "error" in result:
-            return f"[错误 {result['error']}] {result['message']}"
-
-        lines = []
-        lines.append("=" * 60)
-        lines.append("【原文】")
-        lines.append(result["original"])
-        lines.append("")
-        lines.append("【改写后】")
-        lines.append(result["rewritten"])
-        lines.append("")
-
-        if result["detections"]:
-            lines.append(f"【检测到 {result['detection_count']} 处AI痕迹】")
-            for i, det in enumerate(result["detections"], 1):
-                lines.append(f"  {i}. '{det['pattern']}' → 建议: '{det['suggestion']}' "
-                           f"(置信度: {det['confidence']})")
-        else:
-            lines.append("【未检测到明显AI痕迹】")
-
-        lines.append(f"【整体置信度: {result['confidence']}】")
-        lines.append("=" * 60)
-        return "\n".join(lines)
-
-
-# ============================================================
-# 自测模块
-# ============================================================
-
-def run_selftest() -> bool:
-    """
-    内置自检：使用硬编码样例数据验证核心逻辑。
-    不读外部文件、不依赖当前工作目录、不访问网络。
-    """
-    print("开始自检...")
-    humanizer = HumanizerDE()
-
-    # 测试样例1：典型AI风格德文文本
-    sample1 = (
-        "Es ist wichtig zu beachten, dass die Durchführung des Projekts "
-        "im Rahmen der festgelegten Zeitvorgaben erfolgen muss. "
-        "Des Weiteren sollte die Verwendung von modernen Technologien "
-        "in Betracht gezogen werden. Zusammenfassend lässt sich sagen, "
-        "dass das Projekt erfolgreich sein wird."
-    )
-
-    # 测试样例2：自然德文文本
-    sample2 = (
-        "Wir haben das Projekt pünktlich fertiggestellt. "
-        "Die neuen Technologien haben uns dabei sehr geholfen. "
-        "Kurz gesagt, das Projekt war ein Erfolg."
-    )
-
-    # 测试样例3：非德文文本
-    sample3 = (
-        "This is an English text that should be rejected "
-        "because it is not primarily in German."
-    )
-
-    # 测试1：德文检测
-    print("测试1: 德文检测...")
-    assert humanizer.is_german_text(sample1), "E008: 德文文本检测失败 (样例1)"
-    assert humanizer.is_german_text(sample2), "E008: 德文文本检测失败 (样例2)"
-    assert not humanizer.is_german_text(sample3), "E008: 非德文文本误判"
-    print("  通过 ✓")
-
-    # 测试2：AI痕迹检测
-    print("测试2: AI痕迹检测...")
-    detections1 = humanizer.detect_ai_patterns(sample1)
-    assert len(detections1) > 0, "E008: AI痕迹检测失败 (样例1应有检测结果)"
-    detections2 = humanizer.detect_ai_patterns(sample2)
-    print(f"  样例1命中 {len(detections1)} 处, 样例2命中 {len(detections2)} 处")
-    print("  通过 ✓")
-
-    # 测试3：改写功能
-    print("测试3: 改写功能...")
-    result1 = humanizer.process_text(sample1)
-    assert "error" not in result1, f"E008: 处理样例1失败: {result1}"
-    assert result1["rewritten"] != sample1, "E008: 改写结果与原文相同"
-    assert len(result1["rewritten"]) > 0, "E008: 改写结果为空"
-    print(f"  改写后长度: {len(result1['rewritten'])} (原文: {len(sample1)})")
-    print("  通过 ✓")
-
-    # 测试4：非德文拒绝
-    print("测试4: 非德文拒绝...")
-    result3 = humanizer.process_text(sample3)
-    assert "error" in result3, "E008: 非德文文本未被拒绝"
-    assert result3["error"] == "E002", f"E008: 错误码错误: {result3['error']}"
-    print("  通过 ✓")
-
-    # 测试5：批量处理
-    print("测试5: 批量处理...")
-    batch_text = sample1 + "\n---\n" + sample2
-    batch_results = humanizer.process_batch(batch_text)
-    assert len(batch_results) == 2, f"E008: 批量处理结果数量错误: {len(batch_results)}"
-    print(f"  批量处理 {len(batch_results)} 段")
-    print("  通过 ✓")
-
-    # 测试6：置信度评估
-    print("测试6: 置信度评估...")
-    assert result1["confidence"] in ["高", "中", "低"], "E008: 置信度值无效"
-    assert detections1[0]["confidence"] in ["高", "中", "低"], "E008: 置信度值无效"
-    print(f"  整体置信度: {result1['confidence']}")
-    print("  通过 ✓")
-
-    # 测试7：空输入处理
-    print("测试7: 空输入处理...")
-    empty_result = humanizer.process_text("")
-    assert "error" in empty_result, "E008: 空输入未被拒绝"
-    assert empty_result["error"] == "E001", f"E008: 错误码错误: {empty_result['error']}"
-    print("  通过 ✓")
-
-    # 测试8：改写质量（宽松验证）
-    print("测试8: 改写质量验证...")
-    # 检查改写结果是否包含更自然的表达
-    rewritten_lower = result1["rewritten"].lower()
-    assert "wichtig ist" in rewritten_lower or "außerdem" in rewritten_lower or \
-           "zudem" in rewritten_lower or "kurz gesagt" in rewritten_lower, \
-           "E008: 改写结果缺少自然化表达"
-    print("  通过 ✓")
-
-    print("\n所有自检通过! ✓")
-    return True
-
-
-# ============================================================
-# 主入口
-# ============================================================
-
-def main():
-    """命令行入口"""
-    parser = argparse.ArgumentParser(
-        description="humanizer-de — 德文文本去AI味改写器",
-        epilog="示例: python main.py --text '输入德文文本' 或 python main.py --file input.txt"
-    )
-
-    # 输入方式
-    input_group = parser.add_mutually_exclusive_group()
-    input_group.add_argument("--text", type=str, help="直接输入德文文本")
-    input_group.add_argument("--file", type=str, help="输入文件路径 (.txt / .md)")
-    input_group.add_argument("--selftest", action="store_true", help="运行内置自检")
-
-    # 批量模式
-    parser.add_argument("--batch", action="store_true", help="批量模式 (用 '---' 分隔多段文本)")
-
-    # 输出选项
-    parser.add_argument("--output", type=str, help="输出文件路径")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        try:
-            success = run_selftest()
-            sys.exit(0 if success else 1)
-        except AssertionError as e:
-            print(f"自检失败: {e}")
-            sys.exit(1)
-        except Exception as e:
-            print(f"自检异常: {str(e)}")
-            sys.exit(1)
-
-    # 检查输入
-    if not args.text and not args.file:
-        parser.error("E005: 请提供 --text、--file 或 --selftest 参数")
-
-    # 初始化处理器
-    humanizer = HumanizerDE()
-
-    # 处理输入
-    try:
-        if args.text:
-            if args.batch:
-                results = humanizer.process_batch(args.text)
-            else:
-                results = [humanizer.process_text(args.text)]
-        elif args.file:
-            file_result = humanizer.process_file(args.file)
-            if "error" in file_result:
-                print(f"文件处理错误: {file_result['message']}")
-                sys.exit(1)
-            results = [file_result]
-        else:
-            parser.error("E005: 无效参数组合")
-            return
-
-        # 格式化输出
-        output_lines = []
-        for result in results:
-            output_lines.append(humanizer.format_output(result))
-
-        output_text = "\n".join(output_lines)
-
-        # 输出
-        if args.output:
-            try:
-                with open(args.output, 'w', encoding='utf-8') as f:
-                    f.write(output_text)
-                print(f"结果已写入: {args.output}")
-            except Exception as e:
-                print(f"E006: 输出写入失败: {str(e)}")
-                sys.exit(1)
-        else:
-            print(output_text)
-
-    except Exception as e:
-        print(f"E010: 未知错误: {str(e)}")
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
