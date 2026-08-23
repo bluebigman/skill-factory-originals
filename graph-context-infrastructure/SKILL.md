@@ -1,166 +1,125 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: graph-context-infrastructure
 name: graph-context-infrastructure
-displayName: 图基建 上下文关联 问责溯源
-description: 将文本转为图数据，支撑上下文管理与AI问责基础设施。
-version: 2.0.1
-rules_version: cpr-20260810-n301
+displayName: 文本转图 上下文管理 知识基建
+description: 将文本自动转为图数据，支撑上下文管理与AI问责基础设施。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/graph-context-infrastructure
+source_url: ""
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LingGraph Studio
+author: 图基建工坊
 agent_created: true
-trigger_words: ["图数据库", "上下文管理", "图基础设施", "semantica", "ai问责", "关系抽取", "实体链接"]
+trigger_words: ["图数据库", "上下文管理", "图基础设施", "semantica", "ai问责", "--selftest", "--version", "知识图谱", "实体关系抽取"]
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
+> 本内容由 AI 生成，仅供学习参考 <!-- ai-generated-notice -->
 
+> 本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读「用户协议」章节。
 
-> 本内容由 AI 生成，仅供学习参考
-<!-- ai-generated-notice -->
+# 文本转图 · 上下文管理基建（graph-context-infrastructure）
 
-# 图上下文基础设施（Graph Context Infrastructure）
+## 一、能力边界（一页纸速查卡）
 
-## 一、能力边界速查卡
-
-本工具面向**需要将非结构化文本转化为图结构数据**的开发者、数据工程师与 AI 系统架构师。它不依赖预置本体，而是从文本中即时抽取实体与关系，输出为 JSON 格式的图数据，为上下文管理、审计追踪与 AI 问责提供底层支撑。
-
-### 1.1 能做（核心能力）
-
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| C1 | 文本 → 图数据转换 | 接收纯文本文件，输出 JSON 格式的节点（nodes）与边（edges）集合 |
-| C2 | 关键实体识别 | 自动识别公司、机构、技术、人物等实体类型，并标注类型标签 |
-| C3 | 显式关系抽取 | 识别合作、投资、支持、隶属等显式关系，生成有向边 |
-| C4 | 多编码兼容 | 支持 UTF-8、GBK、GB18030 编码输入，自动检测或手动指定 |
-| C5 | 运行模式控制 | 支持 `--dry-run` 预览输出、`--verbose` 输出详细决策日志 |
-
-### 1.2 不能做（边界声明）
-
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| L1 | 不支持数值型表格数据 | 输入必须是文本，若为纯数值表格（如 CSV 数字矩阵），工具将报错并提示正确格式 |
-| L2 | 不支持超大规模文本 | 超过 10 万字且要求毫秒级响应时，单线程处理可能成为瓶颈，建议分块处理 |
-| L3 | 不识别隐式关系 | 仅抽取文本中明确表述的关系（如"X 与 Y 合作"），不推断隐含语义 |
-| L4 | 不保证实体消歧 | 同名实体（如两个"华为"）默认合并，不做上下文消歧 |
-
-### 1.3 适用对象
-
-- 需要为 RAG（检索增强生成）系统构建实体索引的开发者
-- 需要审计 AI 决策链路（输入文本 → 实体 → 关系）的合规团队
-- 需要快速将合同、新闻稿、技术文档转为知识图谱的分析师
+| 维度 | 说明 |
+|------|------|
+| **核心能力** | 将纯文本内容解析为结构化图数据（节点 + 边），输出标准 JSON，供下游图数据库（如 Neo4j）或上下文管理中间件消费 |
+| **输入要求** | UTF-8 编码的纯文本文件（`.txt`、`.md`、`.log` 等），单文件建议不超过 500KB；超出请先切片 |
+| **输出格式** | 严格遵循 JSON Schema（见「五、输出规范」），包含 `nodes` 与 `edges` 两个顶层数组 |
+| **可调参数** | `--min-confidence`（置信度阈值，默认 0.6，范围 0.0~1.0）、`--config`（自定义实体类型配置） |
+| **不能做的事** | ① 不处理图片/PDF/扫描件中的文字；② 不执行跨文档实体消歧（同一实体在不同文件中的指代合并需自行处理）；③ 不提供图数据库部署服务；④ 不保证实体识别覆盖率（受限于输入文本质量与领域词典） |
+| **适用对象** | 需要快速搭建文本→图数据管线的开发者、需要为 AI 对话系统构建上下文记忆层的工程师、需要审计 AI 决策依据（问责）的合规人员 |
 
 ---
 
 ## 二、触发方式与场景映射
 
-### 2.1 触发词
+当你的任务涉及以下任一场景时，可调用本 Skill：
 
-当用户输入包含以下任一关键词时，本 Skill 应被激活：
-
-`图数据库`、`上下文管理`、`图基础设施`、`semantica`、`ai问责`、`关系抽取`、`实体链接`
-
-### 2.2 场景映射表
-
-| 用户说（大白话） | 实际需求 | 触发动作 |
-|------------------|----------|----------|
-| "帮我看看这份合同里有哪些公司合作" | 抽取合同中的实体与关系 | 运行文本→图转换，输出 JSON |
-| "我要给 AI 的回答做溯源，怎么存上下文？" | 构建上下文管理图 | 生成带置信度的图数据，供审计使用 |
-| "这堆新闻稿能变成知识图谱吗？" | 批量文本转图 | 逐文件处理，输出合并图 |
-| "semantica 怎么用？" | 工具使用咨询 | 展示本 SKILL.md 核心流程 |
+| 大白话场景 | 触发词示例 | 使用方式 |
+|------------|------------|----------|
+| "把这段聊天记录变成关系图" | 图数据库、上下文管理 | 将文本保存为 `.txt`，运行主脚本 |
+| "我想看 AI 决策时参考了哪些知识" | ai问责、semantica | 对 AI 的提示词/上下文日志执行转换，分析 `edges` 中的引用关系 |
+| "给知识库建索引结构" | 知识图谱、实体关系抽取 | 批量处理文档，合并输出 JSON 后导入 Neo4j |
+| "检查工具是否正常" | --selftest | 直接运行自检命令 |
+| "确认版本号" | --version | 直接运行版本命令 |
 
 ---
 
-## 三、标准执行流程
+## 三、标准流程
 
-### 3.1 前置条件
+### 前置条件
 
-| 条件 | 要求 |
-|------|------|
-| 输入文件 | 必须存在且可读，内容为非空文本 |
-| 文件编码 | UTF-8 / GBK / GB18030（自动检测或手动指定） |
-| 运行环境 | Python 3.8+，安装 `graph-context-infrastructure` 包 |
+1. Python ≥ 3.8（`python --version` 验证）
+2. 已下载 Skill 源码至本地目录，目录结构完整（含 `main.py`、`config.example.json`、`examples/`）
+3. （可选）如需导入 Neo4j，请自行安装社区版并准备 Cypher Shell
 
-### 3.2 执行步骤
+### 执行步骤
 
-```bash
-# 基本用法
-python -m graph_context_infrastructure --input ./data.txt --output ./result.json
+1. **准备输入文件**：将待处理文本保存为 `.txt` 文件，编码为 UTF-8。
+2. **（可选）自定义配置**：复制 `config.example.json` 为 `config.json`，按需修改 `entity_types` 列表（见「八、配置与扩展」）。
+3. **运行转换命令**：
 
-# 指定编码
-python -m graph_context_infrastructure --input ./data.txt --encoding GBK
+   ```bash
+   python main.py --input your_text.txt --output result.json
+   ```
 
-# 预览模式（不写文件，仅打印结果）
-python -m graph_context_infrastructure --input ./data.txt --dry-run
+   常用参数组合：
 
-# 详细日志模式
-python -m graph_context_infrastructure --input ./data.txt --verbose
+   ```bash
+   # 调整置信度阈值（降低阈值→更多实体但噪声增加）
+   python main.py --input your_text.txt --output result.json --min-confidence 0.4
 
-# 自检模式
-python -m graph_context_infrastructure --selftest
+   # 使用自定义配置
+   python main.py --input your_text.txt --output result.json --config config.json
+   ```
 
-# 版本查询
-python -m graph_context_infrastructure --version
-```
+4. **检查输出**：打开 `result.json`，确认 `nodes` 与 `edges` 结构完整（见「五、输出规范」）。
+5. **（可选）导入 Neo4j**：使用 Cypher 语句批量导入，示例：
 
-### 3.3 参数说明
+   ```cypher
+   // 导入节点（示例，需按实际字段调整）
+   LOAD CSV FROM 'file:///nodes.csv' AS row
+   CREATE (:Entity {id: row[0], type: row[1], name: row[2]});
+   ```
 
-| 参数 | 类型 | 必填 | 默认值 | 说明 |
-|------|------|------|--------|------|
-| `--input` | str | 是 | 无 | 输入文本文件路径 |
-| `--output` | str | 否 | `output.json` | 输出 JSON 文件路径 |
-| `--encoding` | str | 否 | 自动检测 | 输入文件编码 |
-| `--dry-run` | flag | 否 | False | 仅打印结果，不写文件 |
-| `--verbose` | flag | 否 | False | 输出详细决策日志 |
-| `--selftest` | flag | 否 | False | 运行自检并退出 |
-| `--version` | flag | 否 | False | 打印版本并退出 |
+### 输出规范
 
-### 3.4 处理逻辑（分步编号）
-
-1. **读取输入**：按指定编码（或自动检测）读取文本文件。
-2. **实体识别**：使用命名实体识别（NER）模型识别公司、机构、技术、人物等实体。
-3. **关系抽取**：基于依存句法分析与模式匹配，抽取实体间的显式关系。
-4. **置信度标注**：每个实体和关系均标注置信度分数（0.0 ~ 1.0）。
-5. **结果组装**：按约定格式生成 JSON 并输出。
-
-### 3.5 输出规范
+输出 JSON 顶层结构：
 
 ```json
 {
   "schema_version": "1.0",
   "meta": {
-    "input_file": "data.txt",
-    "encoding": "UTF-8",
-    "processed_at": "2026-08-10T12:00:00Z",
-    "total_entities": 12,
-    "total_relations": 8
+    "source_file": "your_text.txt",
+    "processed_at": "2025-01-01T12:00:00Z",
+    "min_confidence": 0.6,
+    "total_nodes": 12,
+    "total_edges": 18
   },
   "nodes": [
     {
-      "id": "ent_001",
-      "name": "华为",
-      "type": "公司",
-      "confidence": 0.98,
-      "mentions": [
-        {"text": "华为", "offset": 0, "length": 2}
-      ]
+      "id": "n1",
+      "type": "PERSON",
+      "name": "张三",
+      "confidence": 0.92,
+      "properties": {
+        "mention_count": 3,
+        "first_seen": "第2段"
+      }
     }
   ],
   "edges": [
     {
-      "id": "rel_001",
-      "source": "ent_001",
-      "target": "ent_002",
-      "relation": "合作",
-      "confidence": 0.92,
-      "evidence": "华为与中兴签署合作协议"
+      "id": "e1",
+      "source": "n1",
+      "target": "n2",
+      "relation": "WORKS_AT",
+      "confidence": 0.85,
+      "evidence": "张三任职于某某公司"
     }
   ]
 }
@@ -168,26 +127,32 @@ python -m graph_context_infrastructure --version
 
 ---
 
-## 四、置信度门控机制
+## 四、置信度门控
 
-当信息不足以做出可靠判断时，本工具**不会编造**，而是输出占位符：
+本 Skill 采用**置信度门控**机制，防止低质量信息污染下游系统：
 
-| 场景 | 输出占位符 | 说明 |
-|------|------------|------|
-| 实体类型无法确定 | `[需核实:实体类型]` | 该实体已识别，但类型不确定 |
-| 关系方向不明确 | `[需核实:关系方向]` | 两个实体间存在关系，但方向不明 |
-| 置信度低于阈值（0.6） | `[需核实:低置信度]` | 结果保留但标记为需人工确认 |
+- 每个节点和边均附带 `confidence` 字段（0.0~1.0）。
+- 低于 `--min-confidence` 阈值的实体/关系**不会出现在输出中**。
+- 当输入文本信息不足（如实体名称缺失、关系证据不明确）时，输出中对应字段使用占位符 `[需核实:字段名]`，**绝不编造**。
 
-**示例**：
+示例：
 
 ```json
 {
-  "id": "ent_007",
-  "name": "某机构",
-  "type": "[需核实:实体类型]",
-  "confidence": 0.45
+  "id": "n7",
+  "type": "ORGANIZATION",
+  "name": "[需核实:组织名称]",
+  "confidence": 0.55
 }
 ```
+
+**设计过滤策略建议**：
+
+| 场景 | 建议阈值 | 说明 |
+|------|----------|------|
+| 快速预览 | 0.4 | 召回优先，容忍噪声 |
+| 标准使用 | 0.6（默认） | 平衡召回与精确 |
+| 审计/问责 | 0.8 | 精确优先，仅保留高置信证据 |
 
 ---
 
@@ -195,90 +160,142 @@ python -m graph_context_infrastructure --version
 
 | 错误码 | 含义 | 提示话术 | 修正步骤 |
 |--------|------|----------|----------|
-| `E001` | 输入文件不存在 | "错误：找不到输入文件，请检查路径" | 确认文件路径是否正确 |
-| `E002` | 输入文件为空 | "错误：输入文件内容为空" | 检查文件是否包含文本内容 |
-| `E003` | 编码无法识别 | "错误：无法自动检测编码，请手动指定 --encoding" | 使用 `--encoding GBK` 或 `--encoding UTF-8` 重试 |
-| `E004` | 输入为数值表格 | "错误：检测到纯数值表格数据，本工具仅支持文本输入" | 将数据转为文本描述后重试 |
-| `E005` | 输出目录不可写 | "错误：无法写入输出文件，请检查目录权限" | 更换输出路径或修改目录权限 |
-| `E006` | 文本超过大小限制 | "错误：文本超过 10 万字限制，请分块处理" | 将文本拆分为多个文件分别处理 |
+| `E001` | 输入文件不存在 | `[错误] 找不到输入文件: xxx` | 检查文件路径是否正确，确认文件已保存 |
+| `E002` | 输入文件编码非 UTF-8 | `[错误] 文件编码不支持，请转换为 UTF-8` | 使用 `iconv` 或文本编辑器另存为 UTF-8 |
+| `E003` | 配置文件 JSON 解析失败 | `[错误] 配置文件格式错误，请检查 JSON 语法` | 使用 JSON 校验工具检查 `config.json` |
+| `E004` | 置信度阈值超出范围 | `[错误] --min-confidence 必须在 0.0~1.0 之间` | 重新传入合法阈值 |
+| `E005` | 输出目录不可写 | `[错误] 无法写入输出文件，请检查目录权限` | 更换输出路径或调整目录权限 |
+| `E006` | 输入文本为空 | `[警告] 输入文本为空，输出空图` | 检查源文件内容 |
 
 ---
 
 ## 六、FAQ 与反模式
 
-### 6.1 常见坑
-
-| 坑 | 反模式（错误做法） | 正模式（正确做法） |
-|----|-------------------|-------------------|
-| 输入格式错误 | 直接传入 CSV 数字表格 | 将表格转为文本描述（如"公司A 2023年营收100亿"） |
-| 编码混乱 | 不指定编码，依赖自动检测 | 明确指定 `--encoding`，避免乱码 |
-| 忽略置信度 | 直接使用全部输出，不检查置信度 | 过滤低置信度（<0.6）结果，人工复核 |
-| 超大规模输入 | 一次性处理 50 万字文本 | 按章节或段落分块，分别处理后再合并 |
-| 关系误判 | 将"X 支持 Y"理解为"Y 支持 X" | 检查 `evidence` 字段，确认关系方向 |
-
-### 6.2 反模式对照表
-
-| 反模式 | 问题 | 替代方案 |
-|--------|------|----------|
-| 把本工具当知识图谱数据库 | 本工具只做抽取，不存储查询 | 将输出导入 Neo4j 等图数据库 |
-| 期望识别隐喻或反讽 | 本工具仅处理显式文本 | 人工预处理或使用语义分析模型 |
-| 期望实时流式处理 | 本工具为单线程批处理 | 使用消息队列分片处理 |
+| 常见坑 | 反模式（错误做法） | 正确做法 |
+|--------|-------------------|----------|
+| **忽略置信度** | 直接使用默认阈值，不根据场景调整 | 先跑一次默认参数，观察输出质量，再按需调整 |
+| **跨文件实体不合并** | 多个文件分别生成 JSON 后直接拼接，导致同一实体出现多个节点 | 编写脚本按实体名称+类型做合并，或使用图数据库的 MERGE 语句 |
+| **输入文本质量差** | 将 OCR 乱码或口语化文本直接输入，期望高精度输出 | 先做文本清洗（去重、纠错、分段），再执行转换 |
+| **过度依赖默认配置** | 不自定义实体类型，导致领域专有名词无法识别 | 编辑 `config.json`，添加领域实体类型（见「八」） |
+| **把输出当绝对事实** | 将图数据直接用于决策，不验证 `confidence` 与 `evidence` | 对低置信度节点进行人工复核，或提高阈值 |
 
 ---
 
-## 七、渐进式披露路径
+## 七、渐进式披露（分层次阅读路径）
 
-### 7.1 速查卡（30 秒上手）
+### 速查卡（30 秒上手）
 
 ```bash
-# 最小可用命令
-python -m graph_context_infrastructure --input ./data.txt
-# 输出：output.json（默认文件名）
+# 1. 运行自检
+python main.py --selftest
+
+# 2. 转换文本
+python main.py --input doc.txt --output graph.json
+
+# 3. 查看结果
+cat graph.json
 ```
 
-### 7.2 新手路径（5 分钟）
+### 新手路径（首次使用）
 
-1. 准备一个文本文件（如 `sample.txt`），内容包含至少两个实体和一个关系。
-2. 运行 `python -m graph_context_infrastructure --input ./sample.txt --dry-run`。
-3. 查看终端输出的 JSON 结构，理解 `nodes` 和 `edges` 的含义。
-4. 尝试修改 `--output` 参数，将结果保存为文件。
+1. 阅读「一、能力边界」确认工具是否匹配需求。
+2. 运行 `--selftest` 验证环境。
+3. 使用 `examples/` 下的示例文件跑通一次完整流程。
+4. 查看输出 JSON，理解 `nodes` 与 `edges` 结构。
 
-### 7.3 进阶路径（深度使用）
+### 进阶路径（深度使用）
 
-1. **自定义实体类型**：通过配置文件指定关注的实体类型（如只关注"公司"和"技术"）。
-2. **批量处理**：编写脚本循环处理多个文件，合并输出。
-3. **与图数据库集成**：将输出 JSON 导入 Neo4j，使用 Cypher 查询。
-4. **置信度调优**：调整置信度阈值，平衡召回率与精确率。
+1. 阅读「四、置信度门控」，设计过滤策略。
+2. 编写脚本批量处理多个文件，合并输出（注意实体消歧）。
+3. 将 JSON 导入 Neo4j，编写 Cypher 查询分析关系。
+4. 自定义实体类型（通过配置文件指定关注的类型）。
+5. 调整置信度阈值，平衡召回率与精确率。
 
 ---
 
-## 八、用户协议
+## 八、配置与扩展
 
-<!-- user-agreement-injected -->
+配置文件 `config.json` 示例：
 
-**使用本 Skill 即表示您同意以下条款：**
+```json
+{
+  "entity_types": [
+    "PERSON",
+    "ORGANIZATION",
+    "LOCATION",
+    "DATE",
+    "PRODUCT",
+    "CUSTOM_TYPE"
+  ],
+  "relation_types": [
+    "WORKS_AT",
+    "LOCATED_IN",
+    "MENTIONS",
+    "CUSTOM_RELATION"
+  ],
+  "language": "zh",
+  "max_entities_per_doc": 500
+}
+```
+
+**自定义实体类型**：在 `entity_types` 数组中添加新类型名称，系统将尝试识别该类型。注意：新增类型需要提供至少 3 个示例样本（在 `examples/` 下新建 `.txt` 文件并标注），否则识别效果可能不理想。
+
+---
+
+## 九、自检与版本
+
+```bash
+# 运行自检（验证环境与依赖）
+python main.py --selftest
+
+# 查看版本
+python main.py --version
+```
+
+自检内容包括：Python 版本检查、依赖库导入、示例文本转换、输出 JSON 格式校验。
+
+---
+
+## 十、用户协议
+
+**请在使用本 Skill 前仔细阅读以下条款，使用即视为同意全部内容：**
 
 1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 提供的输出结果仅供参考，不构成任何形式的专业建议或保证。
 2. **禁止反向工程**：使用者不得对本 Skill 的底层算法、模型权重或核心逻辑进行反向工程、反编译或试图提取源代码（除开源部分外）。
 3. **数据安全**：使用者应确保输入数据不包含敏感个人信息或受法律保护的机密数据。因输入数据引发的合规问题由使用者自行负责。
 4. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
+5. **合规使用**：使用者应遵守所在地法律法规，不得将本 Skill 用于任何非法用途。
+
+<!-- user-agreement-injected -->
 
 ---
 
-## 九、许可证（License）
+## 十一、许可证（License）
+
+本 Skill 采用 MIT 许可证发布：
+
+```
+MIT License
+
+Copyright (c) 2025 原创作者（自持版权）
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
 
 <!-- professional-license-embedded -->
-
-**MIT License**
-
-版权所有 (c) 2026 原创作者（自持版权）
-
-特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士无偿使用本软件的权利，包括但不限于使用、复制、修改、合并、出版、分发、再许可和/或销售软件副本的权利，并允许向提供软件的人士授权上述行为，但须满足以下条件：
-
-上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
-
-本软件按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。在任何情况下，作者或版权持有人均不对任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他方面，由软件或软件的使用或其他交易引起、产生于或与之相关。
-
----
-
-*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
