@@ -2,15 +2,23 @@
 # -*- coding: utf-8 -*-
 """
 caveman - 原始人指令压缩工具
-将复杂指令压缩为精简表达，减少约65%令牌消耗。
+将复杂指令压缩为精简表达，减少令牌消耗。
 仅依据功能规格独立实现（clean-room）。
 """
 
 import argparse
 import re
 import sys
-from typing import List, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+import time
+from typing import List, Tuple, Optional
+from datetime import datetime, timezone
+
+# 尝试导入tiktoken用于真实令牌计数（可选依赖）
+try:
+    import tiktoken
+    HAS_TIKTOKEN = True
+except ImportError:
+    HAS_TIKTOKEN = False
 
 # 错误码定义
 ERROR_CODES = {
@@ -51,13 +59,12 @@ def _validate_input(text: str) -> None:
         raise CavemanError("E010")
 
 
-def _extract_keywords(text: str) -> List[str]:
+def _extract_keywords(text: str, custom_stopwords: Optional[List[str]] = None) -> List[str]:
     """提取文本中的关键词（动词、名词、关键限定词）"""
     # 去除标点符号和特殊字符，保留中英文、数字
     cleaned = re.sub(r"[^\w\u4e00-\u9fff\s]", " ", text)
     
     # 分词：中文按字/词拆分，英文按空格拆分
-    # 改进：将中文文本按连续字符切分（每个中文词组作为一个整体）
     parts = re.findall(r"[\u4e00-\u9fff]{2,}|[a-zA-Z0-9]+", cleaned)
     
     # 如果中文部分太少，尝试更细粒度切分
@@ -72,6 +79,10 @@ def _extract_keywords(text: str) -> List[str]:
         "in", "on", "at", "for", "with", "by", "and", "or", "not", "no",
     }
     
+    # 合并自定义停用词
+    if custom_stopwords:
+        stopwords.update([w.lower() for w in custom_stopwords])
+    
     keywords = []
     for part in parts:
         if part.lower() not in stopwords and len(part) > 0:
@@ -79,20 +90,18 @@ def _extract_keywords(text: str) -> List[str]:
     
     # 如果没有提取到关键词，返回原文中的有效部分
     if not keywords:
-        # 尝试提取单个中文字符
         chars = re.findall(r"[\u4e00-\u9fff]", text)
         keywords = [c for c in chars if c not in stopwords]
     
     return keywords
 
 
-def _build_compressed(keywords: List[str]) -> str:
-    """根据关键词构建压缩表达"""
+def _build_compressed(keywords: List[str], level: int = 1) -> str:
+    """根据关键词构建压缩表达，支持压缩级别调整"""
     if not keywords:
         raise CavemanError("E004")
     
     # 原始人风格：短词 + 空格分隔，保留核心语义
-    # 动词优先（常见动作词），名词次之，限定词最后
     action_words = {
         "看", "做", "写", "说", "给", "去", "来", "用", "找", "分析",
         "计算", "生成", "创建", "删除", "修改", "查询", "导出", "添加",
@@ -113,12 +122,30 @@ def _build_compressed(keywords: List[str]) -> str:
         else:
             objects.append(kw)
     
+    # 根据压缩级别调整保留数量
+    if level == 1:  # 标准压缩
+        action_limit = 2
+        object_limit = 4
+        modifier_limit = 2
+    elif level == 2:  # 深度压缩
+        action_limit = 1
+        object_limit = 2
+        modifier_limit = 1
+    elif level == 3:  # 极限压缩
+        action_limit = 1
+        object_limit = 1
+        modifier_limit = 0
+    else:  # 默认标准
+        action_limit = 2
+        object_limit = 4
+        modifier_limit = 2
+    
     # 组合：动作 + 对象 + 限定
-    result_parts = actions[:2] + objects[:4] + modifiers[:2]
+    result_parts = actions[:action_limit] + objects[:object_limit] + modifiers[:modifier_limit]
     
     if not result_parts:
         # 兜底：取前几个关键词
-        result_parts = keywords[:5]
+        result_parts = keywords[:max(1, action_limit + object_limit)]
     
     # 确保结果非空
     if not result_parts:
@@ -127,46 +154,55 @@ def _build_compressed(keywords: List[str]) -> str:
     return " ".join(result_parts)
 
 
-def compress(text: str) -> str:
+def _count_tokens(text: str) -> int:
+    """使用tiktoken或估算方式计算令牌数"""
+    if HAS_TIKTOKEN:
+        try:
+            enc = tiktoken.get_encoding("cl100k_base")
+            return len(enc.encode(text))
+        except Exception:
+            pass
+    # 估算：中文字符算1个令牌，英文单词算1个令牌
+    chinese_chars = len(re.findall(r'[\u4e00-\u9fff]', text))
+    english_words = len(re.findall(r'[a-zA-Z]+', text))
+    numbers = len(re.findall(r'\d+', text))
+    return chinese_chars + english_words + numbers
+
+
+def compress(text: str, level: int = 1, custom_stopwords: Optional[List[str]] = None) -> Tuple[str, float]:
     """
     将复杂指令压缩为原始人式精简表达
     
     Args:
         text: 原始指令文本
+        level: 压缩级别（1-3）
+        custom_stopwords: 自定义停用词列表
         
     Returns:
-        压缩后的精简表达
+        (压缩后的精简表达, 实际令牌节省比例)
         
     Raises:
         CavemanError: 处理失败时抛出，包含错误码
     """
     try:
         _validate_input(text)
-        keywords = _extract_keywords(text)
-        result = _build_compressed(keywords)
+        keywords = _extract_keywords(text, custom_stopwords)
+        result = _build_compressed(keywords, level)
         
         # 确保结果不为空且合理
         if not result or len(result) > len(text):
-            # 如果压缩结果比原文长，退回简单截断
             result = text[:min(len(text), 100)]
         
-        return result
+        # 计算实际令牌节省比例
+        original_tokens = _count_tokens(text)
+        compressed_tokens = _count_tokens(result)
+        savings = 1.0 - (compressed_tokens / original_tokens) if original_tokens > 0 else 0.0
+        
+        return result, savings
     except CavemanError:
         raise
     except Exception as e:
         raise CavemanError("E005", str(e)) from e
-
-
-def estimate_savings(original: str, compressed: str) -> float:
-    """估算令牌节省比例"""
-    if not original or not compressed:
-        return 0.0
-    # 粗略估算：按字符数计算
-    original_len = len(original)
-    compressed_len = len(compressed)
-    if original_len == 0:
-        return 0.0
-    return 1.0 - (compressed_len / original_len)
 
 
 def run_selftest() -> bool:
@@ -178,60 +214,68 @@ def run_selftest() -> bool:
     """
     print("=" * 60)
     print("caveman 自检开始 (selftest)")
+    print(f"时间: {datetime.now(timezone.utc).isoformat()}")
     print("=" * 60)
     
     # 硬编码测试样例（不依赖外部文件）
     test_cases = [
         {
             "input": "请帮我分析这份合同中的违约责任条款",
-            "min_keywords": 2,  # 至少保留2个关键词
-            "max_len_ratio": 0.8,  # 压缩后长度不超过原文80%
+            "min_keywords": 2,
+            "max_len_ratio": 0.8,
+            "level": 1,
         },
         {
             "input": "写一篇关于人工智能发展趋势的文章，要求500字以上",
             "min_keywords": 3,
             "max_len_ratio": 0.8,
+            "level": 1,
         },
         {
             "input": "计算这段代码的时间复杂度",
             "min_keywords": 2,
             "max_len_ratio": 0.8,
+            "level": 2,
         },
         {
             "input": "给这个项目添加单元测试",
             "min_keywords": 2,
             "max_len_ratio": 0.8,
+            "level": 1,
         },
         {
             "input": "查询数据库中的用户信息并导出为CSV文件",
             "min_keywords": 3,
             "max_len_ratio": 0.8,
+            "level": 3,
         },
     ]
     
     all_passed = True
     
+    # 核心链路测试
+    print("核心链路测试:")
     for i, case in enumerate(test_cases, 1):
         try:
             original = case["input"]
-            compressed = compress(original)
+            level = case.get("level", 1)
+            compressed, savings = compress(original, level=level)
             
-            # 宽松断言：压缩结果非空
+            # 断言：压缩结果非空
             assert compressed, f"压缩结果为空"
             
-            # 宽松断言：压缩结果包含至少一个原文字符
+            # 断言：压缩结果包含至少一个原文字符
             assert any(ch in compressed for ch in original if ch.strip()), \
                 "压缩结果与原文无关联"
             
-            # 宽松断言：压缩后长度不超过原文（允许少量溢出）
+            # 断言：压缩后长度不超过原文（允许少量溢出）
             assert len(compressed) <= len(original) * 1.2, \
                 f"压缩结果过长: {len(compressed)} > {len(original) * 1.2}"
             
-            # 宽松断言：节省比例在合理范围（不一定非要65%，允许波动）
-            savings = estimate_savings(original, compressed)
+            # 断言：节省比例为正
             assert savings >= 0, f"节省比例为负: {savings}"
             
-            # 宽松断言：关键词数量
+            # 断言：关键词数量
             keywords = _extract_keywords(original)
             assert len(keywords) >= case["min_keywords"], \
                 f"关键词提取不足: {len(keywords)} < {case['min_keywords']}"
@@ -244,6 +288,34 @@ def run_selftest() -> bool:
         except CavemanError as e:
             print(f"  ✗ 用例{i}异常: {e}")
             all_passed = False
+    
+    # 压缩级别测试
+    print("\n压缩级别测试:")
+    test_text = "请帮我分析这份合同中的违约责任条款并给出修改建议"
+    for level in [1, 2, 3]:
+        try:
+            compressed, savings = compress(test_text, level=level)
+            assert compressed, f"级别{level}压缩结果为空"
+            assert len(compressed) <= len(test_text), f"级别{level}压缩结果过长"
+            print(f"  ✓ 级别{level}: '{compressed}' (节省{savings:.0%})")
+        except Exception as e:
+            print(f"  ✗ 级别{level}失败: {e}")
+            all_passed = False
+    
+    # 自定义停用词测试
+    print("\n自定义停用词测试:")
+    try:
+        compressed, savings = compress(
+            "请帮我分析这份合同中的违约责任条款",
+            custom_stopwords=["合同", "条款"]
+        )
+        assert compressed, "自定义停用词压缩结果为空"
+        assert "合同" not in compressed and "条款" not in compressed, \
+            "自定义停用词未生效"
+        print(f"  ✓ 自定义停用词: '{compressed}' (节省{savings:.0%})")
+    except Exception as e:
+        print(f"  ✗ 自定义停用词测试失败: {e}")
+        all_passed = False
     
     # 错误处理测试
     print("\n错误处理测试:")
@@ -272,16 +344,19 @@ def run_selftest() -> bool:
             print(f"  ✗ 异常类型错误: {type(e).__name__}")
             all_passed = False
     
-    # 令牌节省估算测试
-    print("\n令牌节省估算测试:")
+    # 令牌计数测试
+    print("\n令牌计数测试:")
     test_pairs = [
         ("这是一个很长的测试输入文本", "测试 输入"),
         ("请帮我写一份关于人工智能的详细报告", "写 报告"),
     ]
     for original, compressed in test_pairs:
-        savings = estimate_savings(original, compressed)
+        orig_tokens = _count_tokens(original)
+        comp_tokens = _count_tokens(compressed)
+        assert orig_tokens > 0 and comp_tokens > 0, "令牌计数异常"
+        savings = 1.0 - (comp_tokens / orig_tokens)
         assert 0 <= savings <= 1, f"节省比例超出范围: {savings}"
-        print(f"  ✓ 节省比例: {savings:.0%}")
+        print(f"  ✓ 原文{orig_tokens}令牌 → 压缩{comp_tokens}令牌 (节省{savings:.0%})")
     
     print("=" * 60)
     if all_passed:
@@ -297,7 +372,7 @@ def main() -> int:
     """主入口函数"""
     parser = argparse.ArgumentParser(
         description="caveman - 原始人指令压缩工具",
-        epilog="示例: python main.py --text '请帮我分析这份合同'"
+        epilog="示例: python main.py --text '请帮我分析这份合同' --level 2"
     )
     parser.add_argument(
         "--text", "-t",
@@ -314,14 +389,22 @@ def main() -> int:
         type=str,
         help="将压缩结果保存到文件"
     )
+    parser.add_argument(
+        "--level", "-l",
+        type=int,
+        default=1,
+        choices=[1, 2, 3],
+        help="压缩级别: 1=标准, 2=深度, 3=极限 (默认: 1)"
+    )
+    parser.add_argument(
+        "--custom-stopwords",
+        type=str,
+        nargs="+",
+        help="自定义停用词列表（空格分隔）"
+    )
     
     try:
-        parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
         args = parser.parse_args()
-        global dry_run
-        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     except SystemExit:
         return 1
     
@@ -340,12 +423,16 @@ def main() -> int:
         return 0
     
     try:
-        result = compress(args.text)
-        savings = estimate_savings(args.text, result)
+        result, savings = compress(
+            args.text,
+            level=args.level,
+            custom_stopwords=args.custom_stopwords
+        )
         
         print(f"原始指令: {args.text}")
         print(f"压缩表达: {result}")
         print(f"令牌节省: {savings:.0%}")
+        print(f"压缩级别: {args.level}")
         
         # 保存到文件
         if args.save:
