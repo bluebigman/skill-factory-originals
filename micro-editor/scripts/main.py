@@ -18,7 +18,6 @@ import sys
 import tempfile
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义 (E001-E010)
 ERR_FILE_NOT_FOUND = "E001"      # 输入文件不存在
@@ -58,19 +57,30 @@ class Document:
         self.cursor_col = max(0, min(self.cursor_col + d_col, line_len))
 
     def insert_text(self, text: str) -> None:
-        """在当前光标位置插入文本（支持多行）"""
+        """在当前光标位置插入文本（支持多行）
+
+        单行插入：直接拼接到光标处，光标后移。
+        多行插入：首段接在光标前半段之后，末段带上光标后半段，
+        中间各段独立成行，光标停在末段行尾。
+        """
         if not text:
             return
-        # 拆分多行输入
         parts = text.split("\n")
         line = self.lines[self.cursor_row]
-        # 第一段插入当前行
-        self.lines[self.cursor_row] = line[:self.cursor_col] + parts[0] + line[self.cursor_col:]
-        self.cursor_col += len(parts[0])
-        # 后续段插入新行
-        for part in parts[1:]:
+        head, tail = line[:self.cursor_col], line[self.cursor_col:]
+
+        # 单行插入：最常见路径
+        if len(parts) == 1:
+            self.lines[self.cursor_row] = head + parts[0] + tail
+            self.cursor_col = len(head) + len(parts[0])
+            return
+
+        # 多行插入：首段留在当前行，末段承接原行剩余内容
+        self.lines[self.cursor_row] = head + parts[0]
+        last_idx = len(parts) - 1
+        for i, part in enumerate(parts[1:], start=1):
             self.cursor_row += 1
-            self.lines.insert(self.cursor_row, part + line[self.cursor_col:])
+            self.lines.insert(self.cursor_row, part + tail if i == last_idx else part)
             self.cursor_col = len(part)
 
     def delete_char(self) -> bool:
@@ -152,15 +162,40 @@ class FileProcessor:
                 raise ValueError(f"{ERR_INVALID_FORMAT}: 无法解析文件编码: {self.input_path}")
         return Document.from_text(content)
 
-    def write_document(self, doc: Document) -> None:
-        """写入文档到输出文件"""
-        try:
-            with open(self.output_path, "w", encoding="utf-8") as f:
-                f.write(doc.to_text())
-        except PermissionError:
+    def write_document(self, doc: Document, dry_run: bool = False) -> None:
+        """写入文档到输出文件。
+
+        dry_run=True 时只做权限与路径校验，不落盘，供 --dry-run 预览使用。
+        """
+        parent = os.path.dirname(os.path.abspath(self.output_path)) or "."
+        if not os.access(parent, os.W_OK):
             raise PermissionError(f"{ERR_WRITE_FAILED}: 无写入权限: {self.output_path}")
-        except OSError as e:
-            raise OSError(f"{ERR_WRITE_FAILED}: 写入失败: {e}")
+        # 写盘分支由 dry_run 统一控制：预览态只校验不落盘
+        if not dry_run:
+            try:
+                with open(self.output_path, "w", encoding="utf-8") as f:
+                    f.write(doc.to_text())
+            except PermissionError:
+                raise PermissionError(f"{ERR_WRITE_FAILED}: 无写入权限: {self.output_path}")
+            except OSError as e:
+                raise OSError(f"{ERR_WRITE_FAILED}: 写入失败: {e}")
+
+    def diff_report(self, before: str, after: str, max_lines: int = 40) -> List[str]:
+        """生成写盘前后的 diff 明细，供 --dry-run / --verbose 展示。
+
+        返回统一 diff 格式的行列表；无变化时返回空列表。
+        """
+        import difflib
+
+        lines = list(difflib.unified_diff(
+            before.splitlines(), after.splitlines(),
+            fromfile=f"a/{os.path.basename(self.input_path)}",
+            tofile=f"b/{os.path.basename(self.output_path)}",
+            lineterm="", n=1,
+        ))
+        if len(lines) > max_lines:
+            lines = lines[:max_lines] + [f"... 其余 {len(lines) - max_lines} 行 diff 已省略"]
+        return lines
 
     def process(self, transform=None) -> Document:
         """
@@ -326,16 +361,28 @@ def run_selftest() -> int:
         doc = Document()
         doc.insert_text("abc")
         assert doc.to_text() == "abc", "插入文本应成功"
-        doc.move_cursor(0, 1)
+        assert doc.cursor_col == 3, "插入后光标应在行尾"
+
+        # 光标从行尾(3)左移 2 位到位置 1，再插入 X → "aXbc"
+        doc.move_cursor(0, -2)
+        assert doc.cursor_col == 1, "光标应位于位置 1"
         doc.insert_text("X")
         assert doc.to_text() == "aXbc", "中间插入应成功"
-        
-        # 修正：光标应该在插入的字符之后（位置2），删除应该删掉"X"
-        # 但当前光标在位置2，需要先移动到位置1来删除"X"
-        doc.move_cursor(0, -1)  # 移动到位置1（"X"之前）
+        assert doc.cursor_col == 2, "插入后光标应紧跟插入内容之后"
+
+        # 光标在位置 2，删除其前一个字符即刚插入的 X → 复原为 abc
         doc.delete_char()
         assert doc.to_text() == "abc", "删除应成功"
         print("[SELFTEST] 插入/删除: PASS")
+
+        # ---- 测试 2b: 多行插入（首段/中间段/末段拼接） ----
+        doc = Document.from_text("HelloWorld")
+        doc.move_cursor(0, 5)          # 光标移到 Hello 之后
+        doc.insert_text("A\nB\nC")     # 期望: HelloA / B / CWorld
+        assert doc.lines == ["HelloA", "B", "CWorld"], f"多行插入结果异常: {doc.lines}"
+        assert doc.cursor_row == 2, "多行插入后应停在末段所在行"
+        assert doc.cursor_col == 1, "多行插入后光标应在末段内容之后"
+        print("[SELFTEST] 多行插入: PASS")
 
         # ---- 测试 3: 搜索 ----
         doc = Document.from_text("apple\nbanana\ncherry")
@@ -394,6 +441,32 @@ def run_selftest() -> int:
         assert doc.cursor_row == 0 and doc.cursor_col == 0, "光标应夹取到边界"
         print("[SELFTEST] 边界情况: PASS")
 
+        # ---- 测试 9: dry-run 不落盘 ----
+        with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False) as tf:
+            tf.write("alpha\nbeta")
+            temp_path = tf.name
+        try:
+            processor = FileProcessor(temp_path)
+            doc = processor.read_document()
+            out_path = temp_path + "_dry.txt"
+            processor.output_path = out_path
+            processor.write_document(doc, dry_run=True)
+            assert not os.path.exists(out_path), "dry-run 不应产生输出文件"
+            processor.write_document(doc)
+            assert os.path.exists(out_path), "去掉 dry-run 后应真正写入"
+            os.unlink(out_path)
+        finally:
+            os.unlink(temp_path)
+        print("[SELFTEST] dry-run 预览不落盘: PASS")
+
+        # ---- 测试 10: diff 明细输出 ----
+        processor = FileProcessor("a.txt", "b.txt")
+        diff = processor.diff_report("x\ny", "x\nz")
+        assert any(line.startswith("-y") for line in diff), "diff 应标出删除行"
+        assert any(line.startswith("+z") for line in diff), "diff 应标出新增行"
+        assert processor.diff_report("same", "same") == [], "无变化时 diff 应为空"
+        print("[SELFTEST] diff 明细生成: PASS")
+
         print("[SELFTEST] 全部自检通过 ✓")
         return 0
 
@@ -418,19 +491,12 @@ def main() -> int:
     parser.add_argument("--preview", action="store_true", help="显示预览后退出")
     parser.add_argument("--lang", default="python", help="语法高亮语言")
     parser.add_argument("--output", "-o", help="输出文件路径（默认带 _out 后缀）")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--dry-run", action="store_true",
+                        help="预览模式：只打印将要写入的 diff，不落盘")
+    parser.add_argument("--verbose", "-v", action="store_true",
+                        help="输出每步处理决策明细（读取编码、行数变化、diff 摘要）")
 
     args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 自检模式
     if args.selftest:
@@ -459,7 +525,38 @@ def main() -> int:
         # 批处理模式（读取 + 写入）
         processor = FileProcessor(args.file, args.output)
         doc = processor.read_document()
+        before = doc.to_text()
+
+        if args.verbose:
+            print(f"[明细] 读取: {args.file}（{len(doc.lines)} 行，{len(before)} 字符）")
+            print(f"[明细] 目标: {processor.output_path}")
+
+        after = doc.to_text()
+        diff = processor.diff_report(before, after)
+
+        if args.dry_run:
+            print("=== 预览模式（--dry-run，未写入任何文件）===")
+            print(f"将写入: {processor.output_path}")
+            print(f"行数: {len(doc.lines)}")
+            if diff:
+                print("--- diff 明细 ---")
+                for line in diff:
+                    print(line)
+            else:
+                print("内容无变化，实际执行时将原样写出")
+            processor.write_document(doc, dry_run=True)
+            print("提示: 确认无误后去掉 --dry-run 即可真正写入")
+            return 0
+
         processor.write_document(doc)
+
+        if args.verbose:
+            if diff:
+                print("[明细] 变更 diff:")
+                for line in diff:
+                    print(f"  {line}")
+            else:
+                print("[明细] 内容无变化，原样写出")
 
         # 统计信息
         print(f"处理完成: {args.file}")
