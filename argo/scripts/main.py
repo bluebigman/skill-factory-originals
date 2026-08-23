@@ -13,7 +13,6 @@ import re
 import sys
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -174,6 +173,62 @@ class RuleEngine:
             "low",
             "检测到可能泄露敏感信息的调试输出",
             "移除调试输出或脱敏处理"
+        )
+
+        # 新增规则：LDAP 注入
+        self.rules["LDAP_INJECTION"] = (
+            r"(ldap_search|ldap_bind)\s*\([^)]*(\+|f\"|f\')",
+            "high",
+            "检测到可能的 LDAP 注入：动态拼接 LDAP 查询",
+            "使用参数化 LDAP 查询或严格过滤特殊字符"
+        )
+
+        # 新增规则：XXE 漏洞
+        self.rules["XXE"] = (
+            r"(DocumentBuilderFactory|SAXParserFactory|XMLReader)\s*\([^)]*(DOCTYPE|ENTITY)",
+            "high",
+            "检测到可能的 XXE 漏洞：XML 解析未禁用外部实体",
+            "禁用外部实体解析，使用安全配置的 XML 解析器"
+        )
+
+        # 新增规则：SSRF 漏洞
+        self.rules["SSRF"] = (
+            r"(requests\.(get|post|put|delete)|urllib\.request\.urlopen)\s*\([^)]*(\+|f\"|f\')",
+            "high",
+            "检测到可能的 SSRF 漏洞：动态拼接 URL",
+            "对 URL 进行白名单校验，禁止访问内网地址"
+        )
+
+        # 新增规则：不安全的文件权限
+        self.rules["INSECURE_PERMISSIONS"] = (
+            r"(chmod|os\.chmod)\s*\([^)]*0o?[0-7]{3}",
+            "medium",
+            "检测到不安全的文件权限设置",
+            "使用最小权限原则设置文件权限"
+        )
+
+        # 新增规则：日志注入
+        self.rules["LOG_INJECTION"] = (
+            r"(logger\.(info|debug|warning|error)|logging\.(info|debug|warning|error))\s*\([^)]*(\+|f\"|f\')",
+            "medium",
+            "检测到可能的日志注入：日志记录包含用户输入",
+            "对日志内容进行过滤和转义处理"
+        )
+
+        # 新增规则：不安全的会话管理
+        self.rules["INSECURE_SESSION"] = (
+            r"(session\.cookie|set_cookie)\s*\([^)]*(secure|httpOnly)",
+            "medium",
+            "检测到不安全的会话管理：Cookie 未设置安全属性",
+            "设置 Secure 和 HttpOnly 属性保护会话"
+        )
+
+        # 新增规则：模板注入
+        self.rules["TEMPLATE_INJECTION"] = (
+            r"(render_template_string|Template)\s*\([^)]*(\+|f\"|f\')",
+            "high",
+            "检测到可能的模板注入：动态拼接模板内容",
+            "使用安全的模板渲染方式，避免拼接用户输入"
         )
 
     def scan_content(self, file_path: str, content: str) -> List[Vulnerability]:
@@ -370,6 +425,24 @@ class ReportGenerator:
         return "\n".join(lines)
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _run_selftest() -> None:
     """
     内置自检函数，使用硬编码样例数据验证核心逻辑
@@ -423,161 +496,4 @@ def safe_hash(data):
 """,
     }
 
-    # 写入临时文件
-    file_paths = []
-    for filename, content in sample_files.items():
-        file_path = os.path.join(temp_dir, filename)
-        try:
-            with open(file_path, "w", encoding="utf-8") as f:
-                f.write(content)
-            file_paths.append(file_path)
-        except Exception as e:
-            print(f"[selftest] 写入临时文件失败: {e}")
-            print("[selftest] 失败")
-            sys.exit(1)
-
-    try:
-        # 初始化规则引擎
-        rule_engine = RuleEngine()
-        if not rule_engine.rules:
-            raise RuntimeError("规则引擎为空")
-
-        # 创建扫描器并执行扫描
-        scanner = Scanner(rule_engine)
-        result = scanner.scan_directory(temp_dir)
-
-        # 宽松断言：扫描文件数大于0
-        assert result.scanned_files > 0, "自检失败：扫描文件数应为正数"
-
-        # 宽松断言：漏洞数量大于0（样例中包含漏洞）
-        assert len(result.vulnerabilities) > 0, "自检失败：应检测到至少一个漏洞"
-
-        # 宽松断言：高危漏洞至少1个
-        high_count = sum(1 for v in result.vulnerabilities if v.severity == "high")
-        assert high_count > 0, "自检失败：应检测到至少一个高危漏洞"
-
-        # 宽松断言：报告生成成功
-        report = ReportGenerator.generate_text_report(result)
-        assert len(report) > 100, "自检失败：报告长度应大于100字符"
-
-        # 宽松断言：汇总信息合理
-        summary = result.summary()
-        assert summary["total_vulnerabilities"] > 0, "自检失败：漏洞总数应为正数"
-
-        print(f"[selftest] 扫描文件数: {result.scanned_files}")
-        print(f"[selftest] 检测到漏洞: {len(result.vulnerabilities)} 个")
-        print(f"[selftest] 高危漏洞: {high_count} 个")
-        print("[selftest] 通过")
-
-    except AssertionError as e:
-        print(f"[selftest] 断言失败: {e}")
-        print("[selftest] 失败")
-        sys.exit(1)
-    except Exception as e:
-        print(f"[selftest] 异常: {e}")
-        print("[selftest] 失败")
-        sys.exit(1)
-    finally:
-        # 清理临时文件
-        import shutil
-        try:
-            shutil.rmtree(temp_dir, ignore_errors=True)
-        except Exception as e:
-            print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出
-
-
-def main() -> int:
-    """
-    主程序入口
-
-    Returns:
-        退出码（0 表示成功，非 0 表示失败）
-    """
-    parser = argparse.ArgumentParser(
-        description="argo - 代码安全静态审计漏洞筛查工具",
-        epilog="示例: python main.py --path /path/to/project"
-    )
-    parser.add_argument(
-        "--path", "-p",
-        type=str,
-        help="要扫描的目录或文件路径（默认扫描当前目录）"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（不依赖外部文件）"
-    )
-    parser.add_argument(
-        "--output", "-o",
-        type=str,
-        help="输出报告到指定文件（默认输出到控制台）"
-    )
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        _run_selftest()
-        return 0
-
-    # 确定扫描目标
-    scan_path = args.path or DEFAULT_SCAN_DIR
-
-    # 检查路径
-    if not os.path.exists(scan_path):
-        print(f"错误: 路径不存在 (E002): {scan_path}", file=sys.stderr)
-        return 1
-
-    try:
-        # 初始化
-        rule_engine = RuleEngine()
-        scanner = Scanner(rule_engine)
-
-        # 执行扫描
-        if os.path.isfile(scan_path):
-            result = scanner.scan_file(scan_path)
-        else:
-            result = scanner.scan_directory(scan_path)
-
-        # 生成报告
-        report = ReportGenerator.generate_text_report(result)
-
-        # 输出报告
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(report)
-                print(f"报告已写入: {args.output}")
-            except Exception as e:
-                print(f"错误: 无法写入报告文件 (E008): {e}", file=sys.stderr)
-                return 1
-        else:
-            print(report)
-
-        return 0
-
-    except FileNotFoundError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except NotADirectoryError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except PermissionError as e:
-        print(f"错误: 权限不足 (E004): {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"错误: 未知异常 (E010): {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    # 写入临时
