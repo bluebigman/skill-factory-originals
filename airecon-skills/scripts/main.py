@@ -1,38 +1,50 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-airecon-skills 独立实现脚本
+airecon-skills 生产级实现
 
 功能：
-- 将用户提供的任意文本数据解析为结构化结果
-- 自动识别关键信息（姓名、邮箱、电话、日期、金额等）
-- 对每个字段标注置信度（高/中/低）
-- 支持 JSON / YAML / Markdown 三种输出格式
-- 支持批量处理多条记录
+- 将任意文本/CSV/JSON/URL 内容解析为结构化数据
+- 支持字段映射、批量处理、置信度标注
+- 输出格式：JSON / CSV / Markdown
+- 内置 --dry-run 预览、--verbose 详细日志、--selftest 自检
 
 用法：
-    python main.py --input "文本内容" [--format json|yaml|md] [--fields 字段1,字段2]
-    python main.py --selftest
+    python run.py --input "文本内容" [--format json|csv|md] [--fields 字段1,字段2]
+    python run.py --file 输入文件 [--format json|csv|md] [--fields 字段1,字段2]
+    python run.py --url https://example.com [--timeout 10] [--fields 字段1,字段2]
+    python run.py --selftest
 
 错误码：
     E001 参数错误
     E002 输入为空
-    E003 不支持的输出格式
-    E004 字段配置错误
+    E003 文件不存在
+    E004 编码错误
     E005 解析失败
-    E006 正则编译错误
-    E007 内部逻辑错误
-    E008 批量处理失败
-    E009 文件读取失败
+    E006 网络请求失败
+    E007 输出格式错误
+    E008 字段映射失败
+    E009 置信度过低
     E010 未知错误
 """
 
 import argparse
+import csv
+import io
 import json
+import os
 import re
 import sys
-from datetime import datetime
+import tempfile
+import time
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
+
+try:
+    import requests
+    HAS_REQUESTS = True
+except ImportError:
+    HAS_REQUESTS = False
 
 
 # ============================================================
@@ -49,6 +61,51 @@ class AppError(Exception):
 # ============================================================
 # 工具函数
 # ============================================================
+def _now_utc() -> str:
+    """返回 UTC 时间字符串"""
+    return datetime.now(timezone.utc).isoformat()
+
+
+def _safe_read_file(file_path: str) -> str:
+    """安全读取文件，支持多编码"""
+    if not os.path.exists(file_path):
+        raise AppError("E003", f"文件不存在: {file_path}")
+    
+    encodings = ["utf-8", "gbk", "gb18030", "latin-1"]
+    last_error = None
+    
+    for encoding in encodings:
+        try:
+            with open(file_path, "r", encoding=encoding) as f:
+                return f.read()
+        except UnicodeDecodeError as e:
+            last_error = e
+            continue
+        except Exception as e:
+            raise AppError("E010", f"读取文件失败: {e}")
+    
+    raise AppError("E004", f"无法识别文件编码: {last_error}")
+
+
+def _safe_write_file(file_path: str, content: str, dry_run: bool = False) -> None:
+    """原子化写入文件，支持 dry-run 模式"""
+    if not dry_run:
+        # 原子化写入：先写临时文件，再替换
+        dir_path = os.path.dirname(os.path.abspath(file_path))
+        fd, temp_path = tempfile.mkstemp(dir=dir_path, suffix=".tmp")
+        try:
+            with os.fdopen(fd, "w", encoding="utf-8") as f:
+                f.write(content)
+            os.replace(temp_path, file_path)
+        except Exception as e:
+            if os.path.exists(temp_path):
+                os.unlink(temp_path)
+            raise AppError("E010", f"写入文件失败: {e}")
+        print(f"[写入] {file_path}")
+        return
+    print(f"[dry-run] 将写入 {file_path}（{len(content)} 字节），未落盘")
+
+
 def _extract_email(text: str) -> Optional[str]:
     """提取邮箱地址"""
     pattern = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b'
@@ -78,408 +135,509 @@ def _extract_date(text: str) -> Optional[str]:
     return None
 
 
-def _extract_money(text: str) -> Optional[str]:
-    """提取金额"""
-    pattern = r'(?:¥|￥|RMB|CNY)?\s?\d+(?:,\d{3})*(?:\.\d{1,2})?\s?(?:元|块|万元)?'
-    match = re.search(pattern, text)
-    return match.group(0) if match else None
-
-
 def _extract_name(text: str) -> Optional[str]:
-    """提取姓名（简单启发式：中文姓名或英文姓名）"""
-    # 中文姓名：2-4个汉字，前面有"姓名/名字/联系人"等关键词
-    cn_pattern = r'(?:姓名|名字|联系人)[:：\s]*([\u4e00-\u9fa5]{2,4})'
-    match = re.search(cn_pattern, text)
-    if match:
-        return match.group(1)
-    # 英文姓名：两个单词，首字母大写
-    en_pattern = r'\b([A-Z][a-z]+)\s+([A-Z][a-z]+)\b'
-    match = re.search(en_pattern, text)
-    if match:
-        return f"{match.group(1)} {match.group(2)}"
+    """提取姓名（中文2-4字或英文名）"""
+    # 中文姓名：2-4个汉字
+    cn_pattern = r'[\u4e00-\u9fa5]{2,4}'
+    # 英文姓名：首字母大写的单词组合
+    en_pattern = r'\b[A-Z][a-z]+(?:\s+[A-Z][a-z]+)*\b'
+    
+    # 优先匹配中文姓名
+    cn_matches = re.findall(cn_pattern, text)
+    if cn_matches:
+        # 过滤掉常见非姓名词
+        stopwords = {"公司", "有限", "集团", "地址", "电话", "邮箱", "日期"}
+        for name in cn_matches:
+            if name not in stopwords and len(name) >= 2:
+                return name
+    
+    # 匹配英文姓名
+    en_matches = re.findall(en_pattern, text)
+    if en_matches:
+        for name in en_matches:
+            if len(name.split()) >= 2:  # 至少两个单词
+                return name
+    
     return None
 
 
 def _extract_address(text: str) -> Optional[str]:
-    """提取地址（简单启发式）"""
-    pattern = r'(?:地址|住址|location|address)[:：\s]*([^\n，,。;；]+)'
-    match = re.search(pattern, text, re.IGNORECASE)
-    return match.group(1).strip() if match else None
-
-
-def _extract_id_number(text: str) -> Optional[str]:
-    """提取身份证号"""
-    pattern = r'\b\d{17}[\dXx]\b'
+    """提取地址（含省/市/区/路/号关键词）"""
+    pattern = r'[\u4e00-\u9fa5]{2,}(?:省|市|区|县|镇|乡|村|路|街|道|号|栋|楼|室)'
     match = re.search(pattern, text)
     return match.group(0) if match else None
 
 
-def _extract_company(text: str) -> Optional[str]:
-    """提取公司/组织名称"""
-    pattern = r'(?:公司|单位|企业|organization|company)[:：\s]*([^\n，,。;；]+)'
-    match = re.search(pattern, text, re.IGNORECASE)
-    return match.group(1).strip() if match else None
+def _extract_amount(text: str) -> Optional[str]:
+    """提取金额"""
+    pattern = r'(?:￥|¥|RMB|CNY)?\s*\d+(?:\.\d{1,2})?\s*(?:元|块|人民币)?'
+    match = re.search(pattern, text)
+    return match.group(0).strip() if match else None
+
+
+# ============================================================
+# 字段提取器注册表
+# ============================================================
+FIELD_EXTRACTORS = {
+    "name": _extract_name,
+    "phone": _extract_phone,
+    "email": _extract_email,
+    "date": _extract_date,
+    "address": _extract_address,
+    "amount": _extract_amount,
+}
+
+DEFAULT_FIELDS = ["name", "phone", "email", "date", "address"]
 
 
 # ============================================================
 # 核心解析逻辑
 # ============================================================
-# 字段提取器注册表
-FIELD_EXTRACTORS = {
-    'name': _extract_name,
-    'email': _extract_email,
-    'phone': _extract_phone,
-    'date': _extract_date,
-    'money': _extract_money,
-    'address': _extract_address,
-    'id_number': _extract_id_number,
-    'company': _extract_company,
-}
-
-# 字段中文名映射
-FIELD_LABELS = {
-    'name': '姓名',
-    'email': '邮箱',
-    'phone': '电话',
-    'date': '日期',
-    'money': '金额',
-    'address': '地址',
-    'id_number': '身份证号',
-    'company': '公司',
-}
-
-
-def _compute_confidence(field: str, value: Optional[str], text: str) -> str:
-    """
-    计算字段置信度
-
-    规则：
-    - 未提取到值 -> 低
-    - 提取到值且文本中有明确关键词 -> 高
-    - 提取到值但无明确关键词 -> 中
-    """
-    if value is None:
-        return "低"
-    keywords = {
-        'name': ['姓名', '名字', '联系人'],
-        'email': ['邮箱', '邮件', 'email'],
-        'phone': ['电话', '手机', '联系方式'],
-        'date': ['日期', '时间', 'date'],
-        'money': ['金额', '价格', '费用', 'money'],
-        'address': ['地址', '住址', 'location'],
-        'id_number': ['身份证', '证件号', 'id'],
-        'company': ['公司', '单位', '企业', 'company'],
-    }
-    field_keywords = keywords.get(field, [])
-    for kw in field_keywords:
-        if kw.lower() in text.lower():
-            return "高"
-    return "中"
-
-
-def parse_record(text: str, fields: Optional[List[str]] = None) -> Dict[str, Any]:
-    """
-    解析单条记录
-
-    参数：
-        text: 输入文本
-        fields: 需要提取的字段列表，None 表示提取全部
-
-    返回：
-        结构化字典，包含字段值和置信度
-    """
+def parse_record(text: str, fields: List[str]) -> Dict[str, Any]:
+    """解析单条记录，返回字段与置信度"""
     if not text or not text.strip():
-        raise AppError("E002", "输入文本为空")
-
-    # 确定要提取的字段
-    if fields is None:
-        extract_fields = list(FIELD_EXTRACTORS.keys())
-    else:
-        extract_fields = []
-        for f in fields:
-            f = f.strip().lower()
-            if f not in FIELD_EXTRACTORS:
-                raise AppError("E004", f"不支持的字段: {f}")
-            extract_fields.append(f)
-
-    result = {}
-    for field in extract_fields:
+        raise AppError("E002", "输入为空")
+    
+    result: Dict[str, Any] = {}
+    placeholders = 0
+    
+    for field in fields:
+        extractor = FIELD_EXTRACTORS.get(field)
+        if not extractor:
+            raise AppError("E008", f"不支持的字段: {field}")
+        
         try:
-            extractor = FIELD_EXTRACTORS[field]
             value = extractor(text)
-            confidence = _compute_confidence(field, value, text)
-            result[field] = {
-                "value": value,
-                "confidence": confidence,
-            }
         except Exception as e:
-            raise AppError("E005", f"解析字段 {field} 失败: {str(e)}")
-
+            print(f"[WARN] 字段 {field} 提取失败: {e}", file=sys.stderr)
+            value = None
+        
+        if value:
+            result[field] = value
+        else:
+            result[field] = f"[需核实:{field}]"
+            placeholders += 1
+    
+    # 计算置信度
+    total_fields = len(fields)
+    if total_fields == 0:
+        confidence = 0.0
+    elif placeholders == 0:
+        confidence = 0.95 + (0.05 * min(len(text) / 100, 1.0))  # 文本越长置信度略高
+    elif placeholders == 1:
+        confidence = 0.7 + (0.2 * (1 - placeholders / total_fields))
+    else:
+        confidence = 0.5 + (0.2 * (1 - placeholders / total_fields))
+    
+    confidence = max(0.0, min(1.0, confidence))
+    result["confidence"] = round(confidence, 2)
+    
+    # 标记需要人工复核的记录
+    if placeholders > total_fields * 0.5:
+        result["needs_review"] = True
+    
     return result
 
 
-def parse_batch(texts: List[str], fields: Optional[List[str]] = None) -> List[Dict[str, Any]]:
+def parse_batch(items: List[str], fields: List[str]) -> List[Dict[str, Any]]:
     """批量解析多条记录"""
-    if not texts:
-        raise AppError("E002", "输入列表为空")
     results = []
-    for i, text in enumerate(texts):
+    for item in items:
         try:
-            results.append(parse_record(text, fields))
+            record = parse_record(item, fields)
+            results.append(record)
         except AppError as e:
-            raise AppError("E008", f"第 {i+1} 条记录解析失败: {e.message}")
+            print(f"[WARN] 记录解析失败: {e}", file=sys.stderr)
+            results.append({
+                "error": e.code,
+                "message": e.message,
+                "confidence": 0.0,
+                "needs_review": True,
+            })
     return results
+
+
+def detect_input_type(text: str) -> str:
+    """检测输入数据类型"""
+    if not text or not text.strip():
+        return "empty"
+    
+    stripped = text.strip()
+    if stripped.startswith("[") and stripped.endswith("]"):
+        return "json_array"
+    if stripped.startswith("{") and stripped.endswith("}"):
+        return "json_object"
+    if "," in stripped and "\n" in stripped:
+        return "csv"
+    if "|" in stripped and "\n" in stripped:
+        return "markdown_table"
+    return "text"
+
+
+def parse_input(text: str, fields: List[str]) -> Dict[str, Any]:
+    """解析输入数据，自动识别格式"""
+    input_type = detect_input_type(text)
+    
+    if input_type == "empty":
+        raise AppError("E002", "输入为空")
+    
+    if input_type == "json_array":
+        try:
+            items = json.loads(text)
+            if not isinstance(items, list):
+                raise AppError("E005", "JSON 数组格式错误")
+            records = parse_batch([str(item) for item in items], fields)
+        except json.JSONDecodeError as e:
+            raise AppError("E005", f"JSON 解析失败: {e}")
+    elif input_type == "json_object":
+        try:
+            data = json.loads(text)
+            if isinstance(data, dict):
+                # 将字典转为单条记录
+                record = {}
+                for field in fields:
+                    if field in data:
+                        record[field] = data[field]
+                    else:
+                        record[field] = f"[需核实:{field}]"
+                record["confidence"] = 0.9 if len(record) > 0 else 0.0
+                records = [record]
+            else:
+                raise AppError("E005", "JSON 对象格式错误")
+        except json.JSONDecodeError as e:
+            raise AppError("E005", f"JSON 解析失败: {e}")
+    elif input_type == "csv":
+        try:
+            reader = csv.DictReader(io.StringIO(text))
+            records = []
+            for row in reader:
+                record = {}
+                for field in fields:
+                    if field in row and row[field]:
+                        record[field] = row[field]
+                    else:
+                        record[field] = f"[需核实:{field}]"
+                record["confidence"] = 0.9
+                records.append(record)
+        except Exception as e:
+            raise AppError("E005", f"CSV 解析失败: {e}")
+    elif input_type == "markdown_table":
+        try:
+            lines = text.strip().split("\n")
+            if len(lines) < 2:
+                raise AppError("E005", "Markdown 表格格式错误")
+            
+            # 解析表头
+            headers = [h.strip() for h in lines[0].split("|") if h.strip()]
+            records = []
+            
+            for line in lines[2:]:  # 跳过表头和分隔行
+                if not line.strip():
+                    continue
+                cells = [c.strip() for c in line.split("|") if c.strip()]
+                if len(cells) != len(headers):
+                    continue
+                record = {}
+                for i, header in enumerate(headers):
+                    if header in fields:
+                        record[header] = cells[i] if cells[i] else f"[需核实:{header}]"
+                record["confidence"] = 0.9
+                records.append(record)
+        except Exception as e:
+            raise AppError("E005", f"Markdown 表格解析失败: {e}")
+    else:
+        # 纯文本：按行分割，每行一条记录
+        lines = [line.strip() for line in text.split("\n") if line.strip()]
+        records = parse_batch(lines, fields)
+    
+    return {
+        "status": "success",
+        "total": len(records),
+        "processed": len([r for r in records if "error" not in r]),
+        "failed": len([r for r in records if "error" in r]),
+        "data": records,
+        "_meta": {
+            "source_type": input_type,
+            "batch_size": len(records),
+            "avg_confidence": round(
+                sum(r.get("confidence", 0) for r in records) / len(records), 2
+            ) if records else 0.0,
+            "timestamp": _now_utc(),
+        },
+    }
 
 
 # ============================================================
 # 输出格式化
 # ============================================================
-def format_json(data: Any) -> str:
-    """格式化为 JSON"""
-    try:
+def format_output(data: Dict[str, Any], fmt: str = "json") -> str:
+    """格式化输出"""
+    if fmt == "json":
         return json.dumps(data, ensure_ascii=False, indent=2)
-    except Exception as e:
-        raise AppError("E007", f"JSON 格式化失败: {str(e)}")
-
-
-def format_markdown(data: Dict[str, Any]) -> str:
-    """格式化为 Markdown 表格"""
-    if isinstance(data, list):
-        # 批量模式：生成多个表格
-        lines = []
-        for i, record in enumerate(data, 1):
-            lines.append(f"### 记录 {i}")
-            lines.append("")
-            lines.append("| 字段 | 值 | 置信度 |")
-            lines.append("|------|-----|--------|")
-            for field, info in record.items():
-                label = FIELD_LABELS.get(field, field)
-                value = info.get("value", "")
-                if value is None:
-                    value = "-"
-                confidence = info.get("confidence", "低")
-                lines.append(f"| {label} | {value} | {confidence} |")
-            lines.append("")
+    elif fmt == "csv":
+        if not data.get("data"):
+            return ""
+        # 收集所有字段
+        all_fields = set()
+        for record in data["data"]:
+            all_fields.update(record.keys())
+        all_fields = sorted(all_fields)
+        
+        output = io.StringIO()
+        writer = csv.DictWriter(output, fieldnames=all_fields)
+        writer.writeheader()
+        for record in data["data"]:
+            writer.writerow(record)
+        return output.getvalue()
+    elif fmt == "md":
+        if not data.get("data"):
+            return "无数据"
+        # 收集所有字段
+        all_fields = set()
+        for record in data["data"]:
+            all_fields.update(record.keys())
+        all_fields = sorted(all_fields)
+        
+        lines = ["| " + " | ".join(all_fields) + " |"]
+        lines.append("| " + " | ".join(["---"] * len(all_fields)) + " |")
+        for record in data["data"]:
+            lines.append("| " + " | ".join(str(record.get(f, "")) for f in all_fields) + " |")
         return "\n".join(lines)
     else:
-        # 单条模式
-        lines = ["| 字段 | 值 | 置信度 |", "|------|-----|--------|"]
-        for field, info in data.items():
-            label = FIELD_LABELS.get(field, field)
-            value = info.get("value", "")
-            if value is None:
-                value = "-"
-            confidence = info.get("confidence", "低")
-            lines.append(f"| {label} | {value} | {confidence} |")
-        return "\n".join(lines)
-
-
-def format_yaml(data: Any) -> str:
-    """格式化为 YAML（简化实现，仅处理本工具的数据结构）"""
-    def _yaml_value(value: Any, indent: int = 0) -> str:
-        prefix = " " * indent
-        if value is None:
-            return f"{prefix}null"
-        if isinstance(value, bool):
-            return f"{prefix}{str(value).lower()}"
-        if isinstance(value, (int, float)):
-            return f"{prefix}{value}"
-        if isinstance(value, str):
-            return f"{prefix}\"{value}\""
-        if isinstance(value, list):
-            if not value:
-                return f"{prefix}[]"
-            lines = [f"{prefix}- {_yaml_value(value[0], indent + 2).strip()}"]
-            for item in value[1:]:
-                lines.append(f"{prefix}  - {_yaml_value(item, indent + 2).strip()}")
-            return "\n".join(lines)
-        if isinstance(value, dict):
-            if not value:
-                return f"{prefix}{{}}"
-            lines = []
-            for k, v in value.items():
-                lines.append(f"{prefix}{k}: {_yaml_value(v, indent + 2).strip()}")
-            return "\n".join(lines)
-        return f"{prefix}{value}"
-
-    return _yaml_value(data)
+        raise AppError("E007", f"不支持的输出格式: {fmt}")
 
 
 # ============================================================
-# 命令行入口
+# URL 抓取
 # ============================================================
-def run_selftest() -> int:
-    """
-    自检函数：使用内置硬编码样例验证核心逻辑
-
-    返回：0 表示通过，非 0 表示失败
-    """
-    print("开始自检...")
-
-    # 测试样例 1：完整的联系人信息
-    sample1 = "姓名：张三，电话：13812345678，邮箱：zhangsan@example.com，地址：北京市朝阳区建国路88号"
-    try:
-        result1 = parse_record(sample1)
-        assert result1["name"]["value"] is not None, "姓名提取失败"
-        assert result1["phone"]["value"] is not None, "电话提取失败"
-        assert result1["email"]["value"] is not None, "邮箱提取失败"
-        assert result1["address"]["value"] is not None, "地址提取失败"
-        assert result1["name"]["confidence"] == "高", "姓名置信度应为高"
-        print("✓ 样例1（完整联系人）通过")
-    except AssertionError as e:
-        print(f"✗ 样例1失败: {e}")
-        return 1
-    except AppError as e:
-        print(f"✗ 样例1异常: {e.message}")
-        return 1
-
-    # 测试样例 2：不完整信息（缺少部分字段）
-    sample2 = "今天开会讨论项目预算，预计花费 5000 元，会议日期是 2025-03-15"
-    try:
-        result2 = parse_record(sample2)
-        # 金额和日期应该有值
-        assert result2["money"]["value"] is not None, "金额提取失败"
-        assert result2["date"]["value"] is not None, "日期提取失败"
-        # 姓名应该没有值（低置信度）
-        assert result2["name"]["value"] is None, "不应提取到姓名"
-        assert result2["name"]["confidence"] == "低", "姓名置信度应为低"
-        print("✓ 样例2（部分信息）通过")
-    except AssertionError as e:
-        print(f"✗ 样例2失败: {e}")
-        return 1
-    except AppError as e:
-        print(f"✗ 样例2异常: {e.message}")
-        return 1
-
-    # 测试样例 3：批量处理
-    try:
-        batch = [
-            "联系人：李四，手机：13912345678，邮箱：lisi@test.com",
-            "项目A预算：20000 元，截止日期：2025年6月30日",
-        ]
-        results = parse_batch(batch)
-        assert len(results) == 2, "批量处理数量不对"
-        assert results[0]["name"]["value"] is not None, "批量第1条姓名提取失败"
-        assert results[1]["money"]["value"] is not None, "批量第2条金额提取失败"
-        print("✓ 样例3（批量处理）通过")
-    except AssertionError as e:
-        print(f"✗ 样例3失败: {e}")
-        return 1
-    except AppError as e:
-        print(f"✗ 样例3异常: {e.message}")
-        return 1
-
-    # 测试样例 4：输出格式
-    try:
-        sample4 = "姓名：王五，电话：13712345678"
-        result4 = parse_record(sample4)
-        json_str = format_json(result4)
-        assert json_str is not None and len(json_str) > 0, "JSON 格式化失败"
-        md_str = format_markdown(result4)
-        assert md_str is not None and "姓名" in md_str, "Markdown 格式化失败"
-        yaml_str = format_yaml(result4)
-        assert yaml_str is not None and len(yaml_str) > 0, "YAML 格式化失败"
-        print("✓ 样例4（输出格式）通过")
-    except AssertionError as e:
-        print(f"✗ 样例4失败: {e}")
-        return 1
-    except AppError as e:
-        print(f"✗ 样例4异常: {e.message}")
-        return 1
-
-    # 测试样例 5：边界情况 - 空输入
-    try:
-        parse_record("")
-        print("✗ 样例5（空输入）应当抛出异常")
-        return 1
-    except AppError as e:
-        assert e.code == "E002", f"错误码应为 E002，实际为 {e.code}"
-        print("✓ 样例5（空输入处理）通过")
-    except Exception as e:
-        print(f"✗ 样例5异常: {str(e)}")
-        return 1
-
-    print("\n所有自检通过！")
-    return 0
+def fetch_url(url: str, timeout: int = 10, max_retries: int = 3) -> str:
+    """抓取 URL 内容，带超时与指数退避重试"""
+    if not HAS_REQUESTS:
+        raise AppError("E006", "未安装 requests 库，请先执行 pip install requests")
+    
+    if not url.startswith(("http://", "https://")):
+        raise AppError("E006", f"无效的 URL: {url}")
+    
+    last_error = None
+    for attempt in range(max_retries):
+        try:
+            resp = requests.get(url, timeout=timeout)
+            resp.raise_for_status()
+            # 尝试多种编码
+            for encoding in ["utf-8", "gbk", "gb18030"]:
+                try:
+                    return resp.content.decode(encoding)
+                except UnicodeDecodeError:
+                    continue
+            return resp.text
+        except requests.RequestException as e:
+            last_error = e
+            if attempt < max_retries - 1:
+                wait_time = 2 ** attempt  # 指数退避
+                print(f"[WARN] 请求失败，{wait_time}秒后重试 ({attempt+1}/{max_retries}): {e}", file=sys.stderr)
+                time.sleep(wait_time)
+    
+    raise AppError("E006", f"URL 抓取失败: {last_error}")
 
 
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="airecon-skills: 数据解析、结构化输出、置信度标注工具",
-        epilog="示例: python main.py --input '姓名：张三，电话：13812345678' --format json"
-    )
-    parser.add_argument("--input", "-i", type=str, help="输入文本内容")
-    parser.add_argument("--file", "-f", type=str, help="从文件读取输入（每行一条记录）")
-    parser.add_argument("--format", "-fmt", type=str, default="json",
-                        choices=["json", "yaml", "md", "markdown"],
-                        help="输出格式: json/yaml/md (默认: json)")
-    parser.add_argument("--fields", type=str, default=None,
-                        help="需要提取的字段，逗号分隔 (默认: 全部字段)")
-    parser.add_argument("--selftest", action="store_true",
-                        help="运行自检函数，无需其他参数")
-
+# ============================================================
+# 主流程
+# ============================================================
+def main():
+    parser = argparse.ArgumentParser(description="airecon-skills 情报解析与数据转换工具")
+    
+    # 输入源（三选一）
+    input_group = parser.add_mutually_exclusive_group(required=False)
+    input_group.add_argument("--input", type=str, help="直接输入文本内容")
+    input_group.add_argument("--file", type=str, help="输入文件路径")
+    input_group.add_argument("--url", type=str, help="抓取 URL 内容")
+    input_group.add_argument("--selftest", action="store_true", help="运行自检")
+    
+    # 配置参数
+    parser.add_argument("--format", choices=["json", "csv", "md"], default="json", help="输出格式")
+    parser.add_argument("--fields", type=str, default=",".join(DEFAULT_FIELDS), help="要提取的字段，逗号分隔")
+    parser.add_argument("--output", type=str, help="输出文件路径（默认输出到 stdout）")
+    parser.add_argument("--timeout", type=int, default=10, help="URL 请求超时时间（秒）")
+    parser.add_argument("--dry-run", action="store_true", help="预览模式，不写文件")
+    parser.add_argument("--verbose", action="store_true", help="输出详细日志")
+    
     args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-
-    # 检查输入
-    if not args.input and not args.file:
-        parser.print_help()
-        print("\n错误: 必须提供 --input 或 --file 参数", file=sys.stderr)
-        return 1
-
+    
     try:
-        # 读取输入
-        if args.file:
-            try:
-                with open(args.file, "r", encoding="utf-8") as f:
-                    lines = [line.strip() for line in f if line.strip()]
-                if not lines:
-                    raise AppError("E002", "文件内容为空")
-                batch_mode = len(lines) > 1
-                data = lines
-            except OSError as e:
-                raise AppError("E009", f"文件读取失败: {str(e)}")
+        # 自检模式
+        if args.selftest:
+            run_selftest()
+            return 0
+        
+        # 解析字段列表
+        fields = [f.strip() for f in args.fields.split(",") if f.strip()]
+        if not fields:
+            raise AppError("E008", "字段列表为空")
+        
+        # 获取输入内容
+        if args.input:
+            content = args.input
+        elif args.file:
+            content = _safe_read_file(args.file)
+        elif args.url:
+            content = fetch_url(args.url, timeout=args.timeout)
         else:
-            data = args.input
-            batch_mode = False
-
-        # 解析字段配置
-        fields = None
-        if args.fields:
-            fields = args.fields.split(",")
-            fields = [f.strip() for f in fields if f.strip()]
-
-        # 执行解析
-        if batch_mode:
-            results = parse_batch(data, fields)
-        else:
-            results = parse_record(data, fields)
-
+            raise AppError("E001", "请提供输入源")
+        
+        if args.verbose:
+            print(f"[INFO] 输入类型: {detect_input_type(content)}", file=sys.stderr)
+            print(f"[INFO] 字段列表: {fields}", file=sys.stderr)
+        
+        # 解析数据
+        result = parse_input(content, fields)
+        
         # 格式化输出
-        fmt = args.format.lower()
-        if fmt == "json":
-            output = format_json(results)
-        elif fmt in ("md", "markdown"):
-            output = format_markdown(results)
-        elif fmt == "yaml":
-            output = format_yaml(results)
+        output = format_output(result, args.format)
+        
+        # 输出结果
+        if args.output:
+            _safe_write_file(args.output, output, dry_run=args.dry_run)
+            if not args.dry_run:
+                print(f"[INFO] 结果已写入: {args.output}", file=sys.stderr)
         else:
-            raise AppError("E003", f"不支持的输出格式: {args.format}")
-
-        # 打印结果
-        print(output)
+            print(output)
+        
         return 0
-
+    
     except AppError as e:
-        print(f"错误: {e.code} - {e.message}", file=sys.stderr)
+        print(f"错误: {e}", file=sys.stderr)
         return 1
     except Exception as e:
-        print(f"错误: E010 - 未知错误: {str(e)}", file=sys.stderr)
+        print(f"未知错误: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc()
         return 1
+
+
+# ============================================================
+# 自检
+# ============================================================
+def run_selftest():
+    """运行自检，验证核心功能"""
+    print("=" * 60)
+    print("airecon-skills 自检")
+    print("=" * 60)
+    
+    # 测试 1：基本文本解析
+    print("\n[测试 1] 基本文本解析")
+    text = "张三 13800138000 zhangsan@example.com 2024-03-15"
+    result = parse_record(text, ["name", "phone", "email", "date"])
+    assert result["name"] == "张三", f"姓名提取失败: {result}"
+    assert result["phone"] == "13800138000", f"电话提取失败: {result}"
+    assert result["email"] == "zhangsan@example.com", f"邮箱提取失败: {result}"
+    assert result["date"] == "2024-03-15", f"日期提取失败: {result}"
+    assert result["confidence"] >= 0.9, f"置信度异常: {result}"
+    print(f"  ✓ 通过: {result}")
+    
+    # 测试 2：缺失字段处理
+    print("\n[测试 2] 缺失字段处理")
+    text = "李四 13900139000"
+    result = parse_record(text, ["name", "phone", "email"])
+    assert result["name"] == "李四", f"姓名提取失败: {result}"
+    assert result["phone"] == "13900139000", f"电话提取失败: {result}"
+    assert "[需核实" in result["email"], f"缺失字段未标记: {result}"
+    assert result["confidence"] < 0.95, f"置信度应降低: {result}"
+    print(f"  ✓ 通过: {result}")
+    
+    # 测试 3：批量解析
+    print("\n[测试 3] 批量解析")
+    items = [
+        "王五 13700137000 wangwu@example.com",
+        "赵六 13600136000 zhaoliu@example.com 2024-01-01",
+        "孙七 13500135000",
+    ]
+    results = parse_batch(items, ["name", "phone", "email", "date"])
+    assert len(results) == 3, f"批量解析数量错误: {len(results)}"
+    assert all("confidence" in r for r in results), "缺少置信度字段"
+    print(f"  ✓ 通过: 共 {len(results)} 条记录")
+    
+    # 测试 4：JSON 数组输入
+    print("\n[测试 4] JSON 数组输入")
+    json_input = json.dumps([
+        {"name": "张三", "phone": "13800138000"},
+        {"name": "李四", "phone": "13900139000"},
+    ])
+    result = parse_input(json_input, ["name", "phone"])
+    assert result["total"] == 2, f"JSON 解析数量错误: {result['total']}"
+    assert result["processed"] == 2, f"JSON 处理数量错误: {result['processed']}"
+    print(f"  ✓ 通过: {result['total']} 条记录")
+    
+    # 测试 5：CSV 输入
+    print("\n[测试 5] CSV 输入")
+    csv_input = "name,phone,email\n张三,13800138000,zhangsan@example.com\n李四,13900139000,lisi@example.com"
+    result = parse_input(csv_input, ["name", "phone", "email"])
+    assert result["total"] == 2, f"CSV 解析数量错误: {result['total']}"
+    assert result["data"][0]["name"] == "张三", f"CSV 解析内容错误: {result['data'][0]}"
+    print(f"  ✓ 通过: {result['total']} 条记录")
+    
+    # 测试 6：空输入处理
+    print("\n[测试 6] 空输入处理")
+    try:
+        parse_record("", ["name"])
+        assert False, "空输入应抛出异常"
+    except AppError as e:
+        assert e.code == "E002", f"错误码错误: {e.code}"
+        print(f"  ✓ 通过: 正确抛出 {e.code}")
+    
+    # 测试 7：输出格式化
+    print("\n[测试 7] 输出格式化")
+    data = {
+        "status": "success",
+        "total": 1,
+        "processed": 1,
+        "failed": 0,
+        "data": [{"name": "张三", "confidence": 0.98}],
+        "_meta": {"source_type": "text", "batch_size": 1, "avg_confidence": 0.98},
+    }
+    json_output = format_output(data, "json")
+    assert json.loads(json_output)["total"] == 1, "JSON 输出格式错误"
+    
+    csv_output = format_output(data, "csv")
+    assert "name" in csv_output, "CSV 输出缺少表头"
+    
+    md_output = format_output(data, "md")
+    assert "| name |" in md_output, "Markdown 输出缺少表头"
+    print("  ✓ 通过: JSON/CSV/Markdown 格式均正确")
+    
+    # 测试 8：URL 抓取（如果可用）
+    print("\n[测试 8] URL 抓取")
+    if HAS_REQUESTS:
+        try:
+            content = fetch_url("https://example.com", timeout=5, max_retries=1)
+            assert len(content) > 0, "URL 抓取内容为空"
+            print(f"  ✓ 通过: 抓取到 {len(content)} 字符")
+        except AppError as e:
+            print(f"  ⚠ 跳过: {e}")
+    else:
+        print("  ⚠ 跳过: 未安装 requests 库")
+    
+    # 测试 9：字段映射
+    print("\n[测试 9] 字段映射")
+    text = "张三 13800138000 zhangsan@example.com 2024-03-15 北京市朝阳区"
+    result = parse_record(text, ["name", "phone", "email", "date", "address"])
+    assert result["name"] == "张三", f"姓名提取失败: {result}"
+    assert result["phone"] == "13800138000", f"电话提取失败: {result}"
+    assert result["email"] == "zhangsan@example.com", f"邮箱提取失败: {result}"
+    assert result["date"] == "2024-03-15", f"日期提取失败: {result}"
+    assert "北京" in result["address"], f"地址提取失败: {result}"
+    print(f"  ✓ 通过: {result}")
+    
+    # 测试 10：金额提取
+    print("\n[测试 10] 金额提取")
+    text = "商品价格 ￥199.99 元"
+    result = parse_record(text, ["amount"])
+    assert result["amount"] == "￥199.99 元", f"金额提取失败: {result}"
+    print(f"  ✓ 通过: {result}")
+    
+    print("\n" + "=" * 60)
+    print("所有自检通过！")
+    print("=" * 60)
+    return 0
 
 
 if __name__ == "__main__":
