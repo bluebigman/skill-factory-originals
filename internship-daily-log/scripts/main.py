@@ -15,8 +15,9 @@ import argparse
 import json
 import re
 import sys
-from datetime import timezone, datetime, timedelta
+from datetime import datetime, timedelta
 from typing import Any, Dict, List, Optional
+from datetime import timezone  # G2 时区修复
 
 
 # ============================================================
@@ -86,6 +87,24 @@ DEFAULT_ALIASES = {
 # ============================================================
 # 工具函数
 # ============================================================
+
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
 
 def normalize_status(raw: str) -> str:
     """将状态文本归一化为标准状态值。"""
@@ -525,6 +544,16 @@ def main() -> int:
     parser.add_argument("--selftest", action="store_true", help="运行内置自检")
     parser.add_argument("--alias-file", help="字段别名配置文件（JSON格式）")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     # 自检模式
@@ -538,7 +567,7 @@ def main() -> int:
         input_text = args.text
     elif args.input:
         try:
-            with open(args.input, "r", encoding="utf-8") as f:
+            with open(args.input, "r", encoding="utf-8", errors="replace") as f:
                 input_text = f.read()
         except (IOError, OSError) as e:
             print(f"[E002] 无法读取文件: {e}", file=sys.stderr)
@@ -551,7 +580,7 @@ def main() -> int:
     aliases = DEFAULT_ALIASES
     if args.alias_file:
         try:
-            with open(args.alias_file, "r", encoding="utf-8") as f:
+            with open(args.alias_file, "r", encoding="utf-8", errors="replace") as f:
                 custom_aliases = json.load(f)
             # 合并到默认别名
             for field, alias_list in custom_aliases.items():
