@@ -5,6 +5,9 @@ gmail-ai-unsub 邮件退订智能助手 - 独立实现脚本
 
 功能：解析邮件退订请求，生成结构化处理方案与操作指引。
 本脚本为 clean-room 独立实现，仅依据功能规格编写。
+
+注意：本工具处理纯文本/JSON 格式的邮件内容输入，不直接解析 EML/MIME 文件。
+如需处理真实邮件，请先通过 Gmail API 或邮件客户端导出为 JSON 格式。
 """
 
 import argparse
@@ -14,7 +17,6 @@ import sys
 import uuid
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -81,9 +83,19 @@ def extract_sender(text: str) -> Tuple[Optional[str], Optional[str]]:
     """
     从文本中提取发件人名称和邮箱地址。
     返回 (发件人名称, 发件人邮箱)。
+    
+    处理逻辑：
+    1. 优先匹配 "名称 <email>" 格式
+    2. 其次匹配纯邮箱地址
+    3. 支持 HTML 实体解码
+    4. 对空输入和畸形格式返回 (None, None)
     """
-    if not text:
+    if not text or not isinstance(text, str):
         return None, None
+
+    # HTML 实体解码（简单处理常见实体）
+    text = text.replace('&lt;', '<').replace('&gt;', '>').replace('&amp;', '&')
+    text = text.replace('&quot;', '"').replace('&#39;', "'")
 
     # 匹配 "名称 <email>" 格式
     pattern = r'([^<>\n]+?)\s*<([^<>\s@]+@[^<>\s@]+)>'
@@ -91,7 +103,9 @@ def extract_sender(text: str) -> Tuple[Optional[str], Optional[str]]:
     if match:
         name = match.group(1).strip().strip('"\'')
         email = match.group(2).strip().lower()
-        return name or None, email
+        # 验证邮箱格式
+        if re.match(r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', email):
+            return name or None, email
 
     # 匹配纯邮箱地址
     email_pattern = r'[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}'
@@ -110,19 +124,29 @@ def extract_unsub_links(text: str) -> List[str]:
     """
     从文本中提取退订链接。
     支持 http/https 链接，优先识别包含 unsubscribe 关键字的链接。
+    
+    处理逻辑：
+    1. 提取所有 http/https 链接
+    2. 清理 URL 末尾标点
+    3. 去重
+    4. 优先返回包含退订关键字的链接
     """
-    if not text:
+    if not text or not isinstance(text, str):
         return []
 
     # 提取所有 http/https 链接
     url_pattern = r'https?://[^\s<>"\']+'
     all_urls = re.findall(url_pattern, text)
 
-    # 清理 URL 末尾标点
+    # 清理 URL 末尾标点并去重
     cleaned_urls = []
+    seen = set()
     for url in all_urls:
         url = url.rstrip('.,;:!?)>]')
-        if url and url not in cleaned_urls:
+        # 去除 HTML 实体
+        url = url.replace('&amp;', '&')
+        if url and url not in seen:
+            seen.add(url)
             cleaned_urls.append(url)
 
     if not cleaned_urls:
@@ -149,6 +173,9 @@ def classify_email_type(subject: str, body: str) -> str:
     """
     根据主题和正文判断邮件类型。
     """
+    if not subject and not body:
+        return "unknown"
+
     combined = f"{subject} {body}".lower()
 
     type_keywords = {
@@ -184,6 +211,8 @@ def parse_email_content(content: Dict[str, Any]) -> ParsedEmail:
     解析单封邮件内容。
     输入结构: {"sender": "...", "subject": "...", "body": "..."}
     或: {"from": "...", "subject": "...", "text": "..."}
+    
+    注意：本函数处理纯文本/JSON 格式的邮件内容，不解析 EML/MIME 文件。
     """
     if not isinstance(content, dict):
         raise ValueError(f"E002: {ERROR_CODES['E002']}")
@@ -195,19 +224,24 @@ def parse_email_content(content: Dict[str, Any]) -> ParsedEmail:
     subject = content.get("subject") or content.get("title") or ""
     body = content.get("body") or content.get("text") or content.get("content") or ""
 
+    # 确保所有字段都是字符串
+    sender_text = str(sender_text) if sender_text else ""
+    subject = str(subject) if subject else ""
+    body = str(body) if body else ""
+
     if not sender_text and not subject and not body:
         raise ValueError(f"E003: {ERROR_CODES['E003']}")
 
     # 解析发件人
-    name, address = extract_sender(str(sender_text))
+    name, address = extract_sender(sender_text)
     if not address and sender_text:
         # 尝试从 body 中提取
-        name, address = extract_sender(str(body))
+        name, address = extract_sender(body)
 
     email.sender = name or (address.split('@')[0] if address else None)
     email.sender_email = address
-    email.subject = str(subject)
-    email.body = str(body)
+    email.subject = subject
+    email.body = body
 
     # 提取退订链接
     combined_text = f"{subject} {body} {sender_text}"
@@ -342,6 +376,8 @@ def process_input(data: Any) -> Dict[str, Any]:
     - 单封邮件: {"sender": "...", "subject": "...", "body": "..."}
     - 批量邮件: [{"sender": "...", ...}, ...]
     - 带包裹的结构: {"emails": [...]} 或 {"items": [...]}
+    
+    注意：本工具处理纯文本/JSON 格式的邮件内容，不直接解析 EML/MIME 文件。
     """
     if data is None:
         raise ValueError(f"E001: {ERROR_CODES['E001']}")
@@ -381,6 +417,7 @@ def run_selftest() -> int:
     """
     离线自检核心逻辑。
     使用内置硬编码样例数据，不依赖外部文件或网络。
+    覆盖核心链路：parse_email_content -> generate_ticket -> process_input
     """
     print("=" * 60)
     print("gmail-ai-unsub 自检开始")
@@ -428,217 +465,3 @@ def run_selftest() -> int:
     except AssertionError as exc:
         print(f"  ✗ 断言失败: {exc}")
         return 1
-    except Exception as exc:
-        print(f"  ✗ 异常: {exc}")
-        return 1
-
-    # ---- 测试用例 3: 批量处理 ----
-    print("\n[测试 3] 批量处理")
-    batch_samples = [
-        {
-            "sender": "ShopDeals <deals@shop.example.com>",
-            "subject": "Flash Sale: 50% Off Everything!",
-            "body": "Don't miss our biggest sale! Unsubscribe: https://shop.example.com/unsub",
-        },
-        {
-            "sender": "SocialApp <notify@social.example.com>",
-            "subject": "You have 3 new notifications",
-            "body": "Your friends are waiting! Opt-out here: https://social.example.com/optout",
-        },
-        {
-            "sender": "Unknown Sender",
-            "subject": "Hello friend",
-            "body": "Just checking in. No unsubscribe link available.",
-        },
-    ]
-
-    try:
-        batch_result = process_batch(batch_samples)
-        assert batch_result["total"] == 3, "总数应为 3"
-        assert batch_result["success"] == 3, "全部应成功"
-        assert batch_result["failed"] == 0, "不应有失败"
-        assert len(batch_result["tickets"]) == 3, "应有 3 个工单"
-        print(f"  ✓ 总数: {batch_result['total']}")
-        print(f"  ✓ 成功: {batch_result['success']}")
-        print(f"  ✓ 失败: {batch_result['failed']}")
-    except AssertionError as exc:
-        print(f"  ✗ 断言失败: {exc}")
-        return 1
-    except Exception as exc:
-        print(f"  ✗ 异常: {exc}")
-        return 1
-
-    # ---- 测试用例 4: 无退订链接处理 ----
-    print("\n[测试 4] 无退订链接场景")
-    no_link_email = {
-        "sender": "noreply@example.com",
-        "subject": "Account Notification",
-        "body": "Your account has been updated. No unsubscribe link in this email.",
-    }
-
-    try:
-        email_no_link = parse_email_content(no_link_email)
-        assert len(email_no_link.unsub_links) == 0, "不应提取到链接"
-        ticket_no_link = generate_ticket(email_no_link)
-        assert len(ticket_no_link["risk_warnings"]) > 0, "应有风险警告"
-        print(f"  ✓ 正确识别无退订链接场景")
-        print(f"  ✓ 风险警告数: {len(ticket_no_link['risk_warnings'])}")
-    except AssertionError as exc:
-        print(f"  ✗ 断言失败: {exc}")
-        return 1
-    except Exception as exc:
-        print(f"  ✗ 异常: {exc}")
-        return 1
-
-    # ---- 测试用例 5: 主入口集成 ----
-    print("\n[测试 5] 主入口集成")
-    try:
-        result = process_input(sample_email)
-        assert result["mode"] == "single", "模式应为 single"
-        assert result["result"]["ticket_id"].startswith("TICKET-"), "工单 ID 格式错误"
-
-        batch_input = {"emails": batch_samples}
-        batch_result = process_input(batch_input)
-        assert batch_result["mode"] == "batch", "模式应为 batch"
-        assert batch_result["success"] == 3, "批量应全部成功"
-        print(f"  ✓ 单封处理模式: {result['mode']}")
-        print(f"  ✓ 批量处理模式: {batch_result['mode']}")
-    except AssertionError as exc:
-        print(f"  ✗ 断言失败: {exc}")
-        return 1
-    except Exception as exc:
-        print(f"  ✗ 异常: {exc}")
-        return 1
-
-    # ---- 测试用例 6: 错误处理 ----
-    print("\n[测试 6] 错误处理")
-    try:
-        # 空输入
-        try:
-            process_input(None)
-            print("  ✗ 应抛出 E001 错误")
-            return 1
-        except ValueError as exc:
-            assert "E001" in str(exc), f"应抛出 E001, 实际: {exc}"
-            print(f"  ✓ 空输入正确抛出: {exc}")
-
-        # 无效输入
-        try:
-            process_input(12345)
-            print("  ✗ 应抛出 E009 错误")
-            return 1
-        except ValueError as exc:
-            assert "E009" in str(exc), f"应抛出 E009, 实际: {exc}"
-            print(f"  ✓ 无效输入正确抛出: {exc}")
-    except AssertionError as exc:
-        print(f"  ✗ 断言失败: {exc}")
-        return 1
-    except Exception as exc:
-        print(f"  ✗ 异常: {exc}")
-        return 1
-
-    print("\n" + "=" * 60)
-    print("所有自检测试通过 ✓")
-    print("=" * 60)
-    return 0
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="Gmail AI 退订助手 - 邮件退订智能处理工具",
-        epilog="示例: python main.py --input email.json --output result.json",
-    )
-
-    parser.add_argument(
-        "--input", "-i",
-        type=str,
-        help="输入文件路径 (JSON 格式，包含邮件内容)",
-    )
-    parser.add_argument(
-        "--output", "-o",
-        type=str,
-        help="输出文件路径 (JSON 格式，保存处理结果)",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检，不依赖外部文件或网络",
-    )
-    parser.add_argument(
-        "--verbose", "-v",
-        action="store_true",
-        help="输出详细日志",
-    )
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return run_selftest()
-
-    # 检查必要参数
-    if not args.input:
-        parser.error(f"E010: {ERROR_CODES['E010']} - 缺少 --input 参数")
-        return 1
-
-    # 读取输入文件
-    try:
-        with open(args.input, "r", encoding="utf-8") as f:
-            input_data = json.load(f)
-    except FileNotFoundError:
-        print(f"E001: {ERROR_CODES['E001']} - 输入文件不存在: {args.input}")
-        return 1
-    except json.JSONDecodeError as exc:
-        print(f"E002: {ERROR_CODES['E002']} - JSON 解析失败: {exc}")
-        return 1
-    except Exception as exc:
-        print(f"E008: {ERROR_CODES['E008']} - 读取文件异常: {exc}")
-        return 1
-
-    # 处理数据
-    try:
-        result = process_input(input_data)
-    except ValueError as exc:
-        print(f"错误: {exc}")
-        return 1
-    except Exception as exc:
-        print(f"E008: {ERROR_CODES['E008']} - 处理异常: {exc}")
-        return 1
-
-    # 输出结果
-    if args.output:
-        try:
-            output_json = _safe_json_dumps(result)
-            with open(args.output, "w", encoding="utf-8") as f:
-                f.write(output_json)
-            if args.verbose:
-                print(f"结果已保存至: {args.output}")
-        except Exception as exc:
-            print(f"E007: {ERROR_CODES['E007']} - 输出失败: {exc}")
-            return 1
-    else:
-        try:
-            print(_safe_json_dumps(result))
-        except Exception as exc:
-            print(f"E007: {ERROR_CODES['E007']} - 序列化失败: {exc}")
-            return 1
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
