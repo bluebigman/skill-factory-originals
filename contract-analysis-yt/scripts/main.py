@@ -6,15 +6,19 @@
 独立实现版本，基于功能规格 clean-room 重写。
 提供合同文本解析、风险点识别、合规性初检和结构化报告输出。
 仅依赖标准库，支持离线自检。
+
+注意：本工具为关键词扫描工具，基于规则匹配识别风险点，
+不进行语义分析或法律逻辑推理。输出结果仅供参考，
+不构成法律意见。
 """
 
 import argparse
 import json
 import re
 import sys
+import os
 from dataclasses import dataclass, field, asdict
 from typing import Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 常量定义
@@ -32,7 +36,14 @@ ERROR_CODES = {
     "E008": "JSON 序列化失败",
     "E009": "自定义规则格式错误",
     "E010": "未预期的内部错误",
+    "E011": "输入文本长度超限",
+    "E012": "输入文本包含非法字符",
 }
+
+# 输入限制
+MAX_TEXT_LENGTH = 100000  # 最大文本长度
+MIN_TEXT_LENGTH = 10      # 最小文本长度
+ILLEGAL_CHARS = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f]')  # 控制字符
 
 # 常见风险关键词及其风险等级（权重）
 RISK_KEYWORDS = {
@@ -102,6 +113,7 @@ class RiskItem:
     context: str
     suggestion: str
     location: Optional[int] = None
+    confidence: float = 0.0  # 置信度
 
 
 @dataclass
@@ -123,14 +135,27 @@ class ContractReport:
 
 
 # ============================================================
-# 核心处理函数
+# 输入验证
 # ============================================================
 
 def validate_input(text: str) -> None:
     """校验输入文本"""
     if not text or not text.strip():
         raise ValueError(f"[{ERROR_CODES['E001']}] 输入文本为空")
+    
+    if len(text) > MAX_TEXT_LENGTH:
+        raise ValueError(f"[{ERROR_CODES['E011']}] 输入文本长度超限（最大 {MAX_TEXT_LENGTH} 字符）")
+    
+    if len(text) < MIN_TEXT_LENGTH:
+        raise ValueError(f"[{ERROR_CODES['E001']}] 输入文本过短（至少 {MIN_TEXT_LENGTH} 字符）")
+    
+    if ILLEGAL_CHARS.search(text):
+        raise ValueError(f"[{ERROR_CODES['E012']}] 输入文本包含非法控制字符")
 
+
+# ============================================================
+# 核心处理函数
+# ============================================================
 
 def extract_contract_type(text: str) -> str:
     """识别合同类型"""
@@ -232,19 +257,30 @@ def analyze_risks(text: str, rules: Dict = None) -> List[RiskItem]:
         rules = DEFAULT_RULES["风险关键词"]
     
     try:
+        validate_input(text)
         sentences = re.split(r"[。；\n]", text)
         for idx, sent in enumerate(sentences):
             for kw, config in rules.items():
                 if kw in sent:
+                    # 计算置信度：基于关键词出现次数和上下文长度
+                    occurrence = sent.count(kw)
+                    context_len = len(sent.strip())
+                    base_confidence = min(0.5 + 0.1 * occurrence, 0.9)
+                    context_factor = min(context_len / 200, 0.1)
+                    confidence = min(base_confidence + context_factor, 0.95)
+                    
                     risk = RiskItem(
                         keyword=kw,
                         level=config.get("level", "中"),
                         context=sent.strip()[:100],
                         suggestion=config.get("suggestion", "建议人工复核该条款。"),
                         location=idx,
+                        confidence=round(confidence, 2),
                     )
                     risks.append(risk)
         return risks
+    except ValueError as e:
+        raise RuntimeError(str(e))
     except Exception:
         raise RuntimeError(f"[{ERROR_CODES['E004']}] 风险分析失败")
 
@@ -256,6 +292,7 @@ def check_compliance(text: str, rules: Dict = None) -> List[ComplianceItem]:
         rules = DEFAULT_RULES["合规关键词"]
     
     try:
+        validate_input(text)
         for law, keywords in rules.items():
             found = [kw for kw in keywords if kw in text]
             if len(found) >= 2:
@@ -269,6 +306,8 @@ def check_compliance(text: str, rules: Dict = None) -> List[ComplianceItem]:
                 detail = "未发现相关条款，建议核查是否符合该法规要求"
             items.append(ComplianceItem(law=law, status=status, detail=detail))
         return items
+    except ValueError as e:
+        raise RuntimeError(str(e))
     except Exception:
         raise RuntimeError(f"[{ERROR_CODES['E004']}] 合规检查失败")
 
@@ -276,6 +315,8 @@ def check_compliance(text: str, rules: Dict = None) -> List[ComplianceItem]:
 def generate_report(text: str, custom_rules: Dict = None) -> ContractReport:
     """生成完整审查报告"""
     try:
+        validate_input(text)
+        
         # 解析合同要素
         elements = parse_contract(text)
         
@@ -307,6 +348,7 @@ def generate_report(text: str, custom_rules: Dict = None) -> ContractReport:
                 "主体列表": ", ".join(elements.parties) if elements.parties else "未识别",
                 "金额": elements.amount_text if elements.amount_text else "未识别",
                 "期限": elements.duration if elements.duration else "未识别",
+                "工具说明": "本工具为关键词扫描工具，结果仅供参考",
             },
             elements=elements,
             risks=risks,
@@ -351,7 +393,7 @@ def report_to_markdown(report: ContractReport) -> str:
         lines.append("\n## 风险点识别")
         if report.risks:
             for i, risk in enumerate(report.risks, 1):
-                lines.append(f"### 风险 {i} [{risk.level}]")
+                lines.append(f"### 风险 {i} [{risk.level}] (置信度: {risk.confidence:.0%})")
                 lines.append(f"- **关键词**: {risk.keyword}")
                 lines.append(f"- **上下文**: {risk.context}")
                 lines.append(f"- **建议**: {risk.suggestion}")
@@ -370,6 +412,7 @@ def report_to_markdown(report: ContractReport) -> str:
         lines.append(f"- 高风险: {report.summary.get('高风险', 0)}")
         lines.append(f"- 中风险: {report.summary.get('中风险', 0)}")
         lines.append(f"- 低风险: {report.summary.get('低风险', 0)}")
+        lines.append("\n> **免责声明**: 本报告由关键词扫描工具自动生成，仅供参考，不构成法律意见。")
         
         return "\n".join(lines)
     except Exception:
@@ -377,225 +420,5 @@ def report_to_markdown(report: ContractReport) -> str:
 
 
 # ============================================================
-# 自检模块
-# ============================================================
-
-def run_selftest() -> bool:
-    """内置硬编码样例数据，离线自检核心逻辑"""
-    print("=" * 60)
-    print("开始自检 (selftest)")
-    print("=" * 60)
-    
-    # 硬编码测试数据
-    sample_text = """
-    采购合同
-    
-    甲方：北京某某科技有限公司
-    乙方：上海某某供应链有限公司
-    
-    第一条 合同标的
-    甲方向乙方采购一批办公设备，合同总金额为人民币50万元。
-    
-    第二条 付款方式
-    甲方在收到货物后30日内支付全款，付款条件较为苛刻。
-    
-    第三条 违约责任
-    若乙方延迟交货，需向甲方支付违约金，违约金比例为合同金额的30%。
-    甲方拥有单方解除权，且不承担任何赔偿责任。
-    
-    第四条 保密条款
-    双方应对本合同内容进行保密，保密期限为合同终止后3年。
-    
-    第五条 知识产权
-    乙方开发的相关软件知识产权归甲方所有。
-    
-    第六条 合同期限
-    本合同有效期为2年，自2026年1月1日起至2027年12月31日止。
-    合同期满前30日，若双方未提出异议，合同自动续约。
-    
-    第七条 争议解决
-    双方发生争议时，提交北京市仲裁委员会仲裁。
-    
-    第八条 不可抗力
-    因不可抗力导致无法履行合同的，双方互不承担责任。
-    """
-    
-    try:
-        # 1. 测试合同解析
-        print("\n[1/5] 测试合同解析...")
-        element = parse_contract(sample_text)
-        assert element.contract_type == "采购合同", f"合同类型识别错误: {element.contract_type}"
-        assert len(element.parties) >= 2, f"应识别至少2个合同主体，实际: {len(element.parties)}"
-        assert element.amount is not None, "未能识别合同金额"
-        assert element.amount > 0, f"金额应为正数，实际: {element.amount}"
-        assert element.duration is not None, "未能识别合同期限"
-        print("  ✅ 合同解析通过")
-        print(f"     - 类型: {element.contract_type}")
-        print(f"     - 主体: {element.parties}")
-        print(f"     - 金额: {element.amount_text}")
-        print(f"     - 期限: {element.duration}")
-        
-        # 2. 测试风险识别
-        print("\n[2/5] 测试风险识别...")
-        risks = analyze_risks(sample_text)
-        assert len(risks) > 0, "应识别出至少1个风险点"
-        risk_keywords = [r.keyword for r in risks]
-        assert "违约金" in risk_keywords, "未识别'违约金'风险"
-        assert "单方解除" in risk_keywords, "未识别'单方解除'风险"
-        print(f"  ✅ 风险识别通过，共识别 {len(risks)} 个风险点")
-        print(f"     - 风险关键词: {risk_keywords[:5]}")
-        
-        # 3. 测试合规检查
-        print("\n[3/5] 测试合规检查...")
-        compliance = check_compliance(sample_text)
-        assert len(compliance) > 0, "合规检查结果为空"
-        laws = [c.law for c in compliance]
-        assert "民法典" in laws, "缺少民法典检查项"
-        print(f"  ✅ 合规检查通过，共 {len(compliance)} 项")
-        for c in compliance:
-            print(f"     - {c.law}: {c.status}")
-        
-        # 4. 测试完整报告生成
-        print("\n[4/5] 测试完整报告生成...")
-        report = generate_report(sample_text)
-        assert report.summary["总风险数"] > 0, "报告风险数为0"
-        assert report.summary["高风险"] > 0, "应存在高风险项"
-        assert len(report.compliance) > 0, "合规检查为空"
-        print("  ✅ 报告生成通过")
-        print(f"     - 风险总数: {report.summary['总风险数']}")
-        print(f"     - 高风险: {report.summary['高风险']}, 中风险: {report.summary['中风险']}, 低风险: {report.summary['低风险']}")
-        
-        # 5. 测试 JSON 和 Markdown 输出
-        print("\n[5/5] 测试输出格式...")
-        json_str = report_to_json(report)
-        assert json_str and len(json_str) > 0, "JSON 输出为空"
-        md_str = report_to_markdown(report)
-        assert md_str and len(md_str) > 0, "Markdown 输出为空"
-        print("  ✅ JSON 输出通过")
-        print("  ✅ Markdown 输出通过")
-        
-        # 额外测试：异常处理
-        print("\n[额外] 测试错误处理...")
-        try:
-            parse_contract("")
-            raise AssertionError("空文本应抛出异常")
-        except RuntimeError as e:
-            assert "E001" in str(e), f"错误码错误: {e}"
-        print("  ✅ 空文本错误码 E001 通过")
-        
-        try:
-            generate_report("这是没有合同内容的普通文本")
-            print("  ✅ 普通文本处理通过")
-        except RuntimeError as e:
-            print(f"  ⚠️ 普通文本处理警告: {e}")
-        
-        print("\n" + "=" * 60)
-        print("所有自检通过 ✅")
-        print("=" * 60)
-        return True
-        
-    except AssertionError as e:
-        print(f"\n❌ 自检失败: {e}")
-        return False
-    except Exception as e:
-        print(f"\n❌ 自检异常: {e}")
-        return False
-
-
-# ============================================================
-# 主入口
-# ============================================================
-
-def main():
-    """命令行入口"""
-    parser = argparse.ArgumentParser(
-        description="合同审查与风险识别工具",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-示例:
-  python main.py --text "合同内容..."
-  python main.py --file contract.txt
-  python main.py --selftest
-  python main.py --text "..." --format json --output report.json
-  python main.py --text "..." --rules custom_rules.json
-        """,
-    )
-    
-    parser.add_argument("--text", type=str, help="直接传入合同文本")
-    parser.add_argument("--file", type=str, help="从文件读取合同文本")
-    parser.add_argument("--format", choices=["json", "markdown", "both"], default="markdown", help="输出格式")
-    parser.add_argument("--output", type=str, help="输出文件路径（可选）")
-    parser.add_argument("--rules", type=str, help="自定义规则 JSON 文件路径（可选）")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    
-    args = parser.parse_args()
-    
-    global dry_run
-    
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-    
-    # 获取输入文本
-    text = ""
-    try:
-        if args.text:
-            text = args.text
-        elif args.file:
-            try:
-                with open(args.file, "r", encoding="utf-8") as f:
-                    text = f.read()
-            except Exception as e:
-                print(f"[{ERROR_CODES['E007']}] 文件读取失败: {e}", file=sys.stderr)
-                sys.exit(1)
-        else:
-            parser.print_help()
-            sys.exit(0)
-        
-        # 加载自定义规则
-        custom_rules = None
-        if args.rules:
-            try:
-                with open(args.rules, "r", encoding="utf-8") as f:
-                    custom_rules = json.load(f)
-            except Exception as e:
-                print(f"[{ERROR_CODES['E009']}] 自定义规则加载失败: {e}", file=sys.stderr)
-                sys.exit(1)
-        
-        # 生成报告
-        report = generate_report(text, custom_rules)
-        
-        # 输出
-        output = ""
-        if args.format in ("json", "both"):
-            output += report_to_json(report)
-            if args.format == "both":
-                output += "\n\n---\n\n"
-        if args.format in ("markdown", "both"):
-            output += report_to_markdown(report)
-        
-        if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
-                f.write(output)
-            print(f"报告已保存到: {args.output}")
-        else:
-            print(output)
-            
-    except RuntimeError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"[{ERROR_CODES['E010']}] 未预期错误: {e}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+# 规则加载
+# =
