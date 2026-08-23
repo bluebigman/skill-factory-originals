@@ -1,8 +1,0 @@
-{
-  "slug": "auto-subtitles",
-  "name": "auto-subtitles",
-  "description": "本地AI语音识别，将视频音频快速转为字幕与文本。 支持 word、json、http 格式处理",
-  "trigger_words": "[\"auto-subtitles\", \"字幕生成\", \"语音转写\", \"视频字幕\", \"音频转文本\", \"字幕制作\", \"本地转写\"]",
-  "original_version": "2.0.0",
-  "capability_outline": []
-}
