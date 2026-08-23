@@ -1,9 +1,9 @@
 {
-  "frozen_at": "2026-08-15T22:53:19.373283",
+  "frozen_at": "2026-08-18T05:52:52.393102",
   "slug": "coding-interview-university",
   "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
   "llm_base_url": "https://api.deepseek.com",
-  "pipeline_commit": "a7970b75d81be1c78122241aaf6206f93423b5c1",
+  "pipeline_commit": "1c37a11076f3fae428d8bc3779de92a404cfe91a",
   "dependencies": [
     "annotated-types==0.8.0",
     "anyio==4.14.2",

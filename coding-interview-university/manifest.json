@@ -1,28 +1,51 @@
 {
-  "timestamp": "20260815_225319",
+  "timestamp": "20260818_055252",
   "slug": "coding-interview-university",
   "spec": {
     "slug": "coding-interview-university",
     "name": "coding-interview-university",
-    "description": "计算机科学系统学习计划，助力软件工程师面试准备。",
-    "cli_interface": [],
+    "description": "计算机科学系统学习路线，覆盖算法、数据结构与系统设计，助力软件工程师面试准备。",
+    "cli_interface": [
+      "[\"coding interview university\"",
+      "\"编程面试\"",
+      "\"计算机科学学习计划\"",
+      "\"软件工程师备考\"",
+      "\"面试复习路线\"",
+      "--selftest",
+      "--version"
+    ],
     "capability_outline": [
-      "1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。",
-      "2. **试运行**：先用单个样本执行，核对输出字段与格式。",
-      "3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。",
-      "4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。"
+      "1. 阅读本 Skill 的\"能力边界\"章节，确认适用性",
+      "2. 检查前置条件，确保编程基础达标",
+      "3. 从阶段一开始，按周执行学习计划",
+      "4. 每周末完成自测清单，通过后进入下一周",
+      "5. 遇到错误码 E001-E006 时，按修正步骤调整",
+      "1. 直接查看\"标准流程\"中的阶段三和阶段四",
+      "2. 使用阶段二的自测标准评估现有水平",
+      "3. 针对薄弱环节，返回对应周次补充学习",
+      "4. 重点完成系统设计案例与模拟面试",
+      "1. 执行阶段四的每日计划",
+      "2. 每日完成 3 道 Medium 题 + 1 道 Hard 题",
+      "3. 每 2 天完成 1 次系统设计模拟",
+      "4. 使用\"置信度门控\"原则，对不确定的信息进行核实",
+      "1. **责任承担**：使用者应自行承担使用本 Skill 的全部责任。本 Skill 提供的是学习路线和方法建议，不构成任何形式的就业承诺或面试通过保证。",
+      "3. **合法使用**：使用者应遵守所在地法律法规，不得将本 Skill 用于任何非法目的，包括但不限于作弊、欺诈或侵犯他人权益。",
+      "4. **内容更新**：本 Skill 可能不定期更新，使用者应关注最新版本。旧版本内容仅供参考。",
+      "5. **免责声明**：本 Skill 由 AI 辅助生成，内容可能存在不准确或不完整之处。使用者应结合官方文档和权威资料进行交叉验证。"
     ],
     "upstream": null,
-    "derivation": "independent-implementation"
+    "derivation": "original-work"
   },
-  "spec_hash": "544e391db919f4f3",
-  "prompt_hash": "49-proxy",
-  "prompt": "(49 代理生成，见 provenance)",
+  "spec_hash": "5127c9a37ea0db5d",
+  "prompt_hash": "d572f1a0f81dbdc6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\":\"coding-interview-university\",\"name\":\"coding-interview-university\",\"description\":\"计算机科学系统学习路线，覆盖算法、数据结构与系统设计，助力软件工程师面试准备。\",\"cli_interface\":[\"[\\\"coding interview university\\\"\",\"\\\"编程面试\\\"\",\"\\\"计算机科学学习计划\\\"\",\"\\\"软件工程师备考\\\"\",\"\\\"面试复习路线\\\"\",\"--selftest\",\"--version\"],\"capability_outline\":[\"1. 阅读本 Skill 的\\\"能力边界\\\"章节，确认适用性\",\"2. 检查前置条件，确保编程基础达标\",\"3. 从阶段一开始，按周执行学习计划\",\"4. 每周末完成自测清单，通过后进入下一周\",\"5. 遇到错误码 E001-E006 时，按修正步骤调整\",\"1. 直接查看\\\"标准流程\\\"中的阶段三和阶段四\",\"2. 使用阶段二的自测标准评估现有水平\",\"3. 针对薄弱环节，返回对应周次补充学习\",\"4. 重点完成系统设计案例与模拟面试\",\"1. 执行阶段四的每日计划\",\"2. 每日完成 3 道 Medium 题 + 1 道 Hard 题\",\"3. 每 2 天完成 1 次系统设计模拟\",\"4. 使用\\\"置信度门控\\\"原则，对不确定的信息进行核实\",\"1. **责任承担**：使用者应自行承担使用本 Skill 的全部责任。本 Skill 提供的是学习路线和方法建议，不构成任何形式的就业承诺或面试通过保证。\",\"3. **合法使用**：使用者应遵守所在地法律法规，不得将本 Skill 用于任何非法目的，包括但不限于作弊、欺诈或侵犯他人权益。\",\"4. **内容更新**：本 Skill 可能不定期更新，使用者应关注最新版本。旧版本内容仅供参考。\",\"5. **免责声明**：本 Skill 由 AI 辅助生成，内容可能存在不准确或不完整之处。使用者应结合官方文档和权威资料进行交叉验证。\"],\"upstream\":null,\"derivation\":\"original-work\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 章节结构自行设计，可参考规格里的\"能力清单\"但不得沿用其标题措辞与顺序。\n3. 输出完整 Markdown，frontmatter 必须包含（值已给定，照抄）：\n   slug: coding-interview-university\n   name: coding-interview-university\n   displayName: （自创中文名，4-12字，含场景词，如\"合同审查 法律风险 条款比对\"风格，给一个最合适的）\n   description: （自创一句话，30字内，讲清用途）\n   version: 1.0.0\n   license: MIT\n   source_project: original\n   source_url: （留空）\n   copyright_holder: 原创作者（自持版权）\n   ai_generated: true\n   ai_tools: [\"DeepSeek\"]\n   disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。\n   author: （自创，不用任何工厂标识）\n   agent_created: true\n   trigger_words: （保留原触发词，可补充2-3个同义场景词）\n4. frontmatter 结束后必须紧跟显式 AI 标识行：\n   > 本内容由 AI 生成，仅供学习参考\n   并带 marker 注释 <!-- ai-generated-notice -->\n5. 正文必须包含以下 TRACE 高分结构（对标 SkillHub 4.8+ 顶级 Skill）：\n   - 能力边界：能做/不能做清单 + 适用对象（一页纸速查卡）\n   - 触发方式：trigger_words + 大白话场景映射表\n   - 标准流程：前置条件 → 执行步骤（分步编号）→ 输出规范\n   - 置信度门控：信息不足时输出 [需核实:字段] 占位，不编造\n   - 错误码体系：常见错误 → 提示话术 → 修正步骤\n   - FAQ 反模式：3-5 个常见坑 + 反模式对照\n   - 渐进式披露：速查卡 + 分层次阅读路径（新手/进阶）\n   每节都要有真实可执行的细节（参数表、示例、边界值），拒绝空话套话。\n6. 全中文为主（代码示例可用英文），语气专业务实。\n7. 严禁：绝对化用语（最/最好/100%/零风险/保证）、收益承诺、任何内部平台信息。\n8. 不要输出 ```markdown 包裹，直接输出 SKILL.md 全文（**首行必须是 --- 开头**）。\n9. 【强制合规章节】（document_gate 硬性要求，缺一即打回重写）：\n   a. 文档末尾必须含「用户协议」章节（含：使用者自行承担全部责任、禁止反向工程，\n      带 marker 注释 <!-- user-agreement-injected -->）\n   b. 文档末尾必须含「许可证（License）」章节，内嵌 MIT 许可证全文，\n      带 marker 注释 <!-- professional-license-embedded -->\n   c. 开头必须有一行 AI 辅助生成免责声明（如\"本 Skill 由 AI 辅助生成，仅供参考\"）\n   d. frontmatter 的 description/正文一律不得出现任何绝对化承诺\n   以上章节即使功能大纲未提及也必须补齐——这是发布合规的强制要求。",
   "llm_model": "deepseek-chat",
   "llm_temperature": 0.9,
-  "cost_usd": 0.0,
+  "cost_usd": 0.007547,
   "similarity_metrics": {
-    "mode": "49-proxy"
+    "section": 0.04081632653061224,
+    "token": 0.21273885350318472,
+    "line": 0.0707070707070707
   },
   "style_checks_passed": true
 }
