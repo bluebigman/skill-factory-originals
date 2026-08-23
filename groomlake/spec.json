@@ -1,8 +1,0 @@
-{
-  "slug": "groomlake",
-  "name": "groomlake",
-  "description": "解析 Adobe 文件格式（PDF/PS/EPS）的 Ruby 解析器，提供文本提取、元数据读取与结构分析。",
-  "trigger_words": "[\"groomlake\", \"adobe\", \"pdf\", \"postscript\", \"eps\"]",
-  "original_version": "2.0.0",
-  "capability_outline": []
-}
