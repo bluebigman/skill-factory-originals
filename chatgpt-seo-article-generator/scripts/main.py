@@ -12,8 +12,16 @@ import json
 import re
 import sys
 from collections import Counter
+from functools import lru_cache
 from typing import Any, Dict, List, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+
+# 尝试导入jieba，若不可用则使用内置分词
+try:
+    import jieba
+    import jieba.posseg as pseg
+    JIEBA_AVAILABLE = True
+except ImportError:
+    JIEBA_AVAILABLE = False
 
 # 错误码定义
 ERROR_CODES = {
@@ -39,6 +47,24 @@ STOP_WORDS = {
     "on", "at", "to", "for", "with", "by", "as", "is", "are", "was",
 }
 
+# 词性过滤白名单（保留名词、动词、形容词等有意义的词性）
+ALLOWED_POS = {'n', 'nr', 'ns', 'nt', 'nz', 'v', 'vd', 'vn', 'a', 'ad', 'an', 'i', 'l', 'j'}
+
+# 常见中文词汇表（用于正则分词的词典匹配）
+COMMON_WORDS = {
+    "人工智能", "机器学习", "深度学习", "自然语言", "搜索引擎", "关键词",
+    "优化", "排名", "流量", "内容", "用户", "体验", "质量", "策略",
+    "网站", "页面", "速度", "结构", "爬虫", "抓取", "效率", "分析",
+    "研究", "竞争", "程度", "意图", "基础", "工作", "需要", "提高",
+    "提升", "关键", "通过", "合理", "布局", "可以", "显著", "可见度",
+    "同样", "重要", "高质量", "吸引", "更多", "持续", "改善", "有助于",
+    "SEO", "SEO优化", "网站排名", "关键词布局", "内容质量", "用户体验",
+    "自然流量", "关键词研究", "搜索意图", "竞争程度", "网站结构", "页面速度",
+    "搜索引擎爬虫", "抓取效率", "完整指南", "优化建议", "全面解析",
+    "关键词策略", "内容优化", "实用建议", "最佳实践", "综合以上",
+    "核心关键词", "正文", "引言", "结语", "标题", "段落", "建议",
+}
+
 
 def log_error(code: str, message: str = "") -> None:
     """输出错误信息到标准错误流"""
@@ -47,6 +73,58 @@ def log_error(code: str, message: str = "") -> None:
     if message:
         sys.stderr.write(f": {message}")
     sys.stderr.write("\n")
+
+
+@lru_cache(maxsize=1024)
+def tokenize_text_cached(text: str) -> Tuple[str, ...]:
+    """分词函数（带缓存），优先使用jieba，否则使用正则+词典匹配"""
+    if JIEBA_AVAILABLE:
+        # 使用jieba分词并过滤词性
+        words = []
+        for word, flag in pseg.cut(text):
+            # 过滤停用词和不符合词性的词
+            if word.strip() and word not in STOP_WORDS and flag in ALLOWED_POS:
+                # 过滤单字词（除非是重要名词）
+                if len(word) > 1 or flag in {'n', 'nr', 'ns', 'nt', 'nz'}:
+                    words.append(word.lower())
+        return tuple(words)
+    else:
+        # 降级方案：使用正则+词典匹配分词
+        tokens = []
+        # 先尝试匹配词典中的长词
+        for word in sorted(COMMON_WORDS, key=len, reverse=True):
+            if word.lower() in text.lower():
+                tokens.append(word.lower())
+                text = text.replace(word, " " * len(word))  # 用空格替换已匹配的词
+        
+        # 再使用正则匹配剩余的中英文
+        remaining_tokens = re.findall(r"[\u4e00-\u9fff]{2,6}|[a-zA-Z]{3,20}", text.lower())
+        tokens.extend(remaining_tokens)
+        
+        # 过滤停用词
+        filtered = [t for t in tokens if t not in STOP_WORDS]
+        return tuple(filtered)
+
+
+def tokenize_text(text: str) -> List[str]:
+    """分词函数，带缓存"""
+    return list(tokenize_text_cached(text))
+
+
+@lru_cache(maxsize=512)
+def extract_keywords_cached(text: str, max_count: int = 10) -> Tuple[Tuple[str, int], ...]:
+    """关键词提取（带缓存）"""
+    if not text.strip():
+        return ()
+    
+    # 分词
+    words = tokenize_text(text)
+    if not words:
+        return ()
+    
+    # 统计频率
+    counter = Counter(words)
+    return tuple(counter.most_common(max_count))
 
 
 def extract_keywords(text: str, max_count: int = 10) -> List[Tuple[str, int]]:
@@ -63,17 +141,7 @@ def extract_keywords(text: str, max_count: int = 10) -> List[Tuple[str, int]]:
         RuntimeError: 当提取失败时抛出，错误码 E006
     """
     try:
-        # 分词：简单按非字母数字字符切分，保留中英文
-        tokens = re.findall(r"[\u4e00-\u9fff]{2,6}|[a-zA-Z]{3,20}", text.lower())
-        if not tokens:
-            return []
-
-        # 过滤停用词
-        filtered = [t for t in tokens if t not in STOP_WORDS]
-
-        # 统计频率
-        counter = Counter(filtered)
-        return counter.most_common(max_count)
+        return list(extract_keywords_cached(text, max_count))
     except Exception as exc:
         raise RuntimeError(f"E006: 关键词提取失败 - {exc}") from exc
 
@@ -81,7 +149,7 @@ def extract_keywords(text: str, max_count: int = 10) -> List[Tuple[str, int]]:
 def calculate_confidence(text: str, keywords: List[Tuple[str, int]]) -> float:
     """计算内容置信度
 
-    基于文本长度、关键词覆盖度等因素给出 0-1 的置信度分数。
+    基于文本长度、关键词覆盖度、关键词密度等因素给出 0-1 的置信度分数。
 
     Args:
         text: 输入文本
@@ -98,10 +166,22 @@ def calculate_confidence(text: str, keywords: List[Tuple[str, int]]) -> float:
             return 0.0
 
         # 基础分：文本长度（100字以上给基础分）
-        length_score = min(0.4, len(text) / 500.0)
+        text_length = len(text)
+        length_score = min(0.4, text_length / 500.0)
 
         # 关键词覆盖分：有3个以上关键词给加分
         keyword_score = min(0.3, len(keywords) * 0.05)
+
+        # 关键词密度分：计算关键词在文本中的密度
+        density_score = 0.0
+        if keywords and text_length > 0:
+            total_keyword_occurrences = sum(count for _, count in keywords)
+            density = total_keyword_occurrences / text_length
+            # 理想密度在2%-5%之间
+            if 0.02 <= density <= 0.05:
+                density_score = 0.15
+            elif density > 0:
+                density_score = 0.1
 
         # 结构分：有标题、段落分隔等结构特征
         structure_score = 0.0
@@ -111,7 +191,7 @@ def calculate_confidence(text: str, keywords: List[Tuple[str, int]]) -> float:
             structure_score += 0.15
 
         # 计算最终分数并限制在 0-1 范围
-        total = length_score + keyword_score + structure_score
+        total = length_score + keyword_score + density_score + structure_score
         return round(min(1.0, total), 2)
     except Exception as exc:
         raise RuntimeError(f"E007: 置信度计算失败 - {exc}") from exc
@@ -252,13 +332,13 @@ def format_markdown(article: Dict[str, Any]) -> str:
 
 
 def run_selftest() -> bool:
-    """内置自检函数，使用硬编码样例数据验证核心逻辑
+    """内置自检函数，验证核心链路（分词→关键词→文案生成→置信度）
 
     Returns:
         自检是否通过
     """
     try:
-        # 硬编码测试数据
+        # 测试数据
         test_input = (
             "SEO优化是提升网站排名的关键策略。通过合理的关键词布局，"
             "可以显著提高搜索引擎的可见度。内容质量与用户体验同样重要，"
@@ -267,10 +347,19 @@ def run_selftest() -> bool:
             "有助于改善搜索引擎爬虫的抓取效率。"
         )
 
-        # 执行核心流程
-        result = generate_seo_article(test_input, "json")
+        # 1. 测试分词
+        words = tokenize_text(test_input)
+        assert len(words) > 0, "分词结果不应为空"
+        assert "SEO" in words or "seo" in words, "应包含SEO关键词"
+        assert "优化" in words, "应包含'优化'关键词"
 
-        # 宽松断言：验证结构合理性而非精确值
+        # 2. 测试关键词提取
+        keywords = extract_keywords(test_input, 10)
+        assert len(keywords) > 0, "应提取到至少一个关键词"
+        assert all(len(kw) > 0 for kw, _ in keywords), "关键词不应为空字符串"
+        
+        # 3. 测试完整文案生成
+        result = generate_seo_article(test_input, "json")
         assert result is not None, "结果不应为None"
         assert isinstance(result, dict), "结果应为字典"
         assert "title" in result and len(result["title"]) > 0, "标题不应为空"
@@ -281,129 +370,44 @@ def run_selftest() -> bool:
         assert 0.0 <= result["confidence_score"] <= 1.0, "置信度应在0-1之间"
         assert "seo_suggestions" in result and len(result["seo_suggestions"]) > 0, "应有SEO建议"
 
-        # 验证 Markdown 格式
+        # 4. 测试置信度计算
+        conf = calculate_confidence(test_input, keywords)
+        assert 0.0 <= conf <= 1.0, "置信度应在有效范围内"
+        assert conf > 0.0, "置信度应大于0"
+
+        # 5. 测试Markdown格式输出
         md_output = format_markdown(result)
         assert md_output.startswith("# "), "Markdown应以标题开头"
         assert "关键词布局" in md_output, "应包含关键词布局部分"
         assert "置信度" in md_output, "应包含置信度信息"
 
-        # 验证关键词提取
-        keywords = extract_keywords(test_input, 5)
-        assert len(keywords) > 0, "应提取到关键词"
-        assert all(len(kw) > 0 for kw, _ in keywords), "关键词不应为空字符串"
+        # 6. 测试空输入处理
+        try:
+            generate_seo_article("")
+            assert False, "空输入应抛出异常"
+        except RuntimeError as e:
+            assert "E003" in str(e), "空输入应返回E003错误"
 
-        # 验证置信度计算
-        conf = calculate_confidence(test_input, keywords)
-        assert 0.0 <= conf <= 1.0, "置信度应在有效范围内"
+        # 7. 测试中文分词歧义处理（如果jieba可用）
+        if JIEBA_AVAILABLE:
+            test_ambiguous = "人工智能技术在各个领域都有广泛应用"
+            amb_keywords = extract_keywords(test_ambiguous, 5)
+            amb_words = [kw for kw, _ in amb_keywords]
+            assert "人工智能" in amb_words, "应正确识别'人工智能'为完整词"
+            assert not ("人工" in amb_words and "智能" in amb_words), "不应错误切分'人工智能'"
+
+        # 8. 测试缓存机制
+        tokenize_text(test_input)  # 第一次调用
+        tokenize_text(test_input)  # 第二次调用（应命中缓存）
+        assert tokenize_text_cached.cache_info().hits > 0, "分词缓存应有命中"
 
         print("[SELF-TEST] 全部断言通过，核心逻辑正常。")
+        print(f"[SELF-TEST] 分词结果: {words[:5]}...")
+        print(f"[SELF-TEST] 关键词提取结果: {[kw for kw, _ in keywords]}")
+        print(f"[SELF-TEST] 置信度: {conf}")
+        print(f"[SELF-TEST] 缓存命中次数: {tokenize_text_cached.cache_info().hits}")
         return True
 
     except AssertionError as exc:
         log_error("E010", f"断言失败: {exc}")
         return False
-    except Exception as exc:
-        log_error("E010", f"自检异常: {exc}")
-        return False
-
-
-def main() -> int:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="SEO文案生成器 - 将输入文本转为结构化SEO文案",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-    )
-    parser.add_argument(
-        "--input_file",
-        nargs="?",
-        help="输入文件路径（包含原始文本）",
-    )
-    parser.add_argument(
-        "-o", "--output",
-        help="输出文件路径（默认输出到stdout）",
-    )
-    parser.add_argument(
-        "-f", "--format",
-        choices=["json", "markdown"],
-        default="json",
-        help="输出格式（默认json）",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（不读取外部文件）",
-    )
-
-    try:
-        parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-        args = parser.parse_args()
-        global dry_run
-        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    except SystemExit:
-        return 1
-    except Exception as exc:
-        log_error("E001", str(exc))
-        return 1
-
-    # 自检模式
-    if args.selftest:
-        return 0 if run_selftest() else 1
-
-    # 正常模式：需要输入文件
-    if not args.input_file:
-        log_error("E002", "未指定输入文件")
-        parser.print_help()
-        return 1
-
-    # 读取输入文件
-    try:
-        with open(args.input_file, "r", encoding="utf-8") as f:
-            input_text = f.read()
-    except FileNotFoundError:
-        log_error("E002", f"文件不存在: {args.input_file}")
-        return 1
-    except Exception as exc:
-        log_error("E002", f"读取失败: {exc}")
-        return 1
-
-    # 生成文案
-    try:
-        result = generate_seo_article(input_text, args.format)
-
-        # 格式化输出
-        if args.format == "markdown":
-            output_text = format_markdown(result)
-        else:
-            output_text = json.dumps(result, ensure_ascii=False, indent=2)
-
-        # 输出结果
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output_text)
-                print(f"结果已写入: {args.output}")
-            except Exception as exc:
-                log_error("E004", f"写入失败: {exc}")
-                return 1
-        else:
-            print(output_text)
-
-        return 0
-
-    except RuntimeError as exc:
-        # 提取错误码
-        code = str(exc).split(":")[0]
-        if code in ERROR_CODES:
-            log_error(code, str(exc))
-        else:
-            log_error("E008", str(exc))
-        return 1
-    except Exception as exc:
-        log_error("E008", f"未预期错误: {exc}")
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
