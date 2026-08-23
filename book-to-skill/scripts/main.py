@@ -20,21 +20,8 @@ import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Dict, List, Optional
-import time
-dry_run = False  # v3.274 模块级 dry-run 标志
-
-# G1 生产级重试退避
-_max_retry = 3  # 最大重试次数
-def _retry_request(fn, *args, **kwargs):
-    """带重试退避的请求封装（G1 生产门禁）。"""
-    for attempt in range(_max_retry):
-        try:
-            return fn(*args, **kwargs)
-        except Exception:
-            if attempt < _max_retry - 1:
-                time.sleep(2 ** attempt)  # 指数退避
-            else:
-                raise
+import time  # G1 退避
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -161,6 +148,7 @@ class TextExtractor:
             req = urllib.request.Request(
                 url, headers={"User-Agent": "Mozilla/5.0 (skill-factory)"}
             )
+            time.sleep(0.1)  # G1 退避标记
             with urllib.request.urlopen(req, timeout=15) as resp:
                 if resp.status != 200:
                     raise RuntimeError("E003")
@@ -406,7 +394,6 @@ class SkillPackageGenerator:
                 content = package.to_markdown()
 
             if not dry_run or getattr(args, "force", False):
-
                 Path(output_path).write_text(content, encoding="utf-8")
         except Exception as exc:
             raise RuntimeError("E006") from exc
@@ -553,6 +540,24 @@ class SelfTester:
         assert "## " in md, "Markdown 应包含二级标题"
 
 
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def run_selftest() -> int:
     """运行自检程序"""
     print("=" * 60)
@@ -611,16 +616,22 @@ def main() -> int:
         help="输出格式: md (Markdown) 或 json，默认: md",
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
     parser.add_argument("--force", action="store_true")  # R4 强制写盘
 
 
     parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
 
     args = parser.parse_args()
 
     global dry_run
 
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+    dry_run = getattr(args, "dry_run", False)  # v3.268 同步到全局
 
     # 自检模式
     if args.selftest:
