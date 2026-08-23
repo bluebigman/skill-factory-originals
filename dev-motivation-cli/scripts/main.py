@@ -15,9 +15,9 @@ dev-motivation-cli 数据转换工具
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
-import datetime as _dt
+import datetime
 from typing import Dict, Any, List
+from datetime import timezone  # G2 时区修复
 
 # 错误码定义
 ERROR_CODES = {
@@ -276,6 +276,11 @@ def parse_arguments() -> argparse.Namespace:
         action="store_true",
         help="运行内置自检并退出"
     )
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
     return parser.parse_args()
 
 
