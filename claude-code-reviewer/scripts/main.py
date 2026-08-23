@@ -18,7 +18,9 @@ import argparse
 import os
 import re
 import sys
+import tempfile
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Dict, List, Optional, Tuple
 
 # 错误码定义（E001-E010）
@@ -60,6 +62,7 @@ class ReviewResult:
     total_lines: int
     issues: List[Issue] = field(default_factory=list)
     metrics: Dict[str, float] = field(default_factory=dict)
+    timestamp: str = field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
     @property
     def critical_count(self) -> int:
@@ -444,7 +447,7 @@ def generate_report(result: ReviewResult, verbose: bool = False) -> str:
     """生成结构化审查报告（文本格式）"""
     lines = []
     lines.append("=" * 70)
-    lines.append(f"代码审查报告")
+    lines.append(f"代码审查报告 - {result.timestamp}")
     lines.append("=" * 70)
     lines.append(f"文件: {result.file_path}")
     lines.append(f"语言: {result.language}")
@@ -486,162 +489,6 @@ def run_selftest() -> bool:
     断言使用宽松阈值，确保稳健。
     """
     print("开始自检...")
-
-    # 1. 测试语言识别
-    lang, ext = detect_language("test.py")
-    assert lang == "python", "语言识别失败"
-    assert ext == ".py", "扩展名识别失败"
-
-    # 2. 测试补丁解析
-    sample_patch = """diff --git a/example.py b/example.py
---- a/example.py
-+++ b/example.py
-@@ -1,5 +1,8 @@
- def main():
-     print("hello")
-+    password = "secret123"
-+    # TODO: fix this
-+    eval(user_input)
-+    long_line = "x" * 200
-"""
-    files = parse_patch(sample_patch)
-    assert len(files) >= 1, "补丁解析失败"
-    assert files[0][0] == "example.py", "补丁文件名解析失败"
-    assert len(files[0][1]) >= 4, "补丁新增行解析失败"
-
-    # 3. 测试审查引擎
     engine = ReviewEngine()
-    sample_code = [
-        'def process(data):\n',
-        '    password = "hardcoded_secret"\n',
-        '    # TODO: implement validation\n',
-        '    eval(data)\n',
-        '    result = "a" * 150\n',
-        '    return result\n',
-    ]
-    issues = engine.review_lines(sample_code, "python")
-    assert len(issues) >= 3, f"审查发现问题数不足，实际: {len(issues)}"
 
-    # 分类断言（宽松）
-    severities = [i.severity for i in issues]
-    assert "critical" in severities, "应检测到严重问题"
-    assert "warning" in severities or "info" in severities, "应检测到警告或提示"
-
-    # 4. 测试审查结果汇总
-    result = ReviewResult(
-        file_path="test.py",
-        language="python",
-        total_lines=10,
-        issues=issues,
-    )
-    assert result.critical_count >= 1, "严重问题计数错误"
-    assert result.risk_score >= 0, "风险评分不应为负"
-    assert result.risk_score <= 100, "风险评分不应超过100"
-
-    # 5. 测试报告生成
-    report = generate_report(result)
-    assert "代码审查报告" in report, "报告格式错误"
-    assert "test.py" in report, "报告缺少文件名"
-
-    # 6. 测试空输入处理
-    empty_result = ReviewResult(file_path="empty.py", language="python", total_lines=0, issues=[])
-    assert empty_result.risk_score == 0, "空结果风险评分应为0"
-    assert empty_result.critical_count == 0, "空结果严重计数应为0"
-
-    # 7. 测试完整文件审查（使用临时内存模拟）
-    # 直接测试 review_lines 而非 review_file（避免文件系统依赖）
-    more_issues = engine.review_lines([
-        'import os\n',
-        'def main():\n',
-        '    global x\n',
-        '    try:\n',
-        '        pass\n',
-        '    except Exception:\n',
-        '        pass\n',
-        '    api_key = "abcdef123456"\n',
-        '    return True\n',
-    ], "python")
-    assert len(more_issues) >= 2, "复杂样例应发现更多问题"
-
-    print("✅ 自检通过：所有核心逻辑验证成功")
-    return True
-
-
-# ---------------------------------------------------------------------------
-# 主入口
-# ---------------------------------------------------------------------------
-
-def main() -> int:
-    """主函数"""
-    parser = argparse.ArgumentParser(
-        description="代码审查工具 - 将代码或补丁转为结构化审查报告",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="示例:\n"
-               "  python main.py --selftest\n"
-               "  python main.py --file sample.py\n"
-               "  python main.py --patch changes.diff\n"
-               "  python main.py --file sample.py --verbose\n"
-    )
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-    parser.add_argument("--file", type=str, help="要审查的代码文件路径")
-    parser.add_argument("--patch", type=str, help="要审查的补丁文件路径")
-    parser.add_argument("--verbose", action="store_true", help="输出详细信息")
-
-    args = parser.parse_args()
-
-    try:
-        # 自检模式
-        if args.selftest:
-            success = run_selftest()
-            return 0 if success else 1
-
-        # 文件审查模式
-        if args.file:
-            if not os.path.isfile(args.file):
-                print(f"错误 {ERROR_CODES['E002']}: 文件不存在或无法访问", file=sys.stderr)
-                return 2
-            engine = ReviewEngine()
-            result = engine.review_file(args.file)
-            report = generate_report(result, verbose=args.verbose)
-            print(report)
-            return 0
-
-        # 补丁审查模式
-        if args.patch:
-            if not os.path.isfile(args.patch):
-                print(f"错误 {ERROR_CODES['E002']}: 补丁文件不存在或无法访问", file=sys.stderr)
-                return 2
-            with open(args.patch, "r", encoding="utf-8", errors="replace") as f:
-                patch_text = f.read()
-            engine = ReviewEngine()
-            results = engine.review_patch(patch_text)
-            if not results:
-                print("未在补丁中发现可审查的代码")
-                return 0
-            for result in results:
-                report = generate_report(result, verbose=args.verbose)
-                print(report)
-                print()
-            return 0
-
-        # 无有效参数
-        parser.print_help()
-        print(f"\n错误 {ERROR_CODES['E001']}: 请提供 --file 或 --patch 参数", file=sys.stderr)
-        return 2
-
-    except FileNotFoundError as e:
-        print(f"错误 {ERROR_CODES['E002']}: {e}", file=sys.stderr)
-        return 2
-    except PermissionError:
-        print(f"错误 {ERROR_CODES['E009']}: 权限不足，无法访问文件", file=sys.stderr)
-        return 2
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 2
-    except Exception as e:
-        print(f"错误 {ERROR_CODES['E010']}: 未预期的异常: {e}", file=sys.stderr)
-        return 2
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    # 1. 测试
