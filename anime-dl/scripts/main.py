@@ -569,6 +569,14 @@ def main():
     parser.add_argument("--pretty", action="store_true", help="美化JSON输出（缩进）")
     parser.add_argument("--complete", action="store_true", help="对输出执行字段补全")
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     # 处理自检模式
