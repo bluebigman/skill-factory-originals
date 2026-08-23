@@ -1,322 +1,482 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: bob
 name: bob
-displayName: 数据库查询构建 多方言SQL 对象映射生成
-description: 面向Go开发者的SQL查询构建与ORM工厂生成工具，支持PostgreSQL、MySQL、SQLite三种主流数据库方言。
-version: 1.0.1
-rules_version: cpr-20260810-n301
+displayName: Go数据库方言转换与ORM代码生成
+description: 面向Go开发者的SQL方言转换与ORM工厂代码生成工具，支持PostgreSQL、MySQL、SQLite。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/bob
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: QueryForge Studio
+author: 代码工匠
 agent_created: true
-trigger_words: ["SQL查询", "ORM生成", "查询构建器", "数据库方言", "Go模型生成", "SQL builder"]
+trigger_words: ["SQL查询", "ORM生成", "查询构建器", "数据库方言", "Go模型生成", "方言转换", "代码生成"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# bob — Go 多方言 SQL 查询构建与 ORM 工厂
+# bob — Go 数据库方言转换与 ORM 代码生成 Skill
 
 ## 一、能力边界（一页纸速查卡）
 
-### 1.1 能做与不能做
+### 1.1 能做什么
 
-| 维度 | 能做 ✅ | 不能做 ❌ |
-|------|--------|----------|
-| **查询构建** | 生成 SELECT / INSERT / UPDATE / DELETE 语句 | 不执行 SQL，不连接数据库 |
-| **方言支持** | PostgreSQL、MySQL、SQLite 三方言语法转换 | 不支持 Oracle、SQL Server、DB2 等其它方言 |
-| **ORM 工厂** | 根据表结构生成 Go 结构体、字段标签、CRUD 方法骨架 | 不生成完整业务逻辑，不生成迁移文件 |
-| **输入处理** | 接受表结构描述（DDL、JSON Schema、现有模型） | 不自动探测数据库，不读取环境变量 |
-| **输出格式** | 结构化 Markdown / JSON / 纯 SQL 文件 | 不生成二进制文件，不生成可执行程序 |
+| 能力项 | 说明 | 支持范围 |
+|--------|------|----------|
+| SQL 方言转换 | 将一种数据库方言的 SQL 转换为另一种方言 | PostgreSQL ↔ MySQL ↔ SQLite |
+| ORM 代码生成 | 根据表结构生成 Go 语言 ORM 模型代码 | 结构体定义、字段标签、CRUD 方法 |
+| 查询构建器 | 生成链式查询构建代码 | 支持 Where、OrderBy、Limit、Join 等 |
+| 类型映射 | 数据库类型到 Go 类型的自动映射 | 可自定义映射规则 |
+| 配置管理 | 通过配置文件定制生成行为 | YAML 格式，支持全局和项目级 |
+| 自动化集成 | 与 CI/CD 流水线、go generate 集成 | JSON 输出、命令行调用 |
 
-### 1.2 适用对象
+### 1.2 不能做什么
 
-- **Go 后端开发者**：需要快速生成数据库访问层代码
-- **DBA / 数据工程师**：需要跨数据库方言的查询语句模板
-- **全栈工程师**：在项目初始化阶段需要 ORM 模型骨架
-- **教学场景**：学习不同数据库方言的语法差异
+| 限制项 | 说明 |
+|--------|------|
+| 不支持非 Go 语言 | 仅面向 Go 开发者 |
+| 不支持 NoSQL 数据库 | 仅支持 PostgreSQL、MySQL、SQLite |
+| 不处理复杂存储过程 | 仅处理标准 SQL DDL/DML 语句 |
+| 不生成完整业务逻辑 | 仅生成数据访问层代码 |
+| 不支持实时数据库连接 | 基于表结构 JSON 文件工作，不直连数据库 |
 
-### 1.3 输入规格
+### 1.3 适用对象
 
-| 输入类型 | 格式要求 | 示例 |
-|---------|---------|------|
-| 表结构描述 | DDL 语句或 JSON Schema | `CREATE TABLE users (id INT PRIMARY KEY, name VARCHAR(100));` |
-| 查询需求 | 自然语言描述 | "查询所有状态为活跃的用户，按创建时间倒序" |
-| 方言指定 | 枚举值 | `postgres` / `mysql` / `sqlite` |
-| 输出偏好 | 可选参数 | `--format=json` / `--format=sql` |
+- Go 后端开发者
+- 需要多数据库兼容的项目团队
+- 使用 ORM 框架（如 GORM、SQLBoiler）的开发者
+- 需要自动化代码生成的 CI/CD 流水线
 
 ---
 
-## 二、触发方式与场景映射
+## 二、触发方式
 
 ### 2.1 触发词
 
-直接使用以下任一关键词即可激活本 Skill：
+当对话中出现以下关键词时，本 Skill 将被激活：
 
-- `SQL查询` — 最直接的触发词
-- `ORM生成` — 需要生成 Go 结构体时
-- `查询构建器` / `SQL builder` — 构建复杂查询时
-- `数据库方言` — 需要方言转换时
-- `Go模型生成` — 生成模型代码时
+- SQL查询、ORM生成、查询构建器、数据库方言、Go模型生成
+- 方言转换、代码生成、表结构转模型、数据库迁移
 
 ### 2.2 场景映射表
 
-| 用户说（大白话） | 实际需求 | 本 Skill 动作 |
-|----------------|---------|--------------|
-| "帮我写个查询用户的 SQL" | 生成 SELECT 语句 | 解析表结构，生成对应方言的 SELECT |
-| "我要在 Go 里操作数据库" | 生成 ORM 模型 | 生成结构体 + 标签 + CRUD 骨架 |
-| "MySQL 的 limit 和 SQLite 有啥区别" | 方言差异对比 | 输出三种方言的语法对照表 |
-| "给我建个表对应的模型" | 从 DDL 生成模型 | 解析 DDL，生成 Go 结构体 |
-| "批量插入怎么写" | 生成批量 INSERT | 生成多值 INSERT 语句 |
+| 用户说（大白话） | 实际需求 | 触发动作 |
+|------------------|----------|----------|
+| "帮我把 MySQL 的建表语句转成 PostgreSQL" | SQL 方言转换 | 运行 `bob convert` |
+| "根据这个表结构生成 Go 结构体" | ORM 代码生成 | 运行 `bob generate` |
+| "我要生成带查询方法的模型代码" | 查询构建器生成 | 运行 `bob generate --with-queries` |
+| "检查一下 bob 装好没有" | 安装验证 | 运行 `bob --selftest` |
+| "生成一个配置文件" | 初始化配置 | 运行 `bob --init` |
 
 ---
 
-## 三、标准工作流程
+## 三、标准流程
 
 ### 3.1 前置条件
 
-- 用户提供至少一项：表结构描述、查询需求描述、或现有模型代码
-- 明确目标方言（默认 `postgres`）
-- 明确输出格式（默认 `sql`，可选 `json` / `markdown`）
+| 条件 | 要求 | 验证方法 |
+|------|------|----------|
+| Go 环境 | Go 1.18+ | `go version` |
+| bob 安装 | 已安装 bob 可执行文件 | `bob --version` |
+| 表结构 JSON | 符合格式要求的表结构描述文件 | 见 3.2 节格式说明 |
+| 配置文件（可选） | `~/.bob/config.yaml` 或项目级配置 | `bob --init` 生成 |
 
-### 3.2 执行步骤
+### 3.2 表结构 JSON 格式
 
-**Step 1：输入解析**
-- 识别输入类型（DDL / JSON / 自然语言）
-- 提取关键实体：表名、字段名、字段类型、约束条件
-- 若信息不足，标记 `[需核实:字段名]` 占位
-
-**Step 2：方言适配**
-- 根据目标方言映射类型系统：
-  - `INT` → PostgreSQL `INTEGER` / MySQL `INT` / SQLite `INTEGER`
-  - `VARCHAR(255)` → 三方言均支持，但 MySQL 需注意字符集
-  - `BOOLEAN` → PostgreSQL `BOOLEAN` / MySQL `TINYINT(1)` / SQLite `INTEGER 0/1`
-- 转换分页语法：
-  - PostgreSQL / SQLite：`LIMIT ? OFFSET ?`
-  - MySQL：`LIMIT ?, ?`
-
-**Step 3：查询生成**
-- 按操作类型生成语句模板：
-  - SELECT：字段列表 + FROM + WHERE + ORDER BY + LIMIT
-  - INSERT：单行 / 多行 VALUES
-  - UPDATE：SET 子句 + WHERE
-  - DELETE：WHERE 条件
-- 参数化查询使用 `?` 占位符（PostgreSQL 可用 `$1, $2`）
-
-**Step 4：ORM 模型生成**
-- 生成 Go 结构体，字段类型映射：
-  - `INT` → `int` / `int64`
-  - `VARCHAR` → `string`
-  - `TIMESTAMP` → `time.Time`
-  - `DECIMAL` → `float64` / `decimal.Decimal`
-- 生成标签：`json:"field_name"` + `db:"column_name"`
-- 生成 CRUD 方法骨架：`Create()` / `GetByID()` / `Update()` / `Delete()`
-
-**Step 5：输出与自查**
-- 按约定格式输出结果
-- 自查清单：
-  - [ ] 字段完整性：所有输入字段均已处理
-  - [ ] 方言正确性：语法符合目标方言
-  - [ ] 参数化：无字符串拼接注入风险
-  - [ ] 置信度标注：所有推断字段已标记
-
-### 3.3 输出规范
-
-**SQL 输出格式：**
-```sql
--- 方言: postgres
--- 生成时间: 2026-08-10T12:00:00Z
--- 置信度: 0.95
-
-SELECT id, name, email, created_at
-FROM users
-WHERE status = 'active'
-ORDER BY created_at DESC
-LIMIT 10;
-```
-
-**ORM 模型输出格式：**
-```go
-// 方言: mysql
-// 置信度: 0.90
-
-type User struct {
-    ID        int64     `json:"id" db:"id"`
-    Name      string    `json:"name" db:"name"`
-    Email     string    `json:"email" db:"email"`
-    CreatedAt time.Time `json:"created_at" db:"created_at"`
-}
-
-func (u *User) Create() error {
-    // TODO: 实现插入逻辑
-    return nil
+```json
+{
+  "database": "mysql",
+  "tables": [
+    {
+      "name": "users",
+      "columns": [
+        {
+          "name": "id",
+          "type": "INT",
+          "nullable": false,
+          "primary_key": true,
+          "auto_increment": true
+        },
+        {
+          "name": "email",
+          "type": "VARCHAR(255)",
+          "nullable": false,
+          "unique": true
+        },
+        {
+          "name": "created_at",
+          "type": "TIMESTAMP",
+          "nullable": false,
+          "default": "CURRENT_TIMESTAMP"
+        }
+      ],
+      "indexes": [
+        {
+          "name": "idx_email",
+          "columns": ["email"],
+          "unique": true
+        }
+      ]
+    }
+  ]
 }
 ```
+
+### 3.3 执行步骤
+
+#### 步骤 1：验证安装
+
+```bash
+bob --selftest
+```
+
+预期输出：`bob: all checks passed`（或类似成功信息）
+
+#### 步骤 2：初始化配置（首次使用）
+
+```bash
+bob --init
+```
+
+生成 `~/.bob/config.yaml`，包含默认类型映射和生成选项。
+
+#### 步骤 3：准备表结构文件
+
+创建 `schema.json`，内容遵循 3.2 节格式。
+
+#### 步骤 4：执行方言转换
+
+```bash
+# 将 MySQL 方言转换为 PostgreSQL
+bob convert --input schema.json --from mysql --to postgresql --output schema_pg.json
+
+# 输出 JSON 格式（用于 CI/CD 集成）
+bob convert --input schema.json --from mysql --to postgresql --format json
+```
+
+#### 步骤 5：生成 ORM 代码
+
+```bash
+# 生成基础模型代码
+bob generate --input schema.json --output ./models
+
+# 生成带查询构建器的代码
+bob generate --input schema.json --output ./models --with-queries
+
+# 指定包名
+bob generate --input schema.json --output ./models --package models
+```
+
+#### 步骤 6：检查生成结果
+
+```bash
+# 查看生成的文件
+ls -la ./models/
+
+# 检查类型映射是否正确
+cat ./models/users.go
+```
+
+### 3.4 输出规范
+
+| 输出类型 | 格式 | 使用场景 |
+|----------|------|----------|
+| 方言转换结果 | SQL 文件或 JSON | 数据库迁移、多数据库支持 |
+| ORM 模型代码 | .go 文件 | Go 项目数据访问层 |
+| 查询构建器 | .go 文件（含链式方法） | 复杂查询场景 |
+| 转换报告 | JSON（`--format json`） | CI/CD 流水线解析 |
 
 ---
 
-## 四、置信度门控机制
+## 四、置信度门控
 
-### 4.1 置信度等级
+### 4.1 信息不足时的处理
 
-| 等级 | 数值范围 | 含义 | 示例 |
-|------|---------|------|------|
-| 高 | 0.90-1.00 | 所有字段明确，无歧义 | 完整 DDL 输入 |
-| 中 | 0.70-0.89 | 部分字段推断，需确认 | 自然语言描述 |
-| 低 | 0.50-0.69 | 关键信息缺失 | 仅有表名无字段 |
+当输入信息不完整时，bob 会输出 `[需核实:字段名]` 占位符，而不是猜测或编造。
 
-### 4.2 占位符规则
+| 场景 | 输出示例 | 处理建议 |
+|------|----------|----------|
+| 缺少主键定义 | `[需核实:primary_key]` | 检查表结构，确认主键字段 |
+| 类型映射不明确 | `[需核实:type_mapping]` | 在配置文件中添加自定义映射 |
+| 默认值不确定 | `[需核实:default_value]` | 明确指定默认值或留空 |
+| 索引信息缺失 | `[需核实:indexes]` | 补充索引定义或确认无索引 |
 
-当信息不足时，使用以下占位符，**绝不编造**：
+### 4.2 处理原则
 
-- `[需核实:表名]` — 表名未知
-- `[需核实:字段列表]` — 字段未指定
-- `[需核实:主键]` — 主键未指定
-- `[需核实:数据类型]` — 字段类型不明确
-
-### 4.3 处理策略
-
-- 置信度 < 0.70 时，输出结果前附加提示：
-  ```
-  ⚠️ 置信度较低（0.65），以下字段为推断值，请核实：
-  - status 字段类型假设为 VARCHAR(20)
-  - created_at 假设为 TIMESTAMP
-  ```
-- 置信度 < 0.50 时，主动询问用户补充信息，不输出结果
+1. 不猜测：遇到不确定的信息，一律输出占位符
+2. 不编造：不生成虚构的字段或类型
+3. 可追溯：占位符包含字段名，便于定位问题
 
 ---
 
 ## 五、错误码体系
 
-| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
-|--------|---------|---------|---------|
-| `E001` | 未指定目标方言 | "请指定目标数据库方言：postgres / mysql / sqlite" | 补充方言参数后重试 |
-| `E002` | 输入为空 | "未检测到有效的输入内容，请提供表结构或查询描述" | 提供至少一项输入 |
-| `E003` | 方言不支持 | "暂不支持该方言，当前支持：PostgreSQL、MySQL、SQLite" | 更换为支持的方言 |
-| `E004` | 字段类型无法映射 | "字段 `xxx` 的类型 `yyy` 无法映射到目标方言" | 提供字段类型或使用默认映射 |
-| `E005` | 语法解析失败 | "输入内容无法解析为有效的表结构描述" | 检查 DDL 语法或改用 JSON 格式 |
-| `E006` | 输出格式不支持 | "仅支持 sql / json / markdown 三种输出格式" | 更换输出格式参数 |
+### 5.1 常见错误与修正
+
+| 错误码 | 错误信息 | 原因 | 提示话术 | 修正步骤 |
+|--------|----------|------|----------|----------|
+| E001 | `invalid input file` | 输入 JSON 格式错误 | "请检查表结构 JSON 文件格式" | 1. 使用 `jq . schema.json` 验证 JSON 合法性<br>2. 对照 3.2 节格式检查字段 |
+| E002 | `unsupported database` | 不支持的数据库类型 | "仅支持 PostgreSQL、MySQL、SQLite" | 1. 检查 `--from`/`--to` 参数<br>2. 确认数据库类型拼写正确 |
+| E003 | `type mapping not found` | 数据库类型无对应 Go 类型 | "请在配置文件中添加类型映射" | 1. 打开 `~/.bob/config.yaml`<br>2. 在 `type_mappings` 中添加映射 |
+| E004 | `output directory not writable` | 输出目录无写权限 | "请检查输出目录权限" | 1. 确认目录存在<br>2. 使用 `chmod` 调整权限 |
+| E005 | `invalid config file` | 配置文件格式错误 | "请检查 YAML 配置格式" | 1. 使用 `bob --init` 重新生成<br>2. 手动检查 YAML 缩进 |
+| E006 | `duplicate table name` | 表名重复 | "请检查表结构定义" | 1. 确认表名唯一<br>2. 检查是否有大小写冲突 |
+
+### 5.2 错误处理流程
+
+```
+遇到错误
+    ↓
+查看错误码
+    ↓
+根据提示话术定位问题
+    ↓
+执行修正步骤
+    ↓
+重新运行命令
+    ↓
+验证输出
+```
 
 ---
 
-## 六、FAQ 反模式对照
+## 六、FAQ 反模式
 
-### 6.1 常见坑与反模式
+### 6.1 常见坑与反模式对照
 
-| 坑 | 反模式（错误做法） | 正模式（正确做法） |
-|----|------------------|------------------|
-| **方言混淆** | 在 MySQL 中使用 `ILIKE` | 使用 `LIKE`，或根据方言自动转换 |
-| **类型不匹配** | 将 `DECIMAL` 映射为 `float64` 导致精度丢失 | 使用 `decimal.Decimal` 或 `string` 存储 |
-| **注入风险** | 直接拼接用户输入到 SQL | 使用参数化查询 `?` 占位符 |
-| **忽略时区** | 将 `TIMESTAMP` 映射为 `string` | 使用 `time.Time` 并处理时区 |
-| **批量插入低效** | 循环执行单条 INSERT | 生成多值 INSERT 语句 |
+| 常见坑 | 反模式（错误做法） | 正确做法 |
+|--------|-------------------|----------|
+| 类型映射错误 | 直接修改生成的代码 | 在配置文件中添加自定义类型映射，重新生成 |
+| 方言转换后 SQL 不兼容 | 手动逐条修改 SQL | 使用 `bob convert` 自动转换，检查转换报告 |
+| 生成代码与项目风格不一致 | 接受默认生成风格 | 编写自定义模板，通过 `--template` 参数指定 |
+| 忽略配置文件 | 每次手动指定所有参数 | 使用 `bob --init` 生成配置，统一管理 |
+| 不验证生成结果 | 直接使用生成代码 | 运行 `go vet` 和 `go build` 验证 |
 
 ### 6.2 反模式示例
 
-**❌ 反模式：方言不区分**
-```sql
--- 用户要求 MySQL，却生成了 PostgreSQL 语法
-SELECT * FROM users LIMIT 10 OFFSET 5;  -- MySQL 应为 LIMIT 5, 10
+**反模式 1：手动修改生成代码**
+
+```go
+// ❌ 错误：直接修改生成的文件
+type User struct {
+    ID   int    `gorm:"column:id"`
+    Name string `gorm:"column:name"`
+    // 手动添加了字段，但下次生成会被覆盖
+    Age  int    `gorm:"column:age"`
+}
 ```
 
-**✅ 正模式：方言感知**
-```sql
--- MySQL 方言
-SELECT * FROM users LIMIT 5, 10;
+**正确做法：**
 
--- PostgreSQL 方言
-SELECT * FROM users LIMIT 10 OFFSET 5;
+```yaml
+# ✅ 正确：在配置文件中添加自定义映射
+type_mappings:
+  TINYINT: int8
+  MEDIUMINT: int32
+```
+
+**反模式 2：忽略方言差异**
+
+```sql
+-- ❌ 错误：直接复制 MySQL 的 SQL 到 PostgreSQL
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(255) UNIQUE
+);
+```
+
+**正确做法：**
+
+```bash
+# ✅ 正确：使用 bob 转换方言
+bob convert --input schema.json --from mysql --to postgresql
 ```
 
 ---
 
-## 七、渐进式披露路径
+## 七、渐进式披露
 
-### 7.1 速查卡（30 秒上手）
+### 7.1 速查卡（新手必读）
 
+```bash
+# 1. 验证安装
+bob --selftest
+
+# 2. 初始化配置
+bob --init
+
+# 3. 生成 ORM 代码
+bob generate --input schema.json --output ./models
+
+# 4. 方言转换
+bob convert --input schema.json --from mysql --to postgresql
+
+# 5. 查看帮助
+bob --help
 ```
-1. 输入：表结构 DDL 或 JSON Schema
-2. 指定方言：postgres / mysql / sqlite
-3. 选择输出：sql / json / markdown
-4. 获取结果：SQL 语句或 Go 模型代码
-```
 
-### 7.2 新手路径（5 分钟）
+### 7.2 分层次阅读路径
+
+#### 新手路径（首次使用）
 
 1. 阅读「能力边界」了解工具范围
-2. 使用「触发方式」中的场景映射找到对应操作
-3. 按「标准工作流程」执行一次完整操作
-4. 遇到问题查「错误码体系」
+2. 运行 `bob --selftest` 验证安装
+3. 运行 `bob --init` 生成配置
+4. 准备表结构 JSON 文件
+5. 运行 `bob generate` 生成代码
+6. 检查生成结果
 
-### 7.3 进阶路径（15 分钟）
+#### 进阶路径（日常使用）
 
-1. 深入理解「置信度门控」机制，掌握占位符使用
-2. 学习「方言适配」细节，了解类型映射差异
-3. 参考「FAQ 反模式」避免常见错误
-4. 自定义输出格式，集成到 CI/CD 流程
+1. 自定义 `~/.bob/config.yaml` 中的类型映射
+2. 使用 `bob convert --format json` 输出 JSON，接入 CI/CD 流水线
+3. 配置变更检测，使用 `jq` 解析变更并触发自动构建
+4. 结合 `go generate` 实现代码生成自动化
+5. 编写自定义模板，扩展生成代码的风格
 
----
+#### 专家路径（深度定制）
 
-## 八、参数速查表
-
-| 参数 | 类型 | 默认值 | 可选值 | 说明 |
-|------|------|--------|--------|------|
-| `--dialect` | string | `postgres` | `postgres` / `mysql` / `sqlite` | 目标数据库方言 |
-| `--format` | string | `sql` | `sql` / `json` / `markdown` | 输出格式 |
-| `--selftest` | bool | `false` | `true` / `false` | 运行自检 |
-| `--version` | bool | `false` | `true` / `false` | 显示版本信息 |
-| `--table` | string | 空 | 任意表名 | 指定操作的表 |
-| `--operation` | string | `select` | `select` / `insert` / `update` / `delete` / `model` | 操作类型 |
+1. 编写自定义 Go 模板，控制生成代码的每个细节
+2. 开发插件扩展 bob 的功能
+3. 将 bob 集成到完整的代码生成流水线
+4. 为团队制定统一的代码生成规范
 
 ---
 
-## 九、用户协议
+## 八、配置参考
 
-**使用本 Skill 即表示您同意以下条款：**
+### 8.1 默认配置文件结构
 
-1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。本 Skill 生成的代码和 SQL 语句仅供参考，使用者应在实际环境中充分测试后再部署。
+```yaml
+# ~/.bob/config.yaml
+version: "1.0"
 
-2. **禁止反向工程**：禁止对本 Skill 的提示词、生成逻辑、内部机制进行反向工程、破解、提取或二次分发。
+type_mappings:
+  # 数据库类型到 Go 类型的映射
+  INT: int
+  BIGINT: int64
+  VARCHAR: string
+  TEXT: string
+  BOOLEAN: bool
+  TIMESTAMP: time.Time
+  DATE: time.Time
+  FLOAT: float64
+  DOUBLE: float64
+  DECIMAL: float64
+  JSON: interface{}
 
-3. **无担保声明**：本 Skill 按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性。
+generation:
+  package_name: models
+  with_queries: false
+  with_timestamps: true
+  json_tags: true
+  gorm_tags: true
 
-4. **合规使用**：使用者应确保使用本 Skill 的行为符合当地法律法规及所在组织的安全规范。
+conversion:
+  preserve_comments: true
+  output_format: sql
+```
 
-5. **免责范围**：因使用本 Skill 导致的任何直接、间接、偶然、特殊或后果性损害，Skill 作者不承担任何责任。
+### 8.2 自定义类型映射示例
+
+```yaml
+type_mappings:
+  # 自定义映射
+  MEDIUMINT: int32
+  TINYINT: int8
+  ENUM: string
+  UUID: string
+  JSONB: interface{}
+```
+
+---
+
+## 九、CI/CD 集成示例
+
+### 9.1 GitHub Actions 示例
+
+```yaml
+name: Generate ORM Code
+
+on:
+  push:
+    paths:
+      - 'schema/**'
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup Go
+        uses: actions/setup-go@v4
+        with:
+          go-version: '1.21'
+      - name: Install bob
+        run: go install github.com/example/bob@latest
+      - name: Generate ORM code
+        run: |
+          bob generate --input schema/schema.json --output ./models
+          bob convert --input schema/schema.json --from mysql --to postgresql --format json > conversion_report.json
+      - name: Check for changes
+        run: |
+          if git diff --quiet; then
+            echo "No changes"
+          else
+            echo "Changes detected"
+            git add .
+            git commit -m "chore: regenerate ORM code"
+            git push
+          fi
+```
+
+### 9.2 go generate 集成
+
+```go
+//go:generate bob generate --input schema.json --output ./models --package models
+//go:generate bob convert --input schema.json --from mysql --to postgresql --output schema_pg.sql
+
+package models
+```
+
+---
+
+## 十、用户协议
 
 <!-- user-agreement-injected -->
 
+**使用条款**
+
+1. **责任承担**：使用者自行承担使用本 Skill 及 bob 工具的全部责任。因使用本 Skill 产生的任何直接或间接损失，作者不承担任何责任。
+
+2. **禁止反向工程**：禁止对本 Skill 文档及关联工具进行反向工程、反编译、破解或任何形式的未授权修改。
+
+3. **合规使用**：使用者应确保使用本 Skill 的行为符合当地法律法规及所在组织的政策要求。
+
+4. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。
+
+5. **更新与变更**：作者保留随时修改、更新或终止本 Skill 的权利，恕不另行通知。
+
 ---
 
-## 十、许可证（License）
+## 十一、许可证（License）
+
+<!-- professional-license-embedded -->
 
 **MIT License**
 
-版权所有 (c) 2026 QueryForge Studio
+版权所有 (c) 2024 代码工匠
 
-特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士以下权限：不受限制地使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本，但须满足以下条件：
+特此免费授予任何获得本软件及相关文档文件（以下简称"软件"）副本的人士，不受限制地处理本软件，包括但不限于使用、复制、修改、合并、发布、分发、再许可和/或销售软件副本的权利，并允许向其提供软件的人士在遵守以下条件的前提下这样做：
 
 上述版权声明和本许可声明应包含在软件的所有副本或实质性部分中。
 
-本软件按"现状"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权性。在任何情况下，作者或版权持有人均不对因使用本软件而产生的任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他方面。
+本软件按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性和非侵权保证。在任何情况下，作者或版权持有人均不对因使用本软件而产生的任何索赔、损害或其他责任负责，无论是在合同诉讼、侵权或其他诉讼中。
 
 ---
 
-**使用建议**：本 Skill 适用于 Go 项目开发中的数据库访问层生成场景。建议与项目初始化流程结合使用，可显著提升开发效率。对于生产环境，请务必进行代码审查和测试验证。
-
----
-
-*文档版本：1.0.0 | 最后更新：2026-08-10 | 生成方式：AI 辅助*
-
-<!-- professional-license-embedded -->
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
