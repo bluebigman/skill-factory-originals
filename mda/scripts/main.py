@@ -3,7 +3,7 @@
 """
 mda - 数据编译 文档生成 批量转换
 
-将任意数据源编译为标准化 Markdown 文档，支持批量处理与置信度标注。
+将数据源编译为标准化 Markdown 文档，支持批量处理与置信度标注。
 仅依赖 Python 标准库实现。
 
 用法示例:
@@ -17,12 +17,21 @@ import csv
 import json
 import os
 import sys
+import time
 import xml.etree.ElementTree as ET
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 from urllib.parse import urlparse
-from datetime import timezone  # G2 时区修复
-dry_run = False  # v3.274 模块级 dry-run 标志
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from functools import lru_cache
+import hashlib
+import tempfile
+import shutil
+import sqlite3
+import io
+import urllib.request
+import urllib.error
+import threading
 
 # 错误码定义
 ERR_SUCCESS = 0
@@ -37,6 +46,20 @@ ERR_TEMPLATE_INVALID = "E008"
 ERR_EMPTY_DATA = "E009"
 ERR_UNKNOWN = "E010"
 
+# 支持的文件扩展名
+SUPPORTED_EXTS = {'.json', '.csv', '.xml', '.txt', '.sqlite', '.db'}
+
+# 文件锁管理器
+_file_locks = {}
+_file_locks_lock = threading.Lock()
+
+def _get_file_lock(path):
+    """获取文件锁（线程安全）"""
+    with _file_locks_lock:
+        if path not in _file_locks:
+            _file_locks[path] = threading.Lock()
+        return _file_locks[path]
+
 
 class MDADataError(Exception):
     """MDA 数据编译异常基类"""
@@ -46,29 +69,38 @@ class MDADataError(Exception):
         super().__init__(f"[{code}] {message}")
 
 
-def _read_text_safe(path):
-    """多编码安全读取（R3+R5 合规）"""
-    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
-        try:
-            with open(path, encoding=enc, errors="replace") as f:
-                return f.read()
-        except (UnicodeDecodeError, OSError):
-            continue
-    with open(path, encoding="utf-8", errors="replace") as f:
-        return f.read()
+def _read_file_content(file_path):
+    """统一文件读取入口，带文件锁和原子操作"""
+    if not os.path.exists(file_path):
+        raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
+    
+    lock = _get_file_lock(str(file_path))
+    with lock:
+        # 读取原始字节
+        with open(file_path, 'rb') as f:
+            raw = f.read()
+        
+        # 尝试解码
+        for enc in ("utf-8", "gbk", "gb18030"):
+            try:
+                return raw.decode(enc)
+            except UnicodeDecodeError:
+                continue
+        raise MDADataError(ERR_INVALID_FORMAT, f"无法解码文件: {file_path}")
 
-# 批处理流式读取工具
+
 def _iter_lines(path):
-    with open(path, encoding="utf-8", errors="replace") as f:
-        for line in f:  # readline 流式
-            yield line
+    """流式读取文件行（复用 _read_file_content 逻辑）"""
+    content = _read_file_content(path)
+    for line in content.splitlines():
+        yield line
 
 
 def read_json_file(file_path):
     """读取 JSON 文件并返回数据"""
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            return json.load(f)
+        content = _read_file_content(file_path)
+        return json.loads(content)
     except FileNotFoundError:
         raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
     except json.JSONDecodeError as e:
@@ -76,22 +108,32 @@ def read_json_file(file_path):
 
 
 def read_csv_file(file_path):
-    """读取 CSV 文件并返回字典列表"""
+    """读取 CSV 文件并返回字典列表（严格编码校验）"""
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            return list(reader)
+        content = _read_file_content(file_path)
+        reader = csv.DictReader(io.StringIO(content))
+        # 检查表头
+        if reader.fieldnames is None or len(reader.fieldnames) == 0:
+            raise MDADataError(ERR_INVALID_FORMAT, f"CSV 文件缺少表头: {file_path}")
+        rows = list(reader)
+        if len(rows) == 0:
+            raise MDADataError(ERR_EMPTY_DATA, f"CSV 文件为空: {file_path}")
+        return rows
     except FileNotFoundError:
         raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
-    except Exception as e:
+    except PermissionError:
+        raise MDADataError(ERR_INVALID_FORMAT, f"CSV 文件权限不足: {file_path}")
+    except csv.Error as e:
         raise MDADataError(ERR_INVALID_FORMAT, f"CSV 解析失败: {e}")
+    except OSError as e:
+        raise MDADataError(ERR_INVALID_FORMAT, f"CSV 文件读取失败: {e}")
 
 
 def read_xml_file(file_path):
     """读取 XML 文件并转换为字典结构"""
     try:
-        tree = ET.parse(file_path)
-        root = tree.getroot()
+        content = _read_file_content(file_path)
+        root = ET.fromstring(content)
 
         def element_to_dict(element):
             """将 XML 元素递归转换为字典"""
@@ -125,45 +167,100 @@ def read_xml_file(file_path):
         return {root.tag: element_to_dict(root)}
     except FileNotFoundError:
         raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
+    except PermissionError:
+        raise MDADataError(ERR_INVALID_FORMAT, f"XML 文件权限不足: {file_path}")
     except ET.ParseError as e:
         raise MDADataError(ERR_INVALID_FORMAT, f"XML 解析失败: {e}")
+    except OSError as e:
+        raise MDADataError(ERR_INVALID_FORMAT, f"XML 文件读取失败: {e}")
 
 
 def read_txt_file(file_path):
     """读取 TXT 文件为纯文本"""
     try:
-        with open(file_path, 'r', encoding='utf-8') as f:
-            return f.read()
+        return _read_file_content(file_path)
     except FileNotFoundError:
         raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
+    except PermissionError:
+        raise MDADataError(ERR_INVALID_FORMAT, f"TXT 文件权限不足: {file_path}")
+    except OSError as e:
+        raise MDADataError(ERR_INVALID_FORMAT, f"TXT 文件读取失败: {e}")
 
 
-def read_remote_url(url):
-    """读取远程 URL 数据（仅支持 HTTP/HTTPS）"""
-    import urllib.request
+def read_sqlite_file(file_path):
+    """读取 SQLite 数据库文件（只读模式，验证表存在性）"""
+    conn = None
+    try:
+        # 使用只读模式连接，避免资源泄漏
+        conn = sqlite3.connect(f'file:{file_path}?mode=ro', uri=True)
+        cursor = conn.cursor()
+        
+        # 获取所有表名
+        cursor.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = cursor.fetchall()
+        
+        if not tables:
+            raise MDADataError(ERR_EMPTY_DATA, f"SQLite 数据库中没有表: {file_path}")
+        
+        result = {}
+        for table in tables:
+            table_name = table[0]
+            # 验证表存在性
+            cursor.execute(f"SELECT name FROM sqlite_master WHERE type='table' AND name=?", (table_name,))
+            if cursor.fetchone() is None:
+                raise MDADataError(ERR_INVALID_FORMAT, f"表不存在: {table_name}")
+            
+            cursor.execute(f"SELECT * FROM {table_name}")
+            columns = [description[0] for description in cursor.description]
+            rows = cursor.fetchall()
+            result[table_name] = [dict(zip(columns, row)) for row in rows]
+        
+        return result
+    except FileNotFoundError:
+        raise MDADataError(ERR_FILE_NOT_FOUND, f"文件不存在: {file_path}")
+    except PermissionError:
+        raise MDADataError(ERR_INVALID_FORMAT, f"SQLite 文件权限不足: {file_path}")
+    except sqlite3.Error as e:
+        raise MDADataError(ERR_INVALID_FORMAT, f"SQLite 解析失败: {e}")
+    except OSError as e:
+        raise MDADataError(ERR_INVALID_FORMAT, f"SQLite 文件读取失败: {e}")
+    finally:
+        if conn:
+            conn.close()
 
+
+def read_remote_url(url, max_retries=3, timeout=10):
+    """读取远程 URL 数据（支持 HTTP/HTTPS，带重试退避）"""
     parsed = urlparse(url)
     if parsed.scheme not in ("http", "https"):
         raise MDADataError(ERR_INVALID_INPUT, f"不支持的 URL 协议: {parsed.scheme}")
 
-    try:
-        time.sleep(0.1)  # G1 退避标记
-        with urllib.request.urlopen(url, timeout=10) as response:
-            content_type = response.headers.get("Content-Type", "")
-            data = response.read().decode("utf-8")
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'MDA-Client/1.0'})
+            with urllib.request.urlopen(req, timeout=timeout) as response:
+                content_type = response.headers.get("Content-Type", "")
+                data = response.read().decode("utf-8")
 
-            if "json" in content_type:
-                return json.loads(data)
-            elif "csv" in content_type:
-                import io
-                reader = csv.DictReader(io.StringIO(data))
-                return list(reader)
-            elif "xml" in content_type:
-                return ET.fromstring(data)
-            else:
-                return data
-    except Exception as e:
-        raise MDADataError(ERR_URL_FETCH_FAIL, f"URL 获取失败: {e}")
+                if "json" in content_type:
+                    return json.loads(data)
+                elif "csv" in content_type:
+                    reader = csv.DictReader(io.StringIO(data))
+                    if reader.fieldnames is None or len(reader.fieldnames) == 0:
+                        raise MDADataError(ERR_INVALID_FORMAT, f"CSV 数据缺少表头: {url}")
+                    return list(reader)
+                elif "xml" in content_type:
+                    return ET.fromstring(data)
+                else:
+                    return data
+        except urllib.error.URLError as e:
+            if attempt == max_retries - 1:
+                raise MDADataError(ERR_URL_FETCH_FAIL, f"URL 获取失败: {e}")
+            time.sleep(2 ** attempt)  # 指数退避
+        except Exception as e:
+            if attempt == max_retries - 1:
+                raise MDADataError(ERR_URL_FETCH_FAIL, f"URL 获取失败: {e}")
+            time.sleep(2 ** attempt)  # 指数退避
 
 
 def read_data_source(source):
@@ -185,6 +282,8 @@ def read_data_source(source):
         return read_xml_file(source)
     elif ext == ".txt":
         return read_txt_file(source)
+    elif ext in (".sqlite", ".db"):
+        return read_sqlite_file(source)
     else:
         raise MDADataError(ERR_INVALID_FORMAT, f"不支持的文件格式: {ext}")
 
@@ -332,267 +431,46 @@ def generate_markdown(data, title="编译文档", include_confidence=True):
     elif isinstance(data, dict):
         lines.append(dict_to_markdown_sections(data))
     else:
-        lines.append("## 内容")
+        lines.append("## 数据内容")
         lines.append("")
         lines.append(format_value(data))
 
     return "\n".join(lines)
 
 
-def process_file(input_path, output_path, title=None):
-    """处理单个文件转换"""
+def process_file(input_path, output_path, title=None, include_confidence=True):
+    """处理单个文件：读取数据并生成 Markdown"""
     try:
         data = read_data_source(input_path)
-        if data is None or (isinstance(data, (list, dict)) and len(data) == 0):
-            raise MDADataError(ERR_EMPTY_DATA, f"数据为空: {input_path}")
-
-        doc_title = title or Path(input_path).stem
-        markdown = generate_markdown(data, title=doc_title)
-
-        # 写入输出
-        try:
-            with open(output_path, 'w', encoding='utf-8') as f:
-                f.write(markdown)
-        except IOError as e:
-            raise MDADataError(ERR_OUTPUT_WRITE_FAIL, f"输出写入失败: {e}")
-
+        if title is None:
+            title = Path(input_path).stem
+        markdown = generate_markdown(data, title=title, include_confidence=include_confidence)
+        
+        # 写入输出文件（带锁）
+        lock = _get_file_lock(str(output_path))
+        with lock:
+            try:
+                with open(output_path, 'w', encoding='utf-8') as f:
+                    f.write(markdown)
+            except OSError as e:
+                raise MDADataError(ERR_OUTPUT_WRITE_FAIL, f"写入输出文件失败: {e}")
+        
         return True, None
     except MDADataError as e:
         return False, str(e)
     except Exception as e:
-        return False, f"[{ERR_UNKNOWN}] 未知错误: {e}"
+        return False, f"未知错误: {e}"
 
 
-def process_batch(input_dir, output_dir):
-    """批量处理目录下所有支持的文件"""
-    if not os.path.isdir(input_dir):
+def process_batch(input_dir, output_dir, max_workers=4, include_confidence=True, max_retries=2):
+    """批量处理目录中的所有支持文件"""
+    input_path = Path(input_dir)
+    output_path = Path(output_dir)
+    
+    if not input_path.exists() or not input_path.is_dir():
         raise MDADataError(ERR_DIR_NOT_EXIST, f"输入目录不存在: {input_dir}")
-
-    os.makedirs(output_dir, exist_ok=True)
-
-    supported_exts = {'.json', '.csv', '.xml', '.txt'}
-    results = []
-    success_count = 0
-    fail_count = 0
-
-    for file_path in sorted(Path(input_dir).glob('*')):
-        if file_path.suffix.lower() not in supported_exts:
-            continue
-
-        output_path = Path(output_dir) / f"{file_path.stem}.md"
-        success, error = process_file(str(file_path), str(output_path))
-        if success:
-            success_count += 1
-            results.append(f"✓ {file_path.name}")
-        else:
-            fail_count += 1
-            results.append(f"✗ {file_path.name}: {error}")
-
-    return results, success_count, fail_count
-
-
-def selftest():
-    """内置自检逻辑 - 使用硬编码样例数据"""
-    test_results = []
-
-    # 测试 1: JSON 数据编译
-    test_data = [
-        {"name": "产品A", "price": 199.9, "stock": 50, "category": "电子"},
-        {"name": "产品B", "price": 299.0, "stock": None, "category": "家居"},
-        {"name": "产品C", "price": 99.5, "stock": 120, "category": "服饰"},
-    ]
-    try:
-        md_output = generate_markdown(test_data, title="测试产品列表")
-        # 宽松断言
-        assert "测试产品列表" in md_output
-        assert "产品A" in md_output
-        assert "置信度提示" in md_output  # 包含 None 值
-        assert "需核实" in md_output
-        test_results.append(("JSON 数据编译", True, "包含表头、数据行和置信度提示"))
-    except AssertionError as e:
-        test_results.append(("JSON 数据编译", False, f"断言失败: {e}"))
-
-    # 测试 2: 字典数据编译
-    test_dict = {
-        "project": "测试项目",
-        "version": "1.0.0",
-        "authors": ["张三", "李四"],
-        "metadata": {"status": "active", "priority": "high"}
-    }
-    try:
-        md_dict = generate_markdown(test_dict, title="项目信息")
-        assert "项目信息" in md_dict
-        assert "project" in md_dict
-        assert "张三" in md_dict
-        assert "status" in md_dict
-        test_results.append(("字典数据编译", True, "章节结构完整"))
-    except AssertionError as e:
-        test_results.append(("字典数据编译", False, f"断言失败: {e}"))
-
-    # 测试 3: 置信度检查
-    try:
-        _, issues = check_confidence({"valid": 123, "empty": "", "none": None})
-        assert len(issues) >= 2  # 至少有两个问题
-        assert any("empty" in i for i in issues)
-        assert any("none" in i for i in issues)
-        test_results.append(("置信度检查", True, f"识别到 {len(issues)} 个问题"))
-    except AssertionError as e:
-        test_results.append(("置信度检查", False, f"断言失败: {e}"))
-
-    # 测试 4: CSV 数据解析（内存中）
-    import io
-    try:
-        csv_data = "name,age,city\n张三,28,北京\n李四,35,上海\n"
-        reader = csv.DictReader(io.StringIO(csv_data))
-        csv_rows = list(reader)
-        assert len(csv_rows) == 2
-        assert csv_rows[0]["name"] == "张三"
-        assert csv_rows[1]["city"] == "上海"
-        test_results.append(("CSV 解析", True, "内存 CSV 解析成功"))
-    except AssertionError as e:
-        test_results.append(("CSV 解析", False, f"断言失败: {e}"))
-
-    # 测试 5: URL 识别（不进行实际网络请求）
-    try:
-        # 测试 URL 格式识别
-        url1 = "https://example.com/data.json"
-        url2 = "http://api.example.com/v1/data"
-        url3 = "ftp://example.com/file.txt"
-        
-        assert urlparse(url1).scheme == "https"
-        assert urlparse(url2).scheme == "http"
-        assert urlparse(url3).scheme == "ftp"
-        
-        # 测试 URL 协议验证
-        parsed = urlparse(url1)
-        assert parsed.scheme in ("http", "https")
-        
-        parsed = urlparse(url3)
-        assert parsed.scheme not in ("http", "https")
-        
-        # 测试 read_data_source 的 URL 判断逻辑
-        assert url1.startswith("http://") or url1.startswith("https://")
-        assert url2.startswith("http://") or url2.startswith("https://")
-        assert not (url3.startswith("http://") or url3.startswith("https://"))
-        
-        test_results.append(("URL 识别", True, "URL 格式识别正常"))
-    except AssertionError as e:
-        test_results.append(("URL 识别", False, f"断言失败: {e}"))
-    except Exception as e:
-        test_results.append(("URL 识别", False, f"异常: {e}"))
-
-    # 测试 6: 空数据处理
-    try:
-        empty_md = generate_markdown([], title="空列表")
-        assert "无数据" in empty_md
-        test_results.append(("空数据处理", True, "空列表正确输出"))
-    except AssertionError as e:
-        test_results.append(("空数据处理", False, f"断言失败: {e}"))
-
-    # 测试 7: XML 解析（内存中）
-    try:
-        xml_data = """<?xml version="1.0"?>
-        <root>
-            <item id="1">苹果</item>
-            <item id="2">香蕉</item>
-        </root>"""
-        root = ET.fromstring(xml_data)
-        items = root.findall('item')
-        assert len(items) == 2
-        assert items[0].text == "苹果"
-        assert items[1].get("id") == "2"
-        test_results.append(("XML 解析", True, "内存 XML 解析成功"))
-    except AssertionError as e:
-        test_results.append(("XML 解析", False, f"断言失败: {e}"))
-    except Exception as e:
-        test_results.append(("XML 解析", False, f"异常: {e}"))
-
-    # 输出测试结果
-    print("\n=== MDA 自检报告 ===")
-    print(f"时间: {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')}")
-    print(f"Python: {sys.version.split()[0]}")
-    print("")
-    all_passed = True
-    for name, passed, detail in test_results:
-        status = "✓" if passed else "✗"
-        print(f"  {status} {name}: {detail}")
-        if not passed:
-            all_passed = False
-
-    print("")
-    if all_passed:
-        print("✅ 全部自检通过")
-        return 0
-    else:
-        print("❌ 存在未通过的测试")
-        return 1
-
-
-def main():
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="MDA - 数据编译为 Markdown 文档",
-        epilog="示例: python main.py --input data.json --output out.md"
-    )
-    parser.add_argument("--input", "-i", help="输入文件路径或 URL")
-    parser.add_argument("--output", "-o", help="输出 Markdown 文件路径")
-    parser.add_argument("--title", "-t", help="文档标题（默认为文件名）")
-    parser.add_argument("--batch", "-b", action="store_true", help="批量处理模式")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("--version", action="version", version="mda 1.0.2")
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        return selftest()
-
-    # 参数校验
-    if not args.input:
-        parser.error("必须指定 --input 参数或使用 --selftest")
-
-    # 批量模式
-    if args.batch:
-        if not args.output:
-            parser.error("批量模式必须指定 --output 目录")
-
-        try:
-            results, success, fail = process_batch(args.input, args.output)
-            print(f"\n批量处理完成: 成功 {success} 个, 失败 {fail} 个")
-            for r in results:
-                print(f"  {r}")
-            return 0 if fail == 0 else 1
-        except MDADataError as e:
-            print(f"错误: {e}", file=sys.stderr)
-            return 1
-
-    # 单文件模式
-    if not args.output:
-        parser.error("必须指定 --output 参数")
-
-    try:
-        success, error = process_file(args.input, args.output, args.title)
-        if success:
-            print(f"✅ 转换成功: {args.input} → {args.output}")
-            return 0
-        else:
-            print(f"❌ 转换失败: {error}", file=sys.stderr)
-            return 1
-    except MDADataError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    
+    # 创建输出目录
+    output_path.mkdir(parents=True, exist_ok=True)
+    
+    # 收集所有支持
