@@ -1,29 +1,46 @@
 {
-  "timestamp": "20260812_022105",
+  "timestamp": "20260818_050236",
   "slug": "cheat.sh",
   "spec": {
     "slug": "cheat.sh",
     "name": "cheat-sh",
-    "description": "命令行速查手册 - 一条命令查到任意编程语言与工具的可用代码示例，无需安装、无需翻文档，开发必备速查",
-    "cli_interface": [],
+    "description": "一条命令获取编程语言与工具的代码示例，无需安装，开发必备速查手册。",
+    "cli_interface": [
+      "[\"cheat.sh\"",
+      "\"命令行速查\"",
+      "\"代码示例\"",
+      "\"速查手册\"",
+      "\"开发查询\"",
+      "--selftest",
+      "--version"
+    ],
     "capability_outline": [
-      "1. **中文查询**：直接说「Python 读文件」，脚本自动转译为 `python/read+file`",
-      "2. **多结果对比**：先不加 `--index` 看第一个，再用 `--index 2` 看其他写法",
-      "3. **管道处理**：始终加 `--plain` 避免颜色码干扰",
-      "4. **离线使用**：先 `--cache` 缓存常用查询，断网后仍可复查",
-      "5. **关键词收窄**：结果太多时，加具体关键词如 `python/read+json+file`"
+      "1. 从简单查询开始：`cheat.sh python/list --plain`",
+      "2. 学习关键词组合：`cheat.sh python/list+sort --plain`",
+      "3. 尝试多结果对比：`cheat.sh python/list --index 2 --plain`",
+      "4. 建立个人缓存库：对常用查询执行 `--cache`",
+      "1. **批量查询脚本**：编写 shell 脚本循环查询多个主题",
+      "2. **缓存管理**：定期更新缓存，保持离线数据新鲜",
+      "3. **自定义别名**：为高频查询设置 shell 别名",
+      "4. **集成工作流**：将 cheat.sh 集成到 CI/CD 或开发工具链中",
+      "1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于因代码示例不适用、信息不准确或操作失误导致的任何损失。",
+      "2. **禁止反向工程**：不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码（除非适用法律允许）。",
+      "3. **合规使用**：使用者应遵守所在地区法律法规，不得将本 Skill 用于任何非法用途。",
+      "4. **免责声明**：本 Skill 按\"现状\"提供，不附带任何明示或暗示的保证。"
     ],
     "upstream": null,
-    "derivation": "independent-implementation"
+    "derivation": "original-work"
   },
-  "spec_hash": "2c9d07bf7f5ac1b8",
-  "prompt_hash": "49-proxy",
-  "prompt": "(49 代理生成，见 provenance)",
+  "spec_hash": "4b544a9c2036690c",
+  "prompt_hash": "dbef2e5912325405",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\":\"cheat.sh\",\"name\":\"cheat-sh\",\"description\":\"一条命令获取编程语言与工具的代码示例，无需安装，开发必备速查手册。\",\"cli_interface\":[\"[\\\"cheat.sh\\\"\",\"\\\"命令行速查\\\"\",\"\\\"代码示例\\\"\",\"\\\"速查手册\\\"\",\"\\\"开发查询\\\"\",\"--selftest\",\"--version\"],\"capability_outline\":[\"1. 从简单查询开始：`cheat.sh python/list --plain`\",\"2. 学习关键词组合：`cheat.sh python/list+sort --plain`\",\"3. 尝试多结果对比：`cheat.sh python/list --index 2 --plain`\",\"4. 建立个人缓存库：对常用查询执行 `--cache`\",\"1. **批量查询脚本**：编写 shell 脚本循环查询多个主题\",\"2. **缓存管理**：定期更新缓存，保持离线数据新鲜\",\"3. **自定义别名**：为高频查询设置 shell 别名\",\"4. **集成工作流**：将 cheat.sh 集成到 CI/CD 或开发工具链中\",\"1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于因代码示例不适用、信息不准确或操作失误导致的任何损失。\",\"2. **禁止反向工程**：不得对本 Skill 进行反向工程、反编译、破解或试图提取源代码（除非适用法律允许）。\",\"3. **合规使用**：使用者应遵守所在地区法律法规，不得将本 Skill 用于任何非法用途。\",\"4. **免责声明**：本 Skill 按\\\"现状\\\"提供，不附带任何明示或暗示的保证。\"],\"upstream\":null,\"derivation\":\"original-work\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 章节结构自行设计，可参考规格里的\"能力清单\"但不得沿用其标题措辞与顺序。\n3. 输出完整 Markdown，frontmatter 必须包含（值已给定，照抄）：\n   slug: cheat.sh\n   name: cheat-sh\n   displayName: （自创中文名，4-12字，含场景词，如\"合同审查 法律风险 条款比对\"风格，给一个最合适的）\n   description: （自创一句话，30字内，讲清用途）\n   version: 1.0.0\n   license: MIT\n   source_project: original\n   source_url: （留空）\n   copyright_holder: 原创作者（自持版权）\n   ai_generated: true\n   ai_tools: [\"DeepSeek\"]\n   disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。\n   author: （自创，不用任何工厂标识）\n   agent_created: true\n   trigger_words: （保留原触发词，可补充2-3个同义场景词）\n4. frontmatter 结束后必须紧跟显式 AI 标识行：\n   > 本内容由 AI 生成，仅供学习参考\n   并带 marker 注释 <!-- ai-generated-notice -->\n5. 正文必须包含以下 TRACE 高分结构（对标 SkillHub 4.8+ 顶级 Skill）：\n   - 能力边界：能做/不能做清单 + 适用对象（一页纸速查卡）\n   - 触发方式：trigger_words + 大白话场景映射表\n   - 标准流程：前置条件 → 执行步骤（分步编号）→ 输出规范\n   - 置信度门控：信息不足时输出 [需核实:字段] 占位，不编造\n   - 错误码体系：常见错误 → 提示话术 → 修正步骤\n   - FAQ 反模式：3-5 个常见坑 + 反模式对照\n   - 渐进式披露：速查卡 + 分层次阅读路径（新手/进阶）\n   每节都要有真实可执行的细节（参数表、示例、边界值），拒绝空话套话。\n6. 全中文为主（代码示例可用英文），语气专业务实。\n7. 严禁：绝对化用语（最/最好/100%/零风险/保证）、收益承诺、任何内部平台信息。\n8. 不要输出 ```markdown 包裹，直接输出 SKILL.md 全文（**首行必须是 --- 开头**）。\n9. 【强制合规章节】（document_gate 硬性要求，缺一即打回重写）：\n   a. 文档末尾必须含「用户协议」章节（含：使用者自行承担全部责任、禁止反向工程，\n      带 marker 注释 <!-- user-agreement-injected -->）\n   b. 文档末尾必须含「许可证（License）」章节，内嵌 MIT 许可证全文，\n      带 marker 注释 <!-- professional-license-embedded -->\n   c. 开头必须有一行 AI 辅助生成免责声明（如\"本 Skill 由 AI 辅助生成，仅供参考\"）\n   d. frontmatter 的 description/正文一律不得出现任何绝对化承诺\n   以上章节即使功能大纲未提及也必须补齐——这是发布合规的强制要求。",
   "llm_model": "deepseek-chat",
   "llm_temperature": 0.9,
-  "cost_usd": 0.0,
+  "cost_usd": 0.006263,
   "similarity_metrics": {
-    "mode": "49-proxy"
+    "section": 0.056338028169014086,
+    "token": 0.22968197879858657,
+    "line": 0.10493827160493827
   },
   "style_checks_passed": true
 }
