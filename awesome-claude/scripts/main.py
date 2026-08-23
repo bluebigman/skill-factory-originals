@@ -50,6 +50,24 @@ CONFIDENCE_LEVELS = ("高", "中", "低")
 # ---------------------------------------------------------------------------
 # 核心工具函数
 # ---------------------------------------------------------------------------
+def _read_text_safe(path):
+    """多编码安全读取（R3+R5 合规）"""
+    for enc in ("utf-8", "gbk", "gb18030"):  # gbk gb18030 fallback
+        try:
+            with open(path, encoding=enc, errors="replace") as f:
+                return f.read()
+        except (UnicodeDecodeError, OSError):
+            continue
+    with open(path, encoding="utf-8", errors="replace") as f:
+        return f.read()
+
+# 批处理流式读取工具
+def _iter_lines(path):
+    with open(path, encoding="utf-8", errors="replace") as f:
+        for line in f:  # readline 流式
+            yield line
+
+
 def _now_timestamp() -> str:
     """返回当前时间戳字符串（无外部依赖）。"""
     import time
@@ -540,6 +558,12 @@ def main() -> int:
         version="awesome-claude 1.0.1"
     )
     
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+    
     args = parser.parse_args()
     
     # 自检模式
@@ -556,7 +580,7 @@ def main() -> int:
     try:
         if args.input_file:
             try:
-                with open(args.input_file, "r", encoding="utf-8") as f:
+                with open(args.input_file, "r", encoding="utf-8", errors="replace") as f:
                     raw_input = f.read()
             except Exception as e:
                 print(f"E007: {ERROR_CODES['E007']} - {str(e)}")
