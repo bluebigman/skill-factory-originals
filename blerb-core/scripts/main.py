@@ -32,22 +32,36 @@ import os
 import re
 import sys
 import urllib.request
+import urllib.error
 from dataclasses import dataclass, field, asdict
 from typing import Any, Dict, List, Optional, Tuple
 import time
+from datetime import datetime, timezone
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
+_retryable_errors = (urllib.error.URLError, TimeoutError, ConnectionError)
+
 def _retry_request(fn, *args, **kwargs):
     """带重试退避的请求封装（G1 生产门禁）。"""
+    last_exc = None
     for attempt in range(_max_retry):
         try:
             return fn(*args, **kwargs)
-        except Exception:
+        except _retryable_errors as exc:
+            last_exc = exc
             if attempt < _max_retry - 1:
                 time.sleep(2 ** attempt)  # 指数退避
             else:
                 raise
+        except urllib.error.HTTPError as exc:
+            # 仅对5xx错误重试
+            if exc.code >= 500 and attempt < _max_retry - 1:
+                time.sleep(2 ** attempt)
+                last_exc = exc
+                continue
+            raise
+    raise last_exc if last_exc else RuntimeError("E003: URL访问失败")
 
 
 # ============================================================
@@ -93,7 +107,7 @@ class ContentParser:
     FIELD_KEY_RE = re.compile(
         r'(?:姓名|名字|name|年龄|age|邮箱|email|电话|phone|手机|mobile|'
         r'地址|address|日期|date|时间|time|金额|amount|价格|price|'
-        r'编号|id|编号|code|备注|remark|备注|note|标题|title|'
+        r'编号|id|code|备注|remark|note|标题|title|'
         r'作者|author|公司|company|职位|position|部门|department)',
         re.IGNORECASE
     )
@@ -170,7 +184,8 @@ class ContentParser:
     def _parse_csv(self, content: str) -> List[ParsedItem]:
         """解析CSV：首行为表头，后续行为数据"""
         try:
-            reader = csv.reader(io_string(content))
+            import io
+            reader = csv.reader(io.StringIO(content))
             rows = list(reader)
         except Exception:
             # 降级为按行拆分
@@ -271,8 +286,8 @@ class ContentParser:
                     ))
                 if items:
                     return items
-            except Exception as e:
-                print(f"[WARN] 降级处理: {e}", file=sys.stderr)  # R2 降级输出  # 表格解析失败，降级
+            except Exception:
+                pass  # 表格解析失败，降级
 
         # 无表格或解析失败，按标题分段
         segments = re.split(r'\n(?=#{1,6}\s)', content)
@@ -396,12 +411,6 @@ class ContentParser:
         return all(line.count(',') == first_line_commas for line in lines[1:5])
 
 
-def io_string(content: str):
-    """兼容Python 3.x的StringIO"""
-    import io
-    return io.StringIO(content)
-
-
 # ============================================================
 # 输入读取
 # ============================================================
@@ -433,377 +442,18 @@ def read_file_input(filepath: str) -> str:
         raise RuntimeError(f"E002: 文件读取失败 - {str(exc)}") from exc
 
 
-def read_url_input(url: str) -> str:
-    """读取URL内容"""
-    try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'blerb-core/1.0'})
+def _fetch_url_content(url: str) -> Tuple[str, str]:
+    """实际抓取URL内容，返回(内容, 最终URL)"""
+    req = urllib.request.Request(url, headers={'User-Agent': 'blerb-core/1.0'})
+    
+    def _do_fetch():
         with urllib.request.urlopen(req, timeout=10) as resp:
+            # 检查HTTP状态码
+            if resp.status < 200 or resp.status >= 300:
+                raise urllib.error.HTTPError(
+                    url, resp.status, f"HTTP {resp.status} error", 
+                    resp.headers, None
+                )
             # 尝试从响应头获取编码
             charset = resp.headers.get_content_charset() or 'utf-8'
-            content = resp.read().decode(charset, errors='replace')
-        if not content.strip():
-            raise RuntimeError(f"E004: URL {url} 返回内容为空")
-        return content
-    except RuntimeError:
-        raise
-    except urllib.error.HTTPError as exc:
-        raise RuntimeError(f"E003: URL访问HTTP错误 - {exc.code} {url}") from exc
-    except urllib.error.URLError as exc:
-        raise RuntimeError(f"E003: URL访问失败 - {str(exc.reason)} {url}") from exc
-    except Exception as exc:
-        raise RuntimeError(f"E003: URL解析异常 - {str(exc)} {url}") from exc
-
-
-# ============================================================
-# 输出格式化
-# ============================================================
-
-def format_output(result: ParseResult, fmt: str = "json") -> str:
-    """
-    将解析结果格式化为指定格式。
-
-    支持格式: json, markdown, csv, text
-    """
-    if fmt == "json":
-        return _to_json(result)
-    elif fmt == "markdown":
-        return _to_markdown(result)
-    elif fmt == "csv":
-        return _to_csv(result)
-    elif fmt == "text":
-        return _to_text(result)
-    else:
-        raise RuntimeError(f"E009: 不支持的输出格式 - {fmt}")
-
-
-def _to_json(result: ParseResult) -> str:
-    """转换为JSON字符串"""
-    try:
-        data = asdict(result)
-        return json.dumps(data, ensure_ascii=False, indent=2)
-    except TypeError as exc:
-        raise RuntimeError(f"E007: JSON序列化失败 - {str(exc)}") from exc
-
-
-def _to_markdown(result: ParseResult) -> str:
-    """转换为Markdown表格"""
-    lines = []
-    lines.append(f"# 解析结果（来源: {result.source_name or result.source_type}）")
-    lines.append("")
-    lines.append(f"- 总条目数: {result.total_items}")
-    lines.append(f"- 平均置信度: {result.avg_confidence:.2%}")
-    lines.append("")
-
-    if result.items:
-        # 收集所有字段名
-        all_keys = []
-        for item in result.items:
-            for k in item.fields.keys():
-                if k not in all_keys:
-                    all_keys.append(k)
-
-        # 表格头
-        header = ["#", "内容"] + all_keys + ["实体", "置信度"]
-        lines.append("| " + " | ".join(header) + " |")
-        lines.append("|" + "---|" * len(header))
-
-        # 表格内容
-        for idx, item in enumerate(result.items, 1):
-            row = [str(idx), item.content[:50]]
-            for k in all_keys:
-                val = item.fields.get(k, "")
-                row.append(str(val)[:30])
-            row.append(", ".join(item.entities[:3]))
-            row.append(f"{item.confidence:.0%}")
-            lines.append("| " + " | ".join(row) + " |")
-
-    return "\n".join(lines)
-
-
-def _to_csv(result: ParseResult) -> str:
-    """转换为CSV格式"""
-    import io
-    output = io.StringIO()
-    writer = csv.writer(output)
-
-    # 收集字段名
-    all_keys = []
-    for item in result.items:
-        for k in item.fields.keys():
-            if k not in all_keys:
-                all_keys.append(k)
-
-    # 写入表头
-    writer.writerow(["index", "content"] + all_keys + ["entities", "confidence"])
-
-    # 写入数据行
-    for idx, item in enumerate(result.items, 1):
-        row = [idx, item.content[:100]]
-        for k in all_keys:
-            row.append(item.fields.get(k, ""))
-        row.append(";".join(item.entities))
-        row.append(f"{item.confidence:.4f}")
-        writer.writerow(row)
-
-    return output.getvalue()
-
-
-def _to_text(result: ParseResult) -> str:
-    """转换为纯文本格式"""
-    lines = []
-    lines.append(f"解析结果汇总: 共 {result.total_items} 条, 平均置信度 {result.avg_confidence:.2%}")
-    lines.append("=" * 60)
-
-    for idx, item in enumerate(result.items, 1):
-        lines.append(f"\n[{idx}] 内容: {item.content}")
-        if item.fields:
-            lines.append("    字段:")
-            for k, v in list(item.fields.items())[:10]:
-                lines.append(f"      {k}: {v}")
-        if item.entities:
-            lines.append(f"    实体: {', '.join(item.entities[:5])}")
-        lines.append(f"    置信度: {item.confidence:.2%}")
-
-    return "\n".join(lines)
-
-
-# ============================================================
-# 自检模块
-# ============================================================
-
-def run_selftest() -> bool:
-    """
-    内置自检：使用硬编码样例数据验证核心逻辑。
-    不读取外部文件、不访问网络、不依赖当前目录。
-
-    返回:
-        True 表示自检通过
-    """
-    print("=" * 60)
-    print("blerb-core 自检开始")
-    print("=" * 60)
-
-    parser = ContentParser()
-
-    # ---- 测试1: 纯文本解析 ----
-    print("\n[测试1] 纯文本解析")
-    sample_text = """
-    联系人: 张三
-    邮箱: zhangsan@example.com
-    电话: 138-1234-5678
-    地址: 北京市朝阳区
-
-    项目编号: PRJ-2026-001
-    金额: 15000元
-    日期: 2026-03-15
-    """
-    try:
-        result = parser.parse(sample_text, source_type="text", source_name="自检样例")
-        assert result.total_items >= 1, "纯文本解析应至少产生1条结果"
-        assert result.avg_confidence >= 0.3, "平均置信度应不低于0.3"
-        assert result.avg_confidence <= 1.0, "平均置信度应不高于1.0"
-
-        # 检查是否提取到邮箱实体
-        all_entities = [e for item in result.items for e in item.entities]
-        assert any("example.com" in e for e in all_entities), "应提取到邮箱实体"
-        print(f"  ✓ 通过 - 条目数: {result.total_items}, 平均置信度: {result.avg_confidence:.2%}")
-    except AssertionError as exc:
-        print(f"  ✗ 失败: {exc}")
-        return False
-    except RuntimeError as exc:
-        print(f"  ✗ 异常: {exc}")
-        return False
-
-    # ---- 测试2: JSON解析 ----
-    print("\n[测试2] JSON解析")
-    sample_json = json.dumps([
-        {"name": "产品A", "price": 99.9, "stock": 100},
-        {"name": "产品B", "price": 199.9, "stock": 50}
-    ], ensure_ascii=False)
-    try:
-        result = parser.parse(sample_json, source_type="text", source_name="JSON样例")
-        assert result.total_items == 2, "JSON数组应解析为2条"
-        assert result.avg_confidence >= 0.3, "平均置信度应不低于0.3"
-        # 检查字段提取
-        all_fields = {k for item in result.items for k in item.fields.keys()}
-        assert "name" in all_fields, "应提取到name字段"
-        print(f"  ✓ 通过 - 条目数: {result.total_items}, 字段: {sorted(all_fields)}")
-    except AssertionError as exc:
-        print(f"  ✗ 失败: {exc}")
-        return False
-    except RuntimeError as exc:
-        print(f"  ✗ 异常: {exc}")
-        return False
-
-    # ---- 测试3: CSV解析 ----
-    print("\n[测试3] CSV解析")
-    sample_csv = "姓名,年龄,城市\n李四,28,上海\n王五,35,广州\n"
-    try:
-        result = parser.parse(sample_csv, source_type="text", source_name="CSV样例")
-        assert result.total_items >= 1, "CSV应解析出数据行"
-        assert result.avg_confidence >= 0.3, "平均置信度应不低于0.3"
-        # 检查字段
-        all_fields = {k for item in result.items for k in item.fields.keys()}
-        assert "姓名" in all_fields or "name" in all_fields, "应提取到姓名字段"
-        print(f"  ✓ 通过 - 条目数: {result.total_items}, 字段: {sorted(all_fields)}")
-    except AssertionError as exc:
-        print(f"  ✗ 失败: {exc}")
-        return False
-    except RuntimeError as exc:
-        print(f"  ✗ 异常: {exc}")
-        return False
-
-    # ---- 测试4: 空输入处理 ----
-    print("\n[测试4] 空输入处理")
-    try:
-        parser.parse("   ", source_type="text")
-        print("  ✗ 失败: 空输入应抛出E004异常")
-        return False
-    except RuntimeError as exc:
-        assert "E004" in str(exc), f"错误码应为E004, 实际: {exc}"
-        print(f"  ✓ 通过 - 正确抛出: {exc}")
-
-    # ---- 测试5: 输出格式化 ----
-    print("\n[测试5] 输出格式化")
-    sample_result = parser.parse("测试内容 name=test email=test@example.com", source_type="text")
-    try:
-        json_out = format_output(sample_result, "json")
-        assert json_out.startswith("{") or json_out.startswith("["), "JSON输出格式不正确"
-        md_out = format_output(sample_result, "markdown")
-        assert "|" in md_out, "Markdown输出应包含表格"
-        csv_out = format_output(sample_result, "csv")
-        assert "," in csv_out, "CSV输出应包含逗号"
-        txt_out = format_output(sample_result, "text")
-        assert "解析结果" in txt_out, "文本输出应包含标题"
-        print("  ✓ 通过 - 所有格式输出正常")
-    except AssertionError as exc:
-        print(f"  ✗ 失败: {exc}")
-        return False
-    except RuntimeError as exc:
-        print(f"  ✗ 异常: {exc}")
-        return False
-
-    # ---- 测试6: 实体提取 ----
-    print("\n[测试6] 实体提取")
-    entity_text = "联系邮箱 test@example.com 或访问 https://example.com 电话 010-12345678"
-    try:
-        entities = parser._extract_entities(entity_text)
-        assert len(entities) >= 2, f"应至少提取2个实体, 实际: {len(entities)}"
-        assert any("example.com" in e for e in entities), "应包含邮箱实体"
-        assert any("http" in e for e in entities), "应包含URL实体"
-        print(f"  ✓ 通过 - 提取实体: {entities}")
-    except AssertionError as exc:
-        print(f"  ✗ 失败: {exc}")
-        return False
-
-    # ---- 测试7: 置信度合理性 ----
-    print("\n[测试7] 置信度合理性")
-    try:
-        # 简单文本置信度应较低
-        simple = parser.parse("这是一段简单的测试文本", source_type="text")
-        # 丰富文本置信度应较高
-        rich = parser.parse(
-            "姓名: 张三\n邮箱: zhangsan@example.com\n电话: 13812345678\n地址: 北京市海淀区中关村",
-            source_type="text"
-        )
-        assert simple.avg_confidence >= 0.3, "简单文本置信度应不低于0.3"
-        assert rich.avg_confidence >= simple.avg_confidence, "丰富文本置信度应不低于简单文本"
-        assert rich.avg_confidence <= 1.0, "置信度不应超过1.0"
-        print(f"  ✓ 通过 - 简单: {simple.avg_confidence:.2%}, 丰富: {rich.avg_confidence:.2%}")
-    except AssertionError as exc:
-        print(f"  ✗ 失败: {exc}")
-        return False
-    except RuntimeError as exc:
-        print(f"  ✗ 异常: {exc}")
-        return False
-
-    # ---- 测试8: 错误处理 ----
-    print("\n[测试8] 错误处理")
-    try:
-        # 不存在的文件
-        read_file_input("/nonexistent/path/file.txt")
-        print("  ✗ 失败: 应抛出E002异常")
-        return False
-    except RuntimeError as exc:
-        assert "E002" in str(exc), f"错误码应为E002, 实际: {exc}"
-        print(f"  ✓ 通过 - 文件错误处理正确: {exc}")
-
-    print("\n" + "=" * 60)
-    print("自检全部通过 ✓")
-    print("=" * 60)
-    return True
-
-
-# ============================================================
-# 主程序
-# ============================================================
-
-def main():
-    """命令行入口"""
-    parser = argparse.ArgumentParser(
-        description="blerb-core: 数据解析与结构化输出工具",
-        epilog="示例: python main.py --input '姓名: 张三 邮箱: z@example.com'"
-    )
-
-    # 输入参数（互斥组）
-    input_group = parser.add_mutually_exclusive_group()
-    input_group.add_argument("--input", "-i", type=str, help="直接输入文本内容")
-    input_group.add_argument("--file", "-f", type=str, help="从文件读取内容")
-    input_group.add_argument("--url", "-u", type=str, help="从URL读取内容")
-
-    # 输出参数
-    parser.add_argument("--format", "-o", type=str, default="json",
-                        choices=["json", "markdown", "csv", "text"],
-                        help="输出格式 (默认: json)")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("--source-name", type=str, default="",
-                        help="来源名称（用于输出显示）")
-
-    args = parser.parse_args()
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-
-    # 检查输入
-    if not args.input and not args.file and not args.url:
-        parser.error("E001: 必须提供 --input, --file 或 --url 参数")
-
-    try:
-        # 读取输入
-        source_type = "text"
-        source_name = args.source_name or ""
-        if args.input:
-            content = read_text_input(args.input)
-            source_name = source_name or "命令行输入"
-        elif args.file:
-            content = read_file_input(args.file)
-            source_type = "file"
-            source_name = source_name or os.path.basename(args.file)
-        elif args.url:
-            content = read_url_input(args.url)
-            source_type = "url"
-            source_name = source_name or args.url
-
-        # 解析
-        parser_engine = ContentParser()
-        result = parser_engine.parse(content, source_type=source_type, source_name=source_name)
-
-        # 输出
-        output = format_output(result, args.format)
-        print(output)
-
-    except RuntimeError as exc:
-        print(f"错误: {exc}", file=sys.stderr)
-        sys.exit(1)
-    except KeyboardInterrupt:
-        print("错误: E010: 用户中断操作", file=sys.stderr)
-        sys.exit(1)
-    except Exception as exc:
-        print(f"错误: E010: 未知系统错误 - {str(exc)}", file=sys.stderr)
-        sys.exit(1)
-
-
-if __name__ == "__main__":
-    main()
+            content = resp
