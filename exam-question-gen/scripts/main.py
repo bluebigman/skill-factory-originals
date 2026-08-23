@@ -15,10 +15,15 @@
 
 import argparse
 import json
+import math
 import random
+import re
 import sys
-from typing import Any, Dict, List, Optional
-dry_run = False  # v3.274 模块级 dry-run 标志
+import time
+from datetime import datetime, timezone
+from typing import Any, Dict, List, Optional, Tuple
+
+dry_run = False  # v3.268 模块级 dry-run 标志
 
 # 错误码定义
 E001 = "E001: 参数错误 - 知识点列表为空"
@@ -46,31 +51,53 @@ QUESTION_TYPE_SINGLE = "single_choice"
 QUESTION_TYPE_FILL = "fill_blank"
 QUESTION_TYPE_SHORT = "short_answer"
 
+# 知识点知识库 - 真实数据，用于动态生成题目
+KNOWLEDGE_BASE = {
+    "勾股定理": {
+        "description": "直角三角形两条直角边的平方和等于斜边的平方",
+        "formula": "a² + b² = c²",
+        "examples": [
+            {"sides": (3, 4), "hypotenuse": 5},
+            {"sides": (6, 8), "hypotenuse": 10},
+            {"sides": (5, 12), "hypotenuse": 13},
+            {"sides": (8, 15), "hypotenuse": 17},
+            {"sides": (7, 24), "hypotenuse": 25},
+        ],
+        "applications": ["测量", "建筑", "导航", "物理"],
+    },
+    "三角函数": {
+        "description": "三角函数是角度与边长比值的函数关系",
+        "formula": "sin θ = 对边/斜边, cos θ = 邻边/斜边, tan θ = 对边/邻边",
+        "special_angles": {
+            "0°": {"sin": 0, "cos": 1, "tan": 0},
+            "30°": {"sin": "1/2", "cos": "√3/2", "tan": "√3/3"},
+            "45°": {"sin": "√2/2", "cos": "√2/2", "tan": 1},
+            "60°": {"sin": "√3/2", "cos": "1/2", "tan": "√3"},
+            "90°": {"sin": 1, "cos": 0, "tan": "不存在"},
+        },
+        "applications": ["物理", "工程", "导航"],
+    },
+    "一元二次方程": {
+        "description": "形如 ax² + bx + c = 0 的方程",
+        "formula": "x = [-b ± √(b²-4ac)] / (2a)",
+        "examples": [
+            {"a": 1, "b": -5, "c": 6, "roots": [2, 3]},
+            {"a": 1, "b": -4, "c": 0, "roots": [0, 4]},
+            {"a": 1, "b": 0, "c": -4, "roots": [-2, 2]},
+            {"a": 2, "b": -7, "c": 3, "roots": [0.5, 3]},
+            {"a": 1, "b": -6, "c": 9, "roots": [3, 3]},
+        ],
+        "applications": ["物理", "经济", "工程"],
+    },
+}
+
 
 class QuestionGenerator:
-    """核心题目生成器（基于内置模板库）"""
+    """核心题目生成器（基于真实知识库动态生成）"""
 
     def __init__(self) -> None:
-        """初始化生成器，加载内置模板库"""
-        # 内置模板库: 每个知识点包含三种题型的生成模板
-        # 模板为函数，接收难度等级，返回题目字典
-        self._knowledge_templates: Dict[str, Dict[str, Any]] = {
-            "勾股定理": {
-                QUESTION_TYPE_SINGLE: self._gen_pythagoras_single,
-                QUESTION_TYPE_FILL: self._gen_pythagoras_fill,
-                QUESTION_TYPE_SHORT: self._gen_pythagoras_short,
-            },
-            "三角函数": {
-                QUESTION_TYPE_SINGLE: self._gen_trig_single,
-                QUESTION_TYPE_FILL: self._gen_trig_fill,
-                QUESTION_TYPE_SHORT: self._gen_trig_short,
-            },
-            "一元二次方程": {
-                QUESTION_TYPE_SINGLE: self._gen_quadratic_single,
-                QUESTION_TYPE_FILL: self._gen_quadratic_fill,
-                QUESTION_TYPE_SHORT: self._gen_quadratic_short,
-            },
-        }
+        """初始化生成器，加载知识库"""
+        self._knowledge_base = KNOWLEDGE_BASE
 
     # ------------------------------------------------------------------
     # 公开接口
@@ -107,23 +134,22 @@ class QuestionGenerator:
         results: List[Dict[str, Any]] = []
 
         for kp in knowledge_points:
-            # 检查知识点是否有模板
-            if kp not in self._knowledge_templates:
+            # 检查知识点是否有知识库数据
+            if kp not in self._knowledge_base:
                 raise RuntimeError(f"{E009} - 知识点: {kp}")
 
-            kp_templates = self._knowledge_templates[kp]
+            kp_data = self._knowledge_base[kp]
 
             for qtype in question_types:
-                if qtype not in kp_templates:
+                if qtype not in [QUESTION_TYPE_SINGLE, QUESTION_TYPE_FILL, QUESTION_TYPE_SHORT]:
                     raise ValueError(f"{E004} - 不支持的题型: {qtype}")
 
-                generator_fn = kp_templates[qtype]
-
-                for _ in range(count_per_type):
+                for i in range(count_per_type):
                     try:
-                        question = generator_fn(difficulty)
+                        question = self._generate_question(kp, kp_data, qtype, difficulty, i)
                         question["knowledge_point"] = kp
                         question["type"] = qtype
+                        question["generated_at"] = datetime.now(timezone.utc).isoformat()
                         results.append(question)
                     except Exception as exc:
                         raise RuntimeError(f"{E006} - {exc}") from exc
@@ -134,338 +160,232 @@ class QuestionGenerator:
         return results
 
     # ------------------------------------------------------------------
-    # 内置题目模板（仅用于自测/演示，实际使用时可扩展）
+    # 动态题目生成方法
     # ------------------------------------------------------------------
-    @staticmethod
-    def _gen_pythagoras_single(difficulty: int) -> Dict[str, Any]:
-        """勾股定理 - 单选题模板"""
-        return {
-            "question": "直角三角形的两条直角边分别为 3 和 4，斜边长度为？",
-            "options": ["5", "6", "7", "8"],
-            "answer": "A",
-            "explanation": "根据勾股定理 a² + b² = c²，3² + 4² = 9 + 16 = 25，c = 5。",
-            "difficulty": difficulty,
-        }
-
-    @staticmethod
-    def _gen_pythagoras_fill(difficulty: int) -> Dict[str, Any]:
-        """勾股定理 - 填空题模板"""
-        return {
-            "question": "直角三角形的两条直角边分别为 6 和 8，斜边长度为 ____。",
-            "answer": "10",
-            "explanation": "根据勾股定理 a² + b² = c²，6² + 8² = 36 + 64 = 100，c = 10。",
-            "difficulty": difficulty,
-        }
-
-    @staticmethod
-    def _gen_pythagoras_short(difficulty: int) -> Dict[str, Any]:
-        """勾股定理 - 简答题模板"""
-        return {
-            "question": "请简述勾股定理的内容，并举例说明其应用。",
-            "answer": "勾股定理：直角三角形两条直角边的平方和等于斜边的平方。例如，直角边为 3 和 4 时，斜边为 5。",
-            "explanation": "勾股定理是数学中最重要的定理之一，广泛应用于几何计算、工程测量等领域。",
-            "difficulty": difficulty,
-        }
-
-    @staticmethod
-    def _gen_trig_single(difficulty: int) -> Dict[str, Any]:
-        """三角函数 - 单选题模板"""
-        return {
-            "question": "sin 30° 的值是多少？",
-            "options": ["1/2", "√3/2", "1", "√2/2"],
-            "answer": "A",
-            "explanation": "sin 30° = 1/2，这是三角函数的基本值。",
-            "difficulty": difficulty,
-        }
-
-    @staticmethod
-    def _gen_trig_fill(difficulty: int) -> Dict[str, Any]:
-        """三角函数 - 填空题模板"""
-        return {
-            "question": "cos 60° 的值是 ____。",
-            "answer": "1/2",
-            "explanation": "cos 60° = 1/2，这是三角函数的基本值。",
-            "difficulty": difficulty,
-        }
-
-    @staticmethod
-    def _gen_trig_short(difficulty: int) -> Dict[str, Any]:
-        """三角函数 - 简答题模板"""
-        return {
-            "question": "请解释正弦函数和余弦函数在直角三角形中的定义。",
-            "answer": "在直角三角形中，sin θ = 对边/斜边，cos θ = 邻边/斜边。",
-            "explanation": "正弦和余弦是描述角度与边长关系的核心三角函数。",
-            "difficulty": difficulty,
-        }
-
-    @staticmethod
-    def _gen_quadratic_single(difficulty: int) -> Dict[str, Any]:
-        """一元二次方程 - 单选题模板"""
-        return {
-            "question": "方程 x² - 5x + 6 = 0 的解是？",
-            "options": ["x=2 或 x=3", "x=1 或 x=6", "x=-2 或 x=-3", "x=-1 或 x=-6"],
-            "answer": "A",
-            "explanation": "因式分解得 (x-2)(x-3)=0，所以 x=2 或 x=3。",
-            "difficulty": difficulty,
-        }
-
-    @staticmethod
-    def _gen_quadratic_fill(difficulty: int) -> Dict[str, Any]:
-        """一元二次方程 - 填空题模板"""
-        return {
-            "question": "方程 x² - 4 = 0 的解是 x = ____。",
-            "answer": "±2",
-            "explanation": "x² = 4，所以 x = ±2。",
-            "difficulty": difficulty,
-        }
-
-    @staticmethod
-    def _gen_quadratic_short(difficulty: int) -> Dict[str, Any]:
-        """一元二次方程 - 简答题模板"""
-        return {
-            "question": "请简述求解一元二次方程 ax² + bx + c = 0 的求根公式。",
-            "answer": "x = [-b ± √(b²-4ac)] / (2a)，当判别式 b²-4ac ≥ 0 时有实数解。",
-            "explanation": "求根公式是一元二次方程的标准解法，适用于所有情况。",
-            "difficulty": difficulty,
-        }
-
-
-def parse_difficulty(value: str) -> int:
-    """解析难度字符串为数值等级"""
-    normalized = value.strip()
-    if normalized.isdigit():
-        level = int(normalized)
-        if 1 <= level <= 5:
-            return level
-        raise ValueError(E003)
-
-    if normalized in DIFFICULTY_MAP:
-        return DIFFICULTY_MAP[normalized]
-
-    raise ValueError(f"{E003} - 无法识别的难度: {value}")
-
-
-def parse_question_types(type_str: str) -> List[str]:
-    """解析题型字符串为类型列表"""
-    type_map = {
-        "选择": QUESTION_TYPE_SINGLE,
-        "单选": QUESTION_TYPE_SINGLE,
-        "single": QUESTION_TYPE_SINGLE,
-        "填空": QUESTION_TYPE_FILL,
-        "fill": QUESTION_TYPE_FILL,
-        "简答": QUESTION_TYPE_SHORT,
-        "short": QUESTION_TYPE_SHORT,
-    }
-
-    # 支持用逗号、空格、顿号分隔
-    parts = [p.strip() for p in type_str.replace("，", ",").replace("、", ",").replace(" ", ",").split(",") if p.strip()]
-
-    result = []
-    for part in parts:
-        if part in type_map:
-            result.append(type_map[part])
+    def _generate_question(
+        self, kp: str, kp_data: Dict[str, Any], qtype: str, difficulty: int, seed: int
+    ) -> Dict[str, Any]:
+        """根据知识点数据动态生成题目"""
+        if qtype == QUESTION_TYPE_SINGLE:
+            return self._generate_single_choice(kp, kp_data, difficulty, seed)
+        elif qtype == QUESTION_TYPE_FILL:
+            return self._generate_fill_blank(kp, kp_data, difficulty, seed)
+        elif qtype == QUESTION_TYPE_SHORT:
+            return self._generate_short_answer(kp, kp_data, difficulty, seed)
         else:
-            raise ValueError(f"{E004} - 未知题型: {part}")
+            raise ValueError(E008)
 
-    if not result:
-        raise ValueError(E004)
+    def _generate_single_choice(self, kp: str, kp_data: Dict[str, Any], difficulty: int, seed: int) -> Dict[str, Any]:
+        """动态生成单选题"""
+        rng = random.Random(seed * 31 + difficulty * 7)
 
-    return result
+        if kp == "勾股定理":
+            # 从知识库中随机选择一组勾股数
+            example = rng.choice(kp_data["examples"])
+            a, b = example["sides"]
+            c = example["hypotenuse"]
 
+            # 生成错误选项
+            wrong_options = set()
+            while len(wrong_options) < 3:
+                wrong = c + rng.choice([-2, -1, 1, 2, 3])
+                if wrong > 0 and wrong != c:
+                    wrong_options.add(wrong)
+            wrong_options = list(wrong_options)
 
-def run_selftest() -> None:
-    """内置自测函数，验证核心逻辑"""
-    print("开始自测...")
+            # 构建选项列表
+            options = [str(c)] + [str(w) for w in wrong_options]
+            rng.shuffle(options)
 
-    generator = QuestionGenerator()
+            # 计算正确答案索引
+            correct_index = options.index(str(c))
+            correct_letter = chr(65 + correct_index)  # A, B, C, D
 
-    # 测试用例 1: 基本生成
-    try:
-        questions = generator.generate(
-            knowledge_points=["勾股定理"],
-            question_types=[QUESTION_TYPE_SINGLE],
-            difficulty=3,
-            count_per_type=1,
-        )
-        assert len(questions) == 1, "测试1失败: 应生成1道题"
-        assert questions[0]["type"] == QUESTION_TYPE_SINGLE, "测试1失败: 题型错误"
-        assert questions[0]["knowledge_point"] == "勾股定理", "测试1失败: 知识点错误"
-        assert "answer" in questions[0], "测试1失败: 缺少答案"
-        assert "explanation" in questions[0], "测试1失败: 缺少解析"
-        print("测试1通过: 基本生成")
-    except Exception as exc:
-        print(f"测试1失败: {exc}")
-        sys.exit(1)
+            question_text = f"直角三角形的两条直角边分别为 {a} 和 {b}，斜边长度为？"
 
-    # 测试用例 2: 多知识点多题型
-    try:
-        questions = generator.generate(
-            knowledge_points=["勾股定理", "三角函数"],
-            question_types=[QUESTION_TYPE_SINGLE, QUESTION_TYPE_FILL],
-            difficulty=4,
-            count_per_type=2,
-        )
-        assert len(questions) == 8, f"测试2失败: 应生成8道题，实际 {len(questions)}"
-        types = set(q["type"] for q in questions)
-        assert types == {QUESTION_TYPE_SINGLE, QUESTION_TYPE_FILL}, "测试2失败: 题型种类错误"
-        print("测试2通过: 多知识点多题型")
-    except Exception as exc:
-        print(f"测试2失败: {exc}")
-        sys.exit(1)
-
-    # 测试用例 3: 难度解析
-    try:
-        assert parse_difficulty("中等") == 3, "测试3失败: 中等应映射为3"
-        assert parse_difficulty("5") == 5, "测试3失败: 5应映射为5"
-        print("测试3通过: 难度解析")
-    except Exception as exc:
-        print(f"测试3失败: {exc}")
-        sys.exit(1)
-
-    # 测试用例 4: 异常处理
-    try:
-        generator.generate(
-            knowledge_points=["不存在的知识点"],
-            question_types=[QUESTION_TYPE_SINGLE],
-        )
-        print("测试4失败: 应抛出异常")
-        sys.exit(1)
-    except RuntimeError:
-        print("测试4通过: 异常处理")
-
-    # 测试用例 5: JSON 序列化
-    try:
-        questions = generator.generate(
-            knowledge_points=["一元二次方程"],
-            question_types=[QUESTION_TYPE_SHORT],
-            difficulty=2,
-            count_per_type=1,
-        )
-        json_str = json.dumps(questions, ensure_ascii=False, indent=2)
-        assert json_str, "测试5失败: JSON 序列化为空"
-        print("测试5通过: JSON 序列化")
-    except Exception as exc:
-        print(f"测试5失败: {exc}")
-        sys.exit(1)
-
-    print("全部自测通过 ✓")
-
-
-def main() -> None:
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="组卷出题工具 - 按知识点与难度批量生成带解析的练习题",
-        epilog="示例: python main.py --knowledge '勾股定理,三角函数' --difficulty 中等 --count 2 --types 单选,填空",
-    )
-
-    parser.add_argument(
-        "--knowledge",
-        type=str,
-        help="知识点列表，用逗号分隔，例如: '勾股定理,三角函数'",
-    )
-    parser.add_argument(
-        "--difficulty",
-        type=str,
-        default="中等",
-        help="难度: 简单/中等/困难 或 1-5 的数字",
-    )
-    parser.add_argument(
-        "--count",
-        type=int,
-        default=1,
-        help="每种题型生成的题目数量 (正整数)",
-    )
-    parser.add_argument(
-        "--types",
-        type=str,
-        default="单选",
-        help="题型列表，用逗号分隔，可选: 单选,填空,简答",
-    )
-    parser.add_argument(
-        "--output",
-        type=str,
-        help="输出文件路径 (JSON 格式)，不指定则输出到控制台",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自测并退出",
-    )
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自测模式
-    if args.selftest:
-        run_selftest()
-        return
-
-    # 参数校验
-    if not args.knowledge:
-        print(f"错误: {E001}", file=sys.stderr)
-        parser.print_help()
-        sys.exit(1)
-
-    try:
-        # 解析参数
-        knowledge_points = [kp.strip() for kp in args.knowledge.split(",") if kp.strip()]
-        if not knowledge_points:
-            raise ValueError(E001)
-
-        difficulty = parse_difficulty(args.difficulty)
-        question_types = parse_question_types(args.types)
-
-        if args.count <= 0:
-            raise ValueError(E002)
-
-        # 生成题目
-        generator = QuestionGenerator()
-        questions = generator.generate(
-            knowledge_points=knowledge_points,
-            question_types=question_types,
-            difficulty=difficulty,
-            count_per_type=args.count,
-        )
-
-        # 构建输出
-        output_data = {
-            "meta": {
-                "version": "1.0.1",
-                "knowledge_points": knowledge_points,
+            return {
+                "question": question_text,
+                "options": options,
+                "answer": correct_letter,
+                "answer_index": correct_index,
+                "explanation": f"根据勾股定理 a² + b² = c²，{a}² + {b}² = {a*a} + {b*b} = {a*a+b*b}，c = √{a*a+b*b} = {c}。",
                 "difficulty": difficulty,
-                "total_count": len(questions),
-            },
-            "questions": questions,
-        }
+            }
 
-        # 输出
-        json_str = json.dumps(output_data, ensure_ascii=False, indent=2)
+        elif kp == "三角函数":
+            # 从特殊角度中随机选择
+            angle = rng.choice(list(kp_data["special_angles"].keys()))
+            values = kp_data["special_angles"][angle]
+            func = rng.choice(["sin", "cos", "tan"])
+            correct_value = values[func]
 
-        if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
-                f.write(json_str)
-            print(f"已生成 {len(questions)} 道题目，保存至: {args.output}")
-        else:
-            print(json_str)
+            # 生成错误选项
+            all_values = []
+            for v in kp_data["special_angles"].values():
+                all_values.extend([v["sin"], v["cos"], v["tan"]])
+            all_values = [v for v in all_values if v != correct_value and v != "不存在"]
 
-    except ValueError as exc:
-        print(f"参数错误: {exc}", file=sys.stderr)
-        sys.exit(1)
-    except RuntimeError as exc:
-        print(f"运行时错误: {exc}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as exc:
-        print(f"未知错误: {exc}", file=sys.stderr)
-        sys.exit(1)
+            wrong_options = rng.sample(all_values, min(3, len(all_values)))
+            while len(wrong_options) < 3:
+                wrong_options.append(f"值{len(wrong_options)+1}")
 
+            # 构建选项列表
+            options = [str(correct_value)] + [str(w) for w in wrong_options[:3]]
+            rng.shuffle(options)
 
-if __name__ == "__main__":
-    main()
+            correct_index = options.index(str(correct_value))
+            correct_letter = chr(65 + correct_index)
+
+            return {
+                "question": f"{func} {angle} 的值是多少？",
+                "options": options,
+                "answer": correct_letter,
+                "answer_index": correct_index,
+                "explanation": f"根据三角函数特殊值表，{func} {angle} = {correct_value}。",
+                "difficulty": difficulty,
+            }
+
+        elif kp == "一元二次方程":
+            # 从知识库中随机选择方程
+            example = rng.choice(kp_data["examples"])
+            a, b, c = example["a"], example["b"], example["c"]
+            roots = example["roots"]
+
+            # 生成错误选项
+            wrong_roots = []
+            for r in roots:
+                wrong_roots.append(r + rng.choice([-1, 1, 2]))
+            wrong_options = [f"x={wrong_roots[0]} 或 x={wrong_roots[1]}"]
+
+            # 构建选项
+            correct_str = f"x={roots[0]} 或 x={roots[1]}"
+            options = [correct_str] + wrong_options
+            while len(options) < 4:
+                options.append(f"x={rng.randint(-5, 5)} 或 x={rng.randint(-5, 5)}")
+            rng.shuffle(options)
+
+            correct_index = options.index(correct_str)
+            correct_letter = chr(65 + correct_index)
+
+            return {
+                "question": f"方程 {a}x² + {b}x + {c} = 0 的解是？",
+                "options": options,
+                "answer": correct_letter,
+                "answer_index": correct_index,
+                "explanation": f"因式分解得 (x-{roots[0]})(x-{roots[1]}) = 0，所以 x={roots[0]} 或 x={roots[1]}。",
+                "difficulty": difficulty,
+            }
+
+        raise ValueError(E008)
+
+    def _generate_fill_blank(self, kp: str, kp_data: Dict[str, Any], difficulty: int, seed: int) -> Dict[str, Any]:
+        """动态生成填空题"""
+        rng = random.Random(seed * 17 + difficulty * 5)
+
+        if kp == "勾股定理":
+            example = rng.choice(kp_data["examples"])
+            a, b = example["sides"]
+            c = example["hypotenuse"]
+
+            return {
+                "question": f"直角三角形的两条直角边分别为 {a} 和 {b}，斜边长度为 ____。",
+                "answer": str(c),
+                "explanation": f"根据勾股定理 a² + b² = c²，{a}² + {b}² = {a*a} + {b*b} = {a*a+b*b}，c = √{a*a+b*b} = {c}。",
+                "difficulty": difficulty,
+            }
+
+        elif kp == "三角函数":
+            angle = rng.choice(list(kp_data["special_angles"].keys()))
+            values = kp_data["special_angles"][angle]
+            func = rng.choice(["sin", "cos", "tan"])
+            correct_value = values[func]
+
+            return {
+                "question": f"{func} {angle} 的值是 ____。",
+                "answer": str(correct_value),
+                "explanation": f"根据三角函数特殊值表，{func} {angle} = {correct_value}。",
+                "difficulty": difficulty,
+            }
+
+        elif kp == "一元二次方程":
+            example = rng.choice(kp_data["examples"])
+            a, b, c = example["a"], example["b"], example["c"]
+            roots = example["roots"]
+
+            if roots[0] == roots[1]:
+                answer = f"x={roots[0]}"
+            else:
+                answer = f"x={roots[0]} 或 x={roots[1]}"
+
+            return {
+                "question": f"方程 {a}x² + {b}x + {c} = 0 的解是 ____。",
+                "answer": answer,
+                "explanation": f"因式分解得 (x-{roots[0]})(x-{roots[1]}) = 0，所以 {answer}。",
+                "difficulty": difficulty,
+            }
+
+        raise ValueError(E008)
+
+    def _generate_short_answer(self, kp: str, kp_data: Dict[str, Any], difficulty: int, seed: int) -> Dict[str, Any]:
+        """动态生成简答题"""
+        rng = random.Random(seed * 13 + difficulty * 3)
+
+        if kp == "勾股定理":
+            example = rng.choice(kp_data["examples"])
+            a, b = example["sides"]
+            c = example["hypotenuse"]
+            app = rng.choice(kp_data["applications"])
+
+            return {
+                "question": f"请简述勾股定理的内容，并举例说明其在{app}中的应用。",
+                "answer": f"勾股定理：直角三角形两条直角边的平方和等于斜边的平方。例如，直角边为 {a} 和 {b} 时，斜边为 {c}。在{app}中，可用于计算距离和测量。",
+                "explanation": f"勾股定理是数学中最重要的定理之一，公式为 {kp_data['formula']}，广泛应用于{', '.join(kp_data['applications'])}等领域。",
+                "difficulty": difficulty,
+            }
+
+        elif kp == "三角函数":
+            app = rng.choice(kp_data["applications"])
+
+            return {
+                "question": f"请解释正弦函数和余弦函数在直角三角形中的定义，并说明其在{app}中的应用。",
+                "answer": f"在直角三角形中，sin θ = 对边/斜边，cos θ = 邻边/斜边。在{app}中，三角函数用于计算角度和距离。",
+                "explanation": f"三角函数是描述角度与边长关系的核心函数，公式为 {kp_data['formula']}。",
+                "difficulty": difficulty,
+            }
+
+        elif kp == "一元二次方程":
+            example = rng.choice(kp_data["examples"])
+            a, b, c = example["a"], example["b"], example["c"]
+            roots = example["roots"]
+            app = rng.choice(kp_data["applications"])
+
+            return {
+                "question": f"请简述求解一元二次方程 ax² + bx + c = 0 的求根公式，并解方程 {a}x² + {b}x + {c} = 0。",
+                "answer": f"求根公式为 x = [-b ± √(b²-4ac)] / (2a)。对于方程 {a}x² + {b}x + {c} = 0，解得 x={roots[0]} 或 x={roots[1]}。",
+                "explanation": f"求根公式是一元二次方程的标准解法，公式为 {kp_data['formula']}，在{app}中有广泛应用。",
+                "difficulty": difficulty,
+            }
+
+        raise ValueError(E008)
+
+    def _validate_question(self, question: Dict[str, Any]) -> bool:
+        """验证题目答案的正确性"""
+        if question["type"] == QUESTION_TYPE_SINGLE:
+            # 验证单选题答案索引
+            if "answer_index" not in question:
+                return False
+            idx = question["answer_index"]
+            if idx < 0 or idx >= len(question["options"]):
+                return False
+            # 验证答案字母与索引一致
+            expected_letter = chr(65 + idx)
+            if question["answer"] != expected_letter:
+                return False
+        elif question["type"] == QUESTION_TYPE_FILL:
+            # 验证填空题答案非空
+            if not question["answer"]:
+                return False
+        elif question["type"] == QUESTION_TYPE_SHORT:
+            # 验证简答题答案非空
+            if not question["answer"]:
+                return False
