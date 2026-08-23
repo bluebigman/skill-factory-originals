@@ -12,6 +12,9 @@ gitpulse 周报生成技能 - 独立实现
 用法:
     python scripts/main.py --selftest   # 离线自检
     python scripts/main.py --input "..."  # 处理输入文本
+    python scripts/main.py --input "..." --format json  # JSON 输出
+    python scripts/main.py --file "path/to/file.txt"  # 处理文件
+    python scripts/main.py --url "https://example.com"  # 处理 URL
 """
 
 import argparse
@@ -19,10 +22,12 @@ import json
 import os
 import sys
 import tempfile
+import time
+import urllib.error
 import urllib.parse
+import urllib.request
 from datetime import timezone, datetime, timedelta
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -39,6 +44,7 @@ ERROR_CODES = {
     "E008": "输出目录不可写，请检查权限",
     "E009": "内部处理异常，请重试或检查输入内容",
     "E010": "参数错误，请检查命令行参数",
+    "E011": "URL 内容获取失败，请检查网络连接或 URL 有效性",
 }
 
 # 置信度阈值
@@ -54,6 +60,11 @@ DEFAULT_TEMPLATE = {
     "置信度": 0.0,
     "标注": ""
 }
+
+# URL 请求配置
+URL_TIMEOUT = 10  # 秒
+URL_MAX_RETRIES = 3
+URL_RETRY_BACKOFF = 1.0  # 秒
 
 
 # ============================================================
@@ -85,13 +96,43 @@ def validate_input(raw_input: str) -> Tuple[bool, str]:
     return True, ""
 
 
+def fetch_url_content(url: str) -> Tuple[bool, str]:
+    """
+    获取 URL 内容，带超时和指数退避重试机制。
+    返回 (是否成功, 内容或错误信息)
+    """
+    for attempt in range(URL_MAX_RETRIES):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "gitpulse/1.0"})
+            with urllib.request.urlopen(req, timeout=URL_TIMEOUT) as response:
+                if response.status != 200:
+                    return False, f"HTTP 状态码: {response.status}"
+                content = response.read().decode("utf-8", errors="replace")
+                return True, content
+        except urllib.error.URLError as e:
+            if attempt < URL_MAX_RETRIES - 1:
+                # 指数退避：每次重试等待时间翻倍
+                backoff_time = URL_RETRY_BACKOFF * (2 ** attempt)
+                time.sleep(backoff_time)
+            else:
+                return False, f"URL 请求失败: {str(e)}"
+        except Exception as e:
+            if attempt < URL_MAX_RETRIES - 1:
+                # 指数退避：每次重试等待时间翻倍
+                backoff_time = URL_RETRY_BACKOFF * (2 ** attempt)
+                time.sleep(backoff_time)
+            else:
+                return False, f"URL 请求异常: {str(e)}"
+    return False, "重试次数耗尽"
+
+
 def parse_input(raw_input: str) -> Dict[str, Any]:
     """
     解析输入内容，提取关键信息。
     支持:
       - 纯文本
-      - 文件路径 (自动读取)
-      - URL (仅解析格式，不访问网络)
+      - 文件路径 (自动读取，带异常捕获)
+      - URL (真实获取内容，带超时和重试)
     """
     parsed = {
         "source_type": "text",
@@ -106,8 +147,15 @@ def parse_input(raw_input: str) -> Dict[str, Any]:
                 parsed["content"] = f.read()
             parsed["source_type"] = "file"
             parsed["metadata"]["filename"] = os.path.basename(raw_input)
+        except (IOError, OSError) as e:
+            # 文件读取失败，返回错误信息
+            parsed["source_type"] = "file_error"
+            parsed["metadata"]["error"] = str(e)
+            return parsed
         except Exception:
-            parsed["content"] = raw_input  # 回退为文本处理
+            parsed["source_type"] = "file_error"
+            parsed["metadata"]["error"] = "未知文件读取错误"
+            return parsed
     # 检查是否为 URL
     elif raw_input.startswith(("http://", "https://")):
         try:
@@ -115,8 +163,16 @@ def parse_input(raw_input: str) -> Dict[str, Any]:
             if not url_parts.netloc:
                 return {"source_type": "invalid_url", "content": "", "metadata": {}}
             parsed["source_type"] = "url"
-            parsed["content"] = raw_input
             parsed["metadata"]["domain"] = url_parts.netloc
+            # 真实获取 URL 内容
+            success, content = fetch_url_content(raw_input)
+            if success:
+                parsed["content"] = content
+                parsed["metadata"]["fetched"] = True
+            else:
+                parsed["source_type"] = "url_error"
+                parsed["metadata"]["error"] = content
+                return parsed
         except Exception:
             parsed["source_type"] = "invalid_url"
             parsed["content"] = ""
@@ -192,7 +248,7 @@ def generate_report(parsed_input: Dict[str, Any], key_points: List[str], confide
     """
     report = dict(DEFAULT_TEMPLATE)
     
-    # 日期范围 (当前周)
+    # 日期范围 (当前周，使用 UTC 时间)
     today = datetime.now(timezone.utc)
     monday = today - timedelta(days=today.weekday())
     friday = monday + timedelta(days=4)
@@ -243,11 +299,26 @@ def process_input(raw_input: str) -> ProcessingResult:
     
     # Step 2: 解析输入
     parsed = parse_input(raw_input)
+    
+    # 处理文件读取错误
+    if parsed["source_type"] == "file_error":
+        result.error_code = "E006"
+        result.error_message = f"{ERROR_CODES['E006']}: {parsed['metadata'].get('error', '')}"
+        return result
+    
+    # 处理 URL 错误
+    if parsed["source_type"] == "url_error":
+        result.error_code = "E011"
+        result.error_message = f"{ERROR_CODES['E011']}: {parsed['metadata'].get('error', '')}"
+        return result
+    
+    # 处理无效 URL
     if parsed["source_type"] == "invalid_url":
         result.error_code = "E007"
         result.error_message = ERROR_CODES["E007"]
         return result
     
+    # 处理空内容
     if not parsed["content"]:
         result.error_code = "E001"
         result.error_message = ERROR_CODES["E001"]
@@ -270,247 +341,118 @@ def process_input(raw_input: str) -> ProcessingResult:
     return result
 
 
+def format_output(result: ProcessingResult, format_type: str) -> str:
+    """
+    根据指定格式输出结果。
+    """
+    if format_type == "json":
+        output_data = {
+            "success": result.success,
+            "data": result.data,
+            "confidence": result.confidence,
+            "annotation": result.annotation
+        }
+        return json.dumps(output_data, ensure_ascii=False, indent=2)
+    else:
+        # 默认人类可读格式
+        lines = []
+        lines.append("=" * 60)
+        lines.append(f"📋 {result.data['标题']} ({result.data['日期范围']})")
+        lines.append("=" * 60)
+        lines.append(f"\n📝 摘要: {result.data['摘要']}")
+        lines.append(f"\n🔑 关键信息 ({len(result.data['关键信息'])} 项):")
+        for i, point in enumerate(result.data["关键信息"], 1):
+            lines.append(f"  {i}. {point}")
+        lines.append(f"\n📊 置信度: {result.data['置信度']:.1f}%")
+        lines.append(f"🏷️  标注: {result.data['标注']}")
+        lines.append("=" * 60)
+        return "\n".join(lines)
+
+
 # ============================================================
 # 自检模块
 # ============================================================
 def run_selftest() -> bool:
     """
     离线自检核心逻辑。
-    使用内置硬编码样例数据，不依赖外部文件/网络。
+    真实调用主流程/核心函数并断言关键输出。
     """
     print("=" * 60)
     print("gitpulse 自检模式 - 验证核心逻辑")
     print("=" * 60)
     
-    test_cases = [
-        {
-            "name": "正常文本输入",
-            "input": """
-            2024-01-15 完成用户登录模块开发
-            2024-01-16 修复支付接口超时问题
-            2024-01-17 优化数据库查询性能
-            2024-01-18 新增数据导出功能
-            2024-01-19 处理客户反馈问题
-            """,
-            "should_succeed": True
-        },
-        {
-            "name": "空输入",
-            "input": "",
-            "should_succeed": False
-        },
-        {
-            "name": "短文本输入",
-            "input": "hi",
-            "should_succeed": False
-        },
-        {
-            "name": "无关键信息文本",
-            "input": "这是一个普通的描述性文本，没有具体的工作内容。",
-            "should_succeed": True
-        },
-        {
-            "name": "URL输入",
-            "input": "https://example.com/project",
-            "should_succeed": True
-        },
-        {
-            "name": "无效URL",
-            "input": "http://",
-            "should_succeed": False
-        },
-    ]
-    
     all_passed = True
     
-    for i, test in enumerate(test_cases, 1):
-        print(f"\n测试 {i}/{len(test_cases)}: {test['name']}")
-        result = process_input(test["input"])
-        
-        # 验证成功/失败状态
-        status_ok = (result.success == test["should_succeed"])
-        print(f"  期望成功: {test['should_succeed']}, 实际: {result.success}")
-        
-        # 验证错误码
-        if not result.success:
-            error_code_ok = result.error_code in ERROR_CODES
-            print(f"  错误码: {result.error_code}, 有效: {error_code_ok}")
-            if error_code_ok:
-                print(f"  错误信息: {result.error_message}")
-            status_ok = status_ok and error_code_ok
-        
-        # 验证成功场景的数据结构
-        if result.success:
-            data_ok = (
-                "标题" in result.data and
-                "日期范围" in result.data and
-                "关键信息" in result.data and
-                "摘要" in result.data and
-                "置信度" in result.data and
-                "标注" in result.data
-            )
-            print(f"  数据结构完整: {data_ok}")
-            
-            # 置信度范围验证（宽松阈值）
-            conf_ok = 0 <= result.data["置信度"] <= 100
-            print(f"  置信度范围 [0-100]: {conf_ok}, 值: {result.data['置信度']}")
-            
-            # 关键信息列表验证（允许为空）
-            info_ok = isinstance(result.data["关键信息"], list)
-            print(f"  关键信息类型: {info_ok}, 数量: {len(result.data['关键信息'])}")
-            
-            status_ok = status_ok and data_ok and conf_ok and info_ok
-        
-        # 汇总
-        if status_ok:
-            print("  ✓ 通过")
-        else:
-            all_passed = False
-            print("  ✗ 失败")
+    # 测试 1: 正常文本输入
+    print("\n测试 1: 正常文本输入")
+    test_input = """
+    2024-01-15 完成用户登录模块开发
+    2024-01-16 修复支付接口超时问题
+    2024-01-17 优化数据库查询性能
+    """
+    result = process_input(test_input)
+    assert result.success, "正常文本输入应成功"
+    assert result.data["关键信息"], "应提取到关键信息"
+    assert 0 <= result.data["置信度"] <= 100, "置信度应在 0-100 范围"
+    assert result.data["标注"] in ["直接输出", "建议复核", "[需核实] 信息不足，请补充更多内容"], "标注应有效"
+    print("  ✓ 通过")
     
-    # 测试文件读取功能（使用临时文件）
-    print(f"\n测试 {len(test_cases)+1}: 文件输入")
+    # 测试 2: 空输入
+    print("\n测试 2: 空输入")
+    result = process_input("")
+    assert not result.success, "空输入应失败"
+    assert result.error_code == "E001", "错误码应为 E001"
+    print(f"  ✓ 通过 (错误码: {result.error_code})")
+    
+    # 测试 3: 短文本输入
+    print("\n测试 3: 短文本输入")
+    result = process_input("hi")
+    assert not result.success, "短文本应失败"
+    assert result.error_code == "E003", "错误码应为 E003"
+    print(f"  ✓ 通过 (错误码: {result.error_code})")
+    
+    # 测试 4: 文件读取（正常）
+    print("\n测试 4: 文件读取（正常）")
     with tempfile.NamedTemporaryFile(mode="w", suffix=".txt", delete=False, encoding="utf-8") as tmp:
         tmp.write("2024-01-15 完成项目部署\n2024-01-16 修复bug\n")
         tmp_path = tmp.name
-    
     try:
         result = process_input(tmp_path)
-        file_ok = result.success and result.data["关键信息"]
-        print(f"  文件读取成功: {result.success}")
-        print(f"  关键信息提取: {bool(result.data.get('关键信息'))}")
-        print(f"  ✓ 通过" if file_ok else "  ✗ 失败")
-        all_passed = all_passed and file_ok
+        assert result.success, "文件读取应成功"
+        assert result.data["关键信息"], "应提取到关键信息"
+        print("  ✓ 通过")
     finally:
         os.unlink(tmp_path)
     
-    # 测试批量处理
-    print(f"\n测试 {len(test_cases)+2}: 批量处理")
-    batch_inputs = [
-        "2024-01-15 完成A模块",
-        "2024-01-16 修复B问题",
-        "2024-01-17 优化C功能",
-    ]
-    batch_results = [process_input(inp) for inp in batch_inputs]
-    batch_ok = all(r.success for r in batch_results) and len(batch_results) == 3
-    print(f"  批量处理成功: {batch_ok}, 处理数量: {len(batch_results)}")
-    print(f"  ✓ 通过" if batch_ok else "  ✗ 失败")
-    all_passed = all_passed and batch_ok
+    # 测试 5: 文件读取（不存在）
+    print("\n测试 5: 文件读取（不存在）")
+    result = process_input("/nonexistent/path/file.txt")
+    assert not result.success, "不存在的文件应失败"
+    assert result.error_code == "E006", "错误码应为 E006"
+    print(f"  ✓ 通过 (错误码: {result.error_code})")
     
-    # 最终结果
-    print("\n" + "=" * 60)
-    if all_passed:
-        print("自检完成: 全部通过 ✓")
-    else:
-        print("自检完成: 存在失败项 ✗")
-    print("=" * 60)
+    # 测试 6: 无效 URL
+    print("\n测试 6: 无效 URL")
+    result = process_input("http://")
+    assert not result.success, "无效 URL 应失败"
+    assert result.error_code == "E007", "错误码应为 E007"
+    print(f"  ✓ 通过 (错误码: {result.error_code})")
     
-    return all_passed
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def main() -> int:
-    """
-    主入口函数。
-    返回进程退出码 (0=成功, 1=失败)。
-    """
-    parser = argparse.ArgumentParser(
-        description="gitpulse 周报生成工具 - 将输入内容转换为结构化周报",
-        epilog="示例: python main.py --input '2024-01-15 完成登录模块开发'"
-    )
+    # 测试 7: 无关键信息文本
+    print("\n测试 7: 无关键信息文本")
+    result = process_input("这是一个普通的描述性文本，没有具体的工作内容。")
+    assert result.success, "无关键信息文本应成功"
+    assert isinstance(result.data["关键信息"], list), "关键信息应为列表"
+    print("  ✓ 通过")
     
-    parser.add_argument(
-        "--input", "-i",
-        type=str,
-        help="输入内容: 文本、文件路径或 URL"
-    )
+    # 测试 8: JSON 格式输出
+    print("\n测试 8: JSON 格式输出")
+    result = process_input("2024-01-15 完成登录模块开发")
+    json_output = format_output(result, "json")
+    parsed_json = json.loads(json_output)
+    assert parsed_json["success"] == True, "JSON 输出应包含 success 字段"
+    assert "data" in parsed_json, "JSON 输出应包含 data 字段"
+    print("  ✓ 通过")
     
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检（使用内置样例数据，不访问外部资源）"
-    )
-    
-    parser.add_argument(
-        "--output", "-o",
-        type=str,
-        help="输出文件路径（JSON格式）"
-    )
-    
-    parser.add_argument(
-        "--json",
-        action="store_true",
-        help="以 JSON 格式输出结果"
-    )
-    
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    
-    args = parser.parse_args()
-    
-    global dry_run
-    
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-    
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
-    
-    # 正常处理模式
-    if not args.input:
-        print(f"错误 [E010]: {ERROR_CODES['E010']}", file=sys.stderr)
-        print("请使用 --input 提供输入内容，或使用 --selftest 运行自检", file=sys.stderr)
-        return 1
-    
-    # 处理输入
-    result = process_input(args.input)
-    
-    if not result.success:
-        print(f"错误 [{result.error_code}]: {result.error_message}", file=sys.stderr)
-        return 1
-    
-    # 输出结果
-    if args.json or args.output:
-        output_data = {
-            "success": True,
-            "data": result.data,
-            "confidence": result.confidence,
-            "annotation": result.annotation
-        }
-        json_str = json.dumps(output_data, ensure_ascii=False, indent=2)
-        
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(json_str)
-                print(f"结果已保存到: {args.output}")
-            except Exception as e:
-                print(f"错误 [E008]: {ERROR_CODES['E008']}: {e}", file=sys.stderr)
-                return 1
-        else:
-            print(json_str)
-    else:
-        # 人类可读格式输出
-        print("\n" + "=" * 60)
-        print(f"📋 {result.data['标题']} ({result.data['日期范围']})")
-        print("=" * 60)
-        print(f"\n📝 摘要: {result.data['摘要']}")
-        
-        print(f"\n🔑 关键信息 ({len(result.data['关键信息'])} 项):")
-        for i, point in enumerate(result.data["关键信息"], 1):
-            print(f"  {i}. {point}")
-        
-        print(f"\n📊 置信度: {result.data['置信度']:.1f}%")
-        print(f"🏷️  标注: {result.data['标注']}")
-        print("=" * 60)
-    
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    # 测试 9: 批量处理
+    print("\n测试 9: 批量处理")
