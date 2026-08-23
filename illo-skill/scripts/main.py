@@ -13,7 +13,6 @@ import json
 import re
 import sys
 import os
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # 错误码定义
 ERROR_CODES = {
@@ -386,16 +385,7 @@ def main():
     parser.add_argument("--text", "-t", help="直接输入文章文本（用于测试）")
     parser.add_argument("--selftest", action="store_true", help="运行离线自检")
     
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    
     args = parser.parse_args()
-    
-    global dry_run
-    
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
     
     # 自检模式
     if args.selftest:
