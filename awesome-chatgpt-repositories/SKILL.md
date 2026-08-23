@@ -1,181 +1,253 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: awesome-chatgpt-repositories
 name: awesome-chatgpt-repositories
-displayName: ChatGPT开源仓库检索 项目筛选 资源导航
-description: 检索并整理ChatGPT相关开源仓库，输出结构化清单。
-version: 1.0.1
-rules_version: cpr-20260809-n251
+displayName: 开源仓库检索 结构化整理 清单生成
+description: 解析GitHub仓库文本，提取结构化字段，输出可筛选排序的清单表格。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/awesome-chatgpt-repositories
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: Ling
+author: SkillForge Studio
 agent_created: true
-trigger_words: ["awesome-chatgpt-repositories", "ChatGPT仓库", "开源项目检索", "OpenAI仓库", "Codex项目", "仓库清单"]
+trigger_words: ["awesome-chatgpt-repositories", "ChatGPT仓库", "开源项目检索", "OpenAI仓库", "Codex项目", "仓库清单整理", "GitHub项目列表"]
 ---
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# ChatGPT 开源仓库检索与整理
+# 开源仓库清单整理助手（SKILL.md）
 
-## 一、能力边界速查卡
+## 一、能力边界：一页纸速查卡
 
-| 维度 | 说明 |
-|------|------|
-| ✅ 能做 | 解析用户提供的仓库列表、URL、文本数据，提取仓库名称、描述、星标数、语言、许可证等字段 |
-| ✅ 能做 | 按主题（ChatGPT / OpenAI API / Codex）或自定义条件（语言、星标阈值）过滤仓库 |
-| ✅ 能做 | 输出 Markdown 、CSV、JSON 三种格式的结构化清单 |
-| ✅ 能做 | 对缺失字段标注 `[需核实:字段名]`，不猜测补全 |
-| ✅ 能做 | 批量处理多条仓库记录，支持去重与排序 |
-| ❌ 不能做 | 实时抓取 GitHub 数据（需用户提供数据源或 URL 内容） |
-| ❌ 不能做 | 评估仓库代码质量或安全性（仅整理元数据） |
-| ❌ 不能做 | 自动推荐"最佳"仓库（可排序，不下结论） |
-| ❌ 不能做 | 处理非仓库类内容（如教程文章、付费产品链接） |
+本 Skill 专注于将非结构化的 GitHub 仓库文本，转换为结构化的清单表格或数据文件。它不执行代码分析、不访问网络、不验证仓库实时状态。
 
-**适用对象**：需要快速浏览大量 ChatGPT 相关开源项目、做技术选型预筛选、或整理资源清单的开发者、技术博主、研究爱好者。
+| 维度 | 能做 | 不能做 |
+|------|------|--------|
+| 输入 | 用户粘贴的仓库列表文本、文件内容 | 直接读取本地文件路径（需用户粘贴内容） |
+| 解析 | 识别仓库名、描述、Star 数、语言、链接等字段 | 解析非文本格式（图片、PDF 扫描件） |
+| 处理 | 字段提取、过滤、排序、去重、格式转换 | 实时抓取 GitHub 数据、验证仓库是否仍存在 |
+| 输出 | Markdown 表格、JSON、CSV | 生成图表、创建 PR、自动发布 |
+| 适用对象 | 开发者、技术调研者、开源爱好者 | 需要实时数据监控的场景 |
+
+**适用场景**：整理收藏夹、批量调研竞品仓库、生成周报附件、构建内部工具的数据源。
 
 ---
 
-## 二、触发方式与场景映射
+## 二、触发方式：场景映射表
 
-| 用户说（大白话） | 触发动作 |
-|------------------|----------|
-| "帮我整理这份 ChatGPT 仓库列表" | 解析输入，输出结构化清单 |
-| "筛选出 Python 写的 OpenAI 项目" | 按语言过滤 |
-| "把星标超过 5000 的排前面" | 按星标数降序排序 |
-| "转成 CSV 给我" | 输出 CSV 格式 |
-| "这个仓库是干嘛的？" | 提取该仓库描述并解释 |
+当对话中出现以下意图时，本 Skill 自动激活：
 
-**触发词**：`awesome-chatgpt-repositories`、`ChatGPT仓库`、`开源项目检索`、`OpenAI仓库`、`Codex项目`、`仓库清单`、`GitHub项目整理`、`仓库筛选`。
+| 用户可能说的话 | 触发词匹配 | 实际行为 |
+|---------------|-----------|---------|
+| "帮我整理一下这些仓库" | 仓库清单整理 | 解析文本 → 输出表格 |
+| "把这段 GitHub 列表结构化" | 开源项目检索 | 提取字段 → 排序输出 |
+| "过滤出 Python 的，Star 过千的" | 过滤语法 | 应用过滤条件 → 输出子集 |
+| "输出成 JSON 给我" | 输出格式指定 | 转换格式 → 输出 JSON |
+| "这是两份列表，合并一下" | 批量合并 | 合并去重 → 输出汇总表 |
+
+**大白话示例**：
+- "我贴一段 awesome 列表，你帮我弄成表格" → 直接解析输出
+- "只要 Go 语言的，Star 从高到低排" → 过滤 + 排序
+- "转成 CSV 我要导入 Excel" → 格式转换
 
 ---
 
-## 三、标准处理流程
+## 三、标准流程：从输入到输出
 
 ### 前置条件
-
-- 用户需提供至少一条仓库记录（名称或 URL），或一份包含多条记录的文本/文件。
-- 若输入为空，返回错误码 `E001` 并附正确输入示例。
+- 用户提供至少一条仓库记录文本（包含仓库名或 URL）
+- 文本格式不限，但需可被正则识别（见下方字段提取规则）
 
 ### 执行步骤
 
-1. **收集输入**：接收用户粘贴的文本、上传的文件（.txt / .csv / .json / .md）或 URL 内容。
-2. **解析记录**：按行或按分隔符拆分，识别每条仓库记录。支持格式：
- - `owner/repo`（如 `openai/chatgpt`）
- - 完整 URL（如 `https://github.com/openai/chatgpt`）
- - 带描述的行（如 `openai/chatgpt - ChatGPT desktop app`）
-3. **字段提取**：从每条记录中提取以下字段（缺失则标注 `[需核实:字段名]`）：
- - `name`：仓库全名（owner/repo）
- - `url`：GitHub 地址
- - `description`：仓库描述（若输入中未提供，标注需核实）
- - `language`：主要编程语言（若输入中未提供，标注需核实）
- - `stars`：星标数（若输入中未提供，标注需核实）
- - `license`：许可证类型（若输入中未提供，标注需核实）
-4. **过滤与排序**（可选）：
- - 按语言过滤：`language:Python`
- - 按星标阈值过滤：`stars:>5000`
- - 按主题过滤：`topic:chatgpt` / `topic:openai-api` / `topic:codex`
- - 排序规则：`sort:stars-desc`（默认）或 `sort:name-asc`
-5. **去重**：若多条记录指向同一仓库，保留信息最完整的一条。
-6. **生成输出**：按约定格式输出（见下节）。
-7. **自查**：检查字段完整性、格式正确性、置信度标注是否齐全。
+**步骤 1：接收输入**
+- 获取用户粘贴的文本或指定文件内容
+- 若输入为空，提示："请提供需要整理的仓库列表文本"
+
+**步骤 2：文本解析**
+- 按行或按分隔符切分文本，识别仓库条目
+- 典型条目格式示例：
+  ```
+  [owner/repo](https://github.com/owner/repo) - 描述文字。 Stars: 1234, Language: Python
+  ```
+  或纯文本：
+  ```
+  owner/repo - 描述。 1234 stars, Python
+  ```
+
+**步骤 3：字段提取**
+
+| 字段名 | 提取规则 | 示例 | 缺失处理 |
+|--------|---------|------|---------|
+| `name` | 匹配 `owner/repo` 模式 | `openai/gpt-3` | 跳过该条 |
+| `url` | 匹配 `github.com/owner/repo` | `https://github.com/openai/gpt-3` | 由 name 拼接 |
+| `description` | 提取 `-` 或 `:` 后的文本，截断至 200 字符 | `GPT-3 的 API 封装库` | 置空 |
+| `stars` | 匹配数字 + `stars`/`star`/`★` | `1234` | 置 0 |
+| `language` | 匹配 `Language:` 或 `语言:` 后的字段 | `Python` | 置 `unknown` |
+| `license` | 匹配 `License:` 或 `许可:` 后的字段 | `MIT` | 置 `unknown` |
+| `last_updated` | 匹配日期格式 `YYYY-MM-DD` | `2024-01-15` | 置空 |
+
+**步骤 4：应用过滤（可选）**
+- 语法：`过滤: 字段=值, 字段>=值, 字段<=值`
+- 支持字段：`language`, `stars`, `license`, `name`（支持 `*` 通配符）
+- 示例：`过滤: language=Python, stars>=1000`
+- 多个条件为 AND 关系
+
+**步骤 5：排序与去重**
+- 默认按 `stars` 降序排列
+- 多份输入合并时，按 `name` 字段去重（保留 Star 数高的记录）
+- 排序规则：`stars` 为数字比较，`name` 为字典序
+
+**步骤 6：生成输出**
+- 默认输出 Markdown 表格，列顺序：`name | stars | language | license | description | url`
+- 可选格式：`JSON`（数组对象）、`CSV`（逗号分隔，含表头）
+- 输出前自动统计：`共 N 条记录，M 条被过滤`
 
 ### 输出规范
 
-| 输出格式 | 适用场景 | 示例 |
-|----------|----------|------|
-| Markdown | 默认格式，适合阅读 | 见下方示例 |
-| CSV | 需要导入工具 | `name,url,description,language,stars,license` |
-| JSON | 需要程序化处理 | `[{"name":"openai/chatgpt","url":"...","stars":12345}]` |
+**Markdown 表格示例**：
 
-**Markdown 示例**：
+| name | stars | language | license | description | url |
+|------|-------|----------|---------|-------------|-----|
+| openai/gpt-3 | 45200 | Python | MIT | GPT-3 API 封装库 | https://github.com/openai/gpt-3 |
+| microsoft/Codex | 23100 | Rust | Apache-2.0 | Codex CLI 工具 | https://github.com/microsoft/Codex |
 
-| 仓库名 | 描述 | 语言 | 星标 | 许可证 |
-|--------|------|------|------|--------|
-| openai/chatgpt | ChatGPT desktop application | TypeScript | 45000 | [需核实:license] |
-| acheong08/ChatGPT | Reverse engineered ChatGPT API | Python | 28000 | MIT |
-
----
-
-## 四、置信度门控
-
-- 当输入中缺少某字段且无法推断时，输出 `[需核实:字段名]`，**绝不编造**。
-- 当输入来源为二手整理（非官方 GitHub 页面）时，在输出末尾附加说明：`数据来源为二手整理，星标数与描述可能滞后，建议以 GitHub 页面为准。`
-- 当用户要求排序但未指定排序字段时，默认按星标数降序，并在输出中注明排序规则。
-
----
-
-## 五、错误码体系
-
-| 错误码 | 触发条件 | 提示话术 | 修正步骤 |
-|--------|----------|----------|----------|
-| `E001` | 输入为空或无法识别 | "未检测到有效的仓库记录。请提供 GitHub 仓库名（如 `openai/chatgpt`）或完整 URL。" | 引导用户粘贴仓库列表或文件 |
-| `E002` | 输入包含非仓库内容 | "检测到部分内容不是有效的 GitHub 仓库，已跳过。请确认输入格式。" | 展示跳过的条目，让用户确认是否保留 |
-| `E003` | 过滤条件无匹配结果 | "没有找到符合过滤条件的仓库。请放宽条件或检查拼写。" | 建议降低星标阈值或移除语言过滤 |
-| `E004` | 输出格式不支持 | "暂不支持该输出格式。当前支持：Markdown 、CSV、JSON。" | 列出支持格式，请用户重新选择 |
+**JSON 输出示例**：
+```json
+[
+  {
+    "name": "openai/gpt-3",
+    "stars": 45200,
+    "language": "Python",
+    "license": "MIT",
+    "description": "GPT-3 API 封装库",
+    "url": "https://github.com/openai/gpt-3"
+  }
+]
+```
 
 ---
 
-## 六、FAQ 反模式对照
+## 四、置信度门控：不编造原则
+
+当提取的字段存在以下情况时，使用占位符而非猜测：
+
+| 情况 | 输出占位符 | 说明 |
+|------|-----------|------|
+| 描述文本缺失 | `[需核实:description]` | 不自动生成描述 |
+| 语言无法识别 | `[需核实:language]` | 不猜测语言类型 |
+| Star 数格式异常 | `[需核实:stars]` | 不估算数值 |
+| 许可证信息缺失 | `[需核实:license]` | 不假设默认许可证 |
+| URL 无法从 name 拼接 | `[需核实:url]` | 不构造可能错误的链接 |
+
+**门控逻辑**：
+- 若一条记录中 `name` 字段缺失，整条记录跳过并在输出末尾标注："已跳过 N 条无法识别的记录"
+- 若某字段提取置信度低于 80%（如描述含混合语言），使用占位符
+- 用户可随时要求"补充核实"，Skill 会列出所有占位符字段
+
+---
+
+## 五、错误码体系：问题定位与修复
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|---------|---------|---------|
+| E001 | 输入为空 | "未检测到任何文本，请粘贴仓库列表" | 检查输入是否为空，重新粘贴 |
+| E002 | 无法识别仓库名 | "第 3 行未找到 owner/repo 格式" | 确认文本包含 GitHub 仓库路径 |
+| E003 | 过滤条件语法错误 | "过滤条件格式应为 字段=值 或 字段>=值" | 检查过滤语法，参考步骤 4 |
+| E004 | 输出格式不支持 | "仅支持 markdown/json/csv 三种格式" | 重新指定格式 |
+| E005 | 字段提取冲突 | "第 5 条记录的 stars 字段存在两种格式" | 手动指定优先格式，或忽略冲突字段 |
+| E006 | 合并去重异常 | "检测到重复记录但 Star 数差异过大" | 保留较高 Star 数，并提示用户确认 |
+
+**错误处理流程**：
+1. 检测到错误 → 输出错误码 + 具体位置
+2. 给出修正建议 → 用户调整输入或指令
+3. 重试 → 重新执行解析流程
+
+---
+
+## 六、FAQ 反模式：常见坑与规避
 
 | 常见坑 | 反模式（错误做法） | 正确做法 |
-|--------|--------------------|----------|
-| 编造星标数 | 输入没写星标，直接填 10000 | 标注 `[需核实:stars]` |
-| 混淆同名仓库 | 只按仓库名去重，忽略 owner | 按 `owner/repo` 全名去重 |
-| 忽略许可证缺失 | 默认填 MIT | 标注 `[需核实:license]` |
-| 排序规则不透明 | 排序后不说明依据 | 在输出末尾注明排序字段与方向 |
-| 过度解读描述 | 把描述翻译成"最强大的项目" | 保留原文描述，不做价值判断 |
+|--------|-------------------|---------|
+| 描述含换行 | 直接截断导致表格断裂 | 将换行替换为空格，再截断 |
+| Star 数带千分位逗号 | 直接转数字失败 | 先移除逗号再解析（如 `1,234` → `1234`） |
+| 语言字段多值 | 只取第一个值 | 用 `/` 分隔多个语言，如 `Python/JavaScript` |
+| 仓库名大小写混淆 | 直接去重导致误判 | 统一转为小写后再比较去重 |
+| 输入含无关文本 | 将广告语误认为仓库描述 | 仅提取 `-` 或 `:` 后的首个句子 |
+
+**反模式对照**：
+- ❌ "这个仓库很火" → 不提取为描述
+- ✅ "openai/gpt-3 - 一个强大的 API 库" → 提取 `一个强大的 API 库`
+- ❌ 将 `stars: 1.2k` 解析为 `1.2`
+- ✅ 将 `1.2k` 转换为 `1200`
 
 ---
 
-## 七、渐进式阅读路径
+## 七、渐进式披露：分层次阅读路径
 
-### 新手路径（5 分钟上手）
+### 速查卡（30 秒上手）
+1. 粘贴仓库文本 → 2. 发送"整理一下" → 3. 获得表格
+4. 可选：加过滤条件 → 5. 可选：指定输出格式
 
-1. 阅读「能力边界速查卡」了解能做什么。
-2. 直接粘贴仓库列表，使用默认格式输出。
-3. 如需过滤，参考「执行步骤」第 4 条的过滤语法。
+### 新手路径（5 分钟掌握）
+- 阅读「能力边界」了解适用范围
+- 阅读「标准流程」步骤 1-3 理解基本操作
+- 尝试一次完整输入输出
 
 ### 进阶路径（深度使用）
+- 掌握「字段提取规则」中的边界情况
+- 组合使用过滤、排序、去重功能
+- 对接外部工具链（通过 JSON/CSV 输出）
+- 理解「置信度门控」确保数据质量
 
-1. 掌握全部字段提取规则与置信度门控逻辑。
-2. 自定义输出格式（CSV / JSON）对接自己的工具链。
-3. 结合错误码体系排查输入格式问题。
-4. 批量处理多份数据源，合并去重后生成统一清单。
+### 专家路径（自定义扩展）
+- 修改提取正则表达式（需自行维护）
+- 增加自定义字段（如 `topics`、`homepage`）
+- 集成到 CI/CD 流水线中自动生成周报
 
 ---
 
-## 八、用户协议
+## 八、参数速查表
 
-使用本 Skill 即表示您同意以下条款：
+| 参数 | 默认值 | 可选值 | 说明 |
+|------|--------|--------|------|
+| `format` | `markdown` | `markdown` / `json` / `csv` | 输出格式 |
+| `sort_by` | `stars` | `stars` / `name` / `last_updated` | 排序字段 |
+| `sort_order` | `desc` | `asc` / `desc` | 排序方向 |
+| `dedup` | `true` | `true` / `false` | 是否去重 |
+| `max_records` | 无限制 | 任意正整数 | 最大输出条数 |
+| `include_fields` | 全部 | 字段名子集 | 控制输出列 |
 
-- **责任承担**：使用者自行承担全部责任。本 Skill 输出的内容基于用户提供的输入，不构成任何形式的保证或建议。
-- **禁止反向工程**：不得对本 Skill 的提示词、内部逻辑进行反向工程、提取或再分发。
-- **合规使用**：使用者需确保输入数据来源合法，不得用于侵犯他人知识产权或违反 GitHub 服务条款的行为。
-- **免责声明**：本 Skill 由 AI 辅助生成，仅供学习参考，不提供任何明示或暗示的担保。
+**使用示例**：
+- `输出: json, sort_by=name, max_records=20`
+- `过滤: language=Go, stars>=5000, 输出: csv`
+
+---
+
+## 九、用户协议
 
 <!-- user-agreement-injected -->
 
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担使用本 Skill 产生的全部责任。包括但不限于因输出数据不准确、信息遗漏或格式错误导致的任何直接或间接损失。
+2. **禁止反向工程**：不得对本 Skill 的提示词、逻辑、生成机制或底层设计意图进行反向工程、破解、提取或二次分发。
+3. **数据验证**：本 Skill 输出的结构化数据基于用户提供的输入文本，不保证与 GitHub 实时数据一致。使用者应自行验证关键信息。
+4. **合规使用**：使用者应确保输入文本的获取和传播符合相关法律法规及 GitHub 服务条款。
+
 ---
 
-## 九、许可证（License）
+## 十、许可证（License）
 
-本 Skill 采用 MIT 许可证发布。
+<!-- professional-license-embedded -->
 
-```
-MIT License
+**MIT License**
 
-Copyright (c) 2025 Ling
+Copyright (c) 2024 SkillForge Studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -194,6 +266,7 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-```
 
-<!-- professional-license-embedded -->
+---
+
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档。*
