@@ -29,7 +29,6 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 import time
 import threading
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # G1 生产级重试退避
 _max_retry = 3  # 最大重试次数
@@ -438,8 +437,7 @@ def write_output(pages: list, output_dir: str) -> list:
         
         with file_locks[filename]:
             try:
-                if not dry_run or getattr(args, "force", False):
-                    filepath.write_text(generate_page_file(page), encoding="utf-8")
+                filepath.write_text(generate_page_file(page), encoding="utf-8")
                 generated_files.append(str(filepath))
             except PermissionError:
                 error_exit("E004")
@@ -448,8 +446,7 @@ def write_output(pages: list, output_dir: str) -> list:
     if generated_files:
         index_path = out_path / INDEX_FILENAME
         try:
-            if not dry_run or getattr(args, "force", False):
-                index_path.write_text(generate_index(pages), encoding="utf-8")
+            index_path.write_text(generate_index(pages), encoding="utf-8")
             generated_files.append(str(index_path))
         except PermissionError:
             error_exit("E004")
@@ -472,8 +469,7 @@ def save_cache(output_dir: str, cache: dict) -> None:
     """保存增量构建缓存"""
     cache_path = Path(output_dir) / CACHE_FILE
     try:
-        if not dry_run or getattr(args, "force", False):
-            cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
+        cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=2), encoding="utf-8")
     except PermissionError:
         pass  # 缓存保存失败不影响主流程
 
