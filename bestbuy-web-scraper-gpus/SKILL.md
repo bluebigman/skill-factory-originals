@@ -1,284 +1,280 @@
 ---
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: bestbuy-web-scraper-gpus
 name: bestbuy-web-scraper-gpus
-displayName: 显卡库存监控与到货提醒
-description: 监控百思买RTX 3080 Ti库存，到货即时通知，支持批量轮询与自定义间隔。
-version: 1.0.1
-rules_version: cpr-20260809-n251
+displayName: 显卡到货监控 百思买库存提醒
+description: 监控百思买显卡库存，到货即时提醒，支持批量轮询与自定义间隔。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/bestbuy-web-scraper-gpus
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: 库存哨兵工作室
+author: SkillForge Studio
 agent_created: true
-trigger_words: ["bestbuy-web-scraper-gpus", "显卡到货监控", "3080Ti库存查询", "百思买补货提醒", "GPU库存抓取"]
+trigger_words: ["bestbuy-web-scraper-gpus", "显卡到货监控", "3080Ti库存查询", "百思买补货提醒", "GPU库存抓取", "显卡库存轮询", "百思买到货通知"]
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
 ---
 
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
-
-
 # 百思买显卡库存监控 Skill 文档
 
-## 一、能力边界速查卡
+## 1. 能力边界（一页纸速查卡）
 
 ### 1.1 本 Skill 能做什么
 
-| 序号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 商品页库存抓取 | 针对百思买（Best Buy）商品详情页，提取 RTX 3080 Ti 的库存状态（有货/无货/预售） |
-| 2 | 结构化输出 | 将抓取结果整理为 JSON 格式，包含商品名、SKU、价格、库存状态、抓取时间戳 |
-| 3 | 到货通知 | 当库存状态从“无货”变为“有货”时，生成醒目通知文本（终端输出或写入日志文件） |
-| 4 | 批量商品监控 | 支持同时监控多个商品 URL，循环轮询，间隔时间可自定义 |
-| 5 | 自定义输出格式 | 支持输出为 JSON 文件、CSV 表格或纯文本摘要，便于对接其他工具 |
+| 能力项 | 说明 |
+|--------|------|
+| 库存轮询 | 按设定间隔批量请求百思买显卡商品页，解析库存状态 |
+| 到货提醒 | 检测到目标显卡从"无货"变为"有货"时，输出醒目提示 |
+| 批量监控 | 支持在配置文件中定义多个显卡 SKU，一次运行全部监控 |
+| 自定义间隔 | 轮询频率可由用户指定，默认 300 秒，最小建议 60 秒 |
+| 快照导出 | 每次轮询后生成 `inventory_snapshot.json`，记录当前所有目标商品状态 |
+| 自检模式 | 通过 `--selftest` 验证依赖安装与网络连通性，不发起实际监控 |
 
 ### 1.2 本 Skill 不能做什么
 
-| 序号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不处理验证码 | 若百思买页面出现人机验证（CAPTCHA），本工具无法自动绕过，需人工介入 |
-| 2 | 不模拟登录 | 不处理需要登录才能查看的价格或库存信息 |
-| 3 | 不保证实时性 | 抓取频率受限于网络延迟与目标站点响应速度，存在秒级延迟 |
-| 4 | 不提供购买服务 | 仅负责监控与通知，不包含自动下单、加入购物车等操作 |
-| 5 | 不处理非目标商品 | 仅针对规格中指定的 RTX 3080 Ti 相关商品页，其他显卡型号不在处理范围内 |
+| 限制项 | 说明 |
+|--------|------|
+| 不保证实时性 | 库存数据以百思买页面实际返回为准，存在网络延迟与页面缓存 |
+| 不处理购买流程 | 本工具仅监控与提醒，不自动下单、不代购、不绕过任何风控 |
+| 不绕过反爬机制 | 若百思买对请求频率或来源 IP 做出限制，本工具不提供绕过方案 |
+| 不保证数据绝对准确 | 页面结构变更、地区差异、登录态差异均可能导致解析失败 |
+| 不支持非显卡品类 | 虽然代码可扩展，但本 Skill 的解析逻辑针对显卡商品页设计 |
 
 ### 1.3 适用对象
 
-- 需要持续关注 RTX 3080 Ti 补货情况的个人买家
-- 小型代购团队或渠道商，需要批量监控多个商品链接
-- 对 Scrapy 框架有一定了解，希望快速搭建库存监控脚本的开发者
+- 想蹲守特定显卡（如 RTX 3080 Ti）补货的个人买家
+- 需要批量跟踪多款显卡库存状态的技术爱好者
+- 希望将库存监控集成到自动化工作流中的开发者
 
 ---
 
-## 二、触发方式与场景映射
+## 2. 触发方式
 
 ### 2.1 触发词
 
-- 主触发词：`bestbuy-web-scraper-gpus`
-- 同义场景词：`显卡到货监控`、`3080Ti库存查询`、`百思买补货提醒`
+当用户输入以下任一触发词时，本 Skill 应被激活：
 
-### 2.2 大白话场景映射表
+- `bestbuy-web-scraper-gpus`
+- `显卡到货监控`
+- `3080Ti库存查询`
+- `百思买补货提醒`
+- `GPU库存抓取`
+- `显卡库存轮询`
+- `百思买到货通知`
 
-| 用户说（口语化表达） | 实际执行动作 |
-|---------------------|-------------|
-| “帮我盯着百思买上 3080Ti 有没有货” | 启动 Scrapy 爬虫，抓取指定商品页库存状态 |
-| “每 10 分钟查一次，有货就喊我” | 设置轮询间隔为 600 秒，状态变化时触发通知 |
-| “把结果存成表格发我” | 输出 CSV 格式文件，包含每次抓取的库存快照 |
-| “这几个链接都帮我看看” | 将多个 URL 加入待抓取队列，批量执行 |
-| “现在有没有货？” | 执行单次抓取，立即返回当前库存状态 |
+### 2.2 场景映射表
+
+| 用户说（大白话） | 本 Skill 实际执行 |
+|------------------|-------------------|
+| "帮我盯着百思买上的 3080Ti，有货了告诉我" | 创建配置 → 启动轮询 → 检测到货后输出提醒 |
+| "查一下这几款显卡现在有没有货" | 执行单次抓取 → 输出当前库存快照 |
+| "每 5 分钟帮我刷一次库存" | 设置轮询间隔为 300 秒 → 持续监控 |
+| "监控 3 张显卡，分别给我看状态" | 配置多 SKU → 批量轮询 → 汇总输出 |
+| "先测试一下工具能不能用" | 运行 `--selftest` → 输出环境检查结果 |
 
 ---
 
-## 三、标准执行流程
+## 3. 标准流程
 
 ### 3.1 前置条件
 
-| 条件项 | 要求 |
-|--------|------|
-| Python 环境 | 3.8 及以上版本 |
-| Scrapy 框架 | 已安装（`pip install scrapy`） |
-| 网络环境 | 可正常访问百思买网站（需海外网络或代理） |
-| 目标 URL | 至少一个有效的百思买商品页链接（RTX 3080 Ti 相关） |
+| 条件 | 要求 |
+|------|------|
+| Python 版本 | 3.8 及以上 |
+| 依赖包 | `requests`、`beautifulsoup4`、`lxml` |
+| 网络 | 可访问百思买网站（可能需要科学上网，视用户网络环境而定） |
+| 目标 SKU | 用户需提供要监控的显卡商品页 URL 或 SKU 编号 |
 
 ### 3.2 执行步骤
 
-**第一步：确认输入**
+#### 步骤一：安装依赖
 
-收集用户提供的商品 URL 列表，检查格式是否合法（必须以 `https://www.bestbuy.com/site/` 开头）。若 URL 无效，返回错误码 `E1001`。
+```bash
+pip install requests beautifulsoup4 lxml
+```
 
-**第二步：配置抓取参数**
+#### 步骤二：创建配置文件
 
-| 参数名 | 默认值 | 说明 |
-|--------|--------|------|
-| `interval` | 300 | 轮询间隔（秒），最小 60，最大 86400 |
-| `output_format` | json | 输出格式：json / csv / text |
-| `notify_on_change` | true | 仅在状态变化时通知，还是每次抓取都通知 |
-| `max_retries` | 3 | 单次抓取失败后的重试次数 |
-
-**第三步：执行抓取**
-
-运行 Scrapy 爬虫，对每个 URL 执行以下操作：
-
-1. 发送 HTTP GET 请求，携带合理的 User-Agent 头
-2. 解析页面中的库存状态元素（通常位于 `div.fulfillment-add-to-cart-button` 或类似容器内）
-3. 提取商品名称、SKU、价格、库存状态
-4. 将结果暂存于内存中
-
-**第四步：状态比对与通知**
-
-- 若 `notify_on_change` 为 `true`，将本次结果与上一次结果比对：
-  - 状态从“无货”变为“有货” → 输出醒目通知（`[到货提醒]` 前缀）
-  - 状态无变化 → 静默记录
-- 若 `notify_on_change` 为 `false`，每次抓取均输出结果
-
-**第五步：输出与保存**
-
-按 `output_format` 参数生成结果文件：
-
-- `json`：输出 `inventory_snapshot.json`，包含每次抓取的完整记录
-- `csv`：输出 `inventory_log.csv`，每行一条记录，字段为 `timestamp, sku, name, price, stock_status`
-- `text`：终端直接打印摘要，不落盘
-
-### 3.3 输出规范
-
-**JSON 输出示例：**
+在项目目录下创建 `monitor_config.json`，格式如下：
 
 ```json
 {
-  "snapshot_id": "20260809_153000_001",
-  "captured_at": "2026-08-09T15:30:00Z",
-  "items": [
+  "interval_seconds": 300,
+  "targets": [
     {
-      "sku": "6450982",
-      "name": "NVIDIA GeForce RTX 3080 Ti 12GB GDDR6X",
-      "price": 1199.99,
-      "stock_status": "in_stock",
-      "url": "https://www.bestbuy.com/site/6450982.p"
+      "name": "RTX 3080 Ti Founders Edition",
+      "url": "https://www.bestbuy.com/site/nvidia-geforce-rtx-3080-ti-12gb-gddr6x-graphics-card/6470917.p?skuId=6470917",
+      "sku_id": "6470917"
+    },
+    {
+      "name": "RTX 3070 Ti Gaming OC",
+      "url": "https://www.bestbuy.com/site/gigabyte-geforce-rtx-3070-ti-gaming-oc-8g-graphics-card/6470918.p?skuId=6470918",
+      "sku_id": "6470918"
     }
   ]
 }
 ```
 
-**CSV 输出示例：**
+**参数说明：**
 
-```csv
-timestamp,sku,name,price,stock_status
-2026-08-09T15:30:00Z,6450982,NVIDIA GeForce RTX 3080 Ti 12GB GDDR6X,1199.99,in_stock
+| 参数 | 类型 | 必填 | 说明 |
+|------|------|------|------|
+| `interval_seconds` | int | 否 | 轮询间隔（秒），默认 300，最小建议 60 |
+| `targets` | array | 是 | 监控目标列表，至少 1 个 |
+| `targets[].name` | string | 是 | 商品别名，用于输出展示 |
+| `targets[].url` | string | 是 | 商品页完整 URL |
+| `targets[].sku_id` | string | 是 | 百思买 SKU 编号，用于 URL 校验 |
+
+#### 步骤三：运行监控
+
+```bash
+python monitor.py --config monitor_config.json
 ```
 
-**文本输出示例：**
+#### 步骤四：查看输出
 
+- 控制台实时输出每次轮询结果
+- 每次轮询后自动生成 `inventory_snapshot.json`，内容示例：
+
+```json
+{
+  "timestamp": "2025-01-15T10:30:00Z",
+  "results": [
+    {
+      "name": "RTX 3080 Ti Founders Edition",
+      "sku_id": "6470917",
+      "in_stock": false,
+      "price": null,
+      "status_text": "Sold Out",
+      "checked_at": "2025-01-15T10:30:00Z"
+    }
+  ]
+}
 ```
-[2026-08-09 15:30:00] RTX 3080 Ti (SKU: 6450982) — 有货，价格 $1199.99
-```
+
+### 3.3 输出规范
+
+| 输出类型 | 格式 | 说明 |
+|----------|------|------|
+| 控制台日志 | `[HH:MM:SS] [SKU名称] 状态：有货/无货` | 每次轮询逐条输出 |
+| 到货提醒 | `⚠️ 到货提醒：{商品名} 当前可购买！` | 状态从无货变为有货时输出 |
+| 快照文件 | JSON 格式，UTF-8 编码 | 覆盖写入，保留最新一次结果 |
 
 ---
 
-## 四、置信度门控机制
+## 4. 置信度门控
 
-### 4.1 信息不足时的处理规则
+### 4.1 信息不足时的处理
 
-当出现以下情况时，本 Skill 不会编造数据，而是输出占位符 `[需核实:字段名]`：
+当出现以下情况时，本 Skill 不会编造数据，而是输出 `[需核实:字段]` 占位符：
 
-| 场景 | 输出内容 |
+| 场景 | 输出示例 |
 |------|----------|
-| 页面结构变化，无法定位库存元素 | `"stock_status": "[需核实:stock_status]"` |
-| 价格被隐藏（需登录） | `"price": "[需核实:price]"` |
-| 商品名称解析失败 | `"name": "[需核实:name]"` |
-| 页面加载超时 | 整条记录标记为 `"fetch_status": "timeout"` |
+| 页面解析失败，无法获取价格 | `"price": "[需核实:price]"` |
+| 库存状态文本无法识别 | `"in_stock": "[需核实:in_stock]"` |
+| 商品页返回 404 或重定向 | `"status_text": "[需核实:page_status]"` |
+| 网络超时，未获取到响应 | `"status_text": "[需核实:network_timeout]"` |
 
-### 4.2 置信度标注
+### 4.2 处理原则
 
-每条抓取记录附带 `confidence` 字段，取值规则：
-
-| 置信度 | 判定条件 |
-|--------|----------|
-| `high` | 所有字段均成功解析，无占位符 |
-| `medium` | 存在 1 个字段为占位符，或页面加载耗时超过 10 秒 |
-| `low` | 存在 2 个及以上字段为占位符，或重试 3 次仍失败 |
+1. 宁可输出占位符，不猜测库存状态
+2. 每次轮询独立判断，不沿用上一次结果
+3. 若连续 3 次解析失败，在控制台输出警告并建议检查页面结构是否变更
 
 ---
 
-## 五、错误码体系
+## 5. 错误码体系
 
 | 错误码 | 含义 | 提示话术 | 修正步骤 |
 |--------|------|----------|----------|
-| `E1001` | URL 格式无效 | “您提供的链接不是有效的百思买商品页，请检查后重试。” | 确认 URL 以 `https://www.bestbuy.com/site/` 开头，且包含数字 SKU |
-| `E1002` | 网络连接失败 | “无法连接到百思买服务器，请检查网络或代理设置。” | 测试网络连通性，更换代理节点后重试 |
-| `E1003` | 页面解析失败 | “页面结构可能已更新，无法提取库存信息。” | 检查页面是否出现验证码，或等待 30 分钟后重试 |
-| `E1004` | 参数越界 | “轮询间隔必须在 60 到 86400 秒之间。” | 调整 `interval` 参数至合法范围 |
-| `E1005` | 输出格式不支持 | “仅支持 json、csv、text 三种输出格式。” | 修改 `output_format` 参数 |
+| `E001` | 配置文件不存在或格式错误 | `[错误] 无法读取配置文件，请检查路径与 JSON 格式` | 1. 确认文件路径正确；2. 用 `json.tool` 校验格式 |
+| `E002` | 网络请求失败（超时/连接拒绝） | `[错误] 网络请求失败：{具体原因}` | 1. 检查网络连通性；2. 增大超时时间；3. 确认目标 URL 可访问 |
+| `E003` | 页面解析失败（HTML 结构变更） | `[错误] 无法解析商品页，可能页面结构已更新` | 1. 手动打开 URL 确认页面存在；2. 检查选择器是否需要更新 |
+| `E004` | 目标列表为空 | `[错误] 配置文件中未找到任何监控目标` | 1. 在 `targets` 数组中至少添加一个商品 |
+| `E005` | 依赖缺失 | `[错误] 缺少依赖包：{包名}` | 1. 执行 `pip install {包名}` 安装缺失依赖 |
+| `E006` | 请求频率过高被限制 | `[警告] 请求被拒绝，疑似触发频率限制` | 1. 增大 `interval_seconds`；2. 暂停 10 分钟后再试 |
 
 ---
 
-## 六、FAQ 与反模式对照
+## 6. FAQ 反模式
 
-### 6.1 常见坑
+### 6.1 常见坑与对照
 
-**坑 1：频繁请求导致 IP 被封**
+| 坑 | 反模式（错误做法） | 正模式（正确做法） |
+|----|-------------------|-------------------|
+| 轮询间隔过短 | 设置 `interval_seconds: 5`，导致 IP 被临时封禁 | 间隔至少 60 秒，建议 300 秒以上 |
+| 忽略页面结构变更 | 页面改版后解析失败，仍反复重试 | 收到 `E003` 后手动检查页面，更新选择器 |
+| 依赖未安装完整 | 只装了 `requests`，运行时报 `bs4` 缺失 | 按文档一次性安装三个依赖包 |
+| 配置文件编码错误 | 使用 Windows 记事本保存为 UTF-8 BOM，JSON 解析失败 | 使用 UTF-8 无 BOM 编码保存 |
+| 混淆 SKU 与 URL | 只填 URL 不填 `sku_id`，导致校验失败 | 两个字段都填写，确保一致 |
 
-- 反模式：将 `interval` 设为 60 秒以下，持续高频抓取
-- 正确做法：保持默认 300 秒间隔，或使用代理池轮换 IP
+### 6.2 反模式自查清单
 
-**坑 2：忽略页面结构变化**
-
-- 反模式：爬虫写死 CSS 选择器，页面改版后直接报错
-- 正确做法：在解析层增加容错逻辑，选择器失效时自动降级为模糊匹配
-
-**坑 3：不处理时区问题**
-
-- 反模式：直接使用本地时间戳，导致跨时区比对混乱
-- 正确做法：统一使用 UTC 时间（ISO 8601 格式）记录时间戳
-
-**坑 4：通知信息过于频繁**
-
-- 反模式：每次抓取都发送通知，造成信息轰炸
-- 正确做法：默认开启 `notify_on_change`，仅在状态变化时提醒
-
-**坑 5：忽略重试机制**
-
-- 反模式：单次请求失败后直接终止整个任务
-- 正确做法：设置 `max_retries=3`，采用指数退避策略（1s、2s、4s）重试
-
-### 6.2 反模式对照表
-
-| 反模式 | 推荐替代方案 |
-|--------|-------------|
-| 硬编码商品 URL 列表 | 从外部配置文件读取，便于动态增删 |
-| 同步阻塞式抓取 | 使用 Scrapy 异步并发，提升吞吐量 |
-| 将库存状态硬编码为布尔值 | 使用枚举（in_stock / out_of_stock / pre_order / unknown） |
-| 忽略 HTTP 状态码检查 | 先检查 `response.status`，非 200 时直接标记为失败 |
+- [ ] 我是否设置了合理的轮询间隔（≥60 秒）？
+- [ ] 我是否在配置中同时填写了 `url` 和 `sku_id`？
+- [ ] 我是否在页面结构变更后及时更新了解析逻辑？
+- [ ] 我是否遵守了百思买的服务条款，未进行高频请求？
 
 ---
 
-## 七、渐进式披露阅读路径
+## 7. 渐进式披露
 
-### 7.1 新手速查卡（30 秒上手）
+### 7.1 速查卡（30 秒上手）
 
-1. 准备一个百思买 RTX 3080 Ti 商品链接
-2. 运行命令：`python monitor.py --url <商品链接> --interval 300`
-3. 等待输出结果，看到 `[到货提醒]` 即表示有货
-4. 结果默认保存为 `inventory_snapshot.json`
+```bash
+# 1. 安装依赖
+pip install requests beautifulsoup4 lxml
 
-### 7.2 进阶用户指南（完整能力）
+# 2. 创建 monitor_config.json（参考上文格式）
 
-- 阅读「三、标准执行流程」了解全部参数配置
-- 阅读「五、错误码体系」排查运行问题
-- 阅读「六、FAQ 与反模式对照」优化抓取策略
-- 可自行修改 `spider.py` 中的解析逻辑，适配其他显卡型号
+# 3. 运行监控
+python monitor.py --config monitor_config.json
+
+# 4. 查看结果
+cat inventory_snapshot.json
+```
+
+### 7.2 新手路径（首次使用）
+
+1. 阅读第 3.2 节，创建配置文件
+2. 先运行 `python monitor.py --selftest` 验证环境
+3. 使用单目标配置，间隔设为 600 秒，观察 2-3 次轮询结果
+4. 确认输出正常后，再添加更多目标
+
+### 7.3 进阶路径（深度使用）
+
+1. 将 `monitor.py` 集成到 cron 或 systemd 定时任务中
+2. 修改输出逻辑，将到货提醒推送到钉钉/企业微信/Telegram（需自行扩展）
+3. 增加价格变动监控，记录价格历史曲线
+4. 使用代理池分散请求来源，降低被限制风险（注意遵守服务条款）
 
 ---
 
-## 八、用户协议
+## 8. 用户协议
 
 <!-- user-agreement-injected -->
 
 **使用本 Skill 即表示您同意以下条款：**
 
-1. 本 Skill 仅供学习与个人用途，使用者自行承担全部责任。
-2. 使用者应遵守百思买网站的服务条款与 robots.txt 规范，不得利用本工具进行恶意抓取或高频请求。
-3. 禁止对本 Skill 进行反向工程、反编译或试图提取底层源代码用于商业用途。
-4. 本 Skill 不提供任何形式的明示或暗示担保，包括但不限于适销性、特定用途适用性。
-5. 因使用本 Skill 产生的任何直接或间接损失，作者不承担任何责任。
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任，包括但不限于因数据不准确、请求被限制、或违反第三方网站条款所导致的任何直接或间接损失。
+2. **禁止反向工程**：使用者不得对本 Skill 的代码进行反向工程、反编译、或试图提取其核心逻辑用于商业用途。
+3. **合规使用**：使用者应遵守百思买网站的服务条款及相关法律法规，本 Skill 仅供个人学习与技术研究使用。
+4. **无担保声明**：本 Skill 按"原样"提供，不附带任何明示或暗示的担保，包括但不限于适销性、特定用途适用性及不侵权保证。
 
 ---
 
-## 九、许可证（License）
+## 9. 许可证（License）
 
 <!-- professional-license-embedded -->
 
 **MIT License**
 
-Copyright (c) 2026 库存哨兵工作室
+Copyright (c) 2025 SkillForge Studio
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -300,81 +296,12 @@ SOFTWARE.
 
 ---
 
-## 十、附：最小可运行示例（main.py）
+## 10. 版本记录
 
-```python
-#!/usr/bin/env python3
-"""Best Buy RTX 3080 Ti 库存监控 - 最小示例"""
-
-import argparse
-import json
-import time
-from datetime import datetime, timezone
-
-import requests
-from scrapy import Selector
-
-# 百思买商品页库存状态选择器（基于 2026 年 8 月页面结构）
-STOCK_SELECTOR = "div.fulfillment-add-to-cart-button button[data-button-state]"
-PRICE_SELECTOR = "div.priceView-hero-price span[aria-hidden='true']"
-NAME_SELECTOR = "h1.sku-title"
-
-def fetch_inventory(url: str) -> dict:
-    """抓取单个商品页的库存信息"""
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
-    }
-    resp = requests.get(url, headers=headers, timeout=15)
-    resp.raise_for_status()
-
-    sel = Selector(text=resp.text)
-    stock_btn = sel.css(STOCK_SELECTOR).get()
-    price = sel.css(PRICE_SELECTOR).re_first(r"\$[\d,]+\.\d{2}")
-    name = sel.css(NAME_SELECTOR).get()
-
-    # 判定库存状态
-    if stock_btn and "SOLD_OUT" in stock_btn:
-        status = "out_of_stock"
-    elif stock_btn and "ADD_TO_CART" in stock_btn:
-        status = "in_stock"
-    else:
-        status = "[需核实:stock_status]"
-
-    return {
-        "name": name.strip() if name else "[需核实:name]",
-        "price": price if price else "[需核实:price]",
-        "stock_status": status,
-        "captured_at": datetime.now(timezone.utc).isoformat(),
-    }
-
-def main():
-    parser = argparse.ArgumentParser(description="Best Buy GPU 库存监控")
-    parser.add_argument("--url", required=True, help="百思买商品页 URL")
-    parser.add_argument("--interval", type=int, default=300, help="轮询间隔（秒）")
-    parser.add_argument("--once", action="store_true", help="仅执行一次抓取")
-    args = parser.parse_args()
-
-    if args.interval < 60:
-        print("错误：轮询间隔不能小于 60 秒")
-        return
-
-    while True:
-        try:
-            data = fetch_inventory(args.url)
-            print(json.dumps(data, ensure_ascii=False, indent=2))
-            if data["stock_status"] == "in_stock":
-                print("[到货提醒] 目标商品已上架！")
-        except Exception as exc:
-            print(f"抓取失败: {exc}")
-
-        if args.once:
-            break
-        time.sleep(args.interval)
-
-if __name__ == "__main__":
-    main()
-```
+| 版本 | 日期 | 变更说明 |
+|------|------|----------|
+| 1.0.0 | 2025-01-15 | 初始版本，包含基础库存监控、批量轮询、快照导出功能 |
 
 ---
 
-*本文档由 AI 辅助生成，旨在提供清晰、可执行的使用指导。实际部署前请结合目标网站最新页面结构进行适配调整。*
+*本 Skill 由 AI 辅助生成，仅供参考。使用前请阅读相关文档并自行验证功能。*
