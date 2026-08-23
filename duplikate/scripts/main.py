@@ -28,13 +28,74 @@ import os
 import shutil
 import sys
 import tempfile
+import hashlib
 from pathlib import Path
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import datetime, timezone
 
 
 # ============================================================
 # 核心逻辑：目录同步
 # ============================================================
+
+def calculate_file_hash(file_path, chunk_size=8192):
+    """
+    计算文件的 SHA-256 哈希值，用于内容比较。
+    
+    参数：
+        file_path (str): 文件路径。
+        chunk_size (int): 分块读取大小。
+    
+    返回：
+        str: 文件的 SHA-256 哈希值（十六进制）。
+    """
+    sha256_hash = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        for chunk in iter(lambda: f.read(chunk_size), b""):
+            sha256_hash.update(chunk)
+    return sha256_hash.hexdigest()
+
+
+def atomic_copy(src_file, dst_file):
+    """
+    原子复制文件：先写入临时文件，再原子替换。
+    
+    参数：
+        src_file (str): 源文件路径。
+        dst_file (str): 目标文件路径。
+    
+    返回：
+        None
+    
+    错误码：
+        可能抛出 OSError（E008 场景），由上层调用者捕获并转换。
+    """
+    dst_path = Path(dst_file)
+    dst_dir = dst_path.parent
+    
+    # 确保目标目录存在
+    dst_dir.mkdir(parents=True, exist_ok=True)
+    
+    # 创建临时文件
+    fd, temp_path = tempfile.mkstemp(dir=str(dst_dir), prefix=".tmp_", suffix=".part")
+    try:
+        # 复制内容
+        with os.fdopen(fd, "wb") as temp_file:
+            with open(src_file, "rb") as src:
+                shutil.copyfileobj(src, temp_file)
+        
+        # 复制权限和元数据
+        shutil.copystat(src_file, temp_path)
+        
+        # 原子替换
+        os.replace(temp_path, dst_file)
+    except Exception:
+        # 清理临时文件
+        try:
+            os.unlink(temp_path)
+        except OSError:
+            pass
+        raise
+
 
 def sync_directory(source_dir, target_dir, dry_run=False):
     """
@@ -81,8 +142,8 @@ def sync_directory(source_dir, target_dir, dry_run=False):
                 raise OSError(f"E007: 目标目录创建失败: {target_dir} ({exc})") from exc
         stats["created_dirs"] += 1
 
-    # --- 遍历源目录 ---
-    for root, dirs, files in os.walk(source_dir):
+    # --- 遍历源目录（followlinks=False 防止符号链接循环） ---
+    for root, dirs, files in os.walk(source_dir, followlinks=False):
         # 计算相对路径
         rel_path = os.path.relpath(root, source_dir)
         if rel_path == ".":
@@ -119,18 +180,11 @@ def sync_directory(source_dir, target_dir, dry_run=False):
                     if src_size != dst_size:
                         need_copy = True
                     else:
-                        # 大小相同再比较内容（保守但更准确）
-                        # 注意：这里使用简单比较，不处理大文件的内存问题（规格未要求）
-                        with open(src_file, "rb") as f_src, open(dst_file, "rb") as f_dst:
-                            # 分块比较，避免一次性读入超大文件
-                            while True:
-                                chunk_src = f_src.read(8192)
-                                chunk_dst = f_dst.read(8192)
-                                if chunk_src != chunk_dst:
-                                    need_copy = True
-                                    break
-                                if not chunk_src:  # 都读完了且相同
-                                    break
+                        # 大小相同再比较哈希值（更准确）
+                        src_hash = calculate_file_hash(src_file)
+                        dst_hash = calculate_file_hash(dst_file)
+                        if src_hash != dst_hash:
+                            need_copy = True
                 except OSError:
                     # 任何读取错误都视为需要复制（保守）
                     need_copy = True
@@ -140,7 +194,7 @@ def sync_directory(source_dir, target_dir, dry_run=False):
                     print(f"[DRY-RUN] 复制: {src_file} -> {dst_file}")
                 else:
                     try:
-                        shutil.copy2(src_file, dst_file)  # copy2 保留元数据
+                        atomic_copy(src_file, dst_file)
                     except OSError as exc:
                         raise OSError(f"E008: 文件复制失败: {src_file} -> {dst_file} ({exc})") from exc
                 stats["copied"] += 1
@@ -257,54 +311,73 @@ def run_selftest():
                 # 执行同步
                 stats = sync_directory(src_dir, dst_dir, dry_run=False)
 
-                # --- 宽松断言 1: 复制的文件数应该等于源文件数（3个） ---
-                # 注意：不依赖精确值，只断言"复制数 >= 3"（因为可能未来增加文件）
-                assert stats["copied"] >= 3, f"自检失败: 复制文件数过少, 实际: {stats['copied']}"
+                # --- 断言 1: 复制的文件数应该等于源文件数（3个） ---
+                assert stats["copied"] == 3, f"自检失败: 复制文件数应为3, 实际: {stats['copied']}"
 
-                # --- 宽松断言 2: 目标目录中应该存在所有源文件 ---
+                # --- 断言 2: 目标目录中应该存在所有源文件 ---
                 for rel_path in test_files:
                     target_file = os.path.join(dst_dir, rel_path)
                     assert os.path.exists(target_file), f"自检失败: 目标文件不存在: {target_file}"
 
-                # --- 宽松断言 3: 文件内容一致 ---
+                # --- 断言 3: 文件内容一致 ---
                 for rel_path, expected_content in test_files.items():
                     target_file = os.path.join(dst_dir, rel_path)
                     with open(target_file, "rb") as f:
                         actual_content = f.read()
-                    # 使用大小比较（宽松）
-                    assert len(actual_content) == len(expected_content), (
-                        f"自检失败: 文件大小不一致: {rel_path}"
+                    assert actual_content == expected_content, (
+                        f"自检失败: 文件内容不一致: {rel_path}"
                     )
 
-                # --- 宽松断言 4: 第二次同步应该全部跳过（不复制） ---
+                # --- 断言 4: 第二次同步应该全部跳过（不复制） ---
                 stats_second = sync_directory(src_dir, dst_dir, dry_run=False)
                 assert stats_second["copied"] == 0, (
                     f"自检失败: 第二次同步不应复制任何文件, 实际复制: {stats_second['copied']}"
                 )
-                assert stats_second["skipped"] >= 3, (
-                    f"自检失败: 第二次同步应跳过至少3个文件, 实际跳过: {stats_second['skipped']}"
+                assert stats_second["skipped"] == 3, (
+                    f"自检失败: 第二次同步应跳过3个文件, 实际跳过: {stats_second['skipped']}"
                 )
 
-                # --- 宽松断言 5: 置信度评估（应该很高） ---
+                # --- 断言 5: 置信度评估（应该很高） ---
                 confidence, label = evaluate_confidence(stats)
-                assert confidence >= 0.8, f"自检失败: 置信度过低: {confidence}"
-                # label 可以是空字符串或"建议复核"，但不能是"[需核实]"（因为同步成功）
-                assert label != "[需核实]", f"自检失败: 置信度标签不应为[需核实]: {label}"
+                assert confidence >= 0.9, f"自检失败: 置信度过低: {confidence}"
+                assert label == "", f"自检失败: 置信度标签应为空, 实际: {label}"
 
-                # --- 宽松断言 6: dry-run 模式不实际修改目标 ---
+                # --- 断言 6: dry-run 模式不实际修改目标 ---
                 with tempfile.TemporaryDirectory(prefix="duplikate_selftest_dry_") as dry_dst:
                     stats_dry = sync_directory(src_dir, dry_dst, dry_run=True)
                     # dry-run 不应实际创建文件
-                    assert stats_dry["copied"] >= 3, "自检失败: dry-run 统计信息错误"
+                    assert stats_dry["copied"] == 3, "自检失败: dry-run 统计信息错误"
                     # 目标目录可能被创建（mkdir 在 dry-run 中也会执行？），
                     # 但文件不应被复制。这里只检查没有文件被复制。
-                    # 注意：我们的实现中 dry-run 也会创建目录（因为 mkdir 会执行），
-                    # 所以只检查文件不存在。
                     for rel_path in test_files:
                         target_file = os.path.join(dry_dst, rel_path)
                         assert not os.path.exists(target_file), (
                             f"自检失败: dry-run 不应创建文件: {target_file}"
                         )
+
+                # --- 断言 7: 原子复制功能测试 ---
+                test_src = os.path.join(src_dir, "file1.txt")
+                test_dst = os.path.join(dst_dir, "atomic_test.txt")
+                atomic_copy(test_src, test_dst)
+                assert os.path.exists(test_dst), "自检失败: 原子复制未创建目标文件"
+                with open(test_src, "rb") as f_src, open(test_dst, "rb") as f_dst:
+                    assert f_src.read() == f_dst.read(), "自检失败: 原子复制内容不一致"
+
+                # --- 断言 8: 符号链接循环测试 ---
+                # 创建符号链接循环（如果平台支持）
+                if hasattr(os, "symlink"):
+                    loop_dir = os.path.join(src_dir, "loop")
+                    os.makedirs(loop_dir, exist_ok=True)
+                    try:
+                        os.symlink(src_dir, os.path.join(loop_dir, "back_to_root"))
+                        # 执行同步，不应死循环
+                        with tempfile.TemporaryDirectory(prefix="duplikate_selftest_loop_") as loop_dst:
+                            stats_loop = sync_directory(src_dir, loop_dst, dry_run=False)
+                            # 应该正常完成，不抛异常
+                            assert stats_loop["copied"] >= 3, "自检失败: 符号链接循环测试复制数异常"
+                    except (OSError, NotImplementedError):
+                        # 平台不支持符号链接，跳过
+                        pass
 
         print("[SELFTEST] 全部自检断言通过 ✓")
         return 0
@@ -364,14 +437,5 @@ def main(argv=None):
 
     # --- 输出结果 ---
     confidence, label = evaluate_confidence(stats)
-    print(f"同步完成: 复制 {stats['copied']} 个文件, 跳过 {stats['skipped']} 个文件, 创建 {stats['created_dirs']} 个目录")
-    if label:
-        print(f"置信度: {confidence:.0%} - {label}")
-    else:
-        print(f"置信度: {confidence:.0%}")
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    timestamp = datetime.now(timezone.utc).isoformat()
+    print(f"[{timestamp}] 同步完成: 复制 {stats['copied']} 个文件, 跳过 {stats['skipped']} 个文件, 创建 {stats['created_dirs']} 个目录")
