@@ -587,6 +587,11 @@ def main() -> int:
         help="从文本提取关键信息"
     )
 
+    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+
     args = parser.parse_args()
 
     # 自检模式
@@ -638,7 +643,7 @@ def main() -> int:
     # 批量模式
     if args.batch:
         try:
-            with open(args.batch, "r", encoding="utf-8") as f:
+            with open(args.batch, "r", encoding="utf-8", errors="replace") as f:
                 items = [line.strip() for line in f if line.strip()]
             result = router.batch_process(items, "route")
             print(json.dumps({
