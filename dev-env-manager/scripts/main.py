@@ -939,6 +939,14 @@ def main():
     parser.add_argument("--force", action="store_true", help="强制模式（允许写盘）")
     parser.add_argument("--verbose", action="store_true", help="详细输出模式")
     
+    parser.add_argument("--batch", default=None, help="文档声明的参数")  # F3 补全
+    
+    parser.add_argument("--config", default=None, help="文档声明的参数")  # F3 补全
+    
+    parser.add_argument("--mode", default=None, help="文档声明的参数")  # F3 补全
+    
+    parser.add_argument("--task", default=None, help="文档声明的参数")  # F3 补全
+    
     args = parser.parse_args()
     
     # 自检模式
