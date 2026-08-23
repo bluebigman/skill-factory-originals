@@ -32,7 +32,6 @@ import json
 import os
 import sys
 import tempfile
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ---------------------------------------------------------------------------
 # 数据存储层（基于 JSON 文件，默认位置 ~/.cmdbox.json）
@@ -199,38 +198,38 @@ def _build_parser() -> argparse.ArgumentParser:
 
     # add
     p_add = sub.add_parser("add", help="添加命令")
-    p_add.add_argument("--name", help="别名名称")
-    p_add.add_argument("--cmd", required=False, help="命令内容（支持 {{var}}）")
+    p_add.add_argument("name", help="别名名称")
+    p_add.add_argument("--cmd", required=True, help="命令内容（支持 {{var}}）")
     p_add.add_argument("--desc", default="", help="描述")
     p_add.add_argument("--tag", action="append", default=[], help="标签（可多次）")
 
     # remove
     p_rm = sub.add_parser("remove", help="删除命令")
-    p_rm.add_argument("--name", help="别名名称")
+    p_rm.add_argument("name", help="别名名称")
 
     # find
     p_find = sub.add_parser("find", help="搜索命令")
-    p_find.add_argument("--keyword", nargs="?", default="", help="搜索关键字")
+    p_find.add_argument("keyword", nargs="?", default="", help="搜索关键字")
     p_find.add_argument("--tag", default="", help="按标签过滤")
 
     # run
     p_run = sub.add_parser("run", help="执行单条命令")
-    p_run.add_argument("--name", help="别名名称")
+    p_run.add_argument("name", help="别名名称")
     p_run.add_argument("--var", action="append", default=[], help="变量 key=value")
 
     # chain
     p_chain = sub.add_parser("chain", help="组合执行多条命令")
-    p_chain.add_argument("--names", nargs="+", help="别名列表")
+    p_chain.add_argument("names", nargs="+", help="别名列表")
     p_chain.add_argument("--mode", choices=["&&", ";"], default="&&", help="组合方式")
     p_chain.add_argument("--var", action="append", default=[], help="变量 key=value")
 
     # export
     p_export = sub.add_parser("export", help="导出命令集")
-    p_export.add_argument("--file", required=False, help="输出 JSON 文件")
+    p_export.add_argument("--file", required=True, help="输出 JSON 文件")
 
     # import
     p_import = sub.add_parser("import", help="导入命令集")
-    p_import.add_argument("--file", required=False, help="输入 JSON 文件")
+    p_import.add_argument("--file", required=True, help="输入 JSON 文件")
     p_import.add_argument("--overwrite", action="store_true", help="覆盖同名命令")
 
     # selftest
@@ -319,12 +318,7 @@ def _do_selftest() -> None:
 def main(argv=None) -> int:
     """主入口。返回进程退出码。"""
     parser = _build_parser()
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
     args = parser.parse_args(argv)
-    global dry_run
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
 
     # 未指定动作时打印帮助
     if not args.action:
