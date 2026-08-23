@@ -19,7 +19,7 @@ from typing import Dict, List, Optional, Tuple, Any
 from functools import lru_cache
 import concurrent.futures
 from concurrent.futures import ThreadPoolExecutor
-dry_run = False  # v3.274 模块级 dry-run 标志
+import xml.etree.ElementTree as ET
 
 try:
     from docx import Document
@@ -418,7 +418,6 @@ def _extract_docx_zipfile(path: Path) -> str:
                 content = f.read().decode('utf-8')
             
             # 提取段落文本
-            import xml.etree.ElementTree as ET
             ns = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}
             root = ET.fromstring(content)
             
