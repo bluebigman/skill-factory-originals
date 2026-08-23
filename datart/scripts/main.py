@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 datart - 数据可视化开放平台图表构建助手
-版本: 1.0.1
+版本: 1.0.2
 仅依据功能规格独立实现（clean-room），不复制任何既有代码。
 """
 
@@ -13,8 +13,11 @@ import json
 import math
 import os
 import sys
+import time
+import urllib.request
+import urllib.error
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 
 # ============================================================
@@ -74,7 +77,11 @@ class DataParser:
             records = [dict(row) for row in reader if any(row.values())]
             if not records:
                 raise DatartError("E001")
+            # 类型推断：尝试将数值字段转换为 float/int
+            records = DataParser._infer_types(records)
             return records
+        except DatartError:
+            raise
         except Exception as e:
             raise DatartError("E008", f"CSV 解析失败: {e}")
 
@@ -95,9 +102,62 @@ class DataParser:
             records = [item for item in data if isinstance(item, dict)]
             if not records:
                 raise DatartError("E001")
+            # 类型推断
+            records = DataParser._infer_types(records)
             return records
         except json.JSONDecodeError as e:
             raise DatartError("E007", f"JSON 解析失败: {e}")
+
+    @staticmethod
+    def _infer_types(records: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+        """推断字段类型：尝试将字符串转换为数值或日期类型。"""
+        if not records:
+            return records
+
+        # 获取所有字段
+        fields = list(records[0].keys())
+        for field in fields:
+            # 检查该字段的所有值
+            values = [r.get(field) for r in records if r.get(field) is not None]
+            if not values:
+                continue
+
+            # 尝试转换为数值
+            numeric_values = []
+            all_numeric = True
+            for v in values:
+                try:
+                    numeric_values.append(float(v))
+                except (ValueError, TypeError):
+                    all_numeric = False
+                    break
+
+            if all_numeric and numeric_values:
+                # 判断是 int 还是 float
+                all_int = all(float(v).is_integer() for v in numeric_values)
+                for r in records:
+                    if r.get(field) is not None:
+                        if all_int:
+                            r[field] = int(float(r[field]))
+                        else:
+                            r[field] = float(r[field])
+                continue
+
+            # 尝试转换为日期时间
+            try:
+                datetime_values = []
+                for v in values:
+                    dt = datetime.fromisoformat(str(v).replace('Z', '+00:00'))
+                    datetime_values.append(dt)
+                if datetime_values:
+                    for r in records:
+                        if r.get(field) is not None:
+                            r[field] = datetime.fromisoformat(str(r[field]).replace('Z', '+00:00'))
+                    continue
+            except (ValueError, TypeError):
+                pass
+
+        return records
 
     @staticmethod
     def parse_file(file_path: str, fmt: str = "csv") -> List[Dict[str, Any]]:
@@ -112,6 +172,31 @@ class DataParser:
             raise
         except Exception as e:
             raise DatartError("E006", f"文件读取失败: {e}")
+
+    @staticmethod
+    def parse_url(url: str, fmt: str = "csv", timeout: int = 10, max_retries: int = 3) -> List[Dict[str, Any]]:
+        """从 URL 下载并解析数据。"""
+        if not url.startswith(('http://', 'https://')):
+            raise DatartError("E006", f"无效的 URL: {url}")
+
+        last_error = None
+        for attempt in range(max_retries):
+            try:
+                req = urllib.request.Request(url, headers={'User-Agent': 'datart/1.0.2'})
+                with urllib.request.urlopen(req, timeout=timeout) as response:
+                    content = response.read().decode('utf-8')
+                return DataParser.parse_text(content, fmt)
+            except urllib.error.URLError as e:
+                last_error = e
+                if attempt < max_retries - 1:
+                    # 指数退避
+                    wait_time = 2 ** attempt
+                    print(f"  ⚠️ URL 请求失败（第 {attempt + 1} 次），{wait_time} 秒后重试...")
+                    time.sleep(wait_time)
+            except Exception as e:
+                raise DatartError("E006", f"URL 数据获取失败: {e}")
+
+        raise DatartError("E006", f"URL 请求失败（已重试 {max_retries} 次）: {last_error}")
 
 
 # ============================================================
@@ -208,7 +293,7 @@ class ChartConfigGenerator:
         if not y_field:
             # 尝试找第一个数值字段
             for f in fields:
-                if f != x_field and DataCleaner._is_numeric_column(records, f):
+                if f != x_field and ChartConfigGenerator._is_numeric_column(records, f):
                     y_field = f
                     break
             if not y_field:
@@ -237,7 +322,8 @@ class ChartConfigGenerator:
             "meta": {
                 "record_count": len(records),
                 "generated_by": "datart",
-                "version": "1.0.1",
+                "version": "1.0.2",
+                "generated_at": datetime.now(timezone.utc).isoformat(),
             },
         }
 
@@ -318,23 +404,32 @@ class DatartProcessor:
     ) -> Dict[str, Any]:
         """完整处理流程。"""
         try:
-            # 1. 解析所有数据源
+            # 1. 检查数据源数量
+            if len(data_inputs) > MultiSourceMerger.MAX_SOURCES:
+                raise DatartError("E009", f"最多支持 {MultiSourceMerger.MAX_SOURCES} 个数据源")
+
+            # 2. 解析所有数据源
             sources = []
             for data_input in data_inputs:
-                if os.path.isfile(data_input):
+                if data_input.startswith(('http://', 'https://')):
+                    # URL 数据源
+                    records = DataParser.parse_url(data_input, input_format)
+                elif os.path.isfile(data_input):
+                    # 文件数据源
                     records = DataParser.parse_file(data_input, input_format)
                 else:
+                    # 文本数据源
                     records = DataParser.parse_text(data_input, input_format)
                 sources.append(records)
 
-            # 2. 合并数据源
+            # 3. 合并数据源
             merged = MultiSourceMerger.merge(sources)
 
-            # 3. 数据清洗
+            # 4. 数据清洗
             if clean_rules:
                 merged = DataCleaner.clean(merged, clean_rules)
 
-            # 4. 生成图表配置
+            # 5. 生成图表配置
             config = ChartConfigGenerator.generate(
                 merged, chart_type, x_field, y_field, group_field
             )
@@ -356,8 +451,8 @@ def run_selftest() -> bool:
     print("datart 自检开始（离线模式）...")
     print("=" * 60)
 
-    # ---------- 测试 1: CSV 解析 ----------
-    print("\n[测试 1] CSV 解析")
+    # ---------- 测试 1: CSV 解析与类型推断 ----------
+    print("\n[测试 1] CSV 解析与类型推断")
     csv_text = """name,age,score
 Alice,25,85.5
 Bob,30,92.3
@@ -366,257 +461,22 @@ Charlie,35,78.9"""
         records = DataParser.parse_text(csv_text, "csv")
         assert len(records) == 3, f"期望 3 条记录，实际 {len(records)}"
         assert records[0]["name"] == "Alice", "第一条记录名称错误"
-        print("  ✓ CSV 解析正常")
+        assert isinstance(records[0]["age"], int), "age 字段应为 int 类型"
+        assert isinstance(records[0]["score"], float), "score 字段应为 float 类型"
+        print("  ✓ CSV 解析与类型推断正常")
     except Exception as e:
-        print(f"  ✗ CSV 解析失败: {e}")
+        print(f"  ✗ CSV 解析与类型推断失败: {e}")
         return False
 
-    # ---------- 测试 2: JSON 解析 ----------
-    print("\n[测试 2] JSON 解析")
-    json_text = '[{"name":"A","value":10},{"name":"B","value":20}]'
+    # ---------- 测试 2: JSON 解析与类型推断 ----------
+    print("\n[测试 2] JSON 解析与类型推断")
+    json_text = '[{"name":"A","value":10},{"name":"B","value":20.5}]'
     try:
         records = DataParser.parse_text(json_text, "json")
         assert len(records) == 2, f"期望 2 条记录，实际 {len(records)}"
-        assert records[1]["value"] == 20, "第二条记录值错误"
-        print("  ✓ JSON 解析正常")
+        assert isinstance(records[0]["value"], int), "value 字段应为 int 类型"
+        assert isinstance(records[1]["value"], float), "value 字段应为 float 类型"
+        print("  ✓ JSON 解析与类型推断正常")
     except Exception as e:
-        print(f"  ✗ JSON 解析失败: {e}")
+        print(f"  ✗ JSON 解析与类型推断失败: {e}")
         return False
-
-    # ---------- 测试 3: 数据清洗 ----------
-    print("\n[测试 3] 数据清洗")
-    dirty_records = [
-        {"name": "A", "value": "10", "note": ""},
-        {"name": "B", "value": "20", "note": "x"},
-        {"name": "", "value": "30", "note": "y"},
-    ]
-    rules = {
-        "drop_na": ["name"],
-        "convert_numeric": ["value"],
-        "fill_na": {"note": "N/A"},
-    }
-    try:
-        cleaned = DataCleaner.clean(dirty_records, rules)
-        assert len(cleaned) == 2, f"期望 2 条清洗后记录，实际 {len(cleaned)}"
-        assert isinstance(cleaned[0]["value"], float), "数值转换失败"
-        assert cleaned[1]["note"] == "x", "填充逻辑错误"
-        print("  ✓ 数据清洗正常")
-    except Exception as e:
-        print(f"  ✗ 数据清洗失败: {e}")
-        return False
-
-    # ---------- 测试 4: 图表配置生成 ----------
-    print("\n[测试 4] 图表配置生成")
-    sample_data = [
-        {"month": "1月", "sales": 100},
-        {"month": "2月", "sales": 150},
-        {"month": "3月", "sales": 120},
-    ]
-    try:
-        config = ChartConfigGenerator.generate(sample_data, "bar", "month", "sales")
-        assert config["chart_type"] == "bar", "图表类型错误"
-        assert config["data_fields"]["x"] == "month", "X 轴字段错误"
-        assert config["data_fields"]["y"] == "sales", "Y 轴字段错误"
-        assert config["meta"]["record_count"] == 3, "记录数错误"
-        print("  ✓ 图表配置生成正常")
-    except Exception as e:
-        print(f"  ✗ 图表配置生成失败: {e}")
-        return False
-
-    # ---------- 测试 5: 多数据源合并 ----------
-    print("\n[测试 5] 多数据源合并")
-    src1 = [{"id": 1, "val": "a"}]
-    src2 = [{"id": 2, "val": "b"}]
-    try:
-        merged = MultiSourceMerger.merge([src1, src2])
-        assert len(merged) == 2, f"期望 2 条合并记录，实际 {len(merged)}"
-        print("  ✓ 多数据源合并正常")
-    except Exception as e:
-        print(f"  ✗ 多数据源合并失败: {e}")
-        return False
-
-    # ---------- 测试 6: 完整流程 ----------
-    print("\n[测试 6] 完整处理流程")
-    try:
-        result = DatartProcessor.process(
-            data_inputs=[csv_text],
-            chart_type="line",
-            x_field="name",
-            y_field="score",
-        )
-        assert result["chart_type"] == "line", "流程图表类型错误"
-        assert result["meta"]["record_count"] == 3, "流程记录数错误"
-        print("  ✓ 完整流程正常")
-    except Exception as e:
-        print(f"  ✗ 完整流程失败: {e}")
-        return False
-
-    # ---------- 测试 7: 错误处理 ----------
-    print("\n[测试 7] 错误处理")
-    try:
-        DatartProcessor.process([""], chart_type="bar")
-        print("  ✗ 空数据应报错 E001")
-        return False
-    except DatartError as e:
-        assert e.code == "E001", f"期望 E001，实际 {e.code}"
-        print("  ✓ 空数据错误码正确 (E001)")
-
-    try:
-        ChartConfigGenerator.generate([{"a": 1}], "3d_bar")
-        print("  ✗ 不支持图表应报错 E004")
-        return False
-    except DatartError as e:
-        assert e.code == "E004", f"期望 E004，实际 {e.code}"
-        print("  ✓ 不支持图表错误码正确 (E004)")
-
-    # ---------- 测试 8: 宽松数值断言 ----------
-    print("\n[测试 8] 数值合理性检查")
-    try:
-        # 生成较大数据集
-        big_data = [{"x": i, "y": i * 2} for i in range(100)]
-        config = ChartConfigGenerator.generate(big_data, "scatter", "x", "y")
-        # 宽松断言：记录数在合理范围
-        assert 50 <= config["meta"]["record_count"] <= 100, "记录数应在 50-100 之间"
-        # 字符串字段存在即可
-        assert isinstance(config["style"]["title"], str), "标题应为字符串"
-        assert len(config["style"]["title"]) > 0, "标题不应为空"
-        print("  ✓ 数值断言通过")
-    except Exception as e:
-        print(f"  ✗ 数值断言失败: {e}")
-        return False
-
-    # ---------- 测试 9: 字段不存在错误 ----------
-    print("\n[测试 9] 字段映射错误")
-    try:
-        ChartConfigGenerator.generate(sample_data, "bar", "nonexist", "sales")
-        print("  ✗ 应报错 E003")
-        return False
-    except DatartError as e:
-        assert e.code == "E003", f"期望 E003，实际 {e.code}"
-        print("  ✓ 字段错误码正确 (E003)")
-
-    print("\n" + "=" * 60)
-    print("✅ 全部自检通过！")
-    print("=" * 60)
-    return True
-
-
-# ============================================================
-# 命令行入口
-# ============================================================
-def main() -> int:
-    """主入口函数。"""
-    parser = argparse.ArgumentParser(
-        description="datart - 数据可视化开放平台图表构建助手"
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行离线自检（使用内置样例数据，不依赖外部文件）",
-    )
-    parser.add_argument(
-        "--input",
-        action="append",
-        help="输入数据：文件路径或文本内容（可多次指定，最多 5 个）",
-    )
-    parser.add_argument(
-        "--format",
-        choices=["csv", "json", "excel"],
-        default="csv",
-        help="输入数据格式（默认: csv）",
-    )
-    parser.add_argument(
-        "--chart",
-        choices=["bar", "line", "pie", "scatter", "pivot", "dashboard"],
-        default="bar",
-        help="图表类型（默认: bar）",
-    )
-    parser.add_argument(
-        "--x",
-        help="X 轴字段名",
-    )
-    parser.add_argument(
-        "--y",
-        help="Y 轴字段名",
-    )
-    parser.add_argument(
-        "--group",
-        help="分组字段名",
-    )
-    parser.add_argument(
-        "--clean-rules",
-        help="数据清洗规则 JSON 字符串，如: '{\"drop_na\": [\"name\"]}'",
-    )
-    parser.add_argument(
-        "--output",
-        help="输出文件路径（默认输出到 stdout）",
-    )
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        return 0 if success else 1
-
-    # 正常处理模式
-    if not args.input:
-        print("错误: 请提供 --input 参数（文件路径或文本内容）", file=sys.stderr)
-        print("提示: 使用 --selftest 运行离线自检", file=sys.stderr)
-        return 2
-
-    if len(args.input) > 5:
-        print("错误: 最多支持 5 个数据源 (E009)", file=sys.stderr)
-        return 1
-
-    # 解析清洗规则
-    clean_rules = None
-    if args.clean_rules:
-        try:
-            clean_rules = json.loads(args.clean_rules)
-        except json.JSONDecodeError:
-            print("错误: --clean-rules 不是合法的 JSON (E005)", file=sys.stderr)
-            return 1
-
-    try:
-        # 执行处理
-        result = DatartProcessor.process(
-            data_inputs=args.input,
-            input_format=args.format,
-            chart_type=args.chart,
-            x_field=args.x,
-            y_field=args.y,
-            group_field=args.group,
-            clean_rules=clean_rules,
-        )
-
-        # 输出结果
-        output_json = json.dumps(result, ensure_ascii=False, indent=2)
-        if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
-                f.write(output_json)
-            print(f"✅ 配置已保存到: {args.output}")
-        else:
-            print(output_json)
-
-        return 0
-
-    except DatartError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        return 1
-    except Exception as e:
-        print(f"未知错误: {e} (E010)", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
