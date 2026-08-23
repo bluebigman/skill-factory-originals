@@ -316,7 +316,7 @@ def main() -> int:
         description="free-for-dev 技能：解析免费云服务信息并输出对比结果"
     )
     parser.add_argument(
-        "--input",
+        "input",
         nargs="?",
         help="输入文件路径（JSON 或 CSV），省略时从标准输入读取",
     )
