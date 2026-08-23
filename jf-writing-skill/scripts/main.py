@@ -11,13 +11,14 @@ scripts/main.py
     python scripts/main.py --selftest          # 离线自检
     python scripts/main.py --check <file.txt>  # 检查文本文件
     python scripts/main.py --convert <file.txt> # 风格转换
+    python scripts/main.py --format <file.txt>  # 格式校准
 """
 
 import argparse
 import re
 import sys
+from datetime import datetime, timezone
 from typing import Dict, List, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 错误码定义
@@ -33,6 +34,7 @@ ERROR_CODES = {
     "E008": "内部错误：引用格式核对异常",
     "E009": "内部错误：自检失败，核心逻辑未通过验证",
     "E010": "运行时错误：未知异常",
+    "E011": "内部错误：格式校准逻辑异常",
 }
 
 
@@ -49,6 +51,7 @@ def _fail(code: str, message: str = None) -> None:
 # 核心数据结构：风格词库（内置，不依赖外部文件）
 # ============================================================
 # 口语化 → 学术化 转换映射（金融领域）
+# 注意：这是基于金融写作常见规则的映射，非期刊风格库
 STYLE_CONVERSIONS: Dict[str, str] = {
     "涨了不少": "呈现显著上行趋势",
     "跌了": "出现回落",
@@ -129,6 +132,24 @@ FINANCE_TERMS: Dict[str, List[str]] = {
     "return": ["收益", "return", "回报"],
 }
 
+# 格式校准规则（引用格式、标点、数字格式等）
+FORMAT_RULES = {
+    "citation_pattern": r"\(([A-Z][a-z]+(?:\s+et\s+al\.)?,\s*\d{4})\)",
+    "citation_replacement": r"(\1)",
+    "double_quotes": r'"([^"]*)"',
+    "double_quotes_replacement": r"「\1」",
+    "number_pattern": r"(\d+),(\d{3})",
+    "number_replacement": r"\1\2",
+    "decimal_pattern": r"(\d+)\.(\d+)",
+    "decimal_replacement": r"\1.\2",
+    "percent_pattern": r"(\d+)\s*%",
+    "percent_replacement": r"\1%",
+    "date_pattern": r"(\d{4})-(\d{2})-(\d{2})",
+    "date_replacement": r"\1年\2月\3日",
+    "time_pattern": r"(\d{1,2}):(\d{2})",
+    "time_replacement": r"\1:\2",
+}
+
 
 # ============================================================
 # 核心功能模块
@@ -139,6 +160,7 @@ class StyleCalibrator:
     def __init__(self):
         self.conversions = STYLE_CONVERSIONS
         self.redundant = REDUNDANT_PHRASES
+        self.format_rules = FORMAT_RULES
 
     def convert_style(self, text: str) -> str:
         """C1: 文本风格转换（口语化 → 学术化）"""
@@ -260,271 +282,192 @@ class StyleCalibrator:
 
         return issues
 
+    def format_text(self, text: str) -> str:
+        """C6: 格式校准（引用格式、标点、数字格式等）"""
+        if not text or not text.strip():
+            raise ValueError("输入文本为空")
 
-# ============================================================
-# 自检模块
-# ============================================================
-def run_selftest() -> bool:
-    """
-    内置硬编码样例数据离线自检。
-    使用宽松断言，确保任何环境可过。
-    """
-    print("=" * 60)
-    print("运行自检 (--selftest)")
-    print("=" * 60)
+        result = text
 
-    calibrator = StyleCalibrator()
-
-    # --- 样例数据（硬编码，不依赖外部） ---
-    sample_informal = (
-        "股票涨了不少，公司赚了很多钱。"
-        "It is important to note that the risk is very high. "
-        "This thing is really good."
-    )
-    sample_academic = (
-        "股票价格呈现显著上行趋势，企业获取大量收益。"
-        "the risk is very high. This thing is really good."
-    )
-    sample_text = (
-        "Abstract: This paper studies corporate governance and asset pricing. "
-        "Introduction: We examine the relationship. "
-        "Literature Review: Previous studies show mixed results. "
-        "Hypothesis: H1: Governance affects pricing. "
-        "Data: We use panel data from 2000-2020. "
-        "Empirical Result: The coefficient is significant. "
-        "Conclusion: We summarize findings. "
-        "References: Smith (2020) studies governance."
-    )
-
-    # --- 测试 1: 风格转换 ---
-    print("\n[测试 1] 风格转换")
-    try:
-        converted = calibrator.convert_style(sample_informal)
-        # 宽松断言：转换后不应包含明显口语化表达
-        assert "涨了不少" not in converted, "口语化表达未转换"
-        assert "It is important to note that" not in converted, "冗余引导句未删除"
-        assert len(converted) > 0, "转换结果为空"
-        print("  ✓ 风格转换通过")
-    except AssertionError as e:
-        print(f"  ✗ 风格转换失败: {e}")
-        return False
-    except Exception:
-        print("  ✗ 风格转换异常")
-        return False
-
-    # --- 测试 2: 结构检查 ---
-    print("\n[测试 2] 结构检查")
-    try:
-        missing = calibrator.check_structure(sample_text)
-        # 宽松断言：完整文本不应缺失所有章节
-        assert len(missing) < len(REQUIRED_SECTIONS), "完整文本被认为缺所有章节"
-        print(f"  ✓ 结构检查通过 (缺失章节数: {len(missing)})")
-    except AssertionError as e:
-        print(f"  ✗ 结构检查失败: {e}")
-        return False
-    except Exception:
-        print("  ✗ 结构检查异常")
-        return False
-
-    # --- 测试 3: 术语一致性 ---
-    print("\n[测试 3] 术语一致性")
-    try:
-        issues = calibrator.check_terminology("corporate governance and 公司治理")
-        # 宽松断言：混用应被检测到
-        assert len(issues) > 0, "术语混用未被检测"
-        print(f"  ✓ 术语一致性通过 (发现 {len(issues)} 个问题)")
-    except AssertionError as e:
-        print(f"  ✗ 术语一致性失败: {e}")
-        return False
-    except Exception:
-        print("  ✗ 术语一致性异常")
-        return False
-
-    # --- 测试 4: 句式精炼 ---
-    print("\n[测试 4] 句式精炼")
-    try:
-        suggestions = calibrator.simplify_sentences(
-            "This is a very long sentence that contains multiple issues and should be split into smaller parts."
+        # 1. 引用格式统一
+        result = re.sub(
+            self.format_rules["citation_pattern"],
+            self.format_rules["citation_replacement"],
+            result,
         )
-        # 宽松断言：长句应有建议
-        assert len(suggestions) > 0, "长句未产生建议"
-        print(f"  ✓ 句式精炼通过 (产生 {len(suggestions)} 条建议)")
-    except AssertionError as e:
-        print(f"  ✗ 句式精炼失败: {e}")
-        return False
-    except Exception:
-        print("  ✗ 句式精炼异常")
-        return False
 
-    # --- 测试 5: 引用格式 ---
-    print("\n[测试 5] 引用格式")
-    try:
-        cite_issues = calibrator.check_citations("(Smith, 2020) studies this. (Nonexist, 1999) also.")
-        # 宽松断言：缺失引用应被检测
-        assert len(cite_issues) > 0, "缺失引用未被检测"
-        print(f"  ✓ 引用格式通过 (发现 {len(cite_issues)} 个问题)")
-    except AssertionError as e:
-        print(f"  ✗ 引用格式失败: {e}")
-        return False
-    except Exception:
-        print("  ✗ 引用格式异常")
-        return False
+        # 2. 双引号统一为中文引号
+        result = re.sub(
+            self.format_rules["double_quotes"],
+            self.format_rules["double_quotes_replacement"],
+            result,
+        )
 
-    # --- 测试 6: 综合集成测试 ---
-    print("\n[测试 6] 综合集成")
-    try:
-        # 完整流程
-        converted = calibrator.convert_style("股票涨了不少")
-        assert "显著" in converted or "上行" in converted, "核心转换逻辑异常"
-        assert converted != "", "转换结果不应为空"
-        print(f"  ✓ 综合集成通过 (转换结果: '{converted}')")
-    except AssertionError as e:
-        print(f"  ✗ 综合集成失败: {e}")
-        return False
-    except Exception:
-        print("  ✗ 综合集成异常")
-        return False
+        # 3. 数字格式（千位分隔符）
+        result = re.sub(
+            self.format_rules["number_pattern"],
+            self.format_rules["number_replacement"],
+            result,
+        )
 
-    print("\n" + "=" * 60)
-    print("所有自检通过 ✓")
-    print("=" * 60)
-    return True
+        # 4. 小数格式
+        result = re.sub(
+            self.format_rules["decimal_pattern"],
+            self.format_rules["decimal_replacement"],
+            result,
+        )
+
+        # 5. 百分比格式
+        result = re.sub(
+            self.format_rules["percent_pattern"],
+            self.format_rules["percent_replacement"],
+            result,
+        )
+
+        # 6. 日期格式
+        result = re.sub(
+            self.format_rules["date_pattern"],
+            self.format_rules["date_replacement"],
+            result,
+        )
+
+        # 7. 时间格式
+        result = re.sub(
+            self.format_rules["time_pattern"],
+            self.format_rules["time_replacement"],
+            result,
+        )
+
+        # 8. 清理多余空格
+        result = re.sub(r"\s+", " ", result).strip()
+        return result
+
+    def academic_score(self, text: str) -> float:
+        """C7: 学术性评分（0-100），用于自检和转换质量评估"""
+        if not text or not text.strip():
+            return 0.0
+
+        score = 50.0  # 基础分
+
+        # 1. 口语化词汇检测（扣分）
+        informal_count = 0
+        for informal in self.conversions.keys():
+            informal_count += len(re.findall(informal, text, re.IGNORECASE))
+        score -= informal_count * 5
+
+        # 2. 冗余引导句检测（扣分）
+        redundant_count = 0
+        for phrase in self.redundant:
+            redundant_count += len(re.findall(re.escape(phrase), text, re.IGNORECASE))
+        score -= redundant_count * 3
+
+        # 3. 学术术语使用（加分）
+        academic_terms = 0
+        for variants in FINANCE_TERMS.values():
+            for variant in variants:
+                academic_terms += len(re.findall(variant, text, re.IGNORECASE))
+        score += min(academic_terms * 2, 30)
+
+        # 4. 引用格式规范（加分）
+        citation_count = len(re.findall(r"\([A-Z][a-z]+(?:\s+et\s+al\.)?,\s*\d{4}\)", text))
+        score += min(citation_count * 2, 10)
+
+        # 5. 句子长度合理性（加分/扣分）
+        sentences = re.split(r"[.!?。！？]", text)
+        long_sentences = sum(1 for s in sentences if len(s.strip()) > 80)
+        score -= long_sentences * 2
+
+        # 6. 被动语态使用（扣分）
+        passive_count = 0
+        for pattern in [r"\bwas\s+\w+ed\b", r"\bwere\s+\w+ed\b", r"\bis\s+\w+ed\b", r"\bare\s+\w+ed\b"]:
+            passive_count += len(re.findall(pattern, text, re.IGNORECASE))
+        score -= passive_count * 1.5
+
+        # 限制在 0-100 范围
+        return max(0.0, min(100.0, score))
 
 
 # ============================================================
-# 命令行入口
+# 文件处理函数
 # ============================================================
-def main():
-    """主入口函数"""
-    parser = argparse.ArgumentParser(
-        description="金融论文 学术写作 风格校准 (jf-writing-skill)",
-        epilog="示例: python scripts/main.py --selftest",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（无需外部文件）",
-    )
-    parser.add_argument(
-        "--convert",
-        metavar="FILE",
-        help="将文件内容进行风格转换",
-    )
-    parser.add_argument(
-        "--check",
-        metavar="FILE",
-        help="检查文件内容的结构完整性",
-    )
-    parser.add_argument(
-        "--output",
-        metavar="FILE",
-        help="输出文件路径（可选）",
-    )
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
+def read_file(filepath: str) -> str:
+    """读取文件内容"""
     try:
-        # 自检模式
-        if args.selftest:
-            success = run_selftest()
-            sys.exit(0 if success else 1)
-
-        # 无参数或仅 --help
-        if not args.convert and not args.check:
-            parser.print_help()
-            sys.exit(0)
-
-        # 文件处理模式
-        if args.convert:
-            try:
-                with open(args.convert, "r", encoding="utf-8") as f:
-                    text = f.read()
-            except FileNotFoundError:
-                _fail("E002", f"文件不存在: {args.convert}")
-            except Exception as e:
-                _fail("E002", str(e))
-
-            calibrator = StyleCalibrator()
-            try:
-                result = calibrator.convert_style(text)
-            except ValueError as e:
-                _fail("E004", str(e))
-            except Exception:
-                _fail("E005")
-
-        elif args.check:
-            try:
-                with open(args.check, "r", encoding="utf-8") as f:
-                    text = f.read()
-            except FileNotFoundError:
-                _fail("E002", f"文件不存在: {args.check}")
-            except Exception as e:
-                _fail("E002", str(e))
-
-            calibrator = StyleCalibrator()
-            try:
-                missing = calibrator.check_structure(text)
-                terminology = calibrator.check_terminology(text)
-                suggestions = calibrator.simplify_sentences(text)
-                citations = calibrator.check_citations(text)
-
-                result = []
-                result.append("=== 结构检查 ===")
-                if missing:
-                    result.append(f"缺失章节: {', '.join(missing)}")
-                else:
-                    result.append("所有必需章节均已覆盖 ✓")
-
-                result.append("\n=== 术语一致性 ===")
-                if terminology:
-                    result.extend(terminology)
-                else:
-                    result.append("未发现术语混用 ✓")
-
-                result.append("\n=== 句式建议 ===")
-                if suggestions:
-                    result.extend(suggestions)
-                else:
-                    result.append("未发现需要精简的句式 ✓")
-
-                result.append("\n=== 引用检查 ===")
-                if citations:
-                    result.extend(citations)
-                else:
-                    result.append("引用格式基本一致 ✓")
-
-                result = "\n".join(result)
-
-            except ValueError as e:
-                _fail("E004", str(e))
-            except Exception:
-                _fail("E006")
-
-        # 输出结果
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(result)
-            except Exception:
-                _fail("E003", f"无法写入: {args.output}")
-        else:
-            print(result)
-
-    except KeyboardInterrupt:
-        print("\n已中断", file=sys.stderr)
-        sys.exit(130)
+        with open(filepath, "r", encoding="utf-8") as f:
+            return f.read()
+    except FileNotFoundError:
+        _fail("E002", f"文件不存在: {filepath}")
     except Exception as e:
-        _fail("E010", str(e))
+        _fail("E002", str(e))
 
 
-if __name__ == "__main__":
-    main()
+def write_file(filepath: str, content: str) -> None:
+    """写入文件内容"""
+    try:
+        with open(filepath, "w", encoding="utf-8") as f:
+            f.write(content)
+    except Exception:
+        _fail("E003", f"无法写入: {filepath}")
+
+
+def convert_file(filepath: str, output: str = None) -> None:
+    """转换文件风格"""
+    text = read_file(filepath)
+    calibrator = StyleCalibrator()
+    try:
+        result = calibrator.convert_style(text)
+        score = calibrator.academic_score(result)
+        print(f"学术性评分: {score:.1f}/100")
+    except ValueError as e:
+        _fail("E004", str(e))
+    except Exception:
+        _fail("E005")
+
+    if output:
+        write_file(output, result)
+    else:
+        print(result)
+
+
+def check_file(filepath: str, output: str = None) -> None:
+    """检查文件结构"""
+    text = read_file(filepath)
+    calibrator = StyleCalibrator()
+    try:
+        missing = calibrator.check_structure(text)
+        terminology = calibrator.check_terminology(text)
+        suggestions = calibrator.simplify_sentences(text)
+        citations = calibrator.check_citations(text)
+        score = calibrator.academic_score(text)
+
+        result = []
+        result.append("=== 结构检查 ===")
+        if missing:
+            result.append(f"缺失章节: {', '.join(missing)}")
+        else:
+            result.append("所有必需章节均已覆盖 ✓")
+
+        result.append("\n=== 术语一致性 ===")
+        if terminology:
+            result.extend(terminology)
+        else:
+            result.append("未发现术语混用 ✓")
+
+        result.append("\n=== 句式建议 ===")
+        if suggestions:
+            result.extend(suggestions)
+        else:
+            result.append("未发现需要精简的句式 ✓")
+
+        result.append("\n=== 引用检查 ===")
+        if citations:
+            result.extend(citations)
+        else:
+            result.append("引用格式基本一致 ✓")
+
+        result.append(f"\n=== 学术性评分: {score:.1f}/100 ===")
+
+        result = "\n".join(result)
+
+    except ValueError as e:
+        _fail("E004", str(e))
