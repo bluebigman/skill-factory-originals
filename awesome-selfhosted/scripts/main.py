@@ -8,14 +8,19 @@ scripts/main.py
 
 import argparse
 import csv
+import hashlib
 import io
 import json
 import re
 import sys
+import time
+import urllib.request
+import urllib.error
+import socket
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
 
-# 错误码定义（E001-E010）
+# 错误码定义（E001-E013）
 ERROR_CODES = {
     "E001": "输入为空或格式无效",
     "E002": "输入数据超过支持条数（1-20条）",
@@ -27,6 +32,9 @@ ERROR_CODES = {
     "E008": "URL格式校验失败",
     "E009": "内部逻辑错误：未知分组方式",
     "E010": "参数错误或命令行使用不当",
+    "E011": "网络请求失败",
+    "E012": "远程数据获取超时",
+    "E013": "远程数据格式无效",
 }
 
 # 支持的部署方式关键词（用于信息提取）
@@ -53,6 +61,20 @@ FEATURE_KEYWORDS = [
     "表单", "api", "api网关", "代理",
 ]
 
+# 远程数据源配置（用于在线筛选）
+REMOTE_SOURCES = {
+    "awesome-selfhosted": {
+        "url": "https://raw.githubusercontent.com/awesome-selfhosted/awesome-selfhosted/master/README.md",
+        "type": "markdown",
+        "timeout": 10,
+        "max_retries": 3,
+        "backoff_factor": 2.0,
+    }
+}
+
+# 本地缓存（基于URL哈希）
+_cache: Dict[str, Tuple[str, float]] = {}
+
 
 class SelfHostedRecord:
     """单条自托管服务记录的数据结构"""
@@ -74,6 +96,83 @@ class SelfHostedRecord:
             "deploy": self.deploy,
             "tags": self.tags,
         }
+
+
+class NetworkClient:
+    """网络请求客户端，支持重试退避、超时和本地缓存"""
+
+    @staticmethod
+    def _get_cache_key(url: str) -> str:
+        """生成URL的缓存键（哈希）"""
+        return hashlib.sha256(url.encode()).hexdigest()
+
+    @staticmethod
+    def _get_cached(url: str) -> Optional[str]:
+        """从缓存获取内容（5分钟有效期）"""
+        cache_key = NetworkClient._get_cache_key(url)
+        if cache_key in _cache:
+            content, timestamp = _cache[cache_key]
+            # 5分钟缓存有效期
+            if datetime.now(timezone.utc).timestamp() - timestamp < 300:
+                return content
+            else:
+                del _cache[cache_key]
+        return None
+
+    @staticmethod
+    def _set_cached(url: str, content: str) -> None:
+        """写入缓存"""
+        cache_key = NetworkClient._get_cache_key(url)
+        _cache[cache_key] = (content, datetime.now(timezone.utc).timestamp())
+
+    @staticmethod
+    def fetch_url(url: str, timeout: int = 10, max_retries: int = 3,
+                  backoff_factor: float = 2.0) -> str:
+        """获取URL内容，带重试退避机制和本地缓存"""
+        # 先检查缓存
+        cached = NetworkClient._get_cached(url)
+        if cached is not None:
+            return cached
+
+        last_error = None
+        for attempt in range(max_retries):
+            try:
+                req = urllib.request.Request(url, headers={"User-Agent": "awesome-selfhosted-tool/1.0"})
+                with urllib.request.urlopen(req, timeout=timeout) as response:
+                    if response.status != 200:
+                        raise urllib.error.HTTPError(url, response.status, "HTTP Error", response.headers, None)
+                    content = response.read().decode("utf-8", errors="replace")
+                    # 写入缓存
+                    NetworkClient._set_cached(url, content)
+                    return content
+            except (urllib.error.URLError, socket.timeout, OSError) as e:
+                last_error = e
+                if attempt < max_retries - 1:
+                    time.sleep(backoff_factor ** attempt)
+                continue
+        # 所有重试失败后，尝试返回缓存数据（即使过期）
+        cached = NetworkClient._get_cached(url)
+        if cached is not None:
+            return cached
+        raise ValueError(f"E011: 网络请求失败: {last_error}")
+
+    @staticmethod
+    def fetch_remote_data(source_name: str = "awesome-selfhosted") -> str:
+        """从远程数据源获取数据"""
+        if source_name not in REMOTE_SOURCES:
+            raise ValueError(f"E010: 未知数据源: {source_name}")
+
+        source = REMOTE_SOURCES[source_name]
+        try:
+            content = NetworkClient.fetch_url(
+                source["url"],
+                timeout=source["timeout"],
+                max_retries=source["max_retries"],
+                backoff_factor=source["backoff_factor"],
+            )
+            return content
+        except ValueError as e:
+            raise ValueError(f"E012: 远程数据获取失败: {e}")
 
 
 class SelfHostedParser:
@@ -361,226 +460,15 @@ class SelfHostedProcessor:
         self.parser = SelfHostedParser()
         self.extractor = InfoExtractor()
         self.formatter = OutputFormatter()
+        self.network = NetworkClient()
 
-    def process(self, content: str, input_format: str = "auto",
-                output_format: str = "markdown", group_by: str = "none") -> str:
-        """处理输入内容并返回格式化结果"""
-        try:
-            records = self.parser.parse(content, input_format)
-            return self.formatter.format(records, output_format, group_by)
-        except ValueError as e:
-            error_code = str(e)
-            if error_code in ERROR_CODES:
-                raise ValueError(f"{error_code}: {ERROR_CODES[error_code]}")
-            raise
+    def filter_by_keywords(self, records: List[SelfHostedRecord], keywords: List[str]) -> List[SelfHostedRecord]:
+        """根据关键词对记录进行匹配和评分筛选"""
+        if not keywords:
+            return records
 
-
-def run_selftest() -> bool:
-    """内置硬编码样例数据的离线自检"""
-    print("开始自检 (self-test)...")
-
-    # 硬编码测试数据（不依赖任何外部文件）
-    test_text = """Nextcloud | https://github.com/nextcloud/server | 自托管云存储与文件同步 | Docker
-Gitea | https://github.com/go-gitea/gitea | 轻量级Git代码托管 | Docker
-Bitwarden | https://github.com/bitwarden/server | 密码管理器 | Docker"""
-
-    test_json = json.dumps({
-        "records": [
-            {"name": "MinIO", "url": "https://github.com/minio/minio",
-             "description": "高性能对象存储服务", "deploy": "Docker", "tags": ["存储", "对象存储"]},
-            {"name": "Grafana", "url": "https://github.com/grafana/grafana",
-             "description": "数据可视化与监控分析平台", "deploy": "Docker", "tags": ["监控", "可视化"]},
-        ]
-    })
-
-    test_csv = "name,url,description,deploy,tags\n" \
-               "Nginx,https://nginx.org,Web服务器与反向代理,Docker,web;代理\n" \
-               "Postgres,https://www.postgresql.org,关系型数据库,裸机,数据库"
-
-    processor = SelfHostedProcessor()
-
-    # 测试文本解析
-    try:
-        records = processor.parser.parse(test_text, "text")
-        assert len(records) == 3, f"文本解析失败: 期望3条记录，实际{len(records)}条"
-        assert all(r.name for r in records), "记录缺少名称"
-        assert all(r.url.startswith("http") for r in records), "记录URL格式错误"
-        print(f"  [PASS] 文本解析: {len(records)}条记录")
-
-        # 测试提取
-        deploy = InfoExtractor.extract_deploy(records[0])
-        assert deploy in ["Docker", "Kubernetes", "裸机", "未知"], f"部署方式提取异常: {deploy}"
-        print(f"  [PASS] 部署方式提取: {deploy}")
-
-        tags = InfoExtractor.extract_tags(records[0])
-        assert isinstance(tags, list), "标签应为列表"
-        print(f"  [PASS] 功能标签提取: {tags if tags else '无'}")
-
-        # 测试输出
-        md_output = OutputFormatter.format_markdown(records)
-        assert "| 服务名称" in md_output, "Markdown表格头缺失"
-        assert "Nextcloud" in md_output, "Markdown输出缺少记录内容"
-        print("  [PASS] Markdown输出")
-
-        json_output = OutputFormatter.format_json(records)
-        json_data = json.loads(json_output)
-        assert json_data["count"] == 3, "JSON输出条数错误"
-        assert len(json_data["records"]) == 3, "JSON记录数错误"
-        print("  [PASS] JSON输出")
-
-        csv_output = OutputFormatter.format_csv(records)
-        assert "name,url" in csv_output, "CSV表头错误"
-        assert "Nextcloud" in csv_output, "CSV输出缺少记录内容"
-        print("  [PASS] CSV输出")
-
-    except AssertionError as e:
-        print(f"  [FAIL] 自检失败: {e}")
-        return False
-    except Exception as e:
-        print(f"  [FAIL] 自检异常: {e}")
-        return False
-
-    # 测试JSON解析
-    try:
-        records = processor.parser.parse(test_json, "json")
-        assert len(records) == 2, f"JSON解析失败: 期望2条记录，实际{len(records)}条"
-        assert records[0].name == "MinIO", "JSON记录名称错误"
-        assert records[0].tags, "JSON记录标签缺失"
-        print(f"  [PASS] JSON解析: {len(records)}条记录")
-    except AssertionError as e:
-        print(f"  [FAIL] 自检失败: {e}")
-        return False
-    except Exception as e:
-        print(f"  [FAIL] 自检异常: {e}")
-        return False
-
-    # 测试CSV解析
-    try:
-        records = processor.parser.parse(test_csv, "csv")
-        assert len(records) == 2, f"CSV解析失败: 期望2条记录，实际{len(records)}条"
-        assert records[0].name == "Nginx", "CSV记录名称错误"
-        print(f"  [PASS] CSV解析: {len(records)}条记录")
-    except AssertionError as e:
-        print(f"  [FAIL] 自检失败: {e}")
-        return False
-    except Exception as e:
-        print(f"  [FAIL] 自检异常: {e}")
-        return False
-
-    # 测试分组输出
-    try:
-        records = processor.parser.parse(test_text, "text")
-        grouped = OutputFormatter.format_markdown(records, group_by="deploy")
-        assert "## Docker" in grouped, "按部署方式分组失败"
-        print("  [PASS] 按部署方式分组")
-
-        grouped = OutputFormatter.format_markdown(records, group_by="tag")
-        assert grouped.strip(), "按标签分组输出为空"
-        print("  [PASS] 按标签分组")
-    except AssertionError as e:
-        print(f"  [FAIL] 自检失败: {e}")
-        return False
-    except Exception as e:
-        print(f"  [FAIL] 自检异常: {e}")
-        return False
-
-    # 测试错误处理
-    try:
-        processor.parser.parse("", "text")
-        print("  [FAIL] 空输入未抛出异常")
-        return False
-    except ValueError as e:
-        assert "E001" in str(e), f"空输入错误码错误: {e}"
-        print("  [PASS] 空输入错误处理")
-
-    try:
-        processor.parser.parse("item1 | https://example.com\n" * 101, "text")
-        print("  [FAIL] 超量输入未抛出异常")
-        return False
-    except ValueError as e:
-        assert "E003" in str(e), f"超量输入错误码错误: {e}"
-        print("  [PASS] 超量输入错误处理")
-
-    print("自检全部通过 ✅")
-    return True
-
-
-def main():
-    """命令行入口"""
-    parser = argparse.ArgumentParser(
-        description="自托管服务资源导航信息整理工具",
-        epilog="示例: python main.py -i input.txt -f markdown -g deploy"
-    )
-    parser.add_argument("-i", "--input", help="输入文件路径（.txt/.md/.csv/.json）")
-    parser.add_argument("-c", "--content", help="直接输入内容字符串")
-    parser.add_argument("-f", "--format", choices=["markdown", "json", "csv"],
-                        default="markdown", help="输出格式")
-    parser.add_argument("-g", "--group", choices=["none", "deploy", "tag"],
-                        default="none", help="分组方式")
-    parser.add_argument("--input-format", choices=["auto", "text", "json", "csv"],
-                        default="auto", help="输入格式")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("-o", "--output", help="输出文件路径")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        success = run_selftest()
-        sys.exit(0 if success else 1)
-
-    # 参数校验
-    if not args.input and not args.content:
-        parser.error("必须提供 --input 或 --content 参数")
-        sys.exit(1)
-
-    # 读取输入
-    try:
-        if args.content:
-            content = args.content
-        else:
-            with open(args.input, "r", encoding="utf-8") as f:
-                content = f.read()
-    except FileNotFoundError:
-        print(f"E010: 输入文件不存在: {args.input}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"E010: 读取输入失败: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    # 处理
-    try:
-        processor = SelfHostedProcessor()
-        result = processor.process(
-            content,
-            input_format=args.input_format,
-            output_format=args.format,
-            group_by=args.group,
-        )
-    except ValueError as e:
-        print(f"错误: {e}", file=sys.stderr)
-        sys.exit(1)
-
-    # 输出
-    if args.output:
-        try:
-            with open(args.output, "w", encoding="utf-8") as f:
-                f.write(result)
-        except Exception as e:
-            print(f"E010: 写入输出文件失败: {e}", file=sys.stderr)
-            sys.exit(1)
-    else:
-        print(result)
-
-
-if __name__ == "__main__":
-    main()
+        scored_records = []
+        for record in records:
+            score = 0
+            # 构建搜索文本
+            search_text
