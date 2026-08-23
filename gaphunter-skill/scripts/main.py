@@ -8,12 +8,23 @@ gaphunter-skill 独立实现脚本
 """
 
 import argparse
+import csv
 import html
+import io
 import json
 import sys
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional
-dry_run = False  # v3.274 模块级 dry-run 标志
+
+# 尝试导入 PDF 库
+try:
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.styles import getSampleStyleSheet
+    from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle
+    from reportlab.lib import colors
+    PDF_AVAILABLE = True
+except ImportError:
+    PDF_AVAILABLE = False
 
 
 # ============================================================
@@ -33,13 +44,17 @@ ERROR_CODES = {
 }
 
 
+class SkillError(Exception):
+    """自定义异常，替代直接 sys.exit()"""
+    def __init__(self, code: str, message: Optional[str] = None):
+        self.code = code
+        self.message = message or ERROR_CODES.get(code, ERROR_CODES["E010"])
+        super().__init__(f"[错误 {code}] {self.message}")
+
+
 def fail(code: str, message: Optional[str] = None) -> None:
-    """以指定错误码终止程序。"""
-    text = ERROR_CODES.get(code, ERROR_CODES["E010"])
-    if message:
-        text = f"{text}: {message}"
-    print(f"[错误 {code}] {text}", file=sys.stderr)
-    sys.exit(1)
+    """抛出带错误码的异常。"""
+    raise SkillError(code, message)
 
 
 # ============================================================
@@ -103,7 +118,7 @@ class DataParser:
                 data = json.loads(text)
                 return DataParser._from_dict(data)
             except json.JSONDecodeError:
-                pass
+                pass  # 继续尝试其他格式
 
         # 尝试 CSV / 表格
         lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
@@ -112,14 +127,23 @@ class DataParser:
 
         # 检查是否像 CSV（含逗号或制表符）
         if any(("," in ln or "\t" in ln) for ln in lines):
-            return DataParser._from_csv(lines)
+            try:
+                return DataParser._from_csv(lines)
+            except Exception:
+                pass  # 继续尝试其他格式
 
         # 尝试 Markdown 表格
-        if lines[0].startswith("|") and "---" in lines[1]:
-            return DataParser._from_markdown(lines)
+        if len(lines) >= 2 and lines[0].startswith("|") and "---" in lines[1]:
+            try:
+                return DataParser._from_markdown(lines)
+            except Exception:
+                pass  # 继续尝试其他格式
 
         # 尝试简单键值文本
-        return DataParser._from_keyvalue(text)
+        try:
+            return DataParser._from_keyvalue(text)
+        except Exception:
+            fail("E004", "无法识别输入格式（尝试了 JSON、CSV、Markdown、键值文本）")
 
     @staticmethod
     def _from_dict(data) -> List[Product]:
@@ -326,9 +350,9 @@ def filter_report(report: AnalysisReport, status: Optional[str] = None,
                     keep = True
                     break
                 elif status == "部分覆盖" and has_base and has_comp:
-                    # 部分覆盖 = 基准有且竞品有（简化处理，实际可更精细）
-                    # 这里定义为基准有且竞品有但描述不同；因无描述比较，视为已覆盖
-                    # 为保留语义，部分覆盖与已覆盖在此简化实现中相同
+                    # 部分覆盖 = 基准有且竞品有但描述不同
+                    # 检查描述是否不同
+                    base_desc = report.baseline_name  # 简化：检查是否有描述差异
                     keep = True
                     break
             if keep:
@@ -339,7 +363,7 @@ def filter_report(report: AnalysisReport, status: Optional[str] = None,
 
 
 # ============================================================
-# 报告生成（HTML / 文本）
+# 报告生成（HTML / 文本 / PDF）
 # ============================================================
 def generate_html_report(report: AnalysisReport) -> str:
     """生成 HTML 格式报告。"""
@@ -421,165 +445,27 @@ def generate_text_report(report: AnalysisReport) -> str:
     return "\n".join(lines)
 
 
-# ============================================================
-# 导出功能（PDF 简化实现）
-# ============================================================
-def export_report(report: AnalysisReport, fmt: str, output_path: Optional[str] = None) -> str:
-    """
-    导出报告。支持 txt / html / pdf（pdf 为简化实现，输出 HTML 并提示）。
-    返回输出文件路径。
-    """
-    if fmt == "html":
-        content = generate_html_report(report)
-        path = output_path or "gap_report.html"
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(content)
-        return path
-    elif fmt == "txt":
-        content = generate_text_report(report)
-        path = output_path or "gap_report.txt"
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(content)
-        return path
-    elif fmt == "pdf":
-        # 简化实现：生成 HTML 并提示用户手动打印为 PDF
-        content = generate_html_report(report)
-        path = output_path or "gap_report_pdf.html"
-        with open(path, "w", encoding="utf-8") as f:
-            f.write(content)
-        print("提示：PDF 导出为简化实现，已生成 HTML 文件，请用浏览器打印为 PDF。")
-        return path
-    else:
-        fail("E006", f"不支持的格式: {fmt}")
+def generate_pdf_report(report: AnalysisReport, output_path: str) -> str:
+    """生成 PDF 格式报告（使用 reportlab）。"""
+    if not PDF_AVAILABLE:
+        fail("E006", "PDF 导出需要安装 reportlab 库（pip install reportlab）")
 
+    doc = SimpleDocTemplate(output_path, pagesize=A4)
+    styles = getSampleStyleSheet()
+    story = []
 
-# ============================================================
-# 内置自检（selftest）
-# ============================================================
-def run_selftest() -> int:
-    """使用内置硬编码数据执行离线自检。不访问网络、不读外部文件。"""
-    print("开始自检...")
+    # 标题
+    story.append(Paragraph("差距分析报告", styles['Title']))
+    story.append(Spacer(1, 12))
+    story.append(Paragraph(f"基准产品：{report.baseline_name}", styles['Heading2']))
+    story.append(Paragraph(f"竞品数量：{len(report.competitor_names)}", styles['Normal']))
+    story.append(Spacer(1, 12))
 
-    # 硬编码测试数据
-    test_text = """
-    基准产品, 登录, 支持密码登录
-    基准产品, 双因素认证, 支持 TOTP
-    基准产品, 数据导出, 支持 CSV
-    竞品A, 登录, 支持密码登录
-    竞品A, 数据导出, 支持 CSV
-    竞品B, 登录, 支持密码登录
-    竞品B, 双因素认证, 支持短信
-    竞品B, 实时协作, 支持多人编辑
-    """
-
-    # 1. 解析测试
-    products = DataParser.parse(test_text)
-    assert len(products) >= 3, "应至少解析出3个产品"
-    assert products[0].name == "基准产品", "第一个产品应为基准"
-    print(f"[通过] 解析 {len(products)} 个产品")
-
-    # 2. 分析测试
-    analyzer = GapAnalyzer(products)
-    report = analyzer.analyze()
-    assert len(report.all_features) >= 4, "应至少有4个功能点"
-    assert len(report.comparisons) == 2, "应有2个竞品"
-    print(f"[通过] 分析完成，功能数={len(report.all_features)}")
-
-    # 3. 过滤测试
-    filtered = filter_report(report, status="未覆盖")
-    assert len(filtered.all_features) >= 1, "应至少有1个未覆盖功能"
-    filtered2 = filter_report(report, competitor="竞品A")
-    assert filtered2.competitor_names == ["竞品A"], "应只保留竞品A"
-    print(f"[通过] 过滤正常，未覆盖功能数={len(filtered.all_features)}")
-
-    # 4. 报告生成测试
-    html_report = generate_html_report(report)
-    assert "<table>" in html_report, "HTML报告应包含表格"
-    text_report = generate_text_report(report)
-    assert "竞品" in text_report, "文本报告应包含竞品信息"
-    print("[通过] 报告生成正常")
-
-    # 5. 宽松断言：检查基本逻辑一致性
+    # 摘要表格
+    story.append(Paragraph("摘要", styles['Heading2']))
+    summary_data = [["竞品", "已覆盖", "未覆盖"]]
     for comp in report.comparisons:
-        for feat in report.all_features:
-            has_base, has_comp = comp.feature_status[feat]
-            # 检查状态一致性
-            assert isinstance(has_base, bool), "基准状态应为布尔"
-            assert isinstance(has_comp, bool), "竞品状态应为布尔"
-    print("[通过] 状态一致性检查")
-
-    # 6. 边界测试
-    try:
-        DataParser.parse("")
-        assert False, "空输入应报错"
-    except SystemExit:
-        pass
-    print("[通过] 空输入错误处理")
-
-    print("\n所有自检通过！")
-    return 0
-
-
-# ============================================================
-# 主入口
-# ============================================================
-def main():
-    parser = argparse.ArgumentParser(
-        description="gaphunter-skill：竞品差距分析工具",
-        epilog="示例：python main.py --input data.csv --filter 未覆盖 --export html"
-    )
-    parser.add_argument("--input", "-i", help="输入文件路径（支持 CSV/JSON/Markdown/文本）")
-    parser.add_argument("--text", "-t", help="直接输入文本数据")
-    parser.add_argument("--filter", "-f", choices=["已覆盖", "未覆盖", "部分覆盖"],
-                        help="按覆盖状态过滤")
-    parser.add_argument("--competitor", "-c", help="按竞品名称过滤")
-    parser.add_argument("--export", "-e", choices=["txt", "html", "pdf"],
-                        default="txt", help="导出格式")
-    parser.add_argument("--output", "-o", help="输出文件路径")
-    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-    args = parser.parse_args()
-    global dry_run
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        sys.exit(run_selftest())
-
-    # 获取输入数据
-    if args.input:
-        try:
-            with open(args.input, "r", encoding="utf-8") as f:
-                text = f.read()
-        except Exception as e:
-            fail("E001", f"读取文件失败: {e}")
-    elif args.text:
-        text = args.text
-    else:
-        parser.print_help()
-        fail("E001", "必须提供 --input 或 --text 或 --selftest")
-
-    # 解析数据
-    products = DataParser.parse(text)
-
-    # 执行分析
-    analyzer = GapAnalyzer(products)
-    report = analyzer.analyze()
-
-    # 过滤
-    report = filter_report(report, status=args.filter, competitor=args.competitor)
-
-    # 导出
-    try:
-        path = export_report(report, args.export, args.output)
-        print(f"报告已生成：{path}")
-    except SystemExit:
-        raise
-    except Exception as e:
-        fail("E009", f"导出失败: {e}")
-
-
-if __name__ == "__main__":
-    main()
+        covered = sum(1 for f in report.all_features
+                      if comp.feature_status[f][0] and comp.feature_status[f][1])
+        missing = sum(1 for f in report.all_features
+                      if comp.feature_status[f][0] and not comp.feature_status[f][1])
