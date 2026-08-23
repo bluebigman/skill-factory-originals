@@ -1,73 +1,267 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: django-dashing
 name: django-dashing
-displayName: 数据看板 可视化 仪表盘构建
+displayName: 数据看板 Django 快速搭建
 description: 将用户数据快速转化为可交互的Django仪表盘应用。
-version: 1.0.1
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/django-dashing
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SkillForge Studio
+author: 数据工坊
 agent_created: true
-trigger_words: ["django-dashing", "数据可视化", "仪表盘", "dashboard", "看板开发", "Django图表"]
+trigger_words: ["django-dashing", "数据可视化", "仪表盘", "dashboard", "看板开发", "数据面板", "可视化报表"]
 ---
-
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# django-dashing 技能文档
+# django-dashing — 数据看板 Django 快速搭建
 
-## 一、能力边界与适用对象（速查卡）
+## 一、能力边界（一页纸速查卡）
 
-### 1.1 核心能力清单
+### 1.1 能做什么
 
-| 能力项 | 说明 | 输入示例 | 输出示例 |
-|--------|------|----------|----------|
-| 数据源接入 | 解析用户提供的 CSV/JSON/Excel 或数据库连接串 | `data.csv`、`{"sales": 120}` | 标准化数据字典 |
-| 图表配置生成 | 根据数据特征推荐图表类型（折线/柱状/饼图） | 时间序列数据 | ECharts 配置 JSON |
-| Django 项目集成 | 生成可嵌入 Django 项目的 dashboard 视图代码 | Django 项目路径 | `views.py` 代码片段 |
-| 模块化布局 | 生成可拖拽的网格布局配置 | 模块数量与尺寸偏好 | `layout.json` |
-| 数据刷新策略 | 配置定时刷新或实时推送方案 | 刷新间隔（秒） | 轮询/WebSocket 配置 |
+| 能力项 | 说明 | 适用场景 |
+|--------|------|----------|
+| 数据接入 | 读取 CSV、JSON、Excel（需 pandas）等结构化数据 | 业务报表、运营数据、日志统计 |
+| 看板生成 | 自动生成 Django 项目 + 仪表盘页面 | 内部管理后台、数据展示站点 |
+| 图表渲染 | 集成 Chart.js，支持折线图、柱状图、饼图 | 趋势分析、占比展示、对比视图 |
+| 交互筛选 | 按日期范围、分类字段进行前端筛选 | 运营看板、销售分析 |
+| 多页布局 | 支持多图表网格布局，自动适配屏幕 | 大屏展示、监控中心 |
 
-### 1.2 明确不做的范围
+### 1.2 不能做什么
 
-- 不执行实际的数据分析或机器学习计算
-- 不直接操作 Django 项目的数据库结构
-- 不生成完整的 Django 项目脚手架（仅生成 dashboard 相关模块）
-- 不处理认证授权体系的设计
-- 不提供生产环境的部署脚本
+| 限制项 | 说明 |
+|--------|------|
+| 不支持实时流数据 | 仅处理静态文件或数据库快照，不接入 WebSocket/消息队列 |
+| 不做复杂权限系统 | 仅提供 Django 默认 admin 登录，不实现细粒度权限 |
+| 不生成业务逻辑 | 只做展示层，不生成增删改查的业务代码 |
+| 不处理非结构化数据 | 图片、音频、自由文本等需自行预处理 |
+| 不保证图表美观度 | 使用默认主题，不进行视觉定制 |
 
 ### 1.3 适用对象
 
-- Django 开发者：需要快速为现有项目添加数据看板
-- 数据分析师：需要将分析结果可视化展示
-- 产品经理：需要制作数据展示原型
+- 需要快速搭建内部数据看板的开发人员
+- 已有数据文件（CSV/JSON）但缺乏可视化界面的团队
+- 希望用 Django 统一管理数据展示的初学者
 
+---
 
-## 许可证（License）
+## 二、触发方式
 
-```text
-MIT License
+### 2.1 触发词
 
-Copyright (c) 2026 SkillForge Lab
+当用户输入以下任一关键词时，本 Skill 被激活：
+
+- `django-dashing`
+- `数据可视化`
+- `仪表盘`
+- `dashboard`
+- `看板开发`
+- `数据面板`
+- `可视化报表`
+
+### 2.2 场景映射表
+
+| 用户说（大白话） | 实际需求 | 本 Skill 响应 |
+|------------------|----------|---------------|
+| "帮我把这个 CSV 变成网页看板" | 将数据文件转为可交互网页 | 生成 Django 项目 + 图表页面 |
+| "我想做个销售数据仪表盘" | 销售数据可视化 | 读取数据 → 生成折线图/柱状图 |
+| "给我搞个监控大屏" | 多指标同时展示 | 多图表网格布局，自动适配 |
+| "这个 JSON 数据怎么展示" | JSON 数据可视化 | 解析 JSON → 生成表格 + 图表 |
+
+---
+
+## 三、标准流程
+
+### 3.1 前置条件
+
+| 条件 | 要求 | 检查方式 |
+|------|------|----------|
+| Python 环境 | Python 3.8+ | `python --version` |
+| Django 安装 | Django 3.2+ | `pip show django` |
+| 数据文件 | CSV/JSON，编码 UTF-8 | 文件可正常打开 |
+| 数据格式 | 至少包含 1 个数值字段 + 1 个分类/时间字段 | 人工确认 |
+
+### 3.2 执行步骤
+
+#### 步骤 1：准备输入
+
+将待处理的数据文件放入同一工作目录，确认命名规范一致（如 `data.csv`、`sales.json`）。
+
+```bash
+mkdir my_dashboard
+cd my_dashboard
+cp /path/to/your/data.csv .
+```
+
+#### 步骤 2：试运行（单样本验证）
+
+先用单个数据文件执行，核对输出字段与格式：
+
+```bash
+django-dashing --input data.csv --output preview.html --dry-run
+```
+
+检查 `preview.html` 中的字段名、数据类型、图表类型是否符合预期。
+
+#### 步骤 3：批量执行
+
+确认无误后，对全量数据执行：
+
+```bash
+django-dashing --input data.csv --output dashboard/
+```
+
+生成 Django 项目结构：
+
+```
+dashboard/
+├── manage.py
+├── dashboard_app/
+│   ├── views.py
+│   ├── urls.py
+│   └── templates/
+│       └── index.html
+└── static/
+    └── js/
+        └── chart.min.js
+```
+
+#### 步骤 4：校验结果
+
+抽查输出条目，核对关键字段与源数据一致：
+
+```bash
+python manage.py runserver
+# 打开 http://localhost:8000 检查图表数据
+```
+
+### 3.3 输出规范
+
+| 输出项 | 格式 | 说明 |
+|--------|------|------|
+| Django 项目 | 标准项目结构 | 可直接 `runserver` 运行 |
+| 图表数据 | JSON 嵌入 HTML | 前端 Chart.js 读取 |
+| 日志 | 控制台输出 | 记录处理进度和错误 |
+
+---
+
+## 四、置信度门控
+
+当输入数据信息不足时，使用 `[需核实:字段]` 占位，不编造数据：
+
+| 场景 | 处理方式 |
+|------|----------|
+| 数据文件缺少数值字段 | 输出 `[需核实:数值字段]`，提示用户补充 |
+| 日期格式无法解析 | 输出 `[需核实:日期格式]`，建议提供 `YYYY-MM-DD` |
+| 分类字段为空 | 输出 `[需核实:分类字段]`，提示选择分组维度 |
+| 文件编码异常 | 输出 `[需核实:文件编码]`，建议转为 UTF-8 |
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|----------|----------|----------|
+| E001 | 文件不存在 | "未找到指定文件，请检查路径" | 确认文件路径，重新执行 |
+| E002 | 文件格式不支持 | "仅支持 CSV 或 JSON 格式" | 转换文件格式后重试 |
+| E003 | 缺少数值字段 | "数据中未找到可聚合的数值列" | 检查数据表头，添加数值列 |
+| E004 | Django 未安装 | "未检测到 Django，请先安装" | `pip install django` |
+| E005 | 端口被占用 | "默认端口 8000 被占用" | 使用 `--port 8080` 指定其他端口 |
+| E006 | 数据量过大 | "数据超过 10 万行，可能影响性能" | 建议抽样或分片处理 |
+
+---
+
+## 六、FAQ 反模式
+
+### 6.1 常见坑
+
+| 坑 | 反模式 | 正确做法 |
+|----|--------|----------|
+| 数据格式混乱 | 直接读取不检查 | 先 `--dry-run` 预览 |
+| 字段名含中文 | 直接作为变量名 | 自动转拼音或英文别名 |
+| 时间字段为字符串 | 直接排序 | 先解析为 datetime 类型 |
+| 图表类型选择错误 | 全部用折线图 | 根据字段类型自动推荐 |
+| 忽略数据备份 | 直接覆盖原文件 | 保留原始文件副本 |
+
+### 6.2 反模式对照表
+
+| 反模式 | 问题 | 建议 |
+|--------|------|------|
+| "这个工具能处理所有格式" | 过度承诺 | 明确支持 CSV/JSON，其他需转换 |
+| "图表一定好看" | 主观标准 | 提供默认主题，用户可自行调整 |
+| "数据不会出错" | 忽略数据质量问题 | 增加校验步骤，输出警告 |
+| "生成后不用改" | 忽略定制需求 | 提供修改入口，说明可编辑位置 |
+
+---
+
+## 七、渐进式披露
+
+### 7.1 速查卡（30 秒上手）
+
+```
+1. 准备数据文件（CSV/JSON）
+2. 运行：django-dashing --input data.csv --output dashboard/
+3. 启动：cd dashboard && python manage.py runserver
+4. 打开 http://localhost:8000 查看
+```
+
+### 7.2 新手路径（5 分钟）
+
+1. 阅读「能力边界」了解适用范围
+2. 按「标准流程」步骤 1-2 执行试运行
+3. 查看生成的 `preview.html` 确认数据正确
+4. 按步骤 3-4 生成完整项目并启动
+
+### 7.3 进阶路径（深入定制）
+
+1. 修改 `dashboard_app/views.py` 调整数据过滤逻辑
+2. 编辑 `templates/index.html` 自定义布局
+3. 在 `static/js/` 中添加自定义图表配置
+4. 集成 Django admin 实现数据管理
+
+---
+
+## 八、参数参考表
+
+| 参数 | 类型 | 默认值 | 说明 |
+|------|------|--------|------|
+| `--input` | string | 必填 | 输入数据文件路径 |
+| `--output` | string | `./dashboard` | 输出目录 |
+| `--dry-run` | flag | false | 仅生成预览 HTML |
+| `--port` | int | 8000 | 开发服务器端口 |
+| `--chart-type` | string | auto | 图表类型（line/bar/pie/auto） |
+| `--title` | string | 数据看板 | 页面标题 |
+| `--theme` | string | default | 主题（default/dark/light） |
+
+---
+
+## 九、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用本 Skill 即表示您同意以下条款：**
+
+1. **责任承担**：使用者自行承担因使用本 Skill 产生的全部责任。包括但不限于数据准确性、系统兼容性、业务影响等。
+2. **禁止反向工程**：不得对本 Skill 生成的代码进行反向工程、反编译或试图提取底层算法。
+3. **数据安全**：使用者需确保输入数据不包含敏感信息，或已获得合法使用授权。
+4. **无担保**：本 Skill 按"现状"提供，不提供任何明示或暗示的担保。
+5. **修改权限**：使用者可自由修改生成的代码，但修改后的代码责任由使用者自行承担。
+
+---
+
+## 十、许可证（License）
+
+<!-- professional-license-embedded -->
+
+**MIT License**
+
+Copyright (c) 2024 数据工坊
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -78,63 +272,11 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-```
-<!-- professional-license-embedded -->
 
-## 前置条件
-
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
