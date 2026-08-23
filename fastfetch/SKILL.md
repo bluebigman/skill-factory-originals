@@ -1,78 +1,236 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
-<!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: fastfetch
 name: fastfetch
-displayName: 系统信息速览 硬件配置 环境诊断
-description: 快速获取设备软硬件信息，支持多平台，输出简洁可读的系统概览。
-version: 3.1.4
+displayName: 系统体检 硬件速览 环境诊断
+description: 快速采集并展示操作系统、硬件配置与网络状态等系统信息。
+version: 1.0.0
 license: MIT
 source_project: original
-source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/fastfetch
+source_url: 
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: SysInfoForge
+author: SysProbe Studio
 agent_created: true
-trigger_words: ["fastfetch", "系统信息", "硬件配置", "环境诊断", "设备概览", "sysinfo"]
+trigger_words: ["fastfetch", "系统信息", "硬件配置", "环境诊断", "sysinfo", "系统体检", "设备概览"]
 ---
-
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
-
-> ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
-> 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
-<!-- professional-disclaimer-injected -->
 
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# fastfetch 系统信息速览 Skill
+# fastfetch 技能手册
 
 ## 一、能力边界（一页纸速查卡）
 
-### 能做（8 项核心能力）
+### 1.1 能做与不能做
 
-| 编号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 触发词识别 | 识别用户输入中的触发词，判断查询意图（总览/定向/格式化） |
-| 2 | 参数提取 | 从用户指令中提取模块名、格式选项、输出方式等参数 |
-| 3 | 默认全量展示 | 用户未指定模块时，展示全部系统信息模块 |
-| 4 | 工具链自动降级 | 按 fastfetch → neofetch → screenfetch → builtin 顺序自动选择可用工具 |
-| 5 | 定向模块查询 | 支持指定单个或多个模块（如仅查 CPU、内存、磁盘） |
-| 6 | 输出格式控制 | 支持 JSON、键值对、纯文本等输出格式 |
-| 7 | 自检与版本查询 | 支持 `--selftest` 和 `--version` 参数 |
-| 8 | 跨平台适配 | 覆盖 Linux / macOS / Windows / Android 四类系统 |
+| 维度 | 能做 ✅ | 不能做 ❌ |
+|------|---------|-----------|
+| 信息采集 | 操作系统版本、内核、运行时长 | 修改系统配置、安装软件 |
+| 硬件识别 | CPU、内存、GPU、主板、磁盘型号与容量 | 超频、调整 BIOS 参数 |
+| 网络状态 | 本机 IP、网关、DNS、活动接口 | 发起网络扫描、端口探测 |
+| 输出格式 | 终端彩色表格、JSON、自定义模板 | 生成图表、可视化仪表盘 |
+| 诊断能力 | 自检各检测模块是否正常 | 修复检测失败的模块 |
+| 脚本集成 | 通过 `--format json` 输出结构化数据 | 提供持久化服务或守护进程 |
 
-### 不能做（明确边界）
+### 1.2 适用对象
 
-| 编号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不修改系统配置 | 本 Skill 仅读取信息，不执行任何写操作 |
-| 2 | 不采集敏感数据 | 不读取用户文件、密码、密钥、浏览器数据等隐私内容 |
-| 3 | 不保证信息实时性 | 部分硬件信息（如温度）依赖系统传感器，可能延迟或不可用 |
-| 4 | 不支持远程主机查询 | 仅查询当前设备，不支持 SSH 到远程主机执行 |
-| 5 | 不处理损坏的系统文件 | 若系统文件缺失导致工具无法运行，仅提示降级方案 |
+- **系统管理员**：快速摸清一台陌生机器的软硬件底细。
+- **运维工程师**：在故障排查初期收集环境基线数据。
+- **开发者**：确认 CI/CD 运行环境的依赖与资源情况。
+- **技术写作者**：撰写教程时获取真实环境参数作为示例。
 
-### 适用对象
+---
 
-- 需要快速了解设备配置的普通用户
-- 排查环境问题时需要系统信息的开发者
-- 需要在脚本中获取系统信息的自动化流程
+## 二、触发方式
 
+### 2.1 触发词
 
-## 许可证（License）
+当对话中出现以下任一词汇或短语时，本技能将被激活：
 
-```text
-MIT License
+- `fastfetch`（直接命令名）
+- `系统信息` / `系统体检` / `设备概览`
+- `硬件配置` / `硬件速览`
+- `环境诊断` / `sysinfo`
 
-Copyright (c) 2026 SkillForge Lab
+### 2.2 场景映射表
+
+| 用户说（大白话） | 技能响应动作 |
+|------------------|--------------|
+| "帮我看看这台电脑什么配置" | 运行 `fastfetch`，解读输出中的 CPU/内存/GPU 字段 |
+| "这个服务器环境正常吗" | 运行 `fastfetch --selftest`，逐项核对检测模块状态 |
+| "把系统信息存成文件方便分析" | 运行 `fastfetch --format json`，指导重定向到文件 |
+| "我只想看 CPU 和内存信息" | 运行 `fastfetch --structure CPU:Memory`，精简输出 |
+| "fastfetch 报错了怎么办" | 对照本文档「错误码体系」章节定位并解决 |
+
+---
+
+## 三、标准流程
+
+### 3.1 前置条件
+
+| 条件项 | 要求 | 验证方式 |
+|--------|------|----------|
+| 操作系统 | Linux / macOS / Windows（部分 BSD 亦可） | `uname -a` 或 `ver` |
+| 安装状态 | fastfetch 已安装 | `which fastfetch` 或 `fastfetch --version` |
+| 终端环境 | 支持 ANSI 彩色输出（非必需，但影响体验） | 直接运行观察 |
+| 权限要求 | 普通用户即可，无需 root | — |
+
+### 3.2 执行步骤
+
+**第一步：基础信息采集**
+
+```bash
+fastfetch
+```
+
+观察输出结构，默认包含：操作系统、内核、运行时间、Shell、分辨率、桌面环境、终端、CPU、GPU、内存、磁盘、网络等字段。
+
+**第二步：字段定制**
+
+```bash
+fastfetch --structure OS:CPU:Memory
+```
+
+`--structure` 参数接受冒号分隔的字段名列表，可用字段包括：
+
+| 字段名 | 含义 | 字段名 | 含义 |
+|--------|------|--------|------|
+| `OS` | 操作系统 | `CPU` | 处理器 |
+| `Memory` | 内存 | `GPU` | 显卡 |
+| `Disk` | 磁盘 | `Network` | 网络 |
+| `Kernel` | 内核版本 | `Uptime` | 运行时长 |
+| `Shell` | 默认 Shell | `Resolution` | 屏幕分辨率 |
+| `Terminal` | 终端模拟器 | `DE` | 桌面环境 |
+
+**第三步：结构化输出**
+
+```bash
+fastfetch --format json
+```
+
+输出为 JSON 格式，适合用 `jq` 等工具解析。示例：
+
+```bash
+fastfetch --format json | jq '.cpu'
+```
+
+**第四步：自检诊断**
+
+```bash
+fastfetch --selftest
+```
+
+逐项检测各信息模块是否工作正常，输出中会标注每个模块的检测结果（通过/失败/跳过）。
+
+### 3.3 输出规范
+
+- **终端展示模式**：默认彩色表格，字段名左对齐，值右对齐。
+- **JSON 模式**：顶层为对象，键为字段名（小写），值为字符串或嵌套对象。
+- **退出码**：`0` 表示成功，非零表示部分模块失败（详见错误码体系）。
+
+---
+
+## 四、置信度门控
+
+当遇到以下情况时，**不得编造数据**，应输出占位符 `[需核实:字段名]` 并提示用户：
+
+| 场景 | 处理方式 |
+|------|----------|
+| 某字段检测失败（如 GPU 驱动异常） | 输出 `[需核实:GPU]`，建议用户运行 `lspci` 或 `system_profiler` 手动确认 |
+| 操作系统版本识别模糊 | 输出 `[需核实:OS版本]`，建议用户查看 `/etc/os-release` 或 `winver` |
+| 网络接口状态未知 | 输出 `[需核实:网络接口]`，建议用户运行 `ip addr` 或 `ifconfig` |
+| JSON 输出中某字段为空字符串 | 保留空值，不填充猜测内容，并在说明中标注 |
+
+**原则**：宁可明确标注未知，不可用推测值冒充实测值。
+
+---
+
+## 五、错误码体系
+
+| 错误码 | 含义 | 提示话术 | 修正步骤 |
+|--------|------|----------|----------|
+| 退出码 `1` | 参数解析失败 | "参数格式有误，请检查拼写" | 运行 `fastfetch --help` 查看参数列表，核对大小写与分隔符 |
+| 退出码 `2` | 指定字段不存在 | "字段名无效，可用字段见文档" | 对照本文档字段表，改用 `--structure OS:CPU:Memory` 等合法组合 |
+| 退出码 `3` | 配置文件加载失败 | "配置文件路径错误或格式损坏" | 检查 `~/.config/fastfetch/config.jsonc` 是否存在，尝试删除后重跑 |
+| 退出码 `4` | 输出格式指定错误 | "不支持的格式类型" | 确认 `--format` 后跟的是 `json`、`jsonc`、`yaml` 或 `xml` |
+| 退出码 `5` | 自检发现模块异常 | "部分检测模块未通过，详见输出" | 查看 `--selftest` 输出中标记 `FAIL` 的模块，按提示手动验证 |
+| 无输出 | 终端不支持 ANSI | "当前终端可能不支持彩色输出" | 添加 `--pipe` 参数强制纯文本输出 |
+
+---
+
+## 六、FAQ 反模式对照
+
+| 常见坑（反模式） | 问题描述 | 正确做法（正模式） |
+|------------------|----------|---------------------|
+| 盲目使用 `--format json` 不解析 | 输出一大坨 JSON 无法阅读 | 配合 `jq` 提取关键字段，如 `fastfetch --format json \| jq '{cpu, memory}'` |
+| 忽略 `--selftest` 直接下结论 | 某字段缺失却误判为系统异常 | 先跑 `--selftest` 确认是检测模块问题还是系统真实状态 |
+| 在脚本中硬编码字段顺序 | 升级后字段名变化导致解析失败 | 使用 JSON 格式按 key 取值，不依赖顺序 |
+| 用 `--structure` 时拼错字段名 | 输出为空或报错 | 先运行 `fastfetch --help` 查看字段列表，或直接跑默认输出对照 |
+| 在管道中丢失颜色控制符 | 输出含乱码转义序列 | 管道场景加 `--pipe` 参数，禁用颜色 |
+
+---
+
+## 七、渐进式披露
+
+### 7.1 速查卡（30 秒上手）
+
+```bash
+# 看全部信息
+fastfetch
+
+# 只看关键硬件
+fastfetch --structure CPU:Memory:GPU:Disk
+
+# 输出 JSON 给脚本用
+fastfetch --format json
+
+# 自检诊断
+fastfetch --selftest
+```
+
+### 7.2 分层次阅读路径
+
+**新手路径（5 分钟）**：
+1. 阅读「能力边界」了解工具能做什么。
+2. 运行 `fastfetch` 观察默认输出。
+3. 尝试 `--structure` 定制字段。
+4. 遇到问题查「错误码体系」。
+
+**进阶路径（15 分钟）**：
+1. 研究 `--format json` 与 `jq` 的组合用法。
+2. 阅读 `fastfetch --help` 完整参数列表，重点关注 `--logo`、`--color`、`--separator` 等美化参数。
+3. 自定义配置文件 `~/.config/fastfetch/config.jsonc`，固化个人偏好。
+4. 将 fastfetch 集成到 shell 启动脚本（如 `.bashrc`）中，登录即显示系统信息。
+
+**专家路径（30 分钟+）**：
+1. 阅读源码或文档了解各检测模块的实现原理。
+2. 编写脚本定期采集系统信息并归档，用于性能趋势分析。
+3. 结合 `--selftest` 输出，编写自动化巡检脚本，异常时告警。
+
+---
+
+## 八、用户协议
+
+<!-- user-agreement-injected -->
+
+**使用须知**：
+
+1. **责任承担**：使用者自行承担使用本 Skill 的全部责任。因使用本 Skill 导致的任何直接或间接损失，作者不承担任何责任。
+2. **禁止反向工程**：使用者不得对本 Skill 的提示词、逻辑结构进行反向工程、破解、篡改或二次分发，除非获得作者明确书面许可。
+3. **合规使用**：使用者应遵守所在地法律法规，不得将本 Skill 用于非法目的。
+4. **免责声明**：本 Skill 由 AI 辅助生成，可能存在不准确或不完整之处。使用者应结合官方文档进行交叉验证。
+
+---
+
+## 九、许可证（License）
+
+<!-- professional-license-embedded -->
+
+**MIT License**
+
+Copyright (c) 2024 原创作者（自持版权）
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -83,63 +241,15 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-```
-<!-- professional-license-embedded -->
 
-## 前置条件
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
+---
 
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
+*本文档由 AI 辅助生成，仅供参考。实际使用请以 fastfetch 官方文档为准。*
