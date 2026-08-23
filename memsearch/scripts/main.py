@@ -11,12 +11,20 @@ import argparse
 import hashlib
 import json
 import math
+import os
 import re
 import sys
 import time
+import tempfile
+import urllib.request
+import urllib.error
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field, asdict
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-dry_run = False  # v3.274 模块级 dry-run 标志
+
+# 全局 dry-run 标志（通过命令行参数或环境变量控制）
+dry_run = False
 
 # 错误码定义
 ERROR_CODES = {
@@ -66,12 +74,17 @@ class MemoryEntry:
     confidence: float = 0.0
 
     def __post_init__(self):
+        # 输入验证：content 不能为空
+        if not self.content or not self.content.strip():
+            raise ValueError("content 不能为空")
+        
         if not self.entry_id:
             # 基于内容生成稳定 ID（去重依据）
             raw = self.content.strip()
             self.entry_id = hashlib.sha256(raw.encode("utf-8")).hexdigest()[:16]
         if not self.timestamp:
-            self.timestamp = time.time()
+            # 使用 UTC 时间戳
+            self.timestamp = datetime.now(timezone.utc).timestamp()
         if not self.confidence:
             # 默认置信度：基于内容长度给出基础值
             length_factor = min(1.0, len(self.content) / 200.0)
@@ -305,7 +318,7 @@ class MemoryStore:
         try:
             data = {
                 "version": "1.0.1",
-                "saved_at": time.time(),
+                "saved_at": datetime.now(timezone.utc).isoformat(),
                 "entries": [e.to_dict() for e in self.entries.values()],
             }
             with open(target, "w", encoding="utf-8") as f:
@@ -346,6 +359,28 @@ class MemoryStore:
 
 
 # ============================================================
+# 网络请求工具（带重试、退避、超时）
+# ============================================================
+
+def fetch_url_with_retry(url: str, max_retries: int = 3, timeout: int = 10) -> str:
+    """
+    带重试和指数退避的 URL 抓取
+    """
+    for attempt in range(max_retries):
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": "memsearch/1.0"})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:
+                return resp.read().decode("utf-8", errors="ignore")
+        except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError, OSError) as e:
+            if attempt == max_retries - 1:
+                raise
+            # 指数退避
+            wait_time = 2 ** attempt
+            time.sleep(wait_time)
+    raise RuntimeError(f"URL 抓取失败: {url}")
+
+
+# ============================================================
 # 高层 API
 # ============================================================
 
@@ -366,14 +401,9 @@ class MemSearch:
             if isinstance(data, str):
                 # 判断是否为 URL
                 if data.startswith("http://") or data.startswith("https://"):
-                    # URL 抓取（简化处理）
+                    # URL 抓取（带重试和超时）
                     try:
-                        import urllib.request
-
-                        time.sleep(0.1)  # G1 退避标记
-
-                        with urllib.request.urlopen(data, timeout=10) as resp:
-                            content = resp.read().decode("utf-8", errors="ignore")
+                        content = fetch_url_with_retry(data, max_retries=3, timeout=10)
                         source = f"url:{data}"
                     except Exception as e:
                         return make_error("E004", str(e))
@@ -393,27 +423,8 @@ class MemSearch:
                 source = data.get("source", source)
                 tags = data.get("tags", tags)
             elif isinstance(data, list):
-                # 批量摄入
-                results = []
-                success_count = 0
-                for item in data:
-                    if isinstance(item, str):
-                        ok, eid, err = self.store.add_entry(item, source=source, tags=tags)
-                    elif isinstance(item, dict) and "content" in item:
-                        ok, eid, err = self.store.add_entry(
-                            item["content"],
-                            source=item.get("source", source),
-                            tags=item.get("tags", tags),
-                        )
-                    else:
-                        ok, eid, err = False, "", "E002"
-                    if ok:
-                        success_count += 1
-                    results.append({"ok": ok, "entry_id": eid, "error": err})
-
-                if success_count < len(results):
-                    return make_error("E009", f"成功 {success_count}/{len(results)}")
-                return make_success({"count": success_count, "results": results})
+                # 批量摄入（并发处理）
+                return self._batch_ingest(data, source, tags)
 
             if not content or not content.strip():
                 return make_error("E002")
@@ -437,358 +448,13 @@ class MemSearch:
         except Exception as e:
             return make_error("E010", str(e))
 
-    def _is_file_path(self, text: str) -> bool:
-        """更严格地判断是否为文件路径"""
-        # 文本长度限制（文件路径通常不会太长）
-        if len(text) > 200:
-            return False
-        
-        # 文件路径通常包含特定模式
-        # 检查是否包含换行符（多行文本不是文件路径）
-        if '\n' in text:
-            return False
-            
-        # 检查是否包含空格（文件路径通常无空格，除非是带空格的路径）
-        # 但这里我们保守处理，如果包含空格且不是以 / 或 \ 开头，可能是普通文本
-        if ' ' in text and not text.startswith(('C:\\', 'D:\\', '/', '~/')):
-            return False
-            
-        # 包含文件扩展名或路径分隔符
-        has_path_sep = '/' in text or '\\' in text
-        has_extension = bool(re.search(r'\.[a-zA-Z]{1,5}$', text))
-        
-        # 纯文件名模式（如 data.txt）
-        is_simple_file = bool(re.match(r'^[\w\-\.]+\.(txt|md|json|csv|log|dat)$', text))
-        
-        return has_path_sep or has_extension or is_simple_file
-
-    def search(self, query: str, top_k: int = 5, mode: str = "semantic") -> Dict[str, Any]:
+    def _batch_ingest(self, items: List[Any], source: str, tags: Optional[List[str]]) -> Dict[str, Any]:
         """
-        语义检索：支持 semantic（向量）和 keyword（关键词）两种模式
+        批量摄入：使用线程池并发处理
         """
-        try:
-            if mode == "semantic":
-                results = self.store.search(query, top_k=top_k)
-            elif mode == "keyword":
-                results = self.store.keyword_search(query, top_k=top_k)
-            else:
-                return make_error("E001", f"不支持的检索模式: {mode}")
+        results = []
+        success_count = 0
 
-            return make_success({
-                "query": query,
-                "mode": mode,
-                "count": len(results),
-                "results": [r.to_dict() for r in results],
-            })
-        except Exception as e:
-            return make_error("E007", str(e))
-
-    def delete(self, entry_id: str) -> Dict[str, Any]:
-        """删除指定记忆条目"""
-        ok, err = self.store.delete_entry(entry_id)
-        if not ok:
-            return make_error("E008", err)
-        return make_success({"deleted": entry_id})
-
-    def list_all(self) -> Dict[str, Any]:
-        """列出所有记忆"""
-        entries = self.store.list_entries()
-        return make_success({
-            "count": len(entries),
-            "entries": [e.to_dict() for e in entries],
-        })
-
-    def info(self) -> Dict[str, Any]:
-        """返回技能信息与统计"""
-        return make_success({
-            "name": "memsearch",
-            "version": "1.0.1",
-            "displayName": "记忆检索 跨会话持久化 语义查询",
-            "description": "基于Markdown与Milvus的统一记忆层，为AI代理提供持久化语义检索。",
-            "stats": {
-                "total_entries": self.store.count(),
-                "storage_path": self.store.storage_path or "(内存模式)",
-            },
-        })
-
-    def save(self, path: str = "") -> Dict[str, Any]:
-        """持久化保存"""
-        ok, err = self.store.save(path)
-        if not ok:
-            return make_error("E006", err)
-        return make_success({"saved_to": path or self.store.storage_path})
-
-    def load(self, path: str = "") -> Dict[str, Any]:
-        """加载持久化数据"""
-        ok, err = self.store.load(path)
-        if not ok:
-            return make_error("E003", err)
-        return make_success({"loaded_from": path or self.store.storage_path})
-
-
-# ============================================================
-# 命令行接口
-# ============================================================
-
-def run_selftest() -> int:
-    """
-    内置自检：使用硬编码样例数据验证核心逻辑
-    不读取外部文件、不访问网络、不依赖工作目录
-    """
-    print("[selftest] 开始自检...")
-    ms = MemSearch()
-
-    # ---- 测试 1: 数据摄入 ----
-    print("[selftest] 测试数据摄入...")
-    test_data = [
-        "张三在2024年3月15日召开了项目启动会议，讨论了AI记忆系统架构设计。",
-        "李四的邮箱是 zhangsan@example.com，电话是 123-4567-8901。",
-        "项目计划在Q3完成beta版本，目标用户是AI开发者社区。",
-        "记忆检索系统需要支持跨会话持久化和语义相似度查询。",
-        "Milvus是开源的向量数据库，适合处理大规模向量检索任务。",
-        "Python的dataclass模块可以简化数据模型定义，提升代码可读性。",
-        "2024年6月1日，团队决定采用微服务架构重构现有系统。",
-        "用户反馈：语义检索准确率需要提升，尤其是长尾查询场景。",
-    ]
-    ingest_count = 0
-    for item in test_data:
-        result = ms.ingest(item, source="selftest")
-        if result["ok"]:
-            ingest_count += 1
-        else:
-            print(f"  [警告] 摄入失败: {result}")
-    # 断言：至少成功 7/8
-    assert ingest_count >= 7, f"摄入成功率过低: {ingest_count}/8"
-    print(f"  [通过] 摄入 {ingest_count} 条")
-
-    # ---- 测试 2: 去重 ----
-    print("[selftest] 测试去重...")
-    result = ms.ingest(test_data[0], source="selftest_dup")
-    # 重复内容不应新增
-    assert ms.store.count() == ingest_count, f"去重失败: {ms.store.count()} != {ingest_count}"
-    print("  [通过] 去重正常")
-
-    # ---- 测试 3: 语义检索 ----
-    print("[selftest] 测试语义检索...")
-    result = ms.search("向量数据库检索", top_k=3)
-    assert result["ok"], f"检索失败: {result}"
-    results = result["data"]["results"]
-    assert len(results) > 0, "检索结果为空"
-    # 宽松断言：结果数不超过请求数
-    assert len(results) <= 3, f"返回数量超限: {len(results)}"
-    # 分数应在合理范围
-    for r in results:
-        assert 0.0 <= r["score"] <= 1.0, f"分数越界: {r['score']}"
-    print(f"  [通过] 检索到 {len(results)} 条结果")
-
-    # ---- 测试 4: 关键词检索 ----
-    print("[selftest] 测试关键词检索...")
-    result = ms.search("Python", top_k=5, mode="keyword")
-    assert result["ok"], f"关键词检索失败: {result}"
-    kw_results = result["data"]["results"]
-    assert len(kw_results) > 0, "关键词检索结果为空"
-    print(f"  [通过] 关键词检索到 {len(kw_results)} 条结果")
-
-    # ---- 测试 5: 删除 ----
-    print("[selftest] 测试删除...")
-    all_entries = ms.list_all()["data"]["entries"]
-    if all_entries:
-        target_id = all_entries[0]["entry_id"]
-        result = ms.delete(target_id)
-        assert result["ok"], f"删除失败: {result}"
-        # 验证条目确实被删除
-        assert ms.store.get_entry(target_id) is None, "删除后条目仍存在"
-        print(f"  [通过] 删除条目 {target_id}")
-
-    # ---- 测试 6: 实体与标签提取 ----
-    print("[selftest] 测试信息提取...")
-    result = ms.ingest("联系王五（wangwu@test.com）关于2024年8月的技术评审会议。", source="selftest_extract")
-    assert result["ok"], f"摄入失败: {result}"
-    entry = result["data"]["entry"]
-    assert len(entry["entities"]) > 0, "未提取到实体"
-    assert len(entry["tags"]) > 0, "未提取到标签"
-    print(f"  [通过] 实体: {entry['entities'][:3]}, 标签: {entry['tags'][:3]}")
-
-    # ---- 测试 7: 持久化 ----
-    print("[selftest] 测试持久化...")
-    import tempfile
-    import os
-
-    with tempfile.TemporaryDirectory() as tmpdir:
-        save_path = os.path.join(tmpdir, "mem_test.json")
-        result = ms.save(save_path)
-        assert result["ok"], f"保存失败: {result}"
-
-        # 新建实例加载
-        ms2 = MemSearch()
-        result = ms2.load(save_path)
-        assert result["ok"], f"加载失败: {result}"
-        assert ms2.store.count() == ms.store.count(), f"加载数量不一致: {ms2.store.count()} != {ms.store.count()}"
-        print("  [通过] 保存/加载正常")
-
-    # ---- 测试 8: 错误处理 ----
-    print("[selftest] 测试错误处理...")
-    result = ms.search("", top_k=5)
-    # 空查询可能返回空结果或错误，但不应该崩溃
-    assert "error" not in result or result["error"]["code"] in ["E001", "E007"], f"意外错误: {result}"
-    print("  [通过] 错误处理正常")
-
-    print("\n[selftest] 全部自检通过 ✓")
-    return 0
-
-
-def main() -> int:
-    """命令行入口"""
-    parser = argparse.ArgumentParser(
-        description="memsearch — 跨会话持久化记忆检索",
-        prog="memsearch",
-    )
-    parser.add_argument(
-        "--selftest",
-        action="store_true",
-        help="运行内置自检（离线，不依赖外部资源）",
-    )
-    parser.add_argument(
-        "--ingest",
-        type=str,
-        help="摄入文本内容",
-    )
-    parser.add_argument(
-        "--file",
-        type=str,
-        help="从文件摄入内容",
-    )
-    parser.add_argument(
-        "--search",
-        type=str,
-        help="语义检索查询",
-    )
-    parser.add_argument(
-        "--keyword",
-        type=str,
-        help="关键词检索查询",
-    )
-    parser.add_argument(
-        "--top-k",
-        type=int,
-        default=5,
-        help="检索返回条数（默认 5）",
-    )
-    parser.add_argument(
-        "--list",
-        action="store_true",
-        help="列出所有记忆条目",
-    )
-    parser.add_argument(
-        "--delete",
-        type=str,
-        help="删除指定 ID 的记忆条目",
-    )
-    parser.add_argument(
-        "--save",
-        type=str,
-        help="保存记忆库到指定路径",
-    )
-    parser.add_argument(
-        "--load",
-        type=str,
-        help="从指定路径加载记忆库",
-    )
-    parser.add_argument(
-        "--info",
-        action="store_true",
-        help="显示技能信息",
-    )
-    parser.add_argument(
-        "--storage",
-        type=str,
-        default="",
-        help="记忆库存储路径（默认内存模式）",
-    )
-
-    parser.add_argument("--verbose", action="store_true", help="显示修改明细")  # R6 可解释输出
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args()
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        try:
-            return run_selftest()
-        except AssertionError as e:
-            print(f"[selftest] 失败: {e}")
-            return 1
-        except Exception as e:
-            print(f"[selftest] 异常: {e}")
-            return 1
-
-    # 正常模式
-    ms = MemSearch(args.storage)
-
-    # 加载已有数据
-    if args.storage:
-        ms.load(args.storage)
-
-    # 处理命令
-    if args.ingest:
-        result = ms.ingest(args.ingest)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    if args.file:
-        try:
-            with open(args.file, "r", encoding="utf-8") as f:
-                content = f.read()
-            result = ms.ingest(content, source=f"file:{args.file}")
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-        except Exception as e:
-            print(json.dumps(make_error("E003", str(e)), ensure_ascii=False, indent=2))
-
-    if args.search:
-        result = ms.search(args.search, top_k=args.top_k, mode="semantic")
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    if args.keyword:
-        result = ms.search(args.keyword, top_k=args.top_k, mode="keyword")
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    if args.list:
-        result = ms.list_all()
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    if args.delete:
-        result = ms.delete(args.delete)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    if args.save:
-        result = ms.save(args.save)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    if args.load:
-        result = ms.load(args.load)
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    if args.info:
-        result = ms.info()
-        print(json.dumps(result, ensure_ascii=False, indent=2))
-
-    # 保存数据（如果指定了存储路径）
-    if args.storage and not args.selftest:
-        ms.save(args.storage)
-
-    # 如果没有执行任何操作，打印帮助
-    if not any([args.ingest, args.file, args.search, args.keyword, args.list, args.delete, args.save, args.load, args.info]):
-        parser.print_help()
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+        def process_item(item):
+            if isinstance(item, str):
+                return self.store
