@@ -10,7 +10,7 @@ import re
 import sys
 from collections import OrderedDict
 from typing import List, Dict, Tuple, Optional
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import datetime, timezone
 
 # 错误码定义
 ERROR_CODES = {
@@ -34,6 +34,12 @@ META_PRIORITY_RE = re.compile(r"\[(高|中|低)\]")
 META_ASSIGNEE_RE = re.compile(r"@([\w\u4e00-\u9fa5-]+)")
 META_DATE_RE = re.compile(r"\((\d{4}-\d{2}-\d{2})\)")
 
+# 最大嵌套深度
+MAX_DEPTH = 5
+
+# 列识别置信度阈值（至少需要匹配到这些字符才算识别成功）
+COLUMN_CONFIDENCE_THRESHOLD = 2
+
 
 def _validate_input(text: str) -> None:
     """验证输入文本，错误码 E001/E006"""
@@ -47,18 +53,36 @@ def _detect_columns(text: str, custom_columns: Optional[List[str]] = None) -> Li
     """
     识别输入中的看板列。
     优先使用自定义列，否则使用默认列 + 输入中出现的分类词。
+    增加置信度阈值，无匹配时返回明确错误。
     """
     columns = []
     if custom_columns:
         columns = [c.strip() for c in custom_columns if c.strip()]
-    else:
-        # 从输入中查找已知列关键词
-        for col in DEFAULT_COLUMNS:
-            if col in text:
-                columns.append(col)
-        # 如果没有找到，使用默认全部列
         if not columns:
-            columns = DEFAULT_COLUMNS.copy()
+            raise ValueError(f"E002: {ERROR_CODES['E002']}")
+        return columns
+
+    # 从输入中查找已知列关键词，统计出现次数
+    column_counts = {}
+    for col in DEFAULT_COLUMNS:
+        # 统计列名在文本中出现的次数（包括作为标题、列表项等）
+        count = len(re.findall(re.escape(col), text))
+        if count > 0:
+            column_counts[col] = count
+
+    # 按出现次数排序，取出现次数最多的列
+    if column_counts:
+        # 按出现次数降序排序
+        sorted_columns = sorted(column_counts.items(), key=lambda x: x[1], reverse=True)
+        # 取出现次数达到阈值的列
+        columns = [col for col, count in sorted_columns if count >= COLUMN_CONFIDENCE_THRESHOLD]
+        # 如果所有列都低于阈值，但至少有一个列出现，则使用出现次数最多的列
+        if not columns and sorted_columns:
+            columns = [sorted_columns[0][0]]
+    else:
+        # 没有匹配到任何列，返回明确错误
+        raise ValueError(f"E002: {ERROR_CODES['E002']}")
+
     return columns
 
 
@@ -121,7 +145,7 @@ def _extract_subtasks(lines: List[str], start_idx: int, indent: int = 0) -> Tupl
     """
     subtasks = []
     idx = start_idx
-    max_depth = 5  # 最大嵌套深度
+    max_depth = MAX_DEPTH
 
     while idx < len(lines):
         line = lines[idx]
@@ -248,7 +272,7 @@ def _process_text_to_board(text: str, custom_columns: Optional[List[str]] = None
 def _selftest() -> bool:
     """
     内置自检函数：使用硬编码样例数据验证核心逻辑。
-    使用宽松阈值断言，确保任何环境可过。
+    真实调用主流程/核心函数并断言关键输出。
     """
     print("运行自检...")
 
@@ -268,14 +292,14 @@ def _selftest() -> bool:
 """
     try:
         result1 = _process_text_to_board(sample1)
-        # 宽松断言：检查关键结构存在
+        # 严格断言：检查关键结构存在
         assert "## 待办" in result1, "缺少待办列"
         assert "## 进行中" in result1, "缺少进行中列"
         assert "## 已完成" in result1, "缺少已完成列"
         assert "买牛奶" in result1, "缺少卡片内容"
         assert "修复登录bug" in result1, "缺少卡片内容"
-        assert "[高]" in result1 or "高" in result1, "缺少优先级标记"
-        assert "@张三" in result1 or "张三" in result1, "缺少负责人标记"
+        assert "[高]" in result1, "缺少优先级标记"
+        assert "@张三" in result1, "缺少负责人标记"
         assert "2025-06-30" in result1, "缺少日期标记"
         assert "检查日志" in result1, "缺少子任务"
         print("  样例1（基本转换）: 通过")
@@ -346,10 +370,13 @@ def _selftest() -> bool:
         assert "用户调研" in result5, "缺少二级子任务"
         assert "竞品分析" in result5, "缺少二级子任务"
         assert "技术选型" in result5, "缺少一级子任务"
-        # 检查缩进存在（宽松判断）
+        # 检查缩进存在（严格判断）
         lines5 = result5.split("\n")
         has_indent = any(line.startswith("  ") for line in lines5)
         assert has_indent, "缺少缩进结构"
+        # 验证嵌套层级
+        assert "    - 用户调研" in result5, "二级子任务缩进错误"
+        assert "    - 竞品分析" in result5, "二级子任务缩进错误"
         print("  样例5（多级嵌套）: 通过")
     except AssertionError as e:
         print(f"  样例5失败: {e}")
@@ -358,12 +385,71 @@ def _selftest() -> bool:
         print(f"  样例5异常: {e}")
         return False
 
+    # 测试样例6：错误码映射
+    try:
+        _process_text_to_board("")
+        print("  样例6（错误码映射）: 失败 - 应抛出异常")
+        return False
+    except ValueError as e:
+        assert "E001" in str(e), "错误码不正确"
+        print("  样例6（错误码映射）: 通过")
+    except Exception:
+        print("  样例6（错误码映射）: 失败 - 异常类型错误")
+        return False
+
+    # 测试样例7：无列匹配时返回错误
+    sample7 = "这是一个没有列关键词的文本"
+    try:
+        _process_text_to_board(sample7)
+        print("  样例7（无列匹配）: 失败 - 应抛出异常")
+        return False
+    except ValueError as e:
+        assert "E002" in str(e), "错误码不正确"
+        print("  样例7（无列匹配）: 通过")
+    except Exception:
+        print("  样例7（无列匹配）: 失败 - 异常类型错误")
+        return False
+
+    # 测试样例8：主流程完整调用（通过main函数）
+    try:
+        # 使用临时文件测试主流程
+        import tempfile
+        import os
+        
+        # 创建临时输入文件
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.txt', delete=False, encoding='utf-8') as f:
+            f.write(sample1)
+            input_path = f.name
+        
+        # 创建临时输出文件
+        output_path = input_path.replace('.txt', '_output.md')
+        
+        # 调用主函数
+        exit_code = main_with_args(['-i', input_path, '-o', output_path])
+        
+        # 验证输出文件
+        with open(output_path, 'r', encoding='utf-8') as f:
+            output_content = f.read()
+        
+        assert exit_code == 0, f"主流程退出码不为0: {exit_code}"
+        assert "## 待办" in output_content, "主流程输出缺少待办列"
+        assert "买牛奶" in output_content, "主流程输出缺少卡片内容"
+        
+        # 清理临时文件
+        os.unlink(input_path)
+        os.unlink(output_path)
+        
+        print("  样例8（主流程完整调用）: 通过")
+    except Exception as e:
+        print(f"  样例8失败: {e}")
+        return False
+
     print("\n全部自检通过 ✓")
     return True
 
 
-def main() -> int:
-    """主入口函数"""
+def main_with_args(args_list: List[str]) -> int:
+    """带参数的主函数，用于测试"""
     parser = argparse.ArgumentParser(
         description="kanban-md 任务看板标记转换器",
         epilog="示例: python main.py -i input.txt -o output.md"
@@ -375,64 +461,10 @@ def main() -> int:
     parser.add_argument("--text", help="直接传入文本内容")
 
     try:
-        parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-        parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-        args = parser.parse_args()
-        global dry_run
-        dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+        args = parser.parse_args(args_list)
     except SystemExit:
         return 8  # E008 参数解析失败
 
     # 自检模式
     if args.selftest:
         return 0 if _selftest() else 1
-
-    # 获取输入文本
-    input_text = ""
-    try:
-        if args.text:
-            input_text = args.text
-        elif args.input:
-            with open(args.input, "r", encoding="utf-8") as f:
-                input_text = f.read()
-        else:
-            # 从标准输入读取
-            print("请输入文本（Ctrl+D 结束）:")
-            input_text = sys.stdin.read()
-    except Exception as e:
-        print(f"E001: 读取输入失败 - {e}")
-        return 1
-
-    # 处理自定义列
-    custom_cols = None
-    if args.columns:
-        custom_cols = [c.strip() for c in args.columns.split(",") if c.strip()]
-
-    # 执行转换
-    try:
-        result = _process_text_to_board(input_text, custom_cols)
-    except ValueError as e:
-        print(f"转换失败: {e}")
-        return 1
-    except Exception as e:
-        print(f"E010: 未知错误 - {e}")
-        return 10
-
-    # 输出结果
-    try:
-        if args.output:
-            with open(args.output, "w", encoding="utf-8") as f:
-                f.write(result)
-            print(f"看板已保存至: {args.output}")
-        else:
-            print(result)
-    except Exception as e:
-        print(f"E007: 输出失败 - {e}")
-        return 7
-
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
