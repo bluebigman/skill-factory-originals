@@ -33,7 +33,7 @@ from collections import OrderedDict
 from html.parser import HTMLParser
 from typing import Dict, List, Optional, Set, Tuple
 import time
-dry_run = False  # v3.274 模块级 dry-run 标志
+from datetime import datetime, timezone
 
 # G4 Mock sample: 外部 HTML 结构变更时的降级样本
 _MOCK_SAMPLE = "<html><body><div class='content'>sample</div></body></html>"  # mock fallback
@@ -252,11 +252,11 @@ class EmailScraper:
         获取 URL 内容。
         返回 (HTML内容, 错误信息)。成功时错误信息为 None。
         """
-        request = urllib.request.Request(
-            url,
-            headers={"User-Agent": self.user_agent, "Accept": "text/html,application/xhtml+xml"},
-        )
-        try:
+        def _fetch():
+            request = urllib.request.Request(
+                url,
+                headers={"User-Agent": self.user_agent, "Accept": "text/html,application/xhtml+xml"},
+            )
             with urllib.request.urlopen(request, timeout=self.timeout) as response:
                 content_type = response.headers.get("Content-Type", "")
                 # 只处理 HTML 内容
@@ -269,6 +269,9 @@ class EmailScraper:
                 except UnicodeDecodeError:
                     html = data.decode("latin-1")
                 return html, None
+        
+        try:
+            return _retry_request(_fetch)
         except Exception as e:
             return None, str(e)
 
@@ -435,129 +438,4 @@ def run_selftest() -> int:
     txt_output = format_output(test_emails, "txt")
     assert len(txt_output.splitlines()) == 2, "E008: TXT 输出格式错误"
     json_output = format_output(test_emails, "json")
-    json_data = json.loads(json_output)
-    assert len(json_data["emails"]) == 2, "E008: JSON 输出格式错误"
-    csv_output = format_output(test_emails, "csv")
-    assert len(csv_output.splitlines()) == 3, "E008: CSV 输出格式错误"
-    print("  [通过] 输出格式化")
-
-    # ---- 测试 7: 模拟爬虫（使用本地 HTML 字符串，不访问网络） ----
-    # 创建一个模拟的爬虫实例，但直接测试其内部逻辑
-    scraper = EmailScraper(max_depth=2)
-    # 测试 visited 去重
-    scraper.visited.add("https://example.com")
-    assert "https://example.com" in scraper.visited
-    print("  [通过] 爬虫实例初始化")
-
-    print("\n全部自检通过！")
-    return 0
-
-
-# ============================================================
-# 主入口
-# ============================================================
-def main(argv: Optional[List[str]] = None) -> int:
-    """主函数入口。"""
-    parser = argparse.ArgumentParser(
-        description="email-scraper - 递归爬取网站并提取公开邮箱地址",
-        epilog="示例: python main.py https://example.com -d 2 -o result.json",
-    )
-    parser.add_argument("--url", nargs="?", help="起始 URL（不提供时使用默认示例）")
-    parser.add_argument("-d", "--depth", type=int, default=2, help="递归爬取深度（默认 2）")
-    parser.add_argument("-w", "--whitelist", help="域名白名单，逗号分隔（如 example.com,test.org）")
-    parser.add_argument("-b", "--blacklist", help="域名黑名单，逗号分隔")
-    parser.add_argument("-o", "--output", help="输出文件路径（默认输出到 stdout）")
-    parser.add_argument("-f", "--format", choices=["txt", "json", "csv"], default="txt", help="输出格式（默认 txt）")
-    parser.add_argument("--timeout", type=int, default=10, help="请求超时时间（秒，默认 10）")
-    parser.add_argument("--max-pages", type=int, default=100, help="最大爬取页面数（默认 100）")
-    parser.add_argument("--selftest", action="store_true", help="运行离线自检")
-
-    parser.add_argument("--force", action="store_true")  # R4 强制写盘
-
-
-    parser.add_argument("--dry-run", action="store_true")  # R4 预览模式
-
-    args = parser.parse_args(argv)
-
-    global dry_run
-
-    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
-
-    # 自检模式
-    if args.selftest:
-        try:
-            return run_selftest()
-        except AssertionError as e:
-            print(f"自检失败: {e}", file=sys.stderr)
-            return 1
-        except Exception as e:
-            print(f"自检异常: {e}", file=sys.stderr)
-            return 1
-
-    # 正常模式
-    if not args.url:
-        print("错误: 请提供起始 URL（或使用 --selftest 运行自检）", file=sys.stderr)
-        print("示例: python main.py https://example.com", file=sys.stderr)
-        return 1
-
-    # 解析白名单/黑名单
-    whitelist = None
-    if args.whitelist:
-        whitelist = {d.strip().lower() for d in args.whitelist.split(",") if d.strip()}
-    blacklist = None
-    if args.blacklist:
-        blacklist = {d.strip().lower() for d in args.blacklist.split(",") if d.strip()}
-
-    # 验证 URL 格式
-    parsed_url = urllib.parse.urlparse(args.url)
-    if parsed_url.scheme not in ("http", "https") or not parsed_url.netloc:
-        print(f"错误: URL 格式无效: {args.url}", file=sys.stderr)
-        return 1
-
-    # 创建爬虫并执行
-    scraper = EmailScraper(
-        max_depth=args.depth,
-        whitelist=whitelist,
-        blacklist=blacklist,
-        timeout=args.timeout,
-    )
-
-    try:
-        print(f"开始爬取: {args.url} (深度: {args.depth})")
-        page_emails = scraper.crawl(args.url, max_pages=args.max_pages)
-        all_emails = scraper.get_all_emails()
-
-        if not all_emails:
-            print("未找到任何邮箱地址。", file=sys.stderr)
-            return 0
-
-        print(f"共爬取 {len(page_emails)} 个页面，找到 {len(all_emails)} 个唯一邮箱。")
-
-        # 输出结果
-        output_text = format_output(all_emails, args.format)
-        if args.output:
-            try:
-                with open(args.output, "w", encoding="utf-8") as f:
-                    f.write(output_text)
-                print(f"结果已保存到: {args.output}")
-            except Exception as e:
-                print(f"错误: 无法写入文件: {e}", file=sys.stderr)
-                return 1
-        else:
-            print("\n" + output_text)
-
-        return 0
-
-    except AppError as e:
-        print(f"错误 [{e.code}]: {e.message}", file=sys.stderr)
-        return 1
-    except KeyboardInterrupt:
-        print("\n已取消。", file=sys.stderr)
-        return 130
-    except Exception as e:
-        print(f"未预期错误: {e}", file=sys.stderr)
-        return 1
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    json_data = json.load
