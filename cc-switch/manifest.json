@@ -1,0 +1,28 @@
+{
+  "timestamp": "20260831_203736",
+  "slug": "cc-switch",
+  "spec": {
+    "slug": "cc-switch",
+    "name": "cc-switch",
+    "description": "统一管理多款AI编码助手配置，一键切换，提升开发效率。",
+    "cli_interface": [],
+    "capability_outline": [
+      "1. Claude Code  -> ~/.claude-code/config.json",
+      "2. Codex        -> ~/.codex/config.toml",
+      "1. 备份当前生效配置到 ~/.cc-switch/backups/config.claude-code.20260821-153000.json",
+      "2. 将 ~/.claude-code/config.json 的内容写入 ~/.claude-code/config.json"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "a90a075a2c570fab",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}

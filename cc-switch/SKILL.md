@@ -1,12 +1,11 @@
 ---
-> 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
-<!-- ai-generated-notice -->
 <!-- © 2026 SkillForge Lab. All rights reserved. -->
 slug: cc-switch
 name: cc-switch
-displayName: 多智能体终端切换器 配置管理 环境迁移
-description: 跨平台桌面工具，统一管理多款AI编码助手的配置与切换。
-version: 1.0.1
+displayName: 多智能体配置切换台
+description: 统一管理多款AI编码助手配置，一键切换，提升开发效率。
+version: 2.0.1
+rules_version: cpr-20260821-n626
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/cc-switch
@@ -14,61 +13,165 @@ copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
-author: LinguaForge
+author: 林墨白
 agent_created: true
-trigger_words: ["cc-switch", "cc switch", "多智能体切换", "AI编码助手配置管理", "Claude Code配置", "Codex配置切换"]
+trigger_words: ["cc-switch", "cc switch", "多智能体切换", "AI编码助手配置管理", "Claude Code配置", "配置切换", "编码助手管理"]
 ---
-
-> 📜 **用户协议（User Agreement）**
-> 1. 本 Skill 仅供学习与参考用途。使用本 Skill 产生的任何结果，由使用者自行承担全部责任；本 Skill 不提供任何明示或暗示的保证。
-> 2. 涉及法律、财务、税务、投资、医疗等专业决策时，请务必咨询持证专业人士。
-> 3. 本代码受版权法保护，未经授权复制、反向工程或商业利用将被追究法律责任。
-<!-- user-agreement-injected -->
-
 
 > ⚠️ **本内容仅供一般信息参考，不构成法律、财务、税务、投资或医疗建议。**
 > 涉及合同签署、报税、投资、诊疗等专业决策时，请务必咨询持证专业人士，并由使用者自行承担决策后果。
 <!-- professional-disclaimer-injected -->
 
+
 > 本内容由 AI 生成，仅供学习参考
 <!-- ai-generated-notice -->
 
-# cc-switch 技能文档
+# cc-switch：多智能体配置切换台
 
-## 一、能力边界速查卡
+## 一、能力边界：一页纸速查卡
 
-### 1.1 能做什么
+本 Skill 面向需要同时维护多套 AI 编码助手配置的开发者，提供配置备份、切换、恢复的标准化操作指引。
 
-| 序号 | 能力项 | 说明 |
-|------|--------|------|
-| 1 | 配置切换 | 在 Claude Code、Codex、OpenCode、OpenClaw、Grok Build、Hermes Agent 之间切换当前激活的配置 |
-| 2 | 配置导入 | 从外部文件、URL 或用户粘贴的文本中解析配置信息并写入本地配置库 |
-| 3 | 配置导出 | 将当前配置或指定配置导出为标准化格式（JSON/YAML/ENV） |
-| 4 | 配置校验 | 检查配置完整性、格式合法性，并给出置信度评估 |
-| 5 | 批量操作 | 支持同时对多个目标工具的配置进行批量切换或备份 |
+| 维度 | 说明 |
+|------|------|
+| 核心能力 | 管理 Claude Code、Codex 等编码助手的配置文件，支持备份、切换、恢复 |
+| 适用对象 | 使用 2 款及以上 AI 编码助手的开发者、团队技术负责人、DevOps 工程师 |
+| 前置条件 | 已安装目标编码助手 CLI 工具，且配置文件路径符合默认约定 |
+| 不做的事 | 不修改编码助手本身的模型参数、不代理网络请求、不处理认证令牌生成 |
+| 边界限制 | 仅处理本机文件系统内的配置，不涉及远程同步或云端存储 |
 
-### 1.2 不能做什么
+**配置路径速查**
 
-| 序号 | 限制项 | 说明 |
-|------|--------|------|
-| 1 | 不修改工具本体 | 不修改各 AI 编码助手的程序文件或安装包 |
-| 2 | 不处理认证凭据 | 不存储、不传输 API Key、Token 等敏感认证信息（仅做引用标记） |
-| 3 | 不保证兼容性 | 不保证所有版本的工具配置格式完全兼容，需用户确认目标版本 |
-| 4 | 不自动更新 | 不自动拉取或更新各工具的最新配置模板 |
+| 工具 | 配置文件路径 | 格式 |
+|------|-------------|------|
+| Claude Code | `~/.claude-code/config.json` | JSON |
+| Codex | `~/.codex/config.toml` | TOML |
 
-### 1.3 适用对象
+## 二、触发方式：场景映射表
 
-- 同时使用多个 AI 编码助手的开发者
-- 需要在不同项目间切换不同工具配置的团队
-- 需要批量管理多台开发机配置的运维人员
+当出现以下场景时，可调用本 Skill 的操作流程：
 
+| 触发词 | 实际场景 | 对应操作 |
+|--------|---------|---------|
+| cc-switch / cc switch | 在多个项目间切换不同 AI 助手配置 | 执行配置切换流程 |
+| 多智能体切换 | 团队内多人使用不同编码助手配置 | 执行配置备份与分发 |
+| AI编码助手配置管理 | 需要统一管理多套配置版本 | 执行配置备份与恢复 |
+| Claude Code配置 | 单独调整 Claude Code 配置 | 执行单工具配置操作 |
+
+## 三、标准流程：从备份到切换
+
+### 前置条件检查
+
+1. 确认目标配置文件存在（`ls ~/.claude-code/config.json` 或 `ls ~/.codex/config.toml`）
+2. 确认备份目录可写（`mkdir -p ~/.cc-switch/backups`）
+3. 确认当前用户对配置文件有读写权限
+
+### 执行步骤
+
+**步骤 1：备份当前生效配置**
+
+```bash
+# 生成带时间戳的备份文件名
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+cp ~/.claude-code/config.json ~/.cc-switch/backups/config.claude-code.${TIMESTAMP}.json
+```
+
+**步骤 2：写入新配置**
+
+```bash
+# 将目标配置内容写入生效位置
+cat /path/to/target-config.json > ~/.claude-code/config.json
+```
+
+**步骤 3：验证配置生效**
+
+```bash
+# 检查配置语法
+claude-code --version
+# 或直接启动工具确认无报错
+```
+
+### 输出规范
+
+- 每次操作后输出操作日志，格式：`[时间] [操作类型] [目标文件] [结果]`
+- 备份文件命名规则：`config.{tool-name}.{YYYYMMDD-HHMMSS}.{ext}`
+
+## 四、置信度门控
+
+当遇到以下情况时，输出 `[需核实:字段]` 占位符，不进行猜测：
+
+| 场景 | 处理方式 |
+|------|---------|
+| 配置文件路径不确定 | 输出 `[需核实:配置文件路径]`，提示用户通过 `which` 或 `find` 确认 |
+| 配置格式不明确 | 输出 `[需核实:配置格式]`，建议用户参考官方文档 |
+| 工具版本差异 | 输出 `[需核实:工具版本]`，提示不同版本配置项可能存在差异 |
+
+## 五、错误码体系
+
+| 错误码 | 错误描述 | 提示话术 | 修正步骤 |
+|--------|---------|---------|---------|
+| E001 | 配置文件不存在 | 未找到目标配置文件，请确认工具已初始化 | 运行工具初始化命令（如 `claude-code init`） |
+| E002 | 备份目录不可写 | 备份目录权限不足，无法创建备份 | 执行 `chmod u+w ~/.cc-switch/backups` 或更换目录 |
+| E003 | 配置格式错误 | 新配置无法被工具解析 | 使用 `jq` 或 `python -m json.tool` 校验 JSON 格式 |
+| E004 | 权限拒绝 | 当前用户无权限写入配置文件 | 使用 `sudo` 或调整文件所有者 |
+| E005 | 备份文件损坏 | 备份文件内容不完整或格式错误 | 检查备份文件完整性，必要时从其他备份恢复 |
+
+## 六、FAQ 反模式对照
+
+| 常见坑 | 反模式示例 | 正确做法 |
+|--------|-----------|---------|
+| 跳过备份直接覆盖 | 直接 `cp new-config.json ~/.claude-code/config.json` | 先执行备份步骤，确保可回滚 |
+| 忽略配置格式差异 | 将 TOML 格式直接写入 JSON 配置文件 | 确认目标工具期望的格式，必要时转换 |
+| 不验证切换结果 | 切换后不启动工具直接关闭终端 | 切换后立即验证工具可正常启动 |
+| 备份文件命名混乱 | 使用 `config1.json`、`config2.json` 等无意义名称 | 使用带时间戳的规范命名 |
+| 忘记恢复旧配置 | 切换后不保留原配置副本 | 始终保留最近 3 份备份，便于快速回退 |
+
+## 七、渐进式披露：分层次阅读路径
+
+### 速查卡（30 秒上手）
+
+```bash
+# 备份
+mkdir -p ~/.cc-switch/backups
+cp ~/.claude-code/config.json ~/.cc-switch/backups/config.claude-code.$(date +%Y%m%d-%H%M%S).json
+
+# 切换
+cp /path/to/new-config.json ~/.claude-code/config.json
+
+# 验证
+claude-code --version
+```
+
+### 新手路径（5 分钟掌握）
+
+1. 阅读「能力边界」了解适用范围
+2. 按「标准流程」执行一次完整备份-切换-验证
+3. 遇到问题查阅「错误码体系」
+
+### 进阶路径（深度使用）
+
+1. 结合「FAQ 反模式」优化操作习惯
+2. 为多工具建立统一的备份管理脚本
+3. 将配置切换纳入 CI/CD 流程，实现自动化
+
+---
+
+## 用户协议
+
+使用本 Skill 即表示您同意以下条款：
+
+1. **责任承担**：使用者自行承担使用本 Skill 产生的全部责任。包括但不限于因配置错误导致的工具异常、数据丢失或开发效率下降。
+2. **禁止反向工程**：不得对本 Skill 文档进行反向工程、反编译或试图提取底层逻辑。
+3. **合规使用**：使用者应确保使用场景符合相关法律法规及所在组织的规章制度。
+4. **无担保声明**：本 Skill 按"现状"提供，不附带任何形式的明示或暗示担保。
+
+<!-- user-agreement-injected -->
 
 ## 许可证（License）
 
-```text
 MIT License
 
-Copyright (c) 2026 SkillForge Lab
+Copyright (c) 2026 林墨白
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -79,63 +182,13 @@ furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all
 copies or substantial portions of the Software.
-```
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
 <!-- professional-license-embedded -->
-
-## 前置条件
-
-- Python 3.9+（脚本依赖标准库，无需联网即可运行自检）
-- 已获取待处理的输入文件，并对其拥有合法使用权
-- 建议先在样本数据上试运行，确认输出符合预期后再批量处理
-
-## 执行步骤
-
-1. **准备输入**：将待处理文件放入同一目录，确认命名规范一致。
-2. **试运行**：先用单个样本执行，核对输出字段与格式。
-3. **批量执行**：确认无误后对全量数据执行，并保留原始文件备份。
-4. **校验结果**：抽查输出条目，核对关键字段与源数据一致。
-
-## 输出
-
-- 结构化结果文件（默认与输入同目录，带 `_out` 后缀），原始文件不被改写
-- 控制台摘要：处理总数、成功数、跳过数、失败数
-- 失败明细清单，含文件名与失败原因，便于定向重跑
-
-## 异常处理
-
-| 异常情况 | 表现 | 处理方式 |
-|---|---|---|
-| 输入文件不存在 | 提示路径错误并退出 | 核对路径，使用绝对路径重试 |
-| 文件格式不符 | 该条跳过并计入失败明细 | 转换为受支持格式后重跑该条 |
-| 权限不足 | 写入失败 | 更换输出目录或提升目录写权限 |
-| 单条数据异常 | 跳过该条，继续处理其余 | 处理结束后查看失败明细定向重跑 |
-
-失败处理原则：**单条失败不中断整批**，全部异常汇总到失败明细，支持只重跑失败项。
-
-## 稳定性保障
-
-- **超时控制**：单条处理设置上限，超时自动跳过并记入失败明细，避免整批卡死。
-- **重试策略**：可恢复类错误（临时占用、瞬时 IO 失败）自动重试 3 次，间隔递增。
-- **降级方案**：高级解析失败时自动回退到基础解析模式，保证有可用输出而非直接报错。
-- **幂等性**：重复执行同一批输入结果一致，不会产生重复追加。
-
-## FAQ 与反模式
-
-**Q：可以直接对原始文件覆盖写入吗？**
-A：不建议。默认输出到独立文件，保留原始数据是可回溯的前提。
-
-**Q：处理到一半失败了怎么办？**
-A：已完成部分的输出有效，查看失败明细后只重跑失败项即可，无需整批重来。
-
-**反模式 ①**：不做试运行直接批量处理全量数据 —— 参数配错会一次性污染全部输出。
-
-**反模式 ②**：忽略失败明细只看成功数 —— 静默跳过的条目会造成数据缺口。
-
-**反模式 ③**：把工具输出直接作为最终结论 —— 关键字段务必人工抽检。
-
-## 安全声明
-
-- 全流程本地执行，不上传任何用户数据到第三方服务。
-- 不读取与任务无关的目录，不写入系统目录。
-- 处理含个人信息的数据时，请自行遵守《个人信息保护法》等相关法规。
-- 本 Skill 代码由 AI 辅助生成并经自检验证，以 MIT 协议开源，使用者自负使用后果。
