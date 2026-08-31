@@ -1,0 +1,25 @@
+{
+  "timestamp": "20260831_203933",
+  "slug": "ai-reputation-claude",
+  "spec": {
+    "slug": "ai-reputation-claude",
+    "name": "ai-reputation-claude",
+    "description": "解析在线评论，量化品牌声誉，对标竞品，输出可执行洞察报告。",
+    "cli_interface": [],
+    "capability_outline": [
+      "- 输出报告仅供一般信息参考，不构成专业建议"
+    ],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "bd58c2a3881ca31f",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
