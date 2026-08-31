@@ -4,29 +4,31 @@
 tasks - 数据转换与批量处理工具
 
 功能：
-- 解析 CSV / JSON / Markdown 表格等常见格式
+- 解析 CSV / JSON / JSONL / TXT 等常见格式
 - 结构化转换：将非结构化数据映射为字段明确的记录
 - 批量处理：对多条同类数据执行相同转换规则
-- 自定义格式输出：Markdown 表格、CSV、JSON
-- 字段映射与重命名
-- 基础数据清洗（去空行、去重、日期格式统一）
+- 自定义格式输出：JSON / JSONL / CSV
+- 字段映射与重命名（支持点号嵌套展开）
+- 日期格式化、常量字段注入
+- 试运行模式（--dry-run）与小样本验证（--sample）
 
 用法示例：
-    python scripts/main.py --input data.csv --output result.json --format json
-    python scripts/main.py --selftest
+    python run.py --input data.csv --output result.json --format json
+    python run.py --input-dir ./input --output-dir ./output --format jsonl
+    python run.py --input data.csv --dry-run --sample 5 --verbose
+    python run.py --selftest
 """
 
 import argparse
 import csv
 import io
 import json
-import re
+import os
 import sys
 import time
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional, Tuple
-from concurrent.futures import ThreadPoolExecutor, as_completed
-
+dry_run = False  # v3.274 模块级 dry-run 标志
 
 # ============================================================
 # 错误码定义
@@ -60,6 +62,8 @@ class DataRecord:
 
     def rename(self, old: str, new: str) -> None:
         if old in self.fields:
+            if new in self.fields and new != old:
+                raise err("E003", f"字段重命名冲突: '{old}' -> '{new}'，目标字段已存在")
             self.fields[new] = self.fields.pop(old)
 
     def to_dict(self) -> Dict[str, Any]:
@@ -68,378 +72,605 @@ class DataRecord:
 
 class DataTable:
     """数据表：包含字段列表和多条记录。"""
-    def __init__(self, fields: Optional[List[str]] = None):
-        self.fields = fields if fields is not None else []
-        self.records: List[DataRecord] = []
-
-    def add_record(self, record: DataRecord) -> None:
-        # 自动扩展字段列表
-        for key in record.fields:
-            if key not in self.fields:
-                self.fields.append(key)
-        self.records.append(record)
-
-    def add_records(self, records: List[DataRecord]) -> None:
-        for r in records:
-            self.add_record(r)
+    def __init__(self, fields: List[str], records: List[DataRecord]):
+        self.fields = fields
+        self.records = records
 
     def __len__(self) -> int:
         return len(self.records)
 
-    def to_dicts(self) -> List[Dict[str, Any]]:
-        return [r.to_dict() for r in self.records]
-
-
-# ============================================================
-# 解析器（输入）
-# ============================================================
-def parse_csv(text: str) -> DataTable:
-    """解析 CSV 文本为 DataTable。"""
-    try:
-        reader = csv.DictReader(io.StringIO(text))
-        table = DataTable(fields=reader.fieldnames or [])
-        for row in reader:
-            table.add_record(DataRecord(row))
-        return table
-    except Exception as e:
-        raise err("E001", f"CSV 解析失败: {e}")
-
-
-def parse_json(text: str) -> DataTable:
-    """解析 JSON 文本为 DataTable。支持对象数组或单个对象。"""
-    try:
-        data = json.loads(text)
-    except json.JSONDecodeError as e:
-        raise err("E002", f"JSON 解析失败: {e}")
-
-    if isinstance(data, dict):
-        # 单个对象：所有值必须是标量才视为一条记录
-        table = DataTable(fields=list(data.keys()))
-        table.add_record(DataRecord(data))
-        return table
-    elif isinstance(data, list):
-        if not data:
-            return DataTable(fields=[])
-        if not all(isinstance(item, dict) for item in data):
-            raise err("E003", "JSON 数组元素必须是对象")
-        table = DataTable()
-        for item in data:
-            table.add_record(DataRecord(item))
-        return table
-    else:
-        raise err("E004", "JSON 顶层必须是对象或对象数组")
-
-
-def parse_markdown_table(text: str) -> DataTable:
-    """解析 Markdown 表格文本为 DataTable。"""
-    lines = [line.strip() for line in text.strip().splitlines() if line.strip()]
-    if len(lines) < 2:
-        raise err("E005", "Markdown 表格至少需要表头和分隔行")
-
-    header_line = lines[0]
-    # 去除首尾的 |
-    header_cells = [c.strip() for c in header_line.strip("|").split("|")]
-
-    # 验证分隔行（---）
-    sep_line = lines[1]
-    sep_cells = [c.strip() for c in sep_line.strip("|").split("|")]
-    if not all(re.match(r"^:?-{3,}:?$", cell) for cell in sep_cells):
-        raise err("E006", "Markdown 表格第二行必须是分隔行（---）")
-
-    table = DataTable(fields=header_cells)
-    for line in lines[2:]:
-        cells = [c.strip() for c in line.strip("|").split("|")]
-        if len(cells) != len(header_cells):
-            raise err("E007", f"数据行列数({len(cells)})与表头列数({len(header_cells)})不一致")
-        record = DataRecord(dict(zip(header_cells, cells)))
-        table.add_record(record)
-    return table
-
-
-def detect_and_parse(text: str) -> DataTable:
-    """自动检测格式并解析。"""
-    stripped = text.strip()
-    if not stripped:
-        raise err("E008", "输入内容为空")
-
-    # 尝试 JSON
-    if stripped.startswith("{") or stripped.startswith("["):
-        try:
-            return parse_json(stripped)
-        except AppError:
-            pass  # 不是合法 JSON，继续尝试其他格式
-
-    # 尝试 Markdown 表格（第二行是 --- 分隔）
-    lines = stripped.splitlines()
-    if len(lines) >= 2 and re.match(r"^\s*\|", lines[1]) and "---" in lines[1]:
-        try:
-            return parse_markdown_table(stripped)
-        except AppError:
-            pass
-
-    # 尝试 CSV
-    try:
-        return parse_csv(stripped)
-    except AppError:
-        pass
-
-    raise err("E009", "无法识别输入格式（支持 CSV、JSON、Markdown 表格）")
-
-
-# ============================================================
-# 数据清洗与转换
-# ============================================================
-def clean_table(table: DataTable, remove_duplicates: bool = True) -> DataTable:
-    """基础清洗：去空行、去重。"""
-    cleaned = DataTable(fields=list(table.fields))
-    seen = set()
-
-    for record in table.records:
-        # 去空行：所有字段值都为空或空白则跳过
-        if all(str(v).strip() == "" for v in record.fields.values()):
-            continue
-
-        # 去重
-        if remove_duplicates:
-            key = tuple(sorted((k, str(v)) for k, v in record.fields.items()))
-            if key in seen:
-                continue
-            seen.add(key)
-
-        cleaned.add_record(record)
-
-    return cleaned
-
-
-def normalize_date(value: str) -> str:
-    """统一日期格式为 YYYY-MM-DD。"""
-    value = value.strip()
-    if not value:
-        return value
-
-    # 支持常见格式
-    patterns = [
-        (r"^(\d{4})/(\d{1,2})/(\d{1,2})$", "ymd"),      # 2024/1/5
-        (r"^(\d{4})-(\d{1,2})-(\d{1,2})$", "ymd"),      # 2024-1-5
-        (r"^(\d{1,2})/(\d{1,2})/(\d{4})$", "mdy"),      # 1/5/2024
-        (r"^(\d{4})年(\d{1,2})月(\d{1,2})日$", "ymd"),  # 2024年1月5日
-        (r"^(\d{1,2})月(\d{1,2})日$", "md"),            # 1月5日（补充格式）
-    ]
-
-    for pattern, fmt in patterns:
-        m = re.match(pattern, value)
-        if m:
-            groups = m.groups()
-            try:
-                if fmt == "ymd":
-                    year, month, day = groups
-                elif fmt == "mdy":
-                    month, day, year = groups
-                elif fmt == "md":
-                    # 只有月日，默认年份为当前年份
-                    month, day = groups
-                    year = datetime.now(timezone.utc).year
-                return f"{int(year):04d}-{int(month):02d}-{int(day):02d}"
-            except ValueError:
-                return value
-
-    # 尝试用 datetime 解析
-    for fmt in ("%Y/%m/%d", "%Y-%m-%d", "%m/%d/%Y", "%Y年%m月%d日"):
-        try:
-            dt = datetime.strptime(value, fmt)
-            return dt.strftime("%Y-%m-%d")
-        except ValueError:
-            continue
-
-    return value
-
-
-def apply_field_mapping(table: DataTable, mapping: Dict[str, str]) -> DataTable:
-    """字段映射与重命名。mapping 为 {源字段名: 目标字段名}。"""
-    result = DataTable()
-    for record in table.records:
-        new_record = DataRecord({})
-        for src, dst in mapping.items():
-            if src in record.fields:
-                new_record.set(dst, record.get(src))
-        # 保留未映射字段
+    def add_record(self, record: DataRecord) -> None:
+        self.records.append(record)
         for key in record.fields:
-            if key not in mapping:
-                new_record.set(key, record.get(key))
-        result.add_record(new_record)
-    return result
-
-
-def normalize_dates_in_table(table: DataTable, date_fields: List[str]) -> DataTable:
-    """对指定字段做日期格式化。"""
-    for record in table.records:
-        for field in date_fields:
-            if field in record.fields:
-                record.set(field, normalize_date(str(record.get(field))))
-    return table
+            if key not in self.fields:
+                self.fields.append(key)
 
 
 # ============================================================
-# 输出格式化（输出）
+# 输入解析
 # ============================================================
-def to_csv(table: DataTable) -> str:
-    """输出为 CSV 文本。"""
-    output = io.StringIO()
-    writer = csv.DictWriter(output, fieldnames=table.fields)
-    writer.writeheader()
-    for record in table.records:
-        writer.writerow(record.to_dict())
-    return output.getvalue()
+def read_file_with_encoding(filepath: str) -> str:
+    """读取文件内容，自动尝试多种编码。"""
+    encodings = ["utf-8", "gbk", "gb18030"]
+    for enc in encodings:
+        try:
+            with open(filepath, "r", encoding=enc) as f:
+                return f.read()
+        except UnicodeDecodeError:
+            continue
+        except FileNotFoundError:
+            raise err("E001", f"输入文件不存在: {filepath}")
+    raise err("E006", f"无法识别文件编码: {filepath}（尝试了 utf-8/gbk/gb18030）")
 
 
-def to_json(table: DataTable, pretty: bool = True) -> str:
-    """输出为 JSON 文本。"""
-    data = table.to_dicts()
-    if pretty:
-        return json.dumps(data, ensure_ascii=False, indent=2)
-    return json.dumps(data, ensure_ascii=False)
+def parse_csv(content: str) -> DataTable:
+    """解析 CSV 内容。"""
+    reader = csv.DictReader(io.StringIO(content))
+    fields = reader.fieldnames or []
+    records = []
+    for row in reader:
+        records.append(DataRecord(dict(row)))
+    return DataTable(fields, records)
 
 
-def to_markdown(table: DataTable) -> str:
-    """输出为 Markdown 表格。"""
-    if not table.fields:
-        return ""
+def parse_json(content: str) -> DataTable:
+    """解析 JSON 内容（支持数组或对象数组）。"""
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError as e:
+        raise err("E007", f"JSON 解析失败: {e}")
+    if not isinstance(data, list):
+        raise err("E008", "JSON 顶层必须是数组")
+    records = []
+    fields = []
+    for item in data:
+        if not isinstance(item, dict):
+            raise err("E009", f"JSON 数组元素必须是对象，得到: {type(item)}")
+        records.append(DataRecord(item))
+        for key in item:
+            if key not in fields:
+                fields.append(key)
+    return DataTable(fields, records)
 
-    lines = []
-    # 表头
-    lines.append("| " + " | ".join(table.fields) + " |")
-    # 分隔行
-    lines.append("| " + " | ".join(["---"] * len(table.fields)) + " |")
-    # 数据行
-    for record in table.records:
-        cells = [str(record.get(f, "")) for f in table.fields]
-        lines.append("| " + " | ".join(cells) + " |")
-    return "\n".join(lines)
+
+def parse_jsonl(content: str) -> DataTable:
+    """解析 JSONL 内容（每行一个 JSON 对象）。"""
+    records = []
+    fields = []
+    for line_num, line in enumerate(content.splitlines(), 1):
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            item = json.loads(line)
+        except json.JSONDecodeError as e:
+            raise err("E010", f"JSONL 第 {line_num} 行解析失败: {e}")
+        if not isinstance(item, dict):
+            raise err("E011", f"JSONL 第 {line_num} 行不是对象")
+        records.append(DataRecord(item))
+        for key in item:
+            if key not in fields:
+                fields.append(key)
+    return DataTable(fields, records)
 
 
-def format_output(table: DataTable, fmt: str) -> str:
-    """按指定格式输出。"""
-    fmt = fmt.lower()
-    if fmt == "csv":
-        return to_csv(table)
-    elif fmt == "json":
-        return to_json(table)
-    elif fmt == "markdown" or fmt == "md":
-        return to_markdown(table)
+def parse_txt(content: str) -> DataTable:
+    """解析 TXT 内容（Tab 分隔，首行为表头）。"""
+    lines = content.splitlines()
+    if not lines:
+        return DataTable([], [])
+    header = lines[0].split("\t")
+    records = []
+    for line in lines[1:]:
+        if not line.strip():
+            continue
+        values = line.split("\t")
+        row = {}
+        for i, field in enumerate(header):
+            row[field] = values[i] if i < len(values) else ""
+        records.append(DataRecord(row))
+    return DataTable(header, records)
+
+
+def parse_input(filepath: str) -> DataTable:
+    """根据文件扩展名解析输入文件。"""
+    ext = os.path.splitext(filepath)[1].lower()
+    content = read_file_with_encoding(filepath)
+    if ext == ".csv":
+        return parse_csv(content)
+    elif ext == ".json":
+        return parse_json(content)
+    elif ext == ".jsonl":
+        return parse_jsonl(content)
+    elif ext == ".txt":
+        return parse_txt(content)
     else:
-        raise err("E010", f"不支持的输出格式: {fmt}（支持 csv/json/markdown）")
+        raise err("E002", f"不支持的输入格式: {ext}（支持 .csv/.json/.jsonl/.txt）")
 
 
 # ============================================================
-# 主处理流程
+# 字段映射与转换
 # ============================================================
-def process_data(
-    input_text: str,
-    output_format: str = "json",
-    field_mapping: Optional[Dict[str, str]] = None,
-    date_fields: Optional[List[str]] = None,
-    remove_duplicates: bool = True,
-) -> str:
-    """完整处理流程：解析 → 清洗 → 映射 → 日期标准化 → 输出。"""
-    # 1. 解析
-    table = detect_and_parse(input_text)
-
-    # 2. 清洗
-    table = clean_table(table, remove_duplicates=remove_duplicates)
-
-    # 3. 字段映射
-    if field_mapping:
-        table = apply_field_mapping(table, field_mapping)
-
-    # 4. 日期标准化
-    if date_fields:
-        table = normalize_dates_in_table(table, date_fields)
-
-    # 5. 输出
-    return format_output(table, output_format)
+def resolve_nested_path(data: Dict[str, Any], path: str) -> Any:
+    """解析点号路径，如 'user.address.city'。"""
+    current = data
+    for part in path.split("."):
+        if isinstance(current, dict) and part in current:
+            current = current[part]
+        else:
+            return None
+    return current
 
 
-def process_batch(
-    items: List[Tuple[str, str, Optional[Dict[str, str]], Optional[List[str]], bool]],
-    max_workers: int = 4,
-    timeout: float = 30.0,
-) -> List[str]:
-    """并发处理多条数据。items 为 (input_text, output_format, field_mapping, date_fields, remove_duplicates) 元组列表。"""
-    results: List[Tuple[int, str]] = []
-    with ThreadPoolExecutor(max_workers=max_workers) as executor:
-        future_to_index = {
-            executor.submit(process_data, text, fmt, mapping, dates, dedup): idx
-            for idx, (text, fmt, mapping, dates, dedup) in enumerate(items)
-        }
-        for future in as_completed(future_to_index):
-            idx = future_to_index[future]
-            try:
-                result = future.result(timeout=timeout)
-                results.append((idx, result))
-            except Exception as e:
-                results.append((idx, f"错误: {e}"))
-    # 按原始顺序返回
-    results.sort(key=lambda x: x[0])
-    return [r[1] for r in results]
+def apply_field_mapping(record: DataRecord, mapping: Dict[str, str]) -> DataRecord:
+    """应用字段映射（支持点号嵌套展开）。"""
+    new_fields = {}
+    for old_path, new_name in mapping.items():
+        value = resolve_nested_path(record.fields, old_path)
+        if value is not None:
+            new_fields[new_name] = value
+    # 保留未映射的字段
+    mapped_old = set(mapping.keys())
+    for key, value in record.fields.items():
+        if key not in mapped_old:
+            new_fields[key] = value
+    return DataRecord(new_fields)
+
+
+def apply_output_fields(record: DataRecord, output_fields: List[str]) -> DataRecord:
+    """按白名单筛选字段并排序。"""
+    if not output_fields:
+        return record
+    new_fields = {}
+    for field in output_fields:
+        if field in record.fields:
+            new_fields[field] = record.fields[field]
+    return DataRecord(new_fields)
+
+
+def apply_date_format(record: DataRecord, date_fields: List[str], date_format: str) -> DataRecord:
+    """格式化日期字段。"""
+    if not date_fields or not date_format:
+        return record
+    for field in date_fields:
+        if field in record.fields:
+            value = record.fields[field]
+            if isinstance(value, str) and value.strip():
+                try:
+                    # 尝试多种常见日期格式
+                    parsed = None
+                    for fmt in ["%Y-%m-%d", "%Y/%m/%d", "%d-%m-%Y", "%d/%m/%Y", "%Y-%m-%d %H:%M:%S"]:
+                        try:
+                            parsed = datetime.strptime(value.strip(), fmt)
+                            break
+                        except ValueError:
+                            continue
+                    if parsed is None:
+                        raise ValueError(f"无法解析日期: {value}")
+                    record.fields[field] = parsed.strftime(date_format)
+                except ValueError as e:
+                    print(f"[WARN] 日期格式化失败: {e}", file=sys.stderr)
+    return record
+
+
+def apply_constant_fields(record: DataRecord, constant_fields: Dict[str, str]) -> DataRecord:
+    """注入常量字段。"""
+    for key, value in constant_fields.items():
+        record.fields[key] = value
+    return record
+
+
+def transform_record(record: DataRecord, args) -> DataRecord:
+    """对单条记录执行完整转换流程。"""
+    # 字段映射
+    if args.field_mapping:
+        record = apply_field_mapping(record, args.field_mapping)
+    # 日期格式化
+    if args.date_fields and args.date_format:
+        record = apply_date_format(record, args.date_fields, args.date_format)
+    # 常量字段
+    if args.constant_fields:
+        record = apply_constant_fields(record, args.constant_fields)
+    # 输出字段筛选
+    if args.output_fields:
+        record = apply_output_fields(record, args.output_fields)
+    return record
 
 
 # ============================================================
-# 自检（selftest）
+# 输出
+# ============================================================
+def atomic_write(filepath: str, content: str) -> None:
+    """原子化写入文件（先写临时文件再重命名）。"""
+    dirname = os.path.dirname(filepath)
+    if dirname and not os.path.exists(dirname):
+        os.makedirs(dirname, exist_ok=True)
+    tmp_path = filepath + f".tmp.{os.getpid()}"
+    try:
+        with open(tmp_path, "w", encoding="utf-8") as f:
+            f.write(content)
+        os.replace(tmp_path, filepath)
+    except Exception:
+        if os.path.exists(tmp_path):
+            os.remove(tmp_path)
+        raise
+
+
+def format_output(table: DataTable, output_format: str) -> str:
+    """将数据表格式化为指定格式的字符串。"""
+    if output_format == "json":
+        return json.dumps([r.to_dict() for r in table.records], ensure_ascii=False, indent=2)
+    elif output_format == "jsonl":
+        return "\n".join(json.dumps(r.to_dict(), ensure_ascii=False) for r in table.records)
+    elif output_format == "csv":
+        if not table.records:
+            return ""
+        fields = table.fields
+        output = [",".join(fields)]
+        for record in table.records:
+            output.append(",".join(str(record.get(f, "")) for f in fields))
+        return "\n".join(output)
+    else:
+        raise err("E012", f"不支持的输出格式: {output_format}")
+
+
+def write_output(table: DataTable, output_path: str, output_format: str, dry_run: bool) -> None:
+    """写入输出文件（支持 dry-run 模式）。"""
+    content = format_output(table, output_format)
+    if not dry_run:
+        atomic_write(output_path, content)
+        print(f"[OK] 已写入: {output_path} ({len(table.records)} 条记录)")
+        return
+    print(f"[DRY-RUN] 将写入: {output_path}")
+    print(f"[DRY-RUN] 内容预览（前 500 字符）:")
+    print(content[:500])
+
+
+def write_report(report: Dict[str, Any], output_dir: str, dry_run: bool) -> None:
+    """写入处理报告。"""
+    report_path = os.path.join(output_dir, "report.txt")
+    lines = [
+        f"处理时间: {report['timestamp']}",
+        f"输入文件数: {report['input_files']}",
+        f"总记录数: {report['total_records']}",
+        f"成功记录数: {report['success_records']}",
+        f"失败记录数: {report['failed_records']}",
+        f"处理耗时: {report['elapsed_seconds']:.2f} 秒",
+    ]
+    if report["errors"]:
+        lines.append("\n失败详情:")
+        for error in report["errors"]:
+            lines.append(f"  - {error}")
+    content = "\n".join(lines)
+    if not dry_run:
+        atomic_write(report_path, content)
+        print(f"[OK] 报告已写入: {report_path}")
+        return
+    print(f"[DRY-RUN] 将写入报告: {report_path}")
+    print(content)
+
+
+# ============================================================
+# 主流程
+# ============================================================
+def process_file(filepath: str, output_path: str, args) -> Tuple[int, int, List[str]]:
+    """处理单个文件，返回 (成功数, 失败数, 错误列表)。"""
+    try:
+        table = parse_input(filepath)
+    except AppError as e:
+        return 0, 0, [f"{filepath}: {e.code} {e.message}"]
+
+    success = 0
+    failed = 0
+    errors = []
+    transformed_records = []
+
+    for i, record in enumerate(table.records):
+        if args.sample and i >= args.sample:
+            break
+        try:
+            transformed = transform_record(record, args)
+            transformed_records.append(transformed)
+            success += 1
+        except AppError as e:
+            failed += 1
+            errors.append(f"{filepath} 第 {i+1} 行: {e.code} {e.message}")
+        except Exception as e:
+            failed += 1
+            errors.append(f"{filepath} 第 {i+1} 行: 未知错误 {e}")
+
+    if transformed_records:
+        output_table = DataTable(
+            list(transformed_records[0].fields.keys()),
+            transformed_records
+        )
+        try:
+            write_output(output_table, output_path, args.format, args.dry_run)
+        except AppError as e:
+            errors.append(f"{output_path}: {e.code} {e.message}")
+
+    return success, failed, errors
+
+
+def process_directory(input_dir: str, output_dir: str, args) -> Tuple[int, int, int, List[str]]:
+    """处理目录下所有支持的文件。"""
+    supported_exts = {".csv", ".json", ".jsonl", ".txt"}
+    files = [f for f in os.listdir(input_dir) if os.path.splitext(f)[1].lower() in supported_exts]
+    files.sort()
+
+    total_success = 0
+    total_failed = 0
+    all_errors = []
+
+    for filename in files:
+        input_path = os.path.join(input_dir, filename)
+        base_name = os.path.splitext(filename)[0]
+        output_path = os.path.join(output_dir, f"{base_name}.{args.format}")
+        success, failed, errors = process_file(input_path, output_path, args)
+        total_success += success
+        total_failed += failed
+        all_errors.extend(errors)
+
+    return len(files), total_success, total_failed, all_errors
+
+
+def main() -> int:
+    """CLI 入口。"""
+    parser = argparse.ArgumentParser(
+        description="数据转换与批量处理工具",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog=__doc__
+    )
+    parser.add_argument("--input", type=str, help="输入文件路径")
+    parser.add_argument("--input-dir", type=str, help="输入目录路径")
+    parser.add_argument("--output", type=str, default="./output/result.json", help="输出文件路径")
+    parser.add_argument("--output-dir", type=str, default="./output", help="输出目录路径")
+    parser.add_argument("--format", type=str, default="json", choices=["json", "jsonl", "csv"], help="输出格式")
+    parser.add_argument("--field-mapping", type=str, help="字段映射 JSON，如 '{\"old\": \"new\"}'")
+    parser.add_argument("--output-fields", type=str, help="输出字段白名单，逗号分隔")
+    parser.add_argument("--date-format", type=str, help="日期输出格式（Python strftime 语法）")
+    parser.add_argument("--date-fields", type=str, help="日期字段列表，逗号分隔")
+    parser.add_argument("--constant-fields", type=str, help="常量字段，如 'source=internal'")
+    parser.add_argument("--dry-run", action="store_true", help="试运行模式，不写盘")
+    parser.add_argument("--sample", type=int, help="仅处理前 N 条记录")
+    parser.add_argument("--verbose", action="store_true", help="输出详细日志")
+    parser.add_argument("--selftest", action="store_true", help="运行内置自检")
+
+    args = parser.parse_args()
+
+    global dry_run
+
+    dry_run = getattr(args, "dry_run", False)  # v3.274 同步到全局
+
+    if args.selftest:
+        return run_selftest()
+
+    # 解析复杂参数
+    try:
+        args.field_mapping = json.loads(args.field_mapping) if args.field_mapping else {}
+        args.output_fields = [f.strip() for f in args.output_fields.split(",")] if args.output_fields else []
+        args.date_fields = [f.strip() for f in args.date_fields.split(",")] if args.date_fields else []
+        args.constant_fields = {}
+        if args.constant_fields:
+            for pair in args.constant_fields.split(","):
+                key, _, value = pair.partition("=")
+                args.constant_fields[key.strip()] = value.strip()
+    except json.JSONDecodeError as e:
+        print(f"[ERROR] 参数解析失败: {e}", file=sys.stderr)
+        return 1
+
+    # 输入校验
+    if not args.input and not args.input_dir:
+        print("[ERROR] 必须指定 --input 或 --input-dir", file=sys.stderr)
+        return 1
+    if args.input and args.input_dir:
+        print("[ERROR] --input 和 --input-dir 只能指定一个", file=sys.stderr)
+        return 1
+
+    start_time = time.time()
+    report = {
+        "timestamp": datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M:%S UTC"),
+        "input_files": 0,
+        "total_records": 0,
+        "success_records": 0,
+        "failed_records": 0,
+        "elapsed_seconds": 0.0,
+        "errors": [],
+    }
+
+    try:
+        if args.input:
+            # 单文件模式
+            if not os.path.exists(args.input):
+                raise err("E001", f"输入文件不存在: {args.input}")
+            success, failed, errors = process_file(args.input, args.output, args)
+            report["input_files"] = 1
+            report["success_records"] = success
+            report["failed_records"] = failed
+            report["errors"] = errors
+        else:
+            # 目录模式
+            if not os.path.exists(args.input_dir):
+                raise err("E001", f"输入目录不存在: {args.input_dir}")
+            file_count, success, failed, errors = process_directory(args.input_dir, args.output_dir, args)
+            report["input_files"] = file_count
+            report["success_records"] = success
+            report["failed_records"] = failed
+            report["errors"] = errors
+    except AppError as e:
+        print(f"[ERROR] {e.code} {e.message}", file=sys.stderr)
+        return 1
+    except Exception as e:
+        print(f"[ERROR] 未知错误: {e}", file=sys.stderr)
+        return 1
+
+    report["total_records"] = report["success_records"] + report["failed_records"]
+    report["elapsed_seconds"] = time.time() - start_time
+
+    # 写入报告
+    output_dir = args.output_dir if args.input_dir else os.path.dirname(args.output)
+    write_report(report, output_dir, args.dry_run)
+
+    if args.verbose:
+        print(f"\n[VERBOSE] 处理完成: {report['input_files']} 个文件, "
+              f"{report['total_records']} 条记录, "
+              f"成功 {report['success_records']}, 失败 {report['failed_records']}")
+        for error in report["errors"]:
+            print(f"[VERBOSE] 错误: {error}")
+
+    return 0 if report["failed_records"] == 0 else 2
+
+
+# ============================================================
+# 自检
 # ============================================================
 def run_selftest() -> int:
-    """内置硬编码样例，离线自检核心逻辑。"""
-    print("开始自检...")
+    """运行内置自检，验证核心功能。"""
+    print("=" * 60)
+    print("运行自检...")
+    failures = []
 
-    # --- 测试 1: CSV 解析与 JSON 输出（端到端核心链路） ---
-    csv_input = "name,date,amount\nAlice,2024/1/5,100\nBob,2024-02-10,200\nAlice,2024/1/5,100\n"
-    result = process_data(csv_input, output_format="json", date_fields=["date"])
-    parsed = json.loads(result)
-    # 去重后应少于 3 条记录（宽松阈值）
-    assert len(parsed) < 3, f"CSV 去重失败: 期望少于3条，实际{len(parsed)}"
-    # 日期应统一格式
-    for item in parsed:
-        assert re.match(r"^\d{4}-\d{2}-\d{2}$", item["date"]), f"日期格式错误: {item['date']}"
-    print("  [通过] CSV 解析/去重/日期格式化/JSON 输出")
+    # 测试 1: CSV 解析
+    print("\n[测试 1] CSV 解析")
+    csv_content = "name,age,city\n张三,28,北京\n李四,35,上海\n"
+    table = parse_csv(csv_content)
+    assert len(table) == 2, f"CSV 解析失败: 期望 2 条记录，得到 {len(table)}"
+    assert table.records[0].get("name") == "张三", "CSV 解析失败: 第一条记录 name 字段错误"
+    print(f"  [PASS] 解析 {len(table)} 条记录")
 
-    # --- 测试 2: Markdown 表格解析（端到端核心链路） ---
-    md_input = """| 姓名 | 年龄 | 城市 |
-|------|------|------|
-| 张三 | 25   | 北京 |
-| 李四 | 30   | 上海 |
-"""
-    result = process_data(md_input, output_format="json")
-    parsed = json.loads(result)
-    assert len(parsed) >= 2, f"Markdown 解析失败: 期望至少2条，实际{len(parsed)}"
-    assert parsed[0]["姓名"] == "张三", "Markdown 字段值错误"
-    print("  [通过] Markdown 表格解析")
+    # 测试 2: JSON 解析
+    print("\n[测试 2] JSON 解析")
+    json_content = '[{"name": "张三", "age": 28}, {"name": "李四", "age": 35}]'
+    table = parse_json(json_content)
+    assert len(table) == 2, f"JSON 解析失败: 期望 2 条记录，得到 {len(table)}"
+    assert table.records[0].get("age") == 28, "JSON 解析失败: age 字段错误"
+    print(f"  [PASS] 解析 {len(table)} 条记录")
 
-    # --- 测试 3: JSON 输入与字段映射（端到端核心链路） ---
-    json_input = '[{"name": "Alice", "age": 30}, {"name": "Bob", "age": 25}]'
-    result = process_data(
-        json_input,
-        output_format="markdown",
-        field_mapping={"name": "姓名", "age": "年龄"},
-    )
-    assert "姓名" in result and "年龄" in result, "字段映射失败"
-    assert "Alice" in result and "Bob" in result, "字段映射数据丢失"
-    print("  [通过] JSON 解析/字段映射/Markdown 输出")
+    # 测试 3: JSONL 解析
+    print("\n[测试 3] JSONL 解析")
+    jsonl_content = '{"name": "张三", "age": 28}\n{"name": "李四", "age": 35}\n'
+    table = parse_jsonl(jsonl_content)
+    assert len(table) == 2, f"JSONL 解析失败: 期望 2 条记录，得到 {len(table)}"
+    print(f"  [PASS] 解析 {len(table)} 条记录")
 
-    # --- 测试 4: 日期标准化 ---
-    test_dates = ["2024/1/5", "2024-02-10", "2024年3月15日", "12/25/2024"]
-    for d in test_dates:
-        normalized = normalize_date(d)
-        assert re.match(r"^\d{4}-\d{2}-\d{2}$", normalized), f"日期标准化失败: {d} → {normalized}"
-    print("  [通过] 日期标准化")
+    # 测试 4: TXT 解析
+    print("\n[测试 4] TXT 解析")
+    txt_content = "name\tage\tcity\n张三\t28\t北京\n李四\t35\t上海\n"
+    table = parse_txt(txt_content)
+    assert len(table) == 2, f"TXT 解析失败: 期望 2 条记录，得到 {len(table)}"
+    assert table.records[0].get("city") == "北京", "TXT 解析失败: city 字段错误"
+    print(f"  [PASS] 解析 {len(table)} 条记录")
 
-    # --- 测试 5: 错误处理 ---
+    # 测试 5: 字段映射
+    print("\n[测试 5] 字段映射")
+    record = DataRecord({"user": {"name": "张三", "age": "28"}})
+    mapping = {"user.name": "name", "user.age": "age"}
+    transformed = apply_field_mapping(record, mapping)
+    assert transformed.get("name") == "张三", "字段映射失败: name 字段错误"
+    assert transformed.get("age") == "28", "字段映射失败: age 字段错误"
+    print("  [PASS] 字段映射正确")
+
+    # 测试 6: 嵌套路径展开
+    print("\n[测试 6] 嵌套路径展开")
+    record = DataRecord({"user": {"address": {"city": "北京"}}})
+    value = resolve_nested_path(record.fields, "user.address.city")
+    assert value == "北京", f"嵌套路径展开失败: 期望 '北京'，得到 {value}"
+    print("  [PASS] 嵌套路径展开正确")
+
+    # 测试 7: 日期格式化
+    print("\n[测试 7] 日期格式化")
+    record = DataRecord({"created_at": "2024/01/15"})
+    transformed = apply_date_format(record, ["created_at"], "%Y-%m-%d")
+    assert transformed.get("created_at") == "2024-01-15", f"日期格式化失败: {transformed.get('created_at')}"
+    print("  [PASS] 日期格式化正确")
+
+    # 测试 8: 常量字段注入
+    print("\n[测试 8] 常量字段注入")
+    record = DataRecord({"name": "张三"})
+    transformed = apply_constant_fields(record, {"source": "internal"})
+    assert transformed.get("source") == "internal", "常量字段注入失败"
+    print("  [PASS] 常量字段注入正确")
+
+    # 测试 9: 输出字段筛选
+    print("\n[测试 9] 输出字段筛选")
+    record = DataRecord({"name": "张三", "age": "28", "city": "北京"})
+    transformed = apply_output_fields(record, ["name", "city"])
+    assert "age" not in transformed.fields, "输出字段筛选失败: age 不应存在"
+    assert transformed.get("name") == "张三", "输出字段筛选失败: name 字段错误"
+    print("  [PASS] 输出字段筛选正确")
+
+    # 测试 10: 完整转换流程
+    print("\n[测试 10] 完整转换流程")
+    class Args:
+        field_mapping = {"user_name": "name"}
+        date_fields = ["created_at"]
+        date_format = "%Y-%m-%d"
+        constant_fields = {"source": "test"}
+        output_fields = ["name", "created_at", "source"]
+
+    args = Args()
+    record = DataRecord({"user_name": "张三", "created_at": "2024/01/15"})
+    transformed = transform_record(record, args)
+    assert transformed.get("name") == "张三", "完整转换失败: name 字段错误"
+    assert transformed.get("created_at") == "2024-01-15", "完整转换失败: 日期格式化错误"
+    assert transformed.get("source") == "test", "完整转换失败: 常量字段错误"
+    assert "user_name" not in transformed.fields, "完整转换失败: 原字段应被映射"
+    print("  [PASS] 完整转换流程正确")
+
+    # 测试 11: 输出格式化
+    print("\n[测试 11] 输出格式化")
+    table = DataTable(["name", "age"], [DataRecord({"name": "张三", "age": "28"})])
+    json_output = format_output(table, "json")
+    assert "张三" in json_output, "JSON 输出失败"
+    jsonl_output = format_output(table, "jsonl")
+    assert "张三" in jsonl_output, "JSONL 输出失败"
+    csv_output = format_output(table, "csv")
+    assert "name,age" in csv_output, "CSV 输出失败"
+    print("  [PASS] 输出格式化正确")
+
+    # 测试 12: 空输入处理
+    print("\n[测试 12] 空输入处理")
+    empty_table = parse_csv("")
+    assert len(empty_table) == 0, "空输入处理失败"
+    print("  [PASS] 空输入处理正确")
+
+    # 测试 13: 编码兼容
+    print("\n[测试 13] 编码兼容")
+    # 模拟 GBK 编码内容
+    gbk_content = "name,age\n张三,28\n".encode("gbk")
+    import io as io_module
+    with open("/tmp/test_gbk.csv", "wb") as f:
+        f.write(gbk_content)
+    table = parse_input("/tmp/test_gbk.csv")
+    assert len(table) == 1, "GBK 编码解析失败"
+    assert table.records[0].get("name") == "张三", "GBK 编码解析失败: name 字段错误"
+    # 使用 try/except 包裹删除操作，避免沙箱回收站问题
     try:
-        process_data("not a valid format at all", output_format="json")
-        # 如果没抛异常，说明可能被解析为 CSV（单列），此时应检查结果
-        # 但这里我们期望抛出 E009，所以如果没抛，则断言失败
-        assert False, "应抛出 E009 错误"
-    except AppError as e:
-        assert e.code == "E009", f"错误码错误: {e.code}"
-    print("  [通过] 错误处理")
+        os.remove("/tmp/test_gbk.csv")
+    except OSError as e:
+        print(f"  [WARN] 清理临时文件失败（不影响测试结果）: {e}")
+    print("  [PASS] GBK 编码兼容正确")
 
-    # --- 测试 6: 空数据处理 ---
-    empty_input
+    # 测试 14: 错误处理
+    print("\n[测试 14] 错误处理")
+    try:
+        parse_input("/nonexistent/file.csv")
+        failures.append("错误处理失败: 应抛出 E001 错误")
+    except AppError as e:
+        assert e.code == "E001", f"错误码错误: 期望 E001，得到 {e.code}"
+        print("  [PASS] 错误处理正确")
+
+    # 汇总
+    print("\n" + "=" * 60)
+    if failures:
+        print(f"自检失败: {len(failures)} 项")
+        for failure in failures:
+            print(f"  - {failure}")
+        return 1
+    else:
+        print("全部 14 项测试通过 ✓")
+        return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
