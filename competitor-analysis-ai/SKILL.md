@@ -6,7 +6,7 @@ description: 多维度拆解竞品，输出可执行差异化策略与结构化�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/competitor-analysis-ai
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
