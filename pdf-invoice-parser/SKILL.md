@@ -6,7 +6,7 @@ description: 从PDF发票中提取结构化字段并校验数据一致性。
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/pdf-invoice-parser
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
