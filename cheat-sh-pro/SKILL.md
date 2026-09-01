@@ -6,7 +6,7 @@ description: 一条命令获取编程语言与工具示例，开发调试即时�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/cheat-sh-pro
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
