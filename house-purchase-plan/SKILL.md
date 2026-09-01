@@ -6,7 +6,7 @@ description: 输入收入与房价，输出月供、税费、现金流压力与�
 version: 2.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/house-purchase-plan
 copyright_holder: 居安测算工坊
 ai_generated: true
 ai_tools: ["DeepSeek"]
