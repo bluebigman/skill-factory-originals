@@ -6,7 +6,7 @@ description: 对合同文本进行风险点审查，输出违约、付款、保�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/contract-review-check
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
