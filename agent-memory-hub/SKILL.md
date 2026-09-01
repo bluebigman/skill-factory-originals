@@ -6,7 +6,7 @@ description: 将对话、文档、代码整理为四类记忆资产，生成团�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agent-memory-hub
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
