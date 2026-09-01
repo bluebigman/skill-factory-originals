@@ -6,8 +6,7 @@ description: 将语音转写文本整理为结构化纪要，清理冗余并提�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
-copyright_holder: 原创作者（自持版权）
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/audio-transcript-format 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
