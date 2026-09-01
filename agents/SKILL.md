@@ -6,7 +6,7 @@ description: 编排多个AI Agent分工协作，完成复杂任务并输出结�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/agents
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
