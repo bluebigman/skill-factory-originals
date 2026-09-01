@@ -6,7 +6,7 @@ description: 将中文操作意图精准转译为可执行命令行，内置命�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/CLI-Anything
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
