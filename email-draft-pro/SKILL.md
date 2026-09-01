@@ -6,7 +6,7 @@ description: 按场景生成专业商务邮件，自动匹配语气与格式，�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/email-draft-pro
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
