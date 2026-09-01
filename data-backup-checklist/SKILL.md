@@ -6,7 +6,7 @@ description: 备份清单核对、版本差异追踪、恢复演练评分与风�
 version: 2.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/data-backup-checklist
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
