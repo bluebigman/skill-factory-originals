@@ -6,7 +6,7 @@ description: 将自然语言或数据文件转换为结构化 SQL 查询与结�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/advancedsql
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
