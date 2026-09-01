@@ -6,7 +6,7 @@ description: 命令行构造HTTP请求、调试REST API并格式化输出响应�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/cli-command-tester
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
