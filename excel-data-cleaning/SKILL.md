@@ -6,7 +6,7 @@ description: 将杂乱表格按规则整理为规范、可分析的结构化数�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/excel-data-cleaning
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
