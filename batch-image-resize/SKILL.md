@@ -6,7 +6,7 @@ description: 批量缩放、压缩、转换图片格式，自动处理EXIF与目
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/batch-image-resize
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
