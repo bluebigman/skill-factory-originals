@@ -6,7 +6,7 @@ description: 根据基础与目标，生成含资源与验收的AI分周学习�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/ai-learning-roadmap
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
