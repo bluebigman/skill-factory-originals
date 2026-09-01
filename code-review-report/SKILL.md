@@ -6,7 +6,7 @@ description: 解析git diff，扫描密码硬编码、不安全日志、性能�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/code-review-report
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
