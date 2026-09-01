@@ -6,7 +6,7 @@ description: 本地批量管理AI智能体实例，支持启停控制与运行�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/Agent-Reach
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
