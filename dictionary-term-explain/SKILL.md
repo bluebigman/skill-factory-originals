@@ -6,7 +6,7 @@ description: 按场景拆解术语含义，给出边界清晰、可落地的概�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/dictionary-term-explain
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
