@@ -6,7 +6,7 @@ description: 以提问引导替代直接讲解，帮中小学生自主解出作�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/homework-solution-guide
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
