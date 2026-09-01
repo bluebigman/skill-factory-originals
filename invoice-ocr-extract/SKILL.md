@@ -6,7 +6,7 @@ description: 从发票图片或PDF中抽取关键字段，输出结构化表格�
 version: 1.0.0
 license: MIT
 source_project: original
-source_url: 
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/invoice-ocr-extract
 copyright_holder: 原创作者（自持版权）
 ai_generated: true
 ai_tools: ["DeepSeek"]
