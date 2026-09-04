@@ -1,0 +1,6 @@
+{
+  "name": "talking-script-gen",
+  "displayName": "口播稿 逐字稿生成器",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "short-video-script-gen",
+  "displayName": "短视频脚本 分镜脚本生成器",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}

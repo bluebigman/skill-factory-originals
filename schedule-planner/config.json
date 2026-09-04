@@ -1,0 +1,6 @@
+{
+  "name": "schedule-planner",
+  "displayName": "日程管理 时间规划助手",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}

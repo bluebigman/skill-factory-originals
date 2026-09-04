@@ -1,0 +1,6 @@
+{
+  "name": "wechat-article-writer",
+  "displayName": "公众号文章 图文生成器",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}

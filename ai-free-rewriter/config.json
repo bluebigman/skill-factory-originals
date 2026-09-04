@@ -1,0 +1,6 @@
+{
+  "name": "ai-free-rewriter",
+  "displayName": "去AI味 文本改写润色",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}

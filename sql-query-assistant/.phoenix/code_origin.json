@@ -1,0 +1,11 @@
+{
+ "slug": "sql-query-assistant",
+ "files": [
+  "run.py",
+  "scripts/main.py",
+  "scripts/template_lib.py",
+  "selftest.py"
+ ],
+ "author": "原创作者",
+ "license": "MIT"
+}

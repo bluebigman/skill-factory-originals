@@ -1,0 +1,6 @@
+{
+  "name": "campaign-planner",
+  "displayName": "活动策划方案生成器",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}

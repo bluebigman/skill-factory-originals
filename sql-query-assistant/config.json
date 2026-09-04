@@ -1,0 +1,6 @@
+{
+  "name": "sql-query-assistant",
+  "displayName": "SQL查询 语句生成助手",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}

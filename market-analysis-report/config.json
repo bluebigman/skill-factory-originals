@@ -1,0 +1,6 @@
+{
+  "name": "market-analysis-report",
+  "displayName": "市场分析报告 行业研究框架",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}

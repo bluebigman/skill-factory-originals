@@ -1,0 +1,6 @@
+{
+ "slug": "short-video-script-gen",
+ "checker": "factory-92",
+ "date": "2026-09-04",
+ "result": "score_est>=4.5, originality_docs, completeness>=90 target"
+}

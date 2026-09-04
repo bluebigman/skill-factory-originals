@@ -1,0 +1,6 @@
+{
+  "name": "meeting-summary-gen",
+  "displayName": "会议纪要 会议总结生成器",
+  "encoding_fallback": ["utf-8", "gbk", "gb18030"],
+  "features": ["cli", "selftest", "dry-run", "error-handling", "json-output"]
+}
