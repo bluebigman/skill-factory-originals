@@ -1,0 +1,23 @@
+{
+  "timestamp": "20260909_184654",
+  "slug": "wb-publish-guide",
+  "spec": {
+    "slug": "wb-publish-guide",
+    "name": "wb-publish-guide",
+    "description": "诊断 WorkBuddy 开放平台技能/专家上传失败与审核驳回原因，给出修复步骤。",
+    "cli_interface": [],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "independent-implementation"
+  },
+  "spec_hash": "b902926edd4eb510",
+  "prompt_hash": "49-proxy",
+  "prompt": "(49 代理生成，见 provenance)",
+  "llm_model": "deepseek-chat",
+  "llm_temperature": 0.9,
+  "cost_usd": 0.0,
+  "similarity_metrics": {
+    "mode": "49-proxy"
+  },
+  "style_checks_passed": true
+}
