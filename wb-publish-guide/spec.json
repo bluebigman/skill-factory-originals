@@ -1,0 +1,8 @@
+{
+  "slug": "wb-publish-guide",
+  "name": "wb-publish-guide",
+  "description": "诊断 WorkBuddy 开放平台技能/专家上传失败与审核驳回原因，给出修复步骤。",
+  "trigger_words": "",
+  "original_version": "1.0.0",
+  "capability_outline": []
+}
