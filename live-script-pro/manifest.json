@@ -1,0 +1,36 @@
+{
+  "timestamp": "20261001_141013",
+  "slug": "live-script-pro",
+  "spec": {
+    "slug": "live-script-pro",
+    "name": "compliance",
+    "description": "需求缺口驱动原创：探测词[直播脚本/直播话术/互动/带货] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "直播脚本",
+      "直播话术",
+      "互动",
+      "带货"
+    ],
+    "upstream": null,
+    "derivation": "original-work (clean-room, self-authored rules)",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab",
+    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/live-script-pro"
+  },
+  "spec_hash": "fba7847d1591fd98",
+  "prompt_hash": "dfeb1941ad63fab2",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"live-script-pro\", \"name\": \"compliance\", \"description\": \"需求缺口驱动原创：探测词[直播脚本/直播话术/互动/带货] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"直播脚本\", \"直播话术\", \"互动\", \"带货\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "43f24ee6e0684f2b3d2bf7738119a4b13a3b0f2bb5f930e72e4e7c2b34270efd",
+    "main_py_sha256": "6f29b6d99489b6b13925960354508cc3713caf9f5d538a9c71bf697ba20ccb29"
+  }
+}
