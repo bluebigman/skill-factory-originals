@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# Forecast
+# 活动方案 优惠设计专家
 
 **** —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
