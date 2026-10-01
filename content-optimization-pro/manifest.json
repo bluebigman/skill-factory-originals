@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_180107",
+  "timestamp": "20261001_202448",
   "slug": "content-optimization-pro",
   "spec": {
     "slug": "content-optimization-pro",
@@ -29,7 +29,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"content-optimization-pro\", \"name\": \"marketing-copy\", \"description\": \"需求缺口驱动原创：探测词[内容优化/朋友圈/营销/文案优化] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"内容优化\", \"朋友圈\", \"营销\", \"文案优化\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "957c45b835b48b492f4a66ec3b0652d5819e3e1b2540ea44fae63a92b8fcceea",
+    "skill_md_sha256": "bb1b4d6c59bcd31554e624f4fe5e6426a016ead2ed3277b8b84178fbd15a7830",
     "main_py_sha256": "6cf81692e1cba9890db43135f19eeeb718d555991cba281295423b3313e7ed83"
   }
 }
