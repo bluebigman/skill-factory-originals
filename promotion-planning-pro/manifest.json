@@ -1,0 +1,36 @@
+{
+  "timestamp": "20261001_141101",
+  "slug": "promotion-planning-pro",
+  "spec": {
+    "slug": "promotion-planning-pro",
+    "name": "compliance",
+    "description": "需求缺口驱动原创：探测词[促销活动/活动方案/优惠/营销] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "促销活动",
+      "活动方案",
+      "优惠",
+      "营销"
+    ],
+    "upstream": null,
+    "derivation": "original-work (clean-room, self-authored rules)",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab",
+    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/promotion-planning-pro"
+  },
+  "spec_hash": "d004c208b8d6b944",
+  "prompt_hash": "f1e365f9e5e1775f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"promotion-planning-pro\", \"name\": \"compliance\", \"description\": \"需求缺口驱动原创：探测词[促销活动/活动方案/优惠/营销] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"促销活动\", \"活动方案\", \"优惠\", \"营销\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "b31a9deb4f613139eef26cbbc0e07d277e7da1cd42c881987815c10b9f533148",
+    "main_py_sha256": "86466c48b1a7d2c7679f88ad0e1eed32912818d908ce54d187b7726f3f0beca3"
+  }
+}
