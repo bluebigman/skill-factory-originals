@@ -1,0 +1,36 @@
+{
+  "timestamp": "20261001_141135",
+  "slug": "stress-relief-pro",
+  "spec": {
+    "slug": "stress-relief-pro",
+    "name": "daily-recovery",
+    "description": "需求缺口驱动原创：探测词[压力/焦虑/放松/情绪调节] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "压力",
+      "焦虑",
+      "放松",
+      "情绪调节"
+    ],
+    "upstream": null,
+    "derivation": "original-work (clean-room, self-authored rules)",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab",
+    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/stress-relief-pro"
+  },
+  "spec_hash": "ae1e6cf3b93c532c",
+  "prompt_hash": "688e86947df16861",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"stress-relief-pro\", \"name\": \"daily-recovery\", \"description\": \"需求缺口驱动原创：探测词[压力/焦虑/放松/情绪调节] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"压力\", \"焦虑\", \"放松\", \"情绪调节\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "d7e96c3e8b5176571513734eca4a610c3e1b4331aeb9f94e2860bc937ba7c541",
+    "main_py_sha256": "bfb988ada2301ac2e8e800144a4cd6e5e1203501054a2e78b1a5ac2214e7e734"
+  }
+}
