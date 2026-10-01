@@ -1,0 +1,36 @@
+{
+  "timestamp": "20261001_140924",
+  "slug": "excel-formula-pro",
+  "spec": {
+    "slug": "excel-formula-pro",
+    "name": "debug",
+    "description": "需求缺口驱动原创：探测词[表格公式/excel/函数/VLOOKUP] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "表格公式",
+      "excel",
+      "函数",
+      "VLOOKUP"
+    ],
+    "upstream": null,
+    "derivation": "original-work (clean-room, self-authored rules)",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab",
+    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/excel-formula-pro"
+  },
+  "spec_hash": "87312fb46ae7e559",
+  "prompt_hash": "4bbbb1bc68a273be",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"excel-formula-pro\", \"name\": \"debug\", \"description\": \"需求缺口驱动原创：探测词[表格公式/excel/函数/VLOOKUP] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"表格公式\", \"excel\", \"函数\", \"VLOOKUP\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "282b685ac8f7499383fdcbd64bf764b56589f2604dfc2eac149f1de3e2651cdf",
+    "main_py_sha256": "8a0904ee0379d9d3ff3c53902aa15844e862607cd137d429619830a24ce60a71"
+  }
+}
