@@ -10,7 +10,15 @@ ai_generated: true
 
 # 儿童情绪 亲子沟通专家
 
-**** —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
+识别孩子哭闹背后的真实需求 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
+
+<!-- ai-generated-notice -->
+**AI 生成披露**：本能力边界、领域规则与示例由生成器按通用领域知识撰写，经人工规则化整理与
+自动化合规检查后产出；**未复制任何受版权保护的原文**，与上游开源项目无派生关系。
+
+<!-- professional-disclaimer-injected -->
+**边界声明**：本能力提供通用方法性建议，**不构成专业诊断、治疗、法律或投资意见**；
+涉及医疗/法律/金融等专业事项请咨询具备资质的专业人士。
 
 ## 快速开始 Quick Start
 
@@ -203,6 +211,12 @@ python run.py --text "憋屈不说"
 - 知识来源：`self_authored_rules`（按通用领域知识自撰，**无上游派生**）
 - 可复现性：见 `reproduce.py` 与 `.phoenix/selftest_evidence.json`
 
+## 许可证与版权
+
+<!-- professional-license-embedded -->
+本项目以 **MIT License** 授权（全文见包内 `LICENSE` 文件）。
+Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
+
 ## AtoA 调用示例（Agent 视角）
 
 面向 Agent 自主调用时，建议按以下顺序判断与使用：
@@ -219,8 +233,8 @@ python run.py --text "憋屈不说"
 ```yaml
 capability:
   id: emotion-identify
-  name_zh: "Emotion Identify"
-  when_to_use: ""
+  name_zh: "儿童情绪 亲子沟通专家"
+  when_to_use: "识别孩子哭闹背后的真实需求"
   input_schema:
     type: object
     properties:
