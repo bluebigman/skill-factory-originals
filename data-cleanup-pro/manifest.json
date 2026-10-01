@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_180113",
+  "timestamp": "20261001_202454",
   "slug": "data-cleanup-pro",
   "spec": {
     "slug": "data-cleanup-pro",
@@ -29,7 +29,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"data-cleanup-pro\", \"name\": \"clean-rules\", \"description\": \"需求缺口驱动原创：探测词[数据清洗/表格整理/去重/数据规范] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"数据清洗\", \"表格整理\", \"去重\", \"数据规范\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "0c5c178a021173681e4fda029efce57c11d29f97de1b4ee265ac5603a78cd126",
+    "skill_md_sha256": "c315cd851f3fa9dfbf61f0001fad8d2eeac31f36d9fd7158cc951158af45fd6c",
     "main_py_sha256": "a28349c5d55ff7618d0cae5888e61b8fbc8084c922e79e3e09be323935901a78"
   }
 }
