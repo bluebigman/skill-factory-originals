@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_141018",
+  "timestamp": "20261001_180230",
   "slug": "meeting-notes-pro",
   "spec": {
     "slug": "meeting-notes-pro",
@@ -19,18 +19,17 @@
       "决议"
     ],
     "upstream": null,
-    "derivation": "original-work (clean-room, self-authored rules)",
+    "derivation": "original-work",
     "source_type": "self_authored_rules",
     "license": "MIT",
-    "copyright_holder": "SkillForge Lab",
-    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/meeting-notes-pro"
+    "copyright_holder": "SkillForge Lab"
   },
   "spec_hash": "87ea4a15b293b434",
   "prompt_hash": "d9a1133a55c4ce2a",
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"meeting-notes-pro\", \"name\": \"action-tracking\", \"description\": \"需求缺口驱动原创：探测词[会议纪要/行动项/会议记录/决议] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"会议纪要\", \"行动项\", \"会议记录\", \"决议\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "37be7728825cc45d442cc51e7cc8746d48db80547ea43bee21583f384edd1716",
+    "skill_md_sha256": "549d6f898cf794ccd74eb1f17399c4e55146814dac663266df4b6d7ae5ce045d",
     "main_py_sha256": "4bb3e384f5e9eb1a1fb91dc8ef98f8c1a0635ea3e60de6f3fb7ce2660bb72b0a"
   }
 }
