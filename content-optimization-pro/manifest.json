@@ -1,0 +1,36 @@
+{
+  "timestamp": "20261001_140857",
+  "slug": "content-optimization-pro",
+  "spec": {
+    "slug": "content-optimization-pro",
+    "name": "marketing-copy",
+    "description": "需求缺口驱动原创：探测词[内容优化/朋友圈/营销/文案优化] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "内容优化",
+      "朋友圈",
+      "营销",
+      "文案优化"
+    ],
+    "upstream": null,
+    "derivation": "original-work (clean-room, self-authored rules)",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab",
+    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/content-optimization-pro"
+  },
+  "spec_hash": "5a96b60d88e0a3ba",
+  "prompt_hash": "291ee90f71009107",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"content-optimization-pro\", \"name\": \"marketing-copy\", \"description\": \"需求缺口驱动原创：探测词[内容优化/朋友圈/营销/文案优化] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"内容优化\", \"朋友圈\", \"营销\", \"文案优化\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "7f40f17960f08a1a53e420db16ce659dc2e4aad09937737aa4ae6642ee4e0c8f",
+    "main_py_sha256": "6cf81692e1cba9890db43135f19eeeb718d555991cba281295423b3313e7ed83"
+  }
+}
