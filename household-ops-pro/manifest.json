@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_180206",
+  "timestamp": "20261001_202546",
   "slug": "household-ops-pro",
   "spec": {
     "slug": "household-ops-pro",
@@ -29,7 +29,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"household-ops-pro\", \"name\": \"chore-plan\", \"description\": \"需求缺口驱动原创：探测词[家庭事务/记账/采购清单/家务] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家庭事务\", \"记账\", \"采购清单\", \"家务\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "59e0100e4b1c5347e8df2ae89b25eb93c848ee6f1432ca4696ae0c3410736e77",
+    "skill_md_sha256": "19e93812be085ff3b5a95bf6479b95fc5c294511333784165b97c67907f780a6",
     "main_py_sha256": "e46db2f19b4b681981eec0f22287d8e9cb1d419686c9003347a28083bd5a78fd"
   }
 }
