@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_141035",
+  "timestamp": "20261001_180248",
   "slug": "parenting-coach-pro",
   "spec": {
     "slug": "parenting-coach-pro",
@@ -19,18 +19,17 @@
       "家长"
     ],
     "upstream": null,
-    "derivation": "original-work (clean-room, self-authored rules)",
+    "derivation": "original-work",
     "source_type": "self_authored_rules",
     "license": "MIT",
-    "copyright_holder": "SkillForge Lab",
-    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/parenting-coach-pro"
+    "copyright_holder": "SkillForge Lab"
   },
   "spec_hash": "1fe352897b879ef7",
   "prompt_hash": "8b5131edea2867f9",
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"parenting-coach-pro\", \"name\": \"behavior-diagnose\", \"description\": \"需求缺口驱动原创：探测词[育儿/家庭教育/亲子/家长] 平台专家1/技能4 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"育儿\", \"家庭教育\", \"亲子\", \"家长\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "5a49203db28c19bc7a9c2c1147b9e337c48af978832d7d772469cc8dfdc05e81",
+    "skill_md_sha256": "0a5fa34dfc71f5f0bad6d7d2319e585f95b297f2d306cda99b6cb41725d56679",
     "main_py_sha256": "529260c04d602c9f5dbbcc3c17a4c6ae05a99c51875fe352f8e996fc512a0bea"
   }
 }
