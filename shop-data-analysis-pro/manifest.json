@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_180332",
+  "timestamp": "20261001_202711",
   "slug": "shop-data-analysis-pro",
   "spec": {
     "slug": "shop-data-analysis-pro",
@@ -29,7 +29,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"shop-data-analysis-pro\", \"name\": \"diagnose\", \"description\": \"需求缺口驱动原创：探测词[店铺数据/转化率/数据分析/复盘] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"店铺数据\", \"转化率\", \"数据分析\", \"复盘\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "d6cb70a9575e18a10f0da523375ee7671c9c70c5ecd88374bf04a0c2240b140f",
+    "skill_md_sha256": "65277e15d668229b29a4ba0a5965c3ae1d5ffcc6a295fe4736f43020aff6d887",
     "main_py_sha256": "0591c62e040938ea60ee7a0279775c3562fd31527daaeaf200feab6eb4ab7938"
   }
 }
