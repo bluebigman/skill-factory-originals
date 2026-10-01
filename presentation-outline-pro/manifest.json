@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_141046",
+  "timestamp": "20261001_180259",
   "slug": "presentation-outline-pro",
   "spec": {
     "slug": "presentation-outline-pro",
@@ -19,18 +19,17 @@
       "演讲"
     ],
     "upstream": null,
-    "derivation": "original-work (clean-room, self-authored rules)",
+    "derivation": "original-work",
     "source_type": "self_authored_rules",
     "license": "MIT",
-    "copyright_holder": "SkillForge Lab",
-    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/presentation-outline-pro"
+    "copyright_holder": "SkillForge Lab"
   },
   "spec_hash": "0bbea5fe39281dc5",
   "prompt_hash": "d01422884531b7a6",
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"presentation-outline-pro\", \"name\": \"narrative\", \"description\": \"需求缺口驱动原创：探测词[演示大纲/ppt/汇报/演讲] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"演示大纲\", \"ppt\", \"汇报\", \"演讲\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "b816a4e9dd5fa92db59377f738d630e9b3d4f851c88405845a81fca710ec1d42",
+    "skill_md_sha256": "94944d19dc6ca884b687f64ee3afe55882f8081d8b2b0fbc18371be3264af9a1",
     "main_py_sha256": "3dbce33cb41b2d446c68d4206d264249fd1456ed1653cfbe0da768be0ef840de"
   }
 }
