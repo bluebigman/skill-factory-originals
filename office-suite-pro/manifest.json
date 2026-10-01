@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_141027",
+  "timestamp": "20261001_180239",
   "slug": "office-suite-pro",
   "spec": {
     "slug": "office-suite-pro",
@@ -19,18 +19,17 @@
       "表格公式"
     ],
     "upstream": null,
-    "derivation": "original-work (clean-room, self-authored rules)",
+    "derivation": "original-work",
     "source_type": "self_authored_rules",
     "license": "MIT",
-    "copyright_holder": "SkillForge Lab",
-    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/office-suite-pro"
+    "copyright_holder": "SkillForge Lab"
   },
   "spec_hash": "2a90cf8616db83e1",
   "prompt_hash": "38cda043f4231f03",
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"office-suite-pro\", \"name\": \"data-process\", \"description\": \"需求缺口驱动原创：探测词[excel/VLOOKUP/ppt/表格公式] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"excel\", \"VLOOKUP\", \"ppt\", \"表格公式\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "3667f13d0c3d8192e014b4d814949e9d3c6521f351e39f370fcced1dafa3fd85",
+    "skill_md_sha256": "297c67cd7a84e76194a725778a1332d5831d338ca276d308117830e787f8dd2b",
     "main_py_sha256": "306de73c860de77df2d8a928dab3a3ec375220627c01e167f91470a211df1884"
   }
 }
