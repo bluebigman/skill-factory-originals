@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 项目管理 进度跟踪助手
+# 里程碑 甘特排期助手
 
 会议纪要的结构与跟踪 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
