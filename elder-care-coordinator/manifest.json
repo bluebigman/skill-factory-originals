@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261001_140915",
+  "timestamp": "20261001_180124",
   "slug": "elder-care-coordinator",
   "spec": {
     "slug": "elder-care-coordinator",
@@ -19,18 +19,17 @@
       "家庭分工"
     ],
     "upstream": null,
-    "derivation": "original-work (clean-room, self-authored rules)",
+    "derivation": "original-work",
     "source_type": "self_authored_rules",
     "license": "MIT",
-    "copyright_holder": "SkillForge Lab",
-    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/elder-care-coordinator"
+    "copyright_holder": "SkillForge Lab"
   },
   "spec_hash": "4fb9e8e3b3fe4aa2",
   "prompt_hash": "a010c0e7aded733a",
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"elder-care-coordinator\", \"name\": \"care-plan\", \"description\": \"需求缺口驱动原创：探测词[老人照护/养老/就医陪同/家庭分工] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"老人照护\", \"养老\", \"就医陪同\", \"家庭分工\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "5a2ab26f5a9981249cc1f8e55f52d0166d5ff25496778da130930e4c0786e4eb",
+    "skill_md_sha256": "9c9b5dcd8a92528225254b59d7febb5f29590cbd58c1ab801bca41457b92cb7c",
     "main_py_sha256": "b4b066cfb045ef4ade53da5cb9ffce6be21044b9afe243600c79f4ca1997caee"
   }
 }
