@@ -1,0 +1,36 @@
+{
+  "timestamp": "20261001_141004",
+  "slug": "knowledge-management-pro",
+  "spec": {
+    "slug": "knowledge-management-pro",
+    "name": "capture",
+    "description": "需求缺口驱动原创：探测词[知识管理/总结/笔记体系/复盘] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "知识管理",
+      "总结",
+      "笔记体系",
+      "复盘"
+    ],
+    "upstream": null,
+    "derivation": "original-work (clean-room, self-authored rules)",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab",
+    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/knowledge-management-pro"
+  },
+  "spec_hash": "7003723800502230",
+  "prompt_hash": "c45628ac11ec0830",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"knowledge-management-pro\", \"name\": \"capture\", \"description\": \"需求缺口驱动原创：探测词[知识管理/总结/笔记体系/复盘] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"知识管理\", \"总结\", \"笔记体系\", \"复盘\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "e74b57ef1b6b5eaba0330912c48d2ddc4cb23cabceb9d02710726551570900a3",
+    "main_py_sha256": "73eafc72aba3a8257cc793eb02168a4554cf0adc3a287f874b11b279153ad179"
+  }
+}
