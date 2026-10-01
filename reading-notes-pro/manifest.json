@@ -1,0 +1,36 @@
+{
+  "timestamp": "20261001_141103",
+  "slug": "reading-notes-pro",
+  "spec": {
+    "slug": "reading-notes-pro",
+    "name": "capture",
+    "description": "需求缺口驱动原创：探测词[读书笔记/读书/笔记/知识管理] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "读书笔记",
+      "读书",
+      "笔记",
+      "知识管理"
+    ],
+    "upstream": null,
+    "derivation": "original-work (clean-room, self-authored rules)",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab",
+    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/reading-notes-pro"
+  },
+  "spec_hash": "8c05301b22e26cf5",
+  "prompt_hash": "3ed8123195607e96",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"reading-notes-pro\", \"name\": \"capture\", \"description\": \"需求缺口驱动原创：探测词[读书笔记/读书/笔记/知识管理] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"读书笔记\", \"读书\", \"笔记\", \"知识管理\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "25f68fcc69d6fcba31f569404cf1370b4a4f71223226c56eed826ca9fc16fd0e",
+    "main_py_sha256": "2f7efdf099e465b7cc0c70a719d519fe477927c30ed4a9af8ccd69a945f56a56"
+  }
+}
