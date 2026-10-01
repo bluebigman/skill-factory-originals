@@ -1,0 +1,36 @@
+{
+  "timestamp": "20261001_141120",
+  "slug": "short-video-script-pro",
+  "spec": {
+    "slug": "short-video-script-pro",
+    "name": "hook-3s",
+    "description": "需求缺口驱动原创：探测词[短视频脚本/分镜/口播/视频文案] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "短视频脚本",
+      "分镜",
+      "口播",
+      "视频文案"
+    ],
+    "upstream": null,
+    "derivation": "original-work (clean-room, self-authored rules)",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab",
+    "source_url": "https://github.com/bluebigman/skill-factory-originals/tree/main/short-video-script-pro"
+  },
+  "spec_hash": "dd851ca2b8767ba1",
+  "prompt_hash": "b10cb7b28e036f9c",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"short-video-script-pro\", \"name\": \"hook-3s\", \"description\": \"需求缺口驱动原创：探测词[短视频脚本/分镜/口播/视频文案] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"短视频脚本\", \"分镜\", \"口播\", \"视频文案\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "8ca567de97bf426f6cc9739572edaa428f3abb29d19fe9cbee944b44750709ec",
+    "main_py_sha256": "4895a1ddb1b29da0053e89f727c96ee479e8fd8edafc154dd64e057146ac70da"
+  }
+}
