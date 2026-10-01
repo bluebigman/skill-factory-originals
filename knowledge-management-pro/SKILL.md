@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 知识管理 笔记体系顾问
+# 知识卡片 双链笔记顾问
 
 信息的捕捉与筛选 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
