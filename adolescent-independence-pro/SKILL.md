@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 青春期教育 独立顾问
+# 青春期独立 边界设定 放手指南
 
 按年龄梯度交出自主权 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: autonomy-release
-  name_zh: "青春期教育 独立顾问"
+  name_zh: "青春期独立 边界设定 放手指南"
   when_to_use: "按年龄梯度交出自主权"
   input_schema:
     type: object
