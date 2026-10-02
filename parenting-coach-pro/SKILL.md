@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 家庭教育 亲子沟通专家
+# 家庭教育 亲子沟通 情绪引导
 
 诊断孩子行为问题背后的家庭因素 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: behavior-diagnose
-  name_zh: "家庭教育 亲子沟通专家"
+  name_zh: "家庭教育 亲子沟通 情绪引导"
   when_to_use: "诊断孩子行为问题背后的家庭因素"
   input_schema:
     type: object

@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 内容优化 朋友圈文案专家
+# 内容优化 朋友圈文案 营销文案
 
 营销场景的文案结构 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: marketing-copy
-  name_zh: "内容优化 朋友圈文案专家"
+  name_zh: "内容优化 朋友圈文案 营销文案"
   when_to_use: "营销场景的文案结构"
   input_schema:
     type: object

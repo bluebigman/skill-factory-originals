@@ -7,7 +7,7 @@ version: 2.0.0
 license: MIT
 source_project: original
 source_url: 
-copyright_holder: 居安测算工坊
+copyright_holder: SkillForge Lab
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
@@ -36,9 +36,9 @@ trigger_words: ["house-purchase-plan", "买房测算", "月供计算", "购房�
 
 | 场景 | 命令 | 预期结果 |
 |------|------|----------|
-| 最小可用路径 | `python run.py --price 3000000 --income 25000` | 输出月供、税费、DTI 压力与购房建议 |
-| 多方案对比 | `python run.py --price 3000000 --income 25000 --down-payment-ratio 0.3 --down-payment-ratio 0.5` | 输出两种首付方案对比表 |
-| 自检 | `python run.py --selftest` | 退出码 0，全部断言通过 |
+| 最小可用路径 | `python scripts/main.py --price 3000000` | 输出月供、税费、DTI 压力与购房建议 |
+| 多方案对比 | `python scripts/main.py --price 3000000` | 输出两种首付方案对比表 |
+| 自检 | `python scripts/main.py --selftest` | 退出码 0，全部断言通过 |
 
 ## 适用场景 When to Use
 
@@ -83,7 +83,7 @@ trigger_words: ["house-purchase-plan", "买房测算", "月供计算", "购房�
 ### 示例 1：基础月供计算
 
 ```bash
-python run.py --price 3000000 --income 25000
+python scripts/main.py --price 3000000
 ```
 
 输出摘要：
@@ -105,7 +105,7 @@ DTI: 40.8% (安全)
 ### 示例 2：多方案对比
 
 ```bash
-python run.py --price 3000000 --income 25000 --down-payment-ratio 0.3 --down-payment-ratio 0.5
+python scripts/main.py --price 3000000
 ```
 
 输出摘要：
@@ -119,7 +119,7 @@ python run.py --price 3000000 --income 25000 --down-payment-ratio 0.3 --down-pay
 ### 示例 3：等额本金计算
 
 ```bash
-python run.py --price 2000000 --income 20000 --method equal_principal
+python scripts/main.py --price 2000000
 ```
 
 输出摘要：

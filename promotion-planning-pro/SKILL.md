@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 促销活动 优惠方案专家
+# 促销活动 优惠 方案
 
 促销活动的合规要求 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: compliance
-  name_zh: "促销活动 优惠方案专家"
+  name_zh: "促销活动 优惠 方案"
   when_to_use: "促销活动的合规要求"
   input_schema:
     type: object

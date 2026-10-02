@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 家庭沟通 亲子教养顾问
+# 家庭沟通 亲子时间 教养一致
 
 家庭成员间的教养一致性 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: consistency
-  name_zh: "家庭沟通 亲子教养顾问"
+  name_zh: "家庭沟通 亲子时间 教养一致"
   when_to_use: "家庭成员间的教养一致性"
   input_schema:
     type: object

@@ -1,35 +1,35 @@
 {
-  "timestamp": "20261001_202624",
+ "timestamp": "20261002_063145",
+ "slug": "parent-child-activity-pro",
+ "spec": {
   "slug": "parent-child-activity-pro",
-  "spec": {
-    "slug": "parent-child-activity-pro",
-    "name": "activity-design",
-    "description": "需求缺口驱动原创：探测词[亲子活动/陪伴/亲子时间/成长记录] 平台专家0/技能0 —— 未复制任何原文",
-    "cli_interface": [
-      "--text",
-      "--input",
-      "--selftest",
-      "--dry-run",
-      "--version"
-    ],
-    "capability_outline": [
-      "亲子活动",
-      "陪伴",
-      "亲子时间",
-      "成长记录"
-    ],
-    "upstream": null,
-    "derivation": "original-work",
-    "source_type": "self_authored_rules",
-    "license": "MIT",
-    "copyright_holder": "SkillForge Lab"
-  },
-  "spec_hash": "989ac6303044fcff",
-  "prompt_hash": "cfd31d950fd1565e",
-  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"parent-child-activity-pro\", \"name\": \"activity-design\", \"description\": \"需求缺口驱动原创：探测词[亲子活动/陪伴/亲子时间/成长记录] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"亲子活动\", \"陪伴\", \"亲子时间\", \"成长记录\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
-  "iroulaw": "CREATION_IRONLAW v1",
-  "outputs": {
-    "skill_md_sha256": "4791649a514f88714f1998984b6a2ca7a45dfc70d32099283b882ed56c3729cd",
-    "main_py_sha256": "4d02c45314d70657e8c65e45840d590a7eae22a4b9bbbb446aef1aa20a878d6c"
-  }
+  "name": "activity-design",
+  "description": "需求缺口驱动原创：探测词[亲子活动/陪伴/亲子时间/成长记录] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "亲子活动",
+   "陪伴",
+   "亲子时间",
+   "成长记录"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "989ac6303044fcff",
+ "prompt_hash": "cfd31d950fd1565e",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"parent-child-activity-pro\", \"name\": \"activity-design\", \"description\": \"需求缺口驱动原创：探测词[亲子活动/陪伴/亲子时间/成长记录] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"亲子活动\", \"陪伴\", \"亲子时间\", \"成长记录\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "3934fa51ad125bb85a201eb6e9053df17115f622ea4ae15ade71f2189af9b9d9",
+  "main_py_sha256": "4d02c45314d70657e8c65e45840d590a7eae22a4b9bbbb446aef1aa20a878d6c"
+ }
 }

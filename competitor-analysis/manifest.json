@@ -1,27 +1,34 @@
 {
-  "timestamp": "20260807_115312",
+ "timestamp": "20261002_083423",
+ "slug": "competitor-analysis",
+ "spec": {
   "slug": "competitor-analysis",
-  "spec": {
-    "slug": "competitor-analysis",
-    "name": "competitor-analysis",
-    "description": "输入竞品资料，输出功能、定价、评价多维对比与差异化建议报告",
-    "cli_interface": [],
-    "capability_outline": [
-      "1. 读取输入参数或交互输入。",
-      "2. 按技能定义的处理流程执行核心逻辑。",
-      "3. 输出结构化结果，并在完成后给出下一步建议。"
-    ],
-    "upstream": null,
-    "derivation": "independent-implementation"
-  },
-  "spec_hash": "d8a36bcb2d6c6a62",
-  "prompt_hash": "49-proxy",
-  "prompt": "(49 代理生成，见 provenance)",
-  "llm_model": "deepseek-chat",
-  "llm_temperature": 0.9,
-  "cost_usd": 0.0,
-  "similarity_metrics": {
-    "mode": "49-proxy"
-  },
-  "style_checks_passed": true
+  "name": "competitor-analysis-1",
+  "description": "需求缺口驱动原创：探测词[竞品分析/先定维度/试用为准] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "竞品分析",
+   "先定维度",
+   "试用为准"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "7524882f44cb596d",
+ "prompt_hash": "d0c901814997eac5",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"competitor-analysis\", \"name\": \"competitor-analysis-1\", \"description\": \"需求缺口驱动原创：探测词[竞品分析/先定维度/试用为准] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"竞品分析\", \"先定维度\", \"试用为准\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "d23ceffcac941156ab95e29cc220f130e78c95c6c315d6c043aa9f0f537be958",
+  "main_py_sha256": "c572bc5a6d0235c6de4e6592513ce500a653b2da8d6f57753fcf3aa3200ec2af"
+ }
 }

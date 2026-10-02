@@ -1,35 +1,35 @@
 {
-  "timestamp": "20261001_202607",
+ "timestamp": "20261002_063128",
+ "slug": "meal-planning-pro",
+ "spec": {
   "slug": "meal-planning-pro",
-  "spec": {
-    "slug": "meal-planning-pro",
-    "name": "balance-check",
-    "description": "需求缺口驱动原创：探测词[一周菜单/家庭餐食/买菜/营养搭配] 平台专家0/技能0 —— 未复制任何原文",
-    "cli_interface": [
-      "--text",
-      "--input",
-      "--selftest",
-      "--dry-run",
-      "--version"
-    ],
-    "capability_outline": [
-      "一周菜单",
-      "家庭餐食",
-      "买菜",
-      "营养搭配"
-    ],
-    "upstream": null,
-    "derivation": "original-work",
-    "source_type": "self_authored_rules",
-    "license": "MIT",
-    "copyright_holder": "SkillForge Lab"
-  },
-  "spec_hash": "2b27dbe99411873f",
-  "prompt_hash": "2b8a379712c9324a",
-  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"meal-planning-pro\", \"name\": \"balance-check\", \"description\": \"需求缺口驱动原创：探测词[一周菜单/家庭餐食/买菜/营养搭配] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"一周菜单\", \"家庭餐食\", \"买菜\", \"营养搭配\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
-  "iroulaw": "CREATION_IRONLAW v1",
-  "outputs": {
-    "skill_md_sha256": "2998c71d57cf83f79a4d34b4c5b858a9dcbbd99cf98dc9b128fce3b36205a2d2",
-    "main_py_sha256": "e78e219aa9e729b8b8bd125e3b3a524e7a51f629ff93ce17fdbb6bd76dcaee27"
-  }
+  "name": "balance-check",
+  "description": "需求缺口驱动原创：探测词[一周菜单/家庭餐食/买菜/营养搭配] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "一周菜单",
+   "家庭餐食",
+   "买菜",
+   "营养搭配"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "2b27dbe99411873f",
+ "prompt_hash": "2b8a379712c9324a",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"meal-planning-pro\", \"name\": \"balance-check\", \"description\": \"需求缺口驱动原创：探测词[一周菜单/家庭餐食/买菜/营养搭配] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"一周菜单\", \"家庭餐食\", \"买菜\", \"营养搭配\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "01785a12f8f44163df1778adafa13850cae0abce9bf7efee9e151ec5f623df86",
+  "main_py_sha256": "e78e219aa9e729b8b8bd125e3b3a524e7a51f629ff93ce17fdbb6bd76dcaee27"
+ }
 }

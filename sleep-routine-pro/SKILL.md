@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 睡眠作息 睡前习惯顾问
+# 作息 睡眠 早睡
 
 睡前的固定流程设计 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: bedtime-ritual
-  name_zh: "睡眠作息 睡前习惯顾问"
+  name_zh: "作息 睡眠 早睡"
   when_to_use: "睡前的固定流程设计"
   input_schema:
     type: object

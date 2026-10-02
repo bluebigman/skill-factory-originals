@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 数据规范 字段治理专家
+# 数据规范 表格标准 字段治理
 
 指标口径的对齐 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: caliber
-  name_zh: "数据规范 字段治理专家"
+  name_zh: "数据规范 表格标准 字段治理"
   when_to_use: "指标口径的对齐"
   input_schema:
     type: object

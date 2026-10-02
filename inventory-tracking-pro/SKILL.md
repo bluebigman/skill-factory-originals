@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 库存管理 补货预警助手
+# 库存管理 补货预警 周转率
 
 库存相关风险防范 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: risk
-  name_zh: "库存管理 补货预警助手"
+  name_zh: "库存管理 补货预警 周转率"
   when_to_use: "库存相关风险防范"
   input_schema:
     type: object

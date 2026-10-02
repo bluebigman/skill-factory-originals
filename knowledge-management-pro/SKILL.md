@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 知识卡片 双链笔记顾问
+# 知识管理 笔记体系 总结提炼
 
 信息的捕捉与筛选 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: capture
-  name_zh: "知识管理 笔记体系顾问"
+  name_zh: "知识管理 笔记体系 总结提炼"
   when_to_use: "信息的捕捉与筛选"
   input_schema:
     type: object

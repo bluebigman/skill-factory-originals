@@ -1,5 +1,5 @@
 ---
-copyright_holder: 原创作者（自持版权）
+copyright_holder: SkillForge Lab
 source_project: original
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 ai_generated: true

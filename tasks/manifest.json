@@ -1,23 +1,23 @@
 {
-  "timestamp": "20260831_204102",
+ "timestamp": "20260831_204102",
+ "slug": "tasks",
+ "spec": {
   "slug": "tasks",
-  "spec": {
-    "slug": "tasks",
-    "name": "",
-    "description": "",
-    "cli_interface": [],
-    "capability_outline": [],
-    "upstream": null,
-    "derivation": "independent-implementation"
-  },
-  "spec_hash": "6b68c10979bd0b4d",
-  "prompt_hash": "49-proxy",
-  "prompt": "(49 代理生成，见 provenance)",
-  "llm_model": "deepseek-chat",
-  "llm_temperature": 0.9,
-  "cost_usd": 0.0,
-  "similarity_metrics": {
-    "mode": "49-proxy"
-  },
-  "style_checks_passed": true
+  "name": "",
+  "description": "",
+  "cli_interface": [],
+  "capability_outline": [],
+  "upstream": null,
+  "derivation": "independent-implementation"
+ },
+ "spec_hash": "6b68c10979bd0b4d",
+ "prompt_hash": "49-proxy",
+ "prompt": "(49 代理生成，见 provenance)",
+ "llm_model": "deepseek-chat",
+ "llm_temperature": 0.9,
+ "cost_usd": 0.0,
+ "similarity_metrics": {
+  "mode": "49-proxy"
+ },
+ "style_checks_passed": true
 }

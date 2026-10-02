@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 店铺数据 转化复盘专家
+# 店铺数据分析 转化漏斗 复盘
 
 数据异常的原因定位 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: diagnose
-  name_zh: "店铺数据 转化复盘专家"
+  name_zh: "店铺数据分析 转化漏斗 复盘"
   when_to_use: "数据异常的原因定位"
   input_schema:
     type: object

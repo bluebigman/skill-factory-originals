@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 小红书笔记 种草文案专家
+# 小红书笔记 种草文案 封面文案
 
 平台规则与广告合规 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: compliance
-  name_zh: "小红书笔记 种草文案专家"
+  name_zh: "小红书笔记 种草文案 封面文案"
   when_to_use: "平台规则与广告合规"
   input_schema:
     type: object

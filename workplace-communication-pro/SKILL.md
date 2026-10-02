@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 职场沟通 向上管理顾问
+# 职场沟通 向上管理 跨部门协作
 
 跨部门推进的方法 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: cross-team
-  name_zh: "职场沟通 向上管理顾问"
+  name_zh: "职场沟通 向上管理 跨部门协作"
   when_to_use: "跨部门推进的方法"
   input_schema:
     type: object

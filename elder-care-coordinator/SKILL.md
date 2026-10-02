@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 老人照护 居家养老顾问
+# 老人照护 家庭分工 就医陪同
 
 家庭照护分工与资源协调 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: care-plan
-  name_zh: "老人照护 居家养老顾问"
+  name_zh: "老人照护 家庭分工 就医陪同"
   when_to_use: "家庭照护分工与资源协调"
   input_schema:
     type: object

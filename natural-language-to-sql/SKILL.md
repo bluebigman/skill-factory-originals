@@ -9,9 +9,9 @@ version: 1.0.0
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
 source_project: original
-source_url: https://skillhub.cn
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/natural-language-to-sql
 source_license_url: 
-copyright_holder: Skill Factory
+copyright_holder: SkillForge Lab
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。本Skill为AI辅助生成内容。

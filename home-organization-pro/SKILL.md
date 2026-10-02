@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 家庭收纳 空间整理专家
+# 家庭收纳 空间整理 断舍离
 
 物品去留的判断标准与流程 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: declutter-rules
-  name_zh: "家庭收纳 空间整理专家"
+  name_zh: "家庭收纳 空间整理 断舍离"
   when_to_use: "物品去留的判断标准与流程"
   input_schema:
     type: object

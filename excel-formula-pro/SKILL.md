@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 表格函数 报错排查专家
+# 表格公式 数据处理 函数排查
 
 公式报错的定位方法 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: debug
-  name_zh: "表格公式 数据处理专家"
+  name_zh: "表格公式 数据处理 函数排查"
   when_to_use: "公式报错的定位方法"
   input_schema:
     type: object

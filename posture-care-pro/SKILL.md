@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 久坐改善 体态调整教练
+# 久坐改善 体态调整 拉伸放松
 
 久坐环境的工位设置 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: desk-setup
-  name_zh: "久坐改善 体态调整教练"
+  name_zh: "久坐改善 体态调整 拉伸放松"
   when_to_use: "久坐环境的工位设置"
   input_schema:
     type: object

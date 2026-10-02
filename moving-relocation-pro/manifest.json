@@ -1,35 +1,35 @@
 {
-  "timestamp": "20261001_202613",
+ "timestamp": "20261002_063133",
+ "slug": "moving-relocation-pro",
+ "spec": {
   "slug": "moving-relocation-pro",
-  "spec": {
-    "slug": "moving-relocation-pro",
-    "name": "handover-check",
-    "description": "需求缺口驱动原创：探测词[搬家/搬迁/租房/交接] 平台专家0/技能0 —— 未复制任何原文",
-    "cli_interface": [
-      "--text",
-      "--input",
-      "--selftest",
-      "--dry-run",
-      "--version"
-    ],
-    "capability_outline": [
-      "搬家",
-      "搬迁",
-      "租房",
-      "交接"
-    ],
-    "upstream": null,
-    "derivation": "original-work",
-    "source_type": "self_authored_rules",
-    "license": "MIT",
-    "copyright_holder": "SkillForge Lab"
-  },
-  "spec_hash": "f7ce2c8feff624ee",
-  "prompt_hash": "8345dd64890242c3",
-  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"moving-relocation-pro\", \"name\": \"handover-check\", \"description\": \"需求缺口驱动原创：探测词[搬家/搬迁/租房/交接] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"搬家\", \"搬迁\", \"租房\", \"交接\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
-  "iroulaw": "CREATION_IRONLAW v1",
-  "outputs": {
-    "skill_md_sha256": "45e761d9d1cd88306ce79a7b0e2b4947085064b373659a9eb3296b03af2bbefe",
-    "main_py_sha256": "6c84e202133b0a19d976b621bd0f09f9211b388869507d702f52a8503e848898"
-  }
+  "name": "handover-check",
+  "description": "需求缺口驱动原创：探测词[搬家/搬迁/租房/交接] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "搬家",
+   "搬迁",
+   "租房",
+   "交接"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "f7ce2c8feff624ee",
+ "prompt_hash": "8345dd64890242c3",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"moving-relocation-pro\", \"name\": \"handover-check\", \"description\": \"需求缺口驱动原创：探测词[搬家/搬迁/租房/交接] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"搬家\", \"搬迁\", \"租房\", \"交接\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "3da600fe20d4969cc6ea8fa135efa2a612b9c7c4396a0be2e1725f3b3ffe7fcc",
+  "main_py_sha256": "6c84e202133b0a19d976b621bd0f09f9211b388869507d702f52a8503e848898"
+ }
 }

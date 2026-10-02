@@ -7,7 +7,7 @@ version: 1.0.0
 license: MIT
 source_project: original
 source_url: 
-copyright_holder: 原创作者（自持版权）
+copyright_holder: SkillForge Lab
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
@@ -159,13 +159,13 @@ pip install -r requirements.txt
 ### 基本用法
 
 ```bash
-python run.py
+python scripts/main.py
 ```
 
 ### 高级选项
 
 ```bash
-python run.py --mode advanced --output-dir ./results
+python scripts/main.py --mode advanced
 ```
 
 ### 参数说明

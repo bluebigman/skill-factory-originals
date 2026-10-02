@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 膳食搭配 营养均衡顾问
+# 膳食搭配 营养均衡 控糖控油
 
 按周执行的备餐方法 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: meal-prep
-  name_zh: "膳食搭配 营养均衡顾问"
+  name_zh: "膳食搭配 营养均衡 控糖控油"
   when_to_use: "按周执行的备餐方法"
   input_schema:
     type: object

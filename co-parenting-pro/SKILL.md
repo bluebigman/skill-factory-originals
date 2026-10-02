@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 夫妻育儿 教养一致顾问
+# 夫妻育儿 教养分歧 一致性沟通
 
 夫妻教养观念分歧的处理 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: disagreement-align
-  name_zh: "夫妻育儿 教养一致顾问"
+  name_zh: "夫妻育儿 教养分歧 一致性沟通"
   when_to_use: "夫妻教养观念分歧的处理"
   input_schema:
     type: object

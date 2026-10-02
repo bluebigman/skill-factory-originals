@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 旅行规划 行程路线助手
+# 旅行规划 行程路线 预算清单
 
 旅行预算的分配与节省 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: budget
-  name_zh: "旅行规划 行程路线助手"
+  name_zh: "旅行规划 行程路线 预算清单"
   when_to_use: "旅行预算的分配与节省"
   input_schema:
     type: object

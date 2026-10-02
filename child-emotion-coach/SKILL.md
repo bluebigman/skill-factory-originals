@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 儿童情绪 亲子沟通专家
+# 儿童情绪 哭闹安抚 情绪识别
 
 识别孩子哭闹背后的真实需求 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: emotion-identify
-  name_zh: "儿童情绪 亲子沟通专家"
+  name_zh: "儿童情绪 哭闹安抚 情绪识别"
   when_to_use: "识别孩子哭闹背后的真实需求"
   input_schema:
     type: object

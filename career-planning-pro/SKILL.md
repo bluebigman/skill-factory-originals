@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 职业规划 转行路径顾问
+# 职业规划 转行路径 能力盘点
 
 职业路径的规划与选择 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: path
-  name_zh: "职业规划 转行路径顾问"
+  name_zh: "职业规划 转行路径 能力盘点"
   when_to_use: "职业路径的规划与选择"
   input_schema:
     type: object

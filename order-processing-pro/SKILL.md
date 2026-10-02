@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 订单处理 物流售后助手
+# 订单处理 物流查询 售后流程
 
 退换货与售后的流程 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: after-sale
-  name_zh: "订单处理 物流售后助手"
+  name_zh: "订单处理 物流查询 售后流程"
   when_to_use: "退换货与售后的流程"
   input_schema:
     type: object

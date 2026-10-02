@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 语言学习 记忆口语教练
+# 语言学习 记忆方法 口语练习
 
 可理解输入的组织 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: input
-  name_zh: "语言学习 记忆口语教练"
+  name_zh: "语言学习 记忆方法 口语练习"
   when_to_use: "可理解输入的组织"
   input_schema:
     type: object

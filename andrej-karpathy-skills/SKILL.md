@@ -9,7 +9,7 @@ rules_version: cpr-20260817-n526
 license: MIT
 source_project: original
 source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/andrej-karpathy-skills
-copyright_holder: 原创作者（自持版权）
+copyright_holder: SkillForge Lab
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。

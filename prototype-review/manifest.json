@@ -1,0 +1,34 @@
+{
+ "timestamp": "20261002_082916",
+ "slug": "prototype-review",
+ "spec": {
+  "slug": "prototype-review",
+  "name": "prototype-review-1",
+  "description": "需求缺口驱动原创：探测词[原型评审/先走主流程/按角色走] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "原型评审",
+   "先走主流程",
+   "按角色走"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "2f6ab503c84ae454",
+ "prompt_hash": "38f60bcc9ad0a006",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"prototype-review\", \"name\": \"prototype-review-1\", \"description\": \"需求缺口驱动原创：探测词[原型评审/先走主流程/按角色走] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"原型评审\", \"先走主流程\", \"按角色走\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "f34e8f19fc827e72682290bb4faafd3ba04f73c553b2bc240b5161dc92523332",
+  "main_py_sha256": "5daec28c203fa28cb97023b790eee3c4c8f69948c41ed1510d4ff56086ffef94"
+ }
+}

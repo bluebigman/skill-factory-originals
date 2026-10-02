@@ -7,7 +7,7 @@ version: 2.0.0
 license: MIT
 source_project: original
 source_url: 
-copyright_holder: 代码工坊
+copyright_holder: SkillForge Lab
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本 Skill 由 AI 辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
@@ -36,9 +36,9 @@ trigger_words: ["aider", "结对编程", "AI改代码", "终端编程助手", "A
 
 | 场景 | 命令 | 预期结果 |
 |------|------|----------|
-| 修改单个文件 | `python run.py --file src/main.py --task "将函数名 foo 改为 bar"` | 生成 diff 预览，输入 `y` 接受并自动提交 |
-| 批量替换多个文件 | `python run.py --dir src --pattern "*.py" --task "将所有 print 改为 logging.info"` | 逐文件展示 diff，逐个确认后提交 |
-| 预览不落盘 | `python run.py --file src/main.py --task "删除所有 TODO 注释" --dry-run` | 只打印将执行的修改，不写文件不提交 |
+| 修改单个文件 | `python scripts/run.py --file src/main.py --task "将函数名 foo 改为 bar"` | 生成 diff 预览，输入 `y` 接受并自动提交 |
+| 批量替换多个文件 | `python scripts/run.py --dir src --pattern "*.py" --task "将所有 print 改为 logging.info"` | 逐文件展示 diff，逐个确认后提交 |
+| 预览不落盘 | `python scripts/run.py --file src/main.py --task "删除所有 TODO 注释" --dry-run` | 只打印将执行的修改，不写文件不提交 |
 
 ## 适用场景 When to Use
 
@@ -81,7 +81,7 @@ trigger_words: ["aider", "结对编程", "AI改代码", "终端编程助手", "A
 ### 示例 1：修改单个文件
 
 ```bash
-python run.py --file src/main.py --task "将函数名 foo 改为 bar"
+python scripts/run.py --file src/main.py --task "将函数名 foo 改为 bar"
 ```
 
 输出：
@@ -100,7 +100,7 @@ python run.py --file src/main.py --task "将函数名 foo 改为 bar"
 ### 示例 2：批量替换多个文件
 
 ```bash
-python run.py --dir src --pattern "*.py" --task "将所有 print 改为 logging.info"
+python scripts/run.py --dir src --pattern "*.py" --task "将所有 print 改为 logging.info"
 ```
 
 输出：
@@ -120,7 +120,7 @@ python run.py --dir src --pattern "*.py" --task "将所有 print 改为 logging.
 ### 示例 3：预览模式
 
 ```bash
-python run.py --file src/main.py --task "删除所有 TODO 注释" --dry-run
+python scripts/run.py --file src/main.py --task "删除所有 TODO 注释" --dry-run
 ```
 
 输出：
@@ -150,7 +150,7 @@ cd aider-skill
 
 # 无需额外安装依赖（仅使用标准库）
 # 验证安装
-python run.py --selftest
+python scripts/run.py --selftest
 ```
 
 ### 配置
@@ -263,13 +263,13 @@ pip install -r requirements.txt
 ### 基本用法
 
 ```bash
-python run.py
+python scripts/run.py
 ```
 
 ### 高级选项
 
 ```bash
-python run.py --mode advanced --output-dir ./results
+python scripts/run.py --mode advanced
 ```
 
 ### 参数说明
@@ -284,7 +284,7 @@ python run.py --mode advanced --output-dir ./results
 ### 示例 1：基础使用
 
 ```bash
-python run.py --task example
+python scripts/run.py --task example
 ```
 
 输出：
@@ -296,13 +296,13 @@ python run.py --task example
 ### 示例 2：批量处理
 
 ```bash
-python run.py --batch --input data/ --output results/
+python scripts/run.py --batch
 ```
 
 ### 示例 3：自定义配置
 
 ```bash
-python run.py --config custom.yaml --verbose
+python scripts/run.py --config custom.yaml --verbose
 ```
 
 ## 常见问题

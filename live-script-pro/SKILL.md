@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 直播脚本 话术节奏助手
+# 直播脚本 话术节奏 互动设计
 
 直播中的合规红线 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: compliance
-  name_zh: "直播脚本 话术节奏助手"
+  name_zh: "直播脚本 话术节奏 互动设计"
   when_to_use: "直播中的合规红线"
   input_schema:
     type: object

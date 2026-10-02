@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 搬家搬迁 租房交接助手
+# 搬家 搬迁清单 租房交接
 
 租退与房屋交接的核验 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: handover-check
-  name_zh: "搬家搬迁 租房交接助手"
+  name_zh: "搬家 搬迁清单 租房交接"
   when_to_use: "租退与房屋交接的核验"
   input_schema:
     type: object

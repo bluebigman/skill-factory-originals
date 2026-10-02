@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 搜索优化 关键词布局专家
+# 搜索排名 关键词布局 转化率
 
 关键词的选取与布局 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: keyword-plan
-  name_zh: "SEO文章 关键词搜索专家"
+  name_zh: "搜索排名 关键词布局 转化率"
   when_to_use: "关键词的选取与布局"
   input_schema:
     type: object

@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 增肌减脂 训练营养顾问
+# 增肌减脂 训练计划 营养餐
 
 减脂期餐食结构与配比 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: fat-loss-meal
-  name_zh: "增肌减脂 训练营养顾问"
+  name_zh: "增肌减脂 训练计划 营养餐"
   when_to_use: "减脂期餐食结构与配比"
   input_schema:
     type: object

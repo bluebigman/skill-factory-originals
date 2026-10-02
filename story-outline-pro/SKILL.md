@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 故事大纲 情节设计助手
+# 故事大纲 情节设计 人物弧光
 
 人物的成长轨迹设计 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: character-arc
-  name_zh: "故事大纲 情节设计助手"
+  name_zh: "故事大纲 情节设计 人物弧光"
   when_to_use: "人物的成长轨迹设计"
   input_schema:
     type: object

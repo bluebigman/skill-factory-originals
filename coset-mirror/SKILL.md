@@ -9,8 +9,8 @@ description: 将输入数据转换为结构化结果，保留关键信息并标�
 version: 1.0.1
 license: MIT
 source_project: original
-source_url: s://.com/bluebigman/skill-factory-originals/tree/main/coset-mirror
-copyright_holder: 原创作者（自持版权）
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/coset-mirror
+copyright_holder: SkillForge Lab
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。

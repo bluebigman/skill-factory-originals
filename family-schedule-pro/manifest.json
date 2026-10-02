@@ -1,35 +1,35 @@
 {
-  "timestamp": "20261001_202523",
+ "timestamp": "20261002_063025",
+ "slug": "family-schedule-pro",
+ "spec": {
   "slug": "family-schedule-pro",
-  "spec": {
-    "slug": "family-schedule-pro",
-    "name": "calendar-unify",
-    "description": "需求缺口驱动原创：探测词[家庭日程/接送/时间安排/统筹] 平台专家0/技能0 —— 未复制任何原文",
-    "cli_interface": [
-      "--text",
-      "--input",
-      "--selftest",
-      "--dry-run",
-      "--version"
-    ],
-    "capability_outline": [
-      "家庭日程",
-      "接送",
-      "时间安排",
-      "统筹"
-    ],
-    "upstream": null,
-    "derivation": "original-work",
-    "source_type": "self_authored_rules",
-    "license": "MIT",
-    "copyright_holder": "SkillForge Lab"
-  },
-  "spec_hash": "08ca75e6724ddcff",
-  "prompt_hash": "3869c237352751ff",
-  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"family-schedule-pro\", \"name\": \"calendar-unify\", \"description\": \"需求缺口驱动原创：探测词[家庭日程/接送/时间安排/统筹] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家庭日程\", \"接送\", \"时间安排\", \"统筹\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
-  "iroulaw": "CREATION_IRONLAW v1",
-  "outputs": {
-    "skill_md_sha256": "b3f697c06c5929f594e8fce2ba08dac258f24f06bc01794f32226d74b576bfd4",
-    "main_py_sha256": "3a7f971a4f5be0d8e0ecbf76219a82cf0a95ca73c615fd2446a15e25116abacd"
-  }
+  "name": "calendar-unify",
+  "description": "需求缺口驱动原创：探测词[家庭日程/接送/时间安排/统筹] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "家庭日程",
+   "接送",
+   "时间安排",
+   "统筹"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "08ca75e6724ddcff",
+ "prompt_hash": "3869c237352751ff",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"family-schedule-pro\", \"name\": \"calendar-unify\", \"description\": \"需求缺口驱动原创：探测词[家庭日程/接送/时间安排/统筹] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家庭日程\", \"接送\", \"时间安排\", \"统筹\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "d9e8cf48f17ea59ebb513ac89fea007279cf8fa8ab7d83dc0997bdf5508bbbfe",
+  "main_py_sha256": "3a7f971a4f5be0d8e0ecbf76219a82cf0a95ca73c615fd2446a15e25116abacd"
+ }
 }

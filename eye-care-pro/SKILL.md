@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 用眼健康 护眼习惯顾问
+# 用眼健康 休息节奏 护眼习惯
 
 照明与阅读环境设置 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: environment
-  name_zh: "用眼健康 护眼习惯顾问"
+  name_zh: "用眼健康 休息节奏 护眼习惯"
   when_to_use: "照明与阅读环境设置"
   input_schema:
     type: object

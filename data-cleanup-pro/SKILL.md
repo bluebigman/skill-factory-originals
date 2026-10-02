@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 脏数据 缺失填补专家
+# 数据清洗 表格整理 去重规范
 
 可复现的清洗流程 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: clean-rules
-  name_zh: "数据清洗 表格整理专家"
+  name_zh: "数据清洗 表格整理 去重规范"
   when_to_use: "可复现的清洗流程"
   input_schema:
     type: object

@@ -1,35 +1,35 @@
 {
-  "timestamp": "20261001_202529",
+ "timestamp": "20261002_063036",
+ "slug": "fitness-nutrition-pro",
+ "spec": {
   "slug": "fitness-nutrition-pro",
-  "spec": {
-    "slug": "fitness-nutrition-pro",
-    "name": "fat-loss-meal",
-    "description": "需求缺口驱动原创：探测词[增肌/减脂餐/健身饮食/蛋白质] 平台专家0/技能0 —— 未复制任何原文",
-    "cli_interface": [
-      "--text",
-      "--input",
-      "--selftest",
-      "--dry-run",
-      "--version"
-    ],
-    "capability_outline": [
-      "增肌",
-      "减脂餐",
-      "健身饮食",
-      "蛋白质"
-    ],
-    "upstream": null,
-    "derivation": "original-work",
-    "source_type": "self_authored_rules",
-    "license": "MIT",
-    "copyright_holder": "SkillForge Lab"
-  },
-  "spec_hash": "c796c05cffa38b2d",
-  "prompt_hash": "99de90f4b8689a7f",
-  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"fitness-nutrition-pro\", \"name\": \"fat-loss-meal\", \"description\": \"需求缺口驱动原创：探测词[增肌/减脂餐/健身饮食/蛋白质] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"增肌\", \"减脂餐\", \"健身饮食\", \"蛋白质\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
-  "iroulaw": "CREATION_IRONLAW v1",
-  "outputs": {
-    "skill_md_sha256": "c634dfe4c09fc62cedf7c99da36f5b05ea7a6f5c61c0fcca6ddae6f63c7d91f7",
-    "main_py_sha256": "69ca0a07d6cb8613e71c08394255a911245f4de84114100118f26afd31f5b032"
-  }
+  "name": "fat-loss-meal",
+  "description": "需求缺口驱动原创：探测词[增肌/减脂餐/健身饮食/蛋白质] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "增肌",
+   "减脂餐",
+   "健身饮食",
+   "蛋白质"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "c796c05cffa38b2d",
+ "prompt_hash": "99de90f4b8689a7f",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"fitness-nutrition-pro\", \"name\": \"fat-loss-meal\", \"description\": \"需求缺口驱动原创：探测词[增肌/减脂餐/健身饮食/蛋白质] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"增肌\", \"减脂餐\", \"健身饮食\", \"蛋白质\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "214dca7b33212efd654c7a2281a74caf008b231f8cee8fbe1810321e08ec9bb7",
+  "main_py_sha256": "69ca0a07d6cb8613e71c08394255a911245f4de84114100118f26afd31f5b032"
+ }
 }

@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 分镜脚本 短视频创作专家
+# 短视频脚本 分镜设计 黄金3秒
 
 开头三秒的留存设计 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: hook-3s
-  name_zh: "短视频脚本 分镜设计专家"
+  name_zh: "短视频脚本 分镜设计 黄金3秒"
   when_to_use: "开头三秒的留存设计"
   input_schema:
     type: object

@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 屏幕时间 手机管理专家
+# 屏幕时间 手机管理 家庭规则
 
 判断哪些内容适合孩子看 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: content-curation
-  name_zh: "屏幕时间 手机管理专家"
+  name_zh: "屏幕时间 手机管理 家庭规则"
   when_to_use: "判断哪些内容适合孩子看"
   input_schema:
     type: object

@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 学习习惯 作业辅导教练
+# 背单词 学习 专注
 
 提升专注时长的具体方法 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -183,7 +183,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: focus-training
-  name_zh: "学习习惯 作业辅导教练"
+  name_zh: "背单词 学习 专注"
   when_to_use: "提升专注时长的具体方法"
   input_schema:
     type: object

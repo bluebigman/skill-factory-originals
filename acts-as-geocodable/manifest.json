@@ -1,39 +1,39 @@
 {
-  "timestamp": "20260819_234208",
+ "timestamp": "20260819_234208",
+ "slug": "acts-as-geocodable",
+ "spec": {
   "slug": "acts-as-geocodable",
-  "spec": {
-    "slug": "acts-as-geocodable",
-    "name": "acts-as-geocodable",
-    "description": "将地址文本解析为结构化地理数据并输出坐标与置信度。",
-    "cli_interface": [],
-    "capability_outline": [
-      "1. **降级到市级**：仅返回市级坐标，标注 `match_level: \"locality\"`",
-      "2. **降级到省级**：仅返回省级中心点坐标，标注 `match_level: \"administrative_area_level_1\"`",
-      "3. **拒绝解析**：返回 `INCOMPLETE_ADDRESS`，要求用户补充信息",
-      "1. 阅读「能力边界」了解适用范围",
-      "2. 查看「触发方式」确认使用场景",
-      "3. 按「标准处理流程」步骤 1-4 完成一次调用",
-      "4. 遇到问题查「错误码体系」",
-      "1. 理解「置信度门控」的降级策略，设计业务兜底逻辑",
-      "2. 参考「FAQ 反模式」优化输入预处理",
-      "3. 根据「输出规范」设计数据存储结构",
-      "4. 结合错误码设计重试与降级方案",
-      "1. 分析置信度分布，调整阈值参数",
-      "2. 实现候选结果缓存，减少重复请求",
-      "3. 设计多服务故障切换机制",
-      "4. 建立地址清洗规则库，持续优化预处理"
-    ],
-    "upstream": null,
-    "derivation": "independent-implementation"
-  },
-  "spec_hash": "75f4116c4fca76af",
-  "prompt_hash": "49-proxy",
-  "prompt": "(49 代理生成，见 provenance)",
-  "llm_model": "deepseek-chat",
-  "llm_temperature": 0.9,
-  "cost_usd": 0.0,
-  "similarity_metrics": {
-    "mode": "49-proxy"
-  },
-  "style_checks_passed": true
+  "name": "acts-as-geocodable",
+  "description": "将地址文本解析为结构化地理数据并输出坐标与置信度。",
+  "cli_interface": [],
+  "capability_outline": [
+   "1. **降级到市级**：仅返回市级坐标，标注 `match_level: \"locality\"`",
+   "2. **降级到省级**：仅返回省级中心点坐标，标注 `match_level: \"administrative_area_level_1\"`",
+   "3. **拒绝解析**：返回 `INCOMPLETE_ADDRESS`，要求用户补充信息",
+   "1. 阅读「能力边界」了解适用范围",
+   "2. 查看「触发方式」确认使用场景",
+   "3. 按「标准处理流程」步骤 1-4 完成一次调用",
+   "4. 遇到问题查「错误码体系」",
+   "1. 理解「置信度门控」的降级策略，设计业务兜底逻辑",
+   "2. 参考「FAQ 反模式」优化输入预处理",
+   "3. 根据「输出规范」设计数据存储结构",
+   "4. 结合错误码设计重试与降级方案",
+   "1. 分析置信度分布，调整阈值参数",
+   "2. 实现候选结果缓存，减少重复请求",
+   "3. 设计多服务故障切换机制",
+   "4. 建立地址清洗规则库，持续优化预处理"
+  ],
+  "upstream": null,
+  "derivation": "independent-implementation"
+ },
+ "spec_hash": "75f4116c4fca76af",
+ "prompt_hash": "49-proxy",
+ "prompt": "(49 代理生成，见 provenance)",
+ "llm_model": "deepseek-chat",
+ "llm_temperature": 0.9,
+ "cost_usd": 0.0,
+ "similarity_metrics": {
+  "mode": "49-proxy"
+ },
+ "style_checks_passed": true
 }

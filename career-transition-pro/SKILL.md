@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 转行规划 简历优化顾问
+# 转行规划 简历优化 技能迁移
 
 转行的分阶段落地 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: action-plan
-  name_zh: "转行规划 简历优化顾问"
+  name_zh: "转行规划 简历优化 技能迁移"
   when_to_use: "转行的分阶段落地"
   input_schema:
     type: object

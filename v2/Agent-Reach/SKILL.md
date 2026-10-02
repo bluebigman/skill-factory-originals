@@ -7,7 +7,7 @@ version: 5.0.0
 license: MIT
 source_project: original
 source_url: 
-copyright_holder: 远控工坊
+copyright_holder: SkillForge Lab
 ai_generated: true
 ai_tools: ["DeepSeek"]
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
@@ -37,9 +37,9 @@ trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI�
 
 | 场景 (Situation) | 操作 (Action) | 预期结果 (Result) |
 | :--- | :--- | :--- |
-| **启动一个实例** | `python run.py start --names agent-01` | 实例 `agent-01` 被创建并启动，输出包含 PID 和状态文件路径。 |
-| **查看所有实例状态** | `python run.py status --all` | 以表格形式输出所有已注册实例的运行状态、PID、资源占用和最近日志。 |
-| **批量停止测试环境实例** | `python run.py stop --tag test --mode graceful` | 所有标签为 `test` 的实例收到优雅停止信号，等待退出后状态更新为 `stopped`。 |
+| **启动一个实例** | `python scripts/run.py start --names agent-01` | 实例 `agent-01` 被创建并启动，输出包含 PID 和状态文件路径。 |
+| **查看所有实例状态** | `python scripts/run.py status --all` | 以表格形式输出所有已注册实例的运行状态、PID、资源占用和最近日志。 |
+| **批量停止测试环境实例** | `python scripts/run.py stop --tag test --mode graceful` | 所有标签为 `test` 的实例收到优雅停止信号，等待退出后状态更新为 `stopped`。 |
 
 ## 适用场景 When to Use
 
@@ -64,13 +64,13 @@ trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI�
 
 | 能力项 | 命令/参数 | 说明 | 示例 |
 | :--- | :--- | :--- | :--- |
-| **批量启动** | `start` | 通过 `subprocess.Popen` 启动真实进程，支持按名称、标签、文件列表批量操作。 | `python run.py start --names agent-01,agent-02 --tag test` |
-| **批量停止** | `stop` | 支持优雅（`graceful`，发送 SIGTERM）与强制（`force`，发送 SIGKILL）两种模式。 | `python run.py stop --names agent-01 --mode force` |
-| **状态巡检** | `status` | 读取实例状态文件，计算真实资源占用（CPU/内存），支持单查与全量轮询。 | `python run.py status --all` |
-| **远程执行** | `exec` | 通过 SSH 或 `paramiko` 在目标实例上执行白名单命令，支持超时与指数退避重试。 | `python run.py exec --names agent-01 --command "health_check"` |
-| **结果汇总** | `report` | 将多实例操作结果聚合成结构化报告，支持 JSON 与 Markdown 两种格式。 | `python run.py report --format json --output report.json` |
-| **预演模式** | `--dry-run` | 所有写操作（启动、停止、报告）的预演模式，只打印将执行的操作，不实际写盘。 | `python run.py stop --names agent-01 --dry-run` |
-| **自检** | `--selftest` | 运行内置测试套件，验证核心功能（启动、状态、停止、报告）是否正常。 | `python run.py --selftest` |
+| **批量启动** | `start` | 通过 `subprocess.Popen` 启动真实进程，支持按名称、标签、文件列表批量操作。 | `python scripts/run.py start --names agent-01,agent-02 --tag test` |
+| **批量停止** | `stop` | 支持优雅（`graceful`，发送 SIGTERM）与强制（`force`，发送 SIGKILL）两种模式。 | `python scripts/run.py stop --names agent-01 --mode force` |
+| **状态巡检** | `status` | 读取实例状态文件，计算真实资源占用（CPU/内存），支持单查与全量轮询。 | `python scripts/run.py status --all` |
+| **远程执行** | `exec` | 通过 SSH 或 `paramiko` 在目标实例上执行白名单命令，支持超时与指数退避重试。 | `python scripts/run.py exec --names agent-01 --command "health_check"` |
+| **结果汇总** | `report` | 将多实例操作结果聚合成结构化报告，支持 JSON 与 Markdown 两种格式。 | `python scripts/run.py report --format json --output report.json` |
+| **预演模式** | `--dry-run` | 所有写操作（启动、停止、报告）的预演模式，只打印将执行的操作，不实际写盘。 | `python scripts/run.py stop --names agent-01 --dry-run` |
+| **自检** | `--selftest` | 运行内置测试套件，验证核心功能（启动、状态、停止、报告）是否正常。 | `python scripts/run.py --selftest` |
 
 ## 模块决策表 Decision Table
 
@@ -92,7 +92,7 @@ trigger_words: ["AI智能体本地控制", "Agent-Reach", "本地批量运维AI�
 **命令：**
 
 ```bash
-python run.py start --names agent-01,agent-02 --tag test
+python scripts/run.py start --names agent-01,agent-02 --tag test
 ```
 
 **预期输出：**
@@ -110,7 +110,7 @@ python run.py start --names agent-01,agent-02 --tag test
 **命令：**
 
 ```bash
-python run.py stop --names agent-01 --mode graceful
+python scripts/run.py stop --names agent-01 --mode graceful
 ```
 
 **预期输出：**
@@ -125,7 +125,7 @@ python run.py stop --names agent-01 --mode graceful
 **命令：**
 
 ```bash
-python run.py status --all
+python scripts/run.py status --all
 ```
 
 **预期输出：**
@@ -144,7 +144,7 @@ python run.py status --all
 **命令：**
 
 ```bash
-python run.py exec --names agent-01 --command "health_check"
+python scripts/run.py exec --names agent-01 --command "health_check"
 ```
 
 **预期输出：**
@@ -159,7 +159,7 @@ python run.py exec --names agent-01 --command "health_check"
 **命令：**
 
 ```bash
-python run.py report --format json --output report.json
+python scripts/run.py report --format json --output report.json
 ```
 
 **预期输出：**
@@ -189,7 +189,7 @@ python run.py report --format json --output report.json
 3. **验证安装**：
 
    ```bash
-   python run.py --selftest
+   python scripts/run.py --selftest
    ```
 
    如果所有测试通过，说明安装成功。
@@ -249,7 +249,7 @@ pip install paramiko
 **解决办法**：使用强制停止模式：
 
 ```bash
-python run.py stop --names agent-01 --mode force
+python scripts/run.py stop --names agent-01 --mode force
 ```
 
 ### 问题 5：报告生成失败
@@ -267,7 +267,7 @@ python run.py stop --names agent-01 --mode force
 在执行任何写操作（启动、停止、报告）之前，建议先使用 `--dry-run` 参数进行预演，查看将要执行的操作，避免误操作：
 
 ```bash
-python run.py stop --names agent-01 --dry-run
+python scripts/run.py stop --names agent-01 --dry-run
 ```
 
 ### 批量操作
@@ -275,8 +275,8 @@ python run.py stop --names agent-01 --dry-run
 对于需要批量操作的场景，建议使用标签（`--tag`）或文件列表（`--file`）来指定实例，避免逐个输入名称：
 
 ```bash
-python run.py start --tag test
-python run.py stop --file instances.txt
+python scripts/run.py start --tag test
+python scripts/run.py stop --file instances.txt
 ```
 
 ### 状态巡检
@@ -284,7 +284,7 @@ python run.py stop --file instances.txt
 建议定期执行状态巡检，确保所有实例运行正常：
 
 ```bash
-python run.py status --all
+python scripts/run.py status --all
 ```
 
 ### 远程执行
@@ -292,7 +292,7 @@ python run.py status --all
 在执行远程命令时，确保命令在白名单中，避免执行未授权的命令：
 
 ```bash
-python run.py exec --names agent-01 --command "health_check"
+python scripts/run.py exec --names agent-01 --command "health_check"
 ```
 
 ### 报告归档
@@ -300,7 +300,7 @@ python run.py exec --names agent-01 --command "health_check"
 建议将操作结果汇总成报告并归档，便于后续分析和审计：
 
 ```bash
-python run.py report --format json --output report.json
+python scripts/run.py report --format json --output report.json
 ```
 
 ### 安全提醒

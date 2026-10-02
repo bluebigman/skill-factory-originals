@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 演示文稿 幻灯片排版助手
+# excel 公式 ppt
 
 表格数据的整理与分析 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: data-process
-  name_zh: "表格应用 公式演示专家"
+  name_zh: "excel 公式 ppt"
   when_to_use: "表格数据的整理与分析"
   input_schema:
     type: object

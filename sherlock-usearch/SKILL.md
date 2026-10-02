@@ -10,7 +10,7 @@ version: 1.3.17
 # === 法律合规声明（自动生成，请勿删除） ===
 license: MIT
 source_project: sherlock-project/sherlock
-source_url: 文档s://.com/sherlock-project/sherlock
+source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/sherlock-usearch
 source_license_url: s://.com/sherlock-project/sherlock/blob/master/LICENSE
 copyright_holder: sherlock-project contributors
 ai_generated: true

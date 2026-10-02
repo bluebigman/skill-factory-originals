@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 习惯养成 打卡复盘教练
+# 习惯养成 打卡复盘 复利设计
 
 新习惯的最小化设计 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: habit-design
-  name_zh: "习惯养成 打卡复盘教练"
+  name_zh: "习惯养成 打卡复盘 复利设计"
   when_to_use: "新习惯的最小化设计"
   input_schema:
     type: object

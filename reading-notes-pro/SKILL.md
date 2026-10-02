@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 读书笔记 知识卡片助手
+# 读书笔记 知识卡片 输出转化
 
 阅读时的信息捕捉方法 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: capture
-  name_zh: "读书笔记 知识卡片助手"
+  name_zh: "读书笔记 知识卡片 输出转化"
   when_to_use: "阅读时的信息捕捉方法"
   input_schema:
     type: object

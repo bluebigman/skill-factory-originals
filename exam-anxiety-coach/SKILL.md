@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 考试焦虑 心态调节顾问
+# 考试焦虑 心态调整 考前陪伴
 
 识别考前焦虑的身体与行为信号 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -208,7 +208,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: anxiety-scan
-  name_zh: "考试焦虑 心态调节顾问"
+  name_zh: "考试焦虑 心态调整 考前陪伴"
   when_to_use: "识别考前焦虑的身体与行为信号"
   input_schema:
     type: object

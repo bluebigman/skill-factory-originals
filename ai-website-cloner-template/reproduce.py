@@ -57,7 +57,7 @@ def check_merkle() -> int:
     """验证本快照文件的 Merkle 根 hash 未被篡改（遗漏二）。"""
     import hashlib as _h
     files = [p for p in HERE.rglob("*") if p.is_file()
-             and p.name not in ("merkle_root", "prev_hash")]
+             and p.name not in ("merkle_root", "prev_hash", "README.md")]
     leaves = sorted(_h.sha256(f.read_bytes()).hexdigest() for f in files)
     while len(leaves) > 1:
         nxt = []

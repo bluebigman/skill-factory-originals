@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 家庭事务 记账采购管家
+# 家庭事务 收支记账 采购清单
 
 家庭成员的日常事务分配 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: chore-plan
-  name_zh: "家庭事务 记账采购管家"
+  name_zh: "家庭事务 收支记账 采购清单"
   when_to_use: "家庭成员的日常事务分配"
   input_schema:
     type: object

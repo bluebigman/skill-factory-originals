@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 青春期沟通 亲子顾问
+# 青春期沟通 亲子关系 心理疏导
 
 与青春期孩子协商规则的方法 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -208,7 +208,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: teen-boundary-negotiate
-  name_zh: "青春期沟通 亲子顾问"
+  name_zh: "青春期沟通 亲子关系 心理疏导"
   when_to_use: "与青春期孩子协商规则的方法"
   input_schema:
     type: object

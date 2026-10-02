@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 家庭日程 接送安排助手
+# 家庭日程 接送安排 时间统筹
 
 全家日程的集中与冲突检测 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: calendar-unify
-  name_zh: "家庭日程 接送安排助手"
+  name_zh: "家庭日程 接送安排 时间统筹"
   when_to_use: "全家日程的集中与冲突检测"
   input_schema:
     type: object

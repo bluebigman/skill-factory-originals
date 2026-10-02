@@ -1,0 +1,34 @@
+{
+ "timestamp": "20261002_071302",
+ "slug": "teen-peer-pressure",
+ "spec": {
+  "slug": "teen-peer-pressure",
+  "name": "teen-peer-pressure-1",
+  "description": "需求缺口驱动原创：探测词[同伴压力/情景演练/给替代方案] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "同伴压力",
+   "情景演练",
+   "给替代方案"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "48cd3ba9c52f6a90",
+ "prompt_hash": "8d5b6b9df0f6b1ad",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"teen-peer-pressure\", \"name\": \"teen-peer-pressure-1\", \"description\": \"需求缺口驱动原创：探测词[同伴压力/情景演练/给替代方案] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"同伴压力\", \"情景演练\", \"给替代方案\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "ad380cce0aeb561bb1900c5981a334bd7eb7d28bd74a169ee2ad57bbbbcbb311",
+  "main_py_sha256": "a4f994fb02a68831435052217b9cdcf3ca97c4962af34cb6cbb56e495427a634"
+ }
+}

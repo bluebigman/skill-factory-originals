@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 亲子活动 家庭陪伴专家
+# 亲子活动 家庭陪伴 成长记录
 
 分龄亲子活动与陪伴质量提升 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: activity-design
-  name_zh: "亲子活动 家庭陪伴专家"
+  name_zh: "亲子活动 家庭陪伴 成长记录"
   when_to_use: "分龄亲子活动与陪伴质量提升"
   input_schema:
     type: object

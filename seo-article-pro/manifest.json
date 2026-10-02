@@ -1,35 +1,35 @@
 {
-  "timestamp": "20261001_202708",
+ "timestamp": "20261002_063239",
+ "slug": "seo-article-pro",
+ "spec": {
   "slug": "seo-article-pro",
-  "spec": {
-    "slug": "seo-article-pro",
-    "name": "keyword-plan",
-    "description": "需求缺口驱动原创：探测词[SEO/关键词/搜索排名/内容优化] 平台专家0/技能0 —— 未复制任何原文",
-    "cli_interface": [
-      "--text",
-      "--input",
-      "--selftest",
-      "--dry-run",
-      "--version"
-    ],
-    "capability_outline": [
-      "SEO",
-      "关键词",
-      "搜索排名",
-      "内容优化"
-    ],
-    "upstream": null,
-    "derivation": "original-work",
-    "source_type": "self_authored_rules",
-    "license": "MIT",
-    "copyright_holder": "SkillForge Lab"
-  },
-  "spec_hash": "d7f47760369c53a4",
-  "prompt_hash": "9ae66478a3a9e80d",
-  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"seo-article-pro\", \"name\": \"keyword-plan\", \"description\": \"需求缺口驱动原创：探测词[SEO/关键词/搜索排名/内容优化] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"SEO\", \"关键词\", \"搜索排名\", \"内容优化\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
-  "iroulaw": "CREATION_IRONLAW v1",
-  "outputs": {
-    "skill_md_sha256": "95676274bb818ebd965b8ba77493a2e069dee7a26b39d5e30934955ef5a894b1",
-    "main_py_sha256": "dca46785f8254649cda2fbae0b02c623a654f1c68367a91425037e975cf2eb17"
-  }
+  "name": "keyword-plan",
+  "description": "需求缺口驱动原创：探测词[SEO/关键词/搜索排名/内容优化] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "SEO",
+   "关键词",
+   "搜索排名",
+   "内容优化"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "d7f47760369c53a4",
+ "prompt_hash": "9ae66478a3a9e80d",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"seo-article-pro\", \"name\": \"keyword-plan\", \"description\": \"需求缺口驱动原创：探测词[SEO/关键词/搜索排名/内容优化] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"SEO\", \"关键词\", \"搜索排名\", \"内容优化\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "4d10be32af98b5907b420f85f1703301aa938360e31f0b7b4e36b4270e1ddb59",
+  "main_py_sha256": "dca46785f8254649cda2fbae0b02c623a654f1c68367a91425037e975cf2eb17"
+ }
 }

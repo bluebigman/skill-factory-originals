@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 直播带货 话术客服专家
+# 直播话术 带货文案 客服话术
 
 直播脚本的流程与节奏 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: live-flow
-  name_zh: "直播带货 话术客服专家"
+  name_zh: "直播话术 带货文案 客服话术"
   when_to_use: "直播脚本的流程与节奏"
   input_schema:
     type: object

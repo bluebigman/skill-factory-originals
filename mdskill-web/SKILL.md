@@ -1,7 +1,7 @@
 ---
 > 本内容由 AI 生成，仅供学习参考（《人工智能生成合成内容标识办法》显式标识）。
 <!-- ai-generated-notice -->
-copyright_holder: 原创作者（自持版权）
+copyright_holder: SkillForge Lab
 source_project: original
 disclaimer: 本Skill由AI辅助生成，提供使用指导和最佳实践。使用前请阅读相关文档。
 ai_generated: true

@@ -8,7 +8,7 @@ copyright_holder: SkillForge Lab
 ai_generated: true
 ---
 
-# 旅游攻略 自由行规划助手
+# 旅游攻略 自由行 行程规划
 
 旅行预算与风险准备 —— 给需要快速定位与处置「该领域」类问题的使用者：把模糊描述转成**归因清单 + 可执行动作**。
 
@@ -233,7 +233,7 @@ Copyright (c) 2026 **SkillForge Lab**. 保留所有权利声明。
 ```yaml
 capability:
   id: budget-risk
-  name_zh: "旅游攻略 自由行规划助手"
+  name_zh: "旅游攻略 自由行 行程规划"
   when_to_use: "旅行预算与风险准备"
   input_schema:
     type: object

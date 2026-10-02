@@ -1,0 +1,34 @@
+{
+ "timestamp": "20261002_081510",
+ "slug": "cross-border-listing",
+ "spec": {
+  "slug": "cross-border-listing",
+  "name": "cross-border-listing-1",
+  "description": "需求缺口驱动原创：探测词[跨境上架/先查禁售/本地化度量] 平台专家0/技能0 —— 未复制任何原文",
+  "cli_interface": [
+   "--text",
+   "--input",
+   "--selftest",
+   "--dry-run",
+   "--version"
+  ],
+  "capability_outline": [
+   "跨境上架",
+   "先查禁售",
+   "本地化度量"
+  ],
+  "upstream": null,
+  "derivation": "original-work",
+  "source_type": "self_authored_rules",
+  "license": "MIT",
+  "copyright_holder": "SkillForge Lab"
+ },
+ "spec_hash": "45806c742a852163",
+ "prompt_hash": "2abab1df9df69689",
+ "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"cross-border-listing\", \"name\": \"cross-border-listing-1\", \"description\": \"需求缺口驱动原创：探测词[跨境上架/先查禁售/本地化度量] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"跨境上架\", \"先查禁售\", \"本地化度量\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+ "iroulaw": "CREATION_IRONLAW v1",
+ "outputs": {
+  "skill_md_sha256": "f2826696394ec2fbb37c99104c32cedf8bbd9ba6860f8af0a94da6ff158b474a",
+  "main_py_sha256": "bf0a64a46ef297dc69e703dd9dd76859680c714a9046c1f085028a81a8c256be"
+ }
+}
