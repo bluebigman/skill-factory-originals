@@ -1,0 +1,35 @@
+{
+  "timestamp": "20261002_211450",
+  "slug": "multi-agent-orchestrate",
+  "spec": {
+    "slug": "multi-agent-orchestrate",
+    "name": "multi-agent-orchestrate-1",
+    "description": "需求缺口驱动原创：探测词[多智能体编排/任务分发/冲突校验/群体智能] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "多智能体编排",
+      "任务分发",
+      "冲突校验",
+      "群体智能"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "d7565867f64289a3",
+  "prompt_hash": "aafa7c813a85438f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"multi-agent-orchestrate\", \"name\": \"multi-agent-orchestrate-1\", \"description\": \"需求缺口驱动原创：探测词[多智能体编排/任务分发/冲突校验/群体智能] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"多智能体编排\", \"任务分发\", \"冲突校验\", \"群体智能\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "cd96c727760dcc5d5a807a4eb2c5c29897025d8e1d5c8205e61c6a6d46bd6050",
+    "main_py_sha256": "140d11bb08977980c91614dec6fe2ec2c6c8013e873acefe0c517593e277aa20"
+  }
+}
