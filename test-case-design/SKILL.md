@@ -6,6 +6,7 @@ source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/test
 license: MIT
 copyright_holder: SkillForge Lab
 ai_generated: true
+source_project: original
 ---
 
 # 测试用例 场景覆盖 助手

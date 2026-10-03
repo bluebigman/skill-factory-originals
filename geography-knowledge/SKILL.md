@@ -6,6 +6,7 @@ source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/geog
 license: MIT
 copyright_holder: SkillForge Lab
 ai_generated: true
+source_project: original
 ---
 
 # 地理常识 气候成因 顾问

@@ -6,6 +6,7 @@ source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/oee-
 license: MIT
 copyright_holder: SkillForge Lab
 ai_generated: true
+source_project: original
 ---
 
 # 设备效率 损失分析 顾问

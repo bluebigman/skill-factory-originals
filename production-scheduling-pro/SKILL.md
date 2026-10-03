@@ -6,6 +6,7 @@ source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/prod
 license: MIT
 copyright_holder: SkillForge Lab
 ai_generated: true
+source_project: original
 ---
 
 # 生产排程 交期保障 顾问

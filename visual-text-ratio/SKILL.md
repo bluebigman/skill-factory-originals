@@ -6,6 +6,7 @@ source_url: https://github.com/bluebigman/skill-factory-originals/tree/main/visu
 license: MIT
 copyright_holder: SkillForge Lab
 ai_generated: true
+source_project: original
 ---
 
 # 图文配比 排版节奏 助手
