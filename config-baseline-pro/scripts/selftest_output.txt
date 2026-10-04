@@ -1,0 +1,3 @@
+usage: config-security-baseline [-h] [--input INPUT] [--out OUT] [--dry-run]
+                                [--version]
+config-security-baseline: error: unrecognized arguments: --selftest

@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\file-convert-expert\scripts\main.py", line 82, in <module>
+    class ImageProcessor:
+    ...<239 lines>...
+            return kwargs
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\file-convert-expert\scripts\main.py", line 233, in ImageProcessor
+    def _resize_image(self, img: Image.Image) -> Image.Image:
+                                 ^^^^^
+NameError: name 'Image' is not defined

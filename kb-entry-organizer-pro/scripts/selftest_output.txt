@@ -1,0 +1,3 @@
+usage: kb-near-dup-merger [-h] [--input INPUT] [--out OUT] [--dry-run]
+                          [--version]
+kb-near-dup-merger: error: unrecognized arguments: --selftest

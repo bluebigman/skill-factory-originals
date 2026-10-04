@@ -1,0 +1,6 @@
+[OK] 触发器 1 个
+  [OK] SKILL.md 可读
+  [OK] 触发匹配: ['clear-empty-attributes']
+  [OK] 核心转换: 空字符串 → None
+  [OK] JSON 输入输出转换
+== clear-empty-attributes 命令行工具自检通过 ✅ ==

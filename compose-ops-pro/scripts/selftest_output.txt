@@ -1,0 +1,3 @@
+usage: compose-service-verifier [-h] [--input INPUT] [--out OUT] [--dry-run]
+                                [--version]
+compose-service-verifier: error: unrecognized arguments: --selftest

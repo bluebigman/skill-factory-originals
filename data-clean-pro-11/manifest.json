@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143446",
+  "slug": "data-clean-pro-11",
+  "spec": {
+    "slug": "data-clean-pro-11",
+    "name": "data-clean-pro-11",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "a911ae0d8b4527bb",
+  "prompt_hash": "f12fc381cebf4306",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"data-clean-pro-11\", \"name\": \"data-clean-pro-11\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "22c02138b8036f54b9386ee438521156d0b569ef4bda0fcba6b537c980d5b7ca",
+    "main_py_sha256": "8e3a71f18225ae9d679b520ee83e297ae8eacdf236de5a676bb4162dbde40090"
+  }
+}

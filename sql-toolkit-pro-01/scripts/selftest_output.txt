@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\sql-toolkit-pro-01\scripts\main.py", line 475, in _run_selftest
+    print("  [PASS] pgtyped" % name)
+          ~~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: not all arguments converted during string formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\sql-toolkit-pro-01\scripts\main.py", line 555, in <module>
+    _s.exit(_cli())
+            ~~~~^^
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\sql-toolkit-pro-01\scripts\main.py", line 523, in _cli
+    return _run_selftest()
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\sql-toolkit-pro-01\scripts\main.py", line 478, in _run_selftest
+    print("  [FAIL] pgtyped" % name)
+          ~~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: not all arguments converted during string formatting

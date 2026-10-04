@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143048",
+  "slug": "ui-visual-forge-expert",
+  "spec": {
+    "slug": "ui-visual-forge-expert",
+    "name": "ui-visual-forge-expert",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0d319a7db3fb0c11",
+  "prompt_hash": "eddf7351dec71810",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"ui-visual-forge-expert\", \"name\": \"ui-visual-forge-expert\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "dd72912ef24560be60b110625acc8369e9fac09c5b032261522a5fbed2f82b83",
+    "main_py_sha256": "19246933f3ee9e489e121bc903105ab5fad031df1c397411bc893856ae4dd51a"
+  }
+}

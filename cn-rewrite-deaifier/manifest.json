@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143322",
+  "slug": "cn-rewrite-deaifier",
+  "spec": {
+    "slug": "cn-rewrite-deaifier",
+    "name": "cn-rewrite-deaifier",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ab65633f1bdd12e0",
+  "prompt_hash": "ad09598a16a6ee71",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"cn-rewrite-deaifier\", \"name\": \"cn-rewrite-deaifier\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "e6dd3f47d401dd2dc8942c867c05c041b157a3b0cf7e461f9265f5c542748875",
+    "main_py_sha256": "1e1ae35c9fd7630746394b185664b986bb25da4275ab13c88198ea2467107029"
+  }
+}

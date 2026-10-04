@@ -1,0 +1,6 @@
+[selftest] 开始自检...
+[selftest] 样例1通过 ✓
+[selftest] 样例2通过 ✓
+[selftest] 样例3通过 ✓
+[selftest] 样例4通过 ✓
+[selftest] 全部自检通过 ✅

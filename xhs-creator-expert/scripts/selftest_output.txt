@@ -1,0 +1,5 @@
+[selftest] 开始自检...
+[selftest] 样例 1: 保湿面霜
+[selftest] 样例 2: 便携榨汁杯
+[selftest] 样例 3: 护眼台灯
+[selftest] 全部样例通过 ✅

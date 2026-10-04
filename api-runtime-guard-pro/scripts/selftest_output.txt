@@ -1,0 +1,3 @@
+usage: api-batch-throttle-planner [-h] [--input INPUT] [--out OUT] [--dry-run]
+                                  [--version]
+api-batch-throttle-planner: error: unrecognized arguments: --selftest

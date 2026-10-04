@@ -1,0 +1,3 @@
+usage: doc-readability-grader [-h] [--input INPUT] [--out OUT] [--dry-run]
+                              [--version]
+doc-readability-grader: error: unrecognized arguments: --selftest

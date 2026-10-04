@@ -1,0 +1,9 @@
+[selftest] 开始自检...
+[ok] parse_input
+[ok] identify_key_info
+[ok] format_output (json/markdown)
+[ok] batch_process (模拟)
+[ok] search_memories
+[ok] error handling
+
+[selftest] 结果: 8/8 通过

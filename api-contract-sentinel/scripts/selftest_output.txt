@@ -1,0 +1,3 @@
+usage: api-cursor-flow-verifier [-h] [--input INPUT] [--out OUT] [--dry-run]
+                                [--version]
+api-cursor-flow-verifier: error: unrecognized arguments: --selftest

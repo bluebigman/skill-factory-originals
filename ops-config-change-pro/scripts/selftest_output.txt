@@ -1,0 +1,3 @@
+usage: config-change-impact-mapper [-h] [--input INPUT] [--out OUT]
+                                   [--dry-run] [--version]
+config-change-impact-mapper: error: unrecognized arguments: --selftest

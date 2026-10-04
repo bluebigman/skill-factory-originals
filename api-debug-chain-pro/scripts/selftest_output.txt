@@ -1,0 +1,3 @@
+usage: api-auth-element-checker [-h] [--input INPUT] [--out OUT] [--dry-run]
+                                [--version]
+api-auth-element-checker: error: unrecognized arguments: --selftest

@@ -1,0 +1,3 @@
+usage: api-request-debugger [-h] [--input INPUT] [--out OUT] [--dry-run]
+                            [--version]
+api-request-debugger: error: unrecognized arguments: --selftest

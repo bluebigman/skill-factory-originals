@@ -1,0 +1,3 @@
+usage: config-flag-graph [-h] [--input INPUT] [--out OUT] [--dry-run]
+                         [--version]
+config-flag-graph: error: unrecognized arguments: --selftest

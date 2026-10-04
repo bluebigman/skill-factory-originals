@@ -1,0 +1,11 @@
+== cache-fu 自检开始 ==
+  [OK] _format_size 格式化大小
+  [OK] _get_dir_size 目录大小: 22
+  [OK] _list_files 文件列表: 1 个文件
+  [OK] scan_caches 扫描结果: 1 个目录
+[预览] 将删除 C:\Users\ThinkPad\AppData\Local\Temp\cache-fu-selftest\test.tmp (大小: 22 B)
+[预览] 将删除空目录 C:\Users\ThinkPad\AppData\Local\Temp\cache-fu-selftest
+  [OK] clean_caches dry-run 模式
+  [OK] clean_caches 实际执行: 删除 1 个文件，释放 22 B
+  [OK] match_trigger 触发词匹配: ['缓存', '清理']
+== cache-fu 自检通过 ✅ ==

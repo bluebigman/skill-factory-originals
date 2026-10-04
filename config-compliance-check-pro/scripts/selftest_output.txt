@@ -1,0 +1,3 @@
+usage: config-bound-relation-auditor [-h] [--input INPUT] [--out OUT]
+                                     [--dry-run] [--version]
+config-bound-relation-auditor: error: unrecognized arguments: --selftest

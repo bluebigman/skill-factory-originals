@@ -1,0 +1,3 @@
+usage: infra-permission-audit [-h] [--input INPUT] [--out OUT] [--dry-run]
+                              [--version]
+infra-permission-audit: error: unrecognized arguments: --selftest

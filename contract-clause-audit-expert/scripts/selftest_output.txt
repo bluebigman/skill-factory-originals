@@ -1,0 +1,3 @@
+usage: main.py [-h] [--batch BATCH] [--config CONFIG] [--mode MODE]
+               [--task TASK]
+main.py: error: unrecognized arguments: --selftest

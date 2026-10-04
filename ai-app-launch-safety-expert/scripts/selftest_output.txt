@@ -1,0 +1,3 @@
+usage: code-security-decl-auditor [-h] [--input INPUT] [--out OUT] [--dry-run]
+                                  [--version]
+code-security-decl-auditor: error: unrecognized arguments: --selftest

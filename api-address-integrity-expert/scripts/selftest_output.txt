@@ -1,0 +1,3 @@
+usage: download-meta-audit-tool [-h] [--input INPUT] [--out OUT] [--dry-run]
+                                [--version]
+download-meta-audit-tool: error: unrecognized arguments: --selftest

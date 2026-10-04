@@ -1,0 +1,3 @@
+usage: api-credential-carrier-check [-h] [--input INPUT] [--out OUT]
+                                    [--dry-run] [--version]
+api-credential-carrier-check: error: unrecognized arguments: --selftest

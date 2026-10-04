@@ -1,0 +1,14 @@
+=== Grafana Skill 自检开始 ===
+[PASS] CSV 解析
+[PASS] JSON 解析
+[PASS] 图表推荐 (line/bar)
+[PASS] 趋势分析: 上升
+[PASS] 异常检测: 检出 1 个异常点
+[PASS] 分组对比
+[PASS] 完整数据分析
+[PASS] 报告生成
+[PASS] JSON 输出
+[PASS] 错误处理 E002
+[PASS] 错误处理 E003
+
+=== 全部自检通过 ===

@@ -1,0 +1,3 @@
+usage: csv-batch-converter [-h] [--input INPUT] [--out OUT] [--dry-run]
+                           [--version]
+csv-batch-converter: error: unrecognized arguments: --selftest

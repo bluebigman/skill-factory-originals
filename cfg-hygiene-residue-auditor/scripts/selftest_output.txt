@@ -1,0 +1,3 @@
+usage: cfg-list-value-hygiene-check [-h] [--input INPUT] [--out OUT]
+                                    [--dry-run] [--version]
+cfg-list-value-hygiene-check: error: unrecognized arguments: --selftest

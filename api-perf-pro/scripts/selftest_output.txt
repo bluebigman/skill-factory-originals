@@ -1,0 +1,3 @@
+usage: api-latency-profiler [-h] [--input INPUT] [--out OUT] [--dry-run]
+                            [--version]
+api-latency-profiler: error: unrecognized arguments: --selftest

@@ -1,0 +1,35 @@
+=== gitsum 自检开始 ===
+
+[测试 1] 单条文本处理
+  ✓ 通过
+
+[测试 2] 中文冒号处理
+  ✓ 通过
+
+[测试 3] 空输入处理
+  ✓ 通过
+
+[测试 4] 批量文件处理
+  ✓ 通过
+
+[测试 5] 输出格式化
+  ✓ 通过
+
+[测试 6] 置信度阈值过滤
+  ✓ 通过
+
+[测试 7] URL 错误处理
+  ✓ 通过
+
+[测试 8] 原子化写入
+  ✓ 通过
+
+[测试 9] save 函数 dry-run 模式
+[dry-run] 将写入 C:\Users\ThinkPad\AppData\Local\Temp\tmpzjysnji7.txt（12 字节），未落盘
+  ✓ 通过
+
+[测试 10] save 函数实际写入
+[写入] C:\Users\ThinkPad\AppData\Local\Temp\tmpi5ip77kl.txt
+  ✓ 通过
+
+=== 自检完成: 10/10 通过 ===

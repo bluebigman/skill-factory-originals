@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\meeting-summary-expert\scripts\main.py", line 20, in <module>
+    from template_lib import (SCENE_OPTIONS, STRUCTURE, TEMPLATES,
+                              BLOCK_WORDS, RISK_WORDS, MIN_COUNT, MAX_COUNT)
+ModuleNotFoundError: No module named 'template_lib'

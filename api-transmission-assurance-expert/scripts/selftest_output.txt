@@ -1,0 +1,3 @@
+usage: api-async-job-lifecycle [-h] [--input INPUT] [--out OUT] [--dry-run]
+                               [--version]
+api-async-job-lifecycle: error: unrecognized arguments: --selftest

@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143221",
+  "slug": "contract-legal-pro",
+  "spec": {
+    "slug": "contract-legal-pro",
+    "name": "contract-legal-pro",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "334762af8dae4ca8",
+  "prompt_hash": "b7d21be63b839d54",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"contract-legal-pro\", \"name\": \"contract-legal-pro\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "2a87ec392592377ad08b2da6dd18015f87b822915619c59ccf8357a90b179b3f",
+    "main_py_sha256": "6c91a876c4532e0b08f99392b78f4a2b5c7cce4992b4b9de8a3f720ca4a72ce4"
+  }
+}

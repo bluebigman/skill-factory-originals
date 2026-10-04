@@ -1,0 +1,91 @@
+{
+  "name": "notebooklm-py selftest",
+  "passed": true,
+  "checks": [
+    {
+      "name": "文本解析-标题提取",
+      "passed": true,
+      "detail": "标题: 项目总结报告"
+    },
+    {
+      "name": "文本解析-作者提取",
+      "passed": true,
+      "detail": "作者: 张三"
+    },
+    {
+      "name": "文本解析-日期提取",
+      "passed": true,
+      "detail": "日期: 2025-03-15"
+    },
+    {
+      "name": "文本解析-要点数量",
+      "passed": true,
+      "detail": "要点数: 4"
+    },
+    {
+      "name": "文本解析-置信度",
+      "passed": true,
+      "detail": "置信度: 高"
+    },
+    {
+      "name": "URL解析-域名",
+      "passed": true,
+      "detail": "域名: example.com"
+    },
+    {
+      "name": "URL解析-标题",
+      "passed": true,
+      "detail": "标题: Notebooklm Tutorial"
+    },
+    {
+      "name": "JSON解析-标题",
+      "passed": true,
+      "detail": "标题: 测试文档"
+    },
+    {
+      "name": "JSON解析-作者",
+      "passed": true,
+      "detail": "作者: 李四"
+    },
+    {
+      "name": "JSON解析-字段数",
+      "passed": true,
+      "detail": "字段数: 1"
+    },
+    {
+      "name": "错误处理-空输入",
+      "passed": true,
+      "detail": "错误码: E001"
+    },
+    {
+      "name": "错误处理-无效URL",
+      "passed": true,
+      "detail": "错误码: E003"
+    },
+    {
+      "name": "批量处理-总数",
+      "passed": true,
+      "detail": "总数: 3"
+    },
+    {
+      "name": "批量处理-成功数",
+      "passed": true,
+      "detail": "成功: 2"
+    },
+    {
+      "name": "批量处理-失败数",
+      "passed": true,
+      "detail": "失败: 1"
+    },
+    {
+      "name": "自检-字段完整性",
+      "passed": true,
+      "detail": "检查项: 15"
+    },
+    {
+      "name": "自检-通过率",
+      "passed": true,
+      "detail": "通过 16/16"
+    }
+  ]
+}

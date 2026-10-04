@@ -1,0 +1,19 @@
+[SELFTEST] 开始自检...
+[SELFTEST] 高危删除识别: PASS
+[SELFTEST] fork 炸弹识别: PASS
+[SELFTEST] 设备类高危识别: PASS
+[SELFTEST] 供应链风险识别: PASS
+[SELFTEST] 安全命令放行: PASS
+[SELFTEST] 白名单降分: PASS
+[SELFTEST] 黑白名单冲突处置: PASS
+[SELFTEST] 空输入 fail-closed: PASS
+[SELFTEST] 通配符影响提示: PASS
+[SELFTEST] 路径提取: PASS
+[SELFTEST] 规则库降级: PASS
+[SELFTEST] 日志失败不阻断: PASS
+[SELFTEST] 错误码体系完整: PASS
+[SELFTEST] 预览模式不落盘: PASS
+[SELFTEST] 决策明细可解释: PASS
+[SELFTEST] 清单编码自适应: PASS
+[SELFTEST] 大清单流式读取: PASS
+[SELFTEST] 全部自检通过 ✓

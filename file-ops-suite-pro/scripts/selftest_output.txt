@@ -1,0 +1,4 @@
+PASS 计划生成(replace)
+PASS 执行改名
+PASS undo 回滚
+selftest: 3 passed, 0 failed

@@ -1,0 +1,13 @@
+[SELFTEST] 开始自检...
+[SELFTEST] PASS: 单条解析
+[SELFTEST] PASS: JSON 输入解析
+[SELFTEST] PASS: 自定义映射
+[SELFTEST] PASS: 空输入处理
+[SELFTEST] DEBUG 非法日期解析结果: {"data": {"order_id": {"value": "A12345", "confidence": 0.95}, "amount": {"value": 89.9, "confidence": 0.92}}, "summary": {"total_fields": 2, "needs_review": 0, "avg_confidence": 0.935}}
+[SELFTEST] PASS: 非法日期处理
+[DRY-RUN] 将写入 2 条解析结果到 C:\Users\ThinkPad\AppData\Local\Temp\tmppg_5c64x.txt.out.jsonl
+[DRY-RUN] 未执行实际写入操作
+[SELFTEST] PASS: 批量处理
+[SELFTEST] PASS: 多编码支持
+[SELFTEST] PASS: 原子写入
+[SELFTEST] PASSED

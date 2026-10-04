@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\time-mgmt-expert\scripts\main.py", line 492, in _run_selftest
+    print("  [PASS] kanban-md" % name)
+          ~~~~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: not all arguments converted during string formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\time-mgmt-expert\scripts\main.py", line 590, in <module>
+    _s.exit(_cli())
+            ~~~~^^
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\time-mgmt-expert\scripts\main.py", line 540, in _cli
+    return _run_selftest()
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\time-mgmt-expert\scripts\main.py", line 495, in _run_selftest
+    print("  [FAIL] kanban-md" % name)
+          ~~~~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: not all arguments converted during string formatting

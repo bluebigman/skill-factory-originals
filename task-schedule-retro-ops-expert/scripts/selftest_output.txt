@@ -1,0 +1,4 @@
+File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\task-schedule-retro-ops-expert\scripts\main.py", line 22
+    except Exception:
+    ^^^^^^
+SyntaxError: invalid syntax

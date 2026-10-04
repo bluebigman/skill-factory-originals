@@ -1,0 +1,3 @@
+usage: api-number-scale-check [-h] [--input INPUT] [--out OUT] [--dry-run]
+                              [--version]
+api-number-scale-check: error: unrecognized arguments: --selftest

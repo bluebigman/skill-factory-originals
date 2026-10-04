@@ -1,0 +1,16 @@
+[selftest] 开始离线自检...
+[selftest] 用例1: 正常 JSON 输入
+  ✓ 通过 (置信度=75.0%, 字段=['name', 'value', 'status'])
+[selftest] 用例2: 空输入
+  ✓ 通过 (错误码=E001)
+[selftest] 用例3: 缺少 source 字段
+  ✓ 通过 (错误码=E002)
+[selftest] 用例4: 不支持的输入类型
+  ✓ 通过 (错误码=E003)
+[selftest] 用例5: 批量处理
+  ✓ 通过 (共2条，均成功)
+[selftest] 用例6: 错误码体系完整性
+  ✓ 通过 (共5个错误码)
+[selftest] 用例7: 置信度区间有效性
+  ✓ 通过 (置信度=85.0%)
+[selftest] 全部通过 ✅

@@ -1,0 +1,45 @@
+============================================================
+运行自测...
+============================================================
+
+[测试 1] 基本转换
+  ✅ 转换成功: {"dn": "uid=john,dc=example,dc=com", "cn": "John Doe", "mail": "john@example.com", "uid": "john", "dc": "com", "confidence": 0.95}
+
+[测试 2] 批量处理与去重
+  ✅ 批量处理成功: 3 条记录
+
+[测试 3] CSV 输出
+  ✅ CSV 输出成功，长度: 152 字符
+
+[测试 4] YAML 输出
+  ✅ YAML 输出成功，长度: 271 字符
+
+[测试 5] 时间过滤
+  ✅ 时间过滤成功: 1 条记录
+
+[测试 6] DN 解析
+  ✅ DN 解析成功: {'uid': 'john', 'ou': 'people', 'dc': 'com'}
+
+[测试 7] 文件处理
+[DRY-RUN] 将写入 2 条记录到 test_output.json
+[DRY-RUN] 字段: dn, cn, uid, dc, confidence
+  ✅ 文件处理成功: 2 条记录
+
+[测试 8] 空输入
+  ✅ 空输入处理成功: 0 条记录
+
+[测试 9] 中文编码
+  ✅ 中文编码处理成功: 张伟
+
+[测试 10] 特殊字符 DN
+  ✅ 特殊字符 DN 解析成功: {'uid': 'john,doe', 'ou': 'people', 'dc': 'com'}
+
+[测试 11] verbose 明细输出
+[明细] 0. uid=test1,dc=example,dc=com: 原始条目 1 -> 已处理: dn=uid=test1,dc=example,dc=com, cn=Test One, confidence=0.95
+[明细] 1. uid=test2,dc=example,dc=com: 原始条目 2 -> 已处理: dn=uid=test2,dc=example,dc=com, cn=Test Two, confidence=0.95
+[汇总] changed=2 项，skipped=0 项
+  ✅ verbose 明细输出成功: 2 项
+
+============================================================
+所有自测通过！
+============================================================

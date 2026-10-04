@@ -1,0 +1,3 @@
+usage: cfg-datetime-validity-check [-h] [--input INPUT] [--out OUT]
+                                   [--dry-run] [--version]
+cfg-datetime-validity-check: error: unrecognized arguments: --selftest

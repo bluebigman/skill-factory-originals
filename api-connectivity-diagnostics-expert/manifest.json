@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_142836",
+  "slug": "api-connectivity-diagnostics-expert",
+  "spec": {
+    "slug": "api-connectivity-diagnostics-expert",
+    "name": "api-connectivity-diagnostics-expert",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0cdca27b820446f8",
+  "prompt_hash": "c8cddcc419990056",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"api-connectivity-diagnostics-expert\", \"name\": \"api-connectivity-diagnostics-expert\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "c83c0b05a2d631497c133f95b5b1a3cc5375f47fde8f8b510809d65e43aa34ff",
+    "main_py_sha256": "99f54d2c71845fc457225cf6e4038e65aa681b96c5a763e9ad35b08fd5eb4f09"
+  }
+}

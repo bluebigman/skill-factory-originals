@@ -1,0 +1,3 @@
+usage: deploy-config-linter [-h] [--input INPUT] [--out OUT] [--dry-run]
+                            [--version]
+deploy-config-linter: error: unrecognized arguments: --selftest

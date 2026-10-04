@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143506",
+  "slug": "doc-convert-pro-02-fixed",
+  "spec": {
+    "slug": "doc-convert-pro-02-fixed",
+    "name": "doc-convert-pro-02-fixed",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7ec6756e8de349db",
+  "prompt_hash": "94b61eedc13ec1bf",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"doc-convert-pro-02-fixed\", \"name\": \"doc-convert-pro-02-fixed\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "4a3452cc0eb18c8da0e67b3b8c4ed9556d9ad6bf0713ddc5088aa6d67ac9f4e4",
+    "main_py_sha256": "5d951aca70ab2ace26b55272e513650a3c53b9cff67783a2b05ed6e288f60d41"
+  }
+}

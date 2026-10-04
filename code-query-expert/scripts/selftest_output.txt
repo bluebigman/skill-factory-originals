@@ -1,0 +1,3 @@
+usage: main.py [-h] [--domain DOMAIN] [--format FORMAT] [--query QUERY]
+               [--selftest SELFTEST] [--verbose]
+main.py: error: argument --selftest: expected one argument

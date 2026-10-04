@@ -1,0 +1,2 @@
+usage: kb-dup-cluster [-h] [--input INPUT] [--out OUT] [--dry-run] [--version]
+kb-dup-cluster: error: unrecognized arguments: --selftest

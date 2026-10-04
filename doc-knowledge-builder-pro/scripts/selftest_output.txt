@@ -1,0 +1,3 @@
+usage: doc-section-tree [-h] [--input INPUT] [--out OUT] [--dry-run]
+                        [--version]
+doc-section-tree: error: unrecognized arguments: --selftest

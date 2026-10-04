@@ -1,0 +1,43 @@
+============================================================
+agent-workflow-kit 自检模式
+============================================================
+
+[测试 1] 正常数据评估
+  ✓ 通过 (总分: 78.2, 风险: high)
+
+[测试 2] 置信度门控
+  ✓ 通过 (标记数: 2)
+
+[测试 3] 空数据报错
+  ✓ 通过 (正确报错)
+
+[测试 4] 缺少关键字段报错
+  ✓ 通过 (正确报错)
+
+[测试 5] 中文编码处理
+  ✓ 通过 (中文处理正常)
+
+[测试 6] 自定义权重
+  ✓ 通过 (总分: 83.3)
+
+[测试 7] 批量处理
+[DRY-RUN] 将写入 JSON 报告: C:\Users\ThinkPad\AppData\Local\Temp\tmpchu4hv8z\report_20261004_063253.json
+[DRY-RUN] 将写入 Markdown 报告: C:\Users\ThinkPad\AppData\Local\Temp\tmpchu4hv8z\report_20261004_063253.md
+[DRY-RUN] JSON 报告大小: 615 字节
+[DRY-RUN] Markdown 报告大小: 367 字节
+✓ 成功: C:\Users\ThinkPad\AppData\Local\Temp\tmpchu4hv8z\test1.json
+[DRY-RUN] 将写入 JSON 报告: C:\Users\ThinkPad\AppData\Local\Temp\tmpchu4hv8z\report_20261004_063253.json
+[DRY-RUN] 将写入 Markdown 报告: C:\Users\ThinkPad\AppData\Local\Temp\tmpchu4hv8z\report_20261004_063253.md
+[DRY-RUN] JSON 报告大小: 680 字节
+[DRY-RUN] Markdown 报告大小: 405 字节
+✓ 成功: C:\Users\ThinkPad\AppData\Local\Temp\tmpchu4hv8z\test2.json
+
+批量处理完成: 2 个文件, 2 个成功, 0 个失败
+  ✓ 通过 (批量处理正常)
+
+[测试 8] URL 获取错误处理
+  ✓ 通过 (正确报错)
+
+============================================================
+自检完成: 全部测试通过
+============================================================

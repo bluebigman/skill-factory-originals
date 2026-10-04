@@ -1,0 +1,3 @@
+usage: api-curl-rebuilder [-h] [--input INPUT] [--out OUT] [--dry-run]
+                          [--version]
+api-curl-rebuilder: error: unrecognized arguments: --selftest

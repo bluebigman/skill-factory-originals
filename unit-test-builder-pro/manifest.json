@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143049",
+  "slug": "unit-test-builder-pro",
+  "spec": {
+    "slug": "unit-test-builder-pro",
+    "name": "unit-test-builder-pro",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b8341c5079d3f72f",
+  "prompt_hash": "f8d4b25a830b6b83",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"unit-test-builder-pro\", \"name\": \"unit-test-builder-pro\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "8313cf1652c02a1f0aebe3303af0436bbd0d50248aeb226f489f6d8b08a99a13",
+    "main_py_sha256": "517c2e27409188b90b231994a468537e537c11b8a12e43d1595f6e3e4722fbd8"
+  }
+}

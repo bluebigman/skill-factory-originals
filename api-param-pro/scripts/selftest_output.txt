@@ -1,0 +1,3 @@
+usage: api-body-mapper [-h] [--input INPUT] [--out OUT] [--dry-run]
+                       [--version]
+api-body-mapper: error: unrecognized arguments: --selftest

@@ -1,0 +1,1 @@
+[FAIL] 自检异常: SKILL.md 不存在: C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\config-check-pro\SKILL.md

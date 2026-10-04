@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143229",
+  "slug": "dev-cmd-pro",
+  "spec": {
+    "slug": "dev-cmd-pro",
+    "name": "dev-cmd-pro",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c19076fb04146bd5",
+  "prompt_hash": "ab4142d8f0eac542",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"dev-cmd-pro\", \"name\": \"dev-cmd-pro\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "555499fa1a37ab1aa3452567a1e1435d49f91e2202324d33d91b7dee2b3d2d50",
+    "main_py_sha256": "00d083a46e0b30a9d539f37a7ea9270b97c25a9d35af206427015f01054ccfa0"
+  }
+}

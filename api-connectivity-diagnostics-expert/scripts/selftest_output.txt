@@ -1,0 +1,3 @@
+usage: api-compression-consistency-checker [-h] [--input INPUT] [--out OUT]
+                                           [--dry-run] [--version]
+api-compression-consistency-checker: error: unrecognized arguments: --selftest

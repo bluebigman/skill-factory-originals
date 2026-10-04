@@ -1,0 +1,10 @@
+=== sqlgen 自检开始 ===
+[PASS] CSV 解析
+[PASS] JSON 解析
+[PASS] TXT 解析
+[PASS] 类型推断
+[PASS] SQL 生成
+[PASS] Markdown 生成
+[PASS] JSON 生成
+[PASS] 错误处理
+=== sqlgen 自检全部通过 ===

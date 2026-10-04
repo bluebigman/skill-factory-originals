@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143657",
+  "slug": "toolkit-pro-08",
+  "spec": {
+    "slug": "toolkit-pro-08",
+    "name": "toolkit-pro-08",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "54a66d6235b48e50",
+  "prompt_hash": "31bcbebdf07fa01e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"toolkit-pro-08\", \"name\": \"toolkit-pro-08\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "58fbe0563a6ba123b175392b94b1490090f1e6f159b36a44b3e7012f5fbf7988",
+    "main_py_sha256": "4d576d5c7a99a85af218e6f0d63ccbe26394ad1b7d7edb5943e75ad52103ffe9"
+  }
+}

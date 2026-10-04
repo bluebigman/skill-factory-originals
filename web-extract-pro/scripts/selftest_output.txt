@@ -1,0 +1,2 @@
+usage: main.py [-h] [--config CONFIG]
+main.py: error: unrecognized arguments: --selftest

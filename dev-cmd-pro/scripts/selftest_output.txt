@@ -1,0 +1,11 @@
+== capa 命令行工具自检开始 ==
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\dev-cmd-pro\scripts\main.py", line 206, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\dev-cmd-pro\scripts\main.py", line 167, in main
+    return selftest()
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\dev-cmd-pro\scripts\main.py", line 98, in selftest
+    assert md.strip(), "SKILL.md 为空"
+           ~~~~~~~~^^
+AssertionError: SKILL.md 为空

@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\ops-deploy-pro-01-fixed\scripts\main.py", line 504, in _run_selftest
+    print("  [PASS] remnawave-scripts" % name)
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: not all arguments converted during string formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\ops-deploy-pro-01-fixed\scripts\main.py", line 584, in <module>
+    _s.exit(_cli())
+            ~~~~^^
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\ops-deploy-pro-01-fixed\scripts\main.py", line 552, in _cli
+    return _run_selftest()
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\ops-deploy-pro-01-fixed\scripts\main.py", line 507, in _run_selftest
+    print("  [FAIL] remnawave-scripts" % name)
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: not all arguments converted during string formatting

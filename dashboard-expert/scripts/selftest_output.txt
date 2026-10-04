@@ -1,0 +1,16 @@
+[自检] 开始...
+[自检] 测试 JSON 解析... 通过
+[自检] 测试 CSV 解析... 通过
+[自检] 测试 ASCII 渲染... 通过
+[自检] 测试 SVG 渲染... 通过
+[自检] 测试 HTML 渲染... 通过
+[自检] 测试空数据处理... 通过
+[自检] 测试异常输入处理... 通过
+[自检] 测试文件读写... [dry-run] 将写入 C:\Users\ThinkPad\AppData\Local\Temp\tmpar61u_ir\out.svg（11 字节），未落盘
+[写入] C:\Users\ThinkPad\AppData\Local\Temp\tmpar61u_ir\out.svg
+通过
+[自检] 测试批量处理... [写入] C:\Users\ThinkPad\AppData\Local\Temp\tmp2h2bdhai\output\a.ascii
+[写入] C:\Users\ThinkPad\AppData\Local\Temp\tmp2h2bdhai\output\b.ascii
+通过
+[自检] 测试 URL 处理... 通过
+[自检] 全部通过

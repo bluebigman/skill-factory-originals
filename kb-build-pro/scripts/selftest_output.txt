@@ -1,0 +1,3 @@
+usage: doc-section-indexer [-h] [--input INPUT] [--out OUT] [--dry-run]
+                           [--version]
+doc-section-indexer: error: unrecognized arguments: --selftest

@@ -1,0 +1,3 @@
+usage: cred-exposure-scanner [-h] [--input INPUT] [--out OUT] [--dry-run]
+                             [--version]
+cred-exposure-scanner: error: unrecognized arguments: --selftest

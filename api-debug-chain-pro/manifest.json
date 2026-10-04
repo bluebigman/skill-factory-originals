@@ -1,0 +1,30 @@
+{
+  "timestamp": "20261004_143125",
+  "slug": "api-debug-chain-pro",
+  "spec": {
+    "slug": "api-debug-chain-pro",
+    "name": "api-debug-chain-pro",
+    "description": "",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": null,
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "7f43dd7080f0473d",
+  "prompt_hash": "e463b8cce51b9f92",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"api-debug-chain-pro\", \"name\": \"api-debug-chain-pro\", \"description\": \"\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": null, \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "4e81bf7716c6363fc73f37ac583c04318c52fbcb468d54ec5900410d2891b3e7",
+    "main_py_sha256": "5b6d3ae8e4075bab5e5374918f1247f694cadf34d15aad1509032d9a42c2bf83"
+  }
+}

@@ -1,0 +1,3 @@
+usage: column-domain-validator [-h] [--input INPUT] [--out OUT] [--dry-run]
+                               [--version]
+column-domain-validator: error: unrecognized arguments: --selftest

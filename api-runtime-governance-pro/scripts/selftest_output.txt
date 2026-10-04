@@ -1,0 +1,3 @@
+usage: api-media-negotiator [-h] [--input INPUT] [--out OUT] [--dry-run]
+                            [--version]
+api-media-negotiator: error: unrecognized arguments: --selftest

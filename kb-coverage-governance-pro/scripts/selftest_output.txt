@@ -1,0 +1,3 @@
+usage: kb-bilingual-pairing [-h] [--input INPUT] [--out OUT] [--dry-run]
+                            [--version]
+kb-bilingual-pairing: error: unrecognized arguments: --selftest

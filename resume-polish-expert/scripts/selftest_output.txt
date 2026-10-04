@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\resume-polish-expert\scripts\main.py", line 559, in _run_selftest
+    print("  [PASS] cv-builder" % name)
+          ~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: not all arguments converted during string formatting
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\resume-polish-expert\scripts\main.py", line 632, in <module>
+    _s.exit(main())
+            ~~~~^^
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\resume-polish-expert\scripts\main.py", line 627, in main
+    return _f()
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\resume-polish-expert\scripts\main.py", line 607, in _cli
+    return _run_selftest()
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\resume-polish-expert\scripts\main.py", line 562, in _run_selftest
+    print("  [FAIL] cv-builder" % name)
+          ~~~~~~~~~~~~~~~~~~~~~~^~~~~~
+TypeError: not all arguments converted during string formatting

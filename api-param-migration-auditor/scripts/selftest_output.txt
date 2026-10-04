@@ -1,0 +1,3 @@
+usage: api-deprecation-migration-check [-h] [--input INPUT] [--out OUT]
+                                       [--dry-run] [--version]
+api-deprecation-migration-check: error: unrecognized arguments: --selftest

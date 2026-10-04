@@ -1,0 +1,3 @@
+usage: qa-pair-extractor [-h] [--input INPUT] [--out OUT] [--dry-run]
+                         [--version]
+qa-pair-extractor: error: unrecognized arguments: --selftest

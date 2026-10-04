@@ -1,0 +1,3 @@
+usage: api-boundary-faker [-h] [--input INPUT] [--out OUT] [--dry-run]
+                          [--version]
+api-boundary-faker: error: unrecognized arguments: --selftest

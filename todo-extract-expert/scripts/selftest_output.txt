@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\todo-extract-expert\scripts\main.py", line 334, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\todo-extract-expert\scripts\main.py", line 309, in main
+    return selftest()
+  File "C:\Users\ThinkPad\WorkBuddy\2026-08-01-18-37-44\skill-factory\data\original_assets\todo-extract-expert\scripts\main.py", line 139, in selftest
+    assert spec.strip(), "SKILL.md 为空"
+           ~~~~~~~~~~^^
+AssertionError: SKILL.md 为空
