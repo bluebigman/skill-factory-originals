@@ -1,35 +1,35 @@
 {
- "timestamp": "20261002_063328",
- "slug": "workplace-communication-pro",
- "spec": {
+  "timestamp": "20261004_103920",
   "slug": "workplace-communication-pro",
-  "name": "cross-team",
-  "description": "需求缺口驱动原创：探测词[职场沟通/向上管理/跨部门/沟通技巧] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "职场沟通",
-   "向上管理",
-   "跨部门",
-   "沟通技巧"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "5578b512d60671e2",
- "prompt_hash": "217e6c30d6ab87e4",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"workplace-communication-pro\", \"name\": \"cross-team\", \"description\": \"需求缺口驱动原创：探测词[职场沟通/向上管理/跨部门/沟通技巧] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"职场沟通\", \"向上管理\", \"跨部门\", \"沟通技巧\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "37a8492415b9ff37b06239770350ed870ceb771efb34fd7a53076c00c1f831f5",
-  "main_py_sha256": "2f3a1a27606328415717013c611fe09770108a70eb18d7e32729158cf1ffd342"
- }
+  "spec": {
+    "slug": "workplace-communication-pro",
+    "name": "cross-team",
+    "description": "需求缺口驱动原创：探测词[职场沟通/向上管理/跨部门/沟通技巧] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "职场沟通",
+      "向上管理",
+      "跨部门",
+      "沟通技巧"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "5578b512d60671e2",
+  "prompt_hash": "217e6c30d6ab87e4",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"workplace-communication-pro\", \"name\": \"cross-team\", \"description\": \"需求缺口驱动原创：探测词[职场沟通/向上管理/跨部门/沟通技巧] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"职场沟通\", \"向上管理\", \"跨部门\", \"沟通技巧\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "73c994ad3e22f43a894454471f4b3f3fe85029ac1dfa72c1dfe43c7d5c7898ce",
+    "main_py_sha256": "57ae373aa006a52f0e10cca69581ac2e2e9998466c05a67cb212a4f32b6cff97"
+  }
 }

@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_075900",
- "slug": "transcript-qa-extract",
- "spec": {
+  "timestamp": "20261004_103854",
   "slug": "transcript-qa-extract",
-  "name": "transcript-qa-extract-1",
-  "description": "需求缺口驱动原创：探测词[转写稿提取/先定问题/按问题取段] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "转写稿提取",
-   "先定问题",
-   "按问题取段"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "b13b428173e31ee8",
- "prompt_hash": "401d5831e2d33564",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"transcript-qa-extract\", \"name\": \"transcript-qa-extract-1\", \"description\": \"需求缺口驱动原创：探测词[转写稿提取/先定问题/按问题取段] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"转写稿提取\", \"先定问题\", \"按问题取段\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "c4cd26d7780ec670fdbf3ecbcd50da8f138cfb94e74868feebc1731cb671adda",
-  "main_py_sha256": "567bf1d09d658296dccf76bce11705cb8836b08b868e8f1f8271bb3a79d4c398"
- }
+  "spec": {
+    "slug": "transcript-qa-extract",
+    "name": "transcript-qa-extract-1",
+    "description": "需求缺口驱动原创：探测词[转写稿提取/先定问题/按问题取段] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "转写稿提取",
+      "先定问题",
+      "按问题取段"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b13b428173e31ee8",
+  "prompt_hash": "401d5831e2d33564",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"transcript-qa-extract\", \"name\": \"transcript-qa-extract-1\", \"description\": \"需求缺口驱动原创：探测词[转写稿提取/先定问题/按问题取段] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"转写稿提取\", \"先定问题\", \"按问题取段\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "efb232736d9580db6e442bf4f5bdfbf465e5f126bc37b692a1464bc1909b3695",
+    "main_py_sha256": "260cb6f5689e41e140b6e659e8f1e9d3e54a3f6c9f1f5e4f3235e2990a1c28a3"
+  }
 }

@@ -1,35 +1,35 @@
 {
- "timestamp": "20261002_062901",
- "slug": "business-trip-pro",
- "spec": {
+  "timestamp": "20261004_102921",
   "slug": "business-trip-pro",
-  "name": "client-visit",
-  "description": "需求缺口驱动原创：探测词[出差/行程安排/报销/客户拜访] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "出差",
-   "行程安排",
-   "报销",
-   "客户拜访"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "c19038a0bdda4197",
- "prompt_hash": "3e875203b49ad479",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"business-trip-pro\", \"name\": \"client-visit\", \"description\": \"需求缺口驱动原创：探测词[出差/行程安排/报销/客户拜访] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"出差\", \"行程安排\", \"报销\", \"客户拜访\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "cab57af3a144ba2adf6c759e67cfe6af023c27d9d2cd3944333a0afca2ba48b3",
-  "main_py_sha256": "502acb69747abe9080872713f922241ddb569a1e60ee435be7758d744884380a"
- }
+  "spec": {
+    "slug": "business-trip-pro",
+    "name": "client-visit",
+    "description": "需求缺口驱动原创：探测词[出差/行程安排/报销/客户拜访] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "出差",
+      "行程安排",
+      "报销",
+      "客户拜访"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c19038a0bdda4197",
+  "prompt_hash": "3e875203b49ad479",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"business-trip-pro\", \"name\": \"client-visit\", \"description\": \"需求缺口驱动原创：探测词[出差/行程安排/报销/客户拜访] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"出差\", \"行程安排\", \"报销\", \"客户拜访\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "45e2bde457b8828d45870982b6890cd79b018f043ca87154560bbb6f27e7b31c",
+    "main_py_sha256": "0bea9ccb37659e1ce9fd215d365295dd66f50c4c2d9c90d28ed3c5431ce1c551"
+  }
 }

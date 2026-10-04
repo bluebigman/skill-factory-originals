@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_072009",
- "slug": "child-focus-coach",
- "spec": {
+  "timestamp": "20261004_102942",
   "slug": "child-focus-coach",
-  "name": "child-focus-coach-1",
-  "description": "需求缺口驱动原创：探测词[儿童专注力/时长匹配/不打断] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "儿童专注力",
-   "时长匹配",
-   "不打断"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "2e73d23e2d1656b2",
- "prompt_hash": "d00c12195f161309",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"child-focus-coach\", \"name\": \"child-focus-coach-1\", \"description\": \"需求缺口驱动原创：探测词[儿童专注力/时长匹配/不打断] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"儿童专注力\", \"时长匹配\", \"不打断\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "916720a0f28a0f4a4629bd72b03b435176419f10c046f1aa3eb185d16e61cb47",
-  "main_py_sha256": "355452c6a4318c79bfac3867003ead86e4b531c4c8f61b963f7354cdcaca9d15"
- }
+  "spec": {
+    "slug": "child-focus-coach",
+    "name": "child-focus-coach-1",
+    "description": "需求缺口驱动原创：探测词[儿童专注力/时长匹配/不打断] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "儿童专注力",
+      "时长匹配",
+      "不打断"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "2e73d23e2d1656b2",
+  "prompt_hash": "d00c12195f161309",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"child-focus-coach\", \"name\": \"child-focus-coach-1\", \"description\": \"需求缺口驱动原创：探测词[儿童专注力/时长匹配/不打断] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"儿童专注力\", \"时长匹配\", \"不打断\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "ef18b8ad29a0fc6eaf0d58c6d6708be16768ec6bbca9de9bc64f2962696cd1a0",
+    "main_py_sha256": "3ac913171b18fe1f13f45b75e0fae493a15b63d9315a0ec1c26803b03f6ac8a0"
+  }
 }

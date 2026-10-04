@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_093454",
- "slug": "history-context-read",
- "spec": {
+  "timestamp": "20261004_103326",
   "slug": "history-context-read",
-  "name": "history-context-read-1",
-  "description": "需求缺口驱动原创：探测词[历史脉络/先看地理/看同时期] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "历史脉络",
-   "先看地理",
-   "看同时期"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "89d6bf9b024b874d",
- "prompt_hash": "adc25e723a614d30",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"history-context-read\", \"name\": \"history-context-read-1\", \"description\": \"需求缺口驱动原创：探测词[历史脉络/先看地理/看同时期] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"历史脉络\", \"先看地理\", \"看同时期\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "118a981a856ab6e2376d1613915ee433b1ab4f246f5dc9150d25a3fc93f2af6a",
-  "main_py_sha256": "aa3901d05416e26903277664a653146421bd08336d35b57bd6485ce7b0800375"
- }
+  "spec": {
+    "slug": "history-context-read",
+    "name": "history-context-read-1",
+    "description": "需求缺口驱动原创：探测词[历史脉络/先看地理/看同时期] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "历史脉络",
+      "先看地理",
+      "看同时期"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "89d6bf9b024b874d",
+  "prompt_hash": "adc25e723a614d30",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"history-context-read\", \"name\": \"history-context-read-1\", \"description\": \"需求缺口驱动原创：探测词[历史脉络/先看地理/看同时期] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"历史脉络\", \"先看地理\", \"看同时期\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "ab117d6a60ef78d63b969b5d4c5d0b53665051cb9d6a1358cc94c1463b97e19e",
+    "main_py_sha256": "68a2510a64e79538dfd6db8206fb7fc1ac9fa952f12f066daca12c4428ce41ce"
+  }
 }

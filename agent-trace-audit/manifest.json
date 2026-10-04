@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261002_211103",
+  "timestamp": "20261004_102856",
   "slug": "agent-trace-audit",
   "spec": {
     "slug": "agent-trace-audit",
@@ -29,7 +29,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"agent-trace-audit\", \"name\": \"agent-trace-audit-1\", \"description\": \"需求缺口驱动原创：探测词[行为审计/决策留痕/越权接管/审计轨迹] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"行为审计\", \"决策留痕\", \"越权接管\", \"审计轨迹\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "32e4cd4e0b5a1957963c533ab7fb002cd4d99999afeb7cdf429a6f9b7cbd8fed",
-    "main_py_sha256": "8157f844c1cce86a1cacd31a50e67b3a5256b536bf18839bc957942125bc1303"
+    "skill_md_sha256": "4ad6f6fa062b9a232bdb3df8c2c972017451741ce78570e17219f2ed781ab6c3",
+    "main_py_sha256": "bc70de2976a631f1ff8eb4a4a1c1c6ef5fdf45513db4ef73340b39188e3dedd8"
   }
 }

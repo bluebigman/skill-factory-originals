@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_082529",
- "slug": "supplier-quote-compare",
- "spec": {
+  "timestamp": "20261004_103821",
   "slug": "supplier-quote-compare",
-  "name": "supplier-quote-compare-1",
-  "description": "需求缺口驱动原创：探测词[比价谈判/统一口径/算总成本] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "比价谈判",
-   "统一口径",
-   "算总成本"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "c3cf8103120ed1fe",
- "prompt_hash": "f1368942f806cae3",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"supplier-quote-compare\", \"name\": \"supplier-quote-compare-1\", \"description\": \"需求缺口驱动原创：探测词[比价谈判/统一口径/算总成本] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"比价谈判\", \"统一口径\", \"算总成本\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "a982afca9bb119e109b571473b1f8f0f94ff2c2ed5aa3985cfa913593c499098",
-  "main_py_sha256": "9edceb0680c2bdfcba356e2d50f9692e4aab31db4e5339f1bedf6d15720a575a"
- }
+  "spec": {
+    "slug": "supplier-quote-compare",
+    "name": "supplier-quote-compare-1",
+    "description": "需求缺口驱动原创：探测词[比价谈判/统一口径/算总成本] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "比价谈判",
+      "统一口径",
+      "算总成本"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c3cf8103120ed1fe",
+  "prompt_hash": "f1368942f806cae3",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"supplier-quote-compare\", \"name\": \"supplier-quote-compare-1\", \"description\": \"需求缺口驱动原创：探测词[比价谈判/统一口径/算总成本] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"比价谈判\", \"统一口径\", \"算总成本\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "c8aa4e3d2dcbc46679a9fd3690391ad27bbe574f2b31d7f4d111b00e1628c3ed",
+    "main_py_sha256": "c401c0dfa2df334fc24c5dbcab4524a2279378fdc24dacdde5178be20c442a7f"
+  }
 }

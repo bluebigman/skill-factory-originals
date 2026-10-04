@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_071531",
- "slug": "family-conflict-coach",
- "spec": {
+  "timestamp": "20261004_103216",
   "slug": "family-conflict-coach",
-  "name": "family-conflict-coach-1",
-  "description": "需求缺口驱动原创：探测词[家庭矛盾/分开听/谈行为不谈人格] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "家庭矛盾",
-   "分开听",
-   "谈行为不谈人格"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "c9e70ec5fd1f281d",
- "prompt_hash": "1f8cec2b982539d6",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"family-conflict-coach\", \"name\": \"family-conflict-coach-1\", \"description\": \"需求缺口驱动原创：探测词[家庭矛盾/分开听/谈行为不谈人格] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家庭矛盾\", \"分开听\", \"谈行为不谈人格\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "8a9101067a9efb716e16745abcf17e9e872c8d3162991bb9a73e963b784d4540",
-  "main_py_sha256": "909bbe32d7471bfd43469b1b5b7d25063f1435aa8501ea0c678ceb8e6a51dacc"
- }
+  "spec": {
+    "slug": "family-conflict-coach",
+    "name": "family-conflict-coach-1",
+    "description": "需求缺口驱动原创：探测词[家庭矛盾/分开听/谈行为不谈人格] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "家庭矛盾",
+      "分开听",
+      "谈行为不谈人格"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "c9e70ec5fd1f281d",
+  "prompt_hash": "1f8cec2b982539d6",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"family-conflict-coach\", \"name\": \"family-conflict-coach-1\", \"description\": \"需求缺口驱动原创：探测词[家庭矛盾/分开听/谈行为不谈人格] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家庭矛盾\", \"分开听\", \"谈行为不谈人格\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "7323d1266001392d4e41a48094f373bcb3339adca35b4201f755a4d64c3e30fe",
+    "main_py_sha256": "66b87ffe898c0861897cd23a06cb95d4ec86d9c63eb681cd441a9a509454a5ee"
+  }
 }

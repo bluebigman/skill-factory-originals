@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_085942",
- "slug": "brand-tone-coach",
- "spec": {
+  "timestamp": "20261004_102917",
   "slug": "brand-tone-coach",
-  "name": "brand-tone-coach-1",
-  "description": "需求缺口驱动原创：探测词[品牌调性/写下来/给正反例] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "品牌调性",
-   "写下来",
-   "给正反例"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "58e2d5c62a915c26",
- "prompt_hash": "fbad2707eb99e50e",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"brand-tone-coach\", \"name\": \"brand-tone-coach-1\", \"description\": \"需求缺口驱动原创：探测词[品牌调性/写下来/给正反例] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"品牌调性\", \"写下来\", \"给正反例\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "f510f817db291c2fa11bbb170aeff495d0e1133d15e935238b08eb9d0cf46557",
-  "main_py_sha256": "f9ef5cf7ce13b58c98feea4cc8859be94e3799b260f38ecf5c60087fc4ec9ec9"
- }
+  "spec": {
+    "slug": "brand-tone-coach",
+    "name": "brand-tone-coach-1",
+    "description": "需求缺口驱动原创：探测词[品牌调性/写下来/给正反例] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "品牌调性",
+      "写下来",
+      "给正反例"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "58e2d5c62a915c26",
+  "prompt_hash": "fbad2707eb99e50e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"brand-tone-coach\", \"name\": \"brand-tone-coach-1\", \"description\": \"需求缺口驱动原创：探测词[品牌调性/写下来/给正反例] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"品牌调性\", \"写下来\", \"给正反例\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "c81295d4b4806e5b6da0be2c4082b91b1beb2ebd1461d181e18687bbca99e2a8",
+    "main_py_sha256": "9592cbc91c1354463b7cdb1a84465432ef79923b26caa70e15fa76e32b0c0e28"
+  }
 }

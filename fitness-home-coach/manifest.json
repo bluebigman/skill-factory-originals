@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_070258",
- "slug": "fitness-home-coach",
- "spec": {
+  "timestamp": "20261004_103227",
   "slug": "fitness-home-coach",
-  "name": "fitness-home-coach-1",
-  "description": "需求缺口驱动原创：探测词[居家健身/无器械方案/渐进超负荷] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "居家健身",
-   "无器械方案",
-   "渐进超负荷"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "fee6c797d7f0626e",
- "prompt_hash": "bf8f0242f9e49a30",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"fitness-home-coach\", \"name\": \"fitness-home-coach-1\", \"description\": \"需求缺口驱动原创：探测词[居家健身/无器械方案/渐进超负荷] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"居家健身\", \"无器械方案\", \"渐进超负荷\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "411151501bda49aae6413d0e6ccca8777ae6aa9e8e075bb431e85b3c075d7a5f",
-  "main_py_sha256": "f13f5302e771e444ea6c06f0ac97257d30d0c8d0f8181d321341397aaac2def2"
- }
+  "spec": {
+    "slug": "fitness-home-coach",
+    "name": "fitness-home-coach-1",
+    "description": "需求缺口驱动原创：探测词[居家健身/无器械方案/渐进超负荷] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "居家健身",
+      "无器械方案",
+      "渐进超负荷"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "fee6c797d7f0626e",
+  "prompt_hash": "bf8f0242f9e49a30",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"fitness-home-coach\", \"name\": \"fitness-home-coach-1\", \"description\": \"需求缺口驱动原创：探测词[居家健身/无器械方案/渐进超负荷] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"居家健身\", \"无器械方案\", \"渐进超负荷\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "39249ca3aec08deb20d1f30acac2f013fa25fc957147c36ea6c25c192e042bca",
+    "main_py_sha256": "242406c87e79fb1b500b48d13d77f941ff983b1146a3c10b38ad892aa2374786"
+  }
 }

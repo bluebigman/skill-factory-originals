@@ -1,35 +1,35 @@
 {
- "timestamp": "20261002_063256",
- "slug": "story-outline-pro",
- "spec": {
+  "timestamp": "20261004_103813",
   "slug": "story-outline-pro",
-  "name": "character-arc",
-  "description": "需求缺口驱动原创：探测词[故事大纲/情节/人物/写作] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "故事大纲",
-   "情节",
-   "人物",
-   "写作"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "157e756b336362b9",
- "prompt_hash": "c11701f4c1526cae",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"story-outline-pro\", \"name\": \"character-arc\", \"description\": \"需求缺口驱动原创：探测词[故事大纲/情节/人物/写作] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"故事大纲\", \"情节\", \"人物\", \"写作\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "a3400b1d78caa23d61c45e7ec1f6a213d194f0824d4ea852971c41b78c4a44da",
-  "main_py_sha256": "7974f45b9d4243ebd8aedb18a81378e436f962d86f13330d95b246bbad66611e"
- }
+  "spec": {
+    "slug": "story-outline-pro",
+    "name": "character-arc",
+    "description": "需求缺口驱动原创：探测词[故事大纲/情节/人物/写作] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "故事大纲",
+      "情节",
+      "人物",
+      "写作"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "157e756b336362b9",
+  "prompt_hash": "c11701f4c1526cae",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"story-outline-pro\", \"name\": \"character-arc\", \"description\": \"需求缺口驱动原创：探测词[故事大纲/情节/人物/写作] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"故事大纲\", \"情节\", \"人物\", \"写作\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "4aa00cb0a71c48ae282def231e8b3d0a65b60c09bbdee53673e1169283866311",
+    "main_py_sha256": "0465cb941a864293251ab04dbab9fb6d8d154c8822d6a9036c26c96ef7752298"
+  }
 }

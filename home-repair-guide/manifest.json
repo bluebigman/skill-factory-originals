@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_063059",
- "slug": "home-repair-guide",
- "spec": {
+  "timestamp": "20261004_103333",
   "slug": "home-repair-guide",
-  "name": "home-repair-guide-1",
-  "description": "需求缺口驱动原创：探测词[家居维修/描述问题/比价] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "家居维修",
-   "描述问题",
-   "比价"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "1e0d5d00188c6a8f",
- "prompt_hash": "b2a3037873c6ffc1",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"home-repair-guide\", \"name\": \"home-repair-guide-1\", \"description\": \"需求缺口驱动原创：探测词[家居维修/描述问题/比价] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家居维修\", \"描述问题\", \"比价\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "94676f3514bffb25267c566bc323ff852ad89ae3ee3aa0b1d845c3ad1be19582",
-  "main_py_sha256": "bc0b13b46e29653d4946e7e5c0a58cbc180e031a5359ee463e513a25185be04d"
- }
+  "spec": {
+    "slug": "home-repair-guide",
+    "name": "home-repair-guide-1",
+    "description": "需求缺口驱动原创：探测词[家居维修/描述问题/比价] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "家居维修",
+      "描述问题",
+      "比价"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1e0d5d00188c6a8f",
+  "prompt_hash": "b2a3037873c6ffc1",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"home-repair-guide\", \"name\": \"home-repair-guide-1\", \"description\": \"需求缺口驱动原创：探测词[家居维修/描述问题/比价] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家居维修\", \"描述问题\", \"比价\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "bce9b03cab638bb6629e62346496be7537fb13de229e7c9e18fc3fd088f979cf",
+    "main_py_sha256": "a8d02a5b4bb4f60e71f42e74357877a581c6263cd0b501f5a0938d7a41e9e0e6"
+  }
 }

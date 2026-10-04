@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_083947",
- "slug": "test-case-design",
- "spec": {
+  "timestamp": "20261004_103841",
   "slug": "test-case-design",
-  "name": "test-case-design-1",
-  "description": "需求缺口驱动原创：探测词[测试用例/先正常后异常/边界必测] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "测试用例",
-   "先正常后异常",
-   "边界必测"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "49d4d218d651d9a1",
- "prompt_hash": "3a1b8732b845644f",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"test-case-design\", \"name\": \"test-case-design-1\", \"description\": \"需求缺口驱动原创：探测词[测试用例/先正常后异常/边界必测] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"测试用例\", \"先正常后异常\", \"边界必测\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "61575e096af575f35716e81f84e18205ce81f389703c3f725fd60cecc0911381",
-  "main_py_sha256": "6472fbf2fac76e8e1b8457dc3c7bbe85d06d361e138058bd7cd4dfebcef625bd"
- }
+  "spec": {
+    "slug": "test-case-design",
+    "name": "test-case-design-1",
+    "description": "需求缺口驱动原创：探测词[测试用例/先正常后异常/边界必测] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "测试用例",
+      "先正常后异常",
+      "边界必测"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "49d4d218d651d9a1",
+  "prompt_hash": "3a1b8732b845644f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"test-case-design\", \"name\": \"test-case-design-1\", \"description\": \"需求缺口驱动原创：探测词[测试用例/先正常后异常/边界必测] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"测试用例\", \"先正常后异常\", \"边界必测\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "337b3c60ec0f16617acc4aa06371f9d34e0e40061fff5ac33d9885ece088b886",
+    "main_py_sha256": "81b5b174f7a5147287c755a32238f94016be19946b4d299545354ec2a0cd2559"
+  }
 }

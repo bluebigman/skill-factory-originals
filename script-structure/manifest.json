@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_090211",
- "slug": "script-structure",
- "spec": {
+  "timestamp": "20261004_103730",
   "slug": "script-structure",
-  "name": "script-structure-1",
-  "description": "需求缺口驱动原创：探测词[脚本结构/开头给钩子/单点展开] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "脚本结构",
-   "开头给钩子",
-   "单点展开"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "b2221d2c6c9471ec",
- "prompt_hash": "577efb3a488bd211",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"script-structure\", \"name\": \"script-structure-1\", \"description\": \"需求缺口驱动原创：探测词[脚本结构/开头给钩子/单点展开] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"脚本结构\", \"开头给钩子\", \"单点展开\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "1ca287ba3fd483c8865b75c83728989ce18ce897d6fa3fa6e1552f5f811e5abb",
-  "main_py_sha256": "d5403f3d1e4377f84c932d12891ea5269e7d20c90e6099909ec9d82c0190b8c6"
- }
+  "spec": {
+    "slug": "script-structure",
+    "name": "script-structure-1",
+    "description": "需求缺口驱动原创：探测词[脚本结构/开头给钩子/单点展开] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "脚本结构",
+      "开头给钩子",
+      "单点展开"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "b2221d2c6c9471ec",
+  "prompt_hash": "577efb3a488bd211",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"script-structure\", \"name\": \"script-structure-1\", \"description\": \"需求缺口驱动原创：探测词[脚本结构/开头给钩子/单点展开] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"脚本结构\", \"开头给钩子\", \"单点展开\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "37297dd06b8b19baa69227a1d08149c105d1d27362ae08067f9087749dbb49ed",
+    "main_py_sha256": "195246bbbba8a87d5c47f3c405de582653c3cabf35146082c76cd9b9b1584a6d"
+  }
 }

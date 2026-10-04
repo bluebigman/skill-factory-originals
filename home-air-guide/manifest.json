@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_064349",
- "slug": "home-air-guide",
- "spec": {
+  "timestamp": "20261004_103327",
   "slug": "home-air-guide",
-  "name": "home-air-guide-1",
-  "description": "需求缺口驱动原创：探测词[室内空气/定时通风/新家具] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "室内空气",
-   "定时通风",
-   "新家具"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "ace73c4bd6b212da",
- "prompt_hash": "440a77a72dafea41",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"home-air-guide\", \"name\": \"home-air-guide-1\", \"description\": \"需求缺口驱动原创：探测词[室内空气/定时通风/新家具] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"室内空气\", \"定时通风\", \"新家具\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "96e4f9cf9308a8d8063a22e39f400f1275b5959409e1f7c11b8e00d0a13f6201",
-  "main_py_sha256": "e8035bdc8a0b20b27dcb0a3bbf694828c7883244c4208a5268bee9bb791644c8"
- }
+  "spec": {
+    "slug": "home-air-guide",
+    "name": "home-air-guide-1",
+    "description": "需求缺口驱动原创：探测词[室内空气/定时通风/新家具] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "室内空气",
+      "定时通风",
+      "新家具"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ace73c4bd6b212da",
+  "prompt_hash": "440a77a72dafea41",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"home-air-guide\", \"name\": \"home-air-guide-1\", \"description\": \"需求缺口驱动原创：探测词[室内空气/定时通风/新家具] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"室内空气\", \"定时通风\", \"新家具\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "1a829e223b4c492b9b80a3daa8a6d18bb09c03d03b2aa63a5bc0fe9e60f4d4ea",
+    "main_py_sha256": "c7bb6418e0b084bc787c12f1fa770cda90e52c72057ccfa0fc1270ede5debdc8"
+  }
 }

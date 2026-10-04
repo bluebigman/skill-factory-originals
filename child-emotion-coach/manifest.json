@@ -1,35 +1,35 @@
 {
- "timestamp": "20261002_062913",
- "slug": "child-emotion-coach",
- "spec": {
+  "timestamp": "20261004_102940",
   "slug": "child-emotion-coach",
-  "name": "emotion-identify",
-  "description": "需求缺口驱动原创：探测词[儿童情绪/哭闹/发脾气/情绪识别] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "儿童情绪",
-   "哭闹",
-   "发脾气",
-   "情绪识别"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "87bda838d0d7813e",
- "prompt_hash": "f6e4c53d679c2831",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"child-emotion-coach\", \"name\": \"emotion-identify\", \"description\": \"需求缺口驱动原创：探测词[儿童情绪/哭闹/发脾气/情绪识别] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"儿童情绪\", \"哭闹\", \"发脾气\", \"情绪识别\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "9d6a30630af538ce6327d808a583c7569f6bcb2d66eb68e32889dcebdb34106a",
-  "main_py_sha256": "8523be926ad89e1a90a0057460b4fb58301ae081213c9b31bd8344989d7b4729"
- }
+  "spec": {
+    "slug": "child-emotion-coach",
+    "name": "emotion-identify",
+    "description": "需求缺口驱动原创：探测词[儿童情绪/哭闹/发脾气/情绪识别] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "儿童情绪",
+      "哭闹",
+      "发脾气",
+      "情绪识别"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "87bda838d0d7813e",
+  "prompt_hash": "f6e4c53d679c2831",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"child-emotion-coach\", \"name\": \"emotion-identify\", \"description\": \"需求缺口驱动原创：探测词[儿童情绪/哭闹/发脾气/情绪识别] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"儿童情绪\", \"哭闹\", \"发脾气\", \"情绪识别\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "83c4e676c66eb0285335d54a208a55b059376f4b95428ea99633f95ee5dc8d0f",
+    "main_py_sha256": "99a70c2049e2b5efb871998e951c111ca15608939331949311859ec1c20e96c1"
+  }
 }

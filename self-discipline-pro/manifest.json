@@ -1,35 +1,35 @@
 {
- "timestamp": "20261002_063236",
- "slug": "self-discipline-pro",
- "spec": {
+  "timestamp": "20261004_103733",
   "slug": "self-discipline-pro",
-  "name": "anti-procrastination",
-  "description": "需求缺口驱动原创：探测词[自律/时间安排/目标管理/拖延] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "自律",
-   "时间安排",
-   "目标管理",
-   "拖延"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "8edab8165a6fa104",
- "prompt_hash": "14ef3ab6c9687d63",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"self-discipline-pro\", \"name\": \"anti-procrastination\", \"description\": \"需求缺口驱动原创：探测词[自律/时间安排/目标管理/拖延] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"自律\", \"时间安排\", \"目标管理\", \"拖延\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "853366c14cce7200e38e6ee053c594af41d43201942c5d5a5163f65a4aa992ae",
-  "main_py_sha256": "7780fe4642b3bd92c0fb4d3110e469aa77cfe5b32096690eecc9212af10409ff"
- }
+  "spec": {
+    "slug": "self-discipline-pro",
+    "name": "anti-procrastination",
+    "description": "需求缺口驱动原创：探测词[自律/时间安排/目标管理/拖延] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "自律",
+      "时间安排",
+      "目标管理",
+      "拖延"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "8edab8165a6fa104",
+  "prompt_hash": "14ef3ab6c9687d63",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"self-discipline-pro\", \"name\": \"anti-procrastination\", \"description\": \"需求缺口驱动原创：探测词[自律/时间安排/目标管理/拖延] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"自律\", \"时间安排\", \"目标管理\", \"拖延\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "be928fdf3ca0794c1ad22709e076c3392b2ae6e841c5ced1b977e92e259718de",
+    "main_py_sha256": "80c0b11a882c819866050c288486d6d205f717f0debdb9b18bb40bd5800d4c1d"
+  }
 }

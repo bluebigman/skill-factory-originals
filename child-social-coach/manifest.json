@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_064459",
- "slug": "child-social-coach",
- "spec": {
+  "timestamp": "20261004_102952",
   "slug": "child-social-coach",
-  "name": "child-social-coach-1",
-  "description": "需求缺口驱动原创：探测词[儿童社交/不代解决/示范] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "儿童社交",
-   "不代解决",
-   "示范"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "ac37016e170d1dac",
- "prompt_hash": "9d231fe79bc2117e",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"child-social-coach\", \"name\": \"child-social-coach-1\", \"description\": \"需求缺口驱动原创：探测词[儿童社交/不代解决/示范] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"儿童社交\", \"不代解决\", \"示范\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "26b10b22090253ce6058b077a3f8fd239cfed766f3580730e974dad874b07be7",
-  "main_py_sha256": "6553c210b0d3a429d67c96682076627b42470d417f5e862a0ddae84175c0f538"
- }
+  "spec": {
+    "slug": "child-social-coach",
+    "name": "child-social-coach-1",
+    "description": "需求缺口驱动原创：探测词[儿童社交/不代解决/示范] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "儿童社交",
+      "不代解决",
+      "示范"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "ac37016e170d1dac",
+  "prompt_hash": "9d231fe79bc2117e",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"child-social-coach\", \"name\": \"child-social-coach-1\", \"description\": \"需求缺口驱动原创：探测词[儿童社交/不代解决/示范] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"儿童社交\", \"不代解决\", \"示范\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "8aba8bb1ae5cc0b5f416642f7b2ed31f16fafb826429023695458c3800e617a7",
+    "main_py_sha256": "9231d16c49ce87841469e7991fb5d9c685cef61ef575ba7dd128e7ac6e497ba0"
+  }
 }

@@ -1,8 +1,8 @@
 {
-  "frozen_at": "2026-10-02T06:32:31",
+  "frozen_at": "2026-10-04T10:37:09",
   "slug": "report-writing-pro",
-  "python_version": "3.13.14 (main, Jun 11 2026, 04:04:46) [MSC v.1944 64 bit (AMD64)]",
-  "platform": "Windows-10-10.0.19045-SP0",
-  "generator": "wb_forge_line.py（原创产线八道工序）",
+  "python_version": "3.13.14",
+  "platform": "win32 AMD64",
+  "generator": "wb_forge_line.py（原创产线十四道工序）",
   "dependencies": []
 }

@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_085719",
- "slug": "campaign-review",
- "spec": {
+  "timestamp": "20261004_102924",
   "slug": "campaign-review",
-  "name": "campaign-review-1",
-  "description": "需求缺口驱动原创：探测词[活动复盘/先对齐目标/拆环节] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "活动复盘",
-   "先对齐目标",
-   "拆环节"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "0fb4e81ca0c35ec7",
- "prompt_hash": "639a47204cce982f",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"campaign-review\", \"name\": \"campaign-review-1\", \"description\": \"需求缺口驱动原创：探测词[活动复盘/先对齐目标/拆环节] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"活动复盘\", \"先对齐目标\", \"拆环节\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "1caff592add250b506062834f88587ba0de3d032398fa2f49830da900ac6b0f8",
-  "main_py_sha256": "d8f02097fac0eff95a35290246125a85cf745abbf8251ad2a649d53ee6ab8648"
- }
+  "spec": {
+    "slug": "campaign-review",
+    "name": "campaign-review-1",
+    "description": "需求缺口驱动原创：探测词[活动复盘/先对齐目标/拆环节] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "活动复盘",
+      "先对齐目标",
+      "拆环节"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "0fb4e81ca0c35ec7",
+  "prompt_hash": "639a47204cce982f",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"campaign-review\", \"name\": \"campaign-review-1\", \"description\": \"需求缺口驱动原创：探测词[活动复盘/先对齐目标/拆环节] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"活动复盘\", \"先对齐目标\", \"拆环节\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "0a4d1ff7bf8b1b8a58a93ccafe9e921a99d41e324275a91cc70fd6d00dc029fe",
+    "main_py_sha256": "1d03c349b4ec7cfdf2697ac7662e78b6a32b8b5cb73b41bfe954ddccfb660709"
+  }
 }

@@ -1,35 +1,35 @@
 {
- "timestamp": "20261002_062946",
- "slug": "elder-care-coordinator",
- "spec": {
+  "timestamp": "20261004_103148",
   "slug": "elder-care-coordinator",
-  "name": "care-plan",
-  "description": "需求缺口驱动原创：探测词[老人照护/养老/就医陪同/家庭分工] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "老人照护",
-   "养老",
-   "就医陪同",
-   "家庭分工"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "4fb9e8e3b3fe4aa2",
- "prompt_hash": "a010c0e7aded733a",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"elder-care-coordinator\", \"name\": \"care-plan\", \"description\": \"需求缺口驱动原创：探测词[老人照护/养老/就医陪同/家庭分工] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"老人照护\", \"养老\", \"就医陪同\", \"家庭分工\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "90be4e440287194c20c1e0df63068d426991ae832363c9d8bcb6e64a3f174697",
-  "main_py_sha256": "b4b066cfb045ef4ade53da5cb9ffce6be21044b9afe243600c79f4ca1997caee"
- }
+  "spec": {
+    "slug": "elder-care-coordinator",
+    "name": "care-plan",
+    "description": "需求缺口驱动原创：探测词[老人照护/养老/就医陪同/家庭分工] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "老人照护",
+      "养老",
+      "就医陪同",
+      "家庭分工"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "4fb9e8e3b3fe4aa2",
+  "prompt_hash": "a010c0e7aded733a",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"elder-care-coordinator\", \"name\": \"care-plan\", \"description\": \"需求缺口驱动原创：探测词[老人照护/养老/就医陪同/家庭分工] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"老人照护\", \"养老\", \"就医陪同\", \"家庭分工\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "55c76e9e9165d6214217c4a04ce1154e23bb1d29092295cb2f1bf11c2bf6d5f1",
+    "main_py_sha256": "0cab7df6c8720324075a3f991a0751eb805d8c99905511f09c803f9bf56037b0"
+  }
 }

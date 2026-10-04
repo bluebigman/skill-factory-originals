@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261003_024043",
+  "timestamp": "20261004_103853",
   "slug": "traceability-build-pro",
   "spec": {
     "slug": "traceability-build-pro",
@@ -28,7 +28,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"traceability-build-pro\", \"name\": \"traceability-build-pro-1\", \"description\": \"需求缺口驱动原创：探测词[追溯体系/编码唯一/正反可追] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"追溯体系\", \"编码唯一\", \"正反可追\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "aa45c79a0fde2c2f0bb559ff0d89d9a7eda17ea3e84765a43d42dcb77c44a920",
-    "main_py_sha256": "e349d445a20f4219a38df1e48dace2aecb6c4d0fb05894518ec360aacaa60c63"
+    "skill_md_sha256": "2c37eac84a642fe890a91f79e6cd0a5dae45f293cd621a9de6d574480e81592b",
+    "main_py_sha256": "441c58f0f5d77bb0b28cd7e484197663b594f3a186d7f2f556504b3f0960610b"
   }
 }

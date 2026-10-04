@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_071416",
- "slug": "child-lying-coach",
- "spec": {
+  "timestamp": "20261004_102943",
   "slug": "child-lying-coach",
-  "name": "child-lying-coach-1",
-  "description": "需求缺口驱动原创：探测词[儿童说谎/降低承认成本/区分想象] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "儿童说谎",
-   "降低承认成本",
-   "区分想象"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "f619b9a5a518e187",
- "prompt_hash": "01af114f89e5c4c7",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"child-lying-coach\", \"name\": \"child-lying-coach-1\", \"description\": \"需求缺口驱动原创：探测词[儿童说谎/降低承认成本/区分想象] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"儿童说谎\", \"降低承认成本\", \"区分想象\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "a97e4e219a68bea6206ce010006ba9ac09259aca11fe9d4f2b89bc54e1ea5ce3",
-  "main_py_sha256": "bfcd89f799fff3b11c528c4f77f0e9f95b1f3b301c640f8e87c23c6fd5896883"
- }
+  "spec": {
+    "slug": "child-lying-coach",
+    "name": "child-lying-coach-1",
+    "description": "需求缺口驱动原创：探测词[儿童说谎/降低承认成本/区分想象] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "儿童说谎",
+      "降低承认成本",
+      "区分想象"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "f619b9a5a518e187",
+  "prompt_hash": "01af114f89e5c4c7",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"child-lying-coach\", \"name\": \"child-lying-coach-1\", \"description\": \"需求缺口驱动原创：探测词[儿童说谎/降低承认成本/区分想象] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"儿童说谎\", \"降低承认成本\", \"区分想象\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "126710c94b2e89db6000e218009fbba154849f2d9c5d56612336de9759488d9d",
+    "main_py_sha256": "10cfb3cac4f11d36747281750fc66663e34e5db76eff37d0d2712eccbbfa92e9"
+  }
 }

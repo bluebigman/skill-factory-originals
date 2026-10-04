@@ -1,5 +1,5 @@
 {
-  "timestamp": "20261003_023937",
+  "timestamp": "20261004_103915",
   "slug": "warehouse-slot-pro",
   "spec": {
     "slug": "warehouse-slot-pro",
@@ -28,7 +28,7 @@
   "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"warehouse-slot-pro\", \"name\": \"warehouse-slot-pro-1\", \"description\": \"需求缺口驱动原创：探测词[仓储布局/动线优先/ABC 分区] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"仓储布局\", \"动线优先\", \"ABC 分区\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
   "iroulaw": "CREATION_IRONLAW v1",
   "outputs": {
-    "skill_md_sha256": "8819785c273a1c10efdc6df442c22ac181cc9cc195109b3e52f9a6ddbc1ee09c",
-    "main_py_sha256": "61e128a3f011ac22f17e04eea28e41e2e032d0e753a04b212b2117a886c58895"
+    "skill_md_sha256": "c6f9b31bb7e374b614cba7c7fb834f4da283dc758e81ffd39e16834bf7c74c58",
+    "main_py_sha256": "c0f598a53cb5ce16b881ec9a850907de3c7b3f37948136a9ebf6eb298820ed4e"
   }
 }

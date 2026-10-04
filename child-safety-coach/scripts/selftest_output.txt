@@ -1,1 +1,1 @@
-SELFTEST OK
+SELFTEST FAIL: 配置不可用 [Errno 2] No such file or directory: 'C:\\Users\\ThinkPad\\WorkBuddy\\2026-08-01-18-37-44\\skill-factory\\data\\original_assets\\child-safety-coach\\config.json'

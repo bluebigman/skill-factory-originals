@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_091807",
- "slug": "access-audit",
- "spec": {
+  "timestamp": "20261004_102803",
   "slug": "access-audit",
-  "name": "access-audit-1",
-  "description": "需求缺口驱动原创：探测词[权限审计/定期清查/离职即收] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "权限审计",
-   "定期清查",
-   "离职即收"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "de60b282d5f2c431",
- "prompt_hash": "dc404f5548fb4382",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"access-audit\", \"name\": \"access-audit-1\", \"description\": \"需求缺口驱动原创：探测词[权限审计/定期清查/离职即收] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"权限审计\", \"定期清查\", \"离职即收\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "84554897dc5cf57829016a87157c21fc02683b15ebcb7182b4f9744739e466d0",
-  "main_py_sha256": "6386c53ee9ed10295e329340f24f4d374e3d6801943ac4240b41bacf14b8d5c9"
- }
+  "spec": {
+    "slug": "access-audit",
+    "name": "access-audit-1",
+    "description": "需求缺口驱动原创：探测词[权限审计/定期清查/离职即收] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "权限审计",
+      "定期清查",
+      "离职即收"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "de60b282d5f2c431",
+  "prompt_hash": "dc404f5548fb4382",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"access-audit\", \"name\": \"access-audit-1\", \"description\": \"需求缺口驱动原创：探测词[权限审计/定期清查/离职即收] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"权限审计\", \"定期清查\", \"离职即收\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "5a40a14fee904749ef039cc858e39c9d04d9c1b9a6bdc7e1c7ac5dc84675fee2",
+    "main_py_sha256": "de7315da99a65a61dc9909bb30ce80fd63ba111ae8427e6957cae729bb7e1f36"
+  }
 }

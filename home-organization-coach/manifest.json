@@ -1,34 +1,34 @@
 {
- "timestamp": "20261002_063053",
- "slug": "home-organization-coach",
- "spec": {
+  "timestamp": "20261004_103330",
   "slug": "home-organization-coach",
-  "name": "home-organization-coach-1",
-  "description": "需求缺口驱动原创：探测词[家庭收纳/动作结束点设容身位/按场景分区] 平台专家0/技能0 —— 未复制任何原文",
-  "cli_interface": [
-   "--text",
-   "--input",
-   "--selftest",
-   "--dry-run",
-   "--version"
-  ],
-  "capability_outline": [
-   "家庭收纳",
-   "动作结束点设容身位",
-   "按场景分区"
-  ],
-  "upstream": null,
-  "derivation": "original-work",
-  "source_type": "self_authored_rules",
-  "license": "MIT",
-  "copyright_holder": "SkillForge Lab"
- },
- "spec_hash": "1c46821aa4d12845",
- "prompt_hash": "e2674da0f28661af",
- "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"home-organization-coach\", \"name\": \"home-organization-coach-1\", \"description\": \"需求缺口驱动原创：探测词[家庭收纳/动作结束点设容身位/按场景分区] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家庭收纳\", \"动作结束点设容身位\", \"按场景分区\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
- "iroulaw": "CREATION_IRONLAW v1",
- "outputs": {
-  "skill_md_sha256": "b977146f18b7f6fd7bbf4aaa58ea21334c8b7fe628deeca43cfd66975f9ab670",
-  "main_py_sha256": "5863f93f4558debaa41cd1e2f6f1d1506ded496bcc0801b8e34d410fdb4c26a6"
- }
+  "spec": {
+    "slug": "home-organization-coach",
+    "name": "home-organization-coach-1",
+    "description": "需求缺口驱动原创：探测词[家庭收纳/动作结束点设容身位/按场景分区] 平台专家0/技能0 —— 未复制任何原文",
+    "cli_interface": [
+      "--text",
+      "--input",
+      "--selftest",
+      "--dry-run",
+      "--version"
+    ],
+    "capability_outline": [
+      "家庭收纳",
+      "动作结束点设容身位",
+      "按场景分区"
+    ],
+    "upstream": null,
+    "derivation": "original-work",
+    "source_type": "self_authored_rules",
+    "license": "MIT",
+    "copyright_holder": "SkillForge Lab"
+  },
+  "spec_hash": "1c46821aa4d12845",
+  "prompt_hash": "e2674da0f28661af",
+  "prompt": "你是资深技能设计师。请根据下面的【功能规格】编写一份全新的 Skill 文档（SKILL.md）。\n\n【功能规格 JSON】\n{\"slug\": \"home-organization-coach\", \"name\": \"home-organization-coach-1\", \"description\": \"需求缺口驱动原创：探测词[家庭收纳/动作结束点设容身位/按场景分区] 平台专家0/技能0 —— 未复制任何原文\", \"cli_interface\": [\"--text\", \"--input\", \"--selftest\", \"--dry-run\", \"--version\"], \"capability_outline\": [\"家庭收纳\", \"动作结束点设容身位\", \"按场景分区\"], \"upstream\": null, \"derivation\": \"original-work\", \"source_type\": \"self_authored_rules\", \"license\": \"MIT\", \"copyright_holder\": \"SkillForge Lab\"}\n\n【创作铁律】\n1. 独立原创表达：严禁复制、改写、仿写规格来源的任何句子、句式、段落结构。功能相同，表达必须全新。\n2. 只取功能规格（思想层），不取任何原文表达（expression）。\n3. 领域规则须为通用通行做法，不引用特定文献/教材原文。\n4. 强制边界声明：不构成专业诊断/治疗/法律/投资意见。\n5. AI 生成须显式披露（ai_generated=true）。",
+  "iroulaw": "CREATION_IRONLAW v1",
+  "outputs": {
+    "skill_md_sha256": "a1107d358e24e75494f559011fd71dd0549d0e0b445cef337b8791e499e50512",
+    "main_py_sha256": "87b467618a19d56e0096acae452601db6aafd96d367482bf641ffe7adb357a51"
+  }
 }
