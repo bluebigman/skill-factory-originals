@@ -1,0 +1,8 @@
+{
+  "frozen_at": "2026-10-05T11:37:00",
+  "slug": "third-party-audit",
+  "python_version": "3.13.14",
+  "platform": "win32 AMD64",
+  "generator": "wb_forge_line.py（原创产线十四道工序）",
+  "dependencies": []
+}
